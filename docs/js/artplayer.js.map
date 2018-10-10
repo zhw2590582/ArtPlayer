@@ -1,0 +1,1 @@
+{"version":3,"file":"artplayer.js","sources":["../../src/index.js"],"sourcesContent":["import \"./style/index.scss\";\n\nconsole.log(\"test\");"],"names":["console","log"],"mappings":";;;;;;IAEAA,OAAO,CAACC,GAAR,CAAY,MAAZ;;;;"}
