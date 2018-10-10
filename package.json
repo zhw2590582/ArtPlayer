@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhw2590582/artplayer.git"
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
   },
   "keywords": [
     "video",
@@ -19,9 +19,9 @@
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zhw2590582/artplayer/issues"
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
-  "homepage": "https://github.com/zhw2590582/artplayer#readme",
+  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-external-helpers": "^7.0.0",
