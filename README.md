@@ -1,2 +1,2 @@
-# artplayer
-Artplayer is a modern HTML5 video player
+# ArtPlayer
+ArtPlayer is a modern HTML5 video player
