@@ -1,4 +1,4 @@
-export default class Events {
+export default class Player {
   constructor({ option }) {
     //
   }
