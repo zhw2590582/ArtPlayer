@@ -205,7 +205,7 @@
     "no-var": 1,
     "prefer-const": 1,
     "prefer-destructuring": 1,
-    "prefer-spread": 1,
+    "prefer-spread": 0,
     "prefer-template": 1,
     "require-yield": 2,
     "rest-spread-spacing": 1,

@@ -70,6 +70,19 @@ class Artplayer extends Emitter {
     };
   }
 
+  static use(plugin) {
+    const installedPlugins = this.plugins || (this.plugins = []);
+    if (installedPlugins.indexOf(plugin) > -1) {
+      return this;
+    }
+
+    const args = Array.from(arguments).slice(1);
+    args.unshift(this);
+    plugin.apply(null, args);
+    installedPlugins.push(plugin);
+    return this;
+  }
+
   init() {
     this.refs = {
       container: this.option.container
