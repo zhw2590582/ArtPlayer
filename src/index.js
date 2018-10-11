@@ -7,7 +7,7 @@ import Controls from './controls';
 import Contextmenu from './contextmenu';
 import Danmu from './danmu';
 import Info from './info';
-import Captions from './captions';
+import Subtitle from './subtitle';
 import Events from './events';
 import Hotkey from './hotkey';
 
@@ -28,12 +28,55 @@ class Artplayer extends Emitter {
 
   static get DEFAULTS() {
     return {
-      //
+      container: document.querySelector('.artplayer'),
+      live: false,
+      autoplay: false,
+      theme: '#b7daff',
+      loop: false,
+      lang: navigator.language.toLowerCase(),
+      screenshot: false,
+      hotkey: true,
+      preload: 'auto',
+      volume: 0.7,
+      logo: '',
+      apiBackend: '',
+      video: {
+        quality: '',
+        defaultQuality: '',
+        url: '',
+        pic: '',
+        thumbnails: '',
+        type: 'auto',
+        customType: ''
+      },
+      subtitle: {
+        url: '',
+        type: 'webvtt',
+        fontSize: '20px',
+        bottom: '40px',
+        color: '#fff'
+      },
+      danmaku: {
+        id: '',
+        api: '',
+        token: '',
+        maximum: '',
+        addition: '',
+        user: '',
+        bottom: '',
+        unlimited: ''
+      },
+      contextmenu: [],
+      highlight: [],
+      mutex: true
     };
   }
 
   init() {
-    this.refs = {};
+    this.refs = {
+      container: this.option.container
+    };
+
     this.destroyEvents = [];
 
     this.i18n = new I18n(this);
@@ -41,20 +84,19 @@ class Artplayer extends Emitter {
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);
     this.danmu = new Danmu(this);
-    this.captions = new Captions(this);
+    this.subtitle = new Subtitle(this);
     this.info = new Info(this);
     this.events = new Events(this);
     this.hotkey = new Hotkey(this);
 
     this.id = id++;
     instances.push(this);
-
-    console.log(this);
   }
 
   destroy() {
     this.destroyEvents.forEach(event => event.destroy());
     this.refs.container.innerHTML = '';
+    instances.splice(instances.indexOf(this), 1);
   }
 }
 

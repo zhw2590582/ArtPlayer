@@ -5,15 +5,15 @@ import JP from './jp';
 
 const i18nMap = {
   zh: ZHCN,
-  'zh-CN': ZHCN,
-  'zh-TW': ZHTW,
+  'zh-cn': ZHCN,
+  'zh-tw': ZHTW,
   en: EN,
   jp: JP
 };
 
 export default class I18n {
   constructor({ option }) {
-    this.language = i18nMap[option.language] || i18nMap.en;
+    this.language = i18nMap[option.lang.toLowerCase()] || i18nMap.en;
   }
 
   get(key) {

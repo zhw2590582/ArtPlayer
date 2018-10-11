@@ -133,7 +133,7 @@
     "no-mixed-requires": [1, { "allowCall": true }],
     "no-new-require": 2,
     "no-path-concat": 2,
-    "no-process-env": 2,
+    "no-process-env": 0,
     "no-process-exit": 2,
 
     "array-bracket-spacing": 1,
@@ -176,7 +176,7 @@
     "operator-linebreak": 1,
     "padded-blocks": 0,
     "quotes": [1, "single"],
-    "require-jsdoc": 2,
+    "require-jsdoc": 0,
     "semi": 1,
     "semi-spacing": 1,
     "space-before-blocks": 1,
