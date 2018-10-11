@@ -1,3 +1,17 @@
 import "./style/index.scss";
 
-console.log("test");
+class Artplayer {
+  constructor(option) {
+      //
+  }
+
+  static get version() {
+    return __VERSION__;
+  }
+
+  static get DEFAULTS() {
+    return {
+        //
+    };
+  }
+}

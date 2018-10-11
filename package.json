@@ -30,6 +30,7 @@
     "autoprefixer": "^9.1.5",
     "cross-env": "^5.2.0",
     "cssnano": "^4.1.4",
+    "lerna": "^3.4.3",
     "node-sass": "^4.9.3",
     "rollup": "^0.66.5",
     "rollup-plugin-babel": "^4.0.3",
