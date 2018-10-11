@@ -2,6 +2,7 @@ const babel = require("rollup-plugin-babel");
 const commonjs = require("rollup-plugin-commonjs");
 const nodeResolve = require("rollup-plugin-node-resolve");
 const postcss = require("rollup-plugin-postcss");
+const { eslint } = require("rollup-plugin-eslint");
 const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 const replace = require("rollup-plugin-replace");
@@ -33,6 +34,7 @@ export default {
       __ENV__: JSON.stringify(process.env.NODE_ENV || "development"),
       __VERSION__: version
     }),
-    isProd && uglify()
+    isProd && uglify(),
+    !isProd && eslint()
   ]
 };
