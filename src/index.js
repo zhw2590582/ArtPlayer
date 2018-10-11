@@ -4,7 +4,7 @@ import I18n from './i18n';
 import Player from './player';
 import Controls from './controls';
 import Contextmenu from './contextmenu';
-import Danmu from './danmu';
+import Danmaku from './danmaku';
 import Info from './info';
 import Subtitle from './subtitle';
 import Events from './events';
@@ -81,7 +81,7 @@ class Artplayer extends Emitter {
     this.player = new Player(this);
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);
-    this.danmu = new Danmu(this);
+    this.danmaku = new Danmaku(this);
     this.subtitle = new Subtitle(this);
     this.info = new Info(this);
     this.events = new Events(this);
