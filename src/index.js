@@ -1,6 +1,5 @@
 import './style/index.scss';
 import Emitter from 'tiny-emitter';
-import { verification } from './utils';
 import I18n from './i18n';
 import Player from './player';
 import Controls from './controls';
@@ -18,7 +17,6 @@ class Artplayer extends Emitter {
   constructor(option) {
     super();
     this.option = Object.assign({}, Artplayer.DEFAULTS, option);
-    verification(this.option);
     this.init();
   }
 
