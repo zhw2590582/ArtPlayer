@@ -78,7 +78,11 @@ class Artplayer extends Emitter {
 
     const args = Array.from(arguments).slice(1);
     args.unshift(this);
-    plugin.apply(null, args);
+    if (typeof plugin.install === 'function') {
+      plugin.install.apply(plugin, args);
+    } else if (typeof plugin === 'function') {
+      plugin.apply(null, args);
+    }
     installedPlugins.push(plugin);
     return this;
   }
