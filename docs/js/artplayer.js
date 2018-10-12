@@ -220,6 +220,13 @@
   function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
   }
+  function request(url) {
+    return fetch(url).then(function (response) {
+      return response.arrayBuffer();
+    }).catch(function (err) {
+      throw new ArtPlayerError(err.message);
+    });
+  }
 
   function verification(option) {
     errorHandle(option.container, '\'container\' option is required.');
@@ -231,6 +238,8 @@
     errorHandle(typeof option.autoplay === 'boolean', "'autoplay' option require 'boolean' type, but got '".concat(_typeof_1(option.autoplay), "'."));
     errorHandle(['none', 'metadata', 'auto'].indexOf(option.preload) > -1, '\'preload\' option require one of \'none、metadata、auto\'.');
     errorHandle(typeof option.lang === 'string', "'lang' option require 'string' type, but got '".concat(_typeof_1(option.lang), "'."));
+    errorHandle(typeof option.type === 'string', "'type' option require 'string' type, but got '".concat(_typeof_1(option.type), "'."));
+    errorHandle(typeof option.mimeCodec === 'string', "'mimeCodec' option require 'string' type, but got '".concat(_typeof_1(option.mimeCodec), "'."));
   }
 
   function E () {
@@ -362,6 +371,12 @@
     return I18n;
   }();
 
+  var mediaElement = {
+    propertys: ['audioTracks', 'autoplay', 'buffered', 'controller', 'controls', 'crossOrigin', 'currentSrc', 'currentTime', 'defaultMuted', 'defaultPlaybackRate', 'duration', 'ended', 'error', 'loop', 'mediaGroup', 'muted', 'networkState', 'paused', 'playbackRate', 'played', 'preload', 'readyState', 'seekable', 'seeking', 'src', 'startDate', 'textTracks', 'videoTracks', 'volume'],
+    methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'],
+    events: ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']
+  };
+
   var Player =
   /*#__PURE__*/
   function () {
@@ -369,7 +384,9 @@
       classCallCheck(this, Player);
 
       this.art = art;
+      this.eventFn = this.eventFn.bind(this);
       this.init();
+      this.eventBind();
     }
 
     createClass(Player, [{
@@ -377,16 +394,189 @@
       value: function init() {
         var option = this.art.option;
         var $video = this.art.refs.$video;
-        $video.controls = false;
+        $video.controls = true;
         $video.poster = option.poster;
         $video.volume = clamp(option.volume, 0, 1);
         $video.autoplay = option.autoplay;
         $video.preload = option.preload;
-        $video.src = option.url;
+      }
+    }, {
+      key: "eventBind",
+      value: function eventBind() {
+        var _this = this;
+
+        var $video = this.art.refs.$video;
+        var events = mediaElement.events;
+
+        var _loop = function _loop(index) {
+          var eventName = events[index];
+          $video.addEventListener(eventName, _this.eventFn);
+
+          _this.art.destroyEvents.push(function () {
+            $video.removeEventListener(eventName, _this.eventFn);
+          });
+        };
+
+        for (var index = 0; index < events.length; index++) {
+          _loop(index);
+        }
+      }
+    }, {
+      key: "eventFn",
+      value: function eventFn(event) {
+        this.art.emit("video:".concat(event.type), event);
       }
     }]);
 
     return Player;
+  }();
+
+  var mimeCodeces = {
+    mp4: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
+    webm: 'video/webm; codecs="vorbis, vp8"',
+    ts: 'video/mp2t; codecs="avc1.42E01E, mp4a.40.2"'
+  };
+
+  var mseConfig = {
+    instance: {
+      propertys: ['activeSourceBuffers', 'duration', 'readyState', 'sourceBuffers'],
+      methods: ['addSourceBuffer', 'endOfStream', 'removeSourceBuffer', 'clearLiveSeekableRange', 'setLiveSeekableRange'],
+      events: ['sourceclose', 'sourceended', 'sourceopen']
+    },
+    sourceBuffer: {
+      propertys: ['mode', 'updating', 'buffered', 'timestampOffset', 'audioTracks', 'videoTracks', 'textTracks', 'appendWindowStart', 'appendWindowEnd', 'trackDefaults'],
+      methods: ['appendBuffer', 'appendStream', 'abort', 'remove'],
+      events: ['abort', 'error', 'update', 'updateend', 'updatestart']
+    },
+    sourceBufferList: {
+      propertys: ['length'],
+      events: ['addsourcebuffer', 'removesourcebuffer']
+    }
+  };
+
+  var Mse =
+  /*#__PURE__*/
+  function () {
+    function Mse(art) {
+      classCallCheck(this, Mse);
+
+      this.art = art;
+      this.setMimeCodec();
+      this.mediaSourceEventFn = this.mediaSourceEventFn.bind(this);
+      this.sourceBufferEventFn = this.sourceBufferEventFn.bind(this);
+      this.sourceBuffersEventFn = this.sourceBuffersEventFn.bind(this);
+      this.activeSourceBuffersEventFn = this.activeSourceBuffersEventFn.bind(this);
+      this.init();
+      this.eventBind();
+      this.eventStart();
+    }
+
+    createClass(Mse, [{
+      key: "setMimeCodec",
+      value: function setMimeCodec() {
+        var option = this.art.option;
+
+        if (!option.type) {
+          var urlArr = option.url.trim().toLowerCase().split('.');
+          var type = urlArr[urlArr.length - 1];
+          errorHandle(Object.keys(mimeCodeces).includes(type), "Can't find video's type from ".concat(option.url));
+          option.type = type;
+        }
+
+        if (!option.mimeCodec) {
+          var mimeCodec = mimeCodeces[option.type];
+          errorHandle(mimeCodec, "Can't find video's mimeCodec from ".concat(option.type));
+          option.mimeCodec = mimeCodec;
+        }
+      }
+    }, {
+      key: "init",
+      value: function init() {
+        var _this$art = this.art,
+            option = _this$art.option,
+            $video = _this$art.refs.$video;
+        errorHandle(MediaSource.isTypeSupported(option.mimeCodec), "Unsupported MIME type or codec: ".concat(option.mimeCodec));
+        this.mediaSource = new MediaSource();
+        $video.src = URL.createObjectURL(this.mediaSource);
+        this.art.destroyEvents.push(function () {
+          URL.revokeObjectURL($video.src);
+        });
+      }
+    }, {
+      key: "eventBind",
+      value: function eventBind() {
+        var _this = this;
+
+        var instance = mseConfig.instance,
+            sourceBufferList = mseConfig.sourceBufferList;
+        instance.events.forEach(function (eventName) {
+          _this.mediaSource.addEventListener(eventName, _this.mediaSourceEventFn);
+
+          _this.art.destroyEvents.push(function () {
+            _this.mediaSource.removeEventListener(eventName, _this.mediaSourceEventFn);
+          });
+        });
+        sourceBufferList.events.forEach(function (eventName) {
+          _this.mediaSource.sourceBuffers.addEventListener(eventName, _this.sourceBuffersEventFn);
+
+          _this.art.destroyEvents.push(function () {
+            _this.mediaSource.sourceBuffers.removeEventListener(eventName, _this.sourceBuffersEventFn);
+          });
+
+          _this.mediaSource.activeSourceBuffers.addEventListener(eventName, _this.activeSourceBuffersEventFn);
+
+          _this.art.destroyEvents.push(function () {
+            _this.mediaSource.activeSourceBuffers.removeEventListener(eventName, _this.activeSourceBuffersEventFn);
+          });
+        });
+      }
+    }, {
+      key: "eventStart",
+      value: function eventStart() {
+        var _this2 = this;
+
+        var option = this.art.option;
+        var sourceBuffer = mseConfig.sourceBuffer;
+        this.art.on('mediaSource:sourceopen', function () {
+          _this2.sourceBuffer = _this2.mediaSource.addSourceBuffer(option.mimeCodec);
+          sourceBuffer.events.forEach(function (eventName) {
+            _this2.sourceBuffer.addEventListener(eventName, _this2.sourceBufferEventFn);
+
+            _this2.art.destroyEvents.push(function () {
+              _this2.sourceBuffer.removeEventListener(eventName, _this2.sourceBufferEventFn);
+            });
+          });
+        });
+        this.art.on('sourceBuffer:updateend', function () {
+          _this2.mediaSource.endOfStream();
+        });
+        request(option.url).then(function (response) {
+          _this2.sourceBuffer.appendBuffer(response);
+        });
+      }
+    }, {
+      key: "mediaSourceEventFn",
+      value: function mediaSourceEventFn(event) {
+        this.art.emit("mediaSource:".concat(event.type), event);
+      }
+    }, {
+      key: "sourceBufferEventFn",
+      value: function sourceBufferEventFn(event) {
+        this.art.emit("sourceBuffer:".concat(event.type), event);
+      }
+    }, {
+      key: "sourceBuffersEventFn",
+      value: function sourceBuffersEventFn(event) {
+        this.art.emit("sourceBuffers:".concat(event.type), event);
+      }
+    }, {
+      key: "activeSourceBuffersEventFn",
+      value: function activeSourceBuffersEventFn(event) {
+        this.art.emit("activeSourceBuffers:".concat(event.type), event);
+      }
+    }]);
+
+    return Mse;
   }();
 
   var Controls = function Controls(_ref) {//
@@ -470,6 +660,7 @@
         this.template = new Template(this);
         this.i18n = new I18n(this);
         this.player = new Player(this);
+        this.mse = new Mse(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
         this.danmaku = new Danmu(this);
@@ -484,7 +675,7 @@
       key: "destroy",
       value: function destroy() {
         this.destroyEvents.forEach(function (event) {
-          return event.destroy();
+          return event();
         });
         this.refs.container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
@@ -525,6 +716,8 @@
           volume: 0.7,
           autoplay: false,
           preload: 'auto',
+          type: '',
+          mimeCodec: '',
           lang: navigator.language.toLowerCase()
         };
       }

@@ -31,6 +31,22 @@
             poster: 'http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg'
         });
 
+        player.on('video:canplay', event => {
+			console.log(event);
+        });
+        
+        player.on('video:play', event => {
+			console.log(event);
+        });
+        
+        player.on('video:progress', event => {
+			console.log(event);
+        });
+        
+        player.on('video:pause', event => {
+			console.log(event);
+		});
+
         console.log(player);
     </script>
 </body>

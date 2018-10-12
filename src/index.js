@@ -4,6 +4,7 @@ import Emitter from 'tiny-emitter';
 import Template from './template';
 import I18n from './i18n';
 import Player from './player';
+import Mse from './mse';
 import Controls from './controls';
 import Contextmenu from './contextmenu';
 import Danmaku from './danmaku';
@@ -35,6 +36,8 @@ class Artplayer extends Emitter {
       volume: 0.7,
       autoplay: false,
       preload: 'auto',
+      type: '',
+      mimeCodec: '',
       lang: navigator.language.toLowerCase()
     };
   }
@@ -66,6 +69,7 @@ class Artplayer extends Emitter {
     this.template = new Template(this);
     this.i18n = new I18n(this);
     this.player = new Player(this);
+    this.mse = new Mse(this);
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);
     this.danmaku = new Danmaku(this);
@@ -79,7 +83,7 @@ class Artplayer extends Emitter {
   }
 
   destroy() {
-    this.destroyEvents.forEach(event => event.destroy());
+    this.destroyEvents.forEach(event => event());
     this.refs.container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
   }

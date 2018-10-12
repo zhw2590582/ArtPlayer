@@ -46,4 +46,14 @@ export default function verification(option) {
     `'lang' option require 'string' type, but got '${typeof option.lang}'.`
   );
 
+  errorHandle(
+    typeof option.type === 'string',
+    `'type' option require 'string' type, but got '${typeof option.type}'.`
+  );
+
+  errorHandle(
+    typeof option.mimeCodec === 'string',
+    `'mimeCodec' option require 'string' type, but got '${typeof option.mimeCodec}'.`
+  );
+
 }
