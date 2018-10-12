@@ -21,12 +21,14 @@
         <div class="github">
             <a href="https://github.com/zhw2590582/artplayer">GITHUB</a>
         </div>
-        <div class="artplayer-wrap"></div>
+        <div class="artplayer-app"></div>
     </div>
     <script src="./js/artplayer.js"></script>
     <script>
         var player = new Artplayer({
-            container: document.querySelector('.artplayer-wrap'),
+            container: document.querySelector('.artplayer-app'),
+            url: './video/frag_bunny.mp4',
+            poster: 'http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg'
         });
 
         console.log(player);

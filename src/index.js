@@ -1,5 +1,7 @@
 import './style/index.scss';
+import verification from './utils/verification';
 import Emitter from 'tiny-emitter';
+import Template from './template';
 import I18n from './i18n';
 import Player from './player';
 import Controls from './controls';
@@ -17,6 +19,7 @@ class Artplayer extends Emitter {
   constructor(option) {
     super();
     this.option = Object.assign({}, Artplayer.DEFAULTS, option);
+    verification(this.option);
     this.init();
   }
 
@@ -27,46 +30,12 @@ class Artplayer extends Emitter {
   static get DEFAULTS() {
     return {
       container: document.querySelector('.artplayer'),
-      live: false,
-      autoplay: false,
-      theme: '#b7daff',
-      loop: false,
-      lang: navigator.language.toLowerCase(),
-      screenshot: false,
-      hotkey: true,
-      preload: 'auto',
+      url: '',
+      poster: '',
       volume: 0.7,
-      logo: '',
-      apiBackend: '',
-      video: {
-        quality: '',
-        defaultQuality: '',
-        url: '',
-        pic: '',
-        thumbnails: '',
-        type: 'auto',
-        customType: ''
-      },
-      subtitle: {
-        url: '',
-        type: 'webvtt',
-        fontSize: '20px',
-        bottom: '40px',
-        color: '#fff'
-      },
-      danmaku: {
-        id: '',
-        api: '',
-        token: '',
-        maximum: '',
-        addition: '',
-        user: '',
-        bottom: '',
-        unlimited: ''
-      },
-      contextmenu: [],
-      highlight: [],
-      mutex: true
+      autoplay: false,
+      preload: 'auto',
+      lang: navigator.language.toLowerCase()
     };
   }
 
@@ -89,11 +58,12 @@ class Artplayer extends Emitter {
 
   init() {
     this.refs = {
-      container: this.option.container
+      $container: this.option.container
     };
 
     this.destroyEvents = [];
 
+    this.template = new Template(this);
     this.i18n = new I18n(this);
     this.player = new Player(this);
     this.controls = new Controls(this);

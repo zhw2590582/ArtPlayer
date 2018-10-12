@@ -115,72 +115,6 @@
 
   var inherits = _inherits;
 
-  function E () {
-    // Keep this empty so it's easier to inherit from
-    // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
-  }
-
-  E.prototype = {
-    on: function (name, callback, ctx) {
-      var e = this.e || (this.e = {});
-
-      (e[name] || (e[name] = [])).push({
-        fn: callback,
-        ctx: ctx
-      });
-
-      return this;
-    },
-
-    once: function (name, callback, ctx) {
-      var self = this;
-      function listener () {
-        self.off(name, listener);
-        callback.apply(ctx, arguments);
-      }
-      listener._ = callback;
-      return this.on(name, listener, ctx);
-    },
-
-    emit: function (name) {
-      var data = [].slice.call(arguments, 1);
-      var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
-      var i = 0;
-      var len = evtArr.length;
-
-      for (i; i < len; i++) {
-        evtArr[i].fn.apply(evtArr[i].ctx, data);
-      }
-
-      return this;
-    },
-
-    off: function (name, callback) {
-      var e = this.e || (this.e = {});
-      var evts = e[name];
-      var liveEvents = [];
-
-      if (evts && callback) {
-        for (var i = 0, len = evts.length; i < len; i++) {
-          if (evts[i].fn !== callback && evts[i].fn._ !== callback)
-            liveEvents.push(evts[i]);
-        }
-      }
-
-      // Remove event from queue to prevent memory leak
-      // Suggested by https://github.com/lazd
-      // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
-
-      (liveEvents.length)
-        ? e[name] = liveEvents
-        : delete e[name];
-
-      return this;
-    }
-  };
-
-  var tinyEmitter = E;
-
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
   }
@@ -278,9 +212,117 @@
     return ArtPlayerError;
   }(wrapNativeSuper(Error));
 
-  function verification$$1(option) {
-    console.log(option);
+  function errorHandle(condition, msg) {
+    if (!condition) {
+      throw new ArtPlayerError(msg);
+    }
   }
+  function clamp(num, a, b) {
+    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+  }
+
+  function verification(option) {
+    errorHandle(option.container, '\'container\' option is required.');
+    errorHandle(option.url, '\'url\' option is required.');
+    errorHandle(option.container instanceof Element, "'container' option require 'Element' type, but got '".concat(_typeof_1(option.container), "'."));
+    errorHandle(typeof option.url === 'string' || Array.isArray(option.url), "'url' option require 'string' or 'array' type, but got '".concat(_typeof_1(option.url), "'."));
+    errorHandle(typeof option.poster === 'string', "'url' option require 'string' type, but got '".concat(_typeof_1(option.poster), "'."));
+    errorHandle(typeof option.volume === 'number', "'volume' option require 'number' type, but got '".concat(_typeof_1(option.volume), "'."));
+    errorHandle(typeof option.autoplay === 'boolean', "'autoplay' option require 'boolean' type, but got '".concat(_typeof_1(option.autoplay), "'."));
+    errorHandle(['none', 'metadata', 'auto'].indexOf(option.preload) > -1, '\'preload\' option require one of \'none、metadata、auto\'.');
+  }
+
+  function E () {
+    // Keep this empty so it's easier to inherit from
+    // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
+  }
+
+  E.prototype = {
+    on: function (name, callback, ctx) {
+      var e = this.e || (this.e = {});
+
+      (e[name] || (e[name] = [])).push({
+        fn: callback,
+        ctx: ctx
+      });
+
+      return this;
+    },
+
+    once: function (name, callback, ctx) {
+      var self = this;
+      function listener () {
+        self.off(name, listener);
+        callback.apply(ctx, arguments);
+      }
+      listener._ = callback;
+      return this.on(name, listener, ctx);
+    },
+
+    emit: function (name) {
+      var data = [].slice.call(arguments, 1);
+      var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+      var i = 0;
+      var len = evtArr.length;
+
+      for (i; i < len; i++) {
+        evtArr[i].fn.apply(evtArr[i].ctx, data);
+      }
+
+      return this;
+    },
+
+    off: function (name, callback) {
+      var e = this.e || (this.e = {});
+      var evts = e[name];
+      var liveEvents = [];
+
+      if (evts && callback) {
+        for (var i = 0, len = evts.length; i < len; i++) {
+          if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+            liveEvents.push(evts[i]);
+        }
+      }
+
+      // Remove event from queue to prevent memory leak
+      // Suggested by https://github.com/lazd
+      // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
+
+      (liveEvents.length)
+        ? e[name] = liveEvents
+        : delete e[name];
+
+      return this;
+    }
+  };
+
+  var tinyEmitter = E;
+
+  var Template =
+  /*#__PURE__*/
+  function () {
+    function Template(art) {
+      classCallCheck(this, Template);
+
+      this.art = art;
+      this.init();
+    }
+
+    createClass(Template, [{
+      key: "init",
+      value: function init() {
+        this.art.refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+        this.art.refs.$wrap = this.art.refs.$container.querySelector('.artplayer-wrap');
+        this.art.refs.$video = this.art.refs.$container.querySelector('.artplayer-video');
+        this.art.refs.$controls = this.art.refs.$container.querySelector('.artplayer-controls');
+        this.art.refs.$layers = this.art.refs.$container.querySelector('.artplayer-layers');
+        this.art.refs.$loading = this.art.refs.$container.querySelector('.artplayer-loading');
+        this.art.refs.$notice = this.art.refs.$container.querySelector('.artplayer-notice');
+      }
+    }]);
+
+    return Template;
+  }();
 
   var ZHCN = {};
 
@@ -319,12 +361,35 @@
     return I18n;
   }();
 
-  var Player = function Player(_ref) {//
+  var Player =
+  /*#__PURE__*/
+  function () {
+    function Player(art) {
+      classCallCheck(this, Player);
 
-    var option = _ref.option;
+      this.art = art;
+      this.init();
+    }
 
-    classCallCheck(this, Player);
-  };
+    createClass(Player, [{
+      key: "init",
+      value: function init() {
+        var option = this.art.option;
+        var $video = this.art.refs.$video;
+        $video.controls = false;
+        $video.poster = option.poster;
+        $video.volume = clamp(option.volume, 0, 1);
+        $video.autoplay = option.autoplay;
+        $video.preload = option.preload;
+
+        if (typeof option.url === 'string') {
+          $video.src = option.url;
+        } else if (Array.isArray(option.url)) ;
+      }
+    }]);
+
+    return Player;
+  }();
 
   var Controls = function Controls(_ref) {//
 
@@ -390,7 +455,7 @@
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
       _this.option = Object.assign({}, Artplayer.DEFAULTS, option);
-      verification$$1(_this.option);
+      verification(_this.option);
 
       _this.init();
 
@@ -401,14 +466,15 @@
       key: "init",
       value: function init() {
         this.refs = {
-          container: this.option.container
+          $container: this.option.container
         };
         this.destroyEvents = [];
+        this.template = new Template(this);
         this.i18n = new I18n(this);
         this.player = new Player(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
-        this.danmu = new Danmu(this);
+        this.danmaku = new Danmu(this);
         this.subtitle = new Captions(this);
         this.info = new Info(this);
         this.events = new Events(this);
@@ -426,6 +492,27 @@
         instances.splice(instances.indexOf(this), 1);
       }
     }], [{
+      key: "use",
+      value: function use(plugin) {
+        var installedPlugins = this.plugins || (this.plugins = []);
+
+        if (installedPlugins.indexOf(plugin) > -1) {
+          return this;
+        }
+
+        var args = Array.from(arguments).slice(1);
+        args.unshift(this);
+
+        if (typeof plugin.install === 'function') {
+          plugin.install.apply(plugin, args);
+        } else if (typeof plugin === 'function') {
+          plugin.apply(null, args);
+        }
+
+        installedPlugins.push(plugin);
+        return this;
+      }
+    }, {
       key: "version",
       get: function get() {
         return '1.0.0';
@@ -435,46 +522,12 @@
       get: function get() {
         return {
           container: document.querySelector('.artplayer'),
-          live: false,
-          autoplay: false,
-          theme: '#b7daff',
-          loop: false,
-          lang: navigator.language.toLowerCase(),
-          screenshot: false,
-          hotkey: true,
-          preload: 'auto',
+          url: '',
+          poster: '',
           volume: 0.7,
-          logo: '',
-          apiBackend: '',
-          video: {
-            quality: '',
-            defaultQuality: '',
-            url: '',
-            pic: '',
-            thumbnails: '',
-            type: 'auto',
-            customType: ''
-          },
-          subtitle: {
-            url: '',
-            type: 'webvtt',
-            fontSize: '20px',
-            bottom: '40px',
-            color: '#fff'
-          },
-          danmaku: {
-            id: '',
-            api: '',
-            token: '',
-            maximum: '',
-            addition: '',
-            user: '',
-            bottom: '',
-            unlimited: ''
-          },
-          contextmenu: [],
-          highlight: [],
-          mutex: true
+          autoplay: false,
+          preload: 'auto',
+          lang: navigator.language.toLowerCase()
         };
       }
     }]);
