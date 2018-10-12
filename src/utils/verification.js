@@ -1,9 +1,15 @@
 import { errorHandle } from './index';
 
 export default function verification(option) {
-  errorHandle(option.container, '\'container\' option is required.');
+  errorHandle(
+    option.container,
+    '\'container\' option is required.'
+  );
 
-  errorHandle(option.url, '\'url\' option is required.');
+  errorHandle(
+    option.url,
+    '\'url\' option is required.'
+  );
 
   errorHandle(
     option.container instanceof Element,
@@ -11,13 +17,13 @@ export default function verification(option) {
   );
 
   errorHandle(
-    typeof option.url === 'string' || Array.isArray(option.url),
-    `'url' option require 'string' or 'array' type, but got '${typeof option.url}'.`
+    typeof option.url === 'string',
+    `'url' option require 'string' type, but got '${typeof option.url}'.`
   );
 
   errorHandle(
     typeof option.poster === 'string',
-    `'url' option require 'string' type, but got '${typeof option.poster}'.`
+    `'poster' option require 'string' type, but got '${typeof option.poster}'.`
   );
 
   errorHandle(
@@ -34,4 +40,10 @@ export default function verification(option) {
     ['none', 'metadata', 'auto'].indexOf(option.preload) > -1,
     '\'preload\' option require one of \'none、metadata、auto\'.'
   );
+
+  errorHandle(
+    typeof option.lang === 'string',
+    `'lang' option require 'string' type, but got '${typeof option.lang}'.`
+  );
+
 }

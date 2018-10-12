@@ -14,11 +14,6 @@ export default class Player {
     $video.volume = clamp(option.volume, 0, 1);
     $video.autoplay = option.autoplay;
     $video.preload = option.preload;
-
-    if (typeof option.url === 'string') {
-      $video.src = option.url;
-    } else if (Array.isArray(option.url)) {
-      //
-    }
+    $video.src = option.url;
   }
 }

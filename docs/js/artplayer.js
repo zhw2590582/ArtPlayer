@@ -225,11 +225,12 @@
     errorHandle(option.container, '\'container\' option is required.');
     errorHandle(option.url, '\'url\' option is required.');
     errorHandle(option.container instanceof Element, "'container' option require 'Element' type, but got '".concat(_typeof_1(option.container), "'."));
-    errorHandle(typeof option.url === 'string' || Array.isArray(option.url), "'url' option require 'string' or 'array' type, but got '".concat(_typeof_1(option.url), "'."));
-    errorHandle(typeof option.poster === 'string', "'url' option require 'string' type, but got '".concat(_typeof_1(option.poster), "'."));
+    errorHandle(typeof option.url === 'string', "'url' option require 'string' type, but got '".concat(_typeof_1(option.url), "'."));
+    errorHandle(typeof option.poster === 'string', "'poster' option require 'string' type, but got '".concat(_typeof_1(option.poster), "'."));
     errorHandle(typeof option.volume === 'number', "'volume' option require 'number' type, but got '".concat(_typeof_1(option.volume), "'."));
     errorHandle(typeof option.autoplay === 'boolean', "'autoplay' option require 'boolean' type, but got '".concat(_typeof_1(option.autoplay), "'."));
     errorHandle(['none', 'metadata', 'auto'].indexOf(option.preload) > -1, '\'preload\' option require one of \'none、metadata、auto\'.');
+    errorHandle(typeof option.lang === 'string', "'lang' option require 'string' type, but got '".concat(_typeof_1(option.lang), "'."));
   }
 
   function E () {
@@ -381,10 +382,7 @@
         $video.volume = clamp(option.volume, 0, 1);
         $video.autoplay = option.autoplay;
         $video.preload = option.preload;
-
-        if (typeof option.url === 'string') {
-          $video.src = option.url;
-        } else if (Array.isArray(option.url)) ;
+        $video.src = option.url;
       }
     }]);
 
