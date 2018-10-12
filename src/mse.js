@@ -85,7 +85,6 @@ export default class Mse {
 
     this.art.on('mediaSource:sourceopen', () => {
       this.sourceBuffer = this.mediaSource.addSourceBuffer(option.mimeCodec);
-
       sourceBuffer.events.forEach(eventName => {
         this.sourceBuffer.addEventListener(eventName, this.sourceBufferEventFn);
         this.art.destroyEvents.push(() => {

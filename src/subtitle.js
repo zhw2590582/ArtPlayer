@@ -1,5 +1,5 @@
-export default class Captions {
-  constructor({ option }) {
-    //
+export default class Subtitle {
+  constructor(art) {
+    this.art = art;
   }
 }

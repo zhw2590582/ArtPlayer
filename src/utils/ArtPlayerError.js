@@ -1,7 +1,9 @@
 export default class ArtPlayerError extends Error {
-  constructor(message) {
+  constructor(message, context) {
     super(message);
-    Error.captureStackTrace(this, this.constructor);
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, context || this.constructor);
+    }
     this.name = 'ArtPlayerError';
   }
 }

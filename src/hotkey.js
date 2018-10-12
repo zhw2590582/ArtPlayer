@@ -1,5 +1,5 @@
 export default class Hotkey {
-  constructor({ option }) {
-    //
+  constructor(art) {
+    this.art = art;
   }
 }

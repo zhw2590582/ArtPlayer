@@ -1,4 +1,4 @@
-export default class Contextmenu {
+export default class Layers {
   constructor(art) {
     this.art = art;
   }

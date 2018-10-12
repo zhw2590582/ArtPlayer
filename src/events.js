@@ -1,5 +1,5 @@
 export default class Events {
-  constructor({ option }) {
-    //
+  constructor(art) {
+    this.art = art;
   }
 }

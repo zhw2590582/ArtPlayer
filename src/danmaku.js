@@ -1,5 +1,5 @@
 export default class Danmu {
-  constructor({ option }) {
-    //
+  constructor(art) {
+    this.art = art;
   }
 }

@@ -198,13 +198,17 @@
   function (_Error) {
     inherits(ArtPlayerError, _Error);
 
-    function ArtPlayerError(message) {
+    function ArtPlayerError(message, context) {
       var _this;
 
       classCallCheck(this, ArtPlayerError);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(ArtPlayerError).call(this, message));
-      Error.captureStackTrace(assertThisInitialized(assertThisInitialized(_this)), _this.constructor);
+
+      if (typeof Error.captureStackTrace === 'function') {
+        Error.captureStackTrace(assertThisInitialized(assertThisInitialized(_this)), context || _this.constructor);
+      }
+
       _this.name = 'ArtPlayerError';
       return _this;
     }
@@ -586,46 +590,46 @@
     classCallCheck(this, Controls);
   };
 
-  var Contextmenu = function Contextmenu(_ref) {//
-
-    var option = _ref.option;
-
+  var Contextmenu = function Contextmenu(art) {
     classCallCheck(this, Contextmenu);
+
+    this.art = art;
   };
 
-  var Danmu = function Danmu(_ref) {//
-
-    var option = _ref.option;
-
+  var Danmu = function Danmu(art) {
     classCallCheck(this, Danmu);
+
+    this.art = art;
   };
 
-  var Info = function Info(_ref) {//
-
-    var option = _ref.option;
-
+  var Info = function Info(art) {
     classCallCheck(this, Info);
+
+    this.art = art;
   };
 
-  var Captions = function Captions(_ref) {//
+  var Subtitle = function Subtitle(art) {
+    classCallCheck(this, Subtitle);
 
-    var option = _ref.option;
-
-    classCallCheck(this, Captions);
+    this.art = art;
   };
 
-  var Events = function Events(_ref) {//
-
-    var option = _ref.option;
-
+  var Events = function Events(art) {
     classCallCheck(this, Events);
+
+    this.art = art;
   };
 
-  var Hotkey = function Hotkey(_ref) {//
-
-    var option = _ref.option;
-
+  var Hotkey = function Hotkey(art) {
     classCallCheck(this, Hotkey);
+
+    this.art = art;
+  };
+
+  var Layers = function Layers(art) {
+    classCallCheck(this, Layers);
+
+    this.art = art;
   };
 
   var id = 0;
@@ -664,10 +668,11 @@
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
         this.danmaku = new Danmu(this);
-        this.subtitle = new Captions(this);
+        this.subtitle = new Subtitle(this);
         this.info = new Info(this);
         this.events = new Events(this);
         this.hotkey = new Hotkey(this);
+        this.layers = new Layers(this);
         this.id = id++;
         instances.push(this);
       }

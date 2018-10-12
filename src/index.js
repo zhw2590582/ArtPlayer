@@ -12,6 +12,7 @@ import Info from './info';
 import Subtitle from './subtitle';
 import Events from './events';
 import Hotkey from './hotkey';
+import Layers from './layers';
 
 let id = 0;
 export const instances = [];
@@ -77,6 +78,7 @@ class Artplayer extends Emitter {
     this.info = new Info(this);
     this.events = new Events(this);
     this.hotkey = new Hotkey(this);
+    this.layers = new Layers(this);
 
     this.id = id++;
     instances.push(this);

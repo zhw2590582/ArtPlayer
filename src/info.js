@@ -1,5 +1,5 @@
 export default class Info {
-  constructor({ option }) {
-    //
+  constructor(art) {
+    this.art = art;
   }
 }
