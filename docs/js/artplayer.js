@@ -472,9 +472,8 @@
         var option = this.art.option;
 
         if (!option.type) {
-          var urlArr = option.url.trim().toLowerCase().split('.');
-          var type = urlArr[urlArr.length - 1];
-          errorHandle(Object.keys(mimeCodeces).includes(type), "Can't find video's type from ".concat(option.url));
+          var type = option.url.trim().toLowerCase().split('.').pop();
+          errorHandle(Object.keys(mimeCodeces).includes(type), "Can't find video's type '".concat(type, "' from '").concat(option.url, "'"));
           option.type = type;
         }
 
