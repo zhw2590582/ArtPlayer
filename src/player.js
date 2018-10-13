@@ -20,15 +20,12 @@ export default class Player {
   }
 
   eventBind() {
+    const { proxy } = this.art.events;
     const { $video } = this.art.refs;
     const { events } = mediaElement;
-    for (let index = 0; index < events.length; index++) {
-      const eventName = events[index];
-      $video.addEventListener(eventName, this.eventFn);
-      this.art.destroyEvents.push(() => {
-        $video.removeEventListener(eventName, this.eventFn);
-      });
-    }
+    events.forEach(eventName => {
+      proxy($video, eventName, this.eventFn);
+    });
   }
 
   eventFn(event) {

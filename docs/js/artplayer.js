@@ -409,21 +409,12 @@
       value: function eventBind() {
         var _this = this;
 
+        var proxy = this.art.events.proxy;
         var $video = this.art.refs.$video;
         var events = mediaElement.events;
-
-        var _loop = function _loop(index) {
-          var eventName = events[index];
-          $video.addEventListener(eventName, _this.eventFn);
-
-          _this.art.destroyEvents.push(function () {
-            $video.removeEventListener(eventName, _this.eventFn);
-          });
-        };
-
-        for (var index = 0; index < events.length; index++) {
-          _loop(index);
-        }
+        events.forEach(function (eventName) {
+          proxy($video, eventName, _this.eventFn);
+        });
       }
     }, {
       key: "eventFn",
@@ -502,7 +493,7 @@
         errorHandle(MediaSource.isTypeSupported(option.mimeCodec), "Unsupported MIME type or codec: ".concat(option.mimeCodec));
         this.mediaSource = new MediaSource();
         $video.src = URL.createObjectURL(this.mediaSource);
-        this.art.destroyEvents.push(function () {
+        this.art.events.destroys.push(function () {
           URL.revokeObjectURL($video.src);
         });
       }
@@ -511,27 +502,15 @@
       value: function eventBind() {
         var _this = this;
 
+        var proxy = this.art.events.proxy;
         var instance = mseConfig.instance,
             sourceBufferList = mseConfig.sourceBufferList;
         instance.events.forEach(function (eventName) {
-          _this.mediaSource.addEventListener(eventName, _this.mediaSourceEventFn);
-
-          _this.art.destroyEvents.push(function () {
-            _this.mediaSource.removeEventListener(eventName, _this.mediaSourceEventFn);
-          });
+          proxy(_this.mediaSource, eventName, _this.mediaSourceEventFn);
         });
         sourceBufferList.events.forEach(function (eventName) {
-          _this.mediaSource.sourceBuffers.addEventListener(eventName, _this.sourceBuffersEventFn);
-
-          _this.art.destroyEvents.push(function () {
-            _this.mediaSource.sourceBuffers.removeEventListener(eventName, _this.sourceBuffersEventFn);
-          });
-
-          _this.mediaSource.activeSourceBuffers.addEventListener(eventName, _this.activeSourceBuffersEventFn);
-
-          _this.art.destroyEvents.push(function () {
-            _this.mediaSource.activeSourceBuffers.removeEventListener(eventName, _this.activeSourceBuffersEventFn);
-          });
+          proxy(_this.mediaSource.sourceBuffers, eventName, _this.sourceBuffersEventFn);
+          proxy(_this.mediaSource.activeSourceBuffers, eventName, _this.activeSourceBuffersEventFn);
         });
       }
     }, {
@@ -540,15 +519,12 @@
         var _this2 = this;
 
         var option = this.art.option;
+        var proxy = this.art.events.proxy;
         var sourceBuffer = mseConfig.sourceBuffer;
         this.art.on('mediaSource:sourceopen', function () {
           _this2.sourceBuffer = _this2.mediaSource.addSourceBuffer(option.mimeCodec);
           sourceBuffer.events.forEach(function (eventName) {
-            _this2.sourceBuffer.addEventListener(eventName, _this2.sourceBufferEventFn);
-
-            _this2.art.destroyEvents.push(function () {
-              _this2.sourceBuffer.removeEventListener(eventName, _this2.sourceBufferEventFn);
-            });
+            proxy(_this2.sourceBuffer, eventName, _this2.sourceBufferEventFn);
           });
         });
         this.art.on('sourceBuffer:updateend', function () {
@@ -614,11 +590,29 @@
     this.art = art;
   };
 
-  var Events = function Events(art) {
-    classCallCheck(this, Events);
+  var Events =
+  /*#__PURE__*/
+  function () {
+    function Events(art) {
+      classCallCheck(this, Events);
 
-    this.art = art;
-  };
+      this.art = art;
+      this.destroys = [];
+      this.proxy = this.proxy.bind(this);
+    }
+
+    createClass(Events, [{
+      key: "proxy",
+      value: function proxy(target, name, callback) {
+        target.addEventListener(name, callback);
+        this.destroys.push(function () {
+          target.removeEventListener(name, callback);
+        });
+      }
+    }]);
+
+    return Events;
+  }();
 
   var Hotkey = function Hotkey(art) {
     classCallCheck(this, Hotkey);
@@ -660,9 +654,9 @@
         this.refs = {
           $container: this.option.container
         };
-        this.destroyEvents = [];
         this.template = new Template(this);
         this.i18n = new I18n(this);
+        this.events = new Events(this);
         this.player = new Player(this);
         this.mse = new Mse(this);
         this.controls = new Controls(this);
@@ -670,7 +664,6 @@
         this.danmaku = new Danmu(this);
         this.subtitle = new Subtitle(this);
         this.info = new Info(this);
-        this.events = new Events(this);
         this.hotkey = new Hotkey(this);
         this.layers = new Layers(this);
         this.id = id++;
@@ -679,10 +672,10 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.destroyEvents.forEach(function (event) {
-          return event();
+        this.events.destroys.forEach(function (destroy) {
+          return destroy();
         });
-        this.refs.container.innerHTML = '';
+        this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
       }
     }], [{

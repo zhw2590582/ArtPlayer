@@ -65,10 +65,9 @@ class Artplayer extends Emitter {
       $container: this.option.container
     };
 
-    this.destroyEvents = [];
-
     this.template = new Template(this);
     this.i18n = new I18n(this);
+    this.events = new Events(this);
     this.player = new Player(this);
     this.mse = new Mse(this);
     this.controls = new Controls(this);
@@ -76,7 +75,6 @@ class Artplayer extends Emitter {
     this.danmaku = new Danmaku(this);
     this.subtitle = new Subtitle(this);
     this.info = new Info(this);
-    this.events = new Events(this);
     this.hotkey = new Hotkey(this);
     this.layers = new Layers(this);
 
@@ -85,8 +83,8 @@ class Artplayer extends Emitter {
   }
 
   destroy() {
-    this.destroyEvents.forEach(event => event());
-    this.refs.container.innerHTML = '';
+    this.events.destroys.forEach(destroy => destroy());
+    this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
   }
 }

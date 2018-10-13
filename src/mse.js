@@ -51,45 +51,34 @@ export default class Mse {
     );
     this.mediaSource = new MediaSource();
     $video.src = URL.createObjectURL(this.mediaSource);
-    this.art.destroyEvents.push(() => {
+    this.art.events.destroys.push(() => {
       URL.revokeObjectURL($video.src);
     });
   }
 
   eventBind() {
+    const { proxy } = this.art.events;
     const { instance, sourceBufferList } = mseConfig;
 
     instance.events.forEach(eventName => {
-      this.mediaSource.addEventListener(eventName, this.mediaSourceEventFn);
-      this.art.destroyEvents.push(() => {
-        this.mediaSource.removeEventListener(eventName, this.mediaSourceEventFn);
-      });
+      proxy(this.mediaSource, eventName, this.mediaSourceEventFn);
     });
 
     sourceBufferList.events.forEach(eventName => {
-      this.mediaSource.sourceBuffers.addEventListener(eventName, this.sourceBuffersEventFn);
-      this.art.destroyEvents.push(() => {
-        this.mediaSource.sourceBuffers.removeEventListener(eventName, this.sourceBuffersEventFn);
-      });
-
-      this.mediaSource.activeSourceBuffers.addEventListener(eventName, this.activeSourceBuffersEventFn);
-      this.art.destroyEvents.push(() => {
-        this.mediaSource.activeSourceBuffers.removeEventListener(eventName, this.activeSourceBuffersEventFn);
-      });
+      proxy(this.mediaSource.sourceBuffers, eventName, this.sourceBuffersEventFn);
+      proxy(this.mediaSource.activeSourceBuffers, eventName, this.activeSourceBuffersEventFn);
     });
   }
 
   eventStart() {
     const { option } = this.art;
+    const { proxy } = this.art.events;
     const { sourceBuffer } = mseConfig;
 
     this.art.on('mediaSource:sourceopen', () => {
       this.sourceBuffer = this.mediaSource.addSourceBuffer(option.mimeCodec);
       sourceBuffer.events.forEach(eventName => {
-        this.sourceBuffer.addEventListener(eventName, this.sourceBufferEventFn);
-        this.art.destroyEvents.push(() => {
-          this.sourceBuffer.removeEventListener(eventName, this.sourceBufferEventFn);
-        });
+        proxy(this.sourceBuffer, eventName, this.sourceBufferEventFn);
       });
     });
 
