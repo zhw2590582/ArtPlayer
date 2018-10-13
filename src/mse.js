@@ -18,14 +18,10 @@ export default class Mse {
   setMimeCodec() {
     const { option } = this.art;
     if (!option.type) {
-      const urlArr = option.url
-        .trim()
-        .toLowerCase()
-        .split('.');
-      const type = urlArr[urlArr.length - 1];
+      const type = option.url.trim().toLowerCase().split('.').pop();
       errorHandle(
         Object.keys(mimeCodeces).includes(type),
-        `Can't find video's type from ${option.url}`
+        `Can't find video's type '${type}' from '${option.url}'`
       );
       option.type = type;
     }
