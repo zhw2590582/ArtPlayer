@@ -56,4 +56,8 @@ export default function verification(option) {
     `'mimeCodec' option require 'string' type, but got '${typeof option.mimeCodec}'.`
   );
 
+  errorHandle(
+    Array.isArray(option.layers),
+    `'layers' option require 'array' type, but got '${typeof option.layers}'.`
+  );
 }

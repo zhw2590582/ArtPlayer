@@ -39,6 +39,7 @@ class Artplayer extends Emitter {
       preload: 'auto',
       type: '',
       mimeCodec: '',
+      layers: [],
       contextmenu: [],
       lang: navigator.language.toLowerCase()
     };

@@ -244,6 +244,7 @@
     errorHandle(typeof option.lang === 'string', "'lang' option require 'string' type, but got '".concat(_typeof_1(option.lang), "'."));
     errorHandle(typeof option.type === 'string', "'type' option require 'string' type, but got '".concat(_typeof_1(option.type), "'."));
     errorHandle(typeof option.mimeCodec === 'string', "'mimeCodec' option require 'string' type, but got '".concat(_typeof_1(option.mimeCodec), "'."));
+    errorHandle(Array.isArray(option.layers), "'layers' option require 'array' type, but got '".concat(_typeof_1(option.layers), "'."));
   }
 
   function E () {
@@ -548,7 +549,6 @@
       classCallCheck(this, Contextmenu);
 
       this.art = art;
-      this.state = false;
       this.init();
     }
 
@@ -557,16 +557,6 @@
       value: function init() {
         var _this = this;
 
-        this.art.layers.add({
-          name: 'test1',
-          html: 'test2',
-          index: 10
-        });
-        this.art.layers.add({
-          name: 'test3',
-          html: 'test4',
-          index: 11
-        });
         var _this$art = this.art,
             option = _this$art.option,
             i18n = _this$art.i18n,
@@ -575,27 +565,28 @@
         option.contextmenu.push({
           text: i18n.get('Video info'),
           click: function click(art) {
-            console.log(art);
+            art.info.show();
           }
         }, {
           text: i18n.get('About author'),
           link: 'https://github.com/zhw2590582'
+        }, {
+          text: 'ArtPlayer 1.0.0',
+          link: 'https://github.com/zhw2590582/artplayer'
         });
         proxy(refs.$container, 'contextmenu', function (event) {
           event.preventDefault();
 
-          if (!_this.state) {
+          if (!refs.$contextmenu) {
             _this.creatMenu();
-
-            _this.state = true;
           }
 
-          _this.setPos(event);
-
           _this.show();
+
+          _this.setPos(event);
         });
-        proxy(document, 'contextmenu', function (event) {
-          if (!event.path.includes(refs.$container)) {
+        proxy(refs.$container, 'click', function () {
+          if (refs.$contextmenu) {
             _this.hide();
           }
         });
@@ -603,22 +594,78 @@
     }, {
       key: "creatMenu",
       value: function creatMenu() {
-        console.log('creatMenu');
+        var _this2 = this;
+
+        var _this$art2 = this.art,
+            option = _this$art2.option,
+            refs = _this$art2.refs,
+            proxy = _this$art2.events.proxy;
+        refs.$contextmenu = document.createElement('div');
+        refs.$contextmenu.classList.add('artplayer-contextmenu');
+        option.contextmenu.forEach(function (item) {
+          var $menu = document.createElement('a');
+          $menu.innerHTML = item.text;
+          $menu.classList.add('art-menu');
+
+          if (item.link) {
+            $menu.target = '_blank';
+            $menu.href = item.link;
+          } else if (item.click) {
+            $menu.href = '#';
+            proxy($menu, 'click', function (event) {
+              event.preventDefault();
+              item.click(_this2.art, event);
+
+              _this2.hide();
+            });
+          }
+
+          refs.$contextmenu.appendChild($menu);
+        });
+        refs.$wrap.appendChild(refs.$contextmenu);
       }
     }, {
       key: "setPos",
-      value: function setPos() {
-        console.log('setPos');
+      value: function setPos(event) {
+        var refs = this.art.refs;
+        var mouseX = event.clientX;
+        var mouseY = event.clientY;
+
+        var _refs$$container$getB = refs.$container.getBoundingClientRect(),
+            cHeight = _refs$$container$getB.height,
+            cWidth = _refs$$container$getB.width,
+            cLeft = _refs$$container$getB.left,
+            cTop = _refs$$container$getB.top;
+
+        var _refs$$contextmenu$ge = refs.$contextmenu.getBoundingClientRect(),
+            mHeight = _refs$$contextmenu$ge.height,
+            mWidth = _refs$$contextmenu$ge.width;
+
+        var menuLeft = mouseX - cLeft;
+        var menuTop = mouseY - cTop;
+
+        if (mouseX + mWidth > cLeft + cWidth) {
+          menuLeft -= mWidth;
+        }
+
+        if (mouseY + mHeight > cTop + cHeight) {
+          menuTop -= mHeight;
+        }
+
+        refs.$contextmenu.style.left = "".concat(menuLeft, "px");
+        refs.$contextmenu.style.top = "".concat(menuTop, "px");
       }
     }, {
       key: "hide",
       value: function hide() {
-        console.log('hide');
+        var refs = this.art.refs;
+        refs.$contextmenu && (refs.$contextmenu.style.display = 'none');
       }
     }, {
       key: "show",
       value: function show() {
-        console.log('show');
+        var refs = this.art.refs;
+        refs.$contextmenu && (refs.$contextmenu.style.display = 'block');
       }
     }]);
 
@@ -631,11 +678,29 @@
     this.art = art;
   };
 
-  var Info = function Info(art) {
-    classCallCheck(this, Info);
+  var Info =
+  /*#__PURE__*/
+  function () {
+    function Info(art) {
+      classCallCheck(this, Info);
 
-    this.art = art;
-  };
+      this.art = art;
+    }
+
+    createClass(Info, [{
+      key: "show",
+      value: function show() {
+        console.log('info show');
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        console.log('info hide');
+      }
+    }]);
+
+    return Info;
+  }();
 
   var Subtitle = function Subtitle(art) {
     classCallCheck(this, Subtitle);
@@ -652,6 +717,7 @@
       this.art = art;
       this.destroys = [];
       this.proxy = this.proxy.bind(this);
+      this.init();
     }
 
     createClass(Events, [{
@@ -661,6 +727,11 @@
         this.destroys.push(function () {
           target.removeEventListener(name, callback);
         });
+      }
+    }, {
+      key: "init",
+      value: function init() {
+        console.log('init');
       }
     }]);
 
@@ -682,6 +753,8 @@
       classCallCheck(this, Layers);
 
       this.art = art;
+      this.add = this.add.bind(this);
+      this.art.option.layers.forEach(this.add);
     }
 
     createClass(Layers, [{
@@ -689,7 +762,9 @@
       value: function add(option) {
         var refs = this.art.refs;
         id++;
-        refs.$layers.insertAdjacentHTML('beforeend', "\n      <div data-layer-index=\"".concat(id, "\" class=\"art-layer art-layer-").concat(option.name, "\" style=\"z-index: ").concat(option.index || id, "\">\n        ").concat(option.html, "\n      </div>\n    "));
+        refs.$layers.insertAdjacentHTML('beforeend', "\n      <div\n        data-art-layer-id=\"".concat(id, "\"\n        class=\"art-layer art-layer-").concat(option.name || id, "\"\n        style=\"z-index: ").concat(option.index || id, "\"\n      >\n        ").concat(option.html || '', "\n      </div>\n    "));
+        var $layer = refs.$layers.querySelector("[data-art-layer-id=\"".concat(id, "\"]"));
+        option.callback && option.callback($layer);
       }
     }]);
 
@@ -786,6 +861,7 @@
           preload: 'auto',
           type: '',
           mimeCodec: '',
+          layers: [],
           contextmenu: [],
           lang: navigator.language.toLowerCase()
         };

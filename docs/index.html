@@ -28,17 +28,7 @@
         var player = new Artplayer({
             container: document.querySelector('.artplayer-app'),
             url: './video/frag_bunny.mp4',
-            poster: './img/poster.png',
-            contextmenu: [{
-                text: 'custom1',
-                link: 'https://github.com/zhw2590582/artplayer'
-            },
-            {
-                text: 'custom2',
-                click: (player) => {
-                    console.log(player);
-                }
-            }]
+            poster: './img/poster.png'
         });
 
         console.log(player);

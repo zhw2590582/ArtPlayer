@@ -1,62 +1,107 @@
 export default class Contextmenu {
   constructor(art) {
     this.art = art;
-    this.state = false;
     this.init();
   }
 
   init() {
-    this.art.layers.add({
-      name: 'test1',
-      html: 'test2',
-      index: 10
-    });
-    this.art.layers.add({
-      name: 'test3',
-      html: 'test4',
-      index: 11
-    });
-    const { option, i18n, refs, events: { proxy } } = this.art;
-    option.contextmenu.push({
-      text: i18n.get('Video info'),
-      click: art => {
-        console.log(art);
+    const {
+      option,
+      i18n,
+      refs,
+      events: { proxy }
+    } = this.art;
+
+    option.contextmenu.push(
+      {
+        text: i18n.get('Video info'),
+        click: art => {
+          art.info.show();
+        }
+      },
+      {
+        text: i18n.get('About author'),
+        link: 'https://github.com/zhw2590582'
+      },
+      {
+        text: 'ArtPlayer __VERSION__',
+        link: 'https://github.com/zhw2590582/artplayer'
       }
-    }, {
-      text: i18n.get('About author'),
-      link: 'https://github.com/zhw2590582'
-    });
+    );
 
     proxy(refs.$container, 'contextmenu', event => {
       event.preventDefault();
-      if (!this.state) {
+      if (!refs.$contextmenu) {
         this.creatMenu();
-        this.state = true;
       }
-      this.setPos(event);
       this.show();
+      this.setPos(event);
     });
 
-    proxy(document, 'contextmenu', event => {
-      if (!event.path.includes(refs.$container)) {
+    proxy(refs.$container, 'click', () => {
+      if (refs.$contextmenu) {
         this.hide();
       }
     });
   }
 
   creatMenu() {
-    console.log('creatMenu');
+    const {
+      option,
+      refs,
+      events: { proxy }
+    } = this.art;
+    refs.$contextmenu = document.createElement('div');
+    refs.$contextmenu.classList.add('artplayer-contextmenu');
+    option.contextmenu.forEach(item => {
+      const $menu = document.createElement('a');
+      $menu.innerHTML = item.text;
+      $menu.classList.add('art-menu');
+      if (item.link) {
+        $menu.target = '_blank';
+        $menu.href = item.link;
+      } else if (item.click) {
+        $menu.href = '#';
+        proxy($menu, 'click', event => {
+          event.preventDefault();
+          item.click(this.art, event);
+          this.hide();
+        });
+      }
+      refs.$contextmenu.appendChild($menu);
+    });
+    refs.$wrap.appendChild(refs.$contextmenu);
   }
 
-  setPos() {
-    console.log('setPos');
+  setPos(event) {
+    const { refs } = this.art;
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = refs.$container.getBoundingClientRect();
+    const { height: mHeight, width: mWidth } = refs.$contextmenu.getBoundingClientRect();
+
+    let menuLeft = mouseX - cLeft;
+    let menuTop = mouseY - cTop;
+
+    if (mouseX + mWidth > cLeft + cWidth) {
+      menuLeft -= mWidth;
+    }
+
+    if (mouseY + mHeight > cTop + cHeight) {
+      menuTop -= mHeight;
+    }
+
+    refs.$contextmenu.style.left = `${menuLeft}px`;
+    refs.$contextmenu.style.top = `${menuTop}px`;
   }
 
   hide() {
-    console.log('hide');
+    const { refs } = this.art;
+    refs.$contextmenu && (refs.$contextmenu.style.display = 'none');
   }
 
   show() {
-    console.log('show');
+    const { refs } = this.art;
+    refs.$contextmenu && (refs.$contextmenu.style.display = 'block');
   }
 }
