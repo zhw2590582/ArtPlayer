@@ -69,4 +69,34 @@
             visibility: visible;
         }
     }
+
+    .artplayer-loading {
+        position: absolute;
+        z-index: 5;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .artplayer-notice {
+        display: none;
+        font-size: 13px;
+        position: absolute;
+        z-index: 6;
+        left: 10px;
+        top: 10px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+    }
 }

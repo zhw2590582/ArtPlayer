@@ -6,7 +6,7 @@ export default class Layers {
     this.art.option.layers.forEach(this.add);
   }
 
-  add(option) {
+  add(option, callback) {
     const { refs } = this.art;
     id++;
 
@@ -21,6 +21,6 @@ export default class Layers {
     `);
 
     const $layer = refs.$layers.querySelector(`[data-art-layer-id="${id}"]`);
-    option.callback && option.callback($layer);
+    callback && callback($layer);
   }
 }

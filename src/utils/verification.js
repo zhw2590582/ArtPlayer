@@ -60,4 +60,14 @@ export default function verification(option) {
     Array.isArray(option.layers),
     `'layers' option require 'array' type, but got '${typeof option.layers}'.`
   );
+
+  errorHandle(
+    Array.isArray(option.contextmenu),
+    `'contextmenu' option require 'array' type, but got '${typeof option.contextmenu}'.`
+  );
+
+  errorHandle(
+    typeof option.loading === 'string',
+    `'loading' option require 'string' type, but got '${typeof option.loading}'.`
+  );
 }

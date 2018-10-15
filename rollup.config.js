@@ -6,6 +6,7 @@ const { eslint } = require('rollup-plugin-eslint');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const replace = require('rollup-plugin-replace');
+const svgo = require('rollup-plugin-svgo');
 const { uglify } = require('rollup-plugin-uglify');
 const { version } = require('./package.json');
 const isProd = process.env.NODE_ENV === 'production';
@@ -34,6 +35,9 @@ export default {
       runtimeHelpers: true,
       exclude: 'node_modules/**',
       plugins: ['@babel/external-helpers', '@babel/transform-runtime']
+    }),
+    svgo({
+      raw: true
     }),
     replace({
       exclude: 'node_modules/**',

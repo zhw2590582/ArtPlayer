@@ -13,6 +13,8 @@ import Subtitle from './subtitle';
 import Events from './events';
 import Hotkey from './hotkey';
 import Layers from './layers';
+import Loading from './loading';
+import Notice from './notice';
 
 let id = 0;
 export const instances = [];
@@ -41,6 +43,7 @@ class Artplayer extends Emitter {
       mimeCodec: '',
       layers: [],
       contextmenu: [],
+      loading: '',
       lang: navigator.language.toLowerCase()
     };
   }
@@ -79,6 +82,8 @@ class Artplayer extends Emitter {
     this.subtitle = new Subtitle(this);
     this.info = new Info(this);
     this.hotkey = new Hotkey(this);
+    this.loading = new Loading(this);
+    this.notice = new Notice(this);
 
     this.id = id++;
     instances.push(this);
