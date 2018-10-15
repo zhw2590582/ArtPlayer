@@ -4,7 +4,6 @@ import mediaElement from './utils/mediaElement';
 export default class Player {
   constructor(art) {
     this.art = art;
-    this.eventFn = this.eventFn.bind(this);
     this.init();
     this.eventBind();
   }
@@ -24,11 +23,9 @@ export default class Player {
     const { $video } = this.art.refs;
     const { events } = mediaElement;
     events.forEach(eventName => {
-      proxy($video, eventName, this.eventFn);
+      proxy($video, eventName, event => {
+        this.art.emit(`video:${event.type}`, event);
+      });
     });
-  }
-
-  eventFn(event) {
-    this.art.emit(`video:${event.type}`, event);
   }
 }

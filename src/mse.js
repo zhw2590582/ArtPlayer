@@ -6,10 +6,6 @@ export default class Mse {
   constructor(art) {
     this.art = art;
     this.setMimeCodec();
-    this.mediaSourceEventFn = this.mediaSourceEventFn.bind(this);
-    this.sourceBufferEventFn = this.sourceBufferEventFn.bind(this);
-    this.sourceBuffersEventFn = this.sourceBuffersEventFn.bind(this);
-    this.activeSourceBuffersEventFn = this.activeSourceBuffersEventFn.bind(this);
     this.init();
     this.eventBind();
     this.eventStart();
@@ -57,12 +53,18 @@ export default class Mse {
     const { instance, sourceBufferList } = mseConfig;
 
     instance.events.forEach(eventName => {
-      proxy(this.mediaSource, eventName, this.mediaSourceEventFn);
+      proxy(this.mediaSource, eventName, event => {
+        this.art.emit(`mediaSource:${event.type}`, event);
+      });
     });
 
     sourceBufferList.events.forEach(eventName => {
-      proxy(this.mediaSource.sourceBuffers, eventName, this.sourceBuffersEventFn);
-      proxy(this.mediaSource.activeSourceBuffers, eventName, this.activeSourceBuffersEventFn);
+      proxy(this.mediaSource.sourceBuffers, eventName, event => {
+        this.art.emit(`sourceBuffers:${event.type}`, event);
+      });
+      proxy(this.mediaSource.activeSourceBuffers, eventName, event => {
+        this.art.emit(`activeSourceBuffers:${event.type}`, event);
+      });
     });
   }
 
@@ -74,7 +76,9 @@ export default class Mse {
     this.art.on('mediaSource:sourceopen', () => {
       this.sourceBuffer = this.mediaSource.addSourceBuffer(option.mimeCodec);
       sourceBuffer.events.forEach(eventName => {
-        proxy(this.sourceBuffer, eventName, this.sourceBufferEventFn);
+        proxy(this.sourceBuffer, eventName, event => {
+          this.art.emit(`sourceBuffer:${event.type}`, event);
+        });
       });
     });
 
@@ -85,21 +89,5 @@ export default class Mse {
     request(option.url).then(response => {
       this.sourceBuffer.appendBuffer(response);
     });
-  }
-
-  mediaSourceEventFn(event) {
-    this.art.emit(`mediaSource:${event.type}`, event);
-  }
-
-  sourceBufferEventFn(event) {
-    this.art.emit(`sourceBuffer:${event.type}`, event);
-  }
-
-  sourceBuffersEventFn(event) {
-    this.art.emit(`sourceBuffers:${event.type}`, event);
-  }
-
-  activeSourceBuffersEventFn(event) {
-    this.art.emit(`activeSourceBuffers:${event.type}`, event);
   }
 }

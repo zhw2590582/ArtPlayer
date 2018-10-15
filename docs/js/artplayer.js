@@ -388,7 +388,6 @@
       classCallCheck(this, Player);
 
       this.art = art;
-      this.eventFn = this.eventFn.bind(this);
       this.init();
       this.eventBind();
     }
@@ -413,13 +412,10 @@
         var $video = this.art.refs.$video;
         var events = mediaElement.events;
         events.forEach(function (eventName) {
-          proxy($video, eventName, _this.eventFn);
+          proxy($video, eventName, function (event) {
+            _this.art.emit("video:".concat(event.type), event);
+          });
         });
-      }
-    }, {
-      key: "eventFn",
-      value: function eventFn(event) {
-        this.art.emit("video:".concat(event.type), event);
       }
     }]);
 
@@ -457,10 +453,6 @@
 
       this.art = art;
       this.setMimeCodec();
-      this.mediaSourceEventFn = this.mediaSourceEventFn.bind(this);
-      this.sourceBufferEventFn = this.sourceBufferEventFn.bind(this);
-      this.sourceBuffersEventFn = this.sourceBuffersEventFn.bind(this);
-      this.activeSourceBuffersEventFn = this.activeSourceBuffersEventFn.bind(this);
       this.init();
       this.eventBind();
       this.eventStart();
@@ -505,11 +497,17 @@
         var instance = mseConfig.instance,
             sourceBufferList = mseConfig.sourceBufferList;
         instance.events.forEach(function (eventName) {
-          proxy(_this.mediaSource, eventName, _this.mediaSourceEventFn);
+          proxy(_this.mediaSource, eventName, function (event) {
+            _this.art.emit("mediaSource:".concat(event.type), event);
+          });
         });
         sourceBufferList.events.forEach(function (eventName) {
-          proxy(_this.mediaSource.sourceBuffers, eventName, _this.sourceBuffersEventFn);
-          proxy(_this.mediaSource.activeSourceBuffers, eventName, _this.activeSourceBuffersEventFn);
+          proxy(_this.mediaSource.sourceBuffers, eventName, function (event) {
+            _this.art.emit("sourceBuffers:".concat(event.type), event);
+          });
+          proxy(_this.mediaSource.activeSourceBuffers, eventName, function (event) {
+            _this.art.emit("activeSourceBuffers:".concat(event.type), event);
+          });
         });
       }
     }, {
@@ -523,7 +521,9 @@
         this.art.on('mediaSource:sourceopen', function () {
           _this2.sourceBuffer = _this2.mediaSource.addSourceBuffer(option.mimeCodec);
           sourceBuffer.events.forEach(function (eventName) {
-            proxy(_this2.sourceBuffer, eventName, _this2.sourceBufferEventFn);
+            proxy(_this2.sourceBuffer, eventName, function (event) {
+              _this2.art.emit("sourceBuffer:".concat(event.type), event);
+            });
           });
         });
         this.art.on('sourceBuffer:updateend', function () {
@@ -532,26 +532,6 @@
         request(option.url).then(function (response) {
           _this2.sourceBuffer.appendBuffer(response);
         });
-      }
-    }, {
-      key: "mediaSourceEventFn",
-      value: function mediaSourceEventFn(event) {
-        this.art.emit("mediaSource:".concat(event.type), event);
-      }
-    }, {
-      key: "sourceBufferEventFn",
-      value: function sourceBufferEventFn(event) {
-        this.art.emit("sourceBuffer:".concat(event.type), event);
-      }
-    }, {
-      key: "sourceBuffersEventFn",
-      value: function sourceBuffersEventFn(event) {
-        this.art.emit("sourceBuffers:".concat(event.type), event);
-      }
-    }, {
-      key: "activeSourceBuffersEventFn",
-      value: function activeSourceBuffersEventFn(event) {
-        this.art.emit("activeSourceBuffers:".concat(event.type), event);
       }
     }]);
 
