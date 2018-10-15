@@ -14,6 +14,6 @@ export default class Events {
   }
 
   init() {
-    console.log('init');
+    console.log('Events init');
   }
 }

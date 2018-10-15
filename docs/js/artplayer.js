@@ -587,8 +587,8 @@
 
           _this.setPos(event);
         });
-        proxy(refs.$container, 'click', function () {
-          if (refs.$contextmenu) {
+        proxy(refs.$container, 'click', function (event) {
+          if (refs.$contextmenu && !event.path.includes(refs.$contextmenu)) {
             _this.hide();
           }
         });
@@ -733,7 +733,7 @@
     }, {
       key: "init",
       value: function init() {
-        console.log('init');
+        console.log('Events init');
       }
     }]);
 
@@ -847,28 +847,33 @@
       classCallCheck(this, Loading);
 
       this.art = art;
+      this.state = false;
       this.init();
     }
 
     createClass(Loading, [{
       key: "init",
       value: function init() {
-        var option = this.art.option;
+        var _this$art = this.art,
+            option = _this$art.option,
+            $loading = _this$art.refs.$loading;
 
         if (option.loading) {
-          this.art.refs.$loading.insertAdjacentHTML('beforeend', option.loading);
+          $loading.insertAdjacentHTML('beforeend', option.loading);
         } else {
-          this.art.refs.$loading.appendChild(Icons$1.loading);
+          $loading.appendChild(Icons$1.loading);
         }
       }
     }, {
       key: "hide",
       value: function hide() {
+        this.state = false;
         this.art.refs.$loading.style.display = 'none';
       }
     }, {
       key: "show",
       value: function show() {
+        this.state = true;
         this.art.refs.$loading.style.display = 'block';
       }
     }]);

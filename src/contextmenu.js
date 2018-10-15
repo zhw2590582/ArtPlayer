@@ -38,8 +38,8 @@ export default class Contextmenu {
       this.setPos(event);
     });
 
-    proxy(refs.$container, 'click', () => {
-      if (refs.$contextmenu) {
+    proxy(refs.$container, 'click', event => {
+      if (refs.$contextmenu && !event.path.includes(refs.$contextmenu)) {
         this.hide();
       }
     });
