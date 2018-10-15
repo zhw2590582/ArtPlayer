@@ -90,7 +90,7 @@ class Artplayer extends Emitter {
   }
 
   destroy() {
-    this.events.destroys.forEach(destroy => destroy());
+    this.events.destroy();
     this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
   }
