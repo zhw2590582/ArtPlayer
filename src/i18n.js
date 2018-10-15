@@ -1,14 +1,12 @@
-import ZHCN from './zh-CN';
-import ZHTW from './zh-TW';
-import EN from './en';
-import JP from './jp';
-
 const i18nMap = {
-  zh: ZHCN,
-  'zh-cn': ZHCN,
-  'zh-tw': ZHTW,
-  en: EN,
-  jp: JP
+  'zh-cn': {
+    'About author': '关于作者',
+    'Video info': '视频统计信息'
+  },
+  'zh-tw': {
+    'About author': '關於作者',
+    'Video info': '影片統計訊息'
+  }
 };
 
 export default class I18n {

@@ -5,7 +5,8 @@ export default class Template {
   }
 
   init() {
-    this.art.refs.$container.innerHTML = `
+    const { refs } = this.art;
+    refs.$container.innerHTML = `
         <div class="artplayer-wrap">
           <video class="artplayer-video" webkit-playsinline playsinline></video>
           <div class="artplayer-controls"></div>
@@ -14,23 +15,11 @@ export default class Template {
           <div class="artplayer-notice"></div>
         </div>
       `;
-    this.art.refs.$wrap = this.art.refs.$container.querySelector(
-      '.artplayer-wrap'
-    );
-    this.art.refs.$video = this.art.refs.$container.querySelector(
-      '.artplayer-video'
-    );
-    this.art.refs.$controls = this.art.refs.$container.querySelector(
-      '.artplayer-controls'
-    );
-    this.art.refs.$layers = this.art.refs.$container.querySelector(
-      '.artplayer-layers'
-    );
-    this.art.refs.$loading = this.art.refs.$container.querySelector(
-      '.artplayer-loading'
-    );
-    this.art.refs.$notice = this.art.refs.$container.querySelector(
-      '.artplayer-notice'
-    );
+    refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
+    refs.$video = refs.$container.querySelector('.artplayer-video');
+    refs.$controls = refs.$container.querySelector('.artplayer-controls');
+    refs.$layers = refs.$container.querySelector('.artplayer-layers');
+    refs.$loading = refs.$container.querySelector('.artplayer-loading');
+    refs.$notice = refs.$container.querySelector('.artplayer-notice');
   }
 }

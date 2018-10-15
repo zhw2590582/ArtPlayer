@@ -5,9 +5,11 @@
     width: 100%;
     height: 100%;
     text-align: left;
+    user-select: none;
 
     .artplayer-video {
         position: absolute;
+        z-index: 1;
         left: 0;
         top: 0;
         right: 0;
@@ -16,53 +18,14 @@
         height: 100%;
     }
 
-    .artplayer-poster {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-    }
-
-    .artplayer-controls {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-    }
-
-    .artplayer-loading {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-    }
-
-    .artplayer-notice {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-    }
-
     .artplayer-layers {
         position: absolute;
+        z-index: 2;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
         width: 100%;
-        height: 100%; 
+        height: 100%;
     }
 }

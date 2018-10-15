@@ -39,6 +39,7 @@ class Artplayer extends Emitter {
       preload: 'auto',
       type: '',
       mimeCodec: '',
+      contextmenu: [],
       lang: navigator.language.toLowerCase()
     };
   }
@@ -70,13 +71,13 @@ class Artplayer extends Emitter {
     this.events = new Events(this);
     this.player = new Player(this);
     this.mse = new Mse(this);
+    this.layers = new Layers(this);
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);
     this.danmaku = new Danmaku(this);
     this.subtitle = new Subtitle(this);
     this.info = new Info(this);
     this.hotkey = new Hotkey(this);
-    this.layers = new Layers(this);
 
     this.id = id++;
     instances.push(this);

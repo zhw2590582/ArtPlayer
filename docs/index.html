@@ -28,26 +28,49 @@
         var player = new Artplayer({
             container: document.querySelector('.artplayer-app'),
             url: './video/frag_bunny.mp4',
-            poster: 'http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg'
+            poster: './img/poster.png',
+            contextmenu: [{
+                text: 'custom1',
+                link: 'https://github.com/zhw2590582/artplayer'
+            },
+            {
+                text: 'custom2',
+                click: (player) => {
+                    console.log(player);
+                }
+            }]
         });
-
-        player.on('video:canplay', event => {
-			console.log(event);
-        });
-        
-        player.on('video:play', event => {
-			console.log(event);
-        });
-        
-        player.on('video:progress', event => {
-			console.log(event);
-        });
-        
-        player.on('video:pause', event => {
-			console.log(event);
-		});
 
         console.log(player);
+
+        [
+            'abort',
+            'canplay',
+            'canplaythrough',
+            'durationchange',
+            'emptied',
+            'ended',
+            'error',
+            'loadeddata',
+            'loadedmetadata',
+            'loadstart',
+            'pause',
+            'play',
+            'playing',
+            'progress',
+            'ratechange',
+            'seeked',
+            'seeking',
+            'stalled',
+            'suspend',
+            'timeupdate',
+            'volumechange',
+            'waiting'
+        ].forEach(item => {
+            player.on('video:' + item, event => {
+                console.log(event);
+            });
+        });
     </script>
 </body>
 

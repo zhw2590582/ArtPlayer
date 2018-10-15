@@ -325,33 +325,29 @@
     createClass(Template, [{
       key: "init",
       value: function init() {
-        this.art.refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
-        this.art.refs.$wrap = this.art.refs.$container.querySelector('.artplayer-wrap');
-        this.art.refs.$video = this.art.refs.$container.querySelector('.artplayer-video');
-        this.art.refs.$controls = this.art.refs.$container.querySelector('.artplayer-controls');
-        this.art.refs.$layers = this.art.refs.$container.querySelector('.artplayer-layers');
-        this.art.refs.$loading = this.art.refs.$container.querySelector('.artplayer-loading');
-        this.art.refs.$notice = this.art.refs.$container.querySelector('.artplayer-notice');
+        var refs = this.art.refs;
+        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+        refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
+        refs.$video = refs.$container.querySelector('.artplayer-video');
+        refs.$controls = refs.$container.querySelector('.artplayer-controls');
+        refs.$layers = refs.$container.querySelector('.artplayer-layers');
+        refs.$loading = refs.$container.querySelector('.artplayer-loading');
+        refs.$notice = refs.$container.querySelector('.artplayer-notice');
       }
     }]);
 
     return Template;
   }();
 
-  var ZHCN = {};
-
-  var ZHTW = {};
-
-  var EN = {};
-
-  var JP = {};
-
   var i18nMap = {
-    zh: ZHCN,
-    'zh-cn': ZHCN,
-    'zh-tw': ZHTW,
-    en: EN,
-    jp: JP
+    'zh-cn': {
+      'About author': '关于作者',
+      'Video info': '视频统计信息'
+    },
+    'zh-tw': {
+      'About author': '關於作者',
+      'Video info': '影片統計訊息'
+    }
   };
 
   var I18n =
@@ -545,11 +541,89 @@
     classCallCheck(this, Controls);
   };
 
-  var Contextmenu = function Contextmenu(art) {
-    classCallCheck(this, Contextmenu);
+  var Contextmenu =
+  /*#__PURE__*/
+  function () {
+    function Contextmenu(art) {
+      classCallCheck(this, Contextmenu);
 
-    this.art = art;
-  };
+      this.art = art;
+      this.state = false;
+      this.init();
+    }
+
+    createClass(Contextmenu, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+
+        this.art.layers.add({
+          name: 'test1',
+          html: 'test2',
+          index: 10
+        });
+        this.art.layers.add({
+          name: 'test3',
+          html: 'test4',
+          index: 11
+        });
+        var _this$art = this.art,
+            option = _this$art.option,
+            i18n = _this$art.i18n,
+            refs = _this$art.refs,
+            proxy = _this$art.events.proxy;
+        option.contextmenu.push({
+          text: i18n.get('Video info'),
+          click: function click(art) {
+            console.log(art);
+          }
+        }, {
+          text: i18n.get('About author'),
+          link: 'https://github.com/zhw2590582'
+        });
+        proxy(refs.$container, 'contextmenu', function (event) {
+          event.preventDefault();
+
+          if (!_this.state) {
+            _this.creatMenu();
+
+            _this.state = true;
+          }
+
+          _this.setPos(event);
+
+          _this.show();
+        });
+        proxy(document, 'contextmenu', function (event) {
+          if (!event.path.includes(refs.$container)) {
+            _this.hide();
+          }
+        });
+      }
+    }, {
+      key: "creatMenu",
+      value: function creatMenu() {
+        console.log('creatMenu');
+      }
+    }, {
+      key: "setPos",
+      value: function setPos() {
+        console.log('setPos');
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        console.log('hide');
+      }
+    }, {
+      key: "show",
+      value: function show() {
+        console.log('show');
+      }
+    }]);
+
+    return Contextmenu;
+  }();
 
   var Danmu = function Danmu(art) {
     classCallCheck(this, Danmu);
@@ -599,13 +673,30 @@
     this.art = art;
   };
 
-  var Layers = function Layers(art) {
-    classCallCheck(this, Layers);
-
-    this.art = art;
-  };
-
   var id = 0;
+
+  var Layers =
+  /*#__PURE__*/
+  function () {
+    function Layers(art) {
+      classCallCheck(this, Layers);
+
+      this.art = art;
+    }
+
+    createClass(Layers, [{
+      key: "add",
+      value: function add(option) {
+        var refs = this.art.refs;
+        id++;
+        refs.$layers.insertAdjacentHTML('beforeend', "\n      <div data-layer-index=\"".concat(id, "\" class=\"art-layer art-layer-").concat(option.name, "\" style=\"z-index: ").concat(option.index || id, "\">\n        ").concat(option.html, "\n      </div>\n    "));
+      }
+    }]);
+
+    return Layers;
+  }();
+
+  var id$1 = 0;
   var instances = [];
 
   var Artplayer =
@@ -638,14 +729,14 @@
         this.events = new Events(this);
         this.player = new Player(this);
         this.mse = new Mse(this);
+        this.layers = new Layers(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
         this.danmaku = new Danmu(this);
         this.subtitle = new Subtitle(this);
         this.info = new Info(this);
         this.hotkey = new Hotkey(this);
-        this.layers = new Layers(this);
-        this.id = id++;
+        this.id = id$1++;
         instances.push(this);
       }
     }, {
@@ -695,6 +786,7 @@
           preload: 'auto',
           type: '',
           mimeCodec: '',
+          contextmenu: [],
           lang: navigator.language.toLowerCase()
         };
       }
