@@ -327,7 +327,7 @@
       key: "init",
       value: function init() {
         var refs = this.art.refs;
-        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
         refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
         refs.$video = refs.$container.querySelector('.artplayer-video');
         refs.$controls = refs.$container.querySelector('.artplayer-controls');
@@ -359,7 +359,7 @@
 
       classCallCheck(this, I18n);
 
-      this.language = i18nMap[option.lang.toLowerCase()] || i18nMap.en;
+      this.language = i18nMap[option.lang.toLowerCase()] || {};
     }
 
     createClass(I18n, [{
@@ -394,7 +394,7 @@
       value: function init() {
         var option = this.art.option;
         var $video = this.art.refs.$video;
-        $video.controls = true;
+        $video.controls = false;
         $video.poster = option.poster;
         $video.volume = clamp(option.volume, 0, 1);
         $video.autoplay = option.autoplay;

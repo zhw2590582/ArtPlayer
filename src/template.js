@@ -9,8 +9,8 @@ export default class Template {
     refs.$container.innerHTML = `
         <div class="artplayer-wrap">
           <video class="artplayer-video" webkit-playsinline playsinline></video>
-          <div class="artplayer-controls"></div>
           <div class="artplayer-layers"></div>
+          <div class="artplayer-controls"></div>
           <div class="artplayer-loading"></div>
           <div class="artplayer-notice"></div>
         </div>

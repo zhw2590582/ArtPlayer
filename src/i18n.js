@@ -11,7 +11,7 @@ const i18nMap = {
 
 export default class I18n {
   constructor({ option }) {
-    this.language = i18nMap[option.lang.toLowerCase()] || i18nMap.en;
+    this.language = i18nMap[option.lang.toLowerCase()] || {};
   }
 
   get(key) {
