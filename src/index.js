@@ -16,6 +16,7 @@ import Hotkey from './hotkey';
 import Layers from './layers';
 import Loading from './loading';
 import Notice from './notice';
+import Mask from './mask';
 
 let id = 0;
 export const instances = [];
@@ -89,15 +90,18 @@ class Artplayer extends Emitter {
     this.hotkey = new Hotkey(this);
     this.loading = new Loading(this);
     this.notice = new Notice(this);
+    this.mask = new Mask(this);
 
     this.id = id++;
     instances.push(this);
+    return this;
   }
 
   destroy() {
     this.events.destroy();
     this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
+    return this;
   }
 }
 

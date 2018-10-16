@@ -364,13 +364,14 @@
       key: "init",
       value: function init() {
         var refs = this.art.refs;
-        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
         refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
         refs.$video = refs.$container.querySelector('.artplayer-video');
         refs.$controls = refs.$container.querySelector('.artplayer-controls');
         refs.$layers = refs.$container.querySelector('.artplayer-layers');
         refs.$loading = refs.$container.querySelector('.artplayer-loading');
         refs.$notice = refs.$container.querySelector('.artplayer-notice');
+        refs.$mask = refs.$container.querySelector('.artplayer-mask');
       }
     }]);
 
@@ -445,6 +446,42 @@
           proxy($video, eventName, function (event) {
             _this.art.emit("video:".concat(event.type), event);
           });
+        });
+        this.art.on('video:loadstart', function () {
+          _this.art.loading.show();
+        });
+        this.art.on('video:loadeddata', function () {
+          _this.art.loading.hide();
+        });
+        this.art.on('video:canplay', function () {
+          _this.art.controls.show();
+
+          _this.art.mask.show();
+
+          if (_this.art.option.autoplay) {
+            var promise = $video.play(); // TODO: chrome autoplay policy changes
+
+            if (promise !== undefined) {
+              promise.then().catch(function (err) {
+                console.warn(err);
+              });
+            }
+          }
+        });
+        this.art.on('video:playing', function () {
+          _this.art.controls.hide();
+
+          _this.art.mask.hide();
+        });
+        this.art.on('video:pause', function () {
+          _this.art.controls.show();
+
+          _this.art.mask.show();
+        });
+        this.art.on('video:ended', function () {
+          _this.art.controls.show();
+
+          _this.art.mask.show();
         });
       }
     }]);
@@ -564,12 +601,31 @@
     return Mse;
   }();
 
-  var Controls = function Controls(_ref) {//
+  var Controls =
+  /*#__PURE__*/
+  function () {
+    function Controls(art) {
+      classCallCheck(this, Controls);
 
-    var option = _ref.option;
+      this.art = art;
+    }
 
-    classCallCheck(this, Controls);
-  };
+    createClass(Controls, [{
+      key: "show",
+      value: function show() {
+        var $wrap = this.art.refs.$wrap;
+        $wrap.classList.add('controls-show');
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        var $wrap = this.art.refs.$wrap;
+        $wrap.classList.remove('controls-show');
+      }
+    }]);
+
+    return Controls;
+  }();
 
   var Contextmenu =
   /*#__PURE__*/
@@ -860,15 +916,18 @@
 
   var loading = "<svg class=\"lds-default\" width=\"85px\"  height=\"85px\"  xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\"><circle cx=\"75\" cy=\"50\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.9166666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.9166666666666666s\"></animate>\n</circle><circle cx=\"71.65063509461098\" cy=\"62.5\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.8333333333333334s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.8333333333333334s\"></animate>\n</circle><circle cx=\"62.5\" cy=\"71.65063509461096\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.75s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.75s\"></animate>\n</circle><circle cx=\"50\" cy=\"75\" fill=\"undefined\" r=\"3.66667\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.6666666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.6666666666666666s\"></animate>\n</circle><circle cx=\"37.50000000000001\" cy=\"71.65063509461098\" fill=\"undefined\" r=\"4.33333\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.5833333333333334s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.5833333333333334s\"></animate>\n</circle><circle cx=\"28.34936490538903\" cy=\"62.5\" fill=\"undefined\" r=\"5\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.5s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.5s\"></animate>\n</circle><circle cx=\"25\" cy=\"50\" fill=\"undefined\" r=\"4.33333\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.4166666666666667s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.4166666666666667s\"></animate>\n</circle><circle cx=\"28.34936490538903\" cy=\"37.50000000000001\" fill=\"undefined\" r=\"3.66667\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.3333333333333333s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.3333333333333333s\"></animate>\n</circle><circle cx=\"37.499999999999986\" cy=\"28.349364905389038\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.25s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.25s\"></animate>\n</circle><circle cx=\"49.99999999999999\" cy=\"25\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.16666666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.16666666666666666s\"></animate>\n</circle><circle cx=\"62.5\" cy=\"28.349364905389034\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.08333333333333333s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.08333333333333333s\"></animate>\n</circle><circle cx=\"71.65063509461096\" cy=\"37.499999999999986\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"0s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"0s\"></animate>\n</circle></svg>";
 
+  var play = "<svg id=\"plyr-play\" width=\"16px\" height=\"18px\">\n    <path d=\"M15.562 8.1L3.87.225C3.052-.337 2 .225 2 1.125v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z\"></path>\n</svg>";
+
   var Icons = {
-    loading: loading
+    loading: loading,
+    play: play
   };
 
   function creatDomFromSvg(map) {
     var result = {};
     Object.keys(map).forEach(function (name) {
       var tmp = document.createElement('div');
-      tmp.innerHTML = map[name];
+      tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(name, "\">").concat(map[name], "</i>");
 
       var _tmp$childNodes = slicedToArray(tmp.childNodes, 1);
 
@@ -947,6 +1006,36 @@
     return Notice;
   }();
 
+  var Mask =
+  /*#__PURE__*/
+  function () {
+    function Mask(art) {
+      classCallCheck(this, Mask);
+
+      this.art = art;
+      this.init();
+    }
+
+    createClass(Mask, [{
+      key: "init",
+      value: function init() {
+        this.art.refs.$mask.appendChild(Icons$1.play);
+      }
+    }, {
+      key: "show",
+      value: function show() {
+        this.art.refs.$mask.style.display = 'flex';
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        this.art.refs.$mask.style.display = 'none';
+      }
+    }]);
+
+    return Mask;
+  }();
+
   var id$1 = 0;
   var instances = [];
 
@@ -989,8 +1078,10 @@
         this.hotkey = new Hotkey(this);
         this.loading = new Loading(this);
         this.notice = new Notice(this);
+        this.mask = new Mask(this);
         this.id = id$1++;
         instances.push(this);
+        return this;
       }
     }, {
       key: "destroy",
@@ -998,6 +1089,7 @@
         this.events.destroy();
         this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
+        return this;
       }
     }], [{
       key: "use",

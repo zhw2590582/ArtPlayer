@@ -10,6 +10,7 @@ export default class Template {
         <div class="artplayer-wrap">
           <video class="artplayer-video" webkit-playsinline playsinline></video>
           <div class="artplayer-layers"></div>
+          <div class="artplayer-mask"></div>
           <div class="artplayer-controls"></div>
           <div class="artplayer-loading"></div>
           <div class="artplayer-notice"></div>
@@ -21,5 +22,6 @@ export default class Template {
     refs.$layers = refs.$container.querySelector('.artplayer-layers');
     refs.$loading = refs.$container.querySelector('.artplayer-loading');
     refs.$notice = refs.$container.querySelector('.artplayer-notice');
+    refs.$mask = refs.$container.querySelector('.artplayer-mask');
   }
 }

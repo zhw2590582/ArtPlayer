@@ -8,6 +8,12 @@
     overflow: hidden;
     user-select: none;
 
+    .art-icon {
+        svg {
+            fill: #fff;
+        }
+    }
+
     .artplayer-video {
         position: absolute;
         z-index: 1;
@@ -28,6 +34,31 @@
         bottom: 0;
         width: 100%;
         height: 100%;
+    }
+
+    .artplayer-mask {
+        display: none;
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .art-icon-play {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background: #1aafff;
+        }
     }
 
     .artplayer-contextmenu {
@@ -63,7 +94,7 @@
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
     }
 
-    .controls-show, &:hover {
+    &.controls-show, &:hover {
         .artplayer-controls {
             opacity: 1;
             visibility: visible;
