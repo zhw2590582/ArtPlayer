@@ -37,6 +37,7 @@ export default class Contextmenu {
 
     proxy(refs.$container, 'contextmenu', event => {
       event.preventDefault();
+      this.art.focus = true;
       if (!refs.$contextmenu) {
         this.creatMenu();
       }

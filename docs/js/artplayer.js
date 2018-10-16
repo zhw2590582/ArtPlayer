@@ -231,6 +231,9 @@
       throw new ArtPlayerError(err.message);
     });
   }
+  function getExt(url) {
+    return url.trim().toLowerCase().split('.').pop();
+  }
 
   function verification(option) {
     errorHandle(option.container, '\'container\' option is required.');
@@ -248,6 +251,7 @@
     errorHandle(Array.isArray(option.contextmenu), "'contextmenu' option require 'array' type, but got '".concat(_typeof_1(option.contextmenu), "'."));
     errorHandle(typeof option.loading === 'string', "'loading' option require 'string' type, but got '".concat(_typeof_1(option.loading), "'."));
     errorHandle(typeof option.theme === 'string', "'theme' option require 'string' type, but got '".concat(_typeof_1(option.theme), "'."));
+    errorHandle(typeof option.hotkey === 'boolean', "'hotkey' option require 'boolean' type, but got '".concat(_typeof_1(option.hotkey), "'."));
   }
 
   var mimeCodec = {
@@ -383,12 +387,22 @@
     'zh-cn': {
       'About author': '关于作者',
       'Video info': '视频统计信息',
-      'Close': '关闭'
+      'Close': '关闭',
+      'Video load failed': '视频加载失败',
+      'Fast forward 10 seconds': '快进10秒',
+      'Rewind 10 seconds': '快退10秒',
+      '10% increase in volume': '音量增加10%',
+      '10% reduction in volume': '音量减少10%'
     },
     'zh-tw': {
       'About author': '關於作者',
       'Video info': '影片統計訊息',
-      'Close': '關閉'
+      'Close': '關閉',
+      'Video load failed': '影片載入失敗',
+      'Fast forward 10 seconds': '快進10秒',
+      'Rewind 10 seconds': '快退10秒',
+      '10% increase in volume': '音量增加10%',
+      '10% reduction in volume': '音量減少10%'
     }
   };
 
@@ -511,7 +525,7 @@
         var option = this.art.option;
 
         if (!option.type) {
-          var type = option.url.trim().toLowerCase().split('.').pop();
+          var type = getExt(option.url);
           errorHandle(Object.keys(config.mimeCodec).includes(type), "Can't find video's type '".concat(type, "' from '").concat(option.url, "'"));
           option.type = type;
         }
@@ -586,14 +600,18 @@
 
         var _this$art2 = this.art,
             option = _this$art2.option,
-            notice = _this$art2.notice;
+            notice = _this$art2.notice,
+            i18n = _this$art2.i18n,
+            loading = _this$art2.loading;
         request(option.url).then(function (response) {
           _this3.sourceBuffer.appendBuffer(response);
         }).catch(function (err) {
           if (_this3.repeat++ < _this3.maxRepeat) {
             _this3.fetchUrl();
           } else {
-            notice.show(err);
+            notice.show(i18n.get('Video load failed'));
+            console.warn(err);
+            loading.hide();
           }
         });
       }
@@ -667,6 +685,7 @@
         });
         proxy(refs.$container, 'contextmenu', function (event) {
           event.preventDefault();
+          _this.art.focus = true;
 
           if (!refs.$contextmenu) {
             _this.creatMenu();
@@ -808,7 +827,6 @@
       this.art = art;
       this.destroyEvents = [];
       this.proxy = this.proxy.bind(this);
-      this.init();
     }
 
     createClass(Events, [{
@@ -819,11 +837,6 @@
         this.destroyEvents.push(function () {
           target.removeEventListener(name, callback, option);
         });
-      }
-    }, {
-      key: "init",
-      value: function init() {
-        console.log('Events init');
       }
     }, {
       key: "destroy",
@@ -837,11 +850,84 @@
     return Events;
   }();
 
-  var Hotkey = function Hotkey(art) {
-    classCallCheck(this, Hotkey);
+  var Hotkey =
+  /*#__PURE__*/
+  function () {
+    function Hotkey(art) {
+      classCallCheck(this, Hotkey);
 
-    this.art = art;
-  };
+      this.art = art;
+
+      if (this.art.option.hotkey) {
+        this.init();
+      }
+    }
+
+    createClass(Hotkey, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+
+        var _this$art = this.art,
+            player = _this$art.player,
+            notice = _this$art.notice,
+            i18n = _this$art.i18n,
+            $container = _this$art.refs.$container,
+            proxy = _this$art.events.proxy;
+        proxy(document, 'click', function (event) {
+          _this.art.focus = event.path.indexOf($container) > -1;
+        });
+        proxy(window, 'keydown', function (event) {
+          if (_this.art.focus) {
+            var tag = document.activeElement.tagName.toUpperCase();
+            var editable = document.activeElement.getAttribute('contenteditable');
+
+            if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
+              var percentage;
+
+              switch (event.keyCode) {
+                case 39:
+                  event.preventDefault();
+                  player.seek(player.currentTime + 10);
+                  notice.show(i18n.get('Fast forward 10 seconds'), true);
+                  break;
+
+                case 37:
+                  event.preventDefault();
+                  player.seek(player.currentTime - 10);
+                  notice.show(i18n.get('Rewind 10 seconds'), true);
+                  break;
+
+                case 38:
+                  event.preventDefault();
+                  percentage = player.volume() + 0.1;
+                  player.volume(percentage);
+                  notice.show(i18n.get('10% increase in volume'), true);
+                  break;
+
+                case 40:
+                  event.preventDefault();
+                  percentage = player.volume() - 0.1;
+                  player.volume(percentage);
+                  notice.show(i18n.get('10% reduction in volume'), true);
+                  break;
+
+                case 32:
+                  event.preventDefault();
+                  player.toggle();
+                  break;
+
+                default:
+                  break;
+              }
+            }
+          }
+        });
+      }
+    }]);
+
+    return Hotkey;
+  }();
 
   var id = 0;
 
@@ -1001,14 +1087,24 @@
       classCallCheck(this, Notice);
 
       this.art = art;
+      this.timer = null;
     }
 
     createClass(Notice, [{
       key: "show",
-      value: function show(msg) {
+      value: function show(msg, autoHide) {
+        var _this = this;
+
         var $notice = this.art.refs.$notice;
         $notice.style.display = 'block';
         $notice.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
+
+        if (autoHide) {
+          clearTimeout(this.timer);
+          this.timer = setTimeout(function () {
+            _this.hide();
+          }, 1000);
+        }
       }
     }, {
       key: "hide",
@@ -1088,6 +1184,7 @@
     createClass(Artplayer, [{
       key: "init",
       value: function init() {
+        this.focus = false;
         this.refs = {
           $container: this.option.container
         };
@@ -1099,12 +1196,12 @@
         this.layers = new Layers(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
-        this.danmaku = new Danmu(this);
+        this.danmu = new Danmu(this);
         this.subtitle = new Subtitle(this);
         this.info = new Info(this);
-        this.hotkey = new Hotkey(this);
         this.loading = new Loading(this);
         this.notice = new Notice(this);
+        this.hotkey = new Hotkey(this);
         this.mask = new Mask(this);
         this.id = id$1++;
         instances.push(this);
@@ -1164,6 +1261,7 @@
           contextmenu: [],
           loading: '',
           theme: '#1aafff',
+          hotkey: true,
           lang: navigator.language.toLowerCase()
         };
       }

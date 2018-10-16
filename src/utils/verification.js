@@ -75,4 +75,9 @@ export default function verification(option) {
     typeof option.theme === 'string',
     `'theme' option require 'string' type, but got '${typeof option.theme}'.`
   );
+
+  errorHandle(
+    typeof option.hotkey === 'boolean',
+    `'hotkey' option require 'boolean' type, but got '${typeof option.hotkey}'.`
+  );
 }

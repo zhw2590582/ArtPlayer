@@ -17,3 +17,11 @@ export function request(url) {
       throw new ArtPlayerError(err.message);
     });
 }
+
+export function getExt(url) {
+  return url
+    .trim()
+    .toLowerCase()
+    .split('.')
+    .pop();
+}

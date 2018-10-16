@@ -3,7 +3,6 @@ export default class Events {
     this.art = art;
     this.destroyEvents = [];
     this.proxy = this.proxy.bind(this);
-    this.init();
   }
 
   proxy(target, name, callback, option = {}) {
@@ -11,10 +10,6 @@ export default class Events {
     this.destroyEvents.push(() => {
       target.removeEventListener(name, callback, option);
     });
-  }
-
-  init() {
-    console.log('Events init');
   }
 
   destroy() {

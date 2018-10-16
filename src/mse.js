@@ -1,4 +1,4 @@
-import { errorHandle, request } from './utils';
+import { errorHandle, request, getExt } from './utils';
 import config from './config';
 
 export default class Mse {
@@ -15,11 +15,7 @@ export default class Mse {
   setMimeCodec() {
     const { option } = this.art;
     if (!option.type) {
-      const type = option.url
-        .trim()
-        .toLowerCase()
-        .split('.')
-        .pop();
+      const type = getExt(option.url);
       errorHandle(
         Object.keys(config.mimeCodec).includes(type),
         `Can't find video's type '${type}' from '${option.url}'`
@@ -95,7 +91,7 @@ export default class Mse {
   }
 
   fetchUrl() {
-    const { option, notice } = this.art;
+    const { option, notice, i18n, loading } = this.art;
     request(option.url)
       .then(response => {
         this.sourceBuffer.appendBuffer(response);
@@ -104,7 +100,9 @@ export default class Mse {
         if (this.repeat++ < this.maxRepeat) {
           this.fetchUrl();
         } else {
-          notice.show(err);
+          notice.show(i18n.get('Video load failed'));
+          console.warn(err);
+          loading.hide();
         }
       });
   }

@@ -8,7 +8,7 @@ import Player from './player';
 import Mse from './mse';
 import Controls from './controls';
 import Contextmenu from './contextmenu';
-import Danmaku from './danmaku';
+import Danmu from './danmu';
 import Info from './info';
 import Subtitle from './subtitle';
 import Events from './events';
@@ -51,6 +51,7 @@ class Artplayer extends Emitter {
       contextmenu: [],
       loading: '',
       theme: '#1aafff',
+      hotkey: true,
       lang: navigator.language.toLowerCase()
     };
   }
@@ -73,6 +74,7 @@ class Artplayer extends Emitter {
   }
 
   init() {
+    this.focus = false;
     this.refs = {
       $container: this.option.container
     };
@@ -85,12 +87,12 @@ class Artplayer extends Emitter {
     this.layers = new Layers(this);
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);
-    this.danmaku = new Danmaku(this);
+    this.danmu = new Danmu(this);
     this.subtitle = new Subtitle(this);
     this.info = new Info(this);
-    this.hotkey = new Hotkey(this);
     this.loading = new Loading(this);
     this.notice = new Notice(this);
+    this.hotkey = new Hotkey(this);
     this.mask = new Mask(this);
 
     this.id = id++;
