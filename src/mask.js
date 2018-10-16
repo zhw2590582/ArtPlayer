@@ -7,7 +7,19 @@ export default class Mask {
   }
 
   init() {
-    this.art.refs.$mask.appendChild(Icons.play);
+    const {
+      option,
+      refs,
+      events: { proxy }
+    } = this.art;
+
+    Icons.play.style.backgroundColor = option.theme;
+    refs.$mask.appendChild(Icons.play);
+
+    proxy(refs.$mask, 'click', () => {
+      refs.$video.play();
+      this.hide();
+    });
   }
 
   show() {

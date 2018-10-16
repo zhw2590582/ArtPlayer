@@ -247,6 +247,7 @@
     errorHandle(Array.isArray(option.layers), "'layers' option require 'array' type, but got '".concat(_typeof_1(option.layers), "'."));
     errorHandle(Array.isArray(option.contextmenu), "'contextmenu' option require 'array' type, but got '".concat(_typeof_1(option.contextmenu), "'."));
     errorHandle(typeof option.loading === 'string', "'loading' option require 'string' type, but got '".concat(_typeof_1(option.loading), "'."));
+    errorHandle(typeof option.theme === 'string', "'theme' option require 'string' type, but got '".concat(_typeof_1(option.theme), "'."));
   }
 
   var mimeCodec = {
@@ -813,9 +814,10 @@
     createClass(Events, [{
       key: "proxy",
       value: function proxy(target, name, callback) {
-        target.addEventListener(name, callback);
+        var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+        target.addEventListener(name, callback, option);
         this.destroyEvents.push(function () {
-          target.removeEventListener(name, callback);
+          target.removeEventListener(name, callback, option);
         });
       }
     }, {
@@ -852,9 +854,22 @@
       this.art = art;
       this.add = this.add.bind(this);
       this.art.option.layers.forEach(this.add);
+      this.init();
     }
 
     createClass(Layers, [{
+      key: "init",
+      value: function init() {
+        var _this$art = this.art,
+            refs = _this$art.refs,
+            proxy = _this$art.events.proxy;
+        proxy(refs.$layers, 'click', function (event) {
+          if (event.path[0] === refs.$layers) {
+            refs.$video.pause();
+          }
+        });
+      }
+    }, {
       key: "add",
       value: function add(option, callback) {
         var refs = this.art.refs;
@@ -1019,7 +1034,19 @@
     createClass(Mask, [{
       key: "init",
       value: function init() {
-        this.art.refs.$mask.appendChild(Icons$1.play);
+        var _this = this;
+
+        var _this$art = this.art,
+            option = _this$art.option,
+            refs = _this$art.refs,
+            proxy = _this$art.events.proxy;
+        Icons$1.play.style.backgroundColor = option.theme;
+        refs.$mask.appendChild(Icons$1.play);
+        proxy(refs.$mask, 'click', function () {
+          refs.$video.play();
+
+          _this.hide();
+        });
       }
     }, {
       key: "show",
@@ -1089,7 +1116,6 @@
         this.events.destroy();
         this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
-        return this;
       }
     }], [{
       key: "use",
@@ -1137,6 +1163,7 @@
           layers: [],
           contextmenu: [],
           loading: '',
+          theme: '#1aafff',
           lang: navigator.language.toLowerCase()
         };
       }

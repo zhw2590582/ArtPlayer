@@ -70,4 +70,9 @@ export default function verification(option) {
     typeof option.loading === 'string',
     `'loading' option require 'string' type, but got '${typeof option.loading}'.`
   );
+
+  errorHandle(
+    typeof option.theme === 'string',
+    `'theme' option require 'string' type, but got '${typeof option.theme}'.`
+  );
 }

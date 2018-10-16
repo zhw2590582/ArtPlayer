@@ -50,6 +50,7 @@ class Artplayer extends Emitter {
       layers: [],
       contextmenu: [],
       loading: '',
+      theme: '#1aafff',
       lang: navigator.language.toLowerCase()
     };
   }
@@ -101,7 +102,6 @@ class Artplayer extends Emitter {
     this.events.destroy();
     this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
-    return this;
   }
 }
 

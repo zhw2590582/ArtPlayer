@@ -4,6 +4,16 @@ export default class Layers {
     this.art = art;
     this.add = this.add.bind(this);
     this.art.option.layers.forEach(this.add);
+    this.init();
+  }
+
+  init() {
+    const { refs, events: { proxy } } = this.art;
+    proxy(refs.$layers, 'click', event => {
+      if (event.path[0] === refs.$layers) {
+        refs.$video.pause();
+      }
+    });
   }
 
   add(option, callback) {

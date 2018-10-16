@@ -6,10 +6,10 @@ export default class Events {
     this.init();
   }
 
-  proxy(target, name, callback) {
-    target.addEventListener(name, callback);
+  proxy(target, name, callback, option = {}) {
+    target.addEventListener(name, callback, option);
     this.destroyEvents.push(() => {
-      target.removeEventListener(name, callback);
+      target.removeEventListener(name, callback, option);
     });
   }
 
