@@ -6,6 +6,7 @@ export default class Player {
     this.art = art;
     this.init();
     this.eventBind();
+    this.playing = false;
   }
 
   init() {
@@ -39,7 +40,7 @@ export default class Player {
       this.art.controls.show();
       this.art.mask.show();
       if (this.art.option.autoplay) {
-        const promise = $video.play();
+        const promise = this.play();
         if (promise !== undefined) {
           promise.then().catch(err => {
             console.warn(err);
@@ -49,31 +50,38 @@ export default class Player {
     });
 
     this.art.on('video:playing', () => {
+      this.playing = true;
       this.art.controls.hide();
       this.art.mask.hide();
     });
 
     this.art.on('video:pause', () => {
+      this.playing = false;
       this.art.controls.show();
       this.art.mask.show();
     });
 
     this.art.on('video:ended', () => {
+      this.playing = false;
       this.art.controls.show();
       this.art.mask.show();
     });
   }
 
   play() {
-    //
+    return this.art.refs.$video.play();
   }
 
   pause() {
-    //
+    return this.art.refs.$video.pause();
   }
 
   toggle() {
-    //
+    if (this.playing) {
+      this.pause();
+    } else {
+      this.play();
+    }
   }
 
   seek() {

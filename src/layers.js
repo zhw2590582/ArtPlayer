@@ -8,10 +8,10 @@ export default class Layers {
   }
 
   init() {
-    const { refs, events: { proxy } } = this.art;
+    const { refs, player, events: { proxy } } = this.art;
     proxy(refs.$layers, 'click', event => {
       if (event.path[0] === refs.$layers) {
-        refs.$video.pause();
+        player.pause();
       }
     });
   }

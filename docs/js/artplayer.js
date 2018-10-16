@@ -436,6 +436,7 @@
       this.art = art;
       this.init();
       this.eventBind();
+      this.playing = false;
     }
 
     createClass(Player, [{
@@ -474,7 +475,7 @@
           _this.art.mask.show();
 
           if (_this.art.option.autoplay) {
-            var promise = $video.play();
+            var promise = _this.play();
 
             if (promise !== undefined) {
               promise.then().catch(function (err) {
@@ -484,16 +485,22 @@
           }
         });
         this.art.on('video:playing', function () {
+          _this.playing = true;
+
           _this.art.controls.hide();
 
           _this.art.mask.hide();
         });
         this.art.on('video:pause', function () {
+          _this.playing = false;
+
           _this.art.controls.show();
 
           _this.art.mask.show();
         });
         this.art.on('video:ended', function () {
+          _this.playing = false;
+
           _this.art.controls.show();
 
           _this.art.mask.show();
@@ -501,15 +508,22 @@
       }
     }, {
       key: "play",
-      value: function play() {//
+      value: function play() {
+        return this.art.refs.$video.play();
       }
     }, {
       key: "pause",
-      value: function pause() {//
+      value: function pause() {
+        return this.art.refs.$video.pause();
       }
     }, {
       key: "toggle",
-      value: function toggle() {//
+      value: function toggle() {
+        if (this.playing) {
+          this.pause();
+        } else {
+          this.play();
+        }
       }
     }, {
       key: "seek",
@@ -932,13 +946,13 @@
               switch (event.keyCode) {
                 case 39:
                   event.preventDefault();
-                  player.seek(player.currentTime + 10);
+                  player.seek(player.currentTime() + 10);
                   notice.show(i18n.get('Fast forward 10 seconds'), true);
                   break;
 
                 case 37:
                   event.preventDefault();
-                  player.seek(player.currentTime - 10);
+                  player.seek(player.currentTime() - 10);
                   notice.show(i18n.get('Rewind 10 seconds'), true);
                   break;
 
@@ -992,10 +1006,11 @@
       value: function init() {
         var _this$art = this.art,
             refs = _this$art.refs,
+            player = _this$art.player,
             proxy = _this$art.events.proxy;
         proxy(refs.$layers, 'click', function (event) {
           if (event.path[0] === refs.$layers) {
-            refs.$video.pause();
+            player.pause();
           }
         });
       }
@@ -1090,7 +1105,6 @@
       classCallCheck(this, Loading);
 
       this.art = art;
-      this.state = false;
       this.init();
     }
 
@@ -1110,13 +1124,11 @@
     }, {
       key: "hide",
       value: function hide() {
-        this.state = false;
         this.art.refs.$loading.style.display = 'none';
       }
     }, {
       key: "show",
       value: function show() {
-        this.state = true;
         this.art.refs.$loading.style.display = 'flex';
       }
     }]);
@@ -1177,13 +1189,14 @@
         var _this = this;
 
         var _this$art = this.art,
+            player = _this$art.player,
             option = _this$art.option,
             refs = _this$art.refs,
             proxy = _this$art.events.proxy;
         Icons$1.play.style.backgroundColor = option.theme;
         refs.$mask.appendChild(Icons$1.play);
         proxy(refs.$mask, 'click', function () {
-          refs.$video.play();
+          player.play();
 
           _this.hide();
         });

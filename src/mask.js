@@ -8,6 +8,7 @@ export default class Mask {
 
   init() {
     const {
+      player,
       option,
       refs,
       events: { proxy }
@@ -17,7 +18,7 @@ export default class Mask {
     refs.$mask.appendChild(Icons.play);
 
     proxy(refs.$mask, 'click', () => {
-      refs.$video.play();
+      player.play();
       this.hide();
     });
   }

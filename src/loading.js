@@ -3,7 +3,6 @@ import Icons from './icons';
 export default class Loading {
   constructor(art) {
     this.art = art;
-    this.state = false;
     this.init();
   }
 
@@ -17,12 +16,10 @@ export default class Loading {
   }
 
   hide() {
-    this.state = false;
     this.art.refs.$loading.style.display = 'none';
   }
 
   show() {
-    this.state = true;
     this.art.refs.$loading.style.display = 'flex';
   }
 }

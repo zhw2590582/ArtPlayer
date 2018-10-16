@@ -33,12 +33,12 @@ export default class Hotkey {
           switch (event.keyCode) {
             case 39:
               event.preventDefault();
-              player.seek(player.currentTime + 10);
+              player.seek(player.currentTime() + 10);
               notice.show(i18n.get('Fast forward 10 seconds'), true);
               break;
             case 37:
               event.preventDefault();
-              player.seek(player.currentTime - 10);
+              player.seek(player.currentTime() - 10);
               notice.show(i18n.get('Rewind 10 seconds'), true);
               break;
             case 38:
