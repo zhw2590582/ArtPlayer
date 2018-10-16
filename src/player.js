@@ -19,11 +19,9 @@ export default class Player {
   }
 
   eventBind() {
-    const { proxy } = this.art.events;
-    const { $video } = this.art.refs;
-    const { events } = config.video;
+    const { events: { proxy }, refs: { $video } } = this.art;
 
-    events.forEach(eventName => {
+    config.video.events.forEach(eventName => {
       proxy($video, eventName, event => {
         this.art.emit(`video:${event.type}`, event);
       });
@@ -42,8 +40,6 @@ export default class Player {
       this.art.mask.show();
       if (this.art.option.autoplay) {
         const promise = $video.play();
-
-        // TODO: chrome autoplay policy changes
         if (promise !== undefined) {
           promise.then().catch(err => {
             console.warn(err);
@@ -66,5 +62,49 @@ export default class Player {
       this.art.controls.show();
       this.art.mask.show();
     });
+  }
+
+  play() {
+    //
+  }
+
+  pause() {
+    //
+  }
+
+  toggle() {
+    //
+  }
+
+  seek() {
+    //
+  }
+
+  currentTime() {
+    //
+  }
+
+  volume() {
+    //
+  }
+
+  switchVolumeIcon() {
+    //
+  }
+
+  switchVideo() {
+    //
+  }
+
+  switchQuality() {
+    //
+  }
+
+  switchSubtitle() {
+    //
+  }
+
+  speed() {
+    //
   }
 }

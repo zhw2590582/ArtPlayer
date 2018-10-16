@@ -454,10 +454,10 @@
       value: function eventBind() {
         var _this = this;
 
-        var proxy = this.art.events.proxy;
-        var $video = this.art.refs.$video;
-        var events = config.video.events;
-        events.forEach(function (eventName) {
+        var _this$art = this.art,
+            proxy = _this$art.events.proxy,
+            $video = _this$art.refs.$video;
+        config.video.events.forEach(function (eventName) {
           proxy($video, eventName, function (event) {
             _this.art.emit("video:".concat(event.type), event);
           });
@@ -474,7 +474,7 @@
           _this.art.mask.show();
 
           if (_this.art.option.autoplay) {
-            var promise = $video.play(); // TODO: chrome autoplay policy changes
+            var promise = $video.play();
 
             if (promise !== undefined) {
               promise.then().catch(function (err) {
@@ -498,6 +498,50 @@
 
           _this.art.mask.show();
         });
+      }
+    }, {
+      key: "play",
+      value: function play() {//
+      }
+    }, {
+      key: "pause",
+      value: function pause() {//
+      }
+    }, {
+      key: "toggle",
+      value: function toggle() {//
+      }
+    }, {
+      key: "seek",
+      value: function seek() {//
+      }
+    }, {
+      key: "currentTime",
+      value: function currentTime() {//
+      }
+    }, {
+      key: "volume",
+      value: function volume() {//
+      }
+    }, {
+      key: "switchVolumeIcon",
+      value: function switchVolumeIcon() {//
+      }
+    }, {
+      key: "switchVideo",
+      value: function switchVideo() {//
+      }
+    }, {
+      key: "switchQuality",
+      value: function switchQuality() {//
+      }
+    }, {
+      key: "switchSubtitle",
+      value: function switchSubtitle() {//
+      }
+    }, {
+      key: "speed",
+      value: function speed() {//
       }
     }]);
 
