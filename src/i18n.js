@@ -1,11 +1,13 @@
 const i18nMap = {
   'zh-cn': {
     'About author': '关于作者',
-    'Video info': '视频统计信息'
+    'Video info': '视频统计信息',
+    'Close': '关闭'
   },
   'zh-tw': {
     'About author': '關於作者',
-    'Video info': '影片統計訊息'
+    'Video info': '影片統計訊息',
+    'Close': '關閉'
   }
 };
 

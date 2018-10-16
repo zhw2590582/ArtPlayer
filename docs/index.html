@@ -31,34 +31,34 @@
             poster: './img/poster.png'
         });
 
+        console.dir(Artplayer);
+
         console.log(player);
 
-        [
-            'abort',
-            'canplay',
-            'canplaythrough',
-            'durationchange',
-            'emptied',
-            'ended',
-            'error',
-            'loadeddata',
-            'loadedmetadata',
-            'loadstart',
-            'pause',
-            'play',
-            'playing',
-            'progress',
-            'ratechange',
-            'seeked',
-            'seeking',
-            'stalled',
-            'suspend',
-            'timeupdate',
-            'volumechange',
-            'waiting'
-        ].forEach(item => {
+        Artplayer.config.video.events.forEach(item => {
             player.on('video:' + item, event => {
-                console.log(event);
+                console.log('video', event);
+            });
+        });
+
+        Artplayer.config.mse.mediaSource.events.forEach(item => {
+            player.on('mediaSource:' + item, event => {
+                console.log('mediaSource', event);
+            });
+        });
+
+        Artplayer.config.mse.sourceBufferList.events.forEach(item => {
+            player.on('sourceBuffers:' + item, event => {
+                console.log('sourceBuffers', event);
+            });
+            player.on('activeSourceBuffers:' + item, event => {
+                console.log('activeSourceBuffers', event);
+            });
+        });
+
+        Artplayer.config.mse.sourceBuffer.events.forEach(item => {
+            player.on('sourceBuffer:' + item, event => {
+                console.log('sourceBuffer', event);
             });
         });
     </script>

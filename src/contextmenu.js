@@ -26,6 +26,12 @@ export default class Contextmenu {
       {
         text: 'ArtPlayer __VERSION__',
         link: 'https://github.com/zhw2590582/artplayer'
+      },
+      {
+        text: i18n.get('Close'),
+        click: () => {
+          this.hide();
+        }
       }
     );
 

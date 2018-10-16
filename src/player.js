@@ -1,5 +1,5 @@
 import { clamp } from './utils';
-import mediaElement from './utils/mediaElement';
+import config from './config';
 
 export default class Player {
   constructor(art) {
@@ -21,7 +21,7 @@ export default class Player {
   eventBind() {
     const { proxy } = this.art.events;
     const { $video } = this.art.refs;
-    const { events } = mediaElement;
+    const { events } = config.video;
     events.forEach(eventName => {
       proxy($video, eventName, event => {
         this.art.emit(`video:${event.type}`, event);

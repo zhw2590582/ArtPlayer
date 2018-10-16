@@ -1,5 +1,5 @@
 export default {
-  instance: {
+  mediaSource: {
     propertys: [
       'activeSourceBuffers',
       'duration',

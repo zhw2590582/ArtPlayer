@@ -1,5 +1,6 @@
 import './style/index.scss';
 import verification from './utils/verification';
+import config from './config';
 import Emitter from 'tiny-emitter';
 import Template from './template';
 import I18n from './i18n';
@@ -29,6 +30,10 @@ class Artplayer extends Emitter {
 
   static get version() {
     return '__VERSION__';
+  }
+
+  static get config() {
+    return config;
   }
 
   static get DEFAULTS() {

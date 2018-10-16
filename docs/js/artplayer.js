@@ -249,6 +249,41 @@
     errorHandle(typeof option.loading === 'string', "'loading' option require 'string' type, but got '".concat(_typeof_1(option.loading), "'."));
   }
 
+  var mimeCodec = {
+    mp4: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
+    webm: 'video/webm; codecs="vorbis, vp8"',
+    ts: 'video/mp2t; codecs="avc1.42E01E, mp4a.40.2"'
+  };
+
+  var mse = {
+    mediaSource: {
+      propertys: ['activeSourceBuffers', 'duration', 'readyState', 'sourceBuffers'],
+      methods: ['addSourceBuffer', 'endOfStream', 'removeSourceBuffer', 'clearLiveSeekableRange', 'setLiveSeekableRange'],
+      events: ['sourceclose', 'sourceended', 'sourceopen']
+    },
+    sourceBuffer: {
+      propertys: ['mode', 'updating', 'buffered', 'timestampOffset', 'audioTracks', 'videoTracks', 'textTracks', 'appendWindowStart', 'appendWindowEnd', 'trackDefaults'],
+      methods: ['appendBuffer', 'appendStream', 'abort', 'remove'],
+      events: ['abort', 'error', 'update', 'updateend', 'updatestart']
+    },
+    sourceBufferList: {
+      propertys: ['length'],
+      events: ['addsourcebuffer', 'removesourcebuffer']
+    }
+  };
+
+  var video = {
+    propertys: ['audioTracks', 'autoplay', 'buffered', 'controller', 'controls', 'crossOrigin', 'currentSrc', 'currentTime', 'defaultMuted', 'defaultPlaybackRate', 'duration', 'ended', 'error', 'loop', 'mediaGroup', 'muted', 'networkState', 'paused', 'playbackRate', 'played', 'preload', 'readyState', 'seekable', 'seeking', 'src', 'startDate', 'textTracks', 'videoTracks', 'volume'],
+    methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'],
+    events: ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']
+  };
+
+  var config = {
+    mimeCodec: mimeCodec,
+    mse: mse,
+    video: video
+  };
+
   function E () {
     // Keep this empty so it's easier to inherit from
     // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
@@ -345,11 +380,13 @@
   var i18nMap = {
     'zh-cn': {
       'About author': '关于作者',
-      'Video info': '视频统计信息'
+      'Video info': '视频统计信息',
+      'Close': '关闭'
     },
     'zh-tw': {
       'About author': '關於作者',
-      'Video info': '影片統計訊息'
+      'Video info': '影片統計訊息',
+      'Close': '關閉'
     }
   };
 
@@ -373,12 +410,6 @@
 
     return I18n;
   }();
-
-  var mediaElement = {
-    propertys: ['audioTracks', 'autoplay', 'buffered', 'controller', 'controls', 'crossOrigin', 'currentSrc', 'currentTime', 'defaultMuted', 'defaultPlaybackRate', 'duration', 'ended', 'error', 'loop', 'mediaGroup', 'muted', 'networkState', 'paused', 'playbackRate', 'played', 'preload', 'readyState', 'seekable', 'seeking', 'src', 'startDate', 'textTracks', 'videoTracks', 'volume'],
-    methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'],
-    events: ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']
-  };
 
   var Player =
   /*#__PURE__*/
@@ -409,7 +440,7 @@
 
         var proxy = this.art.events.proxy;
         var $video = this.art.refs.$video;
-        var events = mediaElement.events;
+        var events = config.video.events;
         events.forEach(function (eventName) {
           proxy($video, eventName, function (event) {
             _this.art.emit("video:".concat(event.type), event);
@@ -420,29 +451,6 @@
 
     return Player;
   }();
-
-  var mimeCodeces = {
-    mp4: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
-    webm: 'video/webm; codecs="vorbis, vp8"',
-    ts: 'video/mp2t; codecs="avc1.42E01E, mp4a.40.2"'
-  };
-
-  var mseConfig = {
-    instance: {
-      propertys: ['activeSourceBuffers', 'duration', 'readyState', 'sourceBuffers'],
-      methods: ['addSourceBuffer', 'endOfStream', 'removeSourceBuffer', 'clearLiveSeekableRange', 'setLiveSeekableRange'],
-      events: ['sourceclose', 'sourceended', 'sourceopen']
-    },
-    sourceBuffer: {
-      propertys: ['mode', 'updating', 'buffered', 'timestampOffset', 'audioTracks', 'videoTracks', 'textTracks', 'appendWindowStart', 'appendWindowEnd', 'trackDefaults'],
-      methods: ['appendBuffer', 'appendStream', 'abort', 'remove'],
-      events: ['abort', 'error', 'update', 'updateend', 'updatestart']
-    },
-    sourceBufferList: {
-      propertys: ['length'],
-      events: ['addsourcebuffer', 'removesourcebuffer']
-    }
-  };
 
   var Mse =
   /*#__PURE__*/
@@ -455,6 +463,8 @@
       this.init();
       this.eventBind();
       this.eventStart();
+      this.repeat = 0;
+      this.maxRepeat = 5;
     }
 
     createClass(Mse, [{
@@ -464,12 +474,12 @@
 
         if (!option.type) {
           var type = option.url.trim().toLowerCase().split('.').pop();
-          errorHandle(Object.keys(mimeCodeces).includes(type), "Can't find video's type '".concat(type, "' from '").concat(option.url, "'"));
+          errorHandle(Object.keys(config.mimeCodec).includes(type), "Can't find video's type '".concat(type, "' from '").concat(option.url, "'"));
           option.type = type;
         }
 
         if (!option.mimeCodec) {
-          var mimeCodec = mimeCodeces[option.type];
+          var mimeCodec = config.mimeCodec[option.type];
           errorHandle(mimeCodec, "Can't find video's mimeCodec from ".concat(option.type));
           option.mimeCodec = mimeCodec;
         }
@@ -483,7 +493,7 @@
         errorHandle(MediaSource.isTypeSupported(option.mimeCodec), "Unsupported MIME type or codec: ".concat(option.mimeCodec));
         this.mediaSource = new MediaSource();
         $video.src = URL.createObjectURL(this.mediaSource);
-        this.art.events.destroys.push(function () {
+        this.art.events.destroyEvents.push(function () {
           URL.revokeObjectURL($video.src);
         });
       }
@@ -493,9 +503,10 @@
         var _this = this;
 
         var proxy = this.art.events.proxy;
-        var instance = mseConfig.instance,
-            sourceBufferList = mseConfig.sourceBufferList;
-        instance.events.forEach(function (eventName) {
+        var _config$mse = config.mse,
+            mediaSource = _config$mse.mediaSource,
+            sourceBufferList = _config$mse.sourceBufferList;
+        mediaSource.events.forEach(function (eventName) {
           proxy(_this.mediaSource, eventName, function (event) {
             _this.art.emit("mediaSource:".concat(event.type), event);
           });
@@ -516,7 +527,7 @@
 
         var option = this.art.option;
         var proxy = this.art.events.proxy;
-        var sourceBuffer = mseConfig.sourceBuffer;
+        var sourceBuffer = config.mse.sourceBuffer;
         this.art.on('mediaSource:sourceopen', function () {
           _this2.sourceBuffer = _this2.mediaSource.addSourceBuffer(option.mimeCodec);
           sourceBuffer.events.forEach(function (eventName) {
@@ -528,8 +539,24 @@
         this.art.on('sourceBuffer:updateend', function () {
           _this2.mediaSource.endOfStream();
         });
+        this.fetchUrl();
+      }
+    }, {
+      key: "fetchUrl",
+      value: function fetchUrl() {
+        var _this3 = this;
+
+        var _this$art2 = this.art,
+            option = _this$art2.option,
+            notice = _this$art2.notice;
         request(option.url).then(function (response) {
-          _this2.sourceBuffer.appendBuffer(response);
+          _this3.sourceBuffer.appendBuffer(response);
+        }).catch(function (err) {
+          if (_this3.repeat++ < _this3.maxRepeat) {
+            _this3.fetchUrl();
+          } else {
+            notice.show(err);
+          }
         });
       }
     }]);
@@ -575,6 +602,11 @@
         }, {
           text: 'ArtPlayer 1.0.0',
           link: 'https://github.com/zhw2590582/artplayer'
+        }, {
+          text: i18n.get('Close'),
+          click: function click() {
+            _this.hide();
+          }
         });
         proxy(refs.$container, 'contextmenu', function (event) {
           event.preventDefault();
@@ -717,7 +749,7 @@
       classCallCheck(this, Events);
 
       this.art = art;
-      this.destroys = [];
+      this.destroyEvents = [];
       this.proxy = this.proxy.bind(this);
       this.init();
     }
@@ -726,7 +758,7 @@
       key: "proxy",
       value: function proxy(target, name, callback) {
         target.addEventListener(name, callback);
-        this.destroys.push(function () {
+        this.destroyEvents.push(function () {
           target.removeEventListener(name, callback);
         });
       }
@@ -734,6 +766,13 @@
       key: "init",
       value: function init() {
         console.log('Events init');
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.destroyEvents.forEach(function (event) {
+          return event();
+        });
       }
     }]);
 
@@ -819,7 +858,7 @@
 
   var slicedToArray = _slicedToArray;
 
-  var loading = "<svg class=\"lds-bluecat\" width=\"80px\"  height=\"80px\"  xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\">\n      <g transform=\"rotate(0.97464 50 50)\">\n        <animateTransform attributeName=\"transform\" type=\"rotate\" values=\"360 50 50;0 50 50\" keyTimes=\"0;1\" dur=\"1.5s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\"0.5 0 0.5 1\" begin=\"-0.15000000000000002s\"></animateTransform>\n        <circle cx=\"50\" cy=\"50\" r=\"39.891\" stroke=\"#6994b7\" stroke-width=\"14.4\" fill=\"none\" stroke-dasharray=\"0 300\">\n          <animate attributeName=\"stroke-dasharray\" values=\"15 300;55.1413599195142 300;15 300\" keyTimes=\"0;0.5;1\" dur=\"1.5s\" repeatCount=\"indefinite\" calcMode=\"linear\" keySplines=\"0 0.4 0.6 1;0.4 0 1 0.6\" begin=\"-0.069s\"></animate>\n        </circle>\n        <circle cx=\"50\" cy=\"50\" r=\"39.891\" stroke=\"#eeeeee\" stroke-width=\"7.2\" fill=\"none\" stroke-dasharray=\"0 300\">\n          <animate attributeName=\"stroke-dasharray\" values=\"15 300;55.1413599195142 300;15 300\" keyTimes=\"0;0.5;1\" dur=\"1.5s\" repeatCount=\"indefinite\" calcMode=\"linear\" keySplines=\"0 0.4 0.6 1;0.4 0 1 0.6\" begin=\"-0.069s\"></animate>\n        </circle>\n        <circle cx=\"50\" cy=\"50\" r=\"32.771\" stroke=\"#000000\" stroke-width=\"1\" fill=\"none\" stroke-dasharray=\"0 300\">\n          <animate attributeName=\"stroke-dasharray\" values=\"15 300;45.299378454348094 300;15 300\" keyTimes=\"0;0.5;1\" dur=\"1.5s\" repeatCount=\"indefinite\" calcMode=\"linear\" keySplines=\"0 0.4 0.6 1;0.4 0 1 0.6\" begin=\"-0.069s\"></animate>\n        </circle>\n        <circle cx=\"50\" cy=\"50\" r=\"47.171\" stroke=\"#000000\" stroke-width=\"1\" fill=\"none\" stroke-dasharray=\"0 300\">\n          <animate attributeName=\"stroke-dasharray\" values=\"15 300;66.03388996804073 300;15 300\" keyTimes=\"0;0.5;1\" dur=\"1.5s\" repeatCount=\"indefinite\" calcMode=\"linear\" keySplines=\"0 0.4 0.6 1;0.4 0 1 0.6\" begin=\"-0.069s\"></animate>\n        </circle>\n      </g>\n\n      <g transform=\"rotate(11.1822 50 50)\">\n        <animateTransform attributeName=\"transform\" type=\"rotate\" values=\"360 50 50;0 50 50\" keyTimes=\"0;1\" dur=\"1.5s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\"0.5 0 0.5 1\"></animateTransform>\n\t<path fill=\"#6994b7\" stroke=\"#000000\" d=\"M97.2,50.1c0,6.1-1.2,12.2-3.5,17.9l-13.3-5.4c1.6-3.9,2.4-8.2,2.4-12.4\"></path>\n\t<path fill=\"#eeeeee\" d=\"M93.5,49.9c0,1.2,0,2.7-0.1,3.9l-0.4,3.6c-0.4,2-2.3,3.3-4.1,2.8l-0.2-0.1c-1.8-0.5-3.1-2.3-2.7-3.9l0.4-3 c0.1-1,0.1-2.3,0.1-3.3\"></path>\n\t<path fill=\"#6994b7\" stroke=\"#000000\" d=\"M85.4,62.7c-0.2,0.7-0.5,1.4-0.8,2.1c-0.3,0.7-0.6,1.4-0.9,2c-0.6,1.1-2,1.4-3.2,0.8c-1.1-0.7-1.7-2-1.2-2.9 c0.3-0.6,0.5-1.2,0.8-1.8c0.2-0.6,0.6-1.2,0.7-1.8\"></path>\n\t<path fill=\"#6994b7\" stroke=\"#000000\" d=\"M94.5,65.8c-0.3,0.9-0.7,1.7-1,2.6c-0.4,0.9-0.7,1.7-1.1,2.5c-0.7,1.4-2.3,1.9-3.4,1.3h0 c-1.1-0.7-1.5-2.2-0.9-3.4c0.4-0.8,0.7-1.5,1-2.3c0.3-0.8,0.7-1.5,0.9-2.3\"></path>\n      </g>\n      <g transform=\"rotate(0.97464 50 50)\">\n        <animateTransform attributeName=\"transform\" type=\"rotate\" values=\"360 50 50;0 50 50\" keyTimes=\"0;1\" dur=\"1.5s\" repeatCount=\"indefinite\" calcMode=\"spline\" keySplines=\"0.5 0 0.5 1\" begin=\"-0.15000000000000002s\"></animateTransform>\n        <path fill=\"#eeeeee\" stroke=\"#000000\" d=\"M86.9,35.3l-6,2.4c-0.4-1.2-1.1-2.4-1.7-3.5c-0.2-0.5,0.3-1.1,0.9-1C82.3,33.8,84.8,34.4,86.9,35.3z\"></path>\n        <path fill=\"#eeeeee\" stroke=\"#000000\" d=\"M87.1,35.3l6-2.4c-0.6-1.7-1.5-3.3-2.3-4.9c-0.3-0.7-1.2-0.6-1.4,0.1C88.8,30.6,88.2,33,87.1,35.3z\"></path>\n        <path fill=\"#6994b7\" stroke=\"#000000\" d=\"M82.8,50.1c0-3.4-0.5-6.8-1.6-10c-0.2-0.8-0.4-1.5-0.3-2.3c0.1-0.8,0.4-1.6,0.7-2.4c0.7-1.5,1.9-3.1,3.7-4l0,0 c1.8-0.9,3.7-1.1,5.6-0.3c0.9,0.4,1.7,1,2.4,1.8c0.7,0.8,1.3,1.7,1.7,2.8c1.5,4.6,2.2,9.5,2.3,14.4\"></path>\n        <path fill=\"#eeeeee\" d=\"M86.3,50.2l0-0.9l-0.1-0.9l-0.1-1.9c0-0.9,0.2-1.7,0.7-2.3c0.5-0.7,1.3-1.2,2.3-1.4l0.3,0 c0.9-0.2,1.9,0,2.6,0.6c0.7,0.5,1.3,1.4,1.4,2.4l0.2,2.2l0.1,1.1l0,1.1\"></path>\n        <path fill=\"#ff9922\" d=\"M93.2,34.6c0.1,0.4-0.3,0.8-0.9,1c-0.6,0.2-1.2,0.1-1.4-0.2c-0.1-0.3,0.3-0.8,0.9-1 C92.4,34.2,93,34.3,93.2,34.6z\"></path>\n        <path fill=\"#ff9922\" d=\"M81.9,38.7c0.1,0.3,0.7,0.3,1.3,0.1c0.6-0.2,1-0.6,0.9-0.9c-0.1-0.3-0.7-0.3-1.3-0.1 C82.2,38,81.8,38.4,81.9,38.7z\"></path>\n        <path fill=\"#000000\" d=\"M88.5,36.8c0.1,0.3-0.2,0.7-0.6,0.8c-0.5,0.2-0.9,0-1.1-0.3c-0.1-0.3,0.2-0.7,0.6-0.8C87.9,36.3,88.4,36.4,88.5,36.8z\"></path>\n        <path stroke=\"#000000\" d=\"M85.9,38.9c0.2,0.6,0.8,0.9,1.4,0.7c0.6-0.2,0.9-0.9,0.6-2.1c0.3,1.2,1,1.7,1.6,1.5c0.6-0.2,0.9-0.8,0.8-1.4\"></path>\n        <path fill=\"#6994b7\" stroke=\"#000000\" d=\"M86.8,42.3l0.4,2.2c0.1,0.4,0.1,0.7,0.2,1.1l0.1,1.1c0.1,1.2-0.9,2.3-2.2,2.3c-1.3,0-2.5-0.8-2.5-1.9l-0.1-1 c0-0.3-0.1-0.6-0.2-1l-0.3-1.9\"></path>\n        <path fill=\"#6994b7\" stroke=\"#000000\" d=\"M96.2,40.3l0.5,2.7c0.1,0.5,0.2,0.9,0.2,1.4l0.1,1.4c0.1,1.5-0.9,2.8-2.2,2.9h0c-1.3,0-2.5-1.1-2.6-2.4 L92.1,45c0-0.4-0.1-0.8-0.2-1.2l-0.4-2.5\"></path>\n        <path fill=\"#000000\" d=\"M91.1,34.1c0.3,0.7,0,1.4-0.7,1.6c-0.6,0.2-1.3-0.1-1.6-0.7c-0.2-0.6,0-1.4,0.7-1.6C90.1,33.1,90.8,33.5,91.1,34.1z\"></path>\n        <path fill=\"#000000\" d=\"M85.5,36.3c0.2,0.6-0.1,1.2-0.7,1.5c-0.6,0.2-1.3,0-1.5-0.6C83,36.7,83.4,36,84,35.8C84.6,35.5,85.3,35.7,85.5,36.3z\"></path>\n\n      </g></svg>";
+  var loading = "<svg class=\"lds-default\" width=\"85px\"  height=\"85px\"  xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\"><circle cx=\"75\" cy=\"50\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.9166666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.9166666666666666s\"></animate>\n</circle><circle cx=\"71.65063509461098\" cy=\"62.5\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.8333333333333334s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.8333333333333334s\"></animate>\n</circle><circle cx=\"62.5\" cy=\"71.65063509461096\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.75s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.75s\"></animate>\n</circle><circle cx=\"50\" cy=\"75\" fill=\"undefined\" r=\"3.66667\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.6666666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.6666666666666666s\"></animate>\n</circle><circle cx=\"37.50000000000001\" cy=\"71.65063509461098\" fill=\"undefined\" r=\"4.33333\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.5833333333333334s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.5833333333333334s\"></animate>\n</circle><circle cx=\"28.34936490538903\" cy=\"62.5\" fill=\"undefined\" r=\"5\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.5s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.5s\"></animate>\n</circle><circle cx=\"25\" cy=\"50\" fill=\"undefined\" r=\"4.33333\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.4166666666666667s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.4166666666666667s\"></animate>\n</circle><circle cx=\"28.34936490538903\" cy=\"37.50000000000001\" fill=\"undefined\" r=\"3.66667\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.3333333333333333s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.3333333333333333s\"></animate>\n</circle><circle cx=\"37.499999999999986\" cy=\"28.349364905389038\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.25s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.25s\"></animate>\n</circle><circle cx=\"49.99999999999999\" cy=\"25\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.16666666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.16666666666666666s\"></animate>\n</circle><circle cx=\"62.5\" cy=\"28.349364905389034\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.08333333333333333s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.08333333333333333s\"></animate>\n</circle><circle cx=\"71.65063509461096\" cy=\"37.499999999999986\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"0s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"0s\"></animate>\n</circle></svg>";
 
   var Icons = {
     loading: loading
@@ -874,7 +913,7 @@
       key: "show",
       value: function show() {
         this.state = true;
-        this.art.refs.$loading.style.display = 'block';
+        this.art.refs.$loading.style.display = 'flex';
       }
     }]);
 
@@ -956,9 +995,7 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.events.destroys.forEach(function (destroy) {
-          return destroy();
-        });
+        this.events.destroy();
         this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
       }
@@ -987,6 +1024,11 @@
       key: "version",
       get: function get() {
         return '1.0.0';
+      }
+    }, {
+      key: "config",
+      get: function get() {
+        return config;
       }
     }, {
       key: "DEFAULTS",

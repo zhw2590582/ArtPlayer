@@ -23,6 +23,6 @@ export default class Loading {
 
   show() {
     this.state = true;
-    this.art.refs.$loading.style.display = 'block';
+    this.art.refs.$loading.style.display = 'flex';
   }
 }
