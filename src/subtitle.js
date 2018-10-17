@@ -1,7 +1,13 @@
+import { errorHandle, getExt } from './utils';
+
 export default class Subtitle {
   constructor(art) {
     this.art = art;
     if (this.art.option.subtitle) {
+      errorHandle(
+        getExt(this.art.option.subtitle) === 'vtt',
+        `'subtitle' option require 'vtt' format, but got '${getExt(this.art.option.subtitle)}'.`
+      );
       this.init();
     }
   }
@@ -51,6 +57,10 @@ export default class Subtitle {
   }
 
   change(url) {
+    errorHandle(
+      getExt(url) === 'vtt',
+      `'url' option require 'vtt' format, but got '${getExt(url)}'.`
+    );
     this.art.refs.$track.src = url;
   }
 }

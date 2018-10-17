@@ -19,6 +19,10 @@ export function request(url) {
 }
 
 export function getExt(url) {
+  if (url.includes('?')) {
+    return getExt(url.split('?')[0]);
+  }
+
   return url
     .trim()
     .toLowerCase()

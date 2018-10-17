@@ -232,6 +232,10 @@
     });
   }
   function getExt(url) {
+    if (url.includes('?')) {
+      return getExt(url.split('?')[0]);
+    }
+
     return url.trim().toLowerCase().split('.').pop();
   }
 
@@ -927,6 +931,7 @@
       this.art = art;
 
       if (this.art.option.subtitle) {
+        errorHandle(getExt(this.art.option.subtitle) === 'vtt', "'subtitle' option require 'vtt' format, but got '".concat(getExt(this.art.option.subtitle), "'."));
         this.init();
       }
     }
@@ -986,6 +991,7 @@
     }, {
       key: "change",
       value: function change(url) {
+        errorHandle(getExt(url) === 'vtt', "'url' option require 'vtt' format, but got '".concat(getExt(url), "'."));
         this.art.refs.$track.src = url;
       }
     }]);
