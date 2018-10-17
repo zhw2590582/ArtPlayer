@@ -6,7 +6,6 @@ export default class Player {
     this.art = art;
     this.init();
     this.eventBind();
-    this.playing = false;
   }
 
   init() {
@@ -50,19 +49,19 @@ export default class Player {
     });
 
     this.art.on('video:playing', () => {
-      this.playing = true;
+      this.art.playing = true;
       this.art.controls.hide();
       this.art.mask.hide();
     });
 
     this.art.on('video:pause', () => {
-      this.playing = false;
+      this.art.playing = false;
       this.art.controls.show();
       this.art.mask.show();
     });
 
     this.art.on('video:ended', () => {
-      this.playing = false;
+      this.art.playing = false;
       this.art.controls.show();
       this.art.mask.show();
     });
@@ -77,7 +76,7 @@ export default class Player {
   }
 
   toggle() {
-    if (this.playing) {
+    if (this.art.playing) {
       this.pause();
     } else {
       this.play();

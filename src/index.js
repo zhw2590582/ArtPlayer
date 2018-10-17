@@ -77,6 +77,7 @@ class Artplayer extends Emitter {
 
   init() {
     this.focus = false;
+    this.playing = false;
     this.refs = {
       $container: this.option.container
     };

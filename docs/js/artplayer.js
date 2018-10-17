@@ -439,7 +439,6 @@
       this.art = art;
       this.init();
       this.eventBind();
-      this.playing = false;
     }
 
     createClass(Player, [{
@@ -488,21 +487,21 @@
           }
         });
         this.art.on('video:playing', function () {
-          _this.playing = true;
+          _this.art.playing = true;
 
           _this.art.controls.hide();
 
           _this.art.mask.hide();
         });
         this.art.on('video:pause', function () {
-          _this.playing = false;
+          _this.art.playing = false;
 
           _this.art.controls.show();
 
           _this.art.mask.show();
         });
         this.art.on('video:ended', function () {
-          _this.playing = false;
+          _this.art.playing = false;
 
           _this.art.controls.show();
 
@@ -522,7 +521,7 @@
     }, {
       key: "toggle",
       value: function toggle() {
-        if (this.playing) {
+        if (this.art.playing) {
           this.pause();
         } else {
           this.play();
@@ -1314,6 +1313,7 @@
       key: "init",
       value: function init() {
         this.focus = false;
+        this.playing = false;
         this.refs = {
           $container: this.option.container
         };
