@@ -33,4 +33,12 @@ export default class Layers {
     const $layer = refs.$layers.querySelector(`[data-art-layer-id="${id}"]`);
     callback && callback($layer);
   }
+
+  show() {
+    this.art.refs.$layers.style.display = 'block';
+  }
+
+  hide() {
+    this.art.refs.$layers.style.display = 'none';
+  }
 }

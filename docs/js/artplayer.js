@@ -1140,6 +1140,16 @@
         var $layer = refs.$layers.querySelector("[data-art-layer-id=\"".concat(id, "\"]"));
         callback && callback($layer);
       }
+    }, {
+      key: "show",
+      value: function show() {
+        this.art.refs.$layers.style.display = 'block';
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        this.art.refs.$layers.style.display = 'none';
+      }
     }]);
 
     return Layers;
