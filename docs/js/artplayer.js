@@ -238,6 +238,21 @@
 
     return url.trim().toLowerCase().split('.').pop();
   }
+  function append(parent, child) {
+    if (child instanceof Element) {
+      parent.appendChild(child);
+    } else {
+      parent.innerHTML = child;
+    }
+
+    return parent;
+  }
+  function setStyle(element, styles) {
+    Object.keys(styles).forEach(function (key) {
+      element.style[key] = styles[key];
+    });
+    return element;
+  }
 
   function verification(option) {
     errorHandle(option.container, '\'container\' option is required.');
@@ -794,9 +809,9 @@
             });
           }
 
-          refs.$contextmenu.appendChild($menu);
+          append(refs.$contextmenu, $menu);
         });
-        refs.$wrap.appendChild(refs.$contextmenu);
+        append(refs.$wrap, refs.$contextmenu);
       }
     }, {
       key: "setPos",
@@ -947,9 +962,7 @@
             _this$art$refs = _this$art.refs,
             $video = _this$art$refs.$video,
             $subtitle = _this$art$refs.$subtitle;
-        Object.keys(subtitleStyle).forEach(function (key) {
-          $subtitle.style[key] = subtitleStyle[key];
-        });
+        setStyle($subtitle, subtitleStyle);
         var $track = document.createElement('track');
         $track.default = true;
         $track.kind = 'metadata';
@@ -1145,19 +1158,8 @@
         $layer.setAttribute('data-art-layer-id', id);
         $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id));
         $layer.style.zIndex = option.index || id;
-
-        if (option.html instanceof Element) {
-          $layer.appendChild(option.html);
-        } else {
-          $layer.innerHTML = option.html;
-        }
-
-        if (option.style) {
-          Object.keys(option.style).forEach(function (key) {
-            $layer.style[key] = option.style[key];
-          });
-        }
-
+        append($layer, option.html);
+        setStyle($layer, option.style || {});
         refs.$layers.appendChild($layer);
         callback && callback($layer);
       }
@@ -1180,7 +1182,7 @@
 
   var play = "<svg id=\"plyr-play\" width=\"16px\" height=\"18px\">\n  <path d=\"M15.562 8.1L3.87.225C3.052-.337 2 .225 2 1.125v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z\"></path>\n</svg>\n";
 
-  var Icons = {
+  var icons = {
     loading: loading,
     play: play
   };
@@ -1198,7 +1200,7 @@
     return result;
   }
 
-  var Icons$1 = creatDomFromSvg(Icons);
+  var icons$1 = creatDomFromSvg(icons);
 
   var Loading =
   /*#__PURE__*/
@@ -1218,13 +1220,9 @@
             $loading = _this$art.refs.$loading;
 
         if (option.loading) {
-          if (option.loading instanceof Element) {
-            $loading.appendChild(option.loading);
-          } else {
-            $loading.innerHTML = option.loading;
-          }
+          append($loading, option.loading);
         } else {
-          $loading.appendChild(Icons$1.loading);
+          append($loading, icons$1.loading);
         }
       }
     }, {
@@ -1299,8 +1297,8 @@
             option = _this$art.option,
             refs = _this$art.refs,
             proxy = _this$art.events.proxy;
-        Icons$1.play.style.backgroundColor = option.theme;
-        refs.$mask.appendChild(Icons$1.play);
+        icons$1.play.style.backgroundColor = option.theme;
+        append(refs.$mask, icons$1.play);
         proxy(refs.$mask, 'click', function () {
           player.play();
 

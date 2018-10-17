@@ -1,4 +1,5 @@
-import Icons from './icons';
+import icons from './icons';
+import { append } from './utils';
 
 export default class Loading {
   constructor(art) {
@@ -9,13 +10,9 @@ export default class Loading {
   init() {
     const { option, refs: { $loading } } = this.art;
     if (option.loading) {
-      if (option.loading instanceof Element) {
-        $loading.appendChild(option.loading);
-      } else {
-        $loading.innerHTML = option.loading;
-      }
+      append($loading, option.loading);
     } else {
-      $loading.appendChild(Icons.loading);
+      append($loading, icons.loading);
     }
   }
 

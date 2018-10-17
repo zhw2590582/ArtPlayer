@@ -29,3 +29,20 @@ export function getExt(url) {
     .split('.')
     .pop();
 }
+
+
+export function append(parent, child) {
+  if (child instanceof Element) {
+    parent.appendChild(child);
+  } else {
+    parent.innerHTML = child;
+  }
+  return parent;
+}
+
+export function setStyle(element, styles) {
+  Object.keys(styles).forEach(key => {
+    element.style[key] = styles[key];
+  });
+  return element;
+}

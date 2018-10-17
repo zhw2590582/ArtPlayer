@@ -1,7 +1,7 @@
 import loading from './loading.svg';
 import play from './play.svg';
 
-const Icons = {
+const icons = {
   loading,
   play
 };
@@ -16,4 +16,4 @@ function creatDomFromSvg(map) {
   return result;
 }
 
-export default creatDomFromSvg(Icons);
+export default creatDomFromSvg(icons);

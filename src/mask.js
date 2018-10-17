@@ -1,4 +1,5 @@
-import Icons from './icons';
+import icons from './icons';
+import { append } from './utils';
 
 export default class Mask {
   constructor(art) {
@@ -14,8 +15,8 @@ export default class Mask {
       events: { proxy }
     } = this.art;
 
-    Icons.play.style.backgroundColor = option.theme;
-    refs.$mask.appendChild(Icons.play);
+    icons.play.style.backgroundColor = option.theme;
+    append(refs.$mask, icons.play);
 
     proxy(refs.$mask, 'click', () => {
       player.play();

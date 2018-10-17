@@ -1,3 +1,5 @@
+import { append } from './utils';
+
 export default class Contextmenu {
   constructor(art) {
     this.art = art;
@@ -75,9 +77,9 @@ export default class Contextmenu {
           this.hide();
         });
       }
-      refs.$contextmenu.appendChild($menu);
+      append(refs.$contextmenu, $menu);
     });
-    refs.$wrap.appendChild(refs.$contextmenu);
+    append(refs.$wrap, refs.$contextmenu);
   }
 
   setPos(event) {

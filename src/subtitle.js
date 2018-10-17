@@ -1,4 +1,4 @@
-import { errorHandle, getExt } from './utils';
+import { errorHandle, getExt, setStyle } from './utils';
 
 export default class Subtitle {
   constructor(art) {
@@ -19,10 +19,7 @@ export default class Subtitle {
       refs: { $video, $subtitle }
     } = this.art;
 
-    Object.keys(subtitleStyle).forEach(key => {
-      $subtitle.style[key] = subtitleStyle[key];
-    });
-
+    setStyle($subtitle, subtitleStyle);
     const $track = document.createElement('track');
     $track.default = true;
     $track.kind = 'metadata';

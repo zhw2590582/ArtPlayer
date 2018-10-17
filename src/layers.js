@@ -1,3 +1,5 @@
+import { append, setStyle } from './utils';
+
 let id = 0;
 export default class Layers {
   constructor(art) {
@@ -24,19 +26,8 @@ export default class Layers {
     $layer.setAttribute('data-art-layer-id', id);
     $layer.setAttribute('class', `art-layer art-layer-${option.name || id}`);
     $layer.style.zIndex = option.index || id;
-
-    if (option.html instanceof Element) {
-      $layer.appendChild(option.html);
-    } else {
-      $layer.innerHTML = option.html;
-    }
-
-    if (option.style) {
-      Object.keys(option.style).forEach(key => {
-        $layer.style[key] = option.style[key];
-      });
-    }
-
+    append($layer, option.html);
+    setStyle($layer, option.style || {});
     refs.$layers.appendChild($layer);
     callback && callback($layer);
   }
