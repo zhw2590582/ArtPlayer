@@ -67,7 +67,7 @@ export default function verification(option) {
   );
 
   errorHandle(
-    typeof option.loading === 'string',
+    typeof option.loading === 'string' || option.loading instanceof Element,
     `'loading' option require 'string' type, but got '${typeof option.loading}'.`
   );
 

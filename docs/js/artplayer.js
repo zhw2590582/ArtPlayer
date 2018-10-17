@@ -253,7 +253,7 @@
     errorHandle(typeof option.mimeCodec === 'string', "'mimeCodec' option require 'string' type, but got '".concat(_typeof_1(option.mimeCodec), "'."));
     errorHandle(Array.isArray(option.layers), "'layers' option require 'array' type, but got '".concat(_typeof_1(option.layers), "'."));
     errorHandle(Array.isArray(option.contextmenu), "'contextmenu' option require 'array' type, but got '".concat(_typeof_1(option.contextmenu), "'."));
-    errorHandle(typeof option.loading === 'string', "'loading' option require 'string' type, but got '".concat(_typeof_1(option.loading), "'."));
+    errorHandle(typeof option.loading === 'string' || option.loading instanceof Element, "'loading' option require 'string' type, but got '".concat(_typeof_1(option.loading), "'."));
     errorHandle(typeof option.theme === 'string', "'theme' option require 'string' type, but got '".concat(_typeof_1(option.theme), "'."));
     errorHandle(typeof option.hotkey === 'boolean', "'hotkey' option require 'boolean' type, but got '".concat(_typeof_1(option.hotkey), "'."));
     errorHandle(typeof option.subtitle === 'string', "'subtitle' option require 'string' type, but got '".concat(_typeof_1(option.subtitle), "'."));
@@ -1203,7 +1203,11 @@
             $loading = _this$art.refs.$loading;
 
         if (option.loading) {
-          $loading.insertAdjacentHTML('beforeend', option.loading);
+          if (option.loading instanceof Element) {
+            $loading.appendChild(option.loading);
+          } else {
+            $loading.insertAdjacentHTML('beforeend', option.loading);
+          }
         } else {
           $loading.appendChild(Icons$1.loading);
         }

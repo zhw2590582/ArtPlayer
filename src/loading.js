@@ -9,7 +9,11 @@ export default class Loading {
   init() {
     const { option, refs: { $loading } } = this.art;
     if (option.loading) {
-      $loading.insertAdjacentHTML('beforeend', option.loading);
+      if (option.loading instanceof Element) {
+        $loading.appendChild(option.loading);
+      } else {
+        $loading.insertAdjacentHTML('beforeend', option.loading);
+      }
     } else {
       $loading.appendChild(Icons.loading);
     }
