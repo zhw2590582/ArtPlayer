@@ -970,10 +970,9 @@
             if (cue) {
               var template = document.createElement('div');
               template.appendChild(cue.getCueAsHTML());
-              var trackHtml = template.innerHTML.split(/\r?\n/).map(function (item) {
+              $subtitle.innerHTML = template.innerHTML.split(/\r?\n/).map(function (item) {
                 return "<p>".concat(item, "</p>");
               }).join('');
-              $subtitle.insertAdjacentHTML('beforeend', trackHtml);
             }
           });
         }
@@ -1206,7 +1205,7 @@
           if (option.loading instanceof Element) {
             $loading.appendChild(option.loading);
           } else {
-            $loading.insertAdjacentHTML('beforeend', option.loading);
+            $loading.innerHTML = option.loading;
           }
         } else {
           $loading.appendChild(Icons$1.loading);

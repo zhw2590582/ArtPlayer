@@ -12,7 +12,7 @@ export default class Loading {
       if (option.loading instanceof Element) {
         $loading.appendChild(option.loading);
       } else {
-        $loading.insertAdjacentHTML('beforeend', option.loading);
+        $loading.innerHTML = option.loading;
       }
     } else {
       $loading.appendChild(Icons.loading);

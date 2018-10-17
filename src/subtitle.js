@@ -38,11 +38,10 @@ export default class Subtitle {
         if (cue) {
           const template = document.createElement('div');
           template.appendChild(cue.getCueAsHTML());
-          const trackHtml = template.innerHTML
+          $subtitle.innerHTML = template.innerHTML
             .split(/\r?\n/)
             .map(item => `<p>${item}</p>`)
             .join('');
-          $subtitle.insertAdjacentHTML('beforeend', trackHtml);
         }
       });
     }
