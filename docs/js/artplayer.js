@@ -242,7 +242,7 @@
   function verification(option) {
     errorHandle(option.container, '\'container\' option is required.');
     errorHandle(option.url, '\'url\' option is required.');
-    errorHandle(option.container instanceof Element, "'container' option require 'Element' type, but got '".concat(_typeof_1(option.container), "'."));
+    errorHandle(typeof option.container === 'string' || option.container instanceof Element, "'container' option require 'string' or 'Element' type, but got '".concat(_typeof_1(option.container), "'."));
     errorHandle(typeof option.url === 'string', "'url' option require 'string' type, but got '".concat(_typeof_1(option.url), "'."));
     errorHandle(typeof option.poster === 'string', "'poster' option require 'string' type, but got '".concat(_typeof_1(option.poster), "'."));
     errorHandle(typeof option.volume === 'number', "'volume' option require 'number' type, but got '".concat(_typeof_1(option.volume), "'."));
@@ -1141,8 +1141,24 @@
       value: function add(option, callback) {
         var refs = this.art.refs;
         id++;
-        refs.$layers.insertAdjacentHTML('beforeend', "\n      <div\n        data-art-layer-id=\"".concat(id, "\"\n        class=\"art-layer art-layer-").concat(option.name || id, "\"\n        style=\"z-index: ").concat(option.index || id, "\"\n      >\n        ").concat(option.html || '', "\n      </div>\n    "));
-        var $layer = refs.$layers.querySelector("[data-art-layer-id=\"".concat(id, "\"]"));
+        var $layer = document.createElement('div');
+        $layer.setAttribute('data-art-layer-id', id);
+        $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id));
+        $layer.style.zIndex = option.index || id;
+
+        if (option.html instanceof Element) {
+          $layer.appendChild(option.html);
+        } else {
+          $layer.innerHTML = option.html;
+        }
+
+        if (option.style) {
+          Object.keys(option.style).forEach(function (key) {
+            $layer.style[key] = option.style[key];
+          });
+        }
+
+        refs.$layers.appendChild($layer);
         callback && callback($layer);
       }
     }, {
@@ -1333,9 +1349,14 @@
       value: function init() {
         this.focus = false;
         this.playing = false;
-        this.refs = {
-          $container: this.option.container
-        };
+        this.refs = {};
+
+        if (this.option.container instanceof Element) {
+          this.refs.$container = this.option.container;
+        } else {
+          this.refs.$container = document.querySelector(this.option.container);
+        }
+
         this.template = new Template(this);
         this.i18n = new I18n(this);
         this.events = new Events(this);

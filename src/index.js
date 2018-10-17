@@ -78,9 +78,13 @@ class Artplayer extends Emitter {
   init() {
     this.focus = false;
     this.playing = false;
-    this.refs = {
-      $container: this.option.container
-    };
+    this.refs = {};
+
+    if (this.option.container instanceof Element) {
+      this.refs.$container = this.option.container;
+    } else {
+      this.refs.$container = document.querySelector(this.option.container);
+    }
 
     this.template = new Template(this);
     this.i18n = new I18n(this);

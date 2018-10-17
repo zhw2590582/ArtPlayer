@@ -20,17 +20,24 @@ export default class Layers {
     const { refs } = this.art;
     id++;
 
-    refs.$layers.insertAdjacentHTML('beforeend', `
-      <div
-        data-art-layer-id="${id}"
-        class="art-layer art-layer-${option.name || id}"
-        style="z-index: ${option.index || id}"
-      >
-        ${option.html || ''}
-      </div>
-    `);
+    const $layer = document.createElement('div');
+    $layer.setAttribute('data-art-layer-id', id);
+    $layer.setAttribute('class', `art-layer art-layer-${option.name || id}`);
+    $layer.style.zIndex = option.index || id;
 
-    const $layer = refs.$layers.querySelector(`[data-art-layer-id="${id}"]`);
+    if (option.html instanceof Element) {
+      $layer.appendChild(option.html);
+    } else {
+      $layer.innerHTML = option.html;
+    }
+
+    if (option.style) {
+      Object.keys(option.style).forEach(key => {
+        $layer.style[key] = option.style[key];
+      });
+    }
+
+    refs.$layers.appendChild($layer);
     callback && callback($layer);
   }
 

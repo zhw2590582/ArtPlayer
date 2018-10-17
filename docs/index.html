@@ -32,6 +32,17 @@
             subtitle: './subtitle/dw_trailer_low.vtt'
         });
 
+        player.layers.add({
+            html: '23333',
+            index: 999,
+            name: 'test',
+            style: {
+                'color': 'red'
+            }
+        }, dom => {
+            console.log(dom)
+        });
+
         console.dir(Artplayer);
 
         console.log(player);

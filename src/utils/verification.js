@@ -12,8 +12,8 @@ export default function verification(option) {
   );
 
   errorHandle(
-    option.container instanceof Element,
-    `'container' option require 'Element' type, but got '${typeof option.container}'.`
+    typeof option.container === 'string' || option.container instanceof Element,
+    `'container' option require 'string' or 'Element' type, but got '${typeof option.container}'.`
   );
 
   errorHandle(
