@@ -252,6 +252,8 @@
     errorHandle(typeof option.loading === 'string', "'loading' option require 'string' type, but got '".concat(_typeof_1(option.loading), "'."));
     errorHandle(typeof option.theme === 'string', "'theme' option require 'string' type, but got '".concat(_typeof_1(option.theme), "'."));
     errorHandle(typeof option.hotkey === 'boolean', "'hotkey' option require 'boolean' type, but got '".concat(_typeof_1(option.hotkey), "'."));
+    errorHandle(typeof option.subtitle === 'string', "'subtitle' option require 'string' type, but got '".concat(_typeof_1(option.subtitle), "'."));
+    errorHandle(Object.prototype.toString.call(option.subtitleStyle) === '[object Object]', "'subtitleStyle' option require 'object' type, but got '".concat(_typeof_1(option.subtitleStyle), "'."));
   }
 
   var mimeCodec = {
@@ -369,9 +371,10 @@
       key: "init",
       value: function init() {
         var refs = this.art.refs;
-        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
         refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
         refs.$video = refs.$container.querySelector('.artplayer-video');
+        refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
         refs.$controls = refs.$container.querySelector('.artplayer-controls');
         refs.$layers = refs.$container.querySelector('.artplayer-layers');
         refs.$loading = refs.$container.querySelector('.artplayer-loading');
@@ -870,11 +873,126 @@
     return Info;
   }();
 
-  var Subtitle = function Subtitle(art) {
-    classCallCheck(this, Subtitle);
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
 
-    this.art = art;
-  };
+  var arrayWithHoles = _arrayWithHoles;
+
+  function _iterableToArrayLimit(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  var iterableToArrayLimit = _iterableToArrayLimit;
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  var nonIterableRest = _nonIterableRest;
+
+  function _slicedToArray(arr, i) {
+    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+  }
+
+  var slicedToArray = _slicedToArray;
+
+  var Subtitle =
+  /*#__PURE__*/
+  function () {
+    function Subtitle(art) {
+      classCallCheck(this, Subtitle);
+
+      this.art = art;
+
+      if (this.art.option.subtitle) {
+        this.init();
+      }
+    }
+
+    createClass(Subtitle, [{
+      key: "init",
+      value: function init() {
+        var _this$art = this.art,
+            proxy = _this$art.events.proxy,
+            _this$art$option = _this$art.option,
+            subtitle = _this$art$option.subtitle,
+            subtitleStyle = _this$art$option.subtitleStyle,
+            _this$art$refs = _this$art.refs,
+            $video = _this$art$refs.$video,
+            $subtitle = _this$art$refs.$subtitle;
+        Object.keys(subtitleStyle).forEach(function (key) {
+          $subtitle.style[key] = subtitleStyle[key];
+        });
+        var $track = document.createElement('track');
+        $track.default = true;
+        $track.kind = 'metadata';
+        $track.src = subtitle;
+        $video.appendChild($track);
+        this.art.refs.$track = $track;
+
+        if ($video.textTracks && $video.textTracks[0]) {
+          var _$video$textTracks = slicedToArray($video.textTracks, 1),
+              track = _$video$textTracks[0];
+
+          proxy(track, 'cuechange', function () {
+            var _track$activeCues = slicedToArray(track.activeCues, 1),
+                cue = _track$activeCues[0];
+
+            $subtitle.innerHTML = '';
+
+            if (cue) {
+              var template = document.createElement('div');
+              template.appendChild(cue.getCueAsHTML());
+              var trackHtml = template.innerHTML.split(/\r?\n/).map(function (item) {
+                return "<p>".concat(item, "</p>");
+              }).join('');
+              $subtitle.insertAdjacentHTML('beforeend', trackHtml);
+            }
+          });
+        }
+      }
+    }, {
+      key: "show",
+      value: function show() {
+        this.art.refs.$subtitle.style.display = 'block';
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        this.art.refs.$subtitle.style.display = 'none';
+      }
+    }, {
+      key: "change",
+      value: function change(url) {
+        this.art.refs.$track.src = url;
+      }
+    }]);
+
+    return Subtitle;
+  }();
 
   var Events =
   /*#__PURE__*/
@@ -1028,55 +1146,9 @@
     return Layers;
   }();
 
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
+  var loading = "<svg class=\"lds-spinner\" width=\"80px\" height=\"80px\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" style=\"background: none;\"><g transform=\"rotate(0 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(30 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(60 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(90 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(120 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(150 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(180 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(210 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(240 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(270 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(300 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(330 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"0s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g></svg>\n";
 
-  var arrayWithHoles = _arrayWithHoles;
-
-  function _iterableToArrayLimit(arr, i) {
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"] != null) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  var iterableToArrayLimit = _iterableToArrayLimit;
-
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
-  }
-
-  var nonIterableRest = _nonIterableRest;
-
-  function _slicedToArray(arr, i) {
-    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
-  }
-
-  var slicedToArray = _slicedToArray;
-
-  var loading = "<svg class=\"lds-default\" width=\"85px\"  height=\"85px\"  xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\"><circle cx=\"75\" cy=\"50\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.9166666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.9166666666666666s\"></animate>\n</circle><circle cx=\"71.65063509461098\" cy=\"62.5\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.8333333333333334s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.8333333333333334s\"></animate>\n</circle><circle cx=\"62.5\" cy=\"71.65063509461096\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.75s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.75s\"></animate>\n</circle><circle cx=\"50\" cy=\"75\" fill=\"undefined\" r=\"3.66667\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.6666666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.6666666666666666s\"></animate>\n</circle><circle cx=\"37.50000000000001\" cy=\"71.65063509461098\" fill=\"undefined\" r=\"4.33333\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.5833333333333334s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.5833333333333334s\"></animate>\n</circle><circle cx=\"28.34936490538903\" cy=\"62.5\" fill=\"undefined\" r=\"5\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.5s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.5s\"></animate>\n</circle><circle cx=\"25\" cy=\"50\" fill=\"undefined\" r=\"4.33333\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.4166666666666667s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.4166666666666667s\"></animate>\n</circle><circle cx=\"28.34936490538903\" cy=\"37.50000000000001\" fill=\"undefined\" r=\"3.66667\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.3333333333333333s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.3333333333333333s\"></animate>\n</circle><circle cx=\"37.499999999999986\" cy=\"28.349364905389038\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.25s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.25s\"></animate>\n</circle><circle cx=\"49.99999999999999\" cy=\"25\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.16666666666666666s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.16666666666666666s\"></animate>\n</circle><circle cx=\"62.5\" cy=\"28.349364905389034\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"-0.08333333333333333s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"-0.08333333333333333s\"></animate>\n</circle><circle cx=\"71.65063509461096\" cy=\"37.499999999999986\" fill=\"undefined\" r=\"3\">\n  <animate attributeName=\"r\" values=\"3;3;5;3;3\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" repeatCount=\"indefinite\" begin=\"0s\"></animate>\n  <animate attributeName=\"fill\" values=\"#ffffcb;#ffffcb;#ff7c81;#ffffcb;#ffffcb\" repeatCount=\"indefinite\" times=\"0;0.1;0.2;0.3;1\" dur=\"1s\" begin=\"0s\"></animate>\n</circle></svg>";
-
-  var play = "<svg id=\"plyr-play\" width=\"16px\" height=\"18px\">\n    <path d=\"M15.562 8.1L3.87.225C3.052-.337 2 .225 2 1.125v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z\"></path>\n</svg>";
+  var play = "<svg id=\"plyr-play\" width=\"16px\" height=\"18px\">\n  <path d=\"M15.562 8.1L3.87.225C3.052-.337 2 .225 2 1.125v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z\"></path>\n</svg>\n";
 
   var Icons = {
     loading: loading,
@@ -1319,6 +1391,8 @@
           loading: '',
           theme: '#1aafff',
           hotkey: true,
+          subtitle: '',
+          subtitleStyle: {},
           lang: navigator.language.toLowerCase()
         };
       }

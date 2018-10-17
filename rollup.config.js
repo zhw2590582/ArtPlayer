@@ -16,7 +16,8 @@ export default {
   output: {
     name: 'artplayer',
     file: isProd ? 'dist/artplayer.js' : 'docs/js/artplayer.js',
-    format: 'umd'
+    format: 'umd',
+    exports: 'named'
   },
   plugins: [
     eslint({

@@ -80,4 +80,14 @@ export default function verification(option) {
     typeof option.hotkey === 'boolean',
     `'hotkey' option require 'boolean' type, but got '${typeof option.hotkey}'.`
   );
+
+  errorHandle(
+    typeof option.subtitle === 'string',
+    `'subtitle' option require 'string' type, but got '${typeof option.subtitle}'.`
+  );
+
+  errorHandle(
+    Object.prototype.toString.call(option.subtitleStyle) === '[object Object]',
+    `'subtitleStyle' option require 'object' type, but got '${typeof option.subtitleStyle}'.`
+  );
 }

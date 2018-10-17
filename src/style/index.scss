@@ -25,9 +25,22 @@
         height: 100%;
     }
 
-    .artplayer-layers {
+    .artplayer-subtitle {
         position: absolute;
         z-index: 2;
+        bottom: 40px;
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+        color: #fff;
+        text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
+        font-size: 20px;
+        box-sizing: border-box;
+    }
+
+    .artplayer-layers {
+        position: absolute;
+        z-index: 3;
         left: 0;
         top: 0;
         right: 0;
@@ -39,7 +52,7 @@
     .artplayer-mask {
         display: none;
         position: absolute;
-        z-index: 3;
+        z-index: 4;
         left: 0;
         top: 0;
         right: 0;

@@ -52,6 +52,8 @@ class Artplayer extends Emitter {
       loading: '',
       theme: '#1aafff',
       hotkey: true,
+      subtitle: '',
+      subtitleStyle: {},
       lang: navigator.language.toLowerCase()
     };
   }
