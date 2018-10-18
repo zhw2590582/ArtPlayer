@@ -254,7 +254,7 @@
     return element;
   }
 
-  function verification(option) {
+  function validOption(option) {
     errorHandle(option.container, '\'container\' option is required.');
     errorHandle(option.url, '\'url\' option is required.');
     errorHandle(typeof option.container === 'string' || option.container instanceof Element, "'container' option require 'string' or 'Element' type, but got '".concat(_typeof_1(option.container), "'."));
@@ -262,7 +262,7 @@
     errorHandle(typeof option.poster === 'string', "'poster' option require 'string' type, but got '".concat(_typeof_1(option.poster), "'."));
     errorHandle(typeof option.volume === 'number', "'volume' option require 'number' type, but got '".concat(_typeof_1(option.volume), "'."));
     errorHandle(typeof option.autoplay === 'boolean', "'autoplay' option require 'boolean' type, but got '".concat(_typeof_1(option.autoplay), "'."));
-    errorHandle(['none', 'metadata', 'auto'].indexOf(option.preload) > -1, '\'preload\' option require one of \'none、metadata、auto\'.');
+    errorHandle(['none', 'metadata', 'auto'].indexOf(option.preload) > -1, "'preload' option require one of 'none\u3001metadata\u3001auto', but got '".concat(option.preload, "."));
     errorHandle(typeof option.lang === 'string', "'lang' option require 'string' type, but got '".concat(_typeof_1(option.lang), "'."));
     errorHandle(typeof option.type === 'string', "'type' option require 'string' type, but got '".concat(_typeof_1(option.type), "'."));
     errorHandle(typeof option.mimeCodec === 'string', "'mimeCodec' option require 'string' type, but got '".concat(_typeof_1(option.mimeCodec), "'."));
@@ -390,11 +390,15 @@
       key: "init",
       value: function init() {
         var refs = this.art.refs;
-        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-controls\"></div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
         refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
         refs.$video = refs.$container.querySelector('.artplayer-video');
         refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
+        refs.$bottom = refs.$container.querySelector('.artplayer-bottom');
+        refs.$progress = refs.$container.querySelector('.artplayer-progress');
         refs.$controls = refs.$container.querySelector('.artplayer-controls');
+        refs.$controlsLeft = refs.$container.querySelector('.artplayer-controls-left');
+        refs.$controlsRight = refs.$container.querySelector('.artplayer-controls-right');
         refs.$layers = refs.$container.querySelector('.artplayer-layers');
         refs.$loading = refs.$container.querySelector('.artplayer-loading');
         refs.$notice = refs.$container.querySelector('.artplayer-notice');
@@ -465,11 +469,12 @@
       value: function init() {
         var option = this.art.option;
         var $video = this.art.refs.$video;
-        $video.controls = false;
+        $video.controls = true;
         $video.poster = option.poster;
         $video.volume = clamp(option.volume, 0, 1);
         $video.autoplay = option.autoplay;
         $video.preload = option.preload;
+        $video.src = option.url;
       }
     }, {
       key: "eventBind",
@@ -729,6 +734,82 @@
     return Mse;
   }();
 
+  function validControl(option) {
+    errorHandle(typeof option.control === 'function', "'control' option require 'function' type, but got '".concat(_typeof_1(option.control), "'."));
+    errorHandle(typeof option.disable === 'boolean', "'disable' option require 'boolean' type, but got '".concat(_typeof_1(option.disable), "'."));
+    errorHandle(typeof option.icon === 'string' || option.icon instanceof Element, "'icon' option require 'string' or 'Element' type, but got '".concat(_typeof_1(option.icon), "'."));
+    errorHandle(['top', 'left', 'right'].indexOf(option.position) > -1, "'position' option require one of 'top\u3001left\u3001right', but got '".concat(option.position, "'."));
+    errorHandle(typeof option.index === 'number', "'index' option require 'number' type, but got '".concat(_typeof_1(option.index), "'."));
+  }
+
+  var Danmu = function Danmu(art) {
+    classCallCheck(this, Danmu);
+
+    this.art = art;
+  };
+
+  var Fullscreen = function Fullscreen(art) {
+    classCallCheck(this, Fullscreen);
+
+    this.art = art;
+  };
+
+  var Highlight = function Highlight(art) {
+    classCallCheck(this, Highlight);
+
+    this.art = art;
+  };
+
+  var Pip = function Pip(art) {
+    classCallCheck(this, Pip);
+
+    this.art = art;
+  };
+
+  var PlayAndPause = function PlayAndPause(art) {
+    classCallCheck(this, PlayAndPause);
+
+    this.art = art;
+  };
+
+  var Progress = function Progress(art) {
+    classCallCheck(this, Progress);
+
+    this.art = art;
+  };
+
+  var Screenshot = function Screenshot(art) {
+    classCallCheck(this, Screenshot);
+
+    this.art = art;
+  };
+
+  var Subtitle = function Subtitle(art) {
+    classCallCheck(this, Subtitle);
+
+    this.art = art;
+  };
+
+  var Time = function Time(art) {
+    classCallCheck(this, Time);
+
+    this.art = art;
+  };
+
+  var Volume = function Volume(art) {
+    classCallCheck(this, Volume);
+
+    this.art = art;
+  };
+
+  var Setting = function Setting(art) {
+    classCallCheck(this, Setting);
+
+    this.art = art;
+  };
+
+  var id = 0;
+
   var Controls =
   /*#__PURE__*/
   function () {
@@ -736,9 +817,106 @@
       classCallCheck(this, Controls);
 
       this.art = art;
+      this.init();
     }
 
     createClass(Controls, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+
+        this.progress = new Progress(this.art);
+        this.highlight = new Highlight(this.art);
+        this.screenshot = new Screenshot(this.art);
+        this.add({
+          control: PlayAndPause,
+          disable: false,
+          icon: 'PlayAndPause',
+          position: 'left',
+          index: 0
+        });
+        this.add({
+          control: Volume,
+          disable: false,
+          icon: 'Volume',
+          position: 'left',
+          index: 10
+        });
+        this.add({
+          control: Time,
+          disable: false,
+          icon: 'Time',
+          position: 'left',
+          index: 20
+        });
+        this.add({
+          control: Danmu,
+          disable: false,
+          icon: 'Danmu',
+          position: 'right',
+          index: 0
+        });
+        this.add({
+          control: Subtitle,
+          disable: false,
+          icon: 'Subtitle',
+          position: 'right',
+          index: 10
+        });
+        this.add({
+          control: Setting,
+          disable: false,
+          icon: 'Setting',
+          position: 'right',
+          index: 20
+        });
+        this.add({
+          control: Pip,
+          disable: false,
+          icon: 'Pip',
+          position: 'right',
+          index: 30
+        });
+        this.add({
+          control: Fullscreen,
+          disable: false,
+          icon: 'Fullscreen',
+          position: 'right',
+          index: 40
+        });
+        this.art.option.controls.forEach(function (item) {
+          _this.add(item);
+        });
+      }
+    }, {
+      key: "add",
+      value: function add(option) {
+        validControl(option);
+        var _this$art$refs = this.art.refs,
+            $progress = _this$art$refs.$progress,
+            $controlsLeft = _this$art$refs.$controlsLeft,
+            $controlsRight = _this$art$refs.$controlsRight;
+
+        if (!option.disable) {
+          id++;
+          var name = option.control.name.toLowerCase() || "control".concat(id);
+          var $control = document.createElement('div');
+          $control.setAttribute('class', "art-control art-control-".concat(name));
+          $control.setAttribute('data-control-index', option.index || id);
+          append($control, option.icon);
+          this[name] = new option.control(this.art);
+          this[name].ref = $control;
+
+          this[name].show = function show() {
+            $control.style.display = 'inline-block';
+          };
+
+          this[name].hide = function show() {
+            $control.style.display = 'none';
+          };
+        }
+      }
+    }, {
       key: "show",
       value: function show() {
         var $wrap = this.art.refs.$wrap;
@@ -899,7 +1077,7 @@
     return Contextmenu;
   }();
 
-  var Danmu = function Danmu(art) {
+  var Danmu$1 = function Danmu(art) {
     classCallCheck(this, Danmu);
 
     this.art = art;
@@ -975,7 +1153,7 @@
 
   var slicedToArray = _slicedToArray;
 
-  var Subtitle =
+  var Subtitle$1 =
   /*#__PURE__*/
   function () {
     function Subtitle(art) {
@@ -1171,7 +1349,7 @@
     return Hotkey;
   }();
 
-  var id = 0;
+  var id$1 = 0;
 
   var Layers =
   /*#__PURE__*/
@@ -1202,11 +1380,11 @@
       key: "add",
       value: function add(option, callback) {
         var refs = this.art.refs;
-        id++;
+        id$1++;
         var $layer = document.createElement('div');
-        $layer.setAttribute('data-art-layer-id', id);
-        $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id));
-        $layer.style.zIndex = option.index || id;
+        $layer.setAttribute('data-art-layer-id', id$1);
+        $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id$1));
+        $layer.style.zIndex = option.index || id$1;
         append($layer, option.html);
         setStyle($layer, option.style || {});
         refs.$layers.appendChild($layer);
@@ -1380,7 +1558,7 @@
     return Mask;
   }();
 
-  var id$1 = 0;
+  var id$2 = 0;
   var instances = [];
 
   var Artplayer =
@@ -1395,14 +1573,14 @@
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
 
-      _this.art.emit('init:start');
+      _this.emit('init:start');
 
       _this.option = Object.assign({}, Artplayer.DEFAULTS, option);
-      verification(_this.option);
+      validOption(_this.option);
 
       _this.init();
 
-      _this.art.emit('init:end');
+      _this.emit('init:end');
 
       return _this;
     }
@@ -1423,19 +1601,19 @@
         this.template = new Template(this);
         this.i18n = new I18n(this);
         this.events = new Events(this);
-        this.player = new Player(this);
-        this.mse = new Mse(this);
+        this.player = new Player(this); // this.mse = new Mse(this);
+
         this.layers = new Layers(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
-        this.danmu = new Danmu(this);
-        this.subtitle = new Subtitle(this);
+        this.danmu = new Danmu$1(this);
+        this.subtitle = new Subtitle$1(this);
         this.info = new Info(this);
         this.loading = new Loading(this);
         this.notice = new Notice(this);
         this.hotkey = new Hotkey(this);
         this.mask = new Mask(this);
-        this.id = id$1++;
+        this.id = id$2++;
         instances.push(this);
         return this;
       }
@@ -1445,7 +1623,7 @@
         this.events.destroy();
         this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
-        this.art.emit('destroy');
+        this.emit('destroy');
       }
     }], [{
       key: "use",
@@ -1497,6 +1675,7 @@
           hotkey: true,
           subtitle: '',
           subtitleStyle: {},
+          controls: [],
           lang: navigator.language.toLowerCase()
         };
       }

@@ -1,6 +1,6 @@
-import { errorHandle } from './index';
+import { errorHandle } from '.';
 
-export default function verification(option) {
+export default function validOption(option) {
   errorHandle(
     option.container,
     '\'container\' option is required.'
@@ -38,7 +38,7 @@ export default function verification(option) {
 
   errorHandle(
     ['none', 'metadata', 'auto'].indexOf(option.preload) > -1,
-    '\'preload\' option require one of \'none、metadata、auto\'.'
+    `'preload' option require one of 'none、metadata、auto', but got '${option.preload}.`
   );
 
   errorHandle(

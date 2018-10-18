@@ -11,11 +11,12 @@ export default class Player {
   init() {
     const { option } = this.art;
     const { $video } = this.art.refs;
-    $video.controls = false;
+    $video.controls = true;
     $video.poster = option.poster;
     $video.volume = clamp(option.volume, 0, 1);
     $video.autoplay = option.autoplay;
     $video.preload = option.preload;
+    $video.src = option.url;
   }
 
   eventBind() {
@@ -68,14 +69,14 @@ export default class Player {
   }
 
   play() {
-    const { refs: { $video } } = this.art;
+    const { $video } = this.art.refs;
     const promise = $video.play();
     this.art.emit('play', $video);
     return promise;
   }
 
   pause() {
-    const { refs: { $video } } = this.art;
+    const { $video } = this.art.refs;
     $video.pause();
     this.art.emit('pause', $video);
   }
@@ -89,7 +90,7 @@ export default class Player {
   }
 
   seek(time) {
-    const { refs: { $video } } = this.art;
+    const { $video } = this.art.refs;
     let newTime = Math.max(time, 0);
     if ($video.duration) {
       newTime = Math.min(newTime, $video.duration);
@@ -104,11 +105,10 @@ export default class Player {
   }
 
   volume(percentage) {
-    const { refs: { $video } } = this.art;
+    const { $video } = this.art.refs;
     if (percentage) {
       $video.volume = clamp(percentage, 0, 1);
     }
-
     this.art.emit('volume', $video.volume);
   }
 
@@ -129,7 +129,7 @@ export default class Player {
   }
 
   speed(rate) {
-    const { refs: { $video } } = this.art;
+    const { $video } = this.art.refs;
     $video.playbackRate = rate;
     this.art.emit('speed', rate);
   }

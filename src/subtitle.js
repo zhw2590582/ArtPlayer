@@ -46,19 +46,19 @@ export default class Subtitle {
   }
 
   show() {
-    const { refs: { $subtitle } } = this.art;
+    const { $subtitle } = this.art.refs;
     $subtitle.style.display = 'block';
     this.art.emit('subtitle:show', $subtitle);
   }
 
   hide() {
-    const { refs: { $subtitle } } = this.art;
+    const { $subtitle } = this.art.refs;
     $subtitle.style.display = 'none';
     this.art.emit('subtitle:hide', $subtitle);
   }
 
   switch(url) {
-    const { refs: { $track } } = this.art;
+    const { $track } = this.art.refs;
     errorHandle(
       getExt(url) === 'vtt',
       `'url' option require 'vtt' format, but got '${getExt(url)}'.`

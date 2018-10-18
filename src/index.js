@@ -1,5 +1,5 @@
 import './style/index.scss';
-import verification from './utils/verification';
+import validOption from './utils/validOption';
 import config from './config';
 import Emitter from 'tiny-emitter';
 import Template from './template';
@@ -24,11 +24,11 @@ export const instances = [];
 class Artplayer extends Emitter {
   constructor(option) {
     super();
-    this.art.emit('init:start');
+    this.emit('init:start');
     this.option = Object.assign({}, Artplayer.DEFAULTS, option);
-    verification(this.option);
+    validOption(this.option);
     this.init();
-    this.art.emit('init:end');
+    this.emit('init:end');
   }
 
   static get version() {
@@ -56,6 +56,7 @@ class Artplayer extends Emitter {
       hotkey: true,
       subtitle: '',
       subtitleStyle: {},
+      controls: [],
       lang: navigator.language.toLowerCase()
     };
   }
@@ -92,7 +93,7 @@ class Artplayer extends Emitter {
     this.i18n = new I18n(this);
     this.events = new Events(this);
     this.player = new Player(this);
-    this.mse = new Mse(this);
+    // this.mse = new Mse(this);
     this.layers = new Layers(this);
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);
@@ -113,7 +114,7 @@ class Artplayer extends Emitter {
     this.events.destroy();
     this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
-    this.art.emit('destroy');
+    this.emit('destroy');
   }
 }
 

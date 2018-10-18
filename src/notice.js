@@ -5,7 +5,7 @@ export default class Notice {
   }
 
   show(msg, autoHide) {
-    const { refs: { $notice } } = this.art;
+    const { $notice } = this.art.refs;
     $notice.style.display = 'block';
     $notice.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
     if (autoHide) {
@@ -18,7 +18,7 @@ export default class Notice {
   }
 
   hide() {
-    const { refs: { $notice } } = this.art;
+    const { $notice } = this.art.refs;
     $notice.style.display = 'none';
     this.art.emit('notice:hide', $notice);
   }

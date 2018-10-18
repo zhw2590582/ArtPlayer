@@ -13,13 +13,13 @@ export default class Loading {
   }
 
   hide() {
-    const { refs: { $loading } } = this.art;
+    const { $loading } = this.art.refs;
     $loading.style.display = 'none';
     this.art.emit('loading:hide', $loading);
   }
 
   show() {
-    const { refs: { $loading } } = this.art;
+    const { $loading } = this.art.refs;
     $loading.style.display = 'flex';
     this.art.emit('loading:show', $loading);
   }

@@ -1,4 +1,4 @@
-export default class Fullscreen {
+export default class Setting {
   constructor(art) {
     this.art = art;
   }

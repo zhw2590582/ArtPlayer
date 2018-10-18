@@ -34,13 +34,13 @@ export default class Layers {
   }
 
   show() {
-    const { refs: { $layers } } = this.art;
+    const { $layers } = this.art.refs;
     $layers.style.display = 'block';
     this.art.emit('layers:show', $layers);
   }
 
   hide() {
-    const { refs: { $layers } } = this.art;
+    const { $layers } = this.art.refs;
     $layers.style.display = 'none';
     this.art.emit('layers:hide', $layers);
   }
