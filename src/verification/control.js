@@ -1,4 +1,4 @@
-import { errorHandle } from '.';
+import { errorHandle } from '../utils';
 
 export default function validControl(option) {
   errorHandle(
@@ -12,8 +12,8 @@ export default function validControl(option) {
   );
 
   errorHandle(
-    typeof option.icon === 'string' || option.icon instanceof Element,
-    `'icon' option require 'string' or 'Element' type, but got '${typeof option.icon}'.`
+    typeof option.html === 'string' || option.html instanceof Element,
+    `'html' option require 'string' or 'Element' type, but got '${typeof option.html}'.`
   );
 
   errorHandle(

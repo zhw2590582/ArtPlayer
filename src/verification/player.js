@@ -1,4 +1,4 @@
-import { errorHandle } from '.';
+import { errorHandle } from '../utils';
 
 export default function validOption(option) {
   errorHandle(
@@ -82,12 +82,12 @@ export default function validOption(option) {
   );
 
   errorHandle(
-    typeof option.subtitle === 'string',
-    `'subtitle' option require 'string' type, but got '${typeof option.subtitle}'.`
+    Object.prototype.toString.call(option.subtitle) === '[object Object]',
+    `'subtitle' option require 'object' type, but got '${typeof option.subtitle}'.`
   );
 
   errorHandle(
-    Object.prototype.toString.call(option.subtitleStyle) === '[object Object]',
-    `'subtitleStyle' option require 'object' type, but got '${typeof option.subtitleStyle}'.`
+    Array.isArray(option.controls),
+    `'controls' option require 'array' type, but got '${typeof option.controls}'.`
   );
 }

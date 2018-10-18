@@ -1,5 +1,5 @@
-import { append } from '../utils';
-import validControl from '../utils/validControl';
+import { append, setStyle } from '../utils';
+import validControl from '../verification/control';
 import Danmu from './danmu';
 import Fullscreen from './fullscreen';
 import Highlight from './highlight';
@@ -16,18 +16,45 @@ let id = 0;
 export default class Controls {
   constructor(art) {
     this.art = art;
+    this.$map = {
+      top: [],
+      left: [],
+      right: []
+    };
     this.init();
+    this.mount();
   }
 
   init() {
-    this.progress = new Progress(this.art);
-    this.highlight = new Highlight(this.art);
-    this.screenshot = new Screenshot(this.art);
+    this.add({
+      control: Progress,
+      disable: false,
+      html: 'Progress',
+      position: 'top',
+      index: 0
+    });
+
+    this.add({
+      control: Highlight,
+      disable: false,
+      html: 'Highlight',
+      position: 'top',
+      index: 10
+    });
+
+    this.add({
+      control: Screenshot,
+      disable: false,
+      html: 'Screenshot',
+      position: 'top',
+      index: 20
+    });
 
     this.add({
       control: PlayAndPause,
       disable: false,
-      icon: 'PlayAndPause',
+      html: 'PlayAndPause',
+      tooltip: 'PlayAndPause',
       position: 'left',
       index: 0
     });
@@ -35,7 +62,8 @@ export default class Controls {
     this.add({
       control: Volume,
       disable: false,
-      icon: 'Volume',
+      html: 'Volume',
+      tooltip: 'Volume',
       position: 'left',
       index: 10
     });
@@ -43,7 +71,8 @@ export default class Controls {
     this.add({
       control: Time,
       disable: false,
-      icon: 'Time',
+      html: 'Time',
+      tooltip: 'Volume',
       position: 'left',
       index: 20
     });
@@ -51,7 +80,8 @@ export default class Controls {
     this.add({
       control: Danmu,
       disable: false,
-      icon: 'Danmu',
+      html: 'Danmu',
+      tooltip: 'Danmu',
       position: 'right',
       index: 0
     });
@@ -59,7 +89,8 @@ export default class Controls {
     this.add({
       control: Subtitle,
       disable: false,
-      icon: 'Subtitle',
+      html: 'Subtitle',
+      tooltip: 'Subtitle',
       position: 'right',
       index: 10
     });
@@ -67,7 +98,8 @@ export default class Controls {
     this.add({
       control: Setting,
       disable: false,
-      icon: 'Setting',
+      html: 'Setting',
+      tooltip: 'Setting',
       position: 'right',
       index: 20
     });
@@ -75,7 +107,8 @@ export default class Controls {
     this.add({
       control: Pip,
       disable: false,
-      icon: 'Pip',
+      html: 'Pip',
+      tooltip: 'Pip',
       position: 'right',
       index: 30
     });
@@ -83,7 +116,8 @@ export default class Controls {
     this.add({
       control: Fullscreen,
       disable: false,
-      icon: 'Fullscreen',
+      html: 'Fullscreen',
+      tooltip: 'Fullscreen',
       position: 'right',
       index: 40
     });
@@ -95,23 +129,67 @@ export default class Controls {
 
   add(option) {
     validControl(option);
-    const { $progress, $controlsLeft, $controlsRight } = this.art.refs;
     if (!option.disable) {
       id++;
       const name = option.control.name.toLowerCase() || `control${id}`;
       const $control = document.createElement('div');
       $control.setAttribute('class', `art-control art-control-${name}`);
-      $control.setAttribute('data-control-index', option.index || id);
-      append($control, option.icon);
-      this[name] = new option.control(this.art);
-      this[name].ref = $control;
-      this[name].show = function show() {
-        $control.style.display = 'inline-block';
-      };
-      this[name].hide = function show() {
-        $control.style.display = 'none';
-      };
+      $control.setAttribute('data-control-index', String(option.index) || id);
+      setStyle($control, option.style || {});
+      append($control, option.html);
+      option.ref = $control;
+      this.commonMethod(option);
+      this[name] = new option.control(this.art, option);
+      this.$map[option.position].push($control);
     }
+  }
+
+  mount() {
+    const { $progress, $controlsLeft, $controlsRight } = this.art.refs;
+    Object.keys(this.$map).forEach(key => {
+      const $list = this.$map[key].sort(
+        (a, b) =>
+          Number(a.dataset.controlIndex) - Number(b.dataset.controlIndex)
+      );
+
+      $list.forEach($control => {
+        switch (key) {
+          case 'top':
+            $progress.appendChild($control);
+            break;
+          case 'left':
+            $controlsLeft.appendChild($control);
+            break;
+          case 'right':
+            $controlsRight.appendChild($control);
+            break;
+          default:
+            break;
+        }
+      });
+    });
+  }
+
+  commonMethod(option) {
+    Object.defineProperty(option.control.prototype, 'hide', {
+      value: () => {
+        option.ref.style.display = 'none';
+        this.art.emit('control:hide', option.ref);
+      }
+    });
+
+    Object.defineProperty(option.control.prototype, 'show', {
+      value: () => {
+        option.ref.style.display = option.position === 'top' ? 'block' : 'inline-block';
+        this.art.emit('control:show', option.ref);
+      }
+    });
+
+    Object.defineProperty(option.control.prototype, 'addMenu', {
+      value: (menus) => {
+        console.log(menus);
+      }
+    });
   }
 
   show() {

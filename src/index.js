@@ -1,5 +1,6 @@
 import './style/index.scss';
-import validOption from './utils/validOption';
+import 'balloon-css/balloon.min.css';
+import validOption from './verification/player';
 import config from './config';
 import Emitter from 'tiny-emitter';
 import Template from './template';
@@ -41,7 +42,7 @@ class Artplayer extends Emitter {
 
   static get DEFAULTS() {
     return {
-      container: document.querySelector('.artplayer'),
+      container: '.artplayer',
       url: '',
       poster: '',
       volume: 0.7,
@@ -54,8 +55,10 @@ class Artplayer extends Emitter {
       loading: '',
       theme: '#1aafff',
       hotkey: true,
-      subtitle: '',
-      subtitleStyle: {},
+      subtitle: {
+        url: '',
+        style: {}
+      },
       controls: [],
       lang: navigator.language.toLowerCase()
     };

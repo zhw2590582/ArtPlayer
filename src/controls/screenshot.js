@@ -1,5 +1,6 @@
 export default class Screenshot {
-  constructor(art) {
+  constructor(art, option) {
     this.art = art;
+    this.option = option;
   }
 }

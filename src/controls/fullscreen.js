@@ -1,5 +1,6 @@
 export default class Fullscreen {
-  constructor(art) {
+  constructor(art, option) {
     this.art = art;
+    this.option = option;
   }
 }

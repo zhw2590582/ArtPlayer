@@ -5,8 +5,8 @@ export default class Subtitle {
     this.art = art;
     if (this.art.option.subtitle) {
       errorHandle(
-        getExt(this.art.option.subtitle) === 'vtt',
-        `'subtitle' option require 'vtt' format, but got '${getExt(this.art.option.subtitle)}'.`
+        getExt(this.art.option.subtitle.url) === 'vtt',
+        `'url' option require 'vtt' format, but got '${getExt(this.art.option.subtitle.url)}'.`
       );
       this.init();
     }
@@ -15,15 +15,15 @@ export default class Subtitle {
   init() {
     const {
       events: { proxy },
-      option: { subtitle, subtitleStyle },
+      option: { subtitle },
       refs: { $video, $subtitle }
     } = this.art;
 
-    setStyle($subtitle, subtitleStyle);
+    setStyle($subtitle, subtitle.style || {});
     const $track = document.createElement('track');
     $track.default = true;
     $track.kind = 'metadata';
-    $track.src = subtitle;
+    $track.src = subtitle.url;
     $video.appendChild($track);
     this.art.refs.$track = $track;
 
