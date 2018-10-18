@@ -40,23 +40,34 @@ export default class Subtitle {
             .map(item => `<p>${item}</p>`)
             .join('');
         }
+        this.art.emit('subtitle:update', $subtitle);
       });
     }
   }
 
   show() {
-    this.art.refs.$subtitle.style.display = 'block';
+    const { refs: { $subtitle } } = this.art;
+    $subtitle.style.display = 'block';
+    this.art.emit('subtitle:show', $subtitle);
   }
 
   hide() {
-    this.art.refs.$subtitle.style.display = 'none';
+    const { refs: { $subtitle } } = this.art;
+    $subtitle.style.display = 'none';
+    this.art.emit('subtitle:hide', $subtitle);
   }
 
-  change(url) {
+  switch(url) {
+    const { refs: { $track } } = this.art;
     errorHandle(
       getExt(url) === 'vtt',
       `'url' option require 'vtt' format, but got '${getExt(url)}'.`
     );
-    this.art.refs.$track.src = url;
+    errorHandle(
+      $track,
+      'You need to initialize the subtitle option first.'
+    );
+    $track.src = url;
+    this.art.emit('subtitle:switch', url);
   }
 }

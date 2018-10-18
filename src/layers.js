@@ -29,14 +29,19 @@ export default class Layers {
     append($layer, option.html);
     setStyle($layer, option.style || {});
     refs.$layers.appendChild($layer);
+    this.art.emit('layers:add', $layer);
     callback && callback($layer);
   }
 
   show() {
-    this.art.refs.$layers.style.display = 'block';
+    const { refs: { $layers } } = this.art;
+    $layers.style.display = 'block';
+    this.art.emit('layers:show', $layers);
   }
 
   hide() {
-    this.art.refs.$layers.style.display = 'none';
+    const { refs: { $layers } } = this.art;
+    $layers.style.display = 'none';
+    this.art.emit('layers:hide', $layers);
   }
 }

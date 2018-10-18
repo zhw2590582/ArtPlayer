@@ -24,9 +24,11 @@ export const instances = [];
 class Artplayer extends Emitter {
   constructor(option) {
     super();
+    this.art.emit('init:start');
     this.option = Object.assign({}, Artplayer.DEFAULTS, option);
     verification(this.option);
     this.init();
+    this.art.emit('init:end');
   }
 
   static get version() {
@@ -111,6 +113,7 @@ class Artplayer extends Emitter {
     this.events.destroy();
     this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
+    this.art.emit('destroy');
   }
 }
 

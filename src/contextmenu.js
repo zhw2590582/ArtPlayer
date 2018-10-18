@@ -17,8 +17,8 @@ export default class Contextmenu {
     option.contextmenu.push(
       {
         text: i18n.get('Video info'),
-        click: art => {
-          art.info.show();
+        click: () => {
+          this.art.info.show();
         }
       },
       {
@@ -88,16 +88,15 @@ export default class Contextmenu {
     const mouseY = event.clientY;
     const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = refs.$container.getBoundingClientRect();
     const { height: mHeight, width: mWidth } = refs.$contextmenu.getBoundingClientRect();
-
     let menuLeft = mouseX - cLeft;
     let menuTop = mouseY - cTop;
 
     if (mouseX + mWidth > cLeft + cWidth) {
-      menuLeft -= mWidth;
+      menuLeft = cWidth - mWidth;
     }
 
     if (mouseY + mHeight > cTop + cHeight) {
-      menuTop -= mHeight;
+      menuTop = cHeight - mHeight;
     }
 
     refs.$contextmenu.style.left = `${menuLeft}px`;
@@ -105,12 +104,18 @@ export default class Contextmenu {
   }
 
   hide() {
-    const { refs } = this.art;
-    refs.$contextmenu && (refs.$contextmenu.style.display = 'none');
+    const { refs: { $contextmenu } } = this.art;
+    if ($contextmenu) {
+      $contextmenu.style.display = 'none';
+      this.art.emit('contextmenu:hide', $contextmenu);
+    }
   }
 
   show() {
-    const { refs } = this.art;
-    refs.$contextmenu && (refs.$contextmenu.style.display = 'block');
+    const { refs: { $contextmenu } } = this.art;
+    if ($contextmenu) {
+      $contextmenu.style.display = 'block';
+      this.art.emit('contextmenu:show', $contextmenu);
+    }
   }
 }

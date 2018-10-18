@@ -530,12 +530,17 @@
     }, {
       key: "play",
       value: function play() {
-        return this.art.refs.$video.play();
+        var $video = this.art.refs.$video;
+        var promise = $video.play();
+        this.art.emit('play', $video);
+        return promise;
       }
     }, {
       key: "pause",
       value: function pause() {
-        return this.art.refs.$video.pause();
+        var $video = this.art.refs.$video;
+        $video.pause();
+        this.art.emit('pause', $video);
       }
     }, {
       key: "toggle",
@@ -548,15 +553,32 @@
       }
     }, {
       key: "seek",
-      value: function seek() {//
+      value: function seek(time) {
+        var $video = this.art.refs.$video;
+        var newTime = Math.max(time, 0);
+
+        if ($video.duration) {
+          newTime = Math.min(newTime, $video.duration);
+        }
+
+        $video.currentTime = newTime;
+        this.art.emit('seek', newTime);
       }
     }, {
       key: "currentTime",
-      value: function currentTime() {//
+      value: function currentTime() {
+        return this.art.refs.$video.currentTime;
       }
     }, {
       key: "volume",
-      value: function volume() {//
+      value: function volume(percentage) {
+        var $video = this.art.refs.$video;
+
+        if (percentage) {
+          $video.volume = clamp(percentage, 0, 1);
+        }
+
+        this.art.emit('volume', $video.volume);
       }
     }, {
       key: "switchVolumeIcon",
@@ -571,12 +593,15 @@
       value: function switchQuality() {//
       }
     }, {
-      key: "switchSubtitle",
-      value: function switchSubtitle() {//
+      key: "resize",
+      value: function resize() {//
       }
     }, {
       key: "speed",
-      value: function speed() {//
+      value: function speed(rate) {
+        var $video = this.art.refs.$video;
+        $video.playbackRate = rate;
+        this.art.emit('speed', rate);
       }
     }]);
 
@@ -678,12 +703,15 @@
         var _this3 = this;
 
         var _this$art2 = this.art,
-            option = _this$art2.option,
+            url = _this$art2.option.url,
             notice = _this$art2.notice,
             i18n = _this$art2.i18n,
             loading = _this$art2.loading;
-        request(option.url).then(function (response) {
+        this.art.emit('player:fetch:start', url);
+        request(url).then(function (response) {
           _this3.sourceBuffer.appendBuffer(response);
+
+          _this3.art.emit('player:fetch:success', url);
         }).catch(function (err) {
           if (_this3.repeat++ < _this3.maxRepeat) {
             _this3.fetchUrl();
@@ -691,6 +719,8 @@
             notice.show(i18n.get('Video load failed'));
             console.warn(err);
             loading.hide();
+
+            _this3.art.emit('player:fetch:failure', url);
           }
         });
       }
@@ -747,8 +777,8 @@
             proxy = _this$art.events.proxy;
         option.contextmenu.push({
           text: i18n.get('Video info'),
-          click: function click(art) {
-            art.info.show();
+          click: function click() {
+            _this.art.info.show();
           }
         }, {
           text: i18n.get('About author'),
@@ -834,11 +864,11 @@
         var menuTop = mouseY - cTop;
 
         if (mouseX + mWidth > cLeft + cWidth) {
-          menuLeft -= mWidth;
+          menuLeft = cWidth - mWidth;
         }
 
         if (mouseY + mHeight > cTop + cHeight) {
-          menuTop -= mHeight;
+          menuTop = cHeight - mHeight;
         }
 
         refs.$contextmenu.style.left = "".concat(menuLeft, "px");
@@ -847,14 +877,22 @@
     }, {
       key: "hide",
       value: function hide() {
-        var refs = this.art.refs;
-        refs.$contextmenu && (refs.$contextmenu.style.display = 'none');
+        var $contextmenu = this.art.refs.$contextmenu;
+
+        if ($contextmenu) {
+          $contextmenu.style.display = 'none';
+          this.art.emit('contextmenu:hide', $contextmenu);
+        }
       }
     }, {
       key: "show",
       value: function show() {
-        var refs = this.art.refs;
-        refs.$contextmenu && (refs.$contextmenu.style.display = 'block');
+        var $contextmenu = this.art.refs.$contextmenu;
+
+        if ($contextmenu) {
+          $contextmenu.style.display = 'block';
+          this.art.emit('contextmenu:show', $contextmenu);
+        }
       }
     }]);
 
@@ -954,6 +992,8 @@
     createClass(Subtitle, [{
       key: "init",
       value: function init() {
+        var _this = this;
+
         var _this$art = this.art,
             proxy = _this$art.events.proxy,
             _this$art$option = _this$art.option,
@@ -987,24 +1027,33 @@
                 return "<p>".concat(item, "</p>");
               }).join('');
             }
+
+            _this.art.emit('subtitle:update', $subtitle);
           });
         }
       }
     }, {
       key: "show",
       value: function show() {
-        this.art.refs.$subtitle.style.display = 'block';
+        var $subtitle = this.art.refs.$subtitle;
+        $subtitle.style.display = 'block';
+        this.art.emit('subtitle:show', $subtitle);
       }
     }, {
       key: "hide",
       value: function hide() {
-        this.art.refs.$subtitle.style.display = 'none';
+        var $subtitle = this.art.refs.$subtitle;
+        $subtitle.style.display = 'none';
+        this.art.emit('subtitle:hide', $subtitle);
       }
     }, {
-      key: "change",
-      value: function change(url) {
+      key: "switch",
+      value: function _switch(url) {
+        var $track = this.art.refs.$track;
         errorHandle(getExt(url) === 'vtt', "'url' option require 'vtt' format, but got '".concat(getExt(url), "'."));
-        this.art.refs.$track.src = url;
+        errorHandle($track, 'You need to initialize the subtitle option first.');
+        $track.src = url;
+        this.art.emit('subtitle:switch', url);
       }
     }]);
 
@@ -1161,17 +1210,22 @@
         append($layer, option.html);
         setStyle($layer, option.style || {});
         refs.$layers.appendChild($layer);
+        this.art.emit('layers:add', $layer);
         callback && callback($layer);
       }
     }, {
       key: "show",
       value: function show() {
-        this.art.refs.$layers.style.display = 'block';
+        var $layers = this.art.refs.$layers;
+        $layers.style.display = 'block';
+        this.art.emit('layers:show', $layers);
       }
     }, {
       key: "hide",
       value: function hide() {
-        this.art.refs.$layers.style.display = 'none';
+        var $layers = this.art.refs.$layers;
+        $layers.style.display = 'none';
+        this.art.emit('layers:hide', $layers);
       }
     }]);
 
@@ -1218,22 +1272,21 @@
         var _this$art = this.art,
             option = _this$art.option,
             $loading = _this$art.refs.$loading;
-
-        if (option.loading) {
-          append($loading, option.loading);
-        } else {
-          append($loading, icons$1.loading);
-        }
+        append($loading, option.loading || icons$1.loading);
       }
     }, {
       key: "hide",
       value: function hide() {
-        this.art.refs.$loading.style.display = 'none';
+        var $loading = this.art.refs.$loading;
+        $loading.style.display = 'none';
+        this.art.emit('loading:hide', $loading);
       }
     }, {
       key: "show",
       value: function show() {
-        this.art.refs.$loading.style.display = 'flex';
+        var $loading = this.art.refs.$loading;
+        $loading.style.display = 'flex';
+        this.art.emit('loading:show', $loading);
       }
     }]);
 
@@ -1265,12 +1318,15 @@
             _this.hide();
           }, 1000);
         }
+
+        this.art.emit('notice:show', $notice);
       }
     }, {
       key: "hide",
       value: function hide() {
         var $notice = this.art.refs.$notice;
         $notice.style.display = 'none';
+        this.art.emit('notice:hide', $notice);
       }
     }]);
 
@@ -1308,12 +1364,16 @@
     }, {
       key: "show",
       value: function show() {
-        this.art.refs.$mask.style.display = 'flex';
+        var $mask = this.art.refs.$mask;
+        $mask.style.display = 'flex';
+        this.art.emit('mask:show', $mask);
       }
     }, {
       key: "hide",
       value: function hide() {
-        this.art.refs.$mask.style.display = 'none';
+        var $mask = this.art.refs.$mask;
+        $mask.style.display = 'none';
+        this.art.emit('mask:show', $mask);
       }
     }]);
 
@@ -1334,10 +1394,15 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
+
+      _this.art.emit('init:start');
+
       _this.option = Object.assign({}, Artplayer.DEFAULTS, option);
       verification(_this.option);
 
       _this.init();
+
+      _this.art.emit('init:end');
 
       return _this;
     }
@@ -1380,6 +1445,7 @@
         this.events.destroy();
         this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
+        this.art.emit('destroy');
       }
     }], [{
       key: "use",

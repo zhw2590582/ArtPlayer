@@ -9,18 +9,18 @@ export default class Loading {
 
   init() {
     const { option, refs: { $loading } } = this.art;
-    if (option.loading) {
-      append($loading, option.loading);
-    } else {
-      append($loading, icons.loading);
-    }
+    append($loading, option.loading || icons.loading);
   }
 
   hide() {
-    this.art.refs.$loading.style.display = 'none';
+    const { refs: { $loading } } = this.art;
+    $loading.style.display = 'none';
+    this.art.emit('loading:hide', $loading);
   }
 
   show() {
-    this.art.refs.$loading.style.display = 'flex';
+    const { refs: { $loading } } = this.art;
+    $loading.style.display = 'flex';
+    this.art.emit('loading:show', $loading);
   }
 }

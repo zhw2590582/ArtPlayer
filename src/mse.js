@@ -91,10 +91,12 @@ export default class Mse {
   }
 
   fetchUrl() {
-    const { option, notice, i18n, loading } = this.art;
-    request(option.url)
+    const { option: { url }, notice, i18n, loading } = this.art;
+    this.art.emit('player:fetch:start', url);
+    request(url)
       .then(response => {
         this.sourceBuffer.appendBuffer(response);
+        this.art.emit('player:fetch:success', url);
       })
       .catch(err => {
         if (this.repeat++ < this.maxRepeat) {
@@ -103,6 +105,7 @@ export default class Mse {
           notice.show(i18n.get('Video load failed'));
           console.warn(err);
           loading.hide();
+          this.art.emit('player:fetch:failure', url);
         }
       });
   }

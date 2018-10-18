@@ -6,6 +6,8 @@
     height: 100%;
     text-align: left;
     overflow: hidden;
+    font-family: Roboto,Arial,Helvetica,sans-serif;
+    -webkit-font-smoothing: antialiased;
     user-select: none;
 
     .art-icon {
@@ -79,9 +81,9 @@
         z-index: 7;
         left: 0;
         top: 0;
-        width: 170px;
+        width: 200px;
         padding: 5px 0;
-        background:rgba(0, 0, 0, 0.75);
+        background:rgba(0, 0, 0, 0.8);
         a {
             font-size: 13px;
             display: block;
@@ -91,6 +93,11 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             text-decoration: none;
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+
+            &:hover {
+                background-color: rgba(255,255,255,.1);
+            }
         }
     }
 

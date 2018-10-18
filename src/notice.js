@@ -14,10 +14,12 @@ export default class Notice {
         this.hide();
       }, 1000);
     }
+    this.art.emit('notice:show', $notice);
   }
 
   hide() {
     const { refs: { $notice } } = this.art;
     $notice.style.display = 'none';
+    this.art.emit('notice:hide', $notice);
   }
 }

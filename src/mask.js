@@ -25,10 +25,14 @@ export default class Mask {
   }
 
   show() {
-    this.art.refs.$mask.style.display = 'flex';
+    const { refs: { $mask } } = this.art;
+    $mask.style.display = 'flex';
+    this.art.emit('mask:show', $mask);
   }
 
   hide() {
-    this.art.refs.$mask.style.display = 'none';
+    const { refs: { $mask } } = this.art;
+    $mask.style.display = 'none';
+    this.art.emit('mask:show', $mask);
   }
 }

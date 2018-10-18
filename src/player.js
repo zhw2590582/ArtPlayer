@@ -68,11 +68,16 @@ export default class Player {
   }
 
   play() {
-    return this.art.refs.$video.play();
+    const { refs: { $video } } = this.art;
+    const promise = $video.play();
+    this.art.emit('play', $video);
+    return promise;
   }
 
   pause() {
-    return this.art.refs.$video.pause();
+    const { refs: { $video } } = this.art;
+    $video.pause();
+    this.art.emit('pause', $video);
   }
 
   toggle() {
@@ -83,16 +88,28 @@ export default class Player {
     }
   }
 
-  seek() {
-    //
+  seek(time) {
+    const { refs: { $video } } = this.art;
+    let newTime = Math.max(time, 0);
+    if ($video.duration) {
+      newTime = Math.min(newTime, $video.duration);
+    }
+
+    $video.currentTime = newTime;
+    this.art.emit('seek', newTime);
   }
 
   currentTime() {
-    //
+    return this.art.refs.$video.currentTime;
   }
 
-  volume() {
-    //
+  volume(percentage) {
+    const { refs: { $video } } = this.art;
+    if (percentage) {
+      $video.volume = clamp(percentage, 0, 1);
+    }
+
+    this.art.emit('volume', $video.volume);
   }
 
   switchVolumeIcon() {
@@ -107,11 +124,13 @@ export default class Player {
     //
   }
 
-  switchSubtitle() {
+  resize() {
     //
   }
 
-  speed() {
-    //
+  speed(rate) {
+    const { refs: { $video } } = this.art;
+    $video.playbackRate = rate;
+    this.art.emit('speed', rate);
   }
 }
