@@ -4,7 +4,6 @@ import Fullscreen from './fullscreen';
 import Pip from './pip';
 import PlayAndPause from './playAndPause';
 import Progress from './progress';
-import Screenshot from './screenshot';
 import Subtitle from './subtitle';
 import Time from './time';
 import Volume from './volume';
@@ -29,13 +28,6 @@ export default class Controls {
       disable: false,
       position: 'top',
       index: 10
-    });
-
-    this.add({
-      control: Screenshot,
-      disable: false,
-      position: 'top',
-      index: 20
     });
 
     this.add({

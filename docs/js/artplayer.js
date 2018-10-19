@@ -817,10 +817,11 @@
             proxy = _this$art.events.proxy,
             $video = _this$art.refs.$video,
             player = _this$art.player;
-        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-timer\">00:00</div>\n      </div>\n    "));
+        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\">\n          <div class=\"highlight-text\"></div>\n        </div>\n        <div class=\"art-progress-screenshot\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-timer\">00:00</div>\n      </div>\n    "));
         this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
         this.$played = this.option.ref.querySelector('.art-progress-played');
         this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
+        this.$screenshot = this.option.ref.querySelector('.art-progress-screenshot');
         this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
         this.$timer = this.option.ref.querySelector('.art-progress-timer');
         this.art.on('video:canplay', function () {
@@ -828,7 +829,7 @@
 
           highlight.forEach(function (item) {
             var left = Number(item.time) / $video.duration;
-            append(_this.$highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>"));
+            append(_this.$highlight, "\n          <span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>\n        "));
           });
         });
         this.art.on('video:progress', function () {
@@ -842,10 +843,17 @@
         });
         proxy(this.option.ref, 'mousemove', function (event) {
           if (event.path.indexOf(_this.$highlight) > -1) {
-            _this.showHighlight();
+            _this.$timer.style.visibility = 'hidden';
+
+            _this.showHighlight(event);
           } else {
+            _this.$timer.style.visibility = 'visible';
+
             _this.showTime(event);
           }
+        });
+        proxy(this.option.ref, 'mouseleave', function (event) {
+          console.log(event);
         });
         proxy(this.option.ref, 'click', function (event) {
           if (event.target !== _this.$indicator) {
@@ -884,7 +892,7 @@
       }
     }, {
       key: "showHighlight",
-      value: function showHighlight() {
+      value: function showHighlight(event) {
         console.log('showHighlight');
       }
     }, {
@@ -905,6 +913,10 @@
         this.$timer.innerHTML = time;
       }
     }, {
+      key: "showScreenshot",
+      value: function showScreenshot() {//
+      }
+    }, {
       key: "getPos",
       value: function getPos(event) {
         var $video = this.art.refs.$video;
@@ -912,7 +924,7 @@
         var _this$option$ref$getB = this.option.ref.getBoundingClientRect(),
             left = _this$option$ref$getB.left;
 
-        var width = event.x - left;
+        var width = Math.max(0, event.x - left);
         var second = width / this.option.ref.clientWidth * $video.duration;
         var time = secondToTime(second);
         var percentage = clamp(width / this.option.ref.clientWidth, 0, 1);
@@ -948,13 +960,6 @@
 
     return Progress;
   }();
-
-  var Screenshot = function Screenshot(art, option) {
-    classCallCheck(this, Screenshot);
-
-    this.art = art;
-    this.option = option;
-  };
 
   var Subtitle = function Subtitle(art, option) {
     classCallCheck(this, Subtitle);
@@ -1012,12 +1017,6 @@
           disable: false,
           position: 'top',
           index: 10
-        });
-        this.add({
-          control: Screenshot,
-          disable: false,
-          position: 'top',
-          index: 20
         });
         this.add({
           control: PlayAndPause,

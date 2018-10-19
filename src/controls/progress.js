@@ -26,7 +26,10 @@ export default class Progress {
       <div class="art-control-progress-inner">
         <div class="art-progress-loaded"></div>
         <div class="art-progress-played" style="background: ${theme}"></div>
-        <div class="art-progress-highlight"></div>
+        <div class="art-progress-highlight">
+          <div class="highlight-text"></div>
+        </div>
+        <div class="art-progress-screenshot"></div>
         <div class="art-progress-indicator" style="background: ${theme}"></div>
         <div class="art-progress-timer">00:00</div>
       </div>
@@ -36,6 +39,7 @@ export default class Progress {
     this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
     this.$played = this.option.ref.querySelector('.art-progress-played');
     this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
+    this.$screenshot = this.option.ref.querySelector('.art-progress-screenshot');
     this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
     this.$timer = this.option.ref.querySelector('.art-progress-timer');
 
@@ -43,7 +47,9 @@ export default class Progress {
       this.set('loaded', this.getLoaded());
       highlight.forEach(item => {
         const left = Number(item.time) / $video.duration;
-        append(this.$highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>`);
+        append(this.$highlight, `
+          <span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>
+        `);
       });
     });
 
@@ -61,10 +67,16 @@ export default class Progress {
 
     proxy(this.option.ref, 'mousemove', event => {
       if (event.path.indexOf(this.$highlight) > -1) {
-        this.showHighlight();
+        this.$timer.style.visibility = 'hidden';
+        this.showHighlight(event);
       } else {
+        this.$timer.style.visibility = 'visible';
         this.showTime(event);
       }
+    });
+
+    proxy(this.option.ref, 'mouseleave', event => {
+      console.log(event);
     });
 
     proxy(this.option.ref, 'click', event => {
@@ -96,7 +108,7 @@ export default class Progress {
     });
   }
 
-  showHighlight() {
+  showHighlight(event) {
     console.log('showHighlight');
   }
 
@@ -112,10 +124,14 @@ export default class Progress {
     this.$timer.innerHTML = time;
   }
 
+  showScreenshot() {
+    //
+  }
+
   getPos(event) {
     const { $video } = this.art.refs;
     const { left } = this.option.ref.getBoundingClientRect();
-    const width = event.x - left;
+    const width = Math.max(0, event.x - left);
     const second = width / this.option.ref.clientWidth * $video.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / this.option.ref.clientWidth, 0, 1);
