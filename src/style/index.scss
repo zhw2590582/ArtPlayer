@@ -1,9 +1,7 @@
 @charset "UTF-8";
 
-.artplayer-wrap {
+.artplayer-container {
     position: relative;
-    width: 100%;
-    height: 100%;
     text-align: left;
     overflow: hidden;
     font-family: Roboto,Arial,Helvetica,sans-serif;
@@ -18,7 +16,7 @@
 
     .artplayer-video {
         position: absolute;
-        z-index: 1;
+        z-index: 10;
         left: 0;
         top: 0;
         right: 0;
@@ -29,7 +27,7 @@
 
     .artplayer-subtitle {
         position: absolute;
-        z-index: 2;
+        z-index: 20;
         bottom: 40px;
         width: 100%;
         padding: 0 20px;
@@ -42,7 +40,7 @@
 
     .artplayer-layers {
         position: absolute;
-        z-index: 3;
+        z-index: 30;
         left: 0;
         top: 0;
         right: 0;
@@ -54,7 +52,7 @@
     .artplayer-mask {
         display: none;
         position: absolute;
-        z-index: 4;
+        z-index: 40;
         left: 0;
         top: 0;
         right: 0;
@@ -64,7 +62,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-
+    
         .art-icon-play {
             opacity: .8;
             display: flex;
@@ -76,9 +74,57 @@
         }
     }
 
+    .artplayer-bottom {
+        position: absolute;
+        z-index: 40;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .2s ease-in-out;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
+    }
+    
+    &.controls-show, &:hover {
+        .artplayer-bottom {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .artplayer-loading {
+        display: none;
+        position: absolute;
+        z-index: 50;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .artplayer-notice {
+        display: none;
+        font-size: 13px;
+        position: absolute;
+        z-index: 60;
+        left: 10px;
+        top: 10px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
     .artplayer-contextmenu {
         position: absolute;
-        z-index: 7;
+        z-index: 70;
         left: 0;
         top: 0;
         width: 200px;
@@ -94,58 +140,10 @@
             white-space: nowrap;
             text-decoration: none;
             text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-
+    
             &:hover {
                 background-color: rgba(255,255,255,.1);
             }
         }
-    }
-
-    .artplayer-controls {
-        position: absolute;
-        z-index: 4;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100px;
-        opacity: 0;
-        visibility: hidden;
-        transition: all .2s ease-in-out;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
-    }
-
-    &.controls-show, &:hover {
-        .artplayer-controls {
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-
-    .artplayer-loading {
-        display: none;
-        position: absolute;
-        z-index: 5;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .artplayer-notice {
-        display: none;
-        font-size: 13px;
-        position: absolute;
-        z-index: 6;
-        left: 10px;
-        top: 10px;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 10px;
-        color: #fff;
-        background: rgba(0, 0, 0, 0.6);
     }
 }

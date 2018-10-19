@@ -224,13 +224,6 @@
   function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
   }
-  function request(url) {
-    return fetch(url).then(function (response) {
-      return response.arrayBuffer();
-    }).catch(function (err) {
-      throw new ArtPlayerError(err.message);
-    });
-  }
   function getExt(url) {
     if (url.includes('?')) {
       return getExt(url.split('?')[0]);
@@ -390,8 +383,7 @@
       key: "init",
       value: function init() {
         var refs = this.art.refs;
-        refs.$container.innerHTML = "\n        <div class=\"artplayer-wrap\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
-        refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
+        refs.$container.innerHTML = "\n        <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\"></div>\n      ";
         refs.$video = refs.$container.querySelector('.artplayer-video');
         refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
         refs.$bottom = refs.$container.querySelector('.artplayer-bottom');
@@ -713,7 +705,7 @@
             i18n = _this$art2.i18n,
             loading = _this$art2.loading;
         this.art.emit('player:fetch:start', url);
-        request(url).then(function (response) {
+        this.request(url).then(function (response) {
           _this3.sourceBuffer.appendBuffer(response);
 
           _this3.art.emit('player:fetch:success', url);
@@ -727,6 +719,15 @@
 
             _this3.art.emit('player:fetch:failure', url);
           }
+        });
+      }
+    }, {
+      key: "request",
+      value: function request(url) {
+        return fetch(url).then(function (response) {
+          return response.arrayBuffer();
+        }).catch(function (err) {
+          throw new ArtPlayerError(err.message);
         });
       }
     }]);
@@ -847,21 +848,21 @@
           disable: false,
           html: 'Progress',
           position: 'top',
-          index: 0
+          index: 10
         });
         this.add({
           control: Highlight,
           disable: false,
           html: 'Highlight',
           position: 'top',
-          index: 10
+          index: 20
         });
         this.add({
           control: Screenshot,
           disable: false,
           html: 'Screenshot',
           position: 'top',
-          index: 20
+          index: 30
         });
         this.add({
           control: PlayAndPause,
@@ -869,7 +870,7 @@
           html: 'PlayAndPause',
           tooltip: 'PlayAndPause',
           position: 'left',
-          index: 0
+          index: 10
         });
         this.add({
           control: Volume,
@@ -877,7 +878,7 @@
           html: 'Volume',
           tooltip: 'Volume',
           position: 'left',
-          index: 10
+          index: 20
         });
         this.add({
           control: Time,
@@ -885,7 +886,7 @@
           html: 'Time',
           tooltip: 'Volume',
           position: 'left',
-          index: 20
+          index: 30
         });
         this.add({
           control: Danmu,
@@ -893,7 +894,7 @@
           html: 'Danmu',
           tooltip: 'Danmu',
           position: 'right',
-          index: 0
+          index: 10
         });
         this.add({
           control: Subtitle,
@@ -901,7 +902,7 @@
           html: 'Subtitle',
           tooltip: 'Subtitle',
           position: 'right',
-          index: 10
+          index: 20
         });
         this.add({
           control: Setting,
@@ -909,7 +910,7 @@
           html: 'Setting',
           tooltip: 'Setting',
           position: 'right',
-          index: 20
+          index: 30
         });
         this.add({
           control: Pip,
@@ -917,7 +918,7 @@
           html: 'Pip',
           tooltip: 'Pip',
           position: 'right',
-          index: 30
+          index: 40
         });
         this.add({
           control: Fullscreen,
@@ -925,7 +926,7 @@
           html: 'Fullscreen',
           tooltip: 'Fullscreen',
           position: 'right',
-          index: 40
+          index: 50
         });
         this.art.option.controls.forEach(function (item) {
           _this.add(item);
@@ -960,11 +961,9 @@
             $controlsLeft = _this$art$refs.$controlsLeft,
             $controlsRight = _this$art$refs.$controlsRight;
         Object.keys(this.$map).forEach(function (key) {
-          var $list = _this2.$map[key].sort(function (a, b) {
+          _this2.$map[key].sort(function (a, b) {
             return Number(a.dataset.controlIndex) - Number(b.dataset.controlIndex);
-          });
-
-          $list.forEach(function ($control) {
+          }).forEach(function ($control) {
             switch (key) {
               case 'top':
                 $progress.appendChild($control);
@@ -1012,14 +1011,14 @@
     }, {
       key: "show",
       value: function show() {
-        var $wrap = this.art.refs.$wrap;
-        $wrap.classList.add('controls-show');
+        var $container = this.art.refs.$container;
+        $container.classList.add('controls-show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $wrap = this.art.refs.$wrap;
-        $wrap.classList.remove('controls-show');
+        var $container = this.art.refs.$container;
+        $container.classList.remove('controls-show');
       }
     }]);
 
@@ -1112,7 +1111,7 @@
 
           append(refs.$contextmenu, $menu);
         });
-        append(refs.$wrap, refs.$contextmenu);
+        append(refs.$container, refs.$contextmenu);
       }
     }, {
       key: "setPos",
@@ -1689,6 +1688,7 @@
           this.refs.$container = document.querySelector(this.option.container);
         }
 
+        this.refs.$container.classList.add('artplayer-container');
         this.template = new Template(this);
         this.i18n = new I18n(this);
         this.events = new Events(this);
@@ -1712,6 +1712,7 @@
       key: "destroy",
       value: function destroy() {
         this.events.destroy();
+        this.refs.$container.classList.remove('artplayer-container');
         this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
         this.emit('destroy');

@@ -79,7 +79,7 @@ export default class Contextmenu {
       }
       append(refs.$contextmenu, $menu);
     });
-    append(refs.$wrap, refs.$contextmenu);
+    append(refs.$container, refs.$contextmenu);
   }
 
   setPos(event) {

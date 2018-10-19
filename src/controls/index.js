@@ -31,7 +31,7 @@ export default class Controls {
       disable: false,
       html: 'Progress',
       position: 'top',
-      index: 0
+      index: 10
     });
 
     this.add({
@@ -39,7 +39,7 @@ export default class Controls {
       disable: false,
       html: 'Highlight',
       position: 'top',
-      index: 10
+      index: 20
     });
 
     this.add({
@@ -47,7 +47,7 @@ export default class Controls {
       disable: false,
       html: 'Screenshot',
       position: 'top',
-      index: 20
+      index: 30
     });
 
     this.add({
@@ -56,7 +56,7 @@ export default class Controls {
       html: 'PlayAndPause',
       tooltip: 'PlayAndPause',
       position: 'left',
-      index: 0
+      index: 10
     });
 
     this.add({
@@ -65,7 +65,7 @@ export default class Controls {
       html: 'Volume',
       tooltip: 'Volume',
       position: 'left',
-      index: 10
+      index: 20
     });
 
     this.add({
@@ -74,7 +74,7 @@ export default class Controls {
       html: 'Time',
       tooltip: 'Volume',
       position: 'left',
-      index: 20
+      index: 30
     });
 
     this.add({
@@ -83,7 +83,7 @@ export default class Controls {
       html: 'Danmu',
       tooltip: 'Danmu',
       position: 'right',
-      index: 0
+      index: 10
     });
 
     this.add({
@@ -92,7 +92,7 @@ export default class Controls {
       html: 'Subtitle',
       tooltip: 'Subtitle',
       position: 'right',
-      index: 10
+      index: 20
     });
 
     this.add({
@@ -101,7 +101,7 @@ export default class Controls {
       html: 'Setting',
       tooltip: 'Setting',
       position: 'right',
-      index: 20
+      index: 30
     });
 
     this.add({
@@ -110,7 +110,7 @@ export default class Controls {
       html: 'Pip',
       tooltip: 'Pip',
       position: 'right',
-      index: 30
+      index: 40
     });
 
     this.add({
@@ -119,7 +119,7 @@ export default class Controls {
       html: 'Fullscreen',
       tooltip: 'Fullscreen',
       position: 'right',
-      index: 40
+      index: 50
     });
 
     this.art.option.controls.forEach(item => {
@@ -147,26 +147,26 @@ export default class Controls {
   mount() {
     const { $progress, $controlsLeft, $controlsRight } = this.art.refs;
     Object.keys(this.$map).forEach(key => {
-      const $list = this.$map[key].sort(
-        (a, b) =>
-          Number(a.dataset.controlIndex) - Number(b.dataset.controlIndex)
-      );
-
-      $list.forEach($control => {
-        switch (key) {
-          case 'top':
-            $progress.appendChild($control);
-            break;
-          case 'left':
-            $controlsLeft.appendChild($control);
-            break;
-          case 'right':
-            $controlsRight.appendChild($control);
-            break;
-          default:
-            break;
-        }
-      });
+      this.$map[key]
+        .sort(
+          (a, b) =>
+            Number(a.dataset.controlIndex) - Number(b.dataset.controlIndex)
+        )
+        .forEach($control => {
+          switch (key) {
+            case 'top':
+              $progress.appendChild($control);
+              break;
+            case 'left':
+              $controlsLeft.appendChild($control);
+              break;
+            case 'right':
+              $controlsRight.appendChild($control);
+              break;
+            default:
+              break;
+          }
+        });
     });
   }
 
@@ -180,25 +180,26 @@ export default class Controls {
 
     Object.defineProperty(option.control.prototype, 'show', {
       value: () => {
-        option.ref.style.display = option.position === 'top' ? 'block' : 'inline-block';
+        option.ref.style.display =
+          option.position === 'top' ? 'block' : 'inline-block';
         this.art.emit('control:show', option.ref);
       }
     });
 
     Object.defineProperty(option.control.prototype, 'addMenu', {
-      value: (menus) => {
+      value: menus => {
         console.log(menus);
       }
     });
   }
 
   show() {
-    const { $wrap } = this.art.refs;
-    $wrap.classList.add('controls-show');
+    const { $container } = this.art.refs;
+    $container.classList.add('controls-show');
   }
 
   hide() {
-    const { $wrap } = this.art.refs;
-    $wrap.classList.remove('controls-show');
+    const { $container } = this.art.refs;
+    $container.classList.remove('controls-show');
   }
 }

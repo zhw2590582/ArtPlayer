@@ -91,6 +91,7 @@ class Artplayer extends Emitter {
     } else {
       this.refs.$container = document.querySelector(this.option.container);
     }
+    this.refs.$container.classList.add('artplayer-container');
 
     this.template = new Template(this);
     this.i18n = new I18n(this);
@@ -115,6 +116,7 @@ class Artplayer extends Emitter {
 
   destroy() {
     this.events.destroy();
+    this.refs.$container.classList.remove('artplayer-container');
     this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
     this.emit('destroy');

@@ -7,23 +7,20 @@ export default class Template {
   init() {
     const { refs } = this.art;
     refs.$container.innerHTML = `
-        <div class="artplayer-wrap">
-          <video class="artplayer-video" webkit-playsinline playsinline></video>
-          <div class="artplayer-subtitle"></div>
-          <div class="artplayer-layers"></div>
-          <div class="artplayer-mask"></div>
-          <div class="artplayer-bottom">
-            <div class="artplayer-progress"></div>
-            <div class="artplayer-controls">
-              <div class="artplayer-controls-left"></div>
-              <div class="artplayer-controls-right"></div>
-            </div>
+        <video class="artplayer-video" webkit-playsinline playsinline></video>
+        <div class="artplayer-subtitle"></div>
+        <div class="artplayer-layers"></div>
+        <div class="artplayer-mask"></div>
+        <div class="artplayer-bottom">
+          <div class="artplayer-progress"></div>
+          <div class="artplayer-controls">
+            <div class="artplayer-controls-left"></div>
+            <div class="artplayer-controls-right"></div>
           </div>
-          <div class="artplayer-loading"></div>
-          <div class="artplayer-notice"></div>
         </div>
+        <div class="artplayer-loading"></div>
+        <div class="artplayer-notice"></div>
       `;
-    refs.$wrap = refs.$container.querySelector('.artplayer-wrap');
     refs.$video = refs.$container.querySelector('.artplayer-video');
     refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
     refs.$bottom = refs.$container.querySelector('.artplayer-bottom');

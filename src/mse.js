@@ -1,4 +1,5 @@
-import { errorHandle, request, getExt } from './utils';
+import ArtPlayerError from './utils/ArtPlayerError';
+import { errorHandle, getExt } from './utils';
 import config from './config';
 
 export default class Mse {
@@ -93,7 +94,7 @@ export default class Mse {
   fetchUrl() {
     const { option: { url }, notice, i18n, loading } = this.art;
     this.art.emit('player:fetch:start', url);
-    request(url)
+    this.request(url)
       .then(response => {
         this.sourceBuffer.appendBuffer(response);
         this.art.emit('player:fetch:success', url);
@@ -107,6 +108,14 @@ export default class Mse {
           loading.hide();
           this.art.emit('player:fetch:failure', url);
         }
+      });
+  }
+
+  request(url) {
+    return fetch(url)
+      .then(response => response.arrayBuffer())
+      .catch(err => {
+        throw new ArtPlayerError(err.message);
       });
   }
 }
