@@ -4,6 +4,7 @@ export default class Progress {
   constructor(art, option) {
     this.art = art;
     this.option = option;
+    this.isDroging = false;
     this.getLoaded = this.getLoaded.bind(this);
     this.getPlayed = this.getPlayed.bind(this);
     this.getPos = this.getPos.bind(this);
@@ -12,24 +13,38 @@ export default class Progress {
   }
 
   init() {
-    const { option: { theme }, events: { proxy }, player } = this.art;
+    const {
+      option: { highlight, theme },
+      events: { proxy },
+      refs: { $video },
+      player
+    } = this.art;
 
-    append(this.option.ref, `
+    append(
+      this.option.ref,
+      `
       <div class="art-control-progress-inner">
         <div class="art-progress-loaded"></div>
         <div class="art-progress-played" style="background: ${theme}"></div>
+        <div class="art-progress-highlight"></div>
         <div class="art-progress-indicator" style="background: ${theme}"></div>
         <div class="art-progress-timer">00:00</div>
       </div>
-    `);
+    `
+    );
 
     this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
     this.$played = this.option.ref.querySelector('.art-progress-played');
+    this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
     this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
     this.$timer = this.option.ref.querySelector('.art-progress-timer');
 
     this.art.on('video:canplay', () => {
       this.set('loaded', this.getLoaded());
+      highlight.forEach(item => {
+        const left = Number(item.time) / $video.duration;
+        append(this.$highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>`);
+      });
     });
 
     this.art.on('video:progress', () => {
@@ -64,7 +79,6 @@ export default class Progress {
       }
     });
 
-    this.isDroging = false;
     proxy(this.$indicator, 'mousedown', () => {
       this.isDroging = true;
     });
@@ -103,7 +117,9 @@ export default class Progress {
 
   getLoaded() {
     const { $video } = this.art.refs;
-    return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+    return $video.buffered.length
+      ? $video.buffered.end($video.buffered.length - 1) / $video.duration
+      : 0;
   }
 
   set(type, percentage) {
@@ -113,4 +129,3 @@ export default class Progress {
     }
   }
 }
-

@@ -12,11 +12,6 @@ export default function validControl(option) {
   );
 
   errorHandle(
-    typeof option.html === 'string' || option.html instanceof Element,
-    `'html' option require 'string' or 'Element' type, but got '${typeof option.html}'.`
-  );
-
-  errorHandle(
     ['top', 'left', 'right'].indexOf(option.position) > -1,
     `'position' option require one of 'top、left、right', but got '${option.position}'.`
   );

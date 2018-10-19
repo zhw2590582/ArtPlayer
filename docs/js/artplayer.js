@@ -280,6 +280,7 @@
     errorHandle(typeof option.hotkey === 'boolean', "'hotkey' option require 'boolean' type, but got '".concat(_typeof_1(option.hotkey), "'."));
     errorHandle(Object.prototype.toString.call(option.subtitle) === '[object Object]', "'subtitle' option require 'object' type, but got '".concat(_typeof_1(option.subtitle), "'."));
     errorHandle(Array.isArray(option.controls), "'controls' option require 'array' type, but got '".concat(_typeof_1(option.controls), "'."));
+    errorHandle(Array.isArray(option.highlight), "'highlight' option require 'array' type, but got '".concat(_typeof_1(option.highlight), "'."));
   }
 
   var mimeCodec = {
@@ -585,11 +586,6 @@
         this.art.emit('seek', newTime);
       }
     }, {
-      key: "currentTime",
-      value: function currentTime() {
-        return this.art.refs.$video.currentTime;
-      }
-    }, {
       key: "volume",
       value: function volume(percentage) {
         var $video = this.art.refs.$video;
@@ -761,7 +757,6 @@
   function validControl(option) {
     errorHandle(typeof option.control === 'function', "'control' option require 'function' type, but got '".concat(_typeof_1(option.control), "'."));
     errorHandle(typeof option.disable === 'boolean', "'disable' option require 'boolean' type, but got '".concat(_typeof_1(option.disable), "'."));
-    errorHandle(typeof option.html === 'string' || option.html instanceof Element, "'html' option require 'string' or 'Element' type, but got '".concat(_typeof_1(option.html), "'."));
     errorHandle(['top', 'left', 'right'].indexOf(option.position) > -1, "'position' option require one of 'top\u3001left\u3001right', but got '".concat(option.position, "'."));
     errorHandle(typeof option.index === 'number', "'index' option require 'number' type, but got '".concat(_typeof_1(option.index), "'."));
   }
@@ -775,13 +770,6 @@
 
   var Fullscreen = function Fullscreen(art, option) {
     classCallCheck(this, Fullscreen);
-
-    this.art = art;
-    this.option = option;
-  };
-
-  var Highlight = function Highlight(art, option) {
-    classCallCheck(this, Highlight);
 
     this.art = art;
     this.option = option;
@@ -809,6 +797,7 @@
 
       this.art = art;
       this.option = option;
+      this.isDroging = false;
       this.getLoaded = this.getLoaded.bind(this);
       this.getPlayed = this.getPlayed.bind(this);
       this.getPos = this.getPos.bind(this);
@@ -822,16 +811,25 @@
         var _this = this;
 
         var _this$art = this.art,
-            theme = _this$art.option.theme,
+            _this$art$option = _this$art.option,
+            highlight = _this$art$option.highlight,
+            theme = _this$art$option.theme,
             proxy = _this$art.events.proxy,
+            $video = _this$art.refs.$video,
             player = _this$art.player;
-        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-timer\">00:00</div>\n      </div>\n    "));
+        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-timer\">00:00</div>\n      </div>\n    "));
         this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
         this.$played = this.option.ref.querySelector('.art-progress-played');
+        this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
         this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
         this.$timer = this.option.ref.querySelector('.art-progress-timer');
         this.art.on('video:canplay', function () {
           _this.set('loaded', _this.getLoaded());
+
+          highlight.forEach(function (item) {
+            var left = Number(item.time) / $video.duration;
+            append(_this.$highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>"));
+          });
         });
         this.art.on('video:progress', function () {
           _this.set('loaded', _this.getLoaded());
@@ -868,7 +866,6 @@
             player.seek(second);
           }
         });
-        this.isDroging = false;
         proxy(this.$indicator, 'mousedown', function () {
           _this.isDroging = true;
         });
@@ -999,36 +996,24 @@
         this.add({
           control: Progress,
           disable: false,
-          html: '',
           position: 'top',
           index: 10
         });
         this.add({
-          control: Highlight,
+          control: Screenshot,
           disable: false,
-          html: '<div class="art-progress-highlight"></div>',
           position: 'top',
           index: 20
         });
         this.add({
-          control: Screenshot,
-          disable: false,
-          html: '<div class="art-progress-screenshot"></div>',
-          position: 'top',
-          index: 30
-        });
-        this.add({
           control: PlayAndPause,
           disable: false,
-          html: 'PlayAndPause',
-          tooltip: 'PlayAndPause',
           position: 'left',
           index: 10
         });
         this.add({
           control: Volume,
           disable: false,
-          html: 'Volume',
           tooltip: 'Volume',
           position: 'left',
           index: 20
@@ -1036,7 +1021,6 @@
         this.add({
           control: Time,
           disable: false,
-          html: 'Time',
           tooltip: 'Volume',
           position: 'left',
           index: 30
@@ -1044,7 +1028,6 @@
         this.add({
           control: Danmu,
           disable: false,
-          html: 'Danmu',
           tooltip: 'Danmu',
           position: 'right',
           index: 10
@@ -1052,7 +1035,6 @@
         this.add({
           control: Subtitle,
           disable: false,
-          html: 'Subtitle',
           tooltip: 'Subtitle',
           position: 'right',
           index: 20
@@ -1060,7 +1042,6 @@
         this.add({
           control: Setting,
           disable: false,
-          html: 'Setting',
           tooltip: 'Setting',
           position: 'right',
           index: 30
@@ -1068,7 +1049,6 @@
         this.add({
           control: Pip,
           disable: false,
-          html: 'Pip',
           tooltip: 'Pip',
           position: 'right',
           index: 40
@@ -1076,7 +1056,6 @@
         this.add({
           control: Fullscreen,
           disable: false,
-          html: 'Fullscreen',
           tooltip: 'Fullscreen',
           position: 'right',
           index: 50
@@ -1096,8 +1075,6 @@
           var $control = document.createElement('div');
           $control.setAttribute('class', "art-control art-control-".concat(name));
           $control.setAttribute('data-control-index', String(option.index) || id);
-          setStyle($control, option.style || {});
-          append($control, option.html);
           option.ref = $control;
           this.commonMethod(option);
           this[name] = new option.control(this.art, option);
@@ -1787,8 +1764,9 @@
             option = _this$art.option,
             refs = _this$art.refs,
             proxy = _this$art.events.proxy;
-        icons$1.play.style.backgroundColor = option.theme;
-        append(refs.$mask, icons$1.play);
+        var playClone = icons$1.play.cloneNode(true);
+        playClone.style.backgroundColor = option.theme;
+        append(refs.$mask, playClone);
         proxy(refs.$mask, 'click', function () {
           player.play();
 
@@ -1934,6 +1912,7 @@
             style: {}
           },
           controls: [],
+          highlight: [],
           lang: navigator.language.toLowerCase()
         };
       }

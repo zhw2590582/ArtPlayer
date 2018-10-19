@@ -15,8 +15,9 @@ export default class Mask {
       events: { proxy }
     } = this.art;
 
-    icons.play.style.backgroundColor = option.theme;
-    append(refs.$mask, icons.play);
+    const playClone = icons.play.cloneNode(true);
+    playClone.style.backgroundColor = option.theme;
+    append(refs.$mask, playClone);
 
     proxy(refs.$mask, 'click', () => {
       player.play();

@@ -31,50 +31,60 @@
             poster: './img/poster.png',
             subtitle: {
                 url: './subtitle/dw_trailer_low.vtt'
-            }
+            },
+            highlight: [
+                {
+                    time: 20,
+                    text: '这是第 20 秒'
+                },
+                {
+                    time: 120,
+                    text: '这是 2 分钟'
+                }
+            ]
         });
 
-        // player.layers.add({
-        //     html: '23333',
-        //     index: 999,
-        //     name: 'test',
-        //     style: {
-        //         'color': 'red'
-        //     }
-        // }, dom => {
-        //     console.log(dom)
-        // });
+        player.layers.add({
+            html: '23333',
+            index: 999,
+            name: 'test',
+            style: {
+                'color': 'red'
+            }
+        }, dom => {
+            console.log(dom)
+        });
 
-        // console.dir(Artplayer);
+        console.dir(Artplayer);
 
-        // console.log(player);
+        console.log(player);
 
-        // Artplayer.config.video.events.forEach(item => {
-        //     player.on('video:' + item, event => {
-        //         console.log('video', event);
-        //     });
-        // });
+        Artplayer.config.video.events.forEach(item => {
+            player.on('video:' + item, event => {
+                console.log('video', event);
+            });
+        });
 
-        // Artplayer.config.mse.mediaSource.events.forEach(item => {
-        //     player.on('mediaSource:' + item, event => {
-        //         console.log('mediaSource', event);
-        //     });
-        // });
+        Artplayer.config.mse.mediaSource.events.forEach(item => {
+            player.on('mediaSource:' + item, event => {
+                console.log('mediaSource', event);
+            });
+        });
 
-        // Artplayer.config.mse.sourceBufferList.events.forEach(item => {
-        //     player.on('sourceBuffers:' + item, event => {
-        //         console.log('sourceBuffers', event);
-        //     });
-        //     player.on('activeSourceBuffers:' + item, event => {
-        //         console.log('activeSourceBuffers', event);
-        //     });
-        // });
+        Artplayer.config.mse.sourceBufferList.events.forEach(item => {
+            player.on('sourceBuffers:' + item, event => {
+                console.log('sourceBuffers', event);
+            });
+            player.on('activeSourceBuffers:' + item, event => {
+                console.log('activeSourceBuffers', event);
+            });
+        });
 
-        // Artplayer.config.mse.sourceBuffer.events.forEach(item => {
-        //     player.on('sourceBuffer:' + item, event => {
-        //         console.log('sourceBuffer', event);
-        //     });
-        // });
+        Artplayer.config.mse.sourceBuffer.events.forEach(item => {
+            player.on('sourceBuffer:' + item, event => {
+                console.log('sourceBuffer', event);
+            });
+        });
     </script>
 </body>
 

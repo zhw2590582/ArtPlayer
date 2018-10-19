@@ -60,6 +60,7 @@ class Artplayer extends Emitter {
         style: {}
       },
       controls: [],
+      highlight: [],
       lang: navigator.language.toLowerCase()
     };
   }

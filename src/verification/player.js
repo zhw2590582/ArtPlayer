@@ -90,4 +90,9 @@ export default function validOption(option) {
     Array.isArray(option.controls),
     `'controls' option require 'array' type, but got '${typeof option.controls}'.`
   );
+
+  errorHandle(
+    Array.isArray(option.highlight),
+    `'highlight' option require 'array' type, but got '${typeof option.highlight}'.`
+  );
 }

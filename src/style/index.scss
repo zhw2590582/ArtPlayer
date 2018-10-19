@@ -123,7 +123,6 @@
             height: 5px;
             padding: 1px 0;
             cursor: pointer;
-            box-sizing: border-box;
 
             .art-control-progress-inner {
                 position: relative;
@@ -131,7 +130,7 @@
                 background: rgba(255,255,255,.2);
                 .art-progress-loaded {
                     position: absolute;
-                    z-index: 1;
+                    z-index: 10;
                     left: 0;
                     top: 0;
                     right: 0;
@@ -139,25 +138,43 @@
                     height: 100%;
                     width: 0;
                     background: rgba(255,255,255,.4);
-                    transform-origin: 0 0;
                 }
     
                 .art-progress-played {
                     position: absolute;
-                    z-index: 2;
+                    z-index: 20;
                     left: 0;
                     top: 0;
                     right: 0;
                     bottom: 0;
                     height: 100%;
                     width: 0;
-                    transform-origin: 0 0;
+                }
+
+                .art-progress-highlight {
+                    position: absolute;
+                    z-index: 30;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: 0;
+                    span {
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 7px;
+                        height: 3px;
+                        background: #fff;
+                        border-radius: 3px;
+                    }
                 }
     
                 .art-progress-indicator {
                     display: none;
                     position: absolute;
-                    z-index: 3;
+                    z-index: 40;
                     top: -5px;
                     left: -6.5px;
                     width: 13px;
@@ -172,7 +189,7 @@
                 .art-progress-timer {
                     display: none;
                     position: absolute;
-                    z-index: 4;
+                    z-index: 50;
                     top: -25px;
                     left: 0;
                     width: 40px;

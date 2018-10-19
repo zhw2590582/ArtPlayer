@@ -109,10 +109,6 @@ export default class Player {
     this.art.emit('seek', newTime);
   }
 
-  currentTime() {
-    return this.art.refs.$video.currentTime;
-  }
-
   volume(percentage) {
     const { $video } = this.art.refs;
     if (percentage) {
