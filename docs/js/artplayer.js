@@ -503,6 +503,9 @@
         this.art.on('video:loadeddata', function () {
           _this.art.loading.hide();
         });
+        this.art.on('video:waiting', function () {
+          _this.art.loading.show();
+        });
         this.art.on('video:seeking', function () {
           _this.art.loading.show();
         });
@@ -852,9 +855,6 @@
             _this.showTime(event);
           }
         });
-        proxy(this.option.ref, 'mouseleave', function (event) {
-          console.log(event);
-        });
         proxy(this.option.ref, 'click', function (event) {
           if (event.target !== _this.$indicator) {
             var _this$getPos = _this.getPos(event),
@@ -924,7 +924,7 @@
         var _this$option$ref$getB = this.option.ref.getBoundingClientRect(),
             left = _this$option$ref$getB.left;
 
-        var width = Math.max(0, event.x - left);
+        var width = clamp(event.x - left, 0, this.option.ref.clientWidth);
         var second = width / this.option.ref.clientWidth * $video.duration;
         var time = secondToTime(second);
         var percentage = clamp(width / this.option.ref.clientWidth, 0, 1);

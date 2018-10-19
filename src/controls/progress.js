@@ -75,10 +75,6 @@ export default class Progress {
       }
     });
 
-    proxy(this.option.ref, 'mouseleave', event => {
-      console.log(event);
-    });
-
     proxy(this.option.ref, 'click', event => {
       if (event.target !== this.$indicator) {
         const { second, percentage } = this.getPos(event);

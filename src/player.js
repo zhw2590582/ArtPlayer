@@ -36,6 +36,10 @@ export default class Player {
       this.art.loading.hide();
     });
 
+    this.art.on('video:waiting', () => {
+      this.art.loading.show();
+    });
+
     this.art.on('video:seeking', () => {
       this.art.loading.show();
     });
