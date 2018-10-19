@@ -131,7 +131,7 @@ export default class Progress {
   getPos(event) {
     const { $video } = this.art.refs;
     const { left } = this.option.ref.getBoundingClientRect();
-    const width = Math.max(0, event.x - left);
+    const width = clamp(event.x - left, 0, this.option.ref.clientWidth);
     const second = width / this.option.ref.clientWidth * $video.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / this.option.ref.clientWidth, 0, 1);
