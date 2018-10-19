@@ -11,7 +11,7 @@ export default class Player {
   init() {
     const { option } = this.art;
     const { $video } = this.art.refs;
-    $video.controls = true;
+    $video.controls = false;
     $video.poster = option.poster;
     $video.volume = clamp(option.volume, 0, 1);
     $video.autoplay = option.autoplay;
@@ -36,9 +36,14 @@ export default class Player {
       this.art.loading.hide();
     });
 
+    this.art.on('video:seeking', () => {
+      this.art.loading.show();
+    });
+
     this.art.on('video:canplay', () => {
       this.art.controls.show();
       this.art.mask.show();
+      this.art.loading.hide();
       if (this.art.option.autoplay) {
         const promise = this.play();
         if (promise !== undefined) {
@@ -50,21 +55,25 @@ export default class Player {
     });
 
     this.art.on('video:playing', () => {
-      this.art.playing = true;
+      this.art.isPlaying = true;
       this.art.controls.hide();
       this.art.mask.hide();
     });
 
     this.art.on('video:pause', () => {
-      this.art.playing = false;
+      this.art.isPlaying = false;
       this.art.controls.show();
       this.art.mask.show();
     });
 
     this.art.on('video:ended', () => {
-      this.art.playing = false;
+      this.art.isPlaying = false;
       this.art.controls.show();
       this.art.mask.show();
+    });
+
+    this.art.on('video:error', () => {
+      this.art.isPlaying = false;
     });
   }
 
@@ -82,7 +91,7 @@ export default class Player {
   }
 
   toggle() {
-    if (this.art.playing) {
+    if (this.art.isPlaying) {
       this.pause();
     } else {
       this.play();

@@ -229,13 +229,17 @@
       return getExt(url.split('?')[0]);
     }
 
+    if (url.includes('#')) {
+      return getExt(url.split('#')[0]);
+    }
+
     return url.trim().toLowerCase().split('.').pop();
   }
   function append(parent, child) {
     if (child instanceof Element) {
       parent.appendChild(child);
     } else {
-      parent.innerHTML = child;
+      parent.insertAdjacentHTML('beforeend', child);
     }
 
     return parent;
@@ -245,6 +249,16 @@
       element.style[key] = styles[key];
     });
     return element;
+  }
+  function secondToTime(second) {
+    var add0 = function add0(num) {
+      return num < 10 ? "0".concat(num) : String(num);
+    };
+
+    var hour = Math.floor(second / 3600);
+    var min = Math.floor((second - hour * 3600) / 60);
+    var sec = Math.floor(second - hour * 3600 - min * 60);
+    return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
   }
 
   function validOption(option) {
@@ -383,7 +397,8 @@
       key: "init",
       value: function init() {
         var refs = this.art.refs;
-        refs.$container.innerHTML = "\n        <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\"></div>\n      ";
+        refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+        refs.$player = refs.$container.querySelector('.artplayer-video-player');
         refs.$video = refs.$container.querySelector('.artplayer-video');
         refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
         refs.$bottom = refs.$container.querySelector('.artplayer-bottom');
@@ -461,7 +476,7 @@
       value: function init() {
         var option = this.art.option;
         var $video = this.art.refs.$video;
-        $video.controls = true;
+        $video.controls = false;
         $video.poster = option.poster;
         $video.volume = clamp(option.volume, 0, 1);
         $video.autoplay = option.autoplay;
@@ -487,10 +502,15 @@
         this.art.on('video:loadeddata', function () {
           _this.art.loading.hide();
         });
+        this.art.on('video:seeking', function () {
+          _this.art.loading.show();
+        });
         this.art.on('video:canplay', function () {
           _this.art.controls.show();
 
           _this.art.mask.show();
+
+          _this.art.loading.hide();
 
           if (_this.art.option.autoplay) {
             var promise = _this.play();
@@ -503,25 +523,28 @@
           }
         });
         this.art.on('video:playing', function () {
-          _this.art.playing = true;
+          _this.art.isPlaying = true;
 
           _this.art.controls.hide();
 
           _this.art.mask.hide();
         });
         this.art.on('video:pause', function () {
-          _this.art.playing = false;
+          _this.art.isPlaying = false;
 
           _this.art.controls.show();
 
           _this.art.mask.show();
         });
         this.art.on('video:ended', function () {
-          _this.art.playing = false;
+          _this.art.isPlaying = false;
 
           _this.art.controls.show();
 
           _this.art.mask.show();
+        });
+        this.art.on('video:error', function () {
+          _this.art.isPlaying = false;
         });
       }
     }, {
@@ -542,7 +565,7 @@
     }, {
       key: "toggle",
       value: function toggle() {
-        if (this.art.playing) {
+        if (this.art.isPlaying) {
           this.pause();
         } else {
           this.play();
@@ -778,12 +801,142 @@
     this.option = option;
   };
 
-  var Progress = function Progress(art, option) {
-    classCallCheck(this, Progress);
+  var Progress =
+  /*#__PURE__*/
+  function () {
+    function Progress(art, option) {
+      classCallCheck(this, Progress);
 
-    this.art = art;
-    this.option = option;
-  };
+      this.art = art;
+      this.option = option;
+      this.getLoaded = this.getLoaded.bind(this);
+      this.getPlayed = this.getPlayed.bind(this);
+      this.getPos = this.getPos.bind(this);
+      this.set = this.set.bind(this);
+      this.init();
+    }
+
+    createClass(Progress, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+
+        var _this$art = this.art,
+            theme = _this$art.option.theme,
+            proxy = _this$art.events.proxy,
+            player = _this$art.player;
+        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-timer\">00:00</div>\n      </div>\n    "));
+        this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
+        this.$played = this.option.ref.querySelector('.art-progress-played');
+        this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
+        this.$timer = this.option.ref.querySelector('.art-progress-timer');
+        this.art.on('video:canplay', function () {
+          _this.set('loaded', _this.getLoaded());
+        });
+        this.art.on('video:progress', function () {
+          _this.set('loaded', _this.getLoaded());
+        });
+        this.art.on('video:timeupdate', function () {
+          _this.set('played', _this.getPlayed());
+        });
+        this.art.on('video:ended', function () {
+          _this.set('played', 1);
+        });
+        proxy(this.option.ref, 'mousemove', function (event) {
+          var _this$getPos = _this.getPos(event),
+              width = _this$getPos.width,
+              time = _this$getPos.time;
+
+          if (width <= 20) {
+            _this.$timer.style.left = 0;
+          } else if (width > _this.option.ref.clientWidth - 20) {
+            _this.$timer.style.left = "".concat(_this.option.ref.clientWidth - 40, "px");
+          } else {
+            _this.$timer.style.left = "".concat(width - 20, "px");
+          }
+
+          _this.$timer.innerHTML = time;
+        });
+        proxy(this.option.ref, 'click', function (event) {
+          if (event.target !== _this.$indicator) {
+            var _this$getPos2 = _this.getPos(event),
+                second = _this$getPos2.second,
+                percentage = _this$getPos2.percentage;
+
+            _this.set('played', percentage);
+
+            player.seek(second);
+          }
+        });
+        this.isDroging = false;
+        proxy(this.$indicator, 'mousedown', function () {
+          _this.isDroging = true;
+        });
+        proxy(document, 'mousemove', function (event) {
+          if (_this.isDroging) {
+            var _this$getPos3 = _this.getPos(event),
+                second = _this$getPos3.second,
+                percentage = _this$getPos3.percentage;
+
+            _this.$indicator.classList.add('show-indicator');
+
+            _this.set('played', percentage);
+
+            player.seek(second);
+          }
+        });
+        proxy(document, 'mouseup', function () {
+          if (_this.isDroging) {
+            _this.isDroging = false;
+
+            _this.$indicator.classList.remove('show-indicator');
+          }
+        });
+      }
+    }, {
+      key: "getPos",
+      value: function getPos(event) {
+        var $video = this.art.refs.$video;
+
+        var _this$option$ref$getB = this.option.ref.getBoundingClientRect(),
+            left = _this$option$ref$getB.left;
+
+        var width = event.x - left;
+        var second = width / this.option.ref.clientWidth * $video.duration;
+        var time = secondToTime(second);
+        var percentage = clamp(width / this.option.ref.clientWidth, 0, 1);
+        return {
+          second: second,
+          time: time,
+          width: width,
+          percentage: percentage
+        };
+      }
+    }, {
+      key: "getPlayed",
+      value: function getPlayed() {
+        var $video = this.art.refs.$video;
+        return $video.currentTime / $video.duration;
+      }
+    }, {
+      key: "getLoaded",
+      value: function getLoaded() {
+        var $video = this.art.refs.$video;
+        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+      }
+    }, {
+      key: "set",
+      value: function set(type, percentage) {
+        this["$".concat(type)].style.width = "".concat(percentage * 100, "%");
+
+        if (type === 'played') {
+          this.$indicator.style.left = "calc(".concat(percentage * 100, "% - 6.5px)");
+        }
+      }
+    }]);
+
+    return Progress;
+  }();
 
   var Screenshot = function Screenshot(art, option) {
     classCallCheck(this, Screenshot);
@@ -846,21 +999,21 @@
         this.add({
           control: Progress,
           disable: false,
-          html: 'Progress',
+          html: '',
           position: 'top',
           index: 10
         });
         this.add({
           control: Highlight,
           disable: false,
-          html: 'Highlight',
+          html: '<div class="art-progress-highlight"></div>',
           position: 'top',
           index: 20
         });
         this.add({
           control: Screenshot,
           disable: false,
-          html: 'Screenshot',
+          html: '<div class="art-progress-screenshot"></div>',
           position: 'top',
           index: 30
         });
@@ -1011,14 +1164,14 @@
     }, {
       key: "show",
       value: function show() {
-        var $container = this.art.refs.$container;
-        $container.classList.add('controls-show');
+        var $player = this.art.refs.$player;
+        $player.classList.add('controls-show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $container = this.art.refs.$container;
-        $container.classList.remove('controls-show');
+        var $player = this.art.refs.$player;
+        $player.classList.remove('controls-show');
       }
     }]);
 
@@ -1062,9 +1215,9 @@
             _this.hide();
           }
         });
-        proxy(refs.$container, 'contextmenu', function (event) {
+        proxy(refs.$player, 'contextmenu', function (event) {
           event.preventDefault();
-          _this.art.focus = true;
+          _this.art.isFocus = true;
 
           if (!refs.$contextmenu) {
             _this.creatMenu();
@@ -1074,7 +1227,7 @@
 
           _this.setPos(event);
         });
-        proxy(refs.$container, 'click', function (event) {
+        proxy(refs.$player, 'click', function (event) {
           if (refs.$contextmenu && !event.path.includes(refs.$contextmenu)) {
             _this.hide();
           }
@@ -1111,7 +1264,7 @@
 
           append(refs.$contextmenu, $menu);
         });
-        append(refs.$container, refs.$contextmenu);
+        append(refs.$player, refs.$contextmenu);
       }
     }, {
       key: "setPos",
@@ -1120,11 +1273,11 @@
         var mouseX = event.clientX;
         var mouseY = event.clientY;
 
-        var _refs$$container$getB = refs.$container.getBoundingClientRect(),
-            cHeight = _refs$$container$getB.height,
-            cWidth = _refs$$container$getB.width,
-            cLeft = _refs$$container$getB.left,
-            cTop = _refs$$container$getB.top;
+        var _refs$$player$getBoun = refs.$player.getBoundingClientRect(),
+            cHeight = _refs$$player$getBoun.height,
+            cWidth = _refs$$player$getBoun.width,
+            cLeft = _refs$$player$getBoun.left,
+            cTop = _refs$$player$getBoun.top;
 
         var _refs$$contextmenu$ge = refs.$contextmenu.getBoundingClientRect(),
             mHeight = _refs$$contextmenu$ge.height,
@@ -1342,11 +1495,24 @@
     createClass(Events, [{
       key: "proxy",
       value: function proxy(target, name, callback) {
+        var _this = this;
+
         var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+        if (Array.isArray(name)) {
+          name.forEach(function (item) {
+            return _this.proxy(target, item, callback, option);
+          });
+        }
+
         target.addEventListener(name, callback, option);
-        this.destroyEvents.push(function () {
+
+        var destroy = function destroy() {
           target.removeEventListener(name, callback, option);
-        });
+        };
+
+        this.destroyEvents.push(destroy);
+        return destroy;
       }
     }, {
       key: "destroy",
@@ -1382,13 +1548,13 @@
             player = _this$art.player,
             notice = _this$art.notice,
             i18n = _this$art.i18n,
-            $container = _this$art.refs.$container,
+            $player = _this$art.refs.$player,
             proxy = _this$art.events.proxy;
         proxy(document, 'click', function (event) {
-          _this.art.focus = event.path.indexOf($container) > -1;
+          _this.art.isFocus = event.path.indexOf($player) > -1;
         });
         proxy(window, 'keydown', function (event) {
-          if (_this.art.focus) {
+          if (_this.art.isFocus) {
             var tag = document.activeElement.tagName.toUpperCase();
             var editable = document.activeElement.getAttribute('contenteditable');
 
@@ -1678,8 +1844,8 @@
     createClass(Artplayer, [{
       key: "init",
       value: function init() {
-        this.focus = false;
-        this.playing = false;
+        this.isFocus = false;
+        this.isPlaying = false;
         this.refs = {};
 
         if (this.option.container instanceof Element) {
@@ -1688,7 +1854,6 @@
           this.refs.$container = document.querySelector(this.option.container);
         }
 
-        this.refs.$container.classList.add('artplayer-container');
         this.template = new Template(this);
         this.i18n = new I18n(this);
         this.events = new Events(this);
@@ -1712,7 +1877,6 @@
       key: "destroy",
       value: function destroy() {
         this.events.destroy();
-        this.refs.$container.classList.remove('artplayer-container');
         this.refs.$container.innerHTML = '';
         instances.splice(instances.indexOf(this), 1);
         this.emit('destroy');
@@ -1763,7 +1927,7 @@
           layers: [],
           contextmenu: [],
           loading: '',
-          theme: '#1aafff',
+          theme: '#f00',
           hotkey: true,
           subtitle: {
             url: '',

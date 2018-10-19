@@ -29,7 +29,7 @@ export default class Controls {
     this.add({
       control: Progress,
       disable: false,
-      html: 'Progress',
+      html: '',
       position: 'top',
       index: 10
     });
@@ -37,7 +37,7 @@ export default class Controls {
     this.add({
       control: Highlight,
       disable: false,
-      html: 'Highlight',
+      html: '<div class="art-progress-highlight"></div>',
       position: 'top',
       index: 20
     });
@@ -45,7 +45,7 @@ export default class Controls {
     this.add({
       control: Screenshot,
       disable: false,
-      html: 'Screenshot',
+      html: '<div class="art-progress-screenshot"></div>',
       position: 'top',
       index: 30
     });
@@ -194,12 +194,12 @@ export default class Controls {
   }
 
   show() {
-    const { $container } = this.art.refs;
-    $container.classList.add('controls-show');
+    const { $player } = this.art.refs;
+    $player.classList.add('controls-show');
   }
 
   hide() {
-    const { $container } = this.art.refs;
-    $container.classList.remove('controls-show');
+    const { $player } = this.art.refs;
+    $player.classList.remove('controls-show');
   }
 }

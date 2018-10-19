@@ -37,9 +37,9 @@ export default class Contextmenu {
       }
     );
 
-    proxy(refs.$container, 'contextmenu', event => {
+    proxy(refs.$player, 'contextmenu', event => {
       event.preventDefault();
-      this.art.focus = true;
+      this.art.isFocus = true;
       if (!refs.$contextmenu) {
         this.creatMenu();
       }
@@ -47,7 +47,7 @@ export default class Contextmenu {
       this.setPos(event);
     });
 
-    proxy(refs.$container, 'click', event => {
+    proxy(refs.$player, 'click', event => {
       if (refs.$contextmenu && !event.path.includes(refs.$contextmenu)) {
         this.hide();
       }
@@ -79,14 +79,14 @@ export default class Contextmenu {
       }
       append(refs.$contextmenu, $menu);
     });
-    append(refs.$container, refs.$contextmenu);
+    append(refs.$player, refs.$contextmenu);
   }
 
   setPos(event) {
     const { refs } = this.art;
     const mouseX = event.clientX;
     const mouseY = event.clientY;
-    const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = refs.$container.getBoundingClientRect();
+    const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = refs.$player.getBoundingClientRect();
     const { height: mHeight, width: mWidth } = refs.$contextmenu.getBoundingClientRect();
     let menuLeft = mouseX - cLeft;
     let menuTop = mouseY - cTop;

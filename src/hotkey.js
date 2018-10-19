@@ -11,16 +11,16 @@ export default class Hotkey {
       player,
       notice,
       i18n,
-      refs: { $container },
+      refs: { $player },
       events: { proxy }
     } = this.art;
 
     proxy(document, 'click', event => {
-      this.art.focus = event.path.indexOf($container) > -1;
+      this.art.isFocus = event.path.indexOf($player) > -1;
     });
 
     proxy(window, 'keydown', event => {
-      if (this.art.focus) {
+      if (this.art.isFocus) {
         const tag = document.activeElement.tagName.toUpperCase();
         const editable = document.activeElement.getAttribute('contenteditable');
         if (

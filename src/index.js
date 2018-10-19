@@ -53,7 +53,7 @@ class Artplayer extends Emitter {
       layers: [],
       contextmenu: [],
       loading: '',
-      theme: '#1aafff',
+      theme: '#f00',
       hotkey: true,
       subtitle: {
         url: '',
@@ -82,8 +82,8 @@ class Artplayer extends Emitter {
   }
 
   init() {
-    this.focus = false;
-    this.playing = false;
+    this.isFocus = false;
+    this.isPlaying = false;
     this.refs = {};
 
     if (this.option.container instanceof Element) {
@@ -91,7 +91,6 @@ class Artplayer extends Emitter {
     } else {
       this.refs.$container = document.querySelector(this.option.container);
     }
-    this.refs.$container.classList.add('artplayer-container');
 
     this.template = new Template(this);
     this.i18n = new I18n(this);
@@ -116,7 +115,6 @@ class Artplayer extends Emitter {
 
   destroy() {
     this.events.destroy();
-    this.refs.$container.classList.remove('artplayer-container');
     this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
     this.emit('destroy');
