@@ -60,15 +60,11 @@ export default class Progress {
     });
 
     proxy(this.option.ref, 'mousemove', event => {
-      const { width, time } = this.getPos(event);
-      if (width <= 20) {
-        this.$timer.style.left = 0;
-      } else if (width > this.option.ref.clientWidth - 20) {
-        this.$timer.style.left = `${this.option.ref.clientWidth - 40}px`;
+      if (event.path.indexOf(this.$highlight) > -1) {
+        this.showHighlight();
       } else {
-        this.$timer.style.left = `${width - 20}px`;
+        this.showTime(event);
       }
-      this.$timer.innerHTML = time;
     });
 
     proxy(this.option.ref, 'click', event => {
@@ -98,6 +94,22 @@ export default class Progress {
         this.$indicator.classList.remove('show-indicator');
       }
     });
+  }
+
+  showHighlight() {
+    console.log('showHighlight');
+  }
+
+  showTime(event) {
+    const { width, time } = this.getPos(event);
+    if (width <= 20) {
+      this.$timer.style.left = 0;
+    } else if (width > this.option.ref.clientWidth - 20) {
+      this.$timer.style.left = `${this.option.ref.clientWidth - 40}px`;
+    } else {
+      this.$timer.style.left = `${width - 20}px`;
+    }
+    this.$timer.innerHTML = time;
   }
 
   getPos(event) {

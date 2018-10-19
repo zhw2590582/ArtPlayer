@@ -841,25 +841,17 @@
           _this.set('played', 1);
         });
         proxy(this.option.ref, 'mousemove', function (event) {
-          var _this$getPos = _this.getPos(event),
-              width = _this$getPos.width,
-              time = _this$getPos.time;
-
-          if (width <= 20) {
-            _this.$timer.style.left = 0;
-          } else if (width > _this.option.ref.clientWidth - 20) {
-            _this.$timer.style.left = "".concat(_this.option.ref.clientWidth - 40, "px");
+          if (event.path.indexOf(_this.$highlight) > -1) {
+            _this.showHighlight();
           } else {
-            _this.$timer.style.left = "".concat(width - 20, "px");
+            _this.showTime(event);
           }
-
-          _this.$timer.innerHTML = time;
         });
         proxy(this.option.ref, 'click', function (event) {
           if (event.target !== _this.$indicator) {
-            var _this$getPos2 = _this.getPos(event),
-                second = _this$getPos2.second,
-                percentage = _this$getPos2.percentage;
+            var _this$getPos = _this.getPos(event),
+                second = _this$getPos.second,
+                percentage = _this$getPos.percentage;
 
             _this.set('played', percentage);
 
@@ -871,9 +863,9 @@
         });
         proxy(document, 'mousemove', function (event) {
           if (_this.isDroging) {
-            var _this$getPos3 = _this.getPos(event),
-                second = _this$getPos3.second,
-                percentage = _this$getPos3.percentage;
+            var _this$getPos2 = _this.getPos(event),
+                second = _this$getPos2.second,
+                percentage = _this$getPos2.percentage;
 
             _this.$indicator.classList.add('show-indicator');
 
@@ -889,6 +881,28 @@
             _this.$indicator.classList.remove('show-indicator');
           }
         });
+      }
+    }, {
+      key: "showHighlight",
+      value: function showHighlight() {
+        console.log('showHighlight');
+      }
+    }, {
+      key: "showTime",
+      value: function showTime(event) {
+        var _this$getPos3 = this.getPos(event),
+            width = _this$getPos3.width,
+            time = _this$getPos3.time;
+
+        if (width <= 20) {
+          this.$timer.style.left = 0;
+        } else if (width > this.option.ref.clientWidth - 20) {
+          this.$timer.style.left = "".concat(this.option.ref.clientWidth - 40, "px");
+        } else {
+          this.$timer.style.left = "".concat(width - 20, "px");
+        }
+
+        this.$timer.innerHTML = time;
       }
     }, {
       key: "getPos",
