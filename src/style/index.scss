@@ -118,107 +118,109 @@
         box-sizing: border-box;
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
     
-        .art-control-progress {
+        .artplayer-progress {
             position: relative;
-            height: 5px;
-            padding: 1px 0;
-            cursor: pointer;
-
-            .art-control-progress-inner {
+            .art-control-progress {
                 position: relative;
-                height: 100%;
-                background: rgba(255,255,255,.2);
-                .art-progress-loaded {
-                    position: absolute;
-                    z-index: 10;
-                    left: 0;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    height: 100%;
-                    width: 0;
-                    background: rgba(255,255,255,.4);
-                }
+                height: 5px;
+                padding: 1px 0;
+                cursor: pointer;
     
-                .art-progress-played {
-                    position: absolute;
-                    z-index: 20;
-                    left: 0;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
+                .art-control-progress-inner {
+                    position: relative;
                     height: 100%;
-                    width: 0;
-                }
-
-                .art-progress-highlight {
-                    position: absolute;
-                    z-index: 30;
-                    left: 0;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    height: 0;
-
-                    span {
-                        display: inline-block;
+                    background: rgba(255,255,255,.2);
+                    .art-progress-loaded {
                         position: absolute;
+                        z-index: 10;
                         left: 0;
                         top: 0;
-                        width: 7px;
-                        height: 3px;
-                        background: #fff;
+                        right: 0;
+                        bottom: 0;
+                        height: 100%;
+                        width: 0;
+                        background: rgba(255,255,255,.4);
+                    }
+        
+                    .art-progress-played {
+                        position: absolute;
+                        z-index: 20;
+                        left: 0;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 100%;
+                        width: 0;
+                    }
+    
+                    .art-progress-highlight {
+                        position: absolute;
+                        z-index: 30;
+                        left: 0;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        height: 0;
+    
+                        span {
+                            display: inline-block;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 7px;
+                            height: 3px;
+                            background: #fff;
+                            border-radius: 3px;
+                        }
+                    }
+        
+                    .art-progress-indicator {
+                        display: none;
+                        position: absolute;
+                        z-index: 40;
+                        top: -5px;
+                        left: -6.5px;
+                        width: 13px;
+                        height: 13px;
+                        border-radius: 50%;
+    
+                        &.show-indicator {
+                            display: block;
+                        }
+                    }
+        
+                    .art-progress-tip {
+                        display: none;
+                        position: absolute;
+                        z-index: 50;
+                        top: -25px;
+                        left: 0;
+                        height: 20px;
+                        padding: 0 5px;
+                        line-height: 20px;
+                        color: #fff;
+                        font-size: 12px;
+                        text-align: center;
+                        background: rgba(0,0,0,.7);
                         border-radius: 3px;
+                        font-weight: bold;
                     }
                 }
-
-                .art-progress-thumbnails {
-                    // display: none;
-                    position: absolute;
-                    z-index: 50;
-                    top: -95px;
-                    left: 0;
-                    pointer-events: none;
-                    background-color: rgba(0,0,0,.7);
-                }
     
-                .art-progress-indicator {
-                    display: none;
-                    position: absolute;
-                    z-index: 40;
-                    top: -5px;
-                    left: -6.5px;
-                    width: 13px;
-                    height: 13px;
-                    border-radius: 50%;
-
-                    &.show-indicator {
+                &:hover {
+                    .art-progress-indicator, .art-progress-tip {
                         display: block;
                     }
                 }
-    
-                .art-progress-tip {
-                    display: none;
-                    position: absolute;
-                    z-index: 50;
-                    top: -25px;
-                    left: 0;
-                    height: 20px;
-                    padding: 0 5px;
-                    line-height: 20px;
-                    color: #fff;
-                    font-size: 12px;
-                    text-align: center;
-                    background: rgba(0,0,0,.7);
-                    border-radius: 3px;
-                    font-weight: bold;
-                }
             }
-
-            &:hover {
-                .art-progress-indicator, .art-progress-tip {
-                    display: block;
-                }
+    
+            .art-control-thumbnails {
+                display: none;
+                position: absolute;
+                top: -95px;
+                left: 0;
+                pointer-events: none;
+                background-color: rgba(0,0,0,.7);
             }
         }
     }
@@ -232,7 +234,7 @@
 
     .artplayer-notice {
         display: none;
-        font-size: 13px;
+        font-size: 14px;
         position: absolute;
         z-index: 60;
         left: 10px;
@@ -240,6 +242,7 @@
         height: 30px;
         line-height: 30px;
         padding: 0 10px;
+        border-radius: 3px;
         color: #fff;
         background: rgba(0, 0, 0, 0.6);
     }

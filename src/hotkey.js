@@ -9,8 +9,6 @@ export default class Hotkey {
   init() {
     const {
       player,
-      notice,
-      i18n,
       refs: { $player },
       events: { proxy }
     } = this.art;
@@ -29,29 +27,22 @@ export default class Hotkey {
           editable !== '' &&
           editable !== 'true'
         ) {
-          let percentage;
           switch (event.keyCode) {
             case 39:
               event.preventDefault();
               player.seek(player.currentTime() + 10);
-              notice.show(i18n.get('Fast forward 10 seconds'), true);
               break;
             case 37:
               event.preventDefault();
               player.seek(player.currentTime() - 10);
-              notice.show(i18n.get('Rewind 10 seconds'), true);
               break;
             case 38:
               event.preventDefault();
-              percentage = player.volume() + 0.1;
-              player.volume(percentage);
-              notice.show(i18n.get('10% increase in volume'), true);
+              player.volume(player.volume() + 0.05);
               break;
             case 40:
               event.preventDefault();
-              percentage = player.volume() - 0.1;
-              player.volume(percentage);
-              notice.show(i18n.get('10% reduction in volume'), true);
+              player.volume(player.volume() - 0.05);
               break;
             case 32:
               event.preventDefault();

@@ -424,20 +424,20 @@
       'Video info': '视频统计信息',
       'Close': '关闭',
       'Video load failed': '视频加载失败',
-      'Fast forward 10 seconds': '快进10秒',
-      'Rewind 10 seconds': '快退10秒',
-      '10% increase in volume': '音量增加10%',
-      '10% reduction in volume': '音量减少10%'
+      'Volume': '音量',
+      'Start': '开始',
+      'Pause': '暂停',
+      'Rate': '速度'
     },
     'zh-tw': {
       'About author': '關於作者',
       'Video info': '影片統計訊息',
       'Close': '關閉',
       'Video load failed': '影片載入失敗',
-      'Fast forward 10 seconds': '快進10秒',
-      'Rewind 10 seconds': '快退10秒',
-      '10% increase in volume': '音量增加10%',
-      '10% reduction in volume': '音量減少10%'
+      'Volume': '音量',
+      'Start': '開始',
+      'Pause': '暫停',
+      'Rate': '速度'
     }
   };
 
@@ -449,13 +449,25 @@
 
       classCallCheck(this, I18n);
 
-      this.language = i18nMap[option.lang.toLowerCase()] || {};
+      this.option = option;
+      this.init();
     }
 
     createClass(I18n, [{
+      key: "init",
+      value: function init() {
+        this.language = i18nMap[this.option.lang.toLowerCase()] || {};
+      }
+    }, {
       key: "get",
       value: function get(key) {
         return this.language[key] || key;
+      }
+    }, {
+      key: "update",
+      value: function update(callback) {
+        i18nMap = callback(i18nMap);
+        this.init();
       }
     }]);
 
@@ -550,21 +562,31 @@
         });
         this.art.on('video:error', function () {
           _this.art.isPlaying = false;
+
+          _this.art.loading.hide();
         });
       }
     }, {
       key: "play",
       value: function play() {
-        var $video = this.art.refs.$video;
+        var _this$art2 = this.art,
+            $video = _this$art2.refs.$video,
+            i18n = _this$art2.i18n,
+            notice = _this$art2.notice;
         var promise = $video.play();
+        notice.show(i18n.get('Start'));
         this.art.emit('play', $video);
         return promise;
       }
     }, {
       key: "pause",
       value: function pause() {
-        var $video = this.art.refs.$video;
+        var _this$art3 = this.art,
+            $video = _this$art3.refs.$video,
+            i18n = _this$art3.i18n,
+            notice = _this$art3.notice;
         $video.pause();
+        notice.show(i18n.get('Pause'));
         this.art.emit('pause', $video);
       }
     }, {
@@ -579,7 +601,9 @@
     }, {
       key: "seek",
       value: function seek(time) {
-        var $video = this.art.refs.$video;
+        var _this$art4 = this.art,
+            $video = _this$art4.refs.$video,
+            notice = _this$art4.notice;
         var newTime = Math.max(time, 0);
 
         if ($video.duration) {
@@ -587,41 +611,46 @@
         }
 
         $video.currentTime = newTime;
+        notice.show("".concat(secondToTime(newTime), " / ").concat(secondToTime($video.duration)));
         this.art.emit('seek', newTime);
       }
     }, {
       key: "volume",
       value: function volume(percentage) {
-        var $video = this.art.refs.$video;
+        var _this$art5 = this.art,
+            $video = _this$art5.refs.$video,
+            i18n = _this$art5.i18n,
+            notice = _this$art5.notice;
 
         if (percentage) {
           $video.volume = clamp(percentage, 0, 1);
+          notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100)));
+          this.art.emit('volume', $video.volume);
         }
 
-        this.art.emit('volume', $video.volume);
+        return $video.volume;
       }
     }, {
-      key: "switchVolumeIcon",
-      value: function switchVolumeIcon() {//
+      key: "currentTime",
+      value: function currentTime() {
+        return this.art.refs.$video.currentTime;
       }
     }, {
-      key: "switchVideo",
-      value: function switchVideo() {//
+      key: "duration",
+      value: function duration() {
+        return this.art.refs.$video.duration;
       }
     }, {
-      key: "switchQuality",
-      value: function switchQuality() {//
-      }
-    }, {
-      key: "resize",
-      value: function resize() {//
-      }
-    }, {
-      key: "speed",
-      value: function speed(rate) {
-        var $video = this.art.refs.$video;
-        $video.playbackRate = rate;
-        this.art.emit('speed', rate);
+      key: "playbackRate",
+      value: function playbackRate(rate) {
+        var _this$art6 = this.art,
+            $video = _this$art6.refs.$video,
+            i18n = _this$art6.i18n,
+            notice = _this$art6.notice;
+        var newRate = clamp(rate, 0.1, 10);
+        $video.playbackRate = newRate;
+        notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate, "x"));
+        this.art.emit('playbackRate', newRate);
       }
     }]);
 
@@ -804,7 +833,6 @@
       this.isDroging = false;
       this.getLoaded = this.getLoaded.bind(this);
       this.getPlayed = this.getPlayed.bind(this);
-      this.getPos = this.getPos.bind(this);
       this.set = this.set.bind(this);
       this.init();
     }
@@ -821,11 +849,10 @@
             proxy = _this$art.events.proxy,
             $video = _this$art.refs.$video,
             player = _this$art.player;
-        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\"></div>\n        <div class=\"art-progress-thumbnails\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-tip art-tip\"></div>\n      </div>\n    "));
+        append(this.option.ref, "\n        <div class=\"art-control-progress-inner\">\n          <div class=\"art-progress-loaded\"></div>\n          <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n          <div class=\"art-progress-highlight\"></div>\n          <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n          <div class=\"art-progress-tip art-tip\"></div>\n        </div>\n      "));
         this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
         this.$played = this.option.ref.querySelector('.art-progress-played');
         this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
-        this.$thumbnails = this.option.ref.querySelector('.art-progress-thumbnails');
         this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
         this.$tip = this.option.ref.querySelector('.art-progress-tip');
         this.art.on('video:canplay', function () {
@@ -853,25 +880,15 @@
           } else {
             _this.showTime(event);
           }
-
-          if (_this.art.option.thumbnails.url) {
-            _this.$thumbnails.style.display = 'block';
-
-            _this.showThumbnails(event);
-          }
         });
         proxy(this.option.ref, 'mouseout', function () {
           _this.$tip.style.display = 'none';
-
-          if (_this.art.option.thumbnails.url) {
-            _this.$thumbnails.style.display = 'none';
-          }
         });
         proxy(this.option.ref, 'click', function (event) {
           if (event.target !== _this.$indicator) {
-            var _this$getPos = _this.getPos(event),
-                second = _this$getPos.second,
-                percentage = _this$getPos.percentage;
+            var _this$getPosFromEvent = _this.getPosFromEvent(event),
+                second = _this$getPosFromEvent.second,
+                percentage = _this$getPosFromEvent.percentage;
 
             _this.set('played', percentage);
 
@@ -883,9 +900,9 @@
         });
         proxy(document, 'mousemove', function (event) {
           if (_this.isDroging) {
-            var _this$getPos2 = _this.getPos(event),
-                second = _this$getPos2.second,
-                percentage = _this$getPos2.percentage;
+            var _this$getPosFromEvent2 = _this.getPosFromEvent(event),
+                second = _this$getPosFromEvent2.second,
+                percentage = _this$getPosFromEvent2.percentage;
 
             _this.$indicator.classList.add('show-indicator');
 
@@ -916,9 +933,9 @@
     }, {
       key: "showTime",
       value: function showTime(event) {
-        var _this$getPos3 = this.getPos(event),
-            width = _this$getPos3.width,
-            time = _this$getPos3.time;
+        var _this$getPosFromEvent3 = this.getPosFromEvent(event),
+            width = _this$getPosFromEvent3.width,
+            time = _this$getPosFromEvent3.time;
 
         var tipWidth = this.$tip.clientWidth;
         this.$tip.innerHTML = time;
@@ -930,52 +947,6 @@
         } else {
           this.$tip.style.left = "".concat(width - tipWidth / 2, "px");
         }
-      }
-    }, {
-      key: "showThumbnails",
-      value: function showThumbnails(event) {
-        var _this$getPos4 = this.getPos(event),
-            posWidth = _this$getPos4.width;
-
-        var _this$art$option$thum = this.art.option.thumbnails,
-            url = _this$art$option$thum.url,
-            height = _this$art$option$thum.height,
-            width = _this$art$option$thum.width,
-            number = _this$art$option$thum.number;
-        this.$thumbnails.style.backgroundImage = "url(".concat(url, ")");
-        this.$thumbnails.style.height = "".concat(height, "px");
-        this.$thumbnails.style.width = "".concat(width, "px");
-
-        if (posWidth <= width / 2) {
-          this.$thumbnails.style.left = 0;
-        } else if (posWidth > this.option.ref.clientWidth - width / 2) {
-          this.$thumbnails.style.left = "".concat(this.option.ref.clientWidth - width, "px");
-        } else {
-          this.$thumbnails.style.left = "".concat(posWidth - width / 2, "px");
-        }
-
-        var perWidth = this.option.ref.clientWidth / number;
-        var index = Math.ceil(posWidth / perWidth);
-        this.$thumbnails.style.backgroundPosition = "-".concat(index * width, "px 0");
-      }
-    }, {
-      key: "getPos",
-      value: function getPos(event) {
-        var $video = this.art.refs.$video;
-
-        var _this$option$ref$getB = this.option.ref.getBoundingClientRect(),
-            left = _this$option$ref$getB.left;
-
-        var width = clamp(event.x - left, 0, this.option.ref.clientWidth);
-        var second = width / this.option.ref.clientWidth * $video.duration;
-        var time = secondToTime(second);
-        var percentage = clamp(width / this.option.ref.clientWidth, 0, 1);
-        return {
-          second: second,
-          time: time,
-          width: width,
-          percentage: percentage
-        };
       }
     }, {
       key: "getPlayed",
@@ -1031,6 +1002,67 @@
     this.option = option;
   };
 
+  var Thumbnails =
+  /*#__PURE__*/
+  function () {
+    function Thumbnails(art, option) {
+      classCallCheck(this, Thumbnails);
+
+      this.art = art;
+      this.option = option;
+      this.init();
+    }
+
+    createClass(Thumbnails, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+
+        var _this$art = this.art,
+            $progress = _this$art.refs.$progress,
+            proxy = _this$art.events.proxy;
+        proxy($progress, 'mousemove', function (event) {
+          _this.option.ref.style.display = 'block';
+
+          _this.showThumbnails(event);
+        });
+        proxy($progress, 'mouseout', function () {
+          _this.option.ref.style.display = 'none';
+        });
+      }
+    }, {
+      key: "showThumbnails",
+      value: function showThumbnails(event) {
+        var $progress = this.art.refs.$progress;
+
+        var _this$getPosFromEvent = this.getPosFromEvent(event),
+            posWidth = _this$getPosFromEvent.width;
+
+        var _this$art$option$thum = this.art.option.thumbnails,
+            url = _this$art$option$thum.url,
+            height = _this$art$option$thum.height,
+            width = _this$art$option$thum.width,
+            number = _this$art$option$thum.number;
+        var perWidth = $progress.clientWidth / number;
+        var index = Math.ceil(posWidth / perWidth);
+        this.option.ref.style.backgroundImage = "url(".concat(url, ")");
+        this.option.ref.style.height = "".concat(height, "px");
+        this.option.ref.style.width = "".concat(width, "px");
+        this.option.ref.style.backgroundPosition = "-".concat(index * width, "px 0");
+
+        if (posWidth <= width / 2) {
+          this.option.ref.style.left = 0;
+        } else if (posWidth > $progress.clientWidth - width / 2) {
+          this.option.ref.style.left = "".concat($progress.clientWidth - width, "px");
+        } else {
+          this.option.ref.style.left = "".concat(posWidth - width / 2, "px");
+        }
+      }
+    }]);
+
+    return Thumbnails;
+  }();
+
   var id = 0;
 
   var Controls =
@@ -1059,6 +1091,12 @@
           disable: false,
           position: 'top',
           index: 10
+        });
+        this.add({
+          control: Thumbnails,
+          disable: !this.art.option.thumbnails.url,
+          position: 'top',
+          index: 20
         });
         this.add({
           control: PlayAndPause,
@@ -1187,9 +1225,25 @@
             _this3.art.emit('control:show', option.ref);
           }
         });
-        Object.defineProperty(option.control.prototype, 'addMenu', {
-          value: function value(menus) {
-            console.log(menus);
+        Object.defineProperty(option.control.prototype, 'getPosFromEvent', {
+          value: function value(event) {
+            var _this3$art$refs = _this3.art.refs,
+                $video = _this3$art$refs.$video,
+                $progress = _this3$art$refs.$progress;
+
+            var _$progress$getBoundin = $progress.getBoundingClientRect(),
+                left = _$progress$getBoundin.left;
+
+            var width = clamp(event.x - left, 0, $progress.clientWidth);
+            var second = width / $progress.clientWidth * $video.duration;
+            var time = secondToTime(second);
+            var percentage = clamp(width / $progress.clientWidth, 0, 1);
+            return {
+              second: second,
+              time: time,
+              width: width,
+              percentage: percentage
+            };
           }
         });
       }
@@ -1578,8 +1632,6 @@
 
         var _this$art = this.art,
             player = _this$art.player,
-            notice = _this$art.notice,
-            i18n = _this$art.i18n,
             $player = _this$art.refs.$player,
             proxy = _this$art.events.proxy;
         proxy(document, 'click', function (event) {
@@ -1591,33 +1643,25 @@
             var editable = document.activeElement.getAttribute('contenteditable');
 
             if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
-              var percentage;
-
               switch (event.keyCode) {
                 case 39:
                   event.preventDefault();
                   player.seek(player.currentTime() + 10);
-                  notice.show(i18n.get('Fast forward 10 seconds'), true);
                   break;
 
                 case 37:
                   event.preventDefault();
                   player.seek(player.currentTime() - 10);
-                  notice.show(i18n.get('Rewind 10 seconds'), true);
                   break;
 
                 case 38:
                   event.preventDefault();
-                  percentage = player.volume() + 0.1;
-                  player.volume(percentage);
-                  notice.show(i18n.get('10% increase in volume'), true);
+                  player.volume(player.volume() + 0.05);
                   break;
 
                 case 40:
                   event.preventDefault();
-                  percentage = player.volume() - 0.1;
-                  player.volume(percentage);
-                  notice.show(i18n.get('10% reduction in volume'), true);
+                  player.volume(player.volume() - 0.05);
                   break;
 
                 case 32:
@@ -1771,9 +1815,11 @@
 
     createClass(Notice, [{
       key: "show",
-      value: function show(msg, autoHide) {
+      value: function show(msg) {
         var _this = this;
 
+        var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+        var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
         var $notice = this.art.refs.$notice;
         $notice.style.display = 'block';
         $notice.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
@@ -1782,7 +1828,7 @@
           clearTimeout(this.timer);
           this.timer = setTimeout(function () {
             _this.hide();
-          }, 1000);
+          }, time);
         }
 
         this.art.emit('notice:show', $notice);

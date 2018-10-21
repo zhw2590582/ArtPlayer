@@ -1,4 +1,4 @@
-import { append, secondToTime, clamp } from '../utils';
+import { append } from '../utils';
 
 export default class Progress {
   constructor(art, option) {
@@ -7,7 +7,6 @@ export default class Progress {
     this.isDroging = false;
     this.getLoaded = this.getLoaded.bind(this);
     this.getPlayed = this.getPlayed.bind(this);
-    this.getPos = this.getPos.bind(this);
     this.set = this.set.bind(this);
     this.init();
   }
@@ -23,21 +22,19 @@ export default class Progress {
     append(
       this.option.ref,
       `
-      <div class="art-control-progress-inner">
-        <div class="art-progress-loaded"></div>
-        <div class="art-progress-played" style="background: ${theme}"></div>
-        <div class="art-progress-highlight"></div>
-        <div class="art-progress-thumbnails"></div>
-        <div class="art-progress-indicator" style="background: ${theme}"></div>
-        <div class="art-progress-tip art-tip"></div>
-      </div>
-    `
+        <div class="art-control-progress-inner">
+          <div class="art-progress-loaded"></div>
+          <div class="art-progress-played" style="background: ${theme}"></div>
+          <div class="art-progress-highlight"></div>
+          <div class="art-progress-indicator" style="background: ${theme}"></div>
+          <div class="art-progress-tip art-tip"></div>
+        </div>
+      `
     );
 
     this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
     this.$played = this.option.ref.querySelector('.art-progress-played');
     this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
-    this.$thumbnails = this.option.ref.querySelector('.art-progress-thumbnails');
     this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
     this.$tip = this.option.ref.querySelector('.art-progress-tip');
 
@@ -71,23 +68,15 @@ export default class Progress {
       } else {
         this.showTime(event);
       }
-
-      if (this.art.option.thumbnails.url) {
-        this.$thumbnails.style.display = 'block';
-        this.showThumbnails(event);
-      }
     });
 
     proxy(this.option.ref, 'mouseout', () => {
       this.$tip.style.display = 'none';
-      if (this.art.option.thumbnails.url) {
-        this.$thumbnails.style.display = 'none';
-      }
     });
 
     proxy(this.option.ref, 'click', event => {
       if (event.target !== this.$indicator) {
-        const { second, percentage } = this.getPos(event);
+        const { second, percentage } = this.getPosFromEvent(event);
         this.set('played', percentage);
         player.seek(second);
       }
@@ -99,7 +88,7 @@ export default class Progress {
 
     proxy(document, 'mousemove', event => {
       if (this.isDroging) {
-        const { second, percentage } = this.getPos(event);
+        const { second, percentage } = this.getPosFromEvent(event);
         this.$indicator.classList.add('show-indicator');
         this.set('played', percentage);
         player.seek(second);
@@ -126,7 +115,7 @@ export default class Progress {
   }
 
   showTime(event) {
-    const { width, time } = this.getPos(event);
+    const { width, time } = this.getPosFromEvent(event);
     const tipWidth = this.$tip.clientWidth;
     this.$tip.innerHTML = time;
     if (width <= tipWidth / 2) {
@@ -136,36 +125,6 @@ export default class Progress {
     } else {
       this.$tip.style.left = `${width - tipWidth / 2}px`;
     }
-  }
-
-  showThumbnails(event) {
-    const { width: posWidth } = this.getPos(event);
-    const { url, height, width, number } = this.art.option.thumbnails;
-    this.$thumbnails.style.backgroundImage = `url(${url})`;
-    this.$thumbnails.style.height = `${height}px`;
-    this.$thumbnails.style.width = `${width}px`;
-
-    if (posWidth <= width / 2) {
-      this.$thumbnails.style.left = 0;
-    } else if (posWidth > this.option.ref.clientWidth - width / 2) {
-      this.$thumbnails.style.left = `${this.option.ref.clientWidth - width}px`;
-    } else {
-      this.$thumbnails.style.left = `${posWidth - width / 2}px`;
-    }
-
-    const perWidth = this.option.ref.clientWidth / number;
-    const index = Math.ceil(posWidth / perWidth);
-    this.$thumbnails.style.backgroundPosition = `-${index * width}px 0`;
-  }
-
-  getPos(event) {
-    const { $video } = this.art.refs;
-    const { left } = this.option.ref.getBoundingClientRect();
-    const width = clamp(event.x - left, 0, this.option.ref.clientWidth);
-    const second = width / this.option.ref.clientWidth * $video.duration;
-    const time = secondToTime(second);
-    const percentage = clamp(width / this.option.ref.clientWidth, 0, 1);
-    return { second, time, width, percentage };
   }
 
   getPlayed() {

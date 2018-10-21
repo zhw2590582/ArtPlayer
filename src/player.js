@@ -1,4 +1,4 @@
-import { clamp } from './utils';
+import { clamp, secondToTime } from './utils';
 import config from './config';
 
 export default class Player {
@@ -78,19 +78,22 @@ export default class Player {
 
     this.art.on('video:error', () => {
       this.art.isPlaying = false;
+      this.art.loading.hide();
     });
   }
 
   play() {
-    const { $video } = this.art.refs;
+    const { refs: { $video }, i18n, notice } = this.art;
     const promise = $video.play();
+    notice.show(i18n.get('Start'));
     this.art.emit('play', $video);
     return promise;
   }
 
   pause() {
-    const { $video } = this.art.refs;
+    const { refs: { $video }, i18n, notice } = this.art;
     $video.pause();
+    notice.show(i18n.get('Pause'));
     this.art.emit('pause', $video);
   }
 
@@ -103,43 +106,39 @@ export default class Player {
   }
 
   seek(time) {
-    const { $video } = this.art.refs;
+    const { refs: { $video }, notice } = this.art;
     let newTime = Math.max(time, 0);
     if ($video.duration) {
       newTime = Math.min(newTime, $video.duration);
     }
-
     $video.currentTime = newTime;
+    notice.show(`${secondToTime(newTime)} / ${secondToTime($video.duration)}`);
     this.art.emit('seek', newTime);
   }
 
   volume(percentage) {
-    const { $video } = this.art.refs;
+    const { refs: { $video }, i18n, notice } = this.art;
     if (percentage) {
       $video.volume = clamp(percentage, 0, 1);
+      notice.show(`${i18n.get('Volume')}: ${parseInt($video.volume * 100)}`);
+      this.art.emit('volume', $video.volume);
     }
-    this.art.emit('volume', $video.volume);
+    return $video.volume;
   }
 
-  switchVolumeIcon() {
-    //
+  currentTime() {
+    return this.art.refs.$video.currentTime;
   }
 
-  switchVideo() {
-    //
+  duration() {
+    return this.art.refs.$video.duration;
   }
 
-  switchQuality() {
-    //
-  }
-
-  resize() {
-    //
-  }
-
-  speed(rate) {
-    const { $video } = this.art.refs;
-    $video.playbackRate = rate;
-    this.art.emit('speed', rate);
+  playbackRate(rate) {
+    const { refs: { $video }, i18n, notice } = this.art;
+    const newRate = clamp(rate, 0.1, 10);
+    $video.playbackRate = newRate;
+    notice.show(`${i18n.get('Rate')}: ${newRate}x`);
+    this.art.emit('playbackRate', newRate);
   }
 }

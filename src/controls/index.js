@@ -1,3 +1,4 @@
+import { secondToTime, clamp } from '../utils';
 import validControl from '../verification/control';
 import Danmu from './danmu';
 import Fullscreen from './fullscreen';
@@ -8,6 +9,7 @@ import Subtitle from './subtitle';
 import Time from './time';
 import Volume from './volume';
 import Setting from './setting';
+import Thumbnails from './thumbnails';
 
 let id = 0;
 export default class Controls {
@@ -28,6 +30,13 @@ export default class Controls {
       disable: false,
       position: 'top',
       index: 10
+    });
+
+    this.add({
+      control: Thumbnails,
+      disable: !this.art.option.thumbnails.url,
+      position: 'top',
+      index: 20
     });
 
     this.add({
@@ -155,9 +164,15 @@ export default class Controls {
       }
     });
 
-    Object.defineProperty(option.control.prototype, 'addMenu', {
-      value: menus => {
-        console.log(menus);
+    Object.defineProperty(option.control.prototype, 'getPosFromEvent', {
+      value: event => {
+        const { $video, $progress } = this.art.refs;
+        const { left } = $progress.getBoundingClientRect();
+        const width = clamp(event.x - left, 0, $progress.clientWidth);
+        const second = width / $progress.clientWidth * $video.duration;
+        const time = secondToTime(second);
+        const percentage = clamp(width / $progress.clientWidth, 0, 1);
+        return { second, time, width, percentage };
       }
     });
   }
