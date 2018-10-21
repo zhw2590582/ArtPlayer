@@ -18,6 +18,7 @@ import Layers from './layers';
 import Loading from './loading';
 import Notice from './notice';
 import Mask from './mask';
+import plugins from './plugins';
 
 let id = 0;
 export const instances = [];
@@ -29,6 +30,7 @@ class Artplayer extends Emitter {
     this.option = Object.assign({}, Artplayer.DEFAULTS, option);
     validOption(this.option);
     this.init();
+    this.usePlugins();
     this.emit('init:end');
   }
 
@@ -53,6 +55,7 @@ class Artplayer extends Emitter {
       },
       volume: 0.7,
       autoplay: false,
+      loop: false,
       preload: 'auto',
       type: '',
       mimeCodec: '',
@@ -71,24 +74,19 @@ class Artplayer extends Emitter {
     };
   }
 
-  static use(plugin) {
-    const installedPlugins = this.plugins || (this.plugins = []);
-    if (installedPlugins.indexOf(plugin) > -1) {
-      return this;
+  static use(Plugin) {
+    const name = Plugin.name.toLowerCase();
+    const installedPlugins = this.plugins || (this.plugins = {});
+    if (!installedPlugins[name]) {
+      const args = Array.from(arguments).slice(1);
+      args.unshift(this);
+      installedPlugins[name] = new Plugin(...args);
     }
-
-    const args = Array.from(arguments).slice(1);
-    args.unshift(this);
-    if (typeof plugin.install === 'function') {
-      plugin.install.apply(plugin, args);
-    } else if (typeof plugin === 'function') {
-      plugin.apply(null, args);
-    }
-    installedPlugins.push(plugin);
     return this;
   }
 
   init() {
+    this.isError = false;
     this.isFocus = false;
     this.isPlaying = false;
     this.refs = {};
@@ -101,6 +99,7 @@ class Artplayer extends Emitter {
 
     this.template = new Template(this);
     this.i18n = new I18n(this);
+    this.notice = new Notice(this);
     this.events = new Events(this);
     this.player = new Player(this);
     // this.mse = new Mse(this);
@@ -111,7 +110,6 @@ class Artplayer extends Emitter {
     this.subtitle = new Subtitle(this);
     this.info = new Info(this);
     this.loading = new Loading(this);
-    this.notice = new Notice(this);
     this.hotkey = new Hotkey(this);
     this.mask = new Mask(this);
 
@@ -120,10 +118,18 @@ class Artplayer extends Emitter {
     return this;
   }
 
-  destroy() {
+  usePlugins() {
+    Object.keys(plugins).forEach(name => {
+      Artplayer.use(plugins[name]);
+    });
+  }
+
+  destroy(removeHtml = false) {
     this.events.destroy();
-    this.refs.$container.innerHTML = '';
     instances.splice(instances.indexOf(this), 1);
+    if (removeHtml) {
+      this.refs.$container.innerHTML = '';
+    }
     this.emit('destroy');
   }
 }

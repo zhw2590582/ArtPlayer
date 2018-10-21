@@ -42,6 +42,11 @@ export default function validOption(option) {
   );
 
   errorHandle(
+    typeof option.loop === 'boolean',
+    `'loop' option require 'boolean' type, but got '${typeof option.loop}'.`
+  );
+
+  errorHandle(
     ['none', 'metadata', 'auto'].indexOf(option.preload) > -1,
     `'preload' option require one of 'none、metadata、auto', but got '${option.preload}.`
   );

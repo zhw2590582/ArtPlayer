@@ -5,5 +5,4 @@ test
 coverage
 .nyc_output
 .cache
-dist
-.babelrc
+docs

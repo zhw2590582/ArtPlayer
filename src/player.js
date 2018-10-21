@@ -20,7 +20,7 @@ export default class Player {
   }
 
   eventBind() {
-    const { events: { proxy }, refs: { $video } } = this.art;
+    const { events: { proxy }, refs: { $player, $video }, i18n, notice } = this.art;
 
     config.video.events.forEach(eventName => {
       proxy($video, eventName, event => {
@@ -74,11 +74,20 @@ export default class Player {
       this.art.isPlaying = false;
       this.art.controls.show();
       this.art.mask.show();
+      if (this.art.option.loop) {
+        this.seek(0);
+        this.play();
+      }
     });
 
     this.art.on('video:error', () => {
+      this.art.isError = true;
       this.art.isPlaying = false;
       this.art.loading.hide();
+      this.art.controls.hide();
+      $player.classList.add('artplayer-error');
+      notice.show(i18n.get('Video load failed'), false);
+      this.art.destroy();
     });
   }
 
