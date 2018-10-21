@@ -820,13 +820,13 @@
             proxy = _this$art.events.proxy,
             $video = _this$art.refs.$video,
             player = _this$art.player;
-        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\">\n          <div class=\"highlight-text\"></div>\n        </div>\n        <div class=\"art-progress-screenshot\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-timer\">00:00</div>\n      </div>\n    "));
+        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\"></div>\n        <div class=\"art-progress-screenshot\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-tip art-tip\"></div>\n      </div>\n    "));
         this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
         this.$played = this.option.ref.querySelector('.art-progress-played');
         this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
         this.$screenshot = this.option.ref.querySelector('.art-progress-screenshot');
         this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
-        this.$timer = this.option.ref.querySelector('.art-progress-timer');
+        this.$tip = this.option.ref.querySelector('.art-progress-tip');
         this.art.on('video:canplay', function () {
           _this.set('loaded', _this.getLoaded());
 
@@ -845,15 +845,16 @@
           _this.set('played', 1);
         });
         proxy(this.option.ref, 'mousemove', function (event) {
-          if (event.path.indexOf(_this.$highlight) > -1) {
-            _this.$timer.style.visibility = 'hidden';
+          _this.$tip.style.display = 'block';
 
+          if (event.path.indexOf(_this.$highlight) > -1) {
             _this.showHighlight(event);
           } else {
-            _this.$timer.style.visibility = 'visible';
-
             _this.showTime(event);
           }
+        });
+        proxy(this.option.ref, 'mouseout', function () {
+          _this.$tip.style.display = 'none';
         });
         proxy(this.option.ref, 'click', function (event) {
           if (event.target !== _this.$indicator) {
@@ -893,7 +894,13 @@
     }, {
       key: "showHighlight",
       value: function showHighlight(event) {
-        console.log('showHighlight');
+        var $video = this.art.refs.$video;
+        var _event$target$dataset = event.target.dataset,
+            text = _event$target$dataset.text,
+            time = _event$target$dataset.time;
+        this.$tip.innerHTML = text;
+        var left = Number(time) / $video.duration * this.option.ref.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
+        this.$tip.style.left = "".concat(left, "px");
       }
     }, {
       key: "showTime",
@@ -902,15 +909,15 @@
             width = _this$getPos3.width,
             time = _this$getPos3.time;
 
-        if (width <= 20) {
-          this.$timer.style.left = 0;
-        } else if (width > this.option.ref.clientWidth - 20) {
-          this.$timer.style.left = "".concat(this.option.ref.clientWidth - 40, "px");
-        } else {
-          this.$timer.style.left = "".concat(width - 20, "px");
-        }
+        this.$tip.innerHTML = time;
 
-        this.$timer.innerHTML = time;
+        if (width <= 20) {
+          this.$tip.style.left = 0;
+        } else if (width > this.option.ref.clientWidth - 20) {
+          this.$tip.style.left = "".concat(this.option.ref.clientWidth - 40, "px");
+        } else {
+          this.$tip.style.left = "".concat(width - 20, "px");
+        }
       }
     }, {
       key: "showScreenshot",

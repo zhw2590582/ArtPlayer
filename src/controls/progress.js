@@ -26,12 +26,10 @@ export default class Progress {
       <div class="art-control-progress-inner">
         <div class="art-progress-loaded"></div>
         <div class="art-progress-played" style="background: ${theme}"></div>
-        <div class="art-progress-highlight">
-          <div class="highlight-text"></div>
-        </div>
+        <div class="art-progress-highlight"></div>
         <div class="art-progress-screenshot"></div>
         <div class="art-progress-indicator" style="background: ${theme}"></div>
-        <div class="art-progress-timer">00:00</div>
+        <div class="art-progress-tip art-tip"></div>
       </div>
     `
     );
@@ -39,9 +37,11 @@ export default class Progress {
     this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
     this.$played = this.option.ref.querySelector('.art-progress-played');
     this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
-    this.$screenshot = this.option.ref.querySelector('.art-progress-screenshot');
+    this.$screenshot = this.option.ref.querySelector(
+      '.art-progress-screenshot'
+    );
     this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
-    this.$timer = this.option.ref.querySelector('.art-progress-timer');
+    this.$tip = this.option.ref.querySelector('.art-progress-tip');
 
     this.art.on('video:canplay', () => {
       this.set('loaded', this.getLoaded());
@@ -49,7 +49,8 @@ export default class Progress {
         const left = Number(item.time) / $video.duration;
         append(this.$highlight, `
           <span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>
-        `);
+        `
+        );
       });
     });
 
@@ -66,13 +67,16 @@ export default class Progress {
     });
 
     proxy(this.option.ref, 'mousemove', event => {
+      this.$tip.style.display = 'block';
       if (event.path.indexOf(this.$highlight) > -1) {
-        this.$timer.style.visibility = 'hidden';
         this.showHighlight(event);
       } else {
-        this.$timer.style.visibility = 'visible';
         this.showTime(event);
       }
+    });
+
+    proxy(this.option.ref, 'mouseout', () => {
+      this.$tip.style.display = 'none';
     });
 
     proxy(this.option.ref, 'click', event => {
@@ -105,19 +109,26 @@ export default class Progress {
   }
 
   showHighlight(event) {
-    console.log('showHighlight');
+    const { $video } = this.art.refs;
+    const { text, time } = event.target.dataset;
+    this.$tip.innerHTML = text;
+    const left =
+      Number(time) / $video.duration * this.option.ref.clientWidth +
+      event.target.clientWidth / 2 -
+      this.$tip.clientWidth / 2;
+    this.$tip.style.left = `${left}px`;
   }
 
   showTime(event) {
     const { width, time } = this.getPos(event);
+    this.$tip.innerHTML = time;
     if (width <= 20) {
-      this.$timer.style.left = 0;
+      this.$tip.style.left = 0;
     } else if (width > this.option.ref.clientWidth - 20) {
-      this.$timer.style.left = `${this.option.ref.clientWidth - 40}px`;
+      this.$tip.style.left = `${this.option.ref.clientWidth - 40}px`;
     } else {
-      this.$timer.style.left = `${width - 20}px`;
+      this.$tip.style.left = `${width - 20}px`;
     }
-    this.$timer.innerHTML = time;
   }
 
   showScreenshot() {

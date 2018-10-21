@@ -160,10 +160,6 @@
                     bottom: 0;
                     height: 0;
 
-                    .highlight-text{
-                        //
-                    }
-
                     span {
                         display: inline-block;
                         position: absolute;
@@ -191,14 +187,14 @@
                     }
                 }
     
-                .art-progress-timer {
+                .art-progress-tip {
                     display: none;
                     position: absolute;
                     z-index: 50;
                     top: -25px;
                     left: 0;
-                    width: 40px;
                     height: 20px;
+                    padding: 0 5px;
                     line-height: 20px;
                     color: #fff;
                     font-size: 12px;
@@ -210,7 +206,7 @@
             }
 
             &:hover {
-                .art-progress-indicator, .art-progress-timer {
+                .art-progress-indicator, .art-progress-tip {
                     display: block;
                 }
             }
