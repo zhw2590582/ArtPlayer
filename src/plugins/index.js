@@ -1,9 +1,7 @@
 import Srt from './srt';
 import Mse from './mse';
 
-const plugins = {
+export default {
   Srt,
   Mse
 };
-
-export default plugins;

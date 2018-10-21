@@ -6,7 +6,6 @@ import Emitter from 'tiny-emitter';
 import Template from './template';
 import I18n from './i18n';
 import Player from './player';
-import Mse from './mse';
 import Controls from './controls';
 import Contextmenu from './contextmenu';
 import Danmu from './danmu';
@@ -81,6 +80,7 @@ class Artplayer extends Emitter {
       const args = Array.from(arguments).slice(1);
       args.unshift(this);
       installedPlugins[name] = new Plugin(...args);
+      this.prototype.emit('use', Plugin);
     }
     return this;
   }
@@ -102,7 +102,6 @@ class Artplayer extends Emitter {
     this.notice = new Notice(this);
     this.events = new Events(this);
     this.player = new Player(this);
-    // this.mse = new Mse(this);
     this.layers = new Layers(this);
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);

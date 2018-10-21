@@ -706,136 +706,6 @@
 	  return Player;
 	}();
 
-	var Mse =
-	/*#__PURE__*/
-	function () {
-	  function Mse(art) {
-	    classCallCheck(this, Mse);
-
-	    this.art = art;
-	    this.setMimeCodec();
-	    this.init();
-	    this.eventBind();
-	    this.eventStart();
-	    this.repeat = 0;
-	    this.maxRepeat = 5;
-	  }
-
-	  createClass(Mse, [{
-	    key: "setMimeCodec",
-	    value: function setMimeCodec() {
-	      var option = this.art.option;
-
-	      if (!option.type) {
-	        var type = getExt(option.url);
-	        errorHandle(Object.keys(config.mimeCodec).includes(type), "Can't find video's type '".concat(type, "' from '").concat(option.url, "'"));
-	        option.type = type;
-	      }
-
-	      if (!option.mimeCodec) {
-	        var mimeCodec = config.mimeCodec[option.type];
-	        errorHandle(mimeCodec, "Can't find video's mimeCodec from ".concat(option.type));
-	        option.mimeCodec = mimeCodec;
-	      }
-	    }
-	  }, {
-	    key: "init",
-	    value: function init() {
-	      var _this$art = this.art,
-	          option = _this$art.option,
-	          $video = _this$art.refs.$video;
-	      errorHandle(MediaSource.isTypeSupported(option.mimeCodec), "Unsupported MIME type or codec: ".concat(option.mimeCodec));
-	      this.mediaSource = new MediaSource();
-	      $video.src = URL.createObjectURL(this.mediaSource);
-	      this.art.events.destroyEvents.push(function () {
-	        URL.revokeObjectURL($video.src);
-	      });
-	    }
-	  }, {
-	    key: "eventBind",
-	    value: function eventBind() {
-	      var _this = this;
-
-	      var proxy = this.art.events.proxy;
-	      var _config$mse = config.mse,
-	          mediaSource = _config$mse.mediaSource,
-	          sourceBufferList = _config$mse.sourceBufferList;
-	      mediaSource.events.forEach(function (eventName) {
-	        proxy(_this.mediaSource, eventName, function (event) {
-	          _this.art.emit("mediaSource:".concat(event.type), event);
-	        });
-	      });
-	      sourceBufferList.events.forEach(function (eventName) {
-	        proxy(_this.mediaSource.sourceBuffers, eventName, function (event) {
-	          _this.art.emit("sourceBuffers:".concat(event.type), event);
-	        });
-	        proxy(_this.mediaSource.activeSourceBuffers, eventName, function (event) {
-	          _this.art.emit("activeSourceBuffers:".concat(event.type), event);
-	        });
-	      });
-	    }
-	  }, {
-	    key: "eventStart",
-	    value: function eventStart() {
-	      var _this2 = this;
-
-	      var option = this.art.option;
-	      var proxy = this.art.events.proxy;
-	      var sourceBuffer = config.mse.sourceBuffer;
-	      this.art.on('mediaSource:sourceopen', function () {
-	        _this2.sourceBuffer = _this2.mediaSource.addSourceBuffer(option.mimeCodec);
-	        sourceBuffer.events.forEach(function (eventName) {
-	          proxy(_this2.sourceBuffer, eventName, function (event) {
-	            _this2.art.emit("sourceBuffer:".concat(event.type), event);
-	          });
-	        });
-	      });
-	      this.art.on('sourceBuffer:updateend', function () {
-	        _this2.mediaSource.endOfStream();
-	      });
-	      this.fetchUrl();
-	    }
-	  }, {
-	    key: "fetchUrl",
-	    value: function fetchUrl() {
-	      var _this3 = this;
-
-	      var _this$art2 = this.art,
-	          url = _this$art2.option.url,
-	          notice = _this$art2.notice,
-	          i18n = _this$art2.i18n,
-	          loading = _this$art2.loading;
-	      this.art.emit('player:fetch:start', url);
-	      this.request(url).then(function (response) {
-	        _this3.sourceBuffer.appendBuffer(response);
-
-	        _this3.art.emit('player:fetch:success', url);
-	      }).catch(function (err) {
-	        if (_this3.repeat++ < _this3.maxRepeat) {
-	          _this3.fetchUrl();
-	        } else {
-	          notice.show(i18n.get('Video load failed'));
-	          console.warn(err);
-	          loading.hide();
-
-	          _this3.art.emit('player:fetch:failure', url);
-	        }
-	      });
-	    }
-	  }, {
-	    key: "request",
-	    value: function request(url) {
-	      return fetch(url).then(function (response) {
-	        return response.arrayBuffer();
-	      }).catch(function (err) {
-	        throw new ArtPlayerError(err.message);
-	      });
-	    }
-	  }]);
-
-	  return Mse;
-	}();
-
 	function validControl(option) {
 	  errorHandle(typeof option.control === 'function', "'control' option require 'function' type, but got '".concat(_typeof_1(option.control), "'."));
 	  errorHandle(typeof option.disable === 'boolean', "'disable' option require 'boolean' type, but got '".concat(_typeof_1(option.disable), "'."));
@@ -1949,7 +1819,7 @@
 	  console.log(this);
 	};
 
-	var Mse$1 = function Mse(art) {
+	var Mse = function Mse(art) {
 	  classCallCheck(this, Mse);
 
 	  this.art = art;
@@ -1958,7 +1828,7 @@
 
 	var plugins = {
 	  Srt: Srt,
-	  Mse: Mse$1
+	  Mse: Mse
 	};
 
 	var id$2 = 0;
@@ -2008,8 +1878,7 @@
 	      this.i18n = new I18n(this);
 	      this.notice = new Notice(this);
 	      this.events = new Events(this);
-	      this.player = new Player(this); // this.mse = new Mse(this);
-
+	      this.player = new Player(this);
 	      this.layers = new Layers(this);
 	      this.controls = new Controls(this);
 	      this.contextmenu = new Contextmenu(this);
@@ -2053,6 +1922,7 @@
 	        var args = Array.from(arguments).slice(1);
 	        args.unshift(this);
 	        installedPlugins[name] = construct(Plugin, toConsumableArray(args));
+	        this.prototype.emit('use', Plugin);
 	      }
 
 	      return this;
