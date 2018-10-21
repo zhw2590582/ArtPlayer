@@ -27,6 +27,11 @@ export default function validOption(option) {
   );
 
   errorHandle(
+    Object.prototype.toString.call(option.thumbnails) === '[object Object]',
+    `'thumbnails' option require 'object' type, but got '${typeof option.thumbnails}'.`
+  );
+
+  errorHandle(
     typeof option.volume === 'number',
     `'volume' option require 'number' type, but got '${typeof option.volume}'.`
   );

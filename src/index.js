@@ -45,6 +45,12 @@ class Artplayer extends Emitter {
       container: '.artplayer',
       url: '',
       poster: '',
+      thumbnails: {
+        url: '',
+        number: 100,
+        width: 160,
+        height: 90
+      },
       volume: 0.7,
       autoplay: false,
       preload: 'auto',

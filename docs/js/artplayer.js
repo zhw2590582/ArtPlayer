@@ -267,6 +267,7 @@
     errorHandle(typeof option.container === 'string' || option.container instanceof Element, "'container' option require 'string' or 'Element' type, but got '".concat(_typeof_1(option.container), "'."));
     errorHandle(typeof option.url === 'string', "'url' option require 'string' type, but got '".concat(_typeof_1(option.url), "'."));
     errorHandle(typeof option.poster === 'string', "'poster' option require 'string' type, but got '".concat(_typeof_1(option.poster), "'."));
+    errorHandle(Object.prototype.toString.call(option.thumbnails) === '[object Object]', "'thumbnails' option require 'object' type, but got '".concat(_typeof_1(option.thumbnails), "'."));
     errorHandle(typeof option.volume === 'number', "'volume' option require 'number' type, but got '".concat(_typeof_1(option.volume), "'."));
     errorHandle(typeof option.autoplay === 'boolean', "'autoplay' option require 'boolean' type, but got '".concat(_typeof_1(option.autoplay), "'."));
     errorHandle(['none', 'metadata', 'auto'].indexOf(option.preload) > -1, "'preload' option require one of 'none\u3001metadata\u3001auto', but got '".concat(option.preload, "."));
@@ -820,11 +821,11 @@
             proxy = _this$art.events.proxy,
             $video = _this$art.refs.$video,
             player = _this$art.player;
-        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\"></div>\n        <div class=\"art-progress-screenshot\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-tip art-tip\"></div>\n      </div>\n    "));
+        append(this.option.ref, "\n      <div class=\"art-control-progress-inner\">\n        <div class=\"art-progress-loaded\"></div>\n        <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n        <div class=\"art-progress-highlight\"></div>\n        <div class=\"art-progress-thumbnails\"></div>\n        <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n        <div class=\"art-progress-tip art-tip\"></div>\n      </div>\n    "));
         this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
         this.$played = this.option.ref.querySelector('.art-progress-played');
         this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
-        this.$screenshot = this.option.ref.querySelector('.art-progress-screenshot');
+        this.$thumbnails = this.option.ref.querySelector('.art-progress-thumbnails');
         this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
         this.$tip = this.option.ref.querySelector('.art-progress-tip');
         this.art.on('video:canplay', function () {
@@ -852,9 +853,19 @@
           } else {
             _this.showTime(event);
           }
+
+          if (_this.art.option.thumbnails.url) {
+            _this.$thumbnails.style.display = 'block';
+
+            _this.showThumbnails(event);
+          }
         });
         proxy(this.option.ref, 'mouseout', function () {
           _this.$tip.style.display = 'none';
+
+          if (_this.art.option.thumbnails.url) {
+            _this.$thumbnails.style.display = 'none';
+          }
         });
         proxy(this.option.ref, 'click', function (event) {
           if (event.target !== _this.$indicator) {
@@ -909,19 +920,43 @@
             width = _this$getPos3.width,
             time = _this$getPos3.time;
 
+        var tipWidth = this.$tip.clientWidth;
         this.$tip.innerHTML = time;
 
-        if (width <= 20) {
+        if (width <= tipWidth / 2) {
           this.$tip.style.left = 0;
-        } else if (width > this.option.ref.clientWidth - 20) {
-          this.$tip.style.left = "".concat(this.option.ref.clientWidth - 40, "px");
+        } else if (width > this.option.ref.clientWidth - tipWidth / 2) {
+          this.$tip.style.left = "".concat(this.option.ref.clientWidth - tipWidth, "px");
         } else {
-          this.$tip.style.left = "".concat(width - 20, "px");
+          this.$tip.style.left = "".concat(width - tipWidth / 2, "px");
         }
       }
     }, {
-      key: "showScreenshot",
-      value: function showScreenshot() {//
+      key: "showThumbnails",
+      value: function showThumbnails(event) {
+        var _this$getPos4 = this.getPos(event),
+            posWidth = _this$getPos4.width;
+
+        var _this$art$option$thum = this.art.option.thumbnails,
+            url = _this$art$option$thum.url,
+            height = _this$art$option$thum.height,
+            width = _this$art$option$thum.width,
+            number = _this$art$option$thum.number;
+        this.$thumbnails.style.backgroundImage = "url(".concat(url, ")");
+        this.$thumbnails.style.height = "".concat(height, "px");
+        this.$thumbnails.style.width = "".concat(width, "px");
+
+        if (posWidth <= width / 2) {
+          this.$thumbnails.style.left = 0;
+        } else if (posWidth > this.option.ref.clientWidth - width / 2) {
+          this.$thumbnails.style.left = "".concat(this.option.ref.clientWidth - width, "px");
+        } else {
+          this.$thumbnails.style.left = "".concat(posWidth - width / 2, "px");
+        }
+
+        var perWidth = this.option.ref.clientWidth / number;
+        var index = Math.ceil(posWidth / perWidth);
+        this.$thumbnails.style.backgroundPosition = "-".concat(index * width, "px 0");
       }
     }, {
       key: "getPos",
@@ -1917,6 +1952,12 @@
           container: '.artplayer',
           url: '',
           poster: '',
+          thumbnails: {
+            url: '',
+            number: 100,
+            width: 160,
+            height: 90
+          },
           volume: 0.7,
           autoplay: false,
           preload: 'auto',

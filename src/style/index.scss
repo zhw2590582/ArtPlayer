@@ -171,6 +171,16 @@
                         border-radius: 3px;
                     }
                 }
+
+                .art-progress-thumbnails {
+                    // display: none;
+                    position: absolute;
+                    z-index: 50;
+                    top: -95px;
+                    left: 0;
+                    pointer-events: none;
+                    background-color: rgba(0,0,0,.7);
+                }
     
                 .art-progress-indicator {
                     display: none;

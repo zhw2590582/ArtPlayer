@@ -27,7 +27,7 @@ export default class Progress {
         <div class="art-progress-loaded"></div>
         <div class="art-progress-played" style="background: ${theme}"></div>
         <div class="art-progress-highlight"></div>
-        <div class="art-progress-screenshot"></div>
+        <div class="art-progress-thumbnails"></div>
         <div class="art-progress-indicator" style="background: ${theme}"></div>
         <div class="art-progress-tip art-tip"></div>
       </div>
@@ -37,9 +37,7 @@ export default class Progress {
     this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
     this.$played = this.option.ref.querySelector('.art-progress-played');
     this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
-    this.$screenshot = this.option.ref.querySelector(
-      '.art-progress-screenshot'
-    );
+    this.$thumbnails = this.option.ref.querySelector('.art-progress-thumbnails');
     this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
     this.$tip = this.option.ref.querySelector('.art-progress-tip');
 
@@ -73,10 +71,18 @@ export default class Progress {
       } else {
         this.showTime(event);
       }
+
+      if (this.art.option.thumbnails.url) {
+        this.$thumbnails.style.display = 'block';
+        this.showThumbnails(event);
+      }
     });
 
     proxy(this.option.ref, 'mouseout', () => {
       this.$tip.style.display = 'none';
+      if (this.art.option.thumbnails.url) {
+        this.$thumbnails.style.display = 'none';
+      }
     });
 
     proxy(this.option.ref, 'click', event => {
@@ -121,18 +127,35 @@ export default class Progress {
 
   showTime(event) {
     const { width, time } = this.getPos(event);
+    const tipWidth = this.$tip.clientWidth;
     this.$tip.innerHTML = time;
-    if (width <= 20) {
+    if (width <= tipWidth / 2) {
       this.$tip.style.left = 0;
-    } else if (width > this.option.ref.clientWidth - 20) {
-      this.$tip.style.left = `${this.option.ref.clientWidth - 40}px`;
+    } else if (width > this.option.ref.clientWidth - tipWidth / 2) {
+      this.$tip.style.left = `${this.option.ref.clientWidth - tipWidth}px`;
     } else {
-      this.$tip.style.left = `${width - 20}px`;
+      this.$tip.style.left = `${width - tipWidth / 2}px`;
     }
   }
 
-  showScreenshot() {
-    //
+  showThumbnails(event) {
+    const { width: posWidth } = this.getPos(event);
+    const { url, height, width, number } = this.art.option.thumbnails;
+    this.$thumbnails.style.backgroundImage = `url(${url})`;
+    this.$thumbnails.style.height = `${height}px`;
+    this.$thumbnails.style.width = `${width}px`;
+
+    if (posWidth <= width / 2) {
+      this.$thumbnails.style.left = 0;
+    } else if (posWidth > this.option.ref.clientWidth - width / 2) {
+      this.$thumbnails.style.left = `${this.option.ref.clientWidth - width}px`;
+    } else {
+      this.$thumbnails.style.left = `${posWidth - width / 2}px`;
+    }
+
+    const perWidth = this.option.ref.clientWidth / number;
+    const index = Math.ceil(posWidth / perWidth);
+    this.$thumbnails.style.backgroundPosition = `-${index * width}px 0`;
   }
 
   getPos(event) {
