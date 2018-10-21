@@ -1,5 +1,4 @@
 import './style/index.scss';
-import 'balloon-css/balloon.min.css';
 import validOption from './verification/player';
 import config from './config';
 import Emitter from 'tiny-emitter';

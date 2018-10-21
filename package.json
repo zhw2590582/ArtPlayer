@@ -31,7 +31,6 @@
     "autoprefixer": "^9.2.1",
     "cross-env": "^5.2.0",
     "cssnano": "^4.1.4",
-    "lerna": "^3.4.3",
     "node-sass": "^4.9.4",
     "rollup": "^0.66.6",
     "rollup-plugin-babel": "^4.0.3",
@@ -44,7 +43,6 @@
     "rollup-plugin-uglify": "^6.0.0"
   },
   "dependencies": {
-    "balloon-css": "^0.5.0",
     "tiny-emitter": "^2.0.2"
   }
 }
