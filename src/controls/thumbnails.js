@@ -24,13 +24,15 @@ export default class Thumbnails {
   showThumbnails(event) {
     const { $progress } = this.art.refs;
     const { width: posWidth } = this.getPosFromEvent(event);
-    const { url, height, width, number } = this.art.option.thumbnails;
+    const { url, height, width, number, column } = this.art.option.thumbnails;
     const perWidth = $progress.clientWidth / number;
-    const index = Math.ceil(posWidth / perWidth);
+    const perIndex = Math.ceil(posWidth / perWidth);
+    let yIndex = Math.ceil(perIndex / column);
+    let xIndex = perIndex % column || column;
     this.option.ref.style.backgroundImage = `url(${url})`;
     this.option.ref.style.height = `${height}px`;
     this.option.ref.style.width = `${width}px`;
-    this.option.ref.style.backgroundPosition = `-${index * width}px 0`;
+    this.option.ref.style.backgroundPosition = `-${--xIndex * width}px -${--yIndex * height}px`;
 
     if (posWidth <= width / 2) {
       this.option.ref.style.left = 0;

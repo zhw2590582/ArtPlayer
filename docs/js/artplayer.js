@@ -179,6 +179,90 @@
 
 	var inherits = _inherits;
 
+	function _defineProperty(obj, key, value) {
+	  if (key in obj) {
+	    Object.defineProperty(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+
+	  return obj;
+	}
+
+	var defineProperty = _defineProperty;
+
+	function _objectSpread(target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i] != null ? arguments[i] : {};
+	    var ownKeys = Object.keys(source);
+
+	    if (typeof Object.getOwnPropertySymbols === 'function') {
+	      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+	        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+	      }));
+	    }
+
+	    ownKeys.forEach(function (key) {
+	      defineProperty(target, key, source[key]);
+	    });
+	  }
+
+	  return target;
+	}
+
+	var objectSpread = _objectSpread;
+
+	function _arrayWithHoles(arr) {
+	  if (Array.isArray(arr)) return arr;
+	}
+
+	var arrayWithHoles = _arrayWithHoles;
+
+	function _iterableToArrayLimit(arr, i) {
+	  var _arr = [];
+	  var _n = true;
+	  var _d = false;
+	  var _e = undefined;
+
+	  try {
+	    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+	      _arr.push(_s.value);
+
+	      if (i && _arr.length === i) break;
+	    }
+	  } catch (err) {
+	    _d = true;
+	    _e = err;
+	  } finally {
+	    try {
+	      if (!_n && _i["return"] != null) _i["return"]();
+	    } finally {
+	      if (_d) throw _e;
+	    }
+	  }
+
+	  return _arr;
+	}
+
+	var iterableToArrayLimit = _iterableToArrayLimit;
+
+	function _nonIterableRest() {
+	  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+	}
+
+	var nonIterableRest = _nonIterableRest;
+
+	function _slicedToArray(arr, i) {
+	  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+	}
+
+	var slicedToArray = _slicedToArray;
+
 	function _isNativeFunction(fn) {
 	  return Function.toString.call(fn).indexOf("[native code]") !== -1;
 	}
@@ -247,7 +331,9 @@
 	}(wrapNativeSuper(Error));
 
 	function errorHandle(condition, msg) {
-	  if (!condition) {
+	  var isFun = typeof condition === 'function';
+
+	  if (isFun ? !isFun() : !condition) {
 	    throw new ArtPlayerError(msg);
 	  }
 	}
@@ -289,6 +375,45 @@
 	  var min = Math.floor((second - hour * 3600) / 60);
 	  var sec = Math.floor(second - hour * 3600 - min * 60);
 	  return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
+	}
+	function deepMerge() {
+	  var isObject = function isObject(value) {
+	    return value !== null && _typeof_1(value) === 'object';
+	  };
+
+	  var returnValue = {};
+
+	  for (var _len = arguments.length, sources = new Array(_len), _key = 0; _key < _len; _key++) {
+	    sources[_key] = arguments[_key];
+	  }
+
+	  for (var _i = 0; _i < sources.length; _i++) {
+	    var source = sources[_i];
+
+	    if (Array.isArray(source)) {
+	      if (!Array.isArray(returnValue)) {
+	        returnValue = [];
+	      }
+
+	      returnValue = toConsumableArray(returnValue).concat(toConsumableArray(source));
+	    } else if (isObject(source)) {
+	      var _arr = Object.entries(source);
+
+	      for (var _i2 = 0; _i2 < _arr.length; _i2++) {
+	        var _arr$_i = slicedToArray(_arr[_i2], 2),
+	            key = _arr$_i[0],
+	            value = _arr$_i[1];
+
+	        if (isObject(value) && Reflect.has(returnValue, key)) {
+	          value = deepMerge(returnValue[key], value);
+	        }
+
+	        returnValue = objectSpread({}, returnValue, defineProperty({}, key, value));
+	      }
+	    }
+	  }
+
+	  return returnValue;
 	}
 
 	function validOption(option) {
@@ -961,13 +1086,16 @@
 	          url = _this$art$option$thum.url,
 	          height = _this$art$option$thum.height,
 	          width = _this$art$option$thum.width,
-	          number = _this$art$option$thum.number;
+	          number = _this$art$option$thum.number,
+	          column = _this$art$option$thum.column;
 	      var perWidth = $progress.clientWidth / number;
-	      var index = Math.ceil(posWidth / perWidth);
+	      var perIndex = Math.ceil(posWidth / perWidth);
+	      var yIndex = Math.ceil(perIndex / column);
+	      var xIndex = perIndex % column || column;
 	      this.option.ref.style.backgroundImage = "url(".concat(url, ")");
 	      this.option.ref.style.height = "".concat(height, "px");
 	      this.option.ref.style.width = "".concat(width, "px");
-	      this.option.ref.style.backgroundPosition = "-".concat(index * width, "px 0");
+	      this.option.ref.style.backgroundPosition = "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px");
 
 	      if (posWidth <= width / 2) {
 	        this.option.ref.style.left = 0;
@@ -1357,52 +1485,6 @@
 	  return Info;
 	}();
 
-	function _arrayWithHoles(arr) {
-	  if (Array.isArray(arr)) return arr;
-	}
-
-	var arrayWithHoles = _arrayWithHoles;
-
-	function _iterableToArrayLimit(arr, i) {
-	  var _arr = [];
-	  var _n = true;
-	  var _d = false;
-	  var _e = undefined;
-
-	  try {
-	    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-	      _arr.push(_s.value);
-
-	      if (i && _arr.length === i) break;
-	    }
-	  } catch (err) {
-	    _d = true;
-	    _e = err;
-	  } finally {
-	    try {
-	      if (!_n && _i["return"] != null) _i["return"]();
-	    } finally {
-	      if (_d) throw _e;
-	    }
-	  }
-
-	  return _arr;
-	}
-
-	var iterableToArrayLimit = _iterableToArrayLimit;
-
-	function _nonIterableRest() {
-	  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-	}
-
-	var nonIterableRest = _nonIterableRest;
-
-	function _slicedToArray(arr, i) {
-	  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
-	}
-
-	var slicedToArray = _slicedToArray;
-
 	var Subtitle$1 =
 	/*#__PURE__*/
 	function () {
@@ -1410,11 +1492,8 @@
 	    classCallCheck(this, Subtitle);
 
 	    this.art = art;
-
-	    if (this.art.option.subtitle) {
-	      errorHandle(getExt(this.art.option.subtitle.url) === 'vtt', "'url' option require 'vtt' format, but got '".concat(getExt(this.art.option.subtitle.url), "'."));
-	      this.init();
-	    }
+	    this.checkExt(this.art.option.subtitle.url);
+	    this.init();
 	  }
 
 	  createClass(Subtitle, [{
@@ -1432,31 +1511,66 @@
 	      var $track = document.createElement('track');
 	      $track.default = true;
 	      $track.kind = 'metadata';
-	      $track.src = subtitle.url;
-	      $video.appendChild($track);
-	      this.art.refs.$track = $track;
+	      this.load(subtitle.url).then(function (data) {
+	        $track.src = data;
+	        $video.appendChild($track);
+	        _this.art.refs.$track = $track;
 
-	      if ($video.textTracks && $video.textTracks[0]) {
-	        var _$video$textTracks = slicedToArray($video.textTracks, 1),
-	            track = _$video$textTracks[0];
+	        if ($video.textTracks && $video.textTracks[0]) {
+	          var _$video$textTracks = slicedToArray($video.textTracks, 1),
+	              track = _$video$textTracks[0];
 
-	        proxy(track, 'cuechange', function () {
-	          var _track$activeCues = slicedToArray(track.activeCues, 1),
-	              cue = _track$activeCues[0];
+	          proxy(track, 'cuechange', function () {
+	            var _track$activeCues = slicedToArray(track.activeCues, 1),
+	                cue = _track$activeCues[0];
 
-	          $subtitle.innerHTML = '';
+	            $subtitle.innerHTML = '';
 
-	          if (cue) {
-	            var template = document.createElement('div');
-	            template.appendChild(cue.getCueAsHTML());
-	            $subtitle.innerHTML = template.innerHTML.split(/\r?\n/).map(function (item) {
-	              return "<p>".concat(item, "</p>");
-	            }).join('');
-	          }
+	            if (cue) {
+	              var template = document.createElement('div');
+	              template.appendChild(cue.getCueAsHTML());
+	              $subtitle.innerHTML = template.innerHTML.split(/\r?\n/).map(function (item) {
+	                return "<p>".concat(item, "</p>");
+	              }).join('');
+	            }
 
-	          _this.art.emit('subtitle:update', $subtitle);
-	        });
-	      }
+	            _this.art.emit('subtitle:update', $subtitle);
+	          });
+	        }
+	      });
+	    }
+	  }, {
+	    key: "load",
+	    value: function load(url) {
+	      var _this2 = this;
+
+	      var type;
+	      return fetch(url).then(function (response) {
+	        type = response.headers.get('Content-Type');
+	        return response.text();
+	      }).then(function (text) {
+	        if (/x-subrip/gi.test(type)) {
+	          return _this2.srtToVtt(text);
+	        }
+
+	        return url;
+	      }).catch(function (err) {
+	        throw err;
+	      });
+	    }
+	  }, {
+	    key: "srtToVtt",
+	    value: function srtToVtt(text) {
+	      var vttText = 'WEBVTT \r\n\r\n'.concat(text.replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
+	      return URL.createObjectURL(new Blob([vttText], {
+	        type: 'text/vtt'
+	      }));
+	    }
+	  }, {
+	    key: "checkExt",
+	    value: function checkExt(url) {
+	      var ext = getExt(url);
+	      errorHandle(ext === 'vtt' || ext === 'srt', "'url' option require 'vtt' or 'srt' format, but got '".concat(ext, "'."));
 	    }
 	  }, {
 	    key: "show",
@@ -1475,11 +1589,18 @@
 	  }, {
 	    key: "switch",
 	    value: function _switch(url) {
+	      var _this3 = this;
+
 	      var $track = this.art.refs.$track;
-	      errorHandle(getExt(url) === 'vtt', "'url' option require 'vtt' format, but got '".concat(getExt(url), "'."));
+	      this.checkExt(url);
 	      errorHandle($track, 'You need to initialize the subtitle option first.');
-	      $track.src = url;
-	      this.art.emit('subtitle:switch', url);
+	      this.load(url).then(function (data) {
+	        if (url !== data) {
+	          $track.src = data;
+
+	          _this3.art.emit('subtitle:switch', url);
+	        }
+	      });
 	    }
 	  }]);
 
@@ -1812,25 +1933,6 @@
 	  return Mask;
 	}();
 
-	var Srt = function Srt(art) {
-	  classCallCheck(this, Srt);
-
-	  this.art = art;
-	  console.log(this);
-	};
-
-	var Mse = function Mse(art) {
-	  classCallCheck(this, Mse);
-
-	  this.art = art;
-	  console.log(this);
-	};
-
-	var plugins = {
-	  Srt: Srt,
-	  Mse: Mse
-	};
-
 	var id$2 = 0;
 	var instances = [];
 
@@ -1848,12 +1950,10 @@
 
 	    _this.emit('init:start');
 
-	    _this.option = Object.assign({}, Artplayer.DEFAULTS, option);
+	    _this.option = deepMerge({}, Artplayer.DEFAULTS, option);
 	    validOption(_this.option);
 
 	    _this.init();
-
-	    _this.usePlugins();
 
 	    _this.emit('init:end');
 
@@ -1891,13 +1991,6 @@
 	      this.id = id$2++;
 	      instances.push(this);
 	      return this;
-	    }
-	  }, {
-	    key: "usePlugins",
-	    value: function usePlugins() {
-	      Object.keys(plugins).forEach(function (name) {
-	        Artplayer.use(plugins[name]);
-	      });
 	    }
 	  }, {
 	    key: "destroy",
@@ -1946,9 +2039,10 @@
 	        poster: '',
 	        thumbnails: {
 	          url: '',
-	          number: 100,
+	          number: 60,
 	          width: 160,
-	          height: 90
+	          height: 90,
+	          column: 10
 	        },
 	        volume: 0.7,
 	        autoplay: false,

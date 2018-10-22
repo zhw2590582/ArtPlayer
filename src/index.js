@@ -1,4 +1,5 @@
 import './style/index.scss';
+import { deepMerge } from './utils';
 import validOption from './verification/player';
 import config from './config';
 import Emitter from 'tiny-emitter';
@@ -16,7 +17,6 @@ import Layers from './layers';
 import Loading from './loading';
 import Notice from './notice';
 import Mask from './mask';
-import plugins from './plugins';
 
 let id = 0;
 export const instances = [];
@@ -25,10 +25,9 @@ class Artplayer extends Emitter {
   constructor(option) {
     super();
     this.emit('init:start');
-    this.option = Object.assign({}, Artplayer.DEFAULTS, option);
+    this.option = deepMerge({}, Artplayer.DEFAULTS, option);
     validOption(this.option);
     this.init();
-    this.usePlugins();
     this.emit('init:end');
   }
 
@@ -47,9 +46,10 @@ class Artplayer extends Emitter {
       poster: '',
       thumbnails: {
         url: '',
-        number: 100,
+        number: 60,
         width: 160,
-        height: 90
+        height: 90,
+        column: 10
       },
       volume: 0.7,
       autoplay: false,
@@ -114,12 +114,6 @@ class Artplayer extends Emitter {
     this.id = id++;
     instances.push(this);
     return this;
-  }
-
-  usePlugins() {
-    Object.keys(plugins).forEach(name => {
-      Artplayer.use(plugins[name]);
-    });
   }
 
   destroy(removeHtml = false) {
