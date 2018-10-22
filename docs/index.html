@@ -62,14 +62,26 @@
         });
 
         player.layers.add({
-            html: '23333',
-            index: 999,
-            name: 'test',
+            index: 1,
+            name: 'your-name',
+            html: `
+                <div>
+                    <img style="width: 100px" src="./img/yourName.webp">
+                    <p style="margin: 0;">点击关闭</p>
+                </div>
+            `,
             style: {
-                'color': 'red'
+                'font-size': '12px',
+                'text-shadow': '0.5px 0.5px 0.5px rgba(0,0,0,.5)',
+                'top': '20px',
+                'right': '20px',
+                'text-align': 'center',
+                'opacity': '.9'
             }
         }, dom => {
-            console.log(dom)
+            dom.addEventListener('click', () => {
+                dom.remove();
+            });
         });
 
         console.dir(Artplayer);
