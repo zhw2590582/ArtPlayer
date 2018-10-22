@@ -1054,7 +1054,6 @@
 
 	    this.art = art;
 	    this.option = option;
-	    this.isLoad = false;
 	    this.init();
 	  }
 
@@ -1067,42 +1066,12 @@
 	          $progress = _this$art.refs.$progress,
 	          proxy = _this$art.events.proxy;
 	      proxy($progress, 'mousemove', function (event) {
-	        _this.checkLoad(_this.art.option.thumbnails.url).then(function () {
-	          _this.option.ref.style.display = 'block';
+	        _this.option.ref.style.display = 'block';
 
-	          _this.showThumbnails(event);
-	        });
+	        _this.showThumbnails(event);
 	      });
 	      proxy($progress, 'mouseout', function () {
 	        _this.option.ref.style.display = 'none';
-	      });
-	    }
-	  }, {
-	    key: "checkLoad",
-	    value: function checkLoad(url) {
-	      var _this2 = this;
-
-	      if (this.isLoad) {
-	        return Promise.resolve(url);
-	      }
-
-	      var proxy = this.art.events.proxy;
-	      return new Promise(function (resolve, reject) {
-	        var $img = new Image();
-	        $img.src = url;
-
-	        if ($img.complete) {
-	          _this2.isLoad = true;
-	          resolve(url);
-	        }
-
-	        proxy($img, 'load', function () {
-	          _this2.isLoad = true;
-	          resolve(url);
-	        });
-	        proxy($img, 'error', function () {
-	          reject(url);
-	        });
 	      });
 	    }
 	  }, {
