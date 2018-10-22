@@ -22,10 +22,6 @@ export default class Contextmenu {
         }
       },
       {
-        text: i18n.get('About author'),
-        link: 'https://github.com/zhw2590582'
-      },
-      {
         text: 'ArtPlayer __VERSION__',
         link: 'https://github.com/zhw2590582/artplayer'
       },

@@ -1340,9 +1340,6 @@
 	          _this.art.info.show();
 	        }
 	      }, {
-	        text: i18n.get('About author'),
-	        link: 'https://github.com/zhw2590582'
-	      }, {
 	        text: 'ArtPlayer 1.0.0',
 	        link: 'https://github.com/zhw2590582/artplayer'
 	      }, {
