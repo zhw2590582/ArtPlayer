@@ -1651,7 +1651,7 @@
 	    key: "checkExt",
 	    value: function checkExt(url) {
 	      var ext = getExt(url);
-	      errorHandle(ext === 'vtt' || ext === 'srt', "'url' option require 'vtt' or 'srt' format, but got '".concat(ext, "'."));
+	      errorHandle(ext === 'vtt' || ext === 'srt', "'subtitle.url' option require 'vtt' or 'srt' format, but got '".concat(ext, "'."));
 	    }
 	  }, {
 	    key: "show",

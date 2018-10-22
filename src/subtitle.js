@@ -81,7 +81,7 @@ export default class Subtitle {
     const ext = getExt(url);
     errorHandle(
       ext === 'vtt' || ext === 'srt',
-      `'url' option require 'vtt' or 'srt' format, but got '${ext}'.`
+      `'subtitle.url' option require 'vtt' or 'srt' format, but got '${ext}'.`
     );
   }
 
