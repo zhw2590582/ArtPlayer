@@ -1496,6 +1496,7 @@
 
 	      if (!$infoPanel.innerHTML) {
 	        append($infoPanel, this.creatInfo());
+	        this.getHeader();
 	      }
 
 	      clearTimeout(this.timer);
@@ -1507,12 +1508,33 @@
 	    value: function creatInfo() {
 	      var infoHtml = [];
 	      infoHtml.push("\n      <div class=\"art-info-item \">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">1.0.0</div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-type=\"currentSrc\"></div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-type=\"volume\"></div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-type=\"currentTime\"></div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-type=\"duration\"></div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-type=\"videoWidth\"></span> x <span data-type=\"videoHeight\"></span>\n        </div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video type:</div>\n        <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video size:</div>\n        <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    ");
 	      return infoHtml.join('');
+	    }
+	  }, {
+	    key: "getHeader",
+	    value: function getHeader() {
+	      var _this$art2 = this.art,
+	          url = _this$art2.option.url,
+	          $infoPanel = _this$art2.refs.$infoPanel;
+	      var types = Array.from($infoPanel.querySelectorAll('[data-head]'));
+	      fetch(url, {
+	        method: 'HEAD'
+	      }).then(function (data) {
+	        types.forEach(function (item) {
+	          item.innerHTML = data.headers.get(item.dataset.head) || 'unknown';
+	        });
+	      }).catch(function () {
+	        types.forEach(function (item) {
+	          item.innerHTML = 'unknown';
+	        });
+	      });
 	    }
 	  }, {
 	    key: "loop",
@@ -1523,9 +1545,9 @@
 	          $infoPanel = _this$art$refs2.$infoPanel,
 	          $video = _this$art$refs2.$video;
 	      this.timer = setTimeout(function () {
-	        var types = Array.from($infoPanel.querySelectorAll('[data-type]'));
+	        var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
 	        types.forEach(function (item) {
-	          item.innerHTML = $video[item.dataset.type];
+	          item.innerHTML = $video[item.dataset.video] || 'unknown';
 	        });
 
 	        _this2.loop();

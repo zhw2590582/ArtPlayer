@@ -18,6 +18,7 @@ export default class Info {
     $info.style.display = 'block';
     if (!$infoPanel.innerHTML) {
       append($infoPanel, this.creatInfo());
+      this.getHeader();
     }
     clearTimeout(this.timer);
     this.loop();
@@ -37,28 +38,42 @@ export default class Info {
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video url:</div>
-        <div class="art-info-content" data-type="currentSrc"></div>
+        <div class="art-info-content" data-video="currentSrc"></div>
+      </div>
+    `);
+
+    infoHtml.push(`
+      <div class="art-info-item">
+        <div class="art-info-title">Video type:</div>
+        <div class="art-info-content" data-head="Content-Type"></div>
+      </div>
+    `);
+
+    infoHtml.push(`
+      <div class="art-info-item">
+        <div class="art-info-title">Video size:</div>
+        <div class="art-info-content" data-head="Content-length"></div>
       </div>
     `);
 
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video volume:</div>
-        <div class="art-info-content" data-type="volume"></div>
+        <div class="art-info-content" data-video="volume"></div>
       </div>
     `);
 
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video time:</div>
-        <div class="art-info-content" data-type="currentTime"></div>
+        <div class="art-info-content" data-video="currentTime"></div>
       </div>
     `);
 
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video duration:</div>
-        <div class="art-info-content" data-type="duration"></div>
+        <div class="art-info-content" data-video="duration"></div>
       </div>
     `);
 
@@ -66,7 +81,7 @@ export default class Info {
       <div class="art-info-item">
         <div class="art-info-title">Video resolution:</div>
         <div class="art-info-content">
-          <span data-type="videoWidth"></span> x <span data-type="videoHeight"></span>
+          <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
         </div>
       </div>
     `);
@@ -74,12 +89,28 @@ export default class Info {
     return infoHtml.join('');
   }
 
+  getHeader() {
+    const { option: { url }, refs: { $infoPanel } } = this.art;
+    const types = Array.from($infoPanel.querySelectorAll('[data-head]'));
+    fetch(url, {
+      method: 'HEAD'
+    }).then(data => {
+      types.forEach(item => {
+        item.innerHTML = data.headers.get(item.dataset.head) || 'unknown';
+      });
+    }).catch(() => {
+      types.forEach(item => {
+        item.innerHTML = 'unknown';
+      });
+    });
+  }
+
   loop() {
     const { $infoPanel, $video } = this.art.refs;
     this.timer = setTimeout(() => {
-      const types = Array.from($infoPanel.querySelectorAll('[data-type]'));
+      const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
       types.forEach(item => {
-        item.innerHTML = $video[item.dataset.type];
+        item.innerHTML = $video[item.dataset.video] || 'unknown';
       });
       this.loop();
     }, 1000);
