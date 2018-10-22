@@ -11,14 +11,9 @@ export default class Events {
     }
 
     target.addEventListener(name, callback, option);
-
-    const destroy = () => {
+    this.destroyEvents.push(() => {
       target.removeEventListener(name, callback, option);
-    };
-
-    this.destroyEvents.push(destroy);
-
-    return destroy;
+    });
   }
 
   destroy() {
