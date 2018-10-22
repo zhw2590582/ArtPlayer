@@ -555,7 +555,7 @@
 	    key: "init",
 	    value: function init() {
 	      var refs = this.art.refs;
-	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n        </div>\n      ";
+	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
 	      refs.$player = refs.$container.querySelector('.artplayer-video-player');
 	      refs.$video = refs.$container.querySelector('.artplayer-video');
 	      refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -568,6 +568,9 @@
 	      refs.$loading = refs.$container.querySelector('.artplayer-loading');
 	      refs.$notice = refs.$container.querySelector('.artplayer-notice');
 	      refs.$mask = refs.$container.querySelector('.artplayer-mask');
+	      refs.$info = refs.$container.querySelector('.artplayer-info');
+	      refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
+	      refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
 	    }
 	  }]);
 
@@ -1468,17 +1471,73 @@
 	    classCallCheck(this, Info);
 
 	    this.art = art;
+	    this.init();
 	  }
 
 	  createClass(Info, [{
+	    key: "init",
+	    value: function init() {
+	      var _this = this;
+
+	      var _this$art = this.art,
+	          $infoClose = _this$art.refs.$infoClose,
+	          proxy = _this$art.events.proxy;
+	      proxy($infoClose, 'click', function () {
+	        _this.hide();
+	      });
+	    }
+	  }, {
 	    key: "show",
 	    value: function show() {
-	      console.log('info show');
+	      var _this$art$refs = this.art.refs,
+	          $info = _this$art$refs.$info,
+	          $infoPanel = _this$art$refs.$infoPanel;
+	      $info.style.display = 'block';
+
+	      if (!$infoPanel.innerHTML) {
+	        append($infoPanel, this.creatInfo());
+	      }
+
+	      clearTimeout(this.timer);
+	      this.loop();
+	      this.art.emit('info:show', $info);
+	    }
+	  }, {
+	    key: "creatInfo",
+	    value: function creatInfo() {
+	      var infoHtml = [];
+	      infoHtml.push("\n      <div class=\"art-info-item \">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">1.0.0</div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-type=\"currentSrc\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-type=\"volume\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-type=\"currentTime\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-type=\"duration\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-type=\"videoWidth\"></span> x <span data-type=\"videoHeight\"></span>\n        </div>\n      </div>\n    ");
+	      return infoHtml.join('');
+	    }
+	  }, {
+	    key: "loop",
+	    value: function loop() {
+	      var _this2 = this;
+
+	      var _this$art$refs2 = this.art.refs,
+	          $infoPanel = _this$art$refs2.$infoPanel,
+	          $video = _this$art$refs2.$video;
+	      this.timer = setTimeout(function () {
+	        var types = Array.from($infoPanel.querySelectorAll('[data-type]'));
+	        types.forEach(function (item) {
+	          item.innerHTML = $video[item.dataset.type];
+	        });
+
+	        _this2.loop();
+	      }, 1000);
 	    }
 	  }, {
 	    key: "hide",
 	    value: function hide() {
-	      console.log('info hide');
+	      var $info = this.art.refs.$info;
+	      $info.style.display = 'none';
+	      clearTimeout(this.timer);
+	      this.art.emit('info:hide', $info);
 	    }
 	  }]);
 

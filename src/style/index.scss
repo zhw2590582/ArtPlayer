@@ -273,6 +273,43 @@
         }
     }
 
+    .artplayer-info {
+        display: none;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        z-index: 80;
+        width: 350px;
+        min-height: 150px;
+        padding: 10px;
+        color: #fff;
+        font-size: 12px;
+        font-family: Noto Sans CJK SC DemiLight,Roboto,Segoe UI,Tahoma,Arial,Helvetica,sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: rgba(0,0,0,.7);
+
+        .art-info-item {
+            display: flex;
+            margin-bottom: 5px;
+            .art-info-title {
+                width: 100px;
+                text-align: right;
+            }
+    
+            .art-info-content {
+                flex: 1;
+                padding-left: 5px;
+            }
+        }
+
+        .artplayer-info-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    }
+
     &.artplayer-error {
         .art-progress-indicator, .art-progress-tip {
             display: none !important;
