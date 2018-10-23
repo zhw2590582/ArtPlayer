@@ -136,11 +136,11 @@ export default class Player {
   }
 
   currentTime() {
-    return this.art.refs.$video.currentTime;
+    return this.art.refs.$video.currentTime || 0;
   }
 
   duration() {
-    return this.art.refs.$video.duration;
+    return this.art.refs.$video.duration || 0;
   }
 
   playbackRate(rate) {

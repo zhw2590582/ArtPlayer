@@ -10,14 +10,11 @@ export default class Mask {
   init() {
     const {
       player,
-      option,
       refs,
       events: { proxy }
     } = this.art;
 
-    const playClone = icons.play.cloneNode(true);
-    playClone.style.backgroundColor = option.theme;
-    append(refs.$mask, playClone);
+    append(refs.$mask, icons.playBig);
 
     proxy(refs.$mask, 'click', () => {
       player.play();
@@ -27,7 +24,7 @@ export default class Mask {
 
   show() {
     const { $mask } = this.art.refs;
-    $mask.style.display = 'flex';
+    $mask.style.display = 'block';
     this.art.emit('mask:show', $mask);
   }
 

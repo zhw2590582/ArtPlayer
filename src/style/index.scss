@@ -22,6 +22,7 @@
     }
 
     .art-icon {
+        display: inline-block;
         svg {
             fill: #fff;
         }
@@ -81,18 +82,13 @@
         bottom: 0;
         width: 100%;
         height: 100%;
-        align-items: center;
-        justify-content: center;
         cursor: pointer;
     
-        .art-icon-play {
-            opacity: .8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50px;
+        .art-icon-playBig {
+            position: absolute;
+            right: 30px;
+            bottom: 65px;
+            opacity: .6;
         }
     }
 
@@ -117,14 +113,16 @@
         right: 0;
         bottom: 0;
         height: 100px;
-        padding: 50px 10px 0;
+        padding: 55px 10px 0;
         opacity: 0;
         visibility: hidden;
         transition: all .2s ease-in-out;
+        pointer-events: none;
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
     
         .artplayer-progress {
             position: relative;
+            pointer-events: all;
             .art-control-progress {
                 position: relative;
                 height: 5px;
@@ -226,6 +224,30 @@
                 left: 0;
                 pointer-events: none;
                 background-color: rgba(0,0,0,.7);
+            }
+        }
+
+        .artplayer-controls {
+            position: relative;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            height: 40px;
+
+            .art-control {
+                height: 22px;
+                line-height: 22px;
+                float: left;
+                cursor: pointer;
+                font-size: 12px;
+            }
+
+            .artplayer-controls-left {
+
+            }
+
+            .artplayer-controls-right {
+                
             }
         }
     }

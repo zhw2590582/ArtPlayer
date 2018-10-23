@@ -1,9 +1,13 @@
 import loading from './loading.svg';
+import playBig from './play-big.svg';
 import play from './play.svg';
+import pause from './pause.svg';
 
 const icons = {
   loading,
-  play
+  playBig,
+  play,
+  pause
 };
 
 function creatDomFromSvg(map) {

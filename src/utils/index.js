@@ -1,4 +1,12 @@
-import ArtPlayerError from './ArtPlayerError';
+export class ArtPlayerError extends Error {
+  constructor(message, context) {
+    super(message);
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, context || this.constructor);
+    }
+    this.name = 'ArtPlayerError';
+  }
+}
 
 export function errorHandle(condition, msg) {
   const isFun = typeof condition === 'function';
@@ -33,7 +41,7 @@ export function append(parent, child) {
   } else {
     parent.insertAdjacentHTML('beforeend', child);
   }
-  return parent;
+  return child;
 }
 
 export function setStyle(element, styles) {

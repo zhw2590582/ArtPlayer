@@ -329,7 +329,6 @@
 
 	  return ArtPlayerError;
 	}(wrapNativeSuper(Error));
-
 	function errorHandle(condition, msg) {
 	  var isFun = typeof condition === 'function';
 
@@ -358,7 +357,7 @@
 	    parent.insertAdjacentHTML('beforeend', child);
 	  }
 
-	  return parent;
+	  return child;
 	}
 	function setStyle(element, styles) {
 	  Object.keys(styles).forEach(function (key) {
@@ -810,12 +809,12 @@
 	  }, {
 	    key: "currentTime",
 	    value: function currentTime() {
-	      return this.art.refs.$video.currentTime;
+	      return this.art.refs.$video.currentTime || 0;
 	    }
 	  }, {
 	    key: "duration",
 	    value: function duration() {
-	      return this.art.refs.$video.duration;
+	      return this.art.refs.$video.duration || 0;
 	    }
 	  }, {
 	    key: "playbackRate",
@@ -862,12 +861,77 @@
 	  this.option = option;
 	};
 
-	var PlayAndPause = function PlayAndPause(art, option) {
-	  classCallCheck(this, PlayAndPause);
+	var loading = "<svg class=\"lds-spinner\" width=\"80px\" height=\"80px\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" style=\"background: none;\"><g transform=\"rotate(0 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(30 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(60 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(90 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(120 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(150 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(180 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(210 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(240 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(270 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(300 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(330 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"0s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g></svg>\n";
 
-	  this.art = art;
-	  this.option = option;
+	var playBig = "<svg style=\"width: 60px; height: 60px; filter: drop-shadow(0px 1px 1px black);\" version=\"1.1\" viewBox=\"0 0 24 24\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <g id=\"info\"/>\n    <g id=\"icons\">\n        <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16   C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\" id=\"video\"/>\n    </g>\n</svg>";
+
+	var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
+
+	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
+
+	var icons = {
+	  loading: loading,
+	  playBig: playBig,
+	  play: play,
+	  pause: pause
 	};
+
+	function creatDomFromSvg(map) {
+	  var result = {};
+	  Object.keys(map).forEach(function (name) {
+	    var tmp = document.createElement('div');
+	    tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(name, "\">").concat(map[name], "</i>");
+
+	    var _tmp$childNodes = slicedToArray(tmp.childNodes, 1);
+
+	    result[name] = _tmp$childNodes[0];
+	  });
+	  return result;
+	}
+
+	var icons$1 = creatDomFromSvg(icons);
+
+	var PlayAndPause =
+	/*#__PURE__*/
+	function () {
+	  function PlayAndPause(art, option) {
+	    classCallCheck(this, PlayAndPause);
+
+	    this.art = art;
+	    this.option = option;
+	    this.init();
+	  }
+
+	  createClass(PlayAndPause, [{
+	    key: "init",
+	    value: function init() {
+	      var _this = this;
+
+	      var _this$art = this.art,
+	          proxy = _this$art.events.proxy,
+	          player = _this$art.player;
+	      this.$play = append(this.option.ref, icons$1.play);
+	      this.$pause = append(this.option.ref, icons$1.pause);
+	      this.$pause.style.display = 'none';
+	      proxy(this.$play, 'click', function () {
+	        player.play();
+	      });
+	      proxy(this.$pause, 'click', function () {
+	        player.pause();
+	      });
+	      this.art.on('video:playing', function () {
+	        _this.$play.style.display = 'none';
+	        _this.$pause.style.display = 'inline-block';
+	      });
+	      this.art.on('video:pause', function () {
+	        _this.$play.style.display = 'inline-block';
+	        _this.$pause.style.display = 'none';
+	      });
+	    }
+	  }]);
+
+	  return PlayAndPause;
+	}();
 
 	var Progress =
 	/*#__PURE__*/
@@ -1028,12 +1092,43 @@
 	  this.option = option;
 	};
 
-	var Time = function Time(art, option) {
-	  classCallCheck(this, Time);
+	var Time =
+	/*#__PURE__*/
+	function () {
+	  function Time(art, option) {
+	    classCallCheck(this, Time);
 
-	  this.art = art;
-	  this.option = option;
-	};
+	    this.art = art;
+	    this.option = option;
+	    this.init();
+	  }
+
+	  createClass(Time, [{
+	    key: "init",
+	    value: function init() {
+	      var _this = this;
+
+	      this.option.ref.innerHTML = '00:00 / 00:00';
+	      this.art.on('video:canplay', function () {
+	        _this.option.ref.innerHTML = _this.getTime();
+	      });
+	      this.art.on('video:timeupdate', function () {
+	        _this.option.ref.innerHTML = _this.getTime();
+	      });
+	      this.art.on('video:seeking', function () {
+	        _this.option.ref.innerHTML = _this.getTime();
+	      });
+	    }
+	  }, {
+	    key: "getTime",
+	    value: function getTime() {
+	      var player = this.art.player;
+	      return "".concat(secondToTime(player.currentTime()), " / ").concat(secondToTime(player.duration()));
+	    }
+	  }]);
+
+	  return Time;
+	}();
 
 	var Volume = function Volume(art, option) {
 	  classCallCheck(this, Volume);
@@ -1856,30 +1951,6 @@
 	  return Layers;
 	}();
 
-	var loading = "<svg class=\"lds-spinner\" width=\"80px\" height=\"80px\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" style=\"background: none;\"><g transform=\"rotate(0 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(30 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(60 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(90 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(120 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(150 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(180 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(210 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(240 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(270 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(300 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(330 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"0s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g></svg>\n";
-
-	var play = "<svg id=\"plyr-play\" width=\"16px\" height=\"18px\">\n  <path d=\"M15.562 8.1L3.87.225C3.052-.337 2 .225 2 1.125v15.75c0 .9 1.052 1.462 1.87.9L15.563 9.9c.584-.45.584-1.35 0-1.8z\"></path>\n</svg>\n";
-
-	var icons = {
-	  loading: loading,
-	  play: play
-	};
-
-	function creatDomFromSvg(map) {
-	  var result = {};
-	  Object.keys(map).forEach(function (name) {
-	    var tmp = document.createElement('div');
-	    tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(name, "\">").concat(map[name], "</i>");
-
-	    var _tmp$childNodes = slicedToArray(tmp.childNodes, 1);
-
-	    result[name] = _tmp$childNodes[0];
-	  });
-	  return result;
-	}
-
-	var icons$1 = creatDomFromSvg(icons);
-
 	var Loading =
 	/*#__PURE__*/
 	function () {
@@ -1976,12 +2047,9 @@
 
 	      var _this$art = this.art,
 	          player = _this$art.player,
-	          option = _this$art.option,
 	          refs = _this$art.refs,
 	          proxy = _this$art.events.proxy;
-	      var playClone = icons$1.play.cloneNode(true);
-	      playClone.style.backgroundColor = option.theme;
-	      append(refs.$mask, playClone);
+	      append(refs.$mask, icons$1.playBig);
 	      proxy(refs.$mask, 'click', function () {
 	        player.play();
 
@@ -1992,7 +2060,7 @@
 	    key: "show",
 	    value: function show() {
 	      var $mask = this.art.refs.$mask;
-	      $mask.style.display = 'flex';
+	      $mask.style.display = 'block';
 	      this.art.emit('mask:show', $mask);
 	    }
 	  }, {
