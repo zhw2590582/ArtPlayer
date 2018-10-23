@@ -357,7 +357,7 @@
 	    parent.insertAdjacentHTML('beforeend', child);
 	  }
 
-	  return child;
+	  return parent.lastElementChild;
 	}
 	function setStyle(element, styles) {
 	  Object.keys(styles).forEach(function (key) {
@@ -873,13 +873,13 @@
 
 	var playBig = "<svg style=\"width: 60px; height: 60px; filter: drop-shadow(0px 1px 1px black);\" version=\"1.1\" viewBox=\"0 0 24 24\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <g id=\"info\"/>\n    <g id=\"icons\">\n        <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16   C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\" id=\"video\"/>\n    </g>\n</svg>";
 
-	var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
+	var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
 
-	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
+	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
 
-	var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
+	var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
 
-	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
+	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
 
 	var icons = {
 	  loading: loading,
@@ -1152,6 +1152,7 @@
 
 	    this.art = art;
 	    this.option = option;
+	    this.isDroging = false;
 	    this.init();
 	  }
 
@@ -1165,6 +1166,8 @@
 	          player = _this$art.player;
 	      this.$volume = append(this.option.ref, icons$1.volume);
 	      this.$volumeClose = append(this.option.ref, icons$1.volumeClose);
+	      this.$volumePanel = append(this.option.ref, '<div class="art-volume-panel"></div>');
+	      this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
 	      this.$volumeClose.style.display = 'none';
 	      proxy(this.$volume, 'click', function () {
 	        _this.$volume.style.display = 'none';
@@ -1178,10 +1181,26 @@
 	        player.volume(getStorage('volume') || 0.7);
 	      });
 	      proxy(this.option.ref, 'mouseenter', function () {
-	        console.log('mouseenter');
+	        _this.$volumePanel.style.width = '100px';
 	      });
 	      proxy(this.option.ref, 'mouseleave', function () {
-	        console.log('mouseleave');
+	        _this.$volumePanel.style.width = '0';
+	      });
+	      proxy(this.$volumePanel, 'click', function (event) {
+	        _this.volumeChangeFromEvent(event);
+	      });
+	      proxy(this.$volumeHandle, 'mousedown', function () {
+	        _this.isDroging = true;
+	      });
+	      proxy(document, 'mousemove', function (event) {
+	        if (_this.isDroging) {
+	          _this.volumeChangeFromEvent(event);
+	        }
+	      });
+	      proxy(document, 'mouseup', function () {
+	        if (_this.isDroging) {
+	          _this.isDroging = false;
+	        }
 	      });
 	      this.art.on('video:volumechange', function () {
 	        if (player.volume() === 0) {
@@ -1192,6 +1211,20 @@
 	          _this.$volumeClose.style.display = 'none';
 	        }
 	      });
+	    }
+	  }, {
+	    key: "volumeChangeFromEvent",
+	    value: function volumeChangeFromEvent(event) {
+	      var player = this.art.player;
+	      var volumeHandleWidth = this.$volumeHandle.clientWidth / 2;
+
+	      var _this$$volumePanel$ge = this.$volumePanel.getBoundingClientRect(),
+	          left = _this$$volumePanel$ge.left;
+
+	      var width = clamp(event.x - left, volumeHandleWidth, this.$volumePanel.clientWidth - volumeHandleWidth);
+	      var percentage = clamp(width / this.$volumePanel.clientWidth, 0, 1);
+	      this.$volumeHandle.style.left = "calc(".concat(percentage * 100, "% - ").concat(volumeHandleWidth, "px)");
+	      player.volume(percentage);
 	    }
 	  }]);
 

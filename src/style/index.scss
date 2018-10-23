@@ -113,7 +113,7 @@
         right: 0;
         bottom: 0;
         height: 100px;
-        padding: 55px 10px 0;
+        padding: 60px 10px 0;
         opacity: 0;
         visibility: hidden;
         transition: all .2s ease-in-out;
@@ -233,14 +233,64 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 40px;
+            height: 36px;
 
             .art-control {
                 float: left;
                 font-size: 12px;
-                height: 22px;
-                line-height: 22px;
+                height: 36px;
+                line-height: 36px;
                 cursor: pointer;
+                .art-icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    float: left;
+                    height: 36px;
+                    width: 36px;
+                    padding: 7px;
+                }
+            }
+
+            .art-control-volume {
+                .art-volume-panel {
+                    position: relative;
+                    float: left;
+                    width: 0;
+                    height: 100%;
+                    transition: margin .2s cubic-bezier(0.4,0.0,1,1),width .2s cubic-bezier(0.4,0.0,1,1);
+                    overflow: hidden;
+                    .art-volume-slider-handle {
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 12px;
+                        margin-top: -6px;
+                        background: #fff;
+
+                        &::before {
+                            left: -94px;
+                            background: #fff;
+                        }
+
+                        &::after {
+                            left: 6px;
+                            background: rgba(255,255,255,.2);
+                        }
+
+                        &::before, &::after {
+                            content: '';
+                            position: absolute;
+                            display: block;
+                            top: 50%;
+                            height: 3px;
+                            margin-top: -2px;
+                            width: 100px
+                        }
+                    }
+                }
             }
 
             .art-control-time {

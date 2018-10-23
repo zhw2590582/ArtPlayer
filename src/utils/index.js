@@ -41,7 +41,7 @@ export function append(parent, child) {
   } else {
     parent.insertAdjacentHTML('beforeend', child);
   }
-  return child;
+  return parent.lastElementChild;
 }
 
 export function setStyle(element, styles) {
