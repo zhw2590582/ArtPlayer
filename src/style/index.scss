@@ -232,22 +232,19 @@
             pointer-events: all;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             height: 40px;
 
             .art-control {
+                float: left;
+                font-size: 12px;
                 height: 22px;
                 line-height: 22px;
-                float: left;
                 cursor: pointer;
-                font-size: 12px;
             }
 
-            .artplayer-controls-left {
-
-            }
-
-            .artplayer-controls-right {
-                
+            .art-control-time {
+                padding: 0 10px;
             }
         }
     }

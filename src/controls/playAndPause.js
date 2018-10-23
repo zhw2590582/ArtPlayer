@@ -25,11 +25,11 @@ export default class PlayAndPause {
 
     this.art.on('video:playing', () => {
       this.$play.style.display = 'none';
-      this.$pause.style.display = 'inline-block';
+      this.$pause.style.display = 'block';
     });
 
     this.art.on('video:pause', () => {
-      this.$play.style.display = 'inline-block';
+      this.$play.style.display = 'block';
       this.$pause.style.display = 'none';
     });
   }

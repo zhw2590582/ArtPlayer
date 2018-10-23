@@ -65,18 +65,10 @@
         player.layers.add({
             index: 1,
             name: 'your-name',
-            html: `
-                <div>
-                    <img style="width: 100px" src="./img/yourName.png">
-                    <p style="margin: 0;">点击关闭</p>
-                </div>
-            `,
+            html: '<img style="width: 100px" src="./img/yourName.png">',
             style: {
-                'font-size': '12px',
-                'text-shadow': '0.5px 0.5px 0.5px rgba(0,0,0,.5)',
                 'top': '20px',
                 'right': '20px',
-                'text-align': 'center',
                 'opacity': '.9'
             }
         }, dom => {

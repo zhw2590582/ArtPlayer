@@ -79,3 +79,15 @@ export function deepMerge(...sources) {
   }
   return returnValue;
 }
+
+export function getStorage(key) {
+  const storage = JSON.parse(localStorage.getItem('artplayer_settings')) || {};
+  return key ? storage[key] : storage;
+}
+
+export function setStorage(key, value) {
+  const storage = Object.assign({}, getStorage(), {
+    [key]: value
+  });
+  localStorage.setItem('artplayer_settings', JSON.stringify(storage));
+}

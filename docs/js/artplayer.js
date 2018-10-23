@@ -414,6 +414,14 @@
 
 	  return returnValue;
 	}
+	function getStorage(key) {
+	  var storage = JSON.parse(localStorage.getItem('artplayer_settings')) || {};
+	  return key ? storage[key] : storage;
+	}
+	function setStorage(key, value) {
+	  var storage = Object.assign({}, getStorage(), defineProperty({}, key, value));
+	  localStorage.setItem('artplayer_settings', JSON.stringify(storage));
+	}
 
 	function validOption(option) {
 	  errorHandle(option.container, '\'container\' option is required.');
@@ -798,13 +806,13 @@
 	          i18n = _this$art5.i18n,
 	          notice = _this$art5.notice;
 
-	      if (percentage) {
+	      if (percentage !== undefined) {
 	        $video.volume = clamp(percentage, 0, 1);
 	        notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100)));
 	        this.art.emit('volume', $video.volume);
 	      }
 
-	      return $video.volume;
+	      return $video.volume || 0;
 	    }
 	  }, {
 	    key: "currentTime",
@@ -869,11 +877,17 @@
 
 	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
 
+	var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
+
+	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 36px; height: 22px\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
+
 	var icons = {
 	  loading: loading,
 	  playBig: playBig,
 	  play: play,
-	  pause: pause
+	  pause: pause,
+	  volume: volume,
+	  volumeClose: volumeClose
 	};
 
 	function creatDomFromSvg(map) {
@@ -921,10 +935,10 @@
 	      });
 	      this.art.on('video:playing', function () {
 	        _this.$play.style.display = 'none';
-	        _this.$pause.style.display = 'inline-block';
+	        _this.$pause.style.display = 'block';
 	      });
 	      this.art.on('video:pause', function () {
-	        _this.$play.style.display = 'inline-block';
+	        _this.$play.style.display = 'block';
 	        _this.$pause.style.display = 'none';
 	      });
 	    }
@@ -1130,12 +1144,59 @@
 	  return Time;
 	}();
 
-	var Volume = function Volume(art, option) {
-	  classCallCheck(this, Volume);
+	var Volume =
+	/*#__PURE__*/
+	function () {
+	  function Volume(art, option) {
+	    classCallCheck(this, Volume);
 
-	  this.art = art;
-	  this.option = option;
-	};
+	    this.art = art;
+	    this.option = option;
+	    this.init();
+	  }
+
+	  createClass(Volume, [{
+	    key: "init",
+	    value: function init() {
+	      var _this = this;
+
+	      var _this$art = this.art,
+	          proxy = _this$art.events.proxy,
+	          player = _this$art.player;
+	      this.$volume = append(this.option.ref, icons$1.volume);
+	      this.$volumeClose = append(this.option.ref, icons$1.volumeClose);
+	      this.$volumeClose.style.display = 'none';
+	      proxy(this.$volume, 'click', function () {
+	        _this.$volume.style.display = 'none';
+	        _this.$volumeClose.style.display = 'block';
+	        setStorage('volume', player.volume());
+	        player.volume(0);
+	      });
+	      proxy(this.$volumeClose, 'click', function () {
+	        _this.$volume.style.display = 'block';
+	        _this.$volumeClose.style.display = 'none';
+	        player.volume(getStorage('volume') || 0.7);
+	      });
+	      proxy(this.option.ref, 'mouseenter', function () {
+	        console.log('mouseenter');
+	      });
+	      proxy(this.option.ref, 'mouseleave', function () {
+	        console.log('mouseleave');
+	      });
+	      this.art.on('video:volumechange', function () {
+	        if (player.volume() === 0) {
+	          _this.$volume.style.display = 'none';
+	          _this.$volumeClose.style.display = 'block';
+	        } else {
+	          _this.$volume.style.display = 'block';
+	          _this.$volumeClose.style.display = 'none';
+	        }
+	      });
+	    }
+	  }]);
+
+	  return Volume;
+	}();
 
 	var Setting = function Setting(art, option) {
 	  classCallCheck(this, Setting);
@@ -1620,7 +1681,8 @@
 	        method: 'HEAD'
 	      }).then(function (data) {
 	        types.forEach(function (item) {
-	          item.innerHTML = data.headers.get(item.dataset.head) || 'unknown';
+	          var value = data.headers.get(item.dataset.head);
+	          item.innerHTML = value !== undefined ? value : 'unknown';
 	        });
 	      }).catch(function () {
 	        types.forEach(function (item) {
@@ -1639,7 +1701,8 @@
 	      this.timer = setTimeout(function () {
 	        var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
 	        types.forEach(function (item) {
-	          item.innerHTML = $video[item.dataset.video] || 'unknown';
+	          var value = $video[item.dataset.video];
+	          item.innerHTML = value !== undefined ? value : 'unknown';
 	        });
 
 	        _this2.loop();

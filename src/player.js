@@ -127,12 +127,12 @@ export default class Player {
 
   volume(percentage) {
     const { refs: { $video }, i18n, notice } = this.art;
-    if (percentage) {
+    if (percentage !== undefined) {
       $video.volume = clamp(percentage, 0, 1);
       notice.show(`${i18n.get('Volume')}: ${parseInt($video.volume * 100)}`);
       this.art.emit('volume', $video.volume);
     }
-    return $video.volume;
+    return $video.volume || 0;
   }
 
   currentTime() {

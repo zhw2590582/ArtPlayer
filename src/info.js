@@ -96,7 +96,8 @@ export default class Info {
       method: 'HEAD'
     }).then(data => {
       types.forEach(item => {
-        item.innerHTML = data.headers.get(item.dataset.head) || 'unknown';
+        const value = data.headers.get(item.dataset.head);
+        item.innerHTML = value !== undefined ? value : 'unknown';
       });
     }).catch(() => {
       types.forEach(item => {
@@ -110,7 +111,8 @@ export default class Info {
     this.timer = setTimeout(() => {
       const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
       types.forEach(item => {
-        item.innerHTML = $video[item.dataset.video] || 'unknown';
+        const value = $video[item.dataset.video];
+        item.innerHTML = value !== undefined ? value : 'unknown';
       });
       this.loop();
     }, 1000);

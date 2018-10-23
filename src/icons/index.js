@@ -2,12 +2,16 @@ import loading from './loading.svg';
 import playBig from './play-big.svg';
 import play from './play.svg';
 import pause from './pause.svg';
+import volume from './volume.svg';
+import volumeClose from './volume-close.svg';
 
 const icons = {
   loading,
   playBig,
   play,
-  pause
+  pause,
+  volume,
+  volumeClose
 };
 
 function creatDomFromSvg(map) {
