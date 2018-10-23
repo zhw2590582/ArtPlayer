@@ -1154,7 +1154,6 @@
 	    this.option = option;
 	    this.isDroging = false;
 	    this.init();
-	    this.setVolumeHandle(getStorage('volume'));
 	  }
 
 	  createClass(Volume, [{
@@ -1170,6 +1169,9 @@
 	      this.$volumePanel = append(this.option.ref, '<div class="art-volume-panel"></div>');
 	      this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
 	      this.$volumeClose.style.display = 'none';
+	      var volume = getStorage('volume');
+	      this.setVolumeHandle(volume);
+	      player.volume(volume);
 	      proxy(this.$volume, 'click', function () {
 	        _this.$volume.style.display = 'none';
 	        _this.$volumeClose.style.display = 'block';
