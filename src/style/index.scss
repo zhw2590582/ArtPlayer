@@ -261,10 +261,6 @@
                     transition: margin .2s cubic-bezier(0.4,0.0,1,1),width .2s cubic-bezier(0.4,0.0,1,1);
                     overflow: hidden;
 
-                    &.art-volume-panel-hover {
-                        width: 60px;
-                    }
-
                     .art-volume-slider-handle {
                         position: absolute;
                         top: 50%;
@@ -294,6 +290,10 @@
                             margin-top: -2px;
                             width: 60px
                         }
+                    }
+
+                    &.art-volume-panel-hover {
+                        width: 60px;
                     }
                 }
             }
