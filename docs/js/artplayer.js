@@ -1154,6 +1154,7 @@
 	    this.option = option;
 	    this.isDroging = false;
 	    this.init();
+	    this.setVolumeHandle(getStorage('volume'));
 	  }
 
 	  createClass(Volume, [{
@@ -1178,13 +1179,17 @@
 	      proxy(this.$volumeClose, 'click', function () {
 	        _this.$volume.style.display = 'block';
 	        _this.$volumeClose.style.display = 'none';
-	        player.volume(getStorage('volume') || 0.7);
 	      });
 	      proxy(this.option.ref, 'mouseenter', function () {
-	        _this.$volumePanel.style.width = '100px';
+	        _this.$volumePanel.classList.add('art-volume-panel-hover'); // TODO
+
+
+	        setTimeout(function () {
+	          _this.setVolumeHandle(player.volume());
+	        }, 200);
 	      });
 	      proxy(this.option.ref, 'mouseleave', function () {
-	        _this.$volumePanel.style.width = '0';
+	        _this.$volumePanel.classList.remove('art-volume-panel-hover');
 	      });
 	      proxy(this.$volumePanel, 'click', function (event) {
 	        _this.volumeChangeFromEvent(event);
@@ -1192,7 +1197,7 @@
 	      proxy(this.$volumeHandle, 'mousedown', function () {
 	        _this.isDroging = true;
 	      });
-	      proxy(document, 'mousemove', function (event) {
+	      proxy(this.$volumeHandle, 'mousemove', function (event) {
 	        if (_this.isDroging) {
 	          _this.volumeChangeFromEvent(event);
 	        }
@@ -1203,7 +1208,11 @@
 	        }
 	      });
 	      this.art.on('video:volumechange', function () {
-	        if (player.volume() === 0) {
+	        var percentage = player.volume();
+
+	        _this.setVolumeHandle(percentage);
+
+	        if (percentage === 0) {
 	          _this.$volume.style.display = 'none';
 	          _this.$volumeClose.style.display = 'block';
 	        } else {
@@ -1216,15 +1225,31 @@
 	    key: "volumeChangeFromEvent",
 	    value: function volumeChangeFromEvent(event) {
 	      var player = this.art.player;
-	      var volumeHandleWidth = this.$volumeHandle.clientWidth / 2;
 
 	      var _this$$volumePanel$ge = this.$volumePanel.getBoundingClientRect(),
-	          left = _this$$volumePanel$ge.left;
+	          panelLeft = _this$$volumePanel$ge.left,
+	          panelWidth = _this$$volumePanel$ge.width;
 
-	      var width = clamp(event.x - left, volumeHandleWidth, this.$volumePanel.clientWidth - volumeHandleWidth);
-	      var percentage = clamp(width / this.$volumePanel.clientWidth, 0, 1);
-	      this.$volumeHandle.style.left = "calc(".concat(percentage * 100, "% - ").concat(volumeHandleWidth, "px)");
+	      var _this$$volumeHandle$g = this.$volumeHandle.getBoundingClientRect(),
+	          handleWidth = _this$$volumeHandle$g.width;
+
+	      var percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
+	      setStorage('volume', percentage);
 	      player.volume(percentage);
+	    }
+	  }, {
+	    key: "setVolumeHandle",
+	    value: function setVolumeHandle() {
+	      var percentage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.7;
+
+	      var _this$$volumePanel$ge2 = this.$volumePanel.getBoundingClientRect(),
+	          panelWidth = _this$$volumePanel$ge2.width;
+
+	      var _this$$volumeHandle$g2 = this.$volumeHandle.getBoundingClientRect(),
+	          handleWidth = _this$$volumeHandle$g2.width;
+
+	      var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
+	      this.$volumeHandle.style.left = "".concat(width, "px");
 	    }
 	  }]);
 

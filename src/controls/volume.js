@@ -7,6 +7,7 @@ export default class Volume {
     this.option = option;
     this.isDroging = false;
     this.init();
+    this.setVolumeHandle(getStorage('volume'));
   }
 
   init() {
@@ -27,15 +28,19 @@ export default class Volume {
     proxy(this.$volumeClose, 'click', () => {
       this.$volume.style.display = 'block';
       this.$volumeClose.style.display = 'none';
-      player.volume(getStorage('volume') || 0.7);
     });
 
     proxy(this.option.ref, 'mouseenter', () => {
-      this.$volumePanel.style.width = '100px';
+      this.$volumePanel.classList.add('art-volume-panel-hover');
+
+      // TODO
+      setTimeout(() => {
+        this.setVolumeHandle(player.volume());
+      }, 200);
     });
 
     proxy(this.option.ref, 'mouseleave', () => {
-      this.$volumePanel.style.width = '0';
+      this.$volumePanel.classList.remove('art-volume-panel-hover');
     });
 
     proxy(this.$volumePanel, 'click', event => {
@@ -46,7 +51,7 @@ export default class Volume {
       this.isDroging = true;
     });
 
-    proxy(document, 'mousemove', event => {
+    proxy(this.$volumeHandle, 'mousemove', event => {
       if (this.isDroging) {
         this.volumeChangeFromEvent(event);
       }
@@ -59,7 +64,9 @@ export default class Volume {
     });
 
     this.art.on('video:volumechange', () => {
-      if (player.volume() === 0) {
+      const percentage = player.volume();
+      this.setVolumeHandle(percentage);
+      if (percentage === 0) {
         this.$volume.style.display = 'none';
         this.$volumeClose.style.display = 'block';
       } else {
@@ -71,11 +78,17 @@ export default class Volume {
 
   volumeChangeFromEvent(event) {
     const { player } = this.art;
-    const volumeHandleWidth = this.$volumeHandle.clientWidth / 2;
-    const { left } = this.$volumePanel.getBoundingClientRect();
-    const width = clamp(event.x - left, volumeHandleWidth, this.$volumePanel.clientWidth - volumeHandleWidth);
-    const percentage = clamp(width / this.$volumePanel.clientWidth, 0, 1);
-    this.$volumeHandle.style.left = `calc(${percentage * 100}% - ${volumeHandleWidth}px)`;
+    const { left: panelLeft, width: panelWidth } = this.$volumePanel.getBoundingClientRect();
+    const { width: handleWidth } = this.$volumeHandle.getBoundingClientRect();
+    const percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
+    setStorage('volume', percentage);
     player.volume(percentage);
+  }
+
+  setVolumeHandle(percentage = 0.7) {
+    const { width: panelWidth } = this.$volumePanel.getBoundingClientRect();
+    const { width: handleWidth } = this.$volumeHandle.getBoundingClientRect();
+    const width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
+    this.$volumeHandle.style.left = `${width}px`;
   }
 }

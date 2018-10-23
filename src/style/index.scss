@@ -260,6 +260,11 @@
                     height: 100%;
                     transition: margin .2s cubic-bezier(0.4,0.0,1,1),width .2s cubic-bezier(0.4,0.0,1,1);
                     overflow: hidden;
+
+                    &.art-volume-panel-hover {
+                        width: 60px;
+                    }
+
                     .art-volume-slider-handle {
                         position: absolute;
                         top: 50%;
@@ -271,7 +276,7 @@
                         background: #fff;
 
                         &::before {
-                            left: -94px;
+                            left: -54px;
                             background: #fff;
                         }
 
@@ -287,7 +292,7 @@
                             top: 50%;
                             height: 3px;
                             margin-top: -2px;
-                            width: 100px
+                            width: 60px
                         }
                     }
                 }
