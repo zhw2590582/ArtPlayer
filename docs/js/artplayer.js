@@ -1502,18 +1502,28 @@
 	/*#__PURE__*/
 	function () {
 	  function Controls(art) {
+	    var _this = this;
+
 	    classCallCheck(this, Controls);
 
 	    this.art = art;
 	    this.$map = {};
-	    this.init();
-	    this.mount();
+	    this.isVideoCanplay = false;
+	    this.art.on('video:canplay', function () {
+	      if (!_this.isVideoCanplay) {
+	        _this.isVideoCanplay = true;
+
+	        _this.init();
+
+	        _this.mount();
+	      }
+	    });
 	  }
 
 	  createClass(Controls, [{
 	    key: "init",
 	    value: function init() {
-	      var _this = this;
+	      var _this2 = this;
 
 	      this.add(new Progress({
 	        disable: false,
@@ -1566,7 +1576,7 @@
 	        index: 50
 	      }));
 	      this.art.option.controls.forEach(function (item) {
-	        _this.add(item);
+	        _this2.add(item);
 	      });
 	    }
 	  }, {
@@ -1590,14 +1600,14 @@
 	  }, {
 	    key: "mount",
 	    value: function mount() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var _this$art$refs = this.art.refs,
 	          $progress = _this$art$refs.$progress,
 	          $controlsLeft = _this$art$refs.$controlsLeft,
 	          $controlsRight = _this$art$refs.$controlsRight;
 	      Object.keys(this.$map).forEach(function (key) {
-	        _this2.$map[key].sort(function (a, b) {
+	        _this3.$map[key].sort(function (a, b) {
 	          return Number(a.dataset.controlIndex) - Number(b.dataset.controlIndex);
 	        }).forEach(function ($control) {
 	          switch (key) {
@@ -1622,27 +1632,27 @@
 	  }, {
 	    key: "commonMethod",
 	    value: function commonMethod(control) {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      Object.defineProperty(control, 'hide', {
 	        value: function value() {
 	          control.option.$control.style.display = 'none';
 
-	          _this3.art.emit('control:hide', control.option.$control);
+	          _this4.art.emit('control:hide', control.option.$control);
 	        }
 	      });
 	      Object.defineProperty(control, 'show', {
 	        value: function value() {
 	          control.option.$control.style.display = 'block';
 
-	          _this3.art.emit('control:show', control.option.$control);
+	          _this4.art.emit('control:show', control.option.$control);
 	        }
 	      });
 	      Object.defineProperty(control, 'getPosFromEvent', {
 	        value: function value(event) {
-	          var _this3$art$refs = _this3.art.refs,
-	              $video = _this3$art$refs.$video,
-	              $progress = _this3$art$refs.$progress;
+	          var _this4$art$refs = _this4.art.refs,
+	              $video = _this4$art$refs.$video,
+	              $progress = _this4$art$refs.$progress;
 
 	          var _$progress$getBoundin = $progress.getBoundingClientRect(),
 	              left = _$progress$getBoundin.left;

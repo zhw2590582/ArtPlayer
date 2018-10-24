@@ -6,4 +6,3 @@ coverage
 .nyc_output
 .cache
 docs
-dist
