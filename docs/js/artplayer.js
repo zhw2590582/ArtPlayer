@@ -1189,6 +1189,27 @@
 	      return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
 	    }
 	  }, {
+	    key: "getPosFromEvent",
+	    value: function getPosFromEvent(event) {
+	      var _this$art$refs = this.art.refs,
+	          $video = _this$art$refs.$video,
+	          $progress = _this$art$refs.$progress;
+
+	      var _$progress$getBoundin = $progress.getBoundingClientRect(),
+	          left = _$progress$getBoundin.left;
+
+	      var width = clamp(event.x - left, 0, $progress.clientWidth);
+	      var second = width / $progress.clientWidth * $video.duration;
+	      var time = secondToTime(second);
+	      var percentage = clamp(width / $progress.clientWidth, 0, 1);
+	      return {
+	        second: second,
+	        time: time,
+	        width: width,
+	        percentage: percentage
+	      };
+	    }
+	  }, {
 	    key: "set",
 	    value: function set(type, percentage) {
 	      this["$".concat(type)].style.width = "".concat(percentage * 100, "%");
@@ -1468,10 +1489,12 @@
 	  }, {
 	    key: "showThumbnails",
 	    value: function showThumbnails(event) {
-	      var $progress = this.art.refs.$progress;
+	      var _this$art2 = this.art,
+	          $progress = _this$art2.refs.$progress,
+	          controls = _this$art2.controls;
 
-	      var _this$getPosFromEvent = this.getPosFromEvent(event),
-	          posWidth = _this$getPosFromEvent.width;
+	      var _controls$progress$ge = controls.progress.getPosFromEvent(event),
+	          posWidth = _controls$progress$ge.width;
 
 	      var _this$art$option$thum = this.art.option.thumbnails,
 	          url = _this$art$option$thum.url,
@@ -1646,27 +1669,6 @@
 	          control.option.$control.style.display = 'block';
 
 	          _this4.art.emit('control:show', control.option.$control);
-	        }
-	      });
-	      Object.defineProperty(control, 'getPosFromEvent', {
-	        value: function value(event) {
-	          var _this4$art$refs = _this4.art.refs,
-	              $video = _this4$art$refs.$video,
-	              $progress = _this4$art$refs.$progress;
-
-	          var _$progress$getBoundin = $progress.getBoundingClientRect(),
-	              left = _$progress$getBoundin.left;
-
-	          var width = clamp(event.x - left, 0, $progress.clientWidth);
-	          var second = width / $progress.clientWidth * $video.duration;
-	          var time = secondToTime(second);
-	          var percentage = clamp(width / $progress.clientWidth, 0, 1);
-	          return {
-	            second: second,
-	            time: time,
-	            width: width,
-	            percentage: percentage
-	          };
 	        }
 	      });
 	    }

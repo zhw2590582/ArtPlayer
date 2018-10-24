@@ -1,4 +1,3 @@
-import { secondToTime, clamp } from '../utils';
 import Danmu from './danmu';
 import Fullscreen from './fullscreen';
 import Pip from './pip';
@@ -141,18 +140,6 @@ export default class Controls {
       value: () => {
         control.option.$control.style.display = 'block';
         this.art.emit('control:show', control.option.$control);
-      }
-    });
-
-    Object.defineProperty(control, 'getPosFromEvent', {
-      value: event => {
-        const { $video, $progress } = this.art.refs;
-        const { left } = $progress.getBoundingClientRect();
-        const width = clamp(event.x - left, 0, $progress.clientWidth);
-        const second = width / $progress.clientWidth * $video.duration;
-        const time = secondToTime(second);
-        const percentage = clamp(width / $progress.clientWidth, 0, 1);
-        return { second, time, width, percentage };
       }
     });
   }

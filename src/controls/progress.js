@@ -1,4 +1,4 @@
-import { append } from '../utils';
+import { append, clamp, secondToTime } from '../utils';
 
 export default class Progress {
   constructor(option) {
@@ -138,6 +138,16 @@ export default class Progress {
     return $video.buffered.length
       ? $video.buffered.end($video.buffered.length - 1) / $video.duration
       : 0;
+  }
+
+  getPosFromEvent(event) {
+    const { $video, $progress } = this.art.refs;
+    const { left } = $progress.getBoundingClientRect();
+    const width = clamp(event.x - left, 0, $progress.clientWidth);
+    const second = width / $progress.clientWidth * $video.duration;
+    const time = secondToTime(second);
+    const percentage = clamp(width / $progress.clientWidth, 0, 1);
+    return { second, time, width, percentage };
   }
 
   set(type, percentage) {
