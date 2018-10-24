@@ -5,9 +5,10 @@ let i18nMap = {
     'Close': '关闭',
     'Video load failed': '视频加载失败',
     'Volume': '音量',
-    'Start': '开始',
+    'Play': '开始',
     'Pause': '暂停',
-    'Rate': '速度'
+    'Rate': '速度',
+    'Mute': '静音'
   },
   'zh-tw': {
     'About author': '關於作者',
@@ -15,9 +16,10 @@ let i18nMap = {
     'Close': '關閉',
     'Video load failed': '影片載入失敗',
     'Volume': '音量',
-    'Start': '開始',
+    'Play': '開始',
     'Pause': '暫停',
-    'Rate': '速度'
+    'Rate': '速度',
+    'Mute': '靜音'
   }
 };
 

@@ -1,4 +1,5 @@
 import './style';
+import 'balloon-css/balloon.min.css';
 import { deepMerge } from './utils';
 import validOption from './verification/player';
 import config from './config';

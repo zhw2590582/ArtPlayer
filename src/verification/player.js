@@ -6,10 +6,18 @@ export default function validOption(DEFAULTS, option, path = ['option']) {
     const value = option[key];
     const defaultType = getType(defaultValue);
     const type = getType(value);
-    errorHandle(
-      defaultType === type,
-      `'${path.join('.')}.${key}' require '${defaultType}' type, but got '${type}'`
-    );
+
+    if (key === 'container' || key === 'html') {
+      errorHandle(
+        type === 'string' || value instanceof Element,
+        `'${path.join('.')}.${key}' require 'string' or 'Element' type, but got '${type}'`
+      );
+    } else {
+      errorHandle(
+        defaultType === type,
+        `'${path.join('.')}.${key}' require '${defaultType}' type, but got '${type}'`
+      );
+    }
 
     if (type === 'object') {
       validOption(defaultValue, value, path.concat(key));

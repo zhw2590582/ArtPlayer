@@ -100,3 +100,8 @@ export function getType(val) {
   const type = toString.call(val).slice(8, -1).toLowerCase().replace(/\s/g, '');
   return type;
 }
+
+export function tooltip(target, msg, pos = 'up') {
+  target.setAttribute('data-balloon', msg);
+  target.setAttribute('data-balloon-pos', pos);
+}

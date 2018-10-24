@@ -132,7 +132,7 @@
                 float: left;
                 font-size: 12px;
                 height: 36px;
-                line-height: 36px;
+                // line-height: 36px;
                 cursor: pointer;
                 .art-icon {
                     display: flex;
@@ -192,6 +192,7 @@
             }
     
             .art-control-time {
+                line-height: 36px;
                 padding: 0 10px;
             }
         }

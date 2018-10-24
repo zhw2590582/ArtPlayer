@@ -1,4 +1,4 @@
-import { append } from '../utils';
+import { append, tooltip } from '../utils';
 import icons from '../icons';
 
 export default class PlayAndPause {
@@ -12,10 +12,12 @@ export default class PlayAndPause {
   }
 
   init() {
-    const { events: { proxy }, player } = this.art;
+    const { events: { proxy }, player, i18n } = this.art;
 
     this.$play = append(this.option.$control, icons.play);
     this.$pause = append(this.option.$control, icons.pause);
+    tooltip(this.$play, i18n.get('Pause'));
+    tooltip(this.$pause, i18n.get('Play'));
     this.$pause.style.display = 'none';
 
     proxy(this.$play, 'click', () => {

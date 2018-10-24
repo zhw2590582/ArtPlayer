@@ -1,4 +1,4 @@
-import { append, setStorage, getStorage, clamp } from '../utils';
+import { append, setStorage, getStorage, clamp, tooltip } from '../utils';
 import icons from '../icons';
 
 export default class Volume {
@@ -13,11 +13,12 @@ export default class Volume {
   }
 
   init() {
-    const { events: { proxy }, player } = this.art;
+    const { events: { proxy }, player, i18n } = this.art;
     this.$volume = append(this.option.$control, icons.volume);
     this.$volumeClose = append(this.option.$control, icons.volumeClose);
     this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
     this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
+    tooltip(this.$volume, i18n.get('Mute'));
     this.$volumeClose.style.display = 'none';
 
     const volume = getStorage('volume');

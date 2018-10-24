@@ -379,6 +379,11 @@
 	  var type = toString.call(val).slice(8, -1).toLowerCase().replace(/\s/g, '');
 	  return type;
 	}
+	function tooltip(target, msg) {
+	  var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
+	  target.setAttribute('data-balloon', msg);
+	  target.setAttribute('data-balloon-pos', pos);
+	}
 
 	function validOption(DEFAULTS, option) {
 	  var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ['option'];
@@ -387,7 +392,12 @@
 	    var value = option[key];
 	    var defaultType = getType(defaultValue);
 	    var type = getType(value);
-	    errorHandle(defaultType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(defaultType, "' type, but got '").concat(type, "'"));
+
+	    if (key === 'container' || key === 'html') {
+	      errorHandle(type === 'string' || value instanceof Element, "'".concat(path.join('.'), ".").concat(key, "' require 'string' or 'Element' type, but got '").concat(type, "'"));
+	    } else {
+	      errorHandle(defaultType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(defaultType, "' type, but got '").concat(type, "'"));
+	    }
 
 	    if (type === 'object') {
 	      validOption(defaultValue, value, path.concat(key));
@@ -584,9 +594,10 @@
 	    'Close': '关闭',
 	    'Video load failed': '视频加载失败',
 	    'Volume': '音量',
-	    'Start': '开始',
+	    'Play': '开始',
 	    'Pause': '暂停',
-	    'Rate': '速度'
+	    'Rate': '速度',
+	    'Mute': '静音'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -594,9 +605,10 @@
 	    'Close': '關閉',
 	    'Video load failed': '影片載入失敗',
 	    'Volume': '音量',
-	    'Start': '開始',
+	    'Play': '開始',
 	    'Pause': '暫停',
-	    'Rate': '速度'
+	    'Rate': '速度',
+	    'Mute': '靜音'
 	  }
 	};
 
@@ -998,9 +1010,12 @@
 
 	      var _this$art = this.art,
 	          proxy = _this$art.events.proxy,
-	          player = _this$art.player;
+	          player = _this$art.player,
+	          i18n = _this$art.i18n;
 	      this.$play = append(this.option.$control, icons$1.play);
 	      this.$pause = append(this.option.$control, icons$1.pause);
+	      tooltip(this.$play, i18n.get('Pause'));
+	      tooltip(this.$pause, i18n.get('Play'));
 	      this.$pause.style.display = 'none';
 	      proxy(this.$play, 'click', function () {
 	        player.play();
@@ -1264,11 +1279,13 @@
 
 	      var _this$art = this.art,
 	          proxy = _this$art.events.proxy,
-	          player = _this$art.player;
+	          player = _this$art.player,
+	          i18n = _this$art.i18n;
 	      this.$volume = append(this.option.$control, icons$1.volume);
 	      this.$volumeClose = append(this.option.$control, icons$1.volumeClose);
 	      this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
 	      this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
+	      tooltip(this.$volume, i18n.get('Mute'));
 	      this.$volumeClose.style.display = 'none';
 	      var volume = getStorage('volume');
 	      this.setVolumeHandle(volume);
