@@ -14,11 +14,7 @@ let id = 0;
 export default class Controls {
   constructor(art) {
     this.art = art;
-    this.$map = {
-      top: [],
-      left: [],
-      right: []
-    };
+    this.$map = {};
     this.init();
     this.mount();
   }
@@ -84,14 +80,14 @@ export default class Controls {
       index: 50
     }));
 
-    this.art.option.controls.filter(item => !item.disable).forEach(item => {
+    this.art.option.controls.forEach(item => {
       this.add(item);
     });
   }
 
   add(control) {
     const { option } = control;
-    if (!option.disable) {
+    if (option && !option.disable) {
       id++;
       const name = control.constructor.name.toLowerCase() || `control${id}`;
       const $control = document.createElement('div');
@@ -99,8 +95,8 @@ export default class Controls {
       $control.setAttribute('data-control-index', String(option.index) || id);
       option.$control = $control;
       this.commonMethod(control);
-      this.$map[option.position].push($control);
-      control.apply(this.art);
+      (this.$map[option.position] || (this.$map[option.position] = [])).push($control);
+      control.apply && control.apply(this.art);
       this[name] = control;
     }
   }

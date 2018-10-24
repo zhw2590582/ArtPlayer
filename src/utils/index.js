@@ -69,11 +69,14 @@ export function deepMerge(...sources) {
       }
       returnValue = [...returnValue, ...source];
     } else if (isObject(source)) {
-      for (let [key, value] of Object.entries(source)) {
-        if (isObject(value) && Reflect.has(returnValue, key)) {
-          value = deepMerge(returnValue[key], value);
+      for (const key in source) {
+        if (source.hasOwnProperty(key)) {
+          let value = source[key];
+          if (isObject(value) && key in returnValue) {
+            value = deepMerge(returnValue[key], value);
+          }
+          returnValue = { ...returnValue, [key]: value };
         }
-        returnValue = { ...returnValue, [key]: value };
       }
     }
   }

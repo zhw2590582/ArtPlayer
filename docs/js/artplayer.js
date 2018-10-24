@@ -217,52 +217,6 @@
 
 	var objectSpread = _objectSpread;
 
-	function _arrayWithHoles(arr) {
-	  if (Array.isArray(arr)) return arr;
-	}
-
-	var arrayWithHoles = _arrayWithHoles;
-
-	function _iterableToArrayLimit(arr, i) {
-	  var _arr = [];
-	  var _n = true;
-	  var _d = false;
-	  var _e = undefined;
-
-	  try {
-	    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-	      _arr.push(_s.value);
-
-	      if (i && _arr.length === i) break;
-	    }
-	  } catch (err) {
-	    _d = true;
-	    _e = err;
-	  } finally {
-	    try {
-	      if (!_n && _i["return"] != null) _i["return"]();
-	    } finally {
-	      if (_d) throw _e;
-	    }
-	  }
-
-	  return _arr;
-	}
-
-	var iterableToArrayLimit = _iterableToArrayLimit;
-
-	function _nonIterableRest() {
-	  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-	}
-
-	var nonIterableRest = _nonIterableRest;
-
-	function _slicedToArray(arr, i) {
-	  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
-	}
-
-	var slicedToArray = _slicedToArray;
-
 	function _isNativeFunction(fn) {
 	  return Function.toString.call(fn).indexOf("[native code]") !== -1;
 	}
@@ -396,18 +350,16 @@
 
 	      returnValue = toConsumableArray(returnValue).concat(toConsumableArray(source));
 	    } else if (isObject(source)) {
-	      var _arr = Object.entries(source);
+	      for (var key in source) {
+	        if (source.hasOwnProperty(key)) {
+	          var value = source[key];
 
-	      for (var _i2 = 0; _i2 < _arr.length; _i2++) {
-	        var _arr$_i = slicedToArray(_arr[_i2], 2),
-	            key = _arr$_i[0],
-	            value = _arr$_i[1];
+	          if (isObject(value) && key in returnValue) {
+	            value = deepMerge(returnValue[key], value);
+	          }
 
-	        if (isObject(value) && Reflect.has(returnValue, key)) {
-	          value = deepMerge(returnValue[key], value);
+	          returnValue = objectSpread({}, returnValue, defineProperty({}, key, value));
 	        }
-
-	        returnValue = objectSpread({}, returnValue, defineProperty({}, key, value));
 	      }
 	    }
 	  }
@@ -439,6 +391,51 @@
 
 	    if (type === 'object') {
 	      validOption(defaultValue, value, path.concat(key));
+	    }
+
+	    if (path.length === 1) {
+	      if (key === 'layers') {
+	        value.forEach(function (item, index) {
+	          validOption({
+	            name: '',
+	            index: 0,
+	            html: '',
+	            style: {}
+	          }, item, path.concat("".concat(key, "[").concat(index, "]")));
+	        });
+	      }
+
+	      if (key === 'contextmenu') {
+	        value.forEach(function (item, index) {
+	          validOption({
+	            name: '',
+	            click: new Function(),
+	            html: '',
+	            style: {}
+	          }, item, path.concat("".concat(key, "[").concat(index, "]")));
+	        });
+	      }
+
+	      if (key === 'highlight') {
+	        value.forEach(function (item, index) {
+	          validOption({
+	            time: 0,
+	            text: ''
+	          }, item, path.concat("".concat(key, "[").concat(index, "]")));
+	        });
+	      }
+
+	      if (key === 'controls') {
+	        value.forEach(function (item, index) {
+	          if (item.option) {
+	            validOption({
+	              disable: false,
+	              position: '',
+	              index: 0
+	            }, item.option, path.concat("".concat(key, "[").concat(index, "]")));
+	          }
+	        });
+	      }
 	    }
 	  });
 	}
@@ -896,6 +893,52 @@
 
 	  return Pip;
 	}();
+
+	function _arrayWithHoles(arr) {
+	  if (Array.isArray(arr)) return arr;
+	}
+
+	var arrayWithHoles = _arrayWithHoles;
+
+	function _iterableToArrayLimit(arr, i) {
+	  var _arr = [];
+	  var _n = true;
+	  var _d = false;
+	  var _e = undefined;
+
+	  try {
+	    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+	      _arr.push(_s.value);
+
+	      if (i && _arr.length === i) break;
+	    }
+	  } catch (err) {
+	    _d = true;
+	    _e = err;
+	  } finally {
+	    try {
+	      if (!_n && _i["return"] != null) _i["return"]();
+	    } finally {
+	      if (_d) throw _e;
+	    }
+	  }
+
+	  return _arr;
+	}
+
+	var iterableToArrayLimit = _iterableToArrayLimit;
+
+	function _nonIterableRest() {
+	  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+	}
+
+	var nonIterableRest = _nonIterableRest;
+
+	function _slicedToArray(arr, i) {
+	  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+	}
+
+	var slicedToArray = _slicedToArray;
 
 	var loading = "<svg class=\"lds-spinner\" width=\"80px\" height=\"80px\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" style=\"background: none;\"><g transform=\"rotate(0 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(30 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(60 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(90 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(120 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(150 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(180 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(210 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(240 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(270 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(300 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(330 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"0s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g></svg>\n";
 
@@ -1413,11 +1456,7 @@
 	    classCallCheck(this, Controls);
 
 	    this.art = art;
-	    this.$map = {
-	      top: [],
-	      left: [],
-	      right: []
-	    };
+	    this.$map = {};
 	    this.init();
 	    this.mount();
 	  }
@@ -1477,9 +1516,7 @@
 	        position: 'right',
 	        index: 50
 	      }));
-	      this.art.option.controls.filter(function (item) {
-	        return !item.disable;
-	      }).forEach(function (item) {
+	      this.art.option.controls.forEach(function (item) {
 	        _this.add(item);
 	      });
 	    }
@@ -1488,7 +1525,7 @@
 	    value: function add(control) {
 	      var option = control.option;
 
-	      if (!option.disable) {
+	      if (option && !option.disable) {
 	        id++;
 	        var name = control.constructor.name.toLowerCase() || "control".concat(id);
 	        var $control = document.createElement('div');
@@ -1496,8 +1533,8 @@
 	        $control.setAttribute('data-control-index', String(option.index) || id);
 	        option.$control = $control;
 	        this.commonMethod(control);
-	        this.$map[option.position].push($control);
-	        control.apply(this.art);
+	        (this.$map[option.position] || (this.$map[option.position] = [])).push($control);
+	        control.apply && control.apply(this.art);
 	        this[name] = control;
 	      }
 	    }
@@ -2093,7 +2130,9 @@
 
 	    this.art = art;
 	    this.add = this.add.bind(this);
-	    this.art.option.layers.forEach(this.add);
+	    this.art.option.layers.filter(function (item) {
+	      return item.disable === false;
+	    }).forEach(this.add);
 	    this.init();
 	  }
 

@@ -5,7 +5,7 @@ export default class Layers {
   constructor(art) {
     this.art = art;
     this.add = this.add.bind(this);
-    this.art.option.layers.forEach(this.add);
+    this.art.option.layers.filter(item => item.disable === false).forEach(this.add);
     this.init();
   }
 
