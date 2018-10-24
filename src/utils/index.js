@@ -52,7 +52,7 @@ export function setStyle(element, styles) {
 }
 
 export function secondToTime(second) {
-  const add0 = num => (num < 10 ? `0${num}` : String(num));
+  const add0 = num => num < 10 ? `0${num}` : String(num);
   const hour = Math.floor(second / 3600);
   const min = Math.floor((second - hour * 3600) / 60);
   const sec = Math.floor(second - hour * 3600 - min * 60);

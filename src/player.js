@@ -95,7 +95,7 @@ export default class Player {
   play() {
     const { refs: { $video }, i18n, notice } = this.art;
     const promise = $video.play();
-    notice.show(i18n.get('Start'));
+    notice.show(i18n.get('Play'));
     this.art.emit('play', $video);
     return promise;
   }
