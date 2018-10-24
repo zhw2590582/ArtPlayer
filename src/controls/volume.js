@@ -1,4 +1,4 @@
-import { append, setStorage, getStorage, clamp, tooltip } from '../utils';
+import { append, getStorage, clamp, tooltip } from '../utils';
 import icons from '../icons';
 
 export default class Volume {
@@ -28,7 +28,6 @@ export default class Volume {
     proxy(this.$volume, 'click', () => {
       this.$volume.style.display = 'none';
       this.$volumeClose.style.display = 'block';
-      setStorage('volume', player.volume());
       player.volume(0);
     });
 
@@ -89,7 +88,6 @@ export default class Volume {
     const { left: panelLeft, width: panelWidth } = this.$volumePanel.getBoundingClientRect();
     const { width: handleWidth } = this.$volumeHandle.getBoundingClientRect();
     const percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
-    setStorage('volume', percentage);
     player.volume(percentage);
   }
 

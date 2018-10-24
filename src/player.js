@@ -1,4 +1,4 @@
-import { clamp, secondToTime } from './utils';
+import { clamp, secondToTime, setStorage } from './utils';
 import config from './config';
 
 export default class Player {
@@ -137,6 +137,9 @@ export default class Player {
     if (percentage !== undefined) {
       $video.volume = clamp(percentage, 0, 1);
       notice.show(`${i18n.get('Volume')}: ${parseInt($video.volume * 100)}`);
+      if ($video.volume !== 0) {
+        setStorage('volume', $video.volume);
+      }
       this.art.emit('volume', $video.volume);
     }
     return $video.volume || 0;

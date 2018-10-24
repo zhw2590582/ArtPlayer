@@ -824,6 +824,11 @@
 	      if (percentage !== undefined) {
 	        $video.volume = clamp(percentage, 0, 1);
 	        notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100)));
+
+	        if ($video.volume !== 0) {
+	          setStorage('volume', $video.volume);
+	        }
+
 	        this.art.emit('volume', $video.volume);
 	      }
 
@@ -1295,7 +1300,6 @@
 	      proxy(this.$volume, 'click', function () {
 	        _this.$volume.style.display = 'none';
 	        _this.$volumeClose.style.display = 'block';
-	        setStorage('volume', player.volume());
 	        player.volume(0);
 	      });
 	      proxy(this.$volumeClose, 'click', function () {
@@ -1357,7 +1361,6 @@
 	          handleWidth = _this$$volumeHandle$g.width;
 
 	      var percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
-	      setStorage('volume', percentage);
 	      player.volume(percentage);
 	    }
 	  }, {
