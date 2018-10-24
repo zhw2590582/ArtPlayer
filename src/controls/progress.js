@@ -1,9 +1,12 @@
 import { append } from '../utils';
 
 export default class Progress {
-  constructor(art, option) {
-    this.art = art;
+  constructor(option) {
     this.option = option;
+  }
+
+  apply(art) {
+    this.art = art;
     this.isDroging = false;
     this.getLoaded = this.getLoaded.bind(this);
     this.getPlayed = this.getPlayed.bind(this);
@@ -20,7 +23,7 @@ export default class Progress {
     } = this.art;
 
     append(
-      this.option.ref,
+      this.option.$control,
       `
         <div class="art-control-progress-inner">
           <div class="art-progress-loaded"></div>
@@ -32,15 +35,15 @@ export default class Progress {
       `
     );
 
-    this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
-    this.$played = this.option.ref.querySelector('.art-progress-played');
-    this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
-    this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
-    this.$tip = this.option.ref.querySelector('.art-progress-tip');
+    this.$loaded = this.option.$control.querySelector('.art-progress-loaded');
+    this.$played = this.option.$control.querySelector('.art-progress-played');
+    this.$highlight = this.option.$control.querySelector('.art-progress-highlight');
+    this.$indicator = this.option.$control.querySelector('.art-progress-indicator');
+    this.$tip = this.option.$control.querySelector('.art-progress-tip');
 
     this.art.on('video:canplay', () => {
       this.set('loaded', this.getLoaded());
-      highlight.forEach(item => {
+      highlight.filter(item => !item.disable).forEach(item => {
         const left = Number(item.time) / $video.duration;
         append(this.$highlight, `
           <span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>
@@ -61,7 +64,7 @@ export default class Progress {
       this.set('played', 1);
     });
 
-    proxy(this.option.ref, 'mousemove', event => {
+    proxy(this.option.$control, 'mousemove', event => {
       this.$tip.style.display = 'block';
       if (event.path.indexOf(this.$highlight) > -1) {
         this.showHighlight(event);
@@ -70,11 +73,11 @@ export default class Progress {
       }
     });
 
-    proxy(this.option.ref, 'mouseout', () => {
+    proxy(this.option.$control, 'mouseout', () => {
       this.$tip.style.display = 'none';
     });
 
-    proxy(this.option.ref, 'click', event => {
+    proxy(this.option.$control, 'click', event => {
       if (event.target !== this.$indicator) {
         const { second, percentage } = this.getPosFromEvent(event);
         this.set('played', percentage);
@@ -108,7 +111,7 @@ export default class Progress {
     const { text, time } = event.target.dataset;
     this.$tip.innerHTML = text;
     const left =
-      Number(time) / $video.duration * this.option.ref.clientWidth +
+      Number(time) / $video.duration * this.option.$control.clientWidth +
       event.target.clientWidth / 2 -
       this.$tip.clientWidth / 2;
     this.$tip.style.left = `${left}px`;
@@ -120,8 +123,8 @@ export default class Progress {
     this.$tip.innerHTML = time;
     if (width <= tipWidth / 2) {
       this.$tip.style.left = 0;
-    } else if (width > this.option.ref.clientWidth - tipWidth / 2) {
-      this.$tip.style.left = `${this.option.ref.clientWidth - tipWidth}px`;
+    } else if (width > this.option.$control.clientWidth - tipWidth / 2) {
+      this.$tip.style.left = `${this.option.$control.clientWidth - tipWidth}px`;
     } else {
       this.$tip.style.left = `${width - tipWidth / 2}px`;
     }

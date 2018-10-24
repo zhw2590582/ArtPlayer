@@ -26,7 +26,6 @@
     <script src="./js/artplayer.js"></script>
     <script>
         var player = new Artplayer({
-            loop: true,
             container: '.artplayer-app',
             url: './video/one-more-time-one-more-chance.mp4',
             poster: './img/one-more-time-one-more-chance.jpg',
@@ -38,6 +37,7 @@
                 width: 190,
                 height: 107
             },
+            contextmenu: [],
             highlight: [
                 {
                     time: 60,
@@ -65,7 +65,7 @@
         player.layers.add({
             index: 1,
             name: 'your-name',
-            html: '<img style="width: 100px" src="./img/yourName.png">',
+            html: '<img style="width: 100px" src="./img/your-name.png">',
             style: {
                 'top': '20px',
                 'right': '20px',
@@ -73,7 +73,12 @@
             }
         }, dom => {
             dom.addEventListener('click', () => {
-                dom.remove();
+                player.destroy(true);
+                new Artplayer({
+                    autoplay: true,
+                    container: '.artplayer-app',
+                    url: './video/you-name.mp4',
+                })
             });
         });
 
@@ -87,26 +92,26 @@
             });
         });
 
-        Artplayer.config.mse.mediaSource.events.forEach(item => {
-            player.on('mediaSource:' + item, event => {
-                console.log('mediaSource', event);
-            });
-        });
+        // Artplayer.config.mse.mediaSource.events.forEach(item => {
+        //     player.on('mediaSource:' + item, event => {
+        //         console.log('mediaSource', event);
+        //     });
+        // });
 
-        Artplayer.config.mse.sourceBufferList.events.forEach(item => {
-            player.on('sourceBuffers:' + item, event => {
-                console.log('sourceBuffers', event);
-            });
-            player.on('activeSourceBuffers:' + item, event => {
-                console.log('activeSourceBuffers', event);
-            });
-        });
+        // Artplayer.config.mse.sourceBufferList.events.forEach(item => {
+        //     player.on('sourceBuffers:' + item, event => {
+        //         console.log('sourceBuffers', event);
+        //     });
+        //     player.on('activeSourceBuffers:' + item, event => {
+        //         console.log('activeSourceBuffers', event);
+        //     });
+        // });
 
-        Artplayer.config.mse.sourceBuffer.events.forEach(item => {
-            player.on('sourceBuffer:' + item, event => {
-                console.log('sourceBuffer', event);
-            });
-        });
+        // Artplayer.config.mse.sourceBuffer.events.forEach(item => {
+        //     player.on('sourceBuffer:' + item, event => {
+        //         console.log('sourceBuffer', event);
+        //     });
+        // });
     </script>
 </body>
 

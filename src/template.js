@@ -8,7 +8,7 @@ export default class Template {
     const { refs } = this.art;
     refs.$container.innerHTML = `
         <div class="artplayer-video-player">
-          <video class="artplayer-video" webkit-playsinline playsinline></video>
+          <video class="artplayer-video"></video>
           <div class="artplayer-subtitle"></div>
           <div class="artplayer-layers"></div>
           <div class="artplayer-mask"></div>

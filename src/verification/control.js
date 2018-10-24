@@ -2,11 +2,6 @@ import { errorHandle } from '../utils';
 
 export default function validControl(option) {
   errorHandle(
-    typeof option.control === 'function',
-    `'control' option require 'function' type, but got '${typeof option.control}'.`
-  );
-
-  errorHandle(
     typeof option.disable === 'boolean',
     `'disable' option require 'boolean' type, but got '${typeof option.disable}'.`
   );

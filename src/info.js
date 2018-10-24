@@ -45,14 +45,14 @@ export default class Info {
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video type:</div>
-        <div class="art-info-content" data-head="Content-Type"></div>
+        <div class="art-info-content" data-head="Content-Type">loading...</div>
       </div>
     `);
 
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video size:</div>
-        <div class="art-info-content" data-head="Content-length"></div>
+        <div class="art-info-content" data-head="Content-length">loading...</div>
       </div>
     `);
 

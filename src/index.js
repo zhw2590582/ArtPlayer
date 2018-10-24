@@ -1,4 +1,4 @@
-import './style/index.scss';
+import './style';
 import { deepMerge } from './utils';
 import validOption from './verification/player';
 import config from './config';
@@ -26,7 +26,7 @@ class Artplayer extends Emitter {
     super();
     this.emit('init:start');
     this.option = deepMerge({}, Artplayer.DEFAULTS, option);
-    validOption(this.option);
+    validOption(Artplayer.DEFAULTS, this.option);
     this.init();
     this.emit('init:end');
   }
@@ -44,6 +44,7 @@ class Artplayer extends Emitter {
       container: '.artplayer',
       url: '',
       poster: '',
+      volume: 0.7,
       thumbnails: {
         url: '',
         number: 60,
@@ -51,10 +52,8 @@ class Artplayer extends Emitter {
         height: 90,
         column: 10
       },
-      volume: 0.7,
       autoplay: false,
       loop: false,
-      preload: 'auto',
       type: '',
       mimeCodec: '',
       layers: [],
@@ -68,6 +67,12 @@ class Artplayer extends Emitter {
       },
       controls: [],
       highlight: [],
+      moreVideoAttr: {
+        'controls': false,
+        'preload': 'auto',
+        'webkit-playsinline': true,
+        'playsinline': true
+      },
       lang: navigator.language.toLowerCase()
     };
   }

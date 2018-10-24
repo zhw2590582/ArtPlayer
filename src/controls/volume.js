@@ -2,18 +2,21 @@ import { append, setStorage, getStorage, clamp } from '../utils';
 import icons from '../icons';
 
 export default class Volume {
-  constructor(art, option) {
-    this.art = art;
+  constructor(option) {
     this.option = option;
+  }
+
+  apply(art) {
+    this.art = art;
     this.isDroging = false;
     this.init();
   }
 
   init() {
     const { events: { proxy }, player } = this.art;
-    this.$volume = append(this.option.ref, icons.volume);
-    this.$volumeClose = append(this.option.ref, icons.volumeClose);
-    this.$volumePanel = append(this.option.ref, '<div class="art-volume-panel"></div>');
+    this.$volume = append(this.option.$control, icons.volume);
+    this.$volumeClose = append(this.option.$control, icons.volumeClose);
+    this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
     this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
     this.$volumeClose.style.display = 'none';
 
@@ -31,9 +34,10 @@ export default class Volume {
     proxy(this.$volumeClose, 'click', () => {
       this.$volume.style.display = 'block';
       this.$volumeClose.style.display = 'none';
+      player.volume(getStorage('volume'));
     });
 
-    proxy(this.option.ref, 'mouseenter', () => {
+    proxy(this.option.$control, 'mouseenter', () => {
       this.$volumePanel.classList.add('art-volume-panel-hover');
 
       // TODO
@@ -42,7 +46,7 @@ export default class Volume {
       }, 200);
     });
 
-    proxy(this.option.ref, 'mouseleave', () => {
+    proxy(this.option.$control, 'mouseleave', () => {
       this.$volumePanel.classList.remove('art-volume-panel-hover');
     });
 

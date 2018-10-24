@@ -1,5 +1,6 @@
-import { append } from './utils';
+import { append, setStyle } from './utils';
 
+let id = 0;
 export default class Contextmenu {
   constructor(art) {
     this.art = art;
@@ -16,17 +17,19 @@ export default class Contextmenu {
 
     option.contextmenu.push(
       {
-        text: i18n.get('Video info'),
+        name: 'info',
+        html: i18n.get('Video info'),
         click: () => {
           this.art.info.show();
         }
       },
       {
-        text: 'ArtPlayer __VERSION__',
-        link: 'https://github.com/zhw2590582/artplayer'
+        name: 'version',
+        html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer __VERSION__</a>'
       },
       {
-        text: i18n.get('Close'),
+        name: 'close',
+        html: i18n.get('Close'),
         click: () => {
           this.hide();
         }
@@ -59,18 +62,18 @@ export default class Contextmenu {
     refs.$contextmenu = document.createElement('div');
     refs.$contextmenu.classList.add('artplayer-contextmenu');
     option.contextmenu.forEach(item => {
-      const $menu = document.createElement('a');
-      $menu.innerHTML = item.text;
-      $menu.classList.add('art-menu');
-      if (item.link) {
-        $menu.target = '_blank';
-        $menu.href = item.link;
-      } else if (item.click) {
-        $menu.href = '#';
+      id++;
+      const $menu = document.createElement('div');
+      $menu.setAttribute('data-art-menu-id', id);
+      $menu.setAttribute('class', `art-menu art-menu-${item.name || id}`);
+      append($menu, item.html);
+      setStyle($menu, item.style || {});
+      if (item.click) {
         proxy($menu, 'click', event => {
           event.preventDefault();
           item.click(this.art, event);
           this.hide();
+          this.art.emit('contextmenu:click', $menu);
         });
       }
       append(refs.$contextmenu, $menu);

@@ -3,8 +3,12 @@ import { errorHandle, getExt, setStyle } from './utils';
 export default class Subtitle {
   constructor(art) {
     this.art = art;
-    this.checkExt(this.art.option.subtitle.url);
-    this.init();
+
+    const { url } = this.art.option.subtitle;
+    if (url) {
+      this.checkExt(url);
+      this.init();
+    }
   }
 
   init() {

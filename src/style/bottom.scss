@@ -1,111 +1,4 @@
-@charset "UTF-8";
-
 .artplayer-video-player {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    outline: 0;
-    font-family: Roboto,Arial,Helvetica,sans-serif;
-    color: #eee;
-    text-align: left;
-    direction: ltr;
-    font-size: 14px;
-    line-height: 1.3;
-    user-select: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    touch-action: manipulation;
-    -ms-high-contrast-adjust: none;
-
-    * {
-        box-sizing: border-box;
-    }
-
-    .art-icon {
-        display: inline-block;
-        svg {
-            fill: #fff;
-        }
-    }
-
-    .artplayer-video {
-        position: absolute;
-        z-index: 10;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        outline: 0;
-    }
-
-    .artplayer-subtitle {
-        position: absolute;
-        z-index: 20;
-        bottom: 40px;
-        width: 100%;
-        padding: 0 20px;
-        text-align: center;
-        color: #fff;
-        text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
-        font-size: 20px;
-
-        p {
-            margin: 5px 0;
-        }
-    }
-
-    .artplayer-layers {
-        position: absolute;
-        z-index: 30;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-
-        .art-layer {
-            position: absolute;
-        }
-    }
-
-    .artplayer-mask {
-        display: none;
-        position: absolute;
-        z-index: 40;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-    
-        .art-icon-playBig {
-            position: absolute;
-            right: 30px;
-            bottom: 65px;
-            opacity: .6;
-        }
-    }
-
-    .artplayer-loading {
-        display: none;
-        position: absolute;
-        z-index: 40;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
     .artplayer-bottom {
         position: absolute;
         z-index: 50;
@@ -226,7 +119,7 @@
                 background-color: rgba(0,0,0,.7);
             }
         }
-
+    
         .artplayer-controls {
             position: relative;
             pointer-events: all;
@@ -234,7 +127,7 @@
             align-items: center;
             justify-content: space-between;
             height: 36px;
-
+    
             .art-control {
                 float: left;
                 font-size: 12px;
@@ -251,7 +144,7 @@
                     padding: 7px;
                 }
             }
-
+    
             .art-control-volume {
                 .art-volume-panel {
                     position: relative;
@@ -260,7 +153,7 @@
                     height: 100%;
                     transition: margin .2s cubic-bezier(0.4,0.0,1,1),width .2s cubic-bezier(0.4,0.0,1,1);
                     overflow: hidden;
-
+    
                     .art-volume-slider-handle {
                         position: absolute;
                         top: 50%;
@@ -270,17 +163,17 @@
                         border-radius: 12px;
                         margin-top: -6px;
                         background: #fff;
-
+    
                         &::before {
                             left: -54px;
                             background: #fff;
                         }
-
+    
                         &::after {
                             left: 6px;
                             background: rgba(255,255,255,.2);
                         }
-
+    
                         &::before, &::after {
                             content: '';
                             position: absolute;
@@ -291,13 +184,13 @@
                             width: 60px
                         }
                     }
-
+    
                     &.art-volume-panel-hover {
                         width: 60px;
                     }
                 }
             }
-
+    
             .art-control-time {
                 padding: 0 10px;
             }
@@ -308,89 +201,6 @@
         .artplayer-bottom {
             opacity: 1;
             visibility: visible;
-        }
-    }
-
-    .artplayer-notice {
-        display: none;
-        font-size: 14px;
-        position: absolute;
-        z-index: 60;
-        left: 10px;
-        top: 10px;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 10px;
-        border-radius: 3px;
-        color: #fff;
-        background: rgba(0, 0, 0, 0.6);
-    }
-
-    .artplayer-contextmenu {
-        position: absolute;
-        z-index: 70;
-        left: 0;
-        top: 0;
-        width: 200px;
-        padding: 5px 0;
-        background:rgba(0, 0, 0, 0.8);
-        a {
-            font-size: 13px;
-            display: block;
-            color: #fff;
-            padding: 7px 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            text-decoration: none;
-            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-    
-            &:hover {
-                background-color: rgba(255,255,255,.1);
-            }
-        }
-    }
-
-    .artplayer-info {
-        display: none;
-        position: absolute;
-        left: 10px;
-        top: 10px;
-        z-index: 80;
-        width: 350px;
-        min-height: 150px;
-        padding: 10px;
-        color: #fff;
-        font-size: 12px;
-        font-family: Noto Sans CJK SC DemiLight,Roboto,Segoe UI,Tahoma,Arial,Helvetica,sans-serif;
-        -webkit-font-smoothing: antialiased;
-        background: rgba(0,0,0,.7);
-
-        .art-info-item {
-            display: flex;
-            margin-bottom: 5px;
-            .art-info-title {
-                width: 100px;
-                text-align: right;
-            }
-    
-            .art-info-content {
-                flex: 1;
-                padding-left: 5px;
-            }
-        }
-
-        .artplayer-info-close {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-        }
-    }
-
-    &.artplayer-error {
-        .art-progress-indicator, .art-progress-tip {
-            display: none !important;
         }
     }
 }

@@ -9,13 +9,14 @@ export default class Player {
   }
 
   init() {
-    const { option } = this.art;
-    const { $video } = this.art.refs;
-    $video.controls = false;
-    $video.poster = option.poster;
+    const { option, refs: { $video } } = this.art;
+    Object.keys(option.moreVideoAttr).forEach(key => {
+      const value = option.moreVideoAttr[key];
+      $video[key] = value;
+    });
     $video.volume = clamp(option.volume, 0, 1);
+    $video.poster = option.poster;
     $video.autoplay = option.autoplay;
-    $video.preload = option.preload;
     $video.src = option.url;
   }
 

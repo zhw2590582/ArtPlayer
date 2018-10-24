@@ -1,5 +1,4 @@
 import { secondToTime, clamp } from '../utils';
-import validControl from '../verification/control';
 import Danmu from './danmu';
 import Fullscreen from './fullscreen';
 import Pip from './pip';
@@ -25,100 +24,84 @@ export default class Controls {
   }
 
   init() {
-    this.add({
-      control: Progress,
+    this.add(new Progress({
       disable: false,
       position: 'top',
       index: 10
-    });
+    }));
 
-    this.add({
-      control: Thumbnails,
+    this.add(new Thumbnails({
       disable: !this.art.option.thumbnails.url,
       position: 'top',
       index: 20
-    });
+    }));
 
-    this.add({
-      control: PlayAndPause,
+    this.add(new PlayAndPause({
       disable: false,
       position: 'left',
       index: 10
-    });
+    }));
 
-    this.add({
-      control: Volume,
+    this.add(new Volume({
       disable: false,
-      tooltip: 'Volume',
       position: 'left',
       index: 20
-    });
+    }));
 
-    this.add({
-      control: Time,
+    this.add(new Time({
       disable: false,
-      tooltip: 'Volume',
       position: 'left',
       index: 30
-    });
+    }));
 
-    this.add({
-      control: Danmu,
+    this.add(new Danmu({
       disable: false,
-      tooltip: 'Danmu',
       position: 'right',
       index: 10
-    });
+    }));
 
-    this.add({
-      control: Subtitle,
+    this.add(new Subtitle({
       disable: false,
-      tooltip: 'Subtitle',
       position: 'right',
       index: 20
-    });
+    }));
 
-    this.add({
-      control: Setting,
+    this.add(new Setting({
       disable: false,
-      tooltip: 'Setting',
       position: 'right',
       index: 30
-    });
+    }));
 
-    this.add({
-      control: Pip,
+    this.add(new Pip({
       disable: false,
-      tooltip: 'Pip',
       position: 'right',
       index: 40
-    });
+    }));
 
-    this.add({
-      control: Fullscreen,
+    this.add(new Fullscreen({
       disable: false,
-      tooltip: 'Fullscreen',
       position: 'right',
       index: 50
-    });
+    }));
 
-    this.art.option.controls.forEach(item => {
+    this.art.option.controls.filter(item => !item.disable).forEach(item => {
       this.add(item);
     });
   }
 
-  add(option) {
-    validControl(option);
+  add(control) {
+    const { option } = control;
     if (!option.disable) {
       id++;
-      const name = option.control.name.toLowerCase() || `control${id}`;
+      const name = control.constructor.name.toLowerCase() || `control${id}`;
       const $control = document.createElement('div');
       $control.setAttribute('class', `art-control art-control-${name}`);
       $control.setAttribute('data-control-index', String(option.index) || id);
-      option.ref = $control;
-      this.commonMethod(option);
-      this[name] = new option.control(this.art, option);
+      option.$control = $control;
+      this.commonMethod(control);
       this.$map[option.position].push($control);
+      control.apply(this.art);
+      this[name] = control;
     }
   }
 
@@ -148,23 +131,22 @@ export default class Controls {
     });
   }
 
-  commonMethod(option) {
-    Object.defineProperty(option.control.prototype, 'hide', {
+  commonMethod(control) {
+    Object.defineProperty(control, 'hide', {
       value: () => {
-        option.ref.style.display = 'none';
-        this.art.emit('control:hide', option.ref);
+        control.option.$control.style.display = 'none';
+        this.art.emit('control:hide', control.option.$control);
       }
     });
 
-    Object.defineProperty(option.control.prototype, 'show', {
+    Object.defineProperty(control, 'show', {
       value: () => {
-        option.ref.style.display =
-          option.position === 'top' ? 'block' : 'inline-block';
-        this.art.emit('control:show', option.ref);
+        control.option.$control.style.display = 'block';
+        this.art.emit('control:show', control.option.$control);
       }
     });
 
-    Object.defineProperty(option.control.prototype, 'getPosFromEvent', {
+    Object.defineProperty(control, 'getPosFromEvent', {
       value: event => {
         const { $video, $progress } = this.art.refs;
         const { left } = $progress.getBoundingClientRect();

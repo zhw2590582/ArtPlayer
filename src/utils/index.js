@@ -91,3 +91,9 @@ export function setStorage(key, value) {
   });
   localStorage.setItem('artplayer_settings', JSON.stringify(storage));
 }
+
+export function getType(val) {
+  const { toString } = Object.prototype;
+  const type = toString.call(val).slice(8, -1).toLowerCase().replace(/\s/g, '');
+  return type;
+}

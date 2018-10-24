@@ -1,0 +1,16 @@
+.artplayer-video-player {
+    .artplayer-notice {
+        display: none;
+        font-size: 14px;
+        position: absolute;
+        z-index: 60;
+        left: 10px;
+        top: 10px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        border-radius: 3px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+    }
+}

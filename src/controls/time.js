@@ -1,25 +1,28 @@
 import { secondToTime } from '../utils';
 
 export default class Time {
-  constructor(art, option) {
-    this.art = art;
+  constructor(option) {
     this.option = option;
+  }
+
+  apply(art) {
+    this.art = art;
     this.init();
   }
 
   init() {
-    this.option.ref.innerHTML = '00:00 / 00:00';
+    this.option.$control.innerHTML = '00:00 / 00:00';
 
     this.art.on('video:canplay', () => {
-      this.option.ref.innerHTML = this.getTime();
+      this.option.$control.innerHTML = this.getTime();
     });
 
     this.art.on('video:timeupdate', () => {
-      this.option.ref.innerHTML = this.getTime();
+      this.option.$control.innerHTML = this.getTime();
     });
 
     this.art.on('video:seeking', () => {
-      this.option.ref.innerHTML = this.getTime();
+      this.option.$control.innerHTML = this.getTime();
     });
   }
 

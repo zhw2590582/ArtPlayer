@@ -422,29 +422,25 @@
 	  var storage = Object.assign({}, getStorage(), defineProperty({}, key, value));
 	  localStorage.setItem('artplayer_settings', JSON.stringify(storage));
 	}
+	function getType(val) {
+	  var toString = Object.prototype.toString;
+	  var type = toString.call(val).slice(8, -1).toLowerCase().replace(/\s/g, '');
+	  return type;
+	}
 
-	function validOption(option) {
-	  errorHandle(option.container, '\'container\' option is required.');
-	  errorHandle(option.url, '\'url\' option is required.');
-	  errorHandle(typeof option.container === 'string' || option.container instanceof Element, "'container' option require 'string' or 'Element' type, but got '".concat(_typeof_1(option.container), "'."));
-	  errorHandle(typeof option.url === 'string', "'url' option require 'string' type, but got '".concat(_typeof_1(option.url), "'."));
-	  errorHandle(typeof option.poster === 'string', "'poster' option require 'string' type, but got '".concat(_typeof_1(option.poster), "'."));
-	  errorHandle(Object.prototype.toString.call(option.thumbnails) === '[object Object]', "'thumbnails' option require 'object' type, but got '".concat(_typeof_1(option.thumbnails), "'."));
-	  errorHandle(typeof option.volume === 'number', "'volume' option require 'number' type, but got '".concat(_typeof_1(option.volume), "'."));
-	  errorHandle(typeof option.autoplay === 'boolean', "'autoplay' option require 'boolean' type, but got '".concat(_typeof_1(option.autoplay), "'."));
-	  errorHandle(typeof option.loop === 'boolean', "'loop' option require 'boolean' type, but got '".concat(_typeof_1(option.loop), "'."));
-	  errorHandle(['none', 'metadata', 'auto'].indexOf(option.preload) > -1, "'preload' option require one of 'none\u3001metadata\u3001auto', but got '".concat(option.preload, "."));
-	  errorHandle(typeof option.lang === 'string', "'lang' option require 'string' type, but got '".concat(_typeof_1(option.lang), "'."));
-	  errorHandle(typeof option.type === 'string', "'type' option require 'string' type, but got '".concat(_typeof_1(option.type), "'."));
-	  errorHandle(typeof option.mimeCodec === 'string', "'mimeCodec' option require 'string' type, but got '".concat(_typeof_1(option.mimeCodec), "'."));
-	  errorHandle(Array.isArray(option.layers), "'layers' option require 'array' type, but got '".concat(_typeof_1(option.layers), "'."));
-	  errorHandle(Array.isArray(option.contextmenu), "'contextmenu' option require 'array' type, but got '".concat(_typeof_1(option.contextmenu), "'."));
-	  errorHandle(typeof option.loading === 'string' || option.loading instanceof Element, "'loading' option require 'string' type, but got '".concat(_typeof_1(option.loading), "'."));
-	  errorHandle(typeof option.theme === 'string', "'theme' option require 'string' type, but got '".concat(_typeof_1(option.theme), "'."));
-	  errorHandle(typeof option.hotkey === 'boolean', "'hotkey' option require 'boolean' type, but got '".concat(_typeof_1(option.hotkey), "'."));
-	  errorHandle(Object.prototype.toString.call(option.subtitle) === '[object Object]', "'subtitle' option require 'object' type, but got '".concat(_typeof_1(option.subtitle), "'."));
-	  errorHandle(Array.isArray(option.controls), "'controls' option require 'array' type, but got '".concat(_typeof_1(option.controls), "'."));
-	  errorHandle(Array.isArray(option.highlight), "'highlight' option require 'array' type, but got '".concat(_typeof_1(option.highlight), "'."));
+	function validOption(DEFAULTS, option) {
+	  var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ['option'];
+	  Object.keys(DEFAULTS).forEach(function (key) {
+	    var defaultValue = DEFAULTS[key];
+	    var value = option[key];
+	    var defaultType = getType(defaultValue);
+	    var type = getType(value);
+	    errorHandle(defaultType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(defaultType, "' type, but got '").concat(type, "'"));
+
+	    if (type === 'object') {
+	      validOption(defaultValue, value, path.concat(key));
+	    }
+	  });
 	}
 
 	var mimeCodec = {
@@ -562,7 +558,7 @@
 	    key: "init",
 	    value: function init() {
 	      var refs = this.art.refs;
-	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\" webkit-playsinline playsinline></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
+	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
 	      refs.$player = refs.$container.querySelector('.artplayer-video-player');
 	      refs.$video = refs.$container.querySelector('.artplayer-video');
 	      refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -654,13 +650,16 @@
 	  createClass(Player, [{
 	    key: "init",
 	    value: function init() {
-	      var option = this.art.option;
-	      var $video = this.art.refs.$video;
-	      $video.controls = false;
-	      $video.poster = option.poster;
+	      var _this$art = this.art,
+	          option = _this$art.option,
+	          $video = _this$art.refs.$video;
+	      Object.keys(option.moreVideoAttr).forEach(function (key) {
+	        var value = option.moreVideoAttr[key];
+	        $video[key] = value;
+	      });
 	      $video.volume = clamp(option.volume, 0, 1);
+	      $video.poster = option.poster;
 	      $video.autoplay = option.autoplay;
-	      $video.preload = option.preload;
 	      $video.src = option.url;
 	    }
 	  }, {
@@ -668,13 +667,13 @@
 	    value: function eventBind() {
 	      var _this = this;
 
-	      var _this$art = this.art,
-	          proxy = _this$art.events.proxy,
-	          _this$art$refs = _this$art.refs,
-	          $player = _this$art$refs.$player,
-	          $video = _this$art$refs.$video,
-	          i18n = _this$art.i18n,
-	          notice = _this$art.notice;
+	      var _this$art2 = this.art,
+	          proxy = _this$art2.events.proxy,
+	          _this$art2$refs = _this$art2.refs,
+	          $player = _this$art2$refs.$player,
+	          $video = _this$art2$refs.$video,
+	          i18n = _this$art2.i18n,
+	          notice = _this$art2.notice;
 	      config.video.events.forEach(function (eventName) {
 	        proxy($video, eventName, function (event) {
 	          _this.art.emit("video:".concat(event.type), event);
@@ -753,10 +752,10 @@
 	  }, {
 	    key: "play",
 	    value: function play() {
-	      var _this$art2 = this.art,
-	          $video = _this$art2.refs.$video,
-	          i18n = _this$art2.i18n,
-	          notice = _this$art2.notice;
+	      var _this$art3 = this.art,
+	          $video = _this$art3.refs.$video,
+	          i18n = _this$art3.i18n,
+	          notice = _this$art3.notice;
 	      var promise = $video.play();
 	      notice.show(i18n.get('Start'));
 	      this.art.emit('play', $video);
@@ -765,10 +764,10 @@
 	  }, {
 	    key: "pause",
 	    value: function pause() {
-	      var _this$art3 = this.art,
-	          $video = _this$art3.refs.$video,
-	          i18n = _this$art3.i18n,
-	          notice = _this$art3.notice;
+	      var _this$art4 = this.art,
+	          $video = _this$art4.refs.$video,
+	          i18n = _this$art4.i18n,
+	          notice = _this$art4.notice;
 	      $video.pause();
 	      notice.show(i18n.get('Pause'));
 	      this.art.emit('pause', $video);
@@ -785,9 +784,9 @@
 	  }, {
 	    key: "seek",
 	    value: function seek(time) {
-	      var _this$art4 = this.art,
-	          $video = _this$art4.refs.$video,
-	          notice = _this$art4.notice;
+	      var _this$art5 = this.art,
+	          $video = _this$art5.refs.$video,
+	          notice = _this$art5.notice;
 	      var newTime = Math.max(time, 0);
 
 	      if ($video.duration) {
@@ -801,10 +800,10 @@
 	  }, {
 	    key: "volume",
 	    value: function volume(percentage) {
-	      var _this$art5 = this.art,
-	          $video = _this$art5.refs.$video,
-	          i18n = _this$art5.i18n,
-	          notice = _this$art5.notice;
+	      var _this$art6 = this.art,
+	          $video = _this$art6.refs.$video,
+	          i18n = _this$art6.i18n,
+	          notice = _this$art6.notice;
 
 	      if (percentage !== undefined) {
 	        $video.volume = clamp(percentage, 0, 1);
@@ -827,10 +826,10 @@
 	  }, {
 	    key: "playbackRate",
 	    value: function playbackRate(rate) {
-	      var _this$art6 = this.art,
-	          $video = _this$art6.refs.$video,
-	          i18n = _this$art6.i18n,
-	          notice = _this$art6.notice;
+	      var _this$art7 = this.art,
+	          $video = _this$art7.refs.$video,
+	          i18n = _this$art7.i18n,
+	          notice = _this$art7.notice;
 	      var newRate = clamp(rate, 0.1, 10);
 	      $video.playbackRate = newRate;
 	      notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate, "x"));
@@ -841,33 +840,62 @@
 	  return Player;
 	}();
 
-	function validControl(option) {
-	  errorHandle(typeof option.control === 'function', "'control' option require 'function' type, but got '".concat(_typeof_1(option.control), "'."));
-	  errorHandle(typeof option.disable === 'boolean', "'disable' option require 'boolean' type, but got '".concat(_typeof_1(option.disable), "'."));
-	  errorHandle(['top', 'left', 'right'].indexOf(option.position) > -1, "'position' option require one of 'top\u3001left\u3001right', but got '".concat(option.position, "'."));
-	  errorHandle(typeof option.index === 'number', "'index' option require 'number' type, but got '".concat(_typeof_1(option.index), "'."));
-	}
+	var Danmu =
+	/*#__PURE__*/
+	function () {
+	  function Danmu(option) {
+	    classCallCheck(this, Danmu);
 
-	var Danmu = function Danmu(art, option) {
-	  classCallCheck(this, Danmu);
+	    this.option = option;
+	  }
 
-	  this.art = art;
-	  this.option = option;
-	};
+	  createClass(Danmu, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	    }
+	  }]);
 
-	var Fullscreen = function Fullscreen(art, option) {
-	  classCallCheck(this, Fullscreen);
+	  return Danmu;
+	}();
 
-	  this.art = art;
-	  this.option = option;
-	};
+	var Fullscreen =
+	/*#__PURE__*/
+	function () {
+	  function Fullscreen(option) {
+	    classCallCheck(this, Fullscreen);
 
-	var Pip = function Pip(art, option) {
-	  classCallCheck(this, Pip);
+	    this.option = option;
+	  }
 
-	  this.art = art;
-	  this.option = option;
-	};
+	  createClass(Fullscreen, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	    }
+	  }]);
+
+	  return Fullscreen;
+	}();
+
+	var Pip =
+	/*#__PURE__*/
+	function () {
+	  function Pip(option) {
+	    classCallCheck(this, Pip);
+
+	    this.option = option;
+	  }
+
+	  createClass(Pip, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	    }
+	  }]);
+
+	  return Pip;
+	}();
 
 	var loading = "<svg class=\"lds-spinner\" width=\"80px\" height=\"80px\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" style=\"background: none;\"><g transform=\"rotate(0 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(30 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(60 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(90 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(120 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(150 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(180 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(210 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(240 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(270 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(300 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g><g transform=\"rotate(330 50 50)\">\n  <rect x=\"47\" y=\"24\" rx=\"9.4\" ry=\"4.8\" width=\"6\" height=\"12\" fill=\"#ffffff\">\n    <animate attributeName=\"opacity\" values=\"1;0\" keyTimes=\"0;1\" dur=\"1s\" begin=\"0s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</g></svg>\n";
 
@@ -908,15 +936,19 @@
 	var PlayAndPause =
 	/*#__PURE__*/
 	function () {
-	  function PlayAndPause(art, option) {
+	  function PlayAndPause(option) {
 	    classCallCheck(this, PlayAndPause);
 
-	    this.art = art;
 	    this.option = option;
-	    this.init();
 	  }
 
 	  createClass(PlayAndPause, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	      this.init();
+	    }
+	  }, {
 	    key: "init",
 	    value: function init() {
 	      var _this = this;
@@ -924,8 +956,8 @@
 	      var _this$art = this.art,
 	          proxy = _this$art.events.proxy,
 	          player = _this$art.player;
-	      this.$play = append(this.option.ref, icons$1.play);
-	      this.$pause = append(this.option.ref, icons$1.pause);
+	      this.$play = append(this.option.$control, icons$1.play);
+	      this.$pause = append(this.option.$control, icons$1.pause);
 	      this.$pause.style.display = 'none';
 	      proxy(this.$play, 'click', function () {
 	        player.play();
@@ -950,19 +982,23 @@
 	var Progress =
 	/*#__PURE__*/
 	function () {
-	  function Progress(art, option) {
+	  function Progress(option) {
 	    classCallCheck(this, Progress);
 
-	    this.art = art;
 	    this.option = option;
-	    this.isDroging = false;
-	    this.getLoaded = this.getLoaded.bind(this);
-	    this.getPlayed = this.getPlayed.bind(this);
-	    this.set = this.set.bind(this);
-	    this.init();
 	  }
 
 	  createClass(Progress, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	      this.isDroging = false;
+	      this.getLoaded = this.getLoaded.bind(this);
+	      this.getPlayed = this.getPlayed.bind(this);
+	      this.set = this.set.bind(this);
+	      this.init();
+	    }
+	  }, {
 	    key: "init",
 	    value: function init() {
 	      var _this = this;
@@ -974,16 +1010,18 @@
 	          proxy = _this$art.events.proxy,
 	          $video = _this$art.refs.$video,
 	          player = _this$art.player;
-	      append(this.option.ref, "\n        <div class=\"art-control-progress-inner\">\n          <div class=\"art-progress-loaded\"></div>\n          <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n          <div class=\"art-progress-highlight\"></div>\n          <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n          <div class=\"art-progress-tip art-tip\"></div>\n        </div>\n      "));
-	      this.$loaded = this.option.ref.querySelector('.art-progress-loaded');
-	      this.$played = this.option.ref.querySelector('.art-progress-played');
-	      this.$highlight = this.option.ref.querySelector('.art-progress-highlight');
-	      this.$indicator = this.option.ref.querySelector('.art-progress-indicator');
-	      this.$tip = this.option.ref.querySelector('.art-progress-tip');
+	      append(this.option.$control, "\n        <div class=\"art-control-progress-inner\">\n          <div class=\"art-progress-loaded\"></div>\n          <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n          <div class=\"art-progress-highlight\"></div>\n          <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n          <div class=\"art-progress-tip art-tip\"></div>\n        </div>\n      "));
+	      this.$loaded = this.option.$control.querySelector('.art-progress-loaded');
+	      this.$played = this.option.$control.querySelector('.art-progress-played');
+	      this.$highlight = this.option.$control.querySelector('.art-progress-highlight');
+	      this.$indicator = this.option.$control.querySelector('.art-progress-indicator');
+	      this.$tip = this.option.$control.querySelector('.art-progress-tip');
 	      this.art.on('video:canplay', function () {
 	        _this.set('loaded', _this.getLoaded());
 
-	        highlight.forEach(function (item) {
+	        highlight.filter(function (item) {
+	          return !item.disable;
+	        }).forEach(function (item) {
 	          var left = Number(item.time) / $video.duration;
 	          append(_this.$highlight, "\n          <span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>\n        "));
 	        });
@@ -997,7 +1035,7 @@
 	      this.art.on('video:ended', function () {
 	        _this.set('played', 1);
 	      });
-	      proxy(this.option.ref, 'mousemove', function (event) {
+	      proxy(this.option.$control, 'mousemove', function (event) {
 	        _this.$tip.style.display = 'block';
 
 	        if (event.path.indexOf(_this.$highlight) > -1) {
@@ -1006,10 +1044,10 @@
 	          _this.showTime(event);
 	        }
 	      });
-	      proxy(this.option.ref, 'mouseout', function () {
+	      proxy(this.option.$control, 'mouseout', function () {
 	        _this.$tip.style.display = 'none';
 	      });
-	      proxy(this.option.ref, 'click', function (event) {
+	      proxy(this.option.$control, 'click', function (event) {
 	        if (event.target !== _this.$indicator) {
 	          var _this$getPosFromEvent = _this.getPosFromEvent(event),
 	              second = _this$getPosFromEvent.second,
@@ -1052,7 +1090,7 @@
 	          text = _event$target$dataset.text,
 	          time = _event$target$dataset.time;
 	      this.$tip.innerHTML = text;
-	      var left = Number(time) / $video.duration * this.option.ref.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
+	      var left = Number(time) / $video.duration * this.option.$control.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
 	      this.$tip.style.left = "".concat(left, "px");
 	    }
 	  }, {
@@ -1067,8 +1105,8 @@
 
 	      if (width <= tipWidth / 2) {
 	        this.$tip.style.left = 0;
-	      } else if (width > this.option.ref.clientWidth - tipWidth / 2) {
-	        this.$tip.style.left = "".concat(this.option.ref.clientWidth - tipWidth, "px");
+	      } else if (width > this.option.$control.clientWidth - tipWidth / 2) {
+	        this.$tip.style.left = "".concat(this.option.$control.clientWidth - tipWidth, "px");
 	      } else {
 	        this.$tip.style.left = "".concat(width - tipWidth / 2, "px");
 	      }
@@ -1099,38 +1137,54 @@
 	  return Progress;
 	}();
 
-	var Subtitle = function Subtitle(art, option) {
-	  classCallCheck(this, Subtitle);
+	var Subtitle =
+	/*#__PURE__*/
+	function () {
+	  function Subtitle(option) {
+	    classCallCheck(this, Subtitle);
 
-	  this.art = art;
-	  this.option = option;
-	};
+	    this.option = option;
+	  }
+
+	  createClass(Subtitle, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	    }
+	  }]);
+
+	  return Subtitle;
+	}();
 
 	var Time =
 	/*#__PURE__*/
 	function () {
-	  function Time(art, option) {
+	  function Time(option) {
 	    classCallCheck(this, Time);
 
-	    this.art = art;
 	    this.option = option;
-	    this.init();
 	  }
 
 	  createClass(Time, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	      this.init();
+	    }
+	  }, {
 	    key: "init",
 	    value: function init() {
 	      var _this = this;
 
-	      this.option.ref.innerHTML = '00:00 / 00:00';
+	      this.option.$control.innerHTML = '00:00 / 00:00';
 	      this.art.on('video:canplay', function () {
-	        _this.option.ref.innerHTML = _this.getTime();
+	        _this.option.$control.innerHTML = _this.getTime();
 	      });
 	      this.art.on('video:timeupdate', function () {
-	        _this.option.ref.innerHTML = _this.getTime();
+	        _this.option.$control.innerHTML = _this.getTime();
 	      });
 	      this.art.on('video:seeking', function () {
-	        _this.option.ref.innerHTML = _this.getTime();
+	        _this.option.$control.innerHTML = _this.getTime();
 	      });
 	    }
 	  }, {
@@ -1147,16 +1201,20 @@
 	var Volume =
 	/*#__PURE__*/
 	function () {
-	  function Volume(art, option) {
+	  function Volume(option) {
 	    classCallCheck(this, Volume);
 
-	    this.art = art;
 	    this.option = option;
-	    this.isDroging = false;
-	    this.init();
 	  }
 
 	  createClass(Volume, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	      this.isDroging = false;
+	      this.init();
+	    }
+	  }, {
 	    key: "init",
 	    value: function init() {
 	      var _this = this;
@@ -1164,9 +1222,9 @@
 	      var _this$art = this.art,
 	          proxy = _this$art.events.proxy,
 	          player = _this$art.player;
-	      this.$volume = append(this.option.ref, icons$1.volume);
-	      this.$volumeClose = append(this.option.ref, icons$1.volumeClose);
-	      this.$volumePanel = append(this.option.ref, '<div class="art-volume-panel"></div>');
+	      this.$volume = append(this.option.$control, icons$1.volume);
+	      this.$volumeClose = append(this.option.$control, icons$1.volumeClose);
+	      this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
 	      this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
 	      this.$volumeClose.style.display = 'none';
 	      var volume = getStorage('volume');
@@ -1181,8 +1239,9 @@
 	      proxy(this.$volumeClose, 'click', function () {
 	        _this.$volume.style.display = 'block';
 	        _this.$volumeClose.style.display = 'none';
+	        player.volume(getStorage('volume'));
 	      });
-	      proxy(this.option.ref, 'mouseenter', function () {
+	      proxy(this.option.$control, 'mouseenter', function () {
 	        _this.$volumePanel.classList.add('art-volume-panel-hover'); // TODO
 
 
@@ -1190,7 +1249,7 @@
 	          _this.setVolumeHandle(player.volume());
 	        }, 200);
 	      });
-	      proxy(this.option.ref, 'mouseleave', function () {
+	      proxy(this.option.$control, 'mouseleave', function () {
 	        _this.$volumePanel.classList.remove('art-volume-panel-hover');
 	      });
 	      proxy(this.$volumePanel, 'click', function (event) {
@@ -1258,25 +1317,41 @@
 	  return Volume;
 	}();
 
-	var Setting = function Setting(art, option) {
-	  classCallCheck(this, Setting);
+	var Setting =
+	/*#__PURE__*/
+	function () {
+	  function Setting(option) {
+	    classCallCheck(this, Setting);
 
-	  this.art = art;
-	  this.option = option;
-	};
+	    this.option = option;
+	  }
+
+	  createClass(Setting, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	    }
+	  }]);
+
+	  return Setting;
+	}();
 
 	var Thumbnails =
 	/*#__PURE__*/
 	function () {
-	  function Thumbnails(art, option) {
+	  function Thumbnails(option) {
 	    classCallCheck(this, Thumbnails);
 
-	    this.art = art;
 	    this.option = option;
-	    this.init();
 	  }
 
 	  createClass(Thumbnails, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	      this.init();
+	    }
+	  }, {
 	    key: "init",
 	    value: function init() {
 	      var _this = this;
@@ -1285,12 +1360,12 @@
 	          $progress = _this$art.refs.$progress,
 	          proxy = _this$art.events.proxy;
 	      proxy($progress, 'mousemove', function (event) {
-	        _this.option.ref.style.display = 'block';
+	        _this.option.$control.style.display = 'block';
 
 	        _this.showThumbnails(event);
 	      });
 	      proxy($progress, 'mouseout', function () {
-	        _this.option.ref.style.display = 'none';
+	        _this.option.$control.style.display = 'none';
 	      });
 	    }
 	  }, {
@@ -1311,17 +1386,17 @@
 	      var perIndex = Math.ceil(posWidth / perWidth);
 	      var yIndex = Math.ceil(perIndex / column);
 	      var xIndex = perIndex % column || column;
-	      this.option.ref.style.backgroundImage = "url(".concat(url, ")");
-	      this.option.ref.style.height = "".concat(height, "px");
-	      this.option.ref.style.width = "".concat(width, "px");
-	      this.option.ref.style.backgroundPosition = "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px");
+	      this.option.$control.style.backgroundImage = "url(".concat(url, ")");
+	      this.option.$control.style.height = "".concat(height, "px");
+	      this.option.$control.style.width = "".concat(width, "px");
+	      this.option.$control.style.backgroundPosition = "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px");
 
 	      if (posWidth <= width / 2) {
-	        this.option.ref.style.left = 0;
+	        this.option.$control.style.left = 0;
 	      } else if (posWidth > $progress.clientWidth - width / 2) {
-	        this.option.ref.style.left = "".concat($progress.clientWidth - width, "px");
+	        this.option.$control.style.left = "".concat($progress.clientWidth - width, "px");
 	      } else {
-	        this.option.ref.style.left = "".concat(posWidth - width / 2, "px");
+	        this.option.$control.style.left = "".concat(posWidth - width / 2, "px");
 	      }
 	    }
 	  }]);
@@ -1352,92 +1427,78 @@
 	    value: function init() {
 	      var _this = this;
 
-	      this.add({
-	        control: Progress,
+	      this.add(new Progress({
 	        disable: false,
 	        position: 'top',
 	        index: 10
-	      });
-	      this.add({
-	        control: Thumbnails,
+	      }));
+	      this.add(new Thumbnails({
 	        disable: !this.art.option.thumbnails.url,
 	        position: 'top',
 	        index: 20
-	      });
-	      this.add({
-	        control: PlayAndPause,
+	      }));
+	      this.add(new PlayAndPause({
 	        disable: false,
 	        position: 'left',
 	        index: 10
-	      });
-	      this.add({
-	        control: Volume,
+	      }));
+	      this.add(new Volume({
 	        disable: false,
-	        tooltip: 'Volume',
 	        position: 'left',
 	        index: 20
-	      });
-	      this.add({
-	        control: Time,
+	      }));
+	      this.add(new Time({
 	        disable: false,
-	        tooltip: 'Volume',
 	        position: 'left',
 	        index: 30
-	      });
-	      this.add({
-	        control: Danmu,
+	      }));
+	      this.add(new Danmu({
 	        disable: false,
-	        tooltip: 'Danmu',
 	        position: 'right',
 	        index: 10
-	      });
-	      this.add({
-	        control: Subtitle,
+	      }));
+	      this.add(new Subtitle({
 	        disable: false,
-	        tooltip: 'Subtitle',
 	        position: 'right',
 	        index: 20
-	      });
-	      this.add({
-	        control: Setting,
+	      }));
+	      this.add(new Setting({
 	        disable: false,
-	        tooltip: 'Setting',
 	        position: 'right',
 	        index: 30
-	      });
-	      this.add({
-	        control: Pip,
+	      }));
+	      this.add(new Pip({
 	        disable: false,
-	        tooltip: 'Pip',
 	        position: 'right',
 	        index: 40
-	      });
-	      this.add({
-	        control: Fullscreen,
+	      }));
+	      this.add(new Fullscreen({
 	        disable: false,
-	        tooltip: 'Fullscreen',
 	        position: 'right',
 	        index: 50
-	      });
-	      this.art.option.controls.forEach(function (item) {
+	      }));
+	      this.art.option.controls.filter(function (item) {
+	        return !item.disable;
+	      }).forEach(function (item) {
 	        _this.add(item);
 	      });
 	    }
 	  }, {
 	    key: "add",
-	    value: function add(option) {
-	      validControl(option);
+	    value: function add(control) {
+	      var option = control.option;
 
 	      if (!option.disable) {
 	        id++;
-	        var name = option.control.name.toLowerCase() || "control".concat(id);
+	        var name = control.constructor.name.toLowerCase() || "control".concat(id);
 	        var $control = document.createElement('div');
 	        $control.setAttribute('class', "art-control art-control-".concat(name));
 	        $control.setAttribute('data-control-index', String(option.index) || id);
-	        option.ref = $control;
-	        this.commonMethod(option);
-	        this[name] = new option.control(this.art, option);
+	        option.$control = $control;
+	        this.commonMethod(control);
 	        this.$map[option.position].push($control);
+	        control.apply(this.art);
+	        this[name] = control;
 	      }
 	    }
 	  }, {
@@ -1474,24 +1535,24 @@
 	    }
 	  }, {
 	    key: "commonMethod",
-	    value: function commonMethod(option) {
+	    value: function commonMethod(control) {
 	      var _this3 = this;
 
-	      Object.defineProperty(option.control.prototype, 'hide', {
+	      Object.defineProperty(control, 'hide', {
 	        value: function value() {
-	          option.ref.style.display = 'none';
+	          control.option.$control.style.display = 'none';
 
-	          _this3.art.emit('control:hide', option.ref);
+	          _this3.art.emit('control:hide', control.option.$control);
 	        }
 	      });
-	      Object.defineProperty(option.control.prototype, 'show', {
+	      Object.defineProperty(control, 'show', {
 	        value: function value() {
-	          option.ref.style.display = option.position === 'top' ? 'block' : 'inline-block';
+	          control.option.$control.style.display = 'block';
 
-	          _this3.art.emit('control:show', option.ref);
+	          _this3.art.emit('control:show', control.option.$control);
 	        }
 	      });
-	      Object.defineProperty(option.control.prototype, 'getPosFromEvent', {
+	      Object.defineProperty(control, 'getPosFromEvent', {
 	        value: function value(event) {
 	          var _this3$art$refs = _this3.art.refs,
 	              $video = _this3$art$refs.$video,
@@ -1530,6 +1591,8 @@
 	  return Controls;
 	}();
 
+	var id$1 = 0;
+
 	var Contextmenu =
 	/*#__PURE__*/
 	function () {
@@ -1551,15 +1614,17 @@
 	          refs = _this$art.refs,
 	          proxy = _this$art.events.proxy;
 	      option.contextmenu.push({
-	        text: i18n.get('Video info'),
+	        name: 'info',
+	        html: i18n.get('Video info'),
 	        click: function click() {
 	          _this.art.info.show();
 	        }
 	      }, {
-	        text: 'ArtPlayer 1.0.0',
-	        link: 'https://github.com/zhw2590582/artplayer'
+	        name: 'version',
+	        html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.0</a>'
 	      }, {
-	        text: i18n.get('Close'),
+	        name: 'close',
+	        html: i18n.get('Close'),
 	        click: function click() {
 	          _this.hide();
 	        }
@@ -1594,20 +1659,21 @@
 	      refs.$contextmenu = document.createElement('div');
 	      refs.$contextmenu.classList.add('artplayer-contextmenu');
 	      option.contextmenu.forEach(function (item) {
-	        var $menu = document.createElement('a');
-	        $menu.innerHTML = item.text;
-	        $menu.classList.add('art-menu');
+	        id$1++;
+	        var $menu = document.createElement('div');
+	        $menu.setAttribute('data-art-menu-id', id$1);
+	        $menu.setAttribute('class', "art-menu art-menu-".concat(item.name || id$1));
+	        append($menu, item.html);
+	        setStyle($menu, item.style || {});
 
-	        if (item.link) {
-	          $menu.target = '_blank';
-	          $menu.href = item.link;
-	        } else if (item.click) {
-	          $menu.href = '#';
+	        if (item.click) {
 	          proxy($menu, 'click', function (event) {
 	            event.preventDefault();
 	            item.click(_this2.art, event);
 
 	            _this2.hide();
+
+	            _this2.art.emit('contextmenu:click', $menu);
 	          });
 	        }
 
@@ -1722,8 +1788,8 @@
 	      var infoHtml = [];
 	      infoHtml.push("\n      <div class=\"art-info-item \">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">1.0.0</div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video type:</div>\n        <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video size:</div>\n        <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video type:</div>\n        <div class=\"art-info-content\" data-head=\"Content-Type\">loading...</div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video size:</div>\n        <div class=\"art-info-content\" data-head=\"Content-length\">loading...</div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n    ");
@@ -1788,8 +1854,12 @@
 	    classCallCheck(this, Subtitle);
 
 	    this.art = art;
-	    this.checkExt(this.art.option.subtitle.url);
-	    this.init();
+	    var url = this.art.option.subtitle.url;
+
+	    if (url) {
+	      this.checkExt(url);
+	      this.init();
+	    }
 	  }
 
 	  createClass(Subtitle, [{
@@ -2013,7 +2083,7 @@
 	  return Hotkey;
 	}();
 
-	var id$1 = 0;
+	var id$2 = 0;
 
 	var Layers =
 	/*#__PURE__*/
@@ -2044,11 +2114,11 @@
 	    key: "add",
 	    value: function add(option, callback) {
 	      var refs = this.art.refs;
-	      id$1++;
+	      id$2++;
 	      var $layer = document.createElement('div');
-	      $layer.setAttribute('data-art-layer-id', id$1);
-	      $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id$1));
-	      $layer.style.zIndex = option.index || id$1;
+	      $layer.setAttribute('data-art-layer-id', id$2);
+	      $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id$2));
+	      $layer.style.zIndex = option.index || id$2;
 	      append($layer, option.html);
 	      setStyle($layer, option.style || {});
 	      refs.$layers.appendChild($layer);
@@ -2198,7 +2268,7 @@
 	  return Mask;
 	}();
 
-	var id$2 = 0;
+	var id$3 = 0;
 	var instances = [];
 
 	var Artplayer =
@@ -2216,7 +2286,7 @@
 	    _this.emit('init:start');
 
 	    _this.option = deepMerge({}, Artplayer.DEFAULTS, option);
-	    validOption(_this.option);
+	    validOption(Artplayer.DEFAULTS, _this.option);
 
 	    _this.init();
 
@@ -2253,7 +2323,7 @@
 	      this.loading = new Loading(this);
 	      this.hotkey = new Hotkey(this);
 	      this.mask = new Mask(this);
-	      this.id = id$2++;
+	      this.id = id$3++;
 	      instances.push(this);
 	      return this;
 	    }
@@ -2302,6 +2372,7 @@
 	        container: '.artplayer',
 	        url: '',
 	        poster: '',
+	        volume: 0.7,
 	        thumbnails: {
 	          url: '',
 	          number: 60,
@@ -2309,10 +2380,8 @@
 	          height: 90,
 	          column: 10
 	        },
-	        volume: 0.7,
 	        autoplay: false,
 	        loop: false,
-	        preload: 'auto',
 	        type: '',
 	        mimeCodec: '',
 	        layers: [],
@@ -2326,6 +2395,12 @@
 	        },
 	        controls: [],
 	        highlight: [],
+	        moreVideoAttr: {
+	          'controls': false,
+	          'preload': 'auto',
+	          'webkit-playsinline': true,
+	          'playsinline': true
+	        },
 	        lang: navigator.language.toLowerCase()
 	      };
 	    }

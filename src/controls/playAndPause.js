@@ -2,17 +2,20 @@ import { append } from '../utils';
 import icons from '../icons';
 
 export default class PlayAndPause {
-  constructor(art, option) {
-    this.art = art;
+  constructor(option) {
     this.option = option;
+  }
+
+  apply(art) {
+    this.art = art;
     this.init();
   }
 
   init() {
     const { events: { proxy }, player } = this.art;
 
-    this.$play = append(this.option.ref, icons.play);
-    this.$pause = append(this.option.ref, icons.pause);
+    this.$play = append(this.option.$control, icons.play);
+    this.$pause = append(this.option.$control, icons.pause);
     this.$pause.style.display = 'none';
 
     proxy(this.$play, 'click', () => {
