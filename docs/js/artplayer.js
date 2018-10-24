@@ -1026,8 +1026,8 @@
 	          i18n = _this$art.i18n;
 	      this.$play = append(this.option.$control, icons$1.play);
 	      this.$pause = append(this.option.$control, icons$1.pause);
-	      tooltip(this.$play, i18n.get('Pause'));
-	      tooltip(this.$pause, i18n.get('Play'));
+	      tooltip(this.$play, i18n.get('Play'));
+	      tooltip(this.$pause, i18n.get('Pause'));
 	      this.$pause.style.display = 'none';
 	      proxy(this.$play, 'click', function () {
 	        player.play();
