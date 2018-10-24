@@ -1403,6 +1403,8 @@
 	    classCallCheck(this, Thumbnails);
 
 	    this.option = option;
+	    this.loading = false;
+	    this.isLoad = false;
 	  }
 
 	  createClass(Thumbnails, [{
@@ -1420,12 +1422,42 @@
 	          $progress = _this$art.refs.$progress,
 	          proxy = _this$art.events.proxy;
 	      proxy($progress, 'mousemove', function (event) {
-	        _this.option.$control.style.display = 'block';
+	        if (!_this.loading) {
+	          _this.loading = true;
 
-	        _this.showThumbnails(event);
+	          _this.load(_this.art.option.thumbnails.url).then(function () {
+	            _this.isLoad = true;
+	          });
+	        }
+
+	        if (_this.isLoad) {
+	          _this.option.$control.style.display = 'block';
+
+	          _this.showThumbnails(event);
+	        }
 	      });
 	      proxy($progress, 'mouseout', function () {
 	        _this.option.$control.style.display = 'none';
+	      });
+	    }
+	  }, {
+	    key: "load",
+	    value: function load(url) {
+	      var proxy = this.art.events.proxy;
+	      return new Promise(function (resolve, reject) {
+	        var image = new Image();
+	        image.src = url;
+
+	        if (image.complete) {
+	          return resolve(image);
+	        }
+
+	        proxy(image, 'load', function () {
+	          return resolve(image);
+	        });
+	        proxy(image, 'error', function () {
+	          return reject(image);
+	        });
 	      });
 	    }
 	  }, {

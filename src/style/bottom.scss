@@ -204,4 +204,10 @@
             visibility: visible;
         }
     }
+    
+    &.artplayer-error {
+        .art-progress-indicator, .art-progress-tip {
+            display: none !important;
+        }
+    }
 }

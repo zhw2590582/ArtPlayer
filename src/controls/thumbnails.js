@@ -1,6 +1,8 @@
 export default class Thumbnails {
   constructor(option) {
     this.option = option;
+    this.loading = false;
+    this.isLoad = false;
   }
 
   apply(art) {
@@ -15,12 +17,37 @@ export default class Thumbnails {
     } = this.art;
 
     proxy($progress, 'mousemove', event => {
-      this.option.$control.style.display = 'block';
-      this.showThumbnails(event);
+      if (!this.loading) {
+        this.loading = true;
+        this.load(this.art.option.thumbnails.url).then(() => {
+          this.isLoad = true;
+        });
+      }
+
+      if (this.isLoad) {
+        this.option.$control.style.display = 'block';
+        this.showThumbnails(event);
+      }
     });
 
     proxy($progress, 'mouseout', () => {
       this.option.$control.style.display = 'none';
+    });
+  }
+
+  load(url) {
+    const { proxy } = this.art.events;
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.src = url;
+
+      if (image.complete) {
+        return resolve(image);
+      }
+
+      proxy(image, 'load', () => resolve(image));
+
+      proxy(image, 'error', () => reject(image));
     });
   }
 

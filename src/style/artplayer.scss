@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 .artplayer-video-player {
     position: relative;
     width: 100%;
@@ -25,12 +23,6 @@
         display: inline-block;
         svg {
             fill: #fff;
-        }
-    }
-
-    &.artplayer-error {
-        .art-progress-indicator, .art-progress-tip {
-            display: none !important;
         }
     }
 }
