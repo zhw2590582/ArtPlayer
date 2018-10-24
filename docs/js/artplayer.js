@@ -654,6 +654,7 @@
 	    this.art = art;
 	    this.init();
 	    this.eventBind();
+	    this.firstLoad = false;
 	  }
 
 	  createClass(Player, [{
@@ -701,6 +702,12 @@
 	        _this.art.loading.show();
 	      });
 	      this.art.on('video:canplay', function () {
+	        if (!_this.firstLoad) {
+	          _this.firstLoad = true;
+
+	          _this.art.emit('video:firstload');
+	        }
+
 	        _this.art.controls.show();
 
 	        _this.art.mask.show();
@@ -1074,15 +1081,10 @@
 	      this.$highlight = this.option.$control.querySelector('.art-progress-highlight');
 	      this.$indicator = this.option.$control.querySelector('.art-progress-indicator');
 	      this.$tip = this.option.$control.querySelector('.art-progress-tip');
-	      this.art.on('video:canplay', function () {
-	        _this.set('loaded', _this.getLoaded());
-
-	        highlight.filter(function (item) {
-	          return !item.disable;
-	        }).forEach(function (item) {
-	          var left = Number(item.time) / $video.duration;
-	          append(_this.$highlight, "\n          <span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>\n        "));
-	        });
+	      this.set('loaded', this.getLoaded());
+	      highlight.forEach(function (item) {
+	        var left = Number(item.time) / $video.duration;
+	        append(_this.$highlight, "\n        <span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>\n      "));
 	      });
 	      this.art.on('video:progress', function () {
 	        _this.set('loaded', _this.getLoaded());
@@ -1508,15 +1510,10 @@
 
 	    this.art = art;
 	    this.$map = {};
-	    this.isVideoCanplay = false;
-	    this.art.on('video:canplay', function () {
-	      if (!_this.isVideoCanplay) {
-	        _this.isVideoCanplay = true;
+	    this.art.on('video:firstload', function () {
+	      _this.init();
 
-	        _this.init();
-
-	        _this.mount();
-	      }
+	      _this.mount();
 	    });
 	  }
 

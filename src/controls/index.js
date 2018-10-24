@@ -15,13 +15,9 @@ export default class Controls {
   constructor(art) {
     this.art = art;
     this.$map = {};
-    this.isVideoCanplay = false;
-    this.art.on('video:canplay', () => {
-      if (!this.isVideoCanplay) {
-        this.isVideoCanplay = true;
-        this.init();
-        this.mount();
-      }
+    this.art.on('video:firstload', () => {
+      this.init();
+      this.mount();
     });
   }
 

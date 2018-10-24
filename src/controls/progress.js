@@ -41,15 +41,13 @@ export default class Progress {
     this.$indicator = this.option.$control.querySelector('.art-progress-indicator');
     this.$tip = this.option.$control.querySelector('.art-progress-tip');
 
-    this.art.on('video:canplay', () => {
-      this.set('loaded', this.getLoaded());
-      highlight.filter(item => !item.disable).forEach(item => {
-        const left = Number(item.time) / $video.duration;
-        append(this.$highlight, `
-          <span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>
-        `
-        );
-      });
+    this.set('loaded', this.getLoaded());
+    highlight.forEach(item => {
+      const left = Number(item.time) / $video.duration;
+      append(this.$highlight, `
+        <span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>
+      `
+      );
     });
 
     this.art.on('video:progress', () => {

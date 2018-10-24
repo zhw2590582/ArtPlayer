@@ -6,6 +6,7 @@ export default class Player {
     this.art = art;
     this.init();
     this.eventBind();
+    this.firstLoad = false;
   }
 
   init() {
@@ -46,6 +47,11 @@ export default class Player {
     });
 
     this.art.on('video:canplay', () => {
+      if (!this.firstLoad) {
+        this.firstLoad = true;
+        this.art.emit('video:firstload');
+      }
+
       this.art.controls.show();
       this.art.mask.show();
       this.art.loading.hide();
