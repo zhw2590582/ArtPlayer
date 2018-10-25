@@ -384,6 +384,12 @@
 	  target.setAttribute('data-balloon', msg);
 	  target.setAttribute('data-balloon-pos', pos);
 	}
+	function sleep() {
+	  var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+	  return new Promise(function (resolve) {
+	    return setTimeout(resolve, ms);
+	  });
+	}
 
 	function validOption(DEFAULTS, option) {
 	  var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ['option'];
@@ -674,7 +680,9 @@
 	      $video.volume = clamp(option.volume, 0, 1);
 	      $video.poster = option.poster;
 	      $video.autoplay = option.autoplay;
-	      $video.src = option.url;
+	      sleep().then(function () {
+	        $video.src = option.url;
+	      });
 	    }
 	  }, {
 	    key: "eventBind",
@@ -758,11 +766,11 @@
 	      });
 	      this.art.on('video:error', function () {
 	        if (_this.reconnectTime < _this.maxReconnectTime) {
-	          setTimeout(function () {
+	          sleep(100).then(function () {
 	            _this.reconnectTime++;
 	            $video.src = option.url;
 	            notice.show("".concat(i18n.get('Reconnect'), ": ").concat(_this.reconnectTime));
-	          }, 1000);
+	          });
 	        } else {
 	          _this.art.isError = true;
 	          _this.art.isPlaying = false;

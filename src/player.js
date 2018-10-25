@@ -1,4 +1,4 @@
-import { clamp, secondToTime, setStorage } from './utils';
+import { clamp, secondToTime, setStorage, sleep } from './utils';
 import config from './config';
 
 export default class Player {
@@ -20,7 +20,9 @@ export default class Player {
     $video.volume = clamp(option.volume, 0, 1);
     $video.poster = option.poster;
     $video.autoplay = option.autoplay;
-    $video.src = option.url;
+    sleep().then(() => {
+      $video.src = option.url;
+    });
   }
 
   eventBind() {
@@ -91,11 +93,11 @@ export default class Player {
 
     this.art.on('video:error', () => {
       if (this.reconnectTime < this.maxReconnectTime) {
-        setTimeout(() => {
+        sleep(100).then(() => {
           this.reconnectTime++;
           $video.src = option.url;
           notice.show(`${i18n.get('Reconnect')}: ${this.reconnectTime}`);
-        }, 1000);
+        });
       } else {
         this.art.isError = true;
         this.art.isPlaying = false;

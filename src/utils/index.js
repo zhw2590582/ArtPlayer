@@ -105,3 +105,7 @@ export function tooltip(target, msg, pos = 'up') {
   target.setAttribute('data-balloon', msg);
   target.setAttribute('data-balloon-pos', pos);
 }
+
+export function sleep(ms = 0) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
