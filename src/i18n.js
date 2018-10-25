@@ -8,7 +8,8 @@ let i18nMap = {
     'Play': '播放',
     'Pause': '暂停',
     'Rate': '速度',
-    'Mute': '静音'
+    'Mute': '静音',
+    'Reconnect': '重新连接'
   },
   'zh-tw': {
     'About author': '關於作者',
@@ -19,7 +20,8 @@ let i18nMap = {
     'Play': '播放',
     'Pause': '暫停',
     'Rate': '速度',
-    'Mute': '靜音'
+    'Mute': '靜音',
+    'Reconnect': '重新連接'
   }
 };
 

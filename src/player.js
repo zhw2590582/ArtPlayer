@@ -7,6 +7,8 @@ export default class Player {
     this.init();
     this.eventBind();
     this.firstLoad = false;
+    this.reconnectTime = 0;
+    this.maxReconnectTime = 5;
   }
 
   init() {
@@ -22,7 +24,7 @@ export default class Player {
   }
 
   eventBind() {
-    const { events: { proxy }, refs: { $player, $video }, i18n, notice } = this.art;
+    const { option, events: { proxy }, refs: { $player, $video }, i18n, notice } = this.art;
 
     config.video.events.forEach(eventName => {
       proxy($video, eventName, event => {
@@ -55,7 +57,7 @@ export default class Player {
       this.art.controls.show();
       this.art.mask.show();
       this.art.loading.hide();
-      if (this.art.option.autoplay) {
+      if (option.autoplay) {
         const promise = this.play();
         if (promise !== undefined) {
           promise.then().catch(err => {
@@ -81,20 +83,28 @@ export default class Player {
       this.art.isPlaying = false;
       this.art.controls.show();
       this.art.mask.show();
-      if (this.art.option.loop) {
+      if (option.loop) {
         this.seek(0);
         this.play();
       }
     });
 
     this.art.on('video:error', () => {
-      this.art.isError = true;
-      this.art.isPlaying = false;
-      this.art.loading.hide();
-      this.art.controls.hide();
-      $player.classList.add('artplayer-error');
-      notice.show(i18n.get('Video load failed'), false);
-      this.art.destroy();
+      if (this.reconnectTime < this.maxReconnectTime) {
+        setTimeout(() => {
+          this.reconnectTime++;
+          $video.src = option.url;
+          notice.show(`${i18n.get('Reconnect')}: ${this.reconnectTime}`);
+        }, 1000);
+      } else {
+        this.art.isError = true;
+        this.art.isPlaying = false;
+        this.art.loading.hide();
+        this.art.controls.hide();
+        $player.classList.add('artplayer-error');
+        notice.show(i18n.get('Video load failed'), false);
+        this.art.destroy();
+      }
     });
   }
 
