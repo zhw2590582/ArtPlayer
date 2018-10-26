@@ -3,7 +3,6 @@ import { errorHandle, getExt, setStyle } from './utils';
 export default class Subtitle {
   constructor(art) {
     this.art = art;
-    this.isShow = true;
 
     const { url } = this.art.option.subtitle;
     if (url) {
@@ -93,14 +92,12 @@ export default class Subtitle {
   show() {
     const { $subtitle } = this.art.refs;
     $subtitle.style.display = 'block';
-    this.isShow = true;
     this.art.emit('subtitle:show', $subtitle);
   }
 
   hide() {
     const { $subtitle } = this.art.refs;
     $subtitle.style.display = 'none';
-    this.isShow = false;
     this.art.emit('subtitle:hide', $subtitle);
   }
 

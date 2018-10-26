@@ -1100,6 +1100,8 @@
 
 	var subtitle = "<svg style=\"width: 100%; height: 100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
 
+	var subtitleClose = "<svg style=\"width: 100%; height: 100%; opacity: .5\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
+
 	var icons = {
 	  loading: loading,
 	  playBig: playBig,
@@ -1107,7 +1109,8 @@
 	  pause: pause,
 	  volume: volume,
 	  volumeClose: volumeClose,
-	  subtitle: subtitle
+	  subtitle: subtitle,
+	  subtitleClose: subtitleClose
 	};
 
 	function creatDomFromSvg(map) {
@@ -1359,17 +1362,19 @@
 	          subtitle = art.subtitle,
 	          i18n = art.i18n;
 	      this.$subtitle = append(this.option.$control, icons$1.subtitle);
+	      this.$subtitleClose = append(this.option.$control, icons$1.subtitleClose);
 	      tooltip(this.$subtitle, i18n.get('Hide subtitle'));
+	      tooltip(this.$subtitleClose, i18n.get('Show subtitle'));
+	      this.$subtitleClose.style.display = 'none';
 	      proxy(this.$subtitle, 'click', function () {
-	        if (subtitle.isShow) {
-	          subtitle.hide();
-	          tooltip(_this.$subtitle, i18n.get('Show subtitle'));
-	          _this.$subtitle.style.opacity = '.5';
-	        } else {
-	          subtitle.show();
-	          tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
-	          _this.$subtitle.style.opacity = '1';
-	        }
+	        subtitle.hide();
+	        _this.$subtitle.style.display = 'none';
+	        _this.$subtitleClose.style.display = 'block';
+	      });
+	      proxy(this.$subtitleClose, 'click', function () {
+	        subtitle.show();
+	        _this.$subtitle.style.display = 'block';
+	        _this.$subtitleClose.style.display = 'none';
 	      });
 	    }
 	  }]);
@@ -2087,7 +2092,6 @@
 	    classCallCheck(this, Subtitle);
 
 	    this.art = art;
-	    this.isShow = true;
 	    var url = this.art.option.subtitle.url;
 
 	    if (url) {
@@ -2177,7 +2181,6 @@
 	    value: function show() {
 	      var $subtitle = this.art.refs.$subtitle;
 	      $subtitle.style.display = 'block';
-	      this.isShow = true;
 	      this.art.emit('subtitle:show', $subtitle);
 	    }
 	  }, {
@@ -2185,7 +2188,6 @@
 	    value: function hide() {
 	      var $subtitle = this.art.refs.$subtitle;
 	      $subtitle.style.display = 'none';
-	      this.isShow = false;
 	      this.art.emit('subtitle:hide', $subtitle);
 	    }
 	  }, {
