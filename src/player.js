@@ -20,9 +20,9 @@ export default class Player {
     $video.volume = clamp(option.volume, 0, 1);
     $video.poster = option.poster;
     $video.autoplay = option.autoplay;
-    sleep().then(() => {
-      $video.src = option.url;
-    });
+
+    // TODO
+    $video.src = option.url;
   }
 
   eventBind() {

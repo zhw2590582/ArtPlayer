@@ -391,68 +391,166 @@
 	  });
 	}
 
-	function validOption(DEFAULTS, option) {
+	var scheme = {
+	  container: {
+	    type: 'string',
+	    required: true
+	  },
+	  url: {
+	    type: 'string',
+	    required: true
+	  },
+	  poster: {
+	    type: 'string'
+	  },
+	  volume: {
+	    type: 'number'
+	  },
+	  thumbnails: {
+	    type: 'object',
+	    child: {
+	      url: {
+	        type: 'string'
+	      },
+	      number: {
+	        type: 'number'
+	      },
+	      width: {
+	        type: 'number'
+	      },
+	      height: {
+	        type: 'number'
+	      },
+	      column: {
+	        type: 'number'
+	      }
+	    }
+	  },
+	  autoplay: {
+	    type: 'boolean'
+	  },
+	  loop: {
+	    type: 'boolean'
+	  },
+	  type: {
+	    type: 'string'
+	  },
+	  mimeCodec: {
+	    type: 'string'
+	  },
+	  layers: {
+	    type: 'array',
+	    child: {
+	      name: {
+	        type: 'string'
+	      },
+	      index: {
+	        type: 'number'
+	      },
+	      html: {
+	        type: 'string'
+	      },
+	      style: {
+	        type: 'object'
+	      }
+	    }
+	  },
+	  contextmenu: {
+	    type: 'array',
+	    child: {
+	      name: {
+	        type: 'string'
+	      },
+	      html: {
+	        type: 'string'
+	      },
+	      click: {
+	        type: 'function'
+	      }
+	    }
+	  },
+	  loading: {
+	    type: 'string'
+	  },
+	  theme: {
+	    type: 'string'
+	  },
+	  hotkey: {
+	    type: 'boolean'
+	  },
+	  subtitle: {
+	    type: 'object',
+	    child: {
+	      url: {
+	        type: 'string'
+	      },
+	      style: {
+	        type: 'object'
+	      }
+	    }
+	  },
+	  controls: {
+	    type: 'array',
+	    child: {
+	      option: {
+	        disable: {
+	          type: 'boolean'
+	        },
+	        position: {
+	          type: 'string'
+	        },
+	        index: {
+	          type: 'number'
+	        }
+	      }
+	    }
+	  },
+	  highlight: {
+	    type: 'array',
+	    child: {
+	      time: {
+	        type: 'number'
+	      },
+	      text: {
+	        type: 'string'
+	      }
+	    }
+	  },
+	  moreVideoAttr: {
+	    type: 'object'
+	  },
+	  lang: {
+	    type: 'string'
+	  }
+	};
+
+	function validOption(option) {
+	  var param = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : scheme;
 	  var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ['option'];
-	  Object.keys(DEFAULTS).forEach(function (key) {
-	    var defaultValue = DEFAULTS[key];
+	  Object.keys(option).some(function (key) {
+	    if (!param[key]) {
+	      return true;
+	    }
+
 	    var value = option[key];
-	    var defaultType = getType(defaultValue);
 	    var type = getType(value);
+	    var requiredType = param[key].type;
+	    var isRequired = param[key].required;
+	    var requiredChild = param[key].child;
 
-	    if (key === 'container' || key === 'html') {
-	      errorHandle(type === 'string' || value instanceof Element, "'".concat(path.join('.'), ".").concat(key, "' require 'string' or 'Element' type, but got '").concat(type, "'"));
-	    } else {
-	      errorHandle(defaultType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(defaultType, "' type, but got '").concat(type, "'"));
+	    if (type === 'object' && requiredChild) {
+	      validOption(value, requiredChild, path.concat(key));
 	    }
 
-	    if (type === 'object') {
-	      validOption(defaultValue, value, path.concat(key));
+	    if (type === 'array' && requiredChild) {
+	      value.forEach(function (item, index) {
+	        validOption(item, requiredChild, path.concat("".concat(key, "[").concat(index, "]")));
+	      });
 	    }
 
-	    if (path.length === 1) {
-	      if (key === 'layers') {
-	        value.forEach(function (item, index) {
-	          validOption({
-	            name: '',
-	            index: 0,
-	            html: '',
-	            style: {}
-	          }, item, path.concat("".concat(key, "[").concat(index, "]")));
-	        });
-	      }
-
-	      if (key === 'contextmenu') {
-	        value.forEach(function (item, index) {
-	          validOption({
-	            name: '',
-	            click: new Function(),
-	            html: '',
-	            style: {}
-	          }, item, path.concat("".concat(key, "[").concat(index, "]")));
-	        });
-	      }
-
-	      if (key === 'highlight') {
-	        value.forEach(function (item, index) {
-	          validOption({
-	            time: 0,
-	            text: ''
-	          }, item, path.concat("".concat(key, "[").concat(index, "]")));
-	        });
-	      }
-
-	      if (key === 'controls') {
-	        value.forEach(function (item, index) {
-	          if (item.option) {
-	            validOption({
-	              disable: false,
-	              position: '',
-	              index: 0
-	            }, item.option, path.concat("".concat(key, "[").concat(index, "]")));
-	          }
-	        });
-	      }
-	    }
+	    errorHandle(!isRequired || value, "'".concat(path.join('.'), ".").concat(key, "' is required"));
+	    errorHandle(requiredType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(requiredType, "' type, but got '").concat(type, "'"));
+	    return false;
 	  });
 	}
 
@@ -679,10 +777,9 @@
 	      });
 	      $video.volume = clamp(option.volume, 0, 1);
 	      $video.poster = option.poster;
-	      $video.autoplay = option.autoplay;
-	      sleep().then(function () {
-	        $video.src = option.url;
-	      });
+	      $video.autoplay = option.autoplay; // TODO
+
+	      $video.src = option.url;
 	    }
 	  }, {
 	    key: "eventBind",
@@ -2407,7 +2504,7 @@
 	    _this.emit('init:start');
 
 	    _this.option = deepMerge({}, Artplayer.DEFAULTS, option);
-	    validOption(Artplayer.DEFAULTS, _this.option);
+	    validOption(_this.option);
 
 	    _this.init();
 

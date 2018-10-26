@@ -30,7 +30,7 @@
             url: './video/one-more-time-one-more-chance.mp4',
             poster: './img/one-more-time-one-more-chance.jpg',
             subtitle: {
-                url: './subtitle/one-more-time-one-more-chance.srt'
+                url: './subtitle/one-more-time-one-more-chance.srt',
             },
             thumbnails: {
                 url: './img/thumbnails.png',
@@ -81,15 +81,15 @@
             });
         });
 
-        console.dir(Artplayer);
+        // console.dir(Artplayer);
 
-        console.log(player);
+        // console.log(player);
 
-        Artplayer.config.video.events.forEach(item => {
-            player.on('video:' + item, event => {
-                console.log('video', event);
-            });
-        });
+        // Artplayer.config.video.events.forEach(item => {
+        //     player.on('video:' + item, event => {
+        //         console.log('video', event);
+        //     });
+        // });
     </script>
 </body>
 
