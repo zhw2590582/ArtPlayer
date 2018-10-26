@@ -350,6 +350,10 @@
 
 	      returnValue = toConsumableArray(returnValue).concat(toConsumableArray(source));
 	    } else if (isObject(source)) {
+	      if (source instanceof Element) {
+	        return source;
+	      }
+
 	      for (var key in source) {
 	        if (source.hasOwnProperty(key)) {
 	          var value = source[key];
@@ -391,10 +395,32 @@
 	  });
 	}
 
+	var validElement = function validElement(key, value, type, path) {
+	  var handle = false;
+	  var msg = "".concat(path.join('.'), ".").concat(key, " require 'string' or 'Element' type, but got '").concat(type, "'");
+
+	  if (type === 'string') {
+	    if (type.trim() === '') {
+	      handle = false;
+	      msg = "".concat(path.join('.'), ".").concat(key, " can not be empty'");
+	    } else {
+	      handle = true;
+	    }
+	  }
+
+	  if (value instanceof Element) {
+	    handle = true;
+	  }
+
+	  return {
+	    handle: handle,
+	    msg: msg
+	  };
+	};
+
 	var scheme = {
 	  container: {
-	    type: 'string',
-	    required: true
+	    validator: validElement
 	  },
 	  url: {
 	    type: 'string',
@@ -448,7 +474,7 @@
 	        type: 'number'
 	      },
 	      html: {
-	        type: 'string'
+	        validator: validElement
 	      },
 	      style: {
 	        type: 'object'
@@ -462,7 +488,7 @@
 	        type: 'string'
 	      },
 	      html: {
-	        type: 'string'
+	        validator: validElement
 	      },
 	      click: {
 	        type: 'function'
@@ -528,28 +554,37 @@
 	  var param = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : scheme;
 	  var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ['option'];
 	  Object.keys(option).some(function (key) {
-	    if (!param[key]) {
+	    var paramObj = param[key];
+
+	    if (!paramObj) {
 	      return true;
 	    }
 
 	    var value = option[key];
 	    var type = getType(value);
-	    var requiredType = param[key].type;
-	    var isRequired = param[key].required;
-	    var requiredChild = param[key].child;
+	    var paramType = paramObj.type;
+	    var paramRequired = paramObj.required;
+	    var paramChild = paramObj.child;
+	    var paramValidator = paramObj.validator;
 
-	    if (type === 'object' && requiredChild) {
-	      validOption(value, requiredChild, path.concat(key));
+	    if (type === 'object' && paramChild) {
+	      validOption(value, paramChild, path.concat(key));
 	    }
 
-	    if (type === 'array' && requiredChild) {
+	    if (type === 'array' && paramChild) {
 	      value.forEach(function (item, index) {
-	        validOption(item, requiredChild, path.concat("".concat(key, "[").concat(index, "]")));
+	        validOption(item, paramChild, path.concat("".concat(key, "[").concat(index, "]")));
 	      });
 	    }
 
-	    errorHandle(!isRequired || value, "'".concat(path.join('.'), ".").concat(key, "' is required"));
-	    errorHandle(requiredType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(requiredType, "' type, but got '").concat(type, "'"));
+	    if (paramValidator) {
+	      var result = paramValidator(key, value, type, path);
+	      errorHandle(result.handle, result.msg);
+	    } else {
+	      errorHandle(!paramRequired || value, "'".concat(path.join('.'), ".").concat(key, "' is required"));
+	      errorHandle(paramType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(paramType, "' type, but got '").concat(type, "'"));
+	    }
+
 	    return false;
 	  });
 	}

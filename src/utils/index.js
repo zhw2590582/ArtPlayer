@@ -69,6 +69,9 @@ export function deepMerge(...sources) {
       }
       returnValue = [...returnValue, ...source];
     } else if (isObject(source)) {
+      if (source instanceof Element) {
+        return source;
+      }
       for (const key in source) {
         if (source.hasOwnProperty(key)) {
           let value = source[key];

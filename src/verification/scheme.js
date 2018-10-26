@@ -1,7 +1,29 @@
+const validElement = (key, value, type, path) => {
+  let handle = false;
+  let msg = `${path.join('.')}.${key} require 'string' or 'Element' type, but got '${type}'`;
+
+  if (type === 'string') {
+    if (type.trim() === '') {
+      handle = false;
+      msg = `${path.join('.')}.${key} can not be empty'`;
+    } else {
+      handle = true;
+    }
+  }
+
+  if (value instanceof Element) {
+    handle = true;
+  }
+
+  return {
+    handle: handle,
+    msg: msg
+  };
+};
+
 export default {
   container: {
-    type: 'string',
-    required: true
+    validator: validElement
   },
   url: {
     type: 'string',
@@ -55,7 +77,7 @@ export default {
         type: 'number'
       },
       html: {
-        type: 'string'
+        validator: validElement
       },
       style: {
         type: 'object'
@@ -69,7 +91,7 @@ export default {
         type: 'string'
       },
       html: {
-        type: 'string'
+        validator: validElement
       },
       click: {
         type: 'function'

@@ -3,28 +3,37 @@ import scheme from './scheme';
 
 export default function validOption(option, param = scheme, path = ['option']) {
   Object.keys(option).some(key => {
-    if (!param[key]) {
+    const paramObj = param[key];
+
+    if (!paramObj) {
       return true;
     }
 
     const value = option[key];
     const type = getType(value);
-    const requiredType = param[key].type;
-    const isRequired = param[key].required;
-    const requiredChild = param[key].child;
+    const paramType = paramObj.type;
+    const paramRequired = paramObj.required;
+    const paramChild = paramObj.child;
+    const paramValidator = paramObj.validator;
 
-    if (type === 'object' && requiredChild) {
-      validOption(value, requiredChild, path.concat(key));
+    if (type === 'object' && paramChild) {
+      validOption(value, paramChild, path.concat(key));
     }
 
-    if (type === 'array' && requiredChild) {
+    if (type === 'array' && paramChild) {
       value.forEach((item, index) => {
-        validOption(item, requiredChild, path.concat(`${key}[${index}]`));
+        validOption(item, paramChild, path.concat(`${key}[${index}]`));
       });
     }
 
-    errorHandle(!isRequired || value, `'${path.join('.')}.${key}' is required`);
-    errorHandle(requiredType === type, `'${path.join('.')}.${key}' require '${requiredType}' type, but got '${type}'`);
+    if (paramValidator) {
+      const result = paramValidator(key, value, type, path);
+      errorHandle(result.handle, result.msg);
+    } else {
+      errorHandle(!paramRequired || value, `'${path.join('.')}.${key}' is required`);
+      errorHandle(paramType === type, `'${path.join('.')}.${key}' require '${paramType}' type, but got '${type}'`);
+    }
+
     return false;
   });
 }
