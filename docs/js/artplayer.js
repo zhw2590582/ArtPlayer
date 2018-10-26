@@ -400,7 +400,7 @@
 	  var msg = "".concat(path.join('.'), ".").concat(key, " require 'string' or 'Element' type, but got '").concat(type, "'");
 
 	  if (type === 'string') {
-	    if (type.trim() === '') {
+	    if (value.trim() === '') {
 	      handle = false;
 	      msg = "".concat(path.join('.'), ".").concat(key, " can not be empty'");
 	    } else {

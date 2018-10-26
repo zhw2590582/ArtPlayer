@@ -3,7 +3,7 @@ const validElement = (key, value, type, path) => {
   let msg = `${path.join('.')}.${key} require 'string' or 'Element' type, but got '${type}'`;
 
   if (type === 'string') {
-    if (type.trim() === '') {
+    if (value.trim() === '') {
       handle = false;
       msg = `${path.join('.')}.${key} can not be empty'`;
     } else {
