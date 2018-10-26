@@ -9,7 +9,9 @@ let i18nMap = {
     'Pause': '暂停',
     'Rate': '速度',
     'Mute': '静音',
-    'Reconnect': '重新连接'
+    'Reconnect': '重新连接',
+    'Hide subtitle': '隐藏字幕',
+    'Show subtitle': '显示字幕'
   },
   'zh-tw': {
     'About author': '關於作者',
@@ -21,7 +23,9 @@ let i18nMap = {
     'Pause': '暫停',
     'Rate': '速度',
     'Mute': '靜音',
-    'Reconnect': '重新連接'
+    'Reconnect': '重新連接',
+    'Hide subtitle': '隱藏字幕',
+    'Show subtitle': '顯示字幕'
   }
 };
 

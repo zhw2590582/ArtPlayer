@@ -702,7 +702,9 @@
 	    'Pause': '暂停',
 	    'Rate': '速度',
 	    'Mute': '静音',
-	    'Reconnect': '重新连接'
+	    'Reconnect': '重新连接',
+	    'Hide subtitle': '隐藏字幕',
+	    'Show subtitle': '显示字幕'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -714,7 +716,9 @@
 	    'Pause': '暫停',
 	    'Rate': '速度',
 	    'Mute': '靜音',
-	    'Reconnect': '重新連接'
+	    'Reconnect': '重新連接',
+	    'Hide subtitle': '隱藏字幕',
+	    'Show subtitle': '顯示字幕'
 	  }
 	};
 
@@ -1094,13 +1098,16 @@
 
 	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
 
+	var subtitle = "<svg style=\"width: 100%; height: 100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
+
 	var icons = {
 	  loading: loading,
 	  playBig: playBig,
 	  play: play,
 	  pause: pause,
 	  volume: volume,
-	  volumeClose: volumeClose
+	  volumeClose: volumeClose,
+	  subtitle: subtitle
 	};
 
 	function creatDomFromSvg(map) {
@@ -1130,18 +1137,11 @@
 	  createClass(PlayAndPause, [{
 	    key: "apply",
 	    value: function apply(art) {
-	      this.art = art;
-	      this.init();
-	    }
-	  }, {
-	    key: "init",
-	    value: function init() {
 	      var _this = this;
 
-	      var _this$art = this.art,
-	          proxy = _this$art.events.proxy,
-	          player = _this$art.player,
-	          i18n = _this$art.i18n;
+	      var proxy = art.events.proxy,
+	          player = art.player,
+	          i18n = art.i18n;
 	      this.$play = append(this.option.$control, icons$1.play);
 	      this.$pause = append(this.option.$control, icons$1.pause);
 	      tooltip(this.$play, i18n.get('Play'));
@@ -1153,11 +1153,11 @@
 	      proxy(this.$pause, 'click', function () {
 	        player.pause();
 	      });
-	      this.art.on('video:playing', function () {
+	      art.on('video:playing', function () {
 	        _this.$play.style.display = 'none';
 	        _this.$pause.style.display = 'block';
 	      });
-	      this.art.on('video:pause', function () {
+	      art.on('video:pause', function () {
 	        _this.$play.style.display = 'block';
 	        _this.$pause.style.display = 'none';
 	      });
@@ -1174,16 +1174,16 @@
 	    classCallCheck(this, Progress);
 
 	    this.option = option;
+	    this.isDroging = false;
+	    this.getLoaded = this.getLoaded.bind(this);
+	    this.getPlayed = this.getPlayed.bind(this);
+	    this.set = this.set.bind(this);
 	  }
 
 	  createClass(Progress, [{
 	    key: "apply",
 	    value: function apply(art) {
 	      this.art = art;
-	      this.isDroging = false;
-	      this.getLoaded = this.getLoaded.bind(this);
-	      this.getPlayed = this.getPlayed.bind(this);
-	      this.set = this.set.bind(this);
 	      this.init();
 	    }
 	  }, {
@@ -1353,7 +1353,24 @@
 	  createClass(Subtitle, [{
 	    key: "apply",
 	    value: function apply(art) {
-	      this.art = art;
+	      var _this = this;
+
+	      var proxy = art.events.proxy,
+	          subtitle = art.subtitle,
+	          i18n = art.i18n;
+	      this.$subtitle = append(this.option.$control, icons$1.subtitle);
+	      tooltip(this.$subtitle, i18n.get('Hide subtitle'));
+	      proxy(this.$subtitle, 'click', function () {
+	        if (subtitle.isShow) {
+	          subtitle.hide();
+	          tooltip(_this.$subtitle, i18n.get('Show subtitle'));
+	          _this.$subtitle.style.opacity = '.5';
+	        } else {
+	          subtitle.show();
+	          tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
+	          _this.$subtitle.style.opacity = '1';
+	        }
+	      });
 	    }
 	  }]);
 
@@ -1409,13 +1426,13 @@
 	    classCallCheck(this, Volume);
 
 	    this.option = option;
+	    this.isDroging = false;
 	  }
 
 	  createClass(Volume, [{
 	    key: "apply",
 	    value: function apply(art) {
 	      this.art = art;
-	      this.isDroging = false;
 	      this.init();
 	    }
 	  }, {
@@ -2070,6 +2087,7 @@
 	    classCallCheck(this, Subtitle);
 
 	    this.art = art;
+	    this.isShow = true;
 	    var url = this.art.option.subtitle.url;
 
 	    if (url) {
@@ -2159,6 +2177,7 @@
 	    value: function show() {
 	      var $subtitle = this.art.refs.$subtitle;
 	      $subtitle.style.display = 'block';
+	      this.isShow = true;
 	      this.art.emit('subtitle:show', $subtitle);
 	    }
 	  }, {
@@ -2166,6 +2185,7 @@
 	    value: function hide() {
 	      var $subtitle = this.art.refs.$subtitle;
 	      $subtitle.style.display = 'none';
+	      this.isShow = false;
 	      this.art.emit('subtitle:hide', $subtitle);
 	    }
 	  }, {

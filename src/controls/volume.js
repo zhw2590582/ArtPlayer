@@ -4,11 +4,11 @@ import icons from '../icons';
 export default class Volume {
   constructor(option) {
     this.option = option;
+    this.isDroging = false;
   }
 
   apply(art) {
     this.art = art;
-    this.isDroging = false;
     this.init();
   }
 

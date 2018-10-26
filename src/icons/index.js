@@ -4,6 +4,7 @@ import play from './play.svg';
 import pause from './pause.svg';
 import volume from './volume.svg';
 import volumeClose from './volume-close.svg';
+import subtitle from './subtitle.svg';
 
 const icons = {
   loading,
@@ -11,7 +12,8 @@ const icons = {
   play,
   pause,
   volume,
-  volumeClose
+  volumeClose,
+  subtitle
 };
 
 function creatDomFromSvg(map) {

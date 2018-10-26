@@ -7,13 +7,7 @@ export default class PlayAndPause {
   }
 
   apply(art) {
-    this.art = art;
-    this.init();
-  }
-
-  init() {
-    const { events: { proxy }, player, i18n } = this.art;
-
+    const { events: { proxy }, player, i18n } = art;
     this.$play = append(this.option.$control, icons.play);
     this.$pause = append(this.option.$control, icons.pause);
     tooltip(this.$play, i18n.get('Play'));
@@ -28,12 +22,12 @@ export default class PlayAndPause {
       player.pause();
     });
 
-    this.art.on('video:playing', () => {
+    art.on('video:playing', () => {
       this.$play.style.display = 'none';
       this.$pause.style.display = 'block';
     });
 
-    this.art.on('video:pause', () => {
+    art.on('video:pause', () => {
       this.$play.style.display = 'block';
       this.$pause.style.display = 'none';
     });

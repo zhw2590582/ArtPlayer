@@ -3,14 +3,14 @@ import { append, clamp, secondToTime } from '../utils';
 export default class Progress {
   constructor(option) {
     this.option = option;
-  }
-
-  apply(art) {
-    this.art = art;
     this.isDroging = false;
     this.getLoaded = this.getLoaded.bind(this);
     this.getPlayed = this.getPlayed.bind(this);
     this.set = this.set.bind(this);
+  }
+
+  apply(art) {
+    this.art = art;
     this.init();
   }
 
