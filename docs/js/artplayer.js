@@ -452,6 +452,9 @@
 	      }
 	    }
 	  },
+	  screenshot: {
+	    type: 'boolean'
+	  },
 	  autoplay: {
 	    type: 'boolean'
 	  },
@@ -1810,7 +1813,7 @@
 	        index: 10
 	      }));
 	      this.add(new Screenshot({
-	        disable: false,
+	        disable: !this.art.option.screenshot,
 	        position: 'right',
 	        index: 20
 	      }));
@@ -2716,6 +2719,7 @@
 	          height: 90,
 	          column: 10
 	        },
+	        screenshot: true,
 	        autoplay: false,
 	        loop: false,
 	        type: '',
