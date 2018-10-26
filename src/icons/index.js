@@ -6,6 +6,7 @@ import volume from './volume.svg';
 import volumeClose from './volume-close.svg';
 import subtitle from './subtitle.svg';
 import subtitleClose from './subtitle-close.svg';
+import screenshot from './screenshot.svg';
 
 const icons = {
   loading,
@@ -15,7 +16,8 @@ const icons = {
   volume,
   volumeClose,
   subtitle,
-  subtitleClose
+  subtitleClose,
+  screenshot
 };
 
 function creatDomFromSvg(map) {

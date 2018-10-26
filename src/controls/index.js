@@ -8,6 +8,7 @@ import Time from './time';
 import Volume from './volume';
 import Setting from './setting';
 import Thumbnails from './thumbnails';
+import Screenshot from './screenshot';
 
 let id = 0;
 export default class Controls {
@@ -57,28 +58,34 @@ export default class Controls {
       index: 10
     }));
 
-    this.add(new Subtitle({
+    this.add(new Screenshot({
       disable: false,
       position: 'right',
       index: 20
     }));
 
-    this.add(new Setting({
-      disable: false,
+    this.add(new Subtitle({
+      disable: !this.art.option.subtitle.url,
       position: 'right',
       index: 30
     }));
 
-    this.add(new Pip({
+    this.add(new Setting({
       disable: false,
       position: 'right',
       index: 40
     }));
 
-    this.add(new Fullscreen({
+    this.add(new Pip({
       disable: false,
       position: 'right',
       index: 50
+    }));
+
+    this.add(new Fullscreen({
+      disable: false,
+      position: 'right',
+      index: 60
     }));
 
     this.art.option.controls.forEach(item => {

@@ -704,7 +704,8 @@
 	    'Mute': '静音',
 	    'Reconnect': '重新连接',
 	    'Hide subtitle': '隐藏字幕',
-	    'Show subtitle': '显示字幕'
+	    'Show subtitle': '显示字幕',
+	    'Screenshot': '截图'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -718,7 +719,8 @@
 	    'Mute': '靜音',
 	    'Reconnect': '重新連接',
 	    'Hide subtitle': '隱藏字幕',
-	    'Show subtitle': '顯示字幕'
+	    'Show subtitle': '顯示字幕',
+	    'Screenshot': '截圖'
 	  }
 	};
 
@@ -1102,6 +1104,8 @@
 
 	var subtitleClose = "<svg style=\"width: 100%; height: 100%; opacity: .5\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
 
+	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
+
 	var icons = {
 	  loading: loading,
 	  playBig: playBig,
@@ -1110,7 +1114,8 @@
 	  volume: volume,
 	  volumeClose: volumeClose,
 	  subtitle: subtitle,
-	  subtitleClose: subtitleClose
+	  subtitleClose: subtitleClose,
+	  screenshot: screenshot
 	};
 
 	function creatDomFromSvg(map) {
@@ -1664,6 +1669,57 @@
 	  return Thumbnails;
 	}();
 
+	var Screenshot =
+	/*#__PURE__*/
+	function () {
+	  function Screenshot(option) {
+	    classCallCheck(this, Screenshot);
+
+	    this.option = option;
+	  }
+
+	  createClass(Screenshot, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      var _this = this;
+
+	      this.art = art;
+	      var _this$art = this.art,
+	          proxy = _this$art.events.proxy,
+	          i18n = _this$art.i18n,
+	          notice = _this$art.notice;
+	      this.$screenshot = append(this.option.$control, icons$1.screenshot);
+	      tooltip(this.$screenshot, i18n.get('Screenshot'));
+	      proxy(this.$screenshot, 'click', function () {
+	        try {
+	          _this.captureFrame();
+	        } catch (error) {
+	          notice.show(error);
+	        }
+	      });
+	    }
+	  }, {
+	    key: "captureFrame",
+	    value: function captureFrame() {
+	      var $video = this.art.refs.$video;
+	      var canvas = document.createElement('canvas');
+	      canvas.width = $video.videoWidth;
+	      canvas.height = $video.videoHeight;
+	      canvas.getContext('2d').drawImage($video, 0, 0);
+	      var dataUri = canvas.toDataURL('image/png');
+	      var elink = document.createElement('a');
+	      elink.style.display = 'none';
+	      elink.href = dataUri;
+	      elink.download = "".concat(secondToTime($video.currentTime), ".png");
+	      document.body.appendChild(elink);
+	      elink.click();
+	      document.body.removeChild(elink);
+	    }
+	  }]);
+
+	  return Screenshot;
+	}();
+
 	var id = 0;
 
 	var Controls =
@@ -1718,25 +1774,30 @@
 	        position: 'right',
 	        index: 10
 	      }));
-	      this.add(new Subtitle({
+	      this.add(new Screenshot({
 	        disable: false,
 	        position: 'right',
 	        index: 20
 	      }));
-	      this.add(new Setting({
-	        disable: false,
+	      this.add(new Subtitle({
+	        disable: !this.art.option.subtitle.url,
 	        position: 'right',
 	        index: 30
 	      }));
-	      this.add(new Pip({
+	      this.add(new Setting({
 	        disable: false,
 	        position: 'right',
 	        index: 40
 	      }));
-	      this.add(new Fullscreen({
+	      this.add(new Pip({
 	        disable: false,
 	        position: 'right',
 	        index: 50
+	      }));
+	      this.add(new Fullscreen({
+	        disable: false,
+	        position: 'right',
+	        index: 60
 	      }));
 	      this.art.option.controls.forEach(function (item) {
 	        _this2.add(item);
