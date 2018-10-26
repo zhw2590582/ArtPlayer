@@ -55,6 +55,9 @@ export default {
       }
     }
   },
+  screenshot: {
+    type: 'boolean'
+  },
   autoplay: {
     type: 'boolean'
   },

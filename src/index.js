@@ -53,6 +53,7 @@ class Artplayer extends Emitter {
         height: 90,
         column: 10
       },
+      screenshot: true,
       autoplay: false,
       loop: false,
       type: '',

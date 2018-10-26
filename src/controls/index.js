@@ -59,7 +59,7 @@ export default class Controls {
     }));
 
     this.add(new Screenshot({
-      disable: false,
+      disable: !this.art.option.screenshot,
       position: 'right',
       index: 20
     }));
