@@ -20,7 +20,9 @@ export default class Template {
             </div>
           </div>
           <div class="artplayer-loading"></div>
-          <div class="artplayer-notice"></div>
+          <div class="artplayer-notice">
+            <div class="artplayer-notice-inner"></div>
+          </div>
           <div class="artplayer-info">
             <div class="artplayer-info-panel"></div>
             <div class="artplayer-info-close">[x]</div>
@@ -38,6 +40,7 @@ export default class Template {
     refs.$layers = refs.$container.querySelector('.artplayer-layers');
     refs.$loading = refs.$container.querySelector('.artplayer-loading');
     refs.$notice = refs.$container.querySelector('.artplayer-notice');
+    refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
     refs.$mask = refs.$container.querySelector('.artplayer-mask');
     refs.$info = refs.$container.querySelector('.artplayer-info');
     refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');

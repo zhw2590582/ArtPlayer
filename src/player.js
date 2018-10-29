@@ -93,7 +93,7 @@ export default class Player {
 
     this.art.on('video:error', () => {
       if (this.reconnectTime < this.maxReconnectTime) {
-        sleep(100).then(() => {
+        sleep(1000).then(() => {
           this.reconnectTime++;
           $video.src = option.url;
           notice.show(`${i18n.get('Reconnect')}: ${this.reconnectTime}`);

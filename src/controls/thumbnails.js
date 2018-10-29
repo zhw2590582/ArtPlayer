@@ -1,3 +1,5 @@
+import { errorHandle } from '../utils';
+
 export default class Thumbnails {
   constructor(option) {
     this.option = option;
@@ -53,6 +55,7 @@ export default class Thumbnails {
 
   showThumbnails(event) {
     const { refs: { $progress }, controls } = this.art;
+    errorHandle(controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
     const { width: posWidth } = controls.progress.getPosFromEvent(event);
     const { url, height, width, number, column } = this.art.option.thumbnails;
     const perWidth = $progress.clientWidth / number;

@@ -707,7 +707,7 @@
 	    key: "init",
 	    value: function init() {
 	      var refs = this.art.refs;
-	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\"></div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
+	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\">\n            <div class=\"artplayer-notice-inner\"></div>\n          </div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
 	      refs.$player = refs.$container.querySelector('.artplayer-video-player');
 	      refs.$video = refs.$container.querySelector('.artplayer-video');
 	      refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -719,6 +719,7 @@
 	      refs.$layers = refs.$container.querySelector('.artplayer-layers');
 	      refs.$loading = refs.$container.querySelector('.artplayer-loading');
 	      refs.$notice = refs.$container.querySelector('.artplayer-notice');
+	      refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
 	      refs.$mask = refs.$container.querySelector('.artplayer-mask');
 	      refs.$info = refs.$container.querySelector('.artplayer-info');
 	      refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
@@ -907,7 +908,7 @@
 	      });
 	      this.art.on('video:error', function () {
 	        if (_this.reconnectTime < _this.maxReconnectTime) {
-	          sleep(100).then(function () {
+	          sleep(1000).then(function () {
 	            _this.reconnectTime++;
 	            $video.src = option.url;
 	            notice.show("".concat(i18n.get('Reconnect'), ": ").concat(_this.reconnectTime));
@@ -1675,6 +1676,7 @@
 	      var _this$art2 = this.art,
 	          $progress = _this$art2.refs.$progress,
 	          controls = _this$art2.controls;
+	      errorHandle(controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
 
 	      var _controls$progress$ge = controls.progress.getPosFromEvent(event),
 	          posWidth = _controls$progress$ge.width;
@@ -2537,9 +2539,11 @@
 
 	      var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 	      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
-	      var $notice = this.art.refs.$notice;
+	      var _this$art$refs = this.art.refs,
+	          $notice = _this$art$refs.$notice,
+	          $noticeInner = _this$art$refs.$noticeInner;
 	      $notice.style.display = 'block';
-	      $notice.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
+	      $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
 
 	      if (autoHide) {
 	        clearTimeout(this.timer);

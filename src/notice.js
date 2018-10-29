@@ -5,9 +5,9 @@ export default class Notice {
   }
 
   show(msg, autoHide = true, time = 1000) {
-    const { $notice } = this.art.refs;
+    const { $notice, $noticeInner } = this.art.refs;
     $notice.style.display = 'block';
-    $notice.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
+    $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
     if (autoHide) {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
