@@ -1147,20 +1147,21 @@
 	          $player = _this$art8$refs.$player,
 	          i18n = _this$art8.i18n,
 	          notice = _this$art8.notice;
+	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : ratio[0];
 
 	      if (ratio.length === 2) {
 	        var rate = Number(ratio[0]) / Number(ratio[1]);
 	        setStyle($video, 'width', "".concat(100 / rate, "%"));
 	        setStyle($video, 'height', '100%');
 	        setStyle($video, 'padding', "0 ".concat(($player.clientWidth - $player.clientWidth / rate) / 2, "px"));
+	        $player.dataset.aspectRatio = ratioName;
 	      } else {
 	        setStyle($video, 'width', null);
 	        setStyle($video, 'height', null);
 	        setStyle($video, 'padding', null);
+	        delete $player.dataset.aspectRatio;
 	      }
 
-	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : ratio[0];
-	      $player.dataset.aspectRatio = ratioName;
 	      notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratioName));
 	      this.art.emit('aspectRatio', ratio);
 	    }

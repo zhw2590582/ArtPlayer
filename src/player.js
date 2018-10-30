@@ -176,19 +176,21 @@ export default class Player {
 
   aspectRatio(ratio) {
     const { refs: { $video, $player }, i18n, notice } = this.art;
+    const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : ratio[0];
+
     if (ratio.length === 2) {
       const rate = Number(ratio[0]) / Number(ratio[1]);
       setStyle($video, 'width', `${100 / rate}%`);
       setStyle($video, 'height', '100%');
       setStyle($video, 'padding', `0 ${($player.clientWidth - $player.clientWidth / rate) / 2}px`);
+      $player.dataset.aspectRatio = ratioName;
     } else {
       setStyle($video, 'width', null);
       setStyle($video, 'height', null);
       setStyle($video, 'padding', null);
+      delete $player.dataset.aspectRatio;
     }
 
-    const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : ratio[0];
-    $player.dataset.aspectRatio = ratioName;
     notice.show(`${i18n.get('Aspect ratio')}: ${ratioName}`);
     this.art.emit('aspectRatio', ratio);
   }
