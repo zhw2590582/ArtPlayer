@@ -1,3 +1,5 @@
+import { setStyle } from './utils';
+
 export default class Notice {
   constructor(art) {
     this.art = art;
@@ -6,7 +8,7 @@ export default class Notice {
 
   show(msg, autoHide = true, time = 1000) {
     const { $notice, $noticeInner } = this.art.refs;
-    $notice.style.display = 'block';
+    setStyle($notice, 'display', 'block');
     $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
     if (autoHide) {
       clearTimeout(this.timer);
@@ -19,7 +21,7 @@ export default class Notice {
 
   hide() {
     const { $notice } = this.art.refs;
-    $notice.style.display = 'none';
+    setStyle($notice, 'display', 'none');
     this.art.emit('notice:hide', $notice);
   }
 }

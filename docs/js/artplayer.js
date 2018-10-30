@@ -1150,13 +1150,13 @@
 
 	      if (ratio.length === 2) {
 	        var rate = Number(ratio[0]) / Number(ratio[1]);
-	        $video.style.width = "".concat(100 / rate, "%");
-	        $video.style.height = '100%';
-	        $video.style.padding = "0 ".concat(($player.clientWidth - $player.clientWidth / rate) / 2, "px");
+	        setStyle($video, 'width', "".concat(100 / rate, "%"));
+	        setStyle($video, 'height', '100%');
+	        setStyle($video, 'padding', "0 ".concat(($player.clientWidth - $player.clientWidth / rate) / 2, "px"));
 	      } else {
-	        $video.style.width = null;
-	        $video.style.height = null;
-	        $video.style.padding = null;
+	        setStyle($video, 'width', null);
+	        setStyle($video, 'height', null);
+	        setStyle($video, 'padding', null);
 	      }
 
 	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : ratio[0];
@@ -2237,8 +2237,8 @@
 	        menuTop = cHeight - mHeight;
 	      }
 
-	      refs.$contextmenu.style.left = "".concat(menuLeft, "px");
-	      refs.$contextmenu.style.top = "".concat(menuTop, "px");
+	      setStyle(refs.$contextmenu, 'left', "".concat(menuLeft, "px"));
+	      setStyle(refs.$contextmenu, 'top', "".concat(menuTop, "px"));
 	    }
 	  }, {
 	    key: "hide",
@@ -2246,7 +2246,7 @@
 	      var $contextmenu = this.art.refs.$contextmenu;
 
 	      if ($contextmenu) {
-	        $contextmenu.style.display = 'none';
+	        setStyle($contextmenu, 'display', 'none');
 	        this.art.emit('contextmenu:hide', $contextmenu);
 	      }
 	    }
@@ -2256,7 +2256,7 @@
 	      var $contextmenu = this.art.refs.$contextmenu;
 
 	      if ($contextmenu) {
-	        $contextmenu.style.display = 'block';
+	        setStyle($contextmenu, 'display', 'block');
 	        this.art.emit('contextmenu:show', $contextmenu);
 	      }
 	    }
@@ -2299,7 +2299,7 @@
 	      var _this$art$refs = this.art.refs,
 	          $info = _this$art$refs.$info,
 	          $infoPanel = _this$art$refs.$infoPanel;
-	      $info.style.display = 'block';
+	      setStyle($info, 'display', 'block');
 
 	      if (!$infoPanel.innerHTML) {
 	        append($infoPanel, this.creatInfo());
@@ -2372,7 +2372,7 @@
 	    key: "hide",
 	    value: function hide() {
 	      var $info = this.art.refs.$info;
-	      $info.style.display = 'none';
+	      setStyle($info, 'display', 'none');
 	      clearTimeout(this.timer);
 	      this.art.emit('info:hide', $info);
 	    }
@@ -2476,14 +2476,14 @@
 	    key: "show",
 	    value: function show() {
 	      var $subtitle = this.art.refs.$subtitle;
-	      $subtitle.style.display = 'block';
+	      setStyle($subtitle, 'display', 'block');
 	      this.art.emit('subtitle:show', $subtitle);
 	    }
 	  }, {
 	    key: "hide",
 	    value: function hide() {
 	      var $subtitle = this.art.refs.$subtitle;
-	      $subtitle.style.display = 'none';
+	      setStyle($subtitle, 'display', 'none');
 	      this.art.emit('subtitle:hide', $subtitle);
 	    }
 	  }, {
@@ -2654,7 +2654,7 @@
 	      var $layer = document.createElement('div');
 	      $layer.setAttribute('data-art-layer-id', id$2);
 	      $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id$2));
-	      $layer.style.zIndex = option.index || id$2;
+	      setStyle($layer, 'z-index', option.index || id$2);
 	      append($layer, option.html);
 	      setStyles($layer, option.style || {});
 	      refs.$layers.appendChild($layer);
@@ -2665,14 +2665,14 @@
 	    key: "show",
 	    value: function show() {
 	      var $layers = this.art.refs.$layers;
-	      $layers.style.display = 'block';
+	      setStyle($layers, 'display', 'block');
 	      this.art.emit('layers:show', $layers);
 	    }
 	  }, {
 	    key: "hide",
 	    value: function hide() {
 	      var $layers = this.art.refs.$layers;
-	      $layers.style.display = 'none';
+	      setStyle($layers, 'display', 'none');
 	      this.art.emit('layers:hide', $layers);
 	    }
 	  }]);
@@ -2702,14 +2702,14 @@
 	    key: "hide",
 	    value: function hide() {
 	      var $loading = this.art.refs.$loading;
-	      $loading.style.display = 'none';
+	      setStyle($loading, 'display', 'none');
 	      this.art.emit('loading:hide', $loading);
 	    }
 	  }, {
 	    key: "show",
 	    value: function show() {
 	      var $loading = this.art.refs.$loading;
-	      $loading.style.display = 'flex';
+	      setStyle($loading, 'display', 'flex');
 	      this.art.emit('loading:show', $loading);
 	    }
 	  }]);
@@ -2737,7 +2737,7 @@
 	      var _this$art$refs = this.art.refs,
 	          $notice = _this$art$refs.$notice,
 	          $noticeInner = _this$art$refs.$noticeInner;
-	      $notice.style.display = 'block';
+	      setStyle($notice, 'display', 'block');
 	      $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
 
 	      if (autoHide) {
@@ -2753,7 +2753,7 @@
 	    key: "hide",
 	    value: function hide() {
 	      var $notice = this.art.refs.$notice;
-	      $notice.style.display = 'none';
+	      setStyle($notice, 'display', 'none');
 	      this.art.emit('notice:hide', $notice);
 	    }
 	  }]);
@@ -2791,14 +2791,14 @@
 	    key: "show",
 	    value: function show() {
 	      var $mask = this.art.refs.$mask;
-	      $mask.style.display = 'block';
+	      setStyle($mask, 'display', 'block');
 	      this.art.emit('mask:show', $mask);
 	    }
 	  }, {
 	    key: "hide",
 	    value: function hide() {
 	      var $mask = this.art.refs.$mask;
-	      $mask.style.display = 'none';
+	      setStyle($mask, 'display', 'none');
 	      this.art.emit('mask:show', $mask);
 	    }
 	  }]);

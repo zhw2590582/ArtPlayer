@@ -1,4 +1,4 @@
-import { append, setStyles } from './utils';
+import { append, setStyles, setStyle } from './utils';
 
 let id = 0;
 export default class Layers {
@@ -25,7 +25,7 @@ export default class Layers {
     const $layer = document.createElement('div');
     $layer.setAttribute('data-art-layer-id', id);
     $layer.setAttribute('class', `art-layer art-layer-${option.name || id}`);
-    $layer.style.zIndex = option.index || id;
+    setStyle($layer, 'z-index', option.index || id);
     append($layer, option.html);
     setStyles($layer, option.style || {});
     refs.$layers.appendChild($layer);
@@ -35,13 +35,13 @@ export default class Layers {
 
   show() {
     const { $layers } = this.art.refs;
-    $layers.style.display = 'block';
+    setStyle($layers, 'display', 'block');
     this.art.emit('layers:show', $layers);
   }
 
   hide() {
     const { $layers } = this.art.refs;
-    $layers.style.display = 'none';
+    setStyle($layers, 'display', 'none');
     this.art.emit('layers:hide', $layers);
   }
 }

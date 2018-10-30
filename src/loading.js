@@ -1,5 +1,5 @@
 import icons from './icons';
-import { append } from './utils';
+import { append, setStyle } from './utils';
 
 export default class Loading {
   constructor(art) {
@@ -14,13 +14,13 @@ export default class Loading {
 
   hide() {
     const { $loading } = this.art.refs;
-    $loading.style.display = 'none';
+    setStyle($loading, 'display', 'none');
     this.art.emit('loading:hide', $loading);
   }
 
   show() {
     const { $loading } = this.art.refs;
-    $loading.style.display = 'flex';
+    setStyle($loading, 'display', 'flex');
     this.art.emit('loading:show', $loading);
   }
 }

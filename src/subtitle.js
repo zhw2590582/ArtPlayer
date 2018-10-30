@@ -1,4 +1,4 @@
-import { errorHandle, getExt, setStyles } from './utils';
+import { errorHandle, getExt, setStyles, setStyle } from './utils';
 
 export default class Subtitle {
   constructor(art) {
@@ -91,13 +91,13 @@ export default class Subtitle {
 
   show() {
     const { $subtitle } = this.art.refs;
-    $subtitle.style.display = 'block';
+    setStyle($subtitle, 'display', 'block');
     this.art.emit('subtitle:show', $subtitle);
   }
 
   hide() {
     const { $subtitle } = this.art.refs;
-    $subtitle.style.display = 'none';
+    setStyle($subtitle, 'display', 'none');
     this.art.emit('subtitle:hide', $subtitle);
   }
 

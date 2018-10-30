@@ -1,4 +1,4 @@
-import { append } from './utils';
+import { append, setStyle } from './utils';
 
 export default class Info {
   constructor(art) {
@@ -15,7 +15,7 @@ export default class Info {
 
   show() {
     const { $info, $infoPanel } = this.art.refs;
-    $info.style.display = 'block';
+    setStyle($info, 'display', 'block');
     if (!$infoPanel.innerHTML) {
       append($infoPanel, this.creatInfo());
       this.getHeader();
@@ -125,7 +125,7 @@ export default class Info {
 
   hide() {
     const { $info } = this.art.refs;
-    $info.style.display = 'none';
+    setStyle($info, 'display', 'none');
     clearTimeout(this.timer);
     this.art.emit('info:hide', $info);
   }

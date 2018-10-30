@@ -1,4 +1,4 @@
-import { append, setStyles } from './utils';
+import { append, setStyles, setStyle } from './utils';
 
 let id = 0;
 export default class Contextmenu {
@@ -124,14 +124,14 @@ export default class Contextmenu {
       menuTop = cHeight - mHeight;
     }
 
-    refs.$contextmenu.style.left = `${menuLeft}px`;
-    refs.$contextmenu.style.top = `${menuTop}px`;
+    setStyle(refs.$contextmenu, 'left', `${menuLeft}px`);
+    setStyle(refs.$contextmenu, 'top', `${menuTop}px`);
   }
 
   hide() {
     const { refs: { $contextmenu } } = this.art;
     if ($contextmenu) {
-      $contextmenu.style.display = 'none';
+      setStyle($contextmenu, 'display', 'none');
       this.art.emit('contextmenu:hide', $contextmenu);
     }
   }
@@ -139,7 +139,7 @@ export default class Contextmenu {
   show() {
     const { refs: { $contextmenu } } = this.art;
     if ($contextmenu) {
-      $contextmenu.style.display = 'block';
+      setStyle($contextmenu, 'display', 'block');
       this.art.emit('contextmenu:show', $contextmenu);
     }
   }

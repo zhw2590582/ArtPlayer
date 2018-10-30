@@ -1,5 +1,5 @@
 import icons from './icons';
-import { append } from './utils';
+import { append, setStyle } from './utils';
 
 export default class Mask {
   constructor(art) {
@@ -24,13 +24,13 @@ export default class Mask {
 
   show() {
     const { $mask } = this.art.refs;
-    $mask.style.display = 'block';
+    setStyle($mask, 'display', 'block');
     this.art.emit('mask:show', $mask);
   }
 
   hide() {
     const { $mask } = this.art.refs;
-    $mask.style.display = 'none';
+    setStyle($mask, 'display', 'none');
     this.art.emit('mask:show', $mask);
   }
 }

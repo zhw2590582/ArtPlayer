@@ -1,4 +1,4 @@
-import { clamp, secondToTime, setStorage, sleep } from './utils';
+import { clamp, secondToTime, setStorage, sleep, setStyle } from './utils';
 import config from './config';
 
 export default class Player {
@@ -178,13 +178,13 @@ export default class Player {
     const { refs: { $video, $player }, i18n, notice } = this.art;
     if (ratio.length === 2) {
       const rate = Number(ratio[0]) / Number(ratio[1]);
-      $video.style.width = `${100 / rate}%`;
-      $video.style.height = '100%';
-      $video.style.padding = `0 ${($player.clientWidth - $player.clientWidth / rate) / 2}px`;
+      setStyle($video, 'width', `${100 / rate}%`);
+      setStyle($video, 'height', '100%');
+      setStyle($video, 'padding', `0 ${($player.clientWidth - $player.clientWidth / rate) / 2}px`);
     } else {
-      $video.style.width = null;
-      $video.style.height = null;
-      $video.style.padding = null;
+      setStyle($video, 'width', null);
+      setStyle($video, 'height', null);
+      setStyle($video, 'padding', null);
     }
 
     const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : ratio[0];
