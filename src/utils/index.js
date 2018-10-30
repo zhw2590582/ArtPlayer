@@ -44,9 +44,14 @@ export function append(parent, child) {
   return parent.lastElementChild;
 }
 
-export function setStyle(element, styles) {
+export function setStyle(element, key, value) {
+  element.style[key] = value;
+  return element;
+}
+
+export function setStyles(element, styles) {
   Object.keys(styles).forEach(key => {
-    element.style[key] = styles[key];
+    setStyle(element, key, styles[key]);
   });
   return element;
 }
@@ -96,12 +101,6 @@ export function setStorage(key, value) {
     [key]: value
   });
   localStorage.setItem('artplayer_settings', JSON.stringify(storage));
-}
-
-export function getType(val) {
-  const { toString } = Object.prototype;
-  const type = toString.call(val).slice(8, -1).toLowerCase().replace(/\s/g, '');
-  return type;
 }
 
 export function tooltip(target, msg, pos = 'up') {

@@ -1,4 +1,4 @@
-import { append, tooltip } from '../utils';
+import { append, tooltip, setStyle } from '../utils';
 import icons from '../icons';
 
 export default class PlayAndPause {
@@ -12,7 +12,7 @@ export default class PlayAndPause {
     this.$pause = append(this.option.$control, icons.pause);
     tooltip(this.$play, i18n.get('Play'));
     tooltip(this.$pause, i18n.get('Pause'));
-    this.$pause.style.display = 'none';
+    setStyle(this.$pause, 'display', 'none');
 
     proxy(this.$play, 'click', () => {
       player.play();
@@ -23,13 +23,13 @@ export default class PlayAndPause {
     });
 
     art.on('video:playing', () => {
-      this.$play.style.display = 'none';
-      this.$pause.style.display = 'block';
+      setStyle(this.$play, 'display', 'none');
+      setStyle(this.$pause, 'display', 'block');
     });
 
     art.on('video:pause', () => {
-      this.$play.style.display = 'block';
-      this.$pause.style.display = 'none';
+      setStyle(this.$play, 'display', 'block');
+      setStyle(this.$pause, 'display', 'none');
     });
   }
 }

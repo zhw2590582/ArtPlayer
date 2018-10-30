@@ -1,4 +1,4 @@
-import { append, setStyle } from './utils';
+import { append, setStyles } from './utils';
 
 let id = 0;
 export default class Layers {
@@ -27,7 +27,7 @@ export default class Layers {
     $layer.setAttribute('class', `art-layer art-layer-${option.name || id}`);
     $layer.style.zIndex = option.index || id;
     append($layer, option.html);
-    setStyle($layer, option.style || {});
+    setStyles($layer, option.style || {});
     refs.$layers.appendChild($layer);
     this.art.emit('layers:add', $layer);
     callback && callback($layer);

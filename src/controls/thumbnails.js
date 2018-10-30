@@ -1,4 +1,4 @@
-import { errorHandle } from '../utils';
+import { errorHandle, setStyle } from '../utils';
 
 export default class Thumbnails {
   constructor(option) {
@@ -27,13 +27,13 @@ export default class Thumbnails {
       }
 
       if (this.isLoad) {
-        this.option.$control.style.display = 'block';
+        setStyle(this.option.$control, 'display', 'block');
         this.showThumbnails(event);
       }
     });
 
     proxy($progress, 'mouseout', () => {
-      this.option.$control.style.display = 'none';
+      setStyle(this.option.$control, 'display', 'none');
     });
   }
 
@@ -63,17 +63,17 @@ export default class Thumbnails {
     let yIndex = Math.ceil(perIndex / column);
     let xIndex = perIndex % column || column;
 
-    this.option.$control.style.backgroundImage = `url(${url})`;
-    this.option.$control.style.height = `${height}px`;
-    this.option.$control.style.width = `${width}px`;
-    this.option.$control.style.backgroundPosition = `-${--xIndex * width}px -${--yIndex * height}px`;
+    setStyle(this.option.$control, 'backgroundImage', `url(${url})`);
+    setStyle(this.option.$control, 'height', `${height}px`);
+    setStyle(this.option.$control, 'width', `${width}px`);
+    setStyle(this.option.$control, 'backgroundPosition', `-${--xIndex * width}px -${--yIndex * height}px`);
 
     if (posWidth <= width / 2) {
-      this.option.$control.style.left = 0;
+      setStyle(this.option.$control, 'left', 0);
     } else if (posWidth > $progress.clientWidth - width / 2) {
-      this.option.$control.style.left = `${$progress.clientWidth - width}px`;
+      setStyle(this.option.$control, 'left', `${$progress.clientWidth - width}px`);
     } else {
-      this.option.$control.style.left = `${posWidth - width / 2}px`;
+      setStyle(this.option.$control, 'left', `${posWidth - width / 2}px`);
     }
   }
 }

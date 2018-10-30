@@ -1,4 +1,4 @@
-import { append, setStyle } from './utils';
+import { append, setStyles } from './utils';
 
 let id = 0;
 export default class Contextmenu {
@@ -93,7 +93,7 @@ export default class Contextmenu {
         $menu.setAttribute('data-art-menu-id', id);
         $menu.setAttribute('class', `art-menu art-menu-${item.name || id}`);
         append($menu, item.html);
-        setStyle($menu, item.style || {});
+        setStyles($menu, item.style || {});
         if (item.click) {
           proxy($menu, 'click', event => {
             event.preventDefault();

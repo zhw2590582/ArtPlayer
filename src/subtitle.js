@@ -1,4 +1,4 @@
-import { errorHandle, getExt, setStyle } from './utils';
+import { errorHandle, getExt, setStyles } from './utils';
 
 export default class Subtitle {
   constructor(art) {
@@ -18,7 +18,7 @@ export default class Subtitle {
       refs: { $video, $subtitle }
     } = this.art;
 
-    setStyle($subtitle, subtitle.style || {});
+    setStyles($subtitle, subtitle.style || {});
     const $track = document.createElement('track');
     $track.default = true;
     $track.kind = 'metadata';

@@ -1,3 +1,4 @@
+import { setStyle } from '../utils';
 import Danmu from './danmu';
 import Fullscreen from './fullscreen';
 import Pip from './pip';
@@ -138,14 +139,14 @@ export default class Controls {
   commonMethod(control) {
     Object.defineProperty(control, 'hide', {
       value: () => {
-        control.option.$control.style.display = 'none';
+        setStyle(control.option.$control, 'display', 'none');
         this.art.emit('control:hide', control.option.$control);
       }
     });
 
     Object.defineProperty(control, 'show', {
       value: () => {
-        control.option.$control.style.display = 'block';
+        setStyle(control.option.$control, 'display', 'block');
         this.art.emit('control:show', control.option.$control);
       }
     });

@@ -1,4 +1,4 @@
-import { append, clamp, secondToTime } from '../utils';
+import { append, clamp, secondToTime, setStyle } from '../utils';
 
 export default class Progress {
   constructor(option) {
@@ -63,7 +63,7 @@ export default class Progress {
     });
 
     proxy(this.option.$control, 'mousemove', event => {
-      this.$tip.style.display = 'block';
+      setStyle(this.$tip, 'display', 'block');
       if (event.path.indexOf(this.$highlight) > -1) {
         this.showHighlight(event);
       } else {
@@ -72,7 +72,7 @@ export default class Progress {
     });
 
     proxy(this.option.$control, 'mouseout', () => {
-      this.$tip.style.display = 'none';
+      setStyle(this.$tip, 'display', 'none');
     });
 
     proxy(this.option.$control, 'click', event => {
@@ -112,7 +112,7 @@ export default class Progress {
       Number(time) / $video.duration * this.option.$control.clientWidth +
       event.target.clientWidth / 2 -
       this.$tip.clientWidth / 2;
-    this.$tip.style.left = `${left}px`;
+    setStyle(this.$tip, 'left', `${left}px`);
   }
 
   showTime(event) {
@@ -120,11 +120,11 @@ export default class Progress {
     const tipWidth = this.$tip.clientWidth;
     this.$tip.innerHTML = time;
     if (width <= tipWidth / 2) {
-      this.$tip.style.left = 0;
+      setStyle(this.$tip, 'left', 0);
     } else if (width > this.option.$control.clientWidth - tipWidth / 2) {
-      this.$tip.style.left = `${this.option.$control.clientWidth - tipWidth}px`;
+      setStyle(this.$tip, 'left', `${this.option.$control.clientWidth - tipWidth}px`);
     } else {
-      this.$tip.style.left = `${width - tipWidth / 2}px`;
+      setStyle(this.$tip, 'left', `${width - tipWidth / 2}px`);
     }
   }
 
@@ -151,9 +151,9 @@ export default class Progress {
   }
 
   set(type, percentage) {
-    this[`$${type}`].style.width = `${percentage * 100}%`;
+    setStyle(this[`$${type}`], 'width', `${percentage * 100}%`);
     if (type === 'played') {
-      this.$indicator.style.left = `calc(${percentage * 100}% - 6.5px)`;
+      setStyle(this.$indicator, 'left', `calc(${percentage * 100}% - 6.5px)`);
     }
   }
 }

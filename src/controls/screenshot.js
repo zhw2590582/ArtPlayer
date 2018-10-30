@@ -1,4 +1,4 @@
-import { append, tooltip, secondToTime } from '../utils';
+import { append, tooltip, secondToTime, setStyle } from '../utils';
 import icons from '../icons';
 
 export default class Screenshot {
@@ -28,7 +28,7 @@ export default class Screenshot {
     canvas.getContext('2d').drawImage($video, 0, 0);
     const dataUri = canvas.toDataURL('image/png');
     const elink = document.createElement('a');
-    elink.style.display = 'none';
+    setStyle(elink, 'display', 'none');
     elink.href = dataUri;
     elink.download = `${secondToTime($video.currentTime)}.png`;
     document.body.appendChild(elink);

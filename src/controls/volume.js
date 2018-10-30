@@ -1,4 +1,4 @@
-import { append, getStorage, clamp, tooltip } from '../utils';
+import { append, getStorage, clamp, tooltip, setStyle } from '../utils';
 import icons from '../icons';
 
 export default class Volume {
@@ -19,21 +19,21 @@ export default class Volume {
     this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
     this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
     tooltip(this.$volume, i18n.get('Mute'));
-    this.$volumeClose.style.display = 'none';
+    setStyle(this.$volumeClose, 'display', 'none');
 
     const volume = getStorage('volume');
     this.setVolumeHandle(volume);
     player.volume(volume);
 
     proxy(this.$volume, 'click', () => {
-      this.$volume.style.display = 'none';
-      this.$volumeClose.style.display = 'block';
+      setStyle(this.$volume, 'display', 'none');
+      setStyle(this.$volumeClose, 'display', 'block');
       player.volume(0);
     });
 
     proxy(this.$volumeClose, 'click', () => {
-      this.$volume.style.display = 'block';
-      this.$volumeClose.style.display = 'none';
+      setStyle(this.$volume, 'display', 'block');
+      setStyle(this.$volumeClose, 'display', 'none');
       player.volume(getStorage('volume'));
     });
 
@@ -74,11 +74,11 @@ export default class Volume {
       const percentage = player.volume();
       this.setVolumeHandle(percentage);
       if (percentage === 0) {
-        this.$volume.style.display = 'none';
-        this.$volumeClose.style.display = 'block';
+        setStyle(this.$volume, 'display', 'none');
+        setStyle(this.$volumeClose, 'display', 'block');
       } else {
-        this.$volume.style.display = 'block';
-        this.$volumeClose.style.display = 'none';
+        setStyle(this.$volume, 'display', 'block');
+        setStyle(this.$volumeClose, 'display', 'none');
       }
     });
   }
@@ -95,6 +95,6 @@ export default class Volume {
     const { width: panelWidth } = this.$volumePanel.getBoundingClientRect();
     const { width: handleWidth } = this.$volumeHandle.getBoundingClientRect();
     const width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
-    this.$volumeHandle.style.left = `${width}px`;
+    setStyle(this.$volumeHandle, 'left', `${width}px`);
   }
 }

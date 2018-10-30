@@ -1,4 +1,4 @@
-import { append, tooltip } from '../utils';
+import { append, tooltip, setStyle } from '../utils';
 import icons from '../icons';
 
 export default class Subtitle {
@@ -12,18 +12,18 @@ export default class Subtitle {
     this.$subtitleClose = append(this.option.$control, icons.subtitleClose);
     tooltip(this.$subtitle, i18n.get('Hide subtitle'));
     tooltip(this.$subtitleClose, i18n.get('Show subtitle'));
-    this.$subtitleClose.style.display = 'none';
+    setStyle(this.$subtitleClose, 'display', 'none');
 
     proxy(this.$subtitle, 'click', () => {
       subtitle.hide();
-      this.$subtitle.style.display = 'none';
-      this.$subtitleClose.style.display = 'block';
+      setStyle(this.$subtitle, 'display', 'none');
+      setStyle(this.$subtitleClose, 'display', 'block');
     });
 
     proxy(this.$subtitleClose, 'click', () => {
       subtitle.show();
-      this.$subtitle.style.display = 'block';
-      this.$subtitleClose.style.display = 'none';
+      setStyle(this.$subtitle, 'display', 'block');
+      setStyle(this.$subtitleClose, 'display', 'none');
     });
   }
 }

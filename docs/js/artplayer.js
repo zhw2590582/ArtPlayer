@@ -313,9 +313,13 @@
 
 	  return parent.lastElementChild;
 	}
-	function setStyle(element, styles) {
+	function setStyle(element, key, value) {
+	  element.style[key] = value;
+	  return element;
+	}
+	function setStyles(element, styles) {
 	  Object.keys(styles).forEach(function (key) {
-	    element.style[key] = styles[key];
+	    setStyle(element, key, styles[key]);
 	  });
 	  return element;
 	}
@@ -1334,7 +1338,7 @@
 	      this.$pause = append(this.option.$control, icons$1.pause);
 	      tooltip(this.$play, i18n.get('Play'));
 	      tooltip(this.$pause, i18n.get('Pause'));
-	      this.$pause.style.display = 'none';
+	      setStyle(this.$pause, 'display', 'none');
 	      proxy(this.$play, 'click', function () {
 	        player.play();
 	      });
@@ -1342,12 +1346,12 @@
 	        player.pause();
 	      });
 	      art.on('video:playing', function () {
-	        _this.$play.style.display = 'none';
-	        _this.$pause.style.display = 'block';
+	        setStyle(_this.$play, 'display', 'none');
+	        setStyle(_this.$pause, 'display', 'block');
 	      });
 	      art.on('video:pause', function () {
-	        _this.$play.style.display = 'block';
-	        _this.$pause.style.display = 'none';
+	        setStyle(_this.$play, 'display', 'block');
+	        setStyle(_this.$pause, 'display', 'none');
 	      });
 	    }
 	  }]);
@@ -1407,7 +1411,7 @@
 	        _this.set('played', 1);
 	      });
 	      proxy(this.option.$control, 'mousemove', function (event) {
-	        _this.$tip.style.display = 'block';
+	        setStyle(_this.$tip, 'display', 'block');
 
 	        if (event.path.indexOf(_this.$highlight) > -1) {
 	          _this.showHighlight(event);
@@ -1416,7 +1420,7 @@
 	        }
 	      });
 	      proxy(this.option.$control, 'mouseout', function () {
-	        _this.$tip.style.display = 'none';
+	        setStyle(_this.$tip, 'display', 'none');
 	      });
 	      proxy(this.option.$control, 'click', function (event) {
 	        if (event.target !== _this.$indicator) {
@@ -1462,7 +1466,7 @@
 	          time = _event$target$dataset.time;
 	      this.$tip.innerHTML = text;
 	      var left = Number(time) / $video.duration * this.option.$control.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
-	      this.$tip.style.left = "".concat(left, "px");
+	      setStyle(this.$tip, 'left', "".concat(left, "px"));
 	    }
 	  }, {
 	    key: "showTime",
@@ -1475,11 +1479,11 @@
 	      this.$tip.innerHTML = time;
 
 	      if (width <= tipWidth / 2) {
-	        this.$tip.style.left = 0;
+	        setStyle(this.$tip, 'left', 0);
 	      } else if (width > this.option.$control.clientWidth - tipWidth / 2) {
-	        this.$tip.style.left = "".concat(this.option.$control.clientWidth - tipWidth, "px");
+	        setStyle(this.$tip, 'left', "".concat(this.option.$control.clientWidth - tipWidth, "px"));
 	      } else {
-	        this.$tip.style.left = "".concat(width - tipWidth / 2, "px");
+	        setStyle(this.$tip, 'left', "".concat(width - tipWidth / 2, "px"));
 	      }
 	    }
 	  }, {
@@ -1518,10 +1522,10 @@
 	  }, {
 	    key: "set",
 	    value: function set(type, percentage) {
-	      this["$".concat(type)].style.width = "".concat(percentage * 100, "%");
+	      setStyle(this["$".concat(type)], 'width', "".concat(percentage * 100, "%"));
 
 	      if (type === 'played') {
-	        this.$indicator.style.left = "calc(".concat(percentage * 100, "% - 6.5px)");
+	        setStyle(this.$indicator, 'left', "calc(".concat(percentage * 100, "% - 6.5px)"));
 	      }
 	    }
 	  }]);
@@ -1550,16 +1554,16 @@
 	      this.$subtitleClose = append(this.option.$control, icons$1.subtitleClose);
 	      tooltip(this.$subtitle, i18n.get('Hide subtitle'));
 	      tooltip(this.$subtitleClose, i18n.get('Show subtitle'));
-	      this.$subtitleClose.style.display = 'none';
+	      setStyle(this.$subtitleClose, 'display', 'none');
 	      proxy(this.$subtitle, 'click', function () {
 	        subtitle.hide();
-	        _this.$subtitle.style.display = 'none';
-	        _this.$subtitleClose.style.display = 'block';
+	        setStyle(_this.$subtitle, 'display', 'none');
+	        setStyle(_this.$subtitleClose, 'display', 'block');
 	      });
 	      proxy(this.$subtitleClose, 'click', function () {
 	        subtitle.show();
-	        _this.$subtitle.style.display = 'block';
-	        _this.$subtitleClose.style.display = 'none';
+	        setStyle(_this.$subtitle, 'display', 'block');
+	        setStyle(_this.$subtitleClose, 'display', 'none');
 	      });
 	    }
 	  }]);
@@ -1639,18 +1643,18 @@
 	      this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
 	      this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
 	      tooltip(this.$volume, i18n.get('Mute'));
-	      this.$volumeClose.style.display = 'none';
+	      setStyle(this.$volumeClose, 'display', 'none');
 	      var volume = getStorage('volume');
 	      this.setVolumeHandle(volume);
 	      player.volume(volume);
 	      proxy(this.$volume, 'click', function () {
-	        _this.$volume.style.display = 'none';
-	        _this.$volumeClose.style.display = 'block';
+	        setStyle(_this.$volume, 'display', 'none');
+	        setStyle(_this.$volumeClose, 'display', 'block');
 	        player.volume(0);
 	      });
 	      proxy(this.$volumeClose, 'click', function () {
-	        _this.$volume.style.display = 'block';
-	        _this.$volumeClose.style.display = 'none';
+	        setStyle(_this.$volume, 'display', 'block');
+	        setStyle(_this.$volumeClose, 'display', 'none');
 	        player.volume(getStorage('volume'));
 	      });
 	      proxy(this.option.$control, 'mouseenter', function () {
@@ -1686,11 +1690,11 @@
 	        _this.setVolumeHandle(percentage);
 
 	        if (percentage === 0) {
-	          _this.$volume.style.display = 'none';
-	          _this.$volumeClose.style.display = 'block';
+	          setStyle(_this.$volume, 'display', 'none');
+	          setStyle(_this.$volumeClose, 'display', 'block');
 	        } else {
-	          _this.$volume.style.display = 'block';
-	          _this.$volumeClose.style.display = 'none';
+	          setStyle(_this.$volume, 'display', 'block');
+	          setStyle(_this.$volumeClose, 'display', 'none');
 	        }
 	      });
 	    }
@@ -1721,7 +1725,7 @@
 	          handleWidth = _this$$volumeHandle$g2.width;
 
 	      var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
-	      this.$volumeHandle.style.left = "".concat(width, "px");
+	      setStyle(this.$volumeHandle, 'left', "".concat(width, "px"));
 	    }
 	  }]);
 
@@ -1782,13 +1786,13 @@
 	        }
 
 	        if (_this.isLoad) {
-	          _this.option.$control.style.display = 'block';
+	          setStyle(_this.option.$control, 'display', 'block');
 
 	          _this.showThumbnails(event);
 	        }
 	      });
 	      proxy($progress, 'mouseout', function () {
-	        _this.option.$control.style.display = 'none';
+	        setStyle(_this.option.$control, 'display', 'none');
 	      });
 	    }
 	  }, {
@@ -1832,17 +1836,17 @@
 	      var perIndex = Math.ceil(posWidth / perWidth);
 	      var yIndex = Math.ceil(perIndex / column);
 	      var xIndex = perIndex % column || column;
-	      this.option.$control.style.backgroundImage = "url(".concat(url, ")");
-	      this.option.$control.style.height = "".concat(height, "px");
-	      this.option.$control.style.width = "".concat(width, "px");
-	      this.option.$control.style.backgroundPosition = "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px");
+	      setStyle(this.option.$control, 'backgroundImage', "url(".concat(url, ")"));
+	      setStyle(this.option.$control, 'height', "".concat(height, "px"));
+	      setStyle(this.option.$control, 'width', "".concat(width, "px"));
+	      setStyle(this.option.$control, 'backgroundPosition', "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px"));
 
 	      if (posWidth <= width / 2) {
-	        this.option.$control.style.left = 0;
+	        setStyle(this.option.$control, 'left', 0);
 	      } else if (posWidth > $progress.clientWidth - width / 2) {
-	        this.option.$control.style.left = "".concat($progress.clientWidth - width, "px");
+	        setStyle(this.option.$control, 'left', "".concat($progress.clientWidth - width, "px"));
 	      } else {
-	        this.option.$control.style.left = "".concat(posWidth - width / 2, "px");
+	        setStyle(this.option.$control, 'left', "".concat(posWidth - width / 2, "px"));
 	      }
 	    }
 	  }]);
@@ -1889,7 +1893,7 @@
 	      canvas.getContext('2d').drawImage($video, 0, 0);
 	      var dataUri = canvas.toDataURL('image/png');
 	      var elink = document.createElement('a');
-	      elink.style.display = 'none';
+	      setStyle(elink, 'display', 'none');
 	      elink.href = dataUri;
 	      elink.download = "".concat(secondToTime($video.currentTime), ".png");
 	      document.body.appendChild(elink);
@@ -2041,14 +2045,14 @@
 
 	      Object.defineProperty(control, 'hide', {
 	        value: function value() {
-	          control.option.$control.style.display = 'none';
+	          setStyle(control.option.$control, 'display', 'none');
 
 	          _this4.art.emit('control:hide', control.option.$control);
 	        }
 	      });
 	      Object.defineProperty(control, 'show', {
 	        value: function value() {
-	          control.option.$control.style.display = 'block';
+	          setStyle(control.option.$control, 'display', 'block');
 
 	          _this4.art.emit('control:show', control.option.$control);
 	        }
@@ -2188,7 +2192,7 @@
 	        $menu.setAttribute('data-art-menu-id', id$1);
 	        $menu.setAttribute('class', "art-menu art-menu-".concat(item.name || id$1));
 	        append($menu, item.html);
-	        setStyle($menu, item.style || {});
+	        setStyles($menu, item.style || {});
 
 	        if (item.click) {
 	          proxy($menu, 'click', function (event) {
@@ -2403,7 +2407,7 @@
 	          _this$art$refs = _this$art.refs,
 	          $video = _this$art$refs.$video,
 	          $subtitle = _this$art$refs.$subtitle;
-	      setStyle($subtitle, subtitle.style || {});
+	      setStyles($subtitle, subtitle.style || {});
 	      var $track = document.createElement('track');
 	      $track.default = true;
 	      $track.kind = 'metadata';
@@ -2652,7 +2656,7 @@
 	      $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id$2));
 	      $layer.style.zIndex = option.index || id$2;
 	      append($layer, option.html);
-	      setStyle($layer, option.style || {});
+	      setStyles($layer, option.style || {});
 	      refs.$layers.appendChild($layer);
 	      this.art.emit('layers:add', $layer);
 	      callback && callback($layer);
