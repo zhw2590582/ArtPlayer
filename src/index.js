@@ -1,7 +1,8 @@
 import './style';
 import 'balloon-css/balloon.min.css';
 import { deepMerge } from './utils';
-import validOption from './verification';
+import OptionValidator from 'option-validator';
+import scheme from './scheme';
 import config from './config';
 import Emitter from 'tiny-emitter';
 import Template from './template';
@@ -27,7 +28,7 @@ class Artplayer extends Emitter {
     super();
     this.emit('init:start');
     this.option = deepMerge({}, Artplayer.DEFAULTS, option);
-    validOption(this.option);
+    new OptionValidator(this.option, scheme);
     this.init();
     this.emit('init:end');
   }

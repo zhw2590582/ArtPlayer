@@ -17,9 +17,9 @@ export default class Contextmenu {
         html: `${i18n.get('Play speed')}: <span>0.5</span><span>0.75</span><span class="current">1.0</span><span>1.25</span><span>1.5</span><span>2.0</span>`,
         click: (art, event) => {
           const { target } = event;
-          const rate = Number(target.innerText);
-          if (rate && typeof rate === 'number') {
-            player.playbackRate(rate);
+          const rate = target.innerText;
+          if (rate) {
+            player.playbackRate(Number(rate));
             const sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(item => item !== target);
             sublings.forEach(item => item.classList.remove('current'));
             target.classList.add('current');

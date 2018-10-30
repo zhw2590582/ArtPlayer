@@ -378,11 +378,6 @@
 	  var storage = Object.assign({}, getStorage(), defineProperty({}, key, value));
 	  localStorage.setItem('artplayer_settings', JSON.stringify(storage));
 	}
-	function getType(val) {
-	  var toString = Object.prototype.toString;
-	  var type = toString.call(val).slice(8, -1).toLowerCase().replace(/\s/g, '');
-	  return type;
-	}
 	function tooltip(target, msg) {
 	  var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
 	  target.setAttribute('data-balloon', msg);
@@ -395,147 +390,299 @@
 	  });
 	}
 
-	var validElement = function validElement(key, value, type, path) {
-	  var handle = false;
-	  var msg = "".concat(path.join('.'), ".").concat(key, " require 'string' or 'Element' type, but got '").concat(type, "'");
+	var toString = Object.prototype.toString;
 
+	var kindOf = function kindOf(val) {
+	  if (val === void 0) return 'undefined';
+	  if (val === null) return 'null';
+
+	  var type = typeof val;
+	  if (type === 'boolean') return 'boolean';
+	  if (type === 'string') return 'string';
+	  if (type === 'number') return 'number';
+	  if (type === 'symbol') return 'symbol';
+	  if (type === 'function') {
+	    return isGeneratorFn(val) ? 'generatorfunction' : 'function';
+	  }
+
+	  if (isArray(val)) return 'array';
+	  if (isBuffer(val)) return 'buffer';
+	  if (isArguments(val)) return 'arguments';
+	  if (isDate(val)) return 'date';
+	  if (isError(val)) return 'error';
+	  if (isRegexp(val)) return 'regexp';
+
+	  switch (ctorName(val)) {
+	    case 'Symbol': return 'symbol';
+	    case 'Promise': return 'promise';
+
+	    // Set, Map, WeakSet, WeakMap
+	    case 'WeakMap': return 'weakmap';
+	    case 'WeakSet': return 'weakset';
+	    case 'Map': return 'map';
+	    case 'Set': return 'set';
+
+	    // 8-bit typed arrays
+	    case 'Int8Array': return 'int8array';
+	    case 'Uint8Array': return 'uint8array';
+	    case 'Uint8ClampedArray': return 'uint8clampedarray';
+
+	    // 16-bit typed arrays
+	    case 'Int16Array': return 'int16array';
+	    case 'Uint16Array': return 'uint16array';
+
+	    // 32-bit typed arrays
+	    case 'Int32Array': return 'int32array';
+	    case 'Uint32Array': return 'uint32array';
+	    case 'Float32Array': return 'float32array';
+	    case 'Float64Array': return 'float64array';
+	  }
+
+	  if (isGeneratorObj(val)) {
+	    return 'generator';
+	  }
+
+	  // Non-plain objects
+	  type = toString.call(val);
+	  switch (type) {
+	    case '[object Object]': return 'object';
+	    // iterators
+	    case '[object Map Iterator]': return 'mapiterator';
+	    case '[object Set Iterator]': return 'setiterator';
+	    case '[object String Iterator]': return 'stringiterator';
+	    case '[object Array Iterator]': return 'arrayiterator';
+	  }
+
+	  // other
+	  return type.slice(8, -1).toLowerCase().replace(/\s/g, '');
+	};
+
+	function ctorName(val) {
+	  return val.constructor ? val.constructor.name : null;
+	}
+
+	function isArray(val) {
+	  if (Array.isArray) return Array.isArray(val);
+	  return val instanceof Array;
+	}
+
+	function isError(val) {
+	  return val instanceof Error || (typeof val.message === 'string' && val.constructor && typeof val.constructor.stackTraceLimit === 'number');
+	}
+
+	function isDate(val) {
+	  if (val instanceof Date) return true;
+	  return typeof val.toDateString === 'function'
+	    && typeof val.getDate === 'function'
+	    && typeof val.setDate === 'function';
+	}
+
+	function isRegexp(val) {
+	  if (val instanceof RegExp) return true;
+	  return typeof val.flags === 'string'
+	    && typeof val.ignoreCase === 'boolean'
+	    && typeof val.multiline === 'boolean'
+	    && typeof val.global === 'boolean';
+	}
+
+	function isGeneratorFn(name, val) {
+	  return ctorName(name) === 'GeneratorFunction';
+	}
+
+	function isGeneratorObj(val) {
+	  return typeof val.throw === 'function'
+	    && typeof val.return === 'function'
+	    && typeof val.next === 'function';
+	}
+
+	function isArguments(val) {
+	  try {
+	    if (typeof val.length === 'number' && typeof val.callee === 'function') {
+	      return true;
+	    }
+	  } catch (err) {
+	    if (err.message.indexOf('callee') !== -1) {
+	      return true;
+	    }
+	  }
+	  return false;
+	}
+
+	/**
+	 * If you need to support Safari 5-7 (8-10 yr-old browser),
+	 * take a look at https://github.com/feross/is-buffer
+	 */
+
+	function isBuffer(val) {
+	  if (val.constructor && typeof val.constructor.isBuffer === 'function') {
+	    return val.constructor.isBuffer(val);
+	  }
+	  return false;
+	}
+
+	class OptionValidator {
+	  constructor(option, rule, paths = ['option']) {
+	    this.validator(option, rule, paths);
+	  }
+
+	  validator(option, rule, paths) {
+	    const optionType = kindOf(option);
+	    const ruleType = kindOf(rule);
+	    const pathsType = kindOf(paths);
+
+	    if (optionType !== 'object' && optionType !== 'array') {
+	      throw new TypeError(`'option' only support object or array type, but got '${optionType}'`);
+	    } else if (ruleType !== 'object') {
+	      throw new TypeError(`'rule' only support object type, but got '${ruleType}'`);
+	    } else if (pathsType !== 'array') {
+	      throw new TypeError(`'paths' only support array type, but got '${pathsType}'`);
+	    }
+
+	    for (const key in rule) {
+	      if (rule.hasOwnProperty(key)) {
+	        const optionValue = option[key];
+	        const optionType = kindOf(optionValue);
+	        const ruleValue = rule[key];
+
+	        if (!Object.prototype.hasOwnProperty.call(option, key)) {
+	          if (ruleValue.__required__ === true || ruleValue.required === true) {
+	            throw new TypeError(`'${paths.join('.')}.${key}' is required`);
+	          } else {
+	            return;
+	          }
+	        }
+
+	        let ruleType;
+	        if (kindOf(ruleValue) === 'string') {
+	          ruleType = ruleValue;
+	        } else if (ruleValue.__type__) {
+	          ruleType = ruleValue.__type__;
+	        } else if (ruleValue.type) {
+	          ruleType = ruleValue.type;
+	        }
+
+	        if (ruleType && optionType !== ruleType) {
+	          throw new TypeError(`'${paths.join('.')}.${key}' require '${ruleType}' type, but got '${optionType}'`);
+	        }
+
+	        let ruleValidator;
+	        if (ruleValue.___validator__) {
+	          ruleValidator = ruleValue.___validator__;
+	        } else if (ruleValue.validator) {
+	          ruleValidator = ruleValue.validator;
+	        }
+
+	        if (kindOf(ruleValidator) === 'function') {
+	          const resule = ruleValidator(paths.concat(key), optionValue, optionType);
+	          if (resule !== true) {
+	            throw new TypeError(`The rule for '${paths.join('.')}.${key}' validator function require return true, but got '${resule}'`);
+	          }
+	        }
+
+	        let ruleChild;
+	        if (ruleValue.___child__) {
+	          ruleChild = ruleValue.___child__;
+	        } else if (ruleValue.child) {
+	          ruleChild = ruleValue.child;
+	        }
+
+	        if (kindOf(ruleChild) === 'object') {
+	          if (ruleType === 'object') {
+	            this.validator(optionValue, ruleChild, paths.concat(key));
+	          } else if (ruleType === 'array') {
+	            optionValue.forEach((item, index) => {
+	              this.validator(item, ruleChild, paths.concat(`${key}[${index}]`));
+	            });
+	          }
+	        }
+	      }
+	    }
+	  }
+	}
+
+	function validElement(paths, value, type) {
 	  if (type === 'string') {
 	    if (value.trim() === '') {
-	      handle = false;
-	      msg = "".concat(path.join('.'), ".").concat(key, " can not be empty'");
+	      throw new ArtPlayerError("".concat(paths.join('.'), " can not be empty'"));
 	    } else {
-	      handle = true;
+	      return true;
 	    }
 	  }
 
 	  if (value instanceof Element) {
-	    handle = true;
+	    return true;
 	  }
 
-	  return {
-	    handle: handle,
-	    msg: msg
-	  };
-	};
+	  throw new ArtPlayerError("".concat(paths.join('.'), " require 'string' or 'Element' type, but got '").concat(type, "'"));
+	}
 
 	var scheme = {
 	  container: {
-	    validator: validElement
+	    validator: validElement,
+	    required: true
 	  },
 	  url: {
 	    type: 'string',
 	    required: true
 	  },
-	  poster: {
-	    type: 'string'
-	  },
-	  volume: {
-	    type: 'number'
-	  },
+	  volume: 'number',
 	  thumbnails: {
 	    type: 'object',
 	    child: {
-	      url: {
-	        type: 'string'
-	      },
-	      number: {
-	        type: 'number'
-	      },
-	      width: {
-	        type: 'number'
-	      },
-	      height: {
-	        type: 'number'
-	      },
-	      column: {
-	        type: 'number'
-	      }
+	      url: 'string',
+	      number: 'number',
+	      width: 'number',
+	      height: 'number',
+	      column: 'number'
 	    }
 	  },
-	  screenshot: {
-	    type: 'boolean'
-	  },
-	  autoplay: {
-	    type: 'boolean'
-	  },
-	  playbackRate: {
-	    type: 'boolean'
-	  },
-	  aspectRatio: {
-	    type: 'boolean'
-	  },
-	  loop: {
-	    type: 'boolean'
-	  },
-	  type: {
-	    type: 'string'
-	  },
-	  mimeCodec: {
-	    type: 'string'
-	  },
+	  screenshot: 'boolean',
+	  autoplay: 'boolean',
+	  playbackRate: 'boolean',
+	  aspectRatio: 'boolean',
+	  loop: 'boolean',
+	  type: 'string',
+	  mimeCodec: 'string',
 	  layers: {
 	    type: 'array',
 	    child: {
-	      name: {
-	        type: 'string'
-	      },
-	      index: {
-	        type: 'number'
-	      },
+	      name: 'string',
+	      index: 'number',
 	      html: {
 	        validator: validElement
 	      },
-	      style: {
-	        type: 'object'
-	      }
+	      style: 'object'
 	    }
 	  },
 	  contextmenu: {
 	    type: 'array',
 	    child: {
-	      name: {
-	        type: 'string'
-	      },
+	      name: 'string',
 	      html: {
 	        validator: validElement
 	      },
-	      click: {
-	        type: 'function'
-	      }
+	      click: 'function'
 	    }
 	  },
-	  loading: {
-	    type: 'string'
-	  },
-	  theme: {
-	    type: 'string'
-	  },
-	  hotkey: {
-	    type: 'boolean'
-	  },
+	  loading: 'string',
+	  theme: 'string',
+	  hotkey: 'boolean',
 	  subtitle: {
 	    type: 'object',
 	    child: {
-	      url: {
-	        type: 'string'
-	      },
-	      style: {
-	        type: 'object'
-	      }
+	      url: 'string',
+	      style: 'object'
 	    }
 	  },
 	  controls: {
 	    type: 'array',
 	    child: {
 	      option: {
-	        disable: {
-	          type: 'boolean'
-	        },
-	        position: {
-	          type: 'string'
-	        },
-	        index: {
-	          type: 'number'
+	        type: 'object',
+	        child: {
+	          disable: 'boolean',
+	          position: 'boolean',
+	          index: 'number'
 	        }
 	      }
 	    }
@@ -543,60 +690,13 @@
 	  highlight: {
 	    type: 'array',
 	    child: {
-	      time: {
-	        type: 'number'
-	      },
-	      text: {
-	        type: 'string'
-	      }
+	      time: 'number',
+	      text: 'string'
 	    }
 	  },
-	  moreVideoAttr: {
-	    type: 'object'
-	  },
-	  lang: {
-	    type: 'string'
-	  }
+	  moreVideoAttr: 'object',
+	  lang: 'string'
 	};
-
-	function validOption(option) {
-	  var param = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : scheme;
-	  var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ['option'];
-	  Object.keys(option).some(function (key) {
-	    var paramObj = param[key];
-
-	    if (!paramObj) {
-	      return true;
-	    }
-
-	    var value = option[key];
-	    var type = getType(value);
-	    var paramType = paramObj.type;
-	    var paramRequired = paramObj.required;
-	    var paramChild = paramObj.child;
-	    var paramValidator = paramObj.validator;
-
-	    if (type === 'object' && paramChild) {
-	      validOption(value, paramChild, path.concat(key));
-	    }
-
-	    if (type === 'array' && paramChild) {
-	      value.forEach(function (item, index) {
-	        validOption(item, paramChild, path.concat("".concat(key, "[").concat(index, "]")));
-	      });
-	    }
-
-	    if (paramValidator) {
-	      var result = paramValidator(key, value, type, path);
-	      errorHandle(result.handle, result.msg);
-	    } else {
-	      errorHandle(!paramRequired || value, "'".concat(path.join('.'), ".").concat(key, "' is required"));
-	      errorHandle(paramType === type, "'".concat(path.join('.'), ".").concat(key, "' require '").concat(paramType, "' type, but got '").concat(type, "'"));
-	    }
-
-	    return false;
-	  });
-	}
 
 	var mimeCodec = {
 	  mp4: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
@@ -2000,10 +2100,10 @@
 	        html: "".concat(i18n.get('Play speed'), ": <span>0.5</span><span>0.75</span><span class=\"current\">1.0</span><span>1.25</span><span>1.5</span><span>2.0</span>"),
 	        click: function click(art, event) {
 	          var target = event.target;
-	          var rate = Number(target.innerText);
+	          var rate = target.innerText;
 
-	          if (rate && typeof rate === 'number') {
-	            player.playbackRate(rate);
+	          if (rate) {
+	            player.playbackRate(Number(rate));
 	            var sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(function (item) {
 	              return item !== target;
 	            });
@@ -2720,7 +2820,7 @@
 	    _this.emit('init:start');
 
 	    _this.option = deepMerge({}, Artplayer.DEFAULTS, option);
-	    validOption(_this.option);
+	    new OptionValidator(_this.option, scheme);
 
 	    _this.init();
 

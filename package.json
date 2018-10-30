@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "balloon-css": "^0.5.0",
+    "option-validator": "^1.0.4",
     "tiny-emitter": "^2.0.2"
   }
 }
