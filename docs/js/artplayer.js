@@ -458,6 +458,12 @@
 	  autoplay: {
 	    type: 'boolean'
 	  },
+	  playbackRate: {
+	    type: 'boolean'
+	  },
+	  aspectRatio: {
+	    type: 'boolean'
+	  },
 	  loop: {
 	    type: 'boolean'
 	  },
@@ -744,7 +750,10 @@
 	    'Reconnect': '重新连接',
 	    'Hide subtitle': '隐藏字幕',
 	    'Show subtitle': '显示字幕',
-	    'Screenshot': '截图'
+	    'Screenshot': '截图',
+	    'Play speed': '播放速度',
+	    'Aspect ratio': '画面比例',
+	    'Default': '默认'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -759,7 +768,10 @@
 	    'Reconnect': '重新連接',
 	    'Hide subtitle': '隱藏字幕',
 	    'Show subtitle': '顯示字幕',
-	    'Screenshot': '截圖'
+	    'Screenshot': '截圖',
+	    'Play speed': '播放速度',
+	    'Aspect ratio': '畫面比例',
+	    'Default': '默認'
 	  }
 	};
 
@@ -805,7 +817,7 @@
 	    this.art = art;
 	    this.init();
 	    this.eventBind();
-	    this.firstLoad = false;
+	    this.firstCanplay = false;
 	    this.reconnectTime = 0;
 	    this.maxReconnectTime = 5;
 	  }
@@ -857,10 +869,10 @@
 	        _this.art.loading.show();
 	      });
 	      this.art.on('video:canplay', function () {
-	        if (!_this.firstLoad) {
-	          _this.firstLoad = true;
+	        if (!_this.firstCanplay) {
+	          _this.firstCanplay = true;
 
-	          _this.art.emit('video:firstload');
+	          _this.art.emit('player:firstCanplay');
 	        }
 
 	        _this.art.controls.show();
@@ -1011,13 +1023,42 @@
 	    key: "playbackRate",
 	    value: function playbackRate(rate) {
 	      var _this$art7 = this.art,
-	          $video = _this$art7.refs.$video,
+	          _this$art7$refs = _this$art7.refs,
+	          $video = _this$art7$refs.$video,
+	          $player = _this$art7$refs.$player,
 	          i18n = _this$art7.i18n,
 	          notice = _this$art7.notice;
 	      var newRate = clamp(rate, 0.1, 10);
 	      $video.playbackRate = newRate;
+	      $player.dataset.playbackRate = newRate;
 	      notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate, "x"));
 	      this.art.emit('playbackRate', newRate);
+	    }
+	  }, {
+	    key: "aspectRatio",
+	    value: function aspectRatio(ratio) {
+	      var _this$art8 = this.art,
+	          _this$art8$refs = _this$art8.refs,
+	          $video = _this$art8$refs.$video,
+	          $player = _this$art8$refs.$player,
+	          i18n = _this$art8.i18n,
+	          notice = _this$art8.notice;
+
+	      if (ratio.length === 2) {
+	        var rate = Number(ratio[0]) / Number(ratio[1]);
+	        $video.style.width = "".concat(100 / rate, "%");
+	        $video.style.height = '100%';
+	        $video.style.padding = "0 ".concat(($player.clientWidth - $player.clientWidth / rate) / 2, "px");
+	      } else {
+	        $video.style.width = null;
+	        $video.style.height = null;
+	        $video.style.padding = null;
+	      }
+
+	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : ratio[0];
+	      $player.dataset.aspectRatio = ratioName;
+	      notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratioName));
+	      this.art.emit('aspectRatio', ratio);
 	    }
 	  }]);
 
@@ -1772,7 +1813,7 @@
 
 	    this.art = art;
 	    this.$map = {};
-	    this.art.on('video:firstload', function () {
+	    this.art.on('player:firstCanplay', function () {
 	      _this.init();
 
 	      _this.mount();
@@ -1949,19 +1990,61 @@
 
 	      var _this$art = this.art,
 	          option = _this$art.option,
+	          player = _this$art.player,
 	          i18n = _this$art.i18n,
 	          refs = _this$art.refs,
 	          proxy = _this$art.events.proxy;
 	      option.contextmenu.push({
+	        disable: !option.playbackRate,
+	        name: 'playbackRate',
+	        html: "".concat(i18n.get('Play speed'), ": <span>0.5</span><span>0.75</span><span class=\"current\">1.0</span><span>1.25</span><span>1.5</span><span>2.0</span>"),
+	        click: function click(art, event) {
+	          var target = event.target;
+	          var rate = Number(target.innerText);
+
+	          if (rate && typeof rate === 'number') {
+	            player.playbackRate(rate);
+	            var sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(function (item) {
+	              return item !== target;
+	            });
+	            sublings.forEach(function (item) {
+	              return item.classList.remove('current');
+	            });
+	            target.classList.add('current');
+	          }
+	        }
+	      }, {
+	        disable: !option.aspectRatio,
+	        name: 'aspectRatio',
+	        html: "".concat(i18n.get('Aspect ratio'), ": <span class=\"current\">").concat(i18n.get('Default'), "</span><span>4:3</span><span>16:9</span>"),
+	        click: function click(art, event) {
+	          var target = event.target;
+	          var ratio = target.innerText;
+
+	          if (ratio) {
+	            player.aspectRatio(ratio.split(':'));
+	            var sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(function (item) {
+	              return item !== target;
+	            });
+	            sublings.forEach(function (item) {
+	              return item.classList.remove('current');
+	            });
+	            target.classList.add('current');
+	          }
+	        }
+	      }, {
+	        disable: false,
 	        name: 'info',
 	        html: i18n.get('Video info'),
 	        click: function click() {
 	          _this.art.info.show();
 	        }
 	      }, {
+	        disable: false,
 	        name: 'version',
 	        html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.0</a>'
 	      }, {
+	        disable: false,
 	        name: 'close',
 	        html: i18n.get('Close'),
 	        click: function click() {
@@ -1997,7 +2080,9 @@
 	          proxy = _this$art2.events.proxy;
 	      refs.$contextmenu = document.createElement('div');
 	      refs.$contextmenu.classList.add('artplayer-contextmenu');
-	      option.contextmenu.forEach(function (item) {
+	      option.contextmenu.filter(function (item) {
+	        return !item.disable;
+	      }).forEach(function (item) {
 	        id$1++;
 	        var $menu = document.createElement('div');
 	        $menu.setAttribute('data-art-menu-id', id$1);
@@ -2156,19 +2241,25 @@
 	      });
 	    }
 	  }, {
+	    key: "readInfo",
+	    value: function readInfo() {
+	      var _this$art$refs2 = this.art.refs,
+	          $infoPanel = _this$art$refs2.$infoPanel,
+	          $video = _this$art$refs2.$video;
+	      var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
+	      types.forEach(function (item) {
+	        var value = $video[item.dataset.video];
+	        item.innerHTML = value !== undefined ? value : 'unknown';
+	      });
+	    }
+	  }, {
 	    key: "loop",
 	    value: function loop() {
 	      var _this2 = this;
 
-	      var _this$art$refs2 = this.art.refs,
-	          $infoPanel = _this$art$refs2.$infoPanel,
-	          $video = _this$art$refs2.$video;
+	      this.readInfo();
 	      this.timer = setTimeout(function () {
-	        var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
-	        types.forEach(function (item) {
-	          var value = $video[item.dataset.video];
-	          item.innerHTML = value !== undefined ? value : 'unknown';
-	        });
+	        _this2.readInfo();
 
 	        _this2.loop();
 	      }, 1000);
@@ -2725,6 +2816,8 @@
 	        },
 	        screenshot: true,
 	        autoplay: false,
+	        playbackRate: true,
+	        aspectRatio: true,
 	        loop: false,
 	        type: '',
 	        mimeCodec: '',

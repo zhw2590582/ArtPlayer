@@ -8,15 +8,41 @@ export default class Contextmenu {
   }
 
   init() {
-    const {
-      option,
-      i18n,
-      refs,
-      events: { proxy }
-    } = this.art;
+    const { option, player, i18n, refs, events: { proxy } } = this.art;
 
     option.contextmenu.push(
       {
+        disable: !option.playbackRate,
+        name: 'playbackRate',
+        html: `${i18n.get('Play speed')}: <span>0.5</span><span>0.75</span><span class="current">1.0</span><span>1.25</span><span>1.5</span><span>2.0</span>`,
+        click: (art, event) => {
+          const { target } = event;
+          const rate = Number(target.innerText);
+          if (rate && typeof rate === 'number') {
+            player.playbackRate(rate);
+            const sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(item => item !== target);
+            sublings.forEach(item => item.classList.remove('current'));
+            target.classList.add('current');
+          }
+        }
+      },
+      {
+        disable: !option.aspectRatio,
+        name: 'aspectRatio',
+        html: `${i18n.get('Aspect ratio')}: <span class="current">${i18n.get('Default')}</span><span>4:3</span><span>16:9</span>`,
+        click: (art, event) => {
+          const { target } = event;
+          const ratio = target.innerText;
+          if (ratio) {
+            player.aspectRatio(ratio.split(':'));
+            const sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(item => item !== target);
+            sublings.forEach(item => item.classList.remove('current'));
+            target.classList.add('current');
+          }
+        }
+      },
+      {
+        disable: false,
         name: 'info',
         html: i18n.get('Video info'),
         click: () => {
@@ -24,10 +50,12 @@ export default class Contextmenu {
         }
       },
       {
+        disable: false,
         name: 'version',
         html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer __VERSION__</a>'
       },
       {
+        disable: false,
         name: 'close',
         html: i18n.get('Close'),
         click: () => {
@@ -54,30 +82,28 @@ export default class Contextmenu {
   }
 
   creatMenu() {
-    const {
-      option,
-      refs,
-      events: { proxy }
-    } = this.art;
+    const { option, refs, events: { proxy } } = this.art;
     refs.$contextmenu = document.createElement('div');
     refs.$contextmenu.classList.add('artplayer-contextmenu');
-    option.contextmenu.forEach(item => {
-      id++;
-      const $menu = document.createElement('div');
-      $menu.setAttribute('data-art-menu-id', id);
-      $menu.setAttribute('class', `art-menu art-menu-${item.name || id}`);
-      append($menu, item.html);
-      setStyle($menu, item.style || {});
-      if (item.click) {
-        proxy($menu, 'click', event => {
-          event.preventDefault();
-          item.click(this.art, event);
-          this.hide();
-          this.art.emit('contextmenu:click', $menu);
-        });
-      }
-      append(refs.$contextmenu, $menu);
-    });
+    option.contextmenu
+      .filter(item => !item.disable)
+      .forEach(item => {
+        id++;
+        const $menu = document.createElement('div');
+        $menu.setAttribute('data-art-menu-id', id);
+        $menu.setAttribute('class', `art-menu art-menu-${item.name || id}`);
+        append($menu, item.html);
+        setStyle($menu, item.style || {});
+        if (item.click) {
+          proxy($menu, 'click', event => {
+            event.preventDefault();
+            item.click(this.art, event);
+            this.hide();
+            this.art.emit('contextmenu:click', $menu);
+          });
+        }
+        append(refs.$contextmenu, $menu);
+      });
     append(refs.$player, refs.$contextmenu);
   }
 

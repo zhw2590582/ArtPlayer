@@ -106,14 +106,19 @@ export default class Info {
     });
   }
 
-  loop() {
+  readInfo() {
     const { $infoPanel, $video } = this.art.refs;
+    const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
+    types.forEach(item => {
+      const value = $video[item.dataset.video];
+      item.innerHTML = value !== undefined ? value : 'unknown';
+    });
+  }
+
+  loop() {
+    this.readInfo();
     this.timer = setTimeout(() => {
-      const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
-      types.forEach(item => {
-        const value = $video[item.dataset.video];
-        item.innerHTML = value !== undefined ? value : 'unknown';
-      });
+      this.readInfo();
       this.loop();
     }, 1000);
   }

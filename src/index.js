@@ -55,6 +55,8 @@ class Artplayer extends Emitter {
       },
       screenshot: true,
       autoplay: false,
+      playbackRate: true,
+      aspectRatio: true,
       loop: false,
       type: '',
       mimeCodec: '',

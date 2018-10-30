@@ -6,7 +6,7 @@ export default class Player {
     this.art = art;
     this.init();
     this.eventBind();
-    this.firstLoad = false;
+    this.firstCanplay = false;
     this.reconnectTime = 0;
     this.maxReconnectTime = 5;
   }
@@ -51,9 +51,9 @@ export default class Player {
     });
 
     this.art.on('video:canplay', () => {
-      if (!this.firstLoad) {
-        this.firstLoad = true;
-        this.art.emit('video:firstload');
+      if (!this.firstCanplay) {
+        this.firstCanplay = true;
+        this.art.emit('player:firstCanplay');
       }
 
       this.art.controls.show();
@@ -166,10 +166,30 @@ export default class Player {
   }
 
   playbackRate(rate) {
-    const { refs: { $video }, i18n, notice } = this.art;
+    const { refs: { $video, $player }, i18n, notice } = this.art;
     const newRate = clamp(rate, 0.1, 10);
     $video.playbackRate = newRate;
+    $player.dataset.playbackRate = newRate;
     notice.show(`${i18n.get('Rate')}: ${newRate}x`);
     this.art.emit('playbackRate', newRate);
+  }
+
+  aspectRatio(ratio) {
+    const { refs: { $video, $player }, i18n, notice } = this.art;
+    if (ratio.length === 2) {
+      const rate = Number(ratio[0]) / Number(ratio[1]);
+      $video.style.width = `${100 / rate}%`;
+      $video.style.height = '100%';
+      $video.style.padding = `0 ${($player.clientWidth - $player.clientWidth / rate) / 2}px`;
+    } else {
+      $video.style.width = null;
+      $video.style.height = null;
+      $video.style.padding = null;
+    }
+
+    const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : ratio[0];
+    $player.dataset.aspectRatio = ratioName;
+    notice.show(`${i18n.get('Aspect ratio')}: ${ratioName}`);
+    this.art.emit('aspectRatio', ratio);
   }
 }

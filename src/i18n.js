@@ -12,7 +12,10 @@ let i18nMap = {
     'Reconnect': '重新连接',
     'Hide subtitle': '隐藏字幕',
     'Show subtitle': '显示字幕',
-    'Screenshot': '截图'
+    'Screenshot': '截图',
+    'Play speed': '播放速度',
+    'Aspect ratio': '画面比例',
+    'Default': '默认'
   },
   'zh-tw': {
     'About author': '關於作者',
@@ -27,7 +30,10 @@ let i18nMap = {
     'Reconnect': '重新連接',
     'Hide subtitle': '隱藏字幕',
     'Show subtitle': '顯示字幕',
-    'Screenshot': '截圖'
+    'Screenshot': '截圖',
+    'Play speed': '播放速度',
+    'Aspect ratio': '畫面比例',
+    'Default': '默認'
   }
 };
 

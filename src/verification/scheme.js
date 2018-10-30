@@ -61,6 +61,12 @@ export default {
   autoplay: {
     type: 'boolean'
   },
+  playbackRate: {
+    type: 'boolean'
+  },
+  aspectRatio: {
+    type: 'boolean'
+  },
   loop: {
     type: 'boolean'
   },
