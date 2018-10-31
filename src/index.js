@@ -63,6 +63,7 @@ class Artplayer extends Emitter {
       mimeCodec: '',
       layers: [],
       contextmenu: [],
+      quality: [],
       loading: '',
       theme: '#f00',
       hotkey: true,

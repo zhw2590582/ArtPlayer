@@ -50,6 +50,14 @@ export default {
       click: 'function'
     }
   },
+  quality: {
+    type: 'array',
+    child: {
+      default: 'boolean',
+      name: 'string',
+      url: 'string'
+    }
+  },
   loading: 'string',
   theme: 'string',
   hotkey: 'boolean',

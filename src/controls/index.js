@@ -10,6 +10,7 @@ import Volume from './volume';
 import Setting from './setting';
 import Thumbnails from './thumbnails';
 import Screenshot from './screenshot';
+import Quality from './quality';
 
 let id = 0;
 export default class Controls {
@@ -71,22 +72,28 @@ export default class Controls {
       index: 30
     }));
 
-    this.add(new Setting({
-      disable: false,
+    this.add(new Quality({
+      disable: this.art.option.quality.length === 0,
       position: 'right',
       index: 40
     }));
 
-    this.add(new Pip({
+    this.add(new Setting({
       disable: false,
       position: 'right',
       index: 50
     }));
 
-    this.add(new Fullscreen({
+    this.add(new Pip({
       disable: false,
       position: 'right',
       index: 60
+    }));
+
+    this.add(new Fullscreen({
+      disable: false,
+      position: 'right',
+      index: 70
     }));
 
     this.art.option.controls.forEach(item => {
