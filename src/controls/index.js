@@ -94,13 +94,13 @@ export default class Controls {
     this.add(new FullscreenWeb({
       disable: !this.art.option.fullscreenWeb,
       position: 'right',
-      index: 80
+      index: 70
     }));
 
     this.add(new Fullscreen({
       disable: !this.art.option.fullscreen,
       position: 'right',
-      index: 90
+      index: 80
     }));
 
     this.art.option.controls.forEach(item => {
