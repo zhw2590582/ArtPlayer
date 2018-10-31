@@ -111,3 +111,7 @@ export function tooltip(target, msg, pos = 'up') {
 export function sleep(ms = 0) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export function sublings(target) {
+  return Array.from(target.parentElement.children).filter(item => item !== target);
+}

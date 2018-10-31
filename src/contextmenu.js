@@ -1,4 +1,4 @@
-import { append, setStyles, setStyle } from './utils';
+import { append, setStyles, setStyle, sublings } from './utils';
 
 let id = 0;
 export default class Contextmenu {
@@ -20,8 +20,7 @@ export default class Contextmenu {
           const rate = target.innerText;
           if (target.tagName === 'SPAN' && rate) {
             player.playbackRate(Number(rate));
-            const sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(item => item !== target);
-            sublings.forEach(item => item.classList.remove('current'));
+            sublings(target).forEach(item => item.classList.remove('current'));
             target.classList.add('current');
             this.hide();
           }
@@ -36,8 +35,7 @@ export default class Contextmenu {
           const ratio = target.innerText;
           if (target.tagName === 'SPAN' && ratio) {
             player.aspectRatio(ratio.split(':'));
-            const sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(item => item !== target);
-            sublings.forEach(item => item.classList.remove('current'));
+            sublings(target).forEach(item => item.classList.remove('current'));
             target.classList.add('current');
             this.hide();
           }

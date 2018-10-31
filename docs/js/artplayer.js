@@ -393,6 +393,11 @@
 	    return setTimeout(resolve, ms);
 	  });
 	}
+	function sublings(target) {
+	  return Array.from(target.parentElement.children).filter(function (item) {
+	    return item !== target;
+	  });
+	}
 
 	var toString = Object.prototype.toString;
 
@@ -2115,10 +2120,7 @@
 
 	          if (target.tagName === 'SPAN' && rate) {
 	            player.playbackRate(Number(rate));
-	            var sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(function (item) {
-	              return item !== target;
-	            });
-	            sublings.forEach(function (item) {
+	            sublings(target).forEach(function (item) {
 	              return item.classList.remove('current');
 	            });
 	            target.classList.add('current');
@@ -2136,10 +2138,7 @@
 
 	          if (target.tagName === 'SPAN' && ratio) {
 	            player.aspectRatio(ratio.split(':'));
-	            var sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(function (item) {
-	              return item !== target;
-	            });
-	            sublings.forEach(function (item) {
+	            sublings(target).forEach(function (item) {
 	              return item.classList.remove('current');
 	            });
 	            target.classList.add('current');
