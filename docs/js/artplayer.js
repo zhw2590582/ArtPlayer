@@ -690,6 +690,9 @@
 	  loading: 'string',
 	  theme: 'string',
 	  hotkey: 'boolean',
+	  pip: 'boolean',
+	  fullscreen: 'boolean',
+	  fullscreenWeb: 'boolean',
 	  subtitle: {
 	    type: 'object',
 	    child: {
@@ -1243,6 +1246,25 @@
 	  }]);
 
 	  return Fullscreen;
+	}();
+
+	var FullscreenWeb =
+	/*#__PURE__*/
+	function () {
+	  function FullscreenWeb(option) {
+	    classCallCheck(this, FullscreenWeb);
+
+	    this.option = option;
+	  }
+
+	  createClass(FullscreenWeb, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	    }
+	  }]);
+
+	  return FullscreenWeb;
 	}();
 
 	var Pip =
@@ -2037,14 +2059,19 @@
 	        index: 50
 	      }));
 	      this.add(new Pip({
-	        disable: false,
+	        disable: !this.art.option.pip,
 	        position: 'right',
 	        index: 60
 	      }));
-	      this.add(new Fullscreen({
-	        disable: false,
+	      this.add(new FullscreenWeb({
+	        disable: !this.art.option.fullscreenWeb,
 	        position: 'right',
-	        index: 70
+	        index: 80
+	      }));
+	      this.add(new Fullscreen({
+	        disable: !this.art.option.fullscreen,
+	        position: 'right',
+	        index: 90
 	      }));
 	      this.art.option.controls.forEach(function (item) {
 	        _this2.add(item);
@@ -2993,6 +3020,9 @@
 	        loading: '',
 	        theme: '#f00',
 	        hotkey: true,
+	        pip: true,
+	        fullscreen: true,
+	        fullscreenWeb: true,
 	        subtitle: {
 	          url: '',
 	          style: {}

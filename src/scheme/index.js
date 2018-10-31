@@ -61,6 +61,9 @@ export default {
   loading: 'string',
   theme: 'string',
   hotkey: 'boolean',
+  pip: 'boolean',
+  fullscreen: 'boolean',
+  fullscreenWeb: 'boolean',
   subtitle: {
     type: 'object',
     child: {

@@ -1,6 +1,7 @@
 import { setStyle } from '../utils';
 import Danmu from './danmu';
 import Fullscreen from './fullscreen';
+import FullscreenWeb from './fullscreen-web';
 import Pip from './pip';
 import PlayAndPause from './playAndPause';
 import Progress from './progress';
@@ -85,15 +86,21 @@ export default class Controls {
     }));
 
     this.add(new Pip({
-      disable: false,
+      disable: !this.art.option.pip,
       position: 'right',
       index: 60
     }));
 
-    this.add(new Fullscreen({
-      disable: false,
+    this.add(new FullscreenWeb({
+      disable: !this.art.option.fullscreenWeb,
       position: 'right',
-      index: 70
+      index: 80
+    }));
+
+    this.add(new Fullscreen({
+      disable: !this.art.option.fullscreen,
+      position: 'right',
+      index: 90
     }));
 
     this.art.option.controls.forEach(item => {

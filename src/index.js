@@ -67,6 +67,9 @@ class Artplayer extends Emitter {
       loading: '',
       theme: '#f00',
       hotkey: true,
+      pip: true,
+      fullscreen: true,
+      fullscreenWeb: true,
       subtitle: {
         url: '',
         style: {}
