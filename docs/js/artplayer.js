@@ -524,82 +524,86 @@
 	  return false;
 	}
 
-	class OptionValidator {
-	  constructor(option, rule, paths = ['option']) {
-	    this.validator(option, rule, paths);
+	function optionValidator(option, scheme, paths = ['option']) {
+	  checkType(option, scheme, paths);
+	  checkValidator(option, scheme, paths);
+	  checkChild(option, scheme, paths);
+
+	  for (const key in scheme) {
+	    if (scheme.hasOwnProperty(key)) {
+	      const optionValue = option[key];
+	      const schemeValue = scheme[key];
+	      const currentPath = paths.concat(key);
+	      if (checkRequired(option, key, schemeValue, currentPath)) continue;
+	      checkType(optionValue, schemeValue, currentPath);
+	      checkValidator(optionValue, schemeValue, currentPath);
+	      checkChild(optionValue, schemeValue, currentPath);
+	    }
+	  }
+	}
+
+	function checkRequired(option, key, schemeValue, paths) {
+	  if (!Object.prototype.hasOwnProperty.call(option, key)) {
+	    if (schemeValue.__required__ === true || schemeValue.required === true) {
+	      throw new TypeError(`'${paths.join('.')}' is required`);
+	    } else {
+	      return true;
+	    }
+	  }
+	}
+
+	function checkType(optionValue, schemeValue, paths) {
+	  let schemeType;
+	  if (kindOf(schemeValue) === 'string') {
+	    schemeType = schemeValue;
+	  } else if (schemeValue.__type__) {
+	    schemeType = schemeValue.__type__;
+	  } else if (schemeValue.type) {
+	    schemeType = schemeValue.type;
 	  }
 
-	  validator(option, rule, paths) {
-	    const optionType = kindOf(option);
-	    const ruleType = kindOf(rule);
-	    const pathsType = kindOf(paths);
-
-	    if (optionType !== 'object' && optionType !== 'array') {
-	      throw new TypeError(`'option' only support object or array type, but got '${optionType}'`);
-	    } else if (ruleType !== 'object') {
-	      throw new TypeError(`'rule' only support object type, but got '${ruleType}'`);
-	    } else if (pathsType !== 'array') {
-	      throw new TypeError(`'paths' only support array type, but got '${pathsType}'`);
+	  if (schemeType && kindOf(schemeType) === 'string') {
+	    schemeType = schemeType.trim().toLowerCase();
+	    const optionType = kindOf(optionValue);
+	    if (optionType !== schemeType) {
+	      throw new TypeError(`'${paths.join('.')}' require '${schemeType}' type, but got '${optionType}'`);
 	    }
+	  }
+	}
 
-	    for (const key in rule) {
-	      if (rule.hasOwnProperty(key)) {
-	        const optionValue = option[key];
-	        const optionType = kindOf(optionValue);
-	        const ruleValue = rule[key];
+	function checkValidator(optionValue, schemeValue, paths) {
+	  let schemeValidator;
+	  if (schemeValue.___validator__) {
+	    schemeValidator = schemeValue.___validator__;
+	  } else if (schemeValue.validator) {
+	    schemeValidator = schemeValue.validator;
+	  }
 
-	        if (!Object.prototype.hasOwnProperty.call(option, key)) {
-	          if (ruleValue.__required__ === true || ruleValue.required === true) {
-	            throw new TypeError(`'${paths.join('.')}.${key}' is required`);
-	          } else {
-	            return;
-	          }
-	        }
+	  if (kindOf(schemeValidator) === 'function') {
+	    const optionType = kindOf(optionValue);
+	    const resule = schemeValidator(paths, optionValue, optionType);
+	    if (resule !== true) {
+	      throw new TypeError(`The scheme for '${paths.join('.')}' validator function require return true, but got '${resule}'`);
+	    }
+	  }
+	}
 
-	        let ruleType;
-	        if (kindOf(ruleValue) === 'string') {
-	          ruleType = ruleValue;
-	        } else if (ruleValue.__type__) {
-	          ruleType = ruleValue.__type__;
-	        } else if (ruleValue.type) {
-	          ruleType = ruleValue.type;
-	        }
+	function checkChild(optionValue, schemeValue, paths) {
+	  let schemeChild;
+	  if (schemeValue.___child__) {
+	    schemeChild = schemeValue.___child__;
+	  } else if (schemeValue.child) {
+	    schemeChild = schemeValue.child;
+	  }
 
-	        if (ruleType && optionType !== ruleType) {
-	          throw new TypeError(`'${paths.join('.')}.${key}' require '${ruleType}' type, but got '${optionType}'`);
-	        }
-
-	        let ruleValidator;
-	        if (ruleValue.___validator__) {
-	          ruleValidator = ruleValue.___validator__;
-	        } else if (ruleValue.validator) {
-	          ruleValidator = ruleValue.validator;
-	        }
-
-	        if (kindOf(ruleValidator) === 'function') {
-	          const resule = ruleValidator(paths.concat(key), optionValue, optionType);
-	          if (resule !== true) {
-	            throw new TypeError(`The rule for '${paths.join('.')}.${key}' validator function require return true, but got '${resule}'`);
-	          }
-	        }
-
-	        let ruleChild;
-	        if (ruleValue.___child__) {
-	          ruleChild = ruleValue.___child__;
-	        } else if (ruleValue.child) {
-	          ruleChild = ruleValue.child;
-	        }
-
-	        if (kindOf(ruleChild) === 'object') {
-	          if (ruleType === 'object') {
-	            this.validator(optionValue, ruleChild, paths.concat(key));
-	          } else if (ruleType === 'array') {
-	            optionValue.forEach((item, index) => {
-	              this.validator(item, ruleChild, paths.concat(`${key}[${index}]`));
-	            });
-	          }
-	        }
-	      }
+	  if (kindOf(schemeChild) === 'object') {
+	    const optionType = kindOf(optionValue);
+	    if (optionType === 'object') {
+	      optionValidator(optionValue, schemeChild, paths);
+	    } else if (optionType === 'array') {
+	      optionValue.forEach((item, index) => {
+	        optionValidator(item, schemeChild, paths.concat(index));
+	      });
 	    }
 	  }
 	}
@@ -645,7 +649,9 @@
 	  playbackRate: 'boolean',
 	  aspectRatio: 'boolean',
 	  loop: 'boolean',
-	  type: 'string',
+	  type: {
+	    type: 'string'
+	  },
 	  mimeCodec: 'string',
 	  layers: {
 	    type: 'array',
@@ -2825,7 +2831,7 @@
 	    _this.emit('init:start');
 
 	    _this.option = deepMerge({}, Artplayer.DEFAULTS, option);
-	    new OptionValidator(_this.option, scheme);
+	    optionValidator(_this.option, scheme);
 
 	    _this.init();
 

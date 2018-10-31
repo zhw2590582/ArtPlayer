@@ -25,7 +25,9 @@ export default {
   playbackRate: 'boolean',
   aspectRatio: 'boolean',
   loop: 'boolean',
-  type: 'string',
+  type: {
+    type: 'string'
+  },
   mimeCodec: 'string',
   layers: {
     type: 'array',
