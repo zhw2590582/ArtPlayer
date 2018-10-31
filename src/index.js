@@ -131,6 +131,8 @@ class Artplayer extends Emitter {
     instances.splice(instances.indexOf(this), 1);
     if (removeHtml) {
       this.refs.$container.innerHTML = '';
+    } else {
+      this.refs.$player.classList.add('artplayer-destroy');
     }
     this.emit('destroy');
   }

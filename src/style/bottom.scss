@@ -132,7 +132,6 @@
                 float: left;
                 font-size: 12px;
                 height: 36px;
-                // line-height: 36px;
                 cursor: pointer;
                 .art-icon {
                     display: flex;
@@ -205,7 +204,7 @@
         }
     }
     
-    &.artplayer-error {
+    &.artplayer-error, &.artplayer-destroy {
         .art-progress-indicator, .art-progress-tip {
             display: none !important;
         }

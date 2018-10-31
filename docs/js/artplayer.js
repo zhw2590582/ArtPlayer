@@ -2902,6 +2902,8 @@
 
 	      if (removeHtml) {
 	        this.refs.$container.innerHTML = '';
+	      } else {
+	        this.refs.$player.classList.add('artplayer-destroy');
 	      }
 
 	      this.emit('destroy');
