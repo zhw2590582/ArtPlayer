@@ -14,11 +14,19 @@ export default class Contextmenu {
       {
         disable: !option.playbackRate,
         name: 'playbackRate',
-        html: `${i18n.get('Play speed')}: <span>0.5</span><span>0.75</span><span class="current">1.0</span><span>1.25</span><span>1.5</span><span>2.0</span>`,
+        html: `
+          ${i18n.get('Play speed')}:
+          <span data-rate="0.5">0.5</span>
+          <span data-rate="0.75">0.75</span>
+          <span data-rate="1" class="current">${i18n.get('Normal')}</span>
+          <span data-rate="1.25">1.25</span>
+          <span data-rate="1.5">1.5</span>
+          <span data-rate="2.0">2.0</span>
+        `,
         click: (art, event) => {
           const { target } = event;
-          const rate = target.innerText;
-          if (target.tagName === 'SPAN' && rate) {
+          const { rate } = target.dataset;
+          if (rate) {
             player.playbackRate(Number(rate));
             sublings(target).forEach(item => item.classList.remove('current'));
             target.classList.add('current');
@@ -29,11 +37,16 @@ export default class Contextmenu {
       {
         disable: !option.aspectRatio,
         name: 'aspectRatio',
-        html: `${i18n.get('Aspect ratio')}: <span class="current">${i18n.get('Default')}</span><span>4:3</span><span>16:9</span>`,
+        html: `
+          ${i18n.get('Aspect ratio')}:
+          <span data-ratio="default" class="current">${i18n.get('Default')}</span>
+          <span data-ratio="4:3">4:3</span>
+          <span data-ratio="16:9">16:9</span>
+        `,
         click: (art, event) => {
           const { target } = event;
-          const ratio = target.innerText;
-          if (target.tagName === 'SPAN' && ratio) {
+          const { ratio } = target.dataset;
+          if (ratio) {
             player.aspectRatio(ratio.split(':'));
             sublings(target).forEach(item => item.classList.remove('current'));
             target.classList.add('current');

@@ -868,7 +868,8 @@
 	    'Screenshot': '截图',
 	    'Play speed': '播放速度',
 	    'Aspect ratio': '画面比例',
-	    'Default': '默认'
+	    'Default': '默认',
+	    'Normal': '正常'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -886,7 +887,8 @@
 	    'Screenshot': '截圖',
 	    'Play speed': '播放速度',
 	    'Aspect ratio': '畫面比例',
-	    'Default': '默認'
+	    'Default': '默認',
+	    'Normal': '正常'
 	  }
 	};
 
@@ -1146,7 +1148,7 @@
 	      var newRate = clamp(rate, 0.1, 10);
 	      $video.playbackRate = newRate;
 	      $player.dataset.playbackRate = newRate;
-	      notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate, "x"));
+	      notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate === 1 ? i18n.get('Normal') : "".concat(newRate, "x")));
 	      this.art.emit('playbackRate', newRate);
 	    }
 	  }, {
@@ -1158,13 +1160,29 @@
 	          $player = _this$art8$refs.$player,
 	          i18n = _this$art8.i18n,
 	          notice = _this$art8.notice;
-	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : ratio[0];
+	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : i18n.get('Default');
 
 	      if (ratio.length === 2) {
-	        var rate = Number(ratio[0]) / Number(ratio[1]);
-	        setStyle($video, 'width', "".concat(100 / rate, "%"));
-	        setStyle($video, 'height', '100%');
-	        setStyle($video, 'padding', "0 ".concat(($player.clientWidth - $player.clientWidth / rate) / 2, "px"));
+	        var videoWidth = $video.videoWidth,
+	            videoHeight = $video.videoHeight;
+	        var clientWidth = $player.clientWidth,
+	            clientHeight = $player.clientHeight;
+	        var videoRatio = videoWidth / videoHeight;
+	        var setupRatio = Number(ratio[0]) / Number(ratio[1]);
+
+	        if (videoRatio > setupRatio) {
+	          var percentage = setupRatio * videoHeight / videoWidth;
+	          setStyle($video, 'width', "".concat(percentage * 100, "%"));
+	          setStyle($video, 'height', '100%');
+	          setStyle($video, 'padding', "0 ".concat((clientWidth - clientWidth * percentage) / 2, "px"));
+	        } else {
+	          var _percentage = videoWidth / setupRatio / videoHeight;
+
+	          setStyle($video, 'width', '100%');
+	          setStyle($video, 'height', "".concat(_percentage * 100, "%"));
+	          setStyle($video, 'padding', "".concat((clientHeight - clientHeight * _percentage) / 2, "px 0"));
+	        }
+
 	        $player.dataset.aspectRatio = ratioName;
 	      } else {
 	        setStyle($video, 'width', null);
@@ -2113,12 +2131,12 @@
 	      option.contextmenu.push({
 	        disable: !option.playbackRate,
 	        name: 'playbackRate',
-	        html: "".concat(i18n.get('Play speed'), ": <span>0.5</span><span>0.75</span><span class=\"current\">1.0</span><span>1.25</span><span>1.5</span><span>2.0</span>"),
+	        html: "\n          ".concat(i18n.get('Play speed'), ":\n          <span data-rate=\"0.5\">0.5</span>\n          <span data-rate=\"0.75\">0.75</span>\n          <span data-rate=\"1\" class=\"current\">").concat(i18n.get('Normal'), "</span>\n          <span data-rate=\"1.25\">1.25</span>\n          <span data-rate=\"1.5\">1.5</span>\n          <span data-rate=\"2.0\">2.0</span>\n        "),
 	        click: function click(art, event) {
 	          var target = event.target;
-	          var rate = target.innerText;
+	          var rate = target.dataset.rate;
 
-	          if (target.tagName === 'SPAN' && rate) {
+	          if (rate) {
 	            player.playbackRate(Number(rate));
 	            sublings(target).forEach(function (item) {
 	              return item.classList.remove('current');
@@ -2131,12 +2149,12 @@
 	      }, {
 	        disable: !option.aspectRatio,
 	        name: 'aspectRatio',
-	        html: "".concat(i18n.get('Aspect ratio'), ": <span class=\"current\">").concat(i18n.get('Default'), "</span><span>4:3</span><span>16:9</span>"),
+	        html: "\n          ".concat(i18n.get('Aspect ratio'), ":\n          <span data-ratio=\"default\" class=\"current\">").concat(i18n.get('Default'), "</span>\n          <span data-ratio=\"4:3\">4:3</span>\n          <span data-ratio=\"16:9\">16:9</span>\n        "),
 	        click: function click(art, event) {
 	          var target = event.target;
-	          var ratio = target.innerText;
+	          var ratio = target.dataset.ratio;
 
-	          if (target.tagName === 'SPAN' && ratio) {
+	          if (ratio) {
 	            player.aspectRatio(ratio.split(':'));
 	            sublings(target).forEach(function (item) {
 	              return item.classList.remove('current');

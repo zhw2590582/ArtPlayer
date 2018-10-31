@@ -170,19 +170,32 @@ export default class Player {
     const newRate = clamp(rate, 0.1, 10);
     $video.playbackRate = newRate;
     $player.dataset.playbackRate = newRate;
-    notice.show(`${i18n.get('Rate')}: ${newRate}x`);
+    notice.show(`${i18n.get('Rate')}: ${newRate === 1 ? i18n.get('Normal') : `${newRate}x`}`);
     this.art.emit('playbackRate', newRate);
   }
 
   aspectRatio(ratio) {
     const { refs: { $video, $player }, i18n, notice } = this.art;
-    const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : ratio[0];
+    const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : i18n.get('Default');
 
     if (ratio.length === 2) {
-      const rate = Number(ratio[0]) / Number(ratio[1]);
-      setStyle($video, 'width', `${100 / rate}%`);
-      setStyle($video, 'height', '100%');
-      setStyle($video, 'padding', `0 ${($player.clientWidth - $player.clientWidth / rate) / 2}px`);
+      const { videoWidth, videoHeight } = $video;
+      const { clientWidth, clientHeight } = $player;
+      const videoRatio = videoWidth / videoHeight;
+      const setupRatio = Number(ratio[0]) / Number(ratio[1]);
+
+      if (videoRatio > setupRatio) {
+        const percentage = setupRatio * videoHeight / videoWidth;
+        setStyle($video, 'width', `${percentage * 100}%`);
+        setStyle($video, 'height', '100%');
+        setStyle($video, 'padding', `0 ${(clientWidth - clientWidth * percentage) / 2}px`);
+      } else {
+        const percentage = videoWidth / setupRatio / videoHeight;
+        setStyle($video, 'width', '100%');
+        setStyle($video, 'height', `${percentage * 100}%`);
+        setStyle($video, 'padding', `${(clientHeight - clientHeight * percentage) / 2}px 0`);
+      }
+
       $player.dataset.aspectRatio = ratioName;
     } else {
       setStyle($video, 'width', null);

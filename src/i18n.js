@@ -15,7 +15,8 @@ let i18nMap = {
     'Screenshot': '截图',
     'Play speed': '播放速度',
     'Aspect ratio': '画面比例',
-    'Default': '默认'
+    'Default': '默认',
+    'Normal': '正常'
   },
   'zh-tw': {
     'About author': '關於作者',
@@ -33,7 +34,8 @@ let i18nMap = {
     'Screenshot': '截圖',
     'Play speed': '播放速度',
     'Aspect ratio': '畫面比例',
-    'Default': '默認'
+    'Default': '默認',
+    'Normal': '正常'
   }
 };
 
