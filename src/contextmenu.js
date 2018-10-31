@@ -18,11 +18,12 @@ export default class Contextmenu {
         click: (art, event) => {
           const { target } = event;
           const rate = target.innerText;
-          if (rate) {
+          if (target.tagName === 'SPAN' && rate) {
             player.playbackRate(Number(rate));
             const sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(item => item !== target);
             sublings.forEach(item => item.classList.remove('current'));
             target.classList.add('current');
+            this.hide();
           }
         }
       },
@@ -33,11 +34,12 @@ export default class Contextmenu {
         click: (art, event) => {
           const { target } = event;
           const ratio = target.innerText;
-          if (ratio) {
+          if (target.tagName === 'SPAN' && ratio) {
             player.aspectRatio(ratio.split(':'));
             const sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(item => item !== target);
             sublings.forEach(item => item.classList.remove('current'));
             target.classList.add('current');
+            this.hide();
           }
         }
       },
@@ -47,6 +49,7 @@ export default class Contextmenu {
         html: i18n.get('Video info'),
         click: () => {
           this.art.info.show();
+          this.hide();
         }
       },
       {
@@ -98,7 +101,6 @@ export default class Contextmenu {
           proxy($menu, 'click', event => {
             event.preventDefault();
             item.click(this.art, event);
-            this.hide();
             this.art.emit('contextmenu:click', $menu);
           });
         }

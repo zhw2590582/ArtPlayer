@@ -8,11 +8,7 @@ export default class Mask {
   }
 
   init() {
-    const {
-      player,
-      refs,
-      events: { proxy }
-    } = this.art;
+    const { player, refs, events: { proxy } } = this.art;
 
     append(refs.$mask, icons.playBig);
 

@@ -9,14 +9,12 @@ export default class Thumbnails {
 
   apply(art) {
     this.art = art;
+    errorHandle(this.art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
     this.init();
   }
 
   init() {
-    const {
-      refs: { $progress },
-      events: { proxy }
-    } = this.art;
+    const { refs: { $progress }, events: { proxy } } = this.art;
 
     proxy($progress, 'mousemove', event => {
       if (!this.loading) {
@@ -55,7 +53,6 @@ export default class Thumbnails {
 
   showThumbnails(event) {
     const { refs: { $progress }, controls } = this.art;
-    errorHandle(controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
     const { width: posWidth } = controls.progress.getPosFromEvent(event);
     const { url, height, width, number, column } = this.art.option.thumbnails;
     const perWidth = $progress.clientWidth / number;

@@ -982,7 +982,7 @@
 	        if (!_this.firstCanplay) {
 	          _this.firstCanplay = true;
 
-	          _this.art.emit('player:firstCanplay');
+	          _this.art.emit('firstCanplay');
 	        }
 
 	        _this.art.controls.show();
@@ -1773,6 +1773,7 @@
 	    key: "apply",
 	    value: function apply(art) {
 	      this.art = art;
+	      errorHandle(this.art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
 	      this.init();
 	    }
 	  }, {
@@ -1828,7 +1829,6 @@
 	      var _this$art2 = this.art,
 	          $progress = _this$art2.refs.$progress,
 	          controls = _this$art2.controls;
-	      errorHandle(controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
 
 	      var _controls$progress$ge = controls.progress.getPosFromEvent(event),
 	          posWidth = _controls$progress$ge.width;
@@ -1924,7 +1924,7 @@
 
 	    this.art = art;
 	    this.$map = {};
-	    this.art.on('player:firstCanplay', function () {
+	    this.art.on('firstCanplay', function () {
 	      _this.init();
 
 	      _this.mount();
@@ -2113,7 +2113,7 @@
 	          var target = event.target;
 	          var rate = target.innerText;
 
-	          if (rate) {
+	          if (target.tagName === 'SPAN' && rate) {
 	            player.playbackRate(Number(rate));
 	            var sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(function (item) {
 	              return item !== target;
@@ -2122,6 +2122,8 @@
 	              return item.classList.remove('current');
 	            });
 	            target.classList.add('current');
+
+	            _this.hide();
 	          }
 	        }
 	      }, {
@@ -2132,7 +2134,7 @@
 	          var target = event.target;
 	          var ratio = target.innerText;
 
-	          if (ratio) {
+	          if (target.tagName === 'SPAN' && ratio) {
 	            player.aspectRatio(ratio.split(':'));
 	            var sublings = Array.from(target.parentElement.querySelectorAll('span')).filter(function (item) {
 	              return item !== target;
@@ -2141,6 +2143,8 @@
 	              return item.classList.remove('current');
 	            });
 	            target.classList.add('current');
+
+	            _this.hide();
 	          }
 	        }
 	      }, {
@@ -2149,6 +2153,8 @@
 	        html: i18n.get('Video info'),
 	        click: function click() {
 	          _this.art.info.show();
+
+	          _this.hide();
 	        }
 	      }, {
 	        disable: false,
@@ -2205,8 +2211,6 @@
 	          proxy($menu, 'click', function (event) {
 	            event.preventDefault();
 	            item.click(_this2.art, event);
-
-	            _this2.hide();
 
 	            _this2.art.emit('contextmenu:click', $menu);
 	          });

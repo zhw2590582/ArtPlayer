@@ -16,7 +16,7 @@ export default class Controls {
   constructor(art) {
     this.art = art;
     this.$map = {};
-    this.art.on('player:firstCanplay', () => {
+    this.art.on('firstCanplay', () => {
       this.init();
       this.mount();
     });

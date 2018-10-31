@@ -15,12 +15,7 @@ export default class Progress {
   }
 
   init() {
-    const {
-      option: { highlight, theme },
-      events: { proxy },
-      refs: { $video },
-      player
-    } = this.art;
+    const { option: { highlight, theme }, events: { proxy }, refs: { $video }, player } = this.art;
 
     append(
       this.option.$control,

@@ -53,7 +53,7 @@ export default class Player {
     this.art.on('video:canplay', () => {
       if (!this.firstCanplay) {
         this.firstCanplay = true;
-        this.art.emit('player:firstCanplay');
+        this.art.emit('firstCanplay');
       }
 
       this.art.controls.show();
