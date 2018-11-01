@@ -767,7 +767,9 @@
 
 	      var _this$art2 = this.art,
 	          option = _this$art2.option,
-	          proxy = _this$art2.events.proxy,
+	          _this$art2$events = _this$art2.events,
+	          proxy = _this$art2$events.proxy,
+	          hover = _this$art2$events.hover,
 	          _this$art2$refs = _this$art2.refs,
 	          $player = _this$art2$refs.$player,
 	          $video = _this$art2$refs.$video,
@@ -856,6 +858,15 @@
 	            _this.art.destroy();
 	          });
 	        }
+	      });
+	      hover($player, function () {
+	        $player.classList.add('artplayer-hover');
+
+	        _this.art.emit('hoverenter');
+	      }, function () {
+	        $player.classList.remove('artplayer-hover');
+
+	        _this.art.emit('hoverleave');
 	      });
 	    }
 	  }, {
@@ -1821,7 +1832,38 @@
 	  createClass(Quality, [{
 	    key: "apply",
 	    value: function apply(art) {
+	      var _this = this;
+
 	      this.art = art;
+	      var _this$art = this.art,
+	          option = _this$art.option,
+	          _this$art$events = _this$art.events,
+	          proxy = _this$art$events.proxy,
+	          hover = _this$art$events.hover,
+	          player = _this$art.player;
+	      var defaultQuality = option.quality.find(function (item) {
+	        return item.default;
+	      }) || option.quality[0];
+	      var $qualityName = append(this.option.$control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
+	      var qualityList = option.quality.map(function (item, index) {
+	        return "<div class=\"art-quality-item\" data-index=\"".concat(index, "\">").concat(item.name, "</div>");
+	      }).join('');
+	      var $qualitys = append(this.option.$control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
+	      hover(this.option.$control, function () {
+	        _this.option.$control.classList.add('hover');
+	      }, function () {
+	        _this.option.$control.classList.remove('hover');
+	      });
+	      proxy($qualitys, 'click', function (event) {
+	        var _option$quality$event = option.quality[event.target.dataset.index],
+	            url = _option$quality$event.url,
+	            name = _option$quality$event.name;
+
+	        if (url && name) {
+	          player.switch(url, name);
+	          $qualityName.innerHTML = name;
+	        }
+	      });
 	    }
 	  }]);
 
@@ -1995,13 +2037,13 @@
 	    key: "show",
 	    value: function show() {
 	      var $player = this.art.refs.$player;
-	      $player.classList.add('controls-show');
+	      $player.classList.add('artplayer-controls-show');
 	    }
 	  }, {
 	    key: "hide",
 	    value: function hide() {
 	      var $player = this.art.refs.$player;
-	      $player.classList.remove('controls-show');
+	      $player.classList.remove('artplayer-controls-show');
 	    }
 	  }]);
 
@@ -2458,6 +2500,7 @@
 	    this.art = art;
 	    this.destroyEvents = [];
 	    this.proxy = this.proxy.bind(this);
+	    this.hover = this.hover.bind(this);
 	  }
 
 	  createClass(Events, [{
@@ -2477,6 +2520,12 @@
 	      this.destroyEvents.push(function () {
 	        target.removeEventListener(name, callback, option);
 	      });
+	    }
+	  }, {
+	    key: "hover",
+	    value: function hover(target, mouseenter, mouseleave) {
+	      this.proxy(target, 'mouseenter', mouseenter);
+	      this.proxy(target, 'mouseleave', mouseleave);
 	    }
 	  }, {
 	    key: "destroy",

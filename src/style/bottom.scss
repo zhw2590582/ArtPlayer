@@ -194,10 +194,43 @@
                 line-height: 36px;
                 padding: 0 10px;
             }
+
+            .art-control-quality {
+                position: relative;
+                z-index: 30;
+                line-height: 36px;
+                padding: 0 10px;
+                .art-qualitys {
+                    display: none;
+                    position: absolute;
+                    left: -15px;
+                    bottom: 35px;
+                    width: 100px;
+                    padding: 5px 0;
+                    text-align: center;
+                    color: #fff;
+                    background: rgba(0,0,0,.7);
+                    border-radius: 3px;
+                    .art-quality-item {
+                        height: 30px;
+                        line-height: 30px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+                        &:hover {
+                            background-color: rgba(255,255,255,.1);
+                        }
+                    }
+                }
+                &.hover .art-qualitys{
+                    display: block;
+                }
+            }
         }
     }
     
-    &.controls-show, &:hover {
+    &.artplayer-controls-show, &.artplayer-hover {
         .artplayer-bottom {
             opacity: 1;
             visibility: visible;

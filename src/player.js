@@ -26,7 +26,7 @@ export default class Player {
   }
 
   eventBind() {
-    const { option, events: { proxy }, refs: { $player, $video }, i18n, notice } = this.art;
+    const { option, events: { proxy, hover }, refs: { $player, $video }, i18n, notice } = this.art;
 
     config.video.events.forEach(eventName => {
       proxy($video, eventName, event => {
@@ -104,6 +104,14 @@ export default class Player {
           this.art.destroy();
         });
       }
+    });
+
+    hover($player, () => {
+      $player.classList.add('artplayer-hover');
+      this.art.emit('hoverenter');
+    }, () => {
+      $player.classList.remove('artplayer-hover');
+      this.art.emit('hoverleave');
     });
   }
 

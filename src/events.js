@@ -3,6 +3,7 @@ export default class Events {
     this.art = art;
     this.destroyEvents = [];
     this.proxy = this.proxy.bind(this);
+    this.hover = this.hover.bind(this);
   }
 
   proxy(target, name, callback, option = {}) {
@@ -14,6 +15,11 @@ export default class Events {
     this.destroyEvents.push(() => {
       target.removeEventListener(name, callback, option);
     });
+  }
+
+  hover(target, mouseenter, mouseleave) {
+    this.proxy(target, 'mouseenter', mouseenter);
+    this.proxy(target, 'mouseleave', mouseleave);
   }
 
   destroy() {

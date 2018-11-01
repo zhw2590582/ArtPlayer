@@ -168,11 +168,11 @@ export default class Controls {
 
   show() {
     const { $player } = this.art.refs;
-    $player.classList.add('controls-show');
+    $player.classList.add('artplayer-controls-show');
   }
 
   hide() {
     const { $player } = this.art.refs;
-    $player.classList.remove('controls-show');
+    $player.classList.remove('artplayer-controls-show');
   }
 }
