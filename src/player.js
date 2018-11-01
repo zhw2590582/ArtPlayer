@@ -1,4 +1,4 @@
-import { clamp, secondToTime, setStorage, sleep, setStyle } from './utils';
+import { clamp, secondToTime, setStorage, sleep, setStyle, sublings } from './utils';
 import config from './config';
 
 export default class Player {
@@ -173,6 +173,7 @@ export default class Player {
     if (isPlaying) {
       this.play();
     }
+    this.reset();
     notice.show(`${i18n.get('Switch')}: ${name}`);
     this.art.emit('switch', url);
   }
@@ -218,5 +219,24 @@ export default class Player {
 
     notice.show(`${i18n.get('Aspect ratio')}: ${ratioName}`);
     this.art.emit('aspectRatio', ratio);
+  }
+
+  reset() {
+    const { refs: { $video }, contextmenu } = this.art;
+
+    if (contextmenu.$playbackRate) {
+      const $normal = contextmenu.$playbackRate.querySelector('.normal');
+      sublings($normal).forEach(item => item.classList.remove('current'));
+      $normal.classList.add('current');
+    }
+
+    setStyle($video, 'width', null);
+    setStyle($video, 'height', null);
+    setStyle($video, 'padding', null);
+    if (contextmenu.$aspectRatio) {
+      const $default = contextmenu.$aspectRatio.querySelector('.default');
+      sublings($default).forEach(item => item.classList.remove('current'));
+      $default.classList.add('current');
+    }
   }
 }

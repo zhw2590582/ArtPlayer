@@ -18,7 +18,7 @@ export default class Contextmenu {
           ${i18n.get('Play speed')}:
           <span data-rate="0.5">0.5</span>
           <span data-rate="0.75">0.75</span>
-          <span data-rate="1" class="current">${i18n.get('Normal')}</span>
+          <span data-rate="1" class="normal current">${i18n.get('Normal')}</span>
           <span data-rate="1.25">1.25</span>
           <span data-rate="1.5">1.5</span>
           <span data-rate="2.0">2.0</span>
@@ -39,7 +39,7 @@ export default class Contextmenu {
         name: 'aspectRatio',
         html: `
           ${i18n.get('Aspect ratio')}:
-          <span data-ratio="default" class="current">${i18n.get('Default')}</span>
+          <span data-ratio="default" class="default current">${i18n.get('Default')}</span>
           <span data-ratio="4:3">4:3</span>
           <span data-ratio="16:9">16:9</span>
         `,
@@ -115,7 +115,7 @@ export default class Contextmenu {
             this.art.emit('contextmenu:click', $menu);
           });
         }
-        append(refs.$contextmenu, $menu);
+        this[`$${item.name || id}`] = append(refs.$contextmenu, $menu);
       });
     append(refs.$player, refs.$contextmenu);
   }

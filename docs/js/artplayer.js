@@ -1166,6 +1166,7 @@
 	        this.play();
 	      }
 
+	      this.reset();
 	      notice.show("".concat(i18n.get('Switch'), ": ").concat(name));
 	      this.art.emit('switch', url);
 	    }
@@ -1226,6 +1227,33 @@
 
 	      notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratioName));
 	      this.art.emit('aspectRatio', ratio);
+	    }
+	  }, {
+	    key: "reset",
+	    value: function reset() {
+	      var _this$art10 = this.art,
+	          $video = _this$art10.refs.$video,
+	          contextmenu = _this$art10.contextmenu;
+
+	      if (contextmenu.$playbackRate) {
+	        var $normal = contextmenu.$playbackRate.querySelector('.normal');
+	        sublings($normal).forEach(function (item) {
+	          return item.classList.remove('current');
+	        });
+	        $normal.classList.add('current');
+	      }
+
+	      setStyle($video, 'width', null);
+	      setStyle($video, 'height', null);
+	      setStyle($video, 'padding', null);
+
+	      if (contextmenu.$aspectRatio) {
+	        var $default = contextmenu.$aspectRatio.querySelector('.default');
+	        sublings($default).forEach(function (item) {
+	          return item.classList.remove('current');
+	        });
+	        $default.classList.add('current');
+	      }
 	    }
 	  }]);
 
@@ -2212,7 +2240,7 @@
 	      option.contextmenu.push({
 	        disable: !option.playbackRate,
 	        name: 'playbackRate',
-	        html: "\n          ".concat(i18n.get('Play speed'), ":\n          <span data-rate=\"0.5\">0.5</span>\n          <span data-rate=\"0.75\">0.75</span>\n          <span data-rate=\"1\" class=\"current\">").concat(i18n.get('Normal'), "</span>\n          <span data-rate=\"1.25\">1.25</span>\n          <span data-rate=\"1.5\">1.5</span>\n          <span data-rate=\"2.0\">2.0</span>\n        "),
+	        html: "\n          ".concat(i18n.get('Play speed'), ":\n          <span data-rate=\"0.5\">0.5</span>\n          <span data-rate=\"0.75\">0.75</span>\n          <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n          <span data-rate=\"1.25\">1.25</span>\n          <span data-rate=\"1.5\">1.5</span>\n          <span data-rate=\"2.0\">2.0</span>\n        "),
 	        click: function click(art, event) {
 	          var target = event.target;
 	          var rate = target.dataset.rate;
@@ -2230,7 +2258,7 @@
 	      }, {
 	        disable: !option.aspectRatio,
 	        name: 'aspectRatio',
-	        html: "\n          ".concat(i18n.get('Aspect ratio'), ":\n          <span data-ratio=\"default\" class=\"current\">").concat(i18n.get('Default'), "</span>\n          <span data-ratio=\"4:3\">4:3</span>\n          <span data-ratio=\"16:9\">16:9</span>\n        "),
+	        html: "\n          ".concat(i18n.get('Aspect ratio'), ":\n          <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n          <span data-ratio=\"4:3\">4:3</span>\n          <span data-ratio=\"16:9\">16:9</span>\n        "),
 	        click: function click(art, event) {
 	          var target = event.target;
 	          var ratio = target.dataset.ratio;
@@ -2314,7 +2342,7 @@
 	          });
 	        }
 
-	        append(refs.$contextmenu, $menu);
+	        _this2["$".concat(item.name || id$1)] = append(refs.$contextmenu, $menu);
 	      });
 	      append(refs.$player, refs.$contextmenu);
 	    }
