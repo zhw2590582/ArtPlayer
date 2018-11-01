@@ -165,6 +165,18 @@ export default class Player {
     return this.art.refs.$video.duration || 0;
   }
 
+  switch(url, name = 'Unknown') {
+    const { refs: { $video }, i18n, notice, isPlaying } = this.art;
+    const currentTime = this.currentTime();
+    $video.src = url;
+    this.seek(currentTime);
+    if (isPlaying) {
+      this.play();
+    }
+    notice.show(`${i18n.get('Switch')}: ${name}`);
+    this.art.emit('switch', url);
+  }
+
   playbackRate(rate) {
     const { refs: { $video, $player }, i18n, notice } = this.art;
     const newRate = clamp(rate, 0.1, 10);

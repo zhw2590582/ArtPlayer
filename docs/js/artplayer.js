@@ -880,7 +880,8 @@
 	    'Play speed': '播放速度',
 	    'Aspect ratio': '画面比例',
 	    'Default': '默认',
-	    'Normal': '正常'
+	    'Normal': '正常',
+	    'Switch': '切换'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -899,7 +900,8 @@
 	    'Play speed': '播放速度',
 	    'Aspect ratio': '畫面比例',
 	    'Default': '默認',
-	    'Normal': '正常'
+	    'Normal': '正常',
+	    'Switch': '切換'
 	  }
 	};
 
@@ -1148,14 +1150,34 @@
 	      return this.art.refs.$video.duration || 0;
 	    }
 	  }, {
+	    key: "switch",
+	    value: function _switch(url) {
+	      var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Unknown';
+	      var _this$art7 = this.art,
+	          $video = _this$art7.refs.$video,
+	          i18n = _this$art7.i18n,
+	          notice = _this$art7.notice,
+	          isPlaying = _this$art7.isPlaying;
+	      var currentTime = this.currentTime();
+	      $video.src = url;
+	      this.seek(currentTime);
+
+	      if (isPlaying) {
+	        this.play();
+	      }
+
+	      notice.show("".concat(i18n.get('Switch'), ": ").concat(name));
+	      this.art.emit('switch', url);
+	    }
+	  }, {
 	    key: "playbackRate",
 	    value: function playbackRate(rate) {
-	      var _this$art7 = this.art,
-	          _this$art7$refs = _this$art7.refs,
-	          $video = _this$art7$refs.$video,
-	          $player = _this$art7$refs.$player,
-	          i18n = _this$art7.i18n,
-	          notice = _this$art7.notice;
+	      var _this$art8 = this.art,
+	          _this$art8$refs = _this$art8.refs,
+	          $video = _this$art8$refs.$video,
+	          $player = _this$art8$refs.$player,
+	          i18n = _this$art8.i18n,
+	          notice = _this$art8.notice;
 	      var newRate = clamp(rate, 0.1, 10);
 	      $video.playbackRate = newRate;
 	      $player.dataset.playbackRate = newRate;
@@ -1165,12 +1187,12 @@
 	  }, {
 	    key: "aspectRatio",
 	    value: function aspectRatio(ratio) {
-	      var _this$art8 = this.art,
-	          _this$art8$refs = _this$art8.refs,
-	          $video = _this$art8$refs.$video,
-	          $player = _this$art8$refs.$player,
-	          i18n = _this$art8.i18n,
-	          notice = _this$art8.notice;
+	      var _this$art9 = this.art,
+	          _this$art9$refs = _this$art9.refs,
+	          $video = _this$art9$refs.$video,
+	          $player = _this$art9$refs.$player,
+	          i18n = _this$art9.i18n,
+	          notice = _this$art9.notice;
 	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : i18n.get('Default');
 
 	      if (ratio.length === 2) {
@@ -2374,18 +2396,25 @@
 	      var _this = this;
 
 	      var _this$art = this.art,
-	          $infoClose = _this$art.refs.$infoClose,
+	          _this$art$refs = _this$art.refs,
+	          $infoClose = _this$art$refs.$infoClose,
+	          $infoPanel = _this$art$refs.$infoPanel,
 	          proxy = _this$art.events.proxy;
 	      proxy($infoClose, 'click', function () {
 	        _this.hide();
+	      });
+	      this.art.on('switch', function () {
+	        if ($infoPanel.innerHTML) {
+	          _this.getHeader();
+	        }
 	      });
 	    }
 	  }, {
 	    key: "show",
 	    value: function show() {
-	      var _this$art$refs = this.art.refs,
-	          $info = _this$art$refs.$info,
-	          $infoPanel = _this$art$refs.$infoPanel;
+	      var _this$art$refs2 = this.art.refs,
+	          $info = _this$art$refs2.$info,
+	          $infoPanel = _this$art$refs2.$infoPanel;
 	      setStyle($info, 'display', 'block');
 
 	      if (!$infoPanel.innerHTML) {
@@ -2403,8 +2432,8 @@
 	      var infoHtml = [];
 	      infoHtml.push("\n      <div class=\"art-info-item \">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">1.0.0</div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video type:</div>\n        <div class=\"art-info-content\" data-head=\"Content-Type\">loading...</div>\n      </div>\n    ");
-	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video size:</div>\n        <div class=\"art-info-content\" data-head=\"Content-length\">loading...</div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video type:</div>\n        <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n      </div>\n    ");
+	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video size:</div>\n        <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n    ");
 	      infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n    ");
@@ -2414,10 +2443,14 @@
 	  }, {
 	    key: "getHeader",
 	    value: function getHeader() {
-	      var _this$art2 = this.art,
-	          url = _this$art2.option.url,
-	          $infoPanel = _this$art2.refs.$infoPanel;
+	      var _this$art$refs3 = this.art.refs,
+	          $infoPanel = _this$art$refs3.$infoPanel,
+	          $video = _this$art$refs3.$video;
+	      var url = $video.src;
 	      var types = Array.from($infoPanel.querySelectorAll('[data-head]'));
+	      types.forEach(function (item) {
+	        item.innerHTML = 'loading...';
+	      });
 	      fetch(url, {
 	        method: 'HEAD'
 	      }).then(function (data) {
@@ -2434,9 +2467,9 @@
 	  }, {
 	    key: "readInfo",
 	    value: function readInfo() {
-	      var _this$art$refs2 = this.art.refs,
-	          $infoPanel = _this$art$refs2.$infoPanel,
-	          $video = _this$art$refs2.$video;
+	      var _this$art$refs4 = this.art.refs,
+	          $infoPanel = _this$art$refs4.$infoPanel,
+	          $video = _this$art$refs4.$video;
 	      var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
 	      types.forEach(function (item) {
 	        var value = $video[item.dataset.video];

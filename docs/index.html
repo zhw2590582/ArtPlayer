@@ -100,11 +100,11 @@
 
         console.log(player);
 
-        // Artplayer.config.video.events.forEach(item => {
-        //     player.on('video:' + item, event => {
-        //         console.log('video', event);
-        //     });
-        // });
+        Artplayer.config.video.events.forEach(item => {
+            player.on('video:' + item, event => {
+                console.log('video', event);
+            });
+        });
     </script>
 </body>
 

@@ -7,9 +7,14 @@ export default class Info {
   }
 
   init() {
-    const { refs: { $infoClose }, events: { proxy } } = this.art;
+    const { refs: { $infoClose, $infoPanel }, events: { proxy } } = this.art;
     proxy($infoClose, 'click', () => {
       this.hide();
+    });
+    this.art.on('switch', () => {
+      if ($infoPanel.innerHTML) {
+        this.getHeader();
+      }
     });
   }
 
@@ -45,14 +50,14 @@ export default class Info {
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video type:</div>
-        <div class="art-info-content" data-head="Content-Type">loading...</div>
+        <div class="art-info-content" data-head="Content-Type"></div>
       </div>
     `);
 
     infoHtml.push(`
       <div class="art-info-item">
         <div class="art-info-title">Video size:</div>
-        <div class="art-info-content" data-head="Content-length">loading...</div>
+        <div class="art-info-content" data-head="Content-length"></div>
       </div>
     `);
 
@@ -90,8 +95,12 @@ export default class Info {
   }
 
   getHeader() {
-    const { option: { url }, refs: { $infoPanel } } = this.art;
+    const { $infoPanel, $video } = this.art.refs;
+    const url = $video.src;
     const types = Array.from($infoPanel.querySelectorAll('[data-head]'));
+    types.forEach(item => {
+      item.innerHTML = 'loading...';
+    });
     fetch(url, {
       method: 'HEAD'
     }).then(data => {
