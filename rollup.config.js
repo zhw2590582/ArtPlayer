@@ -23,7 +23,9 @@ export default {
     eslint({
       exclude: [
         'node_modules/**',
-        'docs/**'
+        'docs/**',
+        'src/icons/*.svg',
+        'src/style/*.scss'
       ]
     }),
     postcss({
