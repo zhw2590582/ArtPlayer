@@ -1,15 +1,12 @@
 .artplayer-video-player {
-    .artplayer-loading {
-        display: none;
+    .artplayer-danmu {
         position: absolute;
-        z-index: 70;
+        z-index: 40;
         left: 0;
         top: 0;
         right: 0;
         bottom: 0;
         width: 100%;
         height: 100%;
-        align-items: center;
-        justify-content: center;
     }
 }

@@ -185,7 +185,7 @@ export default class Player {
     if (isPlaying) {
       this.play();
     }
-    this.reset();
+    this.resetStyle();
     notice.show(`${i18n.get('Switch')}: ${name}`);
     this.art.emit('switch', url);
   }
@@ -233,7 +233,7 @@ export default class Player {
     this.art.emit('aspectRatio', ratio);
   }
 
-  reset() {
+  resetStyle() {
     const { refs: { $video }, contextmenu } = this.art;
 
     if (contextmenu.$playbackRate) {

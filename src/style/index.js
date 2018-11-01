@@ -2,6 +2,7 @@ import './artplayer.scss';
 import './video.scss';
 import './subtitle.scss';
 import './layers.scss';
+import './danmu.scss';
 import './mask.scss';
 import './loading.scss';
 import './bottom.scss';
