@@ -881,6 +881,7 @@
 	      if (promise !== undefined) {
 	        promise.then().catch(function (err) {
 	          notice.show(err, true, 3000);
+	          console.warn(err);
 	        });
 	      }
 
@@ -962,9 +963,12 @@
 	          $video = _this$art7.refs.$video,
 	          i18n = _this$art7.i18n,
 	          notice = _this$art7.notice,
-	          isPlaying = _this$art7.isPlaying;
+	          isPlaying = _this$art7.isPlaying,
+	          option = _this$art7.option;
 	      var currentTime = this.currentTime();
 	      $video.src = url;
+	      option.url = url;
+	      this.reconnectTime = 0;
 	      this.seek(currentTime);
 
 	      if (isPlaying) {
@@ -1810,7 +1814,7 @@
 	      var elink = document.createElement('a');
 	      setStyle(elink, 'display', 'none');
 	      elink.href = dataUri;
-	      elink.download = "".concat(secondToTime($video.currentTime), ".png");
+	      elink.download = "ArtPlayer_".concat(secondToTime($video.currentTime), ".png");
 	      document.body.appendChild(elink);
 	      elink.click();
 	      document.body.removeChild(elink);
@@ -1827,6 +1831,7 @@
 	    classCallCheck(this, Quality);
 
 	    this.option = option;
+	    this.playIndex = -1;
 	  }
 
 	  createClass(Quality, [{
@@ -1834,34 +1839,36 @@
 	    value: function apply(art) {
 	      var _this = this;
 
-	      this.art = art;
-	      var _this$art = this.art,
-	          option = _this$art.option,
-	          _this$art$events = _this$art.events,
-	          proxy = _this$art$events.proxy,
-	          hover = _this$art$events.hover,
-	          player = _this$art.player;
+	      var $control = this.option.$control;
+	      var option = art.option,
+	          _art$events = art.events,
+	          proxy = _art$events.proxy,
+	          hover = _art$events.hover,
+	          player = art.player;
 	      var defaultQuality = option.quality.find(function (item) {
 	        return item.default;
 	      }) || option.quality[0];
-	      var $qualityName = append(this.option.$control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
+	      this.playIndex = option.quality.indexOf(defaultQuality);
+	      var $qualityName = append($control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
 	      var qualityList = option.quality.map(function (item, index) {
 	        return "<div class=\"art-quality-item\" data-index=\"".concat(index, "\">").concat(item.name, "</div>");
 	      }).join('');
-	      var $qualitys = append(this.option.$control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
-	      hover(this.option.$control, function () {
-	        _this.option.$control.classList.add('hover');
+	      var $qualitys = append($control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
+	      hover($control, function () {
+	        $control.classList.add('hover');
 	      }, function () {
-	        _this.option.$control.classList.remove('hover');
+	        $control.classList.remove('hover');
 	      });
 	      proxy($qualitys, 'click', function (event) {
-	        var _option$quality$event = option.quality[event.target.dataset.index],
-	            url = _option$quality$event.url,
-	            name = _option$quality$event.name;
+	        var index = Number(event.target.dataset.index);
+	        var _option$quality$index = option.quality[index],
+	            url = _option$quality$index.url,
+	            name = _option$quality$index.name;
 
-	        if (url && name) {
+	        if (url && name && _this.playIndex !== index) {
 	          player.switch(url, name);
 	          $qualityName.innerHTML = name;
+	          _this.playIndex = index;
 	        }
 	      });
 	    }
@@ -2934,6 +2941,7 @@
 	        controls: [],
 	        highlight: [],
 	        moreVideoAttr: {
+	          'crossOrigin': 'anonymous',
 	          'controls': false,
 	          'preload': 'auto',
 	          'webkit-playsinline': true,

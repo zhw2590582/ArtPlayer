@@ -30,7 +30,7 @@ export default class Screenshot {
     const elink = document.createElement('a');
     setStyle(elink, 'display', 'none');
     elink.href = dataUri;
-    elink.download = `${secondToTime($video.currentTime)}.png`;
+    elink.download = `ArtPlayer_${secondToTime($video.currentTime)}.png`;
     document.body.appendChild(elink);
     elink.click();
     document.body.removeChild(elink);

@@ -121,6 +121,7 @@ export default class Player {
     if (promise !== undefined) {
       promise.then().catch(err => {
         notice.show(err, true, 3000);
+        console.warn(err);
       });
     }
     notice.show(i18n.get('Play'));
@@ -175,9 +176,11 @@ export default class Player {
   }
 
   switch(url, name = 'Unknown') {
-    const { refs: { $video }, i18n, notice, isPlaying } = this.art;
+    const { refs: { $video }, i18n, notice, isPlaying, option } = this.art;
     const currentTime = this.currentTime();
     $video.src = url;
+    option.url = url;
+    this.reconnectTime = 0;
     this.seek(currentTime);
     if (isPlaying) {
       this.play();
