@@ -10,8 +10,8 @@ export default class Template {
         <div class="artplayer-video-player">
           <video class="artplayer-video"></video>
           <div class="artplayer-subtitle"></div>
-          <div class="artplayer-layers"></div>
           <div class="artplayer-danmu"></div>
+          <div class="artplayer-layers"></div>
           <div class="artplayer-mask"></div>
           <div class="artplayer-bottom">
             <div class="artplayer-progress"></div>
