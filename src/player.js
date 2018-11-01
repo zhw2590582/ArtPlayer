@@ -60,12 +60,7 @@ export default class Player {
       this.art.mask.show();
       this.art.loading.hide();
       if (option.autoplay) {
-        const promise = this.play();
-        if (promise !== undefined) {
-          promise.then().catch(err => {
-            console.warn(err);
-          });
-        }
+        this.play();
       }
     });
 
@@ -104,8 +99,10 @@ export default class Player {
         this.art.loading.hide();
         this.art.controls.hide();
         $player.classList.add('artplayer-error');
-        notice.show(i18n.get('Video load failed'), false);
-        this.art.destroy();
+        sleep(1000).then(() => {
+          notice.show(i18n.get('Video load failed'), false);
+          this.art.destroy();
+        });
       }
     });
   }
@@ -113,9 +110,13 @@ export default class Player {
   play() {
     const { refs: { $video }, i18n, notice } = this.art;
     const promise = $video.play();
+    if (promise !== undefined) {
+      promise.then().catch(err => {
+        notice.show(err, true, 3000);
+      });
+    }
     notice.show(i18n.get('Play'));
     this.art.emit('play', $video);
-    return promise;
   }
 
   pause() {

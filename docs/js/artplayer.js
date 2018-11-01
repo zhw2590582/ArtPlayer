@@ -1012,13 +1012,7 @@
 	        _this.art.loading.hide();
 
 	        if (option.autoplay) {
-	          var promise = _this.play();
-
-	          if (promise !== undefined) {
-	            promise.then().catch(function (err) {
-	              console.warn(err);
-	            });
-	          }
+	          _this.play();
 	        }
 	      });
 	      this.art.on('video:playing', function () {
@@ -1064,9 +1058,11 @@
 	          _this.art.controls.hide();
 
 	          $player.classList.add('artplayer-error');
-	          notice.show(i18n.get('Video load failed'), false);
+	          sleep(1000).then(function () {
+	            notice.show(i18n.get('Video load failed'), false);
 
-	          _this.art.destroy();
+	            _this.art.destroy();
+	          });
 	        }
 	      });
 	    }
@@ -1078,9 +1074,15 @@
 	          i18n = _this$art3.i18n,
 	          notice = _this$art3.notice;
 	      var promise = $video.play();
+
+	      if (promise !== undefined) {
+	        promise.then().catch(function (err) {
+	          notice.show(err, true, 3000);
+	        });
+	      }
+
 	      notice.show(i18n.get('Play'));
 	      this.art.emit('play', $video);
-	      return promise;
 	    }
 	  }, {
 	    key: "pause",
