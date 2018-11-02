@@ -8,8 +8,16 @@ const cssnano = require('cssnano');
 const replace = require('rollup-plugin-replace');
 const svgo = require('rollup-plugin-svgo');
 const { uglify } = require('rollup-plugin-uglify');
-const { version } = require('./package.json');
+const { version, homepage } = require('./package.json');
 const isProd = process.env.NODE_ENV === 'production';
+
+const banner =
+  '/*!\n' +
+  ` * ArtPlayer.js v${version}\n` +
+  ` * Github: ${homepage}\n` +
+  ` * (c) 2017-${new Date().getFullYear()} Harvey Zack\n` +
+  ' * Released under the MIT License.\n' +
+  ' */\n';
 
 export default {
   input: 'src/index.js',
@@ -17,7 +25,8 @@ export default {
     name: 'artplayer',
     file: isProd ? 'dist/artplayer.js' : 'docs/js/artplayer.js',
     format: 'umd',
-    exports: 'named'
+    exports: 'named',
+    banner: banner
   },
   plugins: [
     eslint({

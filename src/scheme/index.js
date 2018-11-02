@@ -41,7 +41,7 @@ export default {
     }
   },
   contextmenu: {
-    type: 'array',
+    type: 'array|function',
     child: {
       name: 'string',
       html: {
