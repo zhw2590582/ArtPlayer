@@ -639,7 +639,7 @@
 	    key: "init",
 	    value: function init() {
 	      var refs = this.art.refs;
-	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-danmu\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\">\n            <div class=\"artplayer-notice-inner\"></div>\n          </div>\n          <div class=\"artplayer-setting\">\n            <div class=\"artplayer-setting-inner\"></div>\n          </div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
+	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-danmu\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\">\n            <div class=\"artplayer-notice-inner\"></div>\n          </div>\n          <div class=\"artplayer-setting\">\n            <div class=\"artplayer-setting-inner\">\n              <div class=\"artplayer-setting-body\"></div>\n              <div class=\"artplayer-setting-close\">\xD7</div>\n            </div>\n          </div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
 	      refs.$player = refs.$container.querySelector('.artplayer-video-player');
 	      refs.$video = refs.$container.querySelector('.artplayer-video');
 	      refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -656,6 +656,8 @@
 	      refs.$mask = refs.$container.querySelector('.artplayer-mask');
 	      refs.$setting = refs.$container.querySelector('.artplayer-setting');
 	      refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
+	      refs.$settingBody = refs.$container.querySelector('.artplayer-setting-body');
+	      refs.$settingClose = refs.$container.querySelector('.artplayer-setting-close');
 	      refs.$info = refs.$container.querySelector('.artplayer-info');
 	      refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
 	      refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
@@ -687,6 +689,7 @@
 	    'Default': '默认',
 	    'Normal': '正常',
 	    'Switch': '切换',
+	    'Common': '常规',
 	    'Hide setting': '隐藏设置',
 	    'Show setting': '显示设置'
 	  },
@@ -711,6 +714,7 @@
 	    'Default': '默認',
 	    'Normal': '正常',
 	    'Switch': '切換',
+	    'Common': '常規',
 	    'Hide setting': '隱藏設置',
 	    'Show setting': '顯示設置'
 	  }
@@ -1959,66 +1963,79 @@
 	      var _this2 = this;
 
 	      this.add(new Progress({
+	        name: 'progress',
 	        disable: false,
 	        position: 'top',
 	        index: 10
 	      }));
 	      this.add(new Thumbnails({
+	        name: 'thumbnails',
 	        disable: !this.art.option.thumbnails.url,
 	        position: 'top',
 	        index: 20
 	      }));
 	      this.add(new PlayAndPause({
+	        name: 'playAndPause',
 	        disable: false,
 	        position: 'left',
 	        index: 10
 	      }));
 	      this.add(new Volume({
+	        name: 'volume',
 	        disable: false,
 	        position: 'left',
 	        index: 20
 	      }));
 	      this.add(new Time({
+	        name: 'time',
 	        disable: false,
 	        position: 'left',
 	        index: 30
 	      }));
 	      this.add(new Quality({
+	        name: 'quality',
 	        disable: this.art.option.quality.length === 0,
 	        position: 'right',
 	        index: 10
 	      }));
 	      this.add(new Danmu({
+	        name: 'danmu',
 	        disable: false,
 	        position: 'right',
 	        index: 20
 	      }));
 	      this.add(new Screenshot({
+	        name: 'screenshot',
 	        disable: !this.art.option.screenshot,
 	        position: 'right',
 	        index: 30
 	      }));
 	      this.add(new Subtitle({
+	        name: 'subtitle',
 	        disable: !this.art.option.subtitle.url,
 	        position: 'right',
 	        index: 40
 	      }));
 	      this.add(new Setting({
+	        name: 'setting',
 	        disable: !this.art.option.setting,
 	        position: 'right',
 	        index: 50
 	      }));
 	      this.add(new Pip({
+	        name: 'pip',
 	        disable: !this.art.option.pip,
 	        position: 'right',
 	        index: 60
 	      }));
 	      this.add(new FullscreenWeb({
+	        name: 'fullscreenWeb',
 	        disable: !this.art.option.fullscreenWeb,
 	        position: 'right',
 	        index: 70
 	      }));
 	      this.add(new Fullscreen({
+	        name: 'fullscreen',
 	        disable: !this.art.option.fullscreen,
 	        position: 'right',
 	        index: 80
@@ -2034,10 +2051,10 @@
 
 	      if (option && !option.disable) {
 	        id++;
-	        var name = control.constructor.name.toLowerCase() || "control".concat(id);
+	        var name = option.name || control.constructor.name.toLowerCase() || "control".concat(id);
 	        var $control = document.createElement('div');
 	        $control.setAttribute('class', "art-control art-control-".concat(name));
-	        $control.setAttribute('data-control-index', String(option.index) || id);
+	        $control.dataset.controlIndex = option.index || id;
 	        option.$control = $control;
 	        this.commonMethod(control);
 	        (this.$map[option.position] || (this.$map[option.position] = [])).push($control);
@@ -2060,15 +2077,15 @@
 	        }).forEach(function ($control) {
 	          switch (key) {
 	            case 'top':
-	              $progress.appendChild($control);
+	              append($progress, $control);
 	              break;
 
 	            case 'left':
-	              $controlsLeft.appendChild($control);
+	              append($controlsLeft, $control);
 	              break;
 
 	            case 'right':
-	              $controlsRight.appendChild($control);
+	              append($controlsRight, $control);
 	              break;
 
 	            default:
@@ -2942,37 +2959,105 @@
 	  return Mask;
 	}();
 
+	var Common =
+	/*#__PURE__*/
+	function () {
+	  function Common(option) {
+	    classCallCheck(this, Common);
+
+	    this.option = option;
+	  }
+
+	  createClass(Common, [{
+	    key: "apply",
+	    value: function apply(art) {
+	      this.art = art;
+	      var $setting = this.option.$setting;
+	      this.$header = $setting.querySelector('.art-setting-header');
+	      this.$body = $setting.querySelector('.art-setting-body');
+	      append(this.$body, '———— 先占坑，暂无设置 ————');
+	    }
+	  }]);
+
+	  return Common;
+	}();
+
+	var id$3 = 0;
+
 	var Setting$1 =
 	/*#__PURE__*/
 	function () {
 	  function Setting(art) {
+	    var _this = this;
+
 	    classCallCheck(this, Setting);
 
 	    this.art = art;
 	    this.isOpen = false;
-	    this.init();
+	    this.$settings = [];
+	    this.art.on('firstCanplay', function () {
+	      _this.init();
+
+	      _this.mount();
+	    });
 	  }
 
 	  createClass(Setting, [{
 	    key: "init",
-	    value: function init() {//
+	    value: function init() {
+	      var _this2 = this;
+
+	      var _this$art = this.art,
+	          $settingClose = _this$art.refs.$settingClose,
+	          proxy = _this$art.events.proxy;
+	      proxy($settingClose, 'click', function () {
+	        _this2.hide();
+	      });
+	      this.add(new Common({
+	        name: 'common',
+	        title: 'Common',
+	        disable: false,
+	        index: 10
+	      }));
 	    }
 	  }, {
 	    key: "add",
-	    value: function add() {//
+	    value: function add(setting) {
+	      var option = setting.option;
+
+	      if (option && !option.disable) {
+	        id$3++;
+	        var name = option.name || setting.constructor.name.toLowerCase() || "setting".concat(id$3);
+	        var title = option.title || name;
+	        var $setting = document.createElement('div');
+	        $setting.setAttribute('class', "art-setting art-setting-".concat(name));
+	        $setting.dataset.settingIndex = option.index || id$3;
+	        append($setting, "<div class=\"art-setting-header\">".concat(this.art.i18n.get(title), "</div>"));
+	        append($setting, '<div class="art-setting-body"></div>');
+	        option.$setting = $setting;
+	        this.$settings.push($setting);
+	        setting.apply && setting.apply(this.art);
+	        this[name] = setting;
+	      }
 	    }
 	  }, {
-	    key: "switch",
-	    value: function _switch(name) {
-	      console.log(name);
+	    key: "mount",
+	    value: function mount() {
+	      var _this3 = this;
+
+	      this.$settings.sort(function (a, b) {
+	        return Number(a.dataset.settingIndex) - Number(b.dataset.settingIndex);
+	      }).forEach(function ($setting) {
+	        append(_this3.art.refs.$settingBody, $setting);
+	      });
 	    }
 	  }, {
 	    key: "show",
 	    value: function show() {
-	      var _this$art = this.art,
-	          $setting = _this$art.refs.$setting,
-	          i18n = _this$art.i18n,
-	          notice = _this$art.notice;
+	      var _this$art2 = this.art,
+	          $setting = _this$art2.refs.$setting,
+	          i18n = _this$art2.i18n,
+	          notice = _this$art2.notice;
 	      setStyle($setting, 'display', 'flex');
 	      this.isOpen = true;
 	      notice.show(i18n.get('Show setting'));
@@ -2981,10 +3066,10 @@
 	  }, {
 	    key: "hide",
 	    value: function hide() {
-	      var _this$art2 = this.art,
-	          $setting = _this$art2.refs.$setting,
-	          i18n = _this$art2.i18n,
-	          notice = _this$art2.notice;
+	      var _this$art3 = this.art,
+	          $setting = _this$art3.refs.$setting,
+	          i18n = _this$art3.i18n,
+	          notice = _this$art3.notice;
 	      setStyle($setting, 'display', 'none');
 	      this.isOpen = false;
 	      notice.show(i18n.get('Hide setting'));
@@ -2995,7 +3080,7 @@
 	  return Setting;
 	}();
 
-	var id$3 = 0;
+	var id$4 = 0;
 	var instances = [];
 
 	var Artplayer =
@@ -3051,7 +3136,7 @@
 	      this.hotkey = new Hotkey(this);
 	      this.mask = new Mask(this);
 	      this.setting = new Setting$1(this);
-	      this.id = id$3++;
+	      this.id = id$4++;
 	      instances.push(this);
 	      return this;
 	    }

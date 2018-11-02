@@ -1,7 +1,6 @@
 .artplayer-video-player {
     .artplayer-setting {
         display: none;
-        font-size: 14px;
         position: absolute;
         z-index: 90;
         left: 0;
@@ -12,13 +11,44 @@
         justify-content: center;
         pointer-events: none;
         .artplayer-setting-inner {
+            position: relative;
             width: 350px;
             height: 250px;
-            padding: 10px;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.6);
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 3px;
             pointer-events: all;
+            overflow: hidden;
+            .artplayer-setting-body {
+                overflow-x: hidden;
+                overflow-y: auto;
+                width: 365px;
+                height: 100%;
+                .art-setting {
+                    border-bottom: 1px solid rgba(255,255,255,.1);
+                    padding: 12px 35px 12px 20px;
+                    .art-setting-header {
+                        color: #fff;
+                        margin-bottom: 10px;
+                    }
+                    .art-setting-body {
+                        color: rgba(255, 255, 255, 0.8);
+                    }
+                }
+            }
+            .artplayer-setting-close {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                color: rgba(255, 255, 255, .8);
+                background: rgba(0, 0, 0, .5);
+                font-size: 20px;
+                cursor: pointer;
+            }
         }
     }
 }

@@ -25,7 +25,10 @@ export default class Template {
             <div class="artplayer-notice-inner"></div>
           </div>
           <div class="artplayer-setting">
-            <div class="artplayer-setting-inner"></div>
+            <div class="artplayer-setting-inner">
+              <div class="artplayer-setting-body"></div>
+              <div class="artplayer-setting-close">×</div>
+            </div>
           </div>
           <div class="artplayer-info">
             <div class="artplayer-info-panel"></div>
@@ -49,6 +52,8 @@ export default class Template {
     refs.$mask = refs.$container.querySelector('.artplayer-mask');
     refs.$setting = refs.$container.querySelector('.artplayer-setting');
     refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
+    refs.$settingBody = refs.$container.querySelector('.artplayer-setting-body');
+    refs.$settingClose = refs.$container.querySelector('.artplayer-setting-close');
     refs.$info = refs.$container.querySelector('.artplayer-info');
     refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
     refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
