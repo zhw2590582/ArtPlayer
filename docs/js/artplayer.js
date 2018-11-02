@@ -669,8 +669,8 @@
 	    'Reconnect': '重新连接',
 	    'Hide subtitle': '隐藏字幕',
 	    'Show subtitle': '显示字幕',
-	    'Hide danmu': '隐藏彈幕',
-	    'Show danmu': '显示彈幕',
+	    'Hide danmu': '隐藏弹幕',
+	    'Show danmu': '显示弹幕',
 	    'Screenshot': '截图',
 	    'Play speed': '播放速度',
 	    'Aspect ratio': '画面比例',
@@ -1138,9 +1138,9 @@
 
 	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
 
-	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" style=\"width: 100%; height: 100%\">\n    <path d=\"M 3 6 L 3 26 L 12.585938 26 L 16 29.414063 L 19.414063 26 L 29 26 L 29 6 Z M 5 8 L 27 8 L 27 24 L 18.585938 24 L 16 26.585938 L 13.414063 24 L 5 24 Z M 9 11 L 9 13 L 23 13 L 23 11 Z M 9 15 L 9 17 L 23 17 L 23 15 Z M 9 19 L 9 21 L 19 21 L 19 19 Z \"/>\n</svg>\n";
+	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
 
-	var danmuClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" style=\"width: 100%; height: 100%; opacity: .5\">\n    <path d=\"M 3 6 L 3 26 L 12.585938 26 L 16 29.414063 L 19.414063 26 L 29 26 L 29 6 Z M 5 8 L 27 8 L 27 24 L 18.585938 24 L 16 26.585938 L 13.414063 24 L 5 24 Z M 9 11 L 9 13 L 23 13 L 23 11 Z M 9 15 L 9 17 L 23 17 L 23 15 Z M 9 19 L 9 21 L 19 21 L 19 19 Z \"/>\n</svg>\n";
+	var danmuClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%; opacity: .5\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
 
 	var icons = {
 	  loading: loading,
@@ -1196,11 +1196,11 @@
 	      proxy(this.$danmu, 'click', function () {
 	        danmu.hide();
 	        setStyle(_this.$danmu, 'display', 'none');
-	        setStyle(_this.$danmuClose, 'display', 'block');
+	        setStyle(_this.$danmuClose, 'display', 'flex');
 	      });
 	      proxy(this.$danmuClose, 'click', function () {
 	        danmu.show();
-	        setStyle(_this.$danmu, 'display', 'block');
+	        setStyle(_this.$danmu, 'display', 'flex');
 	        setStyle(_this.$danmuClose, 'display', 'none');
 	      });
 	    }
@@ -1507,11 +1507,11 @@
 	      proxy(this.$subtitle, 'click', function () {
 	        subtitle.hide();
 	        setStyle(_this.$subtitle, 'display', 'none');
-	        setStyle(_this.$subtitleClose, 'display', 'block');
+	        setStyle(_this.$subtitleClose, 'display', 'flex');
 	      });
 	      proxy(this.$subtitleClose, 'click', function () {
 	        subtitle.show();
-	        setStyle(_this.$subtitle, 'display', 'block');
+	        setStyle(_this.$subtitle, 'display', 'flex');
 	        setStyle(_this.$subtitleClose, 'display', 'none');
 	      });
 	    }
@@ -2087,6 +2087,84 @@
 	  return Controls;
 	}();
 
+	function playbackRate(art) {
+	  var option = art.option,
+	      i18n = art.i18n,
+	      player = art.player,
+	      contextmenu = art.contextmenu;
+	  return {
+	    disable: !option.playbackRate,
+	    name: 'playbackRate',
+	    html: "\n      ".concat(i18n.get('Play speed'), ":\n      <span data-rate=\"0.5\">0.5</span>\n      <span data-rate=\"0.75\">0.75</span>\n      <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n      <span data-rate=\"1.25\">1.25</span>\n      <span data-rate=\"1.5\">1.5</span>\n      <span data-rate=\"2.0\">2.0</span>\n    "),
+	    click: function click(event) {
+	      var target = event.target;
+	      var rate = target.dataset.rate;
+
+	      if (rate) {
+	        player.playbackRate(Number(rate));
+	        sublings(target).forEach(function (item) {
+	          return item.classList.remove('current');
+	        });
+	        target.classList.add('current');
+	        contextmenu.hide();
+	      }
+	    }
+	  };
+	}
+
+	function aspectRatio(art) {
+	  var option = art.option,
+	      i18n = art.i18n,
+	      player = art.player,
+	      contextmenu = art.contextmenu;
+	  return {
+	    disable: !option.aspectRatio,
+	    name: 'aspectRatio',
+	    html: "\n      ".concat(i18n.get('Aspect ratio'), ":\n      <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n      <span data-ratio=\"4:3\">4:3</span>\n      <span data-ratio=\"16:9\">16:9</span>\n    "),
+	    click: function click(event) {
+	      var target = event.target;
+	      var ratio = target.dataset.ratio;
+
+	      if (ratio) {
+	        player.aspectRatio(ratio.split(':'));
+	        sublings(target).forEach(function (item) {
+	          return item.classList.remove('current');
+	        });
+	        target.classList.add('current');
+	        contextmenu.hide();
+	      }
+	    }
+	  };
+	}
+
+	function info(art) {
+	  return {
+	    name: 'info',
+	    html: art.i18n.get('Video info'),
+	    click: function click() {
+	      art.info.show();
+	      art.contextmenu.hide();
+	    }
+	  };
+	}
+
+	var version = {
+	  disable: false,
+	  name: 'version',
+	  html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.0</a>'
+	};
+
+	function close(art) {
+	  return {
+	    disable: false,
+	    name: 'close',
+	    html: art.i18n.get('Close'),
+	    click: function click() {
+	      art.contextmenu.hide();
+	    }
+	  };
+	}
+
 	var id$1 = 0;
 
 	var Contextmenu =
@@ -2106,67 +2184,9 @@
 
 	      var _this$art = this.art,
 	          option = _this$art.option,
-	          player = _this$art.player,
-	          i18n = _this$art.i18n,
 	          refs = _this$art.refs,
 	          proxy = _this$art.events.proxy;
-	      option.contextmenu.push({
-	        disable: !option.playbackRate,
-	        name: 'playbackRate',
-	        html: "\n          ".concat(i18n.get('Play speed'), ":\n          <span data-rate=\"0.5\">0.5</span>\n          <span data-rate=\"0.75\">0.75</span>\n          <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n          <span data-rate=\"1.25\">1.25</span>\n          <span data-rate=\"1.5\">1.5</span>\n          <span data-rate=\"2.0\">2.0</span>\n        "),
-	        click: function click(art, event) {
-	          var target = event.target;
-	          var rate = target.dataset.rate;
-
-	          if (rate) {
-	            player.playbackRate(Number(rate));
-	            sublings(target).forEach(function (item) {
-	              return item.classList.remove('current');
-	            });
-	            target.classList.add('current');
-
-	            _this.hide();
-	          }
-	        }
-	      }, {
-	        disable: !option.aspectRatio,
-	        name: 'aspectRatio',
-	        html: "\n          ".concat(i18n.get('Aspect ratio'), ":\n          <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n          <span data-ratio=\"4:3\">4:3</span>\n          <span data-ratio=\"16:9\">16:9</span>\n        "),
-	        click: function click(art, event) {
-	          var target = event.target;
-	          var ratio = target.dataset.ratio;
-
-	          if (ratio) {
-	            player.aspectRatio(ratio.split(':'));
-	            sublings(target).forEach(function (item) {
-	              return item.classList.remove('current');
-	            });
-	            target.classList.add('current');
-
-	            _this.hide();
-	          }
-	        }
-	      }, {
-	        disable: false,
-	        name: 'info',
-	        html: i18n.get('Video info'),
-	        click: function click() {
-	          _this.art.info.show();
-
-	          _this.hide();
-	        }
-	      }, {
-	        disable: false,
-	        name: 'version',
-	        html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.0</a>'
-	      }, {
-	        disable: false,
-	        name: 'close',
-	        html: i18n.get('Close'),
-	        click: function click() {
-	          _this.hide();
-	        }
-	      });
+	      option.contextmenu.push(playbackRate, aspectRatio, info, version, close);
 	      proxy(refs.$player, 'contextmenu', function (event) {
 	        event.preventDefault();
 	        _this.art.isFocus = true;
@@ -2200,22 +2220,23 @@
 	        return !item.disable;
 	      }).forEach(function (item) {
 	        id$1++;
+	        var menu = typeof item === 'function' ? item(_this2.art) : item;
 	        var $menu = document.createElement('div');
 	        $menu.setAttribute('data-art-menu-id', id$1);
-	        $menu.setAttribute('class', "art-menu art-menu-".concat(item.name || id$1));
-	        append($menu, item.html);
-	        setStyles($menu, item.style || {});
+	        $menu.setAttribute('class', "art-menu art-menu-".concat(menu.name || id$1));
+	        append($menu, menu.html);
+	        setStyles($menu, menu.style || {});
 
-	        if (item.click) {
+	        if (menu.click) {
 	          proxy($menu, 'click', function (event) {
 	            event.preventDefault();
-	            item.click(_this2.art, event);
+	            menu.click(event);
 
 	            _this2.art.emit('contextmenu:click', $menu);
 	          });
 	        }
 
-	        _this2["$".concat(item.name || id$1)] = append(refs.$contextmenu, $menu);
+	        _this2["$".concat(menu.name || id$1)] = append(refs.$contextmenu, $menu);
 	      });
 	      append(refs.$player, refs.$contextmenu);
 	    }
@@ -2292,15 +2313,23 @@
 	  }, {
 	    key: "show",
 	    value: function show() {
-	      var $danmu = this.art.refs.$danmu;
+	      var _this$art = this.art,
+	          $danmu = _this$art.refs.$danmu,
+	          i18n = _this$art.i18n,
+	          notice = _this$art.notice;
 	      setStyle($danmu, 'display', 'block');
+	      notice.show(i18n.get('Show danmu'));
 	      this.art.emit('danmu:show', $danmu);
 	    }
 	  }, {
 	    key: "hide",
 	    value: function hide() {
-	      var $danmu = this.art.refs.$danmu;
+	      var _this$art2 = this.art,
+	          $danmu = _this$art2.refs.$danmu,
+	          i18n = _this$art2.i18n,
+	          notice = _this$art2.notice;
 	      setStyle($danmu, 'display', 'none');
+	      notice.show(i18n.get('Hide danmu'));
 	      this.art.emit('danmu:hide', $danmu);
 	    }
 	  }]);
@@ -2523,15 +2552,23 @@
 	  }, {
 	    key: "show",
 	    value: function show() {
-	      var $subtitle = this.art.refs.$subtitle;
+	      var _this$art2 = this.art,
+	          $subtitle = _this$art2.refs.$subtitle,
+	          i18n = _this$art2.i18n,
+	          notice = _this$art2.notice;
 	      setStyle($subtitle, 'display', 'block');
+	      notice.show(i18n.get('Show subtitle'));
 	      this.art.emit('subtitle:show', $subtitle);
 	    }
 	  }, {
 	    key: "hide",
 	    value: function hide() {
-	      var $subtitle = this.art.refs.$subtitle;
+	      var _this$art3 = this.art,
+	          $subtitle = _this$art3.refs.$subtitle,
+	          i18n = _this$art3.i18n,
+	          notice = _this$art3.notice;
 	      setStyle($subtitle, 'display', 'none');
+	      notice.show(i18n.get('Hide subtitle'));
 	      this.art.emit('subtitle:hide', $subtitle);
 	    }
 	  }, {

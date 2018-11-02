@@ -17,12 +17,12 @@ export default class Subtitle {
     proxy(this.$subtitle, 'click', () => {
       subtitle.hide();
       setStyle(this.$subtitle, 'display', 'none');
-      setStyle(this.$subtitleClose, 'display', 'block');
+      setStyle(this.$subtitleClose, 'display', 'flex');
     });
 
     proxy(this.$subtitleClose, 'click', () => {
       subtitle.show();
-      setStyle(this.$subtitle, 'display', 'block');
+      setStyle(this.$subtitle, 'display', 'flex');
       setStyle(this.$subtitleClose, 'display', 'none');
     });
   }

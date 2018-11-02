@@ -90,14 +90,16 @@ export default class Subtitle {
   }
 
   show() {
-    const { $subtitle } = this.art.refs;
+    const { refs: { $subtitle }, i18n, notice } = this.art;
     setStyle($subtitle, 'display', 'block');
+    notice.show(i18n.get('Show subtitle'));
     this.art.emit('subtitle:show', $subtitle);
   }
 
   hide() {
-    const { $subtitle } = this.art.refs;
+    const { refs: { $subtitle }, i18n, notice } = this.art;
     setStyle($subtitle, 'display', 'none');
+    notice.show(i18n.get('Hide subtitle'));
     this.art.emit('subtitle:hide', $subtitle);
   }
 

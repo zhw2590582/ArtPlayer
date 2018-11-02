@@ -17,12 +17,12 @@ export default class Danmu {
     proxy(this.$danmu, 'click', () => {
       danmu.hide();
       setStyle(this.$danmu, 'display', 'none');
-      setStyle(this.$danmuClose, 'display', 'block');
+      setStyle(this.$danmuClose, 'display', 'flex');
     });
 
     proxy(this.$danmuClose, 'click', () => {
       danmu.show();
-      setStyle(this.$danmu, 'display', 'block');
+      setStyle(this.$danmu, 'display', 'flex');
       setStyle(this.$danmuClose, 'display', 'none');
     });
   }

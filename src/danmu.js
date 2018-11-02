@@ -11,14 +11,16 @@ export default class Danmu {
   }
 
   show() {
-    const { $danmu } = this.art.refs;
+    const { refs: { $danmu }, i18n, notice } = this.art;
     setStyle($danmu, 'display', 'block');
+    notice.show(i18n.get('Show danmu'));
     this.art.emit('danmu:show', $danmu);
   }
 
   hide() {
-    const { $danmu } = this.art.refs;
+    const { refs: { $danmu }, i18n, notice } = this.art;
     setStyle($danmu, 'display', 'none');
+    notice.show(i18n.get('Hide danmu'));
     this.art.emit('danmu:hide', $danmu);
   }
 }
