@@ -7,10 +7,10 @@ export default class Setting {
     this.art = art;
     this.isOpen = false;
     this.$settings = [];
-    this.art.on('firstCanplay', () => {
+    if (art.option.setting) {
       this.init();
       this.mount();
-    });
+    }
   }
 
   init() {

@@ -67,7 +67,7 @@ class Artplayer extends Emitter {
       quality: [],
       loading: '',
       theme: '#f00',
-      setting: true,
+      setting: false,
       hotkey: true,
       pip: true,
       fullscreen: true,

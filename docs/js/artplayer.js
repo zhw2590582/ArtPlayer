@@ -2988,30 +2988,28 @@
 	/*#__PURE__*/
 	function () {
 	  function Setting(art) {
-	    var _this = this;
-
 	    classCallCheck(this, Setting);
 
 	    this.art = art;
 	    this.isOpen = false;
 	    this.$settings = [];
-	    this.art.on('firstCanplay', function () {
-	      _this.init();
 
-	      _this.mount();
-	    });
+	    if (art.option.setting) {
+	      this.init();
+	      this.mount();
+	    }
 	  }
 
 	  createClass(Setting, [{
 	    key: "init",
 	    value: function init() {
-	      var _this2 = this;
+	      var _this = this;
 
 	      var _this$art = this.art,
 	          $settingClose = _this$art.refs.$settingClose,
 	          proxy = _this$art.events.proxy;
 	      proxy($settingClose, 'click', function () {
-	        _this2.hide();
+	        _this.hide();
 	      });
 	      this.add(new Common({
 	        name: 'common',
@@ -3043,12 +3041,12 @@
 	  }, {
 	    key: "mount",
 	    value: function mount() {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      this.$settings.sort(function (a, b) {
 	        return Number(a.dataset.settingIndex) - Number(b.dataset.settingIndex);
 	      }).forEach(function ($setting) {
-	        append(_this3.art.refs.$settingBody, $setting);
+	        append(_this2.art.refs.$settingBody, $setting);
 	      });
 	    }
 	  }, {
@@ -3207,7 +3205,7 @@
 	        quality: [],
 	        loading: '',
 	        theme: '#f00',
-	        setting: true,
+	        setting: false,
 	        hotkey: true,
 	        pip: true,
 	        fullscreen: true,
