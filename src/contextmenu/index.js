@@ -46,11 +46,11 @@ export default class Contextmenu {
     refs.$contextmenu.classList.add('artplayer-contextmenu');
     option.contextmenu
       .filter(item => !item.disable)
-      .forEach(item => {
+      .map(item => {
         id++;
         const menu = typeof item === 'function' ? item(this.art) : item;
         const $menu = document.createElement('div');
-        $menu.setAttribute('data-art-menu-id', id);
+        $menu.dataset.artMenuId = menu.index || id;
         $menu.setAttribute('class', `art-menu art-menu-${menu.name || id}`);
         append($menu, menu.html);
         setStyles($menu, menu.style || {});
@@ -61,7 +61,14 @@ export default class Contextmenu {
             this.art.emit('contextmenu:click', $menu);
           });
         }
-        this[`$${menu.name || id}`] = append(refs.$contextmenu, $menu);
+        this[`$${menu.name || id}`] = $menu;
+        return $menu;
+      })
+      .sort(
+        (a, b) =>
+          Number(a.dataset.artMenuId) - Number(b.dataset.artMenuId)
+      ).forEach($menu => {
+        append(refs.$contextmenu, $menu);
       });
     append(refs.$player, refs.$contextmenu);
   }

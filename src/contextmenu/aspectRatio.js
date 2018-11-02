@@ -5,6 +5,7 @@ export default function aspectRatio(art) {
   return {
     disable: !option.aspectRatio,
     name: 'aspectRatio',
+    index: 20,
     html: `
       ${i18n.get('Aspect ratio')}:
       <span data-ratio="default" class="default current">${i18n.get('Default')}</span>

@@ -5,6 +5,7 @@ export default function playbackRate(art) {
   return {
     disable: !option.playbackRate,
     name: 'playbackRate',
+    index: 10,
     html: `
       ${i18n.get('Play speed')}:
       <span data-rate="0.5">0.5</span>
