@@ -7,23 +7,20 @@ export default class Subtitle {
   }
 
   apply(art) {
-    const { events: { proxy }, subtitle, i18n } = art;
-    this.$subtitle = append(this.option.$control, icons.subtitle);
-    this.$subtitleClose = append(this.option.$control, icons.subtitleClose);
+    const { $control } = this.option;
+    const { events: { proxy }, i18n, subtitle } = art;
+    this.$subtitle = append($control, icons.subtitle);
     tooltip(this.$subtitle, i18n.get('Hide subtitle'));
-    tooltip(this.$subtitleClose, i18n.get('Show subtitle'));
-    setStyle(this.$subtitleClose, 'display', 'none');
-
-    proxy(this.$subtitle, 'click', () => {
-      subtitle.hide();
-      setStyle(this.$subtitle, 'display', 'none');
-      setStyle(this.$subtitleClose, 'display', 'flex');
-    });
-
-    proxy(this.$subtitleClose, 'click', () => {
-      subtitle.show();
-      setStyle(this.$subtitle, 'display', 'flex');
-      setStyle(this.$subtitleClose, 'display', 'none');
+    proxy($control, 'click', () => {
+      if (subtitle.isOpen) {
+        subtitle.hide();
+        setStyle(this.$subtitle, 'opacity', '1');
+        tooltip(this.$subtitle, i18n.get('Show subtitle'));
+      } else {
+        subtitle.show();
+        setStyle(this.$subtitle, 'opacity', '0.8');
+        tooltip(this.$subtitle, i18n.get('Hide subtitle'));
+      }
     });
   }
 }

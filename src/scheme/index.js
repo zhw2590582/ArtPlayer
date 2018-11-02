@@ -41,8 +41,9 @@ export default {
     }
   },
   contextmenu: {
-    type: 'array|function',
+    type: 'array',
     child: {
+      type: 'object|function',
       name: 'string',
       html: {
         validator: validElement

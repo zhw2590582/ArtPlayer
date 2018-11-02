@@ -129,6 +129,7 @@
             height: 36px;
     
             .art-control {
+                opacity: .9;
                 float: left;
                 font-size: 12px;
                 height: 36px;
@@ -141,6 +142,9 @@
                     height: 36px;
                     width: 36px;
                     padding: 7px;
+                }
+                &:hover {
+                    opacity: 1;
                 }
             }
     

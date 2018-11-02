@@ -57,7 +57,7 @@ export default class Contextmenu {
         if (menu.click) {
           proxy($menu, 'click', event => {
             event.preventDefault();
-            menu.click(event);
+            menu.click.call(this, event);
             this.art.emit('contextmenu:click', $menu);
           });
         }
@@ -67,8 +67,8 @@ export default class Contextmenu {
       .sort(
         (a, b) =>
           Number(a.dataset.artMenuId) - Number(b.dataset.artMenuId)
-      ).forEach($menu => {
-        append(refs.$contextmenu, $menu);
+      ).forEach(item => {
+        append(refs.$contextmenu, item);
       });
     append(refs.$player, refs.$contextmenu);
   }

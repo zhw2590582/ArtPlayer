@@ -19,6 +19,7 @@ import Layers from './layers';
 import Loading from './loading';
 import Notice from './notice';
 import Mask from './mask';
+import Setting from './setting';
 
 let id = 0;
 export const instances = [];
@@ -66,6 +67,7 @@ class Artplayer extends Emitter {
       quality: [],
       loading: '',
       theme: '#f00',
+      setting: true,
       hotkey: true,
       pip: true,
       fullscreen: true,
@@ -125,6 +127,7 @@ class Artplayer extends Emitter {
     this.loading = new Loading(this);
     this.hotkey = new Hotkey(this);
     this.mask = new Mask(this);
+    this.setting = new Setting(this);
 
     this.id = id++;
     instances.push(this);

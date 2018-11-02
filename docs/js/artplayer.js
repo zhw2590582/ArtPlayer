@@ -469,8 +469,9 @@
 	    }
 	  },
 	  contextmenu: {
-	    type: 'array|function',
+	    type: 'array',
 	    child: {
+	      type: 'object|function',
 	      name: 'string',
 	      html: {
 	        validator: validElement
@@ -638,7 +639,7 @@
 	    key: "init",
 	    value: function init() {
 	      var refs = this.art.refs;
-	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-danmu\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\">\n            <div class=\"artplayer-notice-inner\"></div>\n          </div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
+	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-danmu\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\">\n            <div class=\"artplayer-notice-inner\"></div>\n          </div>\n          <div class=\"artplayer-setting\">\n            <div class=\"artplayer-setting-inner\"></div>\n          </div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
 	      refs.$player = refs.$container.querySelector('.artplayer-video-player');
 	      refs.$video = refs.$container.querySelector('.artplayer-video');
 	      refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -653,6 +654,8 @@
 	      refs.$notice = refs.$container.querySelector('.artplayer-notice');
 	      refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
 	      refs.$mask = refs.$container.querySelector('.artplayer-mask');
+	      refs.$setting = refs.$container.querySelector('.artplayer-setting');
+	      refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
 	      refs.$info = refs.$container.querySelector('.artplayer-info');
 	      refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
 	      refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
@@ -683,7 +686,9 @@
 	    'Aspect ratio': '画面比例',
 	    'Default': '默认',
 	    'Normal': '正常',
-	    'Switch': '切换'
+	    'Switch': '切换',
+	    'Hide setting': '隐藏设置',
+	    'Show setting': '显示设置'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -705,7 +710,9 @@
 	    'Aspect ratio': '畫面比例',
 	    'Default': '默認',
 	    'Normal': '正常',
-	    'Switch': '切換'
+	    'Switch': '切換',
+	    'Hide setting': '隱藏設置',
+	    'Show setting': '顯示設置'
 	  }
 	};
 
@@ -1141,13 +1148,11 @@
 
 	var subtitle = "<svg style=\"width: 100%; height: 100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
 
-	var subtitleClose = "<svg style=\"width: 100%; height: 100%; opacity: .5\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
-
 	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
 
 	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
 
-	var danmuClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%; opacity: .5\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
+	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
 	var icons = {
 	  loading: loading,
@@ -1157,10 +1162,9 @@
 	  volume: volume,
 	  volumeClose: volumeClose,
 	  subtitle: subtitle,
-	  subtitleClose: subtitleClose,
 	  screenshot: screenshot,
 	  danmu: danmu,
-	  danmuClose: danmuClose
+	  setting: setting
 	};
 
 	function creatDomFromSvg(map) {
@@ -1192,23 +1196,22 @@
 	    value: function apply(art) {
 	      var _this = this;
 
+	      var $control = this.option.$control;
 	      var proxy = art.events.proxy,
-	          danmu = art.danmu,
-	          i18n = art.i18n;
-	      this.$danmu = append(this.option.$control, icons$1.danmu);
-	      this.$danmuClose = append(this.option.$control, icons$1.danmuClose);
+	          i18n = art.i18n,
+	          danmu = art.danmu;
+	      this.$danmu = append($control, icons$1.danmu);
 	      tooltip(this.$danmu, i18n.get('Hide danmu'));
-	      tooltip(this.$danmuClose, i18n.get('Show danmu'));
-	      setStyle(this.$danmuClose, 'display', 'none');
-	      proxy(this.$danmu, 'click', function () {
-	        danmu.hide();
-	        setStyle(_this.$danmu, 'display', 'none');
-	        setStyle(_this.$danmuClose, 'display', 'flex');
-	      });
-	      proxy(this.$danmuClose, 'click', function () {
-	        danmu.show();
-	        setStyle(_this.$danmu, 'display', 'flex');
-	        setStyle(_this.$danmuClose, 'display', 'none');
+	      proxy($control, 'click', function () {
+	        if (danmu.isOpen) {
+	          danmu.hide();
+	          setStyle(_this.$danmu, 'opacity', '1');
+	          tooltip(_this.$danmu, i18n.get('Show danmu'));
+	        } else {
+	          danmu.show();
+	          setStyle(_this.$danmu, 'opacity', '0.8');
+	          tooltip(_this.$danmu, i18n.get('Hide danmu'));
+	        }
 	      });
 	    }
 	  }]);
@@ -1503,23 +1506,22 @@
 	    value: function apply(art) {
 	      var _this = this;
 
+	      var $control = this.option.$control;
 	      var proxy = art.events.proxy,
-	          subtitle = art.subtitle,
-	          i18n = art.i18n;
-	      this.$subtitle = append(this.option.$control, icons$1.subtitle);
-	      this.$subtitleClose = append(this.option.$control, icons$1.subtitleClose);
+	          i18n = art.i18n,
+	          subtitle = art.subtitle;
+	      this.$subtitle = append($control, icons$1.subtitle);
 	      tooltip(this.$subtitle, i18n.get('Hide subtitle'));
-	      tooltip(this.$subtitleClose, i18n.get('Show subtitle'));
-	      setStyle(this.$subtitleClose, 'display', 'none');
-	      proxy(this.$subtitle, 'click', function () {
-	        subtitle.hide();
-	        setStyle(_this.$subtitle, 'display', 'none');
-	        setStyle(_this.$subtitleClose, 'display', 'flex');
-	      });
-	      proxy(this.$subtitleClose, 'click', function () {
-	        subtitle.show();
-	        setStyle(_this.$subtitle, 'display', 'flex');
-	        setStyle(_this.$subtitleClose, 'display', 'none');
+	      proxy($control, 'click', function () {
+	        if (subtitle.isOpen) {
+	          subtitle.hide();
+	          setStyle(_this.$subtitle, 'opacity', '1');
+	          tooltip(_this.$subtitle, i18n.get('Show subtitle'));
+	        } else {
+	          subtitle.show();
+	          setStyle(_this.$subtitle, 'opacity', '0.8');
+	          tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
+	        }
 	      });
 	    }
 	  }]);
@@ -1700,7 +1702,25 @@
 	  createClass(Setting, [{
 	    key: "apply",
 	    value: function apply(art) {
-	      this.art = art;
+	      var _this = this;
+
+	      var $control = this.option.$control;
+	      var proxy = art.events.proxy,
+	          i18n = art.i18n,
+	          setting = art.setting;
+	      this.$setting = append($control, icons$1.setting);
+	      tooltip(this.$setting, i18n.get('Show setting'));
+	      proxy($control, 'click', function () {
+	        if (setting.isOpen) {
+	          setting.hide();
+	          setStyle(_this.$setting, 'opacity', '1');
+	          tooltip(_this.$setting, i18n.get('Show setting'));
+	        } else {
+	          setting.show();
+	          setStyle(_this.$setting, 'opacity', '0.8');
+	          tooltip(_this.$setting, i18n.get('Hide setting'));
+	        }
+	      });
 	    }
 	  }]);
 
@@ -1963,28 +1983,28 @@
 	        position: 'left',
 	        index: 30
 	      }));
+	      this.add(new Quality({
+	        disable: this.art.option.quality.length === 0,
+	        position: 'right',
+	        index: 10
+	      }));
 	      this.add(new Danmu({
 	        disable: false,
 	        position: 'right',
-	        index: 10
+	        index: 20
 	      }));
 	      this.add(new Screenshot({
 	        disable: !this.art.option.screenshot,
 	        position: 'right',
-	        index: 20
+	        index: 30
 	      }));
 	      this.add(new Subtitle({
 	        disable: !this.art.option.subtitle.url,
 	        position: 'right',
-	        index: 30
-	      }));
-	      this.add(new Quality({
-	        disable: this.art.option.quality.length === 0,
-	        position: 'right',
 	        index: 40
 	      }));
 	      this.add(new Setting({
-	        disable: false,
+	        disable: !this.art.option.setting,
 	        position: 'right',
 	        index: 50
 	      }));
@@ -2243,7 +2263,7 @@
 	        if (menu.click) {
 	          proxy($menu, 'click', function (event) {
 	            event.preventDefault();
-	            menu.click(event);
+	            menu.click.call(_this2, event);
 
 	            _this2.art.emit('contextmenu:click', $menu);
 	          });
@@ -2253,8 +2273,8 @@
 	        return $menu;
 	      }).sort(function (a, b) {
 	        return Number(a.dataset.artMenuId) - Number(b.dataset.artMenuId);
-	      }).forEach(function ($menu) {
-	        append(refs.$contextmenu, $menu);
+	      }).forEach(function (item) {
+	        append(refs.$contextmenu, item);
 	      });
 	      append(refs.$player, refs.$contextmenu);
 	    }
@@ -2321,6 +2341,7 @@
 	    classCallCheck(this, Danmu);
 
 	    this.art = art;
+	    this.isOpen = true;
 	    this.init();
 	  }
 
@@ -2336,6 +2357,7 @@
 	          i18n = _this$art.i18n,
 	          notice = _this$art.notice;
 	      setStyle($danmu, 'display', 'block');
+	      this.isOpen = true;
 	      notice.show(i18n.get('Show danmu'));
 	      this.art.emit('danmu:show', $danmu);
 	    }
@@ -2347,6 +2369,7 @@
 	          i18n = _this$art2.i18n,
 	          notice = _this$art2.notice;
 	      setStyle($danmu, 'display', 'none');
+	      this.isOpen = false;
 	      notice.show(i18n.get('Hide danmu'));
 	      this.art.emit('danmu:hide', $danmu);
 	    }
@@ -2483,6 +2506,7 @@
 	    classCallCheck(this, Subtitle);
 
 	    this.art = art;
+	    this.isOpen = true;
 	    var url = this.art.option.subtitle.url;
 
 	    if (url) {
@@ -2575,6 +2599,7 @@
 	          i18n = _this$art2.i18n,
 	          notice = _this$art2.notice;
 	      setStyle($subtitle, 'display', 'block');
+	      this.isOpen = true;
 	      notice.show(i18n.get('Show subtitle'));
 	      this.art.emit('subtitle:show', $subtitle);
 	    }
@@ -2586,6 +2611,7 @@
 	          i18n = _this$art3.i18n,
 	          notice = _this$art3.notice;
 	      setStyle($subtitle, 'display', 'none');
+	      this.isOpen = false;
 	      notice.show(i18n.get('Hide subtitle'));
 	      this.art.emit('subtitle:hide', $subtitle);
 	    }
@@ -2916,6 +2942,59 @@
 	  return Mask;
 	}();
 
+	var Setting$1 =
+	/*#__PURE__*/
+	function () {
+	  function Setting(art) {
+	    classCallCheck(this, Setting);
+
+	    this.art = art;
+	    this.isOpen = false;
+	    this.init();
+	  }
+
+	  createClass(Setting, [{
+	    key: "init",
+	    value: function init() {//
+	    }
+	  }, {
+	    key: "add",
+	    value: function add() {//
+	    }
+	  }, {
+	    key: "switch",
+	    value: function _switch(name) {
+	      console.log(name);
+	    }
+	  }, {
+	    key: "show",
+	    value: function show() {
+	      var _this$art = this.art,
+	          $setting = _this$art.refs.$setting,
+	          i18n = _this$art.i18n,
+	          notice = _this$art.notice;
+	      setStyle($setting, 'display', 'flex');
+	      this.isOpen = true;
+	      notice.show(i18n.get('Show setting'));
+	      this.art.emit('setting:show', $setting);
+	    }
+	  }, {
+	    key: "hide",
+	    value: function hide() {
+	      var _this$art2 = this.art,
+	          $setting = _this$art2.refs.$setting,
+	          i18n = _this$art2.i18n,
+	          notice = _this$art2.notice;
+	      setStyle($setting, 'display', 'none');
+	      this.isOpen = false;
+	      notice.show(i18n.get('Hide setting'));
+	      this.art.emit('setting:hide', $setting);
+	    }
+	  }]);
+
+	  return Setting;
+	}();
+
 	var id$3 = 0;
 	var instances = [];
 
@@ -2971,6 +3050,7 @@
 	      this.loading = new Loading(this);
 	      this.hotkey = new Hotkey(this);
 	      this.mask = new Mask(this);
+	      this.setting = new Setting$1(this);
 	      this.id = id$3++;
 	      instances.push(this);
 	      return this;
@@ -3042,6 +3122,7 @@
 	        quality: [],
 	        loading: '',
 	        theme: '#f00',
+	        setting: true,
 	        hotkey: true,
 	        pip: true,
 	        fullscreen: true,

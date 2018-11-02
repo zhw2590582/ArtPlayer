@@ -7,23 +7,20 @@ export default class Danmu {
   }
 
   apply(art) {
-    const { events: { proxy }, danmu, i18n } = art;
-    this.$danmu = append(this.option.$control, icons.danmu);
-    this.$danmuClose = append(this.option.$control, icons.danmuClose);
+    const { $control } = this.option;
+    const { events: { proxy }, i18n, danmu } = art;
+    this.$danmu = append($control, icons.danmu);
     tooltip(this.$danmu, i18n.get('Hide danmu'));
-    tooltip(this.$danmuClose, i18n.get('Show danmu'));
-    setStyle(this.$danmuClose, 'display', 'none');
-
-    proxy(this.$danmu, 'click', () => {
-      danmu.hide();
-      setStyle(this.$danmu, 'display', 'none');
-      setStyle(this.$danmuClose, 'display', 'flex');
-    });
-
-    proxy(this.$danmuClose, 'click', () => {
-      danmu.show();
-      setStyle(this.$danmu, 'display', 'flex');
-      setStyle(this.$danmuClose, 'display', 'none');
+    proxy($control, 'click', () => {
+      if (danmu.isOpen) {
+        danmu.hide();
+        setStyle(this.$danmu, 'opacity', '1');
+        tooltip(this.$danmu, i18n.get('Show danmu'));
+      } else {
+        danmu.show();
+        setStyle(this.$danmu, 'opacity', '0.8');
+        tooltip(this.$danmu, i18n.get('Hide danmu'));
+      }
     });
   }
 }

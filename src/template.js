@@ -24,6 +24,9 @@ export default class Template {
           <div class="artplayer-notice">
             <div class="artplayer-notice-inner"></div>
           </div>
+          <div class="artplayer-setting">
+            <div class="artplayer-setting-inner"></div>
+          </div>
           <div class="artplayer-info">
             <div class="artplayer-info-panel"></div>
             <div class="artplayer-info-close">[x]</div>
@@ -44,6 +47,8 @@ export default class Template {
     refs.$notice = refs.$container.querySelector('.artplayer-notice');
     refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
     refs.$mask = refs.$container.querySelector('.artplayer-mask');
+    refs.$setting = refs.$container.querySelector('.artplayer-setting');
+    refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
     refs.$info = refs.$container.querySelector('.artplayer-info');
     refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
     refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');

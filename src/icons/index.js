@@ -5,10 +5,9 @@ import pause from './pause.svg';
 import volume from './volume.svg';
 import volumeClose from './volume-close.svg';
 import subtitle from './subtitle.svg';
-import subtitleClose from './subtitle-close.svg';
 import screenshot from './screenshot.svg';
 import danmu from './danmu.svg';
-import danmuClose from './danmu-close.svg';
+import setting from './setting.svg';
 
 const icons = {
   loading,
@@ -18,10 +17,9 @@ const icons = {
   volume,
   volumeClose,
   subtitle,
-  subtitleClose,
   screenshot,
   danmu,
-  danmuClose
+  setting
 };
 
 function creatDomFromSvg(map) {

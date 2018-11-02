@@ -55,32 +55,32 @@ export default class Controls {
       index: 30
     }));
 
+    this.add(new Quality({
+      disable: this.art.option.quality.length === 0,
+      position: 'right',
+      index: 10
+    }));
+
     this.add(new Danmu({
       disable: false,
       position: 'right',
-      index: 10
+      index: 20
     }));
 
     this.add(new Screenshot({
       disable: !this.art.option.screenshot,
       position: 'right',
-      index: 20
+      index: 30
     }));
 
     this.add(new Subtitle({
       disable: !this.art.option.subtitle.url,
       position: 'right',
-      index: 30
-    }));
-
-    this.add(new Quality({
-      disable: this.art.option.quality.length === 0,
-      position: 'right',
       index: 40
     }));
 
     this.add(new Setting({
-      disable: false,
+      disable: !this.art.option.setting,
       position: 'right',
       index: 50
     }));

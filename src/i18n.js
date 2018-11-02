@@ -19,7 +19,9 @@ let i18nMap = {
     'Aspect ratio': '画面比例',
     'Default': '默认',
     'Normal': '正常',
-    'Switch': '切换'
+    'Switch': '切换',
+    'Hide setting': '隐藏设置',
+    'Show setting': '显示设置'
   },
   'zh-tw': {
     'About author': '關於作者',
@@ -41,7 +43,9 @@ let i18nMap = {
     'Aspect ratio': '畫面比例',
     'Default': '默認',
     'Normal': '正常',
-    'Switch': '切換'
+    'Switch': '切換',
+    'Hide setting': '隱藏設置',
+    'Show setting': '顯示設置'
   }
 };
 

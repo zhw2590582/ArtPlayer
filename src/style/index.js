@@ -8,5 +8,6 @@ import './loading.scss';
 import './bottom.scss';
 import './notice.scss';
 import './contextmenu.scss';
+import './setting.scss';
 import './info.scss';
 import './aspectRatio.scss';

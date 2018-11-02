@@ -3,7 +3,7 @@ import { errorHandle, getExt, setStyles, setStyle } from './utils';
 export default class Subtitle {
   constructor(art) {
     this.art = art;
-
+    this.isOpen = true;
     const { url } = this.art.option.subtitle;
     if (url) {
       this.checkExt(url);
@@ -92,6 +92,7 @@ export default class Subtitle {
   show() {
     const { refs: { $subtitle }, i18n, notice } = this.art;
     setStyle($subtitle, 'display', 'block');
+    this.isOpen = true;
     notice.show(i18n.get('Show subtitle'));
     this.art.emit('subtitle:show', $subtitle);
   }
@@ -99,6 +100,7 @@ export default class Subtitle {
   hide() {
     const { refs: { $subtitle }, i18n, notice } = this.art;
     setStyle($subtitle, 'display', 'none');
+    this.isOpen = false;
     notice.show(i18n.get('Hide subtitle'));
     this.art.emit('subtitle:hide', $subtitle);
   }
