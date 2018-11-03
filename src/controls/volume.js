@@ -7,16 +7,17 @@ export default class Volume {
     this.isDroging = false;
   }
 
-  apply(art) {
+  apply(art, $control) {
     this.art = art;
+    this.$control = $control;
     this.init();
   }
 
   init() {
     const { events: { proxy }, player, i18n } = this.art;
-    this.$volume = append(this.option.$control, icons.volume);
-    this.$volumeClose = append(this.option.$control, icons.volumeClose);
-    this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
+    this.$volume = append(this.$control, icons.volume);
+    this.$volumeClose = append(this.$control, icons.volumeClose);
+    this.$volumePanel = append(this.$control, '<div class="art-volume-panel"></div>');
     this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
     tooltip(this.$volume, i18n.get('Mute'));
     setStyle(this.$volumeClose, 'display', 'none');
@@ -37,7 +38,7 @@ export default class Volume {
       player.volume(getStorage('volume'));
     });
 
-    proxy(this.option.$control, 'mouseenter', () => {
+    proxy(this.$control, 'mouseenter', () => {
       this.$volumePanel.classList.add('art-volume-panel-hover');
 
       // TODO
@@ -46,7 +47,7 @@ export default class Volume {
       }, 200);
     });
 
-    proxy(this.option.$control, 'mouseleave', () => {
+    proxy(this.$control, 'mouseleave', () => {
       this.$volumePanel.classList.remove('art-volume-panel-hover');
     });
 

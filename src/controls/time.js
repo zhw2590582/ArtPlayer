@@ -5,24 +5,20 @@ export default class Time {
     this.option = option;
   }
 
-  apply(art) {
+  apply(art, $control) {
     this.art = art;
-    this.init();
-  }
-
-  init() {
-    this.option.$control.innerHTML = '00:00 / 00:00';
+    $control.innerHTML = '00:00 / 00:00';
 
     this.art.on('video:canplay', () => {
-      this.option.$control.innerHTML = this.getTime();
+      $control.innerHTML = this.getTime();
     });
 
     this.art.on('video:timeupdate', () => {
-      this.option.$control.innerHTML = this.getTime();
+      $control.innerHTML = this.getTime();
     });
 
     this.art.on('video:seeking', () => {
-      this.option.$control.innerHTML = this.getTime();
+      $control.innerHTML = this.getTime();
     });
   }
 

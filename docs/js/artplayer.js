@@ -1154,7 +1154,7 @@
 
 	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
 
-	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
+	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\n</svg>\n";
 
 	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
@@ -1197,10 +1197,9 @@
 
 	  createClass(Danmu, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      var $control = this.option.$control;
 	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
 	          danmu = art.danmu;
@@ -1234,7 +1233,7 @@
 
 	  createClass(Fullscreen, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      this.art = art;
 	    }
 	  }]);
@@ -1253,7 +1252,7 @@
 
 	  createClass(FullscreenWeb, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      this.art = art;
 	    }
 	  }]);
@@ -1272,7 +1271,7 @@
 
 	  createClass(Pip, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      this.art = art;
 	    }
 	  }]);
@@ -1291,14 +1290,14 @@
 
 	  createClass(PlayAndPause, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
 	      var proxy = art.events.proxy,
 	          player = art.player,
 	          i18n = art.i18n;
-	      this.$play = append(this.option.$control, icons$1.play);
-	      this.$pause = append(this.option.$control, icons$1.pause);
+	      this.$play = append($control, icons$1.play);
+	      this.$pause = append($control, icons$1.pause);
 	      tooltip(this.$play, i18n.get('Play'));
 	      tooltip(this.$pause, i18n.get('Pause'));
 	      setStyle(this.$pause, 'display', 'none');
@@ -1337,28 +1336,23 @@
 
 	  createClass(Progress, [{
 	    key: "apply",
-	    value: function apply(art) {
-	      this.art = art;
-	      this.init();
-	    }
-	  }, {
-	    key: "init",
-	    value: function init() {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      var _this$art = this.art,
-	          _this$art$option = _this$art.option,
-	          highlight = _this$art$option.highlight,
-	          theme = _this$art$option.theme,
-	          proxy = _this$art.events.proxy,
-	          $video = _this$art.refs.$video,
-	          player = _this$art.player;
-	      append(this.option.$control, "\n        <div class=\"art-control-progress-inner\">\n          <div class=\"art-progress-loaded\"></div>\n          <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n          <div class=\"art-progress-highlight\"></div>\n          <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n          <div class=\"art-progress-tip art-tip\"></div>\n        </div>\n      "));
-	      this.$loaded = this.option.$control.querySelector('.art-progress-loaded');
-	      this.$played = this.option.$control.querySelector('.art-progress-played');
-	      this.$highlight = this.option.$control.querySelector('.art-progress-highlight');
-	      this.$indicator = this.option.$control.querySelector('.art-progress-indicator');
-	      this.$tip = this.option.$control.querySelector('.art-progress-tip');
+	      this.art = art;
+	      this.$control = $control;
+	      var _art$option = art.option,
+	          highlight = _art$option.highlight,
+	          theme = _art$option.theme,
+	          proxy = art.events.proxy,
+	          $video = art.refs.$video,
+	          player = art.player;
+	      append($control, "\n        <div class=\"art-control-progress-inner\">\n          <div class=\"art-progress-loaded\"></div>\n          <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n          <div class=\"art-progress-highlight\"></div>\n          <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n          <div class=\"art-progress-tip art-tip\"></div>\n        </div>\n      "));
+	      this.$loaded = $control.querySelector('.art-progress-loaded');
+	      this.$played = $control.querySelector('.art-progress-played');
+	      this.$highlight = $control.querySelector('.art-progress-highlight');
+	      this.$indicator = $control.querySelector('.art-progress-indicator');
+	      this.$tip = $control.querySelector('.art-progress-tip');
 	      this.set('loaded', this.getLoaded());
 	      highlight.forEach(function (item) {
 	        var left = Number(item.time) / $video.duration;
@@ -1373,7 +1367,7 @@
 	      this.art.on('video:ended', function () {
 	        _this.set('played', 1);
 	      });
-	      proxy(this.option.$control, 'mousemove', function (event) {
+	      proxy($control, 'mousemove', function (event) {
 	        setStyle(_this.$tip, 'display', 'block');
 
 	        if (event.path.indexOf(_this.$highlight) > -1) {
@@ -1382,10 +1376,10 @@
 	          _this.showTime(event);
 	        }
 	      });
-	      proxy(this.option.$control, 'mouseout', function () {
+	      proxy($control, 'mouseout', function () {
 	        setStyle(_this.$tip, 'display', 'none');
 	      });
-	      proxy(this.option.$control, 'click', function (event) {
+	      proxy($control, 'click', function (event) {
 	        if (event.target !== _this.$indicator) {
 	          var _this$getPosFromEvent = _this.getPosFromEvent(event),
 	              second = _this$getPosFromEvent.second,
@@ -1428,7 +1422,7 @@
 	          text = _event$target$dataset.text,
 	          time = _event$target$dataset.time;
 	      this.$tip.innerHTML = text;
-	      var left = Number(time) / $video.duration * this.option.$control.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
+	      var left = Number(time) / $video.duration * this.$control.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
 	      setStyle(this.$tip, 'left', "".concat(left, "px"));
 	    }
 	  }, {
@@ -1443,8 +1437,8 @@
 
 	      if (width <= tipWidth / 2) {
 	        setStyle(this.$tip, 'left', 0);
-	      } else if (width > this.option.$control.clientWidth - tipWidth / 2) {
-	        setStyle(this.$tip, 'left', "".concat(this.option.$control.clientWidth - tipWidth, "px"));
+	      } else if (width > this.$control.clientWidth - tipWidth / 2) {
+	        setStyle(this.$tip, 'left', "".concat(this.$control.clientWidth - tipWidth, "px"));
 	      } else {
 	        setStyle(this.$tip, 'left', "".concat(width - tipWidth / 2, "px"));
 	      }
@@ -1507,10 +1501,9 @@
 
 	  createClass(Subtitle, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      var $control = this.option.$control;
 	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
 	          subtitle = art.subtitle;
@@ -1544,24 +1537,19 @@
 
 	  createClass(Time, [{
 	    key: "apply",
-	    value: function apply(art) {
-	      this.art = art;
-	      this.init();
-	    }
-	  }, {
-	    key: "init",
-	    value: function init() {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      this.option.$control.innerHTML = '00:00 / 00:00';
+	      this.art = art;
+	      $control.innerHTML = '00:00 / 00:00';
 	      this.art.on('video:canplay', function () {
-	        _this.option.$control.innerHTML = _this.getTime();
+	        $control.innerHTML = _this.getTime();
 	      });
 	      this.art.on('video:timeupdate', function () {
-	        _this.option.$control.innerHTML = _this.getTime();
+	        $control.innerHTML = _this.getTime();
 	      });
 	      this.art.on('video:seeking', function () {
-	        _this.option.$control.innerHTML = _this.getTime();
+	        $control.innerHTML = _this.getTime();
 	      });
 	    }
 	  }, {
@@ -1587,8 +1575,9 @@
 
 	  createClass(Volume, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      this.art = art;
+	      this.$control = $control;
 	      this.init();
 	    }
 	  }, {
@@ -1600,9 +1589,9 @@
 	          proxy = _this$art.events.proxy,
 	          player = _this$art.player,
 	          i18n = _this$art.i18n;
-	      this.$volume = append(this.option.$control, icons$1.volume);
-	      this.$volumeClose = append(this.option.$control, icons$1.volumeClose);
-	      this.$volumePanel = append(this.option.$control, '<div class="art-volume-panel"></div>');
+	      this.$volume = append(this.$control, icons$1.volume);
+	      this.$volumeClose = append(this.$control, icons$1.volumeClose);
+	      this.$volumePanel = append(this.$control, '<div class="art-volume-panel"></div>');
 	      this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
 	      tooltip(this.$volume, i18n.get('Mute'));
 	      setStyle(this.$volumeClose, 'display', 'none');
@@ -1619,7 +1608,7 @@
 	        setStyle(_this.$volumeClose, 'display', 'none');
 	        player.volume(getStorage('volume'));
 	      });
-	      proxy(this.option.$control, 'mouseenter', function () {
+	      proxy(this.$control, 'mouseenter', function () {
 	        _this.$volumePanel.classList.add('art-volume-panel-hover'); // TODO
 
 
@@ -1627,7 +1616,7 @@
 	          _this.setVolumeHandle(player.volume());
 	        }, 200);
 	      });
-	      proxy(this.option.$control, 'mouseleave', function () {
+	      proxy(this.$control, 'mouseleave', function () {
 	        _this.$volumePanel.classList.remove('art-volume-panel-hover');
 	      });
 	      proxy(this.$volumePanel, 'click', function (event) {
@@ -1705,10 +1694,9 @@
 
 	  createClass(Setting, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      var $control = this.option.$control;
 	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
 	          setting = art.setting;
@@ -1744,19 +1732,14 @@
 
 	  createClass(Thumbnails, [{
 	    key: "apply",
-	    value: function apply(art) {
-	      this.art = art;
-	      errorHandle(this.art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
-	      this.init();
-	    }
-	  }, {
-	    key: "init",
-	    value: function init() {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      var _this$art = this.art,
-	          $progress = _this$art.refs.$progress,
-	          proxy = _this$art.events.proxy;
+	      this.art = art;
+	      errorHandle(art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
+	      var $progress = art.refs.$progress,
+	          proxy = art.events.proxy;
+	      this.$control = $control;
 	      proxy($progress, 'mousemove', function (event) {
 	        if (!_this.loading) {
 	          _this.loading = true;
@@ -1767,13 +1750,13 @@
 	        }
 
 	        if (_this.isLoad) {
-	          setStyle(_this.option.$control, 'display', 'block');
+	          setStyle($control, 'display', 'block');
 
 	          _this.showThumbnails(event);
 	        }
 	      });
 	      proxy($progress, 'mouseout', function () {
-	        setStyle(_this.option.$control, 'display', 'none');
+	        setStyle($control, 'display', 'none');
 	      });
 	    }
 	  }, {
@@ -1799,9 +1782,9 @@
 	  }, {
 	    key: "showThumbnails",
 	    value: function showThumbnails(event) {
-	      var _this$art2 = this.art,
-	          $progress = _this$art2.refs.$progress,
-	          controls = _this$art2.controls;
+	      var _this$art = this.art,
+	          $progress = _this$art.refs.$progress,
+	          controls = _this$art.controls;
 
 	      var _controls$progress$ge = controls.progress.getPosFromEvent(event),
 	          posWidth = _controls$progress$ge.width;
@@ -1816,17 +1799,17 @@
 	      var perIndex = Math.ceil(posWidth / perWidth);
 	      var yIndex = Math.ceil(perIndex / column);
 	      var xIndex = perIndex % column || column;
-	      setStyle(this.option.$control, 'backgroundImage', "url(".concat(url, ")"));
-	      setStyle(this.option.$control, 'height', "".concat(height, "px"));
-	      setStyle(this.option.$control, 'width', "".concat(width, "px"));
-	      setStyle(this.option.$control, 'backgroundPosition', "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px"));
+	      setStyle(this.$control, 'backgroundImage', "url(".concat(url, ")"));
+	      setStyle(this.$control, 'height', "".concat(height, "px"));
+	      setStyle(this.$control, 'width', "".concat(width, "px"));
+	      setStyle(this.$control, 'backgroundPosition', "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px"));
 
 	      if (posWidth <= width / 2) {
-	        setStyle(this.option.$control, 'left', 0);
+	        setStyle(this.$control, 'left', 0);
 	      } else if (posWidth > $progress.clientWidth - width / 2) {
-	        setStyle(this.option.$control, 'left', "".concat($progress.clientWidth - width, "px"));
+	        setStyle(this.$control, 'left', "".concat($progress.clientWidth - width, "px"));
 	      } else {
-	        setStyle(this.option.$control, 'left', "".concat(posWidth - width / 2, "px"));
+	        setStyle(this.$control, 'left', "".concat(posWidth - width / 2, "px"));
 	      }
 	    }
 	  }]);
@@ -1845,7 +1828,7 @@
 
 	  createClass(Screenshot, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
 	      this.art = art;
@@ -1853,7 +1836,7 @@
 	          proxy = _this$art.events.proxy,
 	          i18n = _this$art.i18n,
 	          notice = _this$art.notice;
-	      this.$screenshot = append(this.option.$control, icons$1.screenshot);
+	      this.$screenshot = append($control, icons$1.screenshot);
 	      tooltip(this.$screenshot, i18n.get('Screenshot'));
 	      proxy(this.$screenshot, 'click', function () {
 	        try {
@@ -1897,10 +1880,9 @@
 
 	  createClass(Quality, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      var $control = this.option.$control;
 	      var option = art.option,
 	          _art$events = art.events,
 	          proxy = _art$events.proxy,
@@ -2055,10 +2037,9 @@
 	        var $control = document.createElement('div');
 	        $control.setAttribute('class', "art-control art-control-".concat(name));
 	        $control.dataset.controlIndex = option.index || id;
-	        option.$control = $control;
 	        this.commonMethod(control);
 	        (this.$map[option.position] || (this.$map[option.position] = [])).push($control);
-	        control.apply && control.apply(this.art);
+	        control.apply && control.apply(this.art, $control);
 	        this[name] = control;
 	      }
 	    }
@@ -2970,9 +2951,8 @@
 
 	  createClass(Common, [{
 	    key: "apply",
-	    value: function apply(art) {
+	    value: function apply(art, $setting) {
 	      this.art = art;
-	      var $setting = this.option.$setting;
 	      this.$header = $setting.querySelector('.art-setting-header');
 	      this.$body = $setting.querySelector('.art-setting-body');
 	      append(this.$body, '———— 先占坑，暂无设置 ————');
@@ -3032,9 +3012,8 @@
 	        $setting.dataset.settingIndex = option.index || id$3;
 	        append($setting, "<div class=\"art-setting-header\">".concat(this.art.i18n.get(title), "</div>"));
 	        append($setting, '<div class="art-setting-body"></div>');
-	        option.$setting = $setting;
 	        this.$settings.push($setting);
-	        setting.apply && setting.apply(this.art);
+	        setting.apply && setting.apply(this.art, $setting);
 	        this[name] = setting;
 	      }
 	    }

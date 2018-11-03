@@ -129,10 +129,9 @@ export default class Controls {
       const $control = document.createElement('div');
       $control.setAttribute('class', `art-control art-control-${name}`);
       $control.dataset.controlIndex = option.index || id;
-      option.$control = $control;
       this.commonMethod(control);
       (this.$map[option.position] || (this.$map[option.position] = [])).push($control);
-      control.apply && control.apply(this.art);
+      control.apply && control.apply(this.art, $control);
       this[name] = control;
     }
   }

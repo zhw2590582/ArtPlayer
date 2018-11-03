@@ -6,8 +6,7 @@ export default class Quality {
     this.playIndex = -1;
   }
 
-  apply(art) {
-    const { $control } = this.option;
+  apply(art, $control) {
     const { option, events: { proxy, hover }, player } = art;
     const defaultQuality = option.quality.find(item => item.default) || option.quality[0];
     this.playIndex = option.quality.indexOf(defaultQuality);

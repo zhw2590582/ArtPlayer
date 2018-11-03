@@ -39,9 +39,8 @@ export default class Setting {
       $setting.dataset.settingIndex = option.index || id;
       append($setting, `<div class="art-setting-header">${this.art.i18n.get(title)}</div>`);
       append($setting, '<div class="art-setting-body"></div>');
-      option.$setting = $setting;
       this.$settings.push($setting);
-      setting.apply && setting.apply(this.art);
+      setting.apply && setting.apply(this.art, $setting);
       this[name] = setting;
     }
   }

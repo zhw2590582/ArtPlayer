@@ -6,10 +6,10 @@ export default class PlayAndPause {
     this.option = option;
   }
 
-  apply(art) {
+  apply(art, $control) {
     const { events: { proxy }, player, i18n } = art;
-    this.$play = append(this.option.$control, icons.play);
-    this.$pause = append(this.option.$control, icons.pause);
+    this.$play = append($control, icons.play);
+    this.$pause = append($control, icons.pause);
     tooltip(this.$play, i18n.get('Play'));
     tooltip(this.$pause, i18n.get('Pause'));
     setStyle(this.$pause, 'display', 'none');

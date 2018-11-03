@@ -6,8 +6,7 @@ export default class Danmu {
     this.option = option;
   }
 
-  apply(art) {
-    const { $control } = this.option;
+  apply(art, $control) {
     const { events: { proxy }, i18n, danmu } = art;
     this.$danmu = append($control, icons.danmu);
     tooltip(this.$danmu, i18n.get('Hide danmu'));

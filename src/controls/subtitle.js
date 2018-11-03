@@ -6,8 +6,7 @@ export default class Subtitle {
     this.option = option;
   }
 
-  apply(art) {
-    const { $control } = this.option;
+  apply(art, $control) {
     const { events: { proxy }, i18n, subtitle } = art;
     this.$subtitle = append($control, icons.subtitle);
     tooltip(this.$subtitle, i18n.get('Hide subtitle'));

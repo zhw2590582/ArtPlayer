@@ -3,7 +3,7 @@ export default class Pip {
     this.option = option;
   }
 
-  apply(art) {
+  apply(art, $control) {
     this.art = art;
   }
 }

@@ -7,14 +7,11 @@ export default class Thumbnails {
     this.isLoad = false;
   }
 
-  apply(art) {
+  apply(art, $control) {
     this.art = art;
-    errorHandle(this.art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
-    this.init();
-  }
-
-  init() {
-    const { refs: { $progress }, events: { proxy } } = this.art;
+    errorHandle(art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
+    const { refs: { $progress }, events: { proxy } } = art;
+    this.$control = $control;
 
     proxy($progress, 'mousemove', event => {
       if (!this.loading) {
@@ -25,13 +22,13 @@ export default class Thumbnails {
       }
 
       if (this.isLoad) {
-        setStyle(this.option.$control, 'display', 'block');
+        setStyle($control, 'display', 'block');
         this.showThumbnails(event);
       }
     });
 
     proxy($progress, 'mouseout', () => {
-      setStyle(this.option.$control, 'display', 'none');
+      setStyle($control, 'display', 'none');
     });
   }
 
@@ -60,17 +57,17 @@ export default class Thumbnails {
     let yIndex = Math.ceil(perIndex / column);
     let xIndex = perIndex % column || column;
 
-    setStyle(this.option.$control, 'backgroundImage', `url(${url})`);
-    setStyle(this.option.$control, 'height', `${height}px`);
-    setStyle(this.option.$control, 'width', `${width}px`);
-    setStyle(this.option.$control, 'backgroundPosition', `-${--xIndex * width}px -${--yIndex * height}px`);
+    setStyle(this.$control, 'backgroundImage', `url(${url})`);
+    setStyle(this.$control, 'height', `${height}px`);
+    setStyle(this.$control, 'width', `${width}px`);
+    setStyle(this.$control, 'backgroundPosition', `-${--xIndex * width}px -${--yIndex * height}px`);
 
     if (posWidth <= width / 2) {
-      setStyle(this.option.$control, 'left', 0);
+      setStyle(this.$control, 'left', 0);
     } else if (posWidth > $progress.clientWidth - width / 2) {
-      setStyle(this.option.$control, 'left', `${$progress.clientWidth - width}px`);
+      setStyle(this.$control, 'left', `${$progress.clientWidth - width}px`);
     } else {
-      setStyle(this.option.$control, 'left', `${posWidth - width / 2}px`);
+      setStyle(this.$control, 'left', `${posWidth - width / 2}px`);
     }
   }
 }

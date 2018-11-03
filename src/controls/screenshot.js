@@ -6,10 +6,10 @@ export default class Screenshot {
     this.option = option;
   }
 
-  apply(art) {
+  apply(art, $control) {
     this.art = art;
     const { events: { proxy }, i18n, notice } = this.art;
-    this.$screenshot = append(this.option.$control, icons.screenshot);
+    this.$screenshot = append($control, icons.screenshot);
     tooltip(this.$screenshot, i18n.get('Screenshot'));
     proxy(this.$screenshot, 'click', () => {
       try {

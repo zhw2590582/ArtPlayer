@@ -6,8 +6,7 @@ export default class Setting {
     this.option = option;
   }
 
-  apply(art) {
-    const { $control } = this.option;
+  apply(art, $control) {
     const { events: { proxy }, i18n, setting } = art;
     this.$setting = append($control, icons.setting);
     tooltip(this.$setting, i18n.get('Show setting'));
