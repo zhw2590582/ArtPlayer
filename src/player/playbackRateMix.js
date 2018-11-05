@@ -22,4 +22,14 @@ export default function playbackRateMix(art, player) {
       }
     }
   });
+
+  Object.defineProperty(player, 'resetPlaybackRate', {
+    value: () => {
+      const { refs: { $player } } = art;
+      const { playbackRate } = $player.dataset;
+      if (playbackRate) {
+        player.playbackRate(Number(playbackRate));
+      }
+    }
+  });
 }

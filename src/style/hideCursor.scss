@@ -1,0 +1,7 @@
+.artplayer-video-player {
+    &.artplayer-hide-cursor {
+        * {
+            cursor: none !important;
+        }
+    }
+}

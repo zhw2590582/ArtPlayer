@@ -115,3 +115,17 @@ export function sleep(ms = 0) {
 export function sublings(target) {
   return Array.from(target.parentElement.children).filter(item => item !== target);
 }
+
+export function debounce(func, wait, scope) {
+  let timeout;
+  return function fn() {
+    const context = scope || this;
+    const args = arguments;
+    const later = function later() {
+      timeout = null;
+      func.apply(context, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}

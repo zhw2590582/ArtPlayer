@@ -10,5 +10,6 @@ import './notice.scss';
 import './contextmenu.scss';
 import './setting.scss';
 import './info.scss';
+import './hideCursor.scss';
 import './aspectRatio.scss';
 import './fullscreenWeb.scss';

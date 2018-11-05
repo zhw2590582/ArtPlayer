@@ -15,10 +15,12 @@ export default class Setting {
         setting.hide();
         setStyle(this.$setting, 'opacity', '1');
         tooltip(this.$setting, i18n.get('Show setting'));
+        art.emit('setting:hide');
       } else {
         setting.show();
         setStyle(this.$setting, 'opacity', '0.8');
         tooltip(this.$setting, i18n.get('Hide setting'));
+        art.emit('setting:show');
       }
     });
   }

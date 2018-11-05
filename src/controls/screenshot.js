@@ -14,6 +14,7 @@ export default class Screenshot {
     proxy(this.$screenshot, 'click', () => {
       try {
         this.captureFrame();
+        art.emit('screenshot');
       } catch (error) {
         notice.show(error);
       }

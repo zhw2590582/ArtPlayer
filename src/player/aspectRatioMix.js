@@ -56,8 +56,6 @@ export default function aspectRatioMix(art, player) {
     value: () => {
       const { refs: { $player } } = art;
       const { aspectRatio } = $player.dataset;
-      console.log($player.dataset);
-      console.log(aspectRatio);
       if (aspectRatio) {
         player.aspectRatio(aspectRatio.split(':'));
       }

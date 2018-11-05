@@ -24,6 +24,7 @@ export default class FullscreenWeb {
         tooltip(this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
       }
       player.resetAspectRatio();
+      art.emit('fullscreenWeb', this.state);
     });
   }
 }

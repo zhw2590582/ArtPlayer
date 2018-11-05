@@ -2,16 +2,8 @@ import config from '../config';
 import { sleep } from '../utils';
 
 export default function eventInit(art, player) {
-  const { option, events: { proxy, hover }, refs: { $player, $video }, i18n, notice } = art;
+  const { option, events: { proxy }, refs: { $player, $video }, i18n, notice } = art;
   let firstCanplay = false;
-
-  hover($player, () => {
-    $player.classList.add('artplayer-hover');
-    art.emit('hoverenter');
-  }, () => {
-    $player.classList.remove('artplayer-hover');
-    art.emit('hoverleave');
-  });
 
   proxy($video, 'click', () => {
     player.toggle();
