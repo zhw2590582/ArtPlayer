@@ -36,10 +36,7 @@ export default class Progress {
     this.set('loaded', this.getLoaded());
     highlight.forEach(item => {
       const left = Number(item.time) / $video.duration;
-      append(this.$highlight, `
-        <span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>
-      `
-      );
+      append(this.$highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>`);
     });
 
     this.art.on('video:progress', () => {

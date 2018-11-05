@@ -5,30 +5,19 @@ export default class Layers {
   constructor(art) {
     this.art = art;
     this.add = this.add.bind(this);
-    this.art.option.layers.filter(item => item.disable === false).forEach(this.add);
-    this.init();
-  }
-
-  init() {
-    const { refs, player, events: { proxy } } = this.art;
-    proxy(refs.$layers, 'click', event => {
-      if (event.path[0] === refs.$layers) {
-        player.pause();
-      }
-    });
+    this.art.option.layers.filter(item => !item.disable).forEach(this.add);
   }
 
   add(option, callback) {
-    const { refs } = this.art;
+    const { refs: { $layers } } = this.art;
     id++;
-
     const $layer = document.createElement('div');
     $layer.setAttribute('data-art-layer-id', id);
     $layer.setAttribute('class', `art-layer art-layer-${option.name || id}`);
     setStyle($layer, 'z-index', option.index || id);
     append($layer, option.html);
     setStyles($layer, option.style || {});
-    refs.$layers.appendChild($layer);
+    $layers.appendChild($layer);
     this.art.emit('layers:add', $layer);
     callback && callback($layer);
   }

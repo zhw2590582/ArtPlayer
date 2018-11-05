@@ -487,7 +487,8 @@
 	      url: 'string'
 	    }
 	  },
-	  loading: 'string',
+	  loading: validElement,
+	  play: validElement,
 	  theme: 'string',
 	  hotkey: 'boolean',
 	  pip: 'boolean',
@@ -625,47 +626,33 @@
 
 	var tinyEmitter = E;
 
-	var Template =
-	/*#__PURE__*/
-	function () {
-	  function Template(art) {
-	    classCallCheck(this, Template);
+	var Template = function Template(art) {
+	  classCallCheck(this, Template);
 
-	    this.art = art;
-	    this.init();
-	  }
-
-	  createClass(Template, [{
-	    key: "init",
-	    value: function init() {
-	      var refs = this.art.refs;
-	      refs.$container.innerHTML = "\n        <div class=\"artplayer-video-player\">\n          <video class=\"artplayer-video\"></video>\n          <div class=\"artplayer-subtitle\"></div>\n          <div class=\"artplayer-danmu\"></div>\n          <div class=\"artplayer-layers\"></div>\n          <div class=\"artplayer-mask\"></div>\n          <div class=\"artplayer-bottom\">\n            <div class=\"artplayer-progress\"></div>\n            <div class=\"artplayer-controls\">\n              <div class=\"artplayer-controls-left\"></div>\n              <div class=\"artplayer-controls-right\"></div>\n            </div>\n          </div>\n          <div class=\"artplayer-loading\"></div>\n          <div class=\"artplayer-notice\">\n            <div class=\"artplayer-notice-inner\"></div>\n          </div>\n          <div class=\"artplayer-setting\">\n            <div class=\"artplayer-setting-inner\">\n              <div class=\"artplayer-setting-body\"></div>\n              <div class=\"artplayer-setting-close\">\xD7</div>\n            </div>\n          </div>\n          <div class=\"artplayer-info\">\n            <div class=\"artplayer-info-panel\"></div>\n            <div class=\"artplayer-info-close\">[x]</div>\n          </div>\n        </div>\n      ";
-	      refs.$player = refs.$container.querySelector('.artplayer-video-player');
-	      refs.$video = refs.$container.querySelector('.artplayer-video');
-	      refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
-	      refs.$bottom = refs.$container.querySelector('.artplayer-bottom');
-	      refs.$progress = refs.$container.querySelector('.artplayer-progress');
-	      refs.$controls = refs.$container.querySelector('.artplayer-controls');
-	      refs.$controlsLeft = refs.$container.querySelector('.artplayer-controls-left');
-	      refs.$controlsRight = refs.$container.querySelector('.artplayer-controls-right');
-	      refs.$layers = refs.$container.querySelector('.artplayer-layers');
-	      refs.$danmu = refs.$container.querySelector('.artplayer-danmu');
-	      refs.$loading = refs.$container.querySelector('.artplayer-loading');
-	      refs.$notice = refs.$container.querySelector('.artplayer-notice');
-	      refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
-	      refs.$mask = refs.$container.querySelector('.artplayer-mask');
-	      refs.$setting = refs.$container.querySelector('.artplayer-setting');
-	      refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
-	      refs.$settingBody = refs.$container.querySelector('.artplayer-setting-body');
-	      refs.$settingClose = refs.$container.querySelector('.artplayer-setting-close');
-	      refs.$info = refs.$container.querySelector('.artplayer-info');
-	      refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
-	      refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
-	    }
-	  }]);
-
-	  return Template;
-	}();
+	  var refs = art.refs;
+	  refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-danmu\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n      </div>\n    ";
+	  refs.$player = refs.$container.querySelector('.artplayer-video-player');
+	  refs.$video = refs.$container.querySelector('.artplayer-video');
+	  refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
+	  refs.$bottom = refs.$container.querySelector('.artplayer-bottom');
+	  refs.$progress = refs.$container.querySelector('.artplayer-progress');
+	  refs.$controls = refs.$container.querySelector('.artplayer-controls');
+	  refs.$controlsLeft = refs.$container.querySelector('.artplayer-controls-left');
+	  refs.$controlsRight = refs.$container.querySelector('.artplayer-controls-right');
+	  refs.$layers = refs.$container.querySelector('.artplayer-layers');
+	  refs.$danmu = refs.$container.querySelector('.artplayer-danmu');
+	  refs.$loading = refs.$container.querySelector('.artplayer-loading');
+	  refs.$notice = refs.$container.querySelector('.artplayer-notice');
+	  refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
+	  refs.$mask = refs.$container.querySelector('.artplayer-mask');
+	  refs.$setting = refs.$container.querySelector('.artplayer-setting');
+	  refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
+	  refs.$settingBody = refs.$container.querySelector('.artplayer-setting-body');
+	  refs.$settingClose = refs.$container.querySelector('.artplayer-setting-close');
+	  refs.$info = refs.$container.querySelector('.artplayer-info');
+	  refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
+	  refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
+	};
 
 	var i18nMap = {
 	  'zh-cn': {
@@ -688,7 +675,8 @@
 	    'Aspect ratio': '画面比例',
 	    'Default': '默认',
 	    'Normal': '正常',
-	    'Switch': '切换',
+	    'Switch video': '切换',
+	    'Switch subtitle': '切换字幕',
 	    'Common': '常规',
 	    'Hide setting': '隐藏设置',
 	    'Show setting': '显示设置'
@@ -713,7 +701,8 @@
 	    'Aspect ratio': '畫面比例',
 	    'Default': '默認',
 	    'Normal': '正常',
-	    'Switch': '切換',
+	    'Switch video': '切換',
+	    'Switch subtitle': '切換字幕',
 	    'Common': '常規',
 	    'Hide setting': '隱藏設置',
 	    'Show setting': '顯示設置'
@@ -770,118 +759,22 @@
 	  createClass(Player, [{
 	    key: "init",
 	    value: function init() {
+	      var _this = this;
+
 	      var _this$art = this.art,
 	          option = _this$art.option,
-	          $video = _this$art.refs.$video;
+	          _this$art$refs = _this$art.refs,
+	          $player = _this$art$refs.$player,
+	          $video = _this$art$refs.$video,
+	          _this$art$events = _this$art.events,
+	          proxy = _this$art$events.proxy,
+	          hover = _this$art$events.hover;
 	      Object.keys(option.moreVideoAttr).forEach(function (key) {
-	        var value = option.moreVideoAttr[key];
-	        $video[key] = value;
+	        $video[key] = option.moreVideoAttr[key];
 	      });
 	      $video.volume = clamp(option.volume, 0, 1);
 	      $video.poster = option.poster;
-	      $video.autoplay = option.autoplay; // TODO
-
-	      $video.src = option.url;
-	    }
-	  }, {
-	    key: "eventBind",
-	    value: function eventBind() {
-	      var _this = this;
-
-	      var _this$art2 = this.art,
-	          option = _this$art2.option,
-	          _this$art2$events = _this$art2.events,
-	          proxy = _this$art2$events.proxy,
-	          hover = _this$art2$events.hover,
-	          _this$art2$refs = _this$art2.refs,
-	          $player = _this$art2$refs.$player,
-	          $video = _this$art2$refs.$video,
-	          i18n = _this$art2.i18n,
-	          notice = _this$art2.notice;
-	      config.video.events.forEach(function (eventName) {
-	        proxy($video, eventName, function (event) {
-	          _this.art.emit("video:".concat(event.type), event);
-	        });
-	      });
-	      this.art.on('video:loadstart', function () {
-	        _this.art.loading.show();
-	      });
-	      this.art.on('video:loadeddata', function () {
-	        _this.art.loading.hide();
-	      });
-	      this.art.on('video:waiting', function () {
-	        _this.art.loading.show();
-	      });
-	      this.art.on('video:seeking', function () {
-	        _this.art.loading.show();
-	      });
-	      this.art.on('video:canplay', function () {
-	        if (!_this.firstCanplay) {
-	          _this.firstCanplay = true;
-
-	          _this.art.emit('firstCanplay');
-	        }
-
-	        _this.art.controls.show();
-
-	        _this.art.mask.show();
-
-	        _this.art.loading.hide();
-
-	        if (option.autoplay) {
-	          _this.play();
-	        }
-	      });
-	      this.art.on('video:playing', function () {
-	        _this.art.isPlaying = true;
-
-	        _this.art.controls.hide();
-
-	        _this.art.mask.hide();
-	      });
-	      this.art.on('video:pause', function () {
-	        _this.art.isPlaying = false;
-
-	        _this.art.controls.show();
-
-	        _this.art.mask.show();
-	      });
-	      this.art.on('video:ended', function () {
-	        _this.art.isPlaying = false;
-
-	        _this.art.controls.show();
-
-	        _this.art.mask.show();
-
-	        if (option.loop) {
-	          _this.seek(0);
-
-	          _this.play();
-	        }
-	      });
-	      this.art.on('video:error', function () {
-	        if (_this.reconnectTime < _this.maxReconnectTime) {
-	          sleep(1000).then(function () {
-	            _this.reconnectTime++;
-	            $video.src = option.url;
-	            notice.show("".concat(i18n.get('Reconnect'), ": ").concat(_this.reconnectTime));
-	          });
-	        } else {
-	          _this.art.isError = true;
-	          _this.art.isPlaying = false;
-
-	          _this.art.loading.hide();
-
-	          _this.art.controls.hide();
-
-	          $player.classList.add('artplayer-error');
-	          sleep(1000).then(function () {
-	            notice.show(i18n.get('Video load failed'), false);
-
-	            _this.art.destroy();
-	          });
-	        }
-	      });
+	      $video.autoplay = option.autoplay;
 	      hover($player, function () {
 	        $player.classList.add('artplayer-hover');
 
@@ -890,6 +783,109 @@
 	        $player.classList.remove('artplayer-hover');
 
 	        _this.art.emit('hoverleave');
+	      });
+	      proxy($video, 'click', function () {
+	        _this.toggle();
+	      }); // TODO
+
+	      $video.src = option.url;
+	    }
+	  }, {
+	    key: "eventBind",
+	    value: function eventBind() {
+	      var _this2 = this;
+
+	      var _this$art2 = this.art,
+	          option = _this$art2.option,
+	          proxy = _this$art2.events.proxy,
+	          _this$art2$refs = _this$art2.refs,
+	          $player = _this$art2$refs.$player,
+	          $video = _this$art2$refs.$video,
+	          i18n = _this$art2.i18n,
+	          notice = _this$art2.notice;
+	      config.video.events.forEach(function (eventName) {
+	        proxy($video, eventName, function (event) {
+	          _this2.art.emit("video:".concat(event.type), event);
+	        });
+	      });
+	      this.art.on('video:loadstart', function () {
+	        _this2.art.loading.show();
+	      });
+	      this.art.on('video:loadeddata', function () {
+	        _this2.art.loading.hide();
+	      });
+	      this.art.on('video:waiting', function () {
+	        _this2.art.loading.show();
+	      });
+	      this.art.on('video:seeking', function () {
+	        _this2.art.loading.show();
+	      });
+	      this.art.on('video:canplay', function () {
+	        if (!_this2.firstCanplay) {
+	          _this2.firstCanplay = true;
+
+	          _this2.art.emit('firstCanplay');
+	        }
+
+	        _this2.art.controls.show();
+
+	        _this2.art.mask.show();
+
+	        _this2.art.loading.hide();
+
+	        if (option.autoplay) {
+	          _this2.play();
+	        }
+	      });
+	      this.art.on('video:playing', function () {
+	        _this2.art.isPlaying = true;
+
+	        _this2.art.controls.hide();
+
+	        _this2.art.mask.hide();
+	      });
+	      this.art.on('video:pause', function () {
+	        _this2.art.isPlaying = false;
+
+	        _this2.art.controls.show();
+
+	        _this2.art.mask.show();
+	      });
+	      this.art.on('video:ended', function () {
+	        _this2.art.isPlaying = false;
+
+	        _this2.art.controls.show();
+
+	        _this2.art.mask.show();
+
+	        if (option.loop) {
+	          _this2.seek(0);
+
+	          _this2.play();
+	        }
+	      });
+	      this.art.on('video:error', function () {
+	        if (_this2.reconnectTime < _this2.maxReconnectTime) {
+	          sleep(1000).then(function () {
+	            _this2.reconnectTime++;
+	            $video.src = option.url;
+	            notice.show("".concat(i18n.get('Reconnect'), ": ").concat(_this2.reconnectTime));
+	          });
+	        } else {
+	          _this2.art.isError = true;
+	          _this2.art.isPlaying = false;
+
+	          _this2.art.loading.hide();
+
+	          _this2.art.controls.hide();
+
+	          $player.classList.add('artplayer-error');
+	          sleep(1000).then(function () {
+	            notice.show(i18n.get('Video load failed'), false);
+
+	            _this2.art.destroy();
+	          });
+	        }
 	      });
 	    }
 	  }, {
@@ -999,7 +995,7 @@
 	      }
 
 	      this.resetStyle();
-	      notice.show("".concat(i18n.get('Switch'), ": ").concat(name));
+	      notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
 	      this.art.emit('switch', url);
 	    }
 	  }, {
@@ -1154,7 +1150,7 @@
 
 	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
 
-	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\n</svg>\n";
+	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
 
 	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
@@ -1356,7 +1352,7 @@
 	      this.set('loaded', this.getLoaded());
 	      highlight.forEach(function (item) {
 	        var left = Number(item.time) / $video.duration;
-	        append(_this.$highlight, "\n        <span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>\n      "));
+	        append(_this.$highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>"));
 	      });
 	      this.art.on('video:progress', function () {
 	        _this.set('loaded', _this.getLoaded());
@@ -1541,22 +1537,23 @@
 	      var _this = this;
 
 	      this.art = art;
+	      this.$control = $control;
 	      $control.innerHTML = '00:00 / 00:00';
 	      this.art.on('video:canplay', function () {
-	        $control.innerHTML = _this.getTime();
+	        _this.getTime();
 	      });
 	      this.art.on('video:timeupdate', function () {
-	        $control.innerHTML = _this.getTime();
+	        _this.getTime();
 	      });
 	      this.art.on('video:seeking', function () {
-	        $control.innerHTML = _this.getTime();
+	        _this.getTime();
 	      });
 	    }
 	  }, {
 	    key: "getTime",
 	    value: function getTime() {
 	      var player = this.art.player;
-	      return "".concat(secondToTime(player.currentTime()), " / ").concat(secondToTime(player.duration()));
+	      this.$control.innerHTML = "".concat(secondToTime(player.currentTime()), " / ").concat(secondToTime(player.duration()));
 	    }
 	  }]);
 
@@ -2220,7 +2217,6 @@
 	      option.contextmenu.push(playbackRate, aspectRatio, info, version, close);
 	      proxy(refs.$player, 'contextmenu', function (event) {
 	        event.preventDefault();
-	        _this.art.isFocus = true;
 
 	        if (!refs.$contextmenu) {
 	          _this.creatMenu();
@@ -2561,6 +2557,7 @@
 	    value: function load(url) {
 	      var _this2 = this;
 
+	      var notice = this.art.notice;
 	      var type;
 	      return fetch(url).then(function (response) {
 	        type = response.headers.get('Content-Type');
@@ -2572,6 +2569,7 @@
 
 	        return url;
 	      }).catch(function (err) {
+	        notice.show(err);
 	        throw err;
 	      });
 	    }
@@ -2618,12 +2616,17 @@
 	    value: function _switch(url) {
 	      var _this3 = this;
 
-	      var $track = this.art.refs.$track;
+	      var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+	      var _this$art$refs2 = this.art.refs,
+	          $track = _this$art$refs2.$track,
+	          i18n = _this$art$refs2.i18n,
+	          notice = _this$art$refs2.notice;
 	      this.checkExt(url);
 	      errorHandle($track, 'You need to initialize the subtitle option first.');
 	      this.load(url).then(function (data) {
 	        if (url !== data) {
 	          $track.src = data;
+	          notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
 
 	          _this3.art.emit('subtitle:switch', url);
 	        }
@@ -2704,7 +2707,7 @@
 	          player = _this$art.player,
 	          $player = _this$art.refs.$player,
 	          proxy = _this$art.events.proxy;
-	      proxy(document, 'click', function (event) {
+	      proxy(document, ['click', 'contextmenu'], function (event) {
 	        _this.art.isFocus = event.path.indexOf($player) > -1;
 	      });
 	      proxy(window, 'keydown', function (event) {
@@ -2762,28 +2765,14 @@
 	    this.art = art;
 	    this.add = this.add.bind(this);
 	    this.art.option.layers.filter(function (item) {
-	      return item.disable === false;
+	      return !item.disable;
 	    }).forEach(this.add);
-	    this.init();
 	  }
 
 	  createClass(Layers, [{
-	    key: "init",
-	    value: function init() {
-	      var _this$art = this.art,
-	          refs = _this$art.refs,
-	          player = _this$art.player,
-	          proxy = _this$art.events.proxy;
-	      proxy(refs.$layers, 'click', function (event) {
-	        if (event.path[0] === refs.$layers) {
-	          player.pause();
-	        }
-	      });
-	    }
-	  }, {
 	    key: "add",
 	    value: function add(option, callback) {
-	      var refs = this.art.refs;
+	      var $layers = this.art.refs.$layers;
 	      id$2++;
 	      var $layer = document.createElement('div');
 	      $layer.setAttribute('data-art-layer-id', id$2);
@@ -2791,7 +2780,7 @@
 	      setStyle($layer, 'z-index', option.index || id$2);
 	      append($layer, option.html);
 	      setStyles($layer, option.style || {});
-	      refs.$layers.appendChild($layer);
+	      $layers.appendChild($layer);
 	      this.art.emit('layers:add', $layer);
 	      callback && callback($layer);
 	    }
@@ -2908,18 +2897,10 @@
 	  createClass(Mask, [{
 	    key: "init",
 	    value: function init() {
-	      var _this = this;
-
 	      var _this$art = this.art,
-	          player = _this$art.player,
-	          refs = _this$art.refs,
-	          proxy = _this$art.events.proxy;
-	      append(refs.$mask, icons$1.playBig);
-	      proxy(refs.$mask, 'click', function () {
-	        player.play();
-
-	        _this.hide();
-	      });
+	          option = _this$art.option,
+	          $mask = _this$art.refs.$mask;
+	      append($mask, option.play || icons$1.playBig);
 	    }
 	  }, {
 	    key: "show",
@@ -3183,6 +3164,7 @@
 	        contextmenu: [],
 	        quality: [],
 	        loading: '',
+	        play: '',
 	        theme: '#f00',
 	        setting: false,
 	        hotkey: true,

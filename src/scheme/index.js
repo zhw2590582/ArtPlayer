@@ -59,7 +59,8 @@ export default {
       url: 'string'
     }
   },
-  loading: 'string',
+  loading: validElement,
+  play: validElement,
   theme: 'string',
   hotkey: 'boolean',
   pip: 'boolean',

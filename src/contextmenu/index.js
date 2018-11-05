@@ -25,7 +25,6 @@ export default class Contextmenu {
 
     proxy(refs.$player, 'contextmenu', event => {
       event.preventDefault();
-      this.art.isFocus = true;
       if (!refs.$contextmenu) {
         this.creatMenu();
       }

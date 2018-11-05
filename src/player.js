@@ -12,21 +12,32 @@ export default class Player {
   }
 
   init() {
-    const { option, refs: { $video } } = this.art;
+    const { option, refs: { $player, $video }, events: { proxy, hover } } = this.art;
     Object.keys(option.moreVideoAttr).forEach(key => {
-      const value = option.moreVideoAttr[key];
-      $video[key] = value;
+      $video[key] = option.moreVideoAttr[key];
     });
     $video.volume = clamp(option.volume, 0, 1);
     $video.poster = option.poster;
     $video.autoplay = option.autoplay;
+
+    hover($player, () => {
+      $player.classList.add('artplayer-hover');
+      this.art.emit('hoverenter');
+    }, () => {
+      $player.classList.remove('artplayer-hover');
+      this.art.emit('hoverleave');
+    });
+
+    proxy($video, 'click', () => {
+      this.toggle();
+    });
 
     // TODO
     $video.src = option.url;
   }
 
   eventBind() {
-    const { option, events: { proxy, hover }, refs: { $player, $video }, i18n, notice } = this.art;
+    const { option, events: { proxy }, refs: { $player, $video }, i18n, notice } = this.art;
 
     config.video.events.forEach(eventName => {
       proxy($video, eventName, event => {
@@ -105,14 +116,6 @@ export default class Player {
         });
       }
     });
-
-    hover($player, () => {
-      $player.classList.add('artplayer-hover');
-      this.art.emit('hoverenter');
-    }, () => {
-      $player.classList.remove('artplayer-hover');
-      this.art.emit('hoverleave');
-    });
   }
 
   play() {
@@ -186,7 +189,7 @@ export default class Player {
       this.play();
     }
     this.resetStyle();
-    notice.show(`${i18n.get('Switch')}: ${name}`);
+    notice.show(`${i18n.get('Switch video')}: ${name}`);
     this.art.emit('switch', url);
   }
 

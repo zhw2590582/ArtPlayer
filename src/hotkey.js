@@ -9,7 +9,7 @@ export default class Hotkey {
   init() {
     const { player, refs: { $player }, events: { proxy } } = this.art;
 
-    proxy(document, 'click', event => {
+    proxy(document, ['click', 'contextmenu'], event => {
       this.art.isFocus = event.path.indexOf($player) > -1;
     });
 

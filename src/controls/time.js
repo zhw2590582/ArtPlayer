@@ -7,23 +7,24 @@ export default class Time {
 
   apply(art, $control) {
     this.art = art;
+    this.$control = $control;
     $control.innerHTML = '00:00 / 00:00';
 
     this.art.on('video:canplay', () => {
-      $control.innerHTML = this.getTime();
+      this.getTime();
     });
 
     this.art.on('video:timeupdate', () => {
-      $control.innerHTML = this.getTime();
+      this.getTime();
     });
 
     this.art.on('video:seeking', () => {
-      $control.innerHTML = this.getTime();
+      this.getTime();
     });
   }
 
   getTime() {
     const { player } = this.art;
-    return `${secondToTime(player.currentTime())} / ${secondToTime(player.duration())}`;
+    this.$control.innerHTML = `${secondToTime(player.currentTime())} / ${secondToTime(player.duration())}`;
   }
 }

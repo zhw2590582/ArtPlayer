@@ -66,6 +66,7 @@ class Artplayer extends Emitter {
       contextmenu: [],
       quality: [],
       loading: '',
+      play: '',
       theme: '#f00',
       setting: false,
       hotkey: true,

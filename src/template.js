@@ -1,41 +1,36 @@
 export default class Template {
   constructor(art) {
-    this.art = art;
-    this.init();
-  }
-
-  init() {
-    const { refs } = this.art;
+    const { refs } = art;
     refs.$container.innerHTML = `
-        <div class="artplayer-video-player">
-          <video class="artplayer-video"></video>
-          <div class="artplayer-subtitle"></div>
-          <div class="artplayer-danmu"></div>
-          <div class="artplayer-layers"></div>
-          <div class="artplayer-mask"></div>
-          <div class="artplayer-bottom">
-            <div class="artplayer-progress"></div>
-            <div class="artplayer-controls">
-              <div class="artplayer-controls-left"></div>
-              <div class="artplayer-controls-right"></div>
-            </div>
-          </div>
-          <div class="artplayer-loading"></div>
-          <div class="artplayer-notice">
-            <div class="artplayer-notice-inner"></div>
-          </div>
-          <div class="artplayer-setting">
-            <div class="artplayer-setting-inner">
-              <div class="artplayer-setting-body"></div>
-              <div class="artplayer-setting-close">×</div>
-            </div>
-          </div>
-          <div class="artplayer-info">
-            <div class="artplayer-info-panel"></div>
-            <div class="artplayer-info-close">[x]</div>
+      <div class="artplayer-video-player">
+        <video class="artplayer-video"></video>
+        <div class="artplayer-subtitle"></div>
+        <div class="artplayer-danmu"></div>
+        <div class="artplayer-layers"></div>
+        <div class="artplayer-mask"></div>
+        <div class="artplayer-bottom">
+          <div class="artplayer-progress"></div>
+          <div class="artplayer-controls">
+            <div class="artplayer-controls-left"></div>
+            <div class="artplayer-controls-right"></div>
           </div>
         </div>
-      `;
+        <div class="artplayer-loading"></div>
+        <div class="artplayer-notice">
+          <div class="artplayer-notice-inner"></div>
+        </div>
+        <div class="artplayer-setting">
+          <div class="artplayer-setting-inner">
+            <div class="artplayer-setting-body"></div>
+            <div class="artplayer-setting-close">×</div>
+          </div>
+        </div>
+        <div class="artplayer-info">
+          <div class="artplayer-info-panel"></div>
+          <div class="artplayer-info-close">[x]</div>
+        </div>
+      </div>
+    `;
     refs.$player = refs.$container.querySelector('.artplayer-video-player');
     refs.$video = refs.$container.querySelector('.artplayer-video');
     refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');

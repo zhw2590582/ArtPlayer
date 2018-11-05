@@ -19,7 +19,8 @@ let i18nMap = {
     'Aspect ratio': '画面比例',
     'Default': '默认',
     'Normal': '正常',
-    'Switch': '切换',
+    'Switch video': '切换',
+    'Switch subtitle': '切换字幕',
     'Common': '常规',
     'Hide setting': '隐藏设置',
     'Show setting': '显示设置'
@@ -44,7 +45,8 @@ let i18nMap = {
     'Aspect ratio': '畫面比例',
     'Default': '默認',
     'Normal': '正常',
-    'Switch': '切換',
+    'Switch video': '切換',
+    'Switch subtitle': '切換字幕',
     'Common': '常規',
     'Hide setting': '隱藏設置',
     'Show setting': '顯示設置'

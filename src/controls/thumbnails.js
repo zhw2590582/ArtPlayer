@@ -43,7 +43,6 @@ export default class Thumbnails {
       }
 
       proxy(image, 'load', () => resolve(image));
-
       proxy(image, 'error', () => reject(image));
     });
   }
