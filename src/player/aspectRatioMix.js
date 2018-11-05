@@ -3,7 +3,6 @@ import { setStyle, sublings } from '../utils';
 export default function aspectRatioMix(art, player) {
   Object.defineProperty(player, 'aspectRatio', {
     value: ratio => {
-      console.log(1);
       const { refs: { $video, $player }, i18n, notice } = art;
       const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : i18n.get('Default');
 

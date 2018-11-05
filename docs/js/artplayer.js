@@ -407,10 +407,9 @@
 	    return item !== target;
 	  });
 	}
-	function debounce(func, wait, scope) {
+	function debounce(func, wait, context) {
 	  var timeout;
 	  return function fn() {
-	    var context = scope || this;
 	    var args = arguments;
 
 	    var later = function later() {
@@ -1034,7 +1033,6 @@
 	function aspectRatioMix(art, player) {
 	  Object.defineProperty(player, 'aspectRatio', {
 	    value: function value(ratio) {
-	      console.log(1);
 	      var _art$refs = art.refs,
 	          $video = _art$refs.$video,
 	          $player = _art$refs.$player,
@@ -1436,7 +1434,6 @@
 	    classCallCheck(this, Fullscreen);
 
 	    this.option = option;
-	    this.state = false;
 	  }
 
 	  createClass(Fullscreen, [{
@@ -1445,45 +1442,58 @@
 	      var _this = this;
 
 	      this.art = art;
-	      var proxy = art.events.proxy,
+	      var _art$events = art.events,
+	          destroyEvents = _art$events.destroyEvents,
+	          proxy = _art$events.proxy,
 	          i18n = art.i18n,
 	          player = art.player,
+	          notice = art.notice,
 	          $player = art.refs.$player;
 	      this.$fullscreen = append($control, icons$1.fullscreen);
 	      tooltip(this.$fullscreen, i18n.get('Fullscreen'));
 	      proxy($control, 'click', function () {
-	        if (_this.state) {
-	          screenfull.exit();
-	          _this.state = false;
-	          $player.classList.remove('artplayer-fullscreen');
-	          setStyle(_this.$fullscreen, 'opacity', '1');
-	          tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
-	        } else {
-	          if (screenfull.enabled) {
-	            _this.state = true;
+	        if (screenfull.enabled) {
+	          if (screenfull.isFullscreen) {
+	            screenfull.exit();
+	            $player.classList.remove('artplayer-fullscreen');
+	            setStyle(_this.$fullscreen, 'opacity', '1');
+	            tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
+	          } else {
 	            $player.classList.add('artplayer-fullscreen');
 	            setStyle(_this.$fullscreen, 'opacity', '0.8');
 	            tooltip(_this.$fullscreen, i18n.get('Exit fullscreen'));
 	            screenfull.request($player);
 	          }
+	        } else {
+	          notice.show('Your browser does not seem to support full screen functionality.');
 	        }
+	      });
 
+	      var screenfullChange = function screenfullChange() {
 	        player.resetAspectRatio();
-	        art.emit('fullscreen', _this.state);
+	        art.emit('fullscreen', screenfull.isFullscreen);
+	      };
+
+	      screenfull.on('change', screenfullChange);
+	      destroyEvents.push(function () {
+	        screenfull.off('change', screenfullChange);
 	      });
 	    }
 	  }, {
 	    key: "exit",
 	    value: function exit() {
 	      screenfull.exit();
-	      this.state = false;
 	    }
 	  }, {
 	    key: "toggle",
 	    value: function toggle() {
 	      var $player = this.art.refs.$player;
 	      screenfull.toggle($player);
-	      this.state = screenfull.isFullscreen;
+	    }
+	  }, {
+	    key: "state",
+	    get: function get() {
+	      return screenfull.isFullscreen;
 	    }
 	  }]);
 

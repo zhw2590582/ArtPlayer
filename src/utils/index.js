@@ -116,10 +116,9 @@ export function sublings(target) {
   return Array.from(target.parentElement.children).filter(item => item !== target);
 }
 
-export function debounce(func, wait, scope) {
+export function debounce(func, wait, context) {
   let timeout;
   return function fn() {
-    const context = scope || this;
     const args = arguments;
     const later = function later() {
       timeout = null;
