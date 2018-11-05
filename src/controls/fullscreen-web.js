@@ -13,7 +13,7 @@ export default class FullscreenWeb {
     this.$fullscreenWeb = append($control, icons.fullscreenWeb);
     tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
     proxy($control, 'click', () => {
-      if (controls.fullscreen) {
+      if (controls.fullscreen && controls.fullscreen.state) {
         controls.fullscreen.exit();
       }
 

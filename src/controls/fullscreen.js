@@ -18,7 +18,7 @@ export default class Fullscreen {
     tooltip(this.$fullscreen, i18n.get('Fullscreen'));
 
     proxy($control, 'click', () => {
-      if (controls.fullscreenWeb) {
+      if (controls.fullscreenWeb && controls.fullscreenWeb.state) {
         controls.fullscreenWeb.exit();
       }
 

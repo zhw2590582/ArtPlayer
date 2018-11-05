@@ -1452,7 +1452,7 @@
 	      this.$fullscreen = append($control, icons$1.fullscreen);
 	      tooltip(this.$fullscreen, i18n.get('Fullscreen'));
 	      proxy($control, 'click', function () {
-	        if (controls.fullscreenWeb) {
+	        if (controls.fullscreenWeb && controls.fullscreenWeb.state) {
 	          controls.fullscreenWeb.exit();
 	        }
 
@@ -1541,7 +1541,7 @@
 	      this.$fullscreenWeb = append($control, icons$1.fullscreenWeb);
 	      tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
 	      proxy($control, 'click', function () {
-	        if (controls.fullscreen) {
+	        if (controls.fullscreen && controls.fullscreen.state) {
 	          controls.fullscreen.exit();
 	        }
 
