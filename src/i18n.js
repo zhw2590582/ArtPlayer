@@ -21,6 +21,8 @@ let i18nMap = {
     'Normal': '正常',
     'Switch video': '切换',
     'Switch subtitle': '切换字幕',
+    'Web fullscreen': '网页全屏',
+    'Exit web fullscreen': '退出网页全屏',
     'Common': '常规',
     'Hide setting': '隐藏设置',
     'Show setting': '显示设置'
@@ -47,6 +49,8 @@ let i18nMap = {
     'Normal': '正常',
     'Switch video': '切換',
     'Switch subtitle': '切換字幕',
+    'Web fullscreen': '網頁全屏',
+    'Exit web fullscreen': '退出網頁全屏',
     'Common': '常規',
     'Hide setting': '隱藏設置',
     'Show setting': '顯示設置'

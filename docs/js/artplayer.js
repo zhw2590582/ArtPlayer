@@ -677,6 +677,8 @@
 	    'Normal': '正常',
 	    'Switch video': '切换',
 	    'Switch subtitle': '切换字幕',
+	    'Web fullscreen': '网页全屏',
+	    'Exit web fullscreen': '退出网页全屏',
 	    'Common': '常规',
 	    'Hide setting': '隐藏设置',
 	    'Show setting': '显示设置'
@@ -703,6 +705,8 @@
 	    'Normal': '正常',
 	    'Switch video': '切換',
 	    'Switch subtitle': '切換字幕',
+	    'Web fullscreen': '網頁全屏',
+	    'Exit web fullscreen': '退出網頁全屏',
 	    'Common': '常規',
 	    'Hide setting': '隱藏設置',
 	    'Show setting': '顯示設置'
@@ -742,159 +746,117 @@
 	  return I18n;
 	}();
 
-	var Player =
-	/*#__PURE__*/
-	function () {
-	  function Player(art) {
-	    classCallCheck(this, Player);
+	function attrInit(art) {
+	  var option = art.option,
+	      $video = art.refs.$video;
+	  Object.keys(option.moreVideoAttr).forEach(function (key) {
+	    $video[key] = option.moreVideoAttr[key];
+	  });
+	  $video.volume = clamp(option.volume, 0, 1);
+	  $video.poster = option.poster;
+	  $video.autoplay = option.autoplay;
+	  $video.src = option.url;
+	}
 
-	    this.art = art;
-	    this.init();
-	    this.eventBind();
-	    this.firstCanplay = false;
-	    this.reconnectTime = 0;
-	    this.maxReconnectTime = 5;
-	  }
-
-	  createClass(Player, [{
-	    key: "init",
-	    value: function init() {
-	      var _this = this;
-
-	      var _this$art = this.art,
-	          option = _this$art.option,
-	          _this$art$refs = _this$art.refs,
-	          $player = _this$art$refs.$player,
-	          $video = _this$art$refs.$video,
-	          _this$art$events = _this$art.events,
-	          proxy = _this$art$events.proxy,
-	          hover = _this$art$events.hover;
-	      Object.keys(option.moreVideoAttr).forEach(function (key) {
-	        $video[key] = option.moreVideoAttr[key];
-	      });
-	      $video.volume = clamp(option.volume, 0, 1);
-	      $video.poster = option.poster;
-	      $video.autoplay = option.autoplay;
-	      hover($player, function () {
-	        $player.classList.add('artplayer-hover');
-
-	        _this.art.emit('hoverenter');
-	      }, function () {
-	        $player.classList.remove('artplayer-hover');
-
-	        _this.art.emit('hoverleave');
-	      });
-	      proxy($video, 'click', function () {
-	        _this.toggle();
-	      }); // TODO
-
-	      $video.src = option.url;
+	function eventInit(art, player) {
+	  var option = art.option,
+	      _art$events = art.events,
+	      proxy = _art$events.proxy,
+	      hover = _art$events.hover,
+	      _art$refs = art.refs,
+	      $player = _art$refs.$player,
+	      $video = _art$refs.$video,
+	      i18n = art.i18n,
+	      notice = art.notice;
+	  var firstCanplay = false;
+	  hover($player, function () {
+	    $player.classList.add('artplayer-hover');
+	    art.emit('hoverenter');
+	  }, function () {
+	    $player.classList.remove('artplayer-hover');
+	    art.emit('hoverleave');
+	  });
+	  proxy($video, 'click', function () {
+	    player.toggle();
+	  });
+	  config.video.events.forEach(function (eventName) {
+	    proxy($video, eventName, function (event) {
+	      art.emit("video:".concat(event.type), event);
+	    });
+	  });
+	  art.on('video:loadstart', function () {
+	    art.loading.show();
+	  });
+	  art.on('video:loadeddata', function () {
+	    art.loading.hide();
+	  });
+	  art.on('video:waiting', function () {
+	    art.loading.show();
+	  });
+	  art.on('video:seeking', function () {
+	    art.loading.show();
+	  });
+	  art.on('video:canplay', function () {
+	    if (!firstCanplay) {
+	      firstCanplay = true;
+	      art.emit('firstCanplay');
 	    }
-	  }, {
-	    key: "eventBind",
-	    value: function eventBind() {
-	      var _this2 = this;
 
-	      var _this$art2 = this.art,
-	          option = _this$art2.option,
-	          proxy = _this$art2.events.proxy,
-	          _this$art2$refs = _this$art2.refs,
-	          $player = _this$art2$refs.$player,
-	          $video = _this$art2$refs.$video,
-	          i18n = _this$art2.i18n,
-	          notice = _this$art2.notice;
-	      config.video.events.forEach(function (eventName) {
-	        proxy($video, eventName, function (event) {
-	          _this2.art.emit("video:".concat(event.type), event);
-	        });
+	    art.controls.show();
+	    art.mask.show();
+	    art.loading.hide();
+
+	    if (option.autoplay) {
+	      player.play();
+	    }
+	  });
+	  art.on('video:playing', function () {
+	    art.isPlaying = true;
+	    art.controls.hide();
+	    art.mask.hide();
+	  });
+	  art.on('video:pause', function () {
+	    art.isPlaying = false;
+	    art.controls.show();
+	    art.mask.show();
+	  });
+	  art.on('video:ended', function () {
+	    art.isPlaying = false;
+	    art.controls.show();
+	    art.mask.show();
+
+	    if (option.loop) {
+	      player.seek(0);
+	      player.play();
+	    }
+	  });
+	  art.on('video:error', function () {
+	    if (player.reconnectTime < player.maxReconnectTime) {
+	      sleep(1000).then(function () {
+	        player.reconnectTime++;
+	        $video.src = option.url;
+	        notice.show("".concat(i18n.get('Reconnect'), ": ").concat(player.reconnectTime));
 	      });
-	      this.art.on('video:loadstart', function () {
-	        _this2.art.loading.show();
-	      });
-	      this.art.on('video:loadeddata', function () {
-	        _this2.art.loading.hide();
-	      });
-	      this.art.on('video:waiting', function () {
-	        _this2.art.loading.show();
-	      });
-	      this.art.on('video:seeking', function () {
-	        _this2.art.loading.show();
-	      });
-	      this.art.on('video:canplay', function () {
-	        if (!_this2.firstCanplay) {
-	          _this2.firstCanplay = true;
-
-	          _this2.art.emit('firstCanplay');
-	        }
-
-	        _this2.art.controls.show();
-
-	        _this2.art.mask.show();
-
-	        _this2.art.loading.hide();
-
-	        if (option.autoplay) {
-	          _this2.play();
-	        }
-	      });
-	      this.art.on('video:playing', function () {
-	        _this2.art.isPlaying = true;
-
-	        _this2.art.controls.hide();
-
-	        _this2.art.mask.hide();
-	      });
-	      this.art.on('video:pause', function () {
-	        _this2.art.isPlaying = false;
-
-	        _this2.art.controls.show();
-
-	        _this2.art.mask.show();
-	      });
-	      this.art.on('video:ended', function () {
-	        _this2.art.isPlaying = false;
-
-	        _this2.art.controls.show();
-
-	        _this2.art.mask.show();
-
-	        if (option.loop) {
-	          _this2.seek(0);
-
-	          _this2.play();
-	        }
-	      });
-	      this.art.on('video:error', function () {
-	        if (_this2.reconnectTime < _this2.maxReconnectTime) {
-	          sleep(1000).then(function () {
-	            _this2.reconnectTime++;
-	            $video.src = option.url;
-	            notice.show("".concat(i18n.get('Reconnect'), ": ").concat(_this2.reconnectTime));
-	          });
-	        } else {
-	          _this2.art.isError = true;
-	          _this2.art.isPlaying = false;
-
-	          _this2.art.loading.hide();
-
-	          _this2.art.controls.hide();
-
-	          $player.classList.add('artplayer-error');
-	          sleep(1000).then(function () {
-	            notice.show(i18n.get('Video load failed'), false);
-
-	            _this2.art.destroy();
-	          });
-	        }
+	    } else {
+	      art.isError = true;
+	      art.isPlaying = false;
+	      art.loading.hide();
+	      art.controls.hide();
+	      $player.classList.add('artplayer-error');
+	      sleep(1000).then(function () {
+	        notice.show(i18n.get('Video load failed'), false);
+	        art.destroy();
 	      });
 	    }
-	  }, {
-	    key: "play",
-	    value: function play() {
-	      var _this$art3 = this.art,
-	          $video = _this$art3.refs.$video,
-	          i18n = _this$art3.i18n,
-	          notice = _this$art3.notice;
+	  });
+	}
+
+	function playMix(art, player) {
+	  Object.defineProperty(player, 'play', {
+	    value: function value() {
+	      var $video = art.refs.$video,
+	          i18n = art.i18n,
+	          notice = art.notice;
 	      var promise = $video.play();
 
 	      if (promise !== undefined) {
@@ -905,34 +867,41 @@
 	      }
 
 	      notice.show(i18n.get('Play'));
-	      this.art.emit('play', $video);
+	      art.emit('play', $video);
 	    }
-	  }, {
-	    key: "pause",
-	    value: function pause() {
-	      var _this$art4 = this.art,
-	          $video = _this$art4.refs.$video,
-	          i18n = _this$art4.i18n,
-	          notice = _this$art4.notice;
+	  });
+	}
+
+	function pauseMin(art, player) {
+	  Object.defineProperty(player, 'pause', {
+	    value: function value() {
+	      var $video = art.refs.$video,
+	          i18n = art.i18n,
+	          notice = art.notice;
 	      $video.pause();
 	      notice.show(i18n.get('Pause'));
-	      this.art.emit('pause', $video);
+	      art.emit('pause', $video);
 	    }
-	  }, {
-	    key: "toggle",
-	    value: function toggle() {
-	      if (this.art.isPlaying) {
-	        this.pause();
+	  });
+	}
+
+	function toggleMix(art, player) {
+	  Object.defineProperty(player, 'toggle', {
+	    value: function value() {
+	      if (art.isPlaying) {
+	        player.pause();
 	      } else {
-	        this.play();
+	        player.play();
 	      }
 	    }
-	  }, {
-	    key: "seek",
-	    value: function seek(time) {
-	      var _this$art5 = this.art,
-	          $video = _this$art5.refs.$video,
-	          notice = _this$art5.notice;
+	  });
+	}
+
+	function seekMix(art, player) {
+	  Object.defineProperty(player, 'seek', {
+	    value: function value(time) {
+	      var $video = art.refs.$video,
+	          notice = art.notice;
 	      var newTime = Math.max(time, 0);
 
 	      if ($video.duration) {
@@ -941,15 +910,17 @@
 
 	      $video.currentTime = newTime;
 	      notice.show("".concat(secondToTime(newTime), " / ").concat(secondToTime($video.duration)));
-	      this.art.emit('seek', newTime);
+	      art.emit('seek', newTime);
 	    }
-	  }, {
-	    key: "volume",
-	    value: function volume(percentage) {
-	      var _this$art6 = this.art,
-	          $video = _this$art6.refs.$video,
-	          i18n = _this$art6.i18n,
-	          notice = _this$art6.notice;
+	  });
+	}
+
+	function volumeMix(art, player) {
+	  Object.defineProperty(player, 'volume', {
+	    value: function value(percentage) {
+	      var $video = art.refs.$video,
+	          i18n = art.i18n,
+	          notice = art.notice;
 
 	      if (percentage !== undefined) {
 	        $video.volume = clamp(percentage, 0, 1);
@@ -959,69 +930,96 @@
 	          setStorage('volume', $video.volume);
 	        }
 
-	        this.art.emit('volume', $video.volume);
+	        art.emit('volume', $video.volume);
 	      }
 
 	      return $video.volume || 0;
 	    }
-	  }, {
-	    key: "currentTime",
-	    value: function currentTime() {
-	      return this.art.refs.$video.currentTime || 0;
+	  });
+	}
+
+	function currentTimeMix(art, player) {
+	  Object.defineProperty(player, 'currentTime', {
+	    value: function value() {
+	      return art.refs.$video.currentTime || 0;
 	    }
-	  }, {
-	    key: "duration",
-	    value: function duration() {
-	      return this.art.refs.$video.duration || 0;
+	  });
+	}
+
+	function durationMix(art, player) {
+	  Object.defineProperty(player, 'duration', {
+	    value: function value() {
+	      return art.refs.$video.duration || 0;
 	    }
-	  }, {
-	    key: "switch",
-	    value: function _switch(url) {
+	  });
+	}
+
+	function switchMix(art, player) {
+	  Object.defineProperty(player, 'switch', {
+	    value: function value(url) {
 	      var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Unknown';
-	      var _this$art7 = this.art,
-	          $video = _this$art7.refs.$video,
-	          i18n = _this$art7.i18n,
-	          notice = _this$art7.notice,
-	          isPlaying = _this$art7.isPlaying,
-	          option = _this$art7.option;
-	      var currentTime = this.currentTime();
+	      var $video = art.refs.$video,
+	          i18n = art.i18n,
+	          notice = art.notice,
+	          isPlaying = art.isPlaying,
+	          option = art.option;
+	      var currentTime = player.currentTime();
 	      $video.src = url;
 	      option.url = url;
-	      this.reconnectTime = 0;
-	      this.seek(currentTime);
+	      player.removePlaybackRate();
+	      player.removeAspectRatio();
+	      player.reconnectTime = 0;
+	      player.seek(currentTime);
 
 	      if (isPlaying) {
-	        this.play();
+	        player.play();
 	      }
 
-	      this.resetStyle();
 	      notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-	      this.art.emit('switch', url);
+	      art.emit('switch', url);
 	    }
-	  }, {
-	    key: "playbackRate",
-	    value: function playbackRate(rate) {
-	      var _this$art8 = this.art,
-	          _this$art8$refs = _this$art8.refs,
-	          $video = _this$art8$refs.$video,
-	          $player = _this$art8$refs.$player,
-	          i18n = _this$art8.i18n,
-	          notice = _this$art8.notice;
+	  });
+	}
+
+	function playbackRateMix(art, player) {
+	  Object.defineProperty(player, 'playbackRate', {
+	    value: function value(rate) {
+	      var _art$refs = art.refs,
+	          $video = _art$refs.$video,
+	          $player = _art$refs.$player,
+	          i18n = art.i18n,
+	          notice = art.notice;
 	      var newRate = clamp(rate, 0.1, 10);
 	      $video.playbackRate = newRate;
 	      $player.dataset.playbackRate = newRate;
 	      notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate === 1 ? i18n.get('Normal') : "".concat(newRate, "x")));
-	      this.art.emit('playbackRate', newRate);
+	      art.emit('playbackRate', newRate);
 	    }
-	  }, {
-	    key: "aspectRatio",
-	    value: function aspectRatio(ratio) {
-	      var _this$art9 = this.art,
-	          _this$art9$refs = _this$art9.refs,
-	          $video = _this$art9$refs.$video,
-	          $player = _this$art9$refs.$player,
-	          i18n = _this$art9.i18n,
-	          notice = _this$art9.notice;
+	  });
+	  Object.defineProperty(player, 'removePlaybackRate', {
+	    value: function value() {
+	      var $playbackRate = art.contextmenu.$playbackRate;
+
+	      if ($playbackRate) {
+	        var $normal = $playbackRate.querySelector('.normal');
+	        sublings($normal).forEach(function (item) {
+	          return item.classList.remove('current');
+	        });
+	        $normal.classList.add('current');
+	      }
+	    }
+	  });
+	}
+
+	function aspectRatioMix(art, player) {
+	  Object.defineProperty(player, 'aspectRatio', {
+	    value: function value(ratio) {
+	      console.log(1);
+	      var _art$refs = art.refs,
+	          $video = _art$refs.$video,
+	          $player = _art$refs.$player,
+	          i18n = art.i18n,
+	          notice = art.notice;
 	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : i18n.get('Default');
 
 	      if (ratio.length === 2) {
@@ -1054,39 +1052,58 @@
 	      }
 
 	      notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratioName));
-	      this.art.emit('aspectRatio', ratio);
+	      art.emit('aspectRatio', ratio);
 	    }
-	  }, {
-	    key: "resetStyle",
-	    value: function resetStyle() {
-	      var _this$art10 = this.art,
-	          $video = _this$art10.refs.$video,
-	          contextmenu = _this$art10.contextmenu;
-
-	      if (contextmenu.$playbackRate) {
-	        var $normal = contextmenu.$playbackRate.querySelector('.normal');
-	        sublings($normal).forEach(function (item) {
-	          return item.classList.remove('current');
-	        });
-	        $normal.classList.add('current');
-	      }
-
+	  });
+	  Object.defineProperty(player, 'removeAspectRatio', {
+	    value: function value() {
+	      var $video = art.refs.$video,
+	          $aspectRatio = art.contextmenu.$aspectRatio;
 	      setStyle($video, 'width', null);
 	      setStyle($video, 'height', null);
 	      setStyle($video, 'padding', null);
 
-	      if (contextmenu.$aspectRatio) {
-	        var $default = contextmenu.$aspectRatio.querySelector('.default');
+	      if ($aspectRatio) {
+	        var $default = $aspectRatio.querySelector('.default');
 	        sublings($default).forEach(function (item) {
 	          return item.classList.remove('current');
 	        });
 	        $default.classList.add('current');
 	      }
 	    }
-	  }]);
+	  });
+	  Object.defineProperty(player, 'resetAspectRatio', {
+	    value: function value() {
+	      var $player = art.refs.$player;
+	      var aspectRatio = $player.dataset.aspectRatio;
+	      console.log($player.dataset);
+	      console.log(aspectRatio);
 
-	  return Player;
-	}();
+	      if (aspectRatio) {
+	        player.aspectRatio(aspectRatio.split(':'));
+	      }
+	    }
+	  });
+	}
+
+	var Player = function Player(art) {
+	  classCallCheck(this, Player);
+
+	  this.reconnectTime = 0;
+	  this.maxReconnectTime = 5;
+	  attrInit(art, this);
+	  eventInit(art, this);
+	  playMix(art, this);
+	  pauseMin(art, this);
+	  toggleMix(art, this);
+	  seekMix(art, this);
+	  volumeMix(art, this);
+	  currentTimeMix(art, this);
+	  durationMix(art, this);
+	  switchMix(art, this);
+	  playbackRateMix(art, this);
+	  aspectRatioMix(art, this);
+	};
 
 	function _arrayWithHoles(arr) {
 	  if (Array.isArray(arr)) return arr;
@@ -1154,6 +1171,8 @@
 
 	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
+	var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\r\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\r\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\r\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\r\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\r\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\r\n</svg>\r\n";
+
 	var icons = {
 	  loading: loading,
 	  playBig: playBig,
@@ -1164,7 +1183,8 @@
 	  subtitle: subtitle,
 	  screenshot: screenshot,
 	  danmu: danmu,
-	  setting: setting
+	  setting: setting,
+	  fullscreenWeb: fullscreenWeb
 	};
 
 	function creatDomFromSvg(map) {
@@ -1244,12 +1264,35 @@
 	    classCallCheck(this, FullscreenWeb);
 
 	    this.option = option;
+	    this.state = false;
 	  }
 
 	  createClass(FullscreenWeb, [{
 	    key: "apply",
 	    value: function apply(art, $control) {
-	      this.art = art;
+	      var _this = this;
+
+	      var proxy = art.events.proxy,
+	          i18n = art.i18n,
+	          player = art.player,
+	          $player = art.refs.$player;
+	      this.$fullscreenWeb = append($control, icons$1.fullscreenWeb);
+	      tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
+	      proxy($control, 'click', function () {
+	        if (_this.state) {
+	          _this.state = false;
+	          $player.classList.remove('artplayer-web-fullscreen');
+	          setStyle(_this.$fullscreenWeb, 'opacity', '1');
+	          tooltip(_this.$fullscreenWeb, i18n.get('Web fullscreen'));
+	        } else {
+	          _this.state = true;
+	          $player.classList.add('artplayer-web-fullscreen');
+	          setStyle(_this.$fullscreenWeb, 'opacity', '0.8');
+	          tooltip(_this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
+	        }
+
+	        player.resetAspectRatio();
+	      });
 	    }
 	  }]);
 

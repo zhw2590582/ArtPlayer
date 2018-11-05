@@ -8,6 +8,7 @@ import subtitle from './subtitle.svg';
 import screenshot from './screenshot.svg';
 import danmu from './danmu.svg';
 import setting from './setting.svg';
+import fullscreenWeb from './fullscreen-web.svg';
 
 const icons = {
   loading,
@@ -19,7 +20,8 @@ const icons = {
   subtitle,
   screenshot,
   danmu,
-  setting
+  setting,
+  fullscreenWeb
 };
 
 function creatDomFromSvg(map) {

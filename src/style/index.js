@@ -11,3 +11,4 @@ import './contextmenu.scss';
 import './setting.scss';
 import './info.scss';
 import './aspectRatio.scss';
+import './fullscreenWeb.scss';
