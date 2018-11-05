@@ -692,6 +692,8 @@
 	    'Normal': '正常',
 	    'Switch video': '切换',
 	    'Switch subtitle': '切换字幕',
+	    'Fullscreen': '全屏',
+	    'Exit fullscreen': '退出全屏',
 	    'Web fullscreen': '网页全屏',
 	    'Exit web fullscreen': '退出网页全屏',
 	    'Common': '常规',
@@ -720,6 +722,8 @@
 	    'Normal': '正常',
 	    'Switch video': '切換',
 	    'Switch subtitle': '切換字幕',
+	    'Fullscreen': '全屏',
+	    'Exit fullscreen': '退出全屏',
 	    'Web fullscreen': '網頁全屏',
 	    'Exit web fullscreen': '退出網頁全屏',
 	    'Common': '常規',
@@ -1185,6 +1189,8 @@
 
 	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
+	var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\r\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\r\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\r\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\r\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\r\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\r\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\r\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\r\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\r\n\t</g>\r\n</g>\r\n</svg>\r\n";
+
 	var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\r\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\r\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\r\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\r\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\r\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\r\n</svg>\r\n";
 
 	var icons = {
@@ -1198,6 +1204,7 @@
 	  screenshot: screenshot,
 	  danmu: danmu,
 	  setting: setting,
+	  fullscreen: fullscreen,
 	  fullscreenWeb: fullscreenWeb
 	};
 
@@ -1252,6 +1259,176 @@
 	  return Danmu;
 	}();
 
+	var screenfull = createCommonjsModule(function (module) {
+	/*!
+	* screenfull
+	* v3.3.3 - 2018-09-04
+	* (c) Sindre Sorhus; MIT License
+	*/
+	(function () {
+
+		var document = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {};
+		var isCommonjs = module.exports;
+		var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
+
+		var fn = (function () {
+			var val;
+
+			var fnMap = [
+				[
+					'requestFullscreen',
+					'exitFullscreen',
+					'fullscreenElement',
+					'fullscreenEnabled',
+					'fullscreenchange',
+					'fullscreenerror'
+				],
+				// New WebKit
+				[
+					'webkitRequestFullscreen',
+					'webkitExitFullscreen',
+					'webkitFullscreenElement',
+					'webkitFullscreenEnabled',
+					'webkitfullscreenchange',
+					'webkitfullscreenerror'
+
+				],
+				// Old WebKit (Safari 5.1)
+				[
+					'webkitRequestFullScreen',
+					'webkitCancelFullScreen',
+					'webkitCurrentFullScreenElement',
+					'webkitCancelFullScreen',
+					'webkitfullscreenchange',
+					'webkitfullscreenerror'
+
+				],
+				[
+					'mozRequestFullScreen',
+					'mozCancelFullScreen',
+					'mozFullScreenElement',
+					'mozFullScreenEnabled',
+					'mozfullscreenchange',
+					'mozfullscreenerror'
+				],
+				[
+					'msRequestFullscreen',
+					'msExitFullscreen',
+					'msFullscreenElement',
+					'msFullscreenEnabled',
+					'MSFullscreenChange',
+					'MSFullscreenError'
+				]
+			];
+
+			var i = 0;
+			var l = fnMap.length;
+			var ret = {};
+
+			for (; i < l; i++) {
+				val = fnMap[i];
+				if (val && val[1] in document) {
+					for (i = 0; i < val.length; i++) {
+						ret[fnMap[0][i]] = val[i];
+					}
+					return ret;
+				}
+			}
+
+			return false;
+		})();
+
+		var eventNameMap = {
+			change: fn.fullscreenchange,
+			error: fn.fullscreenerror
+		};
+
+		var screenfull = {
+			request: function (elem) {
+				var request = fn.requestFullscreen;
+
+				elem = elem || document.documentElement;
+
+				// Work around Safari 5.1 bug: reports support for
+				// keyboard in fullscreen even though it doesn't.
+				// Browser sniffing, since the alternative with
+				// setTimeout is even worse.
+				if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
+					elem[request]();
+				} else {
+					elem[request](keyboardAllowed ? Element.ALLOW_KEYBOARD_INPUT : {});
+				}
+			},
+			exit: function () {
+				document[fn.exitFullscreen]();
+			},
+			toggle: function (elem) {
+				if (this.isFullscreen) {
+					this.exit();
+				} else {
+					this.request(elem);
+				}
+			},
+			onchange: function (callback) {
+				this.on('change', callback);
+			},
+			onerror: function (callback) {
+				this.on('error', callback);
+			},
+			on: function (event, callback) {
+				var eventName = eventNameMap[event];
+				if (eventName) {
+					document.addEventListener(eventName, callback, false);
+				}
+			},
+			off: function (event, callback) {
+				var eventName = eventNameMap[event];
+				if (eventName) {
+					document.removeEventListener(eventName, callback, false);
+				}
+			},
+			raw: fn
+		};
+
+		if (!fn) {
+			if (isCommonjs) {
+				module.exports = false;
+			} else {
+				window.screenfull = false;
+			}
+
+			return;
+		}
+
+		Object.defineProperties(screenfull, {
+			isFullscreen: {
+				get: function () {
+					return Boolean(document[fn.fullscreenElement]);
+				}
+			},
+			element: {
+				enumerable: true,
+				get: function () {
+					return document[fn.fullscreenElement];
+				}
+			},
+			enabled: {
+				enumerable: true,
+				get: function () {
+					// Coerce to boolean in case of old WebKit
+					return Boolean(document[fn.fullscreenEnabled]);
+				}
+			}
+		});
+
+		if (isCommonjs) {
+			module.exports = screenfull;
+		} else {
+			window.screenfull = screenfull;
+		}
+	})();
+	});
+
 	var Fullscreen =
 	/*#__PURE__*/
 	function () {
@@ -1259,12 +1436,54 @@
 	    classCallCheck(this, Fullscreen);
 
 	    this.option = option;
+	    this.state = false;
 	  }
 
 	  createClass(Fullscreen, [{
 	    key: "apply",
 	    value: function apply(art, $control) {
+	      var _this = this;
+
 	      this.art = art;
+	      var proxy = art.events.proxy,
+	          i18n = art.i18n,
+	          player = art.player,
+	          $player = art.refs.$player;
+	      this.$fullscreen = append($control, icons$1.fullscreen);
+	      tooltip(this.$fullscreen, i18n.get('Fullscreen'));
+	      proxy($control, 'click', function () {
+	        if (_this.state) {
+	          screenfull.exit();
+	          _this.state = false;
+	          $player.classList.remove('artplayer-fullscreen');
+	          setStyle(_this.$fullscreen, 'opacity', '1');
+	          tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
+	        } else {
+	          if (screenfull.enabled) {
+	            _this.state = true;
+	            $player.classList.add('artplayer-fullscreen');
+	            setStyle(_this.$fullscreen, 'opacity', '0.8');
+	            tooltip(_this.$fullscreen, i18n.get('Exit fullscreen'));
+	            screenfull.request($player);
+	          }
+	        }
+
+	        player.resetAspectRatio();
+	        art.emit('fullscreen', _this.state);
+	      });
+	    }
+	  }, {
+	    key: "exit",
+	    value: function exit() {
+	      screenfull.exit();
+	      this.state = false;
+	    }
+	  }, {
+	    key: "toggle",
+	    value: function toggle() {
+	      var $player = this.art.refs.$player;
+	      screenfull.toggle($player);
+	      this.state = screenfull.isFullscreen;
 	    }
 	  }]);
 
@@ -1289,10 +1508,15 @@
 	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
 	          player = art.player,
+	          controls = art.controls,
 	          $player = art.refs.$player;
 	      this.$fullscreenWeb = append($control, icons$1.fullscreenWeb);
 	      tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
 	      proxy($control, 'click', function () {
+	        if (controls.fullscreen) {
+	          controls.fullscreen.exit();
+	        }
+
 	        if (_this.state) {
 	          _this.state = false;
 	          $player.classList.remove('artplayer-web-fullscreen');
