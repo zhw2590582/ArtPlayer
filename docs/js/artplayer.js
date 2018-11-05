@@ -1447,26 +1447,16 @@
 	          proxy = _art$events.proxy,
 	          i18n = art.i18n,
 	          player = art.player,
-	          notice = art.notice,
-	          $player = art.refs.$player;
+	          controls = art.controls,
+	          notice = art.notice;
 	      this.$fullscreen = append($control, icons$1.fullscreen);
 	      tooltip(this.$fullscreen, i18n.get('Fullscreen'));
 	      proxy($control, 'click', function () {
-	        if (screenfull.enabled) {
-	          if (screenfull.isFullscreen) {
-	            screenfull.exit();
-	            $player.classList.remove('artplayer-fullscreen');
-	            setStyle(_this.$fullscreen, 'opacity', '1');
-	            tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
-	          } else {
-	            $player.classList.add('artplayer-fullscreen');
-	            setStyle(_this.$fullscreen, 'opacity', '0.8');
-	            tooltip(_this.$fullscreen, i18n.get('Exit fullscreen'));
-	            screenfull.request($player);
-	          }
-	        } else {
-	          notice.show('Your browser does not seem to support full screen functionality.');
+	        if (controls.fullscreenWeb) {
+	          controls.fullscreenWeb.exit();
 	        }
+
+	        _this.toggle();
 	      });
 
 	      var screenfullChange = function screenfullChange() {
@@ -1474,21 +1464,49 @@
 	        art.emit('fullscreen', screenfull.isFullscreen);
 	      };
 
+	      var screenfullError = function screenfullError() {
+	        notice.show('Your browser does not seem to support full screen functionality.');
+	      };
+
 	      screenfull.on('change', screenfullChange);
+	      screenfull.on('error', screenfullError);
 	      destroyEvents.push(function () {
 	        screenfull.off('change', screenfullChange);
+	        screenfull.off('error', screenfullError);
 	      });
+	    }
+	  }, {
+	    key: "enabled",
+	    value: function enabled() {
+	      var _this$art = this.art,
+	          i18n = _this$art.i18n,
+	          $player = _this$art.refs.$player;
+	      $player.classList.add('artplayer-fullscreen');
+	      setStyle(this.$fullscreen, 'opacity', '0.8');
+	      tooltip(this.$fullscreen, i18n.get('Exit fullscreen'));
+	      screenfull.request($player);
 	    }
 	  }, {
 	    key: "exit",
 	    value: function exit() {
+	      var _this$art2 = this.art,
+	          i18n = _this$art2.i18n,
+	          $player = _this$art2.refs.$player;
+	      $player.classList.remove('artplayer-fullscreen');
+	      setStyle(this.$fullscreen, 'opacity', '1');
+	      tooltip(this.$fullscreen, i18n.get('Fullscreen'));
 	      screenfull.exit();
 	    }
 	  }, {
 	    key: "toggle",
 	    value: function toggle() {
-	      var $player = this.art.refs.$player;
-	      screenfull.toggle($player);
+	      if (screenfull.enabled) {
+	        if (screenfull.isFullscreen) {
+	          this.exit();
+	        } else {
+	          this.enabled();
+	        }
+	      }
 	    }
 	  }, {
 	    key: "state",
@@ -1515,11 +1533,11 @@
 	    value: function apply(art, $control) {
 	      var _this = this;
 
+	      this.art = art;
 	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
 	          player = art.player,
-	          controls = art.controls,
-	          $player = art.refs.$player;
+	          controls = art.controls;
 	      this.$fullscreenWeb = append($control, icons$1.fullscreenWeb);
 	      tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
 	      proxy($control, 'click', function () {
@@ -1527,21 +1545,42 @@
 	          controls.fullscreen.exit();
 	        }
 
-	        if (_this.state) {
-	          _this.state = false;
-	          $player.classList.remove('artplayer-web-fullscreen');
-	          setStyle(_this.$fullscreenWeb, 'opacity', '1');
-	          tooltip(_this.$fullscreenWeb, i18n.get('Web fullscreen'));
-	        } else {
-	          _this.state = true;
-	          $player.classList.add('artplayer-web-fullscreen');
-	          setStyle(_this.$fullscreenWeb, 'opacity', '0.8');
-	          tooltip(_this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
-	        }
+	        _this.toggle();
 
 	        player.resetAspectRatio();
 	        art.emit('fullscreenWeb', _this.state);
 	      });
+	    }
+	  }, {
+	    key: "enabled",
+	    value: function enabled() {
+	      var _this$art = this.art,
+	          i18n = _this$art.i18n,
+	          $player = _this$art.refs.$player;
+	      this.state = true;
+	      $player.classList.add('artplayer-web-fullscreen');
+	      setStyle(this.$fullscreenWeb, 'opacity', '0.8');
+	      tooltip(this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
+	    }
+	  }, {
+	    key: "exit",
+	    value: function exit() {
+	      var _this$art2 = this.art,
+	          i18n = _this$art2.i18n,
+	          $player = _this$art2.refs.$player;
+	      this.state = false;
+	      $player.classList.remove('artplayer-web-fullscreen');
+	      setStyle(this.$fullscreenWeb, 'opacity', '1');
+	      tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
+	    }
+	  }, {
+	    key: "toggle",
+	    value: function toggle() {
+	      if (this.state) {
+	        this.exit();
+	      } else {
+	        this.enabled();
+	      }
 	    }
 	  }]);
 
