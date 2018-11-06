@@ -982,8 +982,8 @@
         var currentTime = player.currentTime();
         $video.src = url;
         option.url = url;
-        player.removePlaybackRate();
-        player.removeAspectRatio();
+        player.playbackRateRemove();
+        player.aspectRatioRemove();
         player.reconnectTime = 0;
         player.seek(currentTime);
 
