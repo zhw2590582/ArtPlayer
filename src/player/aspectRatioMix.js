@@ -1,7 +1,7 @@
 import { setStyle, sublings } from '../utils';
 
 export default function aspectRatioMix(art, player) {
-  const { refs: { $video, $player }, i18n, notice, contextmenu } = art;
+  const { refs: { $video, $player }, i18n, notice } = art;
 
   Object.defineProperty(player, 'aspectRatio', {
     value: ratio => {
@@ -27,10 +27,7 @@ export default function aspectRatioMix(art, player) {
 
         $player.dataset.aspectRatio = ratioName;
       } else {
-        setStyle($video, 'width', null);
-        setStyle($video, 'height', null);
-        setStyle($video, 'padding', null);
-        delete $player.dataset.aspectRatio;
+        player.aspectRatioRemove();
       }
 
       notice.show(`${i18n.get('Aspect ratio')}: ${ratioName}`);
@@ -43,8 +40,9 @@ export default function aspectRatioMix(art, player) {
       setStyle($video, 'width', null);
       setStyle($video, 'height', null);
       setStyle($video, 'padding', null);
-      if (contextmenu.$aspectRatio) {
-        const $default = contextmenu.$aspectRatio.querySelector('.default');
+      delete $player.dataset.aspectRatio;
+      if (art.contextmenu.$aspectRatio) {
+        const $default = art.contextmenu.$aspectRatio.querySelector('.default');
         sublings($default).forEach(item => item.classList.remove('current'));
         $default.classList.add('current');
       }

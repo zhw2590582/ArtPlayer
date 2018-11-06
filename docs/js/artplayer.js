@@ -994,8 +994,7 @@
 	      $video = _art$refs.$video,
 	      $player = _art$refs.$player,
 	      i18n = art.i18n,
-	      notice = art.notice,
-	      contextmenu = art.contextmenu;
+	      notice = art.notice;
 	  Object.defineProperty(player, 'playbackRate', {
 	    value: function value(rate) {
 	      var newRate = clamp(rate, 0.1, 10);
@@ -1007,8 +1006,11 @@
 	  });
 	  Object.defineProperty(player, 'playbackRateRemove', {
 	    value: function value() {
-	      if (contextmenu.$playbackRate) {
-	        var $normal = contextmenu.$playbackRate.querySelector('.normal');
+	      player.playbackRate(1);
+	      delete $player.dataset.playbackRate;
+
+	      if (art.contextmenu.$playbackRate) {
+	        var $normal = art.contextmenu.$playbackRate.querySelector('.normal');
 	        sublings($normal).forEach(function (item) {
 	          return item.classList.remove('current');
 	        });
@@ -1032,8 +1034,7 @@
 	      $video = _art$refs.$video,
 	      $player = _art$refs.$player,
 	      i18n = art.i18n,
-	      notice = art.notice,
-	      contextmenu = art.contextmenu;
+	      notice = art.notice;
 	  Object.defineProperty(player, 'aspectRatio', {
 	    value: function value(ratio) {
 	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : i18n.get('Default');
@@ -1061,10 +1062,7 @@
 
 	        $player.dataset.aspectRatio = ratioName;
 	      } else {
-	        setStyle($video, 'width', null);
-	        setStyle($video, 'height', null);
-	        setStyle($video, 'padding', null);
-	        delete $player.dataset.aspectRatio;
+	        player.aspectRatioRemove();
 	      }
 
 	      notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratioName));
@@ -1076,9 +1074,10 @@
 	      setStyle($video, 'width', null);
 	      setStyle($video, 'height', null);
 	      setStyle($video, 'padding', null);
+	      delete $player.dataset.aspectRatio;
 
-	      if (contextmenu.$aspectRatio) {
-	        var $default = contextmenu.$aspectRatio.querySelector('.default');
+	      if (art.contextmenu.$aspectRatio) {
+	        var $default = art.contextmenu.$aspectRatio.querySelector('.default');
 	        sublings($default).forEach(function (item) {
 	          return item.classList.remove('current');
 	        });
@@ -1346,12 +1345,10 @@
 	  });
 	  Object.defineProperty(player, 'fullscreenToggle', {
 	    value: function value() {
-	      if (screenfull.enabled) {
-	        if (screenfull.isFullscreen) {
-	          player.fullscreenExit();
-	        } else {
-	          player.fullscreenEnabled();
-	        }
+	      if (player.fullscreenState) {
+	        player.fullscreenExit();
+	      } else {
+	        player.fullscreenEnabled();
 	      }
 	    }
 	  });
@@ -1389,9 +1386,47 @@
 	  Object.defineProperty(player, 'fullscreenWebToggle', {
 	    value: function value() {
 	      if (player.fullscreenWebState) {
-	        player.exit();
+	        player.fullscreenWebExit();
 	      } else {
-	        player.enabled();
+	        player.fullscreenWebEnabled();
+	      }
+	    }
+	  });
+	}
+
+	function pipMix(art, player) {
+	  var $player = art.refs.$player;
+	  Object.defineProperty(player, 'pipState', {
+	    get: function get() {
+	      return $player.classList.contains('artplayer-pip');
+	    }
+	  });
+	  Object.defineProperty(player, 'pipEnabled', {
+	    value: function value() {
+	      $player.classList.add('artplayer-pip');
+	      player.fullscreenExit();
+	      player.fullscreenWebExit();
+	      player.aspectRatioRemove();
+	      player.playbackRateRemove();
+	      art.emit('pip', true);
+	    }
+	  });
+	  Object.defineProperty(player, 'pipExit', {
+	    value: function value() {
+	      $player.classList.remove('artplayer-pip');
+	      player.fullscreenExit();
+	      player.fullscreenWebExit();
+	      player.aspectRatioRemove();
+	      player.playbackRateRemove();
+	      art.emit('pip', false);
+	    }
+	  });
+	  Object.defineProperty(player, 'pipToggle', {
+	    value: function value() {
+	      if (player.pipState) {
+	        player.pipExit();
+	      } else {
+	        player.pipEnabled();
 	      }
 	    }
 	  });
@@ -1417,6 +1452,7 @@
 	  screenshotMix(art, this);
 	  fullscreenMix(art, this);
 	  fullscreenWebMix(art, this);
+	  pipMix(art, this);
 	};
 
 	function _arrayWithHoles(arr) {
@@ -1639,7 +1675,13 @@
 	  createClass(Pip, [{
 	    key: "apply",
 	    value: function apply(art, $control) {
-	      this.art = art;
+	      var proxy = art.events.proxy,
+	          i18n = art.i18n,
+	          player = art.player;
+	      this.$pip = append($control, '画中画');
+	      proxy($control, 'click', function () {
+	        player.pipToggle();
+	      });
 	    }
 	  }]);
 

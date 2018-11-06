@@ -45,12 +45,10 @@ export default function fullscreenMix(art, player) {
 
   Object.defineProperty(player, 'fullscreenToggle', {
     value: () => {
-      if (screenfull.enabled) {
-        if (screenfull.isFullscreen) {
-          player.fullscreenExit();
-        } else {
-          player.fullscreenEnabled();
-        }
+      if (player.fullscreenState) {
+        player.fullscreenExit();
+      } else {
+        player.fullscreenEnabled();
       }
     }
   });

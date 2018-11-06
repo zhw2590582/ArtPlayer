@@ -1,7 +1,7 @@
 import { clamp, sublings } from '../utils';
 
 export default function playbackRateMix(art, player) {
-  const { refs: { $video, $player }, i18n, notice, contextmenu } = art;
+  const { refs: { $video, $player }, i18n, notice } = art;
 
   Object.defineProperty(player, 'playbackRate', {
     value: rate => {
@@ -15,8 +15,10 @@ export default function playbackRateMix(art, player) {
 
   Object.defineProperty(player, 'playbackRateRemove', {
     value: () => {
-      if (contextmenu.$playbackRate) {
-        const $normal = contextmenu.$playbackRate.querySelector('.normal');
+      player.playbackRate(1);
+      delete $player.dataset.playbackRate;
+      if (art.contextmenu.$playbackRate) {
+        const $normal = art.contextmenu.$playbackRate.querySelector('.normal');
         sublings($normal).forEach(item => item.classList.remove('current'));
         $normal.classList.add('current');
       }

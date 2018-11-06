@@ -30,9 +30,9 @@ export default function fullscreenWebMix(art, player) {
   Object.defineProperty(player, 'fullscreenWebToggle', {
     value: () => {
       if (player.fullscreenWebState) {
-        player.exit();
+        player.fullscreenWebExit();
       } else {
-        player.enabled();
+        player.fullscreenWebEnabled();
       }
     }
   });

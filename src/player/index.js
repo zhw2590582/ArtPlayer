@@ -13,6 +13,7 @@ import aspectRatioMix from './aspectRatioMix';
 import screenshotMix from './screenshotMix';
 import fullscreenMix from './fullscreenMix';
 import fullscreenWebMix from './fullscreenWebMix';
+import pipMix from './pipMix';
 
 export default class Player {
   constructor(art) {
@@ -34,5 +35,6 @@ export default class Player {
     screenshotMix(art, this);
     fullscreenMix(art, this);
     fullscreenWebMix(art, this);
+    pipMix(art, this);
   }
 }
