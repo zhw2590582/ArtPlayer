@@ -1,7 +1,8 @@
 export default function switchMix(art, player) {
+  const { refs: { $video }, i18n, notice, isPlaying, option } = art;
+
   Object.defineProperty(player, 'switch', {
     value: (url, name = 'Unknown') => {
-      const { refs: { $video }, i18n, notice, isPlaying, option } = art;
       const currentTime = player.currentTime();
       $video.src = url;
       option.url = url;

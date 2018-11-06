@@ -1,9 +1,10 @@
 import { setStyle, sublings } from '../utils';
 
 export default function aspectRatioMix(art, player) {
+  const { refs: { $video, $player }, i18n, notice, contextmenu } = art;
+
   Object.defineProperty(player, 'aspectRatio', {
     value: ratio => {
-      const { refs: { $video, $player }, i18n, notice } = art;
       const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : i18n.get('Default');
 
       if (ratio.length === 2) {
@@ -37,23 +38,21 @@ export default function aspectRatioMix(art, player) {
     }
   });
 
-  Object.defineProperty(player, 'removeAspectRatio', {
+  Object.defineProperty(player, 'aspectRatioRemove', {
     value: () => {
-      const { refs: { $video }, contextmenu: { $aspectRatio } } = art;
       setStyle($video, 'width', null);
       setStyle($video, 'height', null);
       setStyle($video, 'padding', null);
-      if ($aspectRatio) {
-        const $default = $aspectRatio.querySelector('.default');
+      if (contextmenu.$aspectRatio) {
+        const $default = contextmenu.$aspectRatio.querySelector('.default');
         sublings($default).forEach(item => item.classList.remove('current'));
         $default.classList.add('current');
       }
     }
   });
 
-  Object.defineProperty(player, 'resetAspectRatio', {
+  Object.defineProperty(player, 'aspectRatioReset', {
     value: () => {
-      const { refs: { $player } } = art;
       const { aspectRatio } = $player.dataset;
       if (aspectRatio) {
         player.aspectRatio(aspectRatio.split(':'));

@@ -15,12 +15,10 @@ export default class Subtitle {
         subtitle.hide();
         setStyle(this.$subtitle, 'opacity', '1');
         tooltip(this.$subtitle, i18n.get('Show subtitle'));
-        art.emit('subtitle:hide');
       } else {
         subtitle.show();
         setStyle(this.$subtitle, 'opacity', '0.8');
         tooltip(this.$subtitle, i18n.get('Hide subtitle'));
-        art.emit('subtitle:show');
       }
     });
   }

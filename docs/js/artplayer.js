@@ -861,11 +861,11 @@
 	}
 
 	function playMix(art, player) {
+	  var $video = art.refs.$video,
+	      i18n = art.i18n,
+	      notice = art.notice;
 	  Object.defineProperty(player, 'play', {
 	    value: function value() {
-	      var $video = art.refs.$video,
-	          i18n = art.i18n,
-	          notice = art.notice;
 	      var promise = $video.play();
 
 	      if (promise !== undefined) {
@@ -882,11 +882,11 @@
 	}
 
 	function pauseMin(art, player) {
+	  var $video = art.refs.$video,
+	      i18n = art.i18n,
+	      notice = art.notice;
 	  Object.defineProperty(player, 'pause', {
 	    value: function value() {
-	      var $video = art.refs.$video,
-	          i18n = art.i18n,
-	          notice = art.notice;
 	      $video.pause();
 	      notice.show(i18n.get('Pause'));
 	      art.emit('pause', $video);
@@ -907,10 +907,10 @@
 	}
 
 	function seekMix(art, player) {
+	  var $video = art.refs.$video,
+	      notice = art.notice;
 	  Object.defineProperty(player, 'seek', {
 	    value: function value(time) {
-	      var $video = art.refs.$video,
-	          notice = art.notice;
 	      var newTime = Math.max(time, 0);
 
 	      if ($video.duration) {
@@ -925,12 +925,11 @@
 	}
 
 	function volumeMix(art, player) {
+	  var $video = art.refs.$video,
+	      i18n = art.i18n,
+	      notice = art.notice;
 	  Object.defineProperty(player, 'volume', {
 	    value: function value(percentage) {
-	      var $video = art.refs.$video,
-	          i18n = art.i18n,
-	          notice = art.notice;
-
 	      if (percentage !== undefined) {
 	        $video.volume = clamp(percentage, 0, 1);
 	        notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100)));
@@ -964,14 +963,14 @@
 	}
 
 	function switchMix(art, player) {
+	  var $video = art.refs.$video,
+	      i18n = art.i18n,
+	      notice = art.notice,
+	      isPlaying = art.isPlaying,
+	      option = art.option;
 	  Object.defineProperty(player, 'switch', {
 	    value: function value(url) {
 	      var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Unknown';
-	      var $video = art.refs.$video,
-	          i18n = art.i18n,
-	          notice = art.notice,
-	          isPlaying = art.isPlaying,
-	          option = art.option;
 	      var currentTime = player.currentTime();
 	      $video.src = url;
 	      option.url = url;
@@ -991,13 +990,14 @@
 	}
 
 	function playbackRateMix(art, player) {
+	  var _art$refs = art.refs,
+	      $video = _art$refs.$video,
+	      $player = _art$refs.$player,
+	      i18n = art.i18n,
+	      notice = art.notice,
+	      contextmenu = art.contextmenu;
 	  Object.defineProperty(player, 'playbackRate', {
 	    value: function value(rate) {
-	      var _art$refs = art.refs,
-	          $video = _art$refs.$video,
-	          $player = _art$refs.$player,
-	          i18n = art.i18n,
-	          notice = art.notice;
 	      var newRate = clamp(rate, 0.1, 10);
 	      $video.playbackRate = newRate;
 	      $player.dataset.playbackRate = newRate;
@@ -1005,12 +1005,10 @@
 	      art.emit('playbackRate', newRate);
 	    }
 	  });
-	  Object.defineProperty(player, 'removePlaybackRate', {
+	  Object.defineProperty(player, 'playbackRateRemove', {
 	    value: function value() {
-	      var $playbackRate = art.contextmenu.$playbackRate;
-
-	      if ($playbackRate) {
-	        var $normal = $playbackRate.querySelector('.normal');
+	      if (contextmenu.$playbackRate) {
+	        var $normal = contextmenu.$playbackRate.querySelector('.normal');
 	        sublings($normal).forEach(function (item) {
 	          return item.classList.remove('current');
 	        });
@@ -1018,9 +1016,8 @@
 	      }
 	    }
 	  });
-	  Object.defineProperty(player, 'resetPlaybackRate', {
+	  Object.defineProperty(player, 'playbackRateReset', {
 	    value: function value() {
-	      var $player = art.refs.$player;
 	      var playbackRate = $player.dataset.playbackRate;
 
 	      if (playbackRate) {
@@ -1031,13 +1028,14 @@
 	}
 
 	function aspectRatioMix(art, player) {
+	  var _art$refs = art.refs,
+	      $video = _art$refs.$video,
+	      $player = _art$refs.$player,
+	      i18n = art.i18n,
+	      notice = art.notice,
+	      contextmenu = art.contextmenu;
 	  Object.defineProperty(player, 'aspectRatio', {
 	    value: function value(ratio) {
-	      var _art$refs = art.refs,
-	          $video = _art$refs.$video,
-	          $player = _art$refs.$player,
-	          i18n = art.i18n,
-	          notice = art.notice;
 	      var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : i18n.get('Default');
 
 	      if (ratio.length === 2) {
@@ -1073,16 +1071,14 @@
 	      art.emit('aspectRatio', ratio);
 	    }
 	  });
-	  Object.defineProperty(player, 'removeAspectRatio', {
+	  Object.defineProperty(player, 'aspectRatioRemove', {
 	    value: function value() {
-	      var $video = art.refs.$video,
-	          $aspectRatio = art.contextmenu.$aspectRatio;
 	      setStyle($video, 'width', null);
 	      setStyle($video, 'height', null);
 	      setStyle($video, 'padding', null);
 
-	      if ($aspectRatio) {
-	        var $default = $aspectRatio.querySelector('.default');
+	      if (contextmenu.$aspectRatio) {
+	        var $default = contextmenu.$aspectRatio.querySelector('.default');
 	        sublings($default).forEach(function (item) {
 	          return item.classList.remove('current');
 	        });
@@ -1090,9 +1086,8 @@
 	      }
 	    }
 	  });
-	  Object.defineProperty(player, 'resetAspectRatio', {
+	  Object.defineProperty(player, 'aspectRatioReset', {
 	    value: function value() {
-	      var $player = art.refs.$player;
 	      var aspectRatio = $player.dataset.aspectRatio;
 
 	      if (aspectRatio) {
@@ -1102,160 +1097,37 @@
 	  });
 	}
 
-	var Player = function Player(art) {
-	  classCallCheck(this, Player);
+	function screenshotMix(art, player) {
+	  var notice = art.notice;
 
-	  this.reconnectTime = 0;
-	  this.maxReconnectTime = 5;
-	  attrInit(art, this);
-	  eventInit(art, this);
-	  playMix(art, this);
-	  pauseMin(art, this);
-	  toggleMix(art, this);
-	  seekMix(art, this);
-	  volumeMix(art, this);
-	  currentTimeMix(art, this);
-	  durationMix(art, this);
-	  switchMix(art, this);
-	  playbackRateMix(art, this);
-	  aspectRatioMix(art, this);
-	};
-
-	function _arrayWithHoles(arr) {
-	  if (Array.isArray(arr)) return arr;
-	}
-
-	var arrayWithHoles = _arrayWithHoles;
-
-	function _iterableToArrayLimit(arr, i) {
-	  var _arr = [];
-	  var _n = true;
-	  var _d = false;
-	  var _e = undefined;
-
-	  try {
-	    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-	      _arr.push(_s.value);
-
-	      if (i && _arr.length === i) break;
-	    }
-	  } catch (err) {
-	    _d = true;
-	    _e = err;
-	  } finally {
-	    try {
-	      if (!_n && _i["return"] != null) _i["return"]();
-	    } finally {
-	      if (_d) throw _e;
-	    }
+	  function captureFrame() {
+	    var $video = art.refs.$video;
+	    var canvas = document.createElement('canvas');
+	    canvas.width = $video.videoWidth;
+	    canvas.height = $video.videoHeight;
+	    canvas.getContext('2d').drawImage($video, 0, 0);
+	    var dataUri = canvas.toDataURL('image/png');
+	    var elink = document.createElement('a');
+	    setStyle(elink, 'display', 'none');
+	    elink.href = dataUri;
+	    elink.download = "ArtPlayer_".concat(secondToTime($video.currentTime), ".png");
+	    document.body.appendChild(elink);
+	    elink.click();
+	    document.body.removeChild(elink);
 	  }
 
-	  return _arr;
-	}
-
-	var iterableToArrayLimit = _iterableToArrayLimit;
-
-	function _nonIterableRest() {
-	  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-	}
-
-	var nonIterableRest = _nonIterableRest;
-
-	function _slicedToArray(arr, i) {
-	  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
-	}
-
-	var slicedToArray = _slicedToArray;
-
-	var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
-
-	var playBig = "<svg style=\"width: 60px; height: 60px; filter: drop-shadow(0px 1px 1px black);\" version=\"1.1\" viewBox=\"0 0 24 24\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <g id=\"info\"/>\n    <g id=\"icons\">\n        <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16   C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\" id=\"video\"/>\n    </g>\n</svg>";
-
-	var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
-
-	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
-
-	var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
-
-	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
-
-	var subtitle = "<svg style=\"width: 100%; height: 100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
-
-	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
-
-	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
-
-	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
-
-	var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\r\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\r\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\r\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\r\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\r\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\r\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\r\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\r\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\r\n\t</g>\r\n</g>\r\n</svg>\r\n";
-
-	var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\r\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\r\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\r\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\r\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\r\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\r\n</svg>\r\n";
-
-	var icons = {
-	  loading: loading,
-	  playBig: playBig,
-	  play: play,
-	  pause: pause,
-	  volume: volume,
-	  volumeClose: volumeClose,
-	  subtitle: subtitle,
-	  screenshot: screenshot,
-	  danmu: danmu,
-	  setting: setting,
-	  fullscreen: fullscreen,
-	  fullscreenWeb: fullscreenWeb
-	};
-
-	function creatDomFromSvg(map) {
-	  var result = {};
-	  Object.keys(map).forEach(function (name) {
-	    var tmp = document.createElement('div');
-	    tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(name, "\">").concat(map[name], "</i>");
-
-	    var _tmp$childNodes = slicedToArray(tmp.childNodes, 1);
-
-	    result[name] = _tmp$childNodes[0];
+	  Object.defineProperty(player, 'screenshot', {
+	    value: function value() {
+	      try {
+	        captureFrame();
+	        art.emit('screenshot');
+	      } catch (error) {
+	        notice.show(error);
+	        console.warn(error);
+	      }
+	    }
 	  });
-	  return result;
 	}
-
-	var icons$1 = creatDomFromSvg(icons);
-
-	var Danmu =
-	/*#__PURE__*/
-	function () {
-	  function Danmu(option) {
-	    classCallCheck(this, Danmu);
-
-	    this.option = option;
-	  }
-
-	  createClass(Danmu, [{
-	    key: "apply",
-	    value: function apply(art, $control) {
-	      var _this = this;
-
-	      var proxy = art.events.proxy,
-	          i18n = art.i18n,
-	          danmu = art.danmu;
-	      this.$danmu = append($control, icons$1.danmu);
-	      tooltip(this.$danmu, i18n.get('Hide danmu'));
-	      proxy($control, 'click', function () {
-	        if (danmu.isOpen) {
-	          danmu.hide();
-	          setStyle(_this.$danmu, 'opacity', '1');
-	          tooltip(_this.$danmu, i18n.get('Show danmu'));
-	        } else {
-	          danmu.show();
-	          setStyle(_this.$danmu, 'opacity', '0.8');
-	          tooltip(_this.$danmu, i18n.get('Hide danmu'));
-	        }
-	      });
-	    }
-	  }]);
-
-	  return Danmu;
-	}();
 
 	var screenfull = createCommonjsModule(function (module) {
 	/*!
@@ -1427,6 +1299,262 @@
 	})();
 	});
 
+	function fullscreenMix(art, player) {
+	  var notice = art.notice,
+	      destroyEvents = art.events.destroyEvents,
+	      $player = art.refs.$player;
+
+	  var screenfullChange = function screenfullChange() {
+	    player.aspectRatioReset();
+	    art.emit('fullscreen', screenfull.isFullscreen);
+	  };
+
+	  var screenfullError = function screenfullError() {
+	    notice.show('Your browser does not seem to support full screen functionality.');
+	  };
+
+	  screenfull.on('change', screenfullChange);
+	  screenfull.on('error', screenfullError);
+	  destroyEvents.push(function () {
+	    screenfull.off('change', screenfullChange);
+	    screenfull.off('error', screenfullError);
+	  });
+	  Object.defineProperty(player, 'fullscreenState', {
+	    get: function get() {
+	      return screenfull.isFullscreen;
+	    }
+	  });
+	  Object.defineProperty(player, 'fullscreenEnabled', {
+	    value: function value() {
+	      if (player.fullscreenWebState) {
+	        player.fullscreenWebExit();
+	      }
+
+	      $player.classList.add('artplayer-fullscreen');
+	      screenfull.request($player);
+	    }
+	  });
+	  Object.defineProperty(player, 'fullscreenExit', {
+	    value: function value() {
+	      if (player.fullscreenWebState) {
+	        player.fullscreenWebExit();
+	      }
+
+	      $player.classList.remove('artplayer-fullscreen');
+	      screenfull.exit();
+	    }
+	  });
+	  Object.defineProperty(player, 'fullscreenToggle', {
+	    value: function value() {
+	      if (screenfull.enabled) {
+	        if (screenfull.isFullscreen) {
+	          player.fullscreenExit();
+	        } else {
+	          player.fullscreenEnabled();
+	        }
+	      }
+	    }
+	  });
+	}
+
+	function fullscreenWebMix(art, player) {
+	  var $player = art.refs.$player;
+	  Object.defineProperty(player, 'fullscreenWebState', {
+	    get: function get() {
+	      return $player.classList.contains('artplayer-web-fullscreen');
+	    }
+	  });
+	  Object.defineProperty(player, 'fullscreenWebEnabled', {
+	    value: function value() {
+	      if (player.fullscreenState) {
+	        player.fullscreenExit();
+	      }
+
+	      $player.classList.add('artplayer-web-fullscreen');
+	      player.aspectRatioReset();
+	      art.emit('fullscreenWeb', true);
+	    }
+	  });
+	  Object.defineProperty(player, 'fullscreenWebExit', {
+	    value: function value() {
+	      if (player.fullscreenState) {
+	        player.fullscreenExit();
+	      }
+
+	      $player.classList.remove('artplayer-web-fullscreen');
+	      player.aspectRatioReset();
+	      art.emit('fullscreenWeb', false);
+	    }
+	  });
+	  Object.defineProperty(player, 'fullscreenWebToggle', {
+	    value: function value() {
+	      if (player.fullscreenWebState) {
+	        player.exit();
+	      } else {
+	        player.enabled();
+	      }
+	    }
+	  });
+	}
+
+	var Player = function Player(art) {
+	  classCallCheck(this, Player);
+
+	  this.reconnectTime = 0;
+	  this.maxReconnectTime = 5;
+	  attrInit(art, this);
+	  eventInit(art, this);
+	  playMix(art, this);
+	  pauseMin(art, this);
+	  toggleMix(art, this);
+	  seekMix(art, this);
+	  volumeMix(art, this);
+	  currentTimeMix(art, this);
+	  durationMix(art, this);
+	  switchMix(art, this);
+	  playbackRateMix(art, this);
+	  aspectRatioMix(art, this);
+	  screenshotMix(art, this);
+	  fullscreenMix(art, this);
+	  fullscreenWebMix(art, this);
+	};
+
+	function _arrayWithHoles(arr) {
+	  if (Array.isArray(arr)) return arr;
+	}
+
+	var arrayWithHoles = _arrayWithHoles;
+
+	function _iterableToArrayLimit(arr, i) {
+	  var _arr = [];
+	  var _n = true;
+	  var _d = false;
+	  var _e = undefined;
+
+	  try {
+	    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+	      _arr.push(_s.value);
+
+	      if (i && _arr.length === i) break;
+	    }
+	  } catch (err) {
+	    _d = true;
+	    _e = err;
+	  } finally {
+	    try {
+	      if (!_n && _i["return"] != null) _i["return"]();
+	    } finally {
+	      if (_d) throw _e;
+	    }
+	  }
+
+	  return _arr;
+	}
+
+	var iterableToArrayLimit = _iterableToArrayLimit;
+
+	function _nonIterableRest() {
+	  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+	}
+
+	var nonIterableRest = _nonIterableRest;
+
+	function _slicedToArray(arr, i) {
+	  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+	}
+
+	var slicedToArray = _slicedToArray;
+
+	var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
+
+	var playBig = "<svg style=\"width: 60px; height: 60px; filter: drop-shadow(0px 1px 1px black);\" version=\"1.1\" viewBox=\"0 0 24 24\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <g id=\"info\"/>\n    <g id=\"icons\">\n        <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16   C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\" id=\"video\"/>\n    </g>\n</svg>";
+
+	var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
+
+	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
+
+	var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
+
+	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
+
+	var subtitle = "<svg style=\"width: 100%; height: 100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
+
+	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
+
+	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
+
+	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
+
+	var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\r\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\r\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\r\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\r\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\r\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\r\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\r\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\r\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\r\n\t</g>\r\n</g>\r\n</svg>\r\n";
+
+	var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\r\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\r\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\r\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\r\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\r\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\r\n</svg>\r\n";
+
+	var icons = {
+	  loading: loading,
+	  playBig: playBig,
+	  play: play,
+	  pause: pause,
+	  volume: volume,
+	  volumeClose: volumeClose,
+	  subtitle: subtitle,
+	  screenshot: screenshot,
+	  danmu: danmu,
+	  setting: setting,
+	  fullscreen: fullscreen,
+	  fullscreenWeb: fullscreenWeb
+	};
+
+	function creatDomFromSvg(map) {
+	  var result = {};
+	  Object.keys(map).forEach(function (name) {
+	    var tmp = document.createElement('div');
+	    tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(name, "\">").concat(map[name], "</i>");
+
+	    var _tmp$childNodes = slicedToArray(tmp.childNodes, 1);
+
+	    result[name] = _tmp$childNodes[0];
+	  });
+	  return result;
+	}
+
+	var icons$1 = creatDomFromSvg(icons);
+
+	var Danmu =
+	/*#__PURE__*/
+	function () {
+	  function Danmu(option) {
+	    classCallCheck(this, Danmu);
+
+	    this.option = option;
+	  }
+
+	  createClass(Danmu, [{
+	    key: "apply",
+	    value: function apply(art, $control) {
+	      var _this = this;
+
+	      var proxy = art.events.proxy,
+	          i18n = art.i18n,
+	          danmu = art.danmu;
+	      this.$danmu = append($control, icons$1.danmu);
+	      tooltip(this.$danmu, i18n.get('Hide danmu'));
+	      proxy($control, 'click', function () {
+	        if (danmu.isOpen) {
+	          danmu.hide();
+	          setStyle(_this.$danmu, 'opacity', '1');
+	          tooltip(_this.$danmu, i18n.get('Show danmu'));
+	        } else {
+	          danmu.show();
+	          setStyle(_this.$danmu, 'opacity', '0.8');
+	          tooltip(_this.$danmu, i18n.get('Hide danmu'));
+	        }
+	      });
+	    }
+	  }]);
+
+	  return Danmu;
+	}();
+
 	var Fullscreen =
 	/*#__PURE__*/
 	function () {
@@ -1441,77 +1569,22 @@
 	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      this.art = art;
-	      var _art$events = art.events,
-	          destroyEvents = _art$events.destroyEvents,
-	          proxy = _art$events.proxy,
+	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
-	          player = art.player,
-	          controls = art.controls,
-	          notice = art.notice;
+	          player = art.player;
 	      this.$fullscreen = append($control, icons$1.fullscreen);
 	      tooltip(this.$fullscreen, i18n.get('Fullscreen'));
 	      proxy($control, 'click', function () {
-	        if (controls.fullscreenWeb && controls.fullscreenWeb.state) {
-	          controls.fullscreenWeb.exit();
-	        }
-
-	        _this.toggle();
-	      });
-
-	      var screenfullChange = function screenfullChange() {
-	        player.resetAspectRatio();
-	        art.emit('fullscreen', screenfull.isFullscreen);
-	      };
-
-	      var screenfullError = function screenfullError() {
-	        notice.show('Your browser does not seem to support full screen functionality.');
-	      };
-
-	      screenfull.on('change', screenfullChange);
-	      screenfull.on('error', screenfullError);
-	      destroyEvents.push(function () {
-	        screenfull.off('change', screenfullChange);
-	        screenfull.off('error', screenfullError);
-	      });
-	    }
-	  }, {
-	    key: "enabled",
-	    value: function enabled() {
-	      var _this$art = this.art,
-	          i18n = _this$art.i18n,
-	          $player = _this$art.refs.$player;
-	      $player.classList.add('artplayer-fullscreen');
-	      setStyle(this.$fullscreen, 'opacity', '0.8');
-	      tooltip(this.$fullscreen, i18n.get('Exit fullscreen'));
-	      screenfull.request($player);
-	    }
-	  }, {
-	    key: "exit",
-	    value: function exit() {
-	      var _this$art2 = this.art,
-	          i18n = _this$art2.i18n,
-	          $player = _this$art2.refs.$player;
-	      $player.classList.remove('artplayer-fullscreen');
-	      setStyle(this.$fullscreen, 'opacity', '1');
-	      tooltip(this.$fullscreen, i18n.get('Fullscreen'));
-	      screenfull.exit();
-	    }
-	  }, {
-	    key: "toggle",
-	    value: function toggle() {
-	      if (screenfull.enabled) {
-	        if (screenfull.isFullscreen) {
-	          this.exit();
+	        if (player.fullscreenState) {
+	          player.fullscreenExit();
+	          setStyle(_this.$fullscreen, 'opacity', '1');
+	          tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
 	        } else {
-	          this.enabled();
+	          player.fullscreenEnabled();
+	          setStyle(_this.$fullscreen, 'opacity', '0.8');
+	          tooltip(_this.$fullscreen, i18n.get('Exit fullscreen'));
 	        }
-	      }
-	    }
-	  }, {
-	    key: "state",
-	    get: function get() {
-	      return screenfull.isFullscreen;
+	      });
 	    }
 	  }]);
 
@@ -1525,7 +1598,6 @@
 	    classCallCheck(this, FullscreenWeb);
 
 	    this.option = option;
-	    this.state = false;
 	  }
 
 	  createClass(FullscreenWeb, [{
@@ -1533,54 +1605,22 @@
 	    value: function apply(art, $control) {
 	      var _this = this;
 
-	      this.art = art;
 	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
-	          player = art.player,
-	          controls = art.controls;
+	          player = art.player;
 	      this.$fullscreenWeb = append($control, icons$1.fullscreenWeb);
 	      tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
 	      proxy($control, 'click', function () {
-	        if (controls.fullscreen && controls.fullscreen.state) {
-	          controls.fullscreen.exit();
+	        if (player.fullscreenWebState) {
+	          player.fullscreenWebExit();
+	          setStyle(_this.$fullscreenWeb, 'opacity', '1');
+	          tooltip(_this.$fullscreenWeb, i18n.get('Web fullscreen'));
+	        } else {
+	          player.fullscreenWebEnabled();
+	          setStyle(_this.$fullscreenWeb, 'opacity', '0.8');
+	          tooltip(_this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
 	        }
-
-	        _this.toggle();
-
-	        player.resetAspectRatio();
-	        art.emit('fullscreenWeb', _this.state);
 	      });
-	    }
-	  }, {
-	    key: "enabled",
-	    value: function enabled() {
-	      var _this$art = this.art,
-	          i18n = _this$art.i18n,
-	          $player = _this$art.refs.$player;
-	      this.state = true;
-	      $player.classList.add('artplayer-web-fullscreen');
-	      setStyle(this.$fullscreenWeb, 'opacity', '0.8');
-	      tooltip(this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
-	    }
-	  }, {
-	    key: "exit",
-	    value: function exit() {
-	      var _this$art2 = this.art,
-	          i18n = _this$art2.i18n,
-	          $player = _this$art2.refs.$player;
-	      this.state = false;
-	      $player.classList.remove('artplayer-web-fullscreen');
-	      setStyle(this.$fullscreenWeb, 'opacity', '1');
-	      tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
-	    }
-	  }, {
-	    key: "toggle",
-	    value: function toggle() {
-	      if (this.state) {
-	        this.exit();
-	      } else {
-	        this.enabled();
-	      }
 	    }
 	  }]);
 
@@ -1841,12 +1881,10 @@
 	          subtitle.hide();
 	          setStyle(_this.$subtitle, 'opacity', '1');
 	          tooltip(_this.$subtitle, i18n.get('Show subtitle'));
-	          art.emit('subtitle:hide');
 	        } else {
 	          subtitle.show();
 	          setStyle(_this.$subtitle, 'opacity', '0.8');
 	          tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
-	          art.emit('subtitle:show');
 	        }
 	      });
 	    }
@@ -2037,12 +2075,10 @@
 	          setting.hide();
 	          setStyle(_this.$setting, 'opacity', '1');
 	          tooltip(_this.$setting, i18n.get('Show setting'));
-	          art.emit('setting:hide');
 	        } else {
 	          setting.show();
 	          setStyle(_this.$setting, 'opacity', '0.8');
 	          tooltip(_this.$setting, i18n.get('Hide setting'));
-	          art.emit('setting:show');
 	        }
 	      });
 	    }
@@ -2161,41 +2197,14 @@
 	  createClass(Screenshot, [{
 	    key: "apply",
 	    value: function apply(art, $control) {
-	      var _this = this;
-
-	      this.art = art;
-	      var _this$art = this.art,
-	          proxy = _this$art.events.proxy,
-	          i18n = _this$art.i18n,
-	          notice = _this$art.notice;
+	      var proxy = art.events.proxy,
+	          i18n = art.i18n,
+	          player = art.player;
 	      this.$screenshot = append($control, icons$1.screenshot);
 	      tooltip(this.$screenshot, i18n.get('Screenshot'));
 	      proxy(this.$screenshot, 'click', function () {
-	        try {
-	          _this.captureFrame();
-
-	          art.emit('screenshot');
-	        } catch (error) {
-	          notice.show(error);
-	        }
+	        player.screenshot();
 	      });
-	    }
-	  }, {
-	    key: "captureFrame",
-	    value: function captureFrame() {
-	      var $video = this.art.refs.$video;
-	      var canvas = document.createElement('canvas');
-	      canvas.width = $video.videoWidth;
-	      canvas.height = $video.videoHeight;
-	      canvas.getContext('2d').drawImage($video, 0, 0);
-	      var dataUri = canvas.toDataURL('image/png');
-	      var elink = document.createElement('a');
-	      setStyle(elink, 'display', 'none');
-	      elink.href = dataUri;
-	      elink.download = "ArtPlayer_".concat(secondToTime($video.currentTime), ".png");
-	      document.body.appendChild(elink);
-	      elink.click();
-	      document.body.removeChild(elink);
 	    }
 	  }]);
 

@@ -1,9 +1,10 @@
 import { clamp, sublings } from '../utils';
 
 export default function playbackRateMix(art, player) {
+  const { refs: { $video, $player }, i18n, notice, contextmenu } = art;
+
   Object.defineProperty(player, 'playbackRate', {
     value: rate => {
-      const { refs: { $video, $player }, i18n, notice } = art;
       const newRate = clamp(rate, 0.1, 10);
       $video.playbackRate = newRate;
       $player.dataset.playbackRate = newRate;
@@ -12,20 +13,18 @@ export default function playbackRateMix(art, player) {
     }
   });
 
-  Object.defineProperty(player, 'removePlaybackRate', {
+  Object.defineProperty(player, 'playbackRateRemove', {
     value: () => {
-      const { contextmenu: { $playbackRate } } = art;
-      if ($playbackRate) {
-        const $normal = $playbackRate.querySelector('.normal');
+      if (contextmenu.$playbackRate) {
+        const $normal = contextmenu.$playbackRate.querySelector('.normal');
         sublings($normal).forEach(item => item.classList.remove('current'));
         $normal.classList.add('current');
       }
     }
   });
 
-  Object.defineProperty(player, 'resetPlaybackRate', {
+  Object.defineProperty(player, 'playbackRateReset', {
     value: () => {
-      const { refs: { $player } } = art;
       const { playbackRate } = $player.dataset;
       if (playbackRate) {
         player.playbackRate(Number(playbackRate));

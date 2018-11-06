@@ -1,7 +1,8 @@
 export default function playMix(art, player) {
+  const { refs: { $video }, i18n, notice } = art;
+
   Object.defineProperty(player, 'play', {
     value: () => {
-      const { refs: { $video }, i18n, notice } = art;
       const promise = $video.play();
       if (promise !== undefined) {
         promise.then().catch(err => {

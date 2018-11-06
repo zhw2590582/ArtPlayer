@@ -1,7 +1,7 @@
 import { setStyle, append } from '../utils';
 import Danmu from './danmu';
 import Fullscreen from './fullscreen';
-import FullscreenWeb from './fullscreen-web';
+import FullscreenWeb from './fullscreenWeb';
 import Pip from './pip';
 import PlayAndPause from './playAndPause';
 import Progress from './progress';

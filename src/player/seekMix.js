@@ -1,9 +1,10 @@
 import { secondToTime } from '../utils';
 
 export default function seekMix(art, player) {
+  const { refs: { $video }, notice } = art;
+
   Object.defineProperty(player, 'seek', {
     value: time => {
-      const { refs: { $video }, notice } = art;
       let newTime = Math.max(time, 0);
       if ($video.duration) {
         newTime = Math.min(newTime, $video.duration);

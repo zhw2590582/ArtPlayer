@@ -10,6 +10,9 @@ import durationMix from './durationMix';
 import switchMix from './switchMix';
 import playbackRateMix from './playbackRateMix';
 import aspectRatioMix from './aspectRatioMix';
+import screenshotMix from './screenshotMix';
+import fullscreenMix from './fullscreenMix';
+import fullscreenWebMix from './fullscreenWebMix';
 
 export default class Player {
   constructor(art) {
@@ -28,5 +31,8 @@ export default class Player {
     switchMix(art, this);
     playbackRateMix(art, this);
     aspectRatioMix(art, this);
+    screenshotMix(art, this);
+    fullscreenMix(art, this);
+    fullscreenWebMix(art, this);
   }
 }
