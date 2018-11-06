@@ -22,10 +22,17 @@ export default class Events {
 
     const hideCursor = debounce(() => {
       $player.classList.add('artplayer-hide-cursor');
+      if (this.art.player.fullscreenState || this.art.player.fullscreenWebState) {
+        $player.classList.remove('artplayer-hover');
+        this.art.controls.hide();
+      }
     }, 5000);
     this.proxy($player, 'mousemove', () => {
       $player.classList.remove('artplayer-hide-cursor');
-      hideCursor();
+      this.art.controls.show();
+      if (!this.art.player.pipState) {
+        hideCursor();
+      }
     });
   }
 

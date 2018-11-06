@@ -1,4 +1,5 @@
-import { append } from '../utils';
+import { append, tooltip } from '../utils';
+import icons from '../icons';
 
 export default class Pip {
   constructor(option) {
@@ -7,9 +8,10 @@ export default class Pip {
 
   apply(art, $control) {
     const { events: { proxy }, i18n, player } = art;
-    this.$pip = append($control, '画中画');
+    this.$pip = append($control, icons.pip);
+    tooltip(this.$pip, i18n.get('Mini player'));
     proxy($control, 'click', () => {
-      player.pipToggle();
+      player.pipEnabled();
     });
   }
 }

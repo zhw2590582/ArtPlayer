@@ -27,7 +27,8 @@ let i18nMap = {
     'Exit web fullscreen': '退出网页全屏',
     'Common': '常规',
     'Hide setting': '隐藏设置',
-    'Show setting': '显示设置'
+    'Show setting': '显示设置',
+    'Mini player': '迷你播放器'
   },
   'zh-tw': {
     'About author': '關於作者',
@@ -57,7 +58,8 @@ let i18nMap = {
     'Exit web fullscreen': '退出網頁全屏',
     'Common': '常規',
     'Hide setting': '隱藏設置',
-    'Show setting': '顯示設置'
+    'Show setting': '顯示設置',
+    'Mini player': '迷你播放器'
   }
 };
 

@@ -10,6 +10,7 @@ import danmu from './danmu.svg';
 import setting from './setting.svg';
 import fullscreen from './fullscreen.svg';
 import fullscreenWeb from './fullscreen-web.svg';
+import pip from './pip.svg';
 
 const icons = {
   loading,
@@ -23,7 +24,8 @@ const icons = {
   danmu,
   setting,
   fullscreen,
-  fullscreenWeb
+  fullscreenWeb,
+  pip
 };
 
 function creatDomFromSvg(map) {

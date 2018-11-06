@@ -451,6 +451,7 @@
 	    type: 'string',
 	    required: true
 	  },
+	  title: 'string',
 	  volume: 'number',
 	  thumbnails: {
 	    type: 'object',
@@ -644,7 +645,7 @@
 	  classCallCheck(this, Template);
 
 	  var refs = art.refs;
-	  refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-danmu\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n      </div>\n    ";
+	  refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-danmu\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n      </div>\n    ";
 	  refs.$player = refs.$container.querySelector('.artplayer-video-player');
 	  refs.$video = refs.$container.querySelector('.artplayer-video');
 	  refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -666,6 +667,9 @@
 	  refs.$info = refs.$container.querySelector('.artplayer-info');
 	  refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
 	  refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
+	  refs.$pipHeader = refs.$container.querySelector('.artplayer-pip-header');
+	  refs.$pipTitle = refs.$container.querySelector('.artplayer-pip-title');
+	  refs.$pipClose = refs.$container.querySelector('.artplayer-pip-close');
 	};
 
 	var i18nMap = {
@@ -697,7 +701,8 @@
 	    'Exit web fullscreen': '退出网页全屏',
 	    'Common': '常规',
 	    'Hide setting': '隐藏设置',
-	    'Show setting': '显示设置'
+	    'Show setting': '显示设置',
+	    'Mini player': '迷你播放器'
 	  },
 	  'zh-tw': {
 	    'About author': '關於作者',
@@ -727,7 +732,8 @@
 	    'Exit web fullscreen': '退出網頁全屏',
 	    'Common': '常規',
 	    'Hide setting': '隱藏設置',
-	    'Show setting': '顯示設置'
+	    'Show setting': '顯示設置',
+	    'Mini player': '迷你播放器'
 	  }
 	};
 
@@ -1394,15 +1400,1363 @@
 	  });
 	}
 
+	var getSize = createCommonjsModule(function (module) {
+	/*!
+	 * getSize v2.0.3
+	 * measure size of elements
+	 * MIT license
+	 */
+
+	/* jshint browser: true, strict: true, undef: true, unused: true */
+	/* globals console: false */
+
+	( function( window, factory ) {
+	  /* jshint strict: false */ /* globals define, module */
+	  if ( module.exports ) {
+	    // CommonJS
+	    module.exports = factory();
+	  } else {
+	    // browser global
+	    window.getSize = factory();
+	  }
+
+	})( window, function factory() {
+
+	// -------------------------- helpers -------------------------- //
+
+	// get a number from a string, not a percentage
+	function getStyleSize( value ) {
+	  var num = parseFloat( value );
+	  // not a percent like '100%', and a number
+	  var isValid = value.indexOf('%') == -1 && !isNaN( num );
+	  return isValid && num;
+	}
+
+	function noop() {}
+
+	var logError = typeof console == 'undefined' ? noop :
+	  function( message ) {
+	    console.error( message );
+	  };
+
+	// -------------------------- measurements -------------------------- //
+
+	var measurements = [
+	  'paddingLeft',
+	  'paddingRight',
+	  'paddingTop',
+	  'paddingBottom',
+	  'marginLeft',
+	  'marginRight',
+	  'marginTop',
+	  'marginBottom',
+	  'borderLeftWidth',
+	  'borderRightWidth',
+	  'borderTopWidth',
+	  'borderBottomWidth'
+	];
+
+	var measurementsLength = measurements.length;
+
+	function getZeroSize() {
+	  var size = {
+	    width: 0,
+	    height: 0,
+	    innerWidth: 0,
+	    innerHeight: 0,
+	    outerWidth: 0,
+	    outerHeight: 0
+	  };
+	  for ( var i=0; i < measurementsLength; i++ ) {
+	    var measurement = measurements[i];
+	    size[ measurement ] = 0;
+	  }
+	  return size;
+	}
+
+	// -------------------------- getStyle -------------------------- //
+
+	/**
+	 * getStyle, get style of element, check for Firefox bug
+	 * https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+	 */
+	function getStyle( elem ) {
+	  var style = getComputedStyle( elem );
+	  if ( !style ) {
+	    logError( 'Style returned ' + style +
+	      '. Are you running this code in a hidden iframe on Firefox? ' +
+	      'See https://bit.ly/getsizebug1' );
+	  }
+	  return style;
+	}
+
+	// -------------------------- setup -------------------------- //
+
+	var isSetup = false;
+
+	var isBoxSizeOuter;
+
+	/**
+	 * setup
+	 * check isBoxSizerOuter
+	 * do on first getSize() rather than on page load for Firefox bug
+	 */
+	function setup() {
+	  // setup once
+	  if ( isSetup ) {
+	    return;
+	  }
+	  isSetup = true;
+
+	  // -------------------------- box sizing -------------------------- //
+
+	  /**
+	   * Chrome & Safari measure the outer-width on style.width on border-box elems
+	   * IE11 & Firefox<29 measures the inner-width
+	   */
+	  var div = document.createElement('div');
+	  div.style.width = '200px';
+	  div.style.padding = '1px 2px 3px 4px';
+	  div.style.borderStyle = 'solid';
+	  div.style.borderWidth = '1px 2px 3px 4px';
+	  div.style.boxSizing = 'border-box';
+
+	  var body = document.body || document.documentElement;
+	  body.appendChild( div );
+	  var style = getStyle( div );
+	  // round value for browser zoom. desandro/masonry#928
+	  isBoxSizeOuter = Math.round( getStyleSize( style.width ) ) == 200;
+	  getSize.isBoxSizeOuter = isBoxSizeOuter;
+
+	  body.removeChild( div );
+	}
+
+	// -------------------------- getSize -------------------------- //
+
+	function getSize( elem ) {
+	  setup();
+
+	  // use querySeletor if elem is string
+	  if ( typeof elem == 'string' ) {
+	    elem = document.querySelector( elem );
+	  }
+
+	  // do not proceed on non-objects
+	  if ( !elem || typeof elem != 'object' || !elem.nodeType ) {
+	    return;
+	  }
+
+	  var style = getStyle( elem );
+
+	  // if hidden, everything is 0
+	  if ( style.display == 'none' ) {
+	    return getZeroSize();
+	  }
+
+	  var size = {};
+	  size.width = elem.offsetWidth;
+	  size.height = elem.offsetHeight;
+
+	  var isBorderBox = size.isBorderBox = style.boxSizing == 'border-box';
+
+	  // get all measurements
+	  for ( var i=0; i < measurementsLength; i++ ) {
+	    var measurement = measurements[i];
+	    var value = style[ measurement ];
+	    var num = parseFloat( value );
+	    // any 'auto', 'medium' value will be 0
+	    size[ measurement ] = !isNaN( num ) ? num : 0;
+	  }
+
+	  var paddingWidth = size.paddingLeft + size.paddingRight;
+	  var paddingHeight = size.paddingTop + size.paddingBottom;
+	  var marginWidth = size.marginLeft + size.marginRight;
+	  var marginHeight = size.marginTop + size.marginBottom;
+	  var borderWidth = size.borderLeftWidth + size.borderRightWidth;
+	  var borderHeight = size.borderTopWidth + size.borderBottomWidth;
+
+	  var isBorderBoxSizeOuter = isBorderBox && isBoxSizeOuter;
+
+	  // overwrite width and height if we can get it from style
+	  var styleWidth = getStyleSize( style.width );
+	  if ( styleWidth !== false ) {
+	    size.width = styleWidth +
+	      // add padding and border unless it's already including it
+	      ( isBorderBoxSizeOuter ? 0 : paddingWidth + borderWidth );
+	  }
+
+	  var styleHeight = getStyleSize( style.height );
+	  if ( styleHeight !== false ) {
+	    size.height = styleHeight +
+	      // add padding and border unless it's already including it
+	      ( isBorderBoxSizeOuter ? 0 : paddingHeight + borderHeight );
+	  }
+
+	  size.innerWidth = size.width - ( paddingWidth + borderWidth );
+	  size.innerHeight = size.height - ( paddingHeight + borderHeight );
+
+	  size.outerWidth = size.width + marginWidth;
+	  size.outerHeight = size.height + marginHeight;
+
+	  return size;
+	}
+
+	return getSize;
+
+	});
+	});
+
+	var evEmitter = createCommonjsModule(function (module) {
+	/**
+	 * EvEmitter v1.1.0
+	 * Lil' event emitter
+	 * MIT License
+	 */
+
+	/* jshint unused: true, undef: true, strict: true */
+
+	( function( global, factory ) {
+	  // universal module definition
+	  /* jshint strict: false */ /* globals define, module, window */
+	  if ( module.exports ) {
+	    // CommonJS - Browserify, Webpack
+	    module.exports = factory();
+	  } else {
+	    // Browser globals
+	    global.EvEmitter = factory();
+	  }
+
+	}( typeof window != 'undefined' ? window : commonjsGlobal, function() {
+
+	function EvEmitter() {}
+
+	var proto = EvEmitter.prototype;
+
+	proto.on = function( eventName, listener ) {
+	  if ( !eventName || !listener ) {
+	    return;
+	  }
+	  // set events hash
+	  var events = this._events = this._events || {};
+	  // set listeners array
+	  var listeners = events[ eventName ] = events[ eventName ] || [];
+	  // only add once
+	  if ( listeners.indexOf( listener ) == -1 ) {
+	    listeners.push( listener );
+	  }
+
+	  return this;
+	};
+
+	proto.once = function( eventName, listener ) {
+	  if ( !eventName || !listener ) {
+	    return;
+	  }
+	  // add event
+	  this.on( eventName, listener );
+	  // set once flag
+	  // set onceEvents hash
+	  var onceEvents = this._onceEvents = this._onceEvents || {};
+	  // set onceListeners object
+	  var onceListeners = onceEvents[ eventName ] = onceEvents[ eventName ] || {};
+	  // set flag
+	  onceListeners[ listener ] = true;
+
+	  return this;
+	};
+
+	proto.off = function( eventName, listener ) {
+	  var listeners = this._events && this._events[ eventName ];
+	  if ( !listeners || !listeners.length ) {
+	    return;
+	  }
+	  var index = listeners.indexOf( listener );
+	  if ( index != -1 ) {
+	    listeners.splice( index, 1 );
+	  }
+
+	  return this;
+	};
+
+	proto.emitEvent = function( eventName, args ) {
+	  var listeners = this._events && this._events[ eventName ];
+	  if ( !listeners || !listeners.length ) {
+	    return;
+	  }
+	  // copy over to avoid interference if .off() in listener
+	  listeners = listeners.slice(0);
+	  args = args || [];
+	  // once stuff
+	  var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
+
+	  for ( var i=0; i < listeners.length; i++ ) {
+	    var listener = listeners[i];
+	    var isOnce = onceListeners && onceListeners[ listener ];
+	    if ( isOnce ) {
+	      // remove listener
+	      // remove before trigger to prevent recursion
+	      this.off( eventName, listener );
+	      // unset once flag
+	      delete onceListeners[ listener ];
+	    }
+	    // trigger listener
+	    listener.apply( this, args );
+	  }
+
+	  return this;
+	};
+
+	proto.allOff = function() {
+	  delete this._events;
+	  delete this._onceEvents;
+	};
+
+	return EvEmitter;
+
+	}));
+	});
+
+	var unipointer = createCommonjsModule(function (module) {
+	/*!
+	 * Unipointer v2.3.0
+	 * base class for doing one thing with pointer event
+	 * MIT license
+	 */
+
+	/*jshint browser: true, undef: true, unused: true, strict: true */
+
+	( function( window, factory ) {
+	  // universal module definition
+	  /* jshint strict: false */ /*global define, module, require */
+	  if ( module.exports ) {
+	    // CommonJS
+	    module.exports = factory(
+	      window,
+	      evEmitter
+	    );
+	  } else {
+	    // browser global
+	    window.Unipointer = factory(
+	      window,
+	      window.EvEmitter
+	    );
+	  }
+
+	}( window, function factory( window, EvEmitter ) {
+
+	function noop() {}
+
+	function Unipointer() {}
+
+	// inherit EvEmitter
+	var proto = Unipointer.prototype = Object.create( EvEmitter.prototype );
+
+	proto.bindStartEvent = function( elem ) {
+	  this._bindStartEvent( elem, true );
+	};
+
+	proto.unbindStartEvent = function( elem ) {
+	  this._bindStartEvent( elem, false );
+	};
+
+	/**
+	 * Add or remove start event
+	 * @param {Boolean} isAdd - remove if falsey
+	 */
+	proto._bindStartEvent = function( elem, isAdd ) {
+	  // munge isAdd, default to true
+	  isAdd = isAdd === undefined ? true : isAdd;
+	  var bindMethod = isAdd ? 'addEventListener' : 'removeEventListener';
+
+	  // default to mouse events
+	  var startEvent = 'mousedown';
+	  if ( window.PointerEvent ) {
+	    // Pointer Events
+	    startEvent = 'pointerdown';
+	  } else if ( 'ontouchstart' in window ) {
+	    // Touch Events. iOS Safari
+	    startEvent = 'touchstart';
+	  }
+	  elem[ bindMethod ]( startEvent, this );
+	};
+
+	// trigger handler methods for events
+	proto.handleEvent = function( event ) {
+	  var method = 'on' + event.type;
+	  if ( this[ method ] ) {
+	    this[ method ]( event );
+	  }
+	};
+
+	// returns the touch that we're keeping track of
+	proto.getTouch = function( touches ) {
+	  for ( var i=0; i < touches.length; i++ ) {
+	    var touch = touches[i];
+	    if ( touch.identifier == this.pointerIdentifier ) {
+	      return touch;
+	    }
+	  }
+	};
+
+	// ----- start event ----- //
+
+	proto.onmousedown = function( event ) {
+	  // dismiss clicks from right or middle buttons
+	  var button = event.button;
+	  if ( button && ( button !== 0 && button !== 1 ) ) {
+	    return;
+	  }
+	  this._pointerDown( event, event );
+	};
+
+	proto.ontouchstart = function( event ) {
+	  this._pointerDown( event, event.changedTouches[0] );
+	};
+
+	proto.onpointerdown = function( event ) {
+	  this._pointerDown( event, event );
+	};
+
+	/**
+	 * pointer start
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto._pointerDown = function( event, pointer ) {
+	  // dismiss right click and other pointers
+	  // button = 0 is okay, 1-4 not
+	  if ( event.button || this.isPointerDown ) {
+	    return;
+	  }
+
+	  this.isPointerDown = true;
+	  // save pointer identifier to match up touch events
+	  this.pointerIdentifier = pointer.pointerId !== undefined ?
+	    // pointerId for pointer events, touch.indentifier for touch events
+	    pointer.pointerId : pointer.identifier;
+
+	  this.pointerDown( event, pointer );
+	};
+
+	proto.pointerDown = function( event, pointer ) {
+	  this._bindPostStartEvents( event );
+	  this.emitEvent( 'pointerDown', [ event, pointer ] );
+	};
+
+	// hash of events to be bound after start event
+	var postStartEvents = {
+	  mousedown: [ 'mousemove', 'mouseup' ],
+	  touchstart: [ 'touchmove', 'touchend', 'touchcancel' ],
+	  pointerdown: [ 'pointermove', 'pointerup', 'pointercancel' ],
+	};
+
+	proto._bindPostStartEvents = function( event ) {
+	  if ( !event ) {
+	    return;
+	  }
+	  // get proper events to match start event
+	  var events = postStartEvents[ event.type ];
+	  // bind events to node
+	  events.forEach( function( eventName ) {
+	    window.addEventListener( eventName, this );
+	  }, this );
+	  // save these arguments
+	  this._boundPointerEvents = events;
+	};
+
+	proto._unbindPostStartEvents = function() {
+	  // check for _boundEvents, in case dragEnd triggered twice (old IE8 bug)
+	  if ( !this._boundPointerEvents ) {
+	    return;
+	  }
+	  this._boundPointerEvents.forEach( function( eventName ) {
+	    window.removeEventListener( eventName, this );
+	  }, this );
+
+	  delete this._boundPointerEvents;
+	};
+
+	// ----- move event ----- //
+
+	proto.onmousemove = function( event ) {
+	  this._pointerMove( event, event );
+	};
+
+	proto.onpointermove = function( event ) {
+	  if ( event.pointerId == this.pointerIdentifier ) {
+	    this._pointerMove( event, event );
+	  }
+	};
+
+	proto.ontouchmove = function( event ) {
+	  var touch = this.getTouch( event.changedTouches );
+	  if ( touch ) {
+	    this._pointerMove( event, touch );
+	  }
+	};
+
+	/**
+	 * pointer move
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 * @private
+	 */
+	proto._pointerMove = function( event, pointer ) {
+	  this.pointerMove( event, pointer );
+	};
+
+	// public
+	proto.pointerMove = function( event, pointer ) {
+	  this.emitEvent( 'pointerMove', [ event, pointer ] );
+	};
+
+	// ----- end event ----- //
+
+
+	proto.onmouseup = function( event ) {
+	  this._pointerUp( event, event );
+	};
+
+	proto.onpointerup = function( event ) {
+	  if ( event.pointerId == this.pointerIdentifier ) {
+	    this._pointerUp( event, event );
+	  }
+	};
+
+	proto.ontouchend = function( event ) {
+	  var touch = this.getTouch( event.changedTouches );
+	  if ( touch ) {
+	    this._pointerUp( event, touch );
+	  }
+	};
+
+	/**
+	 * pointer up
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 * @private
+	 */
+	proto._pointerUp = function( event, pointer ) {
+	  this._pointerDone();
+	  this.pointerUp( event, pointer );
+	};
+
+	// public
+	proto.pointerUp = function( event, pointer ) {
+	  this.emitEvent( 'pointerUp', [ event, pointer ] );
+	};
+
+	// ----- pointer done ----- //
+
+	// triggered on pointer up & pointer cancel
+	proto._pointerDone = function() {
+	  this._pointerReset();
+	  this._unbindPostStartEvents();
+	  this.pointerDone();
+	};
+
+	proto._pointerReset = function() {
+	  // reset properties
+	  this.isPointerDown = false;
+	  delete this.pointerIdentifier;
+	};
+
+	proto.pointerDone = noop;
+
+	// ----- pointer cancel ----- //
+
+	proto.onpointercancel = function( event ) {
+	  if ( event.pointerId == this.pointerIdentifier ) {
+	    this._pointerCancel( event, event );
+	  }
+	};
+
+	proto.ontouchcancel = function( event ) {
+	  var touch = this.getTouch( event.changedTouches );
+	  if ( touch ) {
+	    this._pointerCancel( event, touch );
+	  }
+	};
+
+	/**
+	 * pointer cancel
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 * @private
+	 */
+	proto._pointerCancel = function( event, pointer ) {
+	  this._pointerDone();
+	  this.pointerCancel( event, pointer );
+	};
+
+	// public
+	proto.pointerCancel = function( event, pointer ) {
+	  this.emitEvent( 'pointerCancel', [ event, pointer ] );
+	};
+
+	// -----  ----- //
+
+	// utility function for getting x/y coords from event
+	Unipointer.getPointerPoint = function( pointer ) {
+	  return {
+	    x: pointer.pageX,
+	    y: pointer.pageY
+	  };
+	};
+
+	// -----  ----- //
+
+	return Unipointer;
+
+	}));
+	});
+
+	var unidragger = createCommonjsModule(function (module) {
+	/*!
+	 * Unidragger v2.3.0
+	 * Draggable base class
+	 * MIT license
+	 */
+
+	/*jshint browser: true, unused: true, undef: true, strict: true */
+
+	( function( window, factory ) {
+	  // universal module definition
+	  /*jshint strict: false */ /*globals define, module, require */
+
+	  if ( module.exports ) {
+	    // CommonJS
+	    module.exports = factory(
+	      window,
+	      unipointer
+	    );
+	  } else {
+	    // browser global
+	    window.Unidragger = factory(
+	      window,
+	      window.Unipointer
+	    );
+	  }
+
+	}( window, function factory( window, Unipointer ) {
+
+	// -------------------------- Unidragger -------------------------- //
+
+	function Unidragger() {}
+
+	// inherit Unipointer & EvEmitter
+	var proto = Unidragger.prototype = Object.create( Unipointer.prototype );
+
+	// ----- bind start ----- //
+
+	proto.bindHandles = function() {
+	  this._bindHandles( true );
+	};
+
+	proto.unbindHandles = function() {
+	  this._bindHandles( false );
+	};
+
+	/**
+	 * Add or remove start event
+	 * @param {Boolean} isAdd
+	 */
+	proto._bindHandles = function( isAdd ) {
+	  // munge isAdd, default to true
+	  isAdd = isAdd === undefined ? true : isAdd;
+	  // bind each handle
+	  var bindMethod = isAdd ? 'addEventListener' : 'removeEventListener';
+	  var touchAction = isAdd ? this._touchActionValue : '';
+	  for ( var i=0; i < this.handles.length; i++ ) {
+	    var handle = this.handles[i];
+	    this._bindStartEvent( handle, isAdd );
+	    handle[ bindMethod ]( 'click', this );
+	    // touch-action: none to override browser touch gestures. metafizzy/flickity#540
+	    if ( window.PointerEvent ) {
+	      handle.style.touchAction = touchAction;
+	    }
+	  }
+	};
+
+	// prototype so it can be overwriteable by Flickity
+	proto._touchActionValue = 'none';
+
+	// ----- start event ----- //
+
+	/**
+	 * pointer start
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto.pointerDown = function( event, pointer ) {
+	  var isOkay = this.okayPointerDown( event );
+	  if ( !isOkay ) {
+	    return;
+	  }
+	  // track start event position
+	  this.pointerDownPointer = pointer;
+
+	  event.preventDefault();
+	  this.pointerDownBlur();
+	  // bind move and end events
+	  this._bindPostStartEvents( event );
+	  this.emitEvent( 'pointerDown', [ event, pointer ] );
+	};
+
+	// nodes that have text fields
+	var cursorNodes = {
+	  TEXTAREA: true,
+	  INPUT: true,
+	  SELECT: true,
+	  OPTION: true,
+	};
+
+	// input types that do not have text fields
+	var clickTypes = {
+	  radio: true,
+	  checkbox: true,
+	  button: true,
+	  submit: true,
+	  image: true,
+	  file: true,
+	};
+
+	// dismiss inputs with text fields. flickity#403, flickity#404
+	proto.okayPointerDown = function( event ) {
+	  var isCursorNode = cursorNodes[ event.target.nodeName ];
+	  var isClickType = clickTypes[ event.target.type ];
+	  var isOkay = !isCursorNode || isClickType;
+	  if ( !isOkay ) {
+	    this._pointerReset();
+	  }
+	  return isOkay;
+	};
+
+	// kludge to blur previously focused input
+	proto.pointerDownBlur = function() {
+	  var focused = document.activeElement;
+	  // do not blur body for IE10, metafizzy/flickity#117
+	  var canBlur = focused && focused.blur && focused != document.body;
+	  if ( canBlur ) {
+	    focused.blur();
+	  }
+	};
+
+	// ----- move event ----- //
+
+	/**
+	 * drag move
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto.pointerMove = function( event, pointer ) {
+	  var moveVector = this._dragPointerMove( event, pointer );
+	  this.emitEvent( 'pointerMove', [ event, pointer, moveVector ] );
+	  this._dragMove( event, pointer, moveVector );
+	};
+
+	// base pointer move logic
+	proto._dragPointerMove = function( event, pointer ) {
+	  var moveVector = {
+	    x: pointer.pageX - this.pointerDownPointer.pageX,
+	    y: pointer.pageY - this.pointerDownPointer.pageY
+	  };
+	  // start drag if pointer has moved far enough to start drag
+	  if ( !this.isDragging && this.hasDragStarted( moveVector ) ) {
+	    this._dragStart( event, pointer );
+	  }
+	  return moveVector;
+	};
+
+	// condition if pointer has moved far enough to start drag
+	proto.hasDragStarted = function( moveVector ) {
+	  return Math.abs( moveVector.x ) > 3 || Math.abs( moveVector.y ) > 3;
+	};
+
+	// ----- end event ----- //
+
+	/**
+	 * pointer up
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto.pointerUp = function( event, pointer ) {
+	  this.emitEvent( 'pointerUp', [ event, pointer ] );
+	  this._dragPointerUp( event, pointer );
+	};
+
+	proto._dragPointerUp = function( event, pointer ) {
+	  if ( this.isDragging ) {
+	    this._dragEnd( event, pointer );
+	  } else {
+	    // pointer didn't move enough for drag to start
+	    this._staticClick( event, pointer );
+	  }
+	};
+
+	// -------------------------- drag -------------------------- //
+
+	// dragStart
+	proto._dragStart = function( event, pointer ) {
+	  this.isDragging = true;
+	  // prevent clicks
+	  this.isPreventingClicks = true;
+	  this.dragStart( event, pointer );
+	};
+
+	proto.dragStart = function( event, pointer ) {
+	  this.emitEvent( 'dragStart', [ event, pointer ] );
+	};
+
+	// dragMove
+	proto._dragMove = function( event, pointer, moveVector ) {
+	  // do not drag if not dragging yet
+	  if ( !this.isDragging ) {
+	    return;
+	  }
+
+	  this.dragMove( event, pointer, moveVector );
+	};
+
+	proto.dragMove = function( event, pointer, moveVector ) {
+	  event.preventDefault();
+	  this.emitEvent( 'dragMove', [ event, pointer, moveVector ] );
+	};
+
+	// dragEnd
+	proto._dragEnd = function( event, pointer ) {
+	  // set flags
+	  this.isDragging = false;
+	  // re-enable clicking async
+	  setTimeout( function() {
+	    delete this.isPreventingClicks;
+	  }.bind( this ) );
+
+	  this.dragEnd( event, pointer );
+	};
+
+	proto.dragEnd = function( event, pointer ) {
+	  this.emitEvent( 'dragEnd', [ event, pointer ] );
+	};
+
+	// ----- onclick ----- //
+
+	// handle all clicks and prevent clicks when dragging
+	proto.onclick = function( event ) {
+	  if ( this.isPreventingClicks ) {
+	    event.preventDefault();
+	  }
+	};
+
+	// ----- staticClick ----- //
+
+	// triggered after pointer down & up with no/tiny movement
+	proto._staticClick = function( event, pointer ) {
+	  // ignore emulated mouse up clicks
+	  if ( this.isIgnoringMouseUp && event.type == 'mouseup' ) {
+	    return;
+	  }
+
+	  this.staticClick( event, pointer );
+
+	  // set flag for emulated clicks 300ms after touchend
+	  if ( event.type != 'mouseup' ) {
+	    this.isIgnoringMouseUp = true;
+	    // reset flag after 300ms
+	    setTimeout( function() {
+	      delete this.isIgnoringMouseUp;
+	    }.bind( this ), 400 );
+	  }
+	};
+
+	proto.staticClick = function( event, pointer ) {
+	  this.emitEvent( 'staticClick', [ event, pointer ] );
+	};
+
+	// ----- utils ----- //
+
+	Unidragger.getPointerPoint = Unipointer.getPointerPoint;
+
+	// -----  ----- //
+
+	return Unidragger;
+
+	}));
+	});
+
+	var draggabilly = createCommonjsModule(function (module) {
+	/*!
+	 * Draggabilly v2.2.0
+	 * Make that shiz draggable
+	 * https://draggabilly.desandro.com
+	 * MIT license
+	 */
+
+	/*jshint browser: true, strict: true, undef: true, unused: true */
+
+	( function( window, factory ) {
+	  // universal module definition
+	  /* jshint strict: false */ /*globals define, module, require */
+	  if ( module.exports ) {
+	    // CommonJS
+	    module.exports = factory(
+	      window,
+	      getSize,
+	      unidragger
+	    );
+	  } else {
+	    // browser global
+	    window.Draggabilly = factory(
+	      window,
+	      window.getSize,
+	      window.Unidragger
+	    );
+	  }
+
+	}( window, function factory( window, getSize$$1, Unidragger ) {
+
+	// -------------------------- helpers & variables -------------------------- //
+
+	// extend objects
+	function extend( a, b ) {
+	  for ( var prop in b ) {
+	    a[ prop ] = b[ prop ];
+	  }
+	  return a;
+	}
+
+	function noop() {}
+
+	var jQuery = window.jQuery;
+
+	// --------------------------  -------------------------- //
+
+	function Draggabilly( element, options ) {
+	  // querySelector if string
+	  this.element = typeof element == 'string' ?
+	    document.querySelector( element ) : element;
+
+	  if ( jQuery ) {
+	    this.$element = jQuery( this.element );
+	  }
+
+	  // options
+	  this.options = extend( {}, this.constructor.defaults );
+	  this.option( options );
+
+	  this._create();
+	}
+
+	// inherit Unidragger methods
+	var proto = Draggabilly.prototype = Object.create( Unidragger.prototype );
+
+	Draggabilly.defaults = {
+	};
+
+	/**
+	 * set options
+	 * @param {Object} opts
+	 */
+	proto.option = function( opts ) {
+	  extend( this.options, opts );
+	};
+
+	// css position values that don't need to be set
+	var positionValues = {
+	  relative: true,
+	  absolute: true,
+	  fixed: true
+	};
+
+	proto._create = function() {
+	  // properties
+	  this.position = {};
+	  this._getPosition();
+
+	  this.startPoint = { x: 0, y: 0 };
+	  this.dragPoint = { x: 0, y: 0 };
+
+	  this.startPosition = extend( {}, this.position );
+
+	  // set relative positioning
+	  var style = getComputedStyle( this.element );
+	  if ( !positionValues[ style.position ] ) {
+	    this.element.style.position = 'relative';
+	  }
+
+	  // events, bridge jQuery events from vanilla
+	  this.on( 'pointerDown', this.onPointerDown );
+	  this.on( 'pointerMove', this.onPointerMove );
+	  this.on( 'pointerUp', this.onPointerUp );
+
+	  this.enable();
+	  this.setHandles();
+	};
+
+	/**
+	 * set this.handles and bind start events to 'em
+	 */
+	proto.setHandles = function() {
+	  this.handles = this.options.handle ?
+	    this.element.querySelectorAll( this.options.handle ) : [ this.element ];
+
+	  this.bindHandles();
+	};
+
+	/**
+	 * emits events via EvEmitter and jQuery events
+	 * @param {String} type - name of event
+	 * @param {Event} event - original event
+	 * @param {Array} args - extra arguments
+	 */
+	proto.dispatchEvent = function( type, event, args ) {
+	  var emitArgs = [ event ].concat( args );
+	  this.emitEvent( type, emitArgs );
+	  this.dispatchJQueryEvent( type, event, args );
+	};
+
+	proto.dispatchJQueryEvent = function( type, event, args ) {
+	  var jQuery = window.jQuery;
+	  // trigger jQuery event
+	  if ( !jQuery || !this.$element ) {
+	    return;
+	  }
+	  // create jQuery event
+	  var $event = jQuery.Event( event );
+	  $event.type = type;
+	  this.$element.trigger( $event, args );
+	};
+
+	// -------------------------- position -------------------------- //
+
+	// get x/y position from style
+	proto._getPosition = function() {
+	  var style = getComputedStyle( this.element );
+	  var x = this._getPositionCoord( style.left, 'width' );
+	  var y = this._getPositionCoord( style.top, 'height' );
+	  // clean up 'auto' or other non-integer values
+	  this.position.x = isNaN( x ) ? 0 : x;
+	  this.position.y = isNaN( y ) ? 0 : y;
+
+	  this._addTransformPosition( style );
+	};
+
+	proto._getPositionCoord = function( styleSide, measure ) {
+	  if ( styleSide.indexOf('%') != -1 ) {
+	    // convert percent into pixel for Safari, #75
+	    var parentSize = getSize$$1( this.element.parentNode );
+	    // prevent not-in-DOM element throwing bug, #131
+	    return !parentSize ? 0 :
+	      ( parseFloat( styleSide ) / 100 ) * parentSize[ measure ];
+	  }
+	  return parseInt( styleSide, 10 );
+	};
+
+	// add transform: translate( x, y ) to position
+	proto._addTransformPosition = function( style ) {
+	  var transform = style.transform;
+	  // bail out if value is 'none'
+	  if ( transform.indexOf('matrix') !== 0 ) {
+	    return;
+	  }
+	  // split matrix(1, 0, 0, 1, x, y)
+	  var matrixValues = transform.split(',');
+	  // translate X value is in 12th or 4th position
+	  var xIndex = transform.indexOf('matrix3d') === 0 ? 12 : 4;
+	  var translateX = parseInt( matrixValues[ xIndex ], 10 );
+	  // translate Y value is in 13th or 5th position
+	  var translateY = parseInt( matrixValues[ xIndex + 1 ], 10 );
+	  this.position.x += translateX;
+	  this.position.y += translateY;
+	};
+
+	// -------------------------- events -------------------------- //
+
+	proto.onPointerDown = function( event, pointer ) {
+	  this.element.classList.add('is-pointer-down');
+	  this.dispatchJQueryEvent( 'pointerDown', event, [ pointer ] );
+	};
+
+	/**
+	 * drag start
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto.dragStart = function( event, pointer ) {
+	  if ( !this.isEnabled ) {
+	    return;
+	  }
+	  this._getPosition();
+	  this.measureContainment();
+	  // position _when_ drag began
+	  this.startPosition.x = this.position.x;
+	  this.startPosition.y = this.position.y;
+	  // reset left/top style
+	  this.setLeftTop();
+
+	  this.dragPoint.x = 0;
+	  this.dragPoint.y = 0;
+
+	  this.element.classList.add('is-dragging');
+	  this.dispatchEvent( 'dragStart', event, [ pointer ] );
+	  // start animation
+	  this.animate();
+	};
+
+	proto.measureContainment = function() {
+	  var container = this.getContainer();
+	  if ( !container ) {
+	    return;
+	  }
+
+	  var elemSize = getSize$$1( this.element );
+	  var containerSize = getSize$$1( container );
+	  var elemRect = this.element.getBoundingClientRect();
+	  var containerRect = container.getBoundingClientRect();
+
+	  var borderSizeX = containerSize.borderLeftWidth + containerSize.borderRightWidth;
+	  var borderSizeY = containerSize.borderTopWidth + containerSize.borderBottomWidth;
+
+	  var position = this.relativeStartPosition = {
+	    x: elemRect.left - ( containerRect.left + containerSize.borderLeftWidth ),
+	    y: elemRect.top - ( containerRect.top + containerSize.borderTopWidth )
+	  };
+
+	  this.containSize = {
+	    width: ( containerSize.width - borderSizeX ) - position.x - elemSize.width,
+	    height: ( containerSize.height - borderSizeY ) - position.y - elemSize.height
+	  };
+	};
+
+	proto.getContainer = function() {
+	  var containment = this.options.containment;
+	  if ( !containment ) {
+	    return;
+	  }
+	  var isElement = containment instanceof HTMLElement;
+	  // use as element
+	  if ( isElement ) {
+	    return containment;
+	  }
+	  // querySelector if string
+	  if ( typeof containment == 'string' ) {
+	    return document.querySelector( containment );
+	  }
+	  // fallback to parent element
+	  return this.element.parentNode;
+	};
+
+	// ----- move event ----- //
+
+	proto.onPointerMove = function( event, pointer, moveVector ) {
+	  this.dispatchJQueryEvent( 'pointerMove', event, [ pointer, moveVector ] );
+	};
+
+	/**
+	 * drag move
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto.dragMove = function( event, pointer, moveVector ) {
+	  if ( !this.isEnabled ) {
+	    return;
+	  }
+	  var dragX = moveVector.x;
+	  var dragY = moveVector.y;
+
+	  var grid = this.options.grid;
+	  var gridX = grid && grid[0];
+	  var gridY = grid && grid[1];
+
+	  dragX = applyGrid( dragX, gridX );
+	  dragY = applyGrid( dragY, gridY );
+
+	  dragX = this.containDrag( 'x', dragX, gridX );
+	  dragY = this.containDrag( 'y', dragY, gridY );
+
+	  // constrain to axis
+	  dragX = this.options.axis == 'y' ? 0 : dragX;
+	  dragY = this.options.axis == 'x' ? 0 : dragY;
+
+	  this.position.x = this.startPosition.x + dragX;
+	  this.position.y = this.startPosition.y + dragY;
+	  // set dragPoint properties
+	  this.dragPoint.x = dragX;
+	  this.dragPoint.y = dragY;
+
+	  this.dispatchEvent( 'dragMove', event, [ pointer, moveVector ] );
+	};
+
+	function applyGrid( value, grid, method ) {
+	  method = method || 'round';
+	  return grid ? Math[ method ]( value / grid ) * grid : value;
+	}
+
+	proto.containDrag = function( axis, drag, grid ) {
+	  if ( !this.options.containment ) {
+	    return drag;
+	  }
+	  var measure = axis == 'x' ? 'width' : 'height';
+
+	  var rel = this.relativeStartPosition[ axis ];
+	  var min = applyGrid( -rel, grid, 'ceil' );
+	  var max = this.containSize[ measure ];
+	  max = applyGrid( max, grid, 'floor' );
+	  return  Math.max( min, Math.min( max, drag ) );
+	};
+
+	// ----- end event ----- //
+
+	/**
+	 * pointer up
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto.onPointerUp = function( event, pointer ) {
+	  this.element.classList.remove('is-pointer-down');
+	  this.dispatchJQueryEvent( 'pointerUp', event, [ pointer ] );
+	};
+
+	/**
+	 * drag end
+	 * @param {Event} event
+	 * @param {Event or Touch} pointer
+	 */
+	proto.dragEnd = function( event, pointer ) {
+	  if ( !this.isEnabled ) {
+	    return;
+	  }
+	  // use top left position when complete
+	  this.element.style.transform = '';
+	  this.setLeftTop();
+	  this.element.classList.remove('is-dragging');
+	  this.dispatchEvent( 'dragEnd', event, [ pointer ] );
+	};
+
+	// -------------------------- animation -------------------------- //
+
+	proto.animate = function() {
+	  // only render and animate if dragging
+	  if ( !this.isDragging ) {
+	    return;
+	  }
+
+	  this.positionDrag();
+
+	  var _this = this;
+	  requestAnimationFrame( function animateFrame() {
+	    _this.animate();
+	  });
+
+	};
+
+	// left/top positioning
+	proto.setLeftTop = function() {
+	  this.element.style.left = this.position.x + 'px';
+	  this.element.style.top  = this.position.y + 'px';
+	};
+
+	proto.positionDrag = function() {
+	  this.element.style.transform = 'translate3d( ' + this.dragPoint.x +
+	    'px, ' + this.dragPoint.y + 'px, 0)';
+	};
+
+	// ----- staticClick ----- //
+
+	proto.staticClick = function( event, pointer ) {
+	  this.dispatchEvent( 'staticClick', event, [ pointer ] );
+	};
+
+	// ----- methods ----- //
+
+	/**
+	 * @param {Number} x
+	 * @param {Number} y
+	 */
+	proto.setPosition = function( x, y ) {
+	  this.position.x = x;
+	  this.position.y = y;
+	  this.setLeftTop();
+	};
+
+	proto.enable = function() {
+	  this.isEnabled = true;
+	};
+
+	proto.disable = function() {
+	  this.isEnabled = false;
+	  if ( this.isDragging ) {
+	    this.dragEnd();
+	  }
+	};
+
+	proto.destroy = function() {
+	  this.disable();
+	  // reset styles
+	  this.element.style.transform = '';
+	  this.element.style.left = '';
+	  this.element.style.top = '';
+	  this.element.style.position = '';
+	  // unbind handles
+	  this.unbindHandles();
+	  // remove jQuery data
+	  if ( this.$element ) {
+	    this.$element.removeData('draggabilly');
+	  }
+	};
+
+	// ----- jQuery bridget ----- //
+
+	// required for jQuery bridget
+	proto._init = noop;
+
+	if ( jQuery && jQuery.bridget ) {
+	  jQuery.bridget( 'draggabilly', Draggabilly );
+	}
+
+	// -----  ----- //
+
+	return Draggabilly;
+
+	}));
+	});
+
+	var draggie = null;
 	function pipMix(art, player) {
-	  var $player = art.refs.$player;
+	  var option = art.option,
+	      i18n = art.i18n,
+	      _art$refs = art.refs,
+	      $player = _art$refs.$player,
+	      $pipClose = _art$refs.$pipClose,
+	      $pipTitle = _art$refs.$pipTitle,
+	      _art$events = art.events,
+	      destroyEvents = _art$events.destroyEvents,
+	      proxy = _art$events.proxy;
 	  Object.defineProperty(player, 'pipState', {
 	    get: function get() {
 	      return $player.classList.contains('artplayer-pip');
 	    }
 	  });
+	  Object.defineProperty(player, 'pipDraggie', {
+	    get: function get() {
+	      return draggie;
+	    }
+	  });
 	  Object.defineProperty(player, 'pipEnabled', {
 	    value: function value() {
+	      if (!draggie) {
+	        draggie = new draggabilly($player, {
+	          handle: '.artplayer-pip-header'
+	        });
+	        append($pipTitle, option.title || i18n.get('Mini player'));
+	        proxy($pipClose, 'click', function () {
+	          player.pipExit();
+	        });
+	        destroyEvents.push(function () {
+	          draggie.destroy();
+	        });
+	      }
+
 	      $player.classList.add('artplayer-pip');
 	      player.fullscreenExit();
 	      player.fullscreenWebExit();
@@ -1414,6 +2768,8 @@
 	  Object.defineProperty(player, 'pipExit', {
 	    value: function value() {
 	      $player.classList.remove('artplayer-pip');
+	      setStyle($player, 'left', null);
+	      setStyle($player, 'top', null);
 	      player.fullscreenExit();
 	      player.fullscreenWebExit();
 	      player.aspectRatioRemove();
@@ -1501,29 +2857,31 @@
 
 	var slicedToArray = _slicedToArray;
 
-	var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
+	var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\"><path fill=\"none\" class=\"bk\" d=\"M0 0h100v100H0z\"/><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"translate(0 -30)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(30 105.98 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(60 75.98 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(90 65 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(120 58.66 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(150 54.02 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(180 50 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(-150 45.98 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(-120 41.34 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(-90 35 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(-60 24.02 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/></rect><rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#fff\" transform=\"rotate(-30 -5.98 65)\"><animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/></rect></svg>";
 
-	var playBig = "<svg style=\"width: 60px; height: 60px; filter: drop-shadow(0px 1px 1px black);\" version=\"1.1\" viewBox=\"0 0 24 24\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <g id=\"info\"/>\n    <g id=\"icons\">\n        <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16   C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\" id=\"video\"/>\n    </g>\n</svg>";
+	var playBig = "<svg style=\"width:60px;height:60px\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" filter=\"drop-shadow(0 1px 1px #000)\"><path d=\"M20 2H4C1.8 2 0 3.8 0 6v12c0 2.2 1.8 4 4 4h16c2.2 0 4-1.8 4-4V6c0-2.2-1.8-4-4-4zm-4.4 10.8L10.5 16c-.6.5-1.5 0-1.5-.8V8.8c0-.8.9-1.3 1.5-.8l5.1 3.2c.7.3.7 1.3 0 1.6z\"/></svg>";
 
-	var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
+	var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%\" viewBox=\"0 0 22 22\"><path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"/></svg>";
 
-	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
+	var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%\" viewBox=\"0 0 22 22\"><path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zm8 0a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"/></svg>";
 
-	var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
+	var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%\" viewBox=\"0 0 22 22\"><path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zm4.258-.872a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"/><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"/></svg>";
 
-	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
+	var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%\" viewBox=\"0 0 22 22\"><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"/><path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zm5.195 13.195l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"/></svg>";
 
-	var subtitle = "<svg style=\"width: 100%; height: 100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
+	var subtitle = "<svg style=\"width:100%;height:100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0 0h48v48H0z\" fill=\"none\"/><path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/></svg>";
 
-	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
+	var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width:100%;height:100%\"><path d=\"M19.402 6a5 5 0 0 0-4.902 4.012L14.098 12H9a5 5 0 0 0-5 5v21a5 5 0 0 0 5 5h32a5 5 0 0 0 5-5V17a5 5 0 0 0-5-5h-5.098l-.402-1.988A5 5 0 0 0 30.598 6zM25 17c5.52 0 10 4.48 10 10s-4.48 10-10 10-10-4.48-10-10 4.48-10 10-10zm0 2c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z\"/></svg>";
 
-	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
+	var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width:85%;height:85%\"><path d=\"M54 2.5H6c-3.252 0-6 2.748-6 6v33c0 3.252 2.748 6 6 6h14.555l8.702 9.669a.998.998 0 0 0 1.486 0l8.702-9.669H54c3.252 0 6-2.748 6-6v-33c0-3.252-2.748-6-6-6zm-38 26c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4zm14 0c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4zm14 0c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z\"/></svg>";
 
-	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
+	var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%\" viewBox=\"0 0 22 22\"><circle cx=\"11\" cy=\"11\" r=\"2\"/><path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"/></svg>";
 
-	var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\r\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\r\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\r\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\r\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\r\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\r\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\r\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\r\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\r\n\t</g>\r\n</g>\r\n</svg>\r\n";
+	var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" style=\"width:80%;height:80%\"><path d=\"M236.454 172.808L132.421 68.789l43.184-43.184C185.014 16.197 178.365 0 165 0H15C6.709 0 0 6.709 0 15v150c0 13.241 16.066 20.112 25.606 10.606l43.198-43.169 104.004 104.018c5.856 5.856 15.351 5.859 21.209.001l42.437-42.437c5.832-5.832 5.88-15.331 0-21.211zM497 0H347c-13.361 0-20.018 16.193-10.606 25.605l43.184 43.184-104.034 104.003c-5.844 5.844-5.868 15.358 0 21.226l42.437 42.437c5.86 5.86 15.352 5.859 21.211 0l104.019-104.034 43.184 43.184C495.93 185.141 512 178.23 512 165V15c0-8.291-6.709-15-15-15zM486.396 336.393l-43.184 43.184-104.019-104.033c-5.856-5.856-15.349-5.862-21.211 0l-42.437 42.437c-5.868 5.868-5.844 15.382 0 21.226l104.034 104.004-43.184 43.184C326.986 495.803 333.635 512 347 512h150c8.291 0 15-6.709 15-15V347c0-13.361-16.193-20.018-25.604-10.607zM236.456 317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211 0L68.789 379.579l-43.184-43.184C16.283 327.04 0 333.563 0 347v150c0 8.291 6.709 15 15 15h150c13.361 0 20.018-16.193 10.606-25.605l-43.184-43.184 104.034-104.017c5.88-5.88 5.833-15.378 0-21.211z\"/></svg>";
 
-	var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\r\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\r\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\r\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\r\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\r\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\r\n</svg>\r\n";
+	var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width:80%;height:80%\"><path d=\"M4 18h14V4H4v14zM6 6h10v10H6V6z\"/><path d=\"M2 16H0v6h6v-2H2zM2 2h4V0H0v6h2zM20 20h-4v2h6v-6h-2zM16 0v2h4v4h2V0z\"/></svg>";
+
+	var pip = "<svg viewBox=\"0 0 36 36\" style=\"width:100%;height:100%\"><path d=\"M25 17h-8v6h8v-6zm4 8V10.98C29 9.88 28.1 9 27 9H9c-1.1 0-2 .88-2 1.98V25c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2zm-2 .02H9V10.97h18v14.05z\" fill=\"#fff\"/></svg>";
 
 	var icons = {
 	  loading: loading,
@@ -1537,7 +2895,8 @@
 	  danmu: danmu,
 	  setting: setting,
 	  fullscreen: fullscreen,
-	  fullscreenWeb: fullscreenWeb
+	  fullscreenWeb: fullscreenWeb,
+	  pip: pip
 	};
 
 	function creatDomFromSvg(map) {
@@ -1678,9 +3037,10 @@
 	      var proxy = art.events.proxy,
 	          i18n = art.i18n,
 	          player = art.player;
-	      this.$pip = append($control, '画中画');
+	      this.$pip = append($control, icons$1.pip);
+	      tooltip(this.$pip, i18n.get('Mini player'));
 	      proxy($control, 'click', function () {
-	        player.pipToggle();
+	        player.pipEnabled();
 	      });
 	    }
 	  }]);
@@ -3056,10 +4416,21 @@
 	      });
 	      var hideCursor = debounce(function () {
 	        $player.classList.add('artplayer-hide-cursor');
+
+	        if (_this.art.player.fullscreenState || _this.art.player.fullscreenWebState) {
+	          $player.classList.remove('artplayer-hover');
+
+	          _this.art.controls.hide();
+	        }
 	      }, 5000);
 	      this.proxy($player, 'mousemove', function () {
 	        $player.classList.remove('artplayer-hide-cursor');
-	        hideCursor();
+
+	        _this.art.controls.show();
+
+	        if (!_this.art.player.pipState) {
+	          hideCursor();
+	        }
 	      });
 	    }
 	  }, {
@@ -3320,7 +4691,7 @@
 	    key: "show",
 	    value: function show() {
 	      var $mask = this.art.refs.$mask;
-	      setStyle($mask, 'display', 'block');
+	      setStyle($mask, 'display', 'flex');
 	      this.art.emit('mask:show', $mask);
 	    }
 	  }, {
@@ -3559,6 +4930,7 @@
 	        container: '.artplayer',
 	        url: '',
 	        poster: '',
+	        title: '',
 	        volume: 0.7,
 	        thumbnails: {
 	          url: '',

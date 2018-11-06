@@ -9,6 +9,7 @@ export default {
     type: 'string',
     required: true
   },
+  title: 'string',
   volume: 'number',
   thumbnails: {
     type: 'object',

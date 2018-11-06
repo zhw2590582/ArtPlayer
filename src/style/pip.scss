@@ -1,5 +1,65 @@
 .artplayer-video-player {
+    .artplayer-pip-header {
+        display: none;
+        position: absolute;
+        z-index: 120;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 35px;
+        line-height: 35px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: space-between;
+        .artplayer-pip-title {
+            flex: 1;
+            padding: 0 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .artplayer-pip-close {
+            width: 35px;
+            text-align: center;
+            font-size: 22px;
+            cursor: pointer;
+        }
+    }
+
+    &.is-dragging {
+        opacity: 0.7;
+    }
+
     &.artplayer-pip {
-        background: red;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 400px;
+        height: 225px;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 3px 6px 0 rgba(0,0,0,0.20);
+
+        .artplayer-pip-header {
+            display: flex;
+        }
+
+        .artplayer-mask {
+            align-items: center;
+            justify-content: center;
+            .art-icon-playBig {
+                position: static;
+            }
+        }
+
+        .artplayer-contextmenu,
+        .artplayer-bottom,
+        .artplayer-danmu,
+        .artplayer-info,
+        .artplayer-layers,
+        .artplayer-notice,
+        .artplayer-setting,
+        .artplayer-subtitle {
+            display: none !important;
+        }
     }
 }

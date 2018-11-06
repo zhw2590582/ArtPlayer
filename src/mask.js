@@ -14,7 +14,7 @@ export default class Mask {
 
   show() {
     const { $mask } = this.art.refs;
-    setStyle($mask, 'display', 'block');
+    setStyle($mask, 'display', 'flex');
     this.art.emit('mask:show', $mask);
   }
 

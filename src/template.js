@@ -29,6 +29,10 @@ export default class Template {
           <div class="artplayer-info-panel"></div>
           <div class="artplayer-info-close">[x]</div>
         </div>
+        <div class="artplayer-pip-header">
+          <div class="artplayer-pip-title"></div>
+          <div class="artplayer-pip-close">×</div>
+        </div>
       </div>
     `;
     refs.$player = refs.$container.querySelector('.artplayer-video-player');
@@ -52,5 +56,8 @@ export default class Template {
     refs.$info = refs.$container.querySelector('.artplayer-info');
     refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
     refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
+    refs.$pipHeader = refs.$container.querySelector('.artplayer-pip-header');
+    refs.$pipTitle = refs.$container.querySelector('.artplayer-pip-title');
+    refs.$pipClose = refs.$container.querySelector('.artplayer-pip-close');
   }
 }
