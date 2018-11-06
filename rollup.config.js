@@ -47,7 +47,9 @@ export default {
       exclude: 'node_modules/**',
       plugins: ['@babel/external-helpers', '@babel/transform-runtime']
     }),
-    svgo(),
+    svgo({
+      raw: true
+    }),
     replace({
       exclude: 'node_modules/**',
       __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
