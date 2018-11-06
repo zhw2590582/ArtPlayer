@@ -6,8 +6,7 @@
   "style": "dist/artplayer.css",
   "scripts": {
     "dev": "cross-env NODE_ENV=development rollup -c -m -w",
-    "build": "cross-env NODE_ENV=production rollup -c",
-    "test": "cross-env NODE_ENV=test ava"
+    "build": "cross-env NODE_ENV=production rollup -c"
   },
   "repository": {
     "type": "git",
@@ -28,10 +27,8 @@
     "@babel/plugin-external-helpers": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
-    "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.1.2",
     "autoprefixer": "^9.3.1",
-    "ava": "1.0.0-rc.1",
     "babel-core": "^7.0.0-bridge.0",
     "browser-env": "^3.2.5",
     "cross-env": "^5.2.0",
@@ -53,11 +50,5 @@
     "option-validator": "^1.1.0",
     "screenfull": "^3.3.3",
     "tiny-emitter": "^2.0.2"
-  },
-  "ava": {
-    "require": [
-      "./test/helpers/register.js",
-      "./test/helpers/setup-browser-env.js"
-    ]
   }
 }
