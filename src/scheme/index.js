@@ -65,6 +65,7 @@ export default {
   theme: 'string',
   hotkey: 'boolean',
   pip: 'boolean',
+  mutex: 'boolean',
   fullscreen: 'boolean',
   fullscreenWeb: 'boolean',
   subtitle: {

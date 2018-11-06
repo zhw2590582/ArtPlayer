@@ -25,8 +25,7 @@ export default {
     name: 'artplayer',
     file: isProd ? 'dist/artplayer.js' : 'docs/js/artplayer.js',
     format: 'umd',
-    exports: 'named',
-    banner: banner
+    exports: 'named'
   },
   plugins: [
     eslint({
@@ -54,6 +53,10 @@ export default {
       __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
       __VERSION__: version
     }),
-    isProd && uglify()
+    isProd && uglify({
+      output: {
+        preamble: banner
+      }
+    })
   ]
 };

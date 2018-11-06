@@ -75,7 +75,6 @@ export default function eventInit(art, player) {
         notice.show(`${i18n.get('Reconnect')}: ${player.reconnectTime}`);
       });
     } else {
-      art.isError = true;
       art.isPlaying = false;
       art.loading.hide();
       art.controls.hide();

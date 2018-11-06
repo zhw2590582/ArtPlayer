@@ -1,5 +1,7 @@
+import { instances } from '../utils';
+
 export default function playMix(art, player) {
-  const { refs: { $video }, i18n, notice } = art;
+  const { refs: { $video }, i18n, notice, option: { mutex } } = art;
 
   Object.defineProperty(player, 'play', {
     value: () => {
@@ -10,6 +12,11 @@ export default function playMix(art, player) {
           console.warn(err);
         });
       }
+
+      if (mutex) {
+        instances.forEach(item => item.player.pause());
+      }
+
       notice.show(i18n.get('Play'));
       art.emit('play', $video);
     }

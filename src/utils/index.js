@@ -1,3 +1,5 @@
+export const instances = [];
+
 export class ArtPlayerError extends Error {
   constructor(message, context) {
     super(message);

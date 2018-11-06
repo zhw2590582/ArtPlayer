@@ -4,6 +4,7 @@ export default class Subtitle {
   constructor(art) {
     this.art = art;
     this.isOpen = true;
+    this.vttText = '';
     const { url } = this.art.option.subtitle;
     if (url) {
       this.checkExt(url);
@@ -50,18 +51,21 @@ export default class Subtitle {
       })
       .then(text => {
         if ((/x-subrip/gi).test(type)) {
-          return this.srtToVtt(text);
+          this.vttText = this.srtToVtt(text);
+        } else {
+          this.vttText = text;
         }
-        return url;
+        return this.vttToBlob(this.vttText);
       })
       .catch(err => {
         notice.show(err);
+        console.warn(err);
         throw err;
       });
   }
 
   srtToVtt(text) {
-    const vttText = 'WEBVTT \r\n\r\n'.concat(
+    return 'WEBVTT \r\n\r\n'.concat(
       text
         .replace(/\{\\([ibu])\}/g, '</$1>')
         .replace(/\{\\([ibu])1\}/g, '<$1>')
@@ -70,6 +74,9 @@ export default class Subtitle {
         .replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2')
         .concat('\r\n\r\n')
     );
+  }
+
+  vttToBlob(vttText) {
     return URL.createObjectURL(
       new Blob([vttText], {
         type: 'text/vtt'
@@ -101,7 +108,7 @@ export default class Subtitle {
     this.art.emit('subtitle:hide', $subtitle);
   }
 
-  switch(url, name = '') {
+  switch(url, name = 'unknown') {
     const { $track, i18n, notice } = this.art.refs;
     this.checkExt(url);
     errorHandle($track, 'You need to initialize the subtitle option first.');

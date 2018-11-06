@@ -1,6 +1,6 @@
 import './style';
 import 'balloon-css/balloon.min.css';
-import { deepMerge } from './utils';
+import { instances, deepMerge } from './utils';
 import optionValidator from 'option-validator';
 import scheme from './scheme';
 import config from './config';
@@ -22,8 +22,6 @@ import Mask from './mask';
 import Setting from './setting';
 
 let id = 0;
-export const instances = [];
-
 class Artplayer extends Emitter {
   constructor(option) {
     super();
@@ -72,6 +70,7 @@ class Artplayer extends Emitter {
       setting: false,
       hotkey: true,
       pip: true,
+      mutex: true,
       fullscreen: true,
       fullscreenWeb: true,
       subtitle: {
@@ -91,20 +90,19 @@ class Artplayer extends Emitter {
     };
   }
 
-  static use(Plugin) {
-    const name = Plugin.name.toLowerCase();
-    const installedPlugins = this.plugins || (this.plugins = {});
-    if (!installedPlugins[name]) {
+  static use(plugin) {
+    const installedPlugins = this.plugins || (this.plugins = []);
+    if (installedPlugins.indexOf === -1) {
+      installedPlugins.push(plugin);
       const args = Array.from(arguments).slice(1);
       args.unshift(this);
-      installedPlugins[name] = new Plugin(...args);
-      this.prototype.emit('use', Plugin);
+      plugin.apply(null, args);
+      this.prototype.emit('use', plugin);
     }
     return this;
   }
 
   init() {
-    this.isError = false;
     this.isFocus = false;
     this.isPlaying = false;
     this.refs = {};
@@ -133,7 +131,6 @@ class Artplayer extends Emitter {
 
     this.id = id++;
     instances.push(this);
-    return this;
   }
 
   destroy(removeHtml = false) {
