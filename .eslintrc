@@ -9,6 +9,9 @@
       "impliedStrict": true
     }
   },
+  "globals": {
+    "expect": true
+  },
   "env": {
     "es6": true,
     "amd": true,

@@ -7,5 +7,5 @@
 			}
 		]
 	],
-	"plugins": ["@babel/external-helpers", "@babel/transform-runtime"]
+	"plugins": ["@babel/plugin-external-helpers", "@babel/plugin-transform-runtime"]
 }

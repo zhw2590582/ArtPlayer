@@ -263,7 +263,6 @@
   module.exports = _wrapNativeSuper;
   });
 
-  var instances = [];
   var ArtPlayerError =
   /*#__PURE__*/
   function (_Error) {
@@ -877,7 +876,9 @@
         }
 
         if (mutex) {
-          instances.forEach(function (item) {
+          art.constructor.instances.filter(function (item) {
+            return item !== art;
+          }).forEach(function (item) {
             return item.player.pause();
           });
         }
@@ -4875,14 +4876,14 @@
         this.mask = new Mask(this);
         this.setting = new Setting$1(this);
         this.id = id$4++;
-        instances.push(this);
+        Artplayer.instances.push(this);
       }
     }, {
       key: "destroy",
       value: function destroy() {
         var removeHtml = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
         this.events.destroy();
-        instances.splice(instances.indexOf(this), 1);
+        Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
 
         if (removeHtml) {
           this.refs.$container.innerHTML = '';
@@ -4973,6 +4974,7 @@
     return Artplayer;
   }(tinyEmitter);
 
+  Artplayer.instances = [];
   window.Artplayer = Artplayer;
 
   exports.default = Artplayer;

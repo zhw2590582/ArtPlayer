@@ -1,5 +1,3 @@
-import { instances } from '../utils';
-
 export default function playMix(art, player) {
   const { refs: { $video }, i18n, notice, option: { mutex } } = art;
 
@@ -14,7 +12,9 @@ export default function playMix(art, player) {
       }
 
       if (mutex) {
-        instances.forEach(item => item.player.pause());
+        art.constructor.instances
+          .filter(item => item !== art)
+          .forEach(item => item.player.pause());
       }
 
       notice.show(i18n.get('Play'));

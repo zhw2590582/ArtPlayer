@@ -1,6 +1,6 @@
 import './style';
 import 'balloon-css/balloon.min.css';
-import { instances, deepMerge } from './utils';
+import { deepMerge } from './utils';
 import optionValidator from 'option-validator';
 import scheme from './scheme';
 import config from './config';
@@ -130,12 +130,12 @@ class Artplayer extends Emitter {
     this.setting = new Setting(this);
 
     this.id = id++;
-    instances.push(this);
+    Artplayer.instances.push(this);
   }
 
   destroy(removeHtml = false) {
     this.events.destroy();
-    instances.splice(instances.indexOf(this), 1);
+    Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
     if (removeHtml) {
       this.refs.$container.innerHTML = '';
     } else {
@@ -145,5 +145,6 @@ class Artplayer extends Emitter {
   }
 }
 
+Artplayer.instances = [];
 window.Artplayer = Artplayer;
 export default Artplayer;
