@@ -1,5 +1,4 @@
 import { setStyle, append } from '../utils';
-import Danmu from './danmu';
 import Fullscreen from './fullscreen';
 import FullscreenWeb from './fullscreenWeb';
 import Pip from './pip';
@@ -67,53 +66,46 @@ export default class Controls {
       index: 10
     }));
 
-    this.add(new Danmu({
-      name: 'danmu',
-      disable: false,
-      position: 'right',
-      index: 20
-    }));
-
     this.add(new Screenshot({
       name: 'screenshot',
       disable: !this.art.option.screenshot,
       position: 'right',
-      index: 30
+      index: 20
     }));
 
     this.add(new Subtitle({
       name: 'subtitle',
       disable: !this.art.option.subtitle.url,
       position: 'right',
-      index: 40
+      index: 30
     }));
 
     this.add(new Setting({
       name: 'setting',
       disable: !this.art.option.setting,
       position: 'right',
-      index: 50
+      index: 40
     }));
 
     this.add(new Pip({
       name: 'pip',
       disable: !this.art.option.pip,
       position: 'right',
-      index: 60
+      index: 50
     }));
 
     this.add(new FullscreenWeb({
       name: 'fullscreenWeb',
       disable: !this.art.option.fullscreenWeb,
       position: 'right',
-      index: 70
+      index: 60
     }));
 
     this.add(new Fullscreen({
       name: 'fullscreen',
       disable: !this.art.option.fullscreen,
       position: 'right',
-      index: 80
+      index: 70
     }));
 
     this.art.option.controls.forEach(item => {

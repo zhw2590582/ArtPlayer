@@ -263,6 +263,7 @@
   module.exports = _wrapNativeSuper;
   });
 
+  var instances = [];
   var ArtPlayerError =
   /*#__PURE__*/
   function (_Error) {
@@ -421,6 +422,25 @@
 
     return fn;
   }
+
+  var utils = /*#__PURE__*/Object.freeze({
+    instances: instances,
+    ArtPlayerError: ArtPlayerError,
+    errorHandle: errorHandle,
+    clamp: clamp,
+    getExt: getExt,
+    append: append,
+    setStyle: setStyle,
+    setStyles: setStyles,
+    secondToTime: secondToTime,
+    deepMerge: deepMerge,
+    getStorage: getStorage,
+    setStorage: setStorage,
+    tooltip: tooltip,
+    sleep: sleep,
+    sublings: sublings,
+    debounce: debounce
+  });
 
   var optionValidator = createCommonjsModule(function (module, exports) {
   !function(r,t){module.exports=t();}(commonjsGlobal,function(){function c(r){return (c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var u=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t,e,n,o,a,i=c(r);if("boolean"===i)return "boolean";if("string"===i)return "string";if("number"===i)return "number";if("symbol"===i)return "symbol";if("function"===i)return "GeneratorFunction"===f(r)?"generatorfunction":"function";if(t=r,Array.isArray?Array.isArray(t):t instanceof Array)return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if((e=r)instanceof Date||"function"==typeof e.toDateString&&"function"==typeof e.getDate&&"function"==typeof e.setDate)return "date";if((n=r)instanceof Error||"string"==typeof n.message&&n.constructor&&"number"==typeof n.constructor.stackTraceLimit)return "error";if((o=r)instanceof RegExp||"string"==typeof o.flags&&"boolean"==typeof o.ignoreCase&&"boolean"==typeof o.multiline&&"boolean"==typeof o.global)return "regexp";switch(f(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if("function"==typeof(a=r).throw&&"function"==typeof a.return&&"function"==typeof a.next)return "generator";switch(i=u.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return i.slice(8,-1).toLowerCase().replace(/\s/g,"")};function f(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in y(r,t,e),l(r,t,e),p(r,t,e),t)if(t.hasOwnProperty(n)){var o=r[n],a=t[n],i=e.concat(n);if(s(r,n,a,i))continue;y(o,a,i),l(o,a,i),p(o,a,i);}}function s(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function y(r,t,e){var n;if("string"===i(t)?n=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function l(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(e,r,i(r));if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function p(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,window.optionValidator=a});
@@ -646,7 +666,7 @@
     classCallCheck(this, Template);
 
     var refs = art.refs;
-    refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-danmu\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n      </div>\n    ";
+    refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n      </div>\n    ";
     refs.$player = refs.$container.querySelector('.artplayer-video-player');
     refs.$video = refs.$container.querySelector('.artplayer-video');
     refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -656,7 +676,6 @@
     refs.$controlsLeft = refs.$container.querySelector('.artplayer-controls-left');
     refs.$controlsRight = refs.$container.querySelector('.artplayer-controls-right');
     refs.$layers = refs.$container.querySelector('.artplayer-layers');
-    refs.$danmu = refs.$container.querySelector('.artplayer-danmu');
     refs.$loading = refs.$container.querySelector('.artplayer-loading');
     refs.$notice = refs.$container.querySelector('.artplayer-notice');
     refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
@@ -2945,42 +2964,6 @@
 
   var icons$1 = creatDomFromSvg(icons);
 
-  var Danmu =
-  /*#__PURE__*/
-  function () {
-    function Danmu(option) {
-      classCallCheck(this, Danmu);
-
-      this.option = option;
-    }
-
-    createClass(Danmu, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        var proxy = art.events.proxy,
-            i18n = art.i18n,
-            danmu = art.danmu;
-        this.$danmu = append($control, icons$1.danmu);
-        tooltip(this.$danmu, i18n.get('Hide danmu'));
-        proxy($control, 'click', function () {
-          if (danmu.isOpen) {
-            danmu.hide();
-            setStyle(_this.$danmu, 'opacity', '1');
-            tooltip(_this.$danmu, i18n.get('Show danmu'));
-          } else {
-            danmu.show();
-            setStyle(_this.$danmu, 'opacity', '0.8');
-            tooltip(_this.$danmu, i18n.get('Hide danmu'));
-          }
-        });
-      }
-    }]);
-
-    return Danmu;
-  }();
-
   var Fullscreen =
   /*#__PURE__*/
   function () {
@@ -3751,47 +3734,41 @@
           position: 'right',
           index: 10
         }));
-        this.add(new Danmu({
-          name: 'danmu',
-          disable: false,
-          position: 'right',
-          index: 20
-        }));
         this.add(new Screenshot({
           name: 'screenshot',
           disable: !this.art.option.screenshot,
           position: 'right',
-          index: 30
+          index: 20
         }));
         this.add(new Subtitle({
           name: 'subtitle',
           disable: !this.art.option.subtitle.url,
           position: 'right',
-          index: 40
+          index: 30
         }));
         this.add(new Setting({
           name: 'setting',
           disable: !this.art.option.setting,
           position: 'right',
-          index: 50
+          index: 40
         }));
         this.add(new Pip({
           name: 'pip',
           disable: !this.art.option.pip,
           position: 'right',
-          index: 60
+          index: 50
         }));
         this.add(new FullscreenWeb({
           name: 'fullscreenWeb',
           disable: !this.art.option.fullscreenWeb,
           position: 'right',
-          index: 70
+          index: 60
         }));
         this.add(new Fullscreen({
           name: 'fullscreen',
           disable: !this.art.option.fullscreen,
           position: 'right',
-          index: 80
+          index: 70
         }));
         this.art.option.controls.forEach(function (item) {
           _this2.add(item);
@@ -4100,50 +4077,6 @@
     }]);
 
     return Contextmenu;
-  }();
-
-  var Danmu$1 =
-  /*#__PURE__*/
-  function () {
-    function Danmu(art) {
-      classCallCheck(this, Danmu);
-
-      this.art = art;
-      this.isOpen = true;
-      this.init();
-    }
-
-    createClass(Danmu, [{
-      key: "init",
-      value: function init() {//
-      }
-    }, {
-      key: "show",
-      value: function show() {
-        var _this$art = this.art,
-            $danmu = _this$art.refs.$danmu,
-            i18n = _this$art.i18n,
-            notice = _this$art.notice;
-        setStyle($danmu, 'display', 'block');
-        this.isOpen = true;
-        notice.show(i18n.get('Show danmu'));
-        this.art.emit('danmu:show', $danmu);
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        var _this$art2 = this.art,
-            $danmu = _this$art2.refs.$danmu,
-            i18n = _this$art2.i18n,
-            notice = _this$art2.notice;
-        setStyle($danmu, 'display', 'none');
-        this.isOpen = false;
-        notice.show(i18n.get('Hide danmu'));
-        this.art.emit('danmu:hide', $danmu);
-      }
-    }]);
-
-    return Danmu;
   }();
 
   var Info =
@@ -4910,7 +4843,6 @@
         this.layers = new Layers(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
-        this.danmu = new Danmu$1(this);
         this.subtitle = new Subtitle$1(this);
         this.info = new Info(this);
         this.loading = new Loading(this);
@@ -4959,6 +4891,11 @@
       key: "config",
       get: function get() {
         return config;
+      }
+    }, {
+      key: "utils",
+      get: function get() {
+        return utils;
       }
     }, {
       key: "DEFAULTS",

@@ -1,6 +1,6 @@
 import './style';
 import 'balloon-css/balloon.min.css';
-import { deepMerge } from './utils';
+import * as utils from './utils';
 import optionValidator from 'option-validator';
 import scheme from './scheme';
 import config from './config';
@@ -10,7 +10,6 @@ import I18n from './i18n';
 import Player from './player';
 import Controls from './controls';
 import Contextmenu from './contextmenu';
-import Danmu from './danmu';
 import Info from './info';
 import Subtitle from './subtitle';
 import Events from './events';
@@ -26,7 +25,7 @@ class Artplayer extends Emitter {
   constructor(option) {
     super();
     this.emit('init:start');
-    this.option = deepMerge({}, Artplayer.DEFAULTS, option);
+    this.option = utils.deepMerge({}, Artplayer.DEFAULTS, option);
     optionValidator(this.option, scheme);
     this.init();
     this.emit('init:end');
@@ -38,6 +37,10 @@ class Artplayer extends Emitter {
 
   static get config() {
     return config;
+  }
+
+  static get utils() {
+    return utils;
   }
 
   static get DEFAULTS() {
@@ -121,7 +124,6 @@ class Artplayer extends Emitter {
     this.layers = new Layers(this);
     this.controls = new Controls(this);
     this.contextmenu = new Contextmenu(this);
-    this.danmu = new Danmu(this);
     this.subtitle = new Subtitle(this);
     this.info = new Info(this);
     this.loading = new Loading(this);

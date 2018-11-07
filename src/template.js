@@ -5,7 +5,6 @@ export default class Template {
       <div class="artplayer-video-player">
         <video class="artplayer-video"></video>
         <div class="artplayer-subtitle"></div>
-        <div class="artplayer-danmu"></div>
         <div class="artplayer-layers"></div>
         <div class="artplayer-mask"></div>
         <div class="artplayer-bottom">
@@ -44,7 +43,6 @@ export default class Template {
     refs.$controlsLeft = refs.$container.querySelector('.artplayer-controls-left');
     refs.$controlsRight = refs.$container.querySelector('.artplayer-controls-right');
     refs.$layers = refs.$container.querySelector('.artplayer-layers');
-    refs.$danmu = refs.$container.querySelector('.artplayer-danmu');
     refs.$loading = refs.$container.querySelector('.artplayer-loading');
     refs.$notice = refs.$container.querySelector('.artplayer-notice');
     refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
