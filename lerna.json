@@ -3,5 +3,13 @@
   "version": "1.0.2",
   "packages": [
     "packages/*"
-  ]
+  ],
+  "commands": {
+    "publish": {
+      "ignore": [
+        "docs/**",
+        "package.json"
+      ]
+    }
+  }
 }
