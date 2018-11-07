@@ -4,9 +4,9 @@
   "packages": [
     "packages/*"
   ],
-  "commands": {
+  "command": {
     "publish": {
-      "ignore": [
+      "ignoreChanges": [
         "docs/**",
         "package.json"
       ]
