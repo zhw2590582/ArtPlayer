@@ -1,4 +1,4 @@
-import { append, setStyles, setStyle } from '../utils';
+import { append, insertByIndex, setStyles, setStyle } from '../utils';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
 import info from './info';
@@ -23,11 +23,12 @@ export default class Contextmenu {
       close
     );
 
+    option.contextmenu.forEach(item => {
+      this.add(item);
+    });
+
     proxy(refs.$player, 'contextmenu', event => {
       event.preventDefault();
-      if (!refs.$contextmenu) {
-        this.creatMenu();
-      }
       this.show();
       this.setPos(event);
     });
@@ -39,37 +40,25 @@ export default class Contextmenu {
     });
   }
 
-  creatMenu() {
-    const { option, refs, events: { proxy } } = this.art;
-    refs.$contextmenu = document.createElement('div');
-    refs.$contextmenu.classList.add('artplayer-contextmenu');
-    option.contextmenu
-      .filter(item => !item.disable)
-      .map(item => {
-        id++;
-        const menu = typeof item === 'function' ? item(this.art) : item;
-        const $menu = document.createElement('div');
-        $menu.dataset.artMenuId = menu.index || id;
-        $menu.setAttribute('class', `art-menu art-menu-${menu.name || id}`);
-        append($menu, menu.html);
-        setStyles($menu, menu.style || {});
-        if (menu.click) {
-          proxy($menu, 'click', event => {
-            event.preventDefault();
-            menu.click.call(this, event);
-            this.art.emit('contextmenu:click', $menu);
-          });
-        }
-        this[`$${menu.name || id}`] = $menu;
-        return $menu;
-      })
-      .sort(
-        (a, b) =>
-          Number(a.dataset.artMenuId) - Number(b.dataset.artMenuId)
-      ).forEach(item => {
-        append(refs.$contextmenu, item);
-      });
-    append(refs.$player, refs.$contextmenu);
+  add(item) {
+    if (!item.disable) {
+      const { refs, events: { proxy } } = this.art;
+      id++;
+      const menu = typeof item === 'function' ? item(this.art) : item;
+      const $menu = document.createElement('div');
+      $menu.setAttribute('class', `art-menu art-menu-${menu.name || id}`);
+      append($menu, menu.html);
+      setStyles($menu, menu.style || {});
+      if (menu.click) {
+        proxy($menu, 'click', event => {
+          event.preventDefault();
+          menu.click.call(this, event);
+          this.art.emit('contextmenu:click', $menu);
+        });
+      }
+      this[`$${menu.name || id}`] = $menu;
+      insertByIndex(refs.$contextmenu, $menu, menu.index || id);
+    }
   }
 
   setPos(event) {
@@ -95,17 +84,13 @@ export default class Contextmenu {
 
   hide() {
     const { refs: { $contextmenu } } = this.art;
-    if ($contextmenu) {
-      setStyle($contextmenu, 'display', 'none');
-      this.art.emit('contextmenu:hide', $contextmenu);
-    }
+    setStyle($contextmenu, 'display', 'none');
+    this.art.emit('contextmenu:hide', $contextmenu);
   }
 
   show() {
     const { refs: { $contextmenu } } = this.art;
-    if ($contextmenu) {
-      setStyle($contextmenu, 'display', 'block');
-      this.art.emit('contextmenu:show', $contextmenu);
-    }
+    setStyle($contextmenu, 'display', 'block');
+    this.art.emit('contextmenu:show', $contextmenu);
   }
 }

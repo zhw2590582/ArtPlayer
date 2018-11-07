@@ -32,6 +32,7 @@ export default class Template {
           <div class="artplayer-pip-title"></div>
           <div class="artplayer-pip-close">×</div>
         </div>
+        <div class="artplayer-contextmenu"></div>
       </div>
     `;
     refs.$player = refs.$container.querySelector('.artplayer-video-player');
@@ -57,5 +58,6 @@ export default class Template {
     refs.$pipHeader = refs.$container.querySelector('.artplayer-pip-header');
     refs.$pipTitle = refs.$container.querySelector('.artplayer-pip-title');
     refs.$pipClose = refs.$container.querySelector('.artplayer-pip-close');
+    refs.$contextmenu = refs.$container.querySelector('.artplayer-contextmenu');
   }
 }

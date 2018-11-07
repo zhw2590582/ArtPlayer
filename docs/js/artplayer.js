@@ -316,6 +316,21 @@
 
     return parent.lastElementChild;
   }
+  function insertByIndex(parent, child, index) {
+    var childs = Array.from(parent.children);
+    child.dataset.index = index;
+    var nextChild = childs.find(function (item) {
+      return Number(item.dataset.index) >= Number(index);
+    });
+
+    if (nextChild) {
+      nextChild.insertAdjacentElement('beforebegin', child);
+    } else {
+      append(parent, child);
+    }
+
+    return child;
+  }
   function setStyle(element, key, value) {
     element.style[key] = value;
     return element;
@@ -430,6 +445,7 @@
     clamp: clamp,
     getExt: getExt,
     append: append,
+    insertByIndex: insertByIndex,
     setStyle: setStyle,
     setStyles: setStyles,
     secondToTime: secondToTime,
@@ -666,7 +682,7 @@
     classCallCheck(this, Template);
 
     var refs = art.refs;
-    refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n      </div>\n    ";
+    refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n        <div class=\"artplayer-contextmenu\"></div>\n      </div>\n    ";
     refs.$player = refs.$container.querySelector('.artplayer-video-player');
     refs.$video = refs.$container.querySelector('.artplayer-video');
     refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -690,6 +706,7 @@
     refs.$pipHeader = refs.$container.querySelector('.artplayer-pip-header');
     refs.$pipTitle = refs.$container.querySelector('.artplayer-pip-title');
     refs.$pipClose = refs.$container.querySelector('.artplayer-pip-close');
+    refs.$contextmenu = refs.$container.querySelector('.artplayer-contextmenu');
   };
 
   var i18nMap = {
@@ -3966,12 +3983,11 @@
             refs = _this$art.refs,
             proxy = _this$art.events.proxy;
         option.contextmenu.push(playbackRate, aspectRatio, info, version, close);
+        option.contextmenu.forEach(function (item) {
+          _this.add(item);
+        });
         proxy(refs.$player, 'contextmenu', function (event) {
           event.preventDefault();
-
-          if (!refs.$contextmenu) {
-            _this.creatMenu();
-          }
 
           _this.show();
 
@@ -3984,23 +4000,17 @@
         });
       }
     }, {
-      key: "creatMenu",
-      value: function creatMenu() {
+      key: "add",
+      value: function add(item) {
         var _this2 = this;
 
-        var _this$art2 = this.art,
-            option = _this$art2.option,
-            refs = _this$art2.refs,
-            proxy = _this$art2.events.proxy;
-        refs.$contextmenu = document.createElement('div');
-        refs.$contextmenu.classList.add('artplayer-contextmenu');
-        option.contextmenu.filter(function (item) {
-          return !item.disable;
-        }).map(function (item) {
+        if (!item.disable) {
+          var _this$art2 = this.art,
+              refs = _this$art2.refs,
+              proxy = _this$art2.events.proxy;
           id$1++;
-          var menu = typeof item === 'function' ? item(_this2.art) : item;
+          var menu = typeof item === 'function' ? item(this.art) : item;
           var $menu = document.createElement('div');
-          $menu.dataset.artMenuId = menu.index || id$1;
           $menu.setAttribute('class', "art-menu art-menu-".concat(menu.name || id$1));
           append($menu, menu.html);
           setStyles($menu, menu.style || {});
@@ -4014,14 +4024,9 @@
             });
           }
 
-          _this2["$".concat(menu.name || id$1)] = $menu;
-          return $menu;
-        }).sort(function (a, b) {
-          return Number(a.dataset.artMenuId) - Number(b.dataset.artMenuId);
-        }).forEach(function (item) {
-          append(refs.$contextmenu, item);
-        });
-        append(refs.$player, refs.$contextmenu);
+          this["$".concat(menu.name || id$1)] = $menu;
+          insertByIndex(refs.$contextmenu, $menu, menu.index || id$1);
+        }
       }
     }, {
       key: "setPos",
@@ -4058,21 +4063,15 @@
       key: "hide",
       value: function hide() {
         var $contextmenu = this.art.refs.$contextmenu;
-
-        if ($contextmenu) {
-          setStyle($contextmenu, 'display', 'none');
-          this.art.emit('contextmenu:hide', $contextmenu);
-        }
+        setStyle($contextmenu, 'display', 'none');
+        this.art.emit('contextmenu:hide', $contextmenu);
       }
     }, {
       key: "show",
       value: function show() {
         var $contextmenu = this.art.refs.$contextmenu;
-
-        if ($contextmenu) {
-          setStyle($contextmenu, 'display', 'block');
-          this.art.emit('contextmenu:show', $contextmenu);
-        }
+        setStyle($contextmenu, 'display', 'block');
+        this.art.emit('contextmenu:show', $contextmenu);
       }
     }]);
 
@@ -4536,7 +4535,7 @@
         var $layers = this.art.refs.$layers;
         id$2++;
         var $layer = document.createElement('div');
-        $layer.setAttribute('data-art-layer-id', id$2);
+        $layer.dataset.artLayerIndex = option.index || id$2;
         $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id$2));
         setStyle($layer, 'z-index', option.index || id$2);
         append($layer, option.html);

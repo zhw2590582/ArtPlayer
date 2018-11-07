@@ -12,7 +12,7 @@ export default class Layers {
     const { refs: { $layers } } = this.art;
     id++;
     const $layer = document.createElement('div');
-    $layer.setAttribute('data-art-layer-id', id);
+    $layer.dataset.artLayerIndex = option.index || id;
     $layer.setAttribute('class', `art-layer art-layer-${option.name || id}`);
     setStyle($layer, 'z-index', option.index || id);
     append($layer, option.html);

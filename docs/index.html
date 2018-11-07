@@ -41,9 +41,9 @@
             },
             contextmenu: [
                 {
-                    html: '自定义菜单 - 天黑请关灯 Σ(っ °Д °;)っ',
+                    html: '自定义菜单1 - 天亮请关灯 Σ(っ °Д °;)っ',
                     click: function () {
-                        document.body.classList.toggle('dark');
+                        document.body.classList.remove('dark');
                         this.hide();
                     }
                 }
@@ -81,6 +81,14 @@
                     text: '－－终わり－－'
                 }
             ]
+        });
+
+        app.contextmenu.add({
+            html: '自定义菜单2 - 天黑请开灯 Σ(っ °Д °;)っ',
+            click: function () {
+                document.body.classList.add('dark');
+                this.hide();
+            }
         });
 
         app.layers.add({

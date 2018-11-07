@@ -46,6 +46,18 @@ export function append(parent, child) {
   return parent.lastElementChild;
 }
 
+export function insertByIndex(parent, child, index) {
+  const childs = Array.from(parent.children);
+  child.dataset.index = index;
+  const nextChild = childs.find(item => Number(item.dataset.index) >= Number(index));
+  if (nextChild) {
+    nextChild.insertAdjacentElement('beforebegin', child);
+  } else {
+    append(parent, child);
+  }
+  return child;
+}
+
 export function setStyle(element, key, value) {
   element.style[key] = value;
   return element;
