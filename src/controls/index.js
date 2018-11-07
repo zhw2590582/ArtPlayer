@@ -1,4 +1,4 @@
-import { setStyle, append } from '../utils';
+import { insertByIndex } from '../utils';
 import Fullscreen from './fullscreen';
 import FullscreenWeb from './fullscreenWeb';
 import Pip from './pip';
@@ -16,10 +16,8 @@ let id = 0;
 export default class Controls {
   constructor(art) {
     this.art = art;
-    this.$map = {};
     this.art.on('firstCanplay', () => {
       this.init();
-      this.mount();
     });
   }
 
@@ -120,54 +118,27 @@ export default class Controls {
       const name = option.name || control.constructor.name.toLowerCase() || `control${id}`;
       const $control = document.createElement('div');
       $control.setAttribute('class', `art-control art-control-${name}`);
-      $control.dataset.controlIndex = option.index || id;
-      this.commonMethod(control);
-      (this.$map[option.position] || (this.$map[option.position] = [])).push($control);
+      this.mount(option.position, $control, option.index || id);
       control.apply && control.apply(this.art, $control);
       this[name] = control;
     }
   }
 
-  mount() {
+  mount(position, $control, index) {
     const { $progress, $controlsLeft, $controlsRight } = this.art.refs;
-    Object.keys(this.$map).forEach(key => {
-      this.$map[key]
-        .sort(
-          (a, b) =>
-            Number(a.dataset.controlIndex) - Number(b.dataset.controlIndex)
-        )
-        .forEach($control => {
-          switch (key) {
-            case 'top':
-              append($progress, $control);
-              break;
-            case 'left':
-              append($controlsLeft, $control);
-              break;
-            case 'right':
-              append($controlsRight, $control);
-              break;
-            default:
-              break;
-          }
-        });
-    });
-  }
-
-  commonMethod(control) {
-    Object.defineProperty(control, 'hide', {
-      value: () => {
-        setStyle(control.option.$control, 'display', 'none');
-        this.art.emit('control:hide', control.option.$control);
-      }
-    });
-
-    Object.defineProperty(control, 'show', {
-      value: () => {
-        setStyle(control.option.$control, 'display', 'block');
-        this.art.emit('control:show', control.option.$control);
-      }
-    });
+    switch (position) {
+      case 'top':
+        insertByIndex($progress, $control, index);
+        break;
+      case 'left':
+        insertByIndex($controlsLeft, $control, index);
+        break;
+      case 'right':
+        insertByIndex($controlsRight, $control, index);
+        break;
+      default:
+        break;
+    }
   }
 
   show() {

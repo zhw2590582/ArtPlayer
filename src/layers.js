@@ -1,25 +1,28 @@
-import { append, setStyles, setStyle } from './utils';
+import { append, setStyles, setStyle, insertByIndex } from './utils';
 
 let id = 0;
 export default class Layers {
   constructor(art) {
     this.art = art;
     this.add = this.add.bind(this);
-    this.art.option.layers.filter(item => !item.disable).forEach(this.add);
+    this.art.option.layers.forEach(item => {
+      this.add(item);
+    });
   }
 
-  add(option, callback) {
-    const { refs: { $layers } } = this.art;
-    id++;
-    const $layer = document.createElement('div');
-    $layer.dataset.artLayerIndex = option.index || id;
-    $layer.setAttribute('class', `art-layer art-layer-${option.name || id}`);
-    setStyle($layer, 'z-index', option.index || id);
-    append($layer, option.html);
-    setStyles($layer, option.style || {});
-    $layers.appendChild($layer);
-    this.art.emit('layers:add', $layer);
-    callback && callback($layer);
+  add(item, callback) {
+    if (!item.disable) {
+      const { refs: { $layers } } = this.art;
+      id++;
+      const $layer = document.createElement('div');
+      $layer.setAttribute('class', `art-layer art-layer-${item.name || id}`);
+      setStyle($layer, 'z-index', item.index || id);
+      append($layer, item.html);
+      setStyles($layer, item.style || {});
+      this.art.emit('layers:add', $layer);
+      callback && callback($layer);
+      insertByIndex($layers, $layer, item.index || id);
+    }
   }
 
   show() {

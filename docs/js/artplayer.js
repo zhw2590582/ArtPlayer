@@ -3702,11 +3702,8 @@
       classCallCheck(this, Controls);
 
       this.art = art;
-      this.$map = {};
       this.art.on('firstCanplay', function () {
         _this.init();
-
-        _this.mount();
       });
     }
 
@@ -3801,64 +3798,35 @@
           var name = option.name || control.constructor.name.toLowerCase() || "control".concat(id);
           var $control = document.createElement('div');
           $control.setAttribute('class', "art-control art-control-".concat(name));
-          $control.dataset.controlIndex = option.index || id;
-          this.commonMethod(control);
-          (this.$map[option.position] || (this.$map[option.position] = [])).push($control);
+          this.mount(option.position, $control, option.index || id);
           control.apply && control.apply(this.art, $control);
           this[name] = control;
         }
       }
     }, {
       key: "mount",
-      value: function mount() {
-        var _this3 = this;
-
+      value: function mount(position, $control, index) {
         var _this$art$refs = this.art.refs,
             $progress = _this$art$refs.$progress,
             $controlsLeft = _this$art$refs.$controlsLeft,
             $controlsRight = _this$art$refs.$controlsRight;
-        Object.keys(this.$map).forEach(function (key) {
-          _this3.$map[key].sort(function (a, b) {
-            return Number(a.dataset.controlIndex) - Number(b.dataset.controlIndex);
-          }).forEach(function ($control) {
-            switch (key) {
-              case 'top':
-                append($progress, $control);
-                break;
 
-              case 'left':
-                append($controlsLeft, $control);
-                break;
+        switch (position) {
+          case 'top':
+            insertByIndex($progress, $control, index);
+            break;
 
-              case 'right':
-                append($controlsRight, $control);
-                break;
+          case 'left':
+            insertByIndex($controlsLeft, $control, index);
+            break;
 
-              default:
-                break;
-            }
-          });
-        });
-      }
-    }, {
-      key: "commonMethod",
-      value: function commonMethod(control) {
-        var _this4 = this;
+          case 'right':
+            insertByIndex($controlsRight, $control, index);
+            break;
 
-        Object.defineProperty(control, 'hide', {
-          value: function value() {
-            setStyle(control.option.$control, 'display', 'none');
-
-            _this4.art.emit('control:hide', control.option.$control);
-          }
-        });
-        Object.defineProperty(control, 'show', {
-          value: function value() {
-            setStyle(control.option.$control, 'display', 'block');
-
-            _this4.art.emit('control:show', control.option.$control);
-          }
-        });
+          default:
+            break;
+        }
       }
     }, {
       key: "show",
@@ -4520,29 +4488,32 @@
   /*#__PURE__*/
   function () {
     function Layers(art) {
+      var _this = this;
+
       classCallCheck(this, Layers);
 
       this.art = art;
       this.add = this.add.bind(this);
-      this.art.option.layers.filter(function (item) {
-        return !item.disable;
-      }).forEach(this.add);
+      this.art.option.layers.forEach(function (item) {
+        _this.add(item);
+      });
     }
 
     createClass(Layers, [{
       key: "add",
-      value: function add(option, callback) {
-        var $layers = this.art.refs.$layers;
-        id$2++;
-        var $layer = document.createElement('div');
-        $layer.dataset.artLayerIndex = option.index || id$2;
-        $layer.setAttribute('class', "art-layer art-layer-".concat(option.name || id$2));
-        setStyle($layer, 'z-index', option.index || id$2);
-        append($layer, option.html);
-        setStyles($layer, option.style || {});
-        $layers.appendChild($layer);
-        this.art.emit('layers:add', $layer);
-        callback && callback($layer);
+      value: function add(item, callback) {
+        if (!item.disable) {
+          var $layers = this.art.refs.$layers;
+          id$2++;
+          var $layer = document.createElement('div');
+          $layer.setAttribute('class', "art-layer art-layer-".concat(item.name || id$2));
+          setStyle($layer, 'z-index', item.index || id$2);
+          append($layer, item.html);
+          setStyles($layer, item.style || {});
+          this.art.emit('layers:add', $layer);
+          callback && callback($layer);
+          insertByIndex($layers, $layer, item.index || id$2);
+        }
       }
     }, {
       key: "show",
