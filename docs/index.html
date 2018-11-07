@@ -6,136 +6,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0,minimal-ui">
-    <meta name="keywords" content="artplayer">
-    <meta name="description" content="artplayer">
+    <meta name="keywords" content="artplayer,html5,video,player">
+    <meta name="description" content="ArtPlayer is a modern HTML5 video player">
     <link rel="shortcut icon" href="./img/favicon.ico">
     <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/artplayer.css">
 </head>
 
 <body>
     <div class="app">
-        <div class="title">ArtPlayer</div>
-        <div class="description">ArtPlayer is a modern HTML5 video player</div>
-        <div class="github">
-            <a href="https://github.com/zhw2590582/artplayer">GITHUB</a>
-        </div>
         <div class="artplayer-app"></div>
     </div>
     <script src="./js/artplayer.js"></script>
-    <script>
-        var app = new Artplayer({
-            container: '.artplayer-app',
-            url: './video/one-more-time-one-more-chance-480p.mp4',
-            poster: './img/one-more-time-one-more-chance.jpg',
-            title: 'One more time one more chance',
-            setting: true,
-            subtitle: {
-                url: './subtitle/one-more-time-one-more-chance.srt',
-            },
-            thumbnails: {
-                url: './img/thumbnails.png',
-                width: 190,
-                height: 107
-            },
-            contextmenu: [
-                {
-                    html: '自定义菜单1 - 天亮请关灯 Σ(っ °Д °;)っ',
-                    click: function () {
-                        document.body.classList.remove('dark');
-                        this.hide();
-                    }
-                }
-            ],
-            quality: [
-                {
-                    default: true,
-                    name: '标清 480P',
-                    url: './video/one-more-time-one-more-chance-480p.mp4'
-                },
-                {
-                    name: '高清 720P',
-                    url: './video/one-more-time-one-more-chance-720p.mp4'
-                }
-            ],
-            highlight: [
-                {
-                    time: 60,
-                    text: 'One more chance'
-                },
-                {
-                    time: 120,
-                    text: '谁でもいいはずなのに'
-                },
-                {
-                    time: 180,
-                    text: '夏の想い出がまわる'
-                },
-                {
-                    time: 240,
-                    text: 'こんなとこにあるはずもないのに'
-                },
-                {
-                    time: 300,
-                    text: '－－终わり－－'
-                }
-            ],
-            layers: [
-                {
-                    index: 1,
-                    name: 'your-name',
-                    html: '<img style="width: 100px" src="./img/your-name.png">',
-                    style: {
-                        'top': '20px',
-                        'left': '20px',
-                        'opacity': '.9'
-                    }
-                }
-            ]
-        });
-
-        app.contextmenu.add({
-            html: '自定义菜单2 - 天黑请开灯 Σ(っ °Д °;)っ',
-            click: function () {
-                document.body.classList.add('dark');
-                this.hide();
-            }
-        });
-
-        app.layers.add({
-            index: 2,
-            name: 'your-name',
-            html: '<img style="width: 100px" src="./img/your-name.png">',
-            style: {
-                'top': '20px',
-                'right': '20px',
-                'opacity': '.9'
-            }
-        }, dom => {
-            dom.addEventListener('click', () => {
-                app.destroy(true);
-                app = new Artplayer({
-                    autoplay: true,
-                    container: '.artplayer-app',
-                    url: './video/you-name.mp4',
-                })
-            });
-        });
-
-        app.on('beforeMountUrl', url => {
-            Object.defineProperty(app.player, 'mountUrl', {
-                value: url => url + '?id=0'
-            });
-        });
-
-        console.log(app);
-        Artplayer.config.video.events.forEach(item => {
-            app.on('video:' + item, event => {
-                console.log('video', event);
-            });
-        });
-    </script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>

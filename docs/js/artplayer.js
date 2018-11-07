@@ -676,7 +676,7 @@
     }
   };
 
-  var tinyEmitter = E;
+  var _tinyEmitter_2_0_2_tinyEmitter = E;
 
   var Template = function Template(art) {
     classCallCheck(this, Template);
@@ -4921,7 +4921,7 @@
     }]);
 
     return Artplayer;
-  }(tinyEmitter);
+  }(_tinyEmitter_2_0_2_tinyEmitter);
 
   Artplayer.instances = [];
   window.Artplayer = Artplayer;

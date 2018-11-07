@@ -1,0 +1,11 @@
+{
+	"presets": [
+		[
+			"@babel/env",
+			{
+				"modules": false
+			}
+		]
+	],
+	"plugins": ["@babel/plugin-external-helpers", "@babel/plugin-transform-runtime"]
+}
