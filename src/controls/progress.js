@@ -53,7 +53,7 @@ export default class Progress {
 
     proxy($control, 'mousemove', event => {
       setStyle(this.$tip, 'display', 'block');
-      if (event.path.indexOf(this.$highlight) > -1) {
+      if (event.composedPath().indexOf(this.$highlight) > -1) {
         this.showHighlight(event);
       } else {
         this.showTime(event);

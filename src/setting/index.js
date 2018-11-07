@@ -5,7 +5,7 @@ let id = 0;
 export default class Setting {
   constructor(art) {
     this.art = art;
-    this.isOpen = false;
+    this.state = false;
     this.$settings = [];
     if (art.option.setting) {
       this.init();
@@ -59,7 +59,7 @@ export default class Setting {
   show() {
     const { refs: { $setting }, i18n, notice } = this.art;
     setStyle($setting, 'display', 'flex');
-    this.isOpen = true;
+    this.state = true;
     notice.show(i18n.get('Show setting'));
     this.art.emit('setting:show', $setting);
   }
@@ -67,8 +67,16 @@ export default class Setting {
   hide() {
     const { refs: { $setting }, i18n, notice } = this.art;
     setStyle($setting, 'display', 'none');
-    this.isOpen = false;
+    this.state = false;
     notice.show(i18n.get('Hide setting'));
     this.art.emit('setting:hide', $setting);
+  }
+
+  toggle() {
+    if (this.state) {
+      this.hide();
+    } else {
+      this.show();
+    }
   }
 }

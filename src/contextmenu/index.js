@@ -33,7 +33,7 @@ export default class Contextmenu {
     });
 
     proxy(refs.$player, 'click', event => {
-      if (refs.$contextmenu && !event.path.includes(refs.$contextmenu)) {
+      if (refs.$contextmenu && !event.composedPath().includes(refs.$contextmenu)) {
         this.hide();
       }
     });

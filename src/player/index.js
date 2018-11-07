@@ -1,3 +1,4 @@
+import mountUrlMix from './mountUrlMix';
 import attrInit from './attrInit';
 import eventInit from './eventInit';
 import playMix from './playMix';
@@ -20,6 +21,7 @@ export default class Player {
     this.reconnectTime = 0;
     this.maxReconnectTime = 5;
 
+    mountUrlMix(art, this);
     attrInit(art, this);
     eventInit(art, this);
     playMix(art, this);

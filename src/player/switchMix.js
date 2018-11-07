@@ -2,9 +2,10 @@ export default function switchMix(art, player) {
   const { refs: { $video }, i18n, notice, isPlaying, option } = art;
 
   Object.defineProperty(player, 'switch', {
-    value: (url, name = 'Unknown') => {
+    value: (url, name = 'unknown') => {
       const currentTime = player.currentTime();
-      $video.src = url;
+      art.emit('beforeMountUrl', url);
+      $video.src = player.mountUrl(url);
       option.url = url;
       player.playbackRateRemove();
       player.aspectRatioRemove();

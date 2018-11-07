@@ -3,7 +3,7 @@ import { errorHandle, getExt, setStyles, setStyle } from './utils';
 export default class Subtitle {
   constructor(art) {
     this.art = art;
-    this.isOpen = true;
+    this.state = true;
     this.vttText = '';
     const { url } = this.art.option.subtitle;
     if (url) {
@@ -95,7 +95,7 @@ export default class Subtitle {
   show() {
     const { refs: { $subtitle }, i18n, notice } = this.art;
     setStyle($subtitle, 'display', 'block');
-    this.isOpen = true;
+    this.state = true;
     notice.show(i18n.get('Show subtitle'));
     this.art.emit('subtitle:show', $subtitle);
   }
@@ -103,21 +103,26 @@ export default class Subtitle {
   hide() {
     const { refs: { $subtitle }, i18n, notice } = this.art;
     setStyle($subtitle, 'display', 'none');
-    this.isOpen = false;
+    this.state = false;
     notice.show(i18n.get('Hide subtitle'));
     this.art.emit('subtitle:hide', $subtitle);
   }
 
-  switch(url, name = 'unknown') {
-    const { $track, i18n, notice } = this.art.refs;
+  toggle() {
+    if (this.state) {
+      this.hide();
+    } else {
+      this.show();
+    }
+  }
+
+  switch(url) {
+    const { $track } = this.art.refs;
     this.checkExt(url);
     errorHandle($track, 'You need to initialize the subtitle option first.');
     this.load(url).then(data => {
-      if (url !== data) {
-        $track.src = data;
-        notice.show(`${i18n.get('Switch subtitle')}: ${name}`);
-        this.art.emit('subtitle:switch', url);
-      }
+      $track.src = data;
+      this.art.emit('subtitle:switch', url);
     });
   }
 }

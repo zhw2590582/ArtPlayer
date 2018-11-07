@@ -1,9 +1,10 @@
 import Draggabilly from 'draggabilly';
 import { setStyle, append } from '../utils';
 
-let draggie = null;
 export default function pipMix(art, player) {
   const { option, i18n, refs: { $player, $pipClose, $pipTitle }, events: { destroyEvents, proxy } } = art;
+  let cachePos = null;
+  let draggie = null;
 
   Object.defineProperty(player, 'pipState', {
     get: () => $player.classList.contains('artplayer-pip')
@@ -29,6 +30,9 @@ export default function pipMix(art, player) {
         destroyEvents.push(() => {
           draggie.destroy();
         });
+      } else {
+        setStyle($player, 'left', `${cachePos.x}px`);
+        setStyle($player, 'top', `${cachePos.y}px`);
       }
       $player.classList.add('artplayer-pip');
       player.fullscreenExit();
@@ -42,6 +46,7 @@ export default function pipMix(art, player) {
   Object.defineProperty(player, 'pipExit', {
     value: () => {
       $player.classList.remove('artplayer-pip');
+      cachePos = draggie.position;
       setStyle($player, 'left', null);
       setStyle($player, 'top', null);
       player.fullscreenExit();

@@ -120,7 +120,7 @@ export function sublings(target) {
 
 export function debounce(func, wait, context) {
   let timeout;
-  return function fn() {
+  function fn() {
     const args = arguments;
     const later = function later() {
       timeout = null;
@@ -128,5 +128,11 @@ export function debounce(func, wait, context) {
     };
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
+  }
+
+  fn.clearTimeout = function ct() {
+    clearTimeout(timeout);
   };
+
+  return fn;
 }

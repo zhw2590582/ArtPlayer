@@ -1,7 +1,7 @@
 import { setStyle, secondToTime } from '../utils';
 
 export default function screenshotMix(art, player) {
-  const { notice } = art;
+  const { option, notice } = art;
 
   function captureFrame() {
     const { $video } = art.refs;
@@ -13,7 +13,7 @@ export default function screenshotMix(art, player) {
     const elink = document.createElement('a');
     setStyle(elink, 'display', 'none');
     elink.href = dataUri;
-    elink.download = `ArtPlayer_${secondToTime($video.currentTime)}.png`;
+    elink.download = `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`;
     document.body.appendChild(elink);
     elink.click();
     document.body.removeChild(elink);

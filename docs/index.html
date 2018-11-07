@@ -25,10 +25,11 @@
     </div>
     <script src="./js/artplayer.js"></script>
     <script>
-        var player = new Artplayer({
+        var app = new Artplayer({
             container: '.artplayer-app',
             url: './video/one-more-time-one-more-chance-480p.mp4',
             poster: './img/one-more-time-one-more-chance.jpg',
+            title: 'One more time one more chance',
             setting: true,
             subtitle: {
                 url: './subtitle/one-more-time-one-more-chance.srt',
@@ -82,7 +83,7 @@
             ]
         });
 
-        player.layers.add({
+        app.layers.add({
             index: 1,
             name: 'your-name',
             html: '<img style="width: 100px" src="./img/your-name.png">',
@@ -93,8 +94,8 @@
             }
         }, dom => {
             dom.addEventListener('click', () => {
-                player.destroy(true);
-                new Artplayer({
+                app.destroy(true);
+                app = new Artplayer({
                     autoplay: true,
                     container: '.artplayer-app',
                     url: './video/you-name.mp4',
@@ -102,9 +103,15 @@
             });
         });
 
-        console.log(player);
+        app.on('beforeMountUrl', url => {
+            Object.defineProperty(app.player, 'mountUrl', {
+                value: url => url + '?id=0'
+            });
+        });
+
+        console.log(app);
         Artplayer.config.video.events.forEach(item => {
-            player.on('video:' + item, event => {
+            app.on('video:' + item, event => {
                 console.log('video', event);
             });
         });

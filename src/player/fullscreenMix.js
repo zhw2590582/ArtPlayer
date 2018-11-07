@@ -30,6 +30,7 @@ export default function fullscreenMix(art, player) {
       }
       $player.classList.add('artplayer-fullscreen');
       screenfull.request($player);
+      art.emit('fullscreen:enabled');
     }
   });
 
@@ -40,6 +41,7 @@ export default function fullscreenMix(art, player) {
       }
       $player.classList.remove('artplayer-fullscreen');
       screenfull.exit();
+      art.emit('fullscreen:exit');
     }
   });
 

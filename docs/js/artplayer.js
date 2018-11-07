@@ -402,7 +402,8 @@
   }
   function debounce(func, wait, context) {
     var timeout;
-    return function fn() {
+
+    function fn() {
       var args = arguments;
 
       var later = function later() {
@@ -412,7 +413,13 @@
 
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
+    }
+
+    fn.clearTimeout = function ct() {
+      clearTimeout(timeout);
     };
+
+    return fn;
   }
 
   var optionValidator = createCommonjsModule(function (module, exports) {
@@ -764,7 +771,16 @@
     return I18n;
   }();
 
-  function attrInit(art) {
+  function mountUrlMix(art, player) {
+    Object.defineProperty(player, 'mountUrl', {
+      writable: true,
+      value: function value(url) {
+        return url;
+      }
+    });
+  }
+
+  function attrInit(art, player) {
     var option = art.option,
         $video = art.refs.$video;
     Object.keys(option.moreVideoAttr).forEach(function (key) {
@@ -773,7 +789,10 @@
     $video.volume = clamp(option.volume, 0, 1);
     $video.poster = option.poster;
     $video.autoplay = option.autoplay;
-    $video.src = option.url;
+    sleep().then(function () {
+      art.emit('beforeMountUrl', option.url);
+      $video.src = player.mountUrl(option.url);
+    });
   }
 
   function eventInit(art, player) {
@@ -978,9 +997,10 @@
         option = art.option;
     Object.defineProperty(player, 'switch', {
       value: function value(url) {
-        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Unknown';
+        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
         var currentTime = player.currentTime();
-        $video.src = url;
+        art.emit('beforeMountUrl', url);
+        $video.src = player.mountUrl(url);
         option.url = url;
         player.playbackRateRemove();
         player.aspectRatioRemove();
@@ -1105,7 +1125,8 @@
   }
 
   function screenshotMix(art, player) {
-    var notice = art.notice;
+    var option = art.option,
+        notice = art.notice;
 
     function captureFrame() {
       var $video = art.refs.$video;
@@ -1117,7 +1138,7 @@
       var elink = document.createElement('a');
       setStyle(elink, 'display', 'none');
       elink.href = dataUri;
-      elink.download = "ArtPlayer_".concat(secondToTime($video.currentTime), ".png");
+      elink.download = "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png");
       document.body.appendChild(elink);
       elink.click();
       document.body.removeChild(elink);
@@ -1339,6 +1360,7 @@
 
         $player.classList.add('artplayer-fullscreen');
         screenfull.request($player);
+        art.emit('fullscreen:enabled');
       }
     });
     Object.defineProperty(player, 'fullscreenExit', {
@@ -1349,6 +1371,7 @@
 
         $player.classList.remove('artplayer-fullscreen');
         screenfull.exit();
+        art.emit('fullscreen:exit');
       }
     });
     Object.defineProperty(player, 'fullscreenToggle', {
@@ -1377,7 +1400,7 @@
 
         $player.classList.add('artplayer-web-fullscreen');
         player.aspectRatioReset();
-        art.emit('fullscreenWeb', true);
+        art.emit('fullscreenWeb:enabled');
       }
     });
     Object.defineProperty(player, 'fullscreenWebExit', {
@@ -1388,7 +1411,7 @@
 
         $player.classList.remove('artplayer-web-fullscreen');
         player.aspectRatioReset();
-        art.emit('fullscreenWeb', false);
+        art.emit('fullscreenWeb:exit');
       }
     });
     Object.defineProperty(player, 'fullscreenWebToggle', {
@@ -2723,7 +2746,6 @@
   }));
   });
 
-  var draggie = null;
   function pipMix(art, player) {
     var option = art.option,
         i18n = art.i18n,
@@ -2734,6 +2756,8 @@
         _art$events = art.events,
         destroyEvents = _art$events.destroyEvents,
         proxy = _art$events.proxy;
+    var cachePos = null;
+    var draggie = null;
     Object.defineProperty(player, 'pipState', {
       get: function get() {
         return $player.classList.contains('artplayer-pip');
@@ -2757,6 +2781,9 @@
           destroyEvents.push(function () {
             draggie.destroy();
           });
+        } else {
+          setStyle($player, 'left', "".concat(cachePos.x, "px"));
+          setStyle($player, 'top', "".concat(cachePos.y, "px"));
         }
 
         $player.classList.add('artplayer-pip');
@@ -2770,6 +2797,7 @@
     Object.defineProperty(player, 'pipExit', {
       value: function value() {
         $player.classList.remove('artplayer-pip');
+        cachePos = draggie.position;
         setStyle($player, 'left', null);
         setStyle($player, 'top', null);
         player.fullscreenExit();
@@ -2795,6 +2823,7 @@
 
     this.reconnectTime = 0;
     this.maxReconnectTime = 5;
+    mountUrlMix(art, this);
     attrInit(art, this);
     eventInit(art, this);
     playMix(art, this);
@@ -2972,15 +3001,15 @@
         this.$fullscreen = append($control, icons$1.fullscreen);
         tooltip(this.$fullscreen, i18n.get('Fullscreen'));
         proxy($control, 'click', function () {
-          if (player.fullscreenState) {
-            player.fullscreenExit();
-            setStyle(_this.$fullscreen, 'opacity', '1');
-            tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
-          } else {
-            player.fullscreenEnabled();
-            setStyle(_this.$fullscreen, 'opacity', '0.8');
-            tooltip(_this.$fullscreen, i18n.get('Exit fullscreen'));
-          }
+          player.fullscreenToggle();
+        });
+        art.on('fullscreen:enabled', function () {
+          setStyle(_this.$fullscreen, 'opacity', '0.8');
+          tooltip(_this.$fullscreen, i18n.get('Exit fullscreen'));
+        });
+        art.on('fullscreen:exit', function () {
+          setStyle(_this.$fullscreen, 'opacity', '1');
+          tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
         });
       }
     }]);
@@ -3008,15 +3037,15 @@
         this.$fullscreenWeb = append($control, icons$1.fullscreenWeb);
         tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
         proxy($control, 'click', function () {
-          if (player.fullscreenWebState) {
-            player.fullscreenWebExit();
-            setStyle(_this.$fullscreenWeb, 'opacity', '1');
-            tooltip(_this.$fullscreenWeb, i18n.get('Web fullscreen'));
-          } else {
-            player.fullscreenWebEnabled();
-            setStyle(_this.$fullscreenWeb, 'opacity', '0.8');
-            tooltip(_this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
-          }
+          player.fullscreenWebToggle();
+        });
+        art.on('fullscreenWeb:enabled', function () {
+          setStyle(_this.$fullscreenWeb, 'opacity', '0.8');
+          tooltip(_this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
+        });
+        art.on('fullscreenWeb:exit', function () {
+          setStyle(_this.$fullscreenWeb, 'opacity', '1');
+          tooltip(_this.$fullscreenWeb, i18n.get('Web fullscreen'));
         });
       }
     }]);
@@ -3141,7 +3170,7 @@
         proxy($control, 'mousemove', function (event) {
           setStyle(_this.$tip, 'display', 'block');
 
-          if (event.path.indexOf(_this.$highlight) > -1) {
+          if (event.composedPath().indexOf(_this.$highlight) > -1) {
             _this.showHighlight(event);
           } else {
             _this.showTime(event);
@@ -3281,15 +3310,15 @@
         this.$subtitle = append($control, icons$1.subtitle);
         tooltip(this.$subtitle, i18n.get('Hide subtitle'));
         proxy($control, 'click', function () {
-          if (subtitle.isOpen) {
-            subtitle.hide();
-            setStyle(_this.$subtitle, 'opacity', '1');
-            tooltip(_this.$subtitle, i18n.get('Show subtitle'));
-          } else {
-            subtitle.show();
-            setStyle(_this.$subtitle, 'opacity', '0.8');
-            tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
-          }
+          subtitle.toggle();
+        });
+        art.on('subtitle:show', function () {
+          setStyle(_this.$subtitle, 'opacity', '0.8');
+          tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
+        });
+        art.on('subtitle:hide', function () {
+          setStyle(_this.$subtitle, 'opacity', '1');
+          tooltip(_this.$subtitle, i18n.get('Show subtitle'));
         });
       }
     }]);
@@ -3309,26 +3338,21 @@
     createClass(Time, [{
       key: "apply",
       value: function apply(art, $control) {
-        var _this = this;
-
-        this.art = art;
-        this.$control = $control;
         $control.innerHTML = '00:00 / 00:00';
-        this.art.on('video:canplay', function () {
-          _this.getTime();
+
+        function setTime() {
+          $control.innerHTML = "".concat(secondToTime(art.player.currentTime()), " / ").concat(secondToTime(art.player.duration()));
+        }
+
+        art.on('video:canplay', function () {
+          setTime();
         });
-        this.art.on('video:timeupdate', function () {
-          _this.getTime();
+        art.on('video:timeupdate', function () {
+          setTime();
         });
-        this.art.on('video:seeking', function () {
-          _this.getTime();
+        art.on('video:seeking', function () {
+          setTime();
         });
-      }
-    }, {
-      key: "getTime",
-      value: function getTime() {
-        var player = this.art.player;
-        this.$control.innerHTML = "".concat(secondToTime(player.currentTime()), " / ").concat(secondToTime(player.duration()));
       }
     }]);
 
@@ -3475,15 +3499,15 @@
         this.$setting = append($control, icons$1.setting);
         tooltip(this.$setting, i18n.get('Show setting'));
         proxy($control, 'click', function () {
-          if (setting.isOpen) {
-            setting.hide();
-            setStyle(_this.$setting, 'opacity', '1');
-            tooltip(_this.$setting, i18n.get('Show setting'));
-          } else {
-            setting.show();
-            setStyle(_this.$setting, 'opacity', '0.8');
-            tooltip(_this.$setting, i18n.get('Hide setting'));
-          }
+          setting.toggle();
+        });
+        art.on('setting:show', function () {
+          setStyle(_this.$setting, 'opacity', '0.8');
+          tooltip(_this.$setting, i18n.get('Hide setting'));
+        });
+        art.on('setting:hide', function () {
+          setStyle(_this.$setting, 'opacity', '1');
+          tooltip(_this.$setting, i18n.get('Show setting'));
         });
       }
     }]);
@@ -3977,7 +4001,7 @@
           _this.setPos(event);
         });
         proxy(refs.$player, 'click', function (event) {
-          if (refs.$contextmenu && !event.path.includes(refs.$contextmenu)) {
+          if (refs.$contextmenu && !event.composedPath().includes(refs.$contextmenu)) {
             _this.hide();
           }
         });
@@ -4250,7 +4274,7 @@
       classCallCheck(this, Subtitle);
 
       this.art = art;
-      this.isOpen = true;
+      this.state = true;
       this.vttText = '';
       var url = this.art.option.subtitle.url;
 
@@ -4353,7 +4377,7 @@
             i18n = _this$art2.i18n,
             notice = _this$art2.notice;
         setStyle($subtitle, 'display', 'block');
-        this.isOpen = true;
+        this.state = true;
         notice.show(i18n.get('Show subtitle'));
         this.art.emit('subtitle:show', $subtitle);
       }
@@ -4365,29 +4389,31 @@
             i18n = _this$art3.i18n,
             notice = _this$art3.notice;
         setStyle($subtitle, 'display', 'none');
-        this.isOpen = false;
+        this.state = false;
         notice.show(i18n.get('Hide subtitle'));
         this.art.emit('subtitle:hide', $subtitle);
+      }
+    }, {
+      key: "toggle",
+      value: function toggle() {
+        if (this.state) {
+          this.hide();
+        } else {
+          this.show();
+        }
       }
     }, {
       key: "switch",
       value: function _switch(url) {
         var _this3 = this;
 
-        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
-        var _this$art$refs2 = this.art.refs,
-            $track = _this$art$refs2.$track,
-            i18n = _this$art$refs2.i18n,
-            notice = _this$art$refs2.notice;
+        var $track = this.art.refs.$track;
         this.checkExt(url);
         errorHandle($track, 'You need to initialize the subtitle option first.');
         this.load(url).then(function (data) {
-          if (url !== data) {
-            $track.src = data;
-            notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
+          $track.src = data;
 
-            _this3.art.emit('subtitle:switch', url);
-          }
+          _this3.art.emit('subtitle:switch', url);
         });
       }
     }]);
@@ -4424,6 +4450,15 @@
 
           _this.art.emit('hoverleave');
         });
+        this.proxy(document, ['click', 'contextmenu'], function (event) {
+          if (event.composedPath().indexOf($player) > -1) {
+            _this.art.isFocus = true;
+          } else {
+            _this.art.isFocus = false;
+
+            _this.art.contextmenu.hide();
+          }
+        });
         var hideCursor = debounce(function () {
           $player.classList.add('artplayer-hide-cursor');
 
@@ -4440,6 +4475,8 @@
 
           if (!_this.art.player.pipState) {
             hideCursor();
+          } else {
+            hideCursor.clearTimeout();
           }
         });
       }
@@ -4500,11 +4537,7 @@
 
         var _this$art = this.art,
             player = _this$art.player,
-            $player = _this$art.refs.$player,
             proxy = _this$art.events.proxy;
-        proxy(document, ['click', 'contextmenu'], function (event) {
-          _this.art.isFocus = event.path.indexOf($player) > -1;
-        });
         proxy(window, 'keydown', function (event) {
           if (_this.art.isFocus) {
             var tag = document.activeElement.tagName.toUpperCase();
@@ -4735,7 +4768,7 @@
       classCallCheck(this, Setting);
 
       this.art = art;
-      this.isOpen = false;
+      this.state = false;
       this.$settings = [];
 
       if (art.option.setting) {
@@ -4800,7 +4833,7 @@
             i18n = _this$art2.i18n,
             notice = _this$art2.notice;
         setStyle($setting, 'display', 'flex');
-        this.isOpen = true;
+        this.state = true;
         notice.show(i18n.get('Show setting'));
         this.art.emit('setting:show', $setting);
       }
@@ -4812,9 +4845,18 @@
             i18n = _this$art3.i18n,
             notice = _this$art3.notice;
         setStyle($setting, 'display', 'none');
-        this.isOpen = false;
+        this.state = false;
         notice.show(i18n.get('Hide setting'));
         this.art.emit('setting:hide', $setting);
+      }
+    }, {
+      key: "toggle",
+      value: function toggle() {
+        if (this.state) {
+          this.hide();
+        } else {
+          this.show();
+        }
       }
     }]);
 

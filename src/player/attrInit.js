@@ -1,6 +1,6 @@
-import { clamp } from '../utils';
+import { clamp, sleep } from '../utils';
 
-export default function attrInit(art) {
+export default function attrInit(art, player) {
   const { option, refs: { $video } } = art;
   Object.keys(option.moreVideoAttr).forEach(key => {
     $video[key] = option.moreVideoAttr[key];
@@ -8,5 +8,8 @@ export default function attrInit(art) {
   $video.volume = clamp(option.volume, 0, 1);
   $video.poster = option.poster;
   $video.autoplay = option.autoplay;
-  $video.src = option.url;
+  sleep().then(() => {
+    art.emit('beforeMountUrl', option.url);
+    $video.src = player.mountUrl(option.url);
+  });
 }

@@ -12,12 +12,16 @@
         background: rgba(0, 0, 0, 0.5);
         align-items: center;
         justify-content: space-between;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .2s ease-in-out;
         .artplayer-pip-title {
             flex: 1;
             padding: 0 10px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            cursor: move;
         }
         .artplayer-pip-close {
             width: 35px;
@@ -41,6 +45,13 @@
 
         .artplayer-pip-header {
             display: flex;
+        }
+
+        &.artplayer-hover {
+            .artplayer-pip-header {
+                opacity: 1;
+                visibility: visible;
+            }
         }
 
         .artplayer-mask {
