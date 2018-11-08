@@ -1,13 +1,24 @@
 .container {
-  width: 900px;
+  width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .artplayer-app {
-  width: 400px;
-  height: 300px;
-  margin: 0 auto;
+  width: 100%;
+  height: 450px;
+  margin: 0 auto 20px;
+  background: #000;
+}
+
+.error-tip {
+  font-size: 13px;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  color: red;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid red;
+  border-radius: 3px;
 }
 
 .CodeMirror {
@@ -18,14 +29,4 @@
 .CodeMirror pre {
   padding-left: 7px;
   line-height: 1.25;
-}
-
-.control {
-    margin-bottom: 20px;
-}
-
-.control .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
