@@ -15,6 +15,7 @@ import Quality from './quality';
 let id = 0;
 export default class Controls {
   constructor(art) {
+    id = 0;
     this.art = art;
     this.art.on('firstCanplay', () => {
       this.init();

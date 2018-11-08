@@ -8,6 +8,7 @@ import close from './close';
 let id = 0;
 export default class Contextmenu {
   constructor(art) {
+    id = 0;
     this.art = art;
     this.init();
   }

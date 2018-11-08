@@ -1,15 +1,14 @@
-import { setStyle, append } from '../utils';
+import { setStyle, append, insertByIndex } from '../utils';
 import Common from './common';
 
 let id = 0;
 export default class Setting {
   constructor(art) {
+    id = 0;
     this.art = art;
     this.state = false;
-    this.$settings = [];
     if (art.option.setting) {
       this.init();
-      this.mount();
     }
   }
 
@@ -29,6 +28,7 @@ export default class Setting {
   }
 
   add(setting) {
+    const { refs } = this.art;
     const { option } = setting;
     if (option && !option.disable) {
       id++;
@@ -39,21 +39,10 @@ export default class Setting {
       $setting.dataset.settingIndex = option.index || id;
       append($setting, `<div class="art-setting-header">${this.art.i18n.get(title)}</div>`);
       append($setting, '<div class="art-setting-body"></div>');
-      this.$settings.push($setting);
       setting.apply && setting.apply(this.art, $setting);
-      this[name] = setting;
+      this[name] = $setting;
+      insertByIndex(refs.$settingBody, $setting, option.index || id);
     }
-  }
-
-  mount() {
-    this.$settings
-      .sort(
-        (a, b) =>
-          Number(a.dataset.settingIndex) - Number(b.dataset.settingIndex)
-      )
-      .forEach($setting => {
-        append(this.art.refs.$settingBody, $setting);
-      });
   }
 
   show() {

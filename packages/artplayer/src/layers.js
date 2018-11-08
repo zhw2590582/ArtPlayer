@@ -3,6 +3,7 @@ import { append, setStyles, setStyle, insertByIndex } from './utils';
 let id = 0;
 export default class Layers {
   constructor(art) {
+    id = 0;
     this.art = art;
     this.add = this.add.bind(this);
     this.art.option.layers.forEach(item => {
