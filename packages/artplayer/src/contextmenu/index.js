@@ -41,13 +41,14 @@ export default class Contextmenu {
     });
   }
 
-  add(item) {
+  add(item, callback) {
     if (!item.disable) {
       const { refs, events: { proxy } } = this.art;
       id++;
+      const name = item.name || `menu${id}`;
       const menu = typeof item === 'function' ? item(this.art) : item;
       const $menu = document.createElement('div');
-      $menu.setAttribute('class', `art-menu art-menu-${menu.name || id}`);
+      $menu.setAttribute('class', `art-menu art-menu-${name || id}`);
       append($menu, menu.html);
       setStyles($menu, menu.style || {});
       if (menu.click) {
@@ -57,7 +58,8 @@ export default class Contextmenu {
           this.art.emit('contextmenu:click', $menu);
         });
       }
-      this[`$${menu.name || id}`] = $menu;
+      callback && callback($menu);
+      this[name] = $menu;
       insertByIndex(refs.$contextmenu, $menu, menu.index || id);
     }
   }

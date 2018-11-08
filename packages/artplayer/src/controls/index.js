@@ -112,15 +112,16 @@ export default class Controls {
     });
   }
 
-  add(control) {
+  add(control, callback) {
     const { option } = control;
     if (option && !option.disable) {
       id++;
-      const name = option.name || control.constructor.name.toLowerCase() || `control${id}`;
+      const name = option.name || `control${id}`;
       const $control = document.createElement('div');
       $control.setAttribute('class', `art-control art-control-${name}`);
       this.mount(option.position, $control, option.index || id);
       control.apply && control.apply(this.art, $control);
+      callback && callback($control);
       this[name] = control;
     }
   }

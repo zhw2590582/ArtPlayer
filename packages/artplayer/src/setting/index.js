@@ -27,19 +27,19 @@ export default class Setting {
     }));
   }
 
-  add(setting) {
-    const { refs } = this.art;
+  add(setting, callback) {
+    const { refs, i18n } = this.art;
     const { option } = setting;
     if (option && !option.disable) {
       id++;
-      const name = option.name || setting.constructor.name.toLowerCase() || `setting${id}`;
+      const name = option.name || `setting${id}`;
       const title = option.title || name;
       const $setting = document.createElement('div');
       $setting.setAttribute('class', `art-setting art-setting-${name}`);
-      $setting.dataset.settingIndex = option.index || id;
-      append($setting, `<div class="art-setting-header">${this.art.i18n.get(title)}</div>`);
+      append($setting, `<div class="art-setting-header">${i18n.get(title)}</div>`);
       append($setting, '<div class="art-setting-body"></div>');
       setting.apply && setting.apply(this.art, $setting);
+      callback && callback($setting);
       this[name] = $setting;
       insertByIndex(refs.$settingBody, $setting, option.index || id);
     }
