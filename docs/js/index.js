@@ -40,7 +40,7 @@ function runCode() {
         initApp(Artplayer.instances[0]);
     } catch (error) {
         var msg = error.message.trim();
-        log('运行错误：' + msg);
+        log('Error：' + msg);
     }
 }
 
