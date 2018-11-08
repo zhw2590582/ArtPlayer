@@ -57,7 +57,7 @@ class Artplayer extends Emitter {
         height: 90,
         column: 10
       },
-      screenshot: true,
+      screenshot: false,
       autoplay: false,
       playbackRate: true,
       aspectRatio: true,
@@ -72,7 +72,7 @@ class Artplayer extends Emitter {
       theme: '#f00',
       setting: false,
       hotkey: true,
-      pip: true,
+      pip: false,
       mutex: true,
       fullscreen: true,
       fullscreenWeb: true,

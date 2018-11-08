@@ -1,32 +1,88 @@
+html, body {
+  height: 100%;
+}
+
 .container {
-  width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  display: flex;
+  height: 100%;
 }
 
-.artplayer-app {
-  width: 100%;
-  height: 450px;
-  margin: 0 auto 20px;
-  background: #000;
+.part-left {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  border-right: 1px solid #ddd;
 }
 
-.error-tip {
-  font-size: 13px;
-  padding: 5px 10px;
-  margin-bottom: 20px;
-  color: red;
-  background: rgba(255, 0, 0, 0.1);
-  border: 1px solid red;
-  border-radius: 3px;
+.part-right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
 }
 
-.CodeMirror {
-  height: auto;
-  border: 1px solid #ddd;
+.part-left .controls {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
 }
 
-.CodeMirror pre {
+.part-left .controls .menus {
+  height: 30px;
+  line-height: 30px;
+  flex: 1;
+}
+
+.part-left .controls .run {
+  height: 30px;
+  width: 100px;
+}
+
+.part-left .code {
+  flex: 1;
+  overflow: auto;
+}
+
+.part-left .code .CodeMirror {
+  height: 100%;
+}
+
+.part-left .code .CodeMirror pre {
   padding-left: 7px;
   line-height: 1.25;
+}
+
+.part-right .video-wrap {
+  display: flex;
+  height: 70%;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.part-right .video-wrap .artplayer-app {
+    width: 800px;
+    height: 450px;
+}
+
+.part-right .console {
+  height: 30%;
+}
+
+.part-right .console textarea {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  width: 100%;
+  padding: 10px 20px;
+  overflow-y: scroll;
+  border: none;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
 }
