@@ -12,16 +12,15 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./plugins/codemirror.css">
-    <link rel="stylesheet" href="./css/artplayer.css">
+    <link rel="stylesheet" href="./plugins/consola.css">
+    <link rel="stylesheet" href="./css/artplayer.css">    
 </head>
 
 <body>
     <div class="container">
         <div class="part-left">
             <div class="controls">
-                <div class="menus">
-                    ArtPlay.js
-                </div>
+                <div class="logo">ArtPlayer.js</div>
                 <input class="run" type="button" value="Run Code">
             </div>
             <div class="code"></div>
@@ -30,15 +29,17 @@
             <div class="video-wrap">
                 <div class="artplayer-app"></div>
             </div>
-            <div class="console">
-                <textarea class="textarea" disabled></textarea>
-            </div>
+            <div class="console"></div>
         </div>
     </div>
+    <script src="./plugins/consola.js"></script>
     <script src="./plugins/codemirror.js"></script>
     <script src="./plugins/javascript.js"></script>
     <script src="./js/artplayer.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="./js/common.js"></script>
+    <script>
+        loadCode('./js/index.js');
+    </script>
 </body>
 
 </html>

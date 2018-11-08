@@ -10,7 +10,7 @@ html, body {
 .part-left {
   display: flex;
   flex-direction: column;
-  width: 700px;
+  width: 50%;
   border-right: 1px solid #ddd;
 }
 
@@ -31,7 +31,7 @@ html, body {
   box-sizing: border-box;
 }
 
-.part-left .controls .menus {
+.part-left .controls .logo {
   height: 30px;
   line-height: 30px;
   flex: 1;
@@ -65,24 +65,11 @@ html, body {
 }
 
 .part-right .video-wrap .artplayer-app {
-    width: 800px;
-    height: 450px;
+    width: 90%;
+    height: 65%;
 }
 
 .part-right .console {
+  position: relative;
   height: 30%;
-}
-
-.part-right .console textarea {
-  color: rgba(0, 0, 0, 0.8);
-  font-size: 14px;
-  line-height: 1.5;
-  height: 100%;
-  width: 100%;
-  padding: 10px 20px;
-  overflow-y: scroll;
-  border: none;
-  outline: none;
-  resize: none;
-  box-sizing: border-box;
 }
