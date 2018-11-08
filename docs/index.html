@@ -10,14 +10,27 @@
     <meta name="description" content="ArtPlayer is a modern HTML5 video player">
     <link rel="shortcut icon" href="./img/favicon.ico">
     <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./plugins/codemirror.css">
     <link rel="stylesheet" href="./css/artplayer.css">
 </head>
 
 <body>
-    <div class="app">
+    <div class="container">
         <div class="artplayer-app"></div>
+        <div class="error-tip"></div>
+        <div class="control-list">
+            <div class="control">
+                <div class="header">
+                    <div class="title">简单用法</div>
+                    <div class="run" data-id="1">运行</div>
+                </div>
+                <div class="code" data-control="1"></div>
+            </div>
+        </div>
     </div>
+    <script src="./plugins/codemirror.js"></script>
+    <script src="./plugins/javascript.js"></script>
     <script src="./js/artplayer.js"></script>
     <script src="./js/index.js"></script>
 </body>

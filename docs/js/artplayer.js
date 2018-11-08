@@ -465,7 +465,7 @@
   function validElement(paths, value, type) {
     if (type === 'string') {
       if (value.trim() === '') {
-        throw new ArtPlayerError("".concat(paths.join('.'), " can not be empty'"));
+        throw new ArtPlayerError("".concat(paths.join('.'), " can not be empty"));
       } else {
         return true;
       }
@@ -478,6 +478,18 @@
     throw new ArtPlayerError("".concat(paths.join('.'), " require 'string' or 'Element' type, but got '").concat(type, "'"));
   }
 
+  function validStringEmpty(paths, value, type) {
+    if (type !== 'string') {
+      throw new ArtPlayerError("".concat(paths.join('.'), " required 'string' type."));
+    }
+
+    if (value.trim() === '') {
+      throw new ArtPlayerError("".concat(paths.join('.'), " can not be empty"));
+    }
+
+    return true;
+  }
+
   var scheme = {
     container: {
       validator: validElement,
@@ -485,7 +497,8 @@
     },
     url: {
       type: 'string',
-      required: true
+      required: true,
+      validator: validStringEmpty
     },
     title: 'string',
     volume: 'number',
@@ -676,7 +689,7 @@
     }
   };
 
-  var _tinyEmitter_2_0_2_tinyEmitter = E;
+  var tinyEmitter = E;
 
   var Template = function Template(art) {
     classCallCheck(this, Template);
@@ -822,9 +835,19 @@
     Object.keys(option.moreVideoAttr).forEach(function (key) {
       $video[key] = option.moreVideoAttr[key];
     });
-    $video.volume = clamp(option.volume, 0, 1);
-    $video.poster = option.poster;
-    $video.autoplay = option.autoplay;
+
+    if (option.volume) {
+      $video.volume = clamp(option.volume, 0, 1);
+    }
+
+    if (option.poster) {
+      $video.poster = option.poster;
+    }
+
+    if (option.autoplay) {
+      $video.autoplay = option.autoplay;
+    }
+
     sleep().then(function () {
       art.emit('beforeMountUrl', option.url);
       $video.src = player.mountUrl(option.url);
@@ -3701,6 +3724,7 @@
 
       classCallCheck(this, Controls);
 
+      id = 0;
       this.art = art;
       this.art.on('firstCanplay', function () {
         _this.init();
@@ -3790,16 +3814,17 @@
       }
     }, {
       key: "add",
-      value: function add(control) {
+      value: function add(control, callback) {
         var option = control.option;
 
         if (option && !option.disable) {
           id++;
-          var name = option.name || control.constructor.name.toLowerCase() || "control".concat(id);
+          var name = option.name || "control".concat(id);
           var $control = document.createElement('div');
           $control.setAttribute('class', "art-control art-control-".concat(name));
           this.mount(option.position, $control, option.index || id);
           control.apply && control.apply(this.art, $control);
+          callback && callback($control);
           this[name] = control;
         }
       }
@@ -3914,7 +3939,7 @@
     disable: false,
     name: 'version',
     index: 40,
-    html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.0</a>'
+    html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.2</a>'
   };
 
   function close(art) {
@@ -3937,6 +3962,7 @@
     function Contextmenu(art) {
       classCallCheck(this, Contextmenu);
 
+      id$1 = 0;
       this.art = art;
       this.init();
     }
@@ -3969,7 +3995,7 @@
       }
     }, {
       key: "add",
-      value: function add(item) {
+      value: function add(item, callback) {
         var _this2 = this;
 
         if (!item.disable) {
@@ -3977,9 +4003,10 @@
               refs = _this$art2.refs,
               proxy = _this$art2.events.proxy;
           id$1++;
+          var name = item.name || "menu".concat(id$1);
           var menu = typeof item === 'function' ? item(this.art) : item;
           var $menu = document.createElement('div');
-          $menu.setAttribute('class', "art-menu art-menu-".concat(menu.name || id$1));
+          $menu.setAttribute('class', "art-menu art-menu-".concat(name || id$1));
           append($menu, menu.html);
           setStyles($menu, menu.style || {});
 
@@ -3992,7 +4019,8 @@
             });
           }
 
-          this["$".concat(menu.name || id$1)] = $menu;
+          callback && callback($menu);
+          this[name] = $menu;
           insertByIndex(refs.$contextmenu, $menu, menu.index || id$1);
         }
       }
@@ -4096,7 +4124,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n      <div class=\"art-info-item \">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">1.0.0</div>\n      </div>\n    ");
+        infoHtml.push("\n      <div class=\"art-info-item \">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">1.0.2</div>\n      </div>\n    ");
         infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n      </div>\n    ");
         infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video type:</div>\n        <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n      </div>\n    ");
         infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video size:</div>\n        <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n      </div>\n    ");
@@ -4492,6 +4520,7 @@
 
       classCallCheck(this, Layers);
 
+      id$2 = 0;
       this.art = art;
       this.add = this.add.bind(this);
       this.art.option.layers.forEach(function (item) {
@@ -4670,13 +4699,12 @@
     function Setting(art) {
       classCallCheck(this, Setting);
 
+      id$3 = 0;
       this.art = art;
       this.state = false;
-      this.$settings = [];
 
       if (art.option.setting) {
         this.init();
-        this.mount();
       }
     }
 
@@ -4700,41 +4728,33 @@
       }
     }, {
       key: "add",
-      value: function add(setting) {
+      value: function add(setting, callback) {
+        var _this$art2 = this.art,
+            refs = _this$art2.refs,
+            i18n = _this$art2.i18n;
         var option = setting.option;
 
         if (option && !option.disable) {
           id$3++;
-          var name = option.name || setting.constructor.name.toLowerCase() || "setting".concat(id$3);
+          var name = option.name || "setting".concat(id$3);
           var title = option.title || name;
           var $setting = document.createElement('div');
           $setting.setAttribute('class', "art-setting art-setting-".concat(name));
-          $setting.dataset.settingIndex = option.index || id$3;
-          append($setting, "<div class=\"art-setting-header\">".concat(this.art.i18n.get(title), "</div>"));
+          append($setting, "<div class=\"art-setting-header\">".concat(i18n.get(title), "</div>"));
           append($setting, '<div class="art-setting-body"></div>');
-          this.$settings.push($setting);
           setting.apply && setting.apply(this.art, $setting);
-          this[name] = setting;
+          callback && callback($setting);
+          this[name] = $setting;
+          insertByIndex(refs.$settingBody, $setting, option.index || id$3);
         }
-      }
-    }, {
-      key: "mount",
-      value: function mount() {
-        var _this2 = this;
-
-        this.$settings.sort(function (a, b) {
-          return Number(a.dataset.settingIndex) - Number(b.dataset.settingIndex);
-        }).forEach(function ($setting) {
-          append(_this2.art.refs.$settingBody, $setting);
-        });
       }
     }, {
       key: "show",
       value: function show() {
-        var _this$art2 = this.art,
-            $setting = _this$art2.refs.$setting,
-            i18n = _this$art2.i18n,
-            notice = _this$art2.notice;
+        var _this$art3 = this.art,
+            $setting = _this$art3.refs.$setting,
+            i18n = _this$art3.i18n,
+            notice = _this$art3.notice;
         setStyle($setting, 'display', 'flex');
         this.state = true;
         notice.show(i18n.get('Show setting'));
@@ -4743,10 +4763,10 @@
     }, {
       key: "hide",
       value: function hide() {
-        var _this$art3 = this.art,
-            $setting = _this$art3.refs.$setting,
-            i18n = _this$art3.i18n,
-            notice = _this$art3.notice;
+        var _this$art4 = this.art,
+            $setting = _this$art4.refs.$setting,
+            i18n = _this$art4.i18n,
+            notice = _this$art4.notice;
         setStyle($setting, 'display', 'none');
         this.state = false;
         notice.show(i18n.get('Hide setting'));
@@ -4855,7 +4875,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '1.0.0';
+        return '1.0.2';
       }
     }, {
       key: "config",
@@ -4921,7 +4941,7 @@
     }]);
 
     return Artplayer;
-  }(_tinyEmitter_2_0_2_tinyEmitter);
+  }(tinyEmitter);
 
   Artplayer.instances = [];
   window.Artplayer = Artplayer;

@@ -1,4 +1,5 @@
 import validElement from './validElement';
+import validStringEmpty from './validStringEmpty';
 
 export default {
   container: {
@@ -7,7 +8,8 @@ export default {
   },
   url: {
     type: 'string',
-    required: true
+    required: true,
+    validator: validStringEmpty
   },
   title: 'string',
   volume: 'number',

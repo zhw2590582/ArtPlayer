@@ -5,9 +5,19 @@ export default function attrInit(art, player) {
   Object.keys(option.moreVideoAttr).forEach(key => {
     $video[key] = option.moreVideoAttr[key];
   });
-  $video.volume = clamp(option.volume, 0, 1);
-  $video.poster = option.poster;
-  $video.autoplay = option.autoplay;
+
+  if (option.volume) {
+    $video.volume = clamp(option.volume, 0, 1);
+  }
+
+  if (option.poster) {
+    $video.poster = option.poster;
+  }
+
+  if (option.autoplay) {
+    $video.autoplay = option.autoplay;
+  }
+
   sleep().then(() => {
     art.emit('beforeMountUrl', option.url);
     $video.src = player.mountUrl(option.url);

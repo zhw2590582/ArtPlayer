@@ -1,0 +1,31 @@
+.container {
+  width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.artplayer-app {
+  width: 400px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.CodeMirror {
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+.CodeMirror pre {
+  padding-left: 7px;
+  line-height: 1.25;
+}
+
+.control {
+    margin-bottom: 20px;
+}
+
+.control .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
