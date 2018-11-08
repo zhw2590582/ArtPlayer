@@ -27,6 +27,10 @@ function initApp(app) {
     });
 }
 
+window.addEventListener('error', e => {
+    log(e.message);
+});
+
 function runCode() {
     try {
         Artplayer.instances.forEach(ins => {
