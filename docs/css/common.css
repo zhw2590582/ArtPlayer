@@ -31,10 +31,14 @@ html, body {
   box-sizing: border-box;
 }
 
-.part-left .controls .logo {
-  height: 30px;
-  line-height: 30px;
+.part-left .controls .left {
+  display: flex;
+  align-items: center;
   flex: 1;
+}
+
+.part-left .controls .left .logo {
+  padding-right: 30px;
 }
 
 .part-left .controls .run {
@@ -62,6 +66,10 @@ html, body {
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ddd;
+}
+
+.part-right .video-wrap.dark {
+  background: #000;
 }
 
 .part-right .video-wrap .artplayer-app {

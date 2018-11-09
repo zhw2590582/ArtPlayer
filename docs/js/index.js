@@ -7,6 +7,15 @@ var app = new Artplayer({
   pip: true,
   autoSize: true,
   theme: '#ffad00',
+  contextmenu: [
+      {
+          html: '自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ',
+          click: function() {
+            document.querySelector('.video-wrap').classList.toggle('dark');
+            this.hide();
+          }
+      }
+  ],
   quality: [
     {
       default: true,
