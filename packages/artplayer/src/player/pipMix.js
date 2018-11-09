@@ -16,6 +16,10 @@ export default function pipMix(art, player) {
 
   Object.defineProperty(player, 'pipEnabled', {
     value: () => {
+      if (player.autoSizeState) {
+        player.autoSizeRemove();
+      }
+
       if (!draggie) {
         draggie = new Draggabilly($player, {
           handle: '.artplayer-pip-header'
@@ -34,6 +38,7 @@ export default function pipMix(art, player) {
         setStyle($player, 'left', `${cachePos.x}px`);
         setStyle($player, 'top', `${cachePos.y}px`);
       }
+
       $player.classList.add('artplayer-pip');
       player.fullscreenExit();
       player.fullscreenWebExit();

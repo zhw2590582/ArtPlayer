@@ -3,6 +3,10 @@ import { setStyle } from '../utils';
 export default function resizeMix(art, player) {
   const { refs: { $container, $player, $video } } = art;
 
+  Object.defineProperty(player, 'autoSizeState', {
+    get: () => $container.classList.contains('artplayer-auto-size')
+  });
+
   Object.defineProperty(player, 'autoSize', {
     value: () => {
       const { videoWidth, videoHeight } = $video;

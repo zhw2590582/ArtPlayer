@@ -2841,6 +2841,10 @@
     });
     Object.defineProperty(player, 'pipEnabled', {
       value: function value() {
+        if (player.autoSizeState) {
+          player.autoSizeRemove();
+        }
+
         if (!draggie) {
           draggie = new draggabilly($player, {
             handle: '.artplayer-pip-header'
@@ -2910,6 +2914,11 @@
         $container = _art$refs.$container,
         $player = _art$refs.$player,
         $video = _art$refs.$video;
+    Object.defineProperty(player, 'autoSizeState', {
+      get: function get() {
+        return $container.classList.contains('artplayer-auto-size');
+      }
+    });
     Object.defineProperty(player, 'autoSize', {
       value: function value() {
         var videoWidth = $video.videoWidth,
@@ -4680,7 +4689,7 @@
     var resizeObserver = new ResizeObserver_2(function () {
       sleep().then(function () {
         if (option.autoSize) {
-          if (!art.player.fullscreenState && !art.player.fullscreenWebState) {
+          if (!art.player.fullscreenState && !art.player.fullscreenWebState && !art.player.pipState) {
             art.player.autoSize();
           } else {
             art.player.autoSizeRemove();

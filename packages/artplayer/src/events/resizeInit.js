@@ -6,7 +6,11 @@ export default function resizeInit(art, events) {
   const resizeObserver = new ResizeObserver(() => {
     sleep().then(() => {
       if (option.autoSize) {
-        if (!art.player.fullscreenState && !art.player.fullscreenWebState) {
+        if (
+          !art.player.fullscreenState &&
+          !art.player.fullscreenWebState &&
+          !art.player.pipState
+        ) {
           art.player.autoSize();
         } else {
           art.player.autoSizeRemove();
