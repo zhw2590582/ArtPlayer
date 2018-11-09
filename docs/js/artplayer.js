@@ -741,6 +741,10 @@
       'Pause': '暂停',
       'Rate': '速度',
       'Mute': '静音',
+      'Rotate': '旋转',
+      'Flip': '翻转',
+      'Horizontal': '水平',
+      'Vertical': '垂直',
       'Reconnect': '重新连接',
       'Hide subtitle': '隐藏字幕',
       'Show subtitle': '显示字幕',
@@ -757,9 +761,6 @@
       'Exit fullscreen': '退出全屏',
       'Web fullscreen': '网页全屏',
       'Exit web fullscreen': '退出网页全屏',
-      'Common': '常规',
-      'Hide setting': '隐藏设置',
-      'Show setting': '显示设置',
       'Mini player': '迷你播放器'
     },
     'zh-tw': {
@@ -772,6 +773,10 @@
       'Pause': '暫停',
       'Rate': '速度',
       'Mute': '靜音',
+      'Rotate': '旋轉',
+      'Flip': '翻轉',
+      'Horizontal': '水平',
+      'Vertical': '垂直',
       'Reconnect': '重新連接',
       'Hide subtitle': '隱藏字幕',
       'Show subtitle': '顯示字幕',
@@ -788,9 +793,6 @@
       'Exit fullscreen': '退出全屏',
       'Web fullscreen': '網頁全屏',
       'Exit web fullscreen': '退出網頁全屏',
-      'Common': '常規',
-      'Hide setting': '隱藏設置',
-      'Show setting': '顯示設置',
       'Mini player': '迷你播放器'
     }
   };
@@ -2953,6 +2955,36 @@
     });
   }
 
+  function rotateMix(art, player) {
+    Object.defineProperty(player, 'rotate', {
+      value: function value(angle) {
+        var angleList = [0, 90, 180, 270];
+        errorHandle(angleList.includes(angle), "The 'angle' need to be one of '[0, 90, 180, 270]', but got ".concat(angle));
+        art.refs.$player.dataset.rotate = angle;
+      }
+    });
+    Object.defineProperty(player, 'rotateRemove', {
+      value: function value() {
+        delete art.refs.$player.dataset.rotate;
+      }
+    });
+  }
+
+  function flipMix(art, player) {
+    Object.defineProperty(player, 'flip', {
+      value: function value(dir) {
+        var dirList = ['horizontal', 'vertical'];
+        errorHandle(dirList.includes(dir), "The 'angle' need to be one of '[horizontal, vertical]', but got ".concat(dir));
+        art.refs.$player.dataset.flip = dir;
+      }
+    });
+    Object.defineProperty(player, 'flipRemove', {
+      value: function value() {
+        delete art.refs.$player.dataset.flip;
+      }
+    });
+  }
+
   var Player = function Player(art) {
     classCallCheck(this, Player);
 
@@ -2976,6 +3008,8 @@
     seekMix$1(art, this);
     seekMix$2(art, this);
     resizeMix(art, this);
+    rotateMix(art, this);
+    flipMix(art, this);
   };
 
   function _arrayWithHoles(arr) {
@@ -4399,7 +4433,6 @@
       art.emit('hoverenter');
     }, function () {
       $player.classList.remove('artplayer-hover');
-      $player.classList.remove('artplayer-hide-cursor');
       art.emit('hoverleave');
     });
   }
@@ -4414,6 +4447,10 @@
         art.controls.hide();
       }
     }, 5000);
+    art.on('hoverleave', function () {
+      hideCursor.clearTimeout();
+      $player.classList.remove('artplayer-hide-cursor');
+    });
     events.proxy($player, 'mousemove', function () {
       $player.classList.remove('artplayer-hide-cursor');
       art.controls.show();
@@ -4996,26 +5033,67 @@
     return Mask;
   }();
 
-  var Common =
+  var Rotate =
   /*#__PURE__*/
   function () {
-    function Common(option) {
-      classCallCheck(this, Common);
+    function Rotate(option) {
+      classCallCheck(this, Rotate);
 
       this.option = option;
     }
 
-    createClass(Common, [{
+    createClass(Rotate, [{
       key: "apply",
       value: function apply(art, $setting) {
-        this.art = art;
+        var proxy = art.events.proxy,
+            player = art.player;
         this.$header = $setting.querySelector('.art-setting-header');
-        this.$body = $setting.querySelector('.art-setting-body');
-        append(this.$body, '———— 先占坑，暂无设置 ————');
+        this.$body = append($setting, "\n      <div class=\"art-setting-body\">\n        <span class=\"art-setting-btn\" data-rotate=\"0\">0\xB0</span>\n        <span class=\"art-setting-btn\" data-rotate=\"90\">90\xB0</span>\n        <span class=\"art-setting-btn\" data-rotate=\"180\">180\xB0</span>\n        <span class=\"art-setting-btn\" data-rotate=\"270\">270\xB0</span>\n      </div>\n    ");
+        proxy(this.$body, 'click', function (event) {
+          var target = event.target;
+          var rotate = target.dataset.rotate;
+
+          if (rotate) {
+            player.rotate(Number(rotate));
+            inverseClass(target, 'current');
+          }
+        });
       }
     }]);
 
-    return Common;
+    return Rotate;
+  }();
+
+  var Flip =
+  /*#__PURE__*/
+  function () {
+    function Flip(option) {
+      classCallCheck(this, Flip);
+
+      this.option = option;
+    }
+
+    createClass(Flip, [{
+      key: "apply",
+      value: function apply(art, $setting) {
+        var i18n = art.i18n,
+            proxy = art.events.proxy,
+            player = art.player;
+        this.$header = $setting.querySelector('.art-setting-header');
+        this.$body = append($setting, "\n      <div class=\"art-setting-body\">\n        <span class=\"art-setting-btn\" data-flip=\"horizontal\">".concat(i18n.get('Horizontal'), "</span>\n        <span class=\"art-setting-btn\" data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n      </div>\n    "));
+        proxy(this.$body, 'click', function (event) {
+          var target = event.target;
+          var flip = target.dataset.flip;
+
+          if (flip) {
+            player.flip(flip);
+            inverseClass(target, 'current');
+          }
+        });
+      }
+    }]);
+
+    return Flip;
   }();
 
   var id$3 = 0;
@@ -5046,11 +5124,17 @@
         proxy($settingClose, 'click', function () {
           _this.hide();
         });
-        this.add(new Common({
-          name: 'common',
-          title: 'Common',
+        this.add(new Rotate({
+          name: 'rotate',
+          title: 'Rotate',
           disable: false,
           index: 10
+        }));
+        this.add(new Flip({
+          name: 'flip',
+          title: 'Flip',
+          disable: false,
+          index: 20
         }));
       }
     }, {
@@ -5078,25 +5162,17 @@
     }, {
       key: "show",
       value: function show() {
-        var _this$art3 = this.art,
-            $setting = _this$art3.refs.$setting,
-            i18n = _this$art3.i18n,
-            notice = _this$art3.notice;
+        var $setting = this.art.refs.$setting;
         setStyle($setting, 'display', 'flex');
         this.state = true;
-        notice.show(i18n.get('Show setting'));
         this.art.emit('setting:show', $setting);
       }
     }, {
       key: "hide",
       value: function hide() {
-        var _this$art4 = this.art,
-            $setting = _this$art4.refs.$setting,
-            i18n = _this$art4.i18n,
-            notice = _this$art4.notice;
+        var $setting = this.art.refs.$setting;
         setStyle($setting, 'display', 'none');
         this.state = false;
-        notice.show(i18n.get('Hide setting'));
         this.art.emit('setting:hide', $setting);
       }
     }, {

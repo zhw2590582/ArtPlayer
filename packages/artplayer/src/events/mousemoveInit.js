@@ -11,6 +11,11 @@ export default function mousemoveInitInit(art, events) {
     }
   }, 5000);
 
+  art.on('hoverleave', () => {
+    hideCursor.clearTimeout();
+    $player.classList.remove('artplayer-hide-cursor');
+  });
+
   events.proxy($player, 'mousemove', () => {
     $player.classList.remove('artplayer-hide-cursor');
     art.controls.show();

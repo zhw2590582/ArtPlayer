@@ -9,6 +9,10 @@ let i18nMap = {
     'Pause': '暂停',
     'Rate': '速度',
     'Mute': '静音',
+    'Rotate': '旋转',
+    'Flip': '翻转',
+    'Horizontal': '水平',
+    'Vertical': '垂直',
     'Reconnect': '重新连接',
     'Hide subtitle': '隐藏字幕',
     'Show subtitle': '显示字幕',
@@ -25,9 +29,6 @@ let i18nMap = {
     'Exit fullscreen': '退出全屏',
     'Web fullscreen': '网页全屏',
     'Exit web fullscreen': '退出网页全屏',
-    'Common': '常规',
-    'Hide setting': '隐藏设置',
-    'Show setting': '显示设置',
     'Mini player': '迷你播放器'
   },
   'zh-tw': {
@@ -40,6 +41,10 @@ let i18nMap = {
     'Pause': '暫停',
     'Rate': '速度',
     'Mute': '靜音',
+    'Rotate': '旋轉',
+    'Flip': '翻轉',
+    'Horizontal': '水平',
+    'Vertical': '垂直',
     'Reconnect': '重新連接',
     'Hide subtitle': '隱藏字幕',
     'Show subtitle': '顯示字幕',
@@ -56,9 +61,6 @@ let i18nMap = {
     'Exit fullscreen': '退出全屏',
     'Web fullscreen': '網頁全屏',
     'Exit web fullscreen': '退出網頁全屏',
-    'Common': '常規',
-    'Hide setting': '隱藏設置',
-    'Show setting': '顯示設置',
     'Mini player': '迷你播放器'
   }
 };

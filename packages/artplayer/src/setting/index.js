@@ -1,5 +1,6 @@
 import { setStyle, append, insertByIndex } from '../utils';
-import Common from './common';
+import Rotate from './rotate';
+import Flip from './flip';
 
 let id = 0;
 export default class Setting {
@@ -19,11 +20,18 @@ export default class Setting {
       this.hide();
     });
 
-    this.add(new Common({
-      name: 'common',
-      title: 'Common',
+    this.add(new Rotate({
+      name: 'rotate',
+      title: 'Rotate',
       disable: false,
       index: 10
+    }));
+
+    this.add(new Flip({
+      name: 'flip',
+      title: 'Flip',
+      disable: false,
+      index: 20
     }));
   }
 
@@ -46,18 +54,16 @@ export default class Setting {
   }
 
   show() {
-    const { refs: { $setting }, i18n, notice } = this.art;
+    const { refs: { $setting } } = this.art;
     setStyle($setting, 'display', 'flex');
     this.state = true;
-    notice.show(i18n.get('Show setting'));
     this.art.emit('setting:show', $setting);
   }
 
   hide() {
-    const { refs: { $setting }, i18n, notice } = this.art;
+    const { refs: { $setting } } = this.art;
     setStyle($setting, 'display', 'none');
     this.state = false;
-    notice.show(i18n.get('Hide setting'));
     this.art.emit('setting:hide', $setting);
   }
 

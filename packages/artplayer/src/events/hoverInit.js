@@ -8,7 +8,6 @@ export default function hoverInit(art, events) {
     },
     () => {
       $player.classList.remove('artplayer-hover');
-      $player.classList.remove('artplayer-hide-cursor');
       art.emit('hoverleave');
     }
   );
