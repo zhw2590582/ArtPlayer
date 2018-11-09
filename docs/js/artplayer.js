@@ -697,7 +697,7 @@
     }
   };
 
-  var tinyEmitter = E;
+  var _tinyEmitter_2_0_2 = E;
 
   var Template = function Template(art) {
     classCallCheck(this, Template);
@@ -741,8 +741,7 @@
       'Pause': '暂停',
       'Rate': '速度',
       'Mute': '静音',
-      'Rotate': '旋转',
-      'Flip': '翻转',
+      'Flip': '视频翻转',
       'Horizontal': '水平',
       'Vertical': '垂直',
       'Reconnect': '重新连接',
@@ -773,8 +772,7 @@
       'Pause': '暫停',
       'Rate': '速度',
       'Mute': '靜音',
-      'Rotate': '旋轉',
-      'Flip': '翻轉',
+      'Flip': '影片翻轉',
       'Horizontal': '水平',
       'Vertical': '垂直',
       'Reconnect': '重新連接',
@@ -2955,26 +2953,6 @@
     });
   }
 
-  function rotateMix(art, player) {
-    Object.defineProperty(player, 'rotateState', {
-      get: function get() {
-        return art.refs.$player.dataset.rotate;
-      }
-    });
-    Object.defineProperty(player, 'rotate', {
-      value: function value(angle) {
-        var angleList = [0, 90, 180, 270];
-        errorHandle(angleList.includes(angle), "The 'angle' need to be one of '[0, 90, 180, 270]', but got ".concat(angle));
-        art.refs.$player.dataset.rotate = angle;
-      }
-    });
-    Object.defineProperty(player, 'rotateRemove', {
-      value: function value() {
-        delete art.refs.$player.dataset.rotate;
-      }
-    });
-  }
-
   function flipMix(art, player) {
     Object.defineProperty(player, 'flipState', {
       get: function get() {
@@ -2983,7 +2961,7 @@
     });
     Object.defineProperty(player, 'flip', {
       value: function value(dir) {
-        var dirList = ['horizontal', 'vertical'];
+        var dirList = ['normal', 'horizontal', 'vertical'];
         errorHandle(dirList.includes(dir), "The 'angle' need to be one of '[horizontal, vertical]', but got ".concat(dir));
         art.refs.$player.dataset.flip = dir;
       }
@@ -3018,7 +2996,6 @@
     seekMix$1(art, this);
     seekMix$2(art, this);
     resizeMix(art, this);
-    rotateMix(art, this);
     flipMix(art, this);
   };
 
@@ -3084,13 +3061,13 @@
 
   var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
 
-  var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\r\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\r\n</svg>\r\n";
+  var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\n</svg>\n";
 
   var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
-  var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\r\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\r\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\r\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\r\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\r\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\r\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\r\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\r\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\r\n\t</g>\r\n</g>\r\n</svg>\r\n";
+  var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\n<g>\n\t<g>\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\n\t</g>\n</g>\n<g>\n\t<g>\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\n\t</g>\n</g>\n<g>\n\t<g>\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\n\t</g>\n</g>\n<g>\n\t<g>\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\n\t</g>\n</g>\n</svg>\n";
 
-  var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\r\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\r\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\r\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\r\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\r\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\r\n</svg>\r\n";
+  var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\n</svg>\n";
 
   var pip = "<svg viewBox=\"0 0 36 36\" style=\"width: 100%; height: 100%\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\" fill=\"#fff\" id=\"ytp-id-20\"></path>\n</svg>";
 
@@ -3809,7 +3786,7 @@
 
       id = 0;
       this.art = art;
-      this.art.on('video:loadedmetadata', function () {
+      this.art.on('firstCanplay', function () {
         _this.init();
       });
     }
@@ -5043,37 +5020,6 @@
     return Mask;
   }();
 
-  var Rotate =
-  /*#__PURE__*/
-  function () {
-    function Rotate(option) {
-      classCallCheck(this, Rotate);
-
-      this.option = option;
-    }
-
-    createClass(Rotate, [{
-      key: "apply",
-      value: function apply(art, $setting) {
-        var proxy = art.events.proxy,
-            player = art.player;
-        this.$header = $setting.querySelector('.art-setting-header');
-        this.$body = append($setting, "\n      <div class=\"art-setting-body\">\n        <span class=\"art-setting-btn\" data-rotate=\"0\">0\xB0</span>\n        <span class=\"art-setting-btn\" data-rotate=\"90\">90\xB0</span>\n        <span class=\"art-setting-btn\" data-rotate=\"180\">180\xB0</span>\n        <span class=\"art-setting-btn\" data-rotate=\"270\">270\xB0</span>\n      </div>\n    ");
-        proxy(this.$body, 'click', function (event) {
-          var target = event.target;
-          var rotate = target.dataset.rotate;
-
-          if (rotate) {
-            player.rotate(Number(rotate));
-            inverseClass(target, 'current');
-          }
-        });
-      }
-    }]);
-
-    return Rotate;
-  }();
-
   var Flip =
   /*#__PURE__*/
   function () {
@@ -5090,8 +5036,9 @@
             proxy = art.events.proxy,
             player = art.player;
         this.$header = $setting.querySelector('.art-setting-header');
-        this.$body = append($setting, "\n      <div class=\"art-setting-body\">\n        <span class=\"art-setting-btn\" data-flip=\"horizontal\">".concat(i18n.get('Horizontal'), "</span>\n        <span class=\"art-setting-btn\" data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n      </div>\n    "));
-        proxy(this.$body, 'click', function (event) {
+        this.$body = $setting.querySelector('.art-setting-body');
+        this.$btns = append(this.$body, "\n      <div class=\"art-setting-btns\">\n        <div class=\"art-setting-btn current\">\n          <span data-flip=\"normal\">".concat(i18n.get('Normal'), "</span>\n        </div>\n        <div class=\"art-setting-btn\">\n          <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n        </div>\n        <div class=\"art-setting-btn\">\n          <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n        </div>\n      </div>\n    "));
+        proxy(this.$btns, 'click', function (event) {
           var target = event.target;
           var flip = target.dataset.flip;
 
@@ -5134,17 +5081,11 @@
         proxy($settingClose, 'click', function () {
           _this.hide();
         });
-        this.add(new Rotate({
-          name: 'rotate',
-          title: 'Rotate',
-          disable: false,
-          index: 10
-        }));
         this.add(new Flip({
           name: 'flip',
           title: 'Flip',
           disable: false,
-          index: 20
+          index: 10
         }));
       }
     }, {
@@ -5398,7 +5339,7 @@
     }]);
 
     return Artplayer;
-  }(tinyEmitter);
+  }(_tinyEmitter_2_0_2);
 
   Artplayer.instances = [];
   window.Artplayer = Artplayer;

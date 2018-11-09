@@ -1,5 +1,4 @@
 import { setStyle, append, insertByIndex } from '../utils';
-import Rotate from './rotate';
 import Flip from './flip';
 
 let id = 0;
@@ -20,18 +19,11 @@ export default class Setting {
       this.hide();
     });
 
-    this.add(new Rotate({
-      name: 'rotate',
-      title: 'Rotate',
-      disable: false,
-      index: 10
-    }));
-
     this.add(new Flip({
       name: 'flip',
       title: 'Flip',
       disable: false,
-      index: 20
+      index: 10
     }));
   }
 

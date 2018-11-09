@@ -12,7 +12,7 @@
         pointer-events: none;
         .artplayer-setting-inner {
             position: relative;
-            width: 350px;
+            width: 300px;
             height: 250px;
             font-size: 12px;
             background: rgba(0, 0, 0, 0.8);
@@ -22,7 +22,7 @@
             .artplayer-setting-body {
                 overflow-x: hidden;
                 overflow-y: auto;
-                width: 365px;
+                width: 315px;
                 height: 100%;
                 .art-setting {
                     border-bottom: 1px solid rgba(255,255,255,.1);
@@ -51,19 +51,28 @@
             }
         }
 
-        .art-setting-btn {
-            display: inline-block;
-            padding: 2px 5px;
-            min-width: 50px;
-            text-align: center;
-            color: #fff;
-            border: 1px solid #fff;
-            margin-right: 10px;
-            border-radius: 3px;
-            cursor: pointer;
-
-            &:hover, &.current {
-                background: #fff;
+        .art-setting-btns {
+            display: flex;
+            .art-setting-btn {
+                flex: 1;
+                padding: 0 4px;
+                margin-left: -4px;
+                span {
+                    display: block;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    color: #fff;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 2px;
+                    cursor: pointer;
+                }
+                &:hover, &.current {
+                    span {
+                        color: #fff;
+                        background: #00a1d6;
+                    }
+                }
             }
         }
     }

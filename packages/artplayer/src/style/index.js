@@ -15,4 +15,3 @@ import './fullscreenWeb.scss';
 import './pip.scss';
 import './autoSize.scss';
 import './flip.scss';
-import './rotate.scss';

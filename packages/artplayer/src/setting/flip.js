@@ -8,14 +8,22 @@ export default class Flip {
   apply(art, $setting) {
     const { i18n, events: { proxy }, player } = art;
     this.$header = $setting.querySelector('.art-setting-header');
-    this.$body = append($setting, `
-      <div class="art-setting-body">
-        <span class="art-setting-btn" data-flip="horizontal">${i18n.get('Horizontal')}</span>
-        <span class="art-setting-btn" data-flip="vertical">${i18n.get('Vertical')}</span>
+    this.$body = $setting.querySelector('.art-setting-body');
+    this.$btns = append(this.$body, `
+      <div class="art-setting-btns">
+        <div class="art-setting-btn current">
+          <span data-flip="normal">${i18n.get('Normal')}</span>
+        </div>
+        <div class="art-setting-btn">
+          <span data-flip="horizontal">${i18n.get('Horizontal')}</span>
+        </div>
+        <div class="art-setting-btn">
+          <span data-flip="vertical">${i18n.get('Vertical')}</span>
+        </div>
       </div>
     `);
 
-    proxy(this.$body, 'click', event => {
+    proxy(this.$btns, 'click', event => {
       const { target } = event;
       const { flip } = target.dataset;
       if (flip) {

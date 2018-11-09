@@ -17,7 +17,7 @@ export default class Controls {
   constructor(art) {
     id = 0;
     this.art = art;
-    this.art.on('video:loadedmetadata', () => {
+    this.art.on('firstCanplay', () => {
       this.init();
     });
   }
