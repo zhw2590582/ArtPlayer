@@ -8,7 +8,7 @@ export default function flipMix(art, player) {
   Object.defineProperty(player, 'flip', {
     value: dir => {
       const dirList = ['normal', 'horizontal', 'vertical'];
-      errorHandle(dirList.includes(dir), `The 'angle' need to be one of '[horizontal, vertical]', but got ${dir}`);
+      errorHandle(dirList.includes(dir), `The 'angle' need to be one of '[normal, horizontal, vertical]', but got ${dir}`);
       art.refs.$player.dataset.flip = dir;
     }
   });

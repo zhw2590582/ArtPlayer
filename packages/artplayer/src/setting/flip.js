@@ -28,7 +28,7 @@ export default class Flip {
       const { flip } = target.dataset;
       if (flip) {
         player.flip(flip);
-        inverseClass(target, 'current');
+        inverseClass(target.parentElement, 'current');
       }
     });
   }
