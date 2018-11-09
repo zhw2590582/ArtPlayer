@@ -9,7 +9,7 @@ export default class Time {
     $control.innerHTML = '00:00 / 00:00';
 
     function setTime() {
-      $control.innerHTML = `${secondToTime(art.player.currentTime())} / ${secondToTime(art.player.duration())}`;
+      $control.innerHTML = `${secondToTime(art.player.currentTime)} / ${secondToTime(art.player.duration)}`;
     }
 
     art.on('video:canplay', () => {

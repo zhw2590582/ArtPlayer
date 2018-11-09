@@ -3,7 +3,7 @@ export default function switchMix(art, player) {
 
   Object.defineProperty(player, 'switch', {
     value: (url, name = 'unknown') => {
-      const currentTime = player.currentTime();
+      const { currentTime } = player;
       art.emit('beforeMountUrl', url);
       $video.src = player.mountUrl(url);
       option.url = url;

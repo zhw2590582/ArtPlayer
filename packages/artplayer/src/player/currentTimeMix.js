@@ -1,5 +1,8 @@
 export default function currentTimeMix(art, player) {
   Object.defineProperty(player, 'currentTime', {
-    value: () => art.refs.$video.currentTime || 0
+    get: () => art.refs.$video.currentTime || 0,
+    set: currentTime => {
+      art.refs.$video.currentTime = currentTime;
+    }
   });
 }

@@ -1,18 +1,16 @@
-import { append, clamp, secondToTime, setStyle } from '../utils';
+import { append, clamp, secondToTime, setStyle, getStyle } from '../utils';
 
 export default class Progress {
   constructor(option) {
     this.option = option;
     this.isDroging = false;
-    this.getLoaded = this.getLoaded.bind(this);
-    this.getPlayed = this.getPlayed.bind(this);
     this.set = this.set.bind(this);
   }
 
   apply(art, $control) {
     this.art = art;
     this.$control = $control;
-    const { option: { highlight, theme }, events: { proxy }, refs: { $video }, player } = art;
+    const { option: { highlight, theme }, events: { proxy }, player } = art;
 
     append(
       $control,
@@ -33,18 +31,19 @@ export default class Progress {
     this.$indicator = $control.querySelector('.art-progress-indicator');
     this.$tip = $control.querySelector('.art-progress-tip');
 
-    this.set('loaded', this.getLoaded());
     highlight.forEach(item => {
-      const left = Number(item.time) / $video.duration;
+      const left = Number(item.time) / player.duration;
       append(this.$highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>`);
     });
 
+    this.set('loaded', player.loaded);
+
     this.art.on('video:progress', () => {
-      this.set('loaded', this.getLoaded());
+      this.set('loaded', this.loaded);
     });
 
     this.art.on('video:timeupdate', () => {
-      this.set('played', this.getPlayed());
+      this.set('played', this.played);
     });
 
     this.art.on('video:ended', () => {
@@ -94,11 +93,10 @@ export default class Progress {
   }
 
   showHighlight(event) {
-    const { $video } = this.art.refs;
     const { text, time } = event.target.dataset;
     this.$tip.innerHTML = text;
     const left =
-      Number(time) / $video.duration * this.$control.clientWidth +
+      Number(time) / this.art.player.duration * this.$control.clientWidth +
       event.target.clientWidth / 2 -
       this.$tip.clientWidth / 2;
     setStyle(this.$tip, 'left', `${left}px`);
@@ -117,23 +115,11 @@ export default class Progress {
     }
   }
 
-  getPlayed() {
-    const { $video } = this.art.refs;
-    return $video.currentTime / $video.duration;
-  }
-
-  getLoaded() {
-    const { $video } = this.art.refs;
-    return $video.buffered.length
-      ? $video.buffered.end($video.buffered.length - 1) / $video.duration
-      : 0;
-  }
-
   getPosFromEvent(event) {
-    const { $video, $progress } = this.art.refs;
+    const { player, refs: { $progress } } = this.art;
     const { left } = $progress.getBoundingClientRect();
     const width = clamp(event.x - left, 0, $progress.clientWidth);
-    const second = width / $progress.clientWidth * $video.duration;
+    const second = width / $progress.clientWidth * player.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);
     return { second, time, width, percentage };
@@ -142,7 +128,7 @@ export default class Progress {
   set(type, percentage) {
     setStyle(this[`$${type}`], 'width', `${percentage * 100}%`);
     if (type === 'played') {
-      setStyle(this.$indicator, 'left', `calc(${percentage * 100}% - 6.5px)`);
+      setStyle(this.$indicator, 'left', `calc(${percentage * 100}% - ${getStyle(this.$indicator, 'width') / 2}px)`);
     }
   }
 }

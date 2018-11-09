@@ -15,6 +15,8 @@ import screenshotMix from './screenshotMix';
 import fullscreenMix from './fullscreenMix';
 import fullscreenWebMix from './fullscreenWebMix';
 import pipMix from './pipMix';
+import loadedMix from './loadedMix';
+import playedMix from './playedMix';
 
 export default class Player {
   constructor(art) {
@@ -38,5 +40,7 @@ export default class Player {
     fullscreenMix(art, this);
     fullscreenWebMix(art, this);
     pipMix(art, this);
+    loadedMix(art, this);
+    playedMix(art, this);
   }
 }

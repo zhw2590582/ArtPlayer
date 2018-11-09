@@ -1,4 +1,4 @@
-import { append, getStorage, clamp, tooltip, setStyle } from '../utils';
+import { append, clamp, tooltip, setStyle, sleep, getStyle } from '../utils';
 import icons from '../icons';
 
 export default class Volume {
@@ -8,72 +8,15 @@ export default class Volume {
   }
 
   apply(art, $control) {
-    this.art = art;
-    this.$control = $control;
-    this.init();
-  }
-
-  init() {
-    const { events: { proxy }, player, i18n } = this.art;
-    this.$volume = append(this.$control, icons.volume);
-    this.$volumeClose = append(this.$control, icons.volumeClose);
-    this.$volumePanel = append(this.$control, '<div class="art-volume-panel"></div>');
+    const { events: { proxy, hover }, player, i18n, storage } = art;
+    this.$volume = append($control, icons.volume);
+    this.$volumeClose = append($control, icons.volumeClose);
+    this.$volumePanel = append($control, '<div class="art-volume-panel"></div>');
     this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
     tooltip(this.$volume, i18n.get('Mute'));
     setStyle(this.$volumeClose, 'display', 'none');
 
-    const volume = getStorage('volume');
-    this.setVolumeHandle(volume);
-    player.volume(volume);
-
-    proxy(this.$volume, 'click', () => {
-      setStyle(this.$volume, 'display', 'none');
-      setStyle(this.$volumeClose, 'display', 'block');
-      player.volume(0);
-    });
-
-    proxy(this.$volumeClose, 'click', () => {
-      setStyle(this.$volume, 'display', 'block');
-      setStyle(this.$volumeClose, 'display', 'none');
-      player.volume(getStorage('volume'));
-    });
-
-    proxy(this.$control, 'mouseenter', () => {
-      this.$volumePanel.classList.add('art-volume-panel-hover');
-
-      // TODO
-      setTimeout(() => {
-        this.setVolumeHandle(player.volume());
-      }, 200);
-    });
-
-    proxy(this.$control, 'mouseleave', () => {
-      this.$volumePanel.classList.remove('art-volume-panel-hover');
-    });
-
-    proxy(this.$volumePanel, 'click', event => {
-      this.volumeChangeFromEvent(event);
-    });
-
-    proxy(this.$volumeHandle, 'mousedown', () => {
-      this.isDroging = true;
-    });
-
-    proxy(this.$volumeHandle, 'mousemove', event => {
-      if (this.isDroging) {
-        this.volumeChangeFromEvent(event);
-      }
-    });
-
-    proxy(document, 'mouseup', () => {
-      if (this.isDroging) {
-        this.isDroging = false;
-      }
-    });
-
-    this.art.on('video:volumechange', () => {
-      const percentage = player.volume();
-      this.setVolumeHandle(percentage);
+    art.on('volume', percentage => {
       if (percentage === 0) {
         setStyle(this.$volume, 'display', 'none');
         setStyle(this.$volumeClose, 'display', 'block');
@@ -82,19 +25,59 @@ export default class Volume {
         setStyle(this.$volumeClose, 'display', 'none');
       }
     });
+
+    art.on('video:volumechange', () => {
+      this.setVolumeHandle(player.volume);
+    });
+
+    proxy(this.$volume, 'click', () => {
+      player.volume = 0;
+    });
+
+    proxy(this.$volumeClose, 'click', () => {
+      player.volume = storage.get('volume');
+    });
+
+    hover($control, () => {
+      this.$volumePanel.classList.add('art-volume-panel-hover');
+      sleep(200).then(() => {
+        this.setVolumeHandle(player.volume);
+      });
+    }, () => {
+      this.$volumePanel.classList.remove('art-volume-panel-hover');
+    });
+
+    proxy(this.$volumePanel, 'click', event => {
+      player.volume = this.volumeChangeFromEvent(event);
+    });
+
+    proxy(this.$volumeHandle, 'mousedown', () => {
+      this.isDroging = true;
+    });
+
+    proxy(this.$volumeHandle, 'mousemove', event => {
+      if (this.isDroging) {
+        player.volume = this.volumeChangeFromEvent(event);
+      }
+    });
+
+    proxy(document, 'mouseup', () => {
+      if (this.isDroging) {
+        this.isDroging = false;
+      }
+    });
   }
 
   volumeChangeFromEvent(event) {
-    const { player } = this.art;
     const { left: panelLeft, width: panelWidth } = this.$volumePanel.getBoundingClientRect();
     const { width: handleWidth } = this.$volumeHandle.getBoundingClientRect();
     const percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
-    player.volume(percentage);
+    return percentage;
   }
 
   setVolumeHandle(percentage = 0.7) {
-    const { width: panelWidth } = this.$volumePanel.getBoundingClientRect();
-    const { width: handleWidth } = this.$volumeHandle.getBoundingClientRect();
+    const panelWidth = getStyle(this.$volumePanel, 'width');
+    const handleWidth = getStyle(this.$volumeHandle, 'width');
     const width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
     setStyle(this.$volumeHandle, 'left', `${width}px`);
   }

@@ -32,6 +32,10 @@
 
   var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+  function unwrapExports (x) {
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x.default : x;
+  }
+
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
@@ -341,6 +345,11 @@
     });
     return element;
   }
+  function getStyle(element, key) {
+    var numberType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+    var value = window.getComputedStyle(element, null).getPropertyValue(key);
+    return numberType ? parseFloat(value) : value;
+  }
   function secondToTime(second) {
     var add0 = function add0(num) {
       return num < 10 ? "0".concat(num) : String(num);
@@ -392,14 +401,6 @@
 
     return returnValue;
   }
-  function getStorage(key) {
-    var storage = JSON.parse(localStorage.getItem('artplayer_settings')) || {};
-    return key ? storage[key] : storage;
-  }
-  function setStorage(key, value) {
-    var storage = Object.assign({}, getStorage(), defineProperty({}, key, value));
-    localStorage.setItem('artplayer_settings', JSON.stringify(storage));
-  }
   function tooltip(target, msg) {
     var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
     target.setAttribute('data-balloon', msg);
@@ -448,10 +449,9 @@
     insertByIndex: insertByIndex,
     setStyle: setStyle,
     setStyles: setStyles,
+    getStyle: getStyle,
     secondToTime: secondToTime,
     deepMerge: deepMerge,
-    getStorage: getStorage,
-    setStorage: setStorage,
     tooltip: tooltip,
     sleep: sleep,
     sublings: sublings,
@@ -921,7 +921,8 @@
       if (player.reconnectTime < player.maxReconnectTime) {
         sleep(1000).then(function () {
           player.reconnectTime++;
-          $video.src = option.url;
+          art.emit('beforeMountUrl', option.url);
+          $video.src = player.mountUrl(option.url);
           notice.show("".concat(i18n.get('Reconnect'), ": ").concat(player.reconnectTime));
         });
       } else {
@@ -993,18 +994,17 @@
   }
 
   function seekMix(art, player) {
-    var $video = art.refs.$video,
-        notice = art.notice;
+    var notice = art.notice;
     Object.defineProperty(player, 'seek', {
       value: function value(time) {
         var newTime = Math.max(time, 0);
 
-        if ($video.duration) {
-          newTime = Math.min(newTime, $video.duration);
+        if (player.duration) {
+          newTime = Math.min(newTime, player.duration);
         }
 
-        $video.currentTime = newTime;
-        notice.show("".concat(secondToTime(newTime), " / ").concat(secondToTime($video.duration)));
+        player.currentTime = newTime;
+        notice.show("".concat(secondToTime(newTime), " / ").concat(secondToTime(player.duration)));
         art.emit('seek', newTime);
       }
     });
@@ -1013,36 +1013,41 @@
   function volumeMix(art, player) {
     var $video = art.refs.$video,
         i18n = art.i18n,
-        notice = art.notice;
+        notice = art.notice,
+        storage = art.storage;
     Object.defineProperty(player, 'volume', {
-      value: function value(percentage) {
+      get: function get() {
+        return $video.volume || 0;
+      },
+      set: function set(percentage) {
         if (percentage !== undefined) {
           $video.volume = clamp(percentage, 0, 1);
           notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100)));
 
           if ($video.volume !== 0) {
-            setStorage('volume', $video.volume);
+            storage.set('volume', $video.volume);
           }
 
           art.emit('volume', $video.volume);
         }
-
-        return $video.volume || 0;
       }
     });
   }
 
   function currentTimeMix(art, player) {
     Object.defineProperty(player, 'currentTime', {
-      value: function value() {
+      get: function get() {
         return art.refs.$video.currentTime || 0;
+      },
+      set: function set(currentTime) {
+        art.refs.$video.currentTime = currentTime;
       }
     });
   }
 
   function durationMix(art, player) {
     Object.defineProperty(player, 'duration', {
-      value: function value() {
+      get: function get() {
         return art.refs.$video.duration || 0;
       }
     });
@@ -1057,7 +1062,7 @@
     Object.defineProperty(player, 'switch', {
       value: function value(url) {
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
-        var currentTime = player.currentTime();
+        var currentTime = player.currentTime;
         art.emit('beforeMountUrl', url);
         $video.src = player.mountUrl(url);
         option.url = url;
@@ -1392,7 +1397,6 @@
         $player = art.refs.$player;
 
     var screenfullChange = function screenfullChange() {
-      player.aspectRatioReset();
       art.emit('fullscreen', screenfull.isFullscreen);
     };
 
@@ -1458,7 +1462,6 @@
         }
 
         $player.classList.add('artplayer-web-fullscreen');
-        player.aspectRatioReset();
         art.emit('fullscreenWeb:enabled');
       }
     });
@@ -1469,7 +1472,6 @@
         }
 
         $player.classList.remove('artplayer-web-fullscreen');
-        player.aspectRatioReset();
         art.emit('fullscreenWeb:exit');
       }
     });
@@ -2877,6 +2879,24 @@
     });
   }
 
+  function seekMix$1(art, player) {
+    Object.defineProperty(player, 'loaded', {
+      get: function get() {
+        var $video = art.refs.$video;
+        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+      }
+    });
+  }
+
+  function seekMix$2(art, player) {
+    Object.defineProperty(player, 'played', {
+      get: function get() {
+        var $video = art.refs.$video;
+        return $video.currentTime / $video.duration;
+      }
+    });
+  }
+
   var Player = function Player(art) {
     classCallCheck(this, Player);
 
@@ -2899,6 +2919,8 @@
     fullscreenMix(art, this);
     fullscreenWebMix(art, this);
     pipMix(art, this);
+    seekMix$1(art, this);
+    seekMix$2(art, this);
   };
 
   function _arrayWithHoles(arr) {
@@ -3152,8 +3174,6 @@
 
       this.option = option;
       this.isDroging = false;
-      this.getLoaded = this.getLoaded.bind(this);
-      this.getPlayed = this.getPlayed.bind(this);
       this.set = this.set.bind(this);
     }
 
@@ -3168,7 +3188,6 @@
             highlight = _art$option.highlight,
             theme = _art$option.theme,
             proxy = art.events.proxy,
-            $video = art.refs.$video,
             player = art.player;
         append($control, "\n        <div class=\"art-control-progress-inner\">\n          <div class=\"art-progress-loaded\"></div>\n          <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n          <div class=\"art-progress-highlight\"></div>\n          <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n          <div class=\"art-progress-tip art-tip\"></div>\n        </div>\n      "));
         this.$loaded = $control.querySelector('.art-progress-loaded');
@@ -3176,16 +3195,16 @@
         this.$highlight = $control.querySelector('.art-progress-highlight');
         this.$indicator = $control.querySelector('.art-progress-indicator');
         this.$tip = $control.querySelector('.art-progress-tip');
-        this.set('loaded', this.getLoaded());
         highlight.forEach(function (item) {
-          var left = Number(item.time) / $video.duration;
+          var left = Number(item.time) / player.duration;
           append(_this.$highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>"));
         });
+        this.set('loaded', player.loaded);
         this.art.on('video:progress', function () {
-          _this.set('loaded', _this.getLoaded());
+          _this.set('loaded', _this.loaded);
         });
         this.art.on('video:timeupdate', function () {
-          _this.set('played', _this.getPlayed());
+          _this.set('played', _this.played);
         });
         this.art.on('video:ended', function () {
           _this.set('played', 1);
@@ -3240,12 +3259,11 @@
     }, {
       key: "showHighlight",
       value: function showHighlight(event) {
-        var $video = this.art.refs.$video;
         var _event$target$dataset = event.target.dataset,
             text = _event$target$dataset.text,
             time = _event$target$dataset.time;
         this.$tip.innerHTML = text;
-        var left = Number(time) / $video.duration * this.$control.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
+        var left = Number(time) / this.art.player.duration * this.$control.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
         setStyle(this.$tip, 'left', "".concat(left, "px"));
       }
     }, {
@@ -3267,29 +3285,17 @@
         }
       }
     }, {
-      key: "getPlayed",
-      value: function getPlayed() {
-        var $video = this.art.refs.$video;
-        return $video.currentTime / $video.duration;
-      }
-    }, {
-      key: "getLoaded",
-      value: function getLoaded() {
-        var $video = this.art.refs.$video;
-        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
-      }
-    }, {
       key: "getPosFromEvent",
       value: function getPosFromEvent(event) {
-        var _this$art$refs = this.art.refs,
-            $video = _this$art$refs.$video,
-            $progress = _this$art$refs.$progress;
+        var _this$art = this.art,
+            player = _this$art.player,
+            $progress = _this$art.refs.$progress;
 
         var _$progress$getBoundin = $progress.getBoundingClientRect(),
             left = _$progress$getBoundin.left;
 
         var width = clamp(event.x - left, 0, $progress.clientWidth);
-        var second = width / $progress.clientWidth * $video.duration;
+        var second = width / $progress.clientWidth * player.duration;
         var time = secondToTime(second);
         var percentage = clamp(width / $progress.clientWidth, 0, 1);
         return {
@@ -3305,7 +3311,7 @@
         setStyle(this["$".concat(type)], 'width', "".concat(percentage * 100, "%"));
 
         if (type === 'played') {
-          setStyle(this.$indicator, 'left', "calc(".concat(percentage * 100, "% - 6.5px)"));
+          setStyle(this.$indicator, 'left', "calc(".concat(percentage * 100, "% - ").concat(getStyle(this.$indicator, 'width') / 2, "px)"));
         }
       }
     }]);
@@ -3364,7 +3370,7 @@
         $control.innerHTML = '00:00 / 00:00';
 
         function setTime() {
-          $control.innerHTML = "".concat(secondToTime(art.player.currentTime()), " / ").concat(secondToTime(art.player.duration()));
+          $control.innerHTML = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
         }
 
         art.on('video:canplay', function () {
@@ -3395,70 +3401,21 @@
     createClass(Volume, [{
       key: "apply",
       value: function apply(art, $control) {
-        this.art = art;
-        this.$control = $control;
-        this.init();
-      }
-    }, {
-      key: "init",
-      value: function init() {
         var _this = this;
 
-        var _this$art = this.art,
-            proxy = _this$art.events.proxy,
-            player = _this$art.player,
-            i18n = _this$art.i18n;
-        this.$volume = append(this.$control, icons$1.volume);
-        this.$volumeClose = append(this.$control, icons$1.volumeClose);
-        this.$volumePanel = append(this.$control, '<div class="art-volume-panel"></div>');
+        var _art$events = art.events,
+            proxy = _art$events.proxy,
+            hover = _art$events.hover,
+            player = art.player,
+            i18n = art.i18n,
+            storage = art.storage;
+        this.$volume = append($control, icons$1.volume);
+        this.$volumeClose = append($control, icons$1.volumeClose);
+        this.$volumePanel = append($control, '<div class="art-volume-panel"></div>');
         this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
         tooltip(this.$volume, i18n.get('Mute'));
         setStyle(this.$volumeClose, 'display', 'none');
-        var volume = getStorage('volume');
-        this.setVolumeHandle(volume);
-        player.volume(volume);
-        proxy(this.$volume, 'click', function () {
-          setStyle(_this.$volume, 'display', 'none');
-          setStyle(_this.$volumeClose, 'display', 'block');
-          player.volume(0);
-        });
-        proxy(this.$volumeClose, 'click', function () {
-          setStyle(_this.$volume, 'display', 'block');
-          setStyle(_this.$volumeClose, 'display', 'none');
-          player.volume(getStorage('volume'));
-        });
-        proxy(this.$control, 'mouseenter', function () {
-          _this.$volumePanel.classList.add('art-volume-panel-hover'); // TODO
-
-
-          setTimeout(function () {
-            _this.setVolumeHandle(player.volume());
-          }, 200);
-        });
-        proxy(this.$control, 'mouseleave', function () {
-          _this.$volumePanel.classList.remove('art-volume-panel-hover');
-        });
-        proxy(this.$volumePanel, 'click', function (event) {
-          _this.volumeChangeFromEvent(event);
-        });
-        proxy(this.$volumeHandle, 'mousedown', function () {
-          _this.isDroging = true;
-        });
-        proxy(this.$volumeHandle, 'mousemove', function (event) {
-          if (_this.isDroging) {
-            _this.volumeChangeFromEvent(event);
-          }
-        });
-        proxy(document, 'mouseup', function () {
-          if (_this.isDroging) {
-            _this.isDroging = false;
-          }
-        });
-        this.art.on('video:volumechange', function () {
-          var percentage = player.volume();
-
-          _this.setVolumeHandle(percentage);
-
+        art.on('volume', function (percentage) {
           if (percentage === 0) {
             setStyle(_this.$volume, 'display', 'none');
             setStyle(_this.$volumeClose, 'display', 'block');
@@ -3467,12 +3424,44 @@
             setStyle(_this.$volumeClose, 'display', 'none');
           }
         });
+        art.on('video:volumechange', function () {
+          _this.setVolumeHandle(player.volume);
+        });
+        proxy(this.$volume, 'click', function () {
+          player.volume = 0;
+        });
+        proxy(this.$volumeClose, 'click', function () {
+          player.volume = storage.get('volume');
+        });
+        hover($control, function () {
+          _this.$volumePanel.classList.add('art-volume-panel-hover');
+
+          sleep(200).then(function () {
+            _this.setVolumeHandle(player.volume);
+          });
+        }, function () {
+          _this.$volumePanel.classList.remove('art-volume-panel-hover');
+        });
+        proxy(this.$volumePanel, 'click', function (event) {
+          player.volume = _this.volumeChangeFromEvent(event);
+        });
+        proxy(this.$volumeHandle, 'mousedown', function () {
+          _this.isDroging = true;
+        });
+        proxy(this.$volumeHandle, 'mousemove', function (event) {
+          if (_this.isDroging) {
+            player.volume = _this.volumeChangeFromEvent(event);
+          }
+        });
+        proxy(document, 'mouseup', function () {
+          if (_this.isDroging) {
+            _this.isDroging = false;
+          }
+        });
       }
     }, {
       key: "volumeChangeFromEvent",
       value: function volumeChangeFromEvent(event) {
-        var player = this.art.player;
-
         var _this$$volumePanel$ge = this.$volumePanel.getBoundingClientRect(),
             panelLeft = _this$$volumePanel$ge.left,
             panelWidth = _this$$volumePanel$ge.width;
@@ -3481,19 +3470,14 @@
             handleWidth = _this$$volumeHandle$g.width;
 
         var percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
-        player.volume(percentage);
+        return percentage;
       }
     }, {
       key: "setVolumeHandle",
       value: function setVolumeHandle() {
         var percentage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.7;
-
-        var _this$$volumePanel$ge2 = this.$volumePanel.getBoundingClientRect(),
-            panelWidth = _this$$volumePanel$ge2.width;
-
-        var _this$$volumeHandle$g2 = this.$volumeHandle.getBoundingClientRect(),
-            handleWidth = _this$$volumeHandle$g2.width;
-
+        var panelWidth = getStyle(this.$volumePanel, 'width');
+        var handleWidth = getStyle(this.$volumeHandle, 'width');
         var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
         setStyle(this.$volumeHandle, 'left', "".concat(width, "px"));
       }
@@ -4349,75 +4333,348 @@
     return Subtitle;
   }();
 
+  function clickInit(art, events) {
+    var $player = art.refs.$player;
+    events.proxy(document, ['click', 'contextmenu'], function (event) {
+      if (event.composedPath().indexOf($player) > -1) {
+        art.isFocus = true;
+      } else {
+        art.isFocus = false;
+        art.contextmenu.hide();
+      }
+    });
+  }
+
+  function hoverInit(art, events) {
+    var $player = art.refs.$player;
+    events.hover($player, function () {
+      $player.classList.add('artplayer-hover');
+      art.emit('hoverenter');
+    }, function () {
+      $player.classList.remove('artplayer-hover');
+      $player.classList.remove('artplayer-hide-cursor');
+      art.emit('hoverleave');
+    });
+  }
+
+  function mousemoveInitInit(art, events) {
+    var $player = art.refs.$player;
+    var hideCursor = debounce(function () {
+      $player.classList.add('artplayer-hide-cursor');
+
+      if (art.player.fullscreenState || art.player.fullscreenWebState) {
+        $player.classList.remove('artplayer-hover');
+        art.controls.hide();
+      }
+    }, 5000);
+    events.proxy($player, 'mousemove', function () {
+      $player.classList.remove('artplayer-hide-cursor');
+      art.controls.show();
+
+      if (!art.player.pipState) {
+        hideCursor();
+      } else {
+        hideCursor.clearTimeout();
+      }
+    });
+  }
+
+  var ContentRect_1 = createCommonjsModule(function (module, exports) {
+  Object.defineProperty(exports, "__esModule", { value: true });
+  var ContentRect = function (target) {
+      if ('getBBox' in target) {
+          var box = target.getBBox();
+          return Object.freeze({
+              height: box.height,
+              left: 0,
+              top: 0,
+              width: box.width,
+          });
+      }
+      else { // if (target instanceof HTMLElement) { // also includes all other non-SVGGraphicsElements
+          var styles = window.getComputedStyle(target);
+          return Object.freeze({
+              height: parseFloat(styles.height || '0'),
+              left: parseFloat(styles.paddingLeft || '0'),
+              top: parseFloat(styles.paddingTop || '0'),
+              width: parseFloat(styles.width || '0'),
+          });
+      }
+  };
+  exports.ContentRect = ContentRect;
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29udGVudFJlY3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvQ29udGVudFJlY3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFPQSxJQUFNLFdBQVcsR0FBRyxVQUFDLE1BQWU7SUFDaEMsSUFBSSxTQUFTLElBQUssTUFBNkIsRUFBRTtRQUM3QyxJQUFNLEdBQUcsR0FBSSxNQUE2QixDQUFDLE9BQU8sRUFBRSxDQUFDO1FBQ3JELE9BQU8sTUFBTSxDQUFDLE1BQU0sQ0FBQztZQUNqQixNQUFNLEVBQUUsR0FBRyxDQUFDLE1BQU07WUFDbEIsSUFBSSxFQUFFLENBQUM7WUFDUCxHQUFHLEVBQUUsQ0FBQztZQUNOLEtBQUssRUFBRSxHQUFHLENBQUMsS0FBSztTQUNuQixDQUFDLENBQUM7S0FDTjtTQUFNLEVBQUUsMEZBQTBGO1FBQy9GLElBQU0sTUFBTSxHQUFHLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUMvQyxPQUFPLE1BQU0sQ0FBQyxNQUFNLENBQUM7WUFDakIsTUFBTSxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsTUFBTSxJQUFJLEdBQUcsQ0FBQztZQUN4QyxJQUFJLEVBQUUsVUFBVSxDQUFDLE1BQU0sQ0FBQyxXQUFXLElBQUksR0FBRyxDQUFDO1lBQzNDLEdBQUcsRUFBRSxVQUFVLENBQUMsTUFBTSxDQUFDLFVBQVUsSUFBSSxHQUFHLENBQUM7WUFDekMsS0FBSyxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsS0FBSyxJQUFJLEdBQUcsQ0FBQztTQUN6QyxDQUFDLENBQUM7S0FDTjtBQUNMLENBQUMsQ0FBQztBQUVPLGtDQUFXIn0=
+  });
+
+  unwrapExports(ContentRect_1);
+  var ContentRect_2 = ContentRect_1.ContentRect;
+
+  var ResizeObservation_1 = createCommonjsModule(function (module, exports) {
+  Object.defineProperty(exports, "__esModule", { value: true });
+
+  var ResizeObservation = /** @class */ (function () {
+      function ResizeObservation(target) {
+          this.target = target;
+          this.$$broadcastWidth = this.$$broadcastHeight = 0;
+      }
+      Object.defineProperty(ResizeObservation.prototype, "broadcastWidth", {
+          get: function () {
+              return this.$$broadcastWidth;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      Object.defineProperty(ResizeObservation.prototype, "broadcastHeight", {
+          get: function () {
+              return this.$$broadcastHeight;
+          },
+          enumerable: true,
+          configurable: true
+      });
+      ResizeObservation.prototype.isActive = function () {
+          var cr = ContentRect_1.ContentRect(this.target);
+          return !!cr
+              && (cr.width !== this.broadcastWidth
+                  || cr.height !== this.broadcastHeight);
+      };
+      return ResizeObservation;
+  }());
+  exports.ResizeObservation = ResizeObservation;
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2YXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2YXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNEM7QUFFNUM7SUFlSSwyQkFBWSxNQUFlO1FBQ3ZCLElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO1FBQ3JCLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsaUJBQWlCLEdBQUcsQ0FBQyxDQUFDO0lBQ3ZELENBQUM7SUFWRCxzQkFBVyw2Q0FBYzthQUF6QjtZQUNJLE9BQU8sSUFBSSxDQUFDLGdCQUFnQixDQUFDO1FBQ2pDLENBQUM7OztPQUFBO0lBQ0Qsc0JBQVcsOENBQWU7YUFBMUI7WUFDSSxPQUFPLElBQUksQ0FBQyxpQkFBaUIsQ0FBQztRQUNsQyxDQUFDOzs7T0FBQTtJQU9NLG9DQUFRLEdBQWY7UUFDSSxJQUFNLEVBQUUsR0FBRyx5QkFBVyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUVwQyxPQUFPLENBQUMsQ0FBQyxFQUFFO2VBQ0osQ0FDQyxFQUFFLENBQUMsS0FBSyxLQUFLLElBQUksQ0FBQyxjQUFjO21CQUM3QixFQUFFLENBQUMsTUFBTSxLQUFLLElBQUksQ0FBQyxlQUFlLENBQ3hDLENBQUM7SUFDVixDQUFDO0lBQ0wsd0JBQUM7QUFBRCxDQUFDLEFBN0JELElBNkJDO0FBRVEsOENBQWlCIn0=
+  });
+
+  unwrapExports(ResizeObservation_1);
+  var ResizeObservation_2 = ResizeObservation_1.ResizeObservation;
+
+  var ResizeObserverEntry_1 = createCommonjsModule(function (module, exports) {
+  Object.defineProperty(exports, "__esModule", { value: true });
+
+  var ResizeObserverEntry = /** @class */ (function () {
+      function ResizeObserverEntry(target) {
+          this.target = target;
+          this.contentRect = ContentRect_1.ContentRect(target);
+      }
+      return ResizeObserverEntry;
+  }());
+  exports.ResizeObserverEntry = ResizeObserverEntry;
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXJFbnRyeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9SZXNpemVPYnNlcnZlckVudHJ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTRDO0FBRTVDO0lBR0ksNkJBQVksTUFBZTtRQUN2QixJQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztRQUNyQixJQUFJLENBQUMsV0FBVyxHQUFHLHlCQUFXLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDM0MsQ0FBQztJQUNMLDBCQUFDO0FBQUQsQ0FBQyxBQVBELElBT0M7QUFFUSxrREFBbUIifQ==
+  });
+
+  unwrapExports(ResizeObserverEntry_1);
+  var ResizeObserverEntry_2 = ResizeObserverEntry_1.ResizeObserverEntry;
+
+  var ResizeObserver_1 = createCommonjsModule(function (module, exports) {
+  Object.defineProperty(exports, "__esModule", { value: true });
+
+
+  var resizeObservers = [];
+  var ResizeObserver = /** @class */ (function () {
+      function ResizeObserver(callback) {
+          /** @internal */
+          this.$$observationTargets = [];
+          /** @internal */
+          this.$$activeTargets = [];
+          /** @internal */
+          this.$$skippedTargets = [];
+          var message = callbackGuard(callback);
+          if (message) {
+              throw TypeError(message);
+          }
+          this.$$callback = callback;
+          resizeObservers.push(this);
+      }
+      ResizeObserver.prototype.observe = function (target) {
+          var message = targetGuard('observe', target);
+          if (message) {
+              throw TypeError(message);
+          }
+          var index = findTargetIndex(this.$$observationTargets, target);
+          if (index > 0) {
+              return;
+          }
+          this.$$observationTargets.push(new ResizeObservation_1.ResizeObservation(target));
+          startLoop();
+      };
+      ResizeObserver.prototype.unobserve = function (target) {
+          var message = targetGuard('unobserve', target);
+          if (message) {
+              throw TypeError(message);
+          }
+          var index = findTargetIndex(this.$$observationTargets, target);
+          if (index < 0) {
+              return;
+          }
+          this.$$observationTargets.splice(index, 1);
+          checkStopLoop();
+      };
+      ResizeObserver.prototype.disconnect = function () {
+          this.$$observationTargets = [];
+          this.$$activeTargets = [];
+      };
+      return ResizeObserver;
+  }());
+  exports.ResizeObserver = ResizeObserver;
+  function callbackGuard(callback) {
+      if (typeof (callback) === 'undefined') {
+          return "Failed to construct 'ResizeObserver': 1 argument required, but only 0 present.";
+      }
+      if (typeof (callback) !== 'function') {
+          return "Failed to construct 'ResizeObserver': The callback provided as parameter 1 is not a function.";
+      }
+  }
+  function targetGuard(functionName, target) {
+      if (typeof (target) === 'undefined') {
+          return "Failed to execute '" + functionName + "' on 'ResizeObserver': 1 argument required, but only 0 present.";
+      }
+      if (!(target instanceof window.Element)) {
+          return "Failed to execute '" + functionName + "' on 'ResizeObserver': parameter 1 is not of type 'Element'.";
+      }
+  }
+  function findTargetIndex(collection, target) {
+      for (var index = 0; index < collection.length; index += 1) {
+          if (collection[index].target === target) {
+              return index;
+          }
+      }
+      return -1;
+  }
+  var gatherActiveObservationsAtDepth = function (depth) {
+      resizeObservers.forEach(function (ro) {
+          ro.$$activeTargets = [];
+          ro.$$skippedTargets = [];
+          ro.$$observationTargets.forEach(function (ot) {
+              if (ot.isActive()) {
+                  var targetDepth = calculateDepthForNode(ot.target);
+                  if (targetDepth > depth) {
+                      ro.$$activeTargets.push(ot);
+                  }
+                  else {
+                      ro.$$skippedTargets.push(ot);
+                  }
+              }
+          });
+      });
+  };
+  var hasActiveObservations = function () {
+      return resizeObservers.some(function (ro) { return !!ro.$$activeTargets.length; });
+  };
+  var hasSkippedObservations = function () {
+      return resizeObservers.some(function (ro) { return !!ro.$$skippedTargets.length; });
+  };
+  var broadcastActiveObservations = function () {
+      var shallowestTargetDepth = Infinity;
+      resizeObservers.forEach(function (ro) {
+          if (!ro.$$activeTargets.length) {
+              return;
+          }
+          var entries = [];
+          ro.$$activeTargets.forEach(function (obs) {
+              var entry = new ResizeObserverEntry_1.ResizeObserverEntry(obs.target);
+              entries.push(entry);
+              obs.$$broadcastWidth = entry.contentRect.width;
+              obs.$$broadcastHeight = entry.contentRect.height;
+              var targetDepth = calculateDepthForNode(obs.target);
+              if (targetDepth < shallowestTargetDepth) {
+                  shallowestTargetDepth = targetDepth;
+              }
+          });
+          ro.$$callback(entries, ro);
+          ro.$$activeTargets = [];
+      });
+      return shallowestTargetDepth;
+  };
+  var deliverResizeLoopErrorNotification = function () {
+      var errorEvent = new window.ErrorEvent('ResizeLoopError', {
+          message: 'ResizeObserver loop completed with undelivered notifications.',
+      });
+      window.dispatchEvent(errorEvent);
+  };
+  var calculateDepthForNode = function (target) {
+      var depth = 0;
+      while (target.parentNode) {
+          target = target.parentNode;
+          depth += 1;
+      }
+      return depth;
+  };
+  var notificationIteration = function () {
+      var depth = 0;
+      gatherActiveObservationsAtDepth(depth);
+      while (hasActiveObservations()) {
+          depth = broadcastActiveObservations();
+          gatherActiveObservationsAtDepth(depth);
+      }
+      if (hasSkippedObservations()) {
+          deliverResizeLoopErrorNotification();
+      }
+  };
+  var animationFrameCancelToken;
+  var startLoop = function () {
+      if (animationFrameCancelToken)
+          return;
+      runLoop();
+  };
+  var runLoop = function () {
+      animationFrameCancelToken = window.requestAnimationFrame(function () {
+          notificationIteration();
+          runLoop();
+      });
+  };
+  var checkStopLoop = function () {
+      if (animationFrameCancelToken && !resizeObservers.some(function (ro) { return !!ro.$$observationTargets.length; })) {
+          window.cancelAnimationFrame(animationFrameCancelToken);
+          animationFrameCancelToken = undefined;
+      }
+  };
+  var install = function () {
+      return window.ResizeObserver = ResizeObserver;
+  };
+  exports.install = install;
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSx5REFBd0Q7QUFFeEQsNkRBQTREO0FBRTVELElBQU0sZUFBZSxHQUFHLEVBQXNCLENBQUM7QUFFL0M7SUFVSSx3QkFBWSxRQUFnQztRQVA1QyxnQkFBZ0I7UUFDVCx5QkFBb0IsR0FBRyxFQUF5QixDQUFDO1FBQ3hELGdCQUFnQjtRQUNULG9CQUFlLEdBQUcsRUFBeUIsQ0FBQztRQUNuRCxnQkFBZ0I7UUFDVCxxQkFBZ0IsR0FBRyxFQUF5QixDQUFDO1FBR2hELElBQU0sT0FBTyxHQUFHLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUN4QyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDM0IsZUFBZSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUMvQixDQUFDO0lBRU0sZ0NBQU8sR0FBZCxVQUFlLE1BQWU7UUFDMUIsSUFBTSxPQUFPLEdBQUcsV0FBVyxDQUFDLFNBQVMsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUMvQyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBTSxLQUFLLEdBQUcsZUFBZSxDQUFDLElBQUksQ0FBQyxvQkFBb0IsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUNqRSxJQUFJLEtBQUssR0FBRyxDQUFDLEVBQUU7WUFDWCxPQUFPO1NBQ1Y7UUFDRCxJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLElBQUkscUNBQWlCLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztRQUM5RCxTQUFTLEVBQUUsQ0FBQztJQUNoQixDQUFDO0lBRU0sa0NBQVMsR0FBaEIsVUFB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
+  });
+
+  unwrapExports(ResizeObserver_1);
+  var ResizeObserver_2 = ResizeObserver_1.ResizeObserver;
+  var ResizeObserver_3 = ResizeObserver_1.install;
+
+  function clickInit$1(art, events) {
+    var $player = art.refs.$player;
+    var resizeObserver = new ResizeObserver_2(function () {
+      sleep().then(function () {
+        art.player.aspectRatioReset();
+        art.emit('resize');
+      });
+    });
+    resizeObserver.observe($player);
+    events.destroyEvents.push(function () {
+      resizeObserver.unobserve($player);
+    });
+  }
+
   var Events =
   /*#__PURE__*/
   function () {
     function Events(art) {
       classCallCheck(this, Events);
 
-      this.art = art;
       this.destroyEvents = [];
       this.proxy = this.proxy.bind(this);
       this.hover = this.hover.bind(this);
-      this.init();
+      clickInit(art, this);
+      hoverInit(art, this);
+      mousemoveInitInit(art, this);
+      clickInit$1(art, this);
     }
 
     createClass(Events, [{
-      key: "init",
-      value: function init() {
-        var _this = this;
-
-        var $player = this.art.refs.$player;
-        this.hover($player, function () {
-          $player.classList.add('artplayer-hover');
-
-          _this.art.emit('hoverenter');
-        }, function () {
-          $player.classList.remove('artplayer-hover');
-          $player.classList.remove('artplayer-hide-cursor');
-
-          _this.art.emit('hoverleave');
-        });
-        this.proxy(document, ['click', 'contextmenu'], function (event) {
-          if (event.composedPath().indexOf($player) > -1) {
-            _this.art.isFocus = true;
-          } else {
-            _this.art.isFocus = false;
-
-            _this.art.contextmenu.hide();
-          }
-        });
-        var hideCursor = debounce(function () {
-          $player.classList.add('artplayer-hide-cursor');
-
-          if (_this.art.player.fullscreenState || _this.art.player.fullscreenWebState) {
-            $player.classList.remove('artplayer-hover');
-
-            _this.art.controls.hide();
-          }
-        }, 5000);
-        this.proxy($player, 'mousemove', function () {
-          $player.classList.remove('artplayer-hide-cursor');
-
-          _this.art.controls.show();
-
-          if (!_this.art.player.pipState) {
-            hideCursor();
-          } else {
-            hideCursor.clearTimeout();
-          }
-        });
-      }
-    }, {
       key: "proxy",
       value: function proxy(target, name, callback) {
-        var _this2 = this;
+        var _this = this;
 
         var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
         if (Array.isArray(name)) {
           name.forEach(function (item) {
-            return _this2.proxy(target, item, callback, option);
+            return _this.proxy(target, item, callback, option);
           });
           return;
         }
@@ -4786,6 +5043,48 @@
     return Setting;
   }();
 
+  var Storage =
+  /*#__PURE__*/
+  function () {
+    function Storage(art) {
+      var _this = this;
+
+      classCallCheck(this, Storage);
+
+      this.art = art;
+      this.storageName = 'artplayer_settings';
+      sleep().then(function () {
+        _this.initVolume();
+      });
+    }
+
+    createClass(Storage, [{
+      key: "get",
+      value: function get(key) {
+        var storage = JSON.parse(localStorage.getItem(this.storageName));
+        return storage[key];
+      }
+    }, {
+      key: "set",
+      value: function set(key, value) {
+        var storage = Object.assign({}, this.get() || {}, defineProperty({}, key, value));
+        localStorage.setItem(this.storageName, JSON.stringify(storage));
+      }
+    }, {
+      key: "initVolume",
+      value: function initVolume() {
+        var player = this.art.player;
+        var volume = this.get('volume');
+
+        if (volume) {
+          player.volume = volume;
+        }
+      }
+    }]);
+
+    return Storage;
+  }();
+
   var id$4 = 0;
 
   var Artplayer =
@@ -4826,6 +5125,7 @@
         }
 
         this.template = new Template(this);
+        this.storage = new Storage(this);
         this.i18n = new I18n(this);
         this.notice = new Notice(this);
         this.events = new Events(this);

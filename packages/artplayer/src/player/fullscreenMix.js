@@ -4,7 +4,6 @@ export default function fullscreenMix(art, player) {
   const { notice, events: { destroyEvents }, refs: { $player } } = art;
 
   const screenfullChange = () => {
-    player.aspectRatioReset();
     art.emit('fullscreen', screenfull.isFullscreen);
   };
 

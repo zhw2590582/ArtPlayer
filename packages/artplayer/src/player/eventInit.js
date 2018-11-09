@@ -71,7 +71,8 @@ export default function eventInit(art, player) {
     if (player.reconnectTime < player.maxReconnectTime) {
       sleep(1000).then(() => {
         player.reconnectTime++;
-        $video.src = option.url;
+        art.emit('beforeMountUrl', option.url);
+        $video.src = player.mountUrl(option.url);
         notice.show(`${i18n.get('Reconnect')}: ${player.reconnectTime}`);
       });
     } else {

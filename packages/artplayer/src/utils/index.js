@@ -70,6 +70,11 @@ export function setStyles(element, styles) {
   return element;
 }
 
+export function getStyle(element, key, numberType = true) {
+  const value = window.getComputedStyle(element, null).getPropertyValue(key);
+  return numberType ? parseFloat(value) : value;
+}
+
 export function secondToTime(second) {
   const add0 = num => num < 10 ? `0${num}` : String(num);
   const hour = Math.floor(second / 3600);
@@ -103,18 +108,6 @@ export function deepMerge(...sources) {
     }
   }
   return returnValue;
-}
-
-export function getStorage(key) {
-  const storage = JSON.parse(localStorage.getItem('artplayer_settings')) || {};
-  return key ? storage[key] : storage;
-}
-
-export function setStorage(key, value) {
-  const storage = Object.assign({}, getStorage(), {
-    [key]: value
-  });
-  localStorage.setItem('artplayer_settings', JSON.stringify(storage));
 }
 
 export function tooltip(target, msg, pos = 'up') {

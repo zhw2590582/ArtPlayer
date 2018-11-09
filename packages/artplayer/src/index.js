@@ -19,6 +19,7 @@ import Loading from './loading';
 import Notice from './notice';
 import Mask from './mask';
 import Setting from './setting';
+import Storage from './storage';
 
 let id = 0;
 class Artplayer extends Emitter {
@@ -117,6 +118,7 @@ class Artplayer extends Emitter {
     }
 
     this.template = new Template(this);
+    this.storage = new Storage(this);
     this.i18n = new I18n(this);
     this.notice = new Notice(this);
     this.events = new Events(this);
