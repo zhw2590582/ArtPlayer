@@ -50,7 +50,6 @@
     "option-validator": "^1.1.0",
     "resize-observer": "^1.0.0-alpha.1",
     "screenfull": "^3.3.3",
-    "size-sensor": "^0.2.2",
     "tiny-emitter": "^2.0.2"
   }
 }

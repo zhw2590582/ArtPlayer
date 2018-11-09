@@ -1,6 +1,10 @@
 import { errorHandle } from '../utils';
 
 export default function rotateMix(art, player) {
+  Object.defineProperty(player, 'rotateState', {
+    get: () => art.refs.$player.dataset.rotate
+  });
+
   Object.defineProperty(player, 'rotate', {
     value: angle => {
       const angleList = [0, 90, 180, 270];

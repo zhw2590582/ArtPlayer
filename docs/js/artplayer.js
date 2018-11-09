@@ -2956,6 +2956,11 @@
   }
 
   function rotateMix(art, player) {
+    Object.defineProperty(player, 'rotateState', {
+      get: function get() {
+        return art.refs.$player.dataset.rotate;
+      }
+    });
     Object.defineProperty(player, 'rotate', {
       value: function value(angle) {
         var angleList = [0, 90, 180, 270];
@@ -2971,6 +2976,11 @@
   }
 
   function flipMix(art, player) {
+    Object.defineProperty(player, 'flipState', {
+      get: function get() {
+        return art.refs.$player.dataset.flip;
+      }
+    });
     Object.defineProperty(player, 'flip', {
       value: function value(dir) {
         var dirList = ['horizontal', 'vertical'];

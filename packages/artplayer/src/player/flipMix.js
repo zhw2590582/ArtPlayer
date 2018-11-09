@@ -1,6 +1,10 @@
 import { errorHandle } from '../utils';
 
 export default function flipMix(art, player) {
+  Object.defineProperty(player, 'flipState', {
+    get: () => art.refs.$player.dataset.flip
+  });
+
   Object.defineProperty(player, 'flip', {
     value: dir => {
       const dirList = ['horizontal', 'vertical'];
