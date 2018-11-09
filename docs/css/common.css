@@ -66,7 +66,8 @@ html, body {
 
 .part-right .video-wrap .artplayer-app {
     width: 90%;
-    height: 65%;
+    height: 60%;
+    border: 1px solid #ddd;
 }
 
 .part-right .console {

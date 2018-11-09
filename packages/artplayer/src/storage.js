@@ -11,11 +11,11 @@ export default class Storage {
 
   get(key) {
     const storage = JSON.parse(localStorage.getItem(this.storageName));
-    return storage[key];
+    return key ? storage[key] : {};
   }
 
   set(key, value) {
-    const storage = Object.assign({}, this.get() || {}, {
+    const storage = Object.assign({}, this.get(), {
       [key]: value
     });
     localStorage.setItem(this.storageName, JSON.stringify(storage));

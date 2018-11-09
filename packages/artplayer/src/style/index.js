@@ -13,3 +13,4 @@ import './hideCursor.scss';
 import './aspectRatio.scss';
 import './fullscreenWeb.scss';
 import './pip.scss';
+import './autoSize.scss';

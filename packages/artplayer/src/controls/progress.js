@@ -39,11 +39,11 @@ export default class Progress {
     this.set('loaded', player.loaded);
 
     this.art.on('video:progress', () => {
-      this.set('loaded', this.loaded);
+      this.set('loaded', player.loaded);
     });
 
     this.art.on('video:timeupdate', () => {
-      this.set('played', this.played);
+      this.set('played', player.played);
     });
 
     this.art.on('video:ended', () => {

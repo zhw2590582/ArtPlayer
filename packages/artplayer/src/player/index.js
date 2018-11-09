@@ -17,12 +17,10 @@ import fullscreenWebMix from './fullscreenWebMix';
 import pipMix from './pipMix';
 import loadedMix from './loadedMix';
 import playedMix from './playedMix';
+import autoSizeMix from './autoSizeMix';
 
 export default class Player {
   constructor(art) {
-    this.reconnectTime = 0;
-    this.maxReconnectTime = 5;
-
     mountUrlMix(art, this);
     attrInit(art, this);
     eventInit(art, this);
@@ -42,5 +40,6 @@ export default class Player {
     pipMix(art, this);
     loadedMix(art, this);
     playedMix(art, this);
+    autoSizeMix(art, this);
   }
 }

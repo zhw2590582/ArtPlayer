@@ -9,7 +9,6 @@ export default function switchMix(art, player) {
       option.url = url;
       player.playbackRateRemove();
       player.aspectRatioRemove();
-      player.reconnectTime = 0;
       player.seek(currentTime);
       if (isPlaying) {
         player.play();

@@ -25,6 +25,7 @@ export default {
   },
   screenshot: 'boolean',
   autoplay: 'boolean',
+  autoSize: 'boolean',
   playbackRate: 'boolean',
   aspectRatio: 'boolean',
   loop: 'boolean',

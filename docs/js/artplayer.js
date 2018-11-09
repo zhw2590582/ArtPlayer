@@ -514,6 +514,7 @@
     },
     screenshot: 'boolean',
     autoplay: 'boolean',
+    autoSize: 'boolean',
     playbackRate: 'boolean',
     aspectRatio: 'boolean',
     loop: 'boolean',
@@ -863,6 +864,8 @@
         i18n = art.i18n,
         notice = art.notice;
     var firstCanplay = false;
+    var reconnectTime = 0;
+    var maxReconnectTime = 5;
     proxy($video, 'click', function () {
       player.toggle();
     });
@@ -874,6 +877,11 @@
     art.on('video:loadstart', function () {
       art.loading.show();
     });
+    art.on('video:loadedmetadata', function () {
+      if (option.autoSize) {
+        player.autoSize();
+      }
+    });
     art.on('video:loadeddata', function () {
       art.loading.hide();
     });
@@ -884,6 +892,8 @@
       art.loading.show();
     });
     art.on('video:canplay', function () {
+      reconnectTime = 0;
+
       if (!firstCanplay) {
         firstCanplay = true;
         art.emit('firstCanplay');
@@ -918,12 +928,12 @@
       }
     });
     art.on('video:error', function () {
-      if (player.reconnectTime < player.maxReconnectTime) {
+      if (reconnectTime < maxReconnectTime) {
         sleep(1000).then(function () {
           player.reconnectTime++;
           art.emit('beforeMountUrl', option.url);
           $video.src = player.mountUrl(option.url);
-          notice.show("".concat(i18n.get('Reconnect'), ": ").concat(player.reconnectTime));
+          notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
         });
       } else {
         art.isPlaying = false;
@@ -1068,7 +1078,6 @@
         option.url = url;
         player.playbackRateRemove();
         player.aspectRatioRemove();
-        player.reconnectTime = 0;
         player.seek(currentTime);
 
         if (isPlaying) {
@@ -2882,8 +2891,7 @@
   function seekMix$1(art, player) {
     Object.defineProperty(player, 'loaded', {
       get: function get() {
-        var $video = art.refs.$video;
-        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+        return art.refs.$video.buffered.length ? art.refs.$video.buffered.end(art.refs.$video.buffered.length - 1) / art.refs.$video.duration : 0;
       }
     });
   }
@@ -2891,8 +2899,46 @@
   function seekMix$2(art, player) {
     Object.defineProperty(player, 'played', {
       get: function get() {
-        var $video = art.refs.$video;
-        return $video.currentTime / $video.duration;
+        return art.refs.$video.currentTime / art.refs.$video.duration;
+      }
+    });
+  }
+
+  function resizeMix(art, player) {
+    var _art$refs = art.refs,
+        $container = _art$refs.$container,
+        $player = _art$refs.$player,
+        $video = _art$refs.$video;
+    Object.defineProperty(player, 'autoSize', {
+      value: function value() {
+        var videoWidth = $video.videoWidth,
+            videoHeight = $video.videoHeight;
+
+        var _$container$getBoundi = $container.getBoundingClientRect(),
+            width = _$container$getBoundi.width,
+            height = _$container$getBoundi.height;
+
+        var videoRatio = videoWidth / videoHeight;
+        var containerRatio = width / height;
+        $container.classList.add('artplayer-auto-size');
+
+        if (containerRatio > videoRatio) {
+          var percentage = height * videoRatio / width * 100;
+          setStyle($player, 'width', "".concat(percentage, "%"));
+          setStyle($player, 'height', '100%');
+        } else {
+          var _percentage = width / videoRatio / height * 100;
+
+          setStyle($player, 'width', '100%');
+          setStyle($player, 'height', "".concat(_percentage, "%"));
+        }
+      }
+    });
+    Object.defineProperty(player, 'autoSizeRemove', {
+      value: function value() {
+        $container.classList.remove('artplayer-auto-size');
+        setStyle($player, 'width', null);
+        setStyle($player, 'height', null);
       }
     });
   }
@@ -2900,8 +2946,6 @@
   var Player = function Player(art) {
     classCallCheck(this, Player);
 
-    this.reconnectTime = 0;
-    this.maxReconnectTime = 5;
     mountUrlMix(art, this);
     attrInit(art, this);
     eventInit(art, this);
@@ -2921,6 +2965,7 @@
     pipMix(art, this);
     seekMix$1(art, this);
     seekMix$2(art, this);
+    resizeMix(art, this);
   };
 
   function _arrayWithHoles(arr) {
@@ -3201,10 +3246,10 @@
         });
         this.set('loaded', player.loaded);
         this.art.on('video:progress', function () {
-          _this.set('loaded', _this.loaded);
+          _this.set('loaded', player.loaded);
         });
         this.art.on('video:timeupdate', function () {
-          _this.set('played', _this.played);
+          _this.set('played', player.played);
         });
         this.art.on('video:ended', function () {
           _this.set('played', 1);
@@ -3710,7 +3755,7 @@
 
       id = 0;
       this.art = art;
-      this.art.on('firstCanplay', function () {
+      this.art.on('video:loadedmetadata', function () {
         _this.init();
       });
     }
@@ -3857,8 +3902,7 @@
   function playbackRate(art) {
     var option = art.option,
         i18n = art.i18n,
-        player = art.player,
-        contextmenu = art.contextmenu;
+        player = art.player;
     return {
       disable: !option.playbackRate,
       name: 'playbackRate',
@@ -3874,7 +3918,7 @@
             return item.classList.remove('current');
           });
           target.classList.add('current');
-          contextmenu.hide();
+          art.contextmenu.hide();
         }
       }
     };
@@ -3883,8 +3927,7 @@
   function aspectRatio(art) {
     var option = art.option,
         i18n = art.i18n,
-        player = art.player,
-        contextmenu = art.contextmenu;
+        player = art.player;
     return {
       disable: !option.aspectRatio,
       name: 'aspectRatio',
@@ -3900,7 +3943,7 @@
             return item.classList.remove('current');
           });
           target.classList.add('current');
-          contextmenu.hide();
+          art.contextmenu.hide();
         }
       }
     };
@@ -4637,9 +4680,14 @@
   var ResizeObserver_3 = ResizeObserver_1.install;
 
   function clickInit$1(art, events) {
-    var $player = art.refs.$player;
+    var option = art.option,
+        $player = art.refs.$player;
     var resizeObserver = new ResizeObserver_2(function () {
       sleep().then(function () {
+        if (option.autoSize) {
+          art.player.autoSize();
+        }
+
         art.player.aspectRatioReset();
         art.emit('resize');
       });
@@ -5062,12 +5110,12 @@
       key: "get",
       value: function get(key) {
         var storage = JSON.parse(localStorage.getItem(this.storageName));
-        return storage[key];
+        return key ? storage[key] : {};
       }
     }, {
       key: "set",
       value: function set(key, value) {
-        var storage = Object.assign({}, this.get() || {}, defineProperty({}, key, value));
+        var storage = Object.assign({}, this.get(), defineProperty({}, key, value));
         localStorage.setItem(this.storageName, JSON.stringify(storage));
       }
     }, {
@@ -5205,6 +5253,7 @@
           },
           screenshot: false,
           autoplay: false,
+          autoSize: false,
           playbackRate: true,
           aspectRatio: true,
           loop: false,

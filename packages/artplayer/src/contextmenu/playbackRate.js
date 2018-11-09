@@ -1,7 +1,7 @@
 import { sublings } from '../utils';
 
 export default function playbackRate(art) {
-  const { option, i18n, player, contextmenu } = art;
+  const { option, i18n, player } = art;
   return {
     disable: !option.playbackRate,
     name: 'playbackRate',
@@ -22,7 +22,7 @@ export default function playbackRate(art) {
         player.playbackRate(Number(rate));
         sublings(target).forEach(item => item.classList.remove('current'));
         target.classList.add('current');
-        contextmenu.hide();
+        art.contextmenu.hide();
       }
     }
   };

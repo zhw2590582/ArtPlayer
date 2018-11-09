@@ -1,7 +1,7 @@
 import { sublings } from '../utils';
 
 export default function aspectRatio(art) {
-  const { option, i18n, player, contextmenu } = art;
+  const { option, i18n, player } = art;
   return {
     disable: !option.aspectRatio,
     name: 'aspectRatio',
@@ -19,7 +19,7 @@ export default function aspectRatio(art) {
         player.aspectRatio(ratio.split(':'));
         sublings(target).forEach(item => item.classList.remove('current'));
         target.classList.add('current');
-        contextmenu.hide();
+        art.contextmenu.hide();
       }
     }
   };
