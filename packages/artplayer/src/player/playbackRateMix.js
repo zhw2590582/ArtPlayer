@@ -1,4 +1,4 @@
-import { clamp, sublings } from '../utils';
+import { clamp, inverseClass } from '../utils';
 
 export default function playbackRateMix(art, player) {
   const { refs: { $video, $player }, i18n, notice } = art;
@@ -19,8 +19,7 @@ export default function playbackRateMix(art, player) {
       delete $player.dataset.playbackRate;
       if (art.contextmenu.$playbackRate) {
         const $normal = art.contextmenu.$playbackRate.querySelector('.normal');
-        sublings($normal).forEach(item => item.classList.remove('current'));
-        $normal.classList.add('current');
+        inverseClass($normal, 'current');
       }
     }
   });

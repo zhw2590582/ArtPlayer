@@ -1,4 +1,4 @@
-import { sublings } from '../utils';
+import { inverseClass } from '../utils';
 
 export default function playbackRate(art) {
   const { option, i18n, player } = art;
@@ -20,8 +20,7 @@ export default function playbackRate(art) {
       const { rate } = target.dataset;
       if (rate) {
         player.playbackRate(Number(rate));
-        sublings(target).forEach(item => item.classList.remove('current'));
-        target.classList.add('current');
+        inverseClass(target, 'current');
         art.contextmenu.hide();
       }
     }

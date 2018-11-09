@@ -6,6 +6,9 @@ var app = new Artplayer({
   poster: url + '/image/one-more-time-one-more-chance-poster.jpg',
   pip: true,
   autoSize: true,
+  screenshot: true,
+  setting: true,
+  loop: true,
   theme: '#ffad00',
   contextmenu: [
       {
@@ -15,6 +18,25 @@ var app = new Artplayer({
             this.hide();
           }
       }
+  ],
+  layers: [
+    {
+      html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+      click: function () {
+        app.destroy(true);
+        app = new Artplayer({
+            autoplay: true,
+            container: '.artplayer-app',
+            url: url + '/video/you-name.mp4'
+        })
+      },
+      style: {
+          'position': 'absolute',
+          'top': '20px',
+          'right': '20px',
+          'opacity': '.9'
+      }
+    }
   ],
   quality: [
     {

@@ -1,12 +1,16 @@
 import { sleep } from '../utils';
 import { ResizeObserver } from 'resize-observer';
 
-export default function clickInit(art, events) {
+export default function resizeInit(art, events) {
   const { option, refs: { $player } } = art;
   const resizeObserver = new ResizeObserver(() => {
     sleep().then(() => {
       if (option.autoSize) {
-        art.player.autoSize();
+        if (!art.player.fullscreenState && !art.player.fullscreenWebState) {
+          art.player.autoSize();
+        } else {
+          art.player.autoSizeRemove();
+        }
       }
       art.player.aspectRatioReset();
       art.emit('resize');

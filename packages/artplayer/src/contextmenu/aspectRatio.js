@@ -1,4 +1,4 @@
-import { sublings } from '../utils';
+import { inverseClass } from '../utils';
 
 export default function aspectRatio(art) {
   const { option, i18n, player } = art;
@@ -17,8 +17,7 @@ export default function aspectRatio(art) {
       const { ratio } = target.dataset;
       if (ratio) {
         player.aspectRatio(ratio.split(':'));
-        sublings(target).forEach(item => item.classList.remove('current'));
-        target.classList.add('current');
+        inverseClass(target, 'current');
         art.contextmenu.hide();
       }
     }

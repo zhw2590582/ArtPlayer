@@ -1,4 +1,4 @@
-import { setStyle, sublings } from '../utils';
+import { setStyle, inverseClass } from '../utils';
 
 export default function aspectRatioMix(art, player) {
   const { refs: { $video, $player }, i18n, notice } = art;
@@ -43,8 +43,7 @@ export default function aspectRatioMix(art, player) {
       delete $player.dataset.aspectRatio;
       if (art.contextmenu.$aspectRatio) {
         const $default = art.contextmenu.$aspectRatio.querySelector('.default');
-        sublings($default).forEach(item => item.classList.remove('current'));
-        $default.classList.add('current');
+        inverseClass($default, 'current');
       }
     }
   });

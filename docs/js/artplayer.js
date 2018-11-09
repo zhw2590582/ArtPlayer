@@ -417,6 +417,12 @@
       return item !== target;
     });
   }
+  function inverseClass(target, className) {
+    sublings(target).forEach(function (item) {
+      return item.classList.remove(className);
+    });
+    target.classList.add(className);
+  }
   function debounce(func, wait, context) {
     var timeout;
 
@@ -455,6 +461,7 @@
     tooltip: tooltip,
     sleep: sleep,
     sublings: sublings,
+    inverseClass: inverseClass,
     debounce: debounce
   });
 
@@ -1112,10 +1119,7 @@
 
         if (art.contextmenu.$playbackRate) {
           var $normal = art.contextmenu.$playbackRate.querySelector('.normal');
-          sublings($normal).forEach(function (item) {
-            return item.classList.remove('current');
-          });
-          $normal.classList.add('current');
+          inverseClass($normal, 'current');
         }
       }
     });
@@ -1179,10 +1183,7 @@
 
         if (art.contextmenu.$aspectRatio) {
           var $default = art.contextmenu.$aspectRatio.querySelector('.default');
-          sublings($default).forEach(function (item) {
-            return item.classList.remove('current');
-          });
-          $default.classList.add('current');
+          inverseClass($default, 'current');
         }
       }
     });
@@ -3914,10 +3915,7 @@
 
         if (rate) {
           player.playbackRate(Number(rate));
-          sublings(target).forEach(function (item) {
-            return item.classList.remove('current');
-          });
-          target.classList.add('current');
+          inverseClass(target, 'current');
           art.contextmenu.hide();
         }
       }
@@ -3939,10 +3937,7 @@
 
         if (ratio) {
           player.aspectRatio(ratio.split(':'));
-          sublings(target).forEach(function (item) {
-            return item.classList.remove('current');
-          });
-          target.classList.add('current');
+          inverseClass(target, 'current');
           art.contextmenu.hide();
         }
       }
@@ -4679,13 +4674,17 @@
   var ResizeObserver_2 = ResizeObserver_1.ResizeObserver;
   var ResizeObserver_3 = ResizeObserver_1.install;
 
-  function clickInit$1(art, events) {
+  function resizeInit(art, events) {
     var option = art.option,
         $player = art.refs.$player;
     var resizeObserver = new ResizeObserver_2(function () {
       sleep().then(function () {
         if (option.autoSize) {
-          art.player.autoSize();
+          if (!art.player.fullscreenState && !art.player.fullscreenWebState) {
+            art.player.autoSize();
+          } else {
+            art.player.autoSizeRemove();
+          }
         }
 
         art.player.aspectRatioReset();
@@ -4710,7 +4709,7 @@
       clickInit(art, this);
       hoverInit(art, this);
       mousemoveInitInit(art, this);
-      clickInit$1(art, this);
+      resizeInit(art, this);
     }
 
     createClass(Events, [{
@@ -4836,14 +4835,28 @@
     createClass(Layers, [{
       key: "add",
       value: function add(item, callback) {
+        var _this2 = this;
+
         if (!item.disable) {
-          var $layers = this.art.refs.$layers;
+          var _this$art = this.art,
+              $layers = _this$art.refs.$layers,
+              proxy = _this$art.events.proxy;
           id$2++;
           var $layer = document.createElement('div');
           $layer.setAttribute('class', "art-layer art-layer-".concat(item.name || id$2));
           setStyle($layer, 'z-index', item.index || id$2);
           append($layer, item.html);
           setStyles($layer, item.style || {});
+
+          if (item.click) {
+            proxy($layer, 'click', function (event) {
+              event.preventDefault();
+              item.click.call(_this2, event);
+
+              _this2.art.emit('layers:click', $layer);
+            });
+          }
+
           this.art.emit('layers:add', $layer);
           callback && callback($layer);
           insertByIndex($layers, $layer, item.index || id$2);

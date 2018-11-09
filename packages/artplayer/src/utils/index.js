@@ -123,6 +123,11 @@ export function sublings(target) {
   return Array.from(target.parentElement.children).filter(item => item !== target);
 }
 
+export function inverseClass(target, className) {
+  sublings(target).forEach(item => item.classList.remove(className));
+  target.classList.add(className);
+}
+
 export function debounce(func, wait, context) {
   let timeout;
   function fn() {
