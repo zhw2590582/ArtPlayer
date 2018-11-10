@@ -4,8 +4,8 @@ import { append, setStyle } from './utils';
 export default class Mask {
   constructor(art) {
     this.art = art;
-    const { option, refs: { $mask } } = art;
-    append($mask, option.play || icons.playBig);
+    const { refs: { $mask } } = art;
+    append($mask, icons.playBig);
   }
 
   show() {

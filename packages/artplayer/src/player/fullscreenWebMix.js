@@ -19,9 +19,9 @@ export default function fullscreenWebMix(art, player) {
     value: () => {
       if (player.fullscreenState) {
         player.fullscreenExit();
+        $player.classList.remove('artplayer-web-fullscreen');
+        art.emit('fullscreenWeb:exit');
       }
-      $player.classList.remove('artplayer-web-fullscreen');
-      art.emit('fullscreenWeb:exit');
     }
   });
 

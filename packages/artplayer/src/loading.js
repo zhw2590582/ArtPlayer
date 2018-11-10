@@ -4,8 +4,8 @@ import { append, setStyle } from './utils';
 export default class Loading {
   constructor(art) {
     this.art = art;
-    const { option, refs: { $loading } } = art;
-    append($loading, option.loading || icons.loading);
+    const { refs: { $loading } } = art;
+    append($loading, icons.loading);
   }
 
   hide() {

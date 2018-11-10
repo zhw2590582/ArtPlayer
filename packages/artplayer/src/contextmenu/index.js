@@ -10,7 +10,9 @@ export default class Contextmenu {
   constructor(art) {
     id = 0;
     this.art = art;
-    this.init();
+    this.art.on('firstCanplay', () => {
+      this.init();
+    });
   }
 
   init() {

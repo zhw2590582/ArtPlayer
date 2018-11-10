@@ -50,15 +50,17 @@ export default function pipMix(art, player) {
 
   Object.defineProperty(player, 'pipExit', {
     value: () => {
-      $player.classList.remove('artplayer-pip');
-      cachePos = draggie.position;
-      setStyle($player, 'left', null);
-      setStyle($player, 'top', null);
-      player.fullscreenExit();
-      player.fullscreenWebExit();
-      player.aspectRatioRemove();
-      player.playbackRateRemove();
-      art.emit('pip', false);
+      if (player.pipState) {
+        $player.classList.remove('artplayer-pip');
+        cachePos = draggie.position;
+        setStyle($player, 'left', null);
+        setStyle($player, 'top', null);
+        player.fullscreenExit();
+        player.fullscreenWebExit();
+        player.aspectRatioRemove();
+        player.playbackRateRemove();
+        art.emit('pip', false);
+      }
     }
   });
 

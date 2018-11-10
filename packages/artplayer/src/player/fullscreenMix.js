@@ -37,10 +37,10 @@ export default function fullscreenMix(art, player) {
     value: () => {
       if (player.fullscreenWebState) {
         player.fullscreenWebExit();
+        $player.classList.remove('artplayer-fullscreen');
+        screenfull.exit();
+        art.emit('fullscreen:exit');
       }
-      $player.classList.remove('artplayer-fullscreen');
-      screenfull.exit();
-      art.emit('fullscreen:exit');
     }
   });
 

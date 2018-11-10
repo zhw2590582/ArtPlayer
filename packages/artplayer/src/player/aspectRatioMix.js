@@ -3,6 +3,10 @@ import { setStyle, inverseClass } from '../utils';
 export default function aspectRatioMix(art, player) {
   const { refs: { $video, $player }, i18n, notice } = art;
 
+  Object.defineProperty(player, 'aspectRatioState', {
+    get: () => $player.dataset.aspectRatio
+  });
+
   Object.defineProperty(player, 'aspectRatio', {
     value: ratio => {
       const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : i18n.get('Default');
@@ -37,11 +41,11 @@ export default function aspectRatioMix(art, player) {
 
   Object.defineProperty(player, 'aspectRatioRemove', {
     value: () => {
-      setStyle($video, 'width', null);
-      setStyle($video, 'height', null);
-      setStyle($video, 'padding', null);
-      delete $player.dataset.aspectRatio;
-      if (art.contextmenu.$aspectRatio) {
+      if (player.aspectRatioState) {
+        setStyle($video, 'width', null);
+        setStyle($video, 'height', null);
+        setStyle($video, 'padding', null);
+        delete $player.dataset.aspectRatio;
         const $default = art.contextmenu.$aspectRatio.querySelector('.default');
         inverseClass($default, 'current');
       }

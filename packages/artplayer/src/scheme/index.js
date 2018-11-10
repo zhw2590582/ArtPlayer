@@ -1,5 +1,6 @@
 import validElement from './validElement';
 import validStringEmpty from './validStringEmpty';
+import validElementMap from './validElementMap';
 
 export default {
   container: {
@@ -63,8 +64,10 @@ export default {
       url: 'string'
     }
   },
-  loading: validElement,
-  play: validElement,
+  replace: {
+    type: 'object',
+    validator: validElementMap
+  },
   theme: 'string',
   hotkey: 'boolean',
   pip: 'boolean',

@@ -69,8 +69,6 @@ class Artplayer extends Emitter {
       layers: [],
       contextmenu: [],
       quality: [],
-      loading: '',
-      play: '',
       theme: '#f00',
       setting: false,
       hotkey: true,
@@ -90,6 +88,20 @@ class Artplayer extends Emitter {
         'preload': 'auto',
         'webkit-playsinline': true,
         'playsinline': true
+      },
+      replace: {
+        loading: '',
+        playBig: '',
+        play: '',
+        pause: '',
+        volume: '',
+        volumeClose: '',
+        subtitle: '',
+        screenshot: '',
+        setting: '',
+        fullscreen: '',
+        fullscreenWeb: '',
+        pip: ''
       },
       lang: navigator.language.toLowerCase()
     };

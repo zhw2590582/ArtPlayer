@@ -497,6 +497,20 @@
     return true;
   }
 
+  function validElementMap(paths, value) {
+    return Object.keys(value).every(function (key) {
+      var mapValue = value[key];
+
+      var mapType = _typeof_1(mapValue);
+
+      if (mapValue instanceof Element || mapType === 'string') {
+        return true;
+      }
+
+      throw new ArtPlayerError("".concat(paths.join('.'), " require 'string' or 'Element' type, but got '").concat(mapType, "'"));
+    });
+  }
+
   var scheme = {
     container: {
       validator: validElement,
@@ -559,8 +573,10 @@
         url: 'string'
       }
     },
-    loading: validElement,
-    play: validElement,
+    replace: {
+      type: 'object',
+      validator: validElementMap
+    },
     theme: 'string',
     hotkey: 'boolean',
     pip: 'boolean',
@@ -1103,6 +1119,11 @@
         $player = _art$refs.$player,
         i18n = art.i18n,
         notice = art.notice;
+    Object.defineProperty(player, 'playbackRateState', {
+      get: function get() {
+        return $player.dataset.playbackRate;
+      }
+    });
     Object.defineProperty(player, 'playbackRate', {
       value: function value(rate) {
         var newRate = clamp(rate, 0.1, 10);
@@ -1114,10 +1135,9 @@
     });
     Object.defineProperty(player, 'playbackRateRemove', {
       value: function value() {
-        player.playbackRate(1);
-        delete $player.dataset.playbackRate;
-
-        if (art.contextmenu.$playbackRate) {
+        if (player.$playbackRateState) {
+          player.playbackRate(1);
+          delete $player.dataset.playbackRate;
           var $normal = art.contextmenu.$playbackRate.querySelector('.normal');
           inverseClass($normal, 'current');
         }
@@ -1140,6 +1160,11 @@
         $player = _art$refs.$player,
         i18n = art.i18n,
         notice = art.notice;
+    Object.defineProperty(player, 'aspectRatioState', {
+      get: function get() {
+        return $player.dataset.aspectRatio;
+      }
+    });
     Object.defineProperty(player, 'aspectRatio', {
       value: function value(ratio) {
         var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : i18n.get('Default');
@@ -1176,12 +1201,11 @@
     });
     Object.defineProperty(player, 'aspectRatioRemove', {
       value: function value() {
-        setStyle($video, 'width', null);
-        setStyle($video, 'height', null);
-        setStyle($video, 'padding', null);
-        delete $player.dataset.aspectRatio;
-
-        if (art.contextmenu.$aspectRatio) {
+        if (player.aspectRatioState) {
+          setStyle($video, 'width', null);
+          setStyle($video, 'height', null);
+          setStyle($video, 'padding', null);
+          delete $player.dataset.aspectRatio;
           var $default = art.contextmenu.$aspectRatio.querySelector('.default');
           inverseClass($default, 'current');
         }
@@ -1440,11 +1464,10 @@
       value: function value() {
         if (player.fullscreenWebState) {
           player.fullscreenWebExit();
+          $player.classList.remove('artplayer-fullscreen');
+          screenfull.exit();
+          art.emit('fullscreen:exit');
         }
-
-        $player.classList.remove('artplayer-fullscreen');
-        screenfull.exit();
-        art.emit('fullscreen:exit');
       }
     });
     Object.defineProperty(player, 'fullscreenToggle', {
@@ -1479,10 +1502,9 @@
       value: function value() {
         if (player.fullscreenState) {
           player.fullscreenExit();
+          $player.classList.remove('artplayer-web-fullscreen');
+          art.emit('fullscreenWeb:exit');
         }
-
-        $player.classList.remove('artplayer-web-fullscreen');
-        art.emit('fullscreenWeb:exit');
       }
     });
     Object.defineProperty(player, 'fullscreenWebToggle', {
@@ -2871,15 +2893,17 @@
     });
     Object.defineProperty(player, 'pipExit', {
       value: function value() {
-        $player.classList.remove('artplayer-pip');
-        cachePos = draggie.position;
-        setStyle($player, 'left', null);
-        setStyle($player, 'top', null);
-        player.fullscreenExit();
-        player.fullscreenWebExit();
-        player.aspectRatioRemove();
-        player.playbackRateRemove();
-        art.emit('pip', false);
+        if (player.pipState) {
+          $player.classList.remove('artplayer-pip');
+          cachePos = draggie.position;
+          setStyle($player, 'left', null);
+          setStyle($player, 'top', null);
+          player.fullscreenExit();
+          player.fullscreenWebExit();
+          player.aspectRatioRemove();
+          player.playbackRateRemove();
+          art.emit('pip', false);
+        }
       }
     });
     Object.defineProperty(player, 'pipToggle', {
@@ -3061,8 +3085,6 @@
 
   var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
 
-  var danmu = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 60 60\" style=\"width: 85%; height: 85%\">\n\t<path d=\"M54,2.5H6c-3.252,0-6,2.748-6,6v33c0,3.252,2.748,6,6,6h14.555l8.702,9.669C29.446,57.38,29.717,57.5,30,57.5 s0.554-0.12,0.743-0.331l8.702-9.669H54c3.252,0,6-2.748,6-6v-33C60,5.248,57.252,2.5,54,2.5z M16,28.5c-2.206,0-4-1.794-4-4 s1.794-4,4-4s4,1.794,4,4S18.206,28.5,16,28.5z M30,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S32.206,28.5,30,28.5z M44,28.5c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S46.206,28.5,44,28.5z\"/>\n</svg>\n";
-
   var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
   var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\n<g>\n\t<g>\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\n\t</g>\n</g>\n<g>\n\t<g>\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\n\t</g>\n</g>\n<g>\n\t<g>\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\n\t</g>\n</g>\n<g>\n\t<g>\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\n\t</g>\n</g>\n</svg>\n";
@@ -3080,7 +3102,6 @@
     volumeClose: volumeClose,
     subtitle: subtitle,
     screenshot: screenshot,
-    danmu: danmu,
     setting: setting,
     fullscreen: fullscreen,
     fullscreenWeb: fullscreenWeb,
@@ -4012,17 +4033,21 @@
   /*#__PURE__*/
   function () {
     function Contextmenu(art) {
+      var _this = this;
+
       classCallCheck(this, Contextmenu);
 
       id$1 = 0;
       this.art = art;
-      this.init();
+      this.art.on('firstCanplay', function () {
+        _this.init();
+      });
     }
 
     createClass(Contextmenu, [{
       key: "init",
       value: function init() {
-        var _this = this;
+        var _this2 = this;
 
         var _this$art = this.art,
             option = _this$art.option,
@@ -4030,25 +4055,25 @@
             proxy = _this$art.events.proxy;
         option.contextmenu.push(playbackRate, aspectRatio, info, version, close);
         option.contextmenu.forEach(function (item) {
-          _this.add(item);
+          _this2.add(item);
         });
         proxy(refs.$player, 'contextmenu', function (event) {
           event.preventDefault();
 
-          _this.show();
+          _this2.show();
 
-          _this.setPos(event);
+          _this2.setPos(event);
         });
         proxy(refs.$player, 'click', function (event) {
           if (refs.$contextmenu && !event.composedPath().includes(refs.$contextmenu)) {
-            _this.hide();
+            _this2.hide();
           }
         });
       }
     }, {
       key: "add",
       value: function add(item, callback) {
-        var _this2 = this;
+        var _this3 = this;
 
         if (!item.disable) {
           var _this$art2 = this.art,
@@ -4065,9 +4090,9 @@
           if (menu.click) {
             proxy($menu, 'click', function (event) {
               event.preventDefault();
-              menu.click.call(_this2, event);
+              menu.click.call(_this3, event);
 
-              _this2.art.emit('contextmenu:click', $menu);
+              _this3.art.emit('contextmenu:click', $menu);
             });
           }
 
@@ -4428,17 +4453,19 @@
     var $player = art.refs.$player;
     var hideCursor = debounce(function () {
       $player.classList.add('artplayer-hide-cursor');
-
-      if (art.player.fullscreenState || art.player.fullscreenWebState) {
-        $player.classList.remove('artplayer-hover');
-        art.controls.hide();
-      }
+    }, 5000);
+    var hideControl = debounce(function () {
+      $player.classList.remove('artplayer-hover');
+      art.controls.hide();
     }, 5000);
     art.on('hoverleave', function () {
+      hideControl();
       hideCursor.clearTimeout();
       $player.classList.remove('artplayer-hide-cursor');
     });
     events.proxy($player, 'mousemove', function () {
+      hideControl.clearTimeout();
+      art.controls.show();
       $player.classList.remove('artplayer-hide-cursor');
       art.controls.show();
 
@@ -4473,7 +4500,7 @@
       }
   };
   exports.ContentRect = ContentRect;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29udGVudFJlY3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvQ29udGVudFJlY3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFPQSxJQUFNLFdBQVcsR0FBRyxVQUFDLE1BQWU7SUFDaEMsSUFBSSxTQUFTLElBQUssTUFBNkIsRUFBRTtRQUM3QyxJQUFNLEdBQUcsR0FBSSxNQUE2QixDQUFDLE9BQU8sRUFBRSxDQUFDO1FBQ3JELE9BQU8sTUFBTSxDQUFDLE1BQU0sQ0FBQztZQUNqQixNQUFNLEVBQUUsR0FBRyxDQUFDLE1BQU07WUFDbEIsSUFBSSxFQUFFLENBQUM7WUFDUCxHQUFHLEVBQUUsQ0FBQztZQUNOLEtBQUssRUFBRSxHQUFHLENBQUMsS0FBSztTQUNuQixDQUFDLENBQUM7S0FDTjtTQUFNLEVBQUUsMEZBQTBGO1FBQy9GLElBQU0sTUFBTSxHQUFHLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUMvQyxPQUFPLE1BQU0sQ0FBQyxNQUFNLENBQUM7WUFDakIsTUFBTSxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsTUFBTSxJQUFJLEdBQUcsQ0FBQztZQUN4QyxJQUFJLEVBQUUsVUFBVSxDQUFDLE1BQU0sQ0FBQyxXQUFXLElBQUksR0FBRyxDQUFDO1lBQzNDLEdBQUcsRUFBRSxVQUFVLENBQUMsTUFBTSxDQUFDLFVBQVUsSUFBSSxHQUFHLENBQUM7WUFDekMsS0FBSyxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsS0FBSyxJQUFJLEdBQUcsQ0FBQztTQUN6QyxDQUFDLENBQUM7S0FDTjtBQUNMLENBQUMsQ0FBQztBQUVPLGtDQUFXIn0=
   });
 
   unwrapExports(ContentRect_1);
@@ -4510,7 +4537,7 @@
       return ResizeObservation;
   }());
   exports.ResizeObservation = ResizeObservation;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2YXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2YXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNEM7QUFFNUM7SUFlSSwyQkFBWSxNQUFlO1FBQ3ZCLElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO1FBQ3JCLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsaUJBQWlCLEdBQUcsQ0FBQyxDQUFDO0lBQ3ZELENBQUM7SUFWRCxzQkFBVyw2Q0FBYzthQUF6QjtZQUNJLE9BQU8sSUFBSSxDQUFDLGdCQUFnQixDQUFDO1FBQ2pDLENBQUM7OztPQUFBO0lBQ0Qsc0JBQVcsOENBQWU7YUFBMUI7WUFDSSxPQUFPLElBQUksQ0FBQyxpQkFBaUIsQ0FBQztRQUNsQyxDQUFDOzs7T0FBQTtJQU9NLG9DQUFRLEdBQWY7UUFDSSxJQUFNLEVBQUUsR0FBRyx5QkFBVyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUVwQyxPQUFPLENBQUMsQ0FBQyxFQUFFO2VBQ0osQ0FDQyxFQUFFLENBQUMsS0FBSyxLQUFLLElBQUksQ0FBQyxjQUFjO21CQUM3QixFQUFFLENBQUMsTUFBTSxLQUFLLElBQUksQ0FBQyxlQUFlLENBQ3hDLENBQUM7SUFDVixDQUFDO0lBQ0wsd0JBQUM7QUFBRCxDQUFDLEFBN0JELElBNkJDO0FBRVEsOENBQWlCIn0=
   });
 
   unwrapExports(ResizeObservation_1);
@@ -4527,7 +4554,7 @@
       return ResizeObserverEntry;
   }());
   exports.ResizeObserverEntry = ResizeObserverEntry;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXJFbnRyeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9SZXNpemVPYnNlcnZlckVudHJ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTRDO0FBRTVDO0lBR0ksNkJBQVksTUFBZTtRQUN2QixJQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztRQUNyQixJQUFJLENBQUMsV0FBVyxHQUFHLHlCQUFXLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDM0MsQ0FBQztJQUNMLDBCQUFDO0FBQUQsQ0FBQyxBQVBELElBT0M7QUFFUSxrREFBbUIifQ==
   });
 
   unwrapExports(ResizeObserverEntry_1);
@@ -4700,7 +4727,7 @@
       return window.ResizeObserver = ResizeObserver;
   };
   exports.install = install;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSx5REFBd0Q7QUFFeEQsNkRBQTREO0FBRTVELElBQU0sZUFBZSxHQUFHLEVBQXNCLENBQUM7QUFFL0M7SUFVSSx3QkFBWSxRQUFnQztRQVA1QyxnQkFBZ0I7UUFDVCx5QkFBb0IsR0FBRyxFQUF5QixDQUFDO1FBQ3hELGdCQUFnQjtRQUNULG9CQUFlLEdBQUcsRUFBeUIsQ0FBQztRQUNuRCxnQkFBZ0I7UUFDVCxxQkFBZ0IsR0FBRyxFQUF5QixDQUFDO1FBR2hELElBQU0sT0FBTyxHQUFHLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUN4QyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDM0IsZUFBZSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUMvQixDQUFDO0lBRU0sZ0NBQU8sR0FBZCxVQUFlLE1BQWU7UUFDMUIsSUFBTSxPQUFPLEdBQUcsV0FBVyxDQUFDLFNBQVMsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUMvQyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBTSxLQUFLLEdBQUcsZUFBZSxDQUFDLElBQUksQ0FBQyxvQkFBb0IsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUNqRSxJQUFJLEtBQUssR0FBRyxDQUFDLEVBQUU7WUFDWCxPQUFPO1NBQ1Y7UUFDRCxJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLElBQUkscUNBQWlCLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztRQUM5RCxTQUFTLEVBQUUsQ0FBQztJQUNoQixDQUFDO0lBRU0sa0NBQVMsR0FBaEIsVUFB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
   });
 
   unwrapExports(ResizeObserver_1);
@@ -4921,9 +4948,8 @@
       classCallCheck(this, Loading);
 
       this.art = art;
-      var option = art.option,
-          $loading = art.refs.$loading;
-      append($loading, option.loading || icons$1.loading);
+      var $loading = art.refs.$loading;
+      append($loading, icons$1.loading);
     }
 
     createClass(Loading, [{
@@ -4996,9 +5022,8 @@
       classCallCheck(this, Mask);
 
       this.art = art;
-      var option = art.option,
-          $mask = art.refs.$mask;
-      append($mask, option.play || icons$1.playBig);
+      var $mask = art.refs.$mask;
+      append($mask, icons$1.playBig);
     }
 
     createClass(Mask, [{
@@ -5311,8 +5336,6 @@
           layers: [],
           contextmenu: [],
           quality: [],
-          loading: '',
-          play: '',
           theme: '#f00',
           setting: false,
           hotkey: true,
@@ -5332,6 +5355,20 @@
             'preload': 'auto',
             'webkit-playsinline': true,
             'playsinline': true
+          },
+          replace: {
+            loading: '',
+            playBig: '',
+            play: '',
+            pause: '',
+            volume: '',
+            volumeClose: '',
+            subtitle: '',
+            screenshot: '',
+            setting: '',
+            fullscreen: '',
+            fullscreenWeb: '',
+            pip: ''
           },
           lang: navigator.language.toLowerCase()
         };

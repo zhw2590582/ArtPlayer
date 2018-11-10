@@ -6,7 +6,6 @@ import volume from './volume.svg';
 import volumeClose from './volume-close.svg';
 import subtitle from './subtitle.svg';
 import screenshot from './screenshot.svg';
-import danmu from './danmu.svg';
 import setting from './setting.svg';
 import fullscreen from './fullscreen.svg';
 import fullscreenWeb from './fullscreen-web.svg';
@@ -21,7 +20,6 @@ const icons = {
   volumeClose,
   subtitle,
   screenshot,
-  danmu,
   setting,
   fullscreen,
   fullscreenWeb,

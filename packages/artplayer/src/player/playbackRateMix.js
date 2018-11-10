@@ -3,6 +3,10 @@ import { clamp, inverseClass } from '../utils';
 export default function playbackRateMix(art, player) {
   const { refs: { $video, $player }, i18n, notice } = art;
 
+  Object.defineProperty(player, 'playbackRateState', {
+    get: () => $player.dataset.playbackRate
+  });
+
   Object.defineProperty(player, 'playbackRate', {
     value: rate => {
       const newRate = clamp(rate, 0.1, 10);
@@ -15,9 +19,9 @@ export default function playbackRateMix(art, player) {
 
   Object.defineProperty(player, 'playbackRateRemove', {
     value: () => {
-      player.playbackRate(1);
-      delete $player.dataset.playbackRate;
-      if (art.contextmenu.$playbackRate) {
+      if (player.$playbackRateState) {
+        player.playbackRate(1);
+        delete $player.dataset.playbackRate;
         const $normal = art.contextmenu.$playbackRate.querySelector('.normal');
         inverseClass($normal, 'current');
       }
