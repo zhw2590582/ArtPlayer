@@ -40,15 +40,12 @@
   }
 
   function runCode() {
-    try {
-      Artplayer.instances.forEach(ins => {
-        ins.destroy(true)
-      });;
-      eval(mirror.getValue());
-      initApp(Artplayer.instances[0]);
-    } catch (error) {
-      console.error('Error：' + error.message.trim());
-    }
+    Artplayer.instances.forEach(ins => {
+      ins.destroy(true)
+    });
+    var code = mirror.getValue();
+    eval(code);
+    initApp(Artplayer.instances[0]);
   }
 
   $run.addEventListener('click', function (e) {
