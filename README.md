@@ -1,7 +1,9 @@
 # ArtPlayer
-> ArtPlayer is a modern HTML5 video player
+![version](https://badgen.net/npm/v/artplayer)
+![license](https://badgen.net/npm/license/artplayer)
+![size](https://badgen.net/bundlephobia/minzip/artplayer)
 
-[size-url]: https://bundlephobia.com/result?p=artplayer
+> ArtPlayer is a modern HTML5 video player
 
 ## Status
 ⚠️  This project is WIP and not ready for production use yet!
