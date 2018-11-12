@@ -1,11 +1,15 @@
 # ArtPlayer
 > ArtPlayer is a modern HTML5 video player
 
+[size-url]: https://bundlephobia.com/result?p=artplayer
+
 ## Status
-⚠️ This project is WIP and not ready for production use yet!
+⚠️  This project is WIP and not ready for production use yet!
 
 ## Demo
 [Checkout the demo](https://blog.zhw-island.com/ArtPlayer/)
+
+## Introduction
 
 ## Install
 
@@ -25,7 +29,7 @@ OR umd builds are also available
 <script src="path/to/artplayer.js"></script>
 ```
 
-Expose the global variable to `window.Artplayer`.
+Will expose the global variable to `window.Artplayer`.
 
 ## Usage
 
@@ -40,4 +44,23 @@ var app = new Artplayer({
 });
 ```
 
-Note: You need to initialize a size for the container element.
+Note: You need to initialize a size for the container element, like:
+
+```css
+.artplayer-app {
+    width: 400px;
+    height: 300px;
+}
+```
+
+## Configuration
+
+## API
+
+## Issue
+
+## Contributors
+
+## License
+
+MIT © [Harvey Zack](https://www.zhw-island.com/)
