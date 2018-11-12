@@ -17,7 +17,7 @@ export default function fullscreenWebMix(art, player) {
 
   Object.defineProperty(player, 'fullscreenWebExit', {
     value: () => {
-      if (player.fullscreenState) {
+      if (player.fullscreenWebState) {
         player.fullscreenExit();
         $player.classList.remove('artplayer-web-fullscreen');
         art.emit('fullscreenWeb:exit');

@@ -2,6 +2,7 @@ import clickInit from './clickInit';
 import hoverInit from './hoverInit';
 import mousemoveInit from './mousemoveInit';
 import resizeInit from './resizeInit';
+import doubleClickInit from './doubleClickInit';
 
 export default class Events {
   constructor(art) {
@@ -12,6 +13,7 @@ export default class Events {
     hoverInit(art, this);
     mousemoveInit(art, this);
     resizeInit(art, this);
+    doubleClickInit(art, this);
   }
 
   proxy(target, name, callback, option = {}) {

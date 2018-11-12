@@ -89,20 +89,6 @@ class Artplayer extends Emitter {
         'webkit-playsinline': true,
         'playsinline': true
       },
-      replace: {
-        loading: '',
-        playBig: '',
-        play: '',
-        pause: '',
-        volume: '',
-        volumeClose: '',
-        subtitle: '',
-        screenshot: '',
-        setting: '',
-        fullscreen: '',
-        fullscreenWeb: '',
-        pip: ''
-      },
       lang: navigator.language.toLowerCase()
     };
   }
