@@ -16,7 +16,7 @@ export default class Contextmenu {
   }
 
   init() {
-    const { option, refs, events: { proxy } } = this.art;
+    const { option, refs: { $player, $contextmenu }, events: { proxy } } = this.art;
 
     option.contextmenu.push(
       playbackRate,
@@ -30,14 +30,14 @@ export default class Contextmenu {
       this.add(item);
     });
 
-    proxy(refs.$player, 'contextmenu', event => {
+    proxy($player, 'contextmenu', event => {
       event.preventDefault();
       this.show();
       this.setPos(event);
     });
 
-    proxy(refs.$player, 'click', event => {
-      if (refs.$contextmenu && !event.composedPath().includes(refs.$contextmenu)) {
+    proxy($player, 'click', event => {
+      if (!event.composedPath().includes($contextmenu)) {
         this.hide();
       }
     });
@@ -45,12 +45,12 @@ export default class Contextmenu {
 
   add(item, callback) {
     if (!item.disable) {
-      const { refs, events: { proxy } } = this.art;
       id++;
+      const { refs: { $contextmenu }, events: { proxy } } = this.art;
       const name = item.name || `contextmenu${id}`;
       const menu = typeof item === 'function' ? item(this.art) : item;
       const $menu = document.createElement('div');
-      $menu.setAttribute('class', `art-contextmenu art-contextmenu-${name || id}`);
+      $menu.classList.value = `art-contextmenu art-contextmenu-${name}`;
       append($menu, menu.html);
       setStyles($menu, menu.style || {});
       if (menu.click) {
@@ -62,16 +62,16 @@ export default class Contextmenu {
       }
       callback && callback($menu);
       this[name] = $menu;
-      insertByIndex(refs.$contextmenu, $menu, menu.index || id);
+      insertByIndex($contextmenu, $menu, menu.index || id);
     }
   }
 
   setPos(event) {
-    const { refs } = this.art;
+    const { refs: { $player, $contextmenu } } = this.art;
     const mouseX = event.clientX;
     const mouseY = event.clientY;
-    const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = refs.$player.getBoundingClientRect();
-    const { height: mHeight, width: mWidth } = refs.$contextmenu.getBoundingClientRect();
+    const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
+    const { height: mHeight, width: mWidth } = $contextmenu.getBoundingClientRect();
     let menuLeft = mouseX - cLeft;
     let menuTop = mouseY - cTop;
 
@@ -83,8 +83,8 @@ export default class Contextmenu {
       menuTop = cHeight - mHeight;
     }
 
-    setStyle(refs.$contextmenu, 'left', `${menuLeft}px`);
-    setStyle(refs.$contextmenu, 'top', `${menuTop}px`);
+    setStyle($contextmenu, 'left', `${menuLeft}px`);
+    setStyle($contextmenu, 'top', `${menuTop}px`);
   }
 
   hide() {

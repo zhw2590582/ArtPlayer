@@ -4,11 +4,17 @@ var app = new Artplayer({
   url: url + '/video/one-more-time-one-more-chance-480p.mp4',
   title: '【新海诚动画】『秒速5センチメートル』',
   poster: url + '/image/one-more-time-one-more-chance-poster.jpg',
+  volume: 0.5,
+  autoplay: true,
   pip: true,
   autoSize: true,
   screenshot: true,
   setting: true,
   loop: true,
+  playbackRate: true,
+  aspectRatio: true,
+  fullscreen: true,
+  fullscreenWeb: true,
   theme: '#ffad00',
   contextmenu: [
       {

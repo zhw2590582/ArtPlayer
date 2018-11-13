@@ -118,7 +118,7 @@ export default class Controls {
       id++;
       const name = option.name || `control${id}`;
       const $control = document.createElement('div');
-      $control.setAttribute('class', `art-control art-control-${name}`);
+      $control.classList.value = `art-control art-control-${name}`;
       this.mount(option.position, $control, option.index || id);
       control.apply && control.apply(this.art, $control);
       callback && callback($control);

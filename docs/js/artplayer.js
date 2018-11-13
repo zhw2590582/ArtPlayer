@@ -537,7 +537,8 @@
         html: {
           validator: validElement
         },
-        style: 'object'
+        style: 'object',
+        click: 'function'
       }
     },
     contextmenu: {
@@ -3276,8 +3277,8 @@
         this.$indicator = $control.querySelector('.art-progress-indicator');
         this.$tip = $control.querySelector('.art-progress-tip');
         highlight.forEach(function (item) {
-          var left = Number(item.time) / player.duration;
-          append(_this.$highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left * 100, "%\"></span>"));
+          var left = Number(item.time || 0) / player.duration;
+          append(_this.$highlight, "<span data-text=\"".concat(item.text || '', "\" data-time=\"").concat(item.time || 0, "\" style=\"left: ").concat(left * 100, "%\"></span>"));
         });
         this.set('loaded', player.loaded);
         this.art.on('video:progress', function () {
@@ -3885,7 +3886,7 @@
           id++;
           var name = option.name || "control".concat(id);
           var $control = document.createElement('div');
-          $control.setAttribute('class', "art-control art-control-".concat(name));
+          $control.classList.value = "art-control art-control-".concat(name);
           this.mount(option.position, $control, option.index || id);
           control.apply && control.apply(this.art, $control);
           callback && callback($control);
@@ -4034,21 +4035,23 @@
 
         var _this$art = this.art,
             option = _this$art.option,
-            refs = _this$art.refs,
+            _this$art$refs = _this$art.refs,
+            $player = _this$art$refs.$player,
+            $contextmenu = _this$art$refs.$contextmenu,
             proxy = _this$art.events.proxy;
         option.contextmenu.push(playbackRate, aspectRatio, info, version, close);
         option.contextmenu.forEach(function (item) {
           _this2.add(item);
         });
-        proxy(refs.$player, 'contextmenu', function (event) {
+        proxy($player, 'contextmenu', function (event) {
           event.preventDefault();
 
           _this2.show();
 
           _this2.setPos(event);
         });
-        proxy(refs.$player, 'click', function (event) {
-          if (refs.$contextmenu && !event.composedPath().includes(refs.$contextmenu)) {
+        proxy($player, 'click', function (event) {
+          if (!event.composedPath().includes($contextmenu)) {
             _this2.hide();
           }
         });
@@ -4059,14 +4062,14 @@
         var _this3 = this;
 
         if (!item.disable) {
-          var _this$art2 = this.art,
-              refs = _this$art2.refs,
-              proxy = _this$art2.events.proxy;
           id$1++;
-          var name = item.name || "menu".concat(id$1);
+          var _this$art2 = this.art,
+              $contextmenu = _this$art2.refs.$contextmenu,
+              proxy = _this$art2.events.proxy;
+          var name = item.name || "contextmenu".concat(id$1);
           var menu = typeof item === 'function' ? item(this.art) : item;
           var $menu = document.createElement('div');
-          $menu.setAttribute('class', "art-menu art-menu-".concat(name || id$1));
+          $menu.classList.value = "art-contextmenu art-contextmenu-".concat(name);
           append($menu, menu.html);
           setStyles($menu, menu.style || {});
 
@@ -4081,25 +4084,27 @@
 
           callback && callback($menu);
           this[name] = $menu;
-          insertByIndex(refs.$contextmenu, $menu, menu.index || id$1);
+          insertByIndex($contextmenu, $menu, menu.index || id$1);
         }
       }
     }, {
       key: "setPos",
       value: function setPos(event) {
-        var refs = this.art.refs;
+        var _this$art$refs2 = this.art.refs,
+            $player = _this$art$refs2.$player,
+            $contextmenu = _this$art$refs2.$contextmenu;
         var mouseX = event.clientX;
         var mouseY = event.clientY;
 
-        var _refs$$player$getBoun = refs.$player.getBoundingClientRect(),
-            cHeight = _refs$$player$getBoun.height,
-            cWidth = _refs$$player$getBoun.width,
-            cLeft = _refs$$player$getBoun.left,
-            cTop = _refs$$player$getBoun.top;
+        var _$player$getBoundingC = $player.getBoundingClientRect(),
+            cHeight = _$player$getBoundingC.height,
+            cWidth = _$player$getBoundingC.width,
+            cLeft = _$player$getBoundingC.left,
+            cTop = _$player$getBoundingC.top;
 
-        var _refs$$contextmenu$ge = refs.$contextmenu.getBoundingClientRect(),
-            mHeight = _refs$$contextmenu$ge.height,
-            mWidth = _refs$$contextmenu$ge.width;
+        var _$contextmenu$getBoun = $contextmenu.getBoundingClientRect(),
+            mHeight = _$contextmenu$getBoun.height,
+            mWidth = _$contextmenu$getBoun.width;
 
         var menuLeft = mouseX - cLeft;
         var menuTop = mouseY - cTop;
@@ -4112,8 +4117,8 @@
           menuTop = cHeight - mHeight;
         }
 
-        setStyle(refs.$contextmenu, 'left', "".concat(menuLeft, "px"));
-        setStyle(refs.$contextmenu, 'top', "".concat(menuTop, "px"));
+        setStyle($contextmenu, 'left', "".concat(menuLeft, "px"));
+        setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
       }
     }, {
       key: "hide",
@@ -5317,15 +5322,15 @@
           playbackRate: false,
           aspectRatio: false,
           screenshot: false,
-          type: '',
-          mimeCodec: '',
-          theme: '#f00',
           setting: false,
           hotkey: true,
           pip: false,
           mutex: true,
           fullscreen: false,
           fullscreenWeb: false,
+          type: '',
+          mimeCodec: '',
+          theme: '#f00',
           layers: [],
           contextmenu: [],
           quality: [],
@@ -5343,7 +5348,6 @@
             style: {}
           },
           moreVideoAttr: {
-            'crossOrigin': 'anonymous',
             'controls': false,
             'preload': 'auto',
             'webkit-playsinline': true,

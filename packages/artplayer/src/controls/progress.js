@@ -32,7 +32,7 @@ export default class Progress {
     this.$tip = $control.querySelector('.art-progress-tip');
 
     highlight.forEach(item => {
-      const left = Number(item.time) / player.duration;
+      const left = Number(item.time || 0) / player.duration;
       append(this.$highlight, `<span data-text="${item.text || ''}" data-time="${item.time || 0}" style="left: ${left * 100}%"></span>`);
     });
 
