@@ -659,6 +659,7 @@
     },
 
     emit: function (name) {
+      // (this.allEvents || (this.allEvents = [])).push(name);
       var data = [].slice.call(arguments, 1);
       var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
       var i = 0;
@@ -1120,7 +1121,7 @@
         if (player.$playbackRateState) {
           player.playbackRate(1);
           delete $player.dataset.playbackRate;
-          var $normal = art.contextmenu.$playbackRate.querySelector('.normal');
+          var $normal = art.contextmenu.playbackRate.querySelector('.normal');
           inverseClass($normal, 'current');
         }
       }
@@ -1188,7 +1189,7 @@
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);
           delete $player.dataset.aspectRatio;
-          var $default = art.contextmenu.$aspectRatio.querySelector('.default');
+          var $default = art.contextmenu.aspectRatio.querySelector('.default');
           inverseClass($default, 'current');
         }
       }
@@ -4893,8 +4894,9 @@
               $layers = _this$art.refs.$layers,
               proxy = _this$art.events.proxy;
           id$2++;
+          var name = item.name || "layer".concat(id$2);
           var $layer = document.createElement('div');
-          $layer.setAttribute('class', "art-layer art-layer-".concat(item.name || id$2));
+          $layer.setAttribute('class', "art-layer art-layer-".concat(name));
           setStyle($layer, 'z-index', item.index || id$2);
           append($layer, item.html);
           setStyles($layer, item.style || {});
@@ -5174,7 +5176,7 @@
     createClass(Storage, [{
       key: "get",
       value: function get(key) {
-        var storage = JSON.parse(localStorage.getItem(this.storageName));
+        var storage = JSON.parse(localStorage.getItem(this.storageName)) || {};
         return key ? storage[key] : {};
       }
     }, {
@@ -5309,6 +5311,26 @@
           poster: '',
           title: '',
           volume: 0.7,
+          autoplay: false,
+          autoSize: false,
+          loop: false,
+          playbackRate: false,
+          aspectRatio: false,
+          screenshot: false,
+          type: '',
+          mimeCodec: '',
+          theme: '#f00',
+          setting: false,
+          hotkey: true,
+          pip: false,
+          mutex: true,
+          fullscreen: false,
+          fullscreenWeb: false,
+          layers: [],
+          contextmenu: [],
+          quality: [],
+          controls: [],
+          highlight: [],
           thumbnails: {
             url: '',
             number: 60,
@@ -5316,30 +5338,10 @@
             height: 90,
             column: 10
           },
-          screenshot: false,
-          autoplay: false,
-          autoSize: false,
-          playbackRate: true,
-          aspectRatio: true,
-          loop: false,
-          type: '',
-          mimeCodec: '',
-          layers: [],
-          contextmenu: [],
-          quality: [],
-          theme: '#f00',
-          setting: false,
-          hotkey: true,
-          pip: false,
-          mutex: true,
-          fullscreen: true,
-          fullscreenWeb: true,
           subtitle: {
             url: '',
             style: {}
           },
-          controls: [],
-          highlight: [],
           moreVideoAttr: {
             'crossOrigin': 'anonymous',
             'controls': false,

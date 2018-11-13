@@ -15,8 +15,9 @@ export default class Layers {
     if (!item.disable) {
       const { refs: { $layers }, events: { proxy } } = this.art;
       id++;
+      const name = item.name || `layer${id}`;
       const $layer = document.createElement('div');
-      $layer.setAttribute('class', `art-layer art-layer-${item.name || id}`);
+      $layer.setAttribute('class', `art-layer art-layer-${name}`);
       setStyle($layer, 'z-index', item.index || id);
       append($layer, item.html);
       setStyles($layer, item.style || {});

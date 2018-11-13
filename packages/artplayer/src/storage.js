@@ -10,7 +10,7 @@ export default class Storage {
   }
 
   get(key) {
-    const storage = JSON.parse(localStorage.getItem(this.storageName));
+    const storage = JSON.parse(localStorage.getItem(this.storageName)) || {};
     return key ? storage[key] : {};
   }
 

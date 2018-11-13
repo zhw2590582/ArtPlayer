@@ -22,7 +22,7 @@ export default function playbackRateMix(art, player) {
       if (player.$playbackRateState) {
         player.playbackRate(1);
         delete $player.dataset.playbackRate;
-        const $normal = art.contextmenu.$playbackRate.querySelector('.normal');
+        const $normal = art.contextmenu.playbackRate.querySelector('.normal');
         inverseClass($normal, 'current');
       }
     }

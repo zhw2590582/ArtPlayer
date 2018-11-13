@@ -46,7 +46,7 @@ export default function aspectRatioMix(art, player) {
         setStyle($video, 'height', null);
         setStyle($video, 'padding', null);
         delete $player.dataset.aspectRatio;
-        const $default = art.contextmenu.$aspectRatio.querySelector('.default');
+        const $default = art.contextmenu.aspectRatio.querySelector('.default');
         inverseClass($default, 'current');
       }
     }
