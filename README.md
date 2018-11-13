@@ -1,4 +1,5 @@
 # ArtPlayer
+
 ![version](https://badgen.net/npm/v/artplayer)
 ![license](https://badgen.net/npm/license/artplayer)
 ![size](https://badgen.net/bundlephobia/minzip/artplayer)
@@ -6,9 +7,11 @@
 > ArtPlayer is a modern HTML5 video player
 
 ## Status
-⚠️  This project is WIP and not ready for production use yet!
+
+⚠️ This project is WIP and not ready for production use yet!
 
 ## Demo
+
 [Checkout the demo](https://blog.zhw-island.com/ArtPlayer/)
 
 ## Introduction
@@ -27,7 +30,7 @@ import 'artplayer/dist/artplayer.css';
 OR umd builds are also available
 
 ```html
-<link rel="stylesheet" href="path/to/artplayer.css">
+<link rel="stylesheet" href="path/to/artplayer.css" />
 <script src="path/to/artplayer.js"></script>
 ```
 
@@ -41,8 +44,8 @@ Will expose the global variable to `window.Artplayer`.
 
 ```js
 var app = new Artplayer({
-    container: '.artplayer-app',
-    url: 'path/to/video.mp4',
+  container: '.artplayer-app',
+  url: 'path/to/video.mp4'
 });
 ```
 
@@ -50,12 +53,13 @@ Note: You need to initialize a size for the container element, like:
 
 ```css
 .artplayer-app {
-    width: 400px;
-    height: 300px;
+  width: 400px;
+  height: 300px;
 }
 ```
 
 ## Configuration
+
 <table>
     <tr>
         <th>parameter</th>
@@ -217,6 +221,108 @@ Note: You need to initialize a size for the container element, like:
         </td>
     </tr>
     <tr>
+        <th><code>subtitle</code></th>
+        <td>
+            Type: <code>object</code><br>
+            Default: <code>{}</code><br><br>
+            Custom subtitle<br>
+            <table>
+                <tr>
+                    <th><code>url</code></th>
+                    <td>
+                        Type: <code>string</code><br>
+                        Default: <code>''</code><br><br>
+                        Subtitle url, support vtt and srt format
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>style</code></th>
+                    <td>
+                        Type: <code>object</code><br>
+                        Default: <code>{}</code><br><br>
+                        Subtitle style
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <th><code>moreVideoAttr</code></th>
+        <td>
+            Type: <code>object</code><br>
+            Default:<br>
+            <code>
+            {<br>
+                'controls': false,<br>
+                'preload': 'auto',<br>
+                'webkit-playsinline': true,<br>
+                'playsinline': true<br>
+            }
+            </code><br><br>
+            More video Attributes<br>
+        </td>
+    </tr>  
+    <tr>
+        <th><code>quality</code></th>
+        <td>
+            Type: <code>array</code><br>
+            Default: <code>[]</code><br><br>
+            Custom quality, The type of quality is an object<br>
+            <table>
+                <tr>
+                    <th><code>default</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                        Default: <code>false</code><br><br>
+                        Whether the default quality
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>name</code></th>
+                    <td>
+                        Type: <code>string</code><br>
+                        Default: <code>''</code><br><br>
+                        Quality name
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>url</code></th>
+                    <td>
+                        Type: <code>string</code><br>
+                        Default: <code>''</code><br><br>
+                        Quality url
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <th><code>highlight</code></th>
+        <td>
+            Type: <code>array</code><br>
+            Default: <code>[]</code><br><br>
+            Custom highlight, The type of highlight is an object<br>
+            <table>
+                <tr>
+                    <th><code>time</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Default: <code>0</code><br><br>
+                        highlight seconds
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>text</code></th>
+                    <td>
+                        Type: <code>string</code><br>
+                        Default: <code>''</code><br><br>
+                        highlight text
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr> 
+    <tr>
         <th><code>layers</code></th>
         <td>
             Type: <code>array</code><br>
@@ -266,13 +372,72 @@ Note: You need to initialize a size for the container element, like:
             </table>
         </td>
     </tr>
+    <tr>
+        <th><code>contextmenu</code></th>
+        <td>
+            Type: <code>array</code><br>
+            Default: <code>[]</code><br><br>
+            Custom contextmenu, The type of layer is an object<br>
+            <table>
+                <tr>
+                    <th><code>name</code></th>
+                    <td>
+                        Type: <code>string</code><br>
+                        Default: <code>contextmenu${id}</code><br><br>
+                        The unique name of the contextmenu, used for the class name
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>index</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Default: <code>${id}</code><br><br>
+                        The unique index of the contextmenu, used for the priority level
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>html</code></th>
+                    <td>
+                        Type: <code>string</code>, <code>element</code><br>
+                        Default: <code>''</code><br><br>
+                        The dom element of the contextmenu
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>style</code></th>
+                    <td>
+                        Type: <code>object</code><br>
+                        Default: <code>{}</code><br><br>
+                        The style object of the contextmenu
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>click</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Default: <code>undefined</code><br><br>
+                        Click event of the contextmenu
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <th><code>controls</code></th>
+        <td>
+            Type: <code>array</code><br>
+            Default: <code>[]</code><br><br>
+            Custom controls, The type of controls is an object<br>
+        </td>
+    </tr>
 </table>
 
 ## API
 
 ## Ecosystem
-| Project | Description |
-|---------|--------|
+
+| Project                                                                                                       | Description                |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Danmu plugin for ArtPlayer |
 
 ## Issue

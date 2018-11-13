@@ -33,7 +33,7 @@ export default class Progress {
 
     highlight.forEach(item => {
       const left = Number(item.time) / player.duration;
-      append(this.$highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left * 100}%"></span>`);
+      append(this.$highlight, `<span data-text="${item.text || ''}" data-time="${item.time || 0}" style="left: ${left * 100}%"></span>`);
     });
 
     this.set('loaded', player.loaded);

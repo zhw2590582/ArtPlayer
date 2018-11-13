@@ -47,10 +47,10 @@ export default class Contextmenu {
     if (!item.disable) {
       const { refs, events: { proxy } } = this.art;
       id++;
-      const name = item.name || `menu${id}`;
+      const name = item.name || `contextmenu${id}`;
       const menu = typeof item === 'function' ? item(this.art) : item;
       const $menu = document.createElement('div');
-      $menu.setAttribute('class', `art-menu art-menu-${name || id}`);
+      $menu.setAttribute('class', `art-contextmenu art-contextmenu-${name || id}`);
       append($menu, menu.html);
       setStyles($menu, menu.style || {});
       if (menu.click) {

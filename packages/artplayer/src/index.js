@@ -83,7 +83,6 @@ class Artplayer extends Emitter {
         style: {}
       },
       moreVideoAttr: {
-        'crossOrigin': 'anonymous',
         'controls': false,
         'preload': 'auto',
         'webkit-playsinline': true,

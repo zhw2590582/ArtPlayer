@@ -41,7 +41,8 @@ export default {
       html: {
         validator: validElement
       },
-      style: 'object'
+      style: 'object',
+      click: 'function'
     }
   },
   contextmenu: {
