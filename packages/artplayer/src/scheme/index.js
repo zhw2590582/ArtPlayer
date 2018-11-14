@@ -84,7 +84,7 @@ export default {
         type: 'object',
         child: {
           disable: 'boolean',
-          position: 'boolean',
+          position: 'string',
           index: 'number'
         }
       }

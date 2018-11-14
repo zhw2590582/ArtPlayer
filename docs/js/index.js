@@ -15,6 +15,7 @@ var app = new Artplayer({
   aspectRatio: true,
   fullscreen: true,
   fullscreenWeb: true,
+  mutex: true,
   theme: '#ffad00',
   lang: 'zh-cn',
   moreVideoAttr: {
