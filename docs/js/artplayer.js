@@ -466,7 +466,7 @@
   });
 
   var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function c(r){return (c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var u=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t,e,n,o,a,i=c(r);if("boolean"===i)return "boolean";if("string"===i)return "string";if("number"===i)return "number";if("symbol"===i)return "symbol";if("function"===i)return "GeneratorFunction"===f(r)?"generatorfunction":"function";if(t=r,Array.isArray?Array.isArray(t):t instanceof Array)return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if((e=r)instanceof Date||"function"==typeof e.toDateString&&"function"==typeof e.getDate&&"function"==typeof e.setDate)return "date";if((n=r)instanceof Error||"string"==typeof n.message&&n.constructor&&"number"==typeof n.constructor.stackTraceLimit)return "error";if((o=r)instanceof RegExp||"string"==typeof o.flags&&"boolean"==typeof o.ignoreCase&&"boolean"==typeof o.multiline&&"boolean"==typeof o.global)return "regexp";switch(f(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if("function"==typeof(a=r).throw&&"function"==typeof a.return&&"function"==typeof a.next)return "generator";switch(i=u.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return i.slice(8,-1).toLowerCase().replace(/\s/g,"")};function f(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in y(r,t,e),l(r,t,e),p(r,t,e),t)if(t.hasOwnProperty(n)){var o=r[n],a=t[n],i=e.concat(n);if(s(r,n,a,i))continue;y(o,a,i),l(o,a,i),p(o,a,i);}}function s(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function y(r,t,e){var n;if("string"===i(t)?n=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function l(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(e,r,i(r));if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function p(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,window.optionValidator=a});
+  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function c(r){return (c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var u=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t,e,n,o,a,i=c(r);if("boolean"===i)return "boolean";if("string"===i)return "string";if("number"===i)return "number";if("symbol"===i)return "symbol";if("function"===i)return "GeneratorFunction"===f(r)?"generatorfunction":"function";if(t=r,Array.isArray?Array.isArray(t):t instanceof Array)return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if((e=r)instanceof Date||"function"==typeof e.toDateString&&"function"==typeof e.getDate&&"function"==typeof e.setDate)return "date";if((n=r)instanceof Error||"string"==typeof n.message&&n.constructor&&"number"==typeof n.constructor.stackTraceLimit)return "error";if((o=r)instanceof RegExp||"string"==typeof o.flags&&"boolean"==typeof o.ignoreCase&&"boolean"==typeof o.multiline&&"boolean"==typeof o.global)return "regexp";switch(f(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if("function"==typeof(a=r).throw&&"function"==typeof a.return&&"function"==typeof a.next)return "generator";switch(i=u.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return i.slice(8,-1).toLowerCase().replace(/\s/g,"")};function f(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in y(r,t,e),l(r,t,e),p(r,t,e),t)if(t.hasOwnProperty(n)){var o=r[n],a=t[n],i=e.concat(n);if(s(r,n,a,i))continue;y(o,a,i),l(o,a,i),p(o,a,i);}}function s(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function y(r,t,e){var n;if("string"===i(t)?n=t:"function"===i(t)?t.___validator__=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function l(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(e,r,i(r));if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function p(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,window.optionValidator=a});
   });
 
   function validElement(paths, value, type) {
@@ -507,36 +507,34 @@
       required: true,
       validator: validStringEmpty
     },
+    poster: 'string',
     title: 'string',
-    volume: 'number',
-    thumbnails: {
-      type: 'object',
-      child: {
-        url: 'string',
-        number: 'number',
-        width: 'number',
-        height: 'number',
-        column: 'number'
-      }
-    },
-    screenshot: 'boolean',
-    autoplay: 'boolean',
-    autoSize: 'boolean',
-    playbackRate: 'boolean',
-    aspectRatio: 'boolean',
-    loop: 'boolean',
     type: {
       type: 'string'
     },
     mimeCodec: 'string',
+    theme: 'string',
+    volume: 'number',
+    autoplay: 'boolean',
+    autoSize: 'boolean',
+    loop: 'boolean',
+    playbackRate: 'boolean',
+    aspectRatio: 'boolean',
+    screenshot: 'boolean',
+    setting: 'boolean',
+    hotkey: 'boolean',
+    pip: 'boolean',
+    mutex: 'boolean',
+    fullscreen: 'boolean',
+    fullscreenWeb: 'boolean',
     layers: {
       type: 'array',
       child: {
+        disable: 'boolean',
+        type: 'object|function',
         name: 'string',
         index: 'number',
-        html: {
-          validator: validElement
-        },
+        html: validElement,
         style: 'object',
         click: 'function'
       }
@@ -544,11 +542,12 @@
     contextmenu: {
       type: 'array',
       child: {
+        disable: 'boolean',
         type: 'object|function',
         name: 'string',
-        html: {
-          validator: validElement
-        },
+        index: 'number',
+        html: validElement,
+        style: 'object',
         click: 'function'
       }
     },
@@ -560,28 +559,17 @@
         url: 'string'
       }
     },
-    theme: 'string',
-    hotkey: 'boolean',
-    pip: 'boolean',
-    mutex: 'boolean',
-    fullscreen: 'boolean',
-    fullscreenWeb: 'boolean',
-    subtitle: {
-      type: 'object',
-      child: {
-        url: 'string',
-        style: 'object'
-      }
-    },
     controls: {
       type: 'array',
       child: {
+        type: 'object',
         option: {
           type: 'object',
           child: {
             disable: 'boolean',
-            position: 'string',
-            index: 'number'
+            name: 'string',
+            index: 'number',
+            position: 'string'
           }
         }
       }
@@ -589,8 +577,28 @@
     highlight: {
       type: 'array',
       child: {
+        type: 'object',
         time: 'number',
         text: 'string'
+      }
+    },
+    thumbnails: {
+      type: 'object',
+      child: {
+        type: 'object',
+        url: 'string',
+        number: 'number',
+        width: 'number',
+        height: 'number',
+        column: 'number'
+      }
+    },
+    subtitle: {
+      type: 'object',
+      child: {
+        type: 'object',
+        url: 'string',
+        style: 'object'
       }
     },
     moreVideoAttr: 'object',
@@ -660,7 +668,6 @@
     },
 
     emit: function (name) {
-      // (this.allEvents || (this.allEvents = [])).push(name);
       var data = [].slice.call(arguments, 1);
       var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
       var i = 0;
@@ -4071,8 +4078,8 @@
           var name = menu.name || "contextmenu".concat(id$1);
           var $menu = document.createElement('div');
           $menu.classList.value = "art-contextmenu art-contextmenu-".concat(name);
-          append($menu, menu.html);
           setStyles($menu, menu.style || {});
+          append($menu, menu.html);
 
           if (menu.click) {
             proxy($menu, 'click', function (event) {
@@ -4083,6 +4090,7 @@
             });
           }
 
+          this.art.emit('contextmenu:add', $menu);
           callback && callback($menu);
           this[name] = $menu;
           insertByIndex($contextmenu, $menu, menu.index || id$1);
@@ -4895,22 +4903,23 @@
       value: function add(item, callback) {
         var _this2 = this;
 
-        if (!item.disable) {
+        var layer = typeof item === 'function' ? item(this.art) : item;
+
+        if (!layer.disable) {
+          id$2++;
           var _this$art = this.art,
               $layers = _this$art.refs.$layers,
               proxy = _this$art.events.proxy;
-          id$2++;
-          var name = item.name || "layer".concat(id$2);
+          var name = layer.name || "layer".concat(id$2);
           var $layer = document.createElement('div');
-          $layer.setAttribute('class', "art-layer art-layer-".concat(name));
-          setStyle($layer, 'z-index', item.index || id$2);
-          append($layer, item.html);
-          setStyles($layer, item.style || {});
+          $layer.classList.value = "art-layer art-layer-".concat(name);
+          setStyles($layer, layer.style || {});
+          append($layer, layer.html);
 
-          if (item.click) {
+          if (layer.click) {
             proxy($layer, 'click', function (event) {
               event.preventDefault();
-              item.click.call(_this2, event);
+              layer.click.call(_this2, event);
 
               _this2.art.emit('layers:click', $layer);
             });
@@ -4918,7 +4927,8 @@
 
           this.art.emit('layers:add', $layer);
           callback && callback($layer);
-          insertByIndex($layers, $layer, item.index || id$2);
+          this[name] = $layer;
+          insertByIndex($layers, $layer, layer.index || id$2);
         }
       }
     }, {
@@ -5316,6 +5326,9 @@
           url: '',
           poster: '',
           title: '',
+          type: '',
+          mimeCodec: '',
+          theme: '#f00',
           volume: 0.7,
           autoplay: false,
           autoSize: false,
@@ -5329,9 +5342,6 @@
           mutex: true,
           fullscreen: false,
           fullscreenWeb: false,
-          type: '',
-          mimeCodec: '',
-          theme: '#f00',
           layers: [],
           contextmenu: [],
           quality: [],

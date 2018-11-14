@@ -47,7 +47,7 @@
   "dependencies": {
     "balloon-css": "^0.5.0",
     "draggabilly": "^2.2.0",
-    "option-validator": "^1.1.0",
+    "option-validator": "^1.1.1",
     "resize-observer": "^1.0.0-alpha.1",
     "screenfull": "^3.3.3",
     "tiny-emitter": "^2.0.2"

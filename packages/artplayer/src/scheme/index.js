@@ -11,36 +11,34 @@ export default {
     required: true,
     validator: validStringEmpty
   },
+  poster: 'string',
   title: 'string',
-  volume: 'number',
-  thumbnails: {
-    type: 'object',
-    child: {
-      url: 'string',
-      number: 'number',
-      width: 'number',
-      height: 'number',
-      column: 'number'
-    }
-  },
-  screenshot: 'boolean',
-  autoplay: 'boolean',
-  autoSize: 'boolean',
-  playbackRate: 'boolean',
-  aspectRatio: 'boolean',
-  loop: 'boolean',
   type: {
     type: 'string'
   },
   mimeCodec: 'string',
+  theme: 'string',
+  volume: 'number',
+  autoplay: 'boolean',
+  autoSize: 'boolean',
+  loop: 'boolean',
+  playbackRate: 'boolean',
+  aspectRatio: 'boolean',
+  screenshot: 'boolean',
+  setting: 'boolean',
+  hotkey: 'boolean',
+  pip: 'boolean',
+  mutex: 'boolean',
+  fullscreen: 'boolean',
+  fullscreenWeb: 'boolean',
   layers: {
     type: 'array',
     child: {
+      disable: 'boolean',
+      type: 'object|function',
       name: 'string',
       index: 'number',
-      html: {
-        validator: validElement
-      },
+      html: validElement,
       style: 'object',
       click: 'function'
     }
@@ -48,11 +46,12 @@ export default {
   contextmenu: {
     type: 'array',
     child: {
+      disable: 'boolean',
       type: 'object|function',
       name: 'string',
-      html: {
-        validator: validElement
-      },
+      index: 'number',
+      html: validElement,
+      style: 'object',
       click: 'function'
     }
   },
@@ -64,28 +63,17 @@ export default {
       url: 'string'
     }
   },
-  theme: 'string',
-  hotkey: 'boolean',
-  pip: 'boolean',
-  mutex: 'boolean',
-  fullscreen: 'boolean',
-  fullscreenWeb: 'boolean',
-  subtitle: {
-    type: 'object',
-    child: {
-      url: 'string',
-      style: 'object'
-    }
-  },
   controls: {
     type: 'array',
     child: {
+      type: 'object',
       option: {
         type: 'object',
         child: {
           disable: 'boolean',
-          position: 'string',
-          index: 'number'
+          name: 'string',
+          index: 'number',
+          position: 'string'
         }
       }
     }
@@ -93,8 +81,28 @@ export default {
   highlight: {
     type: 'array',
     child: {
+      type: 'object',
       time: 'number',
       text: 'string'
+    }
+  },
+  thumbnails: {
+    type: 'object',
+    child: {
+      type: 'object',
+      url: 'string',
+      number: 'number',
+      width: 'number',
+      height: 'number',
+      column: 'number'
+    }
+  },
+  subtitle: {
+    type: 'object',
+    child: {
+      type: 'object',
+      url: 'string',
+      style: 'object'
     }
   },
   moreVideoAttr: 'object',

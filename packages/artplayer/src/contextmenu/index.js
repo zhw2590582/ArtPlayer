@@ -51,8 +51,8 @@ export default class Contextmenu {
       const name = menu.name || `contextmenu${id}`;
       const $menu = document.createElement('div');
       $menu.classList.value = `art-contextmenu art-contextmenu-${name}`;
-      append($menu, menu.html);
       setStyles($menu, menu.style || {});
+      append($menu, menu.html);
       if (menu.click) {
         proxy($menu, 'click', event => {
           event.preventDefault();
@@ -60,6 +60,7 @@ export default class Contextmenu {
           this.art.emit('contextmenu:click', $menu);
         });
       }
+      this.art.emit('contextmenu:add', $menu);
       callback && callback($menu);
       this[name] = $menu;
       insertByIndex($contextmenu, $menu, menu.index || id);

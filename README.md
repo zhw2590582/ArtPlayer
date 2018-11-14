@@ -321,6 +321,59 @@ var app = new Artplayer({
         </td>
     </tr>
     <tr>
+        <th><code>thumbnails</code></th>
+        <td>
+            Type: <code>object</code><br>
+            Default: <code>{}</code><br><br>
+            Custom thumbnails with lazy load<br>
+            <table>
+                <tr>
+                    <th><code>url</code></th>
+                    <td>
+                        Type: <code>string</code><br>
+                        Default: <code>''</code><br><br>
+                        Thumbnails image url
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>number</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Default: <code>60</code><br><br>
+                        Thumbnails number
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>width</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Default: <code>160</code><br><br>
+                        Thumbnails width
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>height</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Default: <code>90</code><br><br>
+                        Thumbnails height
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>column</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Default: <code>10</code><br><br>
+                        Thumbnails column
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20subtitle%3A%20%7B%0A%20%20%20%20url%3A%20url%20%2B%20%27%2Fsubtitle%2Fone-more-time-one-more-chance.srt%27%2C%0A%20%20%20%20style%3A%20%7B%0A%20%20%20%20%20%20color%3A%20%27%2303A9F4%27%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D)%3B">Demo</a>
+        </td>
+    </tr>
+    <tr>
         <th><code>moreVideoAttr</code></th>
         <td>
             Type: <code>object</code><br>
@@ -402,7 +455,7 @@ var app = new Artplayer({
         <td>
             Type: <code>array</code><br>
             Default: <code>[]</code><br><br>
-            Custom layer, The type of layer is an object<br>
+            Custom layer, The type of layer is an <code>object</code> or <code>function</code><br>
             <table>
                 <tr>
                     <th><code>disable</code></th>
@@ -463,7 +516,7 @@ var app = new Artplayer({
         <td>
             Type: <code>array</code><br>
             Default: <code>[]</code><br><br>
-            Custom contextmenu, The type of layer is an object<br>
+            Custom contextmenu, The type of layer is an <code>object</code> or <code>function</code><br>
             <table>
                 <tr>
                     <th><code>disable</code></th>

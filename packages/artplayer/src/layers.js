@@ -12,25 +12,26 @@ export default class Layers {
   }
 
   add(item, callback) {
-    if (!item.disable) {
-      const { refs: { $layers }, events: { proxy } } = this.art;
+    const layer = typeof item === 'function' ? item(this.art) : item;
+    if (!layer.disable) {
       id++;
-      const name = item.name || `layer${id}`;
+      const { refs: { $layers }, events: { proxy } } = this.art;
+      const name = layer.name || `layer${id}`;
       const $layer = document.createElement('div');
-      $layer.setAttribute('class', `art-layer art-layer-${name}`);
-      setStyle($layer, 'z-index', item.index || id);
-      append($layer, item.html);
-      setStyles($layer, item.style || {});
-      if (item.click) {
+      $layer.classList.value = `art-layer art-layer-${name}`;
+      setStyles($layer, layer.style || {});
+      append($layer, layer.html);
+      if (layer.click) {
         proxy($layer, 'click', event => {
           event.preventDefault();
-          item.click.call(this, event);
+          layer.click.call(this, event);
           this.art.emit('layers:click', $layer);
         });
       }
       this.art.emit('layers:add', $layer);
       callback && callback($layer);
-      insertByIndex($layers, $layer, item.index || id);
+      this[name] = $layer;
+      insertByIndex($layers, $layer, layer.index || id);
     }
   }
 
