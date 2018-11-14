@@ -1,4 +1,4 @@
-(function (win) {
+(function(win) {
   var $code = document.querySelector('.code');
   var $run = document.querySelector('.run');
 
@@ -13,7 +13,7 @@
     mode: 'javascript',
     matchBrackets: true,
     value: ''
-  });;
+  });
 
   function initApp(app) {
     consola.clean();
@@ -24,32 +24,50 @@
     });
   }
 
+  function getURLParameters(url) {
+    return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
+      (a, v) => (
+        (a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)), a
+      ),
+      {}
+    );
+  }
+
   function loadCode(url) {
-    return fetch(url)
-      .then(response => {
-        return response.text();
-      })
-      .then(text => {
-        mirror.setValue(text.trim());
-        runCode();
-        return text;
-      })
-      .catch(err => {
-        console.error(err.message);
-      });
+    const { code } = getURLParameters(window.location.href);
+    if (code) {
+      mirror.setValue(decodeURIComponent(code).trim());
+      runCode();
+    } else {
+      fetch(url)
+        .then(response => {
+          return response.text();
+        })
+        .then(text => {
+          mirror.setValue(text.trim());
+          runCode();
+          return text;
+        })
+        .catch(err => {
+          console.error(err.message);
+        });
+    }
   }
 
   function runCode() {
     Artplayer.instances.forEach(ins => {
-      ins.destroy(true)
+      ins.destroy(true);
     });
     var code = mirror.getValue();
     eval(code);
     initApp(Artplayer.instances[0]);
   }
 
-  $run.addEventListener('click', function (e) {
+  $run.addEventListener('click', function(e) {
     runCode();
+    const code = encodeURIComponent(mirror.getValue());
+    const url = window.location.origin + window.location.pathname + '?code=' + code;
+    history.pushState(null, null, url);
   });
 
   win.addEventListener('error', err => {

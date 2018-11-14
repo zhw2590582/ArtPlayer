@@ -703,7 +703,7 @@
     classCallCheck(this, Template);
 
     var refs = art.refs;
-    refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video class=\"artplayer-video\"></video>\n        <div class=\"artplayer-subtitle\"></div>\n        <div class=\"artplayer-layers\"></div>\n        <div class=\"artplayer-mask\"></div>\n        <div class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div class=\"artplayer-loading\"></div>\n        <div class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n        <div class=\"artplayer-contextmenu\"></div>\n      </div>\n    ";
+    refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video data-index=\"10\" class=\"artplayer-video\"></video>\n        <div data-index=\"20\" class=\"artplayer-subtitle\"></div>\n        <div data-index=\"30\" class=\"artplayer-layers\"></div>\n        <div data-index=\"40\" class=\"artplayer-mask\"></div>\n        <div data-index=\"50\" class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div data-index=\"60\" class=\"artplayer-loading\"></div>\n        <div data-index=\"70\" class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div data-index=\"80\" class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div data-index=\"90\" class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div data-index=\"100\" class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n        <div data-index=\"110\" class=\"artplayer-contextmenu\"></div>\n      </div>\n    ";
     refs.$player = refs.$container.querySelector('.artplayer-video-player');
     refs.$video = refs.$container.querySelector('.artplayer-video');
     refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -937,7 +937,7 @@
     art.on('video:error', function () {
       if (reconnectTime < maxReconnectTime) {
         sleep(1000).then(function () {
-          player.reconnectTime++;
+          reconnectTime++;
           art.emit('beforeMountUrl', option.url);
           $video.src = player.mountUrl(option.url);
           notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
@@ -4746,8 +4746,8 @@
   }
 
   function doubleClickInit(art, events) {
-    var $player = art.refs.$player;
-    events.proxy($player, 'dblclick', function () {
+    var $video = art.refs.$video;
+    events.proxy($video, 'dblclick', function () {
       art.player.fullscreenToggle();
       art.emit('dblclick');
     });
@@ -5349,9 +5349,7 @@
           },
           moreVideoAttr: {
             'controls': false,
-            'preload': 'auto',
-            'webkit-playsinline': true,
-            'playsinline': true
+            'preload': 'auto'
           },
           lang: navigator.language.toLowerCase()
         };

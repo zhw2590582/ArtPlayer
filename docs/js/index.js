@@ -16,6 +16,11 @@ var app = new Artplayer({
   fullscreen: true,
   fullscreenWeb: true,
   theme: '#ffad00',
+  lang: 'zh-cn',
+  moreVideoAttr: {
+    'webkit-playsinline': true,
+    'playsinline': true
+  },
   contextmenu: [
       {
           html: '自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ',

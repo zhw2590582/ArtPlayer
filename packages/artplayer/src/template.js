@@ -3,36 +3,36 @@ export default class Template {
     const { refs } = art;
     refs.$container.innerHTML = `
       <div class="artplayer-video-player">
-        <video class="artplayer-video"></video>
-        <div class="artplayer-subtitle"></div>
-        <div class="artplayer-layers"></div>
-        <div class="artplayer-mask"></div>
-        <div class="artplayer-bottom">
+        <video data-index="10" class="artplayer-video"></video>
+        <div data-index="20" class="artplayer-subtitle"></div>
+        <div data-index="30" class="artplayer-layers"></div>
+        <div data-index="40" class="artplayer-mask"></div>
+        <div data-index="50" class="artplayer-bottom">
           <div class="artplayer-progress"></div>
           <div class="artplayer-controls">
             <div class="artplayer-controls-left"></div>
             <div class="artplayer-controls-right"></div>
           </div>
         </div>
-        <div class="artplayer-loading"></div>
-        <div class="artplayer-notice">
+        <div data-index="60" class="artplayer-loading"></div>
+        <div data-index="70" class="artplayer-notice">
           <div class="artplayer-notice-inner"></div>
         </div>
-        <div class="artplayer-setting">
+        <div data-index="80" class="artplayer-setting">
           <div class="artplayer-setting-inner">
             <div class="artplayer-setting-body"></div>
             <div class="artplayer-setting-close">×</div>
           </div>
         </div>
-        <div class="artplayer-info">
+        <div data-index="90" class="artplayer-info">
           <div class="artplayer-info-panel"></div>
           <div class="artplayer-info-close">[x]</div>
         </div>
-        <div class="artplayer-pip-header">
+        <div data-index="100" class="artplayer-pip-header">
           <div class="artplayer-pip-title"></div>
           <div class="artplayer-pip-close">×</div>
         </div>
-        <div class="artplayer-contextmenu"></div>
+        <div data-index="110" class="artplayer-contextmenu"></div>
       </div>
     `;
     refs.$player = refs.$container.querySelector('.artplayer-video-player');

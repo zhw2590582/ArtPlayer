@@ -84,9 +84,7 @@ class Artplayer extends Emitter {
       },
       moreVideoAttr: {
         'controls': false,
-        'preload': 'auto',
-        'webkit-playsinline': true,
-        'playsinline': true
+        'preload': 'auto'
       },
       lang: navigator.language.toLowerCase()
     };
