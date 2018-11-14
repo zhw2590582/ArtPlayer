@@ -251,14 +251,7 @@ Note: You need to initialize a size for the container element, like:
         <td>
             Type: <code>object</code><br>
             Default:<br>
-            <code>
-            {<br>
-                'controls': false,<br>
-                'preload': 'auto',<br>
-                'webkit-playsinline': true,<br>
-                'playsinline': true<br>
-            }
-            </code><br><br>
+            <code>{'controls': false,'preload': 'auto'}</code><br><br>
             More video Attributes<br>
         </td>
     </tr>  

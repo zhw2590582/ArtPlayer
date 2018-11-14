@@ -1,6 +1,7 @@
 (function(win) {
   var $code = document.querySelector('.code');
   var $run = document.querySelector('.run');
+  var fileCode = '';
 
   consola.creat({
     target: '.console',
@@ -44,8 +45,10 @@
           return response.text();
         })
         .then(text => {
-          mirror.setValue(text.trim());
+          var code = text.trim();
+          mirror.setValue(code);
           runCode();
+          fileCode = code;
           return text;
         })
         .catch(err => {
@@ -65,9 +68,11 @@
 
   $run.addEventListener('click', function(e) {
     runCode();
-    const code = encodeURIComponent(mirror.getValue());
-    const url = window.location.origin + window.location.pathname + '?code=' + code;
-    history.pushState(null, null, url);
+    if (fileCode !== mirror.getValue()) {
+      const code = encodeURIComponent(mirror.getValue());
+      const url = window.location.origin + window.location.pathname + '?code=' + code;
+      history.pushState(null, null, url);
+    }
   });
 
   win.addEventListener('error', err => {
