@@ -49,15 +49,6 @@ var app = new Artplayer({
 });
 ```
 
-Note: You need to initialize a size for the container element, like:
-
-```css
-.artplayer-app {
-  width: 400px;
-  height: 300px;
-}
-```
-
 ## Configuration
 
 <table>
@@ -72,7 +63,7 @@ Note: You need to initialize a size for the container element, like:
             Type: <code>string</code>, <code>element</code><br>
             Default: <code>.artplayer</code><br>
             Required: <code>true</code><br><br>
-            DOM container of the player
+            DOM container of the player, you need to initialize a size for the container element
         </td>
         <td>
             <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20%2F%2F%20container%3A%20document.querySelector(%27.artplayer-app%27)%2C%0A%20%20%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%7D)%3B">Demo</a>
@@ -84,7 +75,7 @@ Note: You need to initialize a size for the container element, like:
             Type: <code>string</code><br>
             Default: <code>''</code><br>
             Required: <code>true</code><br><br>
-            Video source url, Three file formats are supported: mp4, ogg, webm
+            Video source url, Three video file formats are supported: mp4, ogg, webm
         </td>
         <td>
             <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%20%20%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20%2F%2F%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.ogg%27%2C%0A%20%20%2F%2F%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.webm%27%0A%7D)%3B">Demo</a>
@@ -164,6 +155,9 @@ Note: You need to initialize a size for the container element, like:
             Default: <code>false</code><br><br>
             Whether to show playback rate controller in the contextmenu
         </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20playbackRate%3A%20true%0A%7D)%3B">Demo</a>
+        </td>
     </tr>
     <tr>
         <th><code>aspectRatio</code></th>
@@ -171,6 +165,9 @@ Note: You need to initialize a size for the container element, like:
             Type: <code>boolean</code><br>
             Default: <code>false</code><br><br>
             Whether to show aspect ratio controller in the contextmenu
+        </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20aspectRatio%3A%20true%0A%7D)%3B">Demo</a>
         </td>
     </tr>
     <tr>

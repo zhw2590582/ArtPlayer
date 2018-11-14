@@ -44,11 +44,11 @@ export default class Contextmenu {
   }
 
   add(item, callback) {
-    if (!item.disable) {
+    const menu = typeof item === 'function' ? item(this.art) : item;
+    if (!menu.disable) {
       id++;
       const { refs: { $contextmenu }, events: { proxy } } = this.art;
-      const name = item.name || `contextmenu${id}`;
-      const menu = typeof item === 'function' ? item(this.art) : item;
+      const name = menu.name || `contextmenu${id}`;
       const $menu = document.createElement('div');
       $menu.classList.value = `art-contextmenu art-contextmenu-${name}`;
       append($menu, menu.html);
