@@ -75,7 +75,7 @@ var app = new Artplayer({
             Type: <code>string</code><br>
             Default: <code>''</code><br>
             Required: <code>true</code><br><br>
-            Video source url, Three video file formats are supported: mp4, ogg, webm
+            Video source url, Three video file formats are supported: <code>mp4</code>, <code>ogg</code>, <code>webm</code>
         </td>
         <td>
             <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%20%20%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20%2F%2F%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.ogg%27%2C%0A%20%20%2F%2F%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.webm%27%0A%7D)%3B">Demo</a>
@@ -97,7 +97,7 @@ var app = new Artplayer({
         <td>
             Type: <code>string</code><br>
             Default: <code>''</code><br><br>
-            Video title, will be shown in screenshot file name and pip mode
+            Video title, will be shown in <code>screenshot</code> file name and <code>pip</code> mode
         </td>
         <td>
             <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20title%3A%20%27%E3%80%90%E6%96%B0%E6%B5%B7%E8%AF%9A%E5%8A%A8%E7%94%BB%E3%80%91%E3%80%8E%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%E3%80%8F%27%0A%7D)%3B">Demo</a>
@@ -230,7 +230,29 @@ var app = new Artplayer({
         <td>
             Type: <code>boolean</code><br>
             Default: <code>true</code><br><br>
-            Whether to use hotkey
+            Whether to use hotkey<br>
+            <table>
+                <tr>
+                    <th><code>↑</code></th>
+                    <td>Increase volume</td>
+                </tr>
+                <tr>
+                    <th><code>↓</code></th>
+                    <td>Decrease volume</td>
+                </tr>
+                <tr>
+                    <th><code>←</code></th>
+                    <td>Seek backward</td>
+                </tr>
+                <tr>
+                    <th><code>→</code></th>
+                    <td>Seek forward</td>
+                </tr>
+                <tr>
+                    <th><code>space</code></th>
+                    <td>Toggle playback</td>
+                </tr>
+            </table>
         </td>
         <td>
             <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20hotkey%3A%20true%0A%7D)%3B">Demo</a>
@@ -252,7 +274,7 @@ var app = new Artplayer({
         <td>
             Type: <code>string</code><br>
             Default: <code>navigator.language.toLowerCase()</code><br><br>
-            Default display language
+            Default display language: <code>en</code>, <code>zh-cn</code>, <code>zh-tw</code>
         </td>
         <td>
             <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20lang%3A%20%27en%27%0A%7D)%3B">Demo</a>
@@ -281,7 +303,7 @@ var app = new Artplayer({
                     <td>
                         Type: <code>string</code><br>
                         Default: <code>''</code><br><br>
-                        Subtitle url, support vtt and srt format
+                        Subtitle url, support <code>vtt</code> and <code>srt</code> format
                     </td>
                 </tr>
                 <tr>
@@ -302,8 +324,7 @@ var app = new Artplayer({
         <th><code>moreVideoAttr</code></th>
         <td>
             Type: <code>object</code><br>
-            Default:<br>
-            <code>{'controls': false,'preload': 'auto'}</code><br><br>
+            Default: <code>{'controls': false,'preload': 'auto'}</code><br><br>
             More video Attributes, these properties will be written directly to the video element<br>
         </td>
         <td>
@@ -524,7 +545,7 @@ var app = new Artplayer({
                                 <th><code>name</code></th>
                                 <td>
                                     Type: <code>string</code><br>
-                                    Default: <code>contextmenu${id}</code><br><br>
+                                    Default: <code>control${id}</code><br><br>
                                     The unique name of the controller, used for the class name
                                 </td>
                             </tr>
@@ -533,7 +554,7 @@ var app = new Artplayer({
                                 <td>
                                     Type: <code>string</code><br>
                                     Default: <code>undefined</code><br><br>
-                                    The position where the controller appears: top, left, right
+                                    The position where the controller appears: <code>top</code>, <code>left</code>, <code>right</code>
                                 </td>
                             </tr>
                             <tr>
