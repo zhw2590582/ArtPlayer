@@ -631,6 +631,29 @@ var art = new Artplayer({
 
 ## API
 
+#### Example
+
+```js
+var art = new Artplayer({
+  container: '.artplayer-app',
+  url: 'path/to/video.mp4'
+});
+```
+
+#### Class static properties
+
+| Parameter           | Description               |
+| ------------------- | ------------------------- |
+| Artplayer.version   | Version Information       |
+| Artplayer.config    | Configuration information |
+| Artplayer.utils     | Common utils              |
+| Artplayer.DEFAULTS  | Default configuration     |
+| Artplayer.instances | Instance collection       |
+
+#### Instance method
+
+#### Listening event
+
 ## Ecosystem
 
 | Project                                                                                                       | Description                |
