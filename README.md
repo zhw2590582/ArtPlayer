@@ -64,6 +64,7 @@ Note: You need to initialize a size for the container element, like:
     <tr>
         <th>parameter</th>
         <th>description</th>
+        <th>Example</th>
     </tr>
     <tr>
         <th><code>container</code></th>
@@ -73,6 +74,9 @@ Note: You need to initialize a size for the container element, like:
             Required: <code>true</code><br><br>
             DOM container of the player
         </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20%2F%2F%20container%3A%20document.querySelector(%27.artplayer-app%27)%2C%0A%20%20%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%7D)%3B">Demo</a>
+        </td>
     </tr>
     <tr>
         <th><code>url</code></th>
@@ -80,7 +84,10 @@ Note: You need to initialize a size for the container element, like:
             Type: <code>string</code><br>
             Default: <code>''</code><br>
             Required: <code>true</code><br><br>
-            Video source url 
+            Video source url, Three file formats are supported: mp4, ogg, webm
+        </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%20%20%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20%2F%2F%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.ogg%27%2C%0A%20%20%2F%2F%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.webm%27%0A%7D)%3B">Demo</a>
         </td>
     </tr>
     <tr>
@@ -88,7 +95,10 @@ Note: You need to initialize a size for the container element, like:
         <td>
             Type: <code>string</code><br>
             Default: <code>''</code><br><br>
-            Video poster url 
+            Video poster image url 
+        </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20poster%3A%20url%20%2B%20%27%2Fimage%2Fone-more-time-one-more-chance-poster.jpg%27%2C%0A%7D)%3B">Demo</a>
         </td>
     </tr>
     <tr>
@@ -98,6 +108,9 @@ Note: You need to initialize a size for the container element, like:
             Default: <code>''</code><br><br>
             Video title, will be shown in screenshot file name and pip mode
         </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20title%3A%20%27%E3%80%90%E6%96%B0%E6%B5%B7%E8%AF%9A%E5%8A%A8%E7%94%BB%E3%80%91%E3%80%8E%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%E3%80%8F%27%0A%7D)%3B">Demo</a>
+        </td>
     </tr>
     <tr>
         <th><code>volume</code></th>
@@ -105,6 +118,9 @@ Note: You need to initialize a size for the container element, like:
             Type: <code>number</code><br>
             Default: <code>0.7</code><br><br>
             Default volume, player will cache the last volume, which may be overwritten
+        </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20volume%3A%200.5%2C%0A%7D)%3B">Demo</a>
         </td>
     </tr>
     <tr>
@@ -115,6 +131,9 @@ Note: You need to initialize a size for the container element, like:
             Whether to play automatically, sometimes it doesn't necessarily succeed<br>
             More info: <a  href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes">autoplay-policy-changes</a>
         </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20autoplay%3A%20true%2C%0A%7D)%3B">Demo</a>
+        </td>
     </tr>
     <tr>
         <th><code>autoSize</code></th>
@@ -123,6 +142,9 @@ Note: You need to initialize a size for the container element, like:
             Default: <code>false</code><br><br>
             Keep the original video aspect ratio and automatically zoom
         </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20autoSize%3A%20true%0A%7D)%3B">Demo</a>
+        </td>
     </tr>
     <tr>
         <th><code>loop</code></th>
@@ -130,6 +152,9 @@ Note: You need to initialize a size for the container element, like:
             Type: <code>boolean</code><br>
             Default: <code>false</code><br><br>
             Automatic loop playback
+        </td>
+        <td>
+            <a target="_blank" href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20app%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20loop%3A%20true%0A%7D)%3B">Demo</a>
         </td>
     </tr>
     <tr>
