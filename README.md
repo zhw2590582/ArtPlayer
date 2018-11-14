@@ -640,17 +640,23 @@ var art = new Artplayer({
 });
 ```
 
-#### Class static properties
+#### Class static properties and methods
 
-| Parameter           | Description               |
-| ------------------- | ------------------------- |
-| Artplayer.version   | Version Information       |
-| Artplayer.config    | Configuration information |
-| Artplayer.utils     | Common utils              |
-| Artplayer.DEFAULTS  | Default configuration     |
-| Artplayer.instances | Instance collection       |
+| Parameter                        | Description               |
+| -------------------------------- | ------------------------- |
+| <code>Artplayer.version</code>   | Version Information       |
+| <code>Artplayer.config</code>    | Configuration information |
+| <code>Artplayer.utils</code>     | Common utils              |
+| <code>Artplayer.DEFAULTS</code>  | Default configuration     |
+| <code>Artplayer.instances</code> | Instance collection       |
+| <code>Artplayer.use()</code>     | Function to load plugin   |
 
-#### Instance method
+#### Instance properties and methods
+
+| Method                     | Parameter                              | Description                                           |
+| -------------------------- | -------------------------------------- | ----------------------------------------------------- |
+| <code>art.init()</code>    |                                        | Initialization instance, in general you don't need it |
+| <code>art.destroy()</code> | <code>true</code> / <code>false</code> | Destroy instance, and whether to remove dom           |
 
 #### Listening event
 

@@ -83,8 +83,8 @@ class Artplayer extends Emitter {
         style: {}
       },
       moreVideoAttr: {
-        'controls': false,
-        'preload': 'auto'
+        controls: false,
+        preload: 'auto'
       },
       lang: navigator.language.toLowerCase()
     };
@@ -111,6 +111,14 @@ class Artplayer extends Emitter {
       this.refs.$container = this.option.container;
     } else {
       this.refs.$container = document.querySelector(this.option.container);
+    }
+
+    if (
+      Artplayer.instances.some(
+        art => art.refs.$container === this.refs.$container
+      )
+    ) {
+      utils.errorHandle(false, 'Cannot mount multiple instances on the same dom element');
     }
 
     this.template = new Template(this);
@@ -145,6 +153,9 @@ class Artplayer extends Emitter {
   }
 }
 
-Artplayer.instances = [];
+Object.defineProperty(Artplayer, 'instances', {
+  value: []
+});
+
 window.Artplayer = Artplayer;
 export default Artplayer;

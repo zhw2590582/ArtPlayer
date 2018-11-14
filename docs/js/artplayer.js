@@ -5245,6 +5245,8 @@
     createClass(Artplayer, [{
       key: "init",
       value: function init() {
+        var _this2 = this;
+
         this.isFocus = false;
         this.isPlaying = false;
         this.refs = {};
@@ -5253,6 +5255,12 @@
           this.refs.$container = this.option.container;
         } else {
           this.refs.$container = document.querySelector(this.option.container);
+        }
+
+        if (Artplayer.instances.some(function (art) {
+          return art.refs.$container === _this2.refs.$container;
+        })) {
+          errorHandle(false, 'Cannot mount multiple instances on the same dom element');
         }
 
         this.template = new Template(this);
@@ -5359,8 +5367,8 @@
             style: {}
           },
           moreVideoAttr: {
-            'controls': false,
-            'preload': 'auto'
+            controls: false,
+            preload: 'auto'
           },
           lang: navigator.language.toLowerCase()
         };
@@ -5370,7 +5378,9 @@
     return Artplayer;
   }(tinyEmitter);
 
-  Artplayer.instances = [];
+  Object.defineProperty(Artplayer, 'instances', {
+    value: []
+  });
   window.Artplayer = Artplayer;
 
   exports.default = Artplayer;
