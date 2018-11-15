@@ -671,8 +671,10 @@ var art = new Artplayer({
         <th>example</th>
     </tr>
     <tr>
-        <th><code>art.destroy()</code></th>
+        <th><code>destroy</code></th>
         <td>
+            Type: <code>function</code><br>
+            Parameter: <code>true</code>/<code>false</code><br><br>
             Destroy instance, and whether to remove dom
         </td>
         <td>
@@ -680,33 +682,58 @@ var art = new Artplayer({
         </td>
     </tr>
     <tr>
-        <th><code>art.player.mountUrl()</code></th>
-        <td>A special writable method for modifying the play url before play</td>
+        <th><code>player</code></th>
         <td>
-            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0AObject.defineProperty(art.player%2C%20%27mountUrl%27%2C%20%7B%0A%20%20%20%20value%3A%20url%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20url%20%2B%20%27%3Fid%3D%27%20%2B%20(new%20Date).getTime()%0A%20%20%20%20%7D%0A%7D)%3B">Demo</a>
+            Type: <code>object</code><br>
+            Destroy instance, and whether to remove dom<br><br>
+            <table>
+                <tr>
+                    <th><code>mountUrl</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        A special writable method for modifying the play url before play<br><br>
+                    </td>
+                    <td>
+                        <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0AObject.defineProperty(art.player%2C%20%27mountUrl%27%2C%20%7B%0A%20%20%20%20value%3A%20url%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20url%20%2B%20%27%3Fid%3D%27%20%2B%20(new%20Date).getTime()%0A%20%20%20%20%7D%0A%7D)%3B">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>play</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Trigger play
+                    </td>
+                    <td><code>null</code></td>
+                </tr>
+                <tr>
+                    <th><code>pause</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Trigger pause
+                    </td>
+                    <td><code>null</code></td>
+                </tr>
+                <tr>
+                    <th><code>toggle</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Trigger play or pause
+                    </td>
+                    <td><code>null</code></td>
+                </tr>
+                <tr>
+                    <th><code>seek</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Custom play time in seconds
+                    </td>
+                    <td>
+                        <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0A%2F%2F%20Make%20sure%20you%20can%20seek%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20%20%20art.player.seek(10)%3B%0A%7D)%3B">Demo</a>
+                    </td>
+                </tr>
+            </table>
         </td>
-    </tr>
-    <tr>
-        <th><code>art.player.play()</code></th>
-        <td>Trigger play</td>
-        <td></td>
-    </tr>
-    <tr>
-        <th><code>art.player.pause()</code></th>
-        <td>Trigger pause</td>
-        <td></td>
-    </tr>
-    <tr>
-        <th><code>art.player.toggle()</code></th>
-        <td>Trigger play or pause</td>
-        <td></td>
-    </tr>
-    <tr>
-        <th><code>art.player.seek()</code></th>
-        <td>Custom play time in seconds</td>
-        <td>
-            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0A%2F%2F%20Make%20sure%20you%20can%20seek%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20%20%20art.player.seek(10)%3B%0A%7D)%3B">Demo</a>
-        </td>
+        <td><code>null</code></td>
     </tr>
     <tr>
         <th><code>art.player.volume</code></th>
