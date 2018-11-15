@@ -22,19 +22,19 @@ export default class Hotkey {
           switch (event.keyCode) {
             case 39:
               event.preventDefault();
-              player.seek(player.currentTime() + 10);
+              player.seek(player.currentTime + 10);
               break;
             case 37:
               event.preventDefault();
-              player.seek(player.currentTime() - 10);
+              player.seek(player.currentTime - 10);
               break;
             case 38:
               event.preventDefault();
-              player.volume(player.volume() + 0.05);
+              player.volume += 0.05;
               break;
             case 40:
               event.preventDefault();
-              player.volume(player.volume() - 0.05);
+              player.volume -= 0.05;
               break;
             case 32:
               event.preventDefault();
