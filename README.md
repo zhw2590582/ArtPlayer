@@ -653,15 +653,6 @@ var art = new Artplayer({
 
 ## API
 
-### Example
-
-```js
-var art = new Artplayer({
-  container: '.artplayer-app',
-  url: 'path/to/video.mp4'
-});
-```
-
 ### Instance properties and methods
 
 <table>
@@ -685,13 +676,13 @@ var art = new Artplayer({
         <th><code>player</code></th>
         <td>
             Type: <code>object</code><br>
-            Destroy instance, and whether to remove dom<br><br>
+            Player core function<br><br>
             <table>
                 <tr>
                     <th><code>mountUrl</code></th>
                     <td>
                         Type: <code>function</code><br>
-                        A special writable method for modifying the play url before play<br><br>
+                        A special writable method for modifying the play url before play<br>
                     </td>
                     <td>
                         <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0AObject.defineProperty(art.player%2C%20%27mountUrl%27%2C%20%7B%0A%20%20%20%20value%3A%20url%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20url%20%2B%20%27%3Fid%3D%27%20%2B%20(new%20Date).getTime()%0A%20%20%20%20%7D%0A%7D)%3B">Demo</a>
@@ -701,7 +692,7 @@ var art = new Artplayer({
                     <th><code>play</code></th>
                     <td>
                         Type: <code>function</code><br>
-                        Trigger play
+                        Trigger play<br>
                     </td>
                     <td><code>null</code></td>
                 </tr>
@@ -709,7 +700,7 @@ var art = new Artplayer({
                     <th><code>pause</code></th>
                     <td>
                         Type: <code>function</code><br>
-                        Trigger pause
+                        Trigger pause<br>
                     </td>
                     <td><code>null</code></td>
                 </tr>
@@ -717,7 +708,7 @@ var art = new Artplayer({
                     <th><code>toggle</code></th>
                     <td>
                         Type: <code>function</code><br>
-                        Trigger play or pause
+                        Trigger play or pause<br>
                     </td>
                     <td><code>null</code></td>
                 </tr>
@@ -725,151 +716,327 @@ var art = new Artplayer({
                     <th><code>seek</code></th>
                     <td>
                         Type: <code>function</code><br>
-                        Custom play time in seconds
+                        Custom play time in seconds<br>
                     </td>
                     <td>
                         <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0A%2F%2F%20Make%20sure%20you%20can%20seek%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20%20%20art.player.seek(10)%3B%0A%7D)%3B">Demo</a>
                     </td>
                 </tr>
+                <tr>
+                    <th><code>volume</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Get and set the volume<br>
+                    </td>
+                    <td>
+                        <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0AsetTimeout(()%20%3D%3E%20%7B%0A%20%20console.log(art.player.volume)%0A%20%20art.player.volume%20%3D%20art.player.volume%20%2F%202%3B%0A%20%20console.log(art.player.volume)%0A%7D%2C%200)%3B%0A">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>currentTime</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Get and set current time<br>
+                    </td>
+                    <td>
+                        <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0A%2F%2F%20Make%20sure%20you%20can%20seek%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20art.player.seek(10)%3B%0A%20%20console.log(art.player.currentTime)%3B%0A%7D)%3B">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>duration</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                        Get duration in seconds<br>
+                    </td>
+                    <td>
+                        <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20console.log(art.player.duration)%3B%0A%7D)%3B">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>switch</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Switch video url, use in the case of similar switching quality<br>
+                        You can also pass a name to the url for display, like:<br>
+                        <code>art.player.switch(url, name)</code><br>
+                    </td>
+                    <td>
+                        <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20art.player.switch(url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-720p.mp4%27%2C%20%27720p%27)%3B%0A%7D)%3B">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>playbackRate</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>playbackRateState</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>playbackRateRemove</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>playbackRateReset</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>aspectRatio</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>aspectRatioState</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>aspectRatioRemove</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>aspectRatioReset</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>screenshot</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenState</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenEnabled</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenExit</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenToggle</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenWebState</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenWebEnabled</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenWebExit</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>fullscreenWebToggle</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>pipState</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>pipDraggie</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>pipEnabled</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>pipExit</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>pipToggle</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>loaded</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>played</code></th>
+                    <td>
+                        Type: <code>number</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>autoSize</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>autoSizeState</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>autoSizeRemove</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>flip</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>flipState</code></th>
+                    <td>
+                        Type: <code>boolean</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>flipRemove</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                    </td>
+                    <td>
+                        <a href="/">Demo</a>
+                    </td>
+                </tr>
             </table>
         </td>
         <td><code>null</code></td>
-    </tr>
-    <tr>
-        <th><code>art.player.volume</code></th>
-        <td>Get and set the player volume</td>
-        <td>
-            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0AsetTimeout(()%20%3D%3E%20%7B%0A%20%20console.log(art.player.volume)%0A%20%20art.player.volume%20%3D%20art.player.volume%20%2F%202%3B%0A%20%20console.log(art.player.volume)%0A%7D%2C%200)%3B%0A">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th><code>art.player.currentTime</code></th>
-        <td>Get player current time</td>
-        <td>
-            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0A%2F%2F%20Make%20sure%20you%20can%20seek%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20art.player.seek(10)%3B%0A%20%20console.log(art.player.currentTime)%3B%0A%7D)%3B">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th><code>art.player.duration</code></th>
-        <td>Get player duration in seconds</td>
-        <td>
-            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20console.log(art.player.duration)%3B%0A%7D)%3B">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th><code>art.player.switch()</code></th>
-        <td>
-            Switch video url, use in the case of similar switching quality<br>
-            You can also pass a name to the url for display, like:<br>
-            <code>art.player.switch(url, name)</code>
-        </td>
-        <td>
-            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20art.player.switch(url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-720p.mp4%27%2C%20%27720p%27)%3B%0A%7D)%3B">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <code>art.player.playbackRate()</code><br>
-            <code>art.player.playbackRateState</code><br>
-            <code>art.player.playbackRateRemove()</code><br>
-            <code>art.player.playbackRateReset()</code>
-        </th>
-        <td>Manage the playback rate, at intervals of 0.1 to 10</td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <code>art.player.aspectRatio()</code><br>
-            <code>art.player.aspectRatioState</code><br>
-            <code>art.player.aspectRatioRemove()</code><br>
-            <code>art.player.aspectRatioReset()</code>
-        </th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th><code>art.player.screenshot()</code></th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <code>art.player.fullscreenState</code><br>
-            <code>art.player.fullscreenEnabled()</code><br>
-            <code>art.player.fullscreenExit()</code><br>
-            <code>art.player.fullscreenToggle()</code>
-        </th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <code>art.player.fullscreenWebState</code><br>
-            <code>art.player.fullscreenWebEnabled()</code><br>
-            <code>art.player.fullscreenWebExit()</code><br>
-            <code>art.player.fullscreenWebToggle()</code>
-        </th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <code>art.player.pipState</code><br>
-            <code>art.player.pipDraggie</code><br>
-            <code>art.player.pipEnabled()</code><br>
-            <code>art.player.pipExit()</code><br>
-            <code>art.player.pipToggle()</code>
-        </th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th><code>art.player.loaded</code></th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th><code>art.player.played</code></th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <code>art.player.autoSize()</code><br>
-            <code>art.player.autoSizeState</code><br>
-            <code>art.player.autoSizeRemove()</code>
-        </th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <code>art.player.flip()</code><br>
-            <code>art.player.flipState</code><br>
-            <code>art.player.flipRemove()</code><br>
-        </th>
-        <td></td>
-        <td>
-            <a href="">Demo</a>
-        </td>
     </tr>
 </table>
 
