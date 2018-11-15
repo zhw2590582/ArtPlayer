@@ -49,13 +49,18 @@ var art = new Artplayer({
 });
 ```
 
-## Configuration
+## Ecosystem
 
+| Project                                                                                                       | Description                |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Danmu plugin for ArtPlayer |
+
+## Configuration
 <table>
     <tr>
         <th>parameter</th>
         <th>description</th>
-        <th>Example</th>
+        <th>example</th>
     </tr>
     <tr>
         <th><code>container</code></th>
@@ -624,7 +629,7 @@ var art = new Artplayer({
             </table>
         </td>
         <td>
-            <a href="https://blog.zhw-island.com/ArtPlayer/?code=function%20MyController(option)%7B%0A%09this.option%20%3D%20option%3B%0A%7D%0A%0AMyController.prototype.apply%20%3D%20function(art%2C%20dom)%7B%0A%20%20%20%20dom.innerHTML%20%3D%20%27MyController%27%3B%0A%7D%0A%0Avar%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20controls%3A%20%5Bnew%20MyController(%7B%0A%20%20%09%20%20name%3A%20%27myController%27%2C%0A%20%20%20%20%20%20disable%3A%20false%2C%0A%20%20%20%20%20%20position%3A%20%27right%27%2C%0A%20%20%20%20%20%20index%3A%2010%0A%20%20%7D)%5D%0A%7D)%3B">Demo</a>
+            <a href="https://blog.zhw-island.com/ArtPlayer/?code=function%20MyController(option)%7B%0A%09this.option%20%3D%20option%3B%0A%7D%0A%0AMyController.prototype.apply%20%3D%20function(art%2C%20dom)%7B%0A%20%20%20%20dom.innerHTML%20%3D%20this.option.name%3B%0A%7D%0A%0Avar%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%2C%0A%20%20controls%3A%20%5B%0A%20%20%20%20new%20MyController(%7B%0A%20%20%09%20%20name%3A%20%27myControllerLeft%27%2C%0A%20%20%20%20%20%20position%3A%20%27left%27%2C%0A%20%20%20%20%20%20index%3A%2040%0A%20%20%09%7D)%2C%0A%20%20%20%20new%20MyController(%7B%0A%20%20%09%20%20name%3A%20%27myControllerRight%27%2C%0A%20%20%20%20%20%20position%3A%20%27right%27%2C%0A%20%20%20%20%20%20index%3A%2010%0A%20%20%09%7D)%0A%20%20%5D%0A%7D)%3B">Demo</a>
         </td>
     </tr>
 </table>
@@ -640,31 +645,85 @@ var art = new Artplayer({
 });
 ```
 
-#### Class static properties and methods
-
-| Parameter                        | Description               |
-| -------------------------------- | ------------------------- |
-| <code>Artplayer.version</code>   | Version Information       |
-| <code>Artplayer.config</code>    | Configuration information |
-| <code>Artplayer.utils</code>     | Common utils              |
-| <code>Artplayer.DEFAULTS</code>  | Default configuration     |
-| <code>Artplayer.instances</code> | Instance collection       |
-| <code>Artplayer.use()</code>     | Function to load plugin   |
-
 #### Instance properties and methods
+<table>
+    <tr>
+        <th>property / method</th>
+        <th>parameter</th>
+        <th>description</th>
+        <th>example</th>
+    </tr>
+    <tr>
+        <th><code>art.init()</code></th>
+        <td></td>
+        <td>
+            Initialization instance, in general you don't need it
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>art.destroy()</code></th>
+        <td><code>true</code> / <code>false</code></td>
+        <td>
+            Destroy instance, and whether to remove dom
+        </td>
+        <td>
+            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0AsetTimeout(()%20%3D%3E%20%7B%0A%20%20art.destroy(true)%3B%0A%7D%2C%201000)%3B">Demo</a>
+        </td>
+    </tr>
+</table>
 
-| Method                     | Parameter                              | Description                                           |
-| -------------------------- | -------------------------------------- | ----------------------------------------------------- |
-| <code>art.init()</code>    |                                        | Initialization instance, in general you don't need it |
-| <code>art.destroy()</code> | <code>true</code> / <code>false</code> | Destroy instance, and whether to remove dom           |
+#### Class static properties and methods
+<table>
+    <tr>
+        <th>property / method</th>
+        <th>parameter</th>
+        <th>description</th>
+        <th>example</th>
+    </tr>
+    <tr>
+        <th><code>Artplayer.version</code></th>
+        <td></td>
+        <td>
+            Version Information
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>Artplayer.config</code></th>
+        <td></td>
+        <td>
+            Configuration information
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>Artplayer.utils</code></th>
+        <td></td>
+        <td>
+            Common utils
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>Artplayer.DEFAULTS</code></th>
+        <td></td>
+        <td>
+            Default configuration
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <th><code>Artplayer.use()</code></th>
+        <td></td>
+        <td>
+            Function to load plugin
+        </td>
+        <td></td>
+    </tr>
+</table>
 
 #### Listening event
-
-## Ecosystem
-
-| Project                                                                                                       | Description                |
-| ------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Danmu plugin for ArtPlayer |
 
 ## Issue
 
