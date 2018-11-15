@@ -1062,6 +1062,9 @@
     Object.defineProperty(player, 'currentTime', {
       get: function get() {
         return art.refs.$video.currentTime || 0;
+      },
+      set: function set(currentTime) {
+        art.refs.$video.currentTime = currentTime;
       }
     });
   }
@@ -1083,20 +1086,23 @@
     Object.defineProperty(player, 'switch', {
       value: function value(url) {
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
-        var currentTime = player.currentTime;
-        art.emit('beforeMountUrl', url);
-        $video.src = player.mountUrl(url);
-        option.url = url;
-        player.playbackRateRemove();
-        player.aspectRatioRemove();
-        player.seek(currentTime);
 
-        if (isPlaying) {
-          player.play();
+        if (url !== option.url) {
+          var currentTime = player.currentTime;
+          art.emit('beforeMountUrl', url);
+          $video.src = player.mountUrl(url);
+          option.url = url;
+          player.playbackRateRemove();
+          player.aspectRatioRemove();
+          player.seek(currentTime);
+
+          if (isPlaying) {
+            player.play();
+          }
+
+          notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
+          art.emit('switch', url);
         }
-
-        notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-        art.emit('switch', url);
       }
     });
   }
@@ -1126,8 +1132,6 @@
         if (player.$playbackRateState) {
           player.playbackRate(1);
           delete $player.dataset.playbackRate;
-          var $normal = art.contextmenu.playbackRate.querySelector('.normal');
-          inverseClass($normal, 'current');
         }
       }
     });
@@ -1194,8 +1198,6 @@
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);
           delete $player.dataset.aspectRatio;
-          var $default = art.contextmenu.aspectRatio.querySelector('.default');
-          inverseClass($default, 'current');
         }
       }
     });
@@ -3954,9 +3956,16 @@
 
         if (rate) {
           player.playbackRate(Number(rate));
-          inverseClass(target, 'current');
           art.contextmenu.hide();
         }
+      },
+      callback: function callback($menu) {
+        art.on('playbackRate', function (rate) {
+          var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
+            return Number(item.dataset.rate) === rate;
+          });
+          inverseClass($current, 'current');
+        });
       }
     };
   }
@@ -3976,9 +3985,16 @@
 
         if (ratio) {
           player.aspectRatio(ratio.split(':'));
-          inverseClass(target, 'current');
           art.contextmenu.hide();
         }
+      },
+      callback: function callback($menu) {
+        art.on('aspectRatio', function (ratio) {
+          var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
+            return item.dataset.ratio === ratio.join(':');
+          });
+          inverseClass($current, 'current');
+        });
       }
     };
   }
@@ -4087,10 +4103,11 @@
             });
           }
 
-          this.art.emit('contextmenu:add', $menu);
-          callback && callback($menu);
-          this[name] = $menu;
           insertByIndex($contextmenu, $menu, menu.index || id$1);
+          this[name] = $menu;
+          menu.callback && menu.callback($menu);
+          callback && callback($menu);
+          this.art.emit('contextmenu:add', $menu);
         }
       }
     }, {
@@ -4922,10 +4939,11 @@
             });
           }
 
-          this.art.emit('layers:add', $layer);
-          callback && callback($layer);
-          this[name] = $layer;
           insertByIndex($layers, $layer, layer.index || id$2);
+          this[name] = $layer;
+          item.callback && item.callback($layer);
+          callback && callback($layer);
+          this.art.emit('layers:add', $layer);
         }
       }
     }, {

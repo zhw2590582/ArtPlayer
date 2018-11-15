@@ -17,9 +17,16 @@ export default function aspectRatio(art) {
       const { ratio } = target.dataset;
       if (ratio) {
         player.aspectRatio(ratio.split(':'));
-        inverseClass(target, 'current');
         art.contextmenu.hide();
       }
+    },
+    callback: $menu => {
+      art.on('aspectRatio', ratio => {
+        const $current = Array.from($menu.querySelectorAll('span')).find(
+          item => item.dataset.ratio === ratio.join(':')
+        );
+        inverseClass($current, 'current');
+      });
     }
   };
 }

@@ -60,10 +60,11 @@ export default class Contextmenu {
           this.art.emit('contextmenu:click', $menu);
         });
       }
-      this.art.emit('contextmenu:add', $menu);
-      callback && callback($menu);
-      this[name] = $menu;
       insertByIndex($contextmenu, $menu, menu.index || id);
+      this[name] = $menu;
+      menu.callback && menu.callback($menu);
+      callback && callback($menu);
+      this.art.emit('contextmenu:add', $menu);
     }
   }
 

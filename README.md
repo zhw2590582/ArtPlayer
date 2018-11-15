@@ -511,6 +511,14 @@ var art = new Artplayer({
                         Click event of the layer
                     </td>
                 </tr>
+                <tr>
+                    <th><code>callback</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Default: <code>undefined</code><br><br>
+                        Callback after mounted;
+                    </td>
+                </tr>
             </table>
         </td>
         <td>
@@ -570,6 +578,14 @@ var art = new Artplayer({
                         Type: <code>function</code><br>
                         Default: <code>undefined</code><br><br>
                         Click event of the contextmenu
+                    </td>
+                </tr>
+                <tr>
+                    <th><code>callback</code></th>
+                    <td>
+                        Type: <code>function</code><br>
+                        Default: <code>undefined</code><br><br>
+                        Callback after mounted;
                     </td>
                 </tr>
             </table>
@@ -715,9 +731,13 @@ var art = new Artplayer({
     </tr>
     <tr>
         <th><code>art.player.switch()</code></th>
-        <td></td>
         <td>
-            <a href="">Demo</a>
+            Switch video url, use in the case of similar switching quality<br>
+            You can also pass a name to the url for display, like:<br>
+            <code>art.player.switch(url, name)</code>
+        </td>
+        <td>
+            <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0Aart.on(%27firstCanplay%27%2C%20function%20()%20%7B%0A%20%20art.player.switch(url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-720p.mp4%27%2C%20%27720p%27)%3B%0A%7D)%3B">Demo</a>
         </td>
     </tr>
     <tr>
@@ -727,7 +747,7 @@ var art = new Artplayer({
             <code>art.player.playbackRateRemove()</code><br>
             <code>art.player.playbackRateReset()</code>
         </th>
-        <td></td>
+        <td>Manage the playback rate, at intervals of 0.1 to 10</td>
         <td>
             <a href="">Demo</a>
         </td>

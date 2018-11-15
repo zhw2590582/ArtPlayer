@@ -1,4 +1,4 @@
-import { clamp, inverseClass } from '../utils';
+import { clamp } from '../utils';
 
 export default function playbackRateMix(art, player) {
   const { refs: { $video, $player }, i18n, notice } = art;
@@ -22,8 +22,6 @@ export default function playbackRateMix(art, player) {
       if (player.$playbackRateState) {
         player.playbackRate(1);
         delete $player.dataset.playbackRate;
-        const $normal = art.contextmenu.playbackRate.querySelector('.normal');
-        inverseClass($normal, 'current');
       }
     }
   });

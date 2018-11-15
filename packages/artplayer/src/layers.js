@@ -28,10 +28,11 @@ export default class Layers {
           this.art.emit('layers:click', $layer);
         });
       }
-      this.art.emit('layers:add', $layer);
-      callback && callback($layer);
-      this[name] = $layer;
       insertByIndex($layers, $layer, layer.index || id);
+      this[name] = $layer;
+      item.callback && item.callback($layer);
+      callback && callback($layer);
+      this.art.emit('layers:add', $layer);
     }
   }
 

@@ -20,9 +20,16 @@ export default function playbackRate(art) {
       const { rate } = target.dataset;
       if (rate) {
         player.playbackRate(Number(rate));
-        inverseClass(target, 'current');
         art.contextmenu.hide();
       }
+    },
+    callback: $menu => {
+      art.on('playbackRate', rate => {
+        const $current = Array.from($menu.querySelectorAll('span')).find(
+          item => Number(item.dataset.rate) === rate
+        );
+        inverseClass($current, 'current');
+      });
     }
   };
 }
