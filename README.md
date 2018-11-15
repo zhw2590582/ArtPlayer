@@ -56,6 +56,7 @@ var art = new Artplayer({
 | [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Danmu plugin for ArtPlayer |
 
 ## Configuration
+
 <table>
     <tr>
         <th>parameter</th>
@@ -646,6 +647,7 @@ var art = new Artplayer({
 ```
 
 #### Instance properties and methods
+
 <table>
     <tr>
         <th>property / method</th>
@@ -671,9 +673,322 @@ var art = new Artplayer({
             <a href="https://blog.zhw-island.com/ArtPlayer/?code=var%20url%20%3D%20%27https%3A%2F%2Fblog.zhw-island.com%2Fassets-cdn%27%3B%0Avar%20art%20%3D%20new%20Artplayer(%7B%0A%20%20container%3A%20%27.artplayer-app%27%2C%0A%20%20url%3A%20url%20%2B%20%27%2Fvideo%2Fone-more-time-one-more-chance-480p.mp4%27%0A%7D)%3B%0A%0AsetTimeout(()%20%3D%3E%20%7B%0A%20%20art.destroy(true)%3B%0A%7D%2C%201000)%3B">Demo</a>
         </td>
     </tr>
+    <tr>
+        <th><code>art.player.mountUrl()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.play()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.pause()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.toggle()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.seek()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.volume()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.currentTime()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.duration()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.switch()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.playbackRateState()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.playbackRate()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.playbackRateRemove()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.playbackRateReset()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.aspectRatioState()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.aspectRatio()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.aspectRatioRemove()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.aspectRatioReset()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.screenshot()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenState()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenEnabled()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenExit()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenToggle()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenWebState()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenWebEnabled()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenWebExit()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.fullscreenWebToggle()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.pipState()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.pipDraggie()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.pipEnabled()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.pipExit()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.pipToggle()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.loaded()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.played()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.autoSizeState()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.autoSize()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.autoSizeRemove()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.flipState()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.flip()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
+    <tr>
+        <th><code>art.player.flipRemove()</code></th>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="">Demo</a>
+        </td>
+    </tr>
 </table>
 
 #### Class static properties and methods
+
 <table>
     <tr>
         <th>property / method</th>
