@@ -1062,9 +1062,6 @@
     Object.defineProperty(player, 'currentTime', {
       get: function get() {
         return art.refs.$video.currentTime || 0;
-      },
-      set: function set(currentTime) {
-        art.refs.$video.currentTime = currentTime;
       }
     });
   }
