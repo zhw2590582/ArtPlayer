@@ -839,13 +839,11 @@ var art = new Artplayer({
 });
 ```
 
-# API
-
-## Instance properties
+# Instance properties
 
 > TODO...
 
-## Class static properties
+# Class static properties
 
 > TODO...
 

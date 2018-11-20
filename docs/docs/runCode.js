@@ -4,7 +4,7 @@ window.runCode = function(hook) {
       .filter(function(item) {
         return item.innerHTML === 'Run Code';
       })
-      .forEach(item => {
+      .forEach(function(item) {
         item.addEventListener('click', function(event) {
           event.preventDefault();
           var codeElement = item.parentElement.nextElementSibling;
