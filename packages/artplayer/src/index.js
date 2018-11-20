@@ -46,7 +46,7 @@ class Artplayer extends Emitter {
 
   static get DEFAULTS() {
     return {
-      container: '.artplayer',
+      container: '#artplayer',
       url: '',
       poster: '',
       title: '',
