@@ -24,7 +24,7 @@ export default {
   input: 'src/index.js',
   output: {
     name: name,
-    file: isProd ? `dist/${name}.js` : path.join(process.cwd(), '../../', `docs/js/${name}.js`),
+    file: isProd ? `dist/${name}.js` : path.join(process.cwd(), '../../', `docs/lab/js/${name}.js`),
     format: 'umd',
     exports: 'named'
   },
@@ -38,7 +38,7 @@ export default {
     }),
     postcss({
       plugins: [autoprefixer, cssnano],
-      extract: isProd ? `dist/${name}.css` : path.join(process.cwd(), '../../', `docs/css/${name}.css`)
+      extract: isProd ? `dist/${name}.css` : path.join(process.cwd(), '../../', `docs/lab/css/${name}.css`)
     }),
     nodeResolve(),
     commonjs(),

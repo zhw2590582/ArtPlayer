@@ -657,7 +657,7 @@ var art = new Artplayer({
 
 <table>
     <tr>
-        <th>property / method</th>
+        <th>property</th>
         <th>description</th>
         <th>example</th>
     </tr>
@@ -1044,7 +1044,7 @@ var art = new Artplayer({
 
 <table>
     <tr>
-        <th>property / method</th>
+        <th>property</th>
         <th>description</th>
         <th>example</th>
     </tr>
