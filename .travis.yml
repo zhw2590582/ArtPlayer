@@ -1,11 +1,14 @@
 language: node_js
 
 node_js:
-  - latest
+  - stable
+
+env:
+  - NODE_ENV=lint
 
 before_script:
   - npm install
-  - npm run bootstrap
+  - npm run bootstrap --no-ci
 
 script:
   - npm run lint
