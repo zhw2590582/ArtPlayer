@@ -1,0 +1,1 @@
+PLEASE USE OUR SPECIFIC ISSUE TEMPLATES for bug reports, features and improvement suggestions.
