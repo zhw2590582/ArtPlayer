@@ -5,6 +5,7 @@ node_js:
 
 before_script:
   - npm install
+  - lerna run install
 
 script:
   - npm run lint
