@@ -24,11 +24,11 @@ export default class PlayAndPause {
 
     art.on('video:playing', () => {
       setStyle(this.$play, 'display', 'none');
-      setStyle(this.$pause, 'display', 'block');
+      setStyle(this.$pause, 'display', 'flex');
     });
 
     art.on('video:pause', () => {
-      setStyle(this.$play, 'display', 'block');
+      setStyle(this.$play, 'display', 'flex');
       setStyle(this.$pause, 'display', 'none');
     });
   }

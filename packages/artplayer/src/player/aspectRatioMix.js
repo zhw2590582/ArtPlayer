@@ -1,4 +1,4 @@
-import { setStyle, inverseClass } from '../utils';
+import { setStyle } from '../utils';
 
 export default function aspectRatioMix(art, player) {
   const { refs: { $video, $player }, i18n, notice } = art;

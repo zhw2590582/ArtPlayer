@@ -19,9 +19,9 @@ export default class Volume {
     art.on('volume', percentage => {
       if (percentage === 0) {
         setStyle(this.$volume, 'display', 'none');
-        setStyle(this.$volumeClose, 'display', 'block');
+        setStyle(this.$volumeClose, 'display', 'flex');
       } else {
-        setStyle(this.$volume, 'display', 'block');
+        setStyle(this.$volume, 'display', 'flex');
         setStyle(this.$volumeClose, 'display', 'none');
       }
     });

@@ -11,12 +11,6 @@ export default function eventInit(art, player) {
     player.toggle();
   });
 
-  config.video.events.forEach(eventName => {
-    proxy($video, eventName, event => {
-      art.emit(`video:${event.type}`, event);
-    });
-  });
-
   art.on('video:loadstart', () => {
     art.loading.show();
   });
@@ -94,5 +88,11 @@ export default function eventInit(art, player) {
         art.destroy();
       });
     }
+  });
+
+  config.video.events.forEach(eventName => {
+    proxy($video, eventName, event => {
+      art.emit(`video:${event.type}`, event);
+    });
   });
 }

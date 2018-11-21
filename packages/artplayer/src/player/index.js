@@ -23,8 +23,8 @@ import flipMix from './flipMix';
 export default class Player {
   constructor(art) {
     mountUrlMix(art, this);
-    attrInit(art, this);
     eventInit(art, this);
+    attrInit(art, this);
     playMix(art, this);
     pauseMin(art, this);
     toggleMix(art, this);

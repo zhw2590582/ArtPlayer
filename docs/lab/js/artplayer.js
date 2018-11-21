@@ -756,6 +756,8 @@
       'Show subtitle': '显示字幕',
       'Hide danmu': '隐藏弹幕',
       'Show danmu': '显示弹幕',
+      'Show setting': '显示设置',
+      'Hide setting': '隐藏设置',
       'Screenshot': '截图',
       'Play speed': '播放速度',
       'Aspect ratio': '画面比例',
@@ -785,6 +787,8 @@
       'Reconnect': '重新連接',
       'Hide subtitle': '隱藏字幕',
       'Show subtitle': '顯示字幕',
+      'Show setting': '顯示设置',
+      'Hide setting': '隱藏设置',
       'Hide danmu': '隱藏彈幕',
       'Show danmu': '顯示彈幕',
       'Screenshot': '截圖',
@@ -883,11 +887,6 @@
     proxy($video, 'click', function () {
       player.toggle();
     });
-    config.video.events.forEach(function (eventName) {
-      proxy($video, eventName, function (event) {
-        art.emit("video:".concat(event.type), event);
-      });
-    });
     art.on('video:loadstart', function () {
       art.loading.show();
     });
@@ -959,6 +958,11 @@
           art.destroy();
         });
       }
+    });
+    config.video.events.forEach(function (eventName) {
+      proxy($video, eventName, function (event) {
+        art.emit("video:".concat(event.type), event);
+      });
     });
   }
 
@@ -2991,8 +2995,8 @@
     classCallCheck(this, Player);
 
     mountUrlMix(art, this);
-    attrInit(art, this);
     eventInit(art, this);
+    attrInit(art, this);
     playMix(art, this);
     pauseMin(art, this);
     toggleMix(art, this);
@@ -3061,27 +3065,27 @@
 
   var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
 
-  var playBig = "<svg style=\"width: 60px; height: 60px; filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\" >\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16   C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\" id=\"video\"/>\n</svg>";
+  var playBig = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"60\" width=\"60\" style=\"filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\">\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16 C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\"/>\n</svg>";
 
-  var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
+  var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
 
-  var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
+  var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
 
-  var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path><path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
+  var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path>\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
 
-  var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
+  var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
 
-  var subtitle = "<svg style=\"width: 100%; height: 100%\" viewBox=\"0 0 48 48\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
+  var subtitle = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 48 48\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
 
-  var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 50 50\" style=\"width: 100%; height: 100%\">\n\t<g id=\"surface1\">\n\t\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n\t</g>\n</svg>\n";
+  var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 50 50\">\n\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n</svg>\n";
 
-  var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" style=\"width: 100%; height: 100%\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
+  var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
-  var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"  style=\"width: 80%; height: 80%\">\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.454,172.808L132.421,68.789l43.184-43.184C185.014,16.197,178.365,0,165,0H15C6.709,0,0,6.709,0,15v150\r\n\t\t\tc0,13.241,16.066,20.112,25.606,10.606l43.198-43.169l104.004,104.018c5.856,5.856,15.351,5.859,21.209,0.001l42.437-42.437\r\n\t\t\tC242.286,188.187,242.334,178.688,236.454,172.808z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M497,0H347c-13.361,0-20.018,16.193-10.606,25.605l43.184,43.184L275.544,172.792c-5.844,5.844-5.868,15.358,0,21.226\r\n\t\t\tl42.437,42.437c5.86,5.86,15.352,5.859,21.211,0l104.019-104.034l43.184,43.184C495.93,185.141,512,178.23,512,165V15\r\n\t\t\tC512,6.709,505.291,0,497,0z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M486.396,336.393l-43.184,43.184L339.193,275.544c-5.856-5.856-15.349-5.862-21.211,0l-42.437,42.437\r\n\t\t\tc-5.868,5.868-5.844,15.382,0,21.226l104.034,104.004l-43.184,43.184C326.986,495.803,333.635,512,347,512h150\r\n\t\t\tc8.291,0,15-6.709,15-15V347C512,333.639,495.807,326.982,486.396,336.393z\"/>\r\n\t</g>\r\n</g>\r\n<g>\r\n\t<g>\r\n\t\t<path d=\"M236.456,317.983l-42.437-42.437c-5.625-5.625-15.586-5.625-21.211,0L68.789,379.579l-43.184-43.184\r\n\t\t\tC16.283,327.04,0,333.563,0,347v150c0,8.291,6.709,15,15,15h150c13.361,0,20.018-16.193,10.606-25.605l-43.184-43.184\r\n\t\t\tl104.034-104.017C242.336,333.314,242.289,323.816,236.456,317.983z\"/>\r\n\t</g>\r\n</g>\r\n</svg>\r\n";
+  var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\r\n\t<path d=\"m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z\"></path>\r\n\t<path d=\"m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z\"></path>\r\n\t<path d=\"m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z\"></path>\r\n\t<path d=\"M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z\"></path>\r\n</svg>";
 
-  var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" style=\"width: 80%; height: 80%\">\r\n\t<path d=\"M4,18h14V4H4V18z M6,6h10v10H6V6z\"/>\r\n\t<polygon points=\"2,16 0,16 0,22 6,22 6,20 2,20\"/>\r\n\t<polygon points=\"2,2 6,2 6,0 0,0 0,6 2,6\"/>\r\n\t<polygon points=\"20,20 16,20 16,22 22,22 22,16 20,16\"/>\r\n\t<polygon points=\"16,0 16,2 20,2 20,6 22,6 22,0\"/>\r\n</svg>\r\n";
+  var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"36\" width=\"36\">\r\n\t<path d=\"m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z\" fill-rule=\"evenodd\"></path>\r\n</svg>";
 
-  var pip = "<svg viewBox=\"0 0 36 36\" style=\"width: 100%; height: 100%\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\" fill=\"#fff\" id=\"ytp-id-20\"></path>\n</svg>";
+  var pip = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
   var icons = {
     loading: loading,
@@ -3241,10 +3245,10 @@
         });
         art.on('video:playing', function () {
           setStyle(_this.$play, 'display', 'none');
-          setStyle(_this.$pause, 'display', 'block');
+          setStyle(_this.$pause, 'display', 'flex');
         });
         art.on('video:pause', function () {
-          setStyle(_this.$play, 'display', 'block');
+          setStyle(_this.$play, 'display', 'flex');
           setStyle(_this.$pause, 'display', 'none');
         });
       }
@@ -3454,20 +3458,13 @@
     createClass(Time, [{
       key: "apply",
       value: function apply(art, $control) {
-        $control.innerHTML = '00:00 / 00:00';
-
-        function setTime() {
+        function getTime() {
           $control.innerHTML = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
         }
 
-        art.on('video:canplay', function () {
-          setTime();
-        });
-        art.on('video:timeupdate', function () {
-          setTime();
-        });
-        art.on('video:seeking', function () {
-          setTime();
+        getTime();
+        ['video:loadedmetadata', 'video:timeupdate', 'video:progress'].forEach(function (event) {
+          art.on(event, getTime);
         });
       }
     }]);
@@ -3505,9 +3502,9 @@
         art.on('volume', function (percentage) {
           if (percentage === 0) {
             setStyle(_this.$volume, 'display', 'none');
-            setStyle(_this.$volumeClose, 'display', 'block');
+            setStyle(_this.$volumeClose, 'display', 'flex');
           } else {
-            setStyle(_this.$volume, 'display', 'block');
+            setStyle(_this.$volume, 'display', 'flex');
             setStyle(_this.$volumeClose, 'display', 'none');
           }
         });
@@ -4833,25 +4830,29 @@
   /*#__PURE__*/
   function () {
     function Hotkey(art) {
+      var _this = this;
+
       classCallCheck(this, Hotkey);
 
       this.art = art;
 
       if (this.art.option.hotkey) {
-        this.init();
+        this.art.on('firstCanplay', function () {
+          _this.init();
+        });
       }
     }
 
     createClass(Hotkey, [{
       key: "init",
       value: function init() {
-        var _this = this;
+        var _this2 = this;
 
         var _this$art = this.art,
             player = _this$art.player,
             proxy = _this$art.events.proxy;
         proxy(window, 'keydown', function (event) {
-          if (_this.art.isFocus) {
+          if (_this2.art.isFocus) {
             var tag = document.activeElement.tagName.toUpperCase();
             var editable = document.activeElement.getAttribute('contenteditable');
 
@@ -5108,6 +5109,8 @@
   /*#__PURE__*/
   function () {
     function Setting(art) {
+      var _this = this;
+
       classCallCheck(this, Setting);
 
       id$3 = 0;
@@ -5115,20 +5118,22 @@
       this.state = false;
 
       if (art.option.setting) {
-        this.init();
+        this.art.on('firstCanplay', function () {
+          _this.init();
+        });
       }
     }
 
     createClass(Setting, [{
       key: "init",
       value: function init() {
-        var _this = this;
+        var _this2 = this;
 
         var _this$art = this.art,
             $settingClose = _this$art.refs.$settingClose,
             proxy = _this$art.events.proxy;
         proxy($settingClose, 'click', function () {
-          _this.hide();
+          _this2.hide();
         });
         this.add(new Flip({
           name: 'flip',
@@ -5345,7 +5350,7 @@
       key: "DEFAULTS",
       get: function get() {
         return {
-          container: '.artplayer',
+          container: '#artplayer',
           url: '',
           poster: '',
           title: '',

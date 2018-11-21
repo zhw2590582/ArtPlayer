@@ -8,7 +8,9 @@ export default class Setting {
     this.art = art;
     this.state = false;
     if (art.option.setting) {
-      this.init();
+      this.art.on('firstCanplay', () => {
+        this.init();
+      });
     }
   }
 

@@ -6,22 +6,13 @@ export default class Time {
   }
 
   apply(art, $control) {
-    $control.innerHTML = '00:00 / 00:00';
-
-    function setTime() {
+    function getTime() {
       $control.innerHTML = `${secondToTime(art.player.currentTime)} / ${secondToTime(art.player.duration)}`;
     }
 
-    art.on('video:canplay', () => {
-      setTime();
-    });
-
-    art.on('video:timeupdate', () => {
-      setTime();
-    });
-
-    art.on('video:seeking', () => {
-      setTime();
+    getTime();
+    ['video:loadedmetadata', 'video:timeupdate', 'video:progress'].forEach(event => {
+      art.on(event, getTime);
     });
   }
 }

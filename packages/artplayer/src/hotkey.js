@@ -2,7 +2,9 @@ export default class Hotkey {
   constructor(art) {
     this.art = art;
     if (this.art.option.hotkey) {
-      this.init();
+      this.art.on('firstCanplay', () => {
+        this.init();
+      });
     }
   }
 
