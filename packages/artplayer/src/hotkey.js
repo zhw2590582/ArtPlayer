@@ -10,7 +10,6 @@ export default class Hotkey {
 
   init() {
     const { player, events: { proxy } } = this.art;
-
     proxy(window, 'keydown', event => {
       if (this.art.isFocus) {
         const tag = document.activeElement.tagName.toUpperCase();
@@ -21,6 +20,7 @@ export default class Hotkey {
           editable !== '' &&
           editable !== 'true'
         ) {
+          this.art.emit('hotkey', event);
           switch (event.keyCode) {
             case 39:
               event.preventDefault();

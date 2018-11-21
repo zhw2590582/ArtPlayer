@@ -30,10 +30,10 @@ export default class Setting {
   }
 
   add(setting, callback) {
-    const { refs, i18n } = this.art;
     const { option } = setting;
     if (option && !option.disable) {
       id++;
+      const { refs, i18n } = this.art;
       const name = option.name || `setting${id}`;
       const title = option.title || name;
       const $setting = document.createElement('div');
@@ -41,9 +41,10 @@ export default class Setting {
       append($setting, `<div class="art-setting-header">${i18n.get(title)}</div>`);
       append($setting, '<div class="art-setting-body"></div>');
       setting.apply && setting.apply(this.art, $setting);
-      callback && callback($setting);
-      this[name] = $setting;
       insertByIndex(refs.$settingBody, $setting, option.index || id);
+      this[name] = $setting;
+      callback && callback($setting);
+      this.art.emit('setting:add', $setting);
     }
   }
 

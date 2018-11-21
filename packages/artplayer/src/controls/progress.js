@@ -32,8 +32,8 @@ export default class Progress {
     this.$tip = $control.querySelector('.art-progress-tip');
 
     highlight.forEach(item => {
-      const left = Number(item.time || 0) / player.duration;
-      append(this.$highlight, `<span data-text="${item.text || ''}" data-time="${item.time || 0}" style="left: ${left * 100}%"></span>`);
+      const left = clamp(item.time, 0, player.duration) / player.duration * 100;
+      append(this.$highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`);
     });
 
     this.set('loaded', player.loaded);
@@ -78,7 +78,7 @@ export default class Progress {
     proxy(document, 'mousemove', event => {
       if (this.isDroging) {
         const { second, percentage } = this.getPosFromEvent(event);
-        this.$indicator.classList.add('show-indicator');
+        this.$indicator.classList.add('art-show-indicator');
         this.set('played', percentage);
         player.seek(second);
       }
@@ -87,7 +87,7 @@ export default class Progress {
     proxy(document, 'mouseup', () => {
       if (this.isDroging) {
         this.isDroging = false;
-        this.$indicator.classList.remove('show-indicator');
+        this.$indicator.classList.remove('art-show-indicator');
       }
     });
   }

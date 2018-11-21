@@ -12,7 +12,7 @@ export default function volumeMix(art, player) {
         if ($video.volume !== 0) {
           storage.set('volume', $video.volume);
         }
-        art.emit('volume', $video.volume);
+        art.emit('volumeChange', $video.volume);
       }
     }
   });

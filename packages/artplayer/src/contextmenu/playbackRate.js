@@ -24,7 +24,7 @@ export default function playbackRate(art) {
       }
     },
     callback: $menu => {
-      art.on('playbackRate', rate => {
+      art.on('playbackRateChange', rate => {
         const $current = Array.from($menu.querySelectorAll('span')).find(
           item => Number(item.dataset.rate) === rate
         );

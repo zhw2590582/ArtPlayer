@@ -21,7 +21,7 @@ export default function aspectRatio(art) {
       }
     },
     callback: $menu => {
-      art.on('aspectRatio', ratio => {
+      art.on('aspectRatioChange', ratio => {
         const $current = Array.from($menu.querySelectorAll('span')).find(
           item => item.dataset.ratio === ratio.join(':')
         );

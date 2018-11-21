@@ -44,7 +44,7 @@ export default function pipMix(art, player) {
       player.fullscreenWebExit();
       player.aspectRatioRemove();
       player.playbackRateRemove();
-      art.emit('pip', true);
+      art.emit('pipEnabled');
     }
   });
 
@@ -59,7 +59,7 @@ export default function pipMix(art, player) {
         player.fullscreenWebExit();
         player.aspectRatioRemove();
         player.playbackRateRemove();
-        art.emit('pip', false);
+        art.emit('pipExit');
       }
     }
   });

@@ -5,7 +5,7 @@ export default function pauseMin(art, player) {
     value: () => {
       $video.pause();
       notice.show(i18n.get('Pause'));
-      art.emit('pause', $video);
+      art.emit('pause');
     }
   });
 }

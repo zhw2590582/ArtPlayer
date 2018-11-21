@@ -991,7 +991,7 @@
         }
 
         notice.show(i18n.get('Play'));
-        art.emit('play', $video);
+        art.emit('play');
       }
     });
   }
@@ -1004,7 +1004,7 @@
       value: function value() {
         $video.pause();
         notice.show(i18n.get('Pause'));
-        art.emit('pause', $video);
+        art.emit('pause');
       }
     });
   }
@@ -1056,7 +1056,7 @@
             storage.set('volume', $video.volume);
           }
 
-          art.emit('volume', $video.volume);
+          art.emit('volumeChange', $video.volume);
         }
       }
     });
@@ -1128,7 +1128,7 @@
         $video.playbackRate = newRate;
         $player.dataset.playbackRate = newRate;
         notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate === 1 ? i18n.get('Normal') : "".concat(newRate, "x")));
-        art.emit('playbackRate', newRate);
+        art.emit('playbackRateChange', newRate);
       }
     });
     Object.defineProperty(player, 'playbackRateRemove', {
@@ -1136,6 +1136,7 @@
         if (player.$playbackRateState) {
           player.playbackRate(1);
           delete $player.dataset.playbackRate;
+          art.emit('playbackRateRemove');
         }
       }
     });
@@ -1145,6 +1146,7 @@
 
         if (playbackRate) {
           player.playbackRate(Number(playbackRate));
+          art.emit('playbackRateReset');
         }
       }
     });
@@ -1192,7 +1194,7 @@
         }
 
         notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratioName));
-        art.emit('aspectRatio', ratio);
+        art.emit('aspectRatioChange', ratio);
       }
     });
     Object.defineProperty(player, 'aspectRatioRemove', {
@@ -1202,6 +1204,7 @@
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);
           delete $player.dataset.aspectRatio;
+          art.emit('aspectRatioRemove');
         }
       }
     });
@@ -1211,6 +1214,7 @@
 
         if (aspectRatio) {
           player.aspectRatio(aspectRatio.split(':'));
+          art.emit('aspectRatioReset');
         }
       }
     });
@@ -1218,10 +1222,10 @@
 
   function screenshotMix(art, player) {
     var option = art.option,
-        notice = art.notice;
+        notice = art.notice,
+        $video = art.refs.$video;
 
     function captureFrame() {
-      var $video = art.refs.$video;
       var canvas = document.createElement('canvas');
       canvas.width = $video.videoWidth;
       canvas.height = $video.videoHeight;
@@ -1234,16 +1238,22 @@
       document.body.appendChild(elink);
       elink.click();
       document.body.removeChild(elink);
+      return dataUri;
     }
 
     Object.defineProperty(player, 'screenshot', {
       value: function value() {
+        var crossOrigin = $video.crossOrigin;
+
         try {
-          captureFrame();
-          art.emit('screenshot');
+          $video.crossOrigin = 'anonymous';
+          var dataUri = captureFrame();
+          art.emit('screenshot', dataUri);
         } catch (error) {
           notice.show(error);
           console.warn(error);
+        } finally {
+          $video.crossOrigin = crossOrigin;
         }
       }
     });
@@ -2882,7 +2892,7 @@
         player.fullscreenWebExit();
         player.aspectRatioRemove();
         player.playbackRateRemove();
-        art.emit('pip', true);
+        art.emit('pipEnabled');
       }
     });
     Object.defineProperty(player, 'pipExit', {
@@ -2896,7 +2906,7 @@
           player.fullscreenWebExit();
           player.aspectRatioRemove();
           player.playbackRateRemove();
-          art.emit('pip', false);
+          art.emit('pipExit');
         }
       }
     });
@@ -2960,6 +2970,8 @@
           setStyle($player, 'width', '100%');
           setStyle($player, 'height', "".concat(_percentage, "%"));
         }
+
+        art.emit('autoSizeChange');
       }
     });
     Object.defineProperty(player, 'autoSizeRemove', {
@@ -2967,6 +2979,7 @@
         $container.classList.remove('artplayer-auto-size');
         setStyle($player, 'width', null);
         setStyle($player, 'height', null);
+        art.emit('autoSizeRemove');
       }
     });
   }
@@ -2978,15 +2991,17 @@
       }
     });
     Object.defineProperty(player, 'flip', {
-      value: function value(dir) {
-        var dirList = ['normal', 'horizontal', 'vertical'];
-        errorHandle(dirList.includes(dir), "The 'angle' need to be one of '[normal, horizontal, vertical]', but got ".concat(dir));
-        art.refs.$player.dataset.flip = dir;
+      value: function value(flip) {
+        var flipList = ['normal', 'horizontal', 'vertical'];
+        errorHandle(flipList.includes(flip), "The 'angle' need to be one of '[normal, horizontal, vertical]', but got ".concat(flip));
+        art.refs.$player.dataset.flip = flip;
+        art.emit('flipChange', flip);
       }
     });
     Object.defineProperty(player, 'flipRemove', {
       value: function value() {
         delete art.refs.$player.dataset.flip;
+        art.emit('flipRemove');
       }
     });
   }
@@ -3091,7 +3106,20 @@
 
   var next = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z\"></path>\n</svg>";
 
-  var icons = {
+  function creatDomFromSvg(map) {
+    var result = {};
+    Object.keys(map).forEach(function (name) {
+      var tmp = document.createElement('div');
+      tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(name, "\">").concat(map[name], "</i>");
+
+      var _tmp$childNodes = slicedToArray(tmp.childNodes, 1);
+
+      result[name] = _tmp$childNodes[0];
+    });
+    return result;
+  }
+
+  var icons = creatDomFromSvg({
     loading: loading,
     playBig: playBig,
     play: play,
@@ -3106,22 +3134,7 @@
     pip: pip,
     prev: prev,
     next: next
-  };
-
-  function creatDomFromSvg(map) {
-    var result = {};
-    Object.keys(map).forEach(function (name) {
-      var tmp = document.createElement('div');
-      tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(name, "\">").concat(map[name], "</i>");
-
-      var _tmp$childNodes = slicedToArray(tmp.childNodes, 1);
-
-      result[name] = _tmp$childNodes[0];
-    });
-    return result;
-  }
-
-  var icons$1 = creatDomFromSvg(icons);
+  });
 
   var Fullscreen =
   /*#__PURE__*/
@@ -3140,7 +3153,7 @@
         var proxy = art.events.proxy,
             i18n = art.i18n,
             player = art.player;
-        this.$fullscreen = append($control, icons$1.fullscreen);
+        this.$fullscreen = append($control, icons.fullscreen);
         tooltip(this.$fullscreen, i18n.get('Fullscreen'));
         proxy($control, 'click', function () {
           player.fullscreenToggle();
@@ -3176,7 +3189,7 @@
         var proxy = art.events.proxy,
             i18n = art.i18n,
             player = art.player;
-        this.$fullscreenWeb = append($control, icons$1.fullscreenWeb);
+        this.$fullscreenWeb = append($control, icons.fullscreenWeb);
         tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
         proxy($control, 'click', function () {
           player.fullscreenWebToggle();
@@ -3210,7 +3223,7 @@
         var proxy = art.events.proxy,
             i18n = art.i18n,
             player = art.player;
-        this.$pip = append($control, icons$1.pip);
+        this.$pip = append($control, icons.pip);
         tooltip(this.$pip, i18n.get('Mini player'));
         proxy($control, 'click', function () {
           player.pipEnabled();
@@ -3238,8 +3251,8 @@
         var proxy = art.events.proxy,
             player = art.player,
             i18n = art.i18n;
-        this.$play = append($control, icons$1.play);
-        this.$pause = append($control, icons$1.pause);
+        this.$play = append($control, icons.play);
+        this.$pause = append($control, icons.pause);
         tooltip(this.$play, i18n.get('Play'));
         tooltip(this.$pause, i18n.get('Pause'));
         setStyle(this.$pause, 'display', 'none');
@@ -3293,8 +3306,8 @@
         this.$indicator = $control.querySelector('.art-progress-indicator');
         this.$tip = $control.querySelector('.art-progress-tip');
         highlight.forEach(function (item) {
-          var left = Number(item.time || 0) / player.duration;
-          append(_this.$highlight, "<span data-text=\"".concat(item.text || '', "\" data-time=\"").concat(item.time || 0, "\" style=\"left: ").concat(left * 100, "%\"></span>"));
+          var left = clamp(item.time, 0, player.duration) / player.duration * 100;
+          append(_this.$highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left, "%\"></span>"));
         });
         this.set('loaded', player.loaded);
         this.art.on('video:progress', function () {
@@ -3338,7 +3351,7 @@
                 second = _this$getPosFromEvent2.second,
                 percentage = _this$getPosFromEvent2.percentage;
 
-            _this.$indicator.classList.add('show-indicator');
+            _this.$indicator.classList.add('art-show-indicator');
 
             _this.set('played', percentage);
 
@@ -3349,7 +3362,7 @@
           if (_this.isDroging) {
             _this.isDroging = false;
 
-            _this.$indicator.classList.remove('show-indicator');
+            _this.$indicator.classList.remove('art-show-indicator');
           }
         });
       }
@@ -3433,17 +3446,17 @@
         var proxy = art.events.proxy,
             i18n = art.i18n,
             subtitle = art.subtitle;
-        this.$subtitle = append($control, icons$1.subtitle);
+        this.$subtitle = append($control, icons.subtitle);
         tooltip(this.$subtitle, i18n.get('Hide subtitle'));
         proxy($control, 'click', function () {
           subtitle.toggle();
         });
         art.on('subtitle:show', function () {
-          setStyle(_this.$subtitle, 'opacity', '0.8');
+          setStyle(_this.$subtitle, 'opacity', '1');
           tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
         });
         art.on('subtitle:hide', function () {
-          setStyle(_this.$subtitle, 'opacity', '1');
+          setStyle(_this.$subtitle, 'opacity', '0.8');
           tooltip(_this.$subtitle, i18n.get('Show subtitle'));
         });
       }
@@ -3465,7 +3478,11 @@
       key: "apply",
       value: function apply(art, $control) {
         function getTime() {
-          $control.innerHTML = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
+          var newTime = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
+
+          if (newTime !== $control.innerHTML) {
+            $control.innerHTML = newTime;
+          }
         }
 
         getTime();
@@ -3499,13 +3516,13 @@
             player = art.player,
             i18n = art.i18n,
             storage = art.storage;
-        this.$volume = append($control, icons$1.volume);
-        this.$volumeClose = append($control, icons$1.volumeClose);
+        this.$volume = append($control, icons.volume);
+        this.$volumeClose = append($control, icons.volumeClose);
         this.$volumePanel = append($control, '<div class="art-volume-panel"></div>');
         this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
         tooltip(this.$volume, i18n.get('Mute'));
         setStyle(this.$volumeClose, 'display', 'none');
-        art.on('volume', function (percentage) {
+        art.on('volumeChange', function (percentage) {
           if (percentage === 0) {
             setStyle(_this.$volume, 'display', 'none');
             setStyle(_this.$volumeClose, 'display', 'flex');
@@ -3593,7 +3610,7 @@
         var proxy = art.events.proxy,
             i18n = art.i18n,
             setting = art.setting;
-        this.$setting = append($control, icons$1.setting);
+        this.$setting = append($control, icons.setting);
         tooltip(this.$setting, i18n.get('Show setting'));
         proxy($control, 'click', function () {
           setting.toggle();
@@ -3631,13 +3648,14 @@
         this.art = art;
         errorHandle(art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
         var $progress = art.refs.$progress,
-            proxy = art.events.proxy;
+            _art$events = art.events,
+            proxy = _art$events.proxy,
+            loadImg = _art$events.loadImg;
         this.$control = $control;
         proxy($progress, 'mousemove', function (event) {
           if (!_this.loading) {
             _this.loading = true;
-
-            _this.load(_this.art.option.thumbnails.url).then(function () {
+            loadImg(_this.art.option.thumbnails.url).then(function () {
               _this.isLoad = true;
             });
           }
@@ -3650,26 +3668,6 @@
         });
         proxy($progress, 'mouseout', function () {
           setStyle($control, 'display', 'none');
-        });
-      }
-    }, {
-      key: "load",
-      value: function load(url) {
-        var proxy = this.art.events.proxy;
-        return new Promise(function (resolve, reject) {
-          var image = new Image();
-          image.src = url;
-
-          if (image.complete) {
-            return resolve(image);
-          }
-
-          proxy(image, 'load', function () {
-            return resolve(image);
-          });
-          proxy(image, 'error', function () {
-            return reject(image);
-          });
         });
       }
     }, {
@@ -3725,7 +3723,7 @@
         var proxy = art.events.proxy,
             i18n = art.i18n,
             player = art.player;
-        this.$screenshot = append($control, icons$1.screenshot);
+        this.$screenshot = append($control, icons.screenshot);
         tooltip(this.$screenshot, i18n.get('Screenshot'));
         proxy(this.$screenshot, 'click', function () {
           player.screenshot();
@@ -3766,9 +3764,9 @@
         }).join('');
         var $qualitys = append($control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
         hover($control, function () {
-          $control.classList.add('hover');
+          $control.classList.add('art-quality-hover');
         }, function () {
-          $control.classList.remove('hover');
+          $control.classList.remove('art-quality-hover');
         });
         proxy($qualitys, 'click', function (event) {
           var index = Number(event.target.dataset.index);
@@ -3963,7 +3961,7 @@
         }
       },
       callback: function callback($menu) {
-        art.on('playbackRate', function (rate) {
+        art.on('playbackRateChange', function (rate) {
           var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
             return Number(item.dataset.rate) === rate;
           });
@@ -3992,7 +3990,7 @@
         }
       },
       callback: function callback($menu) {
-        art.on('aspectRatio', function (ratio) {
+        art.on('aspectRatioChange', function (ratio) {
           var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
             return item.dataset.ratio === ratio.join(':');
           });
@@ -4783,6 +4781,7 @@
       this.destroyEvents = [];
       this.proxy = this.proxy.bind(this);
       this.hover = this.hover.bind(this);
+      this.loadImg = this.loadImg.bind(this);
       clickInit(art, this);
       hoverInit(art, this);
       mousemoveInitInit(art, this);
@@ -4814,6 +4813,36 @@
       value: function hover(target, mouseenter, mouseleave) {
         this.proxy(target, 'mouseenter', mouseenter);
         this.proxy(target, 'mouseleave', mouseleave);
+      }
+    }, {
+      key: "loadImg",
+      value: function loadImg(img) {
+        var _this2 = this;
+
+        return new Promise(function (resolve, reject) {
+          var image;
+
+          if (img instanceof HTMLImageElement) {
+            image = img;
+          } else if (typeof img === 'string') {
+            image = new Image();
+            image.src = img;
+          } else {
+            return reject(img);
+          }
+
+          if (image.complete) {
+            return resolve(image);
+          }
+
+          _this2.proxy(image, 'load', function () {
+            return resolve(image);
+          });
+
+          _this2.proxy(image, 'error', function () {
+            return reject(image);
+          });
+        });
       }
     }, {
       key: "destroy",
@@ -4858,6 +4887,8 @@
             var editable = document.activeElement.getAttribute('contenteditable');
 
             if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
+              _this2.art.emit('hotkey', event);
+
               switch (event.keyCode) {
                 case 39:
                   event.preventDefault();
@@ -4975,7 +5006,7 @@
 
       this.art = art;
       var $loading = art.refs.$loading;
-      append($loading, icons$1.loading);
+      append($loading, icons.loading);
     }
 
     createClass(Loading, [{
@@ -5049,7 +5080,7 @@
 
       this.art = art;
       var $mask = art.refs.$mask;
-      append($mask, icons$1.playBig);
+      append($mask, icons.playBig);
     }
 
     createClass(Mask, [{
@@ -5083,6 +5114,8 @@
     createClass(Flip, [{
       key: "apply",
       value: function apply(art, $setting) {
+        var _this = this;
+
         var i18n = art.i18n,
             proxy = art.events.proxy,
             player = art.player;
@@ -5095,8 +5128,13 @@
 
           if (flip) {
             player.flip(flip);
-            inverseClass(target.parentElement, 'current');
           }
+        });
+        art.on('flipChange', function (flip) {
+          var $current = Array.from(_this.$btns.querySelectorAll('span')).find(function (item) {
+            return item.dataset.flip === flip;
+          });
+          inverseClass($current.parentElement, 'current');
         });
       }
     }]);
@@ -5146,13 +5184,13 @@
     }, {
       key: "add",
       value: function add(setting, callback) {
-        var _this$art2 = this.art,
-            refs = _this$art2.refs,
-            i18n = _this$art2.i18n;
         var option = setting.option;
 
         if (option && !option.disable) {
           id$3++;
+          var _this$art2 = this.art,
+              refs = _this$art2.refs,
+              i18n = _this$art2.i18n;
           var name = option.name || "setting".concat(id$3);
           var title = option.title || name;
           var $setting = document.createElement('div');
@@ -5160,9 +5198,10 @@
           append($setting, "<div class=\"art-setting-header\">".concat(i18n.get(title), "</div>"));
           append($setting, '<div class="art-setting-body"></div>');
           setting.apply && setting.apply(this.art, $setting);
-          callback && callback($setting);
-          this[name] = $setting;
           insertByIndex(refs.$settingBody, $setting, option.index || id$3);
+          this[name] = $setting;
+          callback && callback($setting);
+          this.art.emit('setting:add', $setting);
         }
       }
     }, {

@@ -15,9 +15,9 @@ export default class Quality {
     const $qualitys = append($control, `<div class="art-qualitys">${qualityList}</div>`);
 
     hover($control, () => {
-      $control.classList.add('hover');
+      $control.classList.add('art-quality-hover');
     }, () => {
-      $control.classList.remove('hover');
+      $control.classList.remove('art-quality-hover');
     });
 
     proxy($qualitys, 'click', event => {

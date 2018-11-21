@@ -9,6 +9,7 @@ export default class Events {
     this.destroyEvents = [];
     this.proxy = this.proxy.bind(this);
     this.hover = this.hover.bind(this);
+    this.loadImg = this.loadImg.bind(this);
     clickInit(art, this);
     hoverInit(art, this);
     mousemoveInit(art, this);
@@ -31,6 +32,28 @@ export default class Events {
   hover(target, mouseenter, mouseleave) {
     this.proxy(target, 'mouseenter', mouseenter);
     this.proxy(target, 'mouseleave', mouseleave);
+  }
+
+  loadImg(img) {
+    return new Promise((resolve, reject) => {
+      let image;
+
+      if (img instanceof HTMLImageElement) {
+        image = img;
+      } else if (typeof img === 'string') {
+        image = new Image();
+        image.src = img;
+      } else {
+        return reject(img);
+      }
+
+      if (image.complete) {
+        return resolve(image);
+      }
+
+      this.proxy(image, 'load', () => resolve(image));
+      this.proxy(image, 'error', () => reject(image));
+    });
   }
 
   destroy() {

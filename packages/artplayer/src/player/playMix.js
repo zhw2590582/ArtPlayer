@@ -18,7 +18,7 @@ export default function playMix(art, player) {
       }
 
       notice.show(i18n.get('Play'));
-      art.emit('play', $video);
+      art.emit('play');
     }
   });
 }

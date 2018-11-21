@@ -16,7 +16,7 @@ export default class Volume {
     tooltip(this.$volume, i18n.get('Mute'));
     setStyle(this.$volumeClose, 'display', 'none');
 
-    art.on('volume', percentage => {
+    art.on('volumeChange', percentage => {
       if (percentage === 0) {
         setStyle(this.$volume, 'display', 'none');
         setStyle(this.$volumeClose, 'display', 'flex');

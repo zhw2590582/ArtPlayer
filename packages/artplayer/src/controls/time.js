@@ -7,7 +7,10 @@ export default class Time {
 
   apply(art, $control) {
     function getTime() {
-      $control.innerHTML = `${secondToTime(art.player.currentTime)} / ${secondToTime(art.player.duration)}`;
+      const newTime = `${secondToTime(art.player.currentTime)} / ${secondToTime(art.player.duration)}`;
+      if (newTime !== $control.innerHTML) {
+        $control.innerHTML = newTime;
+      }
     }
 
     getTime();

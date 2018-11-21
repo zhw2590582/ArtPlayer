@@ -13,7 +13,7 @@ export default function playbackRateMix(art, player) {
       $video.playbackRate = newRate;
       $player.dataset.playbackRate = newRate;
       notice.show(`${i18n.get('Rate')}: ${newRate === 1 ? i18n.get('Normal') : `${newRate}x`}`);
-      art.emit('playbackRate', newRate);
+      art.emit('playbackRateChange', newRate);
     }
   });
 
@@ -22,6 +22,7 @@ export default function playbackRateMix(art, player) {
       if (player.$playbackRateState) {
         player.playbackRate(1);
         delete $player.dataset.playbackRate;
+        art.emit('playbackRateRemove');
       }
     }
   });
@@ -31,6 +32,7 @@ export default function playbackRateMix(art, player) {
       const { playbackRate } = $player.dataset;
       if (playbackRate) {
         player.playbackRate(Number(playbackRate));
+        art.emit('playbackRateReset');
       }
     }
   });

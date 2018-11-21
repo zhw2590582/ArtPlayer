@@ -23,6 +23,7 @@ export default function resizeMix(art, player) {
         setStyle($player, 'width', '100%');
         setStyle($player, 'height', `${percentage}%`);
       }
+      art.emit('autoSizeChange');
     }
   });
 
@@ -31,6 +32,7 @@ export default function resizeMix(art, player) {
       $container.classList.remove('artplayer-auto-size');
       setStyle($player, 'width', null);
       setStyle($player, 'height', null);
+      art.emit('autoSizeRemove');
     }
   });
 }

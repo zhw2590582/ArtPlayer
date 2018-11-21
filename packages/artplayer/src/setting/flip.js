@@ -28,8 +28,14 @@ export default class Flip {
       const { flip } = target.dataset;
       if (flip) {
         player.flip(flip);
-        inverseClass(target.parentElement, 'current');
       }
+    });
+
+    art.on('flipChange', flip => {
+      const $current = Array.from(this.$btns.querySelectorAll('span')).find(
+        item => item.dataset.flip === flip
+      );
+      inverseClass($current.parentElement, 'current');
     });
   }
 }

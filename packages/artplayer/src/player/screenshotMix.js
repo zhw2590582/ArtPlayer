@@ -1,10 +1,9 @@
 import { setStyle, secondToTime } from '../utils';
 
 export default function screenshotMix(art, player) {
-  const { option, notice } = art;
+  const { option, notice, refs: { $video } } = art;
 
   function captureFrame() {
-    const { $video } = art.refs;
     const canvas = document.createElement('canvas');
     canvas.width = $video.videoWidth;
     canvas.height = $video.videoHeight;
@@ -17,16 +16,21 @@ export default function screenshotMix(art, player) {
     document.body.appendChild(elink);
     elink.click();
     document.body.removeChild(elink);
+    return dataUri;
   }
 
   Object.defineProperty(player, 'screenshot', {
     value: () => {
+      const { crossOrigin } = $video;
       try {
-        captureFrame();
-        art.emit('screenshot');
+        $video.crossOrigin = 'anonymous';
+        const dataUri = captureFrame();
+        art.emit('screenshot', dataUri);
       } catch (error) {
         notice.show(error);
         console.warn(error);
+      } finally {
+        $video.crossOrigin = crossOrigin;
       }
     }
   });

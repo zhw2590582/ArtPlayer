@@ -10,13 +10,13 @@ export default class Thumbnails {
   apply(art, $control) {
     this.art = art;
     errorHandle(art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
-    const { refs: { $progress }, events: { proxy } } = art;
+    const { refs: { $progress }, events: { proxy, loadImg } } = art;
     this.$control = $control;
 
     proxy($progress, 'mousemove', event => {
       if (!this.loading) {
         this.loading = true;
-        this.load(this.art.option.thumbnails.url).then(() => {
+        loadImg(this.art.option.thumbnails.url).then(() => {
           this.isLoad = true;
         });
       }
@@ -29,21 +29,6 @@ export default class Thumbnails {
 
     proxy($progress, 'mouseout', () => {
       setStyle($control, 'display', 'none');
-    });
-  }
-
-  load(url) {
-    const { proxy } = this.art.events;
-    return new Promise((resolve, reject) => {
-      const image = new Image();
-      image.src = url;
-
-      if (image.complete) {
-        return resolve(image);
-      }
-
-      proxy(image, 'load', () => resolve(image));
-      proxy(image, 'error', () => reject(image));
     });
   }
 
