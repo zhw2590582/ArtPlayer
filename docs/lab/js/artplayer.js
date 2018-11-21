@@ -3087,6 +3087,10 @@
 
   var pip = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
+  var prev = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"m 12,12 h 2 v 12 h -2 z m 3.5,6 8.5,6 V 12 z\"></path>\n</svg>";
+
+  var next = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z\"></path>\n</svg>";
+
   var icons = {
     loading: loading,
     playBig: playBig,
@@ -3099,7 +3103,9 @@
     setting: setting,
     fullscreen: fullscreen,
     fullscreenWeb: fullscreenWeb,
-    pip: pip
+    pip: pip,
+    prev: prev,
+    next: next
   };
 
   function creatDomFromSvg(map) {
@@ -4459,28 +4465,23 @@
 
   function mousemoveInitInit(art, events) {
     var $player = art.refs.$player;
-    var hideCursor = debounce(function () {
+    var autoHide = debounce(function () {
       $player.classList.add('artplayer-hide-cursor');
-    }, 5000);
-    var hideControl = debounce(function () {
       $player.classList.remove('artplayer-hover');
       art.controls.hide();
     }, 5000);
     art.on('hoverleave', function () {
-      hideControl();
-      hideCursor.clearTimeout();
-      $player.classList.remove('artplayer-hide-cursor');
+      if (art.isPlaying) {
+        autoHide();
+      }
     });
     events.proxy($player, 'mousemove', function () {
-      hideControl.clearTimeout();
-      art.controls.show();
+      autoHide.clearTimeout();
       $player.classList.remove('artplayer-hide-cursor');
       art.controls.show();
 
-      if (!art.player.pipState) {
-        hideCursor();
-      } else {
-        hideCursor.clearTimeout();
+      if (!art.player.pipState && art.isPlaying) {
+        autoHide();
       }
     });
   }

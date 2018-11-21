@@ -10,6 +10,8 @@ import setting from './setting.svg';
 import fullscreen from './fullscreen.svg';
 import fullscreenWeb from './fullscreen-web.svg';
 import pip from './pip.svg';
+import prev from './prev.svg';
+import next from './next.svg';
 
 const icons = {
   loading,
@@ -23,7 +25,9 @@ const icons = {
   setting,
   fullscreen,
   fullscreenWeb,
-  pip
+  pip,
+  prev,
+  next
 };
 
 function creatDomFromSvg(map) {
