@@ -5,6 +5,7 @@ node_js:
 
 before_script:
   - npm install
+  - npm run bootstrap
 
 script:
   - npm run lint
