@@ -6,6 +6,8 @@
 
 > ArtPlayer is a modern HTML5 video player
 
+![Alt text](./screenshot.png)
+
 ## Introduction
 
 > TODO...
