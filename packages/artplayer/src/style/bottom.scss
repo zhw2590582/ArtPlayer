@@ -128,9 +128,12 @@
             justify-content: space-between;
             height: 36px;
     
+            .artplayer-controls-left, .artplayer-controls-right {
+                display: flex;
+            }
+
             .art-control {
                 opacity: .9;
-                float: left;
                 font-size: 12px;
                 height: 36px;
                 line-height: 36px;

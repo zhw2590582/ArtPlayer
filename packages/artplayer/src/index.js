@@ -25,11 +25,9 @@ let id = 0;
 class Artplayer extends Emitter {
   constructor(option) {
     super();
-    this.emit('init:start');
     this.option = utils.deepMerge({}, Artplayer.DEFAULTS, option);
     optionValidator(this.option, scheme);
     this.init();
-    this.emit('init:end');
   }
 
   static get version() {

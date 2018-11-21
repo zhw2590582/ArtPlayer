@@ -95,3 +95,21 @@ var art = new Artplayer({
     }
   ]
 });
+
+art.on('resize', $player => {
+  art.controls.quality.show();
+  art.controls.setting.show();
+  art.controls.subtitle.show();
+  art.controls.pip.show();
+
+  var playerWidth = $player.clientWidth;
+  if (playerWidth < 480) {
+    art.controls.quality.hide();
+    art.controls.setting.hide();
+  } 
+  
+  if (playerWidth < 360) {
+    art.controls.subtitle.hide();
+    art.controls.pip.hide();
+  }
+});

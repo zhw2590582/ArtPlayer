@@ -1,4 +1,4 @@
-import { insertByIndex } from '../utils';
+import { insertByIndex, setStyle } from '../utils';
 import Fullscreen from './fullscreen';
 import FullscreenWeb from './fullscreenWeb';
 import Pip from './pip';
@@ -120,6 +120,7 @@ export default class Controls {
       const $control = document.createElement('div');
       $control.classList.value = `art-control art-control-${name}`;
       this.mount(option.position, $control, option.index || id);
+      this.commonMethod(control, $control);
       control.apply && control.apply(this.art, $control);
       callback && callback($control);
       this[name] = control;
@@ -141,6 +142,22 @@ export default class Controls {
       default:
         break;
     }
+  }
+
+  commonMethod(control, $control) {
+    Object.defineProperty(control, 'hide', {
+      value: () => {
+        setStyle($control, 'display', 'none');
+        this.art.emit('control:hide', $control);
+      }
+    });
+
+    Object.defineProperty(control, 'show', {
+      value: () => {
+        setStyle($control, 'display', 'block');
+        this.art.emit('control:show', $control);
+      }
+    });
   }
 
   show() {

@@ -17,7 +17,7 @@ export default function resizeInit(art, events) {
         }
       }
       art.player.aspectRatioReset();
-      art.emit('resize');
+      art.emit('resize', $player);
     });
   });
   resizeObserver.observe($player);

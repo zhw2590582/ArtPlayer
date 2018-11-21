@@ -3895,6 +3895,7 @@
           var $control = document.createElement('div');
           $control.classList.value = "art-control art-control-".concat(name);
           this.mount(option.position, $control, option.index || id);
+          this.commonMethod(control, $control);
           control.apply && control.apply(this.art, $control);
           callback && callback($control);
           this[name] = control;
@@ -3924,6 +3925,26 @@
           default:
             break;
         }
+      }
+    }, {
+      key: "commonMethod",
+      value: function commonMethod(control, $control) {
+        var _this3 = this;
+
+        Object.defineProperty(control, 'hide', {
+          value: function value() {
+            setStyle($control, 'display', 'none');
+
+            _this3.art.emit('control:hide', $control);
+          }
+        });
+        Object.defineProperty(control, 'show', {
+          value: function value() {
+            setStyle($control, 'display', 'block');
+
+            _this3.art.emit('control:show', $control);
+          }
+        });
       }
     }, {
       key: "show",
@@ -4755,7 +4776,7 @@
         }
 
         art.player.aspectRatioReset();
-        art.emit('resize');
+        art.emit('resize', $player);
       });
     });
     resizeObserver.observe($player);
@@ -5289,15 +5310,10 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
-
-      _this.emit('init:start');
-
       _this.option = deepMerge({}, Artplayer.DEFAULTS, option);
       optionValidator(_this.option, scheme);
 
       _this.init();
-
-      _this.emit('init:end');
 
       return _this;
     }
