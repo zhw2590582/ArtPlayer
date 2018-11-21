@@ -1,9 +1,7 @@
 {
   "name": "artplayer",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "ArtPlayer is a modern HTML5 video player",
-  "main": "dist/artplayer.js",
-  "style": "dist/artplayer.css",
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "publish": "lerna publish"

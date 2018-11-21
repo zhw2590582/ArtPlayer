@@ -2,8 +2,15 @@
 
 ## Install
 
+Install with `npm`
+
 ```
-$ npm install --save artplayer
+$ npm install artplayer
+```
+Or install with `yarn`
+
+```
+$ yarn add artplayer
 ```
 
 ```js
@@ -11,7 +18,7 @@ import Artplayer from 'artplayer';
 import 'artplayer/dist/artplayer.css';
 ```
 
-OR umd builds are also available
+Or umd builds are also available
 
 ```html
 <link rel="stylesheet" href="path/to/artplayer.css" />
