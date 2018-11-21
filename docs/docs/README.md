@@ -151,6 +151,8 @@ var art = new Artplayer({
 
 Whether to play automatically, sometimes it doesn't necessarily succeed
 
+More info: [autoplay-policy-changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
+
 [Run Code](/)
 
 ```js
@@ -276,7 +278,9 @@ var art = new Artplayer({
 - Type: `Boolean`
 - Default: `false`
 
-Whether to show pip controller in the bottom
+Whether to show pip controller in the bottom, it will give priority to the native picture-in-picture feature.
+
+More info: [picture-in-picture](https://developers.google.com/web/updates/2017/09/picture-in-picture)
 
 [Run Code](/)
 

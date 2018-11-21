@@ -1,17 +1,71 @@
 import Draggabilly from 'draggabilly';
 import { setStyle, append } from '../utils';
 
-export default function pipMix(art, player) {
-  const { option, i18n, refs: { $player, $pipClose, $pipTitle }, events: { destroyEvents, proxy } } = art;
+function nativePip(art, player) {
+  const {
+    notice,
+    refs: { $video },
+    events: { proxy }
+  } = art;
+
+  $video.disablePictureInPicture = false;
+
+  Object.defineProperty(player, 'pipState', {
+    get: () => document.pictureInPictureElement
+  });
+
+  Object.defineProperty(player, 'pipEnabled', {
+    value: () => {
+      $video.requestPictureInPicture().catch(error => {
+        notice.show(error, true, 3000);
+        console.warn(error);
+      });
+    }
+  });
+
+  Object.defineProperty(player, 'pipExit', {
+    value: () => {
+      document.exitPictureInPicture().catch(error => {
+        notice.show(error, true, 3000);
+        console.warn(error);
+      });
+    }
+  });
+
+  Object.defineProperty(player, 'pipToggle', {
+    value: () => {
+      if (player.pipState) {
+        player.pipExit();
+      } else {
+        player.pipEnabled();
+      }
+    }
+  });
+
+  proxy($video, 'enterpictureinpicture', () => {
+    art.emit('pipEnabled');
+  });
+
+  proxy($video, 'leavepictureinpicture', () => {
+    art.emit('pipExit');
+    if (art.isPlaying) {
+      player.play();
+    }
+  });
+}
+
+function customPip(art, player) {
+  const {
+    option,
+    i18n,
+    refs: { $player, $pipClose, $pipTitle },
+    events: { destroyEvents, proxy }
+  } = art;
   let cachePos = null;
   let draggie = null;
 
   Object.defineProperty(player, 'pipState', {
     get: () => $player.classList.contains('artplayer-pip')
-  });
-
-  Object.defineProperty(player, 'pipDraggie', {
-    get: () => draggie
   });
 
   Object.defineProperty(player, 'pipEnabled', {
@@ -73,4 +127,12 @@ export default function pipMix(art, player) {
       }
     }
   });
+}
+
+export default function pipMix(art, player) {
+  if (document.pictureInPictureEnabled) {
+    nativePip(art, player);
+  } else {
+    customPip(art, player);
+  }
 }

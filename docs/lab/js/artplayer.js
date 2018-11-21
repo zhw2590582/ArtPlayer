@@ -2843,7 +2843,54 @@
   }));
   });
 
-  function pipMix(art, player) {
+  function nativePip(art, player) {
+    var notice = art.notice,
+        $video = art.refs.$video,
+        proxy = art.events.proxy;
+    $video.disablePictureInPicture = false;
+    Object.defineProperty(player, 'pipState', {
+      get: function get() {
+        return document.pictureInPictureElement;
+      }
+    });
+    Object.defineProperty(player, 'pipEnabled', {
+      value: function value() {
+        $video.requestPictureInPicture().catch(function (error) {
+          notice.show(error, true, 3000);
+          console.warn(error);
+        });
+      }
+    });
+    Object.defineProperty(player, 'pipExit', {
+      value: function value() {
+        document.exitPictureInPicture().catch(function (error) {
+          notice.show(error, true, 3000);
+          console.warn(error);
+        });
+      }
+    });
+    Object.defineProperty(player, 'pipToggle', {
+      value: function value() {
+        if (player.pipState) {
+          player.pipExit();
+        } else {
+          player.pipEnabled();
+        }
+      }
+    });
+    proxy($video, 'enterpictureinpicture', function () {
+      art.emit('pipEnabled');
+    });
+    proxy($video, 'leavepictureinpicture', function () {
+      art.emit('pipExit');
+
+      if (art.isPlaying) {
+        player.play();
+      }
+    });
+  }
+
+  function customPip(art, player) {
     var option = art.option,
         i18n = art.i18n,
         _art$refs = art.refs,
@@ -2858,11 +2905,6 @@
     Object.defineProperty(player, 'pipState', {
       get: function get() {
         return $player.classList.contains('artplayer-pip');
-      }
-    });
-    Object.defineProperty(player, 'pipDraggie', {
-      get: function get() {
-        return draggie;
       }
     });
     Object.defineProperty(player, 'pipEnabled', {
@@ -2919,6 +2961,14 @@
         }
       }
     });
+  }
+
+  function pipMix(art, player) {
+    if (document.pictureInPictureEnabled) {
+      nativePip(art, player);
+    } else {
+      customPip(art, player);
+    }
   }
 
   function seekMix$1(art, player) {
