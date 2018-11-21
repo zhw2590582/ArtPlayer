@@ -21,27 +21,27 @@ import autoSizeMix from './autoSizeMix';
 import flipMix from './flipMix';
 
 export default class Player {
-  constructor(art) {
-    mountUrlMix(art, this);
-    eventInit(art, this);
-    attrInit(art, this);
-    playMix(art, this);
-    pauseMin(art, this);
-    toggleMix(art, this);
-    seekMix(art, this);
-    volumeMix(art, this);
-    currentTimeMix(art, this);
-    durationMix(art, this);
-    switchMix(art, this);
-    playbackRateMix(art, this);
-    aspectRatioMix(art, this);
-    screenshotMix(art, this);
-    fullscreenMix(art, this);
-    fullscreenWebMix(art, this);
-    pipMix(art, this);
-    loadedMix(art, this);
-    playedMix(art, this);
-    autoSizeMix(art, this);
-    flipMix(art, this);
-  }
+    constructor(art) {
+        mountUrlMix(art, this);
+        eventInit(art, this);
+        attrInit(art, this);
+        playMix(art, this);
+        pauseMin(art, this);
+        toggleMix(art, this);
+        seekMix(art, this);
+        volumeMix(art, this);
+        currentTimeMix(art, this);
+        durationMix(art, this);
+        switchMix(art, this);
+        playbackRateMix(art, this);
+        aspectRatioMix(art, this);
+        screenshotMix(art, this);
+        fullscreenMix(art, this);
+        fullscreenWebMix(art, this);
+        pipMix(art, this);
+        loadedMix(art, this);
+        playedMix(art, this);
+        autoSizeMix(art, this);
+        flipMix(art, this);
+    }
 }

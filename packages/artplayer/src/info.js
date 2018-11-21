@@ -1,141 +1,146 @@
 import { append, setStyle } from './utils';
 
 export default class Info {
-  constructor(art) {
-    this.art = art;
-    this.init();
-  }
-
-  init() {
-    const { refs: { $infoClose, $infoPanel }, events: { proxy } } = this.art;
-    proxy($infoClose, 'click', () => {
-      this.hide();
-    });
-    this.art.on('switch', () => {
-      if ($infoPanel.innerHTML) {
-        this.getHeader();
-      }
-    });
-  }
-
-  show() {
-    const { $info, $infoPanel } = this.art.refs;
-    setStyle($info, 'display', 'block');
-    if (!$infoPanel.innerHTML) {
-      append($infoPanel, this.creatInfo());
-      this.getHeader();
+    constructor(art) {
+        this.art = art;
+        this.init();
     }
-    clearTimeout(this.timer);
-    this.loop();
-    this.art.emit('info:show', $info);
-  }
 
-  creatInfo() {
-    const infoHtml = [];
+    init() {
+        const {
+            refs: { $infoClose, $infoPanel },
+            events: { proxy },
+        } = this.art;
+        proxy($infoClose, 'click', () => {
+            this.hide();
+        });
+        this.art.on('switch', () => {
+            if ($infoPanel.innerHTML) {
+                this.getHeader();
+            }
+        });
+    }
 
-    infoHtml.push(`
-      <div class="art-info-item ">
-        <div class="art-info-title">Player version:</div>
-        <div class="art-info-content">__VERSION__</div>
-      </div>
-    `);
+    show() {
+        const { $info, $infoPanel } = this.art.refs;
+        setStyle($info, 'display', 'block');
+        if (!$infoPanel.innerHTML) {
+            append($infoPanel, this.creatInfo());
+            this.getHeader();
+        }
+        clearTimeout(this.timer);
+        this.loop();
+        this.art.emit('info:show', $info);
+    }
 
-    infoHtml.push(`
-      <div class="art-info-item">
-        <div class="art-info-title">Video url:</div>
-        <div class="art-info-content" data-video="currentSrc"></div>
-      </div>
-    `);
+    creatInfo() {
+        const infoHtml = [];
 
-    infoHtml.push(`
-      <div class="art-info-item">
-        <div class="art-info-title">Video type:</div>
-        <div class="art-info-content" data-head="Content-Type"></div>
-      </div>
-    `);
+        infoHtml.push(`
+          <div class="art-info-item ">
+            <div class="art-info-title">Player version:</div>
+            <div class="art-info-content">__VERSION__</div>
+          </div>
+        `);
 
-    infoHtml.push(`
-      <div class="art-info-item">
-        <div class="art-info-title">Video size:</div>
-        <div class="art-info-content" data-head="Content-length"></div>
-      </div>
-    `);
+        infoHtml.push(`
+          <div class="art-info-item">
+            <div class="art-info-title">Video url:</div>
+            <div class="art-info-content" data-video="currentSrc"></div>
+          </div>
+        `);
 
-    infoHtml.push(`
-      <div class="art-info-item">
-        <div class="art-info-title">Video volume:</div>
-        <div class="art-info-content" data-video="volume"></div>
-      </div>
-    `);
+        infoHtml.push(`
+          <div class="art-info-item">
+            <div class="art-info-title">Video type:</div>
+            <div class="art-info-content" data-head="Content-Type"></div>
+          </div>
+        `);
 
-    infoHtml.push(`
-      <div class="art-info-item">
-        <div class="art-info-title">Video time:</div>
-        <div class="art-info-content" data-video="currentTime"></div>
-      </div>
-    `);
+        infoHtml.push(`
+          <div class="art-info-item">
+            <div class="art-info-title">Video size:</div>
+            <div class="art-info-content" data-head="Content-length"></div>
+          </div>
+        `);
 
-    infoHtml.push(`
-      <div class="art-info-item">
-        <div class="art-info-title">Video duration:</div>
-        <div class="art-info-content" data-video="duration"></div>
-      </div>
-    `);
+        infoHtml.push(`
+          <div class="art-info-item">
+            <div class="art-info-title">Video volume:</div>
+            <div class="art-info-content" data-video="volume"></div>
+          </div>
+        `);
 
-    infoHtml.push(`
-      <div class="art-info-item">
-        <div class="art-info-title">Video resolution:</div>
-        <div class="art-info-content">
-          <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
-        </div>
-      </div>
-    `);
+        infoHtml.push(`
+          <div class="art-info-item">
+            <div class="art-info-title">Video time:</div>
+            <div class="art-info-content" data-video="currentTime"></div>
+          </div>
+        `);
 
-    return infoHtml.join('');
-  }
+        infoHtml.push(`
+          <div class="art-info-item">
+            <div class="art-info-title">Video duration:</div>
+            <div class="art-info-content" data-video="duration"></div>
+          </div>
+        `);
 
-  getHeader() {
-    const { $infoPanel, $video } = this.art.refs;
-    const url = $video.src;
-    const types = Array.from($infoPanel.querySelectorAll('[data-head]'));
-    types.forEach(item => {
-      item.innerHTML = 'loading...';
-    });
-    fetch(url, {
-      method: 'HEAD'
-    }).then(data => {
-      types.forEach(item => {
-        const value = data.headers.get(item.dataset.head);
-        item.innerHTML = value !== undefined ? value : 'unknown';
-      });
-    }).catch(() => {
-      types.forEach(item => {
-        item.innerHTML = 'unknown';
-      });
-    });
-  }
+        infoHtml.push(`
+          <div class="art-info-item">
+            <div class="art-info-title">Video resolution:</div>
+            <div class="art-info-content">
+              <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
+            </div>
+          </div>
+        `);
 
-  readInfo() {
-    const { $infoPanel, $video } = this.art.refs;
-    const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
-    types.forEach(item => {
-      const value = $video[item.dataset.video];
-      item.innerHTML = value !== undefined ? value : 'unknown';
-    });
-  }
+        return infoHtml.join('');
+    }
 
-  loop() {
-    this.readInfo();
-    this.timer = setTimeout(() => {
-      this.readInfo();
-      this.loop();
-    }, 1000);
-  }
+    getHeader() {
+        const { $infoPanel, $video } = this.art.refs;
+        const url = $video.src;
+        const types = Array.from($infoPanel.querySelectorAll('[data-head]'));
+        types.forEach(item => {
+            item.innerHTML = 'loading...';
+        });
+        fetch(url, {
+            method: 'HEAD',
+        })
+            .then(data => {
+                types.forEach(item => {
+                    const value = data.headers.get(item.dataset.head);
+                    item.innerHTML = value !== undefined ? value : 'unknown';
+                });
+            })
+            .catch(() => {
+                types.forEach(item => {
+                    item.innerHTML = 'unknown';
+                });
+            });
+    }
 
-  hide() {
-    const { $info } = this.art.refs;
-    setStyle($info, 'display', 'none');
-    clearTimeout(this.timer);
-    this.art.emit('info:hide', $info);
-  }
+    readInfo() {
+        const { $infoPanel, $video } = this.art.refs;
+        const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
+        types.forEach(item => {
+            const value = $video[item.dataset.video];
+            item.innerHTML = value !== undefined ? value : 'unknown';
+        });
+    }
+
+    loop() {
+        this.readInfo();
+        this.timer = setTimeout(() => {
+            this.readInfo();
+            this.loop();
+        }, 1000);
+    }
+
+    hide() {
+        const { $info } = this.art.refs;
+        setStyle($info, 'display', 'none');
+        clearTimeout(this.timer);
+        this.art.emit('info:hide', $info);
+    }
 }

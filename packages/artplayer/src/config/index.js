@@ -3,7 +3,7 @@ import mse from './mse';
 import video from './video';
 
 export default {
-  mimeCodec,
-  mse,
-  video
+    mimeCodec,
+    mse,
+    video,
 };

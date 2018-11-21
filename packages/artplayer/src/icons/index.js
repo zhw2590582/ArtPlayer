@@ -14,28 +14,28 @@ import prev from './prev.svg';
 import next from './next.svg';
 
 function creatDomFromSvg(map) {
-  const result = {};
-  Object.keys(map).forEach(name => {
-    const tmp = document.createElement('div');
-    tmp.innerHTML = `<i class="art-icon art-icon-${name}">${map[name]}</i>`;
-    [result[name]] = tmp.childNodes;
-  });
-  return result;
+    const result = {};
+    Object.keys(map).forEach(name => {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = `<i class="art-icon art-icon-${name}">${map[name]}</i>`;
+        [result[name]] = tmp.childNodes;
+    });
+    return result;
 }
 
 export default creatDomFromSvg({
-  loading,
-  playBig,
-  play,
-  pause,
-  volume,
-  volumeClose,
-  subtitle,
-  screenshot,
-  setting,
-  fullscreen,
-  fullscreenWeb,
-  pip,
-  prev,
-  next
+    loading,
+    playBig,
+    play,
+    pause,
+    volume,
+    volumeClose,
+    subtitle,
+    screenshot,
+    setting,
+    fullscreen,
+    fullscreenWeb,
+    pip,
+    prev,
+    next,
 });

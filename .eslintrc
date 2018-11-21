@@ -10,6 +10,8 @@
       "jQuery": false
   },
   "rules": {
+      "class-methods-use-this": 0,
+      "no-console": 0,
       "import/no-cycle": 1,
       "no-const-assign": 1,
       "no-shadow": 0,

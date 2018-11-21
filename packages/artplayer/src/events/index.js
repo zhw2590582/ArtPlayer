@@ -5,58 +5,60 @@ import resizeInit from './resizeInit';
 import doubleClickInit from './doubleClickInit';
 
 export default class Events {
-  constructor(art) {
-    this.destroyEvents = [];
-    this.proxy = this.proxy.bind(this);
-    this.hover = this.hover.bind(this);
-    this.loadImg = this.loadImg.bind(this);
-    clickInit(art, this);
-    hoverInit(art, this);
-    mousemoveInit(art, this);
-    resizeInit(art, this);
-    doubleClickInit(art, this);
-  }
-
-  proxy(target, name, callback, option = {}) {
-    if (Array.isArray(name)) {
-      name.forEach(item => this.proxy(target, item, callback, option));
-      return;
+    constructor(art) {
+        this.destroyEvents = [];
+        this.proxy = this.proxy.bind(this);
+        this.hover = this.hover.bind(this);
+        this.loadImg = this.loadImg.bind(this);
+        clickInit(art, this);
+        hoverInit(art, this);
+        mousemoveInit(art, this);
+        resizeInit(art, this);
+        doubleClickInit(art, this);
     }
 
-    target.addEventListener(name, callback, option);
-    this.destroyEvents.push(() => {
-      target.removeEventListener(name, callback, option);
-    });
-  }
+    proxy(target, name, callback, option = {}) {
+        if (Array.isArray(name)) {
+            name.forEach(item => this.proxy(target, item, callback, option));
+            return;
+        }
 
-  hover(target, mouseenter, mouseleave) {
-    this.proxy(target, 'mouseenter', mouseenter);
-    this.proxy(target, 'mouseleave', mouseleave);
-  }
+        target.addEventListener(name, callback, option);
+        this.destroyEvents.push(() => {
+            target.removeEventListener(name, callback, option);
+        });
+    }
 
-  loadImg(img) {
-    return new Promise((resolve, reject) => {
-      let image;
+    hover(target, mouseenter, mouseleave) {
+        this.proxy(target, 'mouseenter', mouseenter);
+        this.proxy(target, 'mouseleave', mouseleave);
+    }
 
-      if (img instanceof HTMLImageElement) {
-        image = img;
-      } else if (typeof img === 'string') {
-        image = new Image();
-        image.src = img;
-      } else {
-        return reject(img);
-      }
+    loadImg(img) {
+        return new Promise((resolve, reject) => {
+            let image;
 
-      if (image.complete) {
-        return resolve(image);
-      }
+            if (img instanceof HTMLImageElement) {
+                image = img;
+            } else if (typeof img === 'string') {
+                image = new Image();
+                image.src = img;
+            } else {
+                return reject(img);
+            }
 
-      this.proxy(image, 'load', () => resolve(image));
-      this.proxy(image, 'error', () => reject(image));
-    });
-  }
+            if (image.complete) {
+                return resolve(image);
+            }
 
-  destroy() {
-    this.destroyEvents.forEach(event => event());
-  }
+            this.proxy(image, 'load', () => resolve(image));
+            this.proxy(image, 'error', () => reject(image));
+
+            return img;
+        });
+    }
+
+    destroy() {
+        this.destroyEvents.forEach(event => event());
+    }
 }

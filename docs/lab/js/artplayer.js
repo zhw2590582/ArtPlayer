@@ -4,6 +4,36 @@
   (factory((global.artplayer = {})));
 }(this, (function (exports) { 'use strict';
 
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    }
+  }
+
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  var iterableToArray = _iterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  }
+
+  var toConsumableArray = _toConsumableArray;
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -121,73 +151,163 @@
 
   var inherits = _inherits;
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
+  function E () {
+    // Keep this empty so it's easier to inherit from
+    // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
   }
 
-  var defineProperty = _defineProperty;
+  E.prototype = {
+    on: function (name, callback, ctx) {
+      var e = this.e || (this.e = {});
 
-  function _objectSpread(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
+      (e[name] || (e[name] = [])).push({
+        fn: callback,
+        ctx: ctx
+      });
 
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
+      return this;
+    },
+
+    once: function (name, callback, ctx) {
+      var self = this;
+      function listener () {
+        self.off(name, listener);
+        callback.apply(ctx, arguments);
+      }
+      listener._ = callback;
+      return this.on(name, listener, ctx);
+    },
+
+    emit: function (name) {
+      var data = [].slice.call(arguments, 1);
+      var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+      var i = 0;
+      var len = evtArr.length;
+
+      for (i; i < len; i++) {
+        evtArr[i].fn.apply(evtArr[i].ctx, data);
       }
 
-      ownKeys.forEach(function (key) {
-        defineProperty(target, key, source[key]);
-      });
-    }
+      return this;
+    },
 
-    return target;
-  }
+    off: function (name, callback) {
+      var e = this.e || (this.e = {});
+      var evts = e[name];
+      var liveEvents = [];
 
-  var objectSpread = _objectSpread;
-
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-        arr2[i] = arr[i];
+      if (evts && callback) {
+        for (var i = 0, len = evts.length; i < len; i++) {
+          if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+            liveEvents.push(evts[i]);
+        }
       }
 
-      return arr2;
+      // Remove event from queue to prevent memory leak
+      // Suggested by https://github.com/lazd
+      // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
+
+      (liveEvents.length)
+        ? e[name] = liveEvents
+        : delete e[name];
+
+      return this;
     }
+  };
+
+  var tinyEmitter = E;
+
+  var optionValidator = createCommonjsModule(function (module, exports) {
+  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function c(r){return (c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var u=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t,e,n,o,a,i=c(r);if("boolean"===i)return "boolean";if("string"===i)return "string";if("number"===i)return "number";if("symbol"===i)return "symbol";if("function"===i)return "GeneratorFunction"===f(r)?"generatorfunction":"function";if(t=r,Array.isArray?Array.isArray(t):t instanceof Array)return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if((e=r)instanceof Date||"function"==typeof e.toDateString&&"function"==typeof e.getDate&&"function"==typeof e.setDate)return "date";if((n=r)instanceof Error||"string"==typeof n.message&&n.constructor&&"number"==typeof n.constructor.stackTraceLimit)return "error";if((o=r)instanceof RegExp||"string"==typeof o.flags&&"boolean"==typeof o.ignoreCase&&"boolean"==typeof o.multiline&&"boolean"==typeof o.global)return "regexp";switch(f(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if("function"==typeof(a=r).throw&&"function"==typeof a.return&&"function"==typeof a.next)return "generator";switch(i=u.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return i.slice(8,-1).toLowerCase().replace(/\s/g,"")};function f(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in y(r,t,e),l(r,t,e),p(r,t,e),t)if(t.hasOwnProperty(n)){var o=r[n],a=t[n],i=e.concat(n);if(s(r,n,a,i))continue;y(o,a,i),l(o,a,i),p(o,a,i);}}function s(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function y(r,t,e){var n;if("string"===i(t)?n=t:"function"===i(t)?t.___validator__=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function l(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(e,r,i(r));if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function p(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,window.optionValidator=a});
+  });
+
+  var isMergeableObject = function isMergeableObject(value) {
+  	return isNonNullObject(value)
+  		&& !isSpecial(value)
+  };
+
+  function isNonNullObject(value) {
+  	return !!value && typeof value === 'object'
   }
 
-  var arrayWithoutHoles = _arrayWithoutHoles;
+  function isSpecial(value) {
+  	var stringValue = Object.prototype.toString.call(value);
 
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  	return stringValue === '[object RegExp]'
+  		|| stringValue === '[object Date]'
+  		|| isReactElement(value)
   }
 
-  var iterableToArray = _iterableToArray;
+  // see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
+  var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
+  var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
 
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  function isReactElement(value) {
+  	return value.$$typeof === REACT_ELEMENT_TYPE
   }
 
-  var nonIterableSpread = _nonIterableSpread;
-
-  function _toConsumableArray(arr) {
-    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  function emptyTarget(val) {
+  	return Array.isArray(val) ? [] : {}
   }
 
-  var toConsumableArray = _toConsumableArray;
+  function cloneUnlessOtherwiseSpecified(value, options) {
+  	return (options.clone !== false && options.isMergeableObject(value))
+  		? deepmerge(emptyTarget(value), value, options)
+  		: value
+  }
+
+  function defaultArrayMerge(target, source, options) {
+  	return target.concat(source).map(function(element) {
+  		return cloneUnlessOtherwiseSpecified(element, options)
+  	})
+  }
+
+  function mergeObject(target, source, options) {
+  	var destination = {};
+  	if (options.isMergeableObject(target)) {
+  		Object.keys(target).forEach(function(key) {
+  			destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
+  		});
+  	}
+  	Object.keys(source).forEach(function(key) {
+  		if (!options.isMergeableObject(source[key]) || !target[key]) {
+  			destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
+  		} else {
+  			destination[key] = deepmerge(target[key], source[key], options);
+  		}
+  	});
+  	return destination
+  }
+
+  function deepmerge(target, source, options) {
+  	options = options || {};
+  	options.arrayMerge = options.arrayMerge || defaultArrayMerge;
+  	options.isMergeableObject = options.isMergeableObject || isMergeableObject;
+
+  	var sourceIsArray = Array.isArray(source);
+  	var targetIsArray = Array.isArray(target);
+  	var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+
+  	if (!sourceAndTargetTypesMatch) {
+  		return cloneUnlessOtherwiseSpecified(source, options)
+  	} else if (sourceIsArray) {
+  		return options.arrayMerge(target, source, options)
+  	} else {
+  		return mergeObject(target, source, options)
+  	}
+  }
+
+  deepmerge.all = function deepmergeAll(array, options) {
+  	if (!Array.isArray(array)) {
+  		throw new Error('first argument should be an array')
+  	}
+
+  	return array.reduce(function(prev, next) {
+  		return deepmerge(prev, next, options)
+  	}, {})
+  };
+
+  var deepmerge_1 = deepmerge;
 
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -360,47 +480,6 @@
     var sec = Math.floor(second - hour * 3600 - min * 60);
     return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
   }
-  function deepMerge() {
-    var isObject = function isObject(value) {
-      return value !== null && _typeof_1(value) === 'object';
-    };
-
-    var returnValue = {};
-
-    for (var _len = arguments.length, sources = new Array(_len), _key = 0; _key < _len; _key++) {
-      sources[_key] = arguments[_key];
-    }
-
-    for (var _i = 0; _i < sources.length; _i++) {
-      var source = sources[_i];
-
-      if (Array.isArray(source)) {
-        if (!Array.isArray(returnValue)) {
-          returnValue = [];
-        }
-
-        returnValue = toConsumableArray(returnValue).concat(toConsumableArray(source));
-      } else if (isObject(source)) {
-        if (source instanceof Element) {
-          return source;
-        }
-
-        for (var key in source) {
-          if (source.hasOwnProperty(key)) {
-            var value = source[key];
-
-            if (isObject(value) && key in returnValue) {
-              value = deepMerge(returnValue[key], value);
-            }
-
-            returnValue = objectSpread({}, returnValue, defineProperty({}, key, value));
-          }
-        }
-      }
-    }
-
-    return returnValue;
-  }
   function tooltip(target, msg) {
     var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
     target.setAttribute('data-balloon', msg);
@@ -427,7 +506,9 @@
     var timeout;
 
     function fn() {
-      var args = arguments;
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
 
       var later = function later() {
         timeout = null;
@@ -457,16 +538,11 @@
     setStyles: setStyles,
     getStyle: getStyle,
     secondToTime: secondToTime,
-    deepMerge: deepMerge,
     tooltip: tooltip,
     sleep: sleep,
     sublings: sublings,
     inverseClass: inverseClass,
     debounce: debounce
-  });
-
-  var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function c(r){return (c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var u=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t,e,n,o,a,i=c(r);if("boolean"===i)return "boolean";if("string"===i)return "string";if("number"===i)return "number";if("symbol"===i)return "symbol";if("function"===i)return "GeneratorFunction"===f(r)?"generatorfunction":"function";if(t=r,Array.isArray?Array.isArray(t):t instanceof Array)return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if((e=r)instanceof Date||"function"==typeof e.toDateString&&"function"==typeof e.getDate&&"function"==typeof e.setDate)return "date";if((n=r)instanceof Error||"string"==typeof n.message&&n.constructor&&"number"==typeof n.constructor.stackTraceLimit)return "error";if((o=r)instanceof RegExp||"string"==typeof o.flags&&"boolean"==typeof o.ignoreCase&&"boolean"==typeof o.multiline&&"boolean"==typeof o.global)return "regexp";switch(f(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if("function"==typeof(a=r).throw&&"function"==typeof a.return&&"function"==typeof a.next)return "generator";switch(i=u.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return i.slice(8,-1).toLowerCase().replace(/\s/g,"")};function f(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in y(r,t,e),l(r,t,e),p(r,t,e),t)if(t.hasOwnProperty(n)){var o=r[n],a=t[n],i=e.concat(n);if(s(r,n,a,i))continue;y(o,a,i),l(o,a,i),p(o,a,i);}}function s(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function y(r,t,e){var n;if("string"===i(t)?n=t:"function"===i(t)?t.___validator__=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function l(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(e,r,i(r));if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function p(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,window.optionValidator=a});
   });
 
   function validElement(paths, value, type) {
@@ -640,77 +716,11 @@
     video: video
   };
 
-  function E () {
-    // Keep this empty so it's easier to inherit from
-    // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
-  }
-
-  E.prototype = {
-    on: function (name, callback, ctx) {
-      var e = this.e || (this.e = {});
-
-      (e[name] || (e[name] = [])).push({
-        fn: callback,
-        ctx: ctx
-      });
-
-      return this;
-    },
-
-    once: function (name, callback, ctx) {
-      var self = this;
-      function listener () {
-        self.off(name, listener);
-        callback.apply(ctx, arguments);
-      }
-      listener._ = callback;
-      return this.on(name, listener, ctx);
-    },
-
-    emit: function (name) {
-      var data = [].slice.call(arguments, 1);
-      var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
-      var i = 0;
-      var len = evtArr.length;
-
-      for (i; i < len; i++) {
-        evtArr[i].fn.apply(evtArr[i].ctx, data);
-      }
-
-      return this;
-    },
-
-    off: function (name, callback) {
-      var e = this.e || (this.e = {});
-      var evts = e[name];
-      var liveEvents = [];
-
-      if (evts && callback) {
-        for (var i = 0, len = evts.length; i < len; i++) {
-          if (evts[i].fn !== callback && evts[i].fn._ !== callback)
-            liveEvents.push(evts[i]);
-        }
-      }
-
-      // Remove event from queue to prevent memory leak
-      // Suggested by https://github.com/lazd
-      // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
-
-      (liveEvents.length)
-        ? e[name] = liveEvents
-        : delete e[name];
-
-      return this;
-    }
-  };
-
-  var tinyEmitter = E;
-
   var Template = function Template(art) {
     classCallCheck(this, Template);
 
     var refs = art.refs;
-    refs.$container.innerHTML = "\n      <div class=\"artplayer-video-player\">\n        <video data-index=\"10\" class=\"artplayer-video\"></video>\n        <div data-index=\"20\" class=\"artplayer-subtitle\"></div>\n        <div data-index=\"30\" class=\"artplayer-layers\"></div>\n        <div data-index=\"40\" class=\"artplayer-mask\"></div>\n        <div data-index=\"50\" class=\"artplayer-bottom\">\n          <div class=\"artplayer-progress\"></div>\n          <div class=\"artplayer-controls\">\n            <div class=\"artplayer-controls-left\"></div>\n            <div class=\"artplayer-controls-right\"></div>\n          </div>\n        </div>\n        <div data-index=\"60\" class=\"artplayer-loading\"></div>\n        <div data-index=\"70\" class=\"artplayer-notice\">\n          <div class=\"artplayer-notice-inner\"></div>\n        </div>\n        <div data-index=\"80\" class=\"artplayer-setting\">\n          <div class=\"artplayer-setting-inner\">\n            <div class=\"artplayer-setting-body\"></div>\n            <div class=\"artplayer-setting-close\">\xD7</div>\n          </div>\n        </div>\n        <div data-index=\"90\" class=\"artplayer-info\">\n          <div class=\"artplayer-info-panel\"></div>\n          <div class=\"artplayer-info-close\">[x]</div>\n        </div>\n        <div data-index=\"100\" class=\"artplayer-pip-header\">\n          <div class=\"artplayer-pip-title\"></div>\n          <div class=\"artplayer-pip-close\">\xD7</div>\n        </div>\n        <div data-index=\"110\" class=\"artplayer-contextmenu\"></div>\n      </div>\n    ";
+    refs.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video data-index=\"10\" class=\"artplayer-video\"></video>\n            <div data-index=\"20\" class=\"artplayer-subtitle\"></div>\n            <div data-index=\"30\" class=\"artplayer-layers\"></div>\n            <div data-index=\"40\" class=\"artplayer-mask\"></div>\n            <div data-index=\"50\" class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div data-index=\"60\" class=\"artplayer-loading\"></div>\n            <div data-index=\"70\" class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div data-index=\"80\" class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n                <div class=\"artplayer-setting-close\">\xD7</div>\n              </div>\n            </div>\n            <div data-index=\"90\" class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div data-index=\"100\" class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div data-index=\"110\" class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
     refs.$player = refs.$container.querySelector('.artplayer-video-player');
     refs.$video = refs.$container.querySelector('.artplayer-video');
     refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
@@ -741,31 +751,31 @@
     'zh-cn': {
       'About author': '关于作者',
       'Video info': '视频统计信息',
-      'Close': '关闭',
+      Close: '关闭',
       'Video load failed': '视频加载失败',
-      'Volume': '音量',
-      'Play': '播放',
-      'Pause': '暂停',
-      'Rate': '速度',
-      'Mute': '静音',
-      'Flip': '视频翻转',
-      'Horizontal': '水平',
-      'Vertical': '垂直',
-      'Reconnect': '重新连接',
+      Volume: '音量',
+      Play: '播放',
+      Pause: '暂停',
+      Rate: '速度',
+      Mute: '静音',
+      Flip: '视频翻转',
+      Horizontal: '水平',
+      Vertical: '垂直',
+      Reconnect: '重新连接',
       'Hide subtitle': '隐藏字幕',
       'Show subtitle': '显示字幕',
       'Hide danmu': '隐藏弹幕',
       'Show danmu': '显示弹幕',
       'Show setting': '显示设置',
       'Hide setting': '隐藏设置',
-      'Screenshot': '截图',
+      Screenshot: '截图',
       'Play speed': '播放速度',
       'Aspect ratio': '画面比例',
-      'Default': '默认',
-      'Normal': '正常',
+      Default: '默认',
+      Normal: '正常',
       'Switch video': '切换',
       'Switch subtitle': '切换字幕',
-      'Fullscreen': '全屏',
+      Fullscreen: '全屏',
       'Exit fullscreen': '退出全屏',
       'Web fullscreen': '网页全屏',
       'Exit web fullscreen': '退出网页全屏',
@@ -774,31 +784,31 @@
     'zh-tw': {
       'About author': '關於作者',
       'Video info': '影片統計訊息',
-      'Close': '關閉',
+      Close: '關閉',
       'Video load failed': '影片載入失敗',
-      'Volume': '音量',
-      'Play': '播放',
-      'Pause': '暫停',
-      'Rate': '速度',
-      'Mute': '靜音',
-      'Flip': '影片翻轉',
-      'Horizontal': '水平',
-      'Vertical': '垂直',
-      'Reconnect': '重新連接',
+      Volume: '音量',
+      Play: '播放',
+      Pause: '暫停',
+      Rate: '速度',
+      Mute: '靜音',
+      Flip: '影片翻轉',
+      Horizontal: '水平',
+      Vertical: '垂直',
+      Reconnect: '重新連接',
       'Hide subtitle': '隱藏字幕',
       'Show subtitle': '顯示字幕',
       'Show setting': '顯示设置',
       'Hide setting': '隱藏设置',
       'Hide danmu': '隱藏彈幕',
       'Show danmu': '顯示彈幕',
-      'Screenshot': '截圖',
+      Screenshot: '截圖',
       'Play speed': '播放速度',
       'Aspect ratio': '畫面比例',
-      'Default': '默認',
-      'Normal': '正常',
+      Default: '默認',
+      Normal: '正常',
       'Switch video': '切換',
       'Switch subtitle': '切換字幕',
-      'Fullscreen': '全屏',
+      Fullscreen: '全屏',
       'Exit fullscreen': '退出全屏',
       'Web fullscreen': '網頁全屏',
       'Exit web fullscreen': '退出網頁全屏',
@@ -943,7 +953,7 @@
     art.on('video:error', function () {
       if (reconnectTime < maxReconnectTime) {
         sleep(1000).then(function () {
-          reconnectTime++;
+          reconnectTime += 1;
           art.emit('beforeMountUrl', option.url);
           $video.src = player.mountUrl(option.url);
           notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
@@ -1050,7 +1060,7 @@
       set: function set(percentage) {
         if (percentage !== undefined) {
           $video.volume = clamp(percentage, 0, 1);
-          notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100)));
+          notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10)));
 
           if ($video.volume !== 0) {
             storage.set('volume', $video.volume);
@@ -3354,7 +3364,7 @@
             theme = _art$option.theme,
             proxy = art.events.proxy,
             player = art.player;
-        append($control, "\n        <div class=\"art-control-progress-inner\">\n          <div class=\"art-progress-loaded\"></div>\n          <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n          <div class=\"art-progress-highlight\"></div>\n          <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n          <div class=\"art-progress-tip art-tip\"></div>\n        </div>\n      "));
+        append($control, "\n              <div class=\"art-control-progress-inner\">\n                <div class=\"art-progress-loaded\"></div>\n                <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n                <div class=\"art-progress-highlight\"></div>\n                <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n                <div class=\"art-progress-tip art-tip\"></div>\n              </div>\n            "));
         this.$loaded = $control.querySelector('.art-progress-loaded');
         this.$played = $control.querySelector('.art-progress-played');
         this.$highlight = $control.querySelector('.art-progress-highlight');
@@ -3701,7 +3711,7 @@
         var _this = this;
 
         this.art = art;
-        errorHandle(art.controls.progress, '\'thumbnails\' control dependent on \'progress\' control');
+        errorHandle(art.controls.progress, "'thumbnails' control dependent on 'progress' control");
         var $progress = art.refs.$progress,
             _art$events = art.events,
             proxy = _art$events.proxy,
@@ -3743,12 +3753,12 @@
             column = _this$art$option$thum.column;
         var perWidth = $progress.clientWidth / number;
         var perIndex = Math.ceil(posWidth / perWidth);
-        var yIndex = Math.ceil(perIndex / column);
-        var xIndex = perIndex % column || column;
+        var yIndex = Math.ceil(perIndex / column) - 1;
+        var xIndex = perIndex % column || column - 1;
         setStyle(this.$control, 'backgroundImage', "url(".concat(url, ")"));
         setStyle(this.$control, 'height', "".concat(height, "px"));
         setStyle(this.$control, 'width', "".concat(width, "px"));
-        setStyle(this.$control, 'backgroundPosition', "-".concat(--xIndex * width, "px -").concat(--yIndex * height, "px"));
+        setStyle(this.$control, 'backgroundPosition', "-".concat(xIndex * width, "px -").concat(yIndex * height, "px"));
 
         if (posWidth <= width / 2) {
           setStyle(this.$control, 'left', 0);
@@ -3945,14 +3955,21 @@
         var option = control.option;
 
         if (option && !option.disable) {
-          id++;
+          id += 1;
           var name = option.name || "control".concat(id);
           var $control = document.createElement('div');
           $control.classList.value = "art-control art-control-".concat(name);
           this.mount(option.position, $control, option.index || id);
           this.commonMethod(control, $control);
-          control.apply && control.apply(this.art, $control);
-          callback && callback($control);
+
+          if (control.apply) {
+            control.apply(this.art, $control);
+          }
+
+          if (callback) {
+            callback($control);
+          }
+
           this[name] = control;
         }
       }
@@ -4026,7 +4043,7 @@
       disable: !option.playbackRate,
       name: 'playbackRate',
       index: 10,
-      html: "\n      ".concat(i18n.get('Play speed'), ":\n      <span data-rate=\"0.5\">0.5</span>\n      <span data-rate=\"0.75\">0.75</span>\n      <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n      <span data-rate=\"1.25\">1.25</span>\n      <span data-rate=\"1.5\">1.5</span>\n      <span data-rate=\"2.0\">2.0</span>\n    "),
+      html: "\n          ".concat(i18n.get('Play speed'), ":\n          <span data-rate=\"0.5\">0.5</span>\n          <span data-rate=\"0.75\">0.75</span>\n          <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n          <span data-rate=\"1.25\">1.25</span>\n          <span data-rate=\"1.5\">1.5</span>\n          <span data-rate=\"2.0\">2.0</span>\n        "),
       click: function click(event) {
         var target = event.target;
         var rate = target.dataset.rate;
@@ -4055,7 +4072,7 @@
       disable: !option.aspectRatio,
       name: 'aspectRatio',
       index: 20,
-      html: "\n      ".concat(i18n.get('Aspect ratio'), ":\n      <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n      <span data-ratio=\"4:3\">4:3</span>\n      <span data-ratio=\"16:9\">16:9</span>\n    "),
+      html: "\n          ".concat(i18n.get('Aspect ratio'), ":\n          <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n          <span data-ratio=\"4:3\">4:3</span>\n          <span data-ratio=\"16:9\">16:9</span>\n        "),
       click: function click(event) {
         var target = event.target;
         var ratio = target.dataset.ratio;
@@ -4093,7 +4110,7 @@
     disable: false,
     name: 'version',
     index: 40,
-    html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.2</a>'
+    html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.3</a>'
   };
 
   function close(art) {
@@ -4161,7 +4178,7 @@
         var menu = typeof item === 'function' ? item(this.art) : item;
 
         if (!menu.disable) {
-          id$1++;
+          id$1 += 1;
           var _this$art2 = this.art,
               $contextmenu = _this$art2.refs.$contextmenu,
               proxy = _this$art2.events.proxy;
@@ -4182,8 +4199,15 @@
 
           insertByIndex($contextmenu, $menu, menu.index || id$1);
           this[name] = $menu;
-          menu.callback && menu.callback($menu);
-          callback && callback($menu);
+
+          if (menu.callback) {
+            menu.callback($menu);
+          }
+
+          if (callback) {
+            callback($menu);
+          }
+
           this.art.emit('contextmenu:add', $menu);
         }
       }
@@ -4289,14 +4313,14 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n      <div class=\"art-info-item \">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">1.0.2</div>\n      </div>\n    ");
-        infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n      </div>\n    ");
-        infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video type:</div>\n        <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n      </div>\n    ");
-        infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video size:</div>\n        <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n      </div>\n    ");
-        infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n    ");
-        infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n    ");
-        infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n    ");
-        infoHtml.push("\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.3</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video type:</div>\n            <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video size:</div>\n            <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video duration:</div>\n            <div class=\"art-info-content\" data-video=\"duration\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video resolution:</div>\n            <div class=\"art-info-content\">\n              <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n            </div>\n          </div>\n        ");
         return infoHtml.join('');
       }
     }, {
@@ -4918,6 +4942,8 @@
           _this2.proxy(image, 'error', function () {
             return reject(image);
           });
+
+          return img;
         });
       }
     }, {
@@ -5029,7 +5055,7 @@
         var layer = typeof item === 'function' ? item(this.art) : item;
 
         if (!layer.disable) {
-          id$2++;
+          id$2 += 1;
           var _this$art = this.art,
               $layers = _this$art.refs.$layers,
               proxy = _this$art.events.proxy;
@@ -5050,8 +5076,15 @@
 
           insertByIndex($layers, $layer, layer.index || id$2);
           this[name] = $layer;
-          item.callback && item.callback($layer);
-          callback && callback($layer);
+
+          if (item.callback) {
+            item.callback($layer);
+          }
+
+          if (callback) {
+            callback($layer);
+          }
+
           this.art.emit('layers:add', $layer);
         }
       }
@@ -5197,7 +5230,7 @@
             player = art.player;
         this.$header = $setting.querySelector('.art-setting-header');
         this.$body = $setting.querySelector('.art-setting-body');
-        this.$btns = append(this.$body, "\n      <div class=\"art-setting-btns\">\n        <div class=\"art-setting-btn current\">\n          <span data-flip=\"normal\">".concat(i18n.get('Normal'), "</span>\n        </div>\n        <div class=\"art-setting-btn\">\n          <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n        </div>\n        <div class=\"art-setting-btn\">\n          <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n        </div>\n      </div>\n    "));
+        this.$btns = append(this.$body, "\n              <div class=\"art-setting-btns\">\n                <div class=\"art-setting-btn current\">\n                  <span data-flip=\"normal\">".concat(i18n.get('Normal'), "</span>\n                </div>\n                <div class=\"art-setting-btn\">\n                  <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                </div>\n                <div class=\"art-setting-btn\">\n                  <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                </div>\n              </div>\n            "));
         proxy(this.$btns, 'click', function (event) {
           var target = event.target;
           var flip = target.dataset.flip;
@@ -5263,7 +5296,7 @@
         var option = setting.option;
 
         if (option && !option.disable) {
-          id$3++;
+          id$3 += 1;
           var _this$art2 = this.art,
               refs = _this$art2.refs,
               i18n = _this$art2.i18n;
@@ -5273,10 +5306,18 @@
           $setting.setAttribute('class', "art-setting art-setting-".concat(name));
           append($setting, "<div class=\"art-setting-header\">".concat(i18n.get(title), "</div>"));
           append($setting, '<div class="art-setting-body"></div>');
-          setting.apply && setting.apply(this.art, $setting);
+
+          if (setting.apply) {
+            setting.apply(this.art, $setting);
+          }
+
           insertByIndex(refs.$settingBody, $setting, option.index || id$3);
           this[name] = $setting;
-          callback && callback($setting);
+
+          if (callback) {
+            callback($setting);
+          }
+
           this.art.emit('setting:add', $setting);
         }
       }
@@ -5309,6 +5350,23 @@
 
     return Setting;
   }();
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var defineProperty = _defineProperty;
 
   var Storage =
   /*#__PURE__*/
@@ -5365,7 +5423,7 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
-      _this.option = deepMerge({}, Artplayer.DEFAULTS, option);
+      _this.option = deepmerge_1(Artplayer.DEFAULTS, option);
       optionValidator(_this.option, scheme);
 
       _this.init();
@@ -5409,7 +5467,8 @@
         this.hotkey = new Hotkey(this);
         this.mask = new Mask(this);
         this.setting = new Setting$1(this);
-        this.id = id$4++;
+        id$4 += 1;
+        this.id = id$4;
         Artplayer.instances.push(this);
       }
     }, {
@@ -5429,14 +5488,18 @@
       }
     }], [{
       key: "use",
-      value: function use(plugin) {
+      value: function use() {
+        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+
+        var plugin = args[0];
         var installedPlugins = this.plugins || (this.plugins = []);
 
         if (installedPlugins.indexOf === -1) {
           installedPlugins.push(plugin);
-          var args = Array.from(arguments).slice(1);
           args.unshift(this);
-          plugin.apply(null, args);
+          plugin.apply(void 0, toConsumableArray(args.slice(1)));
           this.prototype.emit('use', plugin);
         }
 
@@ -5445,7 +5508,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '1.0.2';
+        return '1.0.3';
       }
     }, {
       key: "config",
