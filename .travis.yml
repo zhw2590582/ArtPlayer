@@ -4,6 +4,7 @@ node_js:
   - stable
 
 before_script:
+  - npm i -g npm@5
   - npm install
   - npm run bootstrap --no-ci
 
