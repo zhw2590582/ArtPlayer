@@ -1,12 +1,11 @@
 language: node_js
 
 node_js:
-  - stable
+  - latest
 
 before_script:
-  - npm i -g npm@5
   - npm install
-  - npm run bootstrap --no-ci
+  - npm run bootstrap
 
 script:
   - npm run lint
