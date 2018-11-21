@@ -4,7 +4,10 @@
   "description": "ArtPlayer is a modern HTML5 video player",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "lint": "eslint packages/*/src"
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,11 @@
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
     "lerna": "^3.4.3"
   }
 }

@@ -1,9 +1,9 @@
 import './style/index.scss';
 
 class ArtplayerPluginDanmu {
-  constructor() {
-    console.log(this);
-  }
+    constructor() {
+        console.log(this);
+    }
 }
 
 window.ArtplayerPluginDanmu = ArtplayerPluginDanmu;
