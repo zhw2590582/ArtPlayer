@@ -6,7 +6,7 @@ node_js:
 before_script:
   - npm install -g lerna
   - npm install
-  - npm run bootstrap
+  - npm run bootstrap --no-ci
 
 script:
   - npm run lint
