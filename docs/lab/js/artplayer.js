@@ -1060,6 +1060,11 @@
         }
       }
     });
+    Object.defineProperty(player, 'mute', {
+      value: function value() {
+        player.volume = 0;
+      }
+    });
   }
 
   function currentTimeMix(art, player) {

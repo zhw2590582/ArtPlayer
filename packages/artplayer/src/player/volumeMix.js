@@ -16,4 +16,10 @@ export default function volumeMix(art, player) {
       }
     }
   });
+
+  Object.defineProperty(player, 'mute', {
+    value: () => {
+      player.volume = 0;
+    }
+  });
 }
