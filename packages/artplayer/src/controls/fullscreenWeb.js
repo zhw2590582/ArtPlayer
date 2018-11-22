@@ -1,32 +1,31 @@
 import { append, tooltip, setStyle } from '../utils';
 import icons from '../icons';
 
-export default class FullscreenWeb {
-    constructor(option) {
-        this.option = option;
-    }
+export default function fullscreenWeb(controlOption) {
+    return art => ({
+        ...controlOption,
+        mounted: $control => {
+            const {
+                events: { proxy },
+                i18n,
+                player,
+            } = art;
+            const $fullscreenWeb = append($control, icons.fullscreenWeb);
+            tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
 
-    apply(art, $control) {
-        const {
-            events: { proxy },
-            i18n,
-            player,
-        } = art;
-        this.$fullscreenWeb = append($control, icons.fullscreenWeb);
-        tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
+            proxy($control, 'click', () => {
+                player.fullscreenWebToggle();
+            });
 
-        proxy($control, 'click', () => {
-            player.fullscreenWebToggle();
-        });
+            art.on('fullscreenWeb:enabled', () => {
+                setStyle($fullscreenWeb, 'opacity', '0.8');
+                tooltip($fullscreenWeb, i18n.get('Exit web fullscreen'));
+            });
 
-        art.on('fullscreenWeb:enabled', () => {
-            setStyle(this.$fullscreenWeb, 'opacity', '0.8');
-            tooltip(this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
-        });
-
-        art.on('fullscreenWeb:exit', () => {
-            setStyle(this.$fullscreenWeb, 'opacity', '1');
-            tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
-        });
-    }
+            art.on('fullscreenWeb:exit', () => {
+                setStyle($fullscreenWeb, 'opacity', '1');
+                tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
+            });
+        },
+    });
 }

@@ -1,63 +1,54 @@
-import { errorHandle, setStyle } from '../utils';
+import { setStyle } from '../utils';
+import { getPosFromEvent } from './progress';
 
-export default class Thumbnails {
-    constructor(option) {
-        this.option = option;
-        this.loading = false;
-        this.isLoad = false;
-    }
+export default function thumbnails(controlOption) {
+    return art => ({
+        ...controlOption,
+        mounted: $control => {
+            const {
+                refs: { $progress },
+                events: { proxy, loadImg },
+            } = art;
+            let loading = false;
+            let isLoad = false;
 
-    apply(art, $control) {
-        this.art = art;
-        errorHandle(art.controls.progress, "'thumbnails' control dependent on 'progress' control");
-        const {
-            refs: { $progress },
-            events: { proxy, loadImg },
-        } = art;
-        this.$control = $control;
-
-        proxy($progress, 'mousemove', event => {
-            if (!this.loading) {
-                this.loading = true;
-                loadImg(this.art.option.thumbnails.url).then(() => {
-                    this.isLoad = true;
-                });
+            function showThumbnails(event) {
+                const { width: posWidth } = getPosFromEvent(art, event);
+                const { url, height, width, number, column } = art.option.thumbnails;
+                const perWidth = $progress.clientWidth / number;
+                const perIndex = Math.ceil(posWidth / perWidth);
+                const yIndex = Math.ceil(perIndex / column) - 1;
+                const xIndex = perIndex % column || column - 1;
+                setStyle($control, 'backgroundImage', `url(${url})`);
+                setStyle($control, 'height', `${height}px`);
+                setStyle($control, 'width', `${width}px`);
+                setStyle($control, 'backgroundPosition', `-${xIndex * width}px -${yIndex * height}px`);
+                if (posWidth <= width / 2) {
+                    setStyle($control, 'left', 0);
+                } else if (posWidth > $progress.clientWidth - width / 2) {
+                    setStyle($control, 'left', `${$progress.clientWidth - width}px`);
+                } else {
+                    setStyle($control, 'left', `${posWidth - width / 2}px`);
+                }
             }
 
-            if (this.isLoad) {
-                setStyle($control, 'display', 'block');
-                this.showThumbnails(event);
-            }
-        });
+            proxy($progress, 'mousemove', event => {
+                if (!loading) {
+                    loading = true;
+                    loadImg(art.option.thumbnails.url).then(() => {
+                        isLoad = true;
+                    });
+                }
 
-        proxy($progress, 'mouseout', () => {
-            setStyle($control, 'display', 'none');
-        });
-    }
+                if (isLoad) {
+                    setStyle($control, 'display', 'block');
+                    showThumbnails(event);
+                }
+            });
 
-    showThumbnails(event) {
-        const {
-            refs: { $progress },
-            controls,
-        } = this.art;
-        const { width: posWidth } = controls.progress.getPosFromEvent(event);
-        const { url, height, width, number, column } = this.art.option.thumbnails;
-        const perWidth = $progress.clientWidth / number;
-        const perIndex = Math.ceil(posWidth / perWidth);
-        const yIndex = Math.ceil(perIndex / column) - 1;
-        const xIndex = perIndex % column || column - 1;
-
-        setStyle(this.$control, 'backgroundImage', `url(${url})`);
-        setStyle(this.$control, 'height', `${height}px`);
-        setStyle(this.$control, 'width', `${width}px`);
-        setStyle(this.$control, 'backgroundPosition', `-${xIndex * width}px -${yIndex * height}px`);
-
-        if (posWidth <= width / 2) {
-            setStyle(this.$control, 'left', 0);
-        } else if (posWidth > $progress.clientWidth - width / 2) {
-            setStyle(this.$control, 'left', `${$progress.clientWidth - width}px`);
-        } else {
-            setStyle(this.$control, 'left', `${posWidth - width / 2}px`);
-        }
-    }
+            proxy($progress, 'mouseout', () => {
+                setStyle($control, 'display', 'none');
+            });
+        },
+    });
 }

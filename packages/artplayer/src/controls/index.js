@@ -1,21 +1,20 @@
-import { insertByIndex, setStyle, append } from '../utils';
-import Fullscreen from './fullscreen';
-import FullscreenWeb from './fullscreenWeb';
-import Pip from './pip';
-import PlayAndPause from './playAndPause';
-import Progress from './progress';
-import Subtitle from './subtitle';
-import Time from './time';
-import Volume from './volume';
-import Setting from './setting';
-import Thumbnails from './thumbnails';
-import Screenshot from './screenshot';
-import Quality from './quality';
+import componentMethod from '../utils/componentMethod';
+import fullscreen from './fullscreen';
+import fullscreenWeb from './fullscreenWeb';
+import pip from './pip';
+import playAndPause from './playAndPause';
+import progress from './progress';
+import subtitle from './subtitle';
+import time from './time';
+import volume from './volume';
+import setting from './setting';
+import thumbnails from './thumbnails';
+import screenshot from './screenshot';
+import quality from './quality';
 
-let id = 0;
 export default class Controls {
     constructor(art) {
-        id = 0;
+        this.id = 0;
         this.art = art;
         this.art.on('firstCanplay', () => {
             this.init();
@@ -24,8 +23,9 @@ export default class Controls {
 
     init() {
         const { option } = this.art;
+
         this.add(
-            new Progress({
+            progress({
                 name: 'progress',
                 disable: false,
                 position: 'top',
@@ -34,7 +34,7 @@ export default class Controls {
         );
 
         this.add(
-            new Thumbnails({
+            thumbnails({
                 name: 'thumbnails',
                 disable: !option.thumbnails.url,
                 position: 'top',
@@ -43,7 +43,7 @@ export default class Controls {
         );
 
         this.add(
-            new PlayAndPause({
+            playAndPause({
                 name: 'playAndPause',
                 disable: false,
                 position: 'left',
@@ -52,7 +52,7 @@ export default class Controls {
         );
 
         this.add(
-            new Volume({
+            volume({
                 name: 'volume',
                 disable: false,
                 position: 'left',
@@ -61,7 +61,7 @@ export default class Controls {
         );
 
         this.add(
-            new Time({
+            time({
                 name: 'time',
                 disable: false,
                 position: 'left',
@@ -70,7 +70,7 @@ export default class Controls {
         );
 
         this.add(
-            new Quality({
+            quality({
                 name: 'quality',
                 disable: option.quality.length === 0,
                 position: 'right',
@@ -79,7 +79,7 @@ export default class Controls {
         );
 
         this.add(
-            new Screenshot({
+            screenshot({
                 name: 'screenshot',
                 disable: !option.screenshot,
                 position: 'right',
@@ -88,7 +88,7 @@ export default class Controls {
         );
 
         this.add(
-            new Subtitle({
+            subtitle({
                 name: 'subtitle',
                 disable: !option.subtitle.url,
                 position: 'right',
@@ -97,7 +97,7 @@ export default class Controls {
         );
 
         this.add(
-            new Setting({
+            setting({
                 name: 'setting',
                 disable: !option.setting,
                 position: 'right',
@@ -106,7 +106,7 @@ export default class Controls {
         );
 
         this.add(
-            new Pip({
+            pip({
                 name: 'pip',
                 disable: !option.pip,
                 position: 'right',
@@ -115,7 +115,7 @@ export default class Controls {
         );
 
         this.add(
-            new FullscreenWeb({
+            fullscreenWeb({
                 name: 'fullscreenWeb',
                 disable: !option.fullscreenWeb,
                 position: 'right',
@@ -124,7 +124,7 @@ export default class Controls {
         );
 
         this.add(
-            new Fullscreen({
+            fullscreen({
                 name: 'fullscreen',
                 disable: !option.fullscreen,
                 position: 'right',
@@ -138,76 +138,26 @@ export default class Controls {
     }
 
     add(item, callback) {
-        const control = typeof item === 'function' ? item(this.art) : item.option;
-        if (control && !control.disable) {
-            const {
-                events: { proxy },
-            } = this.art;
-            id += 1;
-            const name = control.name || `control${id}`;
-            const $control = document.createElement('div');
-            $control.classList.value = `art-control art-control-${name}`;
-            if (control.html) {
-                append($control, control.html);
-            }
-            if (control.click) {
-                proxy($control, 'click', event => {
-                    event.preventDefault();
-                    control.click.call(this, event);
-                    this.art.emit('control:click', $control);
-                });
-            }
-            if (item.apply) {
-                item.apply(this.art, $control);
-            }
-            this.mount(control.position, $control, control.index || id);
-            if (control.mounted) {
-                control.mounted($control);
-            }
-            if (callback) {
-                callback($control);
-            }
-            this.commonMethod(control, $control);
-            this[name] = control;
-            this.art.emit('control:add', $control);
-        }
-    }
-
-    mount(position, $control, index) {
+        const option = typeof item === 'function' ? item(this.art) : item;
         const { $progress, $controlsLeft, $controlsRight } = this.art.refs;
-        switch (position) {
+        let parent;
+        switch (option.position) {
             case 'top':
-                insertByIndex($progress, $control, index);
+                parent = $progress;
                 break;
             case 'left':
-                insertByIndex($controlsLeft, $control, index);
+                parent = $controlsLeft;
                 break;
             case 'right':
-                insertByIndex($controlsRight, $control, index);
+                parent = $controlsRight;
                 break;
             default:
                 break;
         }
-    }
 
-    commonMethod(control, $control) {
-        Object.defineProperty(control, '$ref', {
-            get: () => $control,
-        });
-
-        Object.defineProperty(control, 'hide', {
-            value: () => {
-                setStyle($control, 'display', 'none');
-                this.art.emit('control:hide', $control);
-            },
-        });
-
-        Object.defineProperty(control, 'show', {
-            value: () => {
-                setStyle($control, 'display', 'block');
-                this.art.emit('control:show', $control);
-            },
-        });
+        if (parent) {
+            componentMethod(this.art, this, parent, option, callback, 'control');
+        }
     }
 
     show() {

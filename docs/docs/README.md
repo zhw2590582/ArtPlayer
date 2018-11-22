@@ -756,6 +756,13 @@ The unique index, used for the priority level
 
 The dom element
 
+### style
+
+- Type: `Object`
+- Default: `{}`
+
+The style object
+
 ### click
 
 - Type: `Function`
@@ -796,54 +803,26 @@ var art = new Artplayer({
 
 Custom controls, The type of controls is an object or function
 
-### option
-
-- Type: `Object`
-- Default: `{}`
-
-An object property if instantiated 
-
-#### disable
+### disable
 
 - Type: `Boolean`
 - Default: `false`
 
 Whether to disable
 
-#### name
+### name
 
 - Type: `String`
-- Default: `control${id}`
+- Default: `layer${id}`
 
-The unique name, used for the class name
+The unique name , used for the class name
 
-#### click
-
-- Type: `function`
-- Default: `undefined`
-
-Click event
-
-#### index
+### index
 
 - Type: `Number`
-- Default: `undefined`
+- Default: `${id}`
 
 The unique index, used for the priority level
-
-#### position
-
-- Type: `String`
-- Default: `undefined`
-
-The position where the controller appears: top, left, right
-
-### mounted
-
-- Type: `Function`
-- Default: `undefined`
-
-Callback after mounted
 
 ### html
 
@@ -851,6 +830,27 @@ Callback after mounted
 - Default: ``
 
 The dom element
+
+### style
+
+- Type: `Object`
+- Default: `{}`
+
+The style object
+
+### click
+
+- Type: `Function`
+- Default: `undefined`
+
+Click event
+
+### mounted
+
+- Type: `Function`
+- Default: `undefined`
+
+Callback after mounted
 
 [Run Code](/)
 

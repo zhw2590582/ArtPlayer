@@ -1,21 +1,20 @@
 import { append, tooltip } from '../utils';
 import icons from '../icons';
 
-export default class Pip {
-    constructor(option) {
-        this.option = option;
-    }
-
-    apply(art, $control) {
-        const {
-            events: { proxy },
-            i18n,
-            player,
-        } = art;
-        this.$pip = append($control, icons.pip);
-        tooltip(this.$pip, i18n.get('Mini player'));
-        proxy($control, 'click', () => {
-            player.pipEnabled();
-        });
-    }
+export default function pip(controlOption) {
+    return art => ({
+        ...controlOption,
+        mounted: $control => {
+            const {
+                events: { proxy },
+                i18n,
+                player,
+            } = art;
+            const $pip = append($control, icons.pip);
+            tooltip($pip, i18n.get('Mini player'));
+            proxy($control, 'click', () => {
+                player.pipEnabled();
+            });
+        },
+    });
 }

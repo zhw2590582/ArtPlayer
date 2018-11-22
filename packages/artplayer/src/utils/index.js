@@ -118,3 +118,14 @@ export function debounce(func, wait, context) {
 
     return fn;
 }
+
+export function show(target, display) {
+    target.classList.remove('art-hide');
+    if (display) {
+        target.style.display = display;
+    }
+}
+
+export function hide(target) {
+    target.classList.add('art-hide');
+}

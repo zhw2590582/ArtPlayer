@@ -1,39 +1,38 @@
 import { append, tooltip, setStyle } from '../utils';
 import icons from '../icons';
 
-export default class PlayAndPause {
-    constructor(option) {
-        this.option = option;
-    }
+export default function playAndPause(controlOption) {
+    return art => ({
+        ...controlOption,
+        mounted: $control => {
+            const {
+                events: { proxy },
+                player,
+                i18n,
+            } = art;
+            const $play = append($control, icons.play);
+            const $pause = append($control, icons.pause);
+            tooltip($play, i18n.get('Play'));
+            tooltip($pause, i18n.get('Pause'));
+            setStyle($pause, 'display', 'none');
 
-    apply(art, $control) {
-        const {
-            events: { proxy },
-            player,
-            i18n,
-        } = art;
-        this.$play = append($control, icons.play);
-        this.$pause = append($control, icons.pause);
-        tooltip(this.$play, i18n.get('Play'));
-        tooltip(this.$pause, i18n.get('Pause'));
-        setStyle(this.$pause, 'display', 'none');
+            proxy($play, 'click', () => {
+                player.play();
+            });
 
-        proxy(this.$play, 'click', () => {
-            player.play();
-        });
+            proxy($pause, 'click', () => {
+                player.pause();
+            });
 
-        proxy(this.$pause, 'click', () => {
-            player.pause();
-        });
+            art.on('video:playing', () => {
+                setStyle($play, 'display', 'none');
+                setStyle($pause, 'display', 'flex');
+            });
 
-        art.on('video:playing', () => {
-            setStyle(this.$play, 'display', 'none');
-            setStyle(this.$pause, 'display', 'flex');
-        });
-
-        art.on('video:pause', () => {
-            setStyle(this.$play, 'display', 'flex');
-            setStyle(this.$pause, 'display', 'none');
-        });
-    }
+            art.on('video:pause', () => {
+                setStyle($play, 'display', 'flex');
+                setStyle($pause, 'display', 'none');
+            });
+        },
+    });
 }

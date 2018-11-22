@@ -1,85 +1,82 @@
 import { append, clamp, tooltip, setStyle, getStyle } from '../utils';
 import icons from '../icons';
 
-export default class Volume {
-    constructor(option) {
-        this.option = option;
-        this.isDroging = false;
-    }
+export default function volume(controlOption) {
+    return art => ({
+        ...controlOption,
+        mounted: $control => {
+            const {
+                events: { proxy },
+                player,
+                i18n,
+            } = art;
+            let isDroging = false;
+            const $volume = append($control, icons.volume);
+            const $volumeClose = append($control, icons.volumeClose);
+            const $volumePanel = append($control, '<div class="art-volume-panel"></div>');
+            const $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
+            tooltip($volume, i18n.get('Mute'));
+            setStyle($volumeClose, 'display', 'none');
 
-    apply(art, $control) {
-        this.art = art;
-        const {
-            events: { proxy },
-            player,
-            i18n,
-        } = art;
+            function volumeChangeFromEvent(event) {
+                const { left: panelLeft, width: panelWidth } = $volumePanel.getBoundingClientRect();
+                const { width: handleWidth } = $volumeHandle.getBoundingClientRect();
+                const percentage =
+                    clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) /
+                    (panelWidth - handleWidth);
+                return percentage;
+            }
 
-        this.$volume = append($control, icons.volume);
-        this.$volumeClose = append($control, icons.volumeClose);
-        this.$volumePanel = append($control, '<div class="art-volume-panel"></div>');
-        this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
-        tooltip(this.$volume, i18n.get('Mute'));
-        setStyle(this.$volumeClose, 'display', 'none');
+            function setVolumeHandle(percentage = 0.7) {
+                if (player.muted || percentage === 0) {
+                    setStyle($volume, 'display', 'none');
+                    setStyle($volumeClose, 'display', 'flex');
+                    setStyle($volumeHandle, 'left', '0');
+                } else {
+                    // TODO...
+                    const panelWidth = getStyle($volumePanel, 'width') || 60;
+                    const handleWidth = getStyle($volumeHandle, 'width');
+                    const width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
+                    setStyle($volume, 'display', 'flex');
+                    setStyle($volumeClose, 'display', 'none');
+                    setStyle($volumeHandle, 'left', `${width}px`);
+                }
+            }
 
-        this.setVolumeHandle(player.volume);
-        art.on('video:volumechange', () => {
-            this.setVolumeHandle(player.volume);
-        });
+            setVolumeHandle(player.volume);
+            art.on('video:volumechange', () => {
+                setVolumeHandle(player.volume);
+            });
 
-        proxy(this.$volume, 'click', () => {
-            player.muted = true;
-        });
+            proxy($volume, 'click', () => {
+                player.muted = true;
+            });
 
-        proxy(this.$volumeClose, 'click', () => {
-            player.muted = false;
-        });
-
-        proxy(this.$volumePanel, 'click', event => {
-            player.muted = false;
-            player.volume = this.volumeChangeFromEvent(event);
-        });
-
-        proxy(this.$volumeHandle, 'mousedown', () => {
-            this.isDroging = true;
-        });
-
-        proxy(this.$volumeHandle, 'mousemove', event => {
-            if (this.isDroging) {
+            proxy($volumeClose, 'click', () => {
                 player.muted = false;
-                player.volume = this.volumeChangeFromEvent(event);
-            }
-        });
+            });
 
-        proxy(document, 'mouseup', () => {
-            if (this.isDroging) {
-                this.isDroging = false;
-            }
-        });
-    }
+            proxy($volumePanel, 'click', event => {
+                player.muted = false;
+                player.volume = volumeChangeFromEvent(event);
+            });
 
-    volumeChangeFromEvent(event) {
-        const { left: panelLeft, width: panelWidth } = this.$volumePanel.getBoundingClientRect();
-        const { width: handleWidth } = this.$volumeHandle.getBoundingClientRect();
-        const percentage =
-            clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
-        return percentage;
-    }
+            proxy($volumeHandle, 'mousedown', () => {
+                isDroging = true;
+            });
 
-    setVolumeHandle(percentage = 0.7) {
-        const { player } = this.art;
-        if (player.muted || percentage === 0) {
-            setStyle(this.$volume, 'display', 'none');
-            setStyle(this.$volumeClose, 'display', 'flex');
-            setStyle(this.$volumeHandle, 'left', '0');
-        } else {
-            // TODO...
-            const panelWidth = getStyle(this.$volumePanel, 'width') || 60;
-            const handleWidth = getStyle(this.$volumeHandle, 'width');
-            const width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
-            setStyle(this.$volume, 'display', 'flex');
-            setStyle(this.$volumeClose, 'display', 'none');
-            setStyle(this.$volumeHandle, 'left', `${width}px`);
-        }
-    }
+            proxy($volumeHandle, 'mousemove', event => {
+                if (isDroging) {
+                    player.muted = false;
+                    player.volume = volumeChangeFromEvent(event);
+                }
+            });
+
+            proxy(document, 'mouseup', () => {
+                if (isDroging) {
+                    isDroging = false;
+                }
+            });
+        },
+    });
 }

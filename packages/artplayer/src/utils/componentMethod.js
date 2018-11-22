@@ -24,6 +24,9 @@ export default function componentMethod(art, parent, target, component, callback
     const { proxy } = art.events;
     const option = typeof component === 'function' ? component(art) : component;
     if (!option.disable) {
+        if (parent.id === undefined) {
+            parent.id = 0;
+        }
         parent.id += 1;
         const name = option.name || `${title}${parent.id}`;
         const $element = document.createElement('div');

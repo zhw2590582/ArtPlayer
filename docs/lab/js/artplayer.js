@@ -525,6 +525,16 @@
 
     return fn;
   }
+  function show(target, display) {
+    target.classList.remove('art-hide');
+
+    if (display) {
+      target.style.display = display;
+    }
+  }
+  function hide(target) {
+    target.classList.add('art-hide');
+  }
 
   var utils = /*#__PURE__*/Object.freeze({
     instances: instances,
@@ -542,7 +552,9 @@
     sleep: sleep,
     sublings: sublings,
     inverseClass: inverseClass,
-    debounce: debounce
+    debounce: debounce,
+    show: show,
+    hide: hide
   });
 
   function validElement(paths, value, type) {
@@ -3098,6 +3110,109 @@
     flipMix(art, this);
   };
 
+  function commonMethod(art, option, $element, title) {
+    Object.defineProperty(option, '$ref', {
+      get: function get() {
+        return $element;
+      }
+    });
+    Object.defineProperty(option, 'hide', {
+      value: function value() {
+        setStyle($element, 'display', 'none');
+        art.emit("".concat(title, ":hide"), $element);
+      }
+    });
+    Object.defineProperty(option, 'show', {
+      value: function value() {
+        setStyle($element, 'display', 'block');
+        art.emit("".concat(title, ":show"), $element);
+      }
+    });
+  }
+
+  function componentMethod(art, parent, target, component, callback, title) {
+    var proxy = art.events.proxy;
+    var option = typeof component === 'function' ? component(art) : component;
+
+    if (!option.disable) {
+      if (parent.id === undefined) {
+        parent.id = 0;
+      }
+
+      parent.id += 1;
+      var name = option.name || "".concat(title).concat(parent.id);
+      var $element = document.createElement('div');
+      $element.classList.value = "art-".concat(title, " art-").concat(title, "-").concat(name);
+      insertByIndex(target, $element, option.index || parent.id);
+
+      if (option.html) {
+        append($element, option.html);
+      }
+
+      if (option.style) {
+        setStyles($element, option.style);
+      }
+
+      if (option.click) {
+        proxy($element, 'click', function (event) {
+          event.preventDefault();
+          option.click.call(parent, event);
+          art.emit("".concat(title, ":click"), $element);
+        });
+      }
+
+      if (option.mounted) {
+        option.mounted($element);
+      }
+
+      if (callback) {
+        callback($element);
+      }
+
+      commonMethod(art, option, $element, title);
+      parent[name] = option;
+      art.emit("".concat(title, ":add"), option);
+    }
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var defineProperty = _defineProperty;
+
+  function _objectSpread(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      var ownKeys = Object.keys(source);
+
+      if (typeof Object.getOwnPropertySymbols === 'function') {
+        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+        }));
+      }
+
+      ownKeys.forEach(function (key) {
+        defineProperty(target, key, source[key]);
+      });
+    }
+
+    return target;
+  }
+
+  var objectSpread = _objectSpread;
+
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
   }
@@ -3202,651 +3317,496 @@
     next: next
   });
 
-  var Fullscreen =
-  /*#__PURE__*/
-  function () {
-    function Fullscreen(option) {
-      classCallCheck(this, Fullscreen);
-
-      this.option = option;
-    }
-
-    createClass(Fullscreen, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        var proxy = art.events.proxy,
-            i18n = art.i18n,
-            player = art.player;
-        this.$fullscreen = append($control, icons.fullscreen);
-        tooltip(this.$fullscreen, i18n.get('Fullscreen'));
-        proxy($control, 'click', function () {
-          player.fullscreenToggle();
-        });
-        art.on('fullscreen:enabled', function () {
-          setStyle(_this.$fullscreen, 'opacity', '0.8');
-          tooltip(_this.$fullscreen, i18n.get('Exit fullscreen'));
-        });
-        art.on('fullscreen:exit', function () {
-          setStyle(_this.$fullscreen, 'opacity', '1');
-          tooltip(_this.$fullscreen, i18n.get('Fullscreen'));
-        });
-      }
-    }]);
-
-    return Fullscreen;
-  }();
-
-  var FullscreenWeb =
-  /*#__PURE__*/
-  function () {
-    function FullscreenWeb(option) {
-      classCallCheck(this, FullscreenWeb);
-
-      this.option = option;
-    }
-
-    createClass(FullscreenWeb, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        var proxy = art.events.proxy,
-            i18n = art.i18n,
-            player = art.player;
-        this.$fullscreenWeb = append($control, icons.fullscreenWeb);
-        tooltip(this.$fullscreenWeb, i18n.get('Web fullscreen'));
-        proxy($control, 'click', function () {
-          player.fullscreenWebToggle();
-        });
-        art.on('fullscreenWeb:enabled', function () {
-          setStyle(_this.$fullscreenWeb, 'opacity', '0.8');
-          tooltip(_this.$fullscreenWeb, i18n.get('Exit web fullscreen'));
-        });
-        art.on('fullscreenWeb:exit', function () {
-          setStyle(_this.$fullscreenWeb, 'opacity', '1');
-          tooltip(_this.$fullscreenWeb, i18n.get('Web fullscreen'));
-        });
-      }
-    }]);
-
-    return FullscreenWeb;
-  }();
-
-  var Pip =
-  /*#__PURE__*/
-  function () {
-    function Pip(option) {
-      classCallCheck(this, Pip);
-
-      this.option = option;
-    }
-
-    createClass(Pip, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var proxy = art.events.proxy,
-            i18n = art.i18n,
-            player = art.player;
-        this.$pip = append($control, icons.pip);
-        tooltip(this.$pip, i18n.get('Mini player'));
-        proxy($control, 'click', function () {
-          player.pipEnabled();
-        });
-      }
-    }]);
-
-    return Pip;
-  }();
-
-  var PlayAndPause =
-  /*#__PURE__*/
-  function () {
-    function PlayAndPause(option) {
-      classCallCheck(this, PlayAndPause);
-
-      this.option = option;
-    }
-
-    createClass(PlayAndPause, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        var proxy = art.events.proxy,
-            player = art.player,
-            i18n = art.i18n;
-        this.$play = append($control, icons.play);
-        this.$pause = append($control, icons.pause);
-        tooltip(this.$play, i18n.get('Play'));
-        tooltip(this.$pause, i18n.get('Pause'));
-        setStyle(this.$pause, 'display', 'none');
-        proxy(this.$play, 'click', function () {
-          player.play();
-        });
-        proxy(this.$pause, 'click', function () {
-          player.pause();
-        });
-        art.on('video:playing', function () {
-          setStyle(_this.$play, 'display', 'none');
-          setStyle(_this.$pause, 'display', 'flex');
-        });
-        art.on('video:pause', function () {
-          setStyle(_this.$play, 'display', 'flex');
-          setStyle(_this.$pause, 'display', 'none');
-        });
-      }
-    }]);
-
-    return PlayAndPause;
-  }();
-
-  var Progress =
-  /*#__PURE__*/
-  function () {
-    function Progress(option) {
-      classCallCheck(this, Progress);
-
-      this.option = option;
-      this.isDroging = false;
-      this.set = this.set.bind(this);
-    }
-
-    createClass(Progress, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        this.art = art;
-        this.$control = $control;
-        var _art$option = art.option,
-            highlight = _art$option.highlight,
-            theme = _art$option.theme,
-            proxy = art.events.proxy,
-            player = art.player;
-        append($control, "\n              <div class=\"art-control-progress-inner\">\n                <div class=\"art-progress-loaded\"></div>\n                <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n                <div class=\"art-progress-highlight\"></div>\n                <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n                <div class=\"art-progress-tip art-tip\"></div>\n              </div>\n            "));
-        this.$loaded = $control.querySelector('.art-progress-loaded');
-        this.$played = $control.querySelector('.art-progress-played');
-        this.$highlight = $control.querySelector('.art-progress-highlight');
-        this.$indicator = $control.querySelector('.art-progress-indicator');
-        this.$tip = $control.querySelector('.art-progress-tip');
-        highlight.forEach(function (item) {
-          var left = clamp(item.time, 0, player.duration) / player.duration * 100;
-          append(_this.$highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left, "%\"></span>"));
-        });
-        this.set('loaded', player.loaded);
-        this.art.on('video:progress', function () {
-          _this.set('loaded', player.loaded);
-        });
-        this.art.on('video:timeupdate', function () {
-          _this.set('played', player.played);
-        });
-        this.art.on('video:ended', function () {
-          _this.set('played', 1);
-        });
-        proxy($control, 'mousemove', function (event) {
-          setStyle(_this.$tip, 'display', 'block');
-
-          if (event.composedPath().indexOf(_this.$highlight) > -1) {
-            _this.showHighlight(event);
-          } else {
-            _this.showTime(event);
-          }
-        });
-        proxy($control, 'mouseout', function () {
-          setStyle(_this.$tip, 'display', 'none');
-        });
-        proxy($control, 'click', function (event) {
-          if (event.target !== _this.$indicator) {
-            var _this$getPosFromEvent = _this.getPosFromEvent(event),
-                second = _this$getPosFromEvent.second,
-                percentage = _this$getPosFromEvent.percentage;
-
-            _this.set('played', percentage);
-
-            player.seek(second);
-          }
-        });
-        proxy(this.$indicator, 'mousedown', function () {
-          _this.isDroging = true;
-        });
-        proxy(document, 'mousemove', function (event) {
-          if (_this.isDroging) {
-            var _this$getPosFromEvent2 = _this.getPosFromEvent(event),
-                second = _this$getPosFromEvent2.second,
-                percentage = _this$getPosFromEvent2.percentage;
-
-            _this.$indicator.classList.add('art-show-indicator');
-
-            _this.set('played', percentage);
-
-            player.seek(second);
-          }
-        });
-        proxy(document, 'mouseup', function () {
-          if (_this.isDroging) {
-            _this.isDroging = false;
-
-            _this.$indicator.classList.remove('art-show-indicator');
-          }
-        });
-      }
-    }, {
-      key: "showHighlight",
-      value: function showHighlight(event) {
-        var _event$target$dataset = event.target.dataset,
-            text = _event$target$dataset.text,
-            time = _event$target$dataset.time;
-        this.$tip.innerHTML = text;
-        var left = Number(time) / this.art.player.duration * this.$control.clientWidth + event.target.clientWidth / 2 - this.$tip.clientWidth / 2;
-        setStyle(this.$tip, 'left', "".concat(left, "px"));
-      }
-    }, {
-      key: "showTime",
-      value: function showTime(event) {
-        var _this$getPosFromEvent3 = this.getPosFromEvent(event),
-            width = _this$getPosFromEvent3.width,
-            time = _this$getPosFromEvent3.time;
-
-        var tipWidth = this.$tip.clientWidth;
-        this.$tip.innerHTML = time;
-
-        if (width <= tipWidth / 2) {
-          setStyle(this.$tip, 'left', 0);
-        } else if (width > this.$control.clientWidth - tipWidth / 2) {
-          setStyle(this.$tip, 'left', "".concat(this.$control.clientWidth - tipWidth, "px"));
-        } else {
-          setStyle(this.$tip, 'left', "".concat(width - tipWidth / 2, "px"));
+  function fullscreen$1(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              i18n = art.i18n,
+              player = art.player;
+          var $fullscreen = append($control, icons.fullscreen);
+          tooltip($fullscreen, i18n.get('Fullscreen'));
+          proxy($control, 'click', function () {
+            player.fullscreenToggle();
+          });
+          art.on('fullscreen:enabled', function () {
+            setStyle($fullscreen, 'opacity', '0.8');
+            tooltip($fullscreen, i18n.get('Exit fullscreen'));
+          });
+          art.on('fullscreen:exit', function () {
+            setStyle($fullscreen, 'opacity', '1');
+            tooltip($fullscreen, i18n.get('Fullscreen'));
+          });
         }
-      }
-    }, {
-      key: "getPosFromEvent",
-      value: function getPosFromEvent(event) {
-        var _this$art = this.art,
-            player = _this$art.player,
-            $progress = _this$art.refs.$progress;
+      });
+    };
+  }
 
-        var _$progress$getBoundin = $progress.getBoundingClientRect(),
-            left = _$progress$getBoundin.left;
-
-        var width = clamp(event.x - left, 0, $progress.clientWidth);
-        var second = width / $progress.clientWidth * player.duration;
-        var time = secondToTime(second);
-        var percentage = clamp(width / $progress.clientWidth, 0, 1);
-        return {
-          second: second,
-          time: time,
-          width: width,
-          percentage: percentage
-        };
-      }
-    }, {
-      key: "set",
-      value: function set(type, percentage) {
-        setStyle(this["$".concat(type)], 'width', "".concat(percentage * 100, "%"));
-
-        if (type === 'played') {
-          setStyle(this.$indicator, 'left', "calc(".concat(percentage * 100, "% - ").concat(getStyle(this.$indicator, 'width') / 2, "px)"));
+  function fullscreenWeb$1(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              i18n = art.i18n,
+              player = art.player;
+          var $fullscreenWeb = append($control, icons.fullscreenWeb);
+          tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
+          proxy($control, 'click', function () {
+            player.fullscreenWebToggle();
+          });
+          art.on('fullscreenWeb:enabled', function () {
+            setStyle($fullscreenWeb, 'opacity', '0.8');
+            tooltip($fullscreenWeb, i18n.get('Exit web fullscreen'));
+          });
+          art.on('fullscreenWeb:exit', function () {
+            setStyle($fullscreenWeb, 'opacity', '1');
+            tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
+          });
         }
-      }
-    }]);
+      });
+    };
+  }
 
-    return Progress;
-  }();
+  function pip$1(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              i18n = art.i18n,
+              player = art.player;
+          var $pip = append($control, icons.pip);
+          tooltip($pip, i18n.get('Mini player'));
+          proxy($control, 'click', function () {
+            player.pipEnabled();
+          });
+        }
+      });
+    };
+  }
 
-  var Subtitle =
-  /*#__PURE__*/
-  function () {
-    function Subtitle(option) {
-      classCallCheck(this, Subtitle);
+  function playAndPause(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              player = art.player,
+              i18n = art.i18n;
+          var $play = append($control, icons.play);
+          var $pause = append($control, icons.pause);
+          tooltip($play, i18n.get('Play'));
+          tooltip($pause, i18n.get('Pause'));
+          setStyle($pause, 'display', 'none');
+          proxy($play, 'click', function () {
+            player.play();
+          });
+          proxy($pause, 'click', function () {
+            player.pause();
+          });
+          art.on('video:playing', function () {
+            setStyle($play, 'display', 'none');
+            setStyle($pause, 'display', 'flex');
+          });
+          art.on('video:pause', function () {
+            setStyle($play, 'display', 'flex');
+            setStyle($pause, 'display', 'none');
+          });
+        }
+      });
+    };
+  }
 
-      this.option = option;
-    }
+  function getPosFromEvent(art, event) {
+    var $progress = art.refs.$progress,
+        player = art.player;
 
-    createClass(Subtitle, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
+    var _$progress$getBoundin = $progress.getBoundingClientRect(),
+        left = _$progress$getBoundin.left;
 
-        var proxy = art.events.proxy,
-            i18n = art.i18n,
-            subtitle = art.subtitle;
-        this.$subtitle = append($control, icons.subtitle);
-        tooltip(this.$subtitle, i18n.get('Hide subtitle'));
-        proxy($control, 'click', function () {
-          subtitle.toggle();
-        });
-        art.on('subtitle:show', function () {
-          setStyle(_this.$subtitle, 'opacity', '1');
-          tooltip(_this.$subtitle, i18n.get('Hide subtitle'));
-        });
-        art.on('subtitle:hide', function () {
-          setStyle(_this.$subtitle, 'opacity', '0.8');
-          tooltip(_this.$subtitle, i18n.get('Show subtitle'));
-        });
-      }
-    }]);
+    var width = clamp(event.x - left, 0, $progress.clientWidth);
+    var second = width / $progress.clientWidth * player.duration;
+    var time = secondToTime(second);
+    var percentage = clamp(width / $progress.clientWidth, 0, 1);
+    return {
+      second: second,
+      time: time,
+      width: width,
+      percentage: percentage
+    };
+  }
+  function progress(controlOption) {
+    return function (art) {
+      var _art$option = art.option,
+          highlight = _art$option.highlight,
+          theme = _art$option.theme,
+          proxy = art.events.proxy,
+          player = art.player;
+      return objectSpread({}, controlOption, {
+        html: "\n                <div class=\"art-control-progress-inner\">\n                    <div class=\"art-progress-loaded\"></div>\n                    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n                    <div class=\"art-progress-highlight\"></div>\n                    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n                    <div class=\"art-progress-tip art-tip\"></div>\n                </div>\n            "),
+        mounted: function mounted($control) {
+          var isDroging = false;
+          var $loaded = $control.querySelector('.art-progress-loaded');
+          var $played = $control.querySelector('.art-progress-played');
+          var $highlight = $control.querySelector('.art-progress-highlight');
+          var $indicator = $control.querySelector('.art-progress-indicator');
+          var $tip = $control.querySelector('.art-progress-tip');
 
-    return Subtitle;
-  }();
-
-  var Time =
-  /*#__PURE__*/
-  function () {
-    function Time(option) {
-      classCallCheck(this, Time);
-
-      this.option = option;
-    }
-
-    createClass(Time, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        function getTime() {
-          var newTime = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
-
-          if (newTime !== $control.innerHTML) {
-            $control.innerHTML = newTime;
+          function showHighlight(event) {
+            var _event$target$dataset = event.target.dataset,
+                text = _event$target$dataset.text,
+                time = _event$target$dataset.time;
+            $tip.innerHTML = text;
+            var left = Number(time) / art.player.duration * $control.clientWidth + event.target.clientWidth / 2 - $tip.clientWidth / 2;
+            setStyle($tip, 'left', "".concat(left, "px"));
           }
+
+          function showTime(event) {
+            var _getPosFromEvent = getPosFromEvent(art, event),
+                width = _getPosFromEvent.width,
+                time = _getPosFromEvent.time;
+
+            var tipWidth = $tip.clientWidth;
+            $tip.innerHTML = time;
+
+            if (width <= tipWidth / 2) {
+              setStyle($tip, 'left', 0);
+            } else if (width > $control.clientWidth - tipWidth / 2) {
+              setStyle($tip, 'left', "".concat($control.clientWidth - tipWidth, "px"));
+            } else {
+              setStyle($tip, 'left', "".concat(width - tipWidth / 2, "px"));
+            }
+          }
+
+          function setBar(type, percentage) {
+            if (type === 'loaded') {
+              setStyle($loaded, 'width', "".concat(percentage * 100, "%"));
+            }
+
+            if (type === 'played') {
+              setStyle($played, 'width', "".concat(percentage * 100, "%"));
+              setStyle($indicator, 'left', "calc(".concat(percentage * 100, "% - ").concat(getStyle($indicator, 'width') / 2, "px)"));
+            }
+          }
+
+          highlight.forEach(function (item) {
+            var left = clamp(item.time, 0, player.duration) / player.duration * 100;
+            append($highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left, "%\"></span>"));
+          });
+          setBar('loaded', player.loaded);
+          art.on('video:progress', function () {
+            setBar('loaded', player.loaded);
+          });
+          art.on('video:timeupdate', function () {
+            setBar('played', player.played);
+          });
+          art.on('video:ended', function () {
+            setBar('played', 1);
+          });
+          proxy($control, 'mousemove', function (event) {
+            setStyle($tip, 'display', 'block');
+
+            if (event.composedPath().indexOf($highlight) > -1) {
+              showHighlight(event);
+            } else {
+              showTime(event);
+            }
+          });
+          proxy($control, 'mouseout', function () {
+            setStyle($tip, 'display', 'none');
+          });
+          proxy($control, 'click', function (event) {
+            if (event.target !== $indicator) {
+              var _getPosFromEvent2 = getPosFromEvent(art, event),
+                  second = _getPosFromEvent2.second,
+                  percentage = _getPosFromEvent2.percentage;
+
+              setBar('played', percentage);
+              player.seek(second);
+            }
+          });
+          proxy($indicator, 'mousedown', function () {
+            isDroging = true;
+          });
+          proxy(document, 'mousemove', function (event) {
+            if (isDroging) {
+              var _getPosFromEvent3 = getPosFromEvent(art, event),
+                  second = _getPosFromEvent3.second,
+                  percentage = _getPosFromEvent3.percentage;
+
+              $indicator.classList.add('art-show-indicator');
+              setBar('played', percentage);
+              player.seek(second);
+            }
+          });
+          proxy(document, 'mouseup', function () {
+            if (isDroging) {
+              isDroging = false;
+              $indicator.classList.remove('art-show-indicator');
+            }
+          });
         }
+      });
+    };
+  }
 
-        getTime();
-        ['video:loadedmetadata', 'video:timeupdate', 'video:progress'].forEach(function (event) {
-          art.on(event, getTime);
-        });
-      }
-    }]);
+  function subtitle$1(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              i18n = art.i18n,
+              subtitle = art.subtitle;
+          var $subtitle = append($control, icons.subtitle);
+          tooltip($subtitle, i18n.get('Hide subtitle'));
+          proxy($control, 'click', function () {
+            subtitle.toggle();
+          });
+          art.on('subtitle:show', function () {
+            setStyle($subtitle, 'opacity', '1');
+            tooltip($subtitle, i18n.get('Hide subtitle'));
+          });
+          art.on('subtitle:hide', function () {
+            setStyle($subtitle, 'opacity', '0.8');
+            tooltip($subtitle, i18n.get('Show subtitle'));
+          });
+        }
+      });
+    };
+  }
 
-    return Time;
-  }();
+  function time(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          function getTime() {
+            var newTime = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
 
-  var Volume =
-  /*#__PURE__*/
-  function () {
-    function Volume(option) {
-      classCallCheck(this, Volume);
+            if (newTime !== $control.innerHTML) {
+              $control.innerHTML = newTime;
+            }
+          }
 
-      this.option = option;
-      this.isDroging = false;
-    }
+          getTime();
+          ['video:loadedmetadata', 'video:timeupdate', 'video:progress'].forEach(function (event) {
+            art.on(event, getTime);
+          });
+        }
+      });
+    };
+  }
 
-    createClass(Volume, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
+  function volume$1(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              player = art.player,
+              i18n = art.i18n;
+          var isDroging = false;
+          var $volume = append($control, icons.volume);
+          var $volumeClose = append($control, icons.volumeClose);
+          var $volumePanel = append($control, '<div class="art-volume-panel"></div>');
+          var $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
+          tooltip($volume, i18n.get('Mute'));
+          setStyle($volumeClose, 'display', 'none');
 
-        this.art = art;
-        var proxy = art.events.proxy,
-            player = art.player,
-            i18n = art.i18n;
-        this.$volume = append($control, icons.volume);
-        this.$volumeClose = append($control, icons.volumeClose);
-        this.$volumePanel = append($control, '<div class="art-volume-panel"></div>');
-        this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
-        tooltip(this.$volume, i18n.get('Mute'));
-        setStyle(this.$volumeClose, 'display', 'none');
-        this.setVolumeHandle(player.volume);
-        art.on('video:volumechange', function () {
-          _this.setVolumeHandle(player.volume);
-        });
-        proxy(this.$volume, 'click', function () {
-          player.muted = true;
-        });
-        proxy(this.$volumeClose, 'click', function () {
-          player.muted = false;
-        });
-        proxy(this.$volumePanel, 'click', function (event) {
-          player.muted = false;
-          player.volume = _this.volumeChangeFromEvent(event);
-        });
-        proxy(this.$volumeHandle, 'mousedown', function () {
-          _this.isDroging = true;
-        });
-        proxy(this.$volumeHandle, 'mousemove', function (event) {
-          if (_this.isDroging) {
+          function volumeChangeFromEvent(event) {
+            var _$volumePanel$getBoun = $volumePanel.getBoundingClientRect(),
+                panelLeft = _$volumePanel$getBoun.left,
+                panelWidth = _$volumePanel$getBoun.width;
+
+            var _$volumeHandle$getBou = $volumeHandle.getBoundingClientRect(),
+                handleWidth = _$volumeHandle$getBou.width;
+
+            var percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
+            return percentage;
+          }
+
+          function setVolumeHandle() {
+            var percentage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.7;
+
+            if (player.muted || percentage === 0) {
+              setStyle($volume, 'display', 'none');
+              setStyle($volumeClose, 'display', 'flex');
+              setStyle($volumeHandle, 'left', '0');
+            } else {
+              // TODO...
+              var panelWidth = getStyle($volumePanel, 'width') || 60;
+              var handleWidth = getStyle($volumeHandle, 'width');
+              var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
+              setStyle($volume, 'display', 'flex');
+              setStyle($volumeClose, 'display', 'none');
+              setStyle($volumeHandle, 'left', "".concat(width, "px"));
+            }
+          }
+
+          setVolumeHandle(player.volume);
+          art.on('video:volumechange', function () {
+            setVolumeHandle(player.volume);
+          });
+          proxy($volume, 'click', function () {
+            player.muted = true;
+          });
+          proxy($volumeClose, 'click', function () {
             player.muted = false;
-            player.volume = _this.volumeChangeFromEvent(event);
-          }
-        });
-        proxy(document, 'mouseup', function () {
-          if (_this.isDroging) {
-            _this.isDroging = false;
-          }
-        });
-      }
-    }, {
-      key: "volumeChangeFromEvent",
-      value: function volumeChangeFromEvent(event) {
-        var _this$$volumePanel$ge = this.$volumePanel.getBoundingClientRect(),
-            panelLeft = _this$$volumePanel$ge.left,
-            panelWidth = _this$$volumePanel$ge.width;
-
-        var _this$$volumeHandle$g = this.$volumeHandle.getBoundingClientRect(),
-            handleWidth = _this$$volumeHandle$g.width;
-
-        var percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
-        return percentage;
-      }
-    }, {
-      key: "setVolumeHandle",
-      value: function setVolumeHandle() {
-        var percentage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.7;
-        var player = this.art.player;
-
-        if (player.muted || percentage === 0) {
-          setStyle(this.$volume, 'display', 'none');
-          setStyle(this.$volumeClose, 'display', 'flex');
-          setStyle(this.$volumeHandle, 'left', '0');
-        } else {
-          // TODO...
-          var panelWidth = getStyle(this.$volumePanel, 'width') || 60;
-          var handleWidth = getStyle(this.$volumeHandle, 'width');
-          var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
-          setStyle(this.$volume, 'display', 'flex');
-          setStyle(this.$volumeClose, 'display', 'none');
-          setStyle(this.$volumeHandle, 'left', "".concat(width, "px"));
+          });
+          proxy($volumePanel, 'click', function (event) {
+            player.muted = false;
+            player.volume = volumeChangeFromEvent(event);
+          });
+          proxy($volumeHandle, 'mousedown', function () {
+            isDroging = true;
+          });
+          proxy($volumeHandle, 'mousemove', function (event) {
+            if (isDroging) {
+              player.muted = false;
+              player.volume = volumeChangeFromEvent(event);
+            }
+          });
+          proxy(document, 'mouseup', function () {
+            if (isDroging) {
+              isDroging = false;
+            }
+          });
         }
-      }
-    }]);
+      });
+    };
+  }
 
-    return Volume;
-  }();
-
-  var Setting =
-  /*#__PURE__*/
-  function () {
-    function Setting(option) {
-      classCallCheck(this, Setting);
-
-      this.option = option;
-    }
-
-    createClass(Setting, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        var proxy = art.events.proxy,
-            i18n = art.i18n,
-            setting = art.setting;
-        this.$setting = append($control, icons.setting);
-        tooltip(this.$setting, i18n.get('Show setting'));
-        proxy($control, 'click', function () {
-          setting.toggle();
-        });
-        art.on('setting:show', function () {
-          setStyle(_this.$setting, 'opacity', '0.8');
-          tooltip(_this.$setting, i18n.get('Hide setting'));
-        });
-        art.on('setting:hide', function () {
-          setStyle(_this.$setting, 'opacity', '1');
-          tooltip(_this.$setting, i18n.get('Show setting'));
-        });
-      }
-    }]);
-
-    return Setting;
-  }();
-
-  var Thumbnails =
-  /*#__PURE__*/
-  function () {
-    function Thumbnails(option) {
-      classCallCheck(this, Thumbnails);
-
-      this.option = option;
-      this.loading = false;
-      this.isLoad = false;
-    }
-
-    createClass(Thumbnails, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        this.art = art;
-        errorHandle(art.controls.progress, "'thumbnails' control dependent on 'progress' control");
-        var $progress = art.refs.$progress,
-            _art$events = art.events,
-            proxy = _art$events.proxy,
-            loadImg = _art$events.loadImg;
-        this.$control = $control;
-        proxy($progress, 'mousemove', function (event) {
-          if (!_this.loading) {
-            _this.loading = true;
-            loadImg(_this.art.option.thumbnails.url).then(function () {
-              _this.isLoad = true;
-            });
-          }
-
-          if (_this.isLoad) {
-            setStyle($control, 'display', 'block');
-
-            _this.showThumbnails(event);
-          }
-        });
-        proxy($progress, 'mouseout', function () {
-          setStyle($control, 'display', 'none');
-        });
-      }
-    }, {
-      key: "showThumbnails",
-      value: function showThumbnails(event) {
-        var _this$art = this.art,
-            $progress = _this$art.refs.$progress,
-            controls = _this$art.controls;
-
-        var _controls$progress$ge = controls.progress.getPosFromEvent(event),
-            posWidth = _controls$progress$ge.width;
-
-        var _this$art$option$thum = this.art.option.thumbnails,
-            url = _this$art$option$thum.url,
-            height = _this$art$option$thum.height,
-            width = _this$art$option$thum.width,
-            number = _this$art$option$thum.number,
-            column = _this$art$option$thum.column;
-        var perWidth = $progress.clientWidth / number;
-        var perIndex = Math.ceil(posWidth / perWidth);
-        var yIndex = Math.ceil(perIndex / column) - 1;
-        var xIndex = perIndex % column || column - 1;
-        setStyle(this.$control, 'backgroundImage', "url(".concat(url, ")"));
-        setStyle(this.$control, 'height', "".concat(height, "px"));
-        setStyle(this.$control, 'width', "".concat(width, "px"));
-        setStyle(this.$control, 'backgroundPosition', "-".concat(xIndex * width, "px -").concat(yIndex * height, "px"));
-
-        if (posWidth <= width / 2) {
-          setStyle(this.$control, 'left', 0);
-        } else if (posWidth > $progress.clientWidth - width / 2) {
-          setStyle(this.$control, 'left', "".concat($progress.clientWidth - width, "px"));
-        } else {
-          setStyle(this.$control, 'left', "".concat(posWidth - width / 2, "px"));
+  function setting$1(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              i18n = art.i18n,
+              setting = art.setting;
+          var $setting = append($control, icons.setting);
+          tooltip($setting, i18n.get('Show setting'));
+          proxy($control, 'click', function () {
+            setting.toggle();
+          });
+          art.on('setting:show', function () {
+            setStyle($setting, 'opacity', '0.8');
+            tooltip($setting, i18n.get('Hide setting'));
+          });
+          art.on('setting:hide', function () {
+            setStyle($setting, 'opacity', '1');
+            tooltip($setting, i18n.get('Show setting'));
+          });
         }
-      }
-    }]);
+      });
+    };
+  }
 
-    return Thumbnails;
-  }();
+  function thumbnails(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var $progress = art.refs.$progress,
+              _art$events = art.events,
+              proxy = _art$events.proxy,
+              loadImg = _art$events.loadImg;
+          var loading = false;
+          var isLoad = false;
 
-  var Screenshot =
-  /*#__PURE__*/
-  function () {
-    function Screenshot(option) {
-      classCallCheck(this, Screenshot);
+          function showThumbnails(event) {
+            var _getPosFromEvent = getPosFromEvent(art, event),
+                posWidth = _getPosFromEvent.width;
 
-      this.option = option;
-    }
+            var _art$option$thumbnail = art.option.thumbnails,
+                url = _art$option$thumbnail.url,
+                height = _art$option$thumbnail.height,
+                width = _art$option$thumbnail.width,
+                number = _art$option$thumbnail.number,
+                column = _art$option$thumbnail.column;
+            var perWidth = $progress.clientWidth / number;
+            var perIndex = Math.ceil(posWidth / perWidth);
+            var yIndex = Math.ceil(perIndex / column) - 1;
+            var xIndex = perIndex % column || column - 1;
+            setStyle($control, 'backgroundImage', "url(".concat(url, ")"));
+            setStyle($control, 'height', "".concat(height, "px"));
+            setStyle($control, 'width', "".concat(width, "px"));
+            setStyle($control, 'backgroundPosition', "-".concat(xIndex * width, "px -").concat(yIndex * height, "px"));
 
-    createClass(Screenshot, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var proxy = art.events.proxy,
-            i18n = art.i18n,
-            player = art.player;
-        this.$screenshot = append($control, icons.screenshot);
-        tooltip(this.$screenshot, i18n.get('Screenshot'));
-        proxy(this.$screenshot, 'click', function () {
-          player.screenshot();
-        });
-      }
-    }]);
-
-    return Screenshot;
-  }();
-
-  var Quality =
-  /*#__PURE__*/
-  function () {
-    function Quality(option) {
-      classCallCheck(this, Quality);
-
-      this.option = option;
-      this.playIndex = -1;
-    }
-
-    createClass(Quality, [{
-      key: "apply",
-      value: function apply(art, $control) {
-        var _this = this;
-
-        var option = art.option,
-            _art$events = art.events,
-            proxy = _art$events.proxy,
-            hover = _art$events.hover,
-            player = art.player;
-        var defaultQuality = option.quality.find(function (item) {
-          return item.default;
-        }) || option.quality[0];
-        this.playIndex = option.quality.indexOf(defaultQuality);
-        var $qualityName = append($control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
-        var qualityList = option.quality.map(function (item, index) {
-          return "<div class=\"art-quality-item\" data-index=\"".concat(index, "\">").concat(item.name, "</div>");
-        }).join('');
-        var $qualitys = append($control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
-        hover($control, function () {
-          $control.classList.add('art-quality-hover');
-        }, function () {
-          $control.classList.remove('art-quality-hover');
-        });
-        proxy($qualitys, 'click', function (event) {
-          var index = Number(event.target.dataset.index);
-          var _option$quality$index = option.quality[index],
-              url = _option$quality$index.url,
-              name = _option$quality$index.name;
-
-          if (url && name && _this.playIndex !== index) {
-            player.switchQuality(url, name);
-            $qualityName.innerHTML = name;
-            _this.playIndex = index;
+            if (posWidth <= width / 2) {
+              setStyle($control, 'left', 0);
+            } else if (posWidth > $progress.clientWidth - width / 2) {
+              setStyle($control, 'left', "".concat($progress.clientWidth - width, "px"));
+            } else {
+              setStyle($control, 'left', "".concat(posWidth - width / 2, "px"));
+            }
           }
-        });
-      }
-    }]);
 
-    return Quality;
-  }();
+          proxy($progress, 'mousemove', function (event) {
+            if (!loading) {
+              loading = true;
+              loadImg(art.option.thumbnails.url).then(function () {
+                isLoad = true;
+              });
+            }
 
-  var id = 0;
+            if (isLoad) {
+              setStyle($control, 'display', 'block');
+              showThumbnails(event);
+            }
+          });
+          proxy($progress, 'mouseout', function () {
+            setStyle($control, 'display', 'none');
+          });
+        }
+      });
+    };
+  }
+
+  function screenshot$1(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var proxy = art.events.proxy,
+              i18n = art.i18n,
+              player = art.player;
+          var $screenshot = append($control, icons.screenshot);
+          tooltip($screenshot, i18n.get('Screenshot'));
+          proxy($screenshot, 'click', function () {
+            player.screenshot();
+          });
+        }
+      });
+    };
+  }
+
+  function quality(controlOption) {
+    return function (art) {
+      return objectSpread({}, controlOption, {
+        mounted: function mounted($control) {
+          var option = art.option,
+              proxy = art.events.proxy,
+              player = art.player;
+          var playIndex = -1;
+          var defaultQuality = option.quality.find(function (item) {
+            return item.default;
+          }) || option.quality[0];
+          playIndex = option.quality.indexOf(defaultQuality);
+          var $qualityName = append($control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
+          var qualityList = option.quality.map(function (item, index) {
+            return "<div class=\"art-quality-item\" data-index=\"".concat(index, "\">").concat(item.name, "</div>");
+          }).join('');
+          var $qualitys = append($control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
+          proxy($qualitys, 'click', function (event) {
+            var index = Number(event.target.dataset.index);
+            var _option$quality$index = option.quality[index],
+                url = _option$quality$index.url,
+                name = _option$quality$index.name;
+
+            if (url && name && playIndex !== index) {
+              player.switchQuality(url, name);
+              $qualityName.innerHTML = name;
+              playIndex = index;
+            }
+          });
+        }
+      });
+    };
+  }
 
   var Controls =
   /*#__PURE__*/
@@ -3856,7 +3816,7 @@
 
       classCallCheck(this, Controls);
 
-      id = 0;
+      this.id = 0;
       this.art = art;
       this.art.on('firstCanplay', function () {
         _this.init();
@@ -3869,73 +3829,73 @@
         var _this2 = this;
 
         var option = this.art.option;
-        this.add(new Progress({
+        this.add(progress({
           name: 'progress',
           disable: false,
           position: 'top',
           index: 10
         }));
-        this.add(new Thumbnails({
+        this.add(thumbnails({
           name: 'thumbnails',
           disable: !option.thumbnails.url,
           position: 'top',
           index: 20
         }));
-        this.add(new PlayAndPause({
+        this.add(playAndPause({
           name: 'playAndPause',
           disable: false,
           position: 'left',
           index: 10
         }));
-        this.add(new Volume({
+        this.add(volume$1({
           name: 'volume',
           disable: false,
           position: 'left',
           index: 20
         }));
-        this.add(new Time({
+        this.add(time({
           name: 'time',
           disable: false,
           position: 'left',
           index: 30
         }));
-        this.add(new Quality({
+        this.add(quality({
           name: 'quality',
           disable: option.quality.length === 0,
           position: 'right',
           index: 10
         }));
-        this.add(new Screenshot({
+        this.add(screenshot$1({
           name: 'screenshot',
           disable: !option.screenshot,
           position: 'right',
           index: 20
         }));
-        this.add(new Subtitle({
+        this.add(subtitle$1({
           name: 'subtitle',
           disable: !option.subtitle.url,
           position: 'right',
           index: 30
         }));
-        this.add(new Setting({
+        this.add(setting$1({
           name: 'setting',
           disable: !option.setting,
           position: 'right',
           index: 40
         }));
-        this.add(new Pip({
+        this.add(pip$1({
           name: 'pip',
           disable: !option.pip,
           position: 'right',
           index: 50
         }));
-        this.add(new FullscreenWeb({
+        this.add(fullscreenWeb$1({
           name: 'fullscreenWeb',
           disable: !option.fullscreenWeb,
           position: 'right',
           index: 60
         }));
-        this.add(new Fullscreen({
+        this.add(fullscreen$1({
           name: 'fullscreen',
           disable: !option.fullscreen,
           position: 'right',
@@ -3948,98 +3908,33 @@
     }, {
       key: "add",
       value: function add(item, callback) {
-        var _this3 = this;
-
-        var control = typeof item === 'function' ? item(this.art) : item.option;
-
-        if (control && !control.disable) {
-          var proxy = this.art.events.proxy;
-          id += 1;
-          var name = control.name || "control".concat(id);
-          var $control = document.createElement('div');
-          $control.classList.value = "art-control art-control-".concat(name);
-
-          if (control.html) {
-            append($control, control.html);
-          }
-
-          if (control.click) {
-            proxy($control, 'click', function (event) {
-              event.preventDefault();
-              control.click.call(_this3, event);
-
-              _this3.art.emit('control:click', $control);
-            });
-          }
-
-          if (item.apply) {
-            item.apply(this.art, $control);
-          }
-
-          this.mount(control.position, $control, control.index || id);
-
-          if (control.mounted) {
-            control.mounted($control);
-          }
-
-          if (callback) {
-            callback($control);
-          }
-
-          this.commonMethod(control, $control);
-          this[name] = control;
-          this.art.emit('control:add', $control);
-        }
-      }
-    }, {
-      key: "mount",
-      value: function mount(position, $control, index) {
+        var option = typeof item === 'function' ? item(this.art) : item;
         var _this$art$refs = this.art.refs,
             $progress = _this$art$refs.$progress,
             $controlsLeft = _this$art$refs.$controlsLeft,
             $controlsRight = _this$art$refs.$controlsRight;
+        var parent;
 
-        switch (position) {
+        switch (option.position) {
           case 'top':
-            insertByIndex($progress, $control, index);
+            parent = $progress;
             break;
 
           case 'left':
-            insertByIndex($controlsLeft, $control, index);
+            parent = $controlsLeft;
             break;
 
           case 'right':
-            insertByIndex($controlsRight, $control, index);
+            parent = $controlsRight;
             break;
 
           default:
             break;
         }
-      }
-    }, {
-      key: "commonMethod",
-      value: function commonMethod(control, $control) {
-        var _this4 = this;
 
-        Object.defineProperty(control, '$ref', {
-          get: function get() {
-            return $control;
-          }
-        });
-        Object.defineProperty(control, 'hide', {
-          value: function value() {
-            setStyle($control, 'display', 'none');
-
-            _this4.art.emit('control:hide', $control);
-          }
-        });
-        Object.defineProperty(control, 'show', {
-          value: function value() {
-            setStyle($control, 'display', 'block');
-
-            _this4.art.emit('control:show', $control);
-          }
-        });
+        if (parent) {
+          componentMethod(this.art, this, parent, option, callback, 'control');
+        }
       }
     }, {
       key: "show",
@@ -4057,105 +3952,6 @@
 
     return Controls;
   }();
-
-  function commonMethod(art, option, $element, title) {
-    Object.defineProperty(option, '$ref', {
-      get: function get() {
-        return $element;
-      }
-    });
-    Object.defineProperty(option, 'hide', {
-      value: function value() {
-        setStyle($element, 'display', 'none');
-        art.emit("".concat(title, ":hide"), $element);
-      }
-    });
-    Object.defineProperty(option, 'show', {
-      value: function value() {
-        setStyle($element, 'display', 'block');
-        art.emit("".concat(title, ":show"), $element);
-      }
-    });
-  }
-
-  function componentMethod(art, parent, target, component, callback, title) {
-    var proxy = art.events.proxy;
-    var option = typeof component === 'function' ? component(art) : component;
-
-    if (!option.disable) {
-      parent.id += 1;
-      var name = option.name || "".concat(title).concat(parent.id);
-      var $element = document.createElement('div');
-      $element.classList.value = "art-".concat(title, " art-").concat(title, "-").concat(name);
-      insertByIndex(target, $element, option.index || parent.id);
-
-      if (option.html) {
-        append($element, option.html);
-      }
-
-      if (option.style) {
-        setStyles($element, option.style);
-      }
-
-      if (option.click) {
-        proxy($element, 'click', function (event) {
-          event.preventDefault();
-          option.click.call(parent, event);
-          art.emit("".concat(title, ":click"), $element);
-        });
-      }
-
-      if (option.mounted) {
-        option.mounted($element);
-      }
-
-      if (callback) {
-        callback($element);
-      }
-
-      commonMethod(art, option, $element, title);
-      parent[name] = option;
-      art.emit("".concat(title, ":add"), option);
-    }
-  }
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  var defineProperty = _defineProperty;
-
-  function _objectSpread(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
-
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
-      }
-
-      ownKeys.forEach(function (key) {
-        defineProperty(target, key, source[key]);
-      });
-    }
-
-    return target;
-  }
-
-  var objectSpread = _objectSpread;
 
   function playbackRate(menuOption) {
     return function (art) {
@@ -4348,14 +4144,14 @@
       }
     }, {
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var $contextmenu = this.art.refs.$contextmenu;
         setStyle($contextmenu, 'display', 'none');
         this.art.emit('contextmenu:hide', $contextmenu);
       }
     }, {
       key: "show",
-      value: function show() {
+      value: function show$$1() {
         var $contextmenu = this.art.refs.$contextmenu;
         setStyle($contextmenu, 'display', 'block');
         this.art.emit('contextmenu:show', $contextmenu);
@@ -4396,7 +4192,7 @@
       }
     }, {
       key: "show",
-      value: function show() {
+      value: function show$$1() {
         var _this$art$refs2 = this.art.refs,
             $info = _this$art$refs2.$info,
             $infoPanel = _this$art$refs2.$infoPanel;
@@ -4475,7 +4271,7 @@
       }
     }, {
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var $info = this.art.refs.$info;
         setStyle($info, 'display', 'none');
         clearTimeout(this.timer);
@@ -4486,7 +4282,7 @@
     return Info;
   }();
 
-  var Subtitle$1 =
+  var Subtitle =
   /*#__PURE__*/
   function () {
     function Subtitle(art) {
@@ -4590,7 +4386,7 @@
       }
     }, {
       key: "show",
-      value: function show() {
+      value: function show$$1() {
         var _this$art2 = this.art,
             $subtitle = _this$art2.refs.$subtitle,
             i18n = _this$art2.i18n,
@@ -4602,7 +4398,7 @@
       }
     }, {
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var _this$art3 = this.art,
             $subtitle = _this$art3.refs.$subtitle,
             i18n = _this$art3.i18n,
@@ -5157,14 +4953,14 @@
       }
     }, {
       key: "show",
-      value: function show() {
+      value: function show$$1() {
         var $layers = this.art.refs.$layers;
         setStyle($layers, 'display', 'block');
         this.art.emit('layers:show', $layers);
       }
     }, {
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var $layers = this.art.refs.$layers;
         setStyle($layers, 'display', 'none');
         this.art.emit('layers:hide', $layers);
@@ -5187,14 +4983,14 @@
 
     createClass(Loading, [{
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'none');
         this.art.emit('loading:hide', $loading);
       }
     }, {
       key: "show",
-      value: function show() {
+      value: function show$$1() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'flex');
         this.art.emit('loading:show', $loading);
@@ -5216,7 +5012,7 @@
 
     createClass(Notice, [{
       key: "show",
-      value: function show(msg) {
+      value: function show$$1(msg) {
         var _this = this;
 
         var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -5238,7 +5034,7 @@
       }
     }, {
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var $notice = this.art.refs.$notice;
         setStyle($notice, 'display', 'none');
         this.art.emit('notice:hide', $notice);
@@ -5261,14 +5057,14 @@
 
     createClass(Mask, [{
       key: "show",
-      value: function show() {
+      value: function show$$1() {
         var $mask = this.art.refs.$mask;
         setStyle($mask, 'display', 'flex');
         this.art.emit('mask:show', $mask);
       }
     }, {
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var $mask = this.art.refs.$mask;
         setStyle($mask, 'display', 'none');
         this.art.emit('mask:show', $mask);
@@ -5304,7 +5100,7 @@
     };
   }
 
-  var Setting$1 =
+  var Setting =
   /*#__PURE__*/
   function () {
     function Setting(art) {
@@ -5349,7 +5145,7 @@
       }
     }, {
       key: "show",
-      value: function show() {
+      value: function show$$1() {
         var $setting = this.art.refs.$setting;
         setStyle($setting, 'display', 'flex');
         this.state = true;
@@ -5357,7 +5153,7 @@
       }
     }, {
       key: "hide",
-      value: function hide() {
+      value: function hide$$1() {
         var $setting = this.art.refs.$setting;
         setStyle($setting, 'display', 'none');
         this.state = false;
@@ -5419,7 +5215,7 @@
     return Storage;
   }();
 
-  var id$1 = 0;
+  var id = 0;
 
   var Artplayer =
   /*#__PURE__*/
@@ -5470,14 +5266,14 @@
         this.layers = new Layers(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
-        this.subtitle = new Subtitle$1(this);
+        this.subtitle = new Subtitle(this);
         this.info = new Info(this);
         this.loading = new Loading(this);
         this.hotkey = new Hotkey(this);
         this.mask = new Mask(this);
-        this.setting = new Setting$1(this);
-        id$1 += 1;
-        this.id = id$1;
+        this.setting = new Setting(this);
+        id += 1;
+        this.id = id;
         Artplayer.instances.push(this);
       }
     }, {
