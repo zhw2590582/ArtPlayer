@@ -10,7 +10,7 @@ export default class Volume {
     apply(art, $control) {
         this.art = art;
         const {
-            events: { proxy, hover },
+            events: { proxy },
             player,
             i18n,
         } = art;
@@ -34,16 +34,6 @@ export default class Volume {
         proxy(this.$volumeClose, 'click', () => {
             player.muted = false;
         });
-
-        hover(
-            $control,
-            () => {
-                this.$volumePanel.classList.add('art-volume-panel-hover');
-            },
-            () => {
-                this.$volumePanel.classList.remove('art-volume-panel-hover');
-            },
-        );
 
         proxy(this.$volumePanel, 'click', event => {
             player.muted = false;
@@ -86,8 +76,6 @@ export default class Volume {
             // TODO...
             const panelWidth = getStyle(this.$volumePanel, 'width') || 60;
             const handleWidth = getStyle(this.$volumeHandle, 'width');
-            console.log('panelWidth', panelWidth);
-            console.log('handleWidth', handleWidth);
             const width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
             setStyle(this.$volume, 'display', 'flex');
             setStyle(this.$volumeClose, 'display', 'none');

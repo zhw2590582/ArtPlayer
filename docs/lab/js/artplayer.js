@@ -3585,9 +3585,7 @@
         var _this = this;
 
         this.art = art;
-        var _art$events = art.events,
-            proxy = _art$events.proxy,
-            hover = _art$events.hover,
+        var proxy = art.events.proxy,
             player = art.player,
             i18n = art.i18n;
         this.$volume = append($control, icons.volume);
@@ -3605,11 +3603,6 @@
         });
         proxy(this.$volumeClose, 'click', function () {
           player.muted = false;
-        });
-        hover($control, function () {
-          _this.$volumePanel.classList.add('art-volume-panel-hover');
-        }, function () {
-          _this.$volumePanel.classList.remove('art-volume-panel-hover');
         });
         proxy(this.$volumePanel, 'click', function (event) {
           player.muted = false;
@@ -3657,8 +3650,6 @@
           // TODO...
           var panelWidth = getStyle(this.$volumePanel, 'width') || 60;
           var handleWidth = getStyle(this.$volumeHandle, 'width');
-          console.log('panelWidth', panelWidth);
-          console.log('handleWidth', handleWidth);
           var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
           setStyle(this.$volume, 'display', 'flex');
           setStyle(this.$volumeClose, 'display', 'none');

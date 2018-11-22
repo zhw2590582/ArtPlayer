@@ -190,10 +190,10 @@
                             width: 60px
                         }
                     }
-    
-                    &.art-volume-panel-hover {
-                        width: 60px;
-                    }
+                }
+
+                &:hover .art-volume-panel {
+                    width: 60px;
                 }
             }
     
