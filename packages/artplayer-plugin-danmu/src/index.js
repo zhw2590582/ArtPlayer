@@ -1,8 +1,20 @@
 import './index.scss';
-import i18nMix from './i18nMix';
-import contextmenuMix from './contextmenuMix';
-import settingMix from './settingMix';
-import controlMix from './controlMix';
+
+function i18nMix() {
+    //
+}
+
+function contextmenuMix(art) {
+    //
+}
+
+function settingMix(art) {
+    //
+}
+
+function controlMix(art) {
+    //
+}
 
 function artplayerPluginDanmu(Artplayer) {
     const art = Artplayer.prototype;
