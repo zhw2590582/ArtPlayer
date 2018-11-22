@@ -8,7 +8,7 @@ import seekMix from './seekMix';
 import volumeMix from './volumeMix';
 import currentTimeMix from './currentTimeMix';
 import durationMix from './durationMix';
-import switchMix from './switchMix';
+import switchQualityMix from './switchQualityMix';
 import playbackRateMix from './playbackRateMix';
 import aspectRatioMix from './aspectRatioMix';
 import screenshotMix from './screenshotMix';
@@ -32,7 +32,7 @@ export default class Player {
         volumeMix(art, this);
         currentTimeMix(art, this);
         durationMix(art, this);
-        switchMix(art, this);
+        switchQualityMix(art, this);
         playbackRateMix(art, this);
         aspectRatioMix(art, this);
         screenshotMix(art, this);

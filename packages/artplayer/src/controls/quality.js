@@ -34,7 +34,7 @@ export default class Quality {
             const index = Number(event.target.dataset.index);
             const { url, name } = option.quality[index];
             if (url && name && this.playIndex !== index) {
-                player.switch(url, name);
+                player.switchQuality(url, name);
                 $qualityName.innerHTML = name;
                 this.playIndex = index;
             }

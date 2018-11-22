@@ -3,13 +3,13 @@ export default function switchMix(art, player) {
         refs: { $video },
         i18n,
         notice,
-        isPlaying,
         option,
     } = art;
 
-    Object.defineProperty(player, 'switch', {
+    Object.defineProperty(player, 'switchQuality', {
         value: (url, name = 'unknown') => {
             if (url !== option.url) {
+                const { isPlaying } = art;
                 const { currentTime } = player;
                 art.emit('beforeMountUrl', url);
                 $video.src = player.mountUrl(url);

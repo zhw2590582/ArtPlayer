@@ -32,16 +32,6 @@ function nativePip(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'pipToggle', {
-        value: () => {
-            if (player.pipState) {
-                player.pipExit();
-            } else {
-                player.pipEnabled();
-            }
-        },
-    });
-
     proxy($video, 'enterpictureinpicture', () => {
         art.emit('pipEnabled');
     });
@@ -117,6 +107,14 @@ function customPip(art, player) {
             }
         },
     });
+}
+
+export default function pipMix(art, player) {
+    if (document.pictureInPictureEnabled) {
+        nativePip(art, player);
+    } else {
+        customPip(art, player);
+    }
 
     Object.defineProperty(player, 'pipToggle', {
         value: () => {
@@ -127,12 +125,4 @@ function customPip(art, player) {
             }
         },
     });
-}
-
-export default function pipMix(art, player) {
-    if (document.pictureInPictureEnabled) {
-        nativePip(art, player);
-    } else {
-        customPip(art, player);
-    }
 }

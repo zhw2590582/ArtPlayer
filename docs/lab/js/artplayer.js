@@ -1109,13 +1109,13 @@
     var $video = art.refs.$video,
         i18n = art.i18n,
         notice = art.notice,
-        isPlaying = art.isPlaying,
         option = art.option;
-    Object.defineProperty(player, 'switch', {
+    Object.defineProperty(player, 'switchQuality', {
       value: function value(url) {
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
         if (url !== option.url) {
+          var isPlaying = art.isPlaying;
           var currentTime = player.currentTime;
           art.emit('beforeMountUrl', url);
           $video.src = player.mountUrl(url);
@@ -2893,15 +2893,6 @@
         });
       }
     });
-    Object.defineProperty(player, 'pipToggle', {
-      value: function value() {
-        if (player.pipState) {
-          player.pipExit();
-        } else {
-          player.pipEnabled();
-        }
-      }
-    });
     proxy($video, 'enterpictureinpicture', function () {
       art.emit('pipEnabled');
     });
@@ -2976,6 +2967,15 @@
         }
       }
     });
+  }
+
+  function pipMix(art, player) {
+    if (document.pictureInPictureEnabled) {
+      nativePip(art, player);
+    } else {
+      customPip(art, player);
+    }
+
     Object.defineProperty(player, 'pipToggle', {
       value: function value() {
         if (player.pipState) {
@@ -2985,14 +2985,6 @@
         }
       }
     });
-  }
-
-  function pipMix(art, player) {
-    if (document.pictureInPictureEnabled) {
-      nativePip(art, player);
-    } else {
-      customPip(art, player);
-    }
   }
 
   function seekMix$1(art, player) {
@@ -3843,7 +3835,7 @@
               name = _option$quality$index.name;
 
           if (url && name && _this.playIndex !== index) {
-            player.switch(url, name);
+            player.switchQuality(url, name);
             $qualityName.innerHTML = name;
             _this.playIndex = index;
           }

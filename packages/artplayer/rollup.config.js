@@ -10,56 +10,54 @@ const replace = require('rollup-plugin-replace');
 const svgo = require('rollup-plugin-svgo');
 const { uglify } = require('rollup-plugin-uglify');
 const { version, homepage, name } = require('./package.json');
+
 const isProd = process.env.NODE_ENV === 'production';
 
 const banner =
-  '/*!\n' +
-  ` * ${name}.js v${version}\n` +
-  ` * Github: ${homepage}\n` +
-  ` * (c) 2017-${new Date().getFullYear()} Harvey Zack\n` +
-  ' * Released under the MIT License.\n' +
-  ' */\n';
+    '/*!\n' +
+    ` * ${name}.js v${version}\n` +
+    ` * Github: ${homepage}\n` +
+    ` * (c) 2017-${new Date().getFullYear()} Harvey Zack\n` +
+    ' * Released under the MIT License.\n' +
+    ' */\n';
 
 export default {
-  input: 'src/index.js',
-  output: {
-    name: name,
-    file: isProd ? `dist/${name}.js` : path.join(process.cwd(), '../../', `docs/lab/js/${name}.js`),
-    format: 'umd',
-    exports: 'named'
-  },
-  plugins: [
-    eslint({
-      exclude: [
-        'node_modules/**',
-        'src/**/*.scss',
-        'src/**/*.svg'
-      ]
-    }),
-    postcss({
-      plugins: [autoprefixer, cssnano],
-      extract: isProd ? `dist/${name}.css` : path.join(process.cwd(), '../../', `docs/lab/css/${name}.css`)
-    }),
-    nodeResolve(),
-    commonjs(),
-    babel({
-      runtimeHelpers: true,
-      exclude: 'node_modules/**',
-      presets: [['@babel/env', { modules: false }]],
-      plugins: ['@babel/plugin-external-helpers', '@babel/plugin-transform-runtime']
-    }),
-    svgo({
-      raw: true
-    }),
-    replace({
-      exclude: 'node_modules/**',
-      __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
-      __VERSION__: version
-    }),
-    isProd && uglify({
-      output: {
-        preamble: banner
-      }
-    })
-  ]
+    input: 'src/index.js',
+    output: {
+        name,
+        file: isProd ? `dist/${name}.js` : path.join(process.cwd(), '../../', `docs/lab/js/${name}.js`),
+        format: 'umd',
+        exports: 'named',
+    },
+    plugins: [
+        eslint({
+            exclude: ['node_modules/**', 'src/**/*.scss', 'src/**/*.svg'],
+        }),
+        postcss({
+            plugins: [autoprefixer, cssnano],
+            extract: isProd ? `dist/${name}.css` : path.join(process.cwd(), '../../', `docs/lab/css/${name}.css`),
+        }),
+        nodeResolve(),
+        commonjs(),
+        babel({
+            runtimeHelpers: true,
+            exclude: 'node_modules/**',
+            presets: [['@babel/env', { modules: false }]],
+            plugins: ['@babel/plugin-external-helpers', '@babel/plugin-transform-runtime'],
+        }),
+        svgo({
+            raw: true,
+        }),
+        replace({
+            exclude: 'node_modules/**',
+            __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
+            __VERSION__: version,
+        }),
+        isProd &&
+            uglify({
+                output: {
+                    preamble: banner,
+                },
+            }),
+    ],
 };
