@@ -852,6 +852,13 @@ Click event
 
 Callback after mounted
 
+### position
+
+- Type: `String`
+- Default: `undefined`
+
+The position where the controller appears: top, left, right
+
 [Run Code](/)
 
 ```js

@@ -68,15 +68,13 @@ export default {
         type: 'array',
         child: {
             type: 'object|function',
-            option: {
-                type: 'object',
-                child: {
-                    disable: 'boolean',
-                    name: 'string',
-                    index: 'number',
-                    position: 'string',
-                },
-            },
+            disable: 'boolean',
+            name: 'string',
+            index: 'number',
+            html: validElement,
+            style: 'object',
+            click: 'function',
+            position: (paths, value) => ['top', 'left', 'right'].includes(value),
         },
     },
     highlight: {

@@ -96,15 +96,13 @@ var art = new Artplayer({
     }
   ],
   controls: [
-    function (art) {
-      return {
-        name: 'myController',
-        position: 'right',
-        index: 1,
-        html: 'myController',
-        click: function() {
-          console.log('click myController');
-        }
+    {
+      name: 'myController',
+      position: 'right',
+      index: 1,
+      html: 'myController',
+      click: function() {
+        console.log('click myController');
       }
     }
   ]
