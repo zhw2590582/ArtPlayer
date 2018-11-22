@@ -4058,6 +4058,67 @@
     return Controls;
   }();
 
+  function commonMethod(art, option, $element, title) {
+    Object.defineProperty(option, '$ref', {
+      get: function get() {
+        return $element;
+      }
+    });
+    Object.defineProperty(option, 'hide', {
+      value: function value() {
+        setStyle($element, 'display', 'none');
+        art.emit("".concat(title, ":hide"), $element);
+      }
+    });
+    Object.defineProperty(option, 'show', {
+      value: function value() {
+        setStyle($element, 'display', 'block');
+        art.emit("".concat(title, ":show"), $element);
+      }
+    });
+  }
+
+  function componentMethod(art, parent, target, component, callback, title) {
+    var proxy = art.events.proxy;
+    var option = typeof component === 'function' ? component(art) : component;
+
+    if (!option.disable) {
+      parent.id += 1;
+      var name = option.name || "".concat(title).concat(parent.id);
+      var $element = document.createElement('div');
+      $element.classList.value = "art-".concat(title, " art-").concat(title, "-").concat(name);
+      insertByIndex(target, $element, option.index || parent.id);
+
+      if (option.html) {
+        append($element, option.html);
+      }
+
+      if (option.style) {
+        setStyles($element, option.style);
+      }
+
+      if (option.click) {
+        proxy($element, 'click', function (event) {
+          event.preventDefault();
+          option.click.call(parent, event);
+          art.emit("".concat(title, ":click"), $element);
+        });
+      }
+
+      if (option.mounted) {
+        option.mounted($element);
+      }
+
+      if (callback) {
+        callback($element);
+      }
+
+      commonMethod(art, option, $element, title);
+      parent[name] = option;
+      art.emit("".concat(title, ":add"), option);
+    }
+  }
+
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -4179,8 +4240,6 @@
     };
   }
 
-  var id$1 = 0;
-
   var Contextmenu =
   /*#__PURE__*/
   function () {
@@ -4189,7 +4248,7 @@
 
       classCallCheck(this, Contextmenu);
 
-      id$1 = 0;
+      this.id = 0;
       this.art = art;
       this.art.on('firstCanplay', function () {
         _this.init();
@@ -4251,46 +4310,8 @@
     }, {
       key: "add",
       value: function add(item, callback) {
-        var _this3 = this;
-
-        var menu = typeof item === 'function' ? item(this.art) : item;
-
-        if (!menu.disable) {
-          var _this$art2 = this.art,
-              $contextmenu = _this$art2.refs.$contextmenu,
-              proxy = _this$art2.events.proxy;
-          id$1 += 1;
-          var name = menu.name || "contextmenu".concat(id$1);
-          var $menu = document.createElement('div');
-          $menu.classList.value = "art-contextmenu art-contextmenu-".concat(name);
-
-          if (menu.html) {
-            append($menu, menu.html);
-          }
-
-          if (menu.click) {
-            proxy($menu, 'click', function (event) {
-              event.preventDefault();
-              menu.click.call(_this3, event);
-
-              _this3.art.emit('contextmenu:click', $menu);
-            });
-          }
-
-          insertByIndex($contextmenu, $menu, menu.index || id$1);
-
-          if (menu.mounted) {
-            menu.mounted($menu);
-          }
-
-          if (callback) {
-            callback($menu);
-          }
-
-          this.commonMethod(menu, $menu);
-          this[name] = menu;
-          this.art.emit('contextmenu:add', menu);
-        }
+        var $contextmenu = this.art.refs.$contextmenu;
+        componentMethod(this.art, this, $contextmenu, item, callback, 'contextmenu');
       }
     }, {
       key: "setPos",
@@ -4324,31 +4345,6 @@
 
         setStyle($contextmenu, 'left', "".concat(menuLeft, "px"));
         setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
-      }
-    }, {
-      key: "commonMethod",
-      value: function commonMethod(menu, $menu) {
-        var _this4 = this;
-
-        Object.defineProperty(menu, '$ref', {
-          get: function get() {
-            return $menu;
-          }
-        });
-        Object.defineProperty(menu, 'hide', {
-          value: function value() {
-            setStyle($menu, 'display', 'none');
-
-            _this4.art.emit('menu:hide', $menu);
-          }
-        });
-        Object.defineProperty(menu, 'show', {
-          value: function value() {
-            setStyle($menu, 'display', 'block');
-
-            _this4.art.emit('menu:show', $menu);
-          }
-        });
       }
     }, {
       key: "hide",
@@ -5137,8 +5133,6 @@
     return Hotkey;
   }();
 
-  var id$2 = 0;
-
   var Layers =
   /*#__PURE__*/
   function () {
@@ -5147,7 +5141,7 @@
 
       classCallCheck(this, Layers);
 
-      id$2 = 0;
+      this.id = 0;
       this.art = art;
       this.add = this.add.bind(this);
       this.art.option.layers.forEach(function (item) {
@@ -5158,72 +5152,8 @@
     createClass(Layers, [{
       key: "add",
       value: function add(item, callback) {
-        var _this2 = this;
-
-        var layer = typeof item === 'function' ? item(this.art) : item;
-
-        if (!layer.disable) {
-          var _this$art = this.art,
-              $layers = _this$art.refs.$layers,
-              proxy = _this$art.events.proxy;
-          id$2 += 1;
-          var name = layer.name || "layer".concat(id$2);
-          var $layer = document.createElement('div');
-          $layer.classList.value = "art-layer art-layer-".concat(name);
-          setStyles($layer, layer.style || {});
-
-          if (layer.html) {
-            append($layer, layer.html);
-          }
-
-          if (layer.click) {
-            proxy($layer, 'click', function (event) {
-              event.preventDefault();
-              layer.click.call(_this2, event);
-
-              _this2.art.emit('layers:click', $layer);
-            });
-          }
-
-          insertByIndex($layers, $layer, layer.index || id$2);
-
-          if (item.mounted) {
-            item.mounted($layer);
-          }
-
-          if (callback) {
-            callback($layer);
-          }
-
-          this.commonMethod(layer, $layer);
-          this[name] = layer;
-          this.art.emit('layers:add', layer);
-        }
-      }
-    }, {
-      key: "commonMethod",
-      value: function commonMethod(layer, $layer) {
-        var _this3 = this;
-
-        Object.defineProperty(layer, '$ref', {
-          get: function get() {
-            return $layer;
-          }
-        });
-        Object.defineProperty(layer, 'hide', {
-          value: function value() {
-            setStyle($layer, 'display', 'none');
-
-            _this3.art.emit('layer:hide', $layer);
-          }
-        });
-        Object.defineProperty(layer, 'show', {
-          value: function value() {
-            setStyle($layer, 'display', 'block');
-
-            _this3.art.emit('layer:show', $layer);
-          }
-        });
+        var $layers = this.art.refs.$layers;
+        componentMethod(this.art, this, $layers, item, callback, 'layer');
       }
     }, {
       key: "show",
@@ -5353,7 +5283,7 @@
       var i18n = art.i18n,
           player = art.player;
       return objectSpread({}, settingOption, {
-        html: "\n                <div class=\"art-setting-btns\">\n                    <div class=\"art-setting-btn current\">\n                        <span data-flip=\"normal\">".concat(i18n.get('Normal'), "</span>\n                    </div>\n                    <div class=\"art-setting-btn\">\n                        <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                    </div>\n                    <div class=\"art-setting-btn\">\n                        <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                    </div>\n                </div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get(settingOption.title), "</div>\n                <div class=\"art-setting-body\">\n                    <div class=\"art-setting-btns\">\n                        <div class=\"art-setting-btn current\">\n                            <span data-flip=\"normal\">").concat(i18n.get('Normal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                        </div>\n                    </div>\n                </div>\n            "),
         click: function click(event) {
           var target = event.target;
           var flip = target.dataset.flip;
@@ -5374,8 +5304,6 @@
     };
   }
 
-  var id$3 = 0;
-
   var Setting$1 =
   /*#__PURE__*/
   function () {
@@ -5384,7 +5312,7 @@
 
       classCallCheck(this, Setting);
 
-      id$3 = 0;
+      this.id = 0;
       this.art = art;
       this.state = false;
 
@@ -5416,75 +5344,8 @@
     }, {
       key: "add",
       value: function add(item, callback) {
-        var _this3 = this;
-
-        var setting = typeof item === 'function' ? item(this.art) : item;
-
-        if (!setting.disable) {
-          var _this$art2 = this.art,
-              i18n = _this$art2.i18n,
-              $settingBody = _this$art2.refs.$settingBody,
-              proxy = _this$art2.events.proxy;
-          id$3 += 1;
-          var name = setting.name || "setting".concat(id$3);
-          var title = setting.title || name;
-          var $setting = document.createElement('div');
-          $setting.classList.value = "art-setting art-setting-".concat(name);
-          append($setting, "<div class=\"art-setting-header\">".concat(i18n.get(title), "</div>"));
-          var $settingInner = append($setting, '<div class="art-setting-body"></div>');
-
-          if (setting.html) {
-            append($settingInner, setting.html);
-          }
-
-          if ($settingInner.click) {
-            proxy($settingInner, 'click', function (event) {
-              event.preventDefault();
-              setting.click.call(_this3, event);
-
-              _this3.art.emit('setting:click', $setting);
-            });
-          }
-
-          insertByIndex($settingBody, $setting, setting.index || id$3);
-
-          if (setting.mounted) {
-            setting.mounted($settingInner);
-          }
-
-          if (callback) {
-            callback($settingInner);
-          }
-
-          this.commonMethod(setting, $setting);
-          this[name] = setting;
-          this.art.emit('setting:add', setting);
-        }
-      }
-    }, {
-      key: "commonMethod",
-      value: function commonMethod(setting, $setting) {
-        var _this4 = this;
-
-        Object.defineProperty(setting, '$ref', {
-          get: function get() {
-            return $setting;
-          }
-        });
-        Object.defineProperty(setting, 'hide', {
-          value: function value() {
-            setStyle($setting, 'display', 'none');
-
-            _this4.art.emit('setting:hide', $setting);
-          }
-        });
-        Object.defineProperty(setting, 'show', {
-          value: function value() {
-            setStyle($setting, 'display', 'block');
-
-            _this4.art.emit('setting:show', $setting);
-          }
-        });
+        var $settingBody = this.art.refs.$settingBody;
+        componentMethod(this.art, this, $settingBody, item, callback, 'setting');
       }
     }, {
       key: "show",
@@ -5558,7 +5419,7 @@
     return Storage;
   }();
 
-  var id$4 = 0;
+  var id$1 = 0;
 
   var Artplayer =
   /*#__PURE__*/
@@ -5615,8 +5476,8 @@
         this.hotkey = new Hotkey(this);
         this.mask = new Mask(this);
         this.setting = new Setting$1(this);
-        id$4 += 1;
-        this.id = id$4;
+        id$1 += 1;
+        this.id = id$1;
         Artplayer.instances.push(this);
       }
     }, {

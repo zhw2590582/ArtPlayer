@@ -1,14 +1,14 @@
-import { append, insertByIndex, setStyle } from '../utils';
+import { setStyle } from '../utils';
+import componentMethod from '../utils/componentMethod';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
 import info from './info';
 import version from './version';
 import close from './close';
 
-let id = 0;
 export default class Contextmenu {
     constructor(art) {
-        id = 0;
+        this.id = 0;
         this.art = art;
         this.art.on('firstCanplay', () => {
             this.init();
@@ -70,43 +70,12 @@ export default class Contextmenu {
     }
 
     add(item, callback) {
-        const menu = typeof item === 'function' ? item(this.art) : item;
-        if (!menu.disable) {
-            const {
-                refs: { $contextmenu },
-                events: { proxy },
-            } = this.art;
-            id += 1;
-            const name = menu.name || `contextmenu${id}`;
-            const $menu = document.createElement('div');
-            $menu.classList.value = `art-contextmenu art-contextmenu-${name}`;
-            if (menu.html) {
-                append($menu, menu.html);
-            }
-            if (menu.click) {
-                proxy($menu, 'click', event => {
-                    event.preventDefault();
-                    menu.click.call(this, event);
-                    this.art.emit('contextmenu:click', $menu);
-                });
-            }
-            insertByIndex($contextmenu, $menu, menu.index || id);
-            if (menu.mounted) {
-                menu.mounted($menu);
-            }
-            if (callback) {
-                callback($menu);
-            }
-            this.commonMethod(menu, $menu);
-            this[name] = menu;
-            this.art.emit('contextmenu:add', menu);
-        }
+        const { $contextmenu } = this.art.refs;
+        componentMethod(this.art, this, $contextmenu, item, callback, 'contextmenu');
     }
 
     setPos(event) {
-        const {
-            refs: { $player, $contextmenu },
-        } = this.art;
+        const { $player, $contextmenu } = this.art.refs;
         const mouseX = event.clientX;
         const mouseY = event.clientY;
         const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
@@ -126,38 +95,14 @@ export default class Contextmenu {
         setStyle($contextmenu, 'top', `${menuTop}px`);
     }
 
-    commonMethod(menu, $menu) {
-        Object.defineProperty(menu, '$ref', {
-            get: () => $menu,
-        });
-
-        Object.defineProperty(menu, 'hide', {
-            value: () => {
-                setStyle($menu, 'display', 'none');
-                this.art.emit('menu:hide', $menu);
-            },
-        });
-
-        Object.defineProperty(menu, 'show', {
-            value: () => {
-                setStyle($menu, 'display', 'block');
-                this.art.emit('menu:show', $menu);
-            },
-        });
-    }
-
     hide() {
-        const {
-            refs: { $contextmenu },
-        } = this.art;
+        const { $contextmenu } = this.art.refs;
         setStyle($contextmenu, 'display', 'none');
         this.art.emit('contextmenu:hide', $contextmenu);
     }
 
     show() {
-        const {
-            refs: { $contextmenu },
-        } = this.art;
+        const { $contextmenu } = this.art.refs;
         setStyle($contextmenu, 'display', 'block');
         this.art.emit('contextmenu:show', $contextmenu);
     }

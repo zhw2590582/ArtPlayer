@@ -1,10 +1,10 @@
-import { setStyle, append, insertByIndex } from '../utils';
+import { setStyle } from '../utils';
+import componentMethod from '../utils/componentMethod';
 import flip from './flip';
 
-let id = 0;
 export default class Setting {
     constructor(art) {
-        id = 0;
+        this.id = 0;
         this.art = art;
         this.state = false;
         if (art.option.setting) {
@@ -33,76 +33,19 @@ export default class Setting {
     }
 
     add(item, callback) {
-        const setting = typeof item === 'function' ? item(this.art) : item;
-        if (!setting.disable) {
-            const {
-                i18n,
-                refs: { $settingBody },
-                events: { proxy },
-            } = this.art;
-            id += 1;
-            const name = setting.name || `setting${id}`;
-            const title = setting.title || name;
-            const $setting = document.createElement('div');
-            $setting.classList.value = `art-setting art-setting-${name}`;
-            append($setting, `<div class="art-setting-header">${i18n.get(title)}</div>`);
-            const $settingInner = append($setting, '<div class="art-setting-body"></div>');
-            if (setting.html) {
-                append($settingInner , setting.html);
-            }
-            if ($settingInner.click) {
-                proxy($settingInner, 'click', event => {
-                    event.preventDefault();
-                    setting.click.call(this, event);
-                    this.art.emit('setting:click', $setting);
-                });
-            }
-            insertByIndex($settingBody, $setting, setting.index || id);
-            if (setting.mounted) {
-                setting.mounted($settingInner);
-            }
-            if (callback) {
-                callback($settingInner);
-            }
-            this.commonMethod(setting, $setting);
-            this[name] = setting;
-            this.art.emit('setting:add', setting);
-        }
-    }
-
-    commonMethod(setting, $setting) {
-        Object.defineProperty(setting, '$ref', {
-            get: () => $setting,
-        });
-
-        Object.defineProperty(setting, 'hide', {
-            value: () => {
-                setStyle($setting, 'display', 'none');
-                this.art.emit('setting:hide', $setting);
-            },
-        });
-
-        Object.defineProperty(setting, 'show', {
-            value: () => {
-                setStyle($setting, 'display', 'block');
-                this.art.emit('setting:show', $setting);
-            },
-        });
+        const { $settingBody } = this.art.refs;
+        componentMethod(this.art, this, $settingBody, item, callback, 'setting');
     }
 
     show() {
-        const {
-            refs: { $setting },
-        } = this.art;
+        const { $setting } = this.art.refs;
         setStyle($setting, 'display', 'flex');
         this.state = true;
         this.art.emit('setting:show', $setting);
     }
 
     hide() {
-        const {
-            refs: { $setting },
-        } = this.art;
+        const { $setting } = this.art.refs;
         setStyle($setting, 'display', 'none');
         this.state = false;
         this.art.emit('setting:hide', $setting);

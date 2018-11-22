@@ -6,15 +6,18 @@ export default function flip(settingOption) {
         return {
             ...settingOption,
             html: `
-                <div class="art-setting-btns">
-                    <div class="art-setting-btn current">
-                        <span data-flip="normal">${i18n.get('Normal')}</span>
-                    </div>
-                    <div class="art-setting-btn">
-                        <span data-flip="horizontal">${i18n.get('Horizontal')}</span>
-                    </div>
-                    <div class="art-setting-btn">
-                        <span data-flip="vertical">${i18n.get('Vertical')}</span>
+                <div class="art-setting-header">${i18n.get(settingOption.title)}</div>
+                <div class="art-setting-body">
+                    <div class="art-setting-btns">
+                        <div class="art-setting-btn current">
+                            <span data-flip="normal">${i18n.get('Normal')}</span>
+                        </div>
+                        <div class="art-setting-btn">
+                            <span data-flip="horizontal">${i18n.get('Horizontal')}</span>
+                        </div>
+                        <div class="art-setting-btn">
+                            <span data-flip="vertical">${i18n.get('Vertical')}</span>
+                        </div>
                     </div>
                 </div>
             `,
