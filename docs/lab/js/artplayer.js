@@ -591,6 +591,7 @@
     mimeCodec: 'string',
     theme: 'string',
     volume: 'number',
+    muted: 'boolean',
     autoplay: 'boolean',
     autoSize: 'boolean',
     loop: 'boolean',
@@ -865,6 +866,10 @@
       $video[key] = option.moreVideoAttr[key];
     });
 
+    if (option.muted) {
+      $video.muted = option.muted;
+    }
+
     if (option.volume) {
       $video.volume = clamp(option.volume, 0, 1);
     }
@@ -1070,12 +1075,13 @@
         }
       }
     });
-    Object.defineProperty(player, 'mute', {
+    Object.defineProperty(player, 'muted', {
       get: function get() {
-        return player.volume === 0;
+        return $video.muted;
       },
-      set: function set(mute) {
-        player.volume = mute ? 0 : storage.get('volume');
+      set: function set(muted) {
+        $video.muted = muted;
+        art.emit('volumeChange', $video.volume);
       }
     });
   }
@@ -3578,46 +3584,35 @@
       value: function apply(art, $control) {
         var _this = this;
 
+        this.art = art;
         var _art$events = art.events,
             proxy = _art$events.proxy,
             hover = _art$events.hover,
             player = art.player,
-            i18n = art.i18n,
-            storage = art.storage;
+            i18n = art.i18n;
         this.$volume = append($control, icons.volume);
         this.$volumeClose = append($control, icons.volumeClose);
         this.$volumePanel = append($control, '<div class="art-volume-panel"></div>');
         this.$volumeHandle = append(this.$volumePanel, '<div class="art-volume-slider-handle"></div>');
         tooltip(this.$volume, i18n.get('Mute'));
         setStyle(this.$volumeClose, 'display', 'none');
-        art.on('volumeChange', function (percentage) {
-          if (percentage === 0) {
-            setStyle(_this.$volume, 'display', 'none');
-            setStyle(_this.$volumeClose, 'display', 'flex');
-          } else {
-            setStyle(_this.$volume, 'display', 'flex');
-            setStyle(_this.$volumeClose, 'display', 'none');
-          }
-        });
+        this.setVolumeHandle(player.volume);
         art.on('video:volumechange', function () {
           _this.setVolumeHandle(player.volume);
         });
         proxy(this.$volume, 'click', function () {
-          player.mute = true;
+          player.muted = true;
         });
         proxy(this.$volumeClose, 'click', function () {
-          player.mute = false;
+          player.muted = false;
         });
         hover($control, function () {
           _this.$volumePanel.classList.add('art-volume-panel-hover');
-
-          sleep(200).then(function () {
-            _this.setVolumeHandle(player.volume);
-          });
         }, function () {
           _this.$volumePanel.classList.remove('art-volume-panel-hover');
         });
         proxy(this.$volumePanel, 'click', function (event) {
+          player.muted = false;
           player.volume = _this.volumeChangeFromEvent(event);
         });
         proxy(this.$volumeHandle, 'mousedown', function () {
@@ -3625,6 +3620,7 @@
         });
         proxy(this.$volumeHandle, 'mousemove', function (event) {
           if (_this.isDroging) {
+            player.muted = false;
             player.volume = _this.volumeChangeFromEvent(event);
           }
         });
@@ -3651,10 +3647,23 @@
       key: "setVolumeHandle",
       value: function setVolumeHandle() {
         var percentage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.7;
-        var panelWidth = getStyle(this.$volumePanel, 'width');
-        var handleWidth = getStyle(this.$volumeHandle, 'width');
-        var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
-        setStyle(this.$volumeHandle, 'left', "".concat(width, "px"));
+        var player = this.art.player;
+
+        if (player.muted || percentage === 0) {
+          setStyle(this.$volume, 'display', 'none');
+          setStyle(this.$volumeClose, 'display', 'flex');
+          setStyle(this.$volumeHandle, 'left', '0');
+        } else {
+          // TODO...
+          var panelWidth = getStyle(this.$volumePanel, 'width') || 60;
+          var handleWidth = getStyle(this.$volumeHandle, 'width');
+          console.log('panelWidth', panelWidth);
+          console.log('handleWidth', handleWidth);
+          var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
+          setStyle(this.$volume, 'display', 'flex');
+          setStyle(this.$volumeClose, 'display', 'none');
+          setStyle(this.$volumeHandle, 'left', "".concat(width, "px"));
+        }
       }
     }]);
 
@@ -5537,6 +5546,7 @@
           mimeCodec: '',
           theme: '#f00',
           volume: 0.7,
+          muted: false,
           autoplay: false,
           autoSize: false,
           loop: false,

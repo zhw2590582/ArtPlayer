@@ -53,6 +53,7 @@ class Artplayer extends Emitter {
             mimeCodec: '',
             theme: '#f00',
             volume: 0.7,
+            muted: false,
             autoplay: false,
             autoSize: false,
             loop: false,

@@ -5,7 +5,8 @@ var art = new Artplayer({
   title: '【新海诚动画】『秒速5センチメートル』',
   poster: url + '/image/one-more-time-one-more-chance-poster.jpg',
   volume: 0.5,
-  autoplay: true,
+  muted: false,
+  autoplay: false,
   pip: true,
   autoSize: true,
   screenshot: true,
@@ -96,20 +97,23 @@ var art = new Artplayer({
   ]
 });
 
-art.on('resize', $player => {
-  art.controls.quality.show();
-  art.controls.setting.show();
-  art.controls.subtitle.show();
-  art.controls.pip.show();
 
-  var playerWidth = $player.clientWidth;
-  if (playerWidth < 480) {
-    art.controls.quality.hide();
-    art.controls.setting.hide();
-  } 
+art.on('firstCanplay', () => {
+  art.on('resize', $player => {
+    art.controls.quality.show();
+    art.controls.setting.show();
+    art.controls.subtitle.show();
+    art.controls.pip.show();
   
-  if (playerWidth < 360) {
-    art.controls.subtitle.hide();
-    art.controls.pip.hide();
-  }
+    var playerWidth = $player.clientWidth;
+    if (playerWidth < 480) {
+      art.controls.quality.hide();
+      art.controls.setting.hide();
+    } 
+    
+    if (playerWidth < 360) {
+      art.controls.subtitle.hide();
+      art.controls.pip.hide();
+    }
+  });
 });

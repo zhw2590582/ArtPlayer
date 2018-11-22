@@ -22,10 +22,11 @@ export default function volumeMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'mute', {
-        get: () => player.volume === 0,
-        set: mute => {
-            player.volume = mute ? 0 : storage.get('volume');
+    Object.defineProperty(player, 'muted', {
+        get: () => $video.muted,
+        set: muted => {
+            $video.muted = muted;
+            art.emit('volumeChange', $video.volume);
         },
     });
 }

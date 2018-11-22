@@ -9,6 +9,10 @@ export default function attrInit(art, player) {
         $video[key] = option.moreVideoAttr[key];
     });
 
+    if (option.muted) {
+        $video.muted = option.muted;
+    }
+    
     if (option.volume) {
         $video.volume = clamp(option.volume, 0, 1);
     }
