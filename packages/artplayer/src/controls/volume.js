@@ -12,8 +12,8 @@ export default class Volume {
             events: { proxy, hover },
             player,
             i18n,
-            storage,
         } = art;
+        
         this.$volume = append($control, icons.volume);
         this.$volumeClose = append($control, icons.volumeClose);
         this.$volumePanel = append($control, '<div class="art-volume-panel"></div>');
