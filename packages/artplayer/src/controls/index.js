@@ -191,6 +191,10 @@ export default class Controls {
     }
 
     commonMethod(control, $control) {
+        Object.defineProperty(control, '$ref', {
+            get: () => $control,
+        });
+
         Object.defineProperty(control, 'hide', {
             value: () => {
                 setStyle($control, 'display', 'none');

@@ -4021,6 +4021,11 @@
       value: function commonMethod(control, $control) {
         var _this4 = this;
 
+        Object.defineProperty(control, '$ref', {
+          get: function get() {
+            return $control;
+          }
+        });
         Object.defineProperty(control, 'hide', {
           value: function value() {
             setStyle($control, 'display', 'none');
@@ -4282,8 +4287,9 @@
             callback($menu);
           }
 
-          this[name] = $menu;
-          this.art.emit('contextmenu:add', $menu);
+          this.commonMethod(menu, $menu);
+          this[name] = menu;
+          this.art.emit('contextmenu:add', menu);
         }
       }
     }, {
@@ -4318,6 +4324,31 @@
 
         setStyle($contextmenu, 'left', "".concat(menuLeft, "px"));
         setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
+      }
+    }, {
+      key: "commonMethod",
+      value: function commonMethod(menu, $menu) {
+        var _this4 = this;
+
+        Object.defineProperty(menu, '$ref', {
+          get: function get() {
+            return $menu;
+          }
+        });
+        Object.defineProperty(menu, 'hide', {
+          value: function value() {
+            setStyle($menu, 'display', 'none');
+
+            _this4.art.emit('menu:hide', $menu);
+          }
+        });
+        Object.defineProperty(menu, 'show', {
+          value: function value() {
+            setStyle($menu, 'display', 'block');
+
+            _this4.art.emit('menu:show', $menu);
+          }
+        });
       }
     }, {
       key: "hide",
@@ -5164,9 +5195,35 @@
             callback($layer);
           }
 
-          this[name] = $layer;
-          this.art.emit('layers:add', $layer);
+          this.commonMethod(layer, $layer);
+          this[name] = layer;
+          this.art.emit('layers:add', layer);
         }
+      }
+    }, {
+      key: "commonMethod",
+      value: function commonMethod(layer, $layer) {
+        var _this3 = this;
+
+        Object.defineProperty(layer, '$ref', {
+          get: function get() {
+            return $layer;
+          }
+        });
+        Object.defineProperty(layer, 'hide', {
+          value: function value() {
+            setStyle($layer, 'display', 'none');
+
+            _this3.art.emit('layer:hide', $layer);
+          }
+        });
+        Object.defineProperty(layer, 'show', {
+          value: function value() {
+            setStyle($layer, 'display', 'block');
+
+            _this3.art.emit('layer:show', $layer);
+          }
+        });
       }
     }, {
       key: "show",
@@ -5399,9 +5456,35 @@
             callback($settingInner);
           }
 
-          this[name] = $setting;
-          this.art.emit('setting:add', $setting);
+          this.commonMethod(setting, $setting);
+          this[name] = setting;
+          this.art.emit('setting:add', setting);
         }
+      }
+    }, {
+      key: "commonMethod",
+      value: function commonMethod(setting, $setting) {
+        var _this4 = this;
+
+        Object.defineProperty(setting, '$ref', {
+          get: function get() {
+            return $setting;
+          }
+        });
+        Object.defineProperty(setting, 'hide', {
+          value: function value() {
+            setStyle($setting, 'display', 'none');
+
+            _this4.art.emit('setting:hide', $setting);
+          }
+        });
+        Object.defineProperty(setting, 'show', {
+          value: function value() {
+            setStyle($setting, 'display', 'block');
+
+            _this4.art.emit('setting:show', $setting);
+          }
+        });
       }
     }, {
       key: "show",

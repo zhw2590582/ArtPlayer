@@ -64,9 +64,30 @@ export default class Setting {
             if (callback) {
                 callback($settingInner);
             }
-            this[name] = $setting;
-            this.art.emit('setting:add', $setting);
+            this.commonMethod(setting, $setting);
+            this[name] = setting;
+            this.art.emit('setting:add', setting);
         }
+    }
+
+    commonMethod(setting, $setting) {
+        Object.defineProperty(setting, '$ref', {
+            get: () => $setting,
+        });
+
+        Object.defineProperty(setting, 'hide', {
+            value: () => {
+                setStyle($setting, 'display', 'none');
+                this.art.emit('setting:hide', $setting);
+            },
+        });
+
+        Object.defineProperty(setting, 'show', {
+            value: () => {
+                setStyle($setting, 'display', 'block');
+                this.art.emit('setting:show', $setting);
+            },
+        });
     }
 
     show() {

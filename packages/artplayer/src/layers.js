@@ -40,9 +40,30 @@ export default class Layers {
             if (callback) {
                 callback($layer);
             }
-            this[name] = $layer;
-            this.art.emit('layers:add', $layer);
+            this.commonMethod(layer, $layer);
+            this[name] = layer;
+            this.art.emit('layers:add', layer);
         }
+    }
+
+    commonMethod(layer, $layer) {
+        Object.defineProperty(layer, '$ref', {
+            get: () => $layer,
+        });
+
+        Object.defineProperty(layer, 'hide', {
+            value: () => {
+                setStyle($layer, 'display', 'none');
+                this.art.emit('layer:hide', $layer);
+            },
+        });
+
+        Object.defineProperty(layer, 'show', {
+            value: () => {
+                setStyle($layer, 'display', 'block');
+                this.art.emit('layer:show', $layer);
+            },
+        });
     }
 
     show() {

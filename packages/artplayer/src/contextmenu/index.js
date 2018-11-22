@@ -97,8 +97,9 @@ export default class Contextmenu {
             if (callback) {
                 callback($menu);
             }
-            this[name] = $menu;
-            this.art.emit('contextmenu:add', $menu);
+            this.commonMethod(menu, $menu);
+            this[name] = menu;
+            this.art.emit('contextmenu:add', menu);
         }
     }
 
@@ -123,6 +124,26 @@ export default class Contextmenu {
 
         setStyle($contextmenu, 'left', `${menuLeft}px`);
         setStyle($contextmenu, 'top', `${menuTop}px`);
+    }
+
+    commonMethod(menu, $menu) {
+        Object.defineProperty(menu, '$ref', {
+            get: () => $menu,
+        });
+
+        Object.defineProperty(menu, 'hide', {
+            value: () => {
+                setStyle($menu, 'display', 'none');
+                this.art.emit('menu:hide', $menu);
+            },
+        });
+
+        Object.defineProperty(menu, 'show', {
+            value: () => {
+                setStyle($menu, 'display', 'block');
+                this.art.emit('menu:show', $menu);
+            },
+        });
     }
 
     hide() {
