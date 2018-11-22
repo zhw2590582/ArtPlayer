@@ -607,8 +607,8 @@
     layers: {
       type: 'array',
       child: {
-        disable: 'boolean',
         type: 'object|function',
+        disable: 'boolean',
         name: 'string',
         index: 'number',
         html: validElement,
@@ -619,8 +619,8 @@
     contextmenu: {
       type: 'array',
       child: {
-        disable: 'boolean',
         type: 'object|function',
+        disable: 'boolean',
         name: 'string',
         index: 'number',
         html: validElement,
@@ -639,7 +639,7 @@
     controls: {
       type: 'array',
       child: {
-        type: 'object',
+        type: 'object|function',
         option: {
           type: 'object',
           child: {
@@ -3868,6 +3868,7 @@
       value: function init() {
         var _this2 = this;
 
+        var option = this.art.option;
         this.add(new Progress({
           name: 'progress',
           disable: false,
@@ -3876,7 +3877,7 @@
         }));
         this.add(new Thumbnails({
           name: 'thumbnails',
-          disable: !this.art.option.thumbnails.url,
+          disable: !option.thumbnails.url,
           position: 'top',
           index: 20
         }));
@@ -3900,72 +3901,94 @@
         }));
         this.add(new Quality({
           name: 'quality',
-          disable: this.art.option.quality.length === 0,
+          disable: option.quality.length === 0,
           position: 'right',
           index: 10
         }));
         this.add(new Screenshot({
           name: 'screenshot',
-          disable: !this.art.option.screenshot,
+          disable: !option.screenshot,
           position: 'right',
           index: 20
         }));
         this.add(new Subtitle({
           name: 'subtitle',
-          disable: !this.art.option.subtitle.url,
+          disable: !option.subtitle.url,
           position: 'right',
           index: 30
         }));
         this.add(new Setting({
           name: 'setting',
-          disable: !this.art.option.setting,
+          disable: !option.setting,
           position: 'right',
           index: 40
         }));
         this.add(new Pip({
           name: 'pip',
-          disable: !this.art.option.pip,
+          disable: !option.pip,
           position: 'right',
           index: 50
         }));
         this.add(new FullscreenWeb({
           name: 'fullscreenWeb',
-          disable: !this.art.option.fullscreenWeb,
+          disable: !option.fullscreenWeb,
           position: 'right',
           index: 60
         }));
         this.add(new Fullscreen({
           name: 'fullscreen',
-          disable: !this.art.option.fullscreen,
+          disable: !option.fullscreen,
           position: 'right',
           index: 70
         }));
-        this.art.option.controls.forEach(function (item) {
+        option.controls.forEach(function (item) {
           _this2.add(item);
         });
       }
     }, {
       key: "add",
-      value: function add(control, callback) {
-        var option = control.option;
+      value: function add(item, callback) {
+        var _this3 = this;
 
-        if (option && !option.disable) {
+        var control = typeof item === 'function' ? item(this.art) : item.option;
+
+        if (control && !control.disable) {
+          var proxy = this.art.events.proxy;
           id += 1;
-          var name = option.name || "control".concat(id);
+          var name = control.name || "control".concat(id);
           var $control = document.createElement('div');
           $control.classList.value = "art-control art-control-".concat(name);
-          this.mount(option.position, $control, option.index || id);
-          this.commonMethod(control, $control);
 
-          if (control.apply) {
-            control.apply(this.art, $control);
+          if (control.html) {
+            append($control, control.html);
+          }
+
+          if (control.click) {
+            proxy($control, 'click', function (event) {
+              event.preventDefault();
+              control.click.call(_this3, event);
+
+              _this3.art.emit('control:click', $control);
+            });
+          }
+
+          if (item.apply) {
+            item.apply(this.art, $control);
+          }
+
+          this.mount(control.position, $control, control.index || id);
+
+          if (control.mounted) {
+            control.mounted($control);
           }
 
           if (callback) {
             callback($control);
           }
 
+          this.commonMethod(control, $control);
           this[name] = control;
+          this.art.emit('control:add', $control);
         }
       }
     }, {
@@ -3996,20 +4019,20 @@
     }, {
       key: "commonMethod",
       value: function commonMethod(control, $control) {
-        var _this3 = this;
+        var _this4 = this;
 
         Object.defineProperty(control, 'hide', {
           value: function value() {
             setStyle($control, 'display', 'none');
 
-            _this3.art.emit('control:hide', $control);
+            _this4.art.emit('control:hide', $control);
           }
         });
         Object.defineProperty(control, 'show', {
           value: function value() {
             setStyle($control, 'display', 'block');
 
-            _this3.art.emit('control:show', $control);
+            _this4.art.emit('control:show', $control);
           }
         });
       }
@@ -4030,93 +4053,124 @@
     return Controls;
   }();
 
-  function playbackRate(art) {
-    var option = art.option,
-        i18n = art.i18n,
-        player = art.player;
-    return {
-      disable: !option.playbackRate,
-      name: 'playbackRate',
-      index: 10,
-      html: "\n          ".concat(i18n.get('Play speed'), ":\n          <span data-rate=\"0.5\">0.5</span>\n          <span data-rate=\"0.75\">0.75</span>\n          <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n          <span data-rate=\"1.25\">1.25</span>\n          <span data-rate=\"1.5\">1.5</span>\n          <span data-rate=\"2.0\">2.0</span>\n        "),
-      click: function click(event) {
-        var target = event.target;
-        var rate = target.dataset.rate;
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
 
-        if (rate) {
-          player.playbackRate(Number(rate));
+    return obj;
+  }
+
+  var defineProperty = _defineProperty;
+
+  function _objectSpread(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      var ownKeys = Object.keys(source);
+
+      if (typeof Object.getOwnPropertySymbols === 'function') {
+        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+        }));
+      }
+
+      ownKeys.forEach(function (key) {
+        defineProperty(target, key, source[key]);
+      });
+    }
+
+    return target;
+  }
+
+  var objectSpread = _objectSpread;
+
+  function playbackRate(menuOption) {
+    return function (art) {
+      var i18n = art.i18n,
+          player = art.player;
+      return objectSpread({}, menuOption, {
+        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        click: function click(event) {
+          var target = event.target;
+          var rate = target.dataset.rate;
+
+          if (rate) {
+            player.playbackRate(Number(rate));
+            art.contextmenu.hide();
+          }
+        },
+        mounted: function mounted($menu) {
+          art.on('playbackRateChange', function (rate) {
+            var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
+              return Number(item.dataset.rate) === rate;
+            });
+            inverseClass($current, 'current');
+          });
+        }
+      });
+    };
+  }
+
+  function aspectRatio(menuOption) {
+    return function (art) {
+      var i18n = art.i18n,
+          player = art.player;
+      return objectSpread({}, menuOption, {
+        html: "\n                ".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
+        click: function click(event) {
+          var target = event.target;
+          var ratio = target.dataset.ratio;
+
+          if (ratio) {
+            player.aspectRatio(ratio.split(':'));
+            art.contextmenu.hide();
+          }
+        },
+        mounted: function mounted($menu) {
+          art.on('aspectRatioChange', function (ratio) {
+            var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
+              return item.dataset.ratio === ratio.join(':');
+            });
+            inverseClass($current, 'current');
+          });
+        }
+      });
+    };
+  }
+
+  function info(menuOption) {
+    return function (art) {
+      return objectSpread({}, menuOption, {
+        html: art.i18n.get('Video info'),
+        click: function click() {
+          art.info.show();
           art.contextmenu.hide();
         }
-      },
-      callback: function callback($menu) {
-        art.on('playbackRateChange', function (rate) {
-          var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
-            return Number(item.dataset.rate) === rate;
-          });
-          inverseClass($current, 'current');
-        });
-      }
+      });
     };
   }
 
-  function aspectRatio(art) {
-    var option = art.option,
-        i18n = art.i18n,
-        player = art.player;
-    return {
-      disable: !option.aspectRatio,
-      name: 'aspectRatio',
-      index: 20,
-      html: "\n          ".concat(i18n.get('Aspect ratio'), ":\n          <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n          <span data-ratio=\"4:3\">4:3</span>\n          <span data-ratio=\"16:9\">16:9</span>\n        "),
-      click: function click(event) {
-        var target = event.target;
-        var ratio = target.dataset.ratio;
+  function version(menuOption) {
+    return objectSpread({}, menuOption, {
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.3</a>'
+    });
+  }
 
-        if (ratio) {
-          player.aspectRatio(ratio.split(':'));
+  function close(menuOption) {
+    return function (art) {
+      return objectSpread({}, menuOption, {
+        html: art.i18n.get('Close'),
+        click: function click() {
           art.contextmenu.hide();
         }
-      },
-      callback: function callback($menu) {
-        art.on('aspectRatioChange', function (ratio) {
-          var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
-            return item.dataset.ratio === ratio.join(':');
-          });
-          inverseClass($current, 'current');
-        });
-      }
-    };
-  }
-
-  function info(art) {
-    return {
-      disable: false,
-      name: 'info',
-      index: 30,
-      html: art.i18n.get('Video info'),
-      click: function click() {
-        art.info.show();
-        art.contextmenu.hide();
-      }
-    };
-  }
-
-  var version = {
-    disable: false,
-    name: 'version',
-    index: 40,
-    html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.3</a>'
-  };
-
-  function close(art) {
-    return {
-      disable: false,
-      name: 'close',
-      index: 50,
-      html: art.i18n.get('Close'),
-      click: function click() {
-        art.contextmenu.hide();
-      }
+      });
     };
   }
 
@@ -4148,7 +4202,31 @@
             $player = _this$art$refs.$player,
             $contextmenu = _this$art$refs.$contextmenu,
             proxy = _this$art.events.proxy;
-        option.contextmenu.push(playbackRate, aspectRatio, info, version, close);
+        this.add(playbackRate({
+          disable: !option.playbackRate,
+          name: 'playbackRate',
+          index: 10
+        }));
+        this.add(aspectRatio({
+          disable: !option.aspectRatio,
+          name: 'aspectRatio',
+          index: 20
+        }));
+        this.add(info({
+          disable: false,
+          name: 'info',
+          index: 30
+        }));
+        this.add(version({
+          disable: false,
+          name: 'version',
+          index: 40
+        }));
+        this.add(close({
+          disable: false,
+          name: 'close',
+          index: 50
+        }));
         option.contextmenu.forEach(function (item) {
           _this2.add(item);
         });
@@ -4173,15 +4251,17 @@
         var menu = typeof item === 'function' ? item(this.art) : item;
 
         if (!menu.disable) {
-          id$1 += 1;
           var _this$art2 = this.art,
               $contextmenu = _this$art2.refs.$contextmenu,
               proxy = _this$art2.events.proxy;
+          id$1 += 1;
           var name = menu.name || "contextmenu".concat(id$1);
           var $menu = document.createElement('div');
           $menu.classList.value = "art-contextmenu art-contextmenu-".concat(name);
-          setStyles($menu, menu.style || {});
-          append($menu, menu.html);
+
+          if (menu.html) {
+            append($menu, menu.html);
+          }
 
           if (menu.click) {
             proxy($menu, 'click', function (event) {
@@ -4193,16 +4273,16 @@
           }
 
           insertByIndex($contextmenu, $menu, menu.index || id$1);
-          this[name] = $menu;
 
-          if (menu.callback) {
-            menu.callback($menu);
+          if (menu.mounted) {
+            menu.mounted($menu);
           }
 
           if (callback) {
             callback($menu);
           }
 
+          this[name] = $menu;
           this.art.emit('contextmenu:add', $menu);
         }
       }
@@ -5052,15 +5132,18 @@
         var layer = typeof item === 'function' ? item(this.art) : item;
 
         if (!layer.disable) {
-          id$2 += 1;
           var _this$art = this.art,
               $layers = _this$art.refs.$layers,
               proxy = _this$art.events.proxy;
+          id$2 += 1;
           var name = layer.name || "layer".concat(id$2);
           var $layer = document.createElement('div');
           $layer.classList.value = "art-layer art-layer-".concat(name);
           setStyles($layer, layer.style || {});
-          append($layer, layer.html);
+
+          if (layer.html) {
+            append($layer, layer.html);
+          }
 
           if (layer.click) {
             proxy($layer, 'click', function (event) {
@@ -5072,16 +5155,16 @@
           }
 
           insertByIndex($layers, $layer, layer.index || id$2);
-          this[name] = $layer;
 
-          if (item.callback) {
-            item.callback($layer);
+          if (item.mounted) {
+            item.mounted($layer);
           }
 
           if (callback) {
             callback($layer);
           }
 
+          this[name] = $layer;
           this.art.emit('layers:add', $layer);
         }
       }
@@ -5208,45 +5291,31 @@
     return Mask;
   }();
 
-  var Flip =
-  /*#__PURE__*/
-  function () {
-    function Flip(option) {
-      classCallCheck(this, Flip);
-
-      this.option = option;
-    }
-
-    createClass(Flip, [{
-      key: "apply",
-      value: function apply(art, $setting) {
-        var _this = this;
-
-        var i18n = art.i18n,
-            proxy = art.events.proxy,
-            player = art.player;
-        this.$header = $setting.querySelector('.art-setting-header');
-        this.$body = $setting.querySelector('.art-setting-body');
-        this.$btns = append(this.$body, "\n              <div class=\"art-setting-btns\">\n                <div class=\"art-setting-btn current\">\n                  <span data-flip=\"normal\">".concat(i18n.get('Normal'), "</span>\n                </div>\n                <div class=\"art-setting-btn\">\n                  <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                </div>\n                <div class=\"art-setting-btn\">\n                  <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                </div>\n              </div>\n            "));
-        proxy(this.$btns, 'click', function (event) {
+  function flip(settingOption) {
+    return function (art) {
+      var i18n = art.i18n,
+          player = art.player;
+      return objectSpread({}, settingOption, {
+        html: "\n                <div class=\"art-setting-btns\">\n                    <div class=\"art-setting-btn current\">\n                        <span data-flip=\"normal\">".concat(i18n.get('Normal'), "</span>\n                    </div>\n                    <div class=\"art-setting-btn\">\n                        <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                    </div>\n                    <div class=\"art-setting-btn\">\n                        <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                    </div>\n                </div>\n            "),
+        click: function click(event) {
           var target = event.target;
           var flip = target.dataset.flip;
 
           if (flip) {
             player.flip(flip);
           }
-        });
-        art.on('flipChange', function (flip) {
-          var $current = Array.from(_this.$btns.querySelectorAll('span')).find(function (item) {
-            return item.dataset.flip === flip;
+        },
+        mounted: function mounted($setting) {
+          art.on('flipChange', function (flip) {
+            var $current = Array.from($setting.querySelectorAll('span')).find(function (item) {
+              return item.dataset.flip === flip;
+            });
+            inverseClass($current.parentElement, 'current');
           });
-          inverseClass($current.parentElement, 'current');
-        });
-      }
-    }]);
-
-    return Flip;
-  }();
+        }
+      });
+    };
+  }
 
   var id$3 = 0;
 
@@ -5280,41 +5349,57 @@
         proxy($settingClose, 'click', function () {
           _this2.hide();
         });
-        this.add(new Flip({
-          name: 'flip',
-          title: 'Flip',
+        this.add(flip({
           disable: false,
+          title: 'Flip',
+          name: 'flip',
           index: 10
         }));
       }
     }, {
       key: "add",
-      value: function add(setting, callback) {
-        var option = setting.option;
+      value: function add(item, callback) {
+        var _this3 = this;
 
-        if (option && !option.disable) {
-          id$3 += 1;
+        var setting = typeof item === 'function' ? item(this.art) : item;
+
+        if (!setting.disable) {
           var _this$art2 = this.art,
-              refs = _this$art2.refs,
-              i18n = _this$art2.i18n;
-          var name = option.name || "setting".concat(id$3);
-          var title = option.title || name;
+              i18n = _this$art2.i18n,
+              $settingBody = _this$art2.refs.$settingBody,
+              proxy = _this$art2.events.proxy;
+          id$3 += 1;
+          var name = setting.name || "setting".concat(id$3);
+          var title = setting.title || name;
           var $setting = document.createElement('div');
-          $setting.setAttribute('class', "art-setting art-setting-".concat(name));
+          $setting.classList.value = "art-setting art-setting-".concat(name);
           append($setting, "<div class=\"art-setting-header\">".concat(i18n.get(title), "</div>"));
-          append($setting, '<div class="art-setting-body"></div>');
+          var $settingInner = append($setting, '<div class="art-setting-body"></div>');
 
-          if (setting.apply) {
-            setting.apply(this.art, $setting);
+          if (setting.html) {
+            append($settingInner, setting.html);
           }
 
-          insertByIndex(refs.$settingBody, $setting, option.index || id$3);
-          this[name] = $setting;
+          if ($settingInner.click) {
+            proxy($settingInner, 'click', function (event) {
+              event.preventDefault();
+              setting.click.call(_this3, event);
+
+              _this3.art.emit('setting:click', $setting);
+            });
+          }
+
+          insertByIndex($settingBody, $setting, setting.index || id$3);
+
+          if (setting.mounted) {
+            setting.mounted($settingInner);
+          }
 
           if (callback) {
-            callback($setting);
+            callback($settingInner);
           }
 
+          this[name] = $setting;
           this.art.emit('setting:add', $setting);
         }
       }
@@ -5347,23 +5432,6 @@
 
     return Setting;
   }();
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  var defineProperty = _defineProperty;
 
   var Storage =
   /*#__PURE__*/

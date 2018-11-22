@@ -14,16 +14,18 @@ export default class Layers {
     add(item, callback) {
         const layer = typeof item === 'function' ? item(this.art) : item;
         if (!layer.disable) {
-            id += 1;
             const {
                 refs: { $layers },
                 events: { proxy },
             } = this.art;
+            id += 1;
             const name = layer.name || `layer${id}`;
             const $layer = document.createElement('div');
             $layer.classList.value = `art-layer art-layer-${name}`;
             setStyles($layer, layer.style || {});
-            append($layer, layer.html);
+            if (layer.html) {
+                append($layer, layer.html);
+            }
             if (layer.click) {
                 proxy($layer, 'click', event => {
                     event.preventDefault();
@@ -32,13 +34,13 @@ export default class Layers {
                 });
             }
             insertByIndex($layers, $layer, layer.index || id);
-            this[name] = $layer;
-            if (item.callback) {
-                item.callback($layer);
+            if (item.mounted) {
+                item.mounted($layer);
             }
             if (callback) {
                 callback($layer);
             }
+            this[name] = $layer;
             this.art.emit('layers:add', $layer);
         }
     }

@@ -1,4 +1,4 @@
-import { append, insertByIndex, setStyles, setStyle } from '../utils';
+import { append, insertByIndex, setStyle } from '../utils';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
 import info from './info';
@@ -22,7 +22,35 @@ export default class Contextmenu {
             events: { proxy },
         } = this.art;
 
-        option.contextmenu.push(playbackRate, aspectRatio, info, version, close);
+        this.add(playbackRate({
+            disable: !option.playbackRate,
+            name: 'playbackRate',
+            index: 10,
+        }));
+
+        this.add(aspectRatio({
+            disable: !option.aspectRatio,
+            name: 'aspectRatio',
+            index: 20,
+        }));
+
+        this.add(info({
+            disable: false,
+            name: 'info',
+            index: 30,
+        }));
+
+        this.add(version({
+            disable: false,
+            name: 'version',
+            index: 40,
+        }));
+
+        this.add(close({
+            disable: false,
+            name: 'close',
+            index: 50,
+        }));
 
         option.contextmenu.forEach(item => {
             this.add(item);
@@ -44,16 +72,17 @@ export default class Contextmenu {
     add(item, callback) {
         const menu = typeof item === 'function' ? item(this.art) : item;
         if (!menu.disable) {
-            id += 1;
             const {
                 refs: { $contextmenu },
                 events: { proxy },
             } = this.art;
+            id += 1;
             const name = menu.name || `contextmenu${id}`;
             const $menu = document.createElement('div');
             $menu.classList.value = `art-contextmenu art-contextmenu-${name}`;
-            setStyles($menu, menu.style || {});
-            append($menu, menu.html);
+            if (menu.html) {
+                append($menu, menu.html);
+            }
             if (menu.click) {
                 proxy($menu, 'click', event => {
                     event.preventDefault();
@@ -62,13 +91,13 @@ export default class Contextmenu {
                 });
             }
             insertByIndex($contextmenu, $menu, menu.index || id);
-            this[name] = $menu;
-            if (menu.callback) {
-                menu.callback($menu);
+            if (menu.mounted) {
+                menu.mounted($menu);
             }
             if (callback) {
                 callback($menu);
             }
+            this[name] = $menu;
             this.art.emit('contextmenu:add', $menu);
         }
     }

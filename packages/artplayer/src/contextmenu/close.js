@@ -1,11 +1,9 @@
-export default function close(art) {
-    return {
-        disable: false,
-        name: 'close',
-        index: 50,
+export default function close(menuOption) {
+    return art => ({
+        ...menuOption,
         html: art.i18n.get('Close'),
         click: () => {
             art.contextmenu.hide();
         },
-    };
+    });
 }

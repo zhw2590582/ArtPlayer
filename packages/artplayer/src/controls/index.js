@@ -1,4 +1,4 @@
-import { insertByIndex, setStyle } from '../utils';
+import { insertByIndex, setStyle, append } from '../utils';
 import Fullscreen from './fullscreen';
 import FullscreenWeb from './fullscreenWeb';
 import Pip from './pip';
@@ -23,6 +23,7 @@ export default class Controls {
     }
 
     init() {
+        const { option } = this.art;
         this.add(
             new Progress({
                 name: 'progress',
@@ -35,7 +36,7 @@ export default class Controls {
         this.add(
             new Thumbnails({
                 name: 'thumbnails',
-                disable: !this.art.option.thumbnails.url,
+                disable: !option.thumbnails.url,
                 position: 'top',
                 index: 20,
             }),
@@ -71,7 +72,7 @@ export default class Controls {
         this.add(
             new Quality({
                 name: 'quality',
-                disable: this.art.option.quality.length === 0,
+                disable: option.quality.length === 0,
                 position: 'right',
                 index: 10,
             }),
@@ -80,7 +81,7 @@ export default class Controls {
         this.add(
             new Screenshot({
                 name: 'screenshot',
-                disable: !this.art.option.screenshot,
+                disable: !option.screenshot,
                 position: 'right',
                 index: 20,
             }),
@@ -89,7 +90,7 @@ export default class Controls {
         this.add(
             new Subtitle({
                 name: 'subtitle',
-                disable: !this.art.option.subtitle.url,
+                disable: !option.subtitle.url,
                 position: 'right',
                 index: 30,
             }),
@@ -98,7 +99,7 @@ export default class Controls {
         this.add(
             new Setting({
                 name: 'setting',
-                disable: !this.art.option.setting,
+                disable: !option.setting,
                 position: 'right',
                 index: 40,
             }),
@@ -107,7 +108,7 @@ export default class Controls {
         this.add(
             new Pip({
                 name: 'pip',
-                disable: !this.art.option.pip,
+                disable: !option.pip,
                 position: 'right',
                 index: 50,
             }),
@@ -116,7 +117,7 @@ export default class Controls {
         this.add(
             new FullscreenWeb({
                 name: 'fullscreenWeb',
-                disable: !this.art.option.fullscreenWeb,
+                disable: !option.fullscreenWeb,
                 position: 'right',
                 index: 60,
             }),
@@ -125,33 +126,50 @@ export default class Controls {
         this.add(
             new Fullscreen({
                 name: 'fullscreen',
-                disable: !this.art.option.fullscreen,
+                disable: !option.fullscreen,
                 position: 'right',
                 index: 70,
             }),
         );
 
-        this.art.option.controls.forEach(item => {
+        option.controls.forEach(item => {
             this.add(item);
         });
     }
 
-    add(control, callback) {
-        const { option } = control;
-        if (option && !option.disable) {
+    add(item, callback) {
+        const control = typeof item === 'function' ? item(this.art) : item.option;
+        if (control && !control.disable) {
+            const {
+                events: { proxy },
+            } = this.art;
             id += 1;
-            const name = option.name || `control${id}`;
+            const name = control.name || `control${id}`;
             const $control = document.createElement('div');
             $control.classList.value = `art-control art-control-${name}`;
-            this.mount(option.position, $control, option.index || id);
-            this.commonMethod(control, $control);
-            if (control.apply) {
-                control.apply(this.art, $control);
+            if (control.html) {
+                append($control, control.html);
+            }
+            if (control.click) {
+                proxy($control, 'click', event => {
+                    event.preventDefault();
+                    control.click.call(this, event);
+                    this.art.emit('control:click', $control);
+                });
+            }
+            if (item.apply) {
+                item.apply(this.art, $control);
+            }
+            this.mount(control.position, $control, control.index || id);
+            if (control.mounted) {
+                control.mounted($control);
             }
             if (callback) {
                 callback($control);
             }
+            this.commonMethod(control, $control);
             this[name] = control;
+            this.art.emit('control:add', $control);
         }
     }
 

@@ -35,8 +35,8 @@ export default {
     layers: {
         type: 'array',
         child: {
-            disable: 'boolean',
             type: 'object|function',
+            disable: 'boolean',
             name: 'string',
             index: 'number',
             html: validElement,
@@ -47,8 +47,8 @@ export default {
     contextmenu: {
         type: 'array',
         child: {
-            disable: 'boolean',
             type: 'object|function',
+            disable: 'boolean',
             name: 'string',
             index: 'number',
             html: validElement,
@@ -67,7 +67,7 @@ export default {
     controls: {
         type: 'array',
         child: {
-            type: 'object',
+            type: 'object|function',
             option: {
                 type: 'object',
                 child: {

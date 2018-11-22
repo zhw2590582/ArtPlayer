@@ -94,6 +94,19 @@ var art = new Artplayer({
       time: 300,
       text: '－－终わり－－'
     }
+  ],
+  controls: [
+    function (art) {
+      return {
+        name: 'myController',
+        position: 'right',
+        index: 1,
+        html: 'myController',
+        click: function() {
+          console.log('click myController');
+        }
+      }
+    }
   ]
 });
 

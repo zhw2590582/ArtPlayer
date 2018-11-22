@@ -1,10 +1,16 @@
-import './style/index.scss';
+import './index.scss';
+import i18nMix from './i18nMix';
+import contextmenuMix from './contextmenuMix';
+import settingMix from './settingMix';
+import ControlMix from './controlMix';
 
-class ArtplayerPluginDanmu {
-    constructor() {
-        console.log(this);
-    }
+function artplayerPluginDanmu(Artplayer) {
+    const art = Artplayer.prototype;
+    i18nMix(art);
+    contextmenuMix(art);
+    settingMix(art);
+    ControlMix(art);
 }
 
-window.ArtplayerPluginDanmu = ArtplayerPluginDanmu;
-export default ArtplayerPluginDanmu;
+window.artplayerPluginDanmu = artplayerPluginDanmu;
+export default artplayerPluginDanmu;

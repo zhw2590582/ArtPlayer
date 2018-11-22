@@ -693,7 +693,7 @@ The style object
 
 Click event
 
-### callback
+### mounted
 
 - Type: `Function`
 - Default: `undefined`
@@ -756,13 +756,6 @@ The unique index, used for the priority level
 
 The dom element
 
-### style
-
-- Type: `Object`
-- Default: `{}`
-
-The style object
-
 ### click
 
 - Type: `Function`
@@ -770,7 +763,7 @@ The style object
 
 Click event
 
-### callback
+### mounted
 
 - Type: `Function`
 - Default: `undefined`
@@ -801,14 +794,14 @@ var art = new Artplayer({
 - Type: `Array`
 - Default: `[]`
 
-Custom controls, The type of controls is an object
+Custom controls, The type of controls is an object or function
 
 ### option
 
 - Type: `Object`
 - Default: `{}`
 
-Instantiated an object property
+An object property if instantiated 
 
 #### disable
 
@@ -824,6 +817,13 @@ Whether to disable
 
 The unique name, used for the class name
 
+#### click
+
+- Type: `function`
+- Default: `undefined`
+
+Click event
+
 #### index
 
 - Type: `Number`
@@ -838,32 +838,39 @@ The unique index, used for the priority level
 
 The position where the controller appears: top, left, right
 
+### mounted
+
+- Type: `Function`
+- Default: `undefined`
+
+Callback after mounted
+
+### html
+
+- Type: `String`、`Element`
+- Default: ``
+
+The dom element
+
 [Run Code](/)
 
 ```js
-function MyController(option) {
-  this.option = option;
-}
-
-MyController.prototype.apply = function(art, dom) {
-  dom.innerHTML = this.option.name;
-};
-
 var url = 'https://blog.zhw-island.com/assets-cdn';
 var art = new Artplayer({
   container: '.artplayer-app',
   url: url + '/video/one-more-time-one-more-chance-480p.mp4',
   controls: [
-    new MyController({
-      name: 'myControllerLeft',
-      position: 'left',
-      index: 40
-    }),
-    new MyController({
-      name: 'myControllerRight',
-      position: 'right',
-      index: 10
-    })
+    function myController(art) {
+      return {
+        name: 'myController',
+        position: 'right',
+        index: 10,
+        html: 'myController',
+        click: function() {
+          console.log('myController');
+        }
+      }
+    }
   ]
 });
 ```
