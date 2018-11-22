@@ -36,11 +36,11 @@ export default class Volume {
         });
 
         proxy(this.$volume, 'click', () => {
-            player.volume = 0;
+            player.mute = true;
         });
 
         proxy(this.$volumeClose, 'click', () => {
-            player.volume = storage.get('volume');
+            player.mute = false;
         });
 
         hover(

@@ -2,7 +2,7 @@ import { debounce } from '../utils';
 
 export default function mousemoveInitInit(art, events) {
     const {
-        refs: { $player },
+        refs: { $player, $video },
     } = art;
 
     const autoHide = debounce(() => {
@@ -17,11 +17,11 @@ export default function mousemoveInitInit(art, events) {
         }
     });
 
-    events.proxy($player, 'mousemove', () => {
+    events.proxy($player, 'mousemove', event => {
         autoHide.clearTimeout();
         $player.classList.remove('artplayer-hide-cursor');
         art.controls.show();
-        if (!art.player.pipState && art.isPlaying) {
+        if (!art.player.pipState && art.isPlaying && event.target === $video) {
             autoHide();
         }
     });

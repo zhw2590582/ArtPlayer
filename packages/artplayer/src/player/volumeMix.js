@@ -23,8 +23,9 @@ export default function volumeMix(art, player) {
     });
 
     Object.defineProperty(player, 'mute', {
-        value: () => {
-            player.volume = 0;
+        get: () => player.volume === 0,
+        set: mute => {
+            player.volume = mute ? 0 : storage.get('volume');
         },
     });
 }

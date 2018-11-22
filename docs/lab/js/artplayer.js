@@ -1071,8 +1071,11 @@
       }
     });
     Object.defineProperty(player, 'mute', {
-      value: function value() {
-        player.volume = 0;
+      get: function get() {
+        return player.volume === 0;
+      },
+      set: function set(mute) {
+        player.volume = mute ? 0 : storage.get('volume');
       }
     });
   }
@@ -3600,10 +3603,10 @@
           _this.setVolumeHandle(player.volume);
         });
         proxy(this.$volume, 'click', function () {
-          player.volume = 0;
+          player.mute = true;
         });
         proxy(this.$volumeClose, 'click', function () {
-          player.volume = storage.get('volume');
+          player.mute = false;
         });
         hover($control, function () {
           _this.$volumePanel.classList.add('art-volume-panel-hover');
@@ -4562,7 +4565,9 @@
   }
 
   function mousemoveInitInit(art, events) {
-    var $player = art.refs.$player;
+    var _art$refs = art.refs,
+        $player = _art$refs.$player,
+        $video = _art$refs.$video;
     var autoHide = debounce(function () {
       $player.classList.add('artplayer-hide-cursor');
       $player.classList.remove('artplayer-hover');
@@ -4573,12 +4578,12 @@
         autoHide();
       }
     });
-    events.proxy($player, 'mousemove', function () {
+    events.proxy($player, 'mousemove', function (event) {
       autoHide.clearTimeout();
       $player.classList.remove('artplayer-hide-cursor');
       art.controls.show();
 
-      if (!art.player.pipState && art.isPlaying) {
+      if (!art.player.pipState && art.isPlaying && event.target === $video) {
         autoHide();
       }
     });
