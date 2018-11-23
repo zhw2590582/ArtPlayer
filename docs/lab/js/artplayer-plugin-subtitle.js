@@ -60,6 +60,7 @@
             cue.endTime = cuesCache[index].endTime + time;
           });
           notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
+          art.emit('subtitle:offset', value);
         }
       };
     }
