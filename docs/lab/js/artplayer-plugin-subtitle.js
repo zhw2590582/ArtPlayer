@@ -22,7 +22,7 @@
         title: 'Subtitle',
         name: 'subtitle',
         index: 20,
-        html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-body\">\n                <input style=\"width: 100%;\" class=\"art-subtitle-range\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
+        html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-body\">\n                <input\n                    style=\"\n                        width: 100%;\n                        height: 3px;\n                        outline: none;\n                        appearance: none;\n                        -moz-appearance: none;\n                        -webkit-appearance: none;\n                        background-color: #fff;\n                    \"\n                    class=\"art-subtitle-range\"\n                    type=\"range\"\n                    min=\"-5\"\n                    max=\"5\"\n                    step=\"0.5\"\n                >\n            </div>\n        "),
         mounted: function mounted($setting) {
           var $range = $setting.querySelector('.art-subtitle-range');
           var $value = $setting.querySelector('.art-subtitle-value');
