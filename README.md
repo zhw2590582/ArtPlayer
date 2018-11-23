@@ -9,7 +9,7 @@
 
 ![Alt text](./screenshot.png)
 
-## Introduction
+## Features
 
 > TODO...
 
@@ -67,7 +67,7 @@ var art = new Artplayer({
 | Project                                                                                                          | Description                   |
 | ---------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)    | Danmu plugin for ArtPlayer    |
-| [artplayer-plugin-subtitle](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Subtitle plugin for ArtPlayer |
+| [artplayer-plugin-subtitle](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-subtitle) | Subtitle plugin for ArtPlayer |
 
 ## License
 
