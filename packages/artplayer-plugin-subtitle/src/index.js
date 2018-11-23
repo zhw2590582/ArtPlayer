@@ -24,15 +24,7 @@ function settingMix(art) {
             </div>
             <div class="art-setting-body">
                 <input
-                    style="
-                        width: 100%;
-                        height: 3px;
-                        outline: none;
-                        appearance: none;
-                        -moz-appearance: none;
-                        -webkit-appearance: none;
-                        background-color: #fff;
-                    "
+                    style="width: 100%;height: 3px;outline: none;appearance: none;-moz-appearance: none;-webkit-appearance: none;background-color: #fff;"
                     class="art-subtitle-range"
                     type="range"
                     min="-5"
