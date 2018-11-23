@@ -1,5 +1,5 @@
 import { setStyle } from '../utils';
-import componentMethod from '../utils/componentMethod';
+import component from '../utils/component';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
 import info from './info';
@@ -71,7 +71,7 @@ export default class Contextmenu {
 
     add(item, callback) {
         const { $contextmenu } = this.art.refs;
-        componentMethod(this.art, this, $contextmenu, item, callback, 'contextmenu');
+        component(this.art, this, $contextmenu, item, callback, 'contextmenu');
     }
 
     setPos(event) {

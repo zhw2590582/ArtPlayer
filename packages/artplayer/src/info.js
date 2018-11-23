@@ -25,7 +25,7 @@ export default class Info {
         const { $info, $infoPanel } = this.art.refs;
         setStyle($info, 'display', 'block');
         if (!$infoPanel.innerHTML) {
-            append($infoPanel, this.creatInfo());
+            append($infoPanel, Info.creatInfo());
             this.getHeader();
         }
         clearTimeout(this.timer);
@@ -33,7 +33,7 @@ export default class Info {
         this.art.emit('info:show', $info);
     }
 
-    creatInfo() {
+    static creatInfo() {
         const infoHtml = [];
 
         infoHtml.push(`

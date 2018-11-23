@@ -1,5 +1,5 @@
 import { setStyle } from './utils';
-import componentMethod from './utils/componentMethod';
+import component from './utils/component';
 
 export default class Layers {
     constructor(art) {
@@ -13,7 +13,7 @@ export default class Layers {
 
     add(item, callback) {
         const { $layers } = this.art.refs;
-        componentMethod(this.art, this, $layers, item, callback, 'layer');
+        component(this.art, this, $layers, item, callback, 'layer');
     }
 
     show() {

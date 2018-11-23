@@ -1,5 +1,5 @@
 import { setStyle } from '../utils';
-import componentMethod from '../utils/componentMethod';
+import component from '../utils/component';
 import flip from './flip';
 
 export default class Setting {
@@ -34,7 +34,7 @@ export default class Setting {
 
     add(item, callback) {
         const { $settingBody } = this.art.refs;
-        componentMethod(this.art, this, $settingBody, item, callback, 'setting');
+        component(this.art, this, $settingBody, item, callback, 'setting');
     }
 
     show() {

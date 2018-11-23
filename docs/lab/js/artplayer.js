@@ -387,7 +387,6 @@
   module.exports = _wrapNativeSuper;
   });
 
-  var instances = [];
   var ArtPlayerError =
   /*#__PURE__*/
   function (_Error) {
@@ -417,20 +416,7 @@
       throw new ArtPlayerError(msg);
     }
   }
-  function clamp(num, a, b) {
-    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
-  }
-  function getExt(url) {
-    if (url.includes('?')) {
-      return getExt(url.split('?')[0]);
-    }
 
-    if (url.includes('#')) {
-      return getExt(url.split('#')[0]);
-    }
-
-    return url.trim().toLowerCase().split('.').pop();
-  }
   function append(parent, child) {
     if (child instanceof Element) {
       parent.appendChild(child);
@@ -470,27 +456,6 @@
     var value = window.getComputedStyle(element, null).getPropertyValue(key);
     return numberType ? parseFloat(value) : value;
   }
-  function secondToTime(second) {
-    var add0 = function add0(num) {
-      return num < 10 ? "0".concat(num) : String(num);
-    };
-
-    var hour = Math.floor(second / 3600);
-    var min = Math.floor((second - hour * 3600) / 60);
-    var sec = Math.floor(second - hour * 3600 - min * 60);
-    return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
-  }
-  function tooltip(target, msg) {
-    var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
-    target.setAttribute('data-balloon', msg);
-    target.setAttribute('data-balloon-pos', pos);
-  }
-  function sleep() {
-    var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-    return new Promise(function (resolve) {
-      return setTimeout(resolve, ms);
-    });
-  }
   function sublings(target) {
     return Array.from(target.parentElement.children).filter(function (item) {
       return item !== target;
@@ -501,6 +466,51 @@
       return item.classList.remove(className);
     });
     target.classList.add(className);
+  }
+  function tooltip(target, msg) {
+    var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
+    target.setAttribute('data-balloon', msg);
+    target.setAttribute('data-balloon-pos', pos);
+  }
+
+  function srtToVtt(srtText) {
+    return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
+  }
+  function vttToBlob(vttText) {
+    return URL.createObjectURL(new Blob([vttText], {
+      type: 'text/vtt'
+    }));
+  }
+
+  function clamp(num, a, b) {
+    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+  }
+  function getExt(url) {
+    if (url.includes('?')) {
+      return getExt(url.split('?')[0]);
+    }
+
+    if (url.includes('#')) {
+      return getExt(url.split('#')[0]);
+    }
+
+    return url.trim().toLowerCase().split('.').pop();
+  }
+  function secondToTime(second) {
+    var add0 = function add0(num) {
+      return num < 10 ? "0".concat(num) : String(num);
+    };
+
+    var hour = Math.floor(second / 3600);
+    var min = Math.floor((second - hour * 3600) / 60);
+    var sec = Math.floor(second - hour * 3600 - min * 60);
+    return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
+  }
+  function sleep() {
+    var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    return new Promise(function (resolve) {
+      return setTimeout(resolve, ms);
+    });
   }
   function debounce(func, wait, context) {
     var timeout;
@@ -525,36 +535,25 @@
 
     return fn;
   }
-  function show(target, display) {
-    target.classList.remove('art-hide');
-
-    if (display) {
-      target.style.display = display;
-    }
-  }
-  function hide(target) {
-    target.classList.add('art-hide');
-  }
 
   var utils = /*#__PURE__*/Object.freeze({
-    instances: instances,
-    ArtPlayerError: ArtPlayerError,
-    errorHandle: errorHandle,
     clamp: clamp,
     getExt: getExt,
+    secondToTime: secondToTime,
+    sleep: sleep,
+    debounce: debounce,
+    ArtPlayerError: ArtPlayerError,
+    errorHandle: errorHandle,
     append: append,
     insertByIndex: insertByIndex,
     setStyle: setStyle,
     setStyles: setStyles,
     getStyle: getStyle,
-    secondToTime: secondToTime,
-    tooltip: tooltip,
-    sleep: sleep,
     sublings: sublings,
     inverseClass: inverseClass,
-    debounce: debounce,
-    show: show,
-    hide: hide
+    tooltip: tooltip,
+    srtToVtt: srtToVtt,
+    vttToBlob: vttToBlob
   });
 
   function validElement(paths, value, type) {
@@ -3110,40 +3109,14 @@
     flipMix(art, this);
   };
 
-  function commonMethod(art, option, $element, title) {
-    Object.defineProperty(option, '$ref', {
-      get: function get() {
-        return $element;
-      }
-    });
-    Object.defineProperty(option, 'hide', {
-      value: function value() {
-        setStyle($element, 'display', 'none');
-        art.emit("".concat(title, ":hide"), $element);
-      }
-    });
-    Object.defineProperty(option, 'show', {
-      value: function value() {
-        setStyle($element, 'display', 'block');
-        art.emit("".concat(title, ":show"), $element);
-      }
-    });
-  }
-
-  function componentMethod(art, parent, target, component, callback, title) {
-    var proxy = art.events.proxy;
+  function component(art, parent, target, component, callback, title) {
     var option = typeof component === 'function' ? component(art) : component;
 
     if (!option.disable) {
-      if (parent.id === undefined) {
-        parent.id = 0;
-      }
-
       parent.id += 1;
       var name = option.name || "".concat(title).concat(parent.id);
       var $element = document.createElement('div');
       $element.classList.value = "art-".concat(title, " art-").concat(title, "-").concat(name);
-      insertByIndex(target, $element, option.index || parent.id);
 
       if (option.html) {
         append($element, option.html);
@@ -3154,12 +3127,31 @@
       }
 
       if (option.click) {
-        proxy($element, 'click', function (event) {
+        art.events.proxy($element, 'click', function (event) {
           event.preventDefault();
           option.click.call(parent, event);
           art.emit("".concat(title, ":click"), $element);
         });
       }
+
+      Object.defineProperty(option, '$ref', {
+        get: function get() {
+          return $element;
+        }
+      });
+      Object.defineProperty(option, 'hide', {
+        value: function value() {
+          setStyle($element, 'display', 'none');
+          art.emit("".concat(title, ":hide"), $element);
+        }
+      });
+      Object.defineProperty(option, 'show', {
+        value: function value() {
+          setStyle($element, 'display', 'block');
+          art.emit("".concat(title, ":show"), $element);
+        }
+      });
+      insertByIndex(target, $element, option.index || parent.id);
 
       if (option.mounted) {
         option.mounted($element);
@@ -3169,7 +3161,6 @@
         callback($element);
       }
 
-      commonMethod(art, option, $element, title);
       parent[name] = option;
       art.emit("".concat(title, ":add"), option);
     }
@@ -3933,7 +3924,7 @@
         }
 
         if (parent) {
-          componentMethod(this.art, this, parent, option, callback, 'control');
+          component(this.art, this, parent, option, callback, 'control');
         }
       }
     }, {
@@ -4107,7 +4098,7 @@
       key: "add",
       value: function add(item, callback) {
         var $contextmenu = this.art.refs.$contextmenu;
-        componentMethod(this.art, this, $contextmenu, item, callback, 'contextmenu');
+        component(this.art, this, $contextmenu, item, callback, 'contextmenu');
       }
     }, {
       key: "setPos",
@@ -4144,14 +4135,14 @@
       }
     }, {
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var $contextmenu = this.art.refs.$contextmenu;
         setStyle($contextmenu, 'display', 'none');
         this.art.emit('contextmenu:hide', $contextmenu);
       }
     }, {
       key: "show",
-      value: function show$$1() {
+      value: function show() {
         var $contextmenu = this.art.refs.$contextmenu;
         setStyle($contextmenu, 'display', 'block');
         this.art.emit('contextmenu:show', $contextmenu);
@@ -4192,34 +4183,20 @@
       }
     }, {
       key: "show",
-      value: function show$$1() {
+      value: function show() {
         var _this$art$refs2 = this.art.refs,
             $info = _this$art$refs2.$info,
             $infoPanel = _this$art$refs2.$infoPanel;
         setStyle($info, 'display', 'block');
 
         if (!$infoPanel.innerHTML) {
-          append($infoPanel, this.creatInfo());
+          append($infoPanel, Info.creatInfo());
           this.getHeader();
         }
 
         clearTimeout(this.timer);
         this.loop();
         this.art.emit('info:show', $info);
-      }
-    }, {
-      key: "creatInfo",
-      value: function creatInfo() {
-        var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.3</div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video type:</div>\n            <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video size:</div>\n            <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video duration:</div>\n            <div class=\"art-info-content\" data-video=\"duration\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video resolution:</div>\n            <div class=\"art-info-content\">\n              <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n            </div>\n          </div>\n        ");
-        return infoHtml.join('');
       }
     }, {
       key: "getHeader",
@@ -4271,11 +4248,25 @@
       }
     }, {
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var $info = this.art.refs.$info;
         setStyle($info, 'display', 'none');
         clearTimeout(this.timer);
         this.art.emit('info:hide', $info);
+      }
+    }], [{
+      key: "creatInfo",
+      value: function creatInfo() {
+        var infoHtml = [];
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.3</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video type:</div>\n            <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video size:</div>\n            <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video duration:</div>\n            <div class=\"art-info-content\" data-video=\"duration\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video resolution:</div>\n            <div class=\"art-info-content\">\n              <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n            </div>\n          </div>\n        ");
+        return infoHtml.join('');
       }
     }]);
 
@@ -4294,7 +4285,6 @@
       var url = this.art.option.subtitle.url;
 
       if (url) {
-        this.checkExt(url);
         this.init();
       }
     }
@@ -4354,12 +4344,12 @@
           return response.text();
         }).then(function (text) {
           if (/x-subrip/gi.test(type)) {
-            _this2.vttText = _this2.srtToVtt(text);
+            _this2.vttText = srtToVtt(text);
           } else {
             _this2.vttText = text;
           }
 
-          return _this2.vttToBlob(_this2.vttText);
+          return vttToBlob(_this2.vttText);
         }).catch(function (err) {
           notice.show(err);
           console.warn(err);
@@ -4367,26 +4357,8 @@
         });
       }
     }, {
-      key: "srtToVtt",
-      value: function srtToVtt(text) {
-        return 'WEBVTT \r\n\r\n'.concat(text.replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
-      }
-    }, {
-      key: "vttToBlob",
-      value: function vttToBlob(vttText) {
-        return URL.createObjectURL(new Blob([vttText], {
-          type: 'text/vtt'
-        }));
-      }
-    }, {
-      key: "checkExt",
-      value: function checkExt(url) {
-        var ext = getExt(url);
-        errorHandle(ext === 'vtt' || ext === 'srt', "'subtitle.url' option require 'vtt' or 'srt' format, but got '".concat(ext, "'."));
-      }
-    }, {
       key: "show",
-      value: function show$$1() {
+      value: function show() {
         var _this$art2 = this.art,
             $subtitle = _this$art2.refs.$subtitle,
             i18n = _this$art2.i18n,
@@ -4398,7 +4370,7 @@
       }
     }, {
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var _this$art3 = this.art,
             $subtitle = _this$art3.refs.$subtitle,
             i18n = _this$art3.i18n,
@@ -4423,7 +4395,6 @@
         var _this3 = this;
 
         var $track = this.art.refs.$track;
-        this.checkExt(url);
         errorHandle($track, 'You need to initialize the subtitle option first.');
         this.load(url).then(function (data) {
           $track.src = data;
@@ -4949,18 +4920,18 @@
       key: "add",
       value: function add(item, callback) {
         var $layers = this.art.refs.$layers;
-        componentMethod(this.art, this, $layers, item, callback, 'layer');
+        component(this.art, this, $layers, item, callback, 'layer');
       }
     }, {
       key: "show",
-      value: function show$$1() {
+      value: function show() {
         var $layers = this.art.refs.$layers;
         setStyle($layers, 'display', 'block');
         this.art.emit('layers:show', $layers);
       }
     }, {
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var $layers = this.art.refs.$layers;
         setStyle($layers, 'display', 'none');
         this.art.emit('layers:hide', $layers);
@@ -4983,14 +4954,14 @@
 
     createClass(Loading, [{
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'none');
         this.art.emit('loading:hide', $loading);
       }
     }, {
       key: "show",
-      value: function show$$1() {
+      value: function show() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'flex');
         this.art.emit('loading:show', $loading);
@@ -5012,7 +4983,7 @@
 
     createClass(Notice, [{
       key: "show",
-      value: function show$$1(msg) {
+      value: function show(msg) {
         var _this = this;
 
         var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -5034,7 +5005,7 @@
       }
     }, {
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var $notice = this.art.refs.$notice;
         setStyle($notice, 'display', 'none');
         this.art.emit('notice:hide', $notice);
@@ -5057,14 +5028,14 @@
 
     createClass(Mask, [{
       key: "show",
-      value: function show$$1() {
+      value: function show() {
         var $mask = this.art.refs.$mask;
         setStyle($mask, 'display', 'flex');
         this.art.emit('mask:show', $mask);
       }
     }, {
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var $mask = this.art.refs.$mask;
         setStyle($mask, 'display', 'none');
         this.art.emit('mask:show', $mask);
@@ -5141,11 +5112,11 @@
       key: "add",
       value: function add(item, callback) {
         var $settingBody = this.art.refs.$settingBody;
-        componentMethod(this.art, this, $settingBody, item, callback, 'setting');
+        component(this.art, this, $settingBody, item, callback, 'setting');
       }
     }, {
       key: "show",
-      value: function show$$1() {
+      value: function show() {
         var $setting = this.art.refs.$setting;
         setStyle($setting, 'display', 'flex');
         this.state = true;
@@ -5153,7 +5124,7 @@
       }
     }, {
       key: "hide",
-      value: function hide$$1() {
+      value: function hide() {
         var $setting = this.art.refs.$setting;
         setStyle($setting, 'display', 'none');
         this.state = false;

@@ -1,4 +1,5 @@
-import { errorHandle, getExt, setStyles, setStyle } from './utils';
+import { errorHandle, setStyles, setStyle } from './utils';
+import { srtToVtt, vttToBlob } from './utils/subtitle';
 
 export default class Subtitle {
     constructor(art) {
@@ -7,7 +8,6 @@ export default class Subtitle {
         this.vttText = '';
         const { url } = this.art.option.subtitle;
         if (url) {
-            this.checkExt(url);
             this.init();
         }
     }
@@ -55,45 +55,17 @@ export default class Subtitle {
             })
             .then(text => {
                 if (/x-subrip/gi.test(type)) {
-                    this.vttText = this.srtToVtt(text);
+                    this.vttText = srtToVtt(text);
                 } else {
                     this.vttText = text;
                 }
-                return this.vttToBlob(this.vttText);
+                return vttToBlob(this.vttText);
             })
             .catch(err => {
                 notice.show(err);
                 console.warn(err);
                 throw err;
             });
-    }
-
-    srtToVtt(text) {
-        return 'WEBVTT \r\n\r\n'.concat(
-            text
-                .replace(/\{\\([ibu])\}/g, '</$1>')
-                .replace(/\{\\([ibu])1\}/g, '<$1>')
-                .replace(/\{([ibu])\}/g, '<$1>')
-                .replace(/\{\/([ibu])\}/g, '</$1>')
-                .replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2')
-                .concat('\r\n\r\n'),
-        );
-    }
-
-    vttToBlob(vttText) {
-        return URL.createObjectURL(
-            new Blob([vttText], {
-                type: 'text/vtt',
-            }),
-        );
-    }
-
-    checkExt(url) {
-        const ext = getExt(url);
-        errorHandle(
-            ext === 'vtt' || ext === 'srt',
-            `'subtitle.url' option require 'vtt' or 'srt' format, but got '${ext}'.`,
-        );
     }
 
     show() {
@@ -130,7 +102,6 @@ export default class Subtitle {
 
     switch(url) {
         const { $track } = this.art.refs;
-        this.checkExt(url);
         errorHandle($track, 'You need to initialize the subtitle option first.');
         this.load(url).then(data => {
             $track.src = data;

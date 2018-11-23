@@ -1,4 +1,4 @@
-import componentMethod from '../utils/componentMethod';
+import component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
 import pip from './pip';
@@ -156,7 +156,7 @@ export default class Controls {
         }
 
         if (parent) {
-            componentMethod(this.art, this, parent, option, callback, 'control');
+            component(this.art, this, parent, option, callback, 'control');
         }
     }
 
