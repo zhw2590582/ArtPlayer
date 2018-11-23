@@ -97,12 +97,12 @@ var art = new Artplayer({
     ],
     controls: [
         {
-            name: 'myController',
+            name: 'line',
             position: 'right',
             index: 1,
-            html: 'myController',
+            html: '主线',
             click: function() {
-                console.log('click myController');
+                console.log('click line');
             },
         },
     ],

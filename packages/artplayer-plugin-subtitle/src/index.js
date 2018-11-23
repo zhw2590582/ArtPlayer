@@ -19,13 +19,11 @@ function settingMix(art) {
         name: 'subtitle',
         index: 20,
         html: `
-            <div>
-                <div class="art-setting-header">
-                    ${i18n.get('Subtitle offset time')}: <span class="art-subtitle-value">0</span>s
-                </div>
-                <div class="art-setting-body">
-                    <input style="width: 100%;" class="art-subtitle-range" type="range" min="-5" max="5" step="1">
-                </div>
+            <div class="art-setting-header">
+                ${i18n.get('Subtitle offset time')}: <span class="art-subtitle-value">0</span>s
+            </div>
+            <div class="art-setting-body">
+                <input style="width: 100%;" class="art-subtitle-range" type="range" min="-5" max="5" step="0.5">
             </div>
         `,
         mounted: $setting => {
