@@ -6,7 +6,7 @@ export default function flip(settingOption) {
         return {
             ...settingOption,
             html: `
-                <div class="art-setting-header">${i18n.get(settingOption.title)}</div>
+                <div class="art-setting-header">${i18n.get('Flip')}</div>
                 <div class="art-setting-body">
                     <div class="art-setting-btns">
                         <div class="art-setting-btn current">

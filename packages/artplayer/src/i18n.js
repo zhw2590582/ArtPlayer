@@ -1,3 +1,5 @@
+import merge from 'deepmerge';
+
 let i18nMap = {
     'zh-cn': {
         'About author': '关于作者',
@@ -81,8 +83,8 @@ export default class I18n {
         return this.language[key] || key;
     }
 
-    update(callback) {
-        i18nMap = callback(i18nMap);
+    update(value) {
+        i18nMap = merge(i18nMap, value);
         this.init();
     }
 }

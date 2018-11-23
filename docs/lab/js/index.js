@@ -106,11 +106,7 @@ var art = new Artplayer({
             },
         },
     ],
-    plugins: [
-        artplayerPluginSubtitle({
-            time: 4
-        })
-    ]
+    plugins: [artplayerPluginSubtitle]
 });
 
 art.on('firstCanplay', () => {

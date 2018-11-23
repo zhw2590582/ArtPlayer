@@ -26,7 +26,6 @@ export default class Setting {
 
         this.add(flip({
             disable: false,
-            title: 'Flip',
             name: 'flip',
             index: 10,
         }));

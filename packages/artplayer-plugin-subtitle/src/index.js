@@ -1,31 +1,67 @@
-function artplayerPluginSubtitle(option) {
-    return art => {
-        const { errorHandle, clamp, sleep } = art.constructor.utils;
+function i18nMix(i18n) {
+    i18n.update({
+        'zh-cn': {
+            'Subtitle offset time': '字幕偏移时间',
+        },
+        'zh-tw': {
+            'Subtitle offset time': '字幕偏移時間',
+        },
+    });
+}
 
-        errorHandle(
-            option && typeof option.time === 'number',
-            `The plugin 'artplayerPluginSubtitle': 'option.time' require 'number' type, but got '${typeof option.time}'`,
-        );
+function settingMix(art) {
+    const {
+        i18n,
+        events: { proxy },
+    } = art;
+    return {
+        title: 'Subtitle',
+        name: 'subtitle',
+        index: 20,
+        html: `
+            <div>
+                <div class="art-setting-header">
+                    ${i18n.get('Subtitle offset time')}: <span class="art-subtitle-value">0</span>s
+                </div>
+                <div class="art-setting-body">
+                    <input style="width: 100%;" class="art-subtitle-range" type="range" min="-5" max="5" step="1">
+                </div>
+            </div>
+        `,
+        mounted: $setting => {
+            const $range = $setting.querySelector('.art-subtitle-range');
+            const $value = $setting.querySelector('.art-subtitle-value');
+            proxy($range, 'change', () => {
+                const { value } = $range;
+                $value.innerText = value;
+                art.plugins.artplayerPluginSubtitle.set(Number(value));
+            });
+        },
+    };
+}
 
-        let retry = 0;
-        const maxRetry = 10;
-        const time = clamp(option.time, -10, 10);
-
-        function adjust() {
-            errorHandle(retry < maxRetry, 'It seems that something wrong for reading subtitle');
-            retry += 1;
-            const cues = Array.from(art.refs.$track.track.cues);
-            if (cues.length === 0) {
-                sleep(100).then(adjust);
-            } else {
-                cues.forEach(cue => {
-                    cue.startTime += time;
-                    cue.endTime += time;
-                });
-            }
-        }
-
-        art.on('subtitle:load', adjust);
+function artplayerPluginSubtitle(art) {
+    const { setting, notice, refs, i18n } = art;
+    const cuesCache = [];
+    i18nMix(i18n);
+    setting.add(settingMix);
+    const { clamp } = art.constructor.utils;
+    return {
+        set(value) {
+            const cues = Array.from(refs.$track.track.cues);
+            const time = clamp(value, -5, 5);
+            cues.forEach((cue, index) => {
+                if (!cuesCache[index]) {
+                    cuesCache[index] = {
+                        startTime: cue.startTime,
+                        endTime: cue.endTime,
+                    };
+                }
+                cue.startTime = cuesCache[index].startTime + time;
+                cue.endTime = cuesCache[index].endTime + time;
+            });
+            notice.show(`${i18n.get('Subtitle offset time')}: ${value}s`);
+        },
     };
 }
 

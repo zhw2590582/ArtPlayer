@@ -828,8 +828,8 @@
       }
     }, {
       key: "update",
-      value: function update(callback) {
-        i18nMap = callback(i18nMap);
+      value: function update(value) {
+        i18nMap = deepmerge_1(i18nMap, value);
         this.init();
       }
     }]);
@@ -5040,7 +5040,7 @@
       var i18n = art.i18n,
           player = art.player;
       return objectSpread({}, settingOption, {
-        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get(settingOption.title), "</div>\n                <div class=\"art-setting-body\">\n                    <div class=\"art-setting-btns\">\n                        <div class=\"art-setting-btn current\">\n                            <span data-flip=\"normal\">").concat(i18n.get('Normal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                        </div>\n                    </div>\n                </div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-body\">\n                    <div class=\"art-setting-btns\">\n                        <div class=\"art-setting-btn current\">\n                            <span data-flip=\"normal\">").concat(i18n.get('Normal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                        </div>\n                    </div>\n                </div>\n            "),
         click: function click(event) {
           var target = event.target;
           var flip = target.dataset.flip;
@@ -5093,7 +5093,6 @@
         });
         this.add(flip({
           disable: false,
-          title: 'Flip',
           name: 'flip',
           index: 10
         }));

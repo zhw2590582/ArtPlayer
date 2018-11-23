@@ -39,11 +39,13 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: 'path/to/video.mp4',
     plugins: [
-        artplayerPluginSubtitle({
-            time: -1, // Subtitle delay time, ranging from -10 to 10
-        }),
+        artplayerPluginSubtitle,
     ],
 });
+
+// There will be a slider in the settings panel.
+// Or, you can set subtitle offset time by yourself, range from -5 to 5.
+art.artplayerPluginSubtitle.set(-1);
 ```
 
 ## License
