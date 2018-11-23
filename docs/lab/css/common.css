@@ -10,7 +10,7 @@ html, body {
 .part-left {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 45%;
   border-right: 1px solid #ddd;
 }
 
