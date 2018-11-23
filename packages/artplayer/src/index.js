@@ -71,6 +71,7 @@ class Artplayer extends Emitter {
             quality: [],
             controls: [],
             highlight: [],
+            plugins: [],
             thumbnails: {
                 url: '',
                 number: 60,
@@ -88,18 +89,6 @@ class Artplayer extends Emitter {
             },
             lang: navigator.language.toLowerCase(),
         };
-    }
-
-    static use(...args) {
-        const plugin = args[0];
-        const installedPlugins = this.plugins || (this.plugins = []);
-        if (installedPlugins.indexOf === -1) {
-            installedPlugins.push(plugin);
-            args.unshift(this);
-            plugin(...args.slice(1));
-            this.prototype.emit('use', plugin);
-        }
-        return this;
     }
 
     init() {
@@ -136,6 +125,20 @@ class Artplayer extends Emitter {
         id += 1;
         this.id = id;
         Artplayer.instances.push(this);
+
+        this.plugins = [];
+        this.option.plugins.forEach((plugin, index) => {
+            const resule = plugin(this);
+            let pluginName = '';
+            if (resule && resule.name) {
+                pluginName = resule.name;
+            } else if (plugin.name) {
+                pluginName = plugin.name;
+            } else {
+                pluginName = `plugin${index}`;
+            }
+            this.plugins[pluginName] = resule;
+        });
     }
 
     destroy(removeHtml = false) {

@@ -5,7 +5,6 @@ export default class Subtitle {
     constructor(art) {
         this.art = art;
         this.state = true;
-        this.vttText = '';
         const { url } = this.art.option.subtitle;
         if (url) {
             this.init();
@@ -22,10 +21,11 @@ export default class Subtitle {
         const $track = document.createElement('track');
         $track.default = true;
         $track.kind = 'metadata';
-        this.load(subtitle.url).then(data => {
-            $track.src = data;
-            $video.appendChild($track);
-            this.art.refs.$track = $track;
+        $video.appendChild($track);
+        this.art.refs.$track = $track;
+        this.load(subtitle.url).then(vttText => {
+            $track.src = vttToBlob(vttText);
+            this.art.emit('subtitle:load', vttText);
             if ($video.textTracks && $video.textTracks[0]) {
                 const [track] = $video.textTracks;
                 proxy(track, 'cuechange', () => {
@@ -54,12 +54,13 @@ export default class Subtitle {
                 return response.text();
             })
             .then(text => {
+                let vttText = '';
                 if (/x-subrip/gi.test(type)) {
-                    this.vttText = srtToVtt(text);
+                    vttText = srtToVtt(text);
                 } else {
-                    this.vttText = text;
+                    vttText = text;
                 }
-                return vttToBlob(this.vttText);
+                return vttText;
             })
             .catch(err => {
                 notice.show(err);
@@ -103,8 +104,9 @@ export default class Subtitle {
     switch(url) {
         const { $track } = this.art.refs;
         errorHandle($track, 'You need to initialize the subtitle option first.');
-        this.load(url).then(data => {
-            $track.src = data;
+        this.load(url).then(vttText => {
+            $track.src = vttToBlob(vttText);
+            this.art.emit('subtitle:load', vttText);
             this.art.emit('subtitle:switch', url);
         });
     }

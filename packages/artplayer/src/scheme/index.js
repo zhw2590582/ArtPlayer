@@ -32,6 +32,12 @@ export default {
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
+    plugins: {
+        type: 'array',
+        child: {
+            type: 'function',
+        },
+    },
     layers: {
         type: 'array',
         child: {

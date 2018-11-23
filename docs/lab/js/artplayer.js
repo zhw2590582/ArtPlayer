@@ -4,36 +4,6 @@
   (factory((global.artplayer = {})));
 }(this, (function (exports) { 'use strict';
 
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-        arr2[i] = arr[i];
-      }
-
-      return arr2;
-    }
-  }
-
-  var arrayWithoutHoles = _arrayWithoutHoles;
-
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-  }
-
-  var iterableToArray = _iterableToArray;
-
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
-  }
-
-  var nonIterableSpread = _nonIterableSpread;
-
-  function _toConsumableArray(arr) {
-    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-  }
-
-  var toConsumableArray = _toConsumableArray;
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -615,6 +585,12 @@
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
+    plugins: {
+      type: 'array',
+      child: {
+        type: 'function'
+      }
+    },
     layers: {
       type: 'array',
       child: {
@@ -4292,7 +4268,6 @@
 
       this.art = art;
       this.state = true;
-      this.vttText = '';
       var url = this.art.option.subtitle.url;
 
       if (url) {
@@ -4315,10 +4290,12 @@
         var $track = document.createElement('track');
         $track.default = true;
         $track.kind = 'metadata';
-        this.load(subtitle.url).then(function (data) {
-          $track.src = data;
-          $video.appendChild($track);
-          _this.art.refs.$track = $track;
+        $video.appendChild($track);
+        this.art.refs.$track = $track;
+        this.load(subtitle.url).then(function (vttText) {
+          $track.src = vttToBlob(vttText);
+
+          _this.art.emit('subtitle:load', vttText);
 
           if ($video.textTracks && $video.textTracks[0]) {
             var _$video$textTracks = slicedToArray($video.textTracks, 1),
@@ -4346,21 +4323,21 @@
     }, {
       key: "load",
       value: function load(url) {
-        var _this2 = this;
-
         var notice = this.art.notice;
         var type;
         return fetch(url).then(function (response) {
           type = response.headers.get('Content-Type');
           return response.text();
         }).then(function (text) {
+          var vttText = '';
+
           if (/x-subrip/gi.test(type)) {
-            _this2.vttText = srtToVtt(text);
+            vttText = srtToVtt(text);
           } else {
-            _this2.vttText = text;
+            vttText = text;
           }
 
-          return vttToBlob(_this2.vttText);
+          return vttText;
         }).catch(function (err) {
           notice.show(err);
           console.warn(err);
@@ -4403,14 +4380,16 @@
     }, {
       key: "switch",
       value: function _switch(url) {
-        var _this3 = this;
+        var _this2 = this;
 
         var $track = this.art.refs.$track;
         errorHandle($track, 'You need to initialize the subtitle option first.');
-        this.load(url).then(function (data) {
-          $track.src = data;
+        this.load(url).then(function (vttText) {
+          $track.src = vttToBlob(vttText);
 
-          _this3.art.emit('subtitle:switch', url);
+          _this2.art.emit('subtitle:load', vttText);
+
+          _this2.art.emit('subtitle:switch', url);
         });
       }
     }]);
@@ -5257,6 +5236,21 @@
         id += 1;
         this.id = id;
         Artplayer.instances.push(this);
+        this.plugins = [];
+        this.option.plugins.forEach(function (plugin, index) {
+          var resule = plugin(_this2);
+          var pluginName = '';
+
+          if (resule && resule.name) {
+            pluginName = resule.name;
+          } else if (plugin.name) {
+            pluginName = plugin.name;
+          } else {
+            pluginName = "plugin".concat(index);
+          }
+
+          _this2.plugins[pluginName] = resule;
+        });
       }
     }, {
       key: "destroy",
@@ -5274,25 +5268,6 @@
         this.emit('destroy');
       }
     }], [{
-      key: "use",
-      value: function use() {
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-
-        var plugin = args[0];
-        var installedPlugins = this.plugins || (this.plugins = []);
-
-        if (installedPlugins.indexOf === -1) {
-          installedPlugins.push(plugin);
-          args.unshift(this);
-          plugin.apply(void 0, toConsumableArray(args.slice(1)));
-          this.prototype.emit('use', plugin);
-        }
-
-        return this;
-      }
-    }, {
       key: "version",
       get: function get() {
         return '1.0.3';
@@ -5337,6 +5312,7 @@
           quality: [],
           controls: [],
           highlight: [],
+          plugins: [],
           thumbnails: {
             url: '',
             number: 60,
