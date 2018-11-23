@@ -1,4 +1,4 @@
-import { clamp } from '../utils';
+import { errorHandle } from '../utils';
 
 export default function playbackRateMix(art, player) {
     const {
@@ -13,11 +13,17 @@ export default function playbackRateMix(art, player) {
 
     Object.defineProperty(player, 'playbackRate', {
         value: rate => {
-            const newRate = clamp(rate, 0.1, 10);
-            $video.playbackRate = newRate;
-            $player.dataset.playbackRate = newRate;
-            notice.show(`${i18n.get('Rate')}: ${newRate === 1 ? i18n.get('Normal') : `${newRate}x`}`);
-            art.emit('playbackRateChange', newRate);
+            const rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
+            errorHandle(rateList.includes(rate), `'playbackRate' only accept ${rateList.toString()} as parameters`);
+
+            if (rate === $player.dataset.playbackRate) {
+                return;
+            }
+
+            $video.playbackRate = rate;
+            $player.dataset.playbackRate = rate;
+            notice.show(`${i18n.get('Rate')}: ${rate}x`);
+            art.emit('playbackRateChange', rate);
         },
     });
 

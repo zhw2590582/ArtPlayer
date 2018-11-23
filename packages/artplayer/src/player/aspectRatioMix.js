@@ -1,4 +1,4 @@
-import { setStyle } from '../utils';
+import { setStyle, errorHandle } from '../utils';
 
 export default function aspectRatioMix(art, player) {
     const {
@@ -13,14 +13,21 @@ export default function aspectRatioMix(art, player) {
 
     Object.defineProperty(player, 'aspectRatio', {
         value: ratio => {
-            const ratioName = ratio.length === 2 ? `${ratio[0]}:${ratio[1]}` : i18n.get('Default');
+            const ratioList = ['default', '4:3', '16:9'];
+            errorHandle(ratioList.includes(ratio), `'aspectRatio' only accept ${ratioList.toString()} as parameters`);
+            
+            if (ratio === $player.dataset.aspectRatio) {
+                return;
+            }
 
-            if (ratio.length === 2) {
+            if (ratio === 'default') {
+                player.aspectRatioRemove();
+            } else {
+                const ratioArray = ratio.split(':');
                 const { videoWidth, videoHeight } = $video;
                 const { clientWidth, clientHeight } = $player;
                 const videoRatio = videoWidth / videoHeight;
-                const setupRatio = Number(ratio[0]) / Number(ratio[1]);
-
+                const setupRatio = ratioArray[0] / ratioArray[1];
                 if (videoRatio > setupRatio) {
                     const percentage = (setupRatio * videoHeight) / videoWidth;
                     setStyle($video, 'width', `${percentage * 100}%`);
@@ -32,13 +39,10 @@ export default function aspectRatioMix(art, player) {
                     setStyle($video, 'height', `${percentage * 100}%`);
                     setStyle($video, 'padding', `${(clientHeight - clientHeight * percentage) / 2}px 0`);
                 }
-
-                $player.dataset.aspectRatio = ratioName;
-            } else {
-                player.aspectRatioRemove();
             }
 
-            notice.show(`${i18n.get('Aspect ratio')}: ${ratioName}`);
+            $player.dataset.aspectRatio = ratio;
+            notice.show(`${i18n.get('Aspect ratio')}: ${ratio}`);
             art.emit('aspectRatioChange', ratio);
         },
     });

@@ -1159,11 +1159,17 @@
     });
     Object.defineProperty(player, 'playbackRate', {
       value: function value(rate) {
-        var newRate = clamp(rate, 0.1, 10);
-        $video.playbackRate = newRate;
-        $player.dataset.playbackRate = newRate;
-        notice.show("".concat(i18n.get('Rate'), ": ").concat(newRate === 1 ? i18n.get('Normal') : "".concat(newRate, "x")));
-        art.emit('playbackRateChange', newRate);
+        var rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
+        errorHandle(rateList.includes(rate), "'playbackRate' only accept ".concat(rateList.toString(), " as parameters"));
+
+        if (rate === $player.dataset.playbackRate) {
+          return;
+        }
+
+        $video.playbackRate = rate;
+        $player.dataset.playbackRate = rate;
+        notice.show("".concat(i18n.get('Rate'), ": ").concat(rate, "x"));
+        art.emit('playbackRateChange', rate);
       }
     });
     Object.defineProperty(player, 'playbackRateRemove', {
@@ -1200,15 +1206,23 @@
     });
     Object.defineProperty(player, 'aspectRatio', {
       value: function value(ratio) {
-        var ratioName = ratio.length === 2 ? "".concat(ratio[0], ":").concat(ratio[1]) : i18n.get('Default');
+        var ratioList = ['default', '4:3', '16:9'];
+        errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
-        if (ratio.length === 2) {
+        if (ratio === $player.dataset.aspectRatio) {
+          return;
+        }
+
+        if (ratio === 'default') {
+          player.aspectRatioRemove();
+        } else {
+          var ratioArray = ratio.split(':');
           var videoWidth = $video.videoWidth,
               videoHeight = $video.videoHeight;
           var clientWidth = $player.clientWidth,
               clientHeight = $player.clientHeight;
           var videoRatio = videoWidth / videoHeight;
-          var setupRatio = Number(ratio[0]) / Number(ratio[1]);
+          var setupRatio = ratioArray[0] / ratioArray[1];
 
           if (videoRatio > setupRatio) {
             var percentage = setupRatio * videoHeight / videoWidth;
@@ -1222,13 +1236,10 @@
             setStyle($video, 'height', "".concat(_percentage * 100, "%"));
             setStyle($video, 'padding', "".concat((clientHeight - clientHeight * _percentage) / 2, "px 0"));
           }
-
-          $player.dataset.aspectRatio = ratioName;
-        } else {
-          player.aspectRatioRemove();
         }
 
-        notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratioName));
+        $player.dataset.aspectRatio = ratio;
+        notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratio));
         art.emit('aspectRatioChange', ratio);
       }
     });
@@ -3070,7 +3081,7 @@
     Object.defineProperty(player, 'flip', {
       value: function value(flip) {
         var flipList = ['normal', 'horizontal', 'vertical'];
-        errorHandle(flipList.includes(flip), "The 'angle' need to be one of '[normal, horizontal, vertical]', but got ".concat(flip));
+        errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
         art.refs.$player.dataset.flip = flip;
         art.emit('flipChange', flip);
       }
@@ -3949,7 +3960,7 @@
       var i18n = art.i18n,
           player = art.player;
       return objectSpread({}, menuOption, {
-        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(event) {
           var target = event.target;
           var rate = target.dataset.rate;
@@ -3982,14 +3993,14 @@
           var ratio = target.dataset.ratio;
 
           if (ratio) {
-            player.aspectRatio(ratio.split(':'));
+            player.aspectRatio(ratio);
             art.contextmenu.hide();
           }
         },
         mounted: function mounted($menu) {
           art.on('aspectRatioChange', function (ratio) {
             var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
-              return item.dataset.ratio === ratio.join(':');
+              return item.dataset.ratio === ratio;
             });
             inverseClass($current, 'current');
           });

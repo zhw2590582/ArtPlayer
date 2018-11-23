@@ -15,14 +15,14 @@ export default function aspectRatio(menuOption) {
                 const { target } = event;
                 const { ratio } = target.dataset;
                 if (ratio) {
-                    player.aspectRatio(ratio.split(':'));
+                    player.aspectRatio(ratio);
                     art.contextmenu.hide();
                 }
             },
             mounted: $menu => {
                 art.on('aspectRatioChange', ratio => {
                     const $current = Array.from($menu.querySelectorAll('span')).find(
-                        item => item.dataset.ratio === ratio.join(':'),
+                        item => item.dataset.ratio === ratio,
                     );
                     inverseClass($current, 'current');
                 });
