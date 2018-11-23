@@ -28,6 +28,7 @@ Install with `npm`
 ```
 $ npm install artplayer
 ```
+
 Or install with `yarn`
 
 ```
@@ -56,17 +57,17 @@ Will expose the global variable to `window.Artplayer`.
 
 ```js
 var art = new Artplayer({
-  container: '.artplayer-app',
-  url: 'path/to/video.mp4'
+    container: '.artplayer-app',
+    url: 'path/to/video.mp4',
 });
 ```
 
 ## Ecosystem
 
-| Project                                                                                                       | Description                |
-| ------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Danmu plugin for ArtPlayer |
-
+| Project                                                                                                          | Description                   |
+| ---------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)    | Danmu plugin for ArtPlayer    |
+| [artplayer-plugin-subtitle](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Subtitle plugin for ArtPlayer |
 
 ## License
 
