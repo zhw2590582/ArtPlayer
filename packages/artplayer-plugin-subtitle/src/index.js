@@ -46,6 +46,13 @@ function settingMix(art) {
                 $range.value = 0;
                 $value.innerText = 0;
             });
+
+            art.on('artplayerPluginSubtitle:set', value => {
+                if ($range.value !== value) {
+                    $range.value = value;
+                    $value.innerText = value;
+                }
+            });
         },
     };
 }
