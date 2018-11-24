@@ -1,3 +1,5 @@
+import { getExt } from '../utils';
+
 export default function attachUrlMix(art, player) {
     const {
         option: { type, customType },
@@ -11,11 +13,12 @@ export default function attachUrlMix(art, player) {
 
     Object.defineProperty(player, 'attachUrl', {
         value: url => {
-            const typeCallback = customType[type];
-            if (type && typeCallback) {
-                art.emit('beforeCustomType', type);
+            const typeName = type || getExt(url);
+            const typeCallback = customType[typeName];
+            if (typeName && typeCallback) {
+                art.emit('beforeCustomType', typeName);
                 typeCallback($video, player.returnUrl(url), art);
-                art.emit('afterCustomType', type);
+                art.emit('afterCustomType', typeName);
             } else {
                 art.emit('beforeAttachUrl', url);
                 $video.src = player.returnUrl(url);

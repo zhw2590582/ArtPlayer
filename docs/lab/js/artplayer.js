@@ -572,6 +572,7 @@
     mimeCodec: 'string',
     theme: 'string',
     volume: 'number',
+    isLive: 'boolean',
     mse: 'boolean',
     muted: 'boolean',
     autoplay: 'boolean',
@@ -853,12 +854,13 @@
     });
     Object.defineProperty(player, 'attachUrl', {
       value: function value(url) {
-        var typeCallback = customType[type];
+        var typeName = type || getExt(url);
+        var typeCallback = customType[typeName];
 
-        if (type && typeCallback) {
-          art.emit('beforeCustomType');
+        if (typeName && typeCallback) {
+          art.emit('beforeCustomType', typeName);
           typeCallback($video, player.returnUrl(url), art);
-          art.emit('afterCustomType');
+          art.emit('afterCustomType', typeName);
         } else {
           art.emit('beforeAttachUrl', url);
           $video.src = player.returnUrl(url);
@@ -3929,13 +3931,13 @@
         var option = this.art.option;
         this.add(progress({
           name: 'progress',
-          disable: false,
+          disable: option.isLive,
           position: 'top',
           index: 10
         }));
         this.add(thumbnails({
           name: 'thumbnails',
-          disable: !option.thumbnails.url,
+          disable: !option.thumbnails.url || option.isLive,
           position: 'top',
           index: 20
         }));
@@ -3953,7 +3955,7 @@
         }));
         this.add(time({
           name: 'time',
-          disable: false,
+          disable: option.isLive,
           position: 'left',
           index: 30
         }));
@@ -4275,30 +4277,22 @@
         var _this = this;
 
         var _this$art = this.art,
-            _this$art$refs = _this$art.refs,
-            $infoClose = _this$art$refs.$infoClose,
-            $infoPanel = _this$art$refs.$infoPanel,
+            $infoClose = _this$art.refs.$infoClose,
             proxy = _this$art.events.proxy;
         proxy($infoClose, 'click', function () {
           _this.hide();
-        });
-        this.art.on('switch', function () {
-          if ($infoPanel.innerHTML) {
-            _this.getHeader();
-          }
         });
       }
     }, {
       key: "show",
       value: function show() {
-        var _this$art$refs2 = this.art.refs,
-            $info = _this$art$refs2.$info,
-            $infoPanel = _this$art$refs2.$infoPanel;
+        var _this$art$refs = this.art.refs,
+            $info = _this$art$refs.$info,
+            $infoPanel = _this$art$refs.$infoPanel;
         setStyle($info, 'display', 'block');
 
         if (!$infoPanel.innerHTML) {
-          append($infoPanel, Info.creatInfo());
-          this.getHeader();
+          append($infoPanel, this.creatInfo());
         }
 
         clearTimeout(this.timer);
@@ -4306,35 +4300,23 @@
         this.art.emit('info:show', $info);
       }
     }, {
-      key: "getHeader",
-      value: function getHeader() {
-        var _this$art$refs3 = this.art.refs,
-            $infoPanel = _this$art$refs3.$infoPanel,
-            $video = _this$art$refs3.$video;
-        var url = $video.src;
-        var types = Array.from($infoPanel.querySelectorAll('[data-head]'));
-        types.forEach(function (item) {
-          item.innerHTML = 'loading...';
-        });
-        fetch(url, {
-          method: 'HEAD'
-        }).then(function (data) {
-          types.forEach(function (item) {
-            var value = data.headers.get(item.dataset.head);
-            item.innerHTML = value !== undefined ? value : 'unknown';
-          });
-        }).catch(function () {
-          types.forEach(function (item) {
-            item.innerHTML = 'unknown';
-          });
-        });
+      key: "creatInfo",
+      value: function creatInfo() {
+        var infoHtml = [];
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.3</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video duration:</div>\n            <div class=\"art-info-content\" data-video=\"duration\"></div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video resolution:</div>\n            <div class=\"art-info-content\">\n              <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n            </div>\n          </div>\n        ");
+        return infoHtml.join('');
       }
     }, {
       key: "readInfo",
       value: function readInfo() {
-        var _this$art$refs4 = this.art.refs,
-            $infoPanel = _this$art$refs4.$infoPanel,
-            $video = _this$art$refs4.$video;
+        var _this$art$refs2 = this.art.refs,
+            $infoPanel = _this$art$refs2.$infoPanel,
+            $video = _this$art$refs2.$video;
         var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
         types.forEach(function (item) {
           var value = $video[item.dataset.video];
@@ -4360,20 +4342,6 @@
         setStyle($info, 'display', 'none');
         clearTimeout(this.timer);
         this.art.emit('info:hide', $info);
-      }
-    }], [{
-      key: "creatInfo",
-      value: function creatInfo() {
-        var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.3</div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\" data-video=\"currentSrc\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video type:</div>\n            <div class=\"art-info-content\" data-head=\"Content-Type\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video size:</div>\n            <div class=\"art-info-content\" data-head=\"Content-length\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video duration:</div>\n            <div class=\"art-info-content\" data-video=\"duration\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video resolution:</div>\n            <div class=\"art-info-content\">\n              <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n            </div>\n          </div>\n        ");
-        return infoHtml.join('');
       }
     }]);
 
@@ -5442,6 +5410,7 @@
           mimeCodec: '',
           theme: '#f00',
           volume: 0.7,
+          isLive: false,
           mse: false,
           muted: false,
           autoplay: false,

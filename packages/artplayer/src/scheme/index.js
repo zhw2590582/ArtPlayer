@@ -19,6 +19,7 @@ export default {
     mimeCodec: 'string',
     theme: 'string',
     volume: 'number',
+    isLive: 'boolean',
     mse: 'boolean',
     muted: 'boolean',
     autoplay: 'boolean',

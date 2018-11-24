@@ -24,6 +24,9 @@
     
             .art-info-content {
                 flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
                 padding-left: 5px;
             }
         }

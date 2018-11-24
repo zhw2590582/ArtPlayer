@@ -8,16 +8,11 @@ export default class Info {
 
     init() {
         const {
-            refs: { $infoClose, $infoPanel },
+            refs: { $infoClose },
             events: { proxy },
         } = this.art;
         proxy($infoClose, 'click', () => {
             this.hide();
-        });
-        this.art.on('switch', () => {
-            if ($infoPanel.innerHTML) {
-                this.getHeader();
-            }
         });
     }
 
@@ -25,15 +20,14 @@ export default class Info {
         const { $info, $infoPanel } = this.art.refs;
         setStyle($info, 'display', 'block');
         if (!$infoPanel.innerHTML) {
-            append($infoPanel, Info.creatInfo());
-            this.getHeader();
+            append($infoPanel, this.creatInfo());
         }
         clearTimeout(this.timer);
         this.loop();
         this.art.emit('info:show', $info);
     }
 
-    static creatInfo() {
+    creatInfo() {
         const infoHtml = [];
 
         infoHtml.push(`
@@ -46,21 +40,7 @@ export default class Info {
         infoHtml.push(`
           <div class="art-info-item">
             <div class="art-info-title">Video url:</div>
-            <div class="art-info-content" data-video="currentSrc"></div>
-          </div>
-        `);
-
-        infoHtml.push(`
-          <div class="art-info-item">
-            <div class="art-info-title">Video type:</div>
-            <div class="art-info-content" data-head="Content-Type"></div>
-          </div>
-        `);
-
-        infoHtml.push(`
-          <div class="art-info-item">
-            <div class="art-info-title">Video size:</div>
-            <div class="art-info-content" data-head="Content-length"></div>
+            <div class="art-info-content">${this.art.option.url}</div>
           </div>
         `);
 
@@ -95,29 +75,6 @@ export default class Info {
         `);
 
         return infoHtml.join('');
-    }
-
-    getHeader() {
-        const { $infoPanel, $video } = this.art.refs;
-        const url = $video.src;
-        const types = Array.from($infoPanel.querySelectorAll('[data-head]'));
-        types.forEach(item => {
-            item.innerHTML = 'loading...';
-        });
-        fetch(url, {
-            method: 'HEAD',
-        })
-            .then(data => {
-                types.forEach(item => {
-                    const value = data.headers.get(item.dataset.head);
-                    item.innerHTML = value !== undefined ? value : 'unknown';
-                });
-            })
-            .catch(() => {
-                types.forEach(item => {
-                    item.innerHTML = 'unknown';
-                });
-            });
     }
 
     readInfo() {
