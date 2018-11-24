@@ -41,16 +41,25 @@ function settingMix(art) {
                 $value.innerText = value;
                 art.plugins.artplayerPluginSubtitle.set(Number(value));
             });
+
+            art.on('subtitle:switch', () => {
+                $range.value = 0;
+                $value.innerText = 0;
+            });
         },
     };
 }
 
 function artplayerPluginSubtitle(art) {
+    const { clamp } = art.constructor.utils;
     const { setting, notice, refs, i18n } = art;
-    const cuesCache = [];
+    let cuesCache = [];
     i18nMix(i18n);
     setting.add(settingMix);
-    const { clamp } = art.constructor.utils;
+    art.on('subtitle:switch', () => {
+        cuesCache = [];
+    });
+
     return {
         set(value) {
             const cues = Array.from(refs.$track.track.cues);
