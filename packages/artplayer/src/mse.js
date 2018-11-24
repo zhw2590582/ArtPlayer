@@ -1,5 +1,5 @@
-import { errorHandle, getExt } from '../utils';
-import config from '../config';
+import { errorHandle, getExt } from './utils';
+import config from './config';
 
 export default class Mse {
     constructor(art) {

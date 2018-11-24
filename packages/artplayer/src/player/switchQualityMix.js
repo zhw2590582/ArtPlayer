@@ -13,6 +13,7 @@ export default function switchMix(art, player) {
                 const { currentTime } = player;
                 art.emit('beforeMountUrl', url);
                 $video.src = player.mountUrl(url);
+                art.emit('afterMountUrl', url);
                 option.url = url;
                 player.playbackRateRemove();
                 player.aspectRatioRemove();
