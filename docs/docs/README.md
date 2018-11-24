@@ -458,7 +458,7 @@ Custom subtitle
 ### url
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 
 Subtitle url, support vtt and srt format
 
@@ -495,7 +495,7 @@ Custom thumbnails in the progress bar with lazy load
 ### style
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 
 Thumbnails image url
 
@@ -773,7 +773,7 @@ The unique index, used for the priority level
 ### html
 
 - Type: `String`、`Element`
-- Default: ``
+- Default: `''`
 
 The dom element
 
