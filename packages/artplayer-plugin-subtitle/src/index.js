@@ -66,7 +66,7 @@ function artplayerPluginSubtitle(art) {
                 cue.endTime = cuesCache[index].endTime + time;
             });
             notice.show(`${i18n.get('Subtitle offset time')}: ${value}s`);
-            art.emit('subtitle:offset', value);
+            art.emit('artplayerPluginSubtitle:set', value);
         },
     };
 }

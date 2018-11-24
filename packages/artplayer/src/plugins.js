@@ -19,6 +19,7 @@ export default class Plugins {
             pluginName = `plugin${this.id}`;
         }
         this[pluginName] = result;
+        this.art.emit('plugin:add', plugin);
         return this;
     }
 }
