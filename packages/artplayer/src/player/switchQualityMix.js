@@ -1,6 +1,5 @@
 export default function switchMix(art, player) {
     const {
-        refs: { $video },
         i18n,
         notice,
         option,
@@ -11,9 +10,7 @@ export default function switchMix(art, player) {
             if (url !== option.url) {
                 const { isPlaying } = art;
                 const { currentTime } = player;
-                art.emit('beforeMountUrl', url);
-                $video.src = player.mountUrl(url);
-                art.emit('afterMountUrl', url);
+                player.attachUrl(url);
                 option.url = url;
                 player.playbackRateRemove();
                 player.aspectRatioRemove();

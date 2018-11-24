@@ -26,8 +26,6 @@ export default function attrInit(art, player) {
     }
 
     sleep().then(() => {
-        art.emit('beforeMountUrl', option.url);
-        $video.src = player.mountUrl(option.url);
-        art.emit('afterMountUrl', option.url);
+        player.attachUrl(option.url);
     });
 }

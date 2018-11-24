@@ -1,4 +1,4 @@
-import mountUrlMix from './mountUrlMix';
+import attachUrlMix from './attachUrlMix';
 import attrInit from './attrInit';
 import eventInit from './eventInit';
 import playMix from './playMix';
@@ -22,7 +22,7 @@ import flipMix from './flipMix';
 
 export default class Player {
     constructor(art) {
-        mountUrlMix(art, this);
+        attachUrlMix(art, this);
         eventInit(art, this);
         attrInit(art, this);
         playMix(art, this);

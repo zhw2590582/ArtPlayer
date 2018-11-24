@@ -12,7 +12,7 @@ export default class Mse {
     init() {
         const { player, events } = this.art;
         this.setMimeCodec();
-        Object.defineProperty(player, 'mountUrl', {
+        Object.defineProperty(player, 'returnUrl', {
             value: () => {
                 this.mediaSource = new MediaSource();
                 const url = URL.createObjectURL(this.mediaSource);

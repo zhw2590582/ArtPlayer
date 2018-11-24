@@ -839,11 +839,30 @@
     return I18n;
   }();
 
-  function mountUrlMix(art, player) {
-    Object.defineProperty(player, 'mountUrl', {
+  function attachUrlMix(art, player) {
+    var _art$option = art.option,
+        type = _art$option.type,
+        customType = _art$option.customType,
+        $video = art.refs.$video;
+    Object.defineProperty(player, 'returnUrl', {
       writable: true,
       value: function value(url) {
         return url;
+      }
+    });
+    Object.defineProperty(player, 'attachUrl', {
+      value: function value(url) {
+        var typeCallback = customType[type];
+
+        if (type && typeCallback) {
+          art.emit('beforeCustomType', url);
+          typeCallback($video, player.returnUrl(url), art);
+          art.emit('afterCustomType', url);
+        } else {
+          art.emit('beforeAttachUrl', url);
+          $video.src = player.returnUrl(url);
+          art.emit('afterAttachUrl', url);
+        }
       }
     });
   }
@@ -872,9 +891,7 @@
     }
 
     sleep().then(function () {
-      art.emit('beforeMountUrl', option.url);
-      $video.src = player.mountUrl(option.url);
-      art.emit('afterMountUrl', option.url);
+      player.attachUrl(option.url);
     });
   }
 
@@ -949,8 +966,7 @@
       if (reconnectTime < maxReconnectTime) {
         sleep(1000).then(function () {
           reconnectTime += 1;
-          art.emit('beforeMountUrl', option.url);
-          $video.src = player.mountUrl(option.url);
+          player.attachUrl(option.url);
           notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
         });
       } else {
@@ -1096,8 +1112,7 @@
   }
 
   function switchMix(art, player) {
-    var $video = art.refs.$video,
-        i18n = art.i18n,
+    var i18n = art.i18n,
         notice = art.notice,
         option = art.option;
     Object.defineProperty(player, 'switchQuality', {
@@ -1107,9 +1122,7 @@
         if (url !== option.url) {
           var isPlaying = art.isPlaying;
           var currentTime = player.currentTime;
-          art.emit('beforeMountUrl', url);
-          $video.src = player.mountUrl(url);
-          art.emit('afterMountUrl', url);
+          player.attachUrl(url);
           option.url = url;
           player.playbackRateRemove();
           player.aspectRatioRemove();
@@ -3082,7 +3095,7 @@
   var Player = function Player(art) {
     classCallCheck(this, Player);
 
-    mountUrlMix(art, this);
+    attachUrlMix(art, this);
     eventInit(art, this);
     attrInit(art, this);
     playMix(art, this);
@@ -3127,7 +3140,7 @@
             player = _this$art.player,
             events = _this$art.events;
         this.setMimeCodec();
-        Object.defineProperty(player, 'mountUrl', {
+        Object.defineProperty(player, 'returnUrl', {
           value: function value() {
             _this.mediaSource = new MediaSource();
             var url = URL.createObjectURL(_this.mediaSource);
@@ -3361,9 +3374,9 @@
 
   var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
-  var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\r\n\t<path d=\"m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z\"></path>\r\n\t<path d=\"m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z\"></path>\r\n\t<path d=\"m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z\"></path>\r\n\t<path d=\"M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z\"></path>\r\n</svg>";
+  var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n\t<path d=\"m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z\"></path>\n\t<path d=\"m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z\"></path>\n\t<path d=\"m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z\"></path>\n\t<path d=\"M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z\"></path>\n</svg>";
 
-  var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"36\" width=\"36\">\r\n\t<path d=\"m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z\" fill-rule=\"evenodd\"></path>\r\n</svg>";
+  var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"36\" width=\"36\">\n\t<path d=\"m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z\" fill-rule=\"evenodd\"></path>\n</svg>";
 
   var pip = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
