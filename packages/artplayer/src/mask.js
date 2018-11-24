@@ -5,9 +5,10 @@ export default class Mask {
     constructor(art) {
         this.art = art;
         const {
+            option,
             refs: { $mask },
         } = art;
-        append($mask, icons.playBig);
+        append($mask, option.icons.playBig || icons.playBig);
     }
 
     show() {

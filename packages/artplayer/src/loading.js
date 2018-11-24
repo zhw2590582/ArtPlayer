@@ -5,9 +5,10 @@ export default class Loading {
     constructor(art) {
         this.art = art;
         const {
+            option,
             refs: { $loading },
         } = art;
-        append($loading, icons.loading);
+        append($loading, option.icons.loading || icons.loading);
     }
 
     hide() {

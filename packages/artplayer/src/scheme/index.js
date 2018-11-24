@@ -111,5 +111,6 @@ export default {
         },
     },
     moreVideoAttr: 'object',
+    icons: 'object',
     lang: 'string',
 };

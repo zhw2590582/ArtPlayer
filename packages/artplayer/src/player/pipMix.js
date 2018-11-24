@@ -42,6 +42,12 @@ function nativePip(art, player) {
             player.play();
         }
     });
+
+    art.on('destroy', () => {
+        if (player.pipState) {
+            player.pipExit();
+        }
+    });
 }
 
 function customPip(art, player) {

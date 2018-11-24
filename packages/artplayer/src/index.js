@@ -87,6 +87,10 @@ class Artplayer extends Emitter {
                 controls: false,
                 preload: 'auto',
             },
+            icons: {
+                loading: '',
+                playBig: '',
+            },
             lang: navigator.language.toLowerCase(),
         };
     }

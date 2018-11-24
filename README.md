@@ -7,7 +7,7 @@
 
 > ArtPlayer is a modern HTML5 video player
 
-![Alt text](./screenshot.png)
+![Screenshot](./screenshot.png)
 
 ## Features
 
@@ -68,6 +68,10 @@ var art = new Artplayer({
 | ---------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)    | Danmu plugin for ArtPlayer    |
 | [artplayer-plugin-subtitle](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-subtitle) | Subtitle plugin for ArtPlayer |
+
+### QQ Group
+
+![QQ Group](./QQgroup.png)
 
 ## License
 
