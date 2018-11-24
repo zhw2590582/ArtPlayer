@@ -113,5 +113,6 @@ export default {
     },
     moreVideoAttr: 'object',
     icons: 'object',
+    customType: 'object',
     lang: 'string',
 };

@@ -94,6 +94,7 @@ class Artplayer extends Emitter {
                 loading: '',
                 playBig: '',
             },
+            customType: {},
             lang: navigator.language.toLowerCase(),
         };
     }

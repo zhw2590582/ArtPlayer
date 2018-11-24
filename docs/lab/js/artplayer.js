@@ -668,6 +668,7 @@
     },
     moreVideoAttr: 'object',
     icons: 'object',
+    customType: 'object',
     lang: 'string'
   };
 
@@ -5480,6 +5481,7 @@
             loading: '',
             playBig: ''
           },
+          customType: {},
           lang: navigator.language.toLowerCase()
         };
       }
