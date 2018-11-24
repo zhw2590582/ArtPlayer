@@ -5021,7 +5021,8 @@
       this.art = art;
       var option = art.option,
           $mask = art.refs.$mask;
-      append($mask, option.icons.playBig || icons.playBig);
+      var $playBig = append($mask, '<div class="art-playBig"></div>');
+      append($playBig, option.icons.playBig || icons.playBig);
     }
 
     createClass(Mask, [{

@@ -73,7 +73,7 @@ You may need to initialize a size for the container element, like:
 ## url
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 - Required: `true`
 
 Video source url, Three video file formats are supported: mp4, ogg, webm
@@ -93,7 +93,7 @@ var art = new Artplayer({
 ## poster
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 
 Video poster image url
 
@@ -111,7 +111,7 @@ var art = new Artplayer({
 ## title
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 
 Video title, will be shown in screenshot file name and pip mode
 
@@ -414,7 +414,7 @@ var art = new Artplayer({
 - Type: `Object`
 - Default: `{}`
 
-Replace the default icon
+Replace the default icon, The currently configurable icons are: `loading`、`playBig`
 
 [Run Code](/)
 
@@ -424,7 +424,8 @@ var art = new Artplayer({
   container: '.artplayer-app',
   url: url + '/video/one-more-time-one-more-chance-480p.mp4',
   icons: {
-    loading: 'Loading...'
+    loading: 'Loading...',
+    playBig: 'PLAY',
   }
 });
 ```
@@ -579,14 +580,14 @@ Whether the default quality, if not specified, the first quality will be taken
 ### name
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 
 Quality name
 
 ### url
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 
 Quality url
 
@@ -628,7 +629,7 @@ highlight seconds
 ### text
 
 - Type: `String`
-- Default: ``
+- Default: `''`
 
 highlight text
 
@@ -695,7 +696,7 @@ The unique index, used for the priority level
 ### html
 
 - Type: `String`、`Element`
-- Default: ``
+- Default: `''`
 
 The dom element
 
@@ -847,7 +848,7 @@ The unique index, used for the priority level
 ### html
 
 - Type: `String`、`Element`
-- Default: ``
+- Default: `''`
 
 The dom element
 

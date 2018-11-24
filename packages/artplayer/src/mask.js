@@ -8,7 +8,8 @@ export default class Mask {
             option,
             refs: { $mask },
         } = art;
-        append($mask, option.icons.playBig || icons.playBig);
+        const $playBig = append($mask, '<div class="art-playBig"></div>');
+        append($playBig, option.icons.playBig || icons.playBig);
     }
 
     show() {
