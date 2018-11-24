@@ -5,10 +5,24 @@ export default class Mse {
     constructor(art) {
         this.art = art;
         if (art.option.mse) {
-            this.setMimeCodec();
-            this.setVideoSrc();
-            this.eventBind();
+            this.init();
         }
+    }
+
+    init() {
+        const { player, events } = this.art;
+        this.setMimeCodec();
+        Object.defineProperty(player, 'mountUrl', {
+            value: () => {
+                this.mediaSource = new MediaSource();
+                const url = URL.createObjectURL(this.mediaSource);
+                this.eventBind();
+                events.destroyEvents.push(() => {
+                    URL.revokeObjectURL(url);
+                });
+                return url;
+            },
+        });
     }
 
     setMimeCodec() {
@@ -27,24 +41,11 @@ export default class Mse {
             errorHandle(mimeCodec, `Can't find video's mimeCodec from ${option.type}`);
             option.mimeCodec = mimeCodec;
         }
-    }
 
-    setVideoSrc() {
-        const { option, player, events } = this.art;
         errorHandle(
             'MediaSource' in window && MediaSource.isTypeSupported(option.mimeCodec),
             `Unsupported MIME type or codec: ${option.mimeCodec}`,
         );
-        this.mediaSource = new MediaSource();
-        Object.defineProperty(player, 'mountUrl', {
-            value: () => {
-                this.url = URL.createObjectURL(this.mediaSource);
-                events.destroyEvents.push(() => {
-                    URL.revokeObjectURL(this.url);
-                });
-                return this.url;
-            },
-        });
     }
 
     eventBind() {
