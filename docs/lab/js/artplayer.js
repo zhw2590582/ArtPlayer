@@ -1236,7 +1236,7 @@
         var aspectRatio = $player.dataset.aspectRatio;
 
         if (aspectRatio) {
-          player.aspectRatio(aspectRatio.split(':'));
+          player.aspectRatio(aspectRatio);
           art.emit('aspectRatioReset');
         }
       }
