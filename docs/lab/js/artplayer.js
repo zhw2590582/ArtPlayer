@@ -856,13 +856,13 @@
         var typeCallback = customType[type];
 
         if (type && typeCallback) {
-          art.emit('beforeCustomType', url);
+          art.emit('beforeCustomType');
           typeCallback($video, player.returnUrl(url), art);
-          art.emit('afterCustomType', url);
+          art.emit('afterCustomType');
         } else {
           art.emit('beforeAttachUrl', url);
           $video.src = player.returnUrl(url);
-          art.emit('afterAttachUrl', url);
+          art.emit('afterAttachUrl', $video.src);
         }
       }
     });
