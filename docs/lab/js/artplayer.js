@@ -572,6 +572,7 @@
     mimeCodec: 'string',
     theme: 'string',
     volume: 'number',
+    mse: 'boolean',
     muted: 'boolean',
     autoplay: 'boolean',
     autoSize: 'boolean',
@@ -3102,6 +3103,101 @@
     flipMix(art, this);
   };
 
+  var Mse =
+  /*#__PURE__*/
+  function () {
+    function Mse(art) {
+      classCallCheck(this, Mse);
+
+      this.art = art;
+
+      if (art.option.mse) {
+        this.setMimeCodec();
+        this.setVideoSrc();
+        this.eventBind();
+      }
+    }
+
+    createClass(Mse, [{
+      key: "setMimeCodec",
+      value: function setMimeCodec() {
+        var option = this.art.option;
+
+        if (!option.type) {
+          var type = getExt(option.url);
+          errorHandle(Object.keys(config.mimeCodec).includes(type), "Can't find video's type '".concat(type, "' from '").concat(option.url, "'"));
+          option.type = type;
+        }
+
+        if (!option.mimeCodec) {
+          var mimeCodec = config.mimeCodec[option.type];
+          errorHandle(mimeCodec, "Can't find video's mimeCodec from ".concat(option.type));
+          option.mimeCodec = mimeCodec;
+        }
+      }
+    }, {
+      key: "setVideoSrc",
+      value: function setVideoSrc() {
+        var _this = this;
+
+        var _this$art = this.art,
+            option = _this$art.option,
+            player = _this$art.player,
+            events = _this$art.events;
+        errorHandle('MediaSource' in window && MediaSource.isTypeSupported(option.mimeCodec), "Unsupported MIME type or codec: ".concat(option.mimeCodec));
+        this.mediaSource = new MediaSource();
+        Object.defineProperty(player, 'mountUrl', {
+          value: function value() {
+            _this.url = URL.createObjectURL(_this.mediaSource);
+            events.destroyEvents.push(function () {
+              URL.revokeObjectURL(_this.url);
+            });
+            return _this.url;
+          }
+        });
+      }
+    }, {
+      key: "eventBind",
+      value: function eventBind() {
+        var _this2 = this;
+
+        var _this$art2 = this.art,
+            option = _this$art2.option,
+            proxy = _this$art2.events.proxy;
+        var _config$mse = config.mse,
+            mediaSource = _config$mse.mediaSource,
+            sourceBufferList = _config$mse.sourceBufferList,
+            sourceBuffer = _config$mse.sourceBuffer;
+        mediaSource.events.forEach(function (eventName) {
+          proxy(_this2.mediaSource, eventName, function (event) {
+            _this2.art.emit("mediaSource:".concat(event.type), event);
+          });
+        });
+        sourceBufferList.events.forEach(function (eventName) {
+          proxy(_this2.mediaSource.sourceBuffers, eventName, function (event) {
+            _this2.art.emit("sourceBuffers:".concat(event.type), event);
+          });
+          proxy(_this2.mediaSource.activeSourceBuffers, eventName, function (event) {
+            _this2.art.emit("activeSourceBuffers:".concat(event.type), event);
+          });
+        });
+        this.art.on('mediaSource:sourceopen', function () {
+          _this2.sourceBuffer = _this2.mediaSource.addSourceBuffer(option.mimeCodec);
+          sourceBuffer.events.forEach(function (eventName) {
+            proxy(_this2.sourceBuffer, eventName, function (event) {
+              _this2.art.emit("sourceBuffer:".concat(event.type), event);
+            });
+          });
+        });
+        this.art.on('sourceBuffer:updateend', function () {
+          _this2.mediaSource.endOfStream();
+        });
+      }
+    }]);
+
+    return Mse;
+  }();
+
   function component(art, parent, target, component, callback, title) {
     var option = typeof component === 'function' ? component(art) : component;
 
@@ -5271,6 +5367,7 @@
         this.notice = new Notice(this);
         this.events = new Events(this);
         this.player = new Player(this);
+        this.mse = new Mse(this);
         this.layers = new Layers(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);
@@ -5327,6 +5424,7 @@
           mimeCodec: '',
           theme: '#f00',
           volume: 0.7,
+          mse: false,
           muted: false,
           autoplay: false,
           autoSize: false,

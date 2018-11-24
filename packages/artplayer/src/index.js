@@ -9,6 +9,7 @@ import config from './config';
 import Template from './template';
 import I18n from './i18n';
 import Player from './player';
+import Mse from './mse';
 import Controls from './controls';
 import Contextmenu from './contextmenu';
 import Info from './info';
@@ -54,6 +55,7 @@ class Artplayer extends Emitter {
             mimeCodec: '',
             theme: '#f00',
             volume: 0.7,
+            mse: false,
             muted: false,
             autoplay: false,
             autoSize: false,
@@ -117,6 +119,7 @@ class Artplayer extends Emitter {
         this.notice = new Notice(this);
         this.events = new Events(this);
         this.player = new Player(this);
+        this.mse = new Mse(this);
         this.layers = new Layers(this);
         this.controls = new Controls(this);
         this.contextmenu = new Contextmenu(this);

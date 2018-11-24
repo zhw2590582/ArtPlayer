@@ -53,9 +53,10 @@ function settingMix(art) {
 function artplayerPluginSubtitle(art) {
     const { clamp } = art.constructor.utils;
     const { setting, notice, refs, i18n } = art;
-    let cuesCache = [];
     i18nMix(i18n);
     setting.add(settingMix);
+    
+    let cuesCache = [];
     art.on('subtitle:switch', () => {
         cuesCache = [];
     });
