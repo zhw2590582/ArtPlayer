@@ -21,6 +21,7 @@ import Notice from './notice';
 import Mask from './mask';
 import Setting from './setting';
 import Storage from './storage';
+import Plugins from './plugins';
 
 let id = 0;
 class Artplayer extends Emitter {
@@ -125,24 +126,11 @@ class Artplayer extends Emitter {
         this.hotkey = new Hotkey(this);
         this.mask = new Mask(this);
         this.setting = new Setting(this);
+        this.plugins = new Plugins(this);
 
         id += 1;
         this.id = id;
         Artplayer.instances.push(this);
-
-        this.plugins = [];
-        this.option.plugins.forEach((plugin, index) => {
-            const resule = plugin(this);
-            let pluginName = '';
-            if (resule && resule.name) {
-                pluginName = resule.name;
-            } else if (plugin.name) {
-                pluginName = plugin.name;
-            } else {
-                pluginName = `plugin${index}`;
-            }
-            this.plugins[pluginName] = resule;
-        });
     }
 
     destroy(removeHtml = false) {

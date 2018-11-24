@@ -5184,6 +5184,44 @@
     return Storage;
   }();
 
+  var Plugins =
+  /*#__PURE__*/
+  function () {
+    function Plugins(art) {
+      var _this = this;
+
+      classCallCheck(this, Plugins);
+
+      this.art = art;
+      this.id = 0;
+      art.option.plugins.forEach(function (plugin) {
+        _this.add(plugin);
+      });
+    }
+
+    createClass(Plugins, [{
+      key: "add",
+      value: function add(plugin) {
+        this.id += 1;
+        var result = plugin.call(this, this.art);
+        var pluginName = '';
+
+        if (result && result.name) {
+          pluginName = result.name;
+        } else if (plugin.name) {
+          pluginName = plugin.name;
+        } else {
+          pluginName = "plugin".concat(this.id);
+        }
+
+        this[pluginName] = result;
+        return this;
+      }
+    }]);
+
+    return Plugins;
+  }();
+
   var id = 0;
 
   var Artplayer =
@@ -5241,24 +5279,10 @@
         this.hotkey = new Hotkey(this);
         this.mask = new Mask(this);
         this.setting = new Setting(this);
+        this.plugins = new Plugins(this);
         id += 1;
         this.id = id;
         Artplayer.instances.push(this);
-        this.plugins = [];
-        this.option.plugins.forEach(function (plugin, index) {
-          var resule = plugin(_this2);
-          var pluginName = '';
-
-          if (resule && resule.name) {
-            pluginName = resule.name;
-          } else if (plugin.name) {
-            pluginName = plugin.name;
-          } else {
-            pluginName = "plugin".concat(index);
-          }
-
-          _this2.plugins[pluginName] = resule;
-        });
       }
     }, {
       key: "destroy",
