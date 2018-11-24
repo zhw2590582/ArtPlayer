@@ -63,7 +63,7 @@ export default function aspectRatioMix(art, player) {
         value: () => {
             const { aspectRatio } = $player.dataset;
             if (aspectRatio) {
-                player.aspectRatio(aspectRatio.split(':'));
+                player.aspectRatio(aspectRatio);
                 art.emit('aspectRatioReset');
             }
         },
