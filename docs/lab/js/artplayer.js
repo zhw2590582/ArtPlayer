@@ -1285,17 +1285,12 @@
 
     Object.defineProperty(player, 'screenshot', {
       value: function value() {
-        var crossOrigin = $video.crossOrigin;
-
         try {
-          $video.crossOrigin = 'anonymous';
           var dataUri = captureFrame();
           art.emit('screenshot', dataUri);
         } catch (error) {
           notice.show(error);
           console.warn(error);
-        } finally {
-          $video.crossOrigin = crossOrigin;
         }
       }
     });

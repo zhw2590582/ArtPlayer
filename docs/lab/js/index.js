@@ -20,8 +20,7 @@ var art = new Artplayer({
     theme: '#ffad00',
     lang: 'zh-cn',
     moreVideoAttr: {
-        'webkit-playsinline': true,
-        playsinline: true,
+        crossOrigin: 'anonymous'
     },
     contextmenu: [
         {

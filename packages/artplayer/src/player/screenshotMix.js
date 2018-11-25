@@ -25,16 +25,12 @@ export default function screenshotMix(art, player) {
 
     Object.defineProperty(player, 'screenshot', {
         value: () => {
-            const { crossOrigin } = $video;
             try {
-                $video.crossOrigin = 'anonymous';
                 const dataUri = captureFrame();
                 art.emit('screenshot', dataUri);
             } catch (error) {
                 notice.show(error);
                 console.warn(error);
-            } finally {
-                $video.crossOrigin = crossOrigin;
             }
         },
     });
