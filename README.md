@@ -15,11 +15,11 @@
 
 ## Demo
 
-[Checkout the demo](https://blog.zhw-island.com/ArtPlayer/lab) from Github Pages
+[Checkout the demo](https://artplayer.org/lab/) from Github Pages
 
 ## Document
 
-[Checkout the Document](https://blog.zhw-island.com/ArtPlayer/docs) from Github Pages
+[Checkout the Document](https://artplayer.org/docs) from Github Pages
 
 ## Install
 

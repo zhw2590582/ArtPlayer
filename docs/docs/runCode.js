@@ -14,7 +14,7 @@ window.runCode = function(hook) {
           ) {
             var code = window.encodeURIComponent(codeElement.innerText);
             window.open(
-              'https://blog.zhw-island.com/ArtPlayer/lab/?code=' + code
+              'https://artplayer.org/lab/?code=' + code
             );
           }
         });
