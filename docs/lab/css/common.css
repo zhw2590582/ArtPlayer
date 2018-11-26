@@ -31,13 +31,13 @@ html, body {
   box-sizing: border-box;
 }
 
-.part-left .header .left {
+.part-left .header .links {
   display: flex;
   align-items: center;
   flex: 1;
 }
 
-.part-left .header .left .logo {
+.part-left .header .links a {
   padding-right: 30px;
 }
 

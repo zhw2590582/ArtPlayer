@@ -12,10 +12,16 @@ window.runCode = function(hook) {
             codeElement.tagName === 'PRE' &&
             codeElement.dataset.lang === 'js'
           ) {
-            var code = window.encodeURIComponent(codeElement.innerText);
-            window.open(
-              'https://artplayer.org/lab/?code=' + code
-            );
+            var libs = item.href.split('/lib=')[1];
+            var code = encodeURIComponent(codeElement.innerText);
+            var url = 'https://artplayer.org/lab/?';
+            if (libs) {
+              url += 'libs=' + libs + '&';
+            }
+            if (code) {
+              url += 'code=' + code;
+            }
+            window.open(url);
           }
         });
       });

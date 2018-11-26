@@ -1,4 +1,4 @@
-(function(win) {
+(function() {
     var $code = document.querySelector('.code');
     var $run = document.querySelector('.run');
     var $lib = document.querySelector('.lib');
@@ -57,23 +57,33 @@
             script.onload = function() {
                 resolve(url);
             };
+            script.onerror = function() {
+                reject(new Error('Loading script failed:' + url));
+            };
             document.querySelector('head').appendChild(script);
         });
     }
 
     function loadStyle(url) {
-        return new Promise(function(resolve) {
-            var style = document.createElement('style');
-            style.type = 'text/css';
-            style.src = url;
-            document.querySelector('head').appendChild(style);
-            resolve(url);
+        return new Promise(function(resolve, reject) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = url;
+            link.onload = function() {
+                resolve(url);
+            };
+            link.onerror = function() {
+                reject(new Error('Loading style failed:' + url));
+            };
+            document.querySelector('head').appendChild(link);
         });
     }
 
-    function loadLib(libs = defaultLib) {
+    function loadLib(libs) {
         var libPromise = [];
-        libs.split(',')
+        var libsDecode = decodeURIComponent(libs || defaultLib);
+        libsDecode
+            .split(/\r?\n/)
             .filter(function(url) {
                 return !loaddLib.includes(url);
             })
@@ -85,45 +95,27 @@
                     libPromise.push(loadStyle(url));
                 }
             });
-        $lib.value = decodeURIComponent(libs);
+        $lib.value = libsDecode;
         return Promise.all(libPromise);
     }
 
     function loadCode(code) {
-        return new Promise(function(resolve, reject) {
-            if (code) {
-                mirror.setValue(decodeURIComponent(code).trim());
-                runCode();
-                resolve(code);
-            } else {
-                fetch('./js/example.js')
-                    .then(response => {
-                        return response.text();
-                    })
-                    .then(text => {
-                        mirror.setValue(text);
-                        runCode();
-                        resolve(text);
-                    })
-                    .catch(err => {
-                        console.error(err.message);
-                    });
-            }
-        });
-    }
-
-    function initApp() {
-        const { code, libs } = getURLParameters(window.location.href);
-        loadLib(libs)
-            .then(function(result) {
-                loaddLib = loaddLib.concat(result);
-                loadCode(code).then(() => {
-                    console.info('App initialization completed');
+        if (code) {
+            mirror.setValue(decodeURIComponent(code).trim());
+            runCode();
+        } else {
+            fetch('./js/example.js')
+                .then(response => {
+                    return response.text();
+                })
+                .then(text => {
+                    mirror.setValue(text);
+                    runCode();
+                })
+                .catch(err => {
+                    console.error(err.message);
                 });
-            })
-            .catch(err => {
-                console.error(err.message);
-            });
+        }
     }
 
     function runCode() {
@@ -133,19 +125,32 @@
         var code = mirror.getValue();
         eval(code);
         initArt(Artplayer.instances[0]);
+        console.info('Player initialization completed');
+    }
+
+    function initApp() {
+        const { code, libs } = getURLParameters(window.location.href);
+        loadLib(libs)
+            .then(function(result) {
+                loaddLib = loaddLib.concat(result);
+                loadCode(code);
+            })
+            .catch(err => {
+                console.error(err.message);
+            });
     }
 
     $run.addEventListener('click', function(e) {
-        runCode();
         const libs = encodeURIComponent($lib.value);
         const code = encodeURIComponent(mirror.getValue());
         const url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
         history.pushState(null, null, url);
+        initApp();
     });
 
-    win.addEventListener('error', err => {
+    window.addEventListener('error', err => {
         console.error(err.message);
     });
 
     initApp();
-})(window);
+})();
