@@ -21,7 +21,7 @@ html, body {
   overflow: hidden;
 }
 
-.part-left .controls {
+.part-left .header {
   display: flex;
   align-items: center;
   height: 40px;
@@ -31,17 +31,28 @@ html, body {
   box-sizing: border-box;
 }
 
-.part-left .controls .left {
+.part-left .header .left {
   display: flex;
   align-items: center;
   flex: 1;
 }
 
-.part-left .controls .left .logo {
+.part-left .header .left .logo {
   padding-right: 30px;
 }
 
-.part-left .controls .run {
+.part-left .lib {
+  height: 50px;
+  padding: 5px;
+  outline: none;
+  resize: none;
+  border: none;
+  font-size: 13px;
+  color: #666;
+  border-bottom: 1px solid #ddd;
+}
+
+.part-left .header .run {
   height: 30px;
   width: 100px;
 }

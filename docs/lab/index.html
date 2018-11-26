@@ -19,15 +19,15 @@
 <body>
     <div class="container">
         <div class="part-left">
-            <div class="controls">
+            <div class="header">
                 <div class="left">
                     <a href="./" class="logo">ArtPlayer.js Lab</a>
+                    <a href="../docs" class="logo">Github</a>
                     <a href="../docs" class="logo">Document</a>
-                    <iframe src="https://ghbtns.com/github-btn.html?user=zhw2590582&repo=ArtPlayer&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
-                    <iframe src="https://ghbtns.com/github-btn.html?user=zhw2590582&repo=ArtPlayer&type=fork&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
                 </div>
                 <input class="run" type="button" value="Run Code">
             </div>
+            <textarea class="lib" cols="30" rows="10" placeholder="Other dependencies, multiple line breaks" spellcheck="false"></textarea>
             <div class="code"></div>
         </div>
         <div class="part-right">
@@ -41,7 +41,6 @@
     <script src="./plugins/codemirror.js"></script>
     <script src="./plugins/javascript.js"></script>
     <script src="./js/artplayer.js"></script>
-    <script src="./js/artplayer-plugin-subtitle.js"></script>
     <script src="./js/common.js"></script>
     <script>
         var _hmt = _hmt || [];
@@ -51,9 +50,6 @@
           var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();
-    </script>
-    <script>
-        loadCode('./js/index.js');
     </script>
 </body>
 
