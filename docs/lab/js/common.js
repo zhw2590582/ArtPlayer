@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
     var $code = document.querySelector('.code');
     var $run = document.querySelector('.run');
@@ -19,18 +21,17 @@
     });
 
     function initArt(art) {
-        Artplayer.config.video.events.forEach(item => {
-            art.on('video:' + item, event => {
+        Artplayer.config.video.events.forEach(function(item) {
+            art.on('video:' + item, function(event) {
                 console.log('video: ' + event.type);
             });
         });
     }
 
     function getURLParameters(url) {
-        return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
-            (a, v) => ((a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)), a),
-            {},
-        );
+        return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(function(a, v) {
+            return (a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)), a;
+        }, {});
     }
 
     function getExt(url) {
@@ -105,21 +106,21 @@
             runCode();
         } else {
             fetch('./js/example.js')
-                .then(response => {
+                .then(function(response) {
                     return response.text();
                 })
-                .then(text => {
+                .then(function(text) {
                     mirror.setValue(text);
                     runCode();
                 })
-                .catch(err => {
+                .catch(function(err) {
                     console.error(err.message);
                 });
         }
     }
 
     function runCode() {
-        Artplayer.instances.forEach(art => {
+        Artplayer.instances.forEach(function(art) {
             art.destroy(true);
         });
         var code = mirror.getValue();
@@ -129,27 +130,30 @@
     }
 
     function initApp() {
-        const { code, libs } = getURLParameters(window.location.href);
+        var _getURLParameters = getURLParameters(window.location.href),
+            code = _getURLParameters.code,
+            libs = _getURLParameters.libs;
+
         loadLib(libs)
             .then(function(result) {
                 loaddLib = loaddLib.concat(result);
                 loadCode(code);
             })
-            .catch(err => {
+            .catch(function(err) {
                 console.error(err.message);
             });
     }
 
-    $run.addEventListener('click', function(e) {
-        const libs = encodeURIComponent($lib.value);
-        const code = encodeURIComponent(mirror.getValue());
-        const url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
-        history.pushState(null, null, url);
-        initApp();
+    window.addEventListener('error', function(err) {
+        console.error(err.message);
     });
 
-    window.addEventListener('error', err => {
-        console.error(err.message);
+    $run.addEventListener('click', function(e) {
+        var libs = encodeURIComponent($lib.value);
+        var code = encodeURIComponent(mirror.getValue());
+        var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
+        history.pushState(null, null, url);
+        initApp();
     });
 
     initApp();

@@ -12,15 +12,9 @@ window.runCode = function(hook) {
             codeElement.tagName === 'PRE' &&
             codeElement.dataset.lang === 'js'
           ) {
-            var libs = item.href.split('/lib=')[1];
+            var libs = item.href.split('/lib=')[1] || '';
             var code = encodeURIComponent(codeElement.innerText);
-            var url = 'https://artplayer.org/lab/?';
-            if (libs) {
-              url += 'libs=' + libs + '&';
-            }
-            if (code) {
-              url += 'code=' + code;
-            }
+            var url = 'https://artplayer.org/lab/?libs=' + libs + '&code=' + code;
             window.open(url);
           }
         });
