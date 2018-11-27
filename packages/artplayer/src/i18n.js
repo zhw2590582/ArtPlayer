@@ -70,13 +70,13 @@ let i18nMap = {
 };
 
 export default class I18n {
-    constructor({ option }) {
-        this.option = option;
+    constructor(art) {
+        this.art = art;
         this.init();
     }
 
     init() {
-        this.language = i18nMap[this.option.lang.toLowerCase()] || {};
+        this.language = i18nMap[this.art.option.lang.toLowerCase()] || {};
     }
 
     get(key) {

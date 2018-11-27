@@ -37,6 +37,12 @@ export default {
     plugins: {
         type: 'array',
         child: {
+            type: 'string|function|regexp',
+        },
+    },
+    whitelist: {
+        type: 'array',
+        child: {
             type: 'function',
         },
     },

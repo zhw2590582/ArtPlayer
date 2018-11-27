@@ -6,6 +6,7 @@ import merge from 'deepmerge';
 import * as utils from './utils';
 import scheme from './scheme';
 import config from './config';
+import Whitelist from './whitelist';
 import Template from './template';
 import I18n from './i18n';
 import Player from './player';
@@ -35,6 +36,10 @@ class Artplayer extends Emitter {
 
     static get version() {
         return '__VERSION__';
+    }
+
+    static get env() {
+        return '__ENV__';
     }
 
     static get config() {
@@ -76,6 +81,7 @@ class Artplayer extends Emitter {
             controls: [],
             highlight: [],
             plugins: [],
+            whitelist: [],
             thumbnails: {
                 url: '',
                 number: 60,
@@ -115,6 +121,7 @@ class Artplayer extends Emitter {
             utils.errorHandle(false, 'Cannot mount multiple instances on the same dom element');
         }
 
+        this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.storage = new Storage(this);
         this.i18n = new I18n(this);

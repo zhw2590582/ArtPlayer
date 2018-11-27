@@ -590,6 +590,12 @@
     plugins: {
       type: 'array',
       child: {
+        type: 'string|function|regexp'
+      }
+    },
+    whitelist: {
+      type: 'array',
+      child: {
         type: 'function'
       }
     },
@@ -708,6 +714,37 @@
     video: video
   };
 
+  var Whitelist = function Whitelist(art) {
+    classCallCheck(this, Whitelist);
+
+    var whitelist = art.option.whitelist;
+    var userAgent = window.navigator.userAgent;
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    this.state = !isMobile || whitelist.some(function (item) {
+      var type = optionValidator.kindOf(item);
+      var result = false;
+
+      switch (type) {
+        case 'string':
+          result = userAgent.indexOf(item) > -1;
+          break;
+
+        case 'function':
+          result = item(userAgent);
+          break;
+
+        case 'regexp':
+          result = item.test(userAgent);
+          break;
+
+        default:
+          break;
+      }
+
+      return result;
+    });
+  };
+
   var Template = function Template(art) {
     classCallCheck(this, Template);
 
@@ -811,19 +848,17 @@
   var I18n =
   /*#__PURE__*/
   function () {
-    function I18n(_ref) {
-      var option = _ref.option;
-
+    function I18n(art) {
       classCallCheck(this, I18n);
 
-      this.option = option;
+      this.art = art;
       this.init();
     }
 
     createClass(I18n, [{
       key: "init",
       value: function init() {
-        this.language = i18nMap[this.option.lang.toLowerCase()] || {};
+        this.language = i18nMap[this.art.option.lang.toLowerCase()] || {};
       }
     }, {
       key: "get",
@@ -944,6 +979,11 @@
       if (option.autoplay) {
         player.play();
       }
+    });
+    art.on('video:timeupdate', function () {
+      art.isPlaying = true;
+      art.controls.hide();
+      art.mask.hide();
     });
     art.on('video:playing', function () {
       art.isPlaying = true;
@@ -5342,6 +5382,7 @@
           errorHandle(false, 'Cannot mount multiple instances on the same dom element');
         }
 
+        this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.storage = new Storage(this);
         this.i18n = new I18n(this);
@@ -5382,6 +5423,11 @@
       key: "version",
       get: function get() {
         return '1.0.3';
+      }
+    }, {
+      key: "env",
+      get: function get() {
+        return '"development"';
       }
     }, {
       key: "config",
@@ -5426,6 +5472,7 @@
           controls: [],
           highlight: [],
           plugins: [],
+          whitelist: [],
           thumbnails: {
             url: '',
             number: 60,
