@@ -8,7 +8,7 @@ export default function aspectRatioMix(art, player) {
     } = art;
 
     Object.defineProperty(player, 'aspectRatioState', {
-        get: () => $player.dataset.aspectRatio,
+        get: () => $player.dataset.aspectRatio || '',
     });
 
     Object.defineProperty(player, 'aspectRatio', {

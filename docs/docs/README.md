@@ -1008,6 +1008,156 @@ setTimeout(function() {
 
 -   Type: `Object`
 
+### aspectRatioState
+
+-   Type: `String`
+-   Default: `''`
+
+Return the current value of aspect ratio
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.player.aspectRatioState)
+```
+
+### aspectRatio
+
+-   Type: `Function`
+
+Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9`
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.aspectRatio('4:3');
+});
+```
+
+### aspectRatioRemove
+
+-   Type: `Function`
+
+Remove aspect ratio
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.aspectRatio('4:3');
+    setTimeout(function() {
+        art.player.aspectRatioRemove();
+    }, 1000);
+});
+```
+
+### aspectRatioReset
+
+-   Type: `Function`
+
+Recalculate the aspect ratio
+
+### returnUrl
+
+-   Type: `Function`
+
+A special editable method for return new url, useful when modifying url
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+Object.defineProperty(art.player, 'returnUrl', {
+    value: url => url + '?time=' + (new Date).getTime()
+});
+```
+
+### autoSizeState
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Return the current state of auto size
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.player.autoSizeState)
+```
+
+### autoSize
+
+-   Type: `Function`
+
+Return the current state of auto size
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.autoSize();
+});
+```
+
+### autoSizeRemove
+
+-   Type: `Function`
+
+Remove the auto size
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.autoSize();
+    setTimeout(function() {
+        art.player.autoSizeRemove();
+    }, 1000);
+});
+```
+
 ## storage
 
 -   Type: `Object`
@@ -1184,7 +1334,3 @@ var art = new Artplayer({
     },
 });
 ```
-
-# Issue
-
-> TODO...

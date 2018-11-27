@@ -1265,7 +1265,7 @@
         notice = art.notice;
     Object.defineProperty(player, 'aspectRatioState', {
       get: function get() {
-        return $player.dataset.aspectRatio;
+        return $player.dataset.aspectRatio || '';
       }
     });
     Object.defineProperty(player, 'aspectRatio', {
