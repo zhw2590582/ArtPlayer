@@ -590,13 +590,13 @@
     plugins: {
       type: 'array',
       child: {
-        type: 'string|function|regexp'
+        type: 'function'
       }
     },
     whitelist: {
       type: 'array',
       child: {
-        type: 'function'
+        type: 'string|function|regexp'
       }
     },
     layers: {
@@ -782,6 +782,7 @@
       'Video info': '视频统计信息',
       Close: '关闭',
       'Video load failed': '视频加载失败',
+      'Video loading is aborted': '视频加载被中止',
       Volume: '音量',
       Play: '播放',
       Pause: '暂停',
@@ -815,6 +816,7 @@
       'Video info': '影片統計訊息',
       Close: '關閉',
       'Video load failed': '影片載入失敗',
+      'Video loading is aborted': '影片加載被中止',
       Volume: '音量',
       Play: '播放',
       Pause: '暫停',
@@ -947,54 +949,36 @@
     proxy($video, 'click', function () {
       player.toggle();
     });
-    art.on('video:loadstart', function () {
-      art.loading.show();
+    config.video.events.forEach(function (eventName) {
+      proxy($video, eventName, function (event) {
+        art.emit("video:".concat(event.type), event);
+      });
     });
-    art.on('video:loadedmetadata', function () {
-      if (option.autoSize) {
-        player.autoSize();
-      }
-    });
-    art.on('video:loadeddata', function () {
-      art.loading.hide();
-    });
-    art.on('video:waiting', function () {
-      art.loading.show();
-    });
-    art.on('video:seeking', function () {
-      art.loading.show();
+    art.on('video:abort', function () {
+      notice.show("".concat(i18n.get('Video loading is aborted')));
     });
     art.on('video:canplay', function () {
-      reconnectTime = 0;
-
       if (!firstCanplay) {
         firstCanplay = true;
+
+        if (option.autoplay) {
+          player.play();
+        }
+
         art.emit('firstCanplay');
       }
 
+      reconnectTime = 0;
       art.controls.show();
       art.mask.show();
       art.loading.hide();
+    }); // art.on('video:canplaythrough', () => {
+    // });
+    // art.on('video:durationchange', () => {
+    // });
+    // art.on('video:emptied', () => {
+    // });
 
-      if (option.autoplay) {
-        player.play();
-      }
-    });
-    art.on('video:timeupdate', function () {
-      art.isPlaying = true;
-      art.controls.hide();
-      art.mask.hide();
-    });
-    art.on('video:playing', function () {
-      art.isPlaying = true;
-      art.controls.hide();
-      art.mask.hide();
-    });
-    art.on('video:pause', function () {
-      art.isPlaying = false;
-      art.controls.show();
-      art.mask.show();
-    });
     art.on('video:ended', function () {
       art.isPlaying = false;
       art.controls.show();
@@ -1022,11 +1006,55 @@
           art.destroy();
         });
       }
+    }); // art.on('video:loadeddata', () => {
+    // });
+
+    art.on('video:loadedmetadata', function () {
+      if (option.autoSize) {
+        player.autoSize();
+      }
     });
-    config.video.events.forEach(function (eventName) {
-      proxy($video, eventName, function (event) {
-        art.emit("video:".concat(event.type), event);
-      });
+    art.on('video:loadstart', function () {
+      art.loading.show();
+    });
+    art.on('video:pause', function () {
+      art.isPlaying = false;
+      art.controls.show();
+      art.mask.show();
+    });
+    art.on('video:play', function () {
+      art.isPlaying = true;
+      art.controls.hide();
+      art.mask.hide();
+    });
+    art.on('video:playing', function () {
+      art.isPlaying = true;
+      art.controls.hide();
+      art.mask.hide();
+    }); // art.on('video:progress', () => {
+    // });
+    // art.on('video:ratechange', () => {
+    // });
+
+    art.on('video:seeked', function () {
+      art.loading.hide();
+    });
+    art.on('video:seeking', function () {
+      art.loading.show();
+    }); // art.on('video:stalled', () => {
+    // });
+    // art.on('video:suspend', () => {
+    // });
+
+    art.on('video:timeupdate', function () {
+      art.isPlaying = true;
+      art.controls.hide();
+      art.mask.hide();
+    }); // art.on('video:volumechange', () => {
+    // });
+
+    art.on('video:waiting', function () {
+      art.loading.show();
     });
   }
 
@@ -5071,6 +5099,7 @@
       value: function hide() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'none');
+        console.log('hide');
         this.art.emit('loading:hide', $loading);
       }
     }, {
@@ -5078,6 +5107,7 @@
       value: function show() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'flex');
+        console.log('show');
         this.art.emit('loading:show', $loading);
       }
     }]);

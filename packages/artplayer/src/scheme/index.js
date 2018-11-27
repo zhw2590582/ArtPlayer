@@ -37,13 +37,13 @@ export default {
     plugins: {
         type: 'array',
         child: {
-            type: 'string|function|regexp',
+            type: 'function',
         },
     },
     whitelist: {
         type: 'array',
         child: {
-            type: 'function',
+            type: 'string|function|regexp',
         },
     },
     layers: {

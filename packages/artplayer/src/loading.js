@@ -14,12 +14,14 @@ export default class Loading {
     hide() {
         const { $loading } = this.art.refs;
         setStyle($loading, 'display', 'none');
+        console.log('hide');
         this.art.emit('loading:hide', $loading);
     }
 
     show() {
         const { $loading } = this.art.refs;
         setStyle($loading, 'display', 'flex');
+        console.log('show');
         this.art.emit('loading:show', $loading);
     }
 }

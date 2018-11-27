@@ -17,60 +17,42 @@ export default function eventInit(art, player) {
         player.toggle();
     });
 
-    art.on('video:loadstart', () => {
-        art.loading.show();
+    config.video.events.forEach(eventName => {
+        proxy($video, eventName, event => {
+            art.emit(`video:${event.type}`, event);
+        });
     });
 
-    art.on('video:loadedmetadata', () => {
-        if (option.autoSize) {
-            player.autoSize();
-        }
-    });
-
-    art.on('video:loadeddata', () => {
-        art.loading.hide();
-    });
-
-    art.on('video:waiting', () => {
-        art.loading.show();
-    });
-
-    art.on('video:seeking', () => {
-        art.loading.show();
+    art.on('video:abort', () => {
+        notice.show(`${i18n.get('Video loading is aborted')}`);
     });
 
     art.on('video:canplay', () => {
-        reconnectTime = 0;
         if (!firstCanplay) {
             firstCanplay = true;
+            if (option.autoplay) {
+                player.play();
+            }
             art.emit('firstCanplay');
         }
 
+        reconnectTime = 0;
         art.controls.show();
         art.mask.show();
         art.loading.hide();
-        if (option.autoplay) {
-            player.play();
-        }
     });
 
-    art.on('video:timeupdate', () => {
-        art.isPlaying = true;
-        art.controls.hide();
-        art.mask.hide();
-    });
+    // art.on('video:canplaythrough', () => {
 
-    art.on('video:playing', () => {
-        art.isPlaying = true;
-        art.controls.hide();
-        art.mask.hide();
-    });
+    // });
 
-    art.on('video:pause', () => {
-        art.isPlaying = false;
-        art.controls.show();
-        art.mask.show();
-    });
+    // art.on('video:durationchange', () => {
+
+    // });
+
+    // art.on('video:emptied', () => {
+
+    // });
 
     art.on('video:ended', () => {
         art.isPlaying = false;
@@ -101,9 +83,73 @@ export default function eventInit(art, player) {
         }
     });
 
-    config.video.events.forEach(eventName => {
-        proxy($video, eventName, event => {
-            art.emit(`video:${event.type}`, event);
-        });
+    // art.on('video:loadeddata', () => {
+        
+    // });
+
+    art.on('video:loadedmetadata', () => {
+        if (option.autoSize) {
+            player.autoSize();
+        }
+    });
+
+    art.on('video:loadstart', () => {
+        art.loading.show();
+    });
+
+    art.on('video:pause', () => {
+        art.isPlaying = false;
+        art.controls.show();
+        art.mask.show();
+    });
+
+    art.on('video:play', () => {
+        art.isPlaying = true;
+        art.controls.hide();
+        art.mask.hide();
+    });
+
+    art.on('video:playing', () => {
+        art.isPlaying = true;
+        art.controls.hide();
+        art.mask.hide();
+    });
+
+    // art.on('video:progress', () => {
+
+    // });
+
+    // art.on('video:ratechange', () => {
+
+    // });
+
+    art.on('video:seeked', () => {
+        art.loading.hide();
+    });
+
+    art.on('video:seeking', () => {
+        art.loading.show();
+    });
+
+    // art.on('video:stalled', () => {
+        
+    // });
+
+    // art.on('video:suspend', () => {
+        
+    // });
+
+    art.on('video:timeupdate', () => {
+        art.isPlaying = true;
+        art.controls.hide();
+        art.mask.hide();
+    });
+
+    // art.on('video:volumechange', () => {
+        
+    // });
+
+    art.on('video:waiting', () => {
+        art.loading.show();
     });
 }
