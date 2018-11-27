@@ -5099,7 +5099,6 @@
       value: function hide() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'none');
-        console.log('hide');
         this.art.emit('loading:hide', $loading);
       }
     }, {
@@ -5107,7 +5106,6 @@
       value: function show() {
         var $loading = this.art.refs.$loading;
         setStyle($loading, 'display', 'flex');
-        console.log('show');
         this.art.emit('loading:show', $loading);
       }
     }]);

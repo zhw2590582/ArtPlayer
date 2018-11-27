@@ -979,7 +979,82 @@ art.plugins.myPlugin.doSomething();
 
 # Instance properties
 
-> TODO...
+## Instance
+
+### destroy
+
+-   Type: `Function`
+
+Destroy instance, will not remove dom by default
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+setTimeout(function() {
+    art.destroy();
+}, 1000);
+
+// Remeve dom
+// art.destroy(true);
+```
+
+## player
+
+-   Type: `Object`
+
+## storage
+
+-   Type: `Object`
+
+## i18n
+
+-   Type: `Object`
+
+## notice
+
+-   Type: `Object`
+
+## events
+
+-   Type: `Object`
+
+## layers
+
+-   Type: `Object`
+
+## controls
+
+-   Type: `Object`
+
+## contextmenu
+
+-   Type: `Object`
+
+## subtitle
+
+-   Type: `Object`
+
+## loading
+
+-   Type: `Object`
+
+## mask
+
+-   Type: `Object`
+
+## setting
+
+-   Type: `Object`
+
+## plugins
+
+-   Type: `Object`
 
 # Class static properties
 
@@ -988,6 +1063,7 @@ All properties are read only
 | propertie             | Description               |
 | --------------------- | ------------------------- |
 | `Artplayer.version`   | Version Information       |
+| `Artplayer.env`       | Environmental variable    |
 | `Artplayer.config`    | Configuration information |
 | `Artplayer.utils`     | Utils function            |
 | `Artplayer.DEFAULTS`  | Default option            |
@@ -1091,7 +1167,8 @@ var art = new Artplayer({
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d&dn=sintel.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel-1024-surround.mp4',
+    url:
+        'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d&dn=sintel.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel-1024-surround.mp4',
     type: 'torrent',
     customType: {
         torrent: function(video, url, art) {
