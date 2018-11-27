@@ -11,7 +11,19 @@
 
 ## Features
 
-> TODO...
+* Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`
+* Support `playback rate`, `aspect ratio`, `flip`, `window fullscreen` or `web fullscreen` adjustment
+* Support chrome native picture-in-picture mode, or custom picture-in-picture mode
+* Support for custom `control`, `layer`, `contextmenu`, `setting`
+* Support `thumbnails` and `highlight` in the progress bar
+* Support to maintain the original video ratio, adaptive size
+* Support rich custom event monitoring, easy to expand
+* Support for internationalization of controls
+* Support `vtt` and `srt` subtitles
+* Support video quality switching
+* Support for custom plugins
+* Support `screenshot`
+* And more...
 
 ## Demo
 
@@ -61,6 +73,10 @@ var art = new Artplayer({
     url: 'path/to/video.mp4',
 });
 ```
+
+## Changelog
+
+[Checkout the changelog](https://github.com/zhw2590582/ArtPlayer/blob/master/changelog.md)
 
 ## Ecosystem
 
