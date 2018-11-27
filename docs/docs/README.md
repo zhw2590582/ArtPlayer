@@ -1275,7 +1275,7 @@ var art = new Artplayer({
 });
 
 art.on('firstCanplay', () => {
-    art.player.flip('horizontal);
+    art.player.flip('horizontal');
     console.log(art.player.flipState);
 });
 ```
@@ -1296,7 +1296,7 @@ var art = new Artplayer({
 });
 
 art.on('firstCanplay', () => {
-    art.player.flip('horizontal);
+    art.player.flip('horizontal');
     setTimeout(function() {
         art.player.flipRemove();
     }, 1000);
@@ -1812,13 +1812,87 @@ art.on('firstCanplay', () => {
 
 -   Type: `Object`
 
-> TODO...
+### get
+
+-   Type: `Function`
+
+Get the storage
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.storage.get('volume'));
+```
+
+### set
+
+-   Type: `Function`
+
+Set the storage
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.storage.set('volume', 0.7);
+```
 
 ## i18n
 
 -   Type: `Object`
 
-> TODO...
+### get
+
+-   Type: `Function`
+
+Get the a i18n value
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.i18n.get('Play'));
+```
+
+### update
+
+-   Type: `Function`
+
+Update the i18n
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.i18n.update({
+    'zh-cn': {
+        'More': '更多'
+    }
+});
+
+console.log(art.i18n.get('More'));
+```
 
 ## notice
 
