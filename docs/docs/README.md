@@ -1158,6 +1158,113 @@ art.on('firstCanplay', () => {
 });
 ```
 
+### currentTime
+
+-   Type: `Number`
+
+`Geter` and `Setter` of the current time
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    console.log(art.player.currentTime);
+    art.player.currentTime = 5;
+    console.log(art.player.currentTime);
+});
+```
+
+### duration
+
+-   Type: `Number`
+
+`Geter` of the duration
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    console.log(art.player.duration);
+});
+```
+
+### flipState
+
+-   Type: `String`
+-   Default: `''`
+
+Return the current state of flip
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    console.log(art.player.flipState);
+});
+```
+
+### flip
+
+-   Type: `Function`
+
+Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical`
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.flip('horizontal);
+    console.log(art.player.flipState);
+});
+```
+
+### flipRemove
+
+-   Type: `Function`
+
+Remove the flip
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.flip('horizontal);
+    setTimeout(function() {
+        art.player.flipRemove();
+    }, 1000);
+});
+```
+
 ## storage
 
 -   Type: `Object`
