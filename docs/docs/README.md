@@ -981,6 +981,44 @@ art.plugins.myPlugin.doSomething();
 
 ## Instance
 
+### isFocus
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Return to focus state
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.isFocus);
+```
+
+### isPlaying
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Return to play state
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.isPlaying);
+```
+
 ### destroy
 
 -   Type: `Function`
@@ -1024,7 +1062,7 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
 });
 
-console.log(art.player.aspectRatioState)
+console.log(art.player.aspectRatioState);
 ```
 
 ### aspectRatio
@@ -1092,7 +1130,7 @@ var art = new Artplayer({
 });
 
 Object.defineProperty(art.player, 'returnUrl', {
-    value: url => url + '?time=' + (new Date).getTime()
+    value: url => url + '?time=' + new Date().getTime(),
 });
 ```
 
@@ -1112,7 +1150,7 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
 });
 
-console.log(art.player.autoSizeState)
+console.log(art.player.autoSizeState);
 ```
 
 ### autoSize
@@ -1265,53 +1303,582 @@ art.on('firstCanplay', () => {
 });
 ```
 
+### fullscreenState
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Return the current state of fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.player.fullscreenState);
+```
+
+### fullscreenEnabled
+
+-   Type: `Function`
+
+Enable fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.fullscreenEnabled();
+    console.log(art.player.fullscreenState);
+});
+```
+
+### fullscreenExit
+
+-   Type: `Function`
+
+Exit fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.fullscreenEnabled();
+    console.log(art.player.fullscreenState);
+    setTimeout(function() {
+        art.player.fullscreenExit();
+        console.log(art.player.fullscreenState);
+    }, 1000);
+});
+```
+
+### fullscreenToggle
+
+-   Type: `Function`
+
+Toggle fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.fullscreenToggle();
+});
+```
+
+### fullscreenWebState
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Return the current state of web fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.player.fullscreenWebState);
+```
+
+### fullscreenWebEnabled
+
+-   Type: `Function`
+
+Enable web fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.fullscreenWebEnabled();
+    console.log(art.player.fullscreenWebState);
+});
+```
+
+### fullscreenWebExit
+
+-   Type: `Function`
+
+Exit web fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.fullscreenWebEnabled();
+    console.log(art.player.fullscreenWebState);
+    setTimeout(function() {
+        art.player.fullscreenWebExit();
+        console.log(art.player.fullscreenWebState);
+    }, 1000);
+});
+```
+
+### fullscreenWebToggle
+
+-   Type: `Function`
+
+Toggle web fullscreen
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.fullscreenWebToggle();
+});
+```
+
+### loaded
+
+-   Type: `Number`
+
+Return the proportion of the load
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('video:progress', () => {
+    console.log(art.player.loaded);
+});
+```
+
+### pause
+
+-   Type: `Function`
+
+Pause playback
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.pause();
+});
+```
+
+### pipState
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Return the current state of pip
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.player.pipState);
+```
+
+### pipEnabled
+
+-   Type: `Function`
+
+Enable pip
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.pipEnabled();
+    console.log(art.player.pipState);
+});
+```
+
+### pipExit
+
+-   Type: `Function`
+
+Exit pip
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.pipEnabled();
+    console.log(art.player.pipState);
+    setTimeout(function() {
+        art.player.pipExit();
+        console.log(art.player.pipState);
+    }, 1000);
+});
+```
+
+### pipToggle
+
+-   Type: `Function`
+
+Toggle pip
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.pipToggle();
+});
+```
+
+### playbackRateState
+
+-   Type: `String`
+-   Default: `''`
+
+Return the current state of playback rate
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log(art.player.playbackRateState);
+```
+
+### playbackRate
+
+-   Type: `Function`
+
+Set playbackRate, Currently only accepts three values：0.5, 0.75, 1.0, 1.25, 1.5, 2.0
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.playbackRate(1.5);
+    console.log(art.player.playbackRateState);
+});
+```
+
+### playbackRateRemove
+
+-   Type: `Function`
+
+Remove the playback rate
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.playbackRate(1.5);
+    setTimeout(function() {
+        art.player.playbackRateRemove();
+    }, 1000);
+});
+```
+
+### playbackRateReset
+
+-   Type: `Function`
+
+Recalculate the playback rate
+
+### played
+
+-   Type: `Number`
+
+Return the proportion of the load
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('video:timeupdate', () => {
+    console.log(art.player.played);
+});
+```
+
+### screenshot
+
+-   Type: `Function`
+
+Download the screenshot
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.currentTime = 5;
+    art.player.screenshot();
+});
+```
+
+### seek
+
+-   Type: `Function`
+
+Set the current time
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.seek(5);
+});
+```
+
+### switchQuality
+
+-   Type: `Function`
+
+Switch quality, and you can give it a name
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.switchQuality(url + '/video/one-more-time-one-more-chance-720p.mp4', '720P');
+});
+```
+
+### toggle
+
+-   Type: `Function`
+
+Toggle play and pause
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    art.player.toggle();
+});
+```
+
+### volume
+
+-   Type: `Number`
+
+Geter and Setter of the current volume
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    console.log(art.player.volume);
+    art.player.volume = 5;
+    console.log(art.player.volume);
+});
+```
+
+### muted
+
+-   Type: `Number`
+
+Geter and Setter of the muted
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('firstCanplay', () => {
+    console.log(art.player.muted);
+    art.player.muted = true;
+    console.log(art.player.muted);
+});
+```
+
 ## storage
 
 -   Type: `Object`
+
+> TODO...
 
 ## i18n
 
 -   Type: `Object`
 
+> TODO...
+
 ## notice
 
 -   Type: `Object`
+
+> TODO...
 
 ## events
 
 -   Type: `Object`
 
+> TODO...
+
 ## layers
 
 -   Type: `Object`
+
+> TODO...
 
 ## controls
 
 -   Type: `Object`
 
+> TODO...
+
 ## contextmenu
 
 -   Type: `Object`
+
+> TODO...
 
 ## subtitle
 
 -   Type: `Object`
 
+> TODO...
+
 ## loading
 
 -   Type: `Object`
+
+> TODO...
 
 ## mask
 
 -   Type: `Object`
 
+> TODO...
+
 ## setting
 
 -   Type: `Object`
 
+> TODO...
+
 ## plugins
 
 -   Type: `Object`
+
+> TODO...
 
 # Class static properties
 
