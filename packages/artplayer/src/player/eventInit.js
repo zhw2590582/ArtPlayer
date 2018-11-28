@@ -5,7 +5,7 @@ export default function eventInit(art, player) {
     const {
         option,
         events: { proxy },
-        refs: { $player, $video },
+        template: { $player, $video },
         i18n,
         notice,
     } = art;

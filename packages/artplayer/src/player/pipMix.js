@@ -4,7 +4,7 @@ import { setStyle, append } from '../utils';
 function nativePip(art, player) {
     const {
         notice,
-        refs: { $video },
+        template: { $video },
         events: { proxy },
     } = art;
 
@@ -54,7 +54,7 @@ function customPip(art, player) {
     const {
         option,
         i18n,
-        refs: { $player, $pipClose, $pipTitle },
+        template: { $player, $pipClose, $pipTitle },
         events: { destroyEvents, proxy },
     } = art;
     let cachePos = null;

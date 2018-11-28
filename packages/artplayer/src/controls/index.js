@@ -139,7 +139,7 @@ export default class Controls {
 
     add(item, callback) {
         const option = typeof item === 'function' ? item(this.art) : item;
-        const { $progress, $controlsLeft, $controlsRight } = this.art.refs;
+        const { $progress, $controlsLeft, $controlsRight } = this.art.template;
         let parent;
         switch (option.position) {
             case 'top':
@@ -161,12 +161,12 @@ export default class Controls {
     }
 
     show() {
-        const { $player } = this.art.refs;
+        const { $player } = this.art.template;
         $player.classList.add('artplayer-controls-show');
     }
 
     hide() {
-        const { $player } = this.art.refs;
+        const { $player } = this.art.template;
         $player.classList.remove('artplayer-controls-show');
     }
 }

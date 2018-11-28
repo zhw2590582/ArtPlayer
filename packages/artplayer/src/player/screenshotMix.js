@@ -4,7 +4,7 @@ export default function screenshotMix(art, player) {
     const {
         option,
         notice,
-        refs: { $video },
+        template: { $video },
     } = art;
 
     function captureFrame() {

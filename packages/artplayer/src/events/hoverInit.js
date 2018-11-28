@@ -1,6 +1,6 @@
 export default function hoverInit(art, events) {
     const {
-        refs: { $player },
+        template: { $player },
     } = art;
     events.hover(
         $player,

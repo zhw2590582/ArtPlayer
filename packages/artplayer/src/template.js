@@ -1,7 +1,22 @@
+import { errorHandle } from './utils';
+
 export default class Template {
     constructor(art) {
-        const { refs } = art;
-        refs.$container.innerHTML = `
+        if (art.option.container instanceof Element) {
+            this.$container = this.option.container;
+        } else {
+            this.$container = document.querySelector(art.option.container);
+        }
+
+        if (art.constructor.instances.some(art => art.template.$container === this.$container)) {
+            errorHandle(false, 'Cannot mount multiple instances on the same dom element');
+        }
+
+        this.init();
+    }
+
+    init() {
+        this.$container.innerHTML = `
           <div class="artplayer-video-player">
             <video data-index="10" class="artplayer-video"></video>
             <div data-index="20" class="artplayer-subtitle"></div>
@@ -35,29 +50,37 @@ export default class Template {
             <div data-index="110" class="artplayer-contextmenu"></div>
           </div>
         `;
-        refs.$player = refs.$container.querySelector('.artplayer-video-player');
-        refs.$video = refs.$container.querySelector('.artplayer-video');
-        refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
-        refs.$bottom = refs.$container.querySelector('.artplayer-bottom');
-        refs.$progress = refs.$container.querySelector('.artplayer-progress');
-        refs.$controls = refs.$container.querySelector('.artplayer-controls');
-        refs.$controlsLeft = refs.$container.querySelector('.artplayer-controls-left');
-        refs.$controlsRight = refs.$container.querySelector('.artplayer-controls-right');
-        refs.$layers = refs.$container.querySelector('.artplayer-layers');
-        refs.$loading = refs.$container.querySelector('.artplayer-loading');
-        refs.$notice = refs.$container.querySelector('.artplayer-notice');
-        refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
-        refs.$mask = refs.$container.querySelector('.artplayer-mask');
-        refs.$setting = refs.$container.querySelector('.artplayer-setting');
-        refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
-        refs.$settingBody = refs.$container.querySelector('.artplayer-setting-body');
-        refs.$settingClose = refs.$container.querySelector('.artplayer-setting-close');
-        refs.$info = refs.$container.querySelector('.artplayer-info');
-        refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
-        refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
-        refs.$pipHeader = refs.$container.querySelector('.artplayer-pip-header');
-        refs.$pipTitle = refs.$container.querySelector('.artplayer-pip-title');
-        refs.$pipClose = refs.$container.querySelector('.artplayer-pip-close');
-        refs.$contextmenu = refs.$container.querySelector('.artplayer-contextmenu');
+        this.$player = this.$container.querySelector('.artplayer-video-player');
+        this.$video = this.$container.querySelector('.artplayer-video');
+        this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
+        this.$bottom = this.$container.querySelector('.artplayer-bottom');
+        this.$progress = this.$container.querySelector('.artplayer-progress');
+        this.$controls = this.$container.querySelector('.artplayer-controls');
+        this.$controlsLeft = this.$container.querySelector('.artplayer-controls-left');
+        this.$controlsRight = this.$container.querySelector('.artplayer-controls-right');
+        this.$layers = this.$container.querySelector('.artplayer-layers');
+        this.$loading = this.$container.querySelector('.artplayer-loading');
+        this.$notice = this.$container.querySelector('.artplayer-notice');
+        this.$noticeInner = this.$container.querySelector('.artplayer-notice-inner');
+        this.$mask = this.$container.querySelector('.artplayer-mask');
+        this.$setting = this.$container.querySelector('.artplayer-setting');
+        this.$settingInner = this.$container.querySelector('.artplayer-setting-inner');
+        this.$settingBody = this.$container.querySelector('.artplayer-setting-body');
+        this.$settingClose = this.$container.querySelector('.artplayer-setting-close');
+        this.$info = this.$container.querySelector('.artplayer-info');
+        this.$infoPanel = this.$container.querySelector('.artplayer-info-panel');
+        this.$infoClose = this.$container.querySelector('.artplayer-info-close');
+        this.$pipHeader = this.$container.querySelector('.artplayer-pip-header');
+        this.$pipTitle = this.$container.querySelector('.artplayer-pip-title');
+        this.$pipClose = this.$container.querySelector('.artplayer-pip-close');
+        this.$contextmenu = this.$container.querySelector('.artplayer-contextmenu');
+    }
+
+    destroy(removeHtml) {
+        if (removeHtml) {
+            this.$container.innerHTML = '';
+        } else {
+            this.refs.$player.classList.add('artplayer-destroy');
+        }
     }
 }

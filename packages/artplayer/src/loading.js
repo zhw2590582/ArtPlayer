@@ -6,19 +6,19 @@ export default class Loading {
         this.art = art;
         const {
             option,
-            refs: { $loading },
+            template: { $loading },
         } = art;
         append($loading, option.icons.loading || icons.loading);
     }
 
     hide() {
-        const { $loading } = this.art.refs;
+        const { $loading } = this.art.template;
         setStyle($loading, 'display', 'none');
         this.art.emit('loading:hide', $loading);
     }
 
     show() {
-        const { $loading } = this.art.refs;
+        const { $loading } = this.art.template;
         setStyle($loading, 'display', 'flex');
         this.art.emit('loading:show', $loading);
     }

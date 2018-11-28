@@ -8,7 +8,7 @@ export default class Info {
 
     init() {
         const {
-            refs: { $infoClose },
+            template: { $infoClose },
             events: { proxy },
         } = this.art;
         proxy($infoClose, 'click', () => {
@@ -17,7 +17,7 @@ export default class Info {
     }
 
     show() {
-        const { $info, $infoPanel } = this.art.refs;
+        const { $info, $infoPanel } = this.art.template;
         setStyle($info, 'display', 'block');
         if (!$infoPanel.innerHTML) {
             append($infoPanel, this.creatInfo());
@@ -78,7 +78,7 @@ export default class Info {
     }
 
     readInfo() {
-        const { $infoPanel, $video } = this.art.refs;
+        const { $infoPanel, $video } = this.art.template;
         const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
         types.forEach(item => {
             const value = $video[item.dataset.video];
@@ -95,7 +95,7 @@ export default class Info {
     }
 
     hide() {
-        const { $info } = this.art.refs;
+        const { $info } = this.art.template;
         setStyle($info, 'display', 'none');
         clearTimeout(this.timer);
         this.art.emit('info:hide', $info);

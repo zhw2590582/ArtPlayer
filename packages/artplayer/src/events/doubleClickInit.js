@@ -1,6 +1,6 @@
 export default function doubleClickInit(art, events) {
     const {
-        refs: { $video },
+        template: { $video },
     } = art;
     events.proxy($video, 'dblclick', () => {
         art.player.fullscreenToggle();

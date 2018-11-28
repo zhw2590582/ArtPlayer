@@ -2,7 +2,7 @@ import { setStyle } from '../utils';
 
 export default function resizeMix(art, player) {
     const {
-        refs: { $container, $player, $video },
+        template: { $container, $player, $video },
     } = art;
 
     Object.defineProperty(player, 'autoSizeState', {

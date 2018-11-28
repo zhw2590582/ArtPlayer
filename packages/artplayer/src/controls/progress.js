@@ -2,7 +2,7 @@ import { append, clamp, secondToTime, setStyle, getStyle } from '../utils';
 
 export function getPosFromEvent(art, event) {
     const {
-        refs: { $progress },
+        template: { $progress },
         player,
     } = art;
     const { left } = $progress.getBoundingClientRect();

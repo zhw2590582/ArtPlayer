@@ -6,7 +6,7 @@ export default function thumbnails(controlOption) {
         ...controlOption,
         mounted: $control => {
             const {
-                refs: { $progress },
+                template: { $progress },
                 events: { proxy, loadImg },
             } = art;
             let loading = false;

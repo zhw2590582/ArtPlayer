@@ -16,7 +16,7 @@ export default class Setting {
 
     init() {
         const {
-            refs: { $settingClose },
+            template: { $settingClose },
             events: { proxy },
         } = this.art;
 
@@ -32,19 +32,19 @@ export default class Setting {
     }
 
     add(item, callback) {
-        const { $settingBody } = this.art.refs;
+        const { $settingBody } = this.art.template;
         component(this.art, this, $settingBody, item, callback, 'setting');
     }
 
     show() {
-        const { $setting } = this.art.refs;
+        const { $setting } = this.art.template;
         setStyle($setting, 'display', 'flex');
         this.state = true;
         this.art.emit('setting:show', $setting);
     }
 
     hide() {
-        const { $setting } = this.art.refs;
+        const { $setting } = this.art.template;
         setStyle($setting, 'display', 'none');
         this.state = false;
         this.art.emit('setting:hide', $setting);

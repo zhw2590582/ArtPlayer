@@ -2,7 +2,7 @@ import { errorHandle } from '../utils';
 
 export default function playbackRateMix(art, player) {
     const {
-        refs: { $video, $player },
+        template: { $video, $player },
         i18n,
         notice,
     } = art;

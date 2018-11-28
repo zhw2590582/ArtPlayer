@@ -3,7 +3,7 @@ import { clamp, sleep } from '../utils';
 export default function attrInit(art, player) {
     const {
         option,
-        refs: { $video },
+        template: { $video },
     } = art;
     Object.keys(option.moreVideoAttr).forEach(key => {
         $video[key] = option.moreVideoAttr[key];

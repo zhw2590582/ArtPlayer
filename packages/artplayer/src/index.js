@@ -109,18 +109,7 @@ class Artplayer extends Emitter {
     init() {
         this.isFocus = false;
         this.isPlaying = false;
-        this.refs = {};
-
-        if (this.option.container instanceof Element) {
-            this.refs.$container = this.option.container;
-        } else {
-            this.refs.$container = document.querySelector(this.option.container);
-        }
-
-        if (Artplayer.instances.some(art => art.refs.$container === this.refs.$container)) {
-            utils.errorHandle(false, 'Cannot mount multiple instances on the same dom element');
-        }
-
+        
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.storage = new Storage(this);
@@ -146,13 +135,9 @@ class Artplayer extends Emitter {
     }
 
     destroy(removeHtml = false) {
-        this.events.destroy();
         Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
-        if (removeHtml) {
-            this.refs.$container.innerHTML = '';
-        } else {
-            this.refs.$player.classList.add('artplayer-destroy');
-        }
+        this.events.destroy();
+        this.template.destroy(removeHtml);
         this.emit('destroy');
     }
 }

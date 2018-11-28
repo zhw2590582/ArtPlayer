@@ -1,6 +1,6 @@
 export default function clickInit(art, events) {
     const {
-        refs: { $player },
+        template: { $player },
     } = art;
     events.proxy(document, ['click', 'contextmenu'], event => {
         if (event.composedPath().indexOf($player) > -1) {

@@ -2,7 +2,7 @@ import { setStyle, errorHandle } from '../utils';
 
 export default function aspectRatioMix(art, player) {
     const {
-        refs: { $video, $player },
+        template: { $video, $player },
         i18n,
         notice,
     } = art;

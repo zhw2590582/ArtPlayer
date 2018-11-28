@@ -7,7 +7,7 @@ export default class Notice {
     }
 
     show(msg, autoHide = true, time = 1000) {
-        const { $notice, $noticeInner } = this.art.refs;
+        const { $notice, $noticeInner } = this.art.template;
         setStyle($notice, 'display', 'block');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
         if (autoHide) {
@@ -20,7 +20,7 @@ export default class Notice {
     }
 
     hide() {
-        const { $notice } = this.art.refs;
+        const { $notice } = this.art.template;
         setStyle($notice, 'display', 'none');
         this.art.emit('notice:hide', $notice);
     }

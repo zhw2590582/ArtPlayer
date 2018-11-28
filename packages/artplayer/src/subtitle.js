@@ -15,14 +15,14 @@ export default class Subtitle {
         const {
             events: { proxy },
             option: { subtitle },
-            refs: { $video, $subtitle },
+            template: { $video, $subtitle },
         } = this.art;
         setStyles($subtitle, subtitle.style || {});
         const $track = document.createElement('track');
         $track.default = true;
         $track.kind = 'metadata';
         $video.appendChild($track);
-        this.art.refs.$track = $track;
+        this.art.template.$track = $track;
         this.load(subtitle.url).then(url => {
             $track.src = url;
             this.art.emit('subtitle:load', url);
@@ -71,7 +71,7 @@ export default class Subtitle {
 
     show() {
         const {
-            refs: { $subtitle },
+            template: { $subtitle },
             i18n,
             notice,
         } = this.art;
@@ -83,7 +83,7 @@ export default class Subtitle {
 
     hide() {
         const {
-            refs: { $subtitle },
+            template: { $subtitle },
             i18n,
             notice,
         } = this.art;
@@ -102,7 +102,7 @@ export default class Subtitle {
     }
 
     switch(url) {
-        const { $track } = this.art.refs;
+        const { $track } = this.art.template;
         errorHandle($track, 'You need to initialize the subtitle option first.');
         this.load(url).then(url => {
             $track.src = url;

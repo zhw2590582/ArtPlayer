@@ -3,7 +3,7 @@ import { getExt } from '../utils';
 export default function attachUrlMix(art, player) {
     const {
         option: { type, customType },
-        refs: { $video },
+        template: { $video },
     } = art;
 
     Object.defineProperty(player, 'returnUrl', {

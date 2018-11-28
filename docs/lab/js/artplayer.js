@@ -747,36 +747,71 @@
     });
   };
 
-  var Template = function Template(art) {
-    classCallCheck(this, Template);
+  var Template =
+  /*#__PURE__*/
+  function () {
+    function Template(art) {
+      var _this = this;
 
-    var refs = art.refs;
-    refs.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video data-index=\"10\" class=\"artplayer-video\"></video>\n            <div data-index=\"20\" class=\"artplayer-subtitle\"></div>\n            <div data-index=\"30\" class=\"artplayer-layers\"></div>\n            <div data-index=\"40\" class=\"artplayer-mask\"></div>\n            <div data-index=\"50\" class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div data-index=\"60\" class=\"artplayer-loading\"></div>\n            <div data-index=\"70\" class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div data-index=\"80\" class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n                <div class=\"artplayer-setting-close\">\xD7</div>\n              </div>\n            </div>\n            <div data-index=\"90\" class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div data-index=\"100\" class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div data-index=\"110\" class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
-    refs.$player = refs.$container.querySelector('.artplayer-video-player');
-    refs.$video = refs.$container.querySelector('.artplayer-video');
-    refs.$subtitle = refs.$container.querySelector('.artplayer-subtitle');
-    refs.$bottom = refs.$container.querySelector('.artplayer-bottom');
-    refs.$progress = refs.$container.querySelector('.artplayer-progress');
-    refs.$controls = refs.$container.querySelector('.artplayer-controls');
-    refs.$controlsLeft = refs.$container.querySelector('.artplayer-controls-left');
-    refs.$controlsRight = refs.$container.querySelector('.artplayer-controls-right');
-    refs.$layers = refs.$container.querySelector('.artplayer-layers');
-    refs.$loading = refs.$container.querySelector('.artplayer-loading');
-    refs.$notice = refs.$container.querySelector('.artplayer-notice');
-    refs.$noticeInner = refs.$container.querySelector('.artplayer-notice-inner');
-    refs.$mask = refs.$container.querySelector('.artplayer-mask');
-    refs.$setting = refs.$container.querySelector('.artplayer-setting');
-    refs.$settingInner = refs.$container.querySelector('.artplayer-setting-inner');
-    refs.$settingBody = refs.$container.querySelector('.artplayer-setting-body');
-    refs.$settingClose = refs.$container.querySelector('.artplayer-setting-close');
-    refs.$info = refs.$container.querySelector('.artplayer-info');
-    refs.$infoPanel = refs.$container.querySelector('.artplayer-info-panel');
-    refs.$infoClose = refs.$container.querySelector('.artplayer-info-close');
-    refs.$pipHeader = refs.$container.querySelector('.artplayer-pip-header');
-    refs.$pipTitle = refs.$container.querySelector('.artplayer-pip-title');
-    refs.$pipClose = refs.$container.querySelector('.artplayer-pip-close');
-    refs.$contextmenu = refs.$container.querySelector('.artplayer-contextmenu');
-  };
+      classCallCheck(this, Template);
+
+      if (art.option.container instanceof Element) {
+        this.$container = this.option.container;
+      } else {
+        this.$container = document.querySelector(art.option.container);
+      }
+
+      if (art.constructor.instances.some(function (art) {
+        return art.template.$container === _this.$container;
+      })) {
+        errorHandle(false, 'Cannot mount multiple instances on the same dom element');
+      }
+
+      this.init();
+    }
+
+    createClass(Template, [{
+      key: "init",
+      value: function init() {
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video data-index=\"10\" class=\"artplayer-video\"></video>\n            <div data-index=\"20\" class=\"artplayer-subtitle\"></div>\n            <div data-index=\"30\" class=\"artplayer-layers\"></div>\n            <div data-index=\"40\" class=\"artplayer-mask\"></div>\n            <div data-index=\"50\" class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div data-index=\"60\" class=\"artplayer-loading\"></div>\n            <div data-index=\"70\" class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div data-index=\"80\" class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n                <div class=\"artplayer-setting-close\">\xD7</div>\n              </div>\n            </div>\n            <div data-index=\"90\" class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div data-index=\"100\" class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div data-index=\"110\" class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
+        this.$player = this.$container.querySelector('.artplayer-video-player');
+        this.$video = this.$container.querySelector('.artplayer-video');
+        this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
+        this.$bottom = this.$container.querySelector('.artplayer-bottom');
+        this.$progress = this.$container.querySelector('.artplayer-progress');
+        this.$controls = this.$container.querySelector('.artplayer-controls');
+        this.$controlsLeft = this.$container.querySelector('.artplayer-controls-left');
+        this.$controlsRight = this.$container.querySelector('.artplayer-controls-right');
+        this.$layers = this.$container.querySelector('.artplayer-layers');
+        this.$loading = this.$container.querySelector('.artplayer-loading');
+        this.$notice = this.$container.querySelector('.artplayer-notice');
+        this.$noticeInner = this.$container.querySelector('.artplayer-notice-inner');
+        this.$mask = this.$container.querySelector('.artplayer-mask');
+        this.$setting = this.$container.querySelector('.artplayer-setting');
+        this.$settingInner = this.$container.querySelector('.artplayer-setting-inner');
+        this.$settingBody = this.$container.querySelector('.artplayer-setting-body');
+        this.$settingClose = this.$container.querySelector('.artplayer-setting-close');
+        this.$info = this.$container.querySelector('.artplayer-info');
+        this.$infoPanel = this.$container.querySelector('.artplayer-info-panel');
+        this.$infoClose = this.$container.querySelector('.artplayer-info-close');
+        this.$pipHeader = this.$container.querySelector('.artplayer-pip-header');
+        this.$pipTitle = this.$container.querySelector('.artplayer-pip-title');
+        this.$pipClose = this.$container.querySelector('.artplayer-pip-close');
+        this.$contextmenu = this.$container.querySelector('.artplayer-contextmenu');
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(removeHtml) {
+        if (removeHtml) {
+          this.$container.innerHTML = '';
+        } else {
+          this.refs.$player.classList.add('artplayer-destroy');
+        }
+      }
+    }]);
+
+    return Template;
+  }();
 
   var i18nMap = {
     'zh-cn': {
@@ -884,7 +919,7 @@
     var _art$option = art.option,
         type = _art$option.type,
         customType = _art$option.customType,
-        $video = art.refs.$video;
+        $video = art.template.$video;
     Object.defineProperty(player, 'returnUrl', {
       writable: true,
       value: function value(url) {
@@ -911,7 +946,7 @@
 
   function attrInit(art, player) {
     var option = art.option,
-        $video = art.refs.$video;
+        $video = art.template.$video;
     Object.keys(option.moreVideoAttr).forEach(function (key) {
       $video[key] = option.moreVideoAttr[key];
     });
@@ -940,9 +975,9 @@
   function eventInit(art, player) {
     var option = art.option,
         proxy = art.events.proxy,
-        _art$refs = art.refs,
-        $player = _art$refs.$player,
-        $video = _art$refs.$video,
+        _art$template = art.template,
+        $player = _art$template.$player,
+        $video = _art$template.$video,
         i18n = art.i18n,
         notice = art.notice;
     var firstCanplay = false;
@@ -1061,7 +1096,7 @@
   }
 
   function playMix(art, player) {
-    var $video = art.refs.$video,
+    var $video = art.template.$video,
         i18n = art.i18n,
         notice = art.notice,
         mutex = art.option.mutex;
@@ -1091,7 +1126,7 @@
   }
 
   function pauseMin(art, player) {
-    var $video = art.refs.$video,
+    var $video = art.template.$video,
         i18n = art.i18n,
         notice = art.notice;
     Object.defineProperty(player, 'pause', {
@@ -1133,7 +1168,7 @@
   }
 
   function volumeMix(art, player) {
-    var $video = art.refs.$video,
+    var $video = art.template.$video,
         i18n = art.i18n,
         notice = art.notice,
         storage = art.storage;
@@ -1168,10 +1203,10 @@
   function currentTimeMix(art, player) {
     Object.defineProperty(player, 'currentTime', {
       get: function get() {
-        return art.refs.$video.currentTime || 0;
+        return art.template.$video.currentTime || 0;
       },
       set: function set(currentTime) {
-        art.refs.$video.currentTime = currentTime;
+        art.template.$video.currentTime = currentTime;
       }
     });
   }
@@ -1179,7 +1214,7 @@
   function durationMix(art, player) {
     Object.defineProperty(player, 'duration', {
       get: function get() {
-        return art.refs.$video.duration || 0;
+        return art.template.$video.duration || 0;
       }
     });
   }
@@ -1213,9 +1248,9 @@
   }
 
   function playbackRateMix(art, player) {
-    var _art$refs = art.refs,
-        $video = _art$refs.$video,
-        $player = _art$refs.$player,
+    var _art$template = art.template,
+        $video = _art$template.$video,
+        $player = _art$template.$player,
         i18n = art.i18n,
         notice = art.notice;
     Object.defineProperty(player, 'playbackRateState', {
@@ -1260,9 +1295,9 @@
   }
 
   function aspectRatioMix(art, player) {
-    var _art$refs = art.refs,
-        $video = _art$refs.$video,
-        $player = _art$refs.$player,
+    var _art$template = art.template,
+        $video = _art$template.$video,
+        $player = _art$template.$player,
         i18n = art.i18n,
         notice = art.notice;
     Object.defineProperty(player, 'aspectRatioState', {
@@ -1335,7 +1370,7 @@
   function screenshotMix(art, player) {
     var option = art.option,
         notice = art.notice,
-        $video = art.refs.$video;
+        $video = art.template.$video;
 
     function captureFrame() {
       var canvas = document.createElement('canvas');
@@ -1539,7 +1574,7 @@
   function fullscreenMix(art, player) {
     var notice = art.notice,
         destroyEvents = art.events.destroyEvents,
-        $player = art.refs.$player;
+        $player = art.template.$player;
 
     var screenfullChange = function screenfullChange() {
       art.emit('fullscreen', screenfull.isFullscreen);
@@ -1593,7 +1628,7 @@
   }
 
   function fullscreenWebMix(art, player) {
-    var $player = art.refs.$player;
+    var $player = art.template.$player;
     Object.defineProperty(player, 'fullscreenWebState', {
       get: function get() {
         return $player.classList.contains('artplayer-web-fullscreen');
@@ -2952,7 +2987,7 @@
 
   function nativePip(art, player) {
     var notice = art.notice,
-        $video = art.refs.$video,
+        $video = art.template.$video,
         proxy = art.events.proxy;
     $video.disablePictureInPicture = false;
     Object.defineProperty(player, 'pipState', {
@@ -2996,10 +3031,10 @@
   function customPip(art, player) {
     var option = art.option,
         i18n = art.i18n,
-        _art$refs = art.refs,
-        $player = _art$refs.$player,
-        $pipClose = _art$refs.$pipClose,
-        $pipTitle = _art$refs.$pipTitle,
+        _art$template = art.template,
+        $player = _art$template.$player,
+        $pipClose = _art$template.$pipClose,
+        $pipTitle = _art$template.$pipTitle,
         _art$events = art.events,
         destroyEvents = _art$events.destroyEvents,
         proxy = _art$events.proxy;
@@ -3078,7 +3113,7 @@
   function seekMix$1(art, player) {
     Object.defineProperty(player, 'loaded', {
       get: function get() {
-        return art.refs.$video.buffered.length ? art.refs.$video.buffered.end(art.refs.$video.buffered.length - 1) / art.refs.$video.duration : 0;
+        return art.template.$video.buffered.length ? art.template.$video.buffered.end(art.template.$video.buffered.length - 1) / art.template.$video.duration : 0;
       }
     });
   }
@@ -3086,16 +3121,16 @@
   function seekMix$2(art, player) {
     Object.defineProperty(player, 'played', {
       get: function get() {
-        return art.refs.$video.currentTime / art.refs.$video.duration;
+        return art.template.$video.currentTime / art.template.$video.duration;
       }
     });
   }
 
   function resizeMix(art, player) {
-    var _art$refs = art.refs,
-        $container = _art$refs.$container,
-        $player = _art$refs.$player,
-        $video = _art$refs.$video;
+    var _art$template = art.template,
+        $container = _art$template.$container,
+        $player = _art$template.$player,
+        $video = _art$template.$video;
     Object.defineProperty(player, 'autoSizeState', {
       get: function get() {
         return $container.classList.contains('artplayer-auto-size');
@@ -3141,20 +3176,20 @@
   function flipMix(art, player) {
     Object.defineProperty(player, 'flipState', {
       get: function get() {
-        return art.refs.$player.dataset.flip;
+        return art.template.$player.dataset.flip;
       }
     });
     Object.defineProperty(player, 'flip', {
       value: function value(flip) {
         var flipList = ['normal', 'horizontal', 'vertical'];
         errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
-        art.refs.$player.dataset.flip = flip;
+        art.template.$player.dataset.flip = flip;
         art.emit('flipChange', flip);
       }
     });
     Object.defineProperty(player, 'flipRemove', {
       value: function value() {
-        delete art.refs.$player.dataset.flip;
+        delete art.template.$player.dataset.flip;
         art.emit('flipRemove');
       }
     });
@@ -3581,7 +3616,7 @@
   }
 
   function getPosFromEvent(art, event) {
-    var $progress = art.refs.$progress,
+    var $progress = art.template.$progress,
         player = art.player;
 
     var _$progress$getBoundin = $progress.getBoundingClientRect(),
@@ -3866,7 +3901,7 @@
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
-          var $progress = art.refs.$progress,
+          var $progress = art.template.$progress,
               _art$events = art.events,
               proxy = _art$events.proxy,
               loadImg = _art$events.loadImg;
@@ -4074,10 +4109,10 @@
       key: "add",
       value: function add(item, callback) {
         var option = typeof item === 'function' ? item(this.art) : item;
-        var _this$art$refs = this.art.refs,
-            $progress = _this$art$refs.$progress,
-            $controlsLeft = _this$art$refs.$controlsLeft,
-            $controlsRight = _this$art$refs.$controlsRight;
+        var _this$art$template = this.art.template,
+            $progress = _this$art$template.$progress,
+            $controlsLeft = _this$art$template.$controlsLeft,
+            $controlsRight = _this$art$template.$controlsRight;
         var parent;
 
         switch (option.position) {
@@ -4104,13 +4139,13 @@
     }, {
       key: "show",
       value: function show() {
-        var $player = this.art.refs.$player;
+        var $player = this.art.template.$player;
         $player.classList.add('artplayer-controls-show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $player = this.art.refs.$player;
+        var $player = this.art.template.$player;
         $player.classList.remove('artplayer-controls-show');
       }
     }]);
@@ -4186,7 +4221,7 @@
 
   function version(menuOption) {
     return objectSpread({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.3</a>'
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.4</a>'
     });
   }
 
@@ -4223,9 +4258,9 @@
 
         var _this$art = this.art,
             option = _this$art.option,
-            _this$art$refs = _this$art.refs,
-            $player = _this$art$refs.$player,
-            $contextmenu = _this$art$refs.$contextmenu,
+            _this$art$template = _this$art.template,
+            $player = _this$art$template.$player,
+            $contextmenu = _this$art$template.$contextmenu,
             proxy = _this$art.events.proxy;
         this.add(playbackRate({
           disable: !option.playbackRate,
@@ -4271,15 +4306,15 @@
     }, {
       key: "add",
       value: function add(item, callback) {
-        var $contextmenu = this.art.refs.$contextmenu;
+        var $contextmenu = this.art.template.$contextmenu;
         component(this.art, this, $contextmenu, item, callback, 'contextmenu');
       }
     }, {
       key: "setPos",
       value: function setPos(event) {
-        var _this$art$refs2 = this.art.refs,
-            $player = _this$art$refs2.$player,
-            $contextmenu = _this$art$refs2.$contextmenu;
+        var _this$art$template2 = this.art.template,
+            $player = _this$art$template2.$player,
+            $contextmenu = _this$art$template2.$contextmenu;
         var mouseX = event.clientX;
         var mouseY = event.clientY;
 
@@ -4310,14 +4345,14 @@
     }, {
       key: "hide",
       value: function hide() {
-        var $contextmenu = this.art.refs.$contextmenu;
+        var $contextmenu = this.art.template.$contextmenu;
         setStyle($contextmenu, 'display', 'none');
         this.art.emit('contextmenu:hide', $contextmenu);
       }
     }, {
       key: "show",
       value: function show() {
-        var $contextmenu = this.art.refs.$contextmenu;
+        var $contextmenu = this.art.template.$contextmenu;
         setStyle($contextmenu, 'display', 'block');
         this.art.emit('contextmenu:show', $contextmenu);
       }
@@ -4342,7 +4377,7 @@
         var _this = this;
 
         var _this$art = this.art,
-            $infoClose = _this$art.refs.$infoClose,
+            $infoClose = _this$art.template.$infoClose,
             proxy = _this$art.events.proxy;
         proxy($infoClose, 'click', function () {
           _this.hide();
@@ -4351,9 +4386,9 @@
     }, {
       key: "show",
       value: function show() {
-        var _this$art$refs = this.art.refs,
-            $info = _this$art$refs.$info,
-            $infoPanel = _this$art$refs.$infoPanel;
+        var _this$art$template = this.art.template,
+            $info = _this$art$template.$info,
+            $infoPanel = _this$art$template.$infoPanel;
         setStyle($info, 'display', 'block');
 
         if (!$infoPanel.innerHTML) {
@@ -4368,7 +4403,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.3</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.4</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -4379,9 +4414,9 @@
     }, {
       key: "readInfo",
       value: function readInfo() {
-        var _this$art$refs2 = this.art.refs,
-            $infoPanel = _this$art$refs2.$infoPanel,
-            $video = _this$art$refs2.$video;
+        var _this$art$template2 = this.art.template,
+            $infoPanel = _this$art$template2.$infoPanel,
+            $video = _this$art$template2.$video;
         var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
         types.forEach(function (item) {
           var value = $video[item.dataset.video];
@@ -4403,7 +4438,7 @@
     }, {
       key: "hide",
       value: function hide() {
-        var $info = this.art.refs.$info;
+        var $info = this.art.template.$info;
         setStyle($info, 'display', 'none');
         clearTimeout(this.timer);
         this.art.emit('info:hide', $info);
@@ -4436,15 +4471,15 @@
         var _this$art = this.art,
             proxy = _this$art.events.proxy,
             subtitle = _this$art.option.subtitle,
-            _this$art$refs = _this$art.refs,
-            $video = _this$art$refs.$video,
-            $subtitle = _this$art$refs.$subtitle;
+            _this$art$template = _this$art.template,
+            $video = _this$art$template.$video,
+            $subtitle = _this$art$template.$subtitle;
         setStyles($subtitle, subtitle.style || {});
         var $track = document.createElement('track');
         $track.default = true;
         $track.kind = 'metadata';
         $video.appendChild($track);
-        this.art.refs.$track = $track;
+        this.art.template.$track = $track;
         this.load(subtitle.url).then(function (url) {
           $track.src = url;
 
@@ -4501,7 +4536,7 @@
       key: "show",
       value: function show() {
         var _this$art2 = this.art,
-            $subtitle = _this$art2.refs.$subtitle,
+            $subtitle = _this$art2.template.$subtitle,
             i18n = _this$art2.i18n,
             notice = _this$art2.notice;
         setStyle($subtitle, 'display', 'block');
@@ -4513,7 +4548,7 @@
       key: "hide",
       value: function hide() {
         var _this$art3 = this.art,
-            $subtitle = _this$art3.refs.$subtitle,
+            $subtitle = _this$art3.template.$subtitle,
             i18n = _this$art3.i18n,
             notice = _this$art3.notice;
         setStyle($subtitle, 'display', 'none');
@@ -4535,7 +4570,7 @@
       value: function _switch(url) {
         var _this2 = this;
 
-        var $track = this.art.refs.$track;
+        var $track = this.art.template.$track;
         errorHandle($track, 'You need to initialize the subtitle option first.');
         this.load(url).then(function (url) {
           $track.src = url;
@@ -4549,7 +4584,7 @@
   }();
 
   function clickInit(art, events) {
-    var $player = art.refs.$player;
+    var $player = art.template.$player;
     events.proxy(document, ['click', 'contextmenu'], function (event) {
       if (event.composedPath().indexOf($player) > -1) {
         art.isFocus = true;
@@ -4561,7 +4596,7 @@
   }
 
   function hoverInit(art, events) {
-    var $player = art.refs.$player;
+    var $player = art.template.$player;
     events.hover($player, function () {
       $player.classList.add('artplayer-hover');
       art.emit('hoverenter');
@@ -4572,9 +4607,9 @@
   }
 
   function mousemoveInitInit(art, events) {
-    var _art$refs = art.refs,
-        $player = _art$refs.$player,
-        $video = _art$refs.$video;
+    var _art$template = art.template,
+        $player = _art$template.$player,
+        $video = _art$template.$video;
     var autoHide = debounce(function () {
       $player.classList.add('artplayer-hide-cursor');
       $player.classList.remove('artplayer-hover');
@@ -4855,7 +4890,7 @@
 
   function resizeInit(art, events) {
     var option = art.option,
-        $player = art.refs.$player;
+        $player = art.template.$player;
     var resizeObserver = new ResizeObserver_2(function () {
       sleep().then(function () {
         if (option.autoSize) {
@@ -4877,7 +4912,7 @@
   }
 
   function doubleClickInit(art, events) {
-    var $video = art.refs.$video;
+    var $video = art.template.$video;
     events.proxy($video, 'dblclick', function () {
       art.player.fullscreenToggle();
       art.emit('dblclick');
@@ -5060,20 +5095,20 @@
     createClass(Layers, [{
       key: "add",
       value: function add(item, callback) {
-        var $layers = this.art.refs.$layers;
+        var $layers = this.art.template.$layers;
         component(this.art, this, $layers, item, callback, 'layer');
       }
     }, {
       key: "show",
       value: function show() {
-        var $layers = this.art.refs.$layers;
+        var $layers = this.art.template.$layers;
         setStyle($layers, 'display', 'block');
         this.art.emit('layers:show', $layers);
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $layers = this.art.refs.$layers;
+        var $layers = this.art.template.$layers;
         setStyle($layers, 'display', 'none');
         this.art.emit('layers:hide', $layers);
       }
@@ -5090,21 +5125,21 @@
 
       this.art = art;
       var option = art.option,
-          $loading = art.refs.$loading;
+          $loading = art.template.$loading;
       append($loading, option.icons.loading || icons.loading);
     }
 
     createClass(Loading, [{
       key: "hide",
       value: function hide() {
-        var $loading = this.art.refs.$loading;
+        var $loading = this.art.template.$loading;
         setStyle($loading, 'display', 'none');
         this.art.emit('loading:hide', $loading);
       }
     }, {
       key: "show",
       value: function show() {
-        var $loading = this.art.refs.$loading;
+        var $loading = this.art.template.$loading;
         setStyle($loading, 'display', 'flex');
         this.art.emit('loading:show', $loading);
       }
@@ -5130,9 +5165,9 @@
 
         var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
         var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
-        var _this$art$refs = this.art.refs,
-            $notice = _this$art$refs.$notice,
-            $noticeInner = _this$art$refs.$noticeInner;
+        var _this$art$template = this.art.template,
+            $notice = _this$art$template.$notice,
+            $noticeInner = _this$art$template.$noticeInner;
         setStyle($notice, 'display', 'block');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
 
@@ -5148,7 +5183,7 @@
     }, {
       key: "hide",
       value: function hide() {
-        var $notice = this.art.refs.$notice;
+        var $notice = this.art.template.$notice;
         setStyle($notice, 'display', 'none');
         this.art.emit('notice:hide', $notice);
       }
@@ -5165,7 +5200,7 @@
 
       this.art = art;
       var option = art.option,
-          $mask = art.refs.$mask;
+          $mask = art.template.$mask;
       var $playBig = append($mask, '<div class="art-playBig"></div>');
       append($playBig, option.icons.playBig || icons.playBig);
     }
@@ -5173,14 +5208,14 @@
     createClass(Mask, [{
       key: "show",
       value: function show() {
-        var $mask = this.art.refs.$mask;
+        var $mask = this.art.template.$mask;
         setStyle($mask, 'display', 'flex');
         this.art.emit('mask:show', $mask);
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $mask = this.art.refs.$mask;
+        var $mask = this.art.template.$mask;
         setStyle($mask, 'display', 'none');
         this.art.emit('mask:show', $mask);
       }
@@ -5240,7 +5275,7 @@
         var _this2 = this;
 
         var _this$art = this.art,
-            $settingClose = _this$art.refs.$settingClose,
+            $settingClose = _this$art.template.$settingClose,
             proxy = _this$art.events.proxy;
         proxy($settingClose, 'click', function () {
           _this2.hide();
@@ -5254,13 +5289,13 @@
     }, {
       key: "add",
       value: function add(item, callback) {
-        var $settingBody = this.art.refs.$settingBody;
+        var $settingBody = this.art.template.$settingBody;
         component(this.art, this, $settingBody, item, callback, 'setting');
       }
     }, {
       key: "show",
       value: function show() {
-        var $setting = this.art.refs.$setting;
+        var $setting = this.art.template.$setting;
         setStyle($setting, 'display', 'flex');
         this.state = true;
         this.art.emit('setting:show', $setting);
@@ -5268,7 +5303,7 @@
     }, {
       key: "hide",
       value: function hide() {
-        var $setting = this.art.refs.$setting;
+        var $setting = this.art.template.$setting;
         setStyle($setting, 'display', 'none');
         this.state = false;
         this.art.emit('setting:hide', $setting);
@@ -5392,24 +5427,8 @@
     createClass(Artplayer, [{
       key: "init",
       value: function init() {
-        var _this2 = this;
-
         this.isFocus = false;
         this.isPlaying = false;
-        this.refs = {};
-
-        if (this.option.container instanceof Element) {
-          this.refs.$container = this.option.container;
-        } else {
-          this.refs.$container = document.querySelector(this.option.container);
-        }
-
-        if (Artplayer.instances.some(function (art) {
-          return art.refs.$container === _this2.refs.$container;
-        })) {
-          errorHandle(false, 'Cannot mount multiple instances on the same dom element');
-        }
-
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.storage = new Storage(this);
@@ -5436,21 +5455,15 @@
       key: "destroy",
       value: function destroy() {
         var removeHtml = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-        this.events.destroy();
         Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
-
-        if (removeHtml) {
-          this.refs.$container.innerHTML = '';
-        } else {
-          this.refs.$player.classList.add('artplayer-destroy');
-        }
-
+        this.events.destroy();
+        this.template.destroy(removeHtml);
         this.emit('destroy');
       }
     }], [{
       key: "version",
       get: function get() {
-        return '1.0.3';
+        return '1.0.4';
       }
     }, {
       key: "env",

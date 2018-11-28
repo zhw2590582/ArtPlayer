@@ -2,7 +2,7 @@ import { debounce } from '../utils';
 
 export default function mousemoveInitInit(art, events) {
     const {
-        refs: { $player, $video },
+        template: { $player, $video },
     } = art;
 
     const autoHide = debounce(() => {

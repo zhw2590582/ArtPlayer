@@ -1,6 +1,6 @@
 export default function pauseMin(art, player) {
     const {
-        refs: { $video },
+        template: { $video },
         i18n,
         notice,
     } = art;

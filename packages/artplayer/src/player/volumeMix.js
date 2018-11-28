@@ -2,7 +2,7 @@ import { clamp } from '../utils';
 
 export default function volumeMix(art, player) {
     const {
-        refs: { $video },
+        template: { $video },
         i18n,
         notice,
         storage,

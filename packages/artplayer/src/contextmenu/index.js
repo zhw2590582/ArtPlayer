@@ -18,7 +18,7 @@ export default class Contextmenu {
     init() {
         const {
             option,
-            refs: { $player, $contextmenu },
+            template: { $player, $contextmenu },
             events: { proxy },
         } = this.art;
 
@@ -70,12 +70,12 @@ export default class Contextmenu {
     }
 
     add(item, callback) {
-        const { $contextmenu } = this.art.refs;
+        const { $contextmenu } = this.art.template;
         component(this.art, this, $contextmenu, item, callback, 'contextmenu');
     }
 
     setPos(event) {
-        const { $player, $contextmenu } = this.art.refs;
+        const { $player, $contextmenu } = this.art.template;
         const mouseX = event.clientX;
         const mouseY = event.clientY;
         const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
@@ -96,13 +96,13 @@ export default class Contextmenu {
     }
 
     hide() {
-        const { $contextmenu } = this.art.refs;
+        const { $contextmenu } = this.art.template;
         setStyle($contextmenu, 'display', 'none');
         this.art.emit('contextmenu:hide', $contextmenu);
     }
 
     show() {
-        const { $contextmenu } = this.art.refs;
+        const { $contextmenu } = this.art.template;
         setStyle($contextmenu, 'display', 'block');
         this.art.emit('contextmenu:show', $contextmenu);
     }

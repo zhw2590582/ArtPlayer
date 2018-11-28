@@ -4,7 +4,7 @@ import { sleep } from '../utils';
 export default function resizeInit(art, events) {
     const {
         option,
-        refs: { $player },
+        template: { $player },
     } = art;
     const resizeObserver = new ResizeObserver(() => {
         sleep().then(() => {

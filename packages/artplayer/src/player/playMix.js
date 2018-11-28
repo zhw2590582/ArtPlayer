@@ -1,6 +1,6 @@
 export default function playMix(art, player) {
     const {
-        refs: { $video },
+        template: { $video },
         i18n,
         notice,
         option: { mutex },

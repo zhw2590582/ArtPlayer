@@ -4,7 +4,7 @@ export default function fullscreenMix(art, player) {
     const {
         notice,
         events: { destroyEvents },
-        refs: { $player },
+        template: { $player },
     } = art;
 
     const screenfullChange = () => {

@@ -1,6 +1,6 @@
 export default function fullscreenWebMix(art, player) {
     const {
-        refs: { $player },
+        template: { $player },
     } = art;
 
     Object.defineProperty(player, 'fullscreenWebState', {
