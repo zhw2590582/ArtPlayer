@@ -39,7 +39,7 @@ function settingMix(art) {
             proxy($range, 'change', () => {
                 const { value } = $range;
                 $value.innerText = value;
-                art.plugins.artplayerPluginSubtitle.set(Number(value));
+                art.plugins.artplayerPluginSubtitle.offset(Number(value));
             });
 
             art.on('subtitle:switch', () => {
@@ -69,7 +69,7 @@ function artplayerPluginSubtitle(art) {
     });
 
     return {
-        set(value) {
+        offset(value) {
             const cues = Array.from(template.$track.track.cues);
             const time = clamp(value, -5, 5);
             cues.forEach((cue, index) => {
