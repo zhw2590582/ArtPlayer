@@ -1,6 +1,12 @@
 'use strict';
 
 (function() {
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+        window.location.href = './mobile.html';
+        return;
+    }
+
     var $code = document.querySelector('.code');
     var $run = document.querySelector('.run');
     var $lib = document.querySelector('.lib');

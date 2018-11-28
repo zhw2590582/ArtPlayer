@@ -767,12 +767,16 @@
         errorHandle(false, 'Cannot mount multiple instances on the same dom element');
       }
 
-      this.init();
+      if (art.whitelist.state) {
+        this.initDesktop();
+      } else {
+        this.initMobile();
+      }
     }
 
     createClass(Template, [{
-      key: "init",
-      value: function init() {
+      key: "initDesktop",
+      value: function initDesktop() {
         this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n                <div class=\"artplayer-setting-close\">\xD7</div>\n              </div>\n            </div>\n            <div class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
         this.$player = this.$container.querySelector('.artplayer-video-player');
         this.$video = this.$container.querySelector('.artplayer-video');
@@ -798,6 +802,13 @@
         this.$pipTitle = this.$container.querySelector('.artplayer-pip-title');
         this.$pipClose = this.$container.querySelector('.artplayer-pip-close');
         this.$contextmenu = this.$container.querySelector('.artplayer-contextmenu');
+      }
+    }, {
+      key: "initMobile",
+      value: function initMobile() {
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n          </div>\n        ";
+        this.$player = this.$container.querySelector('.artplayer-video-player');
+        this.$video = this.$container.querySelector('.artplayer-video');
       }
     }, {
       key: "destroy",
@@ -5403,6 +5414,46 @@
     return Plugins;
   }();
 
+  var Mobile = function Mobile(art) {
+    classCallCheck(this, Mobile);
+
+    var option = art.option,
+        $video = art.template.$video;
+    Object.keys(option.moreVideoAttr).forEach(function (key) {
+      $video[key] = option.moreVideoAttr[key];
+    });
+
+    if (option.muted) {
+      $video.muted = option.muted;
+    }
+
+    if (option.volume) {
+      $video.volume = clamp(option.volume, 0, 1);
+    }
+
+    if (option.poster) {
+      $video.poster = option.poster;
+    }
+
+    if (option.autoplay) {
+      $video.autoplay = option.autoplay;
+    }
+
+    $video.controls = true;
+    var typeName = option.type || getExt(option.url);
+    var typeCallback = option.customType[typeName];
+
+    if (typeName && typeCallback) {
+      art.emit('beforeCustomType', typeName);
+      typeCallback($video, option.url, art);
+      art.emit('afterCustomType', typeName);
+    } else {
+      art.emit('beforeAttachUrl', option.url);
+      $video.src = option.url;
+      art.emit('afterAttachUrl', $video.src);
+    }
+  };
+
   var id = 0;
 
   var Artplayer =
@@ -5430,22 +5481,28 @@
         this.isFocus = false;
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
-        this.storage = new Storage(this);
-        this.i18n = new I18n(this);
-        this.notice = new Notice(this);
-        this.events = new Events(this);
-        this.player = new Player(this);
-        this.mse = new Mse(this);
-        this.layers = new Layers(this);
-        this.controls = new Controls(this);
-        this.contextmenu = new Contextmenu(this);
-        this.subtitle = new Subtitle(this);
-        this.info = new Info(this);
-        this.loading = new Loading(this);
-        this.hotkey = new Hotkey(this);
-        this.mask = new Mask(this);
-        this.setting = new Setting(this);
-        this.plugins = new Plugins(this);
+
+        if (this.whitelist.state) {
+          this.storage = new Storage(this);
+          this.i18n = new I18n(this);
+          this.notice = new Notice(this);
+          this.events = new Events(this);
+          this.player = new Player(this);
+          this.mse = new Mse(this);
+          this.layers = new Layers(this);
+          this.controls = new Controls(this);
+          this.contextmenu = new Contextmenu(this);
+          this.subtitle = new Subtitle(this);
+          this.info = new Info(this);
+          this.loading = new Loading(this);
+          this.hotkey = new Hotkey(this);
+          this.mask = new Mask(this);
+          this.setting = new Setting(this);
+          this.plugins = new Plugins(this);
+        } else {
+          this.mobile = new Mobile(this);
+        }
+
         id += 1;
         this.id = id;
         Artplayer.instances.push(this);

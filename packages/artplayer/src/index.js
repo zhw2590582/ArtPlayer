@@ -24,6 +24,7 @@ import Mask from './mask';
 import Setting from './setting';
 import Storage from './storage';
 import Plugins from './plugins';
+import Mobile from './mobile';
 
 let id = 0;
 class Artplayer extends Emitter {
@@ -111,22 +112,26 @@ class Artplayer extends Emitter {
         
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
-        this.storage = new Storage(this);
-        this.i18n = new I18n(this);
-        this.notice = new Notice(this);
-        this.events = new Events(this);
-        this.player = new Player(this);
-        this.mse = new Mse(this);
-        this.layers = new Layers(this);
-        this.controls = new Controls(this);
-        this.contextmenu = new Contextmenu(this);
-        this.subtitle = new Subtitle(this);
-        this.info = new Info(this);
-        this.loading = new Loading(this);
-        this.hotkey = new Hotkey(this);
-        this.mask = new Mask(this);
-        this.setting = new Setting(this);
-        this.plugins = new Plugins(this);
+        if (this.whitelist.state) {
+            this.storage = new Storage(this);
+            this.i18n = new I18n(this);
+            this.notice = new Notice(this);
+            this.events = new Events(this);
+            this.player = new Player(this);
+            this.mse = new Mse(this);
+            this.layers = new Layers(this);
+            this.controls = new Controls(this);
+            this.contextmenu = new Contextmenu(this);
+            this.subtitle = new Subtitle(this);
+            this.info = new Info(this);
+            this.loading = new Loading(this);
+            this.hotkey = new Hotkey(this);
+            this.mask = new Mask(this);
+            this.setting = new Setting(this);
+            this.plugins = new Plugins(this);
+        } else {
+            this.mobile = new Mobile(this);
+        }
 
         id += 1;
         this.id = id;

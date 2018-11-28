@@ -12,10 +12,14 @@ export default class Template {
             errorHandle(false, 'Cannot mount multiple instances on the same dom element');
         }
 
-        this.init();
+        if (art.whitelist.state) {
+            this.initDesktop();
+        } else {
+            this.initMobile();
+        }
     }
 
-    init() {
+    initDesktop() {
         this.$container.innerHTML = `
           <div class="artplayer-video-player">
             <video class="artplayer-video"></video>
@@ -74,6 +78,16 @@ export default class Template {
         this.$pipTitle = this.$container.querySelector('.artplayer-pip-title');
         this.$pipClose = this.$container.querySelector('.artplayer-pip-close');
         this.$contextmenu = this.$container.querySelector('.artplayer-contextmenu');
+    }
+
+    initMobile() {
+        this.$container.innerHTML = `
+          <div class="artplayer-video-player">
+            <video class="artplayer-video"></video>
+          </div>
+        `;
+        this.$player = this.$container.querySelector('.artplayer-video-player');
+        this.$video = this.$container.querySelector('.artplayer-video');
     }
 
     destroy(removeHtml) {
