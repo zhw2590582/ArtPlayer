@@ -1,3 +1,4 @@
+var vConsole = new VConsole();
 var url = 'https://blog.zhw-island.com/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
