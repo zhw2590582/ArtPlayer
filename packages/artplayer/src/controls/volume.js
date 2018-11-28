@@ -10,6 +10,7 @@ export default function volume(controlOption) {
                 player,
                 i18n,
             } = art;
+            
             let isDroging = false;
             const $volume = append($control, icons.volume);
             const $volumeClose = append($control, icons.volumeClose);

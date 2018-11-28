@@ -10,6 +10,7 @@ export default function fullscreenWeb(controlOption) {
                 i18n,
                 player,
             } = art;
+            
             const $fullscreenWeb = append($control, icons.fullscreenWeb);
             tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
 

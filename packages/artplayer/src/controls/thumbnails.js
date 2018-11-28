@@ -9,6 +9,7 @@ export default function thumbnails(controlOption) {
                 template: { $progress },
                 events: { proxy, loadImg },
             } = art;
+            
             let loading = false;
             let isLoad = false;
 

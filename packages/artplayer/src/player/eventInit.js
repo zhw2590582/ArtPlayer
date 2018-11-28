@@ -9,6 +9,7 @@ export default function eventInit(art, player) {
         i18n,
         notice,
     } = art;
+    
     let firstCanplay = false;
     let reconnectTime = 0;
     const maxReconnectTime = 5;

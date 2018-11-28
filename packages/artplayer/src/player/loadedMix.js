@@ -1,8 +1,6 @@
 export default function seekMix(art, player) {
+    const { $video } = art.template;
     Object.defineProperty(player, 'loaded', {
-        get: () =>
-            art.template.$video.buffered.length
-                ? art.template.$video.buffered.end(art.template.$video.buffered.length - 1) / art.template.$video.duration
-                : 0,
+        get: () => ($video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0),
     });
 }

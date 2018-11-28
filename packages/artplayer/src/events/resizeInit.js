@@ -5,6 +5,7 @@ export default function resizeInit(art, events) {
         option,
         template: { $player },
     } = art;
+    
     const resizeObserver = new ResizeObserver(() => {
         if (option.autoSize) {
             if (!art.player.fullscreenState && !art.player.fullscreenWebState && !art.player.pipState) {

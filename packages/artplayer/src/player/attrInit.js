@@ -5,6 +5,7 @@ export default function attrInit(art, player) {
         option,
         template: { $video },
     } = art;
+    
     Object.keys(option.moreVideoAttr).forEach(key => {
         $video[key] = option.moreVideoAttr[key];
     });

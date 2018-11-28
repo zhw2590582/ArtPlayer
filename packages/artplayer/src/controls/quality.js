@@ -9,6 +9,7 @@ export default function quality(controlOption) {
                 events: { proxy },
                 player,
             } = art;
+            
             let playIndex = -1;
             const defaultQuality = option.quality.find(item => item.default) || option.quality[0];
             playIndex = option.quality.indexOf(defaultQuality);

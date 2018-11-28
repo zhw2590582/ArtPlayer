@@ -17,6 +17,7 @@ export default class Subtitle {
             option: { subtitle },
             template: { $video, $subtitle },
         } = this.art;
+
         setStyles($subtitle, subtitle.style || {});
         const $track = document.createElement('track');
         $track.default = true;
@@ -65,7 +66,6 @@ export default class Subtitle {
             .catch(err => {
                 notice.show(err);
                 console.warn(err);
-                throw err;
             });
     }
 
@@ -87,6 +87,7 @@ export default class Subtitle {
             i18n,
             notice,
         } = this.art;
+        
         setStyle($subtitle, 'display', 'none');
         this.state = false;
         notice.show(i18n.get('Hide subtitle'));

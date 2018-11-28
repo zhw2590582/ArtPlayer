@@ -8,6 +8,7 @@ export default class Loading {
             option,
             template: { $loading },
         } = art;
+        
         append($loading, option.icons.loading || icons.loading);
     }
 

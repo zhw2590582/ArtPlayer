@@ -10,6 +10,7 @@ export default function playAndPause(controlOption) {
                 player,
                 i18n,
             } = art;
+            
             const $play = append($control, icons.play);
             const $pause = append($control, icons.pause);
             tooltip($play, i18n.get('Play'));

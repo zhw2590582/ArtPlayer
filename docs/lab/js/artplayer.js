@@ -3102,9 +3102,10 @@
   }
 
   function seekMix$1(art, player) {
+    var $video = art.template.$video;
     Object.defineProperty(player, 'loaded', {
       get: function get() {
-        return art.template.$video.buffered.length ? art.template.$video.buffered.end(art.template.$video.buffered.length - 1) / art.template.$video.duration : 0;
+        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
       }
     });
   }
@@ -4530,7 +4531,6 @@
         }).catch(function (err) {
           notice.show(err);
           console.warn(err);
-          throw err;
         });
       }
     }, {

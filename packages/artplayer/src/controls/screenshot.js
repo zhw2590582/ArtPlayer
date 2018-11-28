@@ -10,6 +10,7 @@ export default function screenshot(controlOption) {
                 i18n,
                 player,
             } = art;
+            
             const $screenshot = append($control, icons.screenshot);
             tooltip($screenshot, i18n.get('Screenshot'));
             proxy($screenshot, 'click', () => {

@@ -8,6 +8,7 @@ export default class Mask {
             option,
             template: { $mask },
         } = art;
+        
         const $playBig = append($mask, '<div class="art-playBig"></div>');
         append($playBig, option.icons.playBig || icons.playBig);
     }

@@ -5,6 +5,7 @@ export function getPosFromEvent(art, event) {
         template: { $progress },
         player,
     } = art;
+    
     const { left } = $progress.getBoundingClientRect();
     const width = clamp(event.x - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * player.duration;

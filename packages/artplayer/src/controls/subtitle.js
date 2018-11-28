@@ -10,6 +10,7 @@ export default function subtitle(controlOption) {
                 i18n,
                 subtitle,
             } = art;
+            
             const $subtitle = append($control, icons.subtitle);
             tooltip($subtitle, i18n.get('Hide subtitle'));
 

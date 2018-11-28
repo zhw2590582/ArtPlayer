@@ -10,6 +10,7 @@ export default function setting(controlOption) {
                 i18n,
                 setting,
             } = art;
+            
             const $setting = append($control, icons.setting);
             tooltip($setting, i18n.get('Show setting'));
 
