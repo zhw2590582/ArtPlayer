@@ -4,7 +4,6 @@
     var $code = document.querySelector('.code');
     var $run = document.querySelector('.run');
     var $lib = document.querySelector('.lib');
-    var defaultLib = './js/artplayer-plugin-subtitle.js';
     var loaddLib = [];
 
     consola.creat({
@@ -82,7 +81,7 @@
 
     function loadLib(libs) {
         var libPromise = [];
-        var libsDecode = decodeURIComponent(libs || defaultLib);
+        var libsDecode = decodeURIComponent(libs || '');
         libsDecode
             .split(/\r?\n/)
             .filter(function(url) {
