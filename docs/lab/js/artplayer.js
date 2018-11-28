@@ -819,7 +819,6 @@
       'Video info': '视频统计信息',
       Close: '关闭',
       'Video load failed': '视频加载失败',
-      'Video loading is aborted': '视频加载被中止',
       Volume: '音量',
       Play: '播放',
       Pause: '暂停',
@@ -853,7 +852,6 @@
       'Video info': '影片統計訊息',
       Close: '關閉',
       'Video load failed': '影片載入失敗',
-      'Video loading is aborted': '影片加載被中止',
       Volume: '音量',
       Play: '播放',
       Pause: '暫停',
@@ -930,7 +928,7 @@
       value: function value(url) {
         var typeName = type || getExt(url);
         var typeCallback = customType[typeName];
-        sleep().then(function () {
+        return sleep().then(function () {
           if (typeName && typeCallback) {
             art.emit('beforeCustomType', typeName);
             typeCallback($video, player.returnUrl(url), art);
@@ -989,10 +987,9 @@
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
       });
-    });
-    art.on('video:abort', function () {
-      notice.show("".concat(i18n.get('Video loading is aborted')));
-    });
+    }); // art.on('video:abort', () => {
+    // });
+
     art.on('video:canplay', function () {
       if (!firstCanplay) {
         firstCanplay = true;
@@ -1229,18 +1226,19 @@
         if (url !== option.url) {
           var isPlaying = art.isPlaying;
           var currentTime = player.currentTime;
-          player.attachUrl(url);
-          option.url = url;
-          player.playbackRateRemove();
-          player.aspectRatioRemove();
-          player.seek(currentTime);
+          player.attachUrl(url).then(function () {
+            option.url = url;
+            player.playbackRateRemove();
+            player.aspectRatioRemove();
+            player.seek(currentTime);
 
-          if (isPlaying) {
-            player.play();
-          }
+            if (isPlaying) {
+              player.play();
+            }
 
-          notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-          art.emit('switch', url);
+            notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
+            art.emit('switch', url);
+          });
         }
       }
     });

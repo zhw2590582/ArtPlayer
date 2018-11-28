@@ -15,7 +15,7 @@ export default function attachUrlMix(art, player) {
         value: url => {
             const typeName = type || getExt(url);
             const typeCallback = customType[typeName];
-            sleep().then(() => {
+            return sleep().then(() => {
                 if (typeName && typeCallback) {
                     art.emit('beforeCustomType', typeName);
                     typeCallback($video, player.returnUrl(url), art);

@@ -23,9 +23,9 @@ export default function eventInit(art, player) {
         });
     });
 
-    art.on('video:abort', () => {
-        notice.show(`${i18n.get('Video loading is aborted')}`);
-    });
+    // art.on('video:abort', () => {
+        
+    // });
 
     art.on('video:canplay', () => {
         if (!firstCanplay) {
