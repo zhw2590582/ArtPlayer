@@ -31,22 +31,35 @@
             $value.innerText = value;
             art.plugins.artplayerPluginSubtitle.set(Number(value));
           });
+          art.on('subtitle:switch', function () {
+            $range.value = 0;
+            $value.innerText = 0;
+          });
+          art.on('artplayerPluginSubtitle:set', function (value) {
+            if ($range.value !== value) {
+              $range.value = value;
+              $value.innerText = value;
+            }
+          });
         }
       };
     }
 
     function artplayerPluginSubtitle(art) {
+      var clamp = art.constructor.utils.clamp;
       var setting = art.setting,
           notice = art.notice,
-          refs = art.refs,
+          template = art.template,
           i18n = art.i18n;
-      var cuesCache = [];
       i18nMix(i18n);
       setting.add(settingMix);
-      var clamp = art.constructor.utils.clamp;
+      var cuesCache = [];
+      art.on('subtitle:switch', function () {
+        cuesCache = [];
+      });
       return {
         set: function set(value) {
-          var cues = Array.from(refs.$track.track.cues);
+          var cues = Array.from(template.$track.track.cues);
           var time = clamp(value, -5, 5);
           cues.forEach(function (cue, index) {
             if (!cuesCache[index]) {
@@ -60,7 +73,7 @@
             cue.endTime = cuesCache[index].endTime + time;
           });
           notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
-          art.emit('subtitle:offset', value);
+          art.emit('artplayerPluginSubtitle:set', value);
         }
       };
     }

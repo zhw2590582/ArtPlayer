@@ -80,7 +80,7 @@ export default class Template {
         if (removeHtml) {
             this.$container.innerHTML = '';
         } else {
-            this.refs.$player.classList.add('artplayer-destroy');
+            this.$player.classList.add('artplayer-destroy');
         }
     }
 }

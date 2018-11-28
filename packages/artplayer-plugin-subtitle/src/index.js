@@ -59,7 +59,7 @@ function settingMix(art) {
 
 function artplayerPluginSubtitle(art) {
     const { clamp } = art.constructor.utils;
-    const { setting, notice, refs, i18n } = art;
+    const { setting, notice, template, i18n } = art;
     i18nMix(i18n);
     setting.add(settingMix);
     
@@ -70,7 +70,7 @@ function artplayerPluginSubtitle(art) {
 
     return {
         set(value) {
-            const cues = Array.from(refs.$track.track.cues);
+            const cues = Array.from(template.$track.track.cues);
             const time = clamp(value, -5, 5);
             cues.forEach((cue, index) => {
                 if (!cuesCache[index]) {
