@@ -5478,11 +5478,11 @@
     createClass(Artplayer, [{
       key: "init",
       value: function init() {
-        this.isFocus = false;
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
 
         if (this.whitelist.state) {
+          this.isFocus = false;
           this.storage = new Storage(this);
           this.i18n = new I18n(this);
           this.notice = new Notice(this);
@@ -5511,9 +5511,13 @@
       key: "destroy",
       value: function destroy() {
         var removeHtml = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-        Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
-        this.events.destroy();
+
+        if (this.events) {
+          this.events.destroy();
+        }
+
         this.template.destroy(removeHtml);
+        Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
         this.emit('destroy');
       }
     }], [{
