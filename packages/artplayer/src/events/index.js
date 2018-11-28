@@ -10,11 +10,13 @@ export default class Events {
         this.proxy = this.proxy.bind(this);
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
-        clickInit(art, this);
-        hoverInit(art, this);
-        mousemoveInit(art, this);
-        resizeInit(art, this);
-        doubleClickInit(art, this);
+        art.on('firstCanplay', () => {
+            clickInit(art, this);
+            hoverInit(art, this);
+            mousemoveInit(art, this);
+            resizeInit(art, this);
+            doubleClickInit(art, this);
+        });
     }
 
     proxy(target, name, callback, option = {}) {

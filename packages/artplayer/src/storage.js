@@ -1,19 +1,15 @@
-import { sleep } from './utils';
-
 export default class Storage {
     constructor(art) {
         this.art = art;
         this.storageName = 'artplayer_settings';
-        sleep().then(() => {
-            this.init();
-        });
+        this.init();
     }
 
     init() {
-        const { player } = this.art;
+        const { option } = this.art;
         const volume = this.get('volume');
         if (volume) {
-            player.volume = volume;
+            option.volume = volume;
         }
     }
 

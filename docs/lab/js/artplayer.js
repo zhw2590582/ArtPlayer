@@ -773,7 +773,7 @@
     createClass(Template, [{
       key: "init",
       value: function init() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video data-index=\"10\" class=\"artplayer-video\"></video>\n            <div data-index=\"20\" class=\"artplayer-subtitle\"></div>\n            <div data-index=\"30\" class=\"artplayer-layers\"></div>\n            <div data-index=\"40\" class=\"artplayer-mask\"></div>\n            <div data-index=\"50\" class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div data-index=\"60\" class=\"artplayer-loading\"></div>\n            <div data-index=\"70\" class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div data-index=\"80\" class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n                <div class=\"artplayer-setting-close\">\xD7</div>\n              </div>\n            </div>\n            <div data-index=\"90\" class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div data-index=\"100\" class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div data-index=\"110\" class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n                <div class=\"artplayer-setting-close\">\xD7</div>\n              </div>\n            </div>\n            <div class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
         this.$player = this.$container.querySelector('.artplayer-video-player');
         this.$video = this.$container.querySelector('.artplayer-video');
         this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
@@ -930,16 +930,17 @@
       value: function value(url) {
         var typeName = type || getExt(url);
         var typeCallback = customType[typeName];
-
-        if (typeName && typeCallback) {
-          art.emit('beforeCustomType', typeName);
-          typeCallback($video, player.returnUrl(url), art);
-          art.emit('afterCustomType', typeName);
-        } else {
-          art.emit('beforeAttachUrl', url);
-          $video.src = player.returnUrl(url);
-          art.emit('afterAttachUrl', $video.src);
-        }
+        sleep().then(function () {
+          if (typeName && typeCallback) {
+            art.emit('beforeCustomType', typeName);
+            typeCallback($video, player.returnUrl(url), art);
+            art.emit('afterCustomType', typeName);
+          } else {
+            art.emit('beforeAttachUrl', url);
+            $video.src = player.returnUrl(url);
+            art.emit('afterAttachUrl', $video.src);
+          }
+        });
       }
     });
   }
@@ -967,9 +968,7 @@
       $video.autoplay = option.autoplay;
     }
 
-    sleep().then(function () {
-      player.attachUrl(option.url);
-    });
+    player.attachUrl(option.url);
   }
 
   function eventInit(art, player) {
@@ -4892,18 +4891,16 @@
     var option = art.option,
         $player = art.template.$player;
     var resizeObserver = new ResizeObserver_2(function () {
-      sleep().then(function () {
-        if (option.autoSize) {
-          if (!art.player.fullscreenState && !art.player.fullscreenWebState && !art.player.pipState) {
-            art.player.autoSize();
-          } else {
-            art.player.autoSizeRemove();
-          }
+      if (option.autoSize) {
+        if (!art.player.fullscreenState && !art.player.fullscreenWebState && !art.player.pipState) {
+          art.player.autoSize();
+        } else {
+          art.player.autoSizeRemove();
         }
+      }
 
-        art.player.aspectRatioReset();
-        art.emit('resize', $player);
-      });
+      art.player.aspectRatioReset();
+      art.emit('resize', $player);
     });
     resizeObserver.observe($player);
     events.destroyEvents.push(function () {
@@ -4923,29 +4920,33 @@
   /*#__PURE__*/
   function () {
     function Events(art) {
+      var _this = this;
+
       classCallCheck(this, Events);
 
       this.destroyEvents = [];
       this.proxy = this.proxy.bind(this);
       this.hover = this.hover.bind(this);
       this.loadImg = this.loadImg.bind(this);
-      clickInit(art, this);
-      hoverInit(art, this);
-      mousemoveInitInit(art, this);
-      resizeInit(art, this);
-      doubleClickInit(art, this);
+      art.on('firstCanplay', function () {
+        clickInit(art, _this);
+        hoverInit(art, _this);
+        mousemoveInitInit(art, _this);
+        resizeInit(art, _this);
+        doubleClickInit(art, _this);
+      });
     }
 
     createClass(Events, [{
       key: "proxy",
       value: function proxy(target, name, callback) {
-        var _this = this;
+        var _this2 = this;
 
         var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
         if (Array.isArray(name)) {
           name.forEach(function (item) {
-            return _this.proxy(target, item, callback, option);
+            return _this2.proxy(target, item, callback, option);
           });
           return;
         }
@@ -4964,7 +4965,7 @@
     }, {
       key: "loadImg",
       value: function loadImg(img) {
-        var _this2 = this;
+        var _this3 = this;
 
         return new Promise(function (resolve, reject) {
           var image;
@@ -4982,11 +4983,11 @@
             return resolve(image);
           }
 
-          _this2.proxy(image, 'load', function () {
+          _this3.proxy(image, 'load', function () {
             return resolve(image);
           });
 
-          _this2.proxy(image, 'error', function () {
+          _this3.proxy(image, 'error', function () {
             return reject(image);
           });
 
@@ -5326,25 +5327,21 @@
   /*#__PURE__*/
   function () {
     function Storage(art) {
-      var _this = this;
-
       classCallCheck(this, Storage);
 
       this.art = art;
       this.storageName = 'artplayer_settings';
-      sleep().then(function () {
-        _this.init();
-      });
+      this.init();
     }
 
     createClass(Storage, [{
       key: "init",
       value: function init() {
-        var player = this.art.player;
+        var option = this.art.option;
         var volume = this.get('volume');
 
         if (volume) {
-          player.volume = volume;
+          option.volume = volume;
         }
       }
     }, {

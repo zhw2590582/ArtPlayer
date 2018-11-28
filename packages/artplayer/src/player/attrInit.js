@@ -1,4 +1,4 @@
-import { clamp, sleep } from '../utils';
+import { clamp } from '../utils';
 
 export default function attrInit(art, player) {
     const {
@@ -25,7 +25,5 @@ export default function attrInit(art, player) {
         $video.autoplay = option.autoplay;
     }
 
-    sleep().then(() => {
-        player.attachUrl(option.url);
-    });
+    player.attachUrl(option.url);
 }
