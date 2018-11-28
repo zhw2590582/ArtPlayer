@@ -3,22 +3,22 @@ import optionValidator from 'option-validator';
 export default class Whitelist {
     constructor(art) {
         const { whitelist } = art.option;
-        const { userAgent } = window.navigator;
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+        this.userAgent = window.navigator.userAgent;
+        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
         this.state =
-            !isMobile ||
+            !this.isMobile ||
             whitelist.some(item => {
                 const type = optionValidator.kindOf(item);
                 let result = false;
                 switch (type) {
                     case 'string':
-                        result = userAgent.indexOf(item) > -1;
+                        result = this.userAgent.indexOf(item) > -1;
                         break;
                     case 'function':
-                        result = item(userAgent);
+                        result = item(this.userAgent);
                         break;
                     case 'regexp':
-                        result = item.test(userAgent);
+                        result = item.test(this.userAgent);
                         break;
                     default:
                         break;

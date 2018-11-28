@@ -5,8 +5,16 @@ export default class Storage {
         this.art = art;
         this.storageName = 'artplayer_settings';
         sleep().then(() => {
-            this.initVolume();
+            this.init();
         });
+    }
+
+    init() {
+        const { player } = this.art;
+        const volume = this.get('volume');
+        if (volume) {
+            player.volume = volume;
+        }
     }
 
     get(key) {
@@ -19,13 +27,5 @@ export default class Storage {
             [key]: value,
         });
         localStorage.setItem(this.storageName, JSON.stringify(storage));
-    }
-
-    initVolume() {
-        const { player } = this.art;
-        const volume = this.get('volume');
-        if (volume) {
-            player.volume = volume;
-        }
     }
 }

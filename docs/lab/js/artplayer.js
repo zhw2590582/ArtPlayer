@@ -715,26 +715,28 @@
   };
 
   var Whitelist = function Whitelist(art) {
+    var _this = this;
+
     classCallCheck(this, Whitelist);
 
     var whitelist = art.option.whitelist;
-    var userAgent = window.navigator.userAgent;
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-    this.state = !isMobile || whitelist.some(function (item) {
+    this.userAgent = window.navigator.userAgent;
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
+    this.state = !this.isMobile || whitelist.some(function (item) {
       var type = optionValidator.kindOf(item);
       var result = false;
 
       switch (type) {
         case 'string':
-          result = userAgent.indexOf(item) > -1;
+          result = _this.userAgent.indexOf(item) > -1;
           break;
 
         case 'function':
-          result = item(userAgent);
+          result = item(_this.userAgent);
           break;
 
         case 'regexp':
-          result = item.test(userAgent);
+          result = item.test(_this.userAgent);
           break;
 
         default:
@@ -4443,10 +4445,10 @@
         $track.kind = 'metadata';
         $video.appendChild($track);
         this.art.refs.$track = $track;
-        this.load(subtitle.url).then(function (vttText) {
-          $track.src = vttToBlob(vttText);
+        this.load(subtitle.url).then(function (url) {
+          $track.src = url;
 
-          _this.art.emit('subtitle:load', vttText);
+          _this.art.emit('subtitle:load', url);
 
           if ($video.textTracks && $video.textTracks[0]) {
             var _$video$textTracks = slicedToArray($video.textTracks, 1),
@@ -4480,15 +4482,15 @@
           type = response.headers.get('Content-Type');
           return response.text();
         }).then(function (text) {
-          var vttText = '';
+          var vttUrl = '';
 
           if (/x-subrip/gi.test(type)) {
-            vttText = srtToVtt(text);
+            vttUrl = vttToBlob(srtToVtt(text));
           } else {
-            vttText = text;
+            vttUrl = url;
           }
 
-          return vttText;
+          return vttUrl;
         }).catch(function (err) {
           notice.show(err);
           console.warn(err);
@@ -4535,10 +4537,8 @@
 
         var $track = this.art.refs.$track;
         errorHandle($track, 'You need to initialize the subtitle option first.');
-        this.load(url).then(function (vttText) {
-          $track.src = vttToBlob(vttText);
-
-          _this2.art.emit('subtitle:load', vttText);
+        this.load(url).then(function (url) {
+          $track.src = url;
 
           _this2.art.emit('subtitle:switch', url);
         });
@@ -5298,11 +5298,21 @@
       this.art = art;
       this.storageName = 'artplayer_settings';
       sleep().then(function () {
-        _this.initVolume();
+        _this.init();
       });
     }
 
     createClass(Storage, [{
+      key: "init",
+      value: function init() {
+        var player = this.art.player;
+        var volume = this.get('volume');
+
+        if (volume) {
+          player.volume = volume;
+        }
+      }
+    }, {
       key: "get",
       value: function get(key) {
         var storage = JSON.parse(localStorage.getItem(this.storageName)) || {};
@@ -5313,16 +5323,6 @@
       value: function set(key, value) {
         var storage = Object.assign({}, this.get(), defineProperty({}, key, value));
         localStorage.setItem(this.storageName, JSON.stringify(storage));
-      }
-    }, {
-      key: "initVolume",
-      value: function initVolume() {
-        var player = this.art.player;
-        var volume = this.get('volume');
-
-        if (volume) {
-          player.volume = volume;
-        }
       }
     }]);
 

@@ -23,9 +23,9 @@ export default class Subtitle {
         $track.kind = 'metadata';
         $video.appendChild($track);
         this.art.refs.$track = $track;
-        this.load(subtitle.url).then(vttText => {
-            $track.src = vttToBlob(vttText);
-            this.art.emit('subtitle:load', vttText);
+        this.load(subtitle.url).then(url => {
+            $track.src = url;
+            this.art.emit('subtitle:load', url);
             if ($video.textTracks && $video.textTracks[0]) {
                 const [track] = $video.textTracks;
                 proxy(track, 'cuechange', () => {
@@ -54,13 +54,13 @@ export default class Subtitle {
                 return response.text();
             })
             .then(text => {
-                let vttText = '';
+                let vttUrl = '';
                 if (/x-subrip/gi.test(type)) {
-                    vttText = srtToVtt(text);
+                    vttUrl = vttToBlob(srtToVtt(text));
                 } else {
-                    vttText = text;
+                    vttUrl = url;
                 }
-                return vttText;
+                return vttUrl;
             })
             .catch(err => {
                 notice.show(err);
@@ -104,9 +104,8 @@ export default class Subtitle {
     switch(url) {
         const { $track } = this.art.refs;
         errorHandle($track, 'You need to initialize the subtitle option first.');
-        this.load(url).then(vttText => {
-            $track.src = vttToBlob(vttText);
-            this.art.emit('subtitle:load', vttText);
+        this.load(url).then(url => {
+            $track.src = url;
             this.art.emit('subtitle:switch', url);
         });
     }
