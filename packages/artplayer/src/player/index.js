@@ -17,6 +17,7 @@ import fullscreenWebMix from './fullscreenWebMix';
 import pipMix from './pipMix';
 import loadedMix from './loadedMix';
 import playedMix from './playedMix';
+import playingMix from './playingMix';
 import autoSizeMix from './autoSizeMix';
 import flipMix from './flipMix';
 
@@ -41,6 +42,7 @@ export default class Player {
         pipMix(art, this);
         loadedMix(art, this);
         playedMix(art, this);
+        playingMix(art, this);
         autoSizeMix(art, this);
         flipMix(art, this);
     }

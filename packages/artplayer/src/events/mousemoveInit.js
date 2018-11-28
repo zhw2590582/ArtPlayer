@@ -3,6 +3,7 @@ import { debounce } from '../utils';
 export default function mousemoveInitInit(art, events) {
     const {
         template: { $player, $video },
+        player
     } = art;
 
     const autoHide = debounce(() => {
@@ -12,7 +13,7 @@ export default function mousemoveInitInit(art, events) {
     }, 5000);
 
     art.on('hoverleave', () => {
-        if (art.isPlaying) {
+        if (player.playing) {
             autoHide();
         }
     });
@@ -21,7 +22,7 @@ export default function mousemoveInitInit(art, events) {
         autoHide.clearTimeout();
         $player.classList.remove('artplayer-hide-cursor');
         art.controls.show();
-        if (!art.player.pipState && art.isPlaying && event.target === $video) {
+        if (!art.player.pipState && player.playing && event.target === $video) {
             autoHide();
         }
     });

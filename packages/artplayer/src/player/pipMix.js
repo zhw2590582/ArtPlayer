@@ -38,7 +38,7 @@ function nativePip(art, player) {
 
     proxy($video, 'leavepictureinpicture', () => {
         art.emit('pipExit');
-        if (art.isPlaying) {
+        if (player.playing) {
             player.play();
         }
     });

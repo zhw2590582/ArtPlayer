@@ -103,9 +103,9 @@ Specify the format for the `url`, use with `customType`
 ```js
 var url = 'https://blog.zhw-island.com/assets-cdn';
 var art = new Artplayer({
-  container: '.artplayer-app',
-  url: url + '/video/one-more-time-one-more-chance-480p.flv',
-  type: 'flv'
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.flv',
+    type: 'flv',
 });
 ```
 
@@ -803,11 +803,10 @@ art.plugins.myPlugin.doSomething();
 
 ## Instance
 
-| propertie   | type       | Description                                      |
-| ----------- | ---------- | ------------------------------------------------ |
-| `isFocus`   | `Boolean`  | Return to focus state                            |
-| `isPlaying` | `Boolean`  | Return to playing state                          |
-| `destroy`   | `Function` | Destroy instance, will not remove dom by default |
+| propertie | type       | Description                                      |
+| --------- | ---------- | ------------------------------------------------ |
+| `isFocus` | `Boolean`  | Return to focus state                            |
+| `destroy` | `Function` | Destroy instance, will not remove dom by default |
 
 [Run Code](/)
 
@@ -867,6 +866,7 @@ Player core function
 | `playbackRateRemove`   | `Function` | Remove the playback rate                                                                          |
 | `playbackRateReset`    | `Function` | Recalculate the playback rate                                                                     |
 | `played`               | `Number`   | Return the proportion of the played                                                               |
+| `playing`              | `Boolean`  | Return to playing state                                                                           |
 | `screenshot`           | `Function` | Download a screenshot of current time                                                             |
 | `seek`                 | `Function` | Set the current time                                                                              |
 | `switchQuality`        | `Function` | Switch quality                                                                                    |

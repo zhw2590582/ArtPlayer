@@ -108,7 +108,6 @@ class Artplayer extends Emitter {
 
     init() {
         this.isFocus = false;
-        this.isPlaying = false;
         
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);

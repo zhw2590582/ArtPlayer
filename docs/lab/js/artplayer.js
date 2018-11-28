@@ -1013,7 +1013,6 @@
     // });
 
     art.on('video:ended', function () {
-      art.isPlaying = false;
       art.controls.show();
       art.mask.show();
 
@@ -1030,7 +1029,6 @@
           notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
         });
       } else {
-        art.isPlaying = false;
         art.loading.hide();
         art.controls.hide();
         $player.classList.add('artplayer-error');
@@ -1051,17 +1049,14 @@
       art.loading.show();
     });
     art.on('video:pause', function () {
-      art.isPlaying = false;
       art.controls.show();
       art.mask.show();
     });
     art.on('video:play', function () {
-      art.isPlaying = true;
       art.controls.hide();
       art.mask.hide();
     });
     art.on('video:playing', function () {
-      art.isPlaying = true;
       art.controls.hide();
       art.mask.hide();
     }); // art.on('video:progress', () => {
@@ -1136,7 +1131,7 @@
   function toggleMix(art, player) {
     Object.defineProperty(player, 'toggle', {
       value: function value() {
-        if (art.isPlaying) {
+        if (player.playing) {
           player.pause();
         } else {
           player.play();
@@ -1223,15 +1218,15 @@
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
         if (url !== option.url) {
-          var isPlaying = art.isPlaying;
-          var currentTime = player.currentTime;
+          var currentTime = player.currentTime,
+              playing = player.playing;
           player.attachUrl(url).then(function () {
             option.url = url;
             player.playbackRateRemove();
             player.aspectRatioRemove();
             player.seek(currentTime);
 
-            if (isPlaying) {
+            if (playing) {
               player.play();
             }
 
@@ -3013,7 +3008,7 @@
     proxy($video, 'leavepictureinpicture', function () {
       art.emit('pipExit');
 
-      if (art.isPlaying) {
+      if (player.playing) {
         player.play();
       }
     });
@@ -3122,6 +3117,15 @@
     });
   }
 
+  function playingMix(art, player) {
+    var $video = art.template.$video;
+    Object.defineProperty(player, 'playing', {
+      get: function get() {
+        return !!($video.currentTime > 0 && !$video.paused && !$video.ended && $video.readyState > 2);
+      }
+    });
+  }
+
   function resizeMix(art, player) {
     var _art$template = art.template,
         $container = _art$template.$container,
@@ -3213,6 +3217,7 @@
     pipMix(art, this);
     seekMix$1(art, this);
     seekMix$2(art, this);
+    playingMix(art, this);
     resizeMix(art, this);
     flipMix(art, this);
   };
@@ -4605,14 +4610,15 @@
   function mousemoveInitInit(art, events) {
     var _art$template = art.template,
         $player = _art$template.$player,
-        $video = _art$template.$video;
+        $video = _art$template.$video,
+        player = art.player;
     var autoHide = debounce(function () {
       $player.classList.add('artplayer-hide-cursor');
       $player.classList.remove('artplayer-hover');
       art.controls.hide();
     }, 5000);
     art.on('hoverleave', function () {
-      if (art.isPlaying) {
+      if (player.playing) {
         autoHide();
       }
     });
@@ -4621,7 +4627,7 @@
       $player.classList.remove('artplayer-hide-cursor');
       art.controls.show();
 
-      if (!art.player.pipState && art.isPlaying && event.target === $video) {
+      if (!art.player.pipState && player.playing && event.target === $video) {
         autoHide();
       }
     });
@@ -5422,7 +5428,6 @@
       key: "init",
       value: function init() {
         this.isFocus = false;
-        this.isPlaying = false;
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.storage = new Storage(this);

@@ -55,7 +55,6 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:ended', () => {
-        art.isPlaying = false;
         art.controls.show();
         art.mask.show();
         if (option.loop) {
@@ -72,7 +71,6 @@ export default function eventInit(art, player) {
                 notice.show(`${i18n.get('Reconnect')}: ${reconnectTime}`);
             });
         } else {
-            art.isPlaying = false;
             art.loading.hide();
             art.controls.hide();
             $player.classList.add('artplayer-error');
@@ -98,19 +96,16 @@ export default function eventInit(art, player) {
     });
 
     art.on('video:pause', () => {
-        art.isPlaying = false;
         art.controls.show();
         art.mask.show();
     });
 
     art.on('video:play', () => {
-        art.isPlaying = true;
         art.controls.hide();
         art.mask.hide();
     });
 
     art.on('video:playing', () => {
-        art.isPlaying = true;
         art.controls.hide();
         art.mask.hide();
     });
