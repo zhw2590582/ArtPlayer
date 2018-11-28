@@ -11,16 +11,16 @@
 
 ## Features
 
-* Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`
-* Support `playback rate`, `aspect ratio`, `flip`, `window fullscreen` or `web fullscreen` adjustment
-* Support chrome native picture-in-picture mode, or custom picture-in-picture mode
+* Support `vtt` and `srt` subtitles
+* Support video quality switching
 * Support for custom `control`, `layer`, `contextmenu`, `setting`
+* Support `playback rate`, `aspect ratio`, `flip`, `window fullscreen` or `web fullscreen` adjustment
+* Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`
+* Support chrome native picture-in-picture mode, or custom picture-in-picture mode
 * Support `thumbnails` and `highlight` in the progress bar
 * Support to maintain the original video ratio, adaptive size
 * Support rich custom event monitoring, easy to expand
 * Support for internationalization of controls
-* Support `vtt` and `srt` subtitles
-* Support video quality switching
 * Support for custom plugins
 * Support `screenshot`
 * And more...
