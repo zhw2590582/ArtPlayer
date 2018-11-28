@@ -12,4 +12,7 @@ var art = new Artplayer({
             flvPlayer.load();
         },
     },
+    whitelist: ['iPhone OS 11'],
+    // whitelist: [(ua)=>{ return /iPhone OS 11/gi.test(ua); }],
+    // whitelist: [/iPhone OS 11/gi]
 });
