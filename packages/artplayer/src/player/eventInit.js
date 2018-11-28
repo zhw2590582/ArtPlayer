@@ -140,7 +140,6 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:timeupdate', () => {
-        art.isPlaying = true;
         art.controls.hide();
         art.mask.hide();
     });

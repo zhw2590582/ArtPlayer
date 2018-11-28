@@ -1080,7 +1080,6 @@
     // });
 
     art.on('video:timeupdate', function () {
-      art.isPlaying = true;
       art.controls.hide();
       art.mask.hide();
     }); // art.on('video:volumechange', () => {
