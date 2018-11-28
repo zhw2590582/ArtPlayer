@@ -946,6 +946,7 @@
     var firstCanplay = false;
     var reconnectTime = 0;
     var maxReconnectTime = 5;
+    art.loading.show();
     proxy($video, 'click', function () {
       player.toggle();
     });

@@ -77,7 +77,7 @@ You may need to initialize a size for the container element, like:
 -   Default: `''`
 -   Required: `true`
 
-Video source url, Three video file formats are supported: mp4, ogg, webm
+Video source url, Three video file formats are supported: `mp4`, `ogg`, `webm`
 
 [Run Code](/)
 
@@ -157,7 +157,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-Video title, will be shown in screenshot file name and pip mode
+Video title, will be shown in `screenshot` file name and `pip` mode
 
 [Run Code](/)
 
@@ -304,7 +304,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to show screenshot controller in the bottom
+Whether to show screenshot controller in the bottom, If the video resource exists cross-domain, the screenshot may fail. Unless serves this url with the correct `Access-Control-Allow-Origin`, and Set the video's `crossOrigin` property to `anonymous`
 
 [Run Code](/)
 
@@ -314,6 +314,11 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     screenshot: true,
+
+    // Optional
+    moreVideoAttr: {
+        crossOrigin: 'anonymous',
+    },
 });
 ```
 
@@ -479,7 +484,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `#f00`
 
-Default display language: en, zh-cn, zh-tw
+Default theme color
 
 [Run Code](/)
 
@@ -499,19 +504,10 @@ var art = new Artplayer({
 
 Custom subtitle
 
-### url
-
--   Type: `String`
--   Default: `''`
-
-Subtitle url, support vtt and srt format
-
-### style
-
--   Type: `Object`
--   Default: `{}`
-
-Subtitle style
+| propertie | type     | Description                              |
+| --------- | -------- | ---------------------------------------- |
+| `url`     | `String` | Subtitle url, support vtt and srt format |
+| `style`   | `Object` | Subtitle style                           |
 
 [Run Code](/)
 
@@ -536,40 +532,13 @@ var art = new Artplayer({
 
 Custom thumbnails in the progress bar with lazy load
 
-### style
-
--   Type: `String`
--   Default: `''`
-
-Thumbnails image url
-
-### number
-
--   Type: `Number`
--   Default: `60`
-
-Thumbnails number
-
-### width
-
--   Type: `Number`
--   Default: `160`
-
-Thumbnails width
-
-### height
-
--   Type: `Number`
--   Default: `90`
-
-Thumbnails height
-
-### column
-
--   Type: `Number`
--   Default: `10`
-
-Thumbnails column
+| propertie | type     | Description          |
+| --------- | -------- | -------------------- |
+| `url`     | `String` | Thumbnails image url |
+| `number`  | `Number` | Thumbnails number    |
+| `width`   | `Number` | Thumbnails width     |
+| `height`  | `Number` | Thumbnails height    |
+| `column`  | `Number` | Thumbnails column    |
 
 [Run Code](/)
 
@@ -614,26 +583,11 @@ var art = new Artplayer({
 
 Custom quality, The type of quality is an object
 
-### default
-
--   Type: `Boolean`
--   Default: `false`
-
-Whether the default quality, if not specified, the first quality will be taken
-
-### name
-
--   Type: `String`
--   Default: `''`
-
-Quality name
-
-### url
-
--   Type: `String`
--   Default: `''`
-
-Quality url
+| propertie | type      | Description                                                                    |
+| --------- | --------- | ------------------------------------------------------------------------------ |
+| `default` | `Boolean` | Whether the default quality, if not specified, the first quality will be taken |
+| `name`    | `String`  | Quality name to show                                                           |
+| `url`     | `String`  | Video url                                                                      |
 
 [Run Code](/)
 
@@ -663,19 +617,10 @@ var art = new Artplayer({
 
 Custom highlight, The type of highlight is an object
 
-### time
-
--   Type: `Number`
--   Default: `0`
-
-highlight seconds
-
-### text
-
--   Type: `String`
--   Default: `''`
-
-highlight text
+| propertie | type     | Description      |
+| --------- | -------- | ---------------- |
+| `time`    | `Number` | highlight second |
+| `text`    | `String` | highlight text   |
 
 [Run Code](/)
 
@@ -716,54 +661,15 @@ var art = new Artplayer({
 
 Custom layer, The type of layer is an object or function
 
-### disable
-
--   Type: `Boolean`
--   Default: `false`
-
-Whether to disable
-
-### name
-
--   Type: `String`
--   Default: `layer${id}`
-
-The unique name , used for the class name
-
-### index
-
--   Type: `Number`
--   Default: `${id}`
-
-The unique index, used for the priority level
-
-### html
-
--   Type: `String`、`Element`
--   Default: `''`
-
-The dom element
-
-### style
-
--   Type: `Object`
--   Default: `{}`
-
-The style object
-
-### click
-
--   Type: `Function`
--   Default: `undefined`
-
-Click event
-
-### mounted
-
--   Type: `Function`
--   Default: `undefined`
-
-Callback after mounted
+| propertie | type                | Description                                   |
+| --------- | ------------------- | --------------------------------------------- |
+| `disable` | `Boolean`           | Whether to disable                            |
+| `name`    | `String`            | The unique name , used for the class name     |
+| `index`   | `Number`            | The unique index, used for the priority level |
+| `html`    | `String`、`Element` | The dom element                               |
+| `style`   | `Object`            | The style object                              |
+| `click`   | `Function`          | Click event                                   |
+| `mounted` | `Function`          | Callback after mounted                        |
 
 [Run Code](/)
 
@@ -793,54 +699,15 @@ var art = new Artplayer({
 
 Custom contextmenu, The type of layer is an object or function
 
-### disable
-
--   Type: `Boolean`
--   Default: `false`
-
-Whether to disable
-
-### name
-
--   Type: `String`
--   Default: `layer${id}`
-
-The unique name , used for the class name
-
-### index
-
--   Type: `Number`
--   Default: `${id}`
-
-The unique index, used for the priority level
-
-### html
-
--   Type: `String`、`Element`
--   Default: `''`
-
-The dom element
-
-### style
-
--   Type: `Object`
--   Default: `{}`
-
-The style object
-
-### click
-
--   Type: `Function`
--   Default: `undefined`
-
-Click event
-
-### mounted
-
--   Type: `Function`
--   Default: `undefined`
-
-Callback after mounted
+| propertie | type                | Description                                   |
+| --------- | ------------------- | --------------------------------------------- |
+| `disable` | `Boolean`           | Whether to disable                            |
+| `name`    | `String`            | The unique name , used for the class name     |
+| `index`   | `Number`            | The unique index, used for the priority level |
+| `html`    | `String`、`Element` | The dom element                               |
+| `style`   | `Object`            | The style object                              |
+| `click`   | `Function`          | Click event                                   |
+| `mounted` | `Function`          | Callback after mounted                        |
 
 [Run Code](/)
 
@@ -868,61 +735,16 @@ var art = new Artplayer({
 
 Custom controls, The type of controls is an object or function
 
-### disable
-
--   Type: `Boolean`
--   Default: `false`
-
-Whether to disable
-
-### name
-
--   Type: `String`
--   Default: `layer${id}`
-
-The unique name , used for the class name
-
-### index
-
--   Type: `Number`
--   Default: `${id}`
-
-The unique index, used for the priority level
-
-### html
-
--   Type: `String`、`Element`
--   Default: `''`
-
-The dom element
-
-### style
-
--   Type: `Object`
--   Default: `{}`
-
-The style object
-
-### click
-
--   Type: `Function`
--   Default: `undefined`
-
-Click event
-
-### mounted
-
--   Type: `Function`
--   Default: `undefined`
-
-Callback after mounted
-
-### position
-
--   Type: `String`
--   Default: `undefined`
-
-The position where the controller appears: top, left, right
+| propertie  | type                | Description                                                       |
+| ---------- | ------------------- | ----------------------------------------------------------------- |
+| `disable`  | `Boolean`           | Whether to disable                                                |
+| `name`     | `String`            | The unique name , used for the class name                         |
+| `index`    | `Number`            | The unique index, used for the priority level                     |
+| `html`     | `String`、`Element` | The dom element                                                   |
+| `style`    | `Object`            | The style object                                                  |
+| `click`    | `Function`          | Click event                                                       |
+| `mounted`  | `Function`          | Callback after mounted                                            |
+| `position` | `String`            | The position where the controller appears: `top`, `left`, `right` |
 
 [Run Code](/)
 
@@ -984,137 +806,416 @@ art.plugins.myPlugin.doSomething();
 | propertie   | type       | Description                                      |
 | ----------- | ---------- | ------------------------------------------------ |
 | `isFocus`   | `Boolean`  | Return to focus state                            |
-| `isPlaying` | `Boolean`  | Return to play state                             |
+| `isPlaying` | `Boolean`  | Return to playing state                          |
 | `destroy`   | `Function` | Destroy instance, will not remove dom by default |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+console.log('isFocus', art.isFocus);
+console.log('isPlaying', art.isPlaying);
+
+setTimeout(function() {
+    // keep dom
+    art.destroy();
+
+    // remove dom
+    // art.destroy(true);
+}, 1000);
+```
 
 ## player
 
-| propertie              | type       | Description                                                                           |
-| ---------------------- | ---------- | ------------------------------------------------------------------------------------- |
-| `aspectRatioState`     | `String`   | Return the current value of aspect ratio                                              |
-| `aspectRatio`          | `Function` | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9`       |
-| `aspectRatioRemove`    | `Function` | Remove aspect ratio                                                                   |
-| `aspectRatioReset`     | `Function` | Recalculate the aspect ratio                                                          |
-| `autoSizeState`        | `Boolean`  | Return the current state of auto size                                                 |
-| `autoSize`             | `Function` | Set auto size                                                                         |
-| `autoSizeRemove`       | `Function` | Remove the auto size                                                                  |
-| `currentTime`          | `Number`   | `Geter` and `Setter` of the current time                                              |
-| `duration`             | `Number`   | `Geter` of the duration                                                               |
-| `flipState`            | `String`   | Return the current state of flip                                                      |
-| `flip`                 | `Function` | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical`     |
-| `flipRemove`           | `Function` | Remove the flip                                                                       |
-| `fullscreenState`      | `Boolean`  | Return the current state of fullscreen                                                |
-| `fullscreenEnabled`    | `Function` | Enable fullscreen                                                                     |
-| `fullscreenExit`       | `Function` | Exit fullscreen                                                                       |
-| `fullscreenToggle`     | `Function` | Toggle fullscreen                                                                     |
-| `fullscreenWebState`   | `Boolean`  | Return the current state of web fullscreen                                            |
-| `fullscreenWebEnabled` | `Function` | Enable web fullscreen                                                                 |
-| `fullscreenWebExit`    | `Function` | Exit web fullscreen                                                                   |
-| `fullscreenWebToggle`  | `Function` | Toggle web fullscreen                                                                 |
-| `loaded`               | `Number`   | Return the proportion of the load                                                     |
-| `pause`                | `Function` | Pause playback                                                                        |
-| `pipState`             | `Boolean`  | Return the current state of pip                                                       |
-| `pipEnabled`           | `Function` | Enable pip                                                                            |
-| `pipExit`              | `Function` | Exit pip                                                                              |
-| `pipToggle`            | `Function` | Toggle pip                                                                            |
-| `playbackRateState`    | `String`   | Return the current state of playback rate                                             |
-| `playbackRate`         | `Function` | Set playbackRate, Currently only accepts three values：0.5, 0.75, 1.0, 1.25, 1.5, 2.0 |
-| `playbackRateRemove`   | `Function` | Remove the playback rate                                                              |
-| `playbackRateReset`    | `Function` | Recalculate the playback rate                                                         |
-| `played`               | `Number`   | Return the proportion of the load                                                     |
-| `screenshot`           | `Function` | Download the screenshot                                                               |
-| `seek`                 | `Function` | Set the current time                                                                  |
-| `switchQuality`        | `Function` | Switch quality, and you can give it a name                                            |
-| `toggle`               | `Function` | Toggle play and pause                                                                 |
-| `volume`               | `Number`   | Geter and Setter of the current volume                                                |
-| `muted`                | `Boolean`  | Geter and Setter of the muted                                                         |
+Player core function
+
+| propertie              | type       | Description                                                                                       |
+| ---------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
+| `aspectRatioState`     | `String`   | Return the current value of aspect ratio                                                          |
+| `aspectRatio`          | `Function` | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9`                   |
+| `aspectRatioRemove`    | `Function` | Remove aspect ratio                                                                               |
+| `aspectRatioReset`     | `Function` | Recalculate the aspect ratio                                                                      |
+| `autoSizeState`        | `Boolean`  | Return the current state of auto size                                                             |
+| `autoSize`             | `Function` | Set auto size                                                                                     |
+| `autoSizeRemove`       | `Function` | Remove the auto size                                                                              |
+| `currentTime`          | `Number`   | `Getter` and `Setter` of the current time                                                         |
+| `duration`             | `Number`   | `Getter` of the duration                                                                          |
+| `flipState`            | `String`   | Return the current state of flip                                                                  |
+| `flip`                 | `Function` | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical`                 |
+| `flipRemove`           | `Function` | Remove the flip                                                                                   |
+| `fullscreenState`      | `Boolean`  | Return the current state of fullscreen                                                            |
+| `fullscreenEnabled`    | `Function` | Enable fullscreen                                                                                 |
+| `fullscreenExit`       | `Function` | Exit fullscreen                                                                                   |
+| `fullscreenToggle`     | `Function` | Toggle fullscreen                                                                                 |
+| `fullscreenWebState`   | `Boolean`  | Return the current state of web fullscreen                                                        |
+| `fullscreenWebEnabled` | `Function` | Enable web fullscreen                                                                             |
+| `fullscreenWebExit`    | `Function` | Exit web fullscreen                                                                               |
+| `fullscreenWebToggle`  | `Function` | Toggle web fullscreen                                                                             |
+| `loaded`               | `Number`   | Return the proportion of the load                                                                 |
+| `pause`                | `Function` | Pause playback                                                                                    |
+| `pipState`             | `Boolean`  | Return the current state of pip                                                                   |
+| `pipEnabled`           | `Function` | Enable pip                                                                                        |
+| `pipExit`              | `Function` | Exit pip                                                                                          |
+| `pipToggle`            | `Function` | Toggle pip                                                                                        |
+| `playbackRateState`    | `String`   | Return the current state of playback rate                                                         |
+| `playbackRate`         | `Function` | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
+| `playbackRateRemove`   | `Function` | Remove the playback rate                                                                          |
+| `playbackRateReset`    | `Function` | Recalculate the playback rate                                                                     |
+| `played`               | `Number`   | Return the proportion of the played                                                               |
+| `screenshot`           | `Function` | Download a screenshot of current time                                                             |
+| `seek`                 | `Function` | Set the current time                                                                              |
+| `switchQuality`        | `Function` | Switch quality                                                                                    |
+| `toggle`               | `Function` | Toggle play and pause                                                                             |
+| `volume`               | `Number`   | `Getter` and `Setter` of the current volume                                                       |
+| `muted`                | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+this.art.on('firstCanplay', () => {
+    art.player.seek(5);
+    art.player.screenshot();
+});
+```
 
 ## storage
+
+The player will automatically add a `localStorage` object named `artplayer_settings`, Now the player will only set and read the `volume` value.
 
 | propertie | type       | Description     |
 | --------- | ---------- | --------------- |
 | `get`     | `Function` | Get the storage |
 | `set`     | `Function` | Set the storage |
 
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.storage.set('your-key', 'your-value');
+console.log(art.storage.get('your-key'));
+```
+
 ## i18n
 
-| propertie | type       | Description          |
-| --------- | ---------- | -------------------- |
-| `get`     | `Function` | Get the a i18n value |
-| `update`  | `Function` | Update the i18n      |
+The current support i18n has: `en`, `zh-cn`, `zh-tw`
+
+| propertie | type       | Description                     |
+| --------- | ---------- | ------------------------------- |
+| `get`     | `Function` | Get the a i18n value            |
+| `update`  | `Function` | Pass in a parameter for merging |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    lang: 'jp',
+});
+
+console.log(art.i18n.get('Play'));
+art.i18n.update({
+    'zh-cn': {
+        Language: '简体',
+    },
+    'zh-tw': {
+        Language: '繁體',
+    },
+    jp: {
+        Language: '日文',
+    },
+});
+console.log(art.i18n.get('Language'));
+```
 
 ## notice
 
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description    |
+| --------- | ---------- | -------------- |
+| `show`    | `Function` | Show a message |
+| `hide`    | `Function` | Hide message   |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+// auto hide
+art.notice.show('some message');
+
+// not auto hide
+art.notice.show('some message', false);
+```
 
 ## events
 
+Agent for managing native events
+
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description                                                                          |
+| --------- | ---------- | ------------------------------------------------------------------------------------ |
+| `proxy`   | `Function` | A proxy for `addEventListener` and `removeEventListener` to manage event destruction |
+| `hover`   | `Function` | Hover simplified proxy                                                               |
+| `loadImg` | `Function` | Determine whether to finish the picture                                              |
+| `destroy` | `Function` | Destroy all events                                                                   |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+var target = document.querySelector('body');
+art.events.proxy(target, 'click', function(e) {
+    console.log('body click');
+});
+```
 
 ## layers
 
+Layer manager, and every layer has `show` and `hide` funciton
+
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description             |
+| --------- | ---------- | ----------------------- |
+| `add`     | `Function` | Dynamically add a layer |
+| `show`    | `Function` | Show all layers         |
+| `hide`    | `Function` | Hide all layers         |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.layers.add({
+    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+    style: {
+        name: 'yourLayer',
+        position: 'absolute',
+        top: '20px',
+        right: '20px',
+        opacity: '.9',
+    },
+});
+
+art.layers.yourLayer.hide();
+```
 
 ## controls
 
+Controls manager, and every control has `show` and `hide` funciton
+
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description               |
+| --------- | ---------- | ------------------------- |
+| `add`     | `Function` | Dynamically add a control |
+| `show`    | `Function` | Show all controls         |
+| `hide`    | `Function` | Hide all controls         |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.controls.add(function yourController(art) {
+    return {
+        name: 'yourController',
+        position: 'right',
+        index: 10,
+        html: 'yourController',
+        click: function() {
+            console.log('yourController');
+        },
+    };
+});
+
+art.controls.yourController.hide();
+```
 
 ## contextmenu
 
+Contextmenu manager, and every contextmenu has `show` and `hide` funciton
+
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description                   |
+| --------- | ---------- | ----------------------------- |
+| `add`     | `Function` | Dynamically add a contextmenu |
+| `show`    | `Function` | Show all contextmenu          |
+| `hide`    | `Function` | Hide all contextmenu          |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.contextmenu.add({
+    html: 'Your Contextmenu',
+    name: 'yourContextmenu',
+});
+
+art.contextmenu.yourContextmenu.hide();
+```
 
 ## subtitle
 
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description     |
+| --------- | ---------- | --------------- |
+| `switch`  | `Function` | Switch subtitle |
+| `show`    | `Function` | Show subtitle   |
+| `hide`    | `Function` | Hide subtitle   |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    subtitle: {
+        url: url + '/subtitle/one-more-time-one-more-chance.srt',
+    },
+});
+
+this.art.on('firstCanplay', () => {
+    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt');
+});
+```
 
 ## loading
 
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description  |
+| --------- | ---------- | ------------ |
+| `show`    | `Function` | Show loading |
+| `hide`    | `Function` | Hide loading |
 
 ## mask
 
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description |
+| --------- | ---------- | ----------- |
+| `show`    | `Function` | Show mask   |
+| `hide`    | `Function` | Hide mask   |
 
 ## setting
 
+Setting manager, and every setting has `show` and `hide` funciton
+
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description               |
+| --------- | ---------- | ------------------------- |
+| `add`     | `Function` | Dynamically add a setting |
+| `show`    | `Function` | Show setting              |
+| `hide`    | `Function` | Hide setting              |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.setting.add({
+    html: 'Your Setting',
+    name: 'yourSetting',
+});
+
+art.setting.yourSetting.hide();
+```
 
 ## plugins
 
+Plugins manager
+
 -   Type: `Object`
 
-> TODO...
+| propertie | type       | Description              |
+| --------- | ---------- | ------------------------ |
+| `add`     | `Function` | Dynamically add a plugin |
+
+[Run Code](/)
+
+```js
+var url = 'https://blog.zhw-island.com/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.plugins.add(function myPlugin(art) {
+    return {
+        // This exposes plugin properties or methods for others to use. Like:
+        something: 'something',
+        doSomething: function() {
+            console.log('Do something here...');
+        },
+    };
+});
+
+art.plugins.myPlugin.doSomething();
+```
 
 # Class static properties
 
 All properties are read only
 
-| propertie             | Description               |
-| --------------------- | ------------------------- |
-| `Artplayer.version`   | Version Information       |
-| `Artplayer.env`       | Environmental variable    |
-| `Artplayer.config`    | Configuration information |
-| `Artplayer.utils`     | Utils function            |
-| `Artplayer.DEFAULTS`  | Default option            |
-| `Artplayer.instances` | Instance collection       |
+| propertie             | type     | Description               |
+| --------------------- | -------- | ------------------------- |
+| `Artplayer.version`   | `String` | Version Information       |
+| `Artplayer.env`       | `String` | Environmental variable    |
+| `Artplayer.config`    | `Object` | Configuration information |
+| `Artplayer.utils`     | `Object` | Utils function            |
+| `Artplayer.DEFAULTS`  | `Object` | Default option            |
+| `Artplayer.instances` | `Array`  | Instance collection       |
 
 # Event
 

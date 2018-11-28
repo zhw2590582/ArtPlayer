@@ -12,7 +12,8 @@ export default function eventInit(art, player) {
     let firstCanplay = false;
     let reconnectTime = 0;
     const maxReconnectTime = 5;
-
+    art.loading.show();
+    
     proxy($video, 'click', () => {
         player.toggle();
     });
