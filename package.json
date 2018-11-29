@@ -7,7 +7,7 @@
     "publish": "lerna publish",
     "build": "lerna run build",
     "test": "node ./node_modules/.bin/mocha-chrome ./docs/test/index.html --mocha '{\"ui\":\"bdd\"}'",
-    "lint": "eslint packages/*/src"
+    "lint": "node ./node_modules/.bin/eslint packages/*/src"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 var artBaseOption = {
     container: '.artplayer-app',
-    url: 'https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4'
-}
+    url: 'https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4',
+};
 
 describe('Detect registration status', function() {
     it('Constructor is a global variable', function() {
@@ -20,8 +20,8 @@ describe('Detect registration status', function() {
     });
 
     it('Throw error when multiple instances on the same dom element', function() {
-        expect(function () {
+        expect(function() {
             new Artplayer(artBaseOption);
-        }).to.throw(/Cannot mount multiple instances on the same dom element/)
+        }).to.throw(/Cannot mount multiple instances on the same dom element/);
     });
 });
