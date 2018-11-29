@@ -10,12 +10,11 @@ export default function playAndPause(controlOption) {
                 player,
                 i18n,
             } = art;
-            
+
             const $play = append($control, icons.play);
             const $pause = append($control, icons.pause);
             tooltip($play, i18n.get('Play'));
             tooltip($pause, i18n.get('Pause'));
-            setStyle($pause, 'display', 'none');
 
             proxy($play, 'click', () => {
                 player.play();
@@ -25,14 +24,28 @@ export default function playAndPause(controlOption) {
                 player.pause();
             });
 
-            art.on('video:playing', () => {
+            function showPlay() {
+                setStyle($play, 'display', 'flex');
+                setStyle($pause, 'display', 'none');
+            }
+
+            function showPause() {
                 setStyle($play, 'display', 'none');
                 setStyle($pause, 'display', 'flex');
+            }
+
+            if (player.playing) {
+                showPause();
+            } else {
+                showPlay();
+            }
+
+            art.on('video:playing', () => {
+                showPause();
             });
 
             art.on('video:pause', () => {
-                setStyle($play, 'display', 'flex');
-                setStyle($pause, 'display', 'none');
+                showPlay();
             });
         },
     });

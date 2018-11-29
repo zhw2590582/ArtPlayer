@@ -38,9 +38,6 @@ function nativePip(art, player) {
 
     proxy($video, 'leavepictureinpicture', () => {
         art.emit('pipExit');
-        if (player.playing) {
-            player.play();
-        }
     });
 
     art.on('destroy', () => {

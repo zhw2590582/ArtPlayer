@@ -3018,10 +3018,6 @@
     });
     proxy($video, 'leavepictureinpicture', function () {
       art.emit('pipExit');
-
-      if (player.playing) {
-        player.play();
-      }
     });
     art.on('destroy', function () {
       if (player.pipState) {
@@ -3608,20 +3604,34 @@
           var $pause = append($control, icons.pause);
           tooltip($play, i18n.get('Play'));
           tooltip($pause, i18n.get('Pause'));
-          setStyle($pause, 'display', 'none');
           proxy($play, 'click', function () {
             player.play();
           });
           proxy($pause, 'click', function () {
             player.pause();
           });
-          art.on('video:playing', function () {
-            setStyle($play, 'display', 'none');
-            setStyle($pause, 'display', 'flex');
-          });
-          art.on('video:pause', function () {
+
+          function showPlay() {
             setStyle($play, 'display', 'flex');
             setStyle($pause, 'display', 'none');
+          }
+
+          function showPause() {
+            setStyle($play, 'display', 'none');
+            setStyle($pause, 'display', 'flex');
+          }
+
+          if (player.playing) {
+            showPause();
+          } else {
+            showPlay();
+          }
+
+          art.on('video:playing', function () {
+            showPause();
+          });
+          art.on('video:pause', function () {
+            showPlay();
           });
         }
       });
