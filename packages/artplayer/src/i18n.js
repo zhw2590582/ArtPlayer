@@ -1,4 +1,4 @@
-import merge from 'deepmerge';
+import { mergeDeep } from './utils';
 
 let i18nMap = {
     'zh-cn': {
@@ -84,7 +84,7 @@ export default class I18n {
     }
 
     update(value) {
-        i18nMap = merge(i18nMap, value);
+        i18nMap = mergeDeep(i18nMap, value);
         this.init();
     }
 }

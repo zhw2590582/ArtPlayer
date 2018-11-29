@@ -2,7 +2,6 @@ import './style';
 import 'balloon-css/balloon.min.css';
 import Emitter from 'tiny-emitter';
 import optionValidator from 'option-validator';
-import merge from 'deepmerge';
 import * as utils from './utils';
 import scheme from './scheme';
 import config from './config';
@@ -30,7 +29,8 @@ let id = 0;
 class Artplayer extends Emitter {
     constructor(option) {
         super();
-        this.option = merge(Artplayer.DEFAULTS, option);
+        this.option = utils.mergeDeep(Artplayer.DEFAULTS, option);
+        console.log(this.option);
         optionValidator(this.option, scheme);
         this.init();
     }

@@ -191,93 +191,22 @@
   !function(r,t){module.exports=t();}(commonjsGlobal,function(){function c(r){return (c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var u=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t,e,n,o,a,i=c(r);if("boolean"===i)return "boolean";if("string"===i)return "string";if("number"===i)return "number";if("symbol"===i)return "symbol";if("function"===i)return "GeneratorFunction"===f(r)?"generatorfunction":"function";if(t=r,Array.isArray?Array.isArray(t):t instanceof Array)return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if((e=r)instanceof Date||"function"==typeof e.toDateString&&"function"==typeof e.getDate&&"function"==typeof e.setDate)return "date";if((n=r)instanceof Error||"string"==typeof n.message&&n.constructor&&"number"==typeof n.constructor.stackTraceLimit)return "error";if((o=r)instanceof RegExp||"string"==typeof o.flags&&"boolean"==typeof o.ignoreCase&&"boolean"==typeof o.multiline&&"boolean"==typeof o.global)return "regexp";switch(f(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if("function"==typeof(a=r).throw&&"function"==typeof a.return&&"function"==typeof a.next)return "generator";switch(i=u.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return i.slice(8,-1).toLowerCase().replace(/\s/g,"")};function f(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in y(r,t,e),l(r,t,e),p(r,t,e),t)if(t.hasOwnProperty(n)){var o=r[n],a=t[n],i=e.concat(n);if(s(r,n,a,i))continue;y(o,a,i),l(o,a,i),p(o,a,i);}}function s(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function y(r,t,e){var n;if("string"===i(t)?n=t:"function"===i(t)?t.___validator__=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function l(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(e,r,i(r));if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function p(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,window.optionValidator=a});
   });
 
-  var isMergeableObject = function isMergeableObject(value) {
-  	return isNonNullObject(value)
-  		&& !isSpecial(value)
-  };
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
 
-  function isNonNullObject(value) {
-  	return !!value && typeof value === 'object'
+    return obj;
   }
 
-  function isSpecial(value) {
-  	var stringValue = Object.prototype.toString.call(value);
-
-  	return stringValue === '[object RegExp]'
-  		|| stringValue === '[object Date]'
-  		|| isReactElement(value)
-  }
-
-  // see https://github.com/facebook/react/blob/b5ac963fb791d1298e7f396236383bc955f916c1/src/isomorphic/classic/element/ReactElement.js#L21-L25
-  var canUseSymbol = typeof Symbol === 'function' && Symbol.for;
-  var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for('react.element') : 0xeac7;
-
-  function isReactElement(value) {
-  	return value.$$typeof === REACT_ELEMENT_TYPE
-  }
-
-  function emptyTarget(val) {
-  	return Array.isArray(val) ? [] : {}
-  }
-
-  function cloneUnlessOtherwiseSpecified(value, options) {
-  	return (options.clone !== false && options.isMergeableObject(value))
-  		? deepmerge(emptyTarget(value), value, options)
-  		: value
-  }
-
-  function defaultArrayMerge(target, source, options) {
-  	return target.concat(source).map(function(element) {
-  		return cloneUnlessOtherwiseSpecified(element, options)
-  	})
-  }
-
-  function mergeObject(target, source, options) {
-  	var destination = {};
-  	if (options.isMergeableObject(target)) {
-  		Object.keys(target).forEach(function(key) {
-  			destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
-  		});
-  	}
-  	Object.keys(source).forEach(function(key) {
-  		if (!options.isMergeableObject(source[key]) || !target[key]) {
-  			destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
-  		} else {
-  			destination[key] = deepmerge(target[key], source[key], options);
-  		}
-  	});
-  	return destination
-  }
-
-  function deepmerge(target, source, options) {
-  	options = options || {};
-  	options.arrayMerge = options.arrayMerge || defaultArrayMerge;
-  	options.isMergeableObject = options.isMergeableObject || isMergeableObject;
-
-  	var sourceIsArray = Array.isArray(source);
-  	var targetIsArray = Array.isArray(target);
-  	var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
-
-  	if (!sourceAndTargetTypesMatch) {
-  		return cloneUnlessOtherwiseSpecified(source, options)
-  	} else if (sourceIsArray) {
-  		return options.arrayMerge(target, source, options)
-  	} else {
-  		return mergeObject(target, source, options)
-  	}
-  }
-
-  deepmerge.all = function deepmergeAll(array, options) {
-  	if (!Array.isArray(array)) {
-  		throw new Error('first argument should be an array')
-  	}
-
-  	return array.reduce(function(prev, next) {
-  		return deepmerge(prev, next, options)
-  	}, {})
-  };
-
-  var deepmerge_1 = deepmerge;
+  var defineProperty = _defineProperty;
 
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -380,13 +309,90 @@
     return ArtPlayerError;
   }(wrapNativeSuper(Error));
   function errorHandle(condition, msg) {
-    var isFun = typeof condition === 'function';
-
-    if (isFun ? !isFun() : !condition) {
+    if (!condition) {
       throw new ArtPlayerError(msg);
     }
   }
+  function clamp(num, a, b) {
+    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+  }
+  function getExt(url) {
+    if (url.includes('?')) {
+      return getExt(url.split('?')[0]);
+    }
 
+    if (url.includes('#')) {
+      return getExt(url.split('#')[0]);
+    }
+
+    return url.trim().toLowerCase().split('.').pop();
+  }
+  function secondToTime(second) {
+    var add0 = function add0(num) {
+      return num < 10 ? "0".concat(num) : String(num);
+    };
+
+    var hour = Math.floor(second / 3600);
+    var min = Math.floor((second - hour * 3600) / 60);
+    var sec = Math.floor(second - hour * 3600 - min * 60);
+    return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
+  }
+  function sleep() {
+    var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    return new Promise(function (resolve) {
+      return setTimeout(resolve, ms);
+    });
+  }
+  function debounce(func, wait, context) {
+    var timeout;
+
+    function fn() {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var later = function later() {
+        timeout = null;
+        func.apply(context, args);
+      };
+
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    }
+
+    fn.clearTimeout = function ct() {
+      clearTimeout(timeout);
+    };
+
+    return fn;
+  }
+  function isObject(item) {
+    return item && _typeof_1(item) === 'object' && !Array.isArray(item);
+  }
+  function isElement(item) {
+    return item instanceof Element;
+  }
+  function mergeDeep(target, source) {
+    var output = Object.assign({}, target);
+
+    if (isObject(target) && isObject(source)) {
+      Object.keys(source).forEach(function (key) {
+        var value = source[key];
+
+        if (isObject(value) && !isElement(value)) {
+          if (!(key in target)) {
+            Object.assign(output, defineProperty({}, key, value));
+          } else {
+            output[key] = mergeDeep(target[key], value);
+          }
+        } else {
+          Object.assign(output, defineProperty({}, key, value));
+        }
+      });
+    }
+
+    return output;
+  }
   function append(parent, child) {
     if (child instanceof Element) {
       parent.appendChild(child);
@@ -442,7 +448,6 @@
     target.setAttribute('data-balloon', msg);
     target.setAttribute('data-balloon-pos', pos);
   }
-
   function srtToVtt(srtText) {
     return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
   }
@@ -452,68 +457,17 @@
     }));
   }
 
-  function clamp(num, a, b) {
-    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
-  }
-  function getExt(url) {
-    if (url.includes('?')) {
-      return getExt(url.split('?')[0]);
-    }
-
-    if (url.includes('#')) {
-      return getExt(url.split('#')[0]);
-    }
-
-    return url.trim().toLowerCase().split('.').pop();
-  }
-  function secondToTime(second) {
-    var add0 = function add0(num) {
-      return num < 10 ? "0".concat(num) : String(num);
-    };
-
-    var hour = Math.floor(second / 3600);
-    var min = Math.floor((second - hour * 3600) / 60);
-    var sec = Math.floor(second - hour * 3600 - min * 60);
-    return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
-  }
-  function sleep() {
-    var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-    return new Promise(function (resolve) {
-      return setTimeout(resolve, ms);
-    });
-  }
-  function debounce(func, wait, context) {
-    var timeout;
-
-    function fn() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      var later = function later() {
-        timeout = null;
-        func.apply(context, args);
-      };
-
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    }
-
-    fn.clearTimeout = function ct() {
-      clearTimeout(timeout);
-    };
-
-    return fn;
-  }
-
   var utils = /*#__PURE__*/Object.freeze({
+    ArtPlayerError: ArtPlayerError,
+    errorHandle: errorHandle,
     clamp: clamp,
     getExt: getExt,
     secondToTime: secondToTime,
     sleep: sleep,
     debounce: debounce,
-    ArtPlayerError: ArtPlayerError,
-    errorHandle: errorHandle,
+    isObject: isObject,
+    isElement: isElement,
+    mergeDeep: mergeDeep,
     append: append,
     insertByIndex: insertByIndex,
     setStyle: setStyle,
@@ -756,7 +710,7 @@
       classCallCheck(this, Template);
 
       if (art.option.container instanceof Element) {
-        this.$container = this.option.container;
+        this.$container = art.option.container;
       } else {
         this.$container = document.querySelector(art.option.container);
       }
@@ -916,7 +870,7 @@
     }, {
       key: "update",
       value: function update(value) {
-        i18nMap = deepmerge_1(i18nMap, value);
+        i18nMap = mergeDeep(i18nMap, value);
         this.init();
       }
     }]);
@@ -3384,23 +3338,6 @@
     }
   }
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  var defineProperty = _defineProperty;
-
   function _objectSpread(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i] != null ? arguments[i] : {};
@@ -5477,7 +5414,8 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
-      _this.option = deepmerge_1(Artplayer.DEFAULTS, option);
+      _this.option = mergeDeep(Artplayer.DEFAULTS, option);
+      console.log(_this.option);
       optionValidator(_this.option, scheme);
 
       _this.init();

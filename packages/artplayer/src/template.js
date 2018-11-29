@@ -3,7 +3,7 @@ import { errorHandle } from './utils';
 export default class Template {
     constructor(art) {
         if (art.option.container instanceof Element) {
-            this.$container = this.option.container;
+            this.$container = art.option.container;
         } else {
             this.$container = document.querySelector(art.option.container);
         }

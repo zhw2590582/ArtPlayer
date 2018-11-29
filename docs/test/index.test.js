@@ -1,5 +1,5 @@
 var artBaseOption = {
-    container: '.artplayer-app',
+    container: document.querySelector('.artplayer-app'),
     url: 'https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4',
 };
 

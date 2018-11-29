@@ -1,5 +1,4 @@
-import { errorHandle, setStyles, setStyle } from './utils';
-import { srtToVtt, vttToBlob } from './utils/subtitle';
+import { errorHandle, setStyles, setStyle, srtToVtt, vttToBlob } from './utils';
 
 export default class Subtitle {
     constructor(art) {
