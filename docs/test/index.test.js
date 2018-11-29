@@ -5,23 +5,27 @@ var artBaseOption = {
 
 describe('Detect registration status', function() {
     it('Constructor is a global variable', function() {
-        expect(window.Artplayer).to.be.an('function');
-        expect(window.Artplayer.version).to.be.an('string');
-        expect(window.Artplayer.env).to.be.an('string');
-        expect(window.Artplayer.config).to.be.an('object');
-        expect(window.Artplayer.utils).to.be.an('object');
-        expect(window.Artplayer.DEFAULTS).to.be.an('object');
-        expect(window.Artplayer.instances).to.be.an('array');
+        expect(Artplayer).to.be.an('function');
+        expect(Artplayer.instances).to.be.an('array');
     });
 
-    it('Instantiation state', function() {
+    it('Instance state', function() {
         var art = new Artplayer(artBaseOption);
         expect(art).to.be.an('object');
+        expect(art.id).to.equal(1);
     });
 
     it('Throw error when multiple instances on the same dom element', function() {
         expect(function() {
             new Artplayer(artBaseOption);
         }).to.throw(/Cannot mount multiple instances on the same dom element/);
+    });
+
+    it('Destroy all instances', function() {
+        expect(Artplayer.instances.length).to.equal(1);
+        Artplayer.instances.forEach(art => {
+            art.destroy(true);
+        });
+        expect(Artplayer.instances.length).to.equal(0);
     });
 });
