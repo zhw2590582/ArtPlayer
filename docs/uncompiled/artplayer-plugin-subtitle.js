@@ -29,7 +29,7 @@
           proxy($range, 'change', function () {
             var value = $range.value;
             $value.innerText = value;
-            art.plugins.artplayerPluginSubtitle.set(Number(value));
+            art.plugins.artplayerPluginSubtitle.offset(Number(value));
           });
           art.on('subtitle:switch', function () {
             $range.value = 0;
@@ -58,7 +58,7 @@
         cuesCache = [];
       });
       return {
-        set: function set(value) {
+        offset: function offset(value) {
           var cues = Array.from(template.$track.track.cues);
           var time = clamp(value, -5, 5);
           cues.forEach(function (cue, index) {

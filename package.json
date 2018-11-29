@@ -6,7 +6,7 @@
     "bootstrap": "lerna bootstrap",
     "publish": "lerna publish",
     "build": "lerna run build",
-    "test": "lerna run test",
+    "test": "node ./node_modules/.bin/mocha-chrome ./docs/test/index.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "eslint packages/*/src"
   },
   "repository": {
@@ -25,10 +25,13 @@
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "devDependencies": {
     "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.14.0",
-    "lerna": "^3.4.3"
+    "lerna": "^3.4.3",
+    "mocha": "^5.2.0",
+    "mocha-chrome": "^1.1.0"
   }
 }

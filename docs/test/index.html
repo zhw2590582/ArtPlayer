@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Mocha Tests</title>
+        <link href="https://unpkg.com/mocha@5.2.0/mocha.css" rel="stylesheet" />
+        <link href="../uncompiled/artplayer.css" rel="stylesheet" />
+        <style>
+            .artplayer-app {
+                width: 400px;
+                height: 300px;
+                margin: 20px auto;
+                opacity: 0.2;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="artplayer-app"></div>
+        <div id="mocha"></div>
+        <script src="https://unpkg.com/chai/chai.js"></script>
+        <script src="https://unpkg.com/mocha@5.2.0/mocha.js"></script>
+        <script>
+            window.mocha.setup('bdd');
+            window.expect = window.chai.expect;
+        </script>
+
+        <script src="../uncompiled/artplayer.js"></script>
+        <script src="../uncompiled/artplayer-plugin-subtitle.js"></script>
+
+        <script src="./index.test.js"></script>
+        <script>
+            mocha.checkLeaks();
+            mocha.run();
+        </script>
+    </body>
+</html>
