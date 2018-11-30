@@ -4,6 +4,9 @@
   "description": "Danmu plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-subtitle.js",
   "style": "dist/artplayer-plugin-subtitle.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhw2590582/ArtPlayer.git"

@@ -10,10 +10,10 @@ const cssnano = require('cssnano');
 const replace = require('rollup-plugin-replace');
 const svgo = require('rollup-plugin-svgo');
 const { uglify } = require('rollup-plugin-uglify');
+const copyAfterBuild = require('./copyAfterBuild');
 
 function creatRollupConfig(target) {
     const projectPath = path.join(process.cwd(), 'packages', target);
-    console.log(projectPath);
     const packageJson = JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'), 'utf-8'));
     const { version, homepage, name } = packageJson;
     const isProd = process.env.NODE_ENV === 'production';
@@ -29,17 +29,21 @@ function creatRollupConfig(target) {
         input: path.join(projectPath, 'src/index.js'),
         output: {
             name,
-            file: isProd ? path.join(projectPath, `dist/${name}.js`) : path.join(process.cwd(), `docs/uncompiled/${name}.js`),
+            file: isProd
+                ? path.join(projectPath, `dist/${name}.js`)
+                : path.join(process.cwd(), `docs/uncompiled/${name}.js`),
             format: 'umd',
             exports: 'named',
         },
         plugins: [
             eslint({
-                exclude: ['node_modules/**', 'src/**/*.scss', 'src/**/*.svg'],
+                exclude: ['node_modules/**', 'packages/*/src/**/*.scss', 'packages/*/src/**/*.svg'],
             }),
             postcss({
                 plugins: [autoprefixer, cssnano],
-                extract: isProd ? path.join(projectPath, `dist/${name}.css`) : path.join(process.cwd(), `docs/uncompiled/${name}.css`),
+                extract: isProd
+                    ? path.join(projectPath, `dist/${name}.css`)
+                    : path.join(process.cwd(), `docs/uncompiled/${name}.css`),
             }),
             nodeResolve(),
             commonjs(),
@@ -63,8 +67,12 @@ function creatRollupConfig(target) {
                         preamble: banner,
                     },
                 }),
+            isProd && copyAfterBuild({
+                from: path.join(projectPath, 'dist/*'),
+                to: path.join(process.cwd(), 'docs/compiled'),
+            }),
         ],
     };
-};
+}
 
 module.exports = creatRollupConfig(process.env.TARGET);
