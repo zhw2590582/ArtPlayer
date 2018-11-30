@@ -30,7 +30,6 @@ class Artplayer extends Emitter {
     constructor(option) {
         super();
         this.option = utils.mergeDeep(Artplayer.DEFAULTS, option);
-        console.log(this.option);
         optionValidator(this.option, scheme);
         this.init();
     }
