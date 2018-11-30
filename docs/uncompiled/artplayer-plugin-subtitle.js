@@ -85,4 +85,3 @@
     Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-//# sourceMappingURL=artplayer-plugin-subtitle.js.map

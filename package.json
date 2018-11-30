@@ -5,8 +5,12 @@
   "scripts": {
     "bootstrap": "node ./node_modules/.bin/lerna bootstrap",
     "publish": "node ./node_modules/.bin/lerna publish",
-    "dev": "node ./node_modules/.bin/cross-env NODE_ENV=development node ./script/dev.js",
-    "build": "node ./node_modules/.bin/cross-env NODE_ENV=production node ./script/build.js",
+    "dev:artplayer": "cross-env NODE_ENV=development cross-env TARGET=artplayer rollup -w -c scripts/config.js",
+    "dev:artplayer-plugin-danmu": "cross-env NODE_ENV=development cross-env TARGET=artplayer-plugin-danmu rollup -w -c scripts/config.js",
+    "dev:artplayer-plugin-subtitle": "cross-env NODE_ENV=development cross-env TARGET=artplayer-plugin-subtitle rollup -w -c scripts/config.js",
+    "build:artplayer": "cross-env NODE_ENV=production TARGET=artplayer rollup -c scripts/config.js",
+    "build:artplayer-plugin-danmu": "cross-env NODE_ENV=production TARGET=artplayer-plugin-danmu rollup -c scripts/config.js",
+    "build:artplayer-plugin-subtitle": "cross-env NODE_ENV=production TARGET=artplayer-plugin-subtitle rollup -c scripts/config.js",
     "test": "node ./node_modules/.bin/mocha-chrome ./docs/test/index.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "node ./node_modules/.bin/eslint packages/*/src"
   },
@@ -24,7 +28,7 @@
     "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-external-helpers": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
