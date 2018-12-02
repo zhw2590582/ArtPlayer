@@ -109,7 +109,7 @@ var art = new Artplayer({
 
 art.on('firstCanplay', () => {
     var preview = document.querySelector('.art-control-preview');
-    art.plugins.artplayerPluginLocalPreview.attach(preview);
+    art.plugins.localPreview.attach(preview);
 
     art.on('resize', $player => {
         art.controls.quality.show();

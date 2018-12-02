@@ -11,7 +11,7 @@ function i18nMix(i18n) {
     });
 }
 
-export default function artplayerPluginLocalPreview(art) {
+export default function localPreview(art) {
     const {
         getExt,
         append,
@@ -33,6 +33,7 @@ export default function artplayerPluginLocalPreview(art) {
     i18nMix(i18n);
 
     return {
+        name: 'localPreview',
         attach(target) {
             const $input = append(target, '<input type="file">');
             setStyle(target, 'position', 'relative');
@@ -54,7 +55,7 @@ export default function artplayerPluginLocalPreview(art) {
                         player.aspectRatioRemove();
                         template.$video.src = url;
                         sleep(100).then(() => {
-                            player.seek(0);
+                            player.currentTime = 0;
                         });
                         option.url = url;
                         art.emit('switch', url);

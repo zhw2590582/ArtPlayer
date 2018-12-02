@@ -39,7 +39,7 @@ function settingMix(art) {
             proxy($range, 'change', () => {
                 const { value } = $range;
                 $value.innerText = value;
-                art.plugins.artplayerPluginSubtitle.offset(Number(value));
+                art.plugins.subtitle.offset(Number(value));
             });
 
             art.on('subtitle:switch', () => {
@@ -57,7 +57,7 @@ function settingMix(art) {
     };
 }
 
-export default function artplayerPluginSubtitle(art) {
+export default function subtitle(art) {
     const { clamp } = art.constructor.utils;
     const { setting, notice, template, i18n } = art;
     i18nMix(i18n);
@@ -69,6 +69,7 @@ export default function artplayerPluginSubtitle(art) {
     });
 
     return {
+        name: 'subtitle',
         offset(value) {
             const cues = Array.from(template.$track.track.cues);
             const time = clamp(value, -5, 5);

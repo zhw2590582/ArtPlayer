@@ -5486,7 +5486,7 @@
         proxy($range, 'change', function () {
           var value = $range.value;
           $value.innerText = value;
-          art.plugins.artplayerPluginSubtitle.offset(Number(value));
+          art.plugins.subtitle.offset(Number(value));
         });
         art.on('subtitle:switch', function () {
           $range.value = 0;
@@ -5502,7 +5502,7 @@
     };
   }
 
-  function artplayerPluginSubtitle(art) {
+  function subtitle$2(art) {
     var clamp = art.constructor.utils.clamp;
     var setting = art.setting,
         notice = art.notice,
@@ -5515,6 +5515,7 @@
       cuesCache = [];
     });
     return {
+      name: 'subtitle',
       offset: function offset(value) {
         var cues = Array.from(template.$track.track.cues);
         var time = clamp(value, -5, 5);
@@ -5548,7 +5549,7 @@
     });
   }
 
-  function artplayerPluginLocalPreview(art) {
+  function localPreview(art) {
     var _art$constructor$util = art.constructor.utils,
         getExt = _art$constructor$util.getExt,
         append = _art$constructor$util.append,
@@ -5564,6 +5565,7 @@
         player = art.player;
     i18nMix$1(i18n);
     return {
+      name: 'localPreview',
       attach: function attach(target) {
         var $input = append(target, '<input type="file">');
         setStyle(target, 'position', 'relative');
@@ -5587,7 +5589,7 @@
               player.aspectRatioRemove();
               template.$video.src = url;
               sleep(100).then(function () {
-                player.seek(0);
+                player.currentTime = 0;
               });
               option.url = url;
               art.emit('switch', url);
@@ -5613,8 +5615,8 @@
 
       this.art = art;
       this.id = 0;
-      this.add(artplayerPluginSubtitle);
-      this.add(artplayerPluginLocalPreview);
+      this.add(subtitle$2);
+      this.add(localPreview);
       art.option.plugins.forEach(function (plugin) {
         _this.add(plugin);
       });
