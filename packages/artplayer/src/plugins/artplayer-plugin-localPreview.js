@@ -17,15 +17,18 @@ export default function artplayerPluginLocalPreview(art) {
         append,
         setStyle,
         setStyles,
+        sleep,
     } = art.constructor.utils;
     const formats = ['mp4', 'ogg', 'webm'];
     const {
         events: {
             proxy,
         },
+        option,
         notice,
         i18n,
         template,
+        player,
     } = art;
     i18nMix(i18n);
 
@@ -49,7 +52,15 @@ export default function artplayerPluginLocalPreview(art) {
                 }
                 const ext = getExt(file.name);
                 if (ext && formats.includes(ext)) {
-                    template.$video.src = URL.createObjectURL(file);
+                    const url = URL.createObjectURL(file);
+                    player.playbackRateRemove();
+                    player.aspectRatioRemove();
+                    template.$video.src = url;
+                    sleep(100).then(() => {
+                        player.seek(0);
+                    });
+                    option.url = url;
+                    art.emit('switch', url);
                     notice.show(i18n.get('Load local video successfully'));
                 } else {
                     const tip = `${i18n.get('Only file types are supported')}: ${formats.toString()}`;

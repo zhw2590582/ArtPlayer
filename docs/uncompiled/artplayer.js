@@ -5553,12 +5553,15 @@
         getExt = _art$constructor$util.getExt,
         append = _art$constructor$util.append,
         setStyle = _art$constructor$util.setStyle,
-        setStyles = _art$constructor$util.setStyles;
+        setStyles = _art$constructor$util.setStyles,
+        sleep = _art$constructor$util.sleep;
     var formats = ['mp4', 'ogg', 'webm'];
     var proxy = art.events.proxy,
+        option = art.option,
         notice = art.notice,
         i18n = art.i18n,
-        template = art.template;
+        template = art.template,
+        player = art.player;
     i18nMix$1(i18n);
     return {
       attach: function attach(target) {
@@ -5583,7 +5586,15 @@
           var ext = getExt(file.name);
 
           if (ext && formats.includes(ext)) {
-            template.$video.src = URL.createObjectURL(file);
+            var url = URL.createObjectURL(file);
+            player.playbackRateRemove();
+            player.aspectRatioRemove();
+            template.$video.src = url;
+            sleep(100).then(function () {
+              player.seek(0);
+            });
+            option.url = url;
+            art.emit('switch', url);
             notice.show(i18n.get('Load local video successfully'));
           } else {
             var tip = "".concat(i18n.get('Only file types are supported'), ": ").concat(formats.toString());
