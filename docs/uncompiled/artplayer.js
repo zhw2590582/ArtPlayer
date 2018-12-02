@@ -5535,9 +5535,63 @@
     };
   }
 
+  function i18nMix$1(i18n) {
+    i18n.update({
+      'zh-cn': {
+        'Only file types are supported': '只支持文件类型',
+        'Load local video successfully': '加载本地视频成功'
+      },
+      'zh-tw': {
+        'Only file types are supported': '只支持文件類型',
+        'Load local video successfully': '加載本地視頻成功'
+      }
+    });
+  }
+
   function artplayerPluginLocalPreview(art) {
-    var getExt = art.constructor.utils.getExt;
-    return {// TODO...
+    var _art$constructor$util = art.constructor.utils,
+        getExt = _art$constructor$util.getExt,
+        append = _art$constructor$util.append,
+        setStyle = _art$constructor$util.setStyle,
+        setStyles = _art$constructor$util.setStyles;
+    var formats = ['mp4', 'ogg', 'webm'];
+    var proxy = art.events.proxy,
+        notice = art.notice,
+        i18n = art.i18n,
+        template = art.template;
+    i18nMix$1(i18n);
+    return {
+      attach: function attach(target) {
+        console.log(target);
+        var $input = append(target, '<input type="file">');
+        setStyle(target, 'position', 'relative');
+        setStyles($input, {
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          left: '0',
+          top: '0',
+          opacity: '0'
+        });
+        proxy($input, 'change', function () {
+          var file = $input.files[0];
+
+          if (!file) {
+            return;
+          }
+
+          var ext = getExt(file.name);
+
+          if (ext && formats.includes(ext)) {
+            template.$video.src = URL.createObjectURL(file);
+            notice.show(i18n.get('Load local video successfully'));
+          } else {
+            var tip = "".concat(i18n.get('Only file types are supported'), ": ").concat(formats.toString());
+            notice.show(tip, true, 3000);
+            console.warn(tip);
+          }
+        });
+      }
     };
   }
 

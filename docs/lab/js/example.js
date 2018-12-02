@@ -96,13 +96,10 @@ var art = new Artplayer({
     ],
     controls: [
         {
-            name: 'line',
+            name: 'preview',
             position: 'right',
             index: 1,
-            html: '主线',
-            click: function() {
-                console.log('click line');
-            },
+            html: '打开'
         },
     ],
     icons: {
@@ -111,6 +108,9 @@ var art = new Artplayer({
 });
 
 art.on('firstCanplay', () => {
+    var preview = document.querySelector('.art-control-preview');
+    art.plugins.artplayerPluginLocalPreview.attach(preview);
+
     art.on('resize', $player => {
         art.controls.quality.show();
         art.controls.setting.show();
