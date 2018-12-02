@@ -565,6 +565,9 @@
 
     return parent.lastElementChild;
   }
+  function remove(child) {
+    return child.parentNode.removeChild(child);
+  }
   function insertByIndex(parent, child, index) {
     var childs = Array.from(parent.children);
     child.dataset.index = index;
@@ -632,6 +635,7 @@
     isElement: isElement,
     mergeDeep: mergeDeep,
     append: append,
+    remove: remove,
     insertByIndex: insertByIndex,
     setStyle: setStyle,
     setStyles: setStyles,
@@ -4262,7 +4266,7 @@
 
   function version(menuOption) {
     return objectSpread({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.4</a>'
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.5</a>'
     });
   }
 
@@ -4444,7 +4448,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.4</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.5</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -4500,13 +4504,13 @@
       var url = this.art.option.subtitle.url;
 
       if (url) {
-        this.init();
+        this.init(url);
       }
     }
 
     createClass(Subtitle, [{
       key: "init",
-      value: function init() {
+      value: function init(url) {
         var _this = this;
 
         var _this$art = this.art,
@@ -4514,15 +4518,20 @@
             subtitle = _this$art.option.subtitle,
             _this$art$template = _this$art.template,
             $video = _this$art$template.$video,
-            $subtitle = _this$art$template.$subtitle;
+            $subtitle = _this$art$template.$subtitle,
+            $track = _this$art$template.$track;
         setStyles($subtitle, subtitle.style || {});
-        var $track = document.createElement('track');
-        $track.default = true;
-        $track.kind = 'metadata';
-        $video.appendChild($track);
-        this.art.template.$track = $track;
-        this.load(subtitle.url).then(function (url) {
-          $track.src = url;
+
+        if (!$track) {
+          var $newTrack = document.createElement('track');
+          $newTrack.default = true;
+          $newTrack.kind = 'metadata';
+          $video.appendChild($newTrack);
+          this.art.template.$track = $newTrack;
+        }
+
+        this.load(url).then(function (url) {
+          _this.art.template.$track.src = url;
 
           _this.art.emit('subtitle:load', url);
 
@@ -4604,19 +4613,6 @@
         } else {
           this.show();
         }
-      }
-    }, {
-      key: "switch",
-      value: function _switch(url) {
-        var _this2 = this;
-
-        var $track = this.art.template.$track;
-        errorHandle($track, 'You need to initialize the subtitle option first.');
-        this.load(url).then(function (url) {
-          $track.src = url;
-
-          _this2.art.emit('subtitle:switch', url);
-        });
       }
     }]);
 
@@ -5465,6 +5461,86 @@
     return Storage;
   }();
 
+  function i18nMix(i18n) {
+    i18n.update({
+      'zh-cn': {
+        'Subtitle offset time': '字幕偏移时间'
+      },
+      'zh-tw': {
+        'Subtitle offset time': '字幕偏移時間'
+      }
+    });
+  }
+
+  function settingMix(art) {
+    var i18n = art.i18n,
+        proxy = art.events.proxy;
+    return {
+      title: 'Subtitle',
+      name: 'subtitle',
+      index: 20,
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-body\">\n                <input\n                    style=\"width: 100%;height: 3px;outline: none;appearance: none;-moz-appearance: none;-webkit-appearance: none;background-color: #fff;\"\n                    class=\"art-subtitle-range\"\n                    type=\"range\"\n                    min=\"-5\"\n                    max=\"5\"\n                    step=\"0.5\"\n                >\n            </div>\n        "),
+      mounted: function mounted($setting) {
+        var $range = $setting.querySelector('.art-subtitle-range');
+        var $value = $setting.querySelector('.art-subtitle-value');
+        proxy($range, 'change', function () {
+          var value = $range.value;
+          $value.innerText = value;
+          art.plugins.artplayerPluginSubtitle.offset(Number(value));
+        });
+        art.on('subtitle:switch', function () {
+          $range.value = 0;
+          $value.innerText = 0;
+        });
+        art.on('artplayerPluginSubtitle:set', function (value) {
+          if ($range.value !== value) {
+            $range.value = value;
+            $value.innerText = value;
+          }
+        });
+      }
+    };
+  }
+
+  function artplayerPluginSubtitle(art) {
+    var clamp = art.constructor.utils.clamp;
+    var setting = art.setting,
+        notice = art.notice,
+        template = art.template,
+        i18n = art.i18n;
+    i18nMix(i18n);
+    setting.add(settingMix);
+    var cuesCache = [];
+    art.on('subtitle:switch', function () {
+      cuesCache = [];
+    });
+    return {
+      offset: function offset(value) {
+        var cues = Array.from(template.$track.track.cues);
+        var time = clamp(value, -5, 5);
+        cues.forEach(function (cue, index) {
+          if (!cuesCache[index]) {
+            cuesCache[index] = {
+              startTime: cue.startTime,
+              endTime: cue.endTime
+            };
+          }
+
+          cue.startTime = cuesCache[index].startTime + time;
+          cue.endTime = cuesCache[index].endTime + time;
+        });
+        notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
+        art.emit('artplayerPluginSubtitle:set', value);
+      }
+    };
+  }
+
+  function artplayerPluginLocalPreview(art) {
+    var getExt = art.constructor.utils.getExt;
+    return {// TODO...
+    };
+  }
+
   var Plugins =
   /*#__PURE__*/
   function () {
@@ -5475,6 +5551,8 @@
 
       this.art = art;
       this.id = 0;
+      this.add(artplayerPluginSubtitle);
+      this.add(artplayerPluginLocalPreview);
       art.option.plugins.forEach(function (plugin) {
         _this.add(plugin);
       });
@@ -5613,7 +5691,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '1.0.4';
+        return '1.0.5';
       }
     }, {
       key: "env",

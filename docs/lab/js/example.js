@@ -107,8 +107,7 @@ var art = new Artplayer({
     ],
     icons: {
         loading: '<img src="https://static.hdslb.com/player/images/ploading.gif">',
-    },
-    plugins: [artplayerPluginSubtitle]
+    }
 });
 
 art.on('firstCanplay', () => {

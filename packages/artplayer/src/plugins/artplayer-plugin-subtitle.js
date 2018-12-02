@@ -57,7 +57,7 @@ function settingMix(art) {
     };
 }
 
-function artplayerPluginSubtitle(art) {
+export default function artplayerPluginSubtitle(art) {
     const { clamp } = art.constructor.utils;
     const { setting, notice, template, i18n } = art;
     i18nMix(i18n);
@@ -87,6 +87,3 @@ function artplayerPluginSubtitle(art) {
         },
     };
 }
-
-window.artplayerPluginSubtitle = artplayerPluginSubtitle;
-export default artplayerPluginSubtitle;

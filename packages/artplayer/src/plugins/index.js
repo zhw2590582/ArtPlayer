@@ -1,7 +1,13 @@
+import artplayerPluginSubtitle from './artplayer-plugin-subtitle';
+import artplayerPluginLocalPreview from './artplayer-plugin-localPreview';
+
 export default class Plugins {
     constructor(art) {
         this.art = art;
         this.id = 0;
+
+        this.add(artplayerPluginSubtitle);
+        this.add(artplayerPluginLocalPreview);
         art.option.plugins.forEach(plugin => {
             this.add(plugin);
         });

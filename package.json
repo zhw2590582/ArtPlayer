@@ -7,11 +7,9 @@
     "publish": "node ./node_modules/.bin/lerna publish",
     "dev:artplayer": "cross-env NODE_ENV=development cross-env TARGET=artplayer rollup -w -c scripts/config.js",
     "dev:artplayer-plugin-danmu": "cross-env NODE_ENV=development cross-env TARGET=artplayer-plugin-danmu rollup -w -c scripts/config.js",
-    "dev:artplayer-plugin-subtitle": "cross-env NODE_ENV=development cross-env TARGET=artplayer-plugin-subtitle rollup -w -c scripts/config.js",
     "build:artplayer": "cross-env NODE_ENV=production TARGET=artplayer rollup -c scripts/config.js",
     "build:artplayer-plugin-danmu": "cross-env NODE_ENV=production TARGET=artplayer-plugin-danmu rollup -c scripts/config.js",
-    "build:artplayer-plugin-subtitle": "cross-env NODE_ENV=production TARGET=artplayer-plugin-subtitle rollup -c scripts/config.js",
-    "build:all": "npm-run-all build:artplayer build:artplayer-plugin-danmu build:artplayer-plugin-subtitle",
+    "build:all": "npm-run-all build:artplayer build:artplayer-plugin-danmu",
     "test": "node ./node_modules/.bin/mocha-chrome ./docs/test/index.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "node ./node_modules/.bin/eslint packages/*/src"
   },

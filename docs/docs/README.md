@@ -1124,11 +1124,11 @@ art.contextmenu.yourContextmenu.hide();
 
 -   Type: `Object`
 
-| propertie | type       | Description     |
-| --------- | ---------- | --------------- |
-| `switch`  | `Function` | Switch subtitle |
-| `show`    | `Function` | Show subtitle   |
-| `hide`    | `Function` | Hide subtitle   |
+| propertie | type       | Description   |
+| --------- | ---------- | ------------- |
+| `init`    | `Function` | Init subtitle |
+| `show`    | `Function` | Show subtitle |
+| `hide`    | `Function` | Hide subtitle |
 
 [Run Code](/)
 
@@ -1143,7 +1143,7 @@ var art = new Artplayer({
 });
 
 this.art.on('firstCanplay', () => {
-    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt');
+    art.subtitle.init(url + '/subtitle/one-more-time-one-more-chance.vtt');
 });
 ```
 

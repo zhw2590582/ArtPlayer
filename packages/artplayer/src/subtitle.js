@@ -1,4 +1,4 @@
-import { errorHandle, setStyles, setStyle, srtToVtt, vttToBlob } from './utils';
+import { setStyles, setStyle, srtToVtt, vttToBlob } from './utils';
 
 export default class Subtitle {
     constructor(art) {
@@ -6,26 +6,31 @@ export default class Subtitle {
         this.state = true;
         const { url } = this.art.option.subtitle;
         if (url) {
-            this.init();
+            this.init(url);
         }
     }
 
-    init() {
+    init(url) {
         const {
             events: { proxy },
             option: { subtitle },
-            template: { $video, $subtitle },
+            template: { $video, $subtitle, $track },
         } = this.art;
 
         setStyles($subtitle, subtitle.style || {});
-        const $track = document.createElement('track');
-        $track.default = true;
-        $track.kind = 'metadata';
-        $video.appendChild($track);
-        this.art.template.$track = $track;
-        this.load(subtitle.url).then(url => {
-            $track.src = url;
+
+        if (!$track) {
+            const $newTrack = document.createElement('track');
+            $newTrack.default = true;
+            $newTrack.kind = 'metadata';
+            $video.appendChild($newTrack);
+            this.art.template.$track = $newTrack;
+        }
+
+        this.load(url).then(url => {
+            this.art.template.$track.src = url;
             this.art.emit('subtitle:load', url);
+            
             if ($video.textTracks && $video.textTracks[0]) {
                 const [track] = $video.textTracks;
                 proxy(track, 'cuechange', () => {
@@ -99,14 +104,5 @@ export default class Subtitle {
         } else {
             this.show();
         }
-    }
-
-    switch(url) {
-        const { $track } = this.art.template;
-        errorHandle($track, 'You need to initialize the subtitle option first.');
-        this.load(url).then(url => {
-            $track.src = url;
-            this.art.emit('subtitle:switch', url);
-        });
     }
 }

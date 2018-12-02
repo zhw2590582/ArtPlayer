@@ -104,6 +104,10 @@ export function append(parent, child) {
     return parent.lastElementChild;
 }
 
+export function remove(child) {
+    return child.parentNode.removeChild(child);
+}
+
 export function insertByIndex(parent, child, index) {
     const childs = Array.from(parent.children);
     child.dataset.index = index;
