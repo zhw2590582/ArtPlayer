@@ -34,7 +34,6 @@ export default function artplayerPluginLocalPreview(art) {
 
     return {
         attach(target) {
-            console.log(target);
             const $input = append(target, '<input type="file">');
             setStyle(target, 'position', 'relative');
             setStyles($input, {
@@ -47,25 +46,24 @@ export default function artplayerPluginLocalPreview(art) {
             });
             proxy($input, 'change', () => {
                 const file = $input.files[0];
-                if (!file) {
-                    return;
-                }
-                const ext = getExt(file.name);
-                if (ext && formats.includes(ext)) {
-                    const url = URL.createObjectURL(file);
-                    player.playbackRateRemove();
-                    player.aspectRatioRemove();
-                    template.$video.src = url;
-                    sleep(100).then(() => {
-                        player.seek(0);
-                    });
-                    option.url = url;
-                    art.emit('switch', url);
-                    notice.show(i18n.get('Load local video successfully'));
-                } else {
-                    const tip = `${i18n.get('Only file types are supported')}: ${formats.toString()}`;
-                    notice.show(tip, true, 3000);
-                    console.warn(tip);
+                if (file) {
+                    const ext = getExt(file.name);
+                    if (ext && formats.includes(ext)) {
+                        const url = URL.createObjectURL(file);
+                        player.playbackRateRemove();
+                        player.aspectRatioRemove();
+                        template.$video.src = url;
+                        sleep(100).then(() => {
+                            player.seek(0);
+                        });
+                        option.url = url;
+                        art.emit('switch', url);
+                        notice.show(i18n.get('Load local video successfully'));
+                    } else {
+                        const tip = `${i18n.get('Only file types are supported')}: ${formats.toString()}`;
+                        notice.show(tip, true, 3000);
+                        console.warn(tip);
+                    }
                 }
             });
         },

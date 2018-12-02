@@ -5565,7 +5565,6 @@
     i18nMix$1(i18n);
     return {
       attach: function attach(target) {
-        console.log(target);
         var $input = append(target, '<input type="file">');
         setStyle(target, 'position', 'relative');
         setStyles($input, {
@@ -5579,27 +5578,25 @@
         proxy($input, 'change', function () {
           var file = $input.files[0];
 
-          if (!file) {
-            return;
-          }
+          if (file) {
+            var ext = getExt(file.name);
 
-          var ext = getExt(file.name);
-
-          if (ext && formats.includes(ext)) {
-            var url = URL.createObjectURL(file);
-            player.playbackRateRemove();
-            player.aspectRatioRemove();
-            template.$video.src = url;
-            sleep(100).then(function () {
-              player.seek(0);
-            });
-            option.url = url;
-            art.emit('switch', url);
-            notice.show(i18n.get('Load local video successfully'));
-          } else {
-            var tip = "".concat(i18n.get('Only file types are supported'), ": ").concat(formats.toString());
-            notice.show(tip, true, 3000);
-            console.warn(tip);
+            if (ext && formats.includes(ext)) {
+              var url = URL.createObjectURL(file);
+              player.playbackRateRemove();
+              player.aspectRatioRemove();
+              template.$video.src = url;
+              sleep(100).then(function () {
+                player.seek(0);
+              });
+              option.url = url;
+              art.emit('switch', url);
+              notice.show(i18n.get('Load local video successfully'));
+            } else {
+              var tip = "".concat(i18n.get('Only file types are supported'), ": ").concat(formats.toString());
+              notice.show(tip, true, 3000);
+              console.warn(tip);
+            }
           }
         });
       }
