@@ -11,19 +11,21 @@
 
 ## Features
 
-* Support `vtt` and `srt` subtitles
-* Support video quality switching
-* Support for custom `control`, `layer`, `contextmenu`, `setting`
-* Support `playback rate`, `aspect ratio`, `flip`, `window fullscreen` or `web fullscreen` adjustment
-* Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`
-* Support chrome native picture-in-picture mode, or custom picture-in-picture mode
-* Support `thumbnails` and `highlight` in the progress bar
-* Support to maintain the original video ratio, adaptive size
-* Support rich custom event monitoring, easy to expand
-* Support for internationalization of controls
-* Support for custom plugins
-* Support `screenshot`
-* And more...
+-   Support `vtt` and `srt` subtitles
+-   Support video quality switching
+-   Support for custom `control`, `layer`, `contextmenu`, `setting`
+-   Support `playback rate`, `aspect ratio`, `flip`, `window fullscreen` or `web fullscreen` adjustment
+-   Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`
+-   Support chrome native picture-in-picture mode, or custom picture-in-picture mode
+-   Support `thumbnails` and `highlight` in the progress bar
+-   Support to maintain the original video ratio, adaptive size
+-   Support rich custom event monitoring, easy to expand
+-   Support for internationalization of controls
+-   Support for custom plugins
+-   Support local video preview
+-   Support subtitle time offset
+-   Support `screenshot`
+-   And more...
 
 ## Demo
 
@@ -80,10 +82,9 @@ var art = new Artplayer({
 
 ## Ecosystem
 
-| Project                                                                                                          | Description                   |
-| ---------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)    | Danmu plugin for ArtPlayer    |
-| [artplayer-plugin-subtitle](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-subtitle) | Subtitle plugin for ArtPlayer |
+| Project                                                                                                       | Description                |
+| ------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu) | Danmu plugin for ArtPlayer |
 
 ## QQ Group
 
