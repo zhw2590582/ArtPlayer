@@ -1,5 +1,7 @@
+const path = require('path');
 const inquirer = require('inquirer');
 const rollup = require('rollup');
+const del = require('del');
 const logger = require('./logger');
 const projects = require('./getProjects')();
 const creatRollupConfig = require('./creatRollupConfig');
@@ -27,13 +29,17 @@ if (isBuildAll) {
         bundles.push(build(projectPath));
     });
 
-    Promise.all(bundles)
-        .then(() => {
-            logger.success('----finished building all packages----');
-        })
-        .catch(err => {
-            logger.fatal(err);
-        });
+    const dist = path.join(process.cwd(), 'dist');
+    del(dist).then(() => {
+        logger.success(`----Delete directory successfully: ${dist}----`);
+        Promise.all(bundles)
+            .then(() => {
+                logger.success('----finished building all packages----');
+            })
+            .catch(err => {
+                logger.fatal(err);
+            });
+    });
 } else {
     inquirer
         .prompt([
