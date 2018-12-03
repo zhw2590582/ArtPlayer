@@ -19,6 +19,8 @@
     console.log(this);
   };
 
+  window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
+
   exports.default = ArtplayerToolThumbnail;
 
   Object.defineProperty(exports, '__esModule', { value: true });

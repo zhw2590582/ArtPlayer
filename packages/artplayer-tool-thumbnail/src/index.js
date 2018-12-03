@@ -1,8 +1,11 @@
 import './index.scss';
 
-export default class ArtplayerToolThumbnail {
+class ArtplayerToolThumbnail {
     constructor(el) {
         this.el = el;
         console.log(this);
     }
 }
+
+window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
+export default ArtplayerToolThumbnail;

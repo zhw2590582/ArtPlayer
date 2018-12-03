@@ -1,0 +1,1 @@
+var thumbnail = new ArtplayerToolThumbnail('.artplayer-tool-thumbnail');
