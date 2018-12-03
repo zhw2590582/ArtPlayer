@@ -12,8 +12,7 @@ const svgo = require('rollup-plugin-svgo');
 const { uglify } = require('rollup-plugin-uglify');
 const copyAfterBuild = require('./copyAfterBuild');
 
-function creatRollupConfig(target) {
-    const projectPath = path.join(process.cwd(), 'packages', target);
+module.exports = function creatRollupConfig(projectPath) {
     const packageJson = JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'), 'utf-8'));
     const { version, homepage, name } = packageJson;
     const isProd = process.env.NODE_ENV === 'production';
@@ -67,12 +66,11 @@ function creatRollupConfig(target) {
                         preamble: banner,
                     },
                 }),
-            isProd && copyAfterBuild({
-                from: path.join(projectPath, 'dist/*'),
-                to: path.join(process.cwd(), 'docs/compiled'),
-            }),
+            isProd &&
+                copyAfterBuild({
+                    from: path.join(projectPath, 'dist/*'),
+                    to: path.join(process.cwd(), 'dist'),
+                }),
         ],
     };
-}
-
-module.exports = creatRollupConfig(process.env.TARGET);
+};

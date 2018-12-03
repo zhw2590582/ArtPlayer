@@ -3,7 +3,7 @@
         <meta charset="utf-8" />
         <title>Mocha Tests</title>
         <link href="https://unpkg.com/mocha@5.2.0/mocha.css" rel="stylesheet" />
-        <link href="../uncompiled/artplayer.css" rel="stylesheet" />
+        <link href="../dist/artplayer.css" rel="stylesheet" />
         <style>
             .artplayer-app {
                 width: 400px;
@@ -23,7 +23,7 @@
             window.mocha.setup('bdd');
             window.expect = window.chai.expect;
         </script>
-        <script src="../compiled/artplayer.js"></script>
+        <script src="../dist/artplayer.js"></script>
         <script src="./index.test.js"></script>
         <script>
             mocha.checkLeaks();
