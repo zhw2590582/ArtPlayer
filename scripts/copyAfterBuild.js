@@ -1,17 +1,18 @@
 const cpy = require('cpy');
+const logger = require('./logger');
 
 module.exports = (opts = {}) => ({
     name: 'copyAfterBuild',
     generateBundle(outputOptions, bundle, isWrite) {
         if (!isWrite) {
-            throw new Error('copyAfterBuild currently only works with bundles that are written to disk');
+            logger.fatal('copyAfterBuild currently only works with bundles that are written to disk');
         }
 
         if (opts.from && opts.to) {
             cpy(opts.from, opts.to).then(() => {
-                console.log('File copy succeeded!');
+                logger.success(`Successfully copied to: ${opts.to}`);
             }).catch(() => {
-                throw new Error('File copy failed!');
+                logger.fatal('File copy failed!');
             });
         }
     },

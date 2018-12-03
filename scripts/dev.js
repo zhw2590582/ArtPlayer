@@ -49,3 +49,5 @@ inquirer
     .catch(err => {
         logger.fatal(err);
     });
+
+module.exports = develop;    

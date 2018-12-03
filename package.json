@@ -7,7 +7,8 @@
     "publish": "node ./node_modules/.bin/lerna publish",
     "dev": "node ./node_modules/.bin/cross-env NODE_ENV=development node ./scripts/dev.js",
     "build": "node ./node_modules/.bin/cross-env NODE_ENV=production node ./scripts/build.js",
-    "test": "node ./node_modules/.bin/mocha-chrome ./docs/test/index.html --mocha '{\"ui\":\"bdd\"}'",
+    "build:all": "npm run build all",
+    "test": "node ./node_modules/.bin/mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "node ./node_modules/.bin/eslint packages/*/src"
   },
   "repository": {

@@ -69,7 +69,7 @@ module.exports = function creatRollupConfig(projectPath) {
             isProd &&
                 copyAfterBuild({
                     from: path.join(projectPath, 'dist/*'),
-                    to: path.join(process.cwd(), 'docs/compiled'),
+                    to: path.join(process.cwd(), 'dist'),
                 }),
         ],
     };
