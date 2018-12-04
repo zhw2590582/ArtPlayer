@@ -74,6 +74,18 @@
     }
   }
 
+  function runPromisesInSeries(ps) {
+    return ps.reduce(function (p, next) {
+      return p.then(next);
+    }, Promise.resolve());
+  }
+
+  function sleep(ms) {
+    return new Promise(function (resolve) {
+      return setTimeout(resolve, ms);
+    });
+  }
+
   var ArtplayerToolThumbnail =
   /*#__PURE__*/
   function () {
@@ -96,13 +108,20 @@
         errorHandle(typeof option.callbackThumbnailUrl === 'function', 'This callbackThumbnailUrl is not a function');
       }
 
-      this.option = option;
-      this.init();
+      this.option = objectSpread({}, ArtplayerToolThumbnail.DEFAULTS, option);
+      this.getVideoUrl();
     }
 
     createClass(ArtplayerToolThumbnail, [{
-      key: "init",
-      value: function init() {
+      key: "mergeOption",
+      value: function mergeOption() {
+        var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        this.option = objectSpread({}, this.option, option);
+        return this.option;
+      }
+    }, {
+      key: "getVideoUrl",
+      value: function getVideoUrl() {
         var _this = this;
 
         var fileType = ['video/mp4', 'video/ogg', 'video/webm'];
@@ -121,10 +140,84 @@
         });
       }
     }, {
-      key: "setup",
-      value: function setup() {
+      key: "getThumbnailUrl",
+      value: function getThumbnailUrl() {
+        var _this2 = this;
+
         var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        this.option = objectSpread({}, this.option, option);
+        this.mergeOption(option);
+        var _this$option = this.option,
+            number = _this$option.number,
+            width = _this$option.width,
+            height = _this$option.height,
+            column = _this$option.column,
+            videoElement = _this$option.videoElement,
+            callbackDone = _this$option.callbackDone;
+        var duration = videoElement.duration;
+        var timeGap = duration / number;
+        var timePoints = [timeGap];
+
+        while (timePoints.length < number) {
+          var last = timePoints[timePoints.length - 1];
+          timePoints.push(last + timeGap);
+        }
+
+        var screenshotDate = timePoints.map(function (item, index) {
+          return {
+            time: item - timeGap / 2,
+            x: index % column * width,
+            y: Math.floor(index / column) * height
+          };
+        });
+        var canvas = document.createElement('canvas');
+        canvas.width = width * column;
+        canvas.height = Math.ceil(number / column) * height;
+        var promiseList = screenshotDate.map(function (item) {
+          return _this2.getScreenshot(canvas, item);
+        });
+        runPromisesInSeries(promiseList).then(function () {
+          var thumbnailUrl = canvas.toDataURL('image/png');
+          _this2.thumbnailUrl = thumbnailUrl;
+
+          if (callbackDone) {
+            callbackDone(_this2.videoUrl, thumbnailUrl);
+          }
+        });
+      }
+    }, {
+      key: "getScreenshot",
+      value: function getScreenshot(canvas, item) {
+        var _this3 = this;
+
+        return function () {
+          var context2D = canvas.getContext('2d');
+          var _this3$option = _this3.option,
+              width = _this3$option.width,
+              height = _this3$option.height,
+              videoElement = _this3$option.videoElement,
+              delay = _this3$option.delay,
+              callbackThumbnailUrl = _this3$option.callbackThumbnailUrl;
+          videoElement.currentTime = item.time;
+          return sleep(delay).then(function () {
+            context2D.drawImage(videoElement, item.x, item.y, width, height);
+            var thumbnailUrl = canvas.toDataURL('image/png');
+
+            if (callbackThumbnailUrl) {
+              callbackThumbnailUrl(thumbnailUrl);
+            }
+          });
+        };
+      }
+    }], [{
+      key: "DEFAULTS",
+      get: function get() {
+        return {
+          delay: 300,
+          number: 60,
+          width: 160,
+          height: 90,
+          column: 10
+        };
       }
     }]);
 
