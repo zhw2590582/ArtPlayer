@@ -1,5 +1,7 @@
 /docs
 /dist
+/test
+/scripts
 /node_modules
 /packages/**/node_modules
 /packages/**/dist
