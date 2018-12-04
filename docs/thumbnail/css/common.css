@@ -1,0 +1,147 @@
+html, body {
+    height: 100%;
+}
+
+::-webkit-input-placeholder {
+    color:#dadada;
+}
+:-moz-placeholder {
+    color:#dadada;
+}
+::-moz-placeholder {
+    color:#dadada;
+}
+:-ms-input-placeholder {
+    color:#dadada;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    font-size: 14px;
+    color: #97a8be;
+}
+
+.left-part {
+    width: 40%;
+    flex-direction: column;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.left-part .upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    border: 2px dashed #d9d9d9;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.left-part .upload .file {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    outline: none;
+    opacity: 0;
+}
+
+.left-part .artplayer {
+    display: none;
+    height: 300px;
+    margin-bottom: 10px;
+}
+
+.left-part .result {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.left-part .result .item {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 20px;
+}
+
+.left-part .result .item .name{
+    width: 50px;
+}
+
+.left-part .setup {
+    margin-bottom: 10px;
+}
+
+.left-part .setup .item {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.left-part .setup .item .name{
+    width: 50px;
+}
+
+.left-part .setup .item .input {
+    height: 30px;
+    width: 200px;
+    border-radius: 3px;
+    outline: none;
+    color: #687079;
+    border: 1px solid #d9d9d9;
+    padding: 0 10px;
+}
+
+.left-part .btns {
+    display: flex;
+}
+
+.left-part .btns .btn {
+    width: 120px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-radius: 3px;
+    margin-right: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.left-part .btns .btn.reset {
+    background: #97a8be;
+}
+
+.left-part .btns .btn.download {
+    background: #3ca5ea;
+}
+
+.left-part .btns .btn:hover {
+    opacity: .8;
+}
+
+.rigth-part {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.rigth-part .img {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #d9d9d9;
+    background-color: #f5f5f5;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}

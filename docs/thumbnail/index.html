@@ -17,7 +17,48 @@
 
 <body>
     <div class="container">
-        <div class="artplayer-tool-thumbnail"></div>
+        <div class="left-part">
+            <div class="upload">
+                点击上传视频文件, 支持格式：mp4、ogg、webm
+                <input class="file" type="file">
+            </div>
+            <div class="artplayer"></div>
+            <div class="result">
+                <div class="item">
+                    <div class="name">长宽：</div>
+                    <span class="aspectRatio">0 x 0</span>
+                </div>
+                <div class="item">
+                    <div class="name">时长：</div>
+                    <span class="duration">0s</span>
+                </div>
+            </div>
+            <div class="setup">
+                <div class="item">
+                    <div class="name">数量：</div>
+                    <input class="input number" type="number" min="10" max="100" placeholder="10 - 100" value="100">
+                </div>
+                <div class="item">
+                    <div class="name">宽度：</div>
+                    <input class="input width" type="number" min="10" max="100" placeholder="100 - 500" value="100">
+                </div>
+                <div class="item">
+                    <div class="name">高度：</div>
+                    <input class="input height" type="number" min="10" max="100" placeholder="100 - 500" value="100">
+                </div>
+                <div class="item">
+                    <div class="name">纵数：</div>
+                    <input class="input column" type="number" min="10" max="100" placeholder="10 - 100" value="10">
+                </div>
+            </div>
+            <div class="btns">
+                <div class="btn reset">重置</div>
+                <div class="btn download">下载</div>
+            </div>
+        </div>
+        <div class="rigth-part">
+            <div class="img"></div>
+        </div>
     </div>
     <script src="../uncompiled/artplayer.js"></script>
     <script src="../uncompiled/artplayer-tool-thumbnail.js"></script>
