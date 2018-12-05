@@ -23,10 +23,10 @@ function develop(projectPath) {
                 logger.success('finished building all bundles');
                 break;
             case 'ERROR':
-                logger.fatal(`error: ${event.error}`);
+                logger.warn(`error: ${event.error}`);
                 break;
             case 'FATAL':
-                logger.fatal(`fatal: ${event.error}`);
+                logger.warn(`fatal: ${event.error}`);
                 break;
             default:
                 logger.warn(`unknown event: ${event.code}`);

@@ -4,44 +4,6 @@
   (factory((global['artplayer-tool-thumbnail'] = {})));
 }(this, (function (exports) { 'use strict';
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  var defineProperty = _defineProperty;
-
-  function _objectSpread(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
-
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
-      }
-
-      ownKeys.forEach(function (key) {
-        defineProperty(target, key, source[key]);
-      });
-    }
-
-    return target;
-  }
-
-  var objectSpread = _objectSpread;
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -68,92 +30,295 @@
 
   var createClass = _createClass;
 
-  function errorHandle(condition, msg) {
-    if (!condition) {
-      throw new Error(msg);
-    }
+  function createCommonjsModule(fn, module) {
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
-  function runPromisesInSeries(ps) {
-    return ps.reduce(function (p, next) {
-      return p.then(next);
-    }, Promise.resolve());
+  var _typeof_1 = createCommonjsModule(function (module) {
+  function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+  function _typeof(obj) {
+    if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      module.exports = _typeof = function _typeof(obj) {
+        return _typeof2(obj);
+      };
+    } else {
+      module.exports = _typeof = function _typeof(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+      };
+    }
+
+    return _typeof(obj);
   }
+
+  module.exports = _typeof;
+  });
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  var assertThisInitialized = _assertThisInitialized;
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return assertThisInitialized(self);
+  }
+
+  var possibleConstructorReturn = _possibleConstructorReturn;
+
+  var getPrototypeOf = createCommonjsModule(function (module) {
+  function _getPrototypeOf(o) {
+    module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  module.exports = _getPrototypeOf;
+  });
+
+  var setPrototypeOf = createCommonjsModule(function (module) {
+  function _setPrototypeOf(o, p) {
+    module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  module.exports = _setPrototypeOf;
+  });
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) setPrototypeOf(subClass, superClass);
+  }
+
+  var inherits = _inherits;
+
+  function E () {
+    // Keep this empty so it's easier to inherit from
+    // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
+  }
+
+  E.prototype = {
+    on: function (name, callback, ctx) {
+      var e = this.e || (this.e = {});
+
+      (e[name] || (e[name] = [])).push({
+        fn: callback,
+        ctx: ctx
+      });
+
+      return this;
+    },
+
+    once: function (name, callback, ctx) {
+      var self = this;
+      function listener () {
+        self.off(name, listener);
+        callback.apply(ctx, arguments);
+      }
+      listener._ = callback;
+      return this.on(name, listener, ctx);
+    },
+
+    emit: function (name) {
+      var data = [].slice.call(arguments, 1);
+      var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+      var i = 0;
+      var len = evtArr.length;
+
+      for (i; i < len; i++) {
+        evtArr[i].fn.apply(evtArr[i].ctx, data);
+      }
+
+      return this;
+    },
+
+    off: function (name, callback) {
+      var e = this.e || (this.e = {});
+      var evts = e[name];
+      var liveEvents = [];
+
+      if (evts && callback) {
+        for (var i = 0, len = evts.length; i < len; i++) {
+          if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+            liveEvents.push(evts[i]);
+        }
+      }
+
+      // Remove event from queue to prevent memory leak
+      // Suggested by https://github.com/lazd
+      // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
+
+      (liveEvents.length)
+        ? e[name] = liveEvents
+        : delete e[name];
+
+      return this;
+    }
+  };
+
+  var tinyEmitter = E;
 
   function sleep(ms) {
     return new Promise(function (resolve) {
       return setTimeout(resolve, ms);
     });
   }
+  function runPromisesInSeries(ps) {
+    return ps.reduce(function (p, next) {
+      return p.then(next);
+    }, Promise.resolve());
+  }
+  function getFileName(name) {
+    var nameArray = name.split('.');
+    nameArray.pop();
+    return nameArray.join('.');
+  }
+  function clamp(num, a, b) {
+    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+  }
 
   var ArtplayerToolThumbnail =
   /*#__PURE__*/
-  function () {
-    function ArtplayerToolThumbnail(option) {
+  function (_Emitter) {
+    inherits(ArtplayerToolThumbnail, _Emitter);
+
+    function ArtplayerToolThumbnail() {
+      var _this;
+
+      var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
       classCallCheck(this, ArtplayerToolThumbnail);
 
-      if (option.fileInput) {
-        errorHandle(option.fileInput.tagName === 'INPUT' && option.fileInput.type === 'file', 'This fileInput is not a file input');
-      }
+      _this = possibleConstructorReturn(this, getPrototypeOf(ArtplayerToolThumbnail).call(this));
+      _this.processing = false;
+      _this.option = {};
 
-      if (option.videoElement) {
-        errorHandle(option.fileInput.tagName === 'VIDEO', 'This videoElement is not a video element');
-      }
+      _this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option));
 
-      if (option.callbackVideoUrl) {
-        errorHandle(typeof option.callbackVideoUrl === 'function', 'This callbackVideoUrl is not a function');
-      }
+      _this.video = ArtplayerToolThumbnail.creatVideo();
+      _this.inputChange = _this.inputChange.bind(assertThisInitialized(assertThisInitialized(_this)));
 
-      if (option.callbackThumbnailUrl) {
-        errorHandle(typeof option.callbackThumbnailUrl === 'function', 'This callbackThumbnailUrl is not a function');
-      }
+      _this.option.fileInput.addEventListener('change', _this.inputChange);
 
-      this.option = objectSpread({}, ArtplayerToolThumbnail.DEFAULTS, option);
-      this.getVideoUrl();
+      return _this;
     }
 
     createClass(ArtplayerToolThumbnail, [{
-      key: "mergeOption",
-      value: function mergeOption() {
-        var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        this.option = objectSpread({}, this.option, option);
-        return this.option;
-      }
-    }, {
-      key: "getVideoUrl",
-      value: function getVideoUrl() {
-        var _this = this;
-
-        var fileType = ['video/mp4', 'video/ogg', 'video/webm'];
-        this.option.fileInput.addEventListener('change', function () {
-          var file = _this.option.fileInput.files[0];
-
-          if (file) {
-            errorHandle(fileType.includes(file.type), "Only file types are supported: ".concat(fileType.toString()));
-            var videoUrl = URL.createObjectURL(file);
-            _this.videoUrl = videoUrl;
-
-            if (_this.option.callbackVideoUrl) {
-              _this.option.callbackVideoUrl(videoUrl);
-            }
-          }
-        });
-      }
-    }, {
-      key: "getThumbnailUrl",
-      value: function getThumbnailUrl() {
+      key: "setup",
+      value: function setup() {
         var _this2 = this;
 
         var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        this.mergeOption(option);
+        this.option = Object.assign({}, this.option, option);
         var _this$option = this.option,
+            fileInput = _this$option.fileInput,
+            delay = _this$option.delay,
             number = _this$option.number,
             width = _this$option.width,
             height = _this$option.height,
-            column = _this$option.column,
-            videoElement = _this$option.videoElement,
-            callbackDone = _this$option.callbackDone;
-        var duration = videoElement.duration;
+            column = _this$option.column;
+        this.errorHandle(fileInput.tagName === 'INPUT' && fileInput.type === 'file', 'The \'fileInput\' is not a usable file input like: <input type="file">');
+        ['delay', 'number', 'width', 'height', 'column'].forEach(function (item) {
+          _this2.errorHandle(typeof _this2.option[item] === 'number', "The '".concat(item, "' is not a number"));
+        });
+        this.option.delay = clamp(delay, 100, 1000);
+        this.option.number = clamp(number, 10, 100);
+        this.option.width = clamp(width, 100, 500);
+        this.option.height = clamp(height, 100, 500);
+        this.option.column = clamp(column, 10, 100);
+        return this;
+      }
+    }, {
+      key: "inputChange",
+      value: function inputChange() {
+        var _this3 = this;
+
+        var delay = this.option.delay;
+        var fileType = ['video/mp4', 'audio/ogg', 'video/webm'];
+        var file = this.option.fileInput.files[0];
+
+        if (file) {
+          this.errorHandle(fileType.includes(file.type), "Only file types are supported: ".concat(fileType.toString(), ", but got ").concat(file.type));
+          var videoUrl = URL.createObjectURL(file);
+          this.videoUrl = videoUrl;
+          this.file = file;
+          this.emit('file', this.file);
+          this.video.src = videoUrl;
+          sleep(delay).then(function () {
+            _this3.emit('video', _this3.video);
+          });
+        }
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        var _this4 = this;
+
+        this.errorHandle(this.file && this.video, 'Please select the video file first');
+        this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
+        var _this$option2 = this.option,
+            width = _this$option2.width,
+            height = _this$option2.height,
+            number = _this$option2.number,
+            delay = _this$option2.delay;
+        var screenshotDate = this.creatScreenshotDate();
+        var canvas = this.creatCanvas();
+        var context2D = canvas.getContext('2d');
+        this.emit('canvas', canvas);
+        var promiseList = screenshotDate.map(function (item, index) {
+          return function () {
+            _this4.video.currentTime = item.time;
+            return sleep(delay).then(function () {
+              context2D.drawImage(_this4.video, item.x, item.y, width, height);
+              canvas.toBlob(function (blob) {
+                _this4.thumbnailUrl = URL.createObjectURL(blob);
+
+                _this4.emit('update', (index + 1) / number, _this4.thumbnailUrl);
+              });
+            });
+          };
+        });
+        this.processing = true;
+        runPromisesInSeries(promiseList).then(function () {
+          sleep(delay).then(function () {
+            _this4.processing = false;
+
+            _this4.emit('done');
+          });
+        });
+      }
+    }, {
+      key: "creatScreenshotDate",
+      value: function creatScreenshotDate() {
+        var _this$option3 = this.option,
+            number = _this$option3.number,
+            width = _this$option3.width,
+            height = _this$option3.height,
+            column = _this$option3.column;
+        var duration = this.video.duration;
         var timeGap = duration / number;
         var timePoints = [timeGap];
 
@@ -162,53 +327,68 @@
           timePoints.push(last + timeGap);
         }
 
-        var screenshotDate = timePoints.map(function (item, index) {
+        return timePoints.map(function (item, index) {
           return {
             time: item - timeGap / 2,
             x: index % column * width,
             y: Math.floor(index / column) * height
           };
         });
-        var canvas = document.createElement('canvas');
-        canvas.width = width * column;
-        canvas.height = Math.ceil(number / column) * height;
-        var promiseList = screenshotDate.map(function (item) {
-          return _this2.getScreenshot(canvas, item);
-        });
-        runPromisesInSeries(promiseList).then(function () {
-          var thumbnailUrl = canvas.toDataURL('image/png');
-          _this2.thumbnailUrl = thumbnailUrl;
-
-          if (callbackDone) {
-            callbackDone(_this2.videoUrl, thumbnailUrl);
-          }
-        });
       }
     }, {
-      key: "getScreenshot",
-      value: function getScreenshot(canvas, item) {
-        var _this3 = this;
-
-        return function () {
-          var context2D = canvas.getContext('2d');
-          var _this3$option = _this3.option,
-              width = _this3$option.width,
-              height = _this3$option.height,
-              videoElement = _this3$option.videoElement,
-              delay = _this3$option.delay,
-              callbackThumbnailUrl = _this3$option.callbackThumbnailUrl;
-          videoElement.currentTime = item.time;
-          return sleep(delay).then(function () {
-            context2D.drawImage(videoElement, item.x, item.y, width, height);
-            var thumbnailUrl = canvas.toDataURL('image/png');
-
-            if (callbackThumbnailUrl) {
-              callbackThumbnailUrl(thumbnailUrl);
-            }
-          });
-        };
+      key: "creatCanvas",
+      value: function creatCanvas() {
+        var _this$option4 = this.option,
+            number = _this$option4.number,
+            width = _this$option4.width,
+            height = _this$option4.height,
+            column = _this$option4.column;
+        var canvas = document.createElement('canvas');
+        var context2D = canvas.getContext('2d');
+        canvas.width = width * column;
+        canvas.height = Math.ceil(number / column) * height + 30;
+        context2D.fillStyle = 'black';
+        context2D.fillRect(0, 0, canvas.width, canvas.height);
+        context2D.font = '14px Georgia';
+        context2D.fillStyle = '#fff';
+        context2D.fillText("From: https://artplayer.org/thumbnail, Number: ".concat(number, ", Width: ").concat(width, ", Height: ").concat(height, ", Column: ").concat(column), 10, canvas.height - 12);
+        return canvas;
+      }
+    }, {
+      key: "download",
+      value: function download() {
+        this.errorHandle(this.file && this.thumbnailUrl, 'Download does not seem to be ready');
+        this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
+        var elink = document.createElement('a');
+        var name = "".concat(getFileName(this.file.name), ".png");
+        elink.download = name;
+        elink.href = this.thumbnailUrl;
+        document.body.appendChild(elink);
+        elink.click();
+        document.body.removeChild(elink);
+        this.emit('download', name);
+      }
+    }, {
+      key: "errorHandle",
+      value: function errorHandle(condition, msg) {
+        if (!condition) {
+          this.emit('error', msg);
+          throw new Error(msg);
+        }
       }
     }], [{
+      key: "creatVideo",
+      value: function creatVideo() {
+        var video = document.createElement('video');
+        video.style.position = 'absolute';
+        video.style.top = '-9999px';
+        video.style.left = '-9999px';
+        video.muted = true;
+        video.controls = true;
+        document.body.appendChild(video);
+        return video;
+      }
+    }, {
       key: "DEFAULTS",
       get: function get() {
         return {
@@ -222,7 +402,7 @@
     }]);
 
     return ArtplayerToolThumbnail;
-  }();
+  }(tinyEmitter);
 
   window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
 

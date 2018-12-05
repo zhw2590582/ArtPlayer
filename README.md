@@ -82,10 +82,10 @@ var art = new Artplayer({
 
 ## Ecosystem
 
-| Project                                                                                                           | Description                  | Demo   |
-| ----------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------ |
-| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)     | Danmu plugin for ArtPlayer   | `None` |
-| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail) | Thumbnail tool for ArtPlayer | `None` |
+| Project                                                                                                           | Description                  | Demo                                     |
+| ----------------------------------------------------------------------------------------------------------------- | ---------------------------- | ---------------------------------------- |
+| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)     | Danmu plugin for ArtPlayer   | `WIP`                                   |
+| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail) | Thumbnail tool for ArtPlayer | [demo](https://artplayer.org/thumbnail/) |
 
 ## QQ Group
 

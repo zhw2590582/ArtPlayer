@@ -11,55 +11,52 @@
     <link rel="shortcut icon" href="./img/favicon.ico">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/consola.css">
     <link rel="stylesheet" href="../uncompiled/artplayer.css">    
-    <link rel="stylesheet" href="../uncompiled/artplayer-tool-thumbnail.css">    
 </head>
 
 <body>
     <div class="container">
         <div class="left-part">
             <div class="upload">
-                点击上传视频文件, 支持格式：mp4、ogg、webm
+                Click to upload video file, support format: mp4, ogg, webm
                 <input class="file" type="file">
             </div>
             <div class="artplayer"></div>
-            <div class="result">
-                <div class="item">
-                    <div class="name">长宽：</div>
-                    <span class="aspectRatio">0 x 0</span>
-                </div>
-                <div class="item">
-                    <div class="name">时长：</div>
-                    <span class="duration">0s</span>
-                </div>
-            </div>
             <div class="setup">
                 <div class="item">
-                    <div class="name">数量：</div>
-                    <input class="input number" type="number" min="10" max="100" placeholder="10 - 100" value="100">
+                    <div class="name">Delay：</div>
+                    <input class="input delay" type="number" min="100" max="1000" placeholder="100 - 1000" value="300">
                 </div>
                 <div class="item">
-                    <div class="name">宽度：</div>
-                    <input class="input width" type="number" min="10" max="100" placeholder="100 - 500" value="100">
+                    <div class="name">Number：</div>
+                    <input class="input number" type="number" min="10" max="100" placeholder="10 - 100" value="60">
                 </div>
                 <div class="item">
-                    <div class="name">高度：</div>
-                    <input class="input height" type="number" min="10" max="100" placeholder="100 - 500" value="100">
+                    <div class="name">Width：</div>
+                    <input class="input width" type="number" min="100" max="500" placeholder="100 - 500" value="160">
                 </div>
                 <div class="item">
-                    <div class="name">纵数：</div>
+                    <div class="name">Height：</div>
+                    <input class="input height" type="number" min="100" max="500" placeholder="100 - 500" value="90">
+                </div>
+                <div class="item">
+                    <div class="name">Column：</div>
                     <input class="input column" type="number" min="10" max="100" placeholder="10 - 100" value="10">
                 </div>
             </div>
             <div class="btns">
-                <div class="btn reset">重置</div>
-                <div class="btn download">下载</div>
+                <div class="btn reset">Reset</div>
+                <div class="btn download">Download</div>
+                <div class="btn create">Create</div>
             </div>
         </div>
         <div class="rigth-part">
-            <div class="img"></div>
+            <div class="preview"></div>
+            <div class="console"></div>
         </div>
     </div>
+    <script src="./js/consola.js"></script>
     <script src="../uncompiled/artplayer.js"></script>
     <script src="../uncompiled/artplayer-tool-thumbnail.js"></script>
     <script src="./js/common.js"></script>

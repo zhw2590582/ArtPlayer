@@ -1,59 +1,102 @@
+'use strict';
+
 (function() {
-    var $img = document.querySelector('.img');
+    var $preview = document.querySelector('.preview');
     var $upload = document.querySelector('.upload');
     var $file = document.querySelector('.file');
+    var $reset = document.querySelector('.reset');
+    var $create = document.querySelector('.create');
+    var $download = document.querySelector('.download');
     var $artplayer = document.querySelector('.artplayer');
-    var $aspectRatio = document.querySelector('.aspectRatio');
-    var $duration = document.querySelector('.duration');
+    var $delay = document.querySelector('.delay');
     var $number = document.querySelector('.number');
     var $width = document.querySelector('.width');
     var $height = document.querySelector('.height');
     var $column = document.querySelector('.column');
 
-    var thumbnail = new ArtplayerToolThumbnail({
-        fileInput: $file,
-        callbackVideoUrl: function(url) {
-            $upload.style.display = 'none';
-            $artplayer.style.display = 'block';
-            restartArtplayer();
-        },
-        callbackThumbnailUrl: function(url) {
-            $img.style.backgroundImage = `url(${url})`;
-        },
-        callbackDone: function(videoUrl, thumbnailUrl) {
-            restartArtplayer();
-        },
+    function getConfig() {
+        return {
+            delay: Number($delay.value),
+            number: Number($number.value),
+            width: Number($width.value),
+            height: Number($height.value),
+            column: Number($column.value),
+        };
+    }
+
+    consola.creat({
+        target: '.console',
+        size: '100%',
+        zIndex: 99,
     });
 
-    function restartArtplayer() {
+    console.info('Welcome to this tool, if you like it, consider star it, thank you.');
+    console.info('https://github.com/zhw2590582/ArtPlayer');
+
+    window.addEventListener('error', function(err) {
+        console.error(err.message);
+    });
+
+    var thumbnail = new ArtplayerToolThumbnail({
+        fileInput: $file,
+    });
+
+    $reset.addEventListener('click', function() {
+        window.location.reload();
+    });
+
+    $create.addEventListener('click', function() {
+        thumbnail.setup(getConfig()).start();
+    });
+
+    $download.addEventListener('click', function() {
+        thumbnail.download();
+    });
+
+    thumbnail.on('file', function(file) {
+        console.log('Read video successfully: ' + file.name);
+    });
+
+    thumbnail.on('video', function(video) {
+        console.log('Video size: ' + video.videoWidth + ' x ' + video.videoHeight);
+        console.log('Video duration: ' + video.duration + 's');
+        thumbnail.setup(getConfig()).start();
+    });
+
+    thumbnail.on('canvas', function(canvas) {
+        console.log('Build canvas successfully');
+        console.log('Canvas size: ' + canvas.width + ' x ' + canvas.height);
+    });
+
+    thumbnail.on('update', function(percentage, url) {
+        console.log('Processing: ' + Math.floor(percentage.toFixed(2) * 100) + '%');
+        $preview.style.backgroundImage = 'url(' + url + ')';
+    });
+
+    thumbnail.on('download', function(name) {
+        console.log('Start download preview: ' + name);
+    });
+
+    thumbnail.on('done', function() {
+        console.log('Build preview image complete');
+        $upload.style.display = 'none';
+        $artplayer.style.display = 'block';
+
         Artplayer.instances.forEach(function(art) {
             art.destroy(true);
         });
 
-        var option = {
+        new Artplayer({
             container: $artplayer,
             url: thumbnail.videoUrl,
-        };
-
-        if (thumbnail.thumbnailUrl) {
-            option.thumbnails = {
+            thumbnails: {
                 url: thumbnail.thumbnailUrl,
-            };
-        }
-
-        var art = new Artplayer(option);
-
-        art.on('firstCanplay', function() {
-            var $video = art.template.$video;
-            $aspectRatio.textContent = $video.videoWidth + ' x ' + $video.videoHeight;
-            $duration.textContent = $video.duration + 's';
-            thumbnail.mergeOption({
-                videoElement: $video,
-            });
-
-            if (!thumbnail.thumbnailUrl) {
-                thumbnail.getThumbnailUrl();
-            }
+                number: thumbnail.option.number,
+                width: thumbnail.option.width,
+                height: thumbnail.option.height,
+                column: thumbnail.option.column,
+            },
         });
-    }
+        console.log('Build player complete');
+    });
 })();

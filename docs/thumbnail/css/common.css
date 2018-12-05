@@ -90,7 +90,8 @@ html, body {
 }
 
 .left-part .setup .item .name{
-    width: 50px;
+    width: 65px;
+    text-align: right;
 }
 
 .left-part .setup .item .input {
@@ -122,6 +123,10 @@ html, body {
     background: #97a8be;
 }
 
+.left-part .btns .btn.create {
+    background: #3ca5ea;
+}
+
 .left-part .btns .btn.download {
     background: #3ca5ea;
 }
@@ -131,17 +136,29 @@ html, body {
 }
 
 .rigth-part {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-    padding: 20px;
-    box-sizing: border-box;
+    overflow: hidden;
 }
 
-.rigth-part .img {
+.rigth-part .preview {
     width: 100%;
-    height: 100%;
+    height: 70%;
     border: 2px dashed #d9d9d9;
     background-color: #f5f5f5;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+    box-sizing: border-box;
 }
+
+.rigth-part .preview canvas {
+    max-width: 100%;
+}
+
+.rigth-part .console {
+    position: relative;
+    height: 30%;
+  }
+  
