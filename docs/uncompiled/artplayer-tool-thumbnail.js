@@ -270,6 +270,8 @@
           sleep(delay).then(function () {
             _this3.emit('video', _this3.video);
           }).catch(function (err) {
+            _this3.emit('error', err.message);
+
             console.error(err);
           });
         }
@@ -309,14 +311,22 @@
         });
         this.processing = true;
         runPromisesInSeries(promiseList).then(function () {
-          sleep(delay * 2).then(function () {
+          return sleep(delay * 2).then(function () {
             _this4.processing = false;
 
             _this4.emit('done');
           }).catch(function (err) {
+            _this4.processing = false;
+
+            _this4.emit('error', err.message);
+
             console.error(err);
           });
         }).catch(function (err) {
+          _this4.processing = false;
+
+          _this4.emit('error', err.message);
+
           console.error(err);
         });
       }

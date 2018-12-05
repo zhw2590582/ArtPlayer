@@ -73,6 +73,7 @@ class ArtplayerToolThumbnail extends Emitter {
                     this.emit('video', this.video);
                 })
                 .catch(err => {
+                    this.emit('error', err.message);
                     console.error(err);
                 });
         }
@@ -104,17 +105,21 @@ class ArtplayerToolThumbnail extends Emitter {
         });
         this.processing = true;
         runPromisesInSeries(promiseList)
-            .then(() => {
+            .then(() =>
                 sleep(delay * 2)
                     .then(() => {
                         this.processing = false;
                         this.emit('done');
                     })
                     .catch(err => {
+                        this.processing = false;
+                        this.emit('error', err.message);
                         console.error(err);
-                    });
-            })
+                    }),
+            )
             .catch(err => {
+                this.processing = false;
+                this.emit('error', err.message);
                 console.error(err);
             });
     }
