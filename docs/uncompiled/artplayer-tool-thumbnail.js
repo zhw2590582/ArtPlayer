@@ -115,34 +115,30 @@
 
   var inherits = _inherits;
 
-  function E () {
-    // Keep this empty so it's easier to inherit from
+  function E() {// Keep this empty so it's easier to inherit from
     // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
   }
 
   E.prototype = {
-    on: function (name, callback, ctx) {
+    on: function on(name, callback, ctx) {
       var e = this.e || (this.e = {});
-
       (e[name] || (e[name] = [])).push({
         fn: callback,
         ctx: ctx
       });
-
       return this;
     },
-
-    once: function (name, callback, ctx) {
+    once: function once(name, callback, ctx) {
       var self = this;
-      function listener () {
+
+      function listener() {
         self.off(name, listener);
         callback.apply(ctx, arguments);
       }
       listener._ = callback;
       return this.on(name, listener, ctx);
     },
-
-    emit: function (name) {
+    emit: function emit(name) {
       var data = [].slice.call(arguments, 1);
       var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
       var i = 0;
@@ -154,31 +150,24 @@
 
       return this;
     },
-
-    off: function (name, callback) {
+    off: function off(name, callback) {
       var e = this.e || (this.e = {});
       var evts = e[name];
       var liveEvents = [];
 
       if (evts && callback) {
         for (var i = 0, len = evts.length; i < len; i++) {
-          if (evts[i].fn !== callback && evts[i].fn._ !== callback)
-            liveEvents.push(evts[i]);
+          if (evts[i].fn !== callback && evts[i].fn._ !== callback) liveEvents.push(evts[i]);
         }
-      }
-
-      // Remove event from queue to prevent memory leak
+      } // Remove event from queue to prevent memory leak
       // Suggested by https://github.com/lazd
       // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
 
-      (liveEvents.length)
-        ? e[name] = liveEvents
-        : delete e[name];
 
+      liveEvents.length ? e[name] = liveEvents : delete e[name];
       return this;
     }
   };
-
   var tinyEmitter = E;
 
   function sleep(ms) {
@@ -300,6 +289,10 @@
             return sleep(delay).then(function () {
               context2D.drawImage(_this4.video, item.x, item.y, width, height);
               canvas.toBlob(function (blob) {
+                if (_this4.thumbnailUrl) {
+                  URL.revokeObjectURL(_this4.thumbnailUrl);
+                }
+
                 _this4.thumbnailUrl = URL.createObjectURL(blob);
 
                 _this4.emit('update', _this4.thumbnailUrl, (index + 1) / number);
@@ -395,6 +388,22 @@
           this.emit('error', msg);
           throw new Error(msg);
         }
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.option.fileInput.removeEventListener('change', this.inputChange);
+        document.body.removeChild(this.video);
+
+        if (this.videoUrl) {
+          URL.revokeObjectURL(this.videoUrl);
+        }
+
+        if (this.thumbnailUrl) {
+          URL.revokeObjectURL(this.thumbnailUrl);
+        }
+
+        this.emit('destroy');
       }
     }], [{
       key: "creatVideo",

@@ -95,6 +95,9 @@ class ArtplayerToolThumbnail extends Emitter {
                 .then(() => {
                     context2D.drawImage(this.video, item.x, item.y, width, height);
                     canvas.toBlob(blob => {
+                        if (this.thumbnailUrl) {
+                            URL.revokeObjectURL(this.thumbnailUrl);
+                        }
                         this.thumbnailUrl = URL.createObjectURL(blob);
                         this.emit('update', this.thumbnailUrl, (index + 1) / number);
                     });
@@ -179,6 +182,18 @@ class ArtplayerToolThumbnail extends Emitter {
             this.emit('error', msg);
             throw new Error(msg);
         }
+    }
+
+    destroy() {
+        this.option.fileInput.removeEventListener('change', this.inputChange);
+        document.body.removeChild(this.video);
+        if (this.videoUrl) {
+            URL.revokeObjectURL(this.videoUrl);
+        }
+        if (this.thumbnailUrl) {
+            URL.revokeObjectURL(this.thumbnailUrl);
+        }
+        this.emit('destroy');
     }
 }
 
