@@ -5464,10 +5464,12 @@
   function i18nMix(i18n) {
     i18n.update({
       'zh-cn': {
-        'Subtitle offset time': '字幕偏移时间'
+        'Subtitle offset time': '字幕偏移时间',
+        'No subtitles found': '未发现字幕'
       },
       'zh-tw': {
-        'Subtitle offset time': '字幕偏移時間'
+        'Subtitle offset time': '字幕偏移時間',
+        'No subtitles found': '未發現字幕'
       }
     });
   }
@@ -5517,21 +5519,26 @@
     return {
       name: 'subtitle',
       offset: function offset(value) {
-        var cues = Array.from(template.$track.track.cues);
-        var time = clamp(value, -5, 5);
-        cues.forEach(function (cue, index) {
-          if (!cuesCache[index]) {
-            cuesCache[index] = {
-              startTime: cue.startTime,
-              endTime: cue.endTime
-            };
-          }
+        if (template.$track && template.$track.track) {
+          var cues = Array.from(template.$track.track.cues);
+          var time = clamp(value, -5, 5);
+          cues.forEach(function (cue, index) {
+            if (!cuesCache[index]) {
+              cuesCache[index] = {
+                startTime: cue.startTime,
+                endTime: cue.endTime
+              };
+            }
 
-          cue.startTime = cuesCache[index].startTime + time;
-          cue.endTime = cuesCache[index].endTime + time;
-        });
-        notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
-        art.emit('artplayerPluginSubtitle:set', value);
+            cue.startTime = cuesCache[index].startTime + time;
+            cue.endTime = cuesCache[index].endTime + time;
+          });
+          notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
+          art.emit('artplayerPluginSubtitle:set', value);
+        } else {
+          notice.show("".concat(i18n.get('No subtitles found')));
+          art.emit('artplayerPluginSubtitle:set', 0);
+        }
       }
     };
   }
