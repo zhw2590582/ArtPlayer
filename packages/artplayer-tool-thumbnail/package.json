@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
-  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme"
+  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
+  "dependencies": {
+    "tiny-emitter": "^2.0.2"
+  }
 }
