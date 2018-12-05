@@ -35,11 +35,11 @@ class ArtplayerToolThumbnail extends Emitter {
             this.errorHandle(typeof this.option[item] === 'number', `The '${item}' is not a number`);
         });
 
-        this.option.delay = clamp(delay, 100, 1000);
-        this.option.number = clamp(number, 10, 100);
-        this.option.width = clamp(width, 100, 500);
-        this.option.height = clamp(height, 100, 500);
-        this.option.column = clamp(column, 10, 100);
+        this.option.delay = clamp(delay, 10, 1000);
+        this.option.number = clamp(number, 10, 1000);
+        this.option.width = clamp(width, 10, 1000);
+        this.option.height = clamp(height, 10, 1000);
+        this.option.column = clamp(column, 1, 1000);
         return this;
     }
 
@@ -68,37 +68,55 @@ class ArtplayerToolThumbnail extends Emitter {
             this.file = file;
             this.emit('file', this.file);
             this.video.src = videoUrl;
-            sleep(delay).then(() => {
-                this.emit('video', this.video);
-            });
+            sleep(delay)
+                .then(() => {
+                    this.emit('video', this.video);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
         }
     }
 
     start() {
+        const { width, height, number, delay } = this.option;
+        this.density = number / this.video.duration;
         this.errorHandle(this.file && this.video, 'Please select the video file first');
         this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
-        const { width, height, number, delay } = this.option;
+        this.errorHandle(this.density <= 1, `The preview density cannot be greater than 1, but got ${this.density}`);
         const screenshotDate = this.creatScreenshotDate();
         const canvas = this.creatCanvas();
         const context2D = canvas.getContext('2d');
         this.emit('canvas', canvas);
         const promiseList = screenshotDate.map((item, index) => () => {
             this.video.currentTime = item.time;
-            return sleep(delay).then(() => {
-                context2D.drawImage(this.video, item.x, item.y, width, height);
-                canvas.toBlob(blob => {
-                    this.thumbnailUrl = URL.createObjectURL(blob);
-                    this.emit('update', (index + 1) / number, this.thumbnailUrl);
+            return sleep(delay)
+                .then(() => {
+                    context2D.drawImage(this.video, item.x, item.y, width, height);
+                    canvas.toBlob(blob => {
+                        this.thumbnailUrl = URL.createObjectURL(blob);
+                        this.emit('update', this.thumbnailUrl, (index + 1) / number);
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
                 });
-            });
         });
         this.processing = true;
-        runPromisesInSeries(promiseList).then(() => {
-            sleep(delay).then(() => {
-                this.processing = false;
-                this.emit('done');
+        runPromisesInSeries(promiseList)
+            .then(() => {
+                sleep(delay * 2)
+                    .then(() => {
+                        this.processing = false;
+                        this.emit('done');
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+            })
+            .catch(err => {
+                console.error(err);
             });
-        });
     }
 
     creatScreenshotDate() {
@@ -130,13 +148,16 @@ class ArtplayerToolThumbnail extends Emitter {
         context2D.fillText(
             `From: https://artplayer.org/thumbnail, Number: ${number}, Width: ${width}, Height: ${height}, Column: ${column}`,
             10,
-            canvas.height - 12,
+            canvas.height - 11,
         );
         return canvas;
     }
 
     download() {
-        this.errorHandle(this.file && this.thumbnailUrl, 'Download does not seem to be ready');
+        this.errorHandle(
+            this.file && this.thumbnailUrl,
+            'Download does not seem to be ready, please create preview first',
+        );
         this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
         const elink = document.createElement('a');
         const name = `${getFileName(this.file.name)}.png`;

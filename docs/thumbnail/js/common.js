@@ -66,9 +66,10 @@
     thumbnail.on('canvas', function(canvas) {
         console.log('Build canvas successfully');
         console.log('Canvas size: ' + canvas.width + ' x ' + canvas.height);
+        console.log('Preview density: ' + thumbnail.density + ' p/s');
     });
 
-    thumbnail.on('update', function(percentage, url) {
+    thumbnail.on('update', function(url, percentage) {
         console.log('Processing: ' + Math.floor(percentage.toFixed(2) * 100) + '%');
         $preview.style.backgroundImage = 'url(' + url + ')';
     });

@@ -244,11 +244,11 @@
         ['delay', 'number', 'width', 'height', 'column'].forEach(function (item) {
           _this2.errorHandle(typeof _this2.option[item] === 'number', "The '".concat(item, "' is not a number"));
         });
-        this.option.delay = clamp(delay, 100, 1000);
-        this.option.number = clamp(number, 10, 100);
-        this.option.width = clamp(width, 100, 500);
-        this.option.height = clamp(height, 100, 500);
-        this.option.column = clamp(column, 10, 100);
+        this.option.delay = clamp(delay, 10, 1000);
+        this.option.number = clamp(number, 10, 1000);
+        this.option.width = clamp(width, 10, 1000);
+        this.option.height = clamp(height, 10, 1000);
+        this.option.column = clamp(column, 1, 1000);
         return this;
       }
     }, {
@@ -269,6 +269,8 @@
           this.video.src = videoUrl;
           sleep(delay).then(function () {
             _this3.emit('video', _this3.video);
+          }).catch(function (err) {
+            console.error(err);
           });
         }
       }
@@ -277,13 +279,15 @@
       value: function start() {
         var _this4 = this;
 
-        this.errorHandle(this.file && this.video, 'Please select the video file first');
-        this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
         var _this$option2 = this.option,
             width = _this$option2.width,
             height = _this$option2.height,
             number = _this$option2.number,
             delay = _this$option2.delay;
+        this.density = number / this.video.duration;
+        this.errorHandle(this.file && this.video, 'Please select the video file first');
+        this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
+        this.errorHandle(this.density <= 1, "The preview density cannot be greater than 1, but got ".concat(this.density));
         var screenshotDate = this.creatScreenshotDate();
         var canvas = this.creatCanvas();
         var context2D = canvas.getContext('2d');
@@ -296,18 +300,24 @@
               canvas.toBlob(function (blob) {
                 _this4.thumbnailUrl = URL.createObjectURL(blob);
 
-                _this4.emit('update', (index + 1) / number, _this4.thumbnailUrl);
+                _this4.emit('update', _this4.thumbnailUrl, (index + 1) / number);
               });
+            }).catch(function (err) {
+              console.error(err);
             });
           };
         });
         this.processing = true;
         runPromisesInSeries(promiseList).then(function () {
-          sleep(delay).then(function () {
+          sleep(delay * 2).then(function () {
             _this4.processing = false;
 
             _this4.emit('done');
+          }).catch(function (err) {
+            console.error(err);
           });
+        }).catch(function (err) {
+          console.error(err);
         });
       }
     }, {
@@ -351,13 +361,13 @@
         context2D.fillRect(0, 0, canvas.width, canvas.height);
         context2D.font = '14px Georgia';
         context2D.fillStyle = '#fff';
-        context2D.fillText("From: https://artplayer.org/thumbnail, Number: ".concat(number, ", Width: ").concat(width, ", Height: ").concat(height, ", Column: ").concat(column), 10, canvas.height - 12);
+        context2D.fillText("From: https://artplayer.org/thumbnail, Number: ".concat(number, ", Width: ").concat(width, ", Height: ").concat(height, ", Column: ").concat(column), 10, canvas.height - 11);
         return canvas;
       }
     }, {
       key: "download",
       value: function download() {
-        this.errorHandle(this.file && this.thumbnailUrl, 'Download does not seem to be ready');
+        this.errorHandle(this.file && this.thumbnailUrl, 'Download does not seem to be ready, please create preview first');
         this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
         var elink = document.createElement('a');
         var name = "".concat(getFileName(this.file.name), ".png");
