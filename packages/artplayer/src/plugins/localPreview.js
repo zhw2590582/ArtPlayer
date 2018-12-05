@@ -12,24 +12,16 @@ function i18nMix(i18n) {
 }
 
 export default function localPreview(art) {
+    const { append, setStyle, setStyles, sleep } = art.constructor.utils;
     const {
-        getExt,
-        append,
-        setStyle,
-        setStyles,
-        sleep,
-    } = art.constructor.utils;
-    const formats = ['mp4', 'ogg', 'webm'];
-    const {
-        events: {
-            proxy,
-        },
+        events: { proxy },
         option,
         notice,
         i18n,
         template,
         player,
     } = art;
+    const fileTypes = ['video/mp4', 'audio/ogg', 'video/webm'];
     i18nMix(i18n);
 
     return {
@@ -48,8 +40,7 @@ export default function localPreview(art) {
             proxy($input, 'change', () => {
                 const file = $input.files[0];
                 if (file) {
-                    const ext = getExt(file.name);
-                    if (ext && formats.includes(ext)) {
+                    if (fileTypes.includes(file.type)) {
                         const url = URL.createObjectURL(file);
                         player.playbackRateRemove();
                         player.aspectRatioRemove();
@@ -61,7 +52,7 @@ export default function localPreview(art) {
                         art.emit('switch', url);
                         notice.show(i18n.get('Load local video successfully'));
                     } else {
-                        const tip = `${i18n.get('Only file types are supported')}: ${formats.toString()}`;
+                        const tip = `${i18n.get('Only file types are supported')}: ${fileTypes.toString()}, but got ${file.type}`;
                         notice.show(tip, true, 3000);
                         console.warn(tip);
                     }
