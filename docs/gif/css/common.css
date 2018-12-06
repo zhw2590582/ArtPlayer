@@ -1,0 +1,10 @@
+html, body, .container {
+    height: 100%;
+}
+
+.artplayer {
+    width: 800px;
+    height: 500px;
+    margin: 20px auto 0;
+    background: #fff;
+}
