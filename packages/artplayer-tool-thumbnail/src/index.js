@@ -107,7 +107,7 @@ class ArtplayerToolThumbnail extends Emitter {
                 });
         });
         this.processing = true;
-        runPromisesInSeries(promiseList)
+        return runPromisesInSeries(promiseList)
             .then(() =>
                 sleep(delay * 2)
                     .then(() => {
@@ -175,6 +175,7 @@ class ArtplayerToolThumbnail extends Emitter {
         elink.click();
         document.body.removeChild(elink);
         this.emit('download', name);
+        return this;
     }
 
     errorHandle(condition, msg) {

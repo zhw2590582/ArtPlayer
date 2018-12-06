@@ -303,7 +303,7 @@
           };
         });
         this.processing = true;
-        runPromisesInSeries(promiseList).then(function () {
+        return runPromisesInSeries(promiseList).then(function () {
           return sleep(delay * 2).then(function () {
             _this4.processing = false;
 
@@ -380,6 +380,7 @@
         elink.click();
         document.body.removeChild(elink);
         this.emit('download', name);
+        return this;
       }
     }, {
       key: "errorHandle",

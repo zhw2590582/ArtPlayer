@@ -60,7 +60,9 @@
     thumbnail.on('video', function(video) {
         console.log('Video size: ' + video.videoWidth + ' x ' + video.videoHeight);
         console.log('Video duration: ' + video.duration + 's');
-        thumbnail.setup(getConfig()).start();
+        thumbnail.setup(getConfig()).start().then(() => {
+            thumbnail.download();
+        });
     });
 
     thumbnail.on('canvas', function(canvas) {
