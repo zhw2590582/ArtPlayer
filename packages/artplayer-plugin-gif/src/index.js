@@ -5,7 +5,7 @@ function i18nMix(i18n) {
         'zh-cn': {
             'Long press, gif length is between 1 second and 5 seconds': '长按，gif 长度为 1 ~ 5 秒',
             'Gif time is too short': 'Gif 时间太短',
-            'Start creating gif, please wait': '开始创建 gif，请稍等',
+            'Start creating gif...': '开始创建 gif...',
             'Create gif successfully': '创建 gif 成功',
             'There is another gif in the processing': '正有另一个 gif 在创建中',
             'Release the mouse to start': '放开鼠标即可开始',
@@ -13,7 +13,7 @@ function i18nMix(i18n) {
         'zh-tw': {
             'Long press, gif length is between 1 second and 5 seconds': '長按，gif 長度為 1 ~ 5 秒',
             'Gif time is too short': 'Gif 時間太短',
-            'Start creating gif, please wait': '開始創建 gif，請稍等',
+            'Start creating gif...': '開始創建 gif...',
             'Create gif successfully': '創建 gif 成功',
             'There is another gif in the processing': '正有另一個 gif 在創建中',
             'Release the mouse to start': '放開鼠標即可開始',
@@ -22,13 +22,14 @@ function i18nMix(i18n) {
 }
 
 function artplayerPluginGif(art) {
-    const { errorHandle, clamp, downloadImage } = art.constructor.utils;
+    const { errorHandle, clamp, downloadImage, sleep } = art.constructor.utils;
     const {
         i18n,
         notice,
         layers,
         controls,
         player,
+        loading,
         option: { theme, title },
         events: { proxy },
         template: { $video },
@@ -54,6 +55,7 @@ function artplayerPluginGif(art) {
     let pressStartTime = 0;
     let progressTimer = null;
     let isPress = false;
+    let offset = 0;
 
     function cleanTimer() {
         $progress.style.width = '0%';
@@ -74,11 +76,14 @@ function artplayerPluginGif(art) {
             art.plugins.artplayerPluginGif.create(
                 {
                     numFrames,
+                    offset: Math.floor(offset),
                     gifHeight: 200,
                     gifWidth: (videoWidth / videoHeight) * 200,
                 },
                 image => {
-                    downloadImage(image, `${title || 'unnamed'}.gif`);
+                    sleep(100).then(() => {
+                        downloadImage(image, `${title || 'unnamed'}.gif`);
+                    });
                 },
             );
         }
@@ -92,6 +97,7 @@ function artplayerPluginGif(art) {
             proxy($gif, 'mousedown', () => {
                 isPress = true;
                 cleanTimer();
+                offset = player.currentTime;
                 pressStartTime = new Date();
                 notice.show(i18n.get('Long press, gif length is between 1 second and 5 seconds'));
                 (function loop() {
@@ -111,6 +117,7 @@ function artplayerPluginGif(art) {
                 if (isPress) {
                     isPress = false;
                     createGif();
+                    offset = 0;
                 }
             });
         },
@@ -121,13 +128,15 @@ function artplayerPluginGif(art) {
         isProcessing,
         create(config = {}, callback) {
             isProcessing = true;
+            loading.show();
             art.emit('artplayerPluginGif:create:start');
-            notice.show(`${i18n.get('Start creating gif, please wait')}: ${config.numFrames / 10 || 1} s`, false, 5000);
+            notice.show(i18n.get('Start creating gif...'), false, 5000);
+            console.log(`Start time: ${config.offset || 0} s, Duration: ${config.numFrames / 10 || 1}`);
             gifshot.createGIF(
                 {
                     ...config,
-                    offset: player.currentTime,
                     video: [$video.src],
+                    crossOrigin: 'Anonymous',
                 },
                 obj => {
                     if (obj.error) {
@@ -136,9 +145,11 @@ function artplayerPluginGif(art) {
                     } else if (typeof callback === 'function') {
                         callback(obj.image);
                         notice.show(i18n.get('Create gif successfully'));
+                        art.emit('artplayerPluginGif', obj.image);
                     }
 
                     isProcessing = false;
+                    loading.hide();
                     art.emit('artplayerPluginGif:create:end');
                 },
             );

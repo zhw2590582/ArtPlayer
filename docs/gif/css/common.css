@@ -11,17 +11,43 @@ body,
 
 .part-top {
     display: flex;
-    align-items: center;
-    justify-content: center;
     height: 70%;
-}
-
-.part-top .artplayer {
-    width: 500px;
-    height: 500px;
 }
 
 .part-bottom {
     position: relative;
     height: 30%;
+}
+
+.part-left {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.part-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.part-left .artplayer {
+    width: 500px;
+    height: 500px;
+    background: #fff;
+}
+
+.part-right .preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    background: #f3f3f3;
+}
+
+.part-right .preview img {
+    max-width: 100%;
 }

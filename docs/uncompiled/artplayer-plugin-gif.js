@@ -2724,7 +2724,7 @@
       'zh-cn': {
         'Long press, gif length is between 1 second and 5 seconds': '长按，gif 长度为 1 ~ 5 秒',
         'Gif time is too short': 'Gif 时间太短',
-        'Start creating gif, please wait': '开始创建 gif，请稍等',
+        'Start creating gif...': '开始创建 gif...',
         'Create gif successfully': '创建 gif 成功',
         'There is another gif in the processing': '正有另一个 gif 在创建中',
         'Release the mouse to start': '放开鼠标即可开始'
@@ -2732,7 +2732,7 @@
       'zh-tw': {
         'Long press, gif length is between 1 second and 5 seconds': '長按，gif 長度為 1 ~ 5 秒',
         'Gif time is too short': 'Gif 時間太短',
-        'Start creating gif, please wait': '開始創建 gif，請稍等',
+        'Start creating gif...': '開始創建 gif...',
         'Create gif successfully': '創建 gif 成功',
         'There is another gif in the processing': '正有另一個 gif 在創建中',
         'Release the mouse to start': '放開鼠標即可開始'
@@ -2744,12 +2744,14 @@
     var _art$constructor$util = art.constructor.utils,
         errorHandle = _art$constructor$util.errorHandle,
         clamp = _art$constructor$util.clamp,
-        downloadImage = _art$constructor$util.downloadImage;
+        downloadImage = _art$constructor$util.downloadImage,
+        sleep = _art$constructor$util.sleep;
     var i18n = art.i18n,
         notice = art.notice,
         layers = art.layers,
         controls = art.controls,
         player = art.player,
+        loading = art.loading,
         _art$option = art.option,
         theme = _art$option.theme,
         title = _art$option.title,
@@ -2773,6 +2775,7 @@
     var pressStartTime = 0;
     var progressTimer = null;
     var isPress = false;
+    var offset = 0;
 
     function cleanTimer() {
       $progress.style.width = '0%';
@@ -2794,10 +2797,13 @@
             videoHeight = $video.videoHeight;
         art.plugins.artplayerPluginGif.create({
           numFrames: numFrames,
+          offset: Math.floor(offset),
           gifHeight: 200,
           gifWidth: videoWidth / videoHeight * 200
         }, function (image) {
-          downloadImage(image, "".concat(title || 'unnamed', ".gif"));
+          sleep(100).then(function () {
+            downloadImage(image, "".concat(title || 'unnamed', ".gif"));
+          });
         });
       }
     }
@@ -2810,6 +2816,7 @@
         proxy($gif, 'mousedown', function () {
           isPress = true;
           cleanTimer();
+          offset = player.currentTime;
           pressStartTime = new Date();
           notice.show(i18n.get('Long press, gif length is between 1 second and 5 seconds'));
 
@@ -2830,6 +2837,7 @@
           if (isPress) {
             isPress = false;
             createGif();
+            offset = 0;
           }
         });
       }
@@ -2841,11 +2849,13 @@
         var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var callback = arguments.length > 1 ? arguments[1] : undefined;
         isProcessing = true;
+        loading.show();
         art.emit('artplayerPluginGif:create:start');
-        notice.show("".concat(i18n.get('Start creating gif, please wait'), ": ").concat(config.numFrames / 10 || 1, " s"), false, 5000);
+        notice.show(i18n.get('Start creating gif...'), false, 5000);
+        console.log("Start time: ".concat(config.offset || 0, " s, Duration: ").concat(config.numFrames / 10 || 1));
         gifshot.createGIF(objectSpread({}, config, {
-          offset: player.currentTime,
-          video: [$video.src]
+          video: [$video.src],
+          crossOrigin: 'Anonymous'
         }), function (obj) {
           if (obj.error) {
             notice.show(obj.errorMsg);
@@ -2853,9 +2863,11 @@
           } else if (typeof callback === 'function') {
             callback(obj.image);
             notice.show(i18n.get('Create gif successfully'));
+            art.emit('artplayerPluginGif', obj.image);
           }
 
           isProcessing = false;
+          loading.hide();
           art.emit('artplayerPluginGif:create:end');
         });
       }

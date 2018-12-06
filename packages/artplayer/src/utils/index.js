@@ -176,7 +176,9 @@ export function downloadImage(url, name) {
     setStyle(elink, 'display', 'none');
     elink.href = url;
     elink.download = name;
-    document.body.appendChild(elink);
-    elink.click();
-    document.body.removeChild(elink);
+    sleep(100).then(() => {
+        document.body.appendChild(elink);
+        elink.click();
+        document.body.removeChild(elink);
+    });
 }

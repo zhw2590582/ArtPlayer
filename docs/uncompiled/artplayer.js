@@ -627,9 +627,11 @@
     setStyle(elink, 'display', 'none');
     elink.href = url;
     elink.download = name;
-    document.body.appendChild(elink);
-    elink.click();
-    document.body.removeChild(elink);
+    sleep(100).then(function () {
+      document.body.appendChild(elink);
+      elink.click();
+      document.body.removeChild(elink);
+    });
   }
 
   var utils = /*#__PURE__*/Object.freeze({

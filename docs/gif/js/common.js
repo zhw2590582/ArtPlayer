@@ -31,4 +31,10 @@
         ],
         plugins: [artplayerPluginGif]
     });
+
+    art.on('artplayerPluginGif', image => {
+        var animatedImage = document.createElement('img');
+        animatedImage.src = image;
+        document.querySelector('.preview').appendChild(animatedImage);
+    });
 })();
