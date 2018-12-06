@@ -30,7 +30,7 @@
         zIndex: 99,
     });
 
-    console.info('Welcome to this tool, if you like it, consider star it, thank you.');
+    console.info('Welcome, if you like it, consider star it, thank you.');
     console.info('https://github.com/zhw2590582/ArtPlayer');
 
     window.addEventListener('error', function(err) {

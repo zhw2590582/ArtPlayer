@@ -98,8 +98,10 @@ var art = new Artplayer({
         {
             name: 'preview',
             position: 'right',
-            index: 1,
-            html: '打开'
+            html: '打开',
+            mounted: $preview => {
+                art.plugins.localPreview.attach($preview);
+            },
         },
     ],
     icons: {
@@ -108,9 +110,6 @@ var art = new Artplayer({
 });
 
 art.on('firstCanplay', () => {
-    var preview = document.querySelector('.art-control-preview');
-    art.plugins.localPreview.attach(preview);
-
     art.on('resize', $player => {
         art.controls.quality.show();
         art.controls.setting.show();

@@ -2,25 +2,35 @@
 <html>
 
 <head>
-    <title>ArtPlayer.js Lab</title>
+    <title>Gif plugin for ArtPlayer</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="keywords" content="artplayer,html5,video,player">
-    <meta name="description" content="ArtPlayer is a modern HTML5 video player">
+    <meta name="keywords" content="artplayer,html5,video,player,gif">
+    <meta name="description" content="Gif plugin for ArtPlayer">
     <link rel="shortcut icon" href="../assets/img/favicon.ico">
     <link rel="stylesheet" href="../assets/css/normalize.css">
-    <link rel="stylesheet" href="./css/mobile.css">
+    <link rel="stylesheet" href="../assets/css/consola.css">
+    <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="../uncompiled/artplayer.css">    
 </head>
 
 <body>
     <div class="container">
-        <div class="artplayer-app"></div>
+        <div class="part-top">
+            <div class="part-left">
+                <div class="artplayer"></div>
+            </div>
+            <div class="part-right">
+                <div class="preview"></div>
+            </div>
+        </div>
+        <div class="part-bottom"></div>
     </div>
-    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script src="../assets/js/consola.js"></script>
     <script src="../uncompiled/artplayer.js"></script>
-    <script src="./js/mobile.js"></script>
+    <script src="../uncompiled/artplayer-plugin-gif.js"></script>
+    <script src="./js/common.js"></script>
     <script>
         var _hmt = _hmt || [];
         (function() {

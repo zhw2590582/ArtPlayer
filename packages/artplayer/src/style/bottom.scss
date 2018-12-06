@@ -136,7 +136,9 @@
                 opacity: .9;
                 font-size: 12px;
                 height: 36px;
+                min-width: 36px;
                 line-height: 36px;
+                text-align: center;
                 cursor: pointer;
                 .art-icon {
                     display: flex;
