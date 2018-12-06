@@ -2851,7 +2851,7 @@
         isProcessing = true;
         loading.show();
         art.emit('artplayerPluginGif:create:start');
-        notice.show(i18n.get('Start creating gif...'), false, 5000);
+        notice.show(i18n.get('Start creating gif...'), false);
         console.log("Start time: ".concat(config.offset || 0, " s, Duration: ").concat(config.numFrames / 10 || 1));
         gifshot.createGIF(objectSpread({}, config, {
           video: [$video.src],
