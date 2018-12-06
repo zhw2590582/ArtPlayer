@@ -53,6 +53,7 @@ function artplayerPluginGif(art) {
     let isProcessing = false;
     let pressStartTime = 0;
     let progressTimer = null;
+    let isPress = false;
 
     function cleanTimer() {
         $progress.style.width = '0%';
@@ -63,7 +64,6 @@ function artplayerPluginGif(art) {
     function createGif() {
         cleanTimer();
         const pressTime = new Date() - pressStartTime;
-
         if (isProcessing) {
             notice.show(i18n.get('There is another gif in the processing'));
         } else if (pressTime < 1000) {
@@ -90,6 +90,7 @@ function artplayerPluginGif(art) {
         html: 'GIF',
         mounted: $gif => {
             proxy($gif, 'mousedown', () => {
+                isPress = true;
                 cleanTimer();
                 pressStartTime = new Date();
                 notice.show(i18n.get('Long press, gif length is between 1 second and 5 seconds'));
@@ -106,8 +107,11 @@ function artplayerPluginGif(art) {
                 })();
             });
 
-            proxy($gif, 'mouseup', () => {
-                createGif();
+            proxy(document, 'mouseup', () => {
+                if (isPress) {
+                    isPress = false;
+                    createGif();
+                }
             });
         },
     });

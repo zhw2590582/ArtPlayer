@@ -2772,6 +2772,7 @@
     var isProcessing = false;
     var pressStartTime = 0;
     var progressTimer = null;
+    var isPress = false;
 
     function cleanTimer() {
       $progress.style.width = '0%';
@@ -2807,6 +2808,7 @@
       html: 'GIF',
       mounted: function mounted($gif) {
         proxy($gif, 'mousedown', function () {
+          isPress = true;
           cleanTimer();
           pressStartTime = new Date();
           notice.show(i18n.get('Long press, gif length is between 1 second and 5 seconds'));
@@ -2824,8 +2826,11 @@
             }, 50);
           })();
         });
-        proxy($gif, 'mouseup', function () {
-          createGif();
+        proxy(document, 'mouseup', function () {
+          if (isPress) {
+            isPress = false;
+            createGif();
+          }
         });
       }
     });
