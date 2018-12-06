@@ -2,7 +2,8 @@
 
 (function() {
     consola.creat({
-        target: 'body',
+        target: '.part-bottom',
+        size: '100%',
         zIndex: 99,
     });
 
@@ -30,5 +31,10 @@
     art.on('firstCanplay', () => {
         var preview = document.querySelector('.art-control-preview');
         art.plugins.localPreview.attach(preview);
+        art.plugins.artplayerPluginGif.create({}, image => {
+            var animatedImage = document.createElement('img');
+            animatedImage.src = image;
+            document.querySelector('.preview').appendChild(animatedImage);
+        });
     });
 })();
