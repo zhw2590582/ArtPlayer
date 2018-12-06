@@ -38,12 +38,14 @@ html, body, .container {
 }
 
 .part-right .preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 500px;
     height: 500px;
     background: #f3f3f3;
 }
 
 .part-right .preview img {
-    width: 100%;
     max-width: 100%;
 }

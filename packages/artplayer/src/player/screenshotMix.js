@@ -1,4 +1,4 @@
-import { setStyle, secondToTime } from '../utils';
+import { secondToTime, downloadImage } from '../utils';
 
 export default function screenshotMix(art, player) {
     const {
@@ -13,13 +13,7 @@ export default function screenshotMix(art, player) {
         canvas.height = $video.videoHeight;
         canvas.getContext('2d').drawImage($video, 0, 0);
         const dataUri = canvas.toDataURL('image/png');
-        const elink = document.createElement('a');
-        setStyle(elink, 'display', 'none');
-        elink.href = dataUri;
-        elink.download = `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`;
-        document.body.appendChild(elink);
-        elink.click();
-        document.body.removeChild(elink);
+        downloadImage(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
         return dataUri;
     }
 

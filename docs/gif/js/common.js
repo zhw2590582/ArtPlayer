@@ -17,24 +17,18 @@
     var art = new Artplayer({
         container: '.artplayer',
         url: 'https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4',
+        title: '【新海诚动画】『秒速5センチメートル』',
         autoSize: true,
         controls: [
             {
                 name: 'preview',
                 position: 'right',
-                html: '打开'
+                html: '打开',
+                mounted: $preview => {
+                    art.plugins.localPreview.attach($preview);
+                },
             },
         ],
         plugins: [artplayerPluginGif]
-    });
-
-    art.on('firstCanplay', () => {
-        var preview = document.querySelector('.art-control-preview');
-        art.plugins.localPreview.attach(preview);
-        art.plugins.artplayerPluginGif.create({}, image => {
-            var animatedImage = document.createElement('img');
-            animatedImage.src = image;
-            document.querySelector('.preview').appendChild(animatedImage);
-        });
     });
 })();

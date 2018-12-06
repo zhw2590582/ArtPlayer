@@ -622,6 +622,15 @@
       type: 'text/vtt'
     }));
   }
+  function downloadImage(url, name) {
+    var elink = document.createElement('a');
+    setStyle(elink, 'display', 'none');
+    elink.href = url;
+    elink.download = name;
+    document.body.appendChild(elink);
+    elink.click();
+    document.body.removeChild(elink);
+  }
 
   var utils = /*#__PURE__*/Object.freeze({
     ArtPlayerError: ArtPlayerError,
@@ -644,7 +653,8 @@
     inverseClass: inverseClass,
     tooltip: tooltip,
     srtToVtt: srtToVtt,
-    vttToBlob: vttToBlob
+    vttToBlob: vttToBlob,
+    downloadImage: downloadImage
   });
 
   function validElement(paths, value, type) {
@@ -1501,13 +1511,7 @@
       canvas.height = $video.videoHeight;
       canvas.getContext('2d').drawImage($video, 0, 0);
       var dataUri = canvas.toDataURL('image/png');
-      var elink = document.createElement('a');
-      setStyle(elink, 'display', 'none');
-      elink.href = dataUri;
-      elink.download = "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png");
-      document.body.appendChild(elink);
-      elink.click();
-      document.body.removeChild(elink);
+      downloadImage(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
       return dataUri;
     }
 
