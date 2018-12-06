@@ -2744,8 +2744,7 @@
     var _art$constructor$util = art.constructor.utils,
         errorHandle = _art$constructor$util.errorHandle,
         clamp = _art$constructor$util.clamp,
-        downloadImage = _art$constructor$util.downloadImage,
-        sleep = _art$constructor$util.sleep;
+        downloadImage = _art$constructor$util.downloadImage;
     var i18n = art.i18n,
         notice = art.notice,
         layers = art.layers,
@@ -2801,9 +2800,7 @@
           gifHeight: 200,
           gifWidth: videoWidth / videoHeight * 200
         }, function (image) {
-          sleep(100).then(function () {
-            downloadImage(image, "".concat(title || 'unnamed', ".gif"));
-          });
+          downloadImage(image, "".concat(title || 'unnamed', ".gif"));
         });
       }
     }
@@ -2851,7 +2848,7 @@
         loading.show();
         art.emit('artplayerPluginGif:start');
         notice.show(i18n.get('Start creating gif...'), false);
-        console.log("Start time: ".concat(config.offset || 0, " s, Duration: ").concat(config.numFrames / 10 || 1));
+        console.log("Start time: ".concat(config.offset || 0, "s, Frames: ").concat(config.numFrames || 10, "p, Duration: ").concat(config.numFrames / 10 || 1, "s"));
         gifshot.createGIF(objectSpread({}, config, {
           video: [$video.src],
           crossOrigin: 'Anonymous'

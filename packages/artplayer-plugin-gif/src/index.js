@@ -22,7 +22,7 @@ function i18nMix(i18n) {
 }
 
 function artplayerPluginGif(art) {
-    const { errorHandle, clamp, downloadImage, sleep } = art.constructor.utils;
+    const { errorHandle, clamp, downloadImage } = art.constructor.utils;
     const {
         i18n,
         notice,
@@ -81,9 +81,7 @@ function artplayerPluginGif(art) {
                     gifWidth: (videoWidth / videoHeight) * 200,
                 },
                 image => {
-                    sleep(100).then(() => {
-                        downloadImage(image, `${title || 'unnamed'}.gif`);
-                    });
+                    downloadImage(image, `${title || 'unnamed'}.gif`);
                 },
             );
         }
@@ -130,7 +128,7 @@ function artplayerPluginGif(art) {
             loading.show();
             art.emit('artplayerPluginGif:start');
             notice.show(i18n.get('Start creating gif...'), false);
-            console.log(`Start time: ${config.offset || 0} s, Duration: ${config.numFrames / 10 || 1}`);
+            console.log(`Start time: ${config.offset || 0}s, Frames: ${config.numFrames || 10}p, Duration: ${config.numFrames / 10 || 1}s`);
             gifshot.createGIF(
                 {
                     ...config,
