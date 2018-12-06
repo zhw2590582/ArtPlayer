@@ -2844,13 +2844,12 @@
     });
     return {
       name: 'artplayerPluginGif',
-      isProcessing: isProcessing,
       create: function create() {
         var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var callback = arguments.length > 1 ? arguments[1] : undefined;
         isProcessing = true;
         loading.show();
-        art.emit('artplayerPluginGif:create:start');
+        art.emit('artplayerPluginGif:start');
         notice.show(i18n.get('Start creating gif...'), false);
         console.log("Start time: ".concat(config.offset || 0, " s, Duration: ").concat(config.numFrames / 10 || 1));
         gifshot.createGIF(objectSpread({}, config, {
@@ -2868,7 +2867,7 @@
 
           isProcessing = false;
           loading.hide();
-          art.emit('artplayerPluginGif:create:end');
+          art.emit('artplayerPluginGif:end');
         });
       }
     };

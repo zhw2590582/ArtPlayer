@@ -32,9 +32,11 @@
         plugins: [artplayerPluginGif]
     });
 
+    var $preview = document.querySelector('.preview');
     art.on('artplayerPluginGif', image => {
         var animatedImage = document.createElement('img');
         animatedImage.src = image;
-        document.querySelector('.preview').appendChild(animatedImage);
+        $preview.innerHTML = '';
+        $preview.appendChild(animatedImage);
     });
 })();

@@ -125,11 +125,10 @@ function artplayerPluginGif(art) {
 
     return {
         name: 'artplayerPluginGif',
-        isProcessing,
         create(config = {}, callback) {
             isProcessing = true;
             loading.show();
-            art.emit('artplayerPluginGif:create:start');
+            art.emit('artplayerPluginGif:start');
             notice.show(i18n.get('Start creating gif...'), false);
             console.log(`Start time: ${config.offset || 0} s, Duration: ${config.numFrames / 10 || 1}`);
             gifshot.createGIF(
@@ -150,7 +149,7 @@ function artplayerPluginGif(art) {
 
                     isProcessing = false;
                     loading.hide();
-                    art.emit('artplayerPluginGif:create:end');
+                    art.emit('artplayerPluginGif:end');
                 },
             );
         },
