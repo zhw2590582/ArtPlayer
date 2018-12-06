@@ -8,6 +8,7 @@ function i18nMix(i18n) {
             'Start creating gif, please wait': '开始创建 gif，请稍等',
             'Create gif successfully': '创建 gif 成功',
             'There is another gif in the processing': '正有另一个 gif 在创建中',
+            'Release the mouse to start': '放开鼠标即可开始',
         },
         'zh-tw': {
             'Long press, gif length is between 1 second and 5 seconds': '長按，gif 長度為 1 ~ 5 秒',
@@ -15,6 +16,7 @@ function i18nMix(i18n) {
             'Start creating gif, please wait': '開始創建 gif，請稍等',
             'Create gif successfully': '創建 gif 成功',
             'There is another gif in the processing': '正有另一個 gif 在創建中',
+            'Release the mouse to start': '放開鼠標即可開始',
         },
     });
 }
@@ -91,7 +93,6 @@ function artplayerPluginGif(art) {
                 cleanTimer();
                 pressStartTime = new Date();
                 notice.show(i18n.get('Long press, gif length is between 1 second and 5 seconds'));
-
                 (function loop() {
                     progressTimer = setTimeout(() => {
                         const width = parseInt($progress.style.width, 10);
@@ -99,7 +100,7 @@ function artplayerPluginGif(art) {
                             $progress.style.width = `${width + 1}%`;
                             loop();
                         } else {
-                            createGif();
+                            notice.show(i18n.get('Release the mouse to start'));
                         }
                     }, 50);
                 })();

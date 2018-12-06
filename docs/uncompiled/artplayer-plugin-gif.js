@@ -2726,14 +2726,16 @@
         'Gif time is too short': 'Gif 时间太短',
         'Start creating gif, please wait': '开始创建 gif，请稍等',
         'Create gif successfully': '创建 gif 成功',
-        'There is another gif in the processing': '正有另一个 gif 在创建中'
+        'There is another gif in the processing': '正有另一个 gif 在创建中',
+        'Release the mouse to start': '放开鼠标即可开始'
       },
       'zh-tw': {
         'Long press, gif length is between 1 second and 5 seconds': '長按，gif 長度為 1 ~ 5 秒',
         'Gif time is too short': 'Gif 時間太短',
         'Start creating gif, please wait': '開始創建 gif，請稍等',
         'Create gif successfully': '創建 gif 成功',
-        'There is another gif in the processing': '正有另一個 gif 在創建中'
+        'There is another gif in the processing': '正有另一個 gif 在創建中',
+        'Release the mouse to start': '放開鼠標即可開始'
       }
     });
   }
@@ -2817,7 +2819,7 @@
                 $progress.style.width = "".concat(width + 1, "%");
                 loop();
               } else {
-                createGif();
+                notice.show(i18n.get('Release the mouse to start'));
               }
             }, 50);
           })();
