@@ -303,19 +303,23 @@
         var promiseList = screenshotDate.map(function (item, index) {
           return function () {
             _this4.video.currentTime = item.time;
-            return sleep(delay).then(function () {
-              context2D.drawImage(_this4.video, item.x, item.y, width, height);
-              canvas.toBlob(function (blob) {
-                if (_this4.thumbnailUrl) {
-                  URL.revokeObjectURL(_this4.thumbnailUrl);
-                }
+            return new Promise(function (resolve) {
+              sleep(delay).then(function () {
+                context2D.drawImage(_this4.video, item.x, item.y, width, height);
+                canvas.toBlob(function (blob) {
+                  if (_this4.thumbnailUrl) {
+                    URL.revokeObjectURL(_this4.thumbnailUrl);
+                  }
 
-                _this4.thumbnailUrl = URL.createObjectURL(blob);
+                  _this4.thumbnailUrl = URL.createObjectURL(blob);
 
-                _this4.emit('update', _this4.thumbnailUrl, (index + 1) / number);
+                  _this4.emit('update', _this4.thumbnailUrl, (index + 1) / number);
+
+                  resolve();
+                });
+              }).catch(function (err) {
+                console.error(err);
               });
-            }).catch(function (err) {
-              console.error(err);
             });
           };
         });

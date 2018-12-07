@@ -1,8 +1,10 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global['artplayer-plugin-gif'] = {})));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('b64-to-blob')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'b64-to-blob'], factory) :
+  (factory((global['artplayer-plugin-gif'] = {}),global.b64toBlob));
+}(this, (function (exports,b64toBlob) { 'use strict';
+
+  b64toBlob = b64toBlob && b64toBlob.hasOwnProperty('default') ? b64toBlob['default'] : b64toBlob;
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -41,8 +43,6 @@
   }
 
   var objectSpread = _objectSpread;
-
-  var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -2721,45 +2721,6 @@
     }, typeof window !== "undefined" ? window.navigator : {});
   });
 
-  var b64toBlob = createCommonjsModule(function (module) {
-    (function (root, globalName, factory) {
-      if (module.exports) {
-        // Node:
-        module.exports = factory(); // Use module export as simulated ES6 default export:
-
-        module.exports.default = module.exports;
-      } else {
-        // Browser:
-        window[globalName] = factory();
-      }
-    })(commonjsGlobal, 'b64toBlob', function () {
-
-      return function b64toBlob(b64Data, contentType, sliceSize) {
-        contentType = contentType || '';
-        sliceSize = sliceSize || 512;
-        var byteCharacters = atob(b64Data);
-        var byteArrays = [];
-
-        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-          var slice = byteCharacters.slice(offset, offset + sliceSize);
-          var byteNumbers = new Array(slice.length);
-
-          for (var i = 0; i < slice.length; i++) {
-            byteNumbers[i] = slice.charCodeAt(i);
-          }
-
-          var byteArray = new Uint8Array(byteNumbers);
-          byteArrays.push(byteArray);
-        }
-
-        var blob = new Blob(byteArrays, {
-          type: contentType
-        });
-        return blob;
-      };
-    });
-  });
-
   function i18nMix(i18n) {
     i18n.update({
       'zh-cn': {
@@ -2920,4 +2881,3 @@
   Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-//# sourceMappingURL=artplayer-plugin-gif.js.map

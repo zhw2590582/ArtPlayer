@@ -108,20 +108,23 @@ class ArtplayerToolThumbnail extends Emitter {
         this.emit('canvas', canvas);
         const promiseList = screenshotDate.map((item, index) => () => {
             this.video.currentTime = item.time;
-            return sleep(delay)
-                .then(() => {
-                    context2D.drawImage(this.video, item.x, item.y, width, height);
-                    canvas.toBlob(blob => {
-                        if (this.thumbnailUrl) {
-                            URL.revokeObjectURL(this.thumbnailUrl);
-                        }
-                        this.thumbnailUrl = URL.createObjectURL(blob);
-                        this.emit('update', this.thumbnailUrl, (index + 1) / number);
+            return new Promise(resolve => {
+                sleep(delay)
+                    .then(() => {
+                        context2D.drawImage(this.video, item.x, item.y, width, height);
+                        canvas.toBlob(blob => {
+                            if (this.thumbnailUrl) {
+                                URL.revokeObjectURL(this.thumbnailUrl);
+                            }
+                            this.thumbnailUrl = URL.createObjectURL(blob);
+                            this.emit('update', this.thumbnailUrl, (index + 1) / number);
+                            resolve();
+                        });
+                    })
+                    .catch(err => {
+                        console.error(err);
                     });
-                })
-                .catch(err => {
-                    console.error(err);
-                });
+            });
         });
         this.processing = true;
         return runPromisesInSeries(promiseList)
