@@ -1,9 +1,10 @@
 import gifshot from 'gifshot';
+import b64toBlob from 'b64-to-blob';
 
 function i18nMix(i18n) {
     i18n.update({
         'zh-cn': {
-            'Long press, gif length is between 1 second and 5 seconds': '长按，gif 长度为 1 ~ 5 秒',
+            'Long press, gif length is between 1 second and 10 seconds': '长按，gif 长度为 1 ~ 10 秒',
             'Gif time is too short': 'Gif 时间太短',
             'Start creating gif...': '开始创建 gif...',
             'Create gif successfully': '创建 gif 成功',
@@ -11,7 +12,7 @@ function i18nMix(i18n) {
             'Release the mouse to start': '放开鼠标即可开始',
         },
         'zh-tw': {
-            'Long press, gif length is between 1 second and 5 seconds': '長按，gif 長度為 1 ~ 5 秒',
+            'Long press, gif length is between 1 second and 10 seconds': '長按，gif 長度為 1 ~ 10 秒',
             'Gif time is too short': 'Gif 時間太短',
             'Start creating gif...': '開始創建 gif...',
             'Create gif successfully': '創建 gif 成功',
@@ -51,6 +52,7 @@ function artplayerPluginGif(art) {
     });
 
     const $progress = layers['artplayer-plugin-gif-progress'].$ref;
+    const timeLimit = 10000;
     let isProcessing = false;
     let pressStartTime = 0;
     let progressTimer = null;
@@ -71,7 +73,7 @@ function artplayerPluginGif(art) {
         } else if (pressTime < 1000) {
             notice.show(i18n.get('Gif time is too short'));
         } else {
-            const numFrames = Math.floor(clamp(pressTime, 1000, 5000) / 100);
+            const numFrames = Math.floor(clamp(pressTime, 1000, timeLimit) / 100);
             const { videoWidth, videoHeight } = $video;
             art.plugins.artplayerPluginGif.create(
                 {
@@ -97,7 +99,7 @@ function artplayerPluginGif(art) {
                 cleanTimer();
                 offset = player.currentTime;
                 pressStartTime = new Date();
-                notice.show(i18n.get('Long press, gif length is between 1 second and 5 seconds'));
+                notice.show(i18n.get('Long press, gif length is between 1 second and 10 seconds'));
                 (function loop() {
                     progressTimer = setTimeout(() => {
                         const width = parseInt($progress.style.width, 10);
@@ -107,7 +109,7 @@ function artplayerPluginGif(art) {
                         } else {
                             notice.show(i18n.get('Release the mouse to start'));
                         }
-                    }, 50);
+                    }, timeLimit / 100);
                 })();
             });
 
@@ -128,23 +130,24 @@ function artplayerPluginGif(art) {
             loading.show();
             art.emit('artplayerPluginGif:start');
             notice.show(i18n.get('Start creating gif...'), false);
-            console.log(`Start time: ${config.offset || 0}s, Frames: ${config.numFrames || 10}p, Duration: ${config.numFrames / 10 || 1}s`);
             gifshot.createGIF(
                 {
                     ...config,
                     video: [$video.src],
-                    crossOrigin: 'Anonymous',
+                    crossOrigin: 'anonymous',
                 },
                 obj => {
                     if (obj.error) {
                         notice.show(obj.errorMsg);
                         errorHandle(false, obj.errorMsg);
                     } else if (typeof callback === 'function') {
-                        callback(obj.image);
+                        const base64String = obj.image.split(',')[1];
+                        const blob = b64toBlob(base64String, 'image/gif');
+                        const blobUrl = URL.createObjectURL(blob);
                         notice.show(i18n.get('Create gif successfully'));
-                        art.emit('artplayerPluginGif', obj.image);
+                        art.emit('artplayerPluginGif', blobUrl);
+                        callback(blobUrl);
                     }
-
                     isProcessing = false;
                     loading.hide();
                     art.emit('artplayerPluginGif:end');

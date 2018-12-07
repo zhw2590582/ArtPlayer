@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "dependencies": {
+    "b64-to-blob": "^1.2.19",
+    "blob-util": "^2.0.2",
     "gifshot": "^0.4.5"
   }
 }

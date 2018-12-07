@@ -42,6 +42,8 @@
 
   var objectSpread = _objectSpread;
 
+  var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
@@ -2719,10 +2721,49 @@
     }, typeof window !== "undefined" ? window.navigator : {});
   });
 
+  var b64toBlob = createCommonjsModule(function (module) {
+    (function (root, globalName, factory) {
+      if (module.exports) {
+        // Node:
+        module.exports = factory(); // Use module export as simulated ES6 default export:
+
+        module.exports.default = module.exports;
+      } else {
+        // Browser:
+        window[globalName] = factory();
+      }
+    })(commonjsGlobal, 'b64toBlob', function () {
+
+      return function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+          var slice = byteCharacters.slice(offset, offset + sliceSize);
+          var byteNumbers = new Array(slice.length);
+
+          for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+          }
+
+          var byteArray = new Uint8Array(byteNumbers);
+          byteArrays.push(byteArray);
+        }
+
+        var blob = new Blob(byteArrays, {
+          type: contentType
+        });
+        return blob;
+      };
+    });
+  });
+
   function i18nMix(i18n) {
     i18n.update({
       'zh-cn': {
-        'Long press, gif length is between 1 second and 5 seconds': '长按，gif 长度为 1 ~ 5 秒',
+        'Long press, gif length is between 1 second and 10 seconds': '长按，gif 长度为 1 ~ 10 秒',
         'Gif time is too short': 'Gif 时间太短',
         'Start creating gif...': '开始创建 gif...',
         'Create gif successfully': '创建 gif 成功',
@@ -2730,7 +2771,7 @@
         'Release the mouse to start': '放开鼠标即可开始'
       },
       'zh-tw': {
-        'Long press, gif length is between 1 second and 5 seconds': '長按，gif 長度為 1 ~ 5 秒',
+        'Long press, gif length is between 1 second and 10 seconds': '長按，gif 長度為 1 ~ 10 秒',
         'Gif time is too short': 'Gif 時間太短',
         'Start creating gif...': '開始創建 gif...',
         'Create gif successfully': '創建 gif 成功',
@@ -2770,6 +2811,7 @@
       }
     });
     var $progress = layers['artplayer-plugin-gif-progress'].$ref;
+    var timeLimit = 10000;
     var isProcessing = false;
     var pressStartTime = 0;
     var progressTimer = null;
@@ -2791,7 +2833,7 @@
       } else if (pressTime < 1000) {
         notice.show(i18n.get('Gif time is too short'));
       } else {
-        var numFrames = Math.floor(clamp(pressTime, 1000, 5000) / 100);
+        var numFrames = Math.floor(clamp(pressTime, 1000, timeLimit) / 100);
         var videoWidth = $video.videoWidth,
             videoHeight = $video.videoHeight;
         art.plugins.artplayerPluginGif.create({
@@ -2815,7 +2857,7 @@
           cleanTimer();
           offset = player.currentTime;
           pressStartTime = new Date();
-          notice.show(i18n.get('Long press, gif length is between 1 second and 5 seconds'));
+          notice.show(i18n.get('Long press, gif length is between 1 second and 10 seconds'));
 
           (function loop() {
             progressTimer = setTimeout(function () {
@@ -2827,7 +2869,7 @@
               } else {
                 notice.show(i18n.get('Release the mouse to start'));
               }
-            }, 50);
+            }, timeLimit / 100);
           })();
         });
         proxy(document, 'mouseup', function () {
@@ -2848,18 +2890,20 @@
         loading.show();
         art.emit('artplayerPluginGif:start');
         notice.show(i18n.get('Start creating gif...'), false);
-        console.log("Start time: ".concat(config.offset || 0, "s, Frames: ").concat(config.numFrames || 10, "p, Duration: ").concat(config.numFrames / 10 || 1, "s"));
         gifshot.createGIF(objectSpread({}, config, {
           video: [$video.src],
-          crossOrigin: 'Anonymous'
+          crossOrigin: 'anonymous'
         }), function (obj) {
           if (obj.error) {
             notice.show(obj.errorMsg);
             errorHandle(false, obj.errorMsg);
           } else if (typeof callback === 'function') {
-            callback(obj.image);
+            var base64String = obj.image.split(',')[1];
+            var blob = b64toBlob(base64String, 'image/gif');
+            var blobUrl = URL.createObjectURL(blob);
             notice.show(i18n.get('Create gif successfully'));
-            art.emit('artplayerPluginGif', obj.image);
+            art.emit('artplayerPluginGif', blobUrl);
+            callback(blobUrl);
           }
 
           isProcessing = false;

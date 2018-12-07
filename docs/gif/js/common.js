@@ -9,6 +9,7 @@
 
     console.info('Welcome, if you like it, consider star it, thank you.');
     console.info('https://github.com/zhw2590582/ArtPlayer');
+    console.warn('For web video, this plugin depends on the network, so the results are not necessarily ideal.');
 
     window.addEventListener('error', function(err) {
         console.error(err.message);
