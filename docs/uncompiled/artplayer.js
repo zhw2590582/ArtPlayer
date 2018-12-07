@@ -673,27 +673,14 @@
     throw new ArtPlayerError("".concat(paths.join('.'), " require 'string' or 'Element' type, but got '").concat(type, "'"));
   }
 
-  function validStringEmpty(paths, value, type) {
-    if (type !== 'string') {
-      throw new ArtPlayerError("".concat(paths.join('.'), " required 'string' type."));
-    }
-
-    if (value.trim() === '') {
-      throw new ArtPlayerError("".concat(paths.join('.'), " can not be empty"));
-    }
-
-    return true;
-  }
-
   var scheme = {
     container: {
       validator: validElement,
       required: true
     },
     url: {
-      type: 'string',
-      required: true,
-      validator: validStringEmpty
+      type: 'string|function',
+      required: true
     },
     poster: 'string',
     title: 'string',
@@ -1068,19 +1055,30 @@
     });
     Object.defineProperty(player, 'attachUrl', {
       value: function value(url) {
-        var typeName = type || getExt(url);
-        var typeCallback = customType[typeName];
-        return sleep().then(function () {
-          if (typeName && typeCallback) {
-            art.emit('beforeCustomType', typeName);
-            typeCallback($video, player.returnUrl(url), art);
-            art.emit('afterCustomType', typeName);
-          } else {
-            art.emit('beforeAttachUrl', url);
-            $video.src = player.returnUrl(url);
-            art.emit('afterAttachUrl', $video.src);
-          }
-        });
+        function attachUrl(videoUrl) {
+          var typeName = type || getExt(videoUrl);
+          var typeCallback = customType[typeName];
+          return sleep().then(function () {
+            if (typeName && typeCallback) {
+              art.emit('beforeCustomType', typeName);
+              typeCallback($video, player.returnUrl(videoUrl), art);
+              art.emit('afterCustomType', typeName);
+            } else {
+              art.emit('beforeAttachUrl', videoUrl);
+              $video.src = player.returnUrl(videoUrl);
+              art.emit('afterAttachUrl', $video.src);
+            }
+          });
+        }
+
+        if (typeof url === 'function') {
+          return url().then(function (videoUrl) {
+            art.loading.show();
+            return attachUrl(videoUrl);
+          });
+        }
+
+        return attachUrl(url);
       }
     });
   }

@@ -13,19 +13,30 @@ export default function attachUrlMix(art, player) {
 
     Object.defineProperty(player, 'attachUrl', {
         value: url => {
-            const typeName = type || getExt(url);
-            const typeCallback = customType[typeName];
-            return sleep().then(() => {
-                if (typeName && typeCallback) {
-                    art.emit('beforeCustomType', typeName);
-                    typeCallback($video, player.returnUrl(url), art);
-                    art.emit('afterCustomType', typeName);
-                } else {
-                    art.emit('beforeAttachUrl', url);
-                    $video.src = player.returnUrl(url);
-                    art.emit('afterAttachUrl', $video.src);
-                }
-            });
+            function attachUrl(videoUrl) {
+                const typeName = type || getExt(videoUrl);
+                const typeCallback = customType[typeName];
+                return sleep().then(() => {
+                    if (typeName && typeCallback) {
+                        art.emit('beforeCustomType', typeName);
+                        typeCallback($video, player.returnUrl(videoUrl), art);
+                        art.emit('afterCustomType', typeName);
+                    } else {
+                        art.emit('beforeAttachUrl', videoUrl);
+                        $video.src = player.returnUrl(videoUrl);
+                        art.emit('afterAttachUrl', $video.src);
+                    }
+                });                
+            }
+
+            if (typeof url === 'function') {
+                return url().then(videoUrl => {
+                    art.loading.show();
+                    return attachUrl(videoUrl);
+                });
+            }
+
+            return attachUrl(url);
         },
     });
 }
