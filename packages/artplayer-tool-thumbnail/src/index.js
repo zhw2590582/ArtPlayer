@@ -9,7 +9,10 @@ class ArtplayerToolThumbnail extends Emitter {
         this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option));
         this.video = ArtplayerToolThumbnail.creatVideo();
         this.inputChange = this.inputChange.bind(this);
+        this.ondrop = this.ondrop.bind(this);
         this.option.fileInput.addEventListener('change', this.inputChange);
+        this.option.fileInput.addEventListener('dragover', ArtplayerToolThumbnail.ondragover);
+        this.option.fileInput.addEventListener('drop', ArtplayerToolThumbnail.ondrop);
     }
 
     static get DEFAULTS() {
@@ -20,6 +23,16 @@ class ArtplayerToolThumbnail extends Emitter {
             height: 90,
             column: 10,
         };
+    }
+
+    static ondragover(e) {
+        e.preventDefault();
+    }
+
+    ondrop(e) {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        this.loadVideo(file);
     }
 
     setup(option = {}) {
@@ -55,13 +68,17 @@ class ArtplayerToolThumbnail extends Emitter {
     }
 
     inputChange() {
-        const { delay } = this.option;
-        const fileType = ['video/mp4', 'audio/ogg', 'video/webm'];
         const file = this.option.fileInput.files[0];
+        this.loadVideo(file);
+    }
+
+    loadVideo(file) {
+        const { delay } = this.option;
         if (file) {
+            const canPlayType = this.video.canPlayType(file.type);
             this.errorHandle(
-                fileType.includes(file.type),
-                `Only file types are supported: ${fileType.toString()}, but got ${file.type}`,
+                canPlayType === 'maybe' || canPlayType === 'probably',
+                `Playback of this file format is not supported: ${file.type}`,
             );
             const videoUrl = URL.createObjectURL(file);
             this.videoUrl = videoUrl;
@@ -187,6 +204,8 @@ class ArtplayerToolThumbnail extends Emitter {
 
     destroy() {
         this.option.fileInput.removeEventListener('change', this.inputChange);
+        this.option.fileInput.removeEventListener('dragover', ArtplayerToolThumbnail.ondragover);
+        this.option.fileInput.removeEventListener('drop', ArtplayerToolThumbnail.ondrop);
         document.body.removeChild(this.video);
         if (this.videoUrl) {
             URL.revokeObjectURL(this.videoUrl);

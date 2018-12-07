@@ -1,11 +1,11 @@
 function i18nMix(i18n) {
     i18n.update({
         'zh-cn': {
-            'Only file types are supported': '只支持文件类型',
+            'Playback of this file format is not supported': '不支持播放该文件格式',
             'Load local video successfully': '加载本地视频成功',
         },
         'zh-tw': {
-            'Only file types are supported': '只支持文件類型',
+            'Playback of this file format is not supported': '不支持播放該文件格式',
             'Load local video successfully': '加載本地視頻成功',
         },
     });
@@ -24,9 +24,9 @@ export default function localPreview(art) {
     i18nMix(i18n);
 
     function loadVideo(file) {
-        const fileTypes = ['video/mp4', 'audio/ogg', 'video/webm'];
         if (file) {
-            if (fileTypes.includes(file.type)) {
+            const canPlayType = template.$video.canPlayType(file.type);
+            if (canPlayType === 'maybe' || canPlayType === 'probably') {
                 const url = URL.createObjectURL(file);
                 player.playbackRateRemove();
                 player.aspectRatioRemove();
@@ -38,7 +38,7 @@ export default function localPreview(art) {
                 art.emit('switch', url);
                 notice.show(i18n.get('Load local video successfully'));
             } else {
-                const tip = `${file.type}, ${i18n.get('Only file types are supported')}: ${fileTypes.toString()}`;
+                const tip = `${i18n.get('Playback of this file format is not supported')}: ${file.type}`;
                 notice.show(tip, true, 3000);
                 console.warn(tip);
             }

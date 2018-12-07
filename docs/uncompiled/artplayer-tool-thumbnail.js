@@ -209,13 +209,25 @@
 
       _this.video = ArtplayerToolThumbnail.creatVideo();
       _this.inputChange = _this.inputChange.bind(assertThisInitialized(assertThisInitialized(_this)));
+      _this.ondrop = _this.ondrop.bind(assertThisInitialized(assertThisInitialized(_this)));
 
       _this.option.fileInput.addEventListener('change', _this.inputChange);
+
+      _this.option.fileInput.addEventListener('dragover', ArtplayerToolThumbnail.ondragover);
+
+      _this.option.fileInput.addEventListener('drop', ArtplayerToolThumbnail.ondrop);
 
       return _this;
     }
 
     createClass(ArtplayerToolThumbnail, [{
+      key: "ondrop",
+      value: function ondrop(e) {
+        e.preventDefault();
+        var file = e.dataTransfer.files[0];
+        this.loadVideo(file);
+      }
+    }, {
       key: "setup",
       value: function setup() {
         var _this2 = this;
@@ -243,14 +255,19 @@
     }, {
       key: "inputChange",
       value: function inputChange() {
+        var file = this.option.fileInput.files[0];
+        this.loadVideo(file);
+      }
+    }, {
+      key: "loadVideo",
+      value: function loadVideo(file) {
         var _this3 = this;
 
         var delay = this.option.delay;
-        var fileType = ['video/mp4', 'audio/ogg', 'video/webm'];
-        var file = this.option.fileInput.files[0];
 
         if (file) {
-          this.errorHandle(fileType.includes(file.type), "Only file types are supported: ".concat(fileType.toString(), ", but got ").concat(file.type));
+          var canPlayType = this.video.canPlayType(file.type);
+          this.errorHandle(canPlayType === 'maybe' || canPlayType === 'probably', "Playback of this file format is not supported: ".concat(file.type));
           var videoUrl = URL.createObjectURL(file);
           this.videoUrl = videoUrl;
           this.file = file;
@@ -394,6 +411,8 @@
       key: "destroy",
       value: function destroy() {
         this.option.fileInput.removeEventListener('change', this.inputChange);
+        this.option.fileInput.removeEventListener('dragover', ArtplayerToolThumbnail.ondragover);
+        this.option.fileInput.removeEventListener('drop', ArtplayerToolThumbnail.ondrop);
         document.body.removeChild(this.video);
 
         if (this.videoUrl) {
@@ -407,6 +426,11 @@
         this.emit('destroy');
       }
     }], [{
+      key: "ondragover",
+      value: function ondragover(e) {
+        e.preventDefault();
+      }
+    }, {
       key: "creatVideo",
       value: function creatVideo() {
         var video = document.createElement('video');
