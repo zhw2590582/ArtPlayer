@@ -10,8 +10,8 @@ export default class Notice {
         const { $notice, $noticeInner } = this.art.template;
         setStyle($notice, 'display', 'block');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
+        clearTimeout(this.timer);
         if (autoHide) {
-            clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 this.hide();
             }, time);

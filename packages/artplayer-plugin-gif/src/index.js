@@ -40,7 +40,6 @@ function artplayerPluginGif(art) {
 
     layers.add({
         name: 'artplayer-plugin-gif-progress',
-        html: '<div class="artplayer-plugin-gif-progress"></div>',
         style: {
             position: 'absolute',
             top: '0',

@@ -5275,9 +5275,9 @@
             $noticeInner = _this$art$template.$noticeInner;
         setStyle($notice, 'display', 'block');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
+        clearTimeout(this.timer);
 
         if (autoHide) {
-          clearTimeout(this.timer);
           this.timer = setTimeout(function () {
             _this.hide();
           }, time);
