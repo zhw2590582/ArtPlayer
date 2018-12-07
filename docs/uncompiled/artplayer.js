@@ -5572,8 +5572,40 @@
         i18n = art.i18n,
         template = art.template,
         player = art.player;
-    var fileTypes = ['video/mp4', 'audio/ogg', 'video/webm'];
     i18nMix$1(i18n);
+
+    function loadVideo(file) {
+      var fileTypes = ['video/mp4', 'audio/ogg', 'video/webm'];
+
+      if (file) {
+        if (fileTypes.includes(file.type)) {
+          var url = URL.createObjectURL(file);
+          player.playbackRateRemove();
+          player.aspectRatioRemove();
+          template.$video.src = url;
+          sleep(1000).then(function () {
+            player.currentTime = 0;
+          });
+          option.url = url;
+          art.emit('switch', url);
+          notice.show(i18n.get('Load local video successfully'));
+        } else {
+          var tip = "".concat(file.type, ", ").concat(i18n.get('Only file types are supported'), ": ").concat(fileTypes.toString());
+          notice.show(tip, true, 3000);
+          console.warn(tip);
+        }
+      }
+    }
+
+    proxy(template.$player, 'dragover', function (e) {
+      e.preventDefault();
+      notice.show(i18n.get('Load local video successfully'));
+    });
+    proxy(template.$player, 'drop', function (e) {
+      e.preventDefault();
+      var file = e.dataTransfer.files[0];
+      loadVideo(file);
+    });
     return {
       name: 'localPreview',
       attach: function attach(target) {
@@ -5589,25 +5621,7 @@
         });
         proxy($input, 'change', function () {
           var file = $input.files[0];
-
-          if (file) {
-            if (fileTypes.includes(file.type)) {
-              var url = URL.createObjectURL(file);
-              player.playbackRateRemove();
-              player.aspectRatioRemove();
-              template.$video.src = url;
-              sleep(100).then(function () {
-                player.currentTime = 0;
-              });
-              option.url = url;
-              art.emit('switch', url);
-              notice.show(i18n.get('Load local video successfully'));
-            } else {
-              var tip = "".concat(i18n.get('Only file types are supported'), ": ").concat(fileTypes.toString(), ", but got ").concat(file.type);
-              notice.show(tip, true, 3000);
-              console.warn(tip);
-            }
-          }
+          loadVideo(file);
         });
       }
     };
@@ -5852,3 +5866,4 @@
   Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+//# sourceMappingURL=artplayer.js.map

@@ -21,8 +21,40 @@ export default function localPreview(art) {
         template,
         player,
     } = art;
-    const fileTypes = ['video/mp4', 'audio/ogg', 'video/webm'];
     i18nMix(i18n);
+
+    function loadVideo(file) {
+        const fileTypes = ['video/mp4', 'audio/ogg', 'video/webm'];
+        if (file) {
+            if (fileTypes.includes(file.type)) {
+                const url = URL.createObjectURL(file);
+                player.playbackRateRemove();
+                player.aspectRatioRemove();
+                template.$video.src = url;
+                sleep(1000).then(() => {
+                    player.currentTime = 0;
+                });
+                option.url = url;
+                art.emit('switch', url);
+                notice.show(i18n.get('Load local video successfully'));
+            } else {
+                const tip = `${file.type}, ${i18n.get('Only file types are supported')}: ${fileTypes.toString()}`;
+                notice.show(tip, true, 3000);
+                console.warn(tip);
+            }
+        }
+    }
+
+    proxy(template.$player, 'dragover', e => {
+        e.preventDefault();
+        notice.show(i18n.get('Load local video successfully'));
+    });
+
+    proxy(template.$player, 'drop', e => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        loadVideo(file);
+    });
 
     return {
         name: 'localPreview',
@@ -39,24 +71,7 @@ export default function localPreview(art) {
             });
             proxy($input, 'change', () => {
                 const file = $input.files[0];
-                if (file) {
-                    if (fileTypes.includes(file.type)) {
-                        const url = URL.createObjectURL(file);
-                        player.playbackRateRemove();
-                        player.aspectRatioRemove();
-                        template.$video.src = url;
-                        sleep(100).then(() => {
-                            player.currentTime = 0;
-                        });
-                        option.url = url;
-                        art.emit('switch', url);
-                        notice.show(i18n.get('Load local video successfully'));
-                    } else {
-                        const tip = `${i18n.get('Only file types are supported')}: ${fileTypes.toString()}, but got ${file.type}`;
-                        notice.show(tip, true, 3000);
-                        console.warn(tip);
-                    }
-                }
+                loadVideo(file);
             });
         },
     };

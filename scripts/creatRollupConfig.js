@@ -33,6 +33,7 @@ module.exports = function creatRollupConfig(projectPath) {
                 : path.join(process.cwd(), `docs/uncompiled/${name}.js`),
             format: 'umd',
             exports: 'named',
+            sourcemap: isProd ? false : true,
         },
         plugins: [
             eslint({
@@ -40,6 +41,7 @@ module.exports = function creatRollupConfig(projectPath) {
             }),
             postcss({
                 plugins: [autoprefixer, cssnano],
+                sourceMap: isProd ? false : true,
                 extract: isProd
                     ? path.join(projectPath, `dist/${name}.css`)
                     : path.join(process.cwd(), `docs/uncompiled/${name}.css`),
