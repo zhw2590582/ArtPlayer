@@ -24,8 +24,12 @@
 
         new Artplayer({
             container: '.artplayer',
-            url: function () {
-                return this.plugins.artplayerPluginFlv.load($urlInput.value)
+            url: $urlInput.value,
+            type: 'flv',
+            customType: {
+                flv: function(video, url) {
+                    this.plugins.artplayerPluginFlv.init(video, url);
+                },
             },
             plugins: [artplayerPluginFlv]
         });

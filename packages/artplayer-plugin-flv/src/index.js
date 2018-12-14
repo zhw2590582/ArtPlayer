@@ -1,16 +1,19 @@
 import Flv from './flv';
 
 function artplayerPluginFlv(art) {
-    const {
-        template: { $video },
-    } = art;
-    const flv = new Flv($video);
+    let flv = null;
+
+    art.on('destroy', () => {
+        if (flv) {
+            flv.destroy();
+        }
+    });
+
     return {
-        load: url =>
-            new Promise(resolve => {
-                flv.loadUrl(url).start();
-                return resolve(flv.mediaSource.url);
-            }),
+        flv,
+        init: (mediaElement, url) => {
+            flv = new Flv(mediaElement, url);
+        },
     };
 }
 
