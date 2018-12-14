@@ -1,23 +1,15 @@
-import checkSupport from './checkSupport';
-import CreatMediaSource from './creatMediaSource';
-
-class Flv {
-    constructor(art) {
-        checkSupport(art);
-        this.mediaSource = new CreatMediaSource(art);
-        this.load = url => {
-            console.log(url);
-        };
-    }
-}
+import Flv from './flv';
 
 function artplayerPluginFlv(art) {
-    const flv = new Flv(art);
+    const {
+        template: { $video },
+    } = art;
     return {
-        load: url => new Promise(resolve => {
-            flv.load(url);
-            return resolve(flv.mediaSource.url);
-        }),
+        load: url =>
+            new Promise(resolve => {
+                const flv = new Flv($video, url);
+                return resolve(flv.mediaSource.url);
+            }),
     };
 }
 
