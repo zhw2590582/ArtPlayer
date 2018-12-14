@@ -1054,6 +1054,7 @@
             var typeCallback = customType[typeName];
 
             if (typeName && typeCallback) {
+              art.loading.show();
               art.emit('beforeCustomType', typeName);
               typeCallback.call(art, $video, videoUrl, art);
               art.emit('afterCustomType', typeName);

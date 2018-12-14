@@ -11,6 +11,10 @@ class Flv extends Emitter {
         this.mediaSource = new CreatMediaSource(this);
     }
 
+    load() {
+        console.log(this);
+    }
+
     destroy() {
         console.log(this);
     }

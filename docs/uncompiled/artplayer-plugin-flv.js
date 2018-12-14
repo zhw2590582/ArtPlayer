@@ -314,6 +314,11 @@
     }
 
     createClass(Flv, [{
+      key: "load",
+      value: function load() {
+        console.log(this);
+      }
+    }, {
       key: "destroy",
       value: function destroy() {
         console.log(this);
@@ -336,6 +341,7 @@
       flv: flv,
       init: function init(mediaElement, url) {
         flv = new Flv(mediaElement, url);
+        flv.load();
       }
     };
   }

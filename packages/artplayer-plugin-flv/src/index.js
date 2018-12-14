@@ -13,6 +13,7 @@ function artplayerPluginFlv(art) {
         flv,
         init: (mediaElement, url) => {
             flv = new Flv(mediaElement, url);
+            flv.load();
         },
     };
 }
