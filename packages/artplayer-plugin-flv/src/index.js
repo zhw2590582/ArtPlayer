@@ -1,7 +1,22 @@
+import checkSupport from './checkSupport';
+import CreatMediaSource from './creatMediaSource';
+
+class Flv {
+    constructor(art) {
+        checkSupport(art);
+        this.mediaSource = new CreatMediaSource(art);
+        this.load = url => {
+            console.log(url);
+        };
+    }
+}
+
 function artplayerPluginFlv(art) {
+    const flv = new Flv(art);
     return {
         load: url => new Promise(resolve => {
-            resolve('https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4');
+            flv.load(url);
+            return resolve(flv.mediaSource.url);
         }),
     };
 }

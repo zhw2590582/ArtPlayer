@@ -5618,6 +5618,8 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
+      errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
+      errorHandle(typeof window.fetch === 'function', "Unsupported 'fetch' method");
       _this.option = mergeDeep(Artplayer.DEFAULTS, option);
       optionValidator(_this.option, scheme);
 
