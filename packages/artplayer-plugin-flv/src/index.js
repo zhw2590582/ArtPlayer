@@ -4,10 +4,11 @@ function artplayerPluginFlv(art) {
     const {
         template: { $video },
     } = art;
+    const flv = new Flv($video);
     return {
         load: url =>
             new Promise(resolve => {
-                const flv = new Flv($video, url);
+                flv.loadUrl(url).start();
                 return resolve(flv.mediaSource.url);
             }),
     };
