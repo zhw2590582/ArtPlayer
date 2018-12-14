@@ -29,7 +29,6 @@ class Artplayer extends Emitter {
     constructor(option) {
         super();
         utils.errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
-        utils.errorHandle(typeof window.fetch === 'function', "Unsupported 'fetch' method");
         this.option = utils.mergeDeep(Artplayer.DEFAULTS, option);
         optionValidator(this.option, scheme);
         this.init();
