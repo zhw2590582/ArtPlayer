@@ -6,7 +6,7 @@
 
     function artplayerPluginFlv(art) {
       return {
-        attach: function attach(url) {
+        load: function load(url) {
           return new Promise(function (resolve) {
             resolve('https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4');
           });

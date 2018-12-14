@@ -25,7 +25,7 @@
         new Artplayer({
             container: '.artplayer',
             url: function () {
-                return this.plugins.artplayerPluginFlv.attach($urlInput.value)
+                return this.plugins.artplayerPluginFlv.load($urlInput.value)
             },
             plugins: [artplayerPluginFlv]
         });

@@ -16,9 +16,9 @@ export default function attachUrlMix(art, player) {
                     typeCallback.call(art, $video, videoUrl, art);
                     art.emit('afterCustomType', typeName);
                 } else {
-                    art.emit('beforeAttachUrl', videoUrl);
+                    art.emit('beforeAttachUrl');
                     $video.src = videoUrl;
-                    art.emit('afterAttachUrl', videoUrl);
+                    art.emit('afterAttachUrl');
                 }
                 return Promise.resolve(videoUrl);
             }

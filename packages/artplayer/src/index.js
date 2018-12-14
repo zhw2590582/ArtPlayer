@@ -60,7 +60,6 @@ class Artplayer extends Emitter {
             theme: '#f00',
             volume: 0.7,
             isLive: false,
-            mse: false,
             muted: false,
             autoplay: false,
             autoSize: false,

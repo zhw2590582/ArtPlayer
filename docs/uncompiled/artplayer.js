@@ -691,7 +691,6 @@
     theme: 'string',
     volume: 'number',
     isLive: 'boolean',
-    mse: 'boolean',
     muted: 'boolean',
     autoplay: 'boolean',
     autoSize: 'boolean',
@@ -1059,9 +1058,9 @@
               typeCallback.call(art, $video, videoUrl, art);
               art.emit('afterCustomType', typeName);
             } else {
-              art.emit('beforeAttachUrl', videoUrl);
+              art.emit('beforeAttachUrl');
               $video.src = videoUrl;
-              art.emit('afterAttachUrl', videoUrl);
+              art.emit('afterAttachUrl');
             }
 
             return Promise.resolve(videoUrl);
@@ -5704,7 +5703,6 @@
           theme: '#f00',
           volume: 0.7,
           isLive: false,
-          mse: false,
           muted: false,
           autoplay: false,
           autoSize: false,
