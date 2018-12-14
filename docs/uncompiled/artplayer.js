@@ -1047,38 +1047,35 @@
         type = _art$option.type,
         customType = _art$option.customType,
         $video = art.template.$video;
-    Object.defineProperty(player, 'returnUrl', {
-      writable: true,
-      value: function value(url) {
-        return url;
-      }
-    });
     Object.defineProperty(player, 'attachUrl', {
       value: function value(url) {
-        function attachUrl(videoUrl) {
-          var typeName = type || getExt(videoUrl);
-          var typeCallback = customType[typeName];
-          return sleep().then(function () {
+        return sleep().then(function () {
+          function attachUrl(videoUrl) {
+            var typeName = type || getExt(videoUrl);
+            var typeCallback = customType[typeName];
+
             if (typeName && typeCallback) {
               art.emit('beforeCustomType', typeName);
-              typeCallback($video, player.returnUrl(videoUrl), art);
+              typeCallback.call(art, $video, videoUrl, art);
               art.emit('afterCustomType', typeName);
             } else {
               art.emit('beforeAttachUrl', videoUrl);
-              $video.src = player.returnUrl(videoUrl);
-              art.emit('afterAttachUrl', $video.src);
+              $video.src = videoUrl;
+              art.emit('afterAttachUrl', videoUrl);
             }
-          });
-        }
 
-        if (typeof url === 'function') {
-          return url().then(function (videoUrl) {
-            art.loading.show();
-            return attachUrl(videoUrl);
-          });
-        }
+            return Promise.resolve(videoUrl);
+          }
 
-        return attachUrl(url);
+          if (typeof url === 'function') {
+            return url.call(art).then(function (videoUrl) {
+              art.loading.show();
+              return attachUrl(videoUrl);
+            });
+          }
+
+          return attachUrl(url);
+        });
       }
     });
   }
@@ -3270,103 +3267,6 @@
     resizeMix(art, this);
     flipMix(art, this);
   };
-
-  var Mse =
-  /*#__PURE__*/
-  function () {
-    function Mse(art) {
-      classCallCheck(this, Mse);
-
-      this.art = art;
-
-      if (art.option.mse) {
-        this.init();
-      }
-    }
-
-    createClass(Mse, [{
-      key: "init",
-      value: function init() {
-        var _this = this;
-
-        var _this$art = this.art,
-            player = _this$art.player,
-            events = _this$art.events;
-        this.setMimeCodec();
-        Object.defineProperty(player, 'returnUrl', {
-          value: function value() {
-            _this.mediaSource = new MediaSource();
-            var url = URL.createObjectURL(_this.mediaSource);
-
-            _this.eventBind();
-
-            events.destroyEvents.push(function () {
-              URL.revokeObjectURL(url);
-            });
-            return url;
-          }
-        });
-      }
-    }, {
-      key: "setMimeCodec",
-      value: function setMimeCodec() {
-        var option = this.art.option;
-
-        if (!option.type) {
-          var type = getExt(option.url);
-          errorHandle(Object.keys(config.mimeCodec).includes(type), "Can't find video's type '".concat(type, "' from '").concat(option.url, "'"));
-          option.type = type;
-        }
-
-        if (!option.mimeCodec) {
-          var mimeCodec = config.mimeCodec[option.type];
-          errorHandle(mimeCodec, "Can't find video's mimeCodec from ".concat(option.type));
-          option.mimeCodec = mimeCodec;
-        }
-
-        errorHandle('MediaSource' in window && MediaSource.isTypeSupported(option.mimeCodec), "Unsupported MIME type or codec: ".concat(option.mimeCodec));
-      }
-    }, {
-      key: "eventBind",
-      value: function eventBind() {
-        var _this2 = this;
-
-        var _this$art2 = this.art,
-            option = _this$art2.option,
-            proxy = _this$art2.events.proxy;
-        var _config$mse = config.mse,
-            mediaSource = _config$mse.mediaSource,
-            sourceBufferList = _config$mse.sourceBufferList,
-            sourceBuffer = _config$mse.sourceBuffer;
-        mediaSource.events.forEach(function (eventName) {
-          proxy(_this2.mediaSource, eventName, function (event) {
-            _this2.art.emit("mediaSource:".concat(event.type), event);
-          });
-        });
-        sourceBufferList.events.forEach(function (eventName) {
-          proxy(_this2.mediaSource.sourceBuffers, eventName, function (event) {
-            _this2.art.emit("sourceBuffers:".concat(event.type), event);
-          });
-          proxy(_this2.mediaSource.activeSourceBuffers, eventName, function (event) {
-            _this2.art.emit("activeSourceBuffers:".concat(event.type), event);
-          });
-        });
-        this.art.on('mediaSource:sourceopen', function () {
-          _this2.sourceBuffer = _this2.mediaSource.addSourceBuffer(option.mimeCodec);
-          sourceBuffer.events.forEach(function (eventName) {
-            proxy(_this2.sourceBuffer, eventName, function (event) {
-              _this2.art.emit("sourceBuffer:".concat(event.type), event);
-            });
-          });
-        });
-        this.art.on('sourceBuffer:updateend', function () {
-          _this2.mediaSource.endOfStream();
-        });
-      }
-    }]);
-
-    return Mse;
-  }();
 
   function component(art, parent, target, component, callback, title) {
     var option = typeof component === 'function' ? component(art) : component;
@@ -5740,7 +5640,6 @@
           this.notice = new Notice(this);
           this.events = new Events(this);
           this.player = new Player(this);
-          this.mse = new Mse(this);
           this.layers = new Layers(this);
           this.controls = new Controls(this);
           this.contextmenu = new Contextmenu(this);
