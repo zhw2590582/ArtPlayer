@@ -1,0 +1,44 @@
+html,
+body,
+.container {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.part-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 70%;
+}
+
+.part-top .config {
+    width: 500px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.part-top .config .urlInput {
+    flex: 1;
+    outline: none;
+}
+
+.part-top .config .playBtn {
+    width: 50px;
+}
+
+.part-top .artplayer {
+    width: 500px;
+    height: 300px;
+    background: #fff;
+}
+
+.part-bottom {
+    position: relative;
+    height: 30%;
+}

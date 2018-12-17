@@ -18,7 +18,6 @@ export default {
     theme: 'string',
     volume: 'number',
     isLive: 'boolean',
-    mse: 'boolean',
     muted: 'boolean',
     autoplay: 'boolean',
     autoSize: 'boolean',
