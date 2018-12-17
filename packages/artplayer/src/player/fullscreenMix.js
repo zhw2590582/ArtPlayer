@@ -15,7 +15,13 @@ export default function fullscreenMix(art, player) {
         notice.show('Your browser does not seem to support full screen functionality.');
     };
 
-    screenfull.on('change', screenfullChange);
+    // Can't run on the phone
+    try {
+        screenfull.on('change', screenfullChange);
+    } catch (error) {
+        console.error(error);
+    }
+    
     screenfull.on('error', screenfullError);
     destroyEvents.push(() => {
         screenfull.off('change', screenfullChange);
