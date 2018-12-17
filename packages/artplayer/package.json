@@ -26,7 +26,7 @@
     "draggabilly": "^2.2.0",
     "option-validator": "^1.1.1",
     "resize-observer": "^1.0.0-alpha.1",
-    "screenfull": "^3.3.3",
+    "screenfull": "^4.0.0",
     "tiny-emitter": "^2.0.2"
   }
 }
