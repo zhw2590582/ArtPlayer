@@ -1665,15 +1665,15 @@
 
     try {
       screenfull.on('change', screenfullChange);
+      screenfull.on('error', screenfullError);
+      destroyEvents.push(function () {
+        screenfull.off('change', screenfullChange);
+        screenfull.off('error', screenfullError);
+      });
     } catch (error) {
       console.error(error);
     }
 
-    screenfull.on('error', screenfullError);
-    destroyEvents.push(function () {
-      screenfull.off('change', screenfullChange);
-      screenfull.off('error', screenfullError);
-    });
     Object.defineProperty(player, 'fullscreenState', {
       get: function get() {
         return screenfull.isFullscreen;

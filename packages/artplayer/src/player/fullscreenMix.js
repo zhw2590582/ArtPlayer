@@ -18,15 +18,14 @@ export default function fullscreenMix(art, player) {
     // Can't run on the phone
     try {
         screenfull.on('change', screenfullChange);
+        screenfull.on('error', screenfullError);
+        destroyEvents.push(() => {
+            screenfull.off('change', screenfullChange);
+            screenfull.off('error', screenfullError);
+        });
     } catch (error) {
         console.error(error);
     }
-    
-    screenfull.on('error', screenfullError);
-    destroyEvents.push(() => {
-        screenfull.off('change', screenfullChange);
-        screenfull.off('error', screenfullError);
-    });
 
     Object.defineProperty(player, 'fullscreenState', {
         get: () => screenfull.isFullscreen,
