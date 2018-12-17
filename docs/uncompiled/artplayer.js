@@ -1660,9 +1660,15 @@
 
     var screenfullError = function screenfullError() {
       notice.show('Your browser does not seem to support full screen functionality.');
-    };
+    }; // Can't run on the phone
 
-    screenfull.on('change', screenfullChange);
+
+    try {
+      screenfull.on('change', screenfullChange);
+    } catch (error) {
+      console.error(error);
+    }
+
     screenfull.on('error', screenfullError);
     destroyEvents.push(function () {
       screenfull.off('change', screenfullChange);
