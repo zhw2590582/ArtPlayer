@@ -2,7 +2,10 @@ import { errorHandle } from '.';
 
 export default function checkSupport(mediaElement, url) {
     errorHandle(mediaElement instanceof HTMLVideoElement, 'The first parameter is not a video tag element');
-    errorHandle(typeof url === 'string', 'The second parameter is not a string type');
+    errorHandle(
+        typeof url === 'string' || (url instanceof File && url.type === 'video/x-flv'),
+        'The second parameter is not a string type or flv file',
+    );
     const MP4H264MimeCodec = 'video/mp4; codecs="avc1.42001E, mp4a.40.2"';
     const canPlay = mediaElement.canPlayType(MP4H264MimeCodec);
     errorHandle(

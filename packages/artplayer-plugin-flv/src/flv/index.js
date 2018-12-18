@@ -2,6 +2,7 @@ import Emitter from 'tiny-emitter';
 import checkSupport from './utils/checkSupport';
 import EventProxy from './eventProxy';
 import CreatMediaSource from './creatMediaSource';
+import LoadFile from './loadFile';
 import * as utils from './utils';
 import config from './config';
 
@@ -33,6 +34,7 @@ class Flv extends Emitter {
     load() {
         this.events = new EventProxy(this);
         this.mediaSource = new CreatMediaSource(this);
+        this.file = new LoadFile(this);
         this.emit('load');
     }
 

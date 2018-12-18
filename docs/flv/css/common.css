@@ -19,17 +19,12 @@ body,
 
 .part-top .config {
     width: 500px;
-    display: flex;
     margin-bottom: 20px;
 }
 
 .part-top .config .urlInput {
-    flex: 1;
-    outline: none;
-}
-
-.part-top .config .playBtn {
-    width: 50px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .part-top .artplayer {

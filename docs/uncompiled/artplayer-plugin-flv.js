@@ -283,7 +283,7 @@
 
   function checkSupport(mediaElement, url) {
     errorHandle(mediaElement instanceof HTMLVideoElement, 'The first parameter is not a video tag element');
-    errorHandle(typeof url === 'string', 'The second parameter is not a string type');
+    errorHandle(typeof url === 'string' || url instanceof File && url.type === 'video/x-flv', 'The second parameter is not a string type or flv file');
     var MP4H264MimeCodec = 'video/mp4; codecs="avc1.42001E, mp4a.40.2"';
     var canPlay = mediaElement.canPlayType(MP4H264MimeCodec);
     errorHandle(window.MediaSource && window.MediaSource.isTypeSupported(MP4H264MimeCodec) && (canPlay === 'probably' || canPlay === 'maybe'), "Unsupported MIME type or codec: ".concat(MP4H264MimeCodec));
@@ -388,6 +388,87 @@
     return CreatMediaSource;
   }();
 
+  var LoadFile =
+  /*#__PURE__*/
+  function () {
+    function LoadFile(flv) {
+      classCallCheck(this, LoadFile);
+
+      this.flv = flv;
+      this.uint8 = [];
+      this.index = 0;
+      this.header = {};
+      this.tags = [];
+
+      if (typeof flv.url === 'string') {
+        this.fromNetwork(flv.url);
+      } else {
+        this.fromLocal(flv.url);
+      }
+    }
+
+    createClass(LoadFile, [{
+      key: "fromNetwork",
+      value: function fromNetwork(url) {
+        console.log(this.flv.url);
+      }
+    }, {
+      key: "fromLocal",
+      value: function fromLocal(file) {
+        var _this = this;
+
+        var proxy = this.flv.events.proxy;
+        var reader = new FileReader();
+        proxy(reader, 'load', function (e) {
+          var buffer = e.target.result;
+          _this.uint8 = new Uint8Array(buffer);
+
+          _this.parse();
+        });
+        reader.readAsArrayBuffer(file);
+      }
+    }, {
+      key: "parse",
+      value: function parse() {
+        this.header.signature = this.read(3);
+        this.header.version = this.read(1);
+        this.header.flags = this.read(1);
+        this.header.headersize = this.read(4);
+        this.read(4);
+
+        while (this.index < this.uint8.length) {
+          var tag = {};
+          tag.tagType = this.read(1);
+          tag.dataSize = this.read(3);
+          tag.Timestamp = this.read(4);
+          tag.StreamID = this.read(3);
+          tag.body = this.read(LoadFile.getBodySum(tag.dataSize));
+          this.tags.push(tag);
+          this.read(4);
+        }
+      }
+    }, {
+      key: "read",
+      value: function read(length) {
+        var tempUint8 = [];
+
+        for (var i = 0; i < length; i += 1) {
+          tempUint8.push(this.uint8[this.index]);
+          this.index += 1;
+        }
+
+        return tempUint8;
+      }
+    }], [{
+      key: "getBodySum",
+      value: function getBodySum(arr) {
+        return arr[0] * Math.pow(256, 2) + arr[1] * 256 + arr[2];
+      }
+    }]);
+
+    return LoadFile;
+  }();
+
   var id = 0;
 
   var Flv =
@@ -415,6 +496,7 @@
       value: function load() {
         this.events = new EventProxy(this);
         this.mediaSource = new CreatMediaSource(this);
+        this.file = new LoadFile(this);
         this.emit('load');
       }
     }, {
