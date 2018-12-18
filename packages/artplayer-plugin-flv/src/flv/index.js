@@ -1,5 +1,5 @@
 import Emitter from 'tiny-emitter';
-import checkSupport from './checkSupport';
+import checkSupport from './utils/checkSupport';
 import EventProxy from './eventProxy';
 import CreatMediaSource from './creatMediaSource';
 import * as utils from './utils';

@@ -3,12 +3,21 @@ import config from './config';
 export default class CreatMediaSource {
     constructor(flv) {
         this.flv = flv;
+        this.creatUrl();
+        this.eventBind();
+    }
+
+    creatUrl() {
+        const {
+            mediaElement,
+            events: { destroyEvents },
+        } = this.flv;
         this.mediaSource = new MediaSource();
         const url = URL.createObjectURL(this.mediaSource);
-        flv.events.destroyEvents.push(() => {
+        destroyEvents.push(() => {
             URL.revokeObjectURL(url);
         });
-        flv.mediaElement.src = url;
+        mediaElement.src = url;
     }
 
     eventBind() {

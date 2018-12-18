@@ -1,4 +1,4 @@
-import { errorHandle } from './utils';
+import { errorHandle } from '.';
 
 export default function checkSupport(mediaElement, url) {
     errorHandle(mediaElement instanceof HTMLVideoElement, 'The first parameter is not a video tag element');

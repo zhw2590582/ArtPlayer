@@ -346,15 +346,24 @@
       classCallCheck(this, CreatMediaSource);
 
       this.flv = flv;
-      this.mediaSource = new MediaSource();
-      var url = URL.createObjectURL(this.mediaSource);
-      flv.events.destroyEvents.push(function () {
-        URL.revokeObjectURL(url);
-      });
-      flv.mediaElement.src = url;
+      this.creatUrl();
+      this.eventBind();
     }
 
     createClass(CreatMediaSource, [{
+      key: "creatUrl",
+      value: function creatUrl() {
+        var _this$flv = this.flv,
+            mediaElement = _this$flv.mediaElement,
+            destroyEvents = _this$flv.events.destroyEvents;
+        this.mediaSource = new MediaSource();
+        var url = URL.createObjectURL(this.mediaSource);
+        destroyEvents.push(function () {
+          URL.revokeObjectURL(url);
+        });
+        mediaElement.src = url;
+      }
+    }, {
       key: "eventBind",
       value: function eventBind() {
         var _this = this;
