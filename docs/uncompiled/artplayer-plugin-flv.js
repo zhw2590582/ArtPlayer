@@ -388,11 +388,11 @@
     return CreatMediaSource;
   }();
 
-  var LoadFile =
+  var FlvParse =
   /*#__PURE__*/
   function () {
-    function LoadFile(flv) {
-      classCallCheck(this, LoadFile);
+    function FlvParse(flv) {
+      classCallCheck(this, FlvParse);
 
       this.flv = flv;
       this.uint8 = [];
@@ -407,7 +407,7 @@
       }
     }
 
-    createClass(LoadFile, [{
+    createClass(FlvParse, [{
       key: "fromNetwork",
       value: function fromNetwork(url) {
         console.log(this.flv.url);
@@ -442,7 +442,7 @@
           tag.dataSize = this.read(3);
           tag.Timestamp = this.read(4);
           tag.StreamID = this.read(3);
-          tag.body = this.read(LoadFile.getBodySum(tag.dataSize));
+          tag.body = this.read(FlvParse.getBodySum(tag.dataSize));
           this.tags.push(tag);
           this.read(4);
         }
@@ -466,7 +466,7 @@
       }
     }]);
 
-    return LoadFile;
+    return FlvParse;
   }();
 
   var id = 0;
@@ -496,8 +496,7 @@
       value: function load() {
         this.events = new EventProxy(this);
         this.mediaSource = new CreatMediaSource(this);
-        this.file = new LoadFile(this);
-        this.emit('load');
+        this.flvData = new FlvParse(this);
       }
     }, {
       key: "destroy",

@@ -1,4 +1,4 @@
-export default class LoadFile {
+export default class FlvParse {
     constructor(flv) {
         this.flv = flv;
         this.uint8 = [];
@@ -41,7 +41,7 @@ export default class LoadFile {
             tag.dataSize = this.read(3);
             tag.Timestamp = this.read(4);
             tag.StreamID = this.read(3);
-            tag.body = this.read(LoadFile.getBodySum(tag.dataSize));
+            tag.body = this.read(FlvParse.getBodySum(tag.dataSize));
             this.tags.push(tag);
             this.read(4);
         }
