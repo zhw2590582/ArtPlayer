@@ -281,16 +281,15 @@
     errorHandle: errorHandle
   });
 
-  var CheckSupport = function CheckSupport() {
-    classCallCheck(this, CheckSupport);
-
+  function checkSupport(mediaElement, url) {
+    errorHandle(mediaElement instanceof HTMLVideoElement, 'The first parameter is not a video tag element');
+    errorHandle(typeof url === 'string', 'The second parameter is not a string type');
     var MP4H264MimeCodec = 'video/mp4; codecs="avc1.42001E, mp4a.40.2"';
-    var videoElement = window.document.createElement('video');
-    var canPlay = videoElement.canPlayType(MP4H264MimeCodec);
+    var canPlay = mediaElement.canPlayType(MP4H264MimeCodec);
     errorHandle(window.MediaSource && window.MediaSource.isTypeSupported(MP4H264MimeCodec) && (canPlay === 'probably' || canPlay === 'maybe'), "Unsupported MIME type or codec: ".concat(MP4H264MimeCodec));
     errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
     errorHandle(typeof window.fetch === 'function', "Unsupported 'fetch' method");
-  };
+  }
 
   var EventProxy =
   /*#__PURE__*/
@@ -363,15 +362,15 @@
         var proxy = this.flv.events.proxy;
         config.mediaSource.events.forEach(function (eventName) {
           proxy(_this.mediaSource, eventName, function (event) {
-            _this.art.emit("mediaSource:".concat(event.type), event);
+            _this.flv.emit("mediaSource:".concat(event.type), event);
           });
         });
         config.sourceBufferList.events.forEach(function (eventName) {
           proxy(_this.mediaSource.sourceBuffers, eventName, function (event) {
-            _this.art.emit("sourceBuffers:".concat(event.type), event);
+            _this.flv.emit("sourceBuffers:".concat(event.type), event);
           });
           proxy(_this.mediaSource.activeSourceBuffers, eventName, function (event) {
-            _this.art.emit("activeSourceBuffers:".concat(event.type), event);
+            _this.flv.emit("activeSourceBuffers:".concat(event.type), event);
           });
         });
       }
@@ -393,13 +392,9 @@
       classCallCheck(this, Flv);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Flv).call(this));
-      errorHandle(mediaElement instanceof HTMLVideoElement, 'The first parameter is not a video tag element');
-      errorHandle(typeof url === 'string', 'The second parameter is not a string type');
+      checkSupport(mediaElement, url);
       _this.mediaElement = mediaElement;
       _this.url = url;
-      _this.support = new CheckSupport(assertThisInitialized(assertThisInitialized(_this)));
-      _this.events = new EventProxy(assertThisInitialized(assertThisInitialized(_this)));
-      _this.mediaSource = new CreatMediaSource(assertThisInitialized(assertThisInitialized(_this)));
       id += 1;
       _this.id = id;
       Flv.instances.push(assertThisInitialized(assertThisInitialized(_this)));
@@ -409,7 +404,9 @@
     createClass(Flv, [{
       key: "load",
       value: function load() {
-        console.log(this.id);
+        this.events = new EventProxy(this);
+        this.mediaSource = new CreatMediaSource(this);
+        this.emit('load');
       }
     }, {
       key: "destroy",

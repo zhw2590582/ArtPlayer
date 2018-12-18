@@ -18,16 +18,16 @@ export default class CreatMediaSource {
 
         config.mediaSource.events.forEach(eventName => {
             proxy(this.mediaSource, eventName, event => {
-                this.art.emit(`mediaSource:${event.type}`, event);
+                this.flv.emit(`mediaSource:${event.type}`, event);
             });
         });
 
         config.sourceBufferList.events.forEach(eventName => {
             proxy(this.mediaSource.sourceBuffers, eventName, event => {
-                this.art.emit(`sourceBuffers:${event.type}`, event);
+                this.flv.emit(`sourceBuffers:${event.type}`, event);
             });
             proxy(this.mediaSource.activeSourceBuffers, eventName, event => {
-                this.art.emit(`activeSourceBuffers:${event.type}`, event);
+                this.flv.emit(`activeSourceBuffers:${event.type}`, event);
             });
         });
     }
