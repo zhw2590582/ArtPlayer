@@ -276,6 +276,11 @@
     }
   }
 
+  var utils = /*#__PURE__*/Object.freeze({
+    FlvError: FlvError,
+    errorHandle: errorHandle
+  });
+
   var CheckSupport = function CheckSupport() {
     classCallCheck(this, CheckSupport);
 
@@ -287,13 +292,95 @@
     errorHandle(typeof window.fetch === 'function', "Unsupported 'fetch' method");
   };
 
-  var CreatMediaSource = function CreatMediaSource(flv) {
-    classCallCheck(this, CreatMediaSource);
+  var EventProxy =
+  /*#__PURE__*/
+  function () {
+    function EventProxy() {
+      classCallCheck(this, EventProxy);
 
-    this.mediaSource = new MediaSource();
-    this.url = URL.createObjectURL(this.mediaSource);
-    flv.mediaElement.src = this.url;
+      this.destroyEvents = [];
+      this.proxy = this.proxy.bind(this);
+    }
+
+    createClass(EventProxy, [{
+      key: "proxy",
+      value: function proxy(target, name, callback) {
+        var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+        target.addEventListener(name, callback, option);
+        this.destroyEvents.push(function () {
+          target.removeEventListener(name, callback, option);
+        });
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.destroyEvents.forEach(function (event) {
+          return event();
+        });
+      }
+    }]);
+
+    return EventProxy;
+  }();
+
+  var config = {
+    mediaSource: {
+      propertys: ['activeSourceBuffers', 'duration', 'readyState', 'sourceBuffers'],
+      methods: ['addSourceBuffer', 'endOfStream', 'removeSourceBuffer', 'clearLiveSeekableRange', 'setLiveSeekableRange'],
+      events: ['sourceclose', 'sourceended', 'sourceopen']
+    },
+    sourceBuffer: {
+      propertys: ['mode', 'updating', 'buffered', 'timestampOffset', 'audioTracks', 'videoTracks', 'textTracks', 'appendWindowStart', 'appendWindowEnd', 'trackDefaults'],
+      methods: ['appendBuffer', 'appendStream', 'abort', 'remove'],
+      events: ['abort', 'error', 'update', 'updateend', 'updatestart']
+    },
+    sourceBufferList: {
+      propertys: ['length'],
+      events: ['addsourcebuffer', 'removesourcebuffer']
+    }
   };
+
+  var CreatMediaSource =
+  /*#__PURE__*/
+  function () {
+    function CreatMediaSource(flv) {
+      classCallCheck(this, CreatMediaSource);
+
+      this.flv = flv;
+      this.mediaSource = new MediaSource();
+      var url = URL.createObjectURL(this.mediaSource);
+      flv.events.destroyEvents.push(function () {
+        URL.revokeObjectURL(url);
+      });
+      flv.mediaElement.src = url;
+    }
+
+    createClass(CreatMediaSource, [{
+      key: "eventBind",
+      value: function eventBind() {
+        var _this = this;
+
+        var proxy = this.flv.events.proxy;
+        config.mediaSource.events.forEach(function (eventName) {
+          proxy(_this.mediaSource, eventName, function (event) {
+            _this.art.emit("mediaSource:".concat(event.type), event);
+          });
+        });
+        config.sourceBufferList.events.forEach(function (eventName) {
+          proxy(_this.mediaSource.sourceBuffers, eventName, function (event) {
+            _this.art.emit("sourceBuffers:".concat(event.type), event);
+          });
+          proxy(_this.mediaSource.activeSourceBuffers, eventName, function (event) {
+            _this.art.emit("activeSourceBuffers:".concat(event.type), event);
+          });
+        });
+      }
+    }]);
+
+    return CreatMediaSource;
+  }();
+
+  var id = 0;
 
   var Flv =
   /*#__PURE__*/
@@ -306,28 +393,54 @@
       classCallCheck(this, Flv);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Flv).call(this));
+      errorHandle(mediaElement instanceof HTMLVideoElement, 'The first parameter is not a video tag element');
+      errorHandle(typeof url === 'string', 'The second parameter is not a string type');
       _this.mediaElement = mediaElement;
       _this.url = url;
       _this.support = new CheckSupport(assertThisInitialized(assertThisInitialized(_this)));
+      _this.events = new EventProxy(assertThisInitialized(assertThisInitialized(_this)));
       _this.mediaSource = new CreatMediaSource(assertThisInitialized(assertThisInitialized(_this)));
+      id += 1;
+      _this.id = id;
+      Flv.instances.push(assertThisInitialized(assertThisInitialized(_this)));
       return _this;
     }
 
     createClass(Flv, [{
       key: "load",
       value: function load() {
-        console.log(this);
+        console.log(this.id);
       }
     }, {
       key: "destroy",
       value: function destroy() {
-        console.log(this);
+        this.events.destroy();
+        Flv.instances.splice(Flv.instances.indexOf(this), 1);
+        this.emit('destroy');
+      }
+    }], [{
+      key: "version",
+      get: function get() {
+        return '1.0.6';
+      }
+    }, {
+      key: "config",
+      get: function get() {
+        return config;
+      }
+    }, {
+      key: "utils",
+      get: function get() {
+        return utils;
       }
     }]);
 
     return Flv;
   }(tinyEmitter);
 
+  Object.defineProperty(Flv, 'instances', {
+    value: []
+  });
   window.Flv = Flv;
 
   function artplayerPluginFlv(art) {
