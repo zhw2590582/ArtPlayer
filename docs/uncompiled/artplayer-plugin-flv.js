@@ -275,10 +275,14 @@
       throw new FlvError(msg);
     }
   }
+  function getTagBodySize(dataSize) {
+    return dataSize[0] * Math.pow(256, 2) + dataSize[1] * 256 + dataSize[2];
+  }
 
   var utils = /*#__PURE__*/Object.freeze({
     FlvError: FlvError,
-    errorHandle: errorHandle
+    errorHandle: errorHandle,
+    getTagBodySize: getTagBodySize
   });
 
   function checkSupport(options) {
@@ -291,6 +295,7 @@
     errorHandle(window.MediaSource && window.MediaSource.isTypeSupported(MP4H264MimeCodec) && (canPlay === 'probably' || canPlay === 'maybe'), "Unsupported MIME type or codec: ".concat(MP4H264MimeCodec));
     errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
     errorHandle(typeof window.fetch === 'function', "Unsupported 'fetch' method");
+    errorHandle(typeof window.ReadableStream === 'function', "Unsupported 'ReadableStream' method");
   }
 
   var EventProxy =
@@ -390,10 +395,70 @@
     return CreatMediaSource;
   }();
 
+  function fetchStream(flv, url) {
+    flv.emit('flvFetchStart');
+    fetch(url).then(function (response) {
+      errorHandle(response.ok && response.status >= 200 && response.status <= 299, "".concat(response.status, " ").concat(response.statusText));
+      var contentLength = response.headers.get('content-length');
+      var contentType = response.headers.get('content-type'); // errorHandle(contentLength, 'Content-Length response header unavailable');
+
+      errorHandle(contentType.includes('x-flv'), 'The resource does not seem to be a flv file');
+      flv.emit('flvFetchInfo', {
+        type: contentType,
+        length: contentLength
+      });
+      return new Response(new ReadableStream({
+        start: function start(controller) {
+          var reader = response.body.getReader();
+
+          (function read() {
+            reader.read().then(function (_ref) {
+              var done = _ref.done,
+                  value = _ref.value;
+
+              if (done) {
+                flv.emit('flvFetchEnd');
+                controller.close();
+                return;
+              }
+
+              flv.emit('flvFetching', value);
+              controller.enqueue(value);
+              read();
+            }).catch(function (error) {
+              flv.emit('flvFetchError', error);
+            });
+          })();
+        },
+        cancel: function cancel() {
+          flv.emit('flvFetchCancel');
+        }
+      }));
+    });
+  }
+
+  function readFile(flv, file) {
+    flv.emit('flvFetchStart');
+    flv.emit('flvFetchInfo', {
+      type: file.type,
+      length: file.size
+    });
+    var proxy = flv.events.proxy;
+    var reader = new FileReader();
+    proxy(reader, 'load', function (e) {
+      var buffer = e.target.result;
+      var uint8 = new Uint8Array(buffer);
+      flv.emit('flvFetchEnd', uint8);
+    });
+    reader.readAsArrayBuffer(file);
+  }
+
   var FlvParse =
   /*#__PURE__*/
   function () {
     function FlvParse(flv) {
+      var _this = this;
+
       classCallCheck(this, FlvParse);
 
       this.flv = flv;
@@ -401,35 +466,38 @@
       this.index = 0;
       this.header = {};
       this.tags = [];
+      flv.on('flvFetchStart', function () {
+        console.log('flvFetchStart');
+      });
+      flv.on('flvFetchInfo', function (info) {
+        console.log('flvFetchInfo', info);
+      });
+      flv.on('flvFetchCancel', function () {
+        console.log('flvFetchCancel');
+      });
+      flv.on('flvFetchError', function (error) {
+        console.log('flvFetchError', error);
+      });
+      flv.on('flvFetching', function (value) {
+        console.log(value);
+      });
+      flv.on('flvFetchEnd', function (value) {
+        console.log('flvFetchEnd', value);
 
-      if (typeof flv.options.url === 'string') {
-        this.fromNetwork(flv.url);
+        if (value) {
+          _this.uint8 = value;
+        }
+      });
+      var url = flv.options.url;
+
+      if (typeof url === 'string') {
+        fetchStream(flv, url);
       } else {
-        this.fromLocal(flv.url);
+        readFile(flv, url);
       }
     }
 
     createClass(FlvParse, [{
-      key: "fromNetwork",
-      value: function fromNetwork(url) {
-        console.log(this.flv.options.url);
-      }
-    }, {
-      key: "fromLocal",
-      value: function fromLocal(file) {
-        var _this = this;
-
-        var proxy = this.flv.events.proxy;
-        var reader = new FileReader();
-        proxy(reader, 'load', function (e) {
-          var buffer = e.target.result;
-          _this.uint8 = new Uint8Array(buffer);
-
-          _this.parse();
-        });
-        reader.readAsArrayBuffer(file);
-      }
-    }, {
       key: "parse",
       value: function parse() {
         this.header.signature = this.read(3);
@@ -485,6 +553,7 @@
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Flv).call(this));
       _this.options = Object.assign({}, Flv.DEFAULTS, options);
+      console.log(_this.options);
       checkSupport(_this.options);
       id += 1;
       _this.id = id;

@@ -1,3 +1,6 @@
+import fetchStream from './fetchStream';
+import readFile from './readFile';
+
 export default class FlvParse {
     constructor(flv) {
         this.flv = flv;
@@ -5,28 +8,40 @@ export default class FlvParse {
         this.index = 0;
         this.header = {};
         this.tags = [];
-        if (typeof flv.options.url === 'string') {
-            this.fromNetwork(flv.url);
-        } else {
-            this.fromLocal(flv.url);
-        }
-    }
 
-    fromNetwork(url) {
-        console.log(this.flv.options.url);
-    }
-
-    fromLocal(file) {
-        const {
-            events: { proxy },
-        } = this.flv;
-        const reader = new FileReader();
-        proxy(reader, 'load', e => {
-            const buffer = e.target.result;
-            this.uint8 = new Uint8Array(buffer);
-            this.parse();
+        flv.on('flvFetchStart', () => {
+            console.log('flvFetchStart');
         });
-        reader.readAsArrayBuffer(file);
+
+        flv.on('flvFetchInfo', info => {
+            console.log('flvFetchInfo', info);
+        });
+
+        flv.on('flvFetchCancel', () => {
+            console.log('flvFetchCancel');
+        });
+
+        flv.on('flvFetchError', error => {
+            console.log('flvFetchError', error);
+        });
+
+        flv.on('flvFetching', value => {
+            console.log(value);
+        });
+
+        flv.on('flvFetchEnd', value => {
+            console.log('flvFetchEnd', value);
+            if (value) {
+                this.uint8 = value;
+            }
+        });
+
+        const { url } = flv.options;
+        if (typeof url === 'string') {
+            fetchStream(flv, url);
+        } else {
+            readFile(flv, url);
+        }
     }
 
     parse() {

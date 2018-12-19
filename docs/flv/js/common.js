@@ -31,10 +31,14 @@
                 flv: function(video, url) {
                     var flv = new Flv({
                         mediaElement: video,
-                        url: url,
+                        url: file instanceof File ? file : url,
                     });
 
                     flv.load();
+
+                    this.on('destroy', () => {
+                        flv.destroy();
+                    });
                 },
             },
         });

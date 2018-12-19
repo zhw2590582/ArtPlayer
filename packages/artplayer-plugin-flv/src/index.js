@@ -11,6 +11,7 @@ class Flv extends Emitter {
     constructor(options) {
         super();
         this.options = Object.assign({}, Flv.DEFAULTS, options);
+        console.log(this.options);
         checkSupport(this.options);
         id += 1;
         this.id = id;

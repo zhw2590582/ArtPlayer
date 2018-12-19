@@ -13,3 +13,7 @@ export function errorHandle(condition, msg) {
         throw new FlvError(msg);
     }
 }
+
+export function getTagBodySize(dataSize) {
+    return dataSize[0] * 256 ** 2 + dataSize[1] * 256 + dataSize[2];
+}
