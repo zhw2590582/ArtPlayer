@@ -5,7 +5,7 @@ import { mergeTypedArrays } from '../utils';
 export default class FlvParse {
     constructor(flv) {
         this.flv = flv;
-        this.uint8 = new Int8Array(0);
+        this.uint8 = new Uint8Array(0);
         this.index = 0;
         this.header = null;
         this.tags = [];
@@ -23,7 +23,7 @@ export default class FlvParse {
         });
 
         flv.on('flvFetching', value => {
-            this.uint8 = mergeTypedArrays(this.uint8, value);
+            this.uint8 = mergeTypedArrays(this.uint8, new Uint8Array(value));
             console.log(this.uint8.length);
             this.parseHeader();
         });
@@ -32,6 +32,9 @@ export default class FlvParse {
             console.log('flvFetchEnd');
             if (value) {
                 this.uint8 = value;
+                this.index = 0;
+                this.header = null;
+                this.tags = [];
                 this.parseHeader();
                 // this.parseTags();
             }
@@ -78,6 +81,15 @@ export default class FlvParse {
             this.index += 1;
         }
         return tempUint8;
+    }
+
+    verifyTags() {
+        const state = this.tags.some(item => {
+            const tagType = item.tagType[0];
+            return ![18, 9, 8].includes(tagType);
+        });
+
+        console.log(state ? '验证不通过' : '验证通过');
     }
 
     static getBodySum(arr) {

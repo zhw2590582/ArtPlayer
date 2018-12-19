@@ -542,7 +542,7 @@
       classCallCheck(this, FlvParse);
 
       this.flv = flv;
-      this.uint8 = new Int8Array(0);
+      this.uint8 = new Uint8Array(0);
       this.index = 0;
       this.header = null;
       this.tags = [];
@@ -556,7 +556,7 @@
         console.log('flvFetchError', error);
       });
       flv.on('flvFetching', function (value) {
-        _this.uint8 = mergeTypedArrays(_this.uint8, value);
+        _this.uint8 = mergeTypedArrays(_this.uint8, new Uint8Array(value));
         console.log(_this.uint8.length);
 
         _this.parseHeader();
@@ -566,6 +566,9 @@
 
         if (value) {
           _this.uint8 = value;
+          _this.index = 0;
+          _this.header = null;
+          _this.tags = [];
 
           _this.parseHeader(); // this.parseTags();
 
@@ -619,6 +622,15 @@
         }
 
         return tempUint8;
+      }
+    }, {
+      key: "verifyTags",
+      value: function verifyTags() {
+        var state = this.tags.some(function (item) {
+          var tagType = item.tagType[0];
+          return ![18, 9, 8].includes(tagType);
+        });
+        console.log(state ? '验证不通过' : '验证通过');
       }
     }], [{
       key: "getBodySum",
