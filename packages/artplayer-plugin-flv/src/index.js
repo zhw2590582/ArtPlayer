@@ -1,6 +1,7 @@
 import Emitter from 'tiny-emitter';
 import checkSupport from './utils/checkSupport';
 import EventProxy from './eventProxy';
+import CreatWorker from './creatWorker';
 import CreatMediaSource from './creatMediaSource';
 import FlvParse from './flvParse';
 import * as utils from './utils';
@@ -39,12 +40,14 @@ class Flv extends Emitter {
 
     load() {
         this.events = new EventProxy(this);
+        this.workers = new CreatWorker(this);
         this.mediaSource = new CreatMediaSource(this);
         this.flvData = new FlvParse(this);
     }
 
     destroy() {
         this.events.destroy();
+        this.workers.killAll();
         Flv.instances.splice(Flv.instances.indexOf(this), 1);
         this.emit('destroy');
     }

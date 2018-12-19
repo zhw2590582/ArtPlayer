@@ -14,6 +14,9 @@ export function errorHandle(condition, msg) {
     }
 }
 
-export function getTagBodySize(dataSize) {
-    return dataSize[0] * 256 ** 2 + dataSize[1] * 256 + dataSize[2];
+export function mergeTypedArrays(a, b) {
+    const c = new a.constructor(a.length + b.length);
+    c.set(a);
+    c.set(b, a.length);
+    return c;
 }

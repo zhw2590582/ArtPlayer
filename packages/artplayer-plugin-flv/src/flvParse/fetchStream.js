@@ -7,18 +7,21 @@ export default function fetchStream(flv, url) {
             response.ok && response.status >= 200 && response.status <= 299,
             `${response.status} ${response.statusText}`,
         );
-        const contentLength = response.headers.get('content-length');
         const contentType = response.headers.get('content-type');
-        // errorHandle(contentLength, 'Content-Length response header unavailable');
         errorHandle(contentType.includes('x-flv'), 'The resource does not seem to be a flv file');
-        flv.emit('flvFetchInfo', {
-            type: contentType,
-            length: contentLength,
-        });
         return new Response(
             new ReadableStream({
                 start(controller) {
                     const reader = response.body.getReader();
+
+                    flv.on('destroy', () => {
+                        reader.cancel();
+                    });
+
+                    flv.on('readerCancel', () => {
+                        reader.cancel();
+                    });
+
                     (function read() {
                         reader
                             .read()

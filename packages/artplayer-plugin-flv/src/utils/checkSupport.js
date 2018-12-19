@@ -19,5 +19,6 @@ export default function checkSupport(options) {
 
     errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
     errorHandle(typeof window.fetch === 'function', "Unsupported 'fetch' method");
+    errorHandle(typeof window.Worker === 'function', "Unsupported 'Worker' method");
     errorHandle(typeof window.ReadableStream === 'function', "Unsupported 'ReadableStream' method");
 }

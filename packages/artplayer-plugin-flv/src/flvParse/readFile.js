@@ -1,9 +1,5 @@
 export default function readFile(flv, file) {
     flv.emit('flvFetchStart');
-    flv.emit('flvFetchInfo', {
-        type: file.type,
-        length: file.size,
-    });
     const { proxy } = flv.events;
     const reader = new FileReader();
     proxy(reader, 'load', e => {

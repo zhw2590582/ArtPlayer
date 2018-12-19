@@ -275,14 +275,17 @@
       throw new FlvError(msg);
     }
   }
-  function getTagBodySize(dataSize) {
-    return dataSize[0] * Math.pow(256, 2) + dataSize[1] * 256 + dataSize[2];
+  function mergeTypedArrays(a, b) {
+    var c = new a.constructor(a.length + b.length);
+    c.set(a);
+    c.set(b, a.length);
+    return c;
   }
 
   var utils = /*#__PURE__*/Object.freeze({
     FlvError: FlvError,
     errorHandle: errorHandle,
-    getTagBodySize: getTagBodySize
+    mergeTypedArrays: mergeTypedArrays
   });
 
   function checkSupport(options) {
@@ -295,6 +298,7 @@
     errorHandle(window.MediaSource && window.MediaSource.isTypeSupported(MP4H264MimeCodec) && (canPlay === 'probably' || canPlay === 'maybe'), "Unsupported MIME type or codec: ".concat(MP4H264MimeCodec));
     errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
     errorHandle(typeof window.fetch === 'function', "Unsupported 'fetch' method");
+    errorHandle(typeof window.Worker === 'function', "Unsupported 'Worker' method");
     errorHandle(typeof window.ReadableStream === 'function', "Unsupported 'ReadableStream' method");
   }
 
@@ -327,6 +331,86 @@
     }]);
 
     return EventProxy;
+  }();
+
+  var CreatWorker =
+  /*#__PURE__*/
+  function () {
+    function CreatWorker() {
+      classCallCheck(this, CreatWorker);
+
+      this.workers = new Map();
+    }
+
+    createClass(CreatWorker, [{
+      key: "add",
+      value: function add(name, fn) {
+        if (!this.workers.has(name)) {
+          this.workers.set(name, CreatWorker.create(fn));
+        }
+      }
+    }, {
+      key: "run",
+      value: function run(name) {
+        var worker = this.workers.get(name);
+
+        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+
+        return worker.post(args);
+      }
+    }, {
+      key: "kill",
+      value: function kill(name) {
+        var worker = this.workers.get(name);
+        worker.kill();
+      }
+    }, {
+      key: "killAll",
+      value: function killAll() {
+        this.workers.forEach(function (worker) {
+          worker.kill();
+        });
+      }
+    }], [{
+      key: "fnToStr",
+      value: function fnToStr(fn) {
+        return "\n           self.onmessage = event => {\n               return self.postMessage((".concat(fn, ").apply(null, event.data));\n           }\n         ");
+      }
+    }, {
+      key: "create",
+      value: function create(fn) {
+        var blob = new Blob([CreatWorker.fnToStr(fn)], {
+          type: 'application/javascript'
+        });
+        var objectURL = window.URL.createObjectURL(blob);
+        var worker = new Worker(objectURL);
+
+        worker.kill = function () {
+          URL.revokeObjectURL(objectURL);
+          worker.terminate();
+        };
+
+        worker.post = function (args) {
+          return new Promise(function (resolve, reject) {
+            worker.onmessage = function (event) {
+              resolve(event.data);
+            };
+
+            worker.onerror = function (error) {
+              reject(error);
+            };
+
+            worker.postMessage(args);
+          });
+        };
+
+        return worker;
+      }
+    }]);
+
+    return CreatWorker;
   }();
 
   var config = {
@@ -399,17 +483,17 @@
     flv.emit('flvFetchStart');
     fetch(url).then(function (response) {
       errorHandle(response.ok && response.status >= 200 && response.status <= 299, "".concat(response.status, " ").concat(response.statusText));
-      var contentLength = response.headers.get('content-length');
-      var contentType = response.headers.get('content-type'); // errorHandle(contentLength, 'Content-Length response header unavailable');
-
+      var contentType = response.headers.get('content-type');
       errorHandle(contentType.includes('x-flv'), 'The resource does not seem to be a flv file');
-      flv.emit('flvFetchInfo', {
-        type: contentType,
-        length: contentLength
-      });
       return new Response(new ReadableStream({
         start: function start(controller) {
           var reader = response.body.getReader();
+          flv.on('destroy', function () {
+            reader.cancel();
+          });
+          flv.on('readerCancel', function () {
+            reader.cancel();
+          });
 
           (function read() {
             reader.read().then(function (_ref) {
@@ -439,10 +523,6 @@
 
   function readFile(flv, file) {
     flv.emit('flvFetchStart');
-    flv.emit('flvFetchInfo', {
-      type: file.type,
-      length: file.size
-    });
     var proxy = flv.events.proxy;
     var reader = new FileReader();
     proxy(reader, 'load', function (e) {
@@ -462,15 +542,12 @@
       classCallCheck(this, FlvParse);
 
       this.flv = flv;
-      this.uint8 = [];
+      this.uint8 = new Int8Array(0);
       this.index = 0;
-      this.header = {};
+      this.header = null;
       this.tags = [];
       flv.on('flvFetchStart', function () {
         console.log('flvFetchStart');
-      });
-      flv.on('flvFetchInfo', function (info) {
-        console.log('flvFetchInfo', info);
       });
       flv.on('flvFetchCancel', function () {
         console.log('flvFetchCancel');
@@ -479,13 +556,19 @@
         console.log('flvFetchError', error);
       });
       flv.on('flvFetching', function (value) {
-        console.log(value);
+        _this.uint8 = mergeTypedArrays(_this.uint8, value);
+        console.log(_this.uint8.length);
+
+        _this.parseHeader();
       });
       flv.on('flvFetchEnd', function (value) {
-        console.log('flvFetchEnd', value);
+        console.log('flvFetchEnd');
 
         if (value) {
           _this.uint8 = value;
+
+          _this.parseHeader(); // this.parseTags();
+
         }
       });
       var url = flv.options.url;
@@ -498,14 +581,22 @@
     }
 
     createClass(FlvParse, [{
-      key: "parse",
-      value: function parse() {
-        this.header.signature = this.read(3);
-        this.header.version = this.read(1);
-        this.header.flags = this.read(1);
-        this.header.headersize = this.read(4);
-        this.read(4);
-
+      key: "parseHeader",
+      value: function parseHeader() {
+        if (this.uint8.length >= 13 && !this.header) {
+          var header = {};
+          header.signature = this.read(3);
+          header.version = this.read(1);
+          header.flags = this.read(1);
+          header.headersize = this.read(4);
+          this.header = header;
+          this.read(4);
+          console.log(this.header);
+        }
+      }
+    }, {
+      key: "parseTags",
+      value: function parseTags() {
         while (this.index < this.uint8.length) {
           var tag = {};
           tag.tagType = this.read(1);
@@ -565,6 +656,7 @@
       key: "load",
       value: function load() {
         this.events = new EventProxy(this);
+        this.workers = new CreatWorker(this);
         this.mediaSource = new CreatMediaSource(this);
         this.flvData = new FlvParse(this);
       }
@@ -572,6 +664,7 @@
       key: "destroy",
       value: function destroy() {
         this.events.destroy();
+        this.workers.killAll();
         Flv.instances.splice(Flv.instances.indexOf(this), 1);
         this.emit('destroy');
       }

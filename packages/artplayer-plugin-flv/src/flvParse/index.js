@@ -1,20 +1,17 @@
 import fetchStream from './fetchStream';
 import readFile from './readFile';
+import { mergeTypedArrays } from '../utils';
 
 export default class FlvParse {
     constructor(flv) {
         this.flv = flv;
-        this.uint8 = [];
+        this.uint8 = new Int8Array(0);
         this.index = 0;
-        this.header = {};
+        this.header = null;
         this.tags = [];
 
         flv.on('flvFetchStart', () => {
             console.log('flvFetchStart');
-        });
-
-        flv.on('flvFetchInfo', info => {
-            console.log('flvFetchInfo', info);
         });
 
         flv.on('flvFetchCancel', () => {
@@ -26,13 +23,17 @@ export default class FlvParse {
         });
 
         flv.on('flvFetching', value => {
-            console.log(value);
+            this.uint8 = mergeTypedArrays(this.uint8, value);
+            console.log(this.uint8.length);
+            this.parseHeader();
         });
 
         flv.on('flvFetchEnd', value => {
-            console.log('flvFetchEnd', value);
+            console.log('flvFetchEnd');
             if (value) {
                 this.uint8 = value;
+                this.parseHeader();
+                // this.parseTags();
             }
         });
 
@@ -44,12 +45,20 @@ export default class FlvParse {
         }
     }
 
-    parse() {
-        this.header.signature = this.read(3);
-        this.header.version = this.read(1);
-        this.header.flags = this.read(1);
-        this.header.headersize = this.read(4);
-        this.read(4);
+    parseHeader() {
+        if (this.uint8.length >= 13 && !this.header) {
+            const header = {};
+            header.signature = this.read(3);
+            header.version = this.read(1);
+            header.flags = this.read(1);
+            header.headersize = this.read(4);
+            this.header = header;
+            this.read(4);
+            console.log(this.header);
+        }
+    }
+
+    parseTags() {
         while (this.index < this.uint8.length) {
             const tag = {};
             tag.tagType = this.read(1);
