@@ -9,7 +9,7 @@ export default class CreatMediaSource {
 
     creatUrl() {
         const {
-            mediaElement,
+            options: { mediaElement },
             events: { destroyEvents },
         } = this.flv;
         this.mediaSource = new MediaSource();

@@ -5,7 +5,7 @@ export default class FlvParse {
         this.index = 0;
         this.header = {};
         this.tags = [];
-        if (typeof flv.url === 'string') {
+        if (typeof flv.options.url === 'string') {
             this.fromNetwork(flv.url);
         } else {
             this.fromLocal(flv.url);
@@ -13,7 +13,7 @@ export default class FlvParse {
     }
 
     fromNetwork(url) {
-        console.log(this.flv.url);
+        console.log(this.flv.options.url);
     }
 
     fromLocal(file) {

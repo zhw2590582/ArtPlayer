@@ -29,10 +29,14 @@
             type: 'flv',
             customType: {
                 flv: function(video, url) {
-                    this.plugins.artplayerPluginFlv.init(video, file || url);
+                    var flv = new Flv({
+                        mediaElement: video,
+                        url: url,
+                    });
+
+                    flv.load();
                 },
             },
-            plugins: [artplayerPluginFlv]
         });
     }
 

@@ -281,7 +281,9 @@
     errorHandle: errorHandle
   });
 
-  function checkSupport(mediaElement, url) {
+  function checkSupport(options) {
+    var mediaElement = options.mediaElement,
+        url = options.url;
     errorHandle(mediaElement instanceof HTMLVideoElement, 'The first parameter is not a video tag element');
     errorHandle(typeof url === 'string' || url instanceof File && url.type === 'video/x-flv', 'The second parameter is not a string type or flv file');
     var MP4H264MimeCodec = 'video/mp4; codecs="avc1.42001E, mp4a.40.2"';
@@ -354,7 +356,7 @@
       key: "creatUrl",
       value: function creatUrl() {
         var _this$flv = this.flv,
-            mediaElement = _this$flv.mediaElement,
+            mediaElement = _this$flv.options.mediaElement,
             destroyEvents = _this$flv.events.destroyEvents;
         this.mediaSource = new MediaSource();
         var url = URL.createObjectURL(this.mediaSource);
@@ -400,7 +402,7 @@
       this.header = {};
       this.tags = [];
 
-      if (typeof flv.url === 'string') {
+      if (typeof flv.options.url === 'string') {
         this.fromNetwork(flv.url);
       } else {
         this.fromLocal(flv.url);
@@ -410,7 +412,7 @@
     createClass(FlvParse, [{
       key: "fromNetwork",
       value: function fromNetwork(url) {
-        console.log(this.flv.url);
+        console.log(this.flv.options.url);
       }
     }, {
       key: "fromLocal",
@@ -476,15 +478,14 @@
   function (_Emitter) {
     inherits(Flv, _Emitter);
 
-    function Flv(mediaElement, url) {
+    function Flv(options) {
       var _this;
 
       classCallCheck(this, Flv);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Flv).call(this));
-      checkSupport(mediaElement, url);
-      _this.mediaElement = mediaElement;
-      _this.url = url;
+      _this.options = Object.assign({}, Flv.DEFAULTS, options);
+      checkSupport(_this.options);
       id += 1;
       _this.id = id;
       Flv.instances.push(assertThisInitialized(assertThisInitialized(_this)));
@@ -506,6 +507,14 @@
         this.emit('destroy');
       }
     }], [{
+      key: "DEFAULTS",
+      get: function get() {
+        return {
+          mediaElement: '',
+          url: ''
+        };
+      }
+    }, {
       key: "version",
       get: function get() {
         return '1.0.6';
@@ -530,25 +539,7 @@
   });
   window.Flv = Flv;
 
-  function artplayerPluginFlv(art) {
-    var flv = null;
-    art.on('destroy', function () {
-      if (flv) {
-        flv.destroy();
-      }
-    });
-    return {
-      flv: flv,
-      init: function init(mediaElement, url) {
-        flv = new Flv(mediaElement, url);
-        flv.load();
-      }
-    };
-  }
-
-  window.artplayerPluginFlv = artplayerPluginFlv;
-
-  exports.default = artplayerPluginFlv;
+  exports.default = Flv;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
