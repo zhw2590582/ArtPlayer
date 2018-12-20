@@ -34,8 +34,6 @@
                         url: file instanceof File ? file : url,
                     });
 
-                    flv.load();
-
                     this.on('destroy', () => {
                         flv.destroy();
                     });

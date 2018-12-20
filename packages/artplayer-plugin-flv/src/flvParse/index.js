@@ -1,6 +1,6 @@
 import fetchStream from './fetchStream';
 import readFile from './readFile';
-import { mergeTypedArrays } from '../utils';
+import { mergeTypedArrays, getUint8Sum } from '../utils';
 
 export default class FlvParse {
     constructor(flv) {
@@ -63,9 +63,9 @@ export default class FlvParse {
             const tag = Object.create(null);
             tag.tagType = this.read(1);
             tag.dataSize = this.read(3);
-            tag.Timestamp = this.read(4);
-            tag.StreamID = this.read(3);
-            tag.body = this.read(FlvParse.getBodySum(tag.dataSize));
+            tag.timestamp = this.read(4);
+            tag.streamID = this.read(3);
+            tag.body = this.read(getUint8Sum(tag.dataSize));
             this.tags.push(tag);
             this.read(4);
         }
@@ -93,9 +93,5 @@ export default class FlvParse {
         console.log(this.header);
         console.log(this.tags);
         console.log(types);
-    }
-
-    static getBodySum(arr) {
-        return arr[0] * 256 ** 2 + arr[1] * 256 + arr[2];
     }
 }

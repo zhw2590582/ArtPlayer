@@ -12,8 +12,11 @@ class Flv extends Emitter {
     constructor(options) {
         super();
         this.options = Object.assign({}, Flv.DEFAULTS, options);
-        console.log(this.options);
         checkSupport(this.options);
+        this.events = new EventProxy(this);
+        this.workers = new CreatWorker(this);
+        this.mediaSource = new CreatMediaSource(this);
+        this.flvData = new FlvParse(this);
         id += 1;
         this.id = id;
         Flv.instances.push(this);
@@ -36,13 +39,6 @@ class Flv extends Emitter {
 
     static get utils() {
         return utils;
-    }
-
-    load() {
-        this.events = new EventProxy(this);
-        this.workers = new CreatWorker(this);
-        this.mediaSource = new CreatMediaSource(this);
-        this.flvData = new FlvParse(this);
     }
 
     destroy() {

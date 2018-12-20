@@ -20,3 +20,11 @@ export function mergeTypedArrays(a, b) {
     c.set(b, a.length);
     return c;
 }
+
+export function sleep(ms = 0) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function getUint8Sum(arr) {
+    return arr.reduce((totle, num, index) => totle + num * 256 ** (arr.length - index - 1), 0);
+}

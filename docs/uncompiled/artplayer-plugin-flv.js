@@ -281,11 +281,24 @@
     c.set(b, a.length);
     return c;
   }
+  function sleep() {
+    var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    return new Promise(function (resolve) {
+      return setTimeout(resolve, ms);
+    });
+  }
+  function getUint8Sum(arr) {
+    return arr.reduce(function (totle, num, index) {
+      return totle + num * Math.pow(256, arr.length - index - 1);
+    }, 0);
+  }
 
   var utils = /*#__PURE__*/Object.freeze({
     FlvError: FlvError,
     errorHandle: errorHandle,
-    mergeTypedArrays: mergeTypedArrays
+    mergeTypedArrays: mergeTypedArrays,
+    sleep: sleep,
+    getUint8Sum: getUint8Sum
   });
 
   function checkSupport(options) {
@@ -601,9 +614,9 @@
           var tag = Object.create(null);
           tag.tagType = this.read(1);
           tag.dataSize = this.read(3);
-          tag.Timestamp = this.read(4);
-          tag.StreamID = this.read(3);
-          tag.body = this.read(FlvParse.getBodySum(tag.dataSize));
+          tag.timestamp = this.read(4);
+          tag.streamID = this.read(3);
+          tag.body = this.read(getUint8Sum(tag.dataSize));
           this.tags.push(tag);
           this.read(4);
         }
@@ -637,11 +650,6 @@
         console.log(this.tags);
         console.log(types);
       }
-    }], [{
-      key: "getBodySum",
-      value: function getBodySum(arr) {
-        return arr[0] * Math.pow(256, 2) + arr[1] * 256 + arr[2];
-      }
     }]);
 
     return FlvParse;
@@ -661,8 +669,11 @@
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Flv).call(this));
       _this.options = Object.assign({}, Flv.DEFAULTS, options);
-      console.log(_this.options);
       checkSupport(_this.options);
+      _this.events = new EventProxy(assertThisInitialized(assertThisInitialized(_this)));
+      _this.workers = new CreatWorker(assertThisInitialized(assertThisInitialized(_this)));
+      _this.mediaSource = new CreatMediaSource(assertThisInitialized(assertThisInitialized(_this)));
+      _this.flvData = new FlvParse(assertThisInitialized(assertThisInitialized(_this)));
       id += 1;
       _this.id = id;
       Flv.instances.push(assertThisInitialized(assertThisInitialized(_this)));
@@ -670,14 +681,6 @@
     }
 
     createClass(Flv, [{
-      key: "load",
-      value: function load() {
-        this.events = new EventProxy(this);
-        this.workers = new CreatWorker(this);
-        this.mediaSource = new CreatMediaSource(this);
-        this.flvData = new FlvParse(this);
-      }
-    }, {
       key: "destroy",
       value: function destroy() {
         this.events.destroy();
