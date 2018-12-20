@@ -41,6 +41,7 @@ export default class FlvParse {
                 this.tags = [];
                 this.parse();
             }
+            flv.emit('parseDone');
             this.verify();
         });
 
