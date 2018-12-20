@@ -506,7 +506,7 @@
                 return;
               }
 
-              flv.emit('flvFetching', value);
+              flv.emit('flvFetching', new Uint8Array(value));
               controller.enqueue(value);
               read();
             }).catch(function (error) {
@@ -541,40 +541,41 @@
 
       classCallCheck(this, FlvParse);
 
-      this.flv = flv;
+      var url = flv.options.url;
       this.uint8 = new Uint8Array(0);
       this.index = 0;
       this.header = null;
       this.tags = [];
+      this.done = false;
       flv.on('flvFetchStart', function () {
-        console.log('flvFetchStart');
+        console.log('[flv-fetch-start]');
       });
       flv.on('flvFetchCancel', function () {
-        console.log('flvFetchCancel');
+        console.log('[flv-fetch-cancel]');
       });
       flv.on('flvFetchError', function (error) {
-        console.log('flvFetchError', error);
+        console.log('[flv-fetch-error]', error);
       });
-      flv.on('flvFetching', function (value) {
-        _this.uint8 = mergeTypedArrays(_this.uint8, new Uint8Array(value));
-        console.log(_this.uint8.length);
+      flv.on('flvFetching', function (uint8) {
+        _this.uint8 = mergeTypedArrays(_this.uint8, uint8);
 
-        _this.parseHeader();
+        _this.parse();
       });
-      flv.on('flvFetchEnd', function (value) {
-        console.log('flvFetchEnd');
+      flv.on('flvFetchEnd', function (uint8) {
+        console.log('[flv-fetch-end]');
+        _this.done = true;
 
-        if (value) {
-          _this.uint8 = value;
+        if (uint8) {
+          _this.uint8 = uint8;
           _this.index = 0;
           _this.header = null;
           _this.tags = [];
 
-          _this.parseHeader(); // this.parseTags();
-
+          _this.parse();
         }
+
+        _this.verify();
       });
-      var url = flv.options.url;
 
       if (typeof url === 'string') {
         fetchStream(flv, url);
@@ -584,24 +585,20 @@
     }
 
     createClass(FlvParse, [{
-      key: "parseHeader",
-      value: function parseHeader() {
+      key: "parse",
+      value: function parse() {
         if (this.uint8.length >= 13 && !this.header) {
-          var header = {};
+          var header = Object.create(null);
           header.signature = this.read(3);
           header.version = this.read(1);
           header.flags = this.read(1);
           header.headersize = this.read(4);
           this.header = header;
           this.read(4);
-          console.log(this.header);
         }
-      }
-    }, {
-      key: "parseTags",
-      value: function parseTags() {
+
         while (this.index < this.uint8.length) {
-          var tag = {};
+          var tag = Object.create(null);
           tag.tagType = this.read(1);
           tag.dataSize = this.read(3);
           tag.Timestamp = this.read(4);
@@ -624,13 +621,21 @@
         return tempUint8;
       }
     }, {
-      key: "verifyTags",
-      value: function verifyTags() {
-        var state = this.tags.some(function (item) {
+      key: "verify",
+      value: function verify() {
+        var types = Object.create(null);
+        this.tags.forEach(function (item) {
           var tagType = item.tagType[0];
-          return ![18, 9, 8].includes(tagType);
+
+          if (types[tagType]) {
+            types[tagType] += 1;
+          } else {
+            types[tagType] = 1;
+          }
         });
-        console.log(state ? '验证不通过' : '验证通过');
+        console.log(this.header);
+        console.log(this.tags);
+        console.log(types);
       }
     }], [{
       key: "getBodySum",

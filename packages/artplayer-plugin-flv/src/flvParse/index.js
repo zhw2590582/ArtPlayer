@@ -4,43 +4,43 @@ import { mergeTypedArrays } from '../utils';
 
 export default class FlvParse {
     constructor(flv) {
-        this.flv = flv;
+        const { url } = flv.options;
         this.uint8 = new Uint8Array(0);
         this.index = 0;
         this.header = null;
         this.tags = [];
+        this.done = false;
 
         flv.on('flvFetchStart', () => {
-            console.log('flvFetchStart');
+            console.log('[flv-fetch-start]');
         });
 
         flv.on('flvFetchCancel', () => {
-            console.log('flvFetchCancel');
+            console.log('[flv-fetch-cancel]');
         });
 
         flv.on('flvFetchError', error => {
-            console.log('flvFetchError', error);
+            console.log('[flv-fetch-error]', error);
         });
 
-        flv.on('flvFetching', value => {
-            this.uint8 = mergeTypedArrays(this.uint8, new Uint8Array(value));
-            console.log(this.uint8.length);
-            this.parseHeader();
+        flv.on('flvFetching', uint8 => {
+            this.uint8 = mergeTypedArrays(this.uint8, uint8);
+            this.parse();
         });
 
-        flv.on('flvFetchEnd', value => {
-            console.log('flvFetchEnd');
-            if (value) {
-                this.uint8 = value;
+        flv.on('flvFetchEnd', uint8 => {
+            console.log('[flv-fetch-end]');
+            this.done = true;
+            if (uint8) {
+                this.uint8 = uint8;
                 this.index = 0;
                 this.header = null;
                 this.tags = [];
-                this.parseHeader();
-                // this.parseTags();
+                this.parse();
             }
+            this.verify();
         });
 
-        const { url } = flv.options;
         if (typeof url === 'string') {
             fetchStream(flv, url);
         } else {
@@ -48,22 +48,19 @@ export default class FlvParse {
         }
     }
 
-    parseHeader() {
+    parse() {
         if (this.uint8.length >= 13 && !this.header) {
-            const header = {};
+            const header = Object.create(null);
             header.signature = this.read(3);
             header.version = this.read(1);
             header.flags = this.read(1);
             header.headersize = this.read(4);
             this.header = header;
             this.read(4);
-            console.log(this.header);
         }
-    }
 
-    parseTags() {
         while (this.index < this.uint8.length) {
-            const tag = {};
+            const tag = Object.create(null);
             tag.tagType = this.read(1);
             tag.dataSize = this.read(3);
             tag.Timestamp = this.read(4);
@@ -83,13 +80,19 @@ export default class FlvParse {
         return tempUint8;
     }
 
-    verifyTags() {
-        const state = this.tags.some(item => {
+    verify() {
+        const types = Object.create(null);
+        this.tags.forEach(item => {
             const tagType = item.tagType[0];
-            return ![18, 9, 8].includes(tagType);
+            if (types[tagType]) {
+                types[tagType] += 1;
+            } else {
+                types[tagType] = 1;
+            }
         });
-
-        console.log(state ? '验证不通过' : '验证通过');
+        console.log(this.header);
+        console.log(this.tags);
+        console.log(types);
     }
 
     static getBodySum(arr) {

@@ -31,7 +31,7 @@ export default function fetchStream(flv, url) {
                                     controller.close();
                                     return;
                                 }
-                                flv.emit('flvFetching', value);
+                                flv.emit('flvFetching', new Uint8Array(value));
                                 controller.enqueue(value);
                                 read();
                             })
