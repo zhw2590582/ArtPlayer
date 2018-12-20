@@ -1,5 +1,6 @@
 import fetchStream from './fetchStream';
 import readFile from './readFile';
+import getMetaData from './getMetaData';
 import { mergeTypedArrays, getUint8Sum } from '../utils';
 
 export default class FlvParse {
@@ -8,6 +9,7 @@ export default class FlvParse {
         this.uint8 = new Uint8Array(0);
         this.index = 0;
         this.header = null;
+        this.metadata = null;
         this.tags = [];
         this.done = false;
 
@@ -35,6 +37,7 @@ export default class FlvParse {
                 this.uint8 = uint8;
                 this.index = 0;
                 this.header = null;
+                this.metadata = null;
                 this.tags = [];
                 this.parse();
             }
@@ -69,6 +72,10 @@ export default class FlvParse {
             this.tags.push(tag);
             this.read(4);
         }
+
+        if (this.tags.length > 1 && this.tags[0].tagType[0] === 18 && !this.metadata) {
+            this.metadata = getMetaData(this.tags[0]);
+        }
     }
 
     read(length) {
@@ -91,6 +98,7 @@ export default class FlvParse {
             }
         });
         console.log(this.header);
+        console.log(this.metadata);
         console.log(this.tags);
         console.log(types);
     }

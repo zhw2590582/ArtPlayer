@@ -170,6 +170,36 @@
   };
   var tinyEmitter = E;
 
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    }
+  }
+
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  var iterableToArray = _iterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  }
+
+  var toConsumableArray = _toConsumableArray;
+
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
   }
@@ -292,13 +322,56 @@
       return totle + num * Math.pow(256, arr.length - index - 1);
     }, 0);
   }
+  function string2Bin(str) {
+    var result = [];
+
+    for (var i = 0; i < str.length; i += 1) {
+      result.push(Number(str.charCodeAt(i).toString(10)));
+    }
+
+    return result;
+  }
+  function bin2String(array) {
+    var _String$fromCharCode;
+
+    return (_String$fromCharCode = String.fromCharCode).call.apply(_String$fromCharCode, [String].concat(toConsumableArray(array)));
+  }
+  function bin2Float(array) {
+    var view = new DataView(new ArrayBuffer(array.length));
+    array.forEach(function (b, i) {
+      view.setUint8(i, b);
+    });
+    return view.getFloat64(0);
+  }
+  function bin2Boolean(bin) {
+    return bin === 1;
+  }
+  function readUint8(uint8) {
+    var index = 0;
+    return function read(length) {
+      var result = [];
+
+      for (var i = 0; i < length; i += 1) {
+        result.push(uint8[index]);
+        index += 1;
+      }
+
+      read.index = index;
+      return result;
+    };
+  }
 
   var utils = /*#__PURE__*/Object.freeze({
     FlvError: FlvError,
     errorHandle: errorHandle,
     mergeTypedArrays: mergeTypedArrays,
     sleep: sleep,
-    getUint8Sum: getUint8Sum
+    getUint8Sum: getUint8Sum,
+    string2Bin: string2Bin,
+    bin2String: bin2String,
+    bin2Float: bin2Float,
+    bin2Boolean: bin2Boolean,
+    readUint8: readUint8
   });
 
   function checkSupport(options) {
@@ -535,6 +608,7 @@
   }
 
   function readFile(flv, file) {
+    console.log(file);
     flv.emit('flvFetchStart');
     var proxy = flv.events.proxy;
     var reader = new FileReader();
@@ -544,6 +618,213 @@
       flv.emit('flvFetchEnd', uint8);
     });
     reader.readAsArrayBuffer(file);
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  var arrayWithHoles = _arrayWithHoles;
+
+  function _iterableToArrayLimit(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  var iterableToArrayLimit = _iterableToArrayLimit;
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  var nonIterableRest = _nonIterableRest;
+
+  function _slicedToArray(arr, i) {
+    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+  }
+
+  var slicedToArray = _slicedToArray;
+
+  function getMetaData(scripTag) {
+    var readMetaData = readUint8(scripTag.body);
+    var metadata = Object.create(null);
+    var amf1 = Object.create(null);
+    var amf2 = Object.create(null);
+
+    var _readMetaData = readMetaData(1);
+
+    var _readMetaData2 = slicedToArray(_readMetaData, 1);
+
+    amf1.type = _readMetaData2[0];
+    amf1.size = getUint8Sum(readMetaData(2));
+    amf1.string = bin2String(readMetaData(amf1.size));
+
+    var _readMetaData3 = readMetaData(1);
+
+    var _readMetaData4 = slicedToArray(_readMetaData3, 1);
+
+    amf2.type = _readMetaData4[0];
+    amf2.size = getUint8Sum(readMetaData(4));
+    amf2.metaData = Object.create(null);
+    console.log(scripTag.body.slice(13));
+    var nameLength = getUint8Sum(readMetaData(2));
+    var name = bin2String(readMetaData(nameLength));
+    var type = readMetaData(1)[0];
+    var valueLength = getUint8Sum(readMetaData(2));
+    var value = bin2String(readMetaData(valueLength));
+    console.log(type, name, value);
+    var nameLength2 = getUint8Sum(readMetaData(2));
+    var name2 = bin2String(readMetaData(nameLength2));
+    var type2 = readMetaData(1)[0];
+    var valueLength2 = getUint8Sum(readMetaData(2));
+    var value2 = bin2String(readMetaData(valueLength2));
+    console.log(type2, name2, value2);
+    var nameLength3 = getUint8Sum(readMetaData(2));
+    var name3 = bin2String(readMetaData(nameLength3));
+    var type3 = readMetaData(1)[0];
+    var value3 = bin2Boolean(readMetaData(1)[0]);
+    console.log(type3, name3, value3);
+    var nameLength4 = getUint8Sum(readMetaData(2));
+    var name4 = bin2String(readMetaData(nameLength4));
+    var type4 = readMetaData(1)[0];
+    var value4 = bin2Boolean(readMetaData(1)[0]);
+    console.log(type4, name4, value4);
+    var nameLength5 = getUint8Sum(readMetaData(2));
+    var name5 = bin2String(readMetaData(nameLength5));
+    var type5 = readMetaData(1)[0];
+    var value5 = bin2Boolean(readMetaData(1)[0]);
+    console.log(type5, name5, value5);
+    var nameLength6 = getUint8Sum(readMetaData(2));
+    var name6 = bin2String(readMetaData(nameLength6));
+    var type6 = readMetaData(1)[0];
+    var value6 = bin2Boolean(readMetaData(1)[0]);
+    console.log(type6, name6, value6);
+    var nameLength7 = getUint8Sum(readMetaData(2));
+    var name7 = bin2String(readMetaData(nameLength7));
+    var type7 = readMetaData(1)[0];
+    var value7 = bin2Boolean(readMetaData(1)[0]);
+    console.log(type7, name7, value7);
+    var nameLength8 = getUint8Sum(readMetaData(2));
+    var name8 = bin2String(readMetaData(nameLength8));
+    var type8 = readMetaData(1)[0];
+    var value8 = bin2Float(readMetaData(8));
+    console.log(type8, name8, value8);
+    var nameLength9 = getUint8Sum(readMetaData(2));
+    var name9 = bin2String(readMetaData(nameLength9));
+    var type9 = readMetaData(1)[0];
+    var value9 = bin2Float(readMetaData(8));
+    console.log(type9, name9, value9);
+    var nameLength10 = getUint8Sum(readMetaData(2));
+    var name10 = bin2String(readMetaData(nameLength10));
+    var type10 = readMetaData(1)[0];
+    var value10 = bin2Float(readMetaData(8));
+    console.log(type10, name10, value10);
+    var nameLength11 = getUint8Sum(readMetaData(2));
+    var name11 = bin2String(readMetaData(nameLength11));
+    var type11 = readMetaData(1)[0];
+    var value11 = bin2Float(readMetaData(8));
+    console.log(type11, name11, value11);
+    var nameLength12 = getUint8Sum(readMetaData(2));
+    var name12 = bin2String(readMetaData(nameLength12));
+    var type12 = readMetaData(1)[0];
+    var value12 = bin2Float(readMetaData(8));
+    console.log(type12, name12, value12);
+    var nameLength13 = getUint8Sum(readMetaData(2));
+    var name13 = bin2String(readMetaData(nameLength13));
+    var type13 = readMetaData(1)[0];
+    var value13 = bin2Float(readMetaData(8));
+    console.log(type13, name13, value13);
+    var nameLength14 = getUint8Sum(readMetaData(2));
+    var name14 = bin2String(readMetaData(nameLength14));
+    var type14 = readMetaData(1)[0];
+    var value14 = bin2Float(readMetaData(8));
+    console.log(type14, name14, value14);
+    var nameLength15 = getUint8Sum(readMetaData(2));
+    var name15 = bin2String(readMetaData(nameLength15));
+    var type15 = readMetaData(1)[0];
+    var value15 = bin2Float(readMetaData(8));
+    console.log(type15, name15, value15);
+    var nameLength16 = getUint8Sum(readMetaData(2));
+    var name16 = bin2String(readMetaData(nameLength16));
+    var type16 = readMetaData(1)[0];
+    var value16 = bin2Float(readMetaData(8));
+    console.log(type16, name16, value16);
+    var nameLength17 = getUint8Sum(readMetaData(2));
+    var name17 = bin2String(readMetaData(nameLength17));
+    var type17 = readMetaData(1)[0];
+    var value17 = bin2Float(readMetaData(8));
+    console.log(type17, name17, value17);
+    var nameLength18 = getUint8Sum(readMetaData(2));
+    var name18 = bin2String(readMetaData(nameLength18));
+    var type18 = readMetaData(1)[0];
+    var value18 = bin2Float(readMetaData(8));
+    console.log(type18, name18, value18);
+    var nameLength19 = getUint8Sum(readMetaData(2));
+    var name19 = bin2String(readMetaData(nameLength19));
+    var type19 = readMetaData(1)[0];
+    var value19 = bin2Float(readMetaData(8));
+    console.log(type19, name19, value19);
+    var nameLength20 = getUint8Sum(readMetaData(2));
+    var name20 = bin2String(readMetaData(nameLength20));
+    var type20 = readMetaData(1)[0];
+    var value20 = bin2Float(readMetaData(8));
+    console.log(type20, name20, value20);
+    var nameLength21 = getUint8Sum(readMetaData(2));
+    var name21 = bin2String(readMetaData(nameLength21));
+    var type21 = readMetaData(1)[0];
+    var value21 = bin2Boolean(readMetaData(1)[0]);
+    console.log(type21, name21, value21);
+    var nameLength22 = getUint8Sum(readMetaData(2));
+    var name22 = bin2String(readMetaData(nameLength22));
+    var type22 = readMetaData(1)[0];
+    var value22 = bin2Float(readMetaData(8));
+    console.log(type22, name22, value22);
+    var nameLength23 = getUint8Sum(readMetaData(2));
+    var name23 = bin2String(readMetaData(nameLength23));
+    var type23 = readMetaData(1)[0];
+    var value23 = bin2Float(readMetaData(8));
+    console.log(type23, name23, value23);
+    var nameLength24 = getUint8Sum(readMetaData(2));
+    var name24 = bin2String(readMetaData(nameLength24));
+    var type24 = readMetaData(1)[0];
+    var value24 = bin2Float(readMetaData(8));
+    console.log(type24, name24, value24);
+    var nameLength25 = getUint8Sum(readMetaData(2));
+    var name25 = bin2String(readMetaData(nameLength25));
+    var type25 = readMetaData(1)[0];
+    var value25 = bin2Float(readMetaData(8));
+    console.log(type25, name25, value25);
+    var nameLength26 = getUint8Sum(readMetaData(2));
+    var name26 = bin2String(readMetaData(nameLength26));
+    var type26 = readMetaData(1)[0];
+    console.log(scripTag.body.slice(readMetaData.index));
+    console.log(type26, name26); // while (readMetaData.index < scripTag.body.length) {
+    // }
+
+    metadata.amf1 = amf1;
+    metadata.amf2 = amf2;
+    return metadata;
   }
 
   var FlvParse =
@@ -558,6 +839,7 @@
       this.uint8 = new Uint8Array(0);
       this.index = 0;
       this.header = null;
+      this.metadata = null;
       this.tags = [];
       this.done = false;
       flv.on('flvFetchStart', function () {
@@ -582,6 +864,7 @@
           _this.uint8 = uint8;
           _this.index = 0;
           _this.header = null;
+          _this.metadata = null;
           _this.tags = [];
 
           _this.parse();
@@ -620,6 +903,10 @@
           this.tags.push(tag);
           this.read(4);
         }
+
+        if (this.tags.length > 1 && this.tags[0].tagType[0] === 18 && !this.metadata) {
+          this.metadata = getMetaData(this.tags[0]);
+        }
       }
     }, {
       key: "read",
@@ -647,6 +934,7 @@
           }
         });
         console.log(this.header);
+        console.log(this.metadata);
         console.log(this.tags);
         console.log(types);
       }
