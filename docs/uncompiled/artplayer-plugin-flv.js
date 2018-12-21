@@ -346,18 +346,22 @@
   function bin2Boolean(bin) {
     return bin === 1;
   }
+  function log(name) {
+    var msg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    console.log("[".concat(name, "] ").concat(msg));
+  }
   function readUint8(uint8) {
     var index = 0;
     return function read(length) {
-      var result = [];
+      var tempUint8 = new Uint8Array(length);
 
       for (var i = 0; i < length; i += 1) {
-        result.push(uint8[index]);
+        tempUint8[i] = uint8[index];
         index += 1;
       }
 
       read.index = index;
-      return result;
+      return tempUint8;
     };
   }
 
@@ -371,6 +375,7 @@
     bin2String: bin2String,
     bin2Float: bin2Float,
     bin2Boolean: bin2Boolean,
+    log: log,
     readUint8: readUint8
   });
 
@@ -565,61 +570,6 @@
     return CreatMediaSource;
   }();
 
-  function fetchStream(flv, url) {
-    flv.emit('flvFetchStart');
-    fetch(url).then(function (response) {
-      errorHandle(response.ok && response.status >= 200 && response.status <= 299, "".concat(response.status, " ").concat(response.statusText));
-      var contentType = response.headers.get('content-type');
-      errorHandle(contentType.includes('x-flv'), 'The resource does not seem to be a flv file');
-      return new Response(new ReadableStream({
-        start: function start(controller) {
-          var reader = response.body.getReader();
-          flv.on('destroy', function () {
-            reader.cancel();
-          });
-          flv.on('readerCancel', function () {
-            reader.cancel();
-          });
-
-          (function read() {
-            reader.read().then(function (_ref) {
-              var done = _ref.done,
-                  value = _ref.value;
-
-              if (done) {
-                flv.emit('flvFetchEnd');
-                controller.close();
-                return;
-              }
-
-              flv.emit('flvFetching', new Uint8Array(value));
-              controller.enqueue(value);
-              read();
-            }).catch(function (error) {
-              flv.emit('flvFetchError', error);
-            });
-          })();
-        },
-        cancel: function cancel() {
-          flv.emit('flvFetchCancel');
-        }
-      }));
-    });
-  }
-
-  function readFile(flv, file) {
-    console.log(file);
-    flv.emit('flvFetchStart');
-    var proxy = flv.events.proxy;
-    var reader = new FileReader();
-    proxy(reader, 'load', function (e) {
-      var buffer = e.target.result;
-      var uint8 = new Uint8Array(buffer);
-      flv.emit('flvFetchEnd', uint8);
-    });
-    reader.readAsArrayBuffer(file);
-  }
-
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
   }
@@ -666,6 +616,61 @@
 
   var slicedToArray = _slicedToArray;
 
+  function fetchStream(flv, url) {
+    flv.emit('flvFetchStart');
+    fetch(url).then(function (response) {
+      errorHandle(response.ok && response.status >= 200 && response.status <= 299, "".concat(response.status, " ").concat(response.statusText));
+      var contentType = response.headers.get('content-type');
+      errorHandle(contentType.includes('x-flv'), 'The resource does not seem to be a flv file');
+      return new Response(new ReadableStream({
+        start: function start(controller) {
+          var reader = response.body.getReader();
+          flv.on('destroy', function () {
+            reader.cancel();
+          });
+          flv.on('readerCancel', function () {
+            reader.cancel();
+          });
+
+          (function read() {
+            reader.read().then(function (_ref) {
+              var done = _ref.done,
+                  value = _ref.value;
+
+              if (done) {
+                flv.emit('flvFetchEnd');
+                controller.close();
+                return;
+              }
+
+              flv.emit('flvFetching', new Uint8Array(value));
+              controller.enqueue(value);
+              read();
+            }).catch(function (error) {
+              throw error;
+            });
+          })();
+        },
+        cancel: function cancel() {
+          flv.emit('flvFetchCancel');
+        }
+      }));
+    });
+  }
+
+  function readFile(flv, file) {
+    console.log(file);
+    flv.emit('flvFetchStart');
+    var proxy = flv.events.proxy;
+    var reader = new FileReader();
+    proxy(reader, 'load', function (e) {
+      var buffer = e.target.result;
+      var uint8 = new Uint8Array(buffer);
+      flv.emit('flvFetchEnd', uint8);
+    });
+    reader.readAsArrayBuffer(file);
+  }
+
   function getMetaData(scripTag) {
     var readScripTag = readUint8(scripTag.body);
     var metadata = Object.create(null);
@@ -677,6 +682,7 @@
     var _readScripTag2 = slicedToArray(_readScripTag, 1);
 
     amf1.type = _readScripTag2[0];
+    errorHandle(amf1.type === 2, "AMF: [amf1] type expect 2, but got ".concat(amf1.type));
     amf1.size = getUint8Sum(readScripTag(2));
     amf1.string = bin2String(readScripTag(amf1.size));
 
@@ -685,6 +691,7 @@
     var _readScripTag4 = slicedToArray(_readScripTag3, 1);
 
     amf2.type = _readScripTag4[0];
+    errorHandle(amf2.type === 8, "AMF: [amf1] type expect 8, but got ".concat(amf2.type));
     amf2.size = getUint8Sum(readScripTag(4));
     amf2.metaData = Object.create(null);
 
@@ -733,9 +740,9 @@
           case 8:
             {
               value = Object.create(null);
-              var _endObject = false;
+              var endArray = false;
 
-              while (!_endObject && readScripTag.index < scripTag.body.length) {
+              while (!endArray && readScripTag.index < scripTag.body.length) {
                 var _nameLength = getUint8Sum(readScripTag(2));
 
                 var _name = bin2String(readScripTag(_nameLength));
@@ -747,7 +754,7 @@
                 }
 
                 if (_type2 === 9) {
-                  _endObject = true;
+                  endArray = true;
                 }
               }
 
@@ -777,7 +784,7 @@
             }
 
           default:
-            console.warn("AMF: Unknown metaData type: ".concat(type, " in ").concat(readScripTag.index - 1));
+            errorHandle(false, "AMF: Unknown metaData type: ".concat(type));
             break;
         }
       }
@@ -795,6 +802,8 @@
       }
     }
 
+    errorHandle(readScripTag.index === scripTag.body.length, 'AMF: Seems to be incompletely parsed');
+    errorHandle(amf2.size === Object.keys(amf2.metaData).length, 'AMF: [amf2] length does not match');
     metadata.amf1 = amf1;
     metadata.amf2 = amf2;
     return metadata;
@@ -809,7 +818,9 @@
       classCallCheck(this, FlvParse);
 
       this.flv = flv;
-      var url = flv.options.url;
+      var _flv$options = flv.options,
+          url = _flv$options.url,
+          debug = _flv$options.debug;
       this.uint8 = new Uint8Array(0);
       this.index = 0;
       this.header = null;
@@ -817,13 +828,14 @@
       this.tags = [];
       this.done = false;
       flv.on('flvFetchStart', function () {
-        console.log('[flv-fetch-start]');
+        if (debug) {
+          console.log('[flv-fetch-start]', url);
+        }
       });
       flv.on('flvFetchCancel', function () {
-        console.log('[flv-fetch-cancel]');
-      });
-      flv.on('flvFetchError', function (error) {
-        console.log('[flv-fetch-error]', error);
+        if (debug) {
+          console.log('[flv-fetch-cancel]');
+        }
       });
       flv.on('flvFetching', function (uint8) {
         _this.uint8 = mergeTypedArrays(_this.uint8, uint8);
@@ -831,7 +843,10 @@
         _this.parse();
       });
       flv.on('flvFetchEnd', function (uint8) {
-        console.log('[flv-fetch-end]');
+        if (debug) {
+          console.log('[flv-fetch-end]');
+        }
+
         _this.done = true;
 
         if (uint8) {
@@ -844,7 +859,11 @@
           _this.parse();
         }
 
-        flv.emit('parseDone');
+        flv.emit('flvParseDone');
+
+        if (debug) {
+          console.log('[flv-parse-done]');
+        }
       });
 
       if (typeof url === 'string') {
@@ -857,43 +876,68 @@
     createClass(FlvParse, [{
       key: "parse",
       value: function parse() {
+        var debug = this.flv.options.debug;
+
         if (this.uint8.length >= 13 && !this.header) {
           var header = Object.create(null);
-          header.signature = this.read(3);
-          header.version = this.read(1);
-          header.flags = this.read(1);
-          header.headersize = this.read(4);
+          header.signature = bin2String(this.read(3));
+
+          var _this$read = this.read(1);
+
+          var _this$read2 = slicedToArray(_this$read, 1);
+
+          header.version = _this$read2[0];
+
+          var _this$read3 = this.read(1);
+
+          var _this$read4 = slicedToArray(_this$read3, 1);
+
+          header.flags = _this$read4[0];
+          header.headersize = getUint8Sum(this.read(4));
           this.header = header;
           this.read(4);
-          this.flv.emit('parseHeader', this.header);
-          console.log(this.header);
+          this.flv.emit('flvParseHeader', this.header);
+
+          if (debug) {
+            console.log('[flv-parse-header]', this.header);
+          }
         }
 
         while (this.index < this.uint8.length) {
           var tag = Object.create(null);
-          tag.tagType = this.read(1);
-          tag.dataSize = this.read(3);
+
+          var _this$read5 = this.read(1);
+
+          var _this$read6 = slicedToArray(_this$read5, 1);
+
+          tag.tagType = _this$read6[0];
+          tag.dataSize = getUint8Sum(this.read(3));
           tag.timestamp = this.read(4);
           tag.streamID = this.read(3);
-          tag.body = this.read(getUint8Sum(tag.dataSize));
+          tag.body = this.read(tag.dataSize);
           this.tags.push(tag);
           this.read(4);
-          this.flv.emit('parseTag', tag);
+          this.flv.emit('flvParseTag', tag);
         }
 
-        if (this.tags.length > 1 && this.tags[0].tagType[0] === 18 && !this.metadata) {
+        this.flv.emit('flvParseTags', this.tags);
+
+        if (this.tags.length > 1 && this.tags[0].tagType === 18 && !this.metadata) {
           this.metadata = getMetaData(this.tags[0]);
           this.flv.emit('parseMetadata', this.metadata);
-          console.log(this.metadata);
+
+          if (debug) {
+            console.log('[flv-parse-metadata]', this.metadata);
+          }
         }
       }
     }, {
       key: "read",
       value: function read(length) {
-        var tempUint8 = [];
+        var tempUint8 = new Uint8Array(length);
 
         for (var i = 0; i < length; i += 1) {
-          tempUint8.push(this.uint8[this.index]);
+          tempUint8[i] = this.uint8[this.index];
           this.index += 1;
         }
 
@@ -942,7 +986,8 @@
       get: function get() {
         return {
           mediaElement: '',
-          url: ''
+          url: '',
+          debug: false
         };
       }
     }, {

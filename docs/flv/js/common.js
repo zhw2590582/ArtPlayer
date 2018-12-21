@@ -32,6 +32,7 @@
                     var flv = new Flv({
                         mediaElement: video,
                         url: file instanceof File ? file : url,
+                        debug: true,
                     });
 
                     this.on('destroy', () => {

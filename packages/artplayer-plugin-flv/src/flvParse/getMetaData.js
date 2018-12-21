@@ -1,14 +1,18 @@
-import { getUint8Sum, readUint8, bin2String, bin2Boolean, bin2Float } from '../utils';
+import { getUint8Sum, readUint8, bin2String, bin2Boolean, bin2Float, errorHandle } from '../utils';
 
 export default function getMetaData(scripTag) {
     const readScripTag = readUint8(scripTag.body);
     const metadata = Object.create(null);
     const amf1 = Object.create(null);
     const amf2 = Object.create(null);
+
     [amf1.type] = readScripTag(1);
+    errorHandle(amf1.type === 2, `AMF: [amf1] type expect 2, but got ${amf1.type}`);
     amf1.size = getUint8Sum(readScripTag(2));
     amf1.string = bin2String(readScripTag(amf1.size));
+    
     [amf2.type] = readScripTag(1);
+    errorHandle(amf2.type === 8, `AMF: [amf1] type expect 8, but got ${amf2.type}`);
     amf2.size = getUint8Sum(readScripTag(4));
     amf2.metaData = Object.create(null);
 
@@ -45,8 +49,8 @@ export default function getMetaData(scripTag) {
                 }
                 case 8: {
                     value = Object.create(null);
-                    let endObject = false;
-                    while (!endObject && readScripTag.index < scripTag.body.length) {
+                    let endArray = false;
+                    while (!endArray && readScripTag.index < scripTag.body.length) {
                         const nameLength = getUint8Sum(readScripTag(2));
                         const name = bin2String(readScripTag(nameLength));
                         const type = readScripTag(1)[0];
@@ -54,7 +58,7 @@ export default function getMetaData(scripTag) {
                             value[name] = getValue(type);
                         }
                         if (type === 9) {
-                            endObject = true;
+                            endArray = true;
                         }
                     }
                     break;
@@ -74,7 +78,7 @@ export default function getMetaData(scripTag) {
                     break;
                 }
                 default:
-                    console.warn(`AMF: Unknown metaData type: ${type} in ${readScripTag.index - 1}`);
+                    errorHandle(false, `AMF: Unknown metaData type: ${type}`);
                     break;
             }
         }
@@ -89,6 +93,9 @@ export default function getMetaData(scripTag) {
             amf2.metaData[name] = getValue(type);
         }
     }
+
+    errorHandle(readScripTag.index === scripTag.body.length, 'AMF: Seems to be incompletely parsed');
+    errorHandle(amf2.size === Object.keys(amf2.metaData).length, 'AMF: [amf2] length does not match');
 
     metadata.amf1 = amf1;
     metadata.amf2 = amf2;

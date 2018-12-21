@@ -1,12 +1,12 @@
 import fetchStream from './fetchStream';
 import readFile from './readFile';
 import getMetaData from './getMetaData';
-import { mergeTypedArrays, getUint8Sum } from '../utils';
+import { mergeTypedArrays, getUint8Sum, bin2String } from '../utils';
 
 export default class FlvParse {
     constructor(flv) {
         this.flv = flv;
-        const { url } = flv.options;
+        const { url, debug } = flv.options;
         this.uint8 = new Uint8Array(0);
         this.index = 0;
         this.header = null;
@@ -15,15 +15,15 @@ export default class FlvParse {
         this.done = false;
 
         flv.on('flvFetchStart', () => {
-            console.log('[flv-fetch-start]');
+            if (debug) {
+                console.log('[flv-fetch-start]', url);
+            }
         });
 
         flv.on('flvFetchCancel', () => {
-            console.log('[flv-fetch-cancel]');
-        });
-
-        flv.on('flvFetchError', error => {
-            console.log('[flv-fetch-error]', error);
+            if (debug) {
+                console.log('[flv-fetch-cancel]');
+            }
         });
 
         flv.on('flvFetching', uint8 => {
@@ -32,7 +32,9 @@ export default class FlvParse {
         });
 
         flv.on('flvFetchEnd', uint8 => {
-            console.log('[flv-fetch-end]');
+            if (debug) {
+                console.log('[flv-fetch-end]');
+            }
             this.done = true;
             if (uint8) {
                 this.uint8 = uint8;
@@ -42,7 +44,10 @@ export default class FlvParse {
                 this.tags = [];
                 this.parse();
             }
-            flv.emit('parseDone');
+            flv.emit('flvParseDone');
+            if (debug) {
+                console.log('[flv-parse-done]');
+            }
         });
 
         if (typeof url === 'string') {
@@ -53,41 +58,48 @@ export default class FlvParse {
     }
 
     parse() {
+        const { debug } = this.flv.options;
         if (this.uint8.length >= 13 && !this.header) {
             const header = Object.create(null);
-            header.signature = this.read(3);
-            header.version = this.read(1);
-            header.flags = this.read(1);
-            header.headersize = this.read(4);
+            header.signature = bin2String(this.read(3));
+            [header.version] = this.read(1);
+            [header.flags] = this.read(1);
+            header.headersize = getUint8Sum(this.read(4));
             this.header = header;
             this.read(4);
-            this.flv.emit('parseHeader', this.header);
-            console.log(this.header);
+            this.flv.emit('flvParseHeader', this.header);
+            if (debug) {
+                console.log('[flv-parse-header]', this.header);
+            }
         }
 
         while (this.index < this.uint8.length) {
             const tag = Object.create(null);
-            tag.tagType = this.read(1);
-            tag.dataSize = this.read(3);
+            [tag.tagType] = this.read(1);
+            tag.dataSize = getUint8Sum(this.read(3));
             tag.timestamp = this.read(4);
             tag.streamID = this.read(3);
-            tag.body = this.read(getUint8Sum(tag.dataSize));
+            tag.body = this.read(tag.dataSize);
             this.tags.push(tag);
             this.read(4);
-            this.flv.emit('parseTag', tag);
+            this.flv.emit('flvParseTag', tag);
         }
 
-        if (this.tags.length > 1 && this.tags[0].tagType[0] === 18 && !this.metadata) {
+        this.flv.emit('flvParseTags', this.tags);
+
+        if (this.tags.length > 1 && this.tags[0].tagType === 18 && !this.metadata) {
             this.metadata = getMetaData(this.tags[0]);
             this.flv.emit('parseMetadata', this.metadata);
-            console.log(this.metadata);
+            if (debug) {
+                console.log('[flv-parse-metadata]', this.metadata);
+            }
         }
     }
 
     read(length) {
-        const tempUint8 = [];
+        const tempUint8 = new Uint8Array(length);
         for (let i = 0; i < length; i += 1) {
-            tempUint8.push(this.uint8[this.index]);
+            tempUint8[i] = this.uint8[this.index];
             this.index += 1;
         }
         return tempUint8;

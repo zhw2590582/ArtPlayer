@@ -36,7 +36,7 @@ export default function fetchStream(flv, url) {
                                 read();
                             })
                             .catch(error => {
-                                flv.emit('flvFetchError', error);
+                                throw error;
                             });
                     })();
                 },

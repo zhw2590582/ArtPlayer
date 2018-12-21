@@ -28,6 +28,7 @@ body,
 }
 
 .part-top .artplayer {
+    opacity: 0;
     width: 500px;
     height: 300px;
     background: #fff;

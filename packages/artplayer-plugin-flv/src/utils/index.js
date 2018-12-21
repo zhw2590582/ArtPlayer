@@ -53,15 +53,19 @@ export function bin2Boolean(bin) {
     return bin === 1;
 }
 
+export function log(name, msg = '') {
+    console.log(`[${name}] ${msg}`);
+}
+
 export function readUint8(uint8) {
     let index = 0;
     return function read(length) {
-        const result = [];
+        const tempUint8 = new Uint8Array(length);
         for (let i = 0; i < length; i += 1) {
-            result.push(uint8[index]);
+            tempUint8[i] = uint8[index];
             index += 1;
         }
         read.index = index;
-        return result;
+        return tempUint8;
     };
 }
