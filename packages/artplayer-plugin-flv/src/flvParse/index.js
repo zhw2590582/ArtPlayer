@@ -1,6 +1,6 @@
 import fetchStream from './fetchStream';
 import readFile from './readFile';
-import getMetaData from './getMetaData';
+import parseScripTag from './parseScripTag';
 import { mergeTypedArrays, getUint8Sum, bin2String } from '../utils';
 
 export default class FlvParse {
@@ -10,7 +10,7 @@ export default class FlvParse {
         this.uint8 = new Uint8Array(0);
         this.index = 0;
         this.header = null;
-        this.metadata = null;
+        this.scripTag = null;
         this.tags = [];
         this.done = false;
 
@@ -40,7 +40,7 @@ export default class FlvParse {
                 this.uint8 = uint8;
                 this.index = 0;
                 this.header = null;
-                this.metadata = null;
+                this.scripTag = null;
                 this.tags = [];
                 this.parse();
             }
@@ -82,15 +82,20 @@ export default class FlvParse {
             tag.body = this.read(tag.dataSize);
             this.tags.push(tag);
             this.read(4);
-            this.flv.emit('flvParseTag', tag);
-        }
 
-        if (this.tags.length > 1 && this.tags[0].tagType === 18 && !this.metadata) {
-            this.metadata = getMetaData(this.tags[0]);
-            this.flv.emit('parseMetadata', this.metadata);
-            if (debug) {
-                console.log('[flv-parse-metadata]', this.metadata);
+            switch (tag.tagType) {
+                case 18:
+                    this.scripTag = parseScripTag(tag.body);
+                    this.flv.emit('parseScripTag', this.scripTag);
+                    if (debug) {
+                        console.log('[flv-parse-scrip-tag]', this.scripTag);
+                    }
+                    break;
+                default:
+                    break;
             }
+
+            this.flv.emit('flvParseTag', tag);
         }
     }
 

@@ -670,8 +670,8 @@
     reader.readAsArrayBuffer(file);
   }
 
-  function getMetaData(scripTag) {
-    var readScripTag = readUint8(scripTag.body);
+  function parseScripTag(scripTagBody) {
+    var readScripTag = readUint8(scripTagBody);
     var metadata = Object.create(null);
     var amf1 = Object.create(null);
     var amf2 = Object.create(null);
@@ -719,7 +719,7 @@
               value = Object.create(null);
               var endObject = false;
 
-              while (!endObject && readScripTag.index < scripTag.body.length) {
+              while (!endObject && readScripTag.index < scripTagBody.length) {
                 var nameLength = getUint8Sum(readScripTag(2));
                 var name = bin2String(readScripTag(nameLength));
                 var _type = readScripTag(1)[0];
@@ -741,7 +741,7 @@
               value = Object.create(null);
               var endArray = false;
 
-              while (!endArray && readScripTag.index < scripTag.body.length) {
+              while (!endArray && readScripTag.index < scripTagBody.length) {
                 var _nameLength = getUint8Sum(readScripTag(2));
 
                 var _name = bin2String(readScripTag(_nameLength));
@@ -783,7 +783,7 @@
             }
 
           default:
-            console.log(readScripTag(scripTag.body.length - readScripTag.index - 1));
+            console.log(readScripTag(scripTagBody.length - readScripTag.index - 1));
             errorHandle(false, "AMF: Unknown metaData type: ".concat(type));
             break;
         }
@@ -792,7 +792,7 @@
       return value;
     }
 
-    while (readScripTag.index < scripTag.body.length) {
+    while (readScripTag.index < scripTagBody.length) {
       var nameLength = getUint8Sum(readScripTag(2));
       var name = bin2String(readScripTag(nameLength));
       var type = readScripTag(1)[0];
@@ -802,7 +802,7 @@
       }
     }
 
-    errorHandle(readScripTag.index === scripTag.body.length, 'AMF: Seems to be incompletely parsed');
+    errorHandle(readScripTag.index === scripTagBody.length, 'AMF: Seems to be incompletely parsed');
     errorHandle(amf2.size === Object.keys(amf2.metaData).length, 'AMF: [amf2] length does not match');
     metadata.amf1 = amf1;
     metadata.amf2 = amf2;
@@ -824,7 +824,7 @@
       this.uint8 = new Uint8Array(0);
       this.index = 0;
       this.header = null;
-      this.metadata = null;
+      this.scripTag = null;
       this.tags = [];
       this.done = false;
       flv.on('flvFetchStart', function () {
@@ -853,7 +853,7 @@
           _this.uint8 = uint8;
           _this.index = 0;
           _this.header = null;
-          _this.metadata = null;
+          _this.scripTag = null;
           _this.tags = [];
 
           _this.parse();
@@ -917,16 +917,23 @@
           tag.body = this.read(tag.dataSize);
           this.tags.push(tag);
           this.read(4);
-          this.flv.emit('flvParseTag', tag);
-        }
 
-        if (this.tags.length > 1 && this.tags[0].tagType === 18 && !this.metadata) {
-          this.metadata = getMetaData(this.tags[0]);
-          this.flv.emit('parseMetadata', this.metadata);
+          switch (tag.tagType) {
+            case 18:
+              this.scripTag = parseScripTag(tag.body);
+              this.flv.emit('parseScripTag', this.scripTag);
 
-          if (debug) {
-            console.log('[flv-parse-metadata]', this.metadata);
+              if (debug) {
+                console.log('[flv-parse-scrip-tag]', this.scripTag);
+              }
+
+              break;
+
+            default:
+              break;
           }
+
+          this.flv.emit('flvParseTag', tag);
         }
       }
     }, {

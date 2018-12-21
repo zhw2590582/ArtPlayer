@@ -1,7 +1,7 @@
 import { getUint8Sum, readUint8, bin2String, bin2Boolean, bin2Float, errorHandle } from '../utils';
 
-export default function getMetaData(scripTag) {
-    const readScripTag = readUint8(scripTag.body);
+export default function parseScripTag(scripTagBody) {
+    const readScripTag = readUint8(scripTagBody);
     const metadata = Object.create(null);
     const amf1 = Object.create(null);
     const amf2 = Object.create(null);
@@ -34,7 +34,7 @@ export default function getMetaData(scripTag) {
                 case 3: {
                     value = Object.create(null);
                     let endObject = false;
-                    while (!endObject && readScripTag.index < scripTag.body.length) {
+                    while (!endObject && readScripTag.index < scripTagBody.length) {
                         const nameLength = getUint8Sum(readScripTag(2));
                         const name = bin2String(readScripTag(nameLength));
                         const type = readScripTag(1)[0];
@@ -50,7 +50,7 @@ export default function getMetaData(scripTag) {
                 case 8: {
                     value = Object.create(null);
                     let endArray = false;
-                    while (!endArray && readScripTag.index < scripTag.body.length) {
+                    while (!endArray && readScripTag.index < scripTagBody.length) {
                         const nameLength = getUint8Sum(readScripTag(2));
                         const name = bin2String(readScripTag(nameLength));
                         const type = readScripTag(1)[0];
@@ -78,7 +78,7 @@ export default function getMetaData(scripTag) {
                     break;
                 }
                 default:
-                    console.log(readScripTag(scripTag.body.length - readScripTag.index - 1));
+                    console.log(readScripTag(scripTagBody.length - readScripTag.index - 1));
                     errorHandle(false, `AMF: Unknown metaData type: ${type}`);
                     break;
             }
@@ -86,7 +86,7 @@ export default function getMetaData(scripTag) {
         return value;
     }
 
-    while (readScripTag.index < scripTag.body.length) {
+    while (readScripTag.index < scripTagBody.length) {
         const nameLength = getUint8Sum(readScripTag(2));
         const name = bin2String(readScripTag(nameLength));
         const type = readScripTag(1)[0];
@@ -95,7 +95,7 @@ export default function getMetaData(scripTag) {
         }
     }
 
-    errorHandle(readScripTag.index === scripTag.body.length, 'AMF: Seems to be incompletely parsed');
+    errorHandle(readScripTag.index === scripTagBody.length, 'AMF: Seems to be incompletely parsed');
     errorHandle(amf2.size === Object.keys(amf2.metaData).length, 'AMF: [amf2] length does not match');
 
     metadata.amf1 = amf1;
