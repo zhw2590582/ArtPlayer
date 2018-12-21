@@ -300,6 +300,7 @@
 
     return FlvError;
   }(wrapNativeSuper(Error));
+
   function errorHandle(condition, msg) {
     if (!condition) {
       throw new FlvError(msg);
@@ -366,7 +367,6 @@
   }
 
   var utils = /*#__PURE__*/Object.freeze({
-    FlvError: FlvError,
     errorHandle: errorHandle,
     mergeTypedArrays: mergeTypedArrays,
     sleep: sleep,
@@ -659,7 +659,6 @@
   }
 
   function readFile(flv, file) {
-    console.log(file);
     flv.emit('flvFetchStart');
     var proxy = flv.events.proxy;
     var reader = new FileReader();
@@ -784,6 +783,7 @@
             }
 
           default:
+            console.log(readScripTag(scripTag.body.length - readScripTag.index - 1));
             errorHandle(false, "AMF: Unknown metaData type: ".concat(type));
             break;
         }
@@ -919,8 +919,6 @@
           this.read(4);
           this.flv.emit('flvParseTag', tag);
         }
-
-        this.flv.emit('flvParseTags', this.tags);
 
         if (this.tags.length > 1 && this.tags[0].tagType === 18 && !this.metadata) {
           this.metadata = getMetaData(this.tags[0]);

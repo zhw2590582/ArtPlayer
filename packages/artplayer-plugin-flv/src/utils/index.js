@@ -1,12 +1,4 @@
-export class FlvError extends Error {
-    constructor(message, context) {
-        super(message);
-        if (typeof Error.captureStackTrace === 'function') {
-            Error.captureStackTrace(this, context || this.constructor);
-        }
-        this.name = 'FlvError';
-    }
-}
+import FlvError from './flvError';
 
 export function errorHandle(condition, msg) {
     if (!condition) {

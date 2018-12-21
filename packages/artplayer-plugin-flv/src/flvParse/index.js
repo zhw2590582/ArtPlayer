@@ -85,8 +85,6 @@ export default class FlvParse {
             this.flv.emit('flvParseTag', tag);
         }
 
-        this.flv.emit('flvParseTags', this.tags);
-
         if (this.tags.length > 1 && this.tags[0].tagType === 18 && !this.metadata) {
             this.metadata = getMetaData(this.tags[0]);
             this.flv.emit('parseMetadata', this.metadata);

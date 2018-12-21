@@ -10,7 +10,7 @@ export default function getMetaData(scripTag) {
     errorHandle(amf1.type === 2, `AMF: [amf1] type expect 2, but got ${amf1.type}`);
     amf1.size = getUint8Sum(readScripTag(2));
     amf1.string = bin2String(readScripTag(amf1.size));
-    
+
     [amf2.type] = readScripTag(1);
     errorHandle(amf2.type === 8, `AMF: [amf1] type expect 8, but got ${amf2.type}`);
     amf2.size = getUint8Sum(readScripTag(4));
@@ -78,6 +78,7 @@ export default function getMetaData(scripTag) {
                     break;
                 }
                 default:
+                    console.log(readScripTag(scripTag.body.length - readScripTag.index - 1));
                     errorHandle(false, `AMF: Unknown metaData type: ${type}`);
                     break;
             }
