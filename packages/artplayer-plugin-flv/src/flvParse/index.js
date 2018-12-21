@@ -5,6 +5,7 @@ import { mergeTypedArrays, getUint8Sum } from '../utils';
 
 export default class FlvParse {
     constructor(flv) {
+        this.flv = flv;
         const { url } = flv.options;
         this.uint8 = new Uint8Array(0);
         this.index = 0;
@@ -42,7 +43,6 @@ export default class FlvParse {
                 this.parse();
             }
             flv.emit('parseDone');
-            this.verify();
         });
 
         if (typeof url === 'string') {
@@ -61,6 +61,8 @@ export default class FlvParse {
             header.headersize = this.read(4);
             this.header = header;
             this.read(4);
+            this.flv.emit('parseHeader', this.header);
+            console.log(this.header);
         }
 
         while (this.index < this.uint8.length) {
@@ -72,10 +74,13 @@ export default class FlvParse {
             tag.body = this.read(getUint8Sum(tag.dataSize));
             this.tags.push(tag);
             this.read(4);
+            this.flv.emit('parseTag', tag);
         }
 
         if (this.tags.length > 1 && this.tags[0].tagType[0] === 18 && !this.metadata) {
             this.metadata = getMetaData(this.tags[0]);
+            this.flv.emit('parseMetadata', this.metadata);
+            console.log(this.metadata);
         }
     }
 
@@ -86,21 +91,5 @@ export default class FlvParse {
             this.index += 1;
         }
         return tempUint8;
-    }
-
-    verify() {
-        const types = Object.create(null);
-        this.tags.forEach(item => {
-            const tagType = item.tagType[0];
-            if (types[tagType]) {
-                types[tagType] += 1;
-            } else {
-                types[tagType] = 1;
-            }
-        });
-        console.log(this.header);
-        console.log(this.metadata);
-        console.log(this.tags);
-        console.log(types);
     }
 }

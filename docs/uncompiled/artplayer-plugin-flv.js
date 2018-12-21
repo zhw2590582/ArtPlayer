@@ -667,56 +667,131 @@
   var slicedToArray = _slicedToArray;
 
   function getMetaData(scripTag) {
-    var readMetaData = readUint8(scripTag.body);
+    var readScripTag = readUint8(scripTag.body);
     var metadata = Object.create(null);
     var amf1 = Object.create(null);
     var amf2 = Object.create(null);
 
-    var _readMetaData = readMetaData(1);
+    var _readScripTag = readScripTag(1);
 
-    var _readMetaData2 = slicedToArray(_readMetaData, 1);
+    var _readScripTag2 = slicedToArray(_readScripTag, 1);
 
-    amf1.type = _readMetaData2[0];
-    amf1.size = getUint8Sum(readMetaData(2));
-    amf1.string = bin2String(readMetaData(amf1.size));
+    amf1.type = _readScripTag2[0];
+    amf1.size = getUint8Sum(readScripTag(2));
+    amf1.string = bin2String(readScripTag(amf1.size));
 
-    var _readMetaData3 = readMetaData(1);
+    var _readScripTag3 = readScripTag(1);
 
-    var _readMetaData4 = slicedToArray(_readMetaData3, 1);
+    var _readScripTag4 = slicedToArray(_readScripTag3, 1);
 
-    amf2.type = _readMetaData4[0];
-    amf2.size = getUint8Sum(readMetaData(4));
+    amf2.type = _readScripTag4[0];
+    amf2.size = getUint8Sum(readScripTag(4));
     amf2.metaData = Object.create(null);
 
-    while (readMetaData.index < scripTag.body.length) {
-      var nameLength = getUint8Sum(readMetaData(2));
-      var name = bin2String(readMetaData(nameLength));
-      var type = readMetaData(1)[0];
+    function getValue(type) {
+      var value = null;
 
-      switch (type) {
-        case 0:
-          amf2.metaData[name] = bin2Float(readMetaData(8));
-          break;
-
-        case 1:
-          amf2.metaData[name] = bin2Boolean(readMetaData(1)[0]);
-          break;
-
-        case 2:
-          {
-            var valueLength = getUint8Sum(readMetaData(2));
-            amf2.metaData[name] = bin2String(readMetaData(valueLength));
+      if (type !== undefined) {
+        switch (type) {
+          case 0:
+            value = bin2Float(readScripTag(8));
             break;
-          }
 
-        case 3:
-          amf2.metaData[name] = Object.create(null);
-          readMetaData(scripTag.body.length - readMetaData.index);
-          break;
+          case 1:
+            value = bin2Boolean(readScripTag(1)[0]);
+            break;
 
-        default:
-          errorHandle(false, "AMF: Unknown metaData type: ".concat(type));
-          break;
+          case 2:
+            {
+              var valueLength = getUint8Sum(readScripTag(2));
+              value = bin2String(readScripTag(valueLength));
+              break;
+            }
+
+          case 3:
+            {
+              value = Object.create(null);
+              var endObject = false;
+
+              while (!endObject && readScripTag.index < scripTag.body.length) {
+                var nameLength = getUint8Sum(readScripTag(2));
+                var name = bin2String(readScripTag(nameLength));
+                var _type = readScripTag(1)[0];
+
+                if (name) {
+                  value[name] = getValue(_type);
+                }
+
+                if (_type === 9) {
+                  endObject = true;
+                }
+              }
+
+              break;
+            }
+
+          case 8:
+            {
+              value = Object.create(null);
+              var _endObject = false;
+
+              while (!_endObject && readScripTag.index < scripTag.body.length) {
+                var _nameLength = getUint8Sum(readScripTag(2));
+
+                var _name = bin2String(readScripTag(_nameLength));
+
+                var _type2 = readScripTag(1)[0];
+
+                if (_name) {
+                  value[_name] = getValue(_type2);
+                }
+
+                if (_type2 === 9) {
+                  _endObject = true;
+                }
+              }
+
+              break;
+            }
+
+          case 10:
+            {
+              var _valueLength = getUint8Sum(readScripTag(4));
+
+              value = [];
+
+              for (var index = 0; index < _valueLength; index += 1) {
+                var itemType = readScripTag(1)[0];
+                value.push(getValue(itemType));
+              }
+
+              break;
+            }
+
+          case 12:
+            {
+              var _valueLength2 = getUint8Sum(readScripTag(4));
+
+              value = bin2String(readScripTag(_valueLength2));
+              break;
+            }
+
+          default:
+            console.warn("AMF: Unknown metaData type: ".concat(type, " in ").concat(readScripTag.index - 1));
+            break;
+        }
+      }
+
+      return value;
+    }
+
+    while (readScripTag.index < scripTag.body.length) {
+      var nameLength = getUint8Sum(readScripTag(2));
+      var name = bin2String(readScripTag(nameLength));
+      var type = readScripTag(1)[0];
+
+      if (name) {
+        amf2.metaData[name] = getValue(type);
       }
     }
 
@@ -733,6 +808,7 @@
 
       classCallCheck(this, FlvParse);
 
+      this.flv = flv;
       var url = flv.options.url;
       this.uint8 = new Uint8Array(0);
       this.index = 0;
@@ -769,8 +845,6 @@
         }
 
         flv.emit('parseDone');
-
-        _this.verify();
       });
 
       if (typeof url === 'string') {
@@ -791,6 +865,8 @@
           header.headersize = this.read(4);
           this.header = header;
           this.read(4);
+          this.flv.emit('parseHeader', this.header);
+          console.log(this.header);
         }
 
         while (this.index < this.uint8.length) {
@@ -802,10 +878,13 @@
           tag.body = this.read(getUint8Sum(tag.dataSize));
           this.tags.push(tag);
           this.read(4);
+          this.flv.emit('parseTag', tag);
         }
 
         if (this.tags.length > 1 && this.tags[0].tagType[0] === 18 && !this.metadata) {
           this.metadata = getMetaData(this.tags[0]);
+          this.flv.emit('parseMetadata', this.metadata);
+          console.log(this.metadata);
         }
       }
     }, {
@@ -819,24 +898,6 @@
         }
 
         return tempUint8;
-      }
-    }, {
-      key: "verify",
-      value: function verify() {
-        var types = Object.create(null);
-        this.tags.forEach(function (item) {
-          var tagType = item.tagType[0];
-
-          if (types[tagType]) {
-            types[tagType] += 1;
-          } else {
-            types[tagType] = 1;
-          }
-        });
-        console.log(this.header);
-        console.log(this.metadata);
-        console.log(this.tags);
-        console.log(types);
       }
     }]);
 
