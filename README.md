@@ -4,6 +4,8 @@
 ![version](https://badgen.net/npm/v/artplayer)
 ![license](https://badgen.net/npm/license/artplayer)
 ![size](https://badgen.net/bundlephobia/minzip/artplayer)
+[![HitCount](http://hits.dwyl.io/zhw2590582/artplayer.svg)](http://hits.dwyl.io/zhw2590582/artplayer)
+
 
 > ArtPlayer is a modern HTML5 video player
 
