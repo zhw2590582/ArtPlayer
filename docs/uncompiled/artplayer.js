@@ -1710,7 +1710,7 @@
 
         $player.classList.add('artplayer-fullscreen');
         screenfull.request($player);
-        player.aspectRatioRemove();
+        player.aspectRatio('default');
         art.emit('fullscreen:enabled');
       }
     });
@@ -1720,7 +1720,7 @@
           player.fullscreenWebExit();
           $player.classList.remove('artplayer-fullscreen');
           screenfull.exit();
-          player.aspectRatioRemove();
+          player.aspectRatio('default');
           art.emit('fullscreen:exit');
         }
       }
@@ -1750,7 +1750,7 @@
         }
 
         $player.classList.add('artplayer-web-fullscreen');
-        player.aspectRatioRemove();
+        player.aspectRatio('default');
         art.emit('fullscreenWeb:enabled');
       }
     });
@@ -1759,7 +1759,7 @@
         if (player.fullscreenWebState) {
           player.fullscreenExit();
           $player.classList.remove('artplayer-web-fullscreen');
-          player.aspectRatioRemove();
+          player.aspectRatio('default');
           art.emit('fullscreenWeb:exit');
         }
       }
