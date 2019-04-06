@@ -15,7 +15,7 @@ export default class Events {
             hoverInit(art, this);
             mousemoveInit(art, this);
             resizeInit(art, this);
-            doubleClickInit(art, this);
+            // doubleClickInit(art, this);
         });
     }
 

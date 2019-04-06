@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.artplayer = {})));
-}(this, (function (exports) { 'use strict';
+  (global = global || self, factory(global.artplayer = {}));
+}(this, function (exports) { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -30,10 +30,10 @@
 
   var createClass = _createClass;
 
-  var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+  var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
   function unwrapExports (x) {
-  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x.default : x;
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
   }
 
   function createCommonjsModule(fn, module) {
@@ -175,6 +175,8 @@
     }
   };
   var tinyEmitter = E;
+  var TinyEmitter = E;
+  tinyEmitter.TinyEmitter = TinyEmitter;
 
   var optionValidator = createCommonjsModule(function (module, exports) {
     !function (r, t) {
@@ -269,7 +271,7 @@
             return "float64array";
         }
 
-        if ("function" == typeof (a = r).throw && "function" == typeof a.return && "function" == typeof a.next) return "generator";
+        if ("function" == typeof (a = r)["throw"] && "function" == typeof a["return"] && "function" == typeof a.next) return "generator";
 
         switch (i = u.call(r)) {
           case "[object Object]":
@@ -462,7 +464,7 @@
       _this = possibleConstructorReturn(this, getPrototypeOf(ArtPlayerError).call(this, message));
 
       if (typeof Error.captureStackTrace === 'function') {
-        Error.captureStackTrace(assertThisInitialized(assertThisInitialized(_this)), context || _this.constructor);
+        Error.captureStackTrace(assertThisInitialized(_this), context || _this.constructor);
       }
 
       _this.name = 'ArtPlayerError';
@@ -743,7 +745,7 @@
     quality: {
       type: 'array',
       child: {
-        default: 'boolean',
+        "default": 'boolean',
         name: 'string',
         url: 'string'
       }
@@ -1232,7 +1234,7 @@
         var promise = $video.play();
 
         if (promise !== undefined) {
-          promise.then().catch(function (err) {
+          promise.then()["catch"](function (err) {
             notice.show(err, true, 3000);
             console.warn(err);
           });
@@ -1526,7 +1528,7 @@
   var screenfull = createCommonjsModule(function (module) {
     /*!
     * screenfull
-    * v3.3.3 - 2018-09-04
+    * v4.2.0 - 2019-04-01
     * (c) Sindre Sorhus; MIT License
     */
     (function () {
@@ -1565,27 +1567,46 @@
       };
       var screenfull = {
         request: function request(elem) {
-          var request = fn.requestFullscreen;
-          elem = elem || document.documentElement; // Work around Safari 5.1 bug: reports support for
-          // keyboard in fullscreen even though it doesn't.
-          // Browser sniffing, since the alternative with
-          // setTimeout is even worse.
+          return new Promise(function (resolve) {
+            var request = fn.requestFullscreen;
 
-          if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
-            elem[request]();
-          } else {
-            elem[request](keyboardAllowed ? Element.ALLOW_KEYBOARD_INPUT : {});
-          }
+            var onFullScreenEntered = function () {
+              this.off('change', onFullScreenEntered);
+              resolve();
+            }.bind(this);
+
+            elem = elem || document.documentElement; // Work around Safari 5.1 bug: reports support for
+            // keyboard in fullscreen even though it doesn't.
+            // Browser sniffing, since the alternative with
+            // setTimeout is even worse.
+
+            if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
+              elem[request]();
+            } else {
+              elem[request](keyboardAllowed ? Element.ALLOW_KEYBOARD_INPUT : {});
+            }
+
+            this.on('change', onFullScreenEntered);
+          }.bind(this));
         },
         exit: function exit() {
-          document[fn.exitFullscreen]();
+          return new Promise(function (resolve) {
+            if (!this.isFullscreen) {
+              resolve();
+              return;
+            }
+
+            var onFullScreenExit = function () {
+              this.off('change', onFullScreenExit);
+              resolve();
+            }.bind(this);
+
+            document[fn.exitFullscreen]();
+            this.on('change', onFullScreenExit);
+          }.bind(this));
         },
         toggle: function toggle(elem) {
-          if (this.isFullscreen) {
-            this.exit();
-          } else {
-            this.request(elem);
-          }
+          return this.isFullscreen ? this.exit() : this.request(elem);
         },
         onchange: function onchange(callback) {
           this.on('change', callback);
@@ -1642,7 +1663,9 @@
       });
 
       if (isCommonjs) {
-        module.exports = screenfull;
+        module.exports = screenfull; // TODO: remove this in the next major version
+
+        module.exports["default"] = screenfull;
       } else {
         window.screenfull = screenfull;
       }
@@ -1687,6 +1710,7 @@
 
         $player.classList.add('artplayer-fullscreen');
         screenfull.request($player);
+        player.aspectRatioRemove();
         art.emit('fullscreen:enabled');
       }
     });
@@ -1696,6 +1720,7 @@
           player.fullscreenWebExit();
           $player.classList.remove('artplayer-fullscreen');
           screenfull.exit();
+          player.aspectRatioRemove();
           art.emit('fullscreen:exit');
         }
       }
@@ -1725,6 +1750,7 @@
         }
 
         $player.classList.add('artplayer-web-fullscreen');
+        player.aspectRatioRemove();
         art.emit('fullscreenWeb:enabled');
       }
     });
@@ -1733,6 +1759,7 @@
         if (player.fullscreenWebState) {
           player.fullscreenExit();
           $player.classList.remove('artplayer-web-fullscreen');
+          player.aspectRatioRemove();
           art.emit('fullscreenWeb:exit');
         }
       }
@@ -2626,7 +2653,7 @@
         // browser global
         window.Draggabilly = factory(window, window.getSize, window.Unidragger);
       }
-    })(window, function factory(window, getSize$$1, Unidragger) {
+    })(window, function factory(window, getSize, Unidragger) {
       // extend objects
 
       function extend(a, b) {
@@ -2759,7 +2786,7 @@
       proto._getPositionCoord = function (styleSide, measure) {
         if (styleSide.indexOf('%') != -1) {
           // convert percent into pixel for Safari, #75
-          var parentSize = getSize$$1(this.element.parentNode); // prevent not-in-DOM element throwing bug, #131
+          var parentSize = getSize(this.element.parentNode); // prevent not-in-DOM element throwing bug, #131
 
           return !parentSize ? 0 : parseFloat(styleSide) / 100 * parentSize[measure];
         }
@@ -2826,8 +2853,8 @@
           return;
         }
 
-        var elemSize = getSize$$1(this.element);
-        var containerSize = getSize$$1(container);
+        var elemSize = getSize(this.element);
+        var containerSize = getSize(container);
         var elemRect = this.element.getBoundingClientRect();
         var containerRect = container.getBoundingClientRect();
         var borderSizeX = containerSize.borderLeftWidth + containerSize.borderRightWidth;
@@ -3043,7 +3070,7 @@
     });
     Object.defineProperty(player, 'pipEnabled', {
       value: function value() {
-        $video.requestPictureInPicture().catch(function (error) {
+        $video.requestPictureInPicture()["catch"](function (error) {
           notice.show(error, true, 3000);
           console.warn(error);
         });
@@ -3051,7 +3078,7 @@
     });
     Object.defineProperty(player, 'pipExit', {
       value: function value() {
-        document.exitPictureInPicture().catch(function (error) {
+        document.exitPictureInPicture()["catch"](function (error) {
           notice.show(error, true, 3000);
           console.warn(error);
         });
@@ -3936,7 +3963,7 @@
               player = art.player;
           var playIndex = -1;
           var defaultQuality = option.quality.find(function (item) {
-            return item.default;
+            return item["default"];
           }) || option.quality[0];
           playIndex = option.quality.indexOf(defaultQuality);
           var $qualityName = append($control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
@@ -4174,7 +4201,7 @@
 
   function version(menuOption) {
     return objectSpread({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.5</a>'
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 1.0.6</a>'
     });
   }
 
@@ -4356,7 +4383,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.5</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">1.0.6</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -4432,7 +4459,7 @@
 
         if (!$track) {
           var $newTrack = document.createElement('track');
-          $newTrack.default = true;
+          $newTrack["default"] = true;
           $newTrack.kind = 'metadata';
           $video.appendChild($newTrack);
           this.art.template.$track = $newTrack;
@@ -4484,7 +4511,7 @@
           }
 
           return vttUrl;
-        }).catch(function (err) {
+        })["catch"](function (err) {
           notice.show(err);
           console.warn(err);
         });
@@ -4916,14 +4943,6 @@
     });
   }
 
-  function doubleClickInit(art, events) {
-    var $video = art.template.$video;
-    events.proxy($video, 'dblclick', function () {
-      art.player.fullscreenToggle();
-      art.emit('dblclick');
-    });
-  }
-
   var Events =
   /*#__PURE__*/
   function () {
@@ -4940,8 +4959,7 @@
         clickInit(art, _this);
         hoverInit(art, _this);
         mousemoveInitInit(art, _this);
-        resizeInit(art, _this);
-        doubleClickInit(art, _this);
+        resizeInit(art, _this); // doubleClickInit(art, this);
       });
     }
 
@@ -5681,7 +5699,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '1.0.5';
+        return '1.0.6';
       }
     }, {
       key: "env",
@@ -5768,5 +5786,5 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=artplayer.js.map
