@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-flv",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Flv plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-flv.js",
   "scripts": {

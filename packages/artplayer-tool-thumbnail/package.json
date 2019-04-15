@@ -1,6 +1,6 @@
 {
   "name": "artplayer-tool-thumbnail",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "thumbnail tool for ArtPlayer",
   "main": "dist/artplayer-tool-thumbnail.js",
   "style": "dist/artplayer-tool-thumbnail.css",
