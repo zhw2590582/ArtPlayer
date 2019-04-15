@@ -59,8 +59,5 @@
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-svgo": "^1.0.1",
     "rollup-plugin-uglify": "^6.0.0"
-  },
-  "devDependencies": {
-    "cypress": "^3.2.0"
   }
 }
