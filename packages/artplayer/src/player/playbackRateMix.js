@@ -22,7 +22,7 @@ export default function playbackRateMix(art, player) {
 
             $video.playbackRate = rate;
             $player.dataset.playbackRate = rate;
-            notice.show(`${i18n.get('Rate')}: ${rate}x`);
+            notice.show(`${i18n.get('Rate')}: ${rate === 1.0 ? i18n.get('Normal') : `${rate}x`}`);
             art.emit('playbackRateChange', rate);
         },
     });
