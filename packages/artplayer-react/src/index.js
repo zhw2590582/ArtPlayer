@@ -33,14 +33,9 @@ export default class ArtplayerComponent extends React.Component {
 
     render() {
         const { option, getInstance, ...rest } = this.props;
-        return React.createElement(
-            'div',
-            Object.assign(
-                {
-                    ref: this.artRef,
-                },
-                rest,
-            ),
-        );
+        return React.createElement('div', {
+            ref: this.artRef,
+            ...rest,
+        });
     }
 }
