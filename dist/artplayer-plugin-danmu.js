@@ -5,4 +5,4 @@
  * Released under the MIT License.
  */
 
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t((e=e||self)["artplayer-plugin-danmu"]={})}(this,function(e){"use strict";function t(e){var t=e.prototype;console.log(t)}window.artplayerPluginDanmu=t,e.default=t,Object.defineProperty(e,"__esModule",{value:!0})});
+!function(e,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n():"function"==typeof define&&define.amd?define(n):(e=e||self)["artplayer-plugin-danmu"]=n()}(this,function(){"use strict";function e(e){var n=e.prototype;console.log(n)}return window.artplayerPluginDanmu=e});

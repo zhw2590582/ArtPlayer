@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global.artplayer = {}));
-}(this, function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global.artplayer = factory());
+}(this, function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -178,183 +178,271 @@
   var TinyEmitter = E;
   tinyEmitter.TinyEmitter = TinyEmitter;
 
-  var optionValidator = createCommonjsModule(function (module, exports) {
-    !function (r, t) {
-      module.exports = t();
-    }(commonjsGlobal, function () {
+  var toString = Object.prototype.toString;
 
-      function c(r) {
-        return (c = "function" == typeof Symbol && "symbol" == _typeof_1(Symbol.iterator) ? function (r) {
-          return _typeof_1(r);
-        } : function (r) {
-          return r && "function" == typeof Symbol && r.constructor === Symbol && r !== Symbol.prototype ? "symbol" : _typeof_1(r);
-        })(r);
+  var kindOf = function kindOf(val) {
+    if (val === void 0) return 'undefined';
+    if (val === null) return 'null';
+
+    var type = _typeof_1(val);
+
+    if (type === 'boolean') return 'boolean';
+    if (type === 'string') return 'string';
+    if (type === 'number') return 'number';
+    if (type === 'symbol') return 'symbol';
+
+    if (type === 'function') {
+      return isGeneratorFn(val) ? 'generatorfunction' : 'function';
+    }
+
+    if (isArray(val)) return 'array';
+    if (isBuffer(val)) return 'buffer';
+    if (isArguments(val)) return 'arguments';
+    if (isDate(val)) return 'date';
+    if (isError(val)) return 'error';
+    if (isRegexp(val)) return 'regexp';
+
+    switch (ctorName(val)) {
+      case 'Symbol':
+        return 'symbol';
+
+      case 'Promise':
+        return 'promise';
+      // Set, Map, WeakSet, WeakMap
+
+      case 'WeakMap':
+        return 'weakmap';
+
+      case 'WeakSet':
+        return 'weakset';
+
+      case 'Map':
+        return 'map';
+
+      case 'Set':
+        return 'set';
+      // 8-bit typed arrays
+
+      case 'Int8Array':
+        return 'int8array';
+
+      case 'Uint8Array':
+        return 'uint8array';
+
+      case 'Uint8ClampedArray':
+        return 'uint8clampedarray';
+      // 16-bit typed arrays
+
+      case 'Int16Array':
+        return 'int16array';
+
+      case 'Uint16Array':
+        return 'uint16array';
+      // 32-bit typed arrays
+
+      case 'Int32Array':
+        return 'int32array';
+
+      case 'Uint32Array':
+        return 'uint32array';
+
+      case 'Float32Array':
+        return 'float32array';
+
+      case 'Float64Array':
+        return 'float64array';
+    }
+
+    if (isGeneratorObj(val)) {
+      return 'generator';
+    } // Non-plain objects
+
+
+    type = toString.call(val);
+
+    switch (type) {
+      case '[object Object]':
+        return 'object';
+      // iterators
+
+      case '[object Map Iterator]':
+        return 'mapiterator';
+
+      case '[object Set Iterator]':
+        return 'setiterator';
+
+      case '[object String Iterator]':
+        return 'stringiterator';
+
+      case '[object Array Iterator]':
+        return 'arrayiterator';
+    } // other
+
+
+    return type.slice(8, -1).toLowerCase().replace(/\s/g, '');
+  };
+
+  function ctorName(val) {
+    return val.constructor ? val.constructor.name : null;
+  }
+
+  function isArray(val) {
+    if (Array.isArray) return Array.isArray(val);
+    return val instanceof Array;
+  }
+
+  function isError(val) {
+    return val instanceof Error || typeof val.message === 'string' && val.constructor && typeof val.constructor.stackTraceLimit === 'number';
+  }
+
+  function isDate(val) {
+    if (val instanceof Date) return true;
+    return typeof val.toDateString === 'function' && typeof val.getDate === 'function' && typeof val.setDate === 'function';
+  }
+
+  function isRegexp(val) {
+    if (val instanceof RegExp) return true;
+    return typeof val.flags === 'string' && typeof val.ignoreCase === 'boolean' && typeof val.multiline === 'boolean' && typeof val.global === 'boolean';
+  }
+
+  function isGeneratorFn(name, val) {
+    return ctorName(name) === 'GeneratorFunction';
+  }
+
+  function isGeneratorObj(val) {
+    return typeof val["throw"] === 'function' && typeof val["return"] === 'function' && typeof val.next === 'function';
+  }
+
+  function isArguments(val) {
+    try {
+      if (typeof val.length === 'number' && typeof val.callee === 'function') {
+        return true;
+      }
+    } catch (err) {
+      if (err.message.indexOf('callee') !== -1) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+  /**
+   * If you need to support Safari 5-7 (8-10 yr-old browser),
+   * take a look at https://github.com/feross/is-buffer
+   */
+
+
+  function isBuffer(val) {
+    if (val.constructor && typeof val.constructor.isBuffer === 'function') {
+      return val.constructor.isBuffer(val);
+    }
+
+    return false;
+  }
+
+  function optionValidator(option, scheme) {
+    var paths = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ['option'];
+    checkType(option, scheme, paths);
+    checkValidator(option, scheme, paths);
+    checkChild(option, scheme, paths);
+
+    for (var key in scheme) {
+      if (scheme.hasOwnProperty(key)) {
+        var optionValue = option[key];
+        var schemeValue = scheme[key];
+        var currentPath = paths.concat(key);
+        if (checkRequired(option, key, schemeValue, currentPath)) continue;
+        checkType(optionValue, schemeValue, currentPath);
+        checkValidator(optionValue, schemeValue, currentPath);
+        checkChild(optionValue, schemeValue, currentPath);
+      }
+    }
+  }
+
+  function checkRequired(option, key, schemeValue, paths) {
+    if (!Object.prototype.hasOwnProperty.call(option, key)) {
+      if (schemeValue.__required__ === true || schemeValue.required === true) {
+        throw new TypeError("'".concat(paths.join('.'), "' is required"));
+      } else {
+        return true;
+      }
+    }
+  }
+
+  function checkType(optionValue, schemeValue, paths) {
+    var schemeType;
+
+    if (kindOf(schemeValue) === 'string') {
+      schemeType = schemeValue;
+    } else if (kindOf(schemeValue) === 'function') {
+      schemeValue.___validator__ = schemeValue;
+    } else if (schemeValue.__type__) {
+      schemeType = schemeValue.__type__;
+    } else if (schemeValue.type) {
+      schemeType = schemeValue.type;
+    }
+
+    if (schemeType && kindOf(schemeType) === 'string') {
+      schemeType = schemeType.trim().toLowerCase();
+      var optionType = kindOf(optionValue);
+      var resule = optionType === schemeType;
+
+      if (schemeType.indexOf('|') > -1) {
+        var schemeTypes = schemeType.split('|');
+        resule = schemeTypes.filter(Boolean).some(function (item) {
+          return optionType === item.trim();
+        });
       }
 
-      var u = Object.prototype.toString,
-          i = function i(r) {
-        if (void 0 === r) return "undefined";
-        if (null === r) return "null";
-        var t,
-            e,
-            n,
-            o,
-            a,
-            i = c(r);
-        if ("boolean" === i) return "boolean";
-        if ("string" === i) return "string";
-        if ("number" === i) return "number";
-        if ("symbol" === i) return "symbol";
-        if ("function" === i) return "GeneratorFunction" === f(r) ? "generatorfunction" : "function";
-        if (t = r, Array.isArray ? Array.isArray(t) : t instanceof Array) return "array";
-        if (function (r) {
-          if (r.constructor && "function" == typeof r.constructor.isBuffer) return r.constructor.isBuffer(r);
-          return !1;
-        }(r)) return "buffer";
-        if (function (r) {
-          try {
-            if ("number" == typeof r.length && "function" == typeof r.callee) return !0;
-          } catch (r) {
-            if (-1 !== r.message.indexOf("callee")) return !0;
-          }
-
-          return !1;
-        }(r)) return "arguments";
-        if ((e = r) instanceof Date || "function" == typeof e.toDateString && "function" == typeof e.getDate && "function" == typeof e.setDate) return "date";
-        if ((n = r) instanceof Error || "string" == typeof n.message && n.constructor && "number" == typeof n.constructor.stackTraceLimit) return "error";
-        if ((o = r) instanceof RegExp || "string" == typeof o.flags && "boolean" == typeof o.ignoreCase && "boolean" == typeof o.multiline && "boolean" == typeof o.global) return "regexp";
-
-        switch (f(r)) {
-          case "Symbol":
-            return "symbol";
-
-          case "Promise":
-            return "promise";
-
-          case "WeakMap":
-            return "weakmap";
-
-          case "WeakSet":
-            return "weakset";
-
-          case "Map":
-            return "map";
-
-          case "Set":
-            return "set";
-
-          case "Int8Array":
-            return "int8array";
-
-          case "Uint8Array":
-            return "uint8array";
-
-          case "Uint8ClampedArray":
-            return "uint8clampedarray";
-
-          case "Int16Array":
-            return "int16array";
-
-          case "Uint16Array":
-            return "uint16array";
-
-          case "Int32Array":
-            return "int32array";
-
-          case "Uint32Array":
-            return "uint32array";
-
-          case "Float32Array":
-            return "float32array";
-
-          case "Float64Array":
-            return "float64array";
-        }
-
-        if ("function" == typeof (a = r)["throw"] && "function" == typeof a["return"] && "function" == typeof a.next) return "generator";
-
-        switch (i = u.call(r)) {
-          case "[object Object]":
-            return "object";
-
-          case "[object Map Iterator]":
-            return "mapiterator";
-
-          case "[object Set Iterator]":
-            return "setiterator";
-
-          case "[object String Iterator]":
-            return "stringiterator";
-
-          case "[object Array Iterator]":
-            return "arrayiterator";
-        }
-
-        return i.slice(8, -1).toLowerCase().replace(/\s/g, "");
-      };
-
-      function f(r) {
-        return r.constructor ? r.constructor.name : null;
+      if (!resule) {
+        throw new TypeError("'".concat(paths.join('.'), "' require '").concat(schemeType, "' type, but got '").concat(optionType, "'"));
       }
+    }
+  }
 
-      function a(r, t) {
-        var e = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : ["option"];
+  function checkValidator(optionValue, schemeValue, paths) {
+    var schemeValidator;
 
-        for (var n in y(r, t, e), l(r, t, e), p(r, t, e), t) {
-          if (t.hasOwnProperty(n)) {
-            var o = r[n],
-                a = t[n],
-                i = e.concat(n);
-            if (s(r, n, a, i)) continue;
-            y(o, a, i), l(o, a, i), p(o, a, i);
-          }
-        }
+    if (schemeValue.___validator__) {
+      schemeValidator = schemeValue.___validator__;
+    } else if (schemeValue.validator) {
+      schemeValidator = schemeValue.validator;
+    }
+
+    if (kindOf(schemeValidator) === 'function') {
+      var optionType = kindOf(optionValue);
+      var resule = schemeValidator(paths, optionValue, optionType);
+
+      if (resule !== true) {
+        throw new TypeError("The scheme for '".concat(paths.join('.'), "' validator function require return true, but got '").concat(resule, "'"));
       }
+    }
+  }
 
-      function s(r, t, e, n) {
-        if (!Object.prototype.hasOwnProperty.call(r, t)) {
-          if (!0 === e.__required__ || !0 === e.required) throw new TypeError("'".concat(n.join("."), "' is required"));
-          return !0;
-        }
+  function checkChild(optionValue, schemeValue, paths) {
+    var schemeChild;
+
+    if (schemeValue.___child__) {
+      schemeChild = schemeValue.___child__;
+    } else if (schemeValue.child) {
+      schemeChild = schemeValue.child;
+    }
+
+    if (kindOf(schemeChild) === 'object') {
+      var optionType = kindOf(optionValue);
+
+      if (optionType === 'object') {
+        optionValidator(optionValue, schemeChild, paths);
+      } else if (optionType === 'array') {
+        optionValue.forEach(function (item, index) {
+          optionValidator(item, schemeChild, paths.concat(index));
+        });
       }
+    }
+  }
 
-      function y(r, t, e) {
-        var n;
-
-        if ("string" === i(t) ? n = t : "function" === i(t) ? t.___validator__ = t : t.__type__ ? n = t.__type__ : t.type && (n = t.type), n && "string" === i(n)) {
-          n = n.trim().toLowerCase();
-          var o = i(r),
-              a = o === n;
-          if (-1 < n.indexOf("|")) a = n.split("|").filter(Boolean).some(function (r) {
-            return o === r.trim();
-          });
-          if (!a) throw new TypeError("'".concat(e.join("."), "' require '").concat(n, "' type, but got '").concat(o, "'"));
-        }
-      }
-
-      function l(r, t, e) {
-        var n;
-
-        if (t.___validator__ ? n = t.___validator__ : t.validator && (n = t.validator), "function" === i(n)) {
-          var o = n(e, r, i(r));
-          if (!0 !== o) throw new TypeError("The scheme for '".concat(e.join("."), "' validator function require return true, but got '").concat(o, "'"));
-        }
-      }
-
-      function p(r, t, e) {
-        var n;
-
-        if (t.___child__ ? n = t.___child__ : t.child && (n = t.child), "object" === i(n)) {
-          var o = i(r);
-          "object" === o ? a(r, n, e) : "array" === o && r.forEach(function (r, t) {
-            a(r, n, e.concat(t));
-          });
-        }
-      }
-
-      return a.kindOf = i, window.optionValidator = a;
-    });
-  });
+  optionValidator.kindOf = kindOf;
+  window.optionValidator = optionValidator;
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -833,6 +921,184 @@
     video: video
   };
 
+  var optionValidator$1 = createCommonjsModule(function (module, exports) {
+    !function (r, t) {
+      module.exports = t();
+    }(commonjsGlobal, function () {
+
+      function c(r) {
+        return (c = "function" == typeof Symbol && "symbol" == _typeof_1(Symbol.iterator) ? function (r) {
+          return _typeof_1(r);
+        } : function (r) {
+          return r && "function" == typeof Symbol && r.constructor === Symbol && r !== Symbol.prototype ? "symbol" : _typeof_1(r);
+        })(r);
+      }
+
+      var u = Object.prototype.toString,
+          i = function i(r) {
+        if (void 0 === r) return "undefined";
+        if (null === r) return "null";
+        var t,
+            e,
+            n,
+            o,
+            a,
+            i = c(r);
+        if ("boolean" === i) return "boolean";
+        if ("string" === i) return "string";
+        if ("number" === i) return "number";
+        if ("symbol" === i) return "symbol";
+        if ("function" === i) return "GeneratorFunction" === f(r) ? "generatorfunction" : "function";
+        if (t = r, Array.isArray ? Array.isArray(t) : t instanceof Array) return "array";
+        if (function (r) {
+          if (r.constructor && "function" == typeof r.constructor.isBuffer) return r.constructor.isBuffer(r);
+          return !1;
+        }(r)) return "buffer";
+        if (function (r) {
+          try {
+            if ("number" == typeof r.length && "function" == typeof r.callee) return !0;
+          } catch (r) {
+            if (-1 !== r.message.indexOf("callee")) return !0;
+          }
+
+          return !1;
+        }(r)) return "arguments";
+        if ((e = r) instanceof Date || "function" == typeof e.toDateString && "function" == typeof e.getDate && "function" == typeof e.setDate) return "date";
+        if ((n = r) instanceof Error || "string" == typeof n.message && n.constructor && "number" == typeof n.constructor.stackTraceLimit) return "error";
+        if ((o = r) instanceof RegExp || "string" == typeof o.flags && "boolean" == typeof o.ignoreCase && "boolean" == typeof o.multiline && "boolean" == typeof o.global) return "regexp";
+
+        switch (f(r)) {
+          case "Symbol":
+            return "symbol";
+
+          case "Promise":
+            return "promise";
+
+          case "WeakMap":
+            return "weakmap";
+
+          case "WeakSet":
+            return "weakset";
+
+          case "Map":
+            return "map";
+
+          case "Set":
+            return "set";
+
+          case "Int8Array":
+            return "int8array";
+
+          case "Uint8Array":
+            return "uint8array";
+
+          case "Uint8ClampedArray":
+            return "uint8clampedarray";
+
+          case "Int16Array":
+            return "int16array";
+
+          case "Uint16Array":
+            return "uint16array";
+
+          case "Int32Array":
+            return "int32array";
+
+          case "Uint32Array":
+            return "uint32array";
+
+          case "Float32Array":
+            return "float32array";
+
+          case "Float64Array":
+            return "float64array";
+        }
+
+        if ("function" == typeof (a = r)["throw"] && "function" == typeof a["return"] && "function" == typeof a.next) return "generator";
+
+        switch (i = u.call(r)) {
+          case "[object Object]":
+            return "object";
+
+          case "[object Map Iterator]":
+            return "mapiterator";
+
+          case "[object Set Iterator]":
+            return "setiterator";
+
+          case "[object String Iterator]":
+            return "stringiterator";
+
+          case "[object Array Iterator]":
+            return "arrayiterator";
+        }
+
+        return i.slice(8, -1).toLowerCase().replace(/\s/g, "");
+      };
+
+      function f(r) {
+        return r.constructor ? r.constructor.name : null;
+      }
+
+      function a(r, t) {
+        var e = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : ["option"];
+
+        for (var n in y(r, t, e), l(r, t, e), p(r, t, e), t) {
+          if (t.hasOwnProperty(n)) {
+            var o = r[n],
+                a = t[n],
+                i = e.concat(n);
+            if (s(r, n, a, i)) continue;
+            y(o, a, i), l(o, a, i), p(o, a, i);
+          }
+        }
+      }
+
+      function s(r, t, e, n) {
+        if (!Object.prototype.hasOwnProperty.call(r, t)) {
+          if (!0 === e.__required__ || !0 === e.required) throw new TypeError("'".concat(n.join("."), "' is required"));
+          return !0;
+        }
+      }
+
+      function y(r, t, e) {
+        var n;
+
+        if ("string" === i(t) ? n = t : "function" === i(t) ? t.___validator__ = t : t.__type__ ? n = t.__type__ : t.type && (n = t.type), n && "string" === i(n)) {
+          n = n.trim().toLowerCase();
+          var o = i(r),
+              a = o === n;
+          if (-1 < n.indexOf("|")) a = n.split("|").filter(Boolean).some(function (r) {
+            return o === r.trim();
+          });
+          if (!a) throw new TypeError("'".concat(e.join("."), "' require '").concat(n, "' type, but got '").concat(o, "'"));
+        }
+      }
+
+      function l(r, t, e) {
+        var n;
+
+        if (t.___validator__ ? n = t.___validator__ : t.validator && (n = t.validator), "function" === i(n)) {
+          var o = n(e, r, i(r));
+          if (!0 !== o) throw new TypeError("The scheme for '".concat(e.join("."), "' validator function require return true, but got '").concat(o, "'"));
+        }
+      }
+
+      function p(r, t, e) {
+        var n;
+
+        if (t.___child__ ? n = t.___child__ : t.child && (n = t.child), "object" === i(n)) {
+          var o = i(r);
+          "object" === o ? a(r, n, e) : "array" === o && r.forEach(function (r, t) {
+            a(r, n, e.concat(t));
+          });
+        }
+      }
+
+      return a.kindOf = i, window.optionValidator = a;
+    });
+  });
+
   var Whitelist = function Whitelist(art) {
     var _this = this;
 
@@ -842,7 +1108,7 @@
     this.userAgent = window.navigator.userAgent;
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
     this.state = !this.isMobile || whitelist.some(function (item) {
-      var type = optionValidator.kindOf(item);
+      var type = optionValidator$1.kindOf(item);
       var result = false;
 
       switch (type) {
@@ -5778,9 +6044,7 @@
   });
   window.Artplayer = Artplayer;
 
-  exports.default = Artplayer;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
+  return Artplayer;
 
 }));
 //# sourceMappingURL=artplayer.js.map

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Artplayer from 'artplayer';
+import 'artplayer/dist/artplayer.css';
 
-export default class ArtplayerComponent extends Component {
+export default class ArtplayerComponent extends React.Component {
     constructor(props) {
         super(props);
         Artplayer.utils.errorHandle(
@@ -32,6 +33,14 @@ export default class ArtplayerComponent extends Component {
 
     render() {
         const { option, getInstance, ...rest } = this.props;
-        return <div ref={this.artRef} {...rest} />;
+        return React.createElement(
+            'div',
+            Object.assign(
+                {
+                    ref: this.artRef,
+                },
+                rest,
+            ),
+        );
     }
 }

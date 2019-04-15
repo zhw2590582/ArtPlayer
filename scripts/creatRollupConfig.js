@@ -32,9 +32,9 @@ module.exports = function creatRollupConfig(projectPath) {
                 ? path.join(projectPath, `dist/${name}.js`)
                 : path.join(process.cwd(), `docs/uncompiled/${name}.js`),
             format: 'umd',
-            exports: 'named',
             sourcemap: isProd ? false : true,
         },
+        exclude: ['node_modules/**', 'packages/**/node_modules/**'],
         plugins: [
             eslint({
                 exclude: ['node_modules/**', 'packages/*/src/**/*.scss', 'packages/*/src/**/*.svg'],
@@ -57,9 +57,12 @@ module.exports = function creatRollupConfig(projectPath) {
             commonjs(),
             babel({
                 runtimeHelpers: true,
-                exclude: 'node_modules/**',
+                exclude: ['node_modules/**', 'packages/**/node_modules/**'],
                 presets: [['@babel/env', { modules: false }]],
-                plugins: ['@babel/plugin-external-helpers', '@babel/plugin-transform-runtime'],
+                plugins: [
+                    '@babel/plugin-external-helpers',
+                    '@babel/plugin-transform-runtime',
+                ],
             }),
             svgo({
                 raw: true,
