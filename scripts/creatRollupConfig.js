@@ -40,7 +40,14 @@ module.exports = function creatRollupConfig(projectPath) {
                 exclude: ['node_modules/**', 'packages/*/src/**/*.scss', 'packages/*/src/**/*.svg'],
             }),
             postcss({
-                plugins: [autoprefixer, cssnano],
+                plugins: [
+                    autoprefixer({
+                        browsers: ['last 2 versions'],
+                    }),
+                    cssnano({
+                        preset: 'default',
+                    }),
+                ],
                 sourceMap: isProd ? false : true,
                 extract: isProd
                     ? path.join(projectPath, `dist/${name}.css`)
