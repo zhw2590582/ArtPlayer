@@ -1,6 +1,6 @@
 # artplayer-react
 
-Artplayer React Component, It is recommended to package itself according to actual business needs.
+React Component for Artplayer, It is recommended to package itself according to actual business needs.
 
 ## Demo
 
@@ -23,11 +23,11 @@ $ yarn add artplayer-react
 ## Usage
 
 ```js
-import Artplayer from 'artplayer-react';
+import ArtplayerComponent from 'artplayer-react';
 import 'artplayer/dist/artplayer.css';
 
 // ...
-<Artplayer
+<ArtplayerComponent
     option={
         {
             // option, no 'container' property required
