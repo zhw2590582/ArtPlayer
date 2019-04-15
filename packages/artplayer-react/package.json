@@ -1,6 +1,6 @@
 {
   "name": "artplayer-react",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React Component for Artplayer",
   "main": "dist/artplayer-react.js",
   "style": "dist/artplayer-react.css",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "dependencies": {
-    "artplayer": "^1.0.6",
+    "artplayer": "^1.0.7",
     "react": "^16.8.6"
   }
 }
