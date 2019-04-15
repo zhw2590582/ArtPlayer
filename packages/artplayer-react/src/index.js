@@ -17,7 +17,7 @@ export default class ArtplayerComponent extends React.Component {
         const { option, getInstance } = this.props;
         this.instance = new Artplayer({
             ...option,
-            container: this.artRef,
+            container: this.artRef.current,
         });
 
         if (getInstance && typeof getInstance === 'function') {

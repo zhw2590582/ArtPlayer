@@ -29,13 +29,13 @@
 
 ## Ecosystem
 
-| Project                                                                                                           | Description                   | Demo                                     |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------- |
-| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)     | Danmu plugin for ArtPlayer    | `WIP`                                    |
-| [artplayer-plugin-flv](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-flv)         | Flv plugin for ArtPlayer      | `WIP`                                    |
-| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)         | Gif plugin for ArtPlayer      | [demo](https://artplayer.org/gif/)       |
-| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail) | Thumbnail tool for ArtPlayer  | [demo](https://artplayer.org/thumbnail/) |
-| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                   | React Component for Artplayer | [demo](https://artplayer.org/react/)     |
+| Project                                                                                                           | Description                   | Demo                                        |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------------------------------------- |
+| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)     | Danmu plugin for ArtPlayer    | `WIP`                                       |
+| [artplayer-plugin-flv](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-flv)         | Flv plugin for ArtPlayer      | `WIP`                                       |
+| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)         | Gif plugin for ArtPlayer      | [demo](https://artplayer.org/gif/)          |
+| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail) | Thumbnail tool for ArtPlayer  | [demo](https://artplayer.org/thumbnail/)    |
+| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                   | React Component for Artplayer | [demo](https://codesandbox.io/s/n74859y9rl) |
 
 ## Demo
 
