@@ -13,7 +13,7 @@ export default function fullscreenWebMix(art, player) {
                 player.fullscreenExit();
             }
             $player.classList.add('artplayer-web-fullscreen');
-            player.aspectRatio('default');
+            player.aspectRatioReset();
             art.emit('fullscreenWeb:enabled');
         },
     });
@@ -23,7 +23,7 @@ export default function fullscreenWebMix(art, player) {
             if (player.fullscreenWebState) {
                 player.fullscreenExit();
                 $player.classList.remove('artplayer-web-fullscreen');
-                player.aspectRatio('default');
+                player.aspectRatioReset();
                 art.emit('fullscreenWeb:exit');
             }
         },

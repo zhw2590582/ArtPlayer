@@ -1440,10 +1440,6 @@
         var ratioList = ['default', '4:3', '16:9'];
         errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
-        if (ratio === $player.dataset.aspectRatio) {
-          return;
-        }
-
         if (ratio === 'default') {
           player.aspectRatioRemove();
         } else {
@@ -1710,7 +1706,7 @@
 
         $player.classList.add('artplayer-fullscreen');
         screenfull.request($player);
-        player.aspectRatio('default');
+        player.aspectRatioReset();
         art.emit('fullscreen:enabled');
       }
     });
@@ -1720,7 +1716,7 @@
           player.fullscreenWebExit();
           $player.classList.remove('artplayer-fullscreen');
           screenfull.exit();
-          player.aspectRatio('default');
+          player.aspectRatioReset();
           art.emit('fullscreen:exit');
         }
       }
@@ -1750,7 +1746,7 @@
         }
 
         $player.classList.add('artplayer-web-fullscreen');
-        player.aspectRatio('default');
+        player.aspectRatioReset();
         art.emit('fullscreenWeb:enabled');
       }
     });
@@ -1759,7 +1755,7 @@
         if (player.fullscreenWebState) {
           player.fullscreenExit();
           $player.classList.remove('artplayer-web-fullscreen');
-          player.aspectRatio('default');
+          player.aspectRatioReset();
           art.emit('fullscreenWeb:exit');
         }
       }

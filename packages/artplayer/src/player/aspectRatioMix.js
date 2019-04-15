@@ -15,10 +15,6 @@ export default function aspectRatioMix(art, player) {
         value: ratio => {
             const ratioList = ['default', '4:3', '16:9'];
             errorHandle(ratioList.includes(ratio), `'aspectRatio' only accept ${ratioList.toString()} as parameters`);
-            
-            if (ratio === $player.dataset.aspectRatio) {
-                return;
-            }
 
             if (ratio === 'default') {
                 player.aspectRatioRemove();
