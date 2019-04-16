@@ -18,7 +18,7 @@ function build(projectPath) {
         })
         .then(bundle => {
             bundle.write(output);
-            logger.success('finished building all bundles');
+            logger.success(`finished building all bundles from ${projectPath}`);
         });
 }
 
