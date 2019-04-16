@@ -1142,7 +1142,7 @@ var art = new Artplayer({
     },
 });
 
-this.art.on('firstCanplay', () => {
+art.on('firstCanplay', () => {
     art.subtitle.init(url + '/subtitle/one-more-time-one-more-chance.vtt');
 });
 ```
