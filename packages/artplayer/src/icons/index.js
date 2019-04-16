@@ -13,17 +13,8 @@ import pip from './pip.svg';
 import prev from './prev.svg';
 import next from './next.svg';
 
-function creatDomFromSvg(map) {
-    const result = {};
-    Object.keys(map).forEach(name => {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = `<i class="art-icon art-icon-${name}">${map[name]}</i>`;
-        [result[name]] = tmp.childNodes;
-    });
-    return result;
-}
-
-export default creatDomFromSvg({
+const icons = {};
+const svgs = {
     loading,
     playBig,
     play,
@@ -38,4 +29,16 @@ export default creatDomFromSvg({
     pip,
     prev,
     next,
+};
+
+Object.keys(svgs).forEach(key => {
+    Object.defineProperty(icons, key, {
+        get() {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = `<i class="art-icon art-icon-${key}">${svgs[key]}</i>`;
+            return tmp.childNodes[0];
+        },
+    });
 });
+
+export default icons;

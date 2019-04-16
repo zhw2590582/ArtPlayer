@@ -6,25 +6,40 @@
         <link href="../dist/artplayer.css" rel="stylesheet" />
         <style>
             .artplayer-app {
-                width: 400px;
+                display: flex;
                 height: 300px;
-                margin: 20px auto;
-                opacity: 0.1;
-                background: #000;
+                border-bottom: 1px solid #999;
+            }
+
+            .artplayer-app > div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex: 1;
+                padding: 10px;
+                border-right: 1px solid #999;
             }
         </style>
     </head>
     <body>
-        <div class="artplayer-app"></div>
+        <div class="artplayer-app">
+            <div class="sample1">sample1</div>
+            <div class="sample2">sample2</div>
+            <div class="sample3">sample3</div>
+        </div>
         <div id="mocha"></div>
         <script src="https://unpkg.com/chai/chai.js"></script>
         <script src="https://unpkg.com/mocha@5.2.0/mocha.js"></script>
         <script>
             window.mocha.setup('bdd');
             window.expect = window.chai.expect;
+            window.artBaseOption = {
+                url: 'https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4',
+                autoSize: true,
+            };
         </script>
-        <script src="../dist/artplayer.js"></script>
-        <script src="./index.test.js"></script>
+        <script src="../docs/uncompiled/artplayer.js"></script>
+        <script src="./constructor.test.js"></script>
         <script>
             mocha.checkLeaks();
             mocha.run();
