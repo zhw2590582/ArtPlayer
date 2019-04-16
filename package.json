@@ -4,7 +4,7 @@
   "description": "ArtPlayer is a modern HTML5 video player",
   "scripts": {
     "bootstrap": "node ./node_modules/.bin/lerna bootstrap",
-    "version": "node ./node_modules/.bin/lerna version patch --yes",
+    "version": "node ./node_modules/.bin/lerna version patch --yes --no-push",
     "publish": "node ./node_modules/.bin/lerna publish --yes",
     "release": "npm run lint && npm run version && npm run build:all && npm test && npm run publish",
     "dev": "node ./node_modules/.bin/cross-env NODE_ENV=development node ./scripts/dev.js",
