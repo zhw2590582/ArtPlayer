@@ -4,7 +4,7 @@ Vue Component for Artplayer, It is recommended to package itself according to ac
 
 ## Demo
 
-[Checkout the demo](https://codesandbox.io/s/n74859y9rl) from Github Pages
+[Checkout the demo](https://codesandbox.io/s/6z76lm109n) from Github Pages
 
 ## Install
 
@@ -27,7 +27,12 @@ import ArtplayerComponent from 'artplayer-vue';
 import 'artplayer-vue/dist/artplayer-vue.css';
 
 // ...
-<ArtplayerComponent />;
+<ArtplayerComponent
+    :option="{
+        // option, no 'container' property required
+    }"
+    @getInstance="ins => console.log(ins)" // get the instance
+/>;
 ```
 
 ## License
