@@ -27,7 +27,7 @@ import artplayerPluginGif from 'artplayer-plugin-gif';
 Or umd builds are also available
 
 ```html
-<script src="artplayer-plugin-gif"></script>
+<script src="artplayer-plugin-gif.js"></script>
 ```
 
 Will expose the global variable to `window.artplayerPluginGif`.
