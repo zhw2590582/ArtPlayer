@@ -4,7 +4,7 @@ React Component for Artplayer, It is recommended to package itself according to 
 
 ## Demo
 
-[Checkout the demo](https://codesandbox.io/s/n74859y9rl) from Github Pages
+[Checkout the demo](https://codesandbox.io/s/n74859y9rl) from Codesandbox
 
 ## Install
 
