@@ -4,7 +4,7 @@ Vue Component for Artplayer, It is recommended to package itself according to ac
 
 ## Demo
 
-[Checkout the demo](https://codesandbox.io/s/6z76lm109n) from Github Pages
+[Checkout the demo](https://codesandbox.io/s/6z76lm109n) from Codesandbox
 
 ## Install
 
