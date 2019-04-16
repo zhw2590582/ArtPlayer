@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-danmu",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "description": "Danmu plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-danmu.js",
   "style": "dist/artplayer-plugin-danmu.css",
