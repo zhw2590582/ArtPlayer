@@ -101,7 +101,7 @@ Specify the format for the `url`, use with `customType`
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.flv',
@@ -119,7 +119,7 @@ Customize when loading third-party libraries
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
   container: '.artplayer-app',
   url: url + '/video/one-more-time-one-more-chance-480p.flv'
@@ -146,7 +146,7 @@ By default, non-whitelisted devices only set video native properties and third-p
 [Open with mobile](https://artplayer.org/lab/mobile.html)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -166,7 +166,7 @@ Video poster image url
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -184,7 +184,7 @@ Video title, will be shown in `screenshot` file name and `pip` mode
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -202,7 +202,7 @@ Default volume, player will cache the last volume, which may be overwritten
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -220,7 +220,7 @@ Whether to mute by default
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -240,7 +240,7 @@ More info: [autoplay-policy-changes](https://developers.google.com/web/updates/2
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -259,7 +259,7 @@ Keep the original video aspect ratio and automatically zoom
 
 ```js
 // Zoom browser window
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -277,7 +277,7 @@ Automatic loop playback
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -295,7 +295,7 @@ Whether to show playback rate controller in the contextmenu
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -313,7 +313,7 @@ Whether to show aspect ratio controller in the contextmenu
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -331,7 +331,7 @@ Whether to show screenshot controller in the bottom, If the video resource exist
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -354,7 +354,7 @@ Whether to show setting controller in the bottom
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -374,7 +374,7 @@ More info: [picture-in-picture](https://developers.google.com/web/updates/2017/0
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -392,7 +392,7 @@ Whether to show window fullscreen controller in the bottom
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -410,7 +410,7 @@ Whether to show web page fullscreen controller in the bottom
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -428,7 +428,7 @@ Player mutually exclusive, only one player can play at a time
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -446,7 +446,7 @@ Whether to use hotkey
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn;
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -472,7 +472,7 @@ Default display language: en, zh-cn, zh-tw
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -490,7 +490,7 @@ Replace the default icon, The currently configurable icons are: `loading`、`pla
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -511,7 +511,7 @@ Default theme color
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -534,7 +534,7 @@ Custom subtitle
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -565,7 +565,7 @@ Custom thumbnails in the progress bar with lazy load
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -587,7 +587,7 @@ More video Attributes, these properties will be written directly to the video el
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -614,7 +614,7 @@ Custom quality, The type of quality is an object
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -647,7 +647,7 @@ Custom highlight, The type of highlight is an object
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -696,7 +696,7 @@ Custom layer, The type of layer is an object or function
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -734,7 +734,7 @@ Custom contextmenu, The type of layer is an object or function
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -771,7 +771,7 @@ Custom controls, The type of controls is an object or function
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -801,7 +801,7 @@ Custom plugins, The type of plugin is a function
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -833,7 +833,7 @@ art.plugins.myPlugin.doSomething();
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -899,7 +899,7 @@ Player core function
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -923,7 +923,7 @@ The player will automatically add a `localStorage` object named `artplayer_setti
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -945,7 +945,7 @@ The current support i18n has: `en`, `zh-cn`, `zh-tw`
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -979,7 +979,7 @@ console.log(art.i18n.get('Language'));
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1008,7 +1008,7 @@ Agent for managing native events
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1035,7 +1035,7 @@ Layer manager, and every layer has `show` and `hide` funciton
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1070,7 +1070,7 @@ Controls manager, and every control has `show` and `hide` funciton
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1106,7 +1106,7 @@ Contextmenu manager, and every contextmenu has `show` and `hide` funciton
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1133,7 +1133,7 @@ art.contextmenu.yourContextmenu.hide();
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1180,7 +1180,7 @@ Setting manager, and every setting has `show` and `hide` funciton
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1207,7 +1207,7 @@ Plugins manager
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -1252,7 +1252,7 @@ All properties are read only
 [Run Code](/lib=https://cdn.bootcss.com/flv.js/1.4.2/flv.js)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.flv',
