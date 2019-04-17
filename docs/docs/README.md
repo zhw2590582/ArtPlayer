@@ -54,7 +54,7 @@ DOM container of the player
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     // container: document.querySelector('.artplayer-app'),
@@ -82,7 +82,7 @@ Video source url, Three video file formats are supported: `mp4`, `ogg`, `webm`
 [Run Code](/)
 
 ```js
-var url = 'https://blog.zhw-island.com/assets-cdn';
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
