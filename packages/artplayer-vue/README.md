@@ -37,4 +37,4 @@ import 'artplayer-vue/dist/artplayer-vue.css';
 
 ## License
 
-MIT © [Harvey Zack](https://www.zhw-island.com/)
+MIT © [Harvey Zack](https://sleepy.im/)
