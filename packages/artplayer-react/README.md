@@ -39,4 +39,4 @@ import 'artplayer-react/dist/artplayer-react.css';
 
 ## License
 
-MIT © [Harvey Zack](https://www.zhw-island.com/)
+MIT © [Harvey Zack](https://sleepy.im/)
