@@ -19,7 +19,7 @@
         container: '.artplayer',
         url: function () {
             return new Promise(function (resolve) {
-                resolve('https://blog.zhw-island.com/assets-cdn/video/one-more-time-one-more-chance-480p.mp4');
+                resolve('https://zhw2590582.github.io/assets-cdn/video/one-more-time-one-more-chance-480p.mp4');
             });
         },
         title: '【新海诚动画】『秒速5センチメートル』',
