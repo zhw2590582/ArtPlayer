@@ -29,14 +29,15 @@
 
 ## Ecosystem
 
-| Project                                                                                                           | Description                   | Demo                                        |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------------------------------------- |
-| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)     | Danmu plugin for ArtPlayer    | `WIP`                                       |
-| [artplayer-plugin-flv](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-flv)         | Flv plugin for ArtPlayer      | `WIP`                                       |
-| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)         | Gif plugin for ArtPlayer      | [demo](https://artplayer.org/gif/)          |
-| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail) | Thumbnail tool for ArtPlayer  | [demo](https://artplayer.org/thumbnail/)    |
-| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                   | React Component for Artplayer | [demo](https://codesandbox.io/s/n74859y9rl) |
-| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                       | Vue Component for Artplayer   | [demo](https://codesandbox.io/s/6z76lm109n) |
+| Project                                                                                                               | Description                    | Demo                                        |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------------------- |
+| [artplayer-plugin-danmu](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmu)         | Danmu plugin for ArtPlayer     | `WIP`                                       |
+| [artplayer-plugin-flv](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-flv)             | Flv plugin for ArtPlayer       | `WIP`                                       |
+| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | Gif plugin for ArtPlayer       | [demo](https://artplayer.org/gif/)          |
+| [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | Backlight plugin for ArtPlayer | [demo](https://artplayer.org/backlight/)    |
+| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail)     | Thumbnail tool for ArtPlayer   | [demo](https://artplayer.org/thumbnail/)    |
+| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React Component for Artplayer  | [demo](https://codesandbox.io/s/n74859y9rl) |
+| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue Component for Artplayer    | [demo](https://codesandbox.io/s/6z76lm109n) |
 
 ## Demo
 

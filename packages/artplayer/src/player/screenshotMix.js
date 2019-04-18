@@ -7,24 +7,28 @@ export default function screenshotMix(art, player) {
         template: { $video },
     } = art;
 
-    function captureFrame() {
-        const canvas = document.createElement('canvas');
-        canvas.width = $video.videoWidth;
-        canvas.height = $video.videoHeight;
-        canvas.getContext('2d').drawImage($video, 0, 0);
-        const dataUri = canvas.toDataURL('image/png');
-        downloadImage(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
-        return dataUri;
-    }
-
-    Object.defineProperty(player, 'screenshot', {
+    Object.defineProperty(player, 'getScreenshotDataURL', {
         value: () => {
             try {
-                const dataUri = captureFrame();
-                art.emit('screenshot', dataUri);
+                const canvas = document.createElement('canvas');
+                canvas.width = $video.videoWidth;
+                canvas.height = $video.videoHeight;
+                canvas.getContext('2d').drawImage($video, 0, 0);
+                return canvas.toDataURL('image/png');;
             } catch (error) {
                 notice.show(error);
                 console.warn(error);
+                return null;
+            }
+        },
+    });
+
+    Object.defineProperty(player, 'downloadScreenshot', {
+        value: () => {
+            const dataUri = player.getScreenshotDataURL();
+            if (dataUri) {
+                downloadImage(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
+                art.emit('screenshot', dataUri);
             }
         },
     });

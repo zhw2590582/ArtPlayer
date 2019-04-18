@@ -1336,25 +1336,28 @@
     var option = art.option,
         notice = art.notice,
         $video = art.template.$video;
-
-    function captureFrame() {
-      var canvas = document.createElement('canvas');
-      canvas.width = $video.videoWidth;
-      canvas.height = $video.videoHeight;
-      canvas.getContext('2d').drawImage($video, 0, 0);
-      var dataUri = canvas.toDataURL('image/png');
-      downloadImage(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
-      return dataUri;
-    }
-
-    Object.defineProperty(player, 'screenshot', {
+    Object.defineProperty(player, 'getScreenshotDataURL', {
       value: function value() {
         try {
-          var dataUri = captureFrame();
-          art.emit('screenshot', dataUri);
+          var canvas = document.createElement('canvas');
+          canvas.width = $video.videoWidth;
+          canvas.height = $video.videoHeight;
+          canvas.getContext('2d').drawImage($video, 0, 0);
+          return canvas.toDataURL('image/png');
         } catch (error) {
           notice.show(error);
           console.warn(error);
+          return null;
+        }
+      }
+    });
+    Object.defineProperty(player, 'downloadScreenshot', {
+      value: function value() {
+        var dataUri = player.getScreenshotDataURL();
+
+        if (dataUri) {
+          downloadImage(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
+          art.emit('screenshot', dataUri);
         }
       }
     });
@@ -3815,7 +3818,7 @@
           var $screenshot = append($control, icons.screenshot);
           tooltip($screenshot, i18n.get('Screenshot'));
           proxy($screenshot, 'click', function () {
-            player.screenshot();
+            player.downloadScreenshot();
           });
         }
       });

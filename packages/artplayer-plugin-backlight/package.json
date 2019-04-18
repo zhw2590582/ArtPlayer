@@ -1,0 +1,24 @@
+{
+  "name": "artplayer-plugin-backlight",
+  "version": "3.1.5",
+  "description": "Backlight plugin for ArtPlayer",
+  "main": "dist/artplayer-plugin-backlight.js",
+  "style": "dist/artplayer-plugin-backlight.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "keywords": [
+    "video",
+    "player"
+  ],
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme"
+}

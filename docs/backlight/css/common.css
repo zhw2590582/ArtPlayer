@@ -1,0 +1,21 @@
+html,
+body,
+.container {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+.artplayer {
+    width: 600px;
+    height: 400px;
+}
+
+.artplayer-video {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
