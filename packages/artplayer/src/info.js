@@ -82,7 +82,11 @@ export default class Info {
         const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
         types.forEach(item => {
             const value = $video[item.dataset.video];
-            item.innerHTML = value !== undefined ? value : 'unknown';
+            if (value !== undefined) {
+                item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
+            } else {
+                item.innerHTML = 'unknown';
+            }
         });
     }
 
