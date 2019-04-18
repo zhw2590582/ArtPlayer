@@ -50,7 +50,7 @@ function creatMatrix(parent, width, height) {
         $box.style.top = `${(yIndex * height) / y}px`;
         $box.style.width = `${100 / x}%`;
         $box.style.height = `${100 / y}%`;
-        $box.style['-webkit-transition'] = 'all .2s ease';
+        $box.style.webkitTransition = 'all .2s ease';
         $box.style.transition = 'all .2s ease';
         parent.appendChild($box);
         return {
@@ -99,7 +99,7 @@ function artplayerPluginBacklight(art) {
                     const x = left ? '-60px' : right ? '60px' : '0';
                     // eslint-disable-next-line no-nested-ternary
                     const y = top ? '-60px' : bottom ? '60px' : '0';
-                    $box.style['-webkit-box-shadow'] = `rgb(${r}, ${g}, ${b}) ${x} ${y} 120px`;
+                    $box.style.webkitBoxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 120px`;
                     $box.style.boxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 120px`;
                 });
             };

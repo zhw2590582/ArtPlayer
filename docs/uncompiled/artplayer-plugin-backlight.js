@@ -62,7 +62,7 @@
         $box.style.top = "".concat(yIndex * height / y, "px");
         $box.style.width = "".concat(100 / x, "%");
         $box.style.height = "".concat(100 / y, "%");
-        $box.style['-webkit-transition'] = 'all .2s ease';
+        $box.style.webkitTransition = 'all .2s ease';
         $box.style.transition = 'all .2s ease';
         parent.appendChild($box);
         return {
@@ -118,7 +118,7 @@
               var x = left ? '-60px' : right ? '60px' : '0'; // eslint-disable-next-line no-nested-ternary
 
               var y = top ? '-60px' : bottom ? '60px' : '0';
-              $box.style['-webkit-box-shadow'] = "rgb(".concat(r, ", ").concat(g, ", ").concat(b, ") ").concat(x, " ").concat(y, " 120px");
+              $box.style.webkitBoxShadow = "rgb(".concat(r, ", ").concat(g, ", ").concat(b, ") ").concat(x, " ").concat(y, " 120px");
               $box.style.boxShadow = "rgb(".concat(r, ", ").concat(g, ", ").concat(b, ") ").concat(x, " ").concat(y, " 120px");
             });
           };
