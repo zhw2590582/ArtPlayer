@@ -23,7 +23,7 @@ export default function screenshotMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'downloadScreenshot', {
+    Object.defineProperty(player, 'screenshot', {
         value: () => {
             const dataUri = player.getScreenshotDataURL();
             if (dataUri) {
