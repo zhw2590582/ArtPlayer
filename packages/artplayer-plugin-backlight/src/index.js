@@ -92,9 +92,7 @@ function artplayerPluginBacklight(art) {
             const dataUri = player.getScreenshotDataURL();
             const $img = document.createElement('img');
             $img.onload = () => {
-                const width = $img.naturalWidth;
-                const height = $img.naturalHeight;
-                const colors = getColors($img, width, height);
+                const colors = getColors($img, clientWidth, clientHeight);
                 colors.forEach(({ r, g, b }, index) => {
                     const { $box, left, right, top, bottom } = matrix[index];
                     // eslint-disable-next-line no-nested-ternary

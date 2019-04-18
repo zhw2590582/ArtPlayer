@@ -103,9 +103,7 @@
           var $img = document.createElement('img');
 
           $img.onload = function () {
-            var width = $img.naturalWidth;
-            var height = $img.naturalHeight;
-            var colors = getColors($img, width, height);
+            var colors = getColors($img, clientWidth, clientHeight);
             colors.forEach(function (_ref, index) {
               var r = _ref.r,
                   g = _ref.g,
