@@ -12,12 +12,12 @@ function matrixCallback(callback) {
     return result;
 }
 
-function getColors($img, width, height) {
+function getColors($video, width, height) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = width;
     canvas.height = height;
-    ctx.drawImage($img, 0, 0);
+    ctx.drawImage($video, 0, 0);
     return matrixCallback((xIndex, yIndex, x, y) => {
         const itemW = width / x;
         const itemH = height / y;
@@ -87,24 +87,19 @@ function artplayerPluginBacklight(art) {
     art.on('firstCanplay', () => {
         const { clientWidth, clientHeight } = $video;
         const matrix = creatMatrix($backlight, clientWidth, clientHeight);
-        const $img = document.createElement('img');
         (function loop() {
             window.requestAnimationFrame(() => {
                 if (player.playing) {
-                    const dataUri = player.getScreenshotDataURL();
-                    $img.onload = () => {
-                        const colors = getColors($img, clientWidth, clientHeight);
-                        colors.forEach(({ r, g, b }, index) => {
-                            const { $box, left, right, top, bottom } = matrix[index];
-                            // eslint-disable-next-line no-nested-ternary
-                            const x = left ? '-64px' : right ? '64px' : '0';
-                            // eslint-disable-next-line no-nested-ternary
-                            const y = top ? '-64px' : bottom ? '64px' : '0';
-                            $box.style.webkitBoxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
-                            $box.style.boxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
-                        });
-                    };
-                    $img.src = dataUri;      
+                    const colors = getColors($video, clientWidth, clientHeight);
+                    colors.forEach(({ r, g, b }, index) => {
+                        const { $box, left, right, top, bottom } = matrix[index];
+                        // eslint-disable-next-line no-nested-ternary
+                        const x = left ? '-64px' : right ? '64px' : '0';
+                        // eslint-disable-next-line no-nested-ternary
+                        const y = top ? '-64px' : bottom ? '64px' : '0';
+                        $box.style.webkitBoxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
+                        $box.style.boxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
+                    });    
                 };
                 loop();
             });
