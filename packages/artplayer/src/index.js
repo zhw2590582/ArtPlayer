@@ -110,6 +110,7 @@ class Artplayer extends Emitter {
         this.template = new Template(this);
         if (this.whitelist.state) {
             this.isFocus = false;
+            this.isDestroy = false;
             this.storage = new Storage(this);
             this.i18n = new I18n(this);
             this.notice = new Notice(this);
@@ -140,6 +141,7 @@ class Artplayer extends Emitter {
         }
         this.template.destroy(removeHtml);
         Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
+        this.isDestroy = true;
         this.emit('destroy');
     }
 }

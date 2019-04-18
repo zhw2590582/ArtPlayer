@@ -1351,7 +1351,7 @@
         }
       }
     });
-    Object.defineProperty(player, 'downloadScreenshot', {
+    Object.defineProperty(player, 'screenshot', {
       value: function value() {
         var dataUri = player.getScreenshotDataURL();
 
@@ -3818,7 +3818,7 @@
           var $screenshot = append($control, icons.screenshot);
           tooltip($screenshot, i18n.get('Screenshot'));
           proxy($screenshot, 'click', function () {
-            player.downloadScreenshot();
+            player.screenshot();
           });
         }
       });
@@ -5515,6 +5515,7 @@
 
         if (this.whitelist.state) {
           this.isFocus = false;
+          this.isDestroy = false;
           this.storage = new Storage(this);
           this.i18n = new I18n(this);
           this.notice = new Notice(this);
@@ -5549,6 +5550,7 @@
 
         this.template.destroy(removeHtml);
         Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
+        this.isDestroy = true;
         this.emit('destroy');
       }
     }], [{

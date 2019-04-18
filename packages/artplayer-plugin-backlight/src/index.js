@@ -39,12 +39,12 @@ function getColors($video, width, height) {
     });
 }
 
-function creatMatrix(parent, width, height) {
+function creatMatrix(parent) {
     return matrixCallback((xIndex, yIndex, x, y) => {
         const $box = document.createElement('div');
         $box.style.position = 'absolute';
-        $box.style.left = `${(xIndex * width) / x}px`;
-        $box.style.top = `${(yIndex * height) / y}px`;
+        $box.style.left = `${xIndex * 100 / x}%`;
+        $box.style.top = `${yIndex * 100 / y}%`;
         $box.style.width = `${100 / x}%`;
         $box.style.height = `${100 / y}%`;
         $box.style.webkitBorderRadius = '50%';
@@ -82,29 +82,30 @@ function artplayerPluginBacklight(art) {
         height: '100%',
     });
 
+    const matrix = creatMatrix($backlight);
     $player.insertBefore($backlight, $video);
 
-    art.on('firstCanplay', () => {
-        const { clientWidth, clientHeight } = $video;
-        const matrix = creatMatrix($backlight, clientWidth, clientHeight);
-        (function loop() {
-            window.requestAnimationFrame(() => {
-                if (player.playing) {
-                    const colors = getColors($video, clientWidth, clientHeight);
-                    colors.forEach(({ r, g, b }, index) => {
-                        const { $box, left, right, top, bottom } = matrix[index];
-                        // eslint-disable-next-line no-nested-ternary
-                        const x = left ? '-64px' : right ? '64px' : '0';
-                        // eslint-disable-next-line no-nested-ternary
-                        const y = top ? '-64px' : bottom ? '64px' : '0';
-                        $box.style.webkitBoxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
-                        $box.style.boxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
-                    });    
-                };
+    (function loop() {
+        window.requestAnimationFrame(() => {
+            if (player.playing) {
+                const { clientWidth, clientHeight } = $video;
+                const colors = getColors($video, clientWidth, clientHeight);
+                colors.forEach(({ r, g, b }, index) => {
+                    const { $box, left, right, top, bottom } = matrix[index];
+                    // eslint-disable-next-line no-nested-ternary
+                    const x = left ? '-64px' : right ? '64px' : '0';
+                    // eslint-disable-next-line no-nested-ternary
+                    const y = top ? '-64px' : bottom ? '64px' : '0';
+                    $box.style.webkitBoxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
+                    $box.style.boxShadow = `rgb(${r}, ${g}, ${b}) ${x} ${y} 128px`;
+                });    
+            };
+
+            if (!art.isDestroy) {
                 loop();
-            });
-        })();
-    });
+            }
+        });
+    })();
 
     return {
         name: 'artplayerPluginBacklight',
