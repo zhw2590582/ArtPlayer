@@ -3992,12 +3992,14 @@
       value: function show() {
         var $player = this.art.template.$player;
         $player.classList.add('artplayer-controls-show');
+        this.art.emit('controls:show');
       }
     }, {
       key: "hide",
       value: function hide() {
         var $player = this.art.template.$player;
         $player.classList.remove('artplayer-controls-show');
+        this.art.emit('controls:hide');
       }
     }]);
 
@@ -4232,6 +4234,11 @@
             proxy = _this$art.events.proxy;
         proxy($infoClose, 'click', function () {
           _this.hide();
+        });
+        this.art.on('destroy', function () {
+          if (_this.timer) {
+            clearTimeout(_this.timer);
+          }
         });
       }
     }, {
@@ -5409,6 +5416,39 @@
     };
   }
 
+  function miniProgressBar(art) {
+    var layers = art.layers,
+        player = art.player,
+        theme = art.option.theme;
+    layers.add({
+      style: {
+        display: 'none',
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: '3px',
+        background: theme
+      },
+      mounted: function mounted($progressBar) {
+        art.on('hoverenter', function () {
+          $progressBar.style.display = 'none';
+        });
+        art.on('hoverleave', function () {
+          if (player.playing) {
+            $progressBar.style.display = 'block';
+          }
+        });
+        art.on('video:timeupdate', function () {
+          $progressBar.style.width = "".concat(player.played * 100, "%");
+        });
+      }
+    });
+    return {
+      name: 'miniProgressBar'
+    };
+  }
+
   var Plugins =
   /*#__PURE__*/
   function () {
@@ -5421,6 +5461,7 @@
       this.id = 0;
       this.add(subtitle$2);
       this.add(localPreview);
+      this.add(miniProgressBar);
       art.option.plugins.forEach(function (plugin) {
         _this.add(plugin);
       });

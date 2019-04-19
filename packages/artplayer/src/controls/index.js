@@ -163,10 +163,12 @@ export default class Controls {
     show() {
         const { $player } = this.art.template;
         $player.classList.add('artplayer-controls-show');
+        this.art.emit('controls:show');
     }
 
     hide() {
         const { $player } = this.art.template;
         $player.classList.remove('artplayer-controls-show');
+        this.art.emit('controls:hide');
     }
 }

@@ -1,5 +1,6 @@
 import subtitle from './subtitle';
 import localPreview from './localPreview';
+import miniProgressBar from './miniProgressBar';
 
 export default class Plugins {
     constructor(art) {
@@ -8,6 +9,7 @@ export default class Plugins {
 
         this.add(subtitle);
         this.add(localPreview);
+        this.add(miniProgressBar);
         art.option.plugins.forEach(plugin => {
             this.add(plugin);
         });
