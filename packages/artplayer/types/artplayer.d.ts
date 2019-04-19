@@ -103,42 +103,48 @@ export default class Artplayer {
         /**
          * Initialize the custom layer
          */
-        layers?: any[];
+        layers?: object[];
 
         /**
          * Initialize the custom contextmenu
          */
-        contextmenu?: any[];
+        contextmenu?: object[];
 
         /**
          * Initialize the custom quality
          */
-        quality?: any[];
+        quality?: object[];
 
         /**
          * Initialize the custom controls
          */
-        controls?: any[];
+        controls?: object[];
 
         /**
          * Initialize the custom highlight
          */
-        highlight?: any[];
+        highlight?: object[];
 
         /**
          * Initialize the custom plugins
          */
-        plugins?: any[];
+        plugins?: Function[];
 
         /**
          * Initialize the custom whitelist
          */
-        whitelist?: any[];
+        whitelist?: [string, Function, regexp];
 
         /**
          * Thumbnails option
          */
-        thumbnails?: object;
+        thumbnails?: {
+            url: string;
+            number?: number;
+            width?: number;
+            height?: number;
+            column?: number;
+        };
 
         /**
          * Subtitle option
@@ -164,6 +170,8 @@ export default class Artplayer {
         /**
          * Custom video type
          */
-        customType?: object;
+        customType?: {
+            [propName: string]: Function;
+        };
     });
 }
