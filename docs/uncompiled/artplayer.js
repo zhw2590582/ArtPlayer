@@ -5576,6 +5576,7 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
+      errorHandle(assertThisInitialized(_this) instanceof Artplayer, 'Artplayer is a constructor and should be called with the `new` keyword');
       errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
       _this.option = mergeDeep(Artplayer.DEFAULTS, option);
       optionValidator(_this.option, scheme);
@@ -5671,7 +5672,6 @@
           title: '',
           theme: '#f00',
           volume: 0.7,
-          isLive: false,
           muted: false,
           autoplay: false,
           autoSize: false,
