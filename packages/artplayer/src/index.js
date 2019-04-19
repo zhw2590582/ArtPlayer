@@ -54,14 +54,16 @@ class Artplayer extends Emitter {
         return Emitter;
     }
 
+    static get validator() {
+        return optionValidator;
+    }
+
     static get DEFAULTS() {
         return {
             container: '#artplayer',
             url: '',
             poster: '',
             title: '',
-            type: '',
-            mimeCodec: '',
             theme: '#f00',
             volume: 0.7,
             isLive: false,

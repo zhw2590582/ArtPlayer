@@ -11,10 +11,6 @@ export default {
     },
     poster: 'string',
     title: 'string',
-    type: {
-        type: 'string',
-    },
-    mimeCodec: 'string',
     theme: 'string',
     volume: 'number',
     isLive: 'boolean',

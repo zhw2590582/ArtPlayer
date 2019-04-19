@@ -523,10 +523,6 @@
     },
     poster: 'string',
     title: 'string',
-    type: {
-      type: 'string'
-    },
-    mimeCodec: 'string',
     theme: 'string',
     volume: 'number',
     isLive: 'boolean',
@@ -5661,6 +5657,11 @@
         return tinyEmitter;
       }
     }, {
+      key: "validator",
+      get: function get() {
+        return optionValidator;
+      }
+    }, {
       key: "DEFAULTS",
       get: function get() {
         return {
@@ -5668,8 +5669,6 @@
           url: '',
           poster: '',
           title: '',
-          type: '',
-          mimeCodec: '',
           theme: '#f00',
           volume: 0.7,
           isLive: false,

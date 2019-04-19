@@ -4,6 +4,7 @@
   "description": "ArtPlayer is a modern HTML5 video player",
   "main": "dist/artplayer.js",
   "style": "dist/artplayer.css",
+  "types": "types/artplayer.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
