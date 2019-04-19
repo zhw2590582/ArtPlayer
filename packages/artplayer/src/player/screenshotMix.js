@@ -14,12 +14,31 @@ export default function screenshotMix(art, player) {
                 canvas.width = $video.videoWidth;
                 canvas.height = $video.videoHeight;
                 canvas.getContext('2d').drawImage($video, 0, 0);
-                return canvas.toDataURL('image/png');;
+                return canvas.toDataURL('image/png');
             } catch (error) {
                 notice.show(error);
                 console.warn(error);
                 return null;
             }
+        },
+    });
+
+    Object.defineProperty(player, 'getScreenshotBlobUrl', {
+        value: () => {
+            return new Promise((resolve, reject) => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = $video.videoWidth;
+                    canvas.height = $video.videoHeight;
+                    canvas.getContext('2d').drawImage($video, 0, 0);
+                    canvas.toBlob(blob => {
+                        resolve(URL.createObjectURL(blob));
+                    });
+                } catch (error) {
+                    notice.show(error);
+                    reject(error);
+                }
+            });
         },
     });
 

@@ -50,6 +50,10 @@ class Artplayer extends Emitter {
         return utils;
     }
 
+    static get Emitter() {
+        return Emitter;
+    }
+
     static get DEFAULTS() {
         return {
             container: '#artplayer',

@@ -60,12 +60,12 @@ export function debounce(func, wait, context) {
     fn.clearTimeout = function ct() {
         clearTimeout(timeout);
     };
-    
+
     return fn;
 }
 
 export function isObject(item) {
-    return (item && typeof item === 'object' && !Array.isArray(item));
+    return item && typeof item === 'object' && !Array.isArray(item);
 }
 
 export function isElement(item) {

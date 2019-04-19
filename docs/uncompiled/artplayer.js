@@ -1351,6 +1351,24 @@
         }
       }
     });
+    Object.defineProperty(player, 'getScreenshotBlobUrl', {
+      value: function value() {
+        return new Promise(function (resolve, reject) {
+          try {
+            var canvas = document.createElement('canvas');
+            canvas.width = $video.videoWidth;
+            canvas.height = $video.videoHeight;
+            canvas.getContext('2d').drawImage($video, 0, 0);
+            canvas.toBlob(function (blob) {
+              resolve(URL.createObjectURL(blob));
+            });
+          } catch (error) {
+            notice.show(error);
+            reject(error);
+          }
+        });
+      }
+    });
     Object.defineProperty(player, 'screenshot', {
       value: function value() {
         var dataUri = player.getScreenshotDataURL();
@@ -5636,6 +5654,11 @@
       key: "utils",
       get: function get() {
         return utils;
+      }
+    }, {
+      key: "Emitter",
+      get: function get() {
+        return tinyEmitter;
       }
     }, {
       key: "DEFAULTS",
