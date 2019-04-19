@@ -5,6 +5,8 @@ export default function miniProgressBar(art) {
         option: { theme },
     } = art;
 
+    let timer = null;
+
     layers.add({
         style: {
             display: 'none',
@@ -17,11 +19,16 @@ export default function miniProgressBar(art) {
         },
         mounted($progressBar) {
             art.on('hoverenter', () => {
+                if (timer) {
+                    clearTimeout(timer);
+                }
                 $progressBar.style.display = 'none';
             });
             art.on('hoverleave', () => {
                 if (player.playing) {
-                    $progressBar.style.display = 'block';
+                    timer = setTimeout(() => {
+                        $progressBar.style.display = 'block';
+                    }, 200);
                 }
             });
             art.on('video:timeupdate', () => {
