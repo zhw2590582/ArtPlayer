@@ -14,6 +14,11 @@ export default class Info {
         proxy($infoClose, 'click', () => {
             this.hide();
         });
+        this.art.on('destroy', () => {
+            if (this.timer) {
+                clearTimeout(this.timer);
+            }
+        });
     }
 
     show() {

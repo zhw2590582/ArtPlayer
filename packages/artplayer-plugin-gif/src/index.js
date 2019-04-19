@@ -58,6 +58,12 @@ function artplayerPluginGif(art) {
     let isPress = false;
     let offset = 0;
 
+    art.on('destroy', () => {
+        if (progressTimer) {
+            clearTimeout(progressTimer);
+        }
+    });
+
     function cleanTimer() {
         $progress.style.width = '0%';
         clearTimeout(progressTimer);
