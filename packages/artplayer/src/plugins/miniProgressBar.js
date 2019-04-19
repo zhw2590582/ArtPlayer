@@ -18,18 +18,29 @@ export default function miniProgressBar(art) {
             background: theme,
         },
         mounted($progressBar) {
-            art.on('hoverenter', () => {
+            function hide() {
                 if (timer) {
                     clearTimeout(timer);
                 }
                 $progressBar.style.display = 'none';
-            });
-            art.on('hoverleave', () => {
+            }
+
+            function show() {
                 if (player.playing) {
                     timer = setTimeout(() => {
                         $progressBar.style.display = 'block';
                     }, 200);
                 }
+            }
+
+            art.on('controls:show', () => {
+                hide();
+            });
+            art.on('hoverenter', () => {
+                hide();
+            });
+            art.on('hoverleave', () => {
+                show();
             });
             art.on('video:timeupdate', () => {
                 $progressBar.style.width = `${player.played * 100}%`;
