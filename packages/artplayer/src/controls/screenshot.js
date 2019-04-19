@@ -14,7 +14,7 @@ export default function screenshot(controlOption) {
             const $screenshot = append($control, icons.screenshot);
             tooltip($screenshot, i18n.get('Screenshot'));
             proxy($screenshot, 'click', () => {
-                player.downloadScreenshot();
+                player.screenshot();
             });
         },
     });
