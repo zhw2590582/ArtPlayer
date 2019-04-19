@@ -28,10 +28,6 @@ let id = 0;
 class Artplayer extends Emitter {
     constructor(option) {
         super();
-        utils.errorHandle(
-            this instanceof Artplayer,
-            'Artplayer is a constructor and should be called with the `new` keyword',
-        );
         utils.errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
         this.option = utils.mergeDeep(Artplayer.DEFAULTS, option);
         optionValidator(this.option, scheme);
