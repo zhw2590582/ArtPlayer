@@ -1579,8 +1579,7 @@
 
     var screenfullError = function screenfullError() {
       notice.show('Your browser does not seem to support full screen functionality.');
-    }; // Can't run on the phone
-
+    };
 
     try {
       screenfull.on('change', screenfullChange);
@@ -1606,8 +1605,11 @@
 
         $player.classList.add('artplayer-fullscreen');
         screenfull.request($player);
-        player.aspectRatioReset();
-        art.emit('fullscreen:enabled');
+
+        if (player.fullscreenState) {
+          player.aspectRatioReset();
+          art.emit('fullscreen:enabled');
+        }
       }
     });
     Object.defineProperty(player, 'fullscreenExit', {
@@ -4088,7 +4090,7 @@
 
   function version(menuOption) {
     return objectSpread({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.5</a>'
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.6</a>'
     });
   }
 
@@ -4275,7 +4277,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.5</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.6</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -5576,7 +5578,6 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
-      errorHandle(assertThisInitialized(_this) instanceof Artplayer, 'Artplayer is a constructor and should be called with the `new` keyword');
       errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
       _this.option = mergeDeep(Artplayer.DEFAULTS, option);
       optionValidator(_this.option, scheme);
@@ -5635,7 +5636,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.5';
+        return '3.1.6';
       }
     }, {
       key: "env",
