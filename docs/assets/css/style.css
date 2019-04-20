@@ -1,0 +1,137 @@
+body,
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, tahoma, arial, simsun, \5b8b\4f53;
+    -webkit-text-size-adjust: 100% !important;
+    -moz-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    background: rgb(16, 17, 19);
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    height: 48px;
+    width: 100%;
+    padding: 0 0 0 20px;
+    border-bottom: 1px solid rgb(17, 21, 24);
+    background-color: rgb(28, 32, 34);
+}
+
+.header .menus {
+    flex: 1;
+}
+
+.header .menus a {
+    margin-left: 30px;
+}
+
+.header .run {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+    color: #f1fa8c;
+    border-left: 1px solid rgb(17, 21, 24);
+    background-color: rgb(39, 41, 54);
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+.main .part-left {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border-right: 1px solid rgb(17, 21, 24);
+}
+
+.main .part-left .libs {
+    height: 50px;
+}
+
+.main .part-left .libsInput {
+    height: 100%;
+    width: 100%;
+    padding: 5px 10px;
+    outline: none;
+    resize: none;
+    border: none;
+    font-size: 13px;
+    color: #ccc;
+    border-bottom: 1px solid rgb(17, 21, 24);
+    background-color: rgb(28, 32, 34);
+}
+
+.main .part-left .code {
+    flex: 1;
+    overflow: auto;
+}
+
+.main .part-left .code .codeMirrorWrap {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.CodeMirror {
+    height: 100%;
+    width: calc(100% + 30px);
+    padding: 10px 30px 10px 0;
+}
+
+.main .part-right {
+    flex: 1;
+}
+
+.part-right .video-wrap {
+    display: flex;
+    height: 70%;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(17, 21, 24);
+}
+
+.part-right .video-wrap .artplayer-app {
+    width: 90%;
+    height: 60%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.part-right .console {
+    position: relative;
+    height: 30%;
+}
