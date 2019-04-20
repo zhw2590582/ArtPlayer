@@ -8,6 +8,7 @@
     var $codeMirror = document.querySelector('.codeMirrorWrap');
     var $lib = document.querySelector('.libsInput');
     var $run = document.querySelector('.run');
+    var $popups = document.querySelector('.popups');
     var loaddLib = [];
 
     consola.creat({
@@ -172,5 +173,11 @@
         initApp();
     });
 
+    $popups.addEventListener('click', function (e) {
+        if (e.target === this) {
+            this.style.display = 'none';
+        }
+    });
+    
     initApp();
 })();
