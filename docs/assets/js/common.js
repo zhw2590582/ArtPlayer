@@ -28,7 +28,7 @@
 
     function initArt(art) {
         Artplayer.config.video.events.forEach(function(item) {
-            art.on('video:' + item, function(event) {
+            art && art.on('video:' + item, function(event) {
                 console.log('video: ' + event.type);
             });
         });
