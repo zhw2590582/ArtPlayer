@@ -12,6 +12,7 @@ body {
     font-size: 14px;
     margin: 0;
     padding: 0;
+    color: #ccc;
     background: rgb(16, 17, 19);
 }
 
@@ -48,11 +49,54 @@ img {
 }
 
 .header .menus {
+    display: flex;
+    align-items: center;
     flex: 1;
+    height: 100%;
 }
 
-.header .menus a {
-    margin-left: 30px;
+.header .menus .item {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    height: 100%;
+}
+
+.header .menus .ecosystem {
+    position: relative;
+    cursor: pointer;
+}
+
+.header .menus .ecosystem:hover .sub-menu{
+    display: block;
+}
+
+.header .menus .ecosystem .sub-menu {
+    display: none;
+    position: absolute;
+    z-index: 9;
+    top: 45px;
+    left: 0;
+    width: 200px;
+    padding: 0 10px;
+    background: #2b2b2b;
+}
+
+.header .menus .ecosystem .sub-menu ul {
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.header .menus .ecosystem .sub-menu li {
+    display: block;
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.header .menus .ecosystem .sub-menu li.title {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 15px;
 }
 
 .header .run {

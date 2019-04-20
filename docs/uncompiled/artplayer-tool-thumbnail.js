@@ -415,7 +415,7 @@
         context2D.fillRect(0, 0, canvas.width, canvas.height);
         context2D.font = '14px Georgia';
         context2D.fillStyle = '#fff';
-        context2D.fillText("From: https://artplayer.org/thumbnail, Number: ".concat(number, ", Width: ").concat(width, ", Height: ").concat(height, ", Column: ").concat(column), 10, canvas.height - 11);
+        context2D.fillText("From: https://artplayer.org/, Number: ".concat(number, ", Width: ").concat(width, ", Height: ").concat(height, ", Column: ").concat(column), 10, canvas.height - 11);
         return canvas;
       }
     }, {

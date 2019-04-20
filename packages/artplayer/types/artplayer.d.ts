@@ -133,7 +133,7 @@ export default class Artplayer {
         /**
          * Initialize the custom whitelist
          */
-        whitelist?: [string, Function, regexp];
+        whitelist?: [string, Function];
 
         /**
          * Thumbnails option

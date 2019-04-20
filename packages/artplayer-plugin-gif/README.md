@@ -40,6 +40,16 @@ This will add a button called "GIF" in the bottom control bar.
 var art = new Artplayer({
     container: '.artplayer-app',
     url: 'path/to/video.mp4',
+    controls: [
+        {
+            name: 'gif',
+            position: 'right',
+            html: '创建GIF',
+            mounted: $gif => {
+                art.plugins.artplayerPluginGif.attach($gif);
+            },
+        },
+    ],
     plugins: [artplayerPluginGif],
 });
 ```
