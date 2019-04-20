@@ -15,7 +15,6 @@ export default function fullscreenMix(art, player) {
         notice.show('Your browser does not seem to support full screen functionality.');
     };
 
-    // Can't run on the phone
     try {
         screenfull.on('change', screenfullChange);
         screenfull.on('error', screenfullError);
@@ -38,8 +37,10 @@ export default function fullscreenMix(art, player) {
             }
             $player.classList.add('artplayer-fullscreen');
             screenfull.request($player);
-            player.aspectRatioReset();
-            art.emit('fullscreen:enabled');
+            if (player.fullscreenState) {
+                player.aspectRatioReset();
+                art.emit('fullscreen:enabled');
+            }
         },
     });
 
