@@ -160,4 +160,7 @@ img {
     background: #2b2b2b;
     border-radius: 3px;
     padding: 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
 }

@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global['artplayer-tool-thumbnail'] = {})));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global['artplayer-tool-thumbnail'] = factory());
+}(this, function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -115,30 +115,34 @@
 
   var inherits = _inherits;
 
-  function E() {// Keep this empty so it's easier to inherit from
+  function E () {
+    // Keep this empty so it's easier to inherit from
     // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
   }
 
   E.prototype = {
-    on: function on(name, callback, ctx) {
+    on: function (name, callback, ctx) {
       var e = this.e || (this.e = {});
+
       (e[name] || (e[name] = [])).push({
         fn: callback,
         ctx: ctx
       });
+
       return this;
     },
-    once: function once(name, callback, ctx) {
-      var self = this;
 
-      function listener() {
+    once: function (name, callback, ctx) {
+      var self = this;
+      function listener () {
         self.off(name, listener);
         callback.apply(ctx, arguments);
       }
       listener._ = callback;
       return this.on(name, listener, ctx);
     },
-    emit: function emit(name) {
+
+    emit: function (name) {
       var data = [].slice.call(arguments, 1);
       var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
       var i = 0;
@@ -150,25 +154,34 @@
 
       return this;
     },
-    off: function off(name, callback) {
+
+    off: function (name, callback) {
       var e = this.e || (this.e = {});
       var evts = e[name];
       var liveEvents = [];
 
       if (evts && callback) {
         for (var i = 0, len = evts.length; i < len; i++) {
-          if (evts[i].fn !== callback && evts[i].fn._ !== callback) liveEvents.push(evts[i]);
+          if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+            liveEvents.push(evts[i]);
         }
-      } // Remove event from queue to prevent memory leak
+      }
+
+      // Remove event from queue to prevent memory leak
       // Suggested by https://github.com/lazd
       // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
 
+      (liveEvents.length)
+        ? e[name] = liveEvents
+        : delete e[name];
 
-      liveEvents.length ? e[name] = liveEvents : delete e[name];
       return this;
     }
   };
+
   var tinyEmitter = E;
+  var TinyEmitter = E;
+  tinyEmitter.TinyEmitter = TinyEmitter;
 
   function sleep(ms) {
     return new Promise(function (resolve) {
@@ -208,8 +221,8 @@
       _this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option));
 
       _this.video = ArtplayerToolThumbnail.creatVideo();
-      _this.inputChange = _this.inputChange.bind(assertThisInitialized(assertThisInitialized(_this)));
-      _this.ondrop = _this.ondrop.bind(assertThisInitialized(assertThisInitialized(_this)));
+      _this.inputChange = _this.inputChange.bind(assertThisInitialized(_this));
+      _this.ondrop = _this.ondrop.bind(assertThisInitialized(_this));
 
       _this.option.fileInput.addEventListener('change', _this.inputChange);
 
@@ -241,7 +254,24 @@
             width = _this$option.width,
             height = _this$option.height,
             column = _this$option.column;
-        this.errorHandle(fileInput.tagName === 'INPUT' && fileInput.type === 'file', 'The \'fileInput\' is not a usable file input like: <input type="file">');
+        this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
+
+        if (!(fileInput.tagName === 'INPUT' && fileInput.type === 'file')) {
+          fileInput.style.position = 'relative';
+          var newFileInput = document.createElement('input');
+          newFileInput.type = 'file';
+          newFileInput.style.position = 'absolute';
+          newFileInput.style.width = '100%';
+          newFileInput.style.height = '100%';
+          newFileInput.style.left = '0';
+          newFileInput.style.top = '0';
+          newFileInput.style.right = '0';
+          newFileInput.style.bottom = '0';
+          newFileInput.style.opacity = '0';
+          fileInput.appendChild(newFileInput);
+          this.option.fileInput = newFileInput;
+        }
+
         ['delay', 'number', 'width', 'height', 'column'].forEach(function (item) {
           _this2.errorHandle(typeof _this2.option[item] === 'number', "The '".concat(item, "' is not a number"));
         });
@@ -275,7 +305,7 @@
           this.video.src = videoUrl;
           sleep(delay).then(function () {
             _this3.emit('video', _this3.video);
-          }).catch(function (err) {
+          })["catch"](function (err) {
             _this3.emit('error', err.message);
 
             console.error(err);
@@ -317,7 +347,7 @@
 
                   resolve();
                 });
-              }).catch(function (err) {
+              })["catch"](function (err) {
                 console.error(err);
               });
             });
@@ -329,14 +359,14 @@
             _this4.processing = false;
 
             _this4.emit('done');
-          }).catch(function (err) {
+          })["catch"](function (err) {
             _this4.processing = false;
 
             _this4.emit('error', err.message);
 
             console.error(err);
           });
-        }).catch(function (err) {
+        })["catch"](function (err) {
           _this4.processing = false;
 
           _this4.emit('error', err.message);
@@ -464,9 +494,7 @@
 
   window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
 
-  exports.default = ArtplayerToolThumbnail;
+  return ArtplayerToolThumbnail;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+}));
 //# sourceMappingURL=artplayer-tool-thumbnail.js.map

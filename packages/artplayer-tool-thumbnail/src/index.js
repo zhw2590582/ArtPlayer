@@ -39,10 +39,23 @@ class ArtplayerToolThumbnail extends Emitter {
         this.option = Object.assign({}, this.option, option);
         const { fileInput, delay, number, width, height, column } = this.option;
 
-        this.errorHandle(
-            fileInput.tagName === 'INPUT' && fileInput.type === 'file',
-            'The \'fileInput\' is not a usable file input like: <input type="file">',
-        );
+        this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
+
+        if (!(fileInput.tagName === 'INPUT' && fileInput.type === 'file')) {
+            fileInput.style.position = 'relative';
+            const newFileInput = document.createElement('input');
+            newFileInput.type = 'file';
+            newFileInput.style.position = 'absolute';
+            newFileInput.style.width = '100%';
+            newFileInput.style.height = '100%';
+            newFileInput.style.left = '0';
+            newFileInput.style.top = '0';
+            newFileInput.style.right = '0';
+            newFileInput.style.bottom = '0';
+            newFileInput.style.opacity = '0';
+            fileInput.appendChild(newFileInput);
+            this.option.fileInput = newFileInput;
+        }
 
         ['delay', 'number', 'width', 'height', 'column'].forEach(item => {
             this.errorHandle(typeof this.option[item] === 'number', `The '${item}' is not a number`);
