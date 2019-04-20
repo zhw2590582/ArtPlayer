@@ -15,7 +15,7 @@
             ) {
               var libs = item.href.split('/lib=')[1] || '';
               var code = encodeURIComponent(codeElement.innerText);
-              var url = 'https://artplayer.org/lab/?libs=' + libs + '&code=' + code;
+              var url = 'https://artplayer.org/?libs=' + libs + '&code=' + code;
               window.open(url);
             }
           });

@@ -143,7 +143,7 @@ The current player uses the simplest native components on mobile devices, but yo
 
 By default, non-whitelisted devices only set video native properties and third-party dependencies.
 
-[Open with mobile](https://artplayer.org/lab/mobile.html)
+[Open with mobile](https://artplayer.org/mobile.html)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
