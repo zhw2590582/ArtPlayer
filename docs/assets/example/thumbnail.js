@@ -1,3 +1,6 @@
+console.warn('暂时只支持本地视频，请点击创建预览图');
+var $popups = document.querySelector('.popups');
+var $popinner = document.querySelector('.popinner');
 var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -12,9 +15,7 @@ var art = new Artplayer({
             name: 'thumbnail',
             position: 'right',
             html: '创建预览图',
-            mounted: $file => {
-                console.warn('暂时只支持本地视频，请点击创建预览图');
-
+            mounted: $file => {                
                 var thumbnail = new ArtplayerToolThumbnail({
                     fileInput: $file,
                     delay: 300,
@@ -42,8 +43,6 @@ var art = new Artplayer({
 
                 thumbnail.on('update', function(url, percentage) {
                     console.log('Processing: ' + Math.floor(percentage.toFixed(2) * 100) + '%');
-                    var $popups = document.querySelector('.popups');
-                    var $popinner = document.querySelector('.popinner');
                     $popups.style.display = 'flex';
                     $popinner.style.backgroundImage = 'url(' + url + ')';
                 });
