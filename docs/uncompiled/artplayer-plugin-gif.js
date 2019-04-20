@@ -2926,7 +2926,6 @@
     var i18n = art.i18n,
         notice = art.notice,
         layers = art.layers,
-        controls = art.controls,
         player = art.player,
         loading = art.loading,
         _art$option = art.option,
@@ -2988,11 +2987,9 @@
       }
     }
 
-    controls.add({
-      name: 'artplayer-plugin-gif',
-      position: 'right',
-      html: 'GIF',
-      mounted: function mounted($gif) {
+    return {
+      name: 'artplayerPluginGif',
+      attach: function attach($gif) {
         proxy($gif, 'mousedown', function () {
           isPress = true;
           cleanTimer();
@@ -3020,10 +3017,7 @@
             offset = 0;
           }
         });
-      }
-    });
-    return {
-      name: 'artplayerPluginGif',
+      },
       create: function create() {
         var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var callback = arguments.length > 1 ? arguments[1] : undefined;
