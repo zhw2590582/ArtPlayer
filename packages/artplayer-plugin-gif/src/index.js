@@ -28,7 +28,6 @@ function artplayerPluginGif(art) {
         i18n,
         notice,
         layers,
-        controls,
         player,
         loading,
         option: { theme, title },
@@ -94,11 +93,9 @@ function artplayerPluginGif(art) {
         }
     }
 
-    controls.add({
-        name: 'artplayer-plugin-gif',
-        position: 'right',
-        html: 'GIF',
-        mounted: $gif => {
+    return {
+        name: 'artplayerPluginGif',
+        attach($gif) {
             proxy($gif, 'mousedown', () => {
                 isPress = true;
                 cleanTimer();
@@ -126,10 +123,6 @@ function artplayerPluginGif(art) {
                 }
             });
         },
-    });
-
-    return {
-        name: 'artplayerPluginGif',
         create(config = {}, callback) {
             isProcessing = true;
             loading.show();

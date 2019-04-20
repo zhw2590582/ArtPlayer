@@ -41,11 +41,11 @@
 
 ## Demo
 
-[Checkout the demo](https://artplayer.org/lab/) from Github Pages
+[Checkout the demo](https://artplayer.org/) from Github Pages
 
 ## Document
 
-[Checkout the Document](https://artplayer.org/docs) from Github Pages
+[Checkout the Document](https://artplayer.org/document) from Github Pages
 
 ## Install
 
