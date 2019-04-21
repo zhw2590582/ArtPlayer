@@ -729,7 +729,7 @@
     createClass(Template, [{
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n                <div class=\"artplayer-setting-close\">\xD7</div>\n              </div>\n            </div>\n            <div class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
         this.$player = this.$container.querySelector('.artplayer-video-player');
         this.$video = this.$container.querySelector('.artplayer-video');
         this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
@@ -746,7 +746,6 @@
         this.$setting = this.$container.querySelector('.artplayer-setting');
         this.$settingInner = this.$container.querySelector('.artplayer-setting-inner');
         this.$settingBody = this.$container.querySelector('.artplayer-setting-body');
-        this.$settingClose = this.$container.querySelector('.artplayer-setting-close');
         this.$info = this.$container.querySelector('.artplayer-info');
         this.$infoPanel = this.$container.querySelector('.artplayer-info-panel');
         this.$infoClose = this.$container.querySelector('.artplayer-info-close');
@@ -5185,10 +5184,12 @@
         var _this2 = this;
 
         var _this$art = this.art,
-            $settingClose = _this$art.template.$settingClose,
+            $setting = _this$art.template.$setting,
             proxy = _this$art.events.proxy;
-        proxy($settingClose, 'click', function () {
-          _this2.hide();
+        proxy($setting, 'click', function (e) {
+          if (e.target === $setting) {
+            _this2.hide();
+          }
         });
         this.add(flip({
           disable: false,

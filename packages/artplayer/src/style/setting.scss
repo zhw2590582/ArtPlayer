@@ -9,15 +9,15 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        pointer-events: none;
         .artplayer-setting-inner {
-            position: relative;
-            width: 300px;
-            height: 250px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 50%;
+            height: 100%;
             font-size: 12px;
             background: rgba(0, 0, 0, 0.8);
-            border-radius: 3px;
-            pointer-events: all;
             overflow: hidden;
             .artplayer-setting-body {
                 overflow-y: auto;
@@ -31,22 +31,9 @@
                         margin-bottom: 10px;
                     }
                     .art-setting-body {
-                        color: rgba(255, 255, 255, 0.8);
+                        color: rgba(255, 255, 255, 0.85);
                     }
                 }
-            }
-            .artplayer-setting-close {
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 20px;
-                height: 20px;
-                line-height: 20px;
-                text-align: center;
-                color: rgba(255, 255, 255, .8);
-                background: rgba(0, 0, 0, .5);
-                font-size: 20px;
-                cursor: pointer;
             }
         }
 

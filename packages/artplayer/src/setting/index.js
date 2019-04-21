@@ -16,19 +16,23 @@ export default class Setting {
 
     init() {
         const {
-            template: { $settingClose },
+            template: { $setting },
             events: { proxy },
         } = this.art;
 
-        proxy($settingClose, 'click', () => {
-            this.hide();
+        proxy($setting, 'click', e => {
+            if (e.target === $setting) {
+                this.hide();
+            }
         });
 
-        this.add(flip({
-            disable: false,
-            name: 'flip',
-            index: 10,
-        }));
+        this.add(
+            flip({
+                disable: false,
+                name: 'flip',
+                index: 10,
+            }),
+        );
     }
 
     add(item, callback) {

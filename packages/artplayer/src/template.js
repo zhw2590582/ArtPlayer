@@ -40,7 +40,6 @@ export default class Template {
             <div class="artplayer-setting">
               <div class="artplayer-setting-inner">
                 <div class="artplayer-setting-body"></div>
-                <div class="artplayer-setting-close">×</div>
               </div>
             </div>
             <div class="artplayer-info">
@@ -70,7 +69,6 @@ export default class Template {
         this.$setting = this.$container.querySelector('.artplayer-setting');
         this.$settingInner = this.$container.querySelector('.artplayer-setting-inner');
         this.$settingBody = this.$container.querySelector('.artplayer-setting-body');
-        this.$settingClose = this.$container.querySelector('.artplayer-setting-close');
         this.$info = this.$container.querySelector('.artplayer-info');
         this.$infoPanel = this.$container.querySelector('.artplayer-info-panel');
         this.$infoClose = this.$container.querySelector('.artplayer-info-close');
