@@ -91,7 +91,7 @@ var art = new Artplayer({
         },
         {
             time: 300,
-            text: '－－终わり－－',
+            text: '终わり',
         },
     ],
     controls: [
