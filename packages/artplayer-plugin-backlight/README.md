@@ -4,7 +4,7 @@ Backlight plugin for ArtPlayer
 
 ## Demo
 
-[Checkout the demo](https://artplayer.org/backlight/) from Github Pages
+[Checkout the demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight) from Github Pages
 
 ## Install
 
