@@ -4,7 +4,7 @@ thumbnail tool for ArtPlayer
 
 ## Demo
 
-[Checkout the demo](https://artplayer.org/thumbnail/) from Github Pages
+[Checkout the demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail) from Github Pages
 
 ## Install
 
