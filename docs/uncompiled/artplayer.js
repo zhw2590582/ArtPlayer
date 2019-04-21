@@ -893,9 +893,9 @@
               typeCallback.call(art, $video, videoUrl, art);
               art.emit('afterCustomType', typeName);
             } else {
-              art.emit('beforeAttachUrl');
+              art.emit('beforeAttachUrl', videoUrl);
               $video.src = videoUrl;
-              art.emit('afterAttachUrl');
+              art.emit('afterAttachUrl', videoUrl);
             }
 
             return Promise.resolve(videoUrl);
@@ -1193,7 +1193,7 @@
         if (url !== option.url) {
           var currentTime = player.currentTime,
               playing = player.playing;
-          player.attachUrl(url).then(function () {
+          return player.attachUrl(url).then(function () {
             option.url = url;
             player.playbackRateRemove();
             player.aspectRatioRemove();
@@ -1207,6 +1207,32 @@
             art.emit('switch', url);
           });
         }
+
+        return null;
+      }
+    });
+    Object.defineProperty(player, 'switchUrl', {
+      value: function value(url) {
+        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
+
+        if (url !== option.url) {
+          var playing = player.playing;
+          return player.attachUrl(url).then(function () {
+            option.url = url;
+            player.playbackRateRemove();
+            player.aspectRatioRemove();
+            player.seek(0);
+
+            if (playing) {
+              player.play();
+            }
+
+            notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
+            art.emit('switch', url);
+          });
+        }
+
+        return null;
       }
     });
   }
@@ -5653,6 +5679,11 @@
       key: "utils",
       get: function get() {
         return utils;
+      }
+    }, {
+      key: "scheme",
+      get: function get() {
+        return scheme;
       }
     }, {
       key: "Emitter",

@@ -4,7 +4,7 @@ Playlist plugin for ArtPlayer
 
 ## Demo
 
-[Checkout the demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js&example=playlist) from Github Pages
+[Checkout the demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist) from Github Pages
 
 ## Install
 
@@ -40,6 +40,30 @@ var art = new Artplayer({
     url: 'path/to/video.mp4',
     plugins: [artplayerPluginPlaylist],
 });
+
+// Load Playlist
+art.plugins.artplayerPluginPlaylist.load([
+    {
+        title: 'video01',
+        url: 'path/to/video01.mp4',
+    },
+    {
+        title: 'video02',
+        url: 'path/to/video02.mp4',
+    },
+]);
+
+// Hide Playlist
+art.plugins.artplayerPluginPlaylist.hide();
+
+// Hide Playlist
+art.plugins.artplayerPluginPlaylist.hide();
+
+// Next Playlist item
+art.plugins.artplayerPluginPlaylist.next();
+
+// Prev Playlist item
+art.plugins.artplayerPluginPlaylist.prev();
 ```
 
 ## License

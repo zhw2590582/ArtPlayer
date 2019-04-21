@@ -50,6 +50,10 @@ class Artplayer extends Emitter {
         return utils;
     }
 
+    static get scheme() {
+        return scheme;
+    }
+
     static get Emitter() {
         return Emitter;
     }
