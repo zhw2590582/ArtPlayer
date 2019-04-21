@@ -7,7 +7,8 @@
     function artplayerPluginPlaylist(art) {
       var _art$constructor$util = art.constructor.utils,
           append = _art$constructor$util.append,
-          errorHandle = _art$constructor$util.errorHandle;
+          errorHandle = _art$constructor$util.errorHandle,
+          sleep = _art$constructor$util.sleep;
       var player = art.player,
           proxy = art.events.proxy,
           _art$template = art.template,
@@ -16,26 +17,40 @@
       var $playlist = append($player, "\n        <div class=\"artplay-playlist\">\n            <div class=\"artplay-playlist-inner\"></div>\n        </div>\n    ");
       var $playlistInner = $playlist.querySelector('.artplay-playlist-inner');
       var playlist = [];
-      art.on('afterAttachUrl', function () {
-        var index = playlist.findIndex(function (item) {
-          return item.url === $video.src;
-        });
-        var $children = Array.from($playlistInner.children);
-        var $item = $children[index];
-
-        if (index !== -1 && $item) {
-          $children.forEach(function (item) {
-            return item.classList.remove('active');
-          });
-          $item.classList.add('active');
-        }
-      });
 
       function switchUrl(index) {
         var itemOption = playlist[index];
-        player.switchUrl(itemOption.url, itemOption.title).then(function () {
+        return player.switchUrl(itemOption.url, itemOption.title).then(function () {
           art.emit('artplayerPluginPlaylist:change', itemOption);
         });
+      }
+
+      function prevVideo() {
+        var index = playlist.findIndex(function (item) {
+          return item.url === $video.src;
+        });
+        errorHandle(index !== -1, "Can't find Playlist item");
+
+        if (playlist.length === 1) {
+          return switchUrl(0);
+        }
+
+        var prevIndex = index - 1 === -1 ? playlist.length - 1 : index - 1;
+        return switchUrl(prevIndex);
+      }
+
+      function nextVideo() {
+        var index = playlist.findIndex(function (item) {
+          return item.url === $video.src;
+        });
+        errorHandle(index !== -1, "Can't find Playlist item");
+
+        if (playlist.length === 1) {
+          return switchUrl(0);
+        }
+
+        var nextIndex = index + 1 === playlist.length ? 0 : index + 1;
+        return switchUrl(nextIndex);
       }
 
       proxy($playlistInner, 'click', function (e) {
@@ -48,6 +63,25 @@
       proxy($playlist, 'click', function (e) {
         if (e.target === $playlist) {
           $playlist.style.display = 'none';
+        }
+      });
+      art.on('video:ended', function () {
+        nextVideo().then(function () {
+          sleep(1000).then(player.play);
+        });
+      });
+      art.on('afterAttachUrl', function () {
+        var index = playlist.findIndex(function (item) {
+          return item.url === $video.src;
+        });
+        var $children = Array.from($playlistInner.children);
+        var $item = $children[index];
+
+        if (index !== -1 && $item) {
+          $children.forEach(function (item) {
+            return item.classList.remove('active');
+          });
+          $item.classList.add('active');
         }
       });
       return {
@@ -71,30 +105,10 @@
           $playlist.style.display = 'none';
         },
         next: function next() {
-          var index = playlist.findIndex(function (item) {
-            return item.url === $video.src;
-          });
-          errorHandle(index !== -1, "Can't find Playlist item");
-
-          if (playlist.length === 1) {
-            switchUrl(0);
-          } else {
-            var nextIndex = index + 1 === playlist.length ? 0 : index + 1;
-            switchUrl(nextIndex);
-          }
+          nextVideo();
         },
         prev: function prev() {
-          var index = playlist.findIndex(function (item) {
-            return item.url === $video.src;
-          });
-          errorHandle(index !== -1, "Can't find Playlist item");
-
-          if (playlist.length === 1) {
-            switchUrl(0);
-          } else {
-            var prevIndex = index - 1 === -1 ? playlist.length - 1 : index - 1;
-            switchUrl(prevIndex);
-          }
+          prevVideo();
         }
       };
     }

@@ -2,7 +2,7 @@ import './index.scss';
 
 function artplayerPluginPlaylist(art) {
     const {
-        utils: { append, errorHandle },
+        utils: { append, errorHandle, sleep },
     } = art.constructor;
     const {
         player,
@@ -22,21 +22,31 @@ function artplayerPluginPlaylist(art) {
     const $playlistInner = $playlist.querySelector('.artplay-playlist-inner');
     let playlist = [];
 
-    art.on('afterAttachUrl', () => {
-        const index = playlist.findIndex(item => item.url === $video.src);
-        const $children = Array.from($playlistInner.children);
-        const $item = $children[index];
-        if (index !== -1 && $item) {
-            $children.forEach(item => item.classList.remove('active'));
-            $item.classList.add('active');
-        }
-    });
-
     function switchUrl(index) {
         const itemOption = playlist[index];
-        player.switchUrl(itemOption.url, itemOption.title).then(() => {
+        return player.switchUrl(itemOption.url, itemOption.title).then(() => {
             art.emit('artplayerPluginPlaylist:change', itemOption);
         });
+    }
+
+    function prevVideo() {
+        const index = playlist.findIndex(item => item.url === $video.src);
+        errorHandle(index !== -1, "Can't find Playlist item");
+        if (playlist.length === 1) {
+            return switchUrl(0);
+        }
+        const prevIndex = index - 1 === -1 ? playlist.length - 1 : index - 1;
+        return switchUrl(prevIndex);
+    }
+
+    function nextVideo() {
+        const index = playlist.findIndex(item => item.url === $video.src);
+        errorHandle(index !== -1, "Can't find Playlist item");
+        if (playlist.length === 1) {
+            return switchUrl(0);
+        }
+        const nextIndex = index + 1 === playlist.length ? 0 : index + 1;
+        return switchUrl(nextIndex);
     }
 
     proxy($playlistInner, 'click', e => {
@@ -49,6 +59,21 @@ function artplayerPluginPlaylist(art) {
     proxy($playlist, 'click', e => {
         if (e.target === $playlist) {
             $playlist.style.display = 'none';
+        }
+    });
+
+    art.on('video:ended', () => {
+        nextVideo().then(() => {
+            sleep(1000).then(player.play);
+        });
+    });
+    art.on('afterAttachUrl', () => {
+        const index = playlist.findIndex(item => item.url === $video.src);
+        const $children = Array.from($playlistInner.children);
+        const $item = $children[index];
+        if (index !== -1 && $item) {
+            $children.forEach(item => item.classList.remove('active'));
+            $item.classList.add('active');
         }
     });
 
@@ -75,24 +100,10 @@ function artplayerPluginPlaylist(art) {
             $playlist.style.display = 'none';
         },
         next() {
-            const index = playlist.findIndex(item => item.url === $video.src);
-            errorHandle(index !== -1, "Can't find Playlist item");
-            if (playlist.length === 1) {
-                switchUrl(0);
-            } else {
-                const nextIndex = index + 1 === playlist.length ? 0 : index + 1;
-                switchUrl(nextIndex);
-            }
+            nextVideo();
         },
         prev() {
-            const index = playlist.findIndex(item => item.url === $video.src);
-            errorHandle(index !== -1, "Can't find Playlist item");
-            if (playlist.length === 1) {
-                switchUrl(0);
-            } else {
-                const prevIndex = index - 1 === -1 ? playlist.length - 1 : index - 1;
-                switchUrl(prevIndex);
-            }
+            prevVideo();
         },
     };
 }
