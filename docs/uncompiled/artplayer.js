@@ -3543,21 +3543,29 @@
           var $tip = $control.querySelector('.art-progress-tip');
 
           function showHighlight(event) {
-            var _event$target$dataset = event.target.dataset,
-                text = _event$target$dataset.text,
-                time = _event$target$dataset.time;
+            var _getPosFromEvent = getPosFromEvent(art, event),
+                width = _getPosFromEvent.width;
+
+            var text = event.target.dataset.text;
             $tip.innerHTML = text;
-            var left = Number(time) / art.player.duration * $control.clientWidth + event.target.clientWidth / 2 - $tip.clientWidth / 2;
-            setStyle($tip, 'left', "".concat(left, "px"));
+            var tipWidth = $tip.clientWidth;
+
+            if (width <= tipWidth / 2) {
+              setStyle($tip, 'left', 0);
+            } else if (width > $control.clientWidth - tipWidth / 2) {
+              setStyle($tip, 'left', "".concat($control.clientWidth - tipWidth, "px"));
+            } else {
+              setStyle($tip, 'left', "".concat(width - tipWidth / 2, "px"));
+            }
           }
 
           function showTime(event) {
-            var _getPosFromEvent = getPosFromEvent(art, event),
-                width = _getPosFromEvent.width,
-                time = _getPosFromEvent.time;
+            var _getPosFromEvent2 = getPosFromEvent(art, event),
+                width = _getPosFromEvent2.width,
+                time = _getPosFromEvent2.time;
 
-            var tipWidth = $tip.clientWidth;
             $tip.innerHTML = time;
+            var tipWidth = $tip.clientWidth;
 
             if (width <= tipWidth / 2) {
               setStyle($tip, 'left', 0);
@@ -3607,9 +3615,9 @@
           });
           proxy($control, 'click', function (event) {
             if (event.target !== $indicator) {
-              var _getPosFromEvent2 = getPosFromEvent(art, event),
-                  second = _getPosFromEvent2.second,
-                  percentage = _getPosFromEvent2.percentage;
+              var _getPosFromEvent3 = getPosFromEvent(art, event),
+                  second = _getPosFromEvent3.second,
+                  percentage = _getPosFromEvent3.percentage;
 
               setBar('played', percentage);
               player.seek(second);
@@ -3620,9 +3628,9 @@
           });
           proxy(document, 'mousemove', function (event) {
             if (isDroging) {
-              var _getPosFromEvent3 = getPosFromEvent(art, event),
-                  second = _getPosFromEvent3.second,
-                  percentage = _getPosFromEvent3.percentage;
+              var _getPosFromEvent4 = getPosFromEvent(art, event),
+                  second = _getPosFromEvent4.second,
+                  percentage = _getPosFromEvent4.percentage;
 
               $indicator.classList.add('art-show-indicator');
               setBar('played', percentage);

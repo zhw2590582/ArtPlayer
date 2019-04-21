@@ -41,19 +41,23 @@ export default function progress(controlOption) {
                 const $tip = $control.querySelector('.art-progress-tip');
 
                 function showHighlight(event) {
-                    const { text, time } = event.target.dataset;
+                    const { width } = getPosFromEvent(art, event);
+                    const { text } = event.target.dataset;
                     $tip.innerHTML = text;
-                    const left =
-                        (Number(time) / art.player.duration) * $control.clientWidth +
-                        event.target.clientWidth / 2 -
-                        $tip.clientWidth / 2;
-                    setStyle($tip, 'left', `${left}px`);
+                    const tipWidth = $tip.clientWidth;
+                    if (width <= tipWidth / 2) {
+                        setStyle($tip, 'left', 0);
+                    } else if (width > $control.clientWidth - tipWidth / 2) {
+                        setStyle($tip, 'left', `${$control.clientWidth - tipWidth}px`);
+                    } else {
+                        setStyle($tip, 'left', `${width - tipWidth / 2}px`);
+                    }
                 }
 
                 function showTime(event) {
                     const { width, time } = getPosFromEvent(art, event);
-                    const tipWidth = $tip.clientWidth;
                     $tip.innerHTML = time;
+                    const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) {
                         setStyle($tip, 'left', 0);
                     } else if (width > $control.clientWidth - tipWidth / 2) {
