@@ -34,9 +34,7 @@ function artplayerPluginPlaylist(art) {
 
     function switchUrl(index) {
         const itemOption = playlist[index];
-        player.switchUrl(itemOption.url, itemOption.title).then(() => {
-            player.play();
-        });
+        player.switchUrl(itemOption.url, itemOption.title);
     }
 
     proxy($playlistInner, 'click', e => {

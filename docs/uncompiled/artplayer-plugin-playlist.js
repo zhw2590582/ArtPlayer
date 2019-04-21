@@ -33,9 +33,7 @@
 
       function switchUrl(index) {
         var itemOption = playlist[index];
-        player.switchUrl(itemOption.url, itemOption.title).then(function () {
-          player.play();
-        });
+        player.switchUrl(itemOption.url, itemOption.title);
       }
 
       proxy($playlistInner, 'click', function (e) {
