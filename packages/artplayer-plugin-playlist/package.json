@@ -1,8 +1,9 @@
 {
-  "name": "artplayer-plugin-gif",
+  "name": "artplayer-plugin-playlist",
   "version": "3.1.6",
-  "description": "Gif plugin for ArtPlayer",
-  "main": "dist/artplayer-plugin-gif.js",
+  "description": "Playlist plugin for ArtPlayer",
+  "main": "dist/artplayer-plugin-playlist.js",
+  "style": "dist/artplayer-plugin-playlist.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,10 +20,5 @@
   "bugs": {
     "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
-  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
-  "dependencies": {
-    "b64-to-blob": "^1.2.19",
-    "blob-util": "^2.0.2",
-    "gifshot": "^0.4.5"
-  }
+  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme"
 }
