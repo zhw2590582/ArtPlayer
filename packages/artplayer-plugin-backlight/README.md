@@ -1,4 +1,4 @@
-# artplayer-plugin-gif
+# artplayer-plugin-backlight
 
 Backlight plugin for ArtPlayer
 
@@ -33,8 +33,6 @@ Or umd builds are also available
 Will expose the global variable to `window.artplayerPluginBacklight`.
 
 ## Usage
-
-This will add a button called "GIF" in the bottom control bar.
 
 ```js
 var art = new Artplayer({
