@@ -19,8 +19,8 @@ function artplayerPluginPlaylist(art) {
     `,
     );
 
-    const $playlistInner = $playlist.querySelector('.artplay-playlist-inner');
     let playlist = [];
+    const $playlistInner = $playlist.querySelector('.artplay-playlist-inner');
 
     function switchUrl(index) {
         const itemOption = playlist[index];
@@ -67,6 +67,7 @@ function artplayerPluginPlaylist(art) {
             sleep(1000).then(player.play);
         });
     });
+
     art.on('afterAttachUrl', () => {
         const index = playlist.findIndex(item => item.url === $video.src);
         const $children = Array.from($playlistInner.children);

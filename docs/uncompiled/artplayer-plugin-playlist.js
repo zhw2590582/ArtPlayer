@@ -15,8 +15,8 @@
           $player = _art$template.$player,
           $video = _art$template.$video;
       var $playlist = append($player, "\n        <div class=\"artplay-playlist\">\n            <div class=\"artplay-playlist-inner\"></div>\n        </div>\n    ");
-      var $playlistInner = $playlist.querySelector('.artplay-playlist-inner');
       var playlist = [];
+      var $playlistInner = $playlist.querySelector('.artplay-playlist-inner');
 
       function switchUrl(index) {
         var itemOption = playlist[index];
