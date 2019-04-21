@@ -53,8 +53,8 @@ art.plugins.artplayerPluginPlaylist.load([
     },
 ]);
 
-// Hide Playlist
-art.plugins.artplayerPluginPlaylist.hide();
+// Show Playlist
+art.plugins.artplayerPluginPlaylist.show();
 
 // Hide Playlist
 art.plugins.artplayerPluginPlaylist.hide();
