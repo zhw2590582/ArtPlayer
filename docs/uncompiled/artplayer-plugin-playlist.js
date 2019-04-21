@@ -33,7 +33,9 @@
 
       function switchUrl(index) {
         var itemOption = playlist[index];
-        player.switchUrl(itemOption.url, itemOption.title);
+        player.switchUrl(itemOption.url, itemOption.title).then(function () {
+          art.emit('artplayerPluginPlaylist:change', itemOption);
+        });
       }
 
       proxy($playlistInner, 'click', function (e) {
