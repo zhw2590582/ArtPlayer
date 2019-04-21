@@ -4,7 +4,7 @@ Gif plugin for ArtPlayer, use [gifshot](https://github.com/yahoo/gifshot) as a d
 
 ## Demo
 
-[Checkout the demo](https://artplayer.org/gif/) from Github Pages
+[Checkout the demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif) from Github Pages
 
 ## Install
 
