@@ -1628,13 +1628,10 @@
           player.fullscreenWebExit();
         }
 
-        $player.classList.add('artplayer-fullscreen');
         screenfull.request($player);
-
-        if (player.fullscreenState) {
-          player.aspectRatioReset();
-          art.emit('fullscreen:enabled');
-        }
+        $player.classList.add('artplayer-fullscreen');
+        player.aspectRatioReset();
+        art.emit('fullscreen:enabled');
       }
     });
     Object.defineProperty(player, 'fullscreenExit', {
