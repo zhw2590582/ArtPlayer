@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "description": "ArtPlayer is a modern HTML5 video player",
   "scripts": {
-    "bootstrap": "node ./node_modules/.bin/lerna bootstrap",
-    "version": "node ./node_modules/.bin/lerna version patch --yes --no-push",
-    "publish": "node ./node_modules/.bin/lerna publish from-package --yes",
+    "bootstrap": "npx lerna bootstrap",
+    "version": "npx lerna version patch --yes --no-push",
+    "publish": "npx lerna publish from-package --yes",
     "release": "npm run lint && npm run version && npm run build:all && npm test && npm run publish",
-    "dev": "node ./node_modules/.bin/cross-env NODE_ENV=development node ./scripts/dev.js",
-    "build": "node ./node_modules/.bin/cross-env NODE_ENV=production node ./scripts/build.js",
+    "start": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
+    "server": "npx cross-env NODE_ENV=development && npx servor docs index.html 8080 5000",
+    "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n ",
-    "test": "node ./node_modules/.bin/mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
-    "lint": "node ./node_modules/.bin/eslint packages/*/src"
+    "test": "npx mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
+    "lint": "npx eslint packages/*/src"
   },
   "repository": {
     "type": "git",
@@ -60,6 +61,7 @@
     "rollup-plugin-postcss": "^2.0.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-svgo": "^1.0.1",
-    "rollup-plugin-uglify": "^6.0.0"
+    "rollup-plugin-uglify": "^6.0.0",
+    "servor": "^2.0.3"
   }
 }
