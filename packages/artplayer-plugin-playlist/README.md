@@ -22,11 +22,13 @@ $ yarn add artplayer-plugin-playlist
 
 ```js
 import artplayerPluginPlaylist from 'artplayer-plugin-playlist';
+import 'artplayer-plugin-playlist/dist/artplayerPluginPlaylist.css';
 ```
 
 Or umd builds are also available
 
 ```html
+<link rel="stylesheet" href="path/to/artplayer-plugin-playlist.css" />
 <script src="artplayer-plugin-playlist.js"></script>
 ```
 
