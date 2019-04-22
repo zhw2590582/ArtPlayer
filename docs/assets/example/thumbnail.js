@@ -1,16 +1,15 @@
 var $popups = document.querySelector('.popups');
 var $popinner = document.querySelector('.popinner');
 var $artplayer = document.querySelector('.artplayer-app');
-var url = 'https://zhw2590582.github.io/assets-cdn';
 
 $artplayer.innerHTML = 'Drop video file here or click to upload.';
 var thumbnail = new ArtplayerToolThumbnail({
     fileInput: $artplayer,
-    delay: 300,
-    number: 60,
-    width: 160,
-    height: 90,
-    column: 10,
+    delay: 300, // 延迟
+    number: 60, // 数量
+    width: 160, // 宽度
+    height: 90, // 高度
+    column: 10, // 列数
 });
 
 thumbnail.on('file', function(file) {
@@ -50,6 +49,7 @@ thumbnail.on('done', function() {
     new Artplayer({
         container: $artplayer,
         url: thumbnail.videoUrl,
+        poster: thumbnail.thumbnailUrl,
         thumbnails: {
             url: thumbnail.thumbnailUrl,
             number: thumbnail.option.number,
