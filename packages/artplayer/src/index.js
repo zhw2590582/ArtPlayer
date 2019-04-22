@@ -1,7 +1,7 @@
 import './style';
 import 'balloon-css/balloon.min.css';
 import Emitter from 'tiny-emitter';
-import optionValidator from 'option-validator';
+import validator from 'option-validator';
 import * as utils from './utils';
 import scheme from './scheme';
 import config from './config';
@@ -30,7 +30,7 @@ class Artplayer extends Emitter {
         super();
         utils.errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
         this.option = utils.mergeDeep(Artplayer.DEFAULTS, option);
-        optionValidator(this.option, scheme);
+        validator(this.option, scheme);
         this.init();
     }
 
@@ -59,7 +59,7 @@ class Artplayer extends Emitter {
     }
 
     static get validator() {
-        return optionValidator;
+        return validator;
     }
 
     static get DEFAULTS() {
