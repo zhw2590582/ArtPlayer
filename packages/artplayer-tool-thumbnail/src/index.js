@@ -164,7 +164,7 @@ class ArtplayerToolThumbnail extends Emitter {
         const { number, width, height, column } = this.option;
         const { duration } = this.video;
         const timeGap = duration / number;
-        const timePoints = [timeGap];
+        const timePoints = [0];
         while (timePoints.length < number) {
             const last = timePoints[timePoints.length - 1];
             timePoints.push(last + timeGap);

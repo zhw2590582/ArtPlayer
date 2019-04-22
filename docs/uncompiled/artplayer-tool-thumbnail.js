@@ -384,7 +384,7 @@
             column = _this$option3.column;
         var duration = this.video.duration;
         var timeGap = duration / number;
-        var timePoints = [timeGap];
+        var timePoints = [0];
 
         while (timePoints.length < number) {
           var last = timePoints[timePoints.length - 1];
