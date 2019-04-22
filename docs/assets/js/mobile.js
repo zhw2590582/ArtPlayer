@@ -7,3 +7,5 @@ var art = new Artplayer({
     // whitelist: [(ua)=>{ return /iPhone OS 11/gi.test(ua); }],
     // whitelist: [/iPhone OS 11/gi]
 });
+
+console.log('移动端功能尚未完成适配，请用电脑打开。')
