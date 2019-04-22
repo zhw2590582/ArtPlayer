@@ -8,4 +8,4 @@ var art = new Artplayer({
     // whitelist: [/iPhone OS 11/gi]
 });
 
-console.log('移动端功能尚未完成适配，请用电脑打开。')
+console.warn('ArtPlayer.js: 移动端功能尚未完成适配，请用电脑打开.')
