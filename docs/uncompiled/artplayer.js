@@ -399,10 +399,10 @@
     if (child instanceof Element) {
       parent.appendChild(child);
     } else {
-      parent.insertAdjacentHTML('beforeend', child);
+      parent.insertAdjacentHTML('beforeend', String(child));
     }
 
-    return parent.lastElementChild;
+    return parent.lastElementChild || parent.lastChild;
   }
   function remove(child) {
     return child.parentNode.removeChild(child);
@@ -3279,7 +3279,7 @@
       if (option.click) {
         art.events.proxy($element, 'click', function (event) {
           event.preventDefault();
-          option.click.call(parent, event);
+          option.click.call(parent, event, art);
           art.emit("".concat(title, ":click"), $element);
         });
       }
@@ -3297,18 +3297,25 @@
       });
       Object.defineProperty(option, 'show', {
         value: function value() {
-          setStyle($element, 'display', 'block');
+          var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'block';
+          setStyle($element, 'display', type);
           art.emit("".concat(title, ":show"), $element);
+        }
+      });
+      Object.defineProperty(option, 'remove', {
+        value: function value() {
+          remove($element);
+          art.emit("".concat(title, ":remove"), $element);
         }
       });
       insertByIndex(target, $element, option.index || parent.id);
 
       if (option.mounted) {
-        option.mounted($element);
+        option.mounted($element, parent, art);
       }
 
       if (callback) {
-        callback($element);
+        callback($element, parent, art);
       }
 
       parent[name] = option;

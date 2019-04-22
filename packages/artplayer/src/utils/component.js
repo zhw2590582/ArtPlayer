@@ -1,4 +1,4 @@
-import { append, insertByIndex, setStyles, setStyle } from './index';
+import { append, insertByIndex, setStyles, setStyle, remove } from './index';
 
 export default function component(art, parent, target, component, callback, title) {
     const option = typeof component === 'function' ? component(art) : component;
@@ -19,7 +19,7 @@ export default function component(art, parent, target, component, callback, titl
         if (option.click) {
             art.events.proxy($element, 'click', event => {
                 event.preventDefault();
-                option.click.call(parent, event);
+                option.click.call(parent, event, art);
                 art.emit(`${title}:click`, $element);
             });
         }
@@ -36,20 +36,27 @@ export default function component(art, parent, target, component, callback, titl
         });
 
         Object.defineProperty(option, 'show', {
-            value: () => {
-                setStyle($element, 'display', 'block');
+            value: (type = 'block') => {
+                setStyle($element, 'display', type);
                 art.emit(`${title}:show`, $element);
+            },
+        });
+
+        Object.defineProperty(option, 'remove', {
+            value: () => {
+                remove($element);
+                art.emit(`${title}:remove`, $element);
             },
         });
 
         insertByIndex(target, $element, option.index || parent.id);
 
         if (option.mounted) {
-            option.mounted($element);
+            option.mounted($element, parent, art);
         }
 
         if (callback) {
-            callback($element);
+            callback($element, parent, art);
         }
 
         parent[name] = option;
