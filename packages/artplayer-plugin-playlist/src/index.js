@@ -2,7 +2,7 @@ import './index.scss';
 
 function artplayerPluginPlaylist(art) {
     const {
-        utils: { append, errorHandle, sleep },
+        utils: { append, errorHandle, sleep, inverseClass },
     } = art.constructor;
     const {
         player,
@@ -70,11 +70,9 @@ function artplayerPluginPlaylist(art) {
 
     art.on('afterAttachUrl', () => {
         const index = playlist.findIndex(item => item.url === $video.src);
-        const $children = Array.from($playlistInner.children);
-        const $item = $children[index];
+        const $item = Array.from($playlistInner.children)[index];
         if (index !== -1 && $item) {
-            $children.forEach(item => item.classList.remove('active'));
-            $item.classList.add('active');
+            inverseClass($item, 'active');
         }
     });
 

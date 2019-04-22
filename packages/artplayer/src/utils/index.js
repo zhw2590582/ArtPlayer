@@ -99,9 +99,9 @@ export function append(parent, child) {
     if (child instanceof Element) {
         parent.appendChild(child);
     } else {
-        parent.insertAdjacentHTML('beforeend', child);
+        parent.insertAdjacentHTML('beforeend', String(child));
     }
-    return parent.lastElementChild;
+    return parent.lastElementChild || parent.lastChild;
 }
 
 export function remove(child) {
