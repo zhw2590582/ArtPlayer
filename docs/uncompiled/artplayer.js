@@ -3823,7 +3823,7 @@
                 number = _art$option$thumbnail.number,
                 column = _art$option$thumbnail.column;
             var perWidth = $progress.clientWidth / number;
-            var perIndex = Math.ceil(posWidth / perWidth);
+            var perIndex = Math.floor(posWidth / perWidth);
             var yIndex = Math.ceil(perIndex / column) - 1;
             var xIndex = perIndex % column || column - 1;
             setStyle($control, 'backgroundImage', "url(".concat(url, ")"));

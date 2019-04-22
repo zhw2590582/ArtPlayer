@@ -384,13 +384,14 @@
             column = _this$option3.column;
         var duration = this.video.duration;
         var timeGap = duration / number;
-        var timePoints = [0];
+        var timePoints = [timeGap];
 
         while (timePoints.length < number) {
           var last = timePoints[timePoints.length - 1];
           timePoints.push(last + timeGap);
         }
 
+        console.log(timePoints);
         return timePoints.map(function (item, index) {
           return {
             time: item - timeGap / 2,

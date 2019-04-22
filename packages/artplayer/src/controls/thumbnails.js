@@ -17,7 +17,7 @@ export default function thumbnails(controlOption) {
                 const { width: posWidth } = getPosFromEvent(art, event);
                 const { url, height, width, number, column } = art.option.thumbnails;
                 const perWidth = $progress.clientWidth / number;
-                const perIndex = Math.ceil(posWidth / perWidth);
+                const perIndex = Math.floor(posWidth / perWidth);
                 const yIndex = Math.ceil(perIndex / column) - 1;
                 const xIndex = perIndex % column || column - 1;
                 setStyle($control, 'backgroundImage', `url(${url})`);
