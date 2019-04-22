@@ -169,7 +169,6 @@ class ArtplayerToolThumbnail extends Emitter {
             const last = timePoints[timePoints.length - 1];
             timePoints.push(last + timeGap);
         }
-        console.log(timePoints);
         return timePoints.map((item, index) => ({
             time: item - timeGap / 2,
             x: (index % column) * width,

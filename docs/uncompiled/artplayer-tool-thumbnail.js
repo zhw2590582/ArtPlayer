@@ -391,7 +391,6 @@
           timePoints.push(last + timeGap);
         }
 
-        console.log(timePoints);
         return timePoints.map(function (item, index) {
           return {
             time: item - timeGap / 2,
