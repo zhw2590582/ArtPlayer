@@ -1599,22 +1599,22 @@
         $player = art.template.$player;
 
     var screenfullChange = function screenfullChange() {
-      art.emit('fullscreen', screenfull.isFullscreen);
+      art.emit('fullscreen:change', screenfull.isFullscreen);
     };
 
     var screenfullError = function screenfullError() {
       notice.show('Your browser does not seem to support full screen functionality.');
     };
 
-    try {
+    if (screenfull.enabled) {
       screenfull.on('change', screenfullChange);
       screenfull.on('error', screenfullError);
       destroyEvents.push(function () {
         screenfull.off('change', screenfullChange);
         screenfull.off('error', screenfullError);
       });
-    } catch (error) {
-      console.error(error);
+    } else {
+      screenfullError();
     }
 
     Object.defineProperty(player, 'fullscreenState', {
@@ -1624,24 +1624,33 @@
     });
     Object.defineProperty(player, 'fullscreenEnabled', {
       value: function value() {
-        if (player.fullscreenWebState) {
-          player.fullscreenWebExit();
+        if (screenfull.enabled) {
+          if (!player.fullscreenState) {
+            player.fullscreenWebExit();
+            screenfull.request($player).then(function () {
+              $player.classList.add('artplayer-fullscreen');
+              player.aspectRatioReset();
+              art.emit('fullscreen:enabled');
+            });
+          }
+        } else {
+          screenfullError();
         }
-
-        screenfull.request($player);
-        $player.classList.add('artplayer-fullscreen');
-        player.aspectRatioReset();
-        art.emit('fullscreen:enabled');
       }
     });
     Object.defineProperty(player, 'fullscreenExit', {
       value: function value() {
-        if (player.fullscreenState) {
-          player.fullscreenWebExit();
-          $player.classList.remove('artplayer-fullscreen');
-          screenfull.exit();
-          player.aspectRatioReset();
-          art.emit('fullscreen:exit');
+        if (screenfull.enabled) {
+          if (player.fullscreenState) {
+            player.fullscreenWebExit();
+            screenfull.exit().then(function () {
+              $player.classList.remove('artplayer-fullscreen');
+              player.aspectRatioReset();
+              art.emit('fullscreen:exit');
+            });
+          }
+        } else {
+          screenfullError();
         }
       }
     });
@@ -4127,7 +4136,7 @@
 
   function version(menuOption) {
     return objectSpread({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.6</a>'
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.7</a>'
     });
   }
 
@@ -4314,7 +4323,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.6</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.7</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -5675,7 +5684,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.6';
+        return '3.1.7';
       }
     }, {
       key: "env",
