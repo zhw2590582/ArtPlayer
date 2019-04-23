@@ -15,14 +15,14 @@ export default function fullscreenMix(art, player) {
         notice.show('Your browser does not seem to support full screen functionality.');
     };
 
-    if (screenfull.enabled) {
+    try {
         screenfull.on('change', screenfullChange);
         screenfull.on('error', screenfullError);
         destroyEvents.push(() => {
             screenfull.off('change', screenfullChange);
             screenfull.off('error', screenfullError);
         });
-    } else {
+    } catch (error) {
         screenfullError();
     }
 
