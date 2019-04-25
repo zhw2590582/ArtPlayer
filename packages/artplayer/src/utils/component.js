@@ -16,6 +16,8 @@ export default function component(art, parent, target, getOption, callback, titl
             setStyles($element, option.style);
         }
 
+        insertByIndex(target, $element, option.index || parent.id);
+
         if (option.click) {
             art.events.proxy($element, 'click', event => {
                 event.preventDefault();
@@ -23,33 +25,6 @@ export default function component(art, parent, target, getOption, callback, titl
                 art.emit(`${title}:click`, $element);
             });
         }
-
-        Object.defineProperty(option, '$ref', {
-            get: () => $element,
-        });
-
-        Object.defineProperty(option, 'hide', {
-            value: () => {
-                setStyle($element, 'display', 'none');
-                art.emit(`${title}:hide`, $element);
-            },
-        });
-
-        Object.defineProperty(option, 'show', {
-            value: (type = 'block') => {
-                setStyle($element, 'display', type);
-                art.emit(`${title}:show`, $element);
-            },
-        });
-
-        Object.defineProperty(option, 'remove', {
-            value: () => {
-                remove($element);
-                art.emit(`${title}:remove`, $element);
-            },
-        });
-
-        insertByIndex(target, $element, option.index || parent.id);
 
         if (option.mounted) {
             option.mounted($element, parent, art);
@@ -59,9 +34,25 @@ export default function component(art, parent, target, getOption, callback, titl
             callback($element, parent, art);
         }
 
-        parent[name] = option;
+        parent[name] = {
+            $ref: $element,
+            hide() {
+                setStyle($element, 'display', 'none');
+                art.emit(`${title}:hide`, $element);
+            },
+            show(type = 'block') {
+                setStyle($element, 'display', type);
+                art.emit(`${title}:show`, $element);
+            },
+            remove() {
+                remove($element);
+                art.emit(`${title}:remove`, $element);
+            },
+        };
+
         art.emit(`${title}:add`, option);
+        return parent[name];
     }
 
-    return option;
+    return null;
 }
