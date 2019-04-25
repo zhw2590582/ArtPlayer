@@ -39,11 +39,14 @@
       classCallCheck(this, Danmuku);
 
       this.art = art;
-      this.option = {};
-      this.config(option);
+      this.queue = {};
+      this.option = Object.assign({}, Danmuku.option, option);
+      art.constructor.validator(this.option, Danmuku.scheme);
+      this.option.danmus.forEach(this.emit);
       this.current = [];
       this.layer = {};
       this.isStop = false;
+      this.timer = null;
       this.init();
     }
 
@@ -64,7 +67,7 @@
             overflow: 'hidden'
           }
         });
-        this.art.on('video:timeupdate', this.update.bind(this));
+        this.update();
         this.art.on('video:play', this.start.bind(this));
         this.art.on('video:pause', this.stop.bind(this));
         this.art.on('video:ended', this.stop.bind(this));
@@ -72,25 +75,33 @@
       }
     }, {
       key: "emit",
-      value: function emit(danmu) {
+      value: function emit() {
+        var danmu = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var errorHandle = this.art.constructor.utils.errorHandle;
-        errorHandle(danmu.text.trim(), 'Danmu text cannot be empty');
-        var _this$art$template$$p = this.art.template.$player,
-            playerWidth = _this$art$template$$p.clientWidth,
-            playerHeight = _this$art$template$$p.clientHeight;
-        var danmuItem = this.getDanmuItem();
-        danmuItem.$ref.innerText = danmu.text;
-        danmuItem.$ref.style.fontSize = danmu.size || this.option.size;
-        var _danmuItem$$ref = danmuItem.$ref,
-            danmuWidth = _danmuItem$$ref.clientWidth,
-            danmuHeight = _danmuItem$$ref.clientHeight;
-        danmuItem.$ref.style.opacity = danmu.opacity || this.option.opacity;
-        danmuItem.$ref.style.color = danmu.color || this.option.color;
-        danmuItem.$ref.style.top = this.getDanmuTop(playerHeight, danmuHeight);
-        danmuItem.$ref.style.left = "".concat(playerWidth, "px");
-        danmuItem.$ref.style.transform = "translateX(".concat(-playerWidth - danmuWidth, "px) translateY(0px) translateZ(0px)");
-        danmuItem.$ref.style.transition = "-webkit-transform ".concat(danmu.speed || this.option.speed, "s linear 0s");
-        this.art.emit('artplayerPluginDanmu:emit', danmu);
+        errorHandle(danmu.text, 'Danmu text cannot be empty');
+        errorHandle(danmu.time, 'Danmu time cannot be empty');
+
+        if (this.queue[danmu.time]) {
+          this.queue[danmu.time].push(danmu);
+        } else {
+          this.queue[danmu.time] = [danmu];
+        } // this.art.emit('artplayerPluginDanmu:emit', danmu);
+        // if (!this.isStop) {
+        //     const { clientWidth: playerWidth, clientHeight: playerHeight } = this.art.template.$player;
+        //     const danmuItem = this.getDanmuItem();
+        //     danmuItem.$ref.innerText = danmu.text;
+        //     danmuItem.$ref.style.fontSize = danmu.size || this.option.size;
+        //     const { clientWidth: danmuWidth, clientHeight: danmuHeight } = danmuItem.$ref;
+        //     danmuItem.$ref.style.opacity = danmu.opacity || this.option.opacity;
+        //     danmuItem.$ref.style.color = danmu.color || this.option.color;
+        //     danmuItem.$ref.style.top = this.getDanmuTop(playerHeight, danmuHeight);
+        //     danmuItem.$ref.style.left = `${playerWidth}px`;
+        //     danmuItem.$ref.style.transform = `translateX(${-playerWidth -
+        //         danmuWidth}px) translateY(0px) translateZ(0px)`;
+        //     danmuItem.$ref.style.transition = `-webkit-transform ${danmu.speed || this.option.speed}s linear 0s`;
+        //     this.art.emit('artplayerPluginDanmu:emit', danmu);
+        // }
+
       }
     }, {
       key: "getDanmuItem",
@@ -101,7 +112,14 @@
         var inactiveItem = this.current.find(function (item) {
           return item.state === 'inactive';
         });
-        if (inactiveItem) return inactiveItem;
+
+        if (inactiveItem) {
+          inactiveItem.time = Date.now();
+          inactiveItem.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+          inactiveItem.$ref.style.transition = '-webkit-transform 0s linear 0s';
+          return inactiveItem;
+        }
+
         var $ref = document.createElement('div');
         setStyles($ref, {
           userSelect: 'none',
@@ -116,10 +134,11 @@
           lineHeight: '1.125',
           textShadow: 'rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px'
         });
-        return {
+        return this.current.push({
           state: 'active',
+          time: Date.now(),
           $ref: append(this.layer.$ref, $ref)
-        };
+        });
       }
     }, {
       key: "getDanmuTop",
@@ -129,18 +148,36 @@
     }, {
       key: "update",
       value: function update() {
-        if (!this.isStop && this.option.danmu.length) ;
-      }
-    }, {
-      key: "config",
-      value: function config(option) {
-        this.option = Object.assign({}, Danmuku.option, option);
-        this.art.constructor.validator(this.option, Danmuku.scheme);
+        var _this = this;
+
+        var _this$art = this.art,
+            $player = _this$art.template.$player,
+            player = _this$art.player;
+        this.timer = window.requestAnimationFrame(function () {
+          _this.current.forEach(function (item) {
+            if (Date.now() - item.time >= _this.option.speed) {
+              item.state = 'inactive';
+            }
+          });
+
+          Object.keys(_this.queue).filter(function (time) {
+            return player.currentTime + 0.5 >= time && time >= player.currentTime - 0.5;
+          }).reduce(function (result, key) {
+            return result.concat(_this.queue[key]);
+          }, []).forEach(function (item) {
+            console.log(item);
+          });
+
+          if (!_this.isStop && player.playing) {
+            _this.update();
+          }
+        });
       }
     }, {
       key: "stop",
       value: function stop() {
         this.isStop = true;
+        window.cancelAnimationFrame(this.timer);
         this.art.emit('artplayerPluginDanmu:stop');
       }
     }, {
@@ -165,7 +202,7 @@
       key: "option",
       get: function get() {
         return {
-          danmu: [],
+          danmus: [],
           speed: 5,
           opacity: 1,
           color: '#fff',
@@ -176,7 +213,7 @@
       key: "scheme",
       get: function get() {
         return {
-          danmu: {
+          danmus: {
             type: 'array',
             child: {
               text: 'string',
@@ -279,8 +316,7 @@
         start: danmuku.start.bind(danmuku),
         stop: danmuku.stop.bind(danmuku),
         hide: danmuku.hide.bind(danmuku),
-        show: danmuku.show.bind(danmuku),
-        config: danmuku.config.bind(danmuku)
+        show: danmuku.show.bind(danmuku)
       };
     };
   }

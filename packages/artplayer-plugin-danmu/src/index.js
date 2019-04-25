@@ -11,7 +11,6 @@ function artplayerPluginDanmu(option) {
             stop: danmuku.stop.bind(danmuku),
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
-            config: danmuku.config.bind(danmuku),
         };
     };
 }

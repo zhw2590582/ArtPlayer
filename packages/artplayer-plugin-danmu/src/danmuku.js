@@ -1,17 +1,20 @@
 export default class Danmuku {
     constructor(art, option = {}) {
         this.art = art;
-        this.option = {};
-        this.config(option);
+        this.queue = {};
+        this.option = Object.assign({}, Danmuku.option, option);
+        art.constructor.validator(this.option, Danmuku.scheme);
+        this.option.danmus.forEach(this.emit);
         this.current = [];
         this.layer = {};
         this.isStop = false;
+        this.timer = null;
         this.init();
     }
 
     static get option() {
         return {
-            danmu: [],
+            danmus: [],
             speed: 5,
             opacity: 1,
             color: '#fff',
@@ -21,7 +24,7 @@ export default class Danmuku {
 
     static get scheme() {
         return {
-            danmu: {
+            danmus: {
                 type: 'array',
                 child: {
                     text: 'string',
@@ -54,34 +57,49 @@ export default class Danmuku {
             },
         });
 
-        this.art.on('video:timeupdate', this.update.bind(this));
+        this.update();
         this.art.on('video:play', this.start.bind(this));
         this.art.on('video:pause', this.stop.bind(this));
         this.art.on('video:ended', this.stop.bind(this));
         this.art.on('destroy', this.stop.bind(this));
     }
 
-    emit(danmu) {
+    emit(danmu = {}) {
         const { errorHandle } = this.art.constructor.utils;
-        errorHandle(danmu.text.trim(), 'Danmu text cannot be empty');
-        const { clientWidth: playerWidth, clientHeight: playerHeight } = this.art.template.$player;
-        const danmuItem = this.getDanmuItem();
-        danmuItem.$ref.innerText = danmu.text;
-        danmuItem.$ref.style.fontSize = danmu.size || this.option.size;
-        const { clientWidth: danmuWidth, clientHeight: danmuHeight } = danmuItem.$ref;
-        danmuItem.$ref.style.opacity = danmu.opacity || this.option.opacity;
-        danmuItem.$ref.style.color = danmu.color || this.option.color;
-        danmuItem.$ref.style.top = this.getDanmuTop(playerHeight, danmuHeight);
-        danmuItem.$ref.style.left = `${playerWidth}px`;
-        danmuItem.$ref.style.transform = `translateX(${-playerWidth - danmuWidth}px) translateY(0px) translateZ(0px)`;
-        danmuItem.$ref.style.transition = `-webkit-transform ${danmu.speed || this.option.speed}s linear 0s`;
-        this.art.emit('artplayerPluginDanmu:emit', danmu);
+        errorHandle(danmu.text, 'Danmu text cannot be empty');
+        errorHandle(danmu.time, 'Danmu time cannot be empty');
+        if (this.queue[danmu.time]) {
+            this.queue[danmu.time].push(danmu);
+        } else {
+            this.queue[danmu.time] = [danmu];
+        }
+        // this.art.emit('artplayerPluginDanmu:emit', danmu);
+        // if (!this.isStop) {
+        //     const { clientWidth: playerWidth, clientHeight: playerHeight } = this.art.template.$player;
+        //     const danmuItem = this.getDanmuItem();
+        //     danmuItem.$ref.innerText = danmu.text;
+        //     danmuItem.$ref.style.fontSize = danmu.size || this.option.size;
+        //     const { clientWidth: danmuWidth, clientHeight: danmuHeight } = danmuItem.$ref;
+        //     danmuItem.$ref.style.opacity = danmu.opacity || this.option.opacity;
+        //     danmuItem.$ref.style.color = danmu.color || this.option.color;
+        //     danmuItem.$ref.style.top = this.getDanmuTop(playerHeight, danmuHeight);
+        //     danmuItem.$ref.style.left = `${playerWidth}px`;
+        //     danmuItem.$ref.style.transform = `translateX(${-playerWidth -
+        //         danmuWidth}px) translateY(0px) translateZ(0px)`;
+        //     danmuItem.$ref.style.transition = `-webkit-transform ${danmu.speed || this.option.speed}s linear 0s`;
+        //     this.art.emit('artplayerPluginDanmu:emit', danmu);
+        // }
     }
 
     getDanmuItem() {
         const { setStyles, append } = this.art.constructor.utils;
         const inactiveItem = this.current.find(item => item.state === 'inactive');
-        if (inactiveItem) return inactiveItem;
+        if (inactiveItem) {
+            inactiveItem.time = Date.now();
+            inactiveItem.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+            inactiveItem.$ref.style.transition = '-webkit-transform 0s linear 0s';
+            return inactiveItem;
+        }
         const $ref = document.createElement('div');
         setStyles($ref, {
             userSelect: 'none',
@@ -97,10 +115,12 @@ export default class Danmuku {
             textShadow:
                 'rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px',
         });
-        return {
+
+        return this.current.push({
             state: 'active',
+            time: Date.now(),
             $ref: append(this.layer.$ref, $ref),
-        };
+        });
     }
 
     getDanmuTop(playerHeight, danmuHeight) {
@@ -108,18 +128,34 @@ export default class Danmuku {
     }
 
     update() {
-        if (!this.isStop && this.option.danmu.length) {
-            // 播放速度
-        }
-    }
+        const {
+            template: { $player },
+            player,
+        } = this.art;
+        this.timer = window.requestAnimationFrame(() => {
+            this.current.forEach(item => {
+                if (Date.now() - item.time >= this.option.speed) {
+                    item.state = 'inactive';
+                }
+            });
 
-    config(option) {
-        this.option = Object.assign({}, Danmuku.option, option);
-        this.art.constructor.validator(this.option, Danmuku.scheme);
+            Object.keys(this.queue).filter(time => {
+                return player.currentTime + 0.5 >= time && time >= player.currentTime - 0.5;
+            }).reduce((result, key) => {
+                return result.concat(this.queue[key]);
+            }, []).forEach(item => {
+                console.log(item);
+            });
+
+            if (!this.isStop && player.playing) {
+                this.update();
+            }
+        });
     }
 
     stop() {
         this.isStop = true;
+        window.cancelAnimationFrame(this.timer);
         this.art.emit('artplayerPluginDanmu:stop');
     }
 
