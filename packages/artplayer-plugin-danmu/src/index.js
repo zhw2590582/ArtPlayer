@@ -6,12 +6,12 @@ function artplayerPluginDanmu(option) {
         const danmuku = new Danmuku(art, option);
         return {
             name: 'artplayerPluginDanmu',
-            emit: danmuku.emit,
-            start: danmuku.start,
-            stop: danmuku.stop,
-            hide: danmuku.hide,
-            show: danmuku.show,
-            config: danmuku.config,
+            emit: danmuku.emit.bind(danmuku),
+            start: danmuku.start.bind(danmuku),
+            stop: danmuku.stop.bind(danmuku),
+            hide: danmuku.hide.bind(danmuku),
+            show: danmuku.show.bind(danmuku),
+            config: danmuku.config.bind(danmuku),
         };
     };
 }
