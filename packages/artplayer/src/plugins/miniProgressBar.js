@@ -8,6 +8,7 @@ export default function miniProgressBar(art) {
     let timer = null;
 
     layers.add({
+        name: 'miniProgressBar',
         style: {
             display: 'none',
             position: 'absolute',

@@ -1,3 +1,4 @@
+import { errorHandle } from '../utils';
 import component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -155,9 +156,8 @@ export default class Controls {
                 break;
         }
 
-        if (parent) {
-            component(this.art, this, parent, option, callback, 'control');
-        }
+        errorHandle(parent, 'Controls option.position can not be empty');
+        return component(this.art, this, parent, option, callback, 'control');
     }
 
     show() {
