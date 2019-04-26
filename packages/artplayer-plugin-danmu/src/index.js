@@ -6,7 +6,7 @@ function artplayerPluginDanmu(option) {
         const danmuku = new Danmuku(art, option);
         return {
             name: 'artplayerPluginDanmu',
-            emit: danmuku.emit.bind(danmuku),
+            emit: danmuku.addToQueue.bind(danmuku),
             start: danmuku.start.bind(danmuku),
             stop: danmuku.stop.bind(danmuku),
             hide: danmuku.hide.bind(danmuku),

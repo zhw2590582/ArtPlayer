@@ -90,6 +90,44 @@
     });
   }
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var defineProperty = _defineProperty;
+
+  function _objectSpread(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+      var ownKeys = Object.keys(source);
+
+      if (typeof Object.getOwnPropertySymbols === 'function') {
+        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+        }));
+      }
+
+      ownKeys.forEach(function (key) {
+        defineProperty(target, key, source[key]);
+      });
+    }
+
+    return target;
+  }
+
+  var objectSpread = _objectSpread;
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -127,22 +165,26 @@
       classCallCheck(this, Danmuku);
 
       this.art = art;
-      this.queue = {};
-      this.current = [];
-      this.layer = {};
+      this.queue = [];
+      this.layer = null;
       this.isStop = false;
       this.timer = null;
       this.option = Object.assign({}, Danmuku.option, option);
       art.constructor.validator(this.option, Danmuku.scheme);
+      art.on('video:play', this.start.bind(this));
+      art.on('video:pause', this.stop.bind(this));
+      art.on('video:ended', this.stop.bind(this));
+      art.on('destroy', this.stop.bind(this));
 
       if (typeof this.option.danmus === 'function') {
         this.option.danmus().then(function (danmus) {
-          danmus.forEach(_this.emit);
+          art.emit('artplayerPluginDanmu:loaded', danmus);
+          danmus.forEach(_this.addToQueue.bind(_this));
 
           _this.init();
         });
       } else {
-        this.option.danmus.forEach(this.emit);
+        this.option.danmus.forEach(this.addToQueue);
         this.init();
       }
     }
@@ -150,8 +192,7 @@
     createClass(Danmuku, [{
       key: "init",
       value: function init() {
-        var layers = this.art.layers;
-        this.layer = layers.add({
+        this.layer = this.art.layers.add({
           name: 'danmu',
           style: {
             position: 'absolute',
@@ -161,60 +202,70 @@
             bottom: 0,
             width: '100%',
             height: '100%',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            pointerEvents: 'none'
           }
         });
-        this.update();
-        this.art.on('video:play', this.start.bind(this));
-        this.art.on('video:pause', this.stop.bind(this));
-        this.art.on('video:ended', this.stop.bind(this));
-        this.art.on('destroy', this.stop.bind(this));
       }
     }, {
       key: "emit",
-      value: function emit() {
-        var danmu = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      value: function emit(danmu) {
         var errorHandle = this.art.constructor.utils.errorHandle;
-        errorHandle(danmu.text, 'Danmu text cannot be empty');
-        errorHandle(danmu.time, 'Danmu time cannot be empty');
-
-        if (this.queue[danmu.time]) {
-          this.queue[danmu.time].push(danmu);
-        } else {
-          this.queue[danmu.time] = [danmu];
-        } // this.art.emit('artplayerPluginDanmu:emit', danmu);
-        // if (!this.isStop) {
-        //     const { clientWidth: playerWidth, clientHeight: playerHeight } = this.art.template.$player;
-        //     const danmuItem = this.getDanmuItem();
-        //     danmuItem.$ref.innerText = danmu.text;
-        //     danmuItem.$ref.style.fontSize = danmu.size || this.option.size;
-        //     const { clientWidth: danmuWidth, clientHeight: danmuHeight } = danmuItem.$ref;
-        //     danmuItem.$ref.style.opacity = danmu.opacity || this.option.opacity;
-        //     danmuItem.$ref.style.color = danmu.color || this.option.color;
-        //     danmuItem.$ref.style.top = this.getDanmuTop(playerHeight, danmuHeight);
-        //     danmuItem.$ref.style.left = `${playerWidth}px`;
-        //     danmuItem.$ref.style.transform = `translateX(${-playerWidth -
-        //         danmuWidth}px) translateY(0px) translateZ(0px)`;
-        //     danmuItem.$ref.style.transition = `-webkit-transform ${danmu.speed || this.option.speed}s linear 0s`;
-        //     this.art.emit('artplayerPluginDanmu:emit', danmu);
-        // }
-
+        errorHandle(this.layer, 'The danmuku is not ready');
+        var _this$art$template$$p = this.art.template.$player,
+            playerWidth = _this$art$template$$p.clientWidth,
+            playerHeight = _this$art$template$$p.clientHeight;
+        danmu.$ref.innerText = danmu.text;
+        danmu.$ref.style.fontSize = "".concat(danmu.size || this.option.size, "px");
+        var _danmu$$ref = danmu.$ref,
+            danmuWidth = _danmu$$ref.clientWidth,
+            danmuHeight = _danmu$$ref.clientHeight;
+        danmu.$ref.style.opacity = danmu.opacity || this.option.opacity;
+        danmu.$ref.style.color = danmu.color || this.option.color;
+        danmu.$ref.style.top = this.getDanmuTop(playerHeight, danmuHeight);
+        danmu.$ref.style.left = "".concat(playerWidth, "px");
+        var translateX = -playerWidth - danmuWidth - 10;
+        danmu.$ref.style.transform = "translateX(".concat(translateX, "px) translateY(0px) translateZ(0px)");
+        danmu.$ref.style.transition = "-webkit-transform ".concat(danmu.speed || this.option.speed, "s linear 0s");
       }
     }, {
-      key: "getDanmuItem",
-      value: function getDanmuItem() {
+      key: "addToQueue",
+      value: function addToQueue(danmu) {
+        var errorHandle = this.art.constructor.utils.errorHandle;
+        errorHandle(danmu.text, 'Danmu text cannot be empty');
+        errorHandle(typeof danmu.time === 'number', 'Danmu time cannot be empty');
+        errorHandle(danmu.text.length <= this.option.maxlength, "The length of the danmu does not exceed ".concat(this.option.maxlength));
+        this.queue.push(objectSpread({}, danmu, {
+          $state: 'wait',
+          $ref: null,
+          $emitTime: 0
+        }));
+      }
+    }, {
+      key: "getDanmuRef",
+      value: function getDanmuRef() {
+        var $player = this.art.template.$player;
         var _this$art$constructor = this.art.constructor.utils,
             setStyles = _this$art$constructor.setStyles,
             append = _this$art$constructor.append;
-        var inactiveItem = this.current.find(function (item) {
-          return item.state === 'inactive';
+        var playerLeft = $player.getBoundingClientRect().left;
+        var waitDanmu = this.queue.find(function (danmu) {
+          if (danmu.$ref) {
+            var _danmu$$ref$getBoundi = danmu.$ref.getBoundingClientRect(),
+                left = _danmu$$ref$getBoundi.left,
+                width = _danmu$$ref$getBoundi.width;
+
+            return playerLeft >= left + width;
+          }
+
+          return false;
         });
 
-        if (inactiveItem) {
-          inactiveItem.time = Date.now();
-          inactiveItem.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
-          inactiveItem.$ref.style.transition = '-webkit-transform 0s linear 0s';
-          return inactiveItem;
+        if (waitDanmu) {
+          waitDanmu.$state = 'wait';
+          waitDanmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+          waitDanmu.$ref.style.transition = '-webkit-transform 0s linear 0s';
+          return waitDanmu.$ref;
         }
 
         var $ref = document.createElement('div');
@@ -231,11 +282,8 @@
           lineHeight: '1.125',
           textShadow: 'rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px'
         });
-        return this.current.push({
-          state: 'active',
-          time: Date.now(),
-          $ref: append(this.layer.$ref, $ref)
-        });
+        append(this.layer.$ref, $ref);
+        return $ref;
       }
     }, {
       key: "getDanmuTop",
@@ -243,29 +291,34 @@
         return 0;
       }
     }, {
+      key: "changeState",
+      value: function changeState(before, after) {
+        return this.queue.filter(function (danmu) {
+          return danmu.$state === before;
+        }).map(function (danmu) {
+          danmu.$state = after;
+          return danmu;
+        });
+      }
+    }, {
       key: "update",
       value: function update() {
         var _this2 = this;
 
-        var _this$art = this.art,
-            $player = _this$art.template.$player,
-            player = _this$art.player;
+        var player = this.art.player;
         this.timer = window.requestAnimationFrame(function () {
-          _this2.current.forEach(function (item) {
-            if (Date.now() - item.time >= _this2.option.speed) {
-              item.state = 'inactive';
-            }
+          _this2.queue.filter(function (danmu) {
+            return player.currentTime + 0.25 >= danmu.time && danmu.time >= player.currentTime - 0.25 && danmu.$state === 'wait';
+          }).map(function (danmu) {
+            danmu.$emitTime = Date.now();
+            danmu.$ref = _this2.getDanmuRef();
+            danmu.$state = 'emit';
+            return danmu;
+          }).forEach(function (danmu) {
+            _this2.emit(danmu);
           });
 
-          Object.keys(_this2.queue).filter(function (time) {
-            return player.currentTime + 0.5 >= time && time >= player.currentTime - 0.5;
-          }).reduce(function (result, key) {
-            return result.concat(_this2.queue[key]);
-          }, []).forEach(function (item) {
-            console.log(item);
-          });
-
-          if (!_this2.isStop && player.playing) {
+          if (!_this2.isStop) {
             _this2.update();
           }
         });
@@ -274,6 +327,8 @@
       key: "stop",
       value: function stop() {
         this.isStop = true;
+        this.changeState('emit', 'stop');
+        this.changeState('continue', 'stop');
         window.cancelAnimationFrame(this.timer);
         this.art.emit('artplayerPluginDanmu:stop');
       }
@@ -281,6 +336,8 @@
       key: "start",
       value: function start() {
         this.isStop = false;
+        this.changeState('stop', 'continue');
+        this.update();
         this.art.emit('artplayerPluginDanmu:start');
       }
     }, {
@@ -303,7 +360,8 @@
           speed: 5,
           opacity: 1,
           color: '#fff',
-          size: 14
+          size: 14,
+          maxlength: 50
         };
       }
     }, {
@@ -314,7 +372,8 @@
           speed: 'number',
           opacity: 'number',
           color: 'string',
-          size: 'number'
+          size: 'number',
+          maxlength: 'number'
         };
       }
     }]);
@@ -327,7 +386,7 @@
       var danmuku = new Danmuku(art, option);
       return {
         name: 'artplayerPluginDanmu',
-        emit: danmuku.emit.bind(danmuku),
+        emit: danmuku.addToQueue.bind(danmuku),
         start: danmuku.start.bind(danmuku),
         stop: danmuku.stop.bind(danmuku),
         hide: danmuku.hide.bind(danmuku),
