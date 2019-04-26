@@ -9,7 +9,6 @@ export default class Danmuku {
         art.constructor.validator(this.option, Danmuku.scheme);
         art.on('video:play', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
-        art.on('video:ended', this.stop.bind(this));
         art.on('destroy', this.stop.bind(this));
         if (typeof this.option.danmus === 'function') {
             this.option.danmus().then(danmus => {
@@ -75,7 +74,12 @@ export default class Danmuku {
         danmu.$ref.style.left = `${playerWidth}px`;
         const translateX = -playerWidth - danmuWidth - 10;
         danmu.$ref.style.transform = `translateX(${translateX}px) translateY(0px) translateZ(0px)`;
-        danmu.$ref.style.transition = `-webkit-transform ${danmu.speed || this.option.speed}s linear 0s`;
+        danmu.$ref.style.transition = `-webkit-transform ${danmu.$restTime}s linear 0s`;
+    }
+
+    continue(danmu) {
+        danmu.$ref.style.transform = `translateX(${translateX}px) translateY(0px) translateZ(0px)`;
+        danmu.$ref.style.transition = `-webkit-transform ${danmu.$restTime}s linear 0s`;
     }
 
     addToQueue(danmu) {
@@ -90,7 +94,8 @@ export default class Danmuku {
             ...danmu,
             $state: 'wait',
             $ref: null,
-            $emitTime: 0,
+            $restTime: this.option.speed,
+            $lastPlayTime: 0,
         });
     }
 
@@ -160,7 +165,8 @@ export default class Danmuku {
                     );
                 })
                 .map(danmu => {
-                    danmu.$emitTime = Date.now();
+                    danmu.$lastPlayTime = Date.now();
+                    danmu.$restTime = 0;
                     danmu.$ref = this.getDanmuRef();
                     danmu.$state = 'emit';
                     return danmu;
@@ -177,15 +183,24 @@ export default class Danmuku {
 
     stop() {
         this.isStop = true;
-        this.changeState('emit', 'stop');
-        this.changeState('continue', 'stop');
+        this.queue
+            .filter(danmu => danmu.$state === 'emit')
+            .forEach(danmu => {
+                danmu.$state = 'stop';
+                danmu.$restTime -= Date.now() - danmu.$lastPlayTime;
+            });
         window.cancelAnimationFrame(this.timer);
         this.art.emit('artplayerPluginDanmu:stop');
     }
 
     start() {
         this.isStop = false;
-        this.changeState('stop', 'continue');
+        this.queue
+            .filter(danmu => danmu.$state === 'stop')
+            .forEach(danmu => {
+                danmu.$state = 'emit';
+                danmu.$lastPlayTime = Date.now();
+            });
         this.update();
         this.art.emit('artplayerPluginDanmu:start');
     }

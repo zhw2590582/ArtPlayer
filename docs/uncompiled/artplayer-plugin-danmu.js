@@ -173,7 +173,6 @@
       art.constructor.validator(this.option, Danmuku.scheme);
       art.on('video:play', this.start.bind(this));
       art.on('video:pause', this.stop.bind(this));
-      art.on('video:ended', this.stop.bind(this));
       art.on('destroy', this.stop.bind(this));
 
       if (typeof this.option.danmus === 'function') {
@@ -226,7 +225,13 @@
         danmu.$ref.style.left = "".concat(playerWidth, "px");
         var translateX = -playerWidth - danmuWidth - 10;
         danmu.$ref.style.transform = "translateX(".concat(translateX, "px) translateY(0px) translateZ(0px)");
-        danmu.$ref.style.transition = "-webkit-transform ".concat(danmu.speed || this.option.speed, "s linear 0s");
+        danmu.$ref.style.transition = "-webkit-transform ".concat(danmu.$restTime, "s linear 0s");
+      }
+    }, {
+      key: "continue",
+      value: function _continue(danmu) {
+        danmu.$ref.style.transform = "translateX(".concat(translateX, "px) translateY(0px) translateZ(0px)");
+        danmu.$ref.style.transition = "-webkit-transform ".concat(danmu.$restTime, "s linear 0s");
       }
     }, {
       key: "addToQueue",
@@ -238,7 +243,8 @@
         this.queue.push(objectSpread({}, danmu, {
           $state: 'wait',
           $ref: null,
-          $emitTime: 0
+          $restTime: this.option.speed,
+          $lastPlayTime: 0
         }));
       }
     }, {
@@ -310,7 +316,8 @@
           _this2.queue.filter(function (danmu) {
             return player.currentTime + 0.25 >= danmu.time && danmu.time >= player.currentTime - 0.25 && danmu.$state === 'wait';
           }).map(function (danmu) {
-            danmu.$emitTime = Date.now();
+            danmu.$lastPlayTime = Date.now();
+            danmu.$restTime = 0;
             danmu.$ref = _this2.getDanmuRef();
             danmu.$state = 'emit';
             return danmu;
@@ -327,8 +334,12 @@
       key: "stop",
       value: function stop() {
         this.isStop = true;
-        this.changeState('emit', 'stop');
-        this.changeState('continue', 'stop');
+        this.queue.filter(function (danmu) {
+          return danmu.$state === 'emit';
+        }).forEach(function (danmu) {
+          danmu.$state = 'stop';
+          danmu.$restTime -= Date.now() - danmu.$lastPlayTime;
+        });
         window.cancelAnimationFrame(this.timer);
         this.art.emit('artplayerPluginDanmu:stop');
       }
@@ -336,7 +347,12 @@
       key: "start",
       value: function start() {
         this.isStop = false;
-        this.changeState('stop', 'continue');
+        this.queue.filter(function (danmu) {
+          return danmu.$state === 'stop';
+        }).forEach(function (danmu) {
+          danmu.$state = 'emit';
+          danmu.$lastPlayTime = Date.now();
+        });
         this.update();
         this.art.emit('artplayerPluginDanmu:start');
       }
