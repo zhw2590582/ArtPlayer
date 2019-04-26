@@ -94,7 +94,7 @@ export default class Danmuku {
             ...danmu,
             $state: 'wait',
             $ref: null,
-            $restTime: this.option.speed,
+            $restTime: 0,
             $lastPlayTime: 0,
         });
     }
@@ -166,7 +166,7 @@ export default class Danmuku {
                 })
                 .map(danmu => {
                     danmu.$lastPlayTime = Date.now();
-                    danmu.$restTime = 0;
+                    danmu.$restTime = this.option.speed;
                     danmu.$ref = this.getDanmuRef();
                     danmu.$state = 'emit';
                     return danmu;

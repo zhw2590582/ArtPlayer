@@ -243,7 +243,7 @@
         this.queue.push(objectSpread({}, danmu, {
           $state: 'wait',
           $ref: null,
-          $restTime: this.option.speed,
+          $restTime: 0,
           $lastPlayTime: 0
         }));
       }
@@ -317,7 +317,7 @@
             return player.currentTime + 0.25 >= danmu.time && danmu.time >= player.currentTime - 0.25 && danmu.$state === 'wait';
           }).map(function (danmu) {
             danmu.$lastPlayTime = Date.now();
-            danmu.$restTime = 0;
+            danmu.$restTime = _this2.option.speed;
             danmu.$ref = _this2.getDanmuRef();
             danmu.$state = 'emit';
             return danmu;
