@@ -2,14 +2,21 @@ export default class Danmuku {
     constructor(art, option = {}) {
         this.art = art;
         this.queue = {};
-        this.option = Object.assign({}, Danmuku.option, option);
-        art.constructor.validator(this.option, Danmuku.scheme);
-        this.option.danmus.forEach(this.emit);
         this.current = [];
         this.layer = {};
         this.isStop = false;
         this.timer = null;
-        this.init();
+        this.option = Object.assign({}, Danmuku.option, option);
+        art.constructor.validator(this.option, Danmuku.scheme);
+        if (typeof this.option.danmus === 'function') {
+            this.option.danmus().then(danmus => {
+                danmus.forEach(this.emit);
+                this.init();
+            });
+        } else {
+            this.option.danmus.forEach(this.emit);
+            this.init();
+        }
     }
 
     static get option() {
@@ -24,16 +31,7 @@ export default class Danmuku {
 
     static get scheme() {
         return {
-            danmus: {
-                type: 'array',
-                child: {
-                    text: 'string',
-                    size: 'number',
-                    time: 'number',
-                    color: 'string',
-                    mode: 'number',
-                },
-            },
+            danmus: 'array|function',
             speed: 'number',
             opacity: 'number',
             color: 'string',

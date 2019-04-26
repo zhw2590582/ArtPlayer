@@ -1,24 +1,21 @@
 export function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
-    const regSrt = '<d p="(.+)">(.+)</d>';
-    const listReg = new RegExp(regSrt, 'gi');
-    const itemReg = new RegExp(regSrt, 'i');
-    const srtList = xmlString.match(listReg);
+    const srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
     return srtList.length
         ? srtList.map(item => {
-            const [, attrStr, text] = item.match(itemReg);
-            const attr = attrStr.split(',').map(Number);
+            const [, attrStr, text] = item.match(/<d p="(.+)">(.+)<\/d>/);
+            const attr = attrStr.split(',');
             return attr.length === 8 && text.trim()
                 ? {
                     text,
-                    time: attr[0],
-                    mode: attr[1],
-                    size: attr[2],
-                    color: `#${attr[3].toString(16)}`,
-                    timestamp: attr[4],
-                    pool: attr[5],
+                    time: Number(attr[0]),
+                    mode: Number(attr[1]),
+                    size: Number(attr[2]),
+                    color: `#${Number(attr[3]).toString(16)}`,
+                    timestamp: Number(attr[4]),
+                    pool: Number(attr[5]),
                     userID: attr[6],
-                    rowID: attr[7],
+                    rowID: Number(attr[7]),
                 }
                 : null;
         })

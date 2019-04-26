@@ -52,27 +52,24 @@
 
   function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
-    var regSrt = '<d p="(.+)">(.+)</d>';
-    var listReg = new RegExp(regSrt, 'gi');
-    var itemReg = new RegExp(regSrt, 'i');
-    var srtList = xmlString.match(listReg);
+    var srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
     return srtList.length ? srtList.map(function (item) {
-      var _item$match = item.match(itemReg),
+      var _item$match = item.match(/<d p="(.+)">(.+)<\/d>/),
           _item$match2 = slicedToArray(_item$match, 3),
           attrStr = _item$match2[1],
           text = _item$match2[2];
 
-      var attr = attrStr.split(',').map(Number);
+      var attr = attrStr.split(',');
       return attr.length === 8 && text.trim() ? {
         text: text,
-        time: attr[0],
-        mode: attr[1],
-        size: attr[2],
-        color: "#".concat(attr[3].toString(16)),
-        timestamp: attr[4],
-        pool: attr[5],
+        time: Number(attr[0]),
+        mode: Number(attr[1]),
+        size: Number(attr[2]),
+        color: "#".concat(Number(attr[3]).toString(16)),
+        timestamp: Number(attr[4]),
+        pool: Number(attr[5]),
         userID: attr[6],
-        rowID: attr[7]
+        rowID: Number(attr[7])
       } : null;
     }) : [];
   }
@@ -123,20 +120,31 @@
   /*#__PURE__*/
   function () {
     function Danmuku(art) {
+      var _this = this;
+
       var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       classCallCheck(this, Danmuku);
 
       this.art = art;
       this.queue = {};
-      this.option = Object.assign({}, Danmuku.option, option);
-      art.constructor.validator(this.option, Danmuku.scheme);
-      this.option.danmus.forEach(this.emit);
       this.current = [];
       this.layer = {};
       this.isStop = false;
       this.timer = null;
-      this.init();
+      this.option = Object.assign({}, Danmuku.option, option);
+      art.constructor.validator(this.option, Danmuku.scheme);
+
+      if (typeof this.option.danmus === 'function') {
+        this.option.danmus().then(function (danmus) {
+          danmus.forEach(_this.emit);
+
+          _this.init();
+        });
+      } else {
+        this.option.danmus.forEach(this.emit);
+        this.init();
+      }
     }
 
     createClass(Danmuku, [{
@@ -237,28 +245,28 @@
     }, {
       key: "update",
       value: function update() {
-        var _this = this;
+        var _this2 = this;
 
         var _this$art = this.art,
             $player = _this$art.template.$player,
             player = _this$art.player;
         this.timer = window.requestAnimationFrame(function () {
-          _this.current.forEach(function (item) {
-            if (Date.now() - item.time >= _this.option.speed) {
+          _this2.current.forEach(function (item) {
+            if (Date.now() - item.time >= _this2.option.speed) {
               item.state = 'inactive';
             }
           });
 
-          Object.keys(_this.queue).filter(function (time) {
+          Object.keys(_this2.queue).filter(function (time) {
             return player.currentTime + 0.5 >= time && time >= player.currentTime - 0.5;
           }).reduce(function (result, key) {
-            return result.concat(_this.queue[key]);
+            return result.concat(_this2.queue[key]);
           }, []).forEach(function (item) {
             console.log(item);
           });
 
-          if (!_this.isStop && player.playing) {
-            _this.update();
+          if (!_this2.isStop && player.playing) {
+            _this2.update();
           }
         });
       }
@@ -302,16 +310,7 @@
       key: "scheme",
       get: function get() {
         return {
-          danmus: {
-            type: 'array',
-            child: {
-              text: 'string',
-              size: 'number',
-              time: 'number',
-              color: 'string',
-              mode: 'number'
-            }
-          },
+          danmus: 'array|function',
           speed: 'number',
           opacity: 'number',
           color: 'string',
