@@ -4,20 +4,22 @@ export default class Danmuku {
         this.queue = [];
         this.layer = null;
         this.isStop = false;
-        this.timer = null;
+        this.animationFrameTimer = null;
         this.option = Object.assign({}, Danmuku.option, option);
         art.constructor.validator(this.option, Danmuku.scheme);
         art.on('video:play', this.start.bind(this));
+        art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
+        art.on('video:waiting', this.stop.bind(this));
         art.on('destroy', this.stop.bind(this));
         if (typeof this.option.danmus === 'function') {
             this.option.danmus().then(danmus => {
-                art.emit('artplayerPluginDanmu:loaded', danmus);
                 danmus.forEach(this.addToQueue.bind(this));
                 this.init();
+                art.emit('artplayerPluginDanmu:loaded', danmus);
             });
         } else {
-            this.option.danmus.forEach(this.addToQueue);
+            this.option.danmus.forEach(this.addToQueue.bind(this));
             this.init();
         }
     }
@@ -28,8 +30,9 @@ export default class Danmuku {
             speed: 5,
             opacity: 1,
             color: '#fff',
-            size: 14,
+            size: 25,
             maxlength: 50,
+            margin: [10, 20],
         };
     }
 
@@ -41,7 +44,13 @@ export default class Danmuku {
             color: 'string',
             size: 'number',
             maxlength: 'number',
+            margin: 'array',
         };
+    }
+
+    static getRect(ref, key) {
+        const result = ref.getBoundingClientRect();
+        return key ? result[key] : result;
     }
 
     init() {
@@ -57,57 +66,80 @@ export default class Danmuku {
                 height: '100%',
                 overflow: 'hidden',
                 pointerEvents: 'none',
+                opacity: this.option.opacity,
             },
         });
     }
 
     emit(danmu) {
-        const { errorHandle } = this.art.constructor.utils;
-        errorHandle(this.layer, 'The danmuku is not ready');
-        const { clientWidth: playerWidth, clientHeight: playerHeight } = this.art.template.$player;
+        const { $player } = this.art.template;
+        danmu.$ref = this.getDanmuRef();
         danmu.$ref.innerText = danmu.text;
         danmu.$ref.style.fontSize = `${danmu.size || this.option.size}px`;
-        const { clientWidth: danmuWidth, clientHeight: danmuHeight } = danmu.$ref;
-        danmu.$ref.style.opacity = danmu.opacity || this.option.opacity;
+        const playerWidth = Danmuku.getRect($player, 'width');
+        const danmuWidth = Danmuku.getRect(danmu.$ref, 'width');
+        danmu.$restWidth = playerWidth + danmuWidth + 5;
+        danmu.$restTime = this.option.speed;
+        danmu.$lastStartTime = Date.now();
         danmu.$ref.style.color = danmu.color || this.option.color;
-        danmu.$ref.style.top = this.getDanmuTop(playerHeight, danmuHeight);
         danmu.$ref.style.left = `${playerWidth}px`;
-        const translateX = -playerWidth - danmuWidth - 10;
-        danmu.$ref.style.transform = `translateX(${translateX}px) translateY(0px) translateZ(0px)`;
+        danmu.$ref.style.top = `${this.getDanmuTop()}px`;
+        danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
         danmu.$ref.style.transition = `-webkit-transform ${danmu.$restTime}s linear 0s`;
+        danmu.$state = 'emit';
     }
 
-    continue(danmu) {
-        danmu.$ref.style.transform = `translateX(${translateX}px) translateY(0px) translateZ(0px)`;
+    static continue(danmu) {
+        danmu.$lastStartTime = Date.now();
+        danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
         danmu.$ref.style.transition = `-webkit-transform ${danmu.$restTime}s linear 0s`;
+        danmu.$state = 'emit';
+    }
+
+    suspend(danmu) {
+        const { $player } = this.art.template;
+        const { left: playerLeft, width: playerWidth } = Danmuku.getRect($player);
+        const { left: danmuLeft } = Danmuku.getRect(danmu.$ref);
+        danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
+        const translateX = playerWidth - (danmuLeft - playerLeft) + 5;
+        danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+        danmu.$ref.style.transition = '-webkit-transform 0s linear 0s';
+        danmu.$state = 'stop';
     }
 
     addToQueue(danmu) {
-        const { errorHandle } = this.art.constructor.utils;
-        errorHandle(danmu.text, 'Danmu text cannot be empty');
-        errorHandle(typeof danmu.time === 'number', 'Danmu time cannot be empty');
-        errorHandle(
-            danmu.text.length <= this.option.maxlength,
-            `The length of the danmu does not exceed ${this.option.maxlength}`,
-        );
+        const { notice, player } = this.art;
+        if (!danmu.text.trim()) {
+            notice('Danmu text cannot be empty');
+            return;
+        }
+
+        if (danmu.text.length > this.option.maxlength) {
+            notice(`The length of the danmu does not exceed ${this.option.maxlength}`);
+            return;
+        }
+
+        if (typeof danmu.time !== 'number') {
+            danmu.time = player.currentTime;
+        }
+
         this.queue.push({
             ...danmu,
             $state: 'wait',
             $ref: null,
             $restTime: 0,
-            $lastPlayTime: 0,
         });
     }
 
     getDanmuRef() {
         const { $player } = this.art.template;
         const { setStyles, append } = this.art.constructor.utils;
-        const playerLeft = $player.getBoundingClientRect().left;
+        const playerLeft = Danmuku.getRect($player, 'left');
 
         const waitDanmu = this.queue.find(danmu => {
             if (danmu.$ref) {
-                const { left, width } = danmu.$ref.getBoundingClientRect();
-                return playerLeft >= left + width;
+                const { left: danmuLeft, width: danmuWidth } = Danmuku.getRect(danmu.$ref);
+                return danmu.$state === 'emit' && playerLeft > danmuLeft + danmuWidth;
             }
             return false;
         });
@@ -140,40 +172,37 @@ export default class Danmuku {
         return $ref;
     }
 
-    getDanmuTop(playerHeight, danmuHeight) {
-        return 0;
-    }
+    getDanmuTop() {
+        const { $player } = this.art.template;
+        const playerHeight = Danmuku.getRect($player, 'height');
+        const danmus = this.queue.filter(danmu => danmu.$state === 'emit');
+        if (danmus.length === 0) {
+            return this.option.margin[0];
+        }
 
-    changeState(before, after) {
-        return this.queue
-            .filter(danmu => danmu.$state === before)
-            .map(danmu => {
-                danmu.$state = after;
-                return danmu;
-            });
+        if (danmus.length === 1) {
+            return this.option.margin[0] + Danmuku.getRect(danmus[0].$ref, 'height');
+        }
+
+        return 0;
     }
 
     update() {
         const { player } = this.art;
-        this.timer = window.requestAnimationFrame(() => {
-            this.queue
-                .filter(danmu => {
-                    return (
-                        player.currentTime + 0.25 >= danmu.time &&
-                        danmu.time >= player.currentTime - 0.25 &&
-                        danmu.$state === 'wait'
-                    );
-                })
-                .map(danmu => {
-                    danmu.$lastPlayTime = Date.now();
-                    danmu.$restTime = this.option.speed;
-                    danmu.$ref = this.getDanmuRef();
-                    danmu.$state = 'emit';
-                    return danmu;
-                })
-                .forEach(danmu => {
-                    this.emit(danmu);
-                });
+        this.animationFrameTimer = window.requestAnimationFrame(() => {
+            if (this.layer && player.playing) {
+                this.queue
+                    .filter(danmu => {
+                        return (
+                            player.currentTime + 0.25 >= danmu.time &&
+                            danmu.time >= player.currentTime - 0.25 &&
+                            danmu.$state === 'wait'
+                        );
+                    })
+                    .forEach(danmu => {
+                        this.emit(danmu);
+                    });
+            }
 
             if (!this.isStop) {
                 this.update();
@@ -186,10 +215,9 @@ export default class Danmuku {
         this.queue
             .filter(danmu => danmu.$state === 'emit')
             .forEach(danmu => {
-                danmu.$state = 'stop';
-                danmu.$restTime -= Date.now() - danmu.$lastPlayTime;
+                this.suspend(danmu);
             });
-        window.cancelAnimationFrame(this.timer);
+        window.cancelAnimationFrame(this.animationFrameTimer);
         this.art.emit('artplayerPluginDanmu:stop');
     }
 
@@ -198,8 +226,7 @@ export default class Danmuku {
         this.queue
             .filter(danmu => danmu.$state === 'stop')
             .forEach(danmu => {
-                danmu.$state = 'emit';
-                danmu.$lastPlayTime = Date.now();
+                Danmuku.continue(danmu);
             });
         this.update();
         this.art.emit('artplayerPluginDanmu:start');

@@ -11,5 +11,11 @@ var art = new Artplayer({
         color: '#fff',
         size: 14,
         maxlength: 50,
+        margin: [10, 20],
     })],
+});
+
+console.info('弹幕加载中...');
+art.on('artplayerPluginDanmu:loaded', () => {
+    console.info('弹幕准备就绪');
 });
