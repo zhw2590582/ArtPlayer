@@ -4,6 +4,95 @@
   (global = global || self, global['artplayer-plugin-danmu'] = factory());
 }(this, function () { 'use strict';
 
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  var arrayWithHoles = _arrayWithHoles;
+
+  function _iterableToArrayLimit(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  var iterableToArrayLimit = _iterableToArrayLimit;
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  var nonIterableRest = _nonIterableRest;
+
+  function _slicedToArray(arr, i) {
+    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+  }
+
+  var slicedToArray = _slicedToArray;
+
+  function bilibiliDanmuParseFromXml(xmlString) {
+    if (typeof xmlString !== 'string') return [];
+    var regSrt = '<d p="(.+)">(.+)</d>';
+    var listReg = new RegExp(regSrt, 'gi');
+    var itemReg = new RegExp(regSrt, 'i');
+    var srtList = xmlString.match(listReg);
+    return srtList.length ? srtList.map(function (item) {
+      var _item$match = item.match(itemReg),
+          _item$match2 = slicedToArray(_item$match, 3),
+          attrStr = _item$match2[1],
+          text = _item$match2[2];
+
+      var attr = attrStr.split(',').map(Number);
+      return attr.length === 8 && text.trim() ? {
+        text: text,
+        time: attr[0],
+        mode: attr[1],
+        size: attr[2],
+        color: "#".concat(attr[3].toString(16)),
+        timestamp: attr[4],
+        pool: attr[5],
+        userID: attr[6],
+        rowID: attr[7]
+      } : null;
+    }) : [];
+  }
+  function bilibiliDanmuParseFromAv(av) {
+    var corsUrl = 'https://cors-anywhere.herokuapp.com/';
+    return fetch("".concat(corsUrl, "https://api.bilibili.com/x/web-interface/view?aid=").concat(av)).then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      if (res.code === 0 && res.data && res.data.cid) {
+        return fetch("".concat(corsUrl, "https://api.bilibili.com/x/v1/dm/list.so?oid=").concat(res.data.cid)).then(function (res) {
+          return res.text();
+        }).then(function (xmlString) {
+          return bilibiliDanmuParseFromXml(xmlString);
+        });
+      }
+
+      throw new Error("Unable to get data: ".concat(JSON.stringify(res)));
+    });
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -234,79 +323,6 @@
     return Danmuku;
   }();
 
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
-
-  var arrayWithHoles = _arrayWithHoles;
-
-  function _iterableToArrayLimit(arr, i) {
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"] != null) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  var iterableToArrayLimit = _iterableToArrayLimit;
-
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
-  }
-
-  var nonIterableRest = _nonIterableRest;
-
-  function _slicedToArray(arr, i) {
-    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
-  }
-
-  var slicedToArray = _slicedToArray;
-
-  function bilibiliDanmuParse(xmlString) {
-    if (typeof xmlString !== 'string') return [];
-    var regSrt = '<d p="(.+)">(.+)</d>';
-    var listReg = new RegExp(regSrt, 'gi');
-    var itemReg = new RegExp(regSrt, 'i');
-    var srtList = xmlString.match(listReg);
-    return srtList.length ? srtList.map(function (item) {
-      var _item$match = item.match(itemReg),
-          _item$match2 = slicedToArray(_item$match, 3),
-          attrStr = _item$match2[1],
-          text = _item$match2[2];
-
-      var attr = attrStr.split(',');
-      return attr.length === 8 && text.trim() ? {
-        text: text,
-        time: Number(attr[0]),
-        mode: Number(attr[1]),
-        size: Number(attr[2]),
-        color: "#".concat(Number(attr[3]).toString(16)),
-        timestamp: Number(attr[4]),
-        pool: Number(attr[5]),
-        userID: Number(attr[6]),
-        rowID: Number(attr[7])
-      } : null;
-    }) : [];
-  }
-
   function artplayerPluginDanmu(option) {
     return function (art) {
       var danmuku = new Danmuku(art, option);
@@ -321,7 +337,8 @@
     };
   }
 
-  artplayerPluginDanmu.bilibiliDanmuParse = bilibiliDanmuParse;
+  artplayerPluginDanmu.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
+  artplayerPluginDanmu.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
   window.artplayerPluginDanmu = artplayerPluginDanmu;
 
   return artplayerPluginDanmu;

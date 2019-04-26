@@ -1,5 +1,5 @@
+import { bilibiliDanmuParseFromXml, bilibiliDanmuParseFromAv } from './bilibiliDanmuParse';
 import Danmuku from './danmuku';
-import bilibiliDanmuParse from './bilibiliDanmuParse';
 
 function artplayerPluginDanmu(option) {
     return art => {
@@ -15,6 +15,7 @@ function artplayerPluginDanmu(option) {
     };
 }
 
-artplayerPluginDanmu.bilibiliDanmuParse = bilibiliDanmuParse;
+artplayerPluginDanmu.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
+artplayerPluginDanmu.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
 window.artplayerPluginDanmu = artplayerPluginDanmu;
 export default artplayerPluginDanmu;
