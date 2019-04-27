@@ -1,19 +1,27 @@
+import { bilibiliDanmuParseFromUrl } from './bilibiliDanmuParse';
+import getDanmuTop from './getDanmuTop';
+
 export default class Danmuku {
-    constructor(art, option = {}) {
+    constructor(art, option) {
         this.art = art;
         this.queue = [];
         this.layer = null;
         this.isStop = false;
         this.animationFrameTimer = null;
-        this.option = Object.assign({}, Danmuku.option, option);
-        art.constructor.validator(this.option, Danmuku.scheme);
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
         art.on('video:waiting', this.stop.bind(this));
         art.on('destroy', this.stop.bind(this));
+        this.config(option);
         if (typeof this.option.danmus === 'function') {
             this.option.danmus().then(danmus => {
+                danmus.forEach(this.addToQueue.bind(this));
+                this.init();
+                art.emit('artplayerPluginDanmu:loaded', danmus);
+            });
+        } else if (typeof this.option.danmus === 'string') {
+            bilibiliDanmuParseFromUrl(this.option.danmus).then(danmus => {
                 danmus.forEach(this.addToQueue.bind(this));
                 this.init();
                 art.emit('artplayerPluginDanmu:loaded', danmus);
@@ -38,7 +46,7 @@ export default class Danmuku {
 
     static get scheme() {
         return {
-            danmus: 'array|function',
+            danmus: 'array|function|string',
             speed: 'number',
             opacity: 'number',
             color: 'string',
@@ -51,6 +59,21 @@ export default class Danmuku {
     static getRect(ref, key) {
         const result = ref.getBoundingClientRect();
         return key ? result[key] : result;
+    }
+
+    config(option) {
+        const {
+            utils: { clamp },
+            validator,
+        } = this.art.constructor;
+        this.option = Object.assign({}, Danmuku.option, option);
+        validator(this.option, Danmuku.scheme);
+        this.option.speed = clamp(this.option.speed, 1, 10);
+        this.option.opacity = clamp(this.option.opacity, 0, 1);
+        this.option.size = clamp(this.option.size, 12, 30);
+        this.option.maxlength = clamp(this.option.maxlength, 10, 100);
+        this.option.margin[0] = clamp(this.option.margin[0], 0, 100);
+        this.option.margin[1] = clamp(this.option.margin[1], 0, 100);
     }
 
     init() {
@@ -86,6 +109,9 @@ export default class Danmuku {
         danmu.$ref.style.top = `${this.getDanmuTop()}px`;
         danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
         danmu.$ref.style.transition = `-webkit-transform ${danmu.$restTime}s linear 0s`;
+        if (danmu.border) {
+            danmu.$ref.style.border = `1px solid ${danmu.border}`;
+        }
         danmu.$state = 'emit';
     }
 
@@ -174,17 +200,50 @@ export default class Danmuku {
 
     getDanmuTop() {
         const { $player } = this.art.template;
-        const playerHeight = Danmuku.getRect($player, 'height');
+        const { left: playerLeft, top: playerTop, height: playerHeight, width: playerWidth } = Danmuku.getRect($player);
         const danmus = this.queue.filter(danmu => danmu.$state === 'emit');
+
         if (danmus.length === 0) {
             return this.option.margin[0];
         }
 
-        if (danmus.length === 1) {
-            return this.option.margin[0] + Danmuku.getRect(danmus[0].$ref, 'height');
-        }
+        const danmusBySort = danmus
+            .map(danmu => {
+                const { left: danmuLeft, top: danmuTop, width: danmuWidth, height: danmuHeight } = Danmuku.getRect(
+                    danmu.$ref,
+                );
+                const top = danmuTop - playerTop;
+                const left = danmuLeft - playerLeft;
+                const right = playerWidth - left - danmuWidth;
+                return {
+                    top,
+                    left,
+                    right,
+                    height: danmuHeight,
+                    width: danmuWidth,
+                };
+            })
+            .sort((prev, next) => {
+                return prev.top - next.top;
+            });
 
-        return 0;
+        danmusBySort.unshift({
+            top: 0,
+            left: 0,
+            right: 0,
+            height: this.option.margin[0],
+            width: playerWidth,
+        });
+
+        danmusBySort.push({
+            top: playerHeight - this.option.margin[1],
+            left: 0,
+            right: 0,
+            height: this.option.margin[1],
+            width: playerWidth,
+        });
+
+        return getDanmuTop(danmusBySort);
     }
 
     update() {
