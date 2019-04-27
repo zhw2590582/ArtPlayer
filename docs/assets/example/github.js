@@ -21,6 +21,10 @@ var art = new Artplayer({
                 } else {
                     var text = prompt('请输入：', '弹幕内容');
                     if (!text || !text.trim()) return;
+                    if (text.length >= 20) {
+                        art.notice.show('弹幕字数不能大于20字！！！');
+                        return;    
+                    }
                     if (github.remaining <= 10) {
                         art.notice.show('接口请求到达上限，请稍后再试！！！');
                         return;
