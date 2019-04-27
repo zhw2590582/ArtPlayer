@@ -41,7 +41,6 @@ var art = new Artplayer({
                             art.plugins.artplayerPluginDanmu.emit({
                                 ...data,
                                 time: art.player.currentTime,
-                                border: data.color,
                             });
                         }).catch(() => {
                             art.notice.show(`发送弹幕失败: ${github.remaining} / ${github.limit}`);
