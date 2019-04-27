@@ -1,4 +1,4 @@
-import ArtplayerToolGithub from 'issues-danmuku/src';
+import ArtplayerToolGithub from 'issues-danmuku';
 
 window.ArtplayerToolGithub = ArtplayerToolGithub;
 export default ArtplayerToolGithub;
