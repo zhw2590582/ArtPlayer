@@ -17,7 +17,10 @@ var art = new Artplayer({
             position: 'right',
             html: '发送弹幕',
             click: () => {
-                if (!github.isLogin) {
+                if (window.location.href.includes('code=')) {
+                    art.notice.show('正在登陆中，请稍等！！！');
+                    return;
+                } else if (!github.isLogin) {
                     github.login();
                 } else {
                     var text = prompt('请输入：', '弹幕内容');
