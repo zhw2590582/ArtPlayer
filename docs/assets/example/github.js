@@ -19,7 +19,6 @@ var art = new Artplayer({
             click: () => {
                 if (window.location.href.includes('code=')) {
                     art.notice.show('正在登陆中，请稍等！！！');
-                    return;
                 } else if (!github.isLogin) {
                     github.login();
                 } else {
