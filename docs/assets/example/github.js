@@ -1,3 +1,4 @@
+// 使用 Github Issues Api 做弹幕接口
 // 接口每小时限制 5000 次请求，勿滥用
 var github = new ArtplayerToolGithub({
     api: 'zhw2590582/github-issues-api-as-danmuku/issues/1',
@@ -41,6 +42,7 @@ var art = new Artplayer({
                             art.plugins.artplayerPluginDanmu.emit({
                                 ...data,
                                 time: art.player.currentTime,
+                                border: data.color,
                             });
                         }).catch(() => {
                             art.notice.show(`发送弹幕失败: ${github.remaining} / ${github.limit}`);
