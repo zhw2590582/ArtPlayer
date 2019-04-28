@@ -246,6 +246,7 @@
       this.layer = null;
       this.isStop = false;
       this.animationFrameTimer = null;
+      art.i18n.update(Danmuku.i18n);
       art.on('video:play', this.start.bind(this));
       art.on('video:playing', this.start.bind(this));
       art.on('video:pause', this.stop.bind(this));
@@ -258,16 +259,12 @@
           danmus.forEach(_this.addToQueue.bind(_this));
 
           _this.init();
-
-          art.emit('artplayerPluginDanmu:loaded', danmus);
         });
       } else if (typeof this.option.danmus === 'string') {
         bilibiliDanmuParseFromUrl(this.option.danmus).then(function (danmus) {
           danmus.forEach(_this.addToQueue.bind(_this));
 
           _this.init();
-
-          art.emit('artplayerPluginDanmu:loaded', danmus);
         });
       } else {
         this.option.danmus.forEach(this.addToQueue.bind(this));
@@ -293,6 +290,7 @@
     }, {
       key: "init",
       value: function init() {
+        this.art.emit('artplayerPluginDanmu:loaded');
         this.layer = this.art.layers.add({
           name: 'danmu',
           style: {
@@ -356,15 +354,16 @@
       value: function addToQueue(danmu) {
         var _this$art = this.art,
             notice = _this$art.notice,
-            player = _this$art.player;
+            player = _this$art.player,
+            i18n = _this$art.i18n;
 
         if (!danmu.text.trim()) {
-          notice('Danmu text cannot be empty');
+          notice.show(i18n.get('Danmu text cannot be empty'));
           return;
         }
 
         if (danmu.text.length > this.option.maxlength) {
-          notice("The length of the danmu does not exceed ".concat(this.option.maxlength));
+          notice.show("".concat(i18n.get('The length of the danmu does not exceed'), " ").concat(this.option.maxlength));
           return;
         }
 
@@ -375,7 +374,8 @@
         this.queue.push(objectSpread({}, danmu, {
           $state: 'wait',
           $ref: null,
-          $restTime: 0
+          $restTime: 0,
+          $lastStartTime: 0
         }));
       }
     }, {
@@ -403,6 +403,9 @@
           waitDanmu.$ref.style.border = 'none';
           waitDanmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
           waitDanmu.$ref.style.transition = 'transform 0s linear 0s';
+          var $children = this.layer.$ref.children;
+          var childrenLen = $children.length;
+          this.layer.$ref.insertBefore(waitDanmu.$ref, $children[childrenLen - 1]);
           return waitDanmu.$ref;
         }
 
@@ -487,7 +490,7 @@
         this.animationFrameTimer = window.requestAnimationFrame(function () {
           if (_this2.layer && player.playing) {
             _this2.queue.filter(function (danmu) {
-              return player.currentTime + 0.25 >= danmu.time && danmu.time >= player.currentTime - 0.25 && danmu.$state === 'wait';
+              return player.currentTime + 0.1 >= danmu.time && danmu.time >= player.currentTime - 0.1 && danmu.$state === 'wait';
             }).forEach(function (danmu) {
               _this2.emit(danmu);
             });
@@ -549,6 +552,20 @@
         danmu.$ref.style.transform = "translateX(".concat(-danmu.$restWidth, "px) translateY(0px) translateZ(0px)");
         danmu.$ref.style.transition = "transform ".concat(danmu.$restTime, "s linear 0s");
         danmu.$state = 'emit';
+      }
+    }, {
+      key: "i18n",
+      get: function get() {
+        return {
+          'zh-cn': {
+            'Danmu text cannot be empty': '弹幕文本不能为空',
+            'The length of the danmu does not exceed': '弹幕文本字数不能超过'
+          },
+          'zh-tw': {
+            'Danmu text cannot be empty': '彈幕文本不能為空',
+            'The length of the danmu does not exceed': '彈幕文本字數不能超過'
+          }
+        };
       }
     }, {
       key: "option",
