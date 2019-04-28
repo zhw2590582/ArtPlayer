@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "dependencies": {
-    "issues-danmuku": "^1.0.4"
+    "issues-danmuku": "latest"
   }
 }
