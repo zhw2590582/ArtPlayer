@@ -189,9 +189,7 @@ export default class Danmuku {
             waitDanmu.$ref.style.border = 'none';
             waitDanmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
             waitDanmu.$ref.style.transition = 'transform 0s linear 0s';
-            const $children = this.layer.$ref.children;
-            const childrenLen = $children.length;
-            this.layer.$ref.insertBefore(waitDanmu.$ref, $children[childrenLen - 1]);
+            this.layer.$ref.appendChild(waitDanmu.$ref);
             return waitDanmu.$ref;
         }
 

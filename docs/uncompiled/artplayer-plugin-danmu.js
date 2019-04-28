@@ -403,9 +403,7 @@
           waitDanmu.$ref.style.border = 'none';
           waitDanmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
           waitDanmu.$ref.style.transition = 'transform 0s linear 0s';
-          var $children = this.layer.$ref.children;
-          var childrenLen = $children.length;
-          this.layer.$ref.insertBefore(waitDanmu.$ref, $children[childrenLen - 1]);
+          this.layer.$ref.appendChild(waitDanmu.$ref);
           return waitDanmu.$ref;
         }
 
