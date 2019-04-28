@@ -71,7 +71,8 @@ export default class Contextmenu {
 
     add(item, callback) {
         const { $contextmenu } = this.art.template;
-        component(this.art, this, $contextmenu, item, callback, 'contextmenu');
+        this.id += 1;
+        return component(this.art, this, $contextmenu, item, callback, 'contextmenu');
     }
 
     setPos(event) {

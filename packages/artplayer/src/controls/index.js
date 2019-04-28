@@ -157,6 +157,7 @@ export default class Controls {
         }
 
         errorHandle(parent, 'Controls option.position can not be empty');
+        this.id += 1;
         return component(this.art, this, parent, option, callback, 'control');
     }
 

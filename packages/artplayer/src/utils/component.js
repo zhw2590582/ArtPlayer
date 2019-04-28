@@ -3,7 +3,6 @@ import { append, insertByIndex, setStyles, setStyle, remove } from './index';
 export default function component(art, parent, target, getOption, callback, title) {
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
     if (!option.disable) {
-        parent.id += 1;
         const name = option.name || `${title}${parent.id}`;
         const $element = document.createElement('div');
         $element.classList.value = `art-${title} art-${title}-${name}`;
@@ -35,6 +34,7 @@ export default function component(art, parent, target, getOption, callback, titl
         }
 
         parent[name] = {
+            id: parent.id,
             $ref: $element,
             hide() {
                 setStyle($element, 'display', 'none');

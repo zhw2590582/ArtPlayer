@@ -37,6 +37,7 @@ export default class Setting {
 
     add(item, callback) {
         const { $settingBody } = this.art.template;
+        this.id += 1;
         return component(this.art, this, $settingBody, item, callback, 'setting');
     }
 
