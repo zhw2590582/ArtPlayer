@@ -7,12 +7,14 @@ export default class Danmuku {
         this.queue = [];
         this.layer = null;
         this.isStop = false;
+        this.refs = [];
         this.animationFrameTimer = null;
         art.i18n.update(Danmuku.i18n);
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
         art.on('video:waiting', this.stop.bind(this));
+        art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
         this.config(option);
         if (typeof this.option.danmus === 'function') {
@@ -135,6 +137,20 @@ export default class Danmuku {
         danmu.$state = 'emit';
     }
 
+    resize() {
+        const { $player } = this.art.template;
+        const { width: playerWidth } = Danmuku.getRect($player);
+        this.queue.forEach(danmu => {
+            danmu.$state = 'wait';
+        });
+        this.refs.forEach($ref => {
+            $ref.style.left = `${playerWidth}px`;
+            $ref.style.border = 'none';
+            $ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+            $ref.style.transition = 'transform 0s linear 0s';
+        });
+    }
+
     suspend(danmu) {
         const { $player } = this.art.template;
         const { left: playerLeft, width: playerWidth } = Danmuku.getRect($player);
@@ -211,6 +227,7 @@ export default class Danmuku {
         });
 
         append(this.layer.$ref, $ref);
+        this.refs.push($ref);
         return $ref;
     }
 

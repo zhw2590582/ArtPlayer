@@ -245,12 +245,14 @@
       this.queue = [];
       this.layer = null;
       this.isStop = false;
+      this.refs = [];
       this.animationFrameTimer = null;
       art.i18n.update(Danmuku.i18n);
       art.on('video:play', this.start.bind(this));
       art.on('video:playing', this.start.bind(this));
       art.on('video:pause', this.stop.bind(this));
       art.on('video:waiting', this.stop.bind(this));
+      art.on('resize', this.resize.bind(this));
       art.on('destroy', this.stop.bind(this));
       this.config(option);
 
@@ -332,16 +334,34 @@
         danmu.$state = 'emit';
       }
     }, {
+      key: "resize",
+      value: function resize() {
+        var $player = this.art.template.$player;
+
+        var _Danmuku$getRect = Danmuku.getRect($player),
+            playerWidth = _Danmuku$getRect.width;
+
+        this.queue.forEach(function (danmu) {
+          danmu.$state = 'wait';
+        });
+        this.refs.forEach(function ($ref) {
+          $ref.style.left = "".concat(playerWidth, "px");
+          $ref.style.border = 'none';
+          $ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+          $ref.style.transition = 'transform 0s linear 0s';
+        });
+      }
+    }, {
       key: "suspend",
       value: function suspend(danmu) {
         var $player = this.art.template.$player;
 
-        var _Danmuku$getRect = Danmuku.getRect($player),
-            playerLeft = _Danmuku$getRect.left,
-            playerWidth = _Danmuku$getRect.width;
+        var _Danmuku$getRect2 = Danmuku.getRect($player),
+            playerLeft = _Danmuku$getRect2.left,
+            playerWidth = _Danmuku$getRect2.width;
 
-        var _Danmuku$getRect2 = Danmuku.getRect(danmu.$ref),
-            danmuLeft = _Danmuku$getRect2.left;
+        var _Danmuku$getRect3 = Danmuku.getRect(danmu.$ref),
+            danmuLeft = _Danmuku$getRect3.left;
 
         danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
         var translateX = playerWidth - (danmuLeft - playerLeft) + 5;
@@ -388,9 +408,9 @@
         var playerLeft = Danmuku.getRect($player, 'left');
         var waitDanmu = this.queue.find(function (danmu) {
           if (danmu.$ref) {
-            var _Danmuku$getRect3 = Danmuku.getRect(danmu.$ref),
-                danmuLeft = _Danmuku$getRect3.left,
-                danmuWidth = _Danmuku$getRect3.width;
+            var _Danmuku$getRect4 = Danmuku.getRect(danmu.$ref),
+                danmuLeft = _Danmuku$getRect4.left,
+                danmuWidth = _Danmuku$getRect4.width;
 
             return danmu.$state === 'emit' && playerLeft > danmuLeft + danmuWidth;
           }
@@ -422,6 +442,7 @@
           textShadow: 'rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px'
         });
         append(this.layer.$ref, $ref);
+        this.refs.push($ref);
         return $ref;
       }
     }, {
@@ -429,11 +450,11 @@
       value: function getDanmuTop$1() {
         var $player = this.art.template.$player;
 
-        var _Danmuku$getRect4 = Danmuku.getRect($player),
-            playerLeft = _Danmuku$getRect4.left,
-            playerTop = _Danmuku$getRect4.top,
-            playerHeight = _Danmuku$getRect4.height,
-            playerWidth = _Danmuku$getRect4.width;
+        var _Danmuku$getRect5 = Danmuku.getRect($player),
+            playerLeft = _Danmuku$getRect5.left,
+            playerTop = _Danmuku$getRect5.top,
+            playerHeight = _Danmuku$getRect5.height,
+            playerWidth = _Danmuku$getRect5.width;
 
         var danmus = this.queue.filter(function (danmu) {
           return danmu.$state === 'emit';
@@ -444,11 +465,11 @@
         }
 
         var danmusBySort = danmus.map(function (danmu) {
-          var _Danmuku$getRect5 = Danmuku.getRect(danmu.$ref),
-              danmuLeft = _Danmuku$getRect5.left,
-              danmuTop = _Danmuku$getRect5.top,
-              danmuWidth = _Danmuku$getRect5.width,
-              danmuHeight = _Danmuku$getRect5.height;
+          var _Danmuku$getRect6 = Danmuku.getRect(danmu.$ref),
+              danmuLeft = _Danmuku$getRect6.left,
+              danmuTop = _Danmuku$getRect6.top,
+              danmuWidth = _Danmuku$getRect6.width,
+              danmuHeight = _Danmuku$getRect6.height;
 
           var top = danmuTop - playerTop;
           var left = danmuLeft - playerLeft;
