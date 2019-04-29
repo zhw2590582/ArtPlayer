@@ -7,7 +7,7 @@ export default class Plugins {
         this.art = art;
         this.id = 0;
 
-        if (this.option.subtitle.url) {
+        if (art.option.subtitle.url) {
             this.add(subtitle);
         }
         
