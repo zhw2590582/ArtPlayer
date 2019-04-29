@@ -7,7 +7,10 @@ export default class Plugins {
         this.art = art;
         this.id = 0;
 
-        this.add(subtitle);
+        if (this.option.subtitle.url) {
+            this.add(subtitle);
+        }
+        
         this.add(localPreview);
         this.add(miniProgressBar);
         art.option.plugins.forEach(plugin => {
