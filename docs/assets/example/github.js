@@ -41,7 +41,7 @@ var art = new Artplayer({
                         })
                         .then(data => {
                             art.notice.show(`发送弹幕成功: ${danmuku.remaining} / ${danmuku.limit}`);
-                            art.plugins.artplayerPluginDanmu.emit({
+                            art.plugins.artplayerPluginDanmuku.emit({
                                 ...data,
                                 time: art.player.currentTime,
                                 border: data.color,
@@ -54,8 +54,8 @@ var art = new Artplayer({
         },
     ],
     plugins: [
-        artplayerPluginDanmu({
-            danmus: () => danmuku.load(),
+        artplayerPluginDanmuku({
+            danmuku: () => danmuku.load(),
             speed: 5,
             opacity: 1,
             color: '#fff',
