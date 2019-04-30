@@ -5219,19 +5219,18 @@
       var i18n = art.i18n,
           player = art.player;
       return objectSpread({}, settingOption, {
-        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-body\">\n                    <div class=\"art-setting-btns\">\n                        <div class=\"art-setting-btn current\">\n                            <span data-flip=\"normal\">").concat(i18n.get('Normal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                        </div>\n                        <div class=\"art-setting-btn\">\n                            <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n                        </div>\n                    </div>\n                </div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
         click: function click(event) {
-          var target = event.target;
-          var flip = target.dataset.flip;
+          var value = event.target.dataset.value;
 
-          if (flip) {
-            player.flip(flip);
+          if (value) {
+            player.flip(value);
           }
         },
         mounted: function mounted($setting) {
           art.on('flipChange', function (flip) {
-            var $current = Array.from($setting.querySelectorAll('span')).find(function (item) {
-              return item.dataset.flip === flip;
+            var $current = Array.from($setting.querySelectorAll('button')).find(function (item) {
+              return item.dataset.value === flip;
             });
             inverseClass($current.parentElement, 'current');
           });
@@ -5361,19 +5360,6 @@
     return Storage;
   }();
 
-  function i18nMix(i18n) {
-    i18n.update({
-      'zh-cn': {
-        'Subtitle offset time': '字幕偏移时间',
-        'No subtitles found': '未发现字幕'
-      },
-      'zh-tw': {
-        'Subtitle offset time': '字幕偏移時間',
-        'No subtitles found': '未發現字幕'
-      }
-    });
-  }
-
   function settingMix(art) {
     var i18n = art.i18n,
         proxy = art.events.proxy;
@@ -5381,7 +5367,7 @@
       title: 'Subtitle',
       name: 'subtitle',
       index: 20,
-      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-body\">\n                <input\n                    style=\"width: 100%;height: 3px;outline: none;appearance: none;-moz-appearance: none;-webkit-appearance: none;background-color: #fff;\"\n                    class=\"art-subtitle-range\"\n                    type=\"range\"\n                    min=\"-5\"\n                    max=\"5\"\n                    step=\"0.5\"\n                >\n            </div>\n        "),
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
       mounted: function mounted($setting) {
         var $range = $setting.querySelector('.art-subtitle-range');
         var $value = $setting.querySelector('.art-subtitle-value');
@@ -5410,7 +5396,16 @@
         notice = art.notice,
         template = art.template,
         i18n = art.i18n;
-    i18nMix(i18n);
+    i18n.update({
+      'zh-cn': {
+        'Subtitle offset time': '字幕偏移时间',
+        'No subtitles found': '未发现字幕'
+      },
+      'zh-tw': {
+        'Subtitle offset time': '字幕偏移時間',
+        'No subtitles found': '未發現字幕'
+      }
+    });
     setting.add(settingMix);
     var cuesCache = [];
     art.on('subtitle:switch', function () {
@@ -5443,7 +5438,7 @@
     };
   }
 
-  function i18nMix$1(i18n) {
+  function i18nMix(i18n) {
     i18n.update({
       'zh-cn': {
         'Playback of this file format is not supported': '不支持播放该文件格式',
@@ -5468,7 +5463,7 @@
         i18n = art.i18n,
         template = art.template,
         player = art.player;
-    i18nMix$1(i18n);
+    i18nMix(i18n);
 
     function loadVideo(file) {
       if (file) {

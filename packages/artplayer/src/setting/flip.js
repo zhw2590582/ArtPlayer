@@ -7,31 +7,28 @@ export default function flip(settingOption) {
             ...settingOption,
             html: `
                 <div class="art-setting-header">${i18n.get('Flip')}</div>
-                <div class="art-setting-body">
-                    <div class="art-setting-btns">
-                        <div class="art-setting-btn current">
-                            <span data-flip="normal">${i18n.get('Normal')}</span>
-                        </div>
-                        <div class="art-setting-btn">
-                            <span data-flip="horizontal">${i18n.get('Horizontal')}</span>
-                        </div>
-                        <div class="art-setting-btn">
-                            <span data-flip="vertical">${i18n.get('Vertical')}</span>
-                        </div>
+                <div class="art-setting-radio">
+                    <div class="art-radio-item current">
+                        <button type="button" data-value="normal">${i18n.get('Normal')}</button>
+                    </div>
+                    <div class="art-radio-item">
+                        <button type="button" data-value="horizontal">${i18n.get('Horizontal')}</button>
+                    </div>
+                    <div class="art-radio-item">
+                        <button type="button" data-value="vertical">${i18n.get('Vertical')}</button>
                     </div>
                 </div>
             `,
             click: event => {
-                const { target } = event;
-                const { flip } = target.dataset;
-                if (flip) {
-                    player.flip(flip);
+                const { value } = event.target.dataset;
+                if (value) {
+                    player.flip(value);
                 }
             },
             mounted: $setting => {
                 art.on('flipChange', flip => {
-                    const $current = Array.from($setting.querySelectorAll('span')).find(
-                        item => item.dataset.flip === flip,
+                    const $current = Array.from($setting.querySelectorAll('button')).find(
+                        item => item.dataset.value === flip,
                     );
                     inverseClass($current.parentElement, 'current');
                 });

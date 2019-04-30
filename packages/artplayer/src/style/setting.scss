@@ -22,7 +22,7 @@
             height: 100%;
             font-size: 12px;
             background: rgba(0, 0, 0, 0.8);
-            transition: all .2s ease-in-out;
+            transition: all 0.2s ease-in-out;
             overflow: hidden;
             .artplayer-setting-body {
                 overflow-y: auto;
@@ -32,40 +32,39 @@
                     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                     padding: 12px 20px 12px 20px;
                     .art-setting-header {
-                        color: #fff;
                         margin-bottom: 10px;
-                    }
-                    .art-setting-body {
-                        color: rgba(255, 255, 255, 0.85);
                     }
                 }
             }
         }
 
-        .art-setting-btns {
+        .art-setting-radio {
             display: flex;
-            margin-left: -4px;
-            margin-right: -4px;
-            .art-setting-btn {
+            .art-radio-item {
                 flex: 1;
-                padding: 0 4px;
-                span {
-                    display: block;
-                    height: 20px;
-                    line-height: 20px;
-                    text-align: center;
+                padding: 0 2px;
+                button {
+                    height: 22px;
+                    width: 100%;
+                    border: none;
+                    outline: none;
                     color: #fff;
-                    background: rgba(255, 255, 255, 0.3);
+                    background: rgba(255, 255, 255, 0.2);
                     border-radius: 2px;
-                    cursor: pointer;
                 }
-                &:hover,
-                &.current {
-                    span {
-                        color: #fff;
-                        background: #00a1d6;
-                    }
+                &.current button {
+                    background: #00a1d6;
                 }
+            }
+        }
+
+        .art-setting-range {
+            input {
+                width: 100%;
+                height: 3px;
+                outline: none;
+                appearance: none;
+                background-color: #fff;
             }
         }
     }
