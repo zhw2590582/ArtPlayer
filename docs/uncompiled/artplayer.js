@@ -4486,6 +4486,7 @@
         var $player = this.art.template.$player;
         this.state = false;
         $player.classList.add('artplayer-subtitle-hide');
+        this.art.emit('subtitle:hide');
       }
     }, {
       key: "toggle",
@@ -5146,7 +5147,7 @@
         var $player = this.art.template.$player;
         this.state = false;
         $player.classList.remove('artplayer-mask-show');
-        this.art.emit('mask:show');
+        this.art.emit('mask:hide');
       }
     }]);
 

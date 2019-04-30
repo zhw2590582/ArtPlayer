@@ -19,6 +19,6 @@ export default class Mask {
         const { $player } = this.art.template;
         this.state = false;
         $player.classList.remove('artplayer-mask-show');
-        this.art.emit('mask:show');
+        this.art.emit('mask:hide');
     }
 }

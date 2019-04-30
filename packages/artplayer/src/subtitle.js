@@ -84,6 +84,7 @@ export default class Subtitle {
         const { $player } = this.art.template;
         this.state = false;
         $player.classList.add('artplayer-subtitle-hide');
+        this.art.emit('subtitle:hide');
     }
 
     toggle() {
