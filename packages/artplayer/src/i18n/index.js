@@ -13,7 +13,8 @@ export default class I18n {
     }
 
     init() {
-        this.language = this.languages[this.art.option.lang.toLowerCase()] || {};
+        const lang = this.art.option.lang.toLowerCase();
+        this.language = this.languages[lang] || {};
     }
 
     get(key) {
