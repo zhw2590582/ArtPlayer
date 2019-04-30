@@ -14,7 +14,7 @@ const copyAfterBuild = require('./copyAfterBuild');
 
 module.exports = function creatRollupConfig(projectPath) {
     const packageJson = JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'), 'utf-8'));
-    const { version, homepage, name } = packageJson;
+    const { version, homepage, name, expose } = packageJson;
     const isProd = process.env.NODE_ENV === 'production';
     const banner =
         '/*!\n' +
@@ -27,7 +27,7 @@ module.exports = function creatRollupConfig(projectPath) {
     return {
         input: path.join(projectPath, 'src/index.js'),
         output: {
-            name,
+            name: expose,
             file: isProd
                 ? path.join(projectPath, `dist/${name}.js`)
                 : path.join(process.cwd(), `docs/uncompiled/${name}.js`),

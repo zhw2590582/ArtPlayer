@@ -155,5 +155,4 @@ function artplayerPluginGif(art) {
     };
 }
 
-window.artplayerPluginGif = artplayerPluginGif;
 export default artplayerPluginGif;

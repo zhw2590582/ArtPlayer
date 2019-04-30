@@ -1,14 +1,15 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, global['artplayer-plugin-playlist'] = factory());
+    (global = global || self, global.artplayerPluginPlaylist = factory());
 }(this, function () { 'use strict';
 
     function artplayerPluginPlaylist(art) {
       var _art$constructor$util = art.constructor.utils,
           append = _art$constructor$util.append,
           errorHandle = _art$constructor$util.errorHandle,
-          sleep = _art$constructor$util.sleep;
+          sleep = _art$constructor$util.sleep,
+          inverseClass = _art$constructor$util.inverseClass;
       var player = art.player,
           proxy = art.events.proxy,
           _art$template = art.template,
@@ -74,14 +75,10 @@
         var index = playlist.findIndex(function (item) {
           return item.url === $video.src;
         });
-        var $children = Array.from($playlistInner.children);
-        var $item = $children[index];
+        var $item = Array.from($playlistInner.children)[index];
 
         if (index !== -1 && $item) {
-          $children.forEach(function (item) {
-            return item.classList.remove('active');
-          });
-          $item.classList.add('active');
+          inverseClass($item, 'active');
         }
       });
       return {
@@ -112,8 +109,6 @@
         }
       };
     }
-
-    window.artplayerPluginPlaylist = artplayerPluginPlaylist;
 
     return artplayerPluginPlaylist;
 

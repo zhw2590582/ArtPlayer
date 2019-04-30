@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global['artplayer-tool-thumbnail'] = factory());
+  (global = global || self, global.ArtplayerToolThumbnail = factory());
 }(this, function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
@@ -491,8 +491,6 @@
 
     return ArtplayerToolThumbnail;
   }(tinyEmitter);
-
-  window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
 
   return ArtplayerToolThumbnail;
 

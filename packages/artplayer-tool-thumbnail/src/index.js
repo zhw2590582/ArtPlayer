@@ -233,5 +233,4 @@ class ArtplayerToolThumbnail extends Emitter {
     }
 }
 
-window.ArtplayerToolThumbnail = ArtplayerToolThumbnail;
 export default ArtplayerToolThumbnail;

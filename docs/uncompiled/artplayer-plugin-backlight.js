@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, global['artplayer-plugin-backlight'] = factory());
+    (global = global || self, global.artplayerPluginBacklight = factory());
 }(this, function () { 'use strict';
 
     function matrixCallback(callback) {
@@ -135,8 +135,6 @@
         name: 'artplayerPluginBacklight'
       };
     }
-
-    window.artplayerPluginBacklight = artplayerPluginBacklight;
 
     return artplayerPluginBacklight;
 

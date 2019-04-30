@@ -107,5 +107,4 @@ function artplayerPluginPlaylist(art) {
     };
 }
 
-window.artplayerPluginPlaylist = artplayerPluginPlaylist;
 export default artplayerPluginPlaylist;

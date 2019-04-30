@@ -112,5 +112,4 @@ function artplayerPluginBacklight(art) {
     };
 }
 
-window.artplayerPluginBacklight = artplayerPluginBacklight;
 export default artplayerPluginBacklight;

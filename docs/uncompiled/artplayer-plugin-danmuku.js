@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global['artplayer-plugin-danmuku'] = factory());
+  (global = global || self, global.artplayerPluginDanmuku = factory());
 }(this, function () { 'use strict';
 
   function _arrayWithHoles(arr) {
@@ -613,7 +613,6 @@
   artplayerPluginDanmuku.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
   artplayerPluginDanmuku.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
   artplayerPluginDanmuku.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
-  window.artplayerPluginDanmuku = artplayerPluginDanmuku;
 
   return artplayerPluginDanmuku;
 

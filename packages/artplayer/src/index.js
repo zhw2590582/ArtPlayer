@@ -162,5 +162,4 @@ Object.defineProperty(Artplayer, 'instances', {
     value: [],
 });
 
-window.Artplayer = Artplayer;
 export default Artplayer;

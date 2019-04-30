@@ -2,7 +2,7 @@ import React from 'react';
 import Artplayer from 'artplayer';
 import 'artplayer/dist/artplayer.css';
 
-export default class ArtplayerComponent extends React.Component {
+export default class ArtplayerReact extends React.Component {
     constructor(props) {
         super(props);
         Artplayer.utils.errorHandle(

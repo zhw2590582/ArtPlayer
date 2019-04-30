@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global['artplayer-plugin-gif'] = factory());
+  (global = global || self, global.artplayerPluginGif = factory());
 }(this, function () { 'use strict';
 
   function _defineProperty(obj, key, value) {
@@ -3048,8 +3048,6 @@
       }
     };
   }
-
-  window.artplayerPluginGif = artplayerPluginGif;
 
   return artplayerPluginGif;
 

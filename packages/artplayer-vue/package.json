@@ -1,6 +1,7 @@
 {
   "name": "artplayer-vue",
   "version": "3.1.7",
+  "expose": "ArtplayerVue",
   "description": "Vue Component for Artplayer",
   "main": "dist/artplayer-vue.js",
   "style": "dist/artplayer-vue.css",

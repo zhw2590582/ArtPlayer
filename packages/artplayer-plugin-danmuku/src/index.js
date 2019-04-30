@@ -19,5 +19,4 @@ function artplayerPluginDanmuku(option) {
 artplayerPluginDanmuku.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
 artplayerPluginDanmuku.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
 artplayerPluginDanmuku.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
-window.artplayerPluginDanmuku = artplayerPluginDanmuku;
 export default artplayerPluginDanmuku;
