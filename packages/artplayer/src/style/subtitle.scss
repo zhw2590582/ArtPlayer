@@ -7,12 +7,18 @@
         padding: 0 20px;
         text-align: center;
         color: #fff;
-        text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
         font-size: 20px;
         pointer-events: none;
+        text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
     
         p {
             margin: 5px 0;
+        }
+    }
+
+    &.artplayer-subtitle-hide {
+        .artplayer-subtitle {
+            display: none;
         }
     }
 }

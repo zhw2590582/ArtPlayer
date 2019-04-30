@@ -3,8 +3,8 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/you-name.mp4',
     autoSize: true,
-    plugins: [artplayerPluginDanmu({
-        danmus: url + '/danmuku/you-name.xml',
+    plugins: [artplayerPluginDanmuku({
+        danmuku: url + '/danmuku/you-name.xml',
         speed: 5,
         opacity: 1,
         color: '#fff',
@@ -15,6 +15,6 @@ var art = new Artplayer({
 });
 
 console.info('弹幕加载中...');
-art.on('artplayerPluginDanmu:loaded', () => {
+art.on('artplayerPluginDanmuku:loaded', () => {
     console.info('弹幕准备就绪');
 });

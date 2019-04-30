@@ -1,4 +1,3 @@
-import { setStyle } from '../utils';
 import component from '../utils/component';
 import flip from './flip';
 
@@ -46,17 +45,17 @@ export default class Setting {
     }
 
     show() {
-        const { $setting } = this.art.template;
-        setStyle($setting, 'display', 'flex');
+        const { $player } = this.art.template;
         this.state = true;
-        this.art.emit('setting:show', $setting);
+        $player.classList.add('artplayer-setting-show');
+        this.art.emit('setting:show');
     }
 
     hide() {
-        const { $setting } = this.art.template;
-        setStyle($setting, 'display', 'none');
+        const { $player } = this.art.template;
         this.state = false;
-        this.art.emit('setting:hide', $setting);
+        $player.classList.remove('artplayer-setting-show');
+        this.art.emit('setting:hide');
     }
 
     toggle() {

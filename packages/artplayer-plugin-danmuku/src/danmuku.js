@@ -5,10 +5,10 @@ export default class Danmuku {
     constructor(art, option) {
         this.art = art;
         this.queue = [];
-        this.layer = null;
         this.isStop = false;
         this.refs = [];
         this.animationFrameTimer = null;
+        this.$danmuku = art.template.$danmuku;
         art.i18n.update(Danmuku.i18n);
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
@@ -17,19 +17,19 @@ export default class Danmuku {
         art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
         this.config(option);
-        if (typeof this.option.danmus === 'function') {
-            this.option.danmus().then(danmus => {
+        if (typeof this.option.danmuku === 'function') {
+            this.option.danmuku().then(danmus => {
                 danmus.forEach(this.addToQueue.bind(this));
-                this.init();
+                art.emit('artplayerPluginDanmuku:loaded');
             });
-        } else if (typeof this.option.danmus === 'string') {
-            bilibiliDanmuParseFromUrl(this.option.danmus).then(danmus => {
+        } else if (typeof this.option.danmuku === 'string') {
+            bilibiliDanmuParseFromUrl(this.option.danmuku).then(danmus => {
                 danmus.forEach(this.addToQueue.bind(this));
-                this.init();
+                art.emit('artplayerPluginDanmuku:loaded');
             });
         } else {
-            this.option.danmus.forEach(this.addToQueue.bind(this));
-            this.init();
+            this.option.danmuku.forEach(this.addToQueue.bind(this));
+            art.emit('artplayerPluginDanmuku:loaded');
         }
     }
 
@@ -48,7 +48,7 @@ export default class Danmuku {
 
     static get option() {
         return {
-            danmus: [],
+            danmuku: [],
             speed: 5,
             opacity: 1,
             color: '#fff',
@@ -60,7 +60,7 @@ export default class Danmuku {
 
     static get scheme() {
         return {
-            danmus: 'array|function|string',
+            danmuku: 'array|function|string',
             speed: 'number',
             opacity: 'number',
             color: 'string',
@@ -88,25 +88,6 @@ export default class Danmuku {
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
         this.option.margin[0] = clamp(this.option.margin[0], 0, 100);
         this.option.margin[1] = clamp(this.option.margin[1], 0, 100);
-    }
-
-    init() {
-        this.art.emit('artplayerPluginDanmu:loaded');
-        this.layer = this.art.layers.add({
-            name: 'danmu',
-            style: {
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                right: 0,
-                bottom: 0,
-                width: '100%',
-                height: '100%',
-                overflow: 'hidden',
-                pointerEvents: 'none',
-                opacity: this.option.opacity,
-            },
-        });
     }
 
     emit(danmu) {
@@ -205,7 +186,7 @@ export default class Danmuku {
             waitDanmu.$ref.style.border = 'none';
             waitDanmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
             waitDanmu.$ref.style.transition = 'transform 0s linear 0s';
-            this.layer.$ref.appendChild(waitDanmu.$ref);
+            this.$danmuku.appendChild(waitDanmu.$ref);
             return waitDanmu.$ref;
         }
 
@@ -226,7 +207,7 @@ export default class Danmuku {
                 'rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px',
         });
 
-        append(this.layer.$ref, $ref);
+        append(this.$danmuku, $ref);
         this.refs.push($ref);
         return $ref;
     }
@@ -282,7 +263,7 @@ export default class Danmuku {
     update() {
         const { player } = this.art;
         this.animationFrameTimer = window.requestAnimationFrame(() => {
-            if (this.layer && player.playing) {
+            if (player.playing) {
                 this.queue
                     .filter(danmu => {
                         return (
@@ -325,12 +306,12 @@ export default class Danmuku {
     }
 
     show() {
-        this.layer.$ref.style = 'none';
+        this.$danmuku.style = 'none';
         this.art.emit('artplayerPluginDanmu:show');
     }
 
     hide() {
-        this.layer.$ref.style = 'block';
+        this.$danmuku.style = 'block';
         this.art.emit('artplayerPluginDanmu:hide');
     }
 }

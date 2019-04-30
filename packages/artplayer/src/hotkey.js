@@ -4,7 +4,7 @@ export default class Hotkey {
         this.keys = {};
 
         this.add(27, () => {
-            if (art.isFocus && art.player.fullscreenWebState) {
+            if (art.player.fullscreenWebState) {
                 art.player.fullscreenWebExit();
             }
         });

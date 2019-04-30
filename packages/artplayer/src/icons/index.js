@@ -1,6 +1,6 @@
 import { errorHandle } from '../utils';
 import loading from './loading.svg';
-import playBig from './play-big.svg';
+import state from './state.svg';
 import play from './play.svg';
 import pause from './pause.svg';
 import volume from './volume.svg';
@@ -19,7 +19,7 @@ export default class Icons {
         const icons = Object.assign(
             {
                 loading,
-                playBig,
+                state,
                 play,
                 pause,
                 volume,

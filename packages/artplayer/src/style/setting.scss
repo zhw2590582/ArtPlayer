@@ -1,30 +1,35 @@
 .artplayer-video-player {
     .artplayer-setting {
-        display: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: absolute;
-        z-index: 80;
+        z-index: 90;
         left: 0;
         top: 0;
         height: 100%;
         width: 100%;
-        align-items: center;
-        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        overflow: hidden;
         .artplayer-setting-inner {
             position: absolute;
             top: 0;
-            right: 0;
+            right: -50%;
             bottom: 0;
             width: 50%;
             height: 100%;
             font-size: 12px;
             background: rgba(0, 0, 0, 0.8);
+            transition: all .2s ease-in-out;
             overflow: hidden;
             .artplayer-setting-body {
                 overflow-y: auto;
                 width: 100%;
                 height: 100%;
                 .art-setting {
-                    border-bottom: 1px solid rgba(255,255,255,.1);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                     padding: 12px 20px 12px 20px;
                     .art-setting-header {
                         color: #fff;
@@ -54,12 +59,24 @@
                     border-radius: 2px;
                     cursor: pointer;
                 }
-                &:hover, &.current {
+                &:hover,
+                &.current {
                     span {
                         color: #fff;
                         background: #00a1d6;
                     }
                 }
+            }
+        }
+    }
+
+    &.artplayer-setting-show {
+        .artplayer-setting {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+            .artplayer-setting-inner {
+                right: 0;
             }
         }
     }

@@ -1,10 +1,11 @@
 .artplayer-video-player {
     .artplayer-info {
         display: none;
+        flex-direction: column;
         position: absolute;
         left: 10px;
         top: 10px;
-        z-index: 90;
+        z-index: 100;
         width: 350px;
         min-height: 150px;
         padding: 10px;
@@ -36,6 +37,12 @@
             top: 5px;
             right: 5px;
             cursor: pointer;
+        }
+    }
+
+    &.artplayer-info-show {
+        .artplayer-info {
+            display: flex;
         }
     }
 }

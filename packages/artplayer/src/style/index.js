@@ -1,6 +1,7 @@
 import './artplayer.scss';
 import './video.scss';
 import './subtitle.scss';
+import './danmuku.scss';
 import './layers.scss';
 import './mask.scss';
 import './loading.scss';

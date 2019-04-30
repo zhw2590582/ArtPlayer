@@ -100,15 +100,17 @@ export default class Contextmenu {
         setStyle($contextmenu, 'top', `${menuTop}px`);
     }
 
-    hide() {
-        const { $contextmenu } = this.art.template;
-        setStyle($contextmenu, 'display', 'none');
-        this.art.emit('contextmenu:hide', $contextmenu);
+    show() {
+        const { $player } = this.art.template;
+        this.state = true;
+        $player.classList.add('artplayer-contextmenu-show');
+        this.art.emit('contextmenu:show');
     }
 
-    show() {
-        const { $contextmenu } = this.art.template;
-        setStyle($contextmenu, 'display', 'block');
-        this.art.emit('contextmenu:show', $contextmenu);
+    hide() {
+        const { $player } = this.art.template;
+        this.state = false;
+        $player.classList.remove('artplayer-contextmenu-show');
+        this.art.emit('contextmenu:hide');
     }
 }

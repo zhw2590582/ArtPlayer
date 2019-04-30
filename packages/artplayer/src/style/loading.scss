@@ -2,7 +2,7 @@
     .artplayer-loading {
         display: none;
         position: absolute;
-        z-index: 60;
+        z-index: 70;
         left: 0;
         top: 0;
         right: 0;
@@ -12,5 +12,11 @@
         align-items: center;
         justify-content: center;
         pointer-events: none;
+    }
+
+    &.artplayer-loading-show {
+        .artplayer-loading {
+            display: flex;
+        }
     }
 }

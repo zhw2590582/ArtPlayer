@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global['artplayer-plugin-danmu'] = factory());
+  (global = global || self, global['artplayer-plugin-danmuku'] = factory());
 }(this, function () { 'use strict';
 
   function _arrayWithHoles(arr) {
@@ -259,16 +259,16 @@
       if (typeof this.option.danmuku === 'function') {
         this.option.danmuku().then(function (danmus) {
           danmus.forEach(_this.addToQueue.bind(_this));
-          art.emit('artplayerPluginDanmu:loaded');
+          art.emit('artplayerPluginDanmuku:loaded');
         });
       } else if (typeof this.option.danmuku === 'string') {
         bilibiliDanmuParseFromUrl(this.option.danmuku).then(function (danmus) {
           danmus.forEach(_this.addToQueue.bind(_this));
-          art.emit('artplayerPluginDanmu:loaded');
+          art.emit('artplayerPluginDanmuku:loaded');
         });
       } else {
         this.option.danmuku.forEach(this.addToQueue.bind(this));
-        art.emit('artplayerPluginDanmu:loaded');
+        art.emit('artplayerPluginDanmuku:loaded');
       }
     }
 
@@ -595,11 +595,11 @@
     return Danmuku;
   }();
 
-  function artplayerPluginDanmu(option) {
+  function artplayerPluginDanmuku(option) {
     return function (art) {
       var danmuku = new Danmuku(art, option);
       return {
-        name: 'artplayerPluginDanmu',
+        name: 'artplayerPluginDanmuku',
         emit: danmuku.addToQueue.bind(danmuku),
         config: danmuku.config.bind(danmuku),
         start: danmuku.start.bind(danmuku),
@@ -610,12 +610,12 @@
     };
   }
 
-  artplayerPluginDanmu.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
-  artplayerPluginDanmu.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
-  artplayerPluginDanmu.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
-  window.artplayerPluginDanmu = artplayerPluginDanmu;
+  artplayerPluginDanmuku.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
+  artplayerPluginDanmuku.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
+  artplayerPluginDanmuku.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
+  window.artplayerPluginDanmuku = artplayerPluginDanmuku;
 
-  return artplayerPluginDanmu;
+  return artplayerPluginDanmuku;
 
 }));
-//# sourceMappingURL=artplayer-plugin-danmu.js.map
+//# sourceMappingURL=artplayer-plugin-danmuku.js.map

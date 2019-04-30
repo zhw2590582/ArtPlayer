@@ -1,4 +1,3 @@
-import { setStyle } from './utils';
 import component from './utils/component';
 
 export default class Layers {
@@ -20,14 +19,16 @@ export default class Layers {
     }
 
     show() {
-        const { $layers } = this.art.template;
-        setStyle($layers, 'display', 'block');
-        this.art.emit('layers:show', $layers);
+        const { $player } = this.art.template;
+        this.state = true;
+        $player.classList.remove('artplayer-layers-hide');
+        this.art.emit('layers:show');
     }
 
     hide() {
-        const { $layers } = this.art.template;
-        setStyle($layers, 'display', 'none');
-        this.art.emit('layers:hide', $layers);
+        const { $player } = this.art.template;
+        this.state = false;
+        $player.classList.add('artplayer-layers-hide');
+        this.art.emit('layers:hide');
     }
 }

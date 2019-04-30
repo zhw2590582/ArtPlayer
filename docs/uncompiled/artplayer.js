@@ -731,10 +731,11 @@
     createClass(Template, [{
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu\"></div>\n          </div>\n        ";
         this.$player = this.$container.querySelector('.artplayer-video-player');
         this.$video = this.$container.querySelector('.artplayer-video');
         this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
+        this.$danmuku = this.$container.querySelector('.artplayer-danmuku');
         this.$bottom = this.$container.querySelector('.artplayer-bottom');
         this.$progress = this.$container.querySelector('.artplayer-progress');
         this.$controls = this.$container.querySelector('.artplayer-controls');
@@ -4007,6 +4008,7 @@
       key: "show",
       value: function show() {
         var $player = this.art.template.$player;
+        this.state = true;
         $player.classList.add('artplayer-controls-show');
         this.art.emit('controls:show');
       }
@@ -4014,6 +4016,7 @@
       key: "hide",
       value: function hide() {
         var $player = this.art.template.$player;
+        this.state = false;
         $player.classList.remove('artplayer-controls-show');
         this.art.emit('controls:hide');
       }
@@ -4216,18 +4219,20 @@
         setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
       }
     }, {
-      key: "hide",
-      value: function hide() {
-        var $contextmenu = this.art.template.$contextmenu;
-        setStyle($contextmenu, 'display', 'none');
-        this.art.emit('contextmenu:hide', $contextmenu);
-      }
-    }, {
       key: "show",
       value: function show() {
-        var $contextmenu = this.art.template.$contextmenu;
-        setStyle($contextmenu, 'display', 'block');
-        this.art.emit('contextmenu:show', $contextmenu);
+        var $player = this.art.template.$player;
+        this.state = true;
+        $player.classList.add('artplayer-contextmenu-show');
+        this.art.emit('contextmenu:show');
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        var $player = this.art.template.$player;
+        this.state = false;
+        $player.classList.remove('artplayer-contextmenu-show');
+        this.art.emit('contextmenu:hide');
       }
     }]);
 
@@ -4262,22 +4267,6 @@
         });
       }
     }, {
-      key: "show",
-      value: function show() {
-        var _this$art$template = this.art.template,
-            $info = _this$art$template.$info,
-            $infoPanel = _this$art$template.$infoPanel;
-        setStyle($info, 'display', 'block');
-
-        if (!$infoPanel.innerHTML) {
-          append($infoPanel, this.creatInfo());
-        }
-
-        clearTimeout(this.timer);
-        this.loop();
-        this.art.emit('info:show', $info);
-      }
-    }, {
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
@@ -4292,9 +4281,9 @@
     }, {
       key: "readInfo",
       value: function readInfo() {
-        var _this$art$template2 = this.art.template,
-            $infoPanel = _this$art$template2.$infoPanel,
-            $video = _this$art$template2.$video;
+        var _this$art$template = this.art.template,
+            $infoPanel = _this$art$template.$infoPanel,
+            $video = _this$art$template.$video;
         var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
         types.forEach(function (item) {
           var value = $video[item.dataset.video];
@@ -4319,12 +4308,30 @@
         }, 1000);
       }
     }, {
+      key: "show",
+      value: function show() {
+        var _this$art$template2 = this.art.template,
+            $player = _this$art$template2.$player,
+            $infoPanel = _this$art$template2.$infoPanel;
+        this.state = true;
+        $player.classList.add('artplayer-info-show');
+
+        if (!$infoPanel.innerHTML) {
+          append($infoPanel, this.creatInfo());
+        }
+
+        clearTimeout(this.timer);
+        this.loop();
+        this.art.emit('info:show');
+      }
+    }, {
       key: "hide",
       value: function hide() {
-        var $info = this.art.template.$info;
-        setStyle($info, 'display', 'none');
+        var $player = this.art.template.$player;
+        this.state = false;
+        $player.classList.remove('artplayer-info-show');
         clearTimeout(this.timer);
-        this.art.emit('info:hide', $info);
+        this.art.emit('info:hide');
       }
     }]);
 
@@ -4468,26 +4475,17 @@
     }, {
       key: "show",
       value: function show() {
-        var _this$art2 = this.art,
-            $subtitle = _this$art2.template.$subtitle,
-            i18n = _this$art2.i18n,
-            notice = _this$art2.notice;
-        setStyle($subtitle, 'display', 'block');
+        var $player = this.art.template.$player;
         this.state = true;
-        notice.show(i18n.get('Show subtitle'));
-        this.art.emit('subtitle:show', $subtitle);
+        $player.classList.remove('artplayer-subtitle-hide');
+        this.art.emit('subtitle:show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var _this$art3 = this.art,
-            $subtitle = _this$art3.template.$subtitle,
-            i18n = _this$art3.i18n,
-            notice = _this$art3.notice;
-        setStyle($subtitle, 'display', 'none');
+        var $player = this.art.template.$player;
         this.state = false;
-        notice.show(i18n.get('Hide subtitle'));
-        this.art.emit('subtitle:hide', $subtitle);
+        $player.classList.add('artplayer-subtitle-hide');
       }
     }, {
       key: "toggle",
@@ -4931,7 +4929,7 @@
       this.art = art;
       this.keys = {};
       this.add(27, function () {
-        if (art.isFocus && art.player.fullscreenWebState) {
+        if (art.player.fullscreenWebState) {
           art.player.fullscreenWebExit();
         }
       });
@@ -5026,16 +5024,18 @@
     }, {
       key: "show",
       value: function show() {
-        var $layers = this.art.template.$layers;
-        setStyle($layers, 'display', 'block');
-        this.art.emit('layers:show', $layers);
+        var $player = this.art.template.$player;
+        this.state = true;
+        $player.classList.remove('artplayer-layers-hide');
+        this.art.emit('layers:show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $layers = this.art.template.$layers;
-        setStyle($layers, 'display', 'none');
-        this.art.emit('layers:hide', $layers);
+        var $player = this.art.template.$player;
+        this.state = false;
+        $player.classList.add('artplayer-layers-hide');
+        this.art.emit('layers:hide');
       }
     }]);
 
@@ -5054,18 +5054,20 @@
     }
 
     createClass(Loading, [{
-      key: "hide",
-      value: function hide() {
-        var $loading = this.art.template.$loading;
-        setStyle($loading, 'display', 'none');
-        this.art.emit('loading:hide', $loading);
-      }
-    }, {
       key: "show",
       value: function show() {
-        var $loading = this.art.template.$loading;
-        setStyle($loading, 'display', 'flex');
-        this.art.emit('loading:show', $loading);
+        var $player = this.art.template.$player;
+        this.state = true;
+        $player.classList.add('artplayer-loading-show');
+        this.art.emit('loading:show');
+      }
+    }, {
+      key: "hide",
+      value: function hide() {
+        var $player = this.art.template.$player;
+        this.state = false;
+        $player.classList.remove('artplayer-loading-show');
+        this.art.emit('loading:hide');
       }
     }]);
 
@@ -5090,9 +5092,10 @@
         var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
         var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
         var _this$art$template = this.art.template,
-            $notice = _this$art$template.$notice,
+            $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
-        setStyle($notice, 'display', 'block');
+        this.state = true;
+        $player.classList.add('artplayer-notice-show');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
         clearTimeout(this.timer);
 
@@ -5102,14 +5105,15 @@
           }, time);
         }
 
-        this.art.emit('notice:show', $notice);
+        this.art.emit('notice:show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $notice = this.art.template.$notice;
-        setStyle($notice, 'display', 'none');
-        this.art.emit('notice:hide', $notice);
+        var $player = this.art.template.$player;
+        this.state = false;
+        $player.classList.remove('artplayer-notice-show');
+        this.art.emit('notice:hide');
       }
     }]);
 
@@ -5124,23 +5128,25 @@
 
       this.art = art;
       var $mask = art.template.$mask;
-      var $playBig = append($mask, '<div class="art-playBig"></div>');
-      append($playBig, art.icons.playBig);
+      var $playBig = append($mask, '<div class="art-state"></div>');
+      append($playBig, art.icons.state);
     }
 
     createClass(Mask, [{
       key: "show",
       value: function show() {
-        var $mask = this.art.template.$mask;
-        setStyle($mask, 'display', 'flex');
-        this.art.emit('mask:show', $mask);
+        var $player = this.art.template.$player;
+        this.state = true;
+        $player.classList.add('artplayer-mask-show');
+        this.art.emit('mask:show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $mask = this.art.template.$mask;
-        setStyle($mask, 'display', 'none');
-        this.art.emit('mask:show', $mask);
+        var $player = this.art.template.$player;
+        this.state = false;
+        $player.classList.remove('artplayer-mask-show');
+        this.art.emit('mask:show');
       }
     }]);
 
@@ -5149,7 +5155,7 @@
 
   var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
 
-  var playBig = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"60\" width=\"60\" style=\"filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\">\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16 C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\"/>\n</svg>";
+  var state = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"60\" width=\"60\" style=\"filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\">\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16 C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\"/>\n</svg>";
 
   var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
 
@@ -5182,7 +5188,7 @@
 
     var icons = Object.assign({
       loading: loading,
-      playBig: playBig,
+      state: state,
       play: play,
       pause: pause,
       volume: volume$1,
@@ -5283,18 +5289,18 @@
     }, {
       key: "show",
       value: function show() {
-        var $setting = this.art.template.$setting;
-        setStyle($setting, 'display', 'flex');
+        var $player = this.art.template.$player;
         this.state = true;
-        this.art.emit('setting:show', $setting);
+        $player.classList.add('artplayer-setting-show');
+        this.art.emit('setting:show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        var $setting = this.art.template.$setting;
-        setStyle($setting, 'display', 'none');
+        var $player = this.art.template.$player;
         this.state = false;
-        this.art.emit('setting:hide', $setting);
+        $player.classList.remove('artplayer-setting-show');
+        this.art.emit('setting:hide');
       }
     }, {
       key: "toggle",
@@ -5807,10 +5813,7 @@
             controls: false,
             preload: 'auto'
           },
-          icons: {
-            loading: '',
-            playBig: ''
-          },
+          icons: {},
           customType: {},
           lang: navigator.language.toLowerCase()
         };

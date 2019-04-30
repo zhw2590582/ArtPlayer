@@ -1,7 +1,7 @@
 .artplayer-video-player {
     .artplayer-layers {
         position: absolute;
-        z-index: 30;
+        z-index: 40;
         left: 0;
         top: 0;
         right: 0;
@@ -12,6 +12,12 @@
         pointer-events: none;    
         .art-layer {
             pointer-events: all;
+        }
+    }
+
+    &.artplayer-layers-hide {
+        .artplayer-layers {
+            display: none;
         }
     }
 }

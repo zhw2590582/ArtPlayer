@@ -1,8 +1,9 @@
 .artplayer-video-player {
     .artplayer-contextmenu {
         display: none;
+        flex-direction: column;
         position: absolute;
-        z-index: 110;
+        z-index: 120;
         left: 0;
         top: 0;
         min-width: 200px;
@@ -42,6 +43,12 @@
             &:last-child {
                 border-bottom: none;
             }
+        }
+    }
+
+    &.artplayer-contextmenu-show {
+        .artplayer-contextmenu {
+            display: flex;
         }
     }
 }

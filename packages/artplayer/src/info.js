@@ -1,4 +1,4 @@
-import { append, setStyle } from './utils';
+import { append } from './utils';
 
 export default class Info {
     constructor(art) {
@@ -19,17 +19,6 @@ export default class Info {
                 clearTimeout(this.timer);
             }
         });
-    }
-
-    show() {
-        const { $info, $infoPanel } = this.art.template;
-        setStyle($info, 'display', 'block');
-        if (!$infoPanel.innerHTML) {
-            append($infoPanel, this.creatInfo());
-        }
-        clearTimeout(this.timer);
-        this.loop();
-        this.art.emit('info:show', $info);
     }
 
     creatInfo() {
@@ -103,10 +92,23 @@ export default class Info {
         }, 1000);
     }
 
-    hide() {
-        const { $info } = this.art.template;
-        setStyle($info, 'display', 'none');
+    show() {
+        const { $player, $infoPanel } = this.art.template;
+        this.state = true;
+        $player.classList.add('artplayer-info-show');
+        if (!$infoPanel.innerHTML) {
+            append($infoPanel, this.creatInfo());
+        }
         clearTimeout(this.timer);
-        this.art.emit('info:hide', $info);
+        this.loop();
+        this.art.emit('info:show');
+    }
+
+    hide() {
+        const { $player } = this.art.template;
+        this.state = false;
+        $player.classList.remove('artplayer-info-show');
+        clearTimeout(this.timer);
+        this.art.emit('info:hide');
     }
 }

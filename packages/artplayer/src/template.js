@@ -25,6 +25,7 @@ export default class Template {
           <div class="artplayer-video-player">
             <video class="artplayer-video"></video>
             <div class="artplayer-subtitle"></div>
+            <div class="artplayer-danmuku"></div>
             <div class="artplayer-layers"></div>
             <div class="artplayer-mask"></div>
             <div class="artplayer-bottom">
@@ -57,6 +58,7 @@ export default class Template {
         this.$player = this.$container.querySelector('.artplayer-video-player');
         this.$video = this.$container.querySelector('.artplayer-video');
         this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
+        this.$danmuku = this.$container.querySelector('.artplayer-danmuku');
         this.$bottom = this.$container.querySelector('.artplayer-bottom');
         this.$progress = this.$container.querySelector('.artplayer-progress');
         this.$controls = this.$container.querySelector('.artplayer-controls');

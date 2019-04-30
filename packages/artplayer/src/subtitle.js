@@ -1,4 +1,4 @@
-import { setStyles, setStyle, srtToVtt, vttToBlob } from './utils';
+import { setStyles, srtToVtt, vttToBlob } from './utils';
 
 export default class Subtitle {
     constructor(art) {
@@ -74,28 +74,16 @@ export default class Subtitle {
     }
 
     show() {
-        const {
-            template: { $subtitle },
-            i18n,
-            notice,
-        } = this.art;
-        setStyle($subtitle, 'display', 'block');
+        const { $player } = this.art.template;
         this.state = true;
-        notice.show(i18n.get('Show subtitle'));
-        this.art.emit('subtitle:show', $subtitle);
+        $player.classList.remove('artplayer-subtitle-hide');
+        this.art.emit('subtitle:show');
     }
 
     hide() {
-        const {
-            template: { $subtitle },
-            i18n,
-            notice,
-        } = this.art;
-        
-        setStyle($subtitle, 'display', 'none');
+        const { $player } = this.art.template;
         this.state = false;
-        notice.show(i18n.get('Hide subtitle'));
-        this.art.emit('subtitle:hide', $subtitle);
+        $player.classList.add('artplayer-subtitle-hide');
     }
 
     toggle() {

@@ -1,4 +1,4 @@
-import { append, setStyle } from './utils';
+import { append } from './utils';
 
 export default class Loading {
     constructor(art) {
@@ -7,15 +7,17 @@ export default class Loading {
         append($loading, art.icons.loading);
     }
 
-    hide() {
-        const { $loading } = this.art.template;
-        setStyle($loading, 'display', 'none');
-        this.art.emit('loading:hide', $loading);
+    show() {
+        const { $player } = this.art.template;
+        this.state = true;
+        $player.classList.add('artplayer-loading-show');
+        this.art.emit('loading:show');
     }
 
-    show() {
-        const { $loading } = this.art.template;
-        setStyle($loading, 'display', 'flex');
-        this.art.emit('loading:show', $loading);
+    hide() {
+        const { $player } = this.art.template;
+        this.state = false;
+        $player.classList.remove('artplayer-loading-show');
+        this.art.emit('loading:hide');
     }
 }

@@ -110,10 +110,7 @@ class Artplayer extends Emitter {
                 controls: false,
                 preload: 'auto',
             },
-            icons: {
-                loading: '',
-                playBig: '',
-            },
+            icons: {},
             customType: {},
             lang: navigator.language.toLowerCase(),
         };

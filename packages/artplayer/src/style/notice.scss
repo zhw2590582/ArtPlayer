@@ -3,7 +3,7 @@
         display: none;
         font-size: 14px;
         position: absolute;
-        z-index: 70;
+        z-index: 80;
         left: 0;
         top: 0;
         padding: 10px;
@@ -15,6 +15,12 @@
             color: #fff;
             background: rgba(0, 0, 0, 0.6);
             border-radius: 3px;
+        }
+    }
+
+    &.artplayer-notice-show {
+        .artplayer-notice {
+            display: flex;
         }
     }
 }

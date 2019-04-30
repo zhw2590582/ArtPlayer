@@ -1,11 +1,11 @@
 import { bilibiliDanmuParseFromXml, bilibiliDanmuParseFromAv, bilibiliDanmuParseFromUrl } from './bilibiliDanmuParse';
 import Danmuku from './danmuku';
 
-function artplayerPluginDanmu(option) {
+function artplayerPluginDanmuku(option) {
     return art => {
         const danmuku = new Danmuku(art, option);
         return {
-            name: 'artplayerPluginDanmu',
+            name: 'artplayerPluginDanmuku',
             emit: danmuku.addToQueue.bind(danmuku),
             config: danmuku.config.bind(danmuku),
             start: danmuku.start.bind(danmuku),
@@ -16,8 +16,8 @@ function artplayerPluginDanmu(option) {
     };
 }
 
-artplayerPluginDanmu.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
-artplayerPluginDanmu.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
-artplayerPluginDanmu.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
-window.artplayerPluginDanmu = artplayerPluginDanmu;
-export default artplayerPluginDanmu;
+artplayerPluginDanmuku.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
+artplayerPluginDanmuku.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
+artplayerPluginDanmuku.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
+window.artplayerPluginDanmuku = artplayerPluginDanmuku;
+export default artplayerPluginDanmuku;

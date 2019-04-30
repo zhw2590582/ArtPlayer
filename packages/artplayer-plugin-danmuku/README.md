@@ -1,35 +1,35 @@
-# artplayer-plugin-danmu
-Danmu plugin for ArtPlayer
+# artplayer-plugin-danmuku
+Danmuku plugin for ArtPlayer
 
 ## Demo
 
-[Checkout the demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmu.js&example=danmu) from Github Pages
+[Checkout the demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku) from Github Pages
 
 ## Install
 
 Install with `npm`
 
 ```
-$ npm install artplayer-plugin-danmu
+$ npm install artplayer-plugin-danmuku
 ```
 
 Or install with `yarn`
 
 ```
-$ yarn add artplayer-plugin-danmu
+$ yarn add artplayer-plugin-danmuku
 ```
 
 ```js
-import artplayerPluginBacklight from 'artplayer-plugin-danmu';
+import artplayerPluginBacklight from 'artplayer-plugin-danmuku';
 ```
 
 Or umd builds are also available
 
 ```html
-<script src="artplayer-plugin-danmu.js"></script>
+<script src="artplayer-plugin-danmuku.js"></script>
 ```
 
-Will expose the global variable to `window.artplayerPluginDanmu`.
+Will expose the global variable to `window.artplayerPluginDanmuku`.
 
 ## Usage
 
@@ -37,8 +37,8 @@ Will expose the global variable to `window.artplayerPluginDanmu`.
 var art = new Artplayer({
     container: '.artplayer-app',
     url: 'path/to/video.mp4',
-    plugins: [artplayerPluginDanmu({
-        danmus: [], // Can be an array or return the promised function or danmuku xml url
+    plugins: [artplayerPluginDanmuku({
+        danmuku: [], // Can be an array or return the promised function or danmuku xml url
         speed: 5, // Animation time
         opacity: 1, // Opacity
         color: '#fff', // Font color
@@ -49,7 +49,7 @@ var art = new Artplayer({
 });
 
 // Send danmu
-art.plugins.artplayerPluginDanmu.emit({
+art.plugins.artplayerPluginDanmuku.emit({
     text: '666', // Danmu text
     time: 5, // Video time
     color: '#fff', // Danmu color
@@ -58,19 +58,19 @@ art.plugins.artplayerPluginDanmu.emit({
 });
 
 // Start danmu
-art.plugins.artplayerPluginDanmu.start();
+art.plugins.artplayerPluginDanmuku.start();
 
 // Stop danmu
-art.plugins.artplayerPluginDanmu.stop();
+art.plugins.artplayerPluginDanmuku.stop();
 
 // Hide danmu
-art.plugins.artplayerPluginDanmu.hide();
+art.plugins.artplayerPluginDanmuku.hide();
 
 // Show danmu
-art.plugins.artplayerPluginDanmu.show();
+art.plugins.artplayerPluginDanmuku.show();
 
 // Config danmu
-art.plugins.artplayerPluginDanmu.config({
+art.plugins.artplayerPluginDanmuku.config({
     // option
 });
 ```

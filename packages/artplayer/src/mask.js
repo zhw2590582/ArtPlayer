@@ -1,22 +1,24 @@
-import { append, setStyle } from './utils';
+import { append } from './utils';
 
 export default class Mask {
     constructor(art) {
         this.art = art;
         const { $mask } = art.template;
-        const $playBig = append($mask, '<div class="art-playBig"></div>');
-        append($playBig, art.icons.playBig);
+        const $playBig = append($mask, '<div class="art-state"></div>');
+        append($playBig, art.icons.state);
     }
 
     show() {
-        const { $mask } = this.art.template;
-        setStyle($mask, 'display', 'flex');
-        this.art.emit('mask:show', $mask);
+        const { $player } = this.art.template;
+        this.state = true;
+        $player.classList.add('artplayer-mask-show');
+        this.art.emit('mask:show');
     }
 
     hide() {
-        const { $mask } = this.art.template;
-        setStyle($mask, 'display', 'none');
-        this.art.emit('mask:show', $mask);
+        const { $player } = this.art.template;
+        this.state = false;
+        $player.classList.remove('artplayer-mask-show');
+        this.art.emit('mask:show');
     }
 }
