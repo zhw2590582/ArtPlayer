@@ -3,7 +3,6 @@ export default function doubleClickInit(art, events) {
         template: { $video },
     } = art;
     events.proxy($video, 'dblclick', () => {
-        art.player.fullscreenToggle();
         art.emit('dblclick');
     });
 }

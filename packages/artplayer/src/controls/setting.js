@@ -1,5 +1,4 @@
 import { append, tooltip, setStyle } from '../utils';
-import icons from '../icons';
 
 export default function setting(controlOption) {
     return art => ({
@@ -11,7 +10,7 @@ export default function setting(controlOption) {
                 setting,
             } = art;
             
-            const $setting = append($control, icons.setting);
+            const $setting = append($control, art.icons.setting);
             tooltip($setting, i18n.get('Show setting'));
 
             proxy($control, 'click', () => {

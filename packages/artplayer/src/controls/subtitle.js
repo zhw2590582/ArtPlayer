@@ -1,5 +1,4 @@
 import { append, tooltip, setStyle } from '../utils';
-import icons from '../icons';
 
 export default function subtitle(controlOption) {
     return art => ({
@@ -11,7 +10,7 @@ export default function subtitle(controlOption) {
                 subtitle,
             } = art;
             
-            const $subtitle = append($control, icons.subtitle);
+            const $subtitle = append($control, art.icons.subtitle);
             tooltip($subtitle, i18n.get('Hide subtitle'));
 
             proxy($control, 'click', () => {

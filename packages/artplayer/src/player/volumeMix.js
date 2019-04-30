@@ -11,14 +11,12 @@ export default function volumeMix(art, player) {
     Object.defineProperty(player, 'volume', {
         get: () => $video.volume || 0,
         set: percentage => {
-            if (percentage !== undefined) {
-                $video.volume = clamp(percentage, 0, 1);
-                notice.show(`${i18n.get('Volume')}: ${parseInt($video.volume * 100, 10)}`);
-                if ($video.volume !== 0) {
-                    storage.set('volume', $video.volume);
-                }
-                art.emit('volumeChange', $video.volume);
+            $video.volume = clamp(percentage, 0, 1);
+            notice.show(`${i18n.get('Volume')}: ${parseInt($video.volume * 100, 10)}`);
+            if ($video.volume !== 0) {
+                storage.set('volume', $video.volume);
             }
+            art.emit('volumeChange', $video.volume);
         },
     });
 

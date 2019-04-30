@@ -14,8 +14,8 @@ export default class Layers {
     }
 
     add(item, callback) {
-        const { $layers } = this.art.template;
         this.id += 1;
+        const { $layers } = this.art.template;
         return component(this.art, this, $layers, item, callback, 'layer');
     }
 

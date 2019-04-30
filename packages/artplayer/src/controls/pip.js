@@ -1,5 +1,4 @@
 import { append, tooltip } from '../utils';
-import icons from '../icons';
 
 export default function pip(controlOption) {
     return art => ({
@@ -10,7 +9,7 @@ export default function pip(controlOption) {
                 i18n,
                 player,
             } = art;
-            const $pip = append($control, icons.pip);
+            const $pip = append($control, art.icons.pip);
             tooltip($pip, i18n.get('Mini player'));
             proxy($control, 'click', () => {
                 player.pipEnabled();

@@ -1,16 +1,11 @@
-import icons from './icons';
 import { append, setStyle } from './utils';
 
 export default class Mask {
     constructor(art) {
         this.art = art;
-        const {
-            option,
-            template: { $mask },
-        } = art;
-        
+        const { $mask } = art.template;
         const $playBig = append($mask, '<div class="art-playBig"></div>');
-        append($playBig, option.icons.playBig || icons.playBig);
+        append($playBig, art.icons.playBig);
     }
 
     show() {

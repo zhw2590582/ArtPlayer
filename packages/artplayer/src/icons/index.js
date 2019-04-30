@@ -1,3 +1,4 @@
+import { errorHandle } from '../utils';
 import loading from './loading.svg';
 import playBig from './play-big.svg';
 import play from './play.svg';
@@ -13,32 +14,35 @@ import pip from './pip.svg';
 import prev from './prev.svg';
 import next from './next.svg';
 
-const icons = {};
-const svgs = {
-    loading,
-    playBig,
-    play,
-    pause,
-    volume,
-    volumeClose,
-    subtitle,
-    screenshot,
-    setting,
-    fullscreen,
-    fullscreenWeb,
-    pip,
-    prev,
-    next,
-};
+export default class Icons {
+    constructor(art) {
+        const icons = Object.assign(
+            {
+                loading,
+                playBig,
+                play,
+                pause,
+                volume,
+                volumeClose,
+                subtitle,
+                screenshot,
+                setting,
+                fullscreen,
+                fullscreenWeb,
+                pip,
+                prev,
+                next,
+            },
+            art.option.icons,
+        );
 
-Object.keys(svgs).forEach(key => {
-    Object.defineProperty(icons, key, {
-        get() {
-            const tmp = document.createElement('div');
-            tmp.innerHTML = `<i class="art-icon art-icon-${key}">${svgs[key]}</i>`;
-            return tmp.childNodes[0];
-        },
-    });
-});
-
-export default icons;
+        Object.keys(icons).forEach(key => {
+            errorHandle(typeof icons[key] === 'string', 'Custom icon values ​​only support string types.');
+            const icon = document.createElement('i');
+            icon.classList.add('art-icon');
+            icon.classList.add(`art-icon-${key}`);
+            icon.innerHTML = icons[key];
+            this[key] = icon;
+        });
+    }
+}

@@ -1,14 +1,13 @@
-import optionValidator from 'option-validator';
-
 export default class Whitelist {
     constructor(art) {
+        const { kindOf } = art.constructor;
         const { whitelist } = art.option;
         this.userAgent = window.navigator.userAgent;
         this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
         this.state =
             !this.isMobile ||
             whitelist.some(item => {
-                const type = optionValidator.kindOf(item);
+                const type = kindOf(item);
                 let result = false;
                 switch (type) {
                     case 'string':

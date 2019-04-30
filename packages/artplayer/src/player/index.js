@@ -19,6 +19,7 @@ import loadedMix from './loadedMix';
 import playedMix from './playedMix';
 import playingMix from './playingMix';
 import autoSizeMix from './autoSizeMix';
+import rectMix from './rectMix';
 import flipMix from './flipMix';
 
 export default class Player {
@@ -44,6 +45,8 @@ export default class Player {
         playedMix(art, this);
         playingMix(art, this);
         autoSizeMix(art, this);
+        rectMix(art, this);
         flipMix(art, this);
+    
     }
 }

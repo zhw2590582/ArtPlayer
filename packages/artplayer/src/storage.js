@@ -1,7 +1,7 @@
 export default class Storage {
     constructor(art) {
         this.art = art;
-        this.storageName = 'artplayer_settings';
+        this.name = 'artplayer_settings';
         this.init();
     }
 
@@ -14,7 +14,7 @@ export default class Storage {
     }
 
     get(key) {
-        const storage = JSON.parse(localStorage.getItem(this.storageName)) || {};
+        const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
         return key ? storage[key] : {};
     }
 
@@ -22,6 +22,10 @@ export default class Storage {
         const storage = Object.assign({}, this.get(), {
             [key]: value,
         });
-        localStorage.setItem(this.storageName, JSON.stringify(storage));
+        window.localStorage.setItem(this.name, JSON.stringify(storage));
+    }
+
+    clean() {
+        window.localStorage.removeItem(this.name);
     }
 }

@@ -11,6 +11,10 @@ export default class Setting {
             this.art.on('firstCanplay', () => {
                 this.init();
             });
+
+            this.art.on('blur', () => {
+                this.hide();
+            });
         }
     }
 
@@ -36,8 +40,8 @@ export default class Setting {
     }
 
     add(item, callback) {
-        const { $settingBody } = this.art.template;
         this.id += 1;
+        const { $settingBody } = this.art.template;
         return component(this.art, this, $settingBody, item, callback, 'setting');
     }
 

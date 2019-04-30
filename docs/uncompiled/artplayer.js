@@ -671,11 +671,12 @@
 
     classCallCheck(this, Whitelist);
 
+    var kindOf = art.constructor.kindOf;
     var whitelist = art.option.whitelist;
     this.userAgent = window.navigator.userAgent;
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
     this.state = !this.isMobile || whitelist.some(function (item) {
-      var type = optionValidator.kindOf(item);
+      var type = kindOf(item);
       var result = false;
 
       switch (type) {
@@ -711,6 +712,7 @@
         this.$container = art.option.container;
       } else {
         this.$container = document.querySelector(art.option.container);
+        errorHandle(this.$container, "No container element found by ".concat(art.option.container));
       }
 
       if (art.constructor.instances.some(function (art) {
@@ -775,73 +777,72 @@
     return Template;
   }();
 
-  var i18nMap = {
-    'zh-cn': {
-      'About author': '关于作者',
-      'Video info': '视频统计信息',
-      Close: '关闭',
-      'Video load failed': '视频加载失败',
-      Volume: '音量',
-      Play: '播放',
-      Pause: '暂停',
-      Rate: '速度',
-      Mute: '静音',
-      Flip: '视频翻转',
-      Horizontal: '水平',
-      Vertical: '垂直',
-      Reconnect: '重新连接',
-      'Hide subtitle': '隐藏字幕',
-      'Show subtitle': '显示字幕',
-      'Hide danmu': '隐藏弹幕',
-      'Show danmu': '显示弹幕',
-      'Show setting': '显示设置',
-      'Hide setting': '隐藏设置',
-      Screenshot: '截图',
-      'Play speed': '播放速度',
-      'Aspect ratio': '画面比例',
-      Default: '默认',
-      Normal: '正常',
-      'Switch video': '切换',
-      'Switch subtitle': '切换字幕',
-      Fullscreen: '全屏',
-      'Exit fullscreen': '退出全屏',
-      'Web fullscreen': '网页全屏',
-      'Exit web fullscreen': '退出网页全屏',
-      'Mini player': '迷你播放器'
-    },
-    'zh-tw': {
-      'About author': '關於作者',
-      'Video info': '影片統計訊息',
-      Close: '關閉',
-      'Video load failed': '影片載入失敗',
-      Volume: '音量',
-      Play: '播放',
-      Pause: '暫停',
-      Rate: '速度',
-      Mute: '靜音',
-      Flip: '影片翻轉',
-      Horizontal: '水平',
-      Vertical: '垂直',
-      Reconnect: '重新連接',
-      'Hide subtitle': '隱藏字幕',
-      'Show subtitle': '顯示字幕',
-      'Show setting': '顯示设置',
-      'Hide setting': '隱藏设置',
-      'Hide danmu': '隱藏彈幕',
-      'Show danmu': '顯示彈幕',
-      Screenshot: '截圖',
-      'Play speed': '播放速度',
-      'Aspect ratio': '畫面比例',
-      Default: '默認',
-      Normal: '正常',
-      'Switch video': '切換',
-      'Switch subtitle': '切換字幕',
-      Fullscreen: '全屏',
-      'Exit fullscreen': '退出全屏',
-      'Web fullscreen': '網頁全屏',
-      'Exit web fullscreen': '退出網頁全屏',
-      'Mini player': '迷你播放器'
-    }
+  var zhCn = {
+    'About author': '关于作者',
+    'Video info': '视频统计信息',
+    Close: '关闭',
+    'Video load failed': '视频加载失败',
+    Volume: '音量',
+    Play: '播放',
+    Pause: '暂停',
+    Rate: '速度',
+    Mute: '静音',
+    Flip: '视频翻转',
+    Horizontal: '水平',
+    Vertical: '垂直',
+    Reconnect: '重新连接',
+    'Hide subtitle': '隐藏字幕',
+    'Show subtitle': '显示字幕',
+    'Hide danmu': '隐藏弹幕',
+    'Show danmu': '显示弹幕',
+    'Show setting': '显示设置',
+    'Hide setting': '隐藏设置',
+    Screenshot: '截图',
+    'Play speed': '播放速度',
+    'Aspect ratio': '画面比例',
+    Default: '默认',
+    Normal: '正常',
+    'Switch video': '切换',
+    'Switch subtitle': '切换字幕',
+    Fullscreen: '全屏',
+    'Exit fullscreen': '退出全屏',
+    'Web fullscreen': '网页全屏',
+    'Exit web fullscreen': '退出网页全屏',
+    'Mini player': '迷你播放器'
+  };
+
+  var zhTw = {
+    'About author': '關於作者',
+    'Video info': '影片統計訊息',
+    Close: '關閉',
+    'Video load failed': '影片載入失敗',
+    Volume: '音量',
+    Play: '播放',
+    Pause: '暫停',
+    Rate: '速度',
+    Mute: '靜音',
+    Flip: '影片翻轉',
+    Horizontal: '水平',
+    Vertical: '垂直',
+    Reconnect: '重新連接',
+    'Hide subtitle': '隱藏字幕',
+    'Show subtitle': '顯示字幕',
+    'Show setting': '顯示设置',
+    'Hide setting': '隱藏设置',
+    'Hide danmu': '隱藏彈幕',
+    'Show danmu': '顯示彈幕',
+    Screenshot: '截圖',
+    'Play speed': '播放速度',
+    'Aspect ratio': '畫面比例',
+    Default: '默認',
+    Normal: '正常',
+    'Switch video': '切換',
+    'Switch subtitle': '切換字幕',
+    Fullscreen: '全屏',
+    'Exit fullscreen': '退出全屏',
+    'Web fullscreen': '網頁全屏',
+    'Exit web fullscreen': '退出網頁全屏',
+    'Mini player': '迷你播放器'
   };
 
   var I18n =
@@ -851,13 +852,17 @@
       classCallCheck(this, I18n);
 
       this.art = art;
+      this.languages = {
+        'zh-cn': zhCn,
+        'zh-tw': zhTw
+      };
       this.init();
     }
 
     createClass(I18n, [{
       key: "init",
       value: function init() {
-        this.language = i18nMap[this.art.option.lang.toLowerCase()] || {};
+        this.language = this.languages[this.art.option.lang.toLowerCase()] || {};
       }
     }, {
       key: "get",
@@ -867,7 +872,7 @@
     }, {
       key: "update",
       value: function update(value) {
-        i18nMap = mergeDeep(i18nMap, value);
+        this.languages = mergeDeep(this.languages, value);
         this.init();
       }
     }]);
@@ -1117,15 +1122,9 @@
     var notice = art.notice;
     Object.defineProperty(player, 'seek', {
       value: function value(time) {
-        var newTime = Math.max(time, 0);
-
-        if (player.duration) {
-          newTime = Math.min(newTime, player.duration);
-        }
-
-        player.currentTime = newTime;
-        notice.show("".concat(secondToTime(newTime), " / ").concat(secondToTime(player.duration)));
-        art.emit('seek', newTime);
+        player.currentTime = time;
+        notice.show("".concat(secondToTime(time), " / ").concat(secondToTime(player.duration)));
+        art.emit('seek', time);
       }
     });
   }
@@ -1140,16 +1139,14 @@
         return $video.volume || 0;
       },
       set: function set(percentage) {
-        if (percentage !== undefined) {
-          $video.volume = clamp(percentage, 0, 1);
-          notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10)));
+        $video.volume = clamp(percentage, 0, 1);
+        notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10)));
 
-          if ($video.volume !== 0) {
-            storage.set('volume', $video.volume);
-          }
-
-          art.emit('volumeChange', $video.volume);
+        if ($video.volume !== 0) {
+          storage.set('volume', $video.volume);
         }
+
+        art.emit('volumeChange', $video.volume);
       }
     });
     Object.defineProperty(player, 'muted', {
@@ -1169,7 +1166,8 @@
         return art.template.$video.currentTime || 0;
       },
       set: function set(currentTime) {
-        art.template.$video.currentTime = currentTime;
+        errorHandle(player.duration, 'Cannot set current time, the video seems to be not ready for mate information.');
+        art.template.$video.currentTime = clamp(currentTime, 0, player.duration);
       }
     });
   }
@@ -3219,6 +3217,21 @@
     });
   }
 
+  function rectMix(art, player) {
+    Object.defineProperty(player, 'rect', {
+      get: function get() {
+        return art.template.$player.getBoundingClientRect();
+      }
+    });
+    ['bottom', 'height', 'left', 'right', 'top', 'width', 'x', 'y'].forEach(function (key) {
+      Object.defineProperty(player, key, {
+        get: function get() {
+          return player.rect[key];
+        }
+      });
+    });
+  }
+
   function flipMix(art, player) {
     Object.defineProperty(player, 'flipState', {
       get: function get() {
@@ -3265,6 +3278,7 @@
     seekMix$2(art, this);
     playingMix(art, this);
     resizeMix(art, this);
+    rectMix(art, this);
     flipMix(art, this);
   };
 
@@ -3348,69 +3362,14 @@
 
   var objectSpread = _objectSpread;
 
-  var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
-
-  var playBig = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"60\" width=\"60\" style=\"filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\">\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16 C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\"/>\n</svg>";
-
-  var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
-
-  var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
-
-  var volume = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path>\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
-
-  var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
-
-  var subtitle = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 48 48\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
-
-  var screenshot = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 50 50\">\n\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n</svg>\n";
-
-  var setting = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
-
-  var fullscreen = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n\t<path d=\"m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z\"></path>\n\t<path d=\"m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z\"></path>\n\t<path d=\"m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z\"></path>\n\t<path d=\"M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z\"></path>\n</svg>";
-
-  var fullscreenWeb = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"36\" width=\"36\">\n\t<path d=\"m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z\" fill-rule=\"evenodd\"></path>\n</svg>";
-
-  var pip = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
-
-  var prev = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"m 12,12 h 2 v 12 h -2 z m 3.5,6 8.5,6 V 12 z\"></path>\n</svg>";
-
-  var next = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z\"></path>\n</svg>";
-
-  var icons = {};
-  var svgs = {
-    loading: loading,
-    playBig: playBig,
-    play: play,
-    pause: pause,
-    volume: volume,
-    volumeClose: volumeClose,
-    subtitle: subtitle,
-    screenshot: screenshot,
-    setting: setting,
-    fullscreen: fullscreen,
-    fullscreenWeb: fullscreenWeb,
-    pip: pip,
-    prev: prev,
-    next: next
-  };
-  Object.keys(svgs).forEach(function (key) {
-    Object.defineProperty(icons, key, {
-      get: function get() {
-        var tmp = document.createElement('div');
-        tmp.innerHTML = "<i class=\"art-icon art-icon-".concat(key, "\">").concat(svgs[key], "</i>");
-        return tmp.childNodes[0];
-      }
-    });
-  });
-
-  function fullscreen$1(controlOption) {
+  function fullscreen(controlOption) {
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreen = append($control, icons.fullscreen);
+          var $fullscreen = append($control, art.icons.fullscreen);
           tooltip($fullscreen, i18n.get('Fullscreen'));
           proxy($control, 'click', function () {
             player.fullscreenToggle();
@@ -3428,14 +3387,14 @@
     };
   }
 
-  function fullscreenWeb$1(controlOption) {
+  function fullscreenWeb(controlOption) {
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreenWeb = append($control, icons.fullscreenWeb);
+          var $fullscreenWeb = append($control, art.icons.fullscreenWeb);
           tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
           proxy($control, 'click', function () {
             player.fullscreenWebToggle();
@@ -3453,14 +3412,14 @@
     };
   }
 
-  function pip$1(controlOption) {
+  function pip(controlOption) {
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               i18n = art.i18n,
               player = art.player;
-          var $pip = append($control, icons.pip);
+          var $pip = append($control, art.icons.pip);
           tooltip($pip, i18n.get('Mini player'));
           proxy($control, 'click', function () {
             player.pipEnabled();
@@ -3477,8 +3436,8 @@
           var proxy = art.events.proxy,
               player = art.player,
               i18n = art.i18n;
-          var $play = append($control, icons.play);
-          var $pause = append($control, icons.pause);
+          var $play = append($control, art.icons.play);
+          var $pause = append($control, art.icons.pause);
           tooltip($play, i18n.get('Play'));
           tooltip($pause, i18n.get('Pause'));
           proxy($play, 'click', function () {
@@ -3656,14 +3615,14 @@
     };
   }
 
-  function subtitle$1(controlOption) {
+  function subtitle(controlOption) {
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               i18n = art.i18n,
               subtitle = art.subtitle;
-          var $subtitle = append($control, icons.subtitle);
+          var $subtitle = append($control, art.icons.subtitle);
           tooltip($subtitle, i18n.get('Hide subtitle'));
           proxy($control, 'click', function () {
             subtitle.toggle();
@@ -3702,7 +3661,7 @@
     };
   }
 
-  function volume$1(controlOption) {
+  function volume(controlOption) {
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
@@ -3710,8 +3669,8 @@
               player = art.player,
               i18n = art.i18n;
           var isDroging = false;
-          var $volume = append($control, icons.volume);
-          var $volumeClose = append($control, icons.volumeClose);
+          var $volume = append($control, art.icons.volume);
+          var $volumeClose = append($control, art.icons.volumeClose);
           var $volumePanel = append($control, '<div class="art-volume-panel"></div>');
           var $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
           tooltip($volume, i18n.get('Mute'));
@@ -3780,14 +3739,14 @@
     };
   }
 
-  function setting$1(controlOption) {
+  function setting(controlOption) {
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               i18n = art.i18n,
               setting = art.setting;
-          var $setting = append($control, icons.setting);
+          var $setting = append($control, art.icons.setting);
           tooltip($setting, i18n.get('Show setting'));
           proxy($control, 'click', function () {
             setting.toggle();
@@ -3865,14 +3824,14 @@
     };
   }
 
-  function screenshot$1(controlOption) {
+  function screenshot(controlOption) {
     return function (art) {
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               i18n = art.i18n,
               player = art.player;
-          var $screenshot = append($control, icons.screenshot);
+          var $screenshot = append($control, art.icons.screenshot);
           tooltip($screenshot, i18n.get('Screenshot'));
           proxy($screenshot, 'click', function () {
             player.screenshot();
@@ -3939,13 +3898,13 @@
         var option = this.art.option;
         this.add(progress({
           name: 'progress',
-          disable: option.isLive,
+          disable: false,
           position: 'top',
           index: 10
         }));
         this.add(thumbnails({
           name: 'thumbnails',
-          disable: !option.thumbnails.url || option.isLive,
+          disable: !option.thumbnails.url,
           position: 'top',
           index: 20
         }));
@@ -3955,7 +3914,7 @@
           position: 'left',
           index: 10
         }));
-        this.add(volume$1({
+        this.add(volume({
           name: 'volume',
           disable: false,
           position: 'left',
@@ -3963,7 +3922,7 @@
         }));
         this.add(time({
           name: 'time',
-          disable: option.isLive,
+          disable: false,
           position: 'left',
           index: 30
         }));
@@ -3973,37 +3932,37 @@
           position: 'right',
           index: 10
         }));
-        this.add(screenshot$1({
+        this.add(screenshot({
           name: 'screenshot',
           disable: !option.screenshot,
           position: 'right',
           index: 20
         }));
-        this.add(subtitle$1({
+        this.add(subtitle({
           name: 'subtitle',
           disable: !option.subtitle.url,
           position: 'right',
           index: 30
         }));
-        this.add(setting$1({
+        this.add(setting({
           name: 'setting',
           disable: !option.setting,
           position: 'right',
           index: 40
         }));
-        this.add(pip$1({
+        this.add(pip({
           name: 'pip',
           disable: !option.pip,
           position: 'right',
           index: 50
         }));
-        this.add(fullscreenWeb$1({
+        this.add(fullscreenWeb({
           name: 'fullscreenWeb',
           disable: !option.fullscreenWeb,
           position: 'right',
           index: 60
         }));
-        this.add(fullscreen$1({
+        this.add(fullscreen({
           name: 'fullscreen',
           disable: !option.fullscreen,
           position: 'right',
@@ -4158,6 +4117,9 @@
       this.art = art;
       this.art.on('firstCanplay', function () {
         _this.init();
+      });
+      this.art.on('blur', function () {
+        _this.hide();
       });
     }
 
@@ -4546,9 +4508,10 @@
     events.proxy(document, ['click', 'contextmenu'], function (event) {
       if (event.composedPath().indexOf($player) > -1) {
         art.isFocus = true;
+        art.emit('focus');
       } else {
         art.isFocus = false;
-        art.contextmenu.hide();
+        art.emit('blur');
       }
     });
   }
@@ -4613,7 +4576,7 @@
       }
   };
   exports.ContentRect = ContentRect;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29udGVudFJlY3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvQ29udGVudFJlY3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFPQSxJQUFNLFdBQVcsR0FBRyxVQUFDLE1BQWU7SUFDaEMsSUFBSSxTQUFTLElBQUssTUFBNkIsRUFBRTtRQUM3QyxJQUFNLEdBQUcsR0FBSSxNQUE2QixDQUFDLE9BQU8sRUFBRSxDQUFDO1FBQ3JELE9BQU8sTUFBTSxDQUFDLE1BQU0sQ0FBQztZQUNqQixNQUFNLEVBQUUsR0FBRyxDQUFDLE1BQU07WUFDbEIsSUFBSSxFQUFFLENBQUM7WUFDUCxHQUFHLEVBQUUsQ0FBQztZQUNOLEtBQUssRUFBRSxHQUFHLENBQUMsS0FBSztTQUNuQixDQUFDLENBQUM7S0FDTjtTQUFNLEVBQUUsMEZBQTBGO1FBQy9GLElBQU0sTUFBTSxHQUFHLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUMvQyxPQUFPLE1BQU0sQ0FBQyxNQUFNLENBQUM7WUFDakIsTUFBTSxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsTUFBTSxJQUFJLEdBQUcsQ0FBQztZQUN4QyxJQUFJLEVBQUUsVUFBVSxDQUFDLE1BQU0sQ0FBQyxXQUFXLElBQUksR0FBRyxDQUFDO1lBQzNDLEdBQUcsRUFBRSxVQUFVLENBQUMsTUFBTSxDQUFDLFVBQVUsSUFBSSxHQUFHLENBQUM7WUFDekMsS0FBSyxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsS0FBSyxJQUFJLEdBQUcsQ0FBQztTQUN6QyxDQUFDLENBQUM7S0FDTjtBQUNMLENBQUMsQ0FBQztBQUVPLGtDQUFXIn0=
   });
 
   unwrapExports(ContentRect_1);
@@ -4650,7 +4613,7 @@
       return ResizeObservation;
   }());
   exports.ResizeObservation = ResizeObservation;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2YXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2YXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNEM7QUFFNUM7SUFlSSwyQkFBWSxNQUFlO1FBQ3ZCLElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO1FBQ3JCLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsaUJBQWlCLEdBQUcsQ0FBQyxDQUFDO0lBQ3ZELENBQUM7SUFWRCxzQkFBVyw2Q0FBYzthQUF6QjtZQUNJLE9BQU8sSUFBSSxDQUFDLGdCQUFnQixDQUFDO1FBQ2pDLENBQUM7OztPQUFBO0lBQ0Qsc0JBQVcsOENBQWU7YUFBMUI7WUFDSSxPQUFPLElBQUksQ0FBQyxpQkFBaUIsQ0FBQztRQUNsQyxDQUFDOzs7T0FBQTtJQU9NLG9DQUFRLEdBQWY7UUFDSSxJQUFNLEVBQUUsR0FBRyx5QkFBVyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUVwQyxPQUFPLENBQUMsQ0FBQyxFQUFFO2VBQ0osQ0FDQyxFQUFFLENBQUMsS0FBSyxLQUFLLElBQUksQ0FBQyxjQUFjO21CQUM3QixFQUFFLENBQUMsTUFBTSxLQUFLLElBQUksQ0FBQyxlQUFlLENBQ3hDLENBQUM7SUFDVixDQUFDO0lBQ0wsd0JBQUM7QUFBRCxDQUFDLEFBN0JELElBNkJDO0FBRVEsOENBQWlCIn0=
   });
 
   unwrapExports(ResizeObservation_1);
@@ -4667,7 +4630,7 @@
       return ResizeObserverEntry;
   }());
   exports.ResizeObserverEntry = ResizeObserverEntry;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXJFbnRyeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9SZXNpemVPYnNlcnZlckVudHJ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTRDO0FBRTVDO0lBR0ksNkJBQVksTUFBZTtRQUN2QixJQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztRQUNyQixJQUFJLENBQUMsV0FBVyxHQUFHLHlCQUFXLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDM0MsQ0FBQztJQUNMLDBCQUFDO0FBQUQsQ0FBQyxBQVBELElBT0M7QUFFUSxrREFBbUIifQ==
   });
 
   unwrapExports(ResizeObserverEntry_1);
@@ -4840,7 +4803,7 @@
       return window.ResizeObserver = ResizeObserver;
   };
   exports.install = install;
-
+  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSx5REFBd0Q7QUFFeEQsNkRBQTREO0FBRTVELElBQU0sZUFBZSxHQUFHLEVBQXNCLENBQUM7QUFFL0M7SUFVSSx3QkFBWSxRQUFnQztRQVA1QyxnQkFBZ0I7UUFDVCx5QkFBb0IsR0FBRyxFQUF5QixDQUFDO1FBQ3hELGdCQUFnQjtRQUNULG9CQUFlLEdBQUcsRUFBeUIsQ0FBQztRQUNuRCxnQkFBZ0I7UUFDVCxxQkFBZ0IsR0FBRyxFQUF5QixDQUFDO1FBR2hELElBQU0sT0FBTyxHQUFHLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUN4QyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDM0IsZUFBZSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUMvQixDQUFDO0lBRU0sZ0NBQU8sR0FBZCxVQUFlLE1BQWU7UUFDMUIsSUFBTSxPQUFPLEdBQUcsV0FBVyxDQUFDLFNBQVMsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUMvQyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBTSxLQUFLLEdBQUcsZUFBZSxDQUFDLElBQUksQ0FBQyxvQkFBb0IsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUNqRSxJQUFJLEtBQUssR0FBRyxDQUFDLEVBQUU7WUFDWCxPQUFPO1NBQ1Y7UUFDRCxJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLElBQUkscUNBQWlCLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztRQUM5RCxTQUFTLEVBQUUsQ0FBQztJQUNoQixDQUFDO0lBRU0sa0NBQVMsR0FBaEIsVUFB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
   });
 
   unwrapExports(ResizeObserver_1);
@@ -4884,7 +4847,7 @@
         clickInit(art, _this);
         hoverInit(art, _this);
         mousemoveInitInit(art, _this);
-        resizeInit(art, _this); // doubleClickInit(art, this);
+        resizeInit(art, _this);
       });
     }
 
@@ -4966,6 +4929,27 @@
       classCallCheck(this, Hotkey);
 
       this.art = art;
+      this.keys = {};
+      this.add(27, function () {
+        if (art.isFocus && art.player.fullscreenWebState) {
+          art.player.fullscreenWebExit();
+        }
+      });
+      this.add(32, function () {
+        art.player.toggle();
+      });
+      this.add(37, function () {
+        art.player.seek(art.player.currentTime - 10);
+      });
+      this.add(38, function () {
+        art.player.volume += 0.05;
+      });
+      this.add(39, function () {
+        art.player.seek(art.player.currentTime + 10);
+      });
+      this.add(40, function () {
+        art.player.volume -= 0.05;
+      });
 
       if (this.art.option.hotkey) {
         this.art.on('firstCanplay', function () {
@@ -4975,49 +4959,35 @@
     }
 
     createClass(Hotkey, [{
+      key: "add",
+      value: function add(key, event) {
+        if (this.keys[key]) {
+          this.keys[key].push(event);
+        } else {
+          this.keys[key] = [event];
+        }
+      }
+    }, {
       key: "init",
       value: function init() {
         var _this2 = this;
 
-        var _this$art = this.art,
-            player = _this$art.player,
-            proxy = _this$art.events.proxy;
+        var proxy = this.art.events.proxy;
         proxy(window, 'keydown', function (event) {
           if (_this2.art.isFocus) {
             var tag = document.activeElement.tagName.toUpperCase();
             var editable = document.activeElement.getAttribute('contenteditable');
 
             if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
-              _this2.art.emit('hotkey', event);
+              var events = _this2.keys[event.keyCode];
 
-              switch (event.keyCode) {
-                case 39:
-                  event.preventDefault();
-                  player.seek(player.currentTime + 10);
-                  break;
+              if (events) {
+                event.preventDefault();
+                events.forEach(function (fn) {
+                  return fn();
+                });
 
-                case 37:
-                  event.preventDefault();
-                  player.seek(player.currentTime - 10);
-                  break;
-
-                case 38:
-                  event.preventDefault();
-                  player.volume += 0.05;
-                  break;
-
-                case 40:
-                  event.preventDefault();
-                  player.volume -= 0.05;
-                  break;
-
-                case 32:
-                  event.preventDefault();
-                  player.toggle();
-                  break;
-
-                default:
-                  break;
+                _this2.art.emit('hotkey', event);
               }
             }
           }
@@ -5049,8 +5019,8 @@
     createClass(Layers, [{
       key: "add",
       value: function add(item, callback) {
-        var $layers = this.art.template.$layers;
         this.id += 1;
+        var $layers = this.art.template.$layers;
         return component(this.art, this, $layers, item, callback, 'layer');
       }
     }, {
@@ -5079,9 +5049,8 @@
       classCallCheck(this, Loading);
 
       this.art = art;
-      var option = art.option,
-          $loading = art.template.$loading;
-      append($loading, option.icons.loading || icons.loading);
+      var $loading = art.template.$loading;
+      append($loading, art.icons.loading);
     }
 
     createClass(Loading, [{
@@ -5154,10 +5123,9 @@
       classCallCheck(this, Mask);
 
       this.art = art;
-      var option = art.option,
-          $mask = art.template.$mask;
+      var $mask = art.template.$mask;
       var $playBig = append($mask, '<div class="art-playBig"></div>');
-      append($playBig, option.icons.playBig || icons.playBig);
+      append($playBig, art.icons.playBig);
     }
 
     createClass(Mask, [{
@@ -5178,6 +5146,65 @@
 
     return Mask;
   }();
+
+  var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
+
+  var playBig = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"60\" width=\"60\" style=\"filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\">\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16 C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\"/>\n</svg>";
+
+  var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
+
+  var pause = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
+
+  var volume$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path>\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
+
+  var volumeClose = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
+
+  var subtitle$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 48 48\">\n    <path d=\"M0 0h48v48H0z\" fill=\"none\"/>\n    <path d=\"M40 8H8c-2.21 0-4 1.79-4 4v24c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V12c0-2.21-1.79-4-4-4zM8 24h8v4H8v-4zm20 12H8v-4h20v4zm12 0h-8v-4h8v4zm0-8H20v-4h20v4z\"/>\n</svg>";
+
+  var screenshot$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 50 50\">\n\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"/>\n</svg>\n";
+
+  var setting$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
+
+  var fullscreen$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n\t<path d=\"m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z\"></path>\n\t<path d=\"m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z\"></path>\n\t<path d=\"m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z\"></path>\n\t<path d=\"M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z\"></path>\n</svg>";
+
+  var fullscreenWeb$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"36\" width=\"36\">\n\t<path d=\"m 28,11 0,14 -20,0 0,-14 z m -18,2 16,0 0,10 -16,0 0,-10 z\" fill-rule=\"evenodd\"></path>\n</svg>";
+
+  var pip$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
+
+  var prev = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"m 12,12 h 2 v 12 h -2 z m 3.5,6 8.5,6 V 12 z\"></path>\n</svg>";
+
+  var next = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z\"></path>\n</svg>";
+
+  var Icons = function Icons(art) {
+    var _this = this;
+
+    classCallCheck(this, Icons);
+
+    var icons = Object.assign({
+      loading: loading,
+      playBig: playBig,
+      play: play,
+      pause: pause,
+      volume: volume$1,
+      volumeClose: volumeClose,
+      subtitle: subtitle$1,
+      screenshot: screenshot$1,
+      setting: setting$1,
+      fullscreen: fullscreen$1,
+      fullscreenWeb: fullscreenWeb$1,
+      pip: pip$1,
+      prev: prev,
+      next: next
+    }, art.option.icons);
+    Object.keys(icons).forEach(function (key) {
+      errorHandle(typeof icons[key] === 'string', 'Custom icon values ​​only support string types.');
+      var icon = document.createElement('i');
+      icon.classList.add('art-icon');
+      icon.classList.add("art-icon-".concat(key));
+      icon.innerHTML = icons[key];
+      _this[key] = icon;
+    });
+  };
 
   function flip(settingOption) {
     return function (art) {
@@ -5221,6 +5248,9 @@
         this.art.on('firstCanplay', function () {
           _this.init();
         });
+        this.art.on('blur', function () {
+          _this.hide();
+        });
       }
     }
 
@@ -5246,8 +5276,8 @@
     }, {
       key: "add",
       value: function add(item, callback) {
-        var $settingBody = this.art.template.$settingBody;
         this.id += 1;
+        var $settingBody = this.art.template.$settingBody;
         return component(this.art, this, $settingBody, item, callback, 'setting');
       }
     }, {
@@ -5287,7 +5317,7 @@
       classCallCheck(this, Storage);
 
       this.art = art;
-      this.storageName = 'artplayer_settings';
+      this.name = 'artplayer_settings';
       this.init();
     }
 
@@ -5304,14 +5334,19 @@
     }, {
       key: "get",
       value: function get(key) {
-        var storage = JSON.parse(localStorage.getItem(this.storageName)) || {};
+        var storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
         return key ? storage[key] : {};
       }
     }, {
       key: "set",
       value: function set(key, value) {
         var storage = Object.assign({}, this.get(), defineProperty({}, key, value));
-        localStorage.setItem(this.storageName, JSON.stringify(storage));
+        window.localStorage.setItem(this.name, JSON.stringify(storage));
+      }
+    }, {
+      key: "clean",
+      value: function clean() {
+        window.localStorage.removeItem(this.name);
       }
     }]);
 
@@ -5650,6 +5685,7 @@
           this.isFocus = false;
           this.isDestroy = false;
           this.storage = new Storage(this);
+          this.icons = new Icons(this);
           this.i18n = new I18n(this);
           this.notice = new Notice(this);
           this.events = new Events(this);
@@ -5720,6 +5756,11 @@
       key: "validator",
       get: function get() {
         return optionValidator;
+      }
+    }, {
+      key: "kindOf",
+      get: function get() {
+        return optionValidator.kindOf;
       }
     }, {
       key: "DEFAULTS",

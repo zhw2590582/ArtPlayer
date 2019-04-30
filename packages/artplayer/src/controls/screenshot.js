@@ -1,5 +1,4 @@
 import { append, tooltip } from '../utils';
-import icons from '../icons';
 
 export default function screenshot(controlOption) {
     return art => ({
@@ -11,7 +10,7 @@ export default function screenshot(controlOption) {
                 player,
             } = art;
             
-            const $screenshot = append($control, icons.screenshot);
+            const $screenshot = append($control, art.icons.screenshot);
             tooltip($screenshot, i18n.get('Screenshot'));
             proxy($screenshot, 'click', () => {
                 player.screenshot();

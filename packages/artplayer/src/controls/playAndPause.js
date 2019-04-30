@@ -1,5 +1,4 @@
 import { append, tooltip, setStyle } from '../utils';
-import icons from '../icons';
 
 export default function playAndPause(controlOption) {
     return art => ({
@@ -11,8 +10,8 @@ export default function playAndPause(controlOption) {
                 i18n,
             } = art;
 
-            const $play = append($control, icons.play);
-            const $pause = append($control, icons.pause);
+            const $play = append($control, art.icons.play);
+            const $pause = append($control, art.icons.pause);
             tooltip($play, i18n.get('Play'));
             tooltip($pause, i18n.get('Pause'));
 

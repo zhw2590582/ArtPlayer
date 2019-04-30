@@ -1,5 +1,4 @@
 import { append, clamp, tooltip, setStyle, getStyle } from '../utils';
-import icons from '../icons';
 
 export default function volume(controlOption) {
     return art => ({
@@ -12,8 +11,8 @@ export default function volume(controlOption) {
             } = art;
             
             let isDroging = false;
-            const $volume = append($control, icons.volume);
-            const $volumeClose = append($control, icons.volumeClose);
+            const $volume = append($control, art.icons.volume);
+            const $volumeClose = append($control, art.icons.volumeClose);
             const $volumePanel = append($control, '<div class="art-volume-panel"></div>');
             const $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
             tooltip($volume, i18n.get('Mute'));

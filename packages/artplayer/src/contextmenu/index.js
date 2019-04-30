@@ -13,6 +13,10 @@ export default class Contextmenu {
         this.art.on('firstCanplay', () => {
             this.init();
         });
+
+        this.art.on('blur', () => {
+            this.hide();
+        });
     }
 
     init() {

@@ -19,6 +19,7 @@ import Layers from './layers';
 import Loading from './loading';
 import Notice from './notice';
 import Mask from './mask';
+import Icons from './icons';
 import Setting from './setting';
 import Storage from './storage';
 import Plugins from './plugins';
@@ -60,6 +61,10 @@ class Artplayer extends Emitter {
 
     static get validator() {
         return validator;
+    }
+
+    static get kindOf() {
+        return validator.kindOf;
     }
 
     static get DEFAULTS() {
@@ -121,6 +126,7 @@ class Artplayer extends Emitter {
             this.isFocus = false;
             this.isDestroy = false;
             this.storage = new Storage(this);
+            this.icons = new Icons(this);
             this.i18n = new I18n(this);
             this.notice = new Notice(this);
             this.events = new Events(this);

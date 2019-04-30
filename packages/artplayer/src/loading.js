@@ -1,15 +1,10 @@
-import icons from './icons';
 import { append, setStyle } from './utils';
 
 export default class Loading {
     constructor(art) {
         this.art = art;
-        const {
-            option,
-            template: { $loading },
-        } = art;
-        
-        append($loading, option.icons.loading || icons.loading);
+        const { $loading } = art.template;
+        append($loading, art.icons.loading);
     }
 
     hide() {

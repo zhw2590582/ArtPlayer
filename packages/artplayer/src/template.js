@@ -6,6 +6,7 @@ export default class Template {
             this.$container = art.option.container;
         } else {
             this.$container = document.querySelector(art.option.container);
+            errorHandle(this.$container, `No container element found by ${art.option.container}`);
         }
 
         if (art.constructor.instances.some(art => art.template.$container === this.$container)) {
