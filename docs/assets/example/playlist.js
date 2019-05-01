@@ -36,16 +36,16 @@ var art = new Artplayer({
             },
         },
     ],
-    plugins: [artplayerPluginPlaylist],
+    plugins: [
+        artplayerPluginPlaylist([
+            {
+                title: '你的名字',
+                url: url + '/video/you-name.mp4',
+            },
+            {
+                title: 'One more time one more chance',
+                url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+            },
+        ]),
+    ],
 });
-
-art.plugins.artplayerPluginPlaylist.load([
-    {
-        title: '你的名字',
-        url: url + '/video/you-name.mp4',
-    },
-    {
-        title: 'One more time one more chance',
-        url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    },
-]);

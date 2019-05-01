@@ -13,8 +13,3 @@ var art = new Artplayer({
         fontSize: 25,
     })],
 });
-
-console.info('Danmuku loading...');
-art.on('artplayerPluginDanmuku:loaded', () => {
-    console.info('Danmuku loaded');
-});

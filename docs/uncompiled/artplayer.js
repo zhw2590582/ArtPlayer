@@ -1168,7 +1168,6 @@
         return art.template.$video.currentTime || 0;
       },
       set: function set(currentTime) {
-        errorHandle(player.duration, 'Cannot set current time, the video seems to be not ready for mate information.');
         art.template.$video.currentTime = clamp(currentTime, 0, player.duration);
       }
     });

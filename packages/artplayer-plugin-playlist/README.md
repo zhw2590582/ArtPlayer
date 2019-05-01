@@ -40,20 +40,19 @@ Will expose the global variable to `window.artplayerPluginPlaylist`.
 var art = new Artplayer({
     container: '.artplayer-app',
     url: 'path/to/video.mp4',
-    plugins: [artplayerPluginPlaylist],
+    plugins: [
+        artplayerPluginPlaylist([
+            {
+                title: 'video01',
+                url: 'path/to/video01.mp4',
+            },
+            {
+                title: 'video02',
+                url: 'path/to/video02.mp4',
+            },
+        ]),
+    ],
 });
-
-// Load Playlist
-art.plugins.artplayerPluginPlaylist.load([
-    {
-        title: 'video01',
-        url: 'path/to/video01.mp4',
-    },
-    {
-        title: 'video02',
-        url: 'path/to/video02.mp4',
-    },
-]);
 
 // Show Playlist
 art.plugins.artplayerPluginPlaylist.show();
