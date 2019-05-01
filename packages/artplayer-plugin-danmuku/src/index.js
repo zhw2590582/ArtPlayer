@@ -1,9 +1,17 @@
-import { bilibiliDanmuParseFromXml, bilibiliDanmuParseFromAv, bilibiliDanmuParseFromUrl } from './bilibiliDanmuParse';
+import * as bilibili from './bilibiliDanmuParse';
 import Danmuku from './danmuku';
+import i18n from './i18n';
+import settingOpacity from './settingOpacity';
+import settingSpeed from './settingSpeed';
+import settingSize from './settingSize';
 
 function artplayerPluginDanmuku(option) {
     return art => {
         const danmuku = new Danmuku(art, option);
+        art.i18n.update(i18n);
+        art.setting.add(settingOpacity);
+        art.setting.add(settingSpeed);
+        art.setting.add(settingSize);
         return {
             name: 'artplayerPluginDanmuku',
             emit: danmuku.addToQueue.bind(danmuku),
@@ -16,7 +24,5 @@ function artplayerPluginDanmuku(option) {
     };
 }
 
-artplayerPluginDanmuku.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
-artplayerPluginDanmuku.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
-artplayerPluginDanmuku.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
+artplayerPluginDanmuku.bilibili = bilibili;
 export default artplayerPluginDanmuku;

@@ -10,7 +10,7 @@ export function bilibiliDanmuParseFromXml(xmlString) {
                     text,
                     time: Number(attr[0]),
                     mode: Number(attr[1]),
-                    size: Number(attr[2]),
+                    fontSize: Number(attr[2]),
                     color: `#${Number(attr[3]).toString(16)}`,
                     timestamp: Number(attr[4]),
                     pool: Number(attr[5]),

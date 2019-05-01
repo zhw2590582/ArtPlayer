@@ -3,18 +3,18 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/you-name.mp4',
     autoSize: true,
+    setting: true,
     plugins: [artplayerPluginDanmuku({
         danmuku: url + '/danmuku/you-name.xml',
         speed: 5,
-        opacity: 1,
-        color: '#fff',
-        size: 25,
         maxlength: 50,
         margin: [10, 100],
+        opacity: 1,
+        fontSize: 25,
     })],
 });
 
-console.info('弹幕加载中...');
+console.info('Danmuku loading...');
 art.on('artplayerPluginDanmuku:loaded', () => {
-    console.info('弹幕准备就绪');
+    console.info('Danmuku loaded');
 });

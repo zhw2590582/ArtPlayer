@@ -5,8 +5,10 @@ export default class Danmuku {
     constructor(art, option) {
         this.art = art;
         this.queue = [];
-        this.isStop = false;
         this.refs = [];
+        this.option = {};
+        this.config(option);
+        this.isStop = false;
         this.animationFrameTimer = null;
         this.$danmuku = art.template.$danmuku;
         art.i18n.update(Danmuku.i18n);
@@ -16,7 +18,6 @@ export default class Danmuku {
         art.on('video:waiting', this.stop.bind(this));
         art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
-        this.config(option);
         if (typeof this.option.danmuku === 'function') {
             this.option.danmuku().then(danmus => {
                 danmus.forEach(this.addToQueue.bind(this));
@@ -50,11 +51,10 @@ export default class Danmuku {
         return {
             danmuku: [],
             speed: 5,
-            opacity: 1,
-            color: '#fff',
-            size: 25,
             maxlength: 50,
-            margin: [10, 20],
+            margin: [10, 100],
+            opacity: 1,
+            fontSize: 25,
         };
     }
 
@@ -62,11 +62,10 @@ export default class Danmuku {
         return {
             danmuku: 'array|function|string',
             speed: 'number',
-            opacity: 'number',
-            color: 'string',
-            size: 'number',
             maxlength: 'number',
             margin: 'array',
+            opacity: 'number',
+            fontSize: 'number',
         };
     }
 
@@ -80,27 +79,29 @@ export default class Danmuku {
             utils: { clamp },
             validator,
         } = this.art.constructor;
-        this.option = Object.assign({}, Danmuku.option, option);
+        this.option = Object.assign({}, Danmuku.option, this.option, option);
         validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
-        this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.size = clamp(this.option.size, 12, 30);
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
         this.option.margin[0] = clamp(this.option.margin[0], 0, 100);
         this.option.margin[1] = clamp(this.option.margin[1], 0, 100);
+        this.option.opacity = clamp(this.option.opacity, 0, 1);
+        this.option.fontSize = clamp(this.option.fontSize, 12, 30);
+        this.art.emit('artplayerPluginDanmuku:config', this.option);
     }
 
     emit(danmu) {
         const { $player } = this.art.template;
         danmu.$ref = this.getDanmuRef();
+        danmu.$ref.style.opacity = this.option.opacity;
+        danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
         danmu.$ref.innerText = danmu.text;
-        danmu.$ref.style.fontSize = `${danmu.size || this.option.size}px`;
+        danmu.$ref.style.color = danmu.color;
         const playerWidth = Danmuku.getRect($player, 'width');
         const danmuWidth = Danmuku.getRect(danmu.$ref, 'width');
         danmu.$restWidth = playerWidth + danmuWidth + 5;
         danmu.$restTime = this.option.speed;
         danmu.$lastStartTime = Date.now();
-        danmu.$ref.style.color = danmu.color || this.option.color;
         danmu.$ref.style.left = `${playerWidth}px`;
         danmu.$ref.style.top = `${this.getDanmuTop()}px`;
         danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
@@ -291,7 +292,7 @@ export default class Danmuku {
                 this.suspend(danmu);
             });
         window.cancelAnimationFrame(this.animationFrameTimer);
-        this.art.emit('artplayerPluginDanmu:stop');
+        this.art.emit('artplayerPluginDanmuku:stop');
     }
 
     start() {
@@ -302,16 +303,16 @@ export default class Danmuku {
                 Danmuku.continue(danmu);
             });
         this.update();
-        this.art.emit('artplayerPluginDanmu:start');
+        this.art.emit('artplayerPluginDanmuku:start');
     }
 
     show() {
-        this.$danmuku.style = 'none';
-        this.art.emit('artplayerPluginDanmu:show');
+        this.$danmuku.style = 'block';
+        this.art.emit('artplayerPluginDanmuku:show');
     }
 
     hide() {
-        this.$danmuku.style = 'block';
-        this.art.emit('artplayerPluginDanmu:hide');
+        this.$danmuku.style = 'none';
+        this.art.emit('artplayerPluginDanmuku:hide');
     }
 }

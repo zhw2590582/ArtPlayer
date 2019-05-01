@@ -5369,7 +5369,7 @@
       index: 20,
       html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
       mounted: function mounted($setting) {
-        var $range = $setting.querySelector('.art-subtitle-range');
+        var $range = $setting.querySelector('.art-setting-range input');
         var $value = $setting.querySelector('.art-subtitle-value');
         proxy($range, 'change', function () {
           var value = $range.value;

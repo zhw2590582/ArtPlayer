@@ -64,7 +64,7 @@
         text: text,
         time: Number(attr[0]),
         mode: Number(attr[1]),
-        size: Number(attr[2]),
+        fontSize: Number(attr[2]),
         color: "#".concat(Number(attr[3]).toString(16)),
         timestamp: Number(attr[4]),
         pool: Number(attr[5]),
@@ -92,6 +92,12 @@
       throw new Error("Unable to get data: ".concat(JSON.stringify(res)));
     });
   }
+
+  var bilibili = /*#__PURE__*/Object.freeze({
+    bilibiliDanmuParseFromXml: bilibiliDanmuParseFromXml,
+    bilibiliDanmuParseFromUrl: bilibiliDanmuParseFromUrl,
+    bilibiliDanmuParseFromAv: bilibiliDanmuParseFromAv
+  });
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -243,8 +249,10 @@
 
       this.art = art;
       this.queue = [];
-      this.isStop = false;
       this.refs = [];
+      this.option = {};
+      this.config(option);
+      this.isStop = false;
       this.animationFrameTimer = null;
       this.$danmuku = art.template.$danmuku;
       art.i18n.update(Danmuku.i18n);
@@ -254,7 +262,6 @@
       art.on('video:waiting', this.stop.bind(this));
       art.on('resize', this.resize.bind(this));
       art.on('destroy', this.stop.bind(this));
-      this.config(option);
 
       if (typeof this.option.danmuku === 'function') {
         this.option.danmuku().then(function (danmus) {
@@ -278,28 +285,30 @@
         var _this$art$constructor = this.art.constructor,
             clamp = _this$art$constructor.utils.clamp,
             validator = _this$art$constructor.validator;
-        this.option = Object.assign({}, Danmuku.option, option);
+        this.option = Object.assign({}, Danmuku.option, this.option, option);
         validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
-        this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.size = clamp(this.option.size, 12, 30);
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
         this.option.margin[0] = clamp(this.option.margin[0], 0, 100);
         this.option.margin[1] = clamp(this.option.margin[1], 0, 100);
+        this.option.opacity = clamp(this.option.opacity, 0, 1);
+        this.option.fontSize = clamp(this.option.fontSize, 12, 30);
+        this.art.emit('artplayerPluginDanmuku:config', this.option);
       }
     }, {
       key: "emit",
       value: function emit(danmu) {
         var $player = this.art.template.$player;
         danmu.$ref = this.getDanmuRef();
+        danmu.$ref.style.opacity = this.option.opacity;
+        danmu.$ref.style.fontSize = "".concat(this.option.fontSize, "px");
         danmu.$ref.innerText = danmu.text;
-        danmu.$ref.style.fontSize = "".concat(danmu.size || this.option.size, "px");
+        danmu.$ref.style.color = danmu.color;
         var playerWidth = Danmuku.getRect($player, 'width');
         var danmuWidth = Danmuku.getRect(danmu.$ref, 'width');
         danmu.$restWidth = playerWidth + danmuWidth + 5;
         danmu.$restTime = this.option.speed;
         danmu.$lastStartTime = Date.now();
-        danmu.$ref.style.color = danmu.color || this.option.color;
         danmu.$ref.style.left = "".concat(playerWidth, "px");
         danmu.$ref.style.top = "".concat(this.getDanmuTop(), "px");
         danmu.$ref.style.transform = "translateX(".concat(-danmu.$restWidth, "px) translateY(0px) translateZ(0px)");
@@ -510,7 +519,7 @@
           _this3.suspend(danmu);
         });
         window.cancelAnimationFrame(this.animationFrameTimer);
-        this.art.emit('artplayerPluginDanmu:stop');
+        this.art.emit('artplayerPluginDanmuku:stop');
       }
     }, {
       key: "start",
@@ -522,19 +531,19 @@
           Danmuku["continue"](danmu);
         });
         this.update();
-        this.art.emit('artplayerPluginDanmu:start');
+        this.art.emit('artplayerPluginDanmuku:start');
       }
     }, {
       key: "show",
       value: function show() {
-        this.$danmuku.style = 'none';
-        this.art.emit('artplayerPluginDanmu:show');
+        this.$danmuku.style = 'block';
+        this.art.emit('artplayerPluginDanmuku:show');
       }
     }, {
       key: "hide",
       value: function hide() {
-        this.$danmuku.style = 'block';
-        this.art.emit('artplayerPluginDanmu:hide');
+        this.$danmuku.style = 'none';
+        this.art.emit('artplayerPluginDanmuku:hide');
       }
     }], [{
       key: "getRect",
@@ -570,11 +579,10 @@
         return {
           danmuku: [],
           speed: 5,
-          opacity: 1,
-          color: '#fff',
-          size: 25,
           maxlength: 50,
-          margin: [10, 20]
+          margin: [10, 100],
+          opacity: 1,
+          fontSize: 25
         };
       }
     }, {
@@ -583,11 +591,10 @@
         return {
           danmuku: 'array|function|string',
           speed: 'number',
-          opacity: 'number',
-          color: 'string',
-          size: 'number',
           maxlength: 'number',
-          margin: 'array'
+          margin: 'array',
+          opacity: 'number',
+          fontSize: 'number'
         };
       }
     }]);
@@ -595,9 +602,107 @@
     return Danmuku;
   }();
 
+  var i18n = {
+    'zh-cn': {
+      'Danmu opacity': '弹幕透明度',
+      'Danmu speed': '弹幕速度',
+      'Danmu size': '弹幕大小'
+    },
+    'zh-tw': {
+      'Danmu opacity': '彈幕透明度',
+      'Danmu speed': '彈幕速度',
+      'Danmu size': '弹幕大小'
+    }
+  };
+
+  function setting(art) {
+    var i18n = art.i18n,
+        proxy = art.events.proxy;
+    return {
+      name: 'danmuku-opacity',
+      index: 30,
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu opacity'), ": <span class=\"art-value\">100</span>%\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"1\" min=\"0.1\" max=\"1\" step=\"0.1\">\n            </div>\n        "),
+      mounted: function mounted($setting) {
+        var $range = $setting.querySelector('input[type=range]');
+        var $value = $setting.querySelector('.art-value');
+        proxy($range, 'change', function () {
+          var value = $range.value;
+          $value.innerText = Number(value) * 100;
+          art.plugins.artplayerPluginDanmuku.config({
+            opacity: Number(value)
+          });
+          art.on('artplayerPluginDanmuku:config', function (config) {
+            if ($range.value !== config.opacity) {
+              $range.value = config.opacity;
+              $value.innerText = config.opacity * 100;
+            }
+          });
+        });
+      }
+    };
+  }
+
+  function setting$1(art) {
+    var i18n = art.i18n,
+        proxy = art.events.proxy;
+    return {
+      name: 'danmuku-speed',
+      index: 40,
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu speed'), ": <span class=\"art-value\">5</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"5\" min=\"1\" max=\"10\" step=\"1\">\n            </div>\n        "),
+      mounted: function mounted($setting) {
+        var $range = $setting.querySelector('input[type=range]');
+        var $value = $setting.querySelector('.art-value');
+        proxy($range, 'change', function () {
+          var value = $range.value;
+          $value.innerText = value;
+          art.plugins.artplayerPluginDanmuku.config({
+            speed: Number(value)
+          });
+          art.on('artplayerPluginDanmuku:config', function (config) {
+            if ($range.value !== config.speed) {
+              $range.value = config.speed;
+              $value.innerText = config.speed;
+            }
+          });
+        });
+      }
+    };
+  }
+
+  function setting$2(art) {
+    var i18n = art.i18n,
+        proxy = art.events.proxy;
+    return {
+      name: 'danmuku-size',
+      index: 50,
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu size'), ": <span class=\"art-value\">25</span>px\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"25\" min=\"14\" max=\"30\" step=\"1\">\n            </div>\n        "),
+      mounted: function mounted($setting) {
+        var $range = $setting.querySelector('input[type=range]');
+        var $value = $setting.querySelector('.art-value');
+        proxy($range, 'change', function () {
+          var value = $range.value;
+          $value.innerText = value;
+          art.plugins.artplayerPluginDanmuku.config({
+            fontSize: Number(value)
+          });
+          art.on('artplayerPluginDanmuku:config', function (config) {
+            if ($range.value !== config.fontSize) {
+              $range.value = config.fontSize;
+              $value.innerText = config.fontSize;
+            }
+          });
+        });
+      }
+    };
+  }
+
   function artplayerPluginDanmuku(option) {
     return function (art) {
       var danmuku = new Danmuku(art, option);
+      art.i18n.update(i18n);
+      art.setting.add(setting);
+      art.setting.add(setting$1);
+      art.setting.add(setting$2);
       return {
         name: 'artplayerPluginDanmuku',
         emit: danmuku.addToQueue.bind(danmuku),
@@ -610,9 +715,7 @@
     };
   }
 
-  artplayerPluginDanmuku.bilibiliDanmuParseFromXml = bilibiliDanmuParseFromXml;
-  artplayerPluginDanmuku.bilibiliDanmuParseFromAv = bilibiliDanmuParseFromAv;
-  artplayerPluginDanmuku.bilibiliDanmuParseFromUrl = bilibiliDanmuParseFromUrl;
+  artplayerPluginDanmuku.bilibili = bilibili;
 
   return artplayerPluginDanmuku;
 

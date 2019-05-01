@@ -17,7 +17,7 @@ function settingMix(art) {
             </div>
         `,
         mounted: $setting => {
-            const $range = $setting.querySelector('.art-subtitle-range');
+            const $range = $setting.querySelector('.art-setting-range input');
             const $value = $setting.querySelector('.art-subtitle-value');
             proxy($range, 'change', () => {
                 const { value } = $range;
