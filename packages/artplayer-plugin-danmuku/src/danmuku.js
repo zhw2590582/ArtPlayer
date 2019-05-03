@@ -1,6 +1,6 @@
 import i18n from './i18n';
 import { opacity, size, speed } from './setting';
-import { filter, getRect } from './utils';
+import { filter, getRect, getDanmuRef } from './utils';
 import { bilibiliDanmuParseFromUrl } from './bilibili';
 import getDanmuTop from './getDanmuTop';
 
@@ -22,6 +22,7 @@ export default class Danmuku {
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
         art.on('video:waiting', this.stop.bind(this));
+        art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
         if (typeof this.option.danmuku === 'function') {
             this.option.danmuku().then(danmus => {
@@ -80,7 +81,6 @@ export default class Danmuku {
     continue() {
         filter(this.queue, 'stop', danmu => {
             danmu.$state = 'emit';
-            danmu.$lastStartTime = Date.now();
             switch (danmu.mode) {
                 case 'scroll':
                     danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
@@ -98,7 +98,6 @@ export default class Danmuku {
         filter(this.queue, 'emit', danmu => {
             danmu.$state = 'stop';
             const { left: danmuLeft } = getRect(danmu.$ref);
-            danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
             const translateX = playerWidth - (danmuLeft - playerLeft) + 5;
             switch (danmu.mode) {
                 case 'scroll':
@@ -111,54 +110,24 @@ export default class Danmuku {
         });
     }
 
-    getDanmuRef() {
+    resize() {
         const { $player } = this.art.template;
-        const { setStyles, append } = this.art.constructor.utils;
-        const playerLeft = getRect($player, 'left');
-
-        const waitDanmu = this.queue.find(danmu => {
+        const danmuLeft = getRect($player, 'width');
+        filter(this.queue, 'wait', danmu => {
             if (danmu.$ref) {
-                const { left: danmuLeft, width: danmuWidth } = getRect(danmu.$ref);
-                return danmu.$state === 'wait' || (danmu.$state === 'emit' && playerLeft > danmuLeft + danmuWidth);
+                danmu.$ref.style.border = 'none';
+                danmu.$ref.style.left = `${danmuLeft}px`;
+                danmu.$ref.style.marginLeft = '0px';
+                danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+                danmu.$ref.style.transition = 'transform 0s linear 0s';
             }
-            return false;
         });
-
-        if (waitDanmu && waitDanmu.$state === 'emit') {
-            waitDanmu.$state = 'wait';
-            waitDanmu.$ref.style.border = 'none';
-            waitDanmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
-            waitDanmu.$ref.style.transition = 'transform 0s linear 0s';
-            this.$danmuku.appendChild(waitDanmu.$ref);
-            return waitDanmu.$ref;
-        }
-
-        const $ref = document.createElement('div');
-
-        setStyles($ref, {
-            userSelect: 'none',
-            position: 'absolute',
-            whiteSpace: 'pre',
-            pointerEvents: 'none',
-            perspective: '500px',
-            display: 'inline-block',
-            willChange: 'transform',
-            fontFamily: 'SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif',
-            fontWeight: 'normal',
-            lineHeight: '1.125',
-            textShadow:
-                'rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px',
-        });
-
-        append(this.$danmuku, $ref);
-        this.refs.push($ref);
-        return $ref;
     }
 
-    getDanmuTop() {
+    getDanmuTop(mode) {
         const { $player } = this.art.template;
         const { left: playerLeft, top: playerTop, height: playerHeight, width: playerWidth } = getRect($player);
-        const danmus = this.queue.filter(danmu => danmu.$state === 'emit');
+        const danmus = this.queue.filter(danmu => danmu.mode === mode && danmu.$state === 'emit');
 
         if (danmus.length === 0) {
             return this.option.margin[0];
@@ -208,6 +177,21 @@ export default class Danmuku {
         } = this.art;
         this.animationFrameTimer = window.requestAnimationFrame(() => {
             if (player.playing) {
+                const danmuLeft = getRect($player, 'width');
+
+                filter(this.queue, 'emit', danmu => {
+                    danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
+                    danmu.$lastStartTime = Date.now();
+                    if (danmu.$restTime <= 0) {
+                        danmu.$state = 'wait';
+                        danmu.$ref.style.border = 'none';
+                        danmu.$ref.style.left = `${danmuLeft}px`;
+                        danmu.$ref.style.marginLeft = '0px';
+                        danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+                        danmu.$ref.style.transition = 'transform 0s linear 0s';
+                    }
+                });
+
                 this.queue
                     .filter(danmu => {
                         return (
@@ -218,7 +202,11 @@ export default class Danmuku {
                     })
                     .forEach(danmu => {
                         danmu.$state = 'emit';
-                        danmu.$ref = this.getDanmuRef();
+                        danmu.$ref = getDanmuRef(this.queue);
+                        this.$danmuku.appendChild(danmu.$ref);
+                        if (!this.refs.includes(danmu.$ref)) {
+                            this.refs.push(danmu.$ref);
+                        }
                         danmu.$ref.style.opacity = this.option.opacity;
                         danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
                         danmu.$ref.innerText = danmu.text;
@@ -230,7 +218,6 @@ export default class Danmuku {
                         const danmuTop = this.getDanmuTop(danmu.mode);
                         switch (danmu.mode) {
                             case 'scroll': {
-                                const danmuLeft = getRect($player, 'width');
                                 danmu.$restWidth = danmuLeft + danmuWidth + 5;
                                 danmu.$ref.style.left = `${danmuLeft}px`;
                                 danmu.$ref.style.top = `${danmuTop}px`;

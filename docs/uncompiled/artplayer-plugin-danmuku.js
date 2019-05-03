@@ -173,6 +173,21 @@
     var result = ref.getBoundingClientRect();
     return key ? result[key] : result;
   }
+  function getDanmuRef(queue) {
+    var result = queue.find(function (danmu) {
+      return danmu.$ref && danmu.$state === 'wait';
+    });
+
+    if (result) {
+      var _$ref = result.$ref;
+      result.$ref = null;
+      return _$ref;
+    }
+
+    var $ref = document.createElement('div');
+    $ref.style.cssText = "\n        user-select: none;\n        position: absolute;\n        white-space: pre;\n        pointer-events: none;\n        perspective: 500px;\n        display: inline-block;\n        will-change: transform;\n        font-family: SimHei, \"Microsoft JhengHei\", Arial, Helvetica, sans-serif;\n        font-weight: normal;\n        line-height: 1.125;\n        text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;\n    ";
+    return $ref;
+  }
 
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
@@ -366,6 +381,7 @@
       art.on('video:playing', this.start.bind(this));
       art.on('video:pause', this.stop.bind(this));
       art.on('video:waiting', this.stop.bind(this));
+      art.on('resize', this.resize.bind(this));
       art.on('destroy', this.stop.bind(this));
 
       if (typeof this.option.danmuku === 'function') {
@@ -405,7 +421,6 @@
       value: function _continue() {
         filter(this.queue, 'stop', function (danmu) {
           danmu.$state = 'emit';
-          danmu.$lastStartTime = Date.now();
 
           switch (danmu.mode) {
             case 'scroll':
@@ -433,7 +448,6 @@
           var _getRect2 = getRect(danmu.$ref),
               danmuLeft = _getRect2.left;
 
-          danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
           var translateX = playerWidth - (danmuLeft - playerLeft) + 5;
 
           switch (danmu.mode) {
@@ -448,65 +462,33 @@
         });
       }
     }, {
-      key: "getDanmuRef",
-      value: function getDanmuRef() {
+      key: "resize",
+      value: function resize() {
         var $player = this.art.template.$player;
-        var _this$art$constructor2 = this.art.constructor.utils,
-            setStyles = _this$art$constructor2.setStyles,
-            append = _this$art$constructor2.append;
-        var playerLeft = getRect($player, 'left');
-        var waitDanmu = this.queue.find(function (danmu) {
+        var danmuLeft = getRect($player, 'width');
+        filter(this.queue, 'wait', function (danmu) {
           if (danmu.$ref) {
-            var _getRect3 = getRect(danmu.$ref),
-                danmuLeft = _getRect3.left,
-                danmuWidth = _getRect3.width;
-
-            return danmu.$state === 'wait' || danmu.$state === 'emit' && playerLeft > danmuLeft + danmuWidth;
+            danmu.$ref.style.border = 'none';
+            danmu.$ref.style.left = "".concat(danmuLeft, "px");
+            danmu.$ref.style.marginLeft = '0px';
+            danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+            danmu.$ref.style.transition = 'transform 0s linear 0s';
           }
-
-          return false;
         });
-
-        if (waitDanmu && waitDanmu.$state === 'emit') {
-          waitDanmu.$state = 'wait';
-          waitDanmu.$ref.style.border = 'none';
-          waitDanmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
-          waitDanmu.$ref.style.transition = 'transform 0s linear 0s';
-          this.$danmuku.appendChild(waitDanmu.$ref);
-          return waitDanmu.$ref;
-        }
-
-        var $ref = document.createElement('div');
-        setStyles($ref, {
-          userSelect: 'none',
-          position: 'absolute',
-          whiteSpace: 'pre',
-          pointerEvents: 'none',
-          perspective: '500px',
-          display: 'inline-block',
-          willChange: 'transform',
-          fontFamily: 'SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif',
-          fontWeight: 'normal',
-          lineHeight: '1.125',
-          textShadow: 'rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px'
-        });
-        append(this.$danmuku, $ref);
-        this.refs.push($ref);
-        return $ref;
       }
     }, {
       key: "getDanmuTop",
-      value: function getDanmuTop$1() {
+      value: function getDanmuTop$1(mode) {
         var $player = this.art.template.$player;
 
-        var _getRect4 = getRect($player),
-            playerLeft = _getRect4.left,
-            playerTop = _getRect4.top,
-            playerHeight = _getRect4.height,
-            playerWidth = _getRect4.width;
+        var _getRect3 = getRect($player),
+            playerLeft = _getRect3.left,
+            playerTop = _getRect3.top,
+            playerHeight = _getRect3.height,
+            playerWidth = _getRect3.width;
 
         var danmus = this.queue.filter(function (danmu) {
-          return danmu.$state === 'emit';
+          return danmu.mode === mode && danmu.$state === 'emit';
         });
 
         if (danmus.length === 0) {
@@ -514,11 +496,11 @@
         }
 
         var danmusBySort = danmus.map(function (danmu) {
-          var _getRect5 = getRect(danmu.$ref),
-              danmuLeft = _getRect5.left,
-              danmuTop = _getRect5.top,
-              danmuWidth = _getRect5.width,
-              danmuHeight = _getRect5.height;
+          var _getRect4 = getRect(danmu.$ref),
+              danmuLeft = _getRect4.left,
+              danmuTop = _getRect4.top,
+              danmuWidth = _getRect4.width,
+              danmuHeight = _getRect4.height;
 
           var top = danmuTop - playerTop;
           var left = danmuLeft - playerLeft;
@@ -559,11 +541,33 @@
             $player = _this$art.template.$player;
         this.animationFrameTimer = window.requestAnimationFrame(function () {
           if (player.playing) {
+            var danmuLeft = getRect($player, 'width');
+            filter(_this2.queue, 'emit', function (danmu) {
+              danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
+              danmu.$lastStartTime = Date.now();
+
+              if (danmu.$restTime <= 0) {
+                danmu.$state = 'wait';
+                danmu.$ref.style.border = 'none';
+                danmu.$ref.style.left = "".concat(danmuLeft, "px");
+                danmu.$ref.style.marginLeft = '0px';
+                danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+                danmu.$ref.style.transition = 'transform 0s linear 0s';
+              }
+            });
+
             _this2.queue.filter(function (danmu) {
               return player.currentTime + 0.1 >= danmu.time && danmu.time >= player.currentTime - 0.1 && danmu.$state === 'wait';
             }).forEach(function (danmu) {
               danmu.$state = 'emit';
-              danmu.$ref = _this2.getDanmuRef();
+              danmu.$ref = getDanmuRef(_this2.queue);
+
+              _this2.$danmuku.appendChild(danmu.$ref);
+
+              if (!_this2.refs.includes(danmu.$ref)) {
+                _this2.refs.push(danmu.$ref);
+              }
+
               danmu.$ref.style.opacity = _this2.option.opacity;
               danmu.$ref.style.fontSize = "".concat(_this2.option.fontSize, "px");
               danmu.$ref.innerText = danmu.text;
@@ -578,7 +582,6 @@
               switch (danmu.mode) {
                 case 'scroll':
                   {
-                    var danmuLeft = getRect($player, 'width');
                     danmu.$restWidth = danmuLeft + danmuWidth + 5;
                     danmu.$ref.style.left = "".concat(danmuLeft, "px");
                     danmu.$ref.style.top = "".concat(danmuTop, "px");
@@ -698,8 +701,6 @@
         name: 'artplayerPluginDanmuku',
         emit: danmuku.emit.bind(danmuku),
         config: danmuku.config.bind(danmuku),
-        start: danmuku.start.bind(danmuku),
-        stop: danmuku.stop.bind(danmuku),
         hide: danmuku.hide.bind(danmuku),
         show: danmuku.show.bind(danmuku)
       };
