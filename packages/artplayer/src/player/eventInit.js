@@ -102,12 +102,10 @@ export default function eventInit(art, player) {
     });
 
     art.on('video:play', () => {
-        art.controls.hide();
         art.mask.hide();
     });
 
     art.on('video:playing', () => {
-        art.controls.hide();
         art.mask.hide();
     });
 
@@ -136,7 +134,6 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:timeupdate', () => {
-        art.controls.hide();
         art.mask.hide();
     });
 

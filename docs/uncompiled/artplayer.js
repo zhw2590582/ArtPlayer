@@ -1033,11 +1033,9 @@
       art.mask.show();
     });
     art.on('video:play', function () {
-      art.controls.hide();
       art.mask.hide();
     });
     art.on('video:playing', function () {
-      art.controls.hide();
       art.mask.hide();
     }); // art.on('video:progress', () => {
     // });
@@ -1055,7 +1053,6 @@
     // });
 
     art.on('video:timeupdate', function () {
-      art.controls.hide();
       art.mask.hide();
     }); // art.on('video:volumechange', () => {
     // });
