@@ -94,16 +94,17 @@ export default class Danmuku {
 
     suspend() {
         const { $player } = this.art.template;
-        const { left: playerLeft, width: playerWidth } = getRect($player);
         filter(this.queue, 'emit', danmu => {
             danmu.$state = 'stop';
-            const { left: danmuLeft } = getRect(danmu.$ref);
-            const translateX = playerWidth - (danmuLeft - playerLeft) + 5;
             switch (danmu.mode) {
-                case 'scroll':
+                case 'scroll': {
+                    const { left: playerLeft, width: playerWidth } = getRect($player);
+                    const { left: danmuLeft } = getRect(danmu.$ref);
+                    const translateX = playerWidth - (danmuLeft - playerLeft) + 5;
                     danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                     danmu.$ref.style.transition = 'transform 0s linear 0s';
                     break;
+                }
                 default:
                     break;
             }

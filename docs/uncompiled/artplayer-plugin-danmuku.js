@@ -437,24 +437,24 @@
       key: "suspend",
       value: function suspend() {
         var $player = this.art.template.$player;
-
-        var _getRect = getRect($player),
-            playerLeft = _getRect.left,
-            playerWidth = _getRect.width;
-
         filter(this.queue, 'emit', function (danmu) {
           danmu.$state = 'stop';
 
-          var _getRect2 = getRect(danmu.$ref),
-              danmuLeft = _getRect2.left;
-
-          var translateX = playerWidth - (danmuLeft - playerLeft) + 5;
-
           switch (danmu.mode) {
             case 'scroll':
-              danmu.$ref.style.transform = "translateX(".concat(-translateX, "px) translateY(0px) translateZ(0px)");
-              danmu.$ref.style.transition = 'transform 0s linear 0s';
-              break;
+              {
+                var _getRect = getRect($player),
+                    playerLeft = _getRect.left,
+                    playerWidth = _getRect.width;
+
+                var _getRect2 = getRect(danmu.$ref),
+                    danmuLeft = _getRect2.left;
+
+                var translateX = playerWidth - (danmuLeft - playerLeft) + 5;
+                danmu.$ref.style.transform = "translateX(".concat(-translateX, "px) translateY(0px) translateZ(0px)");
+                danmu.$ref.style.transition = 'transform 0s linear 0s';
+                break;
+              }
 
             default:
               break;

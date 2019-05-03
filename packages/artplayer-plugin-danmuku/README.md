@@ -54,14 +54,8 @@ art.plugins.artplayerPluginDanmuku.emit({
     time: 5, // Video time
     color: '#fff', // Danmu color
     size: 25, // Danmu size
-    border: '#fff' // Danmu border color
+    border: false // Danmu border
 });
-
-// Start danmu
-art.plugins.artplayerPluginDanmuku.start();
-
-// Stop danmu
-art.plugins.artplayerPluginDanmuku.stop();
 
 // Hide danmu
 art.plugins.artplayerPluginDanmuku.hide();
