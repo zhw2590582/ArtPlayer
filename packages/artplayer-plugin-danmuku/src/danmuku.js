@@ -12,7 +12,6 @@ export default class Danmuku {
         art.setting.add(speed);
         this.art = art;
         this.queue = [];
-        this.refs = [];
         this.option = {};
         this.config(option);
         this.isStop = false;
@@ -126,52 +125,6 @@ export default class Danmuku {
         });
     }
 
-    getDanmuTop(mode) {
-        const { $player } = this.art.template;
-        const { left: playerLeft, top: playerTop, height: playerHeight, width: playerWidth } = getRect($player);
-        const danmus = this.queue.filter(danmu => danmu.mode === mode && danmu.$state === 'emit');
-
-        if (danmus.length === 0) {
-            return this.option.margin[0];
-        }
-
-        const danmusBySort = danmus
-            .map(danmu => {
-                const { left: danmuLeft, top: danmuTop, width: danmuWidth, height: danmuHeight } = getRect(danmu.$ref);
-                const top = danmuTop - playerTop;
-                const left = danmuLeft - playerLeft;
-                const right = playerWidth - left - danmuWidth;
-                return {
-                    top,
-                    left,
-                    right,
-                    height: danmuHeight,
-                    width: danmuWidth,
-                };
-            })
-            .sort((prev, next) => {
-                return prev.top - next.top;
-            });
-
-        danmusBySort.unshift({
-            top: 0,
-            left: 0,
-            right: 0,
-            height: this.option.margin[0],
-            width: playerWidth,
-        });
-
-        danmusBySort.push({
-            top: playerHeight - this.option.margin[1],
-            left: 0,
-            right: 0,
-            height: this.option.margin[1],
-            width: playerWidth,
-        });
-
-        return getDanmuTop(danmusBySort);
-    }
-
     update() {
         const {
             player,
@@ -203,12 +156,8 @@ export default class Danmuku {
                         );
                     })
                     .forEach(danmu => {
-                        danmu.$state = 'emit';
                         danmu.$ref = getDanmuRef(this.queue);
                         this.$danmuku.appendChild(danmu.$ref);
-                        if (!this.refs.includes(danmu.$ref)) {
-                            this.refs.push(danmu.$ref);
-                        }
                         danmu.$ref.style.opacity = this.option.opacity;
                         danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
                         danmu.$ref.innerText = danmu.text;
@@ -217,7 +166,8 @@ export default class Danmuku {
                         danmu.$restTime = this.option.speed;
                         danmu.$lastStartTime = Date.now();
                         const danmuWidth = getRect(danmu.$ref, 'width');
-                        const danmuTop = this.getDanmuTop(danmu.mode);
+                        const danmuTop = getDanmuTop(this, danmu);
+                        danmu.$state = 'emit';
                         switch (danmu.mode) {
                             case 'scroll': {
                                 danmu.$restWidth = danmuLeft + danmuWidth + 5;
@@ -285,6 +235,7 @@ export default class Danmuku {
         }
 
         this.queue.push({
+            mode: 'scroll',
             ...danmu,
             $state: 'wait',
             $ref: null,

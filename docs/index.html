@@ -1,87 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Artplayer.js</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <meta name="keywords" content="artplayer, player, js, html5, video"/>
-        <meta name="description" content="ArtPlayer is a modern HTML5 video player"/>
-        <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="./assets/css/normalize.css" />
-        <link rel="stylesheet" href="./assets/css/codemirror.css" />
-        <link rel="stylesheet" href="./assets/css/dracula.css" />
-        <link rel="stylesheet" href="./assets/css/consola.css" />
-        <link rel="stylesheet" href="./assets/css/style.css" />
-        <link rel="stylesheet" href="./uncompiled/artplayer.css" />
-    </head>
-    <body>
-        <section class="main">
-            <div class="part-left">
-                <header class="header">
-                    <a href="./" class="logo">Artplayer.js</a>
-                    <div class="menus">
-                        <div class="item ecosystem">
-                            Ecosystem
-                            <div class="sub-menu">
-                                <ul>
-                                    <li class="title">Plugins</li>
-                                    <li><a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif">artplayer-plugin-gif</a></li>
-                                    <li><a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight">artplayer-plugin-backlight</a></li>
-                                    <li><a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku">artplayer-plugin-danmuku</a></li>
-                                    <li><a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist">artplayer-plugin-playlist</a></li>
-                                </ul>
-                                <ul>
-                                    <li class="title">Tools</li>
-                                    <li><a href="./?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail">artplayer-tool-thumbnail</a></li>
-                                    <li><a href="./?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github">artplayer-tool-github</a></li>
-                                </ul>
-                                <ul>
-                                    <li class="title">Component</li>
-                                    <li><a href="https://codesandbox.io/s/n74859y9rl">artplayer-react</a></li>
-                                    <li><a href="https://codesandbox.io/s/6z76lm109n">artplayer-vue</a></li>
-                                </ul>
-                            </div>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Artplayer.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="artplayer, player, js, html5, video" />
+    <meta name="description" content="ArtPlayer is a modern HTML5 video player" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/normalize.css" />
+    <link rel="stylesheet" href="./assets/css/codemirror.css" />
+    <link rel="stylesheet" href="./assets/css/dracula.css" />
+    <link rel="stylesheet" href="./assets/css/consola.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./uncompiled/artplayer.css" />
+</head>
+
+<body>
+    <section class="main">
+        <div class="part-left">
+            <header class="header">
+                <a href="./" class="logo">Artplayer.js</a>
+                <div class="menus">
+                    <div class="item ecosystem">
+                        Ecosystem
+                        <div class="sub-menu">
+                            <ul>
+                                <li class="title">Plugins</li>
+                                <li><a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif">artplayer-plugin-gif</a>
+                                </li>
+                                <li><a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight">artplayer-plugin-backlight</a>
+                                </li>
+                                <li><a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku">artplayer-plugin-danmuku</a>
+                                </li>
+                                <li><a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist">artplayer-plugin-playlist</a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li class="title">Tools</li>
+                                <li><a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail">artplayer-tool-thumbnail</a>
+                                </li>
+                                <li><a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github">artplayer-tool-github</a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li class="title">Component</li>
+                                <li><a href="https://codesandbox.io/s/n74859y9rl">artplayer-react</a></li>
+                                <li><a href="https://codesandbox.io/s/6z76lm109n">artplayer-vue</a></li>
+                            </ul>
                         </div>
-                        <a class="item" href="./document/">Document</a>
-                        <a class="item" href="https://github.com/zhw2590582/ArtPlayer">Github</a>
                     </div>
-                    <div class="run">Run Code</div>
-                </header>
-                <div class="libs">
-                    <textarea
-                        class="libsInput"
-                        placeholder="Other dependencies, support for js and css, multiple line breaks"
-                        spellcheck="false"
-                    ></textarea>
+                    <a class="item" href="./document/">Document</a>
+                    <a class="item" href="https://github.com/zhw2590582/ArtPlayer">Github</a>
                 </div>
-                <div class="code">
-                    <div class="codeMirrorWrap"></div>
-                </div>
+                <div class="run">Run Code</div>
+            </header>
+            <div class="libs">
+                <textarea class="libsInput"
+                    placeholder="Other dependencies, support for js and css, multiple line breaks"
+                    spellcheck="false"></textarea>
             </div>
-            <div class="part-right">
-                <div class="video-wrap">
-                    <div class="artplayer-app"></div>
-                </div>
-                <div class="console"></div>
+            <div class="code">
+                <div class="codeMirrorWrap"></div>
             </div>
-        </section>
-        <div class="popups">
-            <div class="popinner"></div>
         </div>
-        <script src="./assets/js/codemirror.js"></script>
-        <script src="./assets/js/javascript.js"></script>
-        <script src="./assets/js/consola.js"></script>
-        <script src="./uncompiled/artplayer.js"></script>
-        <script src="./assets/js/common.js"></script>
-        <script>
-            var _hmt = _hmt || [];
-            (function() {
-              var hm = document.createElement("script");
-              hm.src = "https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d";
-              var s = document.getElementsByTagName("script")[0]; 
-              s.parentNode.insertBefore(hm, s);
-            })();
-        </script>
-    </body>
+        <div class="part-right">
+            <div class="video-wrap">
+                <div class="artplayer-app"></div>
+            </div>
+            <div class="console"></div>
+        </div>
+    </section>
+    <div class="popups">
+        <div class="popinner"></div>
+    </div>
+    <script src="./assets/js/codemirror.js"></script>
+    <script src="./assets/js/javascript.js"></script>
+    <script src="./assets/js/consola.js"></script>
+    <script src="./uncompiled/artplayer.js"></script>
+    <script src="./assets/js/common.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            if (Artplayer.env !== "\"development\"") {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            }
+        })();
+
+    </script>
+</body>
+
 </html>

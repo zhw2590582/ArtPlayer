@@ -281,26 +281,8 @@
     });
   }
 
-  function getDanmuTopByDiff(danmus) {
+  function calculatedTop(danmus) {
     var top = 0;
-    var maxDiff = 0;
-
-    for (var index = 1; index < danmus.length; index += 1) {
-      var item = danmus[index];
-      var prev = danmus[index - 1];
-      var prevTop = prev.top + prev.height;
-      var diff = item.top - prevTop;
-
-      if (diff > maxDiff) {
-        top = prevTop;
-        maxDiff = diff;
-      }
-    }
-
-    return top;
-  }
-
-  function getDanmuTopBySparse(danmus) {
     var topMap = {};
 
     for (var index = 0; index < danmus.length; index += 1) {
@@ -313,48 +295,108 @@
       }
     }
 
-    var maxRight = 0;
-    var top = 0;
     var topMapKeys = Object.keys(topMap);
+    var maxDiff = 0;
 
-    for (var _index = 0; _index < topMapKeys.length; _index += 1) {
-      var minRight = danmus[0].width;
-      var topKey = topMapKeys[_index];
-      var danmuArr = topMap[topKey];
+    for (var _index = 1; _index < danmus.length; _index += 1) {
+      var _item = danmus[_index];
+      var prev = danmus[_index - 1];
+      var prevTop = prev.top + prev.height;
+      var diff = _item.top - prevTop;
 
-      for (var _index2 = 0; _index2 < danmuArr.length; _index2 += 1) {
-        var danmu = danmuArr[_index2];
-
-        if (danmu.right < minRight) {
-          minRight = danmu.right;
-        }
-      }
-
-      if (minRight > maxRight) {
-        maxRight = minRight;
-
-        var _danmuArr = slicedToArray(danmuArr, 1);
-
-        top = _danmuArr[0].top;
+      if (diff > maxDiff) {
+        top = prevTop;
+        maxDiff = diff;
       }
     }
 
     if (top === 0) {
-      var randomKey = Math.floor(Math.random() * (2 - topMapKeys.length) + topMapKeys.length - 1);
-      top = topMapKeys[randomKey];
+      var maxRight = 0;
+
+      for (var _index2 = 0; _index2 < topMapKeys.length; _index2 += 1) {
+        var minRight = danmus[0].width;
+        var topKey = topMapKeys[_index2];
+        var danmuArr = topMap[topKey];
+
+        for (var _index3 = 0; _index3 < danmuArr.length; _index3 += 1) {
+          var danmu = danmuArr[_index3];
+
+          if (danmu.right < minRight) {
+            minRight = danmu.right;
+          }
+        }
+
+        if (minRight > maxRight) {
+          maxRight = minRight;
+
+          var _danmuArr = slicedToArray(danmuArr, 1);
+
+          top = _danmuArr[0].top;
+        }
+      }
+    }
+
+    if (top === 0) {
+      var _topMapKeys$filter$so = topMapKeys.filter(function (item, index) {
+        return index !== 0 && index !== topMapKeys.length - 1;
+      }).sort(function (prev, next) {
+        return topMap[prev].length - topMap[next].length;
+      });
+
+      var _topMapKeys$filter$so2 = slicedToArray(_topMapKeys$filter$so, 1);
+
+      top = _topMapKeys$filter$so2[0];
     }
 
     return top;
   }
 
-  function getDanmuTop(danmus) {
-    var top = getDanmuTopByDiff(danmus);
+  function getDanmuTop(ins, danmu) {
+    var _ins$option$margin = slicedToArray(ins.option.margin, 2),
+        marginTop = _ins$option$margin[0],
+        marginBottom = _ins$option$margin[1];
 
-    if (top === 0) {
-      top = getDanmuTopBySparse(danmus);
+    var playerData = getRect(ins.art.template.$player);
+    var danmus = ins.queue.filter(function (item) {
+      return item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize;
+    }).map(function (item) {
+      var danmuData = getRect(item.$ref);
+      var width = danmuData.width,
+          height = danmuData.height;
+      var top = danmuData.top - playerData.top;
+      var left = danmuData.left - playerData.left;
+      var right = playerData.width - left - width;
+      return {
+        top: top,
+        left: left,
+        height: height,
+        width: width,
+        right: right,
+        item: item
+      };
+    }).sort(function (prev, next) {
+      return prev.top - next.top;
+    });
+
+    if (danmus.length === 0) {
+      return marginTop;
     }
 
-    return top;
+    danmus.unshift({
+      top: 0,
+      left: 0,
+      right: 0,
+      height: marginTop,
+      width: playerData.width
+    });
+    danmus.push({
+      top: playerData.height - marginBottom,
+      left: 0,
+      right: 0,
+      height: marginBottom,
+      width: playerData.width
+    });
+    return calculatedTop(danmus);
   }
 
   var Danmuku =
@@ -371,7 +413,6 @@
       art.setting.add(speed);
       this.art = art;
       this.queue = [];
-      this.refs = [];
       this.option = {};
       this.config(option);
       this.isStop = false;
@@ -478,61 +519,6 @@
         });
       }
     }, {
-      key: "getDanmuTop",
-      value: function getDanmuTop$1(mode) {
-        var $player = this.art.template.$player;
-
-        var _getRect3 = getRect($player),
-            playerLeft = _getRect3.left,
-            playerTop = _getRect3.top,
-            playerHeight = _getRect3.height,
-            playerWidth = _getRect3.width;
-
-        var danmus = this.queue.filter(function (danmu) {
-          return danmu.mode === mode && danmu.$state === 'emit';
-        });
-
-        if (danmus.length === 0) {
-          return this.option.margin[0];
-        }
-
-        var danmusBySort = danmus.map(function (danmu) {
-          var _getRect4 = getRect(danmu.$ref),
-              danmuLeft = _getRect4.left,
-              danmuTop = _getRect4.top,
-              danmuWidth = _getRect4.width,
-              danmuHeight = _getRect4.height;
-
-          var top = danmuTop - playerTop;
-          var left = danmuLeft - playerLeft;
-          var right = playerWidth - left - danmuWidth;
-          return {
-            top: top,
-            left: left,
-            right: right,
-            height: danmuHeight,
-            width: danmuWidth
-          };
-        }).sort(function (prev, next) {
-          return prev.top - next.top;
-        });
-        danmusBySort.unshift({
-          top: 0,
-          left: 0,
-          right: 0,
-          height: this.option.margin[0],
-          width: playerWidth
-        });
-        danmusBySort.push({
-          top: playerHeight - this.option.margin[1],
-          left: 0,
-          right: 0,
-          height: this.option.margin[1],
-          width: playerWidth
-        });
-        return getDanmuTop(danmusBySort);
-      }
-    }, {
       key: "update",
       value: function update() {
         var _this2 = this;
@@ -560,14 +546,9 @@
             _this2.queue.filter(function (danmu) {
               return player.currentTime + 0.1 >= danmu.time && danmu.time >= player.currentTime - 0.1 && danmu.$state === 'wait';
             }).forEach(function (danmu) {
-              danmu.$state = 'emit';
               danmu.$ref = getDanmuRef(_this2.queue);
 
               _this2.$danmuku.appendChild(danmu.$ref);
-
-              if (!_this2.refs.includes(danmu.$ref)) {
-                _this2.refs.push(danmu.$ref);
-              }
 
               danmu.$ref.style.opacity = _this2.option.opacity;
               danmu.$ref.style.fontSize = "".concat(_this2.option.fontSize, "px");
@@ -577,8 +558,8 @@
               danmu.$restTime = _this2.option.speed;
               danmu.$lastStartTime = Date.now();
               var danmuWidth = getRect(danmu.$ref, 'width');
-
-              var danmuTop = _this2.getDanmuTop(danmu.mode);
+              var danmuTop = getDanmuTop(_this2, danmu);
+              danmu.$state = 'emit';
 
               switch (danmu.mode) {
                 case 'scroll':
@@ -658,7 +639,9 @@
           danmu.time = player.currentTime;
         }
 
-        this.queue.push(objectSpread({}, danmu, {
+        this.queue.push(objectSpread({
+          mode: 'scroll'
+        }, danmu, {
           $state: 'wait',
           $ref: null,
           $restTime: 0,
