@@ -1,3 +1,17 @@
+export function getMode(key) {
+    switch (key) {
+        case 1:
+        case 2:
+        case 3:
+            return 'scroll';
+        case 4:
+        case 5:
+            return 'static';
+        default:
+            return null;
+    }
+}
+
 export function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
     const srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
@@ -9,7 +23,7 @@ export function bilibiliDanmuParseFromXml(xmlString) {
                 ? {
                     text,
                     time: Number(attr[0]),
-                    mode: Number(attr[1]),
+                    mode: getMode(Number(attr[1])),
                     fontSize: Number(attr[2]),
                     color: `#${Number(attr[3]).toString(16)}`,
                     timestamp: Number(attr[4]),
