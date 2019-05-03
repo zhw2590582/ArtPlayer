@@ -421,6 +421,7 @@
       value: function _continue() {
         filter(this.queue, 'stop', function (danmu) {
           danmu.$state = 'emit';
+          danmu.$lastStartTime = Date.now();
 
           switch (danmu.mode) {
             case 'scroll':

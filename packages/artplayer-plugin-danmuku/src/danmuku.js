@@ -81,6 +81,7 @@ export default class Danmuku {
     continue() {
         filter(this.queue, 'stop', danmu => {
             danmu.$state = 'emit';
+            danmu.$lastStartTime = Date.now();
             switch (danmu.mode) {
                 case 'scroll':
                     danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
