@@ -12,11 +12,10 @@ function matrixCallback(callback) {
     return result;
 }
 
-function getColors($video, width, height) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = width;
-    canvas.height = height;
+function getColors($canvas, $video, width, height) {
+    const ctx = $canvas.getContext('2d');
+    $canvas.width = width;
+    $canvas.height = height;
     ctx.drawImage($video, 0, 0);
     return matrixCallback((xIndex, yIndex, x, y) => {
         const itemW = width / x;
@@ -83,13 +82,14 @@ function artplayerPluginBacklight(art) {
     });
 
     const matrix = creatMatrix($backlight);
+    const $canvas = document.createElement('canvas');
     $player.insertBefore($backlight, $video);
 
     (function loop() {
         window.requestAnimationFrame(() => {
             if (player.playing) {
                 const { clientWidth, clientHeight } = $video;
-                const colors = getColors($video, clientWidth, clientHeight);
+                const colors = getColors($canvas, $video, clientWidth, clientHeight);
                 colors.forEach(({ r, g, b }, index) => {
                     const { $box, left, right, top, bottom } = matrix[index];
                     // eslint-disable-next-line no-nested-ternary

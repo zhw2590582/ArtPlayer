@@ -20,11 +20,10 @@
       return result;
     }
 
-    function getColors($video, width, height) {
-      var canvas = document.createElement('canvas');
-      var ctx = canvas.getContext('2d');
-      canvas.width = width;
-      canvas.height = height;
+    function getColors($canvas, $video, width, height) {
+      var ctx = $canvas.getContext('2d');
+      $canvas.width = width;
+      $canvas.height = height;
       ctx.drawImage($video, 0, 0);
       return matrixCallback(function (xIndex, yIndex, x, y) {
         var itemW = width / x;
@@ -98,6 +97,7 @@
         height: '100%'
       });
       var matrix = creatMatrix($backlight);
+      var $canvas = document.createElement('canvas');
       $player.insertBefore($backlight, $video);
 
       (function loop() {
@@ -105,7 +105,7 @@
           if (player.playing) {
             var clientWidth = $video.clientWidth,
                 clientHeight = $video.clientHeight;
-            var colors = getColors($video, clientWidth, clientHeight);
+            var colors = getColors($canvas, $video, clientWidth, clientHeight);
             colors.forEach(function (_ref, index) {
               var r = _ref.r,
                   g = _ref.g,
