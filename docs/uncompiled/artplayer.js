@@ -5518,7 +5518,6 @@
     var layers = art.layers,
         player = art.player,
         theme = art.option.theme;
-    var timer = null;
     layers.add({
       name: 'miniProgressBar',
       style: {
@@ -5531,30 +5530,11 @@
         background: theme
       },
       mounted: function mounted($progressBar) {
-        function hide() {
-          if (timer) {
-            clearTimeout(timer);
-          }
-
-          $progressBar.style.display = 'none';
-        }
-
-        function show() {
-          if (player.playing) {
-            timer = setTimeout(function () {
-              $progressBar.style.display = 'block';
-            }, 200);
-          }
-        }
-
         art.on('controls:show', function () {
-          hide();
+          $progressBar.style.display = 'none';
         });
-        art.on('hoverenter', function () {
-          hide();
-        });
-        art.on('hoverleave', function () {
-          show();
+        art.on('controls:hide', function () {
+          $progressBar.style.display = 'block';
         });
         art.on('video:timeupdate', function () {
           $progressBar.style.width = "".concat(player.played * 100, "%");
