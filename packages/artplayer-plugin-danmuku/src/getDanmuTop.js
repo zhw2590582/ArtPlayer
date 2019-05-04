@@ -76,7 +76,7 @@ export default function getDanmuTop(ins, danmu) {
             const top = danmuData.top - playerData.top;
             const left = danmuData.left - playerData.left;
             const right = playerData.width - left - width;
-            return { top, left, height, width, right, item };
+            return { top, left, height, width, right };
         })
         .sort((prev, next) => {
             return prev.top - next.top;
