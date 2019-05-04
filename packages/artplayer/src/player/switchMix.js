@@ -9,7 +9,9 @@ export default function switchMix(art, player) {
                     option.url = url;
                     player.playbackRateRemove();
                     player.aspectRatioRemove();
-                    player.seek(currentTime);
+                    art.once('video:canplay', () => {
+                        player.currentTime = currentTime;
+                    });
                     if (playing) {
                         player.play();
                     }
@@ -29,7 +31,7 @@ export default function switchMix(art, player) {
                     option.url = url;
                     player.playbackRateRemove();
                     player.aspectRatioRemove();
-                    player.seek(0);
+                    player.currentTime = 0;
                     if (playing) {
                         player.play();
                     }

@@ -1193,7 +1193,9 @@
             option.url = url;
             player.playbackRateRemove();
             player.aspectRatioRemove();
-            player.seek(currentTime);
+            art.once('video:canplay', function () {
+              player.currentTime = currentTime;
+            });
 
             if (playing) {
               player.play();
@@ -1217,7 +1219,7 @@
             option.url = url;
             player.playbackRateRemove();
             player.aspectRatioRemove();
-            player.seek(0);
+            player.currentTime = 0;
 
             if (playing) {
               player.play();
@@ -4090,7 +4092,7 @@
 
   function version(menuOption) {
     return objectSpread({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.7</a>'
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.8</a>'
     });
   }
 
@@ -4267,7 +4269,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.7</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.8</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -5704,7 +5706,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.7';
+        return '3.1.8';
       }
     }, {
       key: "env",
