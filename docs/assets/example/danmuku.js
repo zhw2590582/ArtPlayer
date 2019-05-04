@@ -4,6 +4,7 @@ var art = new Artplayer({
     url: url + '/video/you-name.mp4',
     autoSize: true,
     setting: true,
+    fullscreenWeb: true,
     plugins: [artplayerPluginDanmuku({
         danmuku: url + '/danmuku/you-name.xml',
         speed: 5,

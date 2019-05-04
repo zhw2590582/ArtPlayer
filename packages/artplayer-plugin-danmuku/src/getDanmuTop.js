@@ -67,7 +67,8 @@ export default function getDanmuTop(ins, danmu) {
                 item.mode === danmu.mode &&
                 item.$state === 'emit' &&
                 item.$ref &&
-                item.$ref.style.fontSize === danmu.$ref.style.fontSize,
+                item.$ref.style.fontSize === danmu.$ref.style.fontSize &&
+                parseFloat(item.$ref.style.top) <= playerData.height - marginBottom,
         )
         .map(item => {
             const danmuData = getRect(item.$ref);

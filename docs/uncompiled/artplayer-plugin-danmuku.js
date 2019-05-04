@@ -358,7 +358,7 @@
 
     var playerData = getRect(ins.art.template.$player);
     var danmus = ins.queue.filter(function (item) {
-      return item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize;
+      return item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize && parseFloat(item.$ref.style.top) <= playerData.height - marginBottom;
     }).map(function (item) {
       var danmuData = getRect(item.$ref);
       var width = danmuData.width,
