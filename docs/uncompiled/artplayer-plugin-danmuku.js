@@ -74,14 +74,16 @@
       'Danmu speed': '弹幕速度',
       'Danmu size': '弹幕大小',
       'Danmu text cannot be empty': '弹幕文本不能为空',
-      'The length of the danmu does not exceed': '弹幕文本字数不能超过'
+      'The length of the danmu does not exceed': '弹幕文本字数不能超过',
+      'Synchronize video playback speed': '是否同步视频播放速度'
     },
     'zh-tw': {
       'Danmu opacity': '彈幕透明度',
       'Danmu speed': '彈幕速度',
       'Danmu size': '弹幕大小',
       'Danmu text cannot be empty': '彈幕文本不能為空',
-      'The length of the danmu does not exceed': '彈幕文本字數不能超過'
+      'The length of the danmu does not exceed': '彈幕文本字數不能超過',
+      'Synchronize video playback speed': '是否同步視頻播放速度'
     }
   };
 
@@ -90,7 +92,7 @@
         proxy = art.events.proxy;
     return {
       name: 'danmuku-opacity',
-      index: 30,
+      index: 10,
       html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu opacity'), ": <span class=\"art-value\">100</span>%\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"1\" min=\"0.1\" max=\"1\" step=\"0.1\">\n            </div>\n        "),
       mounted: function mounted($setting) {
         var $range = $setting.querySelector('input[type=range]');
@@ -101,12 +103,12 @@
           art.plugins.artplayerPluginDanmuku.config({
             opacity: Number(value)
           });
-          art.on('artplayerPluginDanmuku:config', function (config) {
-            if ($range.value !== config.opacity) {
-              $range.value = config.opacity;
-              $value.innerText = config.opacity * 100;
-            }
-          });
+        });
+        art.on('artplayerPluginDanmuku:config', function (config) {
+          if ($range.value !== config.opacity) {
+            $range.value = config.opacity;
+            $value.innerText = config.opacity * 100;
+          }
         });
       }
     };
@@ -116,7 +118,7 @@
         proxy = art.events.proxy;
     return {
       name: 'danmuku-size',
-      index: 50,
+      index: 11,
       html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu size'), ": <span class=\"art-value\">25</span>px\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"25\" min=\"14\" max=\"30\" step=\"1\">\n            </div>\n        "),
       mounted: function mounted($setting) {
         var $range = $setting.querySelector('input[type=range]');
@@ -127,12 +129,12 @@
           art.plugins.artplayerPluginDanmuku.config({
             fontSize: Number(value)
           });
-          art.on('artplayerPluginDanmuku:config', function (config) {
-            if ($range.value !== config.fontSize) {
-              $range.value = config.fontSize;
-              $value.innerText = config.fontSize;
-            }
-          });
+        });
+        art.on('artplayerPluginDanmuku:config', function (config) {
+          if ($range.value !== config.fontSize) {
+            $range.value = config.fontSize;
+            $value.innerText = config.fontSize;
+          }
         });
       }
     };
@@ -142,7 +144,7 @@
         proxy = art.events.proxy;
     return {
       name: 'danmuku-speed',
-      index: 40,
+      index: 12,
       html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu speed'), ": <span class=\"art-value\">5</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"5\" min=\"1\" max=\"10\" step=\"1\">\n            </div>\n        "),
       mounted: function mounted($setting) {
         var $range = $setting.querySelector('input[type=range]');
@@ -153,12 +155,34 @@
           art.plugins.artplayerPluginDanmuku.config({
             speed: Number(value)
           });
-          art.on('artplayerPluginDanmuku:config', function (config) {
-            if ($range.value !== config.speed) {
-              $range.value = config.speed;
-              $value.innerText = config.speed;
-            }
+        });
+        art.on('artplayerPluginDanmuku:config', function (config) {
+          if ($range.value !== config.speed) {
+            $range.value = config.speed;
+            $value.innerText = config.speed;
+          }
+        });
+      }
+    };
+  }
+  function synchronousPlayback(art) {
+    var i18n = art.i18n,
+        proxy = art.events.proxy;
+    return {
+      name: 'danmuku-synchronousPlayback',
+      index: 13,
+      html: "\n            <label class=\"art-setting-checkbox\">\n                <input type=\"checkbox\"/>".concat(i18n.get('Synchronize video playback speed'), "\n            </label>\n        "),
+      mounted: function mounted($setting) {
+        var $checkbox = $setting.querySelector('input[type=checkbox]');
+        proxy($checkbox, 'change', function () {
+          art.plugins.artplayerPluginDanmuku.config({
+            synchronousPlayback: $checkbox.checked
           });
+        });
+        art.on('artplayerPluginDanmuku:config', function (config) {
+          if ($checkbox.checked !== config.synchronousPlayback) {
+            $checkbox.checked = config.synchronousPlayback;
+          }
         });
       }
     };
@@ -410,6 +434,7 @@
       art.setting.add(opacity);
       art.setting.add(size);
       art.setting.add(speed);
+      art.setting.add(synchronousPlayback);
       this.art = art;
       this.queue = [];
       this.option = {};
@@ -554,7 +579,7 @@
               danmu.$ref.innerText = danmu.text;
               danmu.$ref.style.color = danmu.color;
               danmu.$ref.style.border = danmu.border ? "1px solid ".concat(danmu.color) : 'none';
-              danmu.$restTime = _this2.option.speed;
+              danmu.$restTime = _this2.option.synchronousPlayback && player.playbackRateState ? _this2.option.speed / Number(player.playbackRateState) : _this2.option.speed;
               danmu.$lastStartTime = Date.now();
               var danmuWidth = getRect(danmu.$ref, 'width');
               var danmuTop = getDanmuTop(_this2, danmu);
@@ -657,7 +682,8 @@
           maxlength: 50,
           margin: [10, 100],
           opacity: 1,
-          fontSize: 25
+          fontSize: 25,
+          synchronousPlayback: false
         };
       }
     }, {
@@ -669,7 +695,8 @@
           maxlength: 'number',
           margin: 'array',
           opacity: 'number',
-          fontSize: 'number'
+          fontSize: 'number',
+          synchronousPlayback: 'boolean'
         };
       }
     }]);

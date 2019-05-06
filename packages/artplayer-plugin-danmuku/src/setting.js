@@ -6,7 +6,7 @@ export function opacity(art) {
 
     return {
         name: 'danmuku-opacity',
-        index: 30,
+        index: 10,
         html: `
             <div class="art-setting-header">
                 ${i18n.get('Danmu opacity')}: <span class="art-value">100</span>%
@@ -25,13 +25,13 @@ export function opacity(art) {
                 art.plugins.artplayerPluginDanmuku.config({
                     opacity: Number(value),
                 });
+            });
 
-                art.on('artplayerPluginDanmuku:config', config => {
-                    if ($range.value !== config.opacity) {
-                        $range.value = config.opacity;
-                        $value.innerText = config.opacity * 100;
-                    }
-                });
+            art.on('artplayerPluginDanmuku:config', config => {
+                if ($range.value !== config.opacity) {
+                    $range.value = config.opacity;
+                    $value.innerText = config.opacity * 100;
+                }
             });
         },
     };
@@ -45,7 +45,7 @@ export function size(art) {
 
     return {
         name: 'danmuku-size',
-        index: 50,
+        index: 11,
         html: `
             <div class="art-setting-header">
                 ${i18n.get('Danmu size')}: <span class="art-value">25</span>px
@@ -64,13 +64,13 @@ export function size(art) {
                 art.plugins.artplayerPluginDanmuku.config({
                     fontSize: Number(value),
                 });
+            });
 
-                art.on('artplayerPluginDanmuku:config', config => {
-                    if ($range.value !== config.fontSize) {
-                        $range.value = config.fontSize;
-                        $value.innerText = config.fontSize;
-                    }
-                });
+            art.on('artplayerPluginDanmuku:config', config => {
+                if ($range.value !== config.fontSize) {
+                    $range.value = config.fontSize;
+                    $value.innerText = config.fontSize;
+                }
             });
         },
     };
@@ -84,7 +84,7 @@ export function speed(art) {
 
     return {
         name: 'danmuku-speed',
-        index: 40,
+        index: 12,
         html: `
             <div class="art-setting-header">
                 ${i18n.get('Danmu speed')}: <span class="art-value">5</span>s
@@ -103,13 +103,43 @@ export function speed(art) {
                 art.plugins.artplayerPluginDanmuku.config({
                     speed: Number(value),
                 });
+            });
 
-                art.on('artplayerPluginDanmuku:config', config => {
-                    if ($range.value !== config.speed) {
-                        $range.value = config.speed;
-                        $value.innerText = config.speed;
-                    }
+            art.on('artplayerPluginDanmuku:config', config => {
+                if ($range.value !== config.speed) {
+                    $range.value = config.speed;
+                    $value.innerText = config.speed;
+                }
+            });
+        },
+    };
+}
+
+export function synchronousPlayback(art) {
+    const {
+        i18n,
+        events: { proxy },
+    } = art;
+    return {
+        name: 'danmuku-synchronousPlayback',
+        index: 13,
+        html: `
+            <label class="art-setting-checkbox">
+                <input type="checkbox"/>${i18n.get('Synchronize video playback speed')}
+            </label>
+        `,
+        mounted: $setting => {
+            const $checkbox = $setting.querySelector('input[type=checkbox]');
+            proxy($checkbox, 'change', () => {
+                art.plugins.artplayerPluginDanmuku.config({
+                    synchronousPlayback: $checkbox.checked,
                 });
+            });
+
+            art.on('artplayerPluginDanmuku:config', config => {
+                if ($checkbox.checked !== config.synchronousPlayback) {
+                    $checkbox.checked = config.synchronousPlayback;
+                }
             });
         },
     };

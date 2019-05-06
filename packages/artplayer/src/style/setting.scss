@@ -67,6 +67,14 @@
                 background-color: #fff;
             }
         }
+
+        .art-setting-checkbox {
+            input {
+                height: 14px;
+                width: 14px;
+                margin-right: 5px;
+            }
+        }
     }
 
     &.artplayer-setting-show {

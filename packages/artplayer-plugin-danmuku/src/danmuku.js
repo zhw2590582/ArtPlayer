@@ -1,5 +1,5 @@
 import i18n from './i18n';
-import { opacity, size, speed } from './setting';
+import { opacity, size, speed, synchronousPlayback } from './setting';
 import { filter, getRect, getDanmuRef } from './utils';
 import { bilibiliDanmuParseFromUrl } from './bilibili';
 import getDanmuTop from './getDanmuTop';
@@ -10,6 +10,7 @@ export default class Danmuku {
         art.setting.add(opacity);
         art.setting.add(size);
         art.setting.add(speed);
+        art.setting.add(synchronousPlayback);
         this.art = art;
         this.queue = [];
         this.option = {};
@@ -47,6 +48,7 @@ export default class Danmuku {
             margin: [10, 100],
             opacity: 1,
             fontSize: 25,
+            synchronousPlayback: false,
         };
     }
 
@@ -58,6 +60,7 @@ export default class Danmuku {
             margin: 'array',
             opacity: 'number',
             fontSize: 'number',
+            synchronousPlayback: 'boolean',
         };
     }
 
@@ -163,7 +166,10 @@ export default class Danmuku {
                         danmu.$ref.innerText = danmu.text;
                         danmu.$ref.style.color = danmu.color;
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : 'none';
-                        danmu.$restTime = this.option.speed;
+                        danmu.$restTime =
+                            this.option.synchronousPlayback && player.playbackRateState
+                                ? this.option.speed / Number(player.playbackRateState)
+                                : this.option.speed;
                         danmu.$lastStartTime = Date.now();
                         const danmuWidth = getRect(danmu.$ref, 'width');
                         const danmuTop = getDanmuTop(this, danmu);
