@@ -23,6 +23,13 @@ export default function playbackRate(settingOption) {
                     $value.innerText = value;
                     player.playbackRate(Number(value));
                 });
+
+                art.on('playbackRateChange', rate => {
+                    if ($range.value !== rate) {
+                        $range.value = rate;
+                        $value.innerText = rate;
+                    }
+                });
             },
         };
     };

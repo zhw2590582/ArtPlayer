@@ -5303,6 +5303,12 @@
             $value.innerText = value;
             player.playbackRate(Number(value));
           });
+          art.on('playbackRateChange', function (rate) {
+            if ($range.value !== rate) {
+              $range.value = rate;
+              $value.innerText = rate;
+            }
+          });
         }
       });
     };
