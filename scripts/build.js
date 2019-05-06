@@ -10,16 +10,20 @@ const isBuildAll = process.argv.pop() === 'all';
 
 function build(projectPath) {
     const { input, output, plugins } = creatRollupConfig(projectPath);
-    logger.log(`bundling ${output.file}...`);
-    return rollup
-        .rollup({
-            input,
-            plugins,
-        })
-        .then(bundle => {
-            bundle.write(output);
-            logger.success(`finished building all bundles from ${projectPath}`);
-        });
+    const dist = path.join(projectPath, 'dist');
+    return del(dist).then(() => {
+        logger.success(`----Delete directory successfully: ${dist}----`);
+        logger.log(`bundling ${output.file}...`);
+        return rollup
+            .rollup({
+                input,
+                plugins,
+            })
+            .then(bundle => {
+                bundle.write(output);
+                logger.success(`finished building all bundles from ${projectPath}`);
+            });
+    });
 }
 
 if (isBuildAll) {
