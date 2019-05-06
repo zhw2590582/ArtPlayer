@@ -5486,7 +5486,8 @@
     var setting = art.setting,
         notice = art.notice,
         template = art.template,
-        i18n = art.i18n;
+        i18n = art.i18n,
+        player = art.player;
     i18n.update({
       'zh-cn': {
         'Subtitle offset time': '字幕偏移时间',
@@ -5516,8 +5517,8 @@
               };
             }
 
-            cue.startTime = cuesCache[index].startTime + time;
-            cue.endTime = cuesCache[index].endTime + time;
+            cue.startTime = clamp(cuesCache[index].startTime + time, 0, player.duration);
+            cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
           });
           notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
           art.emit('artplayerPluginSubtitle:set', value);

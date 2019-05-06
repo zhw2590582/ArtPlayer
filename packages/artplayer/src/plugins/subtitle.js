@@ -42,7 +42,7 @@ function settingMix(art) {
 
 export default function subtitle(art) {
     const { clamp } = art.constructor.utils;
-    const { setting, notice, template, i18n } = art;
+    const { setting, notice, template, i18n, player } = art;
     
     i18n.update({
         'zh-cn': {
@@ -74,8 +74,8 @@ export default function subtitle(art) {
                             endTime: cue.endTime,
                         };
                     }
-                    cue.startTime = cuesCache[index].startTime + time;
-                    cue.endTime = cuesCache[index].endTime + time;
+                    cue.startTime = clamp(cuesCache[index].startTime + time, 0, player.duration);
+                    cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
                 });
                 notice.show(`${i18n.get('Subtitle offset time')}: ${value}s`);
                 art.emit('artplayerPluginSubtitle:set', value);
