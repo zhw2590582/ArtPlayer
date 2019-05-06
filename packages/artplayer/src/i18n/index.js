@@ -1,6 +1,6 @@
 import { mergeDeep } from '../utils';
-import zhCn from './zh-cn';
-import zhTw from './zh-tw';
+import zhCn from './zh-cn.json';
+import zhTw from './zh-tw.json';
 
 export default class I18n {
     constructor(art) {

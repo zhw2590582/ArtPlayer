@@ -371,8 +371,7 @@
         left: left,
         height: height,
         width: width,
-        right: right,
-        item: item
+        right: right
       };
     }).sort(function (prev, next) {
       return prev.top - next.top;

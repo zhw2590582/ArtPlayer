@@ -2,6 +2,7 @@ import screenfull from 'screenfull';
 
 export default function fullscreenMix(art, player) {
     const {
+        i18n,
         notice,
         events: { destroyEvents },
         template: { $player },
@@ -12,7 +13,7 @@ export default function fullscreenMix(art, player) {
     };
 
     const screenfullError = () => {
-        notice.show('Your browser does not seem to support full screen functionality.');
+        notice.show(i18n.get('This does not seem to support full screen functionality'));
     };
 
     try {

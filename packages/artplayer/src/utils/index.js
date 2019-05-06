@@ -108,18 +108,6 @@ export function remove(child) {
     return child.parentNode.removeChild(child);
 }
 
-export function insertByIndex(parent, child, index) {
-    const childs = Array.from(parent.children);
-    child.dataset.index = index;
-    const nextChild = childs.find(item => Number(item.dataset.index) >= Number(index));
-    if (nextChild) {
-        nextChild.insertAdjacentElement('beforebegin', child);
-    } else {
-        append(parent, child);
-    }
-    return child;
-}
-
 export function setStyle(element, key, value) {
     element.style[key] = value;
     return element;
@@ -171,7 +159,7 @@ export function vttToBlob(vttText) {
     );
 }
 
-export function downloadImage(url, name) {
+export function downloadFile(url, name) {
     const elink = document.createElement('a');
     setStyle(elink, 'display', 'none');
     elink.href = url;

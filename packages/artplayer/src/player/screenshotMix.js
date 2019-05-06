@@ -1,4 +1,4 @@
-import { secondToTime, downloadImage } from '../utils';
+import { secondToTime, downloadFile } from '../utils';
 
 export default function screenshotMix(art, player) {
     const {
@@ -46,7 +46,7 @@ export default function screenshotMix(art, player) {
         value: () => {
             const dataUri = player.getScreenshotDataURL();
             if (dataUri) {
-                downloadImage(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
+                downloadFile(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
                 art.emit('screenshot', dataUri);
             }
         },

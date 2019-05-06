@@ -1,4 +1,4 @@
-import { append, insertByIndex, setStyles, setStyle, remove } from './index';
+import { append, setStyles, setStyle, remove } from './index';
 
 export default function component(art, parent, target, getOption, callback, title) {
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
@@ -15,7 +15,14 @@ export default function component(art, parent, target, getOption, callback, titl
             setStyles($element, option.style);
         }
 
-        insertByIndex(target, $element, option.index || parent.id);
+        const childs = Array.from(target.children);
+        $element.dataset.index = option.index || parent.id;
+        const nextChild = childs.find(item => Number(item.dataset.index) >= Number($element.dataset.index));
+        if (nextChild) {
+            nextChild.insertAdjacentElement('beforebegin', $element);
+        } else {
+            append(target, $element);
+        }
 
         if (option.click) {
             art.events.proxy($element, 'click', event => {

@@ -11,6 +11,7 @@ const replace = require('rollup-plugin-replace');
 const svgo = require('rollup-plugin-svgo');
 const { uglify } = require('rollup-plugin-uglify');
 const copyAfterBuild = require('./copyAfterBuild');
+const json = require('rollup-plugin-json');
 
 module.exports = function creatRollupConfig(projectPath) {
     const packageJson = JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'), 'utf-8'));
@@ -36,8 +37,11 @@ module.exports = function creatRollupConfig(projectPath) {
         },
         exclude: ['node_modules/**', 'packages/**/node_modules/**'],
         plugins: [
+            json({
+                exclude: ['node_modules/**', 'packages/**/node_modules/**'],
+            }),
             eslint({
-                exclude: ['node_modules/**', 'packages/*/src/**/*.scss', 'packages/*/src/**/*.svg'],
+                exclude: ['node_modules/**', 'packages/*/src/**/*.scss', 'packages/*/src/**/*.svg', 'packages/*/src/**/*.json'],
             }),
             postcss({
                 plugins: [

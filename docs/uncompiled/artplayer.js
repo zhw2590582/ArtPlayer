@@ -407,21 +407,6 @@
   function remove(child) {
     return child.parentNode.removeChild(child);
   }
-  function insertByIndex(parent, child, index) {
-    var childs = Array.from(parent.children);
-    child.dataset.index = index;
-    var nextChild = childs.find(function (item) {
-      return Number(item.dataset.index) >= Number(index);
-    });
-
-    if (nextChild) {
-      nextChild.insertAdjacentElement('beforebegin', child);
-    } else {
-      append(parent, child);
-    }
-
-    return child;
-  }
   function setStyle(element, key, value) {
     element.style[key] = value;
     return element;
@@ -461,7 +446,7 @@
       type: 'text/vtt'
     }));
   }
-  function downloadImage(url, name) {
+  function downloadFile(url, name) {
     var elink = document.createElement('a');
     setStyle(elink, 'display', 'none');
     elink.href = url;
@@ -484,7 +469,6 @@
     mergeDeep: mergeDeep,
     append: append,
     remove: remove,
-    insertByIndex: insertByIndex,
     setStyle: setStyle,
     setStyles: setStyles,
     getStyle: getStyle,
@@ -493,7 +477,7 @@
     tooltip: tooltip,
     srtToVtt: srtToVtt,
     vttToBlob: vttToBlob,
-    downloadImage: downloadImage
+    downloadFile: downloadFile
   });
 
   function validElement(paths, value, type) {
@@ -778,72 +762,102 @@
     return Template;
   }();
 
+  var Close = "关闭";
+  var Volume = "音量";
+  var Play = "播放";
+  var Pause = "暂停";
+  var Rate = "速度";
+  var Mute = "静音";
+  var Flip = "视频翻转";
+  var Horizontal = "水平";
+  var Vertical = "垂直";
+  var Reconnect = "重新连接";
+  var Screenshot = "截图";
+  var Default = "默认";
+  var Normal = "正常";
+  var Fullscreen = "全屏";
   var zhCn = {
-    'About author': '关于作者',
-    'Video info': '视频统计信息',
-    Close: '关闭',
-    'Video load failed': '视频加载失败',
-    Volume: '音量',
-    Play: '播放',
-    Pause: '暂停',
-    Rate: '速度',
-    Mute: '静音',
-    Flip: '视频翻转',
-    Horizontal: '水平',
-    Vertical: '垂直',
-    Reconnect: '重新连接',
-    'Hide subtitle': '隐藏字幕',
-    'Show subtitle': '显示字幕',
-    'Hide danmu': '隐藏弹幕',
-    'Show danmu': '显示弹幕',
-    'Show setting': '显示设置',
-    'Hide setting': '隐藏设置',
-    Screenshot: '截图',
-    'Play speed': '播放速度',
-    'Aspect ratio': '画面比例',
-    Default: '默认',
-    Normal: '正常',
-    'Switch video': '切换',
-    'Switch subtitle': '切换字幕',
-    Fullscreen: '全屏',
-    'Exit fullscreen': '退出全屏',
-    'Web fullscreen': '网页全屏',
-    'Exit web fullscreen': '退出网页全屏',
-    'Mini player': '迷你播放器'
+  	"About author": "关于作者",
+  	"Video info": "视频统计信息",
+  	Close: Close,
+  	"Video load failed": "视频加载失败",
+  	Volume: Volume,
+  	Play: Play,
+  	Pause: Pause,
+  	Rate: Rate,
+  	Mute: Mute,
+  	Flip: Flip,
+  	Horizontal: Horizontal,
+  	Vertical: Vertical,
+  	Reconnect: Reconnect,
+  	"Hide subtitle": "隐藏字幕",
+  	"Show subtitle": "显示字幕",
+  	"Hide danmu": "隐藏弹幕",
+  	"Show danmu": "显示弹幕",
+  	"Show setting": "显示设置",
+  	"Hide setting": "隐藏设置",
+  	Screenshot: Screenshot,
+  	"Play speed": "播放速度",
+  	"Aspect ratio": "画面比例",
+  	Default: Default,
+  	Normal: Normal,
+  	"Switch video": "切换",
+  	"Switch subtitle": "切换字幕",
+  	Fullscreen: Fullscreen,
+  	"Exit fullscreen": "退出全屏",
+  	"Web fullscreen": "网页全屏",
+  	"Exit web fullscreen": "退出网页全屏",
+  	"Mini player": "迷你播放器",
+  	"This does not seem to support full screen functionality": "似乎不支持全屏功能"
   };
 
+  var Close$1 = "關閉";
+  var Volume$1 = "音量";
+  var Play$1 = "播放";
+  var Pause$1 = "暫停";
+  var Rate$1 = "速度";
+  var Mute$1 = "靜音";
+  var Flip$1 = "影片翻轉";
+  var Horizontal$1 = "水平";
+  var Vertical$1 = "垂直";
+  var Reconnect$1 = "重新連接";
+  var Screenshot$1 = "截圖";
+  var Default$1 = "默認";
+  var Normal$1 = "正常";
+  var Fullscreen$1 = "全屏";
   var zhTw = {
-    'About author': '關於作者',
-    'Video info': '影片統計訊息',
-    Close: '關閉',
-    'Video load failed': '影片載入失敗',
-    Volume: '音量',
-    Play: '播放',
-    Pause: '暫停',
-    Rate: '速度',
-    Mute: '靜音',
-    Flip: '影片翻轉',
-    Horizontal: '水平',
-    Vertical: '垂直',
-    Reconnect: '重新連接',
-    'Hide subtitle': '隱藏字幕',
-    'Show subtitle': '顯示字幕',
-    'Show setting': '顯示设置',
-    'Hide setting': '隱藏设置',
-    'Hide danmu': '隱藏彈幕',
-    'Show danmu': '顯示彈幕',
-    Screenshot: '截圖',
-    'Play speed': '播放速度',
-    'Aspect ratio': '畫面比例',
-    Default: '默認',
-    Normal: '正常',
-    'Switch video': '切換',
-    'Switch subtitle': '切換字幕',
-    Fullscreen: '全屏',
-    'Exit fullscreen': '退出全屏',
-    'Web fullscreen': '網頁全屏',
-    'Exit web fullscreen': '退出網頁全屏',
-    'Mini player': '迷你播放器'
+  	"About author": "關於作者",
+  	"Video info": "影片統計訊息",
+  	Close: Close$1,
+  	"Video load failed": "影片載入失敗",
+  	Volume: Volume$1,
+  	Play: Play$1,
+  	Pause: Pause$1,
+  	Rate: Rate$1,
+  	Mute: Mute$1,
+  	Flip: Flip$1,
+  	Horizontal: Horizontal$1,
+  	Vertical: Vertical$1,
+  	Reconnect: Reconnect$1,
+  	"Hide subtitle": "隱藏字幕",
+  	"Show subtitle": "顯示字幕",
+  	"Show setting": "顯示设置",
+  	"Hide setting": "隱藏设置",
+  	"Hide danmu": "隱藏彈幕",
+  	"Show danmu": "顯示彈幕",
+  	Screenshot: Screenshot$1,
+  	"Play speed": "播放速度",
+  	"Aspect ratio": "畫面比例",
+  	Default: Default$1,
+  	Normal: Normal$1,
+  	"Switch video": "切換",
+  	"Switch subtitle": "切換字幕",
+  	Fullscreen: Fullscreen$1,
+  	"Exit fullscreen": "退出全屏",
+  	"Web fullscreen": "網頁全屏",
+  	"Exit web fullscreen": "退出網頁全屏",
+  	"Mini player": "迷你播放器",
+  	"This does not seem to support full screen functionality": "似乎不支持全屏功能"
   };
 
   var I18n =
@@ -1393,7 +1407,7 @@
         var dataUri = player.getScreenshotDataURL();
 
         if (dataUri) {
-          downloadImage(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
+          downloadFile(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
           art.emit('screenshot', dataUri);
         }
       }
@@ -1592,7 +1606,8 @@
   });
 
   function fullscreenMix(art, player) {
-    var notice = art.notice,
+    var i18n = art.i18n,
+        notice = art.notice,
         destroyEvents = art.events.destroyEvents,
         $player = art.template.$player;
 
@@ -1601,7 +1616,7 @@
     };
 
     var screenfullError = function screenfullError() {
-      notice.show('Your browser does not seem to support full screen functionality.');
+      notice.show(i18n.get('This does not seem to support full screen functionality'));
     };
 
     try {
@@ -3298,7 +3313,17 @@
         setStyles($element, option.style);
       }
 
-      insertByIndex(target, $element, option.index || parent.id);
+      var childs = Array.from(target.children);
+      $element.dataset.index = option.index || parent.id;
+      var nextChild = childs.find(function (item) {
+        return Number(item.dataset.index) >= Number($element.dataset.index);
+      });
+
+      if (nextChild) {
+        nextChild.insertAdjacentElement('beforebegin', $element);
+      } else {
+        append(target, $element);
+      }
 
       if (option.click) {
         art.events.proxy($element, 'click', function (event) {
@@ -4574,7 +4599,7 @@
       }
   };
   exports.ContentRect = ContentRect;
-  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29udGVudFJlY3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvQ29udGVudFJlY3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFPQSxJQUFNLFdBQVcsR0FBRyxVQUFDLE1BQWU7SUFDaEMsSUFBSSxTQUFTLElBQUssTUFBNkIsRUFBRTtRQUM3QyxJQUFNLEdBQUcsR0FBSSxNQUE2QixDQUFDLE9BQU8sRUFBRSxDQUFDO1FBQ3JELE9BQU8sTUFBTSxDQUFDLE1BQU0sQ0FBQztZQUNqQixNQUFNLEVBQUUsR0FBRyxDQUFDLE1BQU07WUFDbEIsSUFBSSxFQUFFLENBQUM7WUFDUCxHQUFHLEVBQUUsQ0FBQztZQUNOLEtBQUssRUFBRSxHQUFHLENBQUMsS0FBSztTQUNuQixDQUFDLENBQUM7S0FDTjtTQUFNLEVBQUUsMEZBQTBGO1FBQy9GLElBQU0sTUFBTSxHQUFHLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUMvQyxPQUFPLE1BQU0sQ0FBQyxNQUFNLENBQUM7WUFDakIsTUFBTSxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsTUFBTSxJQUFJLEdBQUcsQ0FBQztZQUN4QyxJQUFJLEVBQUUsVUFBVSxDQUFDLE1BQU0sQ0FBQyxXQUFXLElBQUksR0FBRyxDQUFDO1lBQzNDLEdBQUcsRUFBRSxVQUFVLENBQUMsTUFBTSxDQUFDLFVBQVUsSUFBSSxHQUFHLENBQUM7WUFDekMsS0FBSyxFQUFFLFVBQVUsQ0FBQyxNQUFNLENBQUMsS0FBSyxJQUFJLEdBQUcsQ0FBQztTQUN6QyxDQUFDLENBQUM7S0FDTjtBQUNMLENBQUMsQ0FBQztBQUVPLGtDQUFXIn0=
+
   });
 
   unwrapExports(ContentRect_1);
@@ -4611,7 +4636,7 @@
       return ResizeObservation;
   }());
   exports.ResizeObservation = ResizeObservation;
-  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2YXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2YXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNEM7QUFFNUM7SUFlSSwyQkFBWSxNQUFlO1FBQ3ZCLElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBTSxDQUFDO1FBQ3JCLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsaUJBQWlCLEdBQUcsQ0FBQyxDQUFDO0lBQ3ZELENBQUM7SUFWRCxzQkFBVyw2Q0FBYzthQUF6QjtZQUNJLE9BQU8sSUFBSSxDQUFDLGdCQUFnQixDQUFDO1FBQ2pDLENBQUM7OztPQUFBO0lBQ0Qsc0JBQVcsOENBQWU7YUFBMUI7WUFDSSxPQUFPLElBQUksQ0FBQyxpQkFBaUIsQ0FBQztRQUNsQyxDQUFDOzs7T0FBQTtJQU9NLG9DQUFRLEdBQWY7UUFDSSxJQUFNLEVBQUUsR0FBRyx5QkFBVyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUVwQyxPQUFPLENBQUMsQ0FBQyxFQUFFO2VBQ0osQ0FDQyxFQUFFLENBQUMsS0FBSyxLQUFLLElBQUksQ0FBQyxjQUFjO21CQUM3QixFQUFFLENBQUMsTUFBTSxLQUFLLElBQUksQ0FBQyxlQUFlLENBQ3hDLENBQUM7SUFDVixDQUFDO0lBQ0wsd0JBQUM7QUFBRCxDQUFDLEFBN0JELElBNkJDO0FBRVEsOENBQWlCIn0=
+
   });
 
   unwrapExports(ResizeObservation_1);
@@ -4628,7 +4653,7 @@
       return ResizeObserverEntry;
   }());
   exports.ResizeObserverEntry = ResizeObserverEntry;
-  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXJFbnRyeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9SZXNpemVPYnNlcnZlckVudHJ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQTRDO0FBRTVDO0lBR0ksNkJBQVksTUFBZTtRQUN2QixJQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztRQUNyQixJQUFJLENBQUMsV0FBVyxHQUFHLHlCQUFXLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDM0MsQ0FBQztJQUNMLDBCQUFDO0FBQUQsQ0FBQyxBQVBELElBT0M7QUFFUSxrREFBbUIifQ==
+
   });
 
   unwrapExports(ResizeObserverEntry_1);
@@ -4801,7 +4826,7 @@
       return window.ResizeObserver = ResizeObserver;
   };
   exports.install = install;
-  //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzaXplT2JzZXJ2ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvUmVzaXplT2JzZXJ2ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSx5REFBd0Q7QUFFeEQsNkRBQTREO0FBRTVELElBQU0sZUFBZSxHQUFHLEVBQXNCLENBQUM7QUFFL0M7SUFVSSx3QkFBWSxRQUFnQztRQVA1QyxnQkFBZ0I7UUFDVCx5QkFBb0IsR0FBRyxFQUF5QixDQUFDO1FBQ3hELGdCQUFnQjtRQUNULG9CQUFlLEdBQUcsRUFBeUIsQ0FBQztRQUNuRCxnQkFBZ0I7UUFDVCxxQkFBZ0IsR0FBRyxFQUF5QixDQUFDO1FBR2hELElBQU0sT0FBTyxHQUFHLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUN4QyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBSSxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDM0IsZUFBZSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUMvQixDQUFDO0lBRU0sZ0NBQU8sR0FBZCxVQUFlLE1BQWU7UUFDMUIsSUFBTSxPQUFPLEdBQUcsV0FBVyxDQUFDLFNBQVMsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUMvQyxJQUFJLE9BQU8sRUFBRTtZQUNULE1BQU0sU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBTSxLQUFLLEdBQUcsZUFBZSxDQUFDLElBQUksQ0FBQyxvQkFBb0IsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUNqRSxJQUFJLEtBQUssR0FBRyxDQUFDLEVBQUU7WUFDWCxPQUFPO1NBQ1Y7UUFDRCxJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLElBQUkscUNBQWlCLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztRQUM5RCxTQUFTLEVBQUUsQ0FBQztJQUNoQixDQUFDO0lBRU0sa0NBQVMsR0FBaEIsVUFB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
+
   });
 
   unwrapExports(ResizeObserver_1);
