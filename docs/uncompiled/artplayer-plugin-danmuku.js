@@ -75,7 +75,7 @@
       'Danmu size': '弹幕大小',
       'Danmu text cannot be empty': '弹幕文本不能为空',
       'The length of the danmu does not exceed': '弹幕文本字数不能超过',
-      'Danmu synchronize video playback speed': '弹幕同步视频播放速度'
+      'Danmu speed synchronous playback multiple': '弹幕速度同步播放倍数'
     },
     'zh-tw': {
       'Danmu opacity': '彈幕透明度',
@@ -83,7 +83,7 @@
       'Danmu size': '弹幕大小',
       'Danmu text cannot be empty': '彈幕文本不能為空',
       'The length of the danmu does not exceed': '彈幕文本字數不能超過',
-      'Danmu synchronize video playback speed': '彈幕同步視頻播放速度'
+      'Danmu speed synchronous playback multiple': '彈幕速度同步播放倍數'
     }
   };
 
@@ -171,7 +171,7 @@
     return {
       name: 'danmuku-synchronousPlayback',
       index: 13,
-      html: "\n            <label class=\"art-setting-checkbox\">\n                <input type=\"checkbox\"/>".concat(i18n.get('Danmu synchronize video playback speed'), "\n            </label>\n        "),
+      html: "\n            <label class=\"art-setting-checkbox\">\n                <input type=\"checkbox\"/>".concat(i18n.get('Danmu speed synchronous playback multiple'), "\n            </label>\n        "),
       mounted: function mounted($setting) {
         var $checkbox = $setting.querySelector('input[type=checkbox]');
         proxy($checkbox, 'change', function () {

@@ -125,7 +125,7 @@ export function synchronousPlayback(art) {
         index: 13,
         html: `
             <label class="art-setting-checkbox">
-                <input type="checkbox"/>${i18n.get('Danmu synchronize video playback speed')}
+                <input type="checkbox"/>${i18n.get('Danmu speed synchronous playback multiple')}
             </label>
         `,
         mounted: $setting => {
