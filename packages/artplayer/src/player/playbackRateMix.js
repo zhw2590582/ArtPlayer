@@ -13,7 +13,7 @@ export default function playbackRateMix(art, player) {
 
     Object.defineProperty(player, 'playbackRate', {
         value: rate => {
-            const rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
+            const rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
             errorHandle(rateList.includes(rate), `'playbackRate' only accept ${rateList.toString()} as parameters`);
 
             if (rate === $player.dataset.playbackRate) {

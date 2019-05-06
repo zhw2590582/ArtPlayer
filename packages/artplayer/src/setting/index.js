@@ -1,5 +1,7 @@
 import component from '../utils/component';
 import flip from './flip';
+import aspectRatio from './aspectRatio';
+import playbackRate from './playbackRate';
 
 export default class Setting {
     constructor(art) {
@@ -33,7 +35,23 @@ export default class Setting {
             flip({
                 disable: false,
                 name: 'flip',
-                index: 10,
+                index: 1,
+            }),
+        );
+
+        this.add(
+            aspectRatio({
+                disable: false,
+                name: 'aspectRatio',
+                index: 2,
+            }),
+        );
+
+        this.add(
+            playbackRate({
+                disable: false,
+                name: 'playbackRate',
+                index: 3,
             }),
         );
     }
