@@ -4063,7 +4063,7 @@
       var i18n = art.i18n,
           player = art.player;
       return objectSpread({}, menuOption, {
-        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"1.75\">1.75</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(event) {
           var target = event.target;
           var rate = target.dataset.rate;
@@ -4078,7 +4078,10 @@
             var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
               return Number(item.dataset.rate) === rate;
             });
-            inverseClass($current, 'current');
+
+            if ($current) {
+              inverseClass($current, 'current');
+            }
           });
         }
       });
