@@ -168,8 +168,7 @@ export default class Artplayer {
          * Custom icon
          */
         icons?: {
-            loading?: string;
-            playBig?: string;
+            [propName: string]: string
         };
 
         /**
