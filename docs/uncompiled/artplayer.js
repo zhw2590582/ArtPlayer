@@ -1278,7 +1278,7 @@
     });
     Object.defineProperty(player, 'playbackRateRemove', {
       value: function value() {
-        if (player.$playbackRateState) {
+        if (player.playbackRateState) {
           player.playbackRate(1);
           delete $player.dataset.playbackRate;
           art.emit('playbackRateRemove');
@@ -3393,9 +3393,10 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
+              icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreen = append($control, art.icons.fullscreen);
+          var $fullscreen = append($control, icons.fullscreen);
           tooltip($fullscreen, i18n.get('Fullscreen'));
           proxy($control, 'click', function () {
             player.fullscreenToggle();
@@ -3418,9 +3419,10 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
+              icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreenWeb = append($control, art.icons.fullscreenWeb);
+          var $fullscreenWeb = append($control, icons.fullscreenWeb);
           tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
           proxy($control, 'click', function () {
             player.fullscreenWebToggle();
@@ -3443,9 +3445,10 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
+              icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $pip = append($control, art.icons.pip);
+          var $pip = append($control, icons.pip);
           tooltip($pip, i18n.get('Mini player'));
           proxy($control, 'click', function () {
             player.pipEnabled();
@@ -3460,10 +3463,11 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
-              player = art.player,
-              i18n = art.i18n;
-          var $play = append($control, art.icons.play);
-          var $pause = append($control, art.icons.pause);
+              icons = art.icons,
+              i18n = art.i18n,
+              player = art.player;
+          var $play = append($control, icons.play);
+          var $pause = append($control, icons.pause);
           tooltip($play, i18n.get('Play'));
           tooltip($pause, i18n.get('Pause'));
           proxy($play, 'click', function () {
@@ -3646,9 +3650,10 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
+              icons = art.icons,
               i18n = art.i18n,
               subtitle = art.subtitle;
-          var $subtitle = append($control, art.icons.subtitle);
+          var $subtitle = append($control, icons.subtitle);
           tooltip($subtitle, i18n.get('Hide subtitle'));
           proxy($control, 'click', function () {
             subtitle.toggle();
@@ -3770,9 +3775,10 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
+              icons = art.icons,
               i18n = art.i18n,
               setting = art.setting;
-          var $setting = append($control, art.icons.setting);
+          var $setting = append($control, icons.setting);
           tooltip($setting, i18n.get('Show setting'));
           proxy($control, 'click', function () {
             setting.toggle();
@@ -3855,9 +3861,10 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
+              icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $screenshot = append($control, art.icons.screenshot);
+          var $screenshot = append($control, icons.screenshot);
           tooltip($screenshot, i18n.get('Screenshot'));
           proxy($screenshot, 'click', function () {
             player.screenshot();
@@ -5521,19 +5528,6 @@
     };
   }
 
-  function i18nMix(i18n) {
-    i18n.update({
-      'zh-cn': {
-        'Playback of this file format is not supported': '不支持播放该文件格式',
-        'Load local video successfully': '加载本地视频成功'
-      },
-      'zh-tw': {
-        'Playback of this file format is not supported': '不支持播放該文件格式',
-        'Load local video successfully': '加載本地視頻成功'
-      }
-    });
-  }
-
   function localPreview(art) {
     var _art$constructor$util = art.constructor.utils,
         append = _art$constructor$util.append,
@@ -5546,7 +5540,16 @@
         i18n = art.i18n,
         template = art.template,
         player = art.player;
-    i18nMix(i18n);
+    i18n.update({
+      'zh-cn': {
+        'Playback of this file format is not supported': '不支持播放该文件格式',
+        'Load local video successfully': '加载本地视频成功'
+      },
+      'zh-tw': {
+        'Playback of this file format is not supported': '不支持播放該文件格式',
+        'Load local video successfully': '加載本地視頻成功'
+      }
+    });
 
     function loadVideo(file) {
       if (file) {

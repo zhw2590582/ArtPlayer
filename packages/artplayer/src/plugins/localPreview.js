@@ -1,16 +1,3 @@
-function i18nMix(i18n) {
-    i18n.update({
-        'zh-cn': {
-            'Playback of this file format is not supported': '不支持播放该文件格式',
-            'Load local video successfully': '加载本地视频成功',
-        },
-        'zh-tw': {
-            'Playback of this file format is not supported': '不支持播放該文件格式',
-            'Load local video successfully': '加載本地視頻成功',
-        },
-    });
-}
-
 export default function localPreview(art) {
     const { append, setStyle, setStyles, sleep } = art.constructor.utils;
     const {
@@ -21,7 +8,17 @@ export default function localPreview(art) {
         template,
         player,
     } = art;
-    i18nMix(i18n);
+
+    i18n.update({
+        'zh-cn': {
+            'Playback of this file format is not supported': '不支持播放该文件格式',
+            'Load local video successfully': '加载本地视频成功',
+        },
+        'zh-tw': {
+            'Playback of this file format is not supported': '不支持播放該文件格式',
+            'Load local video successfully': '加載本地視頻成功',
+        },
+    });
 
     function loadVideo(file) {
         if (file) {

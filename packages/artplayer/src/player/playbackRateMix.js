@@ -29,7 +29,7 @@ export default function playbackRateMix(art, player) {
 
     Object.defineProperty(player, 'playbackRateRemove', {
         value: () => {
-            if (player.$playbackRateState) {
+            if (player.playbackRateState) {
                 player.playbackRate(1);
                 delete $player.dataset.playbackRate;
                 art.emit('playbackRateRemove');

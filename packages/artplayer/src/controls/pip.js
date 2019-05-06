@@ -6,10 +6,11 @@ export default function pip(controlOption) {
         mounted: $control => {
             const {
                 events: { proxy },
+                icons,
                 i18n,
                 player,
             } = art;
-            const $pip = append($control, art.icons.pip);
+            const $pip = append($control, icons.pip);
             tooltip($pip, i18n.get('Mini player'));
             proxy($control, 'click', () => {
                 player.pipEnabled();

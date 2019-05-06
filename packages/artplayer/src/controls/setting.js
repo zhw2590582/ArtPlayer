@@ -6,11 +6,12 @@ export default function setting(controlOption) {
         mounted: $control => {
             const {
                 events: { proxy },
+                icons,
                 i18n,
                 setting,
             } = art;
             
-            const $setting = append($control, art.icons.setting);
+            const $setting = append($control, icons.setting);
             tooltip($setting, i18n.get('Show setting'));
 
             proxy($control, 'click', () => {

@@ -6,12 +6,13 @@ export default function playAndPause(controlOption) {
         mounted: $control => {
             const {
                 events: { proxy },
-                player,
+                icons,
                 i18n,
+                player,
             } = art;
 
-            const $play = append($control, art.icons.play);
-            const $pause = append($control, art.icons.pause);
+            const $play = append($control, icons.play);
+            const $pause = append($control, icons.pause);
             tooltip($play, i18n.get('Play'));
             tooltip($pause, i18n.get('Pause'));
 

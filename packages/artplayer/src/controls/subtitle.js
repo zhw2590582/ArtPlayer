@@ -6,11 +6,12 @@ export default function subtitle(controlOption) {
         mounted: $control => {
             const {
                 events: { proxy },
+                icons,
                 i18n,
                 subtitle,
             } = art;
             
-            const $subtitle = append($control, art.icons.subtitle);
+            const $subtitle = append($control, icons.subtitle);
             tooltip($subtitle, i18n.get('Hide subtitle'));
 
             proxy($control, 'click', () => {

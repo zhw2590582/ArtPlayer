@@ -6,11 +6,12 @@ export default function fullscreenWeb(controlOption) {
         mounted: $control => {
             const {
                 events: { proxy },
+                icons,
                 i18n,
                 player,
             } = art;
             
-            const $fullscreenWeb = append($control, art.icons.fullscreenWeb);
+            const $fullscreenWeb = append($control, icons.fullscreenWeb);
             tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
 
             proxy($control, 'click', () => {
