@@ -6,13 +6,14 @@ export default function volume(controlOption) {
         mounted: $control => {
             const {
                 events: { proxy },
+                icons,
                 player,
                 i18n,
             } = art;
             
             let isDroging = false;
-            const $volume = append($control, art.icons.volume);
-            const $volumeClose = append($control, art.icons.volumeClose);
+            const $volume = append($control, icons.volume);
+            const $volumeClose = append($control, icons.volumeClose);
             const $volumePanel = append($control, '<div class="art-volume-panel"></div>');
             const $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
             tooltip($volume, i18n.get('Mute'));

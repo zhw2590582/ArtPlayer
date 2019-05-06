@@ -56,6 +56,11 @@ export default class Artplayer {
         loop?: boolean;
 
         /**
+         * Whether to display flip button
+         */
+        flip?: boolean;
+
+        /**
          * Whether to display playbackRate button
          */
         playbackRate?: boolean;

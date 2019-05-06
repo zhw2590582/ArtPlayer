@@ -3697,11 +3697,12 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
+              icons = art.icons,
               player = art.player,
               i18n = art.i18n;
           var isDroging = false;
-          var $volume = append($control, art.icons.volume);
-          var $volumeClose = append($control, art.icons.volumeClose);
+          var $volume = append($control, icons.volume);
+          var $volumeClose = append($control, icons.volumeClose);
           var $volumePanel = append($control, '<div class="art-volume-panel"></div>');
           var $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
           tooltip($volume, i18n.get('Mute'));
