@@ -13,7 +13,7 @@ function settingMix(art) {
                 ${i18n.get('Subtitle offset time')}: <span class="art-subtitle-value">0</span>s
             </div>
             <div class="art-setting-range">
-                <input class="art-subtitle-range" type="range" min="-5" max="5" step="0.5">
+                <input class="art-subtitle-range" value="0" type="range" min="-5" max="5" step="0.5">
             </div>
         `,
         mounted: $setting => {
