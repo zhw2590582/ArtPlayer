@@ -21,6 +21,7 @@ export default class Setting {
 
     init() {
         const {
+            option,
             template: { $setting },
             events: { proxy },
         } = this.art;
@@ -33,25 +34,22 @@ export default class Setting {
 
         this.add(
             flip({
-                disable: false,
+                disable: !option.flip,
                 name: 'flip',
-                index: 1,
             }),
         );
 
         this.add(
             aspectRatio({
-                disable: false,
+                disable: !option.aspectRatio,
                 name: 'aspectRatio',
-                index: 2,
             }),
         );
 
         this.add(
             playbackRate({
-                disable: false,
+                disable: !option.playbackRate,
                 name: 'playbackRate',
-                index: 3,
             }),
         );
     }

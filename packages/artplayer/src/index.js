@@ -79,6 +79,7 @@ class Artplayer extends Emitter {
             autoplay: false,
             autoSize: false,
             loop: false,
+            flip: false,
             playbackRate: false,
             aspectRatio: false,
             screenshot: false,

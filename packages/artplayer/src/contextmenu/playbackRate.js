@@ -12,6 +12,7 @@ export default function playbackRate(menuOption) {
                 <span data-rate="1.0" class="normal current">${i18n.get('Normal')}</span>
                 <span data-rate="1.25">1.25</span>
                 <span data-rate="1.5">1.5</span>
+                <span data-rate="1.75">1.75</span>
                 <span data-rate="2.0">2.0</span>
             `,
             click: event => {

@@ -34,6 +34,7 @@ export default {
     autoplay: 'boolean',
     autoSize: 'boolean',
     loop: 'boolean',
+    flip: 'boolean',
     playbackRate: 'boolean',
     aspectRatio: 'boolean',
     screenshot: 'boolean',

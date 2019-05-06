@@ -514,6 +514,7 @@
     autoplay: 'boolean',
     autoSize: 'boolean',
     loop: 'boolean',
+    flip: 'boolean',
     playbackRate: 'boolean',
     aspectRatio: 'boolean',
     screenshot: 'boolean',
@@ -4054,7 +4055,7 @@
       var i18n = art.i18n,
           player = art.player;
       return objectSpread({}, menuOption, {
-        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"1.75\">1.75</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(event) {
           var target = event.target;
           var rate = target.dataset.rate;
@@ -5335,6 +5336,7 @@
         var _this2 = this;
 
         var _this$art = this.art,
+            option = _this$art.option,
             $setting = _this$art.template.$setting,
             proxy = _this$art.events.proxy;
         proxy($setting, 'click', function (e) {
@@ -5343,19 +5345,16 @@
           }
         });
         this.add(flip({
-          disable: false,
-          name: 'flip',
-          index: 1
+          disable: !option.flip,
+          name: 'flip'
         }));
         this.add(aspectRatio$1({
-          disable: false,
-          name: 'aspectRatio',
-          index: 2
+          disable: !option.aspectRatio,
+          name: 'aspectRatio'
         }));
         this.add(playbackRate$1({
-          disable: false,
-          name: 'playbackRate',
-          index: 3
+          disable: !option.playbackRate,
+          name: 'playbackRate'
         }));
       }
     }, {
@@ -5837,6 +5836,7 @@
           autoplay: false,
           autoSize: false,
           loop: false,
+          flip: false,
           playbackRate: false,
           aspectRatio: false,
           screenshot: false,
