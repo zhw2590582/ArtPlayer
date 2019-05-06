@@ -36,6 +36,11 @@ export default class Artplayer {
         volume?: number;
 
         /**
+         * Whether to live by default
+         */
+        isLive?: boolean;
+
+        /**
          * Whether to mute by default
          */
         muted?: boolean;

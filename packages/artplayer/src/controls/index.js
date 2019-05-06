@@ -28,7 +28,7 @@ export default class Controls {
         this.add(
             progress({
                 name: 'progress',
-                disable: false,
+                disable: option.isLive,
                 position: 'top',
                 index: 10,
             }),
@@ -37,7 +37,7 @@ export default class Controls {
         this.add(
             thumbnails({
                 name: 'thumbnails',
-                disable: !option.thumbnails.url,
+                disable: !option.thumbnails.url || option.isLive,
                 position: 'top',
                 index: 20,
             }),
@@ -64,7 +64,7 @@ export default class Controls {
         this.add(
             time({
                 name: 'time',
-                disable: false,
+                disable: option.isLive,
                 position: 'left',
                 index: 30,
             }),

@@ -11,8 +11,11 @@ export default class Plugins {
             this.add(subtitle);
         }
         
+        if (!art.option.isLive) {
+            this.add(miniProgressBar);
+        }
+
         this.add(localPreview);
-        this.add(miniProgressBar);
         art.option.plugins.forEach(plugin => {
             this.add(plugin);
         });
