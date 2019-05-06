@@ -107,5 +107,6 @@ var art = new Artplayer({
     ],
     icons: {
         loading: '<img src="./assets/img/ploading.gif">',
+        state: '<img src="./assets/img/state.png">',
     },
 });

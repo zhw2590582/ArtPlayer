@@ -13,9 +13,14 @@
         pointer-events: none;
     
         .art-state {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: absolute;
             right: 30px;
-            bottom: 65px;
+            bottom: 55px;
+            width: 60px;
+            height: 60px;
             opacity: .6;
         }
     }
