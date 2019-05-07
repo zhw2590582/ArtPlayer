@@ -1,17 +1,10 @@
-export class ArtPlayerError extends Error {
-    constructor(message, context) {
-        super(message);
-        if (typeof Error.captureStackTrace === 'function') {
-            Error.captureStackTrace(this, context || this.constructor);
-        }
-        this.name = 'ArtPlayerError';
-    }
-}
+import ArtPlayerError from './ArtPlayerError';
 
 export function errorHandle(condition, msg) {
     if (!condition) {
         throw new ArtPlayerError(msg);
     }
+    return condition;
 }
 
 export function clamp(num, a, b) {
@@ -64,35 +57,22 @@ export function debounce(func, wait, context) {
     return fn;
 }
 
-export function isObject(item) {
-    return item && typeof item === 'object' && !Array.isArray(item);
-}
-
-export function isElement(item) {
-    return item instanceof Element;
-}
-
-export function mergeDeep(target, source) {
-    const output = Object.assign({}, target);
-    if (isObject(target) && isObject(source)) {
-        Object.keys(source).forEach(key => {
-            const value = source[key];
-            if (isObject(value) && !isElement(value)) {
-                if (!(key in target)) {
-                    Object.assign(output, {
-                        [key]: value,
-                    });
-                } else {
-                    output[key] = mergeDeep(target[key], value);
-                }
+export function mergeDeep(...objects) {
+    const isObject = item => item && typeof item === 'object' && !Array.isArray(item);
+    return objects.reduce((prev, obj) => {
+        Object.keys(obj).forEach(key => {
+            const pVal = prev[key];
+            const oVal = obj[key];
+            if (Array.isArray(pVal) && Array.isArray(oVal)) {
+                prev[key] = pVal.concat(...oVal);
+            } else if (isObject(pVal) && isObject(oVal) && !(oVal instanceof Element)) {
+                prev[key] = mergeDeep(pVal, oVal);
             } else {
-                Object.assign(output, {
-                    [key]: value,
-                });
+                prev[key] = oVal;
             }
         });
-    }
-    return output;
+        return prev;
+    }, {});
 }
 
 export function append(parent, child) {

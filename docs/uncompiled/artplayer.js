@@ -193,22 +193,35 @@
   !function(r,t){module.exports=t();}(commonjsGlobal,function(){function c(r){return (c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var u=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t,e,n,o,a,i=c(r);if("boolean"===i)return "boolean";if("string"===i)return "string";if("number"===i)return "number";if("symbol"===i)return "symbol";if("function"===i)return "GeneratorFunction"===f(r)?"generatorfunction":"function";if(t=r,Array.isArray?Array.isArray(t):t instanceof Array)return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if((e=r)instanceof Date||"function"==typeof e.toDateString&&"function"==typeof e.getDate&&"function"==typeof e.setDate)return "date";if((n=r)instanceof Error||"string"==typeof n.message&&n.constructor&&"number"==typeof n.constructor.stackTraceLimit)return "error";if((o=r)instanceof RegExp||"string"==typeof o.flags&&"boolean"==typeof o.ignoreCase&&"boolean"==typeof o.multiline&&"boolean"==typeof o.global)return "regexp";switch(f(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if("function"==typeof(a=r).throw&&"function"==typeof a.return&&"function"==typeof a.next)return "generator";switch(i=u.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return i.slice(8,-1).toLowerCase().replace(/\s/g,"")};function f(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in y(r,t,e),l(r,t,e),p(r,t,e),t)if(t.hasOwnProperty(n)){var o=r[n],a=t[n],i=e.concat(n);if(s(r,n,a,i))continue;y(o,a,i),l(o,a,i),p(o,a,i);}}function s(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function y(r,t,e){var n;if("string"===i(t)?n=t:"function"===i(t)?t.___validator__=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function l(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(e,r,i(r));if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function p(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,window.optionValidator=a});
   });
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
 
-    return obj;
+      return arr2;
+    }
   }
 
-  var defineProperty = _defineProperty;
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  var iterableToArray = _iterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  }
+
+  var toConsumableArray = _toConsumableArray;
 
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -310,10 +323,13 @@
 
     return ArtPlayerError;
   }(wrapNativeSuper(Error));
+
   function errorHandle(condition, msg) {
     if (!condition) {
       throw new ArtPlayerError(msg);
     }
+
+    return condition;
   }
   function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
@@ -368,32 +384,30 @@
 
     return fn;
   }
-  function isObject(item) {
-    return item && _typeof_1(item) === 'object' && !Array.isArray(item);
-  }
-  function isElement(item) {
-    return item instanceof Element;
-  }
-  function mergeDeep(target, source) {
-    var output = Object.assign({}, target);
+  function mergeDeep() {
+    var isObject = function isObject(item) {
+      return item && _typeof_1(item) === 'object' && !Array.isArray(item);
+    };
 
-    if (isObject(target) && isObject(source)) {
-      Object.keys(source).forEach(function (key) {
-        var value = source[key];
-
-        if (isObject(value) && !isElement(value)) {
-          if (!(key in target)) {
-            Object.assign(output, defineProperty({}, key, value));
-          } else {
-            output[key] = mergeDeep(target[key], value);
-          }
-        } else {
-          Object.assign(output, defineProperty({}, key, value));
-        }
-      });
+    for (var _len2 = arguments.length, objects = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      objects[_key2] = arguments[_key2];
     }
 
-    return output;
+    return objects.reduce(function (prev, obj) {
+      Object.keys(obj).forEach(function (key) {
+        var pVal = prev[key];
+        var oVal = obj[key];
+
+        if (Array.isArray(pVal) && Array.isArray(oVal)) {
+          prev[key] = pVal.concat.apply(pVal, toConsumableArray(oVal));
+        } else if (isObject(pVal) && isObject(oVal) && !(oVal instanceof Element)) {
+          prev[key] = mergeDeep(pVal, oVal);
+        } else {
+          prev[key] = oVal;
+        }
+      });
+      return prev;
+    }, {});
   }
   function append(parent, child) {
     if (child instanceof Element) {
@@ -457,15 +471,12 @@
   }
 
   var utils = /*#__PURE__*/Object.freeze({
-    ArtPlayerError: ArtPlayerError,
     errorHandle: errorHandle,
     clamp: clamp,
     getExt: getExt,
     secondToTime: secondToTime,
     sleep: sleep,
     debounce: debounce,
-    isObject: isObject,
-    isElement: isElement,
     mergeDeep: mergeDeep,
     append: append,
     remove: remove,
@@ -481,19 +492,7 @@
   });
 
   function validElement(paths, value, type) {
-    if (type === 'string') {
-      if (value.trim() === '') {
-        throw new ArtPlayerError("".concat(paths.join('.'), " can not be empty"));
-      } else {
-        return true;
-      }
-    }
-
-    if (value instanceof Element) {
-      return true;
-    }
-
-    throw new ArtPlayerError("".concat(paths.join('.'), " require 'string' or 'Element' type, but got '").concat(type, "'"));
+    return errorHandle(type === 'string' || value instanceof Element, "".concat(paths.join('.'), " require 'string' or 'Element' type"));
   }
 
   var scheme = {
@@ -508,6 +507,7 @@
     poster: 'string',
     title: 'string',
     theme: 'string',
+    lang: 'string',
     volume: 'number',
     isLive: 'boolean',
     muted: 'boolean',
@@ -545,7 +545,8 @@
         index: 'number',
         html: validElement,
         style: 'object',
-        click: 'function'
+        click: 'function',
+        mounted: 'function'
       }
     },
     contextmenu: {
@@ -557,7 +558,8 @@
         index: 'number',
         html: validElement,
         style: 'object',
-        click: 'function'
+        click: 'function',
+        mounted: 'function'
       }
     },
     quality: {
@@ -578,8 +580,10 @@
         html: validElement,
         style: 'object',
         click: 'function',
+        mounted: 'function',
         position: function position(paths, value) {
-          return ['top', 'left', 'right'].includes(value);
+          var position = ['top', 'left', 'right'];
+          return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters"));
         }
       }
     },
@@ -594,7 +598,6 @@
     thumbnails: {
       type: 'object',
       child: {
-        type: 'object',
         url: 'string',
         number: 'number',
         width: 'number',
@@ -605,15 +608,13 @@
     subtitle: {
       type: 'object',
       child: {
-        type: 'object',
         url: 'string',
         style: 'object'
       }
     },
     moreVideoAttr: 'object',
     icons: 'object',
-    customType: 'object',
-    lang: 'string'
+    customType: 'object'
   };
 
   var mimeCodec = {
@@ -3366,6 +3367,23 @@
 
     return null;
   }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var defineProperty = _defineProperty;
 
   function _objectSpread(target) {
     for (var i = 1; i < arguments.length; i++) {

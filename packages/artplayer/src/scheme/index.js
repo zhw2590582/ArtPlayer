@@ -1,19 +1,10 @@
-import { ArtPlayerError } from '../utils';
+import { errorHandle } from '../utils';
 
 function validElement(paths, value, type) {
-    if (type === 'string') {
-        if (value.trim() === '') {
-            throw new ArtPlayerError(`${paths.join('.')} can not be empty`);
-        } else {
-            return true;
-        }
-    }
-
-    if (value instanceof Element) {
-        return true;
-    }
-
-    throw new ArtPlayerError(`${paths.join('.')} require 'string' or 'Element' type, but got '${type}'`);
+    return errorHandle(
+        type === 'string' || value instanceof Element,
+        `${paths.join('.')} require 'string' or 'Element' type`,
+    );
 }
 
 export default {
@@ -28,6 +19,7 @@ export default {
     poster: 'string',
     title: 'string',
     theme: 'string',
+    lang: 'string',
     volume: 'number',
     isLive: 'boolean',
     muted: 'boolean',
@@ -66,6 +58,7 @@ export default {
             html: validElement,
             style: 'object',
             click: 'function',
+            mounted: 'function',
         },
     },
     contextmenu: {
@@ -78,6 +71,7 @@ export default {
             html: validElement,
             style: 'object',
             click: 'function',
+            mounted: 'function',
         },
     },
     quality: {
@@ -98,7 +92,14 @@ export default {
             html: validElement,
             style: 'object',
             click: 'function',
-            position: (paths, value) => ['top', 'left', 'right'].includes(value),
+            mounted: 'function',
+            position: (paths, value) => {
+                const position = ['top', 'left', 'right'];
+                return errorHandle(
+                    position.includes(value),
+                    `${paths.join('.')} only accept ${position.toString()} as parameters`,
+                );
+            },
         },
     },
     highlight: {
@@ -112,7 +113,6 @@ export default {
     thumbnails: {
         type: 'object',
         child: {
-            type: 'object',
             url: 'string',
             number: 'number',
             width: 'number',
@@ -123,7 +123,6 @@ export default {
     subtitle: {
         type: 'object',
         child: {
-            type: 'object',
             url: 'string',
             style: 'object',
         },
@@ -131,5 +130,4 @@ export default {
     moreVideoAttr: 'object',
     icons: 'object',
     customType: 'object',
-    lang: 'string',
 };
