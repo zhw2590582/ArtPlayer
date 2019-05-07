@@ -27,7 +27,7 @@ describe('Constructor', function() {
                     container: null,
                 }),
             );
-        }).to.throw(/option.container require \'string\' or \'Element\' type, but got \'null\'/);
+        }).to.throw(/option.container require \'string\' or \'Element\' type'/);
     });
 
     it('Destroy all instances', function() {
