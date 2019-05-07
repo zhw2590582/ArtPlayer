@@ -1,7 +1,19 @@
 import gifshot from 'gifshot';
 import b64toBlob from 'b64-to-blob';
 
-function i18nMix(i18n) {
+function artplayerPluginGif(art) {
+    const { errorHandle, clamp, downloadImage } = art.constructor.utils;
+    const {
+        i18n,
+        notice,
+        layers,
+        player,
+        loading,
+        option: { theme, title },
+        events: { proxy },
+        template: { $video },
+    } = art;
+
     i18n.update({
         'zh-cn': {
             'Long press, gif length is between 1 second and 10 seconds': '长按，gif 长度为 1 ~ 10 秒',
@@ -20,24 +32,8 @@ function i18nMix(i18n) {
             'Release the mouse to start': '放開鼠標即可開始',
         },
     });
-}
 
-function artplayerPluginGif(art) {
-    const { errorHandle, clamp, downloadImage } = art.constructor.utils;
-    const {
-        i18n,
-        notice,
-        layers,
-        player,
-        loading,
-        option: { theme, title },
-        events: { proxy },
-        template: { $video },
-    } = art;
-
-    i18nMix(i18n);
-
-    layers.add({
+    const layer = layers.add({
         name: 'artplayer-plugin-gif-progress',
         style: {
             position: 'absolute',
@@ -49,7 +45,7 @@ function artplayerPluginGif(art) {
         },
     });
 
-    const $progress = layers['artplayer-plugin-gif-progress'].$ref;
+    const $progress = layer.$ref;
     const timeLimit = 10000;
     let isProcessing = false;
     let pressStartTime = 0;
