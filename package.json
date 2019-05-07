@@ -12,8 +12,7 @@
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n ",
     "test": "npx mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
-    "lint": "npx eslint packages/*/src",
-    "postinstall": "npm run bootstrap"
+    "lint": "npx eslint packages/*/src"
   },
   "repository": {
     "type": "git",
