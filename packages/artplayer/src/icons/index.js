@@ -1,4 +1,4 @@
-import { errorHandle } from '../utils';
+import { append } from '../utils';
 import loading from './loading.svg';
 import state from './state.svg';
 import play from './play.svg';
@@ -37,11 +37,10 @@ export default class Icons {
         );
 
         Object.keys(icons).forEach(key => {
-            errorHandle(typeof icons[key] === 'string', 'Custom icon values ​​only support string types.');
             const icon = document.createElement('i');
             icon.classList.add('art-icon');
             icon.classList.add(`art-icon-${key}`);
-            icon.innerHTML = icons[key];
+            append(icon, icons[key]);
             this[key] = icon;
         });
     }

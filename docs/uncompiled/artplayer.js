@@ -5240,11 +5240,10 @@
       next: next
     }, art.option.icons);
     Object.keys(icons).forEach(function (key) {
-      errorHandle(typeof icons[key] === 'string', 'Custom icon values ​​only support string types.');
       var icon = document.createElement('i');
       icon.classList.add('art-icon');
       icon.classList.add("art-icon-".concat(key));
-      icon.innerHTML = icons[key];
+      append(icon, icons[key]);
       _this[key] = icon;
     });
   };
