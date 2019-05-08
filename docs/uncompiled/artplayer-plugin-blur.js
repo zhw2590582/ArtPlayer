@@ -60,29 +60,34 @@
 	      $ref.style.backgroundRepeat = 'no-repeat';
 	      $ref.style.transition = 'all .2s ease';
 
-	      function show() {
-	        var _$ref$getBoundingClie = $ref.getBoundingClientRect(),
-	            left = _$ref$getBoundingClie.left,
-	            top = _$ref$getBoundingClie.top;
-
-	        $ref.style.backgroundImage = 'none';
-	        $ref.style.backgroundSize = "".concat(player.width, "px ").concat(player.height, "px");
-	        $ref.style.backgroundPosition = "".concat(player.left - left, "px ").concat(player.top - top, "px");
-	        player.getScreenshotBlobUrl().then(function (url) {
-	          blurImageUrl(url, clamp(radius, 0, 50)).then(function (img) {
-	            $ref.style.backgroundImage = "url(".concat(img, ")");
-	            $ref.style.visibility = 'visible';
-	            $ref.style.opacity = '1';
-	            $ref.style.pointerEvents = 'auto';
-	          });
-	        });
-	      }
-
 	      function hide() {
 	        $ref.style.visibility = 'hidden';
 	        $ref.style.opacity = '0';
 	        $ref.style.pointerEvents = 'none';
 	        $ref.style.backgroundImage = 'none';
+	      }
+
+	      function show() {
+	        var _$ref$getBoundingClie = $ref.getBoundingClientRect(),
+	            left = _$ref$getBoundingClie.left,
+	            top = _$ref$getBoundingClie.top;
+
+	        var time = player.currentTime;
+	        $ref.style.backgroundImage = 'none';
+	        $ref.style.backgroundSize = "".concat(player.width, "px ").concat(player.height, "px");
+	        $ref.style.backgroundPosition = "".concat(player.left - left, "px ").concat(player.top - top, "px");
+	        player.getScreenshotBlobUrl().then(function (url) {
+	          blurImageUrl(url, clamp(radius, 0, 50)).then(function (img) {
+	            if (time === player.currentTime) {
+	              $ref.style.backgroundImage = "url(".concat(img, ")");
+	              $ref.style.visibility = 'visible';
+	              $ref.style.opacity = '1';
+	              $ref.style.pointerEvents = 'auto';
+	            } else {
+	              hide();
+	            }
+	          });
+	        });
 	      }
 
 	      hide();

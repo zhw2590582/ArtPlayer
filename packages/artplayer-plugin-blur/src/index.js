@@ -10,26 +10,31 @@ function artplayerPluginBlur(art) {
             $ref.style.backgroundRepeat = 'no-repeat';
             $ref.style.transition = 'all .2s ease';
 
-            function show() {
-                const { left, top } = $ref.getBoundingClientRect();
-                $ref.style.backgroundImage = 'none';
-                $ref.style.backgroundSize = `${player.width}px ${player.height}px`;
-                $ref.style.backgroundPosition = `${player.left - left}px ${player.top - top}px`;
-                player.getScreenshotBlobUrl().then(url => {
-                    blurImageUrl(url, clamp(radius, 0, 50)).then(img => {
-                        $ref.style.backgroundImage = `url(${img})`;
-                        $ref.style.visibility = 'visible';
-                        $ref.style.opacity = '1';
-                        $ref.style.pointerEvents = 'auto';
-                    });
-                });
-            }
-
             function hide() {
                 $ref.style.visibility = 'hidden';
                 $ref.style.opacity = '0';
                 $ref.style.pointerEvents = 'none';
                 $ref.style.backgroundImage = 'none';
+            }
+
+            function show() {
+                const { left, top } = $ref.getBoundingClientRect();
+                const time = player.currentTime;
+                $ref.style.backgroundImage = 'none';
+                $ref.style.backgroundSize = `${player.width}px ${player.height}px`;
+                $ref.style.backgroundPosition = `${player.left - left}px ${player.top - top}px`;
+                player.getScreenshotBlobUrl().then(url => {
+                    blurImageUrl(url, clamp(radius, 0, 50)).then(img => {
+                        if (time === player.currentTime) {
+                            $ref.style.backgroundImage = `url(${img})`;
+                            $ref.style.visibility = 'visible';
+                            $ref.style.opacity = '1';
+                            $ref.style.pointerEvents = 'auto';
+                        } else {
+                            hide();
+                        }
+                    });
+                });
             }
 
             hide();
