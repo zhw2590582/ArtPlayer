@@ -1,4 +1,4 @@
-import blurImageUrl from '../node_modules/blur-image-url';
+import blurImageUrl from 'blur-image-url';
 
 function artplayerPluginBlur(art) {
     const { errorHandle, clamp } = art.constructor.utils;
