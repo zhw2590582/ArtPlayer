@@ -20,7 +20,7 @@ function artplayerPluginBlur(art) {
                         $ref.style.backgroundImage = `url(${img})`;
                         $ref.style.visibility = 'visible';
                         $ref.style.opacity = '1';
-                        $ref.style.pointerEvents = 'all';
+                        $ref.style.pointerEvents = 'auto';
                     });
                 });
             }

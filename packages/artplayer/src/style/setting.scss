@@ -81,7 +81,7 @@
         .artplayer-setting {
             opacity: 1;
             visibility: visible;
-            pointer-events: all;
+            pointer-events: auto;
             .artplayer-setting-inner {
                 right: 0;
             }

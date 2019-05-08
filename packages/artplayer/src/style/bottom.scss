@@ -15,7 +15,7 @@
     
         .artplayer-progress {
             position: relative;
-            pointer-events: all;
+            pointer-events: auto;
             .art-control-progress {
                 position: relative;
                 height: 5px;
@@ -123,7 +123,7 @@
     
         .artplayer-controls {
             position: relative;
-            pointer-events: all;
+            pointer-events: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;

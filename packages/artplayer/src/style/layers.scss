@@ -11,7 +11,7 @@
         overflow: hidden;
         pointer-events: none;    
         .art-layer {
-            pointer-events: all;
+            pointer-events: auto;
         }
     }
 

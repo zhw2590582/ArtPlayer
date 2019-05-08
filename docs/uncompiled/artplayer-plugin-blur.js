@@ -28,7 +28,7 @@
 	        canvas.width = w;
 	        canvas.height = h;
 	        var context = canvas.getContext('2d');
-	        context.filter = `blur(${radius}px)`;
+	        context.filter = 'blur(' + radius + 'px)';
 	        context.drawImage(
 	          img,
 	          -radius,
@@ -73,7 +73,7 @@
 	            $ref.style.backgroundImage = "url(".concat(img, ")");
 	            $ref.style.visibility = 'visible';
 	            $ref.style.opacity = '1';
-	            $ref.style.pointerEvents = 'all';
+	            $ref.style.pointerEvents = 'auto';
 	          });
 	        });
 	      }
