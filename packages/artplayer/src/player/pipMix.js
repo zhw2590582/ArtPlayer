@@ -81,7 +81,7 @@ function customPip(art, player) {
                 destroyEvents.push(() => {
                     draggie.destroy();
                 });
-            } else {
+            } else if (cachePos && cachePos.x !== 0 && cachePos.y !== 0) {
                 setStyle($player, 'left', `${cachePos.x}px`);
                 setStyle($player, 'top', `${cachePos.y}px`);
             }

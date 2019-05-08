@@ -3113,7 +3113,7 @@
           destroyEvents.push(function () {
             draggie.destroy();
           });
-        } else {
+        } else if (cachePos && cachePos.x !== 0 && cachePos.y !== 0) {
           setStyle($player, 'left', "".concat(cachePos.x, "px"));
           setStyle($player, 'top', "".concat(cachePos.y, "px"));
         }
