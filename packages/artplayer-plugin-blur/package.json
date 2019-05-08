@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "dependencies": {
-    "blur-image-url": "^1.0.0"
+    "blur-image-url": "^1.0.1"
   }
 }
