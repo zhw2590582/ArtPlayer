@@ -95,6 +95,7 @@
 	      art.on('video:ended', show);
 	      art.on('video:seeked', show);
 	      art.on('video:playing', hide);
+	      art.on('video:seeking', hide);
 	      art.on('video:timeupdate', hide);
 	    }
 	  };
