@@ -52,6 +52,7 @@
 	      errorHandle = _art$constructor$util.errorHandle,
 	      clamp = _art$constructor$util.clamp;
 	  var player = art.player;
+	  var blurUrlCache = '';
 	  return {
 	    name: 'artplayerPluginBlur',
 	    attach: function attach($ref) {
@@ -61,9 +62,10 @@
 	      $ref.style.transition = 'all .2s ease';
 
 	      function hide() {
+	        window.URL.revokeObjectURL(blurUrlCache);
+	        $ref.classList.remove('artplayer-blur-show');
 	        $ref.style.visibility = 'hidden';
 	        $ref.style.opacity = '0';
-	        $ref.style.pointerEvents = 'none';
 	        $ref.style.backgroundImage = 'none';
 	      }
 
@@ -72,17 +74,20 @@
 	            left = _$ref$getBoundingClie.left,
 	            top = _$ref$getBoundingClie.top;
 
-	        var time = player.currentTime;
 	        $ref.style.backgroundImage = 'none';
 	        $ref.style.backgroundSize = "".concat(player.width, "px ").concat(player.height, "px");
 	        $ref.style.backgroundPosition = "".concat(player.left - left, "px ").concat(player.top - top, "px");
-	        player.getScreenshotBlobUrl().then(function (url) {
-	          blurImageUrl(url, clamp(radius, 0, 50)).then(function (img) {
-	            if (time === player.currentTime) {
-	              $ref.style.backgroundImage = "url(".concat(img, ")");
+	        var time = player.currentTime;
+	        player.getScreenshotBlobUrl().then(function (screenshotBlobUrl) {
+	          blurImageUrl(screenshotBlobUrl, clamp(radius, 0, 50)).then(function (blurUrl) {
+	            window.URL.revokeObjectURL(screenshotBlobUrl);
+
+	            if (!player.playing && time === player.currentTime) {
+	              blurUrlCache = blurUrl;
+	              $ref.classList.add('artplayer-blur-show');
 	              $ref.style.visibility = 'visible';
 	              $ref.style.opacity = '1';
-	              $ref.style.pointerEvents = 'auto';
+	              $ref.style.backgroundImage = "url(".concat(blurUrl, ")");
 	            } else {
 	              hide();
 	            }
@@ -92,7 +97,6 @@
 
 	      hide();
 	      art.on('video:pause', show);
-	      art.on('video:ended', show);
 	      art.on('video:seeked', show);
 	      art.on('video:playing', hide);
 	      art.on('video:seeking', hide);

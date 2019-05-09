@@ -15,6 +15,7 @@ var art = new Artplayer({
                 width: '200px',
                 height: '200px',
                 margin: '-100px 0 0 -100px',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
             },
             mounted($layer) {
                 art.plugins.artplayerPluginBlur.attach($layer);
