@@ -3079,6 +3079,28 @@
     });
   }
 
+  function webkitPip(art, player) {
+    var $video = art.template.$video;
+    $video.webkitSetPresentationMode('inline');
+    Object.defineProperty(player, 'pipState', {
+      get: function get() {
+        return $video.webkitPresentationMode === 'picture-in-picture';
+      }
+    });
+    Object.defineProperty(player, 'pipEnabled', {
+      value: function value() {
+        $video.webkitSetPresentationMode('picture-in-picture');
+        art.emit('pipEnabled');
+      }
+    });
+    Object.defineProperty(player, 'pipExit', {
+      value: function value() {
+        $video.webkitSetPresentationMode('inline');
+        art.emit('pipExit');
+      }
+    });
+  }
+
   function customPip(art, player) {
     var option = art.option,
         i18n = art.i18n,
@@ -3144,8 +3166,12 @@
   }
 
   function pipMix(art, player) {
+    var $video = art.template.$video;
+
     if (document.pictureInPictureEnabled) {
       nativePip(art, player);
+    } else if ($video.webkitSupportsPresentationMode && typeof $video.webkitSetPresentationMode === 'function') {
+      webkitPip(art, player);
     } else {
       customPip(art, player);
     }

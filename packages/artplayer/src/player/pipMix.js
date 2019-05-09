@@ -47,6 +47,30 @@ function nativePip(art, player) {
     });
 }
 
+function webkitPip(art, player) {
+    const { $video } = art.template;
+
+    $video.webkitSetPresentationMode('inline');
+
+    Object.defineProperty(player, 'pipState', {
+        get: () => $video.webkitPresentationMode === 'picture-in-picture',
+    });
+
+    Object.defineProperty(player, 'pipEnabled', {
+        value: () => {
+            $video.webkitSetPresentationMode('picture-in-picture');
+            art.emit('pipEnabled');
+        },
+    });
+
+    Object.defineProperty(player, 'pipExit', {
+        value: () => {
+            $video.webkitSetPresentationMode('inline');
+            art.emit('pipExit');
+        },
+    });
+}
+
 function customPip(art, player) {
     const {
         option,
@@ -113,8 +137,11 @@ function customPip(art, player) {
 }
 
 export default function pipMix(art, player) {
+    const { $video } = art.template;
     if (document.pictureInPictureEnabled) {
         nativePip(art, player);
+    } else if ($video.webkitSupportsPresentationMode && typeof $video.webkitSetPresentationMode === 'function') {
+        webkitPip(art, player);
     } else {
         customPip(art, player);
     }
