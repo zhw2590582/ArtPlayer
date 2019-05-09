@@ -11,10 +11,10 @@ about: Report an issue or unexpected behaviour with Artplayer
 
 ### Environment
 
-- Browser:
-- Version:
-- Operating System:
-- Version:
+-   Browser:
+-   Version:
+-   Operating System:
+-   Version:
 
 ### Console errors (if any)
 

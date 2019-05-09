@@ -10,13 +10,13 @@ Backlight plugin for ArtPlayer
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-plugin-backlight
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-plugin-backlight
 ```
 

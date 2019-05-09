@@ -10,13 +10,13 @@ React Component for Artplayer, It is recommended to package itself according to 
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-react
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-react
 ```
 

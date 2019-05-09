@@ -173,7 +173,7 @@ export default class Artplayer {
          * Custom icon
          */
         icons?: {
-            [propName: string]: string
+            [propName: string]: string;
         };
 
         /**

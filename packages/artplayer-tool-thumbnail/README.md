@@ -10,13 +10,13 @@ thumbnail tool for ArtPlayer
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-tool-thumbnail
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-tool-thumbnail
 ```
 

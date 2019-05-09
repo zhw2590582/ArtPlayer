@@ -10,13 +10,13 @@ Playlist plugin for ArtPlayer
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-plugin-playlist
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-plugin-playlist
 ```
 

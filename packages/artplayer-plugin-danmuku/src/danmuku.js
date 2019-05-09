@@ -151,13 +151,12 @@ export default class Danmuku {
                 });
 
                 this.queue
-                    .filter(danmu => {
-                        return (
+                    .filter(
+                        danmu =>
                             player.currentTime + 0.1 >= danmu.time &&
                             danmu.time >= player.currentTime - 0.1 &&
-                            danmu.$state === 'wait'
-                        );
-                    })
+                            danmu.$state === 'wait',
+                    )
                     .forEach(danmu => {
                         danmu.$ref = getDanmuRef(this.queue);
                         this.$danmuku.appendChild(danmu.$ref);

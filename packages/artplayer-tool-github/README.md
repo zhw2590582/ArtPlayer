@@ -10,13 +10,13 @@ Danmu plugin for ArtPlayer
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-plugin-github
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-plugin-github
 ```
 

@@ -9,13 +9,13 @@ Danmuku plugin for ArtPlayer
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-plugin-danmuku
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-plugin-danmuku
 ```
 

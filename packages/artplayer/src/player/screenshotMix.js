@@ -24,8 +24,8 @@ export default function screenshotMix(art, player) {
     });
 
     Object.defineProperty(player, 'getScreenshotBlobUrl', {
-        value: () => {
-            return new Promise((resolve, reject) => {
+        value: () =>
+            new Promise((resolve, reject) => {
                 try {
                     const canvas = document.createElement('canvas');
                     canvas.width = $video.videoWidth;
@@ -38,8 +38,7 @@ export default function screenshotMix(art, player) {
                     notice.show(error);
                     reject(error);
                 }
-            });
-        },
+            }),
     });
 
     Object.defineProperty(player, 'screenshot', {

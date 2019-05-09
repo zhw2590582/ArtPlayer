@@ -78,9 +78,7 @@ export default function getDanmuTop(ins, danmu) {
             const right = playerData.width - left - width;
             return { top, left, height, width, right };
         })
-        .sort((prev, next) => {
-            return prev.top - next.top;
-        });
+        .sort((prev, next) => prev.top - next.top);
 
     if (danmus.length === 0) {
         return marginTop;

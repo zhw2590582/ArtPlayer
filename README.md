@@ -56,13 +56,13 @@
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer
 ```
 

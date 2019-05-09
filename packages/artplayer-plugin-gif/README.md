@@ -10,13 +10,13 @@ Gif plugin for ArtPlayer, use [gifshot](https://github.com/yahoo/gifshot) as a d
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-plugin-gif
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-plugin-gif
 ```
 

@@ -10,13 +10,13 @@ Blur plugin for ArtPlayer
 
 Install with `npm`
 
-```
+```bash
 $ npm install artplayer-plugin-blur
 ```
 
 Or install with `yarn`
 
-```
+```bash
 $ yarn add artplayer-plugin-blur
 ```
 
