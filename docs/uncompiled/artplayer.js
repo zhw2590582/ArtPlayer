@@ -3240,12 +3240,22 @@
         return art.template.$player.getBoundingClientRect();
       }
     });
-    ['bottom', 'height', 'left', 'right', 'top', 'width', 'x', 'y'].forEach(function (key) {
+    ['bottom', 'height', 'left', 'right', 'top', 'width'].forEach(function (key) {
       Object.defineProperty(player, key, {
         get: function get() {
           return player.rect[key];
         }
       });
+    });
+    Object.defineProperty(player, 'x', {
+      get: function get() {
+        return player.left + window.pageXOffset;
+      }
+    });
+    Object.defineProperty(player, 'y', {
+      get: function get() {
+        return player.top + window.pageYOffset;
+      }
     });
   }
 
