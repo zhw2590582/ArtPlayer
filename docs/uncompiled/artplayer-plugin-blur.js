@@ -51,6 +51,7 @@
 	  var _art$constructor$util = art.constructor.utils,
 	      errorHandle = _art$constructor$util.errorHandle,
 	      clamp = _art$constructor$util.clamp;
+	  errorHandle(CanvasRenderingContext2D && Object.prototype.hasOwnProperty.call(CanvasRenderingContext2D.prototype, 'filter'), 'artplayerPluginBlur: Your browser does not support canvas blur');
 	  var player = art.player;
 	  var blurUrlCache = '';
 	  return {

@@ -4,7 +4,7 @@ function artplayerPluginBlur(art) {
     const { errorHandle, clamp } = art.constructor.utils;
     errorHandle(
         CanvasRenderingContext2D && Object.prototype.hasOwnProperty.call(CanvasRenderingContext2D.prototype, 'filter'),
-        'Your browser does not support canvas blur',
+        'artplayerPluginBlur: Your browser does not support canvas blur',
     );
     const { player } = art;
     let blurUrlCache = '';
