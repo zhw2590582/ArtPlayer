@@ -2,6 +2,7 @@ import { errorHandle } from './utils';
 
 export default class Template {
     constructor(art) {
+        this.art = art;
         if (art.option.container instanceof Element) {
             this.$container = art.option.container;
         } else {
@@ -22,7 +23,7 @@ export default class Template {
 
     initDesktop() {
         this.$container.innerHTML = `
-          <div class="artplayer-video-player">
+          <div class="artplayer-video-player" style="--theme: ${this.art.option.theme}">
             <video class="artplayer-video"></video>
             <div class="artplayer-subtitle"></div>
             <div class="artplayer-danmuku"></div>
