@@ -16,7 +16,7 @@
             _art$template = art.template,
             $player = _art$template.$player,
             $video = _art$template.$video;
-        var $playlist = append($player, "\n            <div class=\"artplay-playlist\">\n                <div class=\"artplay-playlist-inner\"></div>\n            </div>\n        ");
+        var $playlist = append($player, "\n            <div class=\"artplayer-playlist\">\n                <div class=\"artplayer-playlist-inner\"></div>\n            </div>\n        ");
         errorHandle(Array.isArray(list), 'Playlist is not an array type');
         errorHandle(list.length > 0, 'Playlist cannot be empty');
         var playlist = list.map(function (item) {
@@ -24,9 +24,9 @@
           errorHandle(item.title, 'Playlist items require title attribute');
           return item;
         });
-        var $playlistInner = $playlist.querySelector('.artplay-playlist-inner');
+        var $playlistInner = $playlist.querySelector('.artplayer-playlist-inner');
         $playlistInner.innerHTML = playlist.map(function (item, index) {
-          return "<div class=\"artplay-playlist-item\" data-option-index=\"".concat(index, "\">").concat(item.title, "</div>");
+          return "<div class=\"artplayer-playlist-item\" data-option-index=\"".concat(index, "\">").concat(item.title, "</div>");
         }).join('');
 
         function switchUrl(index) {
@@ -73,7 +73,7 @@
         });
         proxy($playlist, 'click', function (e) {
           if (e.target === $playlist) {
-            $playlist.style.display = 'none';
+            $player.classList.remove('artplayer-playlist-show');
           }
         });
         art.on('video:ended', function () {
@@ -94,10 +94,10 @@
         return {
           name: 'artplayerPluginPlaylist',
           show: function show() {
-            $playlist.style.display = 'flex';
+            $player.classList.add('artplayer-playlist-show');
           },
           hide: function hide() {
-            $playlist.style.display = 'none';
+            $player.classList.remove('artplayer-playlist-show');
           },
           next: function next() {
             nextVideo();
