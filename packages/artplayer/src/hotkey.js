@@ -30,7 +30,7 @@ export default class Hotkey {
         });
 
         if (this.art.option.hotkey) {
-            this.art.on('firstCanplay', () => {
+            this.art.once('video:canplay', () => {
                 this.init();
             });
         }

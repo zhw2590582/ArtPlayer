@@ -905,7 +905,7 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
 });
 
-art.on('firstCanplay', () => {
+art.once('video:canplay', () => {
     art.player.seek(5);
     art.player.screenshot();
 });
@@ -1142,7 +1142,7 @@ var art = new Artplayer({
     },
 });
 
-art.on('firstCanplay', () => {
+art.once('video:canplay', () => {
     art.subtitle.init(url + '/subtitle/one-more-time-one-more-chance.vtt');
 });
 ```

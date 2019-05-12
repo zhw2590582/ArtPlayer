@@ -10,7 +10,6 @@ export default function eventInit(art, player) {
         notice,
     } = art;
     
-    let firstCanplay = false;
     let reconnectTime = 0;
     const maxReconnectTime = 5;
     
@@ -29,14 +28,6 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:canplay', () => {
-        if (!firstCanplay) {
-            firstCanplay = true;
-            if (option.autoplay) {
-                player.play();
-            }
-            art.emit('firstCanplay');
-        }
-
         reconnectTime = 0;
         art.controls.show();
         art.mask.show();

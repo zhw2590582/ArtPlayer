@@ -9,7 +9,7 @@ export default class Events {
         this.proxy = this.proxy.bind(this);
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
-        art.on('firstCanplay', () => {
+        art.once('video:canplay', () => {
             clickInit(art, this);
             hoverInit(art, this);
             mousemoveInit(art, this);
