@@ -55,7 +55,7 @@
     "node-sass": "^4.12.0",
     "rollup": "^1.11.3",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-eslint": "^5.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^4.2.3",
