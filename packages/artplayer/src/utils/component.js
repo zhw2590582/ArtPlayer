@@ -1,9 +1,10 @@
-import { append, setStyles, setStyle, remove } from './index';
+import { append, setStyles, setStyle, remove, errorHandle, hasOwnProperty } from './index';
 
 export default function component(art, parent, target, getOption, callback, title) {
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
     if (!option.disable) {
         const name = option.name || `${title}${parent.id}`;
+        errorHandle(!hasOwnProperty(parent, name), `Cannot create a component that already has the same name: ${title} -> ${name}`);
         const $element = document.createElement('div');
         $element.classList.value = `art-${title} art-${title}-${name}`;
 

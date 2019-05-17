@@ -7,6 +7,10 @@ export function errorHandle(condition, msg) {
     return condition;
 }
 
+export function hasOwnProperty(obj, name) {
+    return Object.prototype.hasOwnProperty.call(obj, name);
+}
+
 export function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
 }
