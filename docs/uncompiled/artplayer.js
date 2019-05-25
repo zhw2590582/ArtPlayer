@@ -4928,12 +4928,15 @@
       this.proxy = this.proxy.bind(this);
       this.hover = this.hover.bind(this);
       this.loadImg = this.loadImg.bind(this);
-      art.once('video:canplay', function () {
-        clickInit(art, _this);
-        hoverInit(art, _this);
-        mousemoveInitInit(art, _this);
-        resizeInit(art, _this);
-      });
+
+      if (art.whitelist.state) {
+        art.once('video:canplay', function () {
+          clickInit(art, _this);
+          hoverInit(art, _this);
+          mousemoveInitInit(art, _this);
+          resizeInit(art, _this);
+        });
+      }
     }
 
     createClass(Events, [{
@@ -5750,7 +5753,13 @@
     classCallCheck(this, Mobile);
 
     var option = art.option,
+        proxy = art.events.proxy,
         $video = art.template.$video;
+    config.video.events.forEach(function (eventName) {
+      proxy($video, eventName, function (event) {
+        art.emit("video:".concat(event.type), event);
+      });
+    });
     Object.keys(option.moreVideoAttr).forEach(function (key) {
       $video[key] = option.moreVideoAttr[key];
     });
@@ -5813,6 +5822,7 @@
       value: function init() {
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
+        this.events = new Events(this);
 
         if (this.whitelist.state) {
           this.isFocus = false;
@@ -5821,7 +5831,6 @@
           this.icons = new Icons(this);
           this.i18n = new I18n(this);
           this.notice = new Notice(this);
-          this.events = new Events(this);
           this.player = new Player(this);
           this.layers = new Layers(this);
           this.controls = new Controls(this);

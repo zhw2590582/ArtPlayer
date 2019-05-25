@@ -126,6 +126,7 @@ class Artplayer extends Emitter {
     init() {
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
+        this.events = new Events(this);
         if (this.whitelist.state) {
             this.isFocus = false;
             this.isDestroy = false;
@@ -133,7 +134,6 @@ class Artplayer extends Emitter {
             this.icons = new Icons(this);
             this.i18n = new I18n(this);
             this.notice = new Notice(this);
-            this.events = new Events(this);
             this.player = new Player(this);
             this.layers = new Layers(this);
             this.controls = new Controls(this);

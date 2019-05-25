@@ -9,12 +9,15 @@ export default class Events {
         this.proxy = this.proxy.bind(this);
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
-        art.once('video:canplay', () => {
-            clickInit(art, this);
-            hoverInit(art, this);
-            mousemoveInit(art, this);
-            resizeInit(art, this);
-        });
+
+        if (art.whitelist.state) {
+            art.once('video:canplay', () => {
+                clickInit(art, this);
+                hoverInit(art, this);
+                mousemoveInit(art, this);
+                resizeInit(art, this);
+            });
+        }
     }
 
     proxy(target, name, callback, option = {}) {

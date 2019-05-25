@@ -1,11 +1,19 @@
+import config from './config';
 import { clamp, getExt } from './utils';
 
 export default class Mobile {
     constructor(art) {
         const {
             option,
+            events: { proxy },
             template: { $video },
         } = art;
+
+        config.video.events.forEach(eventName => {
+            proxy($video, eventName, event => {
+                art.emit(`video:${event.type}`, event);
+            });
+        });
 
         Object.keys(option.moreVideoAttr).forEach(key => {
             $video[key] = option.moreVideoAttr[key];
