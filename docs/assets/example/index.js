@@ -41,7 +41,7 @@ var art = new Artplayer({
                 art = new Artplayer({
                     autoplay: true,
                     container: '.artplayer-app',
-                    url: url + '/video/you-name.mp4',
+                    url: url + '/video/your-name.mp4',
                 });
             },
             style: {

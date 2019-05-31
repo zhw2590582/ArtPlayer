@@ -1,7 +1,7 @@
 var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/you-name.mp4',
+    url: url + '/video/your-name.mp4',
     poster: url + '/image/one-more-time-one-more-chance-poster.jpg',
     autoSize: true,
     controls: [
@@ -39,8 +39,8 @@ var art = new Artplayer({
     plugins: [
         artplayerPluginPlaylist([
             {
-                title: '你的名字',
-                url: url + '/video/you-name.mp4',
+                title: 'Your name',
+                url: url + '/video/your-name.mp4',
             },
             {
                 title: 'One more time one more chance',
