@@ -11,7 +11,7 @@ var art = new Artplayer({
         {
             name: 'gif',
             position: 'right',
-            html: '创建GIF',
+            html: 'Create GIF',
             mounted: $gif => {
                 art.plugins.artplayerPluginGif.attach($gif);
             },
@@ -22,7 +22,7 @@ var art = new Artplayer({
         {
             name: 'open',
             position: 'right',
-            html: '本地视频',
+            html: 'Local video',
             mounted: $open => {
                 art.plugins.localPreview.attach($open);
             },

@@ -2897,7 +2897,21 @@
   }));
   });
 
-  function i18nMix(i18n) {
+  function artplayerPluginGif(art) {
+    var _art$constructor$util = art.constructor.utils,
+        errorHandle = _art$constructor$util.errorHandle,
+        clamp = _art$constructor$util.clamp,
+        downloadFile = _art$constructor$util.downloadFile;
+    var i18n = art.i18n,
+        notice = art.notice,
+        layers = art.layers,
+        player = art.player,
+        loading = art.loading,
+        _art$option = art.option,
+        theme = _art$option.theme,
+        title = _art$option.title,
+        proxy = art.events.proxy,
+        $video = art.template.$video;
     i18n.update({
       'zh-cn': {
         'Long press, gif length is between 1 second and 10 seconds': '长按，gif 长度为 1 ~ 10 秒',
@@ -2916,25 +2930,7 @@
         'Release the mouse to start': '放開鼠標即可開始'
       }
     });
-  }
-
-  function artplayerPluginGif(art) {
-    var _art$constructor$util = art.constructor.utils,
-        errorHandle = _art$constructor$util.errorHandle,
-        clamp = _art$constructor$util.clamp,
-        downloadImage = _art$constructor$util.downloadImage;
-    var i18n = art.i18n,
-        notice = art.notice,
-        layers = art.layers,
-        player = art.player,
-        loading = art.loading,
-        _art$option = art.option,
-        theme = _art$option.theme,
-        title = _art$option.title,
-        proxy = art.events.proxy,
-        $video = art.template.$video;
-    i18nMix(i18n);
-    layers.add({
+    var layer = layers.add({
       name: 'artplayer-plugin-gif-progress',
       style: {
         position: 'absolute',
@@ -2945,7 +2941,7 @@
         'background-color': theme
       }
     });
-    var $progress = layers['artplayer-plugin-gif-progress'].$ref;
+    var $progress = layer.$ref;
     var timeLimit = 10000;
     var isProcessing = false;
     var pressStartTime = 0;
@@ -2982,7 +2978,7 @@
           gifHeight: 200,
           gifWidth: videoWidth / videoHeight * 200
         }, function (image) {
-          downloadImage(image, "".concat(title || 'unnamed', ".gif"));
+          downloadFile(image, "".concat(title || 'unnamed', ".gif"));
         });
       }
     }

@@ -2,7 +2,7 @@ import gifshot from 'gifshot';
 import b64toBlob from 'b64-to-blob';
 
 function artplayerPluginGif(art) {
-    const { errorHandle, clamp, downloadImage } = art.constructor.utils;
+    const { errorHandle, clamp, downloadFile } = art.constructor.utils;
     const {
         i18n,
         notice,
@@ -83,7 +83,7 @@ function artplayerPluginGif(art) {
                     gifWidth: (videoWidth / videoHeight) * 200,
                 },
                 image => {
-                    downloadImage(image, `${title || 'unnamed'}.gif`);
+                    downloadFile(image, `${title || 'unnamed'}.gif`);
                 },
             );
         }

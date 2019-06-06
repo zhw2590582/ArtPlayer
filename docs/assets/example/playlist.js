@@ -8,7 +8,7 @@ var art = new Artplayer({
         {
             name: 'playlist',
             position: 'right',
-            html: '播放列表',
+            html: 'Playlist',
             click: () => {
                 art.plugins.artplayerPluginPlaylist.show();
             },
@@ -19,7 +19,7 @@ var art = new Artplayer({
         {
             name: 'prev',
             position: 'right',
-            html: '上一个',
+            html: 'Prev',
             click: () => {
                 art.plugins.artplayerPluginPlaylist.prev();
             },
@@ -30,7 +30,7 @@ var art = new Artplayer({
         {
             name: 'next',
             position: 'right',
-            html: '下一个',
+            html: 'Next',
             click: () => {
                 art.plugins.artplayerPluginPlaylist.next();
             },
