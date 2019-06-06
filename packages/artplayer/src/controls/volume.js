@@ -37,7 +37,7 @@ export default function volume(controlOption) {
                     // TODO...
                     const panelWidth = getStyle($volumePanel, 'width') || 60;
                     const handleWidth = getStyle($volumeHandle, 'width');
-                    const width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
+                    const width = (panelWidth - handleWidth) * percentage;
                     setStyle($volume, 'display', 'flex');
                     setStyle($volumeClose, 'display', 'none');
                     setStyle($volumeHandle, 'left', `${width}px`);
