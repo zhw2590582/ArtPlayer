@@ -166,8 +166,8 @@ export default class Danmuku {
                         danmu.$ref.style.color = danmu.color;
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : 'none';
                         danmu.$restTime =
-                            this.option.synchronousPlayback && player.playbackRateState
-                                ? this.option.speed / Number(player.playbackRateState)
+                            this.option.synchronousPlayback && player.playbackRate
+                                ? this.option.speed / Number(player.playbackRate)
                                 : this.option.speed;
                         danmu.$lastStartTime = Date.now();
                         const danmuWidth = getRect(danmu.$ref, 'width');

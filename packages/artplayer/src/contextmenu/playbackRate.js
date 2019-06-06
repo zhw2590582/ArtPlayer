@@ -18,7 +18,7 @@ export default function playbackRate(menuOption) {
                 const { target } = event;
                 const { rate } = target.dataset;
                 if (rate) {
-                    player.playbackRate(Number(rate));
+                    player.playbackRate = Number(rate);
                     art.contextmenu.hide();
                 }
             },

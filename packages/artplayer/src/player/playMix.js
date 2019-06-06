@@ -7,21 +7,29 @@ export default function playMix(art, player) {
     } = art;
 
     Object.defineProperty(player, 'play', {
-        value: () => {
-            const promise = $video.play();
-            if (promise !== undefined) {
-                promise.then().catch(err => {
-                    notice.show(err, true, 3000);
-                    console.warn(err);
-                });
-            }
+        set(value) {
+            if (value) {
+                const promise = $video.play();
+                if (promise !== undefined) {
+                    promise.then().catch(err => {
+                        notice.show(err, true, 3000);
+                        console.warn(err);
+                    });
+                }
 
-            if (mutex) {
-                art.constructor.instances.filter(item => item !== art).forEach(item => item.player.pause());
-            }
+                if (mutex) {
+                    art.constructor.instances
+                        .filter(item => item !== art)
+                        .forEach(item => {
+                            item.player.pause = true;
+                        });
+                }
 
-            notice.show(i18n.get('Play'));
-            art.emit('play');
+                notice.show(i18n.get('Play'));
+                art.emit('play');
+            } else {
+                player.pause = true;
+            }
         },
     });
 }

@@ -13,7 +13,7 @@ export default function pip(controlOption) {
             const $pip = append($control, icons.pip);
             tooltip($pip, i18n.get('Mini player'));
             proxy($control, 'click', () => {
-                player.pipEnabled();
+                player.pip = true;
             });
         },
     });

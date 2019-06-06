@@ -22,7 +22,7 @@ export default function aspectRatio(settingOption) {
             click: event => {
                 const { value } = event.target.dataset;
                 if (value) {
-                    player.aspectRatio(value);
+                    player.aspectRatio = value;
                 }
             },
             mounted: $setting => {

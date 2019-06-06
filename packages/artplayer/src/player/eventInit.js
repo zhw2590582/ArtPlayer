@@ -14,7 +14,7 @@ export default function eventInit(art, player) {
     const maxReconnectTime = 5;
     
     proxy($video, 'click', () => {
-        player.toggle();
+        player.toggle = true;
     });
 
     config.video.events.forEach(eventName => {
@@ -50,8 +50,8 @@ export default function eventInit(art, player) {
         art.controls.show();
         art.mask.show();
         if (option.loop) {
-            player.seek(0);
-            player.play();
+            player.seek = 0;
+            player.play = true;
         }
     });
 
@@ -79,7 +79,7 @@ export default function eventInit(art, player) {
 
     art.on('video:loadedmetadata', () => {
         if (option.autoSize) {
-            player.autoSize();
+            player.autoSize = true;
         }
     });
 

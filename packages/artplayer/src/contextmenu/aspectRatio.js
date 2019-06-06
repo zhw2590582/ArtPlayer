@@ -15,7 +15,7 @@ export default function aspectRatio(menuOption) {
                 const { target } = event;
                 const { ratio } = target.dataset;
                 if (ratio) {
-                    player.aspectRatio(ratio);
+                    player.aspectRatio = ratio;
                     art.contextmenu.hide();
                 }
             },

@@ -579,7 +579,7 @@
               danmu.$ref.innerText = danmu.text;
               danmu.$ref.style.color = danmu.color;
               danmu.$ref.style.border = danmu.border ? "1px solid ".concat(danmu.color) : 'none';
-              danmu.$restTime = _this2.option.synchronousPlayback && player.playbackRateState ? _this2.option.speed / Number(player.playbackRateState) : _this2.option.speed;
+              danmu.$restTime = _this2.option.synchronousPlayback && player.playbackRate ? _this2.option.speed / Number(player.playbackRate) : _this2.option.speed;
               danmu.$lastStartTime = Date.now();
               var danmuWidth = getRect(danmu.$ref, 'width');
               var danmuTop = getDanmuTop(_this2, danmu);
@@ -625,7 +625,7 @@
       key: "start",
       value: function start() {
         this.isStop = false;
-        this["continue"]();
+        this.continue();
         this.update();
         this.art.emit('artplayerPluginDanmuku:start');
       }

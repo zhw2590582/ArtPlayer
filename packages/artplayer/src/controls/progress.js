@@ -121,7 +121,7 @@ export default function progress(controlOption) {
                     if (event.target !== $indicator) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         setBar('played', percentage);
-                        player.seek(second);
+                        player.seek = second;
                     }
                 });
 
@@ -134,7 +134,7 @@ export default function progress(controlOption) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         $indicator.classList.add('art-show-indicator');
                         setBar('played', percentage);
-                        player.seek(second);
+                        player.seek = second;
                     }
                 });
 

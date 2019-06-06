@@ -3,38 +3,33 @@ export default function fullscreenWebMix(art, player) {
         template: { $player },
     } = art;
 
-    Object.defineProperty(player, 'fullscreenWebState', {
-        get: () => $player.classList.contains('artplayer-web-fullscreen'),
-    });
-
-    Object.defineProperty(player, 'fullscreenWebEnabled', {
-        value: () => {
-            if (player.fullscreenState) {
-                player.fullscreenExit();
-            }
-            $player.classList.add('artplayer-web-fullscreen');
-            player.aspectRatioReset();
-            art.emit('fullscreenWeb:enabled');
+    Object.defineProperty(player, 'fullscreenWeb', {
+        get() {
+            return $player.classList.contains('artplayer-web-fullscreen');
         },
-    });
-
-    Object.defineProperty(player, 'fullscreenWebExit', {
-        value: () => {
-            if (player.fullscreenWebState) {
-                player.fullscreenExit();
+        set(value) {
+            if (value) {
+                if (player.fullscreen) {
+                    player.fullscreen = false;
+                }
+                $player.classList.add('artplayer-web-fullscreen');
+                player.aspectRatioReset = true;
+                art.emit('fullscreenWeb:enabled');
+            } else {
+                if (player.fullscreen) {
+                    player.fullscreen = false;
+                }
                 $player.classList.remove('artplayer-web-fullscreen');
-                player.aspectRatioReset();
+                player.aspectRatioReset = true;
                 art.emit('fullscreenWeb:exit');
             }
         },
     });
 
     Object.defineProperty(player, 'fullscreenWebToggle', {
-        value: () => {
-            if (player.fullscreenWebState) {
-                player.fullscreenWebExit();
-            } else {
-                player.fullscreenWebEnabled();
+        set(value) {
+            if (value) {
+                player.fullscreenWeb = !player.fullscreenWeb;
             }
         },
     });

@@ -1,10 +1,12 @@
 export default function toggleMix(art, player) {
     Object.defineProperty(player, 'toggle', {
-        value: () => {
-            if (player.playing) {
-                player.pause();
-            } else {
-                player.play();
+        set(value) {
+            if (value) {
+                if (player.playing) {
+                    player.pause = true;
+                } else {
+                    player.play = true;
+                }
             }
         },
     });

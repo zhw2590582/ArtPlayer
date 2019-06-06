@@ -77,7 +77,9 @@ function artplayerPluginPlaylist(list) {
 
         art.on('video:ended', () => {
             nextVideo().then(() => {
-                sleep(1000).then(player.play);
+                sleep(1000).then(() => {
+                    player.play = true;
+                });
             });
         });
 

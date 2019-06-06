@@ -25,8 +25,8 @@ export default function localPreview(art) {
             const canPlayType = template.$video.canPlayType(file.type);
             if (canPlayType === 'maybe' || canPlayType === 'probably') {
                 const url = URL.createObjectURL(file);
-                player.playbackRateRemove();
-                player.aspectRatioRemove();
+                player.playbackRate = false;
+                player.aspectRatio = false;
                 template.$video.src = url;
                 sleep(1000).then(() => {
                     player.currentTime = 0;

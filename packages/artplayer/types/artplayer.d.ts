@@ -3,7 +3,7 @@ export default class Artplayer {
         /**
          * Selector or a dom element (required)
          */
-        container: string | Element;
+        container: string;
 
         /**
          * Video url or a function that returns a promise value of url (required)

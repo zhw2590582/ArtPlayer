@@ -45,9 +45,7 @@ module.exports = function creatRollupConfig(projectPath) {
             }),
             postcss({
                 plugins: [
-                    autoprefixer({
-                        browsers: ['last 2 versions'],
-                    }),
+                    autoprefixer(),
                     cssnano({
                         preset: 'default',
                     }),

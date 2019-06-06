@@ -27,50 +27,37 @@ export default function fullscreenMix(art, player) {
         screenfullError();
     }
 
-    Object.defineProperty(player, 'fullscreenState', {
-        get: () => screenfull.isFullscreen,
-    });
-
-    Object.defineProperty(player, 'fullscreenEnabled', {
-        value: () => {
-            if (screenfull.enabled) {
-                if (!player.fullscreenState) {
-                    player.fullscreenWebExit();
-                    screenfull.request($player).then(() => {
-                        $player.classList.add('artplayer-fullscreen');
-                        player.aspectRatioReset();
-                        art.emit('fullscreen:enabled');
-                    });
-                }
-            } else {
-                screenfullError();
-            }
+    Object.defineProperty(player, 'fullscreen', {
+        get() {
+            return screenfull.isFullscreen;
         },
-    });
-
-    Object.defineProperty(player, 'fullscreenExit', {
-        value: () => {
-            if (screenfull.enabled) {
-                if (player.fullscreenState) {
-                    player.fullscreenWebExit();
-                    screenfull.exit().then(() => {
-                        $player.classList.remove('artplayer-fullscreen');
-                        player.aspectRatioReset();
-                        art.emit('fullscreen:exit');
-                    });
+        set(value) {
+            if (value) {
+                if (player.fullscreenWeb) {
+                    player.fullscreenWeb = false;
                 }
+                screenfull.request($player).then(() => {
+                    $player.classList.add('artplayer-fullscreen');
+                    player.aspectRatioReset = true;
+                    art.emit('fullscreen:enabled');
+                });
             } else {
-                screenfullError();
+                if (player.fullscreenWeb) {
+                    player.fullscreenWeb = false;
+                }
+                screenfull.exit().then(() => {
+                    $player.classList.remove('artplayer-fullscreen');
+                    player.aspectRatioReset = true;
+                    art.emit('fullscreen:exit');
+                });
             }
         },
     });
 
     Object.defineProperty(player, 'fullscreenToggle', {
-        value: () => {
-            if (player.fullscreenState) {
-                player.fullscreenExit();
-            } else {
-                player.fullscreenEnabled();
+        set(value) {
+            if (value) {
+                player.fullscreen = !player.fullscreen;
             }
         },
     });

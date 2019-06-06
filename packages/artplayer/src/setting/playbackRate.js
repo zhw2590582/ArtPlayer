@@ -21,7 +21,7 @@ export default function playbackRate(settingOption) {
                 proxy($range, 'change', () => {
                     const { value } = $range;
                     $value.innerText = value;
-                    player.playbackRate(Number(value));
+                    player.playbackRate = Number(value);
                 });
 
                 art.on('playbackRateChange', rate => {

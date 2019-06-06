@@ -15,7 +15,7 @@ export default function fullscreenWeb(controlOption) {
             tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
 
             proxy($control, 'click', () => {
-                player.fullscreenWebToggle();
+                player.fullscreenWebToggle = true;
             });
 
             art.on('fullscreenWeb:enabled', () => {

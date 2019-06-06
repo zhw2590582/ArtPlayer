@@ -22,7 +22,7 @@ export default function mousemoveInitInit(art, events) {
         autoHide.clearTimeout();
         $player.classList.remove('artplayer-hide-cursor');
         art.controls.show();
-        if (!art.player.pipState && player.playing && event.target === $video) {
+        if (!art.player.pip && player.playing && event.target === $video) {
             autoHide();
         }
     });

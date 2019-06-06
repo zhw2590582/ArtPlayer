@@ -1890,7 +1890,7 @@
     quality: {
       type: 'array',
       child: {
-        "default": 'boolean',
+        default: 'boolean',
         name: 'string',
         url: 'string'
       }
@@ -2303,7 +2303,7 @@
     var reconnectTime = 0;
     var maxReconnectTime = 5;
     proxy($video, 'click', function () {
-      player.toggle();
+      player.toggle = true;
     });
     config.video.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
@@ -2329,8 +2329,8 @@
       art.mask.show();
 
       if (option.loop) {
-        player.seek(0);
-        player.play();
+        player.seek = 0;
+        player.play = true;
       }
     });
     art.on('video:error', function () {
@@ -2354,7 +2354,7 @@
 
     art.on('video:loadedmetadata', function () {
       if (option.autoSize) {
-        player.autoSize();
+        player.autoSize = true;
       }
     });
     art.on('video:loadstart', function () {
@@ -2400,26 +2400,30 @@
         notice = art.notice,
         mutex = art.option.mutex;
     Object.defineProperty(player, 'play', {
-      value: function value() {
-        var promise = $video.play();
+      set: function set(value) {
+        if (value) {
+          var promise = $video.play();
 
-        if (promise !== undefined) {
-          promise.then()["catch"](function (err) {
-            notice.show(err, true, 3000);
-            console.warn(err);
-          });
+          if (promise !== undefined) {
+            promise.then().catch(function (err) {
+              notice.show(err, true, 3000);
+              console.warn(err);
+            });
+          }
+
+          if (mutex) {
+            art.constructor.instances.filter(function (item) {
+              return item !== art;
+            }).forEach(function (item) {
+              item.player.pause = true;
+            });
+          }
+
+          notice.show(i18n.get('Play'));
+          art.emit('play');
+        } else {
+          player.pause = true;
         }
-
-        if (mutex) {
-          art.constructor.instances.filter(function (item) {
-            return item !== art;
-          }).forEach(function (item) {
-            return item.player.pause();
-          });
-        }
-
-        notice.show(i18n.get('Play'));
-        art.emit('play');
       }
     });
   }
@@ -2429,21 +2433,30 @@
         i18n = art.i18n,
         notice = art.notice;
     Object.defineProperty(player, 'pause', {
-      value: function value() {
-        $video.pause();
-        notice.show(i18n.get('Pause'));
-        art.emit('pause');
+      get: function get() {
+        return $video.paused;
+      },
+      set: function set(value) {
+        if (value) {
+          $video.pause();
+          notice.show(i18n.get('Pause'));
+          art.emit('pause');
+        } else {
+          player.play = true;
+        }
       }
     });
   }
 
   function toggleMix(art, player) {
     Object.defineProperty(player, 'toggle', {
-      value: function value() {
-        if (player.playing) {
-          player.pause();
-        } else {
-          player.play();
+      set: function set(value) {
+        if (value) {
+          if (player.playing) {
+            player.pause = true;
+          } else {
+            player.play = true;
+          }
         }
       }
     });
@@ -2452,7 +2465,7 @@
   function seekMix(art, player) {
     var notice = art.notice;
     Object.defineProperty(player, 'seek', {
-      value: function value(time) {
+      set: function set(time) {
         player.currentTime = time;
         notice.show("".concat(secondToTime(time), " / ").concat(secondToTime(player.duration)));
         art.emit('seek', time);
@@ -2523,14 +2536,14 @@
               playing = player.playing;
           return player.attachUrl(url).then(function () {
             option.url = url;
-            player.playbackRateRemove();
-            player.aspectRatioRemove();
+            player.playbackRate = false;
+            player.aspectRatio = false;
             art.once('video:canplay', function () {
               player.currentTime = currentTime;
             });
 
             if (playing) {
-              player.play();
+              player.play = true;
             }
 
             notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
@@ -2549,12 +2562,12 @@
           var playing = player.playing;
           return player.attachUrl(url).then(function () {
             option.url = url;
-            player.playbackRateRemove();
-            player.aspectRatioRemove();
+            player.playbackRate = false;
+            player.aspectRatio = false;
             player.currentTime = 0;
 
             if (playing) {
-              player.play();
+              player.play = true;
             }
 
             notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
@@ -2573,42 +2586,39 @@
         $player = _art$template.$player,
         i18n = art.i18n,
         notice = art.notice;
-    Object.defineProperty(player, 'playbackRateState', {
+    Object.defineProperty(player, 'playbackRate', {
       get: function get() {
         return $player.dataset.playbackRate;
-      }
-    });
-    Object.defineProperty(player, 'playbackRate', {
-      value: function value(rate) {
-        var rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
-        errorHandle(rateList.includes(rate), "'playbackRate' only accept ".concat(rateList.toString(), " as parameters"));
+      },
+      set: function set(rate) {
+        if (rate) {
+          var rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+          errorHandle(rateList.includes(rate), "'playbackRate' only accept ".concat(rateList.toString(), " as parameters"));
 
-        if (rate === $player.dataset.playbackRate) {
-          return;
-        }
+          if (rate === $player.dataset.playbackRate) {
+            return;
+          }
 
-        $video.playbackRate = rate;
-        $player.dataset.playbackRate = rate;
-        notice.show("".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x")));
-        art.emit('playbackRateChange', rate);
-      }
-    });
-    Object.defineProperty(player, 'playbackRateRemove', {
-      value: function value() {
-        if (player.playbackRateState) {
-          player.playbackRate(1);
+          $video.playbackRate = rate;
+          $player.dataset.playbackRate = rate;
+          notice.show("".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x")));
+          art.emit('playbackRateChange', rate);
+        } else if (player.playbackRate) {
+          player.playbackRate = 1;
           delete $player.dataset.playbackRate;
           art.emit('playbackRateRemove');
         }
       }
     });
     Object.defineProperty(player, 'playbackRateReset', {
-      value: function value() {
-        var playbackRate = $player.dataset.playbackRate;
+      set: function set(value) {
+        if (value) {
+          var playbackRate = $player.dataset.playbackRate;
 
-        if (playbackRate) {
-          player.playbackRate(Number(playbackRate));
-          art.emit('playbackRateReset');
+          if (playbackRate) {
+            player.playbackRate = Number(playbackRate);
+            art.emit('playbackRateReset');
+          }
         }
       }
     });
@@ -2620,49 +2630,44 @@
         $player = _art$template.$player,
         i18n = art.i18n,
         notice = art.notice;
-    Object.defineProperty(player, 'aspectRatioState', {
+    Object.defineProperty(player, 'aspectRatio', {
       get: function get() {
         return $player.dataset.aspectRatio || '';
-      }
-    });
-    Object.defineProperty(player, 'aspectRatio', {
-      value: function value(ratio) {
-        var ratioList = ['default', '4:3', '16:9'];
-        errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
+      },
+      set: function set(ratio) {
+        if (ratio) {
+          var ratioList = ['default', '4:3', '16:9'];
+          errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
-        if (ratio === 'default') {
-          player.aspectRatioRemove();
-        } else {
-          var ratioArray = ratio.split(':');
-          var videoWidth = $video.videoWidth,
-              videoHeight = $video.videoHeight;
-          var clientWidth = $player.clientWidth,
-              clientHeight = $player.clientHeight;
-          var videoRatio = videoWidth / videoHeight;
-          var setupRatio = ratioArray[0] / ratioArray[1];
-
-          if (videoRatio > setupRatio) {
-            var percentage = setupRatio * videoHeight / videoWidth;
-            setStyle($video, 'width', "".concat(percentage * 100, "%"));
-            setStyle($video, 'height', '100%');
-            setStyle($video, 'padding', "0 ".concat((clientWidth - clientWidth * percentage) / 2, "px"));
+          if (ratio === 'default') {
+            player.aspectRatio = false;
           } else {
-            var _percentage = videoWidth / setupRatio / videoHeight;
+            var ratioArray = ratio.split(':');
+            var videoWidth = $video.videoWidth,
+                videoHeight = $video.videoHeight;
+            var clientWidth = $player.clientWidth,
+                clientHeight = $player.clientHeight;
+            var videoRatio = videoWidth / videoHeight;
+            var setupRatio = ratioArray[0] / ratioArray[1];
 
-            setStyle($video, 'width', '100%');
-            setStyle($video, 'height', "".concat(_percentage * 100, "%"));
-            setStyle($video, 'padding', "".concat((clientHeight - clientHeight * _percentage) / 2, "px 0"));
+            if (videoRatio > setupRatio) {
+              var percentage = setupRatio * videoHeight / videoWidth;
+              setStyle($video, 'width', "".concat(percentage * 100, "%"));
+              setStyle($video, 'height', '100%');
+              setStyle($video, 'padding', "0 ".concat((clientWidth - clientWidth * percentage) / 2, "px"));
+            } else {
+              var _percentage = videoWidth / setupRatio / videoHeight;
+
+              setStyle($video, 'width', '100%');
+              setStyle($video, 'height', "".concat(_percentage * 100, "%"));
+              setStyle($video, 'padding', "".concat((clientHeight - clientHeight * _percentage) / 2, "px 0"));
+            }
           }
-        }
 
-        $player.dataset.aspectRatio = ratio;
-        notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio));
-        art.emit('aspectRatioChange', ratio);
-      }
-    });
-    Object.defineProperty(player, 'aspectRatioRemove', {
-      value: function value() {
-        if (player.aspectRatioState) {
+          $player.dataset.aspectRatio = ratio;
+          notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio));
+          art.emit('aspectRatioChange', ratio);
+        } else if (player.aspectRatio) {
           setStyle($video, 'width', null);
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);
@@ -2672,11 +2677,9 @@
       }
     });
     Object.defineProperty(player, 'aspectRatioReset', {
-      value: function value() {
-        var aspectRatio = $player.dataset.aspectRatio;
-
-        if (aspectRatio) {
-          player.aspectRatio(aspectRatio);
+      set: function set(value) {
+        if (value && player.aspectRatio) {
+          player.aspectRatio = player.aspectRatio;
           art.emit('aspectRatioReset');
         }
       }
@@ -2948,49 +2951,38 @@
       screenfullError();
     }
 
-    Object.defineProperty(player, 'fullscreenState', {
+    Object.defineProperty(player, 'fullscreen', {
       get: function get() {
         return screenfull.isFullscreen;
-      }
-    });
-    Object.defineProperty(player, 'fullscreenEnabled', {
-      value: function value() {
-        if (screenfull.enabled) {
-          if (!player.fullscreenState) {
-            player.fullscreenWebExit();
-            screenfull.request($player).then(function () {
-              $player.classList.add('artplayer-fullscreen');
-              player.aspectRatioReset();
-              art.emit('fullscreen:enabled');
-            });
+      },
+      set: function set(value) {
+        if (value) {
+          if (player.fullscreenWeb) {
+            player.fullscreenWeb = false;
           }
+
+          screenfull.request($player).then(function () {
+            $player.classList.add('artplayer-fullscreen');
+            player.aspectRatioReset = true;
+            art.emit('fullscreen:enabled');
+          });
         } else {
-          screenfullError();
-        }
-      }
-    });
-    Object.defineProperty(player, 'fullscreenExit', {
-      value: function value() {
-        if (screenfull.enabled) {
-          if (player.fullscreenState) {
-            player.fullscreenWebExit();
-            screenfull.exit().then(function () {
-              $player.classList.remove('artplayer-fullscreen');
-              player.aspectRatioReset();
-              art.emit('fullscreen:exit');
-            });
+          if (player.fullscreenWeb) {
+            player.fullscreenWeb = false;
           }
-        } else {
-          screenfullError();
+
+          screenfull.exit().then(function () {
+            $player.classList.remove('artplayer-fullscreen');
+            player.aspectRatioReset = true;
+            art.emit('fullscreen:exit');
+          });
         }
       }
     });
     Object.defineProperty(player, 'fullscreenToggle', {
-      value: function value() {
-        if (player.fullscreenState) {
-          player.fullscreenExit();
-        } else {
-          player.fullscreenEnabled();
+      set: function set(value) {
+        if (value) {
+          player.fullscreen = !player.fullscreen;
         }
       }
     });
@@ -2998,38 +2990,34 @@
 
   function fullscreenWebMix(art, player) {
     var $player = art.template.$player;
-    Object.defineProperty(player, 'fullscreenWebState', {
+    Object.defineProperty(player, 'fullscreenWeb', {
       get: function get() {
         return $player.classList.contains('artplayer-web-fullscreen');
-      }
-    });
-    Object.defineProperty(player, 'fullscreenWebEnabled', {
-      value: function value() {
-        if (player.fullscreenState) {
-          player.fullscreenExit();
-        }
+      },
+      set: function set(value) {
+        if (value) {
+          if (player.fullscreen) {
+            player.fullscreen = false;
+          }
 
-        $player.classList.add('artplayer-web-fullscreen');
-        player.aspectRatioReset();
-        art.emit('fullscreenWeb:enabled');
-      }
-    });
-    Object.defineProperty(player, 'fullscreenWebExit', {
-      value: function value() {
-        if (player.fullscreenWebState) {
-          player.fullscreenExit();
+          $player.classList.add('artplayer-web-fullscreen');
+          player.aspectRatioReset = true;
+          art.emit('fullscreenWeb:enabled');
+        } else {
+          if (player.fullscreen) {
+            player.fullscreen = false;
+          }
+
           $player.classList.remove('artplayer-web-fullscreen');
-          player.aspectRatioReset();
+          player.aspectRatioReset = true;
           art.emit('fullscreenWeb:exit');
         }
       }
     });
     Object.defineProperty(player, 'fullscreenWebToggle', {
-      value: function value() {
-        if (player.fullscreenWebState) {
-          player.fullscreenWebExit();
-        } else {
-          player.fullscreenWebEnabled();
+      set: function set(value) {
+        if (value) {
+          player.fullscreenWeb = !player.fullscreenWeb;
         }
       }
     });
@@ -3040,25 +3028,22 @@
         $video = art.template.$video,
         proxy = art.events.proxy;
     $video.disablePictureInPicture = false;
-    Object.defineProperty(player, 'pipState', {
+    Object.defineProperty(player, 'pip', {
       get: function get() {
         return document.pictureInPictureElement;
-      }
-    });
-    Object.defineProperty(player, 'pipEnabled', {
-      value: function value() {
-        $video.requestPictureInPicture()["catch"](function (error) {
-          notice.show(error, true, 3000);
-          console.warn(error);
-        });
-      }
-    });
-    Object.defineProperty(player, 'pipExit', {
-      value: function value() {
-        document.exitPictureInPicture()["catch"](function (error) {
-          notice.show(error, true, 3000);
-          console.warn(error);
-        });
+      },
+      set: function set(value) {
+        if (value) {
+          $video.requestPictureInPicture().catch(function (error) {
+            notice.show(error, true, 3000);
+            console.warn(error);
+          });
+        } else {
+          document.exitPictureInPicture().catch(function (error) {
+            notice.show(error, true, 3000);
+            console.warn(error);
+          });
+        }
       }
     });
     proxy($video, 'enterpictureinpicture', function () {
@@ -3068,8 +3053,8 @@
       art.emit('pipExit');
     });
     art.on('destroy', function () {
-      if (player.pipState) {
-        player.pipExit();
+      if (player.pip) {
+        player.pip = false;
       }
     });
   }
@@ -3077,21 +3062,18 @@
   function webkitPip(art, player) {
     var $video = art.template.$video;
     $video.webkitSetPresentationMode('inline');
-    Object.defineProperty(player, 'pipState', {
+    Object.defineProperty(player, 'pip', {
       get: function get() {
         return $video.webkitPresentationMode === 'picture-in-picture';
-      }
-    });
-    Object.defineProperty(player, 'pipEnabled', {
-      value: function value() {
-        $video.webkitSetPresentationMode('picture-in-picture');
-        art.emit('pipEnabled');
-      }
-    });
-    Object.defineProperty(player, 'pipExit', {
-      value: function value() {
-        $video.webkitSetPresentationMode('inline');
-        art.emit('pipExit');
+      },
+      set: function set(value) {
+        if (value) {
+          $video.webkitSetPresentationMode('picture-in-picture');
+          art.emit('pipEnabled');
+        } else {
+          $video.webkitSetPresentationMode('inline');
+          art.emit('pipExit');
+        }
       }
     });
   }
@@ -3108,52 +3090,47 @@
         proxy = _art$events.proxy;
     var cachePos = null;
     var draggie = null;
-    Object.defineProperty(player, 'pipState', {
+    Object.defineProperty(player, 'pip', {
       get: function get() {
         return $player.classList.contains('artplayer-pip');
-      }
-    });
-    Object.defineProperty(player, 'pipEnabled', {
-      value: function value() {
-        if (player.autoSizeState) {
-          player.autoSizeRemove();
-        }
+      },
+      set: function set(value) {
+        if (value) {
+          if (player.autoSize) {
+            player.autoSize = false;
+          }
 
-        if (!draggie) {
-          draggie = new draggabilly($player, {
-            handle: '.artplayer-pip-header'
-          });
-          append($pipTitle, option.title || i18n.get('Mini player'));
-          proxy($pipClose, 'click', function () {
-            player.pipExit();
-          });
-          destroyEvents.push(function () {
-            draggie.destroy();
-          });
-        } else if (cachePos && cachePos.x !== 0 && cachePos.y !== 0) {
-          setStyle($player, 'left', "".concat(cachePos.x, "px"));
-          setStyle($player, 'top', "".concat(cachePos.y, "px"));
-        }
+          if (!draggie) {
+            draggie = new draggabilly($player, {
+              handle: '.artplayer-pip-header'
+            });
+            append($pipTitle, option.title || i18n.get('Mini player'));
+            proxy($pipClose, 'click', function () {
+              player.pip = false;
+            });
+            destroyEvents.push(function () {
+              draggie.destroy();
+            });
+          } else if (cachePos && cachePos.x !== 0 && cachePos.y !== 0) {
+            setStyle($player, 'left', "".concat(cachePos.x, "px"));
+            setStyle($player, 'top', "".concat(cachePos.y, "px"));
+          }
 
-        $player.classList.add('artplayer-pip');
-        player.fullscreenExit();
-        player.fullscreenWebExit();
-        player.aspectRatioRemove();
-        player.playbackRateRemove();
-        art.emit('pipEnabled');
-      }
-    });
-    Object.defineProperty(player, 'pipExit', {
-      value: function value() {
-        if (player.pipState) {
+          $player.classList.add('artplayer-pip');
+          player.fullscreen = false;
+          player.fullscreenWeb = false;
+          player.aspectRatio = false;
+          player.playbackRate = false;
+          art.emit('pipEnabled');
+        } else if (player.pip) {
           $player.classList.remove('artplayer-pip');
           cachePos = draggie.position;
           setStyle($player, 'left', null);
           setStyle($player, 'top', null);
-          player.fullscreenExit();
-          player.fullscreenWebExit();
-          player.aspectRatioRemove();
-          player.playbackRateRemove();
+          player.fullscreen = false;
+          player.fullscreenWeb = false;
+          player.aspectRatio = false;
+          player.playbackRate = false;
           art.emit('pipExit');
         }
       }
@@ -3172,11 +3149,9 @@
     }
 
     Object.defineProperty(player, 'pipToggle', {
-      value: function value() {
-        if (player.pipState) {
-          player.pipExit();
-        } else {
-          player.pipEnabled();
+      set: function set(value) {
+        if (value) {
+          player.pip = !player.pip;
         }
       }
     });
@@ -3213,44 +3188,41 @@
         $container = _art$template.$container,
         $player = _art$template.$player,
         $video = _art$template.$video;
-    Object.defineProperty(player, 'autoSizeState', {
+    Object.defineProperty(player, 'autoSize', {
       get: function get() {
         return $container.classList.contains('artplayer-auto-size');
-      }
-    });
-    Object.defineProperty(player, 'autoSize', {
-      value: function value() {
-        var videoWidth = $video.videoWidth,
-            videoHeight = $video.videoHeight;
+      },
+      set: function set(value) {
+        if (value) {
+          var videoWidth = $video.videoWidth,
+              videoHeight = $video.videoHeight;
 
-        var _$container$getBoundi = $container.getBoundingClientRect(),
-            width = _$container$getBoundi.width,
-            height = _$container$getBoundi.height;
+          var _$container$getBoundi = $container.getBoundingClientRect(),
+              width = _$container$getBoundi.width,
+              height = _$container$getBoundi.height;
 
-        var videoRatio = videoWidth / videoHeight;
-        var containerRatio = width / height;
-        $container.classList.add('artplayer-auto-size');
+          var videoRatio = videoWidth / videoHeight;
+          var containerRatio = width / height;
+          $container.classList.add('artplayer-auto-size');
 
-        if (containerRatio > videoRatio) {
-          var percentage = height * videoRatio / width * 100;
-          setStyle($player, 'width', "".concat(percentage, "%"));
-          setStyle($player, 'height', '100%');
+          if (containerRatio > videoRatio) {
+            var percentage = height * videoRatio / width * 100;
+            setStyle($player, 'width', "".concat(percentage, "%"));
+            setStyle($player, 'height', '100%');
+          } else {
+            var _percentage = width / videoRatio / height * 100;
+
+            setStyle($player, 'width', '100%');
+            setStyle($player, 'height', "".concat(_percentage, "%"));
+          }
+
+          art.emit('autoSizeChange');
         } else {
-          var _percentage = width / videoRatio / height * 100;
-
-          setStyle($player, 'width', '100%');
-          setStyle($player, 'height', "".concat(_percentage, "%"));
+          $container.classList.remove('artplayer-auto-size');
+          setStyle($player, 'width', null);
+          setStyle($player, 'height', null);
+          art.emit('autoSizeRemove');
         }
-
-        art.emit('autoSizeChange');
-      }
-    });
-    Object.defineProperty(player, 'autoSizeRemove', {
-      value: function value() {
-        $container.classList.remove('artplayer-auto-size');
-        setStyle($player, 'width', null);
-        setStyle($player, 'height', null);
-        art.emit('autoSizeRemove');
       }
     });
   }
@@ -3281,23 +3253,20 @@
   }
 
   function flipMix(art, player) {
-    Object.defineProperty(player, 'flipState', {
+    Object.defineProperty(player, 'flip', {
       get: function get() {
         return art.template.$player.dataset.flip;
-      }
-    });
-    Object.defineProperty(player, 'flip', {
-      value: function value(flip) {
-        var flipList = ['normal', 'horizontal', 'vertical'];
-        errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
-        art.template.$player.dataset.flip = flip;
-        art.emit('flipChange', flip);
-      }
-    });
-    Object.defineProperty(player, 'flipRemove', {
-      value: function value() {
-        delete art.template.$player.dataset.flip;
-        art.emit('flipRemove');
+      },
+      set: function set(flip) {
+        if (flip) {
+          var flipList = ['normal', 'horizontal', 'vertical'];
+          errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
+          art.template.$player.dataset.flip = flip;
+          art.emit('flipChange', flip);
+        } else {
+          delete art.template.$player.dataset.flip;
+          art.emit('flipRemove');
+        }
       }
     });
   }
@@ -3449,7 +3418,7 @@
           var $fullscreen = append($control, icons.fullscreen);
           tooltip($fullscreen, i18n.get('Fullscreen'));
           proxy($control, 'click', function () {
-            player.fullscreenToggle();
+            player.fullscreenToggle = true;
           });
           art.on('fullscreen:enabled', function () {
             setStyle($fullscreen, 'opacity', '0.8');
@@ -3475,7 +3444,7 @@
           var $fullscreenWeb = append($control, icons.fullscreenWeb);
           tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
           proxy($control, 'click', function () {
-            player.fullscreenWebToggle();
+            player.fullscreenWebToggle = true;
           });
           art.on('fullscreenWeb:enabled', function () {
             setStyle($fullscreenWeb, 'opacity', '0.8');
@@ -3501,7 +3470,7 @@
           var $pip = append($control, icons.pip);
           tooltip($pip, i18n.get('Mini player'));
           proxy($control, 'click', function () {
-            player.pipEnabled();
+            player.pip = true;
           });
         }
       });
@@ -3521,10 +3490,10 @@
           tooltip($play, i18n.get('Play'));
           tooltip($pause, i18n.get('Pause'));
           proxy($play, 'click', function () {
-            player.play();
+            player.play = true;
           });
           proxy($pause, 'click', function () {
-            player.pause();
+            player.pause = true;
           });
 
           function showPlay() {
@@ -3667,7 +3636,7 @@
                   percentage = _getPosFromEvent3.percentage;
 
               setBar('played', percentage);
-              player.seek(second);
+              player.seek = second;
             }
           });
           proxy($indicator, 'mousedown', function () {
@@ -3681,7 +3650,7 @@
 
               $indicator.classList.add('art-show-indicator');
               setBar('played', percentage);
-              player.seek(second);
+              player.seek = second;
             }
           });
           proxy(document, 'mouseup', function () {
@@ -3781,7 +3750,7 @@
               // TODO...
               var panelWidth = getStyle($volumePanel, 'width') || 60;
               var handleWidth = getStyle($volumeHandle, 'width');
-              var width = handleWidth / 2 + (panelWidth - handleWidth) * percentage - handleWidth / 2;
+              var width = (panelWidth - handleWidth) * percentage;
               setStyle($volume, 'display', 'flex');
               setStyle($volumeClose, 'display', 'none');
               setStyle($volumeHandle, 'left', "".concat(width, "px"));
@@ -3934,7 +3903,7 @@
               player = art.player;
           var playIndex = -1;
           var defaultQuality = option.quality.find(function (item) {
-            return item["default"];
+            return item.default;
           }) || option.quality[0];
           playIndex = option.quality.indexOf(defaultQuality);
           var $qualityName = append($control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
@@ -4119,7 +4088,7 @@
           var rate = target.dataset.rate;
 
           if (rate) {
-            player.playbackRate(Number(rate));
+            player.playbackRate = Number(rate);
             art.contextmenu.hide();
           }
         },
@@ -4149,7 +4118,7 @@
           var ratio = target.dataset.ratio;
 
           if (ratio) {
-            player.aspectRatio(ratio);
+            player.aspectRatio = ratio;
             art.contextmenu.hide();
           }
         },
@@ -4501,7 +4470,7 @@
 
         if (!$track) {
           var $newTrack = document.createElement('track');
-          $newTrack["default"] = true;
+          $newTrack.default = true;
           $newTrack.kind = 'metadata';
           $video.appendChild($newTrack);
           this.art.template.$track = $newTrack;
@@ -4553,7 +4522,7 @@
           }
 
           return vttUrl;
-        })["catch"](function (err) {
+        }).catch(function (err) {
           notice.show(err);
           console.warn(err);
         });
@@ -4632,7 +4601,7 @@
       $player.classList.remove('artplayer-hide-cursor');
       art.controls.show();
 
-      if (!art.player.pipState && player.playing && event.target === $video) {
+      if (!art.player.pip && player.playing && event.target === $video) {
         autoHide();
       }
     });
@@ -4900,14 +4869,14 @@
         $player = art.template.$player;
     var resizeObserver = new ResizeObserver_2(function () {
       if (option.autoSize) {
-        if (!art.player.fullscreenState && !art.player.fullscreenWebState && !art.player.pipState) {
-          art.player.autoSize();
+        if (!art.player.fullscreen && !art.player.fullscreenWeb && !art.player.pip) {
+          art.player.autoSize = true;
         } else {
-          art.player.autoSizeRemove();
+          art.player.autoSize = false;
         }
       }
 
-      art.player.aspectRatioReset();
+      art.player.aspectRatioReset = true;
       art.emit('resize', $player);
     });
     resizeObserver.observe($player);
@@ -5019,21 +4988,21 @@
       this.art = art;
       this.keys = {};
       this.add(27, function () {
-        if (art.player.fullscreenWebState) {
-          art.player.fullscreenWebExit();
+        if (art.player.fullscreenWeb) {
+          art.player.fullscreenWeb = false;
         }
       });
       this.add(32, function () {
-        art.player.toggle();
+        art.player.toggle = true;
       });
       this.add(37, function () {
-        art.player.seek(art.player.currentTime - 10);
+        art.player.seek = art.player.currentTime - 10;
       });
       this.add(38, function () {
         art.player.volume += 0.05;
       });
       this.add(39, function () {
-        art.player.seek(art.player.currentTime + 10);
+        art.player.seek = art.player.currentTime + 10;
       });
       this.add(40, function () {
         art.player.volume -= 0.05;
@@ -5311,7 +5280,7 @@
           var value = event.target.dataset.value;
 
           if (value) {
-            player.flip(value);
+            player.flip = value;
           }
         },
         mounted: function mounted($setting) {
@@ -5336,7 +5305,7 @@
           var value = event.target.dataset.value;
 
           if (value) {
-            player.aspectRatio(value);
+            player.aspectRatio = value;
           }
         },
         mounted: function mounted($setting) {
@@ -5364,7 +5333,7 @@
           proxy($range, 'change', function () {
             var value = $range.value;
             $value.innerText = value;
-            player.playbackRate(Number(value));
+            player.playbackRate = Number(value);
           });
           art.on('playbackRateChange', function (rate) {
             if ($range.value !== rate) {
@@ -5621,8 +5590,8 @@
 
         if (canPlayType === 'maybe' || canPlayType === 'probably') {
           var url = URL.createObjectURL(file);
-          player.playbackRateRemove();
-          player.aspectRatioRemove();
+          player.playbackRate = false;
+          player.aspectRatio = false;
           template.$video.src = url;
           sleep(1000).then(function () {
             player.currentTime = 0;
@@ -5854,11 +5823,7 @@
       key: "destroy",
       value: function destroy() {
         var removeHtml = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-        if (this.events) {
-          this.events.destroy();
-        }
-
+        this.events.destroy();
         this.template.destroy(removeHtml);
         Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
         this.isDestroy = true;

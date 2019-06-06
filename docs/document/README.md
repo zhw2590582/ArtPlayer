@@ -857,42 +857,31 @@ Player core function
 
 | propertie              | type       | Description                                                                                       |
 | ---------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
-| `aspectRatioState`     | `String`   | Return the current value of aspect ratio                                                          |
-| `aspectRatio`          | `Function` | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9`                   |
-| `aspectRatioRemove`    | `Function` | Remove aspect ratio                                                                               |
-| `aspectRatioReset`     | `Function` | Recalculate the aspect ratio                                                                      |
-| `autoSizeState`        | `Boolean`  | Return the current state of auto size                                                             |
-| `autoSize`             | `Function` | Set auto size                                                                                     |
-| `autoSizeRemove`       | `Function` | Remove the auto size                                                                              |
+| `aspectRatio`          | `String`   | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9` and `false`       |
+| `aspectRatioReset`     | `Boolean`  | Recalculate the aspect ratio                                                                      |
+| `attachUrl`            | `Function` | Replace play address                                                                              |
+| `autoSize`             | `Boolean`  | Set auto size                                                                                     |
 | `currentTime`          | `Number`   | `Getter` and `Setter` of the current time                                                         |
 | `duration`             | `Number`   | `Getter` of the duration                                                                          |
-| `flipState`            | `String`   | Return the current state of flip                                                                  |
-| `flip`                 | `Function` | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical`                 |
-| `flipRemove`           | `Function` | Remove the flip                                                                                   |
-| `fullscreenState`      | `Boolean`  | Return the current state of fullscreen                                                            |
-| `fullscreenEnabled`    | `Function` | Enable fullscreen                                                                                 |
-| `fullscreenExit`       | `Function` | Exit fullscreen                                                                                   |
-| `fullscreenToggle`     | `Function` | Toggle fullscreen                                                                                 |
-| `fullscreenWebState`   | `Boolean`  | Return the current state of web fullscreen                                                        |
-| `fullscreenWebEnabled` | `Function` | Enable web fullscreen                                                                             |
-| `fullscreenWebExit`    | `Function` | Exit web fullscreen                                                                               |
-| `fullscreenWebToggle`  | `Function` | Toggle web fullscreen                                                                             |
+| `flip`                 | `String`   | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical` and `false`     |
+| `fullscreen`           | `Boolean`  | Enable or disable fullscreen                                                                      |
+| `fullscreenToggle`     | `Boolean`  | Toggle fullscreen                                                                                 |
+| `fullscreenWeb`        | `Boolean`  | Enable or disable web fullscreen                                                                  |
+| `fullscreenWebToggle`  | `Boolean`  | Toggle web fullscreen                                                                             |
 | `loaded`               | `Number`   | Return the proportion of the load                                                                 |
-| `pause`                | `Function` | Pause playback                                                                                    |
-| `pipState`             | `Boolean`  | Return the current state of pip                                                                   |
-| `pipEnabled`           | `Function` | Enable pip                                                                                        |
-| `pipExit`              | `Function` | Exit pip                                                                                          |
-| `pipToggle`            | `Function` | Toggle pip                                                                                        |
-| `playbackRateState`    | `String`   | Return the current state of playback rate                                                         |
-| `playbackRate`         | `Function` | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
-| `playbackRateRemove`   | `Function` | Remove the playback rate                                                                          |
-| `playbackRateReset`    | `Function` | Recalculate the playback rate                                                                     |
+| `pause`                | `Boolean`  | Pause playback                                                                                    |
+| `pip`                  | `Boolean`  | Enable or disable pip                                                                             |
+| `pipToggle`            | `Boolean`  | Toggle pip                                                                                        |
+| `playbackRate`         | `String`   | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
+| `playbackRateReset`    | `Boolean`  | Recalculate the playback rate                                                                     |
 | `played`               | `Number`   | Return the proportion of the played                                                               |
 | `playing`              | `Boolean`  | Return to playing state                                                                           |
+| `play`                 | `Boolean`  | Start playback                                                                                    |
 | `screenshot`           | `Function` | Download a screenshot of current time                                                             |
-| `seek`                 | `Function` | Set the current time                                                                              |
+| `seek`                 | `Number`   | Set the current time                                                                              |
 | `switchQuality`        | `Function` | Switch quality                                                                                    |
-| `toggle`               | `Function` | Toggle play and pause                                                                             |
+| `switchUrl`            | `Function` | Switch video url                                                                                  |
+| `toggle`               | `Boolean`  | Toggle play and pause                                                                             |
 | `volume`               | `Number`   | `Getter` and `Setter` of the current volume                                                       |
 | `muted`                | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
 
@@ -906,7 +895,7 @@ var art = new Artplayer({
 });
 
 art.once('video:canplay', () => {
-    art.player.seek(5);
+    art.player.seek = 5;
     art.player.screenshot();
 });
 ```

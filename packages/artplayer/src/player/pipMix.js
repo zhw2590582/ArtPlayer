@@ -10,25 +10,22 @@ function nativePip(art, player) {
 
     $video.disablePictureInPicture = false;
 
-    Object.defineProperty(player, 'pipState', {
-        get: () => document.pictureInPictureElement,
-    });
-
-    Object.defineProperty(player, 'pipEnabled', {
-        value: () => {
-            $video.requestPictureInPicture().catch(error => {
-                notice.show(error, true, 3000);
-                console.warn(error);
-            });
+    Object.defineProperty(player, 'pip', {
+        get() {
+            return document.pictureInPictureElement;
         },
-    });
-
-    Object.defineProperty(player, 'pipExit', {
-        value: () => {
-            document.exitPictureInPicture().catch(error => {
-                notice.show(error, true, 3000);
-                console.warn(error);
-            });
+        set(value) {
+            if (value) {
+                $video.requestPictureInPicture().catch(error => {
+                    notice.show(error, true, 3000);
+                    console.warn(error);
+                });
+            } else {
+                document.exitPictureInPicture().catch(error => {
+                    notice.show(error, true, 3000);
+                    console.warn(error);
+                });
+            }
         },
     });
 
@@ -41,8 +38,8 @@ function nativePip(art, player) {
     });
 
     art.on('destroy', () => {
-        if (player.pipState) {
-            player.pipExit();
+        if (player.pip) {
+            player.pip = false;
         }
     });
 }
@@ -52,21 +49,18 @@ function webkitPip(art, player) {
 
     $video.webkitSetPresentationMode('inline');
 
-    Object.defineProperty(player, 'pipState', {
-        get: () => $video.webkitPresentationMode === 'picture-in-picture',
-    });
-
-    Object.defineProperty(player, 'pipEnabled', {
-        value: () => {
-            $video.webkitSetPresentationMode('picture-in-picture');
-            art.emit('pipEnabled');
+    Object.defineProperty(player, 'pip', {
+        get() {
+            return $video.webkitPresentationMode === 'picture-in-picture';
         },
-    });
-
-    Object.defineProperty(player, 'pipExit', {
-        value: () => {
-            $video.webkitSetPresentationMode('inline');
-            art.emit('pipExit');
+        set(value) {
+            if (value) {
+                $video.webkitSetPresentationMode('picture-in-picture');
+                art.emit('pipEnabled');
+            } else {
+                $video.webkitSetPresentationMode('inline');
+                art.emit('pipExit');
+            }
         },
     });
 }
@@ -81,55 +75,50 @@ function customPip(art, player) {
     let cachePos = null;
     let draggie = null;
 
-    Object.defineProperty(player, 'pipState', {
-        get: () => $player.classList.contains('artplayer-pip'),
-    });
-
-    Object.defineProperty(player, 'pipEnabled', {
-        value: () => {
-            if (player.autoSizeState) {
-                player.autoSizeRemove();
-            }
-
-            if (!draggie) {
-                draggie = new Draggabilly($player, {
-                    handle: '.artplayer-pip-header',
-                });
-
-                append($pipTitle, option.title || i18n.get('Mini player'));
-
-                proxy($pipClose, 'click', () => {
-                    player.pipExit();
-                });
-
-                destroyEvents.push(() => {
-                    draggie.destroy();
-                });
-            } else if (cachePos && cachePos.x !== 0 && cachePos.y !== 0) {
-                setStyle($player, 'left', `${cachePos.x}px`);
-                setStyle($player, 'top', `${cachePos.y}px`);
-            }
-
-            $player.classList.add('artplayer-pip');
-            player.fullscreenExit();
-            player.fullscreenWebExit();
-            player.aspectRatioRemove();
-            player.playbackRateRemove();
-            art.emit('pipEnabled');
+    Object.defineProperty(player, 'pip', {
+        get() {
+            return $player.classList.contains('artplayer-pip');
         },
-    });
+        set(value) {
+            if (value) {
+                if (player.autoSize) {
+                    player.autoSize = false;
+                }
 
-    Object.defineProperty(player, 'pipExit', {
-        value: () => {
-            if (player.pipState) {
+                if (!draggie) {
+                    draggie = new Draggabilly($player, {
+                        handle: '.artplayer-pip-header',
+                    });
+
+                    append($pipTitle, option.title || i18n.get('Mini player'));
+
+                    proxy($pipClose, 'click', () => {
+                        player.pip = false;
+                    });
+
+                    destroyEvents.push(() => {
+                        draggie.destroy();
+                    });
+                } else if (cachePos && cachePos.x !== 0 && cachePos.y !== 0) {
+                    setStyle($player, 'left', `${cachePos.x}px`);
+                    setStyle($player, 'top', `${cachePos.y}px`);
+                }
+
+                $player.classList.add('artplayer-pip');
+                player.fullscreen = false;
+                player.fullscreenWeb = false;
+                player.aspectRatio = false;
+                player.playbackRate = false;
+                art.emit('pipEnabled');
+            } else if (player.pip) {
                 $player.classList.remove('artplayer-pip');
                 cachePos = draggie.position;
                 setStyle($player, 'left', null);
                 setStyle($player, 'top', null);
-                player.fullscreenExit();
-                player.fullscreenWebExit();
-                player.aspectRatioRemove();
-                player.playbackRateRemove();
+                player.fullscreen = false;
+                player.fullscreenWeb = false;
+                player.aspectRatio = false;
+                player.playbackRate = false;
                 art.emit('pipExit');
             }
         },
@@ -147,11 +136,9 @@ export default function pipMix(art, player) {
     }
 
     Object.defineProperty(player, 'pipToggle', {
-        value: () => {
-            if (player.pipState) {
-                player.pipExit();
-            } else {
-                player.pipEnabled();
+        set(value) {
+            if (value) {
+                player.pip = !player.pip;
             }
         },
     });

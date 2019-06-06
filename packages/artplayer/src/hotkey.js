@@ -4,17 +4,17 @@ export default class Hotkey {
         this.keys = {};
 
         this.add(27, () => {
-            if (art.player.fullscreenWebState) {
-                art.player.fullscreenWebExit();
+            if (art.player.fullscreenWeb) {
+                art.player.fullscreenWeb = false;
             }
         });
 
         this.add(32, () => {
-            art.player.toggle();
+            art.player.toggle = true;
         });
 
         this.add(37, () => {
-            art.player.seek(art.player.currentTime - 10);
+            art.player.seek = art.player.currentTime - 10;
         });
 
         this.add(38, () => {
@@ -22,7 +22,7 @@ export default class Hotkey {
         });
 
         this.add(39, () => {
-            art.player.seek(art.player.currentTime + 10);
+            art.player.seek = art.player.currentTime + 10;
         });
 
         this.add(40, () => {

@@ -22,7 +22,7 @@ export default function flip(settingOption) {
             click: event => {
                 const { value } = event.target.dataset;
                 if (value) {
-                    player.flip(value);
+                    player.flip = value;
                 }
             },
             mounted: $setting => {

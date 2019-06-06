@@ -1,5 +1,5 @@
 {
-    "include": ["src"],
+    "include": ["types"],
     "compilerOptions": {
         "lib": ["es2015"],
         "strict": true
