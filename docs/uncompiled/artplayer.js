@@ -2258,7 +2258,7 @@
     var _$progress$getBoundin = $progress.getBoundingClientRect(),
         left = _$progress$getBoundin.left;
 
-    var width = clamp(event.x - left, 0, $progress.clientWidth);
+    var width = clamp(event.pageX - left, 0, $progress.clientWidth);
     var second = width / $progress.clientWidth * player.duration;
     var time = secondToTime(second);
     var percentage = clamp(width / $progress.clientWidth, 0, 1);
@@ -2463,7 +2463,7 @@
             var _$volumeHandle$getBou = $volumeHandle.getBoundingClientRect(),
                 handleWidth = _$volumeHandle$getBou.width;
 
-            var percentage = clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
+            var percentage = clamp(event.pageX - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
             return percentage;
           }
 

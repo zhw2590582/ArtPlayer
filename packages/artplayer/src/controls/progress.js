@@ -7,7 +7,7 @@ export function getPosFromEvent(art, event) {
     } = art;
     
     const { left } = $progress.getBoundingClientRect();
-    const width = clamp(event.x - left, 0, $progress.clientWidth);
+    const width = clamp(event.pageX - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * player.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);

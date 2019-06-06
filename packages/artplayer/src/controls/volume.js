@@ -23,7 +23,7 @@ export default function volume(controlOption) {
                 const { left: panelLeft, width: panelWidth } = $volumePanel.getBoundingClientRect();
                 const { width: handleWidth } = $volumeHandle.getBoundingClientRect();
                 const percentage =
-                    clamp(event.x - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) /
+                    clamp(event.pageX - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) /
                     (panelWidth - handleWidth);
                 return percentage;
             }
