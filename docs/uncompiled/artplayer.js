@@ -3121,52 +3121,65 @@
         $player = _art$template.$player,
         $pipClose = _art$template.$pipClose,
         $pipTitle = _art$template.$pipTitle,
-        _art$events = art.events,
-        destroyEvents = _art$events.destroyEvents,
-        proxy = _art$events.proxy;
-    var cachePos = null;
-    var draggie = null;
+        $pipHeader = _art$template.$pipHeader,
+        proxy = art.events.proxy;
+    var cacheStyle = '';
+    var isDroging = false;
+    var lastPageX = 0;
+    var lastPageY = 0;
+    var lastPlayerLeft = 0;
+    var lastPlayerTop = 0;
+    proxy($pipHeader, 'mousedown', function (event) {
+      isDroging = true;
+      lastPageX = event.pageX;
+      lastPageY = event.pageY;
+      lastPlayerLeft = player.left;
+      lastPlayerTop = player.top;
+    });
+    proxy($pipHeader, 'mousemove', function (event) {
+      if (isDroging) {
+        $player.classList.add('is-dragging');
+        setStyle($player, 'left', "".concat(lastPlayerLeft + event.pageX - lastPageX, "px"));
+        setStyle($player, 'top', "".concat(lastPlayerTop + event.pageY - lastPageY, "px"));
+      }
+    });
+    proxy(document, 'mouseup', function () {
+      isDroging = false;
+      $player.classList.remove('is-dragging');
+    });
+    proxy($pipClose, 'click', function () {
+      player.pip = false;
+      isDroging = false;
+      $player.classList.remove('is-dragging');
+    });
+    append($pipTitle, option.title || i18n.get('Mini player'));
     Object.defineProperty(player, 'pip', {
       get: function get() {
         return $player.classList.contains('artplayer-pip');
       },
       set: function set(value) {
         if (value) {
-          if (player.autoSize) {
-            player.autoSize = false;
-          }
-
-          if (!draggie) {
-            draggie = new draggabilly($player, {
-              handle: '.artplayer-pip-header'
-            });
-            append($pipTitle, option.title || i18n.get('Mini player'));
-            proxy($pipClose, 'click', function () {
-              player.pip = false;
-            });
-            destroyEvents.push(function () {
-              draggie.destroy();
-            });
-          } else if (cachePos && cachePos.x !== 0 && cachePos.y !== 0) {
-            setStyle($player, 'left', "".concat(cachePos.x, "px"));
-            setStyle($player, 'top', "".concat(cachePos.y, "px"));
-          }
-
+          player.autoSize = false;
+          cacheStyle = $player.style.cssText;
           $player.classList.add('artplayer-pip');
+          var $body = document.body;
+          setStyle($player, 'top', "".concat($body.clientHeight - player.height - 50, "px"));
+          setStyle($player, 'left', "".concat($body.clientWidth - player.width - 50, "px"));
           player.fullscreen = false;
           player.fullscreenWeb = false;
           player.aspectRatio = false;
           player.playbackRate = false;
           art.emit('pipEnabled');
         } else if (player.pip) {
+          $player.style.cssText = cacheStyle;
           $player.classList.remove('artplayer-pip');
-          cachePos = draggie.position;
-          setStyle($player, 'left', null);
           setStyle($player, 'top', null);
+          setStyle($player, 'left', null);
           player.fullscreen = false;
           player.fullscreenWeb = false;
           player.aspectRatio = false;
           player.playbackRate = false;
+          player.autoSize = true;
           art.emit('pipExit');
         }
       }

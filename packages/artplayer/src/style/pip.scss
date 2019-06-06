@@ -14,7 +14,7 @@
         justify-content: space-between;
         opacity: 0;
         visibility: hidden;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
         .artplayer-pip-title {
             flex: 1;
             padding: 0 10px;
@@ -40,10 +40,11 @@
         z-index: 9999;
         width: 400px;
         height: 225px;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 3px 6px 0 rgba(0,0,0,0.20);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 
         .artplayer-pip-header {
             display: flex;
+            user-select: none;
         }
 
         &.artplayer-hover {

@@ -1,6 +1,5 @@
 import './style';
 import 'balloon-css/balloon.min.css';
-import Draggabilly from 'draggabilly';
 import validator from 'option-validator';
 import Emitter from './emitter';
 import * as utils from './utils';
@@ -66,10 +65,6 @@ class Artplayer extends Emitter {
 
     static get kindOf() {
         return validator.kindOf;
-    }
-
-    static get Draggabilly() {
-        return Draggabilly;
     }
 
     static get DEFAULTS() {
