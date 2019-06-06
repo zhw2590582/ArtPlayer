@@ -1,8 +1,8 @@
 import './style';
 import 'balloon-css/balloon.min.css';
-import Emitter from 'tiny-emitter';
 import Draggabilly from 'draggabilly';
 import validator from 'option-validator';
+import Emitter from './emitter';
 import * as utils from './utils';
 import scheme from './scheme';
 import config from './config';
