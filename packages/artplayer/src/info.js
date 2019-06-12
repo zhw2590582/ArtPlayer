@@ -12,7 +12,7 @@ export default class Info {
             events: { proxy },
         } = this.art;
         proxy($infoClose, 'click', () => {
-            this.hide();
+            this.show = false;
         });
         this.art.on('destroy', () => {
             if (this.timer) {
@@ -92,23 +92,26 @@ export default class Info {
         }, 1000);
     }
 
-    show() {
+    set show(value) {
         const { $player, $infoPanel } = this.art.template;
-        this.state = true;
-        $player.classList.add('artplayer-info-show');
-        if (!$infoPanel.innerHTML) {
-            append($infoPanel, this.creatInfo());
+        if (value) {
+            this.state = true;
+            $player.classList.add('artplayer-info-show');
+            if (!$infoPanel.innerHTML) {
+                append($infoPanel, this.creatInfo());
+            }
+            clearTimeout(this.timer);
+            this.loop();
+            this.art.emit('info:show');
+        } else {
+            this.state = false;
+            $player.classList.remove('artplayer-info-show');
+            clearTimeout(this.timer);
+            this.art.emit('info:hide');
         }
-        clearTimeout(this.timer);
-        this.loop();
-        this.art.emit('info:show');
     }
 
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.remove('artplayer-info-show');
-        clearTimeout(this.timer);
-        this.art.emit('info:hide');
+    toggle() {
+        this.show = !this.state;
     }
 }

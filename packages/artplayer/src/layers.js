@@ -18,17 +18,20 @@ export default class Layers {
         return component(this.art, this, $layers, item, callback, 'layer');
     }
 
-    show() {
+    set show(value) {
         const { $player } = this.art.template;
-        this.state = true;
-        $player.classList.remove('artplayer-layers-hide');
-        this.art.emit('layers:show');
+        if (value) {
+            this.state = true;
+            $player.classList.remove('artplayer-layers-hide');
+            this.art.emit('layers:show');
+        } else {
+            this.state = false;
+            $player.classList.add('artplayer-layers-hide');
+            this.art.emit('layers:hide');
+        }
     }
 
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.add('artplayer-layers-hide');
-        this.art.emit('layers:hide');
+    toggle() {
+        this.show = !this.state;
     }
 }

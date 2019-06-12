@@ -19,7 +19,7 @@ export default function playbackRate(menuOption) {
                 const { rate } = target.dataset;
                 if (rate) {
                     player.playbackRate = Number(rate);
-                    art.contextmenu.hide();
+                    art.contextmenu.show = false;
                 }
             },
             mounted: $menu => {

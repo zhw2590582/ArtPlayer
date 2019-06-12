@@ -161,17 +161,20 @@ export default class Controls {
         return component(this.art, this, parent, option, callback, 'control');
     }
 
-    show() {
+    set show(value) {
         const { $player } = this.art.template;
-        this.state = true;
-        $player.classList.add('artplayer-controls-show');
-        this.art.emit('controls:show');
+        if (value) {
+            this.state = true;
+            $player.classList.add('artplayer-controls-show');
+            this.art.emit('controls:show');
+        } else {
+            this.state = false;
+            $player.classList.remove('artplayer-controls-show');
+            this.art.emit('controls:hide');
+        }
     }
 
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.remove('artplayer-controls-show');
-        this.art.emit('controls:hide');
+    toggle() {
+        this.show = !this.state;
     }
 }

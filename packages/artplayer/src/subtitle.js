@@ -30,7 +30,7 @@ export default class Subtitle {
         this.load(url).then(url => {
             this.art.template.$track.src = url;
             this.art.emit('subtitle:load', url);
-            
+
             if ($video.textTracks && $video.textTracks[0]) {
                 const [track] = $video.textTracks;
                 proxy(track, 'cuechange', () => {
@@ -73,25 +73,20 @@ export default class Subtitle {
             });
     }
 
-    show() {
+    set show(value) {
         const { $player } = this.art.template;
-        this.state = true;
-        $player.classList.remove('artplayer-subtitle-hide');
-        this.art.emit('subtitle:show');
-    }
-
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.add('artplayer-subtitle-hide');
-        this.art.emit('subtitle:hide');
+        if (value) {
+            this.state = true;
+            $player.classList.remove('artplayer-subtitle-hide');
+            this.art.emit('subtitle:show');
+        } else {
+            this.state = false;
+            $player.classList.add('artplayer-subtitle-hide');
+            this.art.emit('subtitle:hide');
+        }
     }
 
     toggle() {
-        if (this.state) {
-            this.hide();
-        } else {
-            this.show();
-        }
+        this.show = !this.state;
     }
 }

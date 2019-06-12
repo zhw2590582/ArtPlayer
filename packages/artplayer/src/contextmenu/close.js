@@ -3,7 +3,7 @@ export default function close(menuOption) {
         ...menuOption,
         html: art.i18n.get('Close'),
         click: () => {
-            art.contextmenu.hide();
+            art.contextmenu.show = false;
         },
     });
 }

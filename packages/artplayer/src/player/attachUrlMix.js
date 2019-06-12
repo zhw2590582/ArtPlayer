@@ -13,7 +13,7 @@ export default function attachUrlMix(art, player) {
                     const typeName = type || getExt(videoUrl);
                     const typeCallback = customType[typeName];
                     if (typeName && typeCallback) {
-                        art.loading.show();
+                        art.loading.show = true;
                         art.emit('beforeCustomType', typeName);
                         typeCallback.call(art, $video, videoUrl, art);
                         art.emit('afterCustomType', typeName);
@@ -32,7 +32,7 @@ export default function attachUrlMix(art, player) {
                         'If url is a function, it needs to return a promise.',
                     );
                     return result.then(videoUrl => {
-                        art.loading.show();
+                        art.loading.show = true;
                         return attachUrl(videoUrl);
                     });
                 }

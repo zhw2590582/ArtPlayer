@@ -121,7 +121,7 @@ function artplayerPluginGif(art) {
         },
         create(config = {}, callback) {
             isProcessing = true;
-            loading.show();
+            loading.show = true;
             art.emit('artplayerPluginGif:start');
             notice.show(i18n.get('Start creating gif...'), false);
             gifshot.createGIF(
@@ -143,7 +143,7 @@ function artplayerPluginGif(art) {
                         callback(blobUrl);
                     }
                     isProcessing = false;
-                    loading.hide();
+                    loading.show = false;
                     art.emit('artplayerPluginGif:end');
                 },
             );

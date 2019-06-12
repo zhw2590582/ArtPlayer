@@ -7,17 +7,20 @@ export default class Loading {
         append($loading, art.icons.loading);
     }
 
-    show() {
+    set show(value) {
         const { $player } = this.art.template;
-        this.state = true;
-        $player.classList.add('artplayer-loading-show');
-        this.art.emit('loading:show');
+        if (value) {
+            this.state = true;
+            $player.classList.add('artplayer-loading-show');
+            this.art.emit('loading:show');
+        } else {
+            this.state = false;
+            $player.classList.remove('artplayer-loading-show');
+            this.art.emit('loading:hide');
+        }
     }
 
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.remove('artplayer-loading-show');
-        this.art.emit('loading:hide');
+    toggle() {
+        this.show = !this.state;
     }
 }

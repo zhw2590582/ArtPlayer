@@ -8,21 +8,16 @@ export default class Whitelist {
             !this.isMobile ||
             whitelist.some(item => {
                 const type = kindOf(item);
-                let result = false;
                 switch (type) {
                     case 'string':
-                        result = this.userAgent.indexOf(item) > -1;
-                        break;
+                        return this.userAgent.indexOf(item) > -1;
                     case 'function':
-                        result = item(this.userAgent);
-                        break;
+                        return item(this.userAgent);
                     case 'regexp':
-                        result = item.test(this.userAgent);
-                        break;
+                        return item.test(this.userAgent);
                     default:
-                        break;
+                        return false;
                 }
-                return result;
             });
     }
 }

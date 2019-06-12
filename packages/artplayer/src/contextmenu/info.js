@@ -3,8 +3,8 @@ export default function info(menuOption) {
         ...menuOption,
         html: art.i18n.get('Video info'),
         click: () => {
-            art.info.show();
-            art.contextmenu.hide();
+            art.info.show = true;
+            art.contextmenu.show = false;
         },
     });
 }

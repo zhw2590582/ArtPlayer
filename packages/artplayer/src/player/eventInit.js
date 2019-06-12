@@ -29,9 +29,9 @@ export default function eventInit(art, player) {
 
     art.on('video:canplay', () => {
         reconnectTime = 0;
-        art.controls.show();
-        art.mask.show();
-        art.loading.hide();
+        art.controls.show = true;
+        art.mask.show = true;
+        art.loading.show = false;
     });
 
     // art.on('video:canplaythrough', () => {
@@ -47,8 +47,8 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:ended', () => {
-        art.controls.show();
-        art.mask.show();
+        art.controls.show = true;
+        art.mask.show = true;
         if (option.loop) {
             player.seek = 0;
             player.play = true;
@@ -63,8 +63,8 @@ export default function eventInit(art, player) {
                 notice.show(`${i18n.get('Reconnect')}: ${reconnectTime}`);
             });
         } else {
-            art.loading.hide();
-            art.controls.hide();
+            art.loading.show = false;
+            art.controls.show = false;
             $player.classList.add('artplayer-error');
             sleep(1000).then(() => {
                 notice.show(i18n.get('Video load failed'), false);
@@ -84,20 +84,20 @@ export default function eventInit(art, player) {
     });
 
     art.on('video:loadstart', () => {
-        art.loading.show();
+        art.loading.show = true;
     });
 
     art.on('video:pause', () => {
-        art.controls.show();
-        art.mask.show();
+        art.controls.show = true;
+        art.mask.show = true;
     });
 
     art.on('video:play', () => {
-        art.mask.hide();
+        art.mask.show = false;
     });
 
     art.on('video:playing', () => {
-        art.mask.hide();
+        art.mask.show = false;
     });
 
     // art.on('video:progress', () => {
@@ -109,11 +109,11 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:seeked', () => {
-        art.loading.hide();
+        art.loading.show = false;
     });
 
     art.on('video:seeking', () => {
-        art.loading.show();
+        art.loading.show = true;
     });
 
     // art.on('video:stalled', () => {
@@ -125,7 +125,7 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:timeupdate', () => {
-        art.mask.hide();
+        art.mask.show = false;
     });
 
     // art.on('video:volumechange', () => {
@@ -133,6 +133,6 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:waiting', () => {
-        art.loading.show();
+        art.loading.show = true;
     });
 }

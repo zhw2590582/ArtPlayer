@@ -4,7 +4,10 @@ export default function component(art, parent, target, getOption, callback, titl
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
     if (!option.disable) {
         const name = option.name || `${title}${parent.id}`;
-        errorHandle(!hasOwnProperty(parent, name), `Cannot create a component that already has the same name: ${title} -> ${name}`);
+        errorHandle(
+            !hasOwnProperty(parent, name),
+            `Cannot create a component that already has the same name: ${title} -> ${name}`,
+        );
         const $element = document.createElement('div');
         $element.classList.value = `art-${title} art-${title}-${name}`;
 
@@ -41,22 +44,31 @@ export default function component(art, parent, target, getOption, callback, titl
             callback($element, parent, art);
         }
 
-        parent[name] = {
-            id: parent.id,
-            $ref: $element,
-            hide() {
-                setStyle($element, 'display', 'none');
-                art.emit(`${title}:hide`, $element);
+        Object.defineProperty(parent, name, {
+            value: {
+                get id() {
+                    return parent.id;
+                },
+                get $ref() {
+                    return $element;
+                },
+                set show(value) {
+                    if (value) {
+                        setStyle($element, 'display', 'block');
+                        art.emit(`${title}:show`, $element);
+                    } else {
+                        setStyle($element, 'display', 'none');
+                        art.emit(`${title}:hide`, $element);
+                    }
+                },
+                set remove(value) {
+                    if (value) {
+                        remove($element);
+                        art.emit(`${title}:remove`, $element);
+                    }
+                },
             },
-            show(type = 'block') {
-                setStyle($element, 'display', type);
-                art.emit(`${title}:show`, $element);
-            },
-            remove() {
-                remove($element);
-                art.emit(`${title}:remove`, $element);
-            },
-        };
+        });
 
         art.emit(`${title}:add`, option);
         return parent[name];

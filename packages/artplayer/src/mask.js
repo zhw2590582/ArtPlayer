@@ -8,17 +8,20 @@ export default class Mask {
         append($playBig, art.icons.state);
     }
 
-    show() {
+    set show(value) {
         const { $player } = this.art.template;
-        this.state = true;
-        $player.classList.add('artplayer-mask-show');
-        this.art.emit('mask:show');
+        if (value) {
+            this.state = true;
+            $player.classList.add('artplayer-mask-show');
+            this.art.emit('mask:show');
+        } else {
+            this.state = false;
+            $player.classList.remove('artplayer-mask-show');
+            this.art.emit('mask:hide');
+        }
     }
 
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.remove('artplayer-mask-show');
-        this.art.emit('mask:hide');
+    toggle() {
+        this.show = !this.state;
     }
 }

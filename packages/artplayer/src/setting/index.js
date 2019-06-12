@@ -14,7 +14,7 @@ export default class Setting {
             });
 
             this.art.on('blur', () => {
-                this.hide();
+                this.show = false;
             });
         }
     }
@@ -28,7 +28,7 @@ export default class Setting {
 
         proxy($setting, 'click', e => {
             if (e.target === $setting) {
-                this.hide();
+                this.show = false;
             }
         });
 
@@ -60,25 +60,20 @@ export default class Setting {
         return component(this.art, this, $settingBody, item, callback, 'setting');
     }
 
-    show() {
+    set show(value) {
         const { $player } = this.art.template;
-        this.state = true;
-        $player.classList.add('artplayer-setting-show');
-        this.art.emit('setting:show');
-    }
-
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.remove('artplayer-setting-show');
-        this.art.emit('setting:hide');
+        if (value) {
+            this.state = true;
+            $player.classList.add('artplayer-setting-show');
+            this.art.emit('setting:show');
+        } else {
+            this.state = false;
+            $player.classList.remove('artplayer-setting-show');
+            this.art.emit('setting:hide');
+        }
     }
 
     toggle() {
-        if (this.state) {
-            this.hide();
-        } else {
-            this.show();
-        }
+        this.show = !this.state;
     }
 }

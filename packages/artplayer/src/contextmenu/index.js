@@ -15,7 +15,7 @@ export default class Contextmenu {
         });
 
         this.art.on('blur', () => {
-            this.hide();
+            this.show = false;
         });
     }
 
@@ -62,13 +62,13 @@ export default class Contextmenu {
 
         proxy($player, 'contextmenu', event => {
             event.preventDefault();
-            this.show();
+            this.show = true;
             this.setPos(event);
         });
 
         proxy($player, 'click', event => {
             if (!event.composedPath().includes($contextmenu)) {
-                this.hide();
+                this.show = false;
             }
         });
     }
@@ -100,17 +100,20 @@ export default class Contextmenu {
         setStyle($contextmenu, 'top', `${menuTop}px`);
     }
 
-    show() {
+    set show(value) {
         const { $player } = this.art.template;
-        this.state = true;
-        $player.classList.add('artplayer-contextmenu-show');
-        this.art.emit('contextmenu:show');
+        if (value) {
+            this.state = true;
+            $player.classList.add('artplayer-contextmenu-show');
+            this.art.emit('contextmenu:show');
+        } else {
+            this.state = false;
+            $player.classList.remove('artplayer-contextmenu-show');
+            this.art.emit('contextmenu:hide');
+        }
     }
 
-    hide() {
-        const { $player } = this.art.template;
-        this.state = false;
-        $player.classList.remove('artplayer-contextmenu-show');
-        this.art.emit('contextmenu:hide');
+    toggle() {
+        this.show = !this.state;
     }
 }

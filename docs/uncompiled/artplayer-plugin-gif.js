@@ -3018,7 +3018,7 @@
         var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var callback = arguments.length > 1 ? arguments[1] : undefined;
         isProcessing = true;
-        loading.show();
+        loading.show = true;
         art.emit('artplayerPluginGif:start');
         notice.show(i18n.get('Start creating gif...'), false);
         gifshot.createGIF(objectSpread({}, config, {
@@ -3038,7 +3038,7 @@
           }
 
           isProcessing = false;
-          loading.hide();
+          loading.show = false;
           art.emit('artplayerPluginGif:end');
         });
       }

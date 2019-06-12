@@ -2,35 +2,34 @@ export default class Hotkey {
     constructor(art) {
         this.art = art;
         this.keys = {};
-
-        this.add(27, () => {
-            if (art.player.fullscreenWeb) {
-                art.player.fullscreenWeb = false;
-            }
-        });
-
-        this.add(32, () => {
-            art.player.toggle = true;
-        });
-
-        this.add(37, () => {
-            art.player.seek = art.player.currentTime - 10;
-        });
-
-        this.add(38, () => {
-            art.player.volume += 0.05;
-        });
-
-        this.add(39, () => {
-            art.player.seek = art.player.currentTime + 10;
-        });
-
-        this.add(40, () => {
-            art.player.volume -= 0.05;
-        });
-
         if (this.art.option.hotkey) {
             this.art.once('video:canplay', () => {
+                this.add(27, () => {
+                    if (art.player.fullscreenWeb) {
+                        art.player.fullscreenWeb = false;
+                    }
+                });
+
+                this.add(32, () => {
+                    art.player.toggle = true;
+                });
+
+                this.add(37, () => {
+                    art.player.seek = art.player.currentTime - 10;
+                });
+
+                this.add(38, () => {
+                    art.player.volume += 0.05;
+                });
+
+                this.add(39, () => {
+                    art.player.seek = art.player.currentTime + 10;
+                });
+
+                this.add(40, () => {
+                    art.player.volume -= 0.05;
+                });
+
                 this.init();
             });
         }

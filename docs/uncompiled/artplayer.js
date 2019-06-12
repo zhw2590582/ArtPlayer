@@ -703,26 +703,20 @@
     this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
     this.state = !this.isMobile || whitelist.some(function (item) {
       var type = kindOf(item);
-      var result = false;
 
       switch (type) {
         case 'string':
-          result = _this.userAgent.indexOf(item) > -1;
-          break;
+          return _this.userAgent.indexOf(item) > -1;
 
         case 'function':
-          result = item(_this.userAgent);
-          break;
+          return item(_this.userAgent);
 
         case 'regexp':
-          result = item.test(_this.userAgent);
-          break;
+          return item.test(_this.userAgent);
 
         default:
-          break;
+          return false;
       }
-
-      return result;
     });
   };
 
@@ -953,7 +947,7 @@
             var typeCallback = customType[typeName];
 
             if (typeName && typeCallback) {
-              art.loading.show();
+              art.loading.show = true;
               art.emit('beforeCustomType', typeName);
               typeCallback.call(art, $video, videoUrl, art);
               art.emit('afterCustomType', typeName);
@@ -970,7 +964,7 @@
             var result = url.call(art);
             errorHandle(typeof result.then === 'function', 'If url is a function, it needs to return a promise.');
             return result.then(function (videoUrl) {
-              art.loading.show();
+              art.loading.show = true;
               return attachUrl(videoUrl);
             });
           }
@@ -1029,9 +1023,9 @@
 
     art.on('video:canplay', function () {
       reconnectTime = 0;
-      art.controls.show();
-      art.mask.show();
-      art.loading.hide();
+      art.controls.show = true;
+      art.mask.show = true;
+      art.loading.show = false;
     }); // art.on('video:canplaythrough', () => {
     // });
     // art.on('video:durationchange', () => {
@@ -1040,8 +1034,8 @@
     // });
 
     art.on('video:ended', function () {
-      art.controls.show();
-      art.mask.show();
+      art.controls.show = true;
+      art.mask.show = true;
 
       if (option.loop) {
         player.seek = 0;
@@ -1056,8 +1050,8 @@
           notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
         });
       } else {
-        art.loading.hide();
-        art.controls.hide();
+        art.loading.show = false;
+        art.controls.show = false;
         $player.classList.add('artplayer-error');
         sleep(1000).then(function () {
           notice.show(i18n.get('Video load failed'), false);
@@ -1073,39 +1067,39 @@
       }
     });
     art.on('video:loadstart', function () {
-      art.loading.show();
+      art.loading.show = true;
     });
     art.on('video:pause', function () {
-      art.controls.show();
-      art.mask.show();
+      art.controls.show = true;
+      art.mask.show = true;
     });
     art.on('video:play', function () {
-      art.mask.hide();
+      art.mask.show = false;
     });
     art.on('video:playing', function () {
-      art.mask.hide();
+      art.mask.show = false;
     }); // art.on('video:progress', () => {
     // });
     // art.on('video:ratechange', () => {
     // });
 
     art.on('video:seeked', function () {
-      art.loading.hide();
+      art.loading.show = false;
     });
     art.on('video:seeking', function () {
-      art.loading.show();
+      art.loading.show = true;
     }); // art.on('video:stalled', () => {
     // });
     // art.on('video:suspend', () => {
     // });
 
     art.on('video:timeupdate', function () {
-      art.mask.hide();
+      art.mask.show = false;
     }); // art.on('video:volumechange', () => {
     // });
 
     art.on('video:waiting', function () {
-      art.loading.show();
+      art.loading.show = true;
     });
   }
 
@@ -2072,24 +2066,35 @@
         callback($element, parent, art);
       }
 
-      parent[name] = {
-        id: parent.id,
-        $ref: $element,
-        hide: function hide() {
-          setStyle($element, 'display', 'none');
-          art.emit("".concat(title, ":hide"), $element);
-        },
-        show: function show() {
-          var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'block';
-          setStyle($element, 'display', type);
-          art.emit("".concat(title, ":show"), $element);
-        },
-        remove: function remove$1() {
-          remove($element);
+      Object.defineProperty(parent, name, {
+        value: {
+          get id() {
+            return parent.id;
+          },
 
-          art.emit("".concat(title, ":remove"), $element);
+          get $ref() {
+            return $element;
+          },
+
+          set show(value) {
+            if (value) {
+              setStyle($element, 'display', 'block');
+              art.emit("".concat(title, ":show"), $element);
+            } else {
+              setStyle($element, 'display', 'none');
+              art.emit("".concat(title, ":hide"), $element);
+            }
+          },
+
+          set remove(value) {
+            if (value) {
+              remove($element);
+              art.emit("".concat(title, ":remove"), $element);
+            }
+          }
+
         }
-      };
+      });
       art.emit("".concat(title, ":add"), option);
       return parent[name];
     }
@@ -2785,20 +2790,24 @@
         return component(this.art, this, parent, option, callback, 'control');
       }
     }, {
-      key: "show",
-      value: function show() {
-        var $player = this.art.template.$player;
-        this.state = true;
-        $player.classList.add('artplayer-controls-show');
-        this.art.emit('controls:show');
+      key: "toggle",
+      value: function toggle() {
+        this.show = !this.state;
       }
     }, {
-      key: "hide",
-      value: function hide() {
+      key: "show",
+      set: function set(value) {
         var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.remove('artplayer-controls-show');
-        this.art.emit('controls:hide');
+
+        if (value) {
+          this.state = true;
+          $player.classList.add('artplayer-controls-show');
+          this.art.emit('controls:show');
+        } else {
+          this.state = false;
+          $player.classList.remove('artplayer-controls-show');
+          this.art.emit('controls:hide');
+        }
       }
     }]);
 
@@ -2817,7 +2826,7 @@
 
           if (rate) {
             player.playbackRate = Number(rate);
-            art.contextmenu.hide();
+            art.contextmenu.show = false;
           }
         },
         mounted: function mounted($menu) {
@@ -2847,7 +2856,7 @@
 
           if (ratio) {
             player.aspectRatio = ratio;
-            art.contextmenu.hide();
+            art.contextmenu.show = false;
           }
         },
         mounted: function mounted($menu) {
@@ -2867,8 +2876,8 @@
       return objectSpread({}, menuOption, {
         html: art.i18n.get('Video info'),
         click: function click() {
-          art.info.show();
-          art.contextmenu.hide();
+          art.info.show = true;
+          art.contextmenu.show = false;
         }
       });
     };
@@ -2885,7 +2894,7 @@
       return objectSpread({}, menuOption, {
         html: art.i18n.get('Close'),
         click: function click() {
-          art.contextmenu.hide();
+          art.contextmenu.show = false;
         }
       });
     };
@@ -2905,7 +2914,7 @@
         _this.init();
       });
       this.art.on('blur', function () {
-        _this.hide();
+        _this.show = false;
       });
     }
 
@@ -2950,14 +2959,13 @@
         });
         proxy($player, 'contextmenu', function (event) {
           event.preventDefault();
-
-          _this2.show();
+          _this2.show = true;
 
           _this2.setPos(event);
         });
         proxy($player, 'click', function (event) {
           if (!event.composedPath().includes($contextmenu)) {
-            _this2.hide();
+            _this2.show = false;
           }
         });
       }
@@ -3002,20 +3010,24 @@
         setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
       }
     }, {
-      key: "show",
-      value: function show() {
-        var $player = this.art.template.$player;
-        this.state = true;
-        $player.classList.add('artplayer-contextmenu-show');
-        this.art.emit('contextmenu:show');
+      key: "toggle",
+      value: function toggle() {
+        this.show = !this.state;
       }
     }, {
-      key: "hide",
-      value: function hide() {
+      key: "show",
+      set: function set(value) {
         var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.remove('artplayer-contextmenu-show');
-        this.art.emit('contextmenu:hide');
+
+        if (value) {
+          this.state = true;
+          $player.classList.add('artplayer-contextmenu-show');
+          this.art.emit('contextmenu:show');
+        } else {
+          this.state = false;
+          $player.classList.remove('artplayer-contextmenu-show');
+          this.art.emit('contextmenu:hide');
+        }
       }
     }]);
 
@@ -3041,7 +3053,7 @@
             $infoClose = _this$art.template.$infoClose,
             proxy = _this$art.events.proxy;
         proxy($infoClose, 'click', function () {
-          _this.hide();
+          _this.show = false;
         });
         this.art.on('destroy', function () {
           if (_this.timer) {
@@ -3091,30 +3103,34 @@
         }, 1000);
       }
     }, {
+      key: "toggle",
+      value: function toggle() {
+        this.show = !this.state;
+      }
+    }, {
       key: "show",
-      value: function show() {
+      set: function set(value) {
         var _this$art$template2 = this.art.template,
             $player = _this$art$template2.$player,
             $infoPanel = _this$art$template2.$infoPanel;
-        this.state = true;
-        $player.classList.add('artplayer-info-show');
 
-        if (!$infoPanel.innerHTML) {
-          append($infoPanel, this.creatInfo());
+        if (value) {
+          this.state = true;
+          $player.classList.add('artplayer-info-show');
+
+          if (!$infoPanel.innerHTML) {
+            append($infoPanel, this.creatInfo());
+          }
+
+          clearTimeout(this.timer);
+          this.loop();
+          this.art.emit('info:show');
+        } else {
+          this.state = false;
+          $player.classList.remove('artplayer-info-show');
+          clearTimeout(this.timer);
+          this.art.emit('info:hide');
         }
-
-        clearTimeout(this.timer);
-        this.loop();
-        this.art.emit('info:show');
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.remove('artplayer-info-show');
-        clearTimeout(this.timer);
-        this.art.emit('info:hide');
       }
     }]);
 
@@ -3256,28 +3272,23 @@
         });
       }
     }, {
-      key: "show",
-      value: function show() {
-        var $player = this.art.template.$player;
-        this.state = true;
-        $player.classList.remove('artplayer-subtitle-hide');
-        this.art.emit('subtitle:show');
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.add('artplayer-subtitle-hide');
-        this.art.emit('subtitle:hide');
-      }
-    }, {
       key: "toggle",
       value: function toggle() {
-        if (this.state) {
-          this.hide();
+        this.show = !this.state;
+      }
+    }, {
+      key: "show",
+      set: function set(value) {
+        var $player = this.art.template.$player;
+
+        if (value) {
+          this.state = true;
+          $player.classList.remove('artplayer-subtitle-hide');
+          this.art.emit('subtitle:show');
         } else {
-          this.show();
+          this.state = false;
+          $player.classList.add('artplayer-subtitle-hide');
+          this.art.emit('subtitle:hide');
         }
       }
     }]);
@@ -3317,7 +3328,7 @@
     var autoHide = debounce(function () {
       $player.classList.add('artplayer-hide-cursor');
       $player.classList.remove('artplayer-hover');
-      art.controls.hide();
+      art.controls.show = false;
     }, 5000);
     art.on('hoverleave', function () {
       if (player.playing) {
@@ -3327,7 +3338,7 @@
     events.proxy($player, 'mousemove', function (event) {
       autoHide.clearTimeout();
       $player.classList.remove('artplayer-hide-cursor');
-      art.controls.show();
+      art.controls.show = true;
 
       if (!art.player.pip && player.playing && event.target === $video) {
         autoHide();
@@ -3474,29 +3485,35 @@
 
       this.art = art;
       this.keys = {};
-      this.add(27, function () {
-        if (art.player.fullscreenWeb) {
-          art.player.fullscreenWeb = false;
-        }
-      });
-      this.add(32, function () {
-        art.player.toggle = true;
-      });
-      this.add(37, function () {
-        art.player.seek = art.player.currentTime - 10;
-      });
-      this.add(38, function () {
-        art.player.volume += 0.05;
-      });
-      this.add(39, function () {
-        art.player.seek = art.player.currentTime + 10;
-      });
-      this.add(40, function () {
-        art.player.volume -= 0.05;
-      });
 
       if (this.art.option.hotkey) {
         this.art.once('video:canplay', function () {
+          _this.add(27, function () {
+            if (art.player.fullscreenWeb) {
+              art.player.fullscreenWeb = false;
+            }
+          });
+
+          _this.add(32, function () {
+            art.player.toggle = true;
+          });
+
+          _this.add(37, function () {
+            art.player.seek = art.player.currentTime - 10;
+          });
+
+          _this.add(38, function () {
+            art.player.volume += 0.05;
+          });
+
+          _this.add(39, function () {
+            art.player.seek = art.player.currentTime + 10;
+          });
+
+          _this.add(40, function () {
+            art.player.volume -= 0.05;
+          });
+
           _this.init();
         });
       }
@@ -3568,20 +3585,24 @@
         return component(this.art, this, $layers, item, callback, 'layer');
       }
     }, {
-      key: "show",
-      value: function show() {
-        var $player = this.art.template.$player;
-        this.state = true;
-        $player.classList.remove('artplayer-layers-hide');
-        this.art.emit('layers:show');
+      key: "toggle",
+      value: function toggle() {
+        this.show = !this.state;
       }
     }, {
-      key: "hide",
-      value: function hide() {
+      key: "show",
+      set: function set(value) {
         var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.add('artplayer-layers-hide');
-        this.art.emit('layers:hide');
+
+        if (value) {
+          this.state = true;
+          $player.classList.remove('artplayer-layers-hide');
+          this.art.emit('layers:show');
+        } else {
+          this.state = false;
+          $player.classList.add('artplayer-layers-hide');
+          this.art.emit('layers:hide');
+        }
       }
     }]);
 
@@ -3600,20 +3621,24 @@
     }
 
     createClass(Loading, [{
-      key: "show",
-      value: function show() {
-        var $player = this.art.template.$player;
-        this.state = true;
-        $player.classList.add('artplayer-loading-show');
-        this.art.emit('loading:show');
+      key: "toggle",
+      value: function toggle() {
+        this.show = !this.state;
       }
     }, {
-      key: "hide",
-      value: function hide() {
+      key: "show",
+      set: function set(value) {
         var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.remove('artplayer-loading-show');
-        this.art.emit('loading:hide');
+
+        if (value) {
+          this.state = true;
+          $player.classList.add('artplayer-loading-show');
+          this.art.emit('loading:show');
+        } else {
+          this.state = false;
+          $player.classList.remove('artplayer-loading-show');
+          this.art.emit('loading:hide');
+        }
       }
     }]);
 
@@ -3679,20 +3704,24 @@
     }
 
     createClass(Mask, [{
-      key: "show",
-      value: function show() {
-        var $player = this.art.template.$player;
-        this.state = true;
-        $player.classList.add('artplayer-mask-show');
-        this.art.emit('mask:show');
+      key: "toggle",
+      value: function toggle() {
+        this.show = !this.state;
       }
     }, {
-      key: "hide",
-      value: function hide() {
+      key: "show",
+      set: function set(value) {
         var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.remove('artplayer-mask-show');
-        this.art.emit('mask:hide');
+
+        if (value) {
+          this.state = true;
+          $player.classList.add('artplayer-mask-show');
+          this.art.emit('mask:show');
+        } else {
+          this.state = false;
+          $player.classList.remove('artplayer-mask-show');
+          this.art.emit('mask:hide');
+        }
       }
     }]);
 
@@ -3850,7 +3879,7 @@
           _this.init();
         });
         this.art.on('blur', function () {
-          _this.hide();
+          _this.show = false;
         });
       }
     }
@@ -3866,7 +3895,7 @@
             proxy = _this$art.events.proxy;
         proxy($setting, 'click', function (e) {
           if (e.target === $setting) {
-            _this2.hide();
+            _this2.show = false;
           }
         });
         this.add(flip({
@@ -3890,28 +3919,23 @@
         return component(this.art, this, $settingBody, item, callback, 'setting');
       }
     }, {
-      key: "show",
-      value: function show() {
-        var $player = this.art.template.$player;
-        this.state = true;
-        $player.classList.add('artplayer-setting-show');
-        this.art.emit('setting:show');
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        var $player = this.art.template.$player;
-        this.state = false;
-        $player.classList.remove('artplayer-setting-show');
-        this.art.emit('setting:hide');
-      }
-    }, {
       key: "toggle",
       value: function toggle() {
-        if (this.state) {
-          this.hide();
+        this.show = !this.state;
+      }
+    }, {
+      key: "show",
+      set: function set(value) {
+        var $player = this.art.template.$player;
+
+        if (value) {
+          this.state = true;
+          $player.classList.add('artplayer-setting-show');
+          this.art.emit('setting:show');
         } else {
-          this.show();
+          this.state = false;
+          $player.classList.remove('artplayer-setting-show');
+          this.art.emit('setting:hide');
         }
       }
     }]);
