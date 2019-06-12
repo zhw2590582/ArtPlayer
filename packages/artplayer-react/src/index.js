@@ -1,6 +1,6 @@
 import React from 'react';
-import Artplayer from 'artplayer';
-import 'artplayer/dist/artplayer.css';
+import Artplayer from '../../artplayer';
+import '../../artplayer/src/style';
 
 export default class ArtplayerReact extends React.Component {
     constructor(props) {

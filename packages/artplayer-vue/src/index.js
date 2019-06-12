@@ -1,5 +1,5 @@
-import Artplayer from 'artplayer';
-import 'artplayer/dist/artplayer.css';
+import Artplayer from '../../artplayer';
+import '../../artplayer/src/style';
 
 export default {
     data() {
@@ -28,12 +28,8 @@ export default {
         }
     },
     render(h) {
-        return h(
-            'div',
-            {
-                ref: 'artRef',
-            },
-            'render',
-        );
+        return h('div', {
+            ref: 'artRef',
+        });
     },
 };

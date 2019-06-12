@@ -21,8 +21,5 @@
   "bugs": {
     "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
-  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
-  "dependencies": {
-    "artplayer": "latest"
-  }
+  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme"
 }
