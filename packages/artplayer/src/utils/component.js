@@ -3,7 +3,8 @@ import { append, setStyles, setStyle, remove, errorHandle, hasOwnProperty } from
 export default function component(art, parent, target, getOption, callback, title) {
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
     if (!option.disable) {
-        const name = option.name || `${title}${parent.id}`;
+        const componentID = parent.id;
+        const name = option.name || `${title}${componentID}`;
         errorHandle(
             !hasOwnProperty(parent, name),
             `Cannot create a component that already has the same name: ${title} -> ${name}`,
@@ -20,7 +21,7 @@ export default function component(art, parent, target, getOption, callback, titl
         }
 
         const childs = Array.from(target.children);
-        $element.dataset.index = option.index || parent.id;
+        $element.dataset.index = option.index || componentID;
         const nextChild = childs.find(item => Number(item.dataset.index) >= Number($element.dataset.index));
         if (nextChild) {
             nextChild.insertAdjacentElement('beforebegin', $element);
@@ -47,7 +48,7 @@ export default function component(art, parent, target, getOption, callback, titl
         Object.defineProperty(parent, name, {
             value: {
                 get id() {
-                    return parent.id;
+                    return componentID;
                 },
                 get $ref() {
                     return $element;
