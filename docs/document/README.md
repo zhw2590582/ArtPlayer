@@ -743,7 +743,7 @@ var art = new Artplayer({
             html: '自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ',
             click: function() {
                 document.querySelector('.video-wrap').classList.toggle('dark');
-                this.hide();
+                this.show = false;
             },
         },
     ],
@@ -1018,8 +1018,7 @@ Layer manager, and every layer has `show` and `hide` funciton
 | propertie | type       | Description             |
 | --------- | ---------- | ----------------------- |
 | `add`     | `Function` | Dynamically add a layer |
-| `show`    | `Function` | Show all layers         |
-| `hide`    | `Function` | Hide all layers         |
+| `show`    | `setter`   | Show or hide            |
 
 [Run Code](/)
 
@@ -1041,20 +1040,20 @@ art.layers.add({
     },
 });
 
-art.layers.yourLayer.hide();
+art.layers.yourLayer.show = false;
 ```
 
 ## controls
 
-Controls manager, and every control has `show` and `hide` funciton
+Controls manager, and every control has `show` setter
 
 -   Type: `Object`
 
 | propertie | type       | Description               |
 | --------- | ---------- | ------------------------- |
 | `add`     | `Function` | Dynamically add a control |
-| `show`    | `Function` | Show all controls         |
-| `hide`    | `Function` | Hide all controls         |
+| `show`    | `setter`   | Show or hide              |
+
 
 [Run Code](/)
 
@@ -1077,20 +1076,20 @@ art.controls.add(function yourController(art) {
     };
 });
 
-art.controls.yourController.hide();
+art.controls.yourController.show = false;
 ```
 
 ## contextmenu
 
-Contextmenu manager, and every contextmenu has `show` and `hide` funciton
+Contextmenu manager, and every contextmenu has `show` setter
 
 -   Type: `Object`
 
 | propertie | type       | Description                   |
 | --------- | ---------- | ----------------------------- |
 | `add`     | `Function` | Dynamically add a contextmenu |
-| `show`    | `Function` | Show all contextmenu          |
-| `hide`    | `Function` | Hide all contextmenu          |
+| `show`    | `setter`   | Show or hide                  |
+
 
 [Run Code](/)
 
@@ -1106,7 +1105,7 @@ art.contextmenu.add({
     name: 'yourContextmenu',
 });
 
-art.contextmenu.yourContextmenu.hide();
+art.contextmenu.yourContextmenu.show = false;
 ```
 
 ## subtitle
@@ -1116,8 +1115,8 @@ art.contextmenu.yourContextmenu.hide();
 | propertie | type       | Description   |
 | --------- | ---------- | ------------- |
 | `init`    | `Function` | Init subtitle |
-| `show`    | `Function` | Show subtitle |
-| `hide`    | `Function` | Hide subtitle |
+| `show`    | `setter`   | Show or hide  |
+
 
 [Run Code](/)
 
@@ -1142,8 +1141,8 @@ art.once('video:canplay', () => {
 
 | propertie | type       | Description  |
 | --------- | ---------- | ------------ |
-| `show`    | `Function` | Show loading |
-| `hide`    | `Function` | Hide loading |
+| `show`    | `setter`   | Show or hide |
+
 
 ## mask
 
@@ -1151,8 +1150,8 @@ art.once('video:canplay', () => {
 
 | propertie | type       | Description |
 | --------- | ---------- | ----------- |
-| `show`    | `Function` | Show mask   |
-| `hide`    | `Function` | Hide mask   |
+| `show`    | `setter`   | Show or hide|
+
 
 ## setting
 
@@ -1163,8 +1162,8 @@ Setting manager, and every setting has `show` and `hide` funciton
 | propertie | type       | Description               |
 | --------- | ---------- | ------------------------- |
 | `add`     | `Function` | Dynamically add a setting |
-| `show`    | `Function` | Show setting              |
-| `hide`    | `Function` | Hide setting              |
+| `show`    | `setter`   | Show or hide              |
+
 
 [Run Code](/)
 
@@ -1180,7 +1179,7 @@ art.setting.add({
     name: 'yourSetting',
 });
 
-art.setting.yourSetting.hide();
+art.setting.yourSetting.show = false;
 ```
 
 ## plugins
@@ -1332,7 +1331,7 @@ var art = new Artplayer({
     customType: {
         torrent: function(video, url, art) {
             var client = new WebTorrent();
-            art.loading.show();
+            art.loading.show = true;
             client.add(url, function(torrent) {
                 var file = torrent.files[0];
                 file.renderTo(video, {
