@@ -2817,13 +2817,13 @@
           player = art.player;
       return objectSpread({}, menuOption, {
         html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
-        click: function click(event) {
+        click: function click(contextmenu, event) {
           var target = event.target;
           var rate = target.dataset.rate;
 
           if (rate) {
             player.playbackRate = Number(rate);
-            art.contextmenu.show = false;
+            contextmenu.show = false;
           }
         },
         mounted: function mounted($menu) {
@@ -2847,13 +2847,13 @@
           player = art.player;
       return objectSpread({}, menuOption, {
         html: "\n                ".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
-        click: function click(event) {
+        click: function click(contextmenu, event) {
           var target = event.target;
           var ratio = target.dataset.ratio;
 
           if (ratio) {
             player.aspectRatio = ratio;
-            art.contextmenu.show = false;
+            contextmenu.show = false;
           }
         },
         mounted: function mounted($menu) {
@@ -2872,9 +2872,9 @@
     return function (art) {
       return objectSpread({}, menuOption, {
         html: art.i18n.get('Video info'),
-        click: function click() {
+        click: function click(contextmenu) {
           art.info.show = true;
-          art.contextmenu.show = false;
+          contextmenu.show = false;
         }
       });
     };
@@ -2890,8 +2890,8 @@
     return function (art) {
       return objectSpread({}, menuOption, {
         html: art.i18n.get('Close'),
-        click: function click() {
-          art.contextmenu.show = false;
+        click: function click(contextmenu) {
+          contextmenu.show = false;
         }
       });
     };
@@ -3789,7 +3789,7 @@
           player = art.player;
       return objectSpread({}, settingOption, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
-        click: function click(event) {
+        click: function click(setting, event) {
           var value = event.target.dataset.value;
 
           if (value) {
@@ -3814,7 +3814,7 @@
           player = art.player;
       return objectSpread({}, settingOption, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
-        click: function click(event) {
+        click: function click(setting, event) {
           var value = event.target.dataset.value;
 
           if (value) {

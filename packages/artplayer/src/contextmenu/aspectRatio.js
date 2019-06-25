@@ -11,12 +11,12 @@ export default function aspectRatio(menuOption) {
                 <span data-ratio="4:3">4:3</span>
                 <span data-ratio="16:9">16:9</span>
             `,
-            click: event => {
+            click: (contextmenu, event) => {
                 const { target } = event;
                 const { ratio } = target.dataset;
                 if (ratio) {
                     player.aspectRatio = ratio;
-                    art.contextmenu.show = false;
+                    contextmenu.show = false;
                 }
             },
             mounted: $menu => {

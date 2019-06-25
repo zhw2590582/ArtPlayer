@@ -14,12 +14,12 @@ export default function playbackRate(menuOption) {
                 <span data-rate="1.5">1.5</span>
                 <span data-rate="2.0">2.0</span>
             `,
-            click: event => {
+            click: (contextmenu, event) => {
                 const { target } = event;
                 const { rate } = target.dataset;
                 if (rate) {
                     player.playbackRate = Number(rate);
-                    art.contextmenu.show = false;
+                    contextmenu.show = false;
                 }
             },
             mounted: $menu => {

@@ -19,7 +19,7 @@ export default function aspectRatio(settingOption) {
                     </div>
                 </div>
             `,
-            click: event => {
+            click: (setting, event) => {
                 const { value } = event.target.dataset;
                 if (value) {
                     player.aspectRatio = value;

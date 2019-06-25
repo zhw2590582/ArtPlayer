@@ -2,9 +2,9 @@ export default function info(menuOption) {
     return art => ({
         ...menuOption,
         html: art.i18n.get('Video info'),
-        click: () => {
+        click: contextmenu => {
             art.info.show = true;
-            art.contextmenu.show = false;
+            contextmenu.show = false;
         },
     });
 }
