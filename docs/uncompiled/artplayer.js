@@ -4217,7 +4217,10 @@
           pluginName = "plugin".concat(this.id);
         }
 
-        this[pluginName] = result;
+        errorHandle(!hasOwnProperty(this, pluginName), "Cannot add a plugin that already has the same name: ".concat(pluginName));
+        Object.defineProperty(this, pluginName, {
+          value: result
+        });
         this.art.emit('plugin:add', plugin);
         return this;
       }

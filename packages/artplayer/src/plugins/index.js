@@ -1,3 +1,4 @@
+import { errorHandle, hasOwnProperty } from '../utils';
 import subtitle from './subtitle';
 import localPreview from './localPreview';
 import miniProgressBar from './miniProgressBar';
@@ -10,7 +11,7 @@ export default class Plugins {
         if (art.option.subtitle.url) {
             this.add(subtitle);
         }
-        
+
         if (!art.option.isLive) {
             this.add(miniProgressBar);
         }
@@ -32,7 +33,13 @@ export default class Plugins {
         } else {
             pluginName = `plugin${this.id}`;
         }
-        this[pluginName] = result;
+        errorHandle(
+            !hasOwnProperty(this, pluginName),
+            `Cannot add a plugin that already has the same name: ${pluginName}`,
+        );
+        Object.defineProperty(this, pluginName, {
+            value: result,
+        });
         this.art.emit('plugin:add', plugin);
         return this;
     }
