@@ -29,7 +29,7 @@ var art = new Artplayer({
             html: '自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ',
             click: function() {
                 console.info('自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ');
-                this.hide();
+                this.show = false;
             },
         },
     ],
