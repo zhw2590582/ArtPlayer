@@ -2023,83 +2023,80 @@
 
   function component(art, parent, target, getOption, callback, title) {
     var option = typeof getOption === 'function' ? getOption(art) : getOption;
+    if (option.disable) return null;
+    var componentID = parent.id;
+    var name = option.name || "".concat(title).concat(componentID);
+    errorHandle(!hasOwnProperty(parent, name), "Cannot create a component that already has the same name: ".concat(title, " -> ").concat(name));
+    var $element = document.createElement('div');
+    $element.classList.value = "art-".concat(title, " art-").concat(title, "-").concat(name);
 
-    if (!option.disable) {
-      var name = option.name || "".concat(title).concat(parent.id);
-      errorHandle(!hasOwnProperty(parent, name), "Cannot create a component that already has the same name: ".concat(title, " -> ").concat(name));
-      var $element = document.createElement('div');
-      $element.classList.value = "art-".concat(title, " art-").concat(title, "-").concat(name);
-
-      if (option.html) {
-        append($element, option.html);
-      }
-
-      if (option.style) {
-        setStyles($element, option.style);
-      }
-
-      var childs = Array.from(target.children);
-      $element.dataset.index = option.index || parent.id;
-      var nextChild = childs.find(function (item) {
-        return Number(item.dataset.index) >= Number($element.dataset.index);
-      });
-
-      if (nextChild) {
-        nextChild.insertAdjacentElement('beforebegin', $element);
-      } else {
-        append(target, $element);
-      }
-
-      if (option.click) {
-        art.events.proxy($element, 'click', function (event) {
-          event.preventDefault();
-          option.click.call(parent, event, art);
-          art.emit("".concat(title, ":click"), $element);
-        });
-      }
-
-      if (option.mounted) {
-        option.mounted($element, parent, art);
-      }
-
-      if (callback) {
-        callback($element, parent, art);
-      }
-
-      Object.defineProperty(parent, name, {
-        value: {
-          get id() {
-            return parent.id;
-          },
-
-          get $ref() {
-            return $element;
-          },
-
-          set show(value) {
-            if (value) {
-              setStyle($element, 'display', 'block');
-              art.emit("".concat(title, ":show"), $element);
-            } else {
-              setStyle($element, 'display', 'none');
-              art.emit("".concat(title, ":hide"), $element);
-            }
-          },
-
-          set remove(value) {
-            if (value) {
-              remove($element);
-              art.emit("".concat(title, ":remove"), $element);
-            }
-          }
-
-        }
-      });
-      art.emit("".concat(title, ":add"), option);
-      return parent[name];
+    if (option.html) {
+      append($element, option.html);
     }
 
-    return null;
+    if (option.style) {
+      setStyles($element, option.style);
+    }
+
+    var childs = Array.from(target.children);
+    $element.dataset.index = option.index || componentID;
+    var nextChild = childs.find(function (item) {
+      return Number(item.dataset.index) >= Number($element.dataset.index);
+    });
+
+    if (nextChild) {
+      nextChild.insertAdjacentElement('beforebegin', $element);
+    } else {
+      append(target, $element);
+    }
+
+    if (option.click) {
+      art.events.proxy($element, 'click', function (event) {
+        event.preventDefault();
+        option.click.call(art, parent, event);
+        art.emit("".concat(title, ":click"), $element);
+      });
+    }
+
+    if (option.mounted) {
+      option.mounted($element, parent, art);
+    }
+
+    if (callback) {
+      callback($element, parent, art);
+    }
+
+    Object.defineProperty(parent, name, {
+      value: {
+        get id() {
+          return componentID;
+        },
+
+        get $ref() {
+          return $element;
+        },
+
+        set show(value) {
+          if (value) {
+            setStyle($element, 'display', 'block');
+            art.emit("".concat(title, ":show"), $element);
+          } else {
+            setStyle($element, 'display', 'none');
+            art.emit("".concat(title, ":hide"), $element);
+          }
+        },
+
+        set remove(value) {
+          if (value) {
+            remove($element);
+            art.emit("".concat(title, ":remove"), $element);
+          }
+        }
+
+      }
+    });
+    art.emit("".concat(title, ":add"), option);
+    return parent[name];
   }
 
   function _defineProperty(obj, key, value) {
