@@ -1,6 +1,6 @@
 import { errorHandle } from '../utils';
 
-function validElement(paths, value, type) {
+function validElement(value, type, paths) {
     return errorHandle(
         type === 'string' || value instanceof Element,
         `${paths.join('.')} require 'string' or 'Element' type`,
@@ -93,7 +93,7 @@ export default {
             style: 'object',
             click: 'function',
             mounted: 'function',
-            position: (paths, value) => {
+            position: (value, type, paths) => {
                 const position = ['top', 'left', 'right'];
                 return errorHandle(
                     position.includes(value),
