@@ -12,7 +12,8 @@
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n ",
     "test": "npx mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
-    "lint": "npx eslint packages/*/src"
+    "lint": "npx eslint packages/*/src",
+    "sizereport": "npx sizereport --config"
   },
   "repository": {
     "type": "git",
@@ -64,5 +65,8 @@
     "rollup-plugin-svgo": "^1.0.2",
     "rollup-plugin-uglify": "^6.0.2",
     "servor": "^2.2.1"
+  },
+  "devDependencies": {
+    "travis-size-report": "^1.1.0"
   }
 }

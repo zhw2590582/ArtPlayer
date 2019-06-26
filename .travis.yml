@@ -1,13 +1,16 @@
 language: node_js
 
 node_js:
-  - stable
+    - stable
 
 before_script:
-  - npm install
-  - npm i packages/* && lerna bootstrap --hoist
+    - npm install
+    - npm i packages/* && lerna bootstrap --hoist
 
 script:
-  - npm run lint
-  - npm run build:all
-  - npm run test
+    - npm run lint
+    - npm run build:all
+    - npm run test
+
+after_success:
+    - npm run sizereport
