@@ -4300,13 +4300,13 @@
     createClass(Artplayer, [{
       key: "init",
       value: function init() {
+        this.isFocus = false;
+        this.isDestroy = false;
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.events = new Events(this);
 
         if (this.whitelist.state) {
-          this.isFocus = false;
-          this.isDestroy = false;
           this.storage = new Storage(this);
           this.icons = new Icons(this);
           this.i18n = new I18n(this);
