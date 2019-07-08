@@ -2,7 +2,7 @@ var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    title: '【新海诚动画】『秒速5センチメートル』',
+    title: 'One More Time One More Chance',
     poster: url + '/image/one-more-time-one-more-chance-poster.jpg',
     volume: 0.5,
     isLive: false,
@@ -26,9 +26,9 @@ var art = new Artplayer({
     },
     contextmenu: [
         {
-            html: '自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ',
+            html: 'Custom menu',
             click: function(contextmenu) {
-                console.info('自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ');
+                console.info('You clicked on the custom menu');
                 contextmenu.show = false;
             },
         },
@@ -55,11 +55,11 @@ var art = new Artplayer({
     quality: [
         {
             default: true,
-            name: '标清 480P',
+            name: '480P',
             url: url + '/video/one-more-time-one-more-chance-480p.mp4',
         },
         {
-            name: '高清 720P',
+            name: '720P',
             url: url + '/video/one-more-time-one-more-chance-720p.mp4',
         },
     ],
@@ -100,7 +100,7 @@ var art = new Artplayer({
         {
             name: 'preview',
             position: 'right',
-            html: '打开',
+            html: 'Open',
             mounted: $preview => {
                 art.plugins.localPreview.attach($preview);
             },
