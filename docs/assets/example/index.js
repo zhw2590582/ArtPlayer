@@ -20,7 +20,7 @@ var art = new Artplayer({
     fullscreenWeb: true,
     mutex: true,
     theme: '#ffad00',
-    lang: 'zh-cn',
+    lang: navigator.language.toLowerCase(),
     moreVideoAttr: {
         crossOrigin: 'anonymous',
     },
@@ -55,11 +55,11 @@ var art = new Artplayer({
     quality: [
         {
             default: true,
-            name: '480P',
+            name: 'SD 480P',
             url: url + '/video/one-more-time-one-more-chance-480p.mp4',
         },
         {
-            name: '720P',
+            name: 'HD 720P',
             url: url + '/video/one-more-time-one-more-chance-720p.mp4',
         },
     ],
@@ -100,7 +100,7 @@ var art = new Artplayer({
         {
             name: 'preview',
             position: 'right',
-            html: 'Open',
+            html: 'OPEN',
             mounted: $preview => {
                 art.plugins.localPreview.attach($preview);
             },

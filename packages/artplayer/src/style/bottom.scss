@@ -154,6 +154,10 @@
                 }
             }
     
+            .art-control-onlyText {
+                padding: 0 10px;
+            }
+
             .art-control-volume {
                 .art-volume-panel {
                     position: relative;
@@ -199,19 +203,13 @@
                     width: 60px;
                 }
             }
-    
-            .art-control-time {
-                padding: 0 10px;
-            }
 
             .art-control-quality {
                 position: relative;
                 z-index: 30;
-                padding: 0 10px;
                 .art-qualitys {
                     display: none;
                     position: absolute;
-                    left: -15px;
                     bottom: 35px;
                     width: 100px;
                     padding: 5px 0;

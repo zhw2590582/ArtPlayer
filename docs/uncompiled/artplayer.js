@@ -2629,7 +2629,9 @@
       return objectSpread({}, controlOption, {
         mounted: function mounted($control) {
           var option = art.option,
-              proxy = art.events.proxy,
+              _art$events = art.events,
+              proxy = _art$events.proxy,
+              hover = _art$events.hover,
               player = art.player;
           var playIndex = -1;
           var defaultQuality = option.quality.find(function (item) {
@@ -2641,6 +2643,9 @@
             return "<div class=\"art-quality-item\" data-index=\"".concat(index, "\">").concat(item.name, "</div>");
           }).join('');
           var $qualitys = append($control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
+          hover($control, function () {
+            $qualitys.style.left = "-".concat(getStyle($qualitys, 'width') / 2 - $control.clientWidth / 2, "px");
+          });
           proxy($qualitys, 'click', function (event) {
             var index = Number(event.target.dataset.index);
             var _option$quality$index = option.quality[index],
@@ -2784,7 +2789,13 @@
 
         errorHandle(parent, 'Controls option.position can not be empty');
         this.id += 1;
-        return component(this.art, this, parent, option, callback, 'control');
+        var control = component(this.art, this, parent, option, callback, 'control');
+
+        if (!(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')) {
+          control.$ref.classList.add('art-control-onlyText');
+        }
+
+        return control;
       }
     }, {
       key: "toggle",
@@ -3425,8 +3436,13 @@
     }, {
       key: "hover",
       value: function hover(target, mouseenter, mouseleave) {
-        this.proxy(target, 'mouseenter', mouseenter);
-        this.proxy(target, 'mouseleave', mouseleave);
+        if (mouseenter) {
+          this.proxy(target, 'mouseenter', mouseenter);
+        }
+
+        if (mouseleave) {
+          this.proxy(target, 'mouseleave', mouseleave);
+        }
       }
     }, {
       key: "loadImg",

@@ -1,4 +1,4 @@
-import { append } from '../utils';
+import { append, getStyle } from '../utils';
 
 export default function quality(controlOption) {
     return art => ({
@@ -6,7 +6,7 @@ export default function quality(controlOption) {
         mounted: $control => {
             const {
                 option,
-                events: { proxy },
+                events: { proxy, hover },
                 player,
             } = art;
             
@@ -18,6 +18,10 @@ export default function quality(controlOption) {
                 .map((item, index) => `<div class="art-quality-item" data-index="${index}">${item.name}</div>`)
                 .join('');
             const $qualitys = append($control, `<div class="art-qualitys">${qualityList}</div>`);
+
+            hover($control, () => {
+                $qualitys.style.left = `-${getStyle($qualitys, 'width') / 2 - $control.clientWidth / 2}px`;
+            });
 
             proxy($qualitys, 'click', event => {
                 const index = Number(event.target.dataset.index);

@@ -33,8 +33,12 @@ export default class Events {
     }
 
     hover(target, mouseenter, mouseleave) {
-        this.proxy(target, 'mouseenter', mouseenter);
-        this.proxy(target, 'mouseleave', mouseleave);
+        if (mouseenter) {
+            this.proxy(target, 'mouseenter', mouseenter);
+        }
+        if (mouseleave) {
+            this.proxy(target, 'mouseleave', mouseleave);
+        }
     }
 
     loadImg(img) {
