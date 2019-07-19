@@ -2,7 +2,7 @@ import { append, setStyles, setStyle, remove, errorHandle, hasOwnProperty } from
 
 export default function component(art, parent, target, getOption, callback, title) {
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
-    if (option.disable) return null;
+    if (option.disable) return {};
     const componentID = parent.id;
     const name = option.name || `${title}${componentID}`;
     errorHandle(

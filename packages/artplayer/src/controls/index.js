@@ -159,7 +159,11 @@ export default class Controls {
         errorHandle(parent, 'Controls option.position can not be empty');
         this.id += 1;
         const control = component(this.art, this, parent, option, callback, 'control');
-        if (!(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')) {
+        if (
+            !option.disable &&
+            option.position !== 'top' &&
+            !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')
+        ) {
             control.$ref.classList.add('art-control-onlyText');
         }
         return control;
