@@ -1256,7 +1256,7 @@ var art = new Artplayer({
     },
 });
 
-art.on('video:canplay', function() {
+art.once('video:canplay', function() {
     art.player.play = true;
 });
 ```
@@ -1280,7 +1280,7 @@ var art = new Artplayer({
     },
 });
 
-art.on('video:canplay', function() {
+art.once('video:canplay', function() {
     art.player.play = true;
 });
 ```
@@ -1303,7 +1303,7 @@ var art = new Artplayer({
     },
 });
 
-art.on('video:canplay', function() {
+art.once('video:canplay', function() {
     art.player.play = true;
 });
 ```
@@ -1327,7 +1327,7 @@ var art = new Artplayer({
     },
 });
 
-art.on('video:canplay', function() {
+art.once('video:canplay', function() {
     art.player.play = true;
 });
 ```
@@ -1358,7 +1358,7 @@ var art = new Artplayer({
     },
 });
 
-art.on('video:canplay', function() {
+art.once('video:canplay', function() {
     art.player.play = true;
 });
 ```
