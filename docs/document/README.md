@@ -1243,6 +1243,7 @@ All properties are read only
 var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
+    autoplay: true,
     url: url + '/video/one-more-time-one-more-chance-480p.flv',
     customType: {
         flv: function(video, url) {
@@ -1255,10 +1256,6 @@ var art = new Artplayer({
         },
     },
 });
-
-art.once('video:canplay', function() {
-    art.player.play = true;
-});
 ```
 
 ## hls.js
@@ -1270,6 +1267,7 @@ art.once('video:canplay', function() {
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
+    autoplay: true,
     url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
     customType: {
         m3u8: function(video, url) {
@@ -1278,10 +1276,6 @@ var art = new Artplayer({
             hls.attachMedia(video);
         },
     },
-});
-
-art.once('video:canplay', function() {
-    art.player.play = true;
 });
 ```
 
@@ -1294,6 +1288,7 @@ art.once('video:canplay', function() {
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
+    autoplay: true,
     url: 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd',
     customType: {
         mpd: function(video, url) {
@@ -1301,10 +1296,6 @@ var art = new Artplayer({
             player.initialize(video, url, true);
         },
     },
-});
-
-art.once('video:canplay', function() {
-    art.player.play = true;
 });
 ```
 
@@ -1317,6 +1308,7 @@ art.once('video:canplay', function() {
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
+    autoplay: true,
     url: '//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd',
     customType: {
         mpd: function(video, url) {
@@ -1325,10 +1317,6 @@ var art = new Artplayer({
             player.load(url);
         },
     },
-});
-
-art.once('video:canplay', function() {
-    art.player.play = true;
 });
 ```
 
@@ -1341,6 +1329,7 @@ art.once('video:canplay', function() {
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
+    autoplay: true,
     url:
         'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d&dn=sintel.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel-1024-surround.mp4',
     type: 'torrent',
@@ -1356,9 +1345,5 @@ var art = new Artplayer({
             });
         },
     },
-});
-
-art.once('video:canplay', function() {
-    art.player.play = true;
 });
 ```
