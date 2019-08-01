@@ -21,6 +21,7 @@ import playingMix from './playingMix';
 import autoSizeMix from './autoSizeMix';
 import rectMix from './rectMix';
 import flipMix from './flipMix';
+import { proxyPropertys } from '../utils';
 
 export default class Player {
     constructor(art) {
@@ -47,6 +48,6 @@ export default class Player {
         autoSizeMix(art, this);
         rectMix(art, this);
         flipMix(art, this);
-    
+        proxyPropertys(art, this);
     }
 }

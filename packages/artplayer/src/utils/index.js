@@ -177,3 +177,13 @@ export function downloadFile(url, name) {
     elink.click();
     document.body.removeChild(elink);
 }
+
+export function proxyPropertys(target, ...sources) {
+    sources.forEach(source => {
+        Object.getOwnPropertyNames(source).forEach(key => {
+            if (!hasOwnProperty(target, key)) {
+                Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+            }
+        });
+    });
+}

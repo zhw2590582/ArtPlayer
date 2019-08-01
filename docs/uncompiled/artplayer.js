@@ -507,6 +507,19 @@
     elink.click();
     document.body.removeChild(elink);
   }
+  function proxyPropertys(target) {
+    for (var _len4 = arguments.length, sources = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+      sources[_key4 - 1] = arguments[_key4];
+    }
+
+    sources.forEach(function (source) {
+      Object.getOwnPropertyNames(source).forEach(function (key) {
+        if (!hasOwnProperty(target, key)) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        }
+      });
+    });
+  }
 
   var utils = /*#__PURE__*/Object.freeze({
     errorHandle: errorHandle,
@@ -528,7 +541,8 @@
     tooltip: tooltip,
     srtToVtt: srtToVtt,
     vttToBlob: vttToBlob,
-    downloadFile: downloadFile
+    downloadFile: downloadFile,
+    proxyPropertys: proxyPropertys
   });
 
   function validElement(value, type, paths) {
@@ -2019,6 +2033,7 @@
     resizeMix(art, this);
     rectMix(art, this);
     flipMix(art, this);
+    proxyPropertys(art, this);
   };
 
   function component(art, parent, target, getOption, callback, title) {
@@ -2893,7 +2908,7 @@
 
   function version(menuOption) {
     return objectSpread({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.10</a>'
+      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.12</a>'
     });
   }
 
@@ -3073,7 +3088,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.10</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.12</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -4359,7 +4374,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.10';
+        return '3.1.12';
       }
     }, {
       key: "env",
