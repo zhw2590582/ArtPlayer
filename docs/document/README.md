@@ -1255,6 +1255,10 @@ var art = new Artplayer({
         },
     },
 });
+
+art.on('video:canplay', function() {
+    art.player.play = true;
+});
 ```
 
 ## hls.js
@@ -1266,7 +1270,7 @@ var art = new Artplayer({
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8',
+    url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
     customType: {
         m3u8: function(video, url) {
             var hls = new Hls();
@@ -1274,6 +1278,10 @@ var art = new Artplayer({
             hls.attachMedia(video);
         },
     },
+});
+
+art.on('video:canplay', function() {
+    art.player.play = true;
 });
 ```
 
@@ -1294,6 +1302,10 @@ var art = new Artplayer({
         },
     },
 });
+
+art.on('video:canplay', function() {
+    art.player.play = true;
+});
 ```
 
 ## shaka-player
@@ -1313,6 +1325,10 @@ var art = new Artplayer({
             player.load(url);
         },
     },
+});
+
+art.on('video:canplay', function() {
+    art.player.play = true;
 });
 ```
 
@@ -1340,5 +1356,9 @@ var art = new Artplayer({
             });
         },
     },
+});
+
+art.on('video:canplay', function() {
+    art.player.play = true;
 });
 ```
