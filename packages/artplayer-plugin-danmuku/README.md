@@ -20,7 +20,7 @@ $ yarn add artplayer-plugin-danmuku
 ```
 
 ```js
-import artplayerPluginBacklight from 'artplayer-plugin-danmuku';
+import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
 ```
 
 Or umd builds are also available
