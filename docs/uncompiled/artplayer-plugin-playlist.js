@@ -78,7 +78,9 @@
         });
         art.on('video:ended', function () {
           nextVideo().then(function () {
-            sleep(1000).then(player.play);
+            sleep(1000).then(function () {
+              player.play = true;
+            });
           });
         });
         art.on('afterAttachUrl', function () {
