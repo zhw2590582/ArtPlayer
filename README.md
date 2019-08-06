@@ -98,6 +98,27 @@ var art = new Artplayer({
 
 [Checkout the changelog](https://github.com/zhw2590582/ArtPlayer/blob/master/changelog.md)
 
+## Contribution
+
+Installation dependency
+
+```bash
+$ npm install
+$ npm run bootstrap
+```
+
+Run the developer mode and select the project you want to develop
+
+```bash
+$ npm run dev
+```
+
+Open web server
+
+```bash
+$ npm start
+```
+
 ## QQ Group
 
 ![QQ Group](./QQgroup.png)
