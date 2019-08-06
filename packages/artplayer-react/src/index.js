@@ -14,6 +14,21 @@ export default class ArtplayerReact extends React.Component {
     }
 
     componentDidMount() {
+        this.update();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.option !== this.props.option) {
+            this.destroy();
+            this.update();
+        }
+      }
+
+    componentWillUnmount() {
+        this.destroy();
+    }
+
+    update() {
         const { option, getInstance } = this.props;
         this.instance = new Artplayer({
             ...option,
@@ -25,7 +40,7 @@ export default class ArtplayerReact extends React.Component {
         }
     }
 
-    componentWillUnmount() {
+    destroy() {
         if (this.instance && this.instance.destroy) {
             this.instance.destroy();
         }
