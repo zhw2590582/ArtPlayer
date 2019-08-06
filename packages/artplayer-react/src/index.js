@@ -22,7 +22,7 @@ export default class ArtplayerReact extends React.Component {
             this.destroy();
             this.update();
         }
-      }
+    }
 
     componentWillUnmount() {
         this.destroy();
