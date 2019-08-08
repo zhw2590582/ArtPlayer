@@ -59,17 +59,14 @@ export default class Subtitle {
                 return response.text();
             })
             .then(text => {
-                let vttUrl = '';
                 if (/x-subrip/gi.test(type)) {
-                    vttUrl = vttToBlob(srtToVtt(text));
-                } else {
-                    vttUrl = url;
+                    return vttToBlob(srtToVtt(text));
                 }
-                return vttUrl;
+                return url;
             })
             .catch(err => {
                 notice.show(err);
-                console.warn(err);
+                throw err;
             });
     }
 

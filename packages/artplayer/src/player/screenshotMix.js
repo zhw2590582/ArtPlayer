@@ -17,8 +17,7 @@ export default function screenshotMix(art, player) {
                 return canvas.toDataURL('image/png');
             } catch (error) {
                 notice.show(error);
-                console.warn(error);
-                return null;
+                throw error;
             }
         },
     });

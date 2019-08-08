@@ -1,5 +1,5 @@
 export default function localPreview(art) {
-    const { append, setStyle, setStyles, sleep } = art.constructor.utils;
+    const { append, setStyle, setStyles, sleep, errorHandle } = art.constructor.utils;
     const {
         events: { proxy },
         option,
@@ -37,7 +37,7 @@ export default function localPreview(art) {
             } else {
                 const tip = `${i18n.get('Playback of this file format is not supported')}: ${file.type}`;
                 notice.show(tip, true, 3000);
-                console.warn(tip);
+                errorHandle(false, tip);
             }
         }
     }

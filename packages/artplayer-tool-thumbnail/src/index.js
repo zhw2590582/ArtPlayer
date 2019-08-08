@@ -104,7 +104,7 @@ class ArtplayerToolThumbnail extends Emitter {
                 })
                 .catch(err => {
                     this.emit('error', err.message);
-                    console.error(err);
+                    throw err;
                 });
         }
     }
@@ -135,7 +135,7 @@ class ArtplayerToolThumbnail extends Emitter {
                         });
                     })
                     .catch(err => {
-                        console.error(err);
+                        throw err;
                     });
             });
         });
@@ -150,13 +150,13 @@ class ArtplayerToolThumbnail extends Emitter {
                     .catch(err => {
                         this.processing = false;
                         this.emit('error', err.message);
-                        console.error(err);
+                        throw err;
                     }),
             )
             .catch(err => {
                 this.processing = false;
                 this.emit('error', err.message);
-                console.error(err);
+                throw err;
             });
     }
 

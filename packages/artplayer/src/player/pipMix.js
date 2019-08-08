@@ -17,12 +17,12 @@ function nativePip(art, player) {
             if (value) {
                 $video.requestPictureInPicture().catch(error => {
                     notice.show(error, true, 3000);
-                    console.warn(error);
+                    throw error;
                 });
             } else {
                 document.exitPictureInPicture().catch(error => {
                     notice.show(error, true, 3000);
-                    console.warn(error);
+                    throw error;
                 });
             }
         },

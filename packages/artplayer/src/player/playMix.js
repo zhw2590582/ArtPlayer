@@ -13,7 +13,7 @@ export default function playMix(art, player) {
                 if (promise !== undefined) {
                     promise.then().catch(err => {
                         notice.show(err, true, 3000);
-                        console.warn(err);
+                        throw err;
                     });
                 }
 
