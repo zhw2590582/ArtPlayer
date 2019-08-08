@@ -9,7 +9,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/354e9953b70a4791a5a46194d587c707)](https://www.codacy.com/app/zhw2590582/ArtPlayer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=zhw2590582/ArtPlayer&amp;utm_campaign=Badge_Grade)
 [![dependencies Status](https://david-dm.org/zhw2590582/artplayer/status.svg)](https://david-dm.org/zhw2590582/artplayer)
 
-> ArtPlayer is a modern HTML5 video player
+> :art: ArtPlayer.js is a modern and full featured HTML5 video player
 
 ![Screenshot](./screenshot.png)
 
