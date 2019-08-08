@@ -33,6 +33,13 @@ class Artplayer extends Emitter {
         this.option = utils.mergeDeep(Artplayer.DEFAULTS, option);
         validator(this.option, scheme);
         this.init();
+        // eslint-disable-next-line no-console
+        console.log(
+            '%c ArtPlayer %c __VERSION__ %c https://github.com/zhw2590582/ArtPlayer',
+            'color: #fff; background: #E91E63',
+            'color: #fff; background: #00BCD4',
+            'color: #000',
+        );
     }
 
     static get version() {

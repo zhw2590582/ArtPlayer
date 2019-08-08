@@ -1130,7 +1130,7 @@
           if (promise !== undefined) {
             promise.then().catch(function (err) {
               notice.show(err, true, 3000);
-              console.warn(err);
+              throw err;
             });
           }
 
@@ -1423,8 +1423,7 @@
           return canvas.toDataURL('image/png');
         } catch (error) {
           notice.show(error);
-          console.warn(error);
-          return null;
+          throw error;
         }
       }
     });
@@ -1759,12 +1758,12 @@
         if (value) {
           $video.requestPictureInPicture().catch(function (error) {
             notice.show(error, true, 3000);
-            console.warn(error);
+            throw error;
           });
         } else {
           document.exitPictureInPicture().catch(function (error) {
             notice.show(error, true, 3000);
-            console.warn(error);
+            throw error;
           });
         }
       }
@@ -3280,18 +3279,14 @@
           type = response.headers.get('Content-Type');
           return response.text();
         }).then(function (text) {
-          var vttUrl = '';
-
           if (/x-subrip/gi.test(type)) {
-            vttUrl = vttToBlob(srtToVtt(text));
-          } else {
-            vttUrl = url;
+            return vttToBlob(srtToVtt(text));
           }
 
-          return vttUrl;
+          return url;
         }).catch(function (err) {
           notice.show(err);
-          console.warn(err);
+          throw err;
         });
       }
     }, {
@@ -4105,7 +4100,8 @@
         append = _art$constructor$util.append,
         setStyle = _art$constructor$util.setStyle,
         setStyles = _art$constructor$util.setStyles,
-        sleep = _art$constructor$util.sleep;
+        sleep = _art$constructor$util.sleep,
+        errorHandle = _art$constructor$util.errorHandle;
     var proxy = art.events.proxy,
         option = art.option,
         notice = art.notice,
@@ -4141,7 +4137,7 @@
         } else {
           var tip = "".concat(i18n.get('Playback of this file format is not supported'), ": ").concat(file.type);
           notice.show(tip, true, 3000);
-          console.warn(tip);
+          errorHandle(false, tip);
         }
       }
     }
@@ -4323,8 +4319,10 @@
       _this.option = mergeDeep(Artplayer.DEFAULTS, option);
       optionValidator(_this.option, scheme);
 
-      _this.init();
+      _this.init(); // eslint-disable-next-line no-console
 
+
+      console.log('%c ArtPlayer %c 3.1.12 %c https://github.com/zhw2590582/ArtPlayer', 'color: #fff; background: #E91E63', 'color: #fff; background: #00BCD4', 'color: #000');
       return _this;
     }
 
