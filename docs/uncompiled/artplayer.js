@@ -4315,14 +4315,13 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
-      errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
-      _this.option = mergeDeep(Artplayer.DEFAULTS, option);
+      _this.option = mergeDeep(Artplayer.option, option);
       optionValidator(_this.option, scheme);
 
       _this.init(); // eslint-disable-next-line no-console
 
 
-      console.log('%c ArtPlayer %c 3.1.12 %c https://github.com/zhw2590582/ArtPlayer', 'color: #fff; background: #E91E63', 'color: #fff; background: #00BCD4', 'color: #000');
+      console.log('%c ArtPlayer %c 3.1.12 %c https://github.com/zhw2590582/ArtPlayer', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
       return _this;
     }
 
@@ -4410,7 +4409,7 @@
         return optionValidator.kindOf;
       }
     }, {
-      key: "DEFAULTS",
+      key: "option",
       get: function get() {
         return {
           container: '#artplayer',

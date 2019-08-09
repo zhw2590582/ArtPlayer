@@ -29,8 +29,7 @@ let id = 0;
 class Artplayer extends Emitter {
     constructor(option) {
         super();
-        utils.errorHandle(typeof window.Promise === 'function', "Unsupported 'Promise' method");
-        this.option = utils.mergeDeep(Artplayer.DEFAULTS, option);
+        this.option = utils.mergeDeep(Artplayer.option, option);
         validator(this.option, scheme);
         this.init();
         // eslint-disable-next-line no-console
@@ -74,7 +73,7 @@ class Artplayer extends Emitter {
         return validator.kindOf;
     }
 
-    static get DEFAULTS() {
+    static get option() {
         return {
             container: '#artplayer',
             url: '',

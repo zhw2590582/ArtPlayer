@@ -1224,7 +1224,7 @@ All properties are read only
 | `Artplayer.env`       | `String` | Environmental variable    |
 | `Artplayer.config`    | `Object` | Configuration information |
 | `Artplayer.utils`     | `Object` | Utils function            |
-| `Artplayer.DEFAULTS`  | `Object` | Default option            |
+| `Artplayer.option`    | `Object` | Default option            |
 | `Artplayer.instances` | `Array`  | Instance collection       |
 
 # Event
