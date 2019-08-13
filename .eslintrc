@@ -7,7 +7,8 @@
   },
   "rules": {
       "no-shadow": 0,
-      "no-param-reassign": 0
+      "no-param-reassign": 0,
+      "prefer-object-spread": 0
   },
   "parserOptions": {
       "sourceType": "module"

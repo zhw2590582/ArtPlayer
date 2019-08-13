@@ -6,12 +6,12 @@
     <title>Artplayer.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="keywords" content="artplayer, player, js, html5, video"/>
-    <meta name="description" content="ArtPlayer is a modern HTML5 video player"/>
+    <meta name="keywords" content="artplayer, player, js, html5, video" />
+    <meta name="description" content="ArtPlayer is a modern HTML5 video player" />
     <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="./assets/css/mobile.css">
-    <link rel="stylesheet" href="./uncompiled/artplayer.css">    
+    <link rel="stylesheet" href="./uncompiled/artplayer.css">
 </head>
 
 <body>
@@ -23,11 +23,13 @@
     <script src="./assets/js/mobile.js"></script>
     <script>
         var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
+        (function () {
+            if (window.location.hostname !== 'localhost') {
+                var hm = document.createElement('script');
+                hm.src = 'https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(hm, s);
+            }
         })();
     </script>
 </body>

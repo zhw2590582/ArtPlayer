@@ -56,7 +56,8 @@ export default function aspectRatioMix(art, player) {
     Object.defineProperty(player, 'aspectRatioReset', {
         set(value) {
             if (value && player.aspectRatio) {
-                player.aspectRatio = player.aspectRatio;
+                const { aspectRatio } = player
+                player.aspectRatio = aspectRatio;
                 art.emit('aspectRatioReset');
             }
         },
