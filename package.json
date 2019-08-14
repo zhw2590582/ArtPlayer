@@ -44,7 +44,7 @@
     "cross-env": "^5.2.0",
     "cssnano": "^4.1.10",
     "del": "^5.0.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.17.3",
     "glob": "^7.1.4",
