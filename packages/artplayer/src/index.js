@@ -29,9 +29,35 @@ let id = 0;
 class Artplayer extends Emitter {
     constructor(option) {
         super();
-        this.option = utils.mergeDeep(Artplayer.option, option);
-        validator(this.option, scheme);
-        this.init();
+        this.option = validator(utils.mergeDeep(Artplayer.option, option), scheme);
+        this.isFocus = false;
+        this.isDestroy = false;
+        this.whitelist = new Whitelist(this);
+        this.template = new Template(this);
+        this.events = new Events(this);
+        if (this.whitelist.state) {
+            this.storage = new Storage(this);
+            this.icons = new Icons(this);
+            this.i18n = new I18n(this);
+            this.notice = new Notice(this);
+            this.player = new Player(this);
+            this.layers = new Layers(this);
+            this.controls = new Controls(this);
+            this.contextmenu = new Contextmenu(this);
+            this.subtitle = new Subtitle(this);
+            this.info = new Info(this);
+            this.loading = new Loading(this);
+            this.hotkey = new Hotkey(this);
+            this.mask = new Mask(this);
+            this.setting = new Setting(this);
+            this.plugins = new Plugins(this);
+        } else {
+            this.mobile = new Mobile(this);
+        }
+
+        id += 1;
+        this.id = id;
+        Artplayer.instances.push(this);
         // eslint-disable-next-line no-console
         console.log(
             '%c ArtPlayer %c __VERSION__ %c https://github.com/zhw2590582/ArtPlayer',
@@ -122,37 +148,6 @@ class Artplayer extends Emitter {
             customType: {},
             lang: navigator.language.toLowerCase(),
         };
-    }
-
-    init() {
-        this.isFocus = false;
-        this.isDestroy = false;
-        this.whitelist = new Whitelist(this);
-        this.template = new Template(this);
-        this.events = new Events(this);
-        if (this.whitelist.state) {
-            this.storage = new Storage(this);
-            this.icons = new Icons(this);
-            this.i18n = new I18n(this);
-            this.notice = new Notice(this);
-            this.player = new Player(this);
-            this.layers = new Layers(this);
-            this.controls = new Controls(this);
-            this.contextmenu = new Contextmenu(this);
-            this.subtitle = new Subtitle(this);
-            this.info = new Info(this);
-            this.loading = new Loading(this);
-            this.hotkey = new Hotkey(this);
-            this.mask = new Mask(this);
-            this.setting = new Setting(this);
-            this.plugins = new Plugins(this);
-        } else {
-            this.mobile = new Mobile(this);
-        }
-
-        id += 1;
-        this.id = id;
-        Artplayer.instances.push(this);
     }
 
     destroy(removeHtml = false) {
