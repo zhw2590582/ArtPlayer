@@ -33,6 +33,7 @@ export default class Subtitle {
 
             if ($video.textTracks && $video.textTracks[0]) {
                 const [track] = $video.textTracks;
+                // eslint-disable-next-line no-inner-declarations
                 function updateSubtitle() {
                     const [cue] = track.activeCues;
                     $subtitle.innerHTML = '';

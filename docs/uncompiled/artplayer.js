@@ -3286,6 +3286,7 @@
           _this.art.emit('subtitle:load', url);
 
           if ($video.textTracks && $video.textTracks[0]) {
+            // eslint-disable-next-line no-inner-declarations
             var updateSubtitle = function updateSubtitle() {
               var _track$activeCues = slicedToArray(track.activeCues, 1),
                   cue = _track$activeCues[0];
