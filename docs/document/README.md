@@ -495,8 +495,20 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     icons: {
-        loading: 'Loading...',
-        playBig: 'PLAY',
+        loading: '',
+        state: '',
+        play: '',
+        pause: '',
+        volume: '',
+        volumeClose: '',
+        subtitle: '',
+        screenshot: '',
+        setting: '',
+        fullscreen: '',
+        fullscreenWeb: '',
+        pip: '',
+        prev: '',
+        next: '',
     },
 });
 ```
@@ -740,10 +752,10 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     contextmenu: [
         {
-            html: '自定义菜单 - 天亮请关灯 Σ(っ °Д °;)っ',
-            click: function() {
-                document.querySelector('.video-wrap').classList.toggle('dark');
-                this.show = false;
+            html: 'Custom menu',
+            click: function(contextmenu) {
+                console.info('You clicked on the custom menu');
+                contextmenu.show = false;
             },
         },
     ],
