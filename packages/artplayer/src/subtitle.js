@@ -33,7 +33,7 @@ export default class Subtitle {
 
             if ($video.textTracks && $video.textTracks[0]) {
                 const [track] = $video.textTracks;
-                proxy(track, 'cuechange', () => {
+                function updateSubtitle() {
                     const [cue] = track.activeCues;
                     $subtitle.innerHTML = '';
                     if (cue) {
@@ -45,7 +45,10 @@ export default class Subtitle {
                             .join('');
                     }
                     this.art.emit('subtitle:update', $subtitle);
-                });
+                }
+
+                proxy(track, 'cuechange', updateSubtitle.bind(this));
+                this.art.on('artplayerPluginSubtitle:set', updateSubtitle.bind(this));
             }
         });
     }

@@ -3286,10 +3286,7 @@
           _this.art.emit('subtitle:load', url);
 
           if ($video.textTracks && $video.textTracks[0]) {
-            var _$video$textTracks = slicedToArray($video.textTracks, 1),
-                track = _$video$textTracks[0];
-
-            proxy(track, 'cuechange', function () {
+            var updateSubtitle = function updateSubtitle() {
               var _track$activeCues = slicedToArray(track.activeCues, 1),
                   cue = _track$activeCues[0];
 
@@ -3303,8 +3300,15 @@
                 }).join('');
               }
 
-              _this.art.emit('subtitle:update', $subtitle);
-            });
+              this.art.emit('subtitle:update', $subtitle);
+            };
+
+            var _$video$textTracks = slicedToArray($video.textTracks, 1),
+                track = _$video$textTracks[0];
+
+            proxy(track, 'cuechange', updateSubtitle.bind(_this));
+
+            _this.art.on('artplayerPluginSubtitle:set', updateSubtitle.bind(_this));
           }
         });
       }
