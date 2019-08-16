@@ -60,7 +60,7 @@ class Artplayer extends Emitter {
         Artplayer.instances.push(this);
         // eslint-disable-next-line no-console
         console.log(
-            '%c ArtPlayer %c __VERSION__ %c https://github.com/zhw2590582/ArtPlayer',
+            '%c ArtPlayer %c __VERSION__ %c hhttps://artplayer.org',
             'color: #fff; background: #5f5f5f',
             'color: #fff; background: #4bc729',
             '',
