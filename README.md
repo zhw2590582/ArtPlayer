@@ -6,12 +6,12 @@
 ![size](https://badgen.net/bundlephobia/minzip/artplayer)
 [![npm Downloads](https://img.shields.io/npm/dt/artplayer.svg)](https://www.npmjs.com/package/artplayer)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/354e9953b70a4791a5a46194d587c707)](https://www.codacy.com/app/zhw2590582/ArtPlayer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=zhw2590582/ArtPlayer&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/354e9953b70a4791a5a46194d587c707)](https://www.codacy.com/app/zhw2590582/ArtPlayer?utm_source=github.com&utm_medium=referral&utm_content=zhw2590582/ArtPlayer&utm_campaign=Badge_Grade)
 [![dependencies Status](https://david-dm.org/zhw2590582/artplayer/status.svg)](https://david-dm.org/zhw2590582/artplayer)
 
 > :art: ArtPlayer.js is a modern and full featured HTML5 video player
 
-![Screenshot](./screenshot.png)
+![Screenshot](./images/screenshot.png)
 
 ## Features
 
@@ -94,10 +94,6 @@ var art = new Artplayer({
 });
 ```
 
-## Changelog
-
-[Checkout the changelog](https://github.com/zhw2590582/ArtPlayer/blob/master/changelog.md)
-
 ## Contribution
 
 Installation dependency
@@ -119,9 +115,17 @@ Open web server
 $ npm start
 ```
 
+## Donations
+
+We accept donations through these channels:
+
+-   [Paypal](https://www.paypal.me/harveyzack)
+-   [WeChat Pay](./images/wechatpay.jpg)
+-   [Alipay](./images/alipay.jpg)
+
 ## QQ Group
 
-![QQ Group](./QQgroup.png)
+![QQ Group](./images/qqgroup.png)
 
 ## License
 
