@@ -2941,7 +2941,7 @@
 
   function version(menuOption) {
     return _objectSpread$f({}, menuOption, {
-      html: '<a href="https://github.com/zhw2590582/artplayer" target="_blank">ArtPlayer 3.1.13</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.13</a>'
     });
   }
 
@@ -4399,7 +4399,7 @@
       _this.id = id;
       Artplayer.instances.push(assertThisInitialized(_this)); // eslint-disable-next-line no-console
 
-      console.log('%c ArtPlayer %c 3.1.13 %c https://github.com/zhw2590582/ArtPlayer', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+      console.log('%c ArtPlayer %c 3.1.13 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
       return _this;
     }
 
