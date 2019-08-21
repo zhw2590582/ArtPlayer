@@ -1,5 +1,5 @@
 /*!
- * artplayer-plugin-blur.js v3.1.13
+ * artplayer-plugin-blur.js v3.1.14
  * Github: https://github.com/zhw2590582/ArtPlayer#readme
  * (c) 2017-2019 Harvey Zack
  * Released under the MIT License.
