@@ -47,7 +47,12 @@ module.exports = function creatRollupConfig(projectPath) {
                 plugins: [
                     autoprefixer(),
                     cssnano({
-                        preset: 'default',
+                        preset: [
+                            'default',
+                            {
+                                calc: false
+                            }
+                        ],
                     }),
                 ],
                 sourceMap: isProd ? false : true,
