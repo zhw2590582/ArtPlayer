@@ -487,7 +487,7 @@
   }
   function tooltip(target, msg) {
     var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
-    target.setAttribute('data-balloon', msg);
+    target.setAttribute('aria-label', msg);
     target.setAttribute('data-balloon-pos', pos);
   }
   function srtToVtt(srtText) {

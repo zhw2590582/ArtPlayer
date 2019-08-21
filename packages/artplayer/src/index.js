@@ -1,5 +1,4 @@
 import './style';
-import 'balloon-css/balloon.min.css';
 import validator from 'option-validator';
 import Emitter from './emitter';
 import * as utils from './utils';

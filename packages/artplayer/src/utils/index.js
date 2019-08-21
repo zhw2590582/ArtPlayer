@@ -144,7 +144,7 @@ export function inverseClass(target, className) {
 }
 
 export function tooltip(target, msg, pos = 'up') {
-    target.setAttribute('data-balloon', msg);
+    target.setAttribute('aria-label', msg);
     target.setAttribute('data-balloon-pos', pos);
 }
 
