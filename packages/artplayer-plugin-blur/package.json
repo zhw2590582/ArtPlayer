@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-blur",
-  "version": "3.1.13",
+  "version": "3.1.14",
   "expose": "artplayerPluginBlur",
   "description": "Blur plugin for ArtPlayer",
   "main": "dist/artplayer-tool-blur.js",
