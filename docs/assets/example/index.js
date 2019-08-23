@@ -65,8 +65,10 @@ var art = new Artplayer({
     ],
     thumbnails: {
         url: url + '/image/one-more-time-one-more-chance-thumbnails.png',
-        width: 190,
-        height: 107,
+        number: 100,
+        width: 160,
+        height: 90,
+        column: 10,
     },
     subtitle: {
         url: url + '/subtitle/one-more-time-one-more-chance.srt',
