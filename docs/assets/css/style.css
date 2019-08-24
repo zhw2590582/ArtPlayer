@@ -62,16 +62,16 @@ img {
     height: 100%;
 }
 
-.header .menus .ecosystem {
+.header .menus .has-sub-menu {
     position: relative;
     cursor: pointer;
 }
 
-.header .menus .ecosystem:hover .sub-menu{
+.header .menus .has-sub-menu:hover .sub-menu{
     display: block;
 }
 
-.header .menus .ecosystem .sub-menu {
+.header .menus .has-sub-menu .sub-menu {
     display: none;
     position: absolute;
     z-index: 9;
@@ -82,18 +82,18 @@ img {
     background: #2b2b2b;
 }
 
-.header .menus .ecosystem .sub-menu ul {
+.header .menus .has-sub-menu .sub-menu ul {
     padding: 0;
     margin-bottom: 15px;
 }
 
-.header .menus .ecosystem .sub-menu li {
+.header .menus .has-sub-menu .sub-menu li {
     display: block;
     list-style: none;
     margin-bottom: 15px;
 }
 
-.header .menus .ecosystem .sub-menu li.title {
+.header .menus .has-sub-menu .sub-menu li.title {
     color: #fff;
     font-size: 16px;
     margin-bottom: 15px;
