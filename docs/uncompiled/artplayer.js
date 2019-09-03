@@ -32,6 +32,10 @@
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+  function unwrapExports (x) {
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+  }
+
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
@@ -118,8 +122,10 @@
   var inherits = _inherits;
 
   var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,i=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function a(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];for(var n in c(r,t,e),f(r,t,e),s(r,t,e),t)if(Object.prototype.hasOwnProperty.call(t,n)){var o=r[n],a=t[n],i=e.concat(n);if(u(r,n,a,i))continue;c(o,a,i),f(o,a,i),s(o,a,i);}return r}function u(r,t,e,n){if(!Object.prototype.hasOwnProperty.call(r,t)){if(!0===e.__required__||!0===e.required)throw new TypeError("'".concat(n.join("."),"' is required"));return !0}}function c(r,t,e){var n;if("string"===i(t)?n=t:"function"===i(t)?t.___validator__=t:t.__type__?n=t.__type__:t.type&&(n=t.type),n&&"string"===i(n)){n=n.trim().toLowerCase();var o=i(r),a=o===n;if(-1<n.indexOf("|"))a=n.split("|").filter(Boolean).some(function(r){return o===r.trim()});if(!a)throw new TypeError("'".concat(e.join("."),"' require '").concat(n,"' type, but got '").concat(o,"'"))}}function f(r,t,e){var n;if(t.___validator__?n=t.___validator__:t.validator&&(n=t.validator),"function"===i(n)){var o=n(r,i(r),e);if(!0!==o)throw new TypeError("The scheme for '".concat(e.join("."),"' validator function require return true, but got '").concat(o,"'"))}}function s(r,t,e){var n;if(t.___child__?n=t.___child__:t.child&&(n=t.child),"object"===i(n)){var o=i(r);"object"===o?a(r,n,e):"array"===o&&r.forEach(function(r,t){a(r,n,e.concat(t));});}}return a.kindOf=i,a});
+  !function(r,t){t(exports);}(commonjsGlobal,function(r){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}function n(r,t,e){return t in r?Object.defineProperty(r,t,{value:e,enumerable:!0,configurable:!0,writable:!0}):r[t]=e,r}var o=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===a(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(a(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=o.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function a(r){return r.constructor?r.constructor.name:null}var i=Symbol("TYPE"),u=Symbol("VALIDATOR");function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return l(r,t=y(t),e),p(r,t,e),s(r,t,e),r}function s(a,i,u){var r=c(i),t=c(a);"object"===r&&"object"===t&&Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),l(t,e,n),p(t,e,n),f(t,e,n);}),"array"===r&&"array"===t&&a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),l(e,n,o),p(e,n,o),f(e,n,o);});}function y(r){var t=c(r);return "string"===t?n({},i,r.trim().toLowerCase()):"function"===t?n({},u,r):r}function l(r,t,e){if("string"===c(t[i])){var n=c(r);if(!(-1<t[i].indexOf("|")?t[i].split("|").filter(Boolean).some(function(r){return n===r.trim()}):t[i]===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t[i],"' type, but got '").concat(n,"'"))}}function p(r,t,e){if("function"===c(t[u])){var n=c(r),o=t[u](r,n,e);if(!0!==o){var a=c(o);throw"string"===a?new Error(o):"error"===a?o:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(o,"'"))}}}f.kindOf=c,r.checkChild=s,r.formatScheme=y,r.checkType=l,r.checkValidator=p,r.default=f,Object.defineProperty(r,"__esModule",{value:!0});});
   });
+
+  var validator = unwrapExports(optionValidator);
 
   var Emitter =
   /*#__PURE__*/
@@ -550,14 +556,8 @@
   }
 
   var scheme = {
-    container: {
-      validator: validElement,
-      required: true
-    },
-    url: {
-      type: 'string|function',
-      required: true
-    },
+    container: validElement,
+    url: 'string|function',
     poster: 'string',
     title: 'string',
     theme: 'string',
@@ -578,93 +578,58 @@
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
-    plugins: {
-      type: 'array',
-      child: {
-        type: 'function'
+    plugins: ['function'],
+    whitelist: ['string|function|regexp'],
+    layers: [{
+      disable: 'boolean|undefined',
+      name: 'string|undefined',
+      index: 'number|undefined',
+      html: validElement,
+      style: 'object|undefined',
+      click: 'function|undefined',
+      mounted: 'function|undefined'
+    }],
+    contextmenu: [{
+      disable: 'boolean|undefined',
+      name: 'string|undefined',
+      index: 'number|undefined',
+      html: validElement,
+      style: 'object|undefined',
+      click: 'function|undefined',
+      mounted: 'function|undefined'
+    }],
+    quality: [{
+      default: 'boolean|undefined',
+      name: 'string',
+      url: 'string'
+    }],
+    controls: [{
+      disable: 'boolean|undefined',
+      name: 'string|undefined',
+      index: 'number|undefined',
+      html: validElement,
+      style: 'object|undefined',
+      click: 'function|undefined',
+      mounted: 'function|undefined',
+      position: function position(value, type, paths) {
+        var position = ['top', 'left', 'right'];
+        return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters"));
       }
-    },
-    whitelist: {
-      type: 'array',
-      child: {
-        type: 'string|function|regexp'
-      }
-    },
-    layers: {
-      type: 'array',
-      child: {
-        type: 'object|function',
-        disable: 'boolean',
-        name: 'string',
-        index: 'number',
-        html: validElement,
-        style: 'object',
-        click: 'function',
-        mounted: 'function'
-      }
-    },
-    contextmenu: {
-      type: 'array',
-      child: {
-        type: 'object|function',
-        disable: 'boolean',
-        name: 'string',
-        index: 'number',
-        html: validElement,
-        style: 'object',
-        click: 'function',
-        mounted: 'function'
-      }
-    },
-    quality: {
-      type: 'array',
-      child: {
-        default: 'boolean',
-        name: 'string',
-        url: 'string'
-      }
-    },
-    controls: {
-      type: 'array',
-      child: {
-        type: 'object|function',
-        disable: 'boolean',
-        name: 'string',
-        index: 'number',
-        html: validElement,
-        style: 'object',
-        click: 'function',
-        mounted: 'function',
-        position: function position(value, type, paths) {
-          var position = ['top', 'left', 'right'];
-          return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters"));
-        }
-      }
-    },
-    highlight: {
-      type: 'array',
-      child: {
-        type: 'object',
-        time: 'number',
-        text: 'string'
-      }
-    },
+    }],
+    highlight: [{
+      time: 'number',
+      text: 'string'
+    }],
     thumbnails: {
-      type: 'object',
-      child: {
-        url: 'string',
-        number: 'number',
-        width: 'number',
-        height: 'number',
-        column: 'number'
-      }
+      url: 'string',
+      number: 'number',
+      width: 'number',
+      height: 'number',
+      column: 'number'
     },
     subtitle: {
-      type: 'object',
-      child: {
-        url: 'string',
-        style: 'object'
-      }
+      url: 'string',
+      style: 'object'
     },
     moreVideoAttr: 'object',
     icons: 'object',
@@ -2941,7 +2906,7 @@
 
   function version(menuOption) {
     return _objectSpread$f({}, menuOption, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.13</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.14</a>'
     });
   }
 
@@ -3125,7 +3090,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.13</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.14</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -4368,7 +4333,7 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
-      _this.option = optionValidator(mergeDeep(Artplayer.option, option), scheme);
+      _this.option = validator(mergeDeep(Artplayer.option, option), scheme);
       _this.isFocus = false;
       _this.isDestroy = false;
       _this.whitelist = new Whitelist(assertThisInitialized(_this));
@@ -4399,7 +4364,7 @@
       _this.id = id;
       Artplayer.instances.push(assertThisInitialized(_this)); // eslint-disable-next-line no-console
 
-      console.log('%c ArtPlayer %c 3.1.13 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+      console.log('%c ArtPlayer %c 3.1.14 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
       return _this;
     }
 
@@ -4416,7 +4381,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.13';
+        return '3.1.14';
       }
     }, {
       key: "env",
@@ -4446,12 +4411,12 @@
     }, {
       key: "validator",
       get: function get() {
-        return optionValidator;
+        return validator;
       }
     }, {
       key: "kindOf",
       get: function get() {
-        return optionValidator.kindOf;
+        return validator.kindOf;
       }
     }, {
       key: "option",

@@ -8,14 +8,8 @@ function validElement(value, type, paths) {
 }
 
 export default {
-    container: {
-        validator: validElement,
-        required: true,
-    },
-    url: {
-        type: 'string|function',
-        required: true,
-    },
+    container: validElement,
+    url: 'string|function',
     poster: 'string',
     title: 'string',
     theme: 'string',
@@ -36,63 +30,46 @@ export default {
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
-    plugins: {
-        type: 'array',
-        child: {
-            type: 'function',
-        },
-    },
-    whitelist: {
-        type: 'array',
-        child: {
-            type: 'string|function|regexp',
-        },
-    },
-    layers: {
-        type: 'array',
-        child: {
-            type: 'object|function',
-            disable: 'boolean',
-            name: 'string',
-            index: 'number',
+    plugins: ['function'],
+    whitelist: ['string|function|regexp'],
+    layers: [
+        {
+            disable: 'boolean|undefined',
+            name: 'string|undefined',
+            index: 'number|undefined',
             html: validElement,
-            style: 'object',
-            click: 'function',
-            mounted: 'function',
+            style: 'object|undefined',
+            click: 'function|undefined',
+            mounted: 'function|undefined',
         },
-    },
-    contextmenu: {
-        type: 'array',
-        child: {
-            type: 'object|function',
-            disable: 'boolean',
-            name: 'string',
-            index: 'number',
+    ],
+    contextmenu: [
+        {
+            disable: 'boolean|undefined',
+            name: 'string|undefined',
+            index: 'number|undefined',
             html: validElement,
-            style: 'object',
-            click: 'function',
-            mounted: 'function',
+            style: 'object|undefined',
+            click: 'function|undefined',
+            mounted: 'function|undefined',
         },
-    },
-    quality: {
-        type: 'array',
-        child: {
-            default: 'boolean',
+    ],
+    quality: [
+        {
+            default: 'boolean|undefined',
             name: 'string',
             url: 'string',
         },
-    },
-    controls: {
-        type: 'array',
-        child: {
-            type: 'object|function',
-            disable: 'boolean',
-            name: 'string',
-            index: 'number',
+    ],
+    controls: [
+        {
+            disable: 'boolean|undefined',
+            name: 'string|undefined',
+            index: 'number|undefined',
             html: validElement,
-            style: 'object',
-            click: 'function',
-            mounted: 'function',
+            style: 'object|undefined',
+            click: 'function|undefined',
+            mounted: 'function|undefined',
             position: (value, type, paths) => {
                 const position = ['top', 'left', 'right'];
                 return errorHandle(
@@ -101,31 +78,23 @@ export default {
                 );
             },
         },
-    },
-    highlight: {
-        type: 'array',
-        child: {
-            type: 'object',
+    ],
+    highlight: [
+        {
             time: 'number',
             text: 'string',
         },
-    },
+    ],
     thumbnails: {
-        type: 'object',
-        child: {
-            url: 'string',
-            number: 'number',
-            width: 'number',
-            height: 'number',
-            column: 'number',
-        },
+        url: 'string',
+        number: 'number',
+        width: 'number',
+        height: 'number',
+        column: 'number',
     },
     subtitle: {
-        type: 'object',
-        child: {
-            url: 'string',
-            style: 'object',
-        },
+        url: 'string',
+        style: 'object',
     },
     moreVideoAttr: 'object',
     icons: 'object',
