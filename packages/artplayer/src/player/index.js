@@ -2,7 +2,7 @@ import attachUrlMix from './attachUrlMix';
 import attrInit from './attrInit';
 import eventInit from './eventInit';
 import playMix from './playMix';
-import pauseMin from './pauseMin';
+import pauseMix from './pauseMix';
 import toggleMix from './toggleMix';
 import seekMix from './seekMix';
 import volumeMix from './volumeMix';
@@ -29,7 +29,7 @@ export default class Player {
         eventInit(art, this);
         attrInit(art, this);
         playMix(art, this);
-        pauseMin(art, this);
+        pauseMix(art, this);
         toggleMix(art, this);
         seekMix(art, this);
         volumeMix(art, this);
