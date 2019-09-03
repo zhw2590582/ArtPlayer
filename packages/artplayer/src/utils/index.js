@@ -179,11 +179,11 @@ export function downloadFile(url, name) {
 }
 
 export function proxyPropertys(target, ...sources) {
-    sources.forEach(source => {
+    return sources.reduce((result, source) => {
         Object.getOwnPropertyNames(source).forEach(key => {
-            if (!hasOwnProperty(target, key)) {
-                Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-            }
+            errorHandle(!hasOwnProperty(result, key), `Target attribute name is duplicated: ${key}`);
+            Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(source, key));
         });
-    });
+        return result;
+    }, target);
 }
