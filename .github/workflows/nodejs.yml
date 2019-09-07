@@ -17,10 +17,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
+    - name: npm install, lint, build, and test
       run: |
         npm install
-        npm run build --if-present
-        npm test
+        npm install packages/* && lerna bootstrap --hoist
+        npm run lint
+        npm run build:all
+        npm run test
+        npm run sizereport
       env:
         CI: true
