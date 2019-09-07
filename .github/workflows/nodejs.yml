@@ -20,7 +20,7 @@ jobs:
     - name: npm install, lint, build, and test
       run: |
         npm install
-        npm install packages/* && lerna bootstrap --hoist
+        npm install packages/* && npx lerna bootstrap --hoist
         npm run lint
         npm run build:all
         npm run test
