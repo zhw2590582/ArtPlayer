@@ -40,10 +40,10 @@ function settingMix(art) {
     };
 }
 
-export default function subtitle(art) {
+export default function subtitleOffset(art) {
     const { clamp } = art.constructor.utils;
     const { setting, notice, template, i18n, player } = art;
-    
+
     i18n.update({
         'zh-cn': {
             'Subtitle offset time': '字幕偏移时间',

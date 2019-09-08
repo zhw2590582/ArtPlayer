@@ -1,5 +1,5 @@
 import { errorHandle, hasOwnProperty } from '../utils';
-import subtitle from './subtitle';
+import subtitleOffset from './subtitleOffset';
 import localPreview from './localPreview';
 import miniProgressBar from './miniProgressBar';
 import autoPip from './autoPip';
@@ -11,8 +11,8 @@ export default class Plugins {
 
         const { option } = art;
 
-        if (option.subtitle.url) {
-            this.add(subtitle);
+        if (option.subtitle.url && option.subtitleOffset) {
+            this.add(subtitleOffset);
         }
 
         if (!option.isLive && option.miniProgressBar) {
@@ -23,7 +23,7 @@ export default class Plugins {
             this.add(localPreview);
         }
 
-        if (option.pip && option.autoPip) {
+        if (option.autoPip) {
             this.add(autoPip);
         }
 

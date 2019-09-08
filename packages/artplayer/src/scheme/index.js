@@ -30,6 +30,7 @@ export default {
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
+    subtitleOffset: 'boolean',
     miniProgressBar: 'boolean',
     localPreview: 'boolean',
     autoPip: 'boolean',

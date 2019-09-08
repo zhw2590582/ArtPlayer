@@ -572,6 +572,7 @@
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
+    subtitleOffset: 'boolean',
     miniProgressBar: 'boolean',
     localPreview: 'boolean',
     autoPip: 'boolean',
@@ -4062,7 +4063,7 @@
     };
   }
 
-  function subtitle$2(art) {
+  function subtitleOffset(art) {
     var clamp = art.constructor.utils.clamp;
     var setting = art.setting,
         notice = art.notice,
@@ -4250,8 +4251,8 @@
       this.id = 0;
       var option = art.option;
 
-      if (option.subtitle.url) {
-        this.add(subtitle$2);
+      if (option.subtitle.url && option.subtitleOffset) {
+        this.add(subtitleOffset);
       }
 
       if (!option.isLive && option.miniProgressBar) {
@@ -4262,7 +4263,7 @@
         this.add(localPreview);
       }
 
-      if (option.pip && option.autoPip) {
+      if (option.autoPip) {
         this.add(autoPip);
       }
 
@@ -4467,9 +4468,10 @@
           mutex: true,
           fullscreen: false,
           fullscreenWeb: false,
-          miniProgressBar: true,
-          localPreview: true,
-          autoPip: true,
+          subtitleOffset: false,
+          miniProgressBar: false,
+          localPreview: false,
+          autoPip: false,
           layers: [],
           contextmenu: [],
           quality: [],
