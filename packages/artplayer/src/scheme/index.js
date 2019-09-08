@@ -32,6 +32,7 @@ export default {
     fullscreenWeb: 'boolean',
     miniProgressBar: 'boolean',
     localPreview: 'boolean',
+    autoPip: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
     layers: [
