@@ -531,6 +531,89 @@ var art = new Artplayer({
 });
 ```
 
+## subtitleOffset
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Subtitle time offset plugin
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    setting: true,
+    subtitleOffset: true,
+});
+```
+
+## miniProgressBar
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Mini progress bar plugin
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    miniProgressBar: true,
+});
+```
+
+## localPreview
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Local Preview plugin
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    localPreview: true,
+    controls: [
+        {
+            name: 'preview',
+            position: 'right',
+            html: 'OPEN',
+            mounted: $preview => {
+                art.plugins.localPreview.attach($preview);
+            },
+        },
+    ],
+});
+```
+
+## autoPip
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Auto pip mode plugin, when the video is playing and not triggering in the window view
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    autoPip: true,
+});
+```
+
 ## subtitle
 
 -   Type: `Object`
@@ -867,35 +950,35 @@ setTimeout(function() {
 
 Player core function
 
-| propertie              | type       | Description                                                                                       |
-| ---------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
-| `aspectRatio`          | `String`   | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9` and `false`       |
-| `aspectRatioReset`     | `Boolean`  | Recalculate the aspect ratio                                                                      |
-| `attachUrl`            | `Function` | Replace play address                                                                              |
-| `autoSize`             | `Boolean`  | Set auto size                                                                                     |
-| `currentTime`          | `Number`   | `Getter` and `Setter` of the current time                                                         |
-| `duration`             | `Number`   | `Getter` of the duration                                                                          |
-| `flip`                 | `String`   | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical` and `false`     |
-| `fullscreen`           | `Boolean`  | Enable or disable fullscreen                                                                      |
-| `fullscreenToggle`     | `Boolean`  | Toggle fullscreen                                                                                 |
-| `fullscreenWeb`        | `Boolean`  | Enable or disable web fullscreen                                                                  |
-| `fullscreenWebToggle`  | `Boolean`  | Toggle web fullscreen                                                                             |
-| `loaded`               | `Number`   | Return the proportion of the load                                                                 |
-| `pause`                | `Boolean`  | Pause playback                                                                                    |
-| `pip`                  | `Boolean`  | Enable or disable pip                                                                             |
-| `pipToggle`            | `Boolean`  | Toggle pip                                                                                        |
-| `playbackRate`         | `String`   | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
-| `playbackRateReset`    | `Boolean`  | Recalculate the playback rate                                                                     |
-| `played`               | `Number`   | Return the proportion of the played                                                               |
-| `playing`              | `Boolean`  | Return to playing state                                                                           |
-| `play`                 | `Boolean`  | Start playback                                                                                    |
-| `screenshot`           | `Function` | Download a screenshot of current time                                                             |
-| `seek`                 | `Number`   | Set the current time                                                                              |
-| `switchQuality`        | `Function` | Switch quality                                                                                    |
-| `switchUrl`            | `Function` | Switch video url                                                                                  |
-| `toggle`               | `Boolean`  | Toggle play and pause                                                                             |
-| `volume`               | `Number`   | `Getter` and `Setter` of the current volume                                                       |
-| `muted`                | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
+| propertie             | type       | Description                                                                                       |
+| --------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
+| `aspectRatio`         | `String`   | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9` and `false`       |
+| `aspectRatioReset`    | `Boolean`  | Recalculate the aspect ratio                                                                      |
+| `attachUrl`           | `Function` | Replace play address                                                                              |
+| `autoSize`            | `Boolean`  | Set auto size                                                                                     |
+| `currentTime`         | `Number`   | `Getter` and `Setter` of the current time                                                         |
+| `duration`            | `Number`   | `Getter` of the duration                                                                          |
+| `flip`                | `String`   | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical` and `false`     |
+| `fullscreen`          | `Boolean`  | Enable or disable fullscreen                                                                      |
+| `fullscreenToggle`    | `Boolean`  | Toggle fullscreen                                                                                 |
+| `fullscreenWeb`       | `Boolean`  | Enable or disable web fullscreen                                                                  |
+| `fullscreenWebToggle` | `Boolean`  | Toggle web fullscreen                                                                             |
+| `loaded`              | `Number`   | Return the proportion of the load                                                                 |
+| `pause`               | `Boolean`  | Pause playback                                                                                    |
+| `pip`                 | `Boolean`  | Enable or disable pip                                                                             |
+| `pipToggle`           | `Boolean`  | Toggle pip                                                                                        |
+| `playbackRate`        | `String`   | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
+| `playbackRateReset`   | `Boolean`  | Recalculate the playback rate                                                                     |
+| `played`              | `Number`   | Return the proportion of the played                                                               |
+| `playing`             | `Boolean`  | Return to playing state                                                                           |
+| `play`                | `Boolean`  | Start playback                                                                                    |
+| `screenshot`          | `Function` | Download a screenshot of current time                                                             |
+| `seek`                | `Number`   | Set the current time                                                                              |
+| `switchQuality`       | `Function` | Switch quality                                                                                    |
+| `switchUrl`           | `Function` | Switch video url                                                                                  |
+| `toggle`              | `Boolean`  | Toggle play and pause                                                                             |
+| `volume`              | `Number`   | `Getter` and `Setter` of the current volume                                                       |
+| `muted`               | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
 
 [Run Code](/)
 
@@ -1066,7 +1149,6 @@ Controls manager, and every control has `show` setter
 | `add`     | `Function` | Dynamically add a control |
 | `show`    | `setter`   | Show or hide              |
 
-
 [Run Code](/)
 
 ```js
@@ -1102,7 +1184,6 @@ Contextmenu manager, and every contextmenu has `show` setter
 | `add`     | `Function` | Dynamically add a contextmenu |
 | `show`    | `setter`   | Show or hide                  |
 
-
 [Run Code](/)
 
 ```js
@@ -1129,7 +1210,6 @@ art.contextmenu.yourContextmenu.show = false;
 | `init`    | `Function` | Init subtitle |
 | `show`    | `setter`   | Show or hide  |
 
-
 [Run Code](/)
 
 ```js
@@ -1151,19 +1231,17 @@ art.once('video:canplay', () => {
 
 -   Type: `Object`
 
-| propertie | type       | Description  |
-| --------- | ---------- | ------------ |
-| `show`    | `setter`   | Show or hide |
-
+| propertie | type     | Description  |
+| --------- | -------- | ------------ |
+| `show`    | `setter` | Show or hide |
 
 ## mask
 
 -   Type: `Object`
 
-| propertie | type       | Description |
-| --------- | ---------- | ----------- |
-| `show`    | `setter`   | Show or hide|
-
+| propertie | type     | Description  |
+| --------- | -------- | ------------ |
+| `show`    | `setter` | Show or hide |
 
 ## setting
 
@@ -1175,7 +1253,6 @@ Setting manager, and every setting has `show` and `hide` funciton
 | --------- | ---------- | ------------------------- |
 | `add`     | `Function` | Dynamically add a setting |
 | `show`    | `setter`   | Show or hide              |
-
 
 [Run Code](/)
 
