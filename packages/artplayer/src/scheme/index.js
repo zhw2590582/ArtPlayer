@@ -30,6 +30,8 @@ export default {
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
+    miniProgressBar: 'boolean',
+    localPreview: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
     layers: [

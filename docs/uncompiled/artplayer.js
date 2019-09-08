@@ -32,10 +32,6 @@
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-  function unwrapExports (x) {
-  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-  }
-
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
@@ -122,10 +118,8 @@
   var inherits = _inherits;
 
   var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){t(exports);}(commonjsGlobal,function(r){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}function n(r,t,e){return t in r?Object.defineProperty(r,t,{value:e,enumerable:!0,configurable:!0,writable:!0}):r[t]=e,r}var o=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===a(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(a(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=o.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function a(r){return r.constructor?r.constructor.name:null}var i=Symbol("TYPE"),u=Symbol("VALIDATOR");function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return l(r,t=y(t),e),p(r,t,e),s(r,t,e),r}function s(a,i,u){var r=c(i),t=c(a);"object"===r&&"object"===t&&Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),l(t,e,n),p(t,e,n),f(t,e,n);}),"array"===r&&"array"===t&&a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),l(e,n,o),p(e,n,o),f(e,n,o);});}function y(r){var t=c(r);return "string"===t?n({},i,r.trim().toLowerCase()):"function"===t?n({},u,r):r}function l(r,t,e){if("string"===c(t[i])){var n=c(r);if(!(-1<t[i].indexOf("|")?t[i].split("|").filter(Boolean).some(function(r){return n===r.trim()}):t[i]===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t[i],"' type, but got '").concat(n,"'"))}}function p(r,t,e){if("function"===c(t[u])){var n=c(r),o=t[u](r,n,e);if(!0!==o){var a=c(o);throw"string"===a?new Error(o):"error"===a?o:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(o,"'"))}}}f.kindOf=c,r.checkChild=s,r.formatScheme=y,r.checkType=l,r.checkValidator=p,r.default=f,Object.defineProperty(r,"__esModule",{value:!0});});
+  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);"object"===r&&"object"===t&&Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});"array"===r&&"array"===t&&a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw"string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
   });
-
-  var validator = unwrapExports(optionValidator);
 
   var Emitter =
   /*#__PURE__*/
@@ -518,13 +512,13 @@
       sources[_key4 - 1] = arguments[_key4];
     }
 
-    sources.forEach(function (source) {
+    return sources.reduce(function (result, source) {
       Object.getOwnPropertyNames(source).forEach(function (key) {
-        if (!hasOwnProperty(target, key)) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        }
+        errorHandle(!hasOwnProperty(result, key), "Target attribute name is duplicated: ".concat(key));
+        Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(source, key));
       });
-    });
+      return result;
+    }, target);
   }
 
   var utils = /*#__PURE__*/Object.freeze({
@@ -578,6 +572,8 @@
     mutex: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
+    miniProgressBar: 'boolean',
+    localPreview: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
     layers: [{
@@ -1716,8 +1712,7 @@
   }
 
   function nativePip(art, player) {
-    var notice = art.notice,
-        $video = art.template.$video,
+    var $video = art.template.$video,
         proxy = art.events.proxy;
     $video.disablePictureInPicture = false;
     Object.defineProperty(player, 'pip', {
@@ -1727,12 +1722,10 @@
       set: function set(value) {
         if (value) {
           $video.requestPictureInPicture().catch(function (error) {
-            notice.show(error, true, 3000);
             throw error;
           });
         } else {
           document.exitPictureInPicture().catch(function (error) {
-            notice.show(error, true, 3000);
             throw error;
           });
         }
@@ -3169,6 +3162,10 @@
   var arrayWithHoles = _arrayWithHoles;
 
   function _iterableToArrayLimit(arr, i) {
+    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+      return;
+    }
+
     var _arr = [];
     var _n = true;
     var _d = false;
@@ -4222,6 +4219,24 @@
     };
   }
 
+  function autoPip(art) {
+    var events = art.events,
+        player = art.player,
+        template = art.template;
+    var scrollDebounce = debounce(function () {
+      var _template$$player$get = template.$player.getBoundingClientRect(),
+          top = _template$$player$get.top,
+          height = _template$$player$get.height;
+
+      if (top + height <= 0 && !player.pip && player.playing) {
+        player.pip = true;
+      } else if (player.pip) {
+        player.pip = false;
+      }
+    }, 300);
+    events.proxy(window, 'scroll', scrollDebounce);
+  }
+
   var Plugins =
   /*#__PURE__*/
   function () {
@@ -4232,16 +4247,24 @@
 
       this.art = art;
       this.id = 0;
+      var option = art.option;
 
-      if (art.option.subtitle.url) {
+      if (option.subtitle.url) {
         this.add(subtitle$2);
       }
 
-      if (!art.option.isLive) {
+      if (!option.isLive && option.miniProgressBar) {
         this.add(miniProgressBar);
       }
 
-      this.add(localPreview);
+      if (option.localPreview) {
+        this.add(localPreview);
+      }
+
+      if (option.pip && option.autoPip) {
+        this.add(autoPip);
+      }
+
       art.option.plugins.forEach(function (plugin) {
         _this.add(plugin);
       });
@@ -4333,7 +4356,7 @@
       classCallCheck(this, Artplayer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Artplayer).call(this));
-      _this.option = validator(mergeDeep(Artplayer.option, option), scheme);
+      _this.option = optionValidator(mergeDeep(Artplayer.option, option), scheme);
       _this.isFocus = false;
       _this.isDestroy = false;
       _this.whitelist = new Whitelist(assertThisInitialized(_this));
@@ -4411,12 +4434,12 @@
     }, {
       key: "validator",
       get: function get() {
-        return validator;
+        return optionValidator;
       }
     }, {
       key: "kindOf",
       get: function get() {
-        return validator.kindOf;
+        return optionValidator.kindOf;
       }
     }, {
       key: "option",
@@ -4443,6 +4466,9 @@
           mutex: true,
           fullscreen: false,
           fullscreenWeb: false,
+          miniProgressBar: true,
+          localPreview: true,
+          autoPip: true,
           layers: [],
           contextmenu: [],
           quality: [],

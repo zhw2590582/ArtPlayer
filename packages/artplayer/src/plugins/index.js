@@ -2,21 +2,31 @@ import { errorHandle, hasOwnProperty } from '../utils';
 import subtitle from './subtitle';
 import localPreview from './localPreview';
 import miniProgressBar from './miniProgressBar';
+import autoPip from './autoPip';
 
 export default class Plugins {
     constructor(art) {
         this.art = art;
         this.id = 0;
 
-        if (art.option.subtitle.url) {
+        const { option } = art;
+
+        if (option.subtitle.url) {
             this.add(subtitle);
         }
 
-        if (!art.option.isLive) {
+        if (!option.isLive && option.miniProgressBar) {
             this.add(miniProgressBar);
         }
 
-        this.add(localPreview);
+        if (option.localPreview) {
+            this.add(localPreview);
+        }
+
+        if (option.pip && option.autoPip) {
+            this.add(autoPip);
+        }
+
         art.option.plugins.forEach(plugin => {
             this.add(plugin);
         });

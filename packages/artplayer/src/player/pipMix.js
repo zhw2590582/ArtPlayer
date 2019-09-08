@@ -2,7 +2,6 @@ import { append, setStyle } from '../utils';
 
 function nativePip(art, player) {
     const {
-        notice,
         template: { $video },
         events: { proxy },
     } = art;
@@ -16,12 +15,10 @@ function nativePip(art, player) {
         set(value) {
             if (value) {
                 $video.requestPictureInPicture().catch(error => {
-                    notice.show(error, true, 3000);
                     throw error;
                 });
             } else {
                 document.exitPictureInPicture().catch(error => {
-                    notice.show(error, true, 3000);
                     throw error;
                 });
             }
