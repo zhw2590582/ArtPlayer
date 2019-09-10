@@ -16,15 +16,13 @@ export default function fullscreenMix(art, player) {
         notice.show(i18n.get('This does not seem to support full screen functionality'));
     };
 
-    try {
+    if (player.fullscreenIsEnabled) {
         screenfull.on('change', screenfullChange);
         screenfull.on('error', screenfullError);
         destroyEvents.push(() => {
             screenfull.off('change', screenfullChange);
             screenfull.off('error', screenfullError);
         });
-    } catch (error) {
-        screenfullError();
     }
 
     Object.defineProperty(player, 'fullscreen', {
@@ -32,10 +30,16 @@ export default function fullscreenMix(art, player) {
             return screenfull.isFullscreen;
         },
         set(value) {
+            if (!player.fullscreenIsEnabled) {
+                screenfullError();
+                return;
+            }
+
             if (value) {
                 if (player.fullscreenWeb) {
                     player.fullscreenWeb = false;
                 }
+
                 screenfull.request($player).then(() => {
                     $player.classList.add('artplayer-fullscreen');
                     player.aspectRatioReset = true;
@@ -45,6 +49,7 @@ export default function fullscreenMix(art, player) {
                 if (player.fullscreenWeb) {
                     player.fullscreenWeb = false;
                 }
+
                 screenfull.exit().then(() => {
                     $player.classList.remove('artplayer-fullscreen');
                     player.aspectRatioReset = true;
@@ -59,6 +64,12 @@ export default function fullscreenMix(art, player) {
             if (value) {
                 player.fullscreen = !player.fullscreen;
             }
+        },
+    });
+
+    Object.defineProperty(player, 'fullscreenIsEnabled', {
+        get() {
+            return screenfull.isEnabled;
         },
     });
 }
