@@ -4,6 +4,7 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     title: '【新海诚动画】『秒速5センチメートル』',
     autoSize: true,
+    localPreview: true,
     moreVideoAttr: {
         crossOrigin: 'anonymous',
     },
