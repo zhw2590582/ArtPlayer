@@ -606,6 +606,10 @@ var art = new Artplayer({
 
 Auto pip mode plugin, when the video is playing and not triggering in the window view
 
+In chrome, you must use gestures on the page to use this feature, otherwise you will get an error.
+
+More info: [picture-in-picture](https://developers.google.com/web/updates/2017/09/picture-in-picture)
+
 [Run Code](/)
 
 ```js
