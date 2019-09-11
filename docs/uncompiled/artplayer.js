@@ -4045,13 +4045,13 @@
         proxy($range, 'change', function () {
           var value = $range.value;
           $value.innerText = value;
-          art.plugins.subtitle.offset(Number(value));
+          art.plugins.subtitleOffset.offset(Number(value));
         });
         art.on('subtitle:switch', function () {
           $range.value = 0;
           $value.innerText = 0;
         });
-        art.on('artplayerPluginSubtitle:set', function (value) {
+        art.on('artplayerPluginSubtitleOffset', function (value) {
           if ($range.value !== value) {
             $range.value = value;
             $value.innerText = value;
@@ -4084,7 +4084,7 @@
       cuesCache = [];
     });
     return {
-      name: 'subtitle',
+      name: 'subtitleOffset',
       offset: function offset(value) {
         if (template.$track && template.$track.track) {
           var cues = Array.from(template.$track.track.cues);
@@ -4101,10 +4101,10 @@
             cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
           });
           notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
-          art.emit('artplayerPluginSubtitle:set', value);
+          art.emit('artplayerPluginSubtitleOffset', value);
         } else {
           notice.show("".concat(i18n.get('No subtitles found')));
-          art.emit('artplayerPluginSubtitle:set', 0);
+          art.emit('artplayerPluginSubtitleOffset', 0);
         }
       }
     };
@@ -4206,6 +4206,9 @@
         art.on('controls:show', function () {
           $progressBar.style.display = 'none';
         });
+        art.on('destroy', function () {
+          $progressBar.style.display = 'none';
+        });
         art.on('controls:hide', function () {
           $progressBar.style.display = 'block';
         });
@@ -4277,8 +4280,10 @@
 
       if (top + height <= 0 && !player.pip && player.playing) {
         player.pip = true;
+        art.emit('artplayerPluginAutoPip', true);
       } else if (player.pip) {
         player.pip = false;
+        art.emit('artplayerPluginAutoPip', false);
       }
     }, 300);
     events.proxy(window, 'scroll', scrollDebounce);

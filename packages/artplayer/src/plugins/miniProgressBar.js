@@ -21,6 +21,10 @@ export default function miniProgressBar(art) {
                 $progressBar.style.display = 'none';
             });
 
+            art.on('destroy', () => {
+                $progressBar.style.display = 'none';
+            });
+
             art.on('controls:hide', () => {
                 $progressBar.style.display = 'block';
             });

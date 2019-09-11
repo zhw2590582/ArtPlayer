@@ -22,7 +22,7 @@ function settingMix(art) {
             proxy($range, 'change', () => {
                 const { value } = $range;
                 $value.innerText = value;
-                art.plugins.subtitle.offset(Number(value));
+                art.plugins.subtitleOffset.offset(Number(value));
             });
 
             art.on('subtitle:switch', () => {
@@ -30,7 +30,7 @@ function settingMix(art) {
                 $value.innerText = 0;
             });
 
-            art.on('artplayerPluginSubtitle:set', value => {
+            art.on('artplayerPluginSubtitleOffset', value => {
                 if ($range.value !== value) {
                     $range.value = value;
                     $value.innerText = value;
@@ -62,7 +62,7 @@ export default function subtitleOffset(art) {
     });
 
     return {
-        name: 'subtitle',
+        name: 'subtitleOffset',
         offset(value) {
             if (template.$track && template.$track.track) {
                 const cues = Array.from(template.$track.track.cues);
@@ -78,10 +78,10 @@ export default function subtitleOffset(art) {
                     cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
                 });
                 notice.show(`${i18n.get('Subtitle offset time')}: ${value}s`);
-                art.emit('artplayerPluginSubtitle:set', value);
+                art.emit('artplayerPluginSubtitleOffset', value);
             } else {
                 notice.show(`${i18n.get('No subtitles found')}`);
-                art.emit('artplayerPluginSubtitle:set', 0);
+                art.emit('artplayerPluginSubtitleOffset', 0);
             }
         },
     };
