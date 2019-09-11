@@ -617,6 +617,34 @@ var art = new Artplayer({
 });
 ```
 
+## networkMonitor
+
+-   Type: `Boolean`
+-   Default: `false`
+
+A network monitor is used to monitor the blocking of the video.
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    networkMonitor: true,
+});
+
+// Is the ratio of the time the video is blocked to the time the video has been played.
+// For example, when the ratio is equal to 0.3, it means that every ten seconds, it is blocked for three seconds.
+let notice = false;
+art.on('networkMonitor', ratio => {
+    if (ratio >= 0.5 && !notice) {
+        notice = true;
+        console.log('Current network condition is not good');
+    }
+});
+```
+
 ## subtitle
 
 -   Type: `Object`

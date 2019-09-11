@@ -576,6 +576,7 @@
     miniProgressBar: 'boolean',
     localPreview: 'boolean',
     autoPip: 'boolean',
+    networkMonitor: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
     layers: [{
@@ -1854,6 +1855,11 @@
     Object.defineProperty(player, 'loaded', {
       get: function get() {
         return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+      }
+    });
+    Object.defineProperty(player, 'loadedTime', {
+      get: function get() {
+        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
       }
     });
   }
@@ -4213,6 +4219,53 @@
     };
   }
 
+  function networkMonitor(art) {
+    var waitTime = 0;
+    var playTime = 0;
+    var lastTime = 0;
+    var timer = null;
+
+    function resetTime() {
+      waitTime = 0;
+      playTime = 0;
+      lastTime = 0;
+      cancelAnimationFrame(timer);
+      timer = null;
+    }
+
+    function calculatingTime() {
+      if (timer) return;
+
+      (function loop() {
+        if (art.isDestroy) return;
+        timer = requestAnimationFrame(function () {
+          var nowTime = Date.now();
+
+          if (lastTime) {
+            var diffTime = nowTime - lastTime;
+            playTime += diffTime;
+
+            if (!art.player.playing) {
+              waitTime += diffTime;
+            }
+          }
+
+          lastTime = nowTime;
+          art.emit('networkMonitor', waitTime / playTime);
+          loop();
+        });
+      })();
+    }
+
+    art.on('play', calculatingTime);
+    art.on('pause', resetTime);
+    return {
+      name: 'networkMonitor',
+      reset: resetTime,
+      calculating: calculatingTime
+    };
+  }
+
   function autoPip(art) {
     var events = art.events,
         player = art.player,
@@ -4229,6 +4282,9 @@
       }
     }, 300);
     events.proxy(window, 'scroll', scrollDebounce);
+    return {
+      name: 'autoPip'
+    };
   }
 
   var Plugins =
@@ -4253,6 +4309,10 @@
 
       if (option.localPreview) {
         this.add(localPreview);
+      }
+
+      if (option.networkMonitor) {
+        this.add(networkMonitor);
       }
 
       if (option.autoPip) {
@@ -4464,6 +4524,7 @@
           miniProgressBar: false,
           localPreview: false,
           autoPip: false,
+          networkMonitor: false,
           layers: [],
           contextmenu: [],
           quality: [],

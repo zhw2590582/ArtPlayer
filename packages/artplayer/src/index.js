@@ -125,6 +125,7 @@ class Artplayer extends Emitter {
             miniProgressBar: false,
             localPreview: false,
             autoPip: false,
+            networkMonitor: false,
             layers: [],
             contextmenu: [],
             quality: [],

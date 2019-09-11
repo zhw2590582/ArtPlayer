@@ -11,4 +11,8 @@ export default function autoPip(art) {
         }
     }, 300);
     events.proxy(window, 'scroll', scrollDebounce);
+
+    return {
+        name: 'autoPip',
+    }
 }

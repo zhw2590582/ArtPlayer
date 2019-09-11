@@ -21,6 +21,7 @@ var art = new Artplayer({
     subtitleOffset: true,
     miniProgressBar: true,
     localPreview: true,
+    networkMonitor: false,
     autoPip: true,
     mutex: true,
     theme: '#ffad00',

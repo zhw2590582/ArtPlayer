@@ -34,6 +34,7 @@ export default {
     miniProgressBar: 'boolean',
     localPreview: 'boolean',
     autoPip: 'boolean',
+    networkMonitor: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
     layers: [

@@ -2,6 +2,7 @@ import { errorHandle, hasOwnProperty } from '../utils';
 import subtitleOffset from './subtitleOffset';
 import localPreview from './localPreview';
 import miniProgressBar from './miniProgressBar';
+import networkMonitor from './networkMonitor';
 import autoPip from './autoPip';
 
 export default class Plugins {
@@ -21,6 +22,10 @@ export default class Plugins {
 
         if (option.localPreview) {
             this.add(localPreview);
+        }
+
+        if (option.networkMonitor) {
+            this.add(networkMonitor);
         }
 
         if (option.autoPip) {
