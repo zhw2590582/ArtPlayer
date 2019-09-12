@@ -1,4 +1,4 @@
-import { setStyle, floatCeil } from '../utils';
+import { setStyle } from '../utils';
 
 export default function resizeMix(art, player) {
     const {
@@ -17,11 +17,11 @@ export default function resizeMix(art, player) {
                 const containerRatio = width / height;
                 $container.classList.add('artplayer-auto-size');
                 if (containerRatio > videoRatio) {
-                    const percentage = floatCeil(((height * videoRatio) / width) * 100, 1);
+                    const percentage = ((height * videoRatio) / width) * 100;
                     setStyle($player, 'width', `${percentage}%`);
                     setStyle($player, 'height', '100%');
                 } else {
-                    const percentage = floatCeil((width / videoRatio / height) * 100, 1);
+                    const percentage = (width / videoRatio / height) * 100;
                     setStyle($player, 'width', '100%');
                     setStyle($player, 'height', `${percentage}%`);
                 }

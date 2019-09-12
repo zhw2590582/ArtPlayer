@@ -341,10 +341,6 @@
   function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
   }
-  function floatCeil(num) {
-    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-    return Math.ceil(num * Math.pow(10, precision)) / Math.pow(10, precision);
-  }
   function getExt(url) {
     if (url.includes('?')) {
       return getExt(url.split('?')[0]);
@@ -529,7 +525,6 @@
     errorHandle: errorHandle,
     hasOwnProperty: hasOwnProperty,
     clamp: clamp,
-    floatCeil: floatCeil,
     getExt: getExt,
     secondToTime: secondToTime,
     sleep: sleep,
@@ -1909,11 +1904,11 @@
           $container.classList.add('artplayer-auto-size');
 
           if (containerRatio > videoRatio) {
-            var percentage = floatCeil(height * videoRatio / width * 100, 1);
+            var percentage = height * videoRatio / width * 100;
             setStyle($player, 'width', "".concat(percentage, "%"));
             setStyle($player, 'height', '100%');
           } else {
-            var _percentage = floatCeil(width / videoRatio / height * 100, 1);
+            var _percentage = width / videoRatio / height * 100;
 
             setStyle($player, 'width', '100%');
             setStyle($player, 'height', "".concat(_percentage, "%"));

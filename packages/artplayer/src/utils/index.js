@@ -15,10 +15,6 @@ export function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
 }
 
-export function floatCeil(num, precision = 2) {
-    return Math.ceil(num * 10 ** precision) / 10 ** precision;
-}
-
 export function getExt(url) {
     if (url.includes('?')) {
         return getExt(url.split('?')[0]);
