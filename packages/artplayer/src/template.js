@@ -41,11 +41,11 @@ export default class Template {
               <div class="artplayer-notice-inner"></div>
             </div>
             <div class="artplayer-setting">
-              <div class="artplayer-setting-inner">
+              <div class="artplayer-setting-inner artplayer-backdrop-filter">
                 <div class="artplayer-setting-body"></div>
               </div>
             </div>
-            <div class="artplayer-info">
+            <div class="artplayer-info artplayer-backdrop-filter">
               <div class="artplayer-info-panel"></div>
               <div class="artplayer-info-close">[x]</div>
             </div>
@@ -53,7 +53,7 @@ export default class Template {
               <div class="artplayer-pip-title"></div>
               <div class="artplayer-pip-close">×</div>
             </div>
-            <div class="artplayer-contextmenu"></div>
+            <div class="artplayer-contextmenu artplayer-backdrop-filter"></div>
           </div>
         `;
         this.$player = this.$container.querySelector('.artplayer-video-player');

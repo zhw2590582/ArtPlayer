@@ -45,4 +45,12 @@
         pointer-events: none;
         z-index: -1;
     }
+
+    @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
+        .artplayer-backdrop-filter {
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            background-color: rgba(0, 0, 0, 0.7) !important;
+        }
+    }
 }

@@ -16,7 +16,7 @@
             _art$template = art.template,
             $player = _art$template.$player,
             $video = _art$template.$video;
-        var $playlist = append($player, "\n            <div class=\"artplayer-playlist\">\n                <div class=\"artplayer-playlist-inner\"></div>\n            </div>\n        ");
+        var $playlist = append($player, "\n            <div class=\"artplayer-playlist\">\n                <div class=\"artplayer-playlist-inner artplayer-backdrop-filter\"></div>\n            </div>\n        ");
         errorHandle(Array.isArray(list), 'Playlist is not an array type');
         errorHandle(list.length > 0, 'Playlist cannot be empty');
         var playlist = list.map(function (item) {

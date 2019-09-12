@@ -15,7 +15,7 @@ function artplayerPluginPlaylist(list) {
             $player,
             `
             <div class="artplayer-playlist">
-                <div class="artplayer-playlist-inner"></div>
+                <div class="artplayer-playlist-inner artplayer-backdrop-filter"></div>
             </div>
         `,
         );
