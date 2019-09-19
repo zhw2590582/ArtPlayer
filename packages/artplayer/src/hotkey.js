@@ -15,19 +15,19 @@ export default class Hotkey {
                 });
 
                 this.add(37, () => {
-                    art.player.seek = art.player.currentTime - 10;
+                    art.player.seek = art.player.currentTime - 5;
                 });
 
                 this.add(38, () => {
-                    art.player.volume += 0.05;
+                    art.player.volume += 0.1;
                 });
 
                 this.add(39, () => {
-                    art.player.seek = art.player.currentTime + 10;
+                    art.player.seek = art.player.currentTime + 5;
                 });
 
                 this.add(40, () => {
-                    art.player.volume -= 0.05;
+                    art.player.volume -= 0.1;
                 });
 
                 this.init();

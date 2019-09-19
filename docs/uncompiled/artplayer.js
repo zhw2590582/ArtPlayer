@@ -3531,19 +3531,19 @@
           });
 
           _this.add(37, function () {
-            art.player.seek = art.player.currentTime - 10;
+            art.player.seek = art.player.currentTime - 5;
           });
 
           _this.add(38, function () {
-            art.player.volume += 0.05;
+            art.player.volume += 0.1;
           });
 
           _this.add(39, function () {
-            art.player.seek = art.player.currentTime + 10;
+            art.player.seek = art.player.currentTime + 5;
           });
 
           _this.add(40, function () {
-            art.player.volume -= 0.05;
+            art.player.volume -= 0.1;
           });
 
           _this.init();
