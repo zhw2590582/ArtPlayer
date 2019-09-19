@@ -10,7 +10,7 @@ export default function mousemoveInitInit(art, events) {
         $player.classList.add('artplayer-hide-cursor');
         $player.classList.remove('artplayer-hover');
         art.controls.show = false;
-    }, 5000);
+    }, 3000);
 
     art.on('hoverleave', () => {
         if (player.playing) {
