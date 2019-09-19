@@ -2,9 +2,10 @@ import { debounce } from '../utils';
 
 export default function autoPip(art) {
     const { events, player, template } = art;
+
     const scrollDebounce = debounce(() => {
         const { top, height } = template.$player.getBoundingClientRect();
-        if (top + height <= 0 && !player.pip && player.playing) {
+        if (top + height <= 0 && !player.pip) {
             player.pip = true;
             art.emit('artplayerPluginAutoPip', true);
         } else if (player.pip) {
@@ -12,6 +13,7 @@ export default function autoPip(art) {
             art.emit('artplayerPluginAutoPip', false);
         }
     }, 300);
+    
     events.proxy(window, 'scroll', scrollDebounce);
 
     return {

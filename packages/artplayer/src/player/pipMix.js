@@ -4,6 +4,7 @@ function nativePip(art, player) {
     const {
         template: { $video },
         events: { proxy },
+        notice,
     } = art;
 
     $video.disablePictureInPicture = false;
@@ -15,10 +16,12 @@ function nativePip(art, player) {
         set(value) {
             if (value) {
                 $video.requestPictureInPicture().catch(error => {
+                    notice.show(error);
                     throw error;
                 });
             } else {
                 document.exitPictureInPicture().catch(error => {
+                    notice.show(error);
                     throw error;
                 });
             }
@@ -75,6 +78,7 @@ function customPip(art, player) {
     let lastPageY = 0;
     let lastPlayerLeft = 0;
     let lastPlayerTop = 0;
+
     proxy($pipHeader, 'mousedown', event => {
         isDroging = true;
         lastPageX = event.pageX;
@@ -103,7 +107,8 @@ function customPip(art, player) {
     });
 
     append($pipTitle, option.title || i18n.get('Mini player'));
-    Object.defineProperty(player, 'pip', {
+
+    const property = {
         get() {
             return $player.classList.contains('artplayer-pip');
         },
@@ -133,14 +138,16 @@ function customPip(art, player) {
                 art.emit('pipExit');
             }
         },
-    });
+    };
+
+    Object.defineProperty(player, 'pip', property);
 }
 
 export default function pipMix(art, player) {
     const { $video } = art.template;
     if (document.pictureInPictureEnabled) {
         nativePip(art, player);
-    } else if ($video.webkitSupportsPresentationMode && typeof $video.webkitSetPresentationMode === 'function') {
+    } else if ($video.webkitSupportsPresentationMode) {
         webkitPip(art, player);
     } else {
         customPip(art, player);
