@@ -6,26 +6,30 @@
         right: 0;
         bottom: 0;
         height: 100px;
-        padding: 60px 10px 0;
+        padding: 55px 10px 0;
         opacity: 0;
         visibility: hidden;
-        transition: all .2s ease-in-out;
+        transition: all 0.2s ease-in-out;
         pointer-events: none;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;
-    
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==)
+            repeat-x bottom;
+
         .artplayer-progress {
             position: relative;
             pointer-events: auto;
             .art-control-progress {
                 position: relative;
-                height: 5px;
-                padding: 1px 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 4px;
                 cursor: pointer;
-    
+
                 .art-control-progress-inner {
                     position: relative;
-                    height: 100%;
-                    background: rgba(255,255,255,.2);
+                    height: 50%;
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.2);
                     .art-progress-loaded {
                         position: absolute;
                         z-index: 10;
@@ -35,9 +39,9 @@
                         bottom: 0;
                         height: 100%;
                         width: 0;
-                        background: rgba(255,255,255,.4);
+                        background: rgba(255, 255, 255, 0.4);
                     }
-        
+
                     .art-progress-played {
                         position: absolute;
                         z-index: 20;
@@ -48,7 +52,7 @@
                         height: 100%;
                         width: 0;
                     }
-    
+
                     .art-progress-highlight {
                         position: absolute;
                         z-index: 30;
@@ -56,20 +60,21 @@
                         top: 0;
                         right: 0;
                         bottom: 0;
-                        height: 0;
-    
+                        height: 100%;
+                        pointer-events: none;
+
                         span {
                             display: inline-block;
                             position: absolute;
                             left: 0;
                             top: 0;
                             width: 7px;
-                            height: 3px;
+                            height: 100%;
                             background: #fff;
-                            border-radius: 3px;
+                            pointer-events: auto;
                         }
                     }
-        
+
                     .art-progress-indicator {
                         display: none;
                         position: absolute;
@@ -79,12 +84,12 @@
                         width: 13px;
                         height: 13px;
                         border-radius: 50%;
-    
+
                         &.art-show-indicator {
                             display: block;
                         }
                     }
-        
+
                     .art-progress-tip {
                         display: none;
                         position: absolute;
@@ -97,44 +102,50 @@
                         color: #fff;
                         font-size: 12px;
                         text-align: center;
-                        background: rgba(0,0,0,.7);
+                        background: rgba(0, 0, 0, 0.7);
                         border-radius: 3px;
                         font-weight: bold;
                         white-space: nowrap;
                     }
                 }
-    
+
                 &:hover {
-                    .art-progress-indicator, .art-progress-tip {
-                        display: block;
+                    .art-control-progress-inner {
+                        height: 100%;
+                        .art-progress-indicator,
+                        .art-progress-tip {
+                            display: block;
+                        }
                     }
                 }
             }
-    
+
             .art-control-thumbnails {
                 display: none;
                 position: absolute;
                 bottom: 8px;
                 left: 0;
                 pointer-events: none;
-                background-color: rgba(0,0,0,.7);
+                background-color: rgba(0, 0, 0, 0.7);
             }
         }
-    
+
         .artplayer-controls {
             position: relative;
             pointer-events: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 36px;
-    
-            .artplayer-controls-left, .artplayer-controls-right {
+            height: 40px;
+            padding: 5px 0;
+
+            .artplayer-controls-left,
+            .artplayer-controls-right {
                 display: flex;
             }
 
             .art-control {
-                opacity: .9;
+                opacity: 0.9;
                 font-size: 12px;
                 height: 36px;
                 min-width: 36px;
@@ -153,7 +164,7 @@
                     opacity: 1;
                 }
             }
-    
+
             .art-control-onlyText {
                 padding: 0 10px;
             }
@@ -164,9 +175,9 @@
                     float: left;
                     width: 0;
                     height: 100%;
-                    transition: margin .2s cubic-bezier(0.4,0.0,1,1),width .2s cubic-bezier(0.4,0.0,1,1);
+                    transition: margin 0.2s cubic-bezier(0.4, 0, 1, 1), width 0.2s cubic-bezier(0.4, 0, 1, 1);
                     overflow: hidden;
-    
+
                     .art-volume-slider-handle {
                         position: absolute;
                         top: 50%;
@@ -176,25 +187,26 @@
                         border-radius: 12px;
                         margin-top: -6px;
                         background: #fff;
-    
+
                         &::before {
                             left: -54px;
                             background: #fff;
                         }
-    
+
                         &::after {
                             left: 6px;
-                            background: rgba(255,255,255,.2);
+                            background: rgba(255, 255, 255, 0.2);
                         }
-    
-                        &::before, &::after {
+
+                        &::before,
+                        &::after {
                             content: '';
                             position: absolute;
                             display: block;
                             top: 50%;
                             height: 3px;
                             margin-top: -2px;
-                            width: 60px
+                            width: 60px;
                         }
                     }
                 }
@@ -215,7 +227,7 @@
                     padding: 5px 0;
                     text-align: center;
                     color: #fff;
-                    background: rgba(0,0,0,.7);
+                    background: rgba(0, 0, 0, 0.8);
                     border-radius: 3px;
                     .art-quality-item {
                         height: 30px;
@@ -225,26 +237,29 @@
                         white-space: nowrap;
                         text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
                         &:hover {
-                            background-color: rgba(255,255,255,.1);
+                            background-color: rgba(255, 255, 255, 0.1);
                         }
                     }
                 }
-                &:hover .art-qualitys{
+                &:hover .art-qualitys {
                     display: block;
                 }
             }
         }
     }
-    
-    &.artplayer-controls-show, &.artplayer-hover {
+
+    &.artplayer-controls-show,
+    &.artplayer-hover {
         .artplayer-bottom {
             opacity: 1;
             visibility: visible;
         }
     }
-    
-    &.artplayer-error, &.artplayer-destroy {
-        .art-progress-indicator, .art-progress-tip {
+
+    &.artplayer-error,
+    &.artplayer-destroy {
+        .art-progress-indicator,
+        .art-progress-tip {
             display: none !important;
         }
     }

@@ -2899,7 +2899,7 @@
 
   function version(menuOption) {
     return _objectSpread$f({}, menuOption, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.14</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.15</a>'
     });
   }
 
@@ -3083,7 +3083,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.14</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.15</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -3352,7 +3352,7 @@
       $player.classList.add('artplayer-hide-cursor');
       $player.classList.remove('artplayer-hover');
       art.controls.show = false;
-    }, 5000);
+    }, 3000);
     art.on('hoverleave', function () {
       if (player.playing) {
         autoHide();
@@ -4199,7 +4199,7 @@
         left: 0,
         right: 0,
         bottom: 0,
-        height: '3px',
+        height: '2px',
         background: theme
       },
       mounted: function mounted($progressBar) {
@@ -4446,7 +4446,7 @@
       _this.id = id;
       Artplayer.instances.push(assertThisInitialized(_this)); // eslint-disable-next-line no-console
 
-      console.log('%c ArtPlayer %c 3.1.14 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+      console.log('%c ArtPlayer %c 3.1.15 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
       return _this;
     }
 
@@ -4463,7 +4463,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.14';
+        return '3.1.15';
       }
     }, {
       key: "env",
