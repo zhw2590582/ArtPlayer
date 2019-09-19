@@ -1708,7 +1708,8 @@
 
   function nativePip(art, player) {
     var $video = art.template.$video,
-        proxy = art.events.proxy;
+        proxy = art.events.proxy,
+        notice = art.notice;
     $video.disablePictureInPicture = false;
     Object.defineProperty(player, 'pip', {
       get: function get() {
@@ -1717,10 +1718,12 @@
       set: function set(value) {
         if (value) {
           $video.requestPictureInPicture().catch(function (error) {
+            notice.show(error);
             throw error;
           });
         } else {
           document.exitPictureInPicture().catch(function (error) {
+            notice.show(error);
             throw error;
           });
         }
@@ -1797,7 +1800,7 @@
       $player.classList.remove('is-dragging');
     });
     append($pipTitle, option.title || i18n.get('Mini player'));
-    Object.defineProperty(player, 'pip', {
+    var property = {
       get: function get() {
         return $player.classList.contains('artplayer-pip');
       },
@@ -1827,7 +1830,8 @@
           art.emit('pipExit');
         }
       }
-    });
+    };
+    Object.defineProperty(player, 'pip', property);
   }
 
   function pipMix(art, player) {
@@ -1835,7 +1839,7 @@
 
     if (document.pictureInPictureEnabled) {
       nativePip(art, player);
-    } else if ($video.webkitSupportsPresentationMode && typeof $video.webkitSetPresentationMode === 'function') {
+    } else if ($video.webkitSupportsPresentationMode) {
       webkitPip(art, player);
     } else {
       customPip(art, player);
@@ -4278,7 +4282,7 @@
           top = _template$$player$get.top,
           height = _template$$player$get.height;
 
-      if (top + height <= 0 && !player.pip && player.playing) {
+      if (top + height <= 0 && !player.pip) {
         player.pip = true;
         art.emit('artplayerPluginAutoPip', true);
       } else if (player.pip) {
