@@ -1,4 +1,5 @@
 export default function networkMonitor(art) {
+    let sampleTime = 10000;
     let waitTime = 0;
     let playTime = 0;
     let lastTime = 0;
@@ -12,7 +13,7 @@ export default function networkMonitor(art) {
         timer = null;
     }
 
-    function calculatingTime() {
+    function startTime() {
         if (timer) return;
         (function loop() {
             if (art.isDestroy) return;
@@ -27,17 +28,24 @@ export default function networkMonitor(art) {
                 }
                 lastTime = nowTime;
                 art.emit('networkMonitor', waitTime / playTime);
+                if (playTime >= sampleTime) {
+                    waitTime = 0;
+                    playTime = 0;
+                }
                 loop();
             });
         })();
     }
 
-    art.on('play', calculatingTime);
+    art.on('play', startTime);
     art.on('pause', resetTime);
 
     return {
         name: 'networkMonitor',
         reset: resetTime,
-        calculating: calculatingTime,
+        start: startTime,
+        sample: time => {
+            sampleTime = time;
+        },
     };
 }

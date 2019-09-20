@@ -4227,6 +4227,7 @@
   }
 
   function networkMonitor(art) {
+    var sampleTime = 10000;
     var waitTime = 0;
     var playTime = 0;
     var lastTime = 0;
@@ -4240,7 +4241,7 @@
       timer = null;
     }
 
-    function calculatingTime() {
+    function startTime() {
       if (timer) return;
 
       (function loop() {
@@ -4259,17 +4260,26 @@
 
           lastTime = nowTime;
           art.emit('networkMonitor', waitTime / playTime);
+
+          if (playTime >= sampleTime) {
+            waitTime = 0;
+            playTime = 0;
+          }
+
           loop();
         });
       })();
     }
 
-    art.on('play', calculatingTime);
+    art.on('play', startTime);
     art.on('pause', resetTime);
     return {
       name: 'networkMonitor',
       reset: resetTime,
-      calculating: calculatingTime
+      start: startTime,
+      sample: function sample(time) {
+        sampleTime = time;
+      }
     };
   }
 

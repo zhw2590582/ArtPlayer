@@ -639,7 +639,8 @@ var art = new Artplayer({
 });
 
 // Is the ratio of the time the video is blocked to the time the video has been played.
-// For example, when the ratio is equal to 0.3, it means that every ten seconds, it is blocked for three seconds.
+// For example, when the ratio is equal to 0.3, it means that every 10 seconds of sampling time, it is blocked for three seconds.
+
 let notice = false;
 art.on('networkMonitor', ratio => {
     if (ratio >= 0.5 && !notice) {
@@ -647,6 +648,9 @@ art.on('networkMonitor', ratio => {
         console.log('Current network condition is not good');
     }
 });
+
+// Modify sampling time, the unit is milliseconds, default 10 seconds.
+art.plugins.networkMonitor.sample(30000);
 ```
 
 ## subtitle
