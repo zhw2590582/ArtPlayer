@@ -14,7 +14,7 @@
 
 ## Features
 
--   Support `vtt` and `srt` subtitles
+-   Support `vtt`, `ass` and `srt` subtitles
 -   Support video quality switching
 -   Support for custom `control`, `layer`, `contextmenu`, `setting`
 -   Support `playback rate`, `aspect ratio`, `flip`, `window fullscreen` or `web fullscreen` adjustment

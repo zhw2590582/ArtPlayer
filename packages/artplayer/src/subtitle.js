@@ -1,4 +1,5 @@
-import { setStyles, srtToVtt, vttToBlob } from './utils';
+import { setStyles, srtToVtt, vttToBlob, getExt } from './utils';
+import assToVtt from './utils/assToVtt';
 
 export default class Subtitle {
     constructor(art) {
@@ -52,7 +53,7 @@ export default class Subtitle {
                     this.isInit = true;
                     proxy(track, 'cuechange', updateSubtitle.bind(this));
                 }
-                
+
                 this.art.on('artplayerPluginSubtitle:set', updateSubtitle.bind(this));
             }
         });
@@ -60,15 +61,18 @@ export default class Subtitle {
 
     load(url) {
         const { notice } = this.art;
-        let type;
         return fetch(url)
             .then(response => {
-                type = response.headers.get('Content-Type');
                 return response.text();
             })
             .then(text => {
-                if (/x-subrip/gi.test(type)) {
-                    return vttToBlob(srtToVtt(text));
+                const type = getExt(url);
+                const formatText = text.replace(/{[\s\S]*?}/g, '');
+                if (type === 'srt') {
+                    return vttToBlob(srtToVtt(formatText));
+                }
+                if (type === 'ass') {
+                    return vttToBlob(assToVtt(formatText));
                 }
                 return url;
             })

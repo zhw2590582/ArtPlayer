@@ -2903,7 +2903,7 @@
 
   function version(menuOption) {
     return _objectSpread$f({}, menuOption, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.15</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.16</a>'
     });
   }
 
@@ -3087,7 +3087,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.15</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.16</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -3209,6 +3209,52 @@
 
   var slicedToArray = _slicedToArray;
 
+  function assToVtt(ass) {
+    var reAss = new RegExp('Dialogue:\\s\\d,' + '(\\d+:\\d\\d:\\d\\d.\\d\\d),' + '(\\d+:\\d\\d:\\d\\d.\\d\\d),' + '([^,]*),' + '([^,]*),' + '(?:[^,]*,){4}' + '([\\s\\S]*)$', 'i');
+
+    function fixTime() {
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      return time.split(/[:.]/).map(function (item, index, arr) {
+        if (index === arr.length - 1) {
+          if (item.length === 1) {
+            return ".".concat(item, "00");
+          }
+
+          if (item.length === 2) {
+            return ".".concat(item, "0");
+          }
+        } else if (item.length === 1) {
+          return (index === 0 ? '0' : ':0') + item;
+        } // eslint-disable-next-line no-nested-ternary
+
+
+        return index === 0 ? item : index === arr.length - 1 ? ".".concat(item) : ":".concat(item);
+      }).join('');
+    }
+
+    return "WEBVTT\n\n".concat(ass.split(/\r?\n/).map(function (line) {
+      var m = line.match(reAss);
+      if (!m) return null;
+      return {
+        start: fixTime(m[1].trim()),
+        end: fixTime(m[2].trim()),
+        text: m[5].replace(/{[\s\S]*?}/g, '').replace(/(\\N)/g, '\n').trim().split(/\r?\n/).map(function (item) {
+          return item.trim();
+        }).join('\n')
+      };
+    }).filter(function (line) {
+      return line;
+    }).map(function (line, index) {
+      if (line) {
+        return "".concat(index + 1, "\n").concat(line.start, " --> ").concat(line.end, "\n").concat(line.text);
+      }
+
+      return '';
+    }).filter(function (line) {
+      return line.trim();
+    }).join('\n\n'));
+  }
+
   var Subtitle =
   /*#__PURE__*/
   function () {
@@ -3286,13 +3332,18 @@
       key: "load",
       value: function load(url) {
         var notice = this.art.notice;
-        var type;
         return fetch(url).then(function (response) {
-          type = response.headers.get('Content-Type');
           return response.text();
         }).then(function (text) {
-          if (/x-subrip/gi.test(type)) {
-            return vttToBlob(srtToVtt(text));
+          var type = getExt(url);
+          var formatText = text.replace(/{[\s\S]*?}/g, '');
+
+          if (type === 'srt') {
+            return vttToBlob(srtToVtt(formatText));
+          }
+
+          if (type === 'ass') {
+            return vttToBlob(assToVtt(formatText));
           }
 
           return url;
@@ -4463,7 +4514,7 @@
       _this.id = id;
       Artplayer.instances.push(assertThisInitialized(_this)); // eslint-disable-next-line no-console
 
-      console.log('%c ArtPlayer %c 3.1.15 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+      console.log('%c ArtPlayer %c 3.1.16 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
       return _this;
     }
 
@@ -4480,7 +4531,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.15';
+        return '3.1.16';
       }
     }, {
       key: "env",
