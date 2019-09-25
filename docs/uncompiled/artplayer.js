@@ -3217,6 +3217,7 @@
 
       this.art = art;
       this.state = true;
+      this.isInit = false;
       var url = this.art.option.subtitle.url;
 
       if (url) {
@@ -3247,6 +3248,7 @@
         }
 
         this.load(url).then(function (url) {
+          $subtitle.innerHTML = '';
           _this.art.template.$track.src = url;
 
           _this.art.emit('subtitle:load', url);
@@ -3260,9 +3262,7 @@
               $subtitle.innerHTML = '';
 
               if (cue) {
-                var template = document.createElement('div');
-                template.appendChild(cue.getCueAsHTML());
-                $subtitle.innerHTML = template.innerHTML.split(/\r?\n/).map(function (item) {
+                $subtitle.innerHTML = cue.text.split(/\r?\n/).map(function (item) {
                   return "<p>".concat(item, "</p>");
                 }).join('');
               }
@@ -3273,7 +3273,10 @@
             var _$video$textTracks = slicedToArray($video.textTracks, 1),
                 track = _$video$textTracks[0];
 
-            proxy(track, 'cuechange', updateSubtitle.bind(_this));
+            if (!_this.isInit) {
+              _this.isInit = true;
+              proxy(track, 'cuechange', updateSubtitle.bind(_this));
+            }
 
             _this.art.on('artplayerPluginSubtitle:set', updateSubtitle.bind(_this));
           }

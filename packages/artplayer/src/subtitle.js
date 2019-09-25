@@ -4,6 +4,7 @@ export default class Subtitle {
     constructor(art) {
         this.art = art;
         this.state = true;
+        this.isInit = false;
         const { url } = this.art.option.subtitle;
         if (url) {
             this.init(url);
@@ -28,6 +29,7 @@ export default class Subtitle {
         }
 
         this.load(url).then(url => {
+            $subtitle.innerHTML = '';
             this.art.template.$track.src = url;
             this.art.emit('subtitle:load', url);
 
@@ -38,9 +40,7 @@ export default class Subtitle {
                     const [cue] = track.activeCues;
                     $subtitle.innerHTML = '';
                     if (cue) {
-                        const template = document.createElement('div');
-                        template.appendChild(cue.getCueAsHTML());
-                        $subtitle.innerHTML = template.innerHTML
+                        $subtitle.innerHTML = cue.text
                             .split(/\r?\n/)
                             .map(item => `<p>${item}</p>`)
                             .join('');
@@ -48,7 +48,11 @@ export default class Subtitle {
                     this.art.emit('subtitle:update', $subtitle);
                 }
 
-                proxy(track, 'cuechange', updateSubtitle.bind(this));
+                if (!this.isInit) {
+                    this.isInit = true;
+                    proxy(track, 'cuechange', updateSubtitle.bind(this));
+                }
+                
                 this.art.on('artplayerPluginSubtitle:set', updateSubtitle.bind(this));
             }
         });
