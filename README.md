@@ -4,7 +4,7 @@
 ![version](https://badgen.net/npm/v/artplayer)
 ![license](https://badgen.net/npm/license/artplayer)
 ![size](https://badgen.net/bundlephobia/minzip/artplayer)
-[![npm Downloads](https://img.shields.io/npm/dt/artplayer.svg)](https://www.npmjs.com/package/artplayer)
+[![Financial Contributors on Open Collective](https://opencollective.com/ArtPlayer/all/badge.svg?label=financial+contributors)](https://opencollective.com/ArtPlayer) [![npm Downloads](https://img.shields.io/npm/dt/artplayer.svg)](https://www.npmjs.com/package/artplayer)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/354e9953b70a4791a5a46194d587c707)](https://www.codacy.com/app/zhw2590582/ArtPlayer?utm_source=github.com&utm_medium=referral&utm_content=zhw2590582/ArtPlayer&utm_campaign=Badge_Grade)
 [![dependencies Status](https://david-dm.org/zhw2590582/artplayer/status.svg)](https://david-dm.org/zhw2590582/artplayer)
 
@@ -124,6 +124,36 @@ We accept donations through these channels:
 ## QQ Group
 
 ![QQ Group](./images/qqgroup.png)
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/zhw2590582/ArtPlayer/graphs/contributors"><img src="https://opencollective.com/ArtPlayer/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/ArtPlayer/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/ArtPlayer"><img src="https://opencollective.com/ArtPlayer/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/ArtPlayer/contribute)]
+
+<a href="https://opencollective.com/ArtPlayer/organization/0/website"><img src="https://opencollective.com/ArtPlayer/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/1/website"><img src="https://opencollective.com/ArtPlayer/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/2/website"><img src="https://opencollective.com/ArtPlayer/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/3/website"><img src="https://opencollective.com/ArtPlayer/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/4/website"><img src="https://opencollective.com/ArtPlayer/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/5/website"><img src="https://opencollective.com/ArtPlayer/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/6/website"><img src="https://opencollective.com/ArtPlayer/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/7/website"><img src="https://opencollective.com/ArtPlayer/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/8/website"><img src="https://opencollective.com/ArtPlayer/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/ArtPlayer/organization/9/website"><img src="https://opencollective.com/ArtPlayer/organization/9/avatar.svg"></a>
 
 ## License
 
