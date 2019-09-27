@@ -1,9 +1,9 @@
 export default function switchMix(art, player) {
-    const { i18n, notice, option } = art;
+    const { i18n, notice, option, template } = art;
 
     Object.defineProperty(player, 'switchQuality', {
         value: (url, name = 'unknown') => {
-            if (url !== option.url) {
+            if (url !== template.$video.src) {
                 const { currentTime, playing } = player;
                 return player.attachUrl(url).then(() => {
                     option.url = url;
@@ -25,7 +25,7 @@ export default function switchMix(art, player) {
 
     Object.defineProperty(player, 'switchUrl', {
         value: (url, name = 'unknown') => {
-            if (url !== option.url) {
+            if (url !== template.$video.src) {
                 const { playing } = player;
                 return player.attachUrl(url).then(() => {
                     option.url = url;
