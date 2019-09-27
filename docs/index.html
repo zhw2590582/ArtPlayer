@@ -29,25 +29,31 @@
                             <ul>
                                 <li class="title">Plugins</li>
                                 <li>
-                                    <a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif">artplayer-plugin-gif</a>
+                                    <a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif">artplayer-plugin-gif</a>
                                 </li>
                                 <li>
-                                    <a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight">artplayer-plugin-backlight</a>
+                                    <a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight">artplayer-plugin-backlight</a>
                                 </li>
                                 <li>
-                                    <a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku">artplayer-plugin-danmuku</a>
+                                    <a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku">artplayer-plugin-danmuku</a>
                                 </li>
                                 <li>
-                                    <a href="./?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist">artplayer-plugin-playlist</a>
+                                    <a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist">artplayer-plugin-playlist</a>
                                 </li>
                             </ul>
                             <ul>
                                 <li class="title">Tools</li>
                                 <li>
-                                    <a href="./?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail">artplayer-tool-thumbnail</a>
+                                    <a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail">artplayer-tool-thumbnail</a>
                                 </li>
                                 <li>
-                                    <a href="./?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github">artplayer-tool-github</a>
+                                    <a
+                                        href="./?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github">artplayer-tool-github</a>
                                 </li>
                             </ul>
                             <ul>
@@ -67,10 +73,12 @@
                                     <a href="https://www.paypal.me/harveyzack">Paypal</a>
                                 </li>
                                 <li>
-                                    <a href="https://github.com/zhw2590582/ArtPlayer/blob/master/images/wechatpay.jpg">WeChat Pay</a>
+                                    <a href="https://github.com/zhw2590582/ArtPlayer/blob/master/images/wechatpay.jpg">WeChat
+                                        Pay</a>
                                 </li>
                                 <li>
-                                    <a href="https://github.com/zhw2590582/ArtPlayer/blob/master/images/alipay.jpg">Alipay</a>
+                                    <a
+                                        href="https://github.com/zhw2590582/ArtPlayer/blob/master/images/alipay.jpg">Alipay</a>
                                 </li>
                             </ul>
                         </div>
@@ -103,16 +111,22 @@
     <script src="./uncompiled/artplayer.js"></script>
     <script src="./assets/js/common.js"></script>
     <script>
+        var isLocalhost = Boolean(
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '[::1]' ||
+            window.location.hostname.match(
+                /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+            )
+        );
         var _hmt = _hmt || [];
         (function () {
-            if (window.location.hostname !== 'localhost') {
+            if (!isLocalhost) {
                 var hm = document.createElement('script');
                 hm.src = 'https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d';
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(hm, s);
             }
         })();
-
     </script>
 </body>
 
