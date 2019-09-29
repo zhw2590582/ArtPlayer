@@ -1213,12 +1213,13 @@
   function switchMix(art, player) {
     var i18n = art.i18n,
         notice = art.notice,
-        option = art.option;
+        option = art.option,
+        template = art.template;
     Object.defineProperty(player, 'switchQuality', {
       value: function value(url) {
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
-        if (url !== option.url) {
+        if (url !== template.$video.src) {
           var currentTime = player.currentTime,
               playing = player.playing;
           return player.attachUrl(url).then(function () {
@@ -1245,13 +1246,15 @@
       value: function value(url) {
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
-        if (url !== option.url) {
+        if (url !== template.$video.src) {
           var playing = player.playing;
           return player.attachUrl(url).then(function () {
             option.url = url;
             player.playbackRate = false;
             player.aspectRatio = false;
-            player.currentTime = 0;
+            art.once('video:canplay', function () {
+              player.currentTime = 0;
+            });
 
             if (playing) {
               player.play = true;
@@ -3265,6 +3268,7 @@
       this.state = true;
       this.isInit = false;
       var url = this.art.option.subtitle.url;
+      this.switch = this.init.bind(this);
 
       if (url) {
         this.init(url);
@@ -3295,6 +3299,9 @@
 
         this.load(url).then(function (url) {
           $subtitle.innerHTML = '';
+          var lastUrl = _this.art.template.$track.src;
+          if (lastUrl === url) return;
+          URL.revokeObjectURL(lastUrl);
           _this.art.template.$track.src = url;
 
           _this.art.emit('subtitle:load', url);

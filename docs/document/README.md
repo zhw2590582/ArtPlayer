@@ -1244,10 +1244,11 @@ art.contextmenu.yourContextmenu.show = false;
 
 -   Type: `Object`
 
-| propertie | type       | Description   |
-| --------- | ---------- | ------------- |
-| `init`    | `Function` | Init subtitle |
-| `show`    | `setter`   | Show or hide  |
+| propertie | type       | Description     |
+| --------- | ---------- | --------------- |
+| `init`    | `Function` | Init subtitle   |
+| `switch`  | `Function` | Switch subtitle |
+| `show`    | `setter`   | Show or hide    |
 
 [Run Code](/)
 

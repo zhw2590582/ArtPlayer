@@ -7,6 +7,7 @@ export default class Subtitle {
         this.state = true;
         this.isInit = false;
         const { url } = this.art.option.subtitle;
+        this.switch = this.init.bind(this);
         if (url) {
             this.init(url);
         }
@@ -31,6 +32,9 @@ export default class Subtitle {
 
         this.load(url).then(url => {
             $subtitle.innerHTML = '';
+            const lastUrl = this.art.template.$track.src;
+            if (lastUrl === url) return;
+            URL.revokeObjectURL(lastUrl);
             this.art.template.$track.src = url;
             this.art.emit('subtitle:load', url);
 
