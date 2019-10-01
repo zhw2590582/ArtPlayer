@@ -3299,63 +3299,77 @@
     }
 
     createClass(Subtitle, [{
+      key: "switch",
+      value: function _switch(url) {
+        var _this$art = this.art,
+            i18n = _this$art.i18n,
+            notice = _this$art.notice;
+        return this.init(url).then(function (blobUrl) {
+          notice.show(i18n.get('Switch subtitle'));
+          return blobUrl;
+        });
+      }
+    }, {
       key: "init",
       value: function init(url) {
         var _this = this;
 
-        var _this$art = this.art,
-            proxy = _this$art.events.proxy,
-            subtitle = _this$art.option.subtitle,
-            _this$art$template = _this$art.template,
-            $video = _this$art$template.$video,
-            $subtitle = _this$art$template.$subtitle,
-            $track = _this$art$template.$track;
-        setStyles($subtitle, subtitle.style || {});
+        return new Promise(function (resolve) {
+          var _this$art2 = _this.art,
+              proxy = _this$art2.events.proxy,
+              subtitle = _this$art2.option.subtitle,
+              _this$art2$template = _this$art2.template,
+              $video = _this$art2$template.$video,
+              $subtitle = _this$art2$template.$subtitle,
+              $track = _this$art2$template.$track;
+          setStyles($subtitle, subtitle.style || {});
 
-        if (!$track) {
-          var $newTrack = document.createElement('track');
-          $newTrack.default = true;
-          $newTrack.kind = 'metadata';
-          $video.appendChild($newTrack);
-          this.art.template.$track = $newTrack;
-        }
+          if (!$track) {
+            var $newTrack = document.createElement('track');
+            $newTrack.default = true;
+            $newTrack.kind = 'metadata';
+            $video.appendChild($newTrack);
+            _this.art.template.$track = $newTrack;
+          }
 
-        this.load(url).then(function (url) {
-          $subtitle.innerHTML = '';
-          var lastUrl = _this.art.template.$track.src;
-          if (lastUrl === url) return;
-          URL.revokeObjectURL(lastUrl);
-          _this.art.template.$track.src = url;
+          _this.load(url).then(function (blobUrl) {
+            $subtitle.innerHTML = '';
+            var $track = _this.art.template.$track;
+            var lastUrl = $track.src;
+            if (lastUrl === blobUrl) return;
+            URL.revokeObjectURL(lastUrl);
+            $track.src = blobUrl;
 
-          _this.art.emit('subtitle:load', url);
+            if ($video.textTracks && $video.textTracks[0]) {
+              // eslint-disable-next-line no-inner-declarations
+              var updateSubtitle = function updateSubtitle() {
+                var _track$activeCues = slicedToArray(track.activeCues, 1),
+                    cue = _track$activeCues[0];
 
-          if ($video.textTracks && $video.textTracks[0]) {
-            // eslint-disable-next-line no-inner-declarations
-            var updateSubtitle = function updateSubtitle() {
-              var _track$activeCues = slicedToArray(track.activeCues, 1),
-                  cue = _track$activeCues[0];
+                $subtitle.innerHTML = '';
 
-              $subtitle.innerHTML = '';
+                if (cue) {
+                  $subtitle.innerHTML = cue.text.split(/\r?\n/).map(function (item) {
+                    return "<p>".concat(item, "</p>");
+                  }).join('');
+                }
 
-              if (cue) {
-                $subtitle.innerHTML = cue.text.split(/\r?\n/).map(function (item) {
-                  return "<p>".concat(item, "</p>");
-                }).join('');
+                this.art.emit('subtitle:update', $subtitle);
+              };
+
+              var _$video$textTracks = slicedToArray($video.textTracks, 1),
+                  track = _$video$textTracks[0];
+
+              if (!_this.isInit) {
+                _this.isInit = true;
+                proxy(track, 'cuechange', updateSubtitle.bind(_this));
               }
 
-              this.art.emit('subtitle:update', $subtitle);
-            };
-
-            var _$video$textTracks = slicedToArray($video.textTracks, 1),
-                track = _$video$textTracks[0];
-
-            if (!_this.isInit) {
-              _this.isInit = true;
-              proxy(track, 'cuechange', updateSubtitle.bind(_this));
+              _this.art.on('artplayerPluginSubtitleOffset', updateSubtitle.bind(_this));
             }
 
-            _this.art.on('artplayerPluginSubtitle:set', updateSubtitle.bind(_this));
-          }
+            resolve(blobUrl);
+          });
         });
       }
     }, {
@@ -3366,6 +3380,7 @@
           return response.text();
         }).then(function (text) {
           var type = getExt(url);
+          errorHandle(['srt', 'ass', 'vtt'].includes(type), "Unsupported subtitle format: ".concat(type));
           var formatText = text.replace(/{[\s\S]*?}/g, '');
 
           if (type === 'srt') {
@@ -3376,7 +3391,7 @@
             return vttToBlob(assToVtt(formatText));
           }
 
-          return url;
+          return vttToBlob(formatText);
         }).catch(function (err) {
           notice.show(err);
           throw err;
@@ -3397,9 +3412,6 @@
         }
 
         return '';
-      },
-      set: function set(url) {
-        this.init(url);
       }
     }, {
       key: "show",

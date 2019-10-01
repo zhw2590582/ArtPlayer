@@ -1,4 +1,4 @@
-import { setStyles, srtToVtt, vttToBlob, getExt } from './utils';
+import { setStyles, srtToVtt, vttToBlob, getExt, errorHandle } from './utils';
 import assToVtt from './utils/assToVtt';
 
 export default class Subtitle {
@@ -20,57 +20,65 @@ export default class Subtitle {
         return '';
     }
 
-    set url(url) {
-        this.init(url);
+    switch(url) {
+        const { i18n, notice } = this.art;
+        return this.init(url).then(blobUrl => {
+            notice.show(i18n.get('Switch subtitle'));
+            return blobUrl;
+        });
     }
 
     init(url) {
-        const {
-            events: { proxy },
-            option: { subtitle },
-            template: { $video, $subtitle, $track },
-        } = this.art;
+        return new Promise(resolve => {
+            const {
+                events: { proxy },
+                option: { subtitle },
+                template: { $video, $subtitle, $track },
+            } = this.art;
 
-        setStyles($subtitle, subtitle.style || {});
+            setStyles($subtitle, subtitle.style || {});
 
-        if (!$track) {
-            const $newTrack = document.createElement('track');
-            $newTrack.default = true;
-            $newTrack.kind = 'metadata';
-            $video.appendChild($newTrack);
-            this.art.template.$track = $newTrack;
-        }
-
-        this.load(url).then(url => {
-            $subtitle.innerHTML = '';
-            const lastUrl = this.art.template.$track.src;
-            if (lastUrl === url) return;
-            URL.revokeObjectURL(lastUrl);
-            this.art.template.$track.src = url;
-            this.art.emit('subtitle:load', url);
-
-            if ($video.textTracks && $video.textTracks[0]) {
-                const [track] = $video.textTracks;
-                // eslint-disable-next-line no-inner-declarations
-                function updateSubtitle() {
-                    const [cue] = track.activeCues;
-                    $subtitle.innerHTML = '';
-                    if (cue) {
-                        $subtitle.innerHTML = cue.text
-                            .split(/\r?\n/)
-                            .map(item => `<p>${item}</p>`)
-                            .join('');
-                    }
-                    this.art.emit('subtitle:update', $subtitle);
-                }
-
-                if (!this.isInit) {
-                    this.isInit = true;
-                    proxy(track, 'cuechange', updateSubtitle.bind(this));
-                }
-
-                this.art.on('artplayerPluginSubtitle:set', updateSubtitle.bind(this));
+            if (!$track) {
+                const $newTrack = document.createElement('track');
+                $newTrack.default = true;
+                $newTrack.kind = 'metadata';
+                $video.appendChild($newTrack);
+                this.art.template.$track = $newTrack;
             }
+
+            this.load(url).then(blobUrl => {
+                $subtitle.innerHTML = '';
+                const { $track } = this.art.template;
+                const lastUrl = $track.src;
+                if (lastUrl === blobUrl) return;
+                URL.revokeObjectURL(lastUrl);
+                $track.src = blobUrl;
+
+                if ($video.textTracks && $video.textTracks[0]) {
+                    const [track] = $video.textTracks;
+                    // eslint-disable-next-line no-inner-declarations
+                    function updateSubtitle() {
+                        const [cue] = track.activeCues;
+                        $subtitle.innerHTML = '';
+                        if (cue) {
+                            $subtitle.innerHTML = cue.text
+                                .split(/\r?\n/)
+                                .map(item => `<p>${item}</p>`)
+                                .join('');
+                        }
+                        this.art.emit('subtitle:update', $subtitle);
+                    }
+
+                    if (!this.isInit) {
+                        this.isInit = true;
+                        proxy(track, 'cuechange', updateSubtitle.bind(this));
+                    }
+
+                    this.art.on('artplayerPluginSubtitleOffset', updateSubtitle.bind(this));
+                }
+
+                resolve(blobUrl);
+            });
         });
     }
 
@@ -82,14 +90,18 @@ export default class Subtitle {
             })
             .then(text => {
                 const type = getExt(url);
+                errorHandle(['srt', 'ass', 'vtt'].includes(type), `Unsupported subtitle format: ${type}`);
                 const formatText = text.replace(/{[\s\S]*?}/g, '');
+
                 if (type === 'srt') {
                     return vttToBlob(srtToVtt(formatText));
                 }
+
                 if (type === 'ass') {
                     return vttToBlob(assToVtt(formatText));
                 }
-                return url;
+
+                return vttToBlob(formatText);
             })
             .catch(err => {
                 notice.show(err);

@@ -1244,11 +1244,12 @@ art.contextmenu.yourContextmenu.show = false;
 
 -   Type: `Object`
 
-| propertie | type       | Description     |
-| --------- | ---------- | --------------- |
-| `init`    | `Function` | Init subtitle   |
-| `show`    | `setter`   | Show or hide    |
-| `url`     | `setter`   | Switch subtitle |
+| propertie | type       | Description      |
+| --------- | ---------- | ---------------- |
+| `init`    | `Function` | Init subtitle    |
+| `show`    | `setter`   | Show or hide     |
+| `switch`  | `Function` | Switch subtitle  |
+| `url`     | `getter`   | get subtitle url |
 
 [Run Code](/)
 
@@ -1267,7 +1268,7 @@ var art = new Artplayer({
                 index: 10,
                 html: 'subtitle1',
                 click: function() {
-                    art.subtitle.url = url + '/subtitle/one-more-time-one-more-chance.srt';
+                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.srt');
                 },
             };
         },
@@ -1277,7 +1278,7 @@ var art = new Artplayer({
                 index: 20,
                 html: 'subtitle2',
                 click: function() {
-                    art.subtitle.url = url + '/subtitle/one-more-time-one-more-chance.vtt';
+                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt');
                 },
             };
         },
