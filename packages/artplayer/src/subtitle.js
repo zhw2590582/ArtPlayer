@@ -7,10 +7,21 @@ export default class Subtitle {
         this.state = true;
         this.isInit = false;
         const { url } = this.art.option.subtitle;
-        this.switch = this.init.bind(this);
         if (url) {
             this.init(url);
         }
+    }
+
+    get url() {
+        const { $track } = this.art.template;
+        if ($track) {
+            return $track.src;
+        }
+        return '';
+    }
+
+    set url(url) {
+        this.init(url);
     }
 
     init(url) {

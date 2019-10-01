@@ -1247,8 +1247,8 @@ art.contextmenu.yourContextmenu.show = false;
 | propertie | type       | Description     |
 | --------- | ---------- | --------------- |
 | `init`    | `Function` | Init subtitle   |
-| `switch`  | `Function` | Switch subtitle |
 | `show`    | `setter`   | Show or hide    |
+| `url`     | `setter`   | Switch subtitle |
 
 [Run Code](/)
 
@@ -1260,10 +1260,28 @@ var art = new Artplayer({
     subtitle: {
         url: url + '/subtitle/one-more-time-one-more-chance.srt',
     },
-});
-
-art.once('video:canplay', () => {
-    art.subtitle.init(url + '/subtitle/one-more-time-one-more-chance.vtt');
+    controls: [
+        function subtitle1(art) {
+            return {
+                position: 'right',
+                index: 10,
+                html: 'subtitle1',
+                click: function() {
+                    art.subtitle.url = url + '/subtitle/one-more-time-one-more-chance.srt';
+                },
+            };
+        },
+        function subtitle2(art) {
+            return {
+                position: 'right',
+                index: 20,
+                html: 'subtitle2',
+                click: function() {
+                    art.subtitle.url = url + '/subtitle/one-more-time-one-more-chance.vtt';
+                },
+            };
+        },
+    ],
 });
 ```
 

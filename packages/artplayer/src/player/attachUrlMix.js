@@ -6,6 +6,15 @@ export default function attachUrlMix(art, player) {
         template: { $video },
     } = art;
 
+    Object.defineProperty(player, 'url', {
+        get() {
+            return $video.src;
+        },
+        set() {
+            errorHandle(false, 'You should use this method: art.attachUrl()');
+        },
+    });
+
     Object.defineProperty(player, 'attachUrl', {
         value: url =>
             sleep().then(() => {
