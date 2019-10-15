@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "dependencies": {
-    "tiny-emitter": "^2.0.2"
+    "tiny-emitter": "^2.1.0"
   }
 }
