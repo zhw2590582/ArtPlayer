@@ -715,11 +715,10 @@
         errorHandle(this.$container, "No container element found by ".concat(art.option.container));
       }
 
-      if (art.constructor.instances.some(function (art) {
-        return art.template.$container === _this.$container;
-      })) {
-        errorHandle(false, 'Cannot mount multiple instances on the same dom element');
-      }
+      errorHandle(art.constructor.instances.every(function (art) {
+        return art.template.$container !== _this.$container;
+      }), 'Cannot mount multiple instances on the same dom element');
+      errorHandle(this.$container.clientWidth && this.$container.clientHeight, 'The width and height of the container cannot be 0');
 
       if (art.whitelist.state) {
         this.initDesktop();

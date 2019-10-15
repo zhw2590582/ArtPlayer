@@ -10,9 +10,15 @@ export default class Template {
             errorHandle(this.$container, `No container element found by ${art.option.container}`);
         }
 
-        if (art.constructor.instances.some(art => art.template.$container === this.$container)) {
-            errorHandle(false, 'Cannot mount multiple instances on the same dom element');
-        }
+        errorHandle(
+            art.constructor.instances.every(art => art.template.$container !== this.$container),
+            'Cannot mount multiple instances on the same dom element',
+        );
+
+        errorHandle(
+            this.$container.clientWidth && this.$container.clientHeight,
+            'The width and height of the container cannot be 0',
+        );
 
         if (art.whitelist.state) {
             this.initDesktop();
