@@ -118,7 +118,7 @@
   var inherits = _inherits;
 
   var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);"object"===r&&"object"===t&&Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});"array"===r&&"array"===t&&a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw"string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
+  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);if("object"===r){if("object"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'object' type, but got '").concat(t,"'"));Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});}if("array"===r){if("array"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'array' type, but got '").concat(t,"'"));a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw"string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
   });
 
   var Emitter =
@@ -715,11 +715,10 @@
         errorHandle(this.$container, "No container element found by ".concat(art.option.container));
       }
 
-      if (art.constructor.instances.some(function (art) {
-        return art.template.$container === _this.$container;
-      })) {
-        errorHandle(false, 'Cannot mount multiple instances on the same dom element');
-      }
+      errorHandle(art.constructor.instances.every(function (art) {
+        return art.template.$container !== _this.$container;
+      }), 'Cannot mount multiple instances on the same dom element');
+      errorHandle(this.$container.clientWidth && this.$container.clientHeight, 'The width and height of the container cannot be 0');
 
       if (art.whitelist.state) {
         this.initDesktop();
@@ -1012,6 +1011,9 @@
       art.controls.show = true;
       art.mask.show = true;
       art.loading.show = false;
+    });
+    art.once('video:canplay', function () {
+      art.emit('ready');
     }); // art.on('video:canplaythrough', () => {
     // });
     // art.on('video:durationchange', () => {
@@ -1436,14 +1438,13 @@
   var screenfull = createCommonjsModule(function (module) {
   /*!
   * screenfull
-  * v4.2.1 - 2019-07-27
+  * v5.0.0 - 2019-09-09
   * (c) Sindre Sorhus; MIT License
   */
   (function () {
 
   	var document = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {};
   	var isCommonjs =  module.exports;
-  	var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
 
   	var fn = (function () {
   		var val;
@@ -1467,7 +1468,7 @@
   				'webkitfullscreenerror'
 
   			],
-  			// Old WebKit (Safari 5.1)
+  			// Old WebKit
   			[
   				'webkitRequestFullScreen',
   				'webkitCancelFullScreen',
@@ -1518,10 +1519,8 @@
   	};
 
   	var screenfull = {
-  		request: function (elem) {
+  		request: function (element) {
   			return new Promise(function (resolve, reject) {
-  				var request = fn.requestFullscreen;
-
   				var onFullScreenEntered = function () {
   					this.off('change', onFullScreenEntered);
   					resolve();
@@ -1529,25 +1528,13 @@
 
   				this.on('change', onFullScreenEntered);
 
-  				elem = elem || document.documentElement;
+  				element = element || document.documentElement;
 
-  				var promise;
-
-  				// Work around Safari 5.1 bug: reports support for
-  				// keyboard in fullscreen even though it doesn't.
-  				// Browser sniffing, since the alternative with
-  				// setTimeout is even worse.
-  				if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
-  					promise = elem[request]();
-  				} else {
-  					promise = elem[request](keyboardAllowed ? Element.ALLOW_KEYBOARD_INPUT : {});
-  				}
-
-  				Promise.resolve(promise).catch(reject);
+  				Promise.resolve(element[fn.requestFullscreen]()).catch(reject);
   			}.bind(this));
   		},
   		exit: function () {
-  			return new Promise(function (resolve) {
+  			return new Promise(function (resolve, reject) {
   				if (!this.isFullscreen) {
   					resolve();
   					return;
@@ -1558,13 +1545,13 @@
   					resolve();
   				}.bind(this);
 
-  				document[fn.exitFullscreen]();
-
   				this.on('change', onFullScreenExit);
+
+  				Promise.resolve(document[fn.exitFullscreen]()).catch(reject);
   			}.bind(this));
   		},
-  		toggle: function (elem) {
-  			return this.isFullscreen ? this.exit() : this.request(elem);
+  		toggle: function (element) {
+  			return this.isFullscreen ? this.exit() : this.request(element);
   		},
   		onchange: function (callback) {
   			this.on('change', callback);
@@ -1589,9 +1576,9 @@
 
   	if (!fn) {
   		if (isCommonjs) {
-  			module.exports = false;
+  			module.exports = {isEnabled: false};
   		} else {
-  			window.screenfull = false;
+  			window.screenfull = {isEnabled: false};
   		}
 
   		return;
@@ -1609,7 +1596,7 @@
   				return document[fn.fullscreenElement];
   			}
   		},
-  		enabled: {
+  		isEnabled: {
   			enumerable: true,
   			get: function () {
   				// Coerce to boolean in case of old WebKit
@@ -1620,13 +1607,12 @@
 
   	if (isCommonjs) {
   		module.exports = screenfull;
-  		// TODO: remove this in the next major version
-  		module.exports.default = screenfull;
   	} else {
   		window.screenfull = screenfull;
   	}
   })();
   });
+  var screenfull_1 = screenfull.isEnabled;
 
   function fullscreenMix(art, player) {
     var i18n = art.i18n,
@@ -2696,7 +2682,7 @@
 
       this.id = 0;
       this.art = art;
-      this.art.once('video:canplay', function () {
+      this.art.on('ready', function () {
         _this.init();
       });
     }
@@ -2959,7 +2945,7 @@
 
       this.id = 0;
       this.art = art;
-      this.art.once('video:canplay', function () {
+      this.art.on('ready', function () {
         _this.init();
       });
       this.art.on('blur', function () {
@@ -3629,7 +3615,7 @@
       this.keys = {};
 
       if (this.art.option.hotkey) {
-        this.art.once('video:canplay', function () {
+        this.art.on('ready', function () {
           _this.add(27, function () {
             if (art.player.fullscreenWeb) {
               art.player.fullscreenWeb = false;
@@ -3712,7 +3698,7 @@
       this.id = 0;
       this.art = art;
       this.add = this.add.bind(this);
-      this.art.once('video:canplay', function () {
+      this.art.on('ready', function () {
         _this.art.option.layers.forEach(function (item) {
           _this.add(item);
         });
@@ -4027,7 +4013,7 @@
       this.state = false;
 
       if (art.option.setting) {
-        this.art.once('video:canplay', function () {
+        this.art.on('ready', function () {
           _this.init();
         });
         this.art.on('blur', function () {

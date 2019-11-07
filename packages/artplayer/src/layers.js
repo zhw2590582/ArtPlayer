@@ -5,7 +5,7 @@ export default class Layers {
         this.id = 0;
         this.art = art;
         this.add = this.add.bind(this);
-        this.art.once('video:canplay', () => {
+        this.art.on('ready', () => {
             this.art.option.layers.forEach(item => {
                 this.add(item);
             });

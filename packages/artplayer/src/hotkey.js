@@ -3,7 +3,7 @@ export default class Hotkey {
         this.art = art;
         this.keys = {};
         if (this.art.option.hotkey) {
-            this.art.once('video:canplay', () => {
+            this.art.on('ready', () => {
                 this.add(27, () => {
                     if (art.player.fullscreenWeb) {
                         art.player.fullscreenWeb = false;

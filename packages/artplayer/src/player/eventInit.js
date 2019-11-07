@@ -9,10 +9,10 @@ export default function eventInit(art, player) {
         i18n,
         notice,
     } = art;
-    
+
     let reconnectTime = 0;
     const maxReconnectTime = 5;
-    
+
     proxy($video, 'click', () => {
         player.toggle = true;
     });
@@ -24,7 +24,7 @@ export default function eventInit(art, player) {
     });
 
     // art.on('video:abort', () => {
-        
+
     // });
 
     art.on('video:canplay', () => {
@@ -32,6 +32,10 @@ export default function eventInit(art, player) {
         art.controls.show = true;
         art.mask.show = true;
         art.loading.show = false;
+    });
+
+    art.once('video:canplay', () => {
+        art.emit('ready');
     });
 
     // art.on('video:canplaythrough', () => {
@@ -74,7 +78,7 @@ export default function eventInit(art, player) {
     });
 
     // art.on('video:loadeddata', () => {
-        
+
     // });
 
     art.on('video:loadedmetadata', () => {
@@ -117,11 +121,11 @@ export default function eventInit(art, player) {
     });
 
     // art.on('video:stalled', () => {
-        
+
     // });
 
     // art.on('video:suspend', () => {
-        
+
     // });
 
     art.on('video:timeupdate', () => {
@@ -129,7 +133,7 @@ export default function eventInit(art, player) {
     });
 
     // art.on('video:volumechange', () => {
-        
+
     // });
 
     art.on('video:waiting', () => {

@@ -9,7 +9,7 @@ export default class Setting {
         this.art = art;
         this.state = false;
         if (art.option.setting) {
-            this.art.once('video:canplay', () => {
+            this.art.on('ready', () => {
                 this.init();
             });
 
