@@ -491,7 +491,7 @@
     target.setAttribute('data-balloon-pos', pos);
   }
   function srtToVtt(srtText) {
-    return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
+    return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/{[\s\S]*?}/g, '').replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
   }
   function vttToBlob(vttText) {
     return URL.createObjectURL(new Blob([vttText], {
@@ -522,6 +522,7 @@
   }
 
   var utils = /*#__PURE__*/Object.freeze({
+    __proto__: null,
     errorHandle: errorHandle,
     hasOwnProperty: hasOwnProperty,
     clamp: clamp,
@@ -3365,19 +3366,19 @@
         return fetch(url).then(function (response) {
           return response.text();
         }).then(function (text) {
-          var type = getExt(url);
-          errorHandle(['srt', 'ass', 'vtt'].includes(type), "Unsupported subtitle format: ".concat(type));
-          var formatText = text.replace(/{[\s\S]*?}/g, '');
+          switch (getExt(url)) {
+            case 'srt':
+              return vttToBlob(srtToVtt(text));
 
-          if (type === 'srt') {
-            return vttToBlob(srtToVtt(formatText));
+            case 'ass':
+              return vttToBlob(assToVtt(text));
+
+            case 'vtt':
+              return vttToBlob(text);
+
+            default:
+              return url;
           }
-
-          if (type === 'ass') {
-            return vttToBlob(assToVtt(formatText));
-          }
-
-          return vttToBlob(formatText);
         }).catch(function (err) {
           notice.show(err);
           throw err;

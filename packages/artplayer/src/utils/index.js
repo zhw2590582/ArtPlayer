@@ -151,6 +151,7 @@ export function tooltip(target, msg, pos = 'up') {
 export function srtToVtt(srtText) {
     return 'WEBVTT \r\n\r\n'.concat(
         srtText
+            .replace(/{[\s\S]*?}/g, '')
             .replace(/\{\\([ibu])\}/g, '</$1>')
             .replace(/\{\\([ibu])1\}/g, '<$1>')
             .replace(/\{([ibu])\}/g, '<$1>')

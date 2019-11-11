@@ -1,4 +1,4 @@
-import { setStyles, srtToVtt, vttToBlob, getExt, errorHandle } from './utils';
+import { setStyles, srtToVtt, vttToBlob, getExt } from './utils';
 import assToVtt from './utils/assToVtt';
 
 export default class Subtitle {
@@ -89,19 +89,16 @@ export default class Subtitle {
                 return response.text();
             })
             .then(text => {
-                const type = getExt(url);
-                errorHandle(['srt', 'ass', 'vtt'].includes(type), `Unsupported subtitle format: ${type}`);
-                const formatText = text.replace(/{[\s\S]*?}/g, '');
-
-                if (type === 'srt') {
-                    return vttToBlob(srtToVtt(formatText));
+                switch (getExt(url)) {
+                    case 'srt':
+                        return vttToBlob(srtToVtt(text));
+                    case 'ass':
+                        return vttToBlob(assToVtt(text));
+                    case 'vtt':
+                        return vttToBlob(text);
+                    default:
+                        return url;
                 }
-
-                if (type === 'ass') {
-                    return vttToBlob(assToVtt(formatText));
-                }
-
-                return vttToBlob(formatText);
             })
             .catch(err => {
                 notice.show(err);
