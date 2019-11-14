@@ -116,7 +116,7 @@ function customPip(art, player) {
             if (value) {
                 player.autoSize = false;
                 cacheStyle = $player.style.cssText;
-                $player.classList.add('artplayer-pip');
+                addClass($player, 'artplayer-pip');
                 const $body = document.body;
                 setStyle($player, 'top', `${$body.clientHeight - player.height - 50}px`);
                 setStyle($player, 'left', `${$body.clientWidth - player.width - 50}px`);
@@ -127,7 +127,7 @@ function customPip(art, player) {
                 art.emit('pipEnabled');
             } else if (player.pip) {
                 $player.style.cssText = cacheStyle;
-                $player.classList.remove('artplayer-pip');
+                removeClass($player, 'artplayer-pip');
                 setStyle($player, 'top', null);
                 setStyle($player, 'left', null);
                 player.fullscreen = false;

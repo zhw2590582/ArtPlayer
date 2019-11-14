@@ -1,5 +1,4 @@
-import { setStyles, srtToVtt, vttToBlob, getExt, addClass, removeClass } from './utils';
-import assToVtt from './utils/assToVtt';
+import { setStyles, srtToVtt, vttToBlob, getExt, addClass, removeClass, assToVtt } from './utils';
 
 export default class Subtitle {
     constructor(art) {

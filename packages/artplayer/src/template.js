@@ -25,8 +25,10 @@ export default class Template {
         } else {
             this.initMobile();
         }
+    }
 
-        this.query = className => query(className, this.$container);
+    query(className) {
+        return query(className, this.$container);
     }
 
     initDesktop() {

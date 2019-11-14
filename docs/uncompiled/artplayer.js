@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global.Artplayer = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -118,7 +118,7 @@
   var inherits = _inherits;
 
   var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);if("object"===r){if("object"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'object' type, but got '").concat(t,"'"));Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});}if("array"===r){if("array"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'array' type, but got '").concat(t,"'"));a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw"string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
+  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);if("object"===r){if("object"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'object' type, but got '").concat(t,"'"));Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});}if("array"===r){if("array"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'array' type, but got '").concat(t,"'"));a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw "string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
   });
 
   var Emitter =
@@ -197,35 +197,66 @@
     return Emitter;
   }();
 
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-        arr2[i] = arr[i];
-      }
-
-      return arr2;
+  function query(selector) {
+    var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+    return parent.querySelector(selector);
+  }
+  function queryAll(selector) {
+    var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+    return Array.from(parent.querySelectorAll(selector));
+  }
+  function addClass(target, className) {
+    return target.classList.add(className);
+  }
+  function removeClass(target, className) {
+    return target.classList.remove(className);
+  }
+  function hasClass(target, className) {
+    return target.classList.contains(className);
+  }
+  function append(parent, child) {
+    if (child instanceof Element) {
+      parent.appendChild(child);
+    } else {
+      parent.insertAdjacentHTML('beforeend', String(child));
     }
+
+    return parent.lastElementChild || parent.lastChild;
   }
-
-  var arrayWithoutHoles = _arrayWithoutHoles;
-
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  function remove(child) {
+    return child.parentNode.removeChild(child);
   }
-
-  var iterableToArray = _iterableToArray;
-
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  function setStyle(element, key, value) {
+    element.style[key] = value;
+    return element;
   }
-
-  var nonIterableSpread = _nonIterableSpread;
-
-  function _toConsumableArray(arr) {
-    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  function setStyles(element, styles) {
+    Object.keys(styles).forEach(function (key) {
+      setStyle(element, key, styles[key]);
+    });
+    return element;
   }
-
-  var toConsumableArray = _toConsumableArray;
+  function getStyle(element, key) {
+    var numberType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+    var value = window.getComputedStyle(element, null).getPropertyValue(key);
+    return numberType ? parseFloat(value) : value;
+  }
+  function sublings(target) {
+    return Array.from(target.parentElement.children).filter(function (item) {
+      return item !== target;
+    });
+  }
+  function inverseClass(target, className) {
+    sublings(target).forEach(function (item) {
+      return removeClass(item, className);
+    });
+    addClass(target, className);
+  }
+  function tooltip(target, msg) {
+    var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
+    target.setAttribute('aria-label', msg);
+    target.setAttribute('data-balloon-pos', pos);
+  }
 
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -327,7 +358,6 @@
 
     return ArtPlayerError;
   }(wrapNativeSuper(Error));
-
   function errorHandle(condition, msg) {
     if (!condition) {
       throw new ArtPlayerError(msg);
@@ -335,12 +365,61 @@
 
     return condition;
   }
-  function hasOwnProperty(obj, name) {
-    return Object.prototype.hasOwnProperty.call(obj, name);
+
+  function srtToVtt(srtText) {
+    return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/{[\s\S]*?}/g, '').replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
   }
-  function clamp(num, a, b) {
-    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+  function vttToBlob(vttText) {
+    return URL.createObjectURL(new Blob([vttText], {
+      type: 'text/vtt'
+    }));
   }
+  function assToVtt(ass) {
+    var reAss = new RegExp('Dialogue:\\s\\d,' + '(\\d+:\\d\\d:\\d\\d.\\d\\d),' + '(\\d+:\\d\\d:\\d\\d.\\d\\d),' + '([^,]*),' + '([^,]*),' + '(?:[^,]*,){4}' + '([\\s\\S]*)$', 'i');
+
+    function fixTime() {
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      return time.split(/[:.]/).map(function (item, index, arr) {
+        if (index === arr.length - 1) {
+          if (item.length === 1) {
+            return ".".concat(item, "00");
+          }
+
+          if (item.length === 2) {
+            return ".".concat(item, "0");
+          }
+        } else if (item.length === 1) {
+          return (index === 0 ? '0' : ':0') + item;
+        } // eslint-disable-next-line no-nested-ternary
+
+
+        return index === 0 ? item : index === arr.length - 1 ? ".".concat(item) : ":".concat(item);
+      }).join('');
+    }
+
+    return "WEBVTT\n\n".concat(ass.split(/\r?\n/).map(function (line) {
+      var m = line.match(reAss);
+      if (!m) return null;
+      return {
+        start: fixTime(m[1].trim()),
+        end: fixTime(m[2].trim()),
+        text: m[5].replace(/{[\s\S]*?}/g, '').replace(/(\\N)/g, '\n').trim().split(/\r?\n/).map(function (item) {
+          return item.trim();
+        }).join('\n')
+      };
+    }).filter(function (line) {
+      return line;
+    }).map(function (line, index) {
+      if (line) {
+        return "".concat(index + 1, "\n").concat(line.start, " --> ").concat(line.end, "\n").concat(line.text);
+      }
+
+      return '';
+    }).filter(function (line) {
+      return line.trim();
+    }).join('\n\n'));
+  }
+
   function getExt(url) {
     if (url.includes('?')) {
       return getExt(url.split('?')[0]);
@@ -352,16 +431,88 @@
 
     return url.trim().toLowerCase().split('.').pop();
   }
-  function secondToTime(second) {
-    var add0 = function add0(num) {
-      return num < 10 ? "0".concat(num) : String(num);
+  function downloadFile(url, name) {
+    var elink = document.createElement('a');
+    elink.style.display = 'none';
+    elink.href = url;
+    elink.download = name;
+    document.body.appendChild(elink);
+    elink.click();
+    document.body.removeChild(elink);
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    }
+  }
+
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  var iterableToArray = _iterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  }
+
+  var toConsumableArray = _toConsumableArray;
+
+  function hasOwnProperty(obj, name) {
+    return Object.prototype.hasOwnProperty.call(obj, name);
+  }
+  function proxyPropertys(target) {
+    for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      sources[_key - 1] = arguments[_key];
+    }
+
+    return sources.reduce(function (result, source) {
+      Object.getOwnPropertyNames(source).forEach(function (key) {
+        errorHandle(!hasOwnProperty(result, key), "Target attribute name is duplicated: ".concat(key));
+        Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+      return result;
+    }, target);
+  }
+  function mergeDeep() {
+    var isObject = function isObject(item) {
+      return item && _typeof_1(item) === 'object' && !Array.isArray(item);
     };
 
-    var hour = Math.floor(second / 3600);
-    var min = Math.floor((second - hour * 3600) / 60);
-    var sec = Math.floor(second - hour * 3600 - min * 60);
-    return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
+    for (var _len2 = arguments.length, objects = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      objects[_key2] = arguments[_key2];
+    }
+
+    return objects.reduce(function (prev, obj) {
+      Object.keys(obj).forEach(function (key) {
+        var pVal = prev[key];
+        var oVal = obj[key];
+
+        if (Array.isArray(pVal) && Array.isArray(oVal)) {
+          prev[key] = pVal.concat.apply(pVal, toConsumableArray(oVal));
+        } else if (isObject(pVal) && isObject(oVal) && !(oVal instanceof Element)) {
+          prev[key] = mergeDeep(pVal, oVal);
+        } else {
+          prev[key] = oVal;
+        }
+      });
+      return prev;
+    }, {});
   }
+
   function sleep() {
     var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
     return new Promise(function (resolve) {
@@ -422,116 +573,30 @@
 
     return fn;
   }
-  function mergeDeep() {
-    var isObject = function isObject(item) {
-      return item && _typeof_1(item) === 'object' && !Array.isArray(item);
+
+  function clamp(num, a, b) {
+    return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+  }
+  function secondToTime(second) {
+    var add0 = function add0(num) {
+      return num < 10 ? "0".concat(num) : String(num);
     };
 
-    for (var _len3 = arguments.length, objects = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-      objects[_key3] = arguments[_key3];
-    }
+    var hour = Math.floor(second / 3600);
+    var min = Math.floor((second - hour * 3600) / 60);
+    var sec = Math.floor(second - hour * 3600 - min * 60);
+    return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
+  }
 
-    return objects.reduce(function (prev, obj) {
-      Object.keys(obj).forEach(function (key) {
-        var pVal = prev[key];
-        var oVal = obj[key];
 
-        if (Array.isArray(pVal) && Array.isArray(oVal)) {
-          prev[key] = pVal.concat.apply(pVal, toConsumableArray(oVal));
-        } else if (isObject(pVal) && isObject(oVal) && !(oVal instanceof Element)) {
-          prev[key] = mergeDeep(pVal, oVal);
-        } else {
-          prev[key] = oVal;
-        }
-      });
-      return prev;
-    }, {});
-  }
-  function append(parent, child) {
-    if (child instanceof Element) {
-      parent.appendChild(child);
-    } else {
-      parent.insertAdjacentHTML('beforeend', String(child));
-    }
-
-    return parent.lastElementChild || parent.lastChild;
-  }
-  function remove(child) {
-    return child.parentNode.removeChild(child);
-  }
-  function setStyle(element, key, value) {
-    element.style[key] = value;
-    return element;
-  }
-  function setStyles(element, styles) {
-    Object.keys(styles).forEach(function (key) {
-      setStyle(element, key, styles[key]);
-    });
-    return element;
-  }
-  function getStyle(element, key) {
-    var numberType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-    var value = window.getComputedStyle(element, null).getPropertyValue(key);
-    return numberType ? parseFloat(value) : value;
-  }
-  function sublings(target) {
-    return Array.from(target.parentElement.children).filter(function (item) {
-      return item !== target;
-    });
-  }
-  function inverseClass(target, className) {
-    sublings(target).forEach(function (item) {
-      return item.classList.remove(className);
-    });
-    target.classList.add(className);
-  }
-  function tooltip(target, msg) {
-    var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
-    target.setAttribute('aria-label', msg);
-    target.setAttribute('data-balloon-pos', pos);
-  }
-  function srtToVtt(srtText) {
-    return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/{[\s\S]*?}/g, '').replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
-  }
-  function vttToBlob(vttText) {
-    return URL.createObjectURL(new Blob([vttText], {
-      type: 'text/vtt'
-    }));
-  }
-  function downloadFile(url, name) {
-    var elink = document.createElement('a');
-    setStyle(elink, 'display', 'none');
-    elink.href = url;
-    elink.download = name;
-    document.body.appendChild(elink);
-    elink.click();
-    document.body.removeChild(elink);
-  }
-  function proxyPropertys(target) {
-    for (var _len4 = arguments.length, sources = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-      sources[_key4 - 1] = arguments[_key4];
-    }
-
-    return sources.reduce(function (result, source) {
-      Object.getOwnPropertyNames(source).forEach(function (key) {
-        errorHandle(!hasOwnProperty(result, key), "Target attribute name is duplicated: ".concat(key));
-        Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-      return result;
-    }, target);
-  }
 
   var utils = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    errorHandle: errorHandle,
-    hasOwnProperty: hasOwnProperty,
-    clamp: clamp,
-    getExt: getExt,
-    secondToTime: secondToTime,
-    sleep: sleep,
-    debounce: debounce,
-    throttle: throttle,
-    mergeDeep: mergeDeep,
+    query: query,
+    queryAll: queryAll,
+    addClass: addClass,
+    removeClass: removeClass,
+    hasClass: hasClass,
     append: append,
     remove: remove,
     setStyle: setStyle,
@@ -540,10 +605,21 @@
     sublings: sublings,
     inverseClass: inverseClass,
     tooltip: tooltip,
+    ArtPlayerError: ArtPlayerError,
+    errorHandle: errorHandle,
     srtToVtt: srtToVtt,
     vttToBlob: vttToBlob,
+    assToVtt: assToVtt,
+    getExt: getExt,
     downloadFile: downloadFile,
-    proxyPropertys: proxyPropertys
+    hasOwnProperty: hasOwnProperty,
+    proxyPropertys: proxyPropertys,
+    mergeDeep: mergeDeep,
+    sleep: sleep,
+    debounce: debounce,
+    throttle: throttle,
+    clamp: clamp,
+    secondToTime: secondToTime
   });
 
   function validElement(value, type, paths) {
@@ -636,29 +712,6 @@
     customType: 'object'
   };
 
-  var mimeCodec = {
-    mp4: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
-    webm: 'video/webm; codecs="vorbis, vp8"',
-    ts: 'video/mp2t; codecs="avc1.42E01E, mp4a.40.2"'
-  };
-
-  var mse = {
-    mediaSource: {
-      propertys: ['activeSourceBuffers', 'duration', 'readyState', 'sourceBuffers'],
-      methods: ['addSourceBuffer', 'endOfStream', 'removeSourceBuffer', 'clearLiveSeekableRange', 'setLiveSeekableRange'],
-      events: ['sourceclose', 'sourceended', 'sourceopen']
-    },
-    sourceBuffer: {
-      propertys: ['mode', 'updating', 'buffered', 'timestampOffset', 'audioTracks', 'videoTracks', 'textTracks', 'appendWindowStart', 'appendWindowEnd', 'trackDefaults'],
-      methods: ['appendBuffer', 'appendStream', 'abort', 'remove'],
-      events: ['abort', 'error', 'update', 'updateend', 'updatestart']
-    },
-    sourceBufferList: {
-      propertys: ['length'],
-      events: ['addsourcebuffer', 'removesourcebuffer']
-    }
-  };
-
   var video = {
     propertys: ['audioTracks', 'autoplay', 'buffered', 'controller', 'controls', 'crossOrigin', 'currentSrc', 'currentTime', 'defaultMuted', 'defaultPlaybackRate', 'duration', 'ended', 'error', 'loop', 'mediaGroup', 'muted', 'networkState', 'paused', 'playbackRate', 'played', 'preload', 'readyState', 'seekable', 'seeking', 'src', 'startDate', 'textTracks', 'videoTracks', 'volume'],
     methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'],
@@ -666,8 +719,6 @@
   };
 
   var config = {
-    mimeCodec: mimeCodec,
-    mse: mse,
     video: video
   };
 
@@ -712,7 +763,7 @@
       if (art.option.container instanceof Element) {
         this.$container = art.option.container;
       } else {
-        this.$container = document.querySelector(art.option.container);
+        this.$container = query(art.option.container);
         errorHandle(this.$container, "No container element found by ".concat(art.option.container));
       }
 
@@ -729,40 +780,45 @@
     }
 
     createClass(Template, [{
+      key: "query",
+      value: function query$1(className) {
+        return query(className, this.$container);
+      }
+    }, {
       key: "initDesktop",
       value: function initDesktop() {
         this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
-        this.$player = this.$container.querySelector('.artplayer-video-player');
-        this.$video = this.$container.querySelector('.artplayer-video');
-        this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
-        this.$danmuku = this.$container.querySelector('.artplayer-danmuku');
-        this.$bottom = this.$container.querySelector('.artplayer-bottom');
-        this.$progress = this.$container.querySelector('.artplayer-progress');
-        this.$controls = this.$container.querySelector('.artplayer-controls');
-        this.$controlsLeft = this.$container.querySelector('.artplayer-controls-left');
-        this.$controlsRight = this.$container.querySelector('.artplayer-controls-right');
-        this.$layers = this.$container.querySelector('.artplayer-layers');
-        this.$loading = this.$container.querySelector('.artplayer-loading');
-        this.$notice = this.$container.querySelector('.artplayer-notice');
-        this.$noticeInner = this.$container.querySelector('.artplayer-notice-inner');
-        this.$mask = this.$container.querySelector('.artplayer-mask');
-        this.$setting = this.$container.querySelector('.artplayer-setting');
-        this.$settingInner = this.$container.querySelector('.artplayer-setting-inner');
-        this.$settingBody = this.$container.querySelector('.artplayer-setting-body');
-        this.$info = this.$container.querySelector('.artplayer-info');
-        this.$infoPanel = this.$container.querySelector('.artplayer-info-panel');
-        this.$infoClose = this.$container.querySelector('.artplayer-info-close');
-        this.$pipHeader = this.$container.querySelector('.artplayer-pip-header');
-        this.$pipTitle = this.$container.querySelector('.artplayer-pip-title');
-        this.$pipClose = this.$container.querySelector('.artplayer-pip-close');
-        this.$contextmenu = this.$container.querySelector('.artplayer-contextmenu');
+        this.$player = this.query('.artplayer-video-player');
+        this.$video = this.query('.artplayer-video');
+        this.$subtitle = this.query('.artplayer-subtitle');
+        this.$danmuku = this.query('.artplayer-danmuku');
+        this.$bottom = this.query('.artplayer-bottom');
+        this.$progress = this.query('.artplayer-progress');
+        this.$controls = this.query('.artplayer-controls');
+        this.$controlsLeft = this.query('.artplayer-controls-left');
+        this.$controlsRight = this.query('.artplayer-controls-right');
+        this.$layers = this.query('.artplayer-layers');
+        this.$loading = this.query('.artplayer-loading');
+        this.$notice = this.query('.artplayer-notice');
+        this.$noticeInner = this.query('.artplayer-notice-inner');
+        this.$mask = this.query('.artplayer-mask');
+        this.$setting = this.query('.artplayer-setting');
+        this.$settingInner = this.query('.artplayer-setting-inner');
+        this.$settingBody = this.query('.artplayer-setting-body');
+        this.$info = this.query('.artplayer-info');
+        this.$infoPanel = this.query('.artplayer-info-panel');
+        this.$infoClose = this.query('.artplayer-info-close');
+        this.$pipHeader = this.query('.artplayer-pip-header');
+        this.$pipTitle = this.query('.artplayer-pip-title');
+        this.$pipClose = this.query('.artplayer-pip-close');
+        this.$contextmenu = this.query('.artplayer-contextmenu');
       }
     }, {
       key: "initMobile",
       value: function initMobile() {
         this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n          </div>\n        ";
-        this.$player = this.$container.querySelector('.artplayer-video-player');
-        this.$video = this.$container.querySelector('.artplayer-video');
+        this.$player = this.query('.artplayer-video-player');
+        this.$video = this.query('.artplayer-video');
       }
     }, {
       key: "destroy",
@@ -770,7 +826,7 @@
         if (removeHtml) {
           this.$container.innerHTML = '';
         } else {
-          this.$player.classList.add('artplayer-destroy');
+          addClass(this.$player, 'artplayer-destroy');
         }
       }
     }]);
@@ -1041,7 +1097,7 @@
       } else {
         art.loading.show = false;
         art.controls.show = false;
-        $player.classList.add('artplayer-error');
+        addClass($player, 'artplayer-error');
         sleep(1000).then(function () {
           notice.show(i18n.get('Video load failed'), false);
           art.destroy();
@@ -1237,7 +1293,7 @@
             option.url = url;
             player.playbackRate = false;
             player.aspectRatio = false;
-            art.once('video:canplay', function () {
+            art.on('ready', function () {
               player.currentTime = currentTime;
             });
 
@@ -1263,7 +1319,7 @@
             option.url = url;
             player.playbackRate = false;
             player.aspectRatio = false;
-            art.once('video:canplay', function () {
+            art.on('ready', function () {
               player.currentTime = 0;
             });
 
@@ -1654,7 +1710,7 @@
           }
 
           screenfull.request($player).then(function () {
-            $player.classList.add('artplayer-fullscreen');
+            addClass($player, 'artplayer-fullscreen');
             player.aspectRatioReset = true;
             art.emit('fullscreen:enabled');
           });
@@ -1664,7 +1720,7 @@
           }
 
           screenfull.exit().then(function () {
-            $player.classList.remove('artplayer-fullscreen');
+            removeClass($player, 'artplayer-fullscreen');
             player.aspectRatioReset = true;
             art.emit('fullscreen:exit');
           });
@@ -1689,7 +1745,7 @@
     var $player = art.template.$player;
     Object.defineProperty(player, 'fullscreenWeb', {
       get: function get() {
-        return $player.classList.contains('artplayer-web-fullscreen');
+        return hasClass($player, 'artplayer-web-fullscreen');
       },
       set: function set(value) {
         if (value) {
@@ -1697,7 +1753,7 @@
             player.fullscreen = false;
           }
 
-          $player.classList.add('artplayer-web-fullscreen');
+          addClass($player, 'artplayer-web-fullscreen');
           player.aspectRatioReset = true;
           art.emit('fullscreenWeb:enabled');
         } else {
@@ -1705,7 +1761,7 @@
             player.fullscreen = false;
           }
 
-          $player.classList.remove('artplayer-web-fullscreen');
+          removeClass($player, 'artplayer-web-fullscreen');
           player.aspectRatioReset = true;
           art.emit('fullscreenWeb:exit');
         }
@@ -1799,30 +1855,30 @@
     });
     proxy($pipHeader, 'mousemove', function (event) {
       if (isDroging) {
-        $player.classList.add('is-dragging');
+        addClass($player, 'is-dragging');
         setStyle($player, 'left', "".concat(lastPlayerLeft + event.pageX - lastPageX, "px"));
         setStyle($player, 'top', "".concat(lastPlayerTop + event.pageY - lastPageY, "px"));
       }
     });
     proxy(document, 'mouseup', function () {
       isDroging = false;
-      $player.classList.remove('is-dragging');
+      removeClass($player, 'is-dragging');
     });
     proxy($pipClose, 'click', function () {
       player.pip = false;
       isDroging = false;
-      $player.classList.remove('is-dragging');
+      removeClass($player, 'is-dragging');
     });
     append($pipTitle, option.title || i18n.get('Mini player'));
     var property = {
       get: function get() {
-        return $player.classList.contains('artplayer-pip');
+        return hasClass($player, 'artplayer-pip');
       },
       set: function set(value) {
         if (value) {
           player.autoSize = false;
           cacheStyle = $player.style.cssText;
-          $player.classList.add('artplayer-pip');
+          addClass($player, 'artplayer-pip');
           var $body = document.body;
           setStyle($player, 'top', "".concat($body.clientHeight - player.height - 50, "px"));
           setStyle($player, 'left', "".concat($body.clientWidth - player.width - 50, "px"));
@@ -1833,7 +1889,7 @@
           art.emit('pipEnabled');
         } else if (player.pip) {
           $player.style.cssText = cacheStyle;
-          $player.classList.remove('artplayer-pip');
+          removeClass($player, 'artplayer-pip');
           setStyle($player, 'top', null);
           setStyle($player, 'left', null);
           player.fullscreen = false;
@@ -1906,7 +1962,7 @@
         $video = _art$template.$video;
     Object.defineProperty(player, 'autoSize', {
       get: function get() {
-        return $container.classList.contains('artplayer-auto-size');
+        return hasClass($container, 'artplayer-auto-size');
       },
       set: function set(value) {
         if (value) {
@@ -1919,7 +1975,7 @@
 
           var videoRatio = videoWidth / videoHeight;
           var containerRatio = width / height;
-          $container.classList.add('artplayer-auto-size');
+          addClass($container, 'artplayer-auto-size');
 
           if (containerRatio > videoRatio) {
             var percentage = height * videoRatio / width * 100;
@@ -1934,7 +1990,7 @@
 
           art.emit('autoSizeChange');
         } else {
-          $container.classList.remove('artplayer-auto-size');
+          removeClass($container, 'artplayer-auto-size');
           setStyle($player, 'width', null);
           setStyle($player, 'height', null);
           art.emit('autoSizeRemove');
@@ -2114,9 +2170,9 @@
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function fullscreen(controlOption) {
+  function fullscreen(option) {
     return function (art) {
-      return _objectSpread({}, controlOption, {
+      return _objectSpread({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2143,9 +2199,9 @@
   function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function fullscreenWeb(controlOption) {
+  function fullscreenWeb(option) {
     return function (art) {
-      return _objectSpread$1({}, controlOption, {
+      return _objectSpread$1({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2172,9 +2228,9 @@
   function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function pip(controlOption) {
+  function pip(option) {
     return function (art) {
-      return _objectSpread$2({}, controlOption, {
+      return _objectSpread$2({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2193,9 +2249,9 @@
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function playAndPause(controlOption) {
+  function playAndPause(option) {
     return function (art) {
-      return _objectSpread$3({}, controlOption, {
+      return _objectSpread$3({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2260,22 +2316,22 @@
       percentage: percentage
     };
   }
-  function progress(controlOption) {
+  function progress(option) {
     return function (art) {
       var _art$option = art.option,
           highlight = _art$option.highlight,
           theme = _art$option.theme,
           proxy = art.events.proxy,
           player = art.player;
-      return _objectSpread$4({}, controlOption, {
+      return _objectSpread$4({}, option, {
         html: "\n                <div class=\"art-control-progress-inner\">\n                    <div class=\"art-progress-loaded\"></div>\n                    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n                    <div class=\"art-progress-highlight\"></div>\n                    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n                    <div class=\"art-progress-tip art-tip\"></div>\n                </div>\n            "),
         mounted: function mounted($control) {
           var isDroging = false;
-          var $loaded = $control.querySelector('.art-progress-loaded');
-          var $played = $control.querySelector('.art-progress-played');
-          var $highlight = $control.querySelector('.art-progress-highlight');
-          var $indicator = $control.querySelector('.art-progress-indicator');
-          var $tip = $control.querySelector('.art-progress-tip');
+          var $loaded = query('.art-progress-loaded', $control);
+          var $played = query('.art-progress-played', $control);
+          var $highlight = query('.art-progress-highlight', $control);
+          var $indicator = query('.art-progress-indicator', $control);
+          var $tip = query('.art-progress-tip', $control);
 
           function showHighlight(event) {
             var _getPosFromEvent = getPosFromEvent(art, event),
@@ -2367,7 +2423,7 @@
                   second = _getPosFromEvent4.second,
                   percentage = _getPosFromEvent4.percentage;
 
-              $indicator.classList.add('art-show-indicator');
+              addClass($indicator, 'art-show-indicator');
               setBar('played', percentage);
               player.seek = second;
             }
@@ -2375,7 +2431,7 @@
           proxy(document, 'mouseup', function () {
             if (isDroging) {
               isDroging = false;
-              $indicator.classList.remove('art-show-indicator');
+              removeClass($indicator, 'art-show-indicator');
             }
           });
         }
@@ -2386,9 +2442,9 @@
   function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function subtitle(controlOption) {
+  function subtitle(option) {
     return function (art) {
-      return _objectSpread$5({}, controlOption, {
+      return _objectSpread$5({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2415,9 +2471,9 @@
   function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function time(controlOption) {
+  function time(option) {
     return function (art) {
-      return _objectSpread$6({}, controlOption, {
+      return _objectSpread$6({}, option, {
         mounted: function mounted($control) {
           function getTime() {
             var newTime = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
@@ -2439,9 +2495,9 @@
   function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function volume(controlOption) {
+  function volume(option) {
     return function (art) {
-      return _objectSpread$7({}, controlOption, {
+      return _objectSpread$7({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2521,9 +2577,9 @@
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function setting(controlOption) {
+  function setting(option) {
     return function (art) {
-      return _objectSpread$8({}, controlOption, {
+      return _objectSpread$8({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2550,11 +2606,12 @@
   function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function thumbnails(controlOption) {
+  function thumbnails(option) {
     return function (art) {
-      return _objectSpread$9({}, controlOption, {
+      return _objectSpread$9({}, option, {
         mounted: function mounted($control) {
-          var $progress = art.template.$progress,
+          var thumbnails = art.option.thumbnails,
+              $progress = art.template.$progress,
               _art$events = art.events,
               proxy = _art$events.proxy,
               loadImg = _art$events.loadImg;
@@ -2565,12 +2622,11 @@
             var _getPosFromEvent = getPosFromEvent(art, event),
                 posWidth = _getPosFromEvent.width;
 
-            var _art$option$thumbnail = art.option.thumbnails,
-                url = _art$option$thumbnail.url,
-                height = _art$option$thumbnail.height,
-                width = _art$option$thumbnail.width,
-                number = _art$option$thumbnail.number,
-                column = _art$option$thumbnail.column;
+            var url = thumbnails.url,
+                height = thumbnails.height,
+                width = thumbnails.width,
+                number = thumbnails.number,
+                column = thumbnails.column;
             var perWidth = $progress.clientWidth / number;
             var perIndex = Math.floor(posWidth / perWidth);
             var yIndex = Math.ceil(perIndex / column) - 1;
@@ -2592,7 +2648,7 @@
           proxy($progress, 'mousemove', function (event) {
             if (!loading) {
               loading = true;
-              loadImg(art.option.thumbnails.url).then(function () {
+              loadImg(thumbnails.url).then(function () {
                 isLoad = true;
               });
             }
@@ -2613,9 +2669,9 @@
   function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function screenshot(controlOption) {
+  function screenshot(option) {
     return function (art) {
-      return _objectSpread$a({}, controlOption, {
+      return _objectSpread$a({}, option, {
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2634,22 +2690,22 @@
   function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function quality(controlOption) {
+  function quality(option) {
     return function (art) {
-      return _objectSpread$b({}, controlOption, {
+      return _objectSpread$b({}, option, {
         mounted: function mounted($control) {
-          var option = art.option,
+          var quality = art.option.quality,
               _art$events = art.events,
               proxy = _art$events.proxy,
               hover = _art$events.hover,
               player = art.player;
           var playIndex = -1;
-          var defaultQuality = option.quality.find(function (item) {
+          var defaultQuality = quality.find(function (item) {
             return item.default;
-          }) || option.quality[0];
-          playIndex = option.quality.indexOf(defaultQuality);
+          }) || quality[0];
+          playIndex = quality.indexOf(defaultQuality);
           var $qualityName = append($control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
-          var qualityList = option.quality.map(function (item, index) {
+          var qualityList = quality.map(function (item, index) {
             return "<div class=\"art-quality-item\" data-index=\"".concat(index, "\">").concat(item.name, "</div>");
           }).join('');
           var $qualitys = append($control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
@@ -2658,9 +2714,9 @@
           });
           proxy($qualitys, 'click', function (event) {
             var index = Number(event.target.dataset.index);
-            var _option$quality$index = option.quality[index],
-                url = _option$quality$index.url,
-                name = _option$quality$index.name;
+            var _quality$index = quality[index],
+                url = _quality$index.url,
+                name = _quality$index.name;
 
             if (url && name && playIndex !== index) {
               player.switchQuality(url, name);
@@ -2792,17 +2848,14 @@
           case 'right':
             parent = $controlsRight;
             break;
-
-          default:
-            break;
         }
 
-        errorHandle(parent, 'Controls option.position can not be empty');
         this.id += 1;
+        errorHandle(option.position, 'Controls option.position can not be empty');
         var control = component(this.art, this, parent, option, callback, 'control');
 
         if (!option.disable && option.position !== 'top' && !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')) {
-          control.$ref.classList.add('art-control-onlyText');
+          addClass(control.$ref, 'art-control-onlyText');
         }
 
         return control;
@@ -2819,11 +2872,11 @@
 
         if (value) {
           this.state = true;
-          $player.classList.add('artplayer-controls-show');
+          addClass($player, 'artplayer-controls-show');
           this.art.emit('controls:show');
         } else {
           this.state = false;
-          $player.classList.remove('artplayer-controls-show');
+          removeClass($player, 'artplayer-controls-show');
           this.art.emit('controls:hide');
         }
       }
@@ -2835,15 +2888,14 @@
   function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function playbackRate(menuOption) {
+  function playbackRate(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$c({}, menuOption, {
+      return _objectSpread$c({}, option, {
         html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
-          var target = event.target;
-          var rate = target.dataset.rate;
+          var rate = event.target.dataset.rate;
 
           if (rate) {
             player.playbackRate = Number(rate);
@@ -2852,7 +2904,7 @@
         },
         mounted: function mounted($menu) {
           art.on('playbackRateChange', function (rate) {
-            var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
+            var $current = queryAll('span', $menu).find(function (item) {
               return Number(item.dataset.rate) === rate;
             });
 
@@ -2868,15 +2920,14 @@
   function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function aspectRatio(menuOption) {
+  function aspectRatio(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$d({}, menuOption, {
+      return _objectSpread$d({}, option, {
         html: "\n                ".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
-          var target = event.target;
-          var ratio = target.dataset.ratio;
+          var ratio = event.target.dataset.ratio;
 
           if (ratio) {
             player.aspectRatio = ratio;
@@ -2885,10 +2936,13 @@
         },
         mounted: function mounted($menu) {
           art.on('aspectRatioChange', function (ratio) {
-            var $current = Array.from($menu.querySelectorAll('span')).find(function (item) {
+            var $current = queryAll('span', $menu).find(function (item) {
               return item.dataset.ratio === ratio;
             });
-            inverseClass($current, 'current');
+
+            if ($current) {
+              inverseClass($current, 'current');
+            }
           });
         }
       });
@@ -2899,9 +2953,9 @@
 
   function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-  function info(menuOption) {
+  function info(option) {
     return function (art) {
-      return _objectSpread$e({}, menuOption, {
+      return _objectSpread$e({}, option, {
         html: art.i18n.get('Video info'),
         click: function click(contextmenu) {
           art.info.show = true;
@@ -2915,9 +2969,9 @@
 
   function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-  function version(menuOption) {
-    return _objectSpread$f({}, menuOption, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.16</a>'
+  function version(option) {
+    return _objectSpread$f({}, option, {
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.18</a>'
     });
   }
 
@@ -2925,9 +2979,9 @@
 
   function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-  function close(menuOption) {
+  function close(option) {
     return function (art) {
-      return _objectSpread$g({}, menuOption, {
+      return _objectSpread$g({}, option, {
         html: art.i18n.get('Close'),
         click: function click(contextmenu) {
           contextmenu.show = false;
@@ -3057,11 +3111,11 @@
 
         if (value) {
           this.state = true;
-          $player.classList.add('artplayer-contextmenu-show');
+          addClass($player, 'artplayer-contextmenu-show');
           this.art.emit('contextmenu:show');
         } else {
           this.state = false;
-          $player.classList.remove('artplayer-contextmenu-show');
+          removeClass($player, 'artplayer-contextmenu-show');
           this.art.emit('contextmenu:hide');
         }
       }
@@ -3101,7 +3155,7 @@
       key: "creatInfo",
       value: function creatInfo() {
         var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.16</div>\n          </div>\n        ");
+        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.18</div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
         infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
@@ -3115,7 +3169,7 @@
         var _this$art$template = this.art.template,
             $infoPanel = _this$art$template.$infoPanel,
             $video = _this$art$template.$video;
-        var types = Array.from($infoPanel.querySelectorAll('[data-video]'));
+        var types = queryAll('[data-video]', $infoPanel);
         types.forEach(function (item) {
           var value = $video[item.dataset.video];
 
@@ -3152,7 +3206,7 @@
 
         if (value) {
           this.state = true;
-          $player.classList.add('artplayer-info-show');
+          addClass($player, 'artplayer-info-show');
 
           if (!$infoPanel.innerHTML) {
             append($infoPanel, this.creatInfo());
@@ -3163,7 +3217,7 @@
           this.art.emit('info:show');
         } else {
           this.state = false;
-          $player.classList.remove('artplayer-info-show');
+          removeClass($player, 'artplayer-info-show');
           clearTimeout(this.timer);
           this.art.emit('info:hide');
         }
@@ -3222,52 +3276,6 @@
   }
 
   var slicedToArray = _slicedToArray;
-
-  function assToVtt(ass) {
-    var reAss = new RegExp('Dialogue:\\s\\d,' + '(\\d+:\\d\\d:\\d\\d.\\d\\d),' + '(\\d+:\\d\\d:\\d\\d.\\d\\d),' + '([^,]*),' + '([^,]*),' + '(?:[^,]*,){4}' + '([\\s\\S]*)$', 'i');
-
-    function fixTime() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      return time.split(/[:.]/).map(function (item, index, arr) {
-        if (index === arr.length - 1) {
-          if (item.length === 1) {
-            return ".".concat(item, "00");
-          }
-
-          if (item.length === 2) {
-            return ".".concat(item, "0");
-          }
-        } else if (item.length === 1) {
-          return (index === 0 ? '0' : ':0') + item;
-        } // eslint-disable-next-line no-nested-ternary
-
-
-        return index === 0 ? item : index === arr.length - 1 ? ".".concat(item) : ":".concat(item);
-      }).join('');
-    }
-
-    return "WEBVTT\n\n".concat(ass.split(/\r?\n/).map(function (line) {
-      var m = line.match(reAss);
-      if (!m) return null;
-      return {
-        start: fixTime(m[1].trim()),
-        end: fixTime(m[2].trim()),
-        text: m[5].replace(/{[\s\S]*?}/g, '').replace(/(\\N)/g, '\n').trim().split(/\r?\n/).map(function (item) {
-          return item.trim();
-        }).join('\n')
-      };
-    }).filter(function (line) {
-      return line;
-    }).map(function (line, index) {
-      if (line) {
-        return "".concat(index + 1, "\n").concat(line.start, " --> ").concat(line.end, "\n").concat(line.text);
-      }
-
-      return '';
-    }).filter(function (line) {
-      return line.trim();
-    }).join('\n\n'));
-  }
 
   var Subtitle =
   /*#__PURE__*/
@@ -3407,11 +3415,11 @@
 
         if (value) {
           this.state = true;
-          $player.classList.remove('artplayer-subtitle-hide');
+          removeClass($player, 'artplayer-subtitle-hide');
           this.art.emit('subtitle:show');
         } else {
           this.state = false;
-          $player.classList.add('artplayer-subtitle-hide');
+          addClass($player, 'artplayer-subtitle-hide');
           this.art.emit('subtitle:hide');
         }
       }
@@ -3436,10 +3444,10 @@
   function hoverInit(art, events) {
     var $player = art.template.$player;
     events.hover($player, function () {
-      $player.classList.add('artplayer-hover');
+      addClass($player, 'artplayer-hover');
       art.emit('hoverenter');
     }, function () {
-      $player.classList.remove('artplayer-hover');
+      removeClass($player, 'artplayer-hover');
       art.emit('hoverleave');
     });
   }
@@ -3450,8 +3458,8 @@
         $video = _art$template.$video,
         player = art.player;
     var autoHide = debounce(function () {
-      $player.classList.add('artplayer-hide-cursor');
-      $player.classList.remove('artplayer-hover');
+      addClass($player, 'artplayer-hide-cursor');
+      removeClass($player, 'artplayer-hover');
       art.controls.show = false;
     }, 3000);
     art.on('hoverleave', function () {
@@ -3461,7 +3469,7 @@
     });
     events.proxy($player, 'mousemove', function (event) {
       autoHide.clearTimeout();
-      $player.classList.remove('artplayer-hide-cursor');
+      removeClass($player, 'artplayer-hide-cursor');
       art.controls.show = true;
 
       if (!art.player.pip && player.playing && event.target === $video) {
@@ -3725,11 +3733,11 @@
 
         if (value) {
           this.state = true;
-          $player.classList.remove('artplayer-layers-hide');
+          removeClass($player, 'artplayer-layers-hide');
           this.art.emit('layers:show');
         } else {
           this.state = false;
-          $player.classList.add('artplayer-layers-hide');
+          addClass($player, 'artplayer-layers-hide');
           this.art.emit('layers:hide');
         }
       }
@@ -3761,11 +3769,11 @@
 
         if (value) {
           this.state = true;
-          $player.classList.add('artplayer-loading-show');
+          addClass($player, 'artplayer-loading-show');
           this.art.emit('loading:show');
         } else {
           this.state = false;
-          $player.classList.remove('artplayer-loading-show');
+          removeClass($player, 'artplayer-loading-show');
           this.art.emit('loading:hide');
         }
       }
@@ -3795,7 +3803,7 @@
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
         this.state = true;
-        $player.classList.add('artplayer-notice-show');
+        addClass($player, 'artplayer-notice-show');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
         clearTimeout(this.timer);
 
@@ -3812,7 +3820,7 @@
       value: function hide() {
         var $player = this.art.template.$player;
         this.state = false;
-        $player.classList.remove('artplayer-notice-show');
+        removeClass($player, 'artplayer-notice-show');
         this.art.emit('notice:hide');
       }
     }]);
@@ -3844,11 +3852,11 @@
 
         if (value) {
           this.state = true;
-          $player.classList.add('artplayer-mask-show');
+          addClass($player, 'artplayer-mask-show');
           this.art.emit('mask:show');
         } else {
           this.state = false;
-          $player.classList.remove('artplayer-mask-show');
+          removeClass($player, 'artplayer-mask-show');
           this.art.emit('mask:hide');
         }
       }
@@ -3918,11 +3926,11 @@
   function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function flip(settingOption) {
+  function flip(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$h({}, settingOption, {
+      return _objectSpread$h({}, option, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
@@ -3933,10 +3941,13 @@
         },
         mounted: function mounted($setting) {
           art.on('flipChange', function (flip) {
-            var $current = Array.from($setting.querySelectorAll('button')).find(function (item) {
+            var $current = queryAll('button', $setting).find(function (item) {
               return item.dataset.value === flip;
             });
-            inverseClass($current.parentElement, 'current');
+
+            if ($current) {
+              inverseClass($current.parentElement, 'current');
+            }
           });
         }
       });
@@ -3946,11 +3957,11 @@
   function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function aspectRatio$1(settingOption) {
+  function aspectRatio$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$i({}, settingOption, {
+      return _objectSpread$i({}, option, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
@@ -3961,10 +3972,13 @@
         },
         mounted: function mounted($setting) {
           art.on('aspectRatioChange', function (ratio) {
-            var $current = Array.from($setting.querySelectorAll('button')).find(function (item) {
+            var $current = queryAll('button', $setting).find(function (item) {
               return item.dataset.value === ratio;
             });
-            inverseClass($current.parentElement, 'current');
+
+            if ($current) {
+              inverseClass($current.parentElement, 'current');
+            }
           });
         }
       });
@@ -3974,17 +3988,16 @@
   function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-  function playbackRate$1(settingOption) {
+  function playbackRate$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player,
           proxy = art.events.proxy;
-      return _objectSpread$j({}, settingOption, {
+      return _objectSpread$j({}, option, {
         html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n                </div>\n                <div class=\"art-setting-range\">\n                    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n                </div>\n            "),
         mounted: function mounted($setting) {
-          var $range = $setting.querySelector('.art-setting-range input');
-          var $value = $setting.querySelector('.art-subtitle-value');
+          var $range = query('.art-setting-range input', $setting);
+          var $value = query('.art-subtitle-value', $setting);
           proxy($range, 'change', function () {
             var value = $range.value;
             $value.innerText = value;
@@ -4069,11 +4082,11 @@
 
         if (value) {
           this.state = true;
-          $player.classList.add('artplayer-setting-show');
+          addClass($player, 'artplayer-setting-show');
           this.art.emit('setting:show');
         } else {
           this.state = false;
-          $player.classList.remove('artplayer-setting-show');
+          removeClass($player, 'artplayer-setting-show');
           this.art.emit('setting:hide');
         }
       }
@@ -4141,8 +4154,8 @@
       index: 20,
       html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
       mounted: function mounted($setting) {
-        var $range = $setting.querySelector('.art-setting-range input');
-        var $value = $setting.querySelector('.art-subtitle-value');
+        var $range = query('.art-setting-range input', $setting);
+        var $value = query('.art-subtitle-value', $setting);
         proxy($range, 'change', function () {
           var value = $range.value;
           $value.innerText = value;
@@ -4557,7 +4570,7 @@
       _this.id = id;
       Artplayer.instances.push(assertThisInitialized(_this)); // eslint-disable-next-line no-console
 
-      console.log('%c ArtPlayer %c 3.1.16 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+      console.log('%c ArtPlayer %c 3.1.18 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
       return _this;
     }
 
@@ -4574,7 +4587,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.16';
+        return '3.1.18';
       }
     }, {
       key: "env",
@@ -4679,5 +4692,5 @@
 
   return Artplayer;
 
-}));
+})));
 //# sourceMappingURL=artplayer.js.map

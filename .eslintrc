@@ -1,16 +1,20 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["airbnb-base", "prettier"],
-  "env": {
-      "browser": true,
-      "es6": true
-  },
-  "rules": {
-      "no-shadow": 0,
-      "no-param-reassign": 0,
-      "prefer-object-spread": 0
-  },
-  "parserOptions": {
-      "sourceType": "module"
-  }
+    "parser": "babel-eslint",
+    "extends": [
+        "airbnb-base",
+        "prettier"
+    ],
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "rules": {
+        "no-shadow": 0,
+        "no-param-reassign": 0,
+        "prefer-object-spread": 0,
+        "import/named": 0
+    },
+    "parserOptions": {
+        "sourceType": "module"
+    }
 }

@@ -1,4 +1,4 @@
-import { setStyle } from '../utils';
+import { setStyle, addClass, removeClass, hasClass } from '../utils';
 
 export default function resizeMix(art, player) {
     const {
@@ -7,7 +7,7 @@ export default function resizeMix(art, player) {
 
     Object.defineProperty(player, 'autoSize', {
         get() {
-            return $container.classList.contains('artplayer-auto-size');
+            return hasClass($container, 'artplayer-auto-size');
         },
         set(value) {
             if (value) {
@@ -15,7 +15,7 @@ export default function resizeMix(art, player) {
                 const { width, height } = $container.getBoundingClientRect();
                 const videoRatio = videoWidth / videoHeight;
                 const containerRatio = width / height;
-                $container.classList.add('artplayer-auto-size');
+                addClass($container, 'artplayer-auto-size');
                 if (containerRatio > videoRatio) {
                     const percentage = ((height * videoRatio) / width) * 100;
                     setStyle($player, 'width', `${percentage}%`);
@@ -27,7 +27,7 @@ export default function resizeMix(art, player) {
                 }
                 art.emit('autoSizeChange');
             } else {
-                $container.classList.remove('artplayer-auto-size');
+                removeClass($container, 'artplayer-auto-size');
                 setStyle($player, 'width', null);
                 setStyle($player, 'height', null);
                 art.emit('autoSizeRemove');

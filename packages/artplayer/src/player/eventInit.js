@@ -1,5 +1,5 @@
 import config from '../config';
-import { sleep } from '../utils';
+import { sleep, addClass } from '../utils';
 
 export default function eventInit(art, player) {
     const {
@@ -69,7 +69,7 @@ export default function eventInit(art, player) {
         } else {
             art.loading.show = false;
             art.controls.show = false;
-            $player.classList.add('artplayer-error');
+            addClass($player, 'artplayer-error');
             sleep(1000).then(() => {
                 notice.show(i18n.get('Video load failed'), false);
                 art.destroy();

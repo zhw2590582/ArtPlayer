@@ -1,4 +1,4 @@
-export default class ArtPlayerError extends Error {
+export class ArtPlayerError extends Error {
     constructor(message, context) {
         super(message);
         if (typeof Error.captureStackTrace === 'function') {
@@ -6,4 +6,11 @@ export default class ArtPlayerError extends Error {
         }
         this.name = 'ArtPlayerError';
     }
+}
+
+export function errorHandle(condition, msg) {
+    if (!condition) {
+        throw new ArtPlayerError(msg);
+    }
+    return condition;
 }
