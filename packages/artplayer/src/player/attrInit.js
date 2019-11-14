@@ -26,5 +26,7 @@ export default function attrInit(art, player) {
         $video.autoplay = option.autoplay;
     }
 
+    $video.controls = false;
+
     player.attachUrl(option.url);
 }
