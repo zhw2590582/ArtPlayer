@@ -1,6 +1,7 @@
 import { errorHandle, hasOwnProperty } from '../utils';
 import subtitleOffset from './subtitleOffset';
-import localPreview from './localPreview';
+import localVideo from './localVideo';
+import localSubtitle from './localSubtitle';
 import miniProgressBar from './miniProgressBar';
 import networkMonitor from './networkMonitor';
 import autoPip from './autoPip';
@@ -20,8 +21,12 @@ export default class Plugins {
             this.add(miniProgressBar);
         }
 
-        if (option.localPreview) {
-            this.add(localPreview);
+        if (option.localVideo) {
+            this.add(localVideo);
+        }
+
+        if (option.localSubtitle) {
+            this.add(localSubtitle);
         }
 
         if (option.networkMonitor) {

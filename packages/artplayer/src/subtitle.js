@@ -19,10 +19,10 @@ export default class Subtitle {
         return '';
     }
 
-    switch(url) {
+    switch(url, name = 'unknown') {
         const { i18n, notice } = this.art;
         return this.init(url).then(blobUrl => {
-            notice.show(i18n.get('Switch subtitle'));
+            notice.show(`${i18n.get('Switch subtitle')}: ${name}`);
             return blobUrl;
         });
     }

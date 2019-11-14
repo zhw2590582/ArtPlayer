@@ -1,4 +1,4 @@
-import { append, setStyles, setStyle, remove, errorHandle, hasOwnProperty } from './index';
+import { append, setStyles, setStyle, remove, errorHandle, hasOwnProperty, tooltip } from './index';
 
 export default function component(art, parent, target, getOption, callback, title) {
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
@@ -18,6 +18,10 @@ export default function component(art, parent, target, getOption, callback, titl
 
     if (option.style) {
         setStyles($element, option.style);
+    }
+
+    if (option.tooltip) {
+        tooltip($element, option.tooltip);
     }
 
     const childs = Array.from(target.children);

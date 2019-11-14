@@ -14,7 +14,7 @@ export default function fullscreenMix(art, player) {
     };
 
     const screenfullError = () => {
-        notice.show(i18n.get('This does not seem to support full screen functionality'));
+        notice.show(i18n.get('Does not support fullscreen'));
     };
 
     if (player.fullscreenIsEnabled) {

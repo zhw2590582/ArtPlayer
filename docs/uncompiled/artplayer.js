@@ -651,7 +651,8 @@
     fullscreenWeb: 'boolean',
     subtitleOffset: 'boolean',
     miniProgressBar: 'boolean',
-    localPreview: 'boolean',
+    localVideo: 'boolean',
+    localSubtitle: 'boolean',
     autoPip: 'boolean',
     networkMonitor: 'boolean',
     plugins: ['function'],
@@ -663,7 +664,8 @@
       html: validElement,
       style: 'object|undefined',
       click: 'function|undefined',
-      mounted: 'function|undefined'
+      mounted: 'function|undefined',
+      tooltip: 'string|undefined'
     }],
     contextmenu: [{
       disable: 'boolean|undefined',
@@ -672,7 +674,8 @@
       html: validElement,
       style: 'object|undefined',
       click: 'function|undefined',
-      mounted: 'function|undefined'
+      mounted: 'function|undefined',
+      tooltip: 'string|undefined'
     }],
     quality: [{
       default: 'boolean|undefined',
@@ -687,6 +690,7 @@
       style: 'object|undefined',
       click: 'function|undefined',
       mounted: 'function|undefined',
+      tooltip: 'string|undefined',
       position: function position(value, type, paths) {
         var position = ['top', 'left', 'right'];
         return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters"));
@@ -880,7 +884,7 @@
   	"Web fullscreen": "网页全屏",
   	"Exit web fullscreen": "退出网页全屏",
   	"Mini player": "迷你播放器",
-  	"This does not seem to support full screen functionality": "似乎不支持全屏功能"
+  	"Does not support fullscreen": "不支持全屏"
   };
 
   var Close$1 = "關閉";
@@ -929,7 +933,7 @@
   	"Web fullscreen": "網頁全屏",
   	"Exit web fullscreen": "退出網頁全屏",
   	"Mini player": "迷你播放器",
-  	"This does not seem to support full screen functionality": "似乎不支持全屏功能"
+  	"Does not support fullscreen": "不支持全屏"
   };
 
   var I18n =
@@ -1288,6 +1292,7 @@
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
         if (url !== template.$video.src) {
+          URL.revokeObjectURL(template.$video.src);
           var currentTime = player.currentTime,
               playing = player.playing;
           return player.attachUrl(url).then(function () {
@@ -1315,6 +1320,7 @@
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
         if (url !== template.$video.src) {
+          URL.revokeObjectURL(template.$video.src);
           var playing = player.playing;
           return player.attachUrl(url).then(function () {
             option.url = url;
@@ -1683,7 +1689,7 @@
     };
 
     var screenfullError = function screenfullError() {
-      notice.show(i18n.get('This does not seem to support full screen functionality'));
+      notice.show(i18n.get('Does not support fullscreen'));
     };
 
     if (player.fullscreenIsEnabled) {
@@ -2088,6 +2094,10 @@
 
     if (option.style) {
       setStyles($element, option.style);
+    }
+
+    if (option.tooltip) {
+      tooltip($element, option.tooltip);
     }
 
     var childs = Array.from(target.children);
@@ -3297,11 +3307,12 @@
     createClass(Subtitle, [{
       key: "switch",
       value: function _switch(url) {
+        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
         var _this$art = this.art,
             i18n = _this$art.i18n,
             notice = _this$art.notice;
         return this.init(url).then(function (blobUrl) {
-          notice.show(i18n.get('Switch subtitle'));
+          notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
           return blobUrl;
         });
       }
@@ -4225,47 +4236,28 @@
     };
   }
 
-  function localPreview(art) {
-    var _art$constructor$util = art.constructor.utils,
-        append = _art$constructor$util.append,
-        setStyle = _art$constructor$util.setStyle,
-        setStyles = _art$constructor$util.setStyles,
-        sleep = _art$constructor$util.sleep,
-        errorHandle = _art$constructor$util.errorHandle;
+  function localVideo(art) {
     var proxy = art.events.proxy,
-        option = art.option,
         notice = art.notice,
         i18n = art.i18n,
         template = art.template,
         player = art.player;
+    var notSupport = 'Playback of this file format is not supported';
     i18n.update({
-      'zh-cn': {
-        'Playback of this file format is not supported': '不支持播放该文件格式',
-        'Load local video successfully': '加载本地视频成功'
-      },
-      'zh-tw': {
-        'Playback of this file format is not supported': '不支持播放該文件格式',
-        'Load local video successfully': '加載本地視頻成功'
-      }
+      'zh-cn': defineProperty({}, notSupport, '不支持播放该文件格式'),
+      'zh-tw': defineProperty({}, notSupport, '不支持播放該文件格式')
     });
 
     function loadVideo(file) {
       if (file) {
+        var type = getExt(file.name);
         var canPlayType = template.$video.canPlayType(file.type);
 
         if (canPlayType === 'maybe' || canPlayType === 'probably') {
           var url = URL.createObjectURL(file);
-          player.playbackRate = false;
-          player.aspectRatio = false;
-          template.$video.src = url;
-          sleep(1000).then(function () {
-            player.currentTime = 0;
-          });
-          option.url = url;
-          art.emit('switch', url);
-          notice.show(i18n.get('Load local video successfully'));
+          player.switchUrl(url, file.name);
         } else {
-          var tip = "".concat(i18n.get('Playback of this file format is not supported'), ": ").concat(file.type);
+          var tip = "".concat(i18n.get(notSupport), ": ").concat(file.type || type);
           notice.show(tip, true, 3000);
           errorHandle(false, tip);
         }
@@ -4274,7 +4266,6 @@
 
     proxy(template.$player, 'dragover', function (e) {
       e.preventDefault();
-      notice.show(i18n.get('Load local video successfully'));
     });
     proxy(template.$player, 'drop', function (e) {
       e.preventDefault();
@@ -4282,7 +4273,7 @@
       loadVideo(file);
     });
     return {
-      name: 'localPreview',
+      name: 'localVideo',
       attach: function attach(target) {
         var $input = append(target, '<input type="file">');
         setStyle(target, 'position', 'relative');
@@ -4297,6 +4288,81 @@
         proxy($input, 'change', function () {
           var file = $input.files[0];
           loadVideo(file);
+        });
+      }
+    };
+  }
+
+  function localSubtitle(art) {
+    var proxy = art.events.proxy,
+        notice = art.notice,
+        i18n = art.i18n,
+        subtitle = art.subtitle;
+    var notSupport = 'Only supports subtitle files in .ass, .vtt and .srt format';
+    i18n.update({
+      'zh-cn': defineProperty({}, notSupport, '只支持 .ass、.vtt 和 .srt 格式的字幕文件'),
+      'zh-tw': defineProperty({}, notSupport, '只支持 .ass、.vtt 和 .srt 格式的字幕文件')
+    });
+
+    function loadSubtitle(file) {
+      if (file) {
+        var type = getExt(file.name);
+
+        if (['ass', 'vtt', 'srt'].includes(type)) {
+          var reader = new FileReader();
+          proxy(reader, 'load', function (event) {
+            var text = event.target.result;
+
+            switch (type) {
+              case 'srt':
+                {
+                  var url = vttToBlob(srtToVtt(text));
+                  subtitle.switch(url, file.name);
+                  break;
+                }
+
+              case 'ass':
+                {
+                  var _url = vttToBlob(assToVtt(text));
+
+                  subtitle.switch(_url, file.name);
+                  break;
+                }
+
+              case 'vtt':
+                {
+                  var _url2 = vttToBlob(text);
+
+                  subtitle.switch(_url2, file.name);
+                  break;
+                }
+            }
+          });
+          reader.readAsText(file);
+        } else {
+          var tip = i18n.get(notSupport);
+          notice.show(tip, true, 3000);
+          errorHandle(false, tip);
+        }
+      }
+    }
+
+    return {
+      name: 'localSubtitle',
+      attach: function attach(target) {
+        var $input = append(target, '<input type="file">');
+        setStyle(target, 'position', 'relative');
+        setStyles($input, {
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          left: '0',
+          top: '0',
+          opacity: '0'
+        });
+        proxy($input, 'change', function () {
+          var file = $input.files[0];
+          loadSubtitle(file);
         });
       }
     };
@@ -4437,8 +4503,12 @@
         this.add(miniProgressBar);
       }
 
-      if (option.localPreview) {
-        this.add(localPreview);
+      if (option.localVideo) {
+        this.add(localVideo);
+      }
+
+      if (option.localSubtitle) {
+        this.add(localSubtitle);
       }
 
       if (option.networkMonitor) {
@@ -4652,7 +4722,8 @@
           fullscreenWeb: false,
           subtitleOffset: false,
           miniProgressBar: false,
-          localPreview: false,
+          localVideo: false,
+          localSubtitle: false,
           autoPip: false,
           networkMonitor: false,
           layers: [],

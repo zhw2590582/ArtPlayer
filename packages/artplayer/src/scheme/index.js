@@ -32,7 +32,8 @@ export default {
     fullscreenWeb: 'boolean',
     subtitleOffset: 'boolean',
     miniProgressBar: 'boolean',
-    localPreview: 'boolean',
+    localVideo: 'boolean',
+    localSubtitle: 'boolean',
     autoPip: 'boolean',
     networkMonitor: 'boolean',
     plugins: ['function'],
@@ -46,6 +47,7 @@ export default {
             style: 'object|undefined',
             click: 'function|undefined',
             mounted: 'function|undefined',
+            tooltip: 'string|undefined',
         },
     ],
     contextmenu: [
@@ -57,6 +59,7 @@ export default {
             style: 'object|undefined',
             click: 'function|undefined',
             mounted: 'function|undefined',
+            tooltip: 'string|undefined',
         },
     ],
     quality: [
@@ -75,6 +78,7 @@ export default {
             style: 'object|undefined',
             click: 'function|undefined',
             mounted: 'function|undefined',
+            tooltip: 'string|undefined',
             position: (value, type, paths) => {
                 const position = ['top', 'left', 'right'];
                 return errorHandle(

@@ -571,12 +571,12 @@ var art = new Artplayer({
 });
 ```
 
-## localPreview
+## localVideo
 
 -   Type: `Boolean`
 -   Default: `false`
 
-Local Preview plugin
+Local video preview plugin
 
 [Run Code](/)
 
@@ -585,14 +585,42 @@ var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    localPreview: true,
+    localVideo: true,
     controls: [
         {
             name: 'preview',
             position: 'right',
-            html: 'OPEN',
+            html: 'OPEN VIDEO',
             mounted: $preview => {
-                art.plugins.localPreview.attach($preview);
+                art.plugins.localVideo.attach($preview);
+            },
+        },
+    ],
+});
+```
+
+## localSubtitle
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Local subtitle preview plugin
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    localSubtitle: true,
+    controls: [
+        {
+            name: 'preview',
+            position: 'right',
+            html: 'OPEN SUBTITLE',
+            mounted: $preview => {
+                art.plugins.localSubtitle.attach($preview);
             },
         },
     ],
@@ -826,6 +854,7 @@ Custom layer, The type of layer is an object or function
 | `style`   | `Object`            | The style object                              |
 | `click`   | `Function`          | Click event                                   |
 | `mounted` | `Function`          | Callback after mounted                        |
+| `tooltip` | `String`            | Tooltip text                                  |
 
 [Run Code](/)
 
@@ -864,6 +893,7 @@ Custom contextmenu, The type of layer is an object or function
 | `style`   | `Object`            | The style object                              |
 | `click`   | `Function`          | Click event                                   |
 | `mounted` | `Function`          | Callback after mounted                        |
+| `tooltip` | `String`            | Tooltip text                                  |
 
 [Run Code](/)
 
@@ -901,6 +931,7 @@ Custom controls, The type of controls is an object or function
 | `click`    | `Function`          | Click event                                                       |
 | `mounted`  | `Function`          | Callback after mounted                                            |
 | `position` | `String`            | The position where the controller appears: `top`, `left`, `right` |
+| `tooltip`  | `String`            | Tooltip text                                                      |
 
 [Run Code](/)
 
@@ -916,6 +947,7 @@ var art = new Artplayer({
                 position: 'right',
                 index: 10,
                 html: 'myController',
+                tooltip: 'This is my controller',
                 click: function() {
                     console.log('myController');
                 },
@@ -1018,6 +1050,7 @@ Player core function
 | `toggle`              | `Boolean`  | Toggle play and pause                                                                             |
 | `volume`              | `Number`   | `Getter` and `Setter` of the current volume                                                       |
 | `muted`               | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
+| `url`                 | `String`   | `Getter` of the video url                                                                         |
 
 [Run Code](/)
 
@@ -1268,7 +1301,7 @@ var art = new Artplayer({
                 index: 10,
                 html: 'subtitle1',
                 click: function() {
-                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.srt');
+                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.srt', 'srt subtitle name');
                 },
             };
         },
@@ -1278,7 +1311,7 @@ var art = new Artplayer({
                 index: 20,
                 html: 'subtitle2',
                 click: function() {
-                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt');
+                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt', 'vtt subtitle name');
                 },
             };
         },

@@ -20,7 +20,8 @@ var art = new Artplayer({
     fullscreenWeb: true,
     subtitleOffset: true,
     miniProgressBar: true,
-    localPreview: true,
+    localVideo: true,
+    localSubtitle: true,
     networkMonitor: false,
     autoPip: true,
     mutex: true,
@@ -105,11 +106,21 @@ var art = new Artplayer({
     ],
     controls: [
         {
-            name: 'preview',
+            name: 'localVideo',
             position: 'right',
-            html: 'OPEN',
+            html: 'VIDEO',
+            tooltip: 'Open Local Video',
             mounted: $preview => {
-                art.plugins.localPreview.attach($preview);
+                art.plugins.localVideo.attach($preview);
+            },
+        },
+        {
+            name: 'localSubtitle',
+            position: 'right',
+            html: 'SUBTITLE',
+            tooltip: 'Open Local Subtitle',
+            mounted: $preview => {
+                art.plugins.localSubtitle.attach($preview);
             },
         },
     ],
