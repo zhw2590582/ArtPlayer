@@ -1,3 +1,5 @@
+import { addClass, removeClass, hasClass } from '../utils';
+
 export default function fullscreenWebMix(art, player) {
     const {
         template: { $player },
@@ -5,21 +7,21 @@ export default function fullscreenWebMix(art, player) {
 
     Object.defineProperty(player, 'fullscreenWeb', {
         get() {
-            return $player.classList.contains('artplayer-web-fullscreen');
+            return hasClass($player, 'artplayer-web-fullscreen');
         },
         set(value) {
             if (value) {
                 if (player.fullscreen) {
                     player.fullscreen = false;
                 }
-                $player.classList.add('artplayer-web-fullscreen');
+                addClass($player, 'artplayer-web-fullscreen');
                 player.aspectRatioReset = true;
                 art.emit('fullscreenWeb:enabled');
             } else {
                 if (player.fullscreen) {
                     player.fullscreen = false;
                 }
-                $player.classList.remove('artplayer-web-fullscreen');
+                removeClass($player, 'artplayer-web-fullscreen');
                 player.aspectRatioReset = true;
                 art.emit('fullscreenWeb:exit');
             }

@@ -1,3 +1,5 @@
+import { query } from '../utils';
+
 function settingMix(art) {
     const {
         i18n,
@@ -17,8 +19,8 @@ function settingMix(art) {
             </div>
         `,
         mounted: $setting => {
-            const $range = $setting.querySelector('.art-setting-range input');
-            const $value = $setting.querySelector('.art-subtitle-value');
+            const $range = query('.art-setting-range input', $setting);
+            const $value = query('.art-subtitle-value', $setting);
             proxy($range, 'change', () => {
                 const { value } = $range;
                 $value.innerText = value;

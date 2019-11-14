@@ -1,4 +1,4 @@
-import { setStyle } from '../utils';
+import { setStyle, addClass, removeClass } from '../utils';
 import component from '../utils/component';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
@@ -26,35 +26,45 @@ export default class Contextmenu {
             events: { proxy },
         } = this.art;
 
-        this.add(playbackRate({
-            disable: !option.playbackRate,
-            name: 'playbackRate',
-            index: 10,
-        }));
+        this.add(
+            playbackRate({
+                disable: !option.playbackRate,
+                name: 'playbackRate',
+                index: 10,
+            }),
+        );
 
-        this.add(aspectRatio({
-            disable: !option.aspectRatio,
-            name: 'aspectRatio',
-            index: 20,
-        }));
+        this.add(
+            aspectRatio({
+                disable: !option.aspectRatio,
+                name: 'aspectRatio',
+                index: 20,
+            }),
+        );
 
-        this.add(info({
-            disable: false,
-            name: 'info',
-            index: 30,
-        }));
+        this.add(
+            info({
+                disable: false,
+                name: 'info',
+                index: 30,
+            }),
+        );
 
-        this.add(version({
-            disable: false,
-            name: 'version',
-            index: 40,
-        }));
+        this.add(
+            version({
+                disable: false,
+                name: 'version',
+                index: 40,
+            }),
+        );
 
-        this.add(close({
-            disable: false,
-            name: 'close',
-            index: 50,
-        }));
+        this.add(
+            close({
+                disable: false,
+                name: 'close',
+                index: 50,
+            }),
+        );
 
         option.contextmenu.forEach(item => {
             this.add(item);
@@ -104,11 +114,11 @@ export default class Contextmenu {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.add('artplayer-contextmenu-show');
+            addClass($player, 'artplayer-contextmenu-show');
             this.art.emit('contextmenu:show');
         } else {
             this.state = false;
-            $player.classList.remove('artplayer-contextmenu-show');
+            removeClass($player, 'artplayer-contextmenu-show');
             this.art.emit('contextmenu:hide');
         }
     }

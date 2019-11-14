@@ -1,3 +1,4 @@
+import { addClass, removeClass } from './utils';
 import component from './utils/component';
 
 export default class Layers {
@@ -22,11 +23,11 @@ export default class Layers {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.remove('artplayer-layers-hide');
+            removeClass($player, 'artplayer-layers-hide');
             this.art.emit('layers:show');
         } else {
             this.state = false;
-            $player.classList.add('artplayer-layers-hide');
+            addClass($player, 'artplayer-layers-hide');
             this.art.emit('layers:hide');
         }
     }

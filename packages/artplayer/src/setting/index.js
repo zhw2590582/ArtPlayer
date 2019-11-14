@@ -1,3 +1,4 @@
+import { addClass, removeClass } from '../utils';
 import component from '../utils/component';
 import flip from './flip';
 import aspectRatio from './aspectRatio';
@@ -64,11 +65,11 @@ export default class Setting {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.add('artplayer-setting-show');
+            addClass($player, 'artplayer-setting-show');
             this.art.emit('setting:show');
         } else {
             this.state = false;
-            $player.classList.remove('artplayer-setting-show');
+            removeClass($player, 'artplayer-setting-show');
             this.art.emit('setting:hide');
         }
     }

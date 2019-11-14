@@ -11,6 +11,26 @@ export function hasOwnProperty(obj, name) {
     return Object.prototype.hasOwnProperty.call(obj, name);
 }
 
+export function query(selector, parent = document) {
+    return parent.querySelector(selector);
+}
+
+export function queryAll(selector, parent = document) {
+    return Array.from(parent.querySelectorAll(selector));
+}
+
+export function addClass(target, className) {
+    return target.classList.add(className);
+}
+
+export function removeClass(target, className) {
+    return target.classList.remove(className);
+}
+
+export function hasClass(target, className) {
+    return target.classList.contains(className);
+}
+
 export function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
 }
@@ -139,8 +159,8 @@ export function sublings(target) {
 }
 
 export function inverseClass(target, className) {
-    sublings(target).forEach(item => item.classList.remove(className));
-    target.classList.add(className);
+    sublings(target).forEach(item => removeClass(item, className));
+    addClass(target, className);
 }
 
 export function tooltip(target, msg, pos = 'up') {

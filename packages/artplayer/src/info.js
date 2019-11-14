@@ -1,4 +1,4 @@
-import { append } from './utils';
+import { append, addClass, removeClass, queryAll } from './utils';
 
 export default class Info {
     constructor(art) {
@@ -73,7 +73,7 @@ export default class Info {
 
     readInfo() {
         const { $infoPanel, $video } = this.art.template;
-        const types = Array.from($infoPanel.querySelectorAll('[data-video]'));
+        const types = queryAll('[data-video]', $infoPanel);
         types.forEach(item => {
             const value = $video[item.dataset.video];
             if (value !== undefined) {
@@ -96,7 +96,7 @@ export default class Info {
         const { $player, $infoPanel } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.add('artplayer-info-show');
+            addClass($player, 'artplayer-info-show');
             if (!$infoPanel.innerHTML) {
                 append($infoPanel, this.creatInfo());
             }
@@ -105,7 +105,7 @@ export default class Info {
             this.art.emit('info:show');
         } else {
             this.state = false;
-            $player.classList.remove('artplayer-info-show');
+            removeClass($player, 'artplayer-info-show');
             clearTimeout(this.timer);
             this.art.emit('info:hide');
         }

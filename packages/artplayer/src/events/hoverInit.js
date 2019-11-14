@@ -1,3 +1,5 @@
+import { addClass, removeClass } from '../utils';
+
 export default function hoverInit(art, events) {
     const {
         template: { $player },
@@ -5,11 +7,11 @@ export default function hoverInit(art, events) {
     events.hover(
         $player,
         () => {
-            $player.classList.add('artplayer-hover');
+            addClass($player, 'artplayer-hover');
             art.emit('hoverenter');
         },
         () => {
-            $player.classList.remove('artplayer-hover');
+            removeClass($player, 'artplayer-hover');
             art.emit('hoverleave');
         },
     );

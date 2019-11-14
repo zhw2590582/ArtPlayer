@@ -1,8 +1,8 @@
 import { secondToTime } from '../utils';
 
-export default function time(controlOption) {
+export default function time(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             function getTime() {
                 const newTime = `${secondToTime(art.player.currentTime)} / ${secondToTime(art.player.duration)}`;

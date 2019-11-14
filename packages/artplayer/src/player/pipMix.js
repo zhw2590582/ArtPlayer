@@ -1,4 +1,4 @@
-import { append, setStyle } from '../utils';
+import { append, setStyle, addClass, removeClass, hasClass } from '../utils';
 
 function nativePip(art, player) {
     const {
@@ -89,7 +89,7 @@ function customPip(art, player) {
 
     proxy($pipHeader, 'mousemove', event => {
         if (isDroging) {
-            $player.classList.add('is-dragging');
+            addClass($player, 'is-dragging');
             setStyle($player, 'left', `${lastPlayerLeft + event.pageX - lastPageX}px`);
             setStyle($player, 'top', `${lastPlayerTop + event.pageY - lastPageY}px`);
         }
@@ -97,20 +97,20 @@ function customPip(art, player) {
 
     proxy(document, 'mouseup', () => {
         isDroging = false;
-        $player.classList.remove('is-dragging');
+        removeClass($player, 'is-dragging');
     });
 
     proxy($pipClose, 'click', () => {
         player.pip = false;
         isDroging = false;
-        $player.classList.remove('is-dragging');
+        removeClass($player, 'is-dragging');
     });
 
     append($pipTitle, option.title || i18n.get('Mini player'));
 
     const property = {
         get() {
-            return $player.classList.contains('artplayer-pip');
+            return hasClass($player, 'artplayer-pip');
         },
         set(value) {
             if (value) {

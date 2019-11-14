@@ -1,11 +1,11 @@
-import { append, clamp, secondToTime, setStyle, getStyle } from '../utils';
+import { append, clamp, secondToTime, setStyle, getStyle, query, addClass, removeClass } from '../utils';
 
 export function getPosFromEvent(art, event) {
     const {
         template: { $progress },
         player,
     } = art;
-    
+
     const { left } = $progress.getBoundingClientRect();
     const width = clamp(event.pageX - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * player.duration;
@@ -14,7 +14,7 @@ export function getPosFromEvent(art, event) {
     return { second, time, width, percentage };
 }
 
-export default function progress(controlOption) {
+export default function progress(option) {
     return art => {
         const {
             option: { highlight, theme },
@@ -22,7 +22,7 @@ export default function progress(controlOption) {
             player,
         } = art;
         return {
-            ...controlOption,
+            ...option,
             html: `
                 <div class="art-control-progress-inner">
                     <div class="art-progress-loaded"></div>
@@ -34,11 +34,11 @@ export default function progress(controlOption) {
             `,
             mounted: $control => {
                 let isDroging = false;
-                const $loaded = $control.querySelector('.art-progress-loaded');
-                const $played = $control.querySelector('.art-progress-played');
-                const $highlight = $control.querySelector('.art-progress-highlight');
-                const $indicator = $control.querySelector('.art-progress-indicator');
-                const $tip = $control.querySelector('.art-progress-tip');
+                const $loaded = query('.art-progress-loaded', $control);
+                const $played = query('.art-progress-played', $control);
+                const $highlight = query('.art-progress-highlight', $control);
+                const $indicator = query('.art-progress-indicator', $control);
+                const $tip = query('.art-progress-tip', $control);
 
                 function showHighlight(event) {
                     const { width } = getPosFromEvent(art, event);
@@ -132,7 +132,7 @@ export default function progress(controlOption) {
                 proxy(document, 'mousemove', event => {
                     if (isDroging) {
                         const { second, percentage } = getPosFromEvent(art, event);
-                        $indicator.classList.add('art-show-indicator');
+                        addClass($indicator, 'art-show-indicator');
                         setBar('played', percentage);
                         player.seek = second;
                     }
@@ -141,7 +141,7 @@ export default function progress(controlOption) {
                 proxy(document, 'mouseup', () => {
                     if (isDroging) {
                         isDroging = false;
-                        $indicator.classList.remove('art-show-indicator');
+                        removeClass($indicator, 'art-show-indicator');
                     }
                 });
             },

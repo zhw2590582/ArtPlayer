@@ -1,4 +1,4 @@
-import { errorHandle } from './utils';
+import { errorHandle, query, addClass } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -6,7 +6,7 @@ export default class Template {
         if (art.option.container instanceof Element) {
             this.$container = art.option.container;
         } else {
-            this.$container = document.querySelector(art.option.container);
+            this.$container = query(art.option.container);
             errorHandle(this.$container, `No container element found by ${art.option.container}`);
         }
 
@@ -25,6 +25,8 @@ export default class Template {
         } else {
             this.initMobile();
         }
+
+        this.query = className => query(className, this.$container);
     }
 
     initDesktop() {
@@ -62,30 +64,30 @@ export default class Template {
             <div class="artplayer-contextmenu artplayer-backdrop-filter"></div>
           </div>
         `;
-        this.$player = this.$container.querySelector('.artplayer-video-player');
-        this.$video = this.$container.querySelector('.artplayer-video');
-        this.$subtitle = this.$container.querySelector('.artplayer-subtitle');
-        this.$danmuku = this.$container.querySelector('.artplayer-danmuku');
-        this.$bottom = this.$container.querySelector('.artplayer-bottom');
-        this.$progress = this.$container.querySelector('.artplayer-progress');
-        this.$controls = this.$container.querySelector('.artplayer-controls');
-        this.$controlsLeft = this.$container.querySelector('.artplayer-controls-left');
-        this.$controlsRight = this.$container.querySelector('.artplayer-controls-right');
-        this.$layers = this.$container.querySelector('.artplayer-layers');
-        this.$loading = this.$container.querySelector('.artplayer-loading');
-        this.$notice = this.$container.querySelector('.artplayer-notice');
-        this.$noticeInner = this.$container.querySelector('.artplayer-notice-inner');
-        this.$mask = this.$container.querySelector('.artplayer-mask');
-        this.$setting = this.$container.querySelector('.artplayer-setting');
-        this.$settingInner = this.$container.querySelector('.artplayer-setting-inner');
-        this.$settingBody = this.$container.querySelector('.artplayer-setting-body');
-        this.$info = this.$container.querySelector('.artplayer-info');
-        this.$infoPanel = this.$container.querySelector('.artplayer-info-panel');
-        this.$infoClose = this.$container.querySelector('.artplayer-info-close');
-        this.$pipHeader = this.$container.querySelector('.artplayer-pip-header');
-        this.$pipTitle = this.$container.querySelector('.artplayer-pip-title');
-        this.$pipClose = this.$container.querySelector('.artplayer-pip-close');
-        this.$contextmenu = this.$container.querySelector('.artplayer-contextmenu');
+        this.$player = this.query('.artplayer-video-player');
+        this.$video = this.query('.artplayer-video');
+        this.$subtitle = this.query('.artplayer-subtitle');
+        this.$danmuku = this.query('.artplayer-danmuku');
+        this.$bottom = this.query('.artplayer-bottom');
+        this.$progress = this.query('.artplayer-progress');
+        this.$controls = this.query('.artplayer-controls');
+        this.$controlsLeft = this.query('.artplayer-controls-left');
+        this.$controlsRight = this.query('.artplayer-controls-right');
+        this.$layers = this.query('.artplayer-layers');
+        this.$loading = this.query('.artplayer-loading');
+        this.$notice = this.query('.artplayer-notice');
+        this.$noticeInner = this.query('.artplayer-notice-inner');
+        this.$mask = this.query('.artplayer-mask');
+        this.$setting = this.query('.artplayer-setting');
+        this.$settingInner = this.query('.artplayer-setting-inner');
+        this.$settingBody = this.query('.artplayer-setting-body');
+        this.$info = this.query('.artplayer-info');
+        this.$infoPanel = this.query('.artplayer-info-panel');
+        this.$infoClose = this.query('.artplayer-info-close');
+        this.$pipHeader = this.query('.artplayer-pip-header');
+        this.$pipTitle = this.query('.artplayer-pip-title');
+        this.$pipClose = this.query('.artplayer-pip-close');
+        this.$contextmenu = this.query('.artplayer-contextmenu');
     }
 
     initMobile() {
@@ -94,15 +96,15 @@ export default class Template {
             <video class="artplayer-video"></video>
           </div>
         `;
-        this.$player = this.$container.querySelector('.artplayer-video-player');
-        this.$video = this.$container.querySelector('.artplayer-video');
+        this.$player = this.query('.artplayer-video-player');
+        this.$video = this.query('.artplayer-video');
     }
 
     destroy(removeHtml) {
         if (removeHtml) {
             this.$container.innerHTML = '';
         } else {
-            this.$player.classList.add('artplayer-destroy');
+            addClass(this.$player, 'artplayer-destroy');
         }
     }
 }

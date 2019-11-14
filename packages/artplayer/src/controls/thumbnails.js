@@ -1,21 +1,22 @@
 import { setStyle } from '../utils';
 import { getPosFromEvent } from './progress';
 
-export default function thumbnails(controlOption) {
+export default function thumbnails(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             const {
+                option: { thumbnails },
                 template: { $progress },
                 events: { proxy, loadImg },
             } = art;
-            
+
             let loading = false;
             let isLoad = false;
 
             function showThumbnails(event) {
                 const { width: posWidth } = getPosFromEvent(art, event);
-                const { url, height, width, number, column } = art.option.thumbnails;
+                const { url, height, width, number, column } = thumbnails;
                 const perWidth = $progress.clientWidth / number;
                 const perIndex = Math.floor(posWidth / perWidth);
                 const yIndex = Math.ceil(perIndex / column) - 1;
@@ -36,7 +37,7 @@ export default function thumbnails(controlOption) {
             proxy($progress, 'mousemove', event => {
                 if (!loading) {
                     loading = true;
-                    loadImg(art.option.thumbnails.url).then(() => {
+                    loadImg(thumbnails.url).then(() => {
                         isLoad = true;
                     });
                 }

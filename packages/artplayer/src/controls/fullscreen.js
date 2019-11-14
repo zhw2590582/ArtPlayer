@@ -1,8 +1,8 @@
 import { append, tooltip, setStyle } from '../utils';
 
-export default function fullscreen(controlOption) {
+export default function fullscreen(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             const {
                 events: { proxy },

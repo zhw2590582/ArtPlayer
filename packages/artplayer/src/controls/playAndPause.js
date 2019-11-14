@@ -1,8 +1,8 @@
 import { append, tooltip, setStyle } from '../utils';
 
-export default function playAndPause(controlOption) {
+export default function playAndPause(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             const {
                 events: { proxy },

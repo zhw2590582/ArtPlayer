@@ -1,8 +1,8 @@
 import { append, tooltip } from '../utils';
 
-export default function pip(controlOption) {
+export default function pip(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             const {
                 events: { proxy },

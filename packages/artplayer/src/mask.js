@@ -1,4 +1,4 @@
-import { append } from './utils';
+import { append, addClass, removeClass } from './utils';
 
 export default class Mask {
     constructor(art) {
@@ -12,11 +12,11 @@ export default class Mask {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.add('artplayer-mask-show');
+            addClass($player, 'artplayer-mask-show');
             this.art.emit('mask:show');
         } else {
             this.state = false;
-            $player.classList.remove('artplayer-mask-show');
+            removeClass($player, 'artplayer-mask-show');
             this.art.emit('mask:hide');
         }
     }

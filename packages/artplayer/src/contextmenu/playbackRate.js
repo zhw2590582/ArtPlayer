@@ -1,10 +1,10 @@
-import { inverseClass } from '../utils';
+import { inverseClass, queryAll } from '../utils';
 
-export default function playbackRate(menuOption) {
+export default function playbackRate(option) {
     return art => {
         const { i18n, player } = art;
         return {
-            ...menuOption,
+            ...option,
             html: `
                 ${i18n.get('Play speed')}:
                 <span data-rate="0.5">0.5</span>
@@ -15,8 +15,7 @@ export default function playbackRate(menuOption) {
                 <span data-rate="2.0">2.0</span>
             `,
             click: (contextmenu, event) => {
-                const { target } = event;
-                const { rate } = target.dataset;
+                const { rate } = event.target.dataset;
                 if (rate) {
                     player.playbackRate = Number(rate);
                     contextmenu.show = false;
@@ -24,9 +23,7 @@ export default function playbackRate(menuOption) {
             },
             mounted: $menu => {
                 art.on('playbackRateChange', rate => {
-                    const $current = Array.from($menu.querySelectorAll('span')).find(
-                        item => Number(item.dataset.rate) === rate,
-                    );
+                    const $current = queryAll('span', $menu).find(item => Number(item.dataset.rate) === rate);
                     if ($current) {
                         inverseClass($current, 'current');
                     }

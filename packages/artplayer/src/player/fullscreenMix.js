@@ -1,4 +1,5 @@
 import screenfull from 'screenfull';
+import { addClass, removeClass } from '../utils';
 
 export default function fullscreenMix(art, player) {
     const {
@@ -41,7 +42,7 @@ export default function fullscreenMix(art, player) {
                 }
 
                 screenfull.request($player).then(() => {
-                    $player.classList.add('artplayer-fullscreen');
+                    addClass($player, 'artplayer-fullscreen');
                     player.aspectRatioReset = true;
                     art.emit('fullscreen:enabled');
                 });
@@ -51,7 +52,7 @@ export default function fullscreenMix(art, player) {
                 }
 
                 screenfull.exit().then(() => {
-                    $player.classList.remove('artplayer-fullscreen');
+                    removeClass($player, 'artplayer-fullscreen');
                     player.aspectRatioReset = true;
                     art.emit('fullscreen:exit');
                 });

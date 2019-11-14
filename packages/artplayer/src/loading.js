@@ -1,4 +1,4 @@
-import { append } from './utils';
+import { append, addClass, removeClass } from './utils';
 
 export default class Loading {
     constructor(art) {
@@ -11,11 +11,11 @@ export default class Loading {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.add('artplayer-loading-show');
+            addClass($player, 'artplayer-loading-show');
             this.art.emit('loading:show');
         } else {
             this.state = false;
-            $player.classList.remove('artplayer-loading-show');
+            removeClass($player, 'artplayer-loading-show');
             this.art.emit('loading:hide');
         }
     }

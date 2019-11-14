@@ -1,4 +1,4 @@
-import { errorHandle } from '../utils';
+import { errorHandle, addClass, removeClass } from '../utils';
 import component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -156,15 +156,15 @@ export default class Controls {
                 break;
         }
 
-        errorHandle(parent, 'Controls option.position can not be empty');
         this.id += 1;
+        errorHandle(option.position, 'Controls option.position can not be empty');
         const control = component(this.art, this, parent, option, callback, 'control');
         if (
             !option.disable &&
             option.position !== 'top' &&
             !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')
         ) {
-            control.$ref.classList.add('art-control-onlyText');
+            addClass(control.$ref, 'art-control-onlyText');
         }
         return control;
     }
@@ -173,11 +173,11 @@ export default class Controls {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.add('artplayer-controls-show');
+            addClass($player, 'artplayer-controls-show');
             this.art.emit('controls:show');
         } else {
             this.state = false;
-            $player.classList.remove('artplayer-controls-show');
+            removeClass($player, 'artplayer-controls-show');
             this.art.emit('controls:hide');
         }
     }

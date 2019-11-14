@@ -1,4 +1,4 @@
-import { setStyles, srtToVtt, vttToBlob, getExt } from './utils';
+import { setStyles, srtToVtt, vttToBlob, getExt, addClass, removeClass } from './utils';
 import assToVtt from './utils/assToVtt';
 
 export default class Subtitle {
@@ -110,11 +110,11 @@ export default class Subtitle {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            $player.classList.remove('artplayer-subtitle-hide');
+            removeClass($player, 'artplayer-subtitle-hide');
             this.art.emit('subtitle:show');
         } else {
             this.state = false;
-            $player.classList.add('artplayer-subtitle-hide');
+            addClass($player, 'artplayer-subtitle-hide');
             this.art.emit('subtitle:hide');
         }
     }

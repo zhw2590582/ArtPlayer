@@ -1,8 +1,8 @@
 import { append, tooltip, setStyle } from '../utils';
 
-export default function fullscreenWeb(controlOption) {
+export default function fullscreenWeb(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             const {
                 events: { proxy },
@@ -10,7 +10,7 @@ export default function fullscreenWeb(controlOption) {
                 i18n,
                 player,
             } = art;
-            
+
             const $fullscreenWeb = append($control, icons.fullscreenWeb);
             tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
 

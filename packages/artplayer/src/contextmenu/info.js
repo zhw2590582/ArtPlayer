@@ -1,6 +1,6 @@
-export default function info(menuOption) {
+export default function info(option) {
     return art => ({
-        ...menuOption,
+        ...option,
         html: art.i18n.get('Video info'),
         click: contextmenu => {
             art.info.show = true;

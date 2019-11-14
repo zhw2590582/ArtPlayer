@@ -1,8 +1,8 @@
 import { append, tooltip, setStyle } from '../utils';
 
-export default function setting(controlOption) {
+export default function setting(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             const {
                 events: { proxy },
@@ -10,7 +10,7 @@ export default function setting(controlOption) {
                 i18n,
                 setting,
             } = art;
-            
+
             const $setting = append($control, icons.setting);
             tooltip($setting, i18n.get('Show setting'));
 

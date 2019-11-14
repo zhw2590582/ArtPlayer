@@ -1,4 +1,6 @@
-export default function playbackRate(settingOption) {
+import { query } from '../utils';
+
+export default function playbackRate(option) {
     return art => {
         const {
             i18n,
@@ -6,7 +8,7 @@ export default function playbackRate(settingOption) {
             events: { proxy },
         } = art;
         return {
-            ...settingOption,
+            ...option,
             html: `
                 <div class="art-setting-header">
                     ${i18n.get('Play speed')}: <span class="art-subtitle-value">1.0</span>x
@@ -16,8 +18,8 @@ export default function playbackRate(settingOption) {
                 </div>
             `,
             mounted: $setting => {
-                const $range = $setting.querySelector('.art-setting-range input');
-                const $value = $setting.querySelector('.art-subtitle-value');
+                const $range = query('.art-setting-range input', $setting);
+                const $value = query('.art-subtitle-value', $setting);
                 proxy($range, 'change', () => {
                     const { value } = $range;
                     $value.innerText = value;

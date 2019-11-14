@@ -1,10 +1,10 @@
-import { inverseClass } from '../utils';
+import { inverseClass, queryAll } from '../utils';
 
-export default function aspectRatio(menuOption) {
+export default function aspectRatio(option) {
     return art => {
         const { i18n, player } = art;
         return {
-            ...menuOption,
+            ...option,
             html: `
                 ${i18n.get('Aspect ratio')}:
                 <span data-ratio="default" class="default current">${i18n.get('Default')}</span>
@@ -12,8 +12,7 @@ export default function aspectRatio(menuOption) {
                 <span data-ratio="16:9">16:9</span>
             `,
             click: (contextmenu, event) => {
-                const { target } = event;
-                const { ratio } = target.dataset;
+                const { ratio } = event.target.dataset;
                 if (ratio) {
                     player.aspectRatio = ratio;
                     contextmenu.show = false;
@@ -21,10 +20,10 @@ export default function aspectRatio(menuOption) {
             },
             mounted: $menu => {
                 art.on('aspectRatioChange', ratio => {
-                    const $current = Array.from($menu.querySelectorAll('span')).find(
-                        item => item.dataset.ratio === ratio,
-                    );
-                    inverseClass($current, 'current');
+                    const $current = queryAll('span', $menu).find(item => item.dataset.ratio === ratio);
+                    if ($current) {
+                        inverseClass($current, 'current');
+                    }
                 });
             },
         };

@@ -1,8 +1,8 @@
 import { append, clamp, tooltip, setStyle, getStyle } from '../utils';
 
-export default function volume(controlOption) {
+export default function volume(option) {
     return art => ({
-        ...controlOption,
+        ...option,
         mounted: $control => {
             const {
                 events: { proxy },
@@ -10,7 +10,7 @@ export default function volume(controlOption) {
                 player,
                 i18n,
             } = art;
-            
+
             let isDroging = false;
             const $volume = append($control, icons.volume);
             const $volumeClose = append($control, icons.volumeClose);
