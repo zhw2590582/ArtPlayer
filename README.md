@@ -1,4 +1,8 @@
-# ArtPlayer
+# ArtPlayer.js
+
+-   [中文介绍](./README-CN.md)
+
+> :art: ArtPlayer.js is a modern and full featured HTML5 video player
 
 [![Build Status](https://www.travis-ci.org/zhw2590582/ArtPlayer.svg?branch=master)](https://www.travis-ci.org/zhw2590582/ArtPlayer)
 ![version](https://badgen.net/npm/v/artplayer)
@@ -8,27 +12,20 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/354e9953b70a4791a5a46194d587c707)](https://www.codacy.com/app/zhw2590582/ArtPlayer?utm_source=github.com&utm_medium=referral&utm_content=zhw2590582/ArtPlayer&utm_campaign=Badge_Grade)
 [![dependencies Status](https://david-dm.org/zhw2590582/artplayer/status.svg)](https://david-dm.org/zhw2590582/artplayer)
 
-> :art: ArtPlayer.js is a modern and full featured HTML5 video player
-
 ![Screenshot](./images/screenshot.png)
 
 ## Features
 
--   Support `vtt`, `ass` and `srt` subtitles
--   Support video quality switching
--   Support for custom `control`, `layer`, `contextmenu`, `setting`
--   Support `playback rate`, `aspect ratio`, `flip`, `window fullscreen` or `web fullscreen` adjustment
--   Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`
--   Support chrome native picture-in-picture mode, or custom picture-in-picture mode
--   Support `thumbnails` and `highlight` in the progress bar
--   Support to maintain the original video ratio, adaptive size
--   Support rich custom event monitoring, easy to expand
--   Support for internationalization of controls
--   Support for custom plugins
--   Support local video preview
--   Support subtitle time offset
--   Support `screenshot`
--   And more...
+-   <b>File Size</b> - `artplayer.js` ≈ `90kb` and `artplayer.css` ≈ `20kb`
+-   <b>Subtitle</b> - Support for `.VTT`, `.ASS` and `.SRT` formats
+-   <b>Customizable</b> - `Right Click Menu`, `Business Layer`, `Video Controller` and `Settings Panel`
+-   <b>Controller</b> - `Quality Switch`, `Subtitle Switch`, `Play Speed`, `Aspect Ratio`, `Video Flip`, `Fullscreen`, `Picture In Picture`, `Screenshot`, `Thumbnail`, `Adaptive Size`, `Highlight` and `Hotkey`...
+-   <b>Built-in</b> - `Auto PIP Mode`, `Open Local Subtitles`, `Open Local Video`, `Mini Progress Bar`, `Network Detection` and `Subtitle Time Offset`
+-   <b>Integration</b> - Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`...
+-   <b>Code</b> - Vanilla `ES6` and `SASS`, Highly decoupled code, clear structure, easy to track bugs and add new features
+-   <b>Document</b> - Detailed interface documentation and rich code demo
+-   <b>API</b> - Rich interface and response events, easy to interface with business or custom plugin
+-   <b>I18N</b> - support for internationalization of controls
 
 ## Ecosystem
 
