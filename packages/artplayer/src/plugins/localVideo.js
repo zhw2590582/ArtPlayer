@@ -3,33 +3,18 @@ import { append, setStyle, setStyles, errorHandle, getExt } from '../utils';
 export default function localVideo(art) {
     const {
         events: { proxy },
-        notice,
-        i18n,
         template,
         player,
     } = art;
 
-    const notSupport = 'Playback of this file format is not supported';
-    i18n.update({
-        'zh-cn': {
-            [notSupport]: '不支持播放该文件格式',
-        },
-        'zh-tw': {
-            [notSupport]: '不支持播放該文件格式',
-        },
-    });
-
     function loadVideo(file) {
         if (file) {
-            const type = getExt(file.name);
             const canPlayType = template.$video.canPlayType(file.type);
             if (canPlayType === 'maybe' || canPlayType === 'probably') {
                 const url = URL.createObjectURL(file);
                 player.switchUrl(url, file.name);
             } else {
-                const tip = `${i18n.get(notSupport)}: ${file.type || type}`;
-                notice.show(tip, true, 3000);
-                errorHandle(false, tip);
+                errorHandle(false, 'Playback of this file format is not supported');
             }
         }
     }
