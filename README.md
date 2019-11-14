@@ -16,12 +16,12 @@
 
 ## Features
 
--   <b>File Size</b> - `artplayer.js` ≈ `90kb` and `artplayer.css` ≈ `20kb`
+-   <b>Size</b> - `artplayer.js` ≈ `90kb` and `artplayer.css` ≈ `20kb`
 -   <b>Subtitle</b> - Support for `.VTT`, `.ASS` and `.SRT` formats
 -   <b>Customizable</b> - `Right Click Menu`, `Business Layer`, `Video Controller` and `Settings Panel`
 -   <b>Controller</b> - `Quality Switch`, `Subtitle Switch`, `Play Speed`, `Aspect Ratio`, `Video Flip`, `Fullscreen`, `Picture In Picture`, `Screenshot`, `Thumbnail`, `Adaptive Size`, `Highlight` and `Hotkey`...
--   <b>Built-in</b> - `Auto PIP Mode`, `Open Local Subtitles`, `Open Local Video`, `Mini Progress Bar`, `Network Detection` and `Subtitle Time Offset`
--   <b>Integration</b> - Support integration with other dependencies, like: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`...
+-   <b>Built-in</b> - `Auto PIP`, `Open Local Subtitles`, `Open Local Video`, `Mini Progress Bar`, `Network Detection` and `Subtitle Time Offset`
+-   <b>Integration</b> - Easy to integration with other dependencies: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`...
 -   <b>Code</b> - Vanilla `ES6` and `SASS`, Highly decoupled code, clear structure, easy to track bugs and add new features
 -   <b>Document</b> - Detailed interface documentation and rich code demo
 -   <b>API</b> - Rich interface and response events, easy to interface with business or custom plugin
@@ -29,16 +29,16 @@
 
 ## Ecosystem
 
-| Project                                                                                                               | Description                    | Demo                                                                                                                                                |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [artplayer-plugin-danmuku](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku)     | Danmuku plugin for ArtPlayer   | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)                                                    |
-| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | Gif plugin for ArtPlayer       | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif)                                                            |
-| [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | Backlight plugin for ArtPlayer | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight)                                                |
-| [artplayer-plugin-playlist](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-playlist)   | Playlist plugin for ArtPlayer  | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist) |
-| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail)     | Thumbnail tool for ArtPlayer   | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail)                                                  |
-| [artplayer-tool-github](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-github)           | Github api tool for ArtPlayer  | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github)         |  |
-| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React Component for Artplayer  | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                         |
-| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue Component for Artplayer    | [demo](https://codesandbox.io/s/6z76lm109n)                                                                                                         |
+| Project                                                                                                               | Description         | Demo                                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [artplayer-plugin-danmuku](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku)     | Danmuku plugin      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)                                                    |
+| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | Gif plugin          | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif)                                                            |
+| [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | Backlight plugin    | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight)                                                |
+| [artplayer-plugin-playlist](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-playlist)   | Playlist plugin     | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist) |
+| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail)     | Thumbnail tool      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail)                                                  |
+| [artplayer-tool-github](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-github)           | Github Danmuku tool | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github)         |  |
+| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React Component     | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                         |
+| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue Component       | [demo](https://codesandbox.io/s/6z76lm109n)                                                                                                         |
 
 ## Demo
 
@@ -50,13 +50,13 @@
 
 ## Install
 
-Install with `npm`
+Install with `npm`:
 
 ```bash
 $ npm install artplayer
 ```
 
-Or install with `yarn`
+Or install with `yarn`:
 
 ```bash
 $ yarn add artplayer
@@ -67,7 +67,7 @@ import Artplayer from 'artplayer';
 import 'artplayer/dist/artplayer.css';
 ```
 
-Or umd builds are also available
+Or umd builds are also available:
 
 ```html
 <link rel="stylesheet" href="path/to/artplayer.css" />
@@ -91,20 +91,20 @@ var art = new Artplayer({
 
 ## Contribution
 
-Installation dependency
+Installation dependency:
 
 ```bash
 $ npm install
 $ npm run bootstrap
 ```
 
-Run the developer mode and select the project you want to develop
+Run the developer mode and select the project you want to develop:
 
 ```bash
 $ npm run dev
 ```
 
-Open web server
+Open web server:
 
 ```bash
 $ npm start
