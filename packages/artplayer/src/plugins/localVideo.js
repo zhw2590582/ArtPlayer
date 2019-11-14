@@ -1,4 +1,4 @@
-import { append, setStyle, setStyles, errorHandle, getExt } from '../utils';
+import { append, setStyle, setStyles, errorHandle } from '../utils';
 
 export default function localVideo(art) {
     const {
