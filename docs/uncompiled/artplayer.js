@@ -4674,7 +4674,7 @@
           },
           moreVideoAttr: {
             controls: false,
-            preload: 'auto'
+            preload: 'metadata'
           },
           icons: {},
           customType: {},
