@@ -3,9 +3,8 @@ import { append, addClass, removeClass } from './utils';
 export default class Mask {
     constructor(art) {
         this.art = art;
-        const { $mask } = art.template;
-        const $playBig = append($mask, '<div class="art-state"></div>');
-        append($playBig, art.icons.state);
+        const { $state } = art.template;
+        append($state, art.icons.state);
     }
 
     set show(value) {

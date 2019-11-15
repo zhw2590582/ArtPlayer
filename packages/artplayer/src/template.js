@@ -34,11 +34,15 @@ export default class Template {
     initDesktop() {
         this.$container.innerHTML = `
           <div class="artplayer-video-player" style="--theme: ${this.art.option.theme}">
-            <video class="artplayer-video"></video>
+            <video class="artplayer-video">
+              <track default kind="metadata"></track>
+            </video>
             <div class="artplayer-subtitle"></div>
             <div class="artplayer-danmuku"></div>
             <div class="artplayer-layers"></div>
-            <div class="artplayer-mask"></div>
+            <div class="artplayer-mask">
+              <div class="artplayer-state"></div>
+            </div>
             <div class="artplayer-bottom">
               <div class="artplayer-progress"></div>
               <div class="artplayer-controls">
@@ -68,6 +72,7 @@ export default class Template {
         `;
         this.$player = this.query('.artplayer-video-player');
         this.$video = this.query('.artplayer-video');
+        this.$track = this.query('.artplayer-video track');
         this.$subtitle = this.query('.artplayer-subtitle');
         this.$danmuku = this.query('.artplayer-danmuku');
         this.$bottom = this.query('.artplayer-bottom');
@@ -80,6 +85,7 @@ export default class Template {
         this.$notice = this.query('.artplayer-notice');
         this.$noticeInner = this.query('.artplayer-notice-inner');
         this.$mask = this.query('.artplayer-mask');
+        this.$state = this.query('.artplayer-state');
         this.$setting = this.query('.artplayer-setting');
         this.$settingInner = this.query('.artplayer-setting-inner');
         this.$settingBody = this.query('.artplayer-setting-body');

@@ -1,4 +1,6 @@
-import { append, setStyles, setStyle, remove, errorHandle, hasOwnProperty, tooltip } from './index';
+import { append, setStyles, setStyle, tooltip } from './dom';
+import { errorHandle } from './error';
+import { hasOwnProperty } from './property';
 
 export default function component(art, parent, target, getOption, callback, title) {
     const option = typeof getOption === 'function' ? getOption(art) : getOption;
@@ -64,12 +66,6 @@ export default function component(art, parent, target, getOption, callback, titl
                 } else {
                     setStyle($element, 'display', 'none');
                     art.emit(`${title}:hide`, $element);
-                }
-            },
-            set remove(value) {
-                if (value) {
-                    remove($element);
-                    art.emit(`${title}:remove`, $element);
                 }
             },
         },

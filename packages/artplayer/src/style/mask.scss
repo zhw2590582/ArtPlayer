@@ -13,8 +13,8 @@
         height: 100%;
         overflow: hidden;
         pointer-events: none;
-    
-        .art-state {
+
+        .artplayer-state {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,7 +23,7 @@
             bottom: 55px;
             width: 60px;
             height: 60px;
-            opacity: .6;
+            opacity: 0.6;
         }
     }
 

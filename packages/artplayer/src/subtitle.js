@@ -4,85 +4,60 @@ export default class Subtitle {
     constructor(art) {
         this.art = art;
         this.state = true;
-        this.isInit = false;
-        const { url } = this.art.option.subtitle;
-        if (url) {
-            this.init(url);
+
+        const {
+            events: { proxy },
+            option: { subtitle },
+            template: { $subtitle },
+        } = art;
+
+        setStyles($subtitle, subtitle.style);
+        proxy(this.textTrack, 'cuechange', this.update.bind(this));
+
+        if (subtitle.url) {
+            this.init(subtitle.url);
         }
     }
 
     get url() {
-        const { $track } = this.art.template;
-        if ($track) {
-            return $track.src;
+        return this.art.template.$track.src;
+    }
+
+    get textTrack() {
+        return this.art.template.$video.textTracks[0];
+    }
+
+    get activeCue() {
+        return this.textTrack.activeCues[0];
+    }
+
+    update() {
+        const { $subtitle } = this.art.template;
+        $subtitle.innerHTML = '';
+        if (this.activeCue) {
+            $subtitle.innerHTML = this.activeCue.text
+                .split(/\r?\n/)
+                .map(item => `<p>${item}</p>`)
+                .join('');
         }
-        return '';
+        this.art.emit('subtitle:update', $subtitle);
     }
 
     switch(url, name = 'unknown') {
         const { i18n, notice } = this.art;
-        return this.init(url).then(blobUrl => {
+        return this.init(url).then(subUrl => {
             notice.show(`${i18n.get('Switch subtitle')}: ${name}`);
-            return blobUrl;
+            this.art.emit('subtitle:switch', subUrl);
+            return subUrl;
         });
     }
 
     init(url) {
-        return new Promise(resolve => {
-            const {
-                events: { proxy },
-                option: { subtitle },
-                template: { $video, $subtitle, $track },
-            } = this.art;
+        const {
+            notice,
+            template: { $subtitle, $track },
+        } = this.art;
 
-            setStyles($subtitle, subtitle.style || {});
-
-            if (!$track) {
-                const $newTrack = document.createElement('track');
-                $newTrack.default = true;
-                $newTrack.kind = 'metadata';
-                $video.appendChild($newTrack);
-                this.art.template.$track = $newTrack;
-            }
-
-            this.load(url).then(blobUrl => {
-                $subtitle.innerHTML = '';
-                const { $track } = this.art.template;
-                const lastUrl = $track.src;
-                if (lastUrl === blobUrl) return;
-                URL.revokeObjectURL(lastUrl);
-                $track.src = blobUrl;
-
-                if ($video.textTracks && $video.textTracks[0]) {
-                    const [track] = $video.textTracks;
-                    // eslint-disable-next-line no-inner-declarations
-                    function updateSubtitle() {
-                        const [cue] = track.activeCues;
-                        $subtitle.innerHTML = '';
-                        if (cue) {
-                            $subtitle.innerHTML = cue.text
-                                .split(/\r?\n/)
-                                .map(item => `<p>${item}</p>`)
-                                .join('');
-                        }
-                        this.art.emit('subtitle:update', $subtitle);
-                    }
-
-                    if (!this.isInit) {
-                        this.isInit = true;
-                        proxy(track, 'cuechange', updateSubtitle.bind(this));
-                    }
-
-                    this.art.on('artplayerPluginSubtitleOffset', updateSubtitle.bind(this));
-                }
-
-                resolve(blobUrl);
-            });
-        });
-    }
-
-    load(url) {
-        const { notice } = this.art;
         return fetch(url)
             .then(response => {
                 return response.text();
@@ -98,6 +73,13 @@ export default class Subtitle {
                     default:
                         return url;
                 }
+            })
+            .then(subUrl => {
+                $subtitle.innerHTML = '';
+                if (this.url === subUrl) return subUrl;
+                URL.revokeObjectURL(this.url);
+                $track.src = subUrl;
+                return subUrl;
             })
             .catch(err => {
                 notice.show(err);

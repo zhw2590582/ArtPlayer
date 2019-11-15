@@ -3,6 +3,7 @@ import { query } from '../utils';
 function settingMix(art) {
     const {
         i18n,
+        subtitle,
         events: { proxy },
     } = art;
 
@@ -33,6 +34,7 @@ function settingMix(art) {
             });
 
             art.on('artplayerPluginSubtitleOffset', value => {
+                subtitle.update();
                 if ($range.value !== value) {
                     $range.value = value;
                     $value.innerText = value;

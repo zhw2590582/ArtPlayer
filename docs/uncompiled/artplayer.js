@@ -791,9 +791,10 @@
     }, {
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\"></video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\"></div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\">\n              <div class=\"artplayer-state\"></div>\n            </div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
         this.$player = this.query('.artplayer-video-player');
         this.$video = this.query('.artplayer-video');
+        this.$track = this.query('.artplayer-video track');
         this.$subtitle = this.query('.artplayer-subtitle');
         this.$danmuku = this.query('.artplayer-danmuku');
         this.$bottom = this.query('.artplayer-bottom');
@@ -806,6 +807,7 @@
         this.$notice = this.query('.artplayer-notice');
         this.$noticeInner = this.query('.artplayer-notice-inner');
         this.$mask = this.query('.artplayer-mask');
+        this.$state = this.query('.artplayer-state');
         this.$setting = this.query('.artplayer-setting');
         this.$settingInner = this.query('.artplayer-setting-inner');
         this.$settingBody = this.query('.artplayer-setting-body');
@@ -2146,13 +2148,6 @@
             setStyle($element, 'display', 'none');
             art.emit("".concat(title, ":hide"), $element);
           }
-        },
-
-        set remove(value) {
-          if (value) {
-            remove($element);
-            art.emit("".concat(title, ":remove"), $element);
-          }
         }
 
       }
@@ -3238,56 +3233,6 @@
     return Info;
   }();
 
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
-
-  var arrayWithHoles = _arrayWithHoles;
-
-  function _iterableToArrayLimit(arr, i) {
-    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-      return;
-    }
-
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"] != null) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  var iterableToArrayLimit = _iterableToArrayLimit;
-
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
-  }
-
-  var nonIterableRest = _nonIterableRest;
-
-  function _slicedToArray(arr, i) {
-    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
-  }
-
-  var slicedToArray = _slicedToArray;
-
   var Subtitle =
   /*#__PURE__*/
   function () {
@@ -3296,93 +3241,58 @@
 
       this.art = art;
       this.state = true;
-      this.isInit = false;
-      var url = this.art.option.subtitle.url;
+      var proxy = art.events.proxy,
+          subtitle = art.option.subtitle,
+          $subtitle = art.template.$subtitle;
+      setStyles($subtitle, subtitle.style);
+      proxy(this.textTrack, 'cuechange', this.update.bind(this));
 
-      if (url) {
-        this.init(url);
+      if (subtitle.url) {
+        this.init(subtitle.url);
       }
     }
 
     createClass(Subtitle, [{
+      key: "update",
+      value: function update() {
+        var $subtitle = this.art.template.$subtitle;
+        $subtitle.innerHTML = '';
+
+        if (this.activeCue) {
+          $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map(function (item) {
+            return "<p>".concat(item, "</p>");
+          }).join('');
+        }
+
+        this.art.emit('subtitle:update', $subtitle);
+      }
+    }, {
       key: "switch",
       value: function _switch(url) {
+        var _this = this;
+
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
         var _this$art = this.art,
             i18n = _this$art.i18n,
             notice = _this$art.notice;
-        return this.init(url).then(function (blobUrl) {
+        return this.init(url).then(function (subUrl) {
           notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
-          return blobUrl;
+
+          _this.art.emit('subtitle:switch', subUrl);
+
+          return subUrl;
         });
       }
     }, {
       key: "init",
       value: function init(url) {
-        var _this = this;
+        var _this2 = this;
 
-        return new Promise(function (resolve) {
-          var _this$art2 = _this.art,
-              proxy = _this$art2.events.proxy,
-              subtitle = _this$art2.option.subtitle,
-              _this$art2$template = _this$art2.template,
-              $video = _this$art2$template.$video,
-              $subtitle = _this$art2$template.$subtitle,
-              $track = _this$art2$template.$track;
-          setStyles($subtitle, subtitle.style || {});
-
-          if (!$track) {
-            var $newTrack = document.createElement('track');
-            $newTrack.default = true;
-            $newTrack.kind = 'metadata';
-            $video.appendChild($newTrack);
-            _this.art.template.$track = $newTrack;
-          }
-
-          _this.load(url).then(function (blobUrl) {
-            $subtitle.innerHTML = '';
-            var $track = _this.art.template.$track;
-            var lastUrl = $track.src;
-            if (lastUrl === blobUrl) return;
-            URL.revokeObjectURL(lastUrl);
-            $track.src = blobUrl;
-
-            if ($video.textTracks && $video.textTracks[0]) {
-              // eslint-disable-next-line no-inner-declarations
-              var updateSubtitle = function updateSubtitle() {
-                var _track$activeCues = slicedToArray(track.activeCues, 1),
-                    cue = _track$activeCues[0];
-
-                $subtitle.innerHTML = '';
-
-                if (cue) {
-                  $subtitle.innerHTML = cue.text.split(/\r?\n/).map(function (item) {
-                    return "<p>".concat(item, "</p>");
-                  }).join('');
-                }
-
-                this.art.emit('subtitle:update', $subtitle);
-              };
-
-              var _$video$textTracks = slicedToArray($video.textTracks, 1),
-                  track = _$video$textTracks[0];
-
-              if (!_this.isInit) {
-                _this.isInit = true;
-                proxy(track, 'cuechange', updateSubtitle.bind(_this));
-              }
-
-              _this.art.on('artplayerPluginSubtitleOffset', updateSubtitle.bind(_this));
-            }
-
-            resolve(blobUrl);
-          });
-        });
-      }
-    }, {
-      key: "load",
-      value: function load(url) {
-        var notice = this.art.notice;
+        var _this$art2 = this.art,
+            notice = _this$art2.notice,
+            _this$art2$template = _this$art2.template,
+            $subtitle = _this$art2$template.$subtitle,
+            $track = _this$art2$template.$track;
         return fetch(url).then(function (response) {
           return response.text();
         }).then(function (text) {
@@ -3399,6 +3309,12 @@
             default:
               return url;
           }
+        }).then(function (subUrl) {
+          $subtitle.innerHTML = '';
+          if (_this2.url === subUrl) return subUrl;
+          URL.revokeObjectURL(_this2.url);
+          $track.src = subUrl;
+          return subUrl;
         }).catch(function (err) {
           notice.show(err);
           throw err;
@@ -3412,13 +3328,17 @@
     }, {
       key: "url",
       get: function get() {
-        var $track = this.art.template.$track;
-
-        if ($track) {
-          return $track.src;
-        }
-
-        return '';
+        return this.art.template.$track.src;
+      }
+    }, {
+      key: "textTrack",
+      get: function get() {
+        return this.art.template.$video.textTracks[0];
+      }
+    }, {
+      key: "activeCue",
+      get: function get() {
+        return this.textTrack.activeCues[0];
       }
     }, {
       key: "show",
@@ -3847,9 +3767,8 @@
       classCallCheck(this, Mask);
 
       this.art = art;
-      var $mask = art.template.$mask;
-      var $playBig = append($mask, '<div class="art-state"></div>');
-      append($playBig, art.icons.state);
+      var $state = art.template.$state;
+      append($state, art.icons.state);
     }
 
     createClass(Mask, [{
@@ -4115,20 +4034,15 @@
 
       this.art = art;
       this.name = 'artplayer_settings';
-      this.init();
+      var option = art.option;
+      var volume = this.get('volume');
+
+      if (volume) {
+        option.volume = volume;
+      }
     }
 
     createClass(Storage, [{
-      key: "init",
-      value: function init() {
-        var option = this.art.option;
-        var volume = this.get('volume');
-
-        if (volume) {
-          option.volume = volume;
-        }
-      }
-    }, {
       key: "get",
       value: function get(key) {
         var storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
@@ -4159,6 +4073,7 @@
 
   function settingMix(art) {
     var i18n = art.i18n,
+        subtitle = art.subtitle,
         proxy = art.events.proxy;
     return {
       title: 'Subtitle',
@@ -4178,6 +4093,8 @@
           $value.innerText = 0;
         });
         art.on('artplayerPluginSubtitleOffset', function (value) {
+          subtitle.update();
+
           if ($range.value !== value) {
             $range.value = value;
             $value.innerText = value;
@@ -4238,28 +4155,18 @@
 
   function localVideo(art) {
     var proxy = art.events.proxy,
-        notice = art.notice,
-        i18n = art.i18n,
         template = art.template,
         player = art.player;
-    var notSupport = 'Playback of this file format is not supported';
-    i18n.update({
-      'zh-cn': defineProperty({}, notSupport, '不支持播放该文件格式'),
-      'zh-tw': defineProperty({}, notSupport, '不支持播放該文件格式')
-    });
 
     function loadVideo(file) {
       if (file) {
-        var type = getExt(file.name);
         var canPlayType = template.$video.canPlayType(file.type);
 
         if (canPlayType === 'maybe' || canPlayType === 'probably') {
           var url = URL.createObjectURL(file);
           player.switchUrl(url, file.name);
         } else {
-          var tip = "".concat(i18n.get(notSupport), ": ").concat(file.type || type);
-          notice.show(tip, true, 3000);
-          errorHandle(false, tip);
+          errorHandle(false, 'Playback of this file format is not supported');
         }
       }
     }
@@ -4295,14 +4202,7 @@
 
   function localSubtitle(art) {
     var proxy = art.events.proxy,
-        notice = art.notice,
-        i18n = art.i18n,
         subtitle = art.subtitle;
-    var notSupport = 'Only supports subtitle files in .ass, .vtt and .srt format';
-    i18n.update({
-      'zh-cn': defineProperty({}, notSupport, '只支持 .ass、.vtt 和 .srt 格式的字幕文件'),
-      'zh-tw': defineProperty({}, notSupport, '只支持 .ass、.vtt 和 .srt 格式的字幕文件')
-    });
 
     function loadSubtitle(file) {
       if (file) {
@@ -4340,9 +4240,7 @@
           });
           reader.readAsText(file);
         } else {
-          var tip = i18n.get(notSupport);
-          notice.show(tip, true, 3000);
-          errorHandle(false, tip);
+          errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');
         }
       }
     }
@@ -4648,7 +4546,7 @@
     createClass(Artplayer, [{
       key: "destroy",
       value: function destroy() {
-        var removeHtml = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        var removeHtml = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
         this.events.destroy();
         this.template.destroy(removeHtml);
         Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
