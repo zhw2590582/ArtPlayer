@@ -9,7 +9,8 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const replace = require('rollup-plugin-replace');
 const svgo = require('rollup-plugin-svgo');
-const { uglify } = require('rollup-plugin-uglify');
+const { sizeSnapshot } = require('rollup-plugin-size-snapshot');
+const { terser } = require('rollup-plugin-terser');
 const copyAfterBuild = require('./copyAfterBuild');
 const json = require('rollup-plugin-json');
 
@@ -41,7 +42,12 @@ module.exports = function creatRollupConfig(projectPath) {
                 exclude: ['node_modules/**', 'packages/**/node_modules/**'],
             }),
             eslint({
-                exclude: ['node_modules/**', 'packages/*/src/**/*.scss', 'packages/*/src/**/*.svg', 'packages/*/src/**/*.json'],
+                exclude: [
+                    'node_modules/**',
+                    'packages/*/src/**/*.scss',
+                    'packages/*/src/**/*.svg',
+                    'packages/*/src/**/*.json',
+                ],
             }),
             postcss({
                 plugins: [
@@ -50,8 +56,8 @@ module.exports = function creatRollupConfig(projectPath) {
                         preset: [
                             'default',
                             {
-                                calc: false
-                            }
+                                calc: false,
+                            },
                         ],
                     }),
                 ],
@@ -66,10 +72,7 @@ module.exports = function creatRollupConfig(projectPath) {
                 runtimeHelpers: true,
                 exclude: ['node_modules/**', 'packages/**/node_modules/**'],
                 presets: [['@babel/env', { modules: false }]],
-                plugins: [
-                    '@babel/plugin-external-helpers',
-                    '@babel/plugin-transform-runtime',
-                ],
+                plugins: ['@babel/plugin-external-helpers', '@babel/plugin-transform-runtime'],
             }),
             svgo({
                 raw: true,
@@ -79,8 +82,9 @@ module.exports = function creatRollupConfig(projectPath) {
                 __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
                 __VERSION__: version,
             }),
+            isProd && sizeSnapshot(),
             isProd &&
-                uglify({
+                terser({
                     output: {
                         preamble: banner,
                     },
