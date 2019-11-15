@@ -5,6 +5,7 @@ export default function localVideo(art) {
         events: { proxy },
         template,
         player,
+        option,
     } = art;
 
     function loadVideo(file) {
@@ -12,6 +13,7 @@ export default function localVideo(art) {
             const canPlayType = template.$video.canPlayType(file.type);
             if (canPlayType === 'maybe' || canPlayType === 'probably') {
                 const url = URL.createObjectURL(file);
+                option.title = file.name;
                 player.switchUrl(url, file.name);
             } else {
                 errorHandle(false, 'Playback of this file format is not supported');

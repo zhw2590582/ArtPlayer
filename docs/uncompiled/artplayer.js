@@ -4125,7 +4125,8 @@
   function localVideo(art) {
     var proxy = art.events.proxy,
         template = art.template,
-        player = art.player;
+        player = art.player,
+        option = art.option;
 
     function loadVideo(file) {
       if (file) {
@@ -4133,6 +4134,7 @@
 
         if (canPlayType === 'maybe' || canPlayType === 'probably') {
           var url = URL.createObjectURL(file);
+          option.title = file.name;
           player.switchUrl(url, file.name);
         } else {
           errorHandle(false, 'Playback of this file format is not supported');
