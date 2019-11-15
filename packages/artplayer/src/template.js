@@ -60,7 +60,34 @@ export default class Template {
               </div>
             </div>
             <div class="artplayer-info artplayer-backdrop-filter">
-              <div class="artplayer-info-panel"></div>
+              <div class="artplayer-info-panel">
+                <div class="art-info-item">
+                  <div class="art-info-title">Player version:</div>
+                  <div class="art-info-content">__VERSION__</div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video url:</div>
+                  <div class="art-info-content" data-video="src"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video volume:</div>
+                  <div class="art-info-content" data-video="volume"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video time:</div>
+                  <div class="art-info-content" data-video="currentTime"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video duration:</div>
+                  <div class="art-info-content" data-video="duration"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video resolution:</div>
+                  <div class="art-info-content">
+                    <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
+                  </div>
+                </div>
+              </div>
               <div class="artplayer-info-close">[x]</div>
             </div>
             <div class="artplayer-pip-header">

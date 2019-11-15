@@ -791,7 +791,7 @@
     }, {
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\">\n              <div class=\"artplayer-state\"></div>\n            </div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\"></div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\">\n              <div class=\"artplayer-state\"></div>\n            </div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.1.18</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
         this.$player = this.query('.artplayer-video-player');
         this.$video = this.query('.artplayer-video');
         this.$track = this.query('.artplayer-video track');
@@ -3134,56 +3134,32 @@
   /*#__PURE__*/
   function () {
     function Info(art) {
+      var _this = this;
+
       classCallCheck(this, Info);
 
       this.art = art;
-      this.init();
+      this.timer = null;
+      var _art$template = art.template,
+          $infoPanel = _art$template.$infoPanel,
+          $infoClose = _art$template.$infoClose,
+          proxy = art.events.proxy;
+      this.types = queryAll('[data-video]', $infoPanel);
+      proxy($infoClose, 'click', function () {
+        _this.show = false;
+      });
+      this.art.on('destroy', function () {
+        clearTimeout(_this.timer);
+      });
     }
 
     createClass(Info, [{
-      key: "init",
-      value: function init() {
-        var _this = this;
-
-        var _this$art = this.art,
-            $infoClose = _this$art.template.$infoClose,
-            proxy = _this$art.events.proxy;
-        proxy($infoClose, 'click', function () {
-          _this.show = false;
-        });
-        this.art.on('destroy', function () {
-          if (_this.timer) {
-            clearTimeout(_this.timer);
-          }
-        });
-      }
-    }, {
-      key: "creatInfo",
-      value: function creatInfo() {
-        var infoHtml = [];
-        infoHtml.push("\n          <div class=\"art-info-item \">\n            <div class=\"art-info-title\">Player version:</div>\n            <div class=\"art-info-content\">3.1.18</div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video url:</div>\n            <div class=\"art-info-content\">".concat(this.art.option.url, "</div>\n          </div>\n        "));
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video volume:</div>\n            <div class=\"art-info-content\" data-video=\"volume\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video time:</div>\n            <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video duration:</div>\n            <div class=\"art-info-content\" data-video=\"duration\"></div>\n          </div>\n        ");
-        infoHtml.push("\n          <div class=\"art-info-item\">\n            <div class=\"art-info-title\">Video resolution:</div>\n            <div class=\"art-info-content\">\n              <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n            </div>\n          </div>\n        ");
-        return infoHtml.join('');
-      }
-    }, {
       key: "readInfo",
       value: function readInfo() {
-        var _this$art$template = this.art.template,
-            $infoPanel = _this$art$template.$infoPanel,
-            $video = _this$art$template.$video;
-        var types = queryAll('[data-video]', $infoPanel);
-        types.forEach(function (item) {
+        var $video = this.art.template.$video;
+        this.types.forEach(function (item) {
           var value = $video[item.dataset.video];
-
-          if (value !== undefined) {
-            item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
-          } else {
-            item.innerHTML = 'unknown';
-          }
+          item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
         });
       }
     }, {
@@ -3206,18 +3182,11 @@
     }, {
       key: "show",
       set: function set(value) {
-        var _this$art$template2 = this.art.template,
-            $player = _this$art$template2.$player,
-            $infoPanel = _this$art$template2.$infoPanel;
+        var $player = this.art.template.$player;
 
         if (value) {
           this.state = true;
           addClass($player, 'artplayer-info-show');
-
-          if (!$infoPanel.innerHTML) {
-            append($infoPanel, this.creatInfo());
-          }
-
           clearTimeout(this.timer);
           this.loop();
           this.art.emit('info:show');
