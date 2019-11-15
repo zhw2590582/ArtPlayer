@@ -3006,10 +3006,10 @@
 
       this.id = 0;
       this.art = art;
-      this.art.on('ready', function () {
+      art.on('ready', function () {
         _this.init();
       });
-      this.art.on('blur', function () {
+      art.on('blur', function () {
         _this.show = false;
       });
     }
@@ -3068,8 +3068,8 @@
     }, {
       key: "add",
       value: function add(item, callback) {
-        var $contextmenu = this.art.template.$contextmenu;
         this.id += 1;
+        var $contextmenu = this.art.template.$contextmenu;
         return component(this.art, this, $contextmenu, item, callback, 'contextmenu');
       }
     }, {

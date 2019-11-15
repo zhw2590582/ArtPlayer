@@ -10,11 +10,12 @@ export default class Contextmenu {
     constructor(art) {
         this.id = 0;
         this.art = art;
-        this.art.on('ready', () => {
+
+        art.on('ready', () => {
             this.init();
         });
 
-        this.art.on('blur', () => {
+        art.on('blur', () => {
             this.show = false;
         });
     }
@@ -84,8 +85,8 @@ export default class Contextmenu {
     }
 
     add(item, callback) {
-        const { $contextmenu } = this.art.template;
         this.id += 1;
+        const { $contextmenu } = this.art.template;
         return component(this.art, this, $contextmenu, item, callback, 'contextmenu');
     }
 
