@@ -87,6 +87,9 @@ module.exports = function creatRollupConfig(projectPath) {
                 terser({
                     output: {
                         preamble: banner,
+                        comments: function() {
+                            return false;
+                        },
                     },
                 }),
             isProd &&
