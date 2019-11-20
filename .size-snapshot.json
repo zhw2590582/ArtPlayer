@@ -1,8 +1,8 @@
 {
   "packages/artplayer/dist/artplayer.js": {
-    "bundled": 167524,
-    "minified": 91369,
-    "gzipped": 21798
+    "bundled": 167589,
+    "minified": 91395,
+    "gzipped": 21805
   },
   "packages/artplayer-plugin-backlight/dist/artplayer-plugin-backlight.js": {
     "bundled": 4642,
@@ -35,13 +35,13 @@
     "gzipped": 4096
   },
   "packages/artplayer-vue/dist/artplayer-vue.js": {
-    "bundled": 169067,
-    "minified": 92280,
-    "gzipped": 21954
+    "bundled": 169132,
+    "minified": 92306,
+    "gzipped": 21961
   },
   "packages/artplayer-react/dist/artplayer-react.js": {
-    "bundled": 252440,
-    "minified": 121369,
-    "gzipped": 31023
+    "bundled": 251057,
+    "minified": 120831,
+    "gzipped": 30864
   }
 }
