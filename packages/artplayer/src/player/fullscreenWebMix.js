@@ -16,14 +16,14 @@ export default function fullscreenWebMix(art, player) {
                 }
                 addClass($player, 'artplayer-web-fullscreen');
                 player.aspectRatioReset = true;
-                art.emit('fullscreenWeb:enabled');
+                art.emit('fullscreenWebEnabled');
             } else {
                 if (player.fullscreen) {
                     player.fullscreen = false;
                 }
                 removeClass($player, 'artplayer-web-fullscreen');
                 player.aspectRatioReset = true;
-                art.emit('fullscreenWeb:exit');
+                art.emit('fullscreenWebExit');
             }
         },
     });

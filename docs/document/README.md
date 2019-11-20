@@ -1410,7 +1410,144 @@ All properties are read only
 
 # Event
 
-> TODO...
+```js
+art.on('ready', function() {
+    console.log('The player can play');
+});
+```
+
+## Instance
+
+| Event                  | Description                             | Parameter           |
+| ---------------------- | --------------------------------------- | ------------------- |
+| `ready`                | When the video can be played            | `undefined`         |
+| `play`                 | When the video play                     | `undefined`         |
+| `pause`                | When the video pause                    | `undefined`         |
+| `seek`                 | When the video seek                     | Video current time  |
+| `volume`               | When the video volume change            | Video volume value  |
+| `destroy`              | When the instance is destroyed          | `undefined`         |
+| `focus`                | When the player gets focus              | `undefined`         |
+| `blur`                 | When the player loses focus             | `undefined`         |
+| `hoverenter`           | When the mouse is moved into the player | `undefined`         |
+| `hoverleave`           | When the mouse is moved out the player  | `undefined`         |
+| `resize`               | When the player resize                  | Player size         |
+| `mousemove`            | When the mouse moves over the player    | `undefined`         |
+| `aspectRatioChange`    | When aspect ratio change                | Aspect ratio        |
+| `aspectRatioRemove`    | When aspect ratio remove                | `undefined`         |
+| `aspectRatioReset`     | When aspect ratio reset                 | `undefined`         |
+| `beforeCustomType`     | Before triggering CustomType            | Type name           |
+| `afterCustomType`      | After triggering CustomType             | Type name           |
+| `beforeAttachUrl`      | Before the video url change             | Video url           |
+| `afterAttachUrl`       | After the video url change              | Video url           |
+| `autoSizeChange`       | When the player auto size change        | Player size         |
+| `autoSizeRemove`       | When the player auto size remove        | `undefined`         |
+| `flipChange`           | When the player flip change             | Flip name           |
+| `flipRemove`           | When the player flip remove             | `undefined`         |
+| `fullscreenChange`     | When the full screen status change      | Whether full screen |
+| `fullscreenEnabled`    | When entering full screen               | `undefined`         |
+| `fullscreenExit`       | When exiting full screen                | `undefined`         |
+| `fullscreenWebEnabled` | When entering web full screen           | `undefined`         |
+| `fullscreenWebExit`    | When exiting web full screen            | `undefined`         |
+| `pipEnabled`           | When entering picture in picture        | `undefined`         |
+| `pipExit`              | When exiting picture in picture         | `undefined`         |
+| `playbackRateChange`   | When playback rate change               | Playback rate       |
+| `playbackRateRemove`   | When playback rate remove               | `undefined`         |
+| `playbackRateReset`    | When playback rate reset                | `undefined`         |
+| `screenshot`           | When a screenshot occurs                | Image data uri      |
+| `switch`               | When switching video url                | Video url           |
+
+## Video (Native event)
+
+You can use all the native events of video directly: [MDN web docs - Media events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Media_events).
+
+But be careful to add the `video` prefix in front of the event:
+
+```js
+art.on('video:canplay', function(event) {
+    console.log(event);
+});
+```
+
+## Subtitle
+
+| Event             | Description               | Parameter             |
+| ----------------- | ------------------------- | --------------------- |
+| `subtitle:update` | When the subtitles change | Current subtitle text |
+| `subtitle:switch` | When switching subtitles  | Current subtitle url  |
+| `subtitle:show`   | When displaying subtitles | `undefined`           |
+| `subtitle:hide`   | When hiding subtitles     | `undefined`           |
+
+## Notice
+
+| Event         | Description            | Parameter   |
+| ------------- | ---------------------- | ----------- |
+| `notice:show` | When displaying notice | Notice text |
+| `notice:hide` | When hiding notice     | `undefined` |
+
+## Mask
+
+| Event       | Description          | Parameter   |
+| ----------- | -------------------- | ----------- |
+| `mask:show` | When displaying mask | `undefined` |
+| `mask:hide` | When hiding mask     | `undefined` |
+
+## Loading
+
+| Event          | Description             | Parameter   |
+| -------------- | ----------------------- | ----------- |
+| `loading:show` | When displaying loading | `undefined` |
+| `loading:hide` | When hiding loading     | `undefined` |
+
+## Layers
+
+| Event         | Description             | Parameter           |
+| ------------- | ----------------------- | ------------------- |
+| `layers:add`  | When adding a new layer | Layer configuration |
+| `layers:show` | When displaying layers  | `undefined`         |
+| `layers:hide` | When hiding layers      | `undefined`         |
+
+## Info
+
+| Event       | Description          | Parameter   |
+| ----------- | -------------------- | ----------- |
+| `info:show` | When displaying info | `undefined` |
+| `info:hide` | When hiding info     | `undefined` |
+
+## Hotkey
+
+| Event    | Description                  | Parameter           |
+| -------- | ---------------------------- | ------------------- |
+| `hotkey` | When the hotkey is triggered | Hotkey event object |
+
+## Setting
+
+| Event          | Description               | Parameter             |
+| -------------- | ------------------------- | --------------------- |
+| `setting:add`  | When adding a new setting | Setting configuration |
+| `setting:show` | When displaying setting   | `undefined`           |
+| `setting:hide` | When hiding setting       | `undefined`           |
+
+## Contextmenu
+
+| Event              | Description                   | Parameter                 |
+| ------------------ | ----------------------------- | ------------------------- |
+| `contextmenu:add`  | When adding a new contextmenu | Contextmenu configuration |
+| `contextmenu:show` | When displaying contextmenu   | `undefined`               |
+| `contextmenu:hide` | When hiding contextmenu       | `undefined`               |
+
+## Controls
+
+| Event           | Description               | Parameter             |
+| --------------- | ------------------------- | --------------------- |
+| `controls:add`  | When adding a new control | Control configuration |
+| `controls:show` | When displaying controls  | `undefined`           |
+| `controls:hide` | When hiding controls      | `undefined`           |
+
+## Plugins
+
+| Event        | Description              | Parameter            |
+| ------------ | ------------------------ | -------------------- |
+| `plugin:add` | When adding a new plugin | Plugin configuration |
 
 # Third-party libraries
 

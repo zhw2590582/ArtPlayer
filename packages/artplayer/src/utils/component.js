@@ -39,7 +39,6 @@ export default function component(art, parent, target, getOption, callback, titl
         art.events.proxy($element, 'click', event => {
             event.preventDefault();
             option.click.call(art, parent, event);
-            art.emit(`${title}:click`, $element);
         });
     }
 
@@ -62,10 +61,8 @@ export default function component(art, parent, target, getOption, callback, titl
             set show(value) {
                 if (value) {
                     setStyle($element, 'display', 'block');
-                    art.emit(`${title}:show`, $element);
                 } else {
                     setStyle($element, 'display', 'none');
-                    art.emit(`${title}:hide`, $element);
                 }
             },
         },

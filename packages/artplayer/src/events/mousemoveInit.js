@@ -25,5 +25,6 @@ export default function mousemoveInitInit(art, events) {
         if (!art.player.pip && player.playing && event.target === $video) {
             autoHide();
         }
+        art.emit('mousemove');
     });
 }

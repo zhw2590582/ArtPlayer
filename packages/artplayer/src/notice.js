@@ -17,7 +17,7 @@ export default class Notice {
                 this.hide();
             }, time);
         }
-        this.art.emit('notice:show');
+        this.art.emit('notice:show', msg);
     }
 
     hide() {

@@ -40,7 +40,7 @@ export default class Subtitle {
                 .map(item => `<p>${item}</p>`)
                 .join('');
         }
-        this.art.emit('subtitle:update', $subtitle);
+        this.art.emit('subtitle:update', this.activeCue.text);
     }
 
     switch(url, name = 'unknown') {

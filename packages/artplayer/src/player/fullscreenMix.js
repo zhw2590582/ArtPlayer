@@ -10,7 +10,7 @@ export default function fullscreenMix(art, player) {
     } = art;
 
     const screenfullChange = () => {
-        art.emit('fullscreen:change', screenfull.isFullscreen);
+        art.emit('fullscreenChange', screenfull.isFullscreen);
     };
 
     const screenfullError = () => {
@@ -44,7 +44,7 @@ export default function fullscreenMix(art, player) {
                 screenfull.request($player).then(() => {
                     addClass($player, 'artplayer-fullscreen');
                     player.aspectRatioReset = true;
-                    art.emit('fullscreen:enabled');
+                    art.emit('fullscreenEnabled');
                 });
             } else {
                 if (player.fullscreenWeb) {
@@ -54,7 +54,7 @@ export default function fullscreenMix(art, player) {
                 screenfull.exit().then(() => {
                     removeClass($player, 'artplayer-fullscreen');
                     player.aspectRatioReset = true;
-                    art.emit('fullscreen:exit');
+                    art.emit('fullscreenExit');
                 });
             }
         },

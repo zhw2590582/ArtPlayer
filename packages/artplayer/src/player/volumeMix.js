@@ -16,7 +16,7 @@ export default function volumeMix(art, player) {
             if ($video.volume !== 0) {
                 storage.set('volume', $video.volume);
             }
-            art.emit('volumeChange', $video.volume);
+            art.emit('volume', $video.volume);
         },
     });
 
@@ -24,7 +24,7 @@ export default function volumeMix(art, player) {
         get: () => $video.muted,
         set: muted => {
             $video.muted = muted;
-            art.emit('volumeChange', $video.volume);
+            art.emit('volume', $video.volume);
         },
     });
 }
