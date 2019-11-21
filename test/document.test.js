@@ -1,5 +1,5 @@
 
-describe('Option', function() {
+describe('Document', function() {
     afterEach(function() {
         [...Artplayer.instances].forEach(art => {
             art.destroy(true);
