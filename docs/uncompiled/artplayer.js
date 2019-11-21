@@ -3247,9 +3247,8 @@
           $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map(function (item) {
             return "<p>".concat(item, "</p>");
           }).join('');
+          this.art.emit('subtitle:update', this.activeCue.text);
         }
-
-        this.art.emit('subtitle:update', this.activeCue.text);
       }
     }, {
       key: "switch",
