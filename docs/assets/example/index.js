@@ -21,7 +21,7 @@ var art = new Artplayer({
     subtitleOffset: true,
     miniProgressBar: true,
     localVideo: true,
-    localSubtitle: true,
+    localSubtitle: false,
     networkMonitor: false,
     autoPip: true,
     mutex: true,
@@ -108,19 +108,10 @@ var art = new Artplayer({
         {
             name: 'localVideo',
             position: 'right',
-            html: 'VIDEO',
+            html: 'OPEN',
             tooltip: 'Open Local Video',
             mounted: $preview => {
                 art.plugins.localVideo.attach($preview);
-            },
-        },
-        {
-            name: 'localSubtitle',
-            position: 'right',
-            html: 'SUBTITLE',
-            tooltip: 'Open Local Subtitle',
-            mounted: $preview => {
-                art.plugins.localSubtitle.attach($preview);
             },
         },
     ],
