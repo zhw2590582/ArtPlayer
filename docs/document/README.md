@@ -1019,7 +1019,15 @@ setTimeout(function() {
 
 ## player
 
-Player core function
+Player core function.
+
+All player properties and methods can be accessed directly through the instance. For example, the following properties are all equal:
+
+```js
+art.currentTime === art.player.currentTime;
+art.volume === art.player.volume;
+art.seek === art.player.seek;
+```
 
 | propertie             | type       | Description                                                                                       |
 | --------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
