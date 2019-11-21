@@ -9,10 +9,7 @@
     var $lib = document.querySelector('.libsInput');
     var $run = document.querySelector('.run');
     var $popups = document.querySelector('.popups');
-    var $version = document.querySelector('.version');
     var loaddLib = [];
-
-    $version.textContent = 'v' + Artplayer.version;
 
     consola.creat({
         target: '.console',
