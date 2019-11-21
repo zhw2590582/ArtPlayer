@@ -118,7 +118,7 @@
   var inherits = _inherits;
 
   var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);if("object"===r){if("object"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'object' type, but got '").concat(t,"'"));Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});}if("array"===r){if("array"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'array' type, but got '").concat(t,"'"));a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw "string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
+  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);"object"===r&&"object"===t&&Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});"array"===r&&"array"===t&&a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw "string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
   });
 
   var Emitter =
@@ -791,7 +791,7 @@
     }, {
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\">\n              <div class=\"artplayer-state\"></div>\n            </div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.1.18</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\">\n              <div class=\"artplayer-state\"></div>\n            </div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.1.19</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
         this.$player = this.query('.artplayer-video-player');
         this.$video = this.query('.artplayer-video');
         this.$track = this.query('.artplayer-video track');
@@ -1251,7 +1251,7 @@
           storage.set('volume', $video.volume);
         }
 
-        art.emit('volumeChange', $video.volume);
+        art.emit('volume', $video.volume);
       }
     });
     Object.defineProperty(player, 'muted', {
@@ -1260,7 +1260,7 @@
       },
       set: function set(muted) {
         $video.muted = muted;
-        art.emit('volumeChange', $video.volume);
+        art.emit('volume', $video.volume);
       }
     });
   }
@@ -1504,13 +1504,14 @@
   var screenfull = createCommonjsModule(function (module) {
   /*!
   * screenfull
-  * v5.0.0 - 2019-09-09
+  * v4.2.1 - 2019-07-27
   * (c) Sindre Sorhus; MIT License
   */
   (function () {
 
   	var document = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {};
   	var isCommonjs =  module.exports;
+  	var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
 
   	var fn = (function () {
   		var val;
@@ -1534,7 +1535,7 @@
   				'webkitfullscreenerror'
 
   			],
-  			// Old WebKit
+  			// Old WebKit (Safari 5.1)
   			[
   				'webkitRequestFullScreen',
   				'webkitCancelFullScreen',
@@ -1585,8 +1586,10 @@
   	};
 
   	var screenfull = {
-  		request: function (element) {
+  		request: function (elem) {
   			return new Promise(function (resolve, reject) {
+  				var request = fn.requestFullscreen;
+
   				var onFullScreenEntered = function () {
   					this.off('change', onFullScreenEntered);
   					resolve();
@@ -1594,13 +1597,25 @@
 
   				this.on('change', onFullScreenEntered);
 
-  				element = element || document.documentElement;
+  				elem = elem || document.documentElement;
 
-  				Promise.resolve(element[fn.requestFullscreen]()).catch(reject);
+  				var promise;
+
+  				// Work around Safari 5.1 bug: reports support for
+  				// keyboard in fullscreen even though it doesn't.
+  				// Browser sniffing, since the alternative with
+  				// setTimeout is even worse.
+  				if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
+  					promise = elem[request]();
+  				} else {
+  					promise = elem[request](keyboardAllowed ? Element.ALLOW_KEYBOARD_INPUT : {});
+  				}
+
+  				Promise.resolve(promise).catch(reject);
   			}.bind(this));
   		},
   		exit: function () {
-  			return new Promise(function (resolve, reject) {
+  			return new Promise(function (resolve) {
   				if (!this.isFullscreen) {
   					resolve();
   					return;
@@ -1611,13 +1626,13 @@
   					resolve();
   				}.bind(this);
 
-  				this.on('change', onFullScreenExit);
+  				document[fn.exitFullscreen]();
 
-  				Promise.resolve(document[fn.exitFullscreen]()).catch(reject);
+  				this.on('change', onFullScreenExit);
   			}.bind(this));
   		},
-  		toggle: function (element) {
-  			return this.isFullscreen ? this.exit() : this.request(element);
+  		toggle: function (elem) {
+  			return this.isFullscreen ? this.exit() : this.request(elem);
   		},
   		onchange: function (callback) {
   			this.on('change', callback);
@@ -1642,9 +1657,9 @@
 
   	if (!fn) {
   		if (isCommonjs) {
-  			module.exports = {isEnabled: false};
+  			module.exports = false;
   		} else {
-  			window.screenfull = {isEnabled: false};
+  			window.screenfull = false;
   		}
 
   		return;
@@ -1662,7 +1677,7 @@
   				return document[fn.fullscreenElement];
   			}
   		},
-  		isEnabled: {
+  		enabled: {
   			enumerable: true,
   			get: function () {
   				// Coerce to boolean in case of old WebKit
@@ -1673,12 +1688,13 @@
 
   	if (isCommonjs) {
   		module.exports = screenfull;
+  		// TODO: remove this in the next major version
+  		module.exports.default = screenfull;
   	} else {
   		window.screenfull = screenfull;
   	}
   })();
   });
-  var screenfull_1 = screenfull.isEnabled;
 
   function fullscreenMix(art, player) {
     var i18n = art.i18n,
@@ -1687,7 +1703,7 @@
         $player = art.template.$player;
 
     var screenfullChange = function screenfullChange() {
-      art.emit('fullscreen:change', screenfull.isFullscreen);
+      art.emit('fullscreenChange', screenfull.isFullscreen);
     };
 
     var screenfullError = function screenfullError() {
@@ -1721,7 +1737,7 @@
           screenfull.request($player).then(function () {
             addClass($player, 'artplayer-fullscreen');
             player.aspectRatioReset = true;
-            art.emit('fullscreen:enabled');
+            art.emit('fullscreenEnabled');
           });
         } else {
           if (player.fullscreenWeb) {
@@ -1731,7 +1747,7 @@
           screenfull.exit().then(function () {
             removeClass($player, 'artplayer-fullscreen');
             player.aspectRatioReset = true;
-            art.emit('fullscreen:exit');
+            art.emit('fullscreenExit');
           });
         }
       }
@@ -1764,7 +1780,7 @@
 
           addClass($player, 'artplayer-web-fullscreen');
           player.aspectRatioReset = true;
-          art.emit('fullscreenWeb:enabled');
+          art.emit('fullscreenWebEnabled');
         } else {
           if (player.fullscreen) {
             player.fullscreen = false;
@@ -1772,7 +1788,7 @@
 
           removeClass($player, 'artplayer-web-fullscreen');
           player.aspectRatioReset = true;
-          art.emit('fullscreenWeb:exit');
+          art.emit('fullscreenWebExit');
         }
       }
     });
@@ -1997,7 +2013,10 @@
             setStyle($player, 'height', "".concat(_percentage, "%"));
           }
 
-          art.emit('autoSizeChange');
+          art.emit('autoSizeChange', {
+            width: player.width,
+            height: player.height
+          });
         } else {
           removeClass($container, 'artplayer-auto-size');
           setStyle($player, 'width', null);
@@ -2118,7 +2137,6 @@
       art.events.proxy($element, 'click', function (event) {
         event.preventDefault();
         option.click.call(art, parent, event);
-        art.emit("".concat(title, ":click"), $element);
       });
     }
 
@@ -2143,10 +2161,8 @@
         set show(value) {
           if (value) {
             setStyle($element, 'display', 'block');
-            art.emit("".concat(title, ":show"), $element);
           } else {
             setStyle($element, 'display', 'none');
-            art.emit("".concat(title, ":hide"), $element);
           }
         }
 
@@ -2977,7 +2993,7 @@
 
   function version(option) {
     return _objectSpread$f({}, option, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.18</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.19</a>'
     });
   }
 
@@ -3233,7 +3249,7 @@
           }).join('');
         }
 
-        this.art.emit('subtitle:update', $subtitle);
+        this.art.emit('subtitle:update', this.activeCue.text);
       }
     }, {
       key: "switch",
@@ -3265,6 +3281,8 @@
         return fetch(url).then(function (response) {
           return response.text();
         }).then(function (text) {
+          _this2.art.emit('subtitle:load', url);
+
           switch (getExt(url)) {
             case 'srt':
               return vttToBlob(srtToVtt(text));
@@ -3286,6 +3304,9 @@
           return subUrl;
         }).catch(function (err) {
           notice.show(err);
+
+          _this2.art.emit('subtitle:err', err);
+
           throw err;
         });
       }
@@ -3376,6 +3397,8 @@
       if (!art.player.pip && player.playing && event.target === $video) {
         autoHide();
       }
+
+      art.emit('mousemove');
     });
   }
 
@@ -3714,7 +3737,7 @@
           }, time);
         }
 
-        this.art.emit('notice:show');
+        this.art.emit('notice:show', msg);
       }
     }, {
       key: "hide",
@@ -4508,9 +4531,7 @@
 
       id += 1;
       _this.id = id;
-      Artplayer.instances.push(assertThisInitialized(_this)); // eslint-disable-next-line no-console
-
-      console.log('%c ArtPlayer %c 3.1.18 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+      Artplayer.instances.push(assertThisInitialized(_this));
       return _this;
     }
 
@@ -4527,7 +4548,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.18';
+        return '3.1.19';
       }
     }, {
       key: "env",
@@ -4629,7 +4650,9 @@
 
   Object.defineProperty(Artplayer, 'instances', {
     value: []
-  });
+  }); // eslint-disable-next-line no-console
+
+  console.log('%c ArtPlayer %c 3.1.19 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

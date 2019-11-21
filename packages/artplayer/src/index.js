@@ -57,13 +57,6 @@ class Artplayer extends Emitter {
         id += 1;
         this.id = id;
         Artplayer.instances.push(this);
-        // eslint-disable-next-line no-console
-        console.log(
-            '%c ArtPlayer %c __VERSION__ %c https://artplayer.org',
-            'color: #fff; background: #5f5f5f',
-            'color: #fff; background: #4bc729',
-            '',
-        );
     }
 
     static get version() {
@@ -167,5 +160,13 @@ class Artplayer extends Emitter {
 Object.defineProperty(Artplayer, 'instances', {
     value: [],
 });
+
+// eslint-disable-next-line no-console
+console.log(
+    '%c ArtPlayer %c __VERSION__ %c https://artplayer.org',
+    'color: #fff; background: #5f5f5f',
+    'color: #fff; background: #4bc729',
+    '',
+);
 
 export default Artplayer;
