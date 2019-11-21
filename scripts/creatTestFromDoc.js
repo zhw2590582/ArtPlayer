@@ -16,7 +16,7 @@ try {
     fs.writeFileSync(
         path.resolve(__dirname, '../test/document.test.js'),
         `
-describe('Option', function() {
+describe('Document', function() {
     afterEach(function() {
         [...Artplayer.instances].forEach(art => {
             art.destroy(true);
