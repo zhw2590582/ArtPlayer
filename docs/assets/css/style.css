@@ -48,6 +48,12 @@ img {
     background-color: rgb(28, 32, 34);
 }
 
+.version {
+    font-size: 12px;
+    color: #44d808;
+    margin-left: 5px;
+}
+
 .header .menus {
     display: flex;
     align-items: center;
