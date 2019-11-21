@@ -290,7 +290,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to show playback rate controller in the contextmenu
+Whether to show playback rate controller in the contextmenu and setting panel
 
 [Run Code](/)
 
@@ -308,7 +308,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to show aspect ratio controller in the contextmenu
+Whether to show aspect ratio controller in the contextmenu and setting panel
 
 [Run Code](/)
 
@@ -485,7 +485,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-Replace the default icon, The currently configurable icons are: `loading`、`playBig`
+Replace the default icon
 
 [Run Code](/)
 
@@ -704,6 +704,7 @@ var art = new Artplayer({
         url: url + '/subtitle/one-more-time-one-more-chance.srt',
         style: {
             color: '#03A9F4',
+            'font-size': '30px',
         },
     },
 });
@@ -733,8 +734,10 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     thumbnails: {
         url: url + '/image/one-more-time-one-more-chance-thumbnails.png',
-        width: 190,
-        height: 107,
+        number: 100,
+        width: 160,
+        height: 90,
+        column: 10,
     },
 });
 ```
@@ -742,7 +745,7 @@ var art = new Artplayer({
 ## moreVideoAttr
 
 -   Type: `Object`
--   Default: `{'controls': false,'preload': 'auto'}`
+-   Default: `{'controls': false,'preload': 'metadata'}`
 
 More video Attributes, these properties will be written directly to the video element
 
@@ -877,6 +880,28 @@ var art = new Artplayer({
 });
 ```
 
+Or you can add it dynamically after instantiation:
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.layers.add({
+    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+    style: {
+        position: 'absolute',
+        top: '20px',
+        right: '20px',
+        opacity: '.9',
+    },
+});
+```
+
 ## contextmenu
 
 -   Type: `Array`
@@ -914,6 +939,26 @@ var art = new Artplayer({
 });
 ```
 
+Or you can add it dynamically after instantiation:
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.contextmenu.add({
+    html: 'Custom menu',
+    click: function(contextmenu) {
+        console.info('You clicked on the custom menu');
+        contextmenu.show = false;
+    },
+});
+```
+
 ## controls
 
 -   Type: `Array`
@@ -941,19 +986,40 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     controls: [
-        function myController(art) {
-            return {
-                name: 'myController',
-                position: 'right',
-                index: 10,
-                html: 'myController',
-                tooltip: 'This is my controller',
-                click: function() {
-                    console.log('myController');
-                },
-            };
+        {
+            name: 'myController',
+            position: 'right',
+            index: 10,
+            html: 'myController',
+            tooltip: 'This is my controller',
+            click: function() {
+                console.log('myController');
+            },
         },
     ],
+});
+```
+
+Or you can add it dynamically after instantiation:
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.controls.add({
+    name: 'myController',
+    position: 'right',
+    index: 10,
+    html: 'myController',
+    tooltip: 'This is my controller',
+    click: function() {
+        console.log('myController');
+    },
 });
 ```
 
@@ -973,17 +1039,50 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     plugins: [
         function myPlugin(art) {
+            // Do something you like here.
+            // You can also return an object for external calls.
+            console.info('myPlugin running...');
             return {
                 // This exposes plugin properties or methods for others to use. Like:
                 something: 'something',
                 doSomething: function() {
-                    console.log('Do something here...');
+                    console.info('Do something here...');
                 },
             };
         },
     ],
 });
 
+// Call plugin from the outside
+art.plugins.myPlugin.doSomething();
+```
+
+Or you can add it dynamically after instantiation:
+
+[Run Code](/)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.plugins.add(function myPlugin(art) {
+    // Do something you like here.
+    // You can also return an object for external calls.
+    console.info('myPlugin running...');
+    return {
+        // This exposes plugin properties or methods for others to use. Like:
+        something: 'something',
+        doSomething: function() {
+            console.info('Do something here...');
+        },
+    };
+});
+
+// Call plugin from the outside
+art.plugins.myPlugin.something === 'something';
 art.plugins.myPlugin.doSomething();
 ```
 
@@ -1009,11 +1108,11 @@ console.log('isFocus', art.isFocus);
 console.log('isPlaying', art.isPlaying);
 
 setTimeout(function() {
-    // keep dom
+    // remove dom
     art.destroy();
 
-    // remove dom
-    // art.destroy(true);
+    // keep dom
+    // art.destroy(false);
 }, 1000);
 ```
 
@@ -1069,7 +1168,7 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
 });
 
-art.once('video:canplay', () => {
+art.on('ready', () => {
     art.player.seek = 5;
     art.player.screenshot();
 });
@@ -1079,10 +1178,12 @@ art.once('video:canplay', () => {
 
 The player will automatically add a `localStorage` object named `artplayer_settings`, Now the player will only set and read the `volume` value.
 
-| propertie | type       | Description     |
-| --------- | ---------- | --------------- |
-| `get`     | `Function` | Get the storage |
-| `set`     | `Function` | Set the storage |
+| propertie | type       | Description       |
+| --------- | ---------- | ----------------- |
+| `get`     | `Function` | Get a storage     |
+| `set`     | `Function` | Set a storage     |
+| `del`     | `Function` | Delete a storage  |
+| `clean`   | `Function` | Clean all storage |
 
 [Run Code](/)
 
@@ -1154,6 +1255,9 @@ art.notice.show('some message');
 
 // not auto hide
 art.notice.show('some message', false);
+
+// Set hidden delay time
+art.notice.show('some message', true, 1000);
 ```
 
 ## events
@@ -1207,15 +1311,12 @@ var art = new Artplayer({
 art.layers.add({
     html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
     style: {
-        name: 'yourLayer',
         position: 'absolute',
         top: '20px',
         right: '20px',
         opacity: '.9',
     },
 });
-
-art.layers.yourLayer.show = false;
 ```
 
 ## controls
@@ -1238,19 +1339,16 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
 });
 
-art.controls.add(function yourController(art) {
-    return {
-        name: 'yourController',
-        position: 'right',
-        index: 10,
-        html: 'yourController',
-        click: function() {
-            console.log('yourController');
-        },
-    };
+art.controls.add({
+    name: 'myController',
+    position: 'right',
+    index: 10,
+    html: 'myController',
+    tooltip: 'This is my controller',
+    click: function() {
+        console.log('myController');
+    },
 });
-
-art.controls.yourController.show = false;
 ```
 
 ## contextmenu
@@ -1274,11 +1372,12 @@ var art = new Artplayer({
 });
 
 art.contextmenu.add({
-    html: 'Your Contextmenu',
-    name: 'yourContextmenu',
+    html: 'Custom menu',
+    click: function(contextmenu) {
+        console.info('You clicked on the custom menu');
+        contextmenu.show = false;
+    },
 });
-
-art.contextmenu.yourContextmenu.show = false;
 ```
 
 ## subtitle
@@ -1303,25 +1402,21 @@ var art = new Artplayer({
         url: url + '/subtitle/one-more-time-one-more-chance.srt',
     },
     controls: [
-        function subtitle1(art) {
-            return {
-                position: 'right',
-                index: 10,
-                html: 'subtitle1',
-                click: function() {
-                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.srt', 'srt subtitle name');
-                },
-            };
+        {
+            position: 'right',
+            index: 10,
+            html: 'subtitle 01',
+            click: function() {
+                art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.srt', 'srt subtitle name');
+            },
         },
-        function subtitle2(art) {
-            return {
-                position: 'right',
-                index: 20,
-                html: 'subtitle2',
-                click: function() {
-                    art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt', 'vtt subtitle name');
-                },
-            };
+        {
+            position: 'right',
+            index: 20,
+            html: 'subtitle 02',
+            click: function() {
+                art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt', 'vtt subtitle name');
+            },
         },
     ],
 });
@@ -1335,6 +1430,14 @@ var art = new Artplayer({
 | --------- | -------- | ------------ |
 | `show`    | `setter` | Show or hide |
 
+```js
+// Show the loading
+art.loading.show = true;
+
+// Hide the loading
+art.loading.show = false;
+```
+
 ## mask
 
 -   Type: `Object`
@@ -1342,6 +1445,14 @@ var art = new Artplayer({
 | propertie | type     | Description  |
 | --------- | -------- | ------------ |
 | `show`    | `setter` | Show or hide |
+
+```js
+// Show the mask
+art.mask.show = true;
+
+// Hide the mask
+art.mask.show = false;
+```
 
 ## setting
 
@@ -1361,6 +1472,7 @@ var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    setting: true,
 });
 
 art.setting.add({
@@ -1368,7 +1480,11 @@ art.setting.add({
     name: 'yourSetting',
 });
 
-art.setting.yourSetting.show = false;
+// Show the setting
+art.setting.show = true;
+
+// Hide the setting
+art.setting.show = false;
 ```
 
 ## plugins
@@ -1391,15 +1507,20 @@ var art = new Artplayer({
 });
 
 art.plugins.add(function myPlugin(art) {
+    // Do something you like here.
+    // You can also return an object for external calls.
+    console.info('myPlugin running...');
     return {
         // This exposes plugin properties or methods for others to use. Like:
         something: 'something',
         doSomething: function() {
-            console.log('Do something here...');
+            console.info('Do something here...');
         },
     };
 });
 
+// Call plugin from the outside
+art.plugins.myPlugin.something === 'something';
 art.plugins.myPlugin.doSomething();
 ```
 
@@ -1415,11 +1536,15 @@ All properties are read only
 | `Artplayer.utils`     | `Object` | Utils function            |
 | `Artplayer.option`    | `Object` | Default option            |
 | `Artplayer.instances` | `Array`  | Instance collection       |
+| `Artplayer.scheme`    | `Array`  | Option scheme             |
+| `Artplayer.Emitter`   | `Array`  | Emitter constructor       |
+| `Artplayer.validator` | `Array`  | Option validator          |
+| `Artplayer.kindOf`    | `Array`  | Data type detection tool  |
 
 # Event
 
 ```js
-art.on('ready', function() {
+art.on('ready', function(args) {
     console.log('The player can play');
 });
 ```
@@ -1478,12 +1603,14 @@ art.on('video:canplay', function(event) {
 
 ## Subtitle
 
-| Event             | Description               | Parameter             |
-| ----------------- | ------------------------- | --------------------- |
-| `subtitle:update` | When the subtitles change | Current subtitle text |
-| `subtitle:switch` | When switching subtitles  | Current subtitle url  |
-| `subtitle:show`   | When displaying subtitles | `undefined`           |
-| `subtitle:hide`   | When hiding subtitles     | `undefined`           |
+| Event             | Description                   | Parameter             |
+| ----------------- | ----------------------------- | --------------------- |
+| `subtitle:update` | When the subtitles change     | Current subtitle text |
+| `subtitle:switch` | When switching subtitles      | Current subtitle url  |
+| `subtitle:load`   | When the subtitles loaded     | Current subtitle url  |
+| `subtitle:err`    | When the subtitles load error | Error object          |
+| `subtitle:show`   | When displaying subtitles     | `undefined`           |
+| `subtitle:hide`   | When hiding subtitles         | `undefined`           |
 
 ## Notice
 

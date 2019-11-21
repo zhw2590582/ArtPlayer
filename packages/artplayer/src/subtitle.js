@@ -63,6 +63,7 @@ export default class Subtitle {
                 return response.text();
             })
             .then(text => {
+                this.art.emit('subtitle:load', url);
                 switch (getExt(url)) {
                     case 'srt':
                         return vttToBlob(srtToVtt(text));
@@ -83,6 +84,7 @@ export default class Subtitle {
             })
             .catch(err => {
                 notice.show(err);
+                this.art.emit('subtitle:err', err);
                 throw err;
             });
     }
