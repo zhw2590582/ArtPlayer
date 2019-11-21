@@ -51,7 +51,7 @@ var art = new Artplayer({
 
 DOM container of the player
 
-[Run Code](/)
+[Run Code](/Configuration.container)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -79,7 +79,7 @@ You may need to initialize a size for the container element, like:
 
 Video source url, Three video file formats are supported: `mp4`, `ogg`, `webm`
 
-[Run Code](/)
+[Run Code](/Configuration.url)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -98,7 +98,7 @@ var art = new Artplayer({
 
 Specify the format for the `url`, use with `customType`
 
-[Run Code](/)
+[Run Code](/Configuration.type)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -116,13 +116,13 @@ var art = new Artplayer({
 
 Customize when loading third-party libraries
 
-[Run Code](/)
+[Run Code](/Configuration.customType)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
   container: '.artplayer-app',
-  url: url + '/video/one-more-time-one-more-chance-480p.flv'
+  url: url + '/video/one-more-time-one-more-chance-480p.flv',
   type: 'flv',
   customType: {
     flv: function(video, url, art) {
@@ -163,7 +163,7 @@ var art = new Artplayer({
 
 Video poster image url
 
-[Run Code](/)
+[Run Code](/Configuration.poster)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -181,7 +181,7 @@ var art = new Artplayer({
 
 Video title, will be shown in `screenshot` file name and `pip` mode
 
-[Run Code](/)
+[Run Code](/Configuration.title)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -199,7 +199,7 @@ var art = new Artplayer({
 
 Default volume, player will cache the last volume, which may be overwritten
 
-[Run Code](/)
+[Run Code](/Configuration.volume)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -217,7 +217,7 @@ var art = new Artplayer({
 
 Whether to mute by default
 
-[Run Code](/)
+[Run Code](/Configuration.muted)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -237,7 +237,7 @@ Whether to play automatically, sometimes it doesn't necessarily succeed
 
 More info: [autoplay-policy-changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
 
-[Run Code](/)
+[Run Code](/Configuration.autoplay)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -255,7 +255,7 @@ var art = new Artplayer({
 
 Keep the original video aspect ratio and automatically zoom
 
-[Run Code](/)
+[Run Code](/Configuration.autoSize)
 
 ```js
 // Zoom browser window
@@ -274,7 +274,7 @@ var art = new Artplayer({
 
 Automatic loop playback
 
-[Run Code](/)
+[Run Code](/Configuration.loop)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -292,7 +292,7 @@ var art = new Artplayer({
 
 Whether to show playback rate controller in the contextmenu and setting panel
 
-[Run Code](/)
+[Run Code](/Configuration.playbackRate)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -310,7 +310,7 @@ var art = new Artplayer({
 
 Whether to show aspect ratio controller in the contextmenu and setting panel
 
-[Run Code](/)
+[Run Code](/Configuration.aspectRatio)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -328,7 +328,7 @@ var art = new Artplayer({
 
 Whether to show screenshot controller in the bottom, If the video resource exists cross-domain, the screenshot may fail. Unless serves this url with the correct `Access-Control-Allow-Origin`, and Set the video's `crossOrigin` property to `anonymous`
 
-[Run Code](/)
+[Run Code](/Configuration.screenshot)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -351,7 +351,7 @@ var art = new Artplayer({
 
 Whether to show setting controller in the bottom
 
-[Run Code](/)
+[Run Code](/Configuration.setting)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -371,7 +371,7 @@ Whether to show pip controller in the bottom, it will give priority to the nativ
 
 More info: [picture-in-picture](https://developers.google.com/web/updates/2017/09/picture-in-picture)
 
-[Run Code](/)
+[Run Code](/Configuration.pip)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -389,7 +389,7 @@ var art = new Artplayer({
 
 Whether to show window fullscreen controller in the bottom
 
-[Run Code](/)
+[Run Code](/Configuration.fullscreen)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -407,7 +407,7 @@ var art = new Artplayer({
 
 Whether to show web page fullscreen controller in the bottom
 
-[Run Code](/)
+[Run Code](/Configuration.fullscreenWeb)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -425,7 +425,7 @@ var art = new Artplayer({
 
 Player mutually exclusive, only one player can play at a time
 
-[Run Code](/)
+[Run Code](/Configuration.mutex)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -443,10 +443,10 @@ var art = new Artplayer({
 
 Whether to use hotkey
 
-[Run Code](/)
+[Run Code](/Configuration.hotkey)
 
 ```js
-var url = 'https://zhw2590582.github.io/assets-cdn;
+var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
@@ -469,7 +469,7 @@ var art = new Artplayer({
 
 Default display language: en, zh-cn, zh-tw
 
-[Run Code](/)
+[Run Code](/Configuration.lang)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -487,7 +487,7 @@ var art = new Artplayer({
 
 Replace the default icon
 
-[Run Code](/)
+[Run Code](/Configuration.icons)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -520,7 +520,7 @@ var art = new Artplayer({
 
 Default theme color
 
-[Run Code](/)
+[Run Code](/Configuration.theme)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -538,7 +538,7 @@ var art = new Artplayer({
 
 Subtitle time offset plugin
 
-[Run Code](/)
+[Run Code](/Configuration.subtitleOffset)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -560,7 +560,7 @@ var art = new Artplayer({
 
 Mini progress bar plugin
 
-[Run Code](/)
+[Run Code](/Configuration.miniProgressBar)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -578,7 +578,7 @@ var art = new Artplayer({
 
 Local video preview plugin
 
-[Run Code](/)
+[Run Code](/Configuration.localVideo)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -606,7 +606,7 @@ var art = new Artplayer({
 
 Local subtitle preview plugin
 
-[Run Code](/)
+[Run Code](/Configuration.localSubtitle)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -638,7 +638,7 @@ In chrome, you must use gestures on the page to use this feature, otherwise you 
 
 More info: [picture-in-picture](https://developers.google.com/web/updates/2017/09/picture-in-picture)
 
-[Run Code](/)
+[Run Code](/Configuration.autoPip)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -656,7 +656,7 @@ var art = new Artplayer({
 
 A network monitor is used to monitor the blocking of the video.
 
-[Run Code](/)
+[Run Code](/Configuration.networkMonitor)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -693,7 +693,7 @@ Custom subtitle
 | `url`     | `String` | Subtitle url, support vtt and srt format |
 | `style`   | `Object` | Subtitle style                           |
 
-[Run Code](/)
+[Run Code](/Configuration.subtitle)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -725,7 +725,7 @@ Custom thumbnails in the progress bar with lazy load
 | `height`  | `Number` | Thumbnails height    |
 | `column`  | `Number` | Thumbnails column    |
 
-[Run Code](/)
+[Run Code](/Configuration.thumbnails)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -749,7 +749,7 @@ var art = new Artplayer({
 
 More video Attributes, these properties will be written directly to the video element
 
-[Run Code](/)
+[Run Code](/Configuration.moreVideoAttr)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -776,7 +776,7 @@ Custom quality, The type of quality is an object
 | `name`    | `String`  | Quality name to show                                                           |
 | `url`     | `String`  | Video url                                                                      |
 
-[Run Code](/)
+[Run Code](/Configuration.quality)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -809,7 +809,7 @@ Custom highlight, The type of highlight is an object
 | `time`    | `Number` | highlight second |
 | `text`    | `String` | highlight text   |
 
-[Run Code](/)
+[Run Code](/Configuration.highlight)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -859,7 +859,7 @@ Custom layer, The type of layer is an object or function
 | `mounted` | `Function`          | Callback after mounted                        |
 | `tooltip` | `String`            | Tooltip text                                  |
 
-[Run Code](/)
+[Run Code](/Configuration.layers)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -882,7 +882,7 @@ var art = new Artplayer({
 
 Or you can add it dynamically after instantiation:
 
-[Run Code](/)
+[Run Code](/Configuration.layers)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -920,7 +920,7 @@ Custom contextmenu, The type of layer is an object or function
 | `mounted` | `Function`          | Callback after mounted                        |
 | `tooltip` | `String`            | Tooltip text                                  |
 
-[Run Code](/)
+[Run Code](/Configuration.contextmenu)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -941,7 +941,7 @@ var art = new Artplayer({
 
 Or you can add it dynamically after instantiation:
 
-[Run Code](/)
+[Run Code](/Configuration.contextmenu)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -978,7 +978,7 @@ Custom controls, The type of controls is an object or function
 | `position` | `String`            | The position where the controller appears: `top`, `left`, `right` |
 | `tooltip`  | `String`            | Tooltip text                                                      |
 
-[Run Code](/)
+[Run Code](/Configuration.controls)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1002,7 +1002,7 @@ var art = new Artplayer({
 
 Or you can add it dynamically after instantiation:
 
-[Run Code](/)
+[Run Code](/Configuration.controls)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1030,7 +1030,7 @@ art.controls.add({
 
 Custom plugins, The type of plugin is a function
 
-[Run Code](/)
+[Run Code](/Configuration.plugins)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1059,7 +1059,7 @@ art.plugins.myPlugin.doSomething();
 
 Or you can add it dynamically after instantiation:
 
-[Run Code](/)
+[Run Code](/Configuration.plugins)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1095,7 +1095,7 @@ art.plugins.myPlugin.doSomething();
 | `isFocus` | `Boolean`  | Return to focus state                            |
 | `destroy` | `Function` | Destroy instance, will not remove dom by default |
 
-[Run Code](/)
+[Run Code](/Properties.instance)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1159,7 +1159,7 @@ art.seek === art.player.seek;
 | `muted`               | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
 | `url`                 | `String`   | `Getter` of the video url                                                                         |
 
-[Run Code](/)
+[Run Code](/Properties.player)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1185,7 +1185,7 @@ The player will automatically add a `localStorage` object named `artplayer_setti
 | `del`     | `Function` | Delete a storage  |
 | `clean`   | `Function` | Clean all storage |
 
-[Run Code](/)
+[Run Code](/Properties.storage)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1207,7 +1207,7 @@ The current support i18n has: `en`, `zh-cn`, `zh-tw`
 | `get`     | `Function` | Get the a i18n value            |
 | `update`  | `Function` | Pass in a parameter for merging |
 
-[Run Code](/)
+[Run Code](/Properties.i18n)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1241,7 +1241,7 @@ console.log(art.i18n.get('Language'));
 | `show`    | `Function` | Show a message |
 | `hide`    | `Function` | Hide message   |
 
-[Run Code](/)
+[Run Code](/Properties.notice)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1273,7 +1273,7 @@ Agent for managing native events
 | `loadImg` | `Function` | Determine whether to finish the picture                                              |
 | `destroy` | `Function` | Destroy all events                                                                   |
 
-[Run Code](/)
+[Run Code](/Properties.events)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1299,7 +1299,7 @@ Layer manager, and every layer has `show` and `hide` funciton
 | `add`     | `Function` | Dynamically add a layer |
 | `show`    | `setter`   | Show or hide            |
 
-[Run Code](/)
+[Run Code](/Properties.layers)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1330,7 +1330,7 @@ Controls manager, and every control has `show` setter
 | `add`     | `Function` | Dynamically add a control |
 | `show`    | `setter`   | Show or hide              |
 
-[Run Code](/)
+[Run Code](/Properties.controls)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1362,7 +1362,7 @@ Contextmenu manager, and every contextmenu has `show` setter
 | `add`     | `Function` | Dynamically add a contextmenu |
 | `show`    | `setter`   | Show or hide                  |
 
-[Run Code](/)
+[Run Code](/Properties.contextmenu)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1391,7 +1391,7 @@ art.contextmenu.add({
 | `switch`  | `Function` | Switch subtitle  |
 | `url`     | `getter`   | get subtitle url |
 
-[Run Code](/)
+[Run Code](/Properties.subtitle)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1465,7 +1465,7 @@ Setting manager, and every setting has `show` and `hide` funciton
 | `add`     | `Function` | Dynamically add a setting |
 | `show`    | `setter`   | Show or hide              |
 
-[Run Code](/)
+[Run Code](/Properties.setting)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -1497,7 +1497,7 @@ Plugins manager
 | --------- | ---------- | ------------------------ |
 | `add`     | `Function` | Dynamically add a plugin |
 
-[Run Code](/)
+[Run Code](/Properties.plugins)
 
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
