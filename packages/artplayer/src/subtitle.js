@@ -39,8 +39,8 @@ export default class Subtitle {
                 .split(/\r?\n/)
                 .map(item => `<p>${item}</p>`)
                 .join('');
+            this.art.emit('subtitle:update', this.activeCue.text);
         }
-        this.art.emit('subtitle:update', this.activeCue.text);
     }
 
     switch(url, name = 'unknown') {
