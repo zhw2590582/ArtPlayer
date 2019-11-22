@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-danmuku",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "expose": "artplayerPluginDanmuku",
   "description": "Danmuku plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-danmuku.js",

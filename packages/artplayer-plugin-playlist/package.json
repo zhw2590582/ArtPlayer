@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-playlist",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "expose": "artplayerPluginPlaylist",
   "description": "Playlist plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-playlist.js",

@@ -1,6 +1,6 @@
 {
   "name": "artplayer",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "expose": "Artplayer",
   "description": "ArtPlayer is a modern HTML5 video player",
   "main": "dist/artplayer.js",
