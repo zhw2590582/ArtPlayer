@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global.artplayerPluginGif = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -20,27 +20,6 @@
   }
 
   var defineProperty = _defineProperty;
-
-  function _objectSpread(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
-
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
-      }
-
-      ownKeys.forEach(function (key) {
-        defineProperty(target, key, source[key]);
-      });
-    }
-
-    return target;
-  }
-
-  var objectSpread = _objectSpread;
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -2860,7 +2839,7 @@
 
   var b64toBlob = createCommonjsModule(function (module) {
   (function(root, globalName, factory) {
-    if (module.exports) {
+    if ( module.exports) {
       // Node:
       module.exports = factory();
       // Use module export as simulated ES6 default export:
@@ -2896,6 +2875,10 @@
     };
   }));
   });
+
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function artplayerPluginGif(art) {
     var _art$constructor$util = art.constructor.utils,
@@ -3021,7 +3004,7 @@
         loading.show = true;
         art.emit('artplayerPluginGif:start');
         notice.show(i18n.get('Start creating gif...'), false);
-        gifshot.createGIF(objectSpread({}, config, {
+        gifshot.createGIF(_objectSpread({}, config, {
           video: [$video.src],
           crossOrigin: 'anonymous'
         }), function (obj) {
@@ -3047,5 +3030,5 @@
 
   return artplayerPluginGif;
 
-}));
+})));
 //# sourceMappingURL=artplayer-plugin-gif.js.map

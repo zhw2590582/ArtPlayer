@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = global || self, global.artplayerPluginBacklight = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
     function matrixCallback(callback) {
       var result = [];
@@ -138,5 +138,5 @@
 
     return artplayerPluginBacklight;
 
-}));
+})));
 //# sourceMappingURL=artplayer-plugin-backlight.js.map

@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global.ArtplayerToolThumbnail = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -305,10 +305,10 @@
           this.video.src = videoUrl;
           sleep(delay).then(function () {
             _this3.emit('video', _this3.video);
-          })["catch"](function (err) {
+          }).catch(function (err) {
             _this3.emit('error', err.message);
 
-            console.error(err);
+            throw err;
           });
         }
       }
@@ -347,8 +347,8 @@
 
                   resolve();
                 });
-              })["catch"](function (err) {
-                console.error(err);
+              }).catch(function (err) {
+                throw err;
               });
             });
           };
@@ -359,19 +359,19 @@
             _this4.processing = false;
 
             _this4.emit('done');
-          })["catch"](function (err) {
+          }).catch(function (err) {
             _this4.processing = false;
 
             _this4.emit('error', err.message);
 
-            console.error(err);
+            throw err;
           });
-        })["catch"](function (err) {
+        }).catch(function (err) {
           _this4.processing = false;
 
           _this4.emit('error', err.message);
 
-          console.error(err);
+          throw err;
         });
       }
     }, {
@@ -494,5 +494,5 @@
 
   return ArtplayerToolThumbnail;
 
-}));
+})));
 //# sourceMappingURL=artplayer-tool-thumbnail.js.map
