@@ -3231,16 +3231,7 @@
           subtitle = art.option.subtitle,
           $subtitle = art.template.$subtitle;
       setStyles($subtitle, subtitle.style);
-      proxy(_this.textTrack, 'cuechange', function () {
-        $subtitle.innerHTML = '';
-
-        if (_this.activeCue) {
-          $subtitle.innerHTML = _this.activeCue.text.split(/\r?\n/).map(function (item) {
-            return "<p>".concat(item, "</p>");
-          }).join('');
-          art.emit('subtitle:update', _this.activeCue.text);
-        }
-      });
+      proxy(_this.textTrack, 'cuechange', _this.update.bind(assertThisInitialized(_this)));
 
       if (subtitle.url) {
         _this.init(subtitle.url);
@@ -3250,6 +3241,19 @@
     }
 
     createClass(Subtitle, [{
+      key: "update",
+      value: function update() {
+        var $subtitle = this.art.template.$subtitle;
+        $subtitle.innerHTML = '';
+
+        if (this.activeCue) {
+          $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map(function (item) {
+            return "<p>".concat(item, "</p>");
+          }).join('');
+          this.art.emit('subtitle:update', this.activeCue.text);
+        }
+      }
+    }, {
       key: "switch",
       value: function _switch(url) {
         var _this2 = this;
