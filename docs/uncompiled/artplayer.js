@@ -1305,9 +1305,7 @@
         notice = art.notice,
         option = art.option;
     Object.defineProperty(player, 'switchQuality', {
-      value: function value(url) {
-        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
-
+      value: function value(url, name) {
         if (url !== player.url) {
           URL.revokeObjectURL(player.url);
           var currentTime = player.currentTime,
@@ -1324,7 +1322,10 @@
               player.play = true;
             }
 
-            notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
+            if (name) {
+              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
+            }
+
             art.emit('switch', url);
           });
         }
@@ -1333,9 +1334,7 @@
       }
     });
     Object.defineProperty(player, 'switchUrl', {
-      value: function value(url) {
-        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
-
+      value: function value(url, name) {
         if (url !== player.url) {
           URL.revokeObjectURL(player.url);
           var playing = player.playing;
@@ -1351,7 +1350,10 @@
               player.play = true;
             }
 
-            notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
+            if (name) {
+              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
+            }
+
             art.emit('switch', url);
           });
         }
@@ -2419,7 +2421,7 @@
           proxy = art.events.proxy,
           player = art.player;
       return _objectSpread$4({}, option, {
-        html: "\n                <div class=\"art-control-progress-inner\">\n                    <div class=\"art-progress-loaded\"></div>\n                    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n                    <div class=\"art-progress-highlight\"></div>\n                    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n                    <div class=\"art-progress-tip art-tip\"></div>\n                </div>\n            "),
+        html: "\n<div class=\"art-control-progress-inner\">\n    <div class=\"art-progress-loaded\"></div>\n    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n    <div class=\"art-progress-highlight\"></div>\n    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n    <div class=\"art-progress-tip art-tip\"></div>\n</div>\n            "),
         mounted: function mounted($control) {
           var isDroging = false;
           var $loaded = query('.art-progress-loaded', $control);
@@ -2975,7 +2977,7 @@
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$c({}, option, {
-        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "\n".concat(i18n.get('Play speed'), ":\n<span data-rate=\"0.5\">0.5</span>\n<span data-rate=\"0.75\">0.75</span>\n<span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n<span data-rate=\"1.25\">1.25</span>\n<span data-rate=\"1.5\">1.5</span>\n<span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
           var rate = event.target.dataset.rate;
 
@@ -3007,7 +3009,7 @@
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$d({}, option, {
-        html: "\n                ".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
+        html: "\n".concat(i18n.get('Aspect ratio'), ":\n<span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n<span data-ratio=\"4:3\">4:3</span>\n<span data-ratio=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
           var ratio = event.target.dataset.ratio;
 
@@ -3255,15 +3257,16 @@
       }
     }, {
       key: "switch",
-      value: function _switch(url) {
+      value: function _switch(url, name) {
         var _this2 = this;
 
-        var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
         var _this$art = this.art,
             i18n = _this$art.i18n,
             notice = _this$art.notice;
         return this.init(url).then(function (subUrl) {
-          notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
+          if (name) {
+            notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
+          }
 
           _this2.art.emit('subtitle:switch', subUrl);
 
@@ -3527,36 +3530,38 @@
       classCallCheck(this, Hotkey);
 
       this.keys = {};
+      var option = art.option,
+          player = art.player,
+          proxy = art.events.proxy;
 
-      if (art.option.hotkey) {
+      if (option.hotkey) {
         art.on('ready', function () {
           _this.add(27, function () {
-            if (art.player.fullscreenWeb) {
-              art.player.fullscreenWeb = false;
+            if (player.fullscreenWeb) {
+              player.fullscreenWeb = false;
             }
           });
 
           _this.add(32, function () {
-            art.player.toggle = true;
+            player.toggle = true;
           });
 
           _this.add(37, function () {
-            art.player.seek = art.player.currentTime - 5;
+            player.seek = player.currentTime - 5;
           });
 
           _this.add(38, function () {
-            art.player.volume += 0.1;
+            player.volume += 0.1;
           });
 
           _this.add(39, function () {
-            art.player.seek = art.player.currentTime + 5;
+            player.seek = player.currentTime + 5;
           });
 
           _this.add(40, function () {
-            art.player.volume -= 0.1;
+            player.volume -= 0.1;
           });
 
-          var proxy = art.events.proxy;
           proxy(window, 'keydown', function (event) {
             if (art.isFocus) {
               var tag = document.activeElement.tagName.toUpperCase();
@@ -3765,7 +3770,7 @@
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$h({}, option, {
-        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
+        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n    </div>\n</div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -3796,7 +3801,7 @@
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$i({}, option, {
-        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
+        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"4:3\">4:3</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"16:9\">16:9</button>\n    </div>\n</div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -3828,7 +3833,7 @@
           player = art.player,
           proxy = art.events.proxy;
       return _objectSpread$j({}, option, {
-        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n                </div>\n                <div class=\"art-setting-range\">\n                    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n                </div>\n            "),
+        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n</div>\n            "),
         mounted: function mounted($setting) {
           var $range = query('.art-setting-range input', $setting);
           var $value = query('.art-subtitle-value', $setting);
@@ -3953,7 +3958,7 @@
       title: 'Subtitle',
       name: 'subtitleOffset',
       index: 20,
-      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
+      html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n</div>\n        "),
       mounted: function mounted($setting) {
         var $range = query('.art-setting-range input', $setting);
         var $value = query('.art-subtitle-value', $setting);
@@ -4071,7 +4076,7 @@
         title: 'Local Video',
         name: 'localVideo',
         index: 30,
-        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Video'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
+        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Video'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);
@@ -4160,7 +4165,7 @@
         title: 'Local Subtitle',
         name: 'localSubtitle',
         index: 40,
-        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Subtitle'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
+        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Subtitle'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);

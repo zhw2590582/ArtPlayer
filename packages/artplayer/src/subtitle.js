@@ -43,10 +43,12 @@ export default class Subtitle extends Component {
         }
     }
 
-    switch(url, name = 'unknown') {
+    switch(url, name) {
         const { i18n, notice } = this.art;
         return this.init(url).then(subUrl => {
-            notice.show(`${i18n.get('Switch subtitle')}: ${name}`);
+            if (name) {
+                notice.show(`${i18n.get('Switch subtitle')}: ${name}`);
+            }
             this.art.emit('subtitle:switch', subUrl);
             return subUrl;
         });

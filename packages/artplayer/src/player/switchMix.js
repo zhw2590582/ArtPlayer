@@ -2,7 +2,7 @@ export default function switchMix(art, player) {
     const { i18n, notice, option } = art;
 
     Object.defineProperty(player, 'switchQuality', {
-        value: (url, name = 'unknown') => {
+        value: (url, name) => {
             if (url !== player.url) {
                 URL.revokeObjectURL(player.url);
                 const { currentTime, playing } = player;
@@ -16,7 +16,9 @@ export default function switchMix(art, player) {
                     if (playing) {
                         player.play = true;
                     }
-                    notice.show(`${i18n.get('Switch video')}: ${name}`);
+                    if (name) {
+                        notice.show(`${i18n.get('Switch video')}: ${name}`);
+                    }
                     art.emit('switch', url);
                 });
             }
@@ -25,7 +27,7 @@ export default function switchMix(art, player) {
     });
 
     Object.defineProperty(player, 'switchUrl', {
-        value: (url, name = 'unknown') => {
+        value: (url, name) => {
             if (url !== player.url) {
                 URL.revokeObjectURL(player.url);
                 const { playing } = player;
@@ -39,7 +41,9 @@ export default function switchMix(art, player) {
                     if (playing) {
                         player.play = true;
                     }
-                    notice.show(`${i18n.get('Switch video')}: ${name}`);
+                    if (name) {
+                        notice.show(`${i18n.get('Switch video')}: ${name}`);
+                    }
                     art.emit('switch', url);
                 });
             }
