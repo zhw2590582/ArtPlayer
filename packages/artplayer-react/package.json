@@ -1,6 +1,6 @@
 {
   "name": "artplayer-react",
-  "version": "3.1.19",
+  "version": "3.1.20",
   "expose": "ArtplayerReact",
   "description": "React Component for Artplayer",
   "main": "dist/artplayer-react.js",
