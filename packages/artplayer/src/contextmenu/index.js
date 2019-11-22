@@ -114,17 +114,11 @@ export default class Contextmenu {
     set show(value) {
         const { $player } = this.art.template;
         if (value) {
-            this.state = true;
-            addClass($player, 'artplayer-contextmenu-show');
+            addClass($player, 'art-contextmenu-show');
             this.art.emit('contextmenu:show');
         } else {
-            this.state = false;
-            removeClass($player, 'artplayer-contextmenu-show');
+            removeClass($player, 'art-contextmenu-show');
             this.art.emit('contextmenu:hide');
         }
-    }
-
-    toggle() {
-        this.show = !this.state;
     }
 }

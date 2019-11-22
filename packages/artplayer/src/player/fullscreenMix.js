@@ -42,7 +42,7 @@ export default function fullscreenMix(art, player) {
                 }
 
                 screenfull.request($player).then(() => {
-                    addClass($player, 'artplayer-fullscreen');
+                    addClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
                     art.emit('fullscreenEnabled');
                 });
@@ -52,7 +52,7 @@ export default function fullscreenMix(art, player) {
                 }
 
                 screenfull.exit().then(() => {
-                    removeClass($player, 'artplayer-fullscreen');
+                    removeClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
                     art.emit('fullscreenExit');
                 });

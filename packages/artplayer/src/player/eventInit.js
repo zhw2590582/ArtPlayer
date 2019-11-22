@@ -69,7 +69,7 @@ export default function eventInit(art, player) {
         } else {
             art.loading.show = false;
             art.controls.show = false;
-            addClass($player, 'artplayer-error');
+            addClass($player, 'art-error');
             sleep(1000).then(() => {
                 notice.show(i18n.get('Video load failed'), false);
                 art.destroy();

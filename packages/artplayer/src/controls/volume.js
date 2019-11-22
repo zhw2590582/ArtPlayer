@@ -66,7 +66,7 @@ export default function volume(option) {
                 isDroging = true;
             });
 
-            proxy($volumeHandle, 'mousemove', event => {
+            proxy(document, 'mousemove', event => {
                 if (isDroging) {
                     player.muted = false;
                     player.volume = volumeChangeFromEvent(event);

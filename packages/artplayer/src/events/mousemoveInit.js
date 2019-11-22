@@ -7,8 +7,8 @@ export default function mousemoveInitInit(art, events) {
     } = art;
 
     const autoHide = debounce(() => {
-        addClass($player, 'artplayer-hide-cursor');
-        removeClass($player, 'artplayer-hover');
+        addClass($player, 'art-hide-cursor');
+        removeClass($player, 'art-hover');
         art.controls.show = false;
     }, 3000);
 
@@ -20,7 +20,7 @@ export default function mousemoveInitInit(art, events) {
 
     events.proxy($player, 'mousemove', event => {
         autoHide.clearTimeout();
-        removeClass($player, 'artplayer-hide-cursor');
+        removeClass($player, 'art-hide-cursor');
         art.controls.show = true;
         if (!art.player.pip && player.playing && event.target === $video) {
             autoHide();

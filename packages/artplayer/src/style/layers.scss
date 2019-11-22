@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-layers {
+.art-video-player {
+    .art-layers {
         position: absolute;
         z-index: 40;
         left: 0;
@@ -15,8 +15,8 @@
         }
     }
 
-    &.artplayer-layers-hide {
-        .artplayer-layers {
+    &.art-layers-hide {
+        .art-layers {
             display: none;
         }
     }

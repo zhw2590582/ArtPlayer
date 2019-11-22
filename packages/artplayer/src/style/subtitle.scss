@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-subtitle {
+.art-video-player {
+    .art-subtitle {
         position: absolute;
         z-index: 20;
         bottom: 40px;
@@ -16,8 +16,8 @@
         }
     }
 
-    &.artplayer-subtitle-hide {
-        .artplayer-subtitle {
+    &.art-subtitle-hide {
+        .art-subtitle {
             display: none;
         }
     }

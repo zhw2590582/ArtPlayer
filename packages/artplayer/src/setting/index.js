@@ -65,11 +65,11 @@ export default class Setting {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            addClass($player, 'artplayer-setting-show');
+            addClass($player, 'art-setting-show');
             this.art.emit('setting:show');
         } else {
             this.state = false;
-            removeClass($player, 'artplayer-setting-show');
+            removeClass($player, 'art-setting-show');
             this.art.emit('setting:hide');
         }
     }

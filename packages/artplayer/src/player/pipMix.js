@@ -89,7 +89,7 @@ function customPip(art, player) {
 
     proxy($pipHeader, 'mousemove', event => {
         if (isDroging) {
-            addClass($player, 'is-dragging');
+            addClass($player, 'art-is-dragging');
             setStyle($player, 'left', `${lastPlayerLeft + event.pageX - lastPageX}px`);
             setStyle($player, 'top', `${lastPlayerTop + event.pageY - lastPageY}px`);
         }
@@ -97,26 +97,26 @@ function customPip(art, player) {
 
     proxy(document, 'mouseup', () => {
         isDroging = false;
-        removeClass($player, 'is-dragging');
+        removeClass($player, 'art-is-dragging');
     });
 
     proxy($pipClose, 'click', () => {
         player.pip = false;
         isDroging = false;
-        removeClass($player, 'is-dragging');
+        removeClass($player, 'art-is-dragging');
     });
 
     append($pipTitle, option.title || i18n.get('Mini player'));
 
     const property = {
         get() {
-            return hasClass($player, 'artplayer-pip');
+            return hasClass($player, 'art-pip');
         },
         set(value) {
             if (value) {
                 player.autoSize = false;
                 cacheStyle = $player.style.cssText;
-                addClass($player, 'artplayer-pip');
+                addClass($player, 'art-pip');
                 const $body = document.body;
                 setStyle($player, 'top', `${$body.clientHeight - player.height - 50}px`);
                 setStyle($player, 'left', `${$body.clientWidth - player.width - 50}px`);
@@ -127,7 +127,7 @@ function customPip(art, player) {
                 art.emit('pipEnabled');
             } else if (player.pip) {
                 $player.style.cssText = cacheStyle;
-                removeClass($player, 'artplayer-pip');
+                removeClass($player, 'art-pip');
                 setStyle($player, 'top', null);
                 setStyle($player, 'left', null);
                 player.fullscreen = false;

@@ -33,113 +33,113 @@ export default class Template {
 
     initDesktop() {
         this.$container.innerHTML = `
-          <div class="artplayer-video-player" style="--theme: ${this.art.option.theme}">
-            <video class="artplayer-video">
-              <track default kind="metadata"></track>
-            </video>
-            <div class="artplayer-subtitle"></div>
-            <div class="artplayer-danmuku"></div>
-            <div class="artplayer-layers"></div>
-            <div class="artplayer-mask">
-              <div class="artplayer-state"></div>
-            </div>
-            <div class="artplayer-bottom">
-              <div class="artplayer-progress"></div>
-              <div class="artplayer-controls">
-                <div class="artplayer-controls-left"></div>
-                <div class="artplayer-controls-right"></div>
-              </div>
-            </div>
-            <div class="artplayer-loading"></div>
-            <div class="artplayer-notice">
-              <div class="artplayer-notice-inner"></div>
-            </div>
-            <div class="artplayer-setting">
-              <div class="artplayer-setting-inner artplayer-backdrop-filter">
-                <div class="artplayer-setting-body"></div>
-              </div>
-            </div>
-            <div class="artplayer-info artplayer-backdrop-filter">
-              <div class="artplayer-info-panel">
-                <div class="art-info-item">
-                  <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">__VERSION__</div>
-                </div>
-                <div class="art-info-item">
-                  <div class="art-info-title">Video url:</div>
-                  <div class="art-info-content" data-video="src"></div>
-                </div>
-                <div class="art-info-item">
-                  <div class="art-info-title">Video volume:</div>
-                  <div class="art-info-content" data-video="volume"></div>
-                </div>
-                <div class="art-info-item">
-                  <div class="art-info-title">Video time:</div>
-                  <div class="art-info-content" data-video="currentTime"></div>
-                </div>
-                <div class="art-info-item">
-                  <div class="art-info-title">Video duration:</div>
-                  <div class="art-info-content" data-video="duration"></div>
-                </div>
-                <div class="art-info-item">
-                  <div class="art-info-title">Video resolution:</div>
-                  <div class="art-info-content">
-                    <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="artplayer-info-close">[x]</div>
-            </div>
-            <div class="artplayer-pip-header">
-              <div class="artplayer-pip-title"></div>
-              <div class="artplayer-pip-close">×</div>
-            </div>
-            <div class="artplayer-contextmenu artplayer-backdrop-filter"></div>
-          </div>
+<div class="art-video-player" style="--theme: ${this.art.option.theme}">
+  <video class="art-video">
+    <track default kind="metadata"></track>
+  </video>
+  <div class="art-subtitle"></div>
+  <div class="art-danmuku"></div>
+  <div class="art-layers"></div>
+  <div class="art-mask">
+    <div class="art-state"></div>
+  </div>
+  <div class="art-bottom">
+    <div class="art-progress"></div>
+    <div class="art-controls">
+      <div class="art-controls-left"></div>
+      <div class="art-controls-right"></div>
+    </div>
+  </div>
+  <div class="art-loading"></div>
+  <div class="art-notice">
+    <div class="art-notice-inner"></div>
+  </div>
+  <div class="art-settings">
+    <div class="art-setting-inner art-backdrop-filter">
+      <div class="art-setting-body"></div>
+    </div>
+  </div>
+  <div class="art-info art-backdrop-filter">
+    <div class="art-info-panel">
+      <div class="art-info-item">
+        <div class="art-info-title">Player version:</div>
+        <div class="art-info-content">__VERSION__</div>
+      </div>
+      <div class="art-info-item">
+        <div class="art-info-title">Video url:</div>
+        <div class="art-info-content" data-video="src"></div>
+      </div>
+      <div class="art-info-item">
+        <div class="art-info-title">Video volume:</div>
+        <div class="art-info-content" data-video="volume"></div>
+      </div>
+      <div class="art-info-item">
+        <div class="art-info-title">Video time:</div>
+        <div class="art-info-content" data-video="currentTime"></div>
+      </div>
+      <div class="art-info-item">
+        <div class="art-info-title">Video duration:</div>
+        <div class="art-info-content" data-video="duration"></div>
+      </div>
+      <div class="art-info-item">
+        <div class="art-info-title">Video resolution:</div>
+        <div class="art-info-content">
+          <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
+        </div>
+      </div>
+    </div>
+    <div class="art-info-close">[x]</div>
+  </div>
+  <div class="art-pip-header">
+    <div class="art-pip-title"></div>
+    <div class="art-pip-close">×</div>
+  </div>
+  <div class="art-contextmenus art-backdrop-filter"></div>
+</div>
         `;
-        this.$player = this.query('.artplayer-video-player');
-        this.$video = this.query('.artplayer-video');
-        this.$track = this.query('.artplayer-video track');
-        this.$subtitle = this.query('.artplayer-subtitle');
-        this.$danmuku = this.query('.artplayer-danmuku');
-        this.$bottom = this.query('.artplayer-bottom');
-        this.$progress = this.query('.artplayer-progress');
-        this.$controls = this.query('.artplayer-controls');
-        this.$controlsLeft = this.query('.artplayer-controls-left');
-        this.$controlsRight = this.query('.artplayer-controls-right');
-        this.$layers = this.query('.artplayer-layers');
-        this.$loading = this.query('.artplayer-loading');
-        this.$notice = this.query('.artplayer-notice');
-        this.$noticeInner = this.query('.artplayer-notice-inner');
-        this.$mask = this.query('.artplayer-mask');
-        this.$state = this.query('.artplayer-state');
-        this.$setting = this.query('.artplayer-setting');
-        this.$settingInner = this.query('.artplayer-setting-inner');
-        this.$settingBody = this.query('.artplayer-setting-body');
-        this.$info = this.query('.artplayer-info');
-        this.$infoPanel = this.query('.artplayer-info-panel');
-        this.$infoClose = this.query('.artplayer-info-close');
-        this.$pipHeader = this.query('.artplayer-pip-header');
-        this.$pipTitle = this.query('.artplayer-pip-title');
-        this.$pipClose = this.query('.artplayer-pip-close');
-        this.$contextmenu = this.query('.artplayer-contextmenu');
+        this.$player = this.query('.art-video-player');
+        this.$video = this.query('.art-video');
+        this.$track = this.query('.art-video track');
+        this.$subtitle = this.query('.art-subtitle');
+        this.$danmuku = this.query('.art-danmuku');
+        this.$bottom = this.query('.art-bottom');
+        this.$progress = this.query('.art-progress');
+        this.$controls = this.query('.art-controls');
+        this.$controlsLeft = this.query('.art-controls-left');
+        this.$controlsRight = this.query('.art-controls-right');
+        this.$layers = this.query('.art-layers');
+        this.$loading = this.query('.art-loading');
+        this.$notice = this.query('.art-notice');
+        this.$noticeInner = this.query('.art-notice-inner');
+        this.$mask = this.query('.art-mask');
+        this.$state = this.query('.art-state');
+        this.$setting = this.query('.art-settings');
+        this.$settingInner = this.query('.art-setting-inner');
+        this.$settingBody = this.query('.art-setting-body');
+        this.$info = this.query('.art-info');
+        this.$infoPanel = this.query('.art-info-panel');
+        this.$infoClose = this.query('.art-info-close');
+        this.$pipHeader = this.query('.art-pip-header');
+        this.$pipTitle = this.query('.art-pip-title');
+        this.$pipClose = this.query('.art-pip-close');
+        this.$contextmenu = this.query('.art-contextmenus');
     }
 
     initMobile() {
         this.$container.innerHTML = `
-          <div class="artplayer-video-player">
-            <video class="artplayer-video"></video>
+          <div class="art-video-player">
+            <video class="art-video"></video>
           </div>
         `;
-        this.$player = this.query('.artplayer-video-player');
-        this.$video = this.query('.artplayer-video');
+        this.$player = this.query('.art-video-player');
+        this.$video = this.query('.art-video');
     }
 
     destroy(removeHtml) {
         if (removeHtml) {
             this.$container.innerHTML = '';
         } else {
-            addClass(this.$player, 'artplayer-destroy');
+            addClass(this.$player, 'art-destroy');
         }
     }
 }

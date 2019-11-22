@@ -7,7 +7,7 @@ export default function aspectRatio(option) {
             ...option,
             html: `
                 ${i18n.get('Aspect ratio')}:
-                <span data-ratio="default" class="default current">${i18n.get('Default')}</span>
+                <span data-ratio="default" class="art-current">${i18n.get('Default')}</span>
                 <span data-ratio="4:3">4:3</span>
                 <span data-ratio="16:9">16:9</span>
             `,
@@ -22,7 +22,7 @@ export default function aspectRatio(option) {
                 art.on('aspectRatioChange', ratio => {
                     const $current = queryAll('span', $menu).find(item => item.dataset.ratio === ratio);
                     if ($current) {
-                        inverseClass($current, 'current');
+                        inverseClass($current, 'art-current');
                     }
                 });
             },

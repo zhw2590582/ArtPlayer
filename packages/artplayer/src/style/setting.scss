@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-setting {
+.art-video-player {
+    .art-settings {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -13,8 +13,8 @@
         visibility: hidden;
         pointer-events: none;
         overflow: hidden;
-        
-        .artplayer-setting-inner {
+
+        .art-setting-inner {
             position: absolute;
             top: 0;
             right: -300px;
@@ -26,7 +26,7 @@
             transition: all 0.2s ease-in-out;
             overflow: auto;
 
-            .artplayer-setting-body {
+            .art-setting-body {
                 overflow-y: auto;
                 width: 100%;
                 height: 100%;
@@ -103,12 +103,12 @@
         }
     }
 
-    &.artplayer-setting-show {
-        .artplayer-setting {
+    &.art-setting-show {
+        .art-settings {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            .artplayer-setting-inner {
+            .art-setting-inner {
                 right: 0;
             }
         }

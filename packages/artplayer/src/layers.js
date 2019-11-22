@@ -23,11 +23,11 @@ export default class Layers {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            removeClass($player, 'artplayer-layers-hide');
+            removeClass($player, 'art-layers-hide');
             this.art.emit('layers:show');
         } else {
             this.state = false;
-            addClass($player, 'artplayer-layers-hide');
+            addClass($player, 'art-layers-hide');
             this.art.emit('layers:hide');
         }
     }

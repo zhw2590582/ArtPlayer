@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-notice {
+.art-video-player {
+    .art-notice {
         display: none;
         font-size: 14px;
         position: absolute;
@@ -9,7 +9,7 @@
         padding: 10px;
         width: 100%;
         pointer-events: none;
-        .artplayer-notice-inner {
+        .art-notice-inner {
             display: inline-block;
             padding: 5px 10px;
             color: #fff;
@@ -18,8 +18,8 @@
         }
     }
 
-    &.artplayer-notice-show {
-        .artplayer-notice {
+    &.art-notice-show {
+        .art-notice {
             display: flex;
         }
     }

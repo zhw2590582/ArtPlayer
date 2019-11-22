@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-contextmenu {
+.art-video-player {
+    .art-contextmenus {
         display: none;
         flex-direction: column;
         position: absolute;
@@ -31,7 +31,7 @@
             span {
                 display: inline-block;
                 padding: 0 7px;
-                &:hover, &.current {
+                &:hover, &.art-current {
                     color: #00c9ff;
                 }
             }
@@ -46,8 +46,8 @@
         }
     }
 
-    &.artplayer-contextmenu-show {
-        .artplayer-contextmenu {
+    &.art-contextmenu-show {
+        .art-contextmenus {
             display: flex;
         }
     }

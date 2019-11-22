@@ -172,17 +172,11 @@ export default class Controls {
     set show(value) {
         const { $player } = this.art.template;
         if (value) {
-            this.state = true;
-            addClass($player, 'artplayer-controls-show');
+            addClass($player, 'art-controls-show');
             this.art.emit('controls:show');
         } else {
-            this.state = false;
-            removeClass($player, 'artplayer-controls-show');
+            removeClass($player, 'art-controls-show');
             this.art.emit('controls:hide');
         }
-    }
-
-    toggle() {
-        this.show = !this.state;
     }
 }

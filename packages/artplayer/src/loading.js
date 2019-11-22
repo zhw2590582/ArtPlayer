@@ -11,11 +11,11 @@ export default class Loading {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            addClass($player, 'artplayer-loading-show');
+            addClass($player, 'art-loading-show');
             this.art.emit('loading:show');
         } else {
             this.state = false;
-            removeClass($player, 'artplayer-loading-show');
+            removeClass($player, 'art-loading-show');
             this.art.emit('loading:hide');
         }
     }

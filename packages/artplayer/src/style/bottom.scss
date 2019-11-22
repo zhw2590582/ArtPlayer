@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-bottom {
+.art-video-player {
+    .art-bottom {
         position: absolute;
         z-index: 60;
         left: 0;
@@ -14,7 +14,7 @@
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==)
             repeat-x bottom;
 
-        .artplayer-progress {
+        .art-progress {
             position: relative;
             pointer-events: auto;
             .art-control-progress {
@@ -130,7 +130,7 @@
             }
         }
 
-        .artplayer-controls {
+        .art-controls {
             position: relative;
             pointer-events: auto;
             display: flex;
@@ -139,8 +139,8 @@
             height: 40px;
             padding: 5px 0;
 
-            .artplayer-controls-left,
-            .artplayer-controls-right {
+            .art-controls-left,
+            .art-controls-right {
                 display: flex;
             }
 
@@ -248,16 +248,16 @@
         }
     }
 
-    &.artplayer-controls-show,
-    &.artplayer-hover {
-        .artplayer-bottom {
+    &.art-controls-show,
+    &.art-hover {
+        .art-bottom {
             opacity: 1;
             visibility: visible;
         }
     }
 
-    &.artplayer-error,
-    &.artplayer-destroy {
+    &.art-error,
+    &.art-destroy {
         .art-progress-indicator,
         .art-progress-tip {
             display: none !important;

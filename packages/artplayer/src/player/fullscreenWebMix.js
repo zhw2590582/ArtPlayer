@@ -7,21 +7,21 @@ export default function fullscreenWebMix(art, player) {
 
     Object.defineProperty(player, 'fullscreenWeb', {
         get() {
-            return hasClass($player, 'artplayer-web-fullscreen');
+            return hasClass($player, 'art-web-fullscreen');
         },
         set(value) {
             if (value) {
                 if (player.fullscreen) {
                     player.fullscreen = false;
                 }
-                addClass($player, 'artplayer-web-fullscreen');
+                addClass($player, 'art-web-fullscreen');
                 player.aspectRatioReset = true;
                 art.emit('fullscreenWebEnabled');
             } else {
                 if (player.fullscreen) {
                     player.fullscreen = false;
                 }
-                removeClass($player, 'artplayer-web-fullscreen');
+                removeClass($player, 'art-web-fullscreen');
                 player.aspectRatioReset = true;
                 art.emit('fullscreenWebExit');
             }

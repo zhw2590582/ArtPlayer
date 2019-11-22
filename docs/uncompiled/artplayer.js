@@ -791,40 +791,40 @@
     }, {
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"artplayer-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"artplayer-subtitle\"></div>\n            <div class=\"artplayer-danmuku\"></div>\n            <div class=\"artplayer-layers\"></div>\n            <div class=\"artplayer-mask\">\n              <div class=\"artplayer-state\"></div>\n            </div>\n            <div class=\"artplayer-bottom\">\n              <div class=\"artplayer-progress\"></div>\n              <div class=\"artplayer-controls\">\n                <div class=\"artplayer-controls-left\"></div>\n                <div class=\"artplayer-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-loading\"></div>\n            <div class=\"artplayer-notice\">\n              <div class=\"artplayer-notice-inner\"></div>\n            </div>\n            <div class=\"artplayer-setting\">\n              <div class=\"artplayer-setting-inner artplayer-backdrop-filter\">\n                <div class=\"artplayer-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"artplayer-info artplayer-backdrop-filter\">\n              <div class=\"artplayer-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.1.19</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"artplayer-info-close\">[x]</div>\n            </div>\n            <div class=\"artplayer-pip-header\">\n              <div class=\"artplayer-pip-title\"></div>\n              <div class=\"artplayer-pip-close\">\xD7</div>\n            </div>\n            <div class=\"artplayer-contextmenu artplayer-backdrop-filter\"></div>\n          </div>\n        ");
-        this.$player = this.query('.artplayer-video-player');
-        this.$video = this.query('.artplayer-video');
-        this.$track = this.query('.artplayer-video track');
-        this.$subtitle = this.query('.artplayer-subtitle');
-        this.$danmuku = this.query('.artplayer-danmuku');
-        this.$bottom = this.query('.artplayer-bottom');
-        this.$progress = this.query('.artplayer-progress');
-        this.$controls = this.query('.artplayer-controls');
-        this.$controlsLeft = this.query('.artplayer-controls-left');
-        this.$controlsRight = this.query('.artplayer-controls-right');
-        this.$layers = this.query('.artplayer-layers');
-        this.$loading = this.query('.artplayer-loading');
-        this.$notice = this.query('.artplayer-notice');
-        this.$noticeInner = this.query('.artplayer-notice-inner');
-        this.$mask = this.query('.artplayer-mask');
-        this.$state = this.query('.artplayer-state');
-        this.$setting = this.query('.artplayer-setting');
-        this.$settingInner = this.query('.artplayer-setting-inner');
-        this.$settingBody = this.query('.artplayer-setting-body');
-        this.$info = this.query('.artplayer-info');
-        this.$infoPanel = this.query('.artplayer-info-panel');
-        this.$infoClose = this.query('.artplayer-info-close');
-        this.$pipHeader = this.query('.artplayer-pip-header');
-        this.$pipTitle = this.query('.artplayer-pip-title');
-        this.$pipClose = this.query('.artplayer-pip-close');
-        this.$contextmenu = this.query('.artplayer-contextmenu');
+        this.$container.innerHTML = "\n<div class=\"art-video-player\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.1.19</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
+        this.$player = this.query('.art-video-player');
+        this.$video = this.query('.art-video');
+        this.$track = this.query('.art-video track');
+        this.$subtitle = this.query('.art-subtitle');
+        this.$danmuku = this.query('.art-danmuku');
+        this.$bottom = this.query('.art-bottom');
+        this.$progress = this.query('.art-progress');
+        this.$controls = this.query('.art-controls');
+        this.$controlsLeft = this.query('.art-controls-left');
+        this.$controlsRight = this.query('.art-controls-right');
+        this.$layers = this.query('.art-layers');
+        this.$loading = this.query('.art-loading');
+        this.$notice = this.query('.art-notice');
+        this.$noticeInner = this.query('.art-notice-inner');
+        this.$mask = this.query('.art-mask');
+        this.$state = this.query('.art-state');
+        this.$setting = this.query('.art-settings');
+        this.$settingInner = this.query('.art-setting-inner');
+        this.$settingBody = this.query('.art-setting-body');
+        this.$info = this.query('.art-info');
+        this.$infoPanel = this.query('.art-info-panel');
+        this.$infoClose = this.query('.art-info-close');
+        this.$pipHeader = this.query('.art-pip-header');
+        this.$pipTitle = this.query('.art-pip-title');
+        this.$pipClose = this.query('.art-pip-close');
+        this.$contextmenu = this.query('.art-contextmenus');
       }
     }, {
       key: "initMobile",
       value: function initMobile() {
-        this.$container.innerHTML = "\n          <div class=\"artplayer-video-player\">\n            <video class=\"artplayer-video\"></video>\n          </div>\n        ";
-        this.$player = this.query('.artplayer-video-player');
-        this.$video = this.query('.artplayer-video');
+        this.$container.innerHTML = "\n          <div class=\"art-video-player\">\n            <video class=\"art-video\"></video>\n          </div>\n        ";
+        this.$player = this.query('.art-video-player');
+        this.$video = this.query('.art-video');
       }
     }, {
       key: "destroy",
@@ -832,7 +832,7 @@
         if (removeHtml) {
           this.$container.innerHTML = '';
         } else {
-          addClass(this.$player, 'artplayer-destroy');
+          addClass(this.$player, 'art-destroy');
         }
       }
     }]);
@@ -1116,7 +1116,7 @@
       } else {
         art.loading.show = false;
         art.controls.show = false;
-        addClass($player, 'artplayer-error');
+        addClass($player, 'art-error');
         sleep(1000).then(function () {
           notice.show(i18n.get('Video load failed'), false);
           art.destroy();
@@ -1730,7 +1730,7 @@
           }
 
           screenfull.request($player).then(function () {
-            addClass($player, 'artplayer-fullscreen');
+            addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
             art.emit('fullscreenEnabled');
           });
@@ -1740,7 +1740,7 @@
           }
 
           screenfull.exit().then(function () {
-            removeClass($player, 'artplayer-fullscreen');
+            removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
             art.emit('fullscreenExit');
           });
@@ -1765,7 +1765,7 @@
     var $player = art.template.$player;
     Object.defineProperty(player, 'fullscreenWeb', {
       get: function get() {
-        return hasClass($player, 'artplayer-web-fullscreen');
+        return hasClass($player, 'art-web-fullscreen');
       },
       set: function set(value) {
         if (value) {
@@ -1773,7 +1773,7 @@
             player.fullscreen = false;
           }
 
-          addClass($player, 'artplayer-web-fullscreen');
+          addClass($player, 'art-web-fullscreen');
           player.aspectRatioReset = true;
           art.emit('fullscreenWebEnabled');
         } else {
@@ -1781,7 +1781,7 @@
             player.fullscreen = false;
           }
 
-          removeClass($player, 'artplayer-web-fullscreen');
+          removeClass($player, 'art-web-fullscreen');
           player.aspectRatioReset = true;
           art.emit('fullscreenWebExit');
         }
@@ -1875,30 +1875,30 @@
     });
     proxy($pipHeader, 'mousemove', function (event) {
       if (isDroging) {
-        addClass($player, 'is-dragging');
+        addClass($player, 'art-is-dragging');
         setStyle($player, 'left', "".concat(lastPlayerLeft + event.pageX - lastPageX, "px"));
         setStyle($player, 'top', "".concat(lastPlayerTop + event.pageY - lastPageY, "px"));
       }
     });
     proxy(document, 'mouseup', function () {
       isDroging = false;
-      removeClass($player, 'is-dragging');
+      removeClass($player, 'art-is-dragging');
     });
     proxy($pipClose, 'click', function () {
       player.pip = false;
       isDroging = false;
-      removeClass($player, 'is-dragging');
+      removeClass($player, 'art-is-dragging');
     });
     append($pipTitle, option.title || i18n.get('Mini player'));
     var property = {
       get: function get() {
-        return hasClass($player, 'artplayer-pip');
+        return hasClass($player, 'art-pip');
       },
       set: function set(value) {
         if (value) {
           player.autoSize = false;
           cacheStyle = $player.style.cssText;
-          addClass($player, 'artplayer-pip');
+          addClass($player, 'art-pip');
           var $body = document.body;
           setStyle($player, 'top', "".concat($body.clientHeight - player.height - 50, "px"));
           setStyle($player, 'left', "".concat($body.clientWidth - player.width - 50, "px"));
@@ -1909,7 +1909,7 @@
           art.emit('pipEnabled');
         } else if (player.pip) {
           $player.style.cssText = cacheStyle;
-          removeClass($player, 'artplayer-pip');
+          removeClass($player, 'art-pip');
           setStyle($player, 'top', null);
           setStyle($player, 'left', null);
           player.fullscreen = false;
@@ -1982,7 +1982,7 @@
         $video = _art$template.$video;
     Object.defineProperty(player, 'autoSize', {
       get: function get() {
-        return hasClass($container, 'artplayer-auto-size');
+        return hasClass($container, 'art-auto-size');
       },
       set: function set(value) {
         if (value) {
@@ -1995,7 +1995,7 @@
 
           var videoRatio = videoWidth / videoHeight;
           var containerRatio = width / height;
-          addClass($container, 'artplayer-auto-size');
+          addClass($container, 'art-auto-size');
 
           if (containerRatio > videoRatio) {
             var percentage = height * videoRatio / width * 100;
@@ -2013,7 +2013,7 @@
             height: player.height
           });
         } else {
-          removeClass($container, 'artplayer-auto-size');
+          removeClass($container, 'art-auto-size');
           setStyle($player, 'width', null);
           setStyle($player, 'height', null);
           art.emit('autoSizeRemove');
@@ -2575,7 +2575,7 @@
           proxy($volumeHandle, 'mousedown', function () {
             isDroging = true;
           });
-          proxy($volumeHandle, 'mousemove', function (event) {
+          proxy(document, 'mousemove', function (event) {
             if (isDroging) {
               player.muted = false;
               player.volume = volumeChangeFromEvent(event);
@@ -2878,22 +2878,15 @@
         return control;
       }
     }, {
-      key: "toggle",
-      value: function toggle() {
-        this.show = !this.state;
-      }
-    }, {
       key: "show",
       set: function set(value) {
         var $player = this.art.template.$player;
 
         if (value) {
-          this.state = true;
-          addClass($player, 'artplayer-controls-show');
+          addClass($player, 'art-controls-show');
           this.art.emit('controls:show');
         } else {
-          this.state = false;
-          removeClass($player, 'artplayer-controls-show');
+          removeClass($player, 'art-controls-show');
           this.art.emit('controls:hide');
         }
       }
@@ -2910,7 +2903,7 @@
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$c({}, option, {
-        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"normal current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "\n                ".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
           var rate = event.target.dataset.rate;
 
@@ -2926,7 +2919,7 @@
             });
 
             if ($current) {
-              inverseClass($current, 'current');
+              inverseClass($current, 'art-current');
             }
           });
         }
@@ -2942,7 +2935,7 @@
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$d({}, option, {
-        html: "\n                ".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"default current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
+        html: "\n                ".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
           var ratio = event.target.dataset.ratio;
 
@@ -2958,7 +2951,7 @@
             });
 
             if ($current) {
-              inverseClass($current, 'current');
+              inverseClass($current, 'art-current');
             }
           });
         }
@@ -3117,22 +3110,15 @@
         setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
       }
     }, {
-      key: "toggle",
-      value: function toggle() {
-        this.show = !this.state;
-      }
-    }, {
       key: "show",
       set: function set(value) {
         var $player = this.art.template.$player;
 
         if (value) {
-          this.state = true;
-          addClass($player, 'artplayer-contextmenu-show');
+          addClass($player, 'art-contextmenu-show');
           this.art.emit('contextmenu:show');
         } else {
-          this.state = false;
-          removeClass($player, 'artplayer-contextmenu-show');
+          removeClass($player, 'art-contextmenu-show');
           this.art.emit('contextmenu:hide');
         }
       }
@@ -3197,13 +3183,13 @@
 
         if (value) {
           this.state = true;
-          addClass($player, 'artplayer-info-show');
+          addClass($player, 'art-info-show');
           clearTimeout(this.timer);
           this.loop();
           this.art.emit('info:show');
         } else {
           this.state = false;
-          removeClass($player, 'artplayer-info-show');
+          removeClass($player, 'art-info-show');
           clearTimeout(this.timer);
           this.art.emit('info:hide');
         }
@@ -3331,11 +3317,11 @@
 
         if (value) {
           this.state = true;
-          removeClass($player, 'artplayer-subtitle-hide');
+          removeClass($player, 'art-subtitle-hide');
           this.art.emit('subtitle:show');
         } else {
           this.state = false;
-          addClass($player, 'artplayer-subtitle-hide');
+          addClass($player, 'art-subtitle-hide');
           this.art.emit('subtitle:hide');
         }
       }
@@ -3360,10 +3346,10 @@
   function hoverInit(art, events) {
     var $player = art.template.$player;
     events.hover($player, function () {
-      addClass($player, 'artplayer-hover');
+      addClass($player, 'art-hover');
       art.emit('hoverenter');
     }, function () {
-      removeClass($player, 'artplayer-hover');
+      removeClass($player, 'art-hover');
       art.emit('hoverleave');
     });
   }
@@ -3374,8 +3360,8 @@
         $video = _art$template.$video,
         player = art.player;
     var autoHide = debounce(function () {
-      addClass($player, 'artplayer-hide-cursor');
-      removeClass($player, 'artplayer-hover');
+      addClass($player, 'art-hide-cursor');
+      removeClass($player, 'art-hover');
       art.controls.show = false;
     }, 3000);
     art.on('hoverleave', function () {
@@ -3385,7 +3371,7 @@
     });
     events.proxy($player, 'mousemove', function (event) {
       autoHide.clearTimeout();
-      removeClass($player, 'artplayer-hide-cursor');
+      removeClass($player, 'art-hide-cursor');
       art.controls.show = true;
 
       if (!art.player.pip && player.playing && event.target === $video) {
@@ -3651,11 +3637,11 @@
 
         if (value) {
           this.state = true;
-          removeClass($player, 'artplayer-layers-hide');
+          removeClass($player, 'art-layers-hide');
           this.art.emit('layers:show');
         } else {
           this.state = false;
-          addClass($player, 'artplayer-layers-hide');
+          addClass($player, 'art-layers-hide');
           this.art.emit('layers:hide');
         }
       }
@@ -3687,11 +3673,11 @@
 
         if (value) {
           this.state = true;
-          addClass($player, 'artplayer-loading-show');
+          addClass($player, 'art-loading-show');
           this.art.emit('loading:show');
         } else {
           this.state = false;
-          removeClass($player, 'artplayer-loading-show');
+          removeClass($player, 'art-loading-show');
           this.art.emit('loading:hide');
         }
       }
@@ -3721,7 +3707,7 @@
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
         this.state = true;
-        addClass($player, 'artplayer-notice-show');
+        addClass($player, 'art-notice-show');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
         clearTimeout(this.timer);
 
@@ -3738,7 +3724,7 @@
       value: function hide() {
         var $player = this.art.template.$player;
         this.state = false;
-        removeClass($player, 'artplayer-notice-show');
+        removeClass($player, 'art-notice-show');
         this.art.emit('notice:hide');
       }
     }]);
@@ -3769,11 +3755,11 @@
 
         if (value) {
           this.state = true;
-          addClass($player, 'artplayer-mask-show');
+          addClass($player, 'art-mask-show');
           this.art.emit('mask:show');
         } else {
           this.state = false;
-          removeClass($player, 'artplayer-mask-show');
+          removeClass($player, 'art-mask-show');
           this.art.emit('mask:hide');
         }
       }
@@ -3999,11 +3985,11 @@
 
         if (value) {
           this.state = true;
-          addClass($player, 'artplayer-setting-show');
+          addClass($player, 'art-setting-show');
           this.art.emit('setting:show');
         } else {
           this.state = false;
-          removeClass($player, 'artplayer-setting-show');
+          removeClass($player, 'art-setting-show');
           this.art.emit('setting:hide');
         }
       }

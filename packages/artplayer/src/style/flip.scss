@@ -1,9 +1,9 @@
-.artplayer-video-player {
-    &[data-flip="horizontal"] .artplayer-video{
+.art-video-player {
+    &[data-flip="horizontal"] .art-video{
         transform: scaleX(-1);
     }
 
-    &[data-flip="vertical"] .artplayer-video{
+    &[data-flip="vertical"] .art-video{
         transform: scaleY(-1);
     }
 }

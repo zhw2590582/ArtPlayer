@@ -41,13 +41,13 @@ export default class Info {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            addClass($player, 'artplayer-info-show');
+            addClass($player, 'art-info-show');
             clearTimeout(this.timer);
             this.loop();
             this.art.emit('info:show');
         } else {
             this.state = false;
-            removeClass($player, 'artplayer-info-show');
+            removeClass($player, 'art-info-show');
             clearTimeout(this.timer);
             this.art.emit('info:hide');
         }

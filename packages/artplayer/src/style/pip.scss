@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-pip-header {
+.art-video-player {
+    .art-pip-header {
         display: none;
         position: absolute;
         z-index: 110;
@@ -15,7 +15,7 @@
         opacity: 0;
         visibility: hidden;
         transition: all 0.2s ease-in-out;
-        .artplayer-pip-title {
+        .art-pip-title {
             flex: 1;
             padding: 0 10px;
             overflow: hidden;
@@ -23,7 +23,7 @@
             white-space: nowrap;
             cursor: move;
         }
-        .artplayer-pip-close {
+        .art-pip-close {
             width: 35px;
             text-align: center;
             font-size: 22px;
@@ -31,43 +31,43 @@
         }
     }
 
-    &.is-dragging {
+    &.art-is-dragging {
         opacity: 0.7;
     }
 
-    &.artplayer-pip {
+    &.art-pip {
         position: fixed;
         z-index: 9999;
         width: 400px;
         height: 225px;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 
-        .artplayer-pip-header {
+        .art-pip-header {
             display: flex;
             user-select: none;
         }
 
-        &.artplayer-hover {
-            .artplayer-pip-header {
+        &.art-hover {
+            .art-pip-header {
                 opacity: 1;
                 visibility: visible;
             }
         }
 
-        .artplayer-mask {
+        .art-mask {
             .art-state {
                 position: static;
             }
         }
 
-        .artplayer-contextmenu,
-        .artplayer-bottom,
-        .artplayer-danmu,
-        .artplayer-info,
-        .artplayer-layers,
-        .artplayer-notice,
-        .artplayer-setting,
-        .artplayer-subtitle {
+        .art-contextmenu,
+        .art-bottom,
+        .art-danmu,
+        .art-info,
+        .art-layers,
+        .art-notice,
+        .art-setting,
+        .art-subtitle {
             display: none !important;
         }
     }

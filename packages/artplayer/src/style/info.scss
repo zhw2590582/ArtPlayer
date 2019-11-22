@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-info {
+.art-video-player {
+    .art-info {
         display: none;
         flex-direction: column;
         position: absolute;
@@ -32,7 +32,7 @@
             }
         }
     
-        .artplayer-info-close {
+        .art-info-close {
             position: absolute;
             top: 5px;
             right: 5px;
@@ -40,8 +40,8 @@
         }
     }
 
-    &.artplayer-info-show {
-        .artplayer-info {
+    &.art-info-show {
+        .art-info {
             display: flex;
         }
     }

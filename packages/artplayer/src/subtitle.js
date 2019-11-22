@@ -93,11 +93,11 @@ export default class Subtitle {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            removeClass($player, 'artplayer-subtitle-hide');
+            removeClass($player, 'art-subtitle-hide');
             this.art.emit('subtitle:show');
         } else {
             this.state = false;
-            addClass($player, 'artplayer-subtitle-hide');
+            addClass($player, 'art-subtitle-hide');
             this.art.emit('subtitle:hide');
         }
     }

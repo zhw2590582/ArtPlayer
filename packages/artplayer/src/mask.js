@@ -11,11 +11,11 @@ export default class Mask {
         const { $player } = this.art.template;
         if (value) {
             this.state = true;
-            addClass($player, 'artplayer-mask-show');
+            addClass($player, 'art-mask-show');
             this.art.emit('mask:show');
         } else {
             this.state = false;
-            removeClass($player, 'artplayer-mask-show');
+            removeClass($player, 'art-mask-show');
             this.art.emit('mask:hide');
         }
     }

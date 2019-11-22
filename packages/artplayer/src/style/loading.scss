@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-loading {
+.art-video-player {
+    .art-loading {
         display: none;
         position: absolute;
         z-index: 70;
@@ -14,8 +14,8 @@
         pointer-events: none;
     }
 
-    &.artplayer-loading-show {
-        .artplayer-loading {
+    &.art-loading-show {
+        .art-loading {
             display: flex;
         }
     }
