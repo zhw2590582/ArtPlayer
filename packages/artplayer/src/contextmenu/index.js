@@ -10,15 +10,15 @@ export default class Contextmenu extends Component {
     constructor(art) {
         super(art);
 
-        this.$parent = art.template.$contextmenu;
+        const {
+            option,
+            template: { $player, $contextmenu },
+            events: { proxy },
+        } = art;
+
+        this.$parent = $contextmenu;
 
         art.on('ready', () => {
-            const {
-                option,
-                template: { $player, $contextmenu },
-                events: { proxy },
-            } = art;
-
             this.add(
                 playbackRate({
                     disable: !option.playbackRate,

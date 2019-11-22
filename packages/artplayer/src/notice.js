@@ -20,7 +20,8 @@ export default class Notice {
     }
 
     hide() {
-        const { $player } = this.art.template;
+        const { $player, $noticeInner } = this.art.template;
+        $noticeInner.innerHTML = '';
         removeClass($player, 'art-notice-show');
         this.art.emit('notice:toggle', true);
     }

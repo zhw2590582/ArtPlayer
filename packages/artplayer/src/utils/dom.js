@@ -1,5 +1,3 @@
-import { defineProperty } from './property';
-
 export function query(selector, parent = document) {
     return parent.querySelector(selector);
 }
@@ -62,29 +60,4 @@ export function inverseClass(target, className) {
 export function tooltip(target, msg, pos = 'up') {
     target.setAttribute('aria-label', msg);
     target.setAttribute('data-balloon-pos', pos);
-}
-
-export function addShowProperty(target, ref, name) {
-    const className = `art-${name}-show`;
-    
-    defineProperty(target, 'show', {
-        get() {
-            return hasClass(ref, className);
-        },
-        set(value) {
-            if (value) {
-                addClass(ref, className);
-            } else {
-                removeClass(ref, className);
-            }
-
-            target.art.emit(`${name}:toggle`, value);
-        },
-    });
-
-    defineProperty(target, 'toggle', {
-        value: () => {
-            target.show = !target.show;
-        },
-    });
 }

@@ -1,9 +1,8 @@
 export default class Hotkey {
     constructor(art) {
-        this.art = art;
         this.keys = {};
-        if (this.art.option.hotkey) {
-            this.art.on('ready', () => {
+        if (art.option.hotkey) {
+            art.on('ready', () => {
                 this.add(27, () => {
                     if (art.player.fullscreenWeb) {
                         art.player.fullscreenWeb = false;
@@ -30,7 +29,21 @@ export default class Hotkey {
                     art.player.volume -= 0.1;
                 });
 
-                this.init();
+                const { proxy } = art.events;
+                proxy(window, 'keydown', event => {
+                    if (art.isFocus) {
+                        const tag = document.activeElement.tagName.toUpperCase();
+                        const editable = document.activeElement.getAttribute('contenteditable');
+                        if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
+                            const events = this.keys[event.keyCode];
+                            if (events) {
+                                event.preventDefault();
+                                events.forEach(fn => fn());
+                                art.emit('hotkey', event);
+                            }
+                        }
+                    }
+                });
             });
         }
     }
@@ -41,23 +54,5 @@ export default class Hotkey {
         } else {
             this.keys[key] = [event];
         }
-    }
-
-    init() {
-        const { proxy } = this.art.events;
-        proxy(window, 'keydown', event => {
-            if (this.art.isFocus) {
-                const tag = document.activeElement.tagName.toUpperCase();
-                const editable = document.activeElement.getAttribute('contenteditable');
-                if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
-                    const events = this.keys[event.keyCode];
-                    if (events) {
-                        event.preventDefault();
-                        events.forEach(fn => fn());
-                        this.art.emit('hotkey', event);
-                    }
-                }
-            }
-        });
     }
 }

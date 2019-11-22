@@ -7,15 +7,15 @@ export default class Setting extends Component {
     constructor(art) {
         super(art);
 
-        this.$parent = art.template.$settingBody;
-
         const {
             option,
-            template: { $setting },
+            template: { $setting, $settingBody },
             events: { proxy },
         } = art;
 
-        if (art.option.setting) {
+        this.$parent = $settingBody;
+
+        if (option.setting) {
             art.on('ready', () => {
                 proxy($setting, 'click', e => {
                     if (e.target === $setting) {
@@ -44,10 +44,10 @@ export default class Setting extends Component {
                     }),
                 );
             });
-        }
 
-        art.on('blur', () => {
-            this.show = false;
-        });
+            art.on('blur', () => {
+                this.show = false;
+            });
+        }
     }
 }

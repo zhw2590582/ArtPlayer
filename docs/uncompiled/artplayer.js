@@ -197,35 +197,66 @@
     return Emitter;
   }();
 
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) {
-      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-        arr2[i] = arr[i];
-      }
-
-      return arr2;
+  function query(selector) {
+    var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+    return parent.querySelector(selector);
+  }
+  function queryAll(selector) {
+    var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+    return Array.from(parent.querySelectorAll(selector));
+  }
+  function addClass(target, className) {
+    return target.classList.add(className);
+  }
+  function removeClass(target, className) {
+    return target.classList.remove(className);
+  }
+  function hasClass(target, className) {
+    return target.classList.contains(className);
+  }
+  function append(parent, child) {
+    if (child instanceof Element) {
+      parent.appendChild(child);
+    } else {
+      parent.insertAdjacentHTML('beforeend', String(child));
     }
+
+    return parent.lastElementChild || parent.lastChild;
   }
-
-  var arrayWithoutHoles = _arrayWithoutHoles;
-
-  function _iterableToArray(iter) {
-    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  function remove(child) {
+    return child.parentNode.removeChild(child);
   }
-
-  var iterableToArray = _iterableToArray;
-
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  function setStyle(element, key, value) {
+    element.style[key] = value;
+    return element;
   }
-
-  var nonIterableSpread = _nonIterableSpread;
-
-  function _toConsumableArray(arr) {
-    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  function setStyles(element, styles) {
+    Object.keys(styles).forEach(function (key) {
+      setStyle(element, key, styles[key]);
+    });
+    return element;
   }
-
-  var toConsumableArray = _toConsumableArray;
+  function getStyle(element, key) {
+    var numberType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+    var value = window.getComputedStyle(element, null).getPropertyValue(key);
+    return numberType ? parseFloat(value) : value;
+  }
+  function sublings(target) {
+    return Array.from(target.parentElement.children).filter(function (item) {
+      return item !== target;
+    });
+  }
+  function inverseClass(target, className) {
+    sublings(target).forEach(function (item) {
+      return removeClass(item, className);
+    });
+    addClass(target, className);
+  }
+  function tooltip(target, msg) {
+    var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
+    target.setAttribute('aria-label', msg);
+    target.setAttribute('data-balloon-pos', pos);
+  }
 
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -335,134 +366,6 @@
     return condition;
   }
 
-  function hasOwnProperty(obj, name) {
-    return Object.prototype.hasOwnProperty.call(obj, name);
-  }
-  function defineProperty(obj, key, prop) {
-    return Object.defineProperty(obj, key, prop);
-  }
-  function proxyPropertys(target) {
-    for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      sources[_key - 1] = arguments[_key];
-    }
-
-    return sources.reduce(function (result, source) {
-      Object.getOwnPropertyNames(source).forEach(function (key) {
-        errorHandle(!hasOwnProperty(result, key), "Target attribute name is duplicated: ".concat(key));
-        Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-      return result;
-    }, target);
-  }
-  function mergeDeep() {
-    var isObject = function isObject(item) {
-      return item && _typeof_1(item) === 'object' && !Array.isArray(item);
-    };
-
-    for (var _len2 = arguments.length, objects = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      objects[_key2] = arguments[_key2];
-    }
-
-    return objects.reduce(function (prev, obj) {
-      Object.keys(obj).forEach(function (key) {
-        var pVal = prev[key];
-        var oVal = obj[key];
-
-        if (Array.isArray(pVal) && Array.isArray(oVal)) {
-          prev[key] = pVal.concat.apply(pVal, toConsumableArray(oVal));
-        } else if (isObject(pVal) && isObject(oVal) && !(oVal instanceof Element)) {
-          prev[key] = mergeDeep(pVal, oVal);
-        } else {
-          prev[key] = oVal;
-        }
-      });
-      return prev;
-    }, {});
-  }
-
-  function query(selector) {
-    var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-    return parent.querySelector(selector);
-  }
-  function queryAll(selector) {
-    var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-    return Array.from(parent.querySelectorAll(selector));
-  }
-  function addClass(target, className) {
-    return target.classList.add(className);
-  }
-  function removeClass(target, className) {
-    return target.classList.remove(className);
-  }
-  function hasClass(target, className) {
-    return target.classList.contains(className);
-  }
-  function append(parent, child) {
-    if (child instanceof Element) {
-      parent.appendChild(child);
-    } else {
-      parent.insertAdjacentHTML('beforeend', String(child));
-    }
-
-    return parent.lastElementChild || parent.lastChild;
-  }
-  function remove(child) {
-    return child.parentNode.removeChild(child);
-  }
-  function setStyle(element, key, value) {
-    element.style[key] = value;
-    return element;
-  }
-  function setStyles(element, styles) {
-    Object.keys(styles).forEach(function (key) {
-      setStyle(element, key, styles[key]);
-    });
-    return element;
-  }
-  function getStyle(element, key) {
-    var numberType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-    var value = window.getComputedStyle(element, null).getPropertyValue(key);
-    return numberType ? parseFloat(value) : value;
-  }
-  function sublings(target) {
-    return Array.from(target.parentElement.children).filter(function (item) {
-      return item !== target;
-    });
-  }
-  function inverseClass(target, className) {
-    sublings(target).forEach(function (item) {
-      return removeClass(item, className);
-    });
-    addClass(target, className);
-  }
-  function tooltip(target, msg) {
-    var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
-    target.setAttribute('aria-label', msg);
-    target.setAttribute('data-balloon-pos', pos);
-  }
-  function addShowProperty(target, ref, name) {
-    var className = "art-".concat(name, "-show");
-    defineProperty(target, 'show', {
-      get: function get() {
-        return hasClass(ref, className);
-      },
-      set: function set(value) {
-        if (value) {
-          addClass(ref, className);
-        } else {
-          removeClass(ref, className);
-        }
-
-        target.art.emit("".concat(name, ":toggle"), value);
-      }
-    });
-    defineProperty(target, 'toggle', {
-      value: function value() {
-        target.show = !target.show;
-      }
-    });
-  }
-
   function srtToVtt(srtText) {
     return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/{[\s\S]*?}/g, '').replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
   }
@@ -536,6 +439,81 @@
     document.body.appendChild(elink);
     elink.click();
     document.body.removeChild(elink);
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    }
+  }
+
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  var iterableToArray = _iterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  }
+
+  var toConsumableArray = _toConsumableArray;
+
+  function hasOwnProperty(obj, name) {
+    return Object.prototype.hasOwnProperty.call(obj, name);
+  }
+  function defineProperty(obj, key, prop) {
+    return Object.defineProperty(obj, key, prop);
+  }
+  function proxyPropertys(target) {
+    for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      sources[_key - 1] = arguments[_key];
+    }
+
+    return sources.reduce(function (result, source) {
+      Object.getOwnPropertyNames(source).forEach(function (key) {
+        errorHandle(!hasOwnProperty(result, key), "Target attribute name is duplicated: ".concat(key));
+        Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+      return result;
+    }, target);
+  }
+  function mergeDeep() {
+    var isObject = function isObject(item) {
+      return item && _typeof_1(item) === 'object' && !Array.isArray(item);
+    };
+
+    for (var _len2 = arguments.length, objects = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      objects[_key2] = arguments[_key2];
+    }
+
+    return objects.reduce(function (prev, obj) {
+      Object.keys(obj).forEach(function (key) {
+        var pVal = prev[key];
+        var oVal = obj[key];
+
+        if (Array.isArray(pVal) && Array.isArray(oVal)) {
+          prev[key] = pVal.concat.apply(pVal, toConsumableArray(oVal));
+        } else if (isObject(pVal) && isObject(oVal) && !(oVal instanceof Element)) {
+          prev[key] = mergeDeep(pVal, oVal);
+        } else {
+          prev[key] = oVal;
+        }
+      });
+      return prev;
+    }, {});
   }
 
   function sleep() {
@@ -630,7 +608,6 @@
     sublings: sublings,
     inverseClass: inverseClass,
     tooltip: tooltip,
-    addShowProperty: addShowProperty,
     ArtPlayerError: ArtPlayerError,
     errorHandle: errorHandle,
     srtToVtt: srtToVtt,
@@ -2860,9 +2837,8 @@
       classCallCheck(this, Control);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Control).call(this, art));
+      var option = art.option;
       art.on('ready', function () {
-        var option = art.option;
-
         _this.add(progress({
           name: 'progress',
           disable: option.isLive,
@@ -3107,14 +3083,13 @@
       classCallCheck(this, Contextmenu);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Contextmenu).call(this, art));
-      _this.$parent = art.template.$contextmenu;
+      var option = art.option,
+          _art$template = art.template,
+          $player = _art$template.$player,
+          $contextmenu = _art$template.$contextmenu,
+          proxy = art.events.proxy;
+      _this.$parent = $contextmenu;
       art.on('ready', function () {
-        var option = art.option,
-            _art$template = art.template,
-            $player = _art$template.$player,
-            $contextmenu = _art$template.$contextmenu,
-            proxy = art.events.proxy;
-
         _this.add(playbackRate({
           disable: !option.playbackRate,
           name: 'playbackRate',
@@ -3547,11 +3522,10 @@
 
       classCallCheck(this, Hotkey);
 
-      this.art = art;
       this.keys = {};
 
-      if (this.art.option.hotkey) {
-        this.art.on('ready', function () {
+      if (art.option.hotkey) {
+        art.on('ready', function () {
           _this.add(27, function () {
             if (art.player.fullscreenWeb) {
               art.player.fullscreenWeb = false;
@@ -3578,7 +3552,25 @@
             art.player.volume -= 0.1;
           });
 
-          _this.init();
+          var proxy = art.events.proxy;
+          proxy(window, 'keydown', function (event) {
+            if (art.isFocus) {
+              var tag = document.activeElement.tagName.toUpperCase();
+              var editable = document.activeElement.getAttribute('contenteditable');
+
+              if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
+                var events = _this.keys[event.keyCode];
+
+                if (events) {
+                  event.preventDefault();
+                  events.forEach(function (fn) {
+                    return fn();
+                  });
+                  art.emit('hotkey', event);
+                }
+              }
+            }
+          });
         });
       }
     }
@@ -3591,32 +3583,6 @@
         } else {
           this.keys[key] = [event];
         }
-      }
-    }, {
-      key: "init",
-      value: function init() {
-        var _this2 = this;
-
-        var proxy = this.art.events.proxy;
-        proxy(window, 'keydown', function (event) {
-          if (_this2.art.isFocus) {
-            var tag = document.activeElement.tagName.toUpperCase();
-            var editable = document.activeElement.getAttribute('contenteditable');
-
-            if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
-              var events = _this2.keys[event.keyCode];
-
-              if (events) {
-                event.preventDefault();
-                events.forEach(function (fn) {
-                  return fn();
-                });
-
-                _this2.art.emit('hotkey', event);
-              }
-            }
-          }
-        });
       }
     }]);
 
@@ -3657,8 +3623,7 @@
       classCallCheck(this, Loading);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Loading).call(this, art));
-      var $loading = art.template.$loading;
-      append($loading, art.icons.loading);
+      append(art.template.$loading, art.icons.loading);
       return _this;
     }
 
@@ -3700,7 +3665,10 @@
     }, {
       key: "hide",
       value: function hide() {
-        var $player = this.art.template.$player;
+        var _this$art$template2 = this.art.template,
+            $player = _this$art$template2.$player,
+            $noticeInner = _this$art$template2.$noticeInner;
+        $noticeInner.innerHTML = '';
         removeClass($player, 'art-notice-show');
         this.art.emit('notice:toggle', true);
       }
@@ -3720,8 +3688,7 @@
       classCallCheck(this, Mask);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Mask).call(this, art));
-      var $state = art.template.$state;
-      append($state, art.icons.state);
+      append(art.template.$state, art.icons.state);
       return _this;
     }
 
@@ -3888,12 +3855,14 @@
       classCallCheck(this, Setting);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Setting).call(this, art));
-      _this.$parent = art.template.$settingBody;
       var option = art.option,
-          $setting = art.template.$setting,
+          _art$template = art.template,
+          $setting = _art$template.$setting,
+          $settingBody = _art$template.$settingBody,
           proxy = art.events.proxy;
+      _this.$parent = $settingBody;
 
-      if (art.option.setting) {
+      if (option.setting) {
         art.on('ready', function () {
           proxy($setting, 'click', function (e) {
             if (e.target === $setting) {
@@ -3916,11 +3885,11 @@
             name: 'playbackRate'
           }));
         });
+        art.on('blur', function () {
+          _this.show = false;
+        });
       }
 
-      art.on('blur', function () {
-        _this.show = false;
-      });
       return _this;
     }
 
