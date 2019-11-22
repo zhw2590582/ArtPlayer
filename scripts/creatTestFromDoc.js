@@ -35,6 +35,8 @@ describe('Document', function() {
 });    
     `,
     );
+
+    logger.success('Create a test case from the document successfully');
 } catch (error) {
     logger.fatal(error);
 }
