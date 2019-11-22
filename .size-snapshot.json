@@ -35,13 +35,13 @@
     "gzipped": 4081
   },
   "packages/artplayer-vue/dist/artplayer-vue.js": {
-    "bundled": 164232,
-    "minified": 87396,
-    "gzipped": 21889
+    "bundled": 164111,
+    "minified": 87278,
+    "gzipped": 21860
   },
   "packages/artplayer-react/dist/artplayer-react.js": {
-    "bundled": 247609,
-    "minified": 116516,
-    "gzipped": 30920
+    "bundled": 247488,
+    "minified": 116398,
+    "gzipped": 30890
   }
 }

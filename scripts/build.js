@@ -7,6 +7,7 @@ const projects = require('./getProjects')();
 const creatRollupConfig = require('./creatRollupConfig');
 
 const isBuildAll = process.argv.pop() === 'all';
+console.log(process.argv);
 
 function build(projectPath) {
     const { input, output, plugins } = creatRollupConfig(projectPath);
