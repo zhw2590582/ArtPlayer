@@ -1,11 +1,11 @@
-import { addClass, removeClass, hasClass } from '../utils';
+import { addClass, removeClass, hasClass, def } from '../utils';
 
 export default function fullscreenWebMix(art, player) {
     const {
         template: { $player },
     } = art;
 
-    Object.defineProperty(player, 'fullscreenWeb', {
+    def(player, 'fullscreenWeb', {
         get() {
             return hasClass($player, 'art-web-fullscreen');
         },
@@ -28,7 +28,7 @@ export default function fullscreenWebMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'fullscreenWebToggle', {
+    def(player, 'fullscreenWebToggle', {
         set(value) {
             if (value) {
                 player.fullscreenWeb = !player.fullscreenWeb;

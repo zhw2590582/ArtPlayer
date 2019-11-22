@@ -1,4 +1,4 @@
-import { getExt, sleep, errorHandle } from '../utils';
+import { getExt, sleep, errorHandle, def } from '../utils';
 
 export default function attachUrlMix(art, player) {
     const {
@@ -6,7 +6,7 @@ export default function attachUrlMix(art, player) {
         template: { $video },
     } = art;
 
-    Object.defineProperty(player, 'url', {
+    def(player, 'url', {
         get() {
             return $video.src;
         },
@@ -15,7 +15,7 @@ export default function attachUrlMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'attachUrl', {
+    def(player, 'attachUrl', {
         value: url =>
             sleep().then(() => {
                 function attachUrl(videoUrl) {

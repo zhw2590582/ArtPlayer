@@ -1,7 +1,9 @@
+import { def } from '../utils';
+
 export default function switchMix(art, player) {
     const { i18n, notice, option } = art;
 
-    Object.defineProperty(player, 'switchQuality', {
+    def(player, 'switchQuality', {
         value: (url, name) => {
             if (url !== player.url) {
                 URL.revokeObjectURL(player.url);
@@ -26,7 +28,7 @@ export default function switchMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'switchUrl', {
+    def(player, 'switchUrl', {
         value: (url, name) => {
             if (url !== player.url) {
                 URL.revokeObjectURL(player.url);

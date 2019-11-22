@@ -1,11 +1,11 @@
-import { setStyle, addClass, removeClass, hasClass } from '../utils';
+import { setStyle, addClass, removeClass, hasClass, def } from '../utils';
 
 export default function resizeMix(art, player) {
     const {
         template: { $container, $player, $video },
     } = art;
 
-    Object.defineProperty(player, 'autoSize', {
+    def(player, 'autoSize', {
         get() {
             return hasClass($container, 'art-auto-size');
         },

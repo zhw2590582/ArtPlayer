@@ -1,5 +1,7 @@
+import { def } from '../utils';
+
 export default function toggleMix(art, player) {
-    Object.defineProperty(player, 'toggle', {
+    def(player, 'toggle', {
         set(value) {
             if (value) {
                 if (player.playing) {

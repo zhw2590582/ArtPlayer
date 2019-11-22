@@ -1,7 +1,7 @@
-import { errorHandle } from '../utils';
+import { errorHandle, def } from '../utils';
 
 export default function flipMix(art, player) {
-    Object.defineProperty(player, 'flip', {
+    def(player, 'flip', {
         get() {
             return art.template.$player.dataset.flip;
         },

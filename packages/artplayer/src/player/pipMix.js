@@ -1,4 +1,4 @@
-import { append, setStyle, addClass, removeClass, hasClass } from '../utils';
+import { append, setStyle, addClass, removeClass, hasClass, def } from '../utils';
 
 function nativePip(art, player) {
     const {
@@ -9,7 +9,7 @@ function nativePip(art, player) {
 
     $video.disablePictureInPicture = false;
 
-    Object.defineProperty(player, 'pip', {
+    def(player, 'pip', {
         get() {
             return document.pictureInPictureElement;
         },
@@ -48,7 +48,7 @@ function webkitPip(art, player) {
 
     $video.webkitSetPresentationMode('inline');
 
-    Object.defineProperty(player, 'pip', {
+    def(player, 'pip', {
         get() {
             return $video.webkitPresentationMode === 'picture-in-picture';
         },
@@ -140,7 +140,7 @@ function customPip(art, player) {
         },
     };
 
-    Object.defineProperty(player, 'pip', property);
+    def(player, 'pip', property);
 }
 
 export default function pipMix(art, player) {
@@ -153,7 +153,7 @@ export default function pipMix(art, player) {
         customPip(art, player);
     }
 
-    Object.defineProperty(player, 'pipToggle', {
+    def(player, 'pipToggle', {
         set(value) {
             if (value) {
                 player.pip = !player.pip;

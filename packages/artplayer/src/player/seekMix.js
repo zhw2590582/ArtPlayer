@@ -1,9 +1,9 @@
-import { secondToTime } from '../utils';
+import { secondToTime, def } from '../utils';
 
 export default function seekMix(art, player) {
     const { notice } = art;
 
-    Object.defineProperty(player, 'seek', {
+    def(player, 'seek', {
         set(time) {
             player.currentTime = time;
             notice.show(`${secondToTime(time)} / ${secondToTime(player.duration)}`);

@@ -1,4 +1,4 @@
-import { setStyle, errorHandle } from '../utils';
+import { setStyle, errorHandle, def } from '../utils';
 
 export default function aspectRatioMix(art, player) {
     const {
@@ -7,7 +7,7 @@ export default function aspectRatioMix(art, player) {
         notice,
     } = art;
 
-    Object.defineProperty(player, 'aspectRatio', {
+    def(player, 'aspectRatio', {
         get() {
             return $player.dataset.aspectRatio || '';
         },
@@ -53,10 +53,10 @@ export default function aspectRatioMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'aspectRatioReset', {
+    def(player, 'aspectRatioReset', {
         set(value) {
             if (value && player.aspectRatio) {
-                const { aspectRatio } = player
+                const { aspectRatio } = player;
                 player.aspectRatio = aspectRatio;
                 art.emit('aspectRatioReset');
             }

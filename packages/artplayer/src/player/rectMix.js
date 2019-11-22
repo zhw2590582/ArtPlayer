@@ -1,25 +1,27 @@
+import { def } from '../utils';
+
 export default function rectMix(art, player) {
-    Object.defineProperty(player, 'rect', {
+    def(player, 'rect', {
         get: () => {
             return art.template.$player.getBoundingClientRect();
         },
     });
 
     ['bottom', 'height', 'left', 'right', 'top', 'width'].forEach(key => {
-        Object.defineProperty(player, key, {
+        def(player, key, {
             get: () => {
                 return player.rect[key];
             },
         });
     });
 
-    Object.defineProperty(player, 'x', {
+    def(player, 'x', {
         get: () => {
             return player.left + window.pageXOffset;
         },
     });
 
-    Object.defineProperty(player, 'y', {
+    def(player, 'y', {
         get: () => {
             return player.top + window.pageYOffset;
         },

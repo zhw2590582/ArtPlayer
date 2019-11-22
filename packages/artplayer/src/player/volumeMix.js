@@ -1,4 +1,4 @@
-import { clamp } from '../utils';
+import { clamp, def } from '../utils';
 
 export default function volumeMix(art, player) {
     const {
@@ -8,7 +8,7 @@ export default function volumeMix(art, player) {
         storage,
     } = art;
 
-    Object.defineProperty(player, 'volume', {
+    def(player, 'volume', {
         get: () => $video.volume || 0,
         set: percentage => {
             $video.volume = clamp(percentage, 0, 1);
@@ -20,7 +20,7 @@ export default function volumeMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'muted', {
+    def(player, 'muted', {
         get: () => $video.muted,
         set: muted => {
             $video.muted = muted;

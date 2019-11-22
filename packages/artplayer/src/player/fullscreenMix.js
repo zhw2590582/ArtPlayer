@@ -1,5 +1,5 @@
 import screenfull from 'screenfull';
-import { addClass, removeClass } from '../utils';
+import { addClass, removeClass, def } from '../utils';
 
 export default function fullscreenMix(art, player) {
     const {
@@ -26,7 +26,7 @@ export default function fullscreenMix(art, player) {
         });
     }
 
-    Object.defineProperty(player, 'fullscreen', {
+    def(player, 'fullscreen', {
         get() {
             return screenfull.isFullscreen;
         },
@@ -60,7 +60,7 @@ export default function fullscreenMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'fullscreenToggle', {
+    def(player, 'fullscreenToggle', {
         set(value) {
             if (value) {
                 player.fullscreen = !player.fullscreen;
@@ -68,7 +68,7 @@ export default function fullscreenMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'fullscreenIsEnabled', {
+    def(player, 'fullscreenIsEnabled', {
         get() {
             return screenfull.isEnabled;
         },

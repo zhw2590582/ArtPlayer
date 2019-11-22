@@ -1,3 +1,5 @@
+import { def } from '../utils';
+
 export default function playMix(art, player) {
     const {
         template: { $video },
@@ -6,7 +8,7 @@ export default function playMix(art, player) {
         option: { mutex },
     } = art;
 
-    Object.defineProperty(player, 'play', {
+    def(player, 'play', {
         set(value) {
             if (value) {
                 const promise = $video.play();

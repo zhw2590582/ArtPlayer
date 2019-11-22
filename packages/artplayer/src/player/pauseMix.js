@@ -1,3 +1,5 @@
+import { def } from '../utils';
+
 export default function pauseMin(art, player) {
     const {
         template: { $video },
@@ -5,7 +7,7 @@ export default function pauseMin(art, player) {
         notice,
     } = art;
 
-    Object.defineProperty(player, 'pause', {
+    def(player, 'pause', {
         get() {
             return $video.paused;
         },

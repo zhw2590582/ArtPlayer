@@ -1,4 +1,4 @@
-import { errorHandle, hasOwnProperty } from '../utils';
+import { errorHandle, has } from '../utils';
 import subtitleOffset from './subtitleOffset';
 import localVideo from './localVideo';
 import localSubtitle from './localSubtitle';
@@ -54,7 +54,7 @@ export default class Plugins {
             pluginName = `plugin${this.id}`;
         }
         errorHandle(
-            !hasOwnProperty(this, pluginName),
+            !has(this, pluginName),
             `Cannot add a plugin that already has the same name: ${pluginName}`,
         );
         Object.defineProperty(this, pluginName, {

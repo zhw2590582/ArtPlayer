@@ -1,4 +1,4 @@
-import { secondToTime, downloadFile } from '../utils';
+import { secondToTime, downloadFile, def } from '../utils';
 
 export default function screenshotMix(art, player) {
     const {
@@ -7,7 +7,7 @@ export default function screenshotMix(art, player) {
         template: { $video },
     } = art;
 
-    Object.defineProperty(player, 'getScreenshotDataURL', {
+    def(player, 'getScreenshotDataURL', {
         value: () => {
             try {
                 const canvas = document.createElement('canvas');
@@ -22,7 +22,7 @@ export default function screenshotMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'getScreenshotBlobUrl', {
+    def(player, 'getScreenshotBlobUrl', {
         value: () =>
             new Promise((resolve, reject) => {
                 try {
@@ -40,7 +40,7 @@ export default function screenshotMix(art, player) {
             }),
     });
 
-    Object.defineProperty(player, 'screenshot', {
+    def(player, 'screenshot', {
         value: () => {
             const dataUri = player.getScreenshotDataURL();
             if (dataUri) {

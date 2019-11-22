@@ -1,4 +1,4 @@
-import { errorHandle } from '../utils';
+import { errorHandle, def } from '../utils';
 
 export default function playbackRateMix(art, player) {
     const {
@@ -7,7 +7,7 @@ export default function playbackRateMix(art, player) {
         notice,
     } = art;
 
-    Object.defineProperty(player, 'playbackRate', {
+    def(player, 'playbackRate', {
         get() {
             return $player.dataset.playbackRate;
         },
@@ -32,7 +32,7 @@ export default function playbackRateMix(art, player) {
         },
     });
 
-    Object.defineProperty(player, 'playbackRateReset', {
+    def(player, 'playbackRateReset', {
         set(value) {
             if (value) {
                 const { playbackRate } = $player.dataset;

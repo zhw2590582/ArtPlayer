@@ -1,5 +1,5 @@
 import { hasClass, addClass, removeClass, append, setStyle, setStyles, tooltip } from './dom';
-import { hasOwnProperty, defineProperty } from './property';
+import { has, def } from './property';
 import { errorHandle } from './error';
 
 export default class Component {
@@ -35,7 +35,7 @@ export default class Component {
         if (!this.$parent || option.disable) return {};
         this.id += 1;
         const name = option.name || `${this.name}${this.id}`;
-        errorHandle(!hasOwnProperty(this, name), `Cannot add a component that already has the same name: ${name}`);
+        errorHandle(!has(this, name), `Cannot add a component that already has the same name: ${name}`);
         const $ref = document.createElement('div');
         $ref.classList.value = `art-${this.name} art-${this.name}-${name}`;
 
@@ -75,7 +75,7 @@ export default class Component {
             callback($ref, this, this.art);
         }
 
-        defineProperty(this, name, {
+        def(this, name, {
             value: {
                 get $ref() {
                     return $ref;
