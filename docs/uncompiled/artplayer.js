@@ -794,7 +794,7 @@
     }, {
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.1.20</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
+        this.$container.innerHTML = "\n<div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.2.1</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$track = this.query('.art-video track');
@@ -3054,7 +3054,7 @@
 
   function version(option) {
     return _objectSpread$f({}, option, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.20</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.2.1</a>'
     });
   }
 
@@ -4467,7 +4467,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.20';
+        return '3.2.1';
       }
     }, {
       key: "env",
@@ -4571,7 +4571,7 @@
     value: []
   }); // eslint-disable-next-line no-console
 
-  console.log('%c ArtPlayer %c 3.1.20 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 3.2.1 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 
