@@ -2,7 +2,7 @@
   "name": "artplayer",
   "version": "3.2.4",
   "expose": "Artplayer",
-  "description": "ArtPlayer is a modern HTML5 video player",
+  "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
   "main": "dist/artplayer.js",
   "style": "dist/artplayer.css",
   "types": "types/artplayer.d.ts",
