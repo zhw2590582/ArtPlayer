@@ -21,7 +21,7 @@ var art = new Artplayer({
     subtitleOffset: true,
     miniProgressBar: true,
     localVideo: true,
-    localSubtitle: false,
+    localSubtitle: true,
     networkMonitor: false,
     autoPip: true,
     mutex: true,

@@ -7,10 +7,10 @@ export default function autoPip(art) {
         const { top, height } = template.$player.getBoundingClientRect();
         if (top + height <= 0 && !player.pip) {
             player.pip = true;
-            art.emit('artplayerPluginAutoPip', true);
+            art.emit('autoPip', true);
         } else if (player.pip) {
             player.pip = false;
-            art.emit('artplayerPluginAutoPip', false);
+            art.emit('autoPip', false);
         }
     }, 300);
     

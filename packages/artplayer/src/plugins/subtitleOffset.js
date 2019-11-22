@@ -9,7 +9,7 @@ function settingMix(art) {
 
     return {
         title: 'Subtitle',
-        name: 'subtitle',
+        name: 'subtitleOffset',
         index: 20,
         html: `
             <div class="art-setting-header">
@@ -33,7 +33,7 @@ function settingMix(art) {
                 $value.innerText = 0;
             });
 
-            art.on('artplayerPluginSubtitleOffset', value => {
+            art.on('subtitleOffset', value => {
                 subtitle.update();
                 if ($range.value !== value) {
                     $range.value = value;
@@ -82,10 +82,10 @@ export default function subtitleOffset(art) {
                     cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
                 });
                 notice.show(`${i18n.get('Subtitle offset time')}: ${value}s`);
-                art.emit('artplayerPluginSubtitleOffset', value);
+                art.emit('subtitleOffset', value);
             } else {
                 notice.show(`${i18n.get('No subtitles found')}`);
-                art.emit('artplayerPluginSubtitleOffset', 0);
+                art.emit('subtitleOffset', 0);
             }
         },
     };

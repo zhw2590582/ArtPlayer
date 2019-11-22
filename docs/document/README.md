@@ -576,7 +576,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Local video preview plugin
+Local video preview plugin. By default, a configuration is added in the settings panel.
 
 [Run Code](/Configuration.localVideo)
 
@@ -604,7 +604,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Local subtitle preview plugin
+Local subtitle preview plugin. By default, a configuration is added in the settings panel.
 
 [Run Code](/Configuration.localSubtitle)
 

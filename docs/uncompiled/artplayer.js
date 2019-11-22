@@ -118,7 +118,7 @@
   var inherits = _inherits;
 
   var optionValidator = createCommonjsModule(function (module, exports) {
-  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);"object"===r&&"object"===t&&Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});"array"===r&&"array"===t&&a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw "string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
+  !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);if("object"===r){if("object"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'object' type, but got '").concat(t,"'"));Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});}if("array"===r){if("array"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'array' type, but got '").concat(t,"'"));a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw "string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
   });
 
   var Emitter =
@@ -853,6 +853,7 @@
   var Screenshot = "截图";
   var Default = "默认";
   var Normal = "正常";
+  var Open = "打开";
   var Fullscreen = "全屏";
   var zhCn = {
   	"About author": "关于作者",
@@ -879,6 +880,7 @@
   	"Aspect ratio": "画面比例",
   	Default: Default,
   	Normal: Normal,
+  	Open: Open,
   	"Switch video": "切换",
   	"Switch subtitle": "切换字幕",
   	Fullscreen: Fullscreen,
@@ -902,6 +904,7 @@
   var Screenshot$1 = "截圖";
   var Default$1 = "默認";
   var Normal$1 = "正常";
+  var Open$1 = "打開";
   var Fullscreen$1 = "全屏";
   var zhTw = {
   	"About author": "關於作者",
@@ -928,6 +931,7 @@
   	"Aspect ratio": "畫面比例",
   	Default: Default$1,
   	Normal: Normal$1,
+  	Open: Open$1,
   	"Switch video": "切換",
   	"Switch subtitle": "切換字幕",
   	Fullscreen: Fullscreen$1,
@@ -1287,14 +1291,13 @@
   function switchMix(art, player) {
     var i18n = art.i18n,
         notice = art.notice,
-        option = art.option,
-        template = art.template;
+        option = art.option;
     Object.defineProperty(player, 'switchQuality', {
       value: function value(url) {
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
-        if (url !== template.$video.src) {
-          URL.revokeObjectURL(template.$video.src);
+        if (url !== player.url) {
+          URL.revokeObjectURL(player.url);
           var currentTime = player.currentTime,
               playing = player.playing;
           return player.attachUrl(url).then(function () {
@@ -1321,8 +1324,8 @@
       value: function value(url) {
         var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'unknown';
 
-        if (url !== template.$video.src) {
-          URL.revokeObjectURL(template.$video.src);
+        if (url !== player.url) {
+          URL.revokeObjectURL(player.url);
           var playing = player.playing;
           return player.attachUrl(url).then(function () {
             option.url = url;
@@ -1504,14 +1507,13 @@
   var screenfull = createCommonjsModule(function (module) {
   /*!
   * screenfull
-  * v4.2.1 - 2019-07-27
+  * v5.0.0 - 2019-09-09
   * (c) Sindre Sorhus; MIT License
   */
   (function () {
 
   	var document = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {};
   	var isCommonjs =  module.exports;
-  	var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
 
   	var fn = (function () {
   		var val;
@@ -1535,7 +1537,7 @@
   				'webkitfullscreenerror'
 
   			],
-  			// Old WebKit (Safari 5.1)
+  			// Old WebKit
   			[
   				'webkitRequestFullScreen',
   				'webkitCancelFullScreen',
@@ -1586,10 +1588,8 @@
   	};
 
   	var screenfull = {
-  		request: function (elem) {
+  		request: function (element) {
   			return new Promise(function (resolve, reject) {
-  				var request = fn.requestFullscreen;
-
   				var onFullScreenEntered = function () {
   					this.off('change', onFullScreenEntered);
   					resolve();
@@ -1597,25 +1597,13 @@
 
   				this.on('change', onFullScreenEntered);
 
-  				elem = elem || document.documentElement;
+  				element = element || document.documentElement;
 
-  				var promise;
-
-  				// Work around Safari 5.1 bug: reports support for
-  				// keyboard in fullscreen even though it doesn't.
-  				// Browser sniffing, since the alternative with
-  				// setTimeout is even worse.
-  				if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
-  					promise = elem[request]();
-  				} else {
-  					promise = elem[request](keyboardAllowed ? Element.ALLOW_KEYBOARD_INPUT : {});
-  				}
-
-  				Promise.resolve(promise).catch(reject);
+  				Promise.resolve(element[fn.requestFullscreen]()).catch(reject);
   			}.bind(this));
   		},
   		exit: function () {
-  			return new Promise(function (resolve) {
+  			return new Promise(function (resolve, reject) {
   				if (!this.isFullscreen) {
   					resolve();
   					return;
@@ -1626,13 +1614,13 @@
   					resolve();
   				}.bind(this);
 
-  				document[fn.exitFullscreen]();
-
   				this.on('change', onFullScreenExit);
+
+  				Promise.resolve(document[fn.exitFullscreen]()).catch(reject);
   			}.bind(this));
   		},
-  		toggle: function (elem) {
-  			return this.isFullscreen ? this.exit() : this.request(elem);
+  		toggle: function (element) {
+  			return this.isFullscreen ? this.exit() : this.request(element);
   		},
   		onchange: function (callback) {
   			this.on('change', callback);
@@ -1657,9 +1645,9 @@
 
   	if (!fn) {
   		if (isCommonjs) {
-  			module.exports = false;
+  			module.exports = {isEnabled: false};
   		} else {
-  			window.screenfull = false;
+  			window.screenfull = {isEnabled: false};
   		}
 
   		return;
@@ -1677,7 +1665,7 @@
   				return document[fn.fullscreenElement];
   			}
   		},
-  		enabled: {
+  		isEnabled: {
   			enumerable: true,
   			get: function () {
   				// Coerce to boolean in case of old WebKit
@@ -1688,13 +1676,12 @@
 
   	if (isCommonjs) {
   		module.exports = screenfull;
-  		// TODO: remove this in the next major version
-  		module.exports.default = screenfull;
   	} else {
   		window.screenfull = screenfull;
   	}
   })();
   });
+  var screenfull_1 = screenfull.isEnabled;
 
   function fullscreenMix(art, player) {
     var i18n = art.i18n,
@@ -4068,7 +4055,7 @@
         proxy = art.events.proxy;
     return {
       title: 'Subtitle',
-      name: 'subtitle',
+      name: 'subtitleOffset',
       index: 20,
       html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
       mounted: function mounted($setting) {
@@ -4083,7 +4070,7 @@
           $range.value = 0;
           $value.innerText = 0;
         });
-        art.on('artplayerPluginSubtitleOffset', function (value) {
+        art.on('subtitleOffset', function (value) {
           subtitle.update();
 
           if ($range.value !== value) {
@@ -4135,10 +4122,10 @@
             cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
           });
           notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
-          art.emit('artplayerPluginSubtitleOffset', value);
+          art.emit('subtitleOffset', value);
         } else {
           notice.show("".concat(i18n.get('No subtitles found')));
-          art.emit('artplayerPluginSubtitleOffset', 0);
+          art.emit('subtitleOffset', 0);
         }
       }
     };
@@ -4148,7 +4135,17 @@
     var proxy = art.events.proxy,
         template = art.template,
         player = art.player,
-        option = art.option;
+        option = art.option,
+        setting = art.setting,
+        i18n = art.i18n;
+    i18n.update({
+      'zh-cn': {
+        'Local Video': '本地视频'
+      },
+      'zh-tw': {
+        'Local Video': '本地視頻'
+      }
+    });
 
     function loadVideo(file) {
       if (file) {
@@ -4158,6 +4155,7 @@
           var url = URL.createObjectURL(file);
           option.title = file.name;
           player.switchUrl(url, file.name);
+          art.emit('localVideo', file);
         } else {
           errorHandle(false, 'Playback of this file format is not supported');
         }
@@ -4172,30 +4170,60 @@
       var file = e.dataTransfer.files[0];
       loadVideo(file);
     });
+
+    function attach(target) {
+      var $input = append(target, '<input type="file">');
+      setStyle(target, 'position', 'relative');
+      setStyles($input, {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        left: '0',
+        top: '0',
+        opacity: '0'
+      });
+      proxy($input, 'change', function () {
+        var file = $input.files[0];
+        loadVideo(file);
+      });
+    }
+
+    art.on('ready', function () {
+      setting.add({
+        title: 'Local Video',
+        name: 'localVideo',
+        index: 30,
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Video'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
+        mounted: function mounted($setting) {
+          var $btn = query('.art-upload-btn', $setting);
+          var $value = query('.art-upload-value', $setting);
+          art.on('localVideo', function (file) {
+            $value.textContent = file.name;
+            $value.title = file.name;
+          });
+          attach($btn);
+        }
+      });
+    });
     return {
       name: 'localVideo',
-      attach: function attach(target) {
-        var $input = append(target, '<input type="file">');
-        setStyle(target, 'position', 'relative');
-        setStyles($input, {
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          left: '0',
-          top: '0',
-          opacity: '0'
-        });
-        proxy($input, 'change', function () {
-          var file = $input.files[0];
-          loadVideo(file);
-        });
-      }
+      attach: attach
     };
   }
 
   function localSubtitle(art) {
     var proxy = art.events.proxy,
-        subtitle = art.subtitle;
+        subtitle = art.subtitle,
+        setting = art.setting,
+        i18n = art.i18n;
+    i18n.update({
+      'zh-cn': {
+        'Local Subtitle': '本地字幕'
+      },
+      'zh-tw': {
+        'Local Subtitle': '本地字幕'
+      }
+    });
 
     function loadSubtitle(file) {
       if (file) {
@@ -4230,6 +4258,8 @@
                   break;
                 }
             }
+
+            art.emit('localSubtitle', file);
           });
           reader.readAsText(file);
         } else {
@@ -4238,24 +4268,43 @@
       }
     }
 
+    function attach(target) {
+      var $input = append(target, '<input type="file">');
+      setStyle(target, 'position', 'relative');
+      setStyles($input, {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        left: '0',
+        top: '0',
+        opacity: '0'
+      });
+      proxy($input, 'change', function () {
+        var file = $input.files[0];
+        loadSubtitle(file);
+      });
+    }
+
+    art.on('ready', function () {
+      setting.add({
+        title: 'Local Subtitle',
+        name: 'localSubtitle',
+        index: 40,
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Subtitle'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
+        mounted: function mounted($setting) {
+          var $btn = query('.art-upload-btn', $setting);
+          var $value = query('.art-upload-value', $setting);
+          art.on('localSubtitle', function (file) {
+            $value.textContent = file.name;
+            $value.title = file.name;
+          });
+          attach($btn);
+        }
+      });
+    });
     return {
       name: 'localSubtitle',
-      attach: function attach(target) {
-        var $input = append(target, '<input type="file">');
-        setStyle(target, 'position', 'relative');
-        setStyles($input, {
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          left: '0',
-          top: '0',
-          opacity: '0'
-        });
-        proxy($input, 'change', function () {
-          var file = $input.files[0];
-          loadSubtitle(file);
-        });
-      }
+      attach: attach
     };
   }
 
@@ -4362,10 +4411,10 @@
 
       if (top + height <= 0 && !player.pip) {
         player.pip = true;
-        art.emit('artplayerPluginAutoPip', true);
+        art.emit('autoPip', true);
       } else if (player.pip) {
         player.pip = false;
-        art.emit('artplayerPluginAutoPip', false);
+        art.emit('autoPip', false);
       }
     }, 300);
     events.proxy(window, 'scroll', scrollDebounce);

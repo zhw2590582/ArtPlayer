@@ -1,4 +1,4 @@
-import { append, setStyle, setStyles, errorHandle } from '../utils';
+import { append, query, setStyle, setStyles, errorHandle } from '../utils';
 
 export default function localVideo(art) {
     const {
@@ -6,7 +6,18 @@ export default function localVideo(art) {
         template,
         player,
         option,
+        setting,
+        i18n,
     } = art;
+
+    i18n.update({
+        'zh-cn': {
+            'Local Video': '本地视频',
+        },
+        'zh-tw': {
+            'Local Video': '本地視頻',
+        },
+    });
 
     function loadVideo(file) {
         if (file) {
@@ -15,6 +26,7 @@ export default function localVideo(art) {
                 const url = URL.createObjectURL(file);
                 option.title = file.name;
                 player.switchUrl(url, file.name);
+                art.emit('localVideo', file);
             } else {
                 errorHandle(false, 'Playback of this file format is not supported');
             }
@@ -31,23 +43,51 @@ export default function localVideo(art) {
         loadVideo(file);
     });
 
+    function attach(target) {
+        const $input = append(target, '<input type="file">');
+        setStyle(target, 'position', 'relative');
+        setStyles($input, {
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            left: '0',
+            top: '0',
+            opacity: '0',
+        });
+        proxy($input, 'change', () => {
+            const file = $input.files[0];
+            loadVideo(file);
+        });
+    }
+
+    art.on('ready', () => {
+        setting.add({
+            title: 'Local Video',
+            name: 'localVideo',
+            index: 30,
+            html: `
+                <div class="art-setting-header">
+                    ${i18n.get('Local Video')}
+                </div>
+                <div class="art-setting-upload">
+                    <div class="art-upload-btn">${i18n.get('Open')}</div>
+                    <div class="art-upload-value"></div>
+                </div>
+            `,
+            mounted: $setting => {
+                const $btn = query('.art-upload-btn', $setting);
+                const $value = query('.art-upload-value', $setting);
+                art.on('localVideo', file => {
+                    $value.textContent = file.name;
+                    $value.title = file.name;
+                });
+                attach($btn);
+            },
+        });
+    });
+
     return {
         name: 'localVideo',
-        attach(target) {
-            const $input = append(target, '<input type="file">');
-            setStyle(target, 'position', 'relative');
-            setStyles($input, {
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                left: '0',
-                top: '0',
-                opacity: '0',
-            });
-            proxy($input, 'change', () => {
-                const file = $input.files[0];
-                loadVideo(file);
-            });
-        },
+        attach,
     };
 }
