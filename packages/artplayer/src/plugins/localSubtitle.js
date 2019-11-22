@@ -8,15 +8,6 @@ export default function localSubtitle(art) {
         i18n,
     } = art;
 
-    i18n.update({
-        'zh-cn': {
-            'Local Subtitle': '本地字幕',
-        },
-        'zh-tw': {
-            'Local Subtitle': '本地字幕',
-        },
-    });
-
     function loadSubtitle(file) {
         if (file) {
             const type = getExt(file.name);

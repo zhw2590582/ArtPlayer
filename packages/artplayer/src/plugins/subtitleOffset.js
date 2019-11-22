@@ -48,17 +48,6 @@ export default function subtitleOffset(art) {
     const { clamp } = art.constructor.utils;
     const { setting, notice, template, i18n, player } = art;
 
-    i18n.update({
-        'zh-cn': {
-            'Subtitle offset time': '字幕偏移时间',
-            'No subtitles found': '未发现字幕',
-        },
-        'zh-tw': {
-            'Subtitle offset time': '字幕偏移時間',
-            'No subtitles found': '未發現字幕',
-        },
-    });
-
     setting.add(settingMix);
     let cuesCache = [];
     art.on('subtitle:switch', () => {

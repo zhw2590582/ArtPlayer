@@ -14,10 +14,10 @@
     "Reconnect": "重新連接",
     "Hide subtitle": "隱藏字幕",
     "Show subtitle": "顯示字幕",
-    "Show setting": "顯示设置",
-    "Hide setting": "隱藏设置",
     "Hide danmu": "隱藏彈幕",
     "Show danmu": "顯示彈幕",
+    "Show setting": "顯示设置",
+    "Hide setting": "隱藏设置",
     "Screenshot": "截圖",
     "Play speed": "播放速度",
     "Aspect ratio": "畫面比例",
@@ -31,5 +31,9 @@
     "Web fullscreen": "網頁全屏",
     "Exit web fullscreen": "退出網頁全屏",
     "Mini player": "迷你播放器",
-    "Does not support fullscreen": "不支持全屏"
+    "Does not support fullscreen": "不支持全屏",
+    "Local Subtitle": "本地字幕",
+    "Local Video": "本地視頻",
+    "Subtitle offset time": "字幕偏移時間",
+    "No subtitles found": "未發現字幕"
 }

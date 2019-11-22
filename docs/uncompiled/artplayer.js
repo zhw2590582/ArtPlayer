@@ -888,7 +888,11 @@
   	"Web fullscreen": "网页全屏",
   	"Exit web fullscreen": "退出网页全屏",
   	"Mini player": "迷你播放器",
-  	"Does not support fullscreen": "不支持全屏"
+  	"Does not support fullscreen": "不支持全屏",
+  	"Local Subtitle": "本地字幕",
+  	"Local Video": "本地视频",
+  	"Subtitle offset time": "字幕偏移时间",
+  	"No subtitles found": "未发现字幕"
   };
 
   var Close$1 = "關閉";
@@ -922,10 +926,10 @@
   	Reconnect: Reconnect$1,
   	"Hide subtitle": "隱藏字幕",
   	"Show subtitle": "顯示字幕",
-  	"Show setting": "顯示设置",
-  	"Hide setting": "隱藏设置",
   	"Hide danmu": "隱藏彈幕",
   	"Show danmu": "顯示彈幕",
+  	"Show setting": "顯示设置",
+  	"Hide setting": "隱藏设置",
   	Screenshot: Screenshot$1,
   	"Play speed": "播放速度",
   	"Aspect ratio": "畫面比例",
@@ -939,7 +943,11 @@
   	"Web fullscreen": "網頁全屏",
   	"Exit web fullscreen": "退出網頁全屏",
   	"Mini player": "迷你播放器",
-  	"Does not support fullscreen": "不支持全屏"
+  	"Does not support fullscreen": "不支持全屏",
+  	"Local Subtitle": "本地字幕",
+  	"Local Video": "本地視頻",
+  	"Subtitle offset time": "字幕偏移時間",
+  	"No subtitles found": "未發現字幕"
   };
 
   var I18n =
@@ -4089,16 +4097,6 @@
         template = art.template,
         i18n = art.i18n,
         player = art.player;
-    i18n.update({
-      'zh-cn': {
-        'Subtitle offset time': '字幕偏移时间',
-        'No subtitles found': '未发现字幕'
-      },
-      'zh-tw': {
-        'Subtitle offset time': '字幕偏移時間',
-        'No subtitles found': '未發現字幕'
-      }
-    });
     setting.add(settingMix);
     var cuesCache = [];
     art.on('subtitle:switch', function () {
@@ -4138,14 +4136,6 @@
         option = art.option,
         setting = art.setting,
         i18n = art.i18n;
-    i18n.update({
-      'zh-cn': {
-        'Local Video': '本地视频'
-      },
-      'zh-tw': {
-        'Local Video': '本地視頻'
-      }
-    });
 
     function loadVideo(file) {
       if (file) {
@@ -4216,14 +4206,6 @@
         subtitle = art.subtitle,
         setting = art.setting,
         i18n = art.i18n;
-    i18n.update({
-      'zh-cn': {
-        'Local Subtitle': '本地字幕'
-      },
-      'zh-tw': {
-        'Local Subtitle': '本地字幕'
-      }
-    });
 
     function loadSubtitle(file) {
       if (file) {

@@ -10,15 +10,6 @@ export default function localVideo(art) {
         i18n,
     } = art;
 
-    i18n.update({
-        'zh-cn': {
-            'Local Video': '本地视频',
-        },
-        'zh-tw': {
-            'Local Video': '本地視頻',
-        },
-    });
-
     function loadVideo(file) {
         if (file) {
             const canPlayType = template.$video.canPlayType(file.type);
