@@ -24,13 +24,13 @@ export default function progress(option) {
         return {
             ...option,
             html: `
-                <div class="art-control-progress-inner">
-                    <div class="art-progress-loaded"></div>
-                    <div class="art-progress-played" style="background: ${theme}"></div>
-                    <div class="art-progress-highlight"></div>
-                    <div class="art-progress-indicator" style="background: ${theme}"></div>
-                    <div class="art-progress-tip art-tip"></div>
-                </div>
+<div class="art-control-progress-inner">
+    <div class="art-progress-loaded"></div>
+    <div class="art-progress-played" style="background: ${theme}"></div>
+    <div class="art-progress-highlight"></div>
+    <div class="art-progress-indicator" style="background: ${theme}"></div>
+    <div class="art-progress-tip art-tip"></div>
+</div>
             `,
             mounted: $control => {
                 let isDroging = false;

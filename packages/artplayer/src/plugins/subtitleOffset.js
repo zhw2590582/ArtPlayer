@@ -12,12 +12,12 @@ function settingMix(art) {
         name: 'subtitleOffset',
         index: 20,
         html: `
-            <div class="art-setting-header">
-                ${i18n.get('Subtitle offset time')}: <span class="art-subtitle-value">0</span>s
-            </div>
-            <div class="art-setting-range">
-                <input class="art-subtitle-range" value="0" type="range" min="-5" max="5" step="0.5">
-            </div>
+<div class="art-setting-header">
+    ${i18n.get('Subtitle offset time')}: <span class="art-subtitle-value">0</span>s
+</div>
+<div class="art-setting-range">
+    <input class="art-subtitle-range" value="0" type="range" min="-5" max="5" step="0.5">
+</div>
         `,
         mounted: $setting => {
             const $range = query('.art-setting-range input', $setting);

@@ -6,10 +6,10 @@ export default function aspectRatio(option) {
         return {
             ...option,
             html: `
-                ${i18n.get('Aspect ratio')}:
-                <span data-ratio="default" class="art-current">${i18n.get('Default')}</span>
-                <span data-ratio="4:3">4:3</span>
-                <span data-ratio="16:9">16:9</span>
+${i18n.get('Aspect ratio')}:
+<span data-ratio="default" class="art-current">${i18n.get('Default')}</span>
+<span data-ratio="4:3">4:3</span>
+<span data-ratio="16:9">16:9</span>
             `,
             click: (contextmenu, event) => {
                 const { ratio } = event.target.dataset;
