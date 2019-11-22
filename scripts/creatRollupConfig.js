@@ -83,8 +83,8 @@ module.exports = function creatRollupConfig(projectPath) {
                 __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
                 __VERSION__: version,
             }),
-            isProd && removeHtmlSpace(),
             isProd && sizeSnapshot(),
+            isProd && removeHtmlSpace(),
             isProd &&
                 terser({
                     output: {
