@@ -26,5 +26,6 @@
   "dependencies": {
     "option-validator": "^2.0.5",
     "screenfull": "^5.0.0"
-  }
+  },
+  "gitHead": "247d626c3d6f0608e4a6b9d8e6e7dd282dd3b9cd"
 }

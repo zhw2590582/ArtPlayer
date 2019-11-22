@@ -25,5 +25,6 @@
     "b64-to-blob": "^1.2.19",
     "blob-util": "^2.0.2",
     "gifshot": "^0.4.5"
-  }
+  },
+  "gitHead": "247d626c3d6f0608e4a6b9d8e6e7dd282dd3b9cd"
 }
