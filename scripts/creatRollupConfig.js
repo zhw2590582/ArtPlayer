@@ -12,6 +12,7 @@ const svgo = require('rollup-plugin-svgo');
 const { sizeSnapshot } = require('rollup-plugin-size-snapshot');
 const { terser } = require('rollup-plugin-terser');
 const copyAfterBuild = require('./copyAfterBuild');
+const removeHtmlSpace = require('./removeHtmlSpace');
 const json = require('rollup-plugin-json');
 
 module.exports = function creatRollupConfig(projectPath) {
@@ -82,6 +83,7 @@ module.exports = function creatRollupConfig(projectPath) {
                 __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
                 __VERSION__: version,
             }),
+            isProd && removeHtmlSpace(),
             isProd && sizeSnapshot(),
             isProd &&
                 terser({

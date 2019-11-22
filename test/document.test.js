@@ -48,16 +48,16 @@ var art = new Artplayer({
             
 var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
-  container: '.artplayer-app',
-  url: url + '/video/one-more-time-one-more-chance-480p.flv',
-  type: 'flv',
-  customType: {
-    flv: function(video, url, art) {
-      // video: The video element
-      // url: The video url
-      // art: The Artplayer instance
-    }
-  }
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.flv',
+    type: 'flv',
+    customType: {
+        flv: function(video, url, art) {
+            // video: The video element
+            // url: The video url
+            // art: The Artplayer instance
+        },
+    },
 });
 
     });

@@ -1,18 +1,20 @@
 import { errorHandle } from './error';
 
+const has = Object.prototype.hasOwnProperty;
 export function hasOwnProperty(obj, name) {
-    return Object.prototype.hasOwnProperty.call(obj, name);
+    return has.call(obj, name);
 }
 
+const def = Object.defineProperty;
 export function defineProperty(obj, key, prop) {
-    return Object.defineProperty(obj, key, prop);
+    return def(obj, key, prop);
 }
 
 export function proxyPropertys(target, ...sources) {
     return sources.reduce((result, source) => {
         Object.getOwnPropertyNames(source).forEach(key => {
             errorHandle(!hasOwnProperty(result, key), `Target attribute name is duplicated: ${key}`);
-            Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(source, key));
+            def(result, key, Object.getOwnPropertyDescriptor(source, key));
         });
         return result;
     }, target);
