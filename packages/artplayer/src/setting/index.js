@@ -1,5 +1,4 @@
-import Component from '../utils/components';
-import component from '../utils/component';
+import Component from '../utils/component';
 import flip from './flip';
 import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
@@ -8,14 +7,16 @@ export default class Setting extends Component {
     constructor(art) {
         super(art);
 
+        this.$parent = art.template.$settingBody;
+
         const {
             option,
             template: { $setting },
             events: { proxy },
-        } = this.art;
+        } = art;
 
         if (art.option.setting) {
-            this.art.on('ready', () => {
+            art.on('ready', () => {
                 proxy($setting, 'click', e => {
                     if (e.target === $setting) {
                         this.show = false;
@@ -43,16 +44,10 @@ export default class Setting extends Component {
                     }),
                 );
             });
-
-            this.art.on('blur', () => {
-                this.show = false;
-            });
         }
-    }
 
-    add(item, callback) {
-        this.id += 1;
-        const { $settingBody } = this.art.template;
-        return component(this.art, this, $settingBody, item, callback, 'setting');
+        art.on('blur', () => {
+            this.show = false;
+        });
     }
 }

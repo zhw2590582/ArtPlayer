@@ -1,5 +1,5 @@
 import { append } from './utils';
-import Component from './utils/components';
+import Component from './utils/component';
 
 export default class Loading extends Component {
     constructor(art) {

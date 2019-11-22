@@ -1,6 +1,5 @@
 import { errorHandle, addClass } from '../utils';
-import Component from '../utils/components';
-import component from '../utils/component';
+import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
 import pip from './pip';
@@ -14,10 +13,10 @@ import thumbnails from './thumbnails';
 import screenshot from './screenshot';
 import quality from './quality';
 
-export default class Controls extends Component {
+export default class Control extends Component {
     constructor(art) {
         super(art);
-
+        
         art.on('ready', () => {
             const { option } = art;
 
@@ -135,27 +134,27 @@ export default class Controls extends Component {
         });
     }
 
-    add(item, callback) {
-        const option = typeof item === 'function' ? item(this.art) : item;
+    add(getOption, callback) {
+        const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+        errorHandle(option.position, 'Controls option.position can not be empty');
         const { $progress, $controlsLeft, $controlsRight } = this.art.template;
-        let parent;
+
         switch (option.position) {
             case 'top':
-                parent = $progress;
+                this.$parent = $progress;
                 break;
             case 'left':
-                parent = $controlsLeft;
+                this.$parent = $controlsLeft;
                 break;
             case 'right':
-                parent = $controlsRight;
+                this.$parent = $controlsRight;
                 break;
             default:
                 break;
         }
 
-        this.id += 1;
-        errorHandle(option.position, 'Controls option.position can not be empty');
-        const control = component(this.art, this, parent, option, callback, 'control');
+        const control = super.add(option, callback);
+
         if (
             !option.disable &&
             option.position !== 'top' &&
@@ -163,6 +162,7 @@ export default class Controls extends Component {
         ) {
             addClass(control.$ref, 'art-control-onlyText');
         }
+
         return control;
     }
 }

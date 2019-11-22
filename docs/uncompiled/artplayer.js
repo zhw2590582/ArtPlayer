@@ -2122,6 +2122,41 @@
     proxyPropertys(art, this);
   };
 
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  var superPropBase = _superPropBase;
+
+  var get = createCommonjsModule(function (module) {
+  function _get(target, property, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      module.exports = _get = Reflect.get;
+    } else {
+      module.exports = _get = function _get(target, property, receiver) {
+        var base = superPropBase(target, property);
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get(target, property, receiver || target);
+  }
+
+  module.exports = _get;
+  });
+
   var Component =
   /*#__PURE__*/
   function () {
@@ -2130,9 +2165,8 @@
 
       this.id = 0;
       this.art = art;
-      this.$player = art.template.$player;
+      this.add = this.add.bind(this);
       this.name = this.constructor.name.toLowerCase();
-      this.showClassName = "art-".concat(this.name, "-show");
     }
 
     createClass(Component, [{
@@ -2141,17 +2175,90 @@
         this.show = !this.show;
       }
     }, {
+      key: "add",
+      value: function add(getOption, callback) {
+        var _this = this;
+
+        var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+        if (!this.$parent || option.disable) return {};
+        this.id += 1;
+        var name = option.name || "".concat(this.name).concat(this.id);
+        errorHandle(!hasOwnProperty(this, name), "Cannot add a component that already has the same name: ".concat(name));
+        var $ref = document.createElement('div');
+        $ref.classList.value = "art-".concat(this.name, " art-").concat(this.name, "-").concat(name);
+
+        if (option.html) {
+          append($ref, option.html);
+        }
+
+        if (option.style) {
+          setStyles($ref, option.style);
+        }
+
+        if (option.tooltip) {
+          tooltip($ref, option.tooltip);
+        }
+
+        var childs = Array.from(this.$parent.children);
+        $ref.dataset.index = option.index || this.id;
+        var nextChild = childs.find(function (item) {
+          return Number(item.dataset.index) >= Number($ref.dataset.index);
+        });
+
+        if (nextChild) {
+          nextChild.insertAdjacentElement('beforebegin', $ref);
+        } else {
+          append(this.$parent, $ref);
+        }
+
+        if (option.click) {
+          this.art.events.proxy($ref, 'click', function (event) {
+            event.preventDefault();
+            option.click.call(_this.art, _this, event);
+          });
+        }
+
+        if (option.mounted) {
+          option.mounted($ref, this, this.art);
+        }
+
+        if (callback) {
+          callback($ref, this, this.art);
+        }
+
+        defineProperty(this, name, {
+          value: {
+            get $ref() {
+              return $ref;
+            },
+
+            set show(value) {
+              if (value) {
+                setStyle($ref, 'display', 'block');
+              } else {
+                setStyle($ref, 'display', 'none');
+              }
+            }
+
+          }
+        });
+        this.art.emit("".concat(this.name, ":add"), option);
+        return this[name];
+      }
+    }, {
       key: "show",
       get: function get() {
-        return hasClass(this.$player, this.showClassName);
+        return hasClass(this.art.template.$player, "art-".concat(this.name, "-show"));
       },
       set: function set(value) {
         errorHandle(value === false || value === true, 'The show attribute expects a boolean value');
+        var $player = this.art.template.$player;
+        var className = "art-".concat(this.name, "-show");
 
         if (value) {
-          addClass(this.$player, this.showClassName);
+          addClass($player, className);
         } else {
-          removeClass(this.$player, this.showClassName);
+          removeClass($player, className);
         }
 
         this.art.emit("".concat(this.name, ":toggle"), value);
@@ -2160,78 +2267,6 @@
 
     return Component;
   }();
-
-  function component(art, parent, target, getOption, callback, title) {
-    var option = typeof getOption === 'function' ? getOption(art) : getOption;
-    if (option.disable) return {};
-    var componentID = parent.id;
-    var name = option.name || "".concat(title).concat(componentID);
-    errorHandle(!hasOwnProperty(parent, name), "Cannot create a component that already has the same name: ".concat(title, " -> ").concat(name));
-    var $element = document.createElement('div');
-    $element.classList.value = "art-".concat(title, " art-").concat(title, "-").concat(name);
-
-    if (option.html) {
-      append($element, option.html);
-    }
-
-    if (option.style) {
-      setStyles($element, option.style);
-    }
-
-    if (option.tooltip) {
-      tooltip($element, option.tooltip);
-    }
-
-    var childs = Array.from(target.children);
-    $element.dataset.index = option.index || componentID;
-    var nextChild = childs.find(function (item) {
-      return Number(item.dataset.index) >= Number($element.dataset.index);
-    });
-
-    if (nextChild) {
-      nextChild.insertAdjacentElement('beforebegin', $element);
-    } else {
-      append(target, $element);
-    }
-
-    if (option.click) {
-      art.events.proxy($element, 'click', function (event) {
-        event.preventDefault();
-        option.click.call(art, parent, event);
-      });
-    }
-
-    if (option.mounted) {
-      option.mounted($element, parent, art);
-    }
-
-    if (callback) {
-      callback($element, parent, art);
-    }
-
-    Object.defineProperty(parent, name, {
-      value: {
-        get id() {
-          return componentID;
-        },
-
-        get $ref() {
-          return $element;
-        },
-
-        set show(value) {
-          if (value) {
-            setStyle($element, 'display', 'block');
-          } else {
-            setStyle($element, 'display', 'none');
-          }
-        }
-
-      }
-    });
-    art.emit("".concat(title, ":add"), option);
-    return parent[name];
-  }
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -2813,17 +2848,17 @@
     };
   }
 
-  var Controls =
+  var Control =
   /*#__PURE__*/
   function (_Component) {
-    inherits(Controls, _Component);
+    inherits(Control, _Component);
 
-    function Controls(art) {
+    function Control(art) {
       var _this;
 
-      classCallCheck(this, Controls);
+      classCallCheck(this, Control);
 
-      _this = possibleConstructorReturn(this, getPrototypeOf(Controls).call(this, art));
+      _this = possibleConstructorReturn(this, getPrototypeOf(Control).call(this, art));
       art.on('ready', function () {
         var option = art.option;
 
@@ -2918,33 +2953,31 @@
       return _this;
     }
 
-    createClass(Controls, [{
+    createClass(Control, [{
       key: "add",
-      value: function add(item, callback) {
-        var option = typeof item === 'function' ? item(this.art) : item;
+      value: function add(getOption, callback) {
+        var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+        errorHandle(option.position, 'Controls option.position can not be empty');
         var _this$art$template = this.art.template,
             $progress = _this$art$template.$progress,
             $controlsLeft = _this$art$template.$controlsLeft,
             $controlsRight = _this$art$template.$controlsRight;
-        var parent;
 
         switch (option.position) {
           case 'top':
-            parent = $progress;
+            this.$parent = $progress;
             break;
 
           case 'left':
-            parent = $controlsLeft;
+            this.$parent = $controlsLeft;
             break;
 
           case 'right':
-            parent = $controlsRight;
+            this.$parent = $controlsRight;
             break;
         }
 
-        this.id += 1;
-        errorHandle(option.position, 'Controls option.position can not be empty');
-        var control = component(this.art, this, parent, option, callback, 'control');
+        var control = get(getPrototypeOf(Control.prototype), "add", this).call(this, option, callback);
 
         if (!option.disable && option.position !== 'top' && !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')) {
           addClass(control.$ref, 'art-control-onlyText');
@@ -2954,7 +2987,7 @@
       }
     }]);
 
-    return Controls;
+    return Control;
   }(Component);
 
   function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -3073,6 +3106,7 @@
       classCallCheck(this, Contextmenu);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Contextmenu).call(this, art));
+      _this.$parent = art.template.$contextmenu;
       art.on('ready', function () {
         var option = art.option,
             _art$template = art.template,
@@ -3155,15 +3189,6 @@
       return _this;
     }
 
-    createClass(Contextmenu, [{
-      key: "add",
-      value: function add(item, callback) {
-        this.id += 1;
-        var $contextmenu = this.art.template.$contextmenu;
-        return component(this.art, this, $contextmenu, item, callback, 'contextmenu');
-      }
-    }]);
-
     return Contextmenu;
   }(Component);
 
@@ -3230,7 +3255,16 @@
           subtitle = art.option.subtitle,
           $subtitle = art.template.$subtitle;
       setStyles($subtitle, subtitle.style);
-      proxy(_this.textTrack, 'cuechange', _this.update.bind(assertThisInitialized(_this)));
+      proxy(_this.textTrack, 'cuechange', function () {
+        $subtitle.innerHTML = '';
+
+        if (_this.activeCue) {
+          $subtitle.innerHTML = _this.activeCue.text.split(/\r?\n/).map(function (item) {
+            return "<p>".concat(item, "</p>");
+          }).join('');
+          art.emit('subtitle:update', _this.activeCue.text);
+        }
+      });
 
       if (subtitle.url) {
         _this.init(subtitle.url);
@@ -3240,19 +3274,6 @@
     }
 
     createClass(Subtitle, [{
-      key: "update",
-      value: function update() {
-        var $subtitle = this.art.template.$subtitle;
-        $subtitle.innerHTML = '';
-
-        if (this.activeCue) {
-          $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map(function (item) {
-            return "<p>".concat(item, "</p>");
-          }).join('');
-          this.art.emit('subtitle:update', this.activeCue.text);
-        }
-      }
-    }, {
       key: "switch",
       value: function _switch(url) {
         var _this2 = this;
@@ -3601,38 +3622,27 @@
     return Hotkey;
   }();
 
-  var Layers =
+  var Layer =
   /*#__PURE__*/
   function (_Component) {
-    inherits(Layers, _Component);
+    inherits(Layer, _Component);
 
-    function Layers(art) {
+    function Layer(art) {
       var _this;
 
-      classCallCheck(this, Layers);
+      classCallCheck(this, Layer);
 
-      _this = possibleConstructorReturn(this, getPrototypeOf(Layers).call(this, art));
-      _this.add = _this.add.bind(assertThisInitialized(_this));
-
-      _this.art.on('ready', function () {
-        _this.art.option.layers.forEach(function (item) {
+      _this = possibleConstructorReturn(this, getPrototypeOf(Layer).call(this, art));
+      _this.$parent = art.template.$layers;
+      art.on('ready', function () {
+        art.option.layers.forEach(function (item) {
           _this.add(item);
         });
       });
-
       return _this;
     }
 
-    createClass(Layers, [{
-      key: "add",
-      value: function add(item, callback) {
-        this.id += 1;
-        var $layers = this.art.template.$layers;
-        return component(this.art, this, $layers, item, callback, 'layer');
-      }
-    }]);
-
-    return Layers;
+    return Layer;
   }(Component);
 
   var Loading =
@@ -3877,13 +3887,13 @@
       classCallCheck(this, Setting);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Setting).call(this, art));
-      var _this$art = _this.art,
-          option = _this$art.option,
-          $setting = _this$art.template.$setting,
-          proxy = _this$art.events.proxy;
+      _this.$parent = art.template.$settingBody;
+      var option = art.option,
+          $setting = art.template.$setting,
+          proxy = art.events.proxy;
 
       if (art.option.setting) {
-        _this.art.on('ready', function () {
+        art.on('ready', function () {
           proxy($setting, 'click', function (e) {
             if (e.target === $setting) {
               _this.show = false;
@@ -3905,23 +3915,13 @@
             name: 'playbackRate'
           }));
         });
-
-        _this.art.on('blur', function () {
-          _this.show = false;
-        });
       }
 
+      art.on('blur', function () {
+        _this.show = false;
+      });
       return _this;
     }
-
-    createClass(Setting, [{
-      key: "add",
-      value: function add(item, callback) {
-        this.id += 1;
-        var $settingBody = this.art.template.$settingBody;
-        return component(this.art, this, $settingBody, item, callback, 'setting');
-      }
-    }]);
 
     return Setting;
   }(Component);
@@ -4459,8 +4459,8 @@
         _this.i18n = new I18n(assertThisInitialized(_this));
         _this.notice = new Notice(assertThisInitialized(_this));
         _this.player = new Player(assertThisInitialized(_this));
-        _this.layers = new Layers(assertThisInitialized(_this));
-        _this.controls = new Controls(assertThisInitialized(_this));
+        _this.layers = new Layer(assertThisInitialized(_this));
+        _this.controls = new Control(assertThisInitialized(_this));
         _this.contextmenu = new Contextmenu(assertThisInitialized(_this));
         _this.subtitle = new Subtitle(assertThisInitialized(_this));
         _this.info = new Info(assertThisInitialized(_this));

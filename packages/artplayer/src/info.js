@@ -1,5 +1,5 @@
 import { queryAll } from './utils';
-import Component from './utils/components';
+import Component from './utils/component';
 
 export default class Info extends Component {
     constructor(art) {

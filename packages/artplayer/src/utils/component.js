@@ -1,73 +1,96 @@
-import { append, setStyles, setStyle, tooltip } from './dom';
+import { hasClass, addClass, removeClass, append, setStyle, setStyles, tooltip } from './dom';
+import { hasOwnProperty, defineProperty } from './property';
 import { errorHandle } from './error';
-import { hasOwnProperty } from './property';
 
-export default function component(art, parent, target, getOption, callback, title) {
-    const option = typeof getOption === 'function' ? getOption(art) : getOption;
-    if (option.disable) return {};
-    const componentID = parent.id;
-    const name = option.name || `${title}${componentID}`;
-    errorHandle(
-        !hasOwnProperty(parent, name),
-        `Cannot create a component that already has the same name: ${title} -> ${name}`,
-    );
-    const $element = document.createElement('div');
-    $element.classList.value = `art-${title} art-${title}-${name}`;
-
-    if (option.html) {
-        append($element, option.html);
+export default class Component {
+    constructor(art) {
+        this.id = 0;
+        this.art = art;
+        this.add = this.add.bind(this);
+        this.name = this.constructor.name.toLowerCase();
     }
 
-    if (option.style) {
-        setStyles($element, option.style);
+    get show() {
+        return hasClass(this.art.template.$player, `art-${this.name}-show`);
     }
 
-    if (option.tooltip) {
-        tooltip($element, option.tooltip);
+    set show(value) {
+        errorHandle(value === false || value === true, 'The show attribute expects a boolean value');
+        const { $player } = this.art.template;
+        const className = `art-${this.name}-show`;
+        if (value) {
+            addClass($player, className);
+        } else {
+            removeClass($player, className);
+        }
+        this.art.emit(`${this.name}:toggle`, value);
     }
 
-    const childs = Array.from(target.children);
-    $element.dataset.index = option.index || componentID;
-    const nextChild = childs.find(item => Number(item.dataset.index) >= Number($element.dataset.index));
-    if (nextChild) {
-        nextChild.insertAdjacentElement('beforebegin', $element);
-    } else {
-        append(target, $element);
+    toggle() {
+        this.show = !this.show;
     }
 
-    if (option.click) {
-        art.events.proxy($element, 'click', event => {
-            event.preventDefault();
-            option.click.call(art, parent, event);
+    add(getOption, callback) {
+        const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+        if (!this.$parent || option.disable) return {};
+        this.id += 1;
+        const name = option.name || `${this.name}${this.id}`;
+        errorHandle(!hasOwnProperty(this, name), `Cannot add a component that already has the same name: ${name}`);
+        const $ref = document.createElement('div');
+        $ref.classList.value = `art-${this.name} art-${this.name}-${name}`;
+
+        if (option.html) {
+            append($ref, option.html);
+        }
+
+        if (option.style) {
+            setStyles($ref, option.style);
+        }
+
+        if (option.tooltip) {
+            tooltip($ref, option.tooltip);
+        }
+
+        const childs = Array.from(this.$parent.children);
+        $ref.dataset.index = option.index || this.id;
+        const nextChild = childs.find(item => Number(item.dataset.index) >= Number($ref.dataset.index));
+        if (nextChild) {
+            nextChild.insertAdjacentElement('beforebegin', $ref);
+        } else {
+            append(this.$parent, $ref);
+        }
+
+        if (option.click) {
+            this.art.events.proxy($ref, 'click', event => {
+                event.preventDefault();
+                option.click.call(this.art, this, event);
+            });
+        }
+
+        if (option.mounted) {
+            option.mounted($ref, this, this.art);
+        }
+
+        if (callback) {
+            callback($ref, this, this.art);
+        }
+
+        defineProperty(this, name, {
+            value: {
+                get $ref() {
+                    return $ref;
+                },
+                set show(value) {
+                    if (value) {
+                        setStyle($ref, 'display', 'block');
+                    } else {
+                        setStyle($ref, 'display', 'none');
+                    }
+                },
+            },
         });
+
+        this.art.emit(`${this.name}:add`, option);
+        return this[name];
     }
-
-    if (option.mounted) {
-        option.mounted($element, parent, art);
-    }
-
-    if (callback) {
-        callback($element, parent, art);
-    }
-
-    Object.defineProperty(parent, name, {
-        value: {
-            get id() {
-                return componentID;
-            },
-            get $ref() {
-                return $element;
-            },
-            set show(value) {
-                if (value) {
-                    setStyle($element, 'display', 'block');
-                } else {
-                    setStyle($element, 'display', 'none');
-                }
-            },
-        },
-    });
-
-    art.emit(`${title}:add`, option);
-    return parent[name];
 }

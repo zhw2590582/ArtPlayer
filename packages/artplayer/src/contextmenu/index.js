@@ -1,6 +1,5 @@
 import { setStyle } from '../utils';
-import Component from '../utils/components';
-import component from '../utils/component';
+import Component from '../utils/component';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
 import info from './info';
@@ -10,6 +9,8 @@ import close from './close';
 export default class Contextmenu extends Component {
     constructor(art) {
         super(art);
+
+        this.$parent = art.template.$contextmenu;
 
         art.on('ready', () => {
             const {
@@ -65,7 +66,7 @@ export default class Contextmenu extends Component {
             proxy($player, 'contextmenu', event => {
                 event.preventDefault();
                 this.show = true;
-                
+
                 const mouseX = event.clientX;
                 const mouseY = event.clientY;
                 const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
@@ -95,11 +96,5 @@ export default class Contextmenu extends Component {
         art.on('blur', () => {
             this.show = false;
         });
-    }
-
-    add(item, callback) {
-        this.id += 1;
-        const { $contextmenu } = this.art.template;
-        return component(this.art, this, $contextmenu, item, callback, 'contextmenu');
     }
 }

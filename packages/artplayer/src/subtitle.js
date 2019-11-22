@@ -1,5 +1,5 @@
 import { setStyles, srtToVtt, vttToBlob, getExt, assToVtt } from './utils';
-import Component from './utils/components';
+import Component from './utils/component';
 
 export default class Subtitle extends Component {
     constructor(art) {
@@ -12,7 +12,17 @@ export default class Subtitle extends Component {
         } = art;
 
         setStyles($subtitle, subtitle.style);
-        proxy(this.textTrack, 'cuechange', this.update.bind(this));
+
+        proxy(this.textTrack, 'cuechange', () => {
+            $subtitle.innerHTML = '';
+            if (this.activeCue) {
+                $subtitle.innerHTML = this.activeCue.text
+                    .split(/\r?\n/)
+                    .map(item => `<p>${item}</p>`)
+                    .join('');
+                art.emit('subtitle:update', this.activeCue.text);
+            }
+        });
 
         if (subtitle.url) {
             this.init(subtitle.url);
@@ -29,18 +39,6 @@ export default class Subtitle extends Component {
 
     get activeCue() {
         return this.textTrack.activeCues[0];
-    }
-
-    update() {
-        const { $subtitle } = this.art.template;
-        $subtitle.innerHTML = '';
-        if (this.activeCue) {
-            $subtitle.innerHTML = this.activeCue.text
-                .split(/\r?\n/)
-                .map(item => `<p>${item}</p>`)
-                .join('');
-            this.art.emit('subtitle:update', this.activeCue.text);
-        }
     }
 
     switch(url, name = 'unknown') {
