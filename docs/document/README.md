@@ -121,16 +121,16 @@ Customize when loading third-party libraries
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
-  container: '.artplayer-app',
-  url: url + '/video/one-more-time-one-more-chance-480p.flv',
-  type: 'flv',
-  customType: {
-    flv: function(video, url, art) {
-      // video: The video element
-      // url: The video url
-      // art: The Artplayer instance
-    }
-  }
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.flv',
+    type: 'flv',
+    customType: {
+        flv: function(video, url, art) {
+            // video: The video element
+            // url: The video url
+            // art: The Artplayer instance
+        },
+    },
 });
 ```
 
@@ -1609,44 +1609,38 @@ art.on('video:canplay', function(event) {
 | `subtitle:switch` | When switching subtitles      | Current subtitle url  |
 | `subtitle:load`   | When the subtitles loaded     | Current subtitle url  |
 | `subtitle:err`    | When the subtitles load error | Error object          |
-| `subtitle:show`   | When displaying subtitles     | `undefined`           |
-| `subtitle:hide`   | When hiding subtitles         | `undefined`           |
+| `subtitle:toggle` | When displaying subtitles     | Whether to show       |
 
 ## Notice
 
-| Event         | Description            | Parameter   |
-| ------------- | ---------------------- | ----------- |
-| `notice:show` | When displaying notice | Notice text |
-| `notice:hide` | When hiding notice     | `undefined` |
+| Event           | Description            | Parameter       |
+| --------------- | ---------------------- | --------------- |
+| `notice:toggle` | When displaying notice | Whether to show |
 
 ## Mask
 
-| Event       | Description          | Parameter   |
-| ----------- | -------------------- | ----------- |
-| `mask:show` | When displaying mask | `undefined` |
-| `mask:hide` | When hiding mask     | `undefined` |
+| Event         | Description          | Parameter       |
+| ------------- | -------------------- | --------------- |
+| `mask:toggle` | When displaying mask | Whether to show |
 
 ## Loading
 
-| Event          | Description             | Parameter   |
-| -------------- | ----------------------- | ----------- |
-| `loading:show` | When displaying loading | `undefined` |
-| `loading:hide` | When hiding loading     | `undefined` |
+| Event            | Description             | Parameter       |
+| ---------------- | ----------------------- | --------------- |
+| `loading:toggle` | When displaying loading | Whether to show |
 
-## Layers
+## Layer
 
-| Event         | Description             | Parameter           |
-| ------------- | ----------------------- | ------------------- |
-| `layers:add`  | When adding a new layer | Layer configuration |
-| `layers:show` | When displaying layers  | `undefined`         |
-| `layers:hide` | When hiding layers      | `undefined`         |
+| Event          | Description             | Parameter           |
+| -------------- | ----------------------- | ------------------- |
+| `layer:add`    | When adding a new layer | Layer configuration |
+| `layer:toggle` | When displaying layer   | Whether to show     |
 
 ## Info
 
-| Event       | Description          | Parameter   |
-| ----------- | -------------------- | ----------- |
-| `info:show` | When displaying info | `undefined` |
-| `info:hide` | When hiding info     | `undefined` |
+| Event         | Description          | Parameter       |
+| ------------- | -------------------- | --------------- |
+| `info:toggle` | When displaying info | Whether to show |
 
 ## Hotkey
 
@@ -1656,27 +1650,24 @@ art.on('video:canplay', function(event) {
 
 ## Setting
 
-| Event          | Description               | Parameter             |
-| -------------- | ------------------------- | --------------------- |
-| `setting:add`  | When adding a new setting | Setting configuration |
-| `setting:show` | When displaying setting   | `undefined`           |
-| `setting:hide` | When hiding setting       | `undefined`           |
+| Event            | Description               | Parameter             |
+| ---------------- | ------------------------- | --------------------- |
+| `setting:add`    | When adding a new setting | Setting configuration |
+| `setting:toggle` | When displaying setting   | Whether to show       |
 
 ## Contextmenu
 
-| Event              | Description                   | Parameter                 |
-| ------------------ | ----------------------------- | ------------------------- |
-| `contextmenu:add`  | When adding a new contextmenu | Contextmenu configuration |
-| `contextmenu:show` | When displaying contextmenu   | `undefined`               |
-| `contextmenu:hide` | When hiding contextmenu       | `undefined`               |
+| Event                | Description                   | Parameter                 |
+| -------------------- | ----------------------------- | ------------------------- |
+| `contextmenu:add`    | When adding a new contextmenu | Contextmenu configuration |
+| `contextmenu:toggle` | When displaying contextmenu   | Whether to show           |
 
-## Controls
+## Control
 
-| Event           | Description               | Parameter             |
-| --------------- | ------------------------- | --------------------- |
-| `controls:add`  | When adding a new control | Control configuration |
-| `controls:show` | When displaying controls  | `undefined`           |
-| `controls:hide` | When hiding controls      | `undefined`           |
+| Event            | Description               | Parameter             |
+| ---------------- | ------------------------- | --------------------- |
+| `control:add`    | When adding a new control | Control configuration |
+| `control:toggle` | When displaying control   | Whether to show       |
 
 ## Plugins
 

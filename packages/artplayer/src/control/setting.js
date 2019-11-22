@@ -18,14 +18,14 @@ export default function setting(option) {
                 setting.toggle();
             });
 
-            art.on('setting:show', () => {
-                setStyle($setting, 'opacity', '0.8');
-                tooltip($setting, i18n.get('Hide setting'));
-            });
-
-            art.on('setting:hide', () => {
-                setStyle($setting, 'opacity', '1');
-                tooltip($setting, i18n.get('Show setting'));
+            art.on('setting:toggle', value => {
+                if (value) {
+                    setStyle($setting, 'opacity', '0.8');
+                    tooltip($setting, i18n.get('Hide setting'));
+                } else {
+                    setStyle($setting, 'opacity', '1');
+                    tooltip($setting, i18n.get('Show setting'));
+                }
             });
         },
     });

@@ -16,7 +16,7 @@ import quality from './quality';
 export default class Control extends Component {
     constructor(art) {
         super(art);
-        
+
         art.on('ready', () => {
             const { option } = art;
 

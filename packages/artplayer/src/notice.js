@@ -8,7 +8,6 @@ export default class Notice {
 
     show(msg, autoHide = true, time = 1000) {
         const { $player, $noticeInner } = this.art.template;
-        addClass($player, 'art-notice-show');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
         clearTimeout(this.timer);
         if (autoHide) {
@@ -16,12 +15,13 @@ export default class Notice {
                 this.hide();
             }, time);
         }
-        this.art.emit('notice:show', msg);
+        addClass($player, 'art-notice-show');
+        this.art.emit('notice:toggle', true);
     }
 
     hide() {
         const { $player } = this.art.template;
         removeClass($player, 'art-notice-show');
-        this.art.emit('notice:hide');
+        this.art.emit('notice:toggle', true);
     }
 }

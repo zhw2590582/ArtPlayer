@@ -34,7 +34,7 @@ export default class Template {
 
     initDesktop() {
         this.$container.innerHTML = `
-<div class="art-video-player art-subtitle-show" style="--theme: ${this.art.option.theme}">
+<div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${this.art.option.theme}">
   <video class="art-video">
     <track default kind="metadata"></track>
   </video>
@@ -108,7 +108,7 @@ export default class Template {
         this.$controls = this.query('.art-controls');
         this.$controlsLeft = this.query('.art-controls-left');
         this.$controlsRight = this.query('.art-controls-right');
-        this.$layers = this.query('.art-layers');
+        this.$layer = this.query('.art-layers');
         this.$loading = this.query('.art-loading');
         this.$notice = this.query('.art-notice');
         this.$noticeInner = this.query('.art-notice-inner');

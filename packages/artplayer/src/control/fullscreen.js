@@ -18,12 +18,12 @@ export default function fullscreen(option) {
                 player.fullscreenToggle = true;
             });
 
-            art.on('fullscreen:enabled', () => {
+            art.on('fullscreenEnabled', () => {
                 setStyle($fullscreen, 'opacity', '0.8');
                 tooltip($fullscreen, i18n.get('Exit fullscreen'));
             });
 
-            art.on('fullscreen:exit', () => {
+            art.on('fullscreenExit', () => {
                 setStyle($fullscreen, 'opacity', '1');
                 tooltip($fullscreen, i18n.get('Fullscreen'));
             });

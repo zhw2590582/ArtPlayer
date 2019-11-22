@@ -91,10 +91,10 @@ export default class Contextmenu extends Component {
                     this.show = false;
                 }
             });
-        });
 
-        art.on('blur', () => {
-            this.show = false;
+            art.on('blur', () => {
+                this.show = false;
+            });
         });
     }
 }

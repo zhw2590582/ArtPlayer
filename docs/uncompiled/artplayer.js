@@ -818,7 +818,7 @@
     }, {
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player art-subtitle-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.1.19</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
+        this.$container.innerHTML = "\n<div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.1.19</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$track = this.query('.art-video track');
@@ -829,7 +829,7 @@
         this.$controls = this.query('.art-controls');
         this.$controlsLeft = this.query('.art-controls-left');
         this.$controlsRight = this.query('.art-controls-right');
-        this.$layers = this.query('.art-layers');
+        this.$layer = this.query('.art-layers');
         this.$loading = this.query('.art-loading');
         this.$notice = this.query('.art-notice');
         this.$noticeInner = this.query('.art-notice-inner');
@@ -2301,11 +2301,11 @@
           proxy($control, 'click', function () {
             player.fullscreenToggle = true;
           });
-          art.on('fullscreen:enabled', function () {
+          art.on('fullscreenEnabled', function () {
             setStyle($fullscreen, 'opacity', '0.8');
             tooltip($fullscreen, i18n.get('Exit fullscreen'));
           });
-          art.on('fullscreen:exit', function () {
+          art.on('fullscreenExit', function () {
             setStyle($fullscreen, 'opacity', '1');
             tooltip($fullscreen, i18n.get('Fullscreen'));
           });
@@ -2330,11 +2330,11 @@
           proxy($control, 'click', function () {
             player.fullscreenWebToggle = true;
           });
-          art.on('fullscreenWeb:enabled', function () {
+          art.on('fullscreenWebEnabled', function () {
             setStyle($fullscreenWeb, 'opacity', '0.8');
             tooltip($fullscreenWeb, i18n.get('Exit web fullscreen'));
           });
-          art.on('fullscreenWeb:exit', function () {
+          art.on('fullscreenWebExit', function () {
             setStyle($fullscreenWeb, 'opacity', '1');
             tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
           });
@@ -2709,13 +2709,14 @@
           proxy($control, 'click', function () {
             setting.toggle();
           });
-          art.on('setting:show', function () {
-            setStyle($setting, 'opacity', '0.8');
-            tooltip($setting, i18n.get('Hide setting'));
-          });
-          art.on('setting:hide', function () {
-            setStyle($setting, 'opacity', '1');
-            tooltip($setting, i18n.get('Show setting'));
+          art.on('setting:toggle', function (value) {
+            if (value) {
+              setStyle($setting, 'opacity', '0.8');
+              tooltip($setting, i18n.get('Hide setting'));
+            } else {
+              setStyle($setting, 'opacity', '1');
+              tooltip($setting, i18n.get('Show setting'));
+            }
           });
         }
       });
@@ -3182,9 +3183,9 @@
             _this.show = false;
           }
         });
-      });
-      art.on('blur', function () {
-        _this.show = false;
+        art.on('blur', function () {
+          _this.show = false;
+        });
       });
       return _this;
     }
@@ -3633,7 +3634,7 @@
       classCallCheck(this, Layer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Layer).call(this, art));
-      _this.$parent = art.template.$layers;
+      _this.$parent = art.template.$layer;
       art.on('ready', function () {
         art.option.layers.forEach(function (item) {
           _this.add(item);
@@ -3684,7 +3685,6 @@
         var _this$art$template = this.art.template,
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
-        addClass($player, 'art-notice-show');
         $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
         clearTimeout(this.timer);
 
@@ -3694,14 +3694,15 @@
           }, time);
         }
 
-        this.art.emit('notice:show', msg);
+        addClass($player, 'art-notice-show');
+        this.art.emit('notice:toggle', true);
       }
     }, {
       key: "hide",
       value: function hide() {
         var $player = this.art.template.$player;
         removeClass($player, 'art-notice-show');
-        this.art.emit('notice:hide');
+        this.art.emit('notice:toggle', true);
       }
     }]);
 
@@ -4220,14 +4221,11 @@
         background: theme
       },
       mounted: function mounted($progressBar) {
-        art.on('controls:show', function () {
-          $progressBar.style.display = 'none';
+        art.on('control:toggle', function (value) {
+          $progressBar.style.display = value ? 'none' : 'block';
         });
         art.on('destroy', function () {
           $progressBar.style.display = 'none';
-        });
-        art.on('controls:hide', function () {
-          $progressBar.style.display = 'block';
         });
         art.on('video:timeupdate', function () {
           $progressBar.style.width = "".concat(player.played * 100, "%");
