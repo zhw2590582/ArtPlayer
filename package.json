@@ -1,7 +1,7 @@
 {
   "name": "artplayer-packages",
   "version": "1.0.0",
-  "description": "ArtPlayer is a modern HTML5 video player",
+  "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
     "version": "npx lerna version patch --yes --no-push",
@@ -9,9 +9,9 @@
     "release": "npm run lint && npm run version && npm run build:all && npm test && npm run publish",
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "start": "npx cross-env NODE_ENV=development && npx servor docs index.html 8080 5000",
-    "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
+    "build": "npx cross-env NODE_ENV=production node ./scripts/build.js && node ./scripts/creatTestFromDoc.js",
     "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n ",
-    "test": "node ./scripts/creatTestFromDoc.js && npx mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
+    "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "npx eslint packages/*/src",
     "sizereport": "npx sizereport --config"
   },
