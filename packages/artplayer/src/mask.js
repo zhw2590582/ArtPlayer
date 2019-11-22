@@ -1,26 +1,10 @@
-import { append, addClass, removeClass } from './utils';
+import { append } from './utils';
+import Component from './utils/components';
 
-export default class Mask {
+export default class Mask extends Component {
     constructor(art) {
-        this.art = art;
+        super(art);
         const { $state } = art.template;
         append($state, art.icons.state);
-    }
-
-    set show(value) {
-        const { $player } = this.art.template;
-        if (value) {
-            this.state = true;
-            addClass($player, 'art-mask-show');
-            this.art.emit('mask:show');
-        } else {
-            this.state = false;
-            removeClass($player, 'art-mask-show');
-            this.art.emit('mask:hide');
-        }
-    }
-
-    toggle() {
-        this.show = !this.state;
     }
 }

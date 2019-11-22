@@ -1,59 +1,41 @@
-import { addClass, removeClass, queryAll } from './utils';
+import { queryAll } from './utils';
+import Component from './utils/components';
 
-export default class Info {
+export default class Info extends Component {
     constructor(art) {
-        this.art = art;
-        this.timer = null;
+        super(art);
 
         const {
-            template: { $infoPanel, $infoClose },
+            template: { $infoPanel, $infoClose, $video },
             events: { proxy },
         } = art;
-
-        this.types = queryAll('[data-video]', $infoPanel);
 
         proxy($infoClose, 'click', () => {
             this.show = false;
         });
 
-        this.art.on('destroy', () => {
-            clearTimeout(this.timer);
+        let timer = null;
+        const types = queryAll('[data-video]', $infoPanel);
+
+        art.on('destroy', () => {
+            clearTimeout(timer);
         });
-    }
 
-    readInfo() {
-        const { $video } = this.art.template;
-        this.types.forEach(item => {
-            const value = $video[item.dataset.video];
-            item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
-        });
-    }
-
-    loop() {
-        this.readInfo();
-        this.timer = setTimeout(() => {
-            this.readInfo();
-            this.loop();
-        }, 1000);
-    }
-
-    set show(value) {
-        const { $player } = this.art.template;
-        if (value) {
-            this.state = true;
-            addClass($player, 'art-info-show');
-            clearTimeout(this.timer);
-            this.loop();
-            this.art.emit('info:show');
-        } else {
-            this.state = false;
-            removeClass($player, 'art-info-show');
-            clearTimeout(this.timer);
-            this.art.emit('info:hide');
+        function loop() {
+            types.forEach(item => {
+                const value = $video[item.dataset.video];
+                item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
+            });
+            timer = setTimeout(() => {
+                loop();
+            }, 1000);
         }
-    }
 
-    toggle() {
-        this.show = !this.state;
+        art.on('info:toggle', value => {
+            clearTimeout(timer);
+            if (value) {
+                loop();
+            }
+        });
     }
 }

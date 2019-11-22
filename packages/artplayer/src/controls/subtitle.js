@@ -18,14 +18,14 @@ export default function subtitle(option) {
                 subtitle.toggle();
             });
 
-            art.on('subtitle:show', () => {
-                setStyle($subtitle, 'opacity', '1');
-                tooltip($subtitle, i18n.get('Hide subtitle'));
-            });
-
-            art.on('subtitle:hide', () => {
-                setStyle($subtitle, 'opacity', '0.8');
-                tooltip($subtitle, i18n.get('Show subtitle'));
+            art.on('subtitle:toggle', value => {
+                if (value) {
+                    setStyle($subtitle, 'opacity', '1');
+                    tooltip($subtitle, i18n.get('Hide subtitle'));
+                } else {
+                    setStyle($subtitle, 'opacity', '0.8');
+                    tooltip($subtitle, i18n.get('Show subtitle'));
+                }
             });
         },
     });

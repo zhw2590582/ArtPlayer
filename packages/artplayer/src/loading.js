@@ -1,26 +1,10 @@
-import { append, addClass, removeClass } from './utils';
+import { append } from './utils';
+import Component from './utils/components';
 
-export default class Loading {
+export default class Loading extends Component {
     constructor(art) {
-        this.art = art;
+        super(art);
         const { $loading } = art.template;
         append($loading, art.icons.loading);
-    }
-
-    set show(value) {
-        const { $player } = this.art.template;
-        if (value) {
-            this.state = true;
-            addClass($player, 'art-loading-show');
-            this.art.emit('loading:show');
-        } else {
-            this.state = false;
-            removeClass($player, 'art-loading-show');
-            this.art.emit('loading:hide');
-        }
-    }
-
-    toggle() {
-        this.show = !this.state;
     }
 }

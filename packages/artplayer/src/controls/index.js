@@ -1,4 +1,5 @@
-import { errorHandle, addClass, removeClass } from '../utils';
+import { errorHandle, addClass } from '../utils';
+import Component from '../utils/components';
 import component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -13,128 +14,124 @@ import thumbnails from './thumbnails';
 import screenshot from './screenshot';
 import quality from './quality';
 
-export default class Controls {
+export default class Controls extends Component {
     constructor(art) {
-        this.id = 0;
-        this.art = art;
-        this.art.on('ready', () => {
-            this.init();
-        });
-    }
+        super(art);
 
-    init() {
-        const { option } = this.art;
+        art.on('ready', () => {
+            const { option } = art;
 
-        this.add(
-            progress({
-                name: 'progress',
-                disable: option.isLive,
-                position: 'top',
-                index: 10,
-            }),
-        );
+            this.add(
+                progress({
+                    name: 'progress',
+                    disable: option.isLive,
+                    position: 'top',
+                    index: 10,
+                }),
+            );
 
-        this.add(
-            thumbnails({
-                name: 'thumbnails',
-                disable: !option.thumbnails.url || option.isLive,
-                position: 'top',
-                index: 20,
-            }),
-        );
+            this.add(
+                thumbnails({
+                    name: 'thumbnails',
+                    disable: !option.thumbnails.url || option.isLive,
+                    position: 'top',
+                    index: 20,
+                }),
+            );
 
-        this.add(
-            playAndPause({
-                name: 'playAndPause',
-                disable: false,
-                position: 'left',
-                index: 10,
-            }),
-        );
+            this.add(
+                playAndPause({
+                    name: 'playAndPause',
+                    disable: false,
+                    position: 'left',
+                    index: 10,
+                }),
+            );
 
-        this.add(
-            volume({
-                name: 'volume',
-                disable: false,
-                position: 'left',
-                index: 20,
-            }),
-        );
+            this.add(
+                volume({
+                    name: 'volume',
+                    disable: false,
+                    position: 'left',
+                    index: 20,
+                }),
+            );
 
-        this.add(
-            time({
-                name: 'time',
-                disable: option.isLive,
-                position: 'left',
-                index: 30,
-            }),
-        );
+            this.add(
+                time({
+                    name: 'time',
+                    disable: option.isLive,
+                    position: 'left',
+                    index: 30,
+                }),
+            );
 
-        this.add(
-            quality({
-                name: 'quality',
-                disable: option.quality.length === 0,
-                position: 'right',
-                index: 10,
-            }),
-        );
+            this.add(
+                quality({
+                    name: 'quality',
+                    disable: option.quality.length === 0,
+                    position: 'right',
+                    index: 10,
+                }),
+            );
 
-        this.add(
-            screenshot({
-                name: 'screenshot',
-                disable: !option.screenshot,
-                position: 'right',
-                index: 20,
-            }),
-        );
+            this.add(
+                screenshot({
+                    name: 'screenshot',
+                    disable: !option.screenshot,
+                    position: 'right',
+                    index: 20,
+                }),
+            );
 
-        this.add(
-            subtitle({
-                name: 'subtitle',
-                disable: !option.subtitle.url,
-                position: 'right',
-                index: 30,
-            }),
-        );
+            this.add(
+                subtitle({
+                    name: 'subtitle',
+                    disable: !option.subtitle.url,
+                    position: 'right',
+                    index: 30,
+                }),
+            );
 
-        this.add(
-            setting({
-                name: 'setting',
-                disable: !option.setting,
-                position: 'right',
-                index: 40,
-            }),
-        );
+            this.add(
+                setting({
+                    name: 'setting',
+                    disable: !option.setting,
+                    position: 'right',
+                    index: 40,
+                }),
+            );
 
-        this.add(
-            pip({
-                name: 'pip',
-                disable: !option.pip,
-                position: 'right',
-                index: 50,
-            }),
-        );
+            this.add(
+                pip({
+                    name: 'pip',
+                    disable: !option.pip,
+                    position: 'right',
+                    index: 50,
+                }),
+            );
 
-        this.add(
-            fullscreenWeb({
-                name: 'fullscreenWeb',
-                disable: !option.fullscreenWeb,
-                position: 'right',
-                index: 60,
-            }),
-        );
+            this.add(
+                fullscreenWeb({
+                    name: 'fullscreenWeb',
+                    disable: !option.fullscreenWeb,
+                    position: 'right',
+                    index: 60,
+                }),
+            );
 
-        this.add(
-            fullscreen({
-                name: 'fullscreen',
-                disable: !option.fullscreen,
-                position: 'right',
-                index: 70,
-            }),
-        );
+            this.add(
+                fullscreen({
+                    name: 'fullscreen',
+                    disable: !option.fullscreen,
+                    position: 'right',
+                    index: 70,
+                }),
+            );
 
-        option.controls.forEach(item => {
-            this.add(item);
+            option.controls.forEach(item => {
+                this.add(item);
+            });
         });
     }
 
@@ -167,16 +164,5 @@ export default class Controls {
             addClass(control.$ref, 'art-control-onlyText');
         }
         return control;
-    }
-
-    set show(value) {
-        const { $player } = this.art.template;
-        if (value) {
-            addClass($player, 'art-controls-show');
-            this.art.emit('controls:show');
-        } else {
-            removeClass($player, 'art-controls-show');
-            this.art.emit('controls:hide');
-        }
     }
 }

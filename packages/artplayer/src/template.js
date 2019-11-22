@@ -3,6 +3,7 @@ import { errorHandle, query, addClass } from './utils';
 export default class Template {
     constructor(art) {
         this.art = art;
+        
         if (art.option.container instanceof Element) {
             this.$container = art.option.container;
         } else {
@@ -33,7 +34,7 @@ export default class Template {
 
     initDesktop() {
         this.$container.innerHTML = `
-<div class="art-video-player" style="--theme: ${this.art.option.theme}">
+<div class="art-video-player art-subtitle-show" style="--theme: ${this.art.option.theme}">
   <video class="art-video">
     <track default kind="metadata"></track>
   </video>
@@ -127,9 +128,9 @@ export default class Template {
 
     initMobile() {
         this.$container.innerHTML = `
-          <div class="art-video-player">
-            <video class="art-video"></video>
-          </div>
+<div class="art-video-player">
+  <video class="art-video"></video>
+</div>
         `;
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');

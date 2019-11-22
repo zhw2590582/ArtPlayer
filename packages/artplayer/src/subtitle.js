@@ -1,9 +1,9 @@
-import { setStyles, srtToVtt, vttToBlob, getExt, addClass, removeClass, assToVtt } from './utils';
+import { setStyles, srtToVtt, vttToBlob, getExt, assToVtt } from './utils';
+import Component from './utils/components';
 
-export default class Subtitle {
+export default class Subtitle extends Component {
     constructor(art) {
-        this.art = art;
-        this.state = true;
+        super(art);
 
         const {
             events: { proxy },
@@ -87,22 +87,5 @@ export default class Subtitle {
                 this.art.emit('subtitle:err', err);
                 throw err;
             });
-    }
-
-    set show(value) {
-        const { $player } = this.art.template;
-        if (value) {
-            this.state = true;
-            removeClass($player, 'art-subtitle-hide');
-            this.art.emit('subtitle:show');
-        } else {
-            this.state = false;
-            addClass($player, 'art-subtitle-hide');
-            this.art.emit('subtitle:hide');
-        }
-    }
-
-    toggle() {
-        this.show = !this.state;
     }
 }

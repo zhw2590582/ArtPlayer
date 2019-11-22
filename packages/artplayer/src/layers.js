@@ -1,10 +1,9 @@
-import { addClass, removeClass } from './utils';
 import component from './utils/component';
+import Component from './utils/components';
 
-export default class Layers {
+export default class Layers extends Component {
     constructor(art) {
-        this.id = 0;
-        this.art = art;
+        super(art);
         this.add = this.add.bind(this);
         this.art.on('ready', () => {
             this.art.option.layers.forEach(item => {
@@ -17,22 +16,5 @@ export default class Layers {
         this.id += 1;
         const { $layers } = this.art.template;
         return component(this.art, this, $layers, item, callback, 'layer');
-    }
-
-    set show(value) {
-        const { $player } = this.art.template;
-        if (value) {
-            this.state = true;
-            removeClass($player, 'art-layers-hide');
-            this.art.emit('layers:show');
-        } else {
-            this.state = false;
-            addClass($player, 'art-layers-hide');
-            this.art.emit('layers:hide');
-        }
-    }
-
-    toggle() {
-        this.show = !this.state;
     }
 }

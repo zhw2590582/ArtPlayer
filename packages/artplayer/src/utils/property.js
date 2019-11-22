@@ -4,6 +4,10 @@ export function hasOwnProperty(obj, name) {
     return Object.prototype.hasOwnProperty.call(obj, name);
 }
 
+export function defineProperty(obj, key, prop) {
+    return Object.defineProperty(obj, key, prop);
+}
+
 export function proxyPropertys(target, ...sources) {
     return sources.reduce((result, source) => {
         Object.getOwnPropertyNames(source).forEach(key => {

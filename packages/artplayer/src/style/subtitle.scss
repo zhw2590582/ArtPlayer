@@ -1,5 +1,6 @@
 .art-video-player {
     .art-subtitle {
+        display: none;
         position: absolute;
         z-index: 20;
         bottom: 40px;
@@ -10,15 +11,15 @@
         font-size: 20px;
         pointer-events: none;
         text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
-    
+
         p {
             margin: 5px 0;
         }
     }
 
-    &.art-subtitle-hide {
+    &.art-subtitle-show {
         .art-subtitle {
-            display: none;
+            display: block;
         }
     }
 }
