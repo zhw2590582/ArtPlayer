@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     (global = global || self, global.artplayerPluginPlaylist = factory());
-}(this, function () { 'use strict';
+}(this, (function () { 'use strict';
 
     function artplayerPluginPlaylist(list) {
       return function (art) {
@@ -16,7 +16,7 @@
             _art$template = art.template,
             $player = _art$template.$player,
             $video = _art$template.$video;
-        var $playlist = append($player, "\n            <div class=\"artplayer-playlist\">\n                <div class=\"artplayer-playlist-inner artplayer-backdrop-filter\"></div>\n            </div>\n        ");
+        var $playlist = append($player, "\n            <div class=\"art-playlist\">\n                <div class=\"art-playlist-inner art-backdrop-filter\"></div>\n            </div>\n        ");
         errorHandle(Array.isArray(list), 'Playlist is not an array type');
         errorHandle(list.length > 0, 'Playlist cannot be empty');
         var playlist = list.map(function (item) {
@@ -24,9 +24,9 @@
           errorHandle(item.title, 'Playlist items require title attribute');
           return item;
         });
-        var $playlistInner = $playlist.querySelector('.artplayer-playlist-inner');
+        var $playlistInner = $playlist.querySelector('.art-playlist-inner');
         $playlistInner.innerHTML = playlist.map(function (item, index) {
-          return "<div class=\"artplayer-playlist-item\" data-option-index=\"".concat(index, "\">").concat(item.title, "</div>");
+          return "<div class=\"art-playlist-item\" data-option-index=\"".concat(index, "\">").concat(item.title, "</div>");
         }).join('');
 
         function switchUrl(index) {
@@ -73,7 +73,7 @@
         });
         proxy($playlist, 'click', function (e) {
           if (e.target === $playlist) {
-            $player.classList.remove('artplayer-playlist-show');
+            $player.classList.remove('art-playlist-show');
           }
         });
         art.on('video:ended', function () {
@@ -96,10 +96,10 @@
         return {
           name: 'artplayerPluginPlaylist',
           show: function show() {
-            $player.classList.add('artplayer-playlist-show');
+            $player.classList.add('art-playlist-show');
           },
           hide: function hide() {
-            $player.classList.remove('artplayer-playlist-show');
+            $player.classList.remove('art-playlist-show');
           },
           next: function next() {
             nextVideo();
@@ -113,5 +113,5 @@
 
     return artplayerPluginPlaylist;
 
-}));
+})));
 //# sourceMappingURL=artplayer-plugin-playlist.js.map

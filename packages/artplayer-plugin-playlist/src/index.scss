@@ -1,5 +1,5 @@
-.artplayer-video-player {
-    .artplayer-playlist {
+.art-video-player {
+    .art-playlist {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -14,7 +14,7 @@
         pointer-events: none;
         overflow: hidden;
 
-        .artplayer-playlist-inner {
+        .art-playlist-inner {
             position: absolute;
             top: 0;
             right: -300px;
@@ -26,7 +26,7 @@
             transition: all 0.2s ease-in-out;
             overflow: auto;
 
-            .artplayer-playlist-item {
+            .art-playlist-item {
                 cursor: pointer;
                 border-bottom: 1px solid rgba(255,255,255,.1);
                 padding: 12px 20px 12px 20px;
@@ -42,12 +42,12 @@
         }
     }
 
-    &.artplayer-playlist-show {
-        .artplayer-playlist {
+    &.art-playlist-show {
+        .art-playlist {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            .artplayer-playlist-inner {
+            .art-playlist-inner {
                 right: 0;
             }
         }

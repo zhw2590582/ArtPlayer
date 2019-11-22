@@ -14,8 +14,8 @@ function artplayerPluginPlaylist(list) {
         const $playlist = append(
             $player,
             `
-            <div class="artplayer-playlist">
-                <div class="artplayer-playlist-inner artplayer-backdrop-filter"></div>
+            <div class="art-playlist">
+                <div class="art-playlist-inner art-backdrop-filter"></div>
             </div>
         `,
         );
@@ -28,10 +28,10 @@ function artplayerPluginPlaylist(list) {
             return item;
         });
 
-        const $playlistInner = $playlist.querySelector('.artplayer-playlist-inner');
+        const $playlistInner = $playlist.querySelector('.art-playlist-inner');
         $playlistInner.innerHTML = playlist
             .map((item, index) => {
-                return `<div class="artplayer-playlist-item" data-option-index="${index}">${item.title}</div>`;
+                return `<div class="art-playlist-item" data-option-index="${index}">${item.title}</div>`;
             })
             .join('');
 
@@ -71,7 +71,7 @@ function artplayerPluginPlaylist(list) {
 
         proxy($playlist, 'click', e => {
             if (e.target === $playlist) {
-                $player.classList.remove('artplayer-playlist-show');
+                $player.classList.remove('art-playlist-show');
             }
         });
 
@@ -94,10 +94,10 @@ function artplayerPluginPlaylist(list) {
         return {
             name: 'artplayerPluginPlaylist',
             show() {
-                $player.classList.add('artplayer-playlist-show');
+                $player.classList.add('art-playlist-show');
             },
             hide() {
-                $player.classList.remove('artplayer-playlist-show');
+                $player.classList.remove('art-playlist-show');
             },
             next() {
                 nextVideo();
