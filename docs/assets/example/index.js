@@ -43,12 +43,7 @@ var art = new Artplayer({
         {
             html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
             click: function() {
-                art.destroy(true);
-                art = new Artplayer({
-                    autoplay: true,
-                    container: '.artplayer-app',
-                    url: url + '/video/your-name.mp4',
-                });
+                console.info('You clicked on the custom layer');
             },
             style: {
                 position: 'absolute',
@@ -106,12 +101,10 @@ var art = new Artplayer({
     ],
     controls: [
         {
-            name: 'localVideo',
             position: 'right',
-            html: 'OPEN',
-            tooltip: 'Open Local Video',
-            mounted: $preview => {
-                art.plugins.localVideo.attach($preview);
+            html: 'Custom Control',
+            click: function() {
+                console.info('You clicked on the custom control');
             },
         },
     ],
