@@ -13,16 +13,12 @@ export default function playbackRateMix(art, player) {
         },
         set(rate) {
             if (rate) {
+                if (rate === $player.dataset.playbackRate) return;
                 const rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
                 errorHandle(rateList.includes(rate), `'playbackRate' only accept ${rateList.toString()} as parameters`);
-
-                if (rate === $player.dataset.playbackRate) {
-                    return;
-                }
-
                 $video.playbackRate = rate;
                 $player.dataset.playbackRate = rate;
-                notice.show(`${i18n.get('Rate')}: ${rate === 1.0 ? i18n.get('Normal') : `${rate}x`}`);
+                notice.show = `${i18n.get('Rate')}: ${rate === 1.0 ? i18n.get('Normal') : `${rate}x`}`;
                 art.emit('playbackRateChange', rate);
             } else if (player.playbackRate) {
                 player.playbackRate = 1;

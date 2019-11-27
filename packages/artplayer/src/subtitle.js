@@ -47,7 +47,7 @@ export default class Subtitle extends Component {
         const { i18n, notice } = this.art;
         return this.init(url).then(subUrl => {
             if (name) {
-                notice.show(`${i18n.get('Switch subtitle')}: ${name}`);
+                notice.show = `${i18n.get('Switch subtitle')}: ${name}`;
             }
             this.art.emit('subtitle:switch', subUrl);
             return subUrl;
@@ -85,7 +85,7 @@ export default class Subtitle extends Component {
                 return subUrl;
             })
             .catch(err => {
-                notice.show(err);
+                notice.show = err;
                 this.art.emit('subtitle:err', err);
                 throw err;
             });

@@ -64,14 +64,14 @@ export default function eventInit(art, player) {
             sleep(1000).then(() => {
                 reconnectTime += 1;
                 player.attachUrl(option.url);
-                notice.show(`${i18n.get('Reconnect')}: ${reconnectTime}`);
+                notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
             });
         } else {
             art.loading.show = false;
             art.controls.show = false;
             addClass($player, 'art-error');
             sleep(1000).then(() => {
-                notice.show(i18n.get('Video load failed'), false);
+                notice.show = i18n.get('Video load failed');
                 art.destroy();
             });
         }

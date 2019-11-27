@@ -2,10 +2,10 @@ import { def } from '../utils';
 
 export default function playMix(art, player) {
     const {
-        template: { $video },
         i18n,
         notice,
         option: { mutex },
+        template: { $video },
     } = art;
 
     def(player, 'play', {
@@ -14,7 +14,7 @@ export default function playMix(art, player) {
                 const promise = $video.play();
                 if (promise !== undefined) {
                     promise.then().catch(err => {
-                        notice.show(err, true, 3000);
+                        notice.show = err;
                         throw err;
                     });
                 }
@@ -27,7 +27,7 @@ export default function playMix(art, player) {
                         });
                 }
 
-                notice.show(i18n.get('Play'));
+                notice.show = i18n.get('Play');
                 art.emit('play');
             } else {
                 player.pause = true;

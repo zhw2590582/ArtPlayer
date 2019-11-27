@@ -66,13 +66,13 @@ export default function localSubtitle(art) {
             name: 'localSubtitle',
             index: 40,
             html: `
-<div class="art-setting-header">
-    ${i18n.get('Local Subtitle')}
-</div>
-<div class="art-setting-upload">
-    <div class="art-upload-btn">${i18n.get('Open')}</div>
-    <div class="art-upload-value"></div>
-</div>
+                <div class="art-setting-header">
+                    ${i18n.get('Local Subtitle')}
+                </div>
+                <div class="art-setting-upload">
+                    <div class="art-upload-btn">${i18n.get('Open')}</div>
+                    <div class="art-upload-value"></div>
+                </div>
             `,
             mounted: $setting => {
                 const $btn = query('.art-upload-btn', $setting);

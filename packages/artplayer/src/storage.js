@@ -1,17 +1,15 @@
 export default class Storage {
     constructor(art) {
-        this.art = art;
         this.name = 'artplayer_settings';
-        const { option } = art;
 
         const volume = this.get('volume');
         if (volume) {
-            option.volume = volume;
+            art.option.volume = volume;
         }
     }
 
     get(key) {
-        const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+        const storage = JSON.parse(localStorage.getItem(this.name)) || {};
         return key ? storage[key] : {};
     }
 
@@ -19,16 +17,16 @@ export default class Storage {
         const storage = Object.assign({}, this.get(), {
             [key]: value,
         });
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
     }
 
     del(key) {
         const storage = this.get();
         delete storage[key];
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
     }
 
     clean() {
-        window.localStorage.removeItem(this.name);
+        localStorage.removeItem(this.name);
     }
 }

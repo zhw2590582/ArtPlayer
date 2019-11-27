@@ -15,14 +15,14 @@ function nativePip(art, player) {
         },
         set(value) {
             if (value) {
-                $video.requestPictureInPicture().catch(error => {
-                    notice.show(error);
-                    throw error;
+                $video.requestPictureInPicture().catch(err => {
+                    notice.show = err;
+                    throw err;
                 });
             } else {
-                document.exitPictureInPicture().catch(error => {
-                    notice.show(error);
-                    throw error;
+                document.exitPictureInPicture().catch(err => {
+                    notice.show = err;
+                    throw err;
                 });
             }
         },

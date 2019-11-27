@@ -734,22 +734,22 @@
 
     classCallCheck(this, Whitelist);
 
-    var kindOf = art.constructor.kindOf;
-    var whitelist = art.option.whitelist;
-    this.userAgent = window.navigator.userAgent;
-    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
+    var kindOf = art.constructor.kindOf,
+        whitelist = art.option.whitelist;
+    this.ua = window.navigator.userAgent;
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.ua);
     this.state = !this.isMobile || whitelist.some(function (item) {
       var type = kindOf(item);
 
       switch (type) {
         case 'string':
-          return _this.userAgent.indexOf(item) > -1;
+          return _this.ua.indexOf(item) > -1;
 
         case 'function':
-          return item(_this.userAgent);
+          return item(_this.ua);
 
         case 'regexp':
-          return item.test(_this.userAgent);
+          return item.test(_this.ua);
 
         default:
           return false;
@@ -794,7 +794,7 @@
     }, {
       key: "initDesktop",
       value: function initDesktop() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.2.1</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"art-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner art-backdrop-filter\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info art-backdrop-filter\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.2.4</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus art-backdrop-filter\"></div>\n          </div>\n        ");
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$track = this.query('.art-video track');
@@ -825,7 +825,7 @@
     }, {
       key: "initMobile",
       value: function initMobile() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player\">\n  <video class=\"art-video\"></video>\n</div>\n        ";
+        this.$container.innerHTML = "\n          <div class=\"art-video-player\">\n            <video class=\"art-video\"></video>\n          </div>\n        ";
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
       }
@@ -997,9 +997,6 @@
     def(player, 'url', {
       get: function get() {
         return $video.src;
-      },
-      set: function set() {
-        errorHandle(false, 'You should use this method: art.attachUrl()');
       }
     });
     def(player, 'attachUrl', {
@@ -1114,14 +1111,14 @@
         sleep(1000).then(function () {
           reconnectTime += 1;
           player.attachUrl(option.url);
-          notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
+          notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
         });
       } else {
         art.loading.show = false;
         art.controls.show = false;
         addClass($player, 'art-error');
         sleep(1000).then(function () {
-          notice.show(i18n.get('Video load failed'), false);
+          notice.show = i18n.get('Video load failed');
           art.destroy();
         });
       }
@@ -1171,10 +1168,10 @@
   }
 
   function playMix(art, player) {
-    var $video = art.template.$video,
-        i18n = art.i18n,
+    var i18n = art.i18n,
         notice = art.notice,
-        mutex = art.option.mutex;
+        mutex = art.option.mutex,
+        $video = art.template.$video;
     def(player, 'play', {
       set: function set(value) {
         if (value) {
@@ -1182,7 +1179,7 @@
 
           if (promise !== undefined) {
             promise.then().catch(function (err) {
-              notice.show(err, true, 3000);
+              notice.show = err;
               throw err;
             });
           }
@@ -1195,7 +1192,7 @@
             });
           }
 
-          notice.show(i18n.get('Play'));
+          notice.show = i18n.get('Play');
           art.emit('play');
         } else {
           player.pause = true;
@@ -1215,7 +1212,7 @@
       set: function set(value) {
         if (value) {
           $video.pause();
-          notice.show(i18n.get('Pause'));
+          notice.show = i18n.get('Pause');
           art.emit('pause');
         } else {
           player.play = true;
@@ -1243,7 +1240,7 @@
     def(player, 'seek', {
       set: function set(time) {
         player.currentTime = time;
-        notice.show("".concat(secondToTime(time), " / ").concat(secondToTime(player.duration)));
+        notice.show = "".concat(secondToTime(time), " / ").concat(secondToTime(player.duration));
         art.emit('seek', time);
       }
     });
@@ -1260,7 +1257,7 @@
       },
       set: function set(percentage) {
         $video.volume = clamp(percentage, 0, 1);
-        notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10)));
+        notice.show = "".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10));
 
         if ($video.volume !== 0) {
           storage.set('volume', $video.volume);
@@ -1303,61 +1300,38 @@
     var i18n = art.i18n,
         notice = art.notice,
         option = art.option;
-    def(player, 'switchQuality', {
-      value: function value(url, name) {
-        if (url !== player.url) {
-          URL.revokeObjectURL(player.url);
-          var currentTime = player.currentTime,
-              playing = player.playing;
-          return player.attachUrl(url).then(function () {
-            option.url = url;
-            player.playbackRate = false;
-            player.aspectRatio = false;
-            art.on('ready', function () {
-              player.currentTime = currentTime;
-            });
 
-            if (playing) {
-              player.play = true;
-            }
+    function switchUrl(url, name, currentTime) {
+      if (url === player.url) return Promise.resolve(url);
+      URL.revokeObjectURL(player.url);
+      return player.attachUrl(url).then(function () {
+        option.url = url;
+        player.playbackRate = false;
+        player.aspectRatio = false;
+        art.once('video:canplay', function () {
+          player.currentTime = currentTime;
+        });
 
-            if (name) {
-              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-            }
-
-            art.emit('switch', url);
-          });
+        if (player.playing) {
+          player.play = true;
         }
 
-        return null;
+        if (name) {
+          notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
+        }
+
+        art.emit('switch', url);
+      });
+    }
+
+    def(player, 'switchQuality', {
+      value: function value(url, name) {
+        return switchUrl(url, name, player.currentTime);
       }
     });
     def(player, 'switchUrl', {
       value: function value(url, name) {
-        if (url !== player.url) {
-          URL.revokeObjectURL(player.url);
-          var playing = player.playing;
-          return player.attachUrl(url).then(function () {
-            option.url = url;
-            player.playbackRate = false;
-            player.aspectRatio = false;
-            art.on('ready', function () {
-              player.currentTime = 0;
-            });
-
-            if (playing) {
-              player.play = true;
-            }
-
-            if (name) {
-              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-            }
-
-            art.emit('switch', url);
-          });
-        }
-
-        return null;
+        return switchUrl(url, name, 0);
       }
     });
   }
@@ -1374,16 +1348,12 @@
       },
       set: function set(rate) {
         if (rate) {
+          if (rate === $player.dataset.playbackRate) return;
           var rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
           errorHandle(rateList.includes(rate), "'playbackRate' only accept ".concat(rateList.toString(), " as parameters"));
-
-          if (rate === $player.dataset.playbackRate) {
-            return;
-          }
-
           $video.playbackRate = rate;
           $player.dataset.playbackRate = rate;
-          notice.show("".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x")));
+          notice.show = "".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x"));
           art.emit('playbackRateChange', rate);
         } else if (player.playbackRate) {
           player.playbackRate = 1;
@@ -1447,7 +1417,7 @@
           }
 
           $player.dataset.aspectRatio = ratio;
-          notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio));
+          notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
           art.emit('aspectRatioChange', ratio);
         } else if (player.aspectRatio) {
           setStyle($video, 'width', null);
@@ -1481,9 +1451,9 @@
           canvas.height = $video.videoHeight;
           canvas.getContext('2d').drawImage($video, 0, 0);
           return canvas.toDataURL('image/png');
-        } catch (error) {
-          notice.show(error);
-          throw error;
+        } catch (err) {
+          notice.show = err;
+          throw err;
         }
       }
     });
@@ -1498,9 +1468,9 @@
             canvas.toBlob(function (blob) {
               resolve(URL.createObjectURL(blob));
             });
-          } catch (error) {
-            notice.show(error);
-            reject(error);
+          } catch (err) {
+            notice.show = err;
+            reject(err);
           }
         });
       }
@@ -1707,7 +1677,7 @@
     };
 
     var screenfullError = function screenfullError() {
-      notice.show(i18n.get('Does not support fullscreen'));
+      notice.show = i18n.get('Does not support fullscreen');
     };
 
     if (player.fullscreenIsEnabled) {
@@ -1812,14 +1782,14 @@
       },
       set: function set(value) {
         if (value) {
-          $video.requestPictureInPicture().catch(function (error) {
-            notice.show(error);
-            throw error;
+          $video.requestPictureInPicture().catch(function (err) {
+            notice.show = err;
+            throw err;
           });
         } else {
-          document.exitPictureInPicture().catch(function (error) {
-            notice.show(error);
-            throw error;
+          document.exitPictureInPicture().catch(function (err) {
+            notice.show = err;
+            throw err;
           });
         }
       }
@@ -2158,10 +2128,9 @@
         var _this = this;
 
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        if (!this.$parent || option.disable) return {};
+        if (!this.$parent || option.disable) return;
         this.id += 1;
         var name = option.name || "".concat(this.name).concat(this.id);
-        errorHandle(!has(this, name), "Cannot add a component that already has the same name: ".concat(name));
         var $ref = document.createElement('div');
         $ref.classList.value = "art-".concat(this.name, " art-").concat(this.name, "-").concat(name);
 
@@ -2204,24 +2173,7 @@
           callback($ref, this, this.art);
         }
 
-        def(this, name, {
-          value: {
-            get $ref() {
-              return $ref;
-            },
-
-            set show(value) {
-              if (value) {
-                setStyle($ref, 'display', 'block');
-              } else {
-                setStyle($ref, 'display', 'none');
-              }
-            }
-
-          }
-        });
         this.art.emit("".concat(this.name, ":add"), option);
-        return this[name];
       }
     }, {
       key: "show",
@@ -2229,7 +2181,6 @@
         return hasClass(this.art.template.$player, "art-".concat(this.name, "-show"));
       },
       set: function set(value) {
-        errorHandle(value === false || value === true, 'The show attribute expects a boolean value');
         var $player = this.art.template.$player;
         var className = "art-".concat(this.name, "-show");
 
@@ -2265,7 +2216,7 @@
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function fullscreen(option) {
     return function (art) {
       return _objectSpread({}, option, {
@@ -2294,7 +2245,7 @@
 
   function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function fullscreenWeb(option) {
     return function (art) {
       return _objectSpread$1({}, option, {
@@ -2323,7 +2274,7 @@
 
   function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function pip(option) {
     return function (art) {
       return _objectSpread$2({}, option, {
@@ -2344,7 +2295,7 @@
 
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playAndPause(option) {
     return function (art) {
       return _objectSpread$3({}, option, {
@@ -2393,7 +2344,7 @@
 
   function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function getPosFromEvent(art, event) {
     var $progress = art.template.$progress,
         player = art.player;
@@ -2537,7 +2488,7 @@
 
   function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function subtitle(option) {
     return function (art) {
       return _objectSpread$5({}, option, {
@@ -2567,7 +2518,7 @@
 
   function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function time(option) {
     return function (art) {
       return _objectSpread$6({}, option, {
@@ -2591,7 +2542,7 @@
 
   function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function volume(option) {
     return function (art) {
       return _objectSpread$7({}, option, {
@@ -2673,7 +2624,7 @@
 
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function setting(option) {
     return function (art) {
       return _objectSpread$8({}, option, {
@@ -2703,7 +2654,7 @@
 
   function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function thumbnails(option) {
     return function (art) {
       return _objectSpread$9({}, option, {
@@ -2766,7 +2717,7 @@
 
   function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function screenshot(option) {
     return function (art) {
       return _objectSpread$a({}, option, {
@@ -2787,7 +2738,7 @@
 
   function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function quality(option) {
     return function (art) {
       return _objectSpread$b({}, option, {
@@ -2934,6 +2885,8 @@
     createClass(Control, [{
       key: "add",
       value: function add(getOption, callback) {
+        var _this2 = this;
+
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
         errorHandle(option.position, 'Controls option.position can not be empty');
         var _this$art$template = this.art.template,
@@ -2955,13 +2908,15 @@
             break;
         }
 
-        var control = get(getPrototypeOf(Control.prototype), "add", this).call(this, option, callback);
+        get(getPrototypeOf(Control.prototype), "add", this).call(this, option, function ($ref) {
+          if (!option.disable && option.position !== 'top' && !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+            addClass($ref, 'art-control-onlyText');
+          }
 
-        if (!option.disable && option.position !== 'top' && !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')) {
-          addClass(control.$ref, 'art-control-onlyText');
-        }
-
-        return control;
+          if (callback) {
+            callback($ref, _this2, _this2.art);
+          }
+        });
       }
     }]);
 
@@ -2970,7 +2925,7 @@
 
   function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate(option) {
     return function (art) {
       var i18n = art.i18n,
@@ -3002,7 +2957,7 @@
 
   function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio(option) {
     return function (art) {
       var i18n = art.i18n,
@@ -3034,7 +2989,7 @@
 
   function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function info(option) {
     return function (art) {
@@ -3050,17 +3005,17 @@
 
   function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function version(option) {
     return _objectSpread$f({}, option, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.2.1</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.2.4</a>'
     });
   }
 
   function ownKeys$g(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function close(option) {
     return function (art) {
@@ -3197,7 +3152,7 @@
       function loop() {
         types.forEach(function (item) {
           var value = $video[item.dataset.video];
-          item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
+          item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
         });
         timer = setTimeout(function () {
           loop();
@@ -3264,7 +3219,7 @@
             notice = _this$art.notice;
         return this.init(url).then(function (subUrl) {
           if (name) {
-            notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
+            notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(name);
           }
 
           _this2.art.emit('subtitle:switch', subUrl);
@@ -3307,7 +3262,7 @@
           $track.src = subUrl;
           return subUrl;
         }).catch(function (err) {
-          notice.show(err);
+          notice.show = err;
 
           _this3.art.emit('subtitle:err', err);
 
@@ -3437,7 +3392,7 @@
       this.loadImg = this.loadImg.bind(this);
 
       if (art.whitelist.state) {
-        art.once('video:canplay', function () {
+        art.on('ready', function () {
           clickInit(art, _this);
           hoverInit(art, _this);
           mousemoveInitInit(art, _this);
@@ -3454,16 +3409,19 @@
         var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
         if (Array.isArray(name)) {
-          name.forEach(function (item) {
+          return name.map(function (item) {
             return _this2.proxy(target, item, callback, option);
           });
-          return;
         }
 
         target.addEventListener(name, callback, option);
-        this.destroyEvents.push(function () {
-          target.removeEventListener(name, callback, option);
-        });
+
+        var destroy = function destroy() {
+          return target.removeEventListener(name, callback, option);
+        };
+
+        this.destroyEvents.push(destroy);
+        return destroy;
       }
     }, {
       key: "hover",
@@ -3645,40 +3603,22 @@
       classCallCheck(this, Notice);
 
       this.art = art;
+      this.time = 1000;
       this.timer = null;
     }
 
     createClass(Notice, [{
       key: "show",
-      value: function show(msg) {
-        var _this = this;
-
-        var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-        var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
+      set: function set(msg) {
         var _this$art$template = this.art.template,
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
-        $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
-        clearTimeout(this.timer);
-
-        if (autoHide) {
-          this.timer = setTimeout(function () {
-            _this.hide();
-          }, time);
-        }
-
+        $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
         addClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        var _this$art$template2 = this.art.template,
-            $player = _this$art$template2.$player,
-            $noticeInner = _this$art$template2.$noticeInner;
-        $noticeInner.innerHTML = '';
-        removeClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
+        clearTimeout(this.timer);
+        this.timer = setTimeout(function () {
+          removeClass($player, 'art-notice-show');
+        }, this.time);
       }
     }]);
 
@@ -3763,13 +3703,13 @@
 
   function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function flip(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$h({}, option, {
-        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n    </div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -3794,13 +3734,13 @@
 
   function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$i({}, option, {
-        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"4:3\">4:3</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"16:9\">16:9</button>\n    </div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -3825,14 +3765,14 @@
 
   function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player,
           proxy = art.events.proxy;
       return _objectSpread$j({}, option, {
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n                </div>\n                <div class=\"art-setting-range\">\n                    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $range = query('.art-setting-range input', $setting);
           var $value = query('.art-subtitle-value', $setting);
@@ -3910,39 +3850,37 @@
     function Storage(art) {
       classCallCheck(this, Storage);
 
-      this.art = art;
       this.name = 'artplayer_settings';
-      var option = art.option;
       var volume = this.get('volume');
 
       if (volume) {
-        option.volume = volume;
+        art.option.volume = volume;
       }
     }
 
     createClass(Storage, [{
       key: "get",
       value: function get(key) {
-        var storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+        var storage = JSON.parse(localStorage.getItem(this.name)) || {};
         return key ? storage[key] : {};
       }
     }, {
       key: "set",
       value: function set(key, value) {
         var storage = Object.assign({}, this.get(), defineProperty({}, key, value));
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
       }
     }, {
       key: "del",
       value: function del(key) {
         var storage = this.get();
         delete storage[key];
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
       }
     }, {
       key: "clean",
       value: function clean() {
-        window.localStorage.removeItem(this.name);
+        localStorage.removeItem(this.name);
       }
     }]);
 
@@ -3957,7 +3895,7 @@
       title: 'Subtitle',
       name: 'subtitleOffset',
       index: 20,
-      html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n</div>\n        "),
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
       mounted: function mounted($setting) {
         var $range = query('.art-setting-range input', $setting);
         var $value = query('.art-subtitle-value', $setting);
@@ -4011,10 +3949,10 @@
             cue.startTime = clamp(cuesCache[index].startTime + time, 0, player.duration);
             cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
           });
-          notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
+          notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
           art.emit('subtitleOffset', value);
         } else {
-          notice.show("".concat(i18n.get('No subtitles found')));
+          notice.show = "".concat(i18n.get('No subtitles found'));
           art.emit('subtitleOffset', 0);
         }
       }
@@ -4075,7 +4013,7 @@
         title: 'Local Video',
         name: 'localVideo',
         index: 30,
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Video'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Video'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);
@@ -4164,7 +4102,7 @@
         title: 'Local Subtitle',
         name: 'localSubtitle',
         index: 40,
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Subtitle'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Subtitle'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);
@@ -4467,7 +4405,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.2.1';
+        return '3.2.4';
       }
     }, {
       key: "env",
@@ -4571,7 +4509,7 @@
     value: []
   }); // eslint-disable-next-line no-console
 
-  console.log('%c ArtPlayer %c 3.2.1 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 3.2.4 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

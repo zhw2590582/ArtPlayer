@@ -10,9 +10,6 @@ export default function attachUrlMix(art, player) {
         get() {
             return $video.src;
         },
-        set() {
-            errorHandle(false, 'You should use this method: art.attachUrl()');
-        },
     });
 
     def(player, 'attachUrl', {

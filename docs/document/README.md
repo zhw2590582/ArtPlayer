@@ -1232,14 +1232,39 @@ art.i18n.update({
 console.log(art.i18n.get('Language'));
 ```
 
+## hotkey
+
+| propertie | type       | Description  |
+| --------- | ---------- | ------------ |
+| `add`     | `function` | Add a hotkey |
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+// Add a hotkey
+art.hotkey.add(27, function(event) {
+    console.log('You pressed esc button');
+});
+```
+
+## whitelist
+
+| propertie  | type      | Description           |
+| ---------- | --------- | --------------------- |
+| `ua`       | `string`  | The userAgent         |
+| `isMobile` | `boolean` | Whether mobile access |
+
 ## notice
 
 -   Type: `Object`
 
-| propertie | type       | Description    |
-| --------- | ---------- | -------------- |
-| `show`    | `Function` | Show a message |
-| `hide`    | `Function` | Hide message   |
+| propertie | type     | Description    |
+| --------- | -------- | -------------- |
+| `show`    | `setter` | Show a message |
 
 [Run Code](/Properties.notice)
 
@@ -1251,13 +1276,7 @@ var art = new Artplayer({
 });
 
 // auto hide
-art.notice.show('some message');
-
-// not auto hide
-art.notice.show('some message', false);
-
-// Set hidden delay time
-art.notice.show('some message', true, 1000);
+art.notice.show = 'some message';
 ```
 
 ## events

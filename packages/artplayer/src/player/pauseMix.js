@@ -14,7 +14,7 @@ export default function pauseMin(art, player) {
         set(value) {
             if (value) {
                 $video.pause();
-                notice.show(i18n.get('Pause'));
+                notice.show = i18n.get('Pause');
                 art.emit('pause');
             } else {
                 player.play = true;

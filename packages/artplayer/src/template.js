@@ -34,69 +34,69 @@ export default class Template {
 
     initDesktop() {
         this.$container.innerHTML = `
-<div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${this.art.option.theme}">
-  <video class="art-video">
-    <track default kind="metadata"></track>
-  </video>
-  <div class="art-subtitle"></div>
-  <div class="art-danmuku"></div>
-  <div class="art-layers"></div>
-  <div class="art-mask">
-    <div class="art-state"></div>
-  </div>
-  <div class="art-bottom">
-    <div class="art-progress"></div>
-    <div class="art-controls">
-      <div class="art-controls-left"></div>
-      <div class="art-controls-right"></div>
-    </div>
-  </div>
-  <div class="art-loading"></div>
-  <div class="art-notice">
-    <div class="art-notice-inner"></div>
-  </div>
-  <div class="art-settings">
-    <div class="art-setting-inner art-backdrop-filter">
-      <div class="art-setting-body"></div>
-    </div>
-  </div>
-  <div class="art-info art-backdrop-filter">
-    <div class="art-info-panel">
-      <div class="art-info-item">
-        <div class="art-info-title">Player version:</div>
-        <div class="art-info-content">__VERSION__</div>
-      </div>
-      <div class="art-info-item">
-        <div class="art-info-title">Video url:</div>
-        <div class="art-info-content" data-video="src"></div>
-      </div>
-      <div class="art-info-item">
-        <div class="art-info-title">Video volume:</div>
-        <div class="art-info-content" data-video="volume"></div>
-      </div>
-      <div class="art-info-item">
-        <div class="art-info-title">Video time:</div>
-        <div class="art-info-content" data-video="currentTime"></div>
-      </div>
-      <div class="art-info-item">
-        <div class="art-info-title">Video duration:</div>
-        <div class="art-info-content" data-video="duration"></div>
-      </div>
-      <div class="art-info-item">
-        <div class="art-info-title">Video resolution:</div>
-        <div class="art-info-content">
-          <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
-        </div>
-      </div>
-    </div>
-    <div class="art-info-close">[x]</div>
-  </div>
-  <div class="art-pip-header">
-    <div class="art-pip-title"></div>
-    <div class="art-pip-close">×</div>
-  </div>
-  <div class="art-contextmenus art-backdrop-filter"></div>
-</div>
+          <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${this.art.option.theme}">
+            <video class="art-video">
+              <track default kind="metadata"></track>
+            </video>
+            <div class="art-subtitle"></div>
+            <div class="art-danmuku"></div>
+            <div class="art-layers"></div>
+            <div class="art-mask">
+              <div class="art-state"></div>
+            </div>
+            <div class="art-bottom">
+              <div class="art-progress"></div>
+              <div class="art-controls">
+                <div class="art-controls-left"></div>
+                <div class="art-controls-right"></div>
+              </div>
+            </div>
+            <div class="art-loading"></div>
+            <div class="art-notice">
+              <div class="art-notice-inner"></div>
+            </div>
+            <div class="art-settings">
+              <div class="art-setting-inner art-backdrop-filter">
+                <div class="art-setting-body"></div>
+              </div>
+            </div>
+            <div class="art-info art-backdrop-filter">
+              <div class="art-info-panel">
+                <div class="art-info-item">
+                  <div class="art-info-title">Player version:</div>
+                  <div class="art-info-content">__VERSION__</div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video url:</div>
+                  <div class="art-info-content" data-video="src"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video volume:</div>
+                  <div class="art-info-content" data-video="volume"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video time:</div>
+                  <div class="art-info-content" data-video="currentTime"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video duration:</div>
+                  <div class="art-info-content" data-video="duration"></div>
+                </div>
+                <div class="art-info-item">
+                  <div class="art-info-title">Video resolution:</div>
+                  <div class="art-info-content">
+                    <span data-video="videoWidth"></span> x <span data-video="videoHeight"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="art-info-close">[x]</div>
+            </div>
+            <div class="art-pip-header">
+              <div class="art-pip-title"></div>
+              <div class="art-pip-close">×</div>
+            </div>
+            <div class="art-contextmenus art-backdrop-filter"></div>
+          </div>
         `;
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
@@ -128,9 +128,9 @@ export default class Template {
 
     initMobile() {
         this.$container.innerHTML = `
-<div class="art-video-player">
-  <video class="art-video"></video>
-</div>
+          <div class="art-video-player">
+            <video class="art-video"></video>
+          </div>
         `;
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');

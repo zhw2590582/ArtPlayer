@@ -153,16 +153,18 @@ export default class Control extends Component {
                 break;
         }
 
-        const control = super.add(option, callback);
+        super.add(option, $ref => {
+            if (
+                !option.disable &&
+                option.position !== 'top' &&
+                !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')
+            ) {
+                addClass($ref, 'art-control-onlyText');
+            }
 
-        if (
-            !option.disable &&
-            option.position !== 'top' &&
-            !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')
-        ) {
-            addClass(control.$ref, 'art-control-onlyText');
-        }
-
-        return control;
+            if (callback) {
+                callback($ref, this, this.art);
+            }
+        });
     }
 }
