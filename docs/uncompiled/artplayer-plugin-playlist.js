@@ -31,7 +31,12 @@
 
         function switchUrl(index) {
           var itemOption = playlist[index];
+          var isPlaying = player.playing;
           return player.switchUrl(itemOption.url, itemOption.title).then(function () {
+            if (isPlaying) {
+              player.play = true;
+            }
+
             art.emit('artplayerPluginPlaylist:change', itemOption);
           });
         }

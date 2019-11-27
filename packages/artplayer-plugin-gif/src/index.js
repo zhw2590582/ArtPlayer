@@ -33,19 +33,24 @@ function artplayerPluginGif(art) {
         },
     });
 
-    const layer = layers.add({
-        name: 'artplayer-plugin-gif-progress',
-        style: {
-            position: 'absolute',
-            top: '0',
-            left: '0',
-            height: '3px',
-            width: '0%',
-            'background-color': theme,
+    let $progress = null;
+    layers.add(
+        {
+            name: 'artplayer-plugin-gif-progress',
+            style: {
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                height: '3px',
+                width: '0%',
+                'background-color': theme,
+            },
         },
-    });
+        $ref => {
+            $progress = $ref;
+        },
+    );
 
-    const $progress = layer.$ref;
     const timeLimit = 10000;
     let isProcessing = false;
     let pressStartTime = 0;

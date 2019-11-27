@@ -2878,7 +2878,7 @@
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function artplayerPluginGif(art) {
     var _art$constructor$util = art.constructor.utils,
@@ -2913,7 +2913,8 @@
         'Release the mouse to start': '放開鼠標即可開始'
       }
     });
-    var layer = layers.add({
+    var $progress = null;
+    layers.add({
       name: 'artplayer-plugin-gif-progress',
       style: {
         position: 'absolute',
@@ -2923,8 +2924,9 @@
         width: '0%',
         'background-color': theme
       }
+    }, function ($ref) {
+      $progress = $ref;
     });
-    var $progress = layer.$ref;
     var timeLimit = 10000;
     var isProcessing = false;
     var pressStartTime = 0;
@@ -2948,9 +2950,9 @@
       var pressTime = new Date() - pressStartTime;
 
       if (isProcessing) {
-        notice.show(i18n.get('There is another gif in the processing'));
+        notice.show = i18n.get('There is another gif in the processing');
       } else if (pressTime < 1000) {
-        notice.show(i18n.get('Gif time is too short'));
+        notice.show = i18n.get('Gif time is too short');
       } else {
         var numFrames = Math.floor(clamp(pressTime, 1000, timeLimit) / 100);
         var videoWidth = $video.videoWidth,
@@ -2974,7 +2976,7 @@
           cleanTimer();
           offset = player.currentTime;
           pressStartTime = new Date();
-          notice.show(i18n.get('Long press, gif length is between 1 second and 10 seconds'));
+          notice.show = i18n.get('Long press, gif length is between 1 second and 10 seconds');
 
           (function loop() {
             progressTimer = setTimeout(function () {
@@ -2984,7 +2986,7 @@
                 $progress.style.width = "".concat(width + 1, "%");
                 loop();
               } else {
-                notice.show(i18n.get('Release the mouse to start'));
+                notice.show = i18n.get('Release the mouse to start');
               }
             }, timeLimit / 100);
           })();
@@ -3003,19 +3005,19 @@
         isProcessing = true;
         loading.show = true;
         art.emit('artplayerPluginGif:start');
-        notice.show(i18n.get('Start creating gif...'), false);
+        notice.show = i18n.get('Start creating gif...');
         gifshot.createGIF(_objectSpread({}, config, {
           video: [$video.src],
           crossOrigin: 'anonymous'
         }), function (obj) {
           if (obj.error) {
-            notice.show(obj.errorMsg);
+            notice.show = obj.errorMsg;
             errorHandle(false, obj.errorMsg);
           } else if (typeof callback === 'function') {
             var base64String = obj.image.split(',')[1];
             var blob = b64toBlob(base64String, 'image/gif');
             var blobUrl = URL.createObjectURL(blob);
-            notice.show(i18n.get('Create gif successfully'));
+            notice.show = i18n.get('Create gif successfully');
             art.emit('artplayerPluginGif', blobUrl);
             callback(blobUrl);
           }
