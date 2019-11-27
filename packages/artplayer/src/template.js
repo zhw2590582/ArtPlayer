@@ -3,7 +3,7 @@ import { errorHandle, query, addClass } from './utils';
 export default class Template {
     constructor(art) {
         this.art = art;
-        
+
         if (art.option.container instanceof Element) {
             this.$container = art.option.container;
         } else {
@@ -22,9 +22,9 @@ export default class Template {
         );
 
         if (art.whitelist.state) {
-            this.initDesktop();
+            this.desktop();
         } else {
-            this.initMobile();
+            this.mobile();
         }
     }
 
@@ -32,7 +32,7 @@ export default class Template {
         return query(className, this.$container);
     }
 
-    initDesktop() {
+    desktop() {
         this.$container.innerHTML = `
           <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${this.art.option.theme}">
             <video class="art-video">
@@ -126,7 +126,7 @@ export default class Template {
         this.$contextmenu = this.query('.art-contextmenus');
     }
 
-    initMobile() {
+    mobile() {
         this.$container.innerHTML = `
           <div class="art-video-player">
             <video class="art-video"></video>

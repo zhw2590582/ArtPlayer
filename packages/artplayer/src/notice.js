@@ -13,6 +13,7 @@ export default class Notice {
         addClass($player, 'art-notice-show');
         clearTimeout(this.timer);
         this.timer = setTimeout(() => {
+            $noticeInner.innerText = '';
             removeClass($player, 'art-notice-show');
         }, this.time);
     }
