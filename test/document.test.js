@@ -798,13 +798,7 @@ var art = new Artplayer({
 });
 
 // auto hide
-art.notice.show('some message');
-
-// not auto hide
-art.notice.show('some message', false);
-
-// Set hidden delay time
-art.notice.show('some message', true, 1000);
+art.notice.show = 'some message';
 
     });
         
