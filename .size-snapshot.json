@@ -15,14 +15,14 @@
     "gzipped": 4310
   },
   "packages/artplayer-plugin-gif/dist/artplayer-plugin-gif.js": {
-    "bundled": 98459,
-    "minified": 28832,
-    "gzipped": 10437
+    "bundled": 98490,
+    "minified": 28855,
+    "gzipped": 10441
   },
   "packages/artplayer-plugin-playlist/dist/artplayer-plugin-playlist.js": {
-    "bundled": 4227,
-    "minified": 1927,
-    "gzipped": 843
+    "bundled": 4347,
+    "minified": 1954,
+    "gzipped": 856
   },
   "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js": {
     "bundled": 16311,
