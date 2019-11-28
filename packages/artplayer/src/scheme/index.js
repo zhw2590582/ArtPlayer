@@ -34,7 +34,6 @@ export default {
     miniProgressBar: 'boolean',
     localVideo: 'boolean',
     localSubtitle: 'boolean',
-    autoPip: 'boolean',
     networkMonitor: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],

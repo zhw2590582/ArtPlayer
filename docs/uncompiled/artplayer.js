@@ -656,7 +656,6 @@
     miniProgressBar: 'boolean',
     localVideo: 'boolean',
     localSubtitle: 'boolean',
-    autoPip: 'boolean',
     networkMonitor: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
@@ -997,9 +996,11 @@
         var typeCallback = customType[typeName];
 
         if (typeName && typeCallback) {
-          art.loading.show = true;
-          typeCallback.call(art, $video, url, art);
-          art.emit('customType', typeName);
+          sleep().then(function () {
+            art.loading.show = true;
+            typeCallback.call(art, $video, url, art);
+            art.emit('customType', typeName);
+          });
         } else {
           $video.src = url;
           art.option.url = url;

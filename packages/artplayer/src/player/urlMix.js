@@ -1,4 +1,4 @@
-import { getExt, def } from '../utils';
+import { getExt, def, sleep } from '../utils';
 
 export default function urlMix(art, player) {
     const {
@@ -14,9 +14,11 @@ export default function urlMix(art, player) {
             const typeName = type || getExt(url);
             const typeCallback = customType[typeName];
             if (typeName && typeCallback) {
-                art.loading.show = true;
-                typeCallback.call(art, $video, url, art);
-                art.emit('customType', typeName);
+                sleep().then(() => {
+                    art.loading.show = true;
+                    typeCallback.call(art, $video, url, art);
+                    art.emit('customType', typeName);
+                });
             } else {
                 $video.src = url;
                 art.option.url = url;
