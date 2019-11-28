@@ -2920,7 +2920,7 @@
         position: 'absolute',
         top: '0',
         left: '0',
-        height: '3px',
+        height: '2px',
         width: '0%',
         'background-color': theme
       }
