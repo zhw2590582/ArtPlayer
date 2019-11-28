@@ -9,7 +9,7 @@ function validElement(value, type, paths) {
 
 export default {
     container: validElement,
-    url: 'string|function',
+    url: 'string',
     poster: 'string',
     title: 'string',
     theme: 'string',

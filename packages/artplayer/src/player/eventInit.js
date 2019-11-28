@@ -63,7 +63,7 @@ export default function eventInit(art, player) {
         if (reconnectTime < maxReconnectTime) {
             sleep(1000).then(() => {
                 reconnectTime += 1;
-                player.attachUrl(option.url);
+                player.url = option.url;
                 notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
             });
         } else {

@@ -136,7 +136,10 @@ export default class Control extends Component {
 
     add(getOption, callback) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        errorHandle(option.position, 'Controls option.position can not be empty');
+        errorHandle(
+            ['top', 'left', 'right'].includes(option.position),
+            `Control option.position must one of 'top', 'left', 'right'`,
+        );
         const { $progress, $controlsLeft, $controlsRight } = this.art.template;
 
         switch (option.position) {

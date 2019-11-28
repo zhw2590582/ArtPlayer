@@ -29,17 +29,11 @@ function nativePip(art, player) {
     });
 
     proxy($video, 'enterpictureinpicture', () => {
-        art.emit('pipEnabled');
+        art.emit('pipChange', true);
     });
 
     proxy($video, 'leavepictureinpicture', () => {
-        art.emit('pipExit');
-    });
-
-    art.on('destroy', () => {
-        if (player.pip) {
-            player.pip = false;
-        }
+        art.emit('pipChange', false);
     });
 }
 
@@ -55,10 +49,10 @@ function webkitPip(art, player) {
         set(value) {
             if (value) {
                 $video.webkitSetPresentationMode('picture-in-picture');
-                art.emit('pipEnabled');
+                art.emit('pipChange', true);
             } else {
                 $video.webkitSetPresentationMode('inline');
-                art.emit('pipExit');
+                art.emit('pipChange', false);
             }
         },
     });
@@ -108,7 +102,7 @@ function customPip(art, player) {
 
     append($pipTitle, option.title || i18n.get('Mini player'));
 
-    const property = {
+    def(player, 'pip', {
         get() {
             return hasClass($player, 'art-pip');
         },
@@ -124,8 +118,8 @@ function customPip(art, player) {
                 player.fullscreenWeb = false;
                 player.aspectRatio = false;
                 player.playbackRate = false;
-                art.emit('pipEnabled');
-            } else if (player.pip) {
+                art.emit('pipChange', true);
+            } else {
                 $player.style.cssText = cacheStyle;
                 removeClass($player, 'art-pip');
                 setStyle($player, 'top', null);
@@ -135,12 +129,10 @@ function customPip(art, player) {
                 player.aspectRatio = false;
                 player.playbackRate = false;
                 player.autoSize = true;
-                art.emit('pipExit');
+                art.emit('pipChange', false);
             }
         },
-    };
-
-    def(player, 'pip', property);
+    });
 }
 
 export default function pipMix(art, player) {

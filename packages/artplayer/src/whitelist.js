@@ -9,8 +9,7 @@ export default class Whitelist {
         this.state =
             !this.isMobile ||
             whitelist.some(item => {
-                const type = kindOf(item);
-                switch (type) {
+                switch (kindOf(item)) {
                     case 'string':
                         return this.ua.indexOf(item) > -1;
                     case 'function':

@@ -136,8 +136,8 @@ export default class Template {
         this.$video = this.query('.art-video');
     }
 
-    destroy(removeHtml) {
-        if (removeHtml) {
+    destroy(remove) {
+        if (remove) {
             this.$container.innerHTML = '';
         } else {
             addClass(this.$player, 'art-destroy');

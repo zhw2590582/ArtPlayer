@@ -2,59 +2,28 @@ import screenfull from 'screenfull';
 import { addClass, removeClass, def } from '../utils';
 
 export default function fullscreenMix(art, player) {
-    const {
-        i18n,
-        notice,
-        events: { destroyEvents },
-        template: { $player },
-    } = art;
-
-    const screenfullChange = () => {
-        art.emit('fullscreenChange', screenfull.isFullscreen);
-    };
-
-    const screenfullError = () => {
-        notice.show = i18n.get('Does not support fullscreen');
-    };
-
-    if (player.fullscreenIsEnabled) {
-        screenfull.on('change', screenfullChange);
-        screenfull.on('error', screenfullError);
-        destroyEvents.push(() => {
-            screenfull.off('change', screenfullChange);
-            screenfull.off('error', screenfullError);
-        });
-    }
+    const { $player } = art.template;
 
     def(player, 'fullscreen', {
         get() {
             return screenfull.isFullscreen;
         },
         set(value) {
-            if (!player.fullscreenIsEnabled) {
-                screenfullError();
-                return;
+            if (player.fullscreenWeb) {
+                player.fullscreenWeb = false;
             }
 
             if (value) {
-                if (player.fullscreenWeb) {
-                    player.fullscreenWeb = false;
-                }
-
                 screenfull.request($player).then(() => {
                     addClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
-                    art.emit('fullscreenEnabled');
+                    art.emit('fullscreenChange', true);
                 });
             } else {
-                if (player.fullscreenWeb) {
-                    player.fullscreenWeb = false;
-                }
-
                 screenfull.exit().then(() => {
                     removeClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
-                    art.emit('fullscreenExit');
+                    art.emit('fullscreenChange', false);
                 });
             }
         },
@@ -65,12 +34,6 @@ export default function fullscreenMix(art, player) {
             if (value) {
                 player.fullscreen = !player.fullscreen;
             }
-        },
-    });
-
-    def(player, 'fullscreenIsEnabled', {
-        get() {
-            return screenfull.isEnabled;
         },
     });
 }

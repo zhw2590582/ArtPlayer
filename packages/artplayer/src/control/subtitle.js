@@ -1,8 +1,9 @@
-import { append, tooltip, setStyle } from '../utils';
+import { append, tooltip } from '../utils';
 
 export default function subtitle(option) {
     return art => ({
         ...option,
+        tooltip: art.i18n.get('Hide subtitle'),
         mounted: $control => {
             const {
                 events: { proxy },
@@ -11,21 +12,14 @@ export default function subtitle(option) {
                 subtitle,
             } = art;
 
-            const $subtitle = append($control, icons.subtitle);
-            tooltip($subtitle, i18n.get('Hide subtitle'));
+            append($control, icons.subtitle);
 
             proxy($control, 'click', () => {
-                subtitle.toggle();
+                subtitle.toggle = true;
             });
 
             art.on('subtitle:toggle', value => {
-                if (value) {
-                    setStyle($subtitle, 'opacity', '1');
-                    tooltip($subtitle, i18n.get('Hide subtitle'));
-                } else {
-                    setStyle($subtitle, 'opacity', '0.8');
-                    tooltip($subtitle, i18n.get('Show subtitle'));
-                }
+                tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
             });
         },
     });

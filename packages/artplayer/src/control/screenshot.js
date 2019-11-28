@@ -1,19 +1,18 @@
-import { append, tooltip } from '../utils';
+import { append } from '../utils';
 
 export default function screenshot(option) {
     return art => ({
         ...option,
+        tooltip: art.i18n.get('Screenshot'),
         mounted: $control => {
             const {
                 events: { proxy },
                 icons,
-                i18n,
                 player,
             } = art;
 
-            const $screenshot = append($control, icons.screenshot);
-            tooltip($screenshot, i18n.get('Screenshot'));
-            proxy($screenshot, 'click', () => {
+            append($control, icons.screenshot);
+            proxy($control, 'click', () => {
                 player.screenshot();
             });
         },

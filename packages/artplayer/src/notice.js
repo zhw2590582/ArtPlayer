@@ -3,7 +3,7 @@ import { addClass, removeClass } from './utils';
 export default class Notice {
     constructor(art) {
         this.art = art;
-        this.time = 1000;
+        this.time = 2000;
         this.timer = null;
     }
 

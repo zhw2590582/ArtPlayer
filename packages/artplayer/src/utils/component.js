@@ -23,8 +23,10 @@ export default class Component {
         this.art.emit(`${this.name}:toggle`, value);
     }
 
-    toggle() {
-        this.show = !this.show;
+    set toggle(value) {
+        if (value) {
+            this.show = !this.show;
+        }
     }
 
     add(getOption, callback) {

@@ -1,11 +1,6 @@
 export default class Storage {
-    constructor(art) {
+    constructor() {
         this.name = 'artplayer_settings';
-
-        const volume = this.get('volume');
-        if (volume) {
-            art.option.volume = volume;
-        }
     }
 
     get(key) {

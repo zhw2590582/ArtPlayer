@@ -627,28 +627,6 @@ var art = new Artplayer({
 });
 ```
 
-## autoPip
-
--   Type: `Boolean`
--   Default: `false`
-
-Auto pip mode plugin, when the video is playing and not triggering in the window view
-
-In chrome, you must use gestures on the page to use this feature, otherwise you will get an error.
-
-More info: [picture-in-picture](https://developers.google.com/web/updates/2017/09/picture-in-picture)
-
-[Run Code](/Configuration.autoPip)
-
-```js
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    autoPip: true,
-});
-```
-
 ## networkMonitor
 
 -   Type: `Boolean`
@@ -1587,10 +1565,8 @@ art.on('ready', function(args) {
 | `aspectRatioChange`    | When aspect ratio change                | Aspect ratio        |
 | `aspectRatioRemove`    | When aspect ratio remove                | `undefined`         |
 | `aspectRatioReset`     | When aspect ratio reset                 | `undefined`         |
-| `beforeCustomType`     | Before triggering CustomType            | Type name           |
-| `afterCustomType`      | After triggering CustomType             | Type name           |
-| `beforeAttachUrl`      | Before the video url change             | Video url           |
-| `afterAttachUrl`       | After the video url change              | Video url           |
+| `customType`           | After triggering CustomType             | Type name           |
+| `attachUrl`            | After the video url change              | Video url           |
 | `autoSizeChange`       | When the player auto size change        | Player size         |
 | `autoSizeRemove`       | When the player auto size remove        | `undefined`         |
 | `flipChange`           | When the player flip change             | Flip name           |
