@@ -3805,7 +3805,6 @@
 
   function settingMix(art) {
     var i18n = art.i18n,
-        plugins = art.plugins,
         subtitle = art.subtitle,
         proxy = art.events.proxy;
     return {
@@ -3819,7 +3818,7 @@
         proxy($range, 'change', function () {
           var value = $range.value;
           $value.innerText = value;
-          plugins.subtitleOffset.offset(Number(value));
+          art.plugins.subtitleOffset.offset(Number(value));
         });
         art.on('subtitle:switch', function () {
           $range.value = 0;

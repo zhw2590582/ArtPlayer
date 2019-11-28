@@ -3,7 +3,6 @@ import { query } from '../utils';
 function settingMix(art) {
     const {
         i18n,
-        plugins,
         subtitle,
         events: { proxy },
     } = art;
@@ -26,7 +25,7 @@ function settingMix(art) {
             proxy($range, 'change', () => {
                 const { value } = $range;
                 $value.innerText = value;
-                plugins.subtitleOffset.offset(Number(value));
+                art.plugins.subtitleOffset.offset(Number(value));
             });
 
             art.on('subtitle:switch', () => {
