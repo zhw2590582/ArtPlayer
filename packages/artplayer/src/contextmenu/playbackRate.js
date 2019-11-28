@@ -5,8 +5,7 @@ export default function playbackRate(option) {
         const { i18n, player } = art;
         return {
             ...option,
-            html: `
-                ${i18n.get('Play speed')}:
+            html: `${i18n.get('Play speed')}:
                 <span data-rate="0.5">0.5</span>
                 <span data-rate="0.75">0.75</span>
                 <span data-rate="1.0" class="art-current">${i18n.get('Normal')}</span>
