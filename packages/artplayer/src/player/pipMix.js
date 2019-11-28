@@ -119,7 +119,7 @@ function customPip(art, player) {
                 player.aspectRatio = false;
                 player.playbackRate = false;
                 art.emit('pipChange', true);
-            } else {
+            } else if (player.pip) {
                 $player.style.cssText = cacheStyle;
                 removeClass($player, 'art-pip');
                 setStyle($player, 'top', null);

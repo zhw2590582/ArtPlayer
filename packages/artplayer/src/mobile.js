@@ -9,7 +9,7 @@ export default class Mobile {
             template: { $video },
         } = art;
 
-        config.video.events.forEach(eventName => {
+        config.events.forEach(eventName => {
             proxy($video, eventName, event => {
                 art.emit(`video:${event.type}`, event);
             });

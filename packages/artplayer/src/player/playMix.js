@@ -4,6 +4,7 @@ export default function playMix(art, player) {
     const {
         i18n,
         notice,
+        constructor: { instances },
         option: { mutex },
         template: { $video },
     } = art;
@@ -12,7 +13,7 @@ export default function playMix(art, player) {
         set(value) {
             if (value) {
                 const promise = $video.play();
-                if (promise !== undefined) {
+                if (promise.then) {
                     promise.then().catch(err => {
                         notice.show = err;
                         throw err;
@@ -20,7 +21,7 @@ export default function playMix(art, player) {
                 }
 
                 if (mutex) {
-                    art.constructor.instances
+                    instances
                         .filter(item => item !== art)
                         .forEach(item => {
                             item.player.pause = true;

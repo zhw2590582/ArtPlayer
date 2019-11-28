@@ -17,7 +17,7 @@ export default function eventInit(art, player) {
         player.toggle = true;
     });
 
-    config.video.events.forEach(eventName => {
+    config.events.forEach(eventName => {
         proxy($video, eventName, event => {
             art.emit(`video:${event.type}`, event);
         });
@@ -72,7 +72,7 @@ export default function eventInit(art, player) {
             addClass($player, 'art-error');
             sleep(1000).then(() => {
                 notice.show = i18n.get('Video load failed');
-                art.destroy();
+                art.destroy(false);
             });
         }
     });

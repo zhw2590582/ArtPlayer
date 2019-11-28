@@ -15,15 +15,11 @@ export default function setting(option) {
             append($control, icons.setting);
 
             proxy($control, 'click', () => {
-                setting.toggle();
+                setting.toggle = true;
             });
 
             art.on('setting:toggle', value => {
-                if (value) {
-                    tooltip($control, i18n.get('Hide setting'));
-                } else {
-                    tooltip($control, i18n.get('Show setting'));
-                }
+                tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
             });
         },
     });

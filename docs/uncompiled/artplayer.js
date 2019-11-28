@@ -719,14 +719,10 @@
     customType: 'object'
   };
 
-  var video = {
+  var config = {
     propertys: ['audioTracks', 'autoplay', 'buffered', 'controller', 'controls', 'crossOrigin', 'currentSrc', 'currentTime', 'defaultMuted', 'defaultPlaybackRate', 'duration', 'ended', 'error', 'loop', 'mediaGroup', 'muted', 'networkState', 'paused', 'playbackRate', 'played', 'preload', 'readyState', 'seekable', 'seeking', 'src', 'startDate', 'textTracks', 'videoTracks', 'volume'],
     methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'],
     events: ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']
-  };
-
-  var config = {
-    video: video
   };
 
   var Whitelist = function Whitelist(art) {
@@ -890,7 +886,6 @@
   	"Exit web fullscreen": "退出网页全屏",
   	"Mini player": "迷你播放器",
   	"Exit mini player": "退出迷你播放器",
-  	"Does not support fullscreen": "不支持全屏",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地视频",
   	"Subtitle offset time": "字幕偏移时间",
@@ -946,7 +941,6 @@
   	"Exit web fullscreen": "退出網頁全屏",
   	"Mini player": "迷你播放器",
   	"Exit mini player": "退出迷你播放器",
-  	"Does not support fullscreen": "不支持全屏",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地視頻",
   	"Subtitle offset time": "字幕偏移時間",
@@ -1062,7 +1056,7 @@
     proxy($video, 'click', function () {
       player.toggle = true;
     });
-    config.video.events.forEach(function (eventName) {
+    config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
       });
@@ -1106,7 +1100,7 @@
         addClass($player, 'art-error');
         sleep(1000).then(function () {
           notice.show = i18n.get('Video load failed');
-          art.destroy();
+          art.destroy(false);
         });
       }
     }); // art.on('video:loadeddata', () => {
@@ -1157,6 +1151,7 @@
   function playMix(art, player) {
     var i18n = art.i18n,
         notice = art.notice,
+        instances = art.constructor.instances,
         mutex = art.option.mutex,
         $video = art.template.$video;
     def(player, 'play', {
@@ -1164,7 +1159,7 @@
         if (value) {
           var promise = $video.play();
 
-          if (promise !== undefined) {
+          if (promise.then) {
             promise.then().catch(function (err) {
               notice.show = err;
               throw err;
@@ -1172,7 +1167,7 @@
           }
 
           if (mutex) {
-            art.constructor.instances.filter(function (item) {
+            instances.filter(function (item) {
               return item !== art;
             }).forEach(function (item) {
               item.player.pause = true;
@@ -1822,7 +1817,7 @@
           player.aspectRatio = false;
           player.playbackRate = false;
           art.emit('pipChange', true);
-        } else {
+        } else if (player.pip) {
           $player.style.cssText = cacheStyle;
           removeClass($player, 'art-pip');
           setStyle($player, 'top', null);
@@ -1862,7 +1857,7 @@
     var $video = art.template.$video;
     def(player, 'loaded', {
       get: function get() {
-        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+        return player.loadedTime / $video.duration;
       }
     });
     def(player, 'loadedTime', {
@@ -1872,10 +1867,10 @@
     });
   }
 
-  function seekMix$2(art, player) {
+  function playedMix(art, player) {
     def(player, 'played', {
       get: function get() {
-        return art.template.$video.currentTime / art.template.$video.duration;
+        return player.currentTime / player.duration;
       }
     });
   }
@@ -1962,18 +1957,19 @@
   }
 
   function flipMix(art, player) {
+    var $player = art.template.$player;
     def(player, 'flip', {
       get: function get() {
-        return art.template.$player.dataset.flip;
+        return $player.dataset.flip;
       },
       set: function set(flip) {
         if (flip) {
           var flipList = ['normal', 'horizontal', 'vertical'];
           errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
-          art.template.$player.dataset.flip = flip;
+          $player.dataset.flip = flip;
           art.emit('flipChange', flip);
         } else {
-          delete art.template.$player.dataset.flip;
+          delete $player.dataset.flip;
           art.emit('flipRemove');
         }
       }
@@ -2001,7 +1997,7 @@
     fullscreenWebMix(art, this);
     pipMix(art, this);
     seekMix$1(art, this);
-    seekMix$2(art, this);
+    playedMix(art, this);
     playingMix(art, this);
     resizeMix(art, this);
     rectMix(art, this);
@@ -2564,14 +2560,10 @@
               setting = art.setting;
           append($control, icons.setting);
           proxy($control, 'click', function () {
-            setting.toggle();
+            setting.toggle = true;
           });
           art.on('setting:toggle', function (value) {
-            if (value) {
-              tooltip($control, i18n.get('Hide setting'));
-            } else {
-              tooltip($control, i18n.get('Show setting'));
-            }
+            tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
           });
         }
       });
@@ -2694,7 +2686,7 @@
 
             if (url && name && playIndex !== index) {
               player.switchQuality(url, name);
-              $qualityName.innerHTML = name;
+              $qualityName.innerText = name;
               playIndex = index;
             }
           });
@@ -3138,13 +3130,13 @@
       }
     }, {
       key: "switch",
-      value: function _switch(url, name) {
+      value: function _switch(url, name, ext) {
         var _this2 = this;
 
         var _this$art = this.art,
             i18n = _this$art.i18n,
             notice = _this$art.notice;
-        return this.init(url).then(function (subUrl) {
+        return this.init(url, ext).then(function (subUrl) {
           if (name) {
             notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(name);
           }
@@ -3156,7 +3148,7 @@
       }
     }, {
       key: "init",
-      value: function init(url) {
+      value: function init(url, ext) {
         var _this3 = this;
 
         var _this$art2 = this.art,
@@ -3169,7 +3161,7 @@
         }).then(function (text) {
           _this3.art.emit('subtitle:load', url);
 
-          switch (getExt(url)) {
+          switch (ext || getExt(url)) {
             case 'srt':
               return vttToBlob(srtToVtt(text));
 
@@ -3244,11 +3236,12 @@
     var _art$template = art.template,
         $player = _art$template.$player,
         $video = _art$template.$video,
-        player = art.player;
+        player = art.player,
+        controls = art.controls;
     var autoHide = debounce(function () {
       addClass($player, 'art-hide-cursor');
       removeClass($player, 'art-hover');
-      art.controls.show = false;
+      controls.show = false;
     }, 3000);
     art.on('hoverleave', function () {
       if (player.playing) {
@@ -3258,9 +3251,9 @@
     events.proxy($player, 'mousemove', function (event) {
       autoHide.clearTimeout();
       removeClass($player, 'art-hide-cursor');
-      art.controls.show = true;
+      controls.show = true;
 
-      if (!art.player.pip && player.playing && event.target === $video) {
+      if (!player.pip && player.playing && event.target === $video) {
         autoHide();
       }
 
@@ -3285,14 +3278,14 @@
         playerHeight = player.height;
 
         if (option.autoSize) {
-          if (!art.player.fullscreen && !art.player.fullscreenWeb && !art.player.pip) {
-            art.player.autoSize = true;
+          if (!player.fullscreen && !player.fullscreenWeb && !player.pip) {
+            player.autoSize = true;
           } else {
-            art.player.autoSize = false;
+            player.autoSize = false;
           }
         }
 
-        art.player.aspectRatioReset = true;
+        player.aspectRatioReset = true;
         art.emit('resize', {
           width: player.width,
           height: player.height
@@ -3595,12 +3588,16 @@
 
   var pip$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
+  function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
   var Icons = function Icons(art) {
     var _this = this;
 
     classCallCheck(this, Icons);
 
-    var icons = Object.assign({
+    var icons = _objectSpread$h({
       loading: loading,
       state: state,
       play: play,
@@ -3614,6 +3611,7 @@
       fullscreenWeb: fullscreenWeb$1,
       pip: pip$1
     }, art.option.icons);
+
     Object.keys(icons).forEach(function (key) {
       var icon = document.createElement('i');
       icon.classList.add('art-icon');
@@ -3623,14 +3621,14 @@
     });
   };
 
-  function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function flip(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$h({}, option, {
+      return _objectSpread$i({}, option, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
@@ -3654,14 +3652,14 @@
     };
   }
 
-  function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$i({}, option, {
+      return _objectSpread$j({}, option, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
@@ -3685,15 +3683,15 @@
     };
   }
 
-  function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$k(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$k(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$k(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player,
           proxy = art.events.proxy;
-      return _objectSpread$j({}, option, {
+      return _objectSpread$k({}, option, {
         html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n                </div>\n                <div class=\"art-setting-range\">\n                    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $range = query('.art-setting-range input', $setting);
@@ -3960,38 +3958,9 @@
         var type = getExt(file.name);
 
         if (['ass', 'vtt', 'srt'].includes(type)) {
-          var reader = new FileReader();
-          proxy(reader, 'load', function (event) {
-            var text = event.target.result;
-
-            switch (type) {
-              case 'srt':
-                {
-                  var url = vttToBlob(srtToVtt(text));
-                  subtitle.switch(url, file.name);
-                  break;
-                }
-
-              case 'ass':
-                {
-                  var _url = vttToBlob(assToVtt(text));
-
-                  subtitle.switch(_url, file.name);
-                  break;
-                }
-
-              case 'vtt':
-                {
-                  var _url2 = vttToBlob(text);
-
-                  subtitle.switch(_url2, file.name);
-                  break;
-                }
-            }
-
-            art.emit('localSubtitle', file);
-          });
-          reader.readAsText(file);
+          var url = URL.createObjectURL(file);
+          subtitle.switch(url, file.name, type);
+          art.emit('localSubtitle', file);
         } else {
           errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');
         }
@@ -4197,7 +4166,7 @@
     var option = art.option,
         proxy = art.events.proxy,
         $video = art.template.$video;
-    config.video.events.forEach(function (eventName) {
+    config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
       });

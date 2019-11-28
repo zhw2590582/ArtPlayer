@@ -14,23 +14,21 @@ import pip from './pip.svg';
 
 export default class Icons {
     constructor(art) {
-        const icons = Object.assign(
-            {
-                loading,
-                state,
-                play,
-                pause,
-                volume,
-                volumeClose,
-                subtitle,
-                screenshot,
-                setting,
-                fullscreen,
-                fullscreenWeb,
-                pip,
-            },
-            art.option.icons,
-        );
+        const icons = {
+            loading,
+            state,
+            play,
+            pause,
+            volume,
+            volumeClose,
+            subtitle,
+            screenshot,
+            setting,
+            fullscreen,
+            fullscreenWeb,
+            pip,
+            ...art.option.icons,
+        };
 
         Object.keys(icons).forEach(key => {
             const icon = document.createElement('i');
