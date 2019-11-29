@@ -6,13 +6,14 @@ export default function switchMix(art, player) {
     function switchUrl(url, name, currentTime) {
         if (url === player.url) return;
         URL.revokeObjectURL(player.url);
+        const { playing } = player;
         player.url = url;
         player.playbackRate = false;
         player.aspectRatio = false;
         art.once('video:canplay', () => {
             player.currentTime = currentTime;
         });
-        if (player.playing) {
+        if (playing) {
             player.play = true;
         }
         if (name) {
