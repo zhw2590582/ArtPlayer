@@ -1,6 +1,6 @@
 {
   "name": "artplayer-vue",
-  "version": "3.2.5",
+  "version": "3.2.6",
   "expose": "ArtplayerVue",
   "description": "Vue Component for Artplayer",
   "main": "dist/artplayer-vue.js",
