@@ -112,6 +112,7 @@ class Artplayer extends Emitter {
             hotkey: true,
             pip: false,
             mutex: true,
+            backdrop: true,
             fullscreen: false,
             fullscreenWeb: false,
             subtitleOffset: false,

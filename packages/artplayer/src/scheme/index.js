@@ -28,6 +28,7 @@ export default {
     hotkey: 'boolean',
     pip: 'boolean',
     mutex: 'boolean',
+    backdrop: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
     subtitleOffset: 'boolean',
