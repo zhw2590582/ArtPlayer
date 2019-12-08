@@ -15,31 +15,25 @@ function nativePip(art, player) {
         },
         set(value) {
             if (value) {
-                $video.requestPictureInPicture().catch(error => {
-                    notice.show(error);
-                    throw error;
+                $video.requestPictureInPicture().catch(err => {
+                    notice.show = err;
+                    throw err;
                 });
             } else {
-                document.exitPictureInPicture().catch(error => {
-                    notice.show(error);
-                    throw error;
+                document.exitPictureInPicture().catch(err => {
+                    notice.show = err;
+                    throw err;
                 });
             }
         },
     });
 
     proxy($video, 'enterpictureinpicture', () => {
-        art.emit('pipEnabled');
+        art.emit('pipChange', true);
     });
 
     proxy($video, 'leavepictureinpicture', () => {
-        art.emit('pipExit');
-    });
-
-    art.on('destroy', () => {
-        if (player.pip) {
-            player.pip = false;
-        }
+        art.emit('pipChange', false);
     });
 }
 
@@ -55,10 +49,10 @@ function webkitPip(art, player) {
         set(value) {
             if (value) {
                 $video.webkitSetPresentationMode('picture-in-picture');
-                art.emit('pipEnabled');
+                art.emit('pipChange', true);
             } else {
                 $video.webkitSetPresentationMode('inline');
-                art.emit('pipExit');
+                art.emit('pipChange', false);
             }
         },
     });
@@ -108,7 +102,7 @@ function customPip(art, player) {
 
     append($pipTitle, option.title || i18n.get('Mini player'));
 
-    const property = {
+    def(player, 'pip', {
         get() {
             return hasClass($player, 'art-pip');
         },
@@ -124,7 +118,7 @@ function customPip(art, player) {
                 player.fullscreenWeb = false;
                 player.aspectRatio = false;
                 player.playbackRate = false;
-                art.emit('pipEnabled');
+                art.emit('pipChange', true);
             } else if (player.pip) {
                 $player.style.cssText = cacheStyle;
                 removeClass($player, 'art-pip');
@@ -135,12 +129,10 @@ function customPip(art, player) {
                 player.aspectRatio = false;
                 player.playbackRate = false;
                 player.autoSize = true;
-                art.emit('pipExit');
+                art.emit('pipChange', false);
             }
         },
-    };
-
-    def(player, 'pip', property);
+    });
 }
 
 export default function pipMix(art, player) {

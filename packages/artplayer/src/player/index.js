@@ -1,4 +1,4 @@
-import attachUrlMix from './attachUrlMix';
+import urlMix from './urlMix';
 import attrInit from './attrInit';
 import eventInit from './eventInit';
 import playMix from './playMix';
@@ -25,7 +25,7 @@ import { proxyPropertys } from '../utils';
 
 export default class Player {
     constructor(art) {
-        attachUrlMix(art, this);
+        urlMix(art, this);
         eventInit(art, this);
         attrInit(art, this);
         playMix(art, this);

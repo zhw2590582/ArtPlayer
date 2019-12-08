@@ -33,19 +33,24 @@ function artplayerPluginGif(art) {
         },
     });
 
-    const layer = layers.add({
-        name: 'artplayer-plugin-gif-progress',
-        style: {
-            position: 'absolute',
-            top: '0',
-            left: '0',
-            height: '3px',
-            width: '0%',
-            'background-color': theme,
+    let $progress = null;
+    layers.add(
+        {
+            name: 'artplayer-plugin-gif-progress',
+            style: {
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                height: '2px',
+                width: '0%',
+                'background-color': theme,
+            },
         },
-    });
+        $ref => {
+            $progress = $ref;
+        },
+    );
 
-    const $progress = layer.$ref;
     const timeLimit = 10000;
     let isProcessing = false;
     let pressStartTime = 0;
@@ -69,9 +74,9 @@ function artplayerPluginGif(art) {
         cleanTimer();
         const pressTime = new Date() - pressStartTime;
         if (isProcessing) {
-            notice.show(i18n.get('There is another gif in the processing'));
+            notice.show = i18n.get('There is another gif in the processing');
         } else if (pressTime < 1000) {
-            notice.show(i18n.get('Gif time is too short'));
+            notice.show = i18n.get('Gif time is too short');
         } else {
             const numFrames = Math.floor(clamp(pressTime, 1000, timeLimit) / 100);
             const { videoWidth, videoHeight } = $video;
@@ -97,7 +102,7 @@ function artplayerPluginGif(art) {
                 cleanTimer();
                 offset = player.currentTime;
                 pressStartTime = new Date();
-                notice.show(i18n.get('Long press, gif length is between 1 second and 10 seconds'));
+                notice.show = i18n.get('Long press, gif length is between 1 second and 10 seconds');
                 (function loop() {
                     progressTimer = setTimeout(() => {
                         const width = parseInt($progress.style.width, 10);
@@ -105,7 +110,7 @@ function artplayerPluginGif(art) {
                             $progress.style.width = `${width + 1}%`;
                             loop();
                         } else {
-                            notice.show(i18n.get('Release the mouse to start'));
+                            notice.show = i18n.get('Release the mouse to start');
                         }
                     }, timeLimit / 100);
                 })();
@@ -123,7 +128,7 @@ function artplayerPluginGif(art) {
             isProcessing = true;
             loading.show = true;
             art.emit('artplayerPluginGif:start');
-            notice.show(i18n.get('Start creating gif...'), false);
+            notice.show = i18n.get('Start creating gif...');
             gifshot.createGIF(
                 {
                     ...config,
@@ -132,13 +137,13 @@ function artplayerPluginGif(art) {
                 },
                 obj => {
                     if (obj.error) {
-                        notice.show(obj.errorMsg);
+                        notice.show = obj.errorMsg;
                         errorHandle(false, obj.errorMsg);
                     } else if (typeof callback === 'function') {
                         const base64String = obj.image.split(',')[1];
                         const blob = b64toBlob(base64String, 'image/gif');
                         const blobUrl = URL.createObjectURL(blob);
-                        notice.show(i18n.get('Create gif successfully'));
+                        notice.show = i18n.get('Create gif successfully');
                         art.emit('artplayerPluginGif', blobUrl);
                         callback(blobUrl);
                     }

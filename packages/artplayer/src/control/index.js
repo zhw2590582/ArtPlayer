@@ -136,7 +136,10 @@ export default class Control extends Component {
 
     add(getOption, callback) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        errorHandle(option.position, 'Controls option.position can not be empty');
+        errorHandle(
+            ['top', 'left', 'right'].includes(option.position),
+            `Control option.position must one of 'top', 'left', 'right'`,
+        );
         const { $progress, $controlsLeft, $controlsRight } = this.art.template;
 
         switch (option.position) {
@@ -153,16 +156,18 @@ export default class Control extends Component {
                 break;
         }
 
-        const control = super.add(option, callback);
+        super.add(option, $ref => {
+            if (
+                !option.disable &&
+                option.position !== 'top' &&
+                !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')
+            ) {
+                addClass($ref, 'art-control-onlyText');
+            }
 
-        if (
-            !option.disable &&
-            option.position !== 'top' &&
-            !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')
-        ) {
-            addClass(control.$ref, 'art-control-onlyText');
-        }
-
-        return control;
+            if (callback) {
+                callback($ref, this, this.art);
+            }
+        });
     }
 }

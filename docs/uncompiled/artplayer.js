@@ -631,7 +631,7 @@
 
   var scheme = {
     container: validElement,
-    url: 'string|function',
+    url: 'string',
     poster: 'string',
     title: 'string',
     theme: 'string',
@@ -656,7 +656,6 @@
     miniProgressBar: 'boolean',
     localVideo: 'boolean',
     localSubtitle: 'boolean',
-    autoPip: 'boolean',
     networkMonitor: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
@@ -719,14 +718,10 @@
     customType: 'object'
   };
 
-  var video = {
+  var config = {
     propertys: ['audioTracks', 'autoplay', 'buffered', 'controller', 'controls', 'crossOrigin', 'currentSrc', 'currentTime', 'defaultMuted', 'defaultPlaybackRate', 'duration', 'ended', 'error', 'loop', 'mediaGroup', 'muted', 'networkState', 'paused', 'playbackRate', 'played', 'preload', 'readyState', 'seekable', 'seeking', 'src', 'startDate', 'textTracks', 'videoTracks', 'volume'],
     methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'],
     events: ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']
-  };
-
-  var config = {
-    video: video
   };
 
   var Whitelist = function Whitelist(art) {
@@ -734,22 +729,20 @@
 
     classCallCheck(this, Whitelist);
 
-    var kindOf = art.constructor.kindOf;
-    var whitelist = art.option.whitelist;
-    this.userAgent = window.navigator.userAgent;
-    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
+    var kindOf = art.constructor.kindOf,
+        whitelist = art.option.whitelist;
+    this.ua = navigator.userAgent;
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.ua);
     this.state = !this.isMobile || whitelist.some(function (item) {
-      var type = kindOf(item);
-
-      switch (type) {
+      switch (kindOf(item)) {
         case 'string':
-          return _this.userAgent.indexOf(item) > -1;
+          return _this.ua.indexOf(item) > -1;
 
         case 'function':
-          return item(_this.userAgent);
+          return item(_this.ua);
 
         case 'regexp':
-          return item.test(_this.userAgent);
+          return item.test(_this.ua);
 
         default:
           return false;
@@ -780,9 +773,9 @@
       errorHandle(this.$container.clientWidth && this.$container.clientHeight, 'The width and height of the container cannot be 0');
 
       if (art.whitelist.state) {
-        this.initDesktop();
+        this.desktop();
       } else {
-        this.initMobile();
+        this.mobile();
       }
     }
 
@@ -792,9 +785,9 @@
         return query(className, this.$container);
       }
     }, {
-      key: "initDesktop",
-      value: function initDesktop() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.2.1</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
+      key: "desktop",
+      value: function desktop() {
+        this.$container.innerHTML = "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n            <video class=\"art-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner art-backdrop-filter\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info art-backdrop-filter\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.2.5</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus art-backdrop-filter\"></div>\n          </div>\n        ");
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$track = this.query('.art-video track');
@@ -823,16 +816,16 @@
         this.$contextmenu = this.query('.art-contextmenus');
       }
     }, {
-      key: "initMobile",
-      value: function initMobile() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player\">\n  <video class=\"art-video\"></video>\n</div>\n        ";
+      key: "mobile",
+      value: function mobile() {
+        this.$container.innerHTML = "\n          <div class=\"art-video-player\">\n            <video class=\"art-video\"></video>\n          </div>\n        ";
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
       }
     }, {
       key: "destroy",
-      value: function destroy(removeHtml) {
-        if (removeHtml) {
+      value: function destroy(remove) {
+        if (remove) {
           this.$container.innerHTML = '';
         } else {
           addClass(this.$player, 'art-destroy');
@@ -859,7 +852,6 @@
   var Open = "打开";
   var Fullscreen = "全屏";
   var zhCn = {
-  	"About author": "关于作者",
   	"Video info": "视频统计信息",
   	Close: Close,
   	"Video load failed": "视频加载失败",
@@ -891,7 +883,7 @@
   	"Web fullscreen": "网页全屏",
   	"Exit web fullscreen": "退出网页全屏",
   	"Mini player": "迷你播放器",
-  	"Does not support fullscreen": "不支持全屏",
+  	"Exit mini player": "退出迷你播放器",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地视频",
   	"Subtitle offset time": "字幕偏移时间",
@@ -914,7 +906,6 @@
   var Open$1 = "打開";
   var Fullscreen$1 = "全屏";
   var zhTw = {
-  	"About author": "關於作者",
   	"Video info": "影片統計訊息",
   	Close: Close$1,
   	"Video load failed": "影片載入失敗",
@@ -946,7 +937,7 @@
   	"Web fullscreen": "網頁全屏",
   	"Exit web fullscreen": "退出網頁全屏",
   	"Mini player": "迷你播放器",
-  	"Does not support fullscreen": "不支持全屏",
+  	"Exit mini player": "退出迷你播放器",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地視頻",
   	"Subtitle offset time": "字幕偏移時間",
@@ -989,7 +980,7 @@
     return I18n;
   }();
 
-  function attachUrlMix(art, player) {
+  function urlMix(art, player) {
     var _art$option = art.option,
         type = _art$option.type,
         customType = _art$option.customType,
@@ -998,48 +989,28 @@
       get: function get() {
         return $video.src;
       },
-      set: function set() {
-        errorHandle(false, 'You should use this method: art.attachUrl()');
-      }
-    });
-    def(player, 'attachUrl', {
-      value: function value(url) {
-        return sleep().then(function () {
-          function attachUrl(videoUrl) {
-            var typeName = type || getExt(videoUrl);
-            var typeCallback = customType[typeName];
+      set: function set(url) {
+        var typeName = type || getExt(url);
+        var typeCallback = customType[typeName];
 
-            if (typeName && typeCallback) {
-              art.loading.show = true;
-              art.emit('beforeCustomType', typeName);
-              typeCallback.call(art, $video, videoUrl, art);
-              art.emit('afterCustomType', typeName);
-            } else {
-              art.emit('beforeAttachUrl', videoUrl);
-              $video.src = videoUrl;
-              art.emit('afterAttachUrl', videoUrl);
-            }
-
-            return Promise.resolve(videoUrl);
-          }
-
-          if (typeof url === 'function') {
-            var result = url.call(art);
-            errorHandle(typeof result.then === 'function', 'If url is a function, it needs to return a promise.');
-            return result.then(function (videoUrl) {
-              art.loading.show = true;
-              return attachUrl(videoUrl);
-            });
-          }
-
-          return attachUrl(url);
-        });
+        if (typeName && typeCallback) {
+          sleep().then(function () {
+            art.loading.show = true;
+            typeCallback.call(art, $video, url, art);
+            art.emit('customType', typeName);
+          });
+        } else {
+          $video.src = url;
+          art.option.url = url;
+          art.emit('urlChange', url);
+        }
       }
     });
   }
 
   function attrInit(art, player) {
     var option = art.option,
+        storage = art.storage,
         $video = art.template.$video;
     Object.keys(option.moreVideoAttr).forEach(function (key) {
       $video[key] = option.moreVideoAttr[key];
@@ -1053,6 +1024,12 @@
       $video.volume = clamp(option.volume, 0, 1);
     }
 
+    var volume = storage.get('volume');
+
+    if (volume) {
+      $video.volume = clamp(volume, 0, 1);
+    }
+
     if (option.poster) {
       $video.poster = option.poster;
     }
@@ -1062,7 +1039,7 @@
     }
 
     $video.controls = false;
-    player.attachUrl(option.url);
+    player.url = option.url;
   }
 
   function eventInit(art, player) {
@@ -1078,7 +1055,7 @@
     proxy($video, 'click', function () {
       player.toggle = true;
     });
-    config.video.events.forEach(function (eventName) {
+    config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
       });
@@ -1113,16 +1090,16 @@
       if (reconnectTime < maxReconnectTime) {
         sleep(1000).then(function () {
           reconnectTime += 1;
-          player.attachUrl(option.url);
-          notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
+          player.url = option.url;
+          notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
         });
       } else {
         art.loading.show = false;
         art.controls.show = false;
         addClass($player, 'art-error');
         sleep(1000).then(function () {
-          notice.show(i18n.get('Video load failed'), false);
-          art.destroy();
+          notice.show = i18n.get('Video load failed');
+          art.destroy(false);
         });
       }
     }); // art.on('video:loadeddata', () => {
@@ -1171,31 +1148,32 @@
   }
 
   function playMix(art, player) {
-    var $video = art.template.$video,
-        i18n = art.i18n,
+    var i18n = art.i18n,
         notice = art.notice,
-        mutex = art.option.mutex;
+        instances = art.constructor.instances,
+        mutex = art.option.mutex,
+        $video = art.template.$video;
     def(player, 'play', {
       set: function set(value) {
         if (value) {
           var promise = $video.play();
 
-          if (promise !== undefined) {
+          if (promise.then) {
             promise.then().catch(function (err) {
-              notice.show(err, true, 3000);
+              notice.show = err;
               throw err;
             });
           }
 
           if (mutex) {
-            art.constructor.instances.filter(function (item) {
+            instances.filter(function (item) {
               return item !== art;
             }).forEach(function (item) {
               item.player.pause = true;
             });
           }
 
-          notice.show(i18n.get('Play'));
+          notice.show = i18n.get('Play');
           art.emit('play');
         } else {
           player.pause = true;
@@ -1215,7 +1193,7 @@
       set: function set(value) {
         if (value) {
           $video.pause();
-          notice.show(i18n.get('Pause'));
+          notice.show = i18n.get('Pause');
           art.emit('pause');
         } else {
           player.play = true;
@@ -1243,7 +1221,7 @@
     def(player, 'seek', {
       set: function set(time) {
         player.currentTime = time;
-        notice.show("".concat(secondToTime(time), " / ").concat(secondToTime(player.duration)));
+        notice.show = "".concat(secondToTime(time), " / ").concat(secondToTime(player.duration));
         art.emit('seek', time);
       }
     });
@@ -1260,7 +1238,7 @@
       },
       set: function set(percentage) {
         $video.volume = clamp(percentage, 0, 1);
-        notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10)));
+        notice.show = "".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10));
 
         if ($video.volume !== 0) {
           storage.set('volume', $video.volume);
@@ -1301,63 +1279,38 @@
 
   function switchMix(art, player) {
     var i18n = art.i18n,
-        notice = art.notice,
-        option = art.option;
+        notice = art.notice;
+
+    function switchUrl(url, name, currentTime) {
+      if (url === player.url) return;
+      URL.revokeObjectURL(player.url);
+      var playing = player.playing;
+      player.url = url;
+      player.playbackRate = false;
+      player.aspectRatio = false;
+      art.once('video:canplay', function () {
+        player.currentTime = currentTime;
+      });
+
+      if (playing) {
+        player.play = true;
+      }
+
+      if (name) {
+        notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
+      }
+
+      art.emit('switch', url);
+    }
+
     def(player, 'switchQuality', {
       value: function value(url, name) {
-        if (url !== player.url) {
-          URL.revokeObjectURL(player.url);
-          var currentTime = player.currentTime,
-              playing = player.playing;
-          return player.attachUrl(url).then(function () {
-            option.url = url;
-            player.playbackRate = false;
-            player.aspectRatio = false;
-            art.on('ready', function () {
-              player.currentTime = currentTime;
-            });
-
-            if (playing) {
-              player.play = true;
-            }
-
-            if (name) {
-              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-            }
-
-            art.emit('switch', url);
-          });
-        }
-
-        return null;
+        return switchUrl(url, name, player.currentTime);
       }
     });
     def(player, 'switchUrl', {
       value: function value(url, name) {
-        if (url !== player.url) {
-          URL.revokeObjectURL(player.url);
-          var playing = player.playing;
-          return player.attachUrl(url).then(function () {
-            option.url = url;
-            player.playbackRate = false;
-            player.aspectRatio = false;
-            art.on('ready', function () {
-              player.currentTime = 0;
-            });
-
-            if (playing) {
-              player.play = true;
-            }
-
-            if (name) {
-              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-            }
-
-            art.emit('switch', url);
-          });
-        }
-
-        return null;
+        return switchUrl(url, name, 0);
       }
     });
   }
@@ -1374,16 +1327,12 @@
       },
       set: function set(rate) {
         if (rate) {
+          if (rate === $player.dataset.playbackRate) return;
           var rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
           errorHandle(rateList.includes(rate), "'playbackRate' only accept ".concat(rateList.toString(), " as parameters"));
-
-          if (rate === $player.dataset.playbackRate) {
-            return;
-          }
-
           $video.playbackRate = rate;
           $player.dataset.playbackRate = rate;
-          notice.show("".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x")));
+          notice.show = "".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x"));
           art.emit('playbackRateChange', rate);
         } else if (player.playbackRate) {
           player.playbackRate = 1;
@@ -1447,7 +1396,7 @@
           }
 
           $player.dataset.aspectRatio = ratio;
-          notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio));
+          notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
           art.emit('aspectRatioChange', ratio);
         } else if (player.aspectRatio) {
           setStyle($video, 'width', null);
@@ -1481,9 +1430,9 @@
           canvas.height = $video.videoHeight;
           canvas.getContext('2d').drawImage($video, 0, 0);
           return canvas.toDataURL('image/png');
-        } catch (error) {
-          notice.show(error);
-          throw error;
+        } catch (err) {
+          notice.show = err;
+          throw err;
         }
       }
     });
@@ -1498,9 +1447,9 @@
             canvas.toBlob(function (blob) {
               resolve(URL.createObjectURL(blob));
             });
-          } catch (error) {
-            notice.show(error);
-            reject(error);
+          } catch (err) {
+            notice.show = err;
+            reject(err);
           }
         });
       }
@@ -1697,57 +1646,27 @@
   var screenfull_1 = screenfull.isEnabled;
 
   function fullscreenMix(art, player) {
-    var i18n = art.i18n,
-        notice = art.notice,
-        destroyEvents = art.events.destroyEvents,
-        $player = art.template.$player;
-
-    var screenfullChange = function screenfullChange() {
-      art.emit('fullscreenChange', screenfull.isFullscreen);
-    };
-
-    var screenfullError = function screenfullError() {
-      notice.show(i18n.get('Does not support fullscreen'));
-    };
-
-    if (player.fullscreenIsEnabled) {
-      screenfull.on('change', screenfullChange);
-      screenfull.on('error', screenfullError);
-      destroyEvents.push(function () {
-        screenfull.off('change', screenfullChange);
-        screenfull.off('error', screenfullError);
-      });
-    }
-
+    var $player = art.template.$player;
     def(player, 'fullscreen', {
       get: function get() {
         return screenfull.isFullscreen;
       },
       set: function set(value) {
-        if (!player.fullscreenIsEnabled) {
-          screenfullError();
-          return;
+        if (player.fullscreenWeb) {
+          player.fullscreenWeb = false;
         }
 
         if (value) {
-          if (player.fullscreenWeb) {
-            player.fullscreenWeb = false;
-          }
-
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
-            art.emit('fullscreenEnabled');
+            art.emit('fullscreenChange', true);
           });
         } else {
-          if (player.fullscreenWeb) {
-            player.fullscreenWeb = false;
-          }
-
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
-            art.emit('fullscreenExit');
+            art.emit('fullscreenChange', false);
           });
         }
       }
@@ -1759,11 +1678,6 @@
         }
       }
     });
-    def(player, 'fullscreenIsEnabled', {
-      get: function get() {
-        return screenfull.isEnabled;
-      }
-    });
   }
 
   function fullscreenWebMix(art, player) {
@@ -1773,22 +1687,18 @@
         return hasClass($player, 'art-web-fullscreen');
       },
       set: function set(value) {
-        if (value) {
-          if (player.fullscreen) {
-            player.fullscreen = false;
-          }
+        if (player.fullscreen) {
+          player.fullscreen = false;
+        }
 
+        if (value) {
           addClass($player, 'art-web-fullscreen');
           player.aspectRatioReset = true;
-          art.emit('fullscreenWebEnabled');
+          art.emit('fullscreenWebChange', true);
         } else {
-          if (player.fullscreen) {
-            player.fullscreen = false;
-          }
-
           removeClass($player, 'art-web-fullscreen');
           player.aspectRatioReset = true;
-          art.emit('fullscreenWebExit');
+          art.emit('fullscreenWebChange', false);
         }
       }
     });
@@ -1812,28 +1722,23 @@
       },
       set: function set(value) {
         if (value) {
-          $video.requestPictureInPicture().catch(function (error) {
-            notice.show(error);
-            throw error;
+          $video.requestPictureInPicture().catch(function (err) {
+            notice.show = err;
+            throw err;
           });
         } else {
-          document.exitPictureInPicture().catch(function (error) {
-            notice.show(error);
-            throw error;
+          document.exitPictureInPicture().catch(function (err) {
+            notice.show = err;
+            throw err;
           });
         }
       }
     });
     proxy($video, 'enterpictureinpicture', function () {
-      art.emit('pipEnabled');
+      art.emit('pipChange', true);
     });
     proxy($video, 'leavepictureinpicture', function () {
-      art.emit('pipExit');
-    });
-    art.on('destroy', function () {
-      if (player.pip) {
-        player.pip = false;
-      }
+      art.emit('pipChange', false);
     });
   }
 
@@ -1847,10 +1752,10 @@
       set: function set(value) {
         if (value) {
           $video.webkitSetPresentationMode('picture-in-picture');
-          art.emit('pipEnabled');
+          art.emit('pipChange', true);
         } else {
           $video.webkitSetPresentationMode('inline');
-          art.emit('pipExit');
+          art.emit('pipChange', false);
         }
       }
     });
@@ -1895,7 +1800,7 @@
       removeClass($player, 'art-is-dragging');
     });
     append($pipTitle, option.title || i18n.get('Mini player'));
-    var property = {
+    def(player, 'pip', {
       get: function get() {
         return hasClass($player, 'art-pip');
       },
@@ -1911,7 +1816,7 @@
           player.fullscreenWeb = false;
           player.aspectRatio = false;
           player.playbackRate = false;
-          art.emit('pipEnabled');
+          art.emit('pipChange', true);
         } else if (player.pip) {
           $player.style.cssText = cacheStyle;
           removeClass($player, 'art-pip');
@@ -1922,11 +1827,10 @@
           player.aspectRatio = false;
           player.playbackRate = false;
           player.autoSize = true;
-          art.emit('pipExit');
+          art.emit('pipChange', false);
         }
       }
-    };
-    def(player, 'pip', property);
+    });
   }
 
   function pipMix(art, player) {
@@ -1953,7 +1857,7 @@
     var $video = art.template.$video;
     def(player, 'loaded', {
       get: function get() {
-        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+        return player.loadedTime / $video.duration;
       }
     });
     def(player, 'loadedTime', {
@@ -1963,10 +1867,10 @@
     });
   }
 
-  function seekMix$2(art, player) {
+  function playedMix(art, player) {
     def(player, 'played', {
       get: function get() {
-        return art.template.$video.currentTime / art.template.$video.duration;
+        return player.currentTime / player.duration;
       }
     });
   }
@@ -2053,18 +1957,19 @@
   }
 
   function flipMix(art, player) {
+    var $player = art.template.$player;
     def(player, 'flip', {
       get: function get() {
-        return art.template.$player.dataset.flip;
+        return $player.dataset.flip;
       },
       set: function set(flip) {
         if (flip) {
           var flipList = ['normal', 'horizontal', 'vertical'];
           errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
-          art.template.$player.dataset.flip = flip;
+          $player.dataset.flip = flip;
           art.emit('flipChange', flip);
         } else {
-          delete art.template.$player.dataset.flip;
+          delete $player.dataset.flip;
           art.emit('flipRemove');
         }
       }
@@ -2074,7 +1979,7 @@
   var Player = function Player(art) {
     classCallCheck(this, Player);
 
-    attachUrlMix(art, this);
+    urlMix(art, this);
     eventInit(art, this);
     attrInit(art, this);
     playMix(art, this);
@@ -2092,7 +1997,7 @@
     fullscreenWebMix(art, this);
     pipMix(art, this);
     seekMix$1(art, this);
-    seekMix$2(art, this);
+    playedMix(art, this);
     playingMix(art, this);
     resizeMix(art, this);
     rectMix(art, this);
@@ -2148,20 +2053,14 @@
     }
 
     createClass(Component, [{
-      key: "toggle",
-      value: function toggle() {
-        this.show = !this.show;
-      }
-    }, {
       key: "add",
       value: function add(getOption, callback) {
         var _this = this;
 
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        if (!this.$parent || option.disable) return {};
+        if (!this.$parent || option.disable) return;
         this.id += 1;
         var name = option.name || "".concat(this.name).concat(this.id);
-        errorHandle(!has(this, name), "Cannot add a component that already has the same name: ".concat(name));
         var $ref = document.createElement('div');
         $ref.classList.value = "art-".concat(this.name, " art-").concat(this.name, "-").concat(name);
 
@@ -2204,24 +2103,7 @@
           callback($ref, this, this.art);
         }
 
-        def(this, name, {
-          value: {
-            get $ref() {
-              return $ref;
-            },
-
-            set show(value) {
-              if (value) {
-                setStyle($ref, 'display', 'block');
-              } else {
-                setStyle($ref, 'display', 'none');
-              }
-            }
-
-          }
-        });
         this.art.emit("".concat(this.name, ":add"), option);
-        return this[name];
       }
     }, {
       key: "show",
@@ -2229,7 +2111,6 @@
         return hasClass(this.art.template.$player, "art-".concat(this.name, "-show"));
       },
       set: function set(value) {
-        errorHandle(value === false || value === true, 'The show attribute expects a boolean value');
         var $player = this.art.template.$player;
         var className = "art-".concat(this.name, "-show");
 
@@ -2240,6 +2121,13 @@
         }
 
         this.art.emit("".concat(this.name, ":toggle"), value);
+      }
+    }, {
+      key: "toggle",
+      set: function set(value) {
+        if (value) {
+          this.show = !this.show;
+        }
       }
     }]);
 
@@ -2265,27 +2153,22 @@
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function fullscreen(option) {
     return function (art) {
       return _objectSpread({}, option, {
+        tooltip: art.i18n.get('Fullscreen'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreen = append($control, icons.fullscreen);
-          tooltip($fullscreen, i18n.get('Fullscreen'));
+          append($control, icons.fullscreen);
           proxy($control, 'click', function () {
             player.fullscreenToggle = true;
           });
-          art.on('fullscreenEnabled', function () {
-            setStyle($fullscreen, 'opacity', '0.8');
-            tooltip($fullscreen, i18n.get('Exit fullscreen'));
-          });
-          art.on('fullscreenExit', function () {
-            setStyle($fullscreen, 'opacity', '1');
-            tooltip($fullscreen, i18n.get('Fullscreen'));
+          art.on('fullscreenChange', function (value) {
+            tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
           });
         }
       });
@@ -2294,27 +2177,22 @@
 
   function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function fullscreenWeb(option) {
     return function (art) {
       return _objectSpread$1({}, option, {
+        tooltip: art.i18n.get('Web fullscreen'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreenWeb = append($control, icons.fullscreenWeb);
-          tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
+          append($control, icons.fullscreenWeb);
           proxy($control, 'click', function () {
             player.fullscreenWebToggle = true;
           });
-          art.on('fullscreenWebEnabled', function () {
-            setStyle($fullscreenWeb, 'opacity', '0.8');
-            tooltip($fullscreenWeb, i18n.get('Exit web fullscreen'));
-          });
-          art.on('fullscreenWebExit', function () {
-            setStyle($fullscreenWeb, 'opacity', '1');
-            tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
+          art.on('fullscreenWebChange', function (value) {
+            tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
           });
         }
       });
@@ -2323,19 +2201,22 @@
 
   function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function pip(option) {
     return function (art) {
       return _objectSpread$2({}, option, {
+        tooltip: art.i18n.get('Mini player'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $pip = append($control, icons.pip);
-          tooltip($pip, i18n.get('Mini player'));
+          append($control, icons.pip);
           proxy($control, 'click', function () {
-            player.pip = true;
+            player.pipToggle = true;
+          });
+          art.on('pipChange', function (value) {
+            tooltip($control, i18n.get(value ? 'Exit mini player' : 'Mini player'));
           });
         }
       });
@@ -2344,7 +2225,7 @@
 
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playAndPause(option) {
     return function (art) {
       return _objectSpread$3({}, option, {
@@ -2393,7 +2274,7 @@
 
   function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function getPosFromEvent(art, event) {
     var $progress = art.template.$progress,
         player = art.player;
@@ -2420,7 +2301,7 @@
           proxy = art.events.proxy,
           player = art.player;
       return _objectSpread$4({}, option, {
-        html: "\n<div class=\"art-control-progress-inner\">\n    <div class=\"art-progress-loaded\"></div>\n    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n    <div class=\"art-progress-highlight\"></div>\n    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n    <div class=\"art-progress-tip art-tip\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-control-progress-inner\">\n                    <div class=\"art-progress-loaded\"></div>\n                    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n                    <div class=\"art-progress-highlight\"></div>\n                    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n                    <div class=\"art-progress-tip art-tip\"></div>\n                </div>\n            "),
         mounted: function mounted($control) {
           var isDroging = false;
           var $loaded = query('.art-progress-loaded', $control);
@@ -2537,28 +2418,22 @@
 
   function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function subtitle(option) {
     return function (art) {
       return _objectSpread$5({}, option, {
+        tooltip: art.i18n.get('Hide subtitle'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               subtitle = art.subtitle;
-          var $subtitle = append($control, icons.subtitle);
-          tooltip($subtitle, i18n.get('Hide subtitle'));
+          append($control, icons.subtitle);
           proxy($control, 'click', function () {
-            subtitle.toggle();
+            subtitle.toggle = true;
           });
           art.on('subtitle:toggle', function (value) {
-            if (value) {
-              setStyle($subtitle, 'opacity', '1');
-              tooltip($subtitle, i18n.get('Hide subtitle'));
-            } else {
-              setStyle($subtitle, 'opacity', '0.8');
-              tooltip($subtitle, i18n.get('Show subtitle'));
-            }
+            tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
           });
         }
       });
@@ -2567,7 +2442,7 @@
 
   function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function time(option) {
     return function (art) {
       return _objectSpread$6({}, option, {
@@ -2575,8 +2450,8 @@
           function getTime() {
             var newTime = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
 
-            if (newTime !== $control.innerHTML) {
-              $control.innerHTML = newTime;
+            if (newTime !== $control.innerText) {
+              $control.innerText = newTime;
             }
           }
 
@@ -2591,7 +2466,7 @@
 
   function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function volume(option) {
     return function (art) {
       return _objectSpread$7({}, option, {
@@ -2673,28 +2548,22 @@
 
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function setting(option) {
     return function (art) {
       return _objectSpread$8({}, option, {
+        tooltip: art.i18n.get('Show setting'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               setting = art.setting;
-          var $setting = append($control, icons.setting);
-          tooltip($setting, i18n.get('Show setting'));
+          append($control, icons.setting);
           proxy($control, 'click', function () {
-            setting.toggle();
+            setting.toggle = true;
           });
           art.on('setting:toggle', function (value) {
-            if (value) {
-              setStyle($setting, 'opacity', '0.8');
-              tooltip($setting, i18n.get('Hide setting'));
-            } else {
-              setStyle($setting, 'opacity', '1');
-              tooltip($setting, i18n.get('Show setting'));
-            }
+            tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
           });
         }
       });
@@ -2703,7 +2572,7 @@
 
   function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function thumbnails(option) {
     return function (art) {
       return _objectSpread$9({}, option, {
@@ -2766,18 +2635,17 @@
 
   function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function screenshot(option) {
     return function (art) {
       return _objectSpread$a({}, option, {
+        tooltip: art.i18n.get('Screenshot'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
-              i18n = art.i18n,
               player = art.player;
-          var $screenshot = append($control, icons.screenshot);
-          tooltip($screenshot, i18n.get('Screenshot'));
-          proxy($screenshot, 'click', function () {
+          append($control, icons.screenshot);
+          proxy($control, 'click', function () {
             player.screenshot();
           });
         }
@@ -2787,7 +2655,7 @@
 
   function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function quality(option) {
     return function (art) {
       return _objectSpread$b({}, option, {
@@ -2818,7 +2686,7 @@
 
             if (url && name && playIndex !== index) {
               player.switchQuality(url, name);
-              $qualityName.innerHTML = name;
+              $qualityName.innerText = name;
               playIndex = index;
             }
           });
@@ -2934,8 +2802,10 @@
     createClass(Control, [{
       key: "add",
       value: function add(getOption, callback) {
+        var _this2 = this;
+
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        errorHandle(option.position, 'Controls option.position can not be empty');
+        errorHandle(['top', 'left', 'right'].includes(option.position), "Control option.position must one of 'top', 'left', 'right'");
         var _this$art$template = this.art.template,
             $progress = _this$art$template.$progress,
             $controlsLeft = _this$art$template.$controlsLeft,
@@ -2955,13 +2825,15 @@
             break;
         }
 
-        var control = get(getPrototypeOf(Control.prototype), "add", this).call(this, option, callback);
+        get(getPrototypeOf(Control.prototype), "add", this).call(this, option, function ($ref) {
+          if (!option.disable && option.position !== 'top' && !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+            addClass($ref, 'art-control-onlyText');
+          }
 
-        if (!option.disable && option.position !== 'top' && !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')) {
-          addClass(control.$ref, 'art-control-onlyText');
-        }
-
-        return control;
+          if (callback) {
+            callback($ref, _this2, _this2.art);
+          }
+        });
       }
     }]);
 
@@ -2970,13 +2842,13 @@
 
   function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$c({}, option, {
-        html: "\n".concat(i18n.get('Play speed'), ":\n<span data-rate=\"0.5\">0.5</span>\n<span data-rate=\"0.75\">0.75</span>\n<span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n<span data-rate=\"1.25\">1.25</span>\n<span data-rate=\"1.5\">1.5</span>\n<span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
           var rate = event.target.dataset.rate;
 
@@ -3002,13 +2874,13 @@
 
   function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$d({}, option, {
-        html: "\n".concat(i18n.get('Aspect ratio'), ":\n<span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n<span data-ratio=\"4:3\">4:3</span>\n<span data-ratio=\"16:9\">16:9</span>\n            "),
+        html: "".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
           var ratio = event.target.dataset.ratio;
 
@@ -3034,7 +2906,7 @@
 
   function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function info(option) {
     return function (art) {
@@ -3050,17 +2922,17 @@
 
   function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function version(option) {
     return _objectSpread$f({}, option, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.2.1</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.2.5</a>'
     });
   }
 
   function ownKeys$g(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function close(option) {
     return function (art) {
@@ -3151,8 +3023,10 @@
             menuTop = cHeight - mHeight;
           }
 
-          setStyle($contextmenu, 'left', "".concat(menuLeft, "px"));
-          setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
+          setStyles($contextmenu, {
+            top: "".concat(menuTop, "px"),
+            left: "".concat(menuLeft, "px")
+          });
         });
         proxy($player, 'click', function (event) {
           if (!event.composedPath().includes($contextmenu)) {
@@ -3197,7 +3071,7 @@
       function loop() {
         types.forEach(function (item) {
           var value = $video[item.dataset.video];
-          item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
+          item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
         });
         timer = setTimeout(function () {
           loop();
@@ -3256,15 +3130,15 @@
       }
     }, {
       key: "switch",
-      value: function _switch(url, name) {
+      value: function _switch(url, name, ext) {
         var _this2 = this;
 
         var _this$art = this.art,
             i18n = _this$art.i18n,
             notice = _this$art.notice;
-        return this.init(url).then(function (subUrl) {
+        return this.init(url, ext).then(function (subUrl) {
           if (name) {
-            notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
+            notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(name);
           }
 
           _this2.art.emit('subtitle:switch', subUrl);
@@ -3274,7 +3148,7 @@
       }
     }, {
       key: "init",
-      value: function init(url) {
+      value: function init(url, ext) {
         var _this3 = this;
 
         var _this$art2 = this.art,
@@ -3287,7 +3161,7 @@
         }).then(function (text) {
           _this3.art.emit('subtitle:load', url);
 
-          switch (getExt(url)) {
+          switch (ext || getExt(url)) {
             case 'srt':
               return vttToBlob(srtToVtt(text));
 
@@ -3307,7 +3181,7 @@
           $track.src = subUrl;
           return subUrl;
         }).catch(function (err) {
-          notice.show(err);
+          notice.show = err;
 
           _this3.art.emit('subtitle:err', err);
 
@@ -3362,11 +3236,12 @@
     var _art$template = art.template,
         $player = _art$template.$player,
         $video = _art$template.$video,
-        player = art.player;
+        player = art.player,
+        controls = art.controls;
     var autoHide = debounce(function () {
       addClass($player, 'art-hide-cursor');
       removeClass($player, 'art-hover');
-      art.controls.show = false;
+      controls.show = false;
     }, 3000);
     art.on('hoverleave', function () {
       if (player.playing) {
@@ -3376,9 +3251,9 @@
     events.proxy($player, 'mousemove', function (event) {
       autoHide.clearTimeout();
       removeClass($player, 'art-hide-cursor');
-      art.controls.show = true;
+      controls.show = true;
 
-      if (!art.player.pip && player.playing && event.target === $video) {
+      if (!player.pip && player.playing && event.target === $video) {
         autoHide();
       }
 
@@ -3403,14 +3278,14 @@
         playerHeight = player.height;
 
         if (option.autoSize) {
-          if (!art.player.fullscreen && !art.player.fullscreenWeb && !art.player.pip) {
-            art.player.autoSize = true;
+          if (!player.fullscreen && !player.fullscreenWeb && !player.pip) {
+            player.autoSize = true;
           } else {
-            art.player.autoSize = false;
+            player.autoSize = false;
           }
         }
 
-        art.player.aspectRatioReset = true;
+        player.aspectRatioReset = true;
         art.emit('resize', {
           width: player.width,
           height: player.height
@@ -3437,7 +3312,7 @@
       this.loadImg = this.loadImg.bind(this);
 
       if (art.whitelist.state) {
-        art.once('video:canplay', function () {
+        art.on('ready', function () {
           clickInit(art, _this);
           hoverInit(art, _this);
           mousemoveInitInit(art, _this);
@@ -3454,16 +3329,19 @@
         var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
         if (Array.isArray(name)) {
-          name.forEach(function (item) {
+          return name.map(function (item) {
             return _this2.proxy(target, item, callback, option);
           });
-          return;
         }
 
         target.addEventListener(name, callback, option);
-        this.destroyEvents.push(function () {
-          target.removeEventListener(name, callback, option);
-        });
+
+        var destroy = function destroy() {
+          return target.removeEventListener(name, callback, option);
+        };
+
+        this.destroyEvents.push(destroy);
+        return destroy;
       }
     }, {
       key: "hover",
@@ -3645,40 +3523,23 @@
       classCallCheck(this, Notice);
 
       this.art = art;
+      this.time = 2000;
       this.timer = null;
     }
 
     createClass(Notice, [{
       key: "show",
-      value: function show(msg) {
-        var _this = this;
-
-        var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-        var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
+      set: function set(msg) {
         var _this$art$template = this.art.template,
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
-        $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
-        clearTimeout(this.timer);
-
-        if (autoHide) {
-          this.timer = setTimeout(function () {
-            _this.hide();
-          }, time);
-        }
-
+        $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
         addClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        var _this$art$template2 = this.art.template,
-            $player = _this$art$template2.$player,
-            $noticeInner = _this$art$template2.$noticeInner;
-        $noticeInner.innerHTML = '';
-        removeClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
+        clearTimeout(this.timer);
+        this.timer = setTimeout(function () {
+          $noticeInner.innerText = '';
+          removeClass($player, 'art-notice-show');
+        }, this.time);
       }
     }]);
 
@@ -3727,16 +3588,16 @@
 
   var pip$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
-  var prev = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"m 12,12 h 2 v 12 h -2 z m 3.5,6 8.5,6 V 12 z\"></path>\n</svg>";
+  function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  var next = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z\"></path>\n</svg>";
+  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   var Icons = function Icons(art) {
     var _this = this;
 
     classCallCheck(this, Icons);
 
-    var icons = Object.assign({
+    var icons = _objectSpread$h({
       loading: loading,
       state: state,
       play: play,
@@ -3748,10 +3609,9 @@
       setting: setting$1,
       fullscreen: fullscreen$1,
       fullscreenWeb: fullscreenWeb$1,
-      pip: pip$1,
-      prev: prev,
-      next: next
+      pip: pip$1
     }, art.option.icons);
+
     Object.keys(icons).forEach(function (key) {
       var icon = document.createElement('i');
       icon.classList.add('art-icon');
@@ -3761,15 +3621,15 @@
     });
   };
 
-  function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function flip(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$h({}, option, {
-        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n    </div>\n</div>\n            "),
+      return _objectSpread$i({}, option, {
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -3792,15 +3652,15 @@
     };
   }
 
-  function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$i({}, option, {
-        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"4:3\">4:3</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"16:9\">16:9</button>\n    </div>\n</div>\n            "),
+      return _objectSpread$j({}, option, {
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -3823,16 +3683,16 @@
     };
   }
 
-  function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$k(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$k(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$k(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player,
           proxy = art.events.proxy;
-      return _objectSpread$j({}, option, {
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n</div>\n            "),
+      return _objectSpread$k({}, option, {
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n                </div>\n                <div class=\"art-setting-range\">\n                    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $range = query('.art-setting-range input', $setting);
           var $value = query('.art-subtitle-value', $setting);
@@ -3907,42 +3767,35 @@
   var Storage =
   /*#__PURE__*/
   function () {
-    function Storage(art) {
+    function Storage() {
       classCallCheck(this, Storage);
 
-      this.art = art;
       this.name = 'artplayer_settings';
-      var option = art.option;
-      var volume = this.get('volume');
-
-      if (volume) {
-        option.volume = volume;
-      }
     }
 
     createClass(Storage, [{
       key: "get",
       value: function get(key) {
-        var storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+        var storage = JSON.parse(localStorage.getItem(this.name)) || {};
         return key ? storage[key] : {};
       }
     }, {
       key: "set",
       value: function set(key, value) {
         var storage = Object.assign({}, this.get(), defineProperty({}, key, value));
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
       }
     }, {
       key: "del",
       value: function del(key) {
         var storage = this.get();
         delete storage[key];
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
       }
     }, {
       key: "clean",
       value: function clean() {
-        window.localStorage.removeItem(this.name);
+        localStorage.removeItem(this.name);
       }
     }]);
 
@@ -3957,7 +3810,7 @@
       title: 'Subtitle',
       name: 'subtitleOffset',
       index: 20,
-      html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n</div>\n        "),
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
       mounted: function mounted($setting) {
         var $range = query('.art-setting-range input', $setting);
         var $value = query('.art-subtitle-value', $setting);
@@ -4011,10 +3864,10 @@
             cue.startTime = clamp(cuesCache[index].startTime + time, 0, player.duration);
             cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
           });
-          notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
+          notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
           art.emit('subtitleOffset', value);
         } else {
-          notice.show("".concat(i18n.get('No subtitles found')));
+          notice.show = "".concat(i18n.get('No subtitles found'));
           art.emit('subtitleOffset', 0);
         }
       }
@@ -4075,7 +3928,7 @@
         title: 'Local Video',
         name: 'localVideo',
         index: 30,
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Video'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Video'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);
@@ -4104,38 +3957,9 @@
         var type = getExt(file.name);
 
         if (['ass', 'vtt', 'srt'].includes(type)) {
-          var reader = new FileReader();
-          proxy(reader, 'load', function (event) {
-            var text = event.target.result;
-
-            switch (type) {
-              case 'srt':
-                {
-                  var url = vttToBlob(srtToVtt(text));
-                  subtitle.switch(url, file.name);
-                  break;
-                }
-
-              case 'ass':
-                {
-                  var _url = vttToBlob(assToVtt(text));
-
-                  subtitle.switch(_url, file.name);
-                  break;
-                }
-
-              case 'vtt':
-                {
-                  var _url2 = vttToBlob(text);
-
-                  subtitle.switch(_url2, file.name);
-                  break;
-                }
-            }
-
-            art.emit('localSubtitle', file);
-          });
-          reader.readAsText(file);
+          var url = URL.createObjectURL(file);
+          subtitle.switch(url, file.name, type);
+          art.emit('localSubtitle', file);
         } else {
           errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');
         }
@@ -4164,7 +3988,7 @@
         title: 'Local Subtitle',
         name: 'localSubtitle',
         index: 40,
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Subtitle'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Subtitle'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);
@@ -4271,29 +4095,6 @@
     };
   }
 
-  function autoPip(art) {
-    var events = art.events,
-        player = art.player,
-        template = art.template;
-    var scrollDebounce = debounce(function () {
-      var _template$$player$get = template.$player.getBoundingClientRect(),
-          top = _template$$player$get.top,
-          height = _template$$player$get.height;
-
-      if (top + height <= 0 && !player.pip) {
-        player.pip = true;
-        art.emit('autoPip', true);
-      } else if (player.pip) {
-        player.pip = false;
-        art.emit('autoPip', false);
-      }
-    }, 300);
-    events.proxy(window, 'scroll', scrollDebounce);
-    return {
-      name: 'autoPip'
-    };
-  }
-
   var Plugins =
   /*#__PURE__*/
   function () {
@@ -4324,10 +4125,6 @@
 
       if (option.networkMonitor) {
         this.add(networkMonitor);
-      }
-
-      if (option.autoPip) {
-        this.add(autoPip);
       }
 
       art.option.plugins.forEach(function (plugin) {
@@ -4368,7 +4165,7 @@
     var option = art.option,
         proxy = art.events.proxy,
         $video = art.template.$video;
-    config.video.events.forEach(function (eventName) {
+    config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
       });
@@ -4398,13 +4195,11 @@
     var typeCallback = option.customType[typeName];
 
     if (typeName && typeCallback) {
-      art.emit('beforeCustomType', typeName);
       typeCallback($video, option.url, art);
-      art.emit('afterCustomType', typeName);
+      art.emit('customType', typeName);
     } else {
-      art.emit('beforeAttachUrl', option.url);
       $video.src = option.url;
-      art.emit('afterAttachUrl', $video.src);
+      art.emit('urlChange', $video.src);
     }
   };
 
@@ -4467,7 +4262,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.2.1';
+        return '3.2.5';
       }
     }, {
       key: "env",
@@ -4571,7 +4366,7 @@
     value: []
   }); // eslint-disable-next-line no-console
 
-  console.log('%c ArtPlayer %c 3.2.1 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 3.2.5 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

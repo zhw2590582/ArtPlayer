@@ -2,32 +2,33 @@ import { def } from '../utils';
 
 export default function playMix(art, player) {
     const {
-        template: { $video },
         i18n,
         notice,
+        constructor: { instances },
         option: { mutex },
+        template: { $video },
     } = art;
 
     def(player, 'play', {
         set(value) {
             if (value) {
                 const promise = $video.play();
-                if (promise !== undefined) {
+                if (promise.then) {
                     promise.then().catch(err => {
-                        notice.show(err, true, 3000);
+                        notice.show = err;
                         throw err;
                     });
                 }
 
                 if (mutex) {
-                    art.constructor.instances
+                    instances
                         .filter(item => item !== art)
                         .forEach(item => {
                             item.player.pause = true;
                         });
                 }
 
-                notice.show(i18n.get('Play'));
+                notice.show = i18n.get('Play');
                 art.emit('play');
             } else {
                 player.pause = true;

@@ -19,13 +19,13 @@ export default function resizeInit(art, events) {
             playerWidth = player.width;
             playerHeight = player.height;
             if (option.autoSize) {
-                if (!art.player.fullscreen && !art.player.fullscreenWeb && !art.player.pip) {
-                    art.player.autoSize = true;
+                if (!player.fullscreen && !player.fullscreenWeb && !player.pip) {
+                    player.autoSize = true;
                 } else {
-                    art.player.autoSize = false;
+                    player.autoSize = false;
                 }
             }
-            art.player.aspectRatioReset = true;
+            player.aspectRatioReset = true;
             art.emit('resize', {
                 width: player.width,
                 height: player.height,

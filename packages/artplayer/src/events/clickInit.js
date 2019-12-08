@@ -1,7 +1,5 @@
 export default function clickInit(art, events) {
-    const {
-        template: { $player },
-    } = art;
+    const { $player } = art.template;
     events.proxy(document, ['click', 'contextmenu'], event => {
         if (event.composedPath().indexOf($player) > -1) {
             art.isFocus = true;

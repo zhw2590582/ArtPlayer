@@ -1,4 +1,4 @@
-import { query, append, setStyle, setStyles, errorHandle, getExt, vttToBlob, srtToVtt, assToVtt } from '../utils';
+import { query, append, setStyle, setStyles, errorHandle, getExt } from '../utils';
 
 export default function localSubtitle(art) {
     const {
@@ -12,31 +12,9 @@ export default function localSubtitle(art) {
         if (file) {
             const type = getExt(file.name);
             if (['ass', 'vtt', 'srt'].includes(type)) {
-                const reader = new FileReader();
-                proxy(reader, 'load', event => {
-                    const text = event.target.result;
-                    switch (type) {
-                        case 'srt': {
-                            const url = vttToBlob(srtToVtt(text));
-                            subtitle.switch(url, file.name);
-                            break;
-                        }
-                        case 'ass': {
-                            const url = vttToBlob(assToVtt(text));
-                            subtitle.switch(url, file.name);
-                            break;
-                        }
-                        case 'vtt': {
-                            const url = vttToBlob(text);
-                            subtitle.switch(url, file.name);
-                            break;
-                        }
-                        default:
-                            break;
-                    }
-                    art.emit('localSubtitle', file);
-                });
-                reader.readAsText(file);
+                const url = URL.createObjectURL(file);
+                subtitle.switch(url, file.name, type);
+                art.emit('localSubtitle', file);
             } else {
                 errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');
             }
@@ -66,13 +44,13 @@ export default function localSubtitle(art) {
             name: 'localSubtitle',
             index: 40,
             html: `
-<div class="art-setting-header">
-    ${i18n.get('Local Subtitle')}
-</div>
-<div class="art-setting-upload">
-    <div class="art-upload-btn">${i18n.get('Open')}</div>
-    <div class="art-upload-value"></div>
-</div>
+                <div class="art-setting-header">
+                    ${i18n.get('Local Subtitle')}
+                </div>
+                <div class="art-setting-upload">
+                    <div class="art-upload-btn">${i18n.get('Open')}</div>
+                    <div class="art-upload-value"></div>
+                </div>
             `,
             mounted: $setting => {
                 const $btn = query('.art-upload-btn', $setting);

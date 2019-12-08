@@ -15,9 +15,9 @@ export default function screenshotMix(art, player) {
                 canvas.height = $video.videoHeight;
                 canvas.getContext('2d').drawImage($video, 0, 0);
                 return canvas.toDataURL('image/png');
-            } catch (error) {
-                notice.show(error);
-                throw error;
+            } catch (err) {
+                notice.show = err;
+                throw err;
             }
         },
     });
@@ -33,9 +33,9 @@ export default function screenshotMix(art, player) {
                     canvas.toBlob(blob => {
                         resolve(URL.createObjectURL(blob));
                     });
-                } catch (error) {
-                    notice.show(error);
-                    reject(error);
+                } catch (err) {
+                    notice.show = err;
+                    reject(err);
                 }
             }),
     });

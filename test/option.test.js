@@ -22,11 +22,4 @@ describe('Option', function() {
             });
         }).to.throw(/option.container require \'string\' or \'Element\' type/);
     });
-
-    it('The url can return a promise', function() {
-        new Artplayer({
-            container: '.sample1',
-            url: () => Promise.resolve(url),
-        });
-    });
 });

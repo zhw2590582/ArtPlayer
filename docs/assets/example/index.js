@@ -102,7 +102,7 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: 'Custom Control',
+            html: 'Control',
             click: function() {
                 console.info('You clicked on the custom control');
             },

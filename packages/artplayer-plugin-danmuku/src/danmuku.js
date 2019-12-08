@@ -226,12 +226,12 @@ export default class Danmuku {
     emit(danmu) {
         const { notice, player, i18n } = this.art;
         if (!danmu.text.trim()) {
-            notice.show(i18n.get('Danmu text cannot be empty'));
+            notice.show = i18n.get('Danmu text cannot be empty');
             return;
         }
 
         if (danmu.text.length > this.option.maxlength) {
-            notice.show(`${i18n.get('The length of the danmu does not exceed')} ${this.option.maxlength}`);
+            notice.show = `${i18n.get('The length of the danmu does not exceed')} ${this.option.maxlength}`;
             return;
         }
 

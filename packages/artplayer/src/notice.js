@@ -3,26 +3,18 @@ import { addClass, removeClass } from './utils';
 export default class Notice {
     constructor(art) {
         this.art = art;
+        this.time = 2000;
         this.timer = null;
     }
 
-    show(msg, autoHide = true, time = 1000) {
+    set show(msg) {
         const { $player, $noticeInner } = this.art.template;
-        $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
-        clearTimeout(this.timer);
-        if (autoHide) {
-            this.timer = setTimeout(() => {
-                this.hide();
-            }, time);
-        }
+        $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
         addClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
-    }
-
-    hide() {
-        const { $player, $noticeInner } = this.art.template;
-        $noticeInner.innerHTML = '';
-        removeClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+            $noticeInner.innerText = '';
+            removeClass($player, 'art-notice-show');
+        }, this.time);
     }
 }

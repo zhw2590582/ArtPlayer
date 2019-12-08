@@ -46,6 +46,11 @@
         }
     }
 
+    img {
+        max-width: 100%;
+        vertical-align: top;
+    }
+
     & >>> object {
         display: block;
         position: absolute;

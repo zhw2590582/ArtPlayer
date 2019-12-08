@@ -18,21 +18,21 @@ var art = new Artplayer({
             html: '发送弹幕',
             click: () => {
                 if (window.location.href.includes('code=')) {
-                    art.notice.show('正在登陆中，请稍等！！！');
+                    art.notice.show = '正在登陆中，请稍等！！！';
                 } else if (!danmuku.isLogin) {
                     danmuku.login();
                 } else {
                     var text = prompt('请输入：', '弹幕内容');
                     if (!text || !text.trim()) return;
                     if (text.length >= 20) {
-                        art.notice.show('弹幕字数不能大于20字！！！');
-                        return;    
-                    }
-                    if (danmuku.remaining <= 10) {
-                        art.notice.show('接口请求到达上限，请稍后再试！！！');
+                        art.notice.show = '弹幕字数不能大于20字！！！';
                         return;
                     }
-                    art.notice.show('弹幕发送中...');
+                    if (danmuku.remaining <= 10) {
+                        art.notice.show = '接口请求到达上限，请稍后再试！！！';
+                        return;
+                    }
+                    art.notice.show = '弹幕发送中...';
                     danmuku
                         .send({
                             text: text,
@@ -40,15 +40,16 @@ var art = new Artplayer({
                             color: '#' + Math.floor(Math.random() * 0xffffff).toString(16),
                         })
                         .then(data => {
-                            art.notice.show(`发送弹幕成功: ${danmuku.remaining} / ${danmuku.limit}`);
+                            art.notice.show = `发送弹幕成功: ${danmuku.remaining} / ${danmuku.limit}`;
                             art.plugins.artplayerPluginDanmuku.emit({
                                 ...data,
                                 mode: 'scroll',
                                 time: art.player.currentTime + 0.2,
                                 border: data.color,
                             });
-                        }).catch(() => {
-                            art.notice.show(`发送弹幕失败: ${danmuku.remaining} / ${danmuku.limit}`);
+                        })
+                        .catch(() => {
+                            art.notice.show = `发送弹幕失败: ${danmuku.remaining} / ${danmuku.limit}`;
                         });
                 }
             },

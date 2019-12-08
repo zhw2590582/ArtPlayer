@@ -12,9 +12,6 @@ var art = new Artplayer({
             click: () => {
                 art.plugins.artplayerPluginPlaylist.show();
             },
-            style: {
-                marginRight: '15px',
-            },
         },
         {
             name: 'prev',
@@ -22,9 +19,6 @@ var art = new Artplayer({
             html: 'Prev',
             click: () => {
                 art.plugins.artplayerPluginPlaylist.prev();
-            },
-            style: {
-                marginRight: '15px',
             },
         },
         {

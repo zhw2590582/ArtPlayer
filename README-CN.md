@@ -18,7 +18,7 @@
 -   <b>字幕</b> - 支持 `.VTT`, `.ASS` 和 `.SRT` 格式
 -   <b>自定义</b> - `右键菜单`, `业务图层`, `视频控制器` 和 `设置面板`
 -   <b>控制器</b> - `画质切换`, `字幕切换`, `播放速度`, `长宽比`, `视频翻转`, `全屏`, `画中画`, `截图`, `缩略图`, `自适应尺寸`, `高亮` 和 `热键`...
--   <b>内建</b> - `自动画中画`, `打开本地字幕`, `打开本地`, `迷你进度条`, `网络监测` 和 `字幕时间偏移`
+-   <b>内建</b> - `打开本地字幕`, `打开本地`, `迷你进度条`, `网络监测` 和 `字幕时间偏移`
 -   <b>集成</b> - 容易与其它依赖集成：`flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`...
 -   <b>代码</b> - 纯 `ES6` 和 `SASS`, 高解耦的代码, 清晰的结构, 容易跟踪 `Bug` 和添加新功能
 -   <b>文档</b> - 详尽的接口文档和丰富的代码演示
@@ -27,16 +27,15 @@
 
 ## 生态
 
-| 项目                                                                                                                  | 描述              | 演示                                                                                                                                                |
-| --------------------------------------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [artplayer-plugin-danmuku](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku)     | 弹幕库插件        | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)                                                    |
-| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | GIF 生成插件      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif)                                                            |
-| [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | 背光插件          | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight)                                                |
-| [artplayer-plugin-playlist](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-playlist)   | 播放列表插件      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-playlist.js%0A.%2Funcompiled%2Fartplayer-plugin-playlist.css&example=playlist) |
-| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail)     | 缩略图生成工具    | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail)                                                  |
-| [artplayer-tool-github](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-github)           | Github 弹幕库工具 | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github)         |  |
-| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React 组件        | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                         |
-| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue 组件          | [demo](https://codesandbox.io/s/6z76lm109n)                                                                                                         |
+| 项目                                                                                                                  | 描述              | 演示                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [artplayer-plugin-danmuku](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku)     | 弹幕库插件        | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)                                            |
+| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | GIF 生成插件      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif)                                                    |
+| [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | 背光插件          | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight)                                        |
+| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail)     | 缩略图生成工具    | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail)                                          |
+| [artplayer-tool-github](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-github)           | Github 弹幕库工具 | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github) |  |
+| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React 组件        | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                 |
+| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue 组件          | [demo](https://codesandbox.io/s/6z76lm109n)                                                                                                 |
 
 ## 演示
 

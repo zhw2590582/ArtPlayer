@@ -28,7 +28,7 @@ export default function quality(option) {
                 const { url, name } = quality[index];
                 if (url && name && playIndex !== index) {
                     player.switchQuality(url, name);
-                    $qualityName.innerHTML = name;
+                    $qualityName.innerText = name;
                     playIndex = index;
                 }
             });

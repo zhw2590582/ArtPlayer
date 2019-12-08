@@ -1,6 +1,4 @@
-import { hasClass, addClass, removeClass, append, setStyle, setStyles, tooltip } from './dom';
-import { has, def } from './property';
-import { errorHandle } from './error';
+import { hasClass, addClass, removeClass, append, setStyles, tooltip } from './dom';
 
 export default class Component {
     constructor(art) {
@@ -15,7 +13,6 @@ export default class Component {
     }
 
     set show(value) {
-        errorHandle(value === false || value === true, 'The show attribute expects a boolean value');
         const { $player } = this.art.template;
         const className = `art-${this.name}-show`;
         if (value) {
@@ -26,16 +23,17 @@ export default class Component {
         this.art.emit(`${this.name}:toggle`, value);
     }
 
-    toggle() {
-        this.show = !this.show;
+    set toggle(value) {
+        if (value) {
+            this.show = !this.show;
+        }
     }
 
     add(getOption, callback) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        if (!this.$parent || option.disable) return {};
+        if (!this.$parent || option.disable) return;
         this.id += 1;
         const name = option.name || `${this.name}${this.id}`;
-        errorHandle(!has(this, name), `Cannot add a component that already has the same name: ${name}`);
         const $ref = document.createElement('div');
         $ref.classList.value = `art-${this.name} art-${this.name}-${name}`;
 
@@ -75,22 +73,6 @@ export default class Component {
             callback($ref, this, this.art);
         }
 
-        def(this, name, {
-            value: {
-                get $ref() {
-                    return $ref;
-                },
-                set show(value) {
-                    if (value) {
-                        setStyle($ref, 'display', 'block');
-                    } else {
-                        setStyle($ref, 'display', 'none');
-                    }
-                },
-            },
-        });
-
         this.art.emit(`${this.name}:add`, option);
-        return this[name];
     }
 }

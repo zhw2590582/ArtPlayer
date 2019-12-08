@@ -1,8 +1,9 @@
-import { append, tooltip, setStyle } from '../utils';
+import { append, tooltip } from '../utils';
 
 export default function fullscreen(option) {
     return art => ({
         ...option,
+        tooltip: art.i18n.get('Fullscreen'),
         mounted: $control => {
             const {
                 events: { proxy },
@@ -11,21 +12,14 @@ export default function fullscreen(option) {
                 player,
             } = art;
 
-            const $fullscreen = append($control, icons.fullscreen);
-            tooltip($fullscreen, i18n.get('Fullscreen'));
+            append($control, icons.fullscreen);
 
             proxy($control, 'click', () => {
                 player.fullscreenToggle = true;
             });
 
-            art.on('fullscreenEnabled', () => {
-                setStyle($fullscreen, 'opacity', '0.8');
-                tooltip($fullscreen, i18n.get('Exit fullscreen'));
-            });
-
-            art.on('fullscreenExit', () => {
-                setStyle($fullscreen, 'opacity', '1');
-                tooltip($fullscreen, i18n.get('Fullscreen'));
+            art.on('fullscreenChange', value => {
+                tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
             });
         },
     });

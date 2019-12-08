@@ -17,7 +17,7 @@ export default function eventInit(art, player) {
         player.toggle = true;
     });
 
-    config.video.events.forEach(eventName => {
+    config.events.forEach(eventName => {
         proxy($video, eventName, event => {
             art.emit(`video:${event.type}`, event);
         });
@@ -63,16 +63,16 @@ export default function eventInit(art, player) {
         if (reconnectTime < maxReconnectTime) {
             sleep(1000).then(() => {
                 reconnectTime += 1;
-                player.attachUrl(option.url);
-                notice.show(`${i18n.get('Reconnect')}: ${reconnectTime}`);
+                player.url = option.url;
+                notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
             });
         } else {
             art.loading.show = false;
             art.controls.show = false;
             addClass($player, 'art-error');
             sleep(1000).then(() => {
-                notice.show(i18n.get('Video load failed'), false);
-                art.destroy();
+                notice.show = i18n.get('Video load failed');
+                art.destroy(false);
             });
         }
     });

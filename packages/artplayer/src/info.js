@@ -24,7 +24,7 @@ export default class Info extends Component {
         function loop() {
             types.forEach(item => {
                 const value = $video[item.dataset.video];
-                item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
+                item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
             });
             timer = setTimeout(() => {
                 loop();

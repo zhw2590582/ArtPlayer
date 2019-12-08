@@ -1,4 +1,4 @@
-import { setStyle } from '../utils';
+import { setStyles } from '../utils';
 import Component from '../utils/component';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
@@ -82,8 +82,10 @@ export default class Contextmenu extends Component {
                     menuTop = cHeight - mHeight;
                 }
 
-                setStyle($contextmenu, 'left', `${menuLeft}px`);
-                setStyle($contextmenu, 'top', `${menuTop}px`);
+                setStyles($contextmenu, {
+                    top: `${menuTop}px`,
+                    left: `${menuLeft}px`,
+                });
             });
 
             proxy($player, 'click', event => {

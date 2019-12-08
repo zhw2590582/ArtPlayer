@@ -1,9 +1,7 @@
 import { setStyle, addClass, removeClass, hasClass, def } from '../utils';
 
 export default function resizeMix(art, player) {
-    const {
-        template: { $container, $player, $video },
-    } = art;
+    const { $container, $player, $video } = art.template;
 
     def(player, 'autoSize', {
         get() {

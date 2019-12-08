@@ -9,7 +9,7 @@ export default class Mobile {
             template: { $video },
         } = art;
 
-        config.video.events.forEach(eventName => {
+        config.events.forEach(eventName => {
             proxy($video, eventName, event => {
                 art.emit(`video:${event.type}`, event);
             });
@@ -40,13 +40,11 @@ export default class Mobile {
         const typeName = option.type || getExt(option.url);
         const typeCallback = option.customType[typeName];
         if (typeName && typeCallback) {
-            art.emit('beforeCustomType', typeName);
             typeCallback($video, option.url, art);
-            art.emit('afterCustomType', typeName);
+            art.emit('customType', typeName);
         } else {
-            art.emit('beforeAttachUrl', option.url);
             $video.src = option.url;
-            art.emit('afterAttachUrl', $video.src);
+            art.emit('urlChange', $video.src);
         }
     }
 }

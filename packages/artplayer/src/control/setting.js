@@ -1,8 +1,9 @@
-import { append, tooltip, setStyle } from '../utils';
+import { append, tooltip } from '../utils';
 
 export default function setting(option) {
     return art => ({
         ...option,
+        tooltip: art.i18n.get('Show setting'),
         mounted: $control => {
             const {
                 events: { proxy },
@@ -11,21 +12,14 @@ export default function setting(option) {
                 setting,
             } = art;
 
-            const $setting = append($control, icons.setting);
-            tooltip($setting, i18n.get('Show setting'));
+            append($control, icons.setting);
 
             proxy($control, 'click', () => {
-                setting.toggle();
+                setting.toggle = true;
             });
 
             art.on('setting:toggle', value => {
-                if (value) {
-                    setStyle($setting, 'opacity', '0.8');
-                    tooltip($setting, i18n.get('Hide setting'));
-                } else {
-                    setStyle($setting, 'opacity', '1');
-                    tooltip($setting, i18n.get('Show setting'));
-                }
+                tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
             });
         },
     });

@@ -1,5 +1,4 @@
 {
-    "About author": "關於作者",
     "Video info": "影片統計訊息",
     "Close": "關閉",
     "Video load failed": "影片載入失敗",
@@ -31,7 +30,7 @@
     "Web fullscreen": "網頁全屏",
     "Exit web fullscreen": "退出網頁全屏",
     "Mini player": "迷你播放器",
-    "Does not support fullscreen": "不支持全屏",
+    "Exit mini player": "退出迷你播放器",
     "Local Subtitle": "本地字幕",
     "Local Video": "本地視頻",
     "Subtitle offset time": "字幕偏移時間",

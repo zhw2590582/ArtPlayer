@@ -1,6 +1,6 @@
 import './style';
 import validator from 'option-validator';
-import Emitter from './emitter';
+import Emitter from './utils/emitter';
 import * as utils from './utils';
 import scheme from './scheme';
 import config from './config';

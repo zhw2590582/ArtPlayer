@@ -300,6 +300,7 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     playbackRate: true,
+    setting: true,
 });
 ```
 
@@ -318,6 +319,7 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     aspectRatio: true,
+    setting: true,
 });
 ```
 
@@ -507,8 +509,6 @@ var art = new Artplayer({
         fullscreen: '',
         fullscreenWeb: '',
         pip: '',
-        prev: '',
-        next: '',
     },
 });
 ```
@@ -624,28 +624,6 @@ var art = new Artplayer({
             },
         },
     ],
-});
-```
-
-## autoPip
-
--   Type: `Boolean`
--   Default: `false`
-
-Auto pip mode plugin, when the video is playing and not triggering in the window view
-
-In chrome, you must use gestures on the page to use this feature, otherwise you will get an error.
-
-More info: [picture-in-picture](https://developers.google.com/web/updates/2017/09/picture-in-picture)
-
-[Run Code](/Configuration.autoPip)
-
-```js
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    autoPip: true,
 });
 ```
 
@@ -880,28 +858,6 @@ var art = new Artplayer({
 });
 ```
 
-Or you can add it dynamically after instantiation:
-
-[Run Code](/Configuration.layers)
-
-```js
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.layers.add({
-    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
-    style: {
-        position: 'absolute',
-        top: '20px',
-        right: '20px',
-        opacity: '.9',
-    },
-});
-```
-
 ## contextmenu
 
 -   Type: `Array`
@@ -936,26 +892,6 @@ var art = new Artplayer({
             },
         },
     ],
-});
-```
-
-Or you can add it dynamically after instantiation:
-
-[Run Code](/Configuration.contextmenu)
-
-```js
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.contextmenu.add({
-    html: 'Custom menu',
-    click: function(contextmenu) {
-        console.info('You clicked on the custom menu');
-        contextmenu.show = false;
-    },
 });
 ```
 
@@ -1000,29 +936,6 @@ var art = new Artplayer({
 });
 ```
 
-Or you can add it dynamically after instantiation:
-
-[Run Code](/Configuration.controls)
-
-```js
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.controls.add({
-    name: 'myController',
-    position: 'right',
-    index: 10,
-    html: 'myController',
-    tooltip: 'This is my controller',
-    click: function() {
-        console.log('myController');
-    },
-});
-```
-
 ## plugins
 
 -   Type: `Array`
@@ -1057,43 +970,16 @@ var art = new Artplayer({
 art.plugins.myPlugin.doSomething();
 ```
 
-Or you can add it dynamically after instantiation:
-
-[Run Code](/Configuration.plugins)
-
-```js
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.plugins.add(function myPlugin(art) {
-    // Do something you like here.
-    // You can also return an object for external calls.
-    console.info('myPlugin running...');
-    return {
-        // This exposes plugin properties or methods for others to use. Like:
-        something: 'something',
-        doSomething: function() {
-            console.info('Do something here...');
-        },
-    };
-});
-
-// Call plugin from the outside
-art.plugins.myPlugin.something === 'something';
-art.plugins.myPlugin.doSomething();
-```
-
 # Instance properties
 
 ## Instance
 
-| propertie | type       | Description                                      |
-| --------- | ---------- | ------------------------------------------------ |
-| `isFocus` | `Boolean`  | Return to focus state                            |
-| `destroy` | `Function` | Destroy instance, will not remove dom by default |
+| propertie   | type       | Description                                      |
+| ----------- | ---------- | ------------------------------------------------ |
+| `isFocus`   | `Boolean`  | Return the focus state                           |
+| `isDestroy` | `Boolean`  | Return the destroy state                         |
+| `option`    | `Object`   | Return the merge option                          |
+| `destroy`   | `Function` | Destroy instance, will not remove dom by default |
 
 [Run Code](/Properties.instance)
 
@@ -1105,7 +991,8 @@ var art = new Artplayer({
 });
 
 console.log('isFocus', art.isFocus);
-console.log('isPlaying', art.isPlaying);
+console.log('isDestroy', art.isDestroy);
+console.log('option', art.option);
 
 setTimeout(function() {
     // remove dom
@@ -1132,7 +1019,7 @@ art.seek === art.player.seek;
 | --------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
 | `aspectRatio`         | `String`   | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9` and `false`       |
 | `aspectRatioReset`    | `Boolean`  | Recalculate the aspect ratio                                                                      |
-| `attachUrl`           | `Function` | Replace play address                                                                              |
+| `url`                 | `String`   | `Getter` and `Setter` of the video url                                                            |
 | `autoSize`            | `Boolean`  | Set auto size                                                                                     |
 | `currentTime`         | `Number`   | `Getter` and `Setter` of the current time                                                         |
 | `duration`            | `Number`   | `Getter` of the duration                                                                          |
@@ -1152,7 +1039,7 @@ art.seek === art.player.seek;
 | `play`                | `Boolean`  | Start playback                                                                                    |
 | `screenshot`          | `Function` | Download a screenshot of current time                                                             |
 | `seek`                | `Number`   | Set the current time                                                                              |
-| `switchQuality`       | `Function` | Switch quality                                                                                    |
+| `switchQuality`       | `Function` | Switch video quality                                                                              |
 | `switchUrl`           | `Function` | Switch video url                                                                                  |
 | `toggle`              | `Boolean`  | Toggle play and pause                                                                             |
 | `volume`              | `Number`   | `Getter` and `Setter` of the current volume                                                       |
@@ -1232,14 +1119,39 @@ art.i18n.update({
 console.log(art.i18n.get('Language'));
 ```
 
+## hotkey
+
+| propertie | type       | Description  |
+| --------- | ---------- | ------------ |
+| `add`     | `function` | Add a hotkey |
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+// Add a hotkey
+art.hotkey.add(27, function(event) {
+    console.log('You pressed esc button');
+});
+```
+
+## whitelist
+
+| propertie  | type      | Description           |
+| ---------- | --------- | --------------------- |
+| `ua`       | `string`  | The userAgent         |
+| `isMobile` | `boolean` | Whether mobile access |
+
 ## notice
 
 -   Type: `Object`
 
-| propertie | type       | Description    |
-| --------- | ---------- | -------------- |
-| `show`    | `Function` | Show a message |
-| `hide`    | `Function` | Hide message   |
+| propertie | type     | Description    |
+| --------- | -------- | -------------- |
+| `show`    | `setter` | Show a message |
 
 [Run Code](/Properties.notice)
 
@@ -1251,13 +1163,7 @@ var art = new Artplayer({
 });
 
 // auto hide
-art.notice.show('some message');
-
-// not auto hide
-art.notice.show('some message', false);
-
-// Set hidden delay time
-art.notice.show('some message', true, 1000);
+art.notice.show = 'some message';
 ```
 
 ## events
@@ -1430,12 +1336,23 @@ var art = new Artplayer({
 | --------- | -------- | ------------ |
 | `show`    | `setter` | Show or hide |
 
-```js
-// Show the loading
-art.loading.show = true;
+[Run Code](/Properties.loading)
 
-// Hide the loading
-art.loading.show = false;
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('ready', function() {
+    // Show the loading
+    art.loading.show = true;
+    setTimeout(function() {
+        // Hide the loading
+        art.loading.show = false;
+    }, 5000);
+});
 ```
 
 ## mask
@@ -1446,12 +1363,23 @@ art.loading.show = false;
 | --------- | -------- | ------------ |
 | `show`    | `setter` | Show or hide |
 
-```js
-// Show the mask
-art.mask.show = true;
+[Run Code](/Properties.mask)
 
-// Hide the mask
-art.mask.show = false;
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('ready', function() {
+    // Show the mask
+    art.mask.show = true;
+    setTimeout(function() {
+        // Hide the mask
+        art.mask.show = false;
+    }, 5000);
+});
 ```
 
 ## setting
@@ -1475,16 +1403,20 @@ var art = new Artplayer({
     setting: true,
 });
 
-art.setting.add({
-    html: 'Your Setting',
-    name: 'yourSetting',
+art.on('ready', function() {
+    // Add a setting
+    art.setting.add({
+        html: 'Your Setting',
+        name: 'yourSetting',
+    });
+
+    // Show the setting
+    art.setting.show = true;
+    setTimeout(function() {
+        // Hide the setting
+        art.setting.show = false;
+    }, 5000);
 });
-
-// Show the setting
-art.setting.show = true;
-
-// Hide the setting
-art.setting.show = false;
 ```
 
 ## plugins
@@ -1551,43 +1483,37 @@ art.on('ready', function(args) {
 
 ## Instance
 
-| Event                  | Description                             | Parameter           |
-| ---------------------- | --------------------------------------- | ------------------- |
-| `ready`                | When the video can be played            | `undefined`         |
-| `play`                 | When the video play                     | `undefined`         |
-| `pause`                | When the video pause                    | `undefined`         |
-| `seek`                 | When the video seek                     | Video current time  |
-| `volume`               | When the video volume change            | Video volume value  |
-| `destroy`              | When the instance is destroyed          | `undefined`         |
-| `focus`                | When the player gets focus              | `undefined`         |
-| `blur`                 | When the player loses focus             | `undefined`         |
-| `hoverenter`           | When the mouse is moved into the player | `undefined`         |
-| `hoverleave`           | When the mouse is moved out the player  | `undefined`         |
-| `resize`               | When the player resize                  | Player size         |
-| `mousemove`            | When the mouse moves over the player    | `undefined`         |
-| `aspectRatioChange`    | When aspect ratio change                | Aspect ratio        |
-| `aspectRatioRemove`    | When aspect ratio remove                | `undefined`         |
-| `aspectRatioReset`     | When aspect ratio reset                 | `undefined`         |
-| `beforeCustomType`     | Before triggering CustomType            | Type name           |
-| `afterCustomType`      | After triggering CustomType             | Type name           |
-| `beforeAttachUrl`      | Before the video url change             | Video url           |
-| `afterAttachUrl`       | After the video url change              | Video url           |
-| `autoSizeChange`       | When the player auto size change        | Player size         |
-| `autoSizeRemove`       | When the player auto size remove        | `undefined`         |
-| `flipChange`           | When the player flip change             | Flip name           |
-| `flipRemove`           | When the player flip remove             | `undefined`         |
-| `fullscreenChange`     | When the full screen status change      | Whether full screen |
-| `fullscreenEnabled`    | When entering full screen               | `undefined`         |
-| `fullscreenExit`       | When exiting full screen                | `undefined`         |
-| `fullscreenWebEnabled` | When entering web full screen           | `undefined`         |
-| `fullscreenWebExit`    | When exiting web full screen            | `undefined`         |
-| `pipEnabled`           | When entering picture in picture        | `undefined`         |
-| `pipExit`              | When exiting picture in picture         | `undefined`         |
-| `playbackRateChange`   | When playback rate change               | Playback rate       |
-| `playbackRateRemove`   | When playback rate remove               | `undefined`         |
-| `playbackRateReset`    | When playback rate reset                | `undefined`         |
-| `screenshot`           | When a screenshot occurs                | Image data uri      |
-| `switch`               | When switching video url                | Video url           |
+| Event                 | Description                             | Parameter               |
+| --------------------- | --------------------------------------- | ----------------------- |
+| `ready`               | When the video can be played            | `undefined`             |
+| `play`                | When the video play                     | `undefined`             |
+| `pause`               | When the video pause                    | `undefined`             |
+| `seek`                | When the video seek                     | Video current time      |
+| `volume`              | When the video volume change            | Video volume value      |
+| `destroy`             | When the instance is destroyed          | `undefined`             |
+| `focus`               | When the player gets focus              | `undefined`             |
+| `blur`                | When the player loses focus             | `undefined`             |
+| `hoverenter`          | When the mouse is moved into the player | `undefined`             |
+| `hoverleave`          | When the mouse is moved out the player  | `undefined`             |
+| `resize`              | When the player resize                  | Player size             |
+| `mousemove`           | When the mouse moves over the player    | `undefined`             |
+| `aspectRatioChange`   | When aspect ratio change                | Aspect ratio            |
+| `aspectRatioRemove`   | When aspect ratio remove                | `undefined`             |
+| `aspectRatioReset`    | When aspect ratio reset                 | `undefined`             |
+| `customType`          | After triggering CustomType             | Type name               |
+| `urlChange`           | After the video url change              | Video url               |
+| `autoSizeChange`      | When the player auto size change        | Player size             |
+| `autoSizeRemove`      | When the player auto size remove        | `undefined`             |
+| `flipChange`          | When the player flip change             | Flip name               |
+| `flipRemove`          | When the player flip remove             | `undefined`             |
+| `fullscreenChange`    | When the full screen status change      | Whether full screen     |
+| `fullscreenWebChange` | When entering web full screen           | Whether web full screen |
+| `pipChange`           | When entering picture in picture        | Whether in pip          |
+| `playbackRateChange`  | When playback rate change               | Playback rate           |
+| `playbackRateRemove`  | When playback rate remove               | `undefined`             |
+| `playbackRateReset`   | When playback rate reset                | `undefined`             |
+| `screenshot`          | When a screenshot occurs                | Image data uri          |
+| `switch`              | When switching video url                | Video url               |
 
 ## Video (Native event)
 

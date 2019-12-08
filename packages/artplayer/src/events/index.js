@@ -11,7 +11,7 @@ export default class Events {
         this.loadImg = this.loadImg.bind(this);
 
         if (art.whitelist.state) {
-            art.once('video:canplay', () => {
+            art.on('ready', () => {
                 clickInit(art, this);
                 hoverInit(art, this);
                 mousemoveInit(art, this);
@@ -22,14 +22,13 @@ export default class Events {
 
     proxy(target, name, callback, option = {}) {
         if (Array.isArray(name)) {
-            name.forEach(item => this.proxy(target, item, callback, option));
-            return;
+            return name.map(item => this.proxy(target, item, callback, option));
         }
 
         target.addEventListener(name, callback, option);
-        this.destroyEvents.push(() => {
-            target.removeEventListener(name, callback, option);
-        });
+        const destroy = () => target.removeEventListener(name, callback, option);
+        this.destroyEvents.push(destroy);
+        return destroy;
     }
 
     hover(target, mouseenter, mouseleave) {

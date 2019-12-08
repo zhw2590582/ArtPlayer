@@ -155,6 +155,7 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     playbackRate: true,
+    setting: true,
 });
 
     });
@@ -167,6 +168,7 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     aspectRatio: true,
+    setting: true,
 });
 
     });
@@ -292,8 +294,6 @@ var art = new Artplayer({
         fullscreen: '',
         fullscreenWeb: '',
         pip: '',
-        prev: '',
-        next: '',
     },
 });
 
@@ -379,18 +379,6 @@ var art = new Artplayer({
             },
         },
     ],
-});
-
-    });
-        
-
-    it(`Configuration.autoPip`, function() {
-            
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    autoPip: true,
 });
 
     });
@@ -550,27 +538,6 @@ var art = new Artplayer({
     });
         
 
-    it(`Configuration.layers`, function() {
-            
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.layers.add({
-    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
-    style: {
-        position: 'absolute',
-        top: '20px',
-        right: '20px',
-        opacity: '.9',
-    },
-});
-
-    });
-        
-
     it(`Configuration.contextmenu`, function() {
             
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -586,25 +553,6 @@ var art = new Artplayer({
             },
         },
     ],
-});
-
-    });
-        
-
-    it(`Configuration.contextmenu`, function() {
-            
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.contextmenu.add({
-    html: 'Custom menu',
-    click: function(contextmenu) {
-        console.info('You clicked on the custom menu');
-        contextmenu.show = false;
-    },
 });
 
     });
@@ -628,28 +576,6 @@ var art = new Artplayer({
             },
         },
     ],
-});
-
-    });
-        
-
-    it(`Configuration.controls`, function() {
-            
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.controls.add({
-    name: 'myController',
-    position: 'right',
-    index: 10,
-    html: 'myController',
-    tooltip: 'This is my controller',
-    click: function() {
-        console.log('myController');
-    },
 });
 
     });
@@ -683,34 +609,6 @@ art.plugins.myPlugin.doSomething();
     });
         
 
-    it(`Configuration.plugins`, function() {
-            
-var url = 'https://zhw2590582.github.io/assets-cdn';
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-});
-
-art.plugins.add(function myPlugin(art) {
-    // Do something you like here.
-    // You can also return an object for external calls.
-    console.info('myPlugin running...');
-    return {
-        // This exposes plugin properties or methods for others to use. Like:
-        something: 'something',
-        doSomething: function() {
-            console.info('Do something here...');
-        },
-    };
-});
-
-// Call plugin from the outside
-art.plugins.myPlugin.something === 'something';
-art.plugins.myPlugin.doSomething();
-
-    });
-        
-
     it(`Properties.instance`, function() {
             
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -720,7 +618,8 @@ var art = new Artplayer({
 });
 
 console.log('isFocus', art.isFocus);
-console.log('isPlaying', art.isPlaying);
+console.log('isDestroy', art.isDestroy);
+console.log('option', art.option);
 
 setTimeout(function() {
     // remove dom
@@ -798,13 +697,7 @@ var art = new Artplayer({
 });
 
 // auto hide
-art.notice.show('some message');
-
-// not auto hide
-art.notice.show('some message', false);
-
-// Set hidden delay time
-art.notice.show('some message', true, 1000);
+art.notice.show = 'some message';
 
     });
         
@@ -919,6 +812,46 @@ var art = new Artplayer({
     });
         
 
+    it(`Properties.loading`, function() {
+            
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('ready', function() {
+    // Show the loading
+    art.loading.show = true;
+    setTimeout(function() {
+        // Hide the loading
+        art.loading.show = false;
+    }, 5000);
+});
+
+    });
+        
+
+    it(`Properties.mask`, function() {
+            
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+});
+
+art.on('ready', function() {
+    // Show the mask
+    art.mask.show = true;
+    setTimeout(function() {
+        // Hide the mask
+        art.mask.show = false;
+    }, 5000);
+});
+
+    });
+        
+
     it(`Properties.setting`, function() {
             
 var url = 'https://zhw2590582.github.io/assets-cdn';
@@ -928,16 +861,20 @@ var art = new Artplayer({
     setting: true,
 });
 
-art.setting.add({
-    html: 'Your Setting',
-    name: 'yourSetting',
+art.on('ready', function() {
+    // Add a setting
+    art.setting.add({
+        html: 'Your Setting',
+        name: 'yourSetting',
+    });
+
+    // Show the setting
+    art.setting.show = true;
+    setTimeout(function() {
+        // Hide the setting
+        art.setting.show = false;
+    }, 5000);
 });
-
-// Show the setting
-art.setting.show = true;
-
-// Hide the setting
-art.setting.show = false;
 
     });
         

@@ -8,7 +8,7 @@ export default class Artplayer {
         /**
          * Video url or a function that returns a promise value of url (required)
          */
-        url: string | Function;
+        url: string;
 
         /**
          * Video cover url
