@@ -37,11 +37,11 @@
   "packages/artplayer-vue/dist/artplayer-vue.js": {
     "bundled": 158692,
     "minified": 85236,
-    "gzipped": 21139
+    "gzipped": 21140
   },
   "packages/artplayer-react/dist/artplayer-react.js": {
     "bundled": 240619,
     "minified": 113760,
-    "gzipped": 30042
+    "gzipped": 30043
   }
 }
