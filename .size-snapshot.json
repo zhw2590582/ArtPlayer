@@ -19,11 +19,6 @@
     "minified": 28855,
     "gzipped": 10441
   },
-  "packages/artplayer-plugin-playlist/dist/artplayer-plugin-playlist.js": {
-    "bundled": 4347,
-    "minified": 1954,
-    "gzipped": 856
-  },
   "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js": {
     "bundled": 16311,
     "minified": 7927,

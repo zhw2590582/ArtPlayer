@@ -33,8 +33,9 @@ export default class Template {
     }
 
     desktop() {
+        const { theme, backdrop } = this.art.option;
         this.$container.innerHTML = `
-          <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${this.art.option.theme}">
+          <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${theme}">
             <video class="art-video">
               <track default kind="metadata"></track>
             </video>
@@ -56,11 +57,11 @@ export default class Template {
               <div class="art-notice-inner"></div>
             </div>
             <div class="art-settings">
-              <div class="art-setting-inner art-backdrop-filter">
+              <div class="art-setting-inner">
                 <div class="art-setting-body"></div>
               </div>
             </div>
-            <div class="art-info art-backdrop-filter">
+            <div class="art-info">
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
@@ -95,7 +96,7 @@ export default class Template {
               <div class="art-pip-title"></div>
               <div class="art-pip-close">×</div>
             </div>
-            <div class="art-contextmenus art-backdrop-filter"></div>
+            <div class="art-contextmenus"></div>
           </div>
         `;
         this.$player = this.query('.art-video-player');
@@ -124,6 +125,12 @@ export default class Template {
         this.$pipTitle = this.query('.art-pip-title');
         this.$pipClose = this.query('.art-pip-close');
         this.$contextmenu = this.query('.art-contextmenus');
+
+        if (backdrop) {
+            addClass(this.$settingInner, 'art-backdrop-filter');
+            addClass(this.$info, 'art-backdrop-filter');
+            addClass(this.$contextmenu, 'art-backdrop-filter');
+        }
     }
 
     mobile() {
