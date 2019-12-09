@@ -7,6 +7,8 @@ export default class Setting extends Component {
     constructor(art) {
         super(art);
 
+        this.name = 'setting';
+
         const {
             option,
             template: { $setting, $settingBody },

@@ -10,6 +10,8 @@ export default class Contextmenu extends Component {
     constructor(art) {
         super(art);
 
+        this.name = 'contextmenu';
+
         const {
             option,
             template: { $player, $contextmenu },

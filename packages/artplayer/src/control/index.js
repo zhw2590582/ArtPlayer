@@ -17,6 +17,8 @@ export default class Control extends Component {
     constructor(art) {
         super(art);
 
+        this.name = 'control';
+
         const { option } = art;
 
         art.on('ready', () => {

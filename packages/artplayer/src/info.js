@@ -5,6 +5,8 @@ export default class Info extends Component {
     constructor(art) {
         super(art);
 
+        this.name = 'info';
+
         const {
             template: { $infoPanel, $infoClose, $video },
             events: { proxy },

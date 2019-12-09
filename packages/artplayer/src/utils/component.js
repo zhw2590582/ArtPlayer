@@ -5,7 +5,6 @@ export default class Component {
         this.id = 0;
         this.art = art;
         this.add = this.add.bind(this);
-        this.name = this.constructor.name.toLowerCase();
     }
 
     get show() {
@@ -31,7 +30,7 @@ export default class Component {
 
     add(getOption, callback) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        if (!this.$parent || option.disable) return;
+        if (!this.$parent || !this.name || option.disable) return;
         this.id += 1;
         const name = option.name || `${this.name}${this.id}`;
         const $ref = document.createElement('div');

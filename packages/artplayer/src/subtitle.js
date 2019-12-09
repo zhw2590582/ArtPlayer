@@ -5,6 +5,8 @@ export default class Subtitle extends Component {
     constructor(art) {
         super(art);
 
+        this.name = 'subtitle';
+
         const {
             events: { proxy },
             option: { subtitle },
