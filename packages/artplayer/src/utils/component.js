@@ -1,4 +1,6 @@
 import { hasClass, addClass, removeClass, append, setStyles, tooltip } from './dom';
+import { has, def } from './property';
+import { errorHandle } from './error';
 
 export default class Component {
     constructor(art) {
@@ -33,6 +35,7 @@ export default class Component {
         if (!this.$parent || !this.name || option.disable) return;
         this.id += 1;
         const name = option.name || `${this.name}${this.id}`;
+        errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
         const $ref = document.createElement('div');
         $ref.classList.value = `art-${this.name} art-${this.name}-${name}`;
 
@@ -73,5 +76,9 @@ export default class Component {
         }
 
         this.art.emit(`${this.name}:add`, option);
+
+        def(this, name, {
+            get: () => option,
+        });
     }
 }
