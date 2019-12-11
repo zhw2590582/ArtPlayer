@@ -29,12 +29,12 @@ export default function eventInit(art, player) {
 
     art.on('video:canplay', () => {
         reconnectTime = 0;
-        art.controls.show = true;
-        art.mask.show = true;
         art.loading.show = false;
     });
 
     art.once('video:canplay', () => {
+        art.controls.show = true;
+        art.mask.show = true;
         art.emit('ready');
     });
 
@@ -54,6 +54,8 @@ export default function eventInit(art, player) {
         if (option.loop) {
             player.seek = 0;
             player.play = true;
+            art.controls.show = false;
+            art.mask.show = false;
         } else {
             art.controls.show = true;
             art.mask.show = true;
