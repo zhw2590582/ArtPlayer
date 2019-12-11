@@ -51,11 +51,12 @@ export default function eventInit(art, player) {
     // });
 
     art.on('video:ended', () => {
-        art.controls.show = true;
-        art.mask.show = true;
         if (option.loop) {
             player.seek = 0;
             player.play = true;
+        } else {
+            art.controls.show = true;
+            art.mask.show = true;
         }
     });
 
