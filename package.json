@@ -52,7 +52,7 @@
         "glob": "^7.1.6",
         "inquirer": "^7.0.1",
         "lerna": "^3.20.2",
-        "mocha": "^6.2.2",
+        "mocha": "^7.0.0",
         "mocha-chrome": "^2.2.0",
         "node-sass": "^4.13.0",
         "rollup": "^1.27.14",
