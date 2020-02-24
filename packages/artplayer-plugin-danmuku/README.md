@@ -1,4 +1,5 @@
 # artplayer-plugin-danmuku
+
 Danmuku plugin for ArtPlayer
 
 ## Demo
@@ -37,24 +38,26 @@ Will expose the global variable to `window.artplayerPluginDanmuku`.
 var art = new Artplayer({
     container: '.artplayer-app',
     url: 'path/to/video.mp4',
-    plugins: [artplayerPluginDanmuku({
-        danmuku: [
-            {
-                text: '666', // Danmu text
-                time: 5, // Video time
-                color: '#fff', // Danmu color
-                border: false, // Danmu border
-                mode: 'scroll', // Danmu mode: scroll or static
-            }
-        ], // Can be an array or return the promised function or danmuku xml url
-        speed: 5, // Animation time
-        opacity: 1, // Opacity
-        color: '#fff', // Font color
-        size: 25, // Font size
-        maxlength: 50, // The maximum number of words in the danmu
-        margin: [10, 20], // Margin top and margin bottom
-        synchronousPlayback: false, // Synchronous playback speed
-    })],
+    plugins: [
+        artplayerPluginDanmuku({
+            danmuku: [
+                {
+                    text: '666', // Danmu text
+                    time: 5, // Video time
+                    color: '#fff', // Danmu color
+                    border: false, // Danmu border
+                    mode: 0, // Danmu mode: 0-scroll or 1-static
+                },
+            ], // Can be an array or return the promised function or danmuku xml url
+            speed: 5, // Animation time
+            opacity: 1, // Opacity
+            color: '#fff', // Font color
+            size: 25, // Font size
+            maxlength: 50, // The maximum number of words in the danmu
+            margin: [10, 20], // Margin top and margin bottom
+            synchronousPlayback: false, // Synchronous playback speed
+        }),
+    ],
 });
 
 // Send danmu
@@ -64,7 +67,7 @@ art.plugins.artplayerPluginDanmuku.emit({
     color: '#fff', // Danmu color
     size: 25, // Danmu size
     border: false, // Danmu border
-    mode: 'scroll', // Danmu mode: scroll or static
+    mode: 0, // Danmu mode: 0-scroll or 1-static
 });
 
 // Hide danmu

@@ -247,14 +247,14 @@
       case 1:
       case 2:
       case 3:
-        return 'scroll';
+        return 0;
 
       case 4:
       case 5:
-        return 'static';
+        return 1;
 
       default:
-        return null;
+        return 0;
     }
   }
   function bilibiliDanmuParseFromXml(xmlString) {
@@ -476,7 +476,7 @@
           danmu.$lastStartTime = Date.now();
 
           switch (danmu.mode) {
-            case 'scroll':
+            case 0:
               danmu.$ref.style.transform = "translateX(".concat(-danmu.$restWidth, "px) translateY(0px) translateZ(0px)");
               danmu.$ref.style.transition = "transform ".concat(danmu.$restTime, "s linear 0s");
               break;
@@ -491,7 +491,7 @@
           danmu.$state = 'stop';
 
           switch (danmu.mode) {
-            case 'scroll':
+            case 0:
               {
                 var _getRect = getRect($player),
                     playerLeft = _getRect.left,
@@ -567,7 +567,7 @@
               danmu.$state = 'emit';
 
               switch (danmu.mode) {
-                case 'scroll':
+                case 0:
                   {
                     danmu.$restWidth = danmuLeft + danmuWidth + 5;
                     danmu.$ref.style.left = "".concat(danmuLeft, "px");
@@ -577,7 +577,7 @@
                     break;
                   }
 
-                case 'static':
+                case 1:
                   danmu.$ref.style.top = "".concat(danmuTop, "px");
                   danmu.$ref.style.left = '50%';
                   danmu.$ref.style.marginLeft = "-".concat(danmuWidth / 2, "px");
@@ -642,7 +642,7 @@
         }
 
         this.queue.push(_objectSpread({
-          mode: 'scroll'
+          mode: 0
         }, danmu, {
           $state: 'wait',
           $ref: null,

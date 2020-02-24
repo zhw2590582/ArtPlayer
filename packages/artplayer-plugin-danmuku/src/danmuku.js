@@ -85,7 +85,7 @@ export default class Danmuku {
             danmu.$state = 'emit';
             danmu.$lastStartTime = Date.now();
             switch (danmu.mode) {
-                case 'scroll':
+                case 0:
                     danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
                     danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                     break;
@@ -100,7 +100,7 @@ export default class Danmuku {
         filter(this.queue, 'emit', danmu => {
             danmu.$state = 'stop';
             switch (danmu.mode) {
-                case 'scroll': {
+                case 0: {
                     const { left: playerLeft, width: playerWidth } = getRect($player);
                     const { left: danmuLeft } = getRect(danmu.$ref);
                     const translateX = playerWidth - (danmuLeft - playerLeft) + 5;
@@ -174,7 +174,7 @@ export default class Danmuku {
                         const danmuTop = getDanmuTop(this, danmu);
                         danmu.$state = 'emit';
                         switch (danmu.mode) {
-                            case 'scroll': {
+                            case 0: {
                                 danmu.$restWidth = danmuLeft + danmuWidth + 5;
                                 danmu.$ref.style.left = `${danmuLeft}px`;
                                 danmu.$ref.style.top = `${danmuTop}px`;
@@ -182,7 +182,7 @@ export default class Danmuku {
                                 danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                 break;
                             }
-                            case 'static':
+                            case 1:
                                 danmu.$ref.style.top = `${danmuTop}px`;
                                 danmu.$ref.style.left = '50%';
                                 danmu.$ref.style.marginLeft = `-${danmuWidth / 2}px`;
@@ -240,7 +240,7 @@ export default class Danmuku {
         }
 
         this.queue.push({
-            mode: 'scroll',
+            mode: 0,
             ...danmu,
             $state: 'wait',
             $ref: null,

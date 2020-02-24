@@ -43,7 +43,7 @@ var art = new Artplayer({
                             art.notice.show = `发送弹幕成功: ${danmuku.remaining} / ${danmuku.limit}`;
                             art.plugins.artplayerPluginDanmuku.emit({
                                 ...data,
-                                mode: 'scroll',
+                                mode: 0,
                                 time: art.player.currentTime + 0.2,
                                 border: data.color,
                             });
