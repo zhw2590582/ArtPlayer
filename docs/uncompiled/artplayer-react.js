@@ -261,22 +261,21 @@
   	return to;
   };
 
-  var n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.forward_ref"):60112,y=n?Symbol.for("react.suspense"):60113,aa=n?Symbol.for("react.suspense_list"):60120,ba=n?Symbol.for("react.memo"):
-  60115,ca=n?Symbol.for("react.lazy"):60116;var z="function"===typeof Symbol&&Symbol.iterator;
-  function A(a){for(var b=a.message,d="https://reactjs.org/docs/error-decoder.html?invariant="+b,c=1;c<arguments.length;c++)d+="&args[]="+encodeURIComponent(arguments[c]);a.message="Minified React error #"+b+"; visit "+d+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ";return a}var B={isMounted:function(){return !1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},C={};
-  function D(a,b,d){this.props=a;this.context=b;this.refs=C;this.updater=d||B;}D.prototype.isReactComponent={};D.prototype.setState=function(a,b){if("object"!==typeof a&&"function"!==typeof a&&null!=a)throw A(Error(85));this.updater.enqueueSetState(this,a,b,"setState");};D.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate");};function E(){}E.prototype=D.prototype;function F(a,b,d){this.props=a;this.context=b;this.refs=C;this.updater=d||B;}var G=F.prototype=new E;
-  G.constructor=F;objectAssign(G,D.prototype);G.isPureReactComponent=!0;var H={current:null},I={suspense:null},J={current:null},K=Object.prototype.hasOwnProperty,L={key:!0,ref:!0,__self:!0,__source:!0};
-  function M(a,b,d){var c=void 0,e={},g=null,k=null;if(null!=b)for(c in void 0!==b.ref&&(k=b.ref),void 0!==b.key&&(g=""+b.key),b)K.call(b,c)&&!L.hasOwnProperty(c)&&(e[c]=b[c]);var f=arguments.length-2;if(1===f)e.children=d;else if(1<f){for(var l=Array(f),m=0;m<f;m++)l[m]=arguments[m+2];e.children=l;}if(a&&a.defaultProps)for(c in f=a.defaultProps,f)void 0===e[c]&&(e[c]=f[c]);return {$$typeof:p,type:a,key:g,ref:k,props:e,_owner:J.current}}
-  function da(a,b){return {$$typeof:p,type:a.type,key:b,ref:a.ref,props:a.props,_owner:a._owner}}function N(a){return "object"===typeof a&&null!==a&&a.$$typeof===p}function escape(a){var b={"=":"=0",":":"=2"};return "$"+(""+a).replace(/[=:]/g,function(a){return b[a]})}var O=/\/+/g,P=[];function Q(a,b,d,c){if(P.length){var e=P.pop();e.result=a;e.keyPrefix=b;e.func=d;e.context=c;e.count=0;return e}return {result:a,keyPrefix:b,func:d,context:c,count:0}}
+  var n="function"===typeof Symbol&&Symbol.for,p=n?Symbol.for("react.element"):60103,q=n?Symbol.for("react.portal"):60106,r=n?Symbol.for("react.fragment"):60107,t=n?Symbol.for("react.strict_mode"):60108,u=n?Symbol.for("react.profiler"):60114,v=n?Symbol.for("react.provider"):60109,w=n?Symbol.for("react.context"):60110,x=n?Symbol.for("react.forward_ref"):60112,y=n?Symbol.for("react.suspense"):60113;var z=n?Symbol.for("react.memo"):60115,aa=n?Symbol.for("react.lazy"):60116;var A="function"===typeof Symbol&&Symbol.iterator;
+  function B(a){for(var b="https://reactjs.org/docs/error-decoder.html?invariant="+a,c=1;c<arguments.length;c++)b+="&args[]="+encodeURIComponent(arguments[c]);return "Minified React error #"+a+"; visit "+b+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}var C={isMounted:function(){return !1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},D={};
+  function E(a,b,c){this.props=a;this.context=b;this.refs=D;this.updater=c||C;}E.prototype.isReactComponent={};E.prototype.setState=function(a,b){if("object"!==typeof a&&"function"!==typeof a&&null!=a)throw Error(B(85));this.updater.enqueueSetState(this,a,b,"setState");};E.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate");};function F(){}F.prototype=E.prototype;function G(a,b,c){this.props=a;this.context=b;this.refs=D;this.updater=c||C;}var H=G.prototype=new F;
+  H.constructor=G;objectAssign(H,E.prototype);H.isPureReactComponent=!0;var I={current:null},J={current:null},K=Object.prototype.hasOwnProperty,L={key:!0,ref:!0,__self:!0,__source:!0};
+  function M(a,b,c){var e,d={},g=null,l=null;if(null!=b)for(e in void 0!==b.ref&&(l=b.ref),void 0!==b.key&&(g=""+b.key),b)K.call(b,e)&&!L.hasOwnProperty(e)&&(d[e]=b[e]);var f=arguments.length-2;if(1===f)d.children=c;else if(1<f){for(var k=Array(f),m=0;m<f;m++)k[m]=arguments[m+2];d.children=k;}if(a&&a.defaultProps)for(e in f=a.defaultProps,f)void 0===d[e]&&(d[e]=f[e]);return {$$typeof:p,type:a,key:g,ref:l,props:d,_owner:J.current}}
+  function ba(a,b){return {$$typeof:p,type:a.type,key:b,ref:a.ref,props:a.props,_owner:a._owner}}function N(a){return "object"===typeof a&&null!==a&&a.$$typeof===p}function escape(a){var b={"=":"=0",":":"=2"};return "$"+(""+a).replace(/[=:]/g,function(a){return b[a]})}var O=/\/+/g,P=[];function Q(a,b,c,e){if(P.length){var d=P.pop();d.result=a;d.keyPrefix=b;d.func=c;d.context=e;d.count=0;return d}return {result:a,keyPrefix:b,func:c,context:e,count:0}}
   function R(a){a.result=null;a.keyPrefix=null;a.func=null;a.context=null;a.count=0;10>P.length&&P.push(a);}
-  function S(a,b,d,c){var e=typeof a;if("undefined"===e||"boolean"===e)a=null;var g=!1;if(null===a)g=!0;else switch(e){case "string":case "number":g=!0;break;case "object":switch(a.$$typeof){case p:case q:g=!0;}}if(g)return d(c,a,""===b?"."+T(a,0):b),1;g=0;b=""===b?".":b+":";if(Array.isArray(a))for(var k=0;k<a.length;k++){e=a[k];var f=b+T(e,k);g+=S(e,f,d,c);}else if(null===a||"object"!==typeof a?f=null:(f=z&&a[z]||a["@@iterator"],f="function"===typeof f?f:null),"function"===typeof f)for(a=f.call(a),k=
-  0;!(e=a.next()).done;)e=e.value,f=b+T(e,k++),g+=S(e,f,d,c);else if("object"===e)throw d=""+a,A(Error(31),"[object Object]"===d?"object with keys {"+Object.keys(a).join(", ")+"}":d,"");return g}function U(a,b,d){return null==a?0:S(a,"",b,d)}function T(a,b){return "object"===typeof a&&null!==a&&null!=a.key?escape(a.key):b.toString(36)}function ea(a,b){a.func.call(a.context,b,a.count++);}
-  function fa(a,b,d){var c=a.result,e=a.keyPrefix;a=a.func.call(a.context,b,a.count++);Array.isArray(a)?V(a,c,d,function(a){return a}):null!=a&&(N(a)&&(a=da(a,e+(!a.key||b&&b.key===a.key?"":(""+a.key).replace(O,"$&/")+"/")+d)),c.push(a));}function V(a,b,d,c,e){var g="";null!=d&&(g=(""+d).replace(O,"$&/")+"/");b=Q(b,g,c,e);U(a,fa,b);R(b);}function W(){var a=H.current;if(null===a)throw A(Error(321));return a}
-  var X={Children:{map:function(a,b,d){if(null==a)return a;var c=[];V(a,c,null,b,d);return c},forEach:function(a,b,d){if(null==a)return a;b=Q(null,null,b,d);U(a,ea,b);R(b);},count:function(a){return U(a,function(){return null},null)},toArray:function(a){var b=[];V(a,b,null,function(a){return a});return b},only:function(a){if(!N(a))throw A(Error(143));return a}},createRef:function(){return {current:null}},Component:D,PureComponent:F,createContext:function(a,b){void 0===b&&(b=null);a={$$typeof:w,_calculateChangedBits:b,
-  _currentValue:a,_currentValue2:a,_threadCount:0,Provider:null,Consumer:null};a.Provider={$$typeof:v,_context:a};return a.Consumer=a},forwardRef:function(a){return {$$typeof:x,render:a}},lazy:function(a){return {$$typeof:ca,_ctor:a,_status:-1,_result:null}},memo:function(a,b){return {$$typeof:ba,type:a,compare:void 0===b?null:b}},useCallback:function(a,b){return W().useCallback(a,b)},useContext:function(a,b){return W().useContext(a,b)},useEffect:function(a,b){return W().useEffect(a,b)},useImperativeHandle:function(a,
-  b,d){return W().useImperativeHandle(a,b,d)},useDebugValue:function(){},useLayoutEffect:function(a,b){return W().useLayoutEffect(a,b)},useMemo:function(a,b){return W().useMemo(a,b)},useReducer:function(a,b,d){return W().useReducer(a,b,d)},useRef:function(a){return W().useRef(a)},useState:function(a){return W().useState(a)},Fragment:r,Profiler:u,StrictMode:t,Suspense:y,unstable_SuspenseList:aa,createElement:M,cloneElement:function(a,b,d){if(null===a||void 0===a)throw A(Error(267),a);var c=void 0,e=
-  objectAssign({},a.props),g=a.key,k=a.ref,f=a._owner;if(null!=b){void 0!==b.ref&&(k=b.ref,f=J.current);void 0!==b.key&&(g=""+b.key);var l=void 0;a.type&&a.type.defaultProps&&(l=a.type.defaultProps);for(c in b)K.call(b,c)&&!L.hasOwnProperty(c)&&(e[c]=void 0===b[c]&&void 0!==l?l[c]:b[c]);}c=arguments.length-2;if(1===c)e.children=d;else if(1<c){l=Array(c);for(var m=0;m<c;m++)l[m]=arguments[m+2];e.children=l;}return {$$typeof:p,type:a.type,key:g,ref:k,props:e,_owner:f}},createFactory:function(a){var b=M.bind(null,a);
-  b.type=a;return b},isValidElement:N,version:"16.9.0",unstable_withSuspenseConfig:function(a,b){var d=I.suspense;I.suspense=void 0===b?null:b;try{a();}finally{I.suspense=d;}},__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentDispatcher:H,ReactCurrentBatchConfig:I,ReactCurrentOwner:J,IsSomeRendererActing:{current:!1},assign:objectAssign}},Y={default:X},Z=Y&&X||Y;var react_production_min=Z.default||Z;
+  function S(a,b,c,e){var d=typeof a;if("undefined"===d||"boolean"===d)a=null;var g=!1;if(null===a)g=!0;else switch(d){case "string":case "number":g=!0;break;case "object":switch(a.$$typeof){case p:case q:g=!0;}}if(g)return c(e,a,""===b?"."+T(a,0):b),1;g=0;b=""===b?".":b+":";if(Array.isArray(a))for(var l=0;l<a.length;l++){d=a[l];var f=b+T(d,l);g+=S(d,f,c,e);}else if(null===a||"object"!==typeof a?f=null:(f=A&&a[A]||a["@@iterator"],f="function"===typeof f?f:null),"function"===typeof f)for(a=f.call(a),l=
+  0;!(d=a.next()).done;)d=d.value,f=b+T(d,l++),g+=S(d,f,c,e);else if("object"===d)throw c=""+a,Error(B(31,"[object Object]"===c?"object with keys {"+Object.keys(a).join(", ")+"}":c,""));return g}function U(a,b,c){return null==a?0:S(a,"",b,c)}function T(a,b){return "object"===typeof a&&null!==a&&null!=a.key?escape(a.key):b.toString(36)}function ca(a,b){a.func.call(a.context,b,a.count++);}
+  function da(a,b,c){var e=a.result,d=a.keyPrefix;a=a.func.call(a.context,b,a.count++);Array.isArray(a)?V(a,e,c,function(a){return a}):null!=a&&(N(a)&&(a=ba(a,d+(!a.key||b&&b.key===a.key?"":(""+a.key).replace(O,"$&/")+"/")+c)),e.push(a));}function V(a,b,c,e,d){var g="";null!=c&&(g=(""+c).replace(O,"$&/")+"/");b=Q(b,g,e,d);U(a,da,b);R(b);}function W(){var a=I.current;if(null===a)throw Error(B(321));return a}
+  var X={Children:{map:function(a,b,c){if(null==a)return a;var e=[];V(a,e,null,b,c);return e},forEach:function(a,b,c){if(null==a)return a;b=Q(null,null,b,c);U(a,ca,b);R(b);},count:function(a){return U(a,function(){return null},null)},toArray:function(a){var b=[];V(a,b,null,function(a){return a});return b},only:function(a){if(!N(a))throw Error(B(143));return a}},createRef:function(){return {current:null}},Component:E,PureComponent:G,createContext:function(a,b){void 0===b&&(b=null);a={$$typeof:w,_calculateChangedBits:b,
+  _currentValue:a,_currentValue2:a,_threadCount:0,Provider:null,Consumer:null};a.Provider={$$typeof:v,_context:a};return a.Consumer=a},forwardRef:function(a){return {$$typeof:x,render:a}},lazy:function(a){return {$$typeof:aa,_ctor:a,_status:-1,_result:null}},memo:function(a,b){return {$$typeof:z,type:a,compare:void 0===b?null:b}},useCallback:function(a,b){return W().useCallback(a,b)},useContext:function(a,b){return W().useContext(a,b)},useEffect:function(a,b){return W().useEffect(a,b)},useImperativeHandle:function(a,
+  b,c){return W().useImperativeHandle(a,b,c)},useDebugValue:function(){},useLayoutEffect:function(a,b){return W().useLayoutEffect(a,b)},useMemo:function(a,b){return W().useMemo(a,b)},useReducer:function(a,b,c){return W().useReducer(a,b,c)},useRef:function(a){return W().useRef(a)},useState:function(a){return W().useState(a)},Fragment:r,Profiler:u,StrictMode:t,Suspense:y,createElement:M,cloneElement:function(a,b,c){if(null===a||void 0===a)throw Error(B(267,a));var e=objectAssign({},a.props),d=a.key,g=a.ref,l=a._owner;
+  if(null!=b){void 0!==b.ref&&(g=b.ref,l=J.current);void 0!==b.key&&(d=""+b.key);if(a.type&&a.type.defaultProps)var f=a.type.defaultProps;for(k in b)K.call(b,k)&&!L.hasOwnProperty(k)&&(e[k]=void 0===b[k]&&void 0!==f?f[k]:b[k]);}var k=arguments.length-2;if(1===k)e.children=c;else if(1<k){f=Array(k);for(var m=0;m<k;m++)f[m]=arguments[m+2];e.children=f;}return {$$typeof:p,type:a.type,key:d,ref:g,props:e,_owner:l}},createFactory:function(a){var b=M.bind(null,a);b.type=a;return b},isValidElement:N,version:"16.12.0",
+  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentDispatcher:I,ReactCurrentBatchConfig:{suspense:null},ReactCurrentOwner:J,IsSomeRendererActing:{current:!1},assign:objectAssign}},Y={default:X},Z=Y&&X||Y;var react_production_min=Z.default||Z;
 
   /**
    * Copyright (c) 2013-present, Facebook, Inc.
@@ -395,21 +394,20 @@
 
   // TODO: this is special because it gets imported during build.
 
-  var ReactVersion = '16.9.0';
+  var ReactVersion = '16.12.0';
 
   // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
   // nor polyfill, then a plain number is used for performance.
   var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-
   var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
   var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
   var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
   var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
   var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
   var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-  var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace;
-  // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+  var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
   // (unstable) APIs that have been removed. Can we remove the symbols?
+
 
   var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
   var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
@@ -419,33 +417,26 @@
   var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
   var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
   var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-
+  var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
   var MAYBE_ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
   var FAUX_ITERATOR_SYMBOL = '@@iterator';
-
   function getIteratorFn(maybeIterable) {
     if (maybeIterable === null || typeof maybeIterable !== 'object') {
       return null;
     }
+
     var maybeIterator = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL];
+
     if (typeof maybeIterator === 'function') {
       return maybeIterator;
     }
+
     return null;
   }
 
   // Do not require this module directly! Use normal `invariant` calls with
-  // template literal strings. The messages will be converted to ReactError during
-  // build, and in production they will be minified.
-
-  // Do not require this module directly! Use normal `invariant` calls with
-  // template literal strings. The messages will be converted to ReactError during
-  // build, and in production they will be minified.
-
-  function ReactError(error) {
-    error.name = 'Invariant Violation';
-    return error;
-  }
+  // template literal strings. The messages will be replaced with error codes
+  // during build.
 
   /**
    * Use invariant() to assert state which your program assumes to be true.
@@ -471,12 +462,11 @@
    * paths. Removing the logging code for production environments will keep the
    * same logic and follow the same code paths.
    */
-
-  var lowPriorityWarning = function () {};
+  var lowPriorityWarningWithoutStack = function () {};
 
   {
     var printWarning = function (format) {
-      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
 
@@ -484,9 +474,11 @@
       var message = 'Warning: ' + format.replace(/%s/g, function () {
         return args[argIndex++];
       });
+
       if (typeof console !== 'undefined') {
         console.warn(message);
       }
+
       try {
         // --- Welcome to debugging React ---
         // This error was thrown as a convenience so that you can use this stack
@@ -495,21 +487,22 @@
       } catch (x) {}
     };
 
-    lowPriorityWarning = function (condition, format) {
+    lowPriorityWarningWithoutStack = function (condition, format) {
       if (format === undefined) {
-        throw new Error('`lowPriorityWarning(condition, format, ...args)` requires a warning ' + 'message argument');
+        throw new Error('`lowPriorityWarningWithoutStack(condition, format, ...args)` requires a warning ' + 'message argument');
       }
+
       if (!condition) {
-        for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
           args[_key2 - 2] = arguments[_key2];
         }
 
-        printWarning.apply(undefined, [format].concat(args));
+        printWarning.apply(void 0, [format].concat(args));
       }
     };
   }
 
-  var lowPriorityWarning$1 = lowPriorityWarning;
+  var lowPriorityWarningWithoutStack$1 = lowPriorityWarningWithoutStack;
 
   /**
    * Similar to invariant but only logs a warning if the condition is not met.
@@ -517,35 +510,37 @@
    * paths. Removing the logging code for production environments will keep the
    * same logic and follow the same code paths.
    */
-
   var warningWithoutStack = function () {};
 
   {
     warningWithoutStack = function (condition, format) {
-      for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         args[_key - 2] = arguments[_key];
       }
 
       if (format === undefined) {
         throw new Error('`warningWithoutStack(condition, format, ...args)` requires a warning ' + 'message argument');
       }
+
       if (args.length > 8) {
         // Check before the condition to catch violations early.
         throw new Error('warningWithoutStack() currently supports at most 8 arguments.');
       }
+
       if (condition) {
         return;
       }
+
       if (typeof console !== 'undefined') {
         var argsWithFormat = args.map(function (item) {
           return '' + item;
         });
-        argsWithFormat.unshift('Warning: ' + format);
-
-        // We intentionally don't use spread (or .apply) directly because it
+        argsWithFormat.unshift('Warning: ' + format); // We intentionally don't use spread (or .apply) directly because it
         // breaks IE9: https://github.com/facebook/react/issues/13610
+
         Function.prototype.apply.call(console.error, console, argsWithFormat);
       }
+
       try {
         // --- Welcome to debugging React ---
         // This error was thrown as a convenience so that you can use this stack
@@ -567,18 +562,21 @@
     {
       var _constructor = publicInstance.constructor;
       var componentName = _constructor && (_constructor.displayName || _constructor.name) || 'ReactClass';
-      var warningKey = componentName + '.' + callerName;
+      var warningKey = componentName + "." + callerName;
+
       if (didWarnStateUpdateForUnmountedComponent[warningKey]) {
         return;
       }
+
       warningWithoutStack$1(false, "Can't call %s on a component that is not yet mounted. " + 'This is a no-op, but it might indicate a bug in your application. ' + 'Instead, assign to `this.state` directly or define a `state = {};` ' + 'class property with the desired state in the %s component.', callerName, componentName);
       didWarnStateUpdateForUnmountedComponent[warningKey] = true;
     }
   }
-
   /**
    * This is the abstract API for an update queue.
    */
+
+
   var ReactNoopUpdateQueue = {
     /**
      * Checks whether or not this composite component is mounted.
@@ -645,25 +643,26 @@
   };
 
   var emptyObject = {};
+
   {
     Object.freeze(emptyObject);
   }
-
   /**
    * Base class helpers for the updating state of a component.
    */
+
+
   function Component(props, context, updater) {
     this.props = props;
-    this.context = context;
-    // If a component has string refs, we will assign a different object later.
-    this.refs = emptyObject;
-    // We initialize the default updater but the real one gets injected by the
+    this.context = context; // If a component has string refs, we will assign a different object later.
+
+    this.refs = emptyObject; // We initialize the default updater but the real one gets injected by the
     // renderer.
+
     this.updater = updater || ReactNoopUpdateQueue;
   }
 
   Component.prototype.isReactComponent = {};
-
   /**
    * Sets a subset of the state. Always use this to mutate
    * state. You should treat `this.state` as immutable.
@@ -689,17 +688,16 @@
    * @final
    * @protected
    */
+
   Component.prototype.setState = function (partialState, callback) {
-    (function () {
-      if (!(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null)) {
-        {
-          throw ReactError(Error('setState(...): takes an object of state variables to update or a function which returns an object of state variables.'));
-        }
+    if (!(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null)) {
+      {
+        throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
       }
-    })();
+    }
+
     this.updater.enqueueSetState(this, partialState, callback, 'setState');
   };
-
   /**
    * Forces an update. This should only be invoked when it is known with
    * certainty that we are **not** in a DOM transaction.
@@ -714,28 +712,33 @@
    * @final
    * @protected
    */
+
+
   Component.prototype.forceUpdate = function (callback) {
     this.updater.enqueueForceUpdate(this, callback, 'forceUpdate');
   };
-
   /**
    * Deprecated APIs. These APIs used to exist on classic React classes but since
    * we would like to deprecate them, we're not going to move them over to this
    * modern base class. Instead, we define a getter that warns if it's accessed.
    */
+
+
   {
     var deprecatedAPIs = {
       isMounted: ['isMounted', 'Instead, make sure to clean up subscriptions and pending requests in ' + 'componentWillUnmount to prevent memory leaks.'],
       replaceState: ['replaceState', 'Refactor your code to use setState instead (see ' + 'https://github.com/facebook/react/issues/3236).']
     };
+
     var defineDeprecationWarning = function (methodName, info) {
       Object.defineProperty(Component.prototype, methodName, {
         get: function () {
-          lowPriorityWarning$1(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]);
+          lowPriorityWarningWithoutStack$1(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]);
           return undefined;
         }
       });
     };
+
     for (var fnName in deprecatedAPIs) {
       if (deprecatedAPIs.hasOwnProperty(fnName)) {
         defineDeprecationWarning(fnName, deprecatedAPIs[fnName]);
@@ -744,23 +747,25 @@
   }
 
   function ComponentDummy() {}
-  ComponentDummy.prototype = Component.prototype;
 
+  ComponentDummy.prototype = Component.prototype;
   /**
    * Convenience component with default shallow equality check for sCU.
    */
+
   function PureComponent(props, context, updater) {
     this.props = props;
-    this.context = context;
-    // If a component has string refs, we will assign a different object later.
+    this.context = context; // If a component has string refs, we will assign a different object later.
+
     this.refs = emptyObject;
     this.updater = updater || ReactNoopUpdateQueue;
   }
 
   var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
-  pureComponentPrototype.constructor = PureComponent;
-  // Avoid an extra prototype jump for these methods.
+  pureComponentPrototype.constructor = PureComponent; // Avoid an extra prototype jump for these methods.
+
   _assign(pureComponentPrototype, Component.prototype);
+
   pureComponentPrototype.isPureReactComponent = true;
 
   // an immutable object with a single mutable value
@@ -768,9 +773,11 @@
     var refObject = {
       current: null
     };
+
     {
       Object.seal(refObject);
     }
+
     return refObject;
   }
 
@@ -808,19 +815,22 @@
   };
 
   var BEFORE_SLASH_RE = /^(.*)[\\\/]/;
-
   var describeComponentFrame = function (name, source, ownerName) {
     var sourceInfo = '';
+
     if (source) {
       var path = source.fileName;
       var fileName = path.replace(BEFORE_SLASH_RE, '');
+
       {
         // In DEV, include code for a common special case:
         // prefer "folder/index.js" instead of just "index.js".
         if (/^index\./.test(fileName)) {
           var match = path.match(BEFORE_SLASH_RE);
+
           if (match) {
             var pathBeforeSlash = match[1];
+
             if (pathBeforeSlash) {
               var folderName = pathBeforeSlash.replace(BEFORE_SLASH_RE, '');
               fileName = folderName + '/' + fileName;
@@ -828,15 +838,16 @@
           }
         }
       }
+
       sourceInfo = ' (at ' + fileName + ':' + source.lineNumber + ')';
     } else if (ownerName) {
       sourceInfo = ' (created by ' + ownerName + ')';
     }
+
     return '\n    in ' + (name || 'Unknown') + sourceInfo;
   };
 
   var Resolved = 1;
-
 
   function refineResolvedLazyComponent(lazyComponent) {
     return lazyComponent._status === Resolved ? lazyComponent._result : null;
@@ -844,7 +855,7 @@
 
   function getWrappedName(outerType, innerType, wrapperName) {
     var functionName = innerType.displayName || innerType.name || '';
-    return outerType.displayName || (functionName !== '' ? wrapperName + '(' + functionName + ')' : wrapperName);
+    return outerType.displayName || (functionName !== '' ? wrapperName + "(" + functionName + ")" : wrapperName);
   }
 
   function getComponentName(type) {
@@ -852,59 +863,74 @@
       // Host root, text node or just invalid type.
       return null;
     }
+
     {
       if (typeof type.tag === 'number') {
         warningWithoutStack$1(false, 'Received an unexpected object in getComponentName(). ' + 'This is likely a bug in React. Please file an issue.');
       }
     }
+
     if (typeof type === 'function') {
       return type.displayName || type.name || null;
     }
+
     if (typeof type === 'string') {
       return type;
     }
+
     switch (type) {
       case REACT_FRAGMENT_TYPE:
         return 'Fragment';
+
       case REACT_PORTAL_TYPE:
         return 'Portal';
+
       case REACT_PROFILER_TYPE:
-        return 'Profiler';
+        return "Profiler";
+
       case REACT_STRICT_MODE_TYPE:
         return 'StrictMode';
+
       case REACT_SUSPENSE_TYPE:
         return 'Suspense';
+
       case REACT_SUSPENSE_LIST_TYPE:
         return 'SuspenseList';
     }
+
     if (typeof type === 'object') {
       switch (type.$$typeof) {
         case REACT_CONTEXT_TYPE:
           return 'Context.Consumer';
+
         case REACT_PROVIDER_TYPE:
           return 'Context.Provider';
+
         case REACT_FORWARD_REF_TYPE:
           return getWrappedName(type, type.render, 'ForwardRef');
+
         case REACT_MEMO_TYPE:
           return getComponentName(type.type);
+
         case REACT_LAZY_TYPE:
           {
             var thenable = type;
             var resolvedThenable = refineResolvedLazyComponent(thenable);
+
             if (resolvedThenable) {
               return getComponentName(resolvedThenable);
             }
+
             break;
           }
       }
     }
+
     return null;
   }
 
   var ReactDebugCurrentFrame = {};
-
   var currentlyValidatingElement = null;
-
   function setCurrentlyValidatingElement(element) {
     {
       currentlyValidatingElement = element;
@@ -916,17 +942,17 @@
     ReactDebugCurrentFrame.getCurrentStack = null;
 
     ReactDebugCurrentFrame.getStackAddendum = function () {
-      var stack = '';
+      var stack = ''; // Add an extra top frame while an element is being validated
 
-      // Add an extra top frame while an element is being validated
       if (currentlyValidatingElement) {
         var name = getComponentName(currentlyValidatingElement.type);
         var owner = currentlyValidatingElement._owner;
         stack += describeComponentFrame(name, currentlyValidatingElement._source, owner && getComponentName(owner.type));
-      }
+      } // Delegate to the injected renderer-specific implementation
 
-      // Delegate to the injected renderer-specific implementation
+
       var impl = ReactDebugCurrentFrame.getCurrentStack;
+
       if (impl) {
         stack += impl() || '';
       }
@@ -938,7 +964,6 @@
   /**
    * Used by act() to track whether you're inside an act() scope.
    */
-
   var IsSomeRendererActing = {
     current: false
   };
@@ -976,41 +1001,41 @@
       if (condition) {
         return;
       }
-      var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
-      var stack = ReactDebugCurrentFrame.getStackAddendum();
-      // eslint-disable-next-line react-internal/warning-and-invariant-args
 
-      for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      var ReactDebugCurrentFrame = ReactSharedInternals.ReactDebugCurrentFrame;
+      var stack = ReactDebugCurrentFrame.getStackAddendum(); // eslint-disable-next-line react-internal/warning-and-invariant-args
+
+      for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         args[_key - 2] = arguments[_key];
       }
 
-      warningWithoutStack$1.apply(undefined, [false, format + '%s'].concat(args, [stack]));
+      warningWithoutStack$1.apply(void 0, [false, format + '%s'].concat(args, [stack]));
     };
   }
 
   var warning$1 = warning;
 
   var hasOwnProperty = Object.prototype.hasOwnProperty;
-
   var RESERVED_PROPS = {
     key: true,
     ref: true,
     __self: true,
     __source: true
   };
-
-  var specialPropKeyWarningShown = void 0;
-  var specialPropRefWarningShown = void 0;
+  var specialPropKeyWarningShown;
+  var specialPropRefWarningShown;
 
   function hasValidRef(config) {
     {
       if (hasOwnProperty.call(config, 'ref')) {
         var getter = Object.getOwnPropertyDescriptor(config, 'ref').get;
+
         if (getter && getter.isReactWarning) {
           return false;
         }
       }
     }
+
     return config.ref !== undefined;
   }
 
@@ -1018,11 +1043,13 @@
     {
       if (hasOwnProperty.call(config, 'key')) {
         var getter = Object.getOwnPropertyDescriptor(config, 'key').get;
+
         if (getter && getter.isReactWarning) {
           return false;
         }
       }
     }
+
     return config.key !== undefined;
   }
 
@@ -1033,6 +1060,7 @@
         warningWithoutStack$1(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
       }
     };
+
     warnAboutAccessingKey.isReactWarning = true;
     Object.defineProperty(props, 'key', {
       get: warnAboutAccessingKey,
@@ -1047,17 +1075,17 @@
         warningWithoutStack$1(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
       }
     };
+
     warnAboutAccessingRef.isReactWarning = true;
     Object.defineProperty(props, 'ref', {
       get: warnAboutAccessingRef,
       configurable: true
     });
   }
-
   /**
    * Factory method to create a new React element. This no longer adheres to
-   * the class pattern, so do not use new to call it. Also, no instanceof check
-   * will work. Instead test $$typeof field against Symbol.for('react.element') to check
+   * the class pattern, so do not use new to call it. Also, instanceof check
+   * will not work. Instead test $$typeof field against Symbol.for('react.element') to check
    * if something is a React Element.
    *
    * @param {*} type
@@ -1074,17 +1102,17 @@
    * indicating filename, line number, and/or other information.
    * @internal
    */
+
+
   var ReactElement = function (type, key, ref, self, source, owner, props) {
     var element = {
       // This tag allows us to uniquely identify this as a React Element
       $$typeof: REACT_ELEMENT_TYPE,
-
       // Built-in properties that belong on the element
       type: type,
       key: key,
       ref: ref,
       props: props,
-
       // Record the component responsible for creating this element.
       _owner: owner
     };
@@ -1094,33 +1122,33 @@
       // an external backing store so that we can freeze the whole object.
       // This can be replaced with a WeakMap once they are implemented in
       // commonly used development environments.
-      element._store = {};
-
-      // To make comparing ReactElements easier for testing purposes, we make
+      element._store = {}; // To make comparing ReactElements easier for testing purposes, we make
       // the validation flag non-enumerable (where possible, which should
       // include every environment we run tests in), so the test framework
       // ignores it.
+
       Object.defineProperty(element._store, 'validated', {
         configurable: false,
         enumerable: false,
         writable: true,
         value: false
-      });
-      // self and source are DEV only properties.
+      }); // self and source are DEV only properties.
+
       Object.defineProperty(element, '_self', {
         configurable: false,
         enumerable: false,
         writable: false,
         value: self
-      });
-      // Two elements created in two different places should be considered
+      }); // Two elements created in two different places should be considered
       // equal for testing purposes and therefore we hide it from enumeration.
+
       Object.defineProperty(element, '_source', {
         configurable: false,
         enumerable: false,
         writable: false,
         value: source
       });
+
       if (Object.freeze) {
         Object.freeze(element.props);
         Object.freeze(element);
@@ -1129,17 +1157,15 @@
 
     return element;
   };
-
   /**
    * Create and return a new ReactElement of the given type.
    * See https://reactjs.org/docs/react-api.html#createelement
    */
+
   function createElement(type, config, children) {
-    var propName = void 0;
+    var propName; // Reserved names are extracted
 
-    // Reserved names are extracted
     var props = {};
-
     var key = null;
     var ref = null;
     var self = null;
@@ -1149,61 +1175,70 @@
       if (hasValidRef(config)) {
         ref = config.ref;
       }
+
       if (hasValidKey(config)) {
         key = '' + config.key;
       }
 
       self = config.__self === undefined ? null : config.__self;
-      source = config.__source === undefined ? null : config.__source;
-      // Remaining properties are added to a new props object
+      source = config.__source === undefined ? null : config.__source; // Remaining properties are added to a new props object
+
       for (propName in config) {
         if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
           props[propName] = config[propName];
         }
       }
-    }
-
-    // Children can be more than one argument, and those are transferred onto
+    } // Children can be more than one argument, and those are transferred onto
     // the newly allocated props object.
+
+
     var childrenLength = arguments.length - 2;
+
     if (childrenLength === 1) {
       props.children = children;
     } else if (childrenLength > 1) {
       var childArray = Array(childrenLength);
+
       for (var i = 0; i < childrenLength; i++) {
         childArray[i] = arguments[i + 2];
       }
+
       {
         if (Object.freeze) {
           Object.freeze(childArray);
         }
       }
-      props.children = childArray;
-    }
 
-    // Resolve default props
+      props.children = childArray;
+    } // Resolve default props
+
+
     if (type && type.defaultProps) {
       var defaultProps = type.defaultProps;
+
       for (propName in defaultProps) {
         if (props[propName] === undefined) {
           props[propName] = defaultProps[propName];
         }
       }
     }
+
     {
       if (key || ref) {
         var displayName = typeof type === 'function' ? type.displayName || type.name || 'Unknown' : type;
+
         if (key) {
           defineKeyPropWarningGetter(props, displayName);
         }
+
         if (ref) {
           defineRefPropWarningGetter(props, displayName);
         }
       }
     }
+
     return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
   }
-
   /**
    * Return a function that produces ReactElements of a given type.
    * See https://reactjs.org/docs/react-api.html#createfactory
@@ -1212,39 +1247,34 @@
 
   function cloneAndReplaceKey(oldElement, newKey) {
     var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
-
     return newElement;
   }
-
   /**
    * Clone and return a new ReactElement using element as the starting point.
    * See https://reactjs.org/docs/react-api.html#cloneelement
    */
+
   function cloneElement(element, config, children) {
-    (function () {
-      if (!!(element === null || element === undefined)) {
-        {
-          throw ReactError(Error('React.cloneElement(...): The argument must be a React element, but you passed ' + element + '.'));
-        }
+    if (!!(element === null || element === undefined)) {
+      {
+        throw Error("React.cloneElement(...): The argument must be a React element, but you passed " + element + ".");
       }
-    })();
+    }
 
-    var propName = void 0;
+    var propName; // Original props are copied
 
-    // Original props are copied
-    var props = _assign({}, element.props);
+    var props = _assign({}, element.props); // Reserved names are extracted
 
-    // Reserved names are extracted
+
     var key = element.key;
-    var ref = element.ref;
-    // Self is preserved since the owner is preserved.
-    var self = element._self;
-    // Source is preserved since cloneElement is unlikely to be targeted by a
+    var ref = element.ref; // Self is preserved since the owner is preserved.
+
+    var self = element._self; // Source is preserved since cloneElement is unlikely to be targeted by a
     // transpiler, and the original source is probably a better indicator of the
     // true owner.
-    var source = element._source;
 
-    // Owner will be preserved, unless ref is overridden
+    var source = element._source; // Owner will be preserved, unless ref is overridden
+
     var owner = element._owner;
 
     if (config != null) {
@@ -1253,15 +1283,18 @@
         ref = config.ref;
         owner = ReactCurrentOwner.current;
       }
+
       if (hasValidKey(config)) {
         key = '' + config.key;
-      }
+      } // Remaining properties override existing props
 
-      // Remaining properties override existing props
-      var defaultProps = void 0;
+
+      var defaultProps;
+
       if (element.type && element.type.defaultProps) {
         defaultProps = element.type.defaultProps;
       }
+
       for (propName in config) {
         if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
           if (config[propName] === undefined && defaultProps !== undefined) {
@@ -1272,24 +1305,26 @@
           }
         }
       }
-    }
-
-    // Children can be more than one argument, and those are transferred onto
+    } // Children can be more than one argument, and those are transferred onto
     // the newly allocated props object.
+
+
     var childrenLength = arguments.length - 2;
+
     if (childrenLength === 1) {
       props.children = children;
     } else if (childrenLength > 1) {
       var childArray = Array(childrenLength);
+
       for (var i = 0; i < childrenLength; i++) {
         childArray[i] = arguments[i + 2];
       }
+
       props.children = childArray;
     }
 
     return ReactElement(element.type, key, ref, self, source, owner, props);
   }
-
   /**
    * Verifies the object is a ReactElement.
    * See https://reactjs.org/docs/react-api.html#isvalidelement
@@ -1297,19 +1332,20 @@
    * @return {boolean} True if `object` is a ReactElement.
    * @final
    */
+
   function isValidElement(object) {
     return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
   }
 
   var SEPARATOR = '.';
   var SUBSEPARATOR = ':';
-
   /**
    * Escape and wrap key so it is safe to use as a reactid
    *
    * @param {string} key to be escaped.
    * @return {string} the escaped key.
    */
+
   function escape(key) {
     var escapeRegex = /[=:]/g;
     var escaperLookup = {
@@ -1319,24 +1355,24 @@
     var escapedString = ('' + key).replace(escapeRegex, function (match) {
       return escaperLookup[match];
     });
-
     return '$' + escapedString;
   }
-
   /**
    * TODO: Test that a single child and an array with one item have the same key
    * pattern.
    */
 
-  var didWarnAboutMaps = false;
 
+  var didWarnAboutMaps = false;
   var userProvidedKeyEscapeRegex = /\/+/g;
+
   function escapeUserProvidedKey(text) {
     return ('' + text).replace(userProvidedKeyEscapeRegex, '$&/');
   }
 
   var POOL_SIZE = 10;
   var traverseContextPool = [];
+
   function getPooledTraverseContext(mapResult, keyPrefix, mapFunction, mapContext) {
     if (traverseContextPool.length) {
       var traverseContext = traverseContextPool.pop();
@@ -1363,11 +1399,11 @@
     traverseContext.func = null;
     traverseContext.context = null;
     traverseContext.count = 0;
+
     if (traverseContextPool.length < POOL_SIZE) {
       traverseContextPool.push(traverseContext);
     }
   }
-
   /**
    * @param {?*} children Children tree container.
    * @param {!string} nameSoFar Name of the key path so far.
@@ -1376,6 +1412,8 @@
    * process.
    * @return {!number} The number of children in this subtree.
    */
+
+
   function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext) {
     var type = typeof children;
 
@@ -1394,26 +1432,28 @@
         case 'number':
           invokeCallback = true;
           break;
+
         case 'object':
           switch (children.$$typeof) {
             case REACT_ELEMENT_TYPE:
             case REACT_PORTAL_TYPE:
               invokeCallback = true;
           }
+
       }
     }
 
     if (invokeCallback) {
-      callback(traverseContext, children,
-      // If it's the only child, treat the name as if it was wrapped in an array
+      callback(traverseContext, children, // If it's the only child, treat the name as if it was wrapped in an array
       // so that it's consistent if the number of children grows.
       nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar);
       return 1;
     }
 
-    var child = void 0;
-    var nextName = void 0;
+    var child;
+    var nextName;
     var subtreeCount = 0; // Count of children found in the current subtree.
+
     var nextNamePrefix = nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
 
     if (Array.isArray(children)) {
@@ -1424,6 +1464,7 @@
       }
     } else {
       var iteratorFn = getIteratorFn(children);
+
       if (typeof iteratorFn === 'function') {
         {
           // Warn about using Maps as children
@@ -1434,8 +1475,9 @@
         }
 
         var iterator = iteratorFn.call(children);
-        var step = void 0;
+        var step;
         var ii = 0;
+
         while (!(step = iterator.next()).done) {
           child = step.value;
           nextName = nextNamePrefix + getComponentKey(child, ii++);
@@ -1443,23 +1485,23 @@
         }
       } else if (type === 'object') {
         var addendum = '';
+
         {
           addendum = ' If you meant to render a collection of children, use an array ' + 'instead.' + ReactDebugCurrentFrame.getStackAddendum();
         }
+
         var childrenString = '' + children;
-        (function () {
+
+        {
           {
-            {
-              throw ReactError(Error('Objects are not valid as a React child (found: ' + (childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString) + ').' + addendum));
-            }
+            throw Error("Objects are not valid as a React child (found: " + (childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString) + ")." + addendum);
           }
-        })();
+        }
       }
     }
 
     return subtreeCount;
   }
-
   /**
    * Traverses children that are typically specified as `props.children`, but
    * might also be specified through attributes:
@@ -1476,6 +1518,8 @@
    * @param {?*} traverseContext Context for traversal.
    * @return {!number} The number of children in this subtree.
    */
+
+
   function traverseAllChildren(children, callback, traverseContext) {
     if (children == null) {
       return 0;
@@ -1483,7 +1527,6 @@
 
     return traverseAllChildrenImpl(children, '', callback, traverseContext);
   }
-
   /**
    * Generate a key string that identifies a component within a set.
    *
@@ -1491,24 +1534,25 @@
    * @param {number} index Index that is used if a manual key is not provided.
    * @return {string}
    */
+
+
   function getComponentKey(component, index) {
     // Do some typechecking here since we call this blindly. We want to ensure
     // that we don't block potential future ES APIs.
     if (typeof component === 'object' && component !== null && component.key != null) {
       // Explicit key
       return escape(component.key);
-    }
-    // Implicit key determined by the index in the set
+    } // Implicit key determined by the index in the set
+
+
     return index.toString(36);
   }
 
   function forEachSingleChild(bookKeeping, child, name) {
     var func = bookKeeping.func,
         context = bookKeeping.context;
-
     func.call(context, child, bookKeeping.count++);
   }
-
   /**
    * Iterates through children that are typically specified as `props.children`.
    *
@@ -1521,10 +1565,13 @@
    * @param {function(*, int)} forEachFunc
    * @param {*} forEachContext Context for forEachContext.
    */
+
+
   function forEachChildren(children, forEachFunc, forEachContext) {
     if (children == null) {
       return children;
     }
+
     var traverseContext = getPooledTraverseContext(null, null, forEachFunc, forEachContext);
     traverseAllChildren(children, forEachSingleChild, traverseContext);
     releaseTraverseContext(traverseContext);
@@ -1535,34 +1582,34 @@
         keyPrefix = bookKeeping.keyPrefix,
         func = bookKeeping.func,
         context = bookKeeping.context;
-
-
     var mappedChild = func.call(context, child, bookKeeping.count++);
+
     if (Array.isArray(mappedChild)) {
       mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, function (c) {
         return c;
       });
     } else if (mappedChild != null) {
       if (isValidElement(mappedChild)) {
-        mappedChild = cloneAndReplaceKey(mappedChild,
-        // Keep both the (mapped) and old keys if they differ, just as
+        mappedChild = cloneAndReplaceKey(mappedChild, // Keep both the (mapped) and old keys if they differ, just as
         // traverseAllChildren used to do for objects as children
         keyPrefix + (mappedChild.key && (!child || child.key !== mappedChild.key) ? escapeUserProvidedKey(mappedChild.key) + '/' : '') + childKey);
       }
+
       result.push(mappedChild);
     }
   }
 
   function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
     var escapedPrefix = '';
+
     if (prefix != null) {
       escapedPrefix = escapeUserProvidedKey(prefix) + '/';
     }
+
     var traverseContext = getPooledTraverseContext(array, escapedPrefix, func, context);
     traverseAllChildren(children, mapSingleChildIntoContext, traverseContext);
     releaseTraverseContext(traverseContext);
   }
-
   /**
    * Maps children that are typically specified as `props.children`.
    *
@@ -1576,15 +1623,17 @@
    * @param {*} context Context for mapFunction.
    * @return {object} Object containing the ordered map of results.
    */
+
+
   function mapChildren(children, func, context) {
     if (children == null) {
       return children;
     }
+
     var result = [];
     mapIntoWithKeyPrefixInternal(children, result, null, func, context);
     return result;
   }
-
   /**
    * Count the number of children that are typically specified as
    * `props.children`.
@@ -1594,18 +1643,21 @@
    * @param {?*} children Children tree container.
    * @return {number} The number of children.
    */
+
+
   function countChildren(children) {
     return traverseAllChildren(children, function () {
       return null;
     }, null);
   }
-
   /**
    * Flatten a children object (typically specified as `props.children`) and
    * return an array with appropriately re-keyed children.
    *
    * See https://reactjs.org/docs/react-api.html#reactchildrentoarray
    */
+
+
   function toArray(children) {
     var result = [];
     mapIntoWithKeyPrefixInternal(children, result, null, function (child) {
@@ -1613,7 +1665,6 @@
     });
     return result;
   }
-
   /**
    * Returns the first child in a collection of children and verifies that there
    * is only one child in the collection.
@@ -1628,14 +1679,15 @@
    * @return {ReactElement} The first and only `ReactElement` contained in the
    * structure.
    */
+
+
   function onlyChild(children) {
-    (function () {
-      if (!isValidElement(children)) {
-        {
-          throw ReactError(Error('React.Children.only expected to receive a single React element child.'));
-        }
+    if (!isValidElement(children)) {
+      {
+        throw Error("React.Children.only expected to receive a single React element child.");
       }
-    })();
+    }
+
     return children;
   }
 
@@ -1665,12 +1717,10 @@
       Provider: null,
       Consumer: null
     };
-
     context.Provider = {
       $$typeof: REACT_PROVIDER_TYPE,
       _context: context
     };
-
     var hasWarnedAboutUsingNestedContextConsumers = false;
     var hasWarnedAboutUsingConsumerProvider = false;
 
@@ -1682,8 +1732,8 @@
         $$typeof: REACT_CONTEXT_TYPE,
         _context: context,
         _calculateChangedBits: context._calculateChangedBits
-      };
-      // $FlowFixMe: Flow complains about not setting a value, which is intentional here
+      }; // $FlowFixMe: Flow complains about not setting a value, which is intentional here
+
       Object.defineProperties(Consumer, {
         Provider: {
           get: function () {
@@ -1691,6 +1741,7 @@
               hasWarnedAboutUsingConsumerProvider = true;
               warning$1(false, 'Rendering <Context.Consumer.Provider> is not supported and will be removed in ' + 'a future major release. Did you mean to render <Context.Provider> instead?');
             }
+
             return context.Provider;
           },
           set: function (_Provider) {
@@ -1727,11 +1778,12 @@
               hasWarnedAboutUsingNestedContextConsumers = true;
               warning$1(false, 'Rendering <Context.Consumer.Consumer> is not supported and will be removed in ' + 'a future major release. Did you mean to render <Context.Consumer> instead?');
             }
+
             return context.Consumer;
           }
         }
-      });
-      // $FlowFixMe: Flow complains about missing properties because it doesn't understand defineProperty
+      }); // $FlowFixMe: Flow complains about missing properties because it doesn't understand defineProperty
+
       context.Consumer = Consumer;
     }
 
@@ -1754,8 +1806,8 @@
 
     {
       // In production, this would just set it on the object.
-      var defaultProps = void 0;
-      var propTypes = void 0;
+      var defaultProps;
+      var propTypes;
       Object.defineProperties(lazyType, {
         defaultProps: {
           configurable: true,
@@ -1764,8 +1816,8 @@
           },
           set: function (newDefaultProps) {
             warning$1(false, 'React.lazy(...): It is not supported to assign `defaultProps` to ' + 'a lazy component import. Either specify them where the component ' + 'is defined, or create a wrapping component around it.');
-            defaultProps = newDefaultProps;
-            // Match production behavior more closely:
+            defaultProps = newDefaultProps; // Match production behavior more closely:
+
             Object.defineProperty(lazyType, 'defaultProps', {
               enumerable: true
             });
@@ -1778,8 +1830,8 @@
           },
           set: function (newPropTypes) {
             warning$1(false, 'React.lazy(...): It is not supported to assign `propTypes` to ' + 'a lazy component import. Either specify them where the component ' + 'is defined, or create a wrapping component around it.');
-            propTypes = newPropTypes;
-            // Match production behavior more closely:
+            propTypes = newPropTypes; // Match production behavior more closely:
+
             Object.defineProperty(lazyType, 'propTypes', {
               enumerable: true
             });
@@ -1798,8 +1850,7 @@
       } else if (typeof render !== 'function') {
         warningWithoutStack$1(false, 'forwardRef requires a render function but was given %s.', render === null ? 'null' : typeof render);
       } else {
-        !(
-        // Do not warn for 0 arguments because it could be due to usage of the 'arguments' object
+        !( // Do not warn for 0 arguments because it could be due to usage of the 'arguments' object
         render.length === 0 || render.length === 2) ? warningWithoutStack$1(false, 'forwardRef render functions accept exactly two parameters: props and ref. %s', render.length === 1 ? 'Did you forget to use the ref parameter?' : 'Any additional parameter will be undefined.') : void 0;
       }
 
@@ -1815,9 +1866,8 @@
   }
 
   function isValidElementType(type) {
-    return typeof type === 'string' || typeof type === 'function' ||
-    // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-    type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE);
+    return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+    type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE);
   }
 
   function memo(type, compare) {
@@ -1826,6 +1876,7 @@
         warningWithoutStack$1(false, 'memo: The first argument must be a component. Instead ' + 'received: %s', type === null ? 'null' : typeof type);
       }
     }
+
     return {
       $$typeof: REACT_MEMO_TYPE,
       type: type,
@@ -1835,26 +1886,26 @@
 
   function resolveDispatcher() {
     var dispatcher = ReactCurrentDispatcher.current;
-    (function () {
-      if (!(dispatcher !== null)) {
-        {
-          throw ReactError(Error('Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.'));
-        }
+
+    if (!(dispatcher !== null)) {
+      {
+        throw Error("Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.");
       }
-    })();
+    }
+
     return dispatcher;
   }
 
   function useContext(Context, unstable_observedBits) {
     var dispatcher = resolveDispatcher();
-    {
-      !(unstable_observedBits === undefined) ? warning$1(false, 'useContext() second argument is reserved for future ' + 'use in React. Passing it is not supported. ' + 'You passed: %s.%s', unstable_observedBits, typeof unstable_observedBits === 'number' && Array.isArray(arguments[2]) ? '\n\nDid you call array.map(useContext)? ' + 'Calling Hooks inside a loop is not supported. ' + 'Learn more at https://fb.me/rules-of-hooks' : '') : void 0;
 
-      // TODO: add a more generic warning for invalid values.
+    {
+      !(unstable_observedBits === undefined) ? warning$1(false, 'useContext() second argument is reserved for future ' + 'use in React. Passing it is not supported. ' + 'You passed: %s.%s', unstable_observedBits, typeof unstable_observedBits === 'number' && Array.isArray(arguments[2]) ? '\n\nDid you call array.map(useContext)? ' + 'Calling Hooks inside a loop is not supported. ' + 'Learn more at https://fb.me/rules-of-hooks' : '') : void 0; // TODO: add a more generic warning for invalid values.
+
       if (Context._context !== undefined) {
-        var realContext = Context._context;
-        // Don't deduplicate because this legitimately causes bugs
+        var realContext = Context._context; // Don't deduplicate because this legitimately causes bugs
         // and nobody should be using this in existing code.
+
         if (realContext.Consumer === Context) {
           warning$1(false, 'Calling useContext(Context.Consumer) is not supported, may cause bugs, and will be ' + 'removed in a future major release. Did you mean to call useContext(Context) instead?');
         } else if (realContext.Provider === Context) {
@@ -1862,64 +1913,45 @@
         }
       }
     }
+
     return dispatcher.useContext(Context, unstable_observedBits);
   }
-
   function useState(initialState) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useState(initialState);
   }
-
   function useReducer(reducer, initialArg, init) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useReducer(reducer, initialArg, init);
   }
-
   function useRef(initialValue) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useRef(initialValue);
   }
-
   function useEffect(create, inputs) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useEffect(create, inputs);
   }
-
   function useLayoutEffect(create, inputs) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useLayoutEffect(create, inputs);
   }
-
   function useCallback(callback, inputs) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useCallback(callback, inputs);
   }
-
   function useMemo(create, inputs) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useMemo(create, inputs);
   }
-
   function useImperativeHandle(ref, create, inputs) {
     var dispatcher = resolveDispatcher();
     return dispatcher.useImperativeHandle(ref, create, inputs);
   }
-
   function useDebugValue(value, formatterFn) {
     {
       var dispatcher = resolveDispatcher();
       return dispatcher.useDebugValue(value, formatterFn);
-    }
-  }
-
-  // Within the scope of the callback, mark all updates as being allowed to suspend.
-  function withSuspenseConfig(scope, config) {
-    var previousConfig = ReactCurrentBatchConfig.suspense;
-    ReactCurrentBatchConfig.suspense = config === undefined ? null : config;
-    try {
-      scope();
-    } finally {
-      ReactCurrentBatchConfig.suspense = previousConfig;
     }
   }
 
@@ -1929,8 +1961,7 @@
    * used only in DEV and could be replaced by a static type checker for languages
    * that support it.
    */
-
-  var propTypesMisspellWarningShown = void 0;
+  var propTypesMisspellWarningShown;
 
   {
     propTypesMisspellWarningShown = false;
@@ -1939,10 +1970,12 @@
   function getDeclarationErrorAddendum() {
     if (ReactCurrentOwner.current) {
       var name = getComponentName(ReactCurrentOwner.current.type);
+
       if (name) {
         return '\n\nCheck the render method of `' + name + '`.';
       }
     }
+
     return '';
   }
 
@@ -1952,6 +1985,7 @@
       var lineNumber = source.lineNumber;
       return '\n\nCheck your code at ' + fileName + ':' + lineNumber + '.';
     }
+
     return '';
   }
 
@@ -1959,14 +1993,16 @@
     if (elementProps !== null && elementProps !== undefined) {
       return getSourceInfoErrorAddendum(elementProps.__source);
     }
+
     return '';
   }
-
   /**
    * Warn if there's no key explicitly set on dynamic arrays of children or
    * object keys are not valid. This allows us to keep track of children between
    * updates.
    */
+
+
   var ownerHasKeyUseWarning = {};
 
   function getCurrentComponentErrorInfo(parentType) {
@@ -1974,13 +2010,14 @@
 
     if (!info) {
       var parentName = typeof parentType === 'string' ? parentType : parentType.displayName || parentType.name;
+
       if (parentName) {
-        info = '\n\nCheck the top-level render call using <' + parentName + '>.';
+        info = "\n\nCheck the top-level render call using <" + parentName + ">.";
       }
     }
+
     return info;
   }
-
   /**
    * Warn if the element doesn't have an explicit key assigned to it.
    * This element is in an array. The array could grow and shrink or be
@@ -1992,34 +2029,39 @@
    * @param {ReactElement} element Element that requires a key.
    * @param {*} parentType element's parent's type.
    */
+
+
   function validateExplicitKey(element, parentType) {
     if (!element._store || element._store.validated || element.key != null) {
       return;
     }
-    element._store.validated = true;
 
+    element._store.validated = true;
     var currentComponentErrorInfo = getCurrentComponentErrorInfo(parentType);
+
     if (ownerHasKeyUseWarning[currentComponentErrorInfo]) {
       return;
     }
-    ownerHasKeyUseWarning[currentComponentErrorInfo] = true;
 
-    // Usually the current owner is the offender, but if it accepts children as a
+    ownerHasKeyUseWarning[currentComponentErrorInfo] = true; // Usually the current owner is the offender, but if it accepts children as a
     // property, it may be the creator of the child that's responsible for
     // assigning it a key.
+
     var childOwner = '';
+
     if (element && element._owner && element._owner !== ReactCurrentOwner.current) {
       // Give the component that originally created this child.
-      childOwner = ' It was passed a child from ' + getComponentName(element._owner.type) + '.';
+      childOwner = " It was passed a child from " + getComponentName(element._owner.type) + ".";
     }
 
     setCurrentlyValidatingElement(element);
+
     {
       warning$1(false, 'Each child in a list should have a unique "key" prop.' + '%s%s See https://fb.me/react-warning-keys for more information.', currentComponentErrorInfo, childOwner);
     }
+
     setCurrentlyValidatingElement(null);
   }
-
   /**
    * Ensure that every element either is passed in a static location, in an
    * array with an explicit keys property defined, or in an object literal
@@ -2029,13 +2071,17 @@
    * @param {ReactNode} node Statically passed child of any type.
    * @param {*} parentType node's parent's type.
    */
+
+
   function validateChildKeys(node, parentType) {
     if (typeof node !== 'object') {
       return;
     }
+
     if (Array.isArray(node)) {
       for (var i = 0; i < node.length; i++) {
         var child = node[i];
+
         if (isValidElement(child)) {
           validateExplicitKey(child, parentType);
         }
@@ -2047,12 +2093,14 @@
       }
     } else if (node) {
       var iteratorFn = getIteratorFn(node);
+
       if (typeof iteratorFn === 'function') {
         // Entry iterators used to provide implicit keys,
         // but now we print a separate warning for them later.
         if (iteratorFn !== node.entries) {
           var iterator = iteratorFn.call(node);
-          var step = void 0;
+          var step;
+
           while (!(step = iterator.next()).done) {
             if (isValidElement(step.value)) {
               validateExplicitKey(step.value, parentType);
@@ -2062,30 +2110,34 @@
       }
     }
   }
-
   /**
    * Given an element, validate that its props follow the propTypes definition,
    * provided by the type.
    *
    * @param {ReactElement} element
    */
+
+
   function validatePropTypes(element) {
     var type = element.type;
+
     if (type === null || type === undefined || typeof type === 'string') {
       return;
     }
+
     var name = getComponentName(type);
-    var propTypes = void 0;
+    var propTypes;
+
     if (typeof type === 'function') {
       propTypes = type.propTypes;
-    } else if (typeof type === 'object' && (type.$$typeof === REACT_FORWARD_REF_TYPE ||
-    // Note: Memo only checks outer props here.
+    } else if (typeof type === 'object' && (type.$$typeof === REACT_FORWARD_REF_TYPE || // Note: Memo only checks outer props here.
     // Inner props are checked in the reconciler.
     type.$$typeof === REACT_MEMO_TYPE)) {
       propTypes = type.propTypes;
     } else {
       return;
     }
+
     if (propTypes) {
       setCurrentlyValidatingElement(element);
       checkPropTypes(propTypes, element.props, 'prop', name, ReactDebugCurrentFrame.getStackAddendum);
@@ -2094,21 +2146,24 @@
       propTypesMisspellWarningShown = true;
       warningWithoutStack$1(false, 'Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?', name || 'Unknown');
     }
+
     if (typeof type.getDefaultProps === 'function') {
       !type.getDefaultProps.isReactClassApproved ? warningWithoutStack$1(false, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : void 0;
     }
   }
-
   /**
    * Given a fragment, validate that it can only be provided with fragment props
    * @param {ReactElement} fragment
    */
+
+
   function validateFragmentProps(fragment) {
     setCurrentlyValidatingElement(fragment);
-
     var keys = Object.keys(fragment.props);
+
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
+
       if (key !== 'children' && key !== 'key') {
         warning$1(false, 'Invalid prop `%s` supplied to `React.Fragment`. ' + 'React.Fragment can only have `key` and `children` props.', key);
         break;
@@ -2121,32 +2176,33 @@
 
     setCurrentlyValidatingElement(null);
   }
-
   function createElementWithValidation(type, props, children) {
-    var validType = isValidElementType(type);
-
-    // We warn in this case but don't throw. We expect the element creation to
+    var validType = isValidElementType(type); // We warn in this case but don't throw. We expect the element creation to
     // succeed and there will likely be errors in render.
+
     if (!validType) {
       var info = '';
+
       if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
         info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and named imports.";
       }
 
       var sourceInfo = getSourceInfoErrorAddendumForProps(props);
+
       if (sourceInfo) {
         info += sourceInfo;
       } else {
         info += getDeclarationErrorAddendum();
       }
 
-      var typeString = void 0;
+      var typeString;
+
       if (type === null) {
         typeString = 'null';
       } else if (Array.isArray(type)) {
         typeString = 'array';
       } else if (type !== undefined && type.$$typeof === REACT_ELEMENT_TYPE) {
-        typeString = '<' + (getComponentName(type.type) || 'Unknown') + ' />';
+        typeString = "<" + (getComponentName(type.type) || 'Unknown') + " />";
         info = ' Did you accidentally export a JSX literal instead of a component?';
       } else {
         typeString = typeof type;
@@ -2155,19 +2211,18 @@
       warning$1(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', typeString, info);
     }
 
-    var element = createElement.apply(this, arguments);
-
-    // The result can be nullish if a mock or a custom function is used.
+    var element = createElement.apply(this, arguments); // The result can be nullish if a mock or a custom function is used.
     // TODO: Drop this when these are no longer allowed as the type argument.
+
     if (element == null) {
       return element;
-    }
-
-    // Skip key warning if the type isn't valid since our key validation logic
+    } // Skip key warning if the type isn't valid since our key validation logic
     // doesn't expect a non-string/function type and can throw confusing errors.
     // We don't want exception behavior to differ between dev and prod.
     // (Rendering will throw with a helpful message and as soon as the type is
     // fixed, the key warnings will appear.)
+
+
     if (validType) {
       for (var i = 2; i < arguments.length; i++) {
         validateChildKeys(arguments[i], type);
@@ -2182,16 +2237,15 @@
 
     return element;
   }
-
   function createFactoryWithValidation(type) {
     var validatedFactory = createElementWithValidation.bind(null, type);
-    validatedFactory.type = type;
-    // Legacy hook: remove it
+    validatedFactory.type = type; // Legacy hook: remove it
+
     {
       Object.defineProperty(validatedFactory, 'type', {
         enumerable: false,
         get: function () {
-          lowPriorityWarning$1(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.');
+          lowPriorityWarningWithoutStack$1(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.');
           Object.defineProperty(this, 'type', {
             value: type
           });
@@ -2202,53 +2256,51 @@
 
     return validatedFactory;
   }
-
   function cloneElementWithValidation(element, props, children) {
     var newElement = cloneElement.apply(this, arguments);
+
     for (var i = 2; i < arguments.length; i++) {
       validateChildKeys(arguments[i], newElement.type);
     }
+
     validatePropTypes(newElement);
     return newElement;
   }
 
   {
+
     try {
       var frozenObject = Object.freeze({});
       var testMap = new Map([[frozenObject, null]]);
-      var testSet = new Set([frozenObject]);
-      // This is necessary for Rollup to not consider these unused.
+      var testSet = new Set([frozenObject]); // This is necessary for Rollup to not consider these unused.
       // https://github.com/rollup/rollup/issues/1771
       // TODO: we can remove these if Rollup fixes the bug.
+
       testMap.set(0, 0);
       testSet.add(0);
     } catch (e) {
     }
   }
+  // Till then, we warn about the missing mock, but still fallback to a legacy mode compatible version
 
-  // We will enforce mocking scheduler with scheduler/unstable_mock at some point. (v17?)
-  // Till then, we warn about the missing mock, but still fallback to a sync mode compatible version
-
-  // Temporary flag to revert the fix in #15650
-
-
-  // For tests, we flush suspense fallbacks in an act scope;
+   // For tests, we flush suspense fallbacks in an act scope;
   // *except* in some of our own tests, where we test incremental loading states.
 
-
-  // Changes priority of some events like mousemove to user-blocking priority,
-  // but without making them discrete. The flag exists in case it causes
-  // starvation problems.
-
-
-  // Add a callback property to suspense to notify which promises are currently
+   // Add a callback property to suspense to notify which promises are currently
   // in the update queue. This allows reporting and tracing of what is causing
   // the user to see a loading state.
+  // Also allows hydration callbacks to fire when a dehydrated boundary gets
+  // hydrated or deleted.
 
-
-  // Part of the simplification of React.createElement so we can eventually move
+   // Part of the simplification of React.createElement so we can eventually move
   // from React.createElement to React.jsx
   // https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md
+
+
+
+
+
+   // Flag to turn event.target and event.currentTarget in ReactNative from a reactTag to a component instance
 
   var React = {
     Children: {
@@ -2258,16 +2310,13 @@
       toArray: toArray,
       only: onlyChild
     },
-
     createRef: createRef,
     Component: Component,
     PureComponent: PureComponent,
-
     createContext: createContext,
     forwardRef: forwardRef,
     lazy: lazy,
     memo: memo,
-
     useCallback: useCallback,
     useContext: useContext,
     useEffect: useEffect,
@@ -2278,22 +2327,15 @@
     useReducer: useReducer,
     useRef: useRef,
     useState: useState,
-
     Fragment: REACT_FRAGMENT_TYPE,
     Profiler: REACT_PROFILER_TYPE,
     StrictMode: REACT_STRICT_MODE_TYPE,
     Suspense: REACT_SUSPENSE_TYPE,
-    unstable_SuspenseList: REACT_SUSPENSE_LIST_TYPE,
-
     createElement: createElementWithValidation,
     cloneElement: cloneElementWithValidation,
     createFactory: createFactoryWithValidation,
     isValidElement: isValidElement,
-
     version: ReactVersion,
-
-    unstable_withSuspenseConfig: withSuspenseConfig,
-
     __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: ReactSharedInternals
   };
 
@@ -2307,6 +2349,8 @@
 
   // TODO: decide on the top-level export form.
   // This is hacky but makes it work with both Rollup and Jest.
+
+
   var react = React$3.default || React$3;
 
   module.exports = react;
@@ -2322,6 +2366,90 @@
     module.exports = react_development;
   }
   });
+
+  function styleInject(css, ref) {
+    if ( ref === void 0 ) ref = {};
+    var insertAt = ref.insertAt;
+
+    if (!css || typeof document === 'undefined') { return; }
+
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (insertAt === 'top') {
+      if (head.firstChild) {
+        head.insertBefore(style, head.firstChild);
+      } else {
+        head.appendChild(style);
+      }
+    } else {
+      head.appendChild(style);
+    }
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+  }
+
+  var css = ".art-video-player{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative;margin:0 auto;z-index:10;width:100%;height:100%;outline:0;zoom:1;font-family:Roboto,Arial,Helvetica,sans-serif;color:#eee;text-align:left;direction:ltr;font-size:14px;line-height:1.3;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-ms-touch-action:manipulation;touch-action:manipulation;-ms-high-contrast-adjust:none}.art-video-player *{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box}.art-video-player ::-webkit-scrollbar{width:5px}.art-video-player ::-webkit-scrollbar-thumb{background-color:#666}.art-video-player ::-webkit-scrollbar-thumb:hover{background-color:#ccc}.art-video-player .art-icon{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;line-height:1.5}.art-video-player .art-icon svg{fill:#fff}.art-video-player img{max-width:100%;vertical-align:top}.art-video-player>object{display:block;position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden;pointer-events:none;z-index:-1}@supports ((-webkit-backdrop-filter:initial) or (backdrop-filter:initial)){.art-video-player .art-backdrop-filter{-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);background-color:rgba(0,0,0,.7)!important}}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFydHBsYXllci5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGtCQUNFLG1CQUFhLENBQWIsbUJBQWEsQ0FBYixZQUFhLENBQ2IsaUJBQWtCLENBQ2xCLGFBQWMsQ0FDZCxVQUFXLENBQ1gsVUFBVyxDQUNYLFdBQVksQ0FDWixTQUFVLENBQ1YsTUFBTyxDQUNQLDZDQUFpRCxDQUNqRCxVQUFXLENBQ1gsZUFBZ0IsQ0FDaEIsYUFBYyxDQUNkLGNBQWUsQ0FDZixlQUFnQixDQUNoQix3QkFBaUIsQ0FBakIscUJBQWlCLENBQWpCLG9CQUFpQixDQUFqQixnQkFBaUIsQ0FDakIseUNBQTZDLENBQzdDLDZCQUEwQixDQUExQix5QkFBMEIsQ0FDMUIsNkJBQWdDLENBQ2hDLG9CQUNFLFFBQVMsQ0FDVCxTQUFVLENBQ1YsNkJBQXNCLENBQXRCLHFCQUF3QixDQUMxQixzQ0FDRSxTQUFZLENBQ2QsNENBQ0UscUJBQXdCLENBQzFCLGtEQUNFLHFCQUF3QixDQUMxQiw0QkFDRSwwQkFBb0IsQ0FBcEIsMEJBQW9CLENBQXBCLG1CQUFvQixDQUNwQix1QkFBdUIsQ0FBdkIsb0JBQXVCLENBQXZCLHNCQUF1QixDQUN2Qix3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQixlQUFrQixDQUNsQixnQ0FDRSxTQUFZLENBQ2hCLHNCQUNFLGNBQWUsQ0FDZixrQkFBcUIsQ0FDdkIseUJBQ0UsYUFBYyxDQUNkLGlCQUFrQixDQUNsQixLQUFNLENBQ04sTUFBTyxDQUNQLFdBQVksQ0FDWixVQUFXLENBQ1gsZUFBZ0IsQ0FDaEIsbUJBQW9CLENBQ3BCLFVBQWEsQ0FDZiwyRUFDRSx1Q0FDRSxpREFBa0QsQ0FDbEQseUNBQTBDLENBQzFDLHlDQUFpRCxDQUFFIiwiZmlsZSI6ImFydHBsYXllci5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFydC12aWRlby1wbGF5ZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIG1hcmdpbjogMCBhdXRvO1xuICB6LWluZGV4OiAxMDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgb3V0bGluZTogMDtcbiAgem9vbTogMTtcbiAgZm9udC1mYW1pbHk6IFJvYm90bywgQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZjtcbiAgY29sb3I6ICNlZWU7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG4gIGRpcmVjdGlvbjogbHRyO1xuICBmb250LXNpemU6IDE0cHg7XG4gIGxpbmUtaGVpZ2h0OiAxLjM7XG4gIHVzZXItc2VsZWN0OiBub25lO1xuICAtd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMCk7XG4gIHRvdWNoLWFjdGlvbjogbWFuaXB1bGF0aW9uO1xuICAtbXMtaGlnaC1jb250cmFzdC1hZGp1c3Q6IG5vbmU7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgKiB7XG4gICAgbWFyZ2luOiAwO1xuICAgIHBhZGRpbmc6IDA7XG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDsgfVxuICAuYXJ0LXZpZGVvLXBsYXllciA6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcbiAgICB3aWR0aDogNXB4OyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIDo6LXdlYmtpdC1zY3JvbGxiYXItdGh1bWIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICM2NjY7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgOjotd2Via2l0LXNjcm9sbGJhci10aHVtYjpob3ZlciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2NjYzsgfVxuICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWljb24ge1xuICAgIGRpc3BsYXk6IGlubGluZS1mbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgbGluZS1oZWlnaHQ6IDEuNTsgfVxuICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtaWNvbiBzdmcge1xuICAgICAgZmlsbDogI2ZmZjsgfVxuICAuYXJ0LXZpZGVvLXBsYXllciBpbWcge1xuICAgIG1heC13aWR0aDogMTAwJTtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogdG9wOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyID4gPiA+IG9iamVjdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICBsZWZ0OiAwO1xuICAgIGhlaWdodDogMTAwJTtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICAgIHotaW5kZXg6IC0xOyB9XG4gIEBzdXBwb3J0cyAoLXdlYmtpdC1iYWNrZHJvcC1maWx0ZXI6IGluaXRpYWwpIG9yIChiYWNrZHJvcC1maWx0ZXI6IGluaXRpYWwpIHtcbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJhY2tkcm9wLWZpbHRlciB7XG4gICAgICAtd2Via2l0LWJhY2tkcm9wLWZpbHRlcjogc2F0dXJhdGUoMTgwJSkgYmx1cigyMHB4KTtcbiAgICAgIGJhY2tkcm9wLWZpbHRlcjogc2F0dXJhdGUoMTgwJSkgYmx1cigyMHB4KTtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC43KSAhaW1wb3J0YW50OyB9IH1cbiJdfQ== */";
+  styleInject(css);
+
+  var css$1 = ".art-video-player .art-video{position:absolute;z-index:10;left:0;top:0;right:0;bottom:0;width:100%;height:100%;background-color:#000;cursor:pointer}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZGVvLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsNkJBQ0UsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxNQUFPLENBQ1AsS0FBTSxDQUNOLE9BQVEsQ0FDUixRQUFTLENBQ1QsVUFBVyxDQUNYLFdBQVksQ0FDWixxQkFBc0IsQ0FDdEIsY0FBaUIiLCJmaWxlIjoidmlkZW8uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtdmlkZW8ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHotaW5kZXg6IDEwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDA7XG4gIGN1cnNvcjogcG9pbnRlcjsgfVxuIl19 */";
+  styleInject(css$1);
+
+  var css$2 = ".art-video-player .art-subtitle{display:none;position:absolute;z-index:20;bottom:40px;width:100%;padding:0 20px;text-align:center;color:#fff;font-size:20px;pointer-events:none;text-shadow:.5px .5px .5px rgba(0,0,0,.5)}.art-video-player .art-subtitle p{margin:5px 0}.art-video-player.art-subtitle-show .art-subtitle{display:block}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN1YnRpdGxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0NBQ0UsWUFBYSxDQUNiLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsV0FBWSxDQUNaLFVBQVcsQ0FDWCxjQUFlLENBQ2YsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxjQUFlLENBQ2YsbUJBQW9CLENBQ3BCLHlDQUFtRCxDQUNuRCxrQ0FDRSxZQUFlLENBRW5CLGtEQUNFLGFBQWdCIiwiZmlsZSI6InN1YnRpdGxlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXN1YnRpdGxlIHtcbiAgZGlzcGxheTogbm9uZTtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiAyMDtcbiAgYm90dG9tOiA0MHB4O1xuICB3aWR0aDogMTAwJTtcbiAgcGFkZGluZzogMCAyMHB4O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGNvbG9yOiAjZmZmO1xuICBmb250LXNpemU6IDIwcHg7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICB0ZXh0LXNoYWRvdzogMC41cHggMC41cHggMC41cHggcmdiYSgwLCAwLCAwLCAwLjUpOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtc3VidGl0bGUgcCB7XG4gICAgbWFyZ2luOiA1cHggMDsgfVxuXG4uYXJ0LXZpZGVvLXBsYXllci5hcnQtc3VidGl0bGUtc2hvdyAuYXJ0LXN1YnRpdGxlIHtcbiAgZGlzcGxheTogYmxvY2s7IH1cbiJdfQ== */";
+  styleInject(css$2);
+
+  var css$3 = ".art-video-player .art-danmuku{position:absolute;z-index:30;left:0;top:0;right:0;bottom:0;width:100%;height:100%;overflow:hidden;pointer-events:none}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRhbm11a3Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSwrQkFDRSxpQkFBa0IsQ0FDbEIsVUFBVyxDQUNYLE1BQU8sQ0FDUCxLQUFNLENBQ04sT0FBUSxDQUNSLFFBQVMsQ0FDVCxVQUFXLENBQ1gsV0FBWSxDQUNaLGVBQWdCLENBQ2hCLG1CQUFzQiIsImZpbGUiOiJkYW5tdWt1LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWRhbm11a3Uge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHotaW5kZXg6IDMwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHBvaW50ZXItZXZlbnRzOiBub25lOyB9XG4iXX0= */";
+  styleInject(css$3);
+
+  var css$4 = ".art-video-player .art-layers{display:none;position:absolute;z-index:40;left:0;top:0;right:0;bottom:0;width:100%;height:100%;overflow:hidden;pointer-events:none}.art-video-player .art-layers .art-layer{pointer-events:auto}.art-video-player.art-layer-show .art-layers{display:block}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxheWVycy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDhCQUNFLFlBQWEsQ0FDYixpQkFBa0IsQ0FDbEIsVUFBVyxDQUNYLE1BQU8sQ0FDUCxLQUFNLENBQ04sT0FBUSxDQUNSLFFBQVMsQ0FDVCxVQUFXLENBQ1gsV0FBWSxDQUNaLGVBQWdCLENBQ2hCLG1CQUFzQixDQUN0Qix5Q0FDRSxtQkFBc0IsQ0FFMUIsNkNBQ0UsYUFBZ0IiLCJmaWxlIjoibGF5ZXJzLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWxheWVycyB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgei1pbmRleDogNDA7XG4gIGxlZnQ6IDA7XG4gIHRvcDogMDtcbiAgcmlnaHQ6IDA7XG4gIGJvdHRvbTogMDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1sYXllcnMgLmFydC1sYXllciB7XG4gICAgcG9pbnRlci1ldmVudHM6IGF1dG87IH1cblxuLmFydC12aWRlby1wbGF5ZXIuYXJ0LWxheWVyLXNob3cgLmFydC1sYXllcnMge1xuICBkaXNwbGF5OiBibG9jazsgfVxuIl19 */";
+  styleInject(css$4);
+
+  var css$5 = ".art-video-player .art-mask{display:none;z-index:50;left:0;top:0;right:0;bottom:0;width:100%;height:100%;overflow:hidden;pointer-events:none}.art-video-player .art-mask,.art-video-player .art-mask .art-state{-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;position:absolute}.art-video-player .art-mask .art-state{right:30px;bottom:55px;width:60px;height:60px;opacity:.6}.art-video-player.art-mask-show .art-mask,.art-video-player .art-mask .art-state{display:-webkit-box;display:-ms-flexbox;display:flex}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1hc2suc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw0QkFDRSxZQUFhLENBSWIsVUFBVyxDQUNYLE1BQU8sQ0FDUCxLQUFNLENBQ04sT0FBUSxDQUNSLFFBQVMsQ0FDVCxVQUFXLENBQ1gsV0FBWSxDQUNaLGVBQWdCLENBQ2hCLG1CQUFzQixDQUN0QixtRUFaQSx3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQix1QkFBdUIsQ0FBdkIsb0JBQXVCLENBQXZCLHNCQUF1QixDQUN2QixpQkFtQmdCLENBVGhCLHVDQUtFLFVBQVcsQ0FDWCxXQUFZLENBQ1osVUFBVyxDQUNYLFdBQVksQ0FDWixVQUFjLENBRWxCLGlGQVZJLG1CQUFhLENBQWIsbUJBQWEsQ0FBYixZQVdhIiwiZmlsZSI6Im1hc2suc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtbWFzayB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHotaW5kZXg6IDUwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHBvaW50ZXItZXZlbnRzOiBub25lOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtbWFzayAuYXJ0LXN0YXRlIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHJpZ2h0OiAzMHB4O1xuICAgIGJvdHRvbTogNTVweDtcbiAgICB3aWR0aDogNjBweDtcbiAgICBoZWlnaHQ6IDYwcHg7XG4gICAgb3BhY2l0eTogMC42OyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1tYXNrLXNob3cgLmFydC1tYXNrIHtcbiAgZGlzcGxheTogZmxleDsgfVxuIl19 */";
+  styleInject(css$5);
+
+  var css$6 = ".art-video-player .art-loading{display:none;position:absolute;z-index:70;left:0;top:0;right:0;bottom:0;width:100%;height:100%;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;pointer-events:none}.art-video-player.art-loading-show .art-loading{display:-webkit-box;display:-ms-flexbox;display:flex}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvYWRpbmcuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSwrQkFDRSxZQUFhLENBQ2IsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxNQUFPLENBQ1AsS0FBTSxDQUNOLE9BQVEsQ0FDUixRQUFTLENBQ1QsVUFBVyxDQUNYLFdBQVksQ0FDWix3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQix1QkFBdUIsQ0FBdkIsb0JBQXVCLENBQXZCLHNCQUF1QixDQUN2QixtQkFBc0IsQ0FFeEIsZ0RBQ0UsbUJBQWEsQ0FBYixtQkFBYSxDQUFiLFlBQWUiLCJmaWxlIjoibG9hZGluZy5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFydC12aWRlby1wbGF5ZXIgLmFydC1sb2FkaW5nIHtcbiAgZGlzcGxheTogbm9uZTtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiA3MDtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICByaWdodDogMDtcbiAgYm90dG9tOiAwO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7IH1cblxuLmFydC12aWRlby1wbGF5ZXIuYXJ0LWxvYWRpbmctc2hvdyAuYXJ0LWxvYWRpbmcge1xuICBkaXNwbGF5OiBmbGV4OyB9XG4iXX0= */";
+  styleInject(css$6);
+
+  var css$7 = ".art-video-player .art-bottom{position:absolute;z-index:60;left:0;right:0;bottom:0;height:100px;padding:55px 10px 0;opacity:0;visibility:hidden;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;pointer-events:none;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom}.art-video-player .art-bottom .art-progress{position:relative;pointer-events:auto}.art-video-player .art-bottom .art-progress .art-control-progress{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;height:4px;cursor:pointer}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner{position:relative;height:50%;width:100%;background:hsla(0,0%,100%,.2)}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded{position:absolute;z-index:10;left:0;top:0;right:0;bottom:0;height:100%;width:0;background:hsla(0,0%,100%,.4)}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played{position:absolute;z-index:20;left:0;top:0;right:0;bottom:0;height:100%;width:0}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight{position:absolute;z-index:30;left:0;top:0;right:0;bottom:0;height:100%;pointer-events:none}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span{display:inline-block;position:absolute;left:0;top:0;width:7px;height:100%;background:#fff;pointer-events:auto}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator{display:none;position:absolute;z-index:40;top:-5px;left:-6.5px;width:13px;height:13px;border-radius:50%}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator.art-show-indicator{display:block}.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip{display:none;position:absolute;z-index:50;top:-25px;left:0;height:20px;padding:0 5px;line-height:20px;color:#fff;font-size:12px;text-align:center;background:rgba(0,0,0,.7);border-radius:3px;font-weight:700;white-space:nowrap}.art-video-player .art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner{height:100%}.art-video-player .art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner .art-progress-indicator,.art-video-player .art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner .art-progress-tip{display:block}.art-video-player .art-bottom .art-progress .art-control-thumbnails{display:none;position:absolute;bottom:8px;left:0;pointer-events:none;background-color:rgba(0,0,0,.7)}.art-video-player .art-bottom .art-controls{position:relative;pointer-events:auto;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;height:40px;padding:5px 0}.art-video-player .art-bottom .art-controls,.art-video-player .art-bottom .art-controls .art-controls-left,.art-video-player .art-bottom .art-controls .art-controls-right{display:-webkit-box;display:-ms-flexbox;display:flex}.art-video-player .art-bottom .art-controls .art-control{opacity:.9;font-size:12px;height:36px;min-width:36px;line-height:36px;text-align:center;cursor:pointer}.art-video-player .art-bottom .art-controls .art-control .art-icon{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;float:left;height:36px;width:36px}.art-video-player .art-bottom .art-controls .art-control:hover{opacity:1}.art-video-player .art-bottom .art-controls .art-control-onlyText{padding:0 10px}.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel{position:relative;float:left;width:0;height:100%;-webkit-transition:margin .2s cubic-bezier(.4,0,1,1),width .2s cubic-bezier(.4,0,1,1);transition:margin .2s cubic-bezier(.4,0,1,1),width .2s cubic-bezier(.4,0,1,1);overflow:hidden}.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle{position:absolute;top:50%;left:0;width:12px;height:12px;border-radius:12px;margin-top:-6px;background:#fff}.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:before{left:-54px;background:#fff}.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:after{left:6px;background:hsla(0,0%,100%,.2)}.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:after,.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:before{content:\"\";position:absolute;display:block;top:50%;height:3px;margin-top:-2px;width:60px}.art-video-player .art-bottom .art-controls .art-control-volume:hover .art-volume-panel{width:60px}.art-video-player .art-bottom .art-controls .art-control-quality{position:relative;z-index:30}.art-video-player .art-bottom .art-controls .art-control-quality .art-qualitys{display:none;position:absolute;bottom:35px;width:100px;padding:5px 0;text-align:center;color:#fff;background:rgba(0,0,0,.8);border-radius:3px}.art-video-player .art-bottom .art-controls .art-control-quality .art-qualitys .art-quality-item{height:30px;line-height:30px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 0 2px rgba(0,0,0,.5)}.art-video-player .art-bottom .art-controls .art-control-quality .art-qualitys .art-quality-item:hover{background-color:hsla(0,0%,100%,.1)}.art-video-player .art-bottom .art-controls .art-control-quality:hover .art-qualitys{display:block}.art-video-player.art-control-show .art-bottom,.art-video-player.art-hover .art-bottom{opacity:1;visibility:visible}.art-video-player.art-destroy .art-progress-indicator,.art-video-player.art-destroy .art-progress-tip,.art-video-player.art-error .art-progress-indicator,.art-video-player.art-error .art-progress-tip{display:none!important}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJvdHRvbS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDhCQUNFLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsTUFBTyxDQUNQLE9BQVEsQ0FDUixRQUFTLENBQ1QsWUFBYSxDQUNiLG1CQUFvQixDQUNwQixTQUFVLENBQ1YsaUJBQWtCLENBQ2xCLHNDQUFnQyxDQUFoQyw4QkFBZ0MsQ0FDaEMsbUJBQW9CLENBQ3BCLGtTQUFxUyxDQUNyUyw0Q0FDRSxpQkFBa0IsQ0FDbEIsbUJBQXNCLENBQ3RCLGtFQUNFLGlCQUFrQixDQUNsQixtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBYSxDQUNiLDZCQUFtQixDQUFuQiw0QkFBbUIsQ0FBbkIsc0JBQW1CLENBQW5CLGtCQUFtQixDQUNuQix3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQixVQUFXLENBQ1gsY0FBaUIsQ0FDakIsOEZBQ0UsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxVQUFXLENBQ1gsNkJBQXNDLENBQ3RDLG1IQUNFLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsTUFBTyxDQUNQLEtBQU0sQ0FDTixPQUFRLENBQ1IsUUFBUyxDQUNULFdBQVksQ0FDWixPQUFRLENBQ1IsNkJBQXNDLENBQ3hDLG1IQUNFLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsTUFBTyxDQUNQLEtBQU0sQ0FDTixPQUFRLENBQ1IsUUFBUyxDQUNULFdBQVksQ0FDWixPQUFVLENBQ1osc0hBQ0UsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxNQUFPLENBQ1AsS0FBTSxDQUNOLE9BQVEsQ0FDUixRQUFTLENBQ1QsV0FBWSxDQUNaLG1CQUFzQixDQUN0QiwySEFDRSxvQkFBcUIsQ0FDckIsaUJBQWtCLENBQ2xCLE1BQU8sQ0FDUCxLQUFNLENBQ04sU0FBVSxDQUNWLFdBQVksQ0FDWixlQUFnQixDQUNoQixtQkFBc0IsQ0FDMUIsc0hBQ0UsWUFBYSxDQUNiLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsUUFBUyxDQUNULFdBQVksQ0FDWixVQUFXLENBQ1gsV0FBWSxDQUNaLGlCQUFvQixDQUNwQix5SUFDRSxhQUFnQixDQUNwQixnSEFDRSxZQUFhLENBQ2IsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxTQUFVLENBQ1YsTUFBTyxDQUNQLFdBQVksQ0FDWixhQUFjLENBQ2QsZ0JBQWlCLENBQ2pCLFVBQVcsQ0FDWCxjQUFlLENBQ2YsaUJBQWtCLENBQ2xCLHlCQUE4QixDQUM5QixpQkFBa0IsQ0FDbEIsZUFBaUIsQ0FDakIsa0JBQXFCLENBQ3pCLG9HQUNFLFdBQWMsQ0FDZCxrUEFFRSxhQUFnQixDQUN0QixvRUFDRSxZQUFhLENBQ2IsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxNQUFPLENBQ1AsbUJBQW9CLENBQ3BCLCtCQUFzQyxDQUMxQyw0Q0FDRSxpQkFBa0IsQ0FDbEIsbUJBQW9CLENBRXBCLHdCQUFtQixDQUFuQixxQkFBbUIsQ0FBbkIsa0JBQW1CLENBQ25CLHdCQUE4QixDQUE5QixxQkFBOEIsQ0FBOUIsNkJBQThCLENBQzlCLFdBQVksQ0FDWixhQUFnQixDQUNoQiwyS0FMQSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFPaUIsQ0FDakIseURBQ0UsVUFBWSxDQUNaLGNBQWUsQ0FDZixXQUFZLENBQ1osY0FBZSxDQUNmLGdCQUFpQixDQUNqQixpQkFBa0IsQ0FDbEIsY0FBaUIsQ0FDakIsbUVBQ0UsbUJBQWEsQ0FBYixtQkFBYSxDQUFiLFlBQWEsQ0FDYix3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQix1QkFBdUIsQ0FBdkIsb0JBQXVCLENBQXZCLHNCQUF1QixDQUN2QixVQUFXLENBQ1gsV0FBWSxDQUNaLFVBQWEsQ0FDZiwrREFDRSxTQUFZLENBQ2hCLGtFQUNFLGNBQWlCLENBQ25CLGtGQUNFLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsT0FBUSxDQUNSLFdBQVksQ0FDWixxRkFBeUYsQ0FBekYsNkVBQXlGLENBQ3pGLGVBQWtCLENBQ2xCLDRHQUNFLGlCQUFrQixDQUNsQixPQUFRLENBQ1IsTUFBTyxDQUNQLFVBQVcsQ0FDWCxXQUFZLENBQ1osa0JBQW1CLENBQ25CLGVBQWdCLENBQ2hCLGVBQWtCLENBQ2xCLG1IQUNFLFVBQVcsQ0FDWCxlQUFrQixDQUNwQixrSEFDRSxRQUFTLENBQ1QsNkJBQXNDLENBQ3hDLHFPQUNFLFVBQVcsQ0FDWCxpQkFBa0IsQ0FDbEIsYUFBYyxDQUNkLE9BQVEsQ0FDUixVQUFXLENBQ1gsZUFBZ0IsQ0FDaEIsVUFBYSxDQUNuQix3RkFDRSxVQUFhLENBQ2YsaUVBQ0UsaUJBQWtCLENBQ2xCLFVBQWEsQ0FDYiwrRUFDRSxZQUFhLENBQ2IsaUJBQWtCLENBQ2xCLFdBQVksQ0FDWixXQUFZLENBQ1osYUFBYyxDQUNkLGlCQUFrQixDQUNsQixVQUFXLENBQ1gseUJBQThCLENBQzlCLGlCQUFvQixDQUNwQixpR0FDRSxXQUFZLENBQ1osZ0JBQWlCLENBQ2pCLGVBQWdCLENBQ2hCLHNCQUF1QixDQUN2QixrQkFBbUIsQ0FDbkIsa0NBQXlDLENBQ3pDLHVHQUNFLG1DQUE0QyxDQUNsRCxxRkFDRSxhQUFnQixDQUV4Qix1RkFDRSxTQUFVLENBQ1Ysa0JBQXFCLENBRXZCLHdNQUdFLHNCQUEwQiIsImZpbGUiOiJib3R0b20uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiA2MDtcbiAgbGVmdDogMDtcbiAgcmlnaHQ6IDA7XG4gIGJvdHRvbTogMDtcbiAgaGVpZ2h0OiAxMDBweDtcbiAgcGFkZGluZzogNTVweCAxMHB4IDA7XG4gIG9wYWNpdHk6IDA7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZS1pbi1vdXQ7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICBiYWNrZ3JvdW5kOiB1cmwoZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFBRUFBQURHQ0FZQUFBQVQrT3FGQUFBQWRrbEVRVlFvejQyUVFRN0FJQWdFRi9UL0Qra2JxL1JXQWxuUXl5YXpBNGFvQUI0RnNCU0EvYkZqdUYxRU9MN1ZicklyQnV1c21ydDRaWk9SZmI2ZWhiV2RuUkhFSWlJVGFFVUthNUVKcVVha1JTYUVZQkpTQ1kyZEVzdFFZN0F1eGFod1hGcnZabVdsMnJoNEpaMDd6OWRMdGVzZk5qNXEwRlUzQTVPYmJ3QUFBQUJKUlU1RXJrSmdnZz09KSByZXBlYXQteCBib3R0b207IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIHBvaW50ZXItZXZlbnRzOiBhdXRvOyB9XG4gICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3Mge1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgaGVpZ2h0OiA0cHg7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7IH1cbiAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXByb2dyZXNzIC5hcnQtY29udHJvbC1wcm9ncmVzcy1pbm5lciB7XG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgICAgaGVpZ2h0OiA1MCU7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBiYWNrZ3JvdW5kOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMik7IH1cbiAgICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXByb2dyZXNzLWlubmVyIC5hcnQtcHJvZ3Jlc3MtbG9hZGVkIHtcbiAgICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICAgICAgei1pbmRleDogMTA7XG4gICAgICAgICAgbGVmdDogMDtcbiAgICAgICAgICB0b3A6IDA7XG4gICAgICAgICAgcmlnaHQ6IDA7XG4gICAgICAgICAgYm90dG9tOiAwO1xuICAgICAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgICAgICB3aWR0aDogMDtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNCk7IH1cbiAgICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXByb2dyZXNzLWlubmVyIC5hcnQtcHJvZ3Jlc3MtcGxheWVkIHtcbiAgICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICAgICAgei1pbmRleDogMjA7XG4gICAgICAgICAgbGVmdDogMDtcbiAgICAgICAgICB0b3A6IDA7XG4gICAgICAgICAgcmlnaHQ6IDA7XG4gICAgICAgICAgYm90dG9tOiAwO1xuICAgICAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgICAgICB3aWR0aDogMDsgfVxuICAgICAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJvdHRvbSAuYXJ0LXByb2dyZXNzIC5hcnQtY29udHJvbC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3MtaW5uZXIgLmFydC1wcm9ncmVzcy1oaWdobGlnaHQge1xuICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgICB6LWluZGV4OiAzMDtcbiAgICAgICAgICBsZWZ0OiAwO1xuICAgICAgICAgIHRvcDogMDtcbiAgICAgICAgICByaWdodDogMDtcbiAgICAgICAgICBib3R0b206IDA7XG4gICAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lOyB9XG4gICAgICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXByb2dyZXNzLWlubmVyIC5hcnQtcHJvZ3Jlc3MtaGlnaGxpZ2h0IHNwYW4ge1xuICAgICAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgICAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICAgICAgbGVmdDogMDtcbiAgICAgICAgICAgIHRvcDogMDtcbiAgICAgICAgICAgIHdpZHRoOiA3cHg7XG4gICAgICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgICAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgICAgICAgICAgcG9pbnRlci1ldmVudHM6IGF1dG87IH1cbiAgICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXByb2dyZXNzLWlubmVyIC5hcnQtcHJvZ3Jlc3MtaW5kaWNhdG9yIHtcbiAgICAgICAgICBkaXNwbGF5OiBub25lO1xuICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgICB6LWluZGV4OiA0MDtcbiAgICAgICAgICB0b3A6IC01cHg7XG4gICAgICAgICAgbGVmdDogLTYuNXB4O1xuICAgICAgICAgIHdpZHRoOiAxM3B4O1xuICAgICAgICAgIGhlaWdodDogMTNweDtcbiAgICAgICAgICBib3JkZXItcmFkaXVzOiA1MCU7IH1cbiAgICAgICAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJvdHRvbSAuYXJ0LXByb2dyZXNzIC5hcnQtY29udHJvbC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3MtaW5uZXIgLmFydC1wcm9ncmVzcy1pbmRpY2F0b3IuYXJ0LXNob3ctaW5kaWNhdG9yIHtcbiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOyB9XG4gICAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXByb2dyZXNzIC5hcnQtY29udHJvbC1wcm9ncmVzcy1pbm5lciAuYXJ0LXByb2dyZXNzLXRpcCB7XG4gICAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICAgICAgei1pbmRleDogNTA7XG4gICAgICAgICAgdG9wOiAtMjVweDtcbiAgICAgICAgICBsZWZ0OiAwO1xuICAgICAgICAgIGhlaWdodDogMjBweDtcbiAgICAgICAgICBwYWRkaW5nOiAwIDVweDtcbiAgICAgICAgICBsaW5lLWhlaWdodDogMjBweDtcbiAgICAgICAgICBjb2xvcjogI2ZmZjtcbiAgICAgICAgICBmb250LXNpemU6IDEycHg7XG4gICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC43KTtcbiAgICAgICAgICBib3JkZXItcmFkaXVzOiAzcHg7XG4gICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgICAgd2hpdGUtc3BhY2U6IG5vd3JhcDsgfVxuICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3M6aG92ZXIgLmFydC1jb250cm9sLXByb2dyZXNzLWlubmVyIHtcbiAgICAgICAgaGVpZ2h0OiAxMDAlOyB9XG4gICAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXByb2dyZXNzOmhvdmVyIC5hcnQtY29udHJvbC1wcm9ncmVzcy1pbm5lciAuYXJ0LXByb2dyZXNzLWluZGljYXRvcixcbiAgICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1wcm9ncmVzcyAuYXJ0LWNvbnRyb2wtcHJvZ3Jlc3M6aG92ZXIgLmFydC1jb250cm9sLXByb2dyZXNzLWlubmVyIC5hcnQtcHJvZ3Jlc3MtdGlwIHtcbiAgICAgICAgICBkaXNwbGF5OiBibG9jazsgfVxuICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtcHJvZ3Jlc3MgLmFydC1jb250cm9sLXRodW1ibmFpbHMge1xuICAgICAgZGlzcGxheTogbm9uZTtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogOHB4O1xuICAgICAgbGVmdDogMDtcbiAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjcpOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtY29udHJvbHMge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBwb2ludGVyLWV2ZW50czogYXV0bztcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICAgIGhlaWdodDogNDBweDtcbiAgICBwYWRkaW5nOiA1cHggMDsgfVxuICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtY29udHJvbHMgLmFydC1jb250cm9scy1sZWZ0LFxuICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtY29udHJvbHMgLmFydC1jb250cm9scy1yaWdodCB7XG4gICAgICBkaXNwbGF5OiBmbGV4OyB9XG4gICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1jb250cm9scyAuYXJ0LWNvbnRyb2wge1xuICAgICAgb3BhY2l0eTogMC45O1xuICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgaGVpZ2h0OiAzNnB4O1xuICAgICAgbWluLXdpZHRoOiAzNnB4O1xuICAgICAgbGluZS1oZWlnaHQ6IDM2cHg7XG4gICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7IH1cbiAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtY29udHJvbHMgLmFydC1jb250cm9sIC5hcnQtaWNvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICBmbG9hdDogbGVmdDtcbiAgICAgICAgaGVpZ2h0OiAzNnB4O1xuICAgICAgICB3aWR0aDogMzZweDsgfVxuICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1jb250cm9scyAuYXJ0LWNvbnRyb2w6aG92ZXIge1xuICAgICAgICBvcGFjaXR5OiAxOyB9XG4gICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1jb250cm9scyAuYXJ0LWNvbnRyb2wtb25seVRleHQge1xuICAgICAgcGFkZGluZzogMCAxMHB4OyB9XG4gICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1jb250cm9scyAuYXJ0LWNvbnRyb2wtdm9sdW1lIC5hcnQtdm9sdW1lLXBhbmVsIHtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIGZsb2F0OiBsZWZ0O1xuICAgICAgd2lkdGg6IDA7XG4gICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICB0cmFuc2l0aW9uOiBtYXJnaW4gMC4ycyBjdWJpYy1iZXppZXIoMC40LCAwLCAxLCAxKSwgd2lkdGggMC4ycyBjdWJpYy1iZXppZXIoMC40LCAwLCAxLCAxKTtcbiAgICAgIG92ZXJmbG93OiBoaWRkZW47IH1cbiAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtY29udHJvbHMgLmFydC1jb250cm9sLXZvbHVtZSAuYXJ0LXZvbHVtZS1wYW5lbCAuYXJ0LXZvbHVtZS1zbGlkZXItaGFuZGxlIHtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICB0b3A6IDUwJTtcbiAgICAgICAgbGVmdDogMDtcbiAgICAgICAgd2lkdGg6IDEycHg7XG4gICAgICAgIGhlaWdodDogMTJweDtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogMTJweDtcbiAgICAgICAgbWFyZ2luLXRvcDogLTZweDtcbiAgICAgICAgYmFja2dyb3VuZDogI2ZmZjsgfVxuICAgICAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJvdHRvbSAuYXJ0LWNvbnRyb2xzIC5hcnQtY29udHJvbC12b2x1bWUgLmFydC12b2x1bWUtcGFuZWwgLmFydC12b2x1bWUtc2xpZGVyLWhhbmRsZTo6YmVmb3JlIHtcbiAgICAgICAgICBsZWZ0OiAtNTRweDtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiAjZmZmOyB9XG4gICAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtY29udHJvbHMgLmFydC1jb250cm9sLXZvbHVtZSAuYXJ0LXZvbHVtZS1wYW5lbCAuYXJ0LXZvbHVtZS1zbGlkZXItaGFuZGxlOjphZnRlciB7XG4gICAgICAgICAgbGVmdDogNnB4O1xuICAgICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4yKTsgfVxuICAgICAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJvdHRvbSAuYXJ0LWNvbnRyb2xzIC5hcnQtY29udHJvbC12b2x1bWUgLmFydC12b2x1bWUtcGFuZWwgLmFydC12b2x1bWUtc2xpZGVyLWhhbmRsZTo6YmVmb3JlLCAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJvdHRvbSAuYXJ0LWNvbnRyb2xzIC5hcnQtY29udHJvbC12b2x1bWUgLmFydC12b2x1bWUtcGFuZWwgLmFydC12b2x1bWUtc2xpZGVyLWhhbmRsZTo6YWZ0ZXIge1xuICAgICAgICAgIGNvbnRlbnQ6ICcnO1xuICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgICAgICB0b3A6IDUwJTtcbiAgICAgICAgICBoZWlnaHQ6IDNweDtcbiAgICAgICAgICBtYXJnaW4tdG9wOiAtMnB4O1xuICAgICAgICAgIHdpZHRoOiA2MHB4OyB9XG4gICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1jb250cm9scyAuYXJ0LWNvbnRyb2wtdm9sdW1lOmhvdmVyIC5hcnQtdm9sdW1lLXBhbmVsIHtcbiAgICAgIHdpZHRoOiA2MHB4OyB9XG4gICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1jb250cm9scyAuYXJ0LWNvbnRyb2wtcXVhbGl0eSB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB6LWluZGV4OiAzMDsgfVxuICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ib3R0b20gLmFydC1jb250cm9scyAuYXJ0LWNvbnRyb2wtcXVhbGl0eSAuYXJ0LXF1YWxpdHlzIHtcbiAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBib3R0b206IDM1cHg7XG4gICAgICAgIHdpZHRoOiAxMDBweDtcbiAgICAgICAgcGFkZGluZzogNXB4IDA7XG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgY29sb3I6ICNmZmY7XG4gICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC44KTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogM3B4OyB9XG4gICAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtYm90dG9tIC5hcnQtY29udHJvbHMgLmFydC1jb250cm9sLXF1YWxpdHkgLmFydC1xdWFsaXR5cyAuYXJ0LXF1YWxpdHktaXRlbSB7XG4gICAgICAgICAgaGVpZ2h0OiAzMHB4O1xuICAgICAgICAgIGxpbmUtaGVpZ2h0OiAzMHB4O1xuICAgICAgICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgICAgICAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gICAgICAgICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcbiAgICAgICAgICB0ZXh0LXNoYWRvdzogMCAwIDJweCByZ2JhKDAsIDAsIDAsIDAuNSk7IH1cbiAgICAgICAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJvdHRvbSAuYXJ0LWNvbnRyb2xzIC5hcnQtY29udHJvbC1xdWFsaXR5IC5hcnQtcXVhbGl0eXMgLmFydC1xdWFsaXR5LWl0ZW06aG92ZXIge1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjEpOyB9XG4gICAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWJvdHRvbSAuYXJ0LWNvbnRyb2xzIC5hcnQtY29udHJvbC1xdWFsaXR5OmhvdmVyIC5hcnQtcXVhbGl0eXMge1xuICAgICAgICBkaXNwbGF5OiBibG9jazsgfVxuXG4uYXJ0LXZpZGVvLXBsYXllci5hcnQtY29udHJvbC1zaG93IC5hcnQtYm90dG9tLCAuYXJ0LXZpZGVvLXBsYXllci5hcnQtaG92ZXIgLmFydC1ib3R0b20ge1xuICBvcGFjaXR5OiAxO1xuICB2aXNpYmlsaXR5OiB2aXNpYmxlOyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1lcnJvciAuYXJ0LXByb2dyZXNzLWluZGljYXRvcixcbi5hcnQtdmlkZW8tcGxheWVyLmFydC1lcnJvciAuYXJ0LXByb2dyZXNzLXRpcCwgLmFydC12aWRlby1wbGF5ZXIuYXJ0LWRlc3Ryb3kgLmFydC1wcm9ncmVzcy1pbmRpY2F0b3IsXG4uYXJ0LXZpZGVvLXBsYXllci5hcnQtZGVzdHJveSAuYXJ0LXByb2dyZXNzLXRpcCB7XG4gIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDsgfVxuIl19 */";
+  styleInject(css$7);
+
+  var css$8 = ".art-video-player .art-notice{display:none;font-size:14px;position:absolute;z-index:80;left:0;top:0;padding:10px;width:100%;pointer-events:none}.art-video-player .art-notice .art-notice-inner{display:inline-block;padding:5px 10px;color:#fff;background:rgba(0,0,0,.6);border-radius:3px}.art-video-player.art-notice-show .art-notice{display:-webkit-box;display:-ms-flexbox;display:flex}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5vdGljZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDhCQUNFLFlBQWEsQ0FDYixjQUFlLENBQ2YsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxNQUFPLENBQ1AsS0FBTSxDQUNOLFlBQWEsQ0FDYixVQUFXLENBQ1gsbUJBQXNCLENBQ3RCLGdEQUNFLG9CQUFxQixDQUNyQixnQkFBaUIsQ0FDakIsVUFBVyxDQUNYLHlCQUE4QixDQUM5QixpQkFBb0IsQ0FFeEIsOENBQ0UsbUJBQWEsQ0FBYixtQkFBYSxDQUFiLFlBQWUiLCJmaWxlIjoibm90aWNlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LW5vdGljZSB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiA4MDtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICBwYWRkaW5nOiAxMHB4O1xuICB3aWR0aDogMTAwJTtcbiAgcG9pbnRlci1ldmVudHM6IG5vbmU7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1ub3RpY2UgLmFydC1ub3RpY2UtaW5uZXIge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgICBwYWRkaW5nOiA1cHggMTBweDtcbiAgICBjb2xvcjogI2ZmZjtcbiAgICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNik7XG4gICAgYm9yZGVyLXJhZGl1czogM3B4OyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1ub3RpY2Utc2hvdyAuYXJ0LW5vdGljZSB7XG4gIGRpc3BsYXk6IGZsZXg7IH1cbiJdfQ== */";
+  styleInject(css$8);
+
+  var css$9 = ".art-video-player .art-contextmenus{display:none;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;position:absolute;z-index:120;left:0;top:0;min-width:200px;padding:5px 0;background:rgba(0,0,0,.9);border-radius:3px}.art-video-player .art-contextmenus .art-contextmenu{cursor:pointer;font-size:13px;display:block;color:#fff;padding:7px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 0 2px rgba(0,0,0,.5);border-bottom:1px solid hsla(0,0%,100%,.1)}.art-video-player .art-contextmenus .art-contextmenu a{color:#fff;text-decoration:none}.art-video-player .art-contextmenus .art-contextmenu span{display:inline-block;padding:0 7px}.art-video-player .art-contextmenus .art-contextmenu span.art-current,.art-video-player .art-contextmenus .art-contextmenu span:hover{color:#00c9ff}.art-video-player .art-contextmenus .art-contextmenu:hover{background-color:hsla(0,0%,100%,.1)}.art-video-player .art-contextmenus .art-contextmenu:last-child{border-bottom:none}.art-video-player.art-contextmenu-show .art-contextmenus{display:-webkit-box;display:-ms-flexbox;display:flex}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbnRleHRtZW51LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsb0NBQ0UsWUFBYSxDQUNiLDJCQUFzQixDQUF0Qiw0QkFBc0IsQ0FBdEIseUJBQXNCLENBQXRCLHFCQUFzQixDQUN0QixpQkFBa0IsQ0FDbEIsV0FBWSxDQUNaLE1BQU8sQ0FDUCxLQUFNLENBQ04sZUFBZ0IsQ0FDaEIsYUFBYyxDQUNkLHlCQUE4QixDQUM5QixpQkFBb0IsQ0FDcEIscURBQ0UsY0FBZSxDQUNmLGNBQWUsQ0FDZixhQUFjLENBQ2QsVUFBVyxDQUNYLGdCQUFpQixDQUNqQixlQUFnQixDQUNoQixzQkFBdUIsQ0FDdkIsa0JBQW1CLENBQ25CLGtDQUF1QyxDQUN2QywwQ0FBbUQsQ0FDbkQsdURBQ0UsVUFBVyxDQUNYLG9CQUF1QixDQUN6QiwwREFDRSxvQkFBcUIsQ0FDckIsYUFBZ0IsQ0FDaEIsc0lBQ0UsYUFBZ0IsQ0FDcEIsMkRBQ0UsbUNBQTRDLENBQzlDLGdFQUNFLGtCQUFxQixDQUUzQix5REFDRSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBZSIsImZpbGUiOiJjb250ZXh0bWVudS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFydC12aWRlby1wbGF5ZXIgLmFydC1jb250ZXh0bWVudXMge1xuICBkaXNwbGF5OiBub25lO1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHotaW5kZXg6IDEyMDtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICBtaW4td2lkdGg6IDIwMHB4O1xuICBwYWRkaW5nOiA1cHggMDtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjkpO1xuICBib3JkZXItcmFkaXVzOiAzcHg7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1jb250ZXh0bWVudXMgLmFydC1jb250ZXh0bWVudSB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGZvbnQtc2l6ZTogMTNweDtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBjb2xvcjogI2ZmZjtcbiAgICBwYWRkaW5nOiA3cHggMTBweDtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgdGV4dC1zaGFkb3c6IDAgMCAycHggcmdiYSgwLCAwLCAwLCAwLjUpO1xuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMSk7IH1cbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWNvbnRleHRtZW51cyAuYXJ0LWNvbnRleHRtZW51IGEge1xuICAgICAgY29sb3I6ICNmZmY7XG4gICAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7IH1cbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWNvbnRleHRtZW51cyAuYXJ0LWNvbnRleHRtZW51IHNwYW4ge1xuICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgICAgcGFkZGluZzogMCA3cHg7IH1cbiAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtY29udGV4dG1lbnVzIC5hcnQtY29udGV4dG1lbnUgc3Bhbjpob3ZlciwgLmFydC12aWRlby1wbGF5ZXIgLmFydC1jb250ZXh0bWVudXMgLmFydC1jb250ZXh0bWVudSBzcGFuLmFydC1jdXJyZW50IHtcbiAgICAgICAgY29sb3I6ICMwMGM5ZmY7IH1cbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWNvbnRleHRtZW51cyAuYXJ0LWNvbnRleHRtZW51OmhvdmVyIHtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4xKTsgfVxuICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtY29udGV4dG1lbnVzIC5hcnQtY29udGV4dG1lbnU6bGFzdC1jaGlsZCB7XG4gICAgICBib3JkZXItYm90dG9tOiBub25lOyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1jb250ZXh0bWVudS1zaG93IC5hcnQtY29udGV4dG1lbnVzIHtcbiAgZGlzcGxheTogZmxleDsgfVxuIl19 */";
+  styleInject(css$9);
+
+  var css$a = ".art-video-player .art-settings{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;position:absolute;z-index:90;left:0;top:0;height:100%;width:100%;opacity:0;visibility:hidden;pointer-events:none;overflow:hidden}.art-video-player .art-settings .art-setting-inner{position:absolute;top:0;right:-300px;bottom:0;width:300px;height:100%;font-size:12px;background:rgba(0,0,0,.9);-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;overflow:auto}.art-video-player .art-settings .art-setting-inner .art-setting-body{overflow-y:auto;width:100%;height:100%}.art-video-player .art-settings .art-setting-inner .art-setting-body .art-setting{border-bottom:1px solid hsla(0,0%,100%,.1);padding:10px 15px}.art-video-player .art-settings .art-setting-inner .art-setting-body .art-setting .art-setting-header{margin-bottom:5px}.art-video-player .art-settings .art-setting-radio{display:-webkit-box;display:-ms-flexbox;display:flex}.art-video-player .art-settings .art-setting-radio .art-radio-item{-webkit-box-flex:1;-ms-flex:1;flex:1;padding:0 2px}.art-video-player .art-settings .art-setting-radio .art-radio-item button{height:22px;width:100%;border:none;outline:none;color:#fff;background:hsla(0,0%,100%,.2);border-radius:2px}.art-video-player .art-settings .art-setting-radio .art-radio-item.current button{background-color:#00a1d6}.art-video-player .art-settings .art-setting-range input{width:100%;height:3px;outline:none;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:hsla(0,0%,100%,.5)}.art-video-player .art-settings .art-setting-checkbox input{height:14px;width:14px;margin-right:5px}.art-video-player .art-settings .art-setting-upload{display:-webkit-box;display:-ms-flexbox;display:flex}.art-video-player .art-settings .art-setting-upload .art-upload-btn{width:80px;height:22px;line-height:22px;border:none;outline:none;color:#fff;background:hsla(0,0%,100%,.2);border-radius:2px;text-align:center}.art-video-player .art-settings .art-setting-upload .art-upload-value{-webkit-box-flex:1;-ms-flex:1;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;height:22px;line-height:22px;padding-left:10px}.art-video-player.art-setting-show .art-settings{opacity:1;visibility:visible;pointer-events:auto}.art-video-player.art-setting-show .art-settings .art-setting-inner{right:0}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNldHRpbmcuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxnQ0FDRSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBYSxDQUNiLHdCQUFtQixDQUFuQixxQkFBbUIsQ0FBbkIsa0JBQW1CLENBQ25CLHVCQUF1QixDQUF2QixvQkFBdUIsQ0FBdkIsc0JBQXVCLENBQ3ZCLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsTUFBTyxDQUNQLEtBQU0sQ0FDTixXQUFZLENBQ1osVUFBVyxDQUNYLFNBQVUsQ0FDVixpQkFBa0IsQ0FDbEIsbUJBQW9CLENBQ3BCLGVBQWtCLENBQ2xCLG1EQUNFLGlCQUFrQixDQUNsQixLQUFNLENBQ04sWUFBYSxDQUNiLFFBQVMsQ0FDVCxXQUFZLENBQ1osV0FBWSxDQUNaLGNBQWUsQ0FDZix5QkFBOEIsQ0FDOUIsc0NBQWdDLENBQWhDLDhCQUFnQyxDQUNoQyxhQUFnQixDQUNoQixxRUFDRSxlQUFnQixDQUNoQixVQUFXLENBQ1gsV0FBYyxDQUNkLGtGQUNFLDBDQUFpRCxDQUNqRCxpQkFBb0IsQ0FDcEIsc0dBQ0UsaUJBQW9CLENBQzVCLG1EQUNFLG1CQUFhLENBQWIsbUJBQWEsQ0FBYixZQUFlLENBQ2YsbUVBQ0Usa0JBQU8sQ0FBUCxVQUFPLENBQVAsTUFBTyxDQUNQLGFBQWdCLENBQ2hCLDBFQUNFLFdBQVksQ0FDWixVQUFXLENBQ1gsV0FBWSxDQUNaLFlBQWEsQ0FDYixVQUFXLENBQ1gsNkJBQW9DLENBQ3BDLGlCQUFvQixDQUN0QixrRkFDRSx3QkFBMkIsQ0FDakMseURBQ0UsVUFBVyxDQUNYLFVBQVcsQ0FDWCxZQUFhLENBQ2IsdUJBQWdCLENBQWhCLG9CQUFnQixDQUFoQixlQUFnQixDQUNoQixtQ0FBNEMsQ0FDOUMsNERBQ0UsV0FBWSxDQUNaLFVBQVcsQ0FDWCxnQkFBbUIsQ0FDckIsb0RBQ0UsbUJBQWEsQ0FBYixtQkFBYSxDQUFiLFlBQWUsQ0FDZixvRUFDRSxVQUFXLENBQ1gsV0FBWSxDQUNaLGdCQUFpQixDQUNqQixXQUFZLENBQ1osWUFBYSxDQUNiLFVBQVcsQ0FDWCw2QkFBb0MsQ0FDcEMsaUJBQWtCLENBQ2xCLGlCQUFvQixDQUN0QixzRUFDRSxrQkFBTyxDQUFQLFVBQU8sQ0FBUCxNQUFPLENBQ1AsZUFBZ0IsQ0FDaEIsc0JBQXVCLENBQ3ZCLGtCQUFtQixDQUNuQixXQUFZLENBQ1osZ0JBQWlCLENBQ2pCLGlCQUFvQixDQUUxQixpREFDRSxTQUFVLENBQ1Ysa0JBQW1CLENBQ25CLG1CQUFzQixDQUN0QixvRUFDRSxPQUFVIiwiZmlsZSI6InNldHRpbmcuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtc2V0dGluZ3Mge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiA5MDtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICBoZWlnaHQ6IDEwMCU7XG4gIHdpZHRoOiAxMDAlO1xuICBvcGFjaXR5OiAwO1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICBvdmVyZmxvdzogaGlkZGVuOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtc2V0dGluZ3MgLmFydC1zZXR0aW5nLWlubmVyIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIHJpZ2h0OiAtMzAwcHg7XG4gICAgYm90dG9tOiAwO1xuICAgIHdpZHRoOiAzMDBweDtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgZm9udC1zaXplOiAxMnB4O1xuICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC45KTtcbiAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlLWluLW91dDtcbiAgICBvdmVyZmxvdzogYXV0bzsgfVxuICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtc2V0dGluZ3MgLmFydC1zZXR0aW5nLWlubmVyIC5hcnQtc2V0dGluZy1ib2R5IHtcbiAgICAgIG92ZXJmbG93LXk6IGF1dG87XG4gICAgICB3aWR0aDogMTAwJTtcbiAgICAgIGhlaWdodDogMTAwJTsgfVxuICAgICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1zZXR0aW5ncyAuYXJ0LXNldHRpbmctaW5uZXIgLmFydC1zZXR0aW5nLWJvZHkgLmFydC1zZXR0aW5nIHtcbiAgICAgICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMjU1LCAyNTUsIDI1NSwgMC4xKTtcbiAgICAgICAgcGFkZGluZzogMTBweCAxNXB4OyB9XG4gICAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtc2V0dGluZ3MgLmFydC1zZXR0aW5nLWlubmVyIC5hcnQtc2V0dGluZy1ib2R5IC5hcnQtc2V0dGluZyAuYXJ0LXNldHRpbmctaGVhZGVyIHtcbiAgICAgICAgICBtYXJnaW4tYm90dG9tOiA1cHg7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1zZXR0aW5ncyAuYXJ0LXNldHRpbmctcmFkaW8ge1xuICAgIGRpc3BsYXk6IGZsZXg7IH1cbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXNldHRpbmdzIC5hcnQtc2V0dGluZy1yYWRpbyAuYXJ0LXJhZGlvLWl0ZW0ge1xuICAgICAgZmxleDogMTtcbiAgICAgIHBhZGRpbmc6IDAgMnB4OyB9XG4gICAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXNldHRpbmdzIC5hcnQtc2V0dGluZy1yYWRpbyAuYXJ0LXJhZGlvLWl0ZW0gYnV0dG9uIHtcbiAgICAgICAgaGVpZ2h0OiAyMnB4O1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgICBvdXRsaW5lOiBub25lO1xuICAgICAgICBjb2xvcjogI2ZmZjtcbiAgICAgICAgYmFja2dyb3VuZDogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjIpO1xuICAgICAgICBib3JkZXItcmFkaXVzOiAycHg7IH1cbiAgICAgIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtc2V0dGluZ3MgLmFydC1zZXR0aW5nLXJhZGlvIC5hcnQtcmFkaW8taXRlbS5jdXJyZW50IGJ1dHRvbiB7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6ICMwMGExZDY7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1zZXR0aW5ncyAuYXJ0LXNldHRpbmctcmFuZ2UgaW5wdXQge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogM3B4O1xuICAgIG91dGxpbmU6IG5vbmU7XG4gICAgYXBwZWFyYW5jZTogbm9uZTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNSk7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1zZXR0aW5ncyAuYXJ0LXNldHRpbmctY2hlY2tib3ggaW5wdXQge1xuICAgIGhlaWdodDogMTRweDtcbiAgICB3aWR0aDogMTRweDtcbiAgICBtYXJnaW4tcmlnaHQ6IDVweDsgfVxuICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXNldHRpbmdzIC5hcnQtc2V0dGluZy11cGxvYWQge1xuICAgIGRpc3BsYXk6IGZsZXg7IH1cbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXNldHRpbmdzIC5hcnQtc2V0dGluZy11cGxvYWQgLmFydC11cGxvYWQtYnRuIHtcbiAgICAgIHdpZHRoOiA4MHB4O1xuICAgICAgaGVpZ2h0OiAyMnB4O1xuICAgICAgbGluZS1oZWlnaHQ6IDIycHg7XG4gICAgICBib3JkZXI6IG5vbmU7XG4gICAgICBvdXRsaW5lOiBub25lO1xuICAgICAgY29sb3I6ICNmZmY7XG4gICAgICBiYWNrZ3JvdW5kOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMik7XG4gICAgICBib3JkZXItcmFkaXVzOiAycHg7XG4gICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7IH1cbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXNldHRpbmdzIC5hcnQtc2V0dGluZy11cGxvYWQgLmFydC11cGxvYWQtdmFsdWUge1xuICAgICAgZmxleDogMTtcbiAgICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgICBoZWlnaHQ6IDIycHg7XG4gICAgICBsaW5lLWhlaWdodDogMjJweDtcbiAgICAgIHBhZGRpbmctbGVmdDogMTBweDsgfVxuXG4uYXJ0LXZpZGVvLXBsYXllci5hcnQtc2V0dGluZy1zaG93IC5hcnQtc2V0dGluZ3Mge1xuICBvcGFjaXR5OiAxO1xuICB2aXNpYmlsaXR5OiB2aXNpYmxlO1xuICBwb2ludGVyLWV2ZW50czogYXV0bzsgfVxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtc2V0dGluZy1zaG93IC5hcnQtc2V0dGluZ3MgLmFydC1zZXR0aW5nLWlubmVyIHtcbiAgICByaWdodDogMDsgfVxuIl19 */";
+  styleInject(css$a);
+
+  var css$b = ".art-video-player .art-info{display:none;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;position:absolute;left:10px;top:10px;z-index:100;width:350px;min-height:150px;padding:10px;color:#fff;font-size:12px;font-family:Noto Sans CJK SC DemiLight,Roboto,Segoe UI,Tahoma,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;background:rgba(0,0,0,.9)}.art-video-player .art-info .art-info-item{display:-webkit-box;display:-ms-flexbox;display:flex;margin-bottom:5px}.art-video-player .art-info .art-info-item .art-info-title{width:100px;text-align:right}.art-video-player .art-info .art-info-item .art-info-content{-webkit-box-flex:1;-ms-flex:1;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-left:5px}.art-video-player .art-info .art-info-close{position:absolute;top:5px;right:5px;cursor:pointer}.art-video-player.art-info-show .art-info{display:-webkit-box;display:-ms-flexbox;display:flex}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZm8uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw0QkFDRSxZQUFhLENBQ2IsMkJBQXNCLENBQXRCLDRCQUFzQixDQUF0Qix5QkFBc0IsQ0FBdEIscUJBQXNCLENBQ3RCLGlCQUFrQixDQUNsQixTQUFVLENBQ1YsUUFBUyxDQUNULFdBQVksQ0FDWixXQUFZLENBQ1osZ0JBQWlCLENBQ2pCLFlBQWEsQ0FDYixVQUFXLENBQ1gsY0FBZSxDQUNmLHdGQUErRixDQUMvRixrQ0FBbUMsQ0FDbkMseUJBQWdDLENBQ2hDLDJDQUNFLG1CQUFhLENBQWIsbUJBQWEsQ0FBYixZQUFhLENBQ2IsaUJBQW9CLENBQ3BCLDJEQUNFLFdBQVksQ0FDWixnQkFBbUIsQ0FDckIsNkRBQ0Usa0JBQU8sQ0FBUCxVQUFPLENBQVAsTUFBTyxDQUNQLGVBQWdCLENBQ2hCLHNCQUF1QixDQUN2QixrQkFBbUIsQ0FDbkIsZ0JBQW1CLENBQ3ZCLDRDQUNFLGlCQUFrQixDQUNsQixPQUFRLENBQ1IsU0FBVSxDQUNWLGNBQWlCLENBRXJCLDBDQUNFLG1CQUFhLENBQWIsbUJBQWEsQ0FBYixZQUFlIiwiZmlsZSI6ImluZm8uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtaW5mbyB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgbGVmdDogMTBweDtcbiAgdG9wOiAxMHB4O1xuICB6LWluZGV4OiAxMDA7XG4gIHdpZHRoOiAzNTBweDtcbiAgbWluLWhlaWdodDogMTUwcHg7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIGNvbG9yOiAjZmZmO1xuICBmb250LXNpemU6IDEycHg7XG4gIGZvbnQtZmFtaWx5OiBOb3RvIFNhbnMgQ0pLIFNDIERlbWlMaWdodCwgUm9ib3RvLCBTZWdvZSBVSSwgVGFob21hLCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmO1xuICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjkpOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtaW5mbyAuYXJ0LWluZm8taXRlbSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBtYXJnaW4tYm90dG9tOiA1cHg7IH1cbiAgICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWluZm8gLmFydC1pbmZvLWl0ZW0gLmFydC1pbmZvLXRpdGxlIHtcbiAgICAgIHdpZHRoOiAxMDBweDtcbiAgICAgIHRleHQtYWxpZ246IHJpZ2h0OyB9XG4gICAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1pbmZvIC5hcnQtaW5mby1pdGVtIC5hcnQtaW5mby1jb250ZW50IHtcbiAgICAgIGZsZXg6IDE7XG4gICAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgICAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gICAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICAgICAgcGFkZGluZy1sZWZ0OiA1cHg7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1pbmZvIC5hcnQtaW5mby1jbG9zZSB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogNXB4O1xuICAgIHJpZ2h0OiA1cHg7XG4gICAgY3Vyc29yOiBwb2ludGVyOyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1pbmZvLXNob3cgLmFydC1pbmZvIHtcbiAgZGlzcGxheTogZmxleDsgfVxuIl19 */";
+  styleInject(css$b);
+
+  var css$c = ".art-video-player.art-hide-cursor *{cursor:none!important}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhpZGVDdXJzb3Iuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxvQ0FDRSxxQkFBeUIiLCJmaWxlIjoiaGlkZUN1cnNvci5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFydC12aWRlby1wbGF5ZXIuYXJ0LWhpZGUtY3Vyc29yICoge1xuICBjdXJzb3I6IG5vbmUgIWltcG9ydGFudDsgfVxuIl19 */";
+  styleInject(css$c);
+
+  var css$d = ".art-video-player[data-aspect-ratio] video{-webkit-box-sizing:content-box;box-sizing:content-box;-o-object-fit:fill;object-fit:fill}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFzcGVjdFJhdGlvLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsMkNBQ0UsOEJBQXVCLENBQXZCLHNCQUF1QixDQUN2QixrQkFBZ0IsQ0FBaEIsZUFBa0IiLCJmaWxlIjoiYXNwZWN0UmF0aW8uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyW2RhdGEtYXNwZWN0LXJhdGlvXSB2aWRlbyB7XG4gIGJveC1zaXppbmc6IGNvbnRlbnQtYm94O1xuICBvYmplY3QtZml0OiBmaWxsOyB9XG4iXX0= */";
+  styleInject(css$d);
+
+  var css$e = ".art-video-player.art-web-fullscreen{position:fixed;z-index:9999;width:100%;height:100%;left:0;top:0;right:0;bottom:0}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZ1bGxzY3JlZW5XZWIuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxxQ0FDRSxjQUFlLENBQ2YsWUFBYSxDQUNiLFVBQVcsQ0FDWCxXQUFZLENBQ1osTUFBTyxDQUNQLEtBQU0sQ0FDTixPQUFRLENBQ1IsUUFBVyIsImZpbGUiOiJmdWxsc2NyZWVuV2ViLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LXZpZGVvLXBsYXllci5hcnQtd2ViLWZ1bGxzY3JlZW4ge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHotaW5kZXg6IDk5OTk7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGxlZnQ6IDA7XG4gIHRvcDogMDtcbiAgcmlnaHQ6IDA7XG4gIGJvdHRvbTogMDsgfVxuIl19 */";
+  styleInject(css$e);
+
+  var css$f = ".art-video-player .art-pip-header{display:none;position:absolute;z-index:110;left:0;top:0;right:0;height:35px;line-height:35px;color:#fff;background:rgba(0,0,0,.5);-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;opacity:0;visibility:hidden;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.art-video-player .art-pip-header .art-pip-title{-webkit-box-flex:1;-ms-flex:1;flex:1;padding:0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:move}.art-video-player .art-pip-header .art-pip-close{width:35px;text-align:center;font-size:22px;cursor:pointer}.art-video-player.art-is-dragging{opacity:.7}.art-video-player.art-pip{position:fixed;z-index:9999;width:400px;height:225px;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 3px 6px 0 rgba(0,0,0,.2);box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 3px 6px 0 rgba(0,0,0,.2)}.art-video-player.art-pip .art-pip-header{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.art-video-player.art-pip.art-hover .art-pip-header{opacity:1;visibility:visible}.art-video-player.art-pip .art-mask .art-state{position:static}.art-video-player.art-pip .art-bottom,.art-video-player.art-pip .art-contextmenu,.art-video-player.art-pip .art-danmu,.art-video-player.art-pip .art-info,.art-video-player.art-pip .art-layers,.art-video-player.art-pip .art-notice,.art-video-player.art-pip .art-setting,.art-video-player.art-pip .art-subtitle{display:none!important}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBpcC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGtDQUNFLFlBQWEsQ0FDYixpQkFBa0IsQ0FDbEIsV0FBWSxDQUNaLE1BQU8sQ0FDUCxLQUFNLENBQ04sT0FBUSxDQUNSLFdBQVksQ0FDWixnQkFBaUIsQ0FDakIsVUFBVyxDQUNYLHlCQUE4QixDQUM5Qix3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQix3QkFBOEIsQ0FBOUIscUJBQThCLENBQTlCLDZCQUE4QixDQUM5QixTQUFVLENBQ1YsaUJBQWtCLENBQ2xCLHNDQUFnQyxDQUFoQyw4QkFBa0MsQ0FDbEMsaURBQ0Usa0JBQU8sQ0FBUCxVQUFPLENBQVAsTUFBTyxDQUNQLGNBQWUsQ0FDZixlQUFnQixDQUNoQixzQkFBdUIsQ0FDdkIsa0JBQW1CLENBQ25CLFdBQWMsQ0FDaEIsaURBQ0UsVUFBVyxDQUNYLGlCQUFrQixDQUNsQixjQUFlLENBQ2YsY0FBaUIsQ0FFckIsa0NBQ0UsVUFBYyxDQUVoQiwwQkFDRSxjQUFlLENBQ2YsWUFBYSxDQUNiLFdBQVksQ0FDWixZQUFhLENBQ2IseUVBQTJFLENBQTNFLGlFQUE2RSxDQUM3RSwwQ0FDRSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBYSxDQUNiLHdCQUFpQixDQUFqQixxQkFBaUIsQ0FBakIsb0JBQWlCLENBQWpCLGdCQUFtQixDQUNyQixvREFDRSxTQUFVLENBQ1Ysa0JBQXFCLENBQ3ZCLCtDQUNFLGVBQWtCLENBQ3BCLHFUQVFFLHNCQUEwQiIsImZpbGUiOiJwaXAuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtcGlwLWhlYWRlciB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgei1pbmRleDogMTEwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBoZWlnaHQ6IDM1cHg7XG4gIGxpbmUtaGVpZ2h0OiAzNXB4O1xuICBjb2xvcjogI2ZmZjtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjUpO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIG9wYWNpdHk6IDA7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZS1pbi1vdXQ7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1waXAtaGVhZGVyIC5hcnQtcGlwLXRpdGxlIHtcbiAgICBmbGV4OiAxO1xuICAgIHBhZGRpbmc6IDAgMTBweDtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgY3Vyc29yOiBtb3ZlOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtcGlwLWhlYWRlciAuYXJ0LXBpcC1jbG9zZSB7XG4gICAgd2lkdGg6IDM1cHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7IH1cblxuLmFydC12aWRlby1wbGF5ZXIuYXJ0LWlzLWRyYWdnaW5nIHtcbiAgb3BhY2l0eTogMC43OyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHotaW5kZXg6IDk5OTk7XG4gIHdpZHRoOiA0MDBweDtcbiAgaGVpZ2h0OiAyMjVweDtcbiAgYm94LXNoYWRvdzogMCAycHggNXB4IDAgcmdiYSgwLCAwLCAwLCAwLjE2KSwgMCAzcHggNnB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAgLmFydC1waXAtaGVhZGVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIHVzZXItc2VsZWN0OiBub25lOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAuYXJ0LWhvdmVyIC5hcnQtcGlwLWhlYWRlciB7XG4gICAgb3BhY2l0eTogMTtcbiAgICB2aXNpYmlsaXR5OiB2aXNpYmxlOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAgLmFydC1tYXNrIC5hcnQtc3RhdGUge1xuICAgIHBvc2l0aW9uOiBzdGF0aWM7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIuYXJ0LXBpcCAuYXJ0LWNvbnRleHRtZW51LFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtYm90dG9tLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtZGFubXUsXG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAgLmFydC1pbmZvLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtbGF5ZXJzLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtbm90aWNlLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtc2V0dGluZyxcbiAgLmFydC12aWRlby1wbGF5ZXIuYXJ0LXBpcCAuYXJ0LXN1YnRpdGxlIHtcbiAgICBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7IH1cbiJdfQ== */";
+  styleInject(css$f);
+
+  var css$g = ".art-auto-size{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImF1dG9TaXplLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZUFDRSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBYSxDQUNiLHdCQUFtQixDQUFuQixxQkFBbUIsQ0FBbkIsa0JBQW1CLENBQ25CLHVCQUF1QixDQUF2QixvQkFBdUIsQ0FBdkIsc0JBQXlCIiwiZmlsZSI6ImF1dG9TaXplLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LWF1dG8tc2l6ZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyOyB9XG4iXX0= */";
+  styleInject(css$g);
+
+  var css$h = ".art-video-player[data-flip=horizontal] .art-video{-webkit-transform:scaleX(-1);transform:scaleX(-1)}.art-video-player[data-flip=vertical] .art-video{-webkit-transform:scaleY(-1);transform:scaleY(-1)}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZsaXAuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxtREFDRSw0QkFBcUIsQ0FBckIsb0JBQXVCLENBRXpCLGlEQUNFLDRCQUFxQixDQUFyQixvQkFBdUIiLCJmaWxlIjoiZmxpcC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFydC12aWRlby1wbGF5ZXJbZGF0YS1mbGlwPVwiaG9yaXpvbnRhbFwiXSAuYXJ0LXZpZGVvIHtcbiAgdHJhbnNmb3JtOiBzY2FsZVgoLTEpOyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyW2RhdGEtZmxpcD1cInZlcnRpY2FsXCJdIC5hcnQtdmlkZW8ge1xuICB0cmFuc2Zvcm06IHNjYWxlWSgtMSk7IH1cbiJdfQ== */";
+  styleInject(css$h);
+
+  var css$i = ":root{--balloon-color:rgba(16,16,16,0.95);--balloon-font-size:12px;--balloon-move:4px}button[aria-label][data-balloon-pos]{overflow:visible}[aria-label][data-balloon-pos]{position:relative;cursor:pointer}[aria-label][data-balloon-pos]:after{text-indent:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;font-weight:400;font-style:normal;text-shadow:none;font-size:var(--balloon-font-size);background:var(--balloon-color);border-radius:2px;color:#fff;content:attr(aria-label);padding:.5em 1em;white-space:nowrap;line-height:1.2}[aria-label][data-balloon-pos]:after,[aria-label][data-balloon-pos]:before{opacity:0;pointer-events:none;-webkit-transition:all .18s ease-out .18s;transition:all .18s ease-out .18s;position:absolute;z-index:10}[aria-label][data-balloon-pos]:before{width:0;height:0;border:5px solid transparent;border-top:5px solid var(--balloon-color);content:\"\"}[aria-label][data-balloon-pos]:hover:after,[aria-label][data-balloon-pos]:hover:before{opacity:1;pointer-events:none}[aria-label][data-balloon-pos][data-balloon-pos=up]:after{margin-bottom:10px}[aria-label][data-balloon-pos][data-balloon-pos=up]:after,[aria-label][data-balloon-pos][data-balloon-pos=up]:before{bottom:100%;left:50%;-webkit-transform:translate(-50%,var(--balloon-move));transform:translate(-50%,var(--balloon-move));-webkit-transform-origin:top;transform-origin:top}[aria-label][data-balloon-pos][data-balloon-pos=up]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=up]:hover:before{-webkit-transform:translate(-50%);transform:translate(-50%)}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJhbGxvb24uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUNFLG1DQUF1QyxDQUN2Qyx3QkFBeUIsQ0FDekIsa0JBQXFCLENBRXZCLHFDQUNFLGdCQUFtQixDQUVyQiwrQkFDRSxpQkFBa0IsQ0FDbEIsY0FBaUIsQ0FDakIscUNBSUUsYUFBYyxDQUNkLHdIQUF3SSxDQUN4SSxlQUFtQixDQUNuQixpQkFBa0IsQ0FDbEIsZ0JBQWlCLENBQ2pCLGtDQUFtQyxDQUNuQywrQkFBZ0MsQ0FDaEMsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCx3QkFBeUIsQ0FDekIsZ0JBQWtCLENBRWxCLGtCQUFtQixDQUNuQixlQUNhLENBQ2YsMkVBbEJFLFNBQVUsQ0FDVixtQkFBb0IsQ0FDcEIseUNBQW9DLENBQXBDLGlDQUFvQyxDQVlwQyxpQkFBa0IsQ0FHbEIsVUFXYSxDQVZmLHNDQUNFLE9BQVEsQ0FDUixRQUFTLENBRVQsNEJBQXNDLENBQXRDLHlDQUFzQyxDQUl0QyxVQUVhLENBQ2YsdUZBQ0UsU0FBVSxDQUNWLG1CQUFzQixDQUN4QiwwREFHRSxrQkFFdUIsQ0FDekIscUhBTEUsV0FBWSxDQUNaLFFBQVMsQ0FFVCxxREFBK0MsQ0FBL0MsNkNBQStDLENBQy9DLDRCQUFxQixDQUFyQixvQkFLdUIsQ0FHekIsaUlBQ0UsaUNBQTZCLENBQTdCLHlCQUErQiIsImZpbGUiOiJiYWxsb29uLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6cm9vdCB7XG4gIC0tYmFsbG9vbi1jb2xvcjogcmdiYSgxNiwgMTYsIDE2LCAwLjk1KTtcbiAgLS1iYWxsb29uLWZvbnQtc2l6ZTogMTJweDtcbiAgLS1iYWxsb29uLW1vdmU6IDRweDsgfVxuXG5idXR0b25bYXJpYS1sYWJlbF1bZGF0YS1iYWxsb29uLXBvc10ge1xuICBvdmVyZmxvdzogdmlzaWJsZTsgfVxuXG5bYXJpYS1sYWJlbF1bZGF0YS1iYWxsb29uLXBvc10ge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGN1cnNvcjogcG9pbnRlcjsgfVxuICBbYXJpYS1sYWJlbF1bZGF0YS1iYWxsb29uLXBvc106YWZ0ZXIge1xuICAgIG9wYWNpdHk6IDA7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgdHJhbnNpdGlvbjogYWxsIDAuMThzIGVhc2Utb3V0IDAuMThzO1xuICAgIHRleHQtaW5kZW50OiAwO1xuICAgIGZvbnQtZmFtaWx5OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICdTZWdvZSBVSScsIFJvYm90bywgT3h5Z2VuLCBVYnVudHUsIENhbnRhcmVsbCwgJ09wZW4gU2FucycsICdIZWx2ZXRpY2EgTmV1ZScsIHNhbnMtc2VyaWY7XG4gICAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbiAgICBmb250LXN0eWxlOiBub3JtYWw7XG4gICAgdGV4dC1zaGFkb3c6IG5vbmU7XG4gICAgZm9udC1zaXplOiB2YXIoLS1iYWxsb29uLWZvbnQtc2l6ZSk7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tYmFsbG9vbi1jb2xvcik7XG4gICAgYm9yZGVyLXJhZGl1czogMnB4O1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIGNvbnRlbnQ6IGF0dHIoYXJpYS1sYWJlbCk7XG4gICAgcGFkZGluZzogMC41ZW0gMWVtO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICAgIGxpbmUtaGVpZ2h0OiAxLjI7XG4gICAgei1pbmRleDogMTA7IH1cbiAgW2FyaWEtbGFiZWxdW2RhdGEtYmFsbG9vbi1wb3NdOmJlZm9yZSB7XG4gICAgd2lkdGg6IDA7XG4gICAgaGVpZ2h0OiAwO1xuICAgIGJvcmRlcjogNXB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICAgIGJvcmRlci10b3AtY29sb3I6IHZhcigtLWJhbGxvb24tY29sb3IpO1xuICAgIG9wYWNpdHk6IDA7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgdHJhbnNpdGlvbjogYWxsIDAuMThzIGVhc2Utb3V0IDAuMThzO1xuICAgIGNvbnRlbnQ6ICcnO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB6LWluZGV4OiAxMDsgfVxuICBbYXJpYS1sYWJlbF1bZGF0YS1iYWxsb29uLXBvc106aG92ZXI6YmVmb3JlLCBbYXJpYS1sYWJlbF1bZGF0YS1iYWxsb29uLXBvc106aG92ZXI6YWZ0ZXIge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7IH1cbiAgW2FyaWEtbGFiZWxdW2RhdGEtYmFsbG9vbi1wb3NdW2RhdGEtYmFsbG9vbi1wb3M9J3VwJ106YWZ0ZXIge1xuICAgIGJvdHRvbTogMTAwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCB2YXIoLS1iYWxsb29uLW1vdmUpKTtcbiAgICB0cmFuc2Zvcm0tb3JpZ2luOiB0b3A7IH1cbiAgW2FyaWEtbGFiZWxdW2RhdGEtYmFsbG9vbi1wb3NdW2RhdGEtYmFsbG9vbi1wb3M9J3VwJ106YmVmb3JlIHtcbiAgICBib3R0b206IDEwMCU7XG4gICAgbGVmdDogNTAlO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIHZhcigtLWJhbGxvb24tbW92ZSkpO1xuICAgIHRyYW5zZm9ybS1vcmlnaW46IHRvcDsgfVxuICBbYXJpYS1sYWJlbF1bZGF0YS1iYWxsb29uLXBvc11bZGF0YS1iYWxsb29uLXBvcz0ndXAnXTpob3ZlcjphZnRlciB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgMCk7IH1cbiAgW2FyaWEtbGFiZWxdW2RhdGEtYmFsbG9vbi1wb3NdW2RhdGEtYmFsbG9vbi1wb3M9J3VwJ106aG92ZXI6YmVmb3JlIHtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAwKTsgfVxuIl19 */";
+  styleInject(css$i);
 
   var optionValidator = createCommonjsModule(function (module, exports) {
   !function(r,t){module.exports=t();}(commonjsGlobal,function(){function e(r){return (e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}var n=Object.prototype.toString,c=function(r){if(void 0===r)return "undefined";if(null===r)return "null";var t=e(r);if("boolean"===t)return "boolean";if("string"===t)return "string";if("number"===t)return "number";if("symbol"===t)return "symbol";if("function"===t)return function(r){return "GeneratorFunction"===o(r)}(r)?"generatorfunction":"function";if(function(r){return Array.isArray?Array.isArray(r):r instanceof Array}(r))return "array";if(function(r){if(r.constructor&&"function"==typeof r.constructor.isBuffer)return r.constructor.isBuffer(r);return !1}(r))return "buffer";if(function(r){try{if("number"==typeof r.length&&"function"==typeof r.callee)return !0}catch(r){if(-1!==r.message.indexOf("callee"))return !0}return !1}(r))return "arguments";if(function(r){return r instanceof Date||"function"==typeof r.toDateString&&"function"==typeof r.getDate&&"function"==typeof r.setDate}(r))return "date";if(function(r){return r instanceof Error||"string"==typeof r.message&&r.constructor&&"number"==typeof r.constructor.stackTraceLimit}(r))return "error";if(function(r){return r instanceof RegExp||"string"==typeof r.flags&&"boolean"==typeof r.ignoreCase&&"boolean"==typeof r.multiline&&"boolean"==typeof r.global}(r))return "regexp";switch(o(r)){case"Symbol":return "symbol";case"Promise":return "promise";case"WeakMap":return "weakmap";case"WeakSet":return "weakset";case"Map":return "map";case"Set":return "set";case"Int8Array":return "int8array";case"Uint8Array":return "uint8array";case"Uint8ClampedArray":return "uint8clampedarray";case"Int16Array":return "int16array";case"Uint16Array":return "uint16array";case"Int32Array":return "int32array";case"Uint32Array":return "uint32array";case"Float32Array":return "float32array";case"Float64Array":return "float64array"}if(function(r){return "function"==typeof r.throw&&"function"==typeof r.return&&"function"==typeof r.next}(r))return "generator";switch(t=n.call(r)){case"[object Object]":return "object";case"[object Map Iterator]":return "mapiterator";case"[object Set Iterator]":return "setiterator";case"[object String Iterator]":return "stringiterator";case"[object Array Iterator]":return "arrayiterator"}return t.slice(8,-1).toLowerCase().replace(/\s/g,"")};function o(r){return r.constructor?r.constructor.name:null}function f(r,t){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:["option"];return s(r,t,e),y(r,t,e),function(a,i,u){var r=c(i),t=c(a);if("object"===r){if("object"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'object' type, but got '").concat(t,"'"));Object.keys(i).forEach(function(r){var t=a[r],e=i[r],n=u.slice();n.push(r),s(t,e,n),y(t,e,n),f(t,e,n);});}if("array"===r){if("array"!==t)throw new Error("[Type Error]: '".concat(u.join("."),"' require 'array' type, but got '").concat(t,"'"));a.forEach(function(r,t){var e=a[t],n=i[t]||i[0],o=u.slice();o.push(t),s(e,n,o),y(e,n,o),f(e,n,o);});}}(r,t,e),r}function s(r,t,e){if("string"===c(t)){var n=c(r);if(!(-1<t.indexOf("|")?t.split("|").map(function(r){return r.toLowerCase().trim()}).filter(Boolean).some(function(r){return n===r}):t.toLowerCase().trim()===n))throw new Error("[Type Error]: '".concat(e.join("."),"' require '").concat(t,"' type, but got '").concat(n,"'"))}}function y(r,t,e){if("function"===c(t)){var n=t(r,c(r),e);if(!0!==n){var o=c(n);throw "string"===o?new Error(n):"error"===o?n:new Error("[Validator Error]: The scheme for '".concat(e.join("."),"' validator require return true, but got '").concat(n,"'"))}}}return f.kindOf=c,f});
@@ -2837,7 +2965,7 @@
 
   var scheme = {
     container: validElement,
-    url: 'string|function',
+    url: 'string',
     poster: 'string',
     title: 'string',
     theme: 'string',
@@ -2856,13 +2984,13 @@
     hotkey: 'boolean',
     pip: 'boolean',
     mutex: 'boolean',
+    backdrop: 'boolean',
     fullscreen: 'boolean',
     fullscreenWeb: 'boolean',
     subtitleOffset: 'boolean',
     miniProgressBar: 'boolean',
     localVideo: 'boolean',
     localSubtitle: 'boolean',
-    autoPip: 'boolean',
     networkMonitor: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
@@ -2925,14 +3053,10 @@
     customType: 'object'
   };
 
-  var video = {
+  var config = {
     propertys: ['audioTracks', 'autoplay', 'buffered', 'controller', 'controls', 'crossOrigin', 'currentSrc', 'currentTime', 'defaultMuted', 'defaultPlaybackRate', 'duration', 'ended', 'error', 'loop', 'mediaGroup', 'muted', 'networkState', 'paused', 'playbackRate', 'played', 'preload', 'readyState', 'seekable', 'seeking', 'src', 'startDate', 'textTracks', 'videoTracks', 'volume'],
     methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'],
     events: ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']
-  };
-
-  var config = {
-    video: video
   };
 
   var Whitelist = function Whitelist(art) {
@@ -2940,22 +3064,20 @@
 
     classCallCheck(this, Whitelist);
 
-    var kindOf = art.constructor.kindOf;
-    var whitelist = art.option.whitelist;
-    this.userAgent = window.navigator.userAgent;
-    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.userAgent);
+    var kindOf = art.constructor.kindOf,
+        whitelist = art.option.whitelist;
+    this.ua = navigator.userAgent;
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.ua);
     this.state = !this.isMobile || whitelist.some(function (item) {
-      var type = kindOf(item);
-
-      switch (type) {
+      switch (kindOf(item)) {
         case 'string':
-          return _this.userAgent.indexOf(item) > -1;
+          return _this.ua.indexOf(item) > -1;
 
         case 'function':
-          return item(_this.userAgent);
+          return item(_this.ua);
 
         case 'regexp':
-          return item.test(_this.userAgent);
+          return item.test(_this.ua);
 
         default:
           return false;
@@ -2986,9 +3108,9 @@
       errorHandle(this.$container.clientWidth && this.$container.clientHeight, 'The width and height of the container cannot be 0');
 
       if (art.whitelist.state) {
-        this.initDesktop();
+        this.desktop();
       } else {
-        this.initMobile();
+        this.mobile();
       }
     }
 
@@ -2998,9 +3120,12 @@
         return query(className, this.$container);
       }
     }, {
-      key: "initDesktop",
-      value: function initDesktop() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(this.art.option.theme, "\">\n  <video class=\"art-video\">\n    <track default kind=\"metadata\"></track>\n  </video>\n  <div class=\"art-subtitle\"></div>\n  <div class=\"art-danmuku\"></div>\n  <div class=\"art-layers\"></div>\n  <div class=\"art-mask\">\n    <div class=\"art-state\"></div>\n  </div>\n  <div class=\"art-bottom\">\n    <div class=\"art-progress\"></div>\n    <div class=\"art-controls\">\n      <div class=\"art-controls-left\"></div>\n      <div class=\"art-controls-right\"></div>\n    </div>\n  </div>\n  <div class=\"art-loading\"></div>\n  <div class=\"art-notice\">\n    <div class=\"art-notice-inner\"></div>\n  </div>\n  <div class=\"art-settings\">\n    <div class=\"art-setting-inner art-backdrop-filter\">\n      <div class=\"art-setting-body\"></div>\n    </div>\n  </div>\n  <div class=\"art-info art-backdrop-filter\">\n    <div class=\"art-info-panel\">\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Player version:</div>\n        <div class=\"art-info-content\">3.1.20</div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video url:</div>\n        <div class=\"art-info-content\" data-video=\"src\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video volume:</div>\n        <div class=\"art-info-content\" data-video=\"volume\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video time:</div>\n        <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video duration:</div>\n        <div class=\"art-info-content\" data-video=\"duration\"></div>\n      </div>\n      <div class=\"art-info-item\">\n        <div class=\"art-info-title\">Video resolution:</div>\n        <div class=\"art-info-content\">\n          <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n        </div>\n      </div>\n    </div>\n    <div class=\"art-info-close\">[x]</div>\n  </div>\n  <div class=\"art-pip-header\">\n    <div class=\"art-pip-title\"></div>\n    <div class=\"art-pip-close\">\xD7</div>\n  </div>\n  <div class=\"art-contextmenus art-backdrop-filter\"></div>\n</div>\n        ");
+      key: "desktop",
+      value: function desktop() {
+        var _this$art$option = this.art.option,
+            theme = _this$art$option.theme,
+            backdrop = _this$art$option.backdrop;
+        this.$container.innerHTML = "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.3.3</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$track = this.query('.art-video track');
@@ -3027,18 +3152,24 @@
         this.$pipTitle = this.query('.art-pip-title');
         this.$pipClose = this.query('.art-pip-close');
         this.$contextmenu = this.query('.art-contextmenus');
+
+        if (backdrop) {
+          addClass(this.$settingInner, 'art-backdrop-filter');
+          addClass(this.$info, 'art-backdrop-filter');
+          addClass(this.$contextmenu, 'art-backdrop-filter');
+        }
       }
     }, {
-      key: "initMobile",
-      value: function initMobile() {
-        this.$container.innerHTML = "\n<div class=\"art-video-player\">\n  <video class=\"art-video\"></video>\n</div>\n        ";
+      key: "mobile",
+      value: function mobile() {
+        this.$container.innerHTML = "\n          <div class=\"art-video-player\">\n            <video class=\"art-video\"></video>\n          </div>\n        ";
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
       }
     }, {
       key: "destroy",
-      value: function destroy(removeHtml) {
-        if (removeHtml) {
+      value: function destroy(remove) {
+        if (remove) {
           this.$container.innerHTML = '';
         } else {
           addClass(this.$player, 'art-destroy');
@@ -3065,7 +3196,6 @@
   var Open = "打开";
   var Fullscreen = "全屏";
   var zhCn = {
-  	"About author": "关于作者",
   	"Video info": "视频统计信息",
   	Close: Close,
   	"Video load failed": "视频加载失败",
@@ -3097,7 +3227,7 @@
   	"Web fullscreen": "网页全屏",
   	"Exit web fullscreen": "退出网页全屏",
   	"Mini player": "迷你播放器",
-  	"Does not support fullscreen": "不支持全屏",
+  	"Exit mini player": "退出迷你播放器",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地视频",
   	"Subtitle offset time": "字幕偏移时间",
@@ -3120,7 +3250,6 @@
   var Open$1 = "打開";
   var Fullscreen$1 = "全屏";
   var zhTw = {
-  	"About author": "關於作者",
   	"Video info": "影片統計訊息",
   	Close: Close$1,
   	"Video load failed": "影片載入失敗",
@@ -3152,7 +3281,7 @@
   	"Web fullscreen": "網頁全屏",
   	"Exit web fullscreen": "退出網頁全屏",
   	"Mini player": "迷你播放器",
-  	"Does not support fullscreen": "不支持全屏",
+  	"Exit mini player": "退出迷你播放器",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地視頻",
   	"Subtitle offset time": "字幕偏移時間",
@@ -3195,7 +3324,7 @@
     return I18n;
   }();
 
-  function attachUrlMix(art, player) {
+  function urlMix(art, player) {
     var _art$option = art.option,
         type = _art$option.type,
         customType = _art$option.customType,
@@ -3204,48 +3333,28 @@
       get: function get() {
         return $video.src;
       },
-      set: function set() {
-        errorHandle(false, 'You should use this method: art.attachUrl()');
-      }
-    });
-    def(player, 'attachUrl', {
-      value: function value(url) {
-        return sleep().then(function () {
-          function attachUrl(videoUrl) {
-            var typeName = type || getExt(videoUrl);
-            var typeCallback = customType[typeName];
+      set: function set(url) {
+        var typeName = type || getExt(url);
+        var typeCallback = customType[typeName];
 
-            if (typeName && typeCallback) {
-              art.loading.show = true;
-              art.emit('beforeCustomType', typeName);
-              typeCallback.call(art, $video, videoUrl, art);
-              art.emit('afterCustomType', typeName);
-            } else {
-              art.emit('beforeAttachUrl', videoUrl);
-              $video.src = videoUrl;
-              art.emit('afterAttachUrl', videoUrl);
-            }
-
-            return Promise.resolve(videoUrl);
-          }
-
-          if (typeof url === 'function') {
-            var result = url.call(art);
-            errorHandle(typeof result.then === 'function', 'If url is a function, it needs to return a promise.');
-            return result.then(function (videoUrl) {
-              art.loading.show = true;
-              return attachUrl(videoUrl);
-            });
-          }
-
-          return attachUrl(url);
-        });
+        if (typeName && typeCallback) {
+          sleep().then(function () {
+            art.loading.show = true;
+            typeCallback.call(art, $video, url, art);
+            art.emit('customType', typeName);
+          });
+        } else {
+          $video.src = url;
+          art.option.url = url;
+          art.emit('urlChange', url);
+        }
       }
     });
   }
 
   function attrInit(art, player) {
     var option = art.option,
+        storage = art.storage,
         $video = art.template.$video;
     Object.keys(option.moreVideoAttr).forEach(function (key) {
       $video[key] = option.moreVideoAttr[key];
@@ -3259,6 +3368,12 @@
       $video.volume = clamp(option.volume, 0, 1);
     }
 
+    var volume = storage.get('volume');
+
+    if (volume) {
+      $video.volume = clamp(volume, 0, 1);
+    }
+
     if (option.poster) {
       $video.poster = option.poster;
     }
@@ -3268,7 +3383,7 @@
     }
 
     $video.controls = false;
-    player.attachUrl(option.url);
+    player.url = option.url;
   }
 
   function eventInit(art, player) {
@@ -3284,7 +3399,7 @@
     proxy($video, 'click', function () {
       player.toggle = true;
     });
-    config.video.events.forEach(function (eventName) {
+    config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
       });
@@ -3293,11 +3408,11 @@
 
     art.on('video:canplay', function () {
       reconnectTime = 0;
-      art.controls.show = true;
-      art.mask.show = true;
       art.loading.show = false;
     });
     art.once('video:canplay', function () {
+      art.controls.show = true;
+      art.mask.show = true;
       art.emit('ready');
     }); // art.on('video:canplaythrough', () => {
     // });
@@ -3307,28 +3422,30 @@
     // });
 
     art.on('video:ended', function () {
-      art.controls.show = true;
-      art.mask.show = true;
-
       if (option.loop) {
         player.seek = 0;
         player.play = true;
+        art.controls.show = false;
+        art.mask.show = false;
+      } else {
+        art.controls.show = true;
+        art.mask.show = true;
       }
     });
     art.on('video:error', function () {
       if (reconnectTime < maxReconnectTime) {
         sleep(1000).then(function () {
           reconnectTime += 1;
-          player.attachUrl(option.url);
-          notice.show("".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime));
+          player.url = option.url;
+          notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
         });
       } else {
         art.loading.show = false;
         art.controls.show = false;
         addClass($player, 'art-error');
         sleep(1000).then(function () {
-          notice.show(i18n.get('Video load failed'), false);
-          art.destroy();
+          notice.show = i18n.get('Video load failed');
+          art.destroy(false);
         });
       }
     }); // art.on('video:loadeddata', () => {
@@ -3377,31 +3494,32 @@
   }
 
   function playMix(art, player) {
-    var $video = art.template.$video,
-        i18n = art.i18n,
+    var i18n = art.i18n,
         notice = art.notice,
-        mutex = art.option.mutex;
+        instances = art.constructor.instances,
+        mutex = art.option.mutex,
+        $video = art.template.$video;
     def(player, 'play', {
       set: function set(value) {
         if (value) {
           var promise = $video.play();
 
-          if (promise !== undefined) {
+          if (promise.then) {
             promise.then().catch(function (err) {
-              notice.show(err, true, 3000);
+              notice.show = err;
               throw err;
             });
           }
 
           if (mutex) {
-            art.constructor.instances.filter(function (item) {
+            instances.filter(function (item) {
               return item !== art;
             }).forEach(function (item) {
               item.player.pause = true;
             });
           }
 
-          notice.show(i18n.get('Play'));
+          notice.show = i18n.get('Play');
           art.emit('play');
         } else {
           player.pause = true;
@@ -3421,7 +3539,7 @@
       set: function set(value) {
         if (value) {
           $video.pause();
-          notice.show(i18n.get('Pause'));
+          notice.show = i18n.get('Pause');
           art.emit('pause');
         } else {
           player.play = true;
@@ -3449,7 +3567,7 @@
     def(player, 'seek', {
       set: function set(time) {
         player.currentTime = time;
-        notice.show("".concat(secondToTime(time), " / ").concat(secondToTime(player.duration)));
+        notice.show = "".concat(secondToTime(time), " / ").concat(secondToTime(player.duration));
         art.emit('seek', time);
       }
     });
@@ -3466,7 +3584,7 @@
       },
       set: function set(percentage) {
         $video.volume = clamp(percentage, 0, 1);
-        notice.show("".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10)));
+        notice.show = "".concat(i18n.get('Volume'), ": ").concat(parseInt($video.volume * 100, 10));
 
         if ($video.volume !== 0) {
           storage.set('volume', $video.volume);
@@ -3507,63 +3625,38 @@
 
   function switchMix(art, player) {
     var i18n = art.i18n,
-        notice = art.notice,
-        option = art.option;
+        notice = art.notice;
+
+    function switchUrl(url, name, currentTime) {
+      if (url === player.url) return;
+      URL.revokeObjectURL(player.url);
+      var playing = player.playing;
+      player.url = url;
+      player.playbackRate = false;
+      player.aspectRatio = false;
+      art.once('video:canplay', function () {
+        player.currentTime = currentTime;
+      });
+
+      if (playing) {
+        player.play = true;
+      }
+
+      if (name) {
+        notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
+      }
+
+      art.emit('switch', url);
+    }
+
     def(player, 'switchQuality', {
       value: function value(url, name) {
-        if (url !== player.url) {
-          URL.revokeObjectURL(player.url);
-          var currentTime = player.currentTime,
-              playing = player.playing;
-          return player.attachUrl(url).then(function () {
-            option.url = url;
-            player.playbackRate = false;
-            player.aspectRatio = false;
-            art.on('ready', function () {
-              player.currentTime = currentTime;
-            });
-
-            if (playing) {
-              player.play = true;
-            }
-
-            if (name) {
-              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-            }
-
-            art.emit('switch', url);
-          });
-        }
-
-        return null;
+        return switchUrl(url, name, player.currentTime);
       }
     });
     def(player, 'switchUrl', {
       value: function value(url, name) {
-        if (url !== player.url) {
-          URL.revokeObjectURL(player.url);
-          var playing = player.playing;
-          return player.attachUrl(url).then(function () {
-            option.url = url;
-            player.playbackRate = false;
-            player.aspectRatio = false;
-            art.on('ready', function () {
-              player.currentTime = 0;
-            });
-
-            if (playing) {
-              player.play = true;
-            }
-
-            if (name) {
-              notice.show("".concat(i18n.get('Switch video'), ": ").concat(name));
-            }
-
-            art.emit('switch', url);
-          });
-        }
-
-        return null;
+        return switchUrl(url, name, 0);
       }
     });
   }
@@ -3580,16 +3673,12 @@
       },
       set: function set(rate) {
         if (rate) {
+          if (rate === $player.dataset.playbackRate) return;
           var rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
           errorHandle(rateList.includes(rate), "'playbackRate' only accept ".concat(rateList.toString(), " as parameters"));
-
-          if (rate === $player.dataset.playbackRate) {
-            return;
-          }
-
           $video.playbackRate = rate;
           $player.dataset.playbackRate = rate;
-          notice.show("".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x")));
+          notice.show = "".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x"));
           art.emit('playbackRateChange', rate);
         } else if (player.playbackRate) {
           player.playbackRate = 1;
@@ -3653,7 +3742,7 @@
           }
 
           $player.dataset.aspectRatio = ratio;
-          notice.show("".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio));
+          notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
           art.emit('aspectRatioChange', ratio);
         } else if (player.aspectRatio) {
           setStyle($video, 'width', null);
@@ -3687,9 +3776,9 @@
           canvas.height = $video.videoHeight;
           canvas.getContext('2d').drawImage($video, 0, 0);
           return canvas.toDataURL('image/png');
-        } catch (error) {
-          notice.show(error);
-          throw error;
+        } catch (err) {
+          notice.show = err;
+          throw err;
         }
       }
     });
@@ -3704,9 +3793,9 @@
             canvas.toBlob(function (blob) {
               resolve(URL.createObjectURL(blob));
             });
-          } catch (error) {
-            notice.show(error);
-            reject(error);
+          } catch (err) {
+            notice.show = err;
+            reject(err);
           }
         });
       }
@@ -3903,57 +3992,27 @@
   var screenfull_1 = screenfull.isEnabled;
 
   function fullscreenMix(art, player) {
-    var i18n = art.i18n,
-        notice = art.notice,
-        destroyEvents = art.events.destroyEvents,
-        $player = art.template.$player;
-
-    var screenfullChange = function screenfullChange() {
-      art.emit('fullscreenChange', screenfull.isFullscreen);
-    };
-
-    var screenfullError = function screenfullError() {
-      notice.show(i18n.get('Does not support fullscreen'));
-    };
-
-    if (player.fullscreenIsEnabled) {
-      screenfull.on('change', screenfullChange);
-      screenfull.on('error', screenfullError);
-      destroyEvents.push(function () {
-        screenfull.off('change', screenfullChange);
-        screenfull.off('error', screenfullError);
-      });
-    }
-
+    var $player = art.template.$player;
     def(player, 'fullscreen', {
       get: function get() {
         return screenfull.isFullscreen;
       },
       set: function set(value) {
-        if (!player.fullscreenIsEnabled) {
-          screenfullError();
-          return;
+        if (player.fullscreenWeb) {
+          player.fullscreenWeb = false;
         }
 
         if (value) {
-          if (player.fullscreenWeb) {
-            player.fullscreenWeb = false;
-          }
-
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
-            art.emit('fullscreenEnabled');
+            art.emit('fullscreenChange', true);
           });
         } else {
-          if (player.fullscreenWeb) {
-            player.fullscreenWeb = false;
-          }
-
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
-            art.emit('fullscreenExit');
+            art.emit('fullscreenChange', false);
           });
         }
       }
@@ -3965,11 +4024,6 @@
         }
       }
     });
-    def(player, 'fullscreenIsEnabled', {
-      get: function get() {
-        return screenfull.isEnabled;
-      }
-    });
   }
 
   function fullscreenWebMix(art, player) {
@@ -3979,22 +4033,18 @@
         return hasClass($player, 'art-web-fullscreen');
       },
       set: function set(value) {
-        if (value) {
-          if (player.fullscreen) {
-            player.fullscreen = false;
-          }
+        if (player.fullscreen) {
+          player.fullscreen = false;
+        }
 
+        if (value) {
           addClass($player, 'art-web-fullscreen');
           player.aspectRatioReset = true;
-          art.emit('fullscreenWebEnabled');
+          art.emit('fullscreenWebChange', true);
         } else {
-          if (player.fullscreen) {
-            player.fullscreen = false;
-          }
-
           removeClass($player, 'art-web-fullscreen');
           player.aspectRatioReset = true;
-          art.emit('fullscreenWebExit');
+          art.emit('fullscreenWebChange', false);
         }
       }
     });
@@ -4018,28 +4068,23 @@
       },
       set: function set(value) {
         if (value) {
-          $video.requestPictureInPicture().catch(function (error) {
-            notice.show(error);
-            throw error;
+          $video.requestPictureInPicture().catch(function (err) {
+            notice.show = err;
+            throw err;
           });
         } else {
-          document.exitPictureInPicture().catch(function (error) {
-            notice.show(error);
-            throw error;
+          document.exitPictureInPicture().catch(function (err) {
+            notice.show = err;
+            throw err;
           });
         }
       }
     });
     proxy($video, 'enterpictureinpicture', function () {
-      art.emit('pipEnabled');
+      art.emit('pipChange', true);
     });
     proxy($video, 'leavepictureinpicture', function () {
-      art.emit('pipExit');
-    });
-    art.on('destroy', function () {
-      if (player.pip) {
-        player.pip = false;
-      }
+      art.emit('pipChange', false);
     });
   }
 
@@ -4053,10 +4098,10 @@
       set: function set(value) {
         if (value) {
           $video.webkitSetPresentationMode('picture-in-picture');
-          art.emit('pipEnabled');
+          art.emit('pipChange', true);
         } else {
           $video.webkitSetPresentationMode('inline');
-          art.emit('pipExit');
+          art.emit('pipChange', false);
         }
       }
     });
@@ -4101,7 +4146,7 @@
       removeClass($player, 'art-is-dragging');
     });
     append($pipTitle, option.title || i18n.get('Mini player'));
-    var property = {
+    def(player, 'pip', {
       get: function get() {
         return hasClass($player, 'art-pip');
       },
@@ -4117,7 +4162,7 @@
           player.fullscreenWeb = false;
           player.aspectRatio = false;
           player.playbackRate = false;
-          art.emit('pipEnabled');
+          art.emit('pipChange', true);
         } else if (player.pip) {
           $player.style.cssText = cacheStyle;
           removeClass($player, 'art-pip');
@@ -4128,11 +4173,10 @@
           player.aspectRatio = false;
           player.playbackRate = false;
           player.autoSize = true;
-          art.emit('pipExit');
+          art.emit('pipChange', false);
         }
       }
-    };
-    def(player, 'pip', property);
+    });
   }
 
   function pipMix(art, player) {
@@ -4159,7 +4203,7 @@
     var $video = art.template.$video;
     def(player, 'loaded', {
       get: function get() {
-        return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) / $video.duration : 0;
+        return player.loadedTime / $video.duration;
       }
     });
     def(player, 'loadedTime', {
@@ -4169,10 +4213,10 @@
     });
   }
 
-  function seekMix$2(art, player) {
+  function playedMix(art, player) {
     def(player, 'played', {
       get: function get() {
-        return art.template.$video.currentTime / art.template.$video.duration;
+        return player.currentTime / player.duration;
       }
     });
   }
@@ -4259,18 +4303,19 @@
   }
 
   function flipMix(art, player) {
+    var $player = art.template.$player;
     def(player, 'flip', {
       get: function get() {
-        return art.template.$player.dataset.flip;
+        return $player.dataset.flip;
       },
       set: function set(flip) {
         if (flip) {
           var flipList = ['normal', 'horizontal', 'vertical'];
           errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
-          art.template.$player.dataset.flip = flip;
+          $player.dataset.flip = flip;
           art.emit('flipChange', flip);
         } else {
-          delete art.template.$player.dataset.flip;
+          delete $player.dataset.flip;
           art.emit('flipRemove');
         }
       }
@@ -4280,7 +4325,7 @@
   var Player = function Player(art) {
     classCallCheck(this, Player);
 
-    attachUrlMix(art, this);
+    urlMix(art, this);
     eventInit(art, this);
     attrInit(art, this);
     playMix(art, this);
@@ -4298,7 +4343,7 @@
     fullscreenWebMix(art, this);
     pipMix(art, this);
     seekMix$1(art, this);
-    seekMix$2(art, this);
+    playedMix(art, this);
     playingMix(art, this);
     resizeMix(art, this);
     rectMix(art, this);
@@ -4350,24 +4395,18 @@
       this.id = 0;
       this.art = art;
       this.add = this.add.bind(this);
-      this.name = this.constructor.name.toLowerCase();
     }
 
     createClass(Component, [{
-      key: "toggle",
-      value: function toggle() {
-        this.show = !this.show;
-      }
-    }, {
       key: "add",
       value: function add(getOption, callback) {
         var _this = this;
 
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        if (!this.$parent || option.disable) return {};
+        if (!this.$parent || !this.name || option.disable) return;
         this.id += 1;
         var name = option.name || "".concat(this.name).concat(this.id);
-        errorHandle(!has$1(this, name), "Cannot add a component that already has the same name: ".concat(name));
+        errorHandle(!has$1(this, name), "Cannot add an existing name [".concat(name, "] to the [").concat(this.name, "]"));
         var $ref = document.createElement('div');
         $ref.classList.value = "art-".concat(this.name, " art-").concat(this.name, "-").concat(name);
 
@@ -4410,24 +4449,12 @@
           callback($ref, this, this.art);
         }
 
+        this.art.emit("".concat(this.name, ":add"), option);
         def(this, name, {
-          value: {
-            get $ref() {
-              return $ref;
-            },
-
-            set show(value) {
-              if (value) {
-                setStyle($ref, 'display', 'block');
-              } else {
-                setStyle($ref, 'display', 'none');
-              }
-            }
-
+          get: function get() {
+            return option;
           }
         });
-        this.art.emit("".concat(this.name, ":add"), option);
-        return this[name];
       }
     }, {
       key: "show",
@@ -4435,7 +4462,6 @@
         return hasClass(this.art.template.$player, "art-".concat(this.name, "-show"));
       },
       set: function set(value) {
-        errorHandle(value === false || value === true, 'The show attribute expects a boolean value');
         var $player = this.art.template.$player;
         var className = "art-".concat(this.name, "-show");
 
@@ -4447,6 +4473,13 @@
 
         this.art.emit("".concat(this.name, ":toggle"), value);
       }
+    }, {
+      key: "toggle",
+      set: function set(value) {
+        if (value) {
+          this.show = !this.show;
+        }
+      }
     }]);
 
     return Component;
@@ -4454,27 +4487,22 @@
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function fullscreen(option) {
     return function (art) {
       return _objectSpread({}, option, {
+        tooltip: art.i18n.get('Fullscreen'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreen = append($control, icons.fullscreen);
-          tooltip($fullscreen, i18n.get('Fullscreen'));
+          append($control, icons.fullscreen);
           proxy($control, 'click', function () {
             player.fullscreenToggle = true;
           });
-          art.on('fullscreenEnabled', function () {
-            setStyle($fullscreen, 'opacity', '0.8');
-            tooltip($fullscreen, i18n.get('Exit fullscreen'));
-          });
-          art.on('fullscreenExit', function () {
-            setStyle($fullscreen, 'opacity', '1');
-            tooltip($fullscreen, i18n.get('Fullscreen'));
+          art.on('fullscreenChange', function (value) {
+            tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
           });
         }
       });
@@ -4483,27 +4511,22 @@
 
   function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function fullscreenWeb(option) {
     return function (art) {
       return _objectSpread$1({}, option, {
+        tooltip: art.i18n.get('Web fullscreen'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $fullscreenWeb = append($control, icons.fullscreenWeb);
-          tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
+          append($control, icons.fullscreenWeb);
           proxy($control, 'click', function () {
             player.fullscreenWebToggle = true;
           });
-          art.on('fullscreenWebEnabled', function () {
-            setStyle($fullscreenWeb, 'opacity', '0.8');
-            tooltip($fullscreenWeb, i18n.get('Exit web fullscreen'));
-          });
-          art.on('fullscreenWebExit', function () {
-            setStyle($fullscreenWeb, 'opacity', '1');
-            tooltip($fullscreenWeb, i18n.get('Web fullscreen'));
+          art.on('fullscreenWebChange', function (value) {
+            tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
           });
         }
       });
@@ -4512,19 +4535,22 @@
 
   function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function pip(option) {
     return function (art) {
       return _objectSpread$2({}, option, {
+        tooltip: art.i18n.get('Mini player'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               player = art.player;
-          var $pip = append($control, icons.pip);
-          tooltip($pip, i18n.get('Mini player'));
+          append($control, icons.pip);
           proxy($control, 'click', function () {
-            player.pip = true;
+            player.pipToggle = true;
+          });
+          art.on('pipChange', function (value) {
+            tooltip($control, i18n.get(value ? 'Exit mini player' : 'Mini player'));
           });
         }
       });
@@ -4533,7 +4559,7 @@
 
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playAndPause(option) {
     return function (art) {
       return _objectSpread$3({}, option, {
@@ -4582,7 +4608,7 @@
 
   function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function getPosFromEvent(art, event) {
     var $progress = art.template.$progress,
         player = art.player;
@@ -4609,7 +4635,7 @@
           proxy = art.events.proxy,
           player = art.player;
       return _objectSpread$4({}, option, {
-        html: "\n<div class=\"art-control-progress-inner\">\n    <div class=\"art-progress-loaded\"></div>\n    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n    <div class=\"art-progress-highlight\"></div>\n    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n    <div class=\"art-progress-tip art-tip\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-control-progress-inner\">\n                    <div class=\"art-progress-loaded\"></div>\n                    <div class=\"art-progress-played\" style=\"background: ".concat(theme, "\"></div>\n                    <div class=\"art-progress-highlight\"></div>\n                    <div class=\"art-progress-indicator\" style=\"background: ").concat(theme, "\"></div>\n                    <div class=\"art-progress-tip art-tip\"></div>\n                </div>\n            "),
         mounted: function mounted($control) {
           var isDroging = false;
           var $loaded = query('.art-progress-loaded', $control);
@@ -4726,28 +4752,22 @@
 
   function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function subtitle(option) {
     return function (art) {
       return _objectSpread$5({}, option, {
+        tooltip: art.i18n.get('Hide subtitle'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               subtitle = art.subtitle;
-          var $subtitle = append($control, icons.subtitle);
-          tooltip($subtitle, i18n.get('Hide subtitle'));
+          append($control, icons.subtitle);
           proxy($control, 'click', function () {
-            subtitle.toggle();
+            subtitle.toggle = true;
           });
           art.on('subtitle:toggle', function (value) {
-            if (value) {
-              setStyle($subtitle, 'opacity', '1');
-              tooltip($subtitle, i18n.get('Hide subtitle'));
-            } else {
-              setStyle($subtitle, 'opacity', '0.8');
-              tooltip($subtitle, i18n.get('Show subtitle'));
-            }
+            tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
           });
         }
       });
@@ -4756,7 +4776,7 @@
 
   function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function time(option) {
     return function (art) {
       return _objectSpread$6({}, option, {
@@ -4764,8 +4784,8 @@
           function getTime() {
             var newTime = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
 
-            if (newTime !== $control.innerHTML) {
-              $control.innerHTML = newTime;
+            if (newTime !== $control.innerText) {
+              $control.innerText = newTime;
             }
           }
 
@@ -4780,7 +4800,7 @@
 
   function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function volume(option) {
     return function (art) {
       return _objectSpread$7({}, option, {
@@ -4862,28 +4882,22 @@
 
   function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function setting(option) {
     return function (art) {
       return _objectSpread$8({}, option, {
+        tooltip: art.i18n.get('Show setting'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
               i18n = art.i18n,
               setting = art.setting;
-          var $setting = append($control, icons.setting);
-          tooltip($setting, i18n.get('Show setting'));
+          append($control, icons.setting);
           proxy($control, 'click', function () {
-            setting.toggle();
+            setting.toggle = true;
           });
           art.on('setting:toggle', function (value) {
-            if (value) {
-              setStyle($setting, 'opacity', '0.8');
-              tooltip($setting, i18n.get('Hide setting'));
-            } else {
-              setStyle($setting, 'opacity', '1');
-              tooltip($setting, i18n.get('Show setting'));
-            }
+            tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
           });
         }
       });
@@ -4892,7 +4906,7 @@
 
   function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function thumbnails(option) {
     return function (art) {
       return _objectSpread$9({}, option, {
@@ -4955,18 +4969,17 @@
 
   function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function screenshot(option) {
     return function (art) {
       return _objectSpread$a({}, option, {
+        tooltip: art.i18n.get('Screenshot'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
-              i18n = art.i18n,
               player = art.player;
-          var $screenshot = append($control, icons.screenshot);
-          tooltip($screenshot, i18n.get('Screenshot'));
-          proxy($screenshot, 'click', function () {
+          append($control, icons.screenshot);
+          proxy($control, 'click', function () {
             player.screenshot();
           });
         }
@@ -4976,7 +4989,7 @@
 
   function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function quality(option) {
     return function (art) {
       return _objectSpread$b({}, option, {
@@ -5007,7 +5020,7 @@
 
             if (url && name && playIndex !== index) {
               player.switchQuality(url, name);
-              $qualityName.innerHTML = name;
+              $qualityName.innerText = name;
               playIndex = index;
             }
           });
@@ -5027,6 +5040,7 @@
       classCallCheck(this, Control);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Control).call(this, art));
+      _this.name = 'control';
       var option = art.option;
       art.on('ready', function () {
         _this.add(progress({
@@ -5123,8 +5137,10 @@
     createClass(Control, [{
       key: "add",
       value: function add(getOption, callback) {
+        var _this2 = this;
+
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        errorHandle(option.position, 'Controls option.position can not be empty');
+        errorHandle(['top', 'left', 'right'].includes(option.position), "Control option.position must one of 'top', 'left', 'right'");
         var _this$art$template = this.art.template,
             $progress = _this$art$template.$progress,
             $controlsLeft = _this$art$template.$controlsLeft,
@@ -5144,13 +5160,15 @@
             break;
         }
 
-        var control = get(getPrototypeOf(Control.prototype), "add", this).call(this, option, callback);
+        get(getPrototypeOf(Control.prototype), "add", this).call(this, option, function ($ref) {
+          if (!option.disable && option.position !== 'top' && !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+            addClass($ref, 'art-control-onlyText');
+          }
 
-        if (!option.disable && option.position !== 'top' && !(control.$ref.firstElementChild && control.$ref.firstElementChild.tagName === 'I')) {
-          addClass(control.$ref, 'art-control-onlyText');
-        }
-
-        return control;
+          if (callback) {
+            callback($ref, _this2, _this2.art);
+          }
+        });
       }
     }]);
 
@@ -5159,13 +5177,13 @@
 
   function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$c({}, option, {
-        html: "\n".concat(i18n.get('Play speed'), ":\n<span data-rate=\"0.5\">0.5</span>\n<span data-rate=\"0.75\">0.75</span>\n<span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n<span data-rate=\"1.25\">1.25</span>\n<span data-rate=\"1.5\">1.5</span>\n<span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
           var rate = event.target.dataset.rate;
 
@@ -5191,13 +5209,13 @@
 
   function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
       return _objectSpread$d({}, option, {
-        html: "\n".concat(i18n.get('Aspect ratio'), ":\n<span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n<span data-ratio=\"4:3\">4:3</span>\n<span data-ratio=\"16:9\">16:9</span>\n            "),
+        html: "".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
           var ratio = event.target.dataset.ratio;
 
@@ -5223,7 +5241,7 @@
 
   function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function info(option) {
     return function (art) {
@@ -5239,17 +5257,17 @@
 
   function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function version(option) {
     return _objectSpread$f({}, option, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.1.20</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.3.3</a>'
     });
   }
 
   function ownKeys$g(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function close(option) {
     return function (art) {
@@ -5273,6 +5291,7 @@
       classCallCheck(this, Contextmenu);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Contextmenu).call(this, art));
+      _this.name = 'contextmenu';
       var option = art.option,
           _art$template = art.template,
           $player = _art$template.$player,
@@ -5340,8 +5359,10 @@
             menuTop = cHeight - mHeight;
           }
 
-          setStyle($contextmenu, 'left', "".concat(menuLeft, "px"));
-          setStyle($contextmenu, 'top', "".concat(menuTop, "px"));
+          setStyles($contextmenu, {
+            top: "".concat(menuTop, "px"),
+            left: "".concat(menuLeft, "px")
+          });
         });
         proxy($player, 'click', function (event) {
           if (!event.composedPath().includes($contextmenu)) {
@@ -5369,6 +5390,7 @@
       classCallCheck(this, Info);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Info).call(this, art));
+      _this.name = 'info';
       var _art$template = art.template,
           $infoPanel = _art$template.$infoPanel,
           $infoClose = _art$template.$infoClose,
@@ -5386,7 +5408,7 @@
       function loop() {
         types.forEach(function (item) {
           var value = $video[item.dataset.video];
-          item.innerHTML = typeof value === 'number' ? value.toFixed(2) : value;
+          item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
         });
         timer = setTimeout(function () {
           loop();
@@ -5417,6 +5439,7 @@
       classCallCheck(this, Subtitle);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Subtitle).call(this, art));
+      _this.name = 'subtitle';
       var proxy = art.events.proxy,
           subtitle = art.option.subtitle,
           $subtitle = art.template.$subtitle;
@@ -5445,15 +5468,15 @@
       }
     }, {
       key: "switch",
-      value: function _switch(url, name) {
+      value: function _switch(url, name, ext) {
         var _this2 = this;
 
         var _this$art = this.art,
             i18n = _this$art.i18n,
             notice = _this$art.notice;
-        return this.init(url).then(function (subUrl) {
+        return this.init(url, ext).then(function (subUrl) {
           if (name) {
-            notice.show("".concat(i18n.get('Switch subtitle'), ": ").concat(name));
+            notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(name);
           }
 
           _this2.art.emit('subtitle:switch', subUrl);
@@ -5463,7 +5486,7 @@
       }
     }, {
       key: "init",
-      value: function init(url) {
+      value: function init(url, ext) {
         var _this3 = this;
 
         var _this$art2 = this.art,
@@ -5476,7 +5499,7 @@
         }).then(function (text) {
           _this3.art.emit('subtitle:load', url);
 
-          switch (getExt(url)) {
+          switch (ext || getExt(url)) {
             case 'srt':
               return vttToBlob(srtToVtt(text));
 
@@ -5496,7 +5519,7 @@
           $track.src = subUrl;
           return subUrl;
         }).catch(function (err) {
-          notice.show(err);
+          notice.show = err;
 
           _this3.art.emit('subtitle:err', err);
 
@@ -5551,11 +5574,12 @@
     var _art$template = art.template,
         $player = _art$template.$player,
         $video = _art$template.$video,
-        player = art.player;
+        player = art.player,
+        controls = art.controls;
     var autoHide = debounce(function () {
       addClass($player, 'art-hide-cursor');
       removeClass($player, 'art-hover');
-      art.controls.show = false;
+      controls.show = false;
     }, 3000);
     art.on('hoverleave', function () {
       if (player.playing) {
@@ -5565,9 +5589,9 @@
     events.proxy($player, 'mousemove', function (event) {
       autoHide.clearTimeout();
       removeClass($player, 'art-hide-cursor');
-      art.controls.show = true;
+      controls.show = true;
 
-      if (!art.player.pip && player.playing && event.target === $video) {
+      if (!player.pip && player.playing && event.target === $video) {
         autoHide();
       }
 
@@ -5592,14 +5616,14 @@
         playerHeight = player.height;
 
         if (option.autoSize) {
-          if (!art.player.fullscreen && !art.player.fullscreenWeb && !art.player.pip) {
-            art.player.autoSize = true;
+          if (!player.fullscreen && !player.fullscreenWeb && !player.pip) {
+            player.autoSize = true;
           } else {
-            art.player.autoSize = false;
+            player.autoSize = false;
           }
         }
 
-        art.player.aspectRatioReset = true;
+        player.aspectRatioReset = true;
         art.emit('resize', {
           width: player.width,
           height: player.height
@@ -5626,7 +5650,7 @@
       this.loadImg = this.loadImg.bind(this);
 
       if (art.whitelist.state) {
-        art.once('video:canplay', function () {
+        art.on('ready', function () {
           clickInit(art, _this);
           hoverInit(art, _this);
           mousemoveInitInit(art, _this);
@@ -5643,16 +5667,19 @@
         var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
         if (Array.isArray(name)) {
-          name.forEach(function (item) {
+          return name.map(function (item) {
             return _this2.proxy(target, item, callback, option);
           });
-          return;
         }
 
         target.addEventListener(name, callback, option);
-        this.destroyEvents.push(function () {
-          target.removeEventListener(name, callback, option);
-        });
+
+        var destroy = function destroy() {
+          return target.removeEventListener(name, callback, option);
+        };
+
+        this.destroyEvents.push(destroy);
+        return destroy;
       }
     }, {
       key: "hover",
@@ -5797,6 +5824,7 @@
       classCallCheck(this, Layer);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Layer).call(this, art));
+      _this.name = 'layer';
       _this.$parent = art.template.$layer;
       art.on('ready', function () {
         art.option.layers.forEach(function (item) {
@@ -5820,6 +5848,7 @@
       classCallCheck(this, Loading);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Loading).call(this, art));
+      _this.name = 'loading';
       append(art.template.$loading, art.icons.loading);
       return _this;
     }
@@ -5834,40 +5863,23 @@
       classCallCheck(this, Notice);
 
       this.art = art;
+      this.time = 2000;
       this.timer = null;
     }
 
     createClass(Notice, [{
       key: "show",
-      value: function show(msg) {
-        var _this = this;
-
-        var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-        var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
+      set: function set(msg) {
         var _this$art$template = this.art.template,
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
-        $noticeInner.innerHTML = msg instanceof Error ? msg.message.trim() : msg;
-        clearTimeout(this.timer);
-
-        if (autoHide) {
-          this.timer = setTimeout(function () {
-            _this.hide();
-          }, time);
-        }
-
+        $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
         addClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
-      }
-    }, {
-      key: "hide",
-      value: function hide() {
-        var _this$art$template2 = this.art.template,
-            $player = _this$art$template2.$player,
-            $noticeInner = _this$art$template2.$noticeInner;
-        $noticeInner.innerHTML = '';
-        removeClass($player, 'art-notice-show');
-        this.art.emit('notice:toggle', true);
+        clearTimeout(this.timer);
+        this.timer = setTimeout(function () {
+          $noticeInner.innerText = '';
+          removeClass($player, 'art-notice-show');
+        }, this.time);
       }
     }]);
 
@@ -5885,6 +5897,7 @@
       classCallCheck(this, Mask);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Mask).call(this, art));
+      _this.name = 'mask';
       append(art.template.$state, art.icons.state);
       return _this;
     }
@@ -5916,16 +5929,16 @@
 
   var pip$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
-  var prev = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"m 12,12 h 2 v 12 h -2 z m 3.5,6 8.5,6 V 12 z\"></path>\n</svg>";
+  function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  var next = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"36\" width=\"36\" viewBox=\"0 0 36 36\">\n    <path d=\"M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z\"></path>\n</svg>";
+  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   var Icons = function Icons(art) {
     var _this = this;
 
     classCallCheck(this, Icons);
 
-    var icons = Object.assign({
+    var icons = _objectSpread$h({
       loading: loading,
       state: state,
       play: play,
@@ -5937,10 +5950,9 @@
       setting: setting$1,
       fullscreen: fullscreen$1,
       fullscreenWeb: fullscreenWeb$1,
-      pip: pip$1,
-      prev: prev,
-      next: next
+      pip: pip$1
     }, art.option.icons);
+
     Object.keys(icons).forEach(function (key) {
       var icon = document.createElement('i');
       icon.classList.add('art-icon');
@@ -5950,15 +5962,15 @@
     });
   };
 
-  function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function flip(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$h({}, option, {
-        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n    </div>\n</div>\n            "),
+      return _objectSpread$i({}, option, {
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -5981,15 +5993,15 @@
     };
   }
 
-  function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player;
-      return _objectSpread$i({}, option, {
-        html: "\n<div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n<div class=\"art-setting-radio\">\n    <div class=\"art-radio-item current\">\n        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"4:3\">4:3</button>\n    </div>\n    <div class=\"art-radio-item\">\n        <button type=\"button\" data-value=\"16:9\">16:9</button>\n    </div>\n</div>\n            "),
+      return _objectSpread$j({}, option, {
+        html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
@@ -6012,16 +6024,16 @@
     };
   }
 
-  function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$k(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$k(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$k(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate$1(option) {
     return function (art) {
       var i18n = art.i18n,
           player = art.player,
           proxy = art.events.proxy;
-      return _objectSpread$j({}, option, {
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n</div>\n            "),
+      return _objectSpread$k({}, option, {
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n                </div>\n                <div class=\"art-setting-range\">\n                    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $range = query('.art-setting-range input', $setting);
           var $value = query('.art-subtitle-value', $setting);
@@ -6052,6 +6064,7 @@
       classCallCheck(this, Setting);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Setting).call(this, art));
+      _this.name = 'setting';
       var option = art.option,
           _art$template = art.template,
           $setting = _art$template.$setting,
@@ -6096,42 +6109,35 @@
   var Storage =
   /*#__PURE__*/
   function () {
-    function Storage(art) {
+    function Storage() {
       classCallCheck(this, Storage);
 
-      this.art = art;
       this.name = 'artplayer_settings';
-      var option = art.option;
-      var volume = this.get('volume');
-
-      if (volume) {
-        option.volume = volume;
-      }
     }
 
     createClass(Storage, [{
       key: "get",
       value: function get(key) {
-        var storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+        var storage = JSON.parse(localStorage.getItem(this.name)) || {};
         return key ? storage[key] : {};
       }
     }, {
       key: "set",
       value: function set(key, value) {
         var storage = Object.assign({}, this.get(), defineProperty({}, key, value));
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
       }
     }, {
       key: "del",
       value: function del(key) {
         var storage = this.get();
         delete storage[key];
-        window.localStorage.setItem(this.name, JSON.stringify(storage));
+        localStorage.setItem(this.name, JSON.stringify(storage));
       }
     }, {
       key: "clean",
       value: function clean() {
-        window.localStorage.removeItem(this.name);
+        localStorage.removeItem(this.name);
       }
     }]);
 
@@ -6146,7 +6152,7 @@
       title: 'Subtitle',
       name: 'subtitleOffset',
       index: 20,
-      html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n</div>\n<div class=\"art-setting-range\">\n    <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n</div>\n        "),
+      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
       mounted: function mounted($setting) {
         var $range = query('.art-setting-range input', $setting);
         var $value = query('.art-subtitle-value', $setting);
@@ -6200,10 +6206,10 @@
             cue.startTime = clamp(cuesCache[index].startTime + time, 0, player.duration);
             cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
           });
-          notice.show("".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s"));
+          notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
           art.emit('subtitleOffset', value);
         } else {
-          notice.show("".concat(i18n.get('No subtitles found')));
+          notice.show = "".concat(i18n.get('No subtitles found'));
           art.emit('subtitleOffset', 0);
         }
       }
@@ -6264,7 +6270,7 @@
         title: 'Local Video',
         name: 'localVideo',
         index: 30,
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Video'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Video'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);
@@ -6293,38 +6299,9 @@
         var type = getExt(file.name);
 
         if (['ass', 'vtt', 'srt'].includes(type)) {
-          var reader = new FileReader();
-          proxy(reader, 'load', function (event) {
-            var text = event.target.result;
-
-            switch (type) {
-              case 'srt':
-                {
-                  var url = vttToBlob(srtToVtt(text));
-                  subtitle.switch(url, file.name);
-                  break;
-                }
-
-              case 'ass':
-                {
-                  var _url = vttToBlob(assToVtt(text));
-
-                  subtitle.switch(_url, file.name);
-                  break;
-                }
-
-              case 'vtt':
-                {
-                  var _url2 = vttToBlob(text);
-
-                  subtitle.switch(_url2, file.name);
-                  break;
-                }
-            }
-
-            art.emit('localSubtitle', file);
-          });
-          reader.readAsText(file);
+          var url = URL.createObjectURL(file);
+          subtitle.switch(url, file.name, type);
+          art.emit('localSubtitle', file);
         } else {
           errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');
         }
@@ -6353,7 +6330,7 @@
         title: 'Local Subtitle',
         name: 'localSubtitle',
         index: 40,
-        html: "\n<div class=\"art-setting-header\">\n    ".concat(i18n.get('Local Subtitle'), "\n</div>\n<div class=\"art-setting-upload\">\n    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n    <div class=\"art-upload-value\"></div>\n</div>\n            "),
+        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Subtitle'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
         mounted: function mounted($setting) {
           var $btn = query('.art-upload-btn', $setting);
           var $value = query('.art-upload-value', $setting);
@@ -6460,29 +6437,6 @@
     };
   }
 
-  function autoPip(art) {
-    var events = art.events,
-        player = art.player,
-        template = art.template;
-    var scrollDebounce = debounce(function () {
-      var _template$$player$get = template.$player.getBoundingClientRect(),
-          top = _template$$player$get.top,
-          height = _template$$player$get.height;
-
-      if (top + height <= 0 && !player.pip) {
-        player.pip = true;
-        art.emit('autoPip', true);
-      } else if (player.pip) {
-        player.pip = false;
-        art.emit('autoPip', false);
-      }
-    }, 300);
-    events.proxy(window, 'scroll', scrollDebounce);
-    return {
-      name: 'autoPip'
-    };
-  }
-
   var Plugins =
   /*#__PURE__*/
   function () {
@@ -6513,10 +6467,6 @@
 
       if (option.networkMonitor) {
         this.add(networkMonitor);
-      }
-
-      if (option.autoPip) {
-        this.add(autoPip);
       }
 
       art.option.plugins.forEach(function (plugin) {
@@ -6557,7 +6507,7 @@
     var option = art.option,
         proxy = art.events.proxy,
         $video = art.template.$video;
-    config.video.events.forEach(function (eventName) {
+    config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
       });
@@ -6587,13 +6537,11 @@
     var typeCallback = option.customType[typeName];
 
     if (typeName && typeCallback) {
-      art.emit('beforeCustomType', typeName);
       typeCallback($video, option.url, art);
-      art.emit('afterCustomType', typeName);
+      art.emit('customType', typeName);
     } else {
-      art.emit('beforeAttachUrl', option.url);
       $video.src = option.url;
-      art.emit('afterAttachUrl', $video.src);
+      art.emit('urlChange', $video.src);
     }
   };
 
@@ -6656,7 +6604,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.1.20';
+        return '3.3.3';
       }
     }, {
       key: "env",
@@ -6716,6 +6664,7 @@
           hotkey: true,
           pip: false,
           mutex: true,
+          backdrop: true,
           fullscreen: false,
           fullscreenWeb: false,
           subtitleOffset: false,
@@ -6760,11 +6709,11 @@
     value: []
   }); // eslint-disable-next-line no-console
 
-  console.log('%c ArtPlayer %c 3.1.20 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 3.3.3 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
-  function ownKeys$k(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$l(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$k(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$k(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$l(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$l(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$l(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   var ArtplayerReact =
   /*#__PURE__*/
@@ -6789,7 +6738,7 @@
         var _this$props = this.props,
             option = _this$props.option,
             getInstance = _this$props.getInstance;
-        this.instance = new Artplayer(_objectSpread$k({}, option, {
+        this.instance = new Artplayer(_objectSpread$l({}, option, {
           container: this.artRef.current
         }));
 
@@ -6812,7 +6761,7 @@
             getInstance = _this$props2.getInstance,
             rest = objectWithoutProperties(_this$props2, ["option", "getInstance"]);
 
-        return react.createElement('div', _objectSpread$k({
+        return react.createElement('div', _objectSpread$l({
           ref: this.artRef
         }, rest));
       }
