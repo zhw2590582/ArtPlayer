@@ -16,7 +16,7 @@
 
 ## Features
 
--   <b>Size</b> - `artplayer.js` ≈ `90kb` and `artplayer.css` ≈ `20kb`
+-   <b>Size</b> - `artplayer.js` ≈ `100kb`
 -   <b>Subtitle</b> - Support for `.VTT`, `.ASS` and `.SRT` formats
 -   <b>Customizable</b> - `Right Click Menu`, `Business Layer`, `Video Controller` and `Settings Panel`
 -   <b>Controller</b> - `Quality Switch`, `Subtitle Switch`, `Play Speed`, `Aspect Ratio`, `Video Flip`, `Fullscreen`, `Picture In Picture`, `Screenshot`, `Thumbnail`, `Adaptive Size`, `Highlight` and `Hotkey`...

@@ -24,7 +24,6 @@ $ yarn add artplayer-vue
 
 ```js
 import ArtplayerComponent from 'artplayer-vue';
-import 'artplayer-vue/dist/artplayer-vue.css';
 
 // ...
 <ArtplayerComponent

@@ -4,7 +4,6 @@
   "expose": "ArtplayerReact",
   "description": "React Component for Artplayer",
   "main": "dist/artplayer-react.js",
-  "style": "dist/artplayer-react.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

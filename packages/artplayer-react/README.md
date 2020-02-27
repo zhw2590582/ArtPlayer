@@ -24,7 +24,6 @@ $ yarn add artplayer-react
 
 ```js
 import ArtplayerComponent from 'artplayer-react';
-import 'artplayer-react/dist/artplayer-react.css';
 
 // ...
 <ArtplayerComponent
