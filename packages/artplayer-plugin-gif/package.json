@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-gif",
-  "version": "3.3.3",
+  "version": "3.4.1",
   "expose": "artplayerPluginGif",
   "description": "Gif plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-gif.js",
