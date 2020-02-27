@@ -63,9 +63,7 @@ module.exports = function creatRollupConfig(projectPath) {
                     }),
                 ],
                 sourceMap: isProd ? false : true,
-                extract: isProd
-                    ? path.join(projectPath, `dist/${name}.css`)
-                    : path.join(process.cwd(), `docs/uncompiled/${name}.css`),
+                extract: false,
             }),
             nodeResolve(),
             commonjs(),

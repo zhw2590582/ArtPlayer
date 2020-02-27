@@ -63,13 +63,11 @@ $ yarn add artplayer
 
 ```js
 import Artplayer from 'artplayer';
-import 'artplayer/dist/artplayer.css';
 ```
 
 Or umd builds are also available:
 
 ```html
-<link rel="stylesheet" href="path/to/artplayer.css" />
 <script src="path/to/artplayer.js"></script>
 ```
 
