@@ -693,13 +693,13 @@ var art = new Artplayer({
 
 Custom thumbnails in the progress bar with lazy load
 
-| propertie | type     | Description          |
-| --------- | -------- | -------------------- |
-| `url`     | `String` | Thumbnails image url |
-| `number`  | `Number` | Thumbnails number    |
-| `width`   | `Number` | Thumbnails width     |
-| `height`  | `Number` | Thumbnails height    |
-| `column`  | `Number` | Thumbnails column    |
+| propertie | type     | Description                            |
+| --------- | -------- | -------------------------------------- |
+| `url`     | `String` | Thumbnails image url                   |
+| `number`  | `Number` | Total number of thumbnails             |
+| `width`   | `Number` | The width of each thumbnail            |
+| `height`  | `Number` | The height of each thumbnail           |
+| `column`  | `Number` | Total number of columns for thumbnails |
 
 [Run Code](/Configuration.thumbnails)
 
