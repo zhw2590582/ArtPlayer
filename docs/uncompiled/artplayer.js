@@ -37,16 +37,16 @@
   }
 
   var _typeof_1 = createCommonjsModule(function (module) {
-  function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
   function _typeof(obj) {
-    if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
       module.exports = _typeof = function _typeof(obj) {
-        return _typeof2(obj);
+        return typeof obj;
       };
     } else {
       module.exports = _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
       };
     }
 
@@ -875,7 +875,7 @@
         var _this$art$option = this.art.option,
             theme = _this$art$option.theme,
             backdrop = _this$art$option.backdrop;
-        this.$container.innerHTML = "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.3.3</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.4.1</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$track = this.query('.art-video track');
@@ -2577,6 +2577,10 @@
               player = art.player,
               i18n = art.i18n;
           var isDroging = false;
+          var panelWidth = 60; // 音量条宽度
+
+          var handleWidth = 12; // 音量把手宽度
+
           var $volume = append($control, icons.volume);
           var $volumeClose = append($control, icons.volumeClose);
           var $volumePanel = append($control, '<div class="art-volume-panel"></div>');
@@ -2586,11 +2590,7 @@
 
           function volumeChangeFromEvent(event) {
             var _$volumePanel$getBoun = $volumePanel.getBoundingClientRect(),
-                panelLeft = _$volumePanel$getBoun.left,
-                panelWidth = _$volumePanel$getBoun.width;
-
-            var _$volumeHandle$getBou = $volumeHandle.getBoundingClientRect(),
-                handleWidth = _$volumeHandle$getBou.width;
+                panelLeft = _$volumePanel$getBoun.left;
 
             var percentage = clamp(event.pageX - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) / (panelWidth - handleWidth);
             return percentage;
@@ -2604,9 +2604,6 @@
               setStyle($volumeClose, 'display', 'flex');
               setStyle($volumeHandle, 'left', '0');
             } else {
-              // TODO...
-              var panelWidth = getStyle($volumePanel, 'width') || 60;
-              var handleWidth = getStyle($volumeHandle, 'width');
               var width = (panelWidth - handleWidth) * percentage;
               setStyle($volume, 'display', 'flex');
               setStyle($volumeClose, 'display', 'none');
@@ -2631,7 +2628,7 @@
           proxy($volumeHandle, 'mousedown', function () {
             isDroging = true;
           });
-          proxy(document, 'mousemove', function (event) {
+          proxy($control, 'mousemove', function (event) {
             if (isDroging) {
               player.muted = false;
               player.volume = volumeChangeFromEvent(event);
@@ -3028,7 +3025,7 @@
 
   function version(option) {
     return _objectSpread$f({}, option, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.3.3</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.4.1</a>'
     });
   }
 
@@ -4371,7 +4368,7 @@
     }], [{
       key: "version",
       get: function get() {
-        return '3.3.3';
+        return '3.4.1';
       }
     }, {
       key: "env",
@@ -4476,7 +4473,7 @@
     value: []
   }); // eslint-disable-next-line no-console
 
-  console.log('%c ArtPlayer %c 3.3.3 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 3.4.1 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

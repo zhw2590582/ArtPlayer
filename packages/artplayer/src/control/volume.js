@@ -1,4 +1,4 @@
-import { append, clamp, tooltip, setStyle, getStyle } from '../utils';
+import { append, clamp, tooltip, setStyle } from '../utils';
 
 export default function volume(option) {
     return art => ({
@@ -12,6 +12,8 @@ export default function volume(option) {
             } = art;
 
             let isDroging = false;
+            const panelWidth = 60; // 音量条宽度
+            const handleWidth = 12; // 音量把手宽度
             const $volume = append($control, icons.volume);
             const $volumeClose = append($control, icons.volumeClose);
             const $volumePanel = append($control, '<div class="art-volume-panel"></div>');
@@ -20,8 +22,7 @@ export default function volume(option) {
             setStyle($volumeClose, 'display', 'none');
 
             function volumeChangeFromEvent(event) {
-                const { left: panelLeft, width: panelWidth } = $volumePanel.getBoundingClientRect();
-                const { width: handleWidth } = $volumeHandle.getBoundingClientRect();
+                const { left: panelLeft } = $volumePanel.getBoundingClientRect();
                 const percentage =
                     clamp(event.pageX - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) /
                     (panelWidth - handleWidth);
@@ -34,9 +35,6 @@ export default function volume(option) {
                     setStyle($volumeClose, 'display', 'flex');
                     setStyle($volumeHandle, 'left', '0');
                 } else {
-                    // TODO...
-                    const panelWidth = getStyle($volumePanel, 'width') || 60;
-                    const handleWidth = getStyle($volumeHandle, 'width');
                     const width = (panelWidth - handleWidth) * percentage;
                     setStyle($volume, 'display', 'flex');
                     setStyle($volumeClose, 'display', 'none');
@@ -66,7 +64,7 @@ export default function volume(option) {
                 isDroging = true;
             });
 
-            proxy(document, 'mousemove', event => {
+            proxy($control, 'mousemove', event => {
                 if (isDroging) {
                     player.muted = false;
                     player.volume = volumeChangeFromEvent(event);
