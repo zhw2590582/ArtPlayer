@@ -459,7 +459,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `true`
 
-Whether to use blurred background in the context menu and settings bar
+Whether to use blurred background in the context menu and settings panel
 
 [Run Code](/Configuration.backdrop)
 
