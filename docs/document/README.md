@@ -436,6 +436,42 @@ var art = new Artplayer({
 });
 ```
 
+## light
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Whether to display the light mode in the context menu
+
+[Run Code](/Configuration.light)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    light: true,
+});
+```
+
+## backdrop
+
+-   Type: `Boolean`
+-   Default: `true`
+
+Whether to use blurred background in the context menu and settings bar
+
+[Run Code](/Configuration.backdrop)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    backdrop: true,
+});
+```
+
 ## hotkey
 
 -   Type: `Boolean`
@@ -1042,6 +1078,7 @@ art.seek === art.player.seek;
 | `toggle`              | `Boolean`  | Toggle play and pause                                                                             |
 | `volume`              | `Number`   | `Getter` and `Setter` of the current volume                                                       |
 | `muted`               | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
+| `light`               | `Boolean`  | `Getter` and `Setter` of the light mode                                                           |
 | `url`                 | `String`   | `Getter` of the video url                                                                         |
 
 [Run Code](/Properties.player)

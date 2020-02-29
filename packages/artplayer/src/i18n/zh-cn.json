@@ -1,6 +1,8 @@
 {
     "Video info": "视频统计信息",
     "Close": "关闭",
+    "Light Off": "关灯",
+    "Light On": "开灯",
     "Video load failed": "视频加载失败",
     "Volume": "音量",
     "Play": "播放",

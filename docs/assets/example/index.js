@@ -25,6 +25,7 @@ var art = new Artplayer({
     networkMonitor: false,
     autoPip: true,
     mutex: true,
+    light: true,
     backdrop: true,
     theme: '#ffad00',
     lang: navigator.language.toLowerCase(),

@@ -35,6 +35,7 @@ export default class Template {
     desktop() {
         const { theme, backdrop } = this.art.option;
         this.$container.innerHTML = `
+          <div class="art-undercover"></div>
           <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${theme}">
             <video class="art-video">
               <track default kind="metadata"></track>
@@ -99,6 +100,8 @@ export default class Template {
             <div class="art-contextmenus"></div>
           </div>
         `;
+
+        this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$track = this.query('.art-video track');

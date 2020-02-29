@@ -181,6 +181,7 @@ img {
 
 .part-right .console {
     position: relative;
+    z-index: 8;
     height: 30%;
 }
 

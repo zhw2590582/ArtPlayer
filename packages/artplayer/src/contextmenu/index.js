@@ -4,7 +4,7 @@ import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
 import info from './info';
 import version from './version';
-import close from './close';
+import light from './light';
 
 export default class Contextmenu extends Component {
     constructor(art) {
@@ -54,9 +54,9 @@ export default class Contextmenu extends Component {
             );
 
             this.add(
-                close({
-                    disable: false,
-                    name: 'close',
+                light({
+                    disable: !option.light,
+                    name: 'light',
                     index: 50,
                 }),
             );
