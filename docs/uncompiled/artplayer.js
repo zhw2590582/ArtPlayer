@@ -3341,7 +3341,7 @@
   function clickInit(art, events) {
     var $player = art.template.$player;
     events.proxy(document, ['click', 'contextmenu'], function (event) {
-      if (event.composedPath().indexOf($player) > -1) {
+      if (event.composedPath && event.composedPath().indexOf($player) > -1) {
         art.isFocus = true;
         art.emit('focus');
       } else {
