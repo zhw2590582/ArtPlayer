@@ -101,7 +101,7 @@
       $player.insertBefore($backlight, $video);
 
       (function loop() {
-        window.requestAnimationFrame(function () {
+        setTimeout(function () {
           if (player.playing) {
             var clientWidth = $video.clientWidth,
                 clientHeight = $video.clientHeight;
@@ -128,7 +128,7 @@
           if (!art.isDestroy) {
             loop();
           }
-        });
+        }, 200);
       })();
 
       return {
