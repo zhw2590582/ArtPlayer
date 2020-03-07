@@ -4,7 +4,7 @@ Danmu plugin for ArtPlayer
 
 ## Demo
 
-[Checkout the demo](https://artplayer.org/?libs=./uncompiled/artplayer-tool-github.js%0A./uncompiled/artplayer-plugin-danmu.js&example=github) from Github Pages
+[Checkout the demo](https://artplayer.org/?libs=./uncompiled/artplayer-tool-github.js%0A./uncompiled/artplayer-plugin-danmuku.js&example=github) from Github Pages
 
 ## Install
 
