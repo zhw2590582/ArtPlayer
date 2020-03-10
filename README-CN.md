@@ -69,6 +69,12 @@ import Artplayer from 'artplayer';
 <script src="path/to/artplayer.js"></script>
 ```
 
+或者从 jsDelivr CDN 引入:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+```
+
 将会导出全局变量到`window.Artplayer`.
 
 ## 使用

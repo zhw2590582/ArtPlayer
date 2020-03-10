@@ -71,6 +71,12 @@ Or umd builds are also available:
 <script src="path/to/artplayer.js"></script>
 ```
 
+Or from jsDelivr CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+```
+
 Will expose the global variable to `window.Artplayer`.
 
 ## Usage
