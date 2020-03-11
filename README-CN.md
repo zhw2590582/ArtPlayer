@@ -115,6 +115,7 @@ $ npm start
 
 我们通过这些渠道接受捐赠：
 
+-   [Patreon](https://www.patreon.com/artplayer)
 -   [Paypal](https://www.paypal.me/harveyzack)
 -   [微信支付](./images/wechatpay.jpg)
 -   [支付宝](./images/alipay.jpg)
