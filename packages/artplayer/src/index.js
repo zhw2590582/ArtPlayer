@@ -170,4 +170,5 @@ console.log(
     '',
 );
 
+window.Artplayer = Artplayer;
 export default Artplayer;
