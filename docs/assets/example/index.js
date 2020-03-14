@@ -23,7 +23,6 @@ var art = new Artplayer({
     localVideo: true,
     localSubtitle: true,
     networkMonitor: false,
-    autoPip: true,
     mutex: true,
     light: true,
     backdrop: true,
