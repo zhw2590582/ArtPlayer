@@ -1361,12 +1361,13 @@
   }
 
   function currentTimeMix(art, player) {
+    var $video = art.template.$video;
     def(player, 'currentTime', {
       get: function get() {
-        return art.template.$video.currentTime || 0;
+        return $video.currentTime || 0;
       },
-      set: function set(currentTime) {
-        art.template.$video.currentTime = clamp(currentTime, 0, player.duration);
+      set: function set(time) {
+        $video.currentTime = clamp(time, 0, player.duration || Infinity);
       }
     });
   }
@@ -4271,18 +4272,9 @@
       value: function add(plugin) {
         this.id += 1;
         var result = plugin.call(this, this.art);
-        var pluginName = '';
-
-        if (result && result.name) {
-          pluginName = result.name;
-        } else if (plugin.name) {
-          pluginName = plugin.name;
-        } else {
-          pluginName = "plugin".concat(this.id);
-        }
-
+        var pluginName = result && result.name || plugin.name || "plugin".concat(this.id);
         errorHandle(!has(this, pluginName), "Cannot add a plugin that already has the same name: ".concat(pluginName));
-        Object.defineProperty(this, pluginName, {
+        def(this, pluginName, {
           value: result
         });
         this.art.emit('plugin:add', plugin);
@@ -4464,7 +4456,6 @@
           miniProgressBar: false,
           localVideo: false,
           localSubtitle: false,
-          autoPip: false,
           networkMonitor: false,
           layers: [],
           contextmenu: [],
@@ -4498,11 +4489,12 @@
     return Artplayer;
   }(Emitter);
 
-  Object.defineProperty(Artplayer, 'instances', {
+  def(Artplayer, 'instances', {
     value: []
   }); // eslint-disable-next-line no-console
 
   console.log('%c ArtPlayer %c 3.4.2 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  window.Artplayer = Artplayer;
 
   return Artplayer;
 

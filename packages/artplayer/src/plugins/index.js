@@ -1,4 +1,4 @@
-import { errorHandle, has } from '../utils';
+import { errorHandle, has, def } from '../utils';
 import subtitleOffset from './subtitleOffset';
 import localVideo from './localVideo';
 import localSubtitle from './localSubtitle';
@@ -40,19 +40,9 @@ export default class Plugins {
     add(plugin) {
         this.id += 1;
         const result = plugin.call(this, this.art);
-        let pluginName = '';
-        if (result && result.name) {
-            pluginName = result.name;
-        } else if (plugin.name) {
-            pluginName = plugin.name;
-        } else {
-            pluginName = `plugin${this.id}`;
-        }
-        errorHandle(
-            !has(this, pluginName),
-            `Cannot add a plugin that already has the same name: ${pluginName}`,
-        );
-        Object.defineProperty(this, pluginName, {
+        const pluginName = (result && result.name) || plugin.name || `plugin${this.id}`;
+        errorHandle(!has(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
+        def(this, pluginName, {
             value: result,
         });
         this.art.emit('plugin:add', plugin);

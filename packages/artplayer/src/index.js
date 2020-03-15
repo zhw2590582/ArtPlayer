@@ -158,7 +158,7 @@ class Artplayer extends Emitter {
     }
 }
 
-Object.defineProperty(Artplayer, 'instances', {
+utils.def(Artplayer, 'instances', {
     value: [],
 });
 
