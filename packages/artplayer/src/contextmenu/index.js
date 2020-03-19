@@ -5,6 +5,7 @@ import aspectRatio from './aspectRatio';
 import info from './info';
 import version from './version';
 import light from './light';
+import close from './close';
 
 export default class Contextmenu extends Component {
     constructor(art) {
@@ -58,6 +59,14 @@ export default class Contextmenu extends Component {
                     disable: !option.light,
                     name: 'light',
                     index: 50,
+                }),
+            );
+
+            this.add(
+                close({
+                    disable: false,
+                    name: 'close',
+                    index: 60,
                 }),
             );
 
