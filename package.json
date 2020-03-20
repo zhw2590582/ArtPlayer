@@ -55,7 +55,7 @@
         "mocha": "^7.1.0",
         "mocha-chrome": "^2.2.0",
         "node-sass": "^4.13.1",
-        "rollup": "^2.0.6",
+        "rollup": "^2.1.0",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-eslint": "^7.0.0",
