@@ -251,6 +251,30 @@ var art = new Artplayer({
     });
         
 
+    it(`Configuration.light`, function() {
+            
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    light: true,
+});
+
+    });
+        
+
+    it(`Configuration.backdrop`, function() {
+            
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    backdrop: true,
+});
+
+    });
+        
+
     it(`Configuration.hotkey`, function() {
             
 var url = 'https://zhw2590582.github.io/assets-cdn';
