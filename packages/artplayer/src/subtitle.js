@@ -1,4 +1,4 @@
-import { setStyles, srtToVtt, vttToBlob, getExt, assToVtt } from './utils';
+import { setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape } from './utils';
 import Component from './utils/component';
 
 export default class Subtitle extends Component {
@@ -39,7 +39,7 @@ export default class Subtitle extends Component {
         if (this.activeCue) {
             $subtitle.innerHTML = this.activeCue.text
                 .split(/\r?\n/)
-                .map(item => `<p>${item}</p>`)
+                .map(item => `<p>${escape(item)}</p>`)
                 .join('');
             this.art.emit('subtitle:update', this.activeCue.text);
         }

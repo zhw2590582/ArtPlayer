@@ -673,6 +673,17 @@
     var sec = Math.floor(second - hour * 3600 - min * 60);
     return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
   }
+  function escape(str) {
+    return str.replace(/[&<>'"]/g, function (tag) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag;
+    });
+  }
 
 
 
@@ -706,7 +717,8 @@
     debounce: debounce,
     throttle: throttle,
     clamp: clamp,
-    secondToTime: secondToTime
+    secondToTime: secondToTime,
+    escape: escape
   });
 
   function validElement(value, type, paths) {
@@ -3275,7 +3287,7 @@
 
         if (this.activeCue) {
           $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map(function (item) {
-            return "<p>".concat(item, "</p>");
+            return "<p>".concat(escape(item), "</p>");
           }).join('');
           this.art.emit('subtitle:update', this.activeCue.text);
         }
