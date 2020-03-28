@@ -214,12 +214,12 @@ export default class Danmuku {
     }
 
     show() {
-        this.$danmuku.style = 'block';
+        this.$danmuku.style.display = 'block';
         this.art.emit('artplayerPluginDanmuku:show');
     }
 
     hide() {
-        this.$danmuku.style = 'none';
+        this.$danmuku.style.display = 'none';
         this.art.emit('artplayerPluginDanmuku:hide');
     }
 
