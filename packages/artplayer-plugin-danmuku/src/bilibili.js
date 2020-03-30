@@ -39,21 +39,5 @@ export function bilibiliDanmuParseFromXml(xmlString) {
 export function bilibiliDanmuParseFromUrl(url) {
     return fetch(url)
         .then(res => res.text())
-        .then(xmlString => {
-            return bilibiliDanmuParseFromXml(xmlString);
-        });
-}
-
-export function bilibiliDanmuParseFromAv(av) {
-    const corsUrl = 'https://cors-anywhere.herokuapp.com/';
-    return fetch(`${corsUrl}https://api.bilibili.com/x/web-interface/view?aid=${av}`)
-        .then(res => res.json())
-        .then(res => {
-            if (res.code === 0 && res.data && res.data.cid) {
-                return bilibiliDanmuParseFromUrl(
-                    `${corsUrl}https://api.bilibili.com/x/v1/dm/list.so?oid=${res.data.cid}`,
-                );
-            }
-            throw new Error(`Unable to get data: ${JSON.stringify(res)}`);
-        });
+        .then(xmlString => bilibiliDanmuParseFromXml(xmlString));
 }
