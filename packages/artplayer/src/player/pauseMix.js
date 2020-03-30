@@ -1,6 +1,6 @@
 import { def } from '../utils';
 
-export default function pauseMin(art, player) {
+export default function pauseMix(art, player) {
     const {
         template: { $video },
         i18n,
