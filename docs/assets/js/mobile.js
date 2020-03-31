@@ -3,12 +3,12 @@ var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    // whitelist: ['iPhone OS 11'],
+    // whitelist: ['iPhone'],
     // whitelist: [(ua)=>{ return /iPhone OS 11/gi.test(ua); }],
     // whitelist: [/iPhone OS 11/gi]
 });
 
-Artplayer.config.video.events.forEach(function(item) {
+Artplayer.config.events.forEach(function(item) {
     art && art.on('video:' + item, function(event) {
         console.log('video: ' + event.type);
     });
