@@ -1,14 +1,16 @@
+import { isMobile, userAgent } from './utils/compatibility';
+
 export default class Whitelist {
     constructor(art) {
         const {
             constructor: { kindOf },
             option: { whitelist },
         } = art;
-        this.ua = navigator.userAgent;
-        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.ua);
+        this.ua = userAgent;
+        this.isMobile = isMobile();
         this.state =
             !this.isMobile ||
-            whitelist.some(item => {
+            whitelist.some((item) => {
                 switch (kindOf(item)) {
                     case 'string':
                         return this.ua.indexOf(item) > -1;

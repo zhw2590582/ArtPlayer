@@ -685,6 +685,14 @@
     });
   }
 
+  var userAgent = window.navigator.userAgent;
+  function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+  }
+  function isSafari() {
+    return /^((?!chrome|android).)*safari/i.test(userAgent);
+  }
+
 
 
   var utils = /*#__PURE__*/Object.freeze({
@@ -718,7 +726,10 @@
     throttle: throttle,
     clamp: clamp,
     secondToTime: secondToTime,
-    escape: escape
+    escape: escape,
+    userAgent: userAgent,
+    isMobile: isMobile,
+    isSafari: isSafari
   });
 
   function validElement(value, type, paths) {
@@ -829,8 +840,8 @@
 
     var kindOf = art.constructor.kindOf,
         whitelist = art.option.whitelist;
-    this.ua = navigator.userAgent;
-    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(this.ua);
+    this.ua = userAgent;
+    this.isMobile = isMobile();
     this.state = !this.isMobile || whitelist.some(function (item) {
       switch (kindOf(item)) {
         case 'string':
@@ -4510,7 +4521,7 @@
           },
           moreVideoAttr: {
             controls: false,
-            preload: 'auto'
+            preload: isSafari() ? 'auto' : 'metadata'
           },
           icons: {},
           customType: {},

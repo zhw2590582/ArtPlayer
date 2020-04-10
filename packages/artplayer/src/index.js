@@ -141,7 +141,7 @@ class Artplayer extends Emitter {
             },
             moreVideoAttr: {
                 controls: false,
-                preload: 'auto',
+                preload: utils.isSafari() ? 'auto' : 'metadata',
             },
             icons: {},
             customType: {},
