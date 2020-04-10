@@ -141,7 +141,7 @@ class Artplayer extends Emitter {
             },
             moreVideoAttr: {
                 controls: false,
-                preload: 'metadata',
+                preload: 'auto',
             },
             icons: {},
             customType: {},
