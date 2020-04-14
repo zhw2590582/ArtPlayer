@@ -13,6 +13,8 @@
         text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
 
         p {
+            word-break: break-all;
+            height: fit-content;
             margin: 5px 0;
         }
     }
