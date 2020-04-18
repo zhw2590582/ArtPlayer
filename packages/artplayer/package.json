@@ -24,7 +24,7 @@
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
   "dependencies": {
     "option-validator": "^2.0.5",
-    "screenfull": "^5.0.0"
+    "screenfull": "^5.0.2"
   },
   "gitHead": "0a3a20568e37f99972eefb01d4b1dcf4036a46db"
 }
