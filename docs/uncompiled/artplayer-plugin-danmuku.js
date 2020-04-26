@@ -407,7 +407,7 @@
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   var Danmuku =
   /*#__PURE__*/
@@ -427,6 +427,7 @@
       this.option = {};
       this.config(option);
       this.isStop = false;
+      this.isHide = false;
       this.animationFrameTimer = null;
       this.$danmuku = art.template.$danmuku;
       art.on('video:play', this.start.bind(this));
@@ -532,7 +533,7 @@
             player = _this$art.player,
             $player = _this$art.template.$player;
         this.animationFrameTimer = window.requestAnimationFrame(function () {
-          if (player.playing) {
+          if (player.playing && !_this2.isHide) {
             var danmuLeft = getRect($player, 'width');
             filter(_this2.queue, 'emit', function (danmu) {
               danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
@@ -610,12 +611,14 @@
     }, {
       key: "show",
       value: function show() {
+        this.isHide = false;
         this.$danmuku.style.display = 'block';
         this.art.emit('artplayerPluginDanmuku:show');
       }
     }, {
       key: "hide",
       value: function hide() {
+        this.isHide = true;
         this.$danmuku.style.display = 'none';
         this.art.emit('artplayerPluginDanmuku:hide');
       }

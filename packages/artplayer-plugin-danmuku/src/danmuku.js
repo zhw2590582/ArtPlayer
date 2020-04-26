@@ -16,6 +16,7 @@ export default class Danmuku {
         this.option = {};
         this.config(option);
         this.isStop = false;
+        this.isHide = false;
         this.animationFrameTimer = null;
         this.$danmuku = art.template.$danmuku;
         art.on('video:play', this.start.bind(this));
@@ -134,7 +135,7 @@ export default class Danmuku {
             template: { $player },
         } = this.art;
         this.animationFrameTimer = window.requestAnimationFrame(() => {
-            if (player.playing) {
+            if (player.playing && !this.isHide) {
                 const danmuLeft = getRect($player, 'width');
 
                 filter(this.queue, 'emit', danmu => {
@@ -214,11 +215,13 @@ export default class Danmuku {
     }
 
     show() {
+        this.isHide = false;
         this.$danmuku.style.display = 'block';
         this.art.emit('artplayerPluginDanmuku:show');
     }
 
     hide() {
+        this.isHide = true;
         this.$danmuku.style.display = 'none';
         this.art.emit('artplayerPluginDanmuku:hide');
     }
