@@ -25,6 +25,7 @@ import Plugins from './plugins';
 import Mobile from './mobile';
 
 let id = 0;
+const instances = [];
 class Artplayer extends Emitter {
     constructor(option) {
         super();
@@ -56,7 +57,11 @@ class Artplayer extends Emitter {
 
         id += 1;
         this.id = id;
-        Artplayer.instances.push(this);
+        instances.push(this);
+    }
+
+    static get instances() {
+        return instances;
     }
 
     static get version() {
@@ -157,10 +162,6 @@ class Artplayer extends Emitter {
         this.emit('destroy');
     }
 }
-
-utils.def(Artplayer, 'instances', {
-    value: [],
-});
 
 // eslint-disable-next-line no-console
 console.log(

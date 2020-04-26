@@ -45,7 +45,7 @@ var art = new Artplayer({
                                 ...data,
                                 mode: 0,
                                 time: art.player.currentTime + 0.2,
-                                border: data.color,
+                                border: true,
                             });
                         })
                         .catch(() => {

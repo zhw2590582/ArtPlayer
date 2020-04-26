@@ -42,8 +42,7 @@ var art = new Artplayer({
                 art.plugins.artplayerPluginDanmuku.emit({
                     text: text,
                     color: color,
-                    border: color,
-                    time: art.player.currentTime + 0.2,
+                    border: true,
                 });
             },
         },

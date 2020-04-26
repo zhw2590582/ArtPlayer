@@ -559,8 +559,8 @@
               danmu.$ref.style.opacity = _this2.option.opacity;
               danmu.$ref.style.fontSize = "".concat(_this2.option.fontSize, "px");
               danmu.$ref.innerText = danmu.text;
-              danmu.$ref.style.color = danmu.color;
-              danmu.$ref.style.border = danmu.border ? "1px solid ".concat(danmu.color) : 'none';
+              danmu.$ref.style.color = danmu.color || '#fff';
+              danmu.$ref.style.border = danmu.border ? "1px solid ".concat(danmu.color || '#fff') : 'none';
               danmu.$restTime = _this2.option.synchronousPlayback && player.playbackRate ? _this2.option.speed / Number(player.playbackRate) : _this2.option.speed;
               danmu.$lastStartTime = Date.now();
               var danmuWidth = getRect(danmu.$ref, 'width');
@@ -629,6 +629,16 @@
             notice = _this$art2.notice,
             player = _this$art2.player,
             i18n = _this$art2.i18n;
+        var _this$art$constructor2 = this.art.constructor,
+            clamp = _this$art$constructor2.utils.clamp,
+            validator = _this$art$constructor2.validator;
+        validator(danmu, {
+          text: 'string',
+          mode: 'number|undefined',
+          color: 'string|undefined',
+          time: 'number|undefined',
+          border: 'boolean|undefined'
+        });
 
         if (!danmu.text.trim()) {
           notice.show = i18n.get('Danmu text cannot be empty');
@@ -640,8 +650,10 @@
           return;
         }
 
-        if (typeof danmu.time !== 'number') {
-          danmu.time = player.currentTime;
+        if (danmu.time) {
+          danmu.time = clamp(danmu.time, 0, Infinity);
+        } else {
+          danmu.time = player.currentTime + 0.5;
         }
 
         this.queue.push(_objectSpread({
