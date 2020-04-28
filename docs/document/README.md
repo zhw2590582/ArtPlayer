@@ -1160,6 +1160,8 @@ console.log(art.i18n.get('Language'));
 | --------- | ---------- | ------------ |
 | `add`     | `function` | Add a hotkey |
 
+[Run Code](/Properties.hotkey)
+
 ```js
 var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
