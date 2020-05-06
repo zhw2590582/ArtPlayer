@@ -157,7 +157,7 @@ class Artplayer extends Emitter {
     destroy(removeHtml = true) {
         this.events.destroy();
         this.template.destroy(removeHtml);
-        Artplayer.instances.splice(Artplayer.instances.indexOf(this), 1);
+        instances.splice(instances.indexOf(this), 1);
         this.isDestroy = true;
         this.emit('destroy');
     }
