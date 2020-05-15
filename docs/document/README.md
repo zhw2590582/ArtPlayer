@@ -770,7 +770,7 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     moreVideoAttr: {
         'webkit-playsinline': true,
-        playsinline: true,
+        playsInline: true,
     },
 });
 ```
