@@ -43,6 +43,10 @@
 
 [Checkout the demo](https://artplayer.org/) from Github Pages
 
+## Mobile Demo
+
+![mobile](./images/mobile.png)
+
 ## Document
 
 [Checkout the Document](https://artplayer.org/document) from Github Pages
