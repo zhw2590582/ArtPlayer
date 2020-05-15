@@ -19,7 +19,7 @@ var art = new Artplayer({
     subtitle: {
         url: url + '/subtitle/one-more-time-one-more-chance.srt',
         style: {
-            color: '#03A9F4',
+            color: '#fff',
             fontSize: '14px',
         },
     },
@@ -41,6 +41,26 @@ var art = new Artplayer({
         loading: '<img src="./assets/img/ploading.gif">',
         state: '<img src="./assets/img/state.png">',
     },
+    plugins: [
+        artplayerPluginDanmuku({
+            danmuku: url + '/danmuku/one-more-time-one-more-chance.xml',
+            speed: 5,
+            maxlength: 100,
+            margin: [10, 50],
+            opacity: 1,
+            fontSize: 14,
+            synchronousPlayback: false,
+        }),
+    ],
+    controls: [
+        {
+            position: 'right',
+            html: '弹幕',
+            click: function () {
+                art.plugins.artplayerPluginDanmuku.hide();
+            },
+        },
+    ],
     whitelist: ['*'],
 });
 

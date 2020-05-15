@@ -1,7 +1,7 @@
 import Danmuku from './danmuku';
 
 export default function artplayerPluginDanmuku(option) {
-    return art => {
+    return (art) => {
         const danmuku = new Danmuku(art, option);
         return {
             name: 'artplayerPluginDanmuku',
@@ -9,6 +9,9 @@ export default function artplayerPluginDanmuku(option) {
             config: danmuku.config.bind(danmuku),
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
+            get isHide() {
+                return danmuku.isHide;
+            },
         };
     };
 }
