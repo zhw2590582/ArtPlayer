@@ -52,15 +52,6 @@ var art = new Artplayer({
             synchronousPlayback: false,
         }),
     ],
-    controls: [
-        {
-            position: 'right',
-            html: '弹幕',
-            click: function () {
-                art.plugins.artplayerPluginDanmuku.hide();
-            },
-        },
-    ],
     whitelist: ['*'],
 });
 
