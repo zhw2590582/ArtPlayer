@@ -8,13 +8,11 @@ export default class Subtitle extends Component {
         this.name = 'subtitle';
 
         const {
-            events: { proxy },
             option: { subtitle },
             template: { $subtitle },
         } = art;
 
         setStyles($subtitle, subtitle.style);
-        proxy(this.textTrack, 'cuechange', this.update.bind(this));
 
         if (subtitle.url) {
             this.init(subtitle.url);
@@ -22,7 +20,7 @@ export default class Subtitle extends Component {
     }
 
     get url() {
-        return this.art.template.$track.src;
+        return this.$track.src;
     }
 
     get textTrack() {
@@ -39,7 +37,7 @@ export default class Subtitle extends Component {
         if (this.activeCue) {
             $subtitle.innerHTML = this.activeCue.text
                 .split(/\r?\n/)
-                .map(item => `<p>${escape(item)}</p>`)
+                .map((item) => `<p>${escape(item)}</p>`)
                 .join('');
             this.art.emit('subtitle:update', this.activeCue.text);
         }
@@ -47,7 +45,7 @@ export default class Subtitle extends Component {
 
     switch(url, name, ext) {
         const { i18n, notice } = this.art;
-        return this.init(url, ext).then(subUrl => {
+        return this.init(url, ext).then((subUrl) => {
             if (name) {
                 notice.show = `${i18n.get('Switch subtitle')}: ${name}`;
             }
@@ -59,14 +57,24 @@ export default class Subtitle extends Component {
     init(url, ext) {
         const {
             notice,
-            template: { $subtitle, $track },
+            events: { proxy },
+            template: { $subtitle, $video },
         } = this.art;
 
+        if (!this.$track) {
+            const $track = document.createElement('track');
+            $track.default = true;
+            $track.kind = 'metadata';
+            $video.appendChild($track);
+            this.$track = $track;
+            proxy(this.textTrack, 'cuechange', this.update.bind(this));
+        }
+
         return fetch(url)
-            .then(response => {
+            .then((response) => {
                 return response.text();
             })
-            .then(text => {
+            .then((text) => {
                 this.art.emit('subtitle:load', url);
                 switch (ext || getExt(url)) {
                     case 'srt':
@@ -79,14 +87,14 @@ export default class Subtitle extends Component {
                         return url;
                 }
             })
-            .then(subUrl => {
+            .then((subUrl) => {
                 $subtitle.innerHTML = '';
                 if (this.url === subUrl) return subUrl;
                 URL.revokeObjectURL(this.url);
-                $track.src = subUrl;
+                this.$track.src = subUrl;
                 return subUrl;
             })
-            .catch(err => {
+            .catch((err) => {
                 notice.show = err;
                 this.art.emit('subtitle:err', err);
                 throw err;

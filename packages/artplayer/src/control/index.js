@@ -1,4 +1,4 @@
-import { errorHandle, addClass } from '../utils';
+import { errorHandle, addClass, debounce, removeClass } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -19,7 +19,21 @@ export default class Control extends Component {
 
         this.name = 'control';
 
-        const { option } = art;
+        const {
+            option,
+            player,
+            template: { $player },
+        } = art;
+
+        this.delayHide = debounce(() => {
+            if (player.playing && this.show) {
+                addClass($player, 'art-hide-cursor');
+                removeClass($player, 'art-hover');
+                this.show = false;
+            }
+        }, 3000);
+
+        this.cancelDelayHide = this.delayHide.clearTimeout;
 
         art.on('ready', () => {
             this.add(
@@ -130,7 +144,7 @@ export default class Control extends Component {
                 }),
             );
 
-            option.controls.forEach(item => {
+            option.controls.forEach((item) => {
                 this.add(item);
             });
         });
@@ -158,7 +172,7 @@ export default class Control extends Component {
                 break;
         }
 
-        super.add(option, $ref => {
+        super.add(option, ($ref) => {
             if (
                 !option.disable &&
                 option.position !== 'top' &&

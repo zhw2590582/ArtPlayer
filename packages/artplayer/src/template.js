@@ -37,9 +37,7 @@ export default class Template {
         this.$container.innerHTML = `
           <div class="art-undercover"></div>
           <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${theme}">
-            <video class="art-video">
-              <track default kind="metadata"></track>
-            </video>
+            <video class="art-video"></video>
             <div class="art-subtitle"></div>
             <div class="art-danmuku"></div>
             <div class="art-layers"></div>
@@ -104,7 +102,6 @@ export default class Template {
         this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
-        this.$track = this.query('.art-video track');
         this.$subtitle = this.query('.art-subtitle');
         this.$danmuku = this.query('.art-danmuku');
         this.$bottom = this.query('.art-bottom');

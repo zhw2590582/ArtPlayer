@@ -1,9 +1,9 @@
 import { append, clamp, tooltip, setStyle } from '../utils';
 
 export default function volume(option) {
-    return art => ({
+    return (art) => ({
         ...option,
-        mounted: $control => {
+        mounted: ($control) => {
             const {
                 events: { proxy },
                 icons,
@@ -20,6 +20,10 @@ export default function volume(option) {
             const $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
             tooltip($volume, i18n.get('Mute'));
             setStyle($volumeClose, 'display', 'none');
+
+            if (art.isMobile) {
+                setStyle($volumePanel, 'display', 'none');
+            }
 
             function volumeChangeFromEvent(event) {
                 const { left: panelLeft } = $volumePanel.getBoundingClientRect();
@@ -55,7 +59,7 @@ export default function volume(option) {
                 player.muted = false;
             });
 
-            proxy($volumePanel, 'click', event => {
+            proxy($volumePanel, 'click', (event) => {
                 player.muted = false;
                 player.volume = volumeChangeFromEvent(event);
             });
@@ -64,7 +68,7 @@ export default function volume(option) {
                 isDroging = true;
             });
 
-            proxy($control, 'mousemove', event => {
+            proxy($control, 'mousemove', (event) => {
                 if (isDroging) {
                     player.muted = false;
                     player.volume = volumeChangeFromEvent(event);

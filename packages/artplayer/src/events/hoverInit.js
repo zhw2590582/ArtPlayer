@@ -1,7 +1,11 @@
 import { addClass, removeClass } from '../utils';
 
 export default function hoverInit(art, events) {
-    const { $player } = art.template;
+    const {
+        controls,
+        template: { $player },
+    } = art;
+
     events.hover(
         $player,
         () => {
@@ -13,4 +17,8 @@ export default function hoverInit(art, events) {
             art.emit('hoverleave');
         },
     );
+
+    art.on('hoverleave', () => {
+        controls.delayHide();
+    });
 }

@@ -150,7 +150,7 @@
   var css$1 = ".art-video-player .art-video{position:absolute;z-index:10;left:0;top:0;right:0;bottom:0;width:100%;height:100%;background-color:#000;cursor:pointer}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZGVvLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsNkJBQ0UsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxNQUFPLENBQ1AsS0FBTSxDQUNOLE9BQVEsQ0FDUixRQUFTLENBQ1QsVUFBVyxDQUNYLFdBQVksQ0FDWixxQkFBc0IsQ0FDdEIsY0FBaUIiLCJmaWxlIjoidmlkZW8uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtdmlkZW8ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHotaW5kZXg6IDEwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDA7XG4gIGN1cnNvcjogcG9pbnRlcjsgfVxuIl19 */";
   styleInject(css$1);
 
-  var css$2 = ".art-video-player .art-subtitle{display:none;position:absolute;z-index:20;bottom:40px;width:100%;padding:0 20px;text-align:center;color:#fff;font-size:20px;pointer-events:none;text-shadow:.5px .5px .5px rgba(0,0,0,.5)}.art-video-player .art-subtitle p{word-break:break-all;height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;margin:5px 0}.art-video-player.art-subtitle-show .art-subtitle{display:block}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN1YnRpdGxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0NBQ0UsWUFBYSxDQUNiLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsV0FBWSxDQUNaLFVBQVcsQ0FDWCxjQUFlLENBQ2YsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxjQUFlLENBQ2YsbUJBQW9CLENBQ3BCLHlDQUFtRCxDQUNuRCxrQ0FDRSxvQkFBcUIsQ0FDckIsMEJBQW1CLENBQW5CLHVCQUFtQixDQUFuQixrQkFBbUIsQ0FDbkIsWUFBZSxDQUVuQixrREFDRSxhQUFnQiIsImZpbGUiOiJzdWJ0aXRsZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFydC12aWRlby1wbGF5ZXIgLmFydC1zdWJ0aXRsZSB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgei1pbmRleDogMjA7XG4gIGJvdHRvbTogNDBweDtcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDAgMjBweDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBjb2xvcjogI2ZmZjtcbiAgZm9udC1zaXplOiAyMHB4O1xuICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgdGV4dC1zaGFkb3c6IDAuNXB4IDAuNXB4IDAuNXB4IHJnYmEoMCwgMCwgMCwgMC41KTsgfVxuICAuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXN1YnRpdGxlIHAge1xuICAgIHdvcmQtYnJlYWs6IGJyZWFrLWFsbDtcbiAgICBoZWlnaHQ6IGZpdC1jb250ZW50O1xuICAgIG1hcmdpbjogNXB4IDA7IH1cblxuLmFydC12aWRlby1wbGF5ZXIuYXJ0LXN1YnRpdGxlLXNob3cgLmFydC1zdWJ0aXRsZSB7XG4gIGRpc3BsYXk6IGJsb2NrOyB9XG4iXX0= */";
+  var css$2 = ".art-video-player .art-subtitle{display:none;position:absolute;z-index:20;bottom:10px;width:100%;padding:0 20px;text-align:center;color:#fff;font-size:20px;pointer-events:none;text-shadow:.5px .5px .5px rgba(0,0,0,.5)}.art-video-player .art-subtitle p{word-break:break-all;height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;margin:5px 0}.art-video-player.art-subtitle-show .art-subtitle{display:block}.art-video-player.art-control-show .art-subtitle{bottom:40px}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN1YnRpdGxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0NBQ0UsWUFBYSxDQUNiLGlCQUFrQixDQUNsQixVQUFXLENBQ1gsV0FBWSxDQUNaLFVBQVcsQ0FDWCxjQUFlLENBQ2YsaUJBQWtCLENBQ2xCLFVBQVcsQ0FDWCxjQUFlLENBQ2YsbUJBQW9CLENBQ3BCLHlDQUFtRCxDQUNuRCxrQ0FDRSxvQkFBcUIsQ0FDckIsMEJBQW1CLENBQW5CLHVCQUFtQixDQUFuQixrQkFBbUIsQ0FDbkIsWUFBZSxDQUVuQixrREFDRSxhQUFnQixDQUVsQixpREFDRSxXQUFjIiwiZmlsZSI6InN1YnRpdGxlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LXN1YnRpdGxlIHtcbiAgZGlzcGxheTogbm9uZTtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB6LWluZGV4OiAyMDtcbiAgYm90dG9tOiAxMHB4O1xuICB3aWR0aDogMTAwJTtcbiAgcGFkZGluZzogMCAyMHB4O1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIGNvbG9yOiAjZmZmO1xuICBmb250LXNpemU6IDIwcHg7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICB0ZXh0LXNoYWRvdzogMC41cHggMC41cHggMC41cHggcmdiYSgwLCAwLCAwLCAwLjUpOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtc3VidGl0bGUgcCB7XG4gICAgd29yZC1icmVhazogYnJlYWstYWxsO1xuICAgIGhlaWdodDogZml0LWNvbnRlbnQ7XG4gICAgbWFyZ2luOiA1cHggMDsgfVxuXG4uYXJ0LXZpZGVvLXBsYXllci5hcnQtc3VidGl0bGUtc2hvdyAuYXJ0LXN1YnRpdGxlIHtcbiAgZGlzcGxheTogYmxvY2s7IH1cblxuLmFydC12aWRlby1wbGF5ZXIuYXJ0LWNvbnRyb2wtc2hvdyAuYXJ0LXN1YnRpdGxlIHtcbiAgYm90dG9tOiA0MHB4OyB9XG4iXX0= */";
   styleInject(css$2);
 
   var css$3 = ".art-video-player .art-danmuku{position:absolute;z-index:30;left:0;top:0;right:0;bottom:0;width:100%;height:100%;overflow:hidden;pointer-events:none}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRhbm11a3Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSwrQkFDRSxpQkFBa0IsQ0FDbEIsVUFBVyxDQUNYLE1BQU8sQ0FDUCxLQUFNLENBQ04sT0FBUSxDQUNSLFFBQVMsQ0FDVCxVQUFXLENBQ1gsV0FBWSxDQUNaLGVBQWdCLENBQ2hCLG1CQUFzQiIsImZpbGUiOiJkYW5tdWt1LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LXZpZGVvLXBsYXllciAuYXJ0LWRhbm11a3Uge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHotaW5kZXg6IDMwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHBvaW50ZXItZXZlbnRzOiBub25lOyB9XG4iXX0= */";
@@ -834,24 +834,20 @@
   };
 
   var Whitelist = function Whitelist(art) {
-    var _this = this;
-
     classCallCheck(this, Whitelist);
 
     var kindOf = art.constructor.kindOf,
         whitelist = art.option.whitelist;
-    this.ua = userAgent;
-    this.isMobile = isMobile();
-    this.state = !this.isMobile || whitelist.some(function (item) {
+    this.state = !art.isMobile || whitelist.some(function (item) {
       switch (kindOf(item)) {
         case 'string':
-          return _this.ua.indexOf(item) > -1;
+          return item === '*' || art.ua.indexOf(item) > -1;
 
         case 'function':
-          return item(_this.ua);
+          return item(art.ua);
 
         case 'regexp':
-          return item.test(_this.ua);
+          return item.test(art.ua);
 
         default:
           return false;
@@ -899,11 +895,10 @@
         var _this$art$option = this.art.option,
             theme = _this$art$option.theme,
             backdrop = _this$art$option.backdrop;
-        this.$container.innerHTML = "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\">\n              <track default kind=\"metadata\"></track>\n            </video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.4</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.4</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
         this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
-        this.$track = this.query('.art-video track');
         this.$subtitle = this.query('.art-subtitle');
         this.$danmuku = this.query('.art-danmuku');
         this.$bottom = this.query('.art-bottom');
@@ -1173,6 +1168,7 @@
         $video = _art$template.$video,
         i18n = art.i18n,
         notice = art.notice;
+    var isReady = false;
     var reconnectTime = 0;
     var maxReconnectTime = 5;
     proxy($video, 'click', function () {
@@ -1190,9 +1186,14 @@
       art.loading.show = false;
     });
     art.once('video:canplay', function () {
+      art.loading.show = false;
       art.controls.show = true;
       art.mask.show = true;
-      art.emit('ready');
+
+      if (!isReady) {
+        art.emit('ready');
+        isReady = true;
+      }
     }); // art.on('video:canplaythrough', () => {
     // });
     // art.on('video:durationchange', () => {
@@ -1230,9 +1231,20 @@
     }); // art.on('video:loadeddata', () => {
     // });
 
-    art.on('video:loadedmetadata', function () {
+    art.once('video:loadedmetadata', function () {
       if (option.autoSize) {
         player.autoSize = true;
+      }
+
+      if (art.isMobile) {
+        art.loading.show = false;
+        art.controls.show = true;
+        art.mask.show = true;
+
+        if (!isReady) {
+          art.emit('ready');
+          isReady = true;
+        }
       }
     });
     art.on('video:loadstart', function () {
@@ -2632,6 +2644,10 @@
           tooltip($volume, i18n.get('Mute'));
           setStyle($volumeClose, 'display', 'none');
 
+          if (art.isMobile) {
+            setStyle($volumePanel, 'display', 'none');
+          }
+
           function volumeChangeFromEvent(event) {
             var _$volumePanel$getBoun = $volumePanel.getBoundingClientRect(),
                 panelLeft = _$volumePanel$getBoun.left;
@@ -2849,7 +2865,17 @@
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Control).call(this, art));
       _this.name = 'control';
-      var option = art.option;
+      var option = art.option,
+          player = art.player,
+          $player = art.template.$player;
+      _this.delayHide = debounce(function () {
+        if (player.playing && _this.show) {
+          addClass($player, 'art-hide-cursor');
+          removeClass($player, 'art-hover');
+          _this.show = false;
+        }
+      }, 3000);
+      _this.cancelDelayHide = _this.delayHide.clearTimeout;
       art.on('ready', function () {
         _this.add(progress({
           name: 'progress',
@@ -3277,11 +3303,9 @@
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Subtitle).call(this, art));
       _this.name = 'subtitle';
-      var proxy = art.events.proxy,
-          subtitle = art.option.subtitle,
+      var subtitle = art.option.subtitle,
           $subtitle = art.template.$subtitle;
       setStyles($subtitle, subtitle.style);
-      proxy(_this.textTrack, 'cuechange', _this.update.bind(assertThisInitialized(_this)));
 
       if (subtitle.url) {
         _this.init(subtitle.url);
@@ -3328,9 +3352,20 @@
 
         var _this$art2 = this.art,
             notice = _this$art2.notice,
+            proxy = _this$art2.events.proxy,
             _this$art2$template = _this$art2.template,
             $subtitle = _this$art2$template.$subtitle,
-            $track = _this$art2$template.$track;
+            $video = _this$art2$template.$video;
+
+        if (!this.$track) {
+          var $track = document.createElement('track');
+          $track.default = true;
+          $track.kind = 'metadata';
+          $video.appendChild($track);
+          this.$track = $track;
+          proxy(this.textTrack, 'cuechange', this.update.bind(this));
+        }
+
         return fetch(url).then(function (response) {
           return response.text();
         }).then(function (text) {
@@ -3353,7 +3388,7 @@
           $subtitle.innerHTML = '';
           if (_this3.url === subUrl) return subUrl;
           URL.revokeObjectURL(_this3.url);
-          $track.src = subUrl;
+          _this3.$track.src = subUrl;
           return subUrl;
         }).catch(function (err) {
           notice.show = err;
@@ -3366,7 +3401,7 @@
     }, {
       key: "url",
       get: function get() {
-        return this.art.template.$track.src;
+        return this.$track.src;
       }
     }, {
       key: "textTrack",
@@ -3384,26 +3419,34 @@
   }(Component);
 
   function clickInit(art, events) {
-    var $player = art.template.$player;
+    var controls = art.controls,
+        $player = art.template.$player;
     events.proxy(document, ['click', 'contextmenu'], function (event) {
       if (event.composedPath && event.composedPath().indexOf($player) > -1) {
         art.isFocus = true;
         art.emit('focus');
-      } else if (art.isFocus) {
+      } else {
         art.isFocus = false;
         art.emit('blur');
       }
     });
+    art.on('blur', function () {
+      controls.delayHide();
+    });
   }
 
   function hoverInit(art, events) {
-    var $player = art.template.$player;
+    var controls = art.controls,
+        $player = art.template.$player;
     events.hover($player, function () {
       addClass($player, 'art-hover');
       art.emit('hoverenter');
     }, function () {
       removeClass($player, 'art-hover');
       art.emit('hoverleave');
+    });
+    art.on('hoverleave', function () {
+      controls.delayHide();
     });
   }
 
@@ -3413,26 +3456,17 @@
         $video = _art$template.$video,
         player = art.player,
         controls = art.controls;
-    var autoHide = debounce(function () {
-      addClass($player, 'art-hide-cursor');
-      removeClass($player, 'art-hover');
-      controls.show = false;
-    }, 3000);
-    art.on('hoverleave', function () {
-      if (player.playing) {
-        autoHide();
-      }
-    });
     events.proxy($player, 'mousemove', function (event) {
-      autoHide.clearTimeout();
+      art.emit('mousemove', event);
+    });
+    art.on('mousemove', function (event) {
+      controls.cancelDelayHide();
       removeClass($player, 'art-hide-cursor');
       controls.show = true;
 
-      if (!player.pip && player.playing && event.target === $video) {
-        autoHide();
+      if (!player.pip && event.target === $video) {
+        controls.delayHide();
       }
-
-      art.emit('mousemove');
     });
   }
 
@@ -4390,6 +4424,8 @@
       _this.option = optionValidator(mergeDeep(Artplayer.option, option), scheme);
       _this.isFocus = false;
       _this.isDestroy = false;
+      _this.ua = userAgent;
+      _this.isMobile = isMobile();
       _this.whitelist = new Whitelist(assertThisInitialized(_this));
       _this.template = new Template(assertThisInitialized(_this));
       _this.events = new Events(assertThisInitialized(_this));

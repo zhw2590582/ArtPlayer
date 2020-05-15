@@ -4,11 +4,11 @@ html, body {
 
 .container {
     height: 100%;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
 }
 
 .artplayer-app {
     width: 100%;
-    height: 100%;
+    height: 50%;
 }

@@ -123,7 +123,7 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.flv',
     type: 'flv',
     customType: {
-        flv: function(video, url, art) {
+        flv: function (video, url, art) {
             // video: The video element
             // url: The video url
             // art: The Artplayer instance
@@ -625,7 +625,7 @@ var art = new Artplayer({
             name: 'preview',
             position: 'right',
             html: 'OPEN VIDEO',
-            mounted: $preview => {
+            mounted: ($preview) => {
                 art.plugins.localVideo.attach($preview);
             },
         },
@@ -653,7 +653,7 @@ var art = new Artplayer({
             name: 'preview',
             position: 'right',
             html: 'OPEN SUBTITLE',
-            mounted: $preview => {
+            mounted: ($preview) => {
                 art.plugins.localSubtitle.attach($preview);
             },
         },
@@ -682,7 +682,7 @@ var art = new Artplayer({
 // For example, when the ratio is equal to 0.3, it means that every 10 seconds of sampling time, it is blocked for three seconds.
 
 let notice = false;
-art.on('networkMonitor', ratio => {
+art.on('networkMonitor', (ratio) => {
     if (ratio >= 0.5 && !notice) {
         notice = true;
         console.log('Current network condition is not good');
@@ -920,7 +920,7 @@ var art = new Artplayer({
     contextmenu: [
         {
             html: 'Custom menu',
-            click: function(contextmenu) {
+            click: function (contextmenu) {
                 console.info('You clicked on the custom menu');
                 contextmenu.show = false;
             },
@@ -962,7 +962,7 @@ var art = new Artplayer({
             index: 10,
             html: 'myController',
             tooltip: 'This is my controller',
-            click: function() {
+            click: function () {
                 console.log('myController');
             },
         },
@@ -992,7 +992,7 @@ var art = new Artplayer({
             return {
                 // This exposes plugin properties or methods for others to use. Like:
                 something: 'something',
-                doSomething: function() {
+                doSomething: function () {
                     console.info('Do something here...');
                 },
             };
@@ -1011,6 +1011,8 @@ art.plugins.myPlugin.doSomething();
 | propertie   | type       | Description                                      |
 | ----------- | ---------- | ------------------------------------------------ |
 | `isFocus`   | `Boolean`  | Return the focus state                           |
+| `ua`        | `String`   | The user agent                                   |
+| `isMobile`  | `boolean`  | Whether mobile access                            |
 | `isDestroy` | `Boolean`  | Return the destroy state                         |
 | `option`    | `Object`   | Return the merge option                          |
 | `destroy`   | `Function` | Destroy instance, will not remove dom by default |
@@ -1028,7 +1030,7 @@ console.log('isFocus', art.isFocus);
 console.log('isDestroy', art.isDestroy);
 console.log('option', art.option);
 
-setTimeout(function() {
+setTimeout(function () {
     // remove dom
     art.destroy();
 
@@ -1170,17 +1172,16 @@ var art = new Artplayer({
 });
 
 // Add a hotkey
-art.hotkey.add(27, function(event) {
+art.hotkey.add(27, function (event) {
     console.log('You pressed esc button');
 });
 ```
 
 ## whitelist
 
-| propertie  | type      | Description           |
-| ---------- | --------- | --------------------- |
-| `ua`       | `string`  | The userAgent         |
-| `isMobile` | `boolean` | Whether mobile access |
+| propertie | type      | Description                           |
+| --------- | --------- | ------------------------------------- |
+| `state`   | `Boolean` | Whether to enable the UI on the phone |
 
 ## notice
 
@@ -1226,7 +1227,7 @@ var art = new Artplayer({
 });
 
 var target = document.querySelector('body');
-art.events.proxy(target, 'click', function(e) {
+art.events.proxy(target, 'click', function (e) {
     console.log('body click');
 });
 ```
@@ -1288,7 +1289,7 @@ art.controls.add({
     index: 10,
     html: 'myController',
     tooltip: 'This is my controller',
-    click: function() {
+    click: function () {
         console.log('myController');
     },
 });
@@ -1316,7 +1317,7 @@ var art = new Artplayer({
 
 art.contextmenu.add({
     html: 'Custom menu',
-    click: function(contextmenu) {
+    click: function (contextmenu) {
         console.info('You clicked on the custom menu');
         contextmenu.show = false;
     },
@@ -1349,7 +1350,7 @@ var art = new Artplayer({
             position: 'right',
             index: 10,
             html: 'subtitle 01',
-            click: function() {
+            click: function () {
                 art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.srt', 'srt subtitle name');
             },
         },
@@ -1357,7 +1358,7 @@ var art = new Artplayer({
             position: 'right',
             index: 20,
             html: 'subtitle 02',
-            click: function() {
+            click: function () {
                 art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt', 'vtt subtitle name');
             },
         },
@@ -1382,10 +1383,10 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
 });
 
-art.on('ready', function() {
+art.on('ready', function () {
     // Show the loading
     art.loading.show = true;
-    setTimeout(function() {
+    setTimeout(function () {
         // Hide the loading
         art.loading.show = false;
     }, 5000);
@@ -1409,10 +1410,10 @@ var art = new Artplayer({
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
 });
 
-art.on('ready', function() {
+art.on('ready', function () {
     // Show the mask
     art.mask.show = true;
-    setTimeout(function() {
+    setTimeout(function () {
         // Hide the mask
         art.mask.show = false;
     }, 5000);
@@ -1440,7 +1441,7 @@ var art = new Artplayer({
     setting: true,
 });
 
-art.on('ready', function() {
+art.on('ready', function () {
     // Add a setting
     art.setting.add({
         html: 'Your Setting',
@@ -1449,7 +1450,7 @@ art.on('ready', function() {
 
     // Show the setting
     art.setting.show = true;
-    setTimeout(function() {
+    setTimeout(function () {
         // Hide the setting
         art.setting.show = false;
     }, 5000);
@@ -1482,7 +1483,7 @@ art.plugins.add(function myPlugin(art) {
     return {
         // This exposes plugin properties or methods for others to use. Like:
         something: 'something',
-        doSomething: function() {
+        doSomething: function () {
             console.info('Do something here...');
         },
     };
@@ -1513,7 +1514,7 @@ All properties are read only
 # Event
 
 ```js
-art.on('ready', function(args) {
+art.on('ready', function (args) {
     console.log('The player can play');
 });
 ```
@@ -1559,7 +1560,7 @@ You can use all the native events of video directly: [MDN web docs - Media event
 But be careful to add the `video` prefix in front of the event:
 
 ```js
-art.on('video:canplay', function(event) {
+art.on('video:canplay', function (event) {
     console.log(event);
 });
 ```
@@ -1653,7 +1654,7 @@ var art = new Artplayer({
     autoplay: true,
     url: url + '/video/one-more-time-one-more-chance-480p.flv',
     customType: {
-        flv: function(video, url) {
+        flv: function (video, url) {
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
                 url: url,
@@ -1677,7 +1678,7 @@ var art = new Artplayer({
     autoplay: true,
     url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
     customType: {
-        m3u8: function(video, url) {
+        m3u8: function (video, url) {
             var hls = new Hls();
             hls.loadSource(url);
             hls.attachMedia(video);
@@ -1698,7 +1699,7 @@ var art = new Artplayer({
     autoplay: true,
     url: 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd',
     customType: {
-        mpd: function(video, url) {
+        mpd: function (video, url) {
             var player = dashjs.MediaPlayer().create();
             player.initialize(video, url, true);
         },
@@ -1718,7 +1719,7 @@ var art = new Artplayer({
     autoplay: true,
     url: '//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd',
     customType: {
-        mpd: function(video, url) {
+        mpd: function (video, url) {
             shaka.polyfill.installAll();
             var player = new shaka.Player(video);
             player.load(url);
@@ -1741,10 +1742,10 @@ var art = new Artplayer({
         'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d&dn=sintel.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel-1024-surround.mp4',
     type: 'torrent',
     customType: {
-        torrent: function(video, url, art) {
+        torrent: function (video, url, art) {
             var client = new WebTorrent();
             art.loading.show = true;
-            client.add(url, function(torrent) {
+            client.add(url, function (torrent) {
                 var file = torrent.files[0];
                 file.renderTo(video, {
                     autoplay: true,

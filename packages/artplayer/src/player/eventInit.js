@@ -10,6 +10,7 @@ export default function eventInit(art, player) {
         notice,
     } = art;
 
+    let isReady = false;
     let reconnectTime = 0;
     const maxReconnectTime = 5;
 
@@ -17,8 +18,8 @@ export default function eventInit(art, player) {
         player.toggle = true;
     });
 
-    config.events.forEach(eventName => {
-        proxy($video, eventName, event => {
+    config.events.forEach((eventName) => {
+        proxy($video, eventName, (event) => {
             art.emit(`video:${event.type}`, event);
         });
     });
@@ -33,9 +34,13 @@ export default function eventInit(art, player) {
     });
 
     art.once('video:canplay', () => {
+        art.loading.show = false;
         art.controls.show = true;
         art.mask.show = true;
-        art.emit('ready');
+        if (!isReady) {
+            art.emit('ready');
+            isReady = true;
+        }
     });
 
     // art.on('video:canplaythrough', () => {
@@ -84,9 +89,18 @@ export default function eventInit(art, player) {
 
     // });
 
-    art.on('video:loadedmetadata', () => {
+    art.once('video:loadedmetadata', () => {
         if (option.autoSize) {
             player.autoSize = true;
+        }
+        if (art.isMobile) {
+            art.loading.show = false;
+            art.controls.show = true;
+            art.mask.show = true;
+            if (!isReady) {
+                art.emit('ready');
+                isReady = true;
+            }
         }
     });
 
