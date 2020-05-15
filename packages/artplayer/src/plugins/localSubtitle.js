@@ -38,7 +38,7 @@ export default function localSubtitle(art) {
         });
     }
 
-    art.on('ready', () => {
+    art.once('ready', () => {
         setting.add({
             title: 'Local Subtitle',
             name: 'localSubtitle',

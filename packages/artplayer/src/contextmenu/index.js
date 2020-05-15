@@ -21,7 +21,7 @@ export default class Contextmenu extends Component {
 
         this.$parent = $contextmenu;
 
-        art.on('ready', () => {
+        art.once('ready', () => {
             this.add(
                 playbackRate({
                     disable: !option.playbackRate,

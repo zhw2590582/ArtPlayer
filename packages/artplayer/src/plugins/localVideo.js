@@ -51,7 +51,7 @@ export default function localVideo(art) {
         });
     }
 
-    art.on('ready', () => {
+    art.once('ready', () => {
         setting.add({
             title: 'Local Video',
             name: 'localVideo',

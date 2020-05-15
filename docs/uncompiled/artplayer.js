@@ -1171,7 +1171,6 @@
         $video = _art$template.$video,
         i18n = art.i18n,
         notice = art.notice;
-    var isReady = false;
     var reconnectTime = 0;
     var maxReconnectTime = 5;
     proxy($video, 'click', function () {
@@ -1192,11 +1191,7 @@
       art.loading.show = false;
       art.controls.show = true;
       art.mask.show = true;
-
-      if (!isReady) {
-        art.emit('ready');
-        isReady = true;
-      }
+      art.emit('ready');
     }); // art.on('video:canplaythrough', () => {
     // });
     // art.on('video:durationchange', () => {
@@ -1243,11 +1238,7 @@
         art.loading.show = false;
         art.controls.show = true;
         art.mask.show = true;
-
-        if (!isReady) {
-          art.emit('ready');
-          isReady = true;
-        }
+        art.emit('ready');
       }
     });
     art.on('video:loadstart', function () {
@@ -2889,7 +2880,7 @@
         }
       }, 3000);
       _this.cancelDelayHide = _this.delayHide.clearTimeout;
-      art.on('ready', function () {
+      art.once('ready', function () {
         _this.add(progress({
           name: 'progress',
           disable: option.isLive,
@@ -3168,7 +3159,7 @@
           $contextmenu = _art$template.$contextmenu,
           proxy = art.events.proxy;
       _this.$parent = $contextmenu;
-      art.on('ready', function () {
+      art.once('ready', function () {
         _this.add(playbackRate({
           disable: !option.playbackRate,
           name: 'playbackRate',
@@ -3534,7 +3525,7 @@
       this.loadImg = this.loadImg.bind(this);
 
       if (art.whitelist.state) {
-        art.on('ready', function () {
+        art.once('ready', function () {
           clickInit(art, _this);
           hoverInit(art, _this);
           mousemoveInitInit(art, _this);
@@ -3634,7 +3625,7 @@
           proxy = art.events.proxy;
 
       if (option.hotkey) {
-        art.on('ready', function () {
+        art.once('ready', function () {
           _this.add(27, function () {
             if (player.fullscreenWeb) {
               player.fullscreenWeb = false;
@@ -3710,7 +3701,7 @@
       _this = possibleConstructorReturn(this, getPrototypeOf(Layer).call(this, art));
       _this.name = 'layer';
       _this.$parent = art.template.$layer;
-      art.on('ready', function () {
+      art.once('ready', function () {
         art.option.layers.forEach(function (item) {
           _this.add(item);
         });
@@ -3957,7 +3948,7 @@
       _this.$parent = $settingBody;
 
       if (option.setting) {
-        art.on('ready', function () {
+        art.once('ready', function () {
           proxy($setting, 'click', function (e) {
             if (e.target === $setting) {
               _this.show = false;
@@ -4149,7 +4140,7 @@
       });
     }
 
-    art.on('ready', function () {
+    art.once('ready', function () {
       setting.add({
         title: 'Local Video',
         name: 'localVideo',
@@ -4209,7 +4200,7 @@
       });
     }
 
-    art.on('ready', function () {
+    art.once('ready', function () {
       setting.add({
         title: 'Local Subtitle',
         name: 'localSubtitle',

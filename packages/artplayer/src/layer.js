@@ -5,7 +5,7 @@ export default class Layer extends Component {
         super(art);
         this.name = 'layer';
         this.$parent = art.template.$layer;
-        art.on('ready', () => {
+        art.once('ready', () => {
             art.option.layers.forEach(item => {
                 this.add(item);
             });

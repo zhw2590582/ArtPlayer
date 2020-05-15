@@ -9,7 +9,7 @@ export default class Hotkey {
         } = art;
 
         if (option.hotkey) {
-            art.on('ready', () => {
+            art.once('ready', () => {
                 this.add(27, () => {
                     if (player.fullscreenWeb) {
                         player.fullscreenWeb = false;

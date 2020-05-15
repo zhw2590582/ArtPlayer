@@ -11,7 +11,7 @@ export default class Events {
         this.loadImg = this.loadImg.bind(this);
 
         if (art.whitelist.state) {
-            art.on('ready', () => {
+            art.once('ready', () => {
                 clickInit(art, this);
                 hoverInit(art, this);
                 mousemoveInit(art, this);

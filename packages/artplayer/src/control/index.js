@@ -35,7 +35,7 @@ export default class Control extends Component {
 
         this.cancelDelayHide = this.delayHide.clearTimeout;
 
-        art.on('ready', () => {
+        art.once('ready', () => {
             this.add(
                 progress({
                     name: 'progress',

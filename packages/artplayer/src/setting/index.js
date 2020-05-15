@@ -18,7 +18,7 @@ export default class Setting extends Component {
         this.$parent = $settingBody;
 
         if (option.setting) {
-            art.on('ready', () => {
+            art.once('ready', () => {
                 proxy($setting, 'click', e => {
                     if (e.target === $setting) {
                         this.show = false;

@@ -10,7 +10,6 @@ export default function eventInit(art, player) {
         notice,
     } = art;
 
-    let isReady = false;
     let reconnectTime = 0;
     const maxReconnectTime = 5;
 
@@ -37,10 +36,7 @@ export default function eventInit(art, player) {
         art.loading.show = false;
         art.controls.show = true;
         art.mask.show = true;
-        if (!isReady) {
-            art.emit('ready');
-            isReady = true;
-        }
+        art.emit('ready');
     });
 
     // art.on('video:canplaythrough', () => {
@@ -97,10 +93,7 @@ export default function eventInit(art, player) {
             art.loading.show = false;
             art.controls.show = true;
             art.mask.show = true;
-            if (!isReady) {
-                art.emit('ready');
-                isReady = true;
-            }
+            art.emit('ready');
         }
     });
 
