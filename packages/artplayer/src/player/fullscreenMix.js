@@ -9,10 +9,6 @@ export default function fullscreenMix(art, player) {
             return screenfull.isFullscreen;
         },
         set(value) {
-            if (player.fullscreenWeb) {
-                player.fullscreenWeb = false;
-            }
-
             if (value) {
                 screenfull.request($player).then(() => {
                     addClass($player, 'art-fullscreen');

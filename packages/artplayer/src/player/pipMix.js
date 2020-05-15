@@ -114,8 +114,6 @@ function customPip(art, player) {
                 const $body = document.body;
                 setStyle($player, 'top', `${$body.clientHeight - player.height - 50}px`);
                 setStyle($player, 'left', `${$body.clientWidth - player.width - 50}px`);
-                player.fullscreen = false;
-                player.fullscreenWeb = false;
                 player.aspectRatio = false;
                 player.playbackRate = false;
                 art.emit('pipChange', true);
@@ -124,8 +122,6 @@ function customPip(art, player) {
                 removeClass($player, 'art-pip');
                 setStyle($player, 'top', null);
                 setStyle($player, 'left', null);
-                player.fullscreen = false;
-                player.fullscreenWeb = false;
                 player.aspectRatio = false;
                 player.playbackRate = false;
                 player.autoSize = true;

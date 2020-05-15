@@ -1,6 +1,7 @@
 import urlMix from './urlMix';
 import attrInit from './attrInit';
 import eventInit from './eventInit';
+import exclusiveInit from './exclusiveInit';
 import playMix from './playMix';
 import pauseMix from './pauseMix';
 import toggleMix from './toggleMix';
@@ -30,6 +31,7 @@ export default class Player {
         urlMix(art, this);
         eventInit(art, this);
         attrInit(art, this);
+        exclusiveInit(art, this);
         playMix(art, this);
         pauseMix(art, this);
         toggleMix(art, this);

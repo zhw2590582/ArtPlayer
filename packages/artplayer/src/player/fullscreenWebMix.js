@@ -8,10 +8,6 @@ export default function fullscreenWebMix(art, player) {
             return hasClass($player, 'art-fullscreen-web');
         },
         set(value) {
-            if (player.fullscreen) {
-                player.fullscreen = false;
-            }
-
             if (value) {
                 addClass($player, 'art-fullscreen-web');
                 player.aspectRatioReset = true;

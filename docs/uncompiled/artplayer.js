@@ -1281,6 +1281,24 @@
     });
   }
 
+  function exclusiveInit(art, player) {
+    var props = ['pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
+    props.forEach(function (name) {
+      var event = "".concat(name, "Change");
+      art.on(event, function (state) {
+        if (state) {
+          props.filter(function (item) {
+            return item !== name;
+          }).forEach(function (item) {
+            if (player[item]) {
+              player[item] = false;
+            }
+          });
+        }
+      });
+    });
+  }
+
   function playMix(art, player) {
     var i18n = art.i18n,
         notice = art.notice,
@@ -1797,10 +1815,6 @@
         return screenfull.isFullscreen;
       },
       set: function set(value) {
-        if (player.fullscreenWeb) {
-          player.fullscreenWeb = false;
-        }
-
         if (value) {
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
@@ -1832,10 +1846,6 @@
         return hasClass($player, 'art-fullscreen-web');
       },
       set: function set(value) {
-        if (player.fullscreen) {
-          player.fullscreen = false;
-        }
-
         if (value) {
           addClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
@@ -2000,8 +2010,6 @@
           var $body = document.body;
           setStyle($player, 'top', "".concat($body.clientHeight - player.height - 50, "px"));
           setStyle($player, 'left', "".concat($body.clientWidth - player.width - 50, "px"));
-          player.fullscreen = false;
-          player.fullscreenWeb = false;
           player.aspectRatio = false;
           player.playbackRate = false;
           art.emit('pipChange', true);
@@ -2010,8 +2018,6 @@
           removeClass($player, 'art-pip');
           setStyle($player, 'top', null);
           setStyle($player, 'left', null);
-          player.fullscreen = false;
-          player.fullscreenWeb = false;
           player.aspectRatio = false;
           player.playbackRate = false;
           player.autoSize = true;
@@ -2183,6 +2189,7 @@
     urlMix(art, this);
     eventInit(art, this);
     attrInit(art, this);
+    exclusiveInit(art, this);
     playMix(art, this);
     pauseMix(art, this);
     toggleMix(art, this);
@@ -3526,7 +3533,7 @@
         player = art.player;
     var resizeFn = throttle(function () {
       if (option.autoSize) {
-        if (!player.fullscreen && !player.fullscreenWeb && !player.pip) {
+        if (!player.fullscreen && !player.fullscreenWeb && !player.fullscreenRotate && !player.pip) {
           player.autoSize = true;
         } else {
           player.autoSize = false;
