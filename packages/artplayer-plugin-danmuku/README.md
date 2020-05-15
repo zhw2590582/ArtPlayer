@@ -60,7 +60,7 @@ var art = new Artplayer({
     ],
 });
 
-// Send danmu
+// Send a new danmu
 art.plugins.artplayerPluginDanmuku.emit({
     text: '666', // Danmu text
     time: 5, // Video time
@@ -70,13 +70,16 @@ art.plugins.artplayerPluginDanmuku.emit({
     mode: 0, // Danmu mode: 0-scroll or 1-static
 });
 
-// Hide danmu
+// Hide the danmu
 art.plugins.artplayerPluginDanmuku.hide();
 
-// Show danmu
+// Show the danmu
 art.plugins.artplayerPluginDanmuku.show();
 
-// Config danmu
+// Returns whether to hide the danmu
+art.plugins.artplayerPluginDanmuku.isHide;
+
+// Config danmu dynamically
 art.plugins.artplayerPluginDanmuku.config({
     // option
 });
