@@ -4,12 +4,8 @@ export default function resizeInit(art, events) {
     const { option, player } = art;
 
     const resizeFn = throttle(() => {
-        if (option.autoSize) {
-            if (!player.fullscreen && !player.fullscreenWeb && !player.fullscreenRotate && !player.pip && !player.min) {
-                player.autoSize = true;
-            } else {
-                player.autoSize = false;
-            }
+        if (player.normal) {
+            player.autoSize = option.autoSize;
         }
         player.aspectRatioReset = true;
         art.emit('resize', {

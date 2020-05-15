@@ -1237,9 +1237,7 @@
     // });
 
     art.once('video:loadedmetadata', function () {
-      if (option.autoSize) {
-        player.autoSize = true;
-      }
+      player.autoSize = option.autoSize;
 
       if (art.isMobile) {
         art.loading.show = false;
@@ -1300,6 +1298,13 @@
           });
         }
       });
+    });
+    def(player, 'normal', {
+      get: function get() {
+        return props.every(function (name) {
+          return !player[name];
+        });
+      }
     });
   }
 
@@ -2057,17 +2062,16 @@
             setStyle($player, 'width', '100%');
             setStyle($player, 'height', "".concat(_percentage, "%"));
           }
-
-          art.emit('autoSizeChange', {
-            width: player.width,
-            height: player.height
-          });
         } else {
           removeClass($container, 'art-auto-size');
           setStyle($player, 'width', null);
           setStyle($player, 'height', null);
-          art.emit('autoSizeRemove');
         }
+
+        art.emit('autoSizeChange', {
+          width: player.width,
+          height: player.height
+        });
       }
     });
   }
@@ -3555,12 +3559,8 @@
     var option = art.option,
         player = art.player;
     var resizeFn = throttle(function () {
-      if (option.autoSize) {
-        if (!player.fullscreen && !player.fullscreenWeb && !player.fullscreenRotate && !player.pip && !player.min) {
-          player.autoSize = true;
-        } else {
-          player.autoSize = false;
-        }
+      if (player.normal) {
+        player.autoSize = option.autoSize;
       }
 
       player.aspectRatioReset = true;
