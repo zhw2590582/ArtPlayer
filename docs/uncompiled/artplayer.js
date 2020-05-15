@@ -1959,74 +1959,6 @@
     });
   }
 
-  function customPip(art, player) {
-    var option = art.option,
-        i18n = art.i18n,
-        _art$template = art.template,
-        $player = _art$template.$player,
-        $pipClose = _art$template.$pipClose,
-        $pipTitle = _art$template.$pipTitle,
-        $pipHeader = _art$template.$pipHeader,
-        proxy = art.events.proxy;
-    var cacheStyle = '';
-    var isDroging = false;
-    var lastPageX = 0;
-    var lastPageY = 0;
-    var lastPlayerLeft = 0;
-    var lastPlayerTop = 0;
-    proxy($pipHeader, 'mousedown', function (event) {
-      isDroging = true;
-      lastPageX = event.pageX;
-      lastPageY = event.pageY;
-      lastPlayerLeft = player.left;
-      lastPlayerTop = player.top;
-    });
-    proxy($pipHeader, 'mousemove', function (event) {
-      if (isDroging) {
-        addClass($player, 'art-is-dragging');
-        setStyle($player, 'left', "".concat(lastPlayerLeft + event.pageX - lastPageX, "px"));
-        setStyle($player, 'top', "".concat(lastPlayerTop + event.pageY - lastPageY, "px"));
-      }
-    });
-    proxy(document, 'mouseup', function () {
-      isDroging = false;
-      removeClass($player, 'art-is-dragging');
-    });
-    proxy($pipClose, 'click', function () {
-      player.pip = false;
-      isDroging = false;
-      removeClass($player, 'art-is-dragging');
-    });
-    append($pipTitle, option.title || i18n.get('Mini player'));
-    def(player, 'pip', {
-      get: function get() {
-        return hasClass($player, 'art-pip');
-      },
-      set: function set(value) {
-        if (value) {
-          player.autoSize = false;
-          cacheStyle = $player.style.cssText;
-          addClass($player, 'art-pip');
-          var $body = document.body;
-          setStyle($player, 'top', "".concat($body.clientHeight - player.height - 50, "px"));
-          setStyle($player, 'left', "".concat($body.clientWidth - player.width - 50, "px"));
-          player.aspectRatio = false;
-          player.playbackRate = false;
-          art.emit('pipChange', true);
-        } else if (player.pip) {
-          $player.style.cssText = cacheStyle;
-          removeClass($player, 'art-pip');
-          setStyle($player, 'top', null);
-          setStyle($player, 'left', null);
-          player.aspectRatio = false;
-          player.playbackRate = false;
-          player.autoSize = true;
-          art.emit('pipChange', false);
-        }
-      }
-    });
-  }
-
   function pipMix(art, player) {
     var $video = art.template.$video;
 
@@ -2035,7 +1967,11 @@
     } else if ($video.webkitSupportsPresentationMode) {
       webkitPip(art, player);
     } else {
-      customPip(art, player);
+      def(player, 'pip', {
+        get: function get() {
+          return false;
+        }
+      });
     }
 
     def(player, 'pipToggle', {
