@@ -21,7 +21,7 @@ export default class Hotkey {
                 });
 
                 this.add(37, () => {
-                    player.seek = player.currentTime - 5;
+                    player.backward = 5;
                 });
 
                 this.add(38, () => {
@@ -29,14 +29,14 @@ export default class Hotkey {
                 });
 
                 this.add(39, () => {
-                    player.seek = player.currentTime + 5;
+                    player.forward = 5;
                 });
 
                 this.add(40, () => {
                     player.volume -= 0.1;
                 });
 
-                proxy(window, 'keydown', event => {
+                proxy(window, 'keydown', (event) => {
                     if (art.isFocus) {
                         const tag = document.activeElement.tagName.toUpperCase();
                         const editable = document.activeElement.getAttribute('contenteditable');
@@ -44,7 +44,7 @@ export default class Hotkey {
                             const events = this.keys[event.keyCode];
                             if (events) {
                                 event.preventDefault();
-                                events.forEach(fn => fn());
+                                events.forEach((fn) => fn());
                                 art.emit('hotkey', event);
                             }
                         }

@@ -8,13 +8,13 @@ var art = new Artplayer({
     loop: true,
     mutex: true,
     theme: '#ffad00',
-    fullscreenWeb: true,
     miniProgressBar: true,
-    lang: navigator.language.toLowerCase(),
     moreVideoAttr: {
-        'webkit-playsinline': true,
         playsInline: true,
-        crossOrigin: 'anonymous',
+        'webkit-playsinline': true,
+        'x5-video-player-type': 'h5',
+        'x5-video-player-fullscreen': false,
+        'x5-video-orientation': 'portraint',
     },
     subtitle: {
         url: url + '/subtitle/one-more-time-one-more-chance.srt',
@@ -42,9 +42,6 @@ var art = new Artplayer({
         state: '<img src="./assets/img/state.png">',
     },
     whitelist: ['*'],
-    // whitelist: ['iPhone'],
-    // whitelist: [(ua)=>{ return /iPhone OS 11/gi.test(ua); }],
-    // whitelist: [/iPhone OS 11/gi]
 });
 
 Artplayer.config.events.forEach(function (item) {
@@ -52,3 +49,7 @@ Artplayer.config.events.forEach(function (item) {
         console.log('video: ' + event.type);
     });
 });
+
+if (art.isWechat) {
+    document.querySelector('.tip').textContent = '微信环境需手动触发播放';
+}

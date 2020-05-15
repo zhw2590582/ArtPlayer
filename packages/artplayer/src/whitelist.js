@@ -9,11 +9,11 @@ export default class Whitelist {
             whitelist.some((item) => {
                 switch (kindOf(item)) {
                     case 'string':
-                        return item === '*' || art.ua.indexOf(item) > -1;
+                        return item === '*' || art.userAgent.indexOf(item) > -1;
                     case 'function':
-                        return item(art.ua);
+                        return item(art.userAgent);
                     case 'regexp':
-                        return item.test(art.ua);
+                        return item.test(art.userAgent);
                     default:
                         return false;
                 }

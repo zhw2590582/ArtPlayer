@@ -141,6 +141,8 @@ The current player uses the simplest native components on mobile devices, but yo
 
 By default, non-whitelisted devices only set video native properties and third-party dependencies.
 
+`*` is a special value indicating that all mobile devices have the Artplayer UI enabled
+
 [Open with mobile](https://artplayer.org/mobile.html)
 
 ```js
@@ -149,7 +151,8 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: url + '/video/one-more-time-one-more-chance-480p.mp4',
     whitelist: ['iPhone OS 11'],
-    // whitelist: [(ua)=>{ return /iPhone OS 11/gi.test(ua); }],
+    // whitelist: ['*'],
+    // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
     // whitelist: [/iPhone OS 11/gi]
 });
 ```
@@ -1011,7 +1014,7 @@ art.plugins.myPlugin.doSomething();
 | propertie   | type       | Description                                      |
 | ----------- | ---------- | ------------------------------------------------ |
 | `isFocus`   | `Boolean`  | Return the focus state                           |
-| `ua`        | `String`   | The user agent                                   |
+| `userAgent` | `String`   | The user agent                                   |
 | `isMobile`  | `boolean`  | Whether mobile access                            |
 | `isDestroy` | `Boolean`  | Return the destroy state                         |
 | `option`    | `Object`   | Return the merge option                          |
@@ -1075,6 +1078,8 @@ art.seek === art.player.seek;
 | `play`                | `Boolean`  | Start playback                                                                                    |
 | `screenshot`          | `Function` | Download a screenshot of current time                                                             |
 | `seek`                | `Number`   | Set the current time                                                                              |
+| `forward`             | `Number`   | Video fast forward                                                                                |
+| `backward`            | `Number`   | Video fast backward                                                                               |
 | `switchQuality`       | `Function` | Switch video quality                                                                              |
 | `switchUrl`           | `Function` | Switch video url                                                                                  |
 | `toggle`              | `Boolean`  | Toggle play and pause                                                                             |

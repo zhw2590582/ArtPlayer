@@ -32,8 +32,9 @@ class Artplayer extends Emitter {
         this.option = validator(utils.mergeDeep(Artplayer.option, option), scheme);
         this.isFocus = false;
         this.isDestroy = false;
-        this.ua = utils.userAgent;
-        this.isMobile = utils.isMobile();
+        this.userAgent = utils.userAgent;
+        this.isMobile = utils.isMobile;
+        this.isWechat = utils.isWechat;
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.events = new Events(this);
@@ -148,7 +149,7 @@ class Artplayer extends Emitter {
             },
             moreVideoAttr: {
                 controls: false,
-                preload: utils.isSafari() ? 'auto' : 'metadata',
+                preload: utils.isSafari ? 'auto' : 'metadata',
             },
             icons: {},
             customType: {},

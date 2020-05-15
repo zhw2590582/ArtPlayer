@@ -1,3 +1,5 @@
+import { isMobile } from './compatibility';
+
 export function query(selector, parent = document) {
     return parent.querySelector(selector);
 }
@@ -37,7 +39,7 @@ export function setStyle(element, key, value) {
 }
 
 export function setStyles(element, styles) {
-    Object.keys(styles).forEach(key => {
+    Object.keys(styles).forEach((key) => {
         setStyle(element, key, styles[key]);
     });
     return element;
@@ -49,15 +51,16 @@ export function getStyle(element, key, numberType = true) {
 }
 
 export function sublings(target) {
-    return Array.from(target.parentElement.children).filter(item => item !== target);
+    return Array.from(target.parentElement.children).filter((item) => item !== target);
 }
 
 export function inverseClass(target, className) {
-    sublings(target).forEach(item => removeClass(item, className));
+    sublings(target).forEach((item) => removeClass(item, className));
     addClass(target, className);
 }
 
 export function tooltip(target, msg, pos = 'up') {
+    if (isMobile) return;
     target.setAttribute('aria-label', msg);
     target.setAttribute('data-balloon-pos', pos);
 }

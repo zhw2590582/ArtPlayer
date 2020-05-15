@@ -281,6 +281,11 @@
     return Emitter;
   }();
 
+  var userAgent = window.navigator.userAgent;
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+  var isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+  var isWechat = /MicroMessenger/i.test(userAgent);
+
   function query(selector) {
     var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
     return parent.querySelector(selector);
@@ -338,6 +343,7 @@
   }
   function tooltip(target, msg) {
     var pos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'up';
+    if (isMobile) return;
     target.setAttribute('aria-label', msg);
     target.setAttribute('data-balloon-pos', pos);
   }
@@ -685,14 +691,6 @@
     });
   }
 
-  var userAgent = window.navigator.userAgent;
-  function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-  }
-  function isSafari() {
-    return /^((?!chrome|android).)*safari/i.test(userAgent);
-  }
-
 
 
   var utils = /*#__PURE__*/Object.freeze({
@@ -729,7 +727,8 @@
     escape: escape,
     userAgent: userAgent,
     isMobile: isMobile,
-    isSafari: isSafari
+    isSafari: isSafari,
+    isWechat: isWechat
   });
 
   function validElement(value, type, paths) {
@@ -841,13 +840,13 @@
     this.state = !art.isMobile || whitelist.some(function (item) {
       switch (kindOf(item)) {
         case 'string':
-          return item === '*' || art.ua.indexOf(item) > -1;
+          return item === '*' || art.userAgent.indexOf(item) > -1;
 
         case 'function':
-          return item(art.ua);
+          return item(art.userAgent);
 
         case 'regexp':
-          return item.test(art.ua);
+          return item.test(art.userAgent);
 
         default:
           return false;
@@ -927,6 +926,10 @@
           addClass(this.$settingInner, 'art-backdrop-filter');
           addClass(this.$info, 'art-backdrop-filter');
           addClass(this.$contextmenu, 'art-backdrop-filter');
+        }
+
+        if (this.art.isMobile) {
+          addClass(this.$container, 'art-mobile');
         }
       }
     }, {
@@ -1358,8 +1361,18 @@
     def(player, 'seek', {
       set: function set(time) {
         player.currentTime = time;
-        notice.show = "".concat(secondToTime(time), " / ").concat(secondToTime(player.duration));
-        art.emit('seek', time);
+        notice.show = "".concat(secondToTime(player.currentTime), " / ").concat(secondToTime(player.duration));
+        art.emit('seek', player.currentTime);
+      }
+    });
+    def(player, 'forward', {
+      set: function set(time) {
+        player.seek = player.currentTime + time;
+      }
+    });
+    def(player, 'backward', {
+      set: function set(time) {
+        player.seek = player.currentTime - time;
       }
     });
   }
@@ -3633,7 +3646,7 @@
           });
 
           _this.add(37, function () {
-            player.seek = player.currentTime - 5;
+            player.backward = 5;
           });
 
           _this.add(38, function () {
@@ -3641,7 +3654,7 @@
           });
 
           _this.add(39, function () {
-            player.seek = player.currentTime + 5;
+            player.forward = 5;
           });
 
           _this.add(40, function () {
@@ -4424,8 +4437,9 @@
       _this.option = optionValidator(mergeDeep(Artplayer.option, option), scheme);
       _this.isFocus = false;
       _this.isDestroy = false;
-      _this.ua = userAgent;
-      _this.isMobile = isMobile();
+      _this.userAgent = userAgent;
+      _this.isMobile = isMobile;
+      _this.isWechat = isWechat;
       _this.whitelist = new Whitelist(assertThisInitialized(_this));
       _this.template = new Template(assertThisInitialized(_this));
       _this.events = new Events(assertThisInitialized(_this));
@@ -4563,7 +4577,7 @@
           },
           moreVideoAttr: {
             controls: false,
-            preload: isSafari() ? 'auto' : 'metadata'
+            preload: isSafari ? 'auto' : 'metadata'
           },
           icons: {},
           customType: {},

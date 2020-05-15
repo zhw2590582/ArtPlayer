@@ -12,7 +12,7 @@ export default class Template {
         }
 
         errorHandle(
-            art.constructor.instances.every(art => art.template.$container !== this.$container),
+            art.constructor.instances.every((art) => art.template.$container !== this.$container),
             'Cannot mount multiple instances on the same dom element',
         );
 
@@ -130,6 +130,10 @@ export default class Template {
             addClass(this.$settingInner, 'art-backdrop-filter');
             addClass(this.$info, 'art-backdrop-filter');
             addClass(this.$contextmenu, 'art-backdrop-filter');
+        }
+
+        if (this.art.isMobile) {
+            addClass(this.$container, 'art-mobile');
         }
     }
 
