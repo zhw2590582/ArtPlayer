@@ -14,6 +14,7 @@ import aspectRatioMix from './aspectRatioMix';
 import screenshotMix from './screenshotMix';
 import fullscreenMix from './fullscreenMix';
 import fullscreenWebMix from './fullscreenWebMix';
+import fullscreenRotateMix from './fullscreenRotateMix';
 import pipMix from './pipMix';
 import loadedMix from './loadedMix';
 import playedMix from './playedMix';
@@ -42,6 +43,7 @@ export default class Player {
         screenshotMix(art, this);
         fullscreenMix(art, this);
         fullscreenWebMix(art, this);
+        fullscreenRotateMix(art, this);
         pipMix(art, this);
         loadedMix(art, this);
         playedMix(art, this);

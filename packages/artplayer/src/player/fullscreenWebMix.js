@@ -5,7 +5,7 @@ export default function fullscreenWebMix(art, player) {
 
     def(player, 'fullscreenWeb', {
         get() {
-            return hasClass($player, 'art-web-fullscreen');
+            return hasClass($player, 'art-fullscreen-web');
         },
         set(value) {
             if (player.fullscreen) {
@@ -13,11 +13,11 @@ export default function fullscreenWebMix(art, player) {
             }
 
             if (value) {
-                addClass($player, 'art-web-fullscreen');
+                addClass($player, 'art-fullscreen-web');
                 player.aspectRatioReset = true;
                 art.emit('fullscreenWebChange', true);
             } else {
-                removeClass($player, 'art-web-fullscreen');
+                removeClass($player, 'art-fullscreen-web');
                 player.aspectRatioReset = true;
                 art.emit('fullscreenWebChange', false);
             }

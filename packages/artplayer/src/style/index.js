@@ -13,6 +13,7 @@ import './info.scss';
 import './hideCursor.scss';
 import './aspectRatio.scss';
 import './fullscreenWeb.scss';
+import './fullscreenRotate.scss';
 import './pip.scss';
 import './autoSize.scss';
 import './flip.scss';

@@ -8,6 +8,7 @@ var art = new Artplayer({
     loop: true,
     mutex: true,
     theme: '#ffad00',
+    fullscreenWeb: true,
     miniProgressBar: true,
     moreVideoAttr: {
         playsInline: true,

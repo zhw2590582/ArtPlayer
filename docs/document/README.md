@@ -1054,39 +1054,41 @@ art.volume === art.player.volume;
 art.seek === art.player.seek;
 ```
 
-| propertie             | type       | Description                                                                                       |
-| --------------------- | ---------- | ------------------------------------------------------------------------------------------------- |
-| `aspectRatio`         | `String`   | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9` and `false`       |
-| `aspectRatioReset`    | `Boolean`  | Recalculate the aspect ratio                                                                      |
-| `url`                 | `String`   | `Getter` and `Setter` of the video url                                                            |
-| `autoSize`            | `Boolean`  | Set auto size                                                                                     |
-| `currentTime`         | `Number`   | `Getter` and `Setter` of the current time                                                         |
-| `duration`            | `Number`   | `Getter` of the duration                                                                          |
-| `flip`                | `String`   | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical` and `false`     |
-| `fullscreen`          | `Boolean`  | Enable or disable fullscreen                                                                      |
-| `fullscreenToggle`    | `Boolean`  | Toggle fullscreen                                                                                 |
-| `fullscreenWeb`       | `Boolean`  | Enable or disable web fullscreen                                                                  |
-| `fullscreenWebToggle` | `Boolean`  | Toggle web fullscreen                                                                             |
-| `loaded`              | `Number`   | Return the proportion of the load                                                                 |
-| `pause`               | `Boolean`  | Pause playback                                                                                    |
-| `pip`                 | `Boolean`  | Enable or disable pip                                                                             |
-| `pipToggle`           | `Boolean`  | Toggle pip                                                                                        |
-| `playbackRate`        | `String`   | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
-| `playbackRateReset`   | `Boolean`  | Recalculate the playback rate                                                                     |
-| `played`              | `Number`   | Return the proportion of the played                                                               |
-| `playing`             | `Boolean`  | Return to playing state                                                                           |
-| `play`                | `Boolean`  | Start playback                                                                                    |
-| `screenshot`          | `Function` | Download a screenshot of current time                                                             |
-| `seek`                | `Number`   | Set the current time                                                                              |
-| `forward`             | `Number`   | Video fast forward                                                                                |
-| `backward`            | `Number`   | Video fast backward                                                                               |
-| `switchQuality`       | `Function` | Switch video quality                                                                              |
-| `switchUrl`           | `Function` | Switch video url                                                                                  |
-| `toggle`              | `Boolean`  | Toggle play and pause                                                                             |
-| `volume`              | `Number`   | `Getter` and `Setter` of the current volume                                                       |
-| `muted`               | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
-| `light`               | `Boolean`  | `Getter` and `Setter` of the light mode                                                           |
-| `url`                 | `String`   | `Getter` of the video url                                                                         |
+| propertie                | type       | Description                                                                                       |
+| ------------------------ | ---------- | ------------------------------------------------------------------------------------------------- |
+| `aspectRatio`            | `String`   | Set aspect ratio, Currently only accepts three values：`default`, `4:3`, `16:9` and `false`       |
+| `aspectRatioReset`       | `Boolean`  | Recalculate the aspect ratio                                                                      |
+| `url`                    | `String`   | `Getter` and `Setter` of the video url                                                            |
+| `autoSize`               | `Boolean`  | Set auto size                                                                                     |
+| `currentTime`            | `Number`   | `Getter` and `Setter` of the current time                                                         |
+| `duration`               | `Number`   | `Getter` of the duration                                                                          |
+| `flip`                   | `String`   | Set flip, Currently only accepts three values：`normal`, `horizontal`, `vertical` and `false`     |
+| `fullscreen`             | `Boolean`  | Enable or disable fullscreen                                                                      |
+| `fullscreenToggle`       | `Boolean`  | Toggle fullscreen                                                                                 |
+| `fullscreenWeb`          | `Boolean`  | Enable or disable web fullscreen                                                                  |
+| `fullscreenWebToggle`    | `Boolean`  | Toggle web fullscreen                                                                             |
+| `fullscreenRotate`       | `Boolean`  | Enable or disable web fullscreen on the mobile                                                    |
+| `fullscreenRotateToggle` | `Boolean`  | Toggle web fullscreen on the mobile                                                               |
+| `loaded`                 | `Number`   | Return the proportion of the load                                                                 |
+| `pause`                  | `Boolean`  | Pause playback                                                                                    |
+| `pip`                    | `Boolean`  | Enable or disable pip                                                                             |
+| `pipToggle`              | `Boolean`  | Toggle pip                                                                                        |
+| `playbackRate`           | `String`   | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
+| `playbackRateReset`      | `Boolean`  | Recalculate the playback rate                                                                     |
+| `played`                 | `Number`   | Return the proportion of the played                                                               |
+| `playing`                | `Boolean`  | Return to playing state                                                                           |
+| `play`                   | `Boolean`  | Start playback                                                                                    |
+| `screenshot`             | `Function` | Download a screenshot of current time                                                             |
+| `seek`                   | `Number`   | Set the current time                                                                              |
+| `forward`                | `Number`   | Video fast forward                                                                                |
+| `backward`               | `Number`   | Video fast backward                                                                               |
+| `switchQuality`          | `Function` | Switch video quality                                                                              |
+| `switchUrl`              | `Function` | Switch video url                                                                                  |
+| `toggle`                 | `Boolean`  | Toggle play and pause                                                                             |
+| `volume`                 | `Number`   | `Getter` and `Setter` of the current volume                                                       |
+| `muted`                  | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
+| `light`                  | `Boolean`  | `Getter` and `Setter` of the light mode                                                           |
+| `url`                    | `String`   | `Getter` of the video url                                                                         |
 
 [Run Code](/Properties.player)
 
