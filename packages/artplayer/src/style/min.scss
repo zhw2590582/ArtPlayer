@@ -1,5 +1,5 @@
 .art-video-player {
-    .art-pip-header {
+    .art-min-header {
         display: none;
         position: absolute;
         z-index: 110;
@@ -15,7 +15,7 @@
         opacity: 0;
         visibility: hidden;
         transition: all 0.2s ease-in-out;
-        .art-pip-title {
+        .art-min-title {
             flex: 1;
             padding: 0 10px;
             overflow: hidden;
@@ -23,7 +23,7 @@
             white-space: nowrap;
             cursor: move;
         }
-        .art-pip-close {
+        .art-min-close {
             width: 35px;
             text-align: center;
             font-size: 22px;
@@ -35,20 +35,20 @@
         opacity: 0.7;
     }
 
-    &.art-pip {
+    &.art-min {
         position: fixed;
         z-index: 9999;
         width: 400px;
         height: 225px;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 
-        .art-pip-header {
+        .art-min-header {
             display: flex;
             user-select: none;
         }
 
         &.art-hover {
-            .art-pip-header {
+            .art-min-header {
                 opacity: 1;
                 visibility: visible;
             }

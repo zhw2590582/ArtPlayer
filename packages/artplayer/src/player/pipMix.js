@@ -59,7 +59,11 @@ function webkitPip(art, player) {
 }
 
 export default function pipMix(art, player) {
-    const { $video } = art.template;
+    const {
+        i18n,
+        notice,
+        template: { $video },
+    } = art;
     if (document.pictureInPictureEnabled) {
         nativePip(art, player);
     } else if ($video.webkitSupportsPresentationMode) {
@@ -68,6 +72,9 @@ export default function pipMix(art, player) {
         def(player, 'pip', {
             get() {
                 return false;
+            },
+            set() {
+                notice.show = i18n.get('PIP not supported');
             },
         });
     }

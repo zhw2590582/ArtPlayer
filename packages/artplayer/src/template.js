@@ -91,9 +91,9 @@ export default class Template {
               </div>
               <div class="art-info-close">[x]</div>
             </div>
-            <div class="art-pip-header">
-              <div class="art-pip-title"></div>
-              <div class="art-pip-close">×</div>
+            <div class="art-min-header">
+              <div class="art-min-title"></div>
+              <div class="art-min-close">×</div>
             </div>
             <div class="art-contextmenus"></div>
           </div>
@@ -121,9 +121,9 @@ export default class Template {
         this.$info = this.query('.art-info');
         this.$infoPanel = this.query('.art-info-panel');
         this.$infoClose = this.query('.art-info-close');
-        this.$pipHeader = this.query('.art-pip-header');
-        this.$pipTitle = this.query('.art-pip-title');
-        this.$pipClose = this.query('.art-pip-close');
+        this.$minHeader = this.query('.art-min-header');
+        this.$minTitle = this.query('.art-min-title');
+        this.$minClose = this.query('.art-min-close');
         this.$contextmenu = this.query('.art-contextmenus');
 
         if (backdrop) {

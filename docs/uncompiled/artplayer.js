@@ -192,7 +192,7 @@
   var css$f = ".art-fullscreen-rotate{position:fixed;z-index:9999;width:100%;height:100%;left:0;top:0;right:0;bottom:0;background:#000}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZ1bGxzY3JlZW5Sb3RhdGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSx1QkFDRSxjQUFlLENBQ2YsWUFBYSxDQUNiLFVBQVcsQ0FDWCxXQUFZLENBQ1osTUFBTyxDQUNQLEtBQU0sQ0FDTixPQUFRLENBQ1IsUUFBUyxDQUNULGVBQWtCIiwiZmlsZSI6ImZ1bGxzY3JlZW5Sb3RhdGUuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtZnVsbHNjcmVlbi1yb3RhdGUge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHotaW5kZXg6IDk5OTk7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGxlZnQ6IDA7XG4gIHRvcDogMDtcbiAgcmlnaHQ6IDA7XG4gIGJvdHRvbTogMDtcbiAgYmFja2dyb3VuZDogIzAwMDsgfVxuIl19 */";
   styleInject(css$f);
 
-  var css$g = ".art-video-player .art-pip-header{display:none;position:absolute;z-index:110;left:0;top:0;right:0;height:35px;line-height:35px;color:#fff;background:rgba(0,0,0,.5);-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;opacity:0;visibility:hidden;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.art-video-player .art-pip-header .art-pip-title{-webkit-box-flex:1;-ms-flex:1;flex:1;padding:0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:move}.art-video-player .art-pip-header .art-pip-close{width:35px;text-align:center;font-size:22px;cursor:pointer}.art-video-player.art-is-dragging{opacity:.7}.art-video-player.art-pip{position:fixed;z-index:9999;width:400px;height:225px;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 3px 6px 0 rgba(0,0,0,.2);box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 3px 6px 0 rgba(0,0,0,.2)}.art-video-player.art-pip .art-pip-header{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.art-video-player.art-pip.art-hover .art-pip-header{opacity:1;visibility:visible}.art-video-player.art-pip .art-mask .art-state{position:static}.art-video-player.art-pip .art-bottom,.art-video-player.art-pip .art-contextmenu,.art-video-player.art-pip .art-danmu,.art-video-player.art-pip .art-info,.art-video-player.art-pip .art-layers,.art-video-player.art-pip .art-notice,.art-video-player.art-pip .art-setting,.art-video-player.art-pip .art-subtitle{display:none!important}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBpcC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGtDQUNFLFlBQWEsQ0FDYixpQkFBa0IsQ0FDbEIsV0FBWSxDQUNaLE1BQU8sQ0FDUCxLQUFNLENBQ04sT0FBUSxDQUNSLFdBQVksQ0FDWixnQkFBaUIsQ0FDakIsVUFBVyxDQUNYLHlCQUE4QixDQUM5Qix3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQix3QkFBOEIsQ0FBOUIscUJBQThCLENBQTlCLDZCQUE4QixDQUM5QixTQUFVLENBQ1YsaUJBQWtCLENBQ2xCLHNDQUFnQyxDQUFoQyw4QkFBa0MsQ0FDbEMsaURBQ0Usa0JBQU8sQ0FBUCxVQUFPLENBQVAsTUFBTyxDQUNQLGNBQWUsQ0FDZixlQUFnQixDQUNoQixzQkFBdUIsQ0FDdkIsa0JBQW1CLENBQ25CLFdBQWMsQ0FDaEIsaURBQ0UsVUFBVyxDQUNYLGlCQUFrQixDQUNsQixjQUFlLENBQ2YsY0FBaUIsQ0FFckIsa0NBQ0UsVUFBYyxDQUVoQiwwQkFDRSxjQUFlLENBQ2YsWUFBYSxDQUNiLFdBQVksQ0FDWixZQUFhLENBQ2IseUVBQTJFLENBQTNFLGlFQUE2RSxDQUM3RSwwQ0FDRSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBYSxDQUNiLHdCQUFpQixDQUFqQixxQkFBaUIsQ0FBakIsb0JBQWlCLENBQWpCLGdCQUFtQixDQUNyQixvREFDRSxTQUFVLENBQ1Ysa0JBQXFCLENBQ3ZCLCtDQUNFLGVBQWtCLENBQ3BCLHFUQVFFLHNCQUEwQiIsImZpbGUiOiJwaXAuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtcGlwLWhlYWRlciB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgei1pbmRleDogMTEwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBoZWlnaHQ6IDM1cHg7XG4gIGxpbmUtaGVpZ2h0OiAzNXB4O1xuICBjb2xvcjogI2ZmZjtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjUpO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIG9wYWNpdHk6IDA7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZS1pbi1vdXQ7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1waXAtaGVhZGVyIC5hcnQtcGlwLXRpdGxlIHtcbiAgICBmbGV4OiAxO1xuICAgIHBhZGRpbmc6IDAgMTBweDtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgY3Vyc29yOiBtb3ZlOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtcGlwLWhlYWRlciAuYXJ0LXBpcC1jbG9zZSB7XG4gICAgd2lkdGg6IDM1cHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7IH1cblxuLmFydC12aWRlby1wbGF5ZXIuYXJ0LWlzLWRyYWdnaW5nIHtcbiAgb3BhY2l0eTogMC43OyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHotaW5kZXg6IDk5OTk7XG4gIHdpZHRoOiA0MDBweDtcbiAgaGVpZ2h0OiAyMjVweDtcbiAgYm94LXNoYWRvdzogMCAycHggNXB4IDAgcmdiYSgwLCAwLCAwLCAwLjE2KSwgMCAzcHggNnB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAgLmFydC1waXAtaGVhZGVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIHVzZXItc2VsZWN0OiBub25lOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAuYXJ0LWhvdmVyIC5hcnQtcGlwLWhlYWRlciB7XG4gICAgb3BhY2l0eTogMTtcbiAgICB2aXNpYmlsaXR5OiB2aXNpYmxlOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAgLmFydC1tYXNrIC5hcnQtc3RhdGUge1xuICAgIHBvc2l0aW9uOiBzdGF0aWM7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIuYXJ0LXBpcCAuYXJ0LWNvbnRleHRtZW51LFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtYm90dG9tLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtZGFubXUsXG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1waXAgLmFydC1pbmZvLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtbGF5ZXJzLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtbm90aWNlLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtcGlwIC5hcnQtc2V0dGluZyxcbiAgLmFydC12aWRlby1wbGF5ZXIuYXJ0LXBpcCAuYXJ0LXN1YnRpdGxlIHtcbiAgICBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7IH1cbiJdfQ== */";
+  var css$g = ".art-video-player .art-min-header{display:none;position:absolute;z-index:110;left:0;top:0;right:0;height:35px;line-height:35px;color:#fff;background:rgba(0,0,0,.5);-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;opacity:0;visibility:hidden;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out}.art-video-player .art-min-header .art-min-title{-webkit-box-flex:1;-ms-flex:1;flex:1;padding:0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:move}.art-video-player .art-min-header .art-min-close{width:35px;text-align:center;font-size:22px;cursor:pointer}.art-video-player.art-is-dragging{opacity:.7}.art-video-player.art-min{position:fixed;z-index:9999;width:400px;height:225px;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 3px 6px 0 rgba(0,0,0,.2);box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 3px 6px 0 rgba(0,0,0,.2)}.art-video-player.art-min .art-min-header{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.art-video-player.art-min.art-hover .art-min-header{opacity:1;visibility:visible}.art-video-player.art-min .art-mask .art-state{position:static}.art-video-player.art-min .art-bottom,.art-video-player.art-min .art-contextmenu,.art-video-player.art-min .art-danmu,.art-video-player.art-min .art-info,.art-video-player.art-min .art-layers,.art-video-player.art-min .art-notice,.art-video-player.art-min .art-setting,.art-video-player.art-min .art-subtitle{display:none!important}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1pbi5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGtDQUNFLFlBQWEsQ0FDYixpQkFBa0IsQ0FDbEIsV0FBWSxDQUNaLE1BQU8sQ0FDUCxLQUFNLENBQ04sT0FBUSxDQUNSLFdBQVksQ0FDWixnQkFBaUIsQ0FDakIsVUFBVyxDQUNYLHlCQUE4QixDQUM5Qix3QkFBbUIsQ0FBbkIscUJBQW1CLENBQW5CLGtCQUFtQixDQUNuQix3QkFBOEIsQ0FBOUIscUJBQThCLENBQTlCLDZCQUE4QixDQUM5QixTQUFVLENBQ1YsaUJBQWtCLENBQ2xCLHNDQUFnQyxDQUFoQyw4QkFBa0MsQ0FDbEMsaURBQ0Usa0JBQU8sQ0FBUCxVQUFPLENBQVAsTUFBTyxDQUNQLGNBQWUsQ0FDZixlQUFnQixDQUNoQixzQkFBdUIsQ0FDdkIsa0JBQW1CLENBQ25CLFdBQWMsQ0FDaEIsaURBQ0UsVUFBVyxDQUNYLGlCQUFrQixDQUNsQixjQUFlLENBQ2YsY0FBaUIsQ0FFckIsa0NBQ0UsVUFBYyxDQUVoQiwwQkFDRSxjQUFlLENBQ2YsWUFBYSxDQUNiLFdBQVksQ0FDWixZQUFhLENBQ2IseUVBQTJFLENBQTNFLGlFQUE2RSxDQUM3RSwwQ0FDRSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBYSxDQUNiLHdCQUFpQixDQUFqQixxQkFBaUIsQ0FBakIsb0JBQWlCLENBQWpCLGdCQUFtQixDQUNyQixvREFDRSxTQUFVLENBQ1Ysa0JBQXFCLENBQ3ZCLCtDQUNFLGVBQWtCLENBQ3BCLHFUQVFFLHNCQUEwQiIsImZpbGUiOiJtaW4uc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5hcnQtdmlkZW8tcGxheWVyIC5hcnQtbWluLWhlYWRlciB7XG4gIGRpc3BsYXk6IG5vbmU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgei1pbmRleDogMTEwO1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHJpZ2h0OiAwO1xuICBoZWlnaHQ6IDM1cHg7XG4gIGxpbmUtaGVpZ2h0OiAzNXB4O1xuICBjb2xvcjogI2ZmZjtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjUpO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG4gIG9wYWNpdHk6IDA7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbiAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZS1pbi1vdXQ7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIgLmFydC1taW4taGVhZGVyIC5hcnQtbWluLXRpdGxlIHtcbiAgICBmbGV4OiAxO1xuICAgIHBhZGRpbmc6IDAgMTBweDtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgY3Vyc29yOiBtb3ZlOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyIC5hcnQtbWluLWhlYWRlciAuYXJ0LW1pbi1jbG9zZSB7XG4gICAgd2lkdGg6IDM1cHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7IH1cblxuLmFydC12aWRlby1wbGF5ZXIuYXJ0LWlzLWRyYWdnaW5nIHtcbiAgb3BhY2l0eTogMC43OyB9XG5cbi5hcnQtdmlkZW8tcGxheWVyLmFydC1taW4ge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHotaW5kZXg6IDk5OTk7XG4gIHdpZHRoOiA0MDBweDtcbiAgaGVpZ2h0OiAyMjVweDtcbiAgYm94LXNoYWRvdzogMCAycHggNXB4IDAgcmdiYSgwLCAwLCAwLCAwLjE2KSwgMCAzcHggNnB4IDAgcmdiYSgwLCAwLCAwLCAwLjIpOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1taW4gLmFydC1taW4taGVhZGVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIHVzZXItc2VsZWN0OiBub25lOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1taW4uYXJ0LWhvdmVyIC5hcnQtbWluLWhlYWRlciB7XG4gICAgb3BhY2l0eTogMTtcbiAgICB2aXNpYmlsaXR5OiB2aXNpYmxlOyB9XG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1taW4gLmFydC1tYXNrIC5hcnQtc3RhdGUge1xuICAgIHBvc2l0aW9uOiBzdGF0aWM7IH1cbiAgLmFydC12aWRlby1wbGF5ZXIuYXJ0LW1pbiAuYXJ0LWNvbnRleHRtZW51LFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtbWluIC5hcnQtYm90dG9tLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtbWluIC5hcnQtZGFubXUsXG4gIC5hcnQtdmlkZW8tcGxheWVyLmFydC1taW4gLmFydC1pbmZvLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtbWluIC5hcnQtbGF5ZXJzLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtbWluIC5hcnQtbm90aWNlLFxuICAuYXJ0LXZpZGVvLXBsYXllci5hcnQtbWluIC5hcnQtc2V0dGluZyxcbiAgLmFydC12aWRlby1wbGF5ZXIuYXJ0LW1pbiAuYXJ0LXN1YnRpdGxlIHtcbiAgICBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7IH1cbiJdfQ== */";
   styleInject(css$g);
 
   var css$h = ".art-auto-size{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImF1dG9TaXplLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZUFDRSxtQkFBYSxDQUFiLG1CQUFhLENBQWIsWUFBYSxDQUNiLHdCQUFtQixDQUFuQixxQkFBbUIsQ0FBbkIsa0JBQW1CLENBQ25CLHVCQUF1QixDQUF2QixvQkFBdUIsQ0FBdkIsc0JBQXlCIiwiZmlsZSI6ImF1dG9TaXplLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXJ0LWF1dG8tc2l6ZSB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyOyB9XG4iXX0= */";
@@ -897,7 +897,7 @@
         var _this$art$option = this.art.option,
             theme = _this$art$option.theme,
             backdrop = _this$art$option.backdrop;
-        this.$container.innerHTML = "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.4</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-pip-header\">\n              <div class=\"art-pip-title\"></div>\n              <div class=\"art-pip-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.4</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-min-header\">\n              <div class=\"art-min-title\"></div>\n              <div class=\"art-min-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
         this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
@@ -920,9 +920,9 @@
         this.$info = this.query('.art-info');
         this.$infoPanel = this.query('.art-info-panel');
         this.$infoClose = this.query('.art-info-close');
-        this.$pipHeader = this.query('.art-pip-header');
-        this.$pipTitle = this.query('.art-pip-title');
-        this.$pipClose = this.query('.art-pip-close');
+        this.$minHeader = this.query('.art-min-header');
+        this.$minTitle = this.query('.art-min-title');
+        this.$minClose = this.query('.art-min-close');
         this.$contextmenu = this.query('.art-contextmenus');
 
         if (backdrop) {
@@ -1005,7 +1005,9 @@
   	"Web fullscreen": "网页全屏",
   	"Exit web fullscreen": "退出网页全屏",
   	"Mini player": "迷你播放器",
-  	"Exit mini player": "退出迷你播放器",
+  	"PIP mode": "画中画模式",
+  	"Exit PIP mode": "退出画中画模式",
+  	"PIP not supported": "不支持画中画模式",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地视频",
   	"Subtitle offset time": "字幕偏移时间",
@@ -1061,7 +1063,9 @@
   	"Web fullscreen": "網頁全屏",
   	"Exit web fullscreen": "退出網頁全屏",
   	"Mini player": "迷你播放器",
-  	"Exit mini player": "退出迷你播放器",
+  	"PIP mode": "畫中畫模式",
+  	"Exit PIP mode": "退出畫中畫模式",
+  	"PIP not supported": "不支持畫中畫模式",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地視頻",
   	"Subtitle offset time": "字幕偏移時間",
@@ -1282,7 +1286,7 @@
   }
 
   function exclusiveInit(art, player) {
-    var props = ['pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
+    var props = ['min', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
     props.forEach(function (name) {
       var event = "".concat(name, "Change");
       art.on(event, function (state) {
@@ -1960,7 +1964,9 @@
   }
 
   function pipMix(art, player) {
-    var $video = art.template.$video;
+    var i18n = art.i18n,
+        notice = art.notice,
+        $video = art.template.$video;
 
     if (document.pictureInPictureEnabled) {
       nativePip(art, player);
@@ -1970,6 +1976,9 @@
       def(player, 'pip', {
         get: function get() {
           return false;
+        },
+        set: function set() {
+          notice.show = i18n.get('PIP not supported');
         }
       });
     }
@@ -2119,6 +2128,74 @@
     });
   }
 
+  function minMix(art, player) {
+    var i18n = art.i18n,
+        option = art.option,
+        proxy = art.events.proxy,
+        _art$template = art.template,
+        $player = _art$template.$player,
+        $minClose = _art$template.$minClose,
+        $minTitle = _art$template.$minTitle,
+        $minHeader = _art$template.$minHeader;
+    var cacheStyle = '';
+    var isDroging = false;
+    var lastPageX = 0;
+    var lastPageY = 0;
+    var lastPlayerLeft = 0;
+    var lastPlayerTop = 0;
+    proxy($minHeader, 'mousedown', function (event) {
+      isDroging = true;
+      lastPageX = event.pageX;
+      lastPageY = event.pageY;
+      lastPlayerLeft = player.left;
+      lastPlayerTop = player.top;
+    });
+    proxy(document, 'mousemove', function (event) {
+      if (isDroging) {
+        addClass($player, 'art-is-dragging');
+        setStyle($player, 'left', "".concat(lastPlayerLeft + event.pageX - lastPageX, "px"));
+        setStyle($player, 'top', "".concat(lastPlayerTop + event.pageY - lastPageY, "px"));
+      }
+    });
+    proxy(document, 'mouseup', function () {
+      isDroging = false;
+      removeClass($player, 'art-is-dragging');
+    });
+    proxy($minClose, 'click', function () {
+      player.min = false;
+      isDroging = false;
+      removeClass($player, 'art-is-dragging');
+    });
+    append($minTitle, option.title || i18n.get('Mini player'));
+    def(player, 'min', {
+      get: function get() {
+        return hasClass($player, 'art-min');
+      },
+      set: function set(value) {
+        if (value) {
+          player.autoSize = false;
+          cacheStyle = $player.style.cssText;
+          addClass($player, 'art-min');
+          var $body = document.body;
+          setStyle($player, 'top', "".concat($body.clientHeight - player.height - 50, "px"));
+          setStyle($player, 'left', "".concat($body.clientWidth - player.width - 50, "px"));
+          player.aspectRatio = false;
+          player.playbackRate = false;
+          art.emit('minChange', true);
+        } else if (player.min) {
+          $player.style.cssText = cacheStyle;
+          removeClass($player, 'art-min');
+          setStyle($player, 'top', null);
+          setStyle($player, 'left', null);
+          player.aspectRatio = false;
+          player.playbackRate = false;
+          player.autoSize = option.autoSize;
+          art.emit('minChange', false);
+        }
+      }
+    });
+  }
+
   var Player = function Player(art) {
     classCallCheck(this, Player);
 
@@ -2148,6 +2225,7 @@
     rectMix(art, this);
     flipMix(art, this);
     lightMix(art, this);
+    minMix(art, this);
     proxyPropertys(art, this);
   };
 
@@ -2356,7 +2434,7 @@
   function pip(option) {
     return function (art) {
       return _objectSpread$2({}, option, {
-        tooltip: art.i18n.get('Mini player'),
+        tooltip: art.i18n.get('PIP mode'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2367,7 +2445,7 @@
             player.pipToggle = true;
           });
           art.on('pipChange', function (value) {
-            tooltip($control, i18n.get(value ? 'Exit mini player' : 'Mini player'));
+            tooltip($control, i18n.get(value ? 'Exit PIP mode' : 'PIP mode'));
           });
         }
       });
@@ -3469,7 +3547,7 @@
         player = art.player;
     var resizeFn = throttle(function () {
       if (option.autoSize) {
-        if (!player.fullscreen && !player.fullscreenWeb && !player.fullscreenRotate && !player.pip) {
+        if (!player.fullscreen && !player.fullscreenWeb && !player.fullscreenRotate && !player.pip && !player.min) {
           player.autoSize = true;
         } else {
           player.autoSize = false;
