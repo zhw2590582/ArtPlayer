@@ -2,6 +2,7 @@ import clickInit from './clickInit';
 import hoverInit from './hoverInit';
 import mousemoveInit from './mousemoveInit';
 import resizeInit from './resizeInit';
+import gestureInit from './gestureInit';
 
 export default class Events {
     constructor(art) {
@@ -16,6 +17,7 @@ export default class Events {
                 hoverInit(art, this);
                 mousemoveInit(art, this);
                 resizeInit(art, this);
+                gestureInit(art, this);
             });
         }
     }

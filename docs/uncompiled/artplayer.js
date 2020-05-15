@@ -1414,7 +1414,7 @@
   function durationMix(art, player) {
     def(player, 'duration', {
       get: function get() {
-        return art.template.$video.duration || 0;
+        return art.template.$video.duration || Infinity;
       }
     });
   }
@@ -3511,6 +3511,40 @@
     $player.appendChild(object);
   }
 
+  function gestureInit(art, events) {
+    if (art.isMobile && !art.option.isLive) {
+      var player = art.player,
+          notice = art.notice,
+          $video = art.template.$video;
+      var isDroging = false;
+      var startX = 0;
+      var currentTime = 0;
+      events.proxy($video, 'touchstart', function (event) {
+        if (event.touches.length === 1) {
+          isDroging = true;
+          startX = event.touches[0].clientX;
+        }
+      });
+      events.proxy(document, 'touchmove', function (event) {
+        if (event.touches.length === 1 && isDroging) {
+          var widthDiff = event.touches[0].clientX - startX;
+          var proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
+          currentTime = clamp(player.currentTime + 60 * proportion, 0, player.duration);
+          notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(player.duration));
+        }
+      });
+      events.proxy(document, 'touchend', function () {
+        if (isDroging && currentTime) {
+          player.seek = currentTime;
+        }
+
+        isDroging = false;
+        startX = 0;
+        currentTime = 0;
+      });
+    }
+  }
+
   var Events =
   /*#__PURE__*/
   function () {
@@ -3530,6 +3564,7 @@
           hoverInit(art, _this);
           mousemoveInitInit(art, _this);
           resizeInit(art, _this);
+          gestureInit(art, _this);
         });
       }
     }

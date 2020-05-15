@@ -2,6 +2,6 @@ import { def } from '../utils';
 
 export default function durationMix(art, player) {
     def(player, 'duration', {
-        get: () => art.template.$video.duration || 0,
+        get: () => art.template.$video.duration || Infinity,
     });
 }
