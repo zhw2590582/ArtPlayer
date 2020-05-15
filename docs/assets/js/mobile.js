@@ -46,7 +46,7 @@ var art = new Artplayer({
             danmuku: url + '/danmuku/one-more-time-one-more-chance.xml',
             speed: 5,
             maxlength: 100,
-            margin: [10, 50],
+            margin: [10, 70],
             opacity: 1,
             fontSize: 14,
             synchronousPlayback: false,
