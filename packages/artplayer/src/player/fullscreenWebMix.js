@@ -15,6 +15,7 @@ export default function fullscreenWebMix(art, player) {
             } else {
                 removeClass($player, 'art-fullscreen-web');
                 player.aspectRatioReset = true;
+                player.autoSize = art.option.autoSize;
                 art.emit('fullscreenWebChange', false);
             }
         },

@@ -1829,6 +1829,7 @@
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
+            player.autoSize = art.option.autoSize;
             art.emit('fullscreenChange', false);
           });
         }
@@ -1857,6 +1858,7 @@
         } else {
           removeClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
+          player.autoSize = art.option.autoSize;
           art.emit('fullscreenWebChange', false);
         }
       }

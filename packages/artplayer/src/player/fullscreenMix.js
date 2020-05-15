@@ -19,6 +19,7 @@ export default function fullscreenMix(art, player) {
                 screenfull.exit().then(() => {
                     removeClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
+                    player.autoSize = art.option.autoSize;
                     art.emit('fullscreenChange', false);
                 });
             }
