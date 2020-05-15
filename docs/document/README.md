@@ -1073,6 +1073,8 @@ art.seek === art.player.seek;
 | `pause`                  | `Boolean`  | Pause playback                                                                                    |
 | `pip`                    | `Boolean`  | Enable or disable pip                                                                             |
 | `pipToggle`              | `Boolean`  | Toggle pip                                                                                        |
+| `min`                    | `Boolean`  | Enable or disable min player                                                                      |
+| `minToggle`              | `Boolean`  | Toggle min player                                                                                 |
 | `playbackRate`           | `String`   | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
 | `playbackRateReset`      | `Boolean`  | Recalculate the playback rate                                                                     |
 | `played`                 | `Number`   | Return the proportion of the played                                                               |
@@ -1554,6 +1556,7 @@ art.on('ready', function (args) {
 | `fullscreenChange`    | When the full screen status change      | Whether full screen     |
 | `fullscreenWebChange` | When entering web full screen           | Whether web full screen |
 | `pipChange`           | When entering picture in picture        | Whether in pip          |
+| `minChange`           | When entering min player                | Whether in min player   |
 | `playbackRateChange`  | When playback rate change               | Playback rate           |
 | `playbackRateRemove`  | When playback rate remove               | `undefined`             |
 | `playbackRateReset`   | When playback rate reset                | `undefined`             |

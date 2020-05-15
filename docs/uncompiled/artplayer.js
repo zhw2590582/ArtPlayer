@@ -2194,6 +2194,13 @@
         }
       }
     });
+    def(player, 'minToggle', {
+      set: function set(value) {
+        if (value) {
+          player.min = !player.min;
+        }
+      }
+    });
   }
 
   var Player = function Player(art) {

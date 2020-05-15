@@ -71,4 +71,12 @@ export default function minMix(art, player) {
             }
         },
     });
+
+    def(player, 'minToggle', {
+        set(value) {
+            if (value) {
+                player.min = !player.min;
+            }
+        },
+    });
 }
