@@ -2229,14 +2229,14 @@
 
           if (end - start >= 1) {
             interval = [start, end];
-            art.emit('loop:add', interval);
+            art.emit('loopAdd', interval);
           } else {
             interval = [];
-            art.emit('loop:remove');
+            art.emit('loopRemove');
           }
         } else {
           interval = [];
-          art.emit('loop:remove');
+          art.emit('loopRemove');
         }
       }
     });
@@ -2244,7 +2244,7 @@
       if (interval.length) {
         if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
           player.seek = interval[0];
-          art.emit('loop', interval);
+          art.emit('loopStart', interval);
         }
       }
     });

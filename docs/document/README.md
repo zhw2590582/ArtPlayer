@@ -1090,7 +1090,8 @@ art.seek === art.player.seek;
 | `volume`                 | `Number`   | `Getter` and `Setter` of the current volume                                                       |
 | `muted`                  | `Boolean`  | `Getter` and `Setter` of the muted                                                                |
 | `light`                  | `Boolean`  | `Getter` and `Setter` of the light mode                                                           |
-| `url`                    | `String`   | `Getter` of the video url                                                                         |
+| `url`                    | `String`   | `Getter` and `Setter` of the video url                                                            |
+| `loop`                   | `Arrary`   | `Getter` and `Setter` of the interval loop                                                        |
 
 [Run Code](/Properties.player)
 
@@ -1562,6 +1563,9 @@ art.on('ready', function (args) {
 | `playbackRateReset`   | When playback rate reset                | `undefined`             |
 | `screenshot`          | When a screenshot occurs                | Image data uri          |
 | `switch`              | When switching video url                | Video url               |
+| `loopAdd`             | When an interval loop is added          | Interval arrary         |
+| `loopRemove`          | When the interval loop is deleted       | `undefined`             |
+| `loopStart`           | When entering the interval cycle        | Interval arrary         |
 
 ## Video (Native event)
 
