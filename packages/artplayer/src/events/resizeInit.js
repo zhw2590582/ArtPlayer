@@ -8,10 +8,7 @@ export default function resizeInit(art, events) {
             player.autoSize = option.autoSize;
         }
         player.aspectRatioReset = true;
-        art.emit('resize', {
-            width: player.width,
-            height: player.height,
-        });
+        art.emit('resize');
     }, 500);
 
     events.proxy(window, ['orientationchange', 'resize'], () => {

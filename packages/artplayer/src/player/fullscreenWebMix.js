@@ -11,11 +11,13 @@ export default function fullscreenWebMix(art, player) {
             if (value) {
                 addClass($player, 'art-fullscreen-web');
                 player.aspectRatioReset = true;
+                art.emit('resize');
                 art.emit('fullscreenWebChange', true);
             } else {
                 removeClass($player, 'art-fullscreen-web');
                 player.aspectRatioReset = true;
                 player.autoSize = art.option.autoSize;
+                art.emit('resize');
                 art.emit('fullscreenWebChange', false);
             }
         },
