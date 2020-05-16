@@ -25,6 +25,7 @@ import rectMix from './rectMix';
 import flipMix from './flipMix';
 import lightMix from './lightMix';
 import minMix from './minMix';
+import loopMin from './loopMin';
 import { proxyPropertys } from '../utils';
 
 export default class Player {
@@ -56,6 +57,7 @@ export default class Player {
         flipMix(art, this);
         lightMix(art, this);
         minMix(art, this);
+        loopMin(art, this);
         proxyPropertys(art, this);
     }
 }
