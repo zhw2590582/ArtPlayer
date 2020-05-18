@@ -12,6 +12,7 @@ import setting from './setting';
 import thumbnails from './thumbnails';
 import screenshot from './screenshot';
 import quality from './quality';
+import loop from './loop';
 
 export default class Control extends Component {
     constructor(art) {
@@ -51,6 +52,15 @@ export default class Control extends Component {
                     disable: !option.thumbnails.url || option.isLive,
                     position: 'top',
                     index: 20,
+                }),
+            );
+
+            this.add(
+                loop({
+                    name: 'loop',
+                    disable: false,
+                    position: 'top',
+                    index: 30,
                 }),
             );
 

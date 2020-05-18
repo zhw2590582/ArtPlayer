@@ -128,6 +128,32 @@
                 pointer-events: none;
                 background-color: rgba(0, 0, 0, 0.7);
             }
+
+            .art-control-loop {
+                display: none;
+                position: absolute;
+                width: 100%;
+                bottom: 10px;
+                pointer-events: none;
+
+                .art-loop-left {
+                    position: absolute;
+                    left: 0;
+                    width: 0;
+                    height: 0;
+                    border-bottom: 6px solid #fff;
+                    border-left: 6px solid transparent;
+                }
+
+                .art-loop-right {
+                    position: absolute;
+                    left: 0;
+                    width: 0;
+                    height: 0;
+                    border-bottom: 6px solid #fff;
+                    border-right: 6px solid transparent;
+                }
+            }
         }
 
         .art-controls {
