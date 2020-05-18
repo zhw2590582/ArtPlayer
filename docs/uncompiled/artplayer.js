@@ -2996,7 +2996,7 @@
             setStyle($right, 'left', "".concat(value[1] / player.duration * 100, "%"));
           });
           art.on('loopRemove', function () {
-            setStyle($control, 'display', 'node');
+            setStyle($control, 'display', 'none');
           });
         }
       });

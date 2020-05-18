@@ -16,7 +16,7 @@ export default function loop(option) {
             });
 
             art.on('loopRemove', () => {
-                setStyle($control, 'display', 'node');
+                setStyle($control, 'display', 'none');
             });
         },
     });
