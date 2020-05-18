@@ -133,25 +133,20 @@
                 display: none;
                 position: absolute;
                 width: 100%;
-                bottom: 10px;
+                height: 100%;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
                 pointer-events: none;
 
-                .art-loop-left {
+                .art-loop-point {
                     position: absolute;
                     left: 0;
-                    width: 0;
-                    height: 0;
-                    border-bottom: 6px solid #fff;
-                    border-left: 6px solid transparent;
-                }
-
-                .art-loop-right {
-                    position: absolute;
-                    left: 0;
-                    width: 0;
-                    height: 0;
-                    border-bottom: 6px solid #fff;
-                    border-right: 6px solid transparent;
+                    top: -2px;
+                    width: 2px;
+                    height: 8px;
+                    background: rgba(255, 255, 255, 0.75);
                 }
             }
         }
