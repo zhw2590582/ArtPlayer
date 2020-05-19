@@ -7,6 +7,17 @@ function validElement(value, type, paths) {
     );
 }
 
+const component = {
+    html: validElement,
+    disable: 'boolean|undefined',
+    name: 'string|undefined',
+    index: 'number|undefined',
+    style: 'object|undefined',
+    click: 'function|undefined',
+    mounted: 'function|undefined',
+    tooltip: 'string|undefined',
+};
+
 export default {
     container: validElement,
     url: 'string',
@@ -40,28 +51,18 @@ export default {
     networkMonitor: 'boolean',
     plugins: ['function'],
     whitelist: ['string|function|regexp'],
-    layers: [
+    layers: [component],
+    contextmenu: [component],
+    controls: [
         {
-            disable: 'boolean|undefined',
-            name: 'string|undefined',
-            index: 'number|undefined',
-            html: validElement,
-            style: 'object|undefined',
-            click: 'function|undefined',
-            mounted: 'function|undefined',
-            tooltip: 'string|undefined',
-        },
-    ],
-    contextmenu: [
-        {
-            disable: 'boolean|undefined',
-            name: 'string|undefined',
-            index: 'number|undefined',
-            html: validElement,
-            style: 'object|undefined',
-            click: 'function|undefined',
-            mounted: 'function|undefined',
-            tooltip: 'string|undefined',
+            ...component,
+            position: (value, type, paths) => {
+                const position = ['top', 'left', 'right'];
+                return errorHandle(
+                    position.includes(value),
+                    `${paths.join('.')} only accept ${position.toString()} as parameters, but got ${type}`,
+                );
+            },
         },
     ],
     quality: [
@@ -69,25 +70,6 @@ export default {
             default: 'boolean|undefined',
             name: 'string',
             url: 'string',
-        },
-    ],
-    controls: [
-        {
-            disable: 'boolean|undefined',
-            name: 'string|undefined',
-            index: 'number|undefined',
-            html: validElement,
-            style: 'object|undefined',
-            click: 'function|undefined',
-            mounted: 'function|undefined',
-            tooltip: 'string|undefined',
-            position: (value, type, paths) => {
-                const position = ['top', 'left', 'right'];
-                return errorHandle(
-                    position.includes(value),
-                    `${paths.join('.')} only accept ${position.toString()} as parameters`,
-                );
-            },
         },
     ],
     highlight: [

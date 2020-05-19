@@ -1,7 +1,12 @@
 {
-    "include": ["types"],
+    "include": [
+        "types/*"
+    ],
     "compilerOptions": {
-        "lib": ["es2015"],
+        "lib": [
+            "es2018",
+            "dom"
+        ],
         "strict": true
     }
 }
