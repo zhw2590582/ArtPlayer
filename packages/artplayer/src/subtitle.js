@@ -71,9 +71,7 @@ export default class Subtitle extends Component {
         }
 
         return fetch(url)
-            .then((response) => {
-                return response.text();
-            })
+            .then((response) => response.text())
             .then((text) => {
                 this.art.emit('subtitle:load', url);
                 switch (ext || getExt(url)) {

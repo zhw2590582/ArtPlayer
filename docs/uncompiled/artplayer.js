@@ -4745,10 +4745,7 @@
 
     return Artplayer;
   }(Emitter); // eslint-disable-next-line no-console
-
-
   console.log('%c ArtPlayer %c 3.5.4 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
-  window.Artplayer = Artplayer;
 
   return Artplayer;
 

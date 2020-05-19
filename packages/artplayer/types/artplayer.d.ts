@@ -56,6 +56,11 @@ export default class Artplayer {
         autoSize?: boolean;
 
         /**
+         * When the player scrolls out of the viewport, the mini player mode is automatically enabled
+         */
+        autoMin?: boolean;
+
+        /**
          * Whether to loop
          */
         loop?: boolean;
@@ -101,6 +106,16 @@ export default class Artplayer {
         mutex?: boolean;
 
         /**
+         * Whether to display the light mode in the context menu
+         */
+        light?: boolean;
+
+        /**
+         * Whether to use blurred background in the context menu and settings panel
+         */
+        backdrop?: boolean;
+
+        /**
          * Whether to display fullscreen button
          */
         fullscreen?: boolean;
@@ -109,6 +124,41 @@ export default class Artplayer {
          * Whether to display web fullscreen button
          */
         fullscreenWeb?: boolean;
+
+        /**
+         * Subtitle time offset plugin
+         */
+        subtitleOffset?: boolean;
+
+        /**
+         * Mini progress bar plugin
+         */
+        miniProgressBar?: boolean;
+
+        /**
+         * Local video preview plugin. By default, a configuration is added in the settings panel.
+         */
+        localVideo?: boolean;
+
+        /**
+         * Local subtitle preview plugin. By default, a configuration is added in the settings panel.
+         */
+        localSubtitle?: boolean;
+
+        /**
+         * A network monitor is used to monitor the blocking of the video.
+         */
+        networkMonitor?: boolean;
+
+        /**
+         * Initialize the custom plugins
+         */
+        plugins?: Function[];
+
+        /**
+         * Initialize the custom whitelist
+         */
+        whitelist?: [string, Function, RegExp];
 
         /**
          * Initialize the custom layer
@@ -134,16 +184,6 @@ export default class Artplayer {
          * Initialize the custom highlight
          */
         highlight?: object[];
-
-        /**
-         * Initialize the custom plugins
-         */
-        plugins?: Function[];
-
-        /**
-         * Initialize the custom whitelist
-         */
-        whitelist?: [string, Function];
 
         /**
          * Thumbnails option

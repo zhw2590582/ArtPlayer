@@ -26,7 +26,7 @@ import Mobile from './mobile';
 
 let id = 0;
 const instances = [];
-class Artplayer extends Emitter {
+export default class Artplayer extends Emitter {
     constructor(option) {
         super();
         this.option = validator(utils.mergeDeep(Artplayer.option, option), scheme);
@@ -174,6 +174,3 @@ console.log(
     'color: #fff; background: #4bc729',
     '',
 );
-
-window.Artplayer = Artplayer;
-export default Artplayer;
