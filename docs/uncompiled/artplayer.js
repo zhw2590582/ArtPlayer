@@ -759,7 +759,7 @@
     controls: [_objectSpread({}, component, {
       position: function position(value, type, paths) {
         var position = ['top', 'left', 'right'];
-        return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters, but got ").concat(type));
+        return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters"));
       }
     })],
     quality: [{

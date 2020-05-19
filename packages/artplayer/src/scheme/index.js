@@ -60,7 +60,7 @@ export default {
                 const position = ['top', 'left', 'right'];
                 return errorHandle(
                     position.includes(value),
-                    `${paths.join('.')} only accept ${position.toString()} as parameters, but got ${type}`,
+                    `${paths.join('.')} only accept ${position.toString()} as parameters`,
                 );
             },
         },

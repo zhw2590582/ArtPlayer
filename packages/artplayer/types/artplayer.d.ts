@@ -7,6 +7,7 @@ type Component = {
     click?: Function;
     mounted?: Function;
     tooltip?: string;
+    position?: 'top' | 'left' | 'right';
 };
 
 export default class Artplayer {
@@ -16,7 +17,7 @@ export default class Artplayer {
         poster?: string;
         title?: string;
         theme?: string;
-        lang?: string;
+        lang?: 'en' | 'zh-cn' | 'zh-tw';
         volume?: number;
         isLive?: boolean;
         muted?: boolean;
