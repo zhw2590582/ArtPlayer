@@ -1,5 +1,5 @@
 import Artplayer from '../../artplayer/src';
-import '../../artplayer/src/style';
+import '../../artplayer/src/style/index.scss';
 
 export default {
     data() {
