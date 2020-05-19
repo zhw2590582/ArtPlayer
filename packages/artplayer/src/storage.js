@@ -5,7 +5,7 @@ export default class Storage {
 
     get(key) {
         const storage = JSON.parse(localStorage.getItem(this.name)) || {};
-        return key ? storage[key] : {};
+        return key ? storage[key] : storage;
     }
 
     set(key, value) {

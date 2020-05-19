@@ -10,6 +10,7 @@ var art = new Artplayer({
     autoplay: false,
     pip: true,
     autoSize: true,
+    autoMin: true,
     screenshot: true,
     setting: true,
     loop: true,

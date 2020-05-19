@@ -350,6 +350,14 @@
     target.setAttribute('aria-label', msg);
     target.setAttribute('data-balloon-pos', pos);
   }
+  function isInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+    var vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
+    var horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
+    return vertInView && horInView;
+  }
 
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -711,6 +719,7 @@
     sublings: sublings,
     inverseClass: inverseClass,
     tooltip: tooltip,
+    isInViewport: isInViewport,
     ArtPlayerError: ArtPlayerError,
     errorHandle: errorHandle,
     srtToVtt: srtToVtt,
@@ -750,6 +759,7 @@
     muted: 'boolean',
     autoplay: 'boolean',
     autoSize: 'boolean',
+    autoMin: 'boolean',
     loop: 'boolean',
     flip: 'boolean',
     playbackRate: 'boolean',
@@ -2144,6 +2154,7 @@
   function minMix(art, player) {
     var i18n = art.i18n,
         option = art.option,
+        storage = art.storage,
         proxy = art.events.proxy,
         _art$template = art.template,
         $player = _art$template.$player,
@@ -2166,8 +2177,12 @@
     proxy(document, 'mousemove', function (event) {
       if (isDroging) {
         addClass($player, 'art-is-dragging');
-        setStyle($player, 'left', "".concat(lastPlayerLeft + event.pageX - lastPageX, "px"));
-        setStyle($player, 'top', "".concat(lastPlayerTop + event.pageY - lastPageY, "px"));
+        var top = lastPlayerTop + event.pageY - lastPageY;
+        var left = lastPlayerLeft + event.pageX - lastPageX;
+        setStyle($player, 'top', "".concat(top, "px"));
+        setStyle($player, 'left', "".concat(left, "px"));
+        storage.set('top', top);
+        storage.set('left', left);
       }
     });
     proxy(document, 'mouseup', function () {
@@ -2189,13 +2204,35 @@
           player.autoSize = false;
           cacheStyle = $player.style.cssText;
           addClass($player, 'art-min');
-          var $body = document.body;
-          setStyle($player, 'top', "".concat($body.clientHeight - player.height - 50, "px"));
-          setStyle($player, 'left', "".concat($body.clientWidth - player.width - 50, "px"));
+          var top = storage.get('top');
+          var left = storage.get('left');
+
+          if (top && left) {
+            setStyle($player, 'top', "".concat(top, "px"));
+            setStyle($player, 'left', "".concat(left, "px"));
+
+            if (!isInViewport($minHeader)) {
+              storage.del('top');
+              storage.del('left');
+              player.min = true;
+            }
+          } else {
+            var $body = document.body;
+
+            var _top = $body.clientHeight - player.height - 50;
+
+            var _left = $body.clientWidth - player.width - 50;
+
+            storage.set('top', _top);
+            storage.set('left', _left);
+            setStyle($player, 'top', "".concat(_top, "px"));
+            setStyle($player, 'left', "".concat(_left, "px"));
+          }
+
           player.aspectRatio = false;
           player.playbackRate = false;
           art.emit('minChange', true);
-        } else if (player.min) {
+        } else {
           $player.style.cssText = cacheStyle;
           removeClass($player, 'art-min');
           setStyle($player, 'top', null);
@@ -3677,6 +3714,23 @@
     }
   }
 
+  function viewInit(art, events) {
+    var player = art.player,
+        autoMin = art.option.autoMin,
+        $container = art.template.$container;
+    var scrollFn = debounce(function () {
+      art.emit('view', isInViewport($container));
+    }, 200);
+    events.proxy(window, 'scroll', function () {
+      scrollFn();
+    });
+    art.on('view', function (state) {
+      if (autoMin) {
+        player.min = !state;
+      }
+    });
+  }
+
   var Events =
   /*#__PURE__*/
   function () {
@@ -3697,6 +3751,7 @@
           mousemoveInitInit(art, _this);
           resizeInit(art, _this);
           gestureInit(art, _this);
+          viewInit(art, _this);
         });
       }
     }
@@ -4161,7 +4216,7 @@
       key: "get",
       value: function get(key) {
         var storage = JSON.parse(localStorage.getItem(this.name)) || {};
-        return key ? storage[key] : {};
+        return key ? storage[key] : storage;
       }
     }, {
       key: "set",
@@ -4697,6 +4752,7 @@
           muted: false,
           autoplay: false,
           autoSize: false,
+          autoMin: false,
           loop: false,
           flip: false,
           playbackRate: false,

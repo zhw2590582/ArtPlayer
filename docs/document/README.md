@@ -268,6 +268,24 @@ var art = new Artplayer({
 });
 ```
 
+## autoMin
+
+-   Type: `Boolean`
+-   Default: `false`
+
+When the player scrolls out of the viewport, the mini player mode is automatically enabled
+
+[Run Code](/Configuration.autoMin)
+
+```js
+var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    autoMin: true,
+});
+```
+
 ## loop
 
 -   Type: `Boolean`
