@@ -34,7 +34,7 @@ var art = new Artplayer({
     contextmenu: [
         {
             html: 'Custom menu',
-            click: function(contextmenu) {
+            click: function (contextmenu) {
                 console.info('You clicked on the custom menu');
                 contextmenu.show = false;
             },
@@ -43,7 +43,7 @@ var art = new Artplayer({
     layers: [
         {
             html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
-            click: function() {
+            click: function () {
                 console.info('You clicked on the custom layer');
             },
             style: {
@@ -104,7 +104,7 @@ var art = new Artplayer({
         {
             position: 'right',
             html: 'Control',
-            click: function() {
+            click: function () {
                 console.info('You clicked on the custom control');
             },
         },

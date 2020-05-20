@@ -120,7 +120,7 @@ Video poster image url
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    poster: '/assets/sample/poster.jpeg',
+    poster: '/assets/sample/poster.jpg',
 });
 ```
 
@@ -129,7 +129,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-Video title, will be shown in `screenshot` file name and `pip` mode
+Video title, will be shown in `screenshot` file name and `min` mode
 
 [Run Code](/Configuration.title)
 
@@ -138,6 +138,7 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     title: '【新海诚动画】『秒速5センチメートル』',
+    screenshot: true,
 });
 ```
 

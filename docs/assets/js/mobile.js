@@ -1,9 +1,8 @@
 var vConsole = new VConsole();
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    poster: url + '/image/one-more-time-one-more-chance-poster.jpg',
+    title: 'One More Time One More Chance',
+    poster: '/assets/sample/poster.jpg',
     autoSize: true,
     loop: true,
     mutex: true,
@@ -18,7 +17,7 @@ var art = new Artplayer({
         'x5-video-orientation': 'portraint',
     },
     subtitle: {
-        url: url + '/subtitle/one-more-time-one-more-chance.srt',
+        url: '/assets/sample/subtitle.srt',
         style: {
             color: '#fff',
             fontSize: '14px',
@@ -26,7 +25,7 @@ var art = new Artplayer({
     },
     layers: [
         {
-            html: `<img style="width: 50px" src="${url}/image/your-name.png">`,
+            html: `<img style="width: 50px" src="/assets/sample/layer.png">`,
             click: function () {
                 console.info('You clicked on the custom layer');
             },
@@ -44,7 +43,7 @@ var art = new Artplayer({
     },
     plugins: [
         artplayerPluginDanmuku({
-            danmuku: url + '/danmuku/one-more-time-one-more-chance.xml',
+            danmuku: '/assets/sample/danmuku.xml',
             speed: 5,
             maxlength: 100,
             margin: [10, 70],

@@ -9,11 +9,189 @@ describe('Document', function() {
     
     it(`Configuration.container`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+    });
+        
+
+    it(`Class.version`, function() {
+            
+console.log(Artplayer.version);
+
+    });
+        
+
+    it(`Class.env`, function() {
+            
+console.log(Artplayer.env);
+
+    });
+        
+
+    it(`Class.config`, function() {
+            
+console.log(Artplayer.config);
+
+    });
+        
+
+    it(`Class.utils`, function() {
+            
+console.log(Artplayer.utils);
+
+    });
+        
+
+    it(`Class.option`, function() {
+            
+console.log(Artplayer.option);
+
+    });
+        
+
+    it(`Class.instances`, function() {
+            
+console.log(Artplayer.instances.length);
+
+    });
+        
+
+    it(`Class.scheme`, function() {
+            
+console.log(Artplayer.scheme);
+
+    });
+        
+
+    it(`Class.Emitter`, function() {
+            
+console.log(Artplayer.Emitter);
+
+    });
+        
+
+    it(`Class.validator`, function() {
+            
+console.log(Artplayer.validator);
+
+    });
+        
+
+    it(`Class.kindOf`, function() {
+            
+console.log(Artplayer.kindOf);
+
+    });
+        
+
+    it(`lib=https://cdn.bootcss.com/flv.js/1.4.2/flv.js`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    autoplay: true,
+    url: '/assets/sample/video.flv',
+    customType: {
+        flv: function (video, url) {
+            const flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: url,
+            });
+            flvPlayer.attachMediaElement(video);
+            flvPlayer.load();
+        },
+    },
+});
+
+    });
+        
+
+    it(`lib=https://cdn.bootcss.com/hls.js/0.10.1/hls.js`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    autoplay: true,
+    url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+    customType: {
+        m3u8: function (video, url) {
+            var hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+        },
+    },
+});
+
+    });
+        
+
+    it(`lib=https://cdn.bootcss.com/dashjs/2.9.2/dash.all.min.js`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    autoplay: true,
+    url: 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd',
+    customType: {
+        mpd: function (video, url) {
+            var player = dashjs.MediaPlayer().create();
+            player.initialize(video, url, true);
+        },
+    },
+});
+
+    });
+        
+
+    it(`lib=https://cdn.bootcss.com/shaka-player/2.5.0-beta/shaka-player.compiled.js`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    autoplay: true,
+    url: '//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd',
+    customType: {
+        mpd: function (video, url) {
+            shaka.polyfill.installAll();
+            var player = new shaka.Player(video);
+            player.load(url);
+        },
+    },
+});
+
+    });
+        
+
+    it(`lib=https://cdn.bootcss.com/webtorrent/0.102.4/webtorrent.min.js`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    autoplay: true,
+    url:
+        'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d&dn=sintel.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel-1024-surround.mp4',
+    type: 'torrent',
+    customType: {
+        torrent: function (video, url, art) {
+            var client = new WebTorrent();
+            art.loading.show = true;
+            client.add(url, function (torrent) {
+                var file = torrent.files[0];
+                file.renderTo(video, {
+                    autoplay: true,
+                });
+            });
+        },
+    },
+});
+
+    });
+        
+
+    it(`Configuration.container`, function() {
+            
 var art = new Artplayer({
     container: '.artplayer-app',
     // container: document.querySelector('.artplayer-app'),
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
     });
@@ -21,12 +199,9 @@ var art = new Artplayer({
 
     it(`Configuration.url`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    // url: url + '/video/one-more-time-one-more-chance-480p.ogg',
-    // url: url + '/video/one-more-time-one-more-chance-480p.webm',
+    url: '/assets/sample/video.mp4',
 });
 
     });
@@ -34,10 +209,9 @@ var art = new Artplayer({
 
     it(`Configuration.type`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.flv',
+    url: 'path/to/video.flv',
     type: 'flv',
 });
 
@@ -46,13 +220,12 @@ var art = new Artplayer({
 
     it(`Configuration.customType`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.flv',
+    url: 'path/to/video.flv',
     type: 'flv',
     customType: {
-        flv: function(video, url, art) {
+        flv: function (video, url, art) {
             // video: The video element
             // url: The video url
             // art: The Artplayer instance
@@ -65,11 +238,10 @@ var art = new Artplayer({
 
     it(`Configuration.poster`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
-    poster: url + '/image/one-more-time-one-more-chance-poster.jpg',
+    url: '/assets/sample/video.mp4',
+    poster: '/assets/sample/poster.jpg',
 });
 
     });
@@ -77,11 +249,11 @@ var art = new Artplayer({
 
     it(`Configuration.title`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     title: '【新海诚动画】『秒速5センチメートル』',
+    screenshot: true,
 });
 
     });
@@ -89,10 +261,9 @@ var art = new Artplayer({
 
     it(`Configuration.volume`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     volume: 0.5,
 });
 
@@ -101,10 +272,9 @@ var art = new Artplayer({
 
     it(`Configuration.muted`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     muted: true,
 });
 
@@ -113,10 +283,9 @@ var art = new Artplayer({
 
     it(`Configuration.autoplay`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     autoplay: true,
 });
 
@@ -126,11 +295,22 @@ var art = new Artplayer({
     it(`Configuration.autoSize`, function() {
             
 // Zoom browser window
-var url = 'https://zhw2590582.github.io/assets-cdn';
+
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     autoSize: true,
+});
+
+    });
+        
+
+    it(`Configuration.autoMin`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoMin: true,
 });
 
     });
@@ -138,10 +318,9 @@ var art = new Artplayer({
 
     it(`Configuration.loop`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     loop: true,
 });
 
@@ -150,10 +329,9 @@ var art = new Artplayer({
 
     it(`Configuration.playbackRate`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     playbackRate: true,
     setting: true,
 });
@@ -163,10 +341,9 @@ var art = new Artplayer({
 
     it(`Configuration.aspectRatio`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     aspectRatio: true,
     setting: true,
 });
@@ -176,10 +353,9 @@ var art = new Artplayer({
 
     it(`Configuration.screenshot`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     screenshot: true,
 
     // Optional
@@ -193,10 +369,9 @@ var art = new Artplayer({
 
     it(`Configuration.setting`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     setting: true,
 });
 
@@ -205,10 +380,9 @@ var art = new Artplayer({
 
     it(`Configuration.pip`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     pip: true,
 });
 
@@ -217,10 +391,9 @@ var art = new Artplayer({
 
     it(`Configuration.fullscreen`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     fullscreen: true,
 });
 
@@ -229,10 +402,9 @@ var art = new Artplayer({
 
     it(`Configuration.fullscreenWeb`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     fullscreenWeb: true,
 });
 
@@ -241,10 +413,9 @@ var art = new Artplayer({
 
     it(`Configuration.mutex`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     mutex: true,
 });
 
@@ -253,10 +424,9 @@ var art = new Artplayer({
 
     it(`Configuration.light`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     light: true,
 });
 
@@ -265,10 +435,9 @@ var art = new Artplayer({
 
     it(`Configuration.backdrop`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     backdrop: true,
 });
 
@@ -277,10 +446,9 @@ var art = new Artplayer({
 
     it(`Configuration.hotkey`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     hotkey: true,
 });
 
@@ -289,10 +457,9 @@ var art = new Artplayer({
 
     it(`Configuration.lang`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     lang: 'en',
 });
 
@@ -301,10 +468,9 @@ var art = new Artplayer({
 
     it(`Configuration.icons`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     icons: {
         loading: '',
         state: '',
@@ -326,10 +492,9 @@ var art = new Artplayer({
 
     it(`Configuration.theme`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     theme: '#ffad00',
 });
 
@@ -338,12 +503,11 @@ var art = new Artplayer({
 
     it(`Configuration.subtitleOffset`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     subtitle: {
-        url: url + '/subtitle/one-more-time-one-more-chance.srt',
+        url: '/assets/sample/subtitle.srt',
     },
     setting: true,
     subtitleOffset: true,
@@ -354,10 +518,9 @@ var art = new Artplayer({
 
     it(`Configuration.miniProgressBar`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     miniProgressBar: true,
 });
 
@@ -366,17 +529,16 @@ var art = new Artplayer({
 
     it(`Configuration.localVideo`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     localVideo: true,
     controls: [
         {
             name: 'preview',
             position: 'right',
             html: 'OPEN VIDEO',
-            mounted: $preview => {
+            mounted: ($preview) => {
                 art.plugins.localVideo.attach($preview);
             },
         },
@@ -388,17 +550,16 @@ var art = new Artplayer({
 
     it(`Configuration.localSubtitle`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     localSubtitle: true,
     controls: [
         {
             name: 'preview',
             position: 'right',
             html: 'OPEN SUBTITLE',
-            mounted: $preview => {
+            mounted: ($preview) => {
                 art.plugins.localSubtitle.attach($preview);
             },
         },
@@ -410,10 +571,9 @@ var art = new Artplayer({
 
     it(`Configuration.networkMonitor`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     networkMonitor: true,
 });
 
@@ -421,7 +581,7 @@ var art = new Artplayer({
 // For example, when the ratio is equal to 0.3, it means that every 10 seconds of sampling time, it is blocked for three seconds.
 
 let notice = false;
-art.on('networkMonitor', ratio => {
+art.on('networkMonitor', (ratio) => {
     if (ratio >= 0.5 && !notice) {
         notice = true;
         console.log('Current network condition is not good');
@@ -436,12 +596,11 @@ art.plugins.networkMonitor.sample(30000);
 
     it(`Configuration.subtitle`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     subtitle: {
-        url: url + '/subtitle/one-more-time-one-more-chance.srt',
+        url: '/assets/sample/subtitle.srt',
         style: {
             color: '#03A9F4',
             'font-size': '30px',
@@ -454,12 +613,11 @@ var art = new Artplayer({
 
     it(`Configuration.thumbnails`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     thumbnails: {
-        url: url + '/image/one-more-time-one-more-chance-thumbnails.png',
+        url: '/assets/sample/thumbnails.png',
         number: 100,
         width: 160,
         height: 90,
@@ -472,13 +630,12 @@ var art = new Artplayer({
 
     it(`Configuration.moreVideoAttr`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     moreVideoAttr: {
         'webkit-playsinline': true,
-        playsinline: true,
+        playsInline: true,
     },
 });
 
@@ -487,19 +644,18 @@ var art = new Artplayer({
 
     it(`Configuration.quality`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     quality: [
         {
             default: true,
             name: 'SD 480P',
-            url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+            url: '/assets/sample/video.mp4',
         },
         {
             name: 'HD 720P',
-            url: url + '/video/one-more-time-one-more-chance-720p.mp4',
+            url: '/assets/sample/video.mp4',
         },
     ],
 });
@@ -509,10 +665,9 @@ var art = new Artplayer({
 
     it(`Configuration.highlight`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     highlight: [
         {
             time: 60,
@@ -542,13 +697,12 @@ var art = new Artplayer({
 
     it(`Configuration.layers`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     layers: [
         {
-            html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+            html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
             style: {
                 position: 'absolute',
                 top: '20px',
@@ -564,14 +718,13 @@ var art = new Artplayer({
 
     it(`Configuration.contextmenu`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     contextmenu: [
         {
             html: 'Custom menu',
-            click: function(contextmenu) {
+            click: function (contextmenu) {
                 console.info('You clicked on the custom menu');
                 contextmenu.show = false;
             },
@@ -584,10 +737,9 @@ var art = new Artplayer({
 
     it(`Configuration.controls`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     controls: [
         {
             name: 'myController',
@@ -595,7 +747,7 @@ var art = new Artplayer({
             index: 10,
             html: 'myController',
             tooltip: 'This is my controller',
-            click: function() {
+            click: function () {
                 console.log('myController');
             },
         },
@@ -607,10 +759,9 @@ var art = new Artplayer({
 
     it(`Configuration.plugins`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     plugins: [
         function myPlugin(art) {
             // Do something you like here.
@@ -619,7 +770,7 @@ var art = new Artplayer({
             return {
                 // This exposes plugin properties or methods for others to use. Like:
                 something: 'something',
-                doSomething: function() {
+                doSomething: function () {
                     console.info('Do something here...');
                 },
             };
@@ -635,17 +786,16 @@ art.plugins.myPlugin.doSomething();
 
     it(`Properties.instance`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 console.log('isFocus', art.isFocus);
 console.log('isDestroy', art.isDestroy);
 console.log('option', art.option);
 
-setTimeout(function() {
+setTimeout(function () {
     // remove dom
     art.destroy();
 
@@ -658,10 +808,9 @@ setTimeout(function() {
 
     it(`Properties.player`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 art.on('ready', () => {
@@ -674,10 +823,9 @@ art.on('ready', () => {
 
     it(`Properties.storage`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 art.storage.set('your-key', 'your-value');
@@ -688,10 +836,9 @@ console.log(art.storage.get('your-key'));
 
     it(`Properties.i18n`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     lang: 'jp',
 });
 
@@ -712,12 +859,26 @@ console.log(art.i18n.get('Language'));
     });
         
 
-    it(`Properties.notice`, function() {
+    it(`Properties.hotkey`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
+});
+
+// Add a hotkey
+art.hotkey.add(27, function (event) {
+    console.log('You pressed esc button');
+});
+
+    });
+        
+
+    it(`Properties.notice`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
 });
 
 // auto hide
@@ -728,14 +889,13 @@ art.notice.show = 'some message';
 
     it(`Properties.events`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 var target = document.querySelector('body');
-art.events.proxy(target, 'click', function(e) {
+art.events.proxy(target, 'click', function (e) {
     console.log('body click');
 });
 
@@ -744,10 +904,9 @@ art.events.proxy(target, 'click', function(e) {
 
     it(`Properties.layers`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 art.layers.add({
@@ -765,10 +924,9 @@ art.layers.add({
 
     it(`Properties.controls`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 art.controls.add({
@@ -777,7 +935,7 @@ art.controls.add({
     index: 10,
     html: 'myController',
     tooltip: 'This is my controller',
-    click: function() {
+    click: function () {
         console.log('myController');
     },
 });
@@ -787,15 +945,14 @@ art.controls.add({
 
     it(`Properties.contextmenu`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 art.contextmenu.add({
     html: 'Custom menu',
-    click: function(contextmenu) {
+    click: function (contextmenu) {
         console.info('You clicked on the custom menu');
         contextmenu.show = false;
     },
@@ -806,28 +963,27 @@ art.contextmenu.add({
 
     it(`Properties.subtitle`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     subtitle: {
-        url: url + '/subtitle/one-more-time-one-more-chance.srt',
+        url: '/assets/sample/subtitle.srt',
     },
     controls: [
         {
             position: 'right',
             index: 10,
             html: 'subtitle 01',
-            click: function() {
-                art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.srt', 'srt subtitle name');
+            click: function () {
+                art.subtitle.switch('/assets/sample/subtitle.srt', 'srt subtitle name');
             },
         },
         {
             position: 'right',
             index: 20,
             html: 'subtitle 02',
-            click: function() {
-                art.subtitle.switch(url + '/subtitle/one-more-time-one-more-chance.vtt', 'vtt subtitle name');
+            click: function () {
+                art.subtitle.switch('/assets/sample/subtitle.vtt', 'vtt subtitle name');
             },
         },
     ],
@@ -838,16 +994,15 @@ var art = new Artplayer({
 
     it(`Properties.loading`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
-art.on('ready', function() {
+art.on('ready', function () {
     // Show the loading
     art.loading.show = true;
-    setTimeout(function() {
+    setTimeout(function () {
         // Hide the loading
         art.loading.show = false;
     }, 5000);
@@ -858,16 +1013,15 @@ art.on('ready', function() {
 
     it(`Properties.mask`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
-art.on('ready', function() {
+art.on('ready', function () {
     // Show the mask
     art.mask.show = true;
-    setTimeout(function() {
+    setTimeout(function () {
         // Hide the mask
         art.mask.show = false;
     }, 5000);
@@ -878,14 +1032,13 @@ art.on('ready', function() {
 
     it(`Properties.setting`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
     setting: true,
 });
 
-art.on('ready', function() {
+art.on('ready', function () {
     // Add a setting
     art.setting.add({
         html: 'Your Setting',
@@ -894,7 +1047,7 @@ art.on('ready', function() {
 
     // Show the setting
     art.setting.show = true;
-    setTimeout(function() {
+    setTimeout(function () {
         // Hide the setting
         art.setting.show = false;
     }, 5000);
@@ -905,10 +1058,9 @@ art.on('ready', function() {
 
     it(`Properties.plugins`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/one-more-time-one-more-chance-480p.mp4',
+    url: '/assets/sample/video.mp4',
 });
 
 art.plugins.add(function myPlugin(art) {
@@ -918,7 +1070,7 @@ art.plugins.add(function myPlugin(art) {
     return {
         // This exposes plugin properties or methods for others to use. Like:
         something: 'something',
-        doSomething: function() {
+        doSomething: function () {
             console.info('Do something here...');
         },
     };
@@ -931,102 +1083,301 @@ art.plugins.myPlugin.doSomething();
     });
         
 
-    it(`lib=https://cdn.bootcss.com/flv.js/1.4.2/flv.js`, function() {
+    it(`Properties.instance`, function() {
             
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    autoplay: true,
-    url: url + '/video/one-more-time-one-more-chance-480p.flv',
-    customType: {
-        flv: function(video, url) {
-            const flvPlayer = flvjs.createPlayer({
-                type: 'flv',
-                url: url,
-            });
-            flvPlayer.attachMediaElement(video);
-            flvPlayer.load();
-        },
+    url: '/assets/sample/video.mp4',
+});
+
+console.log('isFocus', art.isFocus);
+console.log('isDestroy', art.isDestroy);
+console.log('option', art.option);
+
+setTimeout(function () {
+    // remove dom
+    art.destroy();
+
+    // keep dom
+    // art.destroy(false);
+}, 1000);
+
+    });
+        
+
+    it(`Properties.player`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.player.seek = 5;
+    art.player.screenshot();
+});
+
+    });
+        
+
+    it(`Properties.storage`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.storage.set('your-key', 'your-value');
+console.log(art.storage.get('your-key'));
+
+    });
+        
+
+    it(`Properties.i18n`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    lang: 'jp',
+});
+
+console.log(art.i18n.get('Play'));
+art.i18n.update({
+    'zh-cn': {
+        Language: '简体',
+    },
+    'zh-tw': {
+        Language: '繁體',
+    },
+    jp: {
+        Language: '日文',
+    },
+});
+console.log(art.i18n.get('Language'));
+
+    });
+        
+
+    it(`Properties.hotkey`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+// Add a hotkey
+art.hotkey.add(27, function (event) {
+    console.log('You pressed esc button');
+});
+
+    });
+        
+
+    it(`Properties.notice`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+// auto hide
+art.notice.show = 'some message';
+
+    });
+        
+
+    it(`Properties.events`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+var target = document.querySelector('body');
+art.events.proxy(target, 'click', function (e) {
+    console.log('body click');
+});
+
+    });
+        
+
+    it(`Properties.layers`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.layers.add({
+    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+    style: {
+        position: 'absolute',
+        top: '20px',
+        right: '20px',
+        opacity: '.9',
     },
 });
 
     });
         
 
-    it(`lib=https://cdn.bootcss.com/hls.js/0.10.1/hls.js`, function() {
+    it(`Properties.controls`, function() {
             
 var art = new Artplayer({
     container: '.artplayer-app',
-    autoplay: true,
-    url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-    customType: {
-        m3u8: function(video, url) {
-            var hls = new Hls();
-            hls.loadSource(url);
-            hls.attachMedia(video);
-        },
+    url: '/assets/sample/video.mp4',
+});
+
+art.controls.add({
+    name: 'myController',
+    position: 'right',
+    index: 10,
+    html: 'myController',
+    tooltip: 'This is my controller',
+    click: function () {
+        console.log('myController');
     },
 });
 
     });
         
 
-    it(`lib=https://cdn.bootcss.com/dashjs/2.9.2/dash.all.min.js`, function() {
+    it(`Properties.contextmenu`, function() {
             
 var art = new Artplayer({
     container: '.artplayer-app',
-    autoplay: true,
-    url: 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd',
-    customType: {
-        mpd: function(video, url) {
-            var player = dashjs.MediaPlayer().create();
-            player.initialize(video, url, true);
-        },
+    url: '/assets/sample/video.mp4',
+});
+
+art.contextmenu.add({
+    html: 'Custom menu',
+    click: function (contextmenu) {
+        console.info('You clicked on the custom menu');
+        contextmenu.show = false;
     },
 });
 
     });
         
 
-    it(`lib=https://cdn.bootcss.com/shaka-player/2.5.0-beta/shaka-player.compiled.js`, function() {
+    it(`Properties.subtitle`, function() {
             
 var art = new Artplayer({
     container: '.artplayer-app',
-    autoplay: true,
-    url: '//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd',
-    customType: {
-        mpd: function(video, url) {
-            shaka.polyfill.installAll();
-            var player = new shaka.Player(video);
-            player.load(url);
-        },
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
     },
+    controls: [
+        {
+            position: 'right',
+            index: 10,
+            html: 'subtitle 01',
+            click: function () {
+                art.subtitle.switch('/assets/sample/subtitle.srt', 'srt subtitle name');
+            },
+        },
+        {
+            position: 'right',
+            index: 20,
+            html: 'subtitle 02',
+            click: function () {
+                art.subtitle.switch('/assets/sample/subtitle.vtt', 'vtt subtitle name');
+            },
+        },
+    ],
 });
 
     });
         
 
-    it(`lib=https://cdn.bootcss.com/webtorrent/0.102.4/webtorrent.min.js`, function() {
+    it(`Properties.loading`, function() {
             
 var art = new Artplayer({
     container: '.artplayer-app',
-    autoplay: true,
-    url:
-        'magnet:?xt=urn:btih:6a9759bffd5c0af65319979fb7832189f4f3c35d&dn=sintel.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.io&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel-1024-surround.mp4',
-    type: 'torrent',
-    customType: {
-        torrent: function(video, url, art) {
-            var client = new WebTorrent();
-            art.loading.show = true;
-            client.add(url, function(torrent) {
-                var file = torrent.files[0];
-                file.renderTo(video, {
-                    autoplay: true,
-                });
-            });
-        },
-    },
+    url: '/assets/sample/video.mp4',
 });
+
+art.on('ready', function () {
+    // Show the loading
+    art.loading.show = true;
+    setTimeout(function () {
+        // Hide the loading
+        art.loading.show = false;
+    }, 5000);
+});
+
+    });
+        
+
+    it(`Properties.mask`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', function () {
+    // Show the mask
+    art.mask.show = true;
+    setTimeout(function () {
+        // Hide the mask
+        art.mask.show = false;
+    }, 5000);
+});
+
+    });
+        
+
+    it(`Properties.setting`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+});
+
+art.on('ready', function () {
+    // Add a setting
+    art.setting.add({
+        html: 'Your Setting',
+        name: 'yourSetting',
+    });
+
+    // Show the setting
+    art.setting.show = true;
+    setTimeout(function () {
+        // Hide the setting
+        art.setting.show = false;
+    }, 5000);
+});
+
+    });
+        
+
+    it(`Properties.plugins`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.plugins.add(function myPlugin(art) {
+    // Do something you like here.
+    // You can also return an object for external calls.
+    console.info('myPlugin running...');
+    return {
+        // This exposes plugin properties or methods for others to use. Like:
+        something: 'something',
+        doSomething: function () {
+            console.info('Do something here...');
+        },
+    };
+});
+
+// Call plugin from the outside
+art.plugins.myPlugin.something === 'something';
+art.plugins.myPlugin.doSomething();
 
     });
         ;

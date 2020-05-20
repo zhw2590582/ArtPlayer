@@ -3,9 +3,21 @@ const path = require('path');
 const logger = require('./logger');
 
 try {
-    const documentText = fs.readFileSync(path.resolve(__dirname, '../docs/document/README.md'), 'utf-8');
+    const documentText = [
+        'README.md',
+        'class.md',
+        'events.md',
+        'libraries.md',
+        'options.md',
+        'properties.md',
+        'properties.md',
+    ]
+        .map((name) => {
+            return fs.readFileSync(path.resolve(__dirname, '../docs/document/' + name), 'utf-8');
+        })
+        .join('');
     const jsTests = documentText.match(/\[Run Code\]\(\/([\s\S]*?)\)\n\n\`{3}js([\s\S]*?)\`{3}/g);
-    const jsBlocks = jsTests.map(item => {
+    const jsBlocks = jsTests.map((item) => {
         const result = item.match(/\[Run Code\]\(\/([\s\S]*)\)\n\n\`{3}js([\s\S]*?)\`{3}/);
         return {
             name: result[1],
@@ -24,7 +36,7 @@ describe('Document', function() {
     });
 
     ${jsBlocks
-        .map(item => {
+        .map((item) => {
             return `
     it(\`${item.name}\`, function() {
             ${item.code}
