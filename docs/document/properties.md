@@ -244,7 +244,7 @@ var art = new Artplayer({
 });
 
 art.layers.add({
-    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+    html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
     style: {
         position: 'absolute',
         top: '20px',
