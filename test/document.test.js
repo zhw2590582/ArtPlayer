@@ -54,28 +54,35 @@ console.log(Artplayer.option);
 
     it(`Class.instances`, function() {
             
-console.log(Artplayer.instances.length);
+console.info(Artplayer.instances);
 
     });
         
 
     it(`Class.scheme`, function() {
             
-console.log(Artplayer.scheme);
+console.info(Artplayer.scheme);
 
     });
         
 
     it(`Class.validator`, function() {
             
-console.log(Artplayer.validator);
+console.info(Artplayer.validator);
 
     });
         
 
     it(`Class.kindOf`, function() {
             
-console.log(Artplayer.kindOf);
+console.info(Artplayer.kindOf);
+
+    });
+        
+
+    it(`Class.Emitter`, function() {
+            
+console.info(Artplayer.Emitter);
 
     });
         
@@ -931,7 +938,7 @@ var art = new Artplayer({
 });
 
 art.layers.add({
-    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+    html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
     style: {
         position: 'absolute',
         top: '20px',
@@ -1230,7 +1237,7 @@ var art = new Artplayer({
 });
 
 art.layers.add({
-    html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+    html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
     style: {
         position: 'absolute',
         top: '20px',
