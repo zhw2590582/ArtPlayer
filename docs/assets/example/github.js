@@ -6,10 +6,9 @@ var danmuku = new ArtplayerToolGithub({
     clientSecret: '7bb6fa67ef6e525e5bd5fda46cd3925ecc4a3760',
 });
 
-var url = 'https://zhw2590582.github.io/assets-cdn';
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: url + '/video/your-name.mp4',
+    url: '/assets/sample/video.mp4',
     autoSize: true,
     controls: [
         {

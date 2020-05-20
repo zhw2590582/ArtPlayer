@@ -1,36 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>ArtPlayer Document</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta name="keywords" content="artplayer,html5,video,player">
   <meta name="description" content="ArtPlayer is a modern HTML5 video player">
   <link rel="shortcut icon" href="./favicon.ico">
-  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="https://unpkg.com/docsify/lib/themes/vue.css">
 </head>
+
 <body>
-  <div id="app"></div>
-  <script src="./common.js"></script>
+  <div id="app">Loading</div>
   <script>
     window.$docsify = {
       name: 'ArtPlayer',
       repo: 'zhw2590582/ArtPlayer',
       maxLevel: 4,
+      auto2top: true,
       subMaxLevel: 2,
-      plugins: [window.runCode]
+      loadSidebar: true,
+      plugins: [function (hook) {
+        hook.ready(function () {
+          document.addEventListener('click', function (event) {
+            if (event.target.tagName === 'A' && event.target.innerHTML === 'Run Code') {
+              event.preventDefault();
+              var codeElement = event.target.parentElement.nextElementSibling;
+              if (
+                codeElement.tagName === 'PRE' &&
+                codeElement.dataset.lang === 'js'
+              ) {
+                var libs = event.target.href.split('/lib=')[1] || '';
+                var code = encodeURIComponent(codeElement.innerText);
+                var url = 'http://localhost:8081/?libs=' + libs + '&code=' + code;
+                window.open(url);
+              }
+            }
+          });
+        });
+      }]
     }
   </script>
-  <script src="https://unpkg.com/docsify@4.10.2/lib/docsify.min.js"></script>
+  <script src="https://unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="https://unpkg.com/docsify/lib/plugins/search.min.js"></script>
   <script>
-      var _hmt = _hmt || [];
-      (function() {
+    var isLocalhost = Boolean(
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '[::1]' ||
+      window.location.hostname.match(
+        /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+      )
+    );
+    var _hmt = _hmt || [];
+    (function () {
+      if (!isLocalhost) {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
-      })();
+      }
+    })();
   </script>
 </body>
+
 </html>
