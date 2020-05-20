@@ -67,7 +67,7 @@ Return an array of all player instances
 [Run Code](/Class.instances)
 
 ```js
-console.log(Artplayer.instances.length);
+console.info(Artplayer.instances);
 ```
 
 ## scheme
@@ -79,7 +79,7 @@ Return the scheme used to verify player options
 [Run Code](/Class.scheme)
 
 ```js
-console.log(Artplayer.scheme);
+console.info(Artplayer.scheme);
 ```
 
 ## validator
@@ -91,7 +91,7 @@ Return validator: [https://github.com/zhw2590582/option-validator](https://githu
 [Run Code](/Class.validator)
 
 ```js
-console.log(Artplayer.validator);
+console.info(Artplayer.validator);
 ```
 
 ## kindOf
@@ -103,5 +103,17 @@ Return type judgment function: [https://github.com/jonschlinkert/kind-of](https:
 [Run Code](/Class.kindOf)
 
 ```js
-console.log(Artplayer.kindOf);
+console.info(Artplayer.kindOf);
+```
+
+## Emitter
+
+-   Type: `Function`
+
+Return the `Emitter` constructor
+
+[Run Code](/Class.Emitter)
+
+```js
+console.info(Artplayer.Emitter);
 ```
