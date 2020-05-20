@@ -19,28 +19,28 @@ var art = new Artplayer({
 
     it(`Class.version`, function() {
             
-console.log(Artplayer.version);
+console.info(Artplayer.version);
 
     });
         
 
     it(`Class.env`, function() {
             
-console.log(Artplayer.env);
+console.info(Artplayer.env);
 
     });
         
 
     it(`Class.config`, function() {
             
-console.log(Artplayer.config);
+console.info(Artplayer.config);
 
     });
         
 
     it(`Class.utils`, function() {
             
-console.log(Artplayer.utils);
+console.info(Object.keys(Artplayer.utils));
 
     });
         
@@ -66,13 +66,6 @@ console.log(Artplayer.scheme);
     });
         
 
-    it(`Class.Emitter`, function() {
-            
-console.log(Artplayer.Emitter);
-
-    });
-        
-
     it(`Class.validator`, function() {
             
 console.log(Artplayer.validator);
@@ -83,6 +76,34 @@ console.log(Artplayer.validator);
     it(`Class.kindOf`, function() {
             
 console.log(Artplayer.kindOf);
+
+    });
+        
+
+    it(`Events.canplay`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('video:canplay', function (event) {
+    console.info(event);
+});
+
+    });
+        
+
+    it(`Events.example`, function() {
+            
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', function (args) {
+    console.info('The player can play');
+});
 
     });
         
