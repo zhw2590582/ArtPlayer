@@ -56,44 +56,44 @@ art.on('video:canplay', function (event) {
 
 ## Subtitle
 
-| Event             | Description                   | Parameter             |
-| ----------------- | ----------------------------- | --------------------- |
-| `subtitle:update` | When the subtitles change     | Current subtitle text |
-| `subtitle:switch` | When switching subtitles      | Current subtitle url  |
-| `subtitle:load`   | When the subtitles loaded     | Current subtitle url  |
-| `subtitle:err`    | When the subtitles load error | Error object          |
-| `subtitle:toggle` | When displaying subtitles     | Whether to show       |
+| Event            | Description                   | Parameter             |
+| ---------------- | ----------------------------- | --------------------- |
+| `subtitleUpdate` | When the subtitles change     | Current subtitle text |
+| `subtitleSwitch` | When switching subtitles      | Current subtitle url  |
+| `subtitleLoad`   | When the subtitles loaded     | Current subtitle url  |
+| `subtitleErr`    | When the subtitles load error | Error object          |
+| `subtitleToggle` | When displaying subtitles     | Whether to show       |
 
 ## Notice
 
-| Event           | Description            | Parameter       |
-| --------------- | ---------------------- | --------------- |
-| `notice:toggle` | When displaying notice | Whether to show |
+| Event          | Description            | Parameter       |
+| -------------- | ---------------------- | --------------- |
+| `noticeToggle` | When displaying notice | Whether to show |
 
 ## Mask
 
-| Event         | Description          | Parameter       |
-| ------------- | -------------------- | --------------- |
-| `mask:toggle` | When displaying mask | Whether to show |
+| Event        | Description          | Parameter       |
+| ------------ | -------------------- | --------------- |
+| `maskToggle` | When displaying mask | Whether to show |
 
 ## Loading
 
-| Event            | Description             | Parameter       |
-| ---------------- | ----------------------- | --------------- |
-| `loading:toggle` | When displaying loading | Whether to show |
+| Event           | Description             | Parameter       |
+| --------------- | ----------------------- | --------------- |
+| `loadingToggle` | When displaying loading | Whether to show |
 
 ## Layer
 
-| Event          | Description             | Parameter           |
-| -------------- | ----------------------- | ------------------- |
-| `layer:add`    | When adding a new layer | Layer configuration |
-| `layer:toggle` | When displaying layer   | Whether to show     |
+| Event         | Description             | Parameter           |
+| ------------- | ----------------------- | ------------------- |
+| `layerAdd`    | When adding a new layer | Layer configuration |
+| `layerToggle` | When displaying layer   | Whether to show     |
 
 ## Info
 
-| Event         | Description          | Parameter       |
-| ------------- | -------------------- | --------------- |
-| `info:toggle` | When displaying info | Whether to show |
+| Event        | Description          | Parameter       |
+| ------------ | -------------------- | --------------- |
+| `infoToggle` | When displaying info | Whether to show |
 
 ## Hotkey
 
@@ -103,27 +103,27 @@ art.on('video:canplay', function (event) {
 
 ## Setting
 
-| Event            | Description               | Parameter             |
-| ---------------- | ------------------------- | --------------------- |
-| `setting:add`    | When adding a new setting | Setting configuration |
-| `setting:toggle` | When displaying setting   | Whether to show       |
+| Event           | Description               | Parameter             |
+| --------------- | ------------------------- | --------------------- |
+| `settingAdd`    | When adding a new setting | Setting configuration |
+| `settingToggle` | When displaying setting   | Whether to show       |
 
 ## Contextmenu
 
-| Event                | Description                   | Parameter                 |
-| -------------------- | ----------------------------- | ------------------------- |
-| `contextmenu:add`    | When adding a new contextmenu | Contextmenu configuration |
-| `contextmenu:toggle` | When displaying contextmenu   | Whether to show           |
+| Event               | Description                   | Parameter                 |
+| ------------------- | ----------------------------- | ------------------------- |
+| `contextmenuAdd`    | When adding a new contextmenu | Contextmenu configuration |
+| `contextmenuToggle` | When displaying contextmenu   | Whether to show           |
 
 ## Control
 
-| Event            | Description               | Parameter             |
-| ---------------- | ------------------------- | --------------------- |
-| `control:add`    | When adding a new control | Control configuration |
-| `control:toggle` | When displaying control   | Whether to show       |
+| Event           | Description               | Parameter             |
+| --------------- | ------------------------- | --------------------- |
+| `controlAdd`    | When adding a new control | Control configuration |
+| `controlToggle` | When displaying control   | Whether to show       |
 
 ## Plugins
 
-| Event        | Description              | Parameter            |
-| ------------ | ------------------------ | -------------------- |
-| `plugin:add` | When adding a new plugin | Plugin configuration |
+| Event       | Description              | Parameter            |
+| ----------- | ------------------------ | -------------------- |
+| `pluginAdd` | When adding a new plugin | Plugin configuration |

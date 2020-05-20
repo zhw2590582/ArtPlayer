@@ -39,7 +39,7 @@ export default class Subtitle extends Component {
                 .split(/\r?\n/)
                 .map((item) => `<p>${escape(item)}</p>`)
                 .join('');
-            this.art.emit('subtitle:update', this.activeCue.text);
+            this.art.emit('subtitleUpdate', this.activeCue.text);
         }
     }
 
@@ -49,7 +49,7 @@ export default class Subtitle extends Component {
             if (name) {
                 notice.show = `${i18n.get('Switch subtitle')}: ${name}`;
             }
-            this.art.emit('subtitle:switch', subUrl);
+            this.art.emit('subtitleSwitch', subUrl);
             return subUrl;
         });
     }
@@ -73,7 +73,7 @@ export default class Subtitle extends Component {
         return fetch(url)
             .then((response) => response.text())
             .then((text) => {
-                this.art.emit('subtitle:load', url);
+                this.art.emit('subtitleLoad', url);
                 switch (ext || getExt(url)) {
                     case 'srt':
                         return vttToBlob(srtToVtt(text));
@@ -94,7 +94,7 @@ export default class Subtitle extends Component {
             })
             .catch((err) => {
                 notice.show = err;
-                this.art.emit('subtitle:err', err);
+                this.art.emit('subtitleErr', err);
                 throw err;
             });
     }

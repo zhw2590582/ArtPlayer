@@ -17,7 +17,7 @@ export default function miniProgressBar(art) {
             background: theme,
         },
         mounted($progressBar) {
-            art.on('control:toggle', value => {
+            art.on('controlToggle', value => {
                 $progressBar.style.display = value ? 'none' : 'block';
             });
 

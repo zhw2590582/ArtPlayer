@@ -21,7 +21,7 @@ export default class Component {
         } else {
             removeClass($player, className);
         }
-        this.art.emit(`${this.name}:toggle`, value);
+        this.art.emit(`${this.name}Toggle`, value);
     }
 
     set toggle(value) {
@@ -75,7 +75,7 @@ export default class Component {
             callback($ref, this, this.art);
         }
 
-        this.art.emit(`${this.name}:add`, option);
+        this.art.emit(`${this.name}Add`, option);
 
         def(this, name, {
             get: () => option,

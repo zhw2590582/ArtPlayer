@@ -2367,7 +2367,7 @@
           callback($ref, this, this.art);
         }
 
-        this.art.emit("".concat(this.name, ":add"), option);
+        this.art.emit("".concat(this.name, "Add"), option);
         def(this, name, {
           get: function get() {
             return option;
@@ -2389,7 +2389,7 @@
           removeClass($player, className);
         }
 
-        this.art.emit("".concat(this.name, ":toggle"), value);
+        this.art.emit("".concat(this.name, "Toggle"), value);
       }
     }, {
       key: "toggle",
@@ -2684,7 +2684,7 @@
           proxy($control, 'click', function () {
             subtitle.toggle = true;
           });
-          art.on('subtitle:toggle', function (value) {
+          art.on('subtitleToggle', function (value) {
             tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
           });
         }
@@ -2815,7 +2815,7 @@
           proxy($control, 'click', function () {
             setting.toggle = true;
           });
-          art.on('setting:toggle', function (value) {
+          art.on('settingToggle', function (value) {
             tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
           });
         }
@@ -3403,7 +3403,7 @@
         }, 1000);
       }
 
-      art.on('info:toggle', function (value) {
+      art.on('infoToggle', function (value) {
         clearTimeout(timer);
 
         if (value) {
@@ -3449,7 +3449,7 @@
           $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map(function (item) {
             return "<p>".concat(escape(item), "</p>");
           }).join('');
-          this.art.emit('subtitle:update', this.activeCue.text);
+          this.art.emit('subtitleUpdate', this.activeCue.text);
         }
       }
     }, {
@@ -3465,7 +3465,7 @@
             notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(name);
           }
 
-          _this2.art.emit('subtitle:switch', subUrl);
+          _this2.art.emit('subtitleSwitch', subUrl);
 
           return subUrl;
         });
@@ -3494,7 +3494,7 @@
         return fetch(url).then(function (response) {
           return response.text();
         }).then(function (text) {
-          _this3.art.emit('subtitle:load', url);
+          _this3.art.emit('subtitleLoad', url);
 
           switch (ext || getExt(url)) {
             case 'srt':
@@ -3518,7 +3518,7 @@
         }).catch(function (err) {
           notice.show = err;
 
-          _this3.art.emit('subtitle:err', err);
+          _this3.art.emit('subtitleErr', err);
 
           throw err;
         });
@@ -4392,7 +4392,7 @@
         background: theme
       },
       mounted: function mounted($progressBar) {
-        art.on('control:toggle', function (value) {
+        art.on('controlToggle', function (value) {
           $progressBar.style.display = value ? 'none' : 'block';
         });
         art.on('destroy', function () {
@@ -4512,7 +4512,7 @@
         def(this, pluginName, {
           value: result
         });
-        this.art.emit('plugin:add', plugin);
+        this.art.emit('pluginAdd', plugin);
         return this;
       }
     }]);

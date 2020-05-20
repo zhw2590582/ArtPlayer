@@ -18,7 +18,7 @@ export default function subtitle(option) {
                 subtitle.toggle = true;
             });
 
-            art.on('subtitle:toggle', value => {
+            art.on('subtitleToggle', value => {
                 tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
             });
         },

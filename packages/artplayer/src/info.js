@@ -33,7 +33,7 @@ export default class Info extends Component {
             }, 1000);
         }
 
-        art.on('info:toggle', value => {
+        art.on('infoToggle', value => {
             clearTimeout(timer);
             if (value) {
                 loop();

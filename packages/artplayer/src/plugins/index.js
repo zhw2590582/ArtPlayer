@@ -45,7 +45,7 @@ export default class Plugins {
         def(this, pluginName, {
             value: result,
         });
-        this.art.emit('plugin:add', plugin);
+        this.art.emit('pluginAdd', plugin);
         return this;
     }
 }

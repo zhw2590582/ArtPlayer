@@ -18,7 +18,7 @@ export default function setting(option) {
                 setting.toggle = true;
             });
 
-            art.on('setting:toggle', value => {
+            art.on('settingToggle', value => {
                 tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
             });
         },
