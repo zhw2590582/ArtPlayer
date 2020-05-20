@@ -121,10 +121,10 @@ $ npm start
 
 We accept donations through these channels:
 
+![pay](./images/pay.png)
+
 -   [Patreon](https://www.patreon.com/artplayer)
 -   [Paypal](https://www.paypal.me/harveyzack)
--   [WeChat Pay](./images/wechatpay.jpg)
--   [Alipay](./images/alipay.jpg)
 
 ## QQ Group
 
