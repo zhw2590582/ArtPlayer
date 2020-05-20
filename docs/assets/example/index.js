@@ -42,7 +42,7 @@ var art = new Artplayer({
     ],
     layers: [
         {
-            html: `<img style="width: 100px" src="${url}/image/your-name.png">`,
+            html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
             click: function() {
                 console.info('You clicked on the custom layer');
             },
