@@ -1,5 +1,5 @@
 /*!
- * artplayer-tool-github.js v3.5.5
+ * artplayer-tool-github.js v3.5.8
  * Github: https://github.com/zhw2590582/ArtPlayer#readme
  * (c) 2017-2020 Harvey Zack
  * Released under the MIT License.
