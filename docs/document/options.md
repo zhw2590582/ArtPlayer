@@ -54,7 +54,7 @@ Specify the format for the `url`, use with `customType`
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'path/to/video.flv',
+    url: '/assets/sample/video.flv',
     type: 'flv',
 });
 ```
@@ -71,7 +71,7 @@ Customize when loading third-party libraries
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'path/to/video.flv',
+    url: '/assets/sample/video.flv',
     type: 'flv',
     customType: {
         flv: function (video, url, art) {
@@ -815,12 +815,13 @@ Custom layer, The type of layer is an object or function
 [Run Code](/Configuration.layers)
 
 ```js
+var layer = '/assets/sample/layer.png';
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
+            html: `<img style="width: 100px" src="${layer}">`,
             style: {
                 position: 'absolute',
                 top: '20px',

@@ -243,8 +243,9 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
+var layer = '/assets/sample/layer.png';
 art.layers.add({
-    html: `<img style="width: 100px" src="/assets/sample/layer.png">`,
+    html: `<img style="width: 100px" src="${layer}">`,
     style: {
         position: 'absolute',
         top: '20px',
