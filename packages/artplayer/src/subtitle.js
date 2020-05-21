@@ -20,7 +20,7 @@ export default class Subtitle extends Component {
     }
 
     get url() {
-        return this.$track.src;
+        return this.art.template.$track.src;
     }
 
     get textTrack() {
@@ -58,15 +58,15 @@ export default class Subtitle extends Component {
         const {
             notice,
             events: { proxy },
-            template: { $subtitle, $video },
+            template: { $subtitle, $video, $track },
         } = this.art;
 
-        if (!this.$track) {
+        if (!$track) {
             const $track = document.createElement('track');
             $track.default = true;
             $track.kind = 'metadata';
             $video.appendChild($track);
-            this.$track = $track;
+            this.art.template.$track = $track;
             proxy(this.textTrack, 'cuechange', this.update.bind(this));
         }
 
@@ -89,7 +89,7 @@ export default class Subtitle extends Component {
                 $subtitle.innerHTML = '';
                 if (this.url === subUrl) return subUrl;
                 URL.revokeObjectURL(this.url);
-                this.$track.src = subUrl;
+                this.art.template.$track.src = subUrl;
                 return subUrl;
             })
             .catch((err) => {

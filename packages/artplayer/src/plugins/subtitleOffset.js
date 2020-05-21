@@ -19,7 +19,7 @@ function settingMix(art) {
                 <input class="art-subtitle-range" value="0" type="range" min="-5" max="5" step="0.5">
             </div>
         `,
-        mounted: $setting => {
+        mounted: ($setting) => {
             const $range = query('.art-setting-range input', $setting);
             const $value = query('.art-subtitle-value', $setting);
             proxy($range, 'change', () => {
@@ -33,7 +33,7 @@ function settingMix(art) {
                 $value.innerText = 0;
             });
 
-            art.on('subtitleOffset', value => {
+            art.on('subtitleOffset', (value) => {
                 subtitle.update();
                 if ($range.value !== value) {
                     $range.value = value;
