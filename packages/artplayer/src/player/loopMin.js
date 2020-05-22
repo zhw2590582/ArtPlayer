@@ -10,14 +10,14 @@ export default function loopMin(art, player) {
                 const end = clamp(value[1], start, player.duration);
                 if (end - start >= 1) {
                     interval = [start, end];
-                    art.emit('loopAdd', interval);
+                    art.emit('loop', interval);
                 } else {
                     interval = [];
-                    art.emit('loopRemove');
+                    art.emit('loop');
                 }
             } else {
                 interval = [];
-                art.emit('loopRemove');
+                art.emit('loop');
             }
         },
     });
@@ -26,7 +26,6 @@ export default function loopMin(art, player) {
         if (interval.length) {
             if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
                 player.seek = interval[0];
-                art.emit('loopStart', interval);
             }
         }
     });

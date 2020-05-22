@@ -20,14 +20,14 @@ export default function fullscreenRotateMix(art, player) {
                     const scale = Math.min(bodyHeight / playerWidth, bodyWidth / playerHeight).toFixed(2);
                     setStyle($player, 'transform', `rotate(90deg) scale(${scale},${scale})`);
                     art.emit('resize');
-                    art.emit('fullscreenRotateChange', true);
+                    art.emit('fullscreenRotate', true);
                 }
             } else {
                 removeClass($container, 'art-fullscreen-rotate');
                 player.autoSize = art.option.autoSize;
                 setStyle($player, 'transform', null);
                 art.emit('resize');
-                art.emit('fullscreenRotateChange', false);
+                art.emit('fullscreenRotate');
             }
         },
     });

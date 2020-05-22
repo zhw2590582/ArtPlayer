@@ -94,7 +94,6 @@ export default class Subtitle extends Component {
             })
             .catch((err) => {
                 notice.show = err;
-                this.art.emit('subtitleErr', err);
                 throw err;
             });
     }

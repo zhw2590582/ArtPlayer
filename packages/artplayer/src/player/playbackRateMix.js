@@ -19,11 +19,11 @@ export default function playbackRateMix(art, player) {
                 $video.playbackRate = rate;
                 $player.dataset.playbackRate = rate;
                 notice.show = `${i18n.get('Rate')}: ${rate === 1.0 ? i18n.get('Normal') : `${rate}x`}`;
-                art.emit('playbackRateChange', rate);
+                art.emit('playbackRate', rate);
             } else if (player.playbackRate) {
                 player.playbackRate = 1;
                 delete $player.dataset.playbackRate;
-                art.emit('playbackRateRemove');
+                art.emit('playbackRate');
             }
         },
     });
@@ -34,7 +34,6 @@ export default function playbackRateMix(art, player) {
                 const { playbackRate } = $player.dataset;
                 if (playbackRate) {
                     player.playbackRate = Number(playbackRate);
-                    art.emit('playbackRateReset');
                 }
             }
         },

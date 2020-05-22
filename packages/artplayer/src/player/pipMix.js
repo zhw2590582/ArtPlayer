@@ -29,11 +29,11 @@ function nativePip(art, player) {
     });
 
     proxy($video, 'enterpictureinpicture', () => {
-        art.emit('pipChange', true);
+        art.emit('pip', true);
     });
 
     proxy($video, 'leavepictureinpicture', () => {
-        art.emit('pipChange', false);
+        art.emit('pip');
     });
 }
 
@@ -49,10 +49,10 @@ function webkitPip(art, player) {
         set(value) {
             if (value) {
                 $video.webkitSetPresentationMode('picture-in-picture');
-                art.emit('pipChange', true);
+                art.emit('pip', true);
             } else {
                 $video.webkitSetPresentationMode('inline');
-                art.emit('pipChange', false);
+                art.emit('pip');
             }
         },
     });

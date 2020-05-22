@@ -26,7 +26,7 @@ export default function flip(option) {
                 }
             },
             mounted: $setting => {
-                art.on('flipChange', flip => {
+                art.on('flip', flip => {
                     const $current = queryAll('button', $setting).find(item => item.dataset.value === flip);
                     if ($current) {
                         inverseClass($current.parentElement, 'current');

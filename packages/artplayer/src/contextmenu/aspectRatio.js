@@ -1,7 +1,7 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function aspectRatio(option) {
-    return art => {
+    return (art) => {
         const { i18n, player } = art;
         return {
             ...option,
@@ -17,9 +17,9 @@ export default function aspectRatio(option) {
                     contextmenu.show = false;
                 }
             },
-            mounted: $menu => {
-                art.on('aspectRatioChange', ratio => {
-                    const $current = queryAll('span', $menu).find(item => item.dataset.ratio === ratio);
+            mounted: ($menu) => {
+                art.on('aspectRatio', (ratio) => {
+                    const $current = queryAll('span', $menu).find((item) => item.dataset.ratio === ratio);
                     if ($current) {
                         inverseClass($current, 'art-current');
                     }

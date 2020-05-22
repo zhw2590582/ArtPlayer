@@ -42,13 +42,13 @@ export default function aspectRatioMix(art, player) {
 
                 $player.dataset.aspectRatio = ratio;
                 notice.show = `${i18n.get('Aspect ratio')}: ${ratio === 'default' ? i18n.get('Default') : ratio}`;
-                art.emit('aspectRatioChange', ratio);
+                art.emit('aspectRatio', ratio);
             } else if (player.aspectRatio) {
                 setStyle($video, 'width', null);
                 setStyle($video, 'height', null);
                 setStyle($video, 'padding', null);
                 delete $player.dataset.aspectRatio;
-                art.emit('aspectRatioRemove');
+                art.emit('aspectRatio');
             }
         },
     });
@@ -58,7 +58,6 @@ export default function aspectRatioMix(art, player) {
             if (value && player.aspectRatio) {
                 const { aspectRatio } = player;
                 player.aspectRatio = aspectRatio;
-                art.emit('aspectRatioReset');
             }
         },
     });

@@ -79,7 +79,7 @@ export default function minMix(art, player) {
                 }
                 player.aspectRatio = false;
                 player.playbackRate = false;
-                art.emit('minChange', true);
+                art.emit('min', true);
             } else {
                 $player.style.cssText = cacheStyle;
                 removeClass($player, 'art-min');
@@ -88,7 +88,7 @@ export default function minMix(art, player) {
                 player.aspectRatio = false;
                 player.playbackRate = false;
                 player.autoSize = option.autoSize;
-                art.emit('minChange', false);
+                art.emit('min');
             }
         },
     });

@@ -14,7 +14,7 @@ export default function fullscreenMix(art, player) {
                     addClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
                     art.emit('resize');
-                    art.emit('fullscreenChange', true);
+                    art.emit('fullscreen', true);
                 });
             } else {
                 screenfull.exit().then(() => {
@@ -22,7 +22,7 @@ export default function fullscreenMix(art, player) {
                     player.aspectRatioReset = true;
                     player.autoSize = art.option.autoSize;
                     art.emit('resize');
-                    art.emit('fullscreenChange', false);
+                    art.emit('fullscreen');
                 });
             }
         },

@@ -18,7 +18,7 @@ export default function pip(option) {
                 player.pipToggle = true;
             });
 
-            art.on('pipChange', (value) => {
+            art.on('pip', (value) => {
                 tooltip($control, i18n.get(value ? 'Exit PIP mode' : 'PIP mode'));
             });
         },

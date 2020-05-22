@@ -17,12 +17,11 @@ export default function urlMix(art, player) {
                 sleep().then(() => {
                     art.loading.show = true;
                     typeCallback.call(art, $video, url, art);
-                    art.emit('customType', typeName);
                 });
             } else {
                 $video.src = url;
                 art.option.url = url;
-                art.emit('urlChange', url);
+                art.emit('url', url);
             }
         },
     });

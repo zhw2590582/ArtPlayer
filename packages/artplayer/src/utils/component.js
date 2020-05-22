@@ -21,7 +21,7 @@ export default class Component {
         } else {
             removeClass($player, className);
         }
-        this.art.emit(`${this.name}Toggle`, value);
+        this.art.emit(this.name, value);
     }
 
     set toggle(value) {
@@ -53,7 +53,7 @@ export default class Component {
 
         const childs = Array.from(this.$parent.children);
         $ref.dataset.index = option.index || this.id;
-        const nextChild = childs.find(item => Number(item.dataset.index) >= Number($ref.dataset.index));
+        const nextChild = childs.find((item) => Number(item.dataset.index) >= Number($ref.dataset.index));
         if (nextChild) {
             nextChild.insertAdjacentElement('beforebegin', $ref);
         } else {
@@ -61,7 +61,7 @@ export default class Component {
         }
 
         if (option.click) {
-            this.art.events.proxy($ref, 'click', event => {
+            this.art.events.proxy($ref, 'click', (event) => {
                 event.preventDefault();
                 option.click.call(this.art, this, event);
             });
@@ -74,8 +74,6 @@ export default class Component {
         if (callback) {
             callback($ref, this, this.art);
         }
-
-        this.art.emit(`${this.name}Add`, option);
 
         def(this, name, {
             get: () => option,

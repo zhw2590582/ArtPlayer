@@ -1,4 +1,4 @@
-import { secondToTime, downloadFile, def } from '../utils';
+import { secondToTime, download, def } from '../utils';
 
 export default function screenshotMix(art, player) {
     const {
@@ -7,30 +7,31 @@ export default function screenshotMix(art, player) {
         template: { $video },
     } = art;
 
-    def(player, 'getScreenshotDataURL', {
-        value: () => {
-            try {
-                const canvas = document.createElement('canvas');
-                canvas.width = $video.videoWidth;
-                canvas.height = $video.videoHeight;
-                canvas.getContext('2d').drawImage($video, 0, 0);
-                return canvas.toDataURL('image/png');
-            } catch (err) {
-                notice.show = err;
-                throw err;
-            }
-        },
-    });
+    const $canvas = document.createElement('canvas');
 
-    def(player, 'getScreenshotBlobUrl', {
+    def(player, 'getDataURL', {
         value: () =>
             new Promise((resolve, reject) => {
                 try {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = $video.videoWidth;
-                    canvas.height = $video.videoHeight;
-                    canvas.getContext('2d').drawImage($video, 0, 0);
-                    canvas.toBlob(blob => {
+                    $canvas.width = $video.videoWidth;
+                    $canvas.height = $video.videoHeight;
+                    $canvas.getContext('2d').drawImage($video, 0, 0);
+                    resolve($canvas.toDataURL('image/png'));
+                } catch (err) {
+                    notice.show = err;
+                    reject(err);
+                }
+            }),
+    });
+
+    def(player, 'getBlobUrl', {
+        value: () =>
+            new Promise((resolve, reject) => {
+                try {
+                    $canvas.width = $video.videoWidth;
+                    $canvas.height = $video.videoHeight;
+                    $canvas.getContext('2d').drawImage($video, 0, 0);
+                    $canvas.toBlob((blob) => {
                         resolve(URL.createObjectURL(blob));
                     });
                 } catch (err) {
@@ -42,11 +43,10 @@ export default function screenshotMix(art, player) {
 
     def(player, 'screenshot', {
         value: () => {
-            const dataUri = player.getScreenshotDataURL();
-            if (dataUri) {
-                downloadFile(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
+            player.getDataURL().then((dataUri) => {
+                download(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
                 art.emit('screenshot', dataUri);
-            }
+            });
         },
     });
 }

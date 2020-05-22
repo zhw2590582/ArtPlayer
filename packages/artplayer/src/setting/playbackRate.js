@@ -26,8 +26,8 @@ export default function playbackRate(option) {
                     player.playbackRate = Number(value);
                 });
 
-                art.on('playbackRateChange', rate => {
-                    if ($range.value !== rate) {
+                art.on('playbackRate', rate => {
+                    if (rate && $range.value !== rate) {
                         $range.value = rate;
                         $value.innerText = rate;
                     }

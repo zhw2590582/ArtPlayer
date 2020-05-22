@@ -44,7 +44,7 @@ export default class Mobile {
             art.emit('customType', typeName);
         } else {
             $video.src = option.url;
-            art.emit('urlChange', $video.src);
+            art.emit('url', $video.src);
         }
     }
 }

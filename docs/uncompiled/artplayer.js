@@ -475,7 +475,7 @@
 
     return url.trim().toLowerCase().split('.').pop();
   }
-  function downloadFile(url, name) {
+  function download(url, name) {
     var elink = document.createElement('a');
     elink.style.display = 'none';
     elink.href = url;
@@ -669,7 +669,7 @@
     vttToBlob: vttToBlob,
     assToVtt: assToVtt,
     getExt: getExt,
-    downloadFile: downloadFile,
+    download: download,
     def: def,
     has: has,
     proxyPropertys: proxyPropertys,
@@ -855,7 +855,7 @@
         var _this$art$option = this.art.option,
             theme = _this$art$option.theme,
             backdrop = _this$art$option.backdrop;
-        this.$container.innerHTML = "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.5</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-min-header\">\n              <div class=\"art-min-title\"></div>\n              <div class=\"art-min-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
+        this.$container.innerHTML = "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.8</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-min-header\">\n              <div class=\"art-min-title\"></div>\n              <div class=\"art-min-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
         this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
@@ -1083,12 +1083,11 @@
           sleep().then(function () {
             art.loading.show = true;
             typeCallback.call(art, $video, url, art);
-            art.emit('customType', typeName);
           });
         } else {
           $video.src = url;
           art.option.url = url;
-          art.emit('urlChange', url);
+          art.emit('url', url);
         }
       }
     });
@@ -1244,8 +1243,7 @@
   function exclusiveInit(art, player) {
     var props = ['min', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
     props.forEach(function (name) {
-      var event = "".concat(name, "Change");
-      art.on(event, function (state) {
+      art.on(name, function (state) {
         if (state) {
           props.filter(function (item) {
             return item !== name;
@@ -1463,11 +1461,11 @@
           $video.playbackRate = rate;
           $player.dataset.playbackRate = rate;
           notice.show = "".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x"));
-          art.emit('playbackRateChange', rate);
+          art.emit('playbackRate', rate);
         } else if (player.playbackRate) {
           player.playbackRate = 1;
           delete $player.dataset.playbackRate;
-          art.emit('playbackRateRemove');
+          art.emit('playbackRate');
         }
       }
     });
@@ -1478,7 +1476,6 @@
 
           if (playbackRate) {
             player.playbackRate = Number(playbackRate);
-            art.emit('playbackRateReset');
           }
         }
       }
@@ -1527,13 +1524,13 @@
 
           $player.dataset.aspectRatio = ratio;
           notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
-          art.emit('aspectRatioChange', ratio);
+          art.emit('aspectRatio', ratio);
         } else if (player.aspectRatio) {
           setStyle($video, 'width', null);
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);
           delete $player.dataset.aspectRatio;
-          art.emit('aspectRatioRemove');
+          art.emit('aspectRatio');
         }
       }
     });
@@ -1542,7 +1539,6 @@
         if (value && player.aspectRatio) {
           var aspectRatio = player.aspectRatio;
           player.aspectRatio = aspectRatio;
-          art.emit('aspectRatioReset');
         }
       }
     });
@@ -1552,29 +1548,30 @@
     var option = art.option,
         notice = art.notice,
         $video = art.template.$video;
-    def(player, 'getScreenshotDataURL', {
-      value: function value() {
-        try {
-          var canvas = document.createElement('canvas');
-          canvas.width = $video.videoWidth;
-          canvas.height = $video.videoHeight;
-          canvas.getContext('2d').drawImage($video, 0, 0);
-          return canvas.toDataURL('image/png');
-        } catch (err) {
-          notice.show = err;
-          throw err;
-        }
-      }
-    });
-    def(player, 'getScreenshotBlobUrl', {
+    var $canvas = document.createElement('canvas');
+    def(player, 'getDataURL', {
       value: function value() {
         return new Promise(function (resolve, reject) {
           try {
-            var canvas = document.createElement('canvas');
-            canvas.width = $video.videoWidth;
-            canvas.height = $video.videoHeight;
-            canvas.getContext('2d').drawImage($video, 0, 0);
-            canvas.toBlob(function (blob) {
+            $canvas.width = $video.videoWidth;
+            $canvas.height = $video.videoHeight;
+            $canvas.getContext('2d').drawImage($video, 0, 0);
+            resolve($canvas.toDataURL('image/png'));
+          } catch (err) {
+            notice.show = err;
+            reject(err);
+          }
+        });
+      }
+    });
+    def(player, 'getBlobUrl', {
+      value: function value() {
+        return new Promise(function (resolve, reject) {
+          try {
+            $canvas.width = $video.videoWidth;
+            $canvas.height = $video.videoHeight;
+            $canvas.getContext('2d').drawImage($video, 0, 0);
+            $canvas.toBlob(function (blob) {
               resolve(URL.createObjectURL(blob));
             });
           } catch (err) {
@@ -1586,12 +1583,10 @@
     });
     def(player, 'screenshot', {
       value: function value() {
-        var dataUri = player.getScreenshotDataURL();
-
-        if (dataUri) {
-          downloadFile(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
+        player.getDataURL().then(function (dataUri) {
+          download(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
           art.emit('screenshot', dataUri);
-        }
+        });
       }
     });
   }
@@ -1787,7 +1782,7 @@
             addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
             art.emit('resize');
-            art.emit('fullscreenChange', true);
+            art.emit('fullscreen', true);
           });
         } else {
           screenfull.exit().then(function () {
@@ -1795,7 +1790,7 @@
             player.aspectRatioReset = true;
             player.autoSize = art.option.autoSize;
             art.emit('resize');
-            art.emit('fullscreenChange', false);
+            art.emit('fullscreen');
           });
         }
       }
@@ -1820,13 +1815,13 @@
           addClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
           art.emit('resize');
-          art.emit('fullscreenWebChange', true);
+          art.emit('fullscreenWeb', true);
         } else {
           removeClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
           player.autoSize = art.option.autoSize;
           art.emit('resize');
-          art.emit('fullscreenWebChange', false);
+          art.emit('fullscreenWeb');
         }
       }
     });
@@ -1864,14 +1859,14 @@
             var scale = Math.min(bodyHeight / playerWidth, bodyWidth / playerHeight).toFixed(2);
             setStyle($player, 'transform', "rotate(90deg) scale(".concat(scale, ",").concat(scale, ")"));
             art.emit('resize');
-            art.emit('fullscreenRotateChange', true);
+            art.emit('fullscreenRotate', true);
           }
         } else {
           removeClass($container, 'art-fullscreen-rotate');
           player.autoSize = art.option.autoSize;
           setStyle($player, 'transform', null);
           art.emit('resize');
-          art.emit('fullscreenRotateChange', false);
+          art.emit('fullscreenRotate');
         }
       }
     });
@@ -1908,10 +1903,10 @@
       }
     });
     proxy($video, 'enterpictureinpicture', function () {
-      art.emit('pipChange', true);
+      art.emit('pip', true);
     });
     proxy($video, 'leavepictureinpicture', function () {
-      art.emit('pipChange', false);
+      art.emit('pip');
     });
   }
 
@@ -1925,10 +1920,10 @@
       set: function set(value) {
         if (value) {
           $video.webkitSetPresentationMode('picture-in-picture');
-          art.emit('pipChange', true);
+          art.emit('pip', true);
         } else {
           $video.webkitSetPresentationMode('inline');
-          art.emit('pipChange', false);
+          art.emit('pip');
         }
       }
     });
@@ -2027,7 +2022,7 @@
             setStyle($player, 'height', "".concat(_percentage, "%"));
           }
 
-          art.emit('autoSizeChange', {
+          art.emit('autoSize', {
             width: player.width,
             height: player.height
           });
@@ -2035,7 +2030,7 @@
           removeClass($container, 'art-auto-size');
           setStyle($player, 'width', null);
           setStyle($player, 'height', null);
-          art.emit('autoSizeRemove');
+          art.emit('autoSize');
         }
       }
     });
@@ -2077,10 +2072,10 @@
           var flipList = ['normal', 'horizontal', 'vertical'];
           errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
           $player.dataset.flip = flip;
-          art.emit('flipChange', flip);
+          art.emit('flip', flip);
         } else {
           delete $player.dataset.flip;
-          art.emit('flipRemove');
+          art.emit('flip');
         }
       }
     });
@@ -2179,7 +2174,7 @@
 
           player.aspectRatio = false;
           player.playbackRate = false;
-          art.emit('minChange', true);
+          art.emit('min', true);
         } else {
           $player.style.cssText = cacheStyle;
           removeClass($player, 'art-min');
@@ -2188,7 +2183,7 @@
           player.aspectRatio = false;
           player.playbackRate = false;
           player.autoSize = option.autoSize;
-          art.emit('minChange', false);
+          art.emit('min');
         }
       }
     });
@@ -2214,14 +2209,14 @@
 
           if (end - start >= 1) {
             interval = [start, end];
-            art.emit('loopAdd', interval);
+            art.emit('loop', interval);
           } else {
             interval = [];
-            art.emit('loopRemove');
+            art.emit('loop');
           }
         } else {
           interval = [];
-          art.emit('loopRemove');
+          art.emit('loop');
         }
       }
     });
@@ -2229,7 +2224,6 @@
       if (interval.length) {
         if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
           player.seek = interval[0];
-          art.emit('loopStart', interval);
         }
       }
     });
@@ -2367,7 +2361,6 @@
           callback($ref, this, this.art);
         }
 
-        this.art.emit("".concat(this.name, "Add"), option);
         def(this, name, {
           get: function get() {
             return option;
@@ -2389,7 +2382,7 @@
           removeClass($player, className);
         }
 
-        this.art.emit("".concat(this.name, "Toggle"), value);
+        this.art.emit(this.name, value);
       }
     }, {
       key: "toggle",
@@ -2419,7 +2412,7 @@
           proxy($control, 'click', function () {
             player.fullscreenToggle = true;
           });
-          art.on('fullscreenChange', function (value) {
+          art.on('fullscreen', function (value) {
             tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
           });
         }
@@ -2443,7 +2436,7 @@
           proxy($control, 'click', function () {
             player.fullscreenWebToggle = true;
           });
-          art.on('fullscreenWebChange', function (value) {
+          art.on('fullscreenWeb', function (value) {
             tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
           });
         }
@@ -2467,7 +2460,7 @@
           proxy($control, 'click', function () {
             player.pipToggle = true;
           });
-          art.on('pipChange', function (value) {
+          art.on('pip', function (value) {
             tooltip($control, i18n.get(value ? 'Exit PIP mode' : 'PIP mode'));
           });
         }
@@ -2684,7 +2677,7 @@
           proxy($control, 'click', function () {
             subtitle.toggle = true;
           });
-          art.on('subtitleToggle', function (value) {
+          art.on('subtitle', function (value) {
             tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
           });
         }
@@ -2815,7 +2808,7 @@
           proxy($control, 'click', function () {
             setting.toggle = true;
           });
-          art.on('settingToggle', function (value) {
+          art.on('setting', function (value) {
             tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
           });
         }
@@ -2958,13 +2951,14 @@
           var player = art.player;
           var $left = append($control, "<span class=\"art-loop-point\"></span>");
           var $right = append($control, "<span class=\"art-loop-point\"></span>");
-          art.on('loopAdd', function (value) {
-            setStyle($control, 'display', 'block');
-            setStyle($left, 'left', "calc(".concat(value[0] / player.duration * 100, "% - ").concat($left.clientWidth, "px)"));
-            setStyle($right, 'left', "".concat(value[1] / player.duration * 100, "%"));
-          });
-          art.on('loopRemove', function () {
-            setStyle($control, 'display', 'none');
+          art.on('loop', function (value) {
+            if (value) {
+              setStyle($control, 'display', 'block');
+              setStyle($left, 'left', "calc(".concat(value[0] / player.duration * 100, "% - ").concat($left.clientWidth, "px)"));
+              setStyle($right, 'left', "".concat(value[1] / player.duration * 100, "%"));
+            } else {
+              setStyle($control, 'display', 'none');
+            }
           });
         }
       });
@@ -3152,7 +3146,7 @@
           }
         },
         mounted: function mounted($menu) {
-          art.on('playbackRateChange', function (rate) {
+          art.on('playbackRate', function (rate) {
             var $current = queryAll('span', $menu).find(function (item) {
               return Number(item.dataset.rate) === rate;
             });
@@ -3184,7 +3178,7 @@
           }
         },
         mounted: function mounted($menu) {
-          art.on('aspectRatioChange', function (ratio) {
+          art.on('aspectRatio', function (ratio) {
             var $current = queryAll('span', $menu).find(function (item) {
               return item.dataset.ratio === ratio;
             });
@@ -3220,7 +3214,7 @@
 
   function version(option) {
     return _objectSpread$h({}, option, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.5.5</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 3.5.8</a>'
     });
   }
 
@@ -3403,7 +3397,7 @@
         }, 1000);
       }
 
-      art.on('infoToggle', function (value) {
+      art.on('info', function (value) {
         clearTimeout(timer);
 
         if (value) {
@@ -3519,9 +3513,6 @@
           return subUrl;
         }).catch(function (err) {
           notice.show = err;
-
-          _this3.art.emit('subtitleErr', err);
-
           throw err;
         });
       }
@@ -3567,13 +3558,15 @@
         $player = art.template.$player;
     events.hover($player, function () {
       addClass($player, 'art-hover');
-      art.emit('hoverenter');
+      art.emit('hover', true);
     }, function () {
       removeClass($player, 'art-hover');
-      art.emit('hoverleave');
+      art.emit('hover');
     });
-    art.on('hoverleave', function () {
-      controls.delayHide();
+    art.on('hover', function (value) {
+      if (!value) {
+        controls.delayHide();
+      }
     });
   }
 
@@ -4009,7 +4002,7 @@
           }
         },
         mounted: function mounted($setting) {
-          art.on('flipChange', function (flip) {
+          art.on('flip', function (flip) {
             var $current = queryAll('button', $setting).find(function (item) {
               return item.dataset.value === flip;
             });
@@ -4040,7 +4033,7 @@
           }
         },
         mounted: function mounted($setting) {
-          art.on('aspectRatioChange', function (ratio) {
+          art.on('aspectRatio', function (ratio) {
             var $current = queryAll('button', $setting).find(function (item) {
               return item.dataset.value === ratio;
             });
@@ -4072,8 +4065,8 @@
             $value.innerText = value;
             player.playbackRate = Number(value);
           });
-          art.on('playbackRateChange', function (rate) {
-            if ($range.value !== rate) {
+          art.on('playbackRate', function (rate) {
+            if (rate && $range.value !== rate) {
               $range.value = rate;
               $value.innerText = rate;
             }
@@ -4394,7 +4387,7 @@
         background: theme
       },
       mounted: function mounted($progressBar) {
-        art.on('controlToggle', function (value) {
+        art.on('control', function (value) {
           $progressBar.style.display = value ? 'none' : 'block';
         });
         art.on('destroy', function () {
@@ -4514,7 +4507,7 @@
         def(this, pluginName, {
           value: result
         });
-        this.art.emit('pluginAdd', plugin);
+        this.art.emit('plugin', plugin);
         return this;
       }
     }]);
@@ -4562,7 +4555,7 @@
       art.emit('customType', typeName);
     } else {
       $video.src = option.url;
-      art.emit('urlChange', $video.src);
+      art.emit('url', $video.src);
     }
   };
 
@@ -4634,7 +4627,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '3.5.5';
+        return '3.5.8';
       }
     }, {
       key: "env",
@@ -4735,7 +4728,7 @@
 
     return Artplayer;
   }(Emitter); // eslint-disable-next-line no-console
-  console.log('%c ArtPlayer %c 3.5.5 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 3.5.8 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

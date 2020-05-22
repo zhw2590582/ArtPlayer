@@ -7,14 +7,10 @@ export function getExt(url) {
         return getExt(url.split('#')[0]);
     }
 
-    return url
-        .trim()
-        .toLowerCase()
-        .split('.')
-        .pop();
+    return url.trim().toLowerCase().split('.').pop();
 }
 
-export function downloadFile(url, name) {
+export function download(url, name) {
     const elink = document.createElement('a');
     elink.style.display = 'none';
     elink.href = url;

@@ -10,15 +10,17 @@ export default function hoverInit(art, events) {
         $player,
         () => {
             addClass($player, 'art-hover');
-            art.emit('hoverenter');
+            art.emit('hover', true);
         },
         () => {
             removeClass($player, 'art-hover');
-            art.emit('hoverleave');
+            art.emit('hover');
         },
     );
 
-    art.on('hoverleave', () => {
-        controls.delayHide();
+    art.on('hover', (value) => {
+        if (!value) {
+            controls.delayHide();
+        }
     });
 }

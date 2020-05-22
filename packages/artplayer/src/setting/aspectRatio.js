@@ -26,7 +26,7 @@ export default function aspectRatio(option) {
                 }
             },
             mounted: $setting => {
-                art.on('aspectRatioChange', ratio => {
+                art.on('aspectRatio', ratio => {
                     const $current = queryAll('button', $setting).find(item => item.dataset.value === ratio);
                     if ($current) {
                         inverseClass($current.parentElement, 'current');

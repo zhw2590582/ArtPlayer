@@ -1,7 +1,7 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function playbackRate(option) {
-    return art => {
+    return (art) => {
         const { i18n, player } = art;
         return {
             ...option,
@@ -20,9 +20,9 @@ export default function playbackRate(option) {
                     contextmenu.show = false;
                 }
             },
-            mounted: $menu => {
-                art.on('playbackRateChange', rate => {
-                    const $current = queryAll('span', $menu).find(item => Number(item.dataset.rate) === rate);
+            mounted: ($menu) => {
+                art.on('playbackRate', (rate) => {
+                    const $current = queryAll('span', $menu).find((item) => Number(item.dataset.rate) === rate);
                     if ($current) {
                         inverseClass($current, 'art-current');
                     }

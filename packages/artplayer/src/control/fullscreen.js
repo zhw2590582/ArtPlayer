@@ -18,7 +18,7 @@ export default function fullscreen(option) {
                 player.fullscreenToggle = true;
             });
 
-            art.on('fullscreenChange', value => {
+            art.on('fullscreen', value => {
                 tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
             });
         },
