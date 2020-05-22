@@ -75,4 +75,3 @@ art.on('ready', function (args) {
 | `contextmenu`      | When displaying contextmenu          | Contextmenu configuration  |
 | `control`          | When displaying control              | Control configuration      |
 | `hotkey`           | When the hotkey is triggered         | Hotkey event object        |
-| `plugin`           | When adding a new plugin             | Plugin configuration       |
