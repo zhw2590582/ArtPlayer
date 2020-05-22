@@ -50,7 +50,7 @@ art.on('ready', function (args) {
 | `resize`           | When the player resize               | Player size                |
 | `mousemove`        | When the mouse moves over the player | `undefined`                |
 | `aspectRatio`      | When aspect ratio change             | Aspect ratio               |
-| `url`              | After the video url change           | Video url                  |
+| `url`              | When the video url change            | Video url                  |
 | `autoSize`         | When the player auto size change     | Player size                |
 | `flip`             | When the player flip change          | Flip name                  |
 | `fullscreen`       | When the full screen change          | Whether full screen        |
