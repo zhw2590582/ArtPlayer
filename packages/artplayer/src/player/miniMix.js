@@ -1,12 +1,12 @@
 import { append, setStyle, addClass, removeClass, hasClass, def, isInViewport } from '../utils';
 
-export default function minMix(art, player) {
+export default function miniMix(art, player) {
     const {
         i18n,
         option,
         storage,
         events: { proxy },
-        template: { $player, $minClose, $minTitle, $minHeader },
+        template: { $player, $miniClose, $miniTitle, $miniHeader },
     } = art;
 
     let cacheStyle = '';
@@ -16,7 +16,7 @@ export default function minMix(art, player) {
     let lastPlayerLeft = 0;
     let lastPlayerTop = 0;
 
-    proxy($minHeader, 'mousedown', (event) => {
+    proxy($miniHeader, 'mousedown', (event) => {
         isDroging = true;
         lastPageX = event.pageX;
         lastPageY = event.pageY;
@@ -41,32 +41,32 @@ export default function minMix(art, player) {
         removeClass($player, 'art-is-dragging');
     });
 
-    proxy($minClose, 'click', () => {
-        player.min = false;
+    proxy($miniClose, 'click', () => {
+        player.mini = false;
         isDroging = false;
         removeClass($player, 'art-is-dragging');
     });
 
-    append($minTitle, option.title || i18n.get('Mini player'));
+    append($miniTitle, option.title || i18n.get('Mini player'));
 
-    def(player, 'min', {
+    def(player, 'mini', {
         get() {
-            return hasClass($player, 'art-min');
+            return hasClass($player, 'art-mini');
         },
         set(value) {
             if (value) {
                 player.autoSize = false;
                 cacheStyle = $player.style.cssText;
-                addClass($player, 'art-min');
+                addClass($player, 'art-mini');
                 const top = storage.get('top');
                 const left = storage.get('left');
                 if (top && left) {
                     setStyle($player, 'top', `${top}px`);
                     setStyle($player, 'left', `${left}px`);
-                    if (!isInViewport($minHeader)) {
+                    if (!isInViewport($miniHeader)) {
                         storage.del('top');
                         storage.del('left');
-                        player.min = true;
+                        player.mini = true;
                     }
                 } else {
                     const $body = document.body;
@@ -79,24 +79,24 @@ export default function minMix(art, player) {
                 }
                 player.aspectRatio = false;
                 player.playbackRate = false;
-                art.emit('min', true);
+                art.emit('mini', true);
             } else {
                 $player.style.cssText = cacheStyle;
-                removeClass($player, 'art-min');
+                removeClass($player, 'art-mini');
                 setStyle($player, 'top', null);
                 setStyle($player, 'left', null);
                 player.aspectRatio = false;
                 player.playbackRate = false;
                 player.autoSize = option.autoSize;
-                art.emit('min');
+                art.emit('mini');
             }
         },
     });
 
-    def(player, 'minToggle', {
+    def(player, 'miniToggle', {
         set(value) {
             if (value) {
-                player.min = !player.min;
+                player.mini = !player.mini;
             }
         },
     });

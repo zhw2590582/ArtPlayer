@@ -129,7 +129,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-Video title, will be shown in `screenshot` file name and `min` mode
+Video title, will be shown in `screenshot` file name and `mini` mode
 
 [Run Code](/Configuration.title)
 

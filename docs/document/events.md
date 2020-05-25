@@ -57,7 +57,7 @@ art.on('ready', function (args) {
 | `fullscreenWeb`    | When the web full screen change      | Whether web full screen    |
 | `fullscreenRotate` | When the rotate full screen change   | Whether rotate full screen |
 | `pip`              | When the picture in picture change   | Whether in pip             |
-| `min`              | When the min player change           | Whether in min player      |
+| `mini`              | When the mini player change           | Whether in mini player      |
 | `playbackRate`     | When playback rate change            | Playback rate              |
 | `screenshot`       | When a screenshot                    | Image data uri             |
 | `switch`           | When switching video url             | Video url                  |

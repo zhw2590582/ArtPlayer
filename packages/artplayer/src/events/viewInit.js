@@ -3,7 +3,7 @@ import { debounce, isInViewport } from '../utils';
 export default function viewInit(art, events) {
     const {
         player,
-        option: { autoMin },
+        option: { autoMini },
         template: { $container },
     } = art;
 
@@ -16,8 +16,8 @@ export default function viewInit(art, events) {
     });
 
     art.on('view', (state) => {
-        if (autoMin) {
-            player.min = !state;
+        if (autoMini) {
+            player.mini = !state;
         }
     });
 }

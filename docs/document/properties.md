@@ -61,8 +61,8 @@ art.seek === art.player.seek;
 | `pause`                  | `Boolean`  | Pause playback                                                                                    |
 | `pip`                    | `Boolean`  | Enable or disable pip                                                                             |
 | `pipToggle`              | `Boolean`  | Toggle pip                                                                                        |
-| `min`                    | `Boolean`  | Enable or disable min player                                                                      |
-| `minToggle`              | `Boolean`  | Toggle min player                                                                                 |
+| `mini`                   | `Boolean`  | Enable or disable mini player                                                                     |
+| `minToggle`              | `Boolean`  | Toggle mini player                                                                                |
 | `playbackRate`           | `String`   | Set playbackRate, Currently only accepts three values：`0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `2.0` |
 | `playbackRateReset`      | `Boolean`  | Recalculate the playback rate                                                                     |
 | `played`                 | `Number`   | Return the proportion of the played                                                               |
