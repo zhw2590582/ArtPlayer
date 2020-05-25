@@ -23,7 +23,7 @@ export default class Artplayer {
         muted?: boolean;
         autoplay?: boolean;
         autoSize?: boolean;
-        autoMin?: boolean;
+        autoMini?: boolean;
         loop?: boolean;
         flip?: boolean;
         playbackRate?: boolean;
