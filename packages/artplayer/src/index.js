@@ -137,6 +137,7 @@ export default class Artplayer extends Emitter {
             highlight: [],
             plugins: [],
             whitelist: [],
+            switcher: [],
             thumbnails: {
                 url: '',
                 number: 60,

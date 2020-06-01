@@ -72,6 +72,20 @@ export default {
             url: 'string',
         },
     ],
+    switcher: [
+        {
+            index: 'number|undefined',
+            click: 'function|undefined',
+            name: 'string|undefined',
+            default: 'string|undefined',
+            list: [
+                {
+                    name: 'string',
+                    text: 'string',
+                },
+            ],
+        },
+    ],
     highlight: [
         {
             time: 'number',

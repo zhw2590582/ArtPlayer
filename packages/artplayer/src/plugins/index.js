@@ -4,6 +4,7 @@ import localVideo from './localVideo';
 import localSubtitle from './localSubtitle';
 import miniProgressBar from './miniProgressBar';
 import networkMonitor from './networkMonitor';
+import switcher from './switcher';
 
 export default class Plugins {
     constructor(art) {
@@ -32,7 +33,9 @@ export default class Plugins {
             this.add(networkMonitor);
         }
 
-        art.option.plugins.forEach(plugin => {
+        this.add(switcher);
+
+        art.option.plugins.forEach((plugin) => {
             this.add(plugin);
         });
     }

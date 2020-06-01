@@ -52,6 +52,16 @@ export default class Artplayer {
             name: string;
             url: string;
         }[];
+        switcher?: {
+            index?: number;
+            click?: Function;
+            name?: string;
+            default?: string;
+            list: {
+                name: string;
+                text: string;
+            }[];
+        }[];
         highlight?: {
             time: number;
             text: string;

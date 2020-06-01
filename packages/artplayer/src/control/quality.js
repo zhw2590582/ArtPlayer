@@ -20,7 +20,7 @@ export default function quality(option) {
             const $qualitys = append($control, `<div class="art-qualitys">${qualityList}</div>`);
 
             hover($control, () => {
-                $qualitys.style.left = `-${getStyle($qualitys, 'width') / 2 - $control.clientWidth / 2}px`;
+                $qualitys.style.left = `-${getStyle($qualitys, 'width') / 2 - getStyle($control, 'width') / 2}px`;
             });
 
             proxy($qualitys, 'click', event => {
