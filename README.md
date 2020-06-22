@@ -39,9 +39,9 @@
 | [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React Component     | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                 |
 | [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue Component       | [demo](https://codesandbox.io/s/6z76lm109n)                                                                                                 |
 
-## Demo
+## Homepage
 
-[Checkout the demo](https://artplayer.org/) from Github Pages
+[https://artplayer.org](https://artplayer.org)
 
 ## Mobile Demo
 
@@ -49,7 +49,7 @@
 
 ## Document
 
-[Checkout the Document](https://artplayer.org/document) from Github Pages
+[https://artplayer.org/document](https://artplayer.org/document)
 
 ## Install
 

@@ -37,9 +37,9 @@
 | [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React 组件        | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                 |
 | [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue 组件          | [demo](https://codesandbox.io/s/6z76lm109n)                                                                                                 |
 
-## 演示
+## 主页
 
-[打开 Github Pages 演示](https://artplayer.org/)
+[https://artplayer.org](https://artplayer.org)
 
 ## 手机端演示
 
@@ -47,7 +47,7 @@
 
 ## 文档
 
-[打开 Github Pages 文档](https://artplayer.org/document)
+[https://artplayer.org/document](https://artplayer.org/document)
 
 ## 安装
 
