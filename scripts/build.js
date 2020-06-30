@@ -8,6 +8,10 @@ const creatRollupConfig = require('./creatRollupConfig');
 
 const isBuildAll = process.argv.pop() === 'all';
 
+function runPromisesInSeries(ps) {
+    return ps.reduce((p, next) => p.then(next), Promise.resolve());
+}
+
 function build(projectPath) {
     const { input, output, plugins } = creatRollupConfig(projectPath);
     const dist = path.join(projectPath, 'dist');
@@ -19,7 +23,7 @@ function build(projectPath) {
                 input,
                 plugins,
             })
-            .then(bundle => {
+            .then((bundle) => {
                 bundle.write(output);
                 logger.success(`finished building all bundles from ${projectPath}`);
             });
@@ -28,19 +32,19 @@ function build(projectPath) {
 
 if (isBuildAll) {
     const bundles = [];
-    Object.keys(projects).forEach(item => {
+    Object.keys(projects).forEach((item) => {
         const projectPath = projects[item];
-        bundles.push(build(projectPath));
+        bundles.push(() => build(projectPath));
     });
 
     const dist = path.join(process.cwd(), 'dist');
     del(dist).then(() => {
         logger.success(`----Delete directory successfully: ${dist}----`);
-        Promise.all(bundles)
+        runPromisesInSeries(bundles)
             .then(() => {
                 logger.success('----finished building all packages----');
             })
-            .catch(err => {
+            .catch((err) => {
                 logger.fatal(err);
             });
     });
@@ -54,10 +58,10 @@ if (isBuildAll) {
                 choices: Object.keys(projects),
             },
         ])
-        .then(answers => {
+        .then((answers) => {
             build(projects[answers.project]);
         })
-        .catch(err => {
+        .catch((err) => {
             logger.fatal(err);
         });
 }
