@@ -71,6 +71,8 @@
         }
 
         .art-setting-checkbox {
+            display: flex;
+            align-items: center;
             input {
                 height: 14px;
                 width: 14px;
