@@ -214,20 +214,20 @@ var art = new Artplayer({
 });
 ```
 
-## autoMin
+## autoMini
 
 -   Type: `Boolean`
 -   Default: `false`
 
 When the player scrolls out of the viewport, the mini player mode is automatically enabled
 
-[Run Code](/Configuration.autoMin)
+[Run Code](/Configuration.autoMini)
 
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    autoMin: true,
+    autoMini: true,
 });
 ```
 
