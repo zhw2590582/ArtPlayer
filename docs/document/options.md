@@ -159,6 +159,23 @@ var art = new Artplayer({
 });
 ```
 
+## isLive
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Whether to use live video mode
+
+[Run Code](/Configuration.isLive)
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    isLive: true,
+});
+```
+
 ## muted
 
 -   Type: `Boolean`
