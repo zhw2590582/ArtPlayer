@@ -106,7 +106,7 @@ export default function progress(option) {
 
                 proxy($control, 'mousemove', event => {
                     setStyle($tip, 'display', 'block');
-                    if (event.composedPath().indexOf($highlight) > -1) {
+                    if (event.composedPath && event.composedPath().indexOf($highlight) > -1) {
                         showHighlight(event);
                     } else {
                         showTime(event);

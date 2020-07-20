@@ -70,11 +70,11 @@ export default class Contextmenu extends Component {
                 }),
             );
 
-            option.contextmenu.forEach(item => {
+            option.contextmenu.forEach((item) => {
                 this.add(item);
             });
 
-            proxy($player, 'contextmenu', event => {
+            proxy($player, 'contextmenu', (event) => {
                 event.preventDefault();
                 this.show = true;
 
@@ -99,8 +99,8 @@ export default class Contextmenu extends Component {
                 });
             });
 
-            proxy($player, 'click', event => {
-                if (!event.composedPath().includes($contextmenu)) {
+            proxy($player, 'click', (event) => {
+                if (event.composedPath && !event.composedPath().indexOf($contextmenu) > -1) {
                     this.show = false;
                 }
             });
