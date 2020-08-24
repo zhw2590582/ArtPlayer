@@ -301,6 +301,9 @@
     var horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
     return vertInView && horInView;
   }
+  function includeFromEvent(event, target) {
+    return event.composedPath && event.composedPath().indexOf(target) > -1;
+  }
 
   function _isNativeFunction(fn) {
     return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -663,6 +666,7 @@
     inverseClass: inverseClass,
     tooltip: tooltip,
     isInViewport: isInViewport,
+    includeFromEvent: includeFromEvent,
     ArtPlayerError: ArtPlayerError,
     errorHandle: errorHandle,
     srtToVtt: srtToVtt,
@@ -733,7 +737,7 @@
     muted: 'boolean',
     autoplay: 'boolean',
     autoSize: 'boolean',
-    autoMin: 'boolean',
+    autoMini: 'boolean',
     loop: 'boolean',
     flip: 'boolean',
     playbackRate: 'boolean',
@@ -2630,7 +2634,7 @@
           proxy($control, 'mousemove', function (event) {
             setStyle($tip, 'display', 'block');
 
-            if (event.composedPath().indexOf($highlight) > -1) {
+            if (includeFromEvent(event, $highlight)) {
               showHighlight(event);
             } else {
               showTime(event);
@@ -3360,7 +3364,7 @@
           });
         });
         proxy($player, 'click', function (event) {
-          if (!event.composedPath().includes($contextmenu)) {
+          if (!includeFromEvent(event, $contextmenu)) {
             _this.show = false;
           }
         });
@@ -3553,7 +3557,7 @@
     var controls = art.controls,
         $player = art.template.$player;
     events.proxy(document, ['click', 'contextmenu'], function (event) {
-      if (event.composedPath && event.composedPath().indexOf($player) > -1) {
+      if (includeFromEvent(event, $player)) {
         art.isFocus = true;
         art.emit('focus');
       } else {
@@ -4764,7 +4768,7 @@
           muted: false,
           autoplay: false,
           autoSize: false,
-          autoMin: false,
+          autoMini: false,
           loop: false,
           flip: false,
           playbackRate: false,

@@ -1,4 +1,14 @@
-import { append, clamp, secondToTime, setStyle, getStyle, query, addClass, removeClass } from '../utils';
+import {
+    append,
+    clamp,
+    secondToTime,
+    setStyle,
+    getStyle,
+    query,
+    addClass,
+    removeClass,
+    includeFromEvent,
+} from '../utils';
 
 export function getPosFromEvent(art, event) {
     const {
@@ -15,7 +25,7 @@ export function getPosFromEvent(art, event) {
 }
 
 export default function progress(option) {
-    return art => {
+    return (art) => {
         const {
             option: { highlight, theme },
             events: { proxy },
@@ -32,7 +42,7 @@ export default function progress(option) {
                     <div class="art-progress-tip art-tip"></div>
                 </div>
             `,
-            mounted: $control => {
+            mounted: ($control) => {
                 let isDroging = false;
                 const $loaded = query('.art-progress-loaded', $control);
                 const $played = query('.art-progress-played', $control);
@@ -82,7 +92,7 @@ export default function progress(option) {
                     }
                 }
 
-                highlight.forEach(item => {
+                highlight.forEach((item) => {
                     const left = (clamp(item.time, 0, player.duration) / player.duration) * 100;
                     append(
                         $highlight,
@@ -104,9 +114,9 @@ export default function progress(option) {
                     setBar('played', 1);
                 });
 
-                proxy($control, 'mousemove', event => {
+                proxy($control, 'mousemove', (event) => {
                     setStyle($tip, 'display', 'block');
-                    if (event.composedPath && event.composedPath().indexOf($highlight) > -1) {
+                    if (includeFromEvent(event, $highlight)) {
                         showHighlight(event);
                     } else {
                         showTime(event);
@@ -117,7 +127,7 @@ export default function progress(option) {
                     setStyle($tip, 'display', 'none');
                 });
 
-                proxy($control, 'click', event => {
+                proxy($control, 'click', (event) => {
                     if (event.target !== $indicator) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         setBar('played', percentage);
@@ -129,7 +139,7 @@ export default function progress(option) {
                     isDroging = true;
                 });
 
-                proxy(document, 'mousemove', event => {
+                proxy(document, 'mousemove', (event) => {
                     if (isDroging) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         addClass($indicator, 'art-show-indicator');
