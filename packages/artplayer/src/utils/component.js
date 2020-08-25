@@ -30,17 +30,23 @@ export default class Component {
         }
     }
 
-    add(getOption, callback) {
-        const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+    add(option) {
         if (!this.$parent || !this.name || option.disable) return;
-        this.id += 1;
         const name = option.name || `${this.name}${this.id}`;
         errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
+
+        this.id += 1;
         const $ref = document.createElement('div');
         $ref.classList.value = `art-${this.name} art-${this.name}-${name}`;
 
+        const $value = document.createElement('div');
         if (option.html) {
-            append($ref, option.html);
+            append($value, option.html);
+            append($ref, $value);
+        }
+
+        if (option.switcher) {
+            //
         }
 
         if (option.style) {
@@ -60,23 +66,34 @@ export default class Component {
             append(this.$parent, $ref);
         }
 
+        const result = {
+            $ref,
+            $value,
+            get value() {
+                return $value.innerHTML;
+            },
+            set value(html) {
+                $value.innerHTML = html;
+            },
+        };
+
+        def(this, name, {
+            get: () => result,
+        });
+
         if (option.click) {
             this.art.events.proxy($ref, 'click', (event) => {
                 event.preventDefault();
-                option.click.call(this.art, this, event);
+                option.click.call(this.art, event);
             });
         }
 
         if (option.mounted) {
-            option.mounted($ref, this, this.art);
+            option.mounted.call(this.art, $ref);
         }
 
-        if (callback) {
-            callback($ref, this, this.art);
+        if (option.position !== 'top' && !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+            addClass($ref, 'art-control-onlyText');
         }
-
-        def(this, name, {
-            get: () => option,
-        });
     }
 }

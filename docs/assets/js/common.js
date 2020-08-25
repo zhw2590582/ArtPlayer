@@ -11,11 +11,11 @@
     var $popups = document.querySelector('.popups');
     var loaddLib = [];
 
-    consola.creat({
-        target: '.console',
-        size: '100%',
-        zIndex: 99,
-    });
+    // consola.creat({
+    //     target: '.console',
+    //     size: '100%',
+    //     zIndex: 99,
+    // });
 
     var mirror = CodeMirror($codeMirror, {
         lineNumbers: true,

@@ -2328,20 +2328,23 @@
 
     createClass(Component, [{
       key: "add",
-      value: function add(getOption, callback) {
+      value: function add(option) {
         var _this = this;
 
-        var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
         if (!this.$parent || !this.name || option.disable) return;
-        this.id += 1;
         var name = option.name || "".concat(this.name).concat(this.id);
         errorHandle(!has(this, name), "Cannot add an existing name [".concat(name, "] to the [").concat(this.name, "]"));
+        this.id += 1;
         var $ref = document.createElement('div');
         $ref.classList.value = "art-".concat(this.name, " art-").concat(this.name, "-").concat(name);
+        var $value = document.createElement('div');
 
         if (option.html) {
-          append($ref, option.html);
+          append($value, option.html);
+          append($ref, $value);
         }
+
+        if (option.switcher) ;
 
         if (option.style) {
           setStyles($ref, option.style);
@@ -2363,26 +2366,39 @@
           append(this.$parent, $ref);
         }
 
+        var result = {
+          $ref: $ref,
+          $value: $value,
+
+          get value() {
+            return $value.innerHTML;
+          },
+
+          set value(html) {
+            $value.innerHTML = html;
+          }
+
+        };
+        def(this, name, {
+          get: function get() {
+            return result;
+          }
+        });
+
         if (option.click) {
           this.art.events.proxy($ref, 'click', function (event) {
             event.preventDefault();
-            option.click.call(_this.art, _this, event);
+            option.click.call(_this.art, event);
           });
         }
 
         if (option.mounted) {
-          option.mounted($ref, this, this.art);
+          option.mounted.call(this.art, $ref);
         }
 
-        if (callback) {
-          callback($ref, this, this.art);
+        if (option.position !== 'top' && !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+          addClass($ref, 'art-control-onlyText');
         }
-
-        def(this, name, {
-          get: function get() {
-            return option;
-          }
-        });
       }
     }, {
       key: "show",
@@ -3106,11 +3122,8 @@
 
     createClass(Control, [{
       key: "add",
-      value: function add(getOption, callback) {
-        var _this2 = this;
-
+      value: function add(getOption) {
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        errorHandle(['top', 'left', 'right'].includes(option.position), "Control option.position must one of 'top', 'left', 'right'");
         var _this$art$template = this.art.template,
             $progress = _this$art$template.$progress,
             $controlsLeft = _this$art$template.$controlsLeft,
@@ -3128,17 +3141,13 @@
           case 'right':
             this.$parent = $controlsRight;
             break;
+
+          default:
+            errorHandle(false, "Control option.position must one of 'top', 'left', 'right'");
+            break;
         }
 
-        get(getPrototypeOf(Control.prototype), "add", this).call(this, option, function ($ref) {
-          if (!option.disable && option.position !== 'top' && !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
-            addClass($ref, 'art-control-onlyText');
-          }
-
-          if (callback) {
-            callback($ref, _this2, _this2.art);
-          }
-        });
+        get(getPrototypeOf(Control.prototype), "add", this).call(this, option);
       }
     }]);
 
