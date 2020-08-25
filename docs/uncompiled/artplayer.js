@@ -773,16 +773,6 @@
       name: 'string',
       url: 'string'
     }],
-    switcher: [{
-      index: 'number|undefined',
-      click: 'function|undefined',
-      name: 'string|undefined',
-      default: 'string|undefined',
-      list: [{
-        name: 'string',
-        text: 'string'
-      }]
-    }],
     highlight: [{
       time: 'number',
       text: 'string'
@@ -2374,24 +2364,16 @@
           });
         }
 
-        if (option.mounted) {
-          option.mounted.call(this.art, $ref);
-        }
-
         if (['left', 'right'].includes(option.position)) {
-          if (!($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
-            addClass($ref, 'art-control-onlyText');
-          }
-
           if (option.selector) {
             addClass($ref, 'art-control-selector');
             var $value = document.createElement('div');
             $value.classList.value = "art-selector-value";
             append($value, option.html);
-            $ref.innerHTML = '';
+            $ref.innerText = '';
             append($ref, $value);
             var list = option.selector.map(function (item) {
-              return "<div class=\"art-selector-item\">".concat(item, "</div>");
+              return "<div class=\"art-selector-item\">".concat(item.name, "</div>");
             }).join('');
             var $list = document.createElement('div');
             addClass($list, 'art-selector-list');
@@ -2405,16 +2387,27 @@
             hover($ref, setLeft);
             proxy($ref, 'click', function (event) {
               if (hasClass(event.target, 'art-selector-item')) {
-                var html = event.target.innerHTML;
-                $value.innerHTML = html;
+                var _name = event.target.innerText;
+                var find = option.selector.find(function (item) {
+                  return item.name === _name;
+                });
+                $value.innerText = _name;
                 setLeft();
 
-                if (option.onSelect) {
-                  option.onSelect.call(_this.art, event, html);
+                if (option.onSelect && find) {
+                  option.onSelect.call(_this.art, find.value);
                 }
               }
             });
           }
+        }
+
+        if (option.mounted) {
+          option.mounted.call(this.art, $ref);
+        }
+
+        if (!($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+          addClass($ref, 'art-control-onlyText');
         }
       }
     }, {

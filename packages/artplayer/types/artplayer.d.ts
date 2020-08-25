@@ -8,8 +8,11 @@ type Component = {
     mounted?: Function;
     tooltip?: string;
     position?: 'top' | 'left' | 'right';
-    selector?: string[];
-    onSelect?: Function,
+    selector?: {
+        name: string;
+        value: string;
+    }[];
+    onSelect?: Function;
 };
 
 export default class Artplayer {
@@ -53,16 +56,6 @@ export default class Artplayer {
             default?: boolean;
             name: string;
             url: string;
-        }[];
-        switcher?: {
-            index?: number;
-            click?: Function;
-            name?: string;
-            default?: string;
-            list: {
-                name: string;
-                text: string;
-            }[];
         }[];
         highlight?: {
             time: number;
