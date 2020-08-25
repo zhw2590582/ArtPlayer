@@ -2335,50 +2335,60 @@
         var name = option.name || "".concat(this.name).concat(this.id);
         errorHandle(!has(this, name), "Cannot add an existing name [".concat(name, "] to the [").concat(this.name, "]"));
         this.id += 1;
-        var $ref = document.createElement('div');
-        $ref.classList.value = "art-".concat(this.name, " art-").concat(this.name, "-").concat(name);
-        var $value = document.createElement('div');
+        var result = {};
+        result.$ref = document.createElement('div');
+        addClass(result.$ref, "art-".concat(this.name));
+        addClass(result.$ref, "art-".concat(this.name, "-").concat(name));
 
         if (option.html) {
-          append($value, option.html);
-          append($ref, $value);
+          append(result.$ref, option.html);
         }
 
-        if (option.switcher) ;
+        if (option.position !== 'top') {
+          // if (!(result.$ref.firstElementChild && result.$ref.firstElementChild.tagName === 'I')) {
+          //     addClass(result.$ref, 'art-control-onlyText');
+          // }
+          if (option.switcher) {
+            var hover = this.art.events.hover;
+            addClass(result.$ref, 'art-control-switcher');
+            result.$value = document.createElement('div');
+            result.$value.classList.value = "art-switcher-value";
+            append(result.$value, option.html);
+            result.$ref.innerHTML = '';
+            append(result.$ref, result.$value);
+            var $list = option.switcher.map(function (item) {
+              return "<div class=\"art-switcher-item\">".concat(item, "</div>");
+            }).join('');
+            result.$switcher = document.createElement('div');
+            addClass(result.$switcher, 'art-switcher-list');
+            append(result.$switcher, $list);
+            append(result.$ref, result.$switcher);
+            hover(result.$ref, function () {
+              result.$switcher.style.left = "-".concat(getStyle(result.$switcher, 'width') / 2 - getStyle(result.$ref, 'width') / 2, "px");
+            });
+          }
+        }
 
         if (option.style) {
-          setStyles($ref, option.style);
+          setStyles(result.$ref, option.style);
         }
 
         if (option.tooltip) {
-          tooltip($ref, option.tooltip);
+          tooltip(result.$ref, option.tooltip);
         }
 
         var childs = Array.from(this.$parent.children);
-        $ref.dataset.index = option.index || this.id;
+        result.$ref.dataset.index = option.index || this.id;
         var nextChild = childs.find(function (item) {
-          return Number(item.dataset.index) >= Number($ref.dataset.index);
+          return Number(item.dataset.index) >= Number(result.$ref.dataset.index);
         });
 
         if (nextChild) {
-          nextChild.insertAdjacentElement('beforebegin', $ref);
+          nextChild.insertAdjacentElement('beforebegin', result.$ref);
         } else {
-          append(this.$parent, $ref);
+          append(this.$parent, result.$ref);
         }
 
-        var result = {
-          $ref: $ref,
-          $value: $value,
-
-          get value() {
-            return $value.innerHTML;
-          },
-
-          set value(html) {
-            $value.innerHTML = html;
-          }
-
-        };
         def(this, name, {
           get: function get() {
             return result;
@@ -2386,18 +2396,15 @@
         });
 
         if (option.click) {
-          this.art.events.proxy($ref, 'click', function (event) {
+          this.art.events.proxy(result.$ref, 'click', function (event) {
+            result.event = event;
             event.preventDefault();
-            option.click.call(_this.art, event);
+            option.click.call(_this.art, result);
           });
         }
 
         if (option.mounted) {
-          option.mounted.call(this.art, $ref);
-        }
-
-        if (option.position !== 'top' && !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
-          addClass($ref, 'art-control-onlyText');
+          option.mounted.call(this.art, result.$ref);
         }
       }
     }, {
@@ -4486,79 +4493,6 @@
     };
   }
 
-  function switcher(art) {
-    var controls = art.controls,
-        option = art.option,
-        hover = art.events.hover;
-
-    function add(item) {
-      var list = item.list.map(function (child) {
-        return "<div class=\"art-switcher-item\" data-switcher-name=\"".concat(child.name, "\">").concat(child.text, "</div>");
-      }).join('');
-      var html = "<div class=\"art-switcher-list\">".concat(list, "</div><div class=\"art-switcher-current\"></div>");
-      var $list;
-      var $childs;
-      var $current;
-      controls.add({
-        name: item.name,
-        position: 'right',
-        index: item.index,
-        html: html,
-        mounted: function mounted($switcher) {
-          addClass($switcher, 'art-control-switcher');
-          $list = query('.art-switcher-list', $switcher);
-          $childs = queryAll('.art-switcher-item', $switcher);
-          $current = query('.art-switcher-current', $switcher);
-          var active = item.list.find(function (child) {
-            return child.name === item.default;
-          }) || item.list[0];
-
-          if (active) {
-            $current.innerText = active.text;
-            var $active = $childs.find(function ($child) {
-              return $child.dataset.switcherName === active.name;
-            });
-
-            if ($active) {
-              inverseClass($active, 'art-current');
-            }
-          }
-
-          hover($switcher, function () {
-            $list.style.left = "-".concat(getStyle($list, 'width') / 2 - getStyle($switcher, 'width') / 2, "px");
-          });
-        },
-        click: function click(_, event) {
-          var name = event.target.dataset.switcherName;
-
-          if (name) {
-            var active = item.list.find(function (child) {
-              return child.name === name;
-            });
-
-            if (active) {
-              var $active = $childs.find(function ($child) {
-                return $child.dataset.switcherName === active.name;
-              });
-              $current.innerText = active.text;
-              inverseClass($active, 'art-current');
-
-              if (item.click) {
-                item.click.call(art, name, event);
-              }
-            }
-          }
-        }
-      });
-    }
-
-    option.switcher.forEach(add);
-    return {
-      name: 'switcher',
-      add: add
-    };
-  }
-
   var Plugins =
   /*#__PURE__*/
   function () {
@@ -4591,7 +4525,6 @@
         this.add(networkMonitor);
       }
 
-      this.add(switcher);
       art.option.plugins.forEach(function (plugin) {
         _this.add(plugin);
       });
