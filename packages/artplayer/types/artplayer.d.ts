@@ -8,6 +8,8 @@ type Component = {
     mounted?: Function;
     tooltip?: string;
     position?: 'top' | 'left' | 'right';
+    selector?: string[];
+    onSelect?: Function,
 };
 
 export default class Artplayer {
