@@ -725,7 +725,7 @@
     mounted: 'function|undefined',
     tooltip: 'string|undefined',
     selector: 'array|undefined',
-    onSelect: 'string|undefined'
+    onSelect: 'function|undefined'
   };
   var scheme = {
     container: validElement,
@@ -2323,9 +2323,6 @@
       value: function add(option) {
         var _this = this;
 
-        var _this$art$events = this.art.events,
-            hover = _this$art$events.hover,
-            proxy = _this$art$events.proxy;
         if (!this.$parent || !this.name || option.disable) return;
         var name = option.name || "".concat(this.name).concat(this.id);
         errorHandle(!has(this, name), "Cannot add an existing name [".concat(name, "] to the [").concat(this.name, "]"));
@@ -2358,57 +2355,70 @@
         }
 
         if (option.click) {
-          proxy($ref, 'click', function (event) {
+          this.art.events.proxy($ref, 'click', function (event) {
             event.preventDefault();
             option.click.call(_this.art, event);
           });
         }
 
-        if (['left', 'right'].includes(option.position)) {
-          if (option.selector) {
-            addClass($ref, 'art-control-selector');
-            var $value = document.createElement('div');
-            $value.classList.value = "art-selector-value";
-            append($value, option.html);
-            $ref.innerText = '';
-            append($ref, $value);
-            var list = option.selector.map(function (item) {
-              return "<div class=\"art-selector-item\">".concat(item.name, "</div>");
-            }).join('');
-            var $list = document.createElement('div');
-            addClass($list, 'art-selector-list');
-            append($list, list);
-            append($ref, $list);
-
-            var setLeft = function setLeft() {
-              $list.style.left = "-".concat(getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2, "px");
-            };
-
-            hover($ref, setLeft);
-            proxy($ref, 'click', function (event) {
-              if (hasClass(event.target, 'art-selector-item')) {
-                var _name = event.target.innerText;
-                var find = option.selector.find(function (item) {
-                  return item.name === _name;
-                });
-                $value.innerText = _name;
-                setLeft();
-
-                if (option.onSelect && find) {
-                  option.onSelect.call(_this.art, find.value);
-                }
-              }
-            });
-          }
+        if (option.selector && ['left', 'right'].includes(option.position)) {
+          this.selector(option, $ref);
         }
 
         if (option.mounted) {
           option.mounted.call(this.art, $ref);
         }
 
-        if (!($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+        if ($ref.childNodes.length === 1 && $ref.childNodes[0].nodeType === 3) {
           addClass($ref, 'art-control-onlyText');
         }
+      }
+    }, {
+      key: "selector",
+      value: function selector(option, $ref) {
+        var _this2 = this;
+
+        var _this$art$events = this.art.events,
+            hover = _this$art$events.hover,
+            proxy = _this$art$events.proxy;
+        addClass($ref, 'art-control-selector');
+        var $value = document.createElement('div');
+        addClass($value, 'art-selector-value');
+        append($value, option.html);
+        $ref.innerText = '';
+        append($ref, $value);
+        var list = option.selector.map(function (item) {
+          return "<div class=\"art-selector-item\">".concat(item.name, "</div>");
+        }).join('');
+        var $list = document.createElement('div');
+        addClass($list, 'art-selector-list');
+        append($list, list);
+        append($ref, $list);
+
+        var setLeft = function setLeft() {
+          $list.style.left = "-".concat(getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2, "px");
+        };
+
+        hover($ref, setLeft);
+        proxy($ref, 'click', function (event) {
+          if (hasClass(event.target, 'art-selector-item')) {
+            var name = event.target.innerText;
+            if ($value.innerText === name) return;
+            var find = option.selector.find(function (item) {
+              return item.name === name;
+            });
+            $value.innerText = name;
+            setLeft();
+
+            if (find) {
+              if (option.onSelect) {
+                option.onSelect.call(_this2.art, find);
+              }
+
+              _this2.art.emit('selector', find);
+            }
+          }
+        });
       }
     }, {
       key: "show",

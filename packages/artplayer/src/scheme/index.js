@@ -17,7 +17,7 @@ const component = {
     mounted: 'function|undefined',
     tooltip: 'string|undefined',
     selector: 'array|undefined',
-    onSelect: 'string|undefined',
+    onSelect: 'function|undefined',
 };
 
 export default {

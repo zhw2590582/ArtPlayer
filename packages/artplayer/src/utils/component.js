@@ -31,8 +31,6 @@ export default class Component {
     }
 
     add(option) {
-        const { hover, proxy } = this.art.events;
-
         if (!this.$parent || !this.name || option.disable) return;
         const name = option.name || `${this.name}${this.id}`;
         errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
@@ -64,55 +62,61 @@ export default class Component {
         }
 
         if (option.click) {
-            proxy($ref, 'click', (event) => {
+            this.art.events.proxy($ref, 'click', (event) => {
                 event.preventDefault();
                 option.click.call(this.art, event);
             });
         }
 
-        if (['left', 'right'].includes(option.position)) {
-            if (option.selector) {
-                addClass($ref, 'art-control-selector');
-                const $value = document.createElement('div');
-                $value.classList.value = `art-selector-value`;
-                append($value, option.html);
-                $ref.innerText = '';
-                append($ref, $value);
-
-                const list = option.selector
-                    .map((item) => `<div class="art-selector-item">${item.name}</div>`)
-                    .join('');
-                const $list = document.createElement('div');
-                addClass($list, 'art-selector-list');
-                append($list, list);
-                append($ref, $list);
-
-                const setLeft = () => {
-                    $list.style.left = `-${getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2}px`;
-                };
-
-                hover($ref, setLeft);
-
-                proxy($ref, 'click', (event) => {
-                    if (hasClass(event.target, 'art-selector-item')) {
-                        const name = event.target.innerText;
-                        const find = option.selector.find((item) => item.name === name);
-                        $value.innerText = name;
-                        setLeft();
-                        if (option.onSelect && find) {
-                            option.onSelect.call(this.art, find.value);
-                        }
-                    }
-                });
-            }
+        if (option.selector && ['left', 'right'].includes(option.position)) {
+            this.selector(option, $ref);
         }
 
         if (option.mounted) {
             option.mounted.call(this.art, $ref);
         }
 
-        if (!($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')) {
+        if ($ref.childNodes.length === 1 && $ref.childNodes[0].nodeType === 3) {
             addClass($ref, 'art-control-onlyText');
         }
+    }
+
+    selector(option, $ref) {
+        const { hover, proxy } = this.art.events;
+
+        addClass($ref, 'art-control-selector');
+        const $value = document.createElement('div');
+        addClass($value, 'art-selector-value');
+        append($value, option.html);
+        $ref.innerText = '';
+        append($ref, $value);
+
+        const list = option.selector.map((item) => `<div class="art-selector-item">${item.name}</div>`).join('');
+        const $list = document.createElement('div');
+        addClass($list, 'art-selector-list');
+        append($list, list);
+        append($ref, $list);
+
+        const setLeft = () => {
+            $list.style.left = `-${getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2}px`;
+        };
+
+        hover($ref, setLeft);
+
+        proxy($ref, 'click', (event) => {
+            if (hasClass(event.target, 'art-selector-item')) {
+                const name = event.target.innerText;
+                if ($value.innerText === name) return;
+                const find = option.selector.find((item) => item.name === name);
+                $value.innerText = name;
+                setLeft();
+                if (find) {
+                    if (option.onSelect) {
+                        option.onSelect.call(this.art, find);
+                    }
+                    this.art.emit('selector', find);
+                }
+            }
+        });
     }
 }

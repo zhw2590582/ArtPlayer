@@ -10,7 +10,6 @@ type Component = {
     position?: 'top' | 'left' | 'right';
     selector?: {
         name: string;
-        value: string;
     }[];
     onSelect?: Function;
 };
