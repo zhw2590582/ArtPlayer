@@ -1,8 +1,8 @@
 {
   "packages/artplayer/dist/artplayer.js": {
-    "bundled": 191323,
-    "minified": 111193,
-    "gzipped": 26225
+    "bundled": 190142,
+    "minified": 110722,
+    "gzipped": 26074
   },
   "packages/artplayer-plugin-backlight/dist/artplayer-plugin-backlight.js": {
     "bundled": 4629,

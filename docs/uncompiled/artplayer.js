@@ -2955,40 +2955,18 @@
   function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
   function quality(option) {
     return function (art) {
+      var qualityOption = art.option.quality;
+      var qualityDefault = qualityOption.find(function (item) {
+        return item.default;
+      }) || qualityOption[0];
       return _objectSpread$c({}, option, {
-        mounted: function mounted($control) {
-          var quality = art.option.quality,
-              _art$events = art.events,
-              proxy = _art$events.proxy,
-              hover = _art$events.hover,
-              player = art.player;
-          var playIndex = -1;
-          var defaultQuality = quality.find(function (item) {
-            return item.default;
-          }) || quality[0];
-          playIndex = quality.indexOf(defaultQuality);
-          var $qualityName = append($control, "<div class=\"art-quality-name\">".concat(defaultQuality.name, "</div>"));
-          var qualityList = quality.map(function (item, index) {
-            return "<div class=\"art-quality-item\" data-index=\"".concat(index, "\">").concat(item.name, "</div>");
-          }).join('');
-          var $qualitys = append($control, "<div class=\"art-qualitys\">".concat(qualityList, "</div>"));
-          hover($control, function () {
-            $qualitys.style.left = "-".concat(getStyle($qualitys, 'width') / 2 - getStyle($control, 'width') / 2, "px");
-          });
-          proxy($qualitys, 'click', function (event) {
-            var index = Number(event.target.dataset.index);
-            var _quality$index = quality[index],
-                url = _quality$index.url,
-                name = _quality$index.name;
-
-            if (url && name && playIndex !== index) {
-              player.switchQuality(url, name);
-              $qualityName.innerText = name;
-              playIndex = index;
-            }
-          });
+        html: qualityDefault.name,
+        selector: qualityOption,
+        onSelect: function onSelect(item) {
+          art.player.switchQuality(item.url, item.name);
         }
       });
     };
