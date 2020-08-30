@@ -16,6 +16,8 @@ const component = {
     click: 'function|undefined',
     mounted: 'function|undefined',
     tooltip: 'string|undefined',
+    selector: 'array|undefined',
+    onSelect: 'function|undefined',
 };
 
 export default {
@@ -70,20 +72,6 @@ export default {
             default: 'boolean|undefined',
             name: 'string',
             url: 'string',
-        },
-    ],
-    switcher: [
-        {
-            index: 'number|undefined',
-            click: 'function|undefined',
-            name: 'string|undefined',
-            default: 'string|undefined',
-            list: [
-                {
-                    name: 'string',
-                    text: 'string',
-                },
-            ],
         },
     ],
     highlight: [

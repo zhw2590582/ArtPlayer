@@ -1,4 +1,4 @@
-import { setStyles } from '../utils';
+import { setStyles, includeFromEvent } from '../utils';
 import Component from '../utils/component';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
@@ -100,7 +100,7 @@ export default class Contextmenu extends Component {
             });
 
             proxy($player, 'click', (event) => {
-                if (event.composedPath && !event.composedPath().indexOf($contextmenu) > -1) {
+                if (!includeFromEvent(event, $contextmenu)) {
                     this.show = false;
                 }
             });

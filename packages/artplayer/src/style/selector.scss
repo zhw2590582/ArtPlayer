@@ -1,7 +1,7 @@
 .art-video-player {
-    .art-control-switcher {
+    .art-control-selector {
         position: relative;
-        .art-switcher-list {
+        .art-selector-list {
             display: none;
             position: absolute;
             bottom: 35px;
@@ -11,7 +11,7 @@
             color: #fff;
             background: rgba(0, 0, 0, 0.8);
             border-radius: 3px;
-            .art-switcher-item {
+            .art-selector-item {
                 height: 30px;
                 line-height: 30px;
                 overflow: hidden;
@@ -23,7 +23,7 @@
                 }
             }
         }
-        &:hover .art-switcher-list {
+        &:hover .art-selector-list {
             display: block;
         }
     }

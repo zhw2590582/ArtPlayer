@@ -160,12 +160,8 @@ export default class Control extends Component {
         });
     }
 
-    add(getOption, callback) {
+    add(getOption) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        errorHandle(
-            ['top', 'left', 'right'].includes(option.position),
-            `Control option.position must one of 'top', 'left', 'right'`,
-        );
         const { $progress, $controlsLeft, $controlsRight } = this.art.template;
 
         switch (option.position) {
@@ -179,21 +175,10 @@ export default class Control extends Component {
                 this.$parent = $controlsRight;
                 break;
             default:
+                errorHandle(false, `Control option.position must one of 'top', 'left', 'right'`);
                 break;
         }
 
-        super.add(option, ($ref) => {
-            if (
-                !option.disable &&
-                option.position !== 'top' &&
-                !($ref.firstElementChild && $ref.firstElementChild.tagName === 'I')
-            ) {
-                addClass($ref, 'art-control-onlyText');
-            }
-
-            if (callback) {
-                callback($ref, this, this.art);
-            }
-        });
+        super.add(option);
     }
 }

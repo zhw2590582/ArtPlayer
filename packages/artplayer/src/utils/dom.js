@@ -73,3 +73,7 @@ export function isInViewport(el) {
     const horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
     return vertInView && horInView;
 }
+
+export function includeFromEvent(event, target) {
+    return event.composedPath && event.composedPath().indexOf(target) > -1;
+}

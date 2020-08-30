@@ -1,3 +1,5 @@
+import { includeFromEvent } from '../utils';
+
 export default function clickInit(art, events) {
     const {
         controls,
@@ -5,7 +7,7 @@ export default function clickInit(art, events) {
     } = art;
 
     events.proxy(document, ['click', 'contextmenu'], (event) => {
-        if (event.composedPath && event.composedPath().indexOf($player) > -1) {
+        if (includeFromEvent(event, $player)) {
             art.isFocus = true;
             art.emit('focus');
         } else {

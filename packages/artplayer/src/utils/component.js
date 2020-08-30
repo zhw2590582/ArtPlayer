@@ -1,5 +1,5 @@
-import { hasClass, addClass, removeClass, append, setStyles, tooltip } from './dom';
-import { has, def } from './property';
+import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle } from './dom';
+import { has } from './property';
 import { errorHandle } from './error';
 
 export default class Component {
@@ -30,14 +30,24 @@ export default class Component {
         }
     }
 
-    add(getOption, callback) {
-        const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+    add(option) {
         if (!this.$parent || !this.name || option.disable) return;
-        this.id += 1;
         const name = option.name || `${this.name}${this.id}`;
         errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
+
+        this.id += 1;
         const $ref = document.createElement('div');
-        $ref.classList.value = `art-${this.name} art-${this.name}-${name}`;
+        addClass($ref, `art-${this.name}`);
+        addClass($ref, `art-${this.name}-${name}`);
+
+        const childs = Array.from(this.$parent.children);
+        $ref.dataset.index = option.index || this.id;
+        const nextChild = childs.find((item) => Number(item.dataset.index) >= Number($ref.dataset.index));
+        if (nextChild) {
+            nextChild.insertAdjacentElement('beforebegin', $ref);
+        } else {
+            append(this.$parent, $ref);
+        }
 
         if (option.html) {
             append($ref, option.html);
@@ -51,32 +61,62 @@ export default class Component {
             tooltip($ref, option.tooltip);
         }
 
-        const childs = Array.from(this.$parent.children);
-        $ref.dataset.index = option.index || this.id;
-        const nextChild = childs.find((item) => Number(item.dataset.index) >= Number($ref.dataset.index));
-        if (nextChild) {
-            nextChild.insertAdjacentElement('beforebegin', $ref);
-        } else {
-            append(this.$parent, $ref);
-        }
-
         if (option.click) {
             this.art.events.proxy($ref, 'click', (event) => {
                 event.preventDefault();
-                option.click.call(this.art, this, event);
+                option.click.call(this.art, event);
             });
         }
 
+        if (option.selector && ['left', 'right'].includes(option.position)) {
+            this.selector(option, $ref);
+        }
+
         if (option.mounted) {
-            option.mounted($ref, this, this.art);
+            option.mounted.call(this.art, $ref);
         }
 
-        if (callback) {
-            callback($ref, this, this.art);
+        if ($ref.childNodes.length === 1 && $ref.childNodes[0].nodeType === 3) {
+            addClass($ref, 'art-control-onlyText');
         }
+    }
 
-        def(this, name, {
-            get: () => option,
+    selector(option, $ref) {
+        const { hover, proxy } = this.art.events;
+
+        addClass($ref, 'art-control-selector');
+        const $value = document.createElement('div');
+        addClass($value, 'art-selector-value');
+        append($value, option.html);
+        $ref.innerText = '';
+        append($ref, $value);
+
+        const list = option.selector.map((item) => `<div class="art-selector-item">${item.name}</div>`).join('');
+        const $list = document.createElement('div');
+        addClass($list, 'art-selector-list');
+        append($list, list);
+        append($ref, $list);
+
+        const setLeft = () => {
+            $list.style.left = `-${getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2}px`;
+        };
+
+        hover($ref, setLeft);
+
+        proxy($ref, 'click', (event) => {
+            if (hasClass(event.target, 'art-selector-item')) {
+                const name = event.target.innerText;
+                if ($value.innerText === name) return;
+                const find = option.selector.find((item) => item.name === name);
+                $value.innerText = name;
+                setLeft();
+                if (find) {
+                    if (option.onSelect) {
+                        option.onSelect.call(this.art, find);
+                    }
+                    this.art.emit('selector', find);
+                }
+            }
         });
     }
 }
