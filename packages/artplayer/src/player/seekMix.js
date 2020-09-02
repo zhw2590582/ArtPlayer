@@ -6,8 +6,10 @@ export default function seekMix(art, player) {
     def(player, 'seek', {
         set(time) {
             player.currentTime = time;
-            notice.show = `${secondToTime(player.currentTime)} / ${secondToTime(player.duration)}`;
             art.emit('seek', player.currentTime);
+            if (player.duration) {
+                notice.show = `${secondToTime(player.currentTime)} / ${secondToTime(player.duration)}`;
+            }
         },
     });
 
