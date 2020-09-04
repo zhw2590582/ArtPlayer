@@ -38,5 +38,45 @@
     "bundled": 273879,
     "minified": 140344,
     "gzipped": 35380
+  },
+  "artplayer-plugin-backlight.js": {
+    "bundled": 4678,
+    "minified": 2027,
+    "gzipped": 969
+  },
+  "artplayer.js": {
+    "bundled": 200203,
+    "minified": 116164,
+    "gzipped": 26958
+  },
+  "artplayer-plugin-danmuku.js": {
+    "bundled": 25068,
+    "minified": 13329,
+    "gzipped": 4388
+  },
+  "artplayer-plugin-gif.js": {
+    "bundled": 98558,
+    "minified": 28931,
+    "gzipped": 10430
+  },
+  "artplayer-react.js": {
+    "bundled": 285914,
+    "minified": 146587,
+    "gzipped": 36248
+  },
+  "artplayer-tool-github.js": {
+    "bundled": 12711,
+    "minified": 12347,
+    "gzipped": 4310
+  },
+  "artplayer-tool-thumbnail.js": {
+    "bundled": 16762,
+    "minified": 8169,
+    "gzipped": 2938
+  },
+  "artplayer-vue.js": {
+    "bundled": 201783,
+    "minified": 117101,
+    "gzipped": 27123
   }
 }
