@@ -1,4 +1,4 @@
-import { setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape } from './utils';
+import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, addClass, escape } from './utils';
 import Component from './utils/component';
 
 export default class Subtitle extends Component {
@@ -17,6 +17,10 @@ export default class Subtitle extends Component {
         if (subtitle.url) {
             this.init(subtitle.url);
         }
+
+        if (subtitle.bilingual) {
+            addClass($subtitle, 'art-bilingual');
+        }
     }
 
     get url() {
@@ -29,6 +33,14 @@ export default class Subtitle extends Component {
 
     get activeCue() {
         return this.textTrack.activeCues[0];
+    }
+
+    style(key, value) {
+        const { $subtitle } = this.art.template;
+        if (typeof key === 'object') {
+            return setStyles($subtitle, key);
+        }
+        return setStyle($subtitle, key, value);
     }
 
     update() {
