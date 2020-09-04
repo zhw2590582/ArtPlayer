@@ -65,7 +65,7 @@ export default class Component {
         if (option.click) {
             this.art.events.proxy($ref, 'click', (event) => {
                 event.preventDefault();
-                option.click.call(this.art, event);
+                option.click.call(this.art, this, event);
             });
         }
 

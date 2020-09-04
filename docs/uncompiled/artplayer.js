@@ -2362,7 +2362,7 @@
         if (option.click) {
           this.art.events.proxy($ref, 'click', function (event) {
             event.preventDefault();
-            option.click.call(_this.art, event);
+            option.click.call(_this.art, _this, event);
           });
         }
 
