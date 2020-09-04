@@ -9,15 +9,15 @@ function validElement(value, type, paths) {
 
 const component = {
     html: validElement,
-    disable: 'boolean|undefined',
-    name: 'string|undefined',
-    index: 'number|undefined',
-    style: 'object|undefined',
-    click: 'function|undefined',
-    mounted: 'function|undefined',
-    tooltip: 'string|undefined',
-    selector: 'array|undefined',
-    onSelect: 'function|undefined',
+    disable: '?boolean',
+    name: '?string',
+    index: '?number',
+    style: '?object',
+    click: '?function',
+    mounted: '?function',
+    tooltip: '?string',
+    selector: '?array',
+    onSelect: '?function',
 };
 
 export default {
@@ -69,7 +69,7 @@ export default {
     ],
     quality: [
         {
-            default: 'boolean|undefined',
+            default: '?boolean',
             name: 'string',
             url: 'string',
         },
