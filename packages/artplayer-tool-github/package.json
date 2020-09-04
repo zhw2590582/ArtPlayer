@@ -1,6 +1,6 @@
 {
   "name": "artplayer-tool-github",
-  "version": "3.5.11",
+  "version": "3.5.12",
   "expose": "ArtplayerToolGithub",
   "description": "Github tool for ArtPlayer",
   "main": "dist/artplayer-tool-github.js",
