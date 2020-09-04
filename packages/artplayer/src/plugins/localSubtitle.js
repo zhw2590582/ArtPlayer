@@ -52,10 +52,10 @@ export default function localSubtitle(art) {
                     <div class="art-upload-value"></div>
                 </div>
             `,
-            mounted: $setting => {
+            mounted: ($setting) => {
                 const $btn = query('.art-upload-btn', $setting);
                 const $value = query('.art-upload-value', $setting);
-                art.on('localSubtitle', file => {
+                art.on('localSubtitle', (file) => {
                     $value.textContent = file.name;
                     $value.title = file.name;
                 });

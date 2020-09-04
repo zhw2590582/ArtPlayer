@@ -35,6 +35,14 @@ export default class Subtitle extends Component {
         return this.textTrack.activeCues[0];
     }
 
+    get encoding() {
+        return this.art.option.subtitle.encoding;
+    }
+
+    set encoding(value) {
+        this.art.option.subtitle.encoding = value;
+    }
+
     style(key, value) {
         const { $subtitle } = this.art.template;
         if (typeof key === 'object') {
@@ -55,9 +63,9 @@ export default class Subtitle extends Component {
         }
     }
 
-    switch(url, name, ext) {
+    switch(url, name, ext, encoding) {
         const { i18n, notice } = this.art;
-        return this.init(url, ext).then((subUrl) => {
+        return this.init(url, ext, encoding).then((subUrl) => {
             if (name) {
                 notice.show = `${i18n.get('Switch subtitle')}: ${name}`;
             }
@@ -66,10 +74,11 @@ export default class Subtitle extends Component {
         });
     }
 
-    init(url, ext) {
+    init(url, ext, encoding) {
         const {
             notice,
             events: { proxy },
+            option: { subtitle },
             template: { $subtitle, $video, $track },
         } = this.art;
 
@@ -83,8 +92,11 @@ export default class Subtitle extends Component {
         }
 
         return fetch(url)
-            .then((response) => response.text())
-            .then((text) => {
+            .then((response) => response.arrayBuffer())
+            .then((buffer) => {
+                const decoder = new TextDecoder(encoding || subtitle.encoding);
+                const text = decoder.decode(buffer);
+
                 this.art.emit('subtitleLoad', url);
                 switch (ext || getExt(url)) {
                     case 'srt':

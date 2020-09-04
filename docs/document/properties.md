@@ -318,12 +318,14 @@ art.contextmenu.add({
 
 -   Type: `Object`
 
-| propertie | type       | Description      |
-| --------- | ---------- | ---------------- |
-| `init`    | `Function` | Init subtitle    |
-| `show`    | `setter`   | Show or hide     |
-| `switch`  | `Function` | Switch subtitle  |
-| `url`     | `getter`   | get subtitle url |
+| propertie  | type            | Description           |
+| ---------- | --------------- | --------------------- |
+| `init`     | `Function`      | Init subtitle         |
+| `show`     | `setter`        | Show or hide          |
+| `switch`   | `Function`      | Switch subtitle       |
+| `url`      | `getter`        | get subtitle url      |
+| `encoding` | `getter/setter` | Get and set encoding  |
+| `style`    | `Function`      | Modify subtitle style |
 
 [Run Code](/Properties.subtitle)
 
@@ -333,6 +335,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     subtitle: {
         url: '/assets/sample/subtitle.srt',
+        bilingual: true,
     },
     controls: [
         {
@@ -340,6 +343,7 @@ var art = new Artplayer({
             index: 10,
             html: 'subtitle 01',
             click: function () {
+                art.subtitle.style('color', 'green');
                 art.subtitle.switch('/assets/sample/subtitle.srt', 'srt subtitle name');
             },
         },
@@ -348,6 +352,7 @@ var art = new Artplayer({
             index: 20,
             html: 'subtitle 02',
             click: function () {
+                art.subtitle.style('color', 'red');
                 art.subtitle.switch('/assets/sample/subtitle.vtt', 'vtt subtitle name');
             },
         },

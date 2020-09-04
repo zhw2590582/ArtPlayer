@@ -663,10 +663,12 @@ art.plugins.networkMonitor.sample(30000);
 
 Custom subtitle
 
-| propertie | type     | Description                              |
-| --------- | -------- | ---------------------------------------- |
-| `url`     | `String` | Subtitle url, support vtt and srt format |
-| `style`   | `Object` | Subtitle style                           |
+| propertie   | type      | Description                              |
+| ----------- | --------- | ---------------------------------------- |
+| `url`       | `String`  | Subtitle url, support vtt and srt format |
+| `style`     | `Object`  | Subtitle style                           |
+| `encoding`  | `String`  | Subtitle encoding                        |
+| `bilingual` | `Boolean` | Whether bilingual subtitles              |
 
 [Run Code](/Configuration.subtitle)
 

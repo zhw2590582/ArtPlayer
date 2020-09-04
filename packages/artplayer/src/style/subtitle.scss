@@ -15,8 +15,14 @@
         p {
             word-break: break-all;
             height: fit-content;
-            margin: 10px 0 0;
+            margin: 5px 0 0;
             line-height: 1;
+        }
+    }
+
+    .art-bilingual {
+        p:nth-child(2) {
+            font-size: 0.6em;
         }
     }
 

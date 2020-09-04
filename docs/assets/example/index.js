@@ -77,6 +77,7 @@ var art = new Artplayer({
         style: {
             color: '#03A9F4',
         },
+        encoding: 'utf-8',
         bilingual: true,
     },
     highlight: [
