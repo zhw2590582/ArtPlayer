@@ -30,7 +30,8 @@ export default class Component {
         }
     }
 
-    add(option) {
+    add(getOption) {
+        const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
         if (!this.$parent || !this.name || option.disable) return;
         const name = option.name || `${this.name}${this.id}`;
         errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);

@@ -70,6 +70,7 @@ export default class Artplayer {
         subtitle?: {
             url: string;
             style: object;
+            bilingual: boolean,
         };
         moreVideoAttr?: object;
         icons?: {

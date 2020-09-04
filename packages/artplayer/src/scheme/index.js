@@ -90,6 +90,7 @@ export default {
     subtitle: {
         url: 'string',
         style: 'object',
+        bilingual: 'boolean',
     },
     moreVideoAttr: 'object',
     icons: 'object',
