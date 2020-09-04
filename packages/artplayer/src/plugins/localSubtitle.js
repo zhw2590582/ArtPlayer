@@ -12,8 +12,10 @@ export default function localSubtitle(art) {
         if (file) {
             const type = getExt(file.name);
             if (['ass', 'vtt', 'srt'].includes(type)) {
-                const url = URL.createObjectURL(file);
-                subtitle.switch(url, file.name, type);
+                subtitle.switch(URL.createObjectURL(file), {
+                    name: file.name,
+                    ext: type,
+                });
                 art.emit('localSubtitle', file);
             } else {
                 errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');

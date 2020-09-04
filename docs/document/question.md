@@ -23,7 +23,9 @@ var art = new Artplayer({
                 },
             ],
             onSelect: function (item) {
-                art.subtitle.switch(item.url, item.name);
+                art.subtitle.switch(item.url, {
+                    name: item.name
+                });
             },
         },
     ],

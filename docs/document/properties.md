@@ -318,14 +318,21 @@ art.contextmenu.add({
 
 -   Type: `Object`
 
-| propertie  | type            | Description           |
-| ---------- | --------------- | --------------------- |
-| `init`     | `Function`      | Init subtitle         |
-| `show`     | `setter`        | Show or hide          |
-| `switch`   | `Function`      | Switch subtitle       |
-| `url`      | `getter`        | get subtitle url      |
-| `encoding` | `getter/setter` | Get and set encoding  |
-| `style`    | `Function`      | Modify subtitle style |
+| propertie | type       | Description           |
+| --------- | ---------- | --------------------- |
+| `init`    | `Function` | Init subtitle         |
+| `show`    | `setter`   | Show or hide          |
+| `switch`  | `Function` | Switch subtitle       |
+| `url`     | `getter`   | get subtitle url      |
+| `style`   | `Function` | Modify subtitle style |
+
+Both `init` and `switch` accept subtitle url as the first parameter, and the second parameter as optional:
+
+| propertie  | type     | Description       |
+| ---------- | -------- | ----------------- |
+| `name`     | `String` | Subtitle name     |
+| `ext`      | `String` | Subtitle format   |
+| `encoding` | `String` | Subtitle encoding |
 
 [Run Code](/Properties.subtitle)
 
@@ -344,7 +351,11 @@ var art = new Artplayer({
             html: 'subtitle 01',
             click: function () {
                 art.subtitle.style('color', 'green');
-                art.subtitle.switch('/assets/sample/subtitle.srt', 'srt subtitle name');
+                art.subtitle.switch('/assets/sample/subtitle.srt', {
+                    name: 'srt subtitle name',
+                    ext: 'srt',
+                    encoding: 'utf-8',
+                });
             },
         },
         {
@@ -353,7 +364,11 @@ var art = new Artplayer({
             html: 'subtitle 02',
             click: function () {
                 art.subtitle.style('color', 'red');
-                art.subtitle.switch('/assets/sample/subtitle.vtt', 'vtt subtitle name');
+                art.subtitle.switch('/assets/sample/subtitle.vtt', {
+                    name: 'vtt subtitle name',
+                    ext: 'vtt',
+                    encoding: 'utf-8',
+                });
             },
         },
     ],

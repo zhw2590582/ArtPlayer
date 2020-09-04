@@ -35,14 +35,6 @@ export default class Subtitle extends Component {
         return this.textTrack.activeCues[0];
     }
 
-    get encoding() {
-        return this.art.option.subtitle.encoding;
-    }
-
-    set encoding(value) {
-        this.art.option.subtitle.encoding = value;
-    }
-
     style(key, value) {
         const { $subtitle } = this.art.template;
         if (typeof key === 'object') {
@@ -63,18 +55,18 @@ export default class Subtitle extends Component {
         }
     }
 
-    switch(url, name, ext, encoding) {
+    switch(url, opt = {}) {
         const { i18n, notice } = this.art;
-        return this.init(url, ext, encoding).then((subUrl) => {
-            if (name) {
-                notice.show = `${i18n.get('Switch subtitle')}: ${name}`;
+        return this.init(url, opt).then((subUrl) => {
+            if (opt.name) {
+                notice.show = `${i18n.get('Switch subtitle')}: ${opt.name}`;
             }
             this.art.emit('subtitleSwitch', subUrl);
             return subUrl;
         });
     }
 
-    init(url, ext, encoding) {
+    init(url, opt = {}) {
         const {
             notice,
             events: { proxy },
@@ -94,11 +86,11 @@ export default class Subtitle extends Component {
         return fetch(url)
             .then((response) => response.arrayBuffer())
             .then((buffer) => {
-                const decoder = new TextDecoder(encoding || subtitle.encoding);
+                const decoder = new TextDecoder(opt.encoding || subtitle.encoding);
                 const text = decoder.decode(buffer);
 
                 this.art.emit('subtitleLoad', url);
-                switch (ext || getExt(url)) {
+                switch (opt.ext || getExt(url)) {
                     case 'srt':
                         return vttToBlob(srtToVtt(text));
                     case 'ass':

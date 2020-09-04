@@ -3493,15 +3493,16 @@
       }
     }, {
       key: "switch",
-      value: function _switch(url, name, ext, encoding) {
+      value: function _switch(url) {
         var _this2 = this;
 
+        var opt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         var _this$art = this.art,
             i18n = _this$art.i18n,
             notice = _this$art.notice;
-        return this.init(url, ext, encoding).then(function (subUrl) {
-          if (name) {
-            notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(name);
+        return this.init(url, opt).then(function (subUrl) {
+          if (opt.name) {
+            notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(opt.name);
           }
 
           _this2.art.emit('subtitleSwitch', subUrl);
@@ -3511,9 +3512,10 @@
       }
     }, {
       key: "init",
-      value: function init(url, ext, encoding) {
+      value: function init(url) {
         var _this3 = this;
 
+        var opt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         var _this$art2 = this.art,
             notice = _this$art2.notice,
             proxy = _this$art2.events.proxy,
@@ -3536,12 +3538,12 @@
         return fetch(url).then(function (response) {
           return response.arrayBuffer();
         }).then(function (buffer) {
-          var decoder = new TextDecoder(encoding || subtitle.encoding);
+          var decoder = new TextDecoder(opt.encoding || subtitle.encoding);
           var text = decoder.decode(buffer);
 
           _this3.art.emit('subtitleLoad', url);
 
-          switch (ext || getExt(url)) {
+          switch (opt.ext || getExt(url)) {
             case 'srt':
               return vttToBlob(srtToVtt(text));
 
@@ -3579,14 +3581,6 @@
       key: "activeCue",
       get: function get() {
         return this.textTrack.activeCues[0];
-      }
-    }, {
-      key: "encoding",
-      get: function get() {
-        return this.art.option.subtitle.encoding;
-      },
-      set: function set(value) {
-        this.art.option.subtitle.encoding = value;
       }
     }]);
 
@@ -4379,8 +4373,10 @@
         var type = getExt(file.name);
 
         if (['ass', 'vtt', 'srt'].includes(type)) {
-          var url = URL.createObjectURL(file);
-          subtitle.switch(url, file.name, type);
+          subtitle.switch(URL.createObjectURL(file), {
+            name: file.name,
+            ext: type
+          });
           art.emit('localSubtitle', file);
         } else {
           errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');

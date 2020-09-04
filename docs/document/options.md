@@ -667,7 +667,7 @@ Custom subtitle
 | ----------- | --------- | ---------------------------------------- |
 | `url`       | `String`  | Subtitle url, support vtt and srt format |
 | `style`     | `Object`  | Subtitle style                           |
-| `encoding`  | `String`  | Subtitle encoding                        |
+| `encoding`  | `String`  | Subtitle encoding, default is `utf-8`    |
 | `bilingual` | `Boolean` | Whether bilingual subtitles              |
 
 [Run Code](/Configuration.subtitle)
@@ -678,6 +678,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     subtitle: {
         url: '/assets/sample/subtitle.srt',
+        encoding: 'utf-8',
+        bilingual: true,
         style: {
             color: '#03A9F4',
             'font-size': '30px',
