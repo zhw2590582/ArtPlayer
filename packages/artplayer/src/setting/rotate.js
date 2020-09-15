@@ -34,7 +34,7 @@ export default function rotate(option) {
             mounted: ($setting) => {
                 const $value = query('.art-rotate-value', $setting);
                 art.on('rotate', (rotate) => {
-                    $value.innerText = `${rotate}°`;
+                    $value.innerText = `${rotate || 0}°`;
                 });
             },
         };

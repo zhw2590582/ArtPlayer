@@ -2324,7 +2324,7 @@
           notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
         }
 
-        art.emit('rotate', deg || 0);
+        art.emit('rotate', deg);
       }
     });
     def(player, 'rotateReset', {
@@ -4209,7 +4209,7 @@
         mounted: function mounted($setting) {
           var $value = query('.art-rotate-value', $setting);
           art.on('rotate', function (rotate) {
-            $value.innerText = "".concat(rotate, "\xB0");
+            $value.innerText = "".concat(rotate || 0, "\xB0");
           });
         }
       });

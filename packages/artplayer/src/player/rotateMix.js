@@ -28,8 +28,8 @@ export default function rotateMix(art, player) {
             if (typeof deg === 'number') {
                 notice.show = `${i18n.get('Rotate')}: ${deg}°`;
             }
-            
-            art.emit('rotate', deg || 0);
+
+            art.emit('rotate', deg);
         },
     });
 
