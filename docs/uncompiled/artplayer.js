@@ -1567,7 +1567,10 @@
           $player.dataset.aspectRatio = ratio;
         }
 
-        notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
+        if (typeof ratio === 'string') {
+          notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
+        }
+
         art.emit('aspectRatio', ratio);
       }
     });
@@ -2124,8 +2127,11 @@
           $player.dataset.flip = flip;
         }
 
-        var word = flip.replace(flip[0], flip[0].toUpperCase());
-        notice.show = "".concat(i18n.get('Flip'), ": ").concat(i18n.get(word));
+        if (typeof flip === 'string') {
+          var word = flip.replace(flip[0], flip[0].toUpperCase());
+          notice.show = "".concat(i18n.get('Flip'), ": ").concat(i18n.get(word));
+        }
+
         art.emit('flip', flip);
       }
     });
@@ -2314,8 +2320,11 @@
           $player.dataset.rotate = deg;
         }
 
-        notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
-        art.emit('rotate', deg);
+        if (typeof deg === 'number') {
+          notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
+        }
+
+        art.emit('rotate', deg || 0);
       }
     });
     def(player, 'rotateReset', {

@@ -25,8 +25,11 @@ export default function rotateMix(art, player) {
                 $player.dataset.rotate = deg;
             }
 
-            notice.show = `${i18n.get('Rotate')}: ${deg}°`;
-            art.emit('rotate', deg);
+            if (typeof deg === 'number') {
+                notice.show = `${i18n.get('Rotate')}: ${deg}°`;
+            }
+            
+            art.emit('rotate', deg || 0);
         },
     });
 

@@ -21,8 +21,11 @@ export default function flipMix(art, player) {
                 $player.dataset.flip = flip;
             }
 
-            const word = flip.replace(flip[0], flip[0].toUpperCase());
-            notice.show = `${i18n.get('Flip')}: ${i18n.get(word)}`;
+            if (typeof flip === 'string') {
+                const word = flip.replace(flip[0], flip[0].toUpperCase());
+                notice.show = `${i18n.get('Flip')}: ${i18n.get(word)}`;
+            }
+
             art.emit('flip', flip);
         },
     });
