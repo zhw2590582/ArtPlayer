@@ -1272,23 +1272,28 @@
   }
 
   function exclusiveInit(art, player) {
-    var props = ['mini', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
-    props.forEach(function (name) {
-      art.on(name, function (state) {
-        if (state) {
-          props.filter(function (item) {
-            return item !== name;
-          }).forEach(function (item) {
-            if (player[item]) {
-              player[item] = false;
-            }
-          });
-        }
+    var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
+
+    function exclusive(props) {
+      props.forEach(function (name) {
+        art.on(name, function () {
+          if (player[name]) {
+            props.filter(function (item) {
+              return item !== name;
+            }).forEach(function (item) {
+              if (player[item]) {
+                player[item] = false;
+              }
+            });
+          }
+        });
       });
-    });
-    def(player, 'normal', {
+    }
+
+    exclusive(sizeProps);
+    def(player, 'normalSize', {
       get: function get() {
-        return props.every(function (name) {
+        return sizeProps.every(function (name) {
           return !player[name];
         });
       }
@@ -3740,7 +3745,7 @@
     var option = art.option,
         player = art.player;
     var resizeFn = throttle(function () {
-      if (player.normal) {
+      if (player.normalSize) {
         player.autoSize = option.autoSize;
       }
 

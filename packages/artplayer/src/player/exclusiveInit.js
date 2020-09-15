@@ -1,25 +1,29 @@
 import { def } from '../utils';
 
 export default function exclusiveInit(art, player) {
-    const props = ['mini', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
+    const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
 
-    props.forEach((name) => {
-        art.on(name, (state) => {
-            if (state) {
-                props
-                    .filter((item) => item !== name)
-                    .forEach((item) => {
-                        if (player[item]) {
-                            player[item] = false;
-                        }
-                    });
-            }
+    function exclusive(props) {
+        props.forEach((name) => {
+            art.on(name, () => {
+                if (player[name]) {
+                    props
+                        .filter((item) => item !== name)
+                        .forEach((item) => {
+                            if (player[item]) {
+                                player[item] = false;
+                            }
+                        });
+                }
+            });
         });
-    });
+    }
 
-    def(player, 'normal', {
+    exclusive(sizeProps);
+
+    def(player, 'normalSize', {
         get() {
-            return props.every((name) => !player[name]);
+            return sizeProps.every((name) => !player[name]);
         },
     });
 }
