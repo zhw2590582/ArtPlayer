@@ -10,7 +10,7 @@ export default function rotateMix(art, player) {
     def(player, 'rotate', {
         get: () => Number($player.dataset.rotate) || 0,
         set: (deg) => {
-            if (deg === false) deg = 0;
+            if (!deg) deg = 0;
 
             const degList = [-270, -180, -90, 0, 90, 180, 270];
             errorHandle(degList.includes(deg), `'rotate' only accept ${degList.toString()} as parameters`);

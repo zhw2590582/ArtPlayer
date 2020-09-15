@@ -1534,7 +1534,7 @@
         return $player.dataset.aspectRatio || '';
       },
       set: function set(ratio) {
-        if (ratio === false) ratio = 'default';
+        if (!ratio) ratio = 'default';
         var ratioList = ['default', '4:3', '16:9'];
         errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
@@ -2116,7 +2116,7 @@
         return $player.dataset.flip;
       },
       set: function set(flip) {
-        if (flip === false) flip = 'normal';
+        if (!flip) flip = 'normal';
         var flipList = ['normal', 'horizontal', 'vertical'];
         errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
 
@@ -2300,7 +2300,7 @@
         return Number($player.dataset.rotate) || 0;
       },
       set: function set(deg) {
-        if (deg === false) deg = 0;
+        if (!deg) deg = 0;
         var degList = [-270, -180, -90, 0, 90, 180, 270];
         errorHandle(degList.includes(deg), "'rotate' only accept ".concat(degList.toString(), " as parameters"));
 

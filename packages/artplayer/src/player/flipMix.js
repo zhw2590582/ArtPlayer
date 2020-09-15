@@ -12,7 +12,7 @@ export default function flipMix(art, player) {
             return $player.dataset.flip;
         },
         set(flip) {
-            if (flip === false) flip = 'normal';
+            if (!flip) flip = 'normal';
 
             const flipList = ['normal', 'horizontal', 'vertical'];
             errorHandle(flipList.includes(flip), `'flip' only accept ${flipList.toString()} as parameters`);
