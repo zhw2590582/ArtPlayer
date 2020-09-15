@@ -15,7 +15,7 @@ export default function rotateMix(art, player) {
             const degList = [-270, -180, -90, 0, 90, 180, 270];
             errorHandle(degList.includes(deg), `'rotate' only accept ${degList.toString()} as parameters`);
 
-            if (!deg) {
+            if (deg === 0) {
                 setStyle($video, 'width', null);
                 setStyle($video, 'height', null);
                 setStyle($video, 'padding', null);

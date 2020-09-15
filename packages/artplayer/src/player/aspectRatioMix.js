@@ -17,7 +17,7 @@ export default function aspectRatioMix(art, player) {
             const ratioList = ['default', '4:3', '16:9'];
             errorHandle(ratioList.includes(ratio), `'aspectRatio' only accept ${ratioList.toString()} as parameters`);
 
-            if (!ratio || ratio === 'default') {
+            if (ratio === 'default') {
                 setStyle($video, 'width', null);
                 setStyle($video, 'height', null);
                 setStyle($video, 'padding', null);

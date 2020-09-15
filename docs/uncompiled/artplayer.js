@@ -1538,7 +1538,7 @@
         var ratioList = ['default', '4:3', '16:9'];
         errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
-        if (!ratio || ratio === 'default') {
+        if (ratio === 'default') {
           setStyle($video, 'width', null);
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);
@@ -2120,7 +2120,7 @@
         var flipList = ['normal', 'horizontal', 'vertical'];
         errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
 
-        if (!flip || flip === 'normal') {
+        if (flip === 'normal') {
           delete $player.dataset.flip;
         } else {
           $player.dataset.flip = flip;
@@ -2304,7 +2304,7 @@
         var degList = [-270, -180, -90, 0, 90, 180, 270];
         errorHandle(degList.includes(deg), "'rotate' only accept ".concat(degList.toString(), " as parameters"));
 
-        if (!deg) {
+        if (deg === 0) {
           setStyle($video, 'width', null);
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);

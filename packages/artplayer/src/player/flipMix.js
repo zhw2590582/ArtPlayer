@@ -17,7 +17,7 @@ export default function flipMix(art, player) {
             const flipList = ['normal', 'horizontal', 'vertical'];
             errorHandle(flipList.includes(flip), `'flip' only accept ${flipList.toString()} as parameters`);
 
-            if (!flip || flip === 'normal') {
+            if (flip === 'normal') {
                 delete $player.dataset.flip;
             } else {
                 $player.dataset.flip = flip;
