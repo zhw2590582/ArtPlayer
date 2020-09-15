@@ -8,14 +8,16 @@ export default function switchMix(art, player) {
         URL.revokeObjectURL(player.url);
         const { playing } = player;
         player.url = url;
-        player.playbackRate = false;
-        player.aspectRatio = false;
         art.once('video:canplay', () => {
+            player.playbackRate = false;
+            player.aspectRatio = false;
+            player.flip = 'normal';
+            player.autoSize = true;
             player.currentTime = currentTime;
+            if (playing) {
+                player.play = true;
+            }
         });
-        if (playing) {
-            player.play = true;
-        }
         if (name) {
             notice.show = `${i18n.get('Switch video')}: ${name}`;
         }

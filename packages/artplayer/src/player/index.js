@@ -26,6 +26,7 @@ import flipMix from './flipMix';
 import lightMix from './lightMix';
 import miniMix from './miniMix';
 import loopMin from './loopMin';
+import rotateMix from './rotateMix';
 import { proxyPropertys } from '../utils';
 
 export default class Player {
@@ -58,6 +59,7 @@ export default class Player {
         lightMix(art, this);
         miniMix(art, this);
         loopMin(art, this);
+        rotateMix(art, this);
         proxyPropertys(art, this);
     }
 }
