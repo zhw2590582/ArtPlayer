@@ -1534,7 +1534,8 @@
         return $player.dataset.aspectRatio || '';
       },
       set: function set(ratio) {
-        var ratioList = [false, 'default', '4:3', '16:9'];
+        if (ratio === false) ratio = 'default';
+        var ratioList = ['default', '4:3', '16:9'];
         errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
         if (!ratio || ratio === 'default') {
@@ -1567,10 +1568,7 @@
           $player.dataset.aspectRatio = ratio;
         }
 
-        if (typeof ratio === 'string') {
-          notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
-        }
-
+        notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
         art.emit('aspectRatio', ratio);
       }
     });
@@ -2118,7 +2116,8 @@
         return $player.dataset.flip;
       },
       set: function set(flip) {
-        var flipList = [false, 'normal', 'horizontal', 'vertical'];
+        if (flip === false) flip = 'normal';
+        var flipList = ['normal', 'horizontal', 'vertical'];
         errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
 
         if (!flip || flip === 'normal') {
@@ -2127,11 +2126,8 @@
           $player.dataset.flip = flip;
         }
 
-        if (typeof flip === 'string') {
-          var word = flip.replace(flip[0], flip[0].toUpperCase());
-          notice.show = "".concat(i18n.get('Flip'), ": ").concat(i18n.get(word));
-        }
-
+        var word = flip.replace(flip[0], flip[0].toUpperCase());
+        notice.show = "".concat(i18n.get('Flip'), ": ").concat(i18n.get(word));
         art.emit('flip', flip);
       }
     });
@@ -2304,7 +2300,8 @@
         return Number($player.dataset.rotate) || 0;
       },
       set: function set(deg) {
-        var degList = [false, -270, -180, -90, 0, 90, 180, 270];
+        if (deg === false) deg = 0;
+        var degList = [-270, -180, -90, 0, 90, 180, 270];
         errorHandle(degList.includes(deg), "'rotate' only accept ".concat(degList.toString(), " as parameters"));
 
         if (!deg) {
@@ -2320,10 +2317,7 @@
           $player.dataset.rotate = deg;
         }
 
-        if (typeof deg === 'number') {
-          notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
-        }
-
+        notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
         art.emit('rotate', deg);
       }
     });

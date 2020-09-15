@@ -12,7 +12,9 @@ export default function aspectRatioMix(art, player) {
             return $player.dataset.aspectRatio || '';
         },
         set(ratio) {
-            const ratioList = [false, 'default', '4:3', '16:9'];
+            if (ratio === false) ratio = 'default';
+
+            const ratioList = ['default', '4:3', '16:9'];
             errorHandle(ratioList.includes(ratio), `'aspectRatio' only accept ${ratioList.toString()} as parameters`);
 
             if (!ratio || ratio === 'default') {
@@ -40,10 +42,7 @@ export default function aspectRatioMix(art, player) {
                 $player.dataset.aspectRatio = ratio;
             }
 
-            if (typeof ratio === 'string') {
-                notice.show = `${i18n.get('Aspect ratio')}: ${ratio === 'default' ? i18n.get('Default') : ratio}`;
-            }
-
+            notice.show = `${i18n.get('Aspect ratio')}: ${ratio === 'default' ? i18n.get('Default') : ratio}`;
             art.emit('aspectRatio', ratio);
         },
     });
