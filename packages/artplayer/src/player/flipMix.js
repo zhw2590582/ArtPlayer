@@ -10,11 +10,16 @@ export default function flipMix(art, player) {
             if (flip) {
                 const flipList = ['normal', 'horizontal', 'vertical'];
                 errorHandle(flipList.includes(flip), `'flip' only accept ${flipList.toString()} as parameters`);
-                $player.dataset.flip = flip;
-                art.emit('flip', flip);
+                player.rotate = 0;
+                if (flip === 'normal') {
+                    player.flip = false;
+                } else {
+                    $player.dataset.flip = flip;
+                    art.emit('flip', flip);
+                }
             } else {
                 delete $player.dataset.flip;
-                art.emit('flip');
+                art.emit('flip', 'normal');
             }
         },
     });

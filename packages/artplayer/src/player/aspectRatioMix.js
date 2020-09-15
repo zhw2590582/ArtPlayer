@@ -19,6 +19,7 @@ export default function aspectRatioMix(art, player) {
                     `'aspectRatio' only accept ${ratioList.toString()} as parameters`,
                 );
 
+                player.rotate = 0;
                 if (ratio === 'default') {
                     player.aspectRatio = false;
                 } else {
@@ -48,7 +49,7 @@ export default function aspectRatioMix(art, player) {
                 setStyle($video, 'height', null);
                 setStyle($video, 'padding', null);
                 delete $player.dataset.aspectRatio;
-                art.emit('aspectRatio');
+                art.emit('aspectRatio', 'default');
             }
         },
     });

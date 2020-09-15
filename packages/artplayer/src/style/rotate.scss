@@ -1,0 +1,22 @@
+.art-video-player {
+    &[data-rotate='90'],
+    &[data-rotate='-270'] {
+        .art-video {
+            transform: rotate(90deg);
+        }
+    }
+
+    &[data-rotate='180'],
+    &[data-rotate='-180'] {
+        .art-video {
+            transform: rotate(180deg);
+        }
+    }
+
+    &[data-rotate='270'],
+    &[data-rotate='-90'] {
+        .art-video {
+            transform: rotate(270deg);
+        }
+    }
+}

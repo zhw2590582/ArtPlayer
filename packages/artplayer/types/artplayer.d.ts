@@ -30,6 +30,7 @@ export default class Artplayer {
         autoMini?: boolean;
         loop?: boolean;
         flip?: boolean;
+        rotate?: boolean;
         playbackRate?: boolean;
         aspectRatio?: boolean;
         screenshot?: boolean;

@@ -1,5 +1,6 @@
 import Component from '../utils/component';
 import flip from './flip';
+import rotate from './rotate';
 import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 
@@ -29,6 +30,13 @@ export default class Setting extends Component {
                     flip({
                         disable: !option.flip,
                         name: 'flip',
+                    }),
+                );
+
+                this.add(
+                    rotate({
+                        disable: !option.rotate,
+                        name: 'rotate',
                     }),
                 );
 

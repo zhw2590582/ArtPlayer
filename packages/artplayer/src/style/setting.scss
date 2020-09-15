@@ -53,6 +53,10 @@
                     color: #fff;
                     background: rgba(255, 255, 255, 0.2);
                     border-radius: 2px;
+
+                    &:active {
+                        background-color: #00a1d6;
+                    }
                 }
                 &.current button {
                     background-color: #00a1d6;
