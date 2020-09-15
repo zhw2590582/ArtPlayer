@@ -1529,46 +1529,41 @@
         return $player.dataset.aspectRatio || '';
       },
       set: function set(ratio) {
-        if (ratio) {
-          var ratioList = ['default', '4:3', '16:9'];
-          errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
-          player.rotate = 0;
+        var ratioList = [false, 'default', '4:3', '16:9'];
+        errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
-          if (ratio === 'default') {
-            player.aspectRatio = false;
-          } else {
-            var ratioArray = ratio.split(':');
-            var videoWidth = $video.videoWidth,
-                videoHeight = $video.videoHeight;
-            var clientWidth = $player.clientWidth,
-                clientHeight = $player.clientHeight;
-            var videoRatio = videoWidth / videoHeight;
-            var setupRatio = ratioArray[0] / ratioArray[1];
-
-            if (videoRatio > setupRatio) {
-              var percentage = setupRatio * videoHeight / videoWidth;
-              setStyle($video, 'width', "".concat(percentage * 100, "%"));
-              setStyle($video, 'height', '100%');
-              setStyle($video, 'padding', "0 ".concat((clientWidth - clientWidth * percentage) / 2, "px"));
-            } else {
-              var _percentage = videoWidth / setupRatio / videoHeight;
-
-              setStyle($video, 'width', '100%');
-              setStyle($video, 'height', "".concat(_percentage * 100, "%"));
-              setStyle($video, 'padding', "".concat((clientHeight - clientHeight * _percentage) / 2, "px 0"));
-            }
-          }
-
-          $player.dataset.aspectRatio = ratio;
-          notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
-          art.emit('aspectRatio', ratio);
-        } else if (player.aspectRatio) {
+        if (!ratio || ratio === 'default') {
           setStyle($video, 'width', null);
           setStyle($video, 'height', null);
           setStyle($video, 'padding', null);
           delete $player.dataset.aspectRatio;
-          art.emit('aspectRatio', 'default');
+        } else {
+          var ratioArray = ratio.split(':');
+          var videoWidth = $video.videoWidth,
+              videoHeight = $video.videoHeight;
+          var clientWidth = $player.clientWidth,
+              clientHeight = $player.clientHeight;
+          var videoRatio = videoWidth / videoHeight;
+          var setupRatio = ratioArray[0] / ratioArray[1];
+
+          if (videoRatio > setupRatio) {
+            var percentage = setupRatio * videoHeight / videoWidth;
+            setStyle($video, 'width', "".concat(percentage * 100, "%"));
+            setStyle($video, 'height', '100%');
+            setStyle($video, 'padding', "0 ".concat((clientWidth - clientWidth * percentage) / 2, "px"));
+          } else {
+            var _percentage = videoWidth / setupRatio / videoHeight;
+
+            setStyle($video, 'width', '100%');
+            setStyle($video, 'height', "".concat(_percentage * 100, "%"));
+            setStyle($video, 'padding', "".concat((clientHeight - clientHeight * _percentage) / 2, "px 0"));
+          }
+
+          $player.dataset.aspectRatio = ratio;
         }
+
+        notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
+        art.emit('aspectRatio', ratio);
       }
     });
     def(player, 'aspectRatioReset', {
@@ -2107,26 +2102,33 @@
   }
 
   function flipMix(art, player) {
-    var $player = art.template.$player;
+    var $player = art.template.$player,
+        i18n = art.i18n,
+        notice = art.notice;
     def(player, 'flip', {
       get: function get() {
         return $player.dataset.flip;
       },
       set: function set(flip) {
-        if (flip) {
-          var flipList = ['normal', 'horizontal', 'vertical'];
-          errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
-          player.rotate = 0;
+        var flipList = [false, 'normal', 'horizontal', 'vertical'];
+        errorHandle(flipList.includes(flip), "'flip' only accept ".concat(flipList.toString(), " as parameters"));
 
-          if (flip === 'normal') {
-            player.flip = false;
-          } else {
-            $player.dataset.flip = flip;
-            art.emit('flip', flip);
-          }
-        } else {
+        if (!flip || flip === 'normal') {
           delete $player.dataset.flip;
-          art.emit('flip', 'normal');
+        } else {
+          $player.dataset.flip = flip;
+        }
+
+        var word = flip.replace(flip[0], flip[0].toUpperCase());
+        notice.show = "".concat(i18n.get('Flip'), ": ").concat(i18n.get(word));
+        art.emit('flip', flip);
+      }
+    });
+    def(player, 'flipReset', {
+      set: function set(value) {
+        if (value && player.flip) {
+          var flip = player.flip;
+          player.flip = flip;
         }
       }
     });
@@ -2291,26 +2293,24 @@
         return Number($player.dataset.rotate) || 0;
       },
       set: function set(deg) {
-        var degList = [-270, -180, -90, 0, 90, 180, 270];
+        var degList = [false, -270, -180, -90, 0, 90, 180, 270];
         errorHandle(degList.includes(deg), "'rotate' only accept ".concat(degList.toString(), " as parameters"));
-        player.flip = false;
-        player.aspectRatio = false;
-        notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
 
-        if (deg) {
+        if (!deg) {
+          setStyle($video, 'width', null);
+          setStyle($video, 'height', null);
+          setStyle($video, 'padding', null);
+          delete $player.dataset.rotate;
+        } else {
           var videoWidth = $video.videoWidth,
               videoHeight = $video.videoHeight;
           var clientWidth = $player.clientWidth,
               clientHeight = $player.clientHeight;
           $player.dataset.rotate = deg;
-          art.emit('rotate', deg);
-        } else {
-          setStyle($video, 'width', null);
-          setStyle($video, 'height', null);
-          setStyle($video, 'padding', null);
-          delete $player.dataset.rotate;
-          art.emit('rotate', 0);
         }
+
+        notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
+        art.emit('rotate', deg);
       }
     });
     def(player, 'rotateReset', {
