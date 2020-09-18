@@ -45,9 +45,9 @@
     "gzipped": 969
   },
   "artplayer.js": {
-    "bundled": 205536,
-    "minified": 118641,
-    "gzipped": 27436
+    "bundled": 205439,
+    "minified": 118462,
+    "gzipped": 27456
   },
   "artplayer-plugin-danmuku.js": {
     "bundled": 25068,

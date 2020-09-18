@@ -1,4 +1,4 @@
-import { append } from '../utils';
+import { append, def, addClass } from '../utils';
 import loading from './loading.svg';
 import state from './state.svg';
 import play from './play.svg';
@@ -30,12 +30,16 @@ export default class Icons {
             ...art.option.icons,
         };
 
-        Object.keys(icons).forEach(key => {
-            const icon = document.createElement('i');
-            icon.classList.add('art-icon');
-            icon.classList.add(`art-icon-${key}`);
-            append(icon, icons[key]);
-            this[key] = icon;
+        Object.keys(icons).forEach((key) => {
+            def(this, key, {
+                get: () => {
+                    const icon = document.createElement('i');
+                    addClass(icon, 'art-icon');
+                    addClass(icon, `art-icon-${key}`);
+                    append(icon, icons[key]);
+                    return icon;
+                },
+            });
         });
     }
 }

@@ -729,57 +729,64 @@
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  var b = 'boolean';
+  var s = 'string';
+  var n = 'number';
+  var o = 'object';
+  var a = 'array';
+  var f = 'function';
+  var r = 'regexp';
 
   function validElement(value, type, paths) {
-    return errorHandle(type === 'string' || value instanceof Element, "".concat(paths.join('.'), " require 'string' or 'Element' type"));
+    return errorHandle(type === s || value instanceof Element, "".concat(paths.join('.'), " require s or 'Element' type"));
   }
 
   var component = {
     html: validElement,
-    disable: '?boolean',
-    name: '?string',
-    index: '?number',
-    style: '?object',
-    click: '?function',
-    mounted: '?function',
-    tooltip: '?string',
-    selector: '?array',
-    onSelect: '?function'
+    disable: "?".concat(b),
+    name: "?".concat(s),
+    index: "?".concat(n),
+    style: "?".concat(o),
+    click: "?".concat(f),
+    mounted: "?".concat(f),
+    tooltip: "?".concat(s),
+    selector: "?".concat(a),
+    onSelect: "?".concat(f)
   };
   var scheme = {
     container: validElement,
-    url: 'string',
-    poster: 'string',
-    title: 'string',
-    theme: 'string',
-    lang: 'string',
-    volume: 'number',
-    isLive: 'boolean',
-    muted: 'boolean',
-    autoplay: 'boolean',
-    autoSize: 'boolean',
-    autoMini: 'boolean',
-    loop: 'boolean',
-    flip: 'boolean',
-    rotate: 'boolean',
-    playbackRate: 'boolean',
-    aspectRatio: 'boolean',
-    screenshot: 'boolean',
-    setting: 'boolean',
-    hotkey: 'boolean',
-    pip: 'boolean',
-    mutex: 'boolean',
-    light: 'boolean',
-    backdrop: 'boolean',
-    fullscreen: 'boolean',
-    fullscreenWeb: 'boolean',
-    subtitleOffset: 'boolean',
-    miniProgressBar: 'boolean',
-    localVideo: 'boolean',
-    localSubtitle: 'boolean',
-    networkMonitor: 'boolean',
-    plugins: ['function'],
-    whitelist: ['string|function|regexp'],
+    url: s,
+    poster: s,
+    title: s,
+    theme: s,
+    lang: s,
+    volume: n,
+    isLive: b,
+    muted: b,
+    autoplay: b,
+    autoSize: b,
+    autoMini: b,
+    loop: b,
+    flip: b,
+    rotate: b,
+    playbackRate: b,
+    aspectRatio: b,
+    screenshot: b,
+    setting: b,
+    hotkey: b,
+    pip: b,
+    mutex: b,
+    light: b,
+    backdrop: b,
+    fullscreen: b,
+    fullscreenWeb: b,
+    subtitleOffset: b,
+    miniProgressBar: b,
+    localVideo: b,
+    localSubtitle: b,
+    networkMonitor: b,
+    plugins: [f],
+    whitelist: ["".concat(s, "|").concat(f, "|").concat(r)],
     layers: [component],
     contextmenu: [component],
     controls: [_objectSpread(_objectSpread({}, component), {}, {
@@ -789,30 +796,30 @@
       }
     })],
     quality: [{
-      default: '?boolean',
-      name: 'string',
-      url: 'string'
+      default: "?".concat(b),
+      name: s,
+      url: s
     }],
     highlight: [{
-      time: 'number',
-      text: 'string'
+      time: n,
+      text: s
     }],
     thumbnails: {
-      url: 'string',
-      number: 'number',
-      width: 'number',
-      height: 'number',
-      column: 'number'
+      url: s,
+      number: n,
+      width: n,
+      height: n,
+      column: n
     },
     subtitle: {
-      url: 'string',
-      style: 'object',
-      encoding: 'string',
-      bilingual: 'boolean'
+      url: s,
+      style: o,
+      encoding: s,
+      bilingual: b
     },
-    moreVideoAttr: 'object',
-    icons: 'object',
-    customType: 'object'
+    moreVideoAttr: o,
+    icons: o,
+    customType: o
   };
 
   var config = {
@@ -4178,11 +4185,15 @@
     }, art.option.icons);
 
     Object.keys(icons).forEach(function (key) {
-      var icon = document.createElement('i');
-      icon.classList.add('art-icon');
-      icon.classList.add("art-icon-".concat(key));
-      append(icon, icons[key]);
-      _this[key] = icon;
+      def(_this, key, {
+        get: function get() {
+          var icon = document.createElement('i');
+          addClass(icon, 'art-icon');
+          addClass(icon, "art-icon-".concat(key));
+          append(icon, icons[key]);
+          return icon;
+        }
+      });
     });
   };
 
