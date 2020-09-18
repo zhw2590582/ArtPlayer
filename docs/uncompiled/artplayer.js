@@ -738,7 +738,7 @@
   var r = 'regexp';
 
   function validElement(value, type, paths) {
-    return errorHandle(type === s || value instanceof Element, "".concat(paths.join('.'), " require s or 'Element' type"));
+    return errorHandle(type === s || value instanceof Element, "".concat(paths.join('.'), " require '").concat(s, "' or 'Element' type"));
   }
 
   var component = {
