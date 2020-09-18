@@ -16,15 +16,50 @@ export default function rotateMix(art, player) {
             errorHandle(degList.includes(deg), `'rotate' only accept ${degList.toString()} as parameters`);
 
             if (deg === 0) {
-                setStyle($video, 'width', null);
-                setStyle($video, 'height', null);
-                setStyle($video, 'padding', null);
                 delete $player.dataset.rotate;
+                setStyle($video, 'transform', null);
             } else {
-                const { videoWidth, videoHeight } = $video;
-                const { clientWidth, clientHeight } = $player;
-                const degFormat = deg < 0 ? deg + 360 : deg;
+                player.flip = false;
                 $player.dataset.rotate = deg;
+
+                const getScaleValue = () => {
+                    const { clientWidth: videoWidth, clientHeight: videoHeight } = $video;
+                    const { clientWidth: playerWidth, clientHeight: playerHeight } = $player;
+                    const playerRatio = playerWidth / playerHeight;
+                    const videoRatio = videoWidth / videoHeight;
+                    return playerRatio > videoRatio ? playerWidth / videoHeight : playerHeight / videoWidth;
+                };
+
+                let degValue = 0;
+                let scaleValue = 1;
+                switch (deg) {
+                    case -270:
+                        degValue = 90;
+                        scaleValue = getScaleValue();
+                        break;
+                    case -180:
+                        degValue = 180;
+                        break;
+                    case -90:
+                        degValue = 270;
+                        scaleValue = getScaleValue();
+                        break;
+                    case 90:
+                        degValue = 90;
+                        scaleValue = getScaleValue();
+                        break;
+                    case 180:
+                        degValue = 180;
+                        break;
+                    case 270:
+                        degValue = 270;
+                        scaleValue = getScaleValue();
+                        break;
+                    default:
+                        break;
+                }
+
+                setStyle($video, 'transform', `rotate(${degValue}deg) scale(${scaleValue})`);
             }
 
             notice.show = `${i18n.get('Rotate')}: ${deg}°`;
