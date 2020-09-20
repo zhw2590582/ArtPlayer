@@ -64,18 +64,6 @@
         vertical-align: top;
     }
 
-    & >>> object {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: -1;
-    }
-
     @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
         .art-backdrop-filter {
             -webkit-backdrop-filter: saturate(180%) blur(20px);
