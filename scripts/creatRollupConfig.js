@@ -37,7 +37,9 @@ module.exports = function creatRollupConfig(projectPath) {
             format: 'umd',
             sourcemap: isProd ? false : true,
         },
-        exclude: ['node_modules/**', 'packages/**/node_modules/**'],
+        watch: {
+            exclude: ['node_modules/**', 'packages/**/node_modules/**'],
+        },
         plugins: [
             json({
                 exclude: ['node_modules/**', 'packages/**/node_modules/**'],
@@ -87,7 +89,7 @@ module.exports = function creatRollupConfig(projectPath) {
                 terser({
                     output: {
                         preamble: banner,
-                        comments: function() {
+                        comments: function () {
                             return false;
                         },
                     },
