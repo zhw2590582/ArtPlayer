@@ -12,7 +12,7 @@ export default class Template {
         }
 
         errorHandle(
-            art.constructor.instances.every((art) => art.template.$container !== this.$container),
+            art.constructor.instances.every((ins) => ins.template.$container !== this.$container),
             'Cannot mount multiple instances on the same dom element',
         );
 
