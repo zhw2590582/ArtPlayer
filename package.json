@@ -43,7 +43,7 @@
         "cpy": "^8.1.1",
         "cross-env": "^7.0.2",
         "cssnano": "^4.1.10",
-        "del": "^5.1.0",
+        "del": "^6.0.0",
         "eslint": "^7.9.0",
         "eslint-config-airbnb-base": "^14.2.0",
         "eslint-config-prettier": "^6.11.0",
