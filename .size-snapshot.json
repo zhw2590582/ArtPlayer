@@ -47,7 +47,7 @@
   "artplayer.js": {
     "bundled": 205757,
     "minified": 118547,
-    "gzipped": 27471
+    "gzipped": 27470
   },
   "artplayer-plugin-danmuku.js": {
     "bundled": 25068,
@@ -62,7 +62,7 @@
   "artplayer-react.js": {
     "bundled": 291488,
     "minified": 148982,
-    "gzipped": 36751
+    "gzipped": 36750
   },
   "artplayer-tool-github.js": {
     "bundled": 12711,
@@ -77,6 +77,6 @@
   "artplayer-vue.js": {
     "bundled": 207337,
     "minified": 119483,
-    "gzipped": 27640
+    "gzipped": 27639
   }
 }
