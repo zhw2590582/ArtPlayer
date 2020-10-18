@@ -1,5 +1,5 @@
 /*!
- * artplayer-tool-thumbnail.js v3.5.15
+ * artplayer-tool-thumbnail.js v3.5.16
  * Github: https://github.com/zhw2590582/ArtPlayer#readme
  * (c) 2017-2020 Harvey Zack
  * Released under the MIT License.
