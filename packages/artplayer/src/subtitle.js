@@ -1,4 +1,15 @@
-import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, addClass, escape } from './utils';
+import {
+    setStyle,
+    setStyles,
+    srtToVtt,
+    vttToBlob,
+    getExt,
+    assToVtt,
+    addClass,
+    escape,
+    removeClass,
+    hasClass,
+} from './utils';
 import Component from './utils/component';
 
 export default class Subtitle extends Component {
@@ -33,6 +44,20 @@ export default class Subtitle extends Component {
 
     get activeCue() {
         return this.textTrack.activeCues[0];
+    }
+
+    get bilingual() {
+        const { $subtitle } = this.art.template;
+        return hasClass($subtitle, 'art-bilingual');
+    }
+
+    set bilingual(val) {
+        const { $subtitle } = this.art.template;
+        if (val) {
+            addClass($subtitle, 'art-bilingual');
+        } else {
+            removeClass($subtitle, 'art-bilingual');
+        }
     }
 
     style(key, value) {

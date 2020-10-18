@@ -21,7 +21,7 @@
     }
 
     .art-bilingual {
-        p:nth-child(2) {
+        p:nth-child(n+2) {
             font-size: 0.6em;
         }
     }
