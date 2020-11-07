@@ -16,11 +16,6 @@ export default class Template {
             'Cannot mount multiple instances on the same dom element',
         );
 
-        errorHandle(
-            this.$container.clientWidth && this.$container.clientHeight,
-            'The width and height of the container cannot be 0',
-        );
-
         if (art.whitelist.state) {
             this.desktop();
         } else {
