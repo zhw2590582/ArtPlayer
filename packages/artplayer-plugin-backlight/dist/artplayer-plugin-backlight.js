@@ -1,5 +1,5 @@
 /*!
- * artplayer-plugin-backlight.js v3.5.18
+ * artplayer-plugin-backlight.js v3.5.19
  * Github: https://github.com/zhw2590582/ArtPlayer#readme
  * (c) 2017-2020 Harvey Zack
  * Released under the MIT License.
