@@ -6,7 +6,7 @@ export default function currentTimeMix(art, player) {
     def(player, 'currentTime', {
         get: () => $video.currentTime || 0,
         set: time => {
-            $video.currentTime = clamp(time, 0, player.duration || Infinity);
+            $video.currentTime = clamp(time, 0, player.duration);
         },
     });
 }
