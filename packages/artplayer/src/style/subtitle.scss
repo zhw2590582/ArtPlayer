@@ -21,8 +21,9 @@
     }
 
     .art-bilingual {
-        p:nth-child(n+2) {
-            font-size: 0.6em;
+        p:nth-child(n + 2) {
+            transform: scale(0.6);
+            transform-origin: center top;
         }
     }
 
