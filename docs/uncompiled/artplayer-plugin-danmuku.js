@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.artplayerPluginDanmuku = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.artplayerPluginDanmuku = factory());
 }(this, (function () { 'use strict';
 
   function _defineProperty(obj, key, value) {
@@ -199,10 +199,7 @@
   var arrayWithHoles = _arrayWithHoles;
 
   function _iterableToArrayLimit(arr, i) {
-    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-      return;
-    }
-
+    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
     var _arr = [];
     var _n = true;
     var _d = false;
@@ -230,14 +227,37 @@
 
   var iterableToArrayLimit = _iterableToArrayLimit;
 
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+
+  var arrayLikeToArray = _arrayLikeToArray;
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+  }
+
+  var unsupportedIterableToArray = _unsupportedIterableToArray;
+
   function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var nonIterableRest = _nonIterableRest;
 
   function _slicedToArray(arr, i) {
-    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
   }
 
   var slicedToArray = _slicedToArray;
@@ -407,14 +427,10 @@
 
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-  var Danmuku =
-  /*#__PURE__*/
-  function () {
+  var Danmuku = /*#__PURE__*/function () {
     function Danmuku(art, option) {
-      var _this = this;
-
       classCallCheck(this, Danmuku);
 
       art.i18n.update(i18n);
@@ -436,24 +452,34 @@
       art.on('video:waiting', this.stop.bind(this));
       art.on('resize', this.resize.bind(this));
       art.on('destroy', this.stop.bind(this));
-
-      if (typeof this.option.danmuku === 'function') {
-        this.option.danmuku().then(function (danmus) {
-          danmus.forEach(_this.emit.bind(_this));
-          art.emit('artplayerPluginDanmuku:loaded');
-        });
-      } else if (typeof this.option.danmuku === 'string') {
-        bilibiliDanmuParseFromUrl(this.option.danmuku).then(function (danmus) {
-          danmus.forEach(_this.emit.bind(_this));
-          art.emit('artplayerPluginDanmuku:loaded');
-        });
-      } else {
-        this.option.danmuku.forEach(this.emit.bind(this));
-        art.emit('artplayerPluginDanmuku:loaded');
-      }
+      this.load();
     }
 
     createClass(Danmuku, [{
+      key: "load",
+      value: function load() {
+        var _this = this;
+
+        if (typeof this.option.danmuku === 'function') {
+          this.option.danmuku().then(function (danmus) {
+            danmus.forEach(_this.emit.bind(_this));
+
+            _this.art.emit('artplayerPluginDanmuku:loaded');
+          });
+        } else if (typeof this.option.danmuku === 'string') {
+          bilibiliDanmuParseFromUrl(this.option.danmuku).then(function (danmus) {
+            danmus.forEach(_this.emit.bind(_this));
+
+            _this.art.emit('artplayerPluginDanmuku:loaded');
+          });
+        } else {
+          this.option.danmuku.forEach(this.emit.bind(this));
+          this.art.emit('artplayerPluginDanmuku:loaded');
+        }
+
+        return this;
+      }
+    }, {
       key: "config",
       value: function config(option) {
         var _this$art$constructor = this.art.constructor,
@@ -468,6 +494,7 @@
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.fontSize = clamp(this.option.fontSize, 12, 30);
         this.art.emit('artplayerPluginDanmuku:config', this.option);
+        return this;
       }
     }, {
       key: "continue",
@@ -483,6 +510,7 @@
               break;
           }
         });
+        return this;
       }
     }, {
       key: "suspend",
@@ -508,6 +536,7 @@
               }
           }
         });
+        return this;
       }
     }, {
       key: "resize",
@@ -523,6 +552,7 @@
             danmu.$ref.style.transition = 'transform 0s linear 0s';
           }
         });
+        return this;
       }
     }, {
       key: "update",
@@ -591,6 +621,7 @@
             _this2.update();
           }
         });
+        return this;
       }
     }, {
       key: "stop",
@@ -599,6 +630,7 @@
         this.suspend();
         window.cancelAnimationFrame(this.animationFrameTimer);
         this.art.emit('artplayerPluginDanmuku:stop');
+        return this;
       }
     }, {
       key: "start",
@@ -607,6 +639,7 @@
         this.continue();
         this.update();
         this.art.emit('artplayerPluginDanmuku:start');
+        return this;
       }
     }, {
       key: "show",
@@ -614,6 +647,7 @@
         this.isHide = false;
         this.$danmuku.style.display = 'block';
         this.art.emit('artplayerPluginDanmuku:show');
+        return this;
       }
     }, {
       key: "hide",
@@ -621,6 +655,7 @@
         this.isHide = true;
         this.$danmuku.style.display = 'none';
         this.art.emit('artplayerPluginDanmuku:hide');
+        return this;
       }
     }, {
       key: "emit",
@@ -642,12 +677,12 @@
 
         if (!danmu.text.trim()) {
           notice.show = i18n.get('Danmu text cannot be empty');
-          return;
+          return this;
         }
 
         if (danmu.text.length > this.option.maxlength) {
           notice.show = "".concat(i18n.get('The length of the danmu does not exceed'), " ").concat(this.option.maxlength);
-          return;
+          return this;
         }
 
         if (danmu.time) {
@@ -656,15 +691,16 @@
           danmu.time = player.currentTime + 0.5;
         }
 
-        this.queue.push(_objectSpread({
+        this.queue.push(_objectSpread(_objectSpread({
           mode: 0
-        }, danmu, {
+        }, danmu), {}, {
           $state: 'wait',
           $ref: null,
           $restTime: 0,
           $lastStartTime: 0,
           $restWidth: 0
         }));
+        return this;
       }
     }], [{
       key: "option",

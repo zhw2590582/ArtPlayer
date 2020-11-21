@@ -25,20 +25,7 @@ export default class Danmuku {
         art.on('video:waiting', this.stop.bind(this));
         art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
-        if (typeof this.option.danmuku === 'function') {
-            this.option.danmuku().then((danmus) => {
-                danmus.forEach(this.emit.bind(this));
-                art.emit('artplayerPluginDanmuku:loaded');
-            });
-        } else if (typeof this.option.danmuku === 'string') {
-            bilibiliDanmuParseFromUrl(this.option.danmuku).then((danmus) => {
-                danmus.forEach(this.emit.bind(this));
-                art.emit('artplayerPluginDanmuku:loaded');
-            });
-        } else {
-            this.option.danmuku.forEach(this.emit.bind(this));
-            art.emit('artplayerPluginDanmuku:loaded');
-        }
+        this.load();
     }
 
     static get option() {
@@ -65,6 +52,24 @@ export default class Danmuku {
         };
     }
 
+    load() {
+        if (typeof this.option.danmuku === 'function') {
+            this.option.danmuku().then((danmus) => {
+                danmus.forEach(this.emit.bind(this));
+                this.art.emit('artplayerPluginDanmuku:loaded');
+            });
+        } else if (typeof this.option.danmuku === 'string') {
+            bilibiliDanmuParseFromUrl(this.option.danmuku).then((danmus) => {
+                danmus.forEach(this.emit.bind(this));
+                this.art.emit('artplayerPluginDanmuku:loaded');
+            });
+        } else {
+            this.option.danmuku.forEach(this.emit.bind(this));
+            this.art.emit('artplayerPluginDanmuku:loaded');
+        }
+        return this;
+    }
+
     config(option) {
         const {
             utils: { clamp },
@@ -79,6 +84,7 @@ export default class Danmuku {
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.fontSize = clamp(this.option.fontSize, 12, 30);
         this.art.emit('artplayerPluginDanmuku:config', this.option);
+        return this;
     }
 
     continue() {
@@ -94,6 +100,7 @@ export default class Danmuku {
                     break;
             }
         });
+        return this;
     }
 
     suspend() {
@@ -113,6 +120,7 @@ export default class Danmuku {
                     break;
             }
         });
+        return this;
     }
 
     resize() {
@@ -127,6 +135,7 @@ export default class Danmuku {
                 danmu.$ref.style.transition = 'transform 0s linear 0s';
             }
         });
+        return this;
     }
 
     update() {
@@ -198,6 +207,7 @@ export default class Danmuku {
                 this.update();
             }
         });
+        return this;
     }
 
     stop() {
@@ -205,6 +215,7 @@ export default class Danmuku {
         this.suspend();
         window.cancelAnimationFrame(this.animationFrameTimer);
         this.art.emit('artplayerPluginDanmuku:stop');
+        return this;
     }
 
     start() {
@@ -212,18 +223,21 @@ export default class Danmuku {
         this.continue();
         this.update();
         this.art.emit('artplayerPluginDanmuku:start');
+        return this;
     }
 
     show() {
         this.isHide = false;
         this.$danmuku.style.display = 'block';
         this.art.emit('artplayerPluginDanmuku:show');
+        return this;
     }
 
     hide() {
         this.isHide = true;
         this.$danmuku.style.display = 'none';
         this.art.emit('artplayerPluginDanmuku:hide');
+        return this;
     }
 
     emit(danmu) {
@@ -243,12 +257,12 @@ export default class Danmuku {
 
         if (!danmu.text.trim()) {
             notice.show = i18n.get('Danmu text cannot be empty');
-            return;
+            return this;
         }
 
         if (danmu.text.length > this.option.maxlength) {
             notice.show = `${i18n.get('The length of the danmu does not exceed')} ${this.option.maxlength}`;
-            return;
+            return this;
         }
 
         if (danmu.time) {
@@ -266,5 +280,6 @@ export default class Danmuku {
             $lastStartTime: 0,
             $restWidth: 0,
         });
+        return this;
     }
 }
