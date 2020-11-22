@@ -2,7 +2,7 @@ import { getExt, def, sleep } from '../utils';
 
 export default function urlMix(art, player) {
     const {
-        option: { type, customType },
+        option,
         template: { $video },
     } = art;
 
@@ -11,8 +11,8 @@ export default function urlMix(art, player) {
             return $video.src;
         },
         set(url) {
-            const typeName = type || getExt(url);
-            const typeCallback = customType[typeName];
+            const typeName = option.type || getExt(url);
+            const typeCallback = option.customType[typeName];
             if (typeName && typeCallback) {
                 sleep().then(() => {
                     art.loading.show = true;
