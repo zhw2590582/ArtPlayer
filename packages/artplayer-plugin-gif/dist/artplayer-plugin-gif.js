@@ -1,5 +1,5 @@
 /*!
- * artplayer-plugin-gif.js v3.5.20
+ * artplayer-plugin-gif.js v3.5.21
  * Github: https://github.com/zhw2590582/ArtPlayer#readme
  * (c) 2017-2020 Harvey Zack
  * Released under the MIT License.
