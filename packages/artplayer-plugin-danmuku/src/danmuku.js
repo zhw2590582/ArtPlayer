@@ -55,15 +55,18 @@ export default class Danmuku {
     load() {
         if (typeof this.option.danmuku === 'function') {
             this.option.danmuku().then((danmus) => {
+                this.queue = [];
                 danmus.forEach(this.emit.bind(this));
                 this.art.emit('artplayerPluginDanmuku:loaded');
             });
         } else if (typeof this.option.danmuku === 'string') {
             bilibiliDanmuParseFromUrl(this.option.danmuku).then((danmus) => {
+                this.queue = [];
                 danmus.forEach(this.emit.bind(this));
                 this.art.emit('artplayerPluginDanmuku:loaded');
             });
         } else {
+            this.queue = [];
             this.option.danmuku.forEach(this.emit.bind(this));
             this.art.emit('artplayerPluginDanmuku:loaded');
         }
