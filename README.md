@@ -30,7 +30,7 @@
 ## Ecosystem
 
 | Project                                                                                                               | Description         | Demo                                                                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | [artplayer-plugin-danmuku](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku)     | Danmuku plugin      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)                                            |
 | [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | Gif plugin          | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif)                                                    |
 | [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | Backlight plugin    | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight)                                        |
