@@ -23,11 +23,8 @@ export default function rotateMix(art, player) {
                 $player.dataset.rotate = deg;
 
                 const getScaleValue = () => {
-                    const { clientWidth: videoWidth, clientHeight: videoHeight } = $video;
-                    const { clientWidth: playerWidth, clientHeight: playerHeight } = $player;
-                    const playerRatio = playerWidth / playerHeight;
-                    const videoRatio = videoWidth / videoHeight;
-                    return playerRatio > videoRatio ? playerWidth / videoHeight : playerHeight / videoWidth;
+                    const { videoWidth, videoHeight } = $video;
+                    return videoWidth > videoHeight ? videoHeight / videoWidth : videoWidth / videoHeight;
                 };
 
                 let degValue = 0;
