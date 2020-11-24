@@ -1,0 +1,28 @@
+{
+  "name": "artplayer-plugin-ass",
+  "version": "3.5.24",
+  "expose": "artplayerPluginAss",
+  "description": "Ass plugin for ArtPlayer",
+  "main": "dist/artplayer-plugin-ass.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "keywords": [
+    "video",
+    "player"
+  ],
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
+  "gitHead": "0a3a20568e37f99972eefb01d4b1dcf4036a46db",
+  "dependencies": {
+    "assjs": "^0.0.11"
+  }
+}
