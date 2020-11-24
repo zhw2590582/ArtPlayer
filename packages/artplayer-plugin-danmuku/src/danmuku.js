@@ -56,17 +56,20 @@ export default class Danmuku {
         if (typeof this.option.danmuku === 'function') {
             this.option.danmuku().then((danmus) => {
                 this.queue = [];
+                this.$danmuku.innerText = '';
                 danmus.forEach(this.emit.bind(this));
                 this.art.emit('artplayerPluginDanmuku:loaded');
             });
         } else if (typeof this.option.danmuku === 'string') {
             bilibiliDanmuParseFromUrl(this.option.danmuku).then((danmus) => {
                 this.queue = [];
+                this.$danmuku.innerText = '';
                 danmus.forEach(this.emit.bind(this));
                 this.art.emit('artplayerPluginDanmuku:loaded');
             });
         } else {
             this.queue = [];
+            this.$danmuku.innerText = '';
             this.option.danmuku.forEach(this.emit.bind(this));
             this.art.emit('artplayerPluginDanmuku:loaded');
         }
