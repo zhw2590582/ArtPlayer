@@ -462,17 +462,23 @@
 
         if (typeof this.option.danmuku === 'function') {
           this.option.danmuku().then(function (danmus) {
+            _this.queue = [];
+            _this.$danmuku.innerText = '';
             danmus.forEach(_this.emit.bind(_this));
 
             _this.art.emit('artplayerPluginDanmuku:loaded');
           });
         } else if (typeof this.option.danmuku === 'string') {
           bilibiliDanmuParseFromUrl(this.option.danmuku).then(function (danmus) {
+            _this.queue = [];
+            _this.$danmuku.innerText = '';
             danmus.forEach(_this.emit.bind(_this));
 
             _this.art.emit('artplayerPluginDanmuku:loaded');
           });
         } else {
+          this.queue = [];
+          this.$danmuku.innerText = '';
           this.option.danmuku.forEach(this.emit.bind(this));
           this.art.emit('artplayerPluginDanmuku:loaded');
         }
