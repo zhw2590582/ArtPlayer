@@ -1,3 +1,4 @@
+import { ArtPlayerError } from '../utils/error';
 import clickInit from './clickInit';
 import hoverInit from './hoverInit';
 import mousemoveInit from './mousemoveInit';
@@ -54,7 +55,7 @@ export default class Events {
                 image = new Image();
                 image.src = img;
             } else {
-                return reject(img);
+                return reject(new ArtPlayerError('Unable to get Image'));
             }
 
             if (image.complete) {
@@ -62,9 +63,9 @@ export default class Events {
             }
 
             this.proxy(image, 'load', () => resolve(image));
-            this.proxy(image, 'error', () => reject(image));
+            this.proxy(image, 'error', () => reject(new ArtPlayerError(`Failed to load Image: ${image.src}`)));
 
-            return img;
+            return resolve(image);
         });
     }
 
