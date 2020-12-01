@@ -46,8 +46,6 @@ const webkitScreenfull = (art, player) => {
     });
 };
 
-const state = [];
-
 export default function fullscreenMix(art, player) {
     const {
         i18n,
@@ -55,27 +53,22 @@ export default function fullscreenMix(art, player) {
         template: { $video },
     } = art;
 
-    state.push([screenfull.isEnabled, $video.webkitSupportsFullscreen]);
-
-    setInterval(() => {
-        state.push([screenfull.isEnabled, $video.webkitSupportsFullscreen]);
-        console.log(state);
-    }, 1000);
-
-    if (screenfull.isEnabled) {
-        nativeScreenfull(art, player);
-    } else if ($video.webkitSupportsFullscreen) {
-        webkitScreenfull(art, player);
-    } else {
-        def(player, 'fullscreen', {
-            get() {
-                return false;
-            },
-            set() {
-                notice.show = i18n.get('Fullscreen not supported');
-            },
-        });
-    }
+    art.once('ready', () => {
+        if (screenfull.isEnabled) {
+            nativeScreenfull(art, player);
+        } else if ($video.webkitSupportsFullscreen) {
+            webkitScreenfull(art, player);
+        } else {
+            def(player, 'fullscreen', {
+                get() {
+                    return false;
+                },
+                set() {
+                    notice.show = i18n.get('Fullscreen not supported');
+                },
+            });
+        }
+    });
 
     def(player, 'fullscreenToggle', {
         set(value) {
