@@ -10,6 +10,7 @@ const nativeScreenfull = (art, player) => {
         },
         set(value) {
             if (value) {
+                console.log(screenfull.request);
                 screenfull.request($player).then(() => {
                     addClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
@@ -17,6 +18,7 @@ const nativeScreenfull = (art, player) => {
                     art.emit('fullscreen', true);
                 });
             } else {
+                console.log(screenfull.exit);
                 screenfull.exit().then(() => {
                     removeClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;

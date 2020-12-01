@@ -1828,6 +1828,7 @@
       },
       set: function set(value) {
         if (value) {
+          console.log(screenfull.request);
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
@@ -1835,6 +1836,7 @@
             art.emit('fullscreen', true);
           });
         } else {
+          console.log(screenfull.exit);
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
