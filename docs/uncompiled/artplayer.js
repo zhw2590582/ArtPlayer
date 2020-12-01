@@ -1820,33 +1820,6 @@
   });
   var screenfull_1 = screenfull.isEnabled;
 
-  var nativeScreenfull = function nativeScreenfull(art, player) {
-    var $player = art.template.$player;
-    def(player, 'fullscreen', {
-      get: function get() {
-        return screenfull.isFullscreen;
-      },
-      set: function set(value) {
-        if (value) {
-          screenfull.request($player).then(function () {
-            addClass($player, 'art-fullscreen');
-            player.aspectRatioReset = true;
-            art.emit('resize');
-            art.emit('fullscreen', true);
-          });
-        } else {
-          screenfull.exit().then(function () {
-            removeClass($player, 'art-fullscreen');
-            player.aspectRatioReset = true;
-            player.autoSize = art.option.autoSize;
-            art.emit('resize');
-            art.emit('fullscreen');
-          });
-        }
-      }
-    });
-  };
-
   var webkitScreenfull = function webkitScreenfull(art, player) {
     var $video = art.template.$video;
     def(player, 'fullscreen', {
@@ -1870,22 +1843,7 @@
 
   function fullscreenMix(art, player) {
     var $video = art.template.$video;
-
-    if (screenfull.isEnabled) {
-      nativeScreenfull(art, player);
-    } else if ($video.webkitSupportsFullscreen) {
-      webkitScreenfull(art, player);
-    } else {
-      def(player, 'fullscreen', {
-        get: function get() {
-          return false;
-        },
-        set: function set() {
-          return false;
-        }
-      });
-    }
-
+    webkitScreenfull(art, player);
     def(player, 'fullscreenToggle', {
       set: function set(value) {
         if (value) {

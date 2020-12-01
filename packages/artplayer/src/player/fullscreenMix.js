@@ -53,20 +53,7 @@ const webkitScreenfull = (art, player) => {
 export default function fullscreenMix(art, player) {
     const { $video } = art.template;
 
-    if (screenfull.isEnabled) {
-        nativeScreenfull(art, player);
-    } else if ($video.webkitSupportsFullscreen) {
-        webkitScreenfull(art, player);
-    } else {
-        def(player, 'fullscreen', {
-            get() {
-                return false;
-            },
-            set() {
-                return false;
-            },
-        });
-    }
+    webkitScreenfull(art, player);
 
     def(player, 'fullscreenToggle', {
         set(value) {
