@@ -34,31 +34,52 @@ const webkitScreenfull = (art, player) => {
 
     def(player, 'fullscreen', {
         get() {
-            console.log($video.webkitDisplayingFullscreen);
             return $video.webkitDisplayingFullscreen;
         },
         set(value) {
-            console.log(value);
             if (value) {
-                console.log($video.webkitEnterFullscreen);
                 $video.webkitEnterFullscreen();
             } else {
-                console.log($video.webkitExitFullscreen);
                 $video.webkitExitFullscreen();
             }
         },
     });
 };
 
-export default function fullscreenMix(art, player) {
-    const { $video } = art.template;
+const state = [];
 
-    webkitScreenfull(art, player);
+export default function fullscreenMix(art, player) {
+    const {
+        i18n,
+        notice,
+        template: { $video },
+    } = art;
+
+    state.push([screenfull.isEnabled, $video.webkitSupportsFullscreen]);
+
+    setInterval(() => {
+        state.push([screenfull.isEnabled, $video.webkitSupportsFullscreen]);
+        console.log(state);
+    }, 1000);
+
+    if (screenfull.isEnabled) {
+        nativeScreenfull(art, player);
+    } else if ($video.webkitSupportsFullscreen) {
+        webkitScreenfull(art, player);
+    } else {
+        def(player, 'fullscreen', {
+            get() {
+                return false;
+            },
+            set() {
+                notice.show = i18n.get('Fullscreen not supported');
+            },
+        });
+    }
 
     def(player, 'fullscreenToggle', {
         set(value) {
             if (value) {
-                console.log($video.webkitEnterFullscreen);
                 player.fullscreen = !player.fullscreen;
             }
         },

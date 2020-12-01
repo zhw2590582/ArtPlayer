@@ -36,6 +36,7 @@
     "PIP mode": "画中画模式",
     "Exit PIP mode": "退出画中画模式",
     "PIP not supported": "不支持画中画模式",
+    "Fullscreen not supported": "不支持全屏模式",
     "Local Subtitle": "本地字幕",
     "Local Video": "本地视频",
     "Subtitle offset time": "字幕偏移时间",

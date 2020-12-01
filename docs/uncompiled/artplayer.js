@@ -1000,6 +1000,7 @@
   	"PIP mode": "画中画模式",
   	"Exit PIP mode": "退出画中画模式",
   	"PIP not supported": "不支持画中画模式",
+  	"Fullscreen not supported": "不支持全屏模式",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地视频",
   	"Subtitle offset time": "字幕偏移时间",
@@ -1060,6 +1061,7 @@
   	"PIP mode": "畫中畫模式",
   	"Exit PIP mode": "退出畫中畫模式",
   	"PIP not supported": "不支持畫中畫模式",
+  	"Fullscreen not supported": "不支持全屏模式",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地視頻",
   	"Subtitle offset time": "字幕偏移時間",
@@ -1820,34 +1822,78 @@
   });
   var screenfull_1 = screenfull.isEnabled;
 
+  var nativeScreenfull = function nativeScreenfull(art, player) {
+    var $player = art.template.$player;
+    def(player, 'fullscreen', {
+      get: function get() {
+        return screenfull.isFullscreen;
+      },
+      set: function set(value) {
+        if (value) {
+          screenfull.request($player).then(function () {
+            addClass($player, 'art-fullscreen');
+            player.aspectRatioReset = true;
+            art.emit('resize');
+            art.emit('fullscreen', true);
+          });
+        } else {
+          screenfull.exit().then(function () {
+            removeClass($player, 'art-fullscreen');
+            player.aspectRatioReset = true;
+            player.autoSize = art.option.autoSize;
+            art.emit('resize');
+            art.emit('fullscreen');
+          });
+        }
+      }
+    });
+  };
+
   var webkitScreenfull = function webkitScreenfull(art, player) {
     var $video = art.template.$video;
     def(player, 'fullscreen', {
       get: function get() {
-        console.log($video.webkitDisplayingFullscreen);
         return $video.webkitDisplayingFullscreen;
       },
       set: function set(value) {
-        console.log(value);
-
         if (value) {
-          console.log($video.webkitEnterFullscreen);
           $video.webkitEnterFullscreen();
         } else {
-          console.log($video.webkitExitFullscreen);
           $video.webkitExitFullscreen();
         }
       }
     });
   };
 
+  var state = [];
   function fullscreenMix(art, player) {
-    var $video = art.template.$video;
-    webkitScreenfull(art, player);
+    var i18n = art.i18n,
+        notice = art.notice,
+        $video = art.template.$video;
+    state.push([screenfull.isEnabled, $video.webkitSupportsFullscreen]);
+    setInterval(function () {
+      state.push([screenfull.isEnabled, $video.webkitSupportsFullscreen]);
+      console.log(state);
+    }, 1000);
+
+    if (screenfull.isEnabled) {
+      nativeScreenfull(art, player);
+    } else if ($video.webkitSupportsFullscreen) {
+      webkitScreenfull(art, player);
+    } else {
+      def(player, 'fullscreen', {
+        get: function get() {
+          return false;
+        },
+        set: function set() {
+          notice.show = i18n.get('Fullscreen not supported');
+        }
+      });
+    }
+
     def(player, 'fullscreenToggle', {
       set: function set(value) {
         if (value) {
-          console.log($video.webkitEnterFullscreen);
           player.fullscreen = !player.fullscreen;
         }
       }
@@ -4146,7 +4192,7 @@
 
   var loading = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"/>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"/></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"/>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"/>\n  </rect>\n</svg>";
 
-  var state = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"60\" width=\"60\" style=\"filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\">\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16 C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\"/>\n</svg>";
+  var state$1 = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"60\" width=\"60\" style=\"filter: drop-shadow(0px 1px 1px black);\" viewBox=\"0 0 24 24\">\n    <path d=\"M20,2H4C1.8,2,0,3.8,0,6v12c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V6C24,3.8,22.2,2,20,2z M15.6,12.8L10.5,16 C9.9,16.5,9,16,9,15.2V8.8C9,8,9.9,7.5,10.5,8l5.1,3.2C16.3,11.5,16.3,12.5,15.6,12.8z\"/>\n</svg>";
 
   var play = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
 
@@ -4179,7 +4225,7 @@
 
     var icons = _objectSpread$k({
       loading: loading,
-      state: state,
+      state: state$1,
       play: play,
       pause: pause,
       volume: volume$1,
