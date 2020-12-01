@@ -1828,7 +1828,6 @@
       },
       set: function set(value) {
         if (value) {
-          console.log(screenfull.request);
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
@@ -1836,7 +1835,6 @@
             art.emit('fullscreen', true);
           });
         } else {
-          console.log(screenfull.exit);
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
@@ -1853,9 +1851,12 @@
     var $video = art.template.$video;
     def(player, 'fullscreen', {
       get: function get() {
+        console.log($video.webkitDisplayingFullscreen);
         return $video.webkitDisplayingFullscreen;
       },
       set: function set(value) {
+        console.log(value);
+
         if (value) {
           console.log($video.webkitEnterFullscreen);
           $video.webkitEnterFullscreen();
@@ -1872,10 +1873,8 @@
 
     if (screenfull.isEnabled) {
       nativeScreenfull(art, player);
-      console.log('nativeScreenfull');
     } else if ($video.webkitSupportsFullscreen) {
       webkitScreenfull(art, player);
-      console.log('webkitScreenfull', $video.webkitDisplayingFullscreen);
     } else {
       def(player, 'fullscreen', {
         get: function get() {
@@ -1889,9 +1888,8 @@
 
     def(player, 'fullscreenToggle', {
       set: function set(value) {
-        console.log('fullscreenToggle', screenfull.isEnabled, $video.webkitSupportsFullscreen);
-
         if (value) {
+          console.log($video.webkitEnterFullscreen);
           player.fullscreen = !player.fullscreen;
         }
       }
