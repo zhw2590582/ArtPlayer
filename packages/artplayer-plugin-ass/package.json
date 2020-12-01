@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-ass",
-  "version": "3.5.25",
+  "version": "3.5.26",
   "expose": "artplayerPluginAss",
   "description": "Ass plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-ass.js",
