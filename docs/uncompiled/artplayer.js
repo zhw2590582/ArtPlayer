@@ -1889,6 +1889,8 @@
 
     def(player, 'fullscreenToggle', {
       set: function set(value) {
+        console.log('fullscreenToggle', screenfull.isEnabled, $video.webkitSupportsFullscreen);
+
         if (value) {
           player.fullscreen = !player.fullscreen;
         }

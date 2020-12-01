@@ -72,6 +72,7 @@ export default function fullscreenMix(art, player) {
 
     def(player, 'fullscreenToggle', {
         set(value) {
+            console.log('fullscreenToggle', screenfull.isEnabled, $video.webkitSupportsFullscreen);
             if (value) {
                 player.fullscreen = !player.fullscreen;
             }
