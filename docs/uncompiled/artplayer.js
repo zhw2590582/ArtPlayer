@@ -1855,8 +1855,10 @@
       },
       set: function set(value) {
         if (value) {
+          console.log($video.webkitEnterFullscreen);
           $video.webkitEnterFullscreen();
         } else {
+          console.log($video.webkitExitFullscreen);
           $video.webkitExitFullscreen();
         }
       }
@@ -1868,8 +1870,10 @@
 
     if (screenfull.isEnabled) {
       nativeScreenfull(art, player);
+      console.log('nativeScreenfull');
     } else if ($video.webkitSupportsFullscreen) {
       webkitScreenfull(art, player);
+      console.log('webkitScreenfull', $video.webkitDisplayingFullscreen);
     } else {
       def(player, 'fullscreen', {
         get: function get() {
