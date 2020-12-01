@@ -21,7 +21,7 @@
     "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
   "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
-  "gitHead": "0a3a20568e37f99972eefb01d4b1dcf4036a46db",
+  "gitHead": "5ea211ef738351668e4acace326af4ff6947e2ee",
   "dependencies": {
     "assjs": "^0.0.11"
   }
