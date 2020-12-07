@@ -39,8 +39,10 @@ const webkitScreenfull = (art, player) => {
         set(value) {
             if (value) {
                 $video.webkitEnterFullscreen();
+                art.emit('fullscreen', true);
             } else {
                 $video.webkitExitFullscreen();
+                art.emit('fullscreen');
             }
         },
     });
