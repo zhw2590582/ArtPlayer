@@ -15,8 +15,8 @@ export function getMode(key) {
 export function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
     const srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
-    return srtList.length
-        ? srtList.map(item => {
+    return srtList && srtList.length
+        ? srtList.map((item) => {
               const [, attrStr, text] = item.match(/<d p="(.+)">(.+)<\/d>/);
               const attr = attrStr.split(',');
               return attr.length === 8 && text.trim()
@@ -38,6 +38,6 @@ export function bilibiliDanmuParseFromXml(xmlString) {
 
 export function bilibiliDanmuParseFromUrl(url) {
     return fetch(url)
-        .then(res => res.text())
-        .then(xmlString => bilibiliDanmuParseFromXml(xmlString));
+        .then((res) => res.text())
+        .then((xmlString) => bilibiliDanmuParseFromXml(xmlString));
 }
