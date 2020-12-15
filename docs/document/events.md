@@ -47,7 +47,7 @@ art.on('ready', function (args) {
 | `focus`            | When the player gets focus           | `undefined`                |
 | `blur`             | When the player loses focus          | `undefined`                |
 | `hover`            | When the mouse is moved into or out  | Whether moved into         |
-| `resize`           | When the player resize               | Player size                |
+| `resize`           | When the player resize               | `undefined`                |
 | `mousemove`        | When the mouse moves over the player | `undefined`                |
 | `aspectRatio`      | When aspect ratio change             | Aspect ratio               |
 | `url`              | When the video url change            | Video url                  |
@@ -57,7 +57,7 @@ art.on('ready', function (args) {
 | `fullscreenWeb`    | When the web full screen change      | Whether web full screen    |
 | `fullscreenRotate` | When the rotate full screen change   | Whether rotate full screen |
 | `pip`              | When the picture in picture change   | Whether in pip             |
-| `mini`              | When the mini player change           | Whether in mini player      |
+| `mini`             | When the mini player change          | Whether in mini player     |
 | `playbackRate`     | When playback rate change            | Playback rate              |
 | `screenshot`       | When a screenshot                    | Image data uri             |
 | `switch`           | When switching video url             | Video url                  |
@@ -72,6 +72,6 @@ art.on('ready', function (args) {
 | `layer`            | When displaying layer                | Whether to show            |
 | `info`             | When displaying info                 | Whether to show            |
 | `setting`          | When displaying setting              | Whether to show            |
-| `contextmenu`      | When displaying contextmenu          | Contextmenu configuration  |
-| `control`          | When displaying control              | Control configuration      |
+| `contextmenu`      | When displaying contextmenu          | Whether to show            |
+| `control`          | When displaying control              | Whether to show            |
 | `hotkey`           | When the hotkey is triggered         | Hotkey event object        |
