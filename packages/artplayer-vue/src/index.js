@@ -20,7 +20,9 @@ export default {
             container: this.$refs.artRef,
         });
 
-        this.$emit('getInstance', this.instance);
+        this.$nextTick(() => {
+            this.$emit('getInstance', this.instance);
+        });
     },
     beforeDestroy() {
         if (this.instance && this.instance.destroy) {
