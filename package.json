@@ -4,7 +4,7 @@
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
     "scripts": {
         "bootstrap": "npx lerna bootstrap",
-        "version": "npx lerna version patch --yes && git add -u .",
+        "version": "npx lerna version patch --no-git-tag-version --conventional-prerelease --yes && git add -u .",
         "publish": "npx lerna publish from-package --yes",
         "release": "npm run lint && npm run version && npm run build:all && npm test && npm run publish",
         "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
