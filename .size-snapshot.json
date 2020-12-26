@@ -60,9 +60,9 @@
     "gzipped": 10430
   },
   "artplayer-react.js": {
-    "bundled": 290965,
-    "minified": 148958,
-    "gzipped": 36753
+    "bundled": 292413,
+    "minified": 149521,
+    "gzipped": 36867
   },
   "artplayer-tool-github.js": {
     "bundled": 12711,
@@ -80,8 +80,8 @@
     "gzipped": 27748
   },
   "artplayer-plugin-ass.js": {
-    "bundled": 67987,
-    "minified": 32760,
-    "gzipped": 11875
+    "bundled": 2292,
+    "minified": 1227,
+    "gzipped": 611
   }
 }
