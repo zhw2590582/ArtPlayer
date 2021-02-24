@@ -46,7 +46,7 @@
         "del": "^6.0.0",
         "eslint": "^7.14.0",
         "eslint-config-airbnb-base": "^14.2.1",
-        "eslint-config-prettier": "^7.0.0",
+        "eslint-config-prettier": "^8.1.0",
         "eslint-plugin-import": "^2.22.1",
         "glob": "^7.1.6",
         "inquirer": "^7.3.3",
