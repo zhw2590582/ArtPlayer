@@ -49,7 +49,7 @@
         "eslint-config-prettier": "^8.1.0",
         "eslint-plugin-import": "^2.22.1",
         "glob": "^7.1.6",
-        "inquirer": "^7.3.3",
+        "inquirer": "^8.0.0",
         "lerna": "^3.22.1",
         "mocha": "^8.2.1",
         "mocha-chrome": "^2.2.0",
