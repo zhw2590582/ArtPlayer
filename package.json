@@ -50,7 +50,7 @@
         "eslint-plugin-import": "^2.22.1",
         "glob": "^7.1.6",
         "inquirer": "^8.0.0",
-        "lerna": "^3.22.1",
+        "lerna": "^4.0.0",
         "mocha": "^8.2.1",
         "mocha-chrome": "^2.2.0",
         "node-sass": "^5.0.0",
