@@ -1,0 +1,20 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "19:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: cssnano
+    versions:
+    - 5.0.0
+    - 5.0.1
+  - dependency-name: autoprefixer
+    versions:
+    - 10.2.4
+    - 10.2.5
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 8.0.0
