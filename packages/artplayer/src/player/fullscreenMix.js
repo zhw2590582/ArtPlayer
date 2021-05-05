@@ -58,7 +58,7 @@ export default function fullscreenMix(art, player) {
     art.once('ready', () => {
         if (screenfull.isEnabled) {
             nativeScreenfull(art, player);
-        } else if ($video.webkitSupportsFullscreen) {
+        } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
             webkitScreenfull(art, player);
         } else {
             def(player, 'fullscreen', {
