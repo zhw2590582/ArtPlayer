@@ -1,27 +1,44 @@
 export default class Storage {
     constructor() {
         this.name = 'artplayer_settings';
+        this.settings = {};
     }
 
     get(key) {
-        const storage = JSON.parse(localStorage.getItem(this.name)) || {};
-        return key ? storage[key] : storage;
+        try {
+            const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+            return key ? storage[key] : storage;
+        } catch (error) {
+            return key ? this.settings[key] : this.settings;
+        }
     }
 
     set(key, value) {
-        const storage = Object.assign({}, this.get(), {
-            [key]: value,
-        });
-        localStorage.setItem(this.name, JSON.stringify(storage));
+        try {
+            const storage = Object.assign({}, this.get(), {
+                [key]: value,
+            });
+            window.localStorage.setItem(this.name, JSON.stringify(storage));
+        } catch (error) {
+            this.settings[key] = value;
+        }
     }
 
     del(key) {
-        const storage = this.get();
-        delete storage[key];
-        localStorage.setItem(this.name, JSON.stringify(storage));
+        try {
+            const storage = this.get();
+            delete storage[key];
+            window.localStorage.setItem(this.name, JSON.stringify(storage));
+        } catch (error) {
+            delete this.settings[key];
+        }
     }
 
     clean() {
-        localStorage.removeItem(this.name);
+        try {
+            window.localStorage.removeItem(this.name);
+        } catch (error) {
+            this.settings = {};
+        }
     }
 }
