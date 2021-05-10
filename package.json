@@ -53,7 +53,7 @@
         "lerna": "^4.0.0",
         "mocha": "^8.2.1",
         "mocha-chrome": "^2.2.0",
-        "node-sass": "^5.0.0",
+        "node-sass": "^6.0.0",
         "rollup": "^2.33.3",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-commonjs": "^10.1.0",
