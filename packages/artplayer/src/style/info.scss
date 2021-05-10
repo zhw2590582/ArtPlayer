@@ -30,6 +30,10 @@
                 white-space: nowrap;
                 padding-left: 5px;
             }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
 
         .art-info-close {
