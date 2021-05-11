@@ -1,0 +1,17 @@
+.art-video-player {
+    .art-poster {
+        position: absolute;
+        z-index: 11;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        user-select: none;
+        pointer-events: none;
+    }
+}

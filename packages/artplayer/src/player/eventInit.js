@@ -1,11 +1,11 @@
 import config from '../config';
-import { sleep, addClass } from '../utils';
+import { sleep, addClass, setStyle } from '../utils';
 
 export default function eventInit(art, player) {
     const {
         option,
         events: { proxy },
-        template: { $player, $video },
+        template: { $player, $video, $poster },
         i18n,
         notice,
     } = art;
@@ -105,6 +105,7 @@ export default function eventInit(art, player) {
 
     art.on('video:play', () => {
         art.mask.show = false;
+        setStyle($poster, 'display', 'none');
     });
 
     art.on('video:playing', () => {

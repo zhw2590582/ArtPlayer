@@ -1,13 +1,13 @@
-import { clamp } from '../utils';
+import { clamp, setStyle } from '../utils';
 
 export default function attrInit(art, player) {
     const {
         option,
         storage,
-        template: { $video },
+        template: { $video, $poster },
     } = art;
 
-    Object.keys(option.moreVideoAttr).forEach(key => {
+    Object.keys(option.moreVideoAttr).forEach((key) => {
         $video[key] = option.moreVideoAttr[key];
     });
 
@@ -25,7 +25,8 @@ export default function attrInit(art, player) {
     }
 
     if (option.poster) {
-        $video.poster = option.poster;
+        // $video.poster = option.poster;
+        setStyle($poster, 'backgroundImage', `url(${option.poster})`);
     }
 
     if (option.autoplay) {
