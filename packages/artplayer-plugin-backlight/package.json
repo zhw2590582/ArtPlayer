@@ -1,6 +1,6 @@
 {
   "name": "artplayer-plugin-backlight",
-  "version": "3.5.28",
+  "version": "3.5.29",
   "expose": "artplayerPluginBacklight",
   "description": "Backlight plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-backlight.js",
