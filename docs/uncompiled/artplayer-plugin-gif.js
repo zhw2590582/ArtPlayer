@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.artplayerPluginGif = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.artplayerPluginGif = factory());
 }(this, (function () { 'use strict';
 
   function _defineProperty(obj, key, value) {
@@ -2923,9 +2923,10 @@
         height: '2px',
         width: '0%',
         'background-color': theme
+      },
+      mounted: function mounted($ref) {
+        $progress = $ref;
       }
-    }, function ($ref) {
-      $progress = $ref;
     });
     var timeLimit = 10000;
     var isProcessing = false;
@@ -3006,7 +3007,7 @@
         loading.show = true;
         art.emit('artplayerPluginGif:start');
         notice.show = i18n.get('Start creating gif...');
-        gifshot.createGIF(_objectSpread({}, config, {
+        gifshot.createGIF(_objectSpread(_objectSpread({}, config), {}, {
           video: [$video.src],
           crossOrigin: 'anonymous'
         }), function (obj) {

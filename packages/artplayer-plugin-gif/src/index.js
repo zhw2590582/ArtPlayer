@@ -45,9 +45,9 @@ function artplayerPluginGif(art) {
                 width: '0%',
                 'background-color': theme,
             },
-        },
-        $ref => {
-            $progress = $ref;
+            mounted($ref) {
+                $progress = $ref;
+            }
         },
     );
 
