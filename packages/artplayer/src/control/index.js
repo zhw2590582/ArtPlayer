@@ -1,4 +1,4 @@
-import { errorHandle, addClass, debounce, removeClass } from '../utils';
+import { errorHandle, addClass, removeClass } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -26,15 +26,22 @@ export default class Control extends Component {
             template: { $player },
         } = art;
 
-        this.delayHide = debounce(() => {
-            if (player.playing && this.show) {
+        this.mouseMoveTime = Date.now();
+
+        art.on('mousemove', () => {
+            this.show = true;
+            removeClass($player, 'art-hide-cursor');
+            addClass($player, 'art-hover');
+            this.mouseMoveTime = Date.now();
+        });
+
+        art.on('video:timeupdate', () => {
+            if (player.playing && this.show && Date.now() - this.mouseMoveTime >= 3000) {
+                this.show = false;
                 addClass($player, 'art-hide-cursor');
                 removeClass($player, 'art-hover');
-                this.show = false;
             }
-        }, 3000);
-
-        this.cancelDelayHide = this.delayHide.clearTimeout;
+        });
 
         art.once('ready', () => {
             this.add(

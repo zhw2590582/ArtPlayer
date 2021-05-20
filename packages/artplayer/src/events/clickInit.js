@@ -2,7 +2,6 @@ import { includeFromEvent } from '../utils';
 
 export default function clickInit(art, events) {
     const {
-        controls,
         template: { $player },
     } = art;
 
@@ -14,9 +13,5 @@ export default function clickInit(art, events) {
             art.isFocus = false;
             art.emit('blur');
         }
-    });
-
-    art.on('blur', () => {
-        controls.delayHide();
     });
 }

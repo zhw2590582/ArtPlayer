@@ -1,10 +1,7 @@
 import { addClass, removeClass } from '../utils';
 
 export default function hoverInit(art, events) {
-    const {
-        controls,
-        template: { $player },
-    } = art;
+    const { $player } = art.template;
 
     events.hover(
         $player,
@@ -17,10 +14,4 @@ export default function hoverInit(art, events) {
             art.emit('hover');
         },
     );
-
-    art.on('hover', (value) => {
-        if (!value) {
-            controls.delayHide();
-        }
-    });
 }
