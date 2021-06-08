@@ -8,6 +8,7 @@ class ArtplayerToolThumbnail extends Emitter {
         this.option = {};
         this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option));
         this.video = ArtplayerToolThumbnail.creatVideo();
+        this.duration = 0;
         this.inputChange = this.inputChange.bind(this);
         this.ondrop = this.ondrop.bind(this);
         this.option.fileInput.addEventListener('change', this.inputChange);
@@ -22,6 +23,8 @@ class ArtplayerToolThumbnail extends Emitter {
             width: 160,
             height: 90,
             column: 10,
+            begin: 0,
+            end: 0,
         };
     }
 
@@ -57,7 +60,7 @@ class ArtplayerToolThumbnail extends Emitter {
             this.option.fileInput = newFileInput;
         }
 
-        ['delay', 'number', 'width', 'height', 'column'].forEach(item => {
+        ['delay', 'number', 'width', 'height', 'column', 'begin', 'end'].forEach((item) => {
             this.errorHandle(typeof this.option[item] === 'number', `The '${item}' is not a number`);
         });
 
@@ -102,7 +105,7 @@ class ArtplayerToolThumbnail extends Emitter {
                 .then(() => {
                     this.emit('video', this.video);
                 })
-                .catch(err => {
+                .catch((err) => {
                     this.emit('error', err.message);
                     throw err;
                 });
@@ -110,8 +113,13 @@ class ArtplayerToolThumbnail extends Emitter {
     }
 
     start() {
-        const { width, height, number, delay } = this.option;
-        this.density = number / this.video.duration;
+        if (!this.video.duration) return sleep(1000).then(this.start);
+        const { width, height, number, delay, begin, end } = this.option;
+        this.option.begin = clamp(begin, 0, this.video.duration);
+        this.option.end = clamp(end || this.video.duration, begin, this.video.duration);
+        this.errorHandle(this.option.end > this.option.begin, `End time must be greater than the start time`);
+        this.duration = this.option.end - this.option.begin;
+        this.density = number / this.duration;
         this.errorHandle(this.file && this.video, 'Please select the video file first');
         this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
         this.errorHandle(this.density <= 1, `The preview density cannot be greater than 1, but got ${this.density}`);
@@ -121,11 +129,11 @@ class ArtplayerToolThumbnail extends Emitter {
         this.emit('canvas', canvas);
         const promiseList = screenshotDate.map((item, index) => () => {
             this.video.currentTime = item.time;
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 sleep(delay)
                     .then(() => {
                         context2D.drawImage(this.video, item.x, item.y, width, height);
-                        canvas.toBlob(blob => {
+                        canvas.toBlob((blob) => {
                             if (this.thumbnailUrl) {
                                 URL.revokeObjectURL(this.thumbnailUrl);
                             }
@@ -134,7 +142,7 @@ class ArtplayerToolThumbnail extends Emitter {
                             resolve();
                         });
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         throw err;
                     });
             });
@@ -147,13 +155,13 @@ class ArtplayerToolThumbnail extends Emitter {
                         this.processing = false;
                         this.emit('done');
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         this.processing = false;
                         this.emit('error', err.message);
                         throw err;
                     }),
             )
-            .catch(err => {
+            .catch((err) => {
                 this.processing = false;
                 this.emit('error', err.message);
                 throw err;
@@ -161,10 +169,9 @@ class ArtplayerToolThumbnail extends Emitter {
     }
 
     creatScreenshotDate() {
-        const { number, width, height, column } = this.option;
-        const { duration } = this.video;
-        const timeGap = duration / number;
-        const timePoints = [timeGap];
+        const { number, width, height, column, begin } = this.option;
+        const timeGap = this.duration / number;
+        const timePoints = [begin + timeGap];
         while (timePoints.length < number) {
             const last = timePoints[timePoints.length - 1];
             timePoints.push(last + timeGap);

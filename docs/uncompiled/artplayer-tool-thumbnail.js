@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.ArtplayerToolThumbnail = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ArtplayerToolThumbnail = factory());
 }(this, (function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
@@ -30,30 +30,6 @@
 
   var createClass = _createClass;
 
-  function createCommonjsModule(fn, module) {
-  	return module = { exports: {} }, fn(module, module.exports), module.exports;
-  }
-
-  var _typeof_1 = createCommonjsModule(function (module) {
-  function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-      module.exports = _typeof = function _typeof(obj) {
-        return _typeof2(obj);
-      };
-    } else {
-      module.exports = _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-      };
-    }
-
-    return _typeof(obj);
-  }
-
-  module.exports = _typeof;
-  });
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -64,26 +40,9 @@
 
   var assertThisInitialized = _assertThisInitialized;
 
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return assertThisInitialized(self);
+  function createCommonjsModule(fn, module) {
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
-
-  var possibleConstructorReturn = _possibleConstructorReturn;
-
-  var getPrototypeOf = createCommonjsModule(function (module) {
-  function _getPrototypeOf(o) {
-    module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
-  module.exports = _getPrototypeOf;
-  });
 
   var setPrototypeOf = createCommonjsModule(function (module) {
   function _setPrototypeOf(o, p) {
@@ -114,6 +73,47 @@
   }
 
   var inherits = _inherits;
+
+  var _typeof_1 = createCommonjsModule(function (module) {
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      module.exports = _typeof = function _typeof(obj) {
+        return typeof obj;
+      };
+    } else {
+      module.exports = _typeof = function _typeof(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  module.exports = _typeof;
+  });
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return assertThisInitialized(self);
+  }
+
+  var possibleConstructorReturn = _possibleConstructorReturn;
+
+  var getPrototypeOf = createCommonjsModule(function (module) {
+  function _getPrototypeOf(o) {
+    module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  module.exports = _getPrototypeOf;
+  });
 
   function E () {
     // Keep this empty so it's easier to inherit from
@@ -202,10 +202,14 @@
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
   }
 
-  var ArtplayerToolThumbnail =
-  /*#__PURE__*/
-  function (_Emitter) {
+  function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn(this, result); }; }
+
+  function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+  var ArtplayerToolThumbnail = /*#__PURE__*/function (_Emitter) {
     inherits(ArtplayerToolThumbnail, _Emitter);
+
+    var _super = _createSuper(ArtplayerToolThumbnail);
 
     function ArtplayerToolThumbnail() {
       var _this;
@@ -214,13 +218,14 @@
 
       classCallCheck(this, ArtplayerToolThumbnail);
 
-      _this = possibleConstructorReturn(this, getPrototypeOf(ArtplayerToolThumbnail).call(this));
+      _this = _super.call(this);
       _this.processing = false;
       _this.option = {};
 
       _this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option));
 
       _this.video = ArtplayerToolThumbnail.creatVideo();
+      _this.duration = 0;
       _this.inputChange = _this.inputChange.bind(assertThisInitialized(_this));
       _this.ondrop = _this.ondrop.bind(assertThisInitialized(_this));
 
@@ -272,7 +277,7 @@
           this.option.fileInput = newFileInput;
         }
 
-        ['delay', 'number', 'width', 'height', 'column'].forEach(function (item) {
+        ['delay', 'number', 'width', 'height', 'column', 'begin', 'end'].forEach(function (item) {
           _this2.errorHandle(typeof _this2.option[item] === 'number', "The '".concat(item, "' is not a number"));
         });
         this.option.delay = clamp(delay, 10, 1000);
@@ -317,12 +322,19 @@
       value: function start() {
         var _this4 = this;
 
+        if (!this.video.duration) return sleep(1000).then(this.start);
         var _this$option2 = this.option,
             width = _this$option2.width,
             height = _this$option2.height,
             number = _this$option2.number,
-            delay = _this$option2.delay;
-        this.density = number / this.video.duration;
+            delay = _this$option2.delay,
+            begin = _this$option2.begin,
+            end = _this$option2.end;
+        this.option.begin = clamp(begin, 0, this.video.duration);
+        this.option.end = clamp(end || this.video.duration, begin, this.video.duration);
+        this.errorHandle(this.option.end > this.option.begin, "End time must be greater than the start time");
+        this.duration = this.option.end - this.option.begin;
+        this.density = number / this.duration;
         this.errorHandle(this.file && this.video, 'Please select the video file first');
         this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...');
         this.errorHandle(this.density <= 1, "The preview density cannot be greater than 1, but got ".concat(this.density));
@@ -381,10 +393,10 @@
             number = _this$option3.number,
             width = _this$option3.width,
             height = _this$option3.height,
-            column = _this$option3.column;
-        var duration = this.video.duration;
-        var timeGap = duration / number;
-        var timePoints = [timeGap];
+            column = _this$option3.column,
+            begin = _this$option3.begin;
+        var timeGap = this.duration / number;
+        var timePoints = [begin + timeGap];
 
         while (timePoints.length < number) {
           var last = timePoints[timePoints.length - 1];
@@ -484,7 +496,9 @@
           number: 60,
           width: 160,
           height: 90,
-          column: 10
+          column: 10,
+          begin: 0,
+          end: 0
         };
       }
     }]);
