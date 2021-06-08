@@ -498,7 +498,7 @@
           height: 90,
           column: 10,
           begin: 0,
-          end: 0
+          end: NaN
         };
       }
     }]);
