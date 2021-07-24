@@ -4,6 +4,7 @@ import localVideo from './localVideo';
 import localSubtitle from './localSubtitle';
 import miniProgressBar from './miniProgressBar';
 import networkMonitor from './networkMonitor';
+import log from './log';
 
 export default class Plugins {
     constructor(art) {
@@ -30,6 +31,10 @@ export default class Plugins {
 
         if (option.networkMonitor) {
             this.add(networkMonitor);
+        }
+
+        if (option.log) {
+            this.add(log);
         }
 
         art.option.plugins.forEach((plugin) => {

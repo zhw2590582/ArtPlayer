@@ -27,6 +27,7 @@ var art = new Artplayer({
     mutex: true,
     light: true,
     backdrop: true,
+    log: true,
     theme: '#ffad00',
     lang: navigator.language.toLowerCase(),
     moreVideoAttr: {

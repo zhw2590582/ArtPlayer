@@ -1,0 +1,20 @@
+.art-video-player .art-layers .art-layer-log {
+    display: none;
+    position: absolute;
+    left: 10px;
+    bottom: 50px;
+    width: 120px;
+    color: #fff;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 13px;
+    pointer-events: none;
+    user-select: none;
+
+    p {
+        margin-bottom: 0;
+        word-break: break-all;
+    }
+}
