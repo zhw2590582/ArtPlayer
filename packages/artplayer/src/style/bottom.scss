@@ -181,7 +181,113 @@
                     float: left;
                     height: 36px;
                     width: 36px;
+                    
+                    
+                    &.art-icon-play {
+                        #art-icon-svg-play {
+                            transition: d .3s;
+                            d: path("M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z");
+                        }
+
+                        &--playing {
+                            #art-icon-svg-play {
+                                d: path("M 12,26 16,26 16,10 12,10 z M 21,26 25,26 25,10 21,10 z");
+                            }
+                        }
+                    }
+
+                    &.art-icon-screenshot {
+                        transform: none;
+
+                        @keyframes art-icon-screenshot-animation {
+                            50% {
+                                transform: translateY(2px);
+                            }
+                        }
+
+                        &:hover {
+                            animation: art-icon-screenshot-animation .4s cubic-bezier(0.4,0,0.2,1);
+                        }
+                    }
+
+                    &.art-icon-setting {
+                        transform: none;
+                        transition: transform .1s cubic-bezier(0.4,0,1,1);
+
+                        &:hover {
+                            transform: rotate(30deg);
+                        }
+                    }
+
+                    &.art-icon-pip {
+                        transform: none;
+                        transform-origin: right bottom;
+
+                        @keyframes art-icon-pip-animation {
+                            50% {
+                                transform: scale(0.9375);
+                            }
+                        }
+                        
+                        &:hover {
+                            animation: art-icon-pip-animation .4s cubic-bezier(0.4,0,0.2,1);
+                        }
+                    }
+
+                    &.art-icon-fullscreenWeb {
+                        transform: none;
+
+                        @keyframes art-icon-fullscreenWeb-animation {
+                            50% {
+                                transform: scale(1.125, 1);
+                            }
+                        }
+
+                        &:hover {
+                            animation: art-icon-fullscreenWeb-animation .4s cubic-bezier(0.4,0,0.2,1);
+                        }
+                    }
+
+                    &.art-icon-fullscreen {
+                        @for $i from 0 through 3 {
+                            .art-icon-svg-fullscreen-corner-#{$i} {
+                                transform: none;
+                            }
+                        }
+                        
+                        @keyframes art-icon-svg-fullscreen-corner-0-animation {
+                            50% {
+                                transform: translate(-1px, -1px);
+                            }
+                        }
+                        @keyframes art-icon-svg-fullscreen-corner-1-animation {
+                            50% {
+                                transform: translate(1px, -1px);
+                            }
+                        }
+                        @keyframes art-icon-svg-fullscreen-corner-2-animation {
+                            50% {
+                                transform: translate(1px, 1px);
+                            }
+                        }
+                        @keyframes art-icon-svg-fullscreen-corner-3-animation {
+                            50% {
+                                transform: translate(-1px, 1px);
+                            }
+                        }
+
+                        &:hover { 
+                            @for $i from 0 through 3 {
+                                .art-icon-svg-fullscreen-corner-#{$i} {
+                                    animation: art-icon-svg-fullscreen-corner-#{$i}-animation .4s cubic-bezier(0.4,0,0.2,1);
+                                }
+                            }
+                        }
+                    }
+
+
                 }
+
                 &:hover {
                     opacity: 1;
                 }

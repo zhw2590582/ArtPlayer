@@ -30,6 +30,16 @@
     },
     "homepage": "https://github.com/zhw2590582/ArtPlayer",
     "dependencies": {
+        "artplayer": "file:packages/artplayer",
+        "artplayer-plugin-backlight": "file:packages/artplayer-plugin-backlight",
+        "artplayer-plugin-danmuku": "file:packages/artplayer-plugin-danmuku",
+        "artplayer-plugin-gif": "file:packages/artplayer-plugin-gif",
+        "artplayer-react": "file:packages/artplayer-react",
+        "artplayer-tool-github": "file:packages/artplayer-tool-github",
+        "artplayer-tool-thumbnail": "file:packages/artplayer-tool-thumbnail",
+        "artplayer-vue": "file:packages/artplayer-vue"
+    },
+    "devDependencies": {
         "@babel/core": "^7.12.9",
         "@babel/plugin-external-helpers": "^7.12.1",
         "@babel/plugin-transform-runtime": "^7.12.1",
