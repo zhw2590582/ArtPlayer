@@ -3,7 +3,7 @@ import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
 import pip from './pip';
-import playAndPause from './playAndPause';
+import play from './play';
 import progress from './progress';
 import subtitle from './subtitle';
 import time from './time';
@@ -72,8 +72,8 @@ export default class Control extends Component {
             );
 
             this.add(
-                playAndPause({
-                    name: 'playAndPause',
+                play({
+                    name: 'play',
                     disable: false,
                     position: 'left',
                     index: 10,

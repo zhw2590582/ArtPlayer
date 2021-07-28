@@ -2,7 +2,6 @@ import { append, def, addClass } from '../utils';
 import loading from './loading.svg';
 import state from './state.svg';
 import play from './play.svg';
-import pause from './pause.svg';
 import volume from './volume.svg';
 import volumeClose from './volume-close.svg';
 import subtitle from './subtitle.svg';
@@ -18,7 +17,6 @@ export default class Icons {
             loading,
             state,
             play,
-            pause,
             volume,
             volumeClose,
             subtitle,

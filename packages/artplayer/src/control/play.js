@@ -1,6 +1,6 @@
-import { append, tooltip, setStyle } from '../utils';
+import { append, tooltip, addClass, removeClass } from '../utils';
 
-export default function playAndPause(option) {
+export default function play(option) {
     return art => ({
         ...option,
         mounted: $control => {
@@ -12,26 +12,20 @@ export default function playAndPause(option) {
             } = art;
 
             const $play = append($control, icons.play);
-            const $pause = append($control, icons.pause);
-            tooltip($play, i18n.get('Play'));
-            tooltip($pause, i18n.get('Pause'));
+            
 
             proxy($play, 'click', () => {
-                player.play = true;
-            });
-
-            proxy($pause, 'click', () => {
-                player.pause = true;
+                player.toggle = true
             });
 
             function showPlay() {
-                setStyle($play, 'display', 'flex');
-                setStyle($pause, 'display', 'none');
+                removeClass($play, 'art-icon-play--playing');
+                tooltip($play, i18n.get('Play'));
             }
 
             function showPause() {
-                setStyle($play, 'display', 'none');
-                setStyle($pause, 'display', 'flex');
+                addClass($play, 'art-icon-play--playing');
+                tooltip($play, i18n.get('Pause'));
             }
 
             if (player.playing) {

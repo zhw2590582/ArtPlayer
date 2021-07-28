@@ -1,6 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="36" width="36" viewBox="0 0 36 36">
-	<path d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z"></path>
-	<path d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z"></path>
-	<path d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z"></path>
-	<path d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z"></path>
+	<g class="art-icon-svg-fullscreen-corner-0">
+		<use href="#art-icon-svg-fullscreen-corner-path-0" class="art-svg-shadow" />
+		<path d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z" id="art-icon-svg-fullscreen-corner-path-0" class="art-svg-fill" />
+	</g>
+	<g class="art-icon-svg-fullscreen-corner-1">
+		<use href="#art-icon-svg-fullscreen-corner-path-1" class="art-svg-shadow" />
+		<path d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z" id="art-icon-svg-fullscreen-corner-path-1" class="art-svg-fill" />
+	</g>
+	<g class="art-icon-svg-fullscreen-corner-2">
+		<use href="#art-icon-svg-fullscreen-corner-path-2" class="art-svg-shadow" />
+		<path d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z" id="art-icon-svg-fullscreen-corner-path-2" class="art-svg-fill" />
+	</g>
+	<g class="art-icon-svg-fullscreen-corner-3">
+		<use href="#art-icon-svg-fullscreen-corner-path-3" class="art-svg-shadow" />
+		<path d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z" id="art-icon-svg-fullscreen-corner-path-3" class="art-svg-fill" />
+	</g>
 </svg>

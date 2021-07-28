@@ -55,7 +55,16 @@
         align-items: center;
         line-height: 1.5;
         svg {
-            fill: #fff;
+            .art-svg-fill {
+                fill: #fff;
+            }
+
+            .art-svg-shadow {
+                stroke: #000;
+                stroke-opacity: .15;
+                stroke-width: 2px;
+                fill: none;
+            }
         }
     }
 
