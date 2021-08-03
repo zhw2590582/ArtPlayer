@@ -4777,6 +4777,9 @@
     var $log = null;
     layers.add({
       name: 'log',
+      style: {
+        bottom: '50px'
+      },
       mounted: function mounted($el) {
         $log = $el;
       }
@@ -4787,6 +4790,7 @@
 
     function check() {
       var count = $log.childElementCount;
+      setStyle($log, 'bottom', art.controls.show ? '50px' : '10px');
 
       if (count) {
         if (count > max) {
@@ -4809,6 +4813,7 @@
     return {
       name: 'log',
       emit: function emit(msg) {
+        if (typeof msg !== 'string') return;
         append($log, "<p>".concat(escape(msg), "</p>"));
         setStyle($log, 'display', 'block');
         clearTimeout(timer);

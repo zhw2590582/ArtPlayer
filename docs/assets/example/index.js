@@ -118,3 +118,9 @@ var art = new Artplayer({
         state: '<img src="/assets/img/state.png">',
     },
 });
+
+Artplayer.config.events.forEach(function (item) {
+    art.on('video:' + item, function (event) {
+        art.plugins.log.emit('video: ' + event.type);
+    });
+});

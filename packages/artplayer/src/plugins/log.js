@@ -6,6 +6,9 @@ export default function log(art) {
     let $log = null;
     layers.add({
         name: 'log',
+        style: {
+            bottom: '50px',
+        },
         mounted($el) {
             $log = $el;
         },
@@ -17,6 +20,7 @@ export default function log(art) {
 
     function check() {
         const count = $log.childElementCount;
+        setStyle($log, 'bottom', art.controls.show ? '50px' : '10px');
         if (count) {
             if (count > max) {
                 remove($log.firstElementChild);
@@ -37,6 +41,7 @@ export default function log(art) {
     return {
         name: 'log',
         emit(msg) {
+            if (typeof msg !== 'string') return;
             append($log, `<p>${escape(msg)}</p>`);
             setStyle($log, 'display', 'block');
             clearTimeout(timer);
