@@ -5,8 +5,9 @@ export default function currentTimeMix(art, player) {
 
     def(player, 'currentTime', {
         get: () => $video.currentTime || 0,
-        set: time => {
-            $video.currentTime = clamp(time, 0, player.duration);
+        set: (time) => {
+            // Fixed: The provided double value is non-finite
+            $video.currentTime = clamp(parseFloat(time.toFixed(3)), 0, player.duration);
         },
     });
 }
