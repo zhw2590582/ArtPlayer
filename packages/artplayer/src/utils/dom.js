@@ -69,8 +69,8 @@ export function isInViewport(el, offset = 0) {
     const rect = el.getBoundingClientRect();
     const windowHeight = window.innerHeight || document.documentElement.clientHeight;
     const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    const vertInView = rect.top <= windowHeight + offset && rect.top + rect.height + offset >= 0;
-    const horInView = rect.left <= windowWidth + offset && rect.left + rect.width + offset >= 0;
+    const vertInView = rect.top - offset <= windowHeight && rect.top + rect.height + offset >= 0;
+    const horInView = rect.left - offset <= windowWidth + offset && rect.left + rect.width + offset >= 0;
     return vertInView && horInView;
 }
 

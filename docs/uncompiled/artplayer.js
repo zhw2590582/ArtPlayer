@@ -296,8 +296,8 @@
     var rect = el.getBoundingClientRect();
     var windowHeight = window.innerHeight || document.documentElement.clientHeight;
     var windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    var vertInView = rect.top <= windowHeight + offset && rect.top + rect.height + offset >= 0;
-    var horInView = rect.left <= windowWidth + offset && rect.left + rect.width + offset >= 0;
+    var vertInView = rect.top - offset <= windowHeight && rect.top + rect.height + offset >= 0;
+    var horInView = rect.left - offset <= windowWidth + offset && rect.left + rect.width + offset >= 0;
     return vertInView && horInView;
   }
   function includeFromEvent(event, target) {
