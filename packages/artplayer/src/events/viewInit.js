@@ -8,7 +8,7 @@ export default function viewInit(art, events) {
     } = art;
 
     const scrollFn = throttle(() => {
-        art.emit('view', isInViewport($container));
+        art.emit('view', isInViewport($container, 50));
     }, 200);
 
     events.proxy(window, 'scroll', () => {

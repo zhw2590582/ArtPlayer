@@ -292,11 +292,12 @@
     target.setAttribute('data-balloon-pos', pos);
   }
   function isInViewport(el) {
+    var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var rect = el.getBoundingClientRect();
     var windowHeight = window.innerHeight || document.documentElement.clientHeight;
     var windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    var vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
-    var horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
+    var vertInView = rect.top <= windowHeight + offset && rect.top + rect.height + offset >= 0;
+    var horInView = rect.left <= windowWidth + offset && rect.left + rect.width + offset >= 0;
     return vertInView && horInView;
   }
   function includeFromEvent(event, target) {
@@ -3891,7 +3892,7 @@
         autoMini = art.option.autoMini,
         $container = art.template.$container;
     var scrollFn = throttle(function () {
-      art.emit('view', isInViewport($container));
+      art.emit('view', isInViewport($container, 50));
     }, 200);
     events.proxy(window, 'scroll', function () {
       scrollFn();
