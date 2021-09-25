@@ -1442,7 +1442,8 @@
         return $video.currentTime || 0;
       },
       set: function set(time) {
-        $video.currentTime = clamp(time, 0, player.duration);
+        // Fixed: The provided double value is non-finite
+        $video.currentTime = clamp(parseFloat(time.toFixed(3)), 0, player.duration);
       }
     });
   }
@@ -1831,6 +1832,9 @@
 
   var nativeScreenfull = function nativeScreenfull(art, player) {
     var $player = art.template.$player;
+    screenfull.on('change', function () {
+      return art.emit('fullscreen', screenfull.isFullscreen);
+    });
     def(player, 'fullscreen', {
       get: function get() {
         return screenfull.isFullscreen;
@@ -3886,7 +3890,7 @@
     var player = art.player,
         autoMini = art.option.autoMini,
         $container = art.template.$container;
-    var scrollFn = debounce(function () {
+    var scrollFn = throttle(function () {
       art.emit('view', isInViewport($container));
     }, 200);
     events.proxy(window, 'scroll', function () {

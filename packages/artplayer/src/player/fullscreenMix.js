@@ -4,6 +4,8 @@ import { addClass, removeClass, def } from '../utils';
 const nativeScreenfull = (art, player) => {
     const { $player } = art.template;
 
+    screenfull.on('change', () => art.emit('fullscreen', screenfull.isFullscreen));
+
     def(player, 'fullscreen', {
         get() {
             return screenfull.isFullscreen;

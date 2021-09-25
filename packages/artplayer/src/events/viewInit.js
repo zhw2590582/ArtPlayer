@@ -1,4 +1,4 @@
-import { debounce, isInViewport } from '../utils';
+import { throttle, isInViewport } from '../utils';
 
 export default function viewInit(art, events) {
     const {
@@ -7,7 +7,7 @@ export default function viewInit(art, events) {
         template: { $container },
     } = art;
 
-    const scrollFn = debounce(() => {
+    const scrollFn = throttle(() => {
         art.emit('view', isInViewport($container));
     }, 200);
 
