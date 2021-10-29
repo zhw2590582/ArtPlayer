@@ -47,6 +47,7 @@ export default class Artplayer {
         localVideo?: boolean;
         localSubtitle?: boolean;
         networkMonitor?: boolean;
+        useSSR?: boolean;
         plugins?: Function[];
         whitelist?: (string | Function | RegExp)[];
         layers?: Component[];

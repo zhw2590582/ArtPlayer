@@ -131,6 +131,7 @@ export default class Artplayer extends Emitter {
             localVideo: false,
             localSubtitle: false,
             networkMonitor: false,
+            useSSR: false,
             layers: [],
             contextmenu: [],
             controls: [],

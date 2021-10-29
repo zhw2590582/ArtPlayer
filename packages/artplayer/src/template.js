@@ -27,9 +27,9 @@ export default class Template {
         return query(className, this.$container);
     }
 
-    desktop() {
-        const { theme, backdrop } = this.art.option;
-        this.$container.innerHTML = `
+    html() {
+        const { theme } = this.art.option;
+        return `
           <div class="art-undercover"></div>
           <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${theme}">
             <video class="art-video"></video>
@@ -94,6 +94,14 @@ export default class Template {
             <div class="art-contextmenus"></div>
           </div>
         `;
+    }
+
+    desktop() {
+        const { backdrop, useSSR } = this.art.option;
+
+        if (!useSSR) {
+            this.$container.innerHTML = this.html();
+        }
 
         this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
@@ -125,8 +133,10 @@ export default class Template {
 
         if (backdrop) {
             addClass(this.$settingInner, 'art-backdrop-filter');
-            addClass(this.$info, 'art-backdrop-filter');
             addClass(this.$contextmenu, 'art-backdrop-filter');
+            if (this.$info) {
+                addClass(this.$info, 'art-backdrop-filter');
+            }
         }
 
         if (this.art.isMobile) {

@@ -786,6 +786,7 @@
     localVideo: b,
     localSubtitle: b,
     networkMonitor: b,
+    useSSR: b,
     plugins: [f],
     whitelist: ["".concat(s, "|").concat(f, "|").concat(r)],
     layers: [component],
@@ -883,12 +884,22 @@
         return query(className, this.$container);
       }
     }, {
+      key: "html",
+      value: function html() {
+        var theme = this.art.option.theme;
+        return "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.30</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
+      }
+    }, {
       key: "desktop",
       value: function desktop() {
         var _this$art$option = this.art.option,
-            theme = _this$art$option.theme,
-            backdrop = _this$art$option.backdrop;
-        this.$container.innerHTML = "\n          <div class=\"art-undercover\"></div>\n          <div class=\"art-video-player art-subtitle-show art-layer-show\" style=\"--theme: ".concat(theme, "\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">3.5.30</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ");
+            backdrop = _this$art$option.backdrop,
+            useSSR = _this$art$option.useSSR;
+
+        if (!useSSR) {
+          this.$container.innerHTML = this.html();
+        }
+
         this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
@@ -919,8 +930,11 @@
 
         if (backdrop) {
           addClass(this.$settingInner, 'art-backdrop-filter');
-          addClass(this.$info, 'art-backdrop-filter');
           addClass(this.$contextmenu, 'art-backdrop-filter');
+
+          if (this.$info) {
+            addClass(this.$info, 'art-backdrop-filter');
+          }
         }
 
         if (this.art.isMobile) {
@@ -3602,40 +3616,55 @@
       classCallCheck(this, Info);
 
       _this = _super.call(this, art);
+      _this.art = art;
       _this.name = 'info';
-      var _art$template = art.template,
-          $infoPanel = _art$template.$infoPanel,
-          $infoClose = _art$template.$infoClose,
-          $video = _art$template.$video,
-          proxy = art.events.proxy;
-      proxy($infoClose, 'click', function () {
-        _this.show = false;
-      });
-      var timer = null;
-      var types = queryAll('[data-video]', $infoPanel);
-      art.on('destroy', function () {
-        clearTimeout(timer);
-      });
 
-      function loop() {
-        types.forEach(function (item) {
-          var value = $video[item.dataset.video];
-          item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
-        });
-        timer = setTimeout(function () {
-          loop();
-        }, 1000);
+      if (_this.art.template.$info) {
+        _this.init();
       }
 
-      art.on('info', function (value) {
-        clearTimeout(timer);
-
-        if (value) {
-          loop();
-        }
-      });
       return _this;
     }
+
+    createClass(Info, [{
+      key: "init",
+      value: function init() {
+        var _this2 = this;
+
+        var _this$art = this.art,
+            _this$art$template = _this$art.template,
+            $infoPanel = _this$art$template.$infoPanel,
+            $infoClose = _this$art$template.$infoClose,
+            $video = _this$art$template.$video,
+            proxy = _this$art.events.proxy;
+        proxy($infoClose, 'click', function () {
+          _this2.show = false;
+        });
+        var timer = null;
+        var types = queryAll('[data-video]', $infoPanel);
+        this.art.on('destroy', function () {
+          clearTimeout(timer);
+        });
+
+        function loop() {
+          types.forEach(function (item) {
+            var value = $video[item.dataset.video];
+            item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
+          });
+          timer = setTimeout(function () {
+            loop();
+          }, 1000);
+        }
+
+        this.art.on('info', function (value) {
+          clearTimeout(timer);
+
+          if (value) {
+            loop();
+          }
+        });
+      }
+    }]);
 
     return Info;
   }(Component);
@@ -3889,7 +3918,7 @@
 
   function viewInit(art, events) {
     var player = art.player,
-        autoMini = art.option.autoMini,
+        option = art.option,
         $container = art.template.$container;
     var scrollFn = throttle(function () {
       art.emit('view', isInViewport($container, 50));
@@ -3898,7 +3927,7 @@
       scrollFn();
     });
     art.on('view', function (state) {
-      if (autoMini) {
+      if (option.autoMini) {
         player.mini = !state;
       }
     });
@@ -5069,6 +5098,7 @@
           localVideo: false,
           localSubtitle: false,
           networkMonitor: false,
+          useSSR: false,
           layers: [],
           contextmenu: [],
           controls: [],

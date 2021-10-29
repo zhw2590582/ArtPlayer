@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Artplayer.js</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content="artplayer, player, js, html5, video" />
+    <meta name="description" content="ArtPlayer.js is a modern and full featured HTML5 video player" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .artplayer-app {
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="artplayer-app">
+            <div class="art-undercover"></div>
+            <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: red">
+                <video class="art-video"></video>
+                <div class="art-poster"></div>
+                <div class="art-subtitle"></div>
+                <div class="art-danmuku"></div>
+                <div class="art-layers"></div>
+                <div class="art-mask">
+                    <div class="art-state"></div>
+                </div>
+                <div class="art-bottom">
+                    <div class="art-progress"></div>
+                    <div class="art-controls">
+                        <div class="art-controls-left"></div>
+                        <div class="art-controls-right"></div>
+                    </div>
+                </div>
+                <div class="art-loading"></div>
+                <div class="art-notice">
+                    <div class="art-notice-inner"></div>
+                </div>
+                <div class="art-settings">
+                    <div class="art-setting-inner">
+                        <div class="art-setting-body"></div>
+                    </div>
+                </div>
+                <div class="art-mini-header">
+                    <div class="art-mini-title"></div>
+                    <div class="art-mini-close">×</div>
+                </div>
+                <div class="art-contextmenus"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./uncompiled/artplayer.js?t=6"></script>
+    <script src="./assets/js/ssr.js"></script>
+    <script>
+        var isLocalhost = Boolean(
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '[::1]' ||
+            window.location.hostname.match(
+                /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+            )
+        );
+        var _hmt = _hmt || [];
+        (function () {
+            if (!isLocalhost) {
+                var hm = document.createElement('script');
+                hm.src = 'https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(hm, s);
+            }
+        })();
+    </script>
+</body>
+
+</html>

@@ -57,6 +57,7 @@ export default {
     localVideo: b,
     localSubtitle: b,
     networkMonitor: b,
+    useSSR: b,
     plugins: [f],
     whitelist: [`${s}|${f}|${r}`],
     layers: [component],
