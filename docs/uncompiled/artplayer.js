@@ -922,7 +922,7 @@
         this.$miniTitle = this.query('.art-mini-title');
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
-        setStyle(this.$player, '--theme', theme);
+        this.$player.style.setProperty('--theme', theme);
 
         if (backdrop) {
           addClass(this.$settingInner, 'art-backdrop-filter');

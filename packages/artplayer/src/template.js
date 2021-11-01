@@ -1,4 +1,4 @@
-import { errorHandle, query, addClass, setStyle } from './utils';
+import { errorHandle, query, addClass } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -130,7 +130,7 @@ export default class Template {
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
 
-        setStyle(this.$player, '--theme', theme);
+        this.$player.style.setProperty('--theme', theme);
 
         if (backdrop) {
             addClass(this.$settingInner, 'art-backdrop-filter');
