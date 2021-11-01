@@ -1,6 +1,17 @@
+const $container = document.querySelector('.artplayer-app');
+
+// 在服务器端可以直接访问 Artplayer.html 属性，返回供 ssr 使用的 html
+// 然后直接插值于播放器的容器里
+// const Artplayer = require('artplayer');
+// console.log(Artplayer.html);
+// 在浏览器端，开启 useSSR 即可
+
+// 模拟效果
+$container.innerHTML = Artplayer.html;
+
 var art = new Artplayer({
     useSSR: true,
-    container: '.artplayer-app',
+    container: $container,
     url: 'https://artplayer.org/assets/sample/video.mp4',
     title: 'One More Time One More Chance',
     poster: '/assets/sample/poster.jpg',

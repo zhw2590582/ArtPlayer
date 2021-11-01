@@ -1,4 +1,4 @@
-import { errorHandle, query, addClass } from './utils';
+import { errorHandle, query, addClass, setStyle } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -23,15 +23,10 @@ export default class Template {
         }
     }
 
-    query(className) {
-        return query(className, this.$container);
-    }
-
-    html() {
-        const { theme } = this.art.option;
+    static get html() {
         return `
           <div class="art-undercover"></div>
-          <div class="art-video-player art-subtitle-show art-layer-show" style="--theme: ${theme}">
+          <div class="art-video-player art-subtitle-show art-layer-show">
             <video class="art-video"></video>
             <div class="art-poster"></div>
             <div class="art-subtitle"></div>
@@ -96,11 +91,15 @@ export default class Template {
         `;
     }
 
+    query(className) {
+        return query(className, this.$container);
+    }
+
     desktop() {
-        const { backdrop, useSSR } = this.art.option;
+        const { backdrop, theme, useSSR } = this.art.option;
 
         if (!useSSR) {
-            this.$container.innerHTML = this.html();
+            this.$container.innerHTML = Template.html;
         }
 
         this.$undercover = this.query('.art-undercover');
@@ -130,6 +129,8 @@ export default class Template {
         this.$miniTitle = this.query('.art-mini-title');
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
+
+        setStyle(this.$player, '--theme', theme);
 
         if (backdrop) {
             addClass(this.$settingInner, 'art-backdrop-filter');
