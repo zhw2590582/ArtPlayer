@@ -61,7 +61,7 @@ export default {
         'volumechange',
         'waiting',
     ],
-    prototype: [
+    prototypes: [
         "width",
         "height",
         "videoWidth",
