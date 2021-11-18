@@ -69,6 +69,7 @@ export default function eventInit(art, player) {
                 reconnectTime += 1;
                 player.url = option.url;
                 notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
+                art.emit('error', reconnectTime);
             });
         } else {
             art.loading.show = false;

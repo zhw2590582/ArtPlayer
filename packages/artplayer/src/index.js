@@ -99,6 +99,10 @@ export default class Artplayer extends Emitter {
         return validator.kindOf;
     }
 
+    static get html() {
+        return Template.html;
+    }
+
     static get option() {
         return {
             container: '#artplayer',
