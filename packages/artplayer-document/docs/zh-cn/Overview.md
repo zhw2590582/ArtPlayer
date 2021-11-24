@@ -45,7 +45,13 @@ const Artplayer = require('artplayer');
 
 ## 使用
 
-`Artplayer` 是一个构造函数，通过 `new` 关键字进行实例化
+:::danger 提示
+
+播放器的尺寸依赖于容器 `container` 的尺寸，所以你的容器 `container` 必须是有尺寸的
+
+:::
+
+### 在 `Html` 使用
 
 ```html
 <!DOCTYPE html>
@@ -67,11 +73,156 @@ const Artplayer = require('artplayer');
 </html>
 ```
 
-:::danger 提示
+### 与 `Vue` 使用
 
-播放器的尺寸依赖于容器 `container` 的尺寸，所以你的容器 `container` 必须是有尺寸的
+创建 `Artplayer` 组件: `Artplayer.vue`
+
+```js
+import Artplayer from 'artplayer';
+
+export default {
+    data() {
+        return {
+            instance: null,
+        };
+    },
+    props: {
+        option: {
+            type: Object,
+            required: true,
+        },
+        getInstance: Function,
+    },
+    mounted() {
+        this.instance = new Artplayer({
+            ...this.option,
+            container: this.$refs.artRef,
+        });
+
+        this.$nextTick(() => {
+            this.$emit('getInstance', this.instance);
+        });
+    },
+    beforeDestroy() {
+        if (this.instance && this.instance.destroy) {
+            this.instance.destroy();
+        }
+    },
+    render(h) {
+        return h('div', {
+            ref: 'artRef',
+        });
+    },
+};
+```
+
+引入 `Artplayer.vue` 组件
+
+```jsx
+<template>
+  <Artplayer @get-instance="getInstance" :option="option" :style="style" />
+</template>
+
+<script>
+import Artplayer from "./Artplayer.vue";
+
+export default {
+  data() {
+    return {
+      option: {
+        url: "https://artplayer.org/assets/sample/video.mp4",
+      },
+      style: {
+        width: "600px",
+        height: "400px",
+      },
+    };
+  },
+  components: {
+    Artplayer,
+  },
+  methods: {
+    getInstance(art) {
+      console.log(art);
+    },
+  },
+};
+</script>
+```
+
+:::caution 提示
+
+修改 `option` 不能动态修改 `Artplayer` 实例
 
 :::
+
+### 与 `React` 使用
+
+创建 `Artplayer` 组件: `Artplayer.jsx`
+
+```jsx
+import React from 'react';
+import Artplayer from 'artplayer';
+
+export default class ArtplayerReact extends React.Component {
+    constructor(props) {
+        super(props);
+        Artplayer.utils.errorHandle(
+            props.option && typeof props.option === 'object',
+            "The prop 'option' object cannot be missing",
+        );
+        this.instance = null;
+        this.artRef = React.createRef();
+    }
+
+    componentDidMount() {
+        const { option, getInstance } = this.props;
+        this.instance = new Artplayer({
+            ...option,
+            container: this.artRef.current,
+        });
+
+        if (getInstance && typeof getInstance === 'function') {
+            getInstance(this.instance);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.instance && this.instance.destroy) {
+            this.instance.destroy();
+        }
+    }
+
+    render() {
+        const { option, getInstance, ...rest } = this.props;
+        return React.createElement('div', {
+            ref: this.artRef,
+            ...rest,
+        });
+    }
+}
+```
+
+引入 `Artplayer.jsx` 组件
+
+```jsx
+import Artplayer from "./Artplayer.jsx";
+
+function App() {
+  return (
+    <Artplayer
+      option={{
+        url: "https://artplayer.org/assets/sample/video.mp4",
+      }}
+      style={{
+        width: "600px",
+        height: "400px",
+      }}
+      getInstance={ins => console.log(ins)}
+    />
+  );
+}
+```
 
 ## 演示
 
