@@ -126,7 +126,6 @@ export default class Artplayer extends Emitter {
             hotkey: true,
             pip: false,
             mutex: true,
-            light: false,
             backdrop: true,
             fullscreen: false,
             fullscreenWeb: false,

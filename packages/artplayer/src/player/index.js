@@ -23,7 +23,6 @@ import playingMix from './playingMix';
 import autoSizeMix from './autoSizeMix';
 import rectMix from './rectMix';
 import flipMix from './flipMix';
-import lightMix from './lightMix';
 import miniMix from './miniMix';
 import loopMin from './loopMin';
 import rotateMix from './rotateMix';
@@ -57,7 +56,6 @@ export default class Player {
         autoSizeMix(art, this);
         rectMix(art, this);
         flipMix(art, this);
-        lightMix(art, this);
         miniMix(art, this);
         loopMin(art, this);
         rotateMix(art, this);

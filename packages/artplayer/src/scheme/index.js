@@ -48,7 +48,6 @@ export default {
     hotkey: b,
     pip: b,
     mutex: b,
-    light: b,
     backdrop: b,
     fullscreen: b,
     fullscreenWeb: b,
@@ -66,7 +65,7 @@ export default {
         {
             ...component,
             position: (value, type, paths) => {
-                const position = ['top', 'left', 'right'];
+                const position = ['top', 'left', 'right', 'middle'];
                 return errorHandle(
                     position.includes(value),
                     `${paths.join('.')} only accept ${position.toString()} as parameters`,
