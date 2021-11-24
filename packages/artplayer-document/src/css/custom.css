@@ -1,3 +1,4 @@
+/* stylelint-disable docusaurus/copyright-header */
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -23,6 +24,37 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
+html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+table {
+  display: table;
+  font-size: 15px;
+}
+
+table th {
+  text-align: left;
+}
+
+table thead tr {
+  border-bottom-width: 1px !important;
+}
+
+table p {
+  margin-bottom: 0px;
+}
+
+.markdown li > p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.markdown > p {
+  margin-bottom: 10px;
+}
+
+.navbar__search {
+  padding-left: 1rem;
+  padding-left: var(--ifm-navbar-padding-horizontal);
 }
