@@ -25,7 +25,6 @@ var art = new Artplayer({
     localSubtitle: true,
     networkMonitor: false,
     mutex: true,
-    light: true,
     backdrop: true,
     log: true,
     theme: '#ffad00',

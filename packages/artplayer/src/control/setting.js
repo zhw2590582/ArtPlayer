@@ -15,7 +15,7 @@ export default function setting(option) {
             append($control, icons.setting);
 
             proxy($control, 'click', () => {
-                setting.toggle();
+                setting.toggle = true;
             });
 
             art.on('setting', value => {

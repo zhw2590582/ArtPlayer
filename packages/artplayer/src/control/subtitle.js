@@ -15,7 +15,7 @@ export default function subtitle(option) {
             append($control, icons.subtitle);
 
             proxy($control, 'click', () => {
-                subtitle.toggle();
+                subtitle.toggle = true;
             });
 
             art.on('subtitle', value => {

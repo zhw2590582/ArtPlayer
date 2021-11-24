@@ -2871,7 +2871,7 @@
               subtitle = art.subtitle;
           append($control, icons.subtitle);
           proxy($control, 'click', function () {
-            subtitle.toggle();
+            subtitle.toggle = true;
           });
           art.on('subtitle', function (value) {
             tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
@@ -3002,7 +3002,7 @@
               setting = art.setting;
           append($control, icons.setting);
           proxy($control, 'click', function () {
-            setting.toggle();
+            setting.toggle = true;
           });
           art.on('setting', function (value) {
             tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
