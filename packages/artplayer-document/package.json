@@ -5,7 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "npx docusaurus start",
-    "build": "npx docusaurus build",
+    "build": "npx docusaurus build && npm run copy",
+    "copy": "rm -rf ../../docs/document && mv build ../../docs/document",
     "swizzle": "npx docusaurus swizzle",
     "deploy": "npx docusaurus deploy",
     "clear": "npx docusaurus clear",
