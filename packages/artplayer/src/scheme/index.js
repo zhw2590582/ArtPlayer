@@ -65,7 +65,7 @@ export default {
         {
             ...component,
             position: (value, type, paths) => {
-                const position = ['top', 'left', 'right', 'middle'];
+                const position = ['top', 'left', 'right'];
                 return errorHandle(
                     position.includes(value),
                     `${paths.join('.')} only accept ${position.toString()} as parameters`,

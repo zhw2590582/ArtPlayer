@@ -38,7 +38,6 @@ export default class Template {
               <div class="art-progress"></div>
               <div class="art-controls">
                 <div class="art-controls-left"></div>
-                <div class="art-controls-middle"></div>
                 <div class="art-controls-right"></div>
               </div>
             </div>
@@ -111,7 +110,6 @@ export default class Template {
         this.$progress = this.query('.art-progress');
         this.$controls = this.query('.art-controls');
         this.$controlsLeft = this.query('.art-controls-left');
-        this.$controlsMiddle = this.query('.art-controls-middle');
         this.$controlsRight = this.query('.art-controls-right');
         this.$layer = this.query('.art-layers');
         this.$loading = this.query('.art-loading');
