@@ -28,6 +28,7 @@ module.exports = {
                     label: 'Github',
                 },
                 {
+                    href: '#',
                     label: 'QQ群: 320881312',
                     position: 'right',
                 },

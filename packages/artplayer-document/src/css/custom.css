@@ -58,3 +58,14 @@ table p {
   padding-left: 1rem;
   padding-left: var(--ifm-navbar-padding-horizontal);
 }
+
+.run-code {
+  display: inline-block;
+  padding: 3px 7px;
+  color: #fff;
+  border-radius: 3px;
+  background-color: #25c2a0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
