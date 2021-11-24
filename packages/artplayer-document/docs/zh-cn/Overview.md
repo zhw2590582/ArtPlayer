@@ -1,5 +1,5 @@
 ---
-title: 前言
+title: 快速上手
 sidebar_position: 1
 slug: /zh-cn
 ---
