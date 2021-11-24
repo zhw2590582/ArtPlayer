@@ -8,6 +8,8 @@ module.exports = {
     baseUrl: '/document/',
     onBrokenLinks: 'ignore',
     onBrokenMarkdownLinks: 'ignore',
+    organizationName: 'zhw2590582',
+    projectName: 'Artplayer',
     favicon: 'img/favicon.ico',
     clientModules: [require.resolve('./src/script/main.js')],
     themeConfig: {
