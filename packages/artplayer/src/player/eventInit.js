@@ -14,7 +14,7 @@ export default function eventInit(art, player) {
     const maxReconnectTime = 5;
 
     proxy($video, 'click', () => {
-        player.toggle = true;
+        player.toggle();
     });
 
     config.events.forEach((eventName) => {
@@ -54,7 +54,11 @@ export default function eventInit(art, player) {
     art.on('video:ended', () => {
         if (option.loop) {
             player.seek = 0;
-            player.play = player.playing;
+            if (player.playing) {
+                player.play();
+            } else {
+                player.pause();
+            }
             art.controls.show = false;
             art.mask.show = false;
         } else {

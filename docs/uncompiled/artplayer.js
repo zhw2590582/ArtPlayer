@@ -1151,7 +1151,7 @@
     var reconnectTime = 0;
     var maxReconnectTime = 5;
     proxy($video, 'click', function () {
-      player.toggle = true;
+      player.toggle();
     });
     config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
@@ -1179,7 +1179,13 @@
     art.on('video:ended', function () {
       if (option.loop) {
         player.seek = 0;
-        player.play = player.playing;
+
+        if (player.playing) {
+          player.play();
+        } else {
+          player.pause();
+        }
+
         art.controls.show = false;
         art.mask.show = false;
       } else {
@@ -1290,30 +1296,26 @@
         mutex = art.option.mutex,
         $video = art.template.$video;
     def(player, 'play', {
-      set: function set(value) {
-        if (value) {
-          var promise = $video.play();
+      value: function value() {
+        var promise = $video.play();
 
-          if (promise.then) {
-            promise.then().catch(function (err) {
-              notice.show = err;
-              throw err;
-            });
-          }
-
-          if (mutex) {
-            instances.filter(function (item) {
-              return item !== art;
-            }).forEach(function (item) {
-              item.player.pause = true;
-            });
-          }
-
-          notice.show = i18n.get('Play');
-          art.emit('play');
-        } else {
-          player.pause = true;
+        if (promise.then) {
+          promise.then().catch(function (err) {
+            notice.show = err;
+            throw err;
+          });
         }
+
+        if (mutex) {
+          instances.filter(function (item) {
+            return item !== art;
+          }).forEach(function (item) {
+            item.player.pause();
+          });
+        }
+
+        notice.show = i18n.get('Play');
+        art.emit('play');
       }
     });
   }
@@ -1323,30 +1325,21 @@
         i18n = art.i18n,
         notice = art.notice;
     def(player, 'pause', {
-      get: function get() {
-        return $video.paused;
-      },
-      set: function set(value) {
-        if (value) {
-          $video.pause();
-          notice.show = i18n.get('Pause');
-          art.emit('pause');
-        } else {
-          player.play = true;
-        }
+      value: function value() {
+        $video.pause();
+        notice.show = i18n.get('Pause');
+        art.emit('pause');
       }
     });
   }
 
   function toggleMix(art, player) {
     def(player, 'toggle', {
-      set: function set(value) {
-        if (value) {
-          if (player.playing) {
-            player.pause = true;
-          } else {
-            player.play = true;
-          }
+      value: function value() {
+        if (player.playing) {
+          player.pause();
+        } else {
+          player.play();
         }
       }
     });
@@ -1447,7 +1440,7 @@
         player.currentTime = currentTime;
 
         if (playing) {
-          player.play = true;
+          player.play();
         }
       });
 
@@ -2709,10 +2702,10 @@
           tooltip($play, i18n.get('Play'));
           tooltip($pause, i18n.get('Pause'));
           proxy($play, 'click', function () {
-            player.play = true;
+            player.play();
           });
           proxy($pause, 'click', function () {
-            player.pause = true;
+            player.pause();
           });
 
           function showPlay() {
@@ -2900,7 +2893,7 @@
               subtitle = art.subtitle;
           append($control, icons.subtitle);
           proxy($control, 'click', function () {
-            subtitle.toggle = true;
+            subtitle.toggle();
           });
           art.on('subtitle', function (value) {
             tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
@@ -3031,7 +3024,7 @@
               setting = art.setting;
           append($control, icons.setting);
           proxy($control, 'click', function () {
-            setting.toggle = true;
+            setting.toggle();
           });
           art.on('setting', function (value) {
             tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
@@ -4023,7 +4016,7 @@
           });
 
           _this.add(32, function () {
-            player.toggle = true;
+            player.toggle();
           });
 
           _this.add(37, function () {

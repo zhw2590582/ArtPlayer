@@ -8,17 +8,10 @@ export default function pauseMix(art, player) {
     } = art;
 
     def(player, 'pause', {
-        get() {
-            return $video.paused;
-        },
-        set(value) {
-            if (value) {
-                $video.pause();
-                notice.show = i18n.get('Pause');
-                art.emit('pause');
-            } else {
-                player.play = true;
-            }
+        value() {
+            $video.pause();
+            notice.show = i18n.get('Pause');
+            art.emit('pause');
         },
     });
 }

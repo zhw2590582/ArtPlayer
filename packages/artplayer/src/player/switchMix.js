@@ -15,7 +15,7 @@ export default function switchMix(art, player) {
             player.autoSize = true;
             player.currentTime = currentTime;
             if (playing) {
-                player.play = true;
+                player.play();
             }
         });
         if (name) {
