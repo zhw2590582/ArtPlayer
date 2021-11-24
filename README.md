@@ -1,20 +1,17 @@
 # ArtPlayer.js
 
--   [中文介绍](./README-CN.md)
-
 > :art: ArtPlayer.js is a modern and full featured HTML5 video player
 
 ![version](https://badgen.net/npm/v/artplayer)
 ![license](https://badgen.net/npm/license/artplayer)
 ![size](https://badgen.net/bundlephobia/minzip/artplayer)
 [![npm Downloads](https://img.shields.io/npm/dt/artplayer.svg)](https://www.npmjs.com/package/artplayer)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/354e9953b70a4791a5a46194d587c707)](https://www.codacy.com/app/zhw2590582/ArtPlayer?utm_source=github.com&utm_medium=referral&utm_content=zhw2590582/ArtPlayer&utm_campaign=Badge_Grade)
 
 ![Screenshot](./images/screenshot.png)
 
 ## Features
 
--   <b>Size</b> - `25kB` minified and gzipped
+-   <b>Size</b> - `27kB` minified and gzipped
 -   <b>Subtitle</b> - Support for `.VTT`, `.ASS` and `.SRT` formats
 -   <b>Customizable</b> - `Right Click Menu`, `Business Layer`, `Video Controller` and `Settings Panel`
 -   <b>Controller</b> - `Quality Switch`, `Subtitle Switch`, `Play Speed`, `Aspect Ratio`, `Video Flip`, `Fullscreen`, `Picture In Picture`, `Screenshot`, `Thumbnail`, `Adaptive Size`, `Highlight` and `Hotkey`...
@@ -24,18 +21,6 @@
 -   <b>Document</b> - Detailed interface documentation and rich code demo
 -   <b>API</b> - Rich interface and response events, easy to interface with business or custom plugin
 -   <b>I18N</b> - support for internationalization of controls
-
-## Ecosystem
-
-| Project                                                                                                               | Description         | Demo                                                                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [artplayer-plugin-danmuku](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku)     | Danmuku plugin      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)                                            |
-| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | Gif plugin          | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif)                                                    |
-| [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | Backlight plugin    | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight)                                        |
-| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail)     | Thumbnail tool      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail)                                          |
-| [artplayer-tool-github](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-github)           | Github Danmuku tool | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github) |  |
-| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React Component     | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                 |
-| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue Component       | [demo](https://codesandbox.io/s/thirsty-sunset-3lz7m)                                                                                       |
 
 ## Homepage
 
@@ -99,8 +84,7 @@ var art = new Artplayer({
 Installation dependency:
 
 ```bash
-$ npm install
-$ npm run bootstrap
+$ npm install && npm run bootstrap
 ```
 
 Run the developer mode and select the project you want to develop:
@@ -130,4 +114,4 @@ We accept donations through these channels:
 
 ## License
 
-MIT © [Harvey Zack](https://sleepy.im/)
+MIT © Harvey Zack
