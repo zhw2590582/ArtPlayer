@@ -455,7 +455,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-内置插件：字幕时间偏移插件，偏移的时间范围在 `[-5s, 5s]`
+字幕时间偏移，范围在 `[-5s, 5s]`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -476,7 +476,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-内置插件：迷你进度条插件，只在播放器失去焦点后且正在播放时出现
+迷你进度条，只在播放器失去焦点后且正在播放时出现
 
 <div className="run-code">▶ Run Code</div>
 
@@ -493,7 +493,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-内置插件：本地视频插件，需要使用`art.plugins.localVideo.attach`方法挂载打开视频按钮
+打开本地视频，需要使用`art.plugins.localVideo.attach`方法挂载打开视频按钮
 
 <div className="run-code">▶ Run Code</div>
 
@@ -520,7 +520,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-内置插件：本地字幕插件，需要使用`art.plugins.localSubtitle.attach`方法挂载打开字幕按钮
+打开本地字幕，需要使用`art.plugins.localSubtitle.attach`方法挂载打开字幕按钮
 
 <div className="run-code">▶ Run Code</div>
 
@@ -540,35 +540,6 @@ var art = new Artplayer({
         },
     ],
 });
-```
-
-## networkMonitor
-
--   类型: `Boolean`
--   默认: `false`
-
-内置插件：播放卡顿监听插件
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    networkMonitor: true,
-});
-
-// 例如，当比率等于0.5时，它意味着每10秒的采样时间里有5秒的时间是卡顿的
-let notice = false;
-art.on('networkMonitor', (ratio) => {
-    if (ratio >= 0.5 && !notice) {
-        notice = true;
-        console.log('当前播放状态欠佳');
-    }
-});
-
-// 修改采样时间，单位是毫秒，默认为10秒。
-art.plugins.networkMonitor.sample(30000);
 ```
 
 ## useSSR
