@@ -150,12 +150,6 @@ export default {
 </script>
 ```
 
-:::caution 提示
-
-修改 `option` 不能动态修改 `Artplayer` 实例
-
-:::
-
 ### 与 `React` 使用
 
 创建 `Artplayer` 组件: `Artplayer.jsx`
@@ -167,10 +161,6 @@ import Artplayer from 'artplayer';
 export default class ArtplayerReact extends React.Component {
     constructor(props) {
         super(props);
-        Artplayer.utils.errorHandle(
-            props.option && typeof props.option === 'object',
-            "The prop 'option' object cannot be missing",
-        );
         this.instance = null;
         this.artRef = React.createRef();
     }
@@ -223,6 +213,12 @@ function App() {
   );
 }
 ```
+
+:::caution 提示
+
+在 `Vue` 和 `React` 里修改 `option` 不能动态修改 `Artplayer` 实例
+
+:::
 
 ## 演示
 
