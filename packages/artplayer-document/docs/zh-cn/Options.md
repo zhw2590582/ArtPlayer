@@ -593,15 +593,167 @@ var art = new Artplayer({
 });
 ```
 
+:::tip 提示
+
+SSR 是 Server Side Render 简称，页面上的内容是通过服务端渲染生成的，浏览器直接显示服务端返回的 HTML 就可以了。
+
+:::
+
 ## layers
+
+-   类型: `Array`
+-   默认: `[]`
+
+初始化自定义的业务图层，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var img = '/assets/sample/layer.png';
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    layers: [
+        {
+            html: `<img style="width: 100px" src="${img}">`,
+            style: {
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                opacity: '.9',
+            },
+        },
+    ],
+});
+```
 
 ## contextmenu
 
+-   类型: `Array`
+-   默认: `[]`
+
+初始化自定义的右键菜单，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    contextmenu: [
+        {
+            html: '自定义菜单',
+            click: function () {
+                console.info('你点击了自定义菜单');
+                art.contextmenu.show = false;
+            },
+        },
+    ],
+});
+```
+
 ## controls
+
+-   类型: `Array`
+-   默认: `[]`
+
+初始化自定义的底部控制栏，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    controls: [
+        {
+            position: 'right',
+            index: 10,
+            html: '自定义按钮',
+            tooltip: '自定义按钮的提示',
+            click: function () {
+                console.log('你点击了自定义按钮');
+            },
+        },
+    ],
+});
+```
 
 ## quality
 
+-   类型: `Array`
+-   默认: `[]`
+
+是否在底部控制栏里显示画质选择列表
+
+| 属性      | 类型      | 描述     |
+| --------- | --------- | -------- |
+| `default` | `Boolean` | 默认画质 |
+| `name`    | `String`  | 画质名字 |
+| `url`     | `String`  | 画质地址 |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    quality: [
+        {
+            default: true,
+            name: 'SD 480P',
+            url: '/assets/sample/video.mp4',
+        },
+        {
+            name: 'HD 720P',
+            url: '/assets/sample/video.mp4',
+        },
+    ],
+});
+```
+
 ## highlight
+
+-   类型: `Array`
+-   默认: `[]`
+
+在进度条上显示高亮信息点
+
+| 属性   | 类型     | 描述               |
+| ------ | -------- | ------------------ |
+| `time` | `Number` | 高亮时间（单位秒） |
+| `text` | `String` | 高亮文本           |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    highlight: [
+        {
+            time: 60,
+            text: 'One more chance',
+        },
+        {
+            time: 120,
+            text: '谁でもいいはずなのに',
+        },
+        {
+            time: 180,
+            text: '夏の想い出がまわる',
+        },
+        {
+            time: 240,
+            text: 'こんなとこにあるはずもないのに',
+        },
+        {
+            time: 300,
+            text: '－－终わり－－',
+        },
+    ],
+});
+```
 
 ## plugins
 
