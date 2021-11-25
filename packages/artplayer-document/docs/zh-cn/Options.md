@@ -371,10 +371,9 @@ var art = new Artplayer({
 | ------- | ------------- |
 | `↑`     | 增加音量      |
 | `↓`     | 降低音量      |
-| `←`     | 快进5秒       |
-| `→`     | 快退5秒       |
+| `←`     | 快进 5 秒     |
+| `→`     | 快退 5 秒     |
 | `space` | 切换播放/暂停 |
-
 
 :::tip 提示
 
@@ -728,7 +727,50 @@ var art = new Artplayer({
 
 ## plugins
 
+-   类型: `Array`
+-   默认: `[]`
+
+初始化自定义的插件，更多信息请访问 [自定义插件的使用](/document/zh-cn/Questions/plugin)
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    plugins: [
+        function myPlugin(art) {
+            console.info('myPlugin running...');
+            return {
+                something: 'something',
+                doSomething: function () {
+                    console.info('Do something here...');
+                },
+            };
+        },
+    ],
+});
+```
+
 ## whitelist
+
+-   类型: `Array`
+-   默认: `[]`
+
+因为不同的移动设备存在多种差异和限制，所以本播放器默认在移动设备上使用原生方法挂载视频，假如你想在移动设备上使用本播放器，需要手动开启白名单
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    whitelist: ['iPhone OS 11'],
+    // whitelist: ['*'],
+    // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
+    // whitelist: [/iPhone OS 11/gi]
+});
+```
 
 ## switcher
 
@@ -743,3 +785,7 @@ var art = new Artplayer({
 ## customType
 
 ## lang
+
+```
+
+```
