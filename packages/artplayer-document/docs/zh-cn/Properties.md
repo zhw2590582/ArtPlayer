@@ -513,3 +513,42 @@ art.on('ready', () => {
 尺寸和坐标信息是通过 `getBoundingClientRect` 获取的
 
 :::
+
+```js
+[
+    "option",
+    "isFocus",
+    "isDestroy",
+    "userAgent",
+    "isMobile",
+    "isWechat",
+    "whitelist",
+    "template",
+    "events",
+    "storage",
+    "icons",
+    "i18n",
+    "notice",
+
+    "flip",
+    "loop",
+    "rotate",
+    "switchQuality",
+    "switchUrl",
+    "playbackRate",
+    "aspectRatio",
+    
+    "player",
+    "layers",
+    "controls",
+    "contextmenu",
+    "subtitle",
+    "info",
+    "loading",
+    "hotkey",
+    "mask",
+    "setting",
+    "plugins",
+    "id"
+]
+```
