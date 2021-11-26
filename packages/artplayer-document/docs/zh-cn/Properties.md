@@ -499,7 +499,7 @@ art.on('ready', () => {
 -   类型: `Getter`
 -   参数: `Boolean`
 
-设置视频是否正在播放中
+获取视频是否正在播放中
 
 <div className="run-code">▶ Run Code</div>
 
