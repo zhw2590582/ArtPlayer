@@ -488,3 +488,28 @@ art.on('ready', () => {
     console.info(art.autoSize);
 })
 ```
+
+## rect
+
+-   类型: `Getter`
+
+获取播放器的尺寸和坐标信息
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(JSON.stringify(art.rect));
+})
+```
+
+:::tip 提示
+
+尺寸和坐标信息是通过 `getBoundingClientRect` 获取的
+
+:::
