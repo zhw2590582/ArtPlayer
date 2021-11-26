@@ -418,3 +418,73 @@ art.on('ready', () => {
     art.poster = '/assets/sample/poster.jpg?t=0';
     console.info(art.poster);
 })
+```
+
+## mini
+
+-   类型: `Setter/Getter`
+-   参数: `Boolean`
+
+设置和获取播放器迷你模式
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.mini = true;
+
+    setTimeout(() => {
+        art.mini = false;
+    }, 3000);
+})
+```
+
+## playing
+
+-   类型: `Getter`
+-   参数: `Boolean`
+
+设置视频是否正在播放中
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    muted: true,
+});
+
+art.on('ready', () => {
+    console.info(art.playing);
+    art.play();
+    console.info(art.playing);
+})
+```
+
+## autoSize
+
+-   类型: `Setter/Getter`
+-   参数: `Boolean`
+
+设置视频是否自适应尺寸，设置为 `true` 之后它会只执行一次
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.autoSize);
+    art.autoSize = true;
+    console.info(art.autoSize);
+})
+```
