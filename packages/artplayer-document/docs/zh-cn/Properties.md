@@ -1,5 +1,5 @@
 ---
-title: 实例属性
+title: 常用属性
 sidebar_position: 3
 slug: /zh-cn/propertie
 ---
@@ -178,6 +178,56 @@ art.on('ready', () => {
     console.info(art.url);
     art.url = '/assets/sample/video.mp4?t=0';
     console.info(art.url);
+})
+```
+
+## switchUrl
+
+-   类型: `Function`
+-   参数: `String`
+
+设置视频地址，设置时和 `url` 类似，但会执行一些优化操作
+
+函数支持两个参数，第一个为新的视频地址，第二个为新的视频名字
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.seek = 10;
+    setTimeout(() => {
+        art.switchUrl('/assets/sample/video.mp4?t=0', '新视频地址');
+    }, 3000);
+})
+```
+
+## switchQuality
+
+-   类型: `Function`
+-   参数: `String`
+
+设置视频画质地址，和 `switchQuality` 类似，但会带上之前的播放进度
+
+函数支持两个参数，第一个为新的视频地址，第二个为新的视频名字
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.seek = 10;
+    setTimeout(() => {
+        art.switchQuality('/assets/sample/video.mp4?t=0', '新视频地址');
+    }, 3000);
 })
 ```
 
@@ -514,41 +564,139 @@ art.on('ready', () => {
 
 :::
 
-```js
-[
-    "option",
-    "isFocus",
-    "isDestroy",
-    "userAgent",
-    "isMobile",
-    "isWechat",
-    "whitelist",
-    "template",
-    "events",
-    "storage",
-    "icons",
-    "i18n",
-    "notice",
+## flip
 
-    "flip",
-    "loop",
-    "rotate",
-    "switchQuality",
-    "switchUrl",
-    "playbackRate",
-    "aspectRatio",
-    
-    "player",
-    "layers",
-    "controls",
-    "contextmenu",
-    "subtitle",
-    "info",
-    "loading",
-    "hotkey",
-    "mask",
-    "setting",
-    "plugins",
-    "id"
-]
+-   类型: `Setter/Getter`
+-   参数: `String`
+
+设置和获取播放器翻转，支持`normal`、 `horizontal`、 `vertical`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.flip)
+    art.flip = 'horizontal'
+    console.info(art.flip)
+})
+```
+
+## rotate
+
+-   类型: `Setter/Getter`
+-   参数: `Number`
+
+设置和获取播放器旋转，支持 `-270`、`-180`、`-90`、`0`、`90`、`180`、`270`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoSize: true,
+});
+
+art.on('ready', () => {
+    console.info(art.rotate)
+    art.rotate = 90
+    console.info(art.rotate)
+})
+```
+
+## playbackRate
+
+-   类型: `Setter/Getter`
+-   参数: `Number`
+
+设置和获取播放器播放速度，支持`0.5`、`0.75`、`1.0`、`1.25`、`1.5`、`1.75`、`2.0`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.playbackRate)
+    art.playbackRate = 2
+    console.info(art.playbackRate)
+})
+```
+
+## aspectRatio
+
+-   类型: `Setter/Getter`
+-   参数: `String`
+
+设置和获取播放器长宽比，支持`default`、`4:3`、`16:9`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.aspectRatio)
+    art.aspectRatio = '16:9'
+    console.info(art.aspectRatio)
+})
+```
+
+## loop
+
+-   类型: `Setter/Getter`
+-   参数: `Array`
+
+设置和获取区间循序播放，单位秒
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.loop)
+    art.loop = [5, 10];
+    console.info(art.loop)
+})
+```
+
+:::tip 提示
+
+删除区间循环播放，只需要设置 `loop` 为 `[]` 即可
+
+:::
+
+## destroy
+
+-   类型: `Function`
+-   参数: `Boolean`
+
+销毁播放器，接受一个参数表示是否销毁后同时移除播放器的 `html`，默认为 `true`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.destroy();
+})
 ```
