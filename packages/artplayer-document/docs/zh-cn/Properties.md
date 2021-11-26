@@ -249,3 +249,172 @@ art.on('ready', () => {
 有的视频是没有时长的，例如直播中的视频或者没被解码完成的视频，这个时候获取的时长会是 `0`
 
 :::
+
+## screenshot
+
+-   类型: `Function`
+
+下载当前视频帧的截图
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.seek = 10;
+    art.screenshot();
+})
+```
+
+## getDataURL
+
+-   类型: `Function`
+
+获取当前视频帧的截图的`base64`地址，返回的是一个 `Promise`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.seek = 10;
+    art.getDataURL().then(url => console.info(url));
+})
+```
+
+## getBlobUrl
+
+-   类型: `Function`
+
+获取当前视频帧的截图的`Blob`地址，返回的是一个 `Promise`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.seek = 10;
+    art.getBlobUrl().then(url => console.info(url));
+})
+```
+
+## fullscreen
+
+-   类型: `Setter/Getter`
+-   参数: `Boolean`
+
+设置和获取播放器窗口全屏
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreen: true,
+});
+
+art.on('ready', () => {
+    art.fullscreen = true;
+
+    setTimeout(() => {
+        art.fullscreen = false;
+    }, 3000);
+})
+```
+
+:::tip 提示
+
+由于浏览器安全机制，触发窗口全屏前，页面必须先存在交互（例如用户点击过页面）
+
+:::
+
+## fullscreenWeb
+
+-   类型: `Setter/Getter`
+-   参数: `Boolean`
+
+设置和获取播放器网页全屏
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreenWeb: true,
+});
+
+art.on('ready', () => {
+    art.fullscreenWeb = true;
+
+    setTimeout(() => {
+        art.fullscreenWeb = false;
+    }, 3000);
+})
+```
+
+## pip
+
+-   类型: `Setter/Getter`
+-   参数: `Boolean`
+
+设置和获取播放器画中画模式
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreenWeb: true,
+});
+
+art.on('ready', () => {
+    art.pip = true;
+
+    setTimeout(() => {
+        art.pip = false;
+    }, 3000);
+})
+```
+
+:::tip 提示
+
+由于浏览器安全机制，触发画中画前，页面必须先存在交互（例如用户点击过页面）
+
+:::
+
+## poster
+
+-   类型: `Setter/Getter`
+-   参数: `String`
+
+设置和获取视频海报，只有在视频播放前才能看到海报效果
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    poster: '/assets/sample/poster.jpg',
+});
+
+art.on('ready', () => {
+    console.info(art.poster);
+    art.poster = '/assets/sample/poster.jpg?t=0';
+    console.info(art.poster);
+})

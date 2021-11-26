@@ -72,6 +72,9 @@ export default function fullscreenMix(art, player) {
                 },
             });
         }
+
+        // 异步设置
+        def(art, 'fullscreen', Object.getOwnPropertyDescriptor(player, 'fullscreen'));
     });
 
     def(player, 'fullscreenToggle', {
