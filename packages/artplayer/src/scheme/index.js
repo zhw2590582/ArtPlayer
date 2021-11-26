@@ -30,6 +30,7 @@ export default {
     url: s,
     poster: s,
     title: s,
+    type: s,
     theme: s,
     lang: s,
     volume: n,

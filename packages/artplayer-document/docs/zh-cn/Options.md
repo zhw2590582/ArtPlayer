@@ -759,6 +759,10 @@ var art = new Artplayer({
 
 因为不同的移动设备存在多种差异和限制，所以本播放器默认在移动设备上使用原生方法挂载视频，假如你想在移动设备上使用本播放器，需要手动开启白名单
 
+白名单是一个数组类型，分别与 `window.navigator.userAgent` 进行匹配，只要其中一项匹配成功则启用播放器
+
+支持`字符串`匹配、`函数`匹配、`正则`匹配
+
 <div className="run-code">▶ Run Code</div>
 
 ```js
@@ -772,20 +776,181 @@ var art = new Artplayer({
 });
 ```
 
-## switcher
+:::tip 提示
+
+假如希望全部类型的移动设备都启用播放器，设置 `whitelist` 为通配符 `['*']` 即可
+
+:::
 
 ## thumbnails
 
+-   类型: `Object`
+-   默认: `{}`
+
+在进度条上设置预览图
+
+| 属性     | 类型     | 描述       |
+| -------- | -------- | ---------- |
+| `url`    | `String` | 预览图地址 |
+| `number` | `Number` | 预览图数量 |
+| `width`  | `Number` | 预览图宽度 |
+| `height` | `Number` | 预览图高度 |
+| `column` | `Number` | 预览图列数 |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    thumbnails: {
+        url: '/assets/sample/thumbnails.png',
+        number: 100,
+        width: 160,
+        height: 90,
+        column: 10,
+    },
+});
+```
+
 ## subtitle
+
+-   类型: `Object`
+-   默认: `{}`
+
+设置视频的字幕，支持字幕格式：`vtt`、`srt`、`ass`
+
+| 属性        | 类型      | 描述                         |
+| ----------- | --------- | ---------------------------- |
+| `url`       | `String`  | 字幕地址                     |
+| `style`     | `Object`  | 字幕样式                     |
+| `encoding`  | `String`  | 字幕编码，默认 `utf-8`       |
+| `bilingual` | `Boolean` | 是否双字幕样式，通过换行区分 |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+        encoding: 'utf-8',
+        bilingual: true,
+        style: {
+            color: '#03A9F4',
+            'font-size': '30px',
+        },
+    },
+});
+```
 
 ## moreVideoAttr
 
+-   类型: `Object`
+-   默认: `{'controls': false,'preload': 'metadata'}`
+
+更多视频属性，这些属性将直接写入视频元素里
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    moreVideoAttr: {
+        'webkit-playsinline': true,
+        playsInline: true,
+    },
+});
+```
+
 ## icons
+
+-   类型: `Object`
+-   默认: `{}`
+
+用于替换默认图标，支持 `Html` 字符串
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    icons: {
+        loading: '<img src="/assets/img/ploading.gif">',
+        state: '<img src="/assets/img/state.png">',
+        play: '',
+        pause: '',
+        volume: '',
+        volumeClose: '',
+        subtitle: '',
+        screenshot: '',
+        setting: '',
+        fullscreen: '',
+        fullscreenWeb: '',
+        pip: '',
+    },
+});
+```
+
+## type
+
+-   类型: `String`
+-   默认: `''`
+
+用于指明视频的格式，需要配合 `customType` 一起使用，更多信息请访问 [第三方库](/document/zh-cn/libraries)
+
+默认视频的格式就是视频地址的后缀（如 `.flv`、`.mkv`、`.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.flv',
+    type: 'flv',
+});
+```
 
 ## customType
 
+-   类型: `Object`
+-   默认: `{}`
+
+通过视频的格式进行匹配，把视频解码权交给第三方程序进行处理，更多信息请访问 [第三方库](/document/zh-cn/libraries)
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.flv',
+    customType: {
+        flv: function (video, url, art) {
+            // video: 视频dom元素
+            // url: 视频地址
+            // art: 当前实例
+        },
+    },
+});
+```
+
 ## lang
 
+-   类型: `String`
+-   默认: `navigator.language.toLowerCase()`
+
+默认显示语言，目前支持：`en`、`zh-cn`、`zh-tw`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    lang: 'en',
+});
 ```
 
-```

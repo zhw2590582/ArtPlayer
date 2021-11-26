@@ -20,6 +20,7 @@ export default class Artplayer {
         url: string;
         poster?: string;
         title?: string;
+        type?: string;
         theme?: string;
         lang?: 'en' | 'zh-cn' | 'zh-tw';
         volume?: number;
