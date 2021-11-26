@@ -20,7 +20,7 @@ slug: /zh-cn/advance
 
 -   类型: `Object`
 
-播放器实例的参数对象
+播放器实例经合并后的参数对象
 
 ## isFocus
 
@@ -64,11 +64,50 @@ slug: /zh-cn/advance
 
 管理播放器 `Html` 的对象
 
+方法 `query` 可以查找当前播放器实例内的dom元素，等同于 `document.querySelector('.artplayer-app').querySelector`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    var $video = art.template.query('.art-video');
+    console.info($video);
+})
+```
+
 ## storage
 
 -   类型: `Object`
 
 管理持久化存储的对象
+
+播放器会自动添加一个名为 `artplayer_settings` 的JSON对象到的 `localStorage` 里
+
+| 属性    | 类型       | 描述     |
+| ------- | ---------- | -------- |
+| `get`   | `Function` | 获取值   |
+| `set`   | `Function` | 设置值   |
+| `del`   | `Function` | 删除值   |
+| `clean` | `Function` | 清空对象 |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.storage.set('your-key', 'your-value');
+art.storage.get('your-key');
+art.storage.del('your-key');
+art.storage.clean();
+```
 
 ## icons
 
@@ -82,17 +121,122 @@ slug: /zh-cn/advance
 
 管理多语言的对象
 
+方法 `get` 可以获取到对应的语言的值
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.i18n.get('Play'))
+})
+```
+
+方法 `update` 可以动态添加更多语言
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    lang: 'jp',
+});
+
+art.i18n.update({
+    'zh-cn': {
+        Language: '简体',
+    },
+    'zh-tw': {
+        Language: '繁體',
+    },
+    en: {
+        Language: 'English',
+    },
+    jp: {
+        Language: '日文',
+    },
+    fr: {
+        Language: 'Français',
+    },
+    ru: {
+        Language: 'Russe',
+    },
+})
+```
+
 ## player
 
 -   类型: `Object`
 
-管理核心功能的对象
+管理核心功能的对象，所以属性和方法都代理到播放器实例上了
 
 ## subtitle
 
 -   类型: `Object`
 
 管理字幕的对象
+
+方法 `style` 可以动态修改字幕样式
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+        encoding: 'utf-8',
+        bilingual: true,
+        style: {
+            color: '#03A9F4',
+            'font-size': '30px',
+        },
+    },
+});
+
+art.on('ready', () => {
+    art.seek = 20;
+    setTimeout(() => {
+        art.subtitle.style({
+            color: 'red',
+            'font-size': '40px',
+        });
+    }, 3000);
+})
+```
+
+方法 `switch` 可以动态修改字幕地址
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+        encoding: 'utf-8',
+        bilingual: true,
+        style: {
+            color: '#03A9F4',
+            'font-size': '30px',
+        },
+    },
+});
+
+art.on('ready', () => {
+    art.seek = 20;
+    setTimeout(() => {
+        art.subtitle.switch('/assets/sample/subtitle.srt');
+    }, 3000);
+})
+```
 
 ## info
 
