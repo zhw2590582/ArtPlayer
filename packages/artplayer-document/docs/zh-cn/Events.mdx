@@ -48,8 +48,8 @@ var art = new Artplayer({
 });
 
 art.on('ready', (...args) => {
-    console.info(args)
-})
+    console.info(args);
+});
 ```
 
 ### play
@@ -65,8 +65,8 @@ var art = new Artplayer({
 });
 
 art.on('play', (...args) => {
-    console.info(args)
-})
+    console.info(args);
+});
 ```
 
 ### pause
@@ -82,20 +82,162 @@ var art = new Artplayer({
 });
 
 art.on('pause', (...args) => {
-    console.info(args)
-})
+    console.info(args);
+});
+```
+
+### seek
+
+在视频进行时间跳转时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('seek', (...args) => {
+    console.info(args);
+});
+
+art.on('ready', (...args) => {
+    art.seek = 5;
+});
+```
+
+### volume
+
+在视频音量变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('volume', (...args) => {
+    console.info(args);
+});
+
+art.on('ready', (...args) => {
+    art.volume = 0.5;
+});
+```
+
+### destroy
+
+在播放器实例被销毁时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('destroy', (...args) => {
+    console.info(args);
+});
+
+art.on('ready', (...args) => {
+    art.destroy();
+});
+```
+
+### focus
+
+在播放器获得焦点时触发，如点击了播放器
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('focus', (...args) => {
+    console.info(args);
+});
+```
+
+### blur
+
+在播放器失去焦点时触发，如点击播放器以外的区域
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('blur', (...args) => {
+    console.info(args);
+});
+```
+
+### hover
+
+在鼠标移动进播放器时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('hover', (...args) => {
+    console.info(args);
+});
+```
+
+### resize
+
+在播放器尺寸变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoSize: true,
+});
+
+art.on('resize', (...args) => {
+    console.info(args);
+});
+```
+
+### mousemove
+
+在鼠标经过播放器时触发，和`hover`不一样，它会触发多次
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoSize: true,
+});
+
+art.on('mousemove', (...args) => {
+    console.info(args);
+});
 ```
 
 | 事件名字           | 触发时间                             |
 | ------------------ | ------------------------------------ |
-| `seek`             | When the video seek                  |
-| `volume`           | When the video volume change         |
-| `destroy`          | When the player is destroyed         |
-| `focus`            | When the player gets focus           |
-| `blur`             | When the player loses focus          |
-| `hover`            | When the mouse is moved into or out  |
-| `resize`           | When the player resize               |
-| `mousemove`        | When the mouse moves over the player |
 | `aspectRatio`      | When aspect ratio change             |
 | `url`              | When the video url change            |
 | `autoSize`         | When the player auto size change     |
