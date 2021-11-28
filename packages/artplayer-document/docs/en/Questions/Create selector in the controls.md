@@ -31,7 +31,7 @@ var art = new Artplayer({
                     name: $dom.innerText,
                 });
 
-                return 'You click' + item.html;
+                return 'You click ' + item.html;
             },
         },
     ],
