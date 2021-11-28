@@ -403,7 +403,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `true`
 
-假如页面里同时存在多个播放器，是否只能让一个播放器存在声音
+假如页面里同时存在多个播放器，是否只能让一个播放器播放
 
 <div className="run-code">▶ Run Code</div>
 
