@@ -2498,6 +2498,10 @@
         if ($ref.childNodes.length === 1 && $ref.childNodes[0].nodeType === 3) {
           addClass($ref, 'art-control-onlyText');
         }
+
+        def(this, name, {
+          value: $ref
+        });
       }
     }, {
       key: "selector",
@@ -4867,7 +4871,6 @@
           highlight: [],
           plugins: [],
           whitelist: [],
-          switcher: [],
           thumbnails: {
             url: '',
             number: 60,

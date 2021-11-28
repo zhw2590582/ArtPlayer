@@ -5,7 +5,8 @@ document.addEventListener('click', (event) => {
         if (codeElement) {
             const libs = event.target.dataset.libs || '';
             const code = encodeURIComponent(codeElement.innerText);
-            const url = 'https://artplayer.org/?libs=' + libs + '&code=' + code;
+            const env = window.location.host.includes('localhost') ? 'http://localhost:8081' : 'https://artplayer.org';
+            const url = env + '/?libs=' + libs + '&code=' + code;
             window.open(url);
         }
     }

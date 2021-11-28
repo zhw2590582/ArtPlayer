@@ -1,5 +1,5 @@
 import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle } from './dom';
-import { has } from './property';
+import { has, def } from './property';
 import { errorHandle } from './error';
 
 export default class Component {
@@ -80,6 +80,10 @@ export default class Component {
         if ($ref.childNodes.length === 1 && $ref.childNodes[0].nodeType === 3) {
             addClass($ref, 'art-control-onlyText');
         }
+
+        def(this, name, {
+            value: $ref,
+        });
     }
 
     selector(option, $ref) {

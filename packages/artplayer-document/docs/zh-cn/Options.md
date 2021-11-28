@@ -574,7 +574,18 @@ SSR 是 Server Side Render 简称，页面上的内容是通过服务端渲染�
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的业务图层，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+初始化自定义的业务图层
+
+| 属性      | 类型                | 描述                       |
+| --------- | ------------------- | -------------------------- |
+| `disable` | `Boolean`           | 是否禁用组件               |
+| `name`    | `String`            | 组件唯一名称，用于标记类名 |
+| `index`   | `Number`            | 组件索引，用于显示的优先级 |
+| `html`    | `String`、`Element` | 组件的 DOM 元素            |
+| `style`   | `Object`            | 组件样式对象               |
+| `click`   | `Function`          | 组件点击事件               |
+| `mounted` | `Function`          | 组件挂载后触发             |
+| `tooltip` | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -585,12 +596,22 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
+            index: 1,
+            name: 'potser',
+            disable: false,
             html: `<img style="width: 100px" src="${img}">`,
             style: {
                 position: 'absolute',
                 top: '20px',
                 right: '20px',
                 opacity: '.9',
+            },
+            click: function (...args) {
+                console.info('你点击了组件');
+                art.layers.show = false;
+            },
+            mounted: function (...args) {
+                console.info('组件挂载完成');
             },
         },
     ],
@@ -602,7 +623,18 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的右键菜单，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+初始化自定义的右键菜单
+
+| 属性      | 类型                | 描述                       |
+| --------- | ------------------- | -------------------------- |
+| `disable` | `Boolean`           | 是否禁用组件               |
+| `name`    | `String`            | 组件唯一名称，用于标记类名 |
+| `index`   | `Number`            | 组件索引，用于显示的优先级 |
+| `html`    | `String`、`Element` | 组件的 DOM 元素            |
+| `style`   | `Object`            | 组件样式对象               |
+| `click`   | `Function`          | 组件点击事件               |
+| `mounted` | `Function`          | 组件挂载后触发             |
+| `tooltip` | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -627,7 +659,19 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的底部控制栏，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+初始化自定义的底部控制栏
+
+| 属性       | 类型                | 描述                       |
+| ---------- | ------------------- | -------------------------- |
+| `disable`  | `Boolean`           | 是否禁用组件               |
+| `name`     | `String`            | 组件唯一名称，用于标记类名 |
+| `index`    | `Number`            | 组件索引，用于显示的优先级 |
+| `html`     | `String`、`Element` | 组件的 DOM 元素            |
+| `style`    | `Object`            | 组件样式对象               |
+| `click`    | `Function`          | 组件点击事件               |
+| `mounted`  | `Function`          | 组件挂载后触发             |
+| `tooltip`  | `String`            | 组件的提示文本             |
+| `position` | `String`            | 位置在 `left` 或者 `right` |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -637,12 +681,31 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     controls: [
         {
-            position: 'right',
+            disable: false,
+            name: 'button',
             index: 10,
+            position: 'right',
             html: '自定义按钮',
-            tooltip: '自定义按钮的提示',
+            tooltip: '自定义按钮的提示1',
+            style: {
+                color: 'red',
+            },
             click: function () {
-                console.log('你点击了自定义按钮');
+                console.log('你点击了自定义按钮1');
+            },
+            mounted: function () {
+                console.log('自定义按钮挂载完成1');
+            },
+        },
+        {
+            position: 'left',
+            html: '自定义按钮2',
+            tooltip: '自定义按钮的提示2',
+            style: {
+                color: 'green',
+            },
+            click: function () {
+                console.log('你点击了自定义按钮2');
             },
         },
     ],
@@ -953,4 +1016,3 @@ var art = new Artplayer({
     lang: 'en',
 });
 ```
-
