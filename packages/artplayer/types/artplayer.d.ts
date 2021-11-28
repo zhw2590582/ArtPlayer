@@ -7,9 +7,10 @@ type Component = {
     click?: Function;
     mounted?: Function;
     tooltip?: string;
-    position?: 'top' | 'left' | 'right' | 'middle';
+    position?: 'top' | 'left' | 'right';
     selector?: {
-        name: string;
+        default?: boolean;
+        html: string;
     }[];
     onSelect?: Function;
 };
@@ -46,7 +47,6 @@ export default class Artplayer {
         miniProgressBar?: boolean;
         localVideo?: boolean;
         localSubtitle?: boolean;
-        networkMonitor?: boolean;
         useSSR?: boolean;
         plugins?: Function[];
         whitelist?: (string | Function | RegExp)[];
@@ -55,7 +55,7 @@ export default class Artplayer {
         controls?: Component[];
         quality?: {
             default?: boolean;
-            name: string;
+            html: string;
             url: string;
         }[];
         highlight?: {
@@ -72,8 +72,8 @@ export default class Artplayer {
         subtitle?: {
             url: string;
             style: object;
-            encoding: string,
-            bilingual: boolean,
+            encoding: string;
+            bilingual: boolean;
         };
         moreVideoAttr?: object;
         icons?: {

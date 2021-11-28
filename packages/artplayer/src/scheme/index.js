@@ -56,7 +56,6 @@ export default {
     miniProgressBar: b,
     localVideo: b,
     localSubtitle: b,
-    networkMonitor: b,
     useSSR: b,
     plugins: [f],
     whitelist: [`${s}|${f}|${r}`],
