@@ -8,6 +8,7 @@ sidebar_position: 2
 <div className="run-code">▶ Run Code</div>
 
 ```js
+var time = 0;
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -17,7 +18,8 @@ var art = new Artplayer({
             html: '<button type="button">Click Me!</button>',
             click: function (_, event) {
                 // 第二个参数是事件对象
-                event.target.innerText = 'You Clicked';
+                time += 1;
+                event.target.innerText = 'You Click ' + time;
             },
         },
     ],
