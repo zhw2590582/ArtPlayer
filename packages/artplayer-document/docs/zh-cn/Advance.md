@@ -64,7 +64,7 @@ slug: /zh-cn/advance
 
 管理播放器 `Html` 的对象
 
-方法 `query` 可以查找当前播放器实例内的dom元素，等同于 `document.querySelector('.artplayer-app').querySelector`
+方法 `query` 可以查找当前播放器实例内的 dom 元素，等同于 `document.querySelector('.artplayer-app').querySelector`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -77,7 +77,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     var $video = art.template.query('.art-video');
     console.info($video);
-})
+});
 ```
 
 ## storage
@@ -86,7 +86,7 @@ art.on('ready', () => {
 
 管理持久化存储的对象
 
-播放器会自动添加一个名为 `artplayer_settings` 的JSON对象到的 `localStorage` 里
+播放器会自动添加一个名为 `artplayer_settings` 的 JSON 对象到的 `localStorage` 里
 
 | 属性    | 类型       | 描述     |
 | ------- | ---------- | -------- |
@@ -132,8 +132,8 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.i18n.get('Play'))
-})
+    console.info(art.i18n.get('Play'));
+});
 ```
 
 方法 `update` 可以动态添加更多语言
@@ -166,7 +166,7 @@ art.i18n.update({
     ru: {
         Language: 'Russe',
     },
-})
+});
 ```
 
 ## player
@@ -208,7 +208,7 @@ art.on('ready', () => {
             'font-size': '40px',
         });
     }, 3000);
-})
+});
 ```
 
 方法 `switch` 可以动态修改字幕地址
@@ -235,7 +235,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.subtitle.switch('/assets/sample/subtitle.srt');
     }, 3000);
-})
+});
 ```
 
 ## info
@@ -276,7 +276,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.layers.show = false;
     }, 3000);
-})
+});
 ```
 
 方法 `add` 可以动态添加业务层
@@ -313,7 +313,7 @@ art.on('ready', () => {
             },
         });
     }, 3000);
-})
+});
 ```
 
 ## notice
@@ -335,7 +335,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.notice.show = '自定义提示信息1';
     art.notice.show = '自定义提示信息2';
-})
+});
 ```
 
 ## controls
@@ -358,7 +358,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.controls.show = false;
     }, 3000);
-})
+});
 ```
 
 方法 `add` 可以动态添加控制器
@@ -395,7 +395,7 @@ art.on('ready', () => {
             },
         });
     }, 3000);
-})
+});
 ```
 
 ## contextmenu
@@ -419,21 +419,21 @@ art.on('ready', () => {
     setTimeout(() => {
         art.contextmenu.show = false;
     }, 3000);
-})
+});
 ```
 
 方法 `add` 可以动态添加菜单项
 
-| 属性       | 类型                | 描述                       |
-| ---------- | ------------------- | -------------------------- |
-| `disable`  | `Boolean`           | 是否禁用组件               |
-| `name`     | `String`            | 组件唯一名称，用于标记类名 |
-| `index`    | `Number`            | 组件索引，用于显示的优先级 |
-| `html`     | `String`、`Element` | 组件的 DOM 元素            |
-| `style`    | `Object`            | 组件样式对象               |
-| `click`    | `Function`          | 组件点击事件               |
-| `mounted`  | `Function`          | 组件挂载后触发             |
-| `tooltip`  | `String`            | 组件的提示文本             |
+| 属性      | 类型                | 描述                       |
+| --------- | ------------------- | -------------------------- |
+| `disable` | `Boolean`           | 是否禁用组件               |
+| `name`    | `String`            | 组件唯一名称，用于标记类名 |
+| `index`   | `Number`            | 组件索引，用于显示的优先级 |
+| `html`    | `String`、`Element` | 组件的 DOM 元素            |
+| `style`   | `Object`            | 组件样式对象               |
+| `click`   | `Function`          | 组件点击事件               |
+| `mounted` | `Function`          | 组件挂载后触发             |
+| `tooltip` | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -454,7 +454,7 @@ art.on('ready', () => {
             },
         });
     }, 3000);
-})
+});
 ```
 
 ## loading
@@ -478,7 +478,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.loading.show = false;
     }, 3000);
-})
+});
 ```
 
 ## mask
@@ -502,7 +502,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.mask.show = false;
     }, 3000);
-})
+});
 ```
 
 ## hotkey
@@ -523,13 +523,13 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.hotkey.add(65, () => {
-        console.info('你点击了 A 键')
-    })
+        console.info('你点击了 A 键');
+    });
 
     art.hotkey.add(66, () => {
-        console.info('你点击了 B 键')
-    })
-})
+        console.info('你点击了 B 键');
+    });
+});
 ```
 
 :::tip 提示
@@ -562,21 +562,21 @@ art.on('ready', () => {
     setTimeout(() => {
         art.setting.show = false;
     }, 3000);
-})
+});
 ```
 
 方法 `add` 可以动态添加设置项
 
-| 属性       | 类型                | 描述                       |
-| ---------- | ------------------- | -------------------------- |
-| `disable`  | `Boolean`           | 是否禁用组件               |
-| `name`     | `String`            | 组件唯一名称，用于标记类名 |
-| `index`    | `Number`            | 组件索引，用于显示的优先级 |
-| `html`     | `String`、`Element` | 组件的 DOM 元素            |
-| `style`    | `Object`            | 组件样式对象               |
-| `click`    | `Function`          | 组件点击事件               |
-| `mounted`  | `Function`          | 组件挂载后触发             |
-| `tooltip`  | `String`            | 组件的提示文本             |
+| 属性      | 类型                | 描述                       |
+| --------- | ------------------- | -------------------------- |
+| `disable` | `Boolean`           | 是否禁用组件               |
+| `name`    | `String`            | 组件唯一名称，用于标记类名 |
+| `index`   | `Number`            | 组件索引，用于显示的优先级 |
+| `html`    | `String`、`Element` | 组件的 DOM 元素            |
+| `style`   | `Object`            | 组件样式对象               |
+| `click`   | `Function`          | 组件点击事件               |
+| `mounted` | `Function`          | 组件挂载后触发             |
+| `tooltip` | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -598,7 +598,7 @@ art.on('ready', () => {
             art.setting.show = false;
         },
     });
-})
+});
 ```
 
 ## plugins
@@ -626,10 +626,10 @@ function myPlugin(art) {
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    plugins: [myPlugin],
 });
 
 art.on('ready', () => {
+    art.plugins.add(myPlugin);
     console.info(art.plugins.myPlugin.something);
     console.info(art.plugins.myPlugin.doSomething());
 });
