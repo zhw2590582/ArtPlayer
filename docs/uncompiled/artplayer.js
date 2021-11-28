@@ -1417,6 +1417,7 @@
 
   function switchMix(art, player) {
     var i18n = art.i18n,
+        option = art.option,
         notice = art.notice;
 
     function switchUrl(url, name, currentTime) {
@@ -1428,7 +1429,7 @@
         player.playbackRate = false;
         player.aspectRatio = false;
         player.flip = 'normal';
-        player.autoSize = true;
+        player.autoSize = option.autoSize;
         player.currentTime = currentTime;
 
         if (playing) {
@@ -1604,7 +1605,7 @@
 
   /*!
   * screenfull
-  * v5.2.0 - 2021-11-03
+  * v5.0.2 - 2020-02-13
   * (c) Sindre Sorhus; MIT License
   */
 
@@ -1687,7 +1688,7 @@
   	};
 
   	var screenfull = {
-  		request: function (element, options) {
+  		request: function (element) {
   			return new Promise(function (resolve, reject) {
   				var onFullScreenEntered = function () {
   					this.off('change', onFullScreenEntered);
@@ -1698,7 +1699,7 @@
 
   				element = element || document.documentElement;
 
-  				var returnPromise = element[fn.requestFullscreen](options);
+  				var returnPromise = element[fn.requestFullscreen]();
 
   				if (returnPromise instanceof Promise) {
   					returnPromise.then(onFullScreenEntered).catch(reject);
@@ -1726,8 +1727,8 @@
   				}
   			}.bind(this));
   		},
-  		toggle: function (element, options) {
-  			return this.isFullscreen ? this.exit() : this.request(element, options);
+  		toggle: function (element) {
+  			return this.isFullscreen ? this.exit() : this.request(element);
   		},
   		onchange: function (callback) {
   			this.on('change', callback);
@@ -1857,7 +1858,10 @@
             notice.show = i18n.get('Fullscreen not supported');
           }
         });
-      }
+      } // 异步设置
+
+
+      def(art, 'fullscreen', Object.getOwnPropertyDescriptor(player, 'fullscreen'));
     });
     def(player, 'fullscreenToggle', {
       set: function set(value) {
@@ -1893,51 +1897,6 @@
       set: function set(value) {
         if (value) {
           player.fullscreenWeb = !player.fullscreenWeb;
-        }
-      }
-    });
-  }
-
-  function fullscreenRotateMix(art, player) {
-    var _art$template = art.template,
-        $container = _art$template.$container,
-        $player = _art$template.$player;
-    def(player, 'fullscreenRotate', {
-      get: function get() {
-        return hasClass($container, 'art-fullscreen-rotate');
-      },
-      set: function set(value) {
-        if (value) {
-          addClass($container, 'art-fullscreen-rotate');
-          player.autoSize = true;
-          var _document$body = document.body,
-              bodyHeight = _document$body.clientHeight,
-              bodyWidth = _document$body.clientWidth;
-          var playerHeight = $player.clientHeight,
-              playerWidth = $player.clientWidth;
-          var bodyRatio = bodyWidth / bodyHeight;
-          var videoRatio = playerWidth / playerHeight;
-          var needSpin = bodyRatio < videoRatio;
-
-          if (needSpin) {
-            var scale = Math.min(bodyHeight / playerWidth, bodyWidth / playerHeight).toFixed(2);
-            setStyle($player, 'transform', "rotate(90deg) scale(".concat(scale, ",").concat(scale, ")"));
-            art.emit('resize');
-            art.emit('fullscreenRotate', true);
-          }
-        } else {
-          removeClass($container, 'art-fullscreen-rotate');
-          player.autoSize = art.option.autoSize;
-          setStyle($player, 'transform', null);
-          art.emit('resize');
-          art.emit('fullscreenRotate');
-        }
-      }
-    });
-    def(player, 'fullscreenRotateToggle', {
-      set: function set(value) {
-        if (value) {
-          player.fullscreenRotate = !player.fullscreenRotate;
         }
       }
     });
@@ -2315,6 +2274,7 @@
           setStyle($video, 'transform', null);
         } else {
           player.flip = false;
+          art.autoSize = true;
           $player.dataset.rotate = deg;
 
           var getScaleValue = function getScaleValue() {
@@ -2407,7 +2367,6 @@
     screenshotMix(art, this);
     fullscreenMix(art, this);
     fullscreenWebMix(art, this);
-    fullscreenRotateMix(art, this);
     pipMix(art, this);
     seekMix(art, this);
     playedMix(art, this);

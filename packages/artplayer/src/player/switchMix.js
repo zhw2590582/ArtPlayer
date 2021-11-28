@@ -1,7 +1,7 @@
 import { def } from '../utils';
 
 export default function switchMix(art, player) {
-    const { i18n, notice } = art;
+    const { i18n, option, notice } = art;
 
     function switchUrl(url, name, currentTime) {
         if (url === player.url) return;
@@ -12,7 +12,7 @@ export default function switchMix(art, player) {
             player.playbackRate = false;
             player.aspectRatio = false;
             player.flip = 'normal';
-            player.autoSize = true;
+            player.autoSize = option.autoSize;
             player.currentTime = currentTime;
             if (playing) {
                 player.play();

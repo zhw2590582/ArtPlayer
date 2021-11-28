@@ -256,7 +256,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否显示视频旋转功能，目前只出现在 `设置面板` 里，所以需要同时设置 `setting` 为 `true`
+是否显示视频旋转功能，需要同时设置 `setting` 和 `autoSize` 为 `true`
 
 <div className="run-code">▶ Run Code</div>
 
