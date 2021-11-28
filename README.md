@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/workflow/status/zhw2590582/artplayer/master" alt="Build Status">
+  <img src="https://img.shields.io/github/checks-status/zhw2590582/artplayer/master" alt="Build Status">
   <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
   <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
   <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">

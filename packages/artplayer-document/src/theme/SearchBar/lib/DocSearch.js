@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Hogan from "hogan.js";
 import LunrSearchAdapter from "./lunar-search";
 import autocomplete from "autocomplete.js";
