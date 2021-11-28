@@ -1,14 +1,14 @@
 ---
-title: 常用属性
+title: Common properties
 sidebar_position: 3
 slug: /propertie
 ---
 
 ## play
 
--   类型: `Function`
+-   Type: `Function`
 
-播放视频
+Play video
 
 <div className="run-code">▶ Run Code</div>
 
@@ -21,14 +21,14 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.play();
-})
+});
 ```
 
 ## pause
 
--   类型: `Function`
+-   Type: `Function`
 
-暂停视频
+Pause video
 
 <div className="run-code">▶ Run Code</div>
 
@@ -45,14 +45,14 @@ art.on('ready', () => {
     setTimeout(() => {
         art.pause();
     }, 3000);
-})
+});
 ```
 
 ## toggle
 
--   类型: `Function`
+-   Type: `Function`
 
-切换视频的播放和暂停
+Switch video playback and pause
 
 <div className="run-code">▶ Run Code</div>
 
@@ -69,16 +69,15 @@ art.on('ready', () => {
     setTimeout(() => {
         art.toggle();
     }, 3000);
-})
+});
 ```
 
 ## seek
 
--   类型: `Setter`
--   参数: `Number`
+-   Type: `Setter`
+-   Parameter: `Number`
 
-视频时间跳转，单位秒
-
+Video time jump, unit seconds
 
 <div className="run-code">▶ Run Code</div>
 
@@ -90,15 +89,15 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.seek = 5;
-})
+});
 ```
 
 ## forward
 
--   类型: `Setter`
--   参数: `Number`
+-   Type: `Setter`
+-   Parameter: `Number`
 
-视频时间快进，单位秒
+Video time forward, unit seconds
 
 <div className="run-code">▶ Run Code</div>
 
@@ -110,15 +109,15 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.forward = 5;
-})
+});
 ```
 
 ## backward
 
--   类型: `Setter`
--   参数: `Number`
+-   Type: `Setter`
+-   Parameter: `Number`
 
-视频时间快退，单位秒
+Video time backward, unit seconds
 
 <div className="run-code">▶ Run Code</div>
 
@@ -134,15 +133,15 @@ art.on('ready', () => {
     setTimeout(() => {
         art.backward = 2;
     }, 3000);
-})
+});
 ```
 
 ## volume
 
--   类型: `Setter/Getter`
--   参数: `Number`
+-   Type: `Setter/Getter`
+-   Parameter: `Number`
 
-设置和获取视频音量，范围在：`[0, 1]`
+Set and get video volume, range: `[0, 1]`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -156,15 +155,15 @@ art.on('ready', () => {
     console.info(art.volume);
     art.volume = 0.5;
     console.info(art.volume);
-})
+});
 ```
 
 ## url
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
-设置和获取视频地址
+Set and get video url
 
 <div className="run-code">▶ Run Code</div>
 
@@ -178,17 +177,17 @@ art.on('ready', () => {
     console.info(art.url);
     art.url = '/assets/sample/video.mp4?t=0';
     console.info(art.url);
-})
+});
 ```
 
 ## switchUrl
 
--   类型: `Function`
--   参数: `String`
+-   Type: `Function`
+-   Parameter: `String`
 
-设置视频地址，设置时和 `url` 类似，但会执行一些优化操作
+Set video url, set, like the `url`, but will perform some optimization operations
 
-函数支持两个参数，第一个为新的视频地址，第二个为新的视频名字
+The function supports two parameters, the first one for the new video url, the second is new video name
 
 <div className="run-code">▶ Run Code</div>
 
@@ -201,19 +200,19 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchUrl('/assets/sample/video.mp4?t=0', '新视频地址');
+        art.switchUrl('/assets/sample/video.mp4?t=0', 'New video name');
     }, 3000);
-})
+});
 ```
 
 ## switchQuality
 
--   类型: `Function`
--   参数: `String`
+-   Type: `Function`
+-   Parameter: `String`
 
-设置视频画质地址，和 `switchQuality` 类似，但会带上之前的播放进度
+Set the video quality address, like the `switchUrl`, but will bring the previous play progress
 
-函数支持两个参数，第一个为新的视频地址，第二个为新的视频名字
+The function supports two parameters, the first one for the new video url, the second is new video name
 
 <div className="run-code">▶ Run Code</div>
 
@@ -226,17 +225,17 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchQuality('/assets/sample/video.mp4?t=0', '新视频地址');
+        art.switchQuality('/assets/sample/video.mp4?t=0', 'New video name');
     }, 3000);
-})
+});
 ```
 
 ## muted
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-设置和获取视频是否静音
+Setting up and getting the video mute
 
 <div className="run-code">▶ Run Code</div>
 
@@ -250,15 +249,15 @@ art.on('ready', () => {
     console.info(art.muted);
     art.muted = true;
     console.info(art.muted);
-})
+});
 ```
 
 ## currentTime
 
--   类型: `Setter/Getter`
--   参数: `Number`
+-   Type: `Setter/Getter`
+-   Parameter: `Number`
 
-设置和获取视频当前时间，设置时间时和 `seek` 类似，但它不会触发额外的事件
+Set and get the video current time, set time like the `seek`, but it does not trigger additional events
 
 <div className="run-code">▶ Run Code</div>
 
@@ -272,14 +271,14 @@ art.on('ready', () => {
     console.info(art.currentTime);
     art.currentTime = 5;
     console.info(art.currentTime);
-})
+});
 ```
 
 ## duration
 
--   类型: `Getter`
+-   Type: `Getter`
 
-获取视频时长
+Get video duration
 
 <div className="run-code">▶ Run Code</div>
 
@@ -291,20 +290,20 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     console.info(art.duration);
-})
+});
 ```
 
-:::tip 提示
+:::tip Tip
 
-有的视频是没有时长的，例如直播中的视频或者没被解码完成的视频，这个时候获取的时长会是 `0`
+Some videos are there is no duration, such as the live video or video is not decoded, the duration will be `0`
 
 :::
 
 ## screenshot
 
--   类型: `Function`
+-   Type: `Function`
 
-下载当前视频帧的截图
+Download the current video frame screenshot
 
 <div className="run-code">▶ Run Code</div>
 
@@ -317,14 +316,14 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     art.screenshot();
-})
+});
 ```
 
 ## getDataURL
 
--   类型: `Function`
+-   Type: `Function`
 
-获取当前视频帧的截图的`base64`地址，返回的是一个 `Promise`
+Get the `base64` url of the current video frame, return to a `Promise`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -336,15 +335,15 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.seek = 10;
-    art.getDataURL().then(url => console.info(url));
-})
+    art.getDataURL().then((url) => console.info(url));
+});
 ```
 
 ## getBlobUrl
 
--   类型: `Function`
+-   Type: `Function`
 
-获取当前视频帧的截图的`Blob`地址，返回的是一个 `Promise`
+Get the `blob` url of the current video frame, return to a `Promise`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -356,16 +355,16 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.seek = 10;
-    art.getBlobUrl().then(url => console.info(url));
-})
+    art.getBlobUrl().then((url) => console.info(url));
+});
 ```
 
 ## fullscreen
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-设置和获取播放器窗口全屏
+Set and get a player window full screen
 
 <div className="run-code">▶ Run Code</div>
 
@@ -382,21 +381,21 @@ art.on('ready', () => {
     setTimeout(() => {
         art.fullscreen = false;
     }, 3000);
-})
+});
 ```
 
-:::tip 提示
+:::tip Tip
 
-由于浏览器安全机制，触发窗口全屏前，页面必须先存在交互（例如用户点击过页面）
+Due to the browser security mechanism, the page must be exchanged before the window full screen, such as the user click on the page)
 
 :::
 
 ## fullscreenWeb
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-设置和获取播放器网页全屏
+Setting up and get a player web page full screen
 
 <div className="run-code">▶ Run Code</div>
 
@@ -413,15 +412,15 @@ art.on('ready', () => {
     setTimeout(() => {
         art.fullscreenWeb = false;
     }, 3000);
-})
+});
 ```
 
 ## pip
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-设置和获取播放器画中画模式
+Set and get player PIP mode
 
 <div className="run-code">▶ Run Code</div>
 
@@ -438,21 +437,21 @@ art.on('ready', () => {
     setTimeout(() => {
         art.pip = false;
     }, 3000);
-})
+});
 ```
 
-:::tip 提示
+:::tip Tip
 
-由于浏览器安全机制，触发画中画前，页面必须先存在交互（例如用户点击过页面）
+Due to the browser security mechanism, the page must be exchanged first before the `PIP` (such as user clicking over the page)
 
 :::
 
 ## poster
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
-设置和获取视频海报，只有在视频播放前才能看到海报效果
+Setting up and get a video poster, only the poster effect can only be seen before the video is played
 
 <div className="run-code">▶ Run Code</div>
 
@@ -467,15 +466,15 @@ art.on('ready', () => {
     console.info(art.poster);
     art.poster = '/assets/sample/poster.jpg?t=0';
     console.info(art.poster);
-})
+});
 ```
 
 ## mini
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-设置和获取播放器迷你模式
+Set and get player mini mode
 
 <div className="run-code">▶ Run Code</div>
 
@@ -491,15 +490,15 @@ art.on('ready', () => {
     setTimeout(() => {
         art.mini = false;
     }, 3000);
-})
+});
 ```
 
 ## playing
 
--   类型: `Getter`
--   参数: `Boolean`
+-   Type: `Getter`
+-   Parameter: `Boolean`
 
-获取视频是否正在播放中
+Get the video is playing
 
 <div className="run-code">▶ Run Code</div>
 
@@ -514,15 +513,15 @@ art.on('ready', () => {
     console.info(art.playing);
     art.play();
     console.info(art.playing);
-})
+});
 ```
 
 ## autoSize
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
-设置视频是否自适应尺寸，设置为 `true` 之后它会只执行一次
+Set whether the video is adaptive, set to `true`, it will only execute once
 
 <div className="run-code">▶ Run Code</div>
 
@@ -536,14 +535,14 @@ art.on('ready', () => {
     console.info(art.autoSize);
     art.autoSize = true;
     console.info(art.autoSize);
-})
+});
 ```
 
 ## rect
 
--   类型: `Getter`
+-   Type: `Getter`
 
-获取播放器的尺寸和坐标信息
+Get the size and coordinate information of the player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -555,21 +554,21 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     console.info(JSON.stringify(art.rect));
-})
+});
 ```
 
-:::tip 提示
+:::tip Tip
 
-尺寸和坐标信息是通过 `getBoundingClientRect` 获取的
+Size and coordinate information is obtained by `getBoundingClientRect`
 
 :::
 
 ## flip
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
-设置和获取播放器翻转，支持`normal`、 `horizontal`、 `vertical`
+Set and get player flip, support `normal`, `horizontal`, `vertical`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -580,18 +579,18 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.flip)
-    art.flip = 'horizontal'
-    console.info(art.flip)
-})
+    console.info(art.flip);
+    art.flip = 'horizontal';
+    console.info(art.flip);
+});
 ```
 
 ## rotate
 
--   类型: `Setter/Getter`
--   参数: `Number`
+-   Type: `Setter/Getter`
+-   Parameter: `Number`
 
-设置和获取播放器旋转，支持 `-270`、`-180`、`-90`、`0`、`90`、`180`、`270`
+Set and get player rotation, support `-270`, `-180`, `-90`, `0`, `90`, `180`, `270`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -603,18 +602,18 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.rotate)
-    art.rotate = 90
-    console.info(art.rotate)
-})
+    console.info(art.rotate);
+    art.rotate = 90;
+    console.info(art.rotate);
+});
 ```
 
 ## playbackRate
 
--   类型: `Setter/Getter`
--   参数: `Number`
+-   Type: `Setter/Getter`
+-   Parameter: `Number`
 
-设置和获取播放器播放速度，支持`0.5`、`0.75`、`1.0`、`1.25`、`1.5`、`1.75`、`2.0`
+Set and get player playback speed, support `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, `2.0`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -625,18 +624,18 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.playbackRate)
-    art.playbackRate = 2
-    console.info(art.playbackRate)
-})
+    console.info(art.playbackRate);
+    art.playbackRate = 2;
+    console.info(art.playbackRate);
+});
 ```
 
 ## aspectRatio
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
-设置和获取播放器长宽比，支持`default`、`4:3`、`16:9`
+Set and get the player long aspect, support `default`, `4:3`, `16:9`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -647,18 +646,18 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.aspectRatio)
-    art.aspectRatio = '16:9'
-    console.info(art.aspectRatio)
-})
+    console.info(art.aspectRatio);
+    art.aspectRatio = '16:9';
+    console.info(art.aspectRatio);
+});
 ```
 
 ## loop
 
--   类型: `Setter/Getter`
--   参数: `Array`
+-   Type: `Setter/Getter`
+-   Parameter: `Array`
 
-设置和获取区间循序播放，单位秒
+Setting and getting the interval to play in seconds, unit seconds
 
 <div className="run-code">▶ Run Code</div>
 
@@ -669,24 +668,24 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.loop)
+    console.info(art.loop);
     art.loop = [5, 10];
-    console.info(art.loop)
-})
+    console.info(art.loop);
+});
 ```
 
-:::tip 提示
+:::tip Tip
 
-删除区间循环播放，只需要设置 `loop` 为 `[]` 即可
+Delete interval loop play, only need to set up `loop` is `[]`
 
 :::
 
 ## destroy
 
--   类型: `Function`
--   参数: `Boolean`
+-   Type: `Function`
+-   Parameter: `Boolean`
 
-销毁播放器，接受一个参数表示是否销毁后同时移除播放器的 `html`，默认为 `true`
+Destroy the player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -698,5 +697,5 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.destroy();
-})
+});
 ```

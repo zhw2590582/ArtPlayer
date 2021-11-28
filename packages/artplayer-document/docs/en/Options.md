@@ -367,7 +367,7 @@ var art = new Artplayer({
 });
 ```
 
-| hotkey  | describe                |
+| Hotkey  | Describe                |
 | ------- | ----------------------- |
 | `↑`     | Increasing volume       |
 | `↓`     | lower the volume        |

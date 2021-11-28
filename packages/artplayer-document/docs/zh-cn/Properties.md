@@ -79,7 +79,6 @@ art.on('ready', () => {
 
 视频时间跳转，单位秒
 
-
 <div className="run-code">▶ Run Code</div>
 
 ```js
@@ -201,7 +200,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchUrl('/assets/sample/video.mp4?t=0', '新视频地址');
+        art.switchUrl('/assets/sample/video.mp4?t=0', '新视频名字');
     }, 3000);
 })
 ```
@@ -344,7 +343,7 @@ art.on('ready', () => {
 
 -   类型: `Function`
 
-获取当前视频帧的截图的`Blob`地址，返回的是一个 `Promise`
+获取当前视频帧的截图的`blob`地址，返回的是一个 `Promise`
 
 <div className="run-code">▶ Run Code</div>
 
