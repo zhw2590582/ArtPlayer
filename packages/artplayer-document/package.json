@@ -4,7 +4,7 @@
     "scripts": {
         "docusaurus": "docusaurus",
         "start": "npx docusaurus start",
-        "build": "npx docusaurus build && npm run copy && npm run commit",
+        "build": "npx docusaurus build && npm run copy",
         "copy": "rm -rf ../../docs/document && mv build ../../docs/document",
         "commit": "git add . && git commit -m \"build document\" -n",
         "swizzle": "npx docusaurus swizzle",
