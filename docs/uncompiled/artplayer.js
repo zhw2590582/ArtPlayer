@@ -2527,7 +2527,6 @@
 
         var setLeft = function setLeft() {
           var left = getStyle($ref, 'width') / 2 - getStyle($list, 'width') / 2;
-          console.log(getStyle($list, 'width'), getStyle($ref, 'width'));
           $list.style.left = "".concat(left, "px");
         };
 
