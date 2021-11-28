@@ -1,6 +1,3 @@
-// 使用说明：
-// https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku
-
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -22,22 +19,22 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: 'Hide',
+            html: '隐藏弹幕',
             click: function (_, event) {
                 if (art.plugins.artplayerPluginDanmuku.isHide) {
                     art.plugins.artplayerPluginDanmuku.show();
-                    event.target.innerText = 'Hide';
+                    event.target.innerText = '隐藏弹幕';
                 } else {
                     art.plugins.artplayerPluginDanmuku.hide();
-                    event.target.innerText = 'Show';
+                    event.target.innerText = '显示弹幕';
                 }
             },
         },
         {
             position: 'right',
-            html: 'Send',
+            html: '发送弹幕',
             click: function () {
-                var text = prompt('Please enter', 'Danmu text');
+                var text = prompt('请输入弹幕文本', '弹幕测试文本');
                 if (!text || !text.trim()) return;
                 var color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
                 art.plugins.artplayerPluginDanmuku.emit({

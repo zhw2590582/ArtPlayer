@@ -23,11 +23,6 @@ module.exports = {
                     label: 'Online Editor',
                 },
                 {
-                    href: 'https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku',
-                    position: 'left',
-                    label: 'Danmuku Demo',
-                },
-                {
                     href: 'https://github.com/zhw2590582/ArtPlayer',
                     position: 'left',
                     label: 'Github',
