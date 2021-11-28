@@ -12,7 +12,7 @@ slug: /zh-cn
 $ npm install artplayer
 ```
 
-### 通过  `yarn` 安装：
+### 通过 `yarn` 安装：
 
 ```bash
 $ yarn add artplayer

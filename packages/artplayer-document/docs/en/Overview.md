@@ -1,72 +1,247 @@
 ---
-title: Overview
+title: Quick start
 sidebar_position: 1
 slug: /
 ---
 
-## Integration Guides
+## Install
 
-- Require confirmation from AWDA to implement to production after complete UAT for all services.
+### Install by `npm`:
 
-- You can use API tools to test some services during your development。
+```bash
+$ npm install artplayer
+```
 
-- You can check the response code or contact us when you have problems during the testing
+### Install by `yarn`:
 
-- All services using POST method to send request（Including Inquiry）
+```bash
+$ yarn add artplayer
+```
 
-- All requests and responses are JSON format. NOTE: Header Content-Type -> application/json UTF-8 encoding
+Then load the `Artplayer` module:
 
-- All requests require signature
+```js
+// ES6
+import Artplayer from 'artplayer';
 
-## Document Change Control
+// CommonJS
+const Artplayer = require('artplayer');
+```
 
-| Version | Date       | Authors | Summary of changes   |
-| ------- | ---------- | ------- | -------------------- |
-| 1.0.0   | 2019.06.03 | ZHIBO   | Thumbnails image url |
+### Install by `script`:
 
-## API Summary
+```html
+<!-- locally -->
+<script src="path/to/artplayer.js"></script>
 
-| **Service name** | **Description** |
-| -----------------| --------------- |
-| user registration| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : All other services can be used only after user registration success</p>|
-| Authorization list inquiry| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : NO</p><p>Description : Get the authorization list and check the authorization status</p>|
-| Get the authorization detail page| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : NO</p><p>Description : Customer complete the authorization in the pages</p>
-| Call back for authorization status| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : NO</p><p>Description : To receive the authorization status</p>|
-| Bank card inquiry| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : To inquiry bank card status</p>|
-| Get bank list| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Get the bank list for bank card input</p>|
-| Bank card verification| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Verify and submit bank card</p>|
-| Submit loan| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Submit loan info, including (personal info, work info and emergency contact)</p> |
-| Loan agreement inquiry| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Get loan agreement</p>|
-| Sign agreement| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Sign agreement (Confirm disbursement)</p>|
-| Get loan information| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Get loan info based on loan number (include repayment schedule if disbursed)</p> |
-| Get repayment VA| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Get the repayment VA</p>|
-| Push notification| <p>Provider: Third party </p><p>User : AWDA</p><p>Mandatory: NO</p><p>Description : Push the loan status update to Third party </p>|
-| Eligible Check| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : YES</p><p>Description : Verify Customer</p>|
-| Get the token for uploading image| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : NO</p><p>Description : To get the token which used for api Upload Image (1)</p>|
-| Upload Image (1)| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : NO</p><p>Description : By sending file stream with token</p>|
-| Upload Image (2)| <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : NO</p><p>Description : By sending base64 or url format</p>|
-| Get the redirect url<br/>(For H5 pages of Digital Signature, Loan detail and Repayment detail) | <p>Provider : AWDA</p><p>User : Third party </p><p>Mandatory : NO</p><p>Description : Redirect to the specific H5 pages</p>|
+<!-- jsdelivr -->
+<script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
 
-## Environment information
+<!-- unpkg -->
+<script src="https://unpkg.com/artplayer/dist/artplayer.js"></script>
+```
 
-- Testing environment：`https://sea-staging.wolaidai.com`
-- Production environment：`https://japi.maucash.id`
-- Note: All APIs URL will be environment `url` + `service url`
+Then you can access the constructor via `window.ArtPlayer`
 
-## List Of Response Code
 
-| Code|Description| 
-| ----|----|
-| 0	  | Success| 
-| 1000| System is busy| 
-| 1001| Repeat request| 
-| 1002| Unvalid token| 
-| 1003| Timestamp error or expired (only valid within 60s)| 
-| 1004| Signature error| 
-| 1005| appId invalid| 
-| 1006| Parameters cannot be empty| 
-| 1007| Parameters error| 
-| 1008| User already existed| 
-| 1009| User not found| 
-| 1010| Loan not found| 
-| 1012| Authorization info not found| 
+## Use
+
+:::danger Tip
+
+The size of the player depends on the size of the `container`, so your `container` must have a size.
+
+:::
+
+### Use in `Html`
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ArtPlayer Demo</title>
+        <meta charset="UTF-8" />
+        <style>
+          .artplayer-app {
+              idth:400px;
+              height:300px
+          }
+        </style>
+    </head>
+    <body>
+        <div class="artplayer-app"></div>
+        <script src="path/to/artplayer.js"></script>
+        <script>
+            var art = new Artplayer({
+                container: '.artplayer-app',
+                url: '/assets/sample/video.mp4',
+            });
+        </script>
+    </body>
+</html>
+```
+
+### Use in `Vue`
+
+Create component: `Artplayer.vue`
+
+```js
+import Artplayer from 'artplayer';
+
+export default {
+    data() {
+        return {
+            instance: null,
+        };
+    },
+    props: {
+        option: {
+            type: Object,
+            required: true,
+        },
+        getInstance: Function,
+    },
+    mounted() {
+        this.instance = new Artplayer({
+            ...this.option,
+            container: this.$refs.artRef,
+        });
+
+        this.$nextTick(() => {
+            this.$emit('getInstance', this.instance);
+        });
+    },
+    beforeDestroy() {
+        if (this.instance && this.instance.destroy) {
+            this.instance.destroy();
+        }
+    },
+    render(h) {
+        return h('div', {
+            ref: 'artRef',
+        });
+    },
+};
+```
+
+Import the `Artplayer.vue` component
+
+```jsx
+<template>
+  <Artplayer @get-instance="getInstance" :option="option" :style="style" />
+</template>
+
+<script>
+import Artplayer from "./Artplayer.vue";
+
+export default {
+  data() {
+    return {
+      option: {
+        url: "https://artplayer.org/assets/sample/video.mp4",
+      },
+      style: {
+        width: "600px",
+        height: "400px",
+      },
+    };
+  },
+  components: {
+    Artplayer,
+  },
+  methods: {
+    getInstance(art) {
+      console.log(art);
+    },
+  },
+};
+</script>
+```
+
+### Use in `React`
+
+Create component: `Artplayer.jsx`
+
+```jsx
+import React from 'react';
+import Artplayer from 'artplayer';
+
+export default class ArtplayerReact extends React.Component {
+    constructor(props) {
+        super(props);
+        this.instance = null;
+        this.artRef = React.createRef();
+    }
+
+    componentDidMount() {
+        const { option, getInstance } = this.props;
+        this.instance = new Artplayer({
+            ...option,
+            container: this.artRef.current,
+        });
+
+        if (getInstance && typeof getInstance === 'function') {
+            getInstance(this.instance);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.instance && this.instance.destroy) {
+            this.instance.destroy();
+        }
+    }
+
+    render() {
+        const { option, getInstance, ...rest } = this.props;
+        return React.createElement('div', {
+            ref: this.artRef,
+            ...rest,
+        });
+    }
+}
+```
+
+Import the `Artplayer.jsx` component
+
+```jsx
+import Artplayer from "./Artplayer.jsx";
+
+function App() {
+  return (
+    <Artplayer
+      option={{
+        url: "https://artplayer.org/assets/sample/video.mp4",
+      }}
+      style={{
+        width: "600px",
+        height: "400px",
+      }}
+      getInstance={ins => console.log(ins)}
+    />
+  );
+}
+```
+
+:::caution Tip
+
+Modifying `option` not dynamically modified ArtPlayer instances in `Vue` and `React`
+
+:::
+
+## Demo
+
+:::tip Tip
+
+In this document, by clicking the `Run Code` button before the code block, you can immediately enter the demo.
+
+:::
+
+----------------------------------------------
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+```
