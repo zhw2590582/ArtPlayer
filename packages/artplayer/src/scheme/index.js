@@ -4,7 +4,6 @@ const b = 'boolean';
 const s = 'string';
 const n = 'number';
 const o = 'object';
-const a = 'array';
 const f = 'function';
 const r = 'regexp';
 
@@ -21,7 +20,12 @@ const component = {
     click: `?${f}`,
     mounted: `?${f}`,
     tooltip: `?${s}`,
-    selector: `?${a}`,
+    selector: [
+        {
+            default: `?${b}`,
+            html: s,
+        },
+    ],
     onSelect: `?${f}`,
 };
 
@@ -64,7 +68,7 @@ export default {
     controls: [
         {
             ...component,
-            position: (value, type, paths) => {
+            position: (value, _, paths) => {
                 const position = ['top', 'left', 'right'];
                 return errorHandle(
                     position.includes(value),
