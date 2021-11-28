@@ -1,13 +1,31 @@
-# ArtPlayer.js
+<h2 align="center">
+    <a href="https://artplayer.org">ArtPlayer.js</a>
+</h2>
 
-> :art: ArtPlayer.js is a modern and full featured HTML5 video player
+<p align="center">
+    :art: ArtPlayer.js is a modern and full featured HTML5 video player
+</p>
 
-![version](https://badgen.net/npm/v/artplayer)
-![license](https://badgen.net/npm/license/artplayer)
-![size](https://badgen.net/bundlephobia/minzip/artplayer)
-[![npm Downloads](https://img.shields.io/npm/dt/artplayer.svg)](https://www.npmjs.com/package/artplayer)
+<p align="center">
+  <img src="https://img.shields.io/github/checks-status/zhw2590582/artplayer/master" alt="Build Status">
+  <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
+  <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
+  <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
+</p>
 
-![Screenshot](./images/screenshot.png)
+<p align="center">
+  <span>・</span>
+  <a href="https://artplayer.org">Online Editor</a>
+  <span>・</span>
+  <a href="https://artplayer.org/document">API Document</a>
+  <span>・</span>
+</p>
+
+<p align="center">
+    <a href="https://artplayer.org">
+        <img src="./images/screenshot.png" alt="screenshot">
+    </a>
+</p>
 
 ## Features
 
@@ -21,18 +39,6 @@
 -   <b>Document</b> - Detailed interface documentation and rich code demo
 -   <b>API</b> - Rich interface and response events, easy to interface with business or custom plugin
 -   <b>I18N</b> - support for internationalization of controls
-
-## Homepage
-
-[https://artplayer.org](https://artplayer.org)
-
-## Mobile Demo
-
-![mobile](./images/mobile.png)
-
-## Document
-
-[https://artplayer.org/document](https://artplayer.org/document)
 
 ## Install
 
@@ -77,26 +83,6 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: 'path/to/video.mp4',
 });
-```
-
-## Contribution
-
-Installation dependency:
-
-```bash
-$ npm install && npm run bootstrap
-```
-
-Run the developer mode and select the project you want to develop:
-
-```bash
-$ npm run dev
-```
-
-Open web server:
-
-```bash
-$ npm start
 ```
 
 ## Donations
