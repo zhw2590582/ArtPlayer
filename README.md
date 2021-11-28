@@ -18,6 +18,8 @@
   <span>・</span>
   <a href="https://artplayer.org">Online Editor</a>
   <span>・</span>
+  <a href="https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku">弹幕演示</a>
+  <span>・</span>
   <a href="https://artplayer.org/document">API Document</a>
   <span>・</span>
 </p>
