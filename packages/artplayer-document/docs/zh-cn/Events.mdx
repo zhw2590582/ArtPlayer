@@ -228,7 +228,6 @@ art.on('resize', (...args) => {
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    autoSize: true,
 });
 
 art.on('mousemove', (...args) => {
@@ -236,31 +235,76 @@ art.on('mousemove', (...args) => {
 });
 ```
 
-| 事件名字           | 触发时间                             |
-| ------------------ | ------------------------------------ |
-| `aspectRatio`      | When aspect ratio change             |
-| `url`              | When the video url change            |
-| `autoSize`         | When the player auto size change     |
-| `flip`             | When the player flip change          |
-| `fullscreen`       | When the full screen change          |
-| `fullscreenWeb`    | When the web full screen change      |
-| `fullscreenRotate` | When the rotate full screen change   |
-| `pip`              | When the picture in picture change   |
-| `mini`             | When the mini player change          |
-| `playbackRate`     | When playback rate change            |
-| `screenshot`       | When a screenshot                    |
-| `switch`           | When switching video url             |
-| `loop`             | When the interval loop change        |
-| `subtitleUpdate`   | When the subtitles change            |
-| `subtitleSwitch`   | When switching subtitles             |
-| `subtitleLoad`     | When the subtitles loaded            |
-| `subtitle`         | When displaying subtitles            |
-| `notice`           | When displaying notice               |
-| `mask`             | When displaying mask                 |
-| `loading`          | When displaying loading              |
-| `layer`            | When displaying layer                |
-| `info`             | When displaying info                 |
-| `setting`          | When displaying setting              |
-| `contextmenu`      | When displaying contextmenu          |
-| `control`          | When displaying control              |
-| `hotkey`           | When the hotkey is triggered         |
+### url
+
+在视频地址变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('url', (...args) => {
+    console.info(args);
+});
+
+art.on('ready', (...args) => {
+    art.url = '/assets/sample/video.mp4?t=0';
+});
+```
+
+### fullscreen
+
+在播放器窗口全屏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreen: true,
+});
+
+art.on('fullscreen', (...args) => {
+    console.info(args);
+});
+```
+
+### fullscreenWeb
+
+在播放器网页全屏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreenWeb: true,
+});
+
+art.on('fullscreenWeb', (...args) => {
+    console.info(args);
+});
+```
+
+### hotkey
+
+在快捷键被使用时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('hotkey', (...args) => {
+    console.info(args);
+});
+```
