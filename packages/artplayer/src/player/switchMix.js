@@ -18,10 +18,10 @@ export default function switchMix(art, player) {
             if (playing) {
                 player.play();
             }
+            if (name) {
+                notice.show = `${i18n.get('Switch video')}: ${name}`;
+            }
         });
-        if (name) {
-            notice.show = `${i18n.get('Switch video')}: ${name}`;
-        }
         art.emit('switch', url);
     }
 

@@ -8,8 +8,8 @@ export default class Notice {
     }
 
     set show(msg) {
-        if (!msg) return removeClass($player, 'art-notice-show');
         const { $player, $noticeInner } = this.art.template;
+        if (!msg) return removeClass($player, 'art-notice-show');
         $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
         addClass($player, 'art-notice-show');
         clearTimeout(this.timer);

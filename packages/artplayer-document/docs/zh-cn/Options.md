@@ -738,11 +738,11 @@ var art = new Artplayer({
     quality: [
         {
             default: true,
-            name: 'SD 480P',
+            html: 'SD 480P',
             url: '/assets/sample/video.mp4',
         },
         {
-            name: 'HD 720P',
+            html: 'HD 720P',
             url: '/assets/sample/video.mp4',
         },
     ],

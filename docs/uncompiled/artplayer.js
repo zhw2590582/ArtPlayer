@@ -753,7 +753,7 @@
     })],
     quality: [{
       default: "?".concat(b),
-      name: s,
+      html: s,
       url: s
     }],
     highlight: [{
@@ -1437,12 +1437,11 @@
         if (playing) {
           player.play();
         }
+
+        if (name) {
+          notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
+        }
       });
-
-      if (name) {
-        notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
-      }
-
       art.emit('switch', url);
     }
 
@@ -3075,10 +3074,10 @@
         return item.default;
       }) || qualityOption[0];
       return _objectSpread$b(_objectSpread$b({}, option), {}, {
-        html: qualityDefault ? qualityDefault.name : '',
+        html: qualityDefault ? qualityDefault.html : '',
         selector: qualityOption,
         onSelect: function onSelect(item) {
-          art.player.switchQuality(item.url, item.name);
+          art.player.switchQuality(item.url, item.html);
         }
       });
     };
@@ -4052,10 +4051,10 @@
     _createClass(Notice, [{
       key: "show",
       set: function set(msg) {
-        if (!msg) return removeClass($player, 'art-notice-show');
         var _this$art$template = this.art.template,
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;
+        if (!msg) return removeClass($player, 'art-notice-show');
         $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
         addClass($player, 'art-notice-show');
         clearTimeout(this.timer);

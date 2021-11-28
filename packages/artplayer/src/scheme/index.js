@@ -77,7 +77,7 @@ export default {
     quality: [
         {
             default: `?${b}`,
-            name: s,
+            html: s,
             url: s,
         },
     ],
