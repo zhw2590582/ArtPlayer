@@ -652,6 +652,10 @@ var art = new Artplayer({
         },
     ],
 });
+
+art.on('ready', () => {
+    art.contextmenu.show = true;
+});
 ```
 
 ## controls
@@ -793,25 +797,31 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的插件，更多信息请访问 [自定义插件的使用](/document/zh-cn/Questions/plugin)
+初始化自定义的插件
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
+function myPlugin(art) {
+    console.info('你可以在插件里访问到播放器的实例');
+    return {
+        name: 'myPlugin',
+        something: '自定义导出的属性',
+        doSomething: function () {
+            console.info('自定义导出的方法');
+        },
+    };
+}
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    plugins: [
-        function myPlugin(art) {
-            console.info('myPlugin running...');
-            return {
-                something: 'something',
-                doSomething: function () {
-                    console.info('Do something here...');
-                },
-            };
-        },
-    ],
+    plugins: [myPlugin],
+});
+
+art.on('ready', () => {
+    console.info(art.plugins.myPlugin.something);
+    console.info(art.plugins.myPlugin.doSomething());
 });
 ```
 

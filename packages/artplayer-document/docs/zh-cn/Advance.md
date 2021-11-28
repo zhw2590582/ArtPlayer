@@ -279,7 +279,18 @@ art.on('ready', () => {
 })
 ```
 
-方法 `add` 可以动态添加业务层，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+方法 `add` 可以动态添加业务层
+
+| 属性      | 类型                | 描述                       |
+| --------- | ------------------- | -------------------------- |
+| `disable` | `Boolean`           | 是否禁用组件               |
+| `name`    | `String`            | 组件唯一名称，用于标记类名 |
+| `index`   | `Number`            | 组件索引，用于显示的优先级 |
+| `html`    | `String`、`Element` | 组件的 DOM 元素            |
+| `style`   | `Object`            | 组件样式对象               |
+| `click`   | `Function`          | 组件点击事件               |
+| `mounted` | `Function`          | 组件挂载后触发             |
+| `tooltip` | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -350,7 +361,19 @@ art.on('ready', () => {
 })
 ```
 
-方法 `add` 可以动态添加控制器，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+方法 `add` 可以动态添加控制器
+
+| 属性       | 类型                | 描述                       |
+| ---------- | ------------------- | -------------------------- |
+| `disable`  | `Boolean`           | 是否禁用组件               |
+| `name`     | `String`            | 组件唯一名称，用于标记类名 |
+| `index`    | `Number`            | 组件索引，用于显示的优先级 |
+| `html`     | `String`、`Element` | 组件的 DOM 元素            |
+| `style`    | `Object`            | 组件样式对象               |
+| `click`    | `Function`          | 组件点击事件               |
+| `mounted`  | `Function`          | 组件挂载后触发             |
+| `tooltip`  | `String`            | 组件的提示文本             |
+| `position` | `String`            | 位置在 `left` 或者 `right` |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -399,7 +422,18 @@ art.on('ready', () => {
 })
 ```
 
-方法 `add` 可以动态添加菜单项，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+方法 `add` 可以动态添加菜单项
+
+| 属性       | 类型                | 描述                       |
+| ---------- | ------------------- | -------------------------- |
+| `disable`  | `Boolean`           | 是否禁用组件               |
+| `name`     | `String`            | 组件唯一名称，用于标记类名 |
+| `index`    | `Number`            | 组件索引，用于显示的优先级 |
+| `html`     | `String`、`Element` | 组件的 DOM 元素            |
+| `style`    | `Object`            | 组件样式对象               |
+| `click`    | `Function`          | 组件点击事件               |
+| `mounted`  | `Function`          | 组件挂载后触发             |
+| `tooltip`  | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -531,7 +565,18 @@ art.on('ready', () => {
 })
 ```
 
-方法 `add` 可以动态添加设置项，更多信息请访问 [自定义组件的使用](/document/zh-cn/Questions/component)
+方法 `add` 可以动态添加设置项
+
+| 属性       | 类型                | 描述                       |
+| ---------- | ------------------- | -------------------------- |
+| `disable`  | `Boolean`           | 是否禁用组件               |
+| `name`     | `String`            | 组件唯一名称，用于标记类名 |
+| `index`    | `Number`            | 组件索引，用于显示的优先级 |
+| `html`     | `String`、`Element` | 组件的 DOM 元素            |
+| `style`    | `Object`            | 组件样式对象               |
+| `click`    | `Function`          | 组件点击事件               |
+| `mounted`  | `Function`          | 组件挂载后触发             |
+| `tooltip`  | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -562,25 +607,30 @@ art.on('ready', () => {
 
 管理插件的对象
 
-方法 `add` 可以动态添加插件，更多信息请访问 [自定义插件的使用](/document/zh-cn/Questions/plugin)
+方法 `add` 可以动态添加插件
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
+function myPlugin(art) {
+    console.info('你可以在插件里访问到播放器的实例');
+    return {
+        name: 'myPlugin',
+        something: '自定义导出的属性',
+        doSomething: function () {
+            console.info('自定义导出的方法');
+        },
+    };
+}
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    plugins: [myPlugin],
 });
 
 art.on('ready', () => {
-    art.plugins.add(function myPlugin(art) {
-        console.info('myPlugin running...');
-        return {
-            something: 'something',
-            doSomething: function () {
-                console.info('Do something here...');
-            },
-        };
-    });
-})
+    console.info(art.plugins.myPlugin.something);
+    console.info(art.plugins.myPlugin.doSomething());
+});
 ```
