@@ -5,4 +5,5 @@ node_modules
 examples
 commit.json
 package-lock.json
+.size-snapshot.json
 yarn.lock

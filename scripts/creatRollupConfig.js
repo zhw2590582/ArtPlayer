@@ -1,19 +1,19 @@
 const fs = require('fs');
 const path = require('path');
-const babel = require('rollup-plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
-const nodeResolve = require('rollup-plugin-node-resolve');
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const postcss = require('rollup-plugin-postcss');
 const { eslint } = require('rollup-plugin-eslint');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const replace = require('rollup-plugin-replace');
+const replace = require('@rollup/plugin-replace');
 const svgo = require('rollup-plugin-svgo');
 const { sizeSnapshot } = require('rollup-plugin-size-snapshot');
 const { terser } = require('rollup-plugin-terser');
 const copyAfterBuild = require('./copyAfterBuild');
 const removeHtmlSpace = require('./removeHtmlSpace');
-const json = require('rollup-plugin-json');
+const json = require('@rollup/plugin-json');
 
 module.exports = function creatRollupConfig(projectPath) {
     const packageJson = JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'), 'utf-8'));
@@ -70,7 +70,7 @@ module.exports = function creatRollupConfig(projectPath) {
             nodeResolve(),
             commonjs(),
             babel({
-                runtimeHelpers: true,
+                babelHelpers: 'runtime',
                 exclude: ['node_modules/**', 'packages/**/node_modules/**'],
                 presets: [['@babel/env', { modules: false }]],
                 plugins: ['@babel/plugin-external-helpers', '@babel/plugin-transform-runtime'],
@@ -79,6 +79,7 @@ module.exports = function creatRollupConfig(projectPath) {
                 raw: true,
             }),
             replace({
+                preventAssignment: true,
                 exclude: 'node_modules/**',
                 __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
                 __VERSION__: version,

@@ -109,6 +109,7 @@ export default class Artplayer extends Emitter {
             url: '',
             poster: '',
             title: '',
+            type: '',
             theme: '#f00',
             volume: 0.7,
             isLive: false,
@@ -126,7 +127,6 @@ export default class Artplayer extends Emitter {
             hotkey: true,
             pip: false,
             mutex: true,
-            light: false,
             backdrop: true,
             fullscreen: false,
             fullscreenWeb: false,
@@ -143,7 +143,6 @@ export default class Artplayer extends Emitter {
             highlight: [],
             plugins: [],
             whitelist: [],
-            switcher: [],
             thumbnails: {
                 url: '',
                 number: 60,

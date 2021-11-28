@@ -17,11 +17,11 @@ export default function playAndPause(option) {
             tooltip($pause, i18n.get('Pause'));
 
             proxy($play, 'click', () => {
-                player.play = true;
+                player.play();
             });
 
             proxy($pause, 'click', () => {
-                player.pause = true;
+                player.pause();
             });
 
             function showPlay() {

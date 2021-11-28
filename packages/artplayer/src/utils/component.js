@@ -1,5 +1,5 @@
 import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle } from './dom';
-import { has } from './property';
+import { has, def } from './property';
 import { errorHandle } from './error';
 
 export default class Component {
@@ -80,6 +80,10 @@ export default class Component {
         if ($ref.childNodes.length === 1 && $ref.childNodes[0].nodeType === 3) {
             addClass($ref, 'art-control-onlyText');
         }
+
+        def(this, name, {
+            value: $ref,
+        });
     }
 
     selector(option, $ref) {
@@ -92,32 +96,36 @@ export default class Component {
         $ref.innerText = '';
         append($ref, $value);
 
-        const list = option.selector.map((item) => `<div class="art-selector-item">${item.name}</div>`).join('');
+        const list = option.selector
+            .map((item, index) => `<div class="art-selector-item" data-index="${index}">${item.html}</div>`)
+            .join('');
         const $list = document.createElement('div');
         addClass($list, 'art-selector-list');
         append($list, list);
         append($ref, $list);
 
         const setLeft = () => {
-            $list.style.left = `-${getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2}px`;
+            const left = getStyle($ref, 'width') / 2 - getStyle($list, 'width') / 2;
+            $list.style.left = `${left}px`;
         };
 
         hover($ref, setLeft);
 
-        proxy($ref, 'click', (event) => {
-            if (hasClass(event.target, 'art-selector-item')) {
-                const name = event.target.innerText;
-                if ($value.innerText === name) return;
-                const find = option.selector.find((item) => item.name === name);
-                $value.innerText = name;
-                setLeft();
-                if (find) {
-                    if (option.onSelect) {
-                        option.onSelect.call(this.art, find);
-                    }
-                    this.art.emit('selector', find);
+        proxy($list, 'click', (event) => {
+            const path = event.composedPath() || [];
+            const $item = path.find((item) => hasClass(item, 'art-selector-item'));
+            if (!$item) return;
+            const index = Number($item.dataset.index);
+            const find = option.selector[index] || {};
+            $value.innerText = $item.innerText;
+            if (option.onSelect) {
+                const result = option.onSelect.call(this.art, find, $item);
+                if (typeof result === 'string') {
+                    $value.innerHTML = result;
                 }
             }
+            setLeft();
+            this.art.emit('selector', find, $item);
         });
     }
 }

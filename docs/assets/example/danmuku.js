@@ -1,3 +1,6 @@
+// 使用说明：
+// https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -20,15 +23,14 @@ var art = new Artplayer({
         {
             position: 'right',
             html: 'Hide',
-            click: function () {
-                art.plugins.artplayerPluginDanmuku.hide();
-            },
-        },
-        {
-            position: 'right',
-            html: 'Show',
-            click: function () {
-                art.plugins.artplayerPluginDanmuku.show();
+            click: function (_, event) {
+                if (art.plugins.artplayerPluginDanmuku.isHide) {
+                    art.plugins.artplayerPluginDanmuku.show();
+                    event.target.innerText = 'Hide';
+                } else {
+                    art.plugins.artplayerPluginDanmuku.hide();
+                    event.target.innerText = 'Show';
+                }
             },
         },
         {

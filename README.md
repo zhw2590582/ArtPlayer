@@ -1,53 +1,38 @@
-# ArtPlayer.js
+<h2 align="center">
+    <a href="https://artplayer.org">ArtPlayer.js</a>
+</h2>
 
--   [中文介绍](./README-CN.md)
+<p align="center">
+    :art: ArtPlayer.js is a modern and full featured HTML5 video player
+</p>
 
-> :art: ArtPlayer.js is a modern and full featured HTML5 video player
+<p align="center">
+  <img src="https://img.shields.io/github/checks-status/zhw2590582/artplayer/master" alt="Build Status">
+  <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size">
+  <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
+  <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
+  <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
+</p>
 
-![version](https://badgen.net/npm/v/artplayer)
-![license](https://badgen.net/npm/license/artplayer)
-![size](https://badgen.net/bundlephobia/minzip/artplayer)
-[![npm Downloads](https://img.shields.io/npm/dt/artplayer.svg)](https://www.npmjs.com/package/artplayer)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/354e9953b70a4791a5a46194d587c707)](https://www.codacy.com/app/zhw2590582/ArtPlayer?utm_source=github.com&utm_medium=referral&utm_content=zhw2590582/ArtPlayer&utm_campaign=Badge_Grade)
+<p align="center">
+  <span>・</span>
+  <a href="https://artplayer.org">Online Editor</a>
+  <span>・</span>
+  <a href="https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku">Danmuku Demo</a>
+  <span>・</span>
+  <a href="https://artplayer.org/document">API Document</a>
+  <span>・</span>
+</p>
 
-![Screenshot](./images/screenshot.png)
+<p align="center">
+    <a href="https://artplayer.org">
+        <img src="./images/screenshot.png" alt="screenshot">
+    </a>
+</p>
 
 ## Features
 
--   <b>Size</b> - `25kB` minified and gzipped
--   <b>Subtitle</b> - Support for `.VTT`, `.ASS` and `.SRT` formats
--   <b>Customizable</b> - `Right Click Menu`, `Business Layer`, `Video Controller` and `Settings Panel`
--   <b>Controller</b> - `Quality Switch`, `Subtitle Switch`, `Play Speed`, `Aspect Ratio`, `Video Flip`, `Fullscreen`, `Picture In Picture`, `Screenshot`, `Thumbnail`, `Adaptive Size`, `Highlight` and `Hotkey`...
--   <b>Built-in</b> - `Open Local Subtitles`, `Open Local Video`, `Mini Progress Bar`, `Network Detection` and `Subtitle Time Offset`
--   <b>Integration</b> - Easy to integration with other dependencies: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`...
--   <b>Code</b> - Vanilla `ES6` and `SASS`, Highly decoupled code, clear structure, easy to track bugs and add new features
--   <b>Document</b> - Detailed interface documentation and rich code demo
--   <b>API</b> - Rich interface and response events, easy to interface with business or custom plugin
--   <b>I18N</b> - support for internationalization of controls
-
-## Ecosystem
-
-| Project                                                                                                               | Description         | Demo                                                                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [artplayer-plugin-danmuku](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-danmuku)     | Danmuku plugin      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)                                            |
-| [artplayer-plugin-gif](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-gif)             | Gif plugin          | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-gif.js&example=gif)                                                    |
-| [artplayer-plugin-backlight](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-plugin-backlight) | Backlight plugin    | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-backlight.js&example=backlight)                                        |
-| [artplayer-tool-thumbnail](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-thumbnail)     | Thumbnail tool      | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-thumbnail.js&example=thumbnail)                                          |
-| [artplayer-tool-github](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-tool-github)           | Github Danmuku tool | [demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-tool-github.js%0A.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=github) |  |
-| [artplayer-react](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-react)                       | React Component     | [demo](https://codesandbox.io/s/n74859y9rl)                                                                                                 |
-| [artplayer-vue](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vue)                           | Vue Component       | [demo](https://codesandbox.io/s/thirsty-sunset-3lz7m)                                                                                       |
-
-## Homepage
-
-[https://artplayer.org](https://artplayer.org)
-
-## Mobile Demo
-
-![mobile](./images/mobile.png)
-
-## Document
-
-[https://artplayer.org/document](https://artplayer.org/document)
+[ArtPlayer.js](https://artplayer.org) is an easy-to-use and feature-rich HTML5 video player, and most of the player's functional controls support customization, which makes it easy to connect with your business logic. In addition, it directly supports `.vtt`, `.ass` and `.srt` subtitle formats. Integration with other dependencies such as `flv.js`, `hls.js`, `dash.js`, etc. is also very simple. The code is highly decoupled, the structure and logic are clear, and it is easy to track errors and add new features.
 
 ## Install
 
@@ -94,27 +79,6 @@ var art = new Artplayer({
 });
 ```
 
-## Contribution
-
-Installation dependency:
-
-```bash
-$ npm install
-$ npm run bootstrap
-```
-
-Run the developer mode and select the project you want to develop:
-
-```bash
-$ npm run dev
-```
-
-Open web server:
-
-```bash
-$ npm start
-```
-
 ## Donations
 
 We accept donations through these channels:
@@ -130,4 +94,4 @@ We accept donations through these channels:
 
 ## License
 
-MIT © [Harvey Zack](https://sleepy.im/)
+MIT © Harvey Zack

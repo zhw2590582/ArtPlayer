@@ -17,7 +17,7 @@ export default class Hotkey {
                 });
 
                 this.add(32, () => {
-                    player.toggle = true;
+                    player.toggle();
                 });
 
                 this.add(37, () => {

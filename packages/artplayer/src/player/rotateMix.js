@@ -20,6 +20,7 @@ export default function rotateMix(art, player) {
                 setStyle($video, 'transform', null);
             } else {
                 player.flip = false;
+                art.autoSize = true;
                 $player.dataset.rotate = deg;
 
                 const getScaleValue = () => {

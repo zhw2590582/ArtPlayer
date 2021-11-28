@@ -30,6 +30,7 @@ export default {
     url: s,
     poster: s,
     title: s,
+    type: s,
     theme: s,
     lang: s,
     volume: n,
@@ -48,7 +49,6 @@ export default {
     hotkey: b,
     pip: b,
     mutex: b,
-    light: b,
     backdrop: b,
     fullscreen: b,
     fullscreenWeb: b,
@@ -77,7 +77,7 @@ export default {
     quality: [
         {
             default: `?${b}`,
-            name: s,
+            html: s,
             url: s,
         },
     ],

@@ -3,6 +3,7 @@ import { errorHandle, query, addClass } from './utils';
 export default class Template {
     constructor(art) {
         this.art = art;
+        this.art.query = this.query.bind(this);
 
         if (art.option.container instanceof Element) {
             this.$container = art.option.container;
@@ -25,7 +26,6 @@ export default class Template {
 
     static get html() {
         return `
-          <div class="art-undercover"></div>
           <div class="art-video-player art-subtitle-show art-layer-show">
             <video class="art-video"></video>
             <div class="art-poster"></div>
@@ -102,7 +102,6 @@ export default class Template {
             this.$container.innerHTML = Template.html;
         }
 
-        this.$undercover = this.query('.art-undercover');
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
         this.$poster = this.query('.art-poster');
@@ -135,9 +134,7 @@ export default class Template {
         if (backdrop) {
             addClass(this.$settingInner, 'art-backdrop-filter');
             addClass(this.$contextmenu, 'art-backdrop-filter');
-            if (this.$info) {
-                addClass(this.$info, 'art-backdrop-filter');
-            }
+            addClass(this.$info, 'art-backdrop-filter');
         }
 
         if (this.art.isMobile) {
@@ -155,8 +152,8 @@ export default class Template {
         this.$video = this.query('.art-video');
     }
 
-    destroy(remove) {
-        if (remove) {
+    destroy(removeHtml) {
+        if (removeHtml) {
             this.$container.innerHTML = '';
         } else {
             addClass(this.$player, 'art-destroy');

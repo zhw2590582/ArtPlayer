@@ -7,7 +7,7 @@ type Component = {
     click?: Function;
     mounted?: Function;
     tooltip?: string;
-    position?: 'top' | 'left' | 'right';
+    position?: 'top' | 'left' | 'right' | 'middle';
     selector?: {
         name: string;
     }[];
@@ -20,6 +20,7 @@ export default class Artplayer {
         url: string;
         poster?: string;
         title?: string;
+        type?: string;
         theme?: string;
         lang?: 'en' | 'zh-cn' | 'zh-tw';
         volume?: number;
@@ -38,7 +39,6 @@ export default class Artplayer {
         hotkey?: boolean;
         pip?: boolean;
         mutex?: boolean;
-        light?: boolean;
         backdrop?: boolean;
         fullscreen?: boolean;
         fullscreenWeb?: boolean;

@@ -4,10 +4,10 @@ export default function quality(option) {
         const qualityDefault = qualityOption.find((item) => item.default) || qualityOption[0];
         return {
             ...option,
-            html: qualityDefault ? qualityDefault.name : '',
+            html: qualityDefault ? qualityDefault.html : '',
             selector: qualityOption,
             onSelect(item) {
-                art.player.switchQuality(item.url, item.name);
+                art.player.switchQuality(item.url, item.html);
             },
         };
     };
