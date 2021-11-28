@@ -8,6 +8,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/github/checks-status/zhw2590582/artplayer/master" alt="Build Status">
+  <img src="https://img.shields.io/bundlephobia/minzip/artplayer" alt="Size">
   <img src="https://img.shields.io/npm/dm/artplayer.svg?sanitize=true" alt="Downloads">
   <img src="https://img.shields.io/npm/v/artplayer.svg?sanitize=true" alt="Version">
   <img src="https://img.shields.io/npm/l/artplayer.svg?sanitize=true" alt="License">
@@ -29,16 +30,9 @@
 
 ## Features
 
--   <b>Size</b> - `27kB` minified and gzipped
--   <b>Subtitle</b> - Support for `.VTT`, `.ASS` and `.SRT` formats
--   <b>Customizable</b> - `Right Click Menu`, `Business Layer`, `Video Controller` and `Settings Panel`
--   <b>Controller</b> - `Quality Switch`, `Subtitle Switch`, `Play Speed`, `Aspect Ratio`, `Video Flip`, `Fullscreen`, `Picture In Picture`, `Screenshot`, `Thumbnail`, `Adaptive Size`, `Highlight` and `Hotkey`...
--   <b>Built-in</b> - `Open Local Subtitles`, `Open Local Video`, `Mini Progress Bar`, `Network Detection` and `Subtitle Time Offset`
--   <b>Integration</b> - Easy to integration with other dependencies: `flv.js`, `hls.js`, `dash.js`, `shaka-player`, `webtorrent`...
--   <b>Code</b> - Vanilla `ES6` and `SASS`, Highly decoupled code, clear structure, easy to track bugs and add new features
--   <b>Document</b> - Detailed interface documentation and rich code demo
--   <b>API</b> - Rich interface and response events, easy to interface with business or custom plugin
--   <b>I18N</b> - support for internationalization of controls
+ArtPlayer.js is an easy-to-use and feature-rich HTML5 video player, and most of the player's functional controls support customization, which makes it easy to connect with your business logic. In addition, it directly supports `.VTT`, `.ASS` and `.SRT` subtitle formats. Integration with other dependencies such as `flv.js`, `hls.js`, `dash.js`, etc. is also very simple. The code is highly decoupled, the structure and logic are clear, and it is easy to track errors and add new features.
+
+
 
 ## Install
 
