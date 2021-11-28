@@ -1,70 +1,70 @@
 ---
-title: 高级属性
+title: Advanced property
 sidebar_position: 4
 slug: /advance
 ---
 
-:::tip 提示
+:::tip Tip
 
-这页面是对常用属性的一些额外补充，需要深入开发自定义功能时才需要阅读
+This page is some additional supplements to the commonly used properties, you need to read in depth to develop custom functions.
 
 :::
 
 ## id
 
--   类型: `Number`
+-   Type: `Number`
 
-播放器实例的一个自增编号
+A self-inclusive number of the player instance
 
 ## option
 
--   类型: `Object`
+-   Type: `Object`
 
-播放器实例经合并后的参数对象
+After merged options
 
 ## isFocus
 
--   类型: `Boolean`
+-   Type: `Boolean`
 
-播放器实例是否获得了焦点，如最后被用户点击过
+Whether the player instance has been focused
 
 ## isDestroy
 
--   类型: `Boolean`
+-   Type: `Boolean`
 
-播放器实例是否被销毁
+Whether the player instance is destroyed
 
 ## userAgent
 
--   类型: `Boolean`
+-   Type: `Boolean`
 
-等于 `window.navigator.userAgent`
+Equal to `window.navigator.userAgent`
 
 ## isMobile
 
--   类型: `Boolean`
+-   Type: `Boolean`
 
-当前环境是否移动设备
+Current environment mobile device
 
 ## isWechat
 
--   类型: `Boolean`
+-   Type: `Boolean`
 
-当前环境是否微信设备
+Whether the current environment is WeChat equipment
 
 ## whitelist
 
--   类型: `Object`
+-   Type: `Object`
 
-管理白名单的对象
+Manage the whitelist
 
 ## template
 
--   类型: `Object`
+-   Type: `Object`
 
-管理播放器 `Html` 的对象
+Manage player `HTML`
 
-方法 `query` 可以查找当前播放器实例内的 dom 元素，等同于 `document.querySelector('.artplayer-app').querySelector`
+Method `query` You can find DOM elements in the current player instance, equivalent to `document.querySelector('.artplayer-app').querySelector`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -82,9 +82,9 @@ art.on('ready', () => {
 
 ## query
 
--   类型: `Function`
+-   Type: `Function`
 
-等于 `art.template.query`
+Equal to `art.template.query`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -102,18 +102,18 @@ art.on('ready', () => {
 
 ## storage
 
--   类型: `Object`
+-   Type: `Object`
 
-管理持久化存储的对象
+Manage persistent storage objects
 
-播放器会自动添加一个名为 `artplayer_settings` 的 JSON 对象到的 `localStorage` 里
+The player will automatically add a json object called `artplayer_settings` to the `localstorage`
 
-| 属性    | 类型       | 描述     |
-| ------- | ---------- | -------- |
-| `get`   | `Function` | 获取值   |
-| `set`   | `Function` | 设置值   |
-| `del`   | `Function` | 删除值   |
-| `clean` | `Function` | 清空对象 |
+| Property | Type       | Description  |
+| -------- | ---------- | ------------ |
+| `get`    | `Function` | Get value    |
+| `set`    | `Function` | Set value    |
+| `del`    | `Function` | Delete value |
+| `clean`  | `Function` | Clean value  |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -131,17 +131,17 @@ art.storage.clean();
 
 ## icons
 
--   类型: `Object`
+-   Type: `Object`
 
-管理图标的对象
+Manage player `icons`
 
 ## i18n
 
--   类型: `Object`
+-   Type: `Object`
 
-管理多语言的对象
+Manage player `i18n`
 
-方法 `get` 可以获取到对应的语言的值
+Method `get` can get the value of the language value
 
 <div className="run-code">▶ Run Code</div>
 
@@ -156,7 +156,7 @@ art.on('ready', () => {
 });
 ```
 
-方法 `update` 可以动态添加更多语言
+Method `update` can add more languages
 
 <div className="run-code">▶ Run Code</div>
 
@@ -191,17 +191,17 @@ art.i18n.update({
 
 ## player
 
--   类型: `Object`
+-   Type: `Object`
 
-管理核心功能的对象，所以属性和方法都代理到播放器实例上了
+Manage the object of the core function
 
 ## subtitle
 
--   类型: `Object`
+-   Type: `Object`
 
-管理字幕的对象
+Management subtitle object
 
-方法 `style` 可以动态修改字幕样式
+Method `style` can dynamically modify the subtitle style
 
 <div className="run-code">▶ Run Code</div>
 
@@ -231,7 +231,7 @@ art.on('ready', () => {
 });
 ```
 
-方法 `switch` 可以动态修改字幕地址
+Methods `switch` can dynamically modify the subtitle url
 
 <div className="run-code">▶ Run Code</div>
 
@@ -260,17 +260,17 @@ art.on('ready', () => {
 
 ## info
 
--   类型: `Object`
+-   Type: `Object`
 
-管理统计信息的对象
+Manage video info
 
 ## layers
 
--   类型: `Object`
+-   Type: `Object`
 
-管理业务层的对象
+Manage the object of the layers
 
-属性 `show` 可以控制全部图层是否显示
+Property show can control all layers to display
 
 <div className="run-code">▶ Run Code</div>
 
@@ -289,6 +289,15 @@ var art = new Artplayer({
                 opacity: '.9',
             },
         },
+        {
+            html: `<img style="width: 100px" src="${img}">`,
+            style: {
+                position: 'absolute',
+                top: '20px',
+                left: '20px',
+                opacity: '.9',
+            },
+        },
     ],
 });
 
@@ -299,18 +308,18 @@ art.on('ready', () => {
 });
 ```
 
-方法 `add` 可以动态添加业务层
+Method `add` can dynamically add a layer
 
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
+| Property  | Type                | Description                                                   |
+| --------- | ------------------- | ------------------------------------------------------------- |
+| `disable` | `Boolean`           | Whether to disable the component                              |
+| `name`    | `String`            | The unique name of the component, used to mark the class name |
+| `index`   | `Number`            | Component index, priority for display                         |
+| `html`    | `String`、`Element` | DOM element of the component                                  |
+| `style`   | `Object`            | Component style object                                        |
+| `click`   | `Function`          | Component click event                                         |
+| `mounted` | `Function`          | Triggered after the component is mounted                      |
+| `tooltip` | `String`            | Prompt text of the component                                  |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -338,11 +347,11 @@ art.on('ready', () => {
 
 ## notice
 
--   类型: `Object`
+-   Type: `Object`
 
-管理提示信息的对象
+Manage the object of prompt information
 
-属性 `show` 输出自定义提示信息，默认停留时间为两秒，且新的信息会马上覆盖旧的信息
+Attribute `show` output custom prompt information, the default residence time is two seconds, and the new information will immediately cover the old information
 
 <div className="run-code">▶ Run Code</div>
 
@@ -360,11 +369,11 @@ art.on('ready', () => {
 
 ## controls
 
--   类型: `Object`
+-   Type: `Object`
 
-管理业务层的对象
+Manage the object of the control bar
 
-属性 `show` 可以控制控制栏是否显示
+Attribute show can control if the control bar is displayed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -381,19 +390,19 @@ art.on('ready', () => {
 });
 ```
 
-方法 `add` 可以动态添加控制器
+Method `add` can dynamically add a control
 
-| 属性       | 类型                | 描述                       |
-| ---------- | ------------------- | -------------------------- |
-| `disable`  | `Boolean`           | 是否禁用组件               |
-| `name`     | `String`            | 组件唯一名称，用于标记类名 |
-| `index`    | `Number`            | 组件索引，用于显示的优先级 |
-| `html`     | `String`、`Element` | 组件的 DOM 元素            |
-| `style`    | `Object`            | 组件样式对象               |
-| `click`    | `Function`          | 组件点击事件               |
-| `mounted`  | `Function`          | 组件挂载后触发             |
-| `tooltip`  | `String`            | 组件的提示文本             |
-| `position` | `String`            | 位置在 `left` 或者 `right` |
+| Property   | Type                | Description                                                   |
+| ---------- | ------------------- | ------------------------------------------------------------- |
+| `disable`  | `Boolean`           | Whether to disable the component                              |
+| `name`     | `String`            | The unique name of the component, used to mark the class name |
+| `index`    | `Number`            | Component index, priority for display                         |
+| `html`     | `String`、`Element` | DOM element of the component                                  |
+| `style`    | `Object`            | Component style object                                        |
+| `click`    | `Function`          | Component click event                                         |
+| `mounted`  | `Function`          | Triggered after the component is mounted                      |
+| `tooltip`  | `String`            | Prompt text of the component                                  |
+| `position` | `String`            | Location at `left` or `right`                                 |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -406,12 +415,20 @@ var art = new Artplayer({
 art.on('ready', () => {
     setTimeout(() => {
         art.controls.add({
-            position: 'right',
+            disable: false,
+            name: 'button',
             index: 10,
-            html: '自定义按钮',
-            tooltip: '自定义按钮的提示',
+            position: 'right',
+            html: 'Custom button1',
+            tooltip: 'Custom button1',
+            style: {
+                color: 'red',
+            },
             click: function () {
-                console.log('你点击了自定义按钮');
+                console.log('You clicked custom button 1');
+            },
+            mounted: function () {
+                console.log('Custom button mounting is complete 1');
             },
         });
     }, 3000);
@@ -420,11 +437,11 @@ art.on('ready', () => {
 
 ## contextmenu
 
--   类型: `Object`
+-   Type: `Object`
 
-管理右键菜单的对象
+Manage the contextmenu
 
-属性 `show` 可以控制菜单是否显示
+Attribute show can control if the menu is displayed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -442,18 +459,18 @@ art.on('ready', () => {
 });
 ```
 
-方法 `add` 可以动态添加菜单项
+Method `add` can dynamically add a menu items
 
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
+| Property  | Type                | Description                                                   |
+| --------- | ------------------- | ------------------------------------------------------------- |
+| `disable` | `Boolean`           | Whether to disable the component                              |
+| `name`    | `String`            | The unique name of the component, used to mark the class name |
+| `index`   | `Number`            | Component index, priority for display                         |
+| `html`    | `String`、`Element` | DOM element of the component                                  |
+| `style`   | `Object`            | Component style object                                        |
+| `click`   | `Function`          | Component click event                                         |
+| `mounted` | `Function`          | Triggered after the component is mounted                      |
+| `tooltip` | `String`            | Prompt text of the component                                  |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -467,9 +484,9 @@ art.on('ready', () => {
     art.contextmenu.show = true;
     setTimeout(() => {
         art.contextmenu.add({
-            html: '自定义菜单',
+            html: 'Custom menu',
             click: function () {
-                console.info('你点击了自定义菜单');
+                console.info('You clicked the custom menu');
                 art.contextmenu.show = false;
             },
         });
@@ -479,11 +496,11 @@ art.on('ready', () => {
 
 ## loading
 
--   类型: `Object`
+-   Type: `Object`
 
-管理提示信息的对象
+Manage `loading` icon
 
-属性 `show` 可以控制菜单是否加载层
+Property `show` can control whether the icon in the load is displayed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -503,11 +520,11 @@ art.on('ready', () => {
 
 ## mask
 
--   类型: `Object`
+-   Type: `Object`
 
-管理遮罩层的对象
+Manage the object of the mask layer
 
-属性 `show` 可以控制遮罩层是否加载层
+Attributes `show` can control whether the mask layer is display
 
 <div className="run-code">▶ Run Code</div>
 
@@ -527,11 +544,11 @@ art.on('ready', () => {
 
 ## hotkey
 
--   类型: `Object`
+-   Type: `Object`
 
-管理快捷键的对象
+Manage hotkey
 
-方法 `add` 可以动态添加快捷键，第一个参数是 `key code` 数字，第二个参数是回调函数
+Methods `add` can dynamically add a hotkey, the first parameter is `key code` number, the second parameter is a callback function
 
 <div className="run-code">▶ Run Code</div>
 
@@ -543,28 +560,28 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.hotkey.add(65, () => {
-        console.info('你点击了 A 键');
+        console.info('You click A');
     });
 
     art.hotkey.add(66, () => {
-        console.info('你点击了 B 键');
+        console.info('You click B');
     });
 });
 ```
 
-:::tip 提示
+:::tip Tip
 
-只在播放器获得焦点后（如点击了播放器后），该快捷键才会生效
+This hotkey will take effect only after the player gets the focus (if you click on the player).
 
 :::
 
 ## setting
 
--   类型: `Object`
+-   Type: `Object`
 
-管理设置面板的对象
+Manage the object of the setting panel
 
-属性 `show` 可以控制设置面板是否显示
+Property `show` can control the setting panel to display
 
 <div className="run-code">▶ Run Code</div>
 
@@ -585,18 +602,18 @@ art.on('ready', () => {
 });
 ```
 
-方法 `add` 可以动态添加设置项
+Method `add` can dynamically add a setting items
 
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
+| Property  | Type                | Description                                                   |
+| --------- | ------------------- | ------------------------------------------------------------- |
+| `disable` | `Boolean`           | Whether to disable the component                              |
+| `name`    | `String`            | The unique name of the component, used to mark the class name |
+| `index`   | `Number`            | Component index, priority for display                         |
+| `html`    | `String`、`Element` | DOM element of the component                                  |
+| `style`   | `Object`            | Component style object                                        |
+| `click`   | `Function`          | Component click event                                         |
+| `mounted` | `Function`          | Triggered after the component is mounted                      |
+| `tooltip` | `String`            | Prompt text of the component                                  |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -612,9 +629,9 @@ art.on('ready', () => {
     art.seek = 20;
     art.setting.show = true;
     art.setting.add({
-        html: '自定义设置',
+        html: 'Custom setting',
         click: function () {
-            console.info('你点击了自定义设置');
+            console.info('You click on custom settings');
             art.setting.show = false;
         },
     });
@@ -623,22 +640,22 @@ art.on('ready', () => {
 
 ## plugins
 
--   类型: `Object`
+-   Type: `Object`
 
-管理插件的对象
+Manage plugin
 
-方法 `add` 可以动态添加插件
+Method `add` can be dynamically add a plugin
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
 function myPlugin(art) {
-    console.info('你可以在插件里访问到播放器的实例');
+    console.info('You can access an instance of a player in the plugin');
     return {
         name: 'myPlugin',
-        something: '自定义导出的属性',
+        something: 'Custom export properties',
         doSomething: function () {
-            console.info('自定义导出的方法');
+            console.info('Custom export method');
         },
     };
 }

@@ -289,6 +289,15 @@ var art = new Artplayer({
                 opacity: '.9',
             },
         },
+        {
+            html: `<img style="width: 100px" src="${img}">`,
+            style: {
+                position: 'absolute',
+                top: '20px',
+                left: '20px',
+                opacity: '.9',
+            },
+        },
     ],
 });
 
@@ -362,7 +371,7 @@ art.on('ready', () => {
 
 -   类型: `Object`
 
-管理业务层的对象
+管理控制栏的对象
 
 属性 `show` 可以控制控制栏是否显示
 
@@ -481,9 +490,9 @@ art.on('ready', () => {
 
 -   类型: `Object`
 
-管理提示信息的对象
+管理加载中的图标
 
-属性 `show` 可以控制菜单是否加载层
+属性 `show` 可以控制是否显示加载中的图标
 
 <div className="run-code">▶ Run Code</div>
 
