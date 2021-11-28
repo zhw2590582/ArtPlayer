@@ -1,4 +1,4 @@
-import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle } from './dom';
+import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle, inverseClass } from './dom';
 import { has, def } from './property';
 import { errorHandle } from './error';
 
@@ -97,7 +97,12 @@ export default class Component {
         append($ref, $value);
 
         const list = option.selector
-            .map((item, index) => `<div class="art-selector-item" data-index="${index}">${item.html}</div>`)
+            .map(
+                (item, index) =>
+                    `<div class="art-selector-item ${item.default ? 'art-current' : ''}" data-index="${index}">${
+                        item.html
+                    }</div>`,
+            )
             .join('');
         const $list = document.createElement('div');
         addClass($list, 'art-selector-list');
@@ -115,6 +120,7 @@ export default class Component {
             const path = event.composedPath() || [];
             const $item = path.find((item) => hasClass(item, 'art-selector-item'));
             if (!$item) return;
+            inverseClass($item, 'art-current');
             const index = Number($item.dataset.index);
             const find = option.selector[index] || {};
             $value.innerText = $item.innerText;

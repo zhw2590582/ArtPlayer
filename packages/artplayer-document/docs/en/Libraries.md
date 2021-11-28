@@ -1,5 +1,5 @@
 ---
-title: Third party library
+title: Third party librarys
 sidebar_position: 7
 slug: /libraries
 ---

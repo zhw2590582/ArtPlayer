@@ -1,3 +1,4 @@
+/* eslint-disable */
 import $ from "autocomplete.js/zepto";
 
 const utils = {

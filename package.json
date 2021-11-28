@@ -10,7 +10,7 @@
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "start": "npx cross-env NODE_ENV=development npx servor docs index.html 8081 5000",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
-    "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n ",
+    "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n",
     "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "npx eslint packages/*/src",
     "sizereport": "npx sizereport --config"
@@ -36,6 +36,7 @@
     "@babel/plugin-external-helpers": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
     "@babel/runtime": "^7.16.3",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^21.0.1",

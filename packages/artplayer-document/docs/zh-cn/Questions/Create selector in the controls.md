@@ -17,6 +17,7 @@ var art = new Artplayer({
             html: 'Subtitle 01',
             selector: [
                 {
+                    default: true,
                     html: '<span style="color:red">Subtitle 01</span>',
                     url: '/assets/sample/subtitle.srt?id=1',
                 },

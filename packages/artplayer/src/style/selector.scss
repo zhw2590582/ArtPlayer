@@ -21,6 +21,10 @@
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.1);
                 }
+                &:hover,
+                &.art-current {
+                    color: #00c9ff;
+                }
             }
         }
         &:hover .art-selector-list {

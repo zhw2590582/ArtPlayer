@@ -1,5 +1,5 @@
 ---
-title: Static property
+title: Static propertys
 sidebar_position: 5
 slug: /class
 ---

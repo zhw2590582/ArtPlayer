@@ -1,5 +1,5 @@
 ---
-title: Advanced property
+title: Advanced propertys
 sidebar_position: 4
 slug: /advance
 ---

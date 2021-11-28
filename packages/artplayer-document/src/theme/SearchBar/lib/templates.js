@@ -1,3 +1,4 @@
+/* eslint-disable */
 const prefix = 'algolia-docsearch';
 const suggestionPrefix = `${prefix}-suggestion`;
 const footerPrefix = `${prefix}-footer`;

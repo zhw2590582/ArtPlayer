@@ -1,9 +1,6 @@
 {
     "parser": "@babel/eslint-parser",
-    "extends": [
-        "standard",
-        "prettier"
-    ],
+    "extends": ["standard", "prettier"],
     "env": {
         "browser": true,
         "es6": true
@@ -28,6 +25,9 @@
     "parserOptions": {
         "sourceType": "module",
         "ecmaVersion": 8,
-        "requireConfigFile": false
+        "requireConfigFile": false,
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        }
     }
 }
