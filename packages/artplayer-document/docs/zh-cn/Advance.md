@@ -80,6 +80,26 @@ art.on('ready', () => {
 });
 ```
 
+## query
+
+-   类型: `Function`
+
+等于 `art.template.query`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    var $video = art.query('.art-video');
+    console.info($video);
+});
+```
+
 ## storage
 
 -   类型: `Object`

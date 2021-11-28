@@ -814,6 +814,7 @@
       _classCallCheck(this, Template);
 
       this.art = art;
+      this.art.query = this.query.bind(this);
 
       if (art.option.container instanceof Element) {
         this.$container = art.option.container;
@@ -1431,6 +1432,7 @@
         player.flip = 'normal';
         player.autoSize = option.autoSize;
         player.currentTime = currentTime;
+        art.notice.show = '';
 
         if (playing) {
           player.play();
@@ -4050,6 +4052,7 @@
     _createClass(Notice, [{
       key: "show",
       set: function set(msg) {
+        if (!msg) return removeClass($player, 'art-notice-show');
         var _this$art$template = this.art.template,
             $player = _this$art$template.$player,
             $noticeInner = _this$art$template.$noticeInner;

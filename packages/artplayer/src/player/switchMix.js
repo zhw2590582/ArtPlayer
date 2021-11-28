@@ -14,6 +14,7 @@ export default function switchMix(art, player) {
             player.flip = 'normal';
             player.autoSize = option.autoSize;
             player.currentTime = currentTime;
+            art.notice.show = '';
             if (playing) {
                 player.play();
             }

@@ -3,6 +3,7 @@ import { errorHandle, query, addClass } from './utils';
 export default class Template {
     constructor(art) {
         this.art = art;
+        this.art.query = this.query.bind(this);
 
         if (art.option.container instanceof Element) {
             this.$container = art.option.container;
