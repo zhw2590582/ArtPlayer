@@ -2517,8 +2517,8 @@
         append($value, option.html);
         $ref.innerText = '';
         append($ref, $value);
-        var list = option.selector.map(function (item) {
-          return "<div class=\"art-selector-item\">".concat(item.name, "</div>");
+        var list = option.selector.map(function (item, index) {
+          return "<div class=\"art-selector-item\" data-index=\"".concat(index, "\">").concat(item.html, "</div>");
         }).join('');
         var $list = document.createElement('div');
         addClass($list, 'art-selector-list');
@@ -2526,27 +2526,34 @@
         append($ref, $list);
 
         var setLeft = function setLeft() {
-          $list.style.left = "-".concat(getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2, "px");
+          var left = getStyle($ref, 'width') / 2 - getStyle($list, 'width') / 2;
+          console.log(getStyle($list, 'width'), getStyle($ref, 'width'));
+          $list.style.left = "".concat(left, "px");
         };
 
         hover($ref, setLeft);
-        proxy($ref, 'click', function (event) {
-          if (hasClass(event.target, 'art-selector-item')) {
-            var name = event.target.innerText;
-            if ($value.innerText === name) return;
-            var find = option.selector.find(function (item) {
-              return item.name === name;
-            });
-            $value.innerText = name;
+        proxy($list, 'click', function (event) {
+          var path = event.composedPath() || [];
+          var $item = path.find(function (item) {
+            return hasClass(item, 'art-selector-item');
+          });
+
+          if ($item) {
+            var index = Number($item.dataset.index);
+            var find = option.selector[index] || {};
+            $value.innerText = $item.innerText;
+
+            if (option.onSelect) {
+              var result = option.onSelect.call(_this2.art, find);
+
+              if (typeof result === 'string') {
+                $value.innerHTML = result;
+              }
+            }
+
             setLeft();
 
-            if (find) {
-              if (option.onSelect) {
-                option.onSelect.call(_this2.art, find);
-              }
-
-              _this2.art.emit('selector', find);
-            }
+            _this2.art.emit('selector', find);
           }
         });
       }

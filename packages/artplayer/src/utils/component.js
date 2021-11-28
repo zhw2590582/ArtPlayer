@@ -96,31 +96,37 @@ export default class Component {
         $ref.innerText = '';
         append($ref, $value);
 
-        const list = option.selector.map((item) => `<div class="art-selector-item">${item.name}</div>`).join('');
+        const list = option.selector
+            .map((item, index) => `<div class="art-selector-item" data-index="${index}">${item.html}</div>`)
+            .join('');
         const $list = document.createElement('div');
         addClass($list, 'art-selector-list');
         append($list, list);
         append($ref, $list);
 
         const setLeft = () => {
-            $list.style.left = `-${getStyle($list, 'width') / 2 - getStyle($ref, 'width') / 2}px`;
+            const left = getStyle($ref, 'width') / 2 - getStyle($list, 'width') / 2;
+            console.log(getStyle($list, 'width'), getStyle($ref, 'width'));
+            $list.style.left = `${left}px`;
         };
 
         hover($ref, setLeft);
 
-        proxy($ref, 'click', (event) => {
-            if (hasClass(event.target, 'art-selector-item')) {
-                const name = event.target.innerText;
-                if ($value.innerText === name) return;
-                const find = option.selector.find((item) => item.name === name);
-                $value.innerText = name;
-                setLeft();
-                if (find) {
-                    if (option.onSelect) {
-                        option.onSelect.call(this.art, find);
+        proxy($list, 'click', (event) => {
+            const path = event.composedPath() || [];
+            const $item = path.find((item) => hasClass(item, 'art-selector-item'));
+            if ($item) {
+                const index = Number($item.dataset.index);
+                const find = option.selector[index] || {};
+                $value.innerText = $item.innerText;
+                if (option.onSelect) {
+                    const result = option.onSelect.call(this.art, find);
+                    if (typeof result === 'string') {
+                        $value.innerHTML = result;
                     }
-                    this.art.emit('selector', find);
                 }
+                setLeft();
+                this.art.emit('selector', find);
             }
         });
     }
