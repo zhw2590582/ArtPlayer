@@ -23,6 +23,11 @@ module.exports = {
                     label: 'Online Editor',
                 },
                 {
+                    href: 'https://artplayer.org',
+                    position: 'left',
+                    label: 'Danmuku Demo',
+                },
+                {
                     href: 'https://github.com/zhw2590582/ArtPlayer',
                     position: 'left',
                     label: 'Github',
