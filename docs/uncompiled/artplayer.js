@@ -2537,24 +2537,22 @@
           var $item = path.find(function (item) {
             return hasClass(item, 'art-selector-item');
           });
+          if (!$item) return;
+          var index = Number($item.dataset.index);
+          var find = option.selector[index] || {};
+          $value.innerText = $item.innerText;
 
-          if ($item) {
-            var index = Number($item.dataset.index);
-            var find = option.selector[index] || {};
-            $value.innerText = $item.innerText;
+          if (option.onSelect) {
+            var result = option.onSelect.call(_this2.art, find, $item);
 
-            if (option.onSelect) {
-              var result = option.onSelect.call(_this2.art, find);
-
-              if (typeof result === 'string') {
-                $value.innerHTML = result;
-              }
+            if (typeof result === 'string') {
+              $value.innerHTML = result;
             }
-
-            setLeft();
-
-            _this2.art.emit('selector', find);
           }
+
+          setLeft();
+
+          _this2.art.emit('selector', find, $item);
         });
       }
     }]);

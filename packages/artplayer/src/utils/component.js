@@ -115,19 +115,18 @@ export default class Component {
         proxy($list, 'click', (event) => {
             const path = event.composedPath() || [];
             const $item = path.find((item) => hasClass(item, 'art-selector-item'));
-            if ($item) {
-                const index = Number($item.dataset.index);
-                const find = option.selector[index] || {};
-                $value.innerText = $item.innerText;
-                if (option.onSelect) {
-                    const result = option.onSelect.call(this.art, find);
-                    if (typeof result === 'string') {
-                        $value.innerHTML = result;
-                    }
+            if (!$item) return;
+            const index = Number($item.dataset.index);
+            const find = option.selector[index] || {};
+            $value.innerText = $item.innerText;
+            if (option.onSelect) {
+                const result = option.onSelect.call(this.art, find, $item);
+                if (typeof result === 'string') {
+                    $value.innerHTML = result;
                 }
-                setLeft();
-                this.art.emit('selector', find);
             }
+            setLeft();
+            this.art.emit('selector', find, $item);
         });
     }
 }
