@@ -1,12 +1,12 @@
 ---
-title: 第三方库
+title: Third party library
 sidebar_position: 7
 slug: /libraries
 ---
 
 ## flv.js
 
--   主页: [https://github.com/Bilibili/flv.js](https://github.com/Bilibili/flv.js)
+-   Homepage: [https://github.com/Bilibili/flv.js](https://github.com/Bilibili/flv.js)
 
 <div className="run-code" data-libs="https://cdn.jsdelivr.net/npm/flv.js@1.6.2/dist/flv.min.js">▶ Run Code</div>
 
@@ -30,7 +30,7 @@ var art = new Artplayer({
 
 ## hls.js
 
--   主页: [https://github.com/video-dev/hls.js](https://github.com/video-dev/hls.js)
+-   Homepage: [https://github.com/video-dev/hls.js](https://github.com/video-dev/hls.js)
 
 <div className="run-code" data-libs="https://cdn.jsdelivr.net/npm/hls.js@1.1.1/dist/hls.min.js">▶ Run Code</div>
 
@@ -51,7 +51,7 @@ var art = new Artplayer({
 
 ## dash.js
 
--   主页: [https://github.com/Dash-Industry-Forum/dash.js](https://github.com/Dash-Industry-Forum/dash.js)
+-   Homepage: [https://github.com/Dash-Industry-Forum/dash.js](https://github.com/Dash-Industry-Forum/dash.js)
 
 <div className="run-code" data-libs="https://cdn.jsdelivr.net/npm/dashjs@4.1.0/dist/dash.all.debug.min.js">▶ Run Code</div>
 
@@ -71,7 +71,7 @@ var art = new Artplayer({
 
 ## shaka-player
 
--   主页: [https://github.com/google/shaka-player](https://github.com/google/shaka-player)
+-   Homepage: [https://github.com/google/shaka-player](https://github.com/google/shaka-player)
 
 <div className="run-code" data-libs="https://cdn.jsdelivr.net/npm/shaka-player@3.2.1/dist/shaka-player.compiled.min.js">▶ Run Code</div>
 
@@ -92,7 +92,7 @@ var art = new Artplayer({
 
 ## webtorrent
 
--   主页: [https://github.com/webtorrent/webtorrent](https://github.com/webtorrent/webtorrent)
+-   Homepage: [https://github.com/webtorrent/webtorrent](https://github.com/webtorrent/webtorrent)
 
 <div className="run-code" data-libs="https://cdn.jsdelivr.net/npm/webtorrent@1.5.8/webtorrent.min.js">▶ Run Code</div>
 

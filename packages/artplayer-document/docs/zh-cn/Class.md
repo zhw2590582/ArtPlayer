@@ -69,7 +69,7 @@ console.info(Object.keys(Artplayer.utils))
 
 -   类型: `Object`
 
-存放了播放器的原生属性和方法
+存放了视频的原生属性和方法
 
 <div className="run-code">▶ Run Code</div>
 
@@ -111,7 +111,7 @@ console.info(Artplayer.option)
 
 -   类型: `String`
 
-播放器默认 `Html` 字符串，通常用于 `SSR` 的提前渲染，更多信息请访问 [配合SSR使用](/document/zh-cn/Questions/ssr)
+播放器默认 `Html` 字符串，通常用于 `SSR` 的提前渲染
 
 <div className="run-code">▶ Run Code</div>
 

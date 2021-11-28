@@ -33,6 +33,19 @@ slug: /zh-cn/events
 | `video:volumechange`   | The volume has changed.                                                                                                                                                     |
 | `video:waiting`        | Playback has stopped because of a temporary lack of data                                                                                                                    |
 
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('video:play', (...args) => {
+    console.info(args);
+});
+```
+
 ## 自定义事件
 
 ### ready
@@ -106,6 +119,12 @@ art.on('ready', (...args) => {
     art.seek = 5;
 });
 ```
+
+:::tip 提示
+
+设置 `art.currentTime` 时不会触发 `seek` 事件
+
+:::
 
 ### volume
 
@@ -195,8 +214,10 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('hover', (...args) => {
-    console.info(args);
+art.on('hover', (state) => {
+    // state 为true时，鼠标从外面移进播放器
+    // state 为false时，鼠标从播放器移出外面
+    console.info(state);
 });
 ```
 

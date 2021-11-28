@@ -1,16 +1,16 @@
 ---
-title: 实例事件
+title: Common events
 sidebar_position: 6
 slug: /events
 ---
 
-播放器的事件分为两种，一种视频的原生事件，另外一种是自定义的事件。原生事件来自 `video` 元素，是直接监听`video`元素的原始事件，为了让它和自定义事件区分，原生事件添加了前缀 `video:`
+The event of the player is divided into two, a `native event` of a video, and another is a `custom event`. The `native event` comes from `Video Elements`, is the original event of the `Video Element`, in order to distinguish it and `custom events`, the native event adds a prefix `video:`
 
-## 原生事件
+## Native event
 
-更多信息请阅读 [Mozilla Video Events](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#events)
+For more information, please read [Mozilla Video Events](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#events)
 
-| 事件名字               | 触发时间                                                                                                                                                                    |
+| Event name             | Fired When                                                                                                                                                                  |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `video:canplay`        | The browser can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content. |
 | `video:canplaythrough` | The browser estimates it can play the media up to its end without stopping for content buffering.                                                                           |
@@ -33,11 +33,24 @@ slug: /events
 | `video:volumechange`   | The volume has changed.                                                                                                                                                     |
 | `video:waiting`        | Playback has stopped because of a temporary lack of data                                                                                                                    |
 
-## 自定义事件
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('video:play', (...args) => {
+    console.info(args);
+});
+```
+
+## Custom event
 
 ### ready
 
-当实例初始化完成，并视频可以被播放时触发，只会触发一个，哪怕视频地址变化了
+Fired when the player is initialized, and the video can be played
 
 <div className="run-code">▶ Run Code</div>
 
@@ -54,7 +67,7 @@ art.on('ready', (...args) => {
 
 ### play
 
-在视频被播放后触发
+Fired after the video is played
 
 <div className="run-code">▶ Run Code</div>
 
@@ -71,7 +84,7 @@ art.on('play', (...args) => {
 
 ### pause
 
-在视频被暂停后触发
+Fired after the video is pause
 
 <div className="run-code">▶ Run Code</div>
 
@@ -88,7 +101,7 @@ art.on('pause', (...args) => {
 
 ### seek
 
-在视频进行时间跳转时触发
+Fired when the video is time jump
 
 <div className="run-code">▶ Run Code</div>
 
@@ -107,9 +120,15 @@ art.on('ready', (...args) => {
 });
 ```
 
+:::tip Tip
+
+Set the `art.currentTime` will not fired the `seek` event
+
+:::
+
 ### volume
 
-在视频音量变化时触发
+Fired when the video volume changes
 
 <div className="run-code">▶ Run Code</div>
 
@@ -130,7 +149,7 @@ art.on('ready', (...args) => {
 
 ### destroy
 
-在播放器实例被销毁时触发
+Fired when the player instance is destroyed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -151,7 +170,7 @@ art.on('ready', (...args) => {
 
 ### focus
 
-在播放器获得焦点时触发，如点击了播放器
+Fired when the player gets focus, if you click on the player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -168,7 +187,7 @@ art.on('focus', (...args) => {
 
 ### blur
 
-在播放器失去焦点时触发，如点击播放器以外的区域
+Fired when the player loses focus, such as the area other than the player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -185,7 +204,7 @@ art.on('blur', (...args) => {
 
 ### hover
 
-在鼠标移动进播放器时触发
+Fired when mouse moves player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -195,14 +214,16 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('hover', (...args) => {
-    console.info(args);
+art.on('hover', (state) => {
+    // state for true, the mouse moves from the outside to the player
+    // state for false, the mouse moves from the player to the outside
+    console.info(state);
 });
 ```
 
 ### resize
 
-在播放器尺寸变化时触发
+Fired when the player is changed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -220,7 +241,7 @@ art.on('resize', (...args) => {
 
 ### mousemove
 
-在鼠标经过播放器时触发，和`hover`不一样，它会触发多次
+Fired when the mouse is played, this and `hover` is different, it will trigger multiple times
 
 <div className="run-code">▶ Run Code</div>
 
@@ -237,7 +258,7 @@ art.on('mousemove', (...args) => {
 
 ### url
 
-在视频地址变化时触发
+Fired when the video url changes
 
 <div className="run-code">▶ Run Code</div>
 
@@ -258,7 +279,7 @@ art.on('ready', (...args) => {
 
 ### fullscreen
 
-在播放器窗口全屏时触发
+Fired when the player window is full screen
 
 <div className="run-code">▶ Run Code</div>
 
@@ -276,7 +297,7 @@ art.on('fullscreen', (...args) => {
 
 ### fullscreenWeb
 
-在播放器网页全屏时触发
+Fired when player webpage full screen
 
 <div className="run-code">▶ Run Code</div>
 
@@ -294,7 +315,7 @@ art.on('fullscreenWeb', (...args) => {
 
 ### hotkey
 
-在快捷键被使用时触发
+Trigger when hotkey are used
 
 <div className="run-code">▶ Run Code</div>
 

@@ -1,9 +1,9 @@
 ---
-title: 在控制栏添加列表
+title: Add a list in the controls
 sidebar_position: 1
 ---
 
-有时你需要在控制栏添加列表，那么你可以在添加控件的时候使用 `selector` 和 `onSelect` 属性
+Sometimes you need to add a list in the controls, then you can use the `selector` and `onSelect` attribute when adding controls
 
 <div className="run-code">▶ Run Code</div>
 
@@ -30,7 +30,7 @@ var art = new Artplayer({
                     name: $dom.innerText,
                 });
 
-                return '你点击了' + item.html;
+                return 'You click' + item.html;
             },
         },
     ],
