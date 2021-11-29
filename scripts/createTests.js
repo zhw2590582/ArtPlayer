@@ -24,7 +24,7 @@ const htmls = glob
     .map((item) => item.map((pre) => parse(pre.innerHTML).textContent))
     .flat(Infinity)
     .filter((item) => item.trim().startsWith('var art'))
-    .map((item) => item.replace(/\/assets/g, 'https://artplayer.org/assets'))
+    .map((item) => item.replace(/\/assets/g, './assets'))
     .map((item) => item.replace(/\s{3}/g, '\n  '));
 
 const tests = `
@@ -38,10 +38,13 @@ describe('Document', function() {
     ${htmls
         .map((item, index) => {
             return `
-    it('Test${index}', function() {
+    it('Test${index}', function(done) {
         ${item}
 
-        expect(art.id).to.be.an('number');
+        setTimeout(() => {
+            expect(art.id).to.be.an('number');
+            done();
+        }, 1000);
     });`;
         })
         .join('\n\n')}

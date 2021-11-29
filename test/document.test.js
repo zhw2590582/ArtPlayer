@@ -5,61 +5,73 @@ describe("Document", function () {
     });
   });
 
-  it("Test0", function () {
+  it("Test0", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       var $video = art.template.query(".art-video");
       console.info($video);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test1", function () {
+  it("Test1", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       var $video = art.query(".art-video");
       console.info($video);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test2", function () {
+  it("Test2", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.storage.set("your-key", "your-value");
     art.storage.get("your-key");
     art.storage.del("your-key");
     art.storage.clean();
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test3", function () {
+  it("Test3", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.i18n.get("Play"));
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test4", function () {
+  it("Test4", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       lang: "jp",
     });
     art.i18n.update({
@@ -83,15 +95,18 @@ describe("Document", function () {
       },
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test5", function () {
+  it("Test5", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       subtitle: {
-        url: "https://artplayer.org/assets/sample/subtitle.srt",
+        url: "./assets/sample/subtitle.srt",
 
         encoding: "utf-8",
 
@@ -115,15 +130,18 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test6", function () {
+  it("Test6", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       subtitle: {
-        url: "https://artplayer.org/assets/sample/subtitle.srt",
+        url: "./assets/sample/subtitle.srt",
 
         encoding: "utf-8",
 
@@ -139,19 +157,22 @@ describe("Document", function () {
     art.on("ready", () => {
       art.seek = 20;
       setTimeout(() => {
-        art.subtitle.switch("https://artplayer.org/assets/sample/subtitle.srt");
+        art.subtitle.switch("./assets/sample/subtitle.srt");
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test7", function () {
+  it("Test7", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
-    var img = "https://artplayer.org/assets/sample/layer.png";
+    var img = "./assets/sample/layer.png";
     art.on("ready", () => {
       setTimeout(() => {
         art.layers.add({
@@ -170,26 +191,32 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test8", function () {
+  it("Test8", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.notice.show = "自定义提示信息1";
       art.notice.show = "自定义提示信息2";
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test9", function () {
+  it("Test9", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       setTimeout(() => {
@@ -197,13 +224,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test10", function () {
+  it("Test10", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       setTimeout(() => {
@@ -223,13 +253,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test11", function () {
+  it("Test11", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.contextmenu.show = true;
@@ -238,13 +271,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test12", function () {
+  it("Test12", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.contextmenu.show = true;
@@ -261,13 +297,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test13", function () {
+  it("Test13", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.loading.show = true;
@@ -276,13 +315,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test14", function () {
+  it("Test14", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.mask.show = true;
@@ -291,13 +333,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test15", function () {
+  it("Test15", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.hotkey.add(65, () => {
@@ -308,13 +353,16 @@ describe("Document", function () {
       });
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test16", function () {
+  it("Test16", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       setting: true,
       autoSize: true,
     });
@@ -326,13 +374,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test17", function () {
+  it("Test17", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       setting: true,
       autoSize: true,
     });
@@ -350,73 +401,91 @@ describe("Document", function () {
       });
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test18", function () {
+  it("Test18", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(Artplayer.instances.length);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test19", function () {
+  it("Test19", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("video:play", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test20", function () {
+  it("Test20", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test21", function () {
+  it("Test21", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("play", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test22", function () {
+  it("Test22", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("pause", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test23", function () {
+  it("Test23", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("seek", (...args) => {
       console.info(args);
@@ -425,13 +494,16 @@ describe("Document", function () {
       art.seek = 5;
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test24", function () {
+  it("Test24", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("volume", (...args) => {
       console.info(args);
@@ -440,13 +512,16 @@ describe("Document", function () {
       art.volume = 0.5;
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test25", function () {
+  it("Test25", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("destroy", (...args) => {
       console.info(args);
@@ -455,37 +530,46 @@ describe("Document", function () {
       art.destroy();
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test26", function () {
+  it("Test26", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("focus", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test27", function () {
+  it("Test27", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("blur", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test28", function () {
+  it("Test28", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("hover", (state) => {
       // state 为true时，鼠标从外面移进播放器
@@ -493,256 +577,325 @@ describe("Document", function () {
       console.info(state);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test29", function () {
+  it("Test29", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       autoSize: true,
     });
     art.on("resize", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test30", function () {
+  it("Test30", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("mousemove", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test31", function () {
+  it("Test31", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("url", (...args) => {
       console.info(args);
     });
     art.on("ready", (...args) => {
-      art.url = "https://artplayer.org/assets/sample/video.mp4?t=0";
+      art.url = "./assets/sample/video.mp4?t=0";
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test32", function () {
+  it("Test32", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       fullscreen: true,
     });
     art.on("fullscreen", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test33", function () {
+  it("Test33", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       fullscreenWeb: true,
     });
     art.on("fullscreenWeb", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test34", function () {
+  it("Test34", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("hotkey", (...args) => {
       console.info(args);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test35", function () {
+  it("Test35", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test36", function () {
+  it("Test36", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       // container: document.querySelector('.artplayer-app'),
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test37", function () {
+  it("Test37", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test38", function () {
+  it("Test38", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
-      poster: "https://artplayer.org/assets/sample/poster.jpg",
+      url: "./assets/sample/video.mp4",
+      poster: "./assets/sample/poster.jpg",
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test39", function () {
+  it("Test39", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       title: "【新海诚动画】『秒速5センチメートル』",
       screenshot: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test40", function () {
+  it("Test40", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       theme: "#ffad00",
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test41", function () {
+  it("Test41", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       volume: 0.5,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test42", function () {
+  it("Test42", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       isLive: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test43", function () {
+  it("Test43", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       muted: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test44", function () {
+  it("Test44", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       autoplay: true,
       muted: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test45", function () {
+  it("Test45", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       autoMini: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test46", function () {
+  it("Test46", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       loop: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test47", function () {
+  it("Test47", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       flip: true,
       setting: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test48", function () {
+  it("Test48", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       rotate: true,
       setting: true,
       autoSize: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test49", function () {
+  it("Test49", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       playbackRate: true,
       setting: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test50", function () {
+  it("Test50", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       aspectRatio: true,
       setting: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test51", function () {
+  it("Test51", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       screenshot: true,
       // 可选
       moreVideoAttr: {
@@ -750,97 +903,124 @@ describe("Document", function () {
       },
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test52", function () {
+  it("Test52", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       setting: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test53", function () {
+  it("Test53", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       hotkey: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test54", function () {
+  it("Test54", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       pip: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test55", function () {
+  it("Test55", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       mutex: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test56", function () {
+  it("Test56", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       fullscreen: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test57", function () {
+  it("Test57", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       fullscreenWeb: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test58", function () {
+  it("Test58", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       subtitle: {
-        url: "https://artplayer.org/assets/sample/subtitle.srt",
+        url: "./assets/sample/subtitle.srt",
       },
       setting: true,
       subtitleOffset: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test59", function () {
+  it("Test59", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       miniProgressBar: true,
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test60", function () {
+  it("Test60", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       localVideo: true,
       controls: [
         {
@@ -857,13 +1037,16 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test61", function () {
+  it("Test61", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       localSubtitle: true,
       controls: [
         {
@@ -880,13 +1063,16 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test62", function () {
+  it("Test62", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       setting: true,
       settings: [
         {
@@ -929,13 +1115,16 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test63", function () {
+  it("Test63", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       contextmenu: [
         {
           html: "自定义菜单",
@@ -952,13 +1141,16 @@ describe("Document", function () {
       art.contextmenu.show = true;
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test64", function () {
+  it("Test64", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       controls: [
         {
           disable: false,
@@ -1004,37 +1196,43 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test65", function () {
+  it("Test65", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       quality: [
         {
           default: true,
 
           html: "SD 480P",
 
-          url: "https://artplayer.org/assets/sample/video.mp4",
+          url: "./assets/sample/video.mp4",
         },
 
         {
           html: "HD 720P",
 
-          url: "https://artplayer.org/assets/sample/video.mp4",
+          url: "./assets/sample/video.mp4",
         },
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test66", function () {
+  it("Test66", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       highlight: [
         {
           time: 60,
@@ -1068,28 +1266,34 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test67", function () {
+  it("Test67", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       whitelist: ["iPhone OS 11"],
       // whitelist: ['*'],
       // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
       // whitelist: [/iPhone OS 11/gi],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test68", function () {
+  it("Test68", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       thumbnails: {
-        url: "https://artplayer.org/assets/sample/thumbnails.png",
+        url: "./assets/sample/thumbnails.png",
 
         number: 100,
 
@@ -1101,15 +1305,18 @@ describe("Document", function () {
       },
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test69", function () {
+  it("Test69", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       subtitle: {
-        url: "https://artplayer.org/assets/sample/subtitle.srt",
+        url: "./assets/sample/subtitle.srt",
 
         encoding: "utf-8",
 
@@ -1123,13 +1330,16 @@ describe("Document", function () {
       },
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test70", function () {
+  it("Test70", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       moreVideoAttr: {
         "webkit-playsinline": true,
 
@@ -1137,17 +1347,20 @@ describe("Document", function () {
       },
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test71", function () {
+  it("Test71", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       icons: {
-        loading: '<img src="https://artplayer.org/assets/img/ploading.gif">',
+        loading: '<img src="./assets/img/ploading.gif">',
 
-        state: '<img src="https://artplayer.org/assets/img/state.png">',
+        state: '<img src="./assets/img/state.png">',
 
         play: "",
 
@@ -1171,23 +1384,29 @@ describe("Document", function () {
       },
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test72", function () {
+  it("Test72", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.flv",
+      url: "./assets/sample/video.flv",
       type: "flv",
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test73", function () {
+  it("Test73", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.flv",
+      url: "./assets/sample/video.flv",
       customType: {
         flv: function (video, url, art) {
           // video: 视频dom元素
@@ -1197,23 +1416,29 @@ describe("Document", function () {
       },
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test74", function () {
+  it("Test74", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       lang: "en",
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test75", function () {
+  it("Test75", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       autoSize: true,
       setting: true,
       playbackRate: true,
@@ -1277,29 +1502,35 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test76", function () {
+  it("Test76", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       plugins: [
         artplayerPluginDanmuku({
           // 弹幕 XML 文件，和 Bilibili 网站的弹幕格式一致
 
-          danmuku: "https://artplayer.org/assets/sample/danmuku.xml",
+          danmuku: "./assets/sample/danmuku.xml",
         }),
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test77", function () {
+  it("Test77", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       plugins: [
         artplayerPluginDanmuku({
           // 使用 Promise 异步返回
@@ -1331,16 +1562,19 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test78", function () {
+  it("Test78", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       plugins: [
         artplayerPluginDanmuku({
-          danmuku: "https://artplayer.org/assets/sample/danmuku.xml",
+          danmuku: "./assets/sample/danmuku.xml",
         }),
       ],
       controls: [
@@ -1366,16 +1600,19 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test79", function () {
+  it("Test79", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       plugins: [
         artplayerPluginDanmuku({
-          danmuku: "https://artplayer.org/assets/sample/danmuku.xml",
+          danmuku: "./assets/sample/danmuku.xml",
         }),
       ],
       controls: [
@@ -1399,16 +1636,19 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test80", function () {
+  it("Test80", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       plugins: [
         artplayerPluginDanmuku({
-          danmuku: "https://artplayer.org/assets/sample/danmuku.xml",
+          danmuku: "./assets/sample/danmuku.xml",
         }),
       ],
       controls: [
@@ -1436,16 +1676,19 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test81", function () {
+  it("Test81", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       plugins: [
         artplayerPluginDanmuku({
-          danmuku: "https://artplayer.org/assets/sample/danmuku.xml",
+          danmuku: "./assets/sample/danmuku.xml",
         }),
       ],
       controls: [
@@ -1473,26 +1716,32 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test82", function () {
+  it("Test82", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       muted: true,
     });
     art.on("ready", () => {
       art.play();
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test83", function () {
+  it("Test83", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       muted: true,
     });
     art.on("ready", () => {
@@ -1502,13 +1751,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test84", function () {
+  it("Test84", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       muted: true,
     });
     art.on("ready", () => {
@@ -1518,37 +1770,46 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test85", function () {
+  it("Test85", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.seek = 5;
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test86", function () {
+  it("Test86", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.forward = 5;
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test87", function () {
+  it("Test87", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.seek = 5;
@@ -1557,13 +1818,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test88", function () {
+  it("Test88", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.volume);
@@ -1571,63 +1835,69 @@ describe("Document", function () {
       console.info(art.volume);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test89", function () {
+  it("Test89", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.url);
-      art.url = "https://artplayer.org/assets/sample/video.mp4?t=0";
+      art.url = "./assets/sample/video.mp4?t=0";
       console.info(art.url);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test90", function () {
+  it("Test90", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.seek = 10;
       setTimeout(() => {
-        art.switchUrl(
-          "https://artplayer.org/assets/sample/video.mp4?t=0",
-          "新视频名字"
-        );
+        art.switchUrl("./assets/sample/video.mp4?t=0", "新视频名字");
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test91", function () {
+  it("Test91", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.seek = 10;
       setTimeout(() => {
-        art.switchQuality(
-          "https://artplayer.org/assets/sample/video.mp4?t=0",
-          "新视频地址"
-        );
+        art.switchQuality("./assets/sample/video.mp4?t=0", "新视频地址");
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test92", function () {
+  it("Test92", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.muted);
@@ -1635,13 +1905,16 @@ describe("Document", function () {
       console.info(art.muted);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test93", function () {
+  it("Test93", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.currentTime);
@@ -1649,64 +1922,79 @@ describe("Document", function () {
       console.info(art.currentTime);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test94", function () {
+  it("Test94", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.duration);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test95", function () {
+  it("Test95", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.seek = 10;
       art.screenshot();
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test96", function () {
+  it("Test96", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.seek = 10;
       art.getDataURL().then((url) => console.info(url));
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test97", function () {
+  it("Test97", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.seek = 10;
       art.getBlobUrl().then((url) => console.info(url));
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test98", function () {
+  it("Test98", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       fullscreen: true,
     });
     art.on("ready", () => {
@@ -1716,13 +2004,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test99", function () {
+  it("Test99", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       fullscreenWeb: true,
     });
     art.on("ready", () => {
@@ -1732,13 +2023,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test100", function () {
+  it("Test100", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       fullscreenWeb: true,
     });
     art.on("ready", () => {
@@ -1748,28 +2042,34 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test101", function () {
+  it("Test101", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
-      poster: "https://artplayer.org/assets/sample/poster.jpg",
+      url: "./assets/sample/video.mp4",
+      poster: "./assets/sample/poster.jpg",
     });
     art.on("ready", () => {
       console.info(art.poster);
-      art.poster = "https://artplayer.org/assets/sample/poster.jpg?t=0";
+      art.poster = "./assets/sample/poster.jpg?t=0";
       console.info(art.poster);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test102", function () {
+  it("Test102", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.mini = true;
@@ -1778,13 +2078,16 @@ describe("Document", function () {
       }, 3000);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test103", function () {
+  it("Test103", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       muted: true,
     });
     art.on("ready", () => {
@@ -1793,13 +2096,16 @@ describe("Document", function () {
       console.info(art.playing);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test104", function () {
+  it("Test104", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.autoSize);
@@ -1807,25 +2113,31 @@ describe("Document", function () {
       console.info(art.autoSize);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test105", function () {
+  it("Test105", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(JSON.stringify(art.rect));
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test106", function () {
+  it("Test106", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.flip);
@@ -1833,13 +2145,16 @@ describe("Document", function () {
       console.info(art.flip);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test107", function () {
+  it("Test107", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       autoSize: true,
     });
     art.on("ready", () => {
@@ -1848,13 +2163,16 @@ describe("Document", function () {
       console.info(art.rotate);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test108", function () {
+  it("Test108", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.playbackRate);
@@ -1862,13 +2180,16 @@ describe("Document", function () {
       console.info(art.playbackRate);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test109", function () {
+  it("Test109", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.aspectRatio);
@@ -1876,13 +2197,16 @@ describe("Document", function () {
       console.info(art.aspectRatio);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test110", function () {
+  it("Test110", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       console.info(art.loop);
@@ -1890,25 +2214,31 @@ describe("Document", function () {
       console.info(art.loop);
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test111", function () {
+  it("Test111", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
       art.destroy();
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test112", function () {
+  it("Test112", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       controls: [
         {
           position: "right",
@@ -1921,13 +2251,13 @@ describe("Document", function () {
 
               html: '<span style="color:red">Subtitle 01</span>',
 
-              url: "https://artplayer.org/assets/sample/subtitle.srt?id=1",
+              url: "./assets/sample/subtitle.srt?id=1",
             },
 
             {
               html: '<span style="color:yellow">Subtitle 02</span>',
 
-              url: "https://artplayer.org/assets/sample/subtitle.srt?id=2",
+              url: "./assets/sample/subtitle.srt?id=2",
             },
           ],
 
@@ -1942,13 +2272,16 @@ describe("Document", function () {
       ],
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 
-  it("Test113", function () {
+  it("Test113", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: "https://artplayer.org/assets/sample/video.mp4",
+      url: "./assets/sample/video.mp4",
       setting: true,
     });
     art.on("ready", () => {
@@ -2002,6 +2335,9 @@ describe("Document", function () {
       var $setting1 = art.setting["setting1"];
     });
 
-    expect(art.id).to.be.an("number");
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+      done();
+    }, 1000);
   });
 });
