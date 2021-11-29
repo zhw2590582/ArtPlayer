@@ -31,6 +31,16 @@ var art = new Artplayer({
     moreVideoAttr: {
         crossOrigin: 'anonymous',
     },
+    settings: [
+        {
+            index: 1,
+            html: 'Custom setting',
+            click: function (setting) {
+                console.info('You clicked on the custom setting');
+                setting.show = false;
+            },
+        },
+    ],
     contextmenu: [
         {
             html: 'Custom menu',

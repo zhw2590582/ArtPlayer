@@ -1,5 +1,6 @@
 import { errorHandle } from '../utils';
 
+const a = 'array';
 const b = 'boolean';
 const s = 'string';
 const n = 'number';
@@ -20,12 +21,7 @@ const component = {
     click: `?${f}`,
     mounted: `?${f}`,
     tooltip: `?${s}`,
-    selector: [
-        {
-            default: `?${b}`,
-            html: s,
-        },
-    ],
+    selector: `?${a}`,
     onSelect: `?${f}`,
 };
 

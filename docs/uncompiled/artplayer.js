@@ -684,11 +684,11 @@
   function ownKeys$n(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$n(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$n(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$n(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  var a = 'array';
   var b = 'boolean';
   var s = 'string';
   var n = 'number';
   var o = 'object';
-  var a = 'array';
   var f = 'function';
   var r = 'regexp';
 
@@ -739,14 +739,14 @@
     miniProgressBar: b,
     localVideo: b,
     localSubtitle: b,
-    networkMonitor: b,
     useSSR: b,
     plugins: [f],
     whitelist: ["".concat(s, "|").concat(f, "|").concat(r)],
     layers: [component],
     contextmenu: [component],
+    settings: [component],
     controls: [_objectSpread$n(_objectSpread$n({}, component), {}, {
-      position: function position(value, type, paths) {
+      position: function position(value, _, paths) {
         var position = ['top', 'left', 'right'];
         return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters"));
       }
@@ -908,7 +908,7 @@
     }], [{
       key: "html",
       get: function get() {
-        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.0.0</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
+        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.0.1</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
       }
     }]);
 
@@ -1606,7 +1606,7 @@
 
   /*!
   * screenfull
-  * v5.0.2 - 2020-02-13
+  * v5.2.0 - 2021-11-03
   * (c) Sindre Sorhus; MIT License
   */
 
@@ -1689,7 +1689,7 @@
   	};
 
   	var screenfull = {
-  		request: function (element) {
+  		request: function (element, options) {
   			return new Promise(function (resolve, reject) {
   				var onFullScreenEntered = function () {
   					this.off('change', onFullScreenEntered);
@@ -1700,7 +1700,7 @@
 
   				element = element || document.documentElement;
 
-  				var returnPromise = element[fn.requestFullscreen]();
+  				var returnPromise = element[fn.requestFullscreen](options);
 
   				if (returnPromise instanceof Promise) {
   					returnPromise.then(onFullScreenEntered).catch(reject);
@@ -1728,8 +1728,8 @@
   				}
   			}.bind(this));
   		},
-  		toggle: function (element) {
-  			return this.isFullscreen ? this.exit() : this.request(element);
+  		toggle: function (element, options) {
+  			return this.isFullscreen ? this.exit() : this.request(element, options);
   		},
   		onchange: function (callback) {
   			this.on('change', callback);
@@ -3360,7 +3360,7 @@
 
   function version(option) {
     return _objectSpread$6(_objectSpread$6({}, option), {}, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.0.0</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.0.1</a>'
     });
   }
 
@@ -4303,8 +4303,8 @@
 
       if (option.setting) {
         art.once('ready', function () {
-          proxy($setting, 'click', function (e) {
-            if (e.target === $setting) {
+          proxy($setting, 'click', function (event) {
+            if (event.target === $setting) {
               _this.show = false;
             }
           });
@@ -4328,6 +4328,10 @@
             disable: !option.playbackRate,
             name: 'playbackRate'
           }));
+
+          option.settings.forEach(function (item) {
+            _this.add(item);
+          });
         });
         art.on('blur', function () {
           _this.show = false;
@@ -4794,7 +4798,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '4.0.0';
+        return '4.0.1';
       }
     }, {
       key: "env",
@@ -4869,11 +4873,11 @@
           miniProgressBar: false,
           localVideo: false,
           localSubtitle: false,
-          networkMonitor: false,
           useSSR: false,
           layers: [],
           contextmenu: [],
           controls: [],
+          settings: [],
           quality: [],
           highlight: [],
           plugins: [],
@@ -4904,7 +4908,7 @@
 
     return Artplayer;
   }(Emitter); // eslint-disable-next-line no-console
-  console.log('%c ArtPlayer %c 4.0.0 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 4.0.1 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 
