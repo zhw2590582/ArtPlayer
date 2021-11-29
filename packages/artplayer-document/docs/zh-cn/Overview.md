@@ -75,7 +75,7 @@ const Artplayer = require('artplayer');
 
 ### 与 `Vue` 使用
 
-[点击打开在线演示](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
+👉 [点击打开在线演示](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
 
 创建 `Artplayer` 组件: `Artplayer.vue`
 
@@ -154,7 +154,7 @@ export default {
 
 ### 与 `React` 使用
 
-[点击打开在线演示](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
+👉 [点击打开在线演示](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
 
 创建 `Artplayer` 组件: `Artplayer.jsx`
 

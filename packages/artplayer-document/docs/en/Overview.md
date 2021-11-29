@@ -82,7 +82,7 @@ The size of the player depends on the size of the `container`, so your `containe
 
 ### Use in `Vue`
 
-[Click to open an online demo](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
+👉 [Click to open an online demo](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
 
 Create component: `Artplayer.vue`
 
@@ -161,7 +161,7 @@ export default {
 
 ### Use in `React`
 
-[Click to open an online demo](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
+👉 [Click to open an online demo](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
 
 Create component: `Artplayer.jsx`
 
