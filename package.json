@@ -11,7 +11,7 @@
     "start": "npx cross-env NODE_ENV=development npx servor docs index.html 8081 5000",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n",
-    "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
+    "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index2.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "npx eslint packages/*/src",
     "sizereport": "npx sizereport --config"
   },
@@ -64,6 +64,7 @@
     "lerna": "^4.0.0",
     "mocha": "^9.1.3",
     "mocha-chrome": "^2.2.0",
+    "node-html-parser": "^5.1.0",
     "node-sass": "^6.0.1",
     "postcss": "^8.3.11",
     "rollup": "^2.60.1",
