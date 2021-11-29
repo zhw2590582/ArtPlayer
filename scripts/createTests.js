@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 const { parse } = require('node-html-parser');
+const prettier = require('prettier');
 
 const htmls = glob
     .sync(path.join(process.cwd(), 'docs/document/zh-cn/**/*.html'))
@@ -24,7 +25,7 @@ const htmls = glob
     .flat(Infinity)
     .filter((item) => item.trim().startsWith('var art'))
     .map((item) => item.replace(/\/assets/g, 'https://artplayer.org/assets'))
-    .map((item) => item.replace(/\s{3}/g, '\n      '));
+    .map((item) => item.replace(/\s{3}/g, '\n  '));
 
 const tests = `
 describe('Document', function() {
@@ -47,4 +48,5 @@ describe('Document', function() {
 });
 `;
 
-fs.writeFileSync(path.join(process.cwd(), 'test/document.test.js'), tests);
+const format = prettier.format(tests, { semi: true, parser: 'babel' });
+fs.writeFileSync(path.join(process.cwd(), 'test/document.test.js'), format);
