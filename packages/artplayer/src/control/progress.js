@@ -3,6 +3,7 @@ import {
     clamp,
     secondToTime,
     setStyle,
+    setStyles,
     getStyle,
     query,
     addClass,
@@ -30,15 +31,16 @@ export default function progress(option) {
             option: { highlight, theme },
             events: { proxy },
             player,
+            icons,
         } = art;
         return {
             ...option,
             html: `
                 <div class="art-control-progress-inner">
                     <div class="art-progress-loaded"></div>
-                    <div class="art-progress-played" style="background: ${theme}"></div>
+                    <div class="art-progress-played"></div>
                     <div class="art-progress-highlight"></div>
-                    <div class="art-progress-indicator" style="background: ${theme}"></div>
+                    <div class="art-progress-indicator"></div>
                     <div class="art-progress-tip art-tip"></div>
                 </div>
             `,
@@ -49,6 +51,25 @@ export default function progress(option) {
                 const $highlight = query('.art-progress-highlight', $control);
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
+
+                setStyle($played, 'backgroundColor', theme);
+                if (icons.indicator) {
+                    append($indicator, icons.indicator);
+                    setStyles($indicator, {
+                        top: '-6px',
+                        left: '-8px',
+                        width: '16px',
+                        height: '16px',
+                    });
+                } else {
+                    setStyles($indicator, {
+                        top: '-5px',
+                        left: '-7px',
+                        width: '14px',
+                        height: '14px',
+                        backgroundColor: theme,
+                    });
+                }
 
                 function showHighlight(event) {
                     const { width } = getPosFromEvent(art, event);

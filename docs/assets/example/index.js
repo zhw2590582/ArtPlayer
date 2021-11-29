@@ -122,6 +122,7 @@ var art = new Artplayer({
         },
     ],
     icons: {
+        indicator: '<img src="/assets/img/indicator.svg">',
         loading: '<img src="/assets/img/ploading.gif">',
         state: '<img src="/assets/img/state.png">',
     },

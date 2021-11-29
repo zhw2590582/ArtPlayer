@@ -22,7 +22,7 @@
             width: 300px;
             height: 100%;
             font-size: 12px;
-            background: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.9);
             transition: all 0.2s ease-in-out;
             overflow: auto;
 
@@ -51,7 +51,7 @@
                     border: none;
                     outline: none;
                     color: #fff;
-                    background: rgba(255, 255, 255, 0.2);
+                    background-color: rgba(255, 255, 255, 0.2);
                     border-radius: 2px;
 
                     &:active {
@@ -93,7 +93,7 @@
                 border: none;
                 outline: none;
                 color: #fff;
-                background: rgba(255, 255, 255, 0.2);
+                background-color: rgba(255, 255, 255, 0.2);
                 border-radius: 2px;
                 text-align: center;
             }

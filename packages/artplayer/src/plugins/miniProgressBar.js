@@ -14,10 +14,10 @@ export default function miniProgressBar(art) {
             right: 0,
             bottom: 0,
             height: '2px',
-            background: theme,
+            backgroundColor: theme,
         },
         mounted($progressBar) {
-            art.on('control', value => {
+            art.on('control', (value) => {
                 $progressBar.style.display = value ? 'none' : 'block';
             });
 
