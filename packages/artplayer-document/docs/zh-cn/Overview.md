@@ -75,45 +75,47 @@ const Artplayer = require('artplayer');
 
 ### 与 `Vue` 使用
 
+[点击打开在线演示](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
+
 创建 `Artplayer` 组件: `Artplayer.vue`
 
 ```js
-import Artplayer from 'artplayer';
+<template>
+  <div ref="artRef"></div>
+</template>
+
+<script>
+import Artplayer from "artplayer";
 
 export default {
-    data() {
-        return {
-            instance: null,
-        };
+  data() {
+    return {
+      instance: null,
+    };
+  },
+  props: {
+    option: {
+      type: Object,
+      required: true,
     },
-    props: {
-        option: {
-            type: Object,
-            required: true,
-        },
-        getInstance: Function,
-    },
-    mounted() {
-        this.instance = new Artplayer({
-            ...this.option,
-            container: this.$refs.artRef,
-        });
+  },
+  mounted() {
+    this.instance = new Artplayer({
+      ...this.option,
+      container: this.$refs.artRef,
+    });
 
-        this.$nextTick(() => {
-            this.$emit('getInstance', this.instance);
-        });
-    },
-    beforeDestroy() {
-        if (this.instance && this.instance.destroy) {
-            this.instance.destroy();
-        }
-    },
-    render(h) {
-        return h('div', {
-            ref: 'artRef',
-        });
-    },
+    this.$nextTick(() => {
+      this.$emit("get-instance", this.instance);
+    });
+  },
+  beforeUnmount() {
+    if (this.instance && this.instance.destroy) {
+      this.instance.destroy();
+    }
+  },
 };
+</script>
 ```
 
 引入 `Artplayer.vue` 组件
@@ -151,6 +153,8 @@ export default {
 ```
 
 ### 与 `React` 使用
+
+[点击打开在线演示](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
 
 创建 `Artplayer` 组件: `Artplayer.jsx`
 

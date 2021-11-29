@@ -82,45 +82,47 @@ The size of the player depends on the size of the `container`, so your `containe
 
 ### Use in `Vue`
 
+[Click to open an online demo](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
+
 Create component: `Artplayer.vue`
 
 ```js
-import Artplayer from 'artplayer';
+<template>
+  <div ref="artRef"></div>
+</template>
+
+<script>
+import Artplayer from "artplayer";
 
 export default {
-    data() {
-        return {
-            instance: null,
-        };
+  data() {
+    return {
+      instance: null,
+    };
+  },
+  props: {
+    option: {
+      type: Object,
+      required: true,
     },
-    props: {
-        option: {
-            type: Object,
-            required: true,
-        },
-        getInstance: Function,
-    },
-    mounted() {
-        this.instance = new Artplayer({
-            ...this.option,
-            container: this.$refs.artRef,
-        });
+  },
+  mounted() {
+    this.instance = new Artplayer({
+      ...this.option,
+      container: this.$refs.artRef,
+    });
 
-        this.$nextTick(() => {
-            this.$emit('getInstance', this.instance);
-        });
-    },
-    beforeDestroy() {
-        if (this.instance && this.instance.destroy) {
-            this.instance.destroy();
-        }
-    },
-    render(h) {
-        return h('div', {
-            ref: 'artRef',
-        });
-    },
+    this.$nextTick(() => {
+      this.$emit("get-instance", this.instance);
+    });
+  },
+  beforeUnmount() {
+    if (this.instance && this.instance.destroy) {
+      this.instance.destroy();
+    }
+  },
 };
+</script>
 ```
 
 Import the `Artplayer.vue` component
@@ -158,6 +160,8 @@ export default {
 ```
 
 ### Use in `React`
+
+[Click to open an online demo](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
 
 Create component: `Artplayer.jsx`
 
