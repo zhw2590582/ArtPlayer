@@ -13,6 +13,7 @@ sidebar_position: 3
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    setting: true,
 });
 
 art.on('ready', () => {
@@ -41,21 +42,21 @@ art.on('ready', () => {
         }
     });
 
-     art.setting.add({
+    art.setting.add({
         name: 'setting1',
-        html: 'your-setting'
+        html: 'your-setting',
         mounted: function($setting1) {
             //
         }
     });
 
-    // 使用 query 方法获取组件的 dom 元素
+    // Use the query method to get the DOM element of the component
     var $layer1 = art.query('.art-layer-layer1');
     var $contextmenu1 = art.query('.art-contextmenu-contextmenu1');
     var $control1 = art.query('.art-control-control1');
     var $setting1 = art.query('.art-setting-setting1');
 
-    // 推荐通过 name 获取组件的 dom 元素
+    // Recommended use the name to get the DOM element of the component
     var $layer1 = art.layers['layer1'];
     var $contextmenu1 = art.contextmenu['contextmenu1'];
     var $control1 = art.controls['control1'];

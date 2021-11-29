@@ -3,11 +3,9 @@ title: Handle a single component
 sidebar_position: 3
 ---
 
-当我们在`layers`、`contextmenu`、`controls`、`setting`里添加自定义组件时，最好添加一个name属性，用于定位到组件的dom元素
+When we add custom components in `layers`, `contextmenu`, `controls`, `setting`, It is best to add a `name` property that is used to position the DOM element of the component.
 
-When we add custom components in `layers`, `contextMenu`, `controls`, `setting`, It is best to add a `name` property that is used to position the DOM element to the component.
-
-Here are three ways to get the DOM element of the component: component method `mounted`, instance method `query`, recommended through `name` direct acquisition
+Here are three ways to get the DOM element of the component: component method `mounted`, instance method `query`, recommended through `name` direct acquisition.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -15,6 +13,7 @@ Here are three ways to get the DOM element of the component: component method `m
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    setting: true,
 });
 
 art.on('ready', () => {
@@ -43,9 +42,9 @@ art.on('ready', () => {
         }
     });
 
-     art.setting.add({
+    art.setting.add({
         name: 'setting1',
-        html: 'your-setting'
+        html: 'your-setting',
         mounted: function($setting1) {
             //
         }
@@ -57,7 +56,7 @@ art.on('ready', () => {
     var $control1 = art.query('.art-control-control1');
     var $setting1 = art.query('.art-setting-setting1');
 
-    // Use the name to get the DOM element of the component
+    // Recommended use the name to get the DOM element of the component
     var $layer1 = art.layers['layer1'];
     var $contextmenu1 = art.contextmenu['contextmenu1'];
     var $control1 = art.controls['control1'];
