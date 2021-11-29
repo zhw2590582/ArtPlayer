@@ -65,6 +65,7 @@ export default {
     whitelist: [`${s}|${f}|${r}`],
     layers: [component],
     contextmenu: [component],
+    settings: [component],
     controls: [
         {
             ...component,

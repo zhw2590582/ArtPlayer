@@ -138,6 +138,7 @@ export default class Artplayer extends Emitter {
             layers: [],
             contextmenu: [],
             controls: [],
+            settings: [],
             quality: [],
             highlight: [],
             plugins: [],

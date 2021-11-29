@@ -50,13 +50,13 @@ art.on('ready', () => {
         }
     });
 
-    // Use the query method to get the DOM element of the component
+    // 使用查询 query 获取组件的DOM元素
     var $layer1 = art.query('.art-layer-layer1');
     var $contextmenu1 = art.query('.art-contextmenu-contextmenu1');
     var $control1 = art.query('.art-control-control1');
     var $setting1 = art.query('.art-setting-setting1');
 
-    // Recommended use the name to get the DOM element of the component
+    // 推荐使用 name 获取组件的DOM元素
     var $layer1 = art.layers['layer1'];
     var $contextmenu1 = art.contextmenu['contextmenu1'];
     var $control1 = art.controls['control1'];

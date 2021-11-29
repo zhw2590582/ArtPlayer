@@ -20,8 +20,8 @@ export default class Setting extends Component {
 
         if (option.setting) {
             art.once('ready', () => {
-                proxy($setting, 'click', e => {
-                    if (e.target === $setting) {
+                proxy($setting, 'click', (event) => {
+                    if (event.target === $setting) {
                         this.show = false;
                     }
                 });
@@ -53,6 +53,10 @@ export default class Setting extends Component {
                         name: 'playbackRate',
                     }),
                 );
+
+                option.settings.forEach((item) => {
+                    this.add(item);
+                });
             });
 
             art.on('blur', () => {

@@ -53,6 +53,7 @@ export default class Artplayer {
         layers?: Component[];
         contextmenu?: Component[];
         controls?: Component[];
+        settings?: Component[];
         quality?: {
             default?: boolean;
             html: string;

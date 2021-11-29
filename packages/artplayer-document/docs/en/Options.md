@@ -618,6 +618,62 @@ var art = new Artplayer({
 });
 ```
 
+## settings
+
+-   Type: `Array`
+-   Default: `[]`
+
+Initialize custom setting panel
+
+| Property  | Type                | Description                                                   |
+| --------- | ------------------- | ------------------------------------------------------------- |
+| `disable` | `Boolean`           | Whether to disable the component                              |
+| `name`    | `String`            | The unique name of the component, used to mark the class name |
+| `index`   | `Number`            | Component index, priority for display                         |
+| `html`    | `String`、`Element` | DOM element of the component                                  |
+| `style`   | `Object`            | Component style object                                        |
+| `click`   | `Function`          | Component click event                                         |
+| `mounted` | `Function`          | Triggered after the component is mounted                      |
+| `tooltip` | `String`            | Prompt text of the component                                  |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    settings: [
+        {
+            disable: false,
+            name: 'button',
+            index: 10,
+            html: 'Custom button1',
+            tooltip: 'Custom button1',
+            style: {
+                color: 'red',
+            },
+            click: function () {
+                console.log('You clicked custom button 1');
+            },
+            mounted: function () {
+                console.log('Custom button mounting is complete 1');
+            },
+        },
+        {
+            html: 'Custom button2',
+            tooltip: 'Custom button2',
+            style: {
+                color: 'green',
+            },
+            click: function () {
+                console.log('You clicked custom button 2');
+            },
+        },
+    ],
+});
+```
+
 ## contextmenu
 
 -   Type: `Array`
