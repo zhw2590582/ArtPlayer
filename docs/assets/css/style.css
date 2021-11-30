@@ -73,6 +73,7 @@ img {
     align-items: center;
     margin-left: 20px;
     height: 100%;
+    line-height: 1;
 }
 
 .header .menus .has-sub-menu {
@@ -118,6 +119,7 @@ img {
     align-items: center;
     width: 100px;
     height: 100%;
+    line-height: 1;
     cursor: pointer;
     color: #f1fa8c;
     border-left: 1px solid rgb(17, 21, 24);
@@ -138,13 +140,13 @@ img {
 }
 
 .main .part-left .libs {
-    height: 50px;
+    height: 55px;
 }
 
 .main .part-left .libsInput {
     height: 100%;
     width: 100%;
-    padding: 5px 10px;
+    padding: 10px;
     outline: none;
     resize: none;
     border: none;
@@ -179,7 +181,7 @@ img {
     height: 70%;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid rgb(17, 21, 24);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .part-right .video-wrap .artplayer-app {
@@ -189,7 +191,8 @@ img {
     font-size: 20px;
     width: 90%;
     height: 65%;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgb(0 0 0 / 20%);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 .part-right .console {

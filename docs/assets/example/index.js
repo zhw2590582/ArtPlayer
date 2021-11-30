@@ -25,8 +25,7 @@ var art = new Artplayer({
     localSubtitle: true,
     mutex: true,
     backdrop: true,
-    log: true,
-    theme: '#ffad00',
+    theme: '#23ade5',
     lang: navigator.language.toLowerCase(),
     moreVideoAttr: {
         crossOrigin: 'anonymous',
@@ -122,8 +121,8 @@ var art = new Artplayer({
         },
     ],
     icons: {
-        indicator: '<img src="/assets/img/indicator.svg">',
+        indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
         loading: '<img src="/assets/img/ploading.gif">',
-        state: '<img src="/assets/img/state.png">',
+        state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
     },
 });
