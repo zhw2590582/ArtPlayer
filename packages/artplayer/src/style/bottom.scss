@@ -17,6 +17,7 @@
         .art-progress {
             position: relative;
             pointer-events: auto;
+
             .art-control-progress {
                 position: relative;
                 display: flex;
@@ -26,10 +27,13 @@
                 cursor: pointer;
 
                 .art-control-progress-inner {
+                    display: flex;
+                    align-items: center;
                     position: relative;
                     height: 50%;
                     width: 100%;
                     background: rgba(255, 255, 255, 0.2);
+
                     .art-progress-loaded {
                         position: absolute;
                         z-index: 10;
@@ -76,22 +80,20 @@
                     }
 
                     .art-progress-indicator {
-                        display: none;
+                        visibility: hidden;
                         align-items: center;
                         justify-content: center;
                         position: absolute;
                         z-index: 40;
                         border-radius: 50%;
+                        transform: scale(0.1, 0.1);
+                        transition: all 0.1s ease-in-out;
 
                         .art-icon {
                             width: 100%;
                             height: 100%;
                             pointer-events: none;
                             user-select: none;
-                        }
-
-                        &.art-show-indicator {
-                            display: flex;
                         }
                     }
 
@@ -111,16 +113,6 @@
                         border-radius: 3px;
                         font-weight: bold;
                         white-space: nowrap;
-                    }
-                }
-
-                &:hover {
-                    .art-control-progress-inner {
-                        height: 100%;
-                        .art-progress-indicator,
-                        .art-progress-tip {
-                            display: flex;
-                        }
                     }
                 }
             }
@@ -270,6 +262,17 @@
                 }
                 &:hover .art-qualitys {
                     display: block;
+                }
+            }
+        }
+
+        &:hover {
+            .art-progress .art-control-progress .art-control-progress-inner {
+                height: 100%;
+                .art-progress-indicator {
+                    transform: scale(1, 1);
+                    visibility: visible;
+                    transition: all 0.1s ease-in-out;
                 }
             }
         }

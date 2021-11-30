@@ -5,7 +5,7 @@ sidebar_position: 1
 
 ## Demo
 
-[View full demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)
+👉 [View full demo](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)
 
 ## Install
 

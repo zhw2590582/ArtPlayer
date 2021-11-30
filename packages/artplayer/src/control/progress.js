@@ -1,20 +1,9 @@
-import {
-    append,
-    clamp,
-    secondToTime,
-    setStyle,
-    setStyles,
-    getStyle,
-    query,
-    addClass,
-    removeClass,
-    includeFromEvent,
-} from '../utils';
+import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent } from '../utils';
 
 export function getPosFromEvent(art, event) {
     const {
-        template: { $progress },
         player,
+        template: { $progress },
     } = art;
 
     const { left } = $progress.getBoundingClientRect();
@@ -41,7 +30,7 @@ export default function progress(option) {
                     <div class="art-progress-played"></div>
                     <div class="art-progress-highlight"></div>
                     <div class="art-progress-indicator"></div>
-                    <div class="art-progress-tip art-tip"></div>
+                    <div class="art-progress-tip"></div>
                 </div>
             `,
             mounted: ($control) => {
@@ -53,23 +42,22 @@ export default function progress(option) {
                 const $tip = query('.art-progress-tip', $control);
 
                 setStyle($played, 'backgroundColor', theme);
+
+                let indicatorSize = 14;
                 if (icons.indicator) {
+                    indicatorSize = 16;
                     append($indicator, icons.indicator);
-                    setStyles($indicator, {
-                        top: '-6px',
-                        left: '-8px',
-                        width: '16px',
-                        height: '16px',
-                    });
                 } else {
                     setStyles($indicator, {
-                        top: '-5px',
-                        left: '-7px',
-                        width: '14px',
-                        height: '14px',
                         backgroundColor: theme,
                     });
                 }
+
+                setStyles($indicator, {
+                    left: `-${indicatorSize / 2}px`,
+                    width: `${indicatorSize}px`,
+                    height: `${indicatorSize}px`,
+                });
 
                 function showHighlight(event) {
                     const { width } = getPosFromEvent(art, event);
@@ -105,11 +93,7 @@ export default function progress(option) {
 
                     if (type === 'played') {
                         setStyle($played, 'width', `${percentage * 100}%`);
-                        setStyle(
-                            $indicator,
-                            'left',
-                            `calc(${percentage * 100}% - ${getStyle($indicator, 'width') / 2}px)`,
-                        );
+                        setStyle($indicator, 'left', `calc(${percentage * 100}% - ${indicatorSize / 2}px)`);
                     }
                 }
 
@@ -163,7 +147,6 @@ export default function progress(option) {
                 proxy(document, 'mousemove', (event) => {
                     if (isDroging) {
                         const { second, percentage } = getPosFromEvent(art, event);
-                        addClass($indicator, 'art-show-indicator');
                         setBar('played', percentage);
                         player.seek = second;
                     }
@@ -172,7 +155,6 @@ export default function progress(option) {
                 proxy(document, 'mouseup', () => {
                     if (isDroging) {
                         isDroging = false;
-                        removeClass($indicator, 'art-show-indicator');
                     }
                 });
             },

@@ -1020,6 +1020,7 @@ var art = new Artplayer({
         fullscreen: '',
         fullscreenWeb: '',
         pip: '',
+        indicator: '',
     },
 });
 ```

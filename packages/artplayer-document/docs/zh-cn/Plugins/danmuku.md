@@ -5,7 +5,7 @@ sidebar_position: 1
 
 ## 演示
 
-[查看完整演示](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)
+👉 [查看完整演示](https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku)
 
 ## 安装
 
