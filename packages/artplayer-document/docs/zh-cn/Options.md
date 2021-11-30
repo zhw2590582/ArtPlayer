@@ -901,7 +901,8 @@ var art = new Artplayer({
     whitelist: ['iPhone OS 11'],
     // whitelist: ['*'],
     // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
-    // whitelist: [/iPhone OS 11/gi]
+    // whitelist: [/iPhone OS 11/gi],
+    
 });
 ```
 
