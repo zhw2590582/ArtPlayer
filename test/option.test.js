@@ -1,5 +1,5 @@
 describe('Option', function() {
-    var url = 'https://artplayer.org/assets/sample/video.mp4';
+    var url = './assets/sample/video.mp4';
 
     afterEach(function() {
         [...Artplayer.instances].forEach(art => {
