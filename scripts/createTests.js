@@ -25,7 +25,7 @@ const htmls = glob
     .flat(Infinity)
     .filter((item) => item.trim().startsWith('var art'))
     .map((item) => item.replace(/\/assets/g, './assets'))
-    .map((item) => item.replace(/\s{3}/g, '\n  '));
+    .map((item) => item.replace(/\s{3}/g, '\n'));
 
 const tests = `
 describe('Document', function() {
