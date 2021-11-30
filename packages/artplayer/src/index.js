@@ -75,6 +75,10 @@ export default class Artplayer extends Emitter {
         return '__ENV__';
     }
 
+    static get build() {
+        return '__BUILD__';
+    }
+
     static get config() {
         return config;
     }

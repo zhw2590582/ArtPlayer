@@ -4819,7 +4819,12 @@
     }, {
       key: "env",
       get: function get() {
-        return '"development"';
+        return 'development';
+      }
+    }, {
+      key: "build",
+      get: function get() {
+        return '1638244511807';
       }
     }, {
       key: "config",

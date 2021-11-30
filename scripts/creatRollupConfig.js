@@ -81,8 +81,9 @@ module.exports = function creatRollupConfig(projectPath) {
             replace({
                 preventAssignment: true,
                 exclude: 'node_modules/**',
-                __ENV__: JSON.stringify(process.env.NODE_ENV || 'development'),
+                __ENV__: process.env.NODE_ENV || 'development',
                 __VERSION__: version,
+                __BUILD__: Date.now(),
             }),
             isProd && sizeSnapshot(),
             isProd && removeHtmlSpace(),
