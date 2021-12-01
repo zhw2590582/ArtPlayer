@@ -84,6 +84,8 @@ export default class Component {
         def(this, name, {
             value: $ref,
         });
+
+        return $ref;
     }
 
     selector(option, $ref) {

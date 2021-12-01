@@ -1266,7 +1266,7 @@
   }
 
   function exclusiveInit(art, player) {
-    var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
+    var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
 
     function exclusive(props) {
       props.forEach(function (name) {
@@ -1344,9 +1344,9 @@
     def(player, 'toggle', {
       value: function value() {
         if (player.playing) {
-          player.pause();
+          return player.pause();
         } else {
-          player.play();
+          return player.play();
         }
       }
     });
@@ -1436,27 +1436,31 @@
         notice = art.notice;
 
     function switchUrl(url, name, currentTime) {
-      if (url === player.url) return;
-      URL.revokeObjectURL(player.url);
-      var playing = player.playing;
-      player.url = url;
-      art.once('video:canplay', function () {
-        player.playbackRate = false;
-        player.aspectRatio = false;
-        player.flip = 'normal';
-        player.autoSize = option.autoSize;
-        player.currentTime = currentTime;
-        art.notice.show = '';
+      return new Promise(function (resolve) {
+        if (url === player.url) return resolve(url);
+        URL.revokeObjectURL(player.url);
+        var playing = player.playing;
+        player.url = url;
+        art.once('video:canplay', function () {
+          player.playbackRate = false;
+          player.aspectRatio = false;
+          player.flip = 'normal';
+          player.autoSize = option.autoSize;
+          player.currentTime = currentTime;
+          art.notice.show = '';
 
-        if (playing) {
-          player.play();
-        }
+          if (playing) {
+            player.play();
+          }
 
-        if (name) {
-          notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
-        }
+          if (name) {
+            notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
+          }
+
+          art.emit('switch', url);
+          resolve(url);
+        });
       });
-      art.emit('switch', url);
     }
 
     def(player, 'switchQuality', {
@@ -1608,9 +1612,10 @@
     });
     def(player, 'screenshot', {
       value: function value() {
-        player.getDataURL().then(function (dataUri) {
+        return player.getDataURL().then(function (dataUri) {
           download(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
           art.emit('screenshot', dataUri);
+          return dataUri;
         });
       }
     });
@@ -2517,6 +2522,7 @@
         def(this, name, {
           value: $ref
         });
+        return $ref;
       }
     }, {
       key: "selector",
@@ -4013,6 +4019,8 @@
         } else {
           this.keys[key] = [event];
         }
+
+        return this;
       }
     }]);
 
@@ -4838,7 +4846,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1638325351386';
+        return '1638339306854';
       }
     }, {
       key: "config",

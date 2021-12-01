@@ -60,5 +60,6 @@ export default class Hotkey {
         } else {
             this.keys[key] = [event];
         }
+        return this;
     }
 }

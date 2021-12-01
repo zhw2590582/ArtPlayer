@@ -43,9 +43,10 @@ export default function screenshotMix(art, player) {
 
     def(player, 'screenshot', {
         value: () => {
-            player.getDataURL().then((dataUri) => {
+            return player.getDataURL().then((dataUri) => {
                 download(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
                 art.emit('screenshot', dataUri);
+                return dataUri;
             });
         },
     });

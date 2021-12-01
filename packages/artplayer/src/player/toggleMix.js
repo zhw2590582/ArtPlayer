@@ -4,9 +4,9 @@ export default function toggleMix(art, player) {
     def(player, 'toggle', {
         value() {
             if (player.playing) {
-                player.pause();
+                return player.pause();
             } else {
-                player.play();
+                return player.play();
             }
         },
     });

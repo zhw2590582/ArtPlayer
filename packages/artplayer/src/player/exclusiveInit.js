@@ -1,7 +1,7 @@
 import { def } from '../utils';
 
 export default function exclusiveInit(art, player) {
-    const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb', 'fullscreenRotate'];
+    const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
 
     function exclusive(props) {
         props.forEach((name) => {

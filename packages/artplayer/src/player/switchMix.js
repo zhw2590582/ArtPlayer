@@ -4,25 +4,28 @@ export default function switchMix(art, player) {
     const { i18n, option, notice } = art;
 
     function switchUrl(url, name, currentTime) {
-        if (url === player.url) return;
-        URL.revokeObjectURL(player.url);
-        const { playing } = player;
-        player.url = url;
-        art.once('video:canplay', () => {
-            player.playbackRate = false;
-            player.aspectRatio = false;
-            player.flip = 'normal';
-            player.autoSize = option.autoSize;
-            player.currentTime = currentTime;
-            art.notice.show = '';
-            if (playing) {
-                player.play();
-            }
-            if (name) {
-                notice.show = `${i18n.get('Switch video')}: ${name}`;
-            }
+        return new Promise((resolve) => {
+            if (url === player.url) return resolve(url);
+            URL.revokeObjectURL(player.url);
+            const { playing } = player;
+            player.url = url;
+            art.once('video:canplay', () => {
+                player.playbackRate = false;
+                player.aspectRatio = false;
+                player.flip = 'normal';
+                player.autoSize = option.autoSize;
+                player.currentTime = currentTime;
+                art.notice.show = '';
+                if (playing) {
+                    player.play();
+                }
+                if (name) {
+                    notice.show = `${i18n.get('Switch video')}: ${name}`;
+                }
+                art.emit('switch', url);
+                resolve(url);
+            });
         });
-        art.emit('switch', url);
     }
 
     def(player, 'switchQuality', {
