@@ -8,7 +8,7 @@ export default function urlMix(art, player) {
 
     def(player, 'url', {
         get() {
-            return $video.src;
+            return $video.currentSrc;
         },
         set(url) {
             const typeName = option.type || getExt(url);
