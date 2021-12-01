@@ -1,5 +1,5 @@
 import screenfull from 'screenfull';
-import { addClass, removeClass, def } from '../utils';
+import { addClass, removeClass, def, get } from '../utils';
 
 const nativeScreenfull = (art, player) => {
     const { $player } = art.template;
@@ -74,7 +74,7 @@ export default function fullscreenMix(art, player) {
         }
 
         // 异步设置
-        def(art, 'fullscreen', Object.getOwnPropertyDescriptor(player, 'fullscreen'));
+        def(art, 'fullscreen', get(player, 'fullscreen'));
     });
 
     def(player, 'fullscreenToggle', {

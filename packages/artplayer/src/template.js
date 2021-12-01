@@ -1,4 +1,4 @@
-import { errorHandle, query, addClass } from './utils';
+import { errorHandle, query, addClass, replaceElement } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -12,10 +12,15 @@ export default class Template {
             errorHandle(this.$container, `No container element found by ${art.option.container}`);
         }
 
+        const type = this.$container.tagName.toLowerCase();
+        errorHandle(type === 'div', `Unsupported container element type, only support 'div' but got '${type}'`);
+
         errorHandle(
             art.constructor.instances.every((ins) => ins.template.$container !== this.$container),
             'Cannot mount multiple instances on the same dom element',
         );
+
+        this.$original = this.$container.cloneNode(true);
 
         if (art.whitelist.state) {
             this.desktop();
@@ -154,7 +159,7 @@ export default class Template {
 
     destroy(removeHtml) {
         if (removeHtml) {
-            this.$container.innerHTML = '';
+            replaceElement(this.$original, this.$container);
         } else {
             addClass(this.$player, 'art-destroy');
         }

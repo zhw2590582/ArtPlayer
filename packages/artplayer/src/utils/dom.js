@@ -77,3 +77,8 @@ export function isInViewport(el, offset = 0) {
 export function includeFromEvent(event, target) {
     return event.composedPath && event.composedPath().indexOf(target) > -1;
 }
+
+export function replaceElement(newChild, oldChild) {
+    oldChild.parentNode.replaceChild(newChild, oldChild);
+    return newChild;
+}
