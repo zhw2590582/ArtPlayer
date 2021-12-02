@@ -16,6 +16,14 @@ module.exports = {
         hideableSidebar: true,
         navbar: {
             title: 'Artplayer.js',
+            logo: {
+                alt: 'Artplayer.js',
+                src: 'img/logo.png',
+                href: 'https://artplayer.org/document',
+                target: '_self',
+                width: 32,
+                height: 32,
+            },
             items: [
                 {
                     href: 'https://artplayer.org',
