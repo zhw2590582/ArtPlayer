@@ -1,4 +1,5 @@
 <h2 align="center">
+    <p><img src="./images/logo.png" width="100" alt="logo"></p>
     <a href="https://artplayer.org">ArtPlayer.js</a>
 </h2>
 
