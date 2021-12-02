@@ -61,6 +61,16 @@ img {
     background-color: rgb(28, 32, 34);
 }
 
+.header .logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo img {
+    margin-right: 10px;
+}
+
 .header .menus {
     display: flex;
     align-items: center;

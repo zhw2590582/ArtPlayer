@@ -21,8 +21,8 @@ module.exports = {
                 src: 'img/logo.png',
                 href: 'https://artplayer.org/document',
                 target: '_self',
-                width: 32,
-                height: 32,
+                width: 26,
+                height: 30,
             },
             items: [
                 {
