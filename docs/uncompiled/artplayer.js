@@ -1308,7 +1308,7 @@
       value: function value() {
         var promise = $video.play();
 
-        if (promise.then) {
+        if (promise && promise.then) {
           promise.then().catch(function (err) {
             notice.show = err;
             throw err;
@@ -3722,6 +3722,7 @@
         return fetch(url).then(function (response) {
           return response.arrayBuffer();
         }).then(function (buffer) {
+          if (!window.TextDecoder) return;
           var decoder = new TextDecoder(opt.encoding || subtitle.encoding);
           var text = decoder.decode(buffer);
 
@@ -4850,7 +4851,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1638500312253';
+        return '1638513681132';
       }
     }, {
       key: "config",

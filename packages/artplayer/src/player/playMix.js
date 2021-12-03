@@ -13,7 +13,7 @@ export default function playMix(art, player) {
         value() {
             const promise = $video.play();
 
-            if (promise.then) {
+            if (promise && promise.then) {
                 promise.then().catch((err) => {
                     notice.show = err;
                     throw err;
