@@ -1,7 +1,15 @@
 (function () {
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var userAgent = window.navigator.userAgent;
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    var isIE = userAgent.indexOf('MSIE ') > -1;
+
     if (isMobile) {
         window.location.href = './mobile.html';
+        return;
+    }
+
+    if (isIE) {
+        window.location.href = './ie.html';
         return;
     }
 
