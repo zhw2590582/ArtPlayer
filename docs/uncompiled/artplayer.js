@@ -4004,7 +4004,7 @@
                 if (events) {
                   event.preventDefault();
                   events.forEach(function (fn) {
-                    return fn.call(art);
+                    return fn.call(art, event);
                   });
                   art.emit('hotkey', event);
                 }
