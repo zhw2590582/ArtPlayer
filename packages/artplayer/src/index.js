@@ -29,6 +29,8 @@ const instances = [];
 export default class Artplayer extends Emitter {
     constructor(option) {
         super();
+
+        this.id = ++id;
         this.option = validator(utils.mergeDeep(Artplayer.option, option), scheme);
         this.isFocus = false;
         this.isDestroy = false;
@@ -58,8 +60,6 @@ export default class Artplayer extends Emitter {
             this.mobile = new Mobile(this);
         }
 
-        id += 1;
-        this.id = id;
         instances.push(this);
     }
 

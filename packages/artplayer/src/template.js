@@ -135,6 +135,7 @@ export default class Template {
         this.$contextmenu = this.query('.art-contextmenus');
 
         this.$player.style.setProperty('--theme', theme);
+        this.$container.dataset.artId = this.art.id;
 
         if (backdrop) {
             addClass(this.$settingInner, 'art-backdrop-filter');
