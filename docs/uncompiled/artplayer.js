@@ -3722,7 +3722,7 @@
         return fetch(url).then(function (response) {
           return response.arrayBuffer();
         }).then(function (buffer) {
-          if (!window.TextDecoder) return;
+          errorHandle(window.TextDecoder, 'TextDecoder not support');
           var decoder = new TextDecoder(opt.encoding || subtitle.encoding);
           var text = decoder.decode(buffer);
 

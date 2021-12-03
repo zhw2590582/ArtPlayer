@@ -9,6 +9,7 @@ import {
     escape,
     removeClass,
     hasClass,
+    errorHandle,
 } from './utils';
 import Component from './utils/component';
 
@@ -111,7 +112,7 @@ export default class Subtitle extends Component {
         return fetch(url)
             .then((response) => response.arrayBuffer())
             .then((buffer) => {
-                if (!window.TextDecoder) return;
+                errorHandle(window.TextDecoder, 'TextDecoder not support');
                 const decoder = new TextDecoder(opt.encoding || subtitle.encoding);
                 const text = decoder.decode(buffer);
 
