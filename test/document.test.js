@@ -1381,6 +1381,8 @@ describe("Document", function () {
         fullscreenWeb: "",
 
         pip: "",
+
+        indicator: "",
       },
     });
 
