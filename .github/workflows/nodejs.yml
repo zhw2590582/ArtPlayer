@@ -33,6 +33,7 @@ jobs:
         npm install packages/* && npx lerna bootstrap --hoist
         npm run lint
         npm run build:all
+        npm run test:create
         npm run test
         npm run sizereport
       env:
