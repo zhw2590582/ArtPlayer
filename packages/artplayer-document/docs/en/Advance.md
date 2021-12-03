@@ -100,6 +100,32 @@ art.on('ready', () => {
 });
 ```
 
+## events
+
+-   Type: `Object`
+
+Manage the `events`
+
+## proxy
+
+-   Type: `Function`
+
+Proxy native event method, easy to manage and destroy the event
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var container = document.querySelector('.artplayer-app');
+var art = new Artplayer({
+    container: container,
+    url: '/assets/sample/video.mp4',
+});
+
+art.proxy(container, 'click', (event) => {
+    console.info(event);
+});
+```
+
 ## storage
 
 -   Type: `Object`

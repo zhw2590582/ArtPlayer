@@ -189,6 +189,7 @@ declare class Artplayer extends Player {
     emit(name: string): void;
     off(name: string, callback?: Function): void;
     query(selector: string): HTMLElement;
+    proxy(target: HTMLElement, name: string, callback: Function, option?: object): Function;
     destroy(removeHtml?: boolean): void;
 
     readonly template: {

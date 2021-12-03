@@ -100,6 +100,32 @@ art.on('ready', () => {
 });
 ```
 
+## events
+
+-   类型: `Object`
+
+管理事件发生的对象
+
+## proxy
+
+-   类型: `Function`
+
+代理原生事件的方法，便于事件的管理与销毁
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var container = document.querySelector('.artplayer-app');
+var art = new Artplayer({
+    container: container,
+    url: '/assets/sample/video.mp4',
+});
+
+art.proxy(container, 'click', (event) => {
+    console.info(event);
+});
+```
+
 ## storage
 
 -   类型: `Object`
