@@ -1,6 +1,14 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'dist/**'
+      - 'images/**'
 
 jobs:
   build:
