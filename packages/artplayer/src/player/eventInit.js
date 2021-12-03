@@ -17,6 +17,10 @@ export default function eventInit(art, player) {
         player.toggle();
     });
 
+    proxy($video, 'dblclick', () => {
+        player.fullscreenToggle = true;
+    });
+
     config.events.forEach((eventName) => {
         proxy($video, eventName, (event) => {
             art.emit(`video:${event.type}`, event);

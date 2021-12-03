@@ -1159,6 +1159,9 @@
     proxy($video, 'click', function () {
       player.toggle();
     });
+    proxy($video, 'dblclick', function () {
+      player.fullscreenToggle = true;
+    });
     config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
         art.emit("video:".concat(event.type), event);
