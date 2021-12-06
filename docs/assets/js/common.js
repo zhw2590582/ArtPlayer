@@ -1,7 +1,7 @@
 (function () {
     var userAgent = window.navigator.userAgent;
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-    var isIE = userAgent.indexOf('MSIE ') > -1;
+    var isIE = /MSIE|Trident/.test(userAgent);
 
     if (isMobile) {
         window.location.href = './mobile.html';
@@ -9,8 +9,7 @@
     }
 
     if (isIE) {
-        window.location.href = './ie.html';
-        return;
+        new VConsole();
     }
 
     var $codeMirror = document.querySelector('.codeMirrorWrap');
