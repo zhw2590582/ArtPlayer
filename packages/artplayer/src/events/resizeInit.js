@@ -14,4 +14,10 @@ export default function resizeInit(art, events) {
     events.proxy(window, ['orientationchange', 'resize'], () => {
         resizeFn();
     });
+
+    if (screen && screen.orientation && screen.orientation.onchange) {
+        events.proxy(screen.orientation, 'change', () => {
+            resizeFn();
+        });
+    }
 }
