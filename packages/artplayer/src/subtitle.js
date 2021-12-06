@@ -109,6 +109,7 @@ export default class Subtitle extends Component {
             proxy(this.textTrack, 'cuechange', this.update.bind(this));
         }
 
+        errorHandle(window.fetch, 'fetch not support');
         return fetch(url)
             .then((response) => response.arrayBuffer())
             .then((buffer) => {

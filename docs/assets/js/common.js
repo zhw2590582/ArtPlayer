@@ -108,7 +108,7 @@
     }
 
     function runExample(name) {
-        fetch(`./assets/example/${name}.js`)
+        fetch('./assets/example/' + name + '.js')
             .then(function (response) {
                 return response.text();
             })
@@ -150,9 +150,9 @@
         var code = mirror.getValue();
         eval(code);
         initArt(Artplayer.instances[0]);
-        console.debug(`Artplayer@${Artplayer.version}`);
-        console.debug(`Env@${Artplayer.env}`);
-        console.debug(`Build@${formatDate(Artplayer.build)}`);
+        console.debug('Artplayer@' + Artplayer.version);
+        console.debug('Env@' + Artplayer.env);
+        console.debug('Build@' + formatDate(Artplayer.build));
     }
 
     function initApp() {

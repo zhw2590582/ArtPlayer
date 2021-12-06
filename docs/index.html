@@ -67,13 +67,17 @@
     <div class="popups">
         <div class="popinner"></div>
     </div>
+    <script src="./assets/js/vconsole.min.js"></script>
     <script src="./assets/js/core.js"></script>
+    <script src="./assets/js/fetch.polyfill.js"></script>
+    <script src="./assets/js/encoding-indexes.js"></script>
+    <script src="./assets/js/encoding.js"></script>
     <script src="./assets/js/codemirror.js"></script>
     <script src="./assets/js/javascript.js"></script>
     <script src="./assets/js/console.js"></script>
     <script src="./uncompiled/artplayer.js"></script>
-    <script src="./assets/js/common.js"></script>
     <script>
+        // var vConsole = new VConsole();
         var isLocalhost = Boolean(
             window.location.hostname === 'localhost' ||
             window.location.hostname === '[::1]' ||
@@ -91,6 +95,7 @@
             }
         })();
     </script>
+    <script src="./assets/js/common.js"></script>
 </body>
 
 </html>
