@@ -5,7 +5,6 @@
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
-    "start": "npx cross-env NODE_ENV=development npx servor docs index.html 8081 --reload --browse",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "build:all": "npm run build all && git add . && git commit -m \"build all packages\" -n",
     "test:create": "npx cross-env NODE_ENV=test node ./scripts/createTests.js",

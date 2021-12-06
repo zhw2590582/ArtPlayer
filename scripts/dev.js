@@ -1,13 +1,22 @@
 const inquirer = require('inquirer');
 const rollup = require('rollup');
+const servor = require('servor');
 const logger = require('./logger');
 const projects = require('./getProjects')();
 const creatRollupConfig = require('./creatRollupConfig');
+const openBrowser = require('servor/utils/openBrowser');
 
-function develop(projectPath) {
+async function develop(projectPath) {
     const config = creatRollupConfig(projectPath);
+    const { url } = await servor({
+        root: 'docs',
+        fallback: 'index.html',
+        reload: true,
+        port: 8080,
+    });
+    openBrowser(url);
     const watcher = rollup.watch(config);
-    watcher.on('event', event => {
+    watcher.on('event', (event) => {
         switch (event.code) {
             case 'START':
                 logger.log('checking rollup version...');
@@ -43,11 +52,11 @@ inquirer
             choices: Object.keys(projects),
         },
     ])
-    .then(answers => {
+    .then((answers) => {
         develop(projects[answers.project]);
     })
-    .catch(err => {
+    .catch((err) => {
         logger.fatal(err);
     });
 
-module.exports = develop;    
+module.exports = develop;

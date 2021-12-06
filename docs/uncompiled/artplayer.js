@@ -3719,6 +3719,7 @@
           proxy(this.textTrack, 'cuechange', this.update.bind(this));
         }
 
+        errorHandle(window.fetch, 'fetch not support');
         return fetch(url).then(function (response) {
           return response.arrayBuffer();
         }).then(function (buffer) {
@@ -3802,6 +3803,12 @@
     events.proxy(window, ['orientationchange', 'resize'], function () {
       resizeFn();
     });
+
+    if (screen && screen.orientation && screen.orientation.onchange) {
+      events.proxy(screen.orientation, 'change', function () {
+        resizeFn();
+      });
+    }
   }
 
   function gestureInit(art, events) {
@@ -4851,7 +4858,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1638513681132';
+        return '1638761208609';
       }
     }, {
       key: "config",
