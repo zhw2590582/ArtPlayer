@@ -3947,8 +3947,6 @@
           _this3.proxy(image, 'error', function () {
             return reject(new ArtPlayerError("Failed to load Image: ".concat(image.src)));
           });
-
-          return resolve(image);
         });
       }
     }, {
@@ -4858,7 +4856,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1638761208609';
+        return '1638861331532';
       }
     }, {
       key: "config",

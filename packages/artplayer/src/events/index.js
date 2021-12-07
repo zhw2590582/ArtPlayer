@@ -65,8 +65,6 @@ export default class Events {
 
             this.proxy(image, 'load', () => resolve(image));
             this.proxy(image, 'error', () => reject(new ArtPlayerError(`Failed to load Image: ${image.src}`)));
-
-            return resolve(image);
         });
     }
 
