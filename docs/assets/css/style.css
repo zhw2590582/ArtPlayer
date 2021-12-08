@@ -173,7 +173,7 @@ img {
 
 .main .part-left .code .codeMirrorWrap {
     height: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .CodeMirror {
