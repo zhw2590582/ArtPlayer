@@ -23,14 +23,33 @@
     var editor = null;
     require.config({ paths: { vs: './assets/js/vs' } });
     require(['vs/editor/editor.main'], function () {
-        editor = monaco.editor.create($codeMirror, {
-            theme: 'vs-dark',
-            model: monaco.editor.createModel(
-                ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-                'javascript',
-            ),
-        });
-        initApp();
+        var libUri = './assets/ts/artplayer.d.ts';
+        fetch(libUri)
+            .then((res) => res.text())
+            .then((libSource) => {
+                monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+                    noSemanticValidation: true,
+                    noSyntaxValidation: false,
+                });
+
+                monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+                    target: monaco.languages.typescript.ScriptTarget.ES6,
+                    allowNonTsExtensions: true,
+                });
+
+                monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri);
+                monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri));
+
+                editor = monaco.editor.create($codeMirror, {
+                    theme: 'vs-dark',
+                    model: monaco.editor.createModel(
+                        ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                        'javascript',
+                    ),
+                });
+
+                initApp();
+            });
     });
 
     function initArt(art) {
