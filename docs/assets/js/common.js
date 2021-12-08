@@ -36,6 +36,11 @@
                 monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri);
                 monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri));
 
+                var disposable = monaco.editor.onDidCreateEditor(function () {
+                    disposable.dispose();
+                    setTimeout(initApp, 1000);
+                });
+
                 editor = monaco.editor.create($codeMirror, {
                     theme: 'vs-dark',
                     automaticLayout: true,
@@ -44,8 +49,6 @@
                         'javascript',
                     ),
                 });
-
-                initApp();
             });
     });
 
@@ -78,10 +81,13 @@
 
     function loadScript(url) {
         return new Promise(function (resolve, reject) {
+            var define2 = window.define;
+            window.define = undefined;
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = url;
             script.onload = function () {
+                window.define = define2;
                 resolve(url);
             };
             script.onerror = function () {
