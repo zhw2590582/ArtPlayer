@@ -20,13 +20,17 @@
 
     window.consoleLog(document.querySelector('.console'));
 
-    var mirror = CodeMirror($codeMirror, {
-        lineNumbers: true,
-        mode: 'javascript',
-        matchBrackets: true,
-        styleActiveLine: true,
-        theme: 'dracula',
-        value: '',
+    var editor = null;
+    require.config({ paths: { vs: './assets/js/vs' } });
+    require(['vs/editor/editor.main'], function () {
+        editor = monaco.editor.create($codeMirror, {
+            theme: 'vs-dark',
+            model: monaco.editor.createModel(
+                ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                'javascript',
+            ),
+        });
+        initApp();
     });
 
     function initArt(art) {
@@ -112,7 +116,7 @@
                 return response.text();
             })
             .then(function (text) {
-                mirror.setValue(text);
+                editor.setValue(text);
                 runCode();
             })
             .catch(function (err) {
@@ -124,7 +128,7 @@
         if (example) {
             runExample(example);
         } else if (code) {
-            mirror.setValue(decodeURIComponent(code).trim());
+            editor.setValue(decodeURIComponent(code).trim());
             runCode();
         } else {
             runExample('index');
@@ -146,7 +150,7 @@
         Artplayer.instances.forEach(function (art) {
             art.destroy(true);
         });
-        var code = mirror.getValue();
+        var code = editor.getValue();
         eval(code);
         initArt(Artplayer.instances[0]);
         console.debug('Artplayer@' + Artplayer.version);
@@ -180,7 +184,7 @@
 
     $run.addEventListener('click', function (e) {
         var libs = encodeURIComponent($lib.value);
-        var code = encodeURIComponent(mirror.getValue());
+        var code = encodeURIComponent(editor.getValue());
         var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
         history.pushState(null, null, url);
         initApp();
@@ -191,6 +195,4 @@
             this.style.display = 'none';
         }
     });
-
-    initApp();
 })();
