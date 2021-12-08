@@ -1,20 +1,22 @@
 export = Artplayer;
 
+interface Selector {
+    default?: boolean;
+    html: string;
+}
+
 interface ComponentOption {
     html: string | HTMLElement;
     disable?: boolean;
     name?: string;
     index?: number;
     style?: object;
-    click?: Function;
-    mounted?: Function;
+    click?(component: Component, event: Event): void;
+    mounted?(element: HTMLElement): void;
     tooltip?: string;
     position?: 'top' | 'left' | 'right';
-    selector?: {
-        default?: boolean;
-        html: string;
-    }[];
-    onSelect?: Function;
+    selector?: Selector[];
+    onSelect?(selector: Selector, element: HTMLElement): void;
 }
 
 interface Component {
@@ -26,6 +28,11 @@ interface Component {
     set toggle(state: boolean);
     add(option: ComponentOption): HTMLElement;
 }
+
+type Plugin = (art: Artplayer) => any;
+type WhitelistFunction = (ua: string) => Boolean;
+type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
+type EventCallback = (event: Event) => any;
 
 interface Option {
     container: string | HTMLElement;
@@ -59,8 +66,8 @@ interface Option {
     localVideo?: boolean;
     localSubtitle?: boolean;
     useSSR?: boolean;
-    plugins?: Function[];
-    whitelist?: (string | Function | RegExp)[];
+    plugins?: Plugin[];
+    whitelist?: (string | WhitelistFunction | RegExp)[];
     layers?: ComponentOption[];
     contextmenu?: ComponentOption[];
     controls?: ComponentOption[];
@@ -92,7 +99,7 @@ interface Option {
         [propName: string]: string | HTMLElement;
     };
     customType?: {
-        [propName: string]: Function;
+        [propName: string]: CustomType;
     };
 }
 
@@ -189,7 +196,7 @@ declare class Artplayer extends Player {
     emit(name: string): void;
     off(name: string, callback?: Function): void;
     query(selector: string): HTMLElement;
-    proxy(target: HTMLElement, name: string, callback: Function, option?: object): Function;
+    proxy(target: HTMLElement, name: string, callback: EventCallback, option?: object): Function;
     destroy(removeHtml?: boolean): void;
 
     readonly template: {
@@ -225,8 +232,8 @@ declare class Artplayer extends Player {
     };
 
     readonly events: {
-        proxy(target: HTMLElement, name: string, callback: Function, option?: object): Function;
-        hover(target: HTMLElement, mouseenter?: Function, mouseleave?: Function): Function;
+        proxy(target: HTMLElement, name: string, callback: EventCallback, option?: object): Function;
+        hover(target: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): Function;
         loadImg(target: HTMLImageElement | string): Promise<HTMLImageElement>;
     };
 
@@ -259,12 +266,12 @@ declare class Artplayer extends Player {
     };
 
     readonly hotkey: {
-        add(key: number, event: Function): Artplayer['hotkey'];
+        add(key: number, callback: EventCallback): Artplayer['hotkey'];
     };
 
     readonly plugins: {
         readonly id: number;
-        add(plugin: Function): Artplayer['plugins'];
+        add(plugin: Plugin): Artplayer['plugins'];
     };
 
     readonly i18n: {
