@@ -3,13 +3,9 @@
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
     var isIE = /MSIE|Trident/.test(userAgent);
 
-    if (isMobile) {
+    if (isMobile || isIE) {
         window.location.href = './mobile.html';
         return;
-    }
-
-    if (isIE) {
-        new VConsole();
     }
 
     var $codeMirror = document.querySelector('.codeMirrorWrap');
@@ -193,16 +189,20 @@
             });
     }
 
-    $run.addEventListener('click', function () {
+    function restart() {
         var libs = encodeURIComponent($lib.value);
         var code = encodeURIComponent(editor.getValue());
         var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
         history.pushState(null, null, url);
         initApp();
+    }
+
+    $run.addEventListener('click', function () {
+        restart();
     });
 
-    $popups.addEventListener('click', function (e) {
-        if (e.target === this) {
+    $popups.addEventListener('click', function (event) {
+        if (event.target === this) {
             this.style.display = 'none';
         }
     });
@@ -218,11 +218,7 @@
     document.addEventListener('keydown', function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === 's') {
             event.preventDefault();
-            var libs = encodeURIComponent($lib.value);
-            var code = encodeURIComponent(editor.getValue());
-            var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
-            history.pushState(null, null, url);
-            initApp();
+            restart();
         }
     });
 })();

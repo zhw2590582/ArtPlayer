@@ -1,4 +1,5 @@
 var vConsole = new VConsole();
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: 'https://artplayer.org/assets/sample/video.mp4',
@@ -41,7 +42,7 @@ var art = new Artplayer({
     ],
     icons: {
         loading: '<img src="./assets/img/ploading.gif">',
-        state: '<img src="./assets/img/state.png">',
+        state: '<img src="./assets/img/state.svg">',
     },
     plugins: [
         artplayerPluginDanmuku({
