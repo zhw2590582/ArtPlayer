@@ -174,15 +174,7 @@
             });
     }
 
-    window.addEventListener('error', function (err) {
-        console.error(err);
-    });
-
-    window.addEventListener('unhandledrejection', function (err) {
-        console.error(err);
-    });
-
-    $run.addEventListener('click', function (e) {
+    $run.addEventListener('click', function () {
         var libs = encodeURIComponent($lib.value);
         var code = encodeURIComponent(editor.getValue());
         var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
@@ -193,6 +185,25 @@
     $popups.addEventListener('click', function (e) {
         if (e.target === this) {
             this.style.display = 'none';
+        }
+    });
+
+    window.addEventListener('error', function (err) {
+        console.error(err);
+    });
+
+    window.addEventListener('unhandledrejection', function (err) {
+        console.error(err);
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+            event.preventDefault();
+            var libs = encodeURIComponent($lib.value);
+            var code = encodeURIComponent(editor.getValue());
+            var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
+            history.pushState(null, null, url);
+            initApp();
         }
     });
 })();

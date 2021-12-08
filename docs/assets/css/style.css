@@ -136,6 +136,10 @@ img {
     background-color: rgb(39, 41, 54);
 }
 
+.header .run:hover {
+    background-color: #2e3350;
+}
+
 .main {
     display: flex;
     flex: 1;
