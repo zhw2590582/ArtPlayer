@@ -12,9 +12,10 @@
     var $lib = document.querySelector('.libsInput');
     var $run = document.querySelector('.run');
     var $popups = document.querySelector('.popups');
+    var $console = document.querySelector('.console');
     var loaddLib = [];
 
-    window.consoleLog(document.querySelector('.console'));
+    window.consoleLog($console);
 
     var editor = null;
     require.config({ paths: { vs: './assets/js/vs' } });
@@ -45,7 +46,12 @@
                     theme: 'vs-dark',
                     automaticLayout: true,
                     model: monaco.editor.createModel(
-                        ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                        [
+                            'var art = new Artplayer({',
+                            "\tcontainer: '.artplayer-app',",
+                            "\turl: 'https://artplayer.org/assets/sample/video.mp4',",
+                            '});',
+                        ].join('\n'),
                         'javascript',
                     ),
                 });
