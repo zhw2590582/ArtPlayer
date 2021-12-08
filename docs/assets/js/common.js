@@ -38,6 +38,7 @@
 
                 editor = monaco.editor.create($codeMirror, {
                     theme: 'vs-dark',
+                    automaticLayout: true,
                     model: monaco.editor.createModel(
                         ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
                         'javascript',
