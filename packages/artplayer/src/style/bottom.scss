@@ -16,6 +16,7 @@
 
         .art-progress {
             position: relative;
+            z-index: 0;
             pointer-events: auto;
 
             .art-control-progress {
@@ -150,6 +151,7 @@
 
         .art-controls {
             position: relative;
+            z-index: 1;
             pointer-events: auto;
             display: flex;
             align-items: center;
