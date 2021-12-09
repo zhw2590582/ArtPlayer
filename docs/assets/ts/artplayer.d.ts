@@ -2,31 +2,108 @@ export = Artplayer;
 export as namespace Artplayer;
 
 interface Selector {
+    /**
+     * Whether the default is selected
+     */
     default?: boolean;
+
+    /**
+     * Html string of selector
+     */
     html: string;
 }
 
 interface ComponentOption {
+    /**
+     * Html string or html element of component
+     */
     html: string | HTMLElement;
+
+    /**
+     * Whether to disable component
+     */
     disable?: boolean;
+
+    /**
+     * Unique name for component
+     */
     name?: string;
+
+    /**
+     * Component sort index
+     */
     index?: number;
-    style?: ElementCSSInlineStyle['style'];
+
+    /**
+     * Component style object
+     */
+    style?: CSSStyleDeclaration;
+
+    /**
+     * Component click event
+     */
     click?(component: Component, event: Event): void;
+
+    /**
+     * Wnen the component was mounted
+     */
     mounted?(element: HTMLElement): void;
+
+    /**
+     * Component tooltip, use in controls
+     */
     tooltip?: string;
+
+    /**
+     * Component position, use in controls
+     */
     position?: 'top' | 'left' | 'right';
+
+    /**
+     * Custom selector list, use in controls
+     */
     selector?: Selector[];
+
+    /**
+     * When selector item click, use in controls
+     */
     onSelect?(selector: Selector, element: HTMLElement): void;
 }
 
 interface Component {
+    /**
+     * Component ID
+     */
     readonly id: number;
+
+    /**
+     * Component name
+     */
     readonly name: string | void;
+
+    /**
+     * Component parent element
+     */
     readonly $parent: HTMLElement | void;
+
+    /**
+     * Whether to show component parent
+     */
     get show(): boolean;
+
+    /**
+     * Whether to show component parent
+     */
     set show(state: boolean);
+
+    /**
+     * Toggle the component parent
+     */
     set toggle(state: boolean);
+
+    /**
+     * Dynamic adding component
+     */
     add(option: ComponentOption): HTMLElement;
 }
 
@@ -36,69 +113,301 @@ type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
 type EventCallback = (event: Event) => any;
 
 interface Option {
+    /**
+     * The container mounted by the player
+     */
     container: string | HTMLElement;
+
+    /**
+     * Video url
+     */
     url: string;
+
+    /**
+     * Video poster image url
+     */
     poster?: string;
+
+    /**
+     * Video title
+     */
     title?: string;
+
+    /**
+     * Video url type
+     */
     type?: string;
+
+    /**
+     * Player color theme
+     */
     theme?: string;
+
+    /**
+     * Player language
+     */
     lang?: 'en' | 'zh-cn' | 'zh-tw';
+
+    /**
+     * Player default volume
+     */
     volume?: number;
+
+    /**
+     * Whether live broadcast mode
+     */
     isLive?: boolean;
+
+    /**
+     * Whether video muted
+     */
     muted?: boolean;
+
+    /**
+     * Whether video auto play
+     */
     autoplay?: boolean;
+
+    /**
+     * Whether player auto resize
+     */
     autoSize?: boolean;
+
+    /**
+     * Whether player auto run mini mode
+     */
     autoMini?: boolean;
+
+    /**
+     * Whether video auto loop
+     */
     loop?: boolean;
+
+    /**
+     * Whether show video flip button
+     */
     flip?: boolean;
+
+    /**
+     * Whether show video rotate button
+     */
     rotate?: boolean;
+
+    /**
+     * Whether show video playback rate button
+     */
     playbackRate?: boolean;
+
+    /**
+     * Whether show video aspect ratio button
+     */
     aspectRatio?: boolean;
+
+    /**
+     * Whether show video screenshot button
+     */
     screenshot?: boolean;
+
+    /**
+     * Whether show video setting button
+     */
     setting?: boolean;
+
+    /**
+     * Whether to enable player hotkey
+     */
     hotkey?: boolean;
+
+    /**
+     * Whether show video pip button
+     */
     pip?: boolean;
+
+    /**
+     * Do you want to run only one player at a time
+     */
     mutex?: boolean;
+
+    /**
+     * Whether use backdrop in UI
+     */
     backdrop?: boolean;
+
+    /**
+     * Whether show video window fullscreen button
+     */
     fullscreen?: boolean;
+
+    /**
+     * Whether show video web fullscreen button
+     */
     fullscreenWeb?: boolean;
+
+    /**
+     * Whether to enable player subtitle offset
+     */
     subtitleOffset?: boolean;
+
+    /**
+     * Whether to enable player mini progress bar
+     */
     miniProgressBar?: boolean;
+
+    /**
+     * Whether use local video function
+     */
     localVideo?: boolean;
+
+    /**
+     * Whether use local subtitle function
+     */
     localSubtitle?: boolean;
+
+    /**
+     * Whether use SSR function
+     */
     useSSR?: boolean;
+
+    /**
+     * Custom plugin list
+     */
     plugins?: PluginFunction[];
+
+    /**
+     * Custom mobile whitelist
+     */
     whitelist?: (string | WhitelistFunction | RegExp)[];
+
+    /**
+     * Custom layer list
+     */
     layers?: ComponentOption[];
+
+    /**
+     * Custom contextmenu list
+     */
     contextmenu?: ComponentOption[];
+
+    /**
+     * Custom control list
+     */
     controls?: ComponentOption[];
+
+    /**
+     * Custom setting list
+     */
     settings?: ComponentOption[];
+
+    /**
+     * Custom video quality list
+     */
     quality?: {
+        /**
+         * Whether the default is selected
+         */
         default?: boolean;
+
+        /**
+         * Html string of quality
+         */
         html: string;
+
+        /**
+         * Video quality url
+         */
         url: string;
     }[];
+
+    /**
+     * Custom highlight list
+     */
     highlight?: {
+        /**
+         * The highlight time
+         */
         time: number;
+
+        /**
+         * The highlight text
+         */
         text: string;
     }[];
+
+    /**
+     * Custom thumbnail
+     */
     thumbnails?: {
+        /**
+         * The thumbnail image url
+         */
         url: string;
+
+        /**
+         * The thumbnail item number
+         */
         number?: number;
+
+        /**
+         * The thumbnail item width
+         */
         width?: number;
+
+        /**
+         * The thumbnail item height
+         */
         height?: number;
+
+        /**
+         * The thumbnail column size
+         */
         column?: number;
     };
+
+    /**
+     * Custom subtitle option
+     */
     subtitle?: {
+        /**
+         * The subtitle url
+         */
         url: string;
-        style: ElementCSSInlineStyle['style'];
+
+        /**
+         * The subtitle type
+         */
+        type: 'vtt' | 'srt' | 'ass';
+
+        /**
+         * The subtitle style object
+         */
+        style: CSSStyleDeclaration;
+
+        /**
+         * The subtitle encoding
+         */
         encoding: string;
+
+        /**
+         * Whether bilingual subtitle
+         */
         bilingual: boolean;
     };
-    moreVideoAttr?: object;
+
+    /**
+     * Other video attribute
+     */
+    moreVideoAttr?: HTMLVideoElement;
+
+    /**
+     * Custom default icons
+     */
     icons?: {
         [propName: string]: string | HTMLElement;
     };
+
+    /**
+     * Custom video type function
+     */
     customType?: {
         [propName: string]: CustomType;
     };
@@ -291,7 +600,7 @@ declare class Artplayer extends Player {
         set show(state: boolean);
         set toggle(state: boolean);
         get url(): string;
-        style(name: string | ElementCSSInlineStyle['style'], value?: string): HTMLElement;
+        style(name: string | CSSStyleDeclaration, value?: string): HTMLElement;
         switch(url: string, option?: object): Promise<string>;
     };
 

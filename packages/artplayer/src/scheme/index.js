@@ -96,6 +96,7 @@ export default {
     },
     subtitle: {
         url: s,
+        type: s,
         style: o,
         encoding: s,
         bilingual: b,

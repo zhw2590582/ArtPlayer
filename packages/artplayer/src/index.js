@@ -156,6 +156,7 @@ export default class Artplayer extends Emitter {
             },
             subtitle: {
                 url: '',
+                type: '',
                 style: {},
                 encoding: 'utf-8',
                 bilingual: false,

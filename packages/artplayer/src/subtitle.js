@@ -19,20 +19,9 @@ export default class Subtitle extends Component {
 
         this.name = 'subtitle';
 
-        const {
-            option: { subtitle },
-            template: { $subtitle },
-        } = art;
-
-        setStyles($subtitle, subtitle.style);
-
-        if (subtitle.url) {
-            this.init(subtitle.url);
-        }
-
-        if (subtitle.bilingual) {
-            addClass($subtitle, 'art-bilingual');
-        }
+        art.once('ready', () => {
+            this.init(art.option.subtitle);
+        });
     }
 
     get url() {
@@ -81,22 +70,24 @@ export default class Subtitle extends Component {
         }
     }
 
-    switch(url, opt = {}) {
-        const { i18n, notice } = this.art;
-        return this.init(url, opt).then((subUrl) => {
-            if (opt.name) {
-                notice.show = `${i18n.get('Switch subtitle')}: ${opt.name}`;
+    switch(url, newOption = {}) {
+        const { i18n, notice, option } = this.art;
+        const subtitleOption = { ...option.subtitle, ...newOption, url };
+        return this.init(subtitleOption).then((subUrl) => {
+            if (newOption.name) {
+                notice.show = `${i18n.get('Switch subtitle')}: ${newOption.name}`;
             }
             this.art.emit('subtitleSwitch', subUrl);
             return subUrl;
         });
     }
 
-    init(url, opt = {}) {
+    init(subtitleOption) {
+        if (!subtitleOption.url) return;
+
         const {
             notice,
             events: { proxy },
-            option: { subtitle },
             template: { $subtitle, $video, $track },
         } = this.art;
 
@@ -109,16 +100,19 @@ export default class Subtitle extends Component {
             proxy(this.textTrack, 'cuechange', this.update.bind(this));
         }
 
+        this.style(subtitleOption.style);
+        this.bilingual = subtitleOption.bilingual;
+
         errorHandle(window.fetch, 'fetch not support');
-        return fetch(url)
+        return fetch(subtitleOption.url)
             .then((response) => response.arrayBuffer())
             .then((buffer) => {
                 errorHandle(window.TextDecoder, 'TextDecoder not support');
-                const decoder = new TextDecoder(opt.encoding || subtitle.encoding);
+                const decoder = new TextDecoder(subtitleOption.encoding);
                 const text = decoder.decode(buffer);
 
-                this.art.emit('subtitleLoad', url);
-                switch (opt.ext || getExt(url)) {
+                this.art.emit('subtitleLoad', subtitleOption.url);
+                switch (subtitleOption.type || getExt(subtitleOption.url)) {
                     case 'srt':
                         return vttToBlob(srtToVtt(text));
                     case 'ass':
@@ -126,7 +120,7 @@ export default class Subtitle extends Component {
                     case 'vtt':
                         return vttToBlob(text);
                     default:
-                        return url;
+                        return subtitleOption.url;
                 }
             })
             .then((subUrl) => {

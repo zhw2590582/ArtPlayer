@@ -83,6 +83,7 @@ var art = new Artplayer({
     },
     subtitle: {
         url: '/assets/sample/subtitle.srt',
+        type: 'srt',
         style: {
             color: '#03A9F4',
         },
