@@ -27,8 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, lint, build, and test
       run: |
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
         npm install
         npm install packages/* && npx lerna bootstrap --hoist
         npm run lint
