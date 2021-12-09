@@ -64,6 +64,10 @@ slug: /zh-cn/advance
 
 管理播放器 `Html` 的对象
 
+### query
+
+-   类型: `Function`
+
 方法 `query` 可以查找当前播放器实例内的 dom 元素，等同于 `document.querySelector('.artplayer-app').querySelector`
 
 <div className="run-code">▶ Run Code</div>
@@ -167,6 +171,10 @@ art.storage.clean();
 
 管理多语言的对象
 
+### get
+
+-   类型: `Getter/Setter`
+
 方法 `get` 可以获取到对应的语言的值
 
 <div className="run-code">▶ Run Code</div>
@@ -181,6 +189,10 @@ art.on('ready', () => {
     console.info(art.i18n.get('Play'));
 });
 ```
+
+### update
+
+-   类型: `Function`
 
 方法 `update` 可以动态添加更多语言
 
@@ -227,6 +239,36 @@ art.i18n.update({
 
 管理字幕的对象
 
+### show
+
+-   类型: `Getter/Setter`
+
+属性 `show` 可以控制字幕显示
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+    },
+});
+
+art.on('ready', () => {
+    art.seek = 20;
+    art.subtitle.show = false;
+    setTimeout(() => {
+        art.subtitle.show = true;
+    }, 3000);
+});
+```
+
+### style
+
+-   类型: `Function`
+
 方法 `style` 可以动态修改字幕样式
 
 <div className="run-code">▶ Run Code</div>
@@ -257,7 +299,11 @@ art.on('ready', () => {
 });
 ```
 
-方法 `switch` 可以动态修改字幕地址
+### url
+
+-   类型: `Getter/Setter`
+
+属性 url 可以设置和获取字幕网址
 
 <div className="run-code">▶ Run Code</div>
 
@@ -277,9 +323,47 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
+    console.info(art.subtitle.url);
+    setTimeout(() => {
+        art.subtitle.url = '/assets/sample/subtitle.srt?t=1';
+    }, 3000);
+});
+```
+
+### switch
+
+-   类型: `Function`
+
+方法 `switch` 就像属性设置 `url`，但可以修改字幕选项
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+        encoding: 'utf-8',
+        bilingual: true,
+        style: {
+            color: 'red',
+            'font-size': '30px',
+        },
+    },
+});
+
+art.on('ready', () => {
     art.seek = 20;
     setTimeout(() => {
-        art.subtitle.switch('/assets/sample/subtitle.srt');
+        art.subtitle.switch('/assets/sample/subtitle.srt?t=1', {
+            name: 'The new subtitle',
+            bilingual: false,
+            style: {
+                color: 'green',
+                'font-size': '24px',
+            },
+        });
     }, 3000);
 });
 ```
@@ -295,6 +379,10 @@ art.on('ready', () => {
 -   类型: `Object`
 
 管理业务层的对象
+
+### show
+
+-   类型: `Getter/Setter`
 
 属性 `show` 可以控制全部图层是否显示
 
@@ -333,6 +421,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   类型: `Function`
 
 方法 `add` 可以动态添加业务层
 
@@ -377,6 +469,10 @@ art.on('ready', () => {
 
 管理提示信息的对象
 
+### show
+
+-   类型: `Getter/Setter`
+
 属性 `show` 输出自定义提示信息，默认停留时间为两秒，且新的信息会马上覆盖旧的信息
 
 <div className="run-code">▶ Run Code</div>
@@ -399,6 +495,10 @@ art.on('ready', () => {
 
 管理控制栏的对象
 
+### show
+
+-   类型: `Getter/Setter`
+
 属性 `show` 可以控制控制栏是否显示
 
 <div className="run-code">▶ Run Code</div>
@@ -415,6 +515,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   类型: `Function`
 
 方法 `add` 可以动态添加控制器
 
@@ -459,6 +563,10 @@ art.on('ready', () => {
 
 管理右键菜单的对象
 
+### show
+
+-   类型: `Getter/Setter`
+
 属性 `show` 可以控制菜单是否显示
 
 <div className="run-code">▶ Run Code</div>
@@ -476,6 +584,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   类型: `Function`
 
 方法 `add` 可以动态添加菜单项
 
@@ -518,6 +630,10 @@ art.on('ready', () => {
 
 管理加载中的图标
 
+### show
+
+-   类型: `Getter/Setter`
+
 属性 `show` 可以控制是否显示加载中的图标
 
 <div className="run-code">▶ Run Code</div>
@@ -542,6 +658,10 @@ art.on('ready', () => {
 
 管理遮罩层的对象
 
+### show
+
+-   类型: `Getter/Setter`
+
 属性 `show` 可以控制遮罩层是否加载层
 
 <div className="run-code">▶ Run Code</div>
@@ -565,6 +685,10 @@ art.on('ready', () => {
 -   类型: `Object`
 
 管理快捷键的对象
+
+### add
+
+-   类型: `Function`
 
 方法 `add` 可以动态添加快捷键，第一个参数是 `key code` 数字，第二个参数是回调函数
 
@@ -599,6 +723,10 @@ art.on('ready', () => {
 
 管理设置面板的对象
 
+### show
+
+-   类型: `Getter/Setter`
+
 属性 `show` 可以控制设置面板是否显示
 
 <div className="run-code">▶ Run Code</div>
@@ -619,6 +747,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   类型: `Function`
 
 方法 `add` 可以动态添加设置项
 
@@ -661,6 +793,10 @@ art.on('ready', () => {
 -   类型: `Object`
 
 管理插件的对象
+
+### add
+
+-   类型: `Function`
 
 方法 `add` 可以动态添加插件
 

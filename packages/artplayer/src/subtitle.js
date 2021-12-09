@@ -81,7 +81,6 @@ export default class Subtitle extends Component {
             if (newOption.name) {
                 notice.show = `${i18n.get('Switch subtitle')}: ${newOption.name}`;
             }
-            this.art.emit('subtitleSwitch', subUrl);
             return subUrl;
         });
     }
@@ -132,6 +131,7 @@ export default class Subtitle extends Component {
                 if (this.url === subUrl) return subUrl;
                 URL.revokeObjectURL(this.url);
                 this.art.template.$track.src = subUrl;
+                this.art.emit('subtitleSwitch', subUrl);
                 return subUrl;
             })
             .catch((err) => {

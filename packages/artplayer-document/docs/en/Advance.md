@@ -64,6 +64,10 @@ Manage the whitelist
 
 Manage player `HTML`
 
+### query
+
+-   Type: `Function`
+
 Method `query` You can find DOM elements in the current player instance, equivalent to `document.querySelector('.artplayer-app').querySelector`
 
 <div className="run-code">▶ Run Code</div>
@@ -167,6 +171,10 @@ Manage player `icons`
 
 Manage player `i18n`
 
+### get
+
+-   Type: `Getter/Setter`
+
 Method `get` can get the value of the language value
 
 <div className="run-code">▶ Run Code</div>
@@ -181,6 +189,10 @@ art.on('ready', () => {
     console.info(art.i18n.get('Play'));
 });
 ```
+
+### update
+
+-   Type: `Function`
 
 Method `update` can add more languages
 
@@ -227,6 +239,36 @@ Manage the object of the core function
 
 Management subtitle object
 
+### show
+
+-   Type: `Getter/Setter`
+
+Property show can control subtitle to display
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+    },
+});
+
+art.on('ready', () => {
+    art.seek = 20;
+    art.subtitle.show = false;
+    setTimeout(() => {
+        art.subtitle.show = true;
+    }, 3000);
+});
+```
+
+### style
+
+-   Type: `Function`
+
 Method `style` can dynamically modify the subtitle style
 
 <div className="run-code">▶ Run Code</div>
@@ -257,7 +299,11 @@ art.on('ready', () => {
 });
 ```
 
-Methods `switch` can dynamically modify the subtitle url
+### url
+
+-   Type: `Getter/Setter`
+
+Propertie `url` can `set` and `get` the subtitle url
 
 <div className="run-code">▶ Run Code</div>
 
@@ -277,9 +323,47 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
+    console.info(art.subtitle.url);
+    setTimeout(() => {
+        art.subtitle.url = '/assets/sample/subtitle.srt?t=1';
+    }, 3000);
+});
+```
+
+### switch
+
+-   Type: `Function`
+
+Methods `switch` like the propertie `url` setter, but can modify the subtitle option
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+        encoding: 'utf-8',
+        bilingual: true,
+        style: {
+            color: 'red',
+            'font-size': '30px',
+        },
+    },
+});
+
+art.on('ready', () => {
     art.seek = 20;
     setTimeout(() => {
-        art.subtitle.switch('/assets/sample/subtitle.srt');
+        art.subtitle.switch('/assets/sample/subtitle.srt?t=1', {
+            name: 'The new subtitle',
+            bilingual: false,
+            style: {
+                color: 'green',
+                'font-size': '24px',
+            },
+        });
     }, 3000);
 });
 ```
@@ -295,6 +379,10 @@ Manage video info
 -   Type: `Object`
 
 Manage the object of the layers
+
+### show
+
+-   Type: `Getter/Setter`
 
 Property show can control all layers to display
 
@@ -333,6 +421,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   Type: `Function`
 
 Method `add` can dynamically add a layer
 
@@ -377,6 +469,10 @@ art.on('ready', () => {
 
 Manage the object of prompt information
 
+### show
+
+-   Type: `Getter/Setter`
+
 Attribute `show` output custom prompt information, the default residence time is two seconds, and the new information will immediately cover the old information
 
 <div className="run-code">▶ Run Code</div>
@@ -388,8 +484,8 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    art.notice.show = '自定义提示信息1';
-    art.notice.show = '自定义提示信息2';
+    art.notice.show = 'Custom prompt information 1';
+    art.notice.show = 'Custom prompt information 2';
 });
 ```
 
@@ -399,7 +495,11 @@ art.on('ready', () => {
 
 Manage the object of the control bar
 
-Attribute show can control if the control bar is displayed
+### show
+
+-   Type: `Getter/Setter`
+
+Attribute `show` can control if the control bar is displayed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -415,6 +515,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   Type: `Function`
 
 Method `add` can dynamically add a control
 
@@ -467,7 +571,11 @@ art.on('ready', () => {
 
 Manage the contextmenu
 
-Attribute show can control if the menu is displayed
+### show
+
+-   Type: `Getter/Setter`
+
+Attribute `show` can control if the menu is displayed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -484,6 +592,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   Type: `Function`
 
 Method `add` can dynamically add a menu items
 
@@ -526,6 +638,10 @@ art.on('ready', () => {
 
 Manage `loading` icon
 
+### show
+
+-   Type: `Getter/Setter`
+
 Property `show` can control whether the icon in the load is displayed
 
 <div className="run-code">▶ Run Code</div>
@@ -550,6 +666,10 @@ art.on('ready', () => {
 
 Manage the object of the mask layer
 
+### show
+
+-   Type: `Getter/Setter`
+
 Attributes `show` can control whether the mask layer is display
 
 <div className="run-code">▶ Run Code</div>
@@ -573,6 +693,10 @@ art.on('ready', () => {
 -   Type: `Object`
 
 Manage hotkey
+
+### add
+
+-   Type: `Function`
 
 Methods `add` can dynamically add a hotkey, the first parameter is `key code` number, the second parameter is a callback function
 
@@ -607,6 +731,10 @@ This hotkey will take effect only after the player gets the focus (if you click 
 
 Manage the object of the setting panel
 
+### show
+
+-   Type: `Getter/Setter`
+
 Property `show` can control the setting panel to display
 
 <div className="run-code">▶ Run Code</div>
@@ -627,6 +755,10 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+### add
+
+-   Type: `Function`
 
 Method `add` can dynamically add a setting items
 
@@ -669,6 +801,10 @@ art.on('ready', () => {
 -   Type: `Object`
 
 Manage plugin
+
+### add
+
+-   Type: `Function`
 
 Method `add` can be dynamically add a plugin
 

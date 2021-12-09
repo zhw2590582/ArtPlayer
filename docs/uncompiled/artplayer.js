@@ -3674,8 +3674,6 @@
     }, {
       key: "switch",
       value: function _switch(url) {
-        var _this2 = this;
-
         var newOption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         var _this$art = this.art,
             i18n = _this$art.i18n,
@@ -3691,15 +3689,13 @@
             notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(newOption.name);
           }
 
-          _this2.art.emit('subtitleSwitch', subUrl);
-
           return subUrl;
         });
       }
     }, {
       key: "init",
       value: function init(subtitleOption) {
-        var _this3 = this;
+        var _this2 = this;
 
         if (!subtitleOption.url) return;
         var _this$art2 = this.art,
@@ -3730,7 +3726,7 @@
           var decoder = new TextDecoder(subtitleOption.encoding);
           var text = decoder.decode(buffer);
 
-          _this3.art.emit('subtitleLoad', subtitleOption.url);
+          _this2.art.emit('subtitleLoad', subtitleOption.url);
 
           switch (subtitleOption.type || getExt(subtitleOption.url)) {
             case 'srt':
@@ -3747,9 +3743,12 @@
           }
         }).then(function (subUrl) {
           $subtitle.innerHTML = '';
-          if (_this3.url === subUrl) return subUrl;
-          URL.revokeObjectURL(_this3.url);
-          _this3.art.template.$track.src = subUrl;
+          if (_this2.url === subUrl) return subUrl;
+          URL.revokeObjectURL(_this2.url);
+          _this2.art.template.$track.src = subUrl;
+
+          _this2.art.emit('subtitleSwitch', subUrl);
+
           return subUrl;
         }).catch(function (err) {
           notice.show = err;
