@@ -11,7 +11,7 @@ interface ComponentOption {
     disable?: boolean;
     name?: string;
     index?: number;
-    style?: object;
+    style?: ElementCSSInlineStyle['style'];
     click?(component: Component, event: Event): void;
     mounted?(element: HTMLElement): void;
     tooltip?: string;
@@ -91,7 +91,7 @@ interface Option {
     };
     subtitle?: {
         url: string;
-        style: object;
+        style: ElementCSSInlineStyle['style'];
         encoding: string;
         bilingual: boolean;
     };
@@ -291,7 +291,7 @@ declare class Artplayer extends Player {
         set show(state: boolean);
         set toggle(state: boolean);
         get url(): string;
-        style(name: string | object, value?: string): HTMLElement;
+        style(name: string | ElementCSSInlineStyle['style'], value?: string): HTMLElement;
         switch(url: string, option?: object): Promise<string>;
     };
 

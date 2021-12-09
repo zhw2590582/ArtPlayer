@@ -5,7 +5,8 @@
             display: none;
             position: absolute;
             bottom: 35px;
-            width: 100px;
+            min-width: 100px;
+            max-width: 200px;
             padding: 5px 0;
             text-align: center;
             color: #fff;
@@ -17,6 +18,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+                padding: 0 5px;
                 text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.1);
