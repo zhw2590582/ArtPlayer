@@ -16,10 +16,7 @@ export default function urlMix(art, player) {
             if (typeName && typeCallback) {
                 sleep().then(() => {
                     art.loading.show = true;
-                    const result = typeCallback.call(art, $video, url, art);
-                    def(art, typeName, {
-                        value: result,
-                    });
+                    typeCallback.call(art, $video, url, art);
                 });
             } else {
                 $video.src = url;

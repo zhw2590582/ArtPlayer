@@ -112,6 +112,33 @@ type WhitelistFunction = (ua: string) => Boolean;
 type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
 type EventCallback = (event: Event) => any;
 
+interface SubtitleOption {
+    /**
+     * The subtitle url
+     */
+    url: string;
+
+    /**
+     * The subtitle type
+     */
+    type: 'vtt' | 'srt' | 'ass';
+
+    /**
+     * The subtitle style object
+     */
+    style: CSSStyleDeclaration;
+
+    /**
+     * The subtitle encoding, default utf-8
+     */
+    encoding: string;
+
+    /**
+     * Whether bilingual subtitle
+     */
+    bilingual: boolean;
+}
+
 interface Option {
     /**
      * The container mounted by the player
@@ -366,32 +393,7 @@ interface Option {
     /**
      * Custom subtitle option
      */
-    subtitle?: {
-        /**
-         * The subtitle url
-         */
-        url: string;
-
-        /**
-         * The subtitle type
-         */
-        type: 'vtt' | 'srt' | 'ass';
-
-        /**
-         * The subtitle style object
-         */
-        style: CSSStyleDeclaration;
-
-        /**
-         * The subtitle encoding
-         */
-        encoding: string;
-
-        /**
-         * Whether bilingual subtitle
-         */
-        bilingual: boolean;
-    };
+    subtitle?: SubtitleOption;
 
     /**
      * Other video attribute
@@ -402,7 +404,19 @@ interface Option {
      * Custom default icons
      */
     icons?: {
-        [propName: string]: string | HTMLElement;
+        loading: HTMLElement | string;
+        state: HTMLElement | string;
+        play: HTMLElement | string;
+        pause: HTMLElement | string;
+        volume: HTMLElement | string;
+        volumeClose: HTMLElement | string;
+        subtitle: HTMLElement | string;
+        screenshot: HTMLElement | string;
+        setting: HTMLElement | string;
+        fullscreen: HTMLElement | string;
+        fullscreenWeb: HTMLElement | string;
+        pip: HTMLElement | string;
+        indicator: HTMLElement | string;
     };
 
     /**
@@ -573,6 +587,7 @@ declare class Artplayer extends Player {
         readonly fullscreen: HTMLElement;
         readonly fullscreenWeb: HTMLElement;
         readonly pip: HTMLElement;
+        readonly indicator: HTMLElement;
     };
 
     readonly hotkey: {
@@ -601,7 +616,7 @@ declare class Artplayer extends Player {
         set toggle(state: boolean);
         get url(): string;
         style(name: string | CSSStyleDeclaration, value?: string): HTMLElement;
-        switch(url: string, option?: object): Promise<string>;
+        switch(url: string, option?: SubtitleOption): Promise<string>;
     };
 
     readonly mobile: object;

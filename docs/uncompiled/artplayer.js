@@ -1095,10 +1095,7 @@
         if (typeName && typeCallback) {
           sleep().then(function () {
             art.loading.show = true;
-            var result = typeCallback.call(art, $video, url, art);
-            def(art, typeName, {
-              value: result
-            });
+            typeCallback.call(art, $video, url, art);
           });
         } else {
           $video.src = url;
