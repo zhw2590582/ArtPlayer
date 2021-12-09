@@ -28,6 +28,10 @@ export default class Subtitle extends Component {
         return this.art.template.$track.src;
     }
 
+    set url(url) {
+        this.switch(url);
+    }
+
     get textTrack() {
         return this.art.template.$video.textTracks[0];
     }

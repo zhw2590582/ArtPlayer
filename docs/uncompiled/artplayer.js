@@ -3618,6 +3618,9 @@
       key: "url",
       get: function get() {
         return this.art.template.$track.src;
+      },
+      set: function set(url) {
+        this.switch(url);
       }
     }, {
       key: "textTrack",
