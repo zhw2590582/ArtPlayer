@@ -1,7 +1,7 @@
 export = Artplayer;
 export as namespace Artplayer;
 
-interface Selector {
+type Selector = {
     /**
      * Whether the default is selected
      */
@@ -11,9 +11,9 @@ interface Selector {
      * Html string of selector
      */
     html: string;
-}
+};
 
-interface ComponentOption {
+type ComponentOption = {
     /**
      * Html string or html element of component
      */
@@ -68,16 +68,16 @@ interface ComponentOption {
      * When selector item click, use in controls
      */
     onSelect?(selector: Selector, element: HTMLElement): void;
-}
+};
 
-interface Component {
+type Component = {
     /**
-     * Component ID
+     * Component self-increasing id
      */
     readonly id: number;
 
     /**
-     * Component name
+     * Component parent name
      */
     readonly name: string | void;
 
@@ -102,17 +102,17 @@ interface Component {
     set toggle(state: boolean);
 
     /**
-     * Dynamic adding component
+     * Dynamic add a component
      */
     add(option: ComponentOption): HTMLElement;
-}
+};
 
 type PluginFunction = (art: Artplayer) => any;
 type WhitelistFunction = (ua: string) => Boolean;
 type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
 type EventCallback = (event: Event) => any;
 
-interface SubtitleOption {
+type SubtitleOption = {
     /**
      * The subtitle url
      */
@@ -121,25 +121,25 @@ interface SubtitleOption {
     /**
      * The subtitle type
      */
-    type: 'vtt' | 'srt' | 'ass';
+    type?: 'vtt' | 'srt' | 'ass';
 
     /**
      * The subtitle style object
      */
-    style: CSSStyleDeclaration;
+    style?: CSSStyleDeclaration;
 
     /**
      * The subtitle encoding, default utf-8
      */
-    encoding: string;
+    encoding?: string;
 
     /**
      * Whether bilingual subtitle
      */
-    bilingual: boolean;
-}
+    bilingual?: boolean;
+};
 
-interface Option {
+type Option = {
     /**
      * The container mounted by the player
      */
@@ -404,28 +404,28 @@ interface Option {
      * Custom default icons
      */
     icons?: {
-        loading: HTMLElement | string;
-        state: HTMLElement | string;
-        play: HTMLElement | string;
-        pause: HTMLElement | string;
-        volume: HTMLElement | string;
-        volumeClose: HTMLElement | string;
-        subtitle: HTMLElement | string;
-        screenshot: HTMLElement | string;
-        setting: HTMLElement | string;
-        fullscreen: HTMLElement | string;
-        fullscreenWeb: HTMLElement | string;
-        pip: HTMLElement | string;
-        indicator: HTMLElement | string;
+        loading?: HTMLElement | string;
+        state?: HTMLElement | string;
+        play?: HTMLElement | string;
+        pause?: HTMLElement | string;
+        volume?: HTMLElement | string;
+        volumeClose?: HTMLElement | string;
+        subtitle?: HTMLElement | string;
+        screenshot?: HTMLElement | string;
+        setting?: HTMLElement | string;
+        fullscreen?: HTMLElement | string;
+        fullscreenWeb?: HTMLElement | string;
+        pip?: HTMLElement | string;
+        indicator?: HTMLElement | string;
     };
 
     /**
      * Custom video type function
      */
     customType?: {
-        [propName: string]: CustomType;
+        [key: string]: CustomType;
     };
-}
+};
 
 type AspectRatio = 'default' | '4:3' | '16:9' | void;
 type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
@@ -498,8 +498,23 @@ declare class Artplayer extends Player {
     static version: string;
     static env: string;
     static build: string;
-    static config: object;
-    static utils: object;
+    static config: {
+        propertys: {
+            [key: string]: string[];
+        };
+        methods: {
+            [key: string]: string[];
+        };
+        events: {
+            [key: string]: string[];
+        };
+        prototypes: {
+            [key: string]: string[];
+        };
+    };
+    static utils: {
+        [key: string]: string | Function;
+    };
     static scheme: object;
     static Emitter: Function;
     static validator: Function;
@@ -520,7 +535,12 @@ declare class Artplayer extends Player {
     emit(name: string): void;
     off(name: string, callback?: Function): void;
     query(selector: string): HTMLElement;
-    proxy(target: HTMLElement, name: string, callback: EventCallback, option?: object): Function;
+    proxy(
+        target: HTMLElement,
+        name: string,
+        callback: EventCallback,
+        option?: { passive?: boolean; once?: boolean; capture?: boolean } | Boolean,
+    ): Function;
     destroy(removeHtml?: boolean): void;
 
     readonly template: {
@@ -556,7 +576,12 @@ declare class Artplayer extends Player {
     };
 
     readonly events: {
-        proxy(target: HTMLElement, name: string, callback: EventCallback, option?: object): Function;
+        proxy(
+            target: HTMLElement,
+            name: string,
+            callback: EventCallback,
+            option?: { passive?: boolean; once?: boolean; capture?: boolean } | Boolean,
+        ): Function;
         hover(target: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): Function;
         loadImg(target: HTMLImageElement | string): Promise<HTMLImageElement>;
     };
@@ -600,7 +625,9 @@ declare class Artplayer extends Player {
     };
 
     readonly i18n: {
-        readonly languages: object;
+        readonly languages: {
+            [key: string]: object;
+        };
         get(key: string): string;
         update(language: object): void;
     };
@@ -623,17 +650,17 @@ declare class Artplayer extends Player {
 
     readonly player: Player;
 
-    readonly layers: Component;
-
-    readonly controls: Component;
-
-    readonly contextmenu: Component;
-
     readonly info: Component;
 
     readonly loading: Component;
 
     readonly mask: Component;
 
-    readonly setting: Component;
+    readonly layers: Record<string, HTMLElement> & Component;
+
+    readonly controls: Record<string, HTMLElement> & Component;
+
+    readonly contextmenu: Record<string, HTMLElement> & Component;
+
+    readonly setting: Record<string, HTMLElement> & Component;
 }
