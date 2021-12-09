@@ -952,6 +952,7 @@ Set the subtitles of the video, support subtitles format: `vtt`、`srt`、`ass`
 | Property    | Type      | Description                                            |
 | ----------- | --------- | ------------------------------------------------------ |
 | `url`       | `String`  | Subtitle url                                           |
+| `type`      | `String`  | Subtitle type: `vtt`, `srt`, `ass`                     |
 | `style`     | `Object`  | Subtitle style                                         |
 | `encoding`  | `String`  | Subtitle encoding, default `utf-8`                     |
 | `bilingual` | `Boolean` | Whether the double subtitle style is divided by a wrap |
@@ -964,6 +965,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     subtitle: {
         url: '/assets/sample/subtitle.srt',
+        type: 'srt',
         encoding: 'utf-8',
         bilingual: true,
         style: {
