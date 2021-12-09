@@ -642,6 +642,7 @@ declare class Artplayer extends Player {
         set show(state: boolean);
         set toggle(state: boolean);
         get url(): string;
+        set url(url: string);
         style(name: string | CSSStyleDeclaration, value?: string): HTMLElement;
         switch(url: string, option?: SubtitleOption): Promise<string>;
     };
