@@ -35,16 +35,43 @@ describe('Document', function() {
         });
     });
 
+    function testAll(art, done) {
+        let isDone = false;
+        art.on('ready', () => {
+            expect(art.id).to.be.an('number');
+
+            if (!isDone) {
+                isDone = true;
+                done();
+            }
+        });
+
+        art.on('video:error', () => {
+            expect(art.id).to.be.an('number');
+
+            if (!isDone) {
+                isDone = true;
+                done();
+            }
+        });
+
+        setTimeout(() => {
+            expect(art.id).to.be.an('number');
+
+            if (!isDone) {
+                isDone = true;
+                done();
+            }
+        }, 1000);
+    }
+
     ${htmls
         .map((item, index) => {
             return `
     it('Test${index}', function(done) {
         ${item}
 
-        setTimeout(() => {
-            expect(art.id).to.be.an('number');
-            done();
-        }, 1000);
+        testAll(art, done);
     });`;
         })
         .join('\n\n')}

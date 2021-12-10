@@ -5,6 +5,36 @@ describe("Document", function () {
     });
   });
 
+  function testAll(art, done) {
+    let isDone = false;
+    art.on("ready", () => {
+      expect(art.id).to.be.an("number");
+
+      if (!isDone) {
+        isDone = true;
+        done();
+      }
+    });
+
+    art.on("video:error", () => {
+      expect(art.id).to.be.an("number");
+
+      if (!isDone) {
+        isDone = true;
+        done();
+      }
+    });
+
+    setTimeout(() => {
+      expect(art.id).to.be.an("number");
+
+      if (!isDone) {
+        isDone = true;
+        done();
+      }
+    }, 1000);
+  }
+
   it("Test0", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
@@ -15,10 +45,7 @@ describe("Document", function () {
       console.info($video);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test1", function (done) {
@@ -31,10 +58,7 @@ describe("Document", function () {
       console.info($video);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test2", function (done) {
@@ -47,10 +71,7 @@ describe("Document", function () {
     art.storage.del("your-key");
     art.storage.clean();
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test3", function (done) {
@@ -62,10 +83,7 @@ describe("Document", function () {
       console.info(art.i18n.get("Play"));
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test4", function (done) {
@@ -95,13 +113,29 @@ describe("Document", function () {
       },
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test5", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      subtitle: {
+        url: "./assets/sample/subtitle.srt",
+      },
+    });
+    art.on("ready", () => {
+      art.seek = 20;
+      art.subtitle.show = false;
+      setTimeout(() => {
+        art.subtitle.show = true;
+      }, 3000);
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test6", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -130,13 +164,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test6", function (done) {
+  it("Test7", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -155,19 +186,54 @@ describe("Document", function () {
       },
     });
     art.on("ready", () => {
-      art.seek = 20;
+      console.info(art.subtitle.url);
       setTimeout(() => {
-        art.subtitle.switch("./assets/sample/subtitle.srt");
+        art.subtitle.url = "./assets/sample/subtitle.srt?t=1";
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test7", function (done) {
+  it("Test8", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      subtitle: {
+        url: "./assets/sample/subtitle.srt",
+
+        encoding: "utf-8",
+
+        bilingual: true,
+
+        style: {
+          color: "red",
+
+          "font-size": "30px",
+        },
+      },
+    });
+    art.on("ready", () => {
+      art.seek = 20;
+      setTimeout(() => {
+        art.subtitle.switch("./assets/sample/subtitle.srt?t=1", {
+          name: "The new subtitle",
+
+          bilingual: false,
+
+          style: {
+            color: "green",
+
+            "font-size": "24px",
+          },
+        });
+      }, 3000);
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test9", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -191,13 +257,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test8", function (done) {
+  it("Test10", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -207,13 +270,10 @@ describe("Document", function () {
       art.notice.show = "自定义提示信息2";
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test9", function (done) {
+  it("Test11", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -224,13 +284,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test10", function (done) {
+  it("Test12", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -253,13 +310,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test11", function (done) {
+  it("Test13", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -271,13 +325,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test12", function (done) {
+  it("Test14", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -297,13 +348,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test13", function (done) {
+  it("Test15", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -315,13 +363,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test14", function (done) {
+  it("Test16", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -333,13 +378,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test15", function (done) {
+  it("Test17", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -353,13 +395,10 @@ describe("Document", function () {
       });
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test16", function (done) {
+  it("Test18", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -374,13 +413,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test17", function (done) {
+  it("Test19", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -401,13 +437,10 @@ describe("Document", function () {
       });
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test18", function (done) {
+  it("Test20", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -416,13 +449,10 @@ describe("Document", function () {
       console.info(Artplayer.instances.length);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test19", function (done) {
+  it("Test21", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -431,13 +461,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test20", function (done) {
+  it("Test22", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -446,13 +473,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test21", function (done) {
+  it("Test23", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -461,13 +485,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test22", function (done) {
+  it("Test24", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -476,13 +497,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test23", function (done) {
+  it("Test25", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -494,13 +512,10 @@ describe("Document", function () {
       art.seek = 5;
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test24", function (done) {
+  it("Test26", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -512,13 +527,10 @@ describe("Document", function () {
       art.volume = 0.5;
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test25", function (done) {
+  it("Test27", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -530,13 +542,10 @@ describe("Document", function () {
       art.destroy();
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test26", function (done) {
+  it("Test28", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -545,13 +554,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test27", function (done) {
+  it("Test29", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -560,13 +566,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test28", function (done) {
+  it("Test30", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -577,13 +580,10 @@ describe("Document", function () {
       console.info(state);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test29", function (done) {
+  it("Test31", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -593,13 +593,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test30", function (done) {
+  it("Test32", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -608,13 +605,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test31", function (done) {
+  it("Test33", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -626,13 +620,10 @@ describe("Document", function () {
       art.url = "./assets/sample/video.mp4?t=0";
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test32", function (done) {
+  it("Test34", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -642,13 +633,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test33", function (done) {
+  it("Test35", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -658,13 +646,10 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test34", function (done) {
+  it("Test36", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -673,35 +658,7 @@ describe("Document", function () {
       console.info(args);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test35", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "./assets/sample/video.mp4",
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test36", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      // container: document.querySelector('.artplayer-app'),
-      url: "./assets/sample/video.mp4",
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test37", function (done) {
@@ -710,26 +667,39 @@ describe("Document", function () {
       url: "./assets/sample/video.mp4",
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test38", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      // container: document.querySelector('.artplayer-app'),
+      url: "./assets/sample/video.mp4",
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test39", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test40", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
       poster: "./assets/sample/poster.jpg",
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test39", function (done) {
+  it("Test41", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -737,65 +707,50 @@ describe("Document", function () {
       screenshot: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test40", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "./assets/sample/video.mp4",
-      theme: "#ffad00",
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test41", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "./assets/sample/video.mp4",
-      volume: 0.5,
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test42", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
-      isLive: true,
+      theme: "#ffad00",
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test43", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
-      muted: true,
+      volume: 0.5,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test44", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      isLive: true,
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test45", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      muted: true,
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test46", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -803,39 +758,30 @@ describe("Document", function () {
       muted: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test45", function (done) {
+  it("Test47", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
       autoMini: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test46", function (done) {
+  it("Test48", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
       loop: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test47", function (done) {
+  it("Test49", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -843,13 +789,10 @@ describe("Document", function () {
       setting: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test48", function (done) {
+  it("Test50", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -858,13 +801,10 @@ describe("Document", function () {
       autoSize: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test49", function (done) {
+  it("Test51", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -872,13 +812,10 @@ describe("Document", function () {
       setting: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test50", function (done) {
+  it("Test52", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -886,13 +823,10 @@ describe("Document", function () {
       setting: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test51", function (done) {
+  it("Test53", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -903,91 +837,70 @@ describe("Document", function () {
       },
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test52", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "./assets/sample/video.mp4",
-      setting: true,
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test53", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "./assets/sample/video.mp4",
-      hotkey: true,
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test54", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
-      pip: true,
+      setting: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test55", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
-      mutex: true,
+      hotkey: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test56", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
-      fullscreen: true,
+      pip: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test57", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
-      fullscreenWeb: true,
+      mutex: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test58", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      fullscreen: true,
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test59", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      fullscreenWeb: true,
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test60", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -998,26 +911,20 @@ describe("Document", function () {
       subtitleOffset: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test59", function (done) {
+  it("Test61", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
       miniProgressBar: true,
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test60", function (done) {
+  it("Test62", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1037,13 +944,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test61", function (done) {
+  it("Test63", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1063,13 +967,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test62", function (done) {
+  it("Test64", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1115,13 +1016,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test63", function (done) {
+  it("Test65", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1141,13 +1039,10 @@ describe("Document", function () {
       art.contextmenu.show = true;
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test64", function (done) {
+  it("Test66", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1196,13 +1091,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test65", function (done) {
+  it("Test67", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1223,13 +1115,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test66", function (done) {
+  it("Test68", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1266,13 +1155,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test67", function (done) {
+  it("Test69", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1282,13 +1168,10 @@ describe("Document", function () {
       // whitelist: [/iPhone OS 11/gi],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test68", function (done) {
+  it("Test70", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1305,18 +1188,17 @@ describe("Document", function () {
       },
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test69", function (done) {
+  it("Test71", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
       subtitle: {
         url: "./assets/sample/subtitle.srt",
+
+        type: "srt",
 
         encoding: "utf-8",
 
@@ -1330,13 +1212,10 @@ describe("Document", function () {
       },
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test70", function (done) {
+  it("Test72", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1347,13 +1226,10 @@ describe("Document", function () {
       },
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test71", function (done) {
+  it("Test73", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1386,26 +1262,20 @@ describe("Document", function () {
       },
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test72", function (done) {
+  it("Test74", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.flv",
       type: "flv",
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test73", function (done) {
+  it("Test75", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.flv",
@@ -1418,26 +1288,20 @@ describe("Document", function () {
       },
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test74", function (done) {
+  it("Test76", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
       lang: "en",
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test75", function (done) {
+  it("Test77", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1504,13 +1368,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test76", function (done) {
+  it("Test78", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1523,13 +1384,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test77", function (done) {
+  it("Test79", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1564,13 +1422,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test78", function (done) {
+  it("Test80", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1602,13 +1457,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test79", function (done) {
+  it("Test81", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1638,13 +1490,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test80", function (done) {
+  it("Test82", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1678,13 +1527,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test81", function (done) {
+  it("Test83", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1718,13 +1564,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test82", function (done) {
+  it("Test84", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1734,13 +1577,10 @@ describe("Document", function () {
       art.play();
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test83", function (done) {
+  it("Test85", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1753,13 +1593,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test84", function (done) {
+  it("Test86", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1772,13 +1609,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test85", function (done) {
+  it("Test87", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1787,13 +1621,10 @@ describe("Document", function () {
       art.seek = 5;
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test86", function (done) {
+  it("Test88", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1802,13 +1633,10 @@ describe("Document", function () {
       art.forward = 5;
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test87", function (done) {
+  it("Test89", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1820,13 +1648,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test88", function (done) {
+  it("Test90", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1837,13 +1662,10 @@ describe("Document", function () {
       console.info(art.volume);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test89", function (done) {
+  it("Test91", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1854,13 +1676,10 @@ describe("Document", function () {
       console.info(art.url);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test90", function (done) {
+  it("Test92", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1872,13 +1691,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test91", function (done) {
+  it("Test93", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1890,13 +1706,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test92", function (done) {
+  it("Test94", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1907,13 +1720,10 @@ describe("Document", function () {
       console.info(art.muted);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test93", function (done) {
+  it("Test95", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1924,41 +1734,7 @@ describe("Document", function () {
       console.info(art.currentTime);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test94", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "./assets/sample/video.mp4",
-    });
-    art.on("ready", () => {
-      console.info(art.duration);
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
-  });
-
-  it("Test95", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "./assets/sample/video.mp4",
-    });
-    art.on("ready", () => {
-      art.seek = 10;
-      art.screenshot();
-    });
-
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test96", function (done) {
@@ -1967,14 +1743,10 @@ describe("Document", function () {
       url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
-      art.seek = 10;
-      art.getDataURL().then((url) => console.info(url));
+      console.info(art.duration);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test97", function (done) {
@@ -1984,16 +1756,39 @@ describe("Document", function () {
     });
     art.on("ready", () => {
       art.seek = 10;
-      art.getBlobUrl().then((url) => console.info(url));
+      art.screenshot();
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
   it("Test98", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+    });
+    art.on("ready", () => {
+      art.seek = 10;
+      art.getDataURL().then((url) => console.info(url));
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test99", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+    });
+    art.on("ready", () => {
+      art.seek = 10;
+      art.getBlobUrl().then((url) => console.info(url));
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test100", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2006,13 +1801,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test99", function (done) {
+  it("Test101", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2025,13 +1817,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test100", function (done) {
+  it("Test102", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2044,13 +1833,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test101", function (done) {
+  it("Test103", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2062,13 +1848,10 @@ describe("Document", function () {
       console.info(art.poster);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test102", function (done) {
+  it("Test104", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2080,13 +1863,10 @@ describe("Document", function () {
       }, 3000);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test103", function (done) {
+  it("Test105", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2098,13 +1878,10 @@ describe("Document", function () {
       console.info(art.playing);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test104", function (done) {
+  it("Test106", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2115,13 +1892,10 @@ describe("Document", function () {
       console.info(art.autoSize);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test105", function (done) {
+  it("Test107", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2130,13 +1904,10 @@ describe("Document", function () {
       console.info(JSON.stringify(art.rect));
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test106", function (done) {
+  it("Test108", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2147,13 +1918,10 @@ describe("Document", function () {
       console.info(art.flip);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test107", function (done) {
+  it("Test109", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2165,13 +1933,10 @@ describe("Document", function () {
       console.info(art.rotate);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test108", function (done) {
+  it("Test110", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2182,13 +1947,10 @@ describe("Document", function () {
       console.info(art.playbackRate);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test109", function (done) {
+  it("Test111", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2199,13 +1961,10 @@ describe("Document", function () {
       console.info(art.aspectRatio);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test110", function (done) {
+  it("Test112", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2216,13 +1975,10 @@ describe("Document", function () {
       console.info(art.loop);
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test111", function (done) {
+  it("Test113", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2231,13 +1987,10 @@ describe("Document", function () {
       art.destroy();
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test112", function (done) {
+  it("Test114", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2274,13 +2027,10 @@ describe("Document", function () {
       ],
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 
-  it("Test113", function (done) {
+  it("Test115", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2337,9 +2087,6 @@ describe("Document", function () {
       var $setting1 = art.setting["setting1"];
     });
 
-    setTimeout(() => {
-      expect(art.id).to.be.an("number");
-      done();
-    }, 1000);
+    testAll(art, done);
   });
 });
