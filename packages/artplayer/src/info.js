@@ -4,7 +4,6 @@ import Component from './utils/component';
 export default class Info extends Component {
     constructor(art) {
         super(art);
-        this.art = art;
         this.name = 'info';
         if (this.art.template.$info) {
             this.init();
