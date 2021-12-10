@@ -27,10 +27,10 @@ var art = new Artplayer({
                 },
             ],
             onSelect: function (item, $dom) {
-                art.subtitle.switch(item.url, {
-                    name: $dom.innerText,
-                });
+                console.info(item, $dom);
 
+                art.subtitle.url = item.url;
+                
                 return 'You click ' + item.html;
             },
         },
