@@ -84,56 +84,13 @@ The size of the player depends on the size of the `container`, so your `containe
 
 👉 [Click to open an online demo](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
 
-Create component: `Artplayer.vue`
-
-```js
-<template>
-  <div ref="artRef"></div>
-</template>
-
-<script>
-import Artplayer from "artplayer";
-
-export default {
-  data() {
-    return {
-      instance: null,
-    };
-  },
-  props: {
-    option: {
-      type: Object,
-      required: true,
-    },
-  },
-  mounted() {
-    this.instance = new Artplayer({
-      ...this.option,
-      container: this.$refs.artRef,
-    });
-
-    this.$nextTick(() => {
-      this.$emit("get-instance", this.instance);
-    });
-  },
-  beforeUnmount() {
-    if (this.instance && this.instance.destroy) {
-      this.instance.destroy();
-    }
-  },
-};
-</script>
-```
-
-Import the `Artplayer.vue` component
-
 ```jsx
 <template>
   <Artplayer @get-instance="getInstance" :option="option" :style="style" />
 </template>
 
 <script>
-import Artplayer from "./Artplayer.vue";
+import Artplayer from "artplayer/examples/vue/Artplayer";
 
 export default {
   data() {
@@ -144,6 +101,7 @@ export default {
       style: {
         width: "600px",
         height: "400px",
+        margin: "60px auto 0",
       },
     };
   },
@@ -163,66 +121,31 @@ export default {
 
 👉 [Click to open an online demo](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
 
-Create component: `Artplayer.jsx`
-
 ```jsx
-import React from 'react';
-import Artplayer from 'artplayer';
-
-export default class ArtplayerReact extends React.Component {
-    constructor(props) {
-        super(props);
-        this.instance = null;
-        this.artRef = React.createRef();
-    }
-
-    componentDidMount() {
-        const { option, getInstance } = this.props;
-        this.instance = new Artplayer({
-            ...option,
-            container: this.artRef.current,
-        });
-
-        if (getInstance && typeof getInstance === 'function') {
-            getInstance(this.instance);
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.instance && this.instance.destroy) {
-            this.instance.destroy();
-        }
-    }
-
-    render() {
-        const { option, getInstance, ...rest } = this.props;
-        return React.createElement('div', {
-            ref: this.artRef,
-            ...rest,
-        });
-    }
-}
-```
-
-Import the `Artplayer.jsx` component
-
-```jsx
-import Artplayer from "./Artplayer.jsx";
+import React from "react";
+import ReactDOM from "react-dom";
+import Artplayer from "artplayer/examples/react/Artplayer";
 
 function App() {
   return (
-    <Artplayer
-      option={{
-        url: "https://artplayer.org/assets/sample/video.mp4",
-      }}
-      style={{
-        width: "600px",
-        height: "400px",
-      }}
-      getInstance={ins => console.log(ins)}
-    />
+    <div>
+      <Artplayer
+        option={{
+          url: "https://artplayer.org/assets/sample/video.mp4"
+        }}
+        style={{
+          width: "600px",
+          height: "400px",
+          margin: "60px auto 0"
+        }}
+        getInstance={(art) => console.log(art)}
+      />
+    </div>
   );
 }
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
 ```
 
 :::caution Tip
