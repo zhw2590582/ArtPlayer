@@ -78,12 +78,4 @@ export default function pipMix(art, player) {
             },
         });
     }
-
-    def(player, 'pipToggle', {
-        set(value) {
-            if (value) {
-                player.pip = !player.pip;
-            }
-        },
-    });
 }

@@ -1,10 +1,10 @@
 import { append, tooltip } from '../utils';
 
 export default function fullscreenWeb(option) {
-    return art => ({
+    return (art) => ({
         ...option,
         tooltip: art.i18n.get('Web fullscreen'),
-        mounted: $control => {
+        mounted: ($control) => {
             const {
                 events: { proxy },
                 icons,
@@ -15,10 +15,10 @@ export default function fullscreenWeb(option) {
             append($control, icons.fullscreenWeb);
 
             proxy($control, 'click', () => {
-                player.fullscreenWebToggle = true;
+                player.fullscreenWeb = !player.fullscreenWeb;
             });
 
-            art.on('fullscreenWeb', value => {
+            art.on('fullscreenWeb', (value) => {
                 tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
             });
         },

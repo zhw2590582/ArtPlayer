@@ -92,12 +92,4 @@ export default function miniMix(art, player) {
             }
         },
     });
-
-    def(player, 'miniToggle', {
-        set(value) {
-            if (value) {
-                player.mini = !player.mini;
-            }
-        },
-    });
 }

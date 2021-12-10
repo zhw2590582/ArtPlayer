@@ -18,7 +18,7 @@ export default function eventInit(art, player) {
     });
 
     proxy($video, 'dblclick', () => {
-        player.fullscreenToggle = true;
+        player.fullscreen = !player.fullscreen;
     });
 
     config.events.forEach((eventName) => {

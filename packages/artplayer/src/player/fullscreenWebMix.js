@@ -22,12 +22,4 @@ export default function fullscreenWebMix(art, player) {
             }
         },
     });
-
-    def(player, 'fullscreenWebToggle', {
-        set(value) {
-            if (value) {
-                player.fullscreenWeb = !player.fullscreenWeb;
-            }
-        },
-    });
 }

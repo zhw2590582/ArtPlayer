@@ -1160,7 +1160,7 @@
       player.toggle();
     });
     proxy($video, 'dblclick', function () {
-      player.fullscreenToggle = true;
+      player.fullscreen = !player.fullscreen;
     });
     config.events.forEach(function (eventName) {
       proxy($video, eventName, function (event) {
@@ -1887,13 +1887,6 @@
 
       def(art, 'fullscreen', get(player, 'fullscreen'));
     });
-    def(player, 'fullscreenToggle', {
-      set: function set(value) {
-        if (value) {
-          player.fullscreen = !player.fullscreen;
-        }
-      }
-    });
   }
 
   function fullscreenWebMix(art, player) {
@@ -1914,13 +1907,6 @@
           player.autoSize = art.option.autoSize;
           art.emit('resize');
           art.emit('fullscreenWeb');
-        }
-      }
-    });
-    def(player, 'fullscreenWebToggle', {
-      set: function set(value) {
-        if (value) {
-          player.fullscreenWeb = !player.fullscreenWeb;
         }
       }
     });
@@ -1995,14 +1981,6 @@
         }
       });
     }
-
-    def(player, 'pipToggle', {
-      set: function set(value) {
-        if (value) {
-          player.pip = !player.pip;
-        }
-      }
-    });
   }
 
   function seekMix(art, player) {
@@ -2233,13 +2211,6 @@
           player.playbackRate = false;
           player.autoSize = option.autoSize;
           art.emit('mini');
-        }
-      }
-    });
-    def(player, 'miniToggle', {
-      set: function set(value) {
-        if (value) {
-          player.mini = !player.mini;
         }
       }
     });
@@ -2599,7 +2570,7 @@
               player = art.player;
           append($control, icons.fullscreen);
           proxy($control, 'click', function () {
-            player.fullscreenToggle = true;
+            player.fullscreen = !player.fullscreen;
           });
           art.on('fullscreen', function (value) {
             tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
@@ -2623,7 +2594,7 @@
               player = art.player;
           append($control, icons.fullscreenWeb);
           proxy($control, 'click', function () {
-            player.fullscreenWebToggle = true;
+            player.fullscreenWeb = !player.fullscreenWeb;
           });
           art.on('fullscreenWeb', function (value) {
             tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
@@ -2647,7 +2618,7 @@
               player = art.player;
           append($control, icons.pip);
           proxy($control, 'click', function () {
-            player.pipToggle = true;
+            player.pip = !player.pip;
           });
           art.on('pip', function (value) {
             tooltip($control, i18n.get(value ? 'Exit PIP mode' : 'PIP mode'));

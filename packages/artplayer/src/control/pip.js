@@ -15,7 +15,7 @@ export default function pip(option) {
             append($control, icons.pip);
 
             proxy($control, 'click', () => {
-                player.pipToggle = true;
+                player.pip = !player.pip;
             });
 
             art.on('pip', (value) => {

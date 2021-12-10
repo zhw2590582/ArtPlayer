@@ -76,12 +76,4 @@ export default function fullscreenMix(art, player) {
         // 异步设置
         def(art, 'fullscreen', get(player, 'fullscreen'));
     });
-
-    def(player, 'fullscreenToggle', {
-        set(value) {
-            if (value) {
-                player.fullscreen = !player.fullscreen;
-            }
-        },
-    });
 }
