@@ -189,6 +189,10 @@ export default class Artplayer extends Emitter {
         return utils.isSafari;
     }
 
+    get isIE() {
+        return utils.isIE;
+    }
+
     get proxy() {
         return this.events.proxy;
     }

@@ -209,6 +209,7 @@
   var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
   var isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
   var isWechat = /MicroMessenger/i.test(userAgent);
+  var isIE = /MSIE|Trident/i.test(userAgent);
 
   function query(selector) {
     var parent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
@@ -672,7 +673,8 @@
     userAgent: userAgent,
     isMobile: isMobile,
     isSafari: isSafari,
-    isWechat: isWechat
+    isWechat: isWechat,
+    isIE: isIE
   });
 
   function _defineProperty(obj, key, value) {
@@ -4846,6 +4848,11 @@
       key: "isSafari",
       get: function get() {
         return isSafari;
+      }
+    }, {
+      key: "isIE",
+      get: function get() {
+        return isIE;
       }
     }, {
       key: "proxy",
