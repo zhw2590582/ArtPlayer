@@ -1,4 +1,6 @@
 import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle, inverseClass } from './dom';
+import validator from 'option-validator';
+import { ComponentOption } from '../scheme';
 import { has, def } from './property';
 import { errorHandle } from './error';
 
@@ -32,6 +34,9 @@ export default class Component {
 
     add(getOption) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+        option.html = option.html || '';
+        validator(option, ComponentOption);
+
         if (!this.$parent || !this.name || option.disable) return;
         const name = option.name || `${this.name}${this.id}`;
         errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);

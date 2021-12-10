@@ -12,6 +12,8 @@ import {
     errorHandle,
 } from './utils';
 import Component from './utils/component';
+import validator from 'option-validator';
+import scheme from './scheme';
 
 export default class Subtitle extends Component {
     constructor(art) {
@@ -86,6 +88,7 @@ export default class Subtitle extends Component {
     }
 
     init(subtitleOption) {
+        validator(subtitleOption, scheme.subtitle);
         if (!subtitleOption.url) return;
 
         const {

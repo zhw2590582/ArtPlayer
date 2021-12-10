@@ -707,7 +707,7 @@
     return errorHandle(type === s || value instanceof Element, "".concat(paths.join('.'), " require '").concat(s, "' or 'Element' type"));
   }
 
-  var component = {
+  var ComponentOption = {
     html: validElement,
     disable: "?".concat(b),
     name: "?".concat(s),
@@ -753,10 +753,10 @@
     useSSR: b,
     plugins: [f],
     whitelist: ["".concat(s, "|").concat(f, "|").concat(r)],
-    layers: [component],
-    contextmenu: [component],
-    settings: [component],
-    controls: [_objectSpread$o(_objectSpread$o({}, component), {}, {
+    layers: [ComponentOption],
+    contextmenu: [ComponentOption],
+    settings: [ComponentOption],
+    controls: [_objectSpread$o(_objectSpread$o({}, ComponentOption), {}, {
       position: function position(value, _, paths) {
         var position = ['top', 'left', 'right'];
         return errorHandle(position.includes(value), "".concat(paths.join('.'), " only accept ").concat(position.toString(), " as parameters"));
@@ -2444,6 +2444,8 @@
         var _this = this;
 
         var option = typeof getOption === 'function' ? getOption(this.art) : getOption;
+        option.html = option.html || '';
+        validator(option, ComponentOption);
         if (!this.$parent || !this.name || option.disable) return;
         var name = option.name || "".concat(this.name).concat(this.id);
         errorHandle(!has(this, name), "Cannot add an existing name [".concat(name, "] to the [").concat(this.name, "]"));
@@ -3670,6 +3672,7 @@
       value: function init(subtitleOption) {
         var _this2 = this;
 
+        validator(subtitleOption, scheme.subtitle);
         if (!subtitleOption.url) return;
         var _this$art2 = this.art,
             notice = _this$art2.notice,
@@ -3999,6 +4002,9 @@
     _createClass(Hotkey, [{
       key: "add",
       value: function add(key, event) {
+        errorHandle(typeof key === 'number', 'The Hotkey.add() first parameter is not a number');
+        errorHandle(typeof event === 'function', 'The Hotkey.add() second parameter is not a function');
+
         if (this.keys[key]) {
           this.keys[key].push(event);
         } else {
@@ -4693,6 +4699,7 @@
       key: "add",
       value: function add(plugin) {
         this.id += 1;
+        errorHandle(typeof plugin === 'function', "The Plugins.add() first parameter is not a function");
         var result = plugin.call(this, this.art);
         var pluginName = result && result.name || plugin.name || "plugin".concat(this.id);
         errorHandle(!has(this, pluginName), "Cannot add a plugin that already has the same name: ".concat(pluginName));

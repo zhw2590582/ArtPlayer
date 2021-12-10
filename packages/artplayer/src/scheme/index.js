@@ -12,7 +12,7 @@ function validElement(value, type, paths) {
     return errorHandle(type === s || value instanceof Element, `${paths.join('.')} require '${s}' or 'Element' type`);
 }
 
-const component = {
+export const ComponentOption = {
     html: validElement,
     disable: `?${b}`,
     name: `?${s}`,
@@ -59,12 +59,12 @@ export default {
     useSSR: b,
     plugins: [f],
     whitelist: [`${s}|${f}|${r}`],
-    layers: [component],
-    contextmenu: [component],
-    settings: [component],
+    layers: [ComponentOption],
+    contextmenu: [ComponentOption],
+    settings: [ComponentOption],
     controls: [
         {
-            ...component,
+            ...ComponentOption,
             position: (value, _, paths) => {
                 const position = ['top', 'left', 'right'];
                 return errorHandle(

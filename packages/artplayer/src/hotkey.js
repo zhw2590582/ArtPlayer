@@ -1,3 +1,5 @@
+import { errorHandle } from './utils';
+
 export default class Hotkey {
     constructor(art) {
         this.keys = {};
@@ -55,6 +57,8 @@ export default class Hotkey {
     }
 
     add(key, event) {
+        errorHandle(typeof key === 'number', 'The Hotkey.add() first parameter is not a number');
+        errorHandle(typeof event === 'function', 'The Hotkey.add() second parameter is not a function');
         if (this.keys[key]) {
             this.keys[key].push(event);
         } else {
