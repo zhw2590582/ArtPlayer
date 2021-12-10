@@ -53,16 +53,20 @@ $ yarn add artplayer
 import Artplayer from 'artplayer';
 ```
 
-Or umd builds are also available:
+Or umd build also available:
 
 ```html
 <script src="path/to/artplayer.js"></script>
 ```
 
-Or from jsDelivr CDN:
+Or from CDN:
 
 ```html
+<!-- jsdelivr -->
 <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+
+<!-- unpkg -->
+<script src="https://unpkg.com/artplayer/dist/artplayer.js"></script>
 ```
 
 Will expose the global variable to `window.Artplayer`.
