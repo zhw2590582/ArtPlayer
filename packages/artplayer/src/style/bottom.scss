@@ -1,5 +1,8 @@
 .art-video-player {
     .art-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         position: absolute;
         z-index: 60;
         left: 0;
@@ -157,7 +160,6 @@
             align-items: center;
             justify-content: space-between;
             height: 40px;
-            padding: 5px 0;
 
             .art-controls-left,
             .art-controls-right {
@@ -165,11 +167,12 @@
             }
 
             .art-control {
+                display: flex;
+                align-items: center;
                 opacity: 0.9;
                 font-size: 12px;
-                height: 36px;
                 min-width: 36px;
-                line-height: 36px;
+                line-height: 1;
                 text-align: center;
                 cursor: pointer;
                 white-space: nowrap;
