@@ -50,13 +50,15 @@ thumbnail.on('done', function () {
     $popups.style.display = 'none';
     thumbnail.download();
     console.log('Build preview image complete');
-    Artplayer.instances.forEach(function (art) {
+
+    [...Artplayer.instances].forEach(function (art) {
         art.destroy(true);
     });
 
     new Artplayer({
         container: $artplayer,
         url: thumbnail.videoUrl,
+        autoSize: true,
         poster: thumbnail.thumbnailUrl,
         thumbnails: {
             url: thumbnail.thumbnailUrl,
@@ -66,5 +68,6 @@ thumbnail.on('done', function () {
             column: thumbnail.option.column,
         },
     });
+
     console.log('Build player complete');
 });
