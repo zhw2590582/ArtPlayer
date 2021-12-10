@@ -37,9 +37,7 @@ export default class Artplayer extends Emitter {
 
         this.isFocus = false;
         this.isDestroy = false;
-        this.userAgent = utils.userAgent;
-        this.isMobile = utils.isMobile;
-        this.isWechat = utils.isWechat;
+
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.events = new Events(this);
@@ -173,6 +171,22 @@ export default class Artplayer extends Emitter {
             customType: {},
             lang: navigator.language.toLowerCase(),
         };
+    }
+
+    get userAgent() {
+        return utils.userAgent;
+    }
+
+    get isMobile() {
+        return utils.isMobile;
+    }
+
+    get isWechat() {
+        return utils.isWechat;
+    }
+
+    get isSafari() {
+        return utils.isSafari;
     }
 
     get proxy() {

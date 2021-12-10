@@ -4799,9 +4799,6 @@
       _this.option = validator(mergeOption, scheme);
       _this.isFocus = false;
       _this.isDestroy = false;
-      _this.userAgent = userAgent;
-      _this.isMobile = isMobile;
-      _this.isWechat = isWechat;
       _this.whitelist = new Whitelist(_assertThisInitialized(_this));
       _this.template = new Template(_assertThisInitialized(_this));
       _this.events = new Events(_assertThisInitialized(_this));
@@ -4831,6 +4828,26 @@
     }
 
     _createClass(Artplayer, [{
+      key: "userAgent",
+      get: function get() {
+        return userAgent;
+      }
+    }, {
+      key: "isMobile",
+      get: function get() {
+        return isMobile;
+      }
+    }, {
+      key: "isWechat",
+      get: function get() {
+        return isWechat;
+      }
+    }, {
+      key: "isSafari",
+      get: function get() {
+        return isSafari;
+      }
+    }, {
       key: "proxy",
       get: function get() {
         return this.events.proxy;
