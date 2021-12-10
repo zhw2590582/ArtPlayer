@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <title>Mocha Tests</title>
-    <link href="https://unpkg.com/mocha@5.2.0/mocha.css" rel="stylesheet" />
+    <link href="../node_modules/mocha/mocha.css" rel="stylesheet" />
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
     <style>
         .artplayer-app {
             display: flex;
@@ -29,22 +31,20 @@
         <div class="sample3">sample3</div>
     </div>
     <div id="mocha"></div>
-    <script src="https://unpkg.com/chai/chai.js"></script>
-    <script src="https://unpkg.com/mocha@5.2.0/mocha.js"></script>
     <script>
         window.mocha.setup('bdd');
         window.expect = window.chai.expect;
-
     </script>
     <script src="../dist/artplayer.js"></script>
     <script src="../dist/artplayer-plugin-danmuku.js"></script>
+    <!-- Test start -->
     <script src="./constructor.test.js"></script>
     <script src="./option.test.js"></script>
     <script src="./document.test.js"></script>
+    <!-- Test end -->
     <script>
         mocha.checkLeaks();
         mocha.run();
-
     </script>
 </body>
 
