@@ -12,7 +12,6 @@ export default class Events {
         this.proxy = this.proxy.bind(this);
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
-        art.proxy = this.proxy;
 
         if (art.whitelist.state) {
             art.once('ready', () => {

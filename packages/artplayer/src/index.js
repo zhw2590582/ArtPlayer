@@ -31,7 +31,10 @@ export default class Artplayer extends Emitter {
         super();
 
         this.id = ++id;
-        this.option = validator(utils.mergeDeep(Artplayer.option, option), scheme);
+
+        const mergeOption = utils.mergeDeep(Artplayer.option, option);
+        this.option = validator(mergeOption, scheme);
+
         this.isFocus = false;
         this.isDestroy = false;
         this.userAgent = utils.userAgent;
@@ -40,6 +43,7 @@ export default class Artplayer extends Emitter {
         this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.events = new Events(this);
+
         if (this.whitelist.state) {
             this.storage = new Storage(this);
             this.icons = new Icons(this);
@@ -169,6 +173,14 @@ export default class Artplayer extends Emitter {
             customType: {},
             lang: navigator.language.toLowerCase(),
         };
+    }
+
+    get proxy() {
+        return this.events.proxy;
+    }
+
+    get query() {
+        return this.template.query;
     }
 
     destroy(removeHtml = true) {
