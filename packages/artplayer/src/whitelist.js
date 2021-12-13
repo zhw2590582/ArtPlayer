@@ -1,3 +1,5 @@
+import { userAgent, isMobile } from './utils';
+
 export default class Whitelist {
     constructor(art) {
         const {
@@ -5,15 +7,15 @@ export default class Whitelist {
             option: { whitelist },
         } = art;
         this.state =
-            !art.isMobile ||
+            !isMobile ||
             whitelist.some((item) => {
                 switch (kindOf(item)) {
                     case 'string':
-                        return item === '*' || art.userAgent.indexOf(item) > -1;
+                        return item === '*' || userAgent.indexOf(item) > -1;
                     case 'function':
-                        return item(art.userAgent);
+                        return item(userAgent);
                     case 'regexp':
-                        return item.test(art.userAgent);
+                        return item.test(userAgent);
                     default:
                         return false;
                 }

@@ -1,7 +1,7 @@
-import { clamp, secondToTime } from '../utils';
+import { clamp, secondToTime, isMobile } from '../utils';
 
 export default function gestureInit(art, events) {
-    if (art.isMobile && !art.option.isLive) {
+    if (isMobile && !art.option.isLive) {
         const {
             player,
             notice,

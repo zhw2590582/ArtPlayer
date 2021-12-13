@@ -1,5 +1,5 @@
 import config from '../config';
-import { sleep, addClass, setStyle } from '../utils';
+import { sleep, addClass, setStyle, isMobile } from '../utils';
 
 export default function eventInit(art, player) {
     const {
@@ -96,7 +96,7 @@ export default function eventInit(art, player) {
 
     art.once('video:loadedmetadata', () => {
         player.autoSize = option.autoSize;
-        if (art.isMobile) {
+        if (isMobile) {
             art.loading.show = false;
             art.controls.show = true;
             art.mask.show = true;

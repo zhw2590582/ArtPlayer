@@ -1,4 +1,4 @@
-import { errorHandle, query, addClass, replaceElement } from './utils';
+import { errorHandle, query, addClass, replaceElement, isMobile } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -144,7 +144,7 @@ export default class Template {
             addClass(this.$info, 'art-backdrop-filter');
         }
 
-        if (this.art.isMobile) {
+        if (isMobile) {
             addClass(this.$container, 'art-mobile');
         }
     }

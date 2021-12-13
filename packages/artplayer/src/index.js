@@ -173,26 +173,6 @@ export default class Artplayer extends Emitter {
         };
     }
 
-    get userAgent() {
-        return utils.userAgent;
-    }
-
-    get isMobile() {
-        return utils.isMobile;
-    }
-
-    get isWechat() {
-        return utils.isWechat;
-    }
-
-    get isSafari() {
-        return utils.isSafari;
-    }
-
-    get isIE() {
-        return utils.isIE;
-    }
-
     get proxy() {
         return this.events.proxy;
     }

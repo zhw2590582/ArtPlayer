@@ -802,16 +802,16 @@
 
     var kindOf = art.constructor.kindOf,
         whitelist = art.option.whitelist;
-    this.state = !art.isMobile || whitelist.some(function (item) {
+    this.state = !isMobile || whitelist.some(function (item) {
       switch (kindOf(item)) {
         case 'string':
-          return item === '*' || art.userAgent.indexOf(item) > -1;
+          return item === '*' || userAgent.indexOf(item) > -1;
 
         case 'function':
-          return item(art.userAgent);
+          return item(userAgent);
 
         case 'regexp':
-          return item.test(art.userAgent);
+          return item.test(userAgent);
 
         default:
           return false;
@@ -901,7 +901,7 @@
           addClass(this.$info, 'art-backdrop-filter');
         }
 
-        if (this.art.isMobile) {
+        if (isMobile) {
           addClass(this.$container, 'art-mobile');
         }
       }
@@ -1225,7 +1225,7 @@
     art.once('video:loadedmetadata', function () {
       player.autoSize = option.autoSize;
 
-      if (art.isMobile) {
+      if (isMobile) {
         art.loading.show = false;
         art.controls.show = true;
         art.mask.show = true;
@@ -2910,7 +2910,7 @@
           tooltip($volume, i18n.get('Mute'));
           setStyle($volumeClose, 'display', 'none');
 
-          if (art.isMobile) {
+          if (isMobile) {
             setStyle($volumePanel, 'display', 'none');
           }
 
@@ -3789,7 +3789,7 @@
   }
 
   function gestureInit(art, events) {
-    if (art.isMobile && !art.option.isLive) {
+    if (isMobile && !art.option.isLive) {
       var player = art.player,
           notice = art.notice,
           $video = art.template.$video;
@@ -4807,31 +4807,6 @@
     }
 
     _createClass(Artplayer, [{
-      key: "userAgent",
-      get: function get() {
-        return userAgent;
-      }
-    }, {
-      key: "isMobile",
-      get: function get() {
-        return isMobile;
-      }
-    }, {
-      key: "isWechat",
-      get: function get() {
-        return isWechat;
-      }
-    }, {
-      key: "isSafari",
-      get: function get() {
-        return isSafari;
-      }
-    }, {
-      key: "isIE",
-      get: function get() {
-        return isIE;
-      }
-    }, {
       key: "proxy",
       get: function get() {
         return this.events.proxy;

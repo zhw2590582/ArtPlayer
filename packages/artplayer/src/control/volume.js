@@ -1,4 +1,4 @@
-import { append, clamp, tooltip, setStyle } from '../utils';
+import { append, clamp, tooltip, setStyle, isMobile } from '../utils';
 
 export default function volume(option) {
     return (art) => ({
@@ -21,7 +21,7 @@ export default function volume(option) {
             tooltip($volume, i18n.get('Mute'));
             setStyle($volumeClose, 'display', 'none');
 
-            if (art.isMobile) {
+            if (isMobile) {
                 setStyle($volumePanel, 'display', 'none');
             }
 

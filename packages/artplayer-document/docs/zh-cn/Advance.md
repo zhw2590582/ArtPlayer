@@ -34,24 +34,6 @@ slug: /zh-cn/advance
 
 播放器实例是否被销毁
 
-## userAgent
-
--   类型: `Boolean`
-
-等于 `window.navigator.userAgent`
-
-## isMobile
-
--   类型: `Boolean`
-
-当前环境是否移动设备
-
-## isWechat
-
--   类型: `Boolean`
-
-当前环境是否微信设备
-
 ## whitelist
 
 -   类型: `Object`

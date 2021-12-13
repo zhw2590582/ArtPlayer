@@ -34,24 +34,6 @@ Whether the player instance has been focused
 
 Whether the player instance is destroyed
 
-## userAgent
-
--   Type: `Boolean`
-
-Equal to `window.navigator.userAgent`
-
-## isMobile
-
--   Type: `Boolean`
-
-Current environment mobile device
-
-## isWechat
-
--   Type: `Boolean`
-
-Whether the current environment is WeChat equipment
-
 ## whitelist
 
 -   Type: `Object`
