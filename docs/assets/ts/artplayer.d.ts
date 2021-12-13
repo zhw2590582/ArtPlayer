@@ -526,9 +526,6 @@ declare class Artplayer extends Player {
     readonly option: Option;
     readonly isFocus: boolean;
     readonly isDestroy: boolean;
-    readonly userAgent: string;
-    readonly isMobile: boolean;
-    readonly isWechat: boolean;
 
     on(name: string, fn: Function, ctx?: object): void;
     once(name: string, fn: Function, ctx?: object): void;
