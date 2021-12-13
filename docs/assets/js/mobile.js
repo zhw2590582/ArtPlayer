@@ -64,6 +64,6 @@ Artplayer.config.events.forEach(function (item) {
     });
 });
 
-if (art.isWechat) {
+if (Artplayer.utils.isWechat) {
     document.querySelector('.tip').textContent = '微信环境需手动触发播放';
 }
