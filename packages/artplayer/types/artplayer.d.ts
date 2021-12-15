@@ -484,8 +484,8 @@ declare class Player {
     pause(): any;
     play(): any;
     toggle(): any;
-    switchUrl(): Promise<string>;
-    switchQuality(): Promise<string>;
+    switchUrl(url: string): Promise<string>;
+    switchQuality(url: string): Promise<string>;
     getDataURL(): Promise<string>;
     getBlobUrl(): Promise<string>;
     screenshot(): Promise<string>;
