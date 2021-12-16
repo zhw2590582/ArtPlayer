@@ -58,11 +58,7 @@ export default function eventInit(art, player) {
     art.on('video:ended', () => {
         if (option.loop) {
             player.seek = 0;
-            if (player.playing) {
-                player.play();
-            } else {
-                player.pause();
-            }
+            player.play();
             art.controls.show = false;
             art.mask.show = false;
         } else {
