@@ -1,17 +1,7 @@
 export default class Ads {
     constructor(art) {
         this.art = art;
-        const { option } = art;
-
-        this.index = 0;
-        this.isEnd = false;
-        this.playing = false;
-        this.urlCache = option.url;
-
-        if (this.current) {
-            this.playing = true;
-            this.play(this.current);
-        }
+        this.init();
     }
 
     get current() {
@@ -24,6 +14,18 @@ export default class Ads {
 
     get next() {
         return this.art.option.ads[this.index + 1];
+    }
+
+    init() {
+        this.index = 0;
+        this.isEnd = false;
+        this.playing = false;
+        this.urlCache = this.art.option.url;
+
+        if (this.current) {
+            this.playing = true;
+            this.play(this.current);
+        }
     }
 
     play(item = {}) {

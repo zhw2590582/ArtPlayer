@@ -4733,16 +4733,7 @@
       _classCallCheck(this, Ads);
 
       this.art = art;
-      var option = art.option;
-      this.index = 0;
-      this.isEnd = false;
-      this.playing = false;
-      this.urlCache = option.url;
-
-      if (this.current) {
-        this.playing = true;
-        this.play(this.current);
-      }
+      this.init();
     }
 
     _createClass(Ads, [{
@@ -4759,6 +4750,19 @@
       key: "next",
       get: function get() {
         return this.art.option.ads[this.index + 1];
+      }
+    }, {
+      key: "init",
+      value: function init() {
+        this.index = 0;
+        this.isEnd = false;
+        this.playing = false;
+        this.urlCache = this.art.option.url;
+
+        if (this.current) {
+          this.playing = true;
+          this.play(this.current);
+        }
       }
     }, {
       key: "play",
