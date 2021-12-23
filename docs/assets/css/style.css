@@ -149,7 +149,7 @@ img {
 .main .part-left {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
     border-right: 1px solid rgb(17, 21, 24);
 }
 
