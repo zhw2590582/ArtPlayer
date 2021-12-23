@@ -62,8 +62,8 @@ The size of the player depends on the size of the `container`, so your `containe
         <meta charset="UTF-8" />
         <style>
           .artplayer-app {
-              idth:400px;
-              height:300px
+              width: 400px;
+              height: 300px;
           }
         </style>
     </head>
