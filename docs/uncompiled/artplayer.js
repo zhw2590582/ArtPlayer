@@ -4739,9 +4739,9 @@
       this.playing = false;
       this.urlCache = option.url;
 
-      if (option.ads.length) {
+      if (this.current) {
         this.playing = true;
-        this.play(option.ads[this.index]);
+        this.play(this.current);
       }
     }
 
@@ -4784,8 +4784,8 @@
     }, {
       key: "end",
       value: function end() {
-        this.playing = false;
         this.isEnd = true;
+        this.playing = false;
         this.art.option.url = this.urlCache;
         this.art.player.switchUrl(this.urlCache);
         this.art.emit('ads:end');
