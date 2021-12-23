@@ -22,6 +22,7 @@ import Icons from './icons';
 import Setting from './setting';
 import Storage from './storage';
 import Plugins from './plugins';
+import Ads from './ads';
 import Mobile from './mobile';
 
 let id = 0;
@@ -52,6 +53,7 @@ export default class Artplayer extends Emitter {
             this.controls = new Control(this);
             this.contextmenu = new Contextmenu(this);
             this.subtitle = new Subtitle(this);
+            this.ads = new Ads(this);
             this.info = new Info(this);
             this.loading = new Loading(this);
             this.hotkey = new Hotkey(this);
@@ -141,6 +143,7 @@ export default class Artplayer extends Emitter {
             localVideo: false,
             localSubtitle: false,
             useSSR: false,
+            ads: [],
             layers: [],
             contextmenu: [],
             controls: [],

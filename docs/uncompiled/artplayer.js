@@ -751,6 +751,9 @@
     localVideo: b,
     localSubtitle: b,
     useSSR: b,
+    ads: [{
+      url: s
+    }],
     plugins: [f],
     whitelist: ["".concat(s, "|").concat(f, "|").concat(r)],
     layers: [ComponentOption],
@@ -1142,7 +1145,10 @@
     }
 
     $video.controls = false;
-    player.url = option.url;
+
+    if (option.ads.length === 0) {
+      player.url = option.url;
+    }
   }
 
   function eventInit(art, player) {
@@ -1292,6 +1298,22 @@
     });
   }
 
+  function timeupdateInit(art, player) {
+    var timer = null;
+
+    (function timeupdate() {
+      art.emit('timeupdate', player.currentTime || 0);
+
+      if (!art.isDestroy) {
+        timer = window.requestAnimationFrame(timeupdate);
+      }
+    })();
+
+    art.on('destroy', function () {
+      window.cancelAnimationFrame(timer);
+    });
+  }
+
   function playMix(art, player) {
     var i18n = art.i18n,
         notice = art.notice,
@@ -1437,7 +1459,6 @@
       return new Promise(function (resolve) {
         if (url === player.url) return resolve(url);
         URL.revokeObjectURL(player.url);
-        var playing = player.playing;
         player.url = url;
         art.once('video:canplay', function () {
           player.playbackRate = false;
@@ -1447,7 +1468,7 @@
           player.currentTime = currentTime;
           art.notice.show = '';
 
-          if (playing) {
+          if (player.playing) {
             player.play();
           }
 
@@ -2234,7 +2255,7 @@
         }
       }
     });
-    art.on('video:timeupdate', function () {
+    art.on('timeupdate', function () {
       if (interval.length) {
         if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
           player.seek = interval[0];
@@ -2343,6 +2364,7 @@
     eventInit(art, this);
     attrInit(art, this);
     exclusiveInit(art, this);
+    timeupdateInit(art, this);
     playMix(art, this);
     pauseMix(art, this);
     toggleMix(art, this);
@@ -2782,7 +2804,7 @@
           art.on('video:progress', function () {
             setBar('loaded', player.loaded);
           });
-          art.on('video:timeupdate', function () {
+          art.on('timeupdate', function () {
             setBar('played', player.played);
           });
           art.on('video:ended', function () {
@@ -4647,7 +4669,7 @@
         art.on('destroy', function () {
           $progressBar.style.display = 'none';
         });
-        art.on('video:timeupdate', function () {
+        art.on('timeupdate', function () {
           $progressBar.style.width = "".concat(player.played * 100, "%");
         });
       }
@@ -4704,6 +4726,76 @@
     }]);
 
     return Plugins;
+  }();
+
+  var Ads = /*#__PURE__*/function () {
+    function Ads(art) {
+      _classCallCheck(this, Ads);
+
+      this.art = art;
+      var option = art.option;
+      this.index = 0;
+      this.isEnd = false;
+      this.playing = false;
+      this.urlCache = option.url;
+
+      if (this.current) {
+        this.playing = true;
+        this.play(this.current);
+      }
+    }
+
+    _createClass(Ads, [{
+      key: "current",
+      get: function get() {
+        return this.art.option.ads[this.index];
+      }
+    }, {
+      key: "prev",
+      get: function get() {
+        return this.art.option.ads[this.index - 1];
+      }
+    }, {
+      key: "next",
+      get: function get() {
+        return this.art.option.ads[this.index + 1];
+      }
+    }, {
+      key: "play",
+      value: function play() {
+        var _this = this;
+
+        var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        if (this.isEnd) return;
+        this.art.player.switchUrl(item.url);
+        this.art.once('video:timeupdate', function () {
+          _this.art.emit('ads:start', item);
+        });
+        this.art.once('video:ended', function () {
+          var next = _this.next;
+
+          if (next) {
+            _this.index += 1;
+
+            _this.play(next);
+          } else {
+            _this.end();
+          }
+        });
+      }
+    }, {
+      key: "end",
+      value: function end() {
+        if (this.isEnd) return;
+        this.isEnd = true;
+        this.playing = false;
+        this.art.option.url = this.urlCache;
+        this.art.player.switchUrl(this.urlCache);
+        this.art.emit('ads:end');
+      }
+    }]);
+
+    return Ads;
   }();
 
   var Mobile = function Mobile(art) {
@@ -4786,6 +4878,7 @@
         _this.controls = new Control(_assertThisInitialized(_this));
         _this.contextmenu = new Contextmenu(_assertThisInitialized(_this));
         _this.subtitle = new Subtitle(_assertThisInitialized(_this));
+        _this.ads = new Ads(_assertThisInitialized(_this));
         _this.info = new Info(_assertThisInitialized(_this));
         _this.loading = new Loading(_assertThisInitialized(_this));
         _this.hotkey = new Hotkey(_assertThisInitialized(_this));
@@ -4838,7 +4931,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1640230966636';
+        return '1640248815968';
       }
     }, {
       key: "config",
@@ -4909,6 +5002,7 @@
           localVideo: false,
           localSubtitle: false,
           useSSR: false,
+          ads: [],
           layers: [],
           contextmenu: [],
           controls: [],

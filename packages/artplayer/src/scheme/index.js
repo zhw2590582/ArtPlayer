@@ -57,6 +57,11 @@ export default {
     localVideo: b,
     localSubtitle: b,
     useSSR: b,
+    ads: [
+        {
+            url: s,
+        },
+    ],
     plugins: [f],
     whitelist: [`${s}|${f}|${r}`],
     layers: [ComponentOption],
