@@ -16,10 +16,10 @@ var art = new Artplayer({
     autoplay: true,
     ads: [
         {
-            url: '/assets/sample/test1.mp4'
+            url: '/assets/sample/test1.mp4',
         },
         {
-            url: '/assets/sample/test2.webm'
+            url: '/assets/sample/test2.webm',
         },
     ],
     controls: [
@@ -46,31 +46,33 @@ var art = new Artplayer({
     ],
 });
 
-// 当每个视频广告播放时触发
-art.on('ads:start', (item) => {
-    console.info('广告开始播放: ' + item.url);
+art.on('ready', function () {
+    // 当每个视频广告播放时触发
+    art.on('ads:start', function (item) {
+        console.info('广告开始播放: ' + item.url);
+    });
+
+    // 当全部视频广告播放完成
+    art.on('ads:end', function () {
+        console.info('广告已经结束');
+    });
+
+    // 当前广告的下标
+    console.info(art.ads.index);
+
+    // 广告是否已经结束
+    console.info(art.ads.isEnd);
+
+    // 广告是否正在播放
+    console.info(art.ads.playing);
+
+    // 上一个广告的对象
+    console.info(art.ads.prev);
+
+    // 当前广告的对象
+    console.info(art.ads.current);
+
+    // 下一个广告的对象
+    console.info(art.ads.next);
 });
-
-// 当全部视频广告播放完成
-art.on('ads:end', () => {
-    console.info('广告已经结束');
-});
-
-// 当前广告的下标
-console.info(art.ads.index);
-
-// 广告是否已经结束
-console.info(art.ads.isEnd);
-
-// 广告是否正在播放
-console.info(art.ads.playing);
-
-// 上一个广告的对象
-console.info(art.ads.prev);
-
-// 当前广告的对象
-console.info(art.ads.current);
-
-// 下一个广告的对象
-console.info(art.ads.next);
 ```

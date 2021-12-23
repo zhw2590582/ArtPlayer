@@ -48,31 +48,33 @@ var art = new Artplayer({
 	],
 });
 
-// Triggers when each video advertisement is played
-art.on('ads:start', (item) => {
-	console.info('Ads is playing: ' + item.url);
+art.on('ready', function () {
+	// Triggers when each video advertisement is played
+	art.on('ads:start', (item) => {
+		console.info('Ads is playing: ' + item.url);
+	});
+
+	// Triggers when all video advertisements are end
+	art.on('ads:end', () => {
+		console.info('Ads is end');
+	});
+
+	// Current advertising index
+	console.info(art.ads.index);
+
+	// Whether all the advertisements are ended
+	console.info(art.ads.isEnd);
+
+	// Whether the advertisement is playing
+	console.info(art.ads.playing);
+
+	// The object of the prev advertisement
+	console.info(art.ads.prev);
+
+	// The object of the current advertisement
+	console.info(art.ads.current);
+
+	// The object of the next advertisement
+	console.info(art.ads.next);
 });
-
-// Triggers when all video advertisements are end
-art.on('ads:end', () => {
-	console.info('Ads is end');
-});
-
-// Current advertising index
-console.info(art.ads.index);
-
-// Whether all the advertisements are ended
-console.info(art.ads.isEnd);
-
-// Whether the advertisement is playing
-console.info(art.ads.playing);
-
-// The object of the prev advertisement
-console.info(art.ads.prev);
-
-// The object of the current advertisement
-console.info(art.ads.current);
-
-// The object of the next advertisement
-console.info(art.ads.next);
 ```
