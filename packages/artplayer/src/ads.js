@@ -26,8 +26,8 @@ export default class Ads {
         return this.art.option.ads[this.index + 1];
     }
 
-    play(item) {
-        if (this.isEnd || !item.url) return;
+    play(item = {}) {
+        if (this.isEnd) return;
         this.art.player.switchUrl(item.url);
 
         this.art.once('video:timeupdate', () => {

@@ -4762,10 +4762,11 @@
       }
     }, {
       key: "play",
-      value: function play(item) {
+      value: function play() {
         var _this = this;
 
-        if (this.isEnd || !item.url) return;
+        var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        if (this.isEnd) return;
         this.art.player.switchUrl(item.url);
         this.art.once('video:timeupdate', function () {
           _this.art.emit('ads:start', item);
