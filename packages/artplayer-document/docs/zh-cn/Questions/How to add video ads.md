@@ -27,7 +27,6 @@ var art = new Artplayer({
             position: 'right',
             html: '跳过广告',
             click: function () {
-                // 跳过广告
                 art.ads.end();
             },
         },
@@ -41,7 +40,6 @@ var art = new Artplayer({
                 right: '20px',
             },
             click: function () {
-                // 跳过广告
                 art.ads.end();
             },
         },
@@ -50,12 +48,12 @@ var art = new Artplayer({
 
 // 当每个视频广告播放时触发
 art.on('ads:start', (item) => {
-    console.info('Ads is playing: ' + item.url);
+    console.info('广告开始播放: ' + item.url);
 });
 
 // 当全部视频广告播放完成
 art.on('ads:end', () => {
-    console.info('Ads is end');
+    console.info('广告已经结束');
 });
 
 // 当前广告的下标
