@@ -27,6 +27,7 @@ export default class Ads {
     }
 
     play(item) {
+        if (this.isEnd || !item.url) return;
         this.art.player.switchUrl(item.url);
 
         this.art.once('video:timeupdate', () => {
@@ -45,6 +46,7 @@ export default class Ads {
     }
 
     end() {
+        if (this.isEnd) return;
         this.isEnd = true;
         this.playing = false;
         this.art.option.url = this.urlCache;

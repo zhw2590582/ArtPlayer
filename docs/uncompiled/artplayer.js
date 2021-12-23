@@ -4765,6 +4765,7 @@
       value: function play(item) {
         var _this = this;
 
+        if (this.isEnd || !item.url) return;
         this.art.player.switchUrl(item.url);
         this.art.once('video:timeupdate', function () {
           _this.art.emit('ads:start', item);
@@ -4784,6 +4785,7 @@
     }, {
       key: "end",
       value: function end() {
+        if (this.isEnd) return;
         this.isEnd = true;
         this.playing = false;
         this.art.option.url = this.urlCache;
@@ -4928,7 +4930,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1640235663330';
+        return '1640248815968';
       }
     }, {
       key: "config",
