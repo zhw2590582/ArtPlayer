@@ -4,8 +4,8 @@ export default class Ads {
         const { option } = art;
 
         this.index = 0;
-        this.playing = false;
         this.isEnd = false;
+        this.playing = false;
         this.urlCache = option.url;
 
         if (option.ads.length) {
@@ -18,18 +18,26 @@ export default class Ads {
         return this.art.option.ads[this.index];
     }
 
-    play(item) {
-        const { option, player } = this.art;
+    get prev() {
+        return this.art.option.ads[this.index - 1];
+    }
 
-        player.url = item.url;
-        this.art.emit('ads:start', item);
+    get next() {
+        return this.art.option.ads[this.index + 1];
+    }
+
+    play(item) {
+        this.art.player.switchUrl(item.url);
+
+        this.art.once('video:timeupdate', () => {
+            this.art.emit('ads:start', item);
+        });
 
         this.art.once('video:ended', () => {
-            const nextIndex = this.index + 1;
-            const nextItem = option.ads[nextIndex];
-            if (nextItem) {
-                this.index = nextIndex;
-                this.play(nextItem);
+            const next = this.next;
+            if (next) {
+                this.index += 1;
+                this.play(next);
             } else {
                 this.end();
             }
@@ -40,6 +48,7 @@ export default class Ads {
         this.playing = false;
         this.isEnd = true;
         this.art.option.url = this.urlCache;
+        this.art.player.switchUrl(this.urlCache);
         this.art.emit('ads:end');
     }
 }

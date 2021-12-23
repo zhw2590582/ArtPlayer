@@ -111,7 +111,7 @@ export default function progress(option) {
                     setBar('loaded', player.loaded);
                 });
 
-                art.on('video:timeupdate', () => {
+                art.on('timeupdate', () => {
                     setBar('played', player.played);
                 });
 

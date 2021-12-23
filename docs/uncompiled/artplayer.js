@@ -1146,11 +1146,7 @@
 
     $video.controls = false;
 
-    if (option.ads.length) {
-      art.on('ads:end', function () {
-        player.url = option.url;
-      });
-    } else {
+    if (option.ads.length === 0) {
       player.url = option.url;
     }
   }
@@ -1302,6 +1298,22 @@
     });
   }
 
+  function timeupdateInit(art, player) {
+    var timer = null;
+
+    (function timeupdate() {
+      art.emit('timeupdate', player.currentTime || 0);
+
+      if (!art.isDestroy) {
+        timer = window.requestAnimationFrame(timeupdate);
+      }
+    })();
+
+    art.on('destroy', function () {
+      window.cancelAnimationFrame(timer);
+    });
+  }
+
   function playMix(art, player) {
     var i18n = art.i18n,
         notice = art.notice,
@@ -1447,7 +1459,6 @@
       return new Promise(function (resolve) {
         if (url === player.url) return resolve(url);
         URL.revokeObjectURL(player.url);
-        var playing = player.playing;
         player.url = url;
         art.once('video:canplay', function () {
           player.playbackRate = false;
@@ -1457,7 +1468,7 @@
           player.currentTime = currentTime;
           art.notice.show = '';
 
-          if (playing) {
+          if (player.playing) {
             player.play();
           }
 
@@ -2244,7 +2255,7 @@
         }
       }
     });
-    art.on('video:timeupdate', function () {
+    art.on('timeupdate', function () {
       if (interval.length) {
         if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
           player.seek = interval[0];
@@ -2353,6 +2364,7 @@
     eventInit(art, this);
     attrInit(art, this);
     exclusiveInit(art, this);
+    timeupdateInit(art, this);
     playMix(art, this);
     pauseMix(art, this);
     toggleMix(art, this);
@@ -2792,7 +2804,7 @@
           art.on('video:progress', function () {
             setBar('loaded', player.loaded);
           });
-          art.on('video:timeupdate', function () {
+          art.on('timeupdate', function () {
             setBar('played', player.played);
           });
           art.on('video:ended', function () {
@@ -4657,7 +4669,7 @@
         art.on('destroy', function () {
           $progressBar.style.display = 'none';
         });
-        art.on('video:timeupdate', function () {
+        art.on('timeupdate', function () {
           $progressBar.style.width = "".concat(player.played * 100, "%");
         });
       }
@@ -4723,8 +4735,8 @@
       this.art = art;
       var option = art.option;
       this.index = 0;
-      this.playing = false;
       this.isEnd = false;
+      this.playing = false;
       this.urlCache = option.url;
 
       if (option.ads.length) {
@@ -4739,23 +4751,31 @@
         return this.art.option.ads[this.index];
       }
     }, {
+      key: "prev",
+      get: function get() {
+        return this.art.option.ads[this.index - 1];
+      }
+    }, {
+      key: "next",
+      get: function get() {
+        return this.art.option.ads[this.index + 1];
+      }
+    }, {
       key: "play",
       value: function play(item) {
         var _this = this;
 
-        var _this$art = this.art,
-            option = _this$art.option,
-            player = _this$art.player;
-        player.url = item.url;
-        this.art.emit('ads:start', item);
+        this.art.player.switchUrl(item.url);
+        this.art.once('video:timeupdate', function () {
+          _this.art.emit('ads:start', item);
+        });
         this.art.once('video:ended', function () {
-          var nextIndex = _this.index + 1;
-          var nextItem = option.ads[nextIndex];
+          var next = _this.next;
 
-          if (nextItem) {
-            _this.index = nextIndex;
+          if (next) {
+            _this.index += 1;
 
-            _this.play(nextItem);
+            _this.play(next);
           } else {
             _this.end();
           }
@@ -4767,6 +4787,7 @@
         this.playing = false;
         this.isEnd = true;
         this.art.option.url = this.urlCache;
+        this.art.player.switchUrl(this.urlCache);
         this.art.emit('ads:end');
       }
     }]);

@@ -35,11 +35,7 @@ export default function attrInit(art, player) {
 
     $video.controls = false;
 
-    if (option.ads.length) {
-        art.on('ads:end', () => {
-            player.url = option.url;
-        });
-    } else {
+    if (option.ads.length === 0) {
         player.url = option.url;
     }
 }
