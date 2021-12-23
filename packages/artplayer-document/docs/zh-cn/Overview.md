@@ -59,9 +59,15 @@ const Artplayer = require('artplayer');
     <head>
         <title>ArtPlayer Demo</title>
         <meta charset="UTF-8" />
+        <style>
+          .artplayer-app {
+              width: 400px;
+              height: 300px;
+          }
+        </style>
     </head>
     <body>
-        <div class="artplayer-app" style="width:400px;height:300px"></div>
+        <div class="artplayer-app"></div>
         <script src="path/to/artplayer.js"></script>
         <script>
             var art = new Artplayer({
