@@ -751,6 +751,9 @@
     localVideo: b,
     localSubtitle: b,
     useSSR: b,
+    ads: [{
+      url: s
+    }],
     plugins: [f],
     whitelist: ["".concat(s, "|").concat(f, "|").concat(r)],
     layers: [ComponentOption],
@@ -4909,6 +4912,7 @@
           localVideo: false,
           localSubtitle: false,
           useSSR: false,
+          ads: [],
           layers: [],
           contextmenu: [],
           controls: [],

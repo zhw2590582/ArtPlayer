@@ -306,6 +306,16 @@ type Option = {
     whitelist?: (string | WhitelistFunction | RegExp)[];
 
     /**
+     * Custom ads list
+     */
+    ads?: {
+        /**
+         * The ads video url
+         */
+        url: string;
+    }[];
+
+    /**
      * Custom layer list
      */
     layers?: ComponentOption[];
