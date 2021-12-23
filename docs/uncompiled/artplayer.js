@@ -1145,7 +1145,14 @@
     }
 
     $video.controls = false;
-    player.url = option.url;
+
+    if (option.ads.length) {
+      art.on('ads:end', function () {
+        player.url = option.url;
+      });
+    } else {
+      player.url = option.url;
+    }
   }
 
   function eventInit(art, player) {
@@ -4709,6 +4716,64 @@
     return Plugins;
   }();
 
+  var Ads = /*#__PURE__*/function () {
+    function Ads(art) {
+      _classCallCheck(this, Ads);
+
+      this.art = art;
+      var option = art.option;
+      this.index = 0;
+      this.playing = false;
+      this.isEnd = false;
+      this.urlCache = option.url;
+
+      if (option.ads.length) {
+        this.playing = true;
+        this.play(option.ads[this.index]);
+      }
+    }
+
+    _createClass(Ads, [{
+      key: "current",
+      get: function get() {
+        return this.art.option.ads[this.index];
+      }
+    }, {
+      key: "play",
+      value: function play(item) {
+        var _this = this;
+
+        var _this$art = this.art,
+            option = _this$art.option,
+            player = _this$art.player;
+        player.url = item.url;
+        this.art.emit('ads:start', item);
+        this.art.once('video:ended', function () {
+          var nextIndex = _this.index + 1;
+          var nextItem = option.ads[nextIndex];
+
+          if (nextItem) {
+            _this.index = nextIndex;
+
+            _this.play(nextItem);
+          } else {
+            _this.end();
+          }
+        });
+      }
+    }, {
+      key: "end",
+      value: function end() {
+        this.playing = false;
+        this.isEnd = true;
+        this.art.option.url = this.urlCache;
+        this.art.emit('ads:end');
+      }
+    }]);
+
+    return Ads;
+  }();
+
   var Mobile = function Mobile(art) {
     _classCallCheck(this, Mobile);
 
@@ -4789,6 +4854,7 @@
         _this.controls = new Control(_assertThisInitialized(_this));
         _this.contextmenu = new Contextmenu(_assertThisInitialized(_this));
         _this.subtitle = new Subtitle(_assertThisInitialized(_this));
+        _this.ads = new Ads(_assertThisInitialized(_this));
         _this.info = new Info(_assertThisInitialized(_this));
         _this.loading = new Loading(_assertThisInitialized(_this));
         _this.hotkey = new Hotkey(_assertThisInitialized(_this));
@@ -4841,7 +4907,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1640230966636';
+        return '1640235663330';
       }
     }, {
       key: "config",
