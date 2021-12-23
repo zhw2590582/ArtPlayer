@@ -22,7 +22,7 @@ export default function loopMin(art, player) {
         },
     });
 
-    art.on('video:timeupdate', () => {
+    art.on('timeupdate', () => {
         if (interval.length) {
             if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
                 player.seek = interval[0];

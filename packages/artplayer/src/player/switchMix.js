@@ -7,7 +7,6 @@ export default function switchMix(art, player) {
         return new Promise((resolve) => {
             if (url === player.url) return resolve(url);
             URL.revokeObjectURL(player.url);
-            const { playing } = player;
             player.url = url;
             art.once('video:canplay', () => {
                 player.playbackRate = false;
@@ -16,7 +15,7 @@ export default function switchMix(art, player) {
                 player.autoSize = option.autoSize;
                 player.currentTime = currentTime;
                 art.notice.show = '';
-                if (playing) {
+                if (player.playing) {
                     player.play();
                 }
                 if (name) {

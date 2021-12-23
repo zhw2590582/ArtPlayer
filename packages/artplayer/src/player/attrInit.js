@@ -34,5 +34,8 @@ export default function attrInit(art, player) {
     }
 
     $video.controls = false;
-    player.url = option.url;
+
+    if (option.ads.length === 0) {
+        player.url = option.url;
+    }
 }

@@ -139,6 +139,13 @@ type SubtitleOption = {
     bilingual?: boolean;
 };
 
+type AdsOption = {
+    /**
+     * The ads video url
+     */
+    url: string;
+};
+
 type Option = {
     /**
      * The container mounted by the player
@@ -304,6 +311,11 @@ type Option = {
      * Custom mobile whitelist
      */
     whitelist?: (string | WhitelistFunction | RegExp)[];
+
+    /**
+     * Custom ads list
+     */
+    ads?: AdsOption[];
 
     /**
      * Custom layer list
@@ -642,6 +654,16 @@ declare class Artplayer extends Player {
         set url(url: string);
         style(name: string | CSSStyleDeclaration, value?: string): HTMLElement;
         switch(url: string, option?: SubtitleOption): Promise<string>;
+    };
+
+    readonly ads: {
+        index: number;
+        isEnd: boolean;
+        playing: boolean;
+        current: AdsOption;
+        prev: AdsOption;
+        next: AdsOption;
+        end(): void;
     };
 
     readonly mobile: object;
