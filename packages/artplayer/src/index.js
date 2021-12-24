@@ -36,6 +36,7 @@ export default class Artplayer extends Emitter {
         const mergeOption = utils.mergeDeep(Artplayer.option, option);
         this.option = validator(mergeOption, scheme);
 
+        this.isReady = false;
         this.isFocus = false;
         this.isDestroy = false;
 

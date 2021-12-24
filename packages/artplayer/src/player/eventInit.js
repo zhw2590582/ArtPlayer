@@ -40,6 +40,7 @@ export default function eventInit(art, player) {
         art.loading.show = false;
         art.controls.show = true;
         art.mask.show = true;
+        art.isReady = true;
         art.emit('ready');
     });
 

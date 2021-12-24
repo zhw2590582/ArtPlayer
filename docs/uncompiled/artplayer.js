@@ -1103,6 +1103,14 @@
             typeCallback.call(art, $video, url, art);
           });
         } else {
+          if (player.url && player.url !== url) {
+            art.once('video:canplay', function () {
+              if (art.isReady) {
+                art.emit('restart');
+              }
+            });
+          }
+
           $video.src = url;
           art.option.url = url;
           art.emit('url', url);
@@ -1183,6 +1191,7 @@
       art.loading.show = false;
       art.controls.show = true;
       art.mask.show = true;
+      art.isReady = true;
       art.emit('ready');
     }); // art.on('video:canplaythrough', () => {
     // });
@@ -4866,6 +4875,7 @@
       _this.id = ++id;
       var mergeOption = mergeDeep(Artplayer.option, option);
       _this.option = validator(mergeOption, scheme);
+      _this.isReady = false;
       _this.isFocus = false;
       _this.isDestroy = false;
       _this.whitelist = new Whitelist(_assertThisInitialized(_this));
