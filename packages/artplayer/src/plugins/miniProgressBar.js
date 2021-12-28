@@ -25,7 +25,7 @@ export default function miniProgressBar(art) {
                 $progressBar.style.display = 'none';
             });
 
-            art.on('timeupdate', () => {
+            art.on('video:timeupdate', () => {
                 $progressBar.style.width = `${player.played * 100}%`;
             });
         },

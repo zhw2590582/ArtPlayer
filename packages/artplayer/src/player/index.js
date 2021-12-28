@@ -2,7 +2,6 @@ import urlMix from './urlMix';
 import attrInit from './attrInit';
 import eventInit from './eventInit';
 import exclusiveInit from './exclusiveInit';
-import timeupdateInit from './timeupdateInit';
 import playMix from './playMix';
 import pauseMix from './pauseMix';
 import toggleMix from './toggleMix';
@@ -35,7 +34,6 @@ export default class Player {
         eventInit(art, this);
         attrInit(art, this);
         exclusiveInit(art, this);
-        timeupdateInit(art, this);
         playMix(art, this);
         pauseMix(art, this);
         toggleMix(art, this);
