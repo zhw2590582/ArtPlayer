@@ -221,11 +221,7 @@ var art = new Artplayer({
 			html: 'Instagram Filters',
 			selector: instagramFilters,
 			onSelect: function (item) {
-				var classNameReg = /\b$|(\sfilter-.+)/;
-				var videoClassName = art.template.$video.className;
-				var filterClassName = videoClassName.replace(classNameReg, ' ' + item.class);
-				art.template.$video.className = filterClassName;
-				console.info(filterClassName);
+				art.template.$video.className = 'art-video ' + item.class;
 				return item.html;
 			},
 		},
