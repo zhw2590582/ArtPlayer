@@ -6,6 +6,7 @@ var art = new Artplayer({
     title: 'One More Time One More Chance',
     poster: '/assets/sample/poster.jpg',
     autoSize: true,
+    autoHeight: true,
     loop: true,
     mutex: true,
     theme: '#ffad00',

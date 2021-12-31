@@ -12,6 +12,7 @@ export default function switchMix(art, player) {
                 player.playbackRate = false;
                 player.aspectRatio = false;
                 player.flip = 'normal';
+                player.autoHeight = option.autoHeight;
                 player.autoSize = option.autoSize;
                 player.currentTime = currentTime;
                 art.notice.show = '';

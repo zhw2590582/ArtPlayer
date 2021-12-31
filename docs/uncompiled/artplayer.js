@@ -733,6 +733,7 @@
     autoplay: b,
     autoSize: b,
     autoMini: b,
+    autoHeight: b,
     loop: b,
     flip: b,
     rotate: b,
@@ -1232,6 +1233,7 @@
     // });
 
     art.once('video:loadedmetadata', function () {
+      player.autoHeight = option.autoHeight;
       player.autoSize = option.autoSize;
 
       if (isMobile) {
@@ -1457,6 +1459,7 @@
           player.playbackRate = false;
           player.aspectRatio = false;
           player.flip = 'normal';
+          player.autoHeight = option.autoHeight;
           player.autoSize = option.autoSize;
           player.currentTime = currentTime;
           art.notice.show = '';
@@ -1845,6 +1848,7 @@
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
+            player.autoHeight = art.option.autoHeight;
             player.autoSize = art.option.autoSize;
             art.emit('resize');
             art.emit('fullscreen');
@@ -1912,6 +1916,7 @@
         } else {
           removeClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
+          player.autoHeight = art.option.autoHeight;
           player.autoSize = art.option.autoSize;
           art.emit('resize');
           art.emit('fullscreenWeb');
@@ -2179,6 +2184,7 @@
       },
       set: function set(value) {
         if (value) {
+          player.autoHeight = false;
           player.autoSize = false;
           cacheStyle = $player.style.cssText;
           addClass($player, 'art-mini');
@@ -2217,6 +2223,7 @@
           setStyle($player, 'left', null);
           player.aspectRatio = false;
           player.playbackRate = false;
+          player.autoHeight = option.autoHeight;
           player.autoSize = option.autoSize;
           art.emit('mini');
         }
@@ -2350,6 +2357,32 @@
     });
   }
 
+  function autoHeightMix(art, player) {
+    var _art$template = art.template,
+        $container = _art$template.$container,
+        $video = _art$template.$video;
+    def(player, 'autoHeight', {
+      get: function get() {
+        return hasClass($container, 'art-auto-height');
+      },
+      set: function set(value) {
+        if (value) {
+          var clientWidth = $container.clientWidth;
+          var videoHeight = $video.videoHeight,
+              videoWidth = $video.videoWidth;
+          var height = videoHeight * (clientWidth / videoWidth) + 'px';
+          setStyle($container, 'height', height);
+          addClass($container, 'art-auto-height');
+          art.emit('autoHeight', height);
+        } else {
+          setStyle($container, 'height', null);
+          removeClass($container, 'art-auto-size');
+          art.emit('autoHeight');
+        }
+      }
+    });
+  }
+
   var Player = function Player(art) {
     _classCallCheck(this, Player);
 
@@ -2381,6 +2414,7 @@
     loopMin(art, this);
     rotateMix(art, this);
     posterMix(art, this);
+    autoHeightMix(art, this);
     proxyPropertys(art, this);
   };
 
@@ -3779,6 +3813,7 @@
         player = art.player;
     var resizeFn = throttle(function () {
       if (player.normalSize) {
+        player.autoHeight = option.autoHeight;
         player.autoSize = option.autoSize;
       }
 
@@ -4928,7 +4963,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1640651817041';
+        return '1640928352550';
       }
     }, {
       key: "config",
@@ -4981,6 +5016,7 @@
           autoplay: false,
           autoSize: false,
           autoMini: false,
+          autoHeight: false,
           loop: false,
           flip: false,
           rotate: false,

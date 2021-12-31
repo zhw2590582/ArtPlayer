@@ -22,6 +22,7 @@ const nativeScreenfull = (art, player) => {
                 screenfull.exit().then(() => {
                     removeClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
+                    player.autoHeight = art.option.autoHeight;
                     player.autoSize = art.option.autoSize;
                     art.emit('resize');
                     art.emit('fullscreen');

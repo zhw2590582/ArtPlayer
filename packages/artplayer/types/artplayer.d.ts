@@ -213,6 +213,11 @@ type Option = {
     autoMini?: boolean;
 
     /**
+     * Set the container height based on the video length aspect ratio and the container width
+     */
+    autoHeight?: boolean;
+
+    /**
      * Whether video auto loop
      */
     loop?: boolean;
