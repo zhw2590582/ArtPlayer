@@ -2353,7 +2353,8 @@
   }
 
   function autoHeightMix(art, player) {
-    var _art$template = art.template,
+    var option = art.option,
+        _art$template = art.template,
         $container = _art$template.$container,
         $video = _art$template.$video;
     var heightCache = $container.style.height;
@@ -2367,15 +2368,14 @@
           var videoHeight = $video.videoHeight,
               videoWidth = $video.videoWidth;
           var height = videoHeight * (clientWidth / videoWidth);
-
-          if (height) {
-            setStyle($container, 'height', height + 'px');
-            addClass($container, 'art-auto-height');
-            art.emit('autoHeight', height);
-          }
+          setStyle($container, 'height', height + 'px');
+          addClass($container, 'art-auto-height');
+          player.autoSize = option.autoSize;
+          art.emit('autoHeight', height);
         } else {
           setStyle($container, 'height', heightCache);
           removeClass($container, 'art-auto-height');
+          player.autoSize = option.autoSize;
           art.emit('autoHeight');
         }
       }
