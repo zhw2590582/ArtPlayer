@@ -733,7 +733,6 @@
     autoplay: b,
     autoSize: b,
     autoMini: b,
-    autoHeight: b,
     loop: b,
     flip: b,
     rotate: b,
@@ -928,7 +927,7 @@
     }], [{
       key: "html",
       get: function get() {
-        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.1.0</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
+        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.1.3</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
       }
     }]);
 
@@ -1233,7 +1232,6 @@
     // });
 
     art.once('video:loadedmetadata', function () {
-      player.autoHeight = option.autoHeight;
       player.autoSize = option.autoSize;
 
       if (isMobile) {
@@ -1459,7 +1457,6 @@
           player.playbackRate = false;
           player.aspectRatio = false;
           player.flip = 'normal';
-          player.autoHeight = option.autoHeight;
           player.autoSize = option.autoSize;
           player.currentTime = currentTime;
           art.notice.show = '';
@@ -1841,7 +1838,6 @@
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
-            player.autoHeight = false;
             player.autoSize = false;
             art.emit('resize');
             art.emit('fullscreen', true);
@@ -1850,7 +1846,6 @@
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
-            player.autoHeight = art.option.autoHeight;
             player.autoSize = art.option.autoSize;
             art.emit('resize');
             art.emit('fullscreen');
@@ -1913,14 +1908,12 @@
         if (value) {
           addClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
-          player.autoHeight = false;
           player.autoSize = false;
           art.emit('resize');
           art.emit('fullscreenWeb', true);
         } else {
           removeClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
-          player.autoHeight = art.option.autoHeight;
           player.autoSize = art.option.autoSize;
           art.emit('resize');
           art.emit('fullscreenWeb');
@@ -2188,7 +2181,6 @@
       },
       set: function set(value) {
         if (value) {
-          player.autoHeight = false;
           player.autoSize = false;
           cacheStyle = $player.style.cssText;
           addClass($player, 'art-mini');
@@ -2227,7 +2219,6 @@
           setStyle($player, 'left', null);
           player.aspectRatio = false;
           player.playbackRate = false;
-          player.autoHeight = option.autoHeight;
           player.autoSize = option.autoSize;
           art.emit('mini');
         }
@@ -2365,6 +2356,7 @@
     var _art$template = art.template,
         $container = _art$template.$container,
         $video = _art$template.$video;
+    var heightCache = $container.style.height;
     def(player, 'autoHeight', {
       get: function get() {
         return hasClass($container, 'art-auto-height');
@@ -2382,7 +2374,7 @@
             art.emit('autoHeight', height);
           }
         } else {
-          setStyle($container, 'height', null);
+          setStyle($container, 'height', heightCache);
           removeClass($container, 'art-auto-height');
           art.emit('autoHeight');
         }
@@ -3422,7 +3414,7 @@
 
   function version(option) {
     return _objectSpread$7(_objectSpread$7({}, option), {}, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.1.0</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.1.3</a>'
     });
   }
 
@@ -3820,7 +3812,6 @@
         player = art.player;
     var resizeFn = throttle(function () {
       if (player.normalSize) {
-        player.autoHeight = option.autoHeight;
         player.autoSize = option.autoSize;
       }
 
@@ -4960,7 +4951,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '4.1.0';
+        return '4.1.3';
       }
     }, {
       key: "env",
@@ -4970,7 +4961,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1640928352550';
+        return '1640941432819';
       }
     }, {
       key: "config",
@@ -5023,7 +5014,6 @@
           autoplay: false,
           autoSize: false,
           autoMini: false,
-          autoHeight: false,
           loop: false,
           flip: false,
           rotate: false,
@@ -5078,7 +5068,7 @@
 
     return Artplayer;
   }(Emitter); // eslint-disable-next-line no-console
-  console.log('%c ArtPlayer %c 4.1.0 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 4.1.3 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

@@ -126,7 +126,6 @@ export default class Artplayer extends Emitter {
             autoplay: false,
             autoSize: false,
             autoMini: false,
-            autoHeight: false,
             loop: false,
             flip: false,
             rotate: false,

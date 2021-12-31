@@ -199,23 +199,6 @@ var art = new Artplayer({
 });
 ```
 
-## autoHeight
-
--   Type: `Boolean`
--   Default: `false`
-
-When the container has only width, you want the container height adapt to the player aspect ratio.
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    autoHeight: true,
-});
-```
-
 ## autoMini
 
 -   Type: `Boolean`

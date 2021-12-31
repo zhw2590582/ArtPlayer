@@ -5,7 +5,6 @@ export default function resizeInit(art, events) {
 
     const resizeFn = throttle(() => {
         if (player.normalSize) {
-            player.autoHeight = option.autoHeight;
             player.autoSize = option.autoSize;
         }
         player.aspectRatioReset = true;

@@ -674,6 +674,28 @@ art.on('ready', () => {
 })
 ```
 
+## autoHeight
+
+-   类型: `Setter/Getter`
+-   参数: `Boolean`
+
+当容器只有宽度，但你希望容器高度能自适应播放器的长宽比
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.autoHeight);
+    art.autoHeight = true;
+    console.info(art.autoHeight);
+});
+```
+
 :::tip 提示
 
 删除区间循环播放，只需要设置 `loop` 为 `[]` 即可

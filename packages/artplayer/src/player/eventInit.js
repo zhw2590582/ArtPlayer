@@ -92,7 +92,6 @@ export default function eventInit(art, player) {
     // });
 
     art.once('video:loadedmetadata', () => {
-        player.autoHeight = option.autoHeight;
         player.autoSize = option.autoSize;
         if (isMobile) {
             art.loading.show = false;

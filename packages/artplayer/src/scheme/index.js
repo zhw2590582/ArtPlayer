@@ -39,7 +39,6 @@ export default {
     autoplay: b,
     autoSize: b,
     autoMini: b,
-    autoHeight: b,
     loop: b,
     flip: b,
     rotate: b,

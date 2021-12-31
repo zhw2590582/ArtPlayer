@@ -55,7 +55,6 @@ export default function miniMix(art, player) {
         },
         set(value) {
             if (value) {
-                player.autoHeight = false;
                 player.autoSize = false;
                 cacheStyle = $player.style.cssText;
                 addClass($player, 'art-mini');
@@ -88,7 +87,6 @@ export default function miniMix(art, player) {
                 setStyle($player, 'left', null);
                 player.aspectRatio = false;
                 player.playbackRate = false;
-                player.autoHeight = option.autoHeight;
                 player.autoSize = option.autoSize;
                 art.emit('mini');
             }
