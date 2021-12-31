@@ -58,10 +58,6 @@ var art = new Artplayer({
     whitelist: ['*'],
 });
 
-art.on('ready', function () {
-    art.autoHeight = true;
-});
-
 Artplayer.config.events.forEach(function (item) {
     art.on('video:' + item, function (event) {
         console.log('video: ' + event.type);
