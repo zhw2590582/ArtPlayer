@@ -204,7 +204,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-当容器只有宽度，但你希望容器能自适应播放器时有用
+当容器只有宽度，但你希望容器高度能自适应播放器的长宽比
 
 <div className="run-code">▶ Run Code</div>
 

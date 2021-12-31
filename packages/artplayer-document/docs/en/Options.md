@@ -201,10 +201,10 @@ var art = new Artplayer({
 
 ## autoHeight
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
-When the container has only width, you want the container adapt to the player height.
+When the container has only width, you want the container height adapt to the player aspect ratio.
 
 <div className="run-code">▶ Run Code</div>
 
