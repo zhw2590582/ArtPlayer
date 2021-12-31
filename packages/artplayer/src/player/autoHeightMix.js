@@ -11,13 +11,15 @@ export default function autoHeightMix(art, player) {
             if (value) {
                 const { clientWidth } = $container;
                 const { videoHeight, videoWidth } = $video;
-                const height = videoHeight * (clientWidth / videoWidth) + 'px';
-                setStyle($container, 'height', height);
-                addClass($container, 'art-auto-height');
-                art.emit('autoHeight', height);
+                const height = videoHeight * (clientWidth / videoWidth);
+                if (height) {
+                    setStyle($container, 'height', height + 'px');
+                    addClass($container, 'art-auto-height');
+                    art.emit('autoHeight', height);
+                }
             } else {
                 setStyle($container, 'height', null);
-                removeClass($container, 'art-auto-size');
+                removeClass($container, 'art-auto-height');
                 art.emit('autoHeight');
             }
         },

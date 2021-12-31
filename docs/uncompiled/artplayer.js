@@ -2374,13 +2374,16 @@
           var clientWidth = $container.clientWidth;
           var videoHeight = $video.videoHeight,
               videoWidth = $video.videoWidth;
-          var height = videoHeight * (clientWidth / videoWidth) + 'px';
-          setStyle($container, 'height', height);
-          addClass($container, 'art-auto-height');
-          art.emit('autoHeight', height);
+          var height = videoHeight * (clientWidth / videoWidth);
+
+          if (height) {
+            setStyle($container, 'height', height + 'px');
+            addClass($container, 'art-auto-height');
+            art.emit('autoHeight', height);
+          }
         } else {
           setStyle($container, 'height', null);
-          removeClass($container, 'art-auto-size');
+          removeClass($container, 'art-auto-height');
           art.emit('autoHeight');
         }
       }
