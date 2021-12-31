@@ -2,6 +2,7 @@ import { setStyle, hasClass, addClass, removeClass, def } from '../utils';
 
 export default function autoHeightMix(art, player) {
     const { $container, $video } = art.template;
+    const heightCache = $container.style.height;
 
     def(player, 'autoHeight', {
         get() {
@@ -18,7 +19,7 @@ export default function autoHeightMix(art, player) {
                     art.emit('autoHeight', height);
                 }
             } else {
-                setStyle($container, 'height', null);
+                setStyle($container, 'height', heightCache);
                 removeClass($container, 'art-auto-height');
                 art.emit('autoHeight');
             }
