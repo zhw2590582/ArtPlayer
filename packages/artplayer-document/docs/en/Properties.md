@@ -652,28 +652,6 @@ art.on('ready', () => {
 });
 ```
 
-## autoHeight
-
--   Type: `Setter/Getter`
--   Default: `Boolean`
-
-When the container has only width, you want the container height adapt to the player aspect ratio.
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-
-art.on('ready', () => {
-    console.info(art.autoHeight);
-    art.autoHeight = true;
-    console.info(art.autoHeight);
-});
-```
-
 ## loop
 
 -   Type: `Setter/Getter`
@@ -701,6 +679,28 @@ art.on('ready', () => {
 Delete interval loop play, only need to set up `loop` is `[]`
 
 :::
+
+## autoHeight
+
+-   Type: `Setter/Getter`
+-   Default: `Boolean`
+
+When the container has only width, you want the container height adapt to the player aspect ratio.
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.autoHeight);
+    art.autoHeight = true;
+    console.info(art.autoHeight);
+});
+```
 
 ## destroy
 

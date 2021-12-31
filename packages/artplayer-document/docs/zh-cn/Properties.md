@@ -674,6 +674,12 @@ art.on('ready', () => {
 })
 ```
 
+:::tip 提示
+
+删除区间循环播放，只需要设置 `loop` 为 `[]` 即可
+
+:::
+
 ## autoHeight
 
 -   类型: `Setter/Getter`
@@ -695,12 +701,6 @@ art.on('ready', () => {
     console.info(art.autoHeight);
 });
 ```
-
-:::tip 提示
-
-删除区间循环播放，只需要设置 `loop` 为 `[]` 即可
-
-:::
 
 ## destroy
 
