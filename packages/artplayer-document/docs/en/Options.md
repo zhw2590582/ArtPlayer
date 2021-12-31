@@ -199,6 +199,23 @@ var art = new Artplayer({
 });
 ```
 
+## autoHeight
+
+-   类型: `Boolean`
+-   默认: `false`
+
+When the container has only width, you want the container adapt to the player height.
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoHeight: true,
+});
+```
+
 ## autoMini
 
 -   Type: `Boolean`

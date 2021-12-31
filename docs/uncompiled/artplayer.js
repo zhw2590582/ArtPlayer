@@ -1841,6 +1841,8 @@
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
             player.aspectRatioReset = true;
+            player.autoHeight = false;
+            player.autoSize = false;
             art.emit('resize');
             art.emit('fullscreen', true);
           });
@@ -1911,6 +1913,8 @@
         if (value) {
           addClass($player, 'art-fullscreen-web');
           player.aspectRatioReset = true;
+          player.autoHeight = false;
+          player.autoSize = false;
           art.emit('resize');
           art.emit('fullscreenWeb', true);
         } else {

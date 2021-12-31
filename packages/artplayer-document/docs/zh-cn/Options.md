@@ -199,6 +199,23 @@ var art = new Artplayer({
 });
 ```
 
+## autoHeight
+
+-   类型: `Boolean`
+-   默认: `false`
+
+当容器只有宽度，但你希望容器能自适应播放器时有用
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoHeight: true,
+});
+```
+
 ## autoMini
 
 -   类型: `Boolean`

@@ -15,6 +15,8 @@ const nativeScreenfull = (art, player) => {
                 screenfull.request($player).then(() => {
                     addClass($player, 'art-fullscreen');
                     player.aspectRatioReset = true;
+                    player.autoHeight = false;
+                    player.autoSize = false;
                     art.emit('resize');
                     art.emit('fullscreen', true);
                 });
