@@ -119,7 +119,7 @@ export default {
 
 ### Use in `React`
 
-👉 [Click to open an online demo](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
+👉 [Click to open an online demo](https://codesandbox.io/s/artplayer-react-demo-n74859y9rl?file=/src/index.js)
 
 ```jsx
 import React from "react";

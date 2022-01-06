@@ -118,7 +118,7 @@ export default {
 
 ### 与 `React` 使用
 
-👉 [点击打开在线演示](https://codesandbox.io/s/aged-fire-n74859y9rl?file=/src/index.js)
+👉 [点击打开在线演示](https://codesandbox.io/s/artplayer-react-demo-n74859y9rl?file=/src/index.js)
 
 ```jsx
 import React from "react";
