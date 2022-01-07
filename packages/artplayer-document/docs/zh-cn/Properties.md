@@ -489,7 +489,7 @@ art.on('ready', () => {
 
     setTimeout(() => {
         art.mini = false;
-    }, 3000);
+    }, 1000);
 });
 ```
 

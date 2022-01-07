@@ -1860,7 +1860,7 @@ describe("Document", function () {
       art.mini = true;
       setTimeout(() => {
         art.mini = false;
-      }, 3000);
+      }, 1000);
     });
 
     testAll(art, done);
@@ -1984,13 +1984,69 @@ describe("Document", function () {
       url: "./assets/sample/video.mp4",
     });
     art.on("ready", () => {
-      art.destroy();
+      console.info(art.autoHeight);
+      art.autoHeight = true;
+      console.info(art.autoHeight);
     });
 
     testAll(art, done);
   });
 
   it("Test114", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+    });
+    art.on("ready", () => {
+      console.info(art.attr("playsInline"));
+      art.attr("playsInline", true);
+      console.info(art.attr("playsInline"));
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test115", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+    });
+    art.on("ready", () => {
+      console.info(art.title);
+      art.title = "新标题";
+      console.info(art.title);
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test116", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+    });
+    art.on("ready", () => {
+      console.info(art.theme);
+      art.theme = "#000";
+      console.info(art.theme);
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test117", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+    });
+    art.on("ready", () => {
+      art.destroy();
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test118", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2030,7 +2086,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test115", function (done) {
+  it("Test119", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2090,7 +2146,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test116", function (done) {
+  it("Test120", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "https://artplayer.org./assets/sample/video.mp4",
