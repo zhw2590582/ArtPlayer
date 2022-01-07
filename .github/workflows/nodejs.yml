@@ -31,9 +31,9 @@ jobs:
         npm install packages/* && npx lerna bootstrap --hoist
         npm run lint
         npm run build:all
-        cd packages/artplayer-document
+        cd packages/artplayer-document && ls
         npm run build
-        cd ../../
+        cd ../../ && ls
         npm run test:create
         npm run test
         npm run sizereport
