@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.artplayerPluginDanmuku = factory());
-}(this, (function () { 'use strict';
+})(this, (function () { 'use strict';
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -19,15 +19,11 @@
     return obj;
   }
 
-  var defineProperty = _defineProperty;
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
-  var classCallCheck = _classCallCheck;
 
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -44,8 +40,6 @@
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
   }
-
-  var createClass = _createClass;
 
   var i18n = {
     'zh-cn': {
@@ -196,17 +190,18 @@
     if (Array.isArray(arr)) return arr;
   }
 
-  var arrayWithHoles = _arrayWithHoles;
-
   function _iterableToArrayLimit(arr, i) {
-    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+    if (_i == null) return;
     var _arr = [];
     var _n = true;
     var _d = false;
-    var _e = undefined;
+
+    var _s, _e;
 
     try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
         _arr.push(_s.value);
 
         if (i && _arr.length === i) break;
@@ -225,8 +220,6 @@
     return _arr;
   }
 
-  var iterableToArrayLimit = _iterableToArrayLimit;
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
 
@@ -237,30 +230,22 @@
     return arr2;
   }
 
-  var arrayLikeToArray = _arrayLikeToArray;
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
-    if (typeof o === "string") return arrayLikeToArray(o, minLen);
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor) n = o.constructor.name;
     if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
-  var unsupportedIterableToArray = _unsupportedIterableToArray;
 
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  var nonIterableRest = _nonIterableRest;
-
   function _slicedToArray(arr, i) {
-    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
-
-  var slicedToArray = _slicedToArray;
 
   function getMode(key) {
     switch (key) {
@@ -280,9 +265,9 @@
   function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
     var srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
-    return srtList.length ? srtList.map(function (item) {
+    return srtList && srtList.length ? srtList.map(function (item) {
       var _item$match = item.match(/<d p="(.+)">(.+)<\/d>/),
-          _item$match2 = slicedToArray(_item$match, 3),
+          _item$match2 = _slicedToArray(_item$match, 3),
           attrStr = _item$match2[1],
           text = _item$match2[2];
 
@@ -356,7 +341,7 @@
         if (minRight > maxRight) {
           maxRight = minRight;
 
-          var _danmuArr = slicedToArray(danmuArr, 1);
+          var _danmuArr = _slicedToArray(danmuArr, 1);
 
           top = _danmuArr[0].top;
         }
@@ -370,7 +355,7 @@
         return topMap[prev].length - topMap[next].length;
       });
 
-      var _topMapKeys$filter$so2 = slicedToArray(_topMapKeys$filter$so, 1);
+      var _topMapKeys$filter$so2 = _slicedToArray(_topMapKeys$filter$so, 1);
 
       top = _topMapKeys$filter$so2[0];
     }
@@ -379,7 +364,7 @@
   }
 
   function getDanmuTop(ins, danmu) {
-    var _ins$option$margin = slicedToArray(ins.option.margin, 2),
+    var _ins$option$margin = _slicedToArray(ins.option.margin, 2),
         marginTop = _ins$option$margin[0],
         marginBottom = _ins$option$margin[1];
 
@@ -425,13 +410,13 @@
     return calculatedTop(danmus);
   }
 
-  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   var Danmuku = /*#__PURE__*/function () {
     function Danmuku(art, option) {
-      classCallCheck(this, Danmuku);
+      _classCallCheck(this, Danmuku);
 
       art.i18n.update(i18n);
       art.setting.add(opacity);
@@ -455,7 +440,7 @@
       this.load();
     }
 
-    createClass(Danmuku, [{
+    _createClass(Danmuku, [{
       key: "load",
       value: function load() {
         var _this = this;
@@ -565,11 +550,9 @@
       value: function update() {
         var _this2 = this;
 
-        var _this$art = this.art,
-            player = _this$art.player,
-            $player = _this$art.template.$player;
+        var $player = this.art.template.$player;
         this.animationFrameTimer = window.requestAnimationFrame(function () {
-          if (player.playing && !_this2.isHide) {
+          if (_this2.art.playing && !_this2.isHide) {
             var danmuLeft = getRect($player, 'width');
             filter(_this2.queue, 'emit', function (danmu) {
               danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
@@ -586,7 +569,7 @@
             });
 
             _this2.queue.filter(function (danmu) {
-              return player.currentTime + 0.1 >= danmu.time && danmu.time >= player.currentTime - 0.1 && danmu.$state === 'wait';
+              return _this2.art.currentTime + 0.1 >= danmu.time && danmu.time >= _this2.art.currentTime - 0.1 && danmu.$state === 'wait';
             }).forEach(function (danmu) {
               danmu.$ref = getDanmuRef(_this2.queue);
 
@@ -597,7 +580,7 @@
               danmu.$ref.innerText = danmu.text;
               danmu.$ref.style.color = danmu.color || '#fff';
               danmu.$ref.style.border = danmu.border ? "1px solid ".concat(danmu.color || '#fff') : 'none';
-              danmu.$restTime = _this2.option.synchronousPlayback && player.playbackRate ? _this2.option.speed / Number(player.playbackRate) : _this2.option.speed;
+              danmu.$restTime = _this2.option.synchronousPlayback && _this2.art.playbackRate ? _this2.option.speed / Number(_this2.art.playbackRate) : _this2.option.speed;
               danmu.$lastStartTime = Date.now();
               var danmuWidth = getRect(danmu.$ref, 'width');
               var danmuTop = getDanmuTop(_this2, danmu);
@@ -666,10 +649,9 @@
     }, {
       key: "emit",
       value: function emit(danmu) {
-        var _this$art2 = this.art,
-            notice = _this$art2.notice,
-            player = _this$art2.player,
-            i18n = _this$art2.i18n;
+        var _this$art = this.art,
+            notice = _this$art.notice,
+            i18n = _this$art.i18n;
         var _this$art$constructor2 = this.art.constructor,
             clamp = _this$art$constructor2.utils.clamp,
             validator = _this$art$constructor2.validator;
@@ -694,7 +676,7 @@
         if (danmu.time) {
           danmu.time = clamp(danmu.time, 0, Infinity);
         } else {
-          danmu.time = player.currentTime + 0.5;
+          danmu.time = this.art.currentTime + 0.5;
         }
 
         this.queue.push(_objectSpread(_objectSpread({
@@ -759,5 +741,5 @@
 
   return artplayerPluginDanmuku;
 
-})));
+}));
 //# sourceMappingURL=artplayer-plugin-danmuku.js.map

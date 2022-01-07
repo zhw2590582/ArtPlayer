@@ -145,12 +145,9 @@ export default class Danmuku {
     }
 
     update() {
-        const {
-            player,
-            template: { $player },
-        } = this.art;
+        const { $player } = this.art.template;
         this.animationFrameTimer = window.requestAnimationFrame(() => {
-            if (player.playing && !this.isHide) {
+            if (this.art.playing && !this.isHide) {
                 const danmuLeft = getRect($player, 'width');
 
                 filter(this.queue, 'emit', (danmu) => {
@@ -169,8 +166,8 @@ export default class Danmuku {
                 this.queue
                     .filter(
                         (danmu) =>
-                            player.currentTime + 0.1 >= danmu.time &&
-                            danmu.time >= player.currentTime - 0.1 &&
+                            this.art.currentTime + 0.1 >= danmu.time &&
+                            danmu.time >= this.art.currentTime - 0.1 &&
                             danmu.$state === 'wait',
                     )
                     .forEach((danmu) => {
@@ -182,8 +179,8 @@ export default class Danmuku {
                         danmu.$ref.style.color = danmu.color || '#fff';
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
                         danmu.$restTime =
-                            this.option.synchronousPlayback && player.playbackRate
-                                ? this.option.speed / Number(player.playbackRate)
+                            this.option.synchronousPlayback && this.art.playbackRate
+                                ? this.option.speed / Number(this.art.playbackRate)
                                 : this.option.speed;
                         danmu.$lastStartTime = Date.now();
                         const danmuWidth = getRect(danmu.$ref, 'width');
@@ -247,7 +244,8 @@ export default class Danmuku {
     }
 
     emit(danmu) {
-        const { notice, player, i18n } = this.art;
+        const { notice, i18n } = this.art;
+
         const {
             utils: { clamp },
             validator,
@@ -274,7 +272,7 @@ export default class Danmuku {
         if (danmu.time) {
             danmu.time = clamp(danmu.time, 0, Infinity);
         } else {
-            danmu.time = player.currentTime + 0.5;
+            danmu.time = this.art.currentTime + 0.5;
         }
 
         this.queue.push({
