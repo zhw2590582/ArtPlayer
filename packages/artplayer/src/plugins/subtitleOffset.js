@@ -60,7 +60,9 @@ export default function subtitleOffset(art) {
             if (template.$track && template.$track.track) {
                 const cues = Array.from(template.$track.track.cues);
                 const time = clamp(value, -5, 5);
-                cues.forEach((cue, index) => {
+
+                for (let index = 0; index < cues.length; index++) {
+                    const cue = cues[index];
                     if (!cuesCache[index]) {
                         cuesCache[index] = {
                             startTime: cue.startTime,
@@ -69,7 +71,8 @@ export default function subtitleOffset(art) {
                     }
                     cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
                     cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
-                });
+                }
+
                 notice.show = `${i18n.get('Subtitle offset time')}: ${value}s`;
                 art.emit('subtitleOffset', value);
             } else {

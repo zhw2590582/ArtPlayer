@@ -21,7 +21,12 @@ export default function playMix(art) {
             }
 
             if (option.mutex) {
-                instances.filter((item) => item !== art).forEach((item) => item.pause());
+                for (let index = 0; index < instances.length; index++) {
+                    const instance = instances[index];
+                    if (instance !== art) {
+                        instance.pause();
+                    }
+                }
             }
 
             notice.show = i18n.get('Play');

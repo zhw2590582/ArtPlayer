@@ -27,7 +27,9 @@ export default class Plugins {
             this.add(localSubtitle);
         }
 
-        art.option.plugins.forEach((plugin) => this.add(plugin));
+        for (let index = 0; index < option.plugins.length; index++) {
+            this.add(option.plugins[index]);
+        }
     }
 
     add(plugin) {

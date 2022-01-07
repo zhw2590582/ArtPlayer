@@ -7,13 +7,15 @@ export default function rectMix(art) {
         },
     });
 
-    ['bottom', 'height', 'left', 'right', 'top', 'width'].forEach((key) => {
+    const keys = ['bottom', 'height', 'left', 'right', 'top', 'width'];
+    for (let index = 0; index < keys.length; index++) {
+        const key = keys[index];
         def(art, key, {
             get: () => {
                 return art.rect[key];
             },
         });
-    });
+    }
 
     def(art, 'x', {
         get: () => {

@@ -9,11 +9,11 @@ export default class Mobile {
             template: { $video },
         } = art;
 
-        config.events.forEach((eventName) => {
-            proxy($video, eventName, (event) => {
+        for (let index = 0; index < config.events.length; index++) {
+            proxy($video, config.events[index], (event) => {
                 art.emit(`video:${event.type}`, event);
             });
-        });
+        }
 
         Object.keys(option.moreVideoAttr).forEach((key) => {
             $video[key] = option.moreVideoAttr[key];

@@ -1144,11 +1144,13 @@
         }
 
         if (option.mutex) {
-          instances.filter(function (item) {
-            return item !== art;
-          }).forEach(function (item) {
-            return item.pause();
-          });
+          for (var index = 0; index < instances.length; index++) {
+            var instance = instances[index];
+
+            if (instance !== art) {
+              instance.pause();
+            }
+          }
         }
 
         notice.show = i18n.get('Play');
@@ -1896,13 +1898,21 @@
         return art.template.$player.getBoundingClientRect();
       }
     });
-    ['bottom', 'height', 'left', 'right', 'top', 'width'].forEach(function (key) {
+    var keys = ['bottom', 'height', 'left', 'right', 'top', 'width'];
+
+    var _loop = function _loop(index) {
+      var key = keys[index];
       def(art, key, {
         get: function get() {
           return art.rect[key];
         }
       });
-    });
+    };
+
+    for (var index = 0; index < keys.length; index++) {
+      _loop(index);
+    }
+
     def(art, 'x', {
       get: function get() {
         return art.left + window.pageXOffset;
@@ -2230,7 +2240,8 @@
     var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
 
     function exclusive(props) {
-      props.forEach(function (name) {
+      var _loop = function _loop(index) {
+        var name = props[index];
         art.on(name, function () {
           if (art[name]) {
             props.filter(function (item) {
@@ -2242,7 +2253,11 @@
             });
           }
         });
-      });
+      };
+
+      for (var index = 0; index < props.length; index++) {
+        _loop(index);
+      }
     }
 
     exclusive(sizeProps);
@@ -2313,12 +2328,14 @@
     proxy($video, 'dblclick', function () {
       art.fullscreen = !art.fullscreen;
     });
-    config.events.forEach(function (eventName) {
-      proxy($video, eventName, function (event) {
+
+    for (var index = 0; index < config.events.length; index++) {
+      proxy($video, config.events[index], function (event) {
         art.emit("video:".concat(event.type), event);
       });
-    }); // art.on('video:abort', () => {
+    } // art.on('video:abort', () => {
     // });
+
 
     art.on('video:canplay', function () {
       reconnectTime = 0;
@@ -2848,10 +2865,12 @@
             }
           }
 
-          option.highlight.forEach(function (item) {
+          for (var index = 0; index < option.highlight.length; index++) {
+            var item = option.highlight[index];
             var left = clamp(item.time, 0, art.duration) / art.duration * 100;
             append($highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left, "%\"></span>"));
-          });
+          }
+
           setBar('loaded', art.loaded);
           art.on('video:progress', function () {
             setBar('loaded', art.loaded);
@@ -2947,9 +2966,11 @@
           }
 
           getTime();
-          ['video:loadedmetadata', 'video:timeupdate', 'video:progress'].forEach(function (event) {
-            art.on(event, getTime);
-          });
+          var events = ['video:loadedmetadata', 'video:timeupdate', 'video:progress'];
+
+          for (var index = 0; index < events.length; index++) {
+            art.on(events[index], getTime);
+          }
         }
       });
     };
@@ -3311,9 +3332,9 @@
           index: 70
         }));
 
-        option.controls.forEach(function (item) {
-          return _this.add(item);
-        });
+        for (var index = 0; index < option.controls.length; index++) {
+          _this.add(option.controls[index]);
+        }
       });
       return _this;
     }
@@ -3508,9 +3529,10 @@
           index: 60
         }));
 
-        option.contextmenu.forEach(function (item) {
-          return _this.add(item);
-        });
+        for (var index = 0; index < option.contextmenu.length; index++) {
+          _this.add(option.contextmenu[index]);
+        }
+
         proxy($player, 'contextmenu', function (event) {
           event.preventDefault();
           _this.show = true;
@@ -3574,11 +3596,9 @@
 
       _this = _super.call(this, art);
       _this.name = 'info';
-
-      if (_this.art.template.$info) {
+      art.once('ready', function () {
         _this.init();
-      }
-
+      });
       return _this;
     }
 
@@ -3588,37 +3608,33 @@
         var _this2 = this;
 
         var _this$art = this.art,
+            proxy = _this$art.events.proxy,
             _this$art$template = _this$art.template,
             $infoPanel = _this$art$template.$infoPanel,
             $infoClose = _this$art$template.$infoClose,
-            $video = _this$art$template.$video,
-            proxy = _this$art.events.proxy;
+            $video = _this$art$template.$video;
         proxy($infoClose, 'click', function () {
           _this2.show = false;
         });
         var timer = null;
-        var types = queryAll('[data-video]', $infoPanel);
+        var types = queryAll('[data-video]', $infoPanel) || [];
         this.art.on('destroy', function () {
           clearTimeout(timer);
         });
 
         function loop() {
-          types.forEach(function (item) {
+          for (var index = 0; index < types.length; index++) {
+            var item = types[index];
             var value = $video[item.dataset.video];
             item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
-          });
+          }
+
           timer = setTimeout(function () {
             loop();
           }, 1000);
         }
 
-        this.art.on('info', function (value) {
-          clearTimeout(timer);
-
-          if (value) {
-            loop();
-          }
-        });
+        loop();
       }
     }]);
 
@@ -3988,9 +4004,9 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.destroyEvents.forEach(function (event) {
-          return event();
-        });
+        for (var index = 0; index < this.destroyEvents.length; index++) {
+          this.destroyEvents[index]();
+        }
       }
     }]);
 
@@ -4045,9 +4061,11 @@
 
                 if (events) {
                   event.preventDefault();
-                  events.forEach(function (fn) {
-                    return fn.call(art, event);
-                  });
+
+                  for (var index = 0; index < events.length; index++) {
+                    events[index].call(art, event);
+                  }
+
                   art.emit('hotkey', event);
                 }
               }
@@ -4101,12 +4119,14 @@
       _classCallCheck(this, Layer);
 
       _this = _super.call(this, art);
+      var option = art.option,
+          $layer = art.template.$layer;
       _this.name = 'layer';
-      _this.$parent = art.template.$layer;
+      _this.$parent = $layer;
       art.once('ready', function () {
-        art.option.layers.forEach(function (item) {
-          return _this.add(item);
-        });
+        for (var index = 0; index < option.layers.length; index++) {
+          _this.add(option.layers[index]);
+        }
       });
       return _this;
     }
@@ -4422,9 +4442,9 @@
             name: 'playbackRate'
           }));
 
-          option.settings.forEach(function (item) {
-            return _this.add(item);
-          });
+          for (var index = 0; index < option.settings.length; index++) {
+            _this.add(option.settings[index]);
+          }
         });
         art.on('blur', function () {
           _this.show = false;
@@ -4540,7 +4560,10 @@
         if (template.$track && template.$track.track) {
           var cues = Array.from(template.$track.track.cues);
           var time = clamp(value, -5, 5);
-          cues.forEach(function (cue, index) {
+
+          for (var index = 0; index < cues.length; index++) {
+            var cue = cues[index];
+
             if (!cuesCache[index]) {
               cuesCache[index] = {
                 startTime: cue.startTime,
@@ -4550,7 +4573,8 @@
 
             cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
             cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
-          });
+          }
+
           notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
           art.emit('subtitleOffset', value);
         } else {
@@ -4728,8 +4752,6 @@
 
   var Plugins = /*#__PURE__*/function () {
     function Plugins(art) {
-      var _this = this;
-
       _classCallCheck(this, Plugins);
 
       this.art = art;
@@ -4752,9 +4774,9 @@
         this.add(localSubtitle);
       }
 
-      art.option.plugins.forEach(function (plugin) {
-        return _this.add(plugin);
-      });
+      for (var index = 0; index < option.plugins.length; index++) {
+        this.add(option.plugins[index]);
+      }
     }
 
     _createClass(Plugins, [{
@@ -4854,11 +4876,13 @@
     var option = art.option,
         proxy = art.events.proxy,
         $video = art.template.$video;
-    config.events.forEach(function (eventName) {
-      proxy($video, eventName, function (event) {
+
+    for (var index = 0; index < config.events.length; index++) {
+      proxy($video, config.events[index], function (event) {
         art.emit("video:".concat(event.type), event);
       });
-    });
+    }
+
     Object.keys(option.moreVideoAttr).forEach(function (key) {
       $video[key] = option.moreVideoAttr[key];
     });

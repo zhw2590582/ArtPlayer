@@ -4,7 +4,8 @@ export default function exclusiveMix(art) {
     const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
 
     function exclusive(props) {
-        props.forEach((name) => {
+        for (let index = 0; index < props.length; index++) {
+            const name = props[index];
             art.on(name, () => {
                 if (art[name]) {
                     props
@@ -16,7 +17,7 @@ export default function exclusiveMix(art) {
                         });
                 }
             });
-        });
+        }
     }
 
     exclusive(sizeProps);

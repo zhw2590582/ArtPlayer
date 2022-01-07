@@ -68,6 +68,8 @@ export default class Events {
     }
 
     destroy() {
-        this.destroyEvents.forEach((event) => event());
+        for (let index = 0; index < this.destroyEvents.length; index++) {
+            this.destroyEvents[index]();
+        }
     }
 }

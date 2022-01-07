@@ -93,13 +93,14 @@ export default function progress(options) {
                     }
                 }
 
-                option.highlight.forEach((item) => {
+                for (let index = 0; index < option.highlight.length; index++) {
+                    const item = option.highlight[index];
                     const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
                     append(
                         $highlight,
                         `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`,
                     );
-                });
+                }
 
                 setBar('loaded', art.loaded);
 

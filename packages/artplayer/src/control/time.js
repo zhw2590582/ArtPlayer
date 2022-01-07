@@ -1,9 +1,9 @@
 import { secondToTime } from '../utils';
 
 export default function time(option) {
-    return art => ({
+    return (art) => ({
         ...option,
-        mounted: $control => {
+        mounted: ($control) => {
             function getTime() {
                 const newTime = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
                 if (newTime !== $control.innerText) {
@@ -12,9 +12,11 @@ export default function time(option) {
             }
 
             getTime();
-            ['video:loadedmetadata', 'video:timeupdate', 'video:progress'].forEach(event => {
-                art.on(event, getTime);
-            });
+
+            const events = ['video:loadedmetadata', 'video:timeupdate', 'video:progress'];
+            for (let index = 0; index < events.length; index++) {
+                art.on(events[index], getTime);
+            }
         },
     });
 }

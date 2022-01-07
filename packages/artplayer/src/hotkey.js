@@ -43,7 +43,9 @@ export default class Hotkey {
                             const events = this.keys[event.keyCode];
                             if (events) {
                                 event.preventDefault();
-                                events.forEach((fn) => fn.call(art, event));
+                                for (let index = 0; index < events.length; index++) {
+                                    events[index].call(art, event);
+                                }
                                 art.emit('hotkey', event);
                             }
                         }

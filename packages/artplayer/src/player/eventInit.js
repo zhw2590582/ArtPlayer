@@ -21,11 +21,11 @@ export default function eventInit(art) {
         art.fullscreen = !art.fullscreen;
     });
 
-    config.events.forEach((eventName) => {
-        proxy($video, eventName, (event) => {
+    for (let index = 0; index < config.events.length; index++) {
+        proxy($video, config.events[index], (event) => {
             art.emit(`video:${event.type}`, event);
         });
-    });
+    }
 
     // art.on('video:abort', () => {
 
