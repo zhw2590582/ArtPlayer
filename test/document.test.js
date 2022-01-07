@@ -1858,9 +1858,6 @@ describe("Document", function () {
     });
     art.on("ready", () => {
       art.mini = true;
-      setTimeout(() => {
-        art.mini = false;
-      }, 1000);
     });
 
     testAll(art, done);

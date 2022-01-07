@@ -495,9 +495,14 @@ declare class Player {
     set volume(percentage: number);
     get muted(): boolean;
     set muted(state: boolean);
+    get title(): string;
+    set title(title: string);
+    get theme(): string;
+    set theme(theme: string);
     pause(): any;
     play(): any;
     toggle(): any;
+    attr(key: string, value: any): void;
     switchUrl(url: string): Promise<string>;
     switchQuality(url: string): Promise<string>;
     getDataURL(): Promise<string>;

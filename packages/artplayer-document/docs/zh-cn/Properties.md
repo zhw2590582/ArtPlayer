@@ -486,10 +486,6 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.mini = true;
-
-    setTimeout(() => {
-        art.mini = false;
-    }, 1000);
 });
 ```
 

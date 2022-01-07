@@ -1355,8 +1355,8 @@
       get: function get() {
         return $player.dataset.aspectRatio || '';
       },
-      set: function set() {
-        var ratio = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'default';
+      set: function set(ratio) {
+        if (!ratio) ratio = 'default';
         var ratioList = ['default', '4:3', '16:9'];
         errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
@@ -4981,7 +4981,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1641555243763';
+        return '1641558632300';
       }
     }, {
       key: "config",
