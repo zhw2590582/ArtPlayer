@@ -28,7 +28,7 @@ jobs:
     - name: npm install, lint, build, and test
       run: |
         npm install
-        npm install packages/* && npx lerna bootstrap --hoist
+        npx lerna bootstrap --hoist
         npm run lint
         npm run build:all
         cd packages/artplayer-document && ls
