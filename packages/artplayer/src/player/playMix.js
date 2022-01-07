@@ -4,8 +4,8 @@ export default function playMix(art) {
     const {
         i18n,
         notice,
+        option,
         constructor: { instances },
-        option: { mutex },
         template: { $video },
     } = art;
 
@@ -20,7 +20,7 @@ export default function playMix(art) {
                 });
             }
 
-            if (mutex) {
+            if (option.mutex) {
                 instances.filter((item) => item !== art).forEach((item) => item.pause());
             }
 

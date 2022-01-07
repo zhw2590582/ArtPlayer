@@ -1,8 +1,5 @@
 export default function miniProgressBar(art) {
-    const {
-        layers,
-        option: { theme },
-    } = art;
+    const { layers, option } = art;
 
     layers.add({
         name: 'miniProgressBar',
@@ -13,7 +10,7 @@ export default function miniProgressBar(art) {
             right: 0,
             bottom: 0,
             height: '2px',
-            backgroundColor: theme,
+            backgroundColor: 'var(--theme)',
         },
         mounted($progressBar) {
             art.on('control', (value) => {

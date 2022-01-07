@@ -19,7 +19,7 @@ export default function seekMix(art) {
         },
     });
 
-    def(player, 'backward', {
+    def(art, 'backward', {
         set(time) {
             art.seek = art.currentTime - time;
         },

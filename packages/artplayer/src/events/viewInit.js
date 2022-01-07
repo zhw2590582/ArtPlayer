@@ -2,7 +2,6 @@ import { throttle, isInViewport } from '../utils';
 
 export default function viewInit(art, events) {
     const {
-        player,
         option,
         template: { $container },
     } = art;

@@ -1,6 +1,6 @@
 import { def, clamp } from '../utils';
 
-export default function loopMin(art) {
+export default function loopMix(art) {
     let interval = [];
     def(art, 'loop', {
         get: () => interval,

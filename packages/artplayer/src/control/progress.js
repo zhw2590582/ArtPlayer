@@ -13,15 +13,16 @@ export function getPosFromEvent(art, event) {
     return { second, time, width, percentage };
 }
 
-export default function progress(option) {
+export default function progress(options) {
     return (art) => {
         const {
-            option: { highlight, theme },
-            events: { proxy },
             icons,
+            option,
+            events: { proxy },
         } = art;
+
         return {
-            ...option,
+            ...options,
             html: `
                 <div class="art-control-progress-inner">
                     <div class="art-progress-loaded"></div>
@@ -39,7 +40,7 @@ export default function progress(option) {
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
 
-                setStyle($played, 'backgroundColor', theme);
+                setStyle($played, 'backgroundColor', 'var(--theme)');
 
                 let indicatorSize = 14;
                 if (icons.indicator) {
@@ -47,7 +48,7 @@ export default function progress(option) {
                     append($indicator, icons.indicator);
                 } else {
                     setStyles($indicator, {
-                        backgroundColor: theme,
+                        backgroundColor: 'var(--theme)',
                     });
                 }
 
@@ -95,7 +96,7 @@ export default function progress(option) {
                     }
                 }
 
-                highlight.forEach((item) => {
+                option.highlight.forEach((item) => {
                     const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
                     append(
                         $highlight,

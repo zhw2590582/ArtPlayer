@@ -22,7 +22,6 @@ export default class Control extends Component {
 
         const {
             option,
-            player,
             template: { $player },
         } = art;
 

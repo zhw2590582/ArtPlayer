@@ -23,10 +23,12 @@ import autoSizeMix from './autoSizeMix';
 import rectMix from './rectMix';
 import flipMix from './flipMix';
 import miniMix from './miniMix';
-import loopMin from './loopMin';
+import loopMix from './loopMix';
 import rotateMix from './rotateMix';
 import posterMix from './posterMix';
 import autoHeightMix from './autoHeightMix';
+import themeMix from './themeMix';
+import titleMix from './titleMix';
 
 export default class Player {
     constructor(art) {
@@ -55,9 +57,11 @@ export default class Player {
         rectMix(art);
         flipMix(art);
         miniMix(art);
-        loopMin(art);
+        loopMix(art);
         rotateMix(art);
         posterMix(art);
         autoHeightMix(art);
+        themeMix(art);
+        titleMix(art);
     }
 }

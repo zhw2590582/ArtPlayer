@@ -7,12 +7,13 @@ export default class Whitelist {
 
     get state() {
         const {
+            option,
             constructor: { kindOf },
-            option: { whitelist },
         } = this.art;
+
         return (
             !isMobile ||
-            whitelist.some((item) => {
+            option.whitelist.some((item) => {
                 switch (kindOf(item)) {
                     case 'string':
                         return item === '*' || userAgent.indexOf(item) > -1;

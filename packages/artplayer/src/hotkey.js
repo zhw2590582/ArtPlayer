@@ -6,7 +6,6 @@ export default class Hotkey {
 
         const {
             option,
-            player,
             events: { proxy },
         } = art;
 
