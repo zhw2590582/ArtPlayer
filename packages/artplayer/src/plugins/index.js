@@ -34,7 +34,6 @@ export default class Plugins {
 
     add(plugin) {
         this.id += 1;
-        errorHandle(typeof plugin === 'function', `The Plugins.add() first parameter is not a function`);
         const result = plugin.call(this, this.art);
         const pluginName = (result && result.name) || plugin.name || `plugin${this.id}`;
         errorHandle(!has(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);

@@ -102,7 +102,7 @@ export default class Template {
     }
 
     desktop() {
-        const { backdrop, theme, useSSR } = this.art.option;
+        const { backdrop, useSSR } = this.art.option;
 
         if (!useSSR) {
             this.$container.innerHTML = Template.html;
@@ -135,7 +135,6 @@ export default class Template {
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
 
-        this.$player.style.setProperty('--theme', theme);
         this.$container.dataset.artId = this.art.id;
 
         if (backdrop) {

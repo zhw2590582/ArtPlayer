@@ -3,7 +3,7 @@ import { append, query, setStyle, setStyles, errorHandle } from '../utils';
 export default function localVideo(art) {
     const {
         events: { proxy },
-        template,
+        template: { $video, $player },
         option,
         setting,
         i18n,
@@ -11,7 +11,7 @@ export default function localVideo(art) {
 
     function loadVideo(file) {
         if (file) {
-            const canPlayType = template.$video.canPlayType(file.type);
+            const canPlayType = $video.canPlayType(file.type);
             if (canPlayType === 'maybe' || canPlayType === 'probably') {
                 const url = URL.createObjectURL(file);
                 option.title = file.name;
@@ -23,13 +23,13 @@ export default function localVideo(art) {
         }
     }
 
-    proxy(template.$player, 'dragover', (event) => {
+    proxy($player, 'dragover', (event) => {
         event.preventDefault();
     });
 
-    proxy(template.$player, 'drop', (event) => {
+    proxy($player, 'drop', (event) => {
         event.preventDefault();
-        const file = e.dataTransfer.files[0];
+        const file = event.dataTransfer.files[0];
         loadVideo(file);
     });
 

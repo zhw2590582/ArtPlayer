@@ -1,6 +1,6 @@
 import { def } from '../utils';
 
-export default function exclusiveInit(art) {
+export default function exclusiveMix(art) {
     const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
 
     function exclusive(props) {

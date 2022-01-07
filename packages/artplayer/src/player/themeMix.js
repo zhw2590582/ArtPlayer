@@ -8,7 +8,7 @@ export default function themeMix(art) {
 
     def(art, 'theme', {
         get() {
-            return $player.style.getProperty('--theme');
+            return getComputedStyle($player).getPropertyValue('--theme');
         },
         set(theme) {
             option.theme = theme;

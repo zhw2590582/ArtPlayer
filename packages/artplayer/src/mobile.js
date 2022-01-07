@@ -9,13 +9,13 @@ export default class Mobile {
             template: { $video },
         } = art;
 
-        config.events.forEach(eventName => {
-            proxy($video, eventName, event => {
+        config.events.forEach((eventName) => {
+            proxy($video, eventName, (event) => {
                 art.emit(`video:${event.type}`, event);
             });
         });
 
-        Object.keys(option.moreVideoAttr).forEach(key => {
+        Object.keys(option.moreVideoAttr).forEach((key) => {
             $video[key] = option.moreVideoAttr[key];
         });
 
@@ -34,8 +34,6 @@ export default class Mobile {
         if (option.autoplay) {
             $video.autoplay = option.autoplay;
         }
-
-        $video.controls = true;
 
         const typeName = option.type || getExt(option.url);
         const typeCallback = option.customType[typeName];

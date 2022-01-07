@@ -1,7 +1,5 @@
 import urlMix from './urlMix';
-import attrInit from './attrInit';
-import eventInit from './eventInit';
-import exclusiveInit from './exclusiveInit';
+import attrMix from './attrMix';
 import playMix from './playMix';
 import pauseMix from './pauseMix';
 import toggleMix from './toggleMix';
@@ -29,13 +27,14 @@ import posterMix from './posterMix';
 import autoHeightMix from './autoHeightMix';
 import themeMix from './themeMix';
 import titleMix from './titleMix';
+import exclusiveMix from './exclusiveMix';
+import optionInit from './optionInit';
+import eventInit from './eventInit';
 
 export default class Player {
     constructor(art) {
         urlMix(art);
-        eventInit(art);
-        attrInit(art);
-        exclusiveInit(art);
+        attrMix(art);
         playMix(art);
         pauseMix(art);
         toggleMix(art);
@@ -63,5 +62,8 @@ export default class Player {
         autoHeightMix(art);
         themeMix(art);
         titleMix(art);
+        exclusiveMix(art);
+        eventInit(art);
+        optionInit(art);
     }
 }

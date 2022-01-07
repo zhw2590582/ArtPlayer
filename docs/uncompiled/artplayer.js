@@ -860,7 +860,6 @@
       value: function desktop() {
         var _this$art$option = this.art.option,
             backdrop = _this$art$option.backdrop,
-            theme = _this$art$option.theme,
             useSSR = _this$art$option.useSSR;
 
         if (!useSSR) {
@@ -893,7 +892,6 @@
         this.$miniTitle = this.query('.art-mini-title');
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
-        this.$player.style.setProperty('--theme', theme);
         this.$container.dataset.artId = this.art.id;
 
         if (backdrop) {
@@ -1117,190 +1115,12 @@
     });
   }
 
-  function attrInit(art) {
-    var option = art.option,
-        storage = art.storage,
-        _art$template = art.template,
-        $video = _art$template.$video,
-        $poster = _art$template.$poster;
-    Object.keys(option.moreVideoAttr).forEach(function (key) {
-      $video[key] = option.moreVideoAttr[key];
-    });
-
-    if (option.muted) {
-      $video.muted = option.muted;
-    }
-
-    if (option.volume) {
-      $video.volume = clamp(option.volume, 0, 1);
-    }
-
-    var volume = storage.get('volume');
-
-    if (volume) {
-      $video.volume = clamp(volume, 0, 1);
-    }
-
-    if (option.poster) {
-      // $video.poster = option.poster;
-      setStyle($poster, 'backgroundImage', "url(".concat(option.poster, ")"));
-    }
-
-    if (option.autoplay) {
-      $video.autoplay = option.autoplay;
-    }
-
-    $video.controls = false;
-
-    if (option.ads.length === 0) {
-      art.url = option.url;
-    }
-  }
-
-  function eventInit(art) {
-    var option = art.option,
-        proxy = art.events.proxy,
-        _art$template = art.template,
-        $player = _art$template.$player,
-        $video = _art$template.$video,
-        $poster = _art$template.$poster,
-        i18n = art.i18n,
-        notice = art.notice;
-    var reconnectTime = 0;
-    var maxReconnectTime = 5;
-    proxy($video, 'click', function () {
-      art.toggle();
-    });
-    proxy($video, 'dblclick', function () {
-      art.fullscreen = !art.fullscreen;
-    });
-    config.events.forEach(function (eventName) {
-      proxy($video, eventName, function (event) {
-        art.emit("video:".concat(event.type), event);
-      });
-    }); // art.on('video:abort', () => {
-    // });
-
-    art.on('video:canplay', function () {
-      reconnectTime = 0;
-      art.loading.show = false;
-    });
-    art.once('video:canplay', function () {
-      art.loading.show = false;
-      art.controls.show = true;
-      art.mask.show = true;
-      art.isReady = true;
-      art.emit('ready');
-    }); // art.on('video:canplaythrough', () => {
-    // });
-    // art.on('video:durationchange', () => {
-    // });
-    // art.on('video:emptied', () => {
-    // });
-
-    art.on('video:ended', function () {
-      if (option.loop) {
-        art.seek = 0;
-        art.play();
-        art.controls.show = false;
-        art.mask.show = false;
-      } else {
-        art.controls.show = true;
-        art.mask.show = true;
-      }
-    });
-    art.on('video:error', function () {
-      if (reconnectTime < maxReconnectTime) {
-        sleep(1000).then(function () {
-          reconnectTime += 1;
-          art.url = option.url;
-          notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
-          art.emit('error', reconnectTime);
-        });
-      } else {
-        art.loading.show = false;
-        art.controls.show = false;
-        addClass($player, 'art-error');
-        sleep(1000).then(function () {
-          notice.show = i18n.get('Video load failed');
-          art.destroy(false);
-        });
-      }
-    }); // art.on('video:loadeddata', () => {
-    // });
-
-    art.once('video:loadedmetadata', function () {
-      art.autoSize = option.autoSize;
-
-      if (isMobile) {
-        art.loading.show = false;
-        art.controls.show = true;
-        art.mask.show = true;
-      }
-    });
-    art.on('video:loadstart', function () {
-      art.loading.show = true;
-    });
-    art.on('video:pause', function () {
-      art.controls.show = true;
-      art.mask.show = true;
-    });
-    art.on('video:play', function () {
-      art.mask.show = false;
-      setStyle($poster, 'display', 'none');
-    });
-    art.on('video:playing', function () {
-      art.mask.show = false;
-    }); // art.on('video:progress', () => {
-    // });
-    // art.on('video:ratechange', () => {
-    // });
-
-    art.on('video:seeked', function () {
-      art.loading.show = false;
-    });
-    art.on('video:seeking', function () {
-      art.loading.show = true;
-    }); // art.on('video:stalled', () => {
-    // });
-    // art.on('video:suspend', () => {
-    // });
-
-    art.on('video:timeupdate', function () {
-      art.mask.show = false;
-    }); // art.on('video:volumechange', () => {
-    // });
-
-    art.on('video:waiting', function () {
-      art.loading.show = true;
-    });
-  }
-
-  function exclusiveInit(art) {
-    var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
-
-    function exclusive(props) {
-      props.forEach(function (name) {
-        art.on(name, function () {
-          if (art[name]) {
-            props.filter(function (item) {
-              return item !== name;
-            }).forEach(function (item) {
-              if (art[item]) {
-                art[item] = false;
-              }
-            });
-          }
-        });
-      });
-    }
-
-    exclusive(sizeProps);
-    def(art, 'normalSize', {
-      get: function get() {
-        return sizeProps.every(function (name) {
-          return !art[name];
-        });
+  function attrMix(art) {
+    var $video = art.template.$video;
+    def(art, 'attr', {
+      value: function value(key, _value) {
+        if (_value === undefined) return $video[key];
+        $video[key] = _value;
       }
     });
   }
@@ -2385,7 +2205,7 @@
         $player = art.template.$player;
     def(art, 'theme', {
       get: function get() {
-        return $player.style.getProperty('--theme');
+        return getComputedStyle($player).getPropertyValue('--theme');
       },
       set: function set(theme) {
         option.theme = theme;
@@ -2405,13 +2225,200 @@
     });
   }
 
+  function exclusiveMix(art) {
+    var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
+
+    function exclusive(props) {
+      props.forEach(function (name) {
+        art.on(name, function () {
+          if (art[name]) {
+            props.filter(function (item) {
+              return item !== name;
+            }).forEach(function (item) {
+              if (art[item]) {
+                art[item] = false;
+              }
+            });
+          }
+        });
+      });
+    }
+
+    exclusive(sizeProps);
+    def(art, 'normalSize', {
+      get: function get() {
+        return sizeProps.every(function (name) {
+          return !art[name];
+        });
+      }
+    });
+  }
+
+  function attrInit(art) {
+    var option = art.option,
+        storage = art.storage,
+        _art$template = art.template,
+        $video = _art$template.$video,
+        $poster = _art$template.$poster;
+    Object.keys(option.moreVideoAttr).forEach(function (key) {
+      art.attr(key, option.moreVideoAttr[key]);
+    });
+
+    if (option.muted) {
+      art.muted = option.muted;
+    }
+
+    if (option.volume) {
+      art.volume = clamp(option.volume, 0, 1);
+    }
+
+    var volume = storage.get('volume');
+
+    if (volume) {
+      art.volume = clamp(volume, 0, 1);
+    }
+
+    if (option.poster) {
+      setStyle($poster, 'backgroundImage', "url(".concat(option.poster, ")"));
+    }
+
+    if (option.autoplay) {
+      $video.autoplay = option.autoplay;
+    }
+
+    if (option.theme) {
+      art.theme = option.theme;
+    }
+
+    if (option.ads.length === 0) {
+      art.url = option.url;
+    }
+  }
+
+  function eventInit(art) {
+    var option = art.option,
+        proxy = art.events.proxy,
+        _art$template = art.template,
+        $player = _art$template.$player,
+        $video = _art$template.$video,
+        $poster = _art$template.$poster,
+        i18n = art.i18n,
+        notice = art.notice;
+    var reconnectTime = 0;
+    var maxReconnectTime = 5;
+    proxy($video, 'click', function () {
+      art.toggle();
+    });
+    proxy($video, 'dblclick', function () {
+      art.fullscreen = !art.fullscreen;
+    });
+    config.events.forEach(function (eventName) {
+      proxy($video, eventName, function (event) {
+        art.emit("video:".concat(event.type), event);
+      });
+    }); // art.on('video:abort', () => {
+    // });
+
+    art.on('video:canplay', function () {
+      reconnectTime = 0;
+      art.loading.show = false;
+    });
+    art.once('video:canplay', function () {
+      art.loading.show = false;
+      art.controls.show = true;
+      art.mask.show = true;
+      art.isReady = true;
+      art.emit('ready');
+    }); // art.on('video:canplaythrough', () => {
+    // });
+    // art.on('video:durationchange', () => {
+    // });
+    // art.on('video:emptied', () => {
+    // });
+
+    art.on('video:ended', function () {
+      if (option.loop) {
+        art.seek = 0;
+        art.play();
+        art.controls.show = false;
+        art.mask.show = false;
+      } else {
+        art.controls.show = true;
+        art.mask.show = true;
+      }
+    });
+    art.on('video:error', function () {
+      if (reconnectTime < maxReconnectTime) {
+        sleep(1000).then(function () {
+          reconnectTime += 1;
+          art.url = option.url;
+          notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
+          art.emit('error', reconnectTime);
+        });
+      } else {
+        art.loading.show = false;
+        art.controls.show = false;
+        addClass($player, 'art-error');
+        sleep(1000).then(function () {
+          notice.show = i18n.get('Video load failed');
+          art.destroy(false);
+        });
+      }
+    }); // art.on('video:loadeddata', () => {
+    // });
+
+    art.once('video:loadedmetadata', function () {
+      art.autoSize = option.autoSize;
+
+      if (isMobile) {
+        art.loading.show = false;
+        art.controls.show = true;
+        art.mask.show = true;
+      }
+    });
+    art.on('video:loadstart', function () {
+      art.loading.show = true;
+    });
+    art.on('video:pause', function () {
+      art.controls.show = true;
+      art.mask.show = true;
+    });
+    art.on('video:play', function () {
+      art.mask.show = false;
+      setStyle($poster, 'display', 'none');
+    });
+    art.on('video:playing', function () {
+      art.mask.show = false;
+    }); // art.on('video:progress', () => {
+    // });
+    // art.on('video:ratechange', () => {
+    // });
+
+    art.on('video:seeked', function () {
+      art.loading.show = false;
+    });
+    art.on('video:seeking', function () {
+      art.loading.show = true;
+    }); // art.on('video:stalled', () => {
+    // });
+    // art.on('video:suspend', () => {
+    // });
+
+    art.on('video:timeupdate', function () {
+      art.mask.show = false;
+    }); // art.on('video:volumechange', () => {
+    // });
+
+    art.on('video:waiting', function () {
+      art.loading.show = true;
+    });
+  }
+
   var Player = function Player(art) {
     _classCallCheck(this, Player);
 
     urlMix(art);
-    eventInit(art);
-    attrInit(art);
-    exclusiveInit(art);
+    attrMix(art);
     playMix(art);
     pauseMix(art);
     toggleMix(art);
@@ -2439,6 +2446,9 @@
     autoHeightMix(art);
     themeMix(art);
     titleMix(art);
+    exclusiveMix(art);
+    eventInit(art);
+    attrInit(art);
   };
 
   function _superPropBase(object, property) {
@@ -4049,9 +4059,6 @@
     _createClass(Hotkey, [{
       key: "add",
       value: function add(key, event) {
-        errorHandle(typeof key === 'number', 'The Hotkey.add() first parameter is not a number');
-        errorHandle(typeof event === 'function', 'The Hotkey.add() second parameter is not a function');
-
         if (this.keys[key]) {
           this.keys[key].push(event);
         } else {
@@ -4059,6 +4066,17 @@
         }
 
         return this;
+      }
+    }, {
+      key: "remove",
+      value: function remove(key, event) {
+        if (this.keys[key]) {
+          var index = this.keys[key].indexOf(event);
+
+          if (index !== -1) {
+            this.keys[key].splice(index, 1);
+          }
+        }
       }
     }]);
 
@@ -4542,14 +4560,16 @@
 
   function localVideo(art) {
     var proxy = art.events.proxy,
-        template = art.template,
+        _art$template = art.template,
+        $video = _art$template.$video,
+        $player = _art$template.$player,
         option = art.option,
         setting = art.setting,
         i18n = art.i18n;
 
     function loadVideo(file) {
       if (file) {
-        var canPlayType = template.$video.canPlayType(file.type);
+        var canPlayType = $video.canPlayType(file.type);
 
         if (canPlayType === 'maybe' || canPlayType === 'probably') {
           var url = URL.createObjectURL(file);
@@ -4562,12 +4582,12 @@
       }
     }
 
-    proxy(template.$player, 'dragover', function (event) {
+    proxy($player, 'dragover', function (event) {
       event.preventDefault();
     });
-    proxy(template.$player, 'drop', function (event) {
+    proxy($player, 'drop', function (event) {
       event.preventDefault();
-      var file = e.dataTransfer.files[0];
+      var file = event.dataTransfer.files[0];
       loadVideo(file);
     });
 
@@ -4739,7 +4759,6 @@
       key: "add",
       value: function add(plugin) {
         this.id += 1;
-        errorHandle(typeof plugin === 'function', "The Plugins.add() first parameter is not a function");
         var result = plugin.call(this, this.art);
         var pluginName = result && result.name || plugin.name || "plugin".concat(this.id);
         errorHandle(!has(this, pluginName), "Cannot add a plugin that already has the same name: ".concat(pluginName));
@@ -4858,7 +4877,6 @@
       $video.autoplay = option.autoplay;
     }
 
-    $video.controls = true;
     var typeName = option.type || getExt(option.url);
     var typeCallback = option.customType[typeName];
 

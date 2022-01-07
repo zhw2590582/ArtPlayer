@@ -8,24 +8,23 @@ export default function attrInit(art) {
     } = art;
 
     Object.keys(option.moreVideoAttr).forEach((key) => {
-        $video[key] = option.moreVideoAttr[key];
+        art.attr(key, option.moreVideoAttr[key]);
     });
 
     if (option.muted) {
-        $video.muted = option.muted;
+        art.muted = option.muted;
     }
 
     if (option.volume) {
-        $video.volume = clamp(option.volume, 0, 1);
+        art.volume = clamp(option.volume, 0, 1);
     }
 
     const volume = storage.get('volume');
     if (volume) {
-        $video.volume = clamp(volume, 0, 1);
+        art.volume = clamp(volume, 0, 1);
     }
 
     if (option.poster) {
-        // $video.poster = option.poster;
         setStyle($poster, 'backgroundImage', `url(${option.poster})`);
     }
 
@@ -33,7 +32,9 @@ export default function attrInit(art) {
         $video.autoplay = option.autoplay;
     }
 
-    $video.controls = false;
+    if (option.theme) {
+        art.theme = option.theme;
+    }
 
     if (option.ads.length === 0) {
         art.url = option.url;
