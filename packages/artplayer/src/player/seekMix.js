@@ -1,27 +1,27 @@
 import { secondToTime, def } from '../utils';
 
-export default function seekMix(art, player) {
+export default function seekMix(art) {
     const { notice } = art;
 
-    def(player, 'seek', {
+    def(art, 'seek', {
         set(time) {
-            player.currentTime = time;
-            art.emit('seek', player.currentTime);
-            if (player.duration) {
-                notice.show = `${secondToTime(player.currentTime)} / ${secondToTime(player.duration)}`;
+            art.currentTime = time;
+            art.emit('seek', art.currentTime);
+            if (art.duration) {
+                notice.show = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
             }
         },
     });
 
-    def(player, 'forward', {
+    def(art, 'forward', {
         set(time) {
-            player.seek = player.currentTime + time;
+            art.seek = art.currentTime + time;
         },
     });
 
-    def(player, 'backward', {
+    def(art, 'backward', {
         set(time) {
-            player.seek = player.currentTime - time;
+            art.seek = art.currentTime - time;
         },
     });
 }

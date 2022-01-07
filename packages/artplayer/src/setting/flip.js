@@ -1,8 +1,8 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function flip(option) {
-    return art => {
-        const { i18n, player } = art;
+    return (art) => {
+        const { i18n } = art;
         return {
             ...option,
             html: `
@@ -19,15 +19,15 @@ export default function flip(option) {
                     </div>
                 </div>
             `,
-            click: (setting, event) => {
+            click: (_, event) => {
                 const { value } = event.target.dataset;
                 if (value) {
-                    player.flip = value;
+                    art.flip = value;
                 }
             },
-            mounted: $setting => {
-                art.on('flip', flip => {
-                    const $current = queryAll('button', $setting).find(item => item.dataset.value === flip);
+            mounted: ($setting) => {
+                art.on('flip', (flip) => {
+                    const $current = queryAll('button', $setting).find((item) => item.dataset.value === flip);
                     if ($current) {
                         inverseClass($current.parentElement, 'current');
                     }

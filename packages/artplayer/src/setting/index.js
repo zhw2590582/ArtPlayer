@@ -54,9 +54,7 @@ export default class Setting extends Component {
                     }),
                 );
 
-                option.settings.forEach((item) => {
-                    this.add(item);
-                });
+                option.settings.forEach((item) => this.add(item));
             });
 
             art.on('blur', () => {

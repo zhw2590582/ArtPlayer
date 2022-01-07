@@ -1,13 +1,13 @@
 import { setStyle, errorHandle, def } from '../utils';
 
-export default function rotateMix(art, player) {
+export default function rotateMix(art) {
     const {
         template: { $video, $player },
         i18n,
         notice,
     } = art;
 
-    def(player, 'rotate', {
+    def(art, 'rotate', {
         get: () => Number($player.dataset.rotate) || 0,
         set: (deg) => {
             if (!deg) deg = 0;
@@ -19,7 +19,7 @@ export default function rotateMix(art, player) {
                 delete $player.dataset.rotate;
                 setStyle($video, 'transform', null);
             } else {
-                player.flip = false;
+                art.flip = false;
                 art.autoSize = true;
                 $player.dataset.rotate = deg;
 
@@ -65,11 +65,11 @@ export default function rotateMix(art, player) {
         },
     });
 
-    def(player, 'rotateReset', {
+    def(art, 'rotateReset', {
         set(value) {
-            if (value && player.rotate) {
-                const { rotate } = player;
-                player.rotate = rotate;
+            if (value && art.rotate) {
+                const { rotate } = art;
+                art.rotate = rotate;
             }
         },
     });

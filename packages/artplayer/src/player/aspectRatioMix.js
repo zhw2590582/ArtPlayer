@@ -1,19 +1,17 @@
 import { setStyle, errorHandle, def } from '../utils';
 
-export default function aspectRatioMix(art, player) {
+export default function aspectRatioMix(art) {
     const {
         template: { $video, $player },
         i18n,
         notice,
     } = art;
 
-    def(player, 'aspectRatio', {
+    def(art, 'aspectRatio', {
         get() {
             return $player.dataset.aspectRatio || '';
         },
-        set(ratio) {
-            if (!ratio) ratio = 'default';
-
+        set(ratio = 'default') {
             const ratioList = ['default', '4:3', '16:9'];
             errorHandle(ratioList.includes(ratio), `'aspectRatio' only accept ${ratioList.toString()} as parameters`);
 
@@ -23,7 +21,7 @@ export default function aspectRatioMix(art, player) {
                 setStyle($video, 'padding', null);
                 delete $player.dataset.aspectRatio;
             } else {
-                const ratioArray = ratio.split(':');
+                const ratioArray = ratio.split(':').map(Number);
                 const { videoWidth, videoHeight } = $video;
                 const { clientWidth, clientHeight } = $player;
                 const videoRatio = videoWidth / videoHeight;
@@ -47,11 +45,11 @@ export default function aspectRatioMix(art, player) {
         },
     });
 
-    def(player, 'aspectRatioReset', {
+    def(art, 'aspectRatioReset', {
         set(value) {
-            if (value && player.aspectRatio) {
-                const { aspectRatio } = player;
-                player.aspectRatio = aspectRatio;
+            if (value && art.aspectRatio) {
+                const { aspectRatio } = art;
+                art.aspectRatio = aspectRatio;
             }
         },
     });

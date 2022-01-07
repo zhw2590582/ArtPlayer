@@ -1,14 +1,13 @@
 import { append, tooltip, setStyle } from '../utils';
 
 export default function playAndPause(option) {
-    return art => ({
+    return (art) => ({
         ...option,
-        mounted: $control => {
+        mounted: ($control) => {
             const {
                 events: { proxy },
                 icons,
                 i18n,
-                player,
             } = art;
 
             const $play = append($control, icons.play);
@@ -17,11 +16,11 @@ export default function playAndPause(option) {
             tooltip($pause, i18n.get('Pause'));
 
             proxy($play, 'click', () => {
-                player.play();
+                art.play();
             });
 
             proxy($pause, 'click', () => {
-                player.pause();
+                art.pause();
             });
 
             function showPlay() {
@@ -34,7 +33,7 @@ export default function playAndPause(option) {
                 setStyle($pause, 'display', 'flex');
             }
 
-            if (player.playing) {
+            if (art.playing) {
                 showPause();
             } else {
                 showPlay();

@@ -1,9 +1,5 @@
 export default function miniProgressBar(art) {
-    const {
-        layers,
-        player,
-        option: { theme },
-    } = art;
+    const { layers } = art;
 
     layers.add({
         name: 'miniProgressBar',
@@ -14,7 +10,7 @@ export default function miniProgressBar(art) {
             right: 0,
             bottom: 0,
             height: '2px',
-            backgroundColor: theme,
+            backgroundColor: 'var(--theme)',
         },
         mounted($progressBar) {
             art.on('control', (value) => {
@@ -26,7 +22,7 @@ export default function miniProgressBar(art) {
             });
 
             art.on('video:timeupdate', () => {
-                $progressBar.style.width = `${player.played * 100}%`;
+                $progressBar.style.width = `${art.played * 100}%`;
             });
         },
     });

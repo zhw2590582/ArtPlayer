@@ -1,13 +1,13 @@
 import { def, clamp } from '../utils';
 
-export default function loopMin(art, player) {
+export default function loopMix(art) {
     let interval = [];
-    def(player, 'loop', {
+    def(art, 'loop', {
         get: () => interval,
         set: (value) => {
             if (Array.isArray(value) && typeof value[0] === 'number' && typeof value[1] === 'number') {
-                const start = clamp(value[0], 0, Math.min(value[1], player.duration));
-                const end = clamp(value[1], start, player.duration);
+                const start = clamp(value[0], 0, Math.min(value[1], art.duration));
+                const end = clamp(value[1], start, art.duration);
                 if (end - start >= 1) {
                     interval = [start, end];
                     art.emit('loop', interval);
@@ -24,8 +24,8 @@ export default function loopMin(art, player) {
 
     art.on('video:timeupdate', () => {
         if (interval.length) {
-            if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
-                player.seek = interval[0];
+            if (art.currentTime < interval[0] || art.currentTime > interval[1]) {
+                art.seek = interval[0];
             }
         }
     });

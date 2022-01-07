@@ -1,9 +1,9 @@
 import { setStyle, addClass, removeClass, hasClass, def } from '../utils';
 
-export default function resizeMix(art, player) {
+export default function resizeMix(art) {
     const { $container, $player, $video } = art.template;
 
-    def(player, 'autoSize', {
+    def(art, 'autoSize', {
         get() {
             return hasClass($container, 'art-auto-size');
         },
@@ -24,8 +24,8 @@ export default function resizeMix(art, player) {
                     setStyle($player, 'height', `${percentage}%`);
                 }
                 art.emit('autoSize', {
-                    width: player.width,
-                    height: player.height,
+                    width: art.width,
+                    height: art.height,
                 });
             } else {
                 removeClass($container, 'art-auto-size');

@@ -509,26 +509,13 @@
   function get(obj, name) {
     return Object.getOwnPropertyDescriptor(obj, name);
   }
-  function proxyPropertys(target) {
-    for (var _len = arguments.length, sources = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      sources[_key - 1] = arguments[_key];
-    }
-
-    return sources.reduce(function (result, source) {
-      Object.getOwnPropertyNames(source).forEach(function (key) {
-        errorHandle(!has(result, key), "Target attribute name is duplicated: ".concat(key));
-        def(result, key, get(source, key));
-      });
-      return result;
-    }, target);
-  }
   function mergeDeep() {
     var isObject = function isObject(item) {
       return item && _typeof(item) === 'object' && !Array.isArray(item);
     };
 
-    for (var _len2 = arguments.length, objects = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      objects[_key2] = arguments[_key2];
+    for (var _len = arguments.length, objects = new Array(_len), _key = 0; _key < _len; _key++) {
+      objects[_key] = arguments[_key];
     }
 
     return objects.reduce(function (prev, obj) {
@@ -662,7 +649,6 @@
     def: def,
     has: has,
     get: get,
-    proxyPropertys: proxyPropertys,
     mergeDeep: mergeDeep,
     sleep: sleep,
     debounce: debounce,
@@ -800,27 +786,39 @@
     prototypes: ["width", "height", "videoWidth", "videoHeight", "poster", "webkitDecodedFrameCount", "webkitDroppedFrameCount", "playsInline", "webkitSupportsFullscreen", "webkitDisplayingFullscreen", "onenterpictureinpicture", "onleavepictureinpicture", "disablePictureInPicture", "cancelVideoFrameCallback", "requestVideoFrameCallback", "getVideoPlaybackQuality", "requestPictureInPicture", "webkitEnterFullScreen", "webkitEnterFullscreen", "webkitExitFullScreen", "webkitExitFullscreen"]
   };
 
-  var Whitelist = function Whitelist(art) {
-    _classCallCheck(this, Whitelist);
+  var Whitelist = /*#__PURE__*/function () {
+    function Whitelist(art) {
+      _classCallCheck(this, Whitelist);
 
-    var kindOf = art.constructor.kindOf,
-        whitelist = art.option.whitelist;
-    this.state = !isMobile || whitelist.some(function (item) {
-      switch (kindOf(item)) {
-        case 'string':
-          return item === '*' || userAgent.indexOf(item) > -1;
+      this.art = art;
+    }
 
-        case 'function':
-          return item(userAgent);
+    _createClass(Whitelist, [{
+      key: "state",
+      get: function get() {
+        var _this$art = this.art,
+            option = _this$art.option,
+            kindOf = _this$art.constructor.kindOf;
+        return !isMobile || option.whitelist.some(function (item) {
+          switch (kindOf(item)) {
+            case 'string':
+              return item === '*' || userAgent.indexOf(item) > -1;
 
-        case 'regexp':
-          return item.test(userAgent);
+            case 'function':
+              return item(userAgent);
 
-        default:
-          return false;
+            case 'regexp':
+              return item.test(userAgent);
+
+            default:
+              return false;
+          }
+        });
       }
-    });
-  };
+    }]);
+
+    return Whitelist;
+  }();
 
   var Template = /*#__PURE__*/function () {
     function Template(art) {
@@ -829,23 +827,27 @@
       _classCallCheck(this, Template);
 
       this.art = art;
-      this.query = this.query.bind(this);
+      var option = art.option,
+          constructor = art.constructor,
+          whitelist = art.whitelist;
 
-      if (art.option.container instanceof Element) {
-        this.$container = art.option.container;
+      if (option.container instanceof Element) {
+        this.$container = option.container;
       } else {
-        this.$container = query(art.option.container);
-        errorHandle(this.$container, "No container element found by ".concat(art.option.container));
+        this.$container = query(option.container);
+        errorHandle(this.$container, "No container element found by ".concat(option.container));
       }
 
       var type = this.$container.tagName.toLowerCase();
       errorHandle(type === 'div', "Unsupported container element type, only support 'div' but got '".concat(type, "'"));
-      errorHandle(art.constructor.instances.every(function (ins) {
+      errorHandle(constructor.instances.every(function (ins) {
         return ins.template.$container !== _this.$container;
       }), 'Cannot mount multiple instances on the same dom element');
+      this.query = this.query.bind(this);
+      this.$container.dataset.artId = art.id;
       this.$original = this.$container.cloneNode(true);
 
-      if (art.whitelist.state) {
+      if (whitelist.state) {
         this.desktop();
       } else {
         this.mobile();
@@ -860,12 +862,9 @@
     }, {
       key: "desktop",
       value: function desktop() {
-        var _this$art$option = this.art.option,
-            backdrop = _this$art$option.backdrop,
-            theme = _this$art$option.theme,
-            useSSR = _this$art$option.useSSR;
+        var option = this.art.option;
 
-        if (!useSSR) {
+        if (!option.useSSR) {
           this.$container.innerHTML = Template.html;
         }
 
@@ -895,10 +894,8 @@
         this.$miniTitle = this.query('.art-mini-title');
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
-        this.$player.style.setProperty('--theme', theme);
-        this.$container.dataset.artId = this.art.id;
 
-        if (backdrop) {
+        if (option.backdrop) {
           addClass(this.$settingInner, 'art-backdrop-filter');
           addClass(this.$contextmenu, 'art-backdrop-filter');
           addClass(this.$info, 'art-backdrop-filter');
@@ -927,7 +924,7 @@
     }], [{
       key: "html",
       get: function get() {
-        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.1.3</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
+        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.2.0</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
       }
     }]);
 
@@ -1086,10 +1083,10 @@
     return I18n;
   }();
 
-  function urlMix(art, player) {
+  function urlMix(art) {
     var option = art.option,
         $video = art.template.$video;
-    def(player, 'url', {
+    def(art, 'url', {
       get: function get() {
         return $video.currentSrc;
       },
@@ -1103,7 +1100,7 @@
             typeCallback.call(art, $video, url, art);
           });
         } else {
-          if (player.url && player.url !== url) {
+          if (art.url && art.url !== url) {
             art.once('video:canplay', function () {
               if (art.isReady) {
                 art.emit('restart');
@@ -1119,201 +1116,23 @@
     });
   }
 
-  function attrInit(art, player) {
-    var option = art.option,
-        storage = art.storage,
-        _art$template = art.template,
-        $video = _art$template.$video,
-        $poster = _art$template.$poster;
-    Object.keys(option.moreVideoAttr).forEach(function (key) {
-      $video[key] = option.moreVideoAttr[key];
-    });
-
-    if (option.muted) {
-      $video.muted = option.muted;
-    }
-
-    if (option.volume) {
-      $video.volume = clamp(option.volume, 0, 1);
-    }
-
-    var volume = storage.get('volume');
-
-    if (volume) {
-      $video.volume = clamp(volume, 0, 1);
-    }
-
-    if (option.poster) {
-      // $video.poster = option.poster;
-      setStyle($poster, 'backgroundImage', "url(".concat(option.poster, ")"));
-    }
-
-    if (option.autoplay) {
-      $video.autoplay = option.autoplay;
-    }
-
-    $video.controls = false;
-
-    if (option.ads.length === 0) {
-      player.url = option.url;
-    }
-  }
-
-  function eventInit(art, player) {
-    var option = art.option,
-        proxy = art.events.proxy,
-        _art$template = art.template,
-        $player = _art$template.$player,
-        $video = _art$template.$video,
-        $poster = _art$template.$poster,
-        i18n = art.i18n,
-        notice = art.notice;
-    var reconnectTime = 0;
-    var maxReconnectTime = 5;
-    proxy($video, 'click', function () {
-      player.toggle();
-    });
-    proxy($video, 'dblclick', function () {
-      player.fullscreen = !player.fullscreen;
-    });
-    config.events.forEach(function (eventName) {
-      proxy($video, eventName, function (event) {
-        art.emit("video:".concat(event.type), event);
-      });
-    }); // art.on('video:abort', () => {
-    // });
-
-    art.on('video:canplay', function () {
-      reconnectTime = 0;
-      art.loading.show = false;
-    });
-    art.once('video:canplay', function () {
-      art.loading.show = false;
-      art.controls.show = true;
-      art.mask.show = true;
-      art.isReady = true;
-      art.emit('ready');
-    }); // art.on('video:canplaythrough', () => {
-    // });
-    // art.on('video:durationchange', () => {
-    // });
-    // art.on('video:emptied', () => {
-    // });
-
-    art.on('video:ended', function () {
-      if (option.loop) {
-        player.seek = 0;
-        player.play();
-        art.controls.show = false;
-        art.mask.show = false;
-      } else {
-        art.controls.show = true;
-        art.mask.show = true;
-      }
-    });
-    art.on('video:error', function () {
-      if (reconnectTime < maxReconnectTime) {
-        sleep(1000).then(function () {
-          reconnectTime += 1;
-          player.url = option.url;
-          notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
-          art.emit('error', reconnectTime);
-        });
-      } else {
-        art.loading.show = false;
-        art.controls.show = false;
-        addClass($player, 'art-error');
-        sleep(1000).then(function () {
-          notice.show = i18n.get('Video load failed');
-          art.destroy(false);
-        });
-      }
-    }); // art.on('video:loadeddata', () => {
-    // });
-
-    art.once('video:loadedmetadata', function () {
-      player.autoSize = option.autoSize;
-
-      if (isMobile) {
-        art.loading.show = false;
-        art.controls.show = true;
-        art.mask.show = true;
-      }
-    });
-    art.on('video:loadstart', function () {
-      art.loading.show = true;
-    });
-    art.on('video:pause', function () {
-      art.controls.show = true;
-      art.mask.show = true;
-    });
-    art.on('video:play', function () {
-      art.mask.show = false;
-      setStyle($poster, 'display', 'none');
-    });
-    art.on('video:playing', function () {
-      art.mask.show = false;
-    }); // art.on('video:progress', () => {
-    // });
-    // art.on('video:ratechange', () => {
-    // });
-
-    art.on('video:seeked', function () {
-      art.loading.show = false;
-    });
-    art.on('video:seeking', function () {
-      art.loading.show = true;
-    }); // art.on('video:stalled', () => {
-    // });
-    // art.on('video:suspend', () => {
-    // });
-
-    art.on('video:timeupdate', function () {
-      art.mask.show = false;
-    }); // art.on('video:volumechange', () => {
-    // });
-
-    art.on('video:waiting', function () {
-      art.loading.show = true;
-    });
-  }
-
-  function exclusiveInit(art, player) {
-    var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
-
-    function exclusive(props) {
-      props.forEach(function (name) {
-        art.on(name, function () {
-          if (player[name]) {
-            props.filter(function (item) {
-              return item !== name;
-            }).forEach(function (item) {
-              if (player[item]) {
-                player[item] = false;
-              }
-            });
-          }
-        });
-      });
-    }
-
-    exclusive(sizeProps);
-    def(player, 'normalSize', {
-      get: function get() {
-        return sizeProps.every(function (name) {
-          return !player[name];
-        });
+  function attrMix(art) {
+    var $video = art.template.$video;
+    def(art, 'attr', {
+      value: function value(key, _value) {
+        if (_value === undefined) return $video[key];
+        $video[key] = _value;
       }
     });
   }
 
-  function playMix(art, player) {
+  function playMix(art) {
     var i18n = art.i18n,
         notice = art.notice,
+        option = art.option,
         instances = art.constructor.instances,
-        mutex = art.option.mutex,
         $video = art.template.$video;
-    def(player, 'play', {
+    def(art, 'play', {
       value: function value() {
         var promise = $video.play();
 
@@ -1324,11 +1143,11 @@
           });
         }
 
-        if (mutex) {
+        if (option.mutex) {
           instances.filter(function (item) {
             return item !== art;
           }).forEach(function (item) {
-            item.player.pause();
+            return item.pause();
           });
         }
 
@@ -1339,11 +1158,11 @@
     });
   }
 
-  function pauseMix(art, player) {
+  function pauseMix(art) {
     var $video = art.template.$video,
         i18n = art.i18n,
         notice = art.notice;
-    def(player, 'pause', {
+    def(art, 'pause', {
       value: function value() {
         var result = $video.pause();
         notice.show = i18n.get('Pause');
@@ -1353,48 +1172,48 @@
     });
   }
 
-  function toggleMix(art, player) {
-    def(player, 'toggle', {
+  function toggleMix(art) {
+    def(art, 'toggle', {
       value: function value() {
-        if (player.playing) {
-          return player.pause();
+        if (art.playing) {
+          return art.pause();
         } else {
-          return player.play();
+          return art.play();
         }
       }
     });
   }
 
-  function seekMix$1(art, player) {
+  function seekMix$1(art) {
     var notice = art.notice;
-    def(player, 'seek', {
+    def(art, 'seek', {
       set: function set(time) {
-        player.currentTime = time;
-        art.emit('seek', player.currentTime);
+        art.currentTime = time;
+        art.emit('seek', art.currentTime);
 
-        if (player.duration) {
-          notice.show = "".concat(secondToTime(player.currentTime), " / ").concat(secondToTime(player.duration));
+        if (art.duration) {
+          notice.show = "".concat(secondToTime(art.currentTime), " / ").concat(secondToTime(art.duration));
         }
       }
     });
-    def(player, 'forward', {
+    def(art, 'forward', {
       set: function set(time) {
-        player.seek = player.currentTime + time;
+        art.seek = art.currentTime + time;
       }
     });
-    def(player, 'backward', {
+    def(art, 'backward', {
       set: function set(time) {
-        player.seek = player.currentTime - time;
+        art.seek = art.currentTime - time;
       }
     });
   }
 
-  function volumeMix(art, player) {
+  function volumeMix(art) {
     var $video = art.template.$video,
         i18n = art.i18n,
         notice = art.notice,
         storage = art.storage;
-    def(player, 'volume', {
+    def(art, 'volume', {
       get: function get() {
         return $video.volume || 0;
       },
@@ -1409,7 +1228,7 @@
         art.emit('volume', $video.volume);
       }
     });
-    def(player, 'muted', {
+    def(art, 'muted', {
       get: function get() {
         return $video.muted;
       },
@@ -1420,21 +1239,21 @@
     });
   }
 
-  function currentTimeMix(art, player) {
+  function currentTimeMix(art) {
     var $video = art.template.$video;
-    def(player, 'currentTime', {
+    def(art, 'currentTime', {
       get: function get() {
         return $video.currentTime || 0;
       },
       set: function set(time) {
         // Fixed: The provided double value is non-finite
-        $video.currentTime = clamp(parseFloat(time.toFixed(3)), 0, player.duration);
+        $video.currentTime = clamp(parseFloat(time.toFixed(3)), 0, art.duration);
       }
     });
   }
 
-  function durationMix(art, player) {
-    def(player, 'duration', {
+  function durationMix(art) {
+    def(art, 'duration', {
       get: function get() {
         var duration = art.template.$video.duration;
         if (duration === Infinity) return 0;
@@ -1443,26 +1262,26 @@
     });
   }
 
-  function switchMix(art, player) {
+  function switchMix(art) {
     var i18n = art.i18n,
         option = art.option,
         notice = art.notice;
 
     function switchUrl(url, name, currentTime) {
       return new Promise(function (resolve) {
-        if (url === player.url) return resolve(url);
-        URL.revokeObjectURL(player.url);
-        player.url = url;
+        if (url === art.url) return resolve(url);
+        URL.revokeObjectURL(art.url);
+        art.url = url;
         art.once('video:canplay', function () {
-          player.playbackRate = false;
-          player.aspectRatio = false;
-          player.flip = 'normal';
-          player.autoSize = option.autoSize;
-          player.currentTime = currentTime;
+          art.playbackRate = false;
+          art.aspectRatio = false;
+          art.flip = 'normal';
+          art.autoSize = option.autoSize;
+          art.currentTime = currentTime;
           art.notice.show = '';
 
-          if (player.playing) {
-            player.play();
+          if (art.playing) {
+            art.play();
           }
 
           if (name) {
@@ -1475,25 +1294,25 @@
       });
     }
 
-    def(player, 'switchQuality', {
+    def(art, 'switchQuality', {
       value: function value(url, name) {
-        return switchUrl(url, name, player.currentTime);
+        return switchUrl(url, name, art.currentTime);
       }
     });
-    def(player, 'switchUrl', {
+    def(art, 'switchUrl', {
       value: function value(url, name) {
         return switchUrl(url, name, 0);
       }
     });
   }
 
-  function playbackRateMix(art, player) {
+  function playbackRateMix(art) {
     var _art$template = art.template,
         $video = _art$template.$video,
         $player = _art$template.$player,
         i18n = art.i18n,
         notice = art.notice;
-    def(player, 'playbackRate', {
+    def(art, 'playbackRate', {
       get: function get() {
         return $player.dataset.playbackRate;
       },
@@ -1506,38 +1325,38 @@
           $player.dataset.playbackRate = rate;
           notice.show = "".concat(i18n.get('Rate'), ": ").concat(rate === 1.0 ? i18n.get('Normal') : "".concat(rate, "x"));
           art.emit('playbackRate', rate);
-        } else if (player.playbackRate) {
-          player.playbackRate = 1;
+        } else if (art.playbackRate) {
+          art.playbackRate = 1;
           delete $player.dataset.playbackRate;
           art.emit('playbackRate');
         }
       }
     });
-    def(player, 'playbackRateReset', {
+    def(art, 'playbackRateReset', {
       set: function set(value) {
         if (value) {
           var playbackRate = $player.dataset.playbackRate;
 
           if (playbackRate) {
-            player.playbackRate = Number(playbackRate);
+            art.playbackRate = Number(playbackRate);
           }
         }
       }
     });
   }
 
-  function aspectRatioMix(art, player) {
+  function aspectRatioMix(art) {
     var _art$template = art.template,
         $video = _art$template.$video,
         $player = _art$template.$player,
         i18n = art.i18n,
         notice = art.notice;
-    def(player, 'aspectRatio', {
+    def(art, 'aspectRatio', {
       get: function get() {
         return $player.dataset.aspectRatio || '';
       },
-      set: function set(ratio) {
-        if (!ratio) ratio = 'default';
+      set: function set() {
+        var ratio = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'default';
         var ratioList = ['default', '4:3', '16:9'];
         errorHandle(ratioList.includes(ratio), "'aspectRatio' only accept ".concat(ratioList.toString(), " as parameters"));
 
@@ -1547,7 +1366,7 @@
           setStyle($video, 'padding', null);
           delete $player.dataset.aspectRatio;
         } else {
-          var ratioArray = ratio.split(':');
+          var ratioArray = ratio.split(':').map(Number);
           var videoWidth = $video.videoWidth,
               videoHeight = $video.videoHeight;
           var clientWidth = $player.clientWidth,
@@ -1575,22 +1394,22 @@
         art.emit('aspectRatio', ratio);
       }
     });
-    def(player, 'aspectRatioReset', {
+    def(art, 'aspectRatioReset', {
       set: function set(value) {
-        if (value && player.aspectRatio) {
-          var aspectRatio = player.aspectRatio;
-          player.aspectRatio = aspectRatio;
+        if (value && art.aspectRatio) {
+          var aspectRatio = art.aspectRatio;
+          art.aspectRatio = aspectRatio;
         }
       }
     });
   }
 
-  function screenshotMix(art, player) {
+  function screenshotMix(art) {
     var option = art.option,
         notice = art.notice,
         $video = art.template.$video;
     var $canvas = document.createElement('canvas');
-    def(player, 'getDataURL', {
+    def(art, 'getDataURL', {
       value: function value() {
         return new Promise(function (resolve, reject) {
           try {
@@ -1605,7 +1424,7 @@
         });
       }
     });
-    def(player, 'getBlobUrl', {
+    def(art, 'getBlobUrl', {
       value: function value() {
         return new Promise(function (resolve, reject) {
           try {
@@ -1622,9 +1441,9 @@
         });
       }
     });
-    def(player, 'screenshot', {
+    def(art, 'screenshot', {
       value: function value() {
-        return player.getDataURL().then(function (dataUri) {
+        return art.getDataURL().then(function (dataUri) {
           download(dataUri, "".concat(option.title || 'artplayer', "_").concat(secondToTime($video.currentTime), ".png"));
           art.emit('screenshot', dataUri);
           return dataUri;
@@ -1637,7 +1456,7 @@
 
   /*!
   * screenfull
-  * v5.2.0 - 2021-11-03
+  * v5.0.2 - 2020-02-13
   * (c) Sindre Sorhus; MIT License
   */
 
@@ -1720,7 +1539,7 @@
   	};
 
   	var screenfull = {
-  		request: function (element, options) {
+  		request: function (element) {
   			return new Promise(function (resolve, reject) {
   				var onFullScreenEntered = function () {
   					this.off('change', onFullScreenEntered);
@@ -1731,7 +1550,7 @@
 
   				element = element || document.documentElement;
 
-  				var returnPromise = element[fn.requestFullscreen](options);
+  				var returnPromise = element[fn.requestFullscreen]();
 
   				if (returnPromise instanceof Promise) {
   					returnPromise.then(onFullScreenEntered).catch(reject);
@@ -1759,8 +1578,8 @@
   				}
   			}.bind(this));
   		},
-  		toggle: function (element, options) {
-  			return this.isFullscreen ? this.exit() : this.request(element, options);
+  		toggle: function (element) {
+  			return this.isFullscreen ? this.exit() : this.request(element);
   		},
   		onchange: function (callback) {
   			this.on('change', callback);
@@ -1824,12 +1643,12 @@
 
   var screenfull = screenfull$1.exports;
 
-  var nativeScreenfull = function nativeScreenfull(art, player) {
+  var nativeScreenfull = function nativeScreenfull(art) {
     var $player = art.template.$player;
     screenfull.on('change', function () {
       return art.emit('fullscreen', screenfull.isFullscreen);
     });
-    def(player, 'fullscreen', {
+    def(art, 'fullscreen', {
       get: function get() {
         return screenfull.isFullscreen;
       },
@@ -1837,16 +1656,16 @@
         if (value) {
           screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
-            player.aspectRatioReset = true;
-            player.autoSize = false;
+            art.aspectRatioReset = true;
+            art.autoSize = false;
             art.emit('resize');
             art.emit('fullscreen', true);
           });
         } else {
           screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
-            player.aspectRatioReset = true;
-            player.autoSize = art.option.autoSize;
+            art.aspectRatioReset = true;
+            art.autoSize = art.option.autoSize;
             art.emit('resize');
             art.emit('fullscreen');
           });
@@ -1855,9 +1674,9 @@
     });
   };
 
-  var webkitScreenfull = function webkitScreenfull(art, player) {
+  var webkitScreenfull = function webkitScreenfull(art) {
     var $video = art.template.$video;
-    def(player, 'fullscreen', {
+    def(art, 'fullscreen', {
       get: function get() {
         return $video.webkitDisplayingFullscreen;
       },
@@ -1873,17 +1692,17 @@
     });
   };
 
-  function fullscreenMix(art, player) {
+  function fullscreenMix(art) {
     var i18n = art.i18n,
         notice = art.notice,
         $video = art.template.$video;
     art.once('ready', function () {
       if (screenfull.isEnabled) {
-        nativeScreenfull(art, player);
+        nativeScreenfull(art);
       } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
-        webkitScreenfull(art, player);
+        webkitScreenfull(art);
       } else {
-        def(player, 'fullscreen', {
+        def(art, 'fullscreen', {
           get: function get() {
             return false;
           },
@@ -1891,30 +1710,30 @@
             notice.show = i18n.get('Fullscreen not supported');
           }
         });
-      } // 异步设置
+      } // Asynchronous setting
 
 
-      def(art, 'fullscreen', get(player, 'fullscreen'));
+      def(art, 'fullscreen', get(art, 'fullscreen'));
     });
   }
 
-  function fullscreenWebMix(art, player) {
+  function fullscreenWebMix(art) {
     var $player = art.template.$player;
-    def(player, 'fullscreenWeb', {
+    def(art, 'fullscreenWeb', {
       get: function get() {
         return hasClass($player, 'art-fullscreen-web');
       },
       set: function set(value) {
         if (value) {
           addClass($player, 'art-fullscreen-web');
-          player.aspectRatioReset = true;
-          player.autoSize = false;
+          art.aspectRatioReset = true;
+          art.autoSize = false;
           art.emit('resize');
           art.emit('fullscreenWeb', true);
         } else {
           removeClass($player, 'art-fullscreen-web');
-          player.aspectRatioReset = true;
-          player.autoSize = art.option.autoSize;
+          art.aspectRatioReset = true;
+          art.autoSize = art.option.autoSize;
           art.emit('resize');
           art.emit('fullscreenWeb');
         }
@@ -1922,12 +1741,12 @@
     });
   }
 
-  function nativePip(art, player) {
+  function nativePip(art) {
     var $video = art.template.$video,
         proxy = art.events.proxy,
         notice = art.notice;
     $video.disablePictureInPicture = false;
-    def(player, 'pip', {
+    def(art, 'pip', {
       get: function get() {
         return document.pictureInPictureElement;
       },
@@ -1953,10 +1772,10 @@
     });
   }
 
-  function webkitPip(art, player) {
+  function webkitPip(art) {
     var $video = art.template.$video;
     $video.webkitSetPresentationMode('inline');
-    def(player, 'pip', {
+    def(art, 'pip', {
       get: function get() {
         return $video.webkitPresentationMode === 'picture-in-picture';
       },
@@ -1972,17 +1791,17 @@
     });
   }
 
-  function pipMix(art, player) {
+  function pipMix(art) {
     var i18n = art.i18n,
         notice = art.notice,
         $video = art.template.$video;
 
     if (document.pictureInPictureEnabled) {
-      nativePip(art, player);
+      nativePip(art);
     } else if ($video.webkitSupportsPresentationMode) {
-      webkitPip(art, player);
+      webkitPip(art);
     } else {
-      def(player, 'pip', {
+      def(art, 'pip', {
         get: function get() {
           return false;
         },
@@ -1993,43 +1812,43 @@
     }
   }
 
-  function seekMix(art, player) {
+  function seekMix(art) {
     var $video = art.template.$video;
-    def(player, 'loaded', {
+    def(art, 'loaded', {
       get: function get() {
-        return player.loadedTime / $video.duration;
+        return art.loadedTime / $video.duration;
       }
     });
-    def(player, 'loadedTime', {
+    def(art, 'loadedTime', {
       get: function get() {
         return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
       }
     });
   }
 
-  function playedMix(art, player) {
-    def(player, 'played', {
+  function playedMix(art) {
+    def(art, 'played', {
       get: function get() {
-        return player.currentTime / player.duration;
+        return art.currentTime / art.duration;
       }
     });
   }
 
-  function playingMix(art, player) {
+  function playingMix(art) {
     var $video = art.template.$video;
-    def(player, 'playing', {
+    def(art, 'playing', {
       get: function get() {
         return !!($video.currentTime > 0 && !$video.paused && !$video.ended && $video.readyState > 2);
       }
     });
   }
 
-  function resizeMix(art, player) {
+  function resizeMix(art) {
     var _art$template = art.template,
         $container = _art$template.$container,
         $player = _art$template.$player,
         $video = _art$template.$video;
-    def(player, 'autoSize', {
+    def(art, 'autoSize', {
       get: function get() {
         return hasClass($container, 'art-auto-size');
       },
@@ -2058,8 +1877,8 @@
           }
 
           art.emit('autoSize', {
-            width: player.width,
-            height: player.height
+            width: art.width,
+            height: art.height
           });
         } else {
           removeClass($container, 'art-auto-size');
@@ -2071,36 +1890,36 @@
     });
   }
 
-  function rectMix(art, player) {
-    def(player, 'rect', {
+  function rectMix(art) {
+    def(art, 'rect', {
       get: function get() {
         return art.template.$player.getBoundingClientRect();
       }
     });
     ['bottom', 'height', 'left', 'right', 'top', 'width'].forEach(function (key) {
-      def(player, key, {
+      def(art, key, {
         get: function get() {
-          return player.rect[key];
+          return art.rect[key];
         }
       });
     });
-    def(player, 'x', {
+    def(art, 'x', {
       get: function get() {
-        return player.left + window.pageXOffset;
+        return art.left + window.pageXOffset;
       }
     });
-    def(player, 'y', {
+    def(art, 'y', {
       get: function get() {
-        return player.top + window.pageYOffset;
+        return art.top + window.pageYOffset;
       }
     });
   }
 
-  function flipMix(art, player) {
+  function flipMix(art) {
     var $player = art.template.$player,
         i18n = art.i18n,
         notice = art.notice;
-    def(player, 'flip', {
+    def(art, 'flip', {
       get: function get() {
         return $player.dataset.flip;
       },
@@ -2112,7 +1931,7 @@
         if (flip === 'normal') {
           delete $player.dataset.flip;
         } else {
-          player.rotate = false;
+          art.rotate = false;
           $player.dataset.flip = flip;
         }
 
@@ -2121,17 +1940,17 @@
         art.emit('flip', flip);
       }
     });
-    def(player, 'flipReset', {
+    def(art, 'flipReset', {
       set: function set(value) {
-        if (value && player.flip) {
-          var flip = player.flip;
-          player.flip = flip;
+        if (value && art.flip) {
+          var flip = art.flip;
+          art.flip = flip;
         }
       }
     });
   }
 
-  function miniMix(art, player) {
+  function miniMix(art) {
     var i18n = art.i18n,
         option = art.option,
         storage = art.storage,
@@ -2151,8 +1970,8 @@
       isDroging = true;
       lastPageX = event.pageX;
       lastPageY = event.pageY;
-      lastPlayerLeft = player.left;
-      lastPlayerTop = player.top;
+      lastPlayerLeft = art.left;
+      lastPlayerTop = art.top;
     });
     proxy(document, 'mousemove', function (event) {
       if (isDroging) {
@@ -2170,18 +1989,18 @@
       removeClass($player, 'art-is-dragging');
     });
     proxy($miniClose, 'click', function () {
-      player.mini = false;
+      art.mini = false;
       isDroging = false;
       removeClass($player, 'art-is-dragging');
     });
     append($miniTitle, option.title || i18n.get('Mini player'));
-    def(player, 'mini', {
+    def(art, 'mini', {
       get: function get() {
         return hasClass($player, 'art-mini');
       },
       set: function set(value) {
         if (value) {
-          player.autoSize = false;
+          art.autoSize = false;
           cacheStyle = $player.style.cssText;
           addClass($player, 'art-mini');
           var top = storage.get('top');
@@ -2194,14 +2013,14 @@
             if (!isInViewport($miniHeader)) {
               storage.del('top');
               storage.del('left');
-              player.mini = true;
+              art.mini = true;
             }
           } else {
             var $body = document.body;
 
-            var _top = $body.clientHeight - player.height - 50;
+            var _top = $body.clientHeight - art.height - 50;
 
-            var _left = $body.clientWidth - player.width - 50;
+            var _left = $body.clientWidth - art.width - 50;
 
             storage.set('top', _top);
             storage.set('left', _left);
@@ -2209,33 +2028,33 @@
             setStyle($player, 'left', "".concat(_left, "px"));
           }
 
-          player.aspectRatio = false;
-          player.playbackRate = false;
+          art.aspectRatio = false;
+          art.playbackRate = false;
           art.emit('mini', true);
         } else {
           $player.style.cssText = cacheStyle;
           removeClass($player, 'art-mini');
           setStyle($player, 'top', null);
           setStyle($player, 'left', null);
-          player.aspectRatio = false;
-          player.playbackRate = false;
-          player.autoSize = option.autoSize;
+          art.aspectRatio = false;
+          art.playbackRate = false;
+          art.autoSize = option.autoSize;
           art.emit('mini');
         }
       }
     });
   }
 
-  function loopMin(art, player) {
+  function loopMix(art) {
     var interval = [];
-    def(player, 'loop', {
+    def(art, 'loop', {
       get: function get() {
         return interval;
       },
       set: function set(value) {
         if (Array.isArray(value) && typeof value[0] === 'number' && typeof value[1] === 'number') {
-          var start = clamp(value[0], 0, Math.min(value[1], player.duration));
-          var end = clamp(value[1], start, player.duration);
+          var start = clamp(value[0], 0, Math.min(value[1], art.duration));
+          var end = clamp(value[1], start, art.duration);
 
           if (end - start >= 1) {
             interval = [start, end];
@@ -2252,20 +2071,20 @@
     });
     art.on('video:timeupdate', function () {
       if (interval.length) {
-        if (player.currentTime < interval[0] || player.currentTime > interval[1]) {
-          player.seek = interval[0];
+        if (art.currentTime < interval[0] || art.currentTime > interval[1]) {
+          art.seek = interval[0];
         }
       }
     });
   }
 
-  function rotateMix(art, player) {
+  function rotateMix(art) {
     var _art$template = art.template,
         $video = _art$template.$video,
         $player = _art$template.$player,
         i18n = art.i18n,
         notice = art.notice;
-    def(player, 'rotate', {
+    def(art, 'rotate', {
       get: function get() {
         return Number($player.dataset.rotate) || 0;
       },
@@ -2278,7 +2097,7 @@
           delete $player.dataset.rotate;
           setStyle($video, 'transform', null);
         } else {
-          player.flip = false;
+          art.flip = false;
           art.autoSize = true;
           $player.dataset.rotate = deg;
 
@@ -2328,20 +2147,20 @@
         art.emit('rotate', deg);
       }
     });
-    def(player, 'rotateReset', {
+    def(art, 'rotateReset', {
       set: function set(value) {
-        if (value && player.rotate) {
-          var rotate = player.rotate;
-          player.rotate = rotate;
+        if (value && art.rotate) {
+          var rotate = art.rotate;
+          art.rotate = rotate;
         }
       }
     });
   }
 
-  function posterMix(art, player) {
+  function posterMix(art) {
     var option = art.option,
         $poster = art.template.$poster;
-    def(player, 'poster', {
+    def(art, 'poster', {
       get: function get() {
         return option.poster;
       },
@@ -2352,13 +2171,13 @@
     });
   }
 
-  function autoHeightMix(art, player) {
+  function autoHeightMix(art) {
     var option = art.option,
         _art$template = art.template,
         $container = _art$template.$container,
         $video = _art$template.$video;
     var heightCache = $container.style.height;
-    def(player, 'autoHeight', {
+    def(art, 'autoHeight', {
       get: function get() {
         return hasClass($container, 'art-auto-height');
       },
@@ -2370,51 +2189,267 @@
           var height = videoHeight * (clientWidth / videoWidth);
           setStyle($container, 'height', height + 'px');
           addClass($container, 'art-auto-height');
-          player.autoSize = option.autoSize;
+          art.autoSize = option.autoSize;
           art.emit('autoHeight', height);
         } else {
           setStyle($container, 'height', heightCache);
           removeClass($container, 'art-auto-height');
-          player.autoSize = option.autoSize;
+          art.autoSize = option.autoSize;
           art.emit('autoHeight');
         }
       }
     });
   }
 
+  function themeMix(art) {
+    var option = art.option,
+        $player = art.template.$player;
+    def(art, 'theme', {
+      get: function get() {
+        return getComputedStyle($player).getPropertyValue('--theme');
+      },
+      set: function set(theme) {
+        option.theme = theme;
+        $player.style.setProperty('--theme', theme);
+      }
+    });
+  }
+
+  function titleMix(art) {
+    def(art, 'title', {
+      get: function get() {
+        return art.option.title;
+      },
+      set: function set(title) {
+        art.option.title = title;
+      }
+    });
+  }
+
+  function exclusiveMix(art) {
+    var sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
+
+    function exclusive(props) {
+      props.forEach(function (name) {
+        art.on(name, function () {
+          if (art[name]) {
+            props.filter(function (item) {
+              return item !== name;
+            }).forEach(function (item) {
+              if (art[item]) {
+                art[item] = false;
+              }
+            });
+          }
+        });
+      });
+    }
+
+    exclusive(sizeProps);
+    def(art, 'normalSize', {
+      get: function get() {
+        return sizeProps.every(function (name) {
+          return !art[name];
+        });
+      }
+    });
+  }
+
+  function attrInit(art) {
+    var option = art.option,
+        storage = art.storage,
+        _art$template = art.template,
+        $video = _art$template.$video,
+        $poster = _art$template.$poster;
+    Object.keys(option.moreVideoAttr).forEach(function (key) {
+      art.attr(key, option.moreVideoAttr[key]);
+    });
+
+    if (option.muted) {
+      art.muted = option.muted;
+    }
+
+    if (option.volume) {
+      $video.volume = clamp(option.volume, 0, 1);
+    }
+
+    var volumeStorage = storage.get('volume');
+
+    if (typeof volumeStorage === 'number') {
+      $video.volume = clamp(volumeStorage, 0, 1);
+    }
+
+    if (option.poster) {
+      setStyle($poster, 'backgroundImage', "url(".concat(option.poster, ")"));
+    }
+
+    if (option.autoplay) {
+      $video.autoplay = option.autoplay;
+    }
+
+    if (option.theme) {
+      art.theme = option.theme;
+    }
+
+    if (option.ads.length === 0) {
+      art.url = option.url;
+    }
+  }
+
+  function eventInit(art) {
+    var option = art.option,
+        proxy = art.events.proxy,
+        _art$template = art.template,
+        $player = _art$template.$player,
+        $video = _art$template.$video,
+        $poster = _art$template.$poster,
+        i18n = art.i18n,
+        notice = art.notice;
+    var reconnectTime = 0;
+    var maxReconnectTime = 5;
+    proxy($video, 'click', function () {
+      art.toggle();
+    });
+    proxy($video, 'dblclick', function () {
+      art.fullscreen = !art.fullscreen;
+    });
+    config.events.forEach(function (eventName) {
+      proxy($video, eventName, function (event) {
+        art.emit("video:".concat(event.type), event);
+      });
+    }); // art.on('video:abort', () => {
+    // });
+
+    art.on('video:canplay', function () {
+      reconnectTime = 0;
+      art.loading.show = false;
+    });
+    art.once('video:canplay', function () {
+      art.loading.show = false;
+      art.controls.show = true;
+      art.mask.show = true;
+      art.isReady = true;
+      art.emit('ready');
+    }); // art.on('video:canplaythrough', () => {
+    // });
+    // art.on('video:durationchange', () => {
+    // });
+    // art.on('video:emptied', () => {
+    // });
+
+    art.on('video:ended', function () {
+      if (option.loop) {
+        art.seek = 0;
+        art.play();
+        art.controls.show = false;
+        art.mask.show = false;
+      } else {
+        art.controls.show = true;
+        art.mask.show = true;
+      }
+    });
+    art.on('video:error', function () {
+      if (reconnectTime < maxReconnectTime) {
+        sleep(1000).then(function () {
+          reconnectTime += 1;
+          art.url = option.url;
+          notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
+          art.emit('error', reconnectTime);
+        });
+      } else {
+        art.loading.show = false;
+        art.controls.show = false;
+        addClass($player, 'art-error');
+        sleep(1000).then(function () {
+          notice.show = i18n.get('Video load failed');
+          art.destroy(false);
+        });
+      }
+    }); // art.on('video:loadeddata', () => {
+    // });
+
+    art.once('video:loadedmetadata', function () {
+      art.autoSize = option.autoSize;
+
+      if (isMobile) {
+        art.loading.show = false;
+        art.controls.show = true;
+        art.mask.show = true;
+      }
+    });
+    art.on('video:loadstart', function () {
+      art.loading.show = true;
+    });
+    art.on('video:pause', function () {
+      art.controls.show = true;
+      art.mask.show = true;
+    });
+    art.on('video:play', function () {
+      art.mask.show = false;
+      setStyle($poster, 'display', 'none');
+    });
+    art.on('video:playing', function () {
+      art.mask.show = false;
+    }); // art.on('video:progress', () => {
+    // });
+    // art.on('video:ratechange', () => {
+    // });
+
+    art.on('video:seeked', function () {
+      art.loading.show = false;
+    });
+    art.on('video:seeking', function () {
+      art.loading.show = true;
+    }); // art.on('video:stalled', () => {
+    // });
+    // art.on('video:suspend', () => {
+    // });
+
+    art.on('video:timeupdate', function () {
+      art.mask.show = false;
+    }); // art.on('video:volumechange', () => {
+    // });
+
+    art.on('video:waiting', function () {
+      art.loading.show = true;
+    });
+  }
+
   var Player = function Player(art) {
     _classCallCheck(this, Player);
 
-    urlMix(art, this);
-    eventInit(art, this);
-    attrInit(art, this);
-    exclusiveInit(art, this);
-    playMix(art, this);
-    pauseMix(art, this);
-    toggleMix(art, this);
-    seekMix$1(art, this);
-    volumeMix(art, this);
-    currentTimeMix(art, this);
-    durationMix(art, this);
-    switchMix(art, this);
-    playbackRateMix(art, this);
-    aspectRatioMix(art, this);
-    screenshotMix(art, this);
-    fullscreenMix(art, this);
-    fullscreenWebMix(art, this);
-    pipMix(art, this);
-    seekMix(art, this);
-    playedMix(art, this);
-    playingMix(art, this);
-    resizeMix(art, this);
-    rectMix(art, this);
-    flipMix(art, this);
-    miniMix(art, this);
-    loopMin(art, this);
-    rotateMix(art, this);
-    posterMix(art, this);
-    autoHeightMix(art, this);
-    proxyPropertys(art, this);
+    urlMix(art);
+    attrMix(art);
+    playMix(art);
+    pauseMix(art);
+    toggleMix(art);
+    seekMix$1(art);
+    volumeMix(art);
+    currentTimeMix(art);
+    durationMix(art);
+    switchMix(art);
+    playbackRateMix(art);
+    aspectRatioMix(art);
+    screenshotMix(art);
+    fullscreenMix(art);
+    fullscreenWebMix(art);
+    pipMix(art);
+    seekMix(art);
+    playedMix(art);
+    playingMix(art);
+    resizeMix(art);
+    rectMix(art);
+    flipMix(art);
+    miniMix(art);
+    loopMix(art);
+    rotateMix(art);
+    posterMix(art);
+    autoHeightMix(art);
+    themeMix(art);
+    titleMix(art);
+    exclusiveMix(art);
+    eventInit(art);
+    attrInit(art);
   };
 
   function _superPropBase(object, property) {
@@ -2609,11 +2644,10 @@
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
-              i18n = art.i18n,
-              player = art.player;
+              i18n = art.i18n;
           append($control, icons.fullscreen);
           proxy($control, 'click', function () {
-            player.fullscreen = !player.fullscreen;
+            art.fullscreen = !art.fullscreen;
           });
           art.on('fullscreen', function (value) {
             tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
@@ -2633,11 +2667,10 @@
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
-              i18n = art.i18n,
-              player = art.player;
+              i18n = art.i18n;
           append($control, icons.fullscreenWeb);
           proxy($control, 'click', function () {
-            player.fullscreenWeb = !player.fullscreenWeb;
+            art.fullscreenWeb = !art.fullscreenWeb;
           });
           art.on('fullscreenWeb', function (value) {
             tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
@@ -2657,11 +2690,10 @@
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
-              i18n = art.i18n,
-              player = art.player;
+              i18n = art.i18n;
           append($control, icons.pip);
           proxy($control, 'click', function () {
-            player.pip = !player.pip;
+            art.pip = !art.pip;
           });
           art.on('pip', function (value) {
             tooltip($control, i18n.get(value ? 'Exit PIP mode' : 'PIP mode'));
@@ -2680,17 +2712,16 @@
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
-              i18n = art.i18n,
-              player = art.player;
+              i18n = art.i18n;
           var $play = append($control, icons.play);
           var $pause = append($control, icons.pause);
           tooltip($play, i18n.get('Play'));
           tooltip($pause, i18n.get('Pause'));
           proxy($play, 'click', function () {
-            player.play();
+            art.play();
           });
           proxy($pause, 'click', function () {
-            player.pause();
+            art.pause();
           });
 
           function showPlay() {
@@ -2703,7 +2734,7 @@
             setStyle($pause, 'display', 'flex');
           }
 
-          if (player.playing) {
+          if (art.playing) {
             showPause();
           } else {
             showPlay();
@@ -2724,14 +2755,13 @@
 
   function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function getPosFromEvent(art, event) {
-    var player = art.player,
-        $progress = art.template.$progress;
+    var $progress = art.template.$progress;
 
     var _$progress$getBoundin = $progress.getBoundingClientRect(),
         left = _$progress$getBoundin.left;
 
     var width = clamp(event.pageX - left, 0, $progress.clientWidth);
-    var second = width / $progress.clientWidth * player.duration;
+    var second = width / $progress.clientWidth * art.duration;
     var time = secondToTime(second);
     var percentage = clamp(width / $progress.clientWidth, 0, 1);
     return {
@@ -2741,15 +2771,12 @@
       percentage: percentage
     };
   }
-  function progress(option) {
+  function progress(options) {
     return function (art) {
-      var _art$option = art.option,
-          highlight = _art$option.highlight,
-          theme = _art$option.theme,
-          proxy = art.events.proxy,
-          player = art.player,
-          icons = art.icons;
-      return _objectSpread$j(_objectSpread$j({}, option), {}, {
+      var icons = art.icons,
+          option = art.option,
+          proxy = art.events.proxy;
+      return _objectSpread$j(_objectSpread$j({}, options), {}, {
         html: "\n                <div class=\"art-control-progress-inner\">\n                    <div class=\"art-progress-loaded\"></div>\n                    <div class=\"art-progress-played\"></div>\n                    <div class=\"art-progress-highlight\"></div>\n                    <div class=\"art-progress-indicator\"></div>\n                    <div class=\"art-progress-tip\"></div>\n                </div>\n            ",
         mounted: function mounted($control) {
           var isDroging = false;
@@ -2758,7 +2785,7 @@
           var $highlight = query('.art-progress-highlight', $control);
           var $indicator = query('.art-progress-indicator', $control);
           var $tip = query('.art-progress-tip', $control);
-          setStyle($played, 'backgroundColor', theme);
+          setStyle($played, 'backgroundColor', 'var(--theme)');
           var indicatorSize = 14;
 
           if (icons.indicator) {
@@ -2766,7 +2793,7 @@
             append($indicator, icons.indicator);
           } else {
             setStyles($indicator, {
-              backgroundColor: theme
+              backgroundColor: 'var(--theme)'
             });
           }
 
@@ -2821,16 +2848,16 @@
             }
           }
 
-          highlight.forEach(function (item) {
-            var left = clamp(item.time, 0, player.duration) / player.duration * 100;
+          option.highlight.forEach(function (item) {
+            var left = clamp(item.time, 0, art.duration) / art.duration * 100;
             append($highlight, "<span data-text=\"".concat(item.text, "\" data-time=\"").concat(item.time, "\" style=\"left: ").concat(left, "%\"></span>"));
           });
-          setBar('loaded', player.loaded);
+          setBar('loaded', art.loaded);
           art.on('video:progress', function () {
-            setBar('loaded', player.loaded);
+            setBar('loaded', art.loaded);
           });
           art.on('video:timeupdate', function () {
-            setBar('played', player.played);
+            setBar('played', art.played);
           });
           art.on('video:ended', function () {
             setBar('played', 1);
@@ -2854,7 +2881,7 @@
                   percentage = _getPosFromEvent3.percentage;
 
               setBar('played', percentage);
-              player.seek = second;
+              art.seek = second;
             }
           });
           proxy($indicator, 'mousedown', function () {
@@ -2867,7 +2894,7 @@
                   percentage = _getPosFromEvent4.percentage;
 
               setBar('played', percentage);
-              player.seek = second;
+              art.seek = second;
             }
           });
           proxy(document, 'mouseup', function () {
@@ -2912,7 +2939,7 @@
       return _objectSpread$h(_objectSpread$h({}, option), {}, {
         mounted: function mounted($control) {
           function getTime() {
-            var newTime = "".concat(secondToTime(art.player.currentTime), " / ").concat(secondToTime(art.player.duration));
+            var newTime = "".concat(secondToTime(art.currentTime), " / ").concat(secondToTime(art.duration));
 
             if (newTime !== $control.innerText) {
               $control.innerText = newTime;
@@ -2937,7 +2964,6 @@
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
-              player = art.player,
               i18n = art.i18n;
           var isDroging = false;
           var panelWidth = 60; // 音量条宽度
@@ -2966,7 +2992,7 @@
           function setVolumeHandle() {
             var percentage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.7;
 
-            if (player.muted || percentage === 0) {
+            if (art.muted || percentage === 0) {
               setStyle($volume, 'display', 'none');
               setStyle($volumeClose, 'display', 'flex');
               setStyle($volumeHandle, 'left', '0');
@@ -2978,27 +3004,27 @@
             }
           }
 
-          setVolumeHandle(player.volume);
+          setVolumeHandle(art.volume);
           art.on('video:volumechange', function () {
-            setVolumeHandle(player.volume);
+            setVolumeHandle(art.volume);
           });
           proxy($volume, 'click', function () {
-            player.muted = true;
+            art.muted = true;
           });
           proxy($volumeClose, 'click', function () {
-            player.muted = false;
+            art.muted = false;
           });
           proxy($volumePanel, 'click', function (event) {
-            player.muted = false;
-            player.volume = volumeChangeFromEvent(event);
+            art.muted = false;
+            art.volume = volumeChangeFromEvent(event);
           });
           proxy($volumeHandle, 'mousedown', function () {
             isDroging = true;
           });
           proxy($control, 'mousemove', function (event) {
             if (isDroging) {
-              player.muted = false;
-              player.volume = volumeChangeFromEvent(event);
+              art.muted = false;
+              art.volume = volumeChangeFromEvent(event);
             }
           });
           proxy(document, 'mouseup', function () {
@@ -3038,11 +3064,11 @@
   function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function thumbnails(option) {
+  function thumbnails(options) {
     return function (art) {
-      return _objectSpread$e(_objectSpread$e({}, option), {}, {
+      return _objectSpread$e(_objectSpread$e({}, options), {}, {
         mounted: function mounted($control) {
-          var thumbnails = art.option.thumbnails,
+          var option = art.option,
               $progress = art.template.$progress,
               _art$events = art.events,
               proxy = _art$events.proxy,
@@ -3054,11 +3080,12 @@
             var _getPosFromEvent = getPosFromEvent(art, event),
                 posWidth = _getPosFromEvent.width;
 
-            var url = thumbnails.url,
-                height = thumbnails.height,
-                width = thumbnails.width,
-                number = thumbnails.number,
-                column = thumbnails.column;
+            var _option$thumbnails = option.thumbnails,
+                url = _option$thumbnails.url,
+                height = _option$thumbnails.height,
+                width = _option$thumbnails.width,
+                number = _option$thumbnails.number,
+                column = _option$thumbnails.column;
             var perWidth = $progress.clientWidth / number;
             var perIndex = Math.floor(posWidth / perWidth);
             var yIndex = Math.ceil(perIndex / column) - 1;
@@ -3080,7 +3107,7 @@
           proxy($progress, 'mousemove', function (event) {
             if (!loading) {
               loading = true;
-              loadImg(thumbnails.url).then(function () {
+              loadImg(option.thumbnails.url).then(function () {
                 isLoad = true;
               });
             }
@@ -3107,11 +3134,10 @@
         tooltip: art.i18n.get('Screenshot'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
-              icons = art.icons,
-              player = art.player;
+              icons = art.icons;
           append($control, icons.screenshot);
           proxy($control, 'click', function () {
-            player.screenshot();
+            art.screenshot();
           });
         }
       });
@@ -3132,7 +3158,7 @@
         html: qualityDefault ? qualityDefault.html : '',
         selector: qualityOption,
         onSelect: function onSelect(item) {
-          art.player.switchQuality(item.url, item.html);
+          art.switchQuality(item.url, item.html);
         }
       });
     };
@@ -3145,14 +3171,13 @@
     return function (art) {
       return _objectSpread$b(_objectSpread$b({}, option), {}, {
         mounted: function mounted($control) {
-          var player = art.player;
           var $left = append($control, "<span class=\"art-loop-point\"></span>");
           var $right = append($control, "<span class=\"art-loop-point\"></span>");
           art.on('loop', function (value) {
             if (value) {
               setStyle($control, 'display', 'block');
-              setStyle($left, 'left', "calc(".concat(value[0] / player.duration * 100, "% - ").concat($left.clientWidth, "px)"));
-              setStyle($right, 'left', "".concat(value[1] / player.duration * 100, "%"));
+              setStyle($left, 'left', "calc(".concat(value[0] / art.duration * 100, "% - ").concat($left.clientWidth, "px)"));
+              setStyle($right, 'left', "".concat(value[1] / art.duration * 100, "%"));
             } else {
               setStyle($control, 'display', 'none');
             }
@@ -3179,7 +3204,6 @@
       _this = _super.call(this, art);
       _this.name = 'control';
       var option = art.option,
-          player = art.player,
           $player = art.template.$player;
       _this.mouseMoveTime = Date.now();
       art.on('mousemove', function () {
@@ -3189,7 +3213,7 @@
         _this.mouseMoveTime = Date.now();
       });
       art.on('video:timeupdate', function () {
-        if (player.playing && _this.show && Date.now() - _this.mouseMoveTime >= 3000) {
+        if (art.playing && _this.show && Date.now() - _this.mouseMoveTime >= 3000) {
           _this.show = false;
           addClass($player, 'art-hide-cursor');
           removeClass($player, 'art-hover');
@@ -3288,7 +3312,7 @@
         }));
 
         option.controls.forEach(function (item) {
-          _this.add(item);
+          return _this.add(item);
         });
       });
       return _this;
@@ -3333,15 +3357,14 @@
   function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function playbackRate$1(option) {
     return function (art) {
-      var i18n = art.i18n,
-          player = art.player;
+      var i18n = art.i18n;
       return _objectSpread$a(_objectSpread$a({}, option), {}, {
         html: "".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
           var rate = event.target.dataset.rate;
 
           if (rate) {
-            player.playbackRate = Number(rate);
+            art.playbackRate = Number(rate);
             contextmenu.show = false;
           }
         },
@@ -3365,15 +3388,14 @@
   function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio$1(option) {
     return function (art) {
-      var i18n = art.i18n,
-          player = art.player;
+      var i18n = art.i18n;
       return _objectSpread$9(_objectSpread$9({}, option), {}, {
         html: "".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
           var ratio = event.target.dataset.ratio;
 
           if (ratio) {
-            player.aspectRatio = ratio;
+            art.aspectRatio = ratio;
             contextmenu.show = false;
           }
         },
@@ -3414,7 +3436,7 @@
 
   function version(option) {
     return _objectSpread$7(_objectSpread$7({}, option), {}, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.1.3</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.2.0</a>'
     });
   }
 
@@ -3487,7 +3509,7 @@
         }));
 
         option.contextmenu.forEach(function (item) {
-          _this.add(item);
+          return _this.add(item);
         });
         proxy($player, 'contextmenu', function (event) {
           event.preventDefault();
@@ -3808,14 +3830,13 @@
   }
 
   function resizeInit(art, events) {
-    var option = art.option,
-        player = art.player;
+    var option = art.option;
     var resizeFn = throttle(function () {
-      if (player.normalSize) {
-        player.autoSize = option.autoSize;
+      if (art.normalSize) {
+        art.autoSize = option.autoSize;
       }
 
-      player.aspectRatioReset = true;
+      art.aspectRatioReset = true;
       art.emit('resize');
     }, 500);
     events.proxy(window, ['orientationchange', 'resize'], function () {
@@ -3831,8 +3852,7 @@
 
   function gestureInit(art, events) {
     if (isMobile && !art.option.isLive) {
-      var player = art.player,
-          notice = art.notice,
+      var notice = art.notice,
           $video = art.template.$video;
       var isDroging = false;
       var startX = 0;
@@ -3847,13 +3867,13 @@
         if (event.touches.length === 1 && isDroging) {
           var widthDiff = event.touches[0].clientX - startX;
           var proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
-          currentTime = clamp(player.currentTime + 60 * proportion, 0, player.duration);
-          notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(player.duration));
+          currentTime = clamp(art.currentTime + 60 * proportion, 0, art.duration);
+          notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(art.duration));
         }
       });
       events.proxy(document, 'touchend', function () {
         if (isDroging && currentTime) {
-          player.seek = currentTime;
+          art.seek = currentTime;
         }
 
         isDroging = false;
@@ -3864,8 +3884,7 @@
   }
 
   function viewInit(art, events) {
-    var player = art.player,
-        option = art.option,
+    var option = art.option,
         $container = art.template.$container;
     var scrollFn = throttle(function () {
       art.emit('view', isInViewport($container, 50));
@@ -3875,7 +3894,7 @@
     });
     art.on('view', function (state) {
       if (option.autoMini) {
-        player.mini = !state;
+        art.mini = !state;
       }
     });
   }
@@ -3986,35 +4005,34 @@
 
       this.keys = {};
       var option = art.option,
-          player = art.player,
           proxy = art.events.proxy;
 
       if (option.hotkey) {
         art.once('ready', function () {
           _this.add(27, function () {
-            if (player.fullscreenWeb) {
-              player.fullscreenWeb = false;
+            if (art.fullscreenWeb) {
+              art.fullscreenWeb = false;
             }
           });
 
           _this.add(32, function () {
-            player.toggle();
+            art.toggle();
           });
 
           _this.add(37, function () {
-            player.backward = 5;
+            art.backward = 5;
           });
 
           _this.add(38, function () {
-            player.volume += 0.1;
+            art.volume += 0.1;
           });
 
           _this.add(39, function () {
-            player.forward = 5;
+            art.forward = 5;
           });
 
           _this.add(40, function () {
-            player.volume -= 0.1;
+            art.volume -= 0.1;
           });
 
           proxy(window, 'keydown', function (event) {
@@ -4042,13 +4060,23 @@
     _createClass(Hotkey, [{
       key: "add",
       value: function add(key, event) {
-        errorHandle(typeof key === 'number', 'The Hotkey.add() first parameter is not a number');
-        errorHandle(typeof event === 'function', 'The Hotkey.add() second parameter is not a function');
-
         if (this.keys[key]) {
           this.keys[key].push(event);
         } else {
           this.keys[key] = [event];
+        }
+
+        return this;
+      }
+    }, {
+      key: "remove",
+      value: function remove(key, event) {
+        if (this.keys[key]) {
+          var index = this.keys[key].indexOf(event);
+
+          if (index !== -1) {
+            this.keys[key].splice(index, 1);
+          }
         }
 
         return this;
@@ -4077,7 +4105,7 @@
       _this.$parent = art.template.$layer;
       art.once('ready', function () {
         art.option.layers.forEach(function (item) {
-          _this.add(item);
+          return _this.add(item);
         });
       });
       return _this;
@@ -4227,15 +4255,14 @@
   function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function flip(option) {
     return function (art) {
-      var i18n = art.i18n,
-          player = art.player;
+      var i18n = art.i18n;
       return _objectSpread$3(_objectSpread$3({}, option), {}, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Flip'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"normal\">").concat(i18n.get('Normal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"vertical\">").concat(i18n.get('Vertical'), "</button>\n                    </div>\n                </div>\n            "),
-        click: function click(setting, event) {
+        click: function click(_, event) {
           var value = event.target.dataset.value;
 
           if (value) {
-            player.flip = value;
+            art.flip = value;
           }
         },
         mounted: function mounted($setting) {
@@ -4258,23 +4285,22 @@
   function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function rotate(option) {
     return function (art) {
-      var i18n = art.i18n,
-          player = art.player;
+      var i18n = art.i18n;
       return _objectSpread$2(_objectSpread$2({}, option), {}, {
         html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Rotate'), ": <span class=\"art-rotate-value\">0\xB0</span>\n                </div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"90\">+90\xB0</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"-90\">-90\xB0</button>\n                    </div>\n                </div>\n            "),
         click: function click(setting, event) {
           var value = event.target.dataset.value;
 
           if (value) {
-            var deg = player.rotate + Number(value);
+            var deg = art.rotate + Number(value);
 
             if (deg === 360 || deg === -360) {
-              player.rotate = 0;
+              art.rotate = 0;
             } else {
-              player.rotate = deg;
+              art.rotate = deg;
             }
           } else {
-            player.rotate = 0;
+            art.rotate = 0;
           }
         },
         mounted: function mounted($setting) {
@@ -4292,15 +4318,14 @@
   function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   function aspectRatio(option) {
     return function (art) {
-      var i18n = art.i18n,
-          player = art.player;
+      var i18n = art.i18n;
       return _objectSpread$1(_objectSpread$1({}, option), {}, {
         html: "\n                <div class=\"art-setting-header\">".concat(i18n.get('Aspect ratio'), "</div>\n                <div class=\"art-setting-radio\">\n                    <div class=\"art-radio-item current\">\n                        <button type=\"button\" data-value=\"default\">").concat(i18n.get('Default'), "</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"4:3\">4:3</button>\n                    </div>\n                    <div class=\"art-radio-item\">\n                        <button type=\"button\" data-value=\"16:9\">16:9</button>\n                    </div>\n                </div>\n            "),
-        click: function click(setting, event) {
+        click: function click(_, event) {
           var value = event.target.dataset.value;
 
           if (value) {
-            player.aspectRatio = value;
+            art.aspectRatio = value;
           }
         },
         mounted: function mounted($setting) {
@@ -4324,7 +4349,6 @@
   function playbackRate(option) {
     return function (art) {
       var i18n = art.i18n,
-          player = art.player,
           proxy = art.events.proxy;
       return _objectSpread(_objectSpread({}, option), {}, {
         html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Play speed'), ": <span class=\"art-subtitle-value\">1.0</span>x\n                </div>\n                <div class=\"art-setting-range\">\n                    <input class=\"art-subtitle-range\" value=\"1\" type=\"range\" min=\"0.5\" max=\"2\" step=\"0.25\">\n                </div>\n            "),
@@ -4334,7 +4358,7 @@
           proxy($range, 'change', function () {
             var value = $range.value;
             $value.innerText = value;
-            player.playbackRate = Number(value);
+            art.playbackRate = Number(value);
           });
           art.on('playbackRate', function (rate) {
             if (rate && $range.value !== rate) {
@@ -4399,7 +4423,7 @@
           }));
 
           option.settings.forEach(function (item) {
-            _this.add(item);
+            return _this.add(item);
           });
         });
         art.on('blur', function () {
@@ -4504,8 +4528,7 @@
     var setting = art.setting,
         notice = art.notice,
         template = art.template,
-        i18n = art.i18n,
-        player = art.player;
+        i18n = art.i18n;
     setting.add(settingMix);
     var cuesCache = [];
     art.on('subtitle:switch', function () {
@@ -4525,8 +4548,8 @@
               };
             }
 
-            cue.startTime = clamp(cuesCache[index].startTime + time, 0, player.duration);
-            cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
+            cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
+            cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
           });
           notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
           art.emit('subtitleOffset', value);
@@ -4540,20 +4563,21 @@
 
   function localVideo(art) {
     var proxy = art.events.proxy,
-        template = art.template,
-        player = art.player,
+        _art$template = art.template,
+        $video = _art$template.$video,
+        $player = _art$template.$player,
         option = art.option,
         setting = art.setting,
         i18n = art.i18n;
 
     function loadVideo(file) {
       if (file) {
-        var canPlayType = template.$video.canPlayType(file.type);
+        var canPlayType = $video.canPlayType(file.type);
 
         if (canPlayType === 'maybe' || canPlayType === 'probably') {
           var url = URL.createObjectURL(file);
           option.title = file.name;
-          player.switchUrl(url, file.name);
+          art.switchUrl(url, file.name);
           art.emit('localVideo', file);
         } else {
           errorHandle(false, 'Playback of this file format is not supported');
@@ -4561,12 +4585,12 @@
       }
     }
 
-    proxy(template.$player, 'dragover', function (e) {
-      e.preventDefault();
+    proxy($player, 'dragover', function (event) {
+      event.preventDefault();
     });
-    proxy(template.$player, 'drop', function (e) {
-      e.preventDefault();
-      var file = e.dataTransfer.files[0];
+    proxy($player, 'drop', function (event) {
+      event.preventDefault();
+      var file = event.dataTransfer.files[0];
       loadVideo(file);
     });
 
@@ -4673,9 +4697,7 @@
   }
 
   function miniProgressBar(art) {
-    var layers = art.layers,
-        player = art.player,
-        theme = art.option.theme;
+    var layers = art.layers;
     layers.add({
       name: 'miniProgressBar',
       style: {
@@ -4685,7 +4707,7 @@
         right: 0,
         bottom: 0,
         height: '2px',
-        backgroundColor: theme
+        backgroundColor: 'var(--theme)'
       },
       mounted: function mounted($progressBar) {
         art.on('control', function (value) {
@@ -4695,7 +4717,7 @@
           $progressBar.style.display = 'none';
         });
         art.on('video:timeupdate', function () {
-          $progressBar.style.width = "".concat(player.played * 100, "%");
+          $progressBar.style.width = "".concat(art.played * 100, "%");
         });
       }
     });
@@ -4731,7 +4753,7 @@
       }
 
       art.option.plugins.forEach(function (plugin) {
-        _this.add(plugin);
+        return _this.add(plugin);
       });
     }
 
@@ -4739,7 +4761,6 @@
       key: "add",
       value: function add(plugin) {
         this.id += 1;
-        errorHandle(typeof plugin === 'function', "The Plugins.add() first parameter is not a function");
         var result = plugin.call(this, this.art);
         var pluginName = result && result.name || plugin.name || "plugin".concat(this.id);
         errorHandle(!has(this, pluginName), "Cannot add a plugin that already has the same name: ".concat(pluginName));
@@ -4796,7 +4817,7 @@
 
         var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         if (this.isEnd) return;
-        this.art.player.switchUrl(item.url);
+        this.art.switchUrl(item.url);
         this.art.once('video:timeupdate', function () {
           _this.art.emit('ads:start', item);
         });
@@ -4819,7 +4840,7 @@
         this.isEnd = true;
         this.playing = false;
         this.art.option.url = this.urlCache;
-        this.art.player.switchUrl(this.urlCache);
+        this.art.switchUrl(this.urlCache);
         this.art.emit('ads:end');
       }
     }]);
@@ -4858,7 +4879,6 @@
       $video.autoplay = option.autoplay;
     }
 
-    $video.controls = true;
     var typeName = option.type || getExt(option.url);
     var typeCallback = option.customType[typeName];
 
@@ -4951,7 +4971,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '4.1.3';
+        return '4.2.0';
       }
     }, {
       key: "env",
@@ -4961,7 +4981,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1640941432819';
+        return '1641555243763';
       }
     }, {
       key: "config",
@@ -5068,7 +5088,7 @@
 
     return Artplayer;
   }(Emitter); // eslint-disable-next-line no-console
-  console.log('%c ArtPlayer %c 4.1.3 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 4.2.0 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

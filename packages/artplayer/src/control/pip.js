@@ -9,13 +9,12 @@ export default function pip(option) {
                 events: { proxy },
                 icons,
                 i18n,
-                player,
             } = art;
 
             append($control, icons.pip);
 
             proxy($control, 'click', () => {
-                player.pip = !player.pip;
+                art.pip = !art.pip;
             });
 
             art.on('pip', (value) => {

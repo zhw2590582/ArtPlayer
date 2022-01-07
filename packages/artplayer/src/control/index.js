@@ -22,7 +22,6 @@ export default class Control extends Component {
 
         const {
             option,
-            player,
             template: { $player },
         } = art;
 
@@ -36,7 +35,7 @@ export default class Control extends Component {
         });
 
         art.on('video:timeupdate', () => {
-            if (player.playing && this.show && Date.now() - this.mouseMoveTime >= 3000) {
+            if (art.playing && this.show && Date.now() - this.mouseMoveTime >= 3000) {
                 this.show = false;
                 addClass($player, 'art-hide-cursor');
                 removeClass($player, 'art-hover');
@@ -161,9 +160,7 @@ export default class Control extends Component {
                 }),
             );
 
-            option.controls.forEach((item) => {
-                this.add(item);
-            });
+            option.controls.forEach((item) => this.add(item));
         });
     }
 

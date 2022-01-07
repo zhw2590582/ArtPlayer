@@ -3,8 +3,7 @@ import { append, query, setStyle, setStyles, errorHandle } from '../utils';
 export default function localVideo(art) {
     const {
         events: { proxy },
-        template,
-        player,
+        template: { $video, $player },
         option,
         setting,
         i18n,
@@ -12,11 +11,11 @@ export default function localVideo(art) {
 
     function loadVideo(file) {
         if (file) {
-            const canPlayType = template.$video.canPlayType(file.type);
+            const canPlayType = $video.canPlayType(file.type);
             if (canPlayType === 'maybe' || canPlayType === 'probably') {
                 const url = URL.createObjectURL(file);
                 option.title = file.name;
-                player.switchUrl(url, file.name);
+                art.switchUrl(url, file.name);
                 art.emit('localVideo', file);
             } else {
                 errorHandle(false, 'Playback of this file format is not supported');
@@ -24,13 +23,13 @@ export default function localVideo(art) {
         }
     }
 
-    proxy(template.$player, 'dragover', e => {
-        e.preventDefault();
+    proxy($player, 'dragover', (event) => {
+        event.preventDefault();
     });
 
-    proxy(template.$player, 'drop', e => {
-        e.preventDefault();
-        const file = e.dataTransfer.files[0];
+    proxy($player, 'drop', (event) => {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
         loadVideo(file);
     });
 
@@ -65,10 +64,10 @@ export default function localVideo(art) {
                     <div class="art-upload-value"></div>
                 </div>
             `,
-            mounted: $setting => {
+            mounted: ($setting) => {
                 const $btn = query('.art-upload-btn', $setting);
                 const $value = query('.art-upload-value', $setting);
-                art.on('localVideo', file => {
+                art.on('localVideo', (file) => {
                     $value.textContent = file.name;
                     $value.title = file.name;
                 });

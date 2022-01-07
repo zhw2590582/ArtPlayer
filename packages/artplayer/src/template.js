@@ -3,27 +3,28 @@ import { errorHandle, query, addClass, replaceElement, isMobile } from './utils'
 export default class Template {
     constructor(art) {
         this.art = art;
+        const { option, constructor, whitelist } = art;
 
-        this.query = this.query.bind(this);
-
-        if (art.option.container instanceof Element) {
-            this.$container = art.option.container;
+        if (option.container instanceof Element) {
+            this.$container = option.container;
         } else {
-            this.$container = query(art.option.container);
-            errorHandle(this.$container, `No container element found by ${art.option.container}`);
+            this.$container = query(option.container);
+            errorHandle(this.$container, `No container element found by ${option.container}`);
         }
 
         const type = this.$container.tagName.toLowerCase();
         errorHandle(type === 'div', `Unsupported container element type, only support 'div' but got '${type}'`);
 
         errorHandle(
-            art.constructor.instances.every((ins) => ins.template.$container !== this.$container),
+            constructor.instances.every((ins) => ins.template.$container !== this.$container),
             'Cannot mount multiple instances on the same dom element',
         );
 
+        this.query = this.query.bind(this);
+        this.$container.dataset.artId = art.id;
         this.$original = this.$container.cloneNode(true);
 
-        if (art.whitelist.state) {
+        if (whitelist.state) {
             this.desktop();
         } else {
             this.mobile();
@@ -102,9 +103,9 @@ export default class Template {
     }
 
     desktop() {
-        const { backdrop, theme, useSSR } = this.art.option;
+        const { option } = this.art;
 
-        if (!useSSR) {
+        if (!option.useSSR) {
             this.$container.innerHTML = Template.html;
         }
 
@@ -135,10 +136,7 @@ export default class Template {
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
 
-        this.$player.style.setProperty('--theme', theme);
-        this.$container.dataset.artId = this.art.id;
-
-        if (backdrop) {
+        if (option.backdrop) {
             addClass(this.$settingInner, 'art-backdrop-filter');
             addClass(this.$contextmenu, 'art-backdrop-filter');
             addClass(this.$info, 'art-backdrop-filter');

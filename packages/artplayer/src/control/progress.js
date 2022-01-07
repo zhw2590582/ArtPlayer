@@ -1,29 +1,25 @@
 import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent } from '../utils';
 
 export function getPosFromEvent(art, event) {
-    const {
-        player,
-        template: { $progress },
-    } = art;
-
+    const { $progress } = art.template;
     const { left } = $progress.getBoundingClientRect();
     const width = clamp(event.pageX - left, 0, $progress.clientWidth);
-    const second = (width / $progress.clientWidth) * player.duration;
+    const second = (width / $progress.clientWidth) * art.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);
     return { second, time, width, percentage };
 }
 
-export default function progress(option) {
+export default function progress(options) {
     return (art) => {
         const {
-            option: { highlight, theme },
-            events: { proxy },
-            player,
             icons,
+            option,
+            events: { proxy },
         } = art;
+
         return {
-            ...option,
+            ...options,
             html: `
                 <div class="art-control-progress-inner">
                     <div class="art-progress-loaded"></div>
@@ -41,7 +37,7 @@ export default function progress(option) {
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
 
-                setStyle($played, 'backgroundColor', theme);
+                setStyle($played, 'backgroundColor', 'var(--theme)');
 
                 let indicatorSize = 14;
                 if (icons.indicator) {
@@ -49,7 +45,7 @@ export default function progress(option) {
                     append($indicator, icons.indicator);
                 } else {
                     setStyles($indicator, {
-                        backgroundColor: theme,
+                        backgroundColor: 'var(--theme)',
                     });
                 }
 
@@ -97,22 +93,22 @@ export default function progress(option) {
                     }
                 }
 
-                highlight.forEach((item) => {
-                    const left = (clamp(item.time, 0, player.duration) / player.duration) * 100;
+                option.highlight.forEach((item) => {
+                    const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
                     append(
                         $highlight,
                         `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`,
                     );
                 });
 
-                setBar('loaded', player.loaded);
+                setBar('loaded', art.loaded);
 
                 art.on('video:progress', () => {
-                    setBar('loaded', player.loaded);
+                    setBar('loaded', art.loaded);
                 });
 
                 art.on('video:timeupdate', () => {
-                    setBar('played', player.played);
+                    setBar('played', art.played);
                 });
 
                 art.on('video:ended', () => {
@@ -136,7 +132,7 @@ export default function progress(option) {
                     if (event.target !== $indicator) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         setBar('played', percentage);
-                        player.seek = second;
+                        art.seek = second;
                     }
                 });
 
@@ -148,7 +144,7 @@ export default function progress(option) {
                     if (isDroging) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         setBar('played', percentage);
-                        player.seek = second;
+                        art.seek = second;
                     }
                 });
 

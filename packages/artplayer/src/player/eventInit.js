@@ -1,7 +1,7 @@
 import config from '../config';
 import { sleep, addClass, setStyle, isMobile } from '../utils';
 
-export default function eventInit(art, player) {
+export default function eventInit(art) {
     const {
         option,
         events: { proxy },
@@ -14,11 +14,11 @@ export default function eventInit(art, player) {
     const maxReconnectTime = 5;
 
     proxy($video, 'click', () => {
-        player.toggle();
+        art.toggle();
     });
 
     proxy($video, 'dblclick', () => {
-        player.fullscreen = !player.fullscreen;
+        art.fullscreen = !art.fullscreen;
     });
 
     config.events.forEach((eventName) => {
@@ -58,8 +58,8 @@ export default function eventInit(art, player) {
 
     art.on('video:ended', () => {
         if (option.loop) {
-            player.seek = 0;
-            player.play();
+            art.seek = 0;
+            art.play();
             art.controls.show = false;
             art.mask.show = false;
         } else {
@@ -72,7 +72,7 @@ export default function eventInit(art, player) {
         if (reconnectTime < maxReconnectTime) {
             sleep(1000).then(() => {
                 reconnectTime += 1;
-                player.url = option.url;
+                art.url = option.url;
                 notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
                 art.emit('error', reconnectTime);
             });
@@ -92,7 +92,7 @@ export default function eventInit(art, player) {
     // });
 
     art.once('video:loadedmetadata', () => {
-        player.autoSize = option.autoSize;
+        art.autoSize = option.autoSize;
         if (isMobile) {
             art.loading.show = false;
             art.controls.show = true;

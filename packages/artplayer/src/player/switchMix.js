@@ -1,22 +1,22 @@
 import { def } from '../utils';
 
-export default function switchMix(art, player) {
+export default function switchMix(art) {
     const { i18n, option, notice } = art;
 
     function switchUrl(url, name, currentTime) {
         return new Promise((resolve) => {
-            if (url === player.url) return resolve(url);
-            URL.revokeObjectURL(player.url);
-            player.url = url;
+            if (url === art.url) return resolve(url);
+            URL.revokeObjectURL(art.url);
+            art.url = url;
             art.once('video:canplay', () => {
-                player.playbackRate = false;
-                player.aspectRatio = false;
-                player.flip = 'normal';
-                player.autoSize = option.autoSize;
-                player.currentTime = currentTime;
+                art.playbackRate = false;
+                art.aspectRatio = false;
+                art.flip = 'normal';
+                art.autoSize = option.autoSize;
+                art.currentTime = currentTime;
                 art.notice.show = '';
-                if (player.playing) {
-                    player.play();
+                if (art.playing) {
+                    art.play();
                 }
                 if (name) {
                     notice.show = `${i18n.get('Switch video')}: ${name}`;
@@ -27,13 +27,13 @@ export default function switchMix(art, player) {
         });
     }
 
-    def(player, 'switchQuality', {
+    def(art, 'switchQuality', {
         value: (url, name) => {
-            return switchUrl(url, name, player.currentTime);
+            return switchUrl(url, name, art.currentTime);
         },
     });
 
-    def(player, 'switchUrl', {
+    def(art, 'switchUrl', {
         value: (url, name) => {
             return switchUrl(url, name, 0);
         },

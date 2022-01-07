@@ -1,13 +1,13 @@
 import { throttle } from '../utils';
 
 export default function resizeInit(art, events) {
-    const { option, player } = art;
+    const { option } = art;
 
     const resizeFn = throttle(() => {
-        if (player.normalSize) {
-            player.autoSize = option.autoSize;
+        if (art.normalSize) {
+            art.autoSize = option.autoSize;
         }
-        player.aspectRatioReset = true;
+        art.aspectRatioReset = true;
         art.emit('resize');
     }, 500);
 

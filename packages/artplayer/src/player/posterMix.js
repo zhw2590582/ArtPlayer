@@ -1,12 +1,12 @@
 import { def, setStyle } from '../utils';
 
-export default function posterMix(art, player) {
+export default function posterMix(art) {
     const {
         option,
         template: { $poster },
     } = art;
 
-    def(player, 'poster', {
+    def(art, 'poster', {
         get: () => option.poster,
         set(url) {
             option.poster = url;

@@ -1,29 +1,29 @@
 import { def } from '../utils';
 
-export default function rectMix(art, player) {
-    def(player, 'rect', {
+export default function rectMix(art) {
+    def(art, 'rect', {
         get: () => {
             return art.template.$player.getBoundingClientRect();
         },
     });
 
-    ['bottom', 'height', 'left', 'right', 'top', 'width'].forEach(key => {
-        def(player, key, {
+    ['bottom', 'height', 'left', 'right', 'top', 'width'].forEach((key) => {
+        def(art, key, {
             get: () => {
-                return player.rect[key];
+                return art.rect[key];
             },
         });
     });
 
-    def(player, 'x', {
+    def(art, 'x', {
         get: () => {
-            return player.left + window.pageXOffset;
+            return art.left + window.pageXOffset;
         },
     });
 
-    def(player, 'y', {
+    def(art, 'y', {
         get: () => {
-            return player.top + window.pageYOffset;
+            return art.top + window.pageYOffset;
         },
     });
 }

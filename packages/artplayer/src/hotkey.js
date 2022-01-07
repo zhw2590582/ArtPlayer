@@ -1,41 +1,38 @@
-import { errorHandle } from './utils';
-
 export default class Hotkey {
     constructor(art) {
         this.keys = {};
 
         const {
             option,
-            player,
             events: { proxy },
         } = art;
 
         if (option.hotkey) {
             art.once('ready', () => {
                 this.add(27, () => {
-                    if (player.fullscreenWeb) {
-                        player.fullscreenWeb = false;
+                    if (art.fullscreenWeb) {
+                        art.fullscreenWeb = false;
                     }
                 });
 
                 this.add(32, () => {
-                    player.toggle();
+                    art.toggle();
                 });
 
                 this.add(37, () => {
-                    player.backward = 5;
+                    art.backward = 5;
                 });
 
                 this.add(38, () => {
-                    player.volume += 0.1;
+                    art.volume += 0.1;
                 });
 
                 this.add(39, () => {
-                    player.forward = 5;
+                    art.forward = 5;
                 });
 
                 this.add(40, () => {
-                    player.volume -= 0.1;
+                    art.volume -= 0.1;
                 });
 
                 proxy(window, 'keydown', (event) => {
@@ -57,12 +54,20 @@ export default class Hotkey {
     }
 
     add(key, event) {
-        errorHandle(typeof key === 'number', 'The Hotkey.add() first parameter is not a number');
-        errorHandle(typeof event === 'function', 'The Hotkey.add() second parameter is not a function');
         if (this.keys[key]) {
             this.keys[key].push(event);
         } else {
             this.keys[key] = [event];
+        }
+        return this;
+    }
+
+    remove(key, event) {
+        if (this.keys[key]) {
+            const index = this.keys[key].indexOf(event);
+            if (index !== -1) {
+                this.keys[key].splice(index, 1);
+            }
         }
         return this;
     }

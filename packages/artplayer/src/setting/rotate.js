@@ -2,7 +2,7 @@ import { query } from '../utils';
 
 export default function rotate(option) {
     return (art) => {
-        const { i18n, player } = art;
+        const { i18n } = art;
         return {
             ...option,
             html: `
@@ -21,14 +21,14 @@ export default function rotate(option) {
             click: (setting, event) => {
                 const { value } = event.target.dataset;
                 if (value) {
-                    const deg = player.rotate + Number(value);
+                    const deg = art.rotate + Number(value);
                     if (deg === 360 || deg === -360) {
-                        player.rotate = 0;
+                        art.rotate = 0;
                     } else {
-                        player.rotate = deg;
+                        art.rotate = deg;
                     }
                 } else {
-                    player.rotate = 0;
+                    art.rotate = 0;
                 }
             },
             mounted: ($setting) => {

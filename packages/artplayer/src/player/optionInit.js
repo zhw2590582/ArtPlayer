@@ -1,6 +1,6 @@
 import { clamp, setStyle } from '../utils';
 
-export default function attrInit(art, player) {
+export default function attrInit(art) {
     const {
         option,
         storage,
@@ -8,24 +8,23 @@ export default function attrInit(art, player) {
     } = art;
 
     Object.keys(option.moreVideoAttr).forEach((key) => {
-        $video[key] = option.moreVideoAttr[key];
+        art.attr(key, option.moreVideoAttr[key]);
     });
 
     if (option.muted) {
-        $video.muted = option.muted;
+        art.muted = option.muted;
     }
 
     if (option.volume) {
         $video.volume = clamp(option.volume, 0, 1);
     }
 
-    const volume = storage.get('volume');
-    if (volume) {
-        $video.volume = clamp(volume, 0, 1);
+    const volumeStorage = storage.get('volume');
+    if (typeof volumeStorage === 'number') {
+        $video.volume = clamp(volumeStorage, 0, 1);
     }
 
     if (option.poster) {
-        // $video.poster = option.poster;
         setStyle($poster, 'backgroundImage', `url(${option.poster})`);
     }
 
@@ -33,9 +32,11 @@ export default function attrInit(art, player) {
         $video.autoplay = option.autoplay;
     }
 
-    $video.controls = false;
+    if (option.theme) {
+        art.theme = option.theme;
+    }
 
     if (option.ads.length === 0) {
-        player.url = option.url;
+        art.url = option.url;
     }
 }

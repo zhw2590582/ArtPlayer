@@ -2,7 +2,6 @@ import { throttle, isInViewport } from '../utils';
 
 export default function viewInit(art, events) {
     const {
-        player,
         option,
         template: { $container },
     } = art;
@@ -17,7 +16,7 @@ export default function viewInit(art, events) {
 
     art.on('view', (state) => {
         if (option.autoMini) {
-            player.mini = !state;
+            art.mini = !state;
         }
     });
 }

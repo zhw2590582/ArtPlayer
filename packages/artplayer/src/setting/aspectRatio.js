@@ -1,8 +1,8 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function aspectRatio(option) {
-    return art => {
-        const { i18n, player } = art;
+    return (art) => {
+        const { i18n } = art;
         return {
             ...option,
             html: `
@@ -19,15 +19,15 @@ export default function aspectRatio(option) {
                     </div>
                 </div>
             `,
-            click: (setting, event) => {
+            click: (_, event) => {
                 const { value } = event.target.dataset;
                 if (value) {
-                    player.aspectRatio = value;
+                    art.aspectRatio = value;
                 }
             },
-            mounted: $setting => {
-                art.on('aspectRatio', ratio => {
-                    const $current = queryAll('button', $setting).find(item => item.dataset.value === ratio);
+            mounted: ($setting) => {
+                art.on('aspectRatio', (ratio) => {
+                    const $current = queryAll('button', $setting).find((item) => item.dataset.value === ratio);
                     if ($current) {
                         inverseClass($current.parentElement, 'current');
                     }

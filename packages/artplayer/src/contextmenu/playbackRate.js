@@ -2,7 +2,7 @@ import { inverseClass, queryAll } from '../utils';
 
 export default function playbackRate(option) {
     return (art) => {
-        const { i18n, player } = art;
+        const { i18n } = art;
         return {
             ...option,
             html: `${i18n.get('Play speed')}:
@@ -16,7 +16,7 @@ export default function playbackRate(option) {
             click: (contextmenu, event) => {
                 const { rate } = event.target.dataset;
                 if (rate) {
-                    player.playbackRate = Number(rate);
+                    art.playbackRate = Number(rate);
                     contextmenu.show = false;
                 }
             },

@@ -1,5 +1,3 @@
-import { errorHandle } from './error';
-
 export const def = Object.defineProperty;
 
 const { hasOwnProperty } = Object.prototype;
@@ -9,16 +7,6 @@ export function has(obj, name) {
 
 export function get(obj, name) {
     return Object.getOwnPropertyDescriptor(obj, name);
-}
-
-export function proxyPropertys(target, ...sources) {
-    return sources.reduce((result, source) => {
-        Object.getOwnPropertyNames(source).forEach((key) => {
-            errorHandle(!has(result, key), `Target attribute name is duplicated: ${key}`);
-            def(result, key, get(source, key));
-        });
-        return result;
-    }, target);
 }
 
 export function mergeDeep(...objects) {
