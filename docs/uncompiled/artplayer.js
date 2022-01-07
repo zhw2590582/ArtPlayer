@@ -3311,7 +3311,7 @@
         }));
 
         option.controls.forEach(function (item) {
-          _this.add(item);
+          return _this.add(item);
         });
       });
       return _this;
@@ -3508,7 +3508,7 @@
         }));
 
         option.contextmenu.forEach(function (item) {
-          _this.add(item);
+          return _this.add(item);
         });
         proxy($player, 'contextmenu', function (event) {
           event.preventDefault();
@@ -4102,7 +4102,7 @@
       _this.$parent = art.template.$layer;
       art.once('ready', function () {
         art.option.layers.forEach(function (item) {
-          _this.add(item);
+          return _this.add(item);
         });
       });
       return _this;
@@ -4420,7 +4420,7 @@
           }));
 
           option.settings.forEach(function (item) {
-            _this.add(item);
+            return _this.add(item);
           });
         });
         art.on('blur', function () {
@@ -4751,7 +4751,7 @@
       }
 
       art.option.plugins.forEach(function (plugin) {
-        _this.add(plugin);
+        return _this.add(plugin);
       });
     }
 

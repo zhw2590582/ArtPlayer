@@ -61,9 +61,7 @@ export default class Contextmenu extends Component {
                 }),
             );
 
-            option.contextmenu.forEach((item) => {
-                this.add(item);
-            });
+            option.contextmenu.forEach((item) => this.add(item));
 
             proxy($player, 'contextmenu', (event) => {
                 event.preventDefault();

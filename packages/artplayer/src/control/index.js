@@ -160,9 +160,7 @@ export default class Control extends Component {
                 }),
             );
 
-            option.controls.forEach((item) => {
-                this.add(item);
-            });
+            option.controls.forEach((item) => this.add(item));
         });
     }
 
