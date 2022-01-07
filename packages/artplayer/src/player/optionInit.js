@@ -16,12 +16,12 @@ export default function attrInit(art) {
     }
 
     if (option.volume) {
-        art.volume = clamp(option.volume, 0, 1);
+        $video.volume = clamp(option.volume, 0, 1);
     }
 
-    const volume = storage.get('volume');
-    if (volume) {
-        art.volume = clamp(volume, 0, 1);
+    const volumeStorage = storage.get('volume');
+    if (typeof volumeStorage === 'number') {
+        $video.volume = clamp(volumeStorage, 0, 1);
     }
 
     if (option.poster) {

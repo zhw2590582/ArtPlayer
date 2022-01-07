@@ -702,6 +702,72 @@ art.on('ready', () => {
 });
 ```
 
+## attr
+
+-   Type: `Function`
+-   Parameter: `String`
+
+Dynamically get and set the properties of the video element
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.attr('playsInline'));
+    art.attr('playsInline', true);
+    console.info(art.attr('playsInline'));
+});
+```
+
+## title
+
+-   Type: `Setter/Getter`
+-   Parameter: `String`
+
+Dynamic get and set player title
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.title);
+    art.title = 'New Title';
+    console.info(art.title);
+});
+```
+
+## theme
+
+-   Type: `Setter/Getter`
+-   Parameter: `String`
+
+Dynamic get and set player theme color
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.theme);
+    art.theme = '#000';
+    console.info(art.theme);
+});
+```
+
 ## destroy
 
 -   Type: `Function`

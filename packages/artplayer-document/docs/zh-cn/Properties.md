@@ -21,7 +21,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.play();
-})
+});
 ```
 
 ## pause
@@ -45,7 +45,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.pause();
     }, 3000);
-})
+});
 ```
 
 ## toggle
@@ -69,7 +69,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.toggle();
     }, 3000);
-})
+});
 ```
 
 ## seek
@@ -89,7 +89,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.seek = 5;
-})
+});
 ```
 
 ## forward
@@ -109,7 +109,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.forward = 5;
-})
+});
 ```
 
 ## backward
@@ -133,7 +133,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.backward = 2;
     }, 3000);
-})
+});
 ```
 
 ## volume
@@ -155,7 +155,7 @@ art.on('ready', () => {
     console.info(art.volume);
     art.volume = 0.5;
     console.info(art.volume);
-})
+});
 ```
 
 ## url
@@ -177,7 +177,7 @@ art.on('ready', () => {
     console.info(art.url);
     art.url = '/assets/sample/video.mp4?t=0';
     console.info(art.url);
-})
+});
 ```
 
 ## switchUrl
@@ -202,7 +202,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.switchUrl('/assets/sample/video.mp4?t=0', '新视频名字');
     }, 3000);
-})
+});
 ```
 
 ## switchQuality
@@ -227,7 +227,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.switchQuality('/assets/sample/video.mp4?t=0', '新视频地址');
     }, 3000);
-})
+});
 ```
 
 ## muted
@@ -249,7 +249,7 @@ art.on('ready', () => {
     console.info(art.muted);
     art.muted = true;
     console.info(art.muted);
-})
+});
 ```
 
 ## currentTime
@@ -271,7 +271,7 @@ art.on('ready', () => {
     console.info(art.currentTime);
     art.currentTime = 5;
     console.info(art.currentTime);
-})
+});
 ```
 
 ## duration
@@ -290,7 +290,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     console.info(art.duration);
-})
+});
 ```
 
 :::tip 提示
@@ -316,7 +316,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     art.screenshot();
-})
+});
 ```
 
 ## getDataURL
@@ -335,8 +335,8 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.seek = 10;
-    art.getDataURL().then(url => console.info(url));
-})
+    art.getDataURL().then((url) => console.info(url));
+});
 ```
 
 ## getBlobUrl
@@ -355,8 +355,8 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.seek = 10;
-    art.getBlobUrl().then(url => console.info(url));
-})
+    art.getBlobUrl().then((url) => console.info(url));
+});
 ```
 
 ## fullscreen
@@ -381,7 +381,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.fullscreen = false;
     }, 3000);
-})
+});
 ```
 
 :::tip 提示
@@ -412,7 +412,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.fullscreenWeb = false;
     }, 3000);
-})
+});
 ```
 
 ## pip
@@ -437,7 +437,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.pip = false;
     }, 3000);
-})
+});
 ```
 
 :::tip 提示
@@ -466,7 +466,7 @@ art.on('ready', () => {
     console.info(art.poster);
     art.poster = '/assets/sample/poster.jpg?t=0';
     console.info(art.poster);
-})
+});
 ```
 
 ## mini
@@ -490,7 +490,7 @@ art.on('ready', () => {
     setTimeout(() => {
         art.mini = false;
     }, 3000);
-})
+});
 ```
 
 ## playing
@@ -513,7 +513,7 @@ art.on('ready', () => {
     console.info(art.playing);
     art.play();
     console.info(art.playing);
-})
+});
 ```
 
 ## autoSize
@@ -535,7 +535,7 @@ art.on('ready', () => {
     console.info(art.autoSize);
     art.autoSize = true;
     console.info(art.autoSize);
-})
+});
 ```
 
 ## rect
@@ -554,7 +554,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     console.info(JSON.stringify(art.rect));
-})
+});
 ```
 
 :::tip 提示
@@ -579,10 +579,10 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.flip)
-    art.flip = 'horizontal'
-    console.info(art.flip)
-})
+    console.info(art.flip);
+    art.flip = 'horizontal';
+    console.info(art.flip);
+});
 ```
 
 ## rotate
@@ -602,10 +602,10 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.rotate)
-    art.rotate = 90
-    console.info(art.rotate)
-})
+    console.info(art.rotate);
+    art.rotate = 90;
+    console.info(art.rotate);
+});
 ```
 
 ## playbackRate
@@ -624,10 +624,10 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.playbackRate)
-    art.playbackRate = 2
-    console.info(art.playbackRate)
-})
+    console.info(art.playbackRate);
+    art.playbackRate = 2;
+    console.info(art.playbackRate);
+});
 ```
 
 ## aspectRatio
@@ -646,10 +646,10 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.aspectRatio)
-    art.aspectRatio = '16:9'
-    console.info(art.aspectRatio)
-})
+    console.info(art.aspectRatio);
+    art.aspectRatio = '16:9';
+    console.info(art.aspectRatio);
+});
 ```
 
 ## loop
@@ -668,10 +668,10 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.loop)
+    console.info(art.loop);
     art.loop = [5, 10];
-    console.info(art.loop)
-})
+    console.info(art.loop);
+});
 ```
 
 :::tip 提示
@@ -702,6 +702,72 @@ art.on('ready', () => {
 });
 ```
 
+## attr
+
+-   类型: `Function`
+-   参数: `String`
+
+动态获取和设置 video 元素的属性
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.attr('playsInline'));
+    art.attr('playsInline', true);
+    console.info(art.attr('playsInline'));
+});
+```
+
+## title
+
+-   类型: `Setter/Getter`
+-   参数: `String`
+
+动态获取和设置播放器标题
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.title);
+    art.title = '新标题';
+    console.info(art.title);
+});
+```
+
+## theme
+
+-   类型: `Setter/Getter`
+-   参数: `String`
+
+动态获取和设置播放器主题颜色
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.theme);
+    art.theme = '#000';
+    console.info(art.theme);
+});
+```
+
 ## destroy
 
 -   类型: `Function`
@@ -719,5 +785,5 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.destroy();
-})
+});
 ```

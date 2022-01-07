@@ -69,5 +69,6 @@ export default class Hotkey {
                 this.keys[key].splice(index, 1);
             }
         }
+        return this;
     }
 }

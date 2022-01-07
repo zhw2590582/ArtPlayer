@@ -1,5 +1,5 @@
 export default function miniProgressBar(art) {
-    const { layers, option } = art;
+    const { layers } = art;
 
     layers.add({
         name: 'miniProgressBar',

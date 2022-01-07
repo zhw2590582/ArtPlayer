@@ -827,23 +827,27 @@
       _classCallCheck(this, Template);
 
       this.art = art;
-      this.query = this.query.bind(this);
+      var option = art.option,
+          constructor = art.constructor,
+          whitelist = art.whitelist;
 
-      if (art.option.container instanceof Element) {
-        this.$container = art.option.container;
+      if (option.container instanceof Element) {
+        this.$container = option.container;
       } else {
-        this.$container = query(art.option.container);
-        errorHandle(this.$container, "No container element found by ".concat(art.option.container));
+        this.$container = query(option.container);
+        errorHandle(this.$container, "No container element found by ".concat(option.container));
       }
 
       var type = this.$container.tagName.toLowerCase();
       errorHandle(type === 'div', "Unsupported container element type, only support 'div' but got '".concat(type, "'"));
-      errorHandle(art.constructor.instances.every(function (ins) {
+      errorHandle(constructor.instances.every(function (ins) {
         return ins.template.$container !== _this.$container;
       }), 'Cannot mount multiple instances on the same dom element');
+      this.query = this.query.bind(this);
+      this.$container.dataset.artId = art.id;
       this.$original = this.$container.cloneNode(true);
 
-      if (art.whitelist.state) {
+      if (whitelist.state) {
         this.desktop();
       } else {
         this.mobile();
@@ -858,11 +862,9 @@
     }, {
       key: "desktop",
       value: function desktop() {
-        var _this$art$option = this.art.option,
-            backdrop = _this$art$option.backdrop,
-            useSSR = _this$art$option.useSSR;
+        var option = this.art.option;
 
-        if (!useSSR) {
+        if (!option.useSSR) {
           this.$container.innerHTML = Template.html;
         }
 
@@ -892,9 +894,8 @@
         this.$miniTitle = this.query('.art-mini-title');
         this.$miniClose = this.query('.art-mini-close');
         this.$contextmenu = this.query('.art-contextmenus');
-        this.$container.dataset.artId = this.art.id;
 
-        if (backdrop) {
+        if (option.backdrop) {
           addClass(this.$settingInner, 'art-backdrop-filter');
           addClass(this.$contextmenu, 'art-backdrop-filter');
           addClass(this.$info, 'art-backdrop-filter');
@@ -923,7 +924,7 @@
     }], [{
       key: "html",
       get: function get() {
-        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">5.0.0</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
+        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\">\n              <div class=\"art-setting-inner\">\n                <div class=\"art-setting-body\"></div>\n              </div>\n            </div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.2.0</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
       }
     }]);
 
@@ -2269,13 +2270,13 @@
     }
 
     if (option.volume) {
-      art.volume = clamp(option.volume, 0, 1);
+      $video.volume = clamp(option.volume, 0, 1);
     }
 
-    var volume = storage.get('volume');
+    var volumeStorage = storage.get('volume');
 
-    if (volume) {
-      art.volume = clamp(volume, 0, 1);
+    if (typeof volumeStorage === 'number') {
+      $video.volume = clamp(volumeStorage, 0, 1);
     }
 
     if (option.poster) {
@@ -3435,7 +3436,7 @@
 
   function version(option) {
     return _objectSpread$7(_objectSpread$7({}, option), {}, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 5.0.0</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.2.0</a>'
     });
   }
 
@@ -4077,6 +4078,8 @@
             this.keys[key].splice(index, 1);
           }
         }
+
+        return this;
       }
     }]);
 
@@ -4695,7 +4698,6 @@
 
   function miniProgressBar(art) {
     var layers = art.layers;
-        art.option;
     layers.add({
       name: 'miniProgressBar',
       style: {
@@ -4969,7 +4971,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '5.0.0';
+        return '4.2.0';
       }
     }, {
       key: "env",
@@ -4979,7 +4981,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1641548341085';
+        return '1641555243763';
       }
     }, {
       key: "config",
@@ -5086,7 +5088,7 @@
 
     return Artplayer;
   }(Emitter); // eslint-disable-next-line no-console
-  console.log('%c ArtPlayer %c 5.0.0 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 4.2.0 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

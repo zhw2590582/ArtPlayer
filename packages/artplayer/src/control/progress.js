@@ -1,10 +1,7 @@
 import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent } from '../utils';
 
 export function getPosFromEvent(art, event) {
-    const {
-        template: { $progress },
-    } = art;
-
+    const { $progress } = art.template;
     const { left } = $progress.getBoundingClientRect();
     const width = clamp(event.pageX - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * art.duration;
