@@ -79,6 +79,7 @@ export default function miniMix(art) {
                 }
                 art.aspectRatio = false;
                 art.playbackRate = false;
+                art.notice.show = '';
                 art.emit('mini', true);
             } else {
                 $player.style.cssText = cacheStyle;
@@ -88,6 +89,7 @@ export default function miniMix(art) {
                 art.aspectRatio = false;
                 art.playbackRate = false;
                 art.autoSize = option.autoSize;
+                art.notice.show = '';
                 art.emit('mini');
             }
         },
