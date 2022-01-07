@@ -1,6 +1,6 @@
 import { secondToTime, download, def } from '../utils';
 
-export default function screenshotMix(art, player) {
+export default function screenshotMix(art) {
     const {
         option,
         notice,
@@ -9,7 +9,7 @@ export default function screenshotMix(art, player) {
 
     const $canvas = document.createElement('canvas');
 
-    def(player, 'getDataURL', {
+    def(art, 'getDataURL', {
         value: () =>
             new Promise((resolve, reject) => {
                 try {
@@ -24,7 +24,7 @@ export default function screenshotMix(art, player) {
             }),
     });
 
-    def(player, 'getBlobUrl', {
+    def(art, 'getBlobUrl', {
         value: () =>
             new Promise((resolve, reject) => {
                 try {
@@ -41,9 +41,9 @@ export default function screenshotMix(art, player) {
             }),
     });
 
-    def(player, 'screenshot', {
+    def(art, 'screenshot', {
         value: () => {
-            return player.getDataURL().then((dataUri) => {
+            return art.getDataURL().then((dataUri) => {
                 download(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
                 art.emit('screenshot', dataUri);
                 return dataUri;

@@ -1,12 +1,12 @@
 import { getExt, def, sleep } from '../utils';
 
-export default function urlMix(art, player) {
+export default function urlMix(art) {
     const {
         option,
         template: { $video },
     } = art;
 
-    def(player, 'url', {
+    def(art, 'url', {
         get() {
             return $video.currentSrc;
         },
@@ -19,7 +19,7 @@ export default function urlMix(art, player) {
                     typeCallback.call(art, $video, url, art);
                 });
             } else {
-                if (player.url && player.url !== url) {
+                if (art.url && art.url !== url) {
                     art.once('video:canplay', () => {
                         if (art.isReady) {
                             art.emit('restart');

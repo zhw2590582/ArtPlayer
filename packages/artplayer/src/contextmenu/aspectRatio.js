@@ -2,7 +2,7 @@ import { inverseClass, queryAll } from '../utils';
 
 export default function aspectRatio(option) {
     return (art) => {
-        const { i18n, player } = art;
+        const { i18n } = art;
         return {
             ...option,
             html: `${i18n.get('Aspect ratio')}:
@@ -13,7 +13,7 @@ export default function aspectRatio(option) {
             click: (contextmenu, event) => {
                 const { ratio } = event.target.dataset;
                 if (ratio) {
-                    player.aspectRatio = ratio;
+                    art.aspectRatio = ratio;
                     contextmenu.show = false;
                 }
             },

@@ -7,7 +7,6 @@ export default function volume(option) {
             const {
                 events: { proxy },
                 icons,
-                player,
                 i18n,
             } = art;
 
@@ -34,7 +33,7 @@ export default function volume(option) {
             }
 
             function setVolumeHandle(percentage = 0.7) {
-                if (player.muted || percentage === 0) {
+                if (art.muted || percentage === 0) {
                     setStyle($volume, 'display', 'none');
                     setStyle($volumeClose, 'display', 'flex');
                     setStyle($volumeHandle, 'left', '0');
@@ -46,22 +45,22 @@ export default function volume(option) {
                 }
             }
 
-            setVolumeHandle(player.volume);
+            setVolumeHandle(art.volume);
             art.on('video:volumechange', () => {
-                setVolumeHandle(player.volume);
+                setVolumeHandle(art.volume);
             });
 
             proxy($volume, 'click', () => {
-                player.muted = true;
+                art.muted = true;
             });
 
             proxy($volumeClose, 'click', () => {
-                player.muted = false;
+                art.muted = false;
             });
 
             proxy($volumePanel, 'click', (event) => {
-                player.muted = false;
-                player.volume = volumeChangeFromEvent(event);
+                art.muted = false;
+                art.volume = volumeChangeFromEvent(event);
             });
 
             proxy($volumeHandle, 'mousedown', () => {
@@ -70,8 +69,8 @@ export default function volume(option) {
 
             proxy($control, 'mousemove', (event) => {
                 if (isDroging) {
-                    player.muted = false;
-                    player.volume = volumeChangeFromEvent(event);
+                    art.muted = false;
+                    art.volume = volumeChangeFromEvent(event);
                 }
             });
 

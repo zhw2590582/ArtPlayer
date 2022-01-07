@@ -2,13 +2,12 @@ import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEve
 
 export function getPosFromEvent(art, event) {
     const {
-        player,
         template: { $progress },
     } = art;
 
     const { left } = $progress.getBoundingClientRect();
     const width = clamp(event.pageX - left, 0, $progress.clientWidth);
-    const second = (width / $progress.clientWidth) * player.duration;
+    const second = (width / $progress.clientWidth) * art.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);
     return { second, time, width, percentage };
@@ -19,7 +18,6 @@ export default function progress(option) {
         const {
             option: { highlight, theme },
             events: { proxy },
-            player,
             icons,
         } = art;
         return {
@@ -98,21 +96,21 @@ export default function progress(option) {
                 }
 
                 highlight.forEach((item) => {
-                    const left = (clamp(item.time, 0, player.duration) / player.duration) * 100;
+                    const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
                     append(
                         $highlight,
                         `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`,
                     );
                 });
 
-                setBar('loaded', player.loaded);
+                setBar('loaded', art.loaded);
 
                 art.on('video:progress', () => {
-                    setBar('loaded', player.loaded);
+                    setBar('loaded', art.loaded);
                 });
 
                 art.on('video:timeupdate', () => {
-                    setBar('played', player.played);
+                    setBar('played', art.played);
                 });
 
                 art.on('video:ended', () => {
@@ -136,7 +134,7 @@ export default function progress(option) {
                     if (event.target !== $indicator) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         setBar('played', percentage);
-                        player.seek = second;
+                        art.seek = second;
                     }
                 });
 
@@ -148,7 +146,7 @@ export default function progress(option) {
                     if (isDroging) {
                         const { second, percentage } = getPosFromEvent(art, event);
                         setBar('played', percentage);
-                        player.seek = second;
+                        art.seek = second;
                     }
                 });
 

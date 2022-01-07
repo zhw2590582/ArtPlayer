@@ -1,7 +1,6 @@
 export default function miniProgressBar(art) {
     const {
         layers,
-        player,
         option: { theme },
     } = art;
 
@@ -26,7 +25,7 @@ export default function miniProgressBar(art) {
             });
 
             art.on('video:timeupdate', () => {
-                $progressBar.style.width = `${player.played * 100}%`;
+                $progressBar.style.width = `${art.played * 100}%`;
             });
         },
     });

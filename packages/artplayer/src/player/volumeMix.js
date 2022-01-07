@@ -1,6 +1,6 @@
 import { clamp, def } from '../utils';
 
-export default function volumeMix(art, player) {
+export default function volumeMix(art) {
     const {
         template: { $video },
         i18n,
@@ -8,9 +8,9 @@ export default function volumeMix(art, player) {
         storage,
     } = art;
 
-    def(player, 'volume', {
+    def(art, 'volume', {
         get: () => $video.volume || 0,
-        set: percentage => {
+        set: (percentage) => {
             $video.volume = clamp(percentage, 0, 1);
             notice.show = `${i18n.get('Volume')}: ${parseInt($video.volume * 100, 10)}`;
             if ($video.volume !== 0) {
@@ -20,9 +20,9 @@ export default function volumeMix(art, player) {
         },
     });
 
-    def(player, 'muted', {
+    def(art, 'muted', {
         get: () => $video.muted,
-        set: muted => {
+        set: (muted) => {
             $video.muted = muted;
             art.emit('volume', $video.volume);
         },

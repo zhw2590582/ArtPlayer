@@ -2,11 +2,15 @@ import { userAgent, isMobile } from './utils';
 
 export default class Whitelist {
     constructor(art) {
+        this.art = art;
+    }
+
+    get state() {
         const {
             constructor: { kindOf },
             option: { whitelist },
-        } = art;
-        this.state =
+        } = this.art;
+        return (
             !isMobile ||
             whitelist.some((item) => {
                 switch (kindOf(item)) {
@@ -19,6 +23,7 @@ export default class Whitelist {
                     default:
                         return false;
                 }
-            });
+            })
+        );
     }
 }

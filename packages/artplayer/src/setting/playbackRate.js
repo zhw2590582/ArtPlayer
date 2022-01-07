@@ -1,10 +1,9 @@
 import { query } from '../utils';
 
 export default function playbackRate(option) {
-    return art => {
+    return (art) => {
         const {
             i18n,
-            player,
             events: { proxy },
         } = art;
         return {
@@ -17,16 +16,16 @@ export default function playbackRate(option) {
                     <input class="art-subtitle-range" value="1" type="range" min="0.5" max="2" step="0.25">
                 </div>
             `,
-            mounted: $setting => {
+            mounted: ($setting) => {
                 const $range = query('.art-setting-range input', $setting);
                 const $value = query('.art-subtitle-value', $setting);
                 proxy($range, 'change', () => {
                     const { value } = $range;
                     $value.innerText = value;
-                    player.playbackRate = Number(value);
+                    art.playbackRate = Number(value);
                 });
 
-                art.on('playbackRate', rate => {
+                art.on('playbackRate', (rate) => {
                     if (rate && $range.value !== rate) {
                         $range.value = rate;
                         $value.innerText = rate;

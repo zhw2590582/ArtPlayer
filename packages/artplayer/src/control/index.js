@@ -36,7 +36,7 @@ export default class Control extends Component {
         });
 
         art.on('video:timeupdate', () => {
-            if (player.playing && this.show && Date.now() - this.mouseMoveTime >= 3000) {
+            if (art.playing && this.show && Date.now() - this.mouseMoveTime >= 3000) {
                 this.show = false;
                 addClass($player, 'art-hide-cursor');
                 removeClass($player, 'art-hover');

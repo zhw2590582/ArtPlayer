@@ -1,6 +1,6 @@
 import { def } from '../utils';
 
-export default function playMix(art, player) {
+export default function playMix(art) {
     const {
         i18n,
         notice,
@@ -9,7 +9,7 @@ export default function playMix(art, player) {
         template: { $video },
     } = art;
 
-    def(player, 'play', {
+    def(art, 'play', {
         value() {
             const promise = $video.play();
 
@@ -21,11 +21,7 @@ export default function playMix(art, player) {
             }
 
             if (mutex) {
-                instances
-                    .filter((item) => item !== art)
-                    .forEach((item) => {
-                        item.player.pause();
-                    });
+                instances.filter((item) => item !== art).forEach((item) => item.pause());
             }
 
             notice.show = i18n.get('Play');

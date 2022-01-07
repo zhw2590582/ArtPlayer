@@ -3,7 +3,6 @@ import { clamp, secondToTime, isMobile } from '../utils';
 export default function gestureInit(art, events) {
     if (isMobile && !art.option.isLive) {
         const {
-            player,
             notice,
             template: { $video },
         } = art;
@@ -23,14 +22,14 @@ export default function gestureInit(art, events) {
             if (event.touches.length === 1 && isDroging) {
                 const widthDiff = event.touches[0].clientX - startX;
                 const proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
-                currentTime = clamp(player.currentTime + 60 * proportion, 0, player.duration);
-                notice.show = `${secondToTime(currentTime)} / ${secondToTime(player.duration)}`;
+                currentTime = clamp(art.currentTime + 60 * proportion, 0, art.duration);
+                notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
             }
         });
 
         events.proxy(document, 'touchend', () => {
             if (isDroging && currentTime) {
-                player.seek = currentTime;
+                art.seek = currentTime;
             }
             isDroging = false;
             startX = 0;

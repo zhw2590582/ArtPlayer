@@ -7,7 +7,7 @@ export default function quality(option) {
             html: qualityDefault ? qualityDefault.html : '',
             selector: qualityOption,
             onSelect(item) {
-                art.player.switchQuality(item.url, item.html);
+                art.switchQuality(item.url, item.html);
             },
         };
     };

@@ -5,7 +5,7 @@ export default function time(option) {
         ...option,
         mounted: $control => {
             function getTime() {
-                const newTime = `${secondToTime(art.player.currentTime)} / ${secondToTime(art.player.duration)}`;
+                const newTime = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
                 if (newTime !== $control.innerText) {
                     $control.innerText = newTime;
                 }

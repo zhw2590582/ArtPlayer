@@ -46,7 +46,7 @@ function settingMix(art) {
 
 export default function subtitleOffset(art) {
     const { clamp } = art.constructor.utils;
-    const { setting, notice, template, i18n, player } = art;
+    const { setting, notice, template, i18n } = art;
 
     setting.add(settingMix);
     let cuesCache = [];
@@ -67,8 +67,8 @@ export default function subtitleOffset(art) {
                             endTime: cue.endTime,
                         };
                     }
-                    cue.startTime = clamp(cuesCache[index].startTime + time, 0, player.duration);
-                    cue.endTime = clamp(cuesCache[index].endTime + time, 0, player.duration);
+                    cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
+                    cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
                 });
                 notice.show = `${i18n.get('Subtitle offset time')}: ${value}s`;
                 art.emit('subtitleOffset', value);

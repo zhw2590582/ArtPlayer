@@ -1,13 +1,13 @@
 import { errorHandle, def } from '../utils';
 
-export default function playbackRateMix(art, player) {
+export default function playbackRateMix(art) {
     const {
         template: { $video, $player },
         i18n,
         notice,
     } = art;
 
-    def(player, 'playbackRate', {
+    def(art, 'playbackRate', {
         get() {
             return $player.dataset.playbackRate;
         },
@@ -20,20 +20,20 @@ export default function playbackRateMix(art, player) {
                 $player.dataset.playbackRate = rate;
                 notice.show = `${i18n.get('Rate')}: ${rate === 1.0 ? i18n.get('Normal') : `${rate}x`}`;
                 art.emit('playbackRate', rate);
-            } else if (player.playbackRate) {
-                player.playbackRate = 1;
+            } else if (art.playbackRate) {
+                art.playbackRate = 1;
                 delete $player.dataset.playbackRate;
                 art.emit('playbackRate');
             }
         },
     });
 
-    def(player, 'playbackRateReset', {
+    def(art, 'playbackRateReset', {
         set(value) {
             if (value) {
                 const { playbackRate } = $player.dataset;
                 if (playbackRate) {
-                    player.playbackRate = Number(playbackRate);
+                    art.playbackRate = Number(playbackRate);
                 }
             }
         },

@@ -13,29 +13,29 @@ export default class Hotkey {
         if (option.hotkey) {
             art.once('ready', () => {
                 this.add(27, () => {
-                    if (player.fullscreenWeb) {
-                        player.fullscreenWeb = false;
+                    if (art.fullscreenWeb) {
+                        art.fullscreenWeb = false;
                     }
                 });
 
                 this.add(32, () => {
-                    player.toggle();
+                    art.toggle();
                 });
 
                 this.add(37, () => {
-                    player.backward = 5;
+                    art.backward = 5;
                 });
 
                 this.add(38, () => {
-                    player.volume += 0.1;
+                    art.volume += 0.1;
                 });
 
                 this.add(39, () => {
-                    player.forward = 5;
+                    art.forward = 5;
                 });
 
                 this.add(40, () => {
-                    player.volume -= 0.1;
+                    art.volume -= 0.1;
                 });
 
                 proxy(window, 'keydown', (event) => {

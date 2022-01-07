@@ -1,6 +1,6 @@
 import { def } from '../utils';
 
-function nativePip(art, player) {
+function nativePip(art) {
     const {
         template: { $video },
         events: { proxy },
@@ -9,7 +9,7 @@ function nativePip(art, player) {
 
     $video.disablePictureInPicture = false;
 
-    def(player, 'pip', {
+    def(art, 'pip', {
         get() {
             return document.pictureInPictureElement;
         },
@@ -37,12 +37,12 @@ function nativePip(art, player) {
     });
 }
 
-function webkitPip(art, player) {
+function webkitPip(art) {
     const { $video } = art.template;
 
     $video.webkitSetPresentationMode('inline');
 
-    def(player, 'pip', {
+    def(art, 'pip', {
         get() {
             return $video.webkitPresentationMode === 'picture-in-picture';
         },
@@ -58,18 +58,18 @@ function webkitPip(art, player) {
     });
 }
 
-export default function pipMix(art, player) {
+export default function pipMix(art) {
     const {
         i18n,
         notice,
         template: { $video },
     } = art;
     if (document.pictureInPictureEnabled) {
-        nativePip(art, player);
+        nativePip(art);
     } else if ($video.webkitSupportsPresentationMode) {
-        webkitPip(art, player);
+        webkitPip(art);
     } else {
-        def(player, 'pip', {
+        def(art, 'pip', {
             get() {
                 return false;
             },

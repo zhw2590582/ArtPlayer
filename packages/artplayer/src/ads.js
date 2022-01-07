@@ -30,7 +30,7 @@ export default class Ads {
 
     play(item = {}) {
         if (this.isEnd) return;
-        this.art.player.switchUrl(item.url);
+        this.art.switchUrl(item.url);
 
         this.art.once('video:timeupdate', () => {
             this.art.emit('ads:start', item);
@@ -52,7 +52,7 @@ export default class Ads {
         this.isEnd = true;
         this.playing = false;
         this.art.option.url = this.urlCache;
-        this.art.player.switchUrl(this.urlCache);
+        this.art.switchUrl(this.urlCache);
         this.art.emit('ads:end');
     }
 }

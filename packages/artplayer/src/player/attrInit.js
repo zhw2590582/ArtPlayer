@@ -1,6 +1,6 @@
 import { clamp, setStyle } from '../utils';
 
-export default function attrInit(art, player) {
+export default function attrInit(art) {
     const {
         option,
         storage,
@@ -36,6 +36,6 @@ export default function attrInit(art, player) {
     $video.controls = false;
 
     if (option.ads.length === 0) {
-        player.url = option.url;
+        art.url = option.url;
     }
 }

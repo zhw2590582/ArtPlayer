@@ -4,7 +4,6 @@ export default function localVideo(art) {
     const {
         events: { proxy },
         template,
-        player,
         option,
         setting,
         i18n,
@@ -16,7 +15,7 @@ export default function localVideo(art) {
             if (canPlayType === 'maybe' || canPlayType === 'probably') {
                 const url = URL.createObjectURL(file);
                 option.title = file.name;
-                player.switchUrl(url, file.name);
+                art.switchUrl(url, file.name);
                 art.emit('localVideo', file);
             } else {
                 errorHandle(false, 'Playback of this file format is not supported');
@@ -24,12 +23,12 @@ export default function localVideo(art) {
         }
     }
 
-    proxy(template.$player, 'dragover', e => {
-        e.preventDefault();
+    proxy(template.$player, 'dragover', (event) => {
+        event.preventDefault();
     });
 
-    proxy(template.$player, 'drop', e => {
-        e.preventDefault();
+    proxy(template.$player, 'drop', (event) => {
+        event.preventDefault();
         const file = e.dataTransfer.files[0];
         loadVideo(file);
     });
@@ -65,10 +64,10 @@ export default function localVideo(art) {
                     <div class="art-upload-value"></div>
                 </div>
             `,
-            mounted: $setting => {
+            mounted: ($setting) => {
                 const $btn = query('.art-upload-btn', $setting);
                 const $value = query('.art-upload-value', $setting);
-                art.on('localVideo', file => {
+                art.on('localVideo', (file) => {
                     $value.textContent = file.name;
                     $value.title = file.name;
                 });

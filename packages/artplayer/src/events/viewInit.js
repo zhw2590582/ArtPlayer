@@ -17,7 +17,7 @@ export default function viewInit(art, events) {
 
     art.on('view', (state) => {
         if (option.autoMini) {
-            player.mini = !state;
+            art.mini = !state;
         }
     });
 }

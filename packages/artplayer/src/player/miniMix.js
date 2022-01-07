@@ -1,6 +1,6 @@
 import { append, setStyle, addClass, removeClass, hasClass, def, isInViewport } from '../utils';
 
-export default function miniMix(art, player) {
+export default function miniMix(art) {
     const {
         i18n,
         option,
@@ -20,8 +20,8 @@ export default function miniMix(art, player) {
         isDroging = true;
         lastPageX = event.pageX;
         lastPageY = event.pageY;
-        lastPlayerLeft = player.left;
-        lastPlayerTop = player.top;
+        lastPlayerLeft = art.left;
+        lastPlayerTop = art.top;
     });
 
     proxy(document, 'mousemove', (event) => {
@@ -42,20 +42,20 @@ export default function miniMix(art, player) {
     });
 
     proxy($miniClose, 'click', () => {
-        player.mini = false;
+        art.mini = false;
         isDroging = false;
         removeClass($player, 'art-is-dragging');
     });
 
     append($miniTitle, option.title || i18n.get('Mini player'));
 
-    def(player, 'mini', {
+    def(art, 'mini', {
         get() {
             return hasClass($player, 'art-mini');
         },
         set(value) {
             if (value) {
-                player.autoSize = false;
+                art.autoSize = false;
                 cacheStyle = $player.style.cssText;
                 addClass($player, 'art-mini');
                 const top = storage.get('top');
@@ -66,28 +66,28 @@ export default function miniMix(art, player) {
                     if (!isInViewport($miniHeader)) {
                         storage.del('top');
                         storage.del('left');
-                        player.mini = true;
+                        art.mini = true;
                     }
                 } else {
                     const $body = document.body;
-                    const top = $body.clientHeight - player.height - 50;
-                    const left = $body.clientWidth - player.width - 50;
+                    const top = $body.clientHeight - art.height - 50;
+                    const left = $body.clientWidth - art.width - 50;
                     storage.set('top', top);
                     storage.set('left', left);
                     setStyle($player, 'top', `${top}px`);
                     setStyle($player, 'left', `${left}px`);
                 }
-                player.aspectRatio = false;
-                player.playbackRate = false;
+                art.aspectRatio = false;
+                art.playbackRate = false;
                 art.emit('mini', true);
             } else {
                 $player.style.cssText = cacheStyle;
                 removeClass($player, 'art-mini');
                 setStyle($player, 'top', null);
                 setStyle($player, 'left', null);
-                player.aspectRatio = false;
-                player.playbackRate = false;
-                player.autoSize = option.autoSize;
+                art.aspectRatio = false;
+                art.playbackRate = false;
+                art.autoSize = option.autoSize;
                 art.emit('mini');
             }
         },

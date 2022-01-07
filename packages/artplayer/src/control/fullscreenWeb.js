@@ -9,13 +9,12 @@ export default function fullscreenWeb(option) {
                 events: { proxy },
                 icons,
                 i18n,
-                player,
             } = art;
 
             append($control, icons.fullscreenWeb);
 
             proxy($control, 'click', () => {
-                player.fullscreenWeb = !player.fullscreenWeb;
+                art.fullscreenWeb = !art.fullscreenWeb;
             });
 
             art.on('fullscreenWeb', (value) => {

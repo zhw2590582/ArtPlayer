@@ -1,13 +1,13 @@
 import { errorHandle, def } from '../utils';
 
-export default function flipMix(art, player) {
+export default function flipMix(art) {
     const {
         template: { $player },
         i18n,
         notice,
     } = art;
 
-    def(player, 'flip', {
+    def(art, 'flip', {
         get() {
             return $player.dataset.flip;
         },
@@ -20,7 +20,7 @@ export default function flipMix(art, player) {
             if (flip === 'normal') {
                 delete $player.dataset.flip;
             } else {
-                player.rotate = false;
+                art.rotate = false;
                 $player.dataset.flip = flip;
             }
 
@@ -30,11 +30,11 @@ export default function flipMix(art, player) {
         },
     });
 
-    def(player, 'flipReset', {
+    def(art, 'flipReset', {
         set(value) {
-            if (value && player.flip) {
-                const { flip } = player;
-                player.flip = flip;
+            if (value && art.flip) {
+                const { flip } = art;
+                art.flip = flip;
             }
         },
     });

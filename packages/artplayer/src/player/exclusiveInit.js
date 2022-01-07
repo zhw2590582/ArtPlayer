@@ -1,17 +1,17 @@
 import { def } from '../utils';
 
-export default function exclusiveInit(art, player) {
+export default function exclusiveInit(art) {
     const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
 
     function exclusive(props) {
         props.forEach((name) => {
             art.on(name, () => {
-                if (player[name]) {
+                if (art[name]) {
                     props
                         .filter((item) => item !== name)
                         .forEach((item) => {
-                            if (player[item]) {
-                                player[item] = false;
+                            if (art[item]) {
+                                art[item] = false;
                             }
                         });
                 }
@@ -21,9 +21,9 @@ export default function exclusiveInit(art, player) {
 
     exclusive(sizeProps);
 
-    def(player, 'normalSize', {
+    def(art, 'normalSize', {
         get() {
-            return sizeProps.every((name) => !player[name]);
+            return sizeProps.every((name) => !art[name]);
         },
     });
 }
