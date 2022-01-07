@@ -3619,21 +3619,23 @@
           _this2.show = false;
         });
         var timer = null;
-        var types = queryAll('[data-video]', $infoPanel) || [];
+        var $types = queryAll('[data-video]', $infoPanel) || [];
         this.art.on('destroy', function () {
           clearTimeout(timer);
         });
 
         function loop() {
-          for (var index = 0; index < types.length; index++) {
-            var item = types[index];
+          for (var index = 0; index < $types.length; index++) {
+            var item = $types[index];
             var value = $video[item.dataset.video];
-            item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
+            var innerText = typeof value === 'number' ? value.toFixed(2) : value;
+
+            if (item.innerText !== innerText) {
+              item.innerText = innerText;
+            }
           }
 
-          timer = setTimeout(function () {
-            loop();
-          }, 1000);
+          timer = setTimeout(loop, 1000);
         }
 
         loop();

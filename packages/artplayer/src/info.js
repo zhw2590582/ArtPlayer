@@ -21,22 +21,22 @@ export default class Info extends Component {
         });
 
         let timer = null;
-        const types = queryAll('[data-video]', $infoPanel) || [];
+        const $types = queryAll('[data-video]', $infoPanel) || [];
 
         this.art.on('destroy', () => {
             clearTimeout(timer);
         });
 
         function loop() {
-            for (let index = 0; index < types.length; index++) {
-                const item = types[index];
+            for (let index = 0; index < $types.length; index++) {
+                const item = $types[index];
                 const value = $video[item.dataset.video];
-                item.innerText = typeof value === 'number' ? value.toFixed(2) : value;
+                const innerText = typeof value === 'number' ? value.toFixed(2) : value;
+                if (item.innerText !== innerText) {
+                    item.innerText = innerText;
+                }
             }
-
-            timer = setTimeout(() => {
-                loop();
-            }, 1000);
+            timer = setTimeout(loop, 1000);
         }
 
         loop();
