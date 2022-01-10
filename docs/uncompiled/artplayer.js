@@ -4056,63 +4056,63 @@
 
       _classCallCheck(this, Hotkey);
 
+      this.art = art;
       this.keys = {};
-      var option = art.option,
-          proxy = art.events.proxy;
-
-      if (option.hotkey) {
-        art.once('ready', function () {
-          _this.add(27, function () {
-            if (art.fullscreenWeb) {
-              art.fullscreenWeb = false;
-            }
-          });
-
-          _this.add(32, function () {
-            art.toggle();
-          });
-
-          _this.add(37, function () {
-            art.backward = 5;
-          });
-
-          _this.add(38, function () {
-            art.volume += 0.1;
-          });
-
-          _this.add(39, function () {
-            art.forward = 5;
-          });
-
-          _this.add(40, function () {
-            art.volume -= 0.1;
-          });
-
-          proxy(window, 'keydown', function (event) {
-            if (art.isFocus) {
-              var tag = document.activeElement.tagName.toUpperCase();
-              var editable = document.activeElement.getAttribute('contenteditable');
-
-              if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
-                var events = _this.keys[event.keyCode];
-
-                if (events) {
-                  event.preventDefault();
-
-                  for (var index = 0; index < events.length; index++) {
-                    events[index].call(art, event);
-                  }
-
-                  art.emit('hotkey', event);
-                }
-              }
-            }
-          });
-        });
-      }
+      art.once('ready', function () {
+        if (art.option.hotkey && !isMobile) {
+          _this.init();
+        }
+      });
     }
 
     _createClass(Hotkey, [{
+      key: "init",
+      value: function init() {
+        var _this2 = this;
+
+        var proxy = this.art.events.proxy;
+        this.add(27, function () {
+          if (_this2.art.fullscreenWeb) {
+            _this2.art.fullscreenWeb = false;
+          }
+        });
+        this.add(32, function () {
+          _this2.art.toggle();
+        });
+        this.add(37, function () {
+          _this2.art.backward = 5;
+        });
+        this.add(38, function () {
+          _this2.art.volume += 0.1;
+        });
+        this.add(39, function () {
+          _this2.art.forward = 5;
+        });
+        this.add(40, function () {
+          _this2.art.volume -= 0.1;
+        });
+        proxy(window, 'keydown', function (event) {
+          if (_this2.art.isFocus) {
+            var tag = document.activeElement.tagName.toUpperCase();
+            var editable = document.activeElement.getAttribute('contenteditable');
+
+            if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
+              var events = _this2.keys[event.keyCode];
+
+              if (events) {
+                event.preventDefault();
+
+                for (var index = 0; index < events.length; index++) {
+                  events[index].call(_this2.art, event);
+                }
+
+                _this2.art.emit('hotkey', event);
+              }
+            }
+          }
+        });
+      }
+    }, {
       key: "add",
       value: function add(key, event) {
         if (this.keys[key]) {
