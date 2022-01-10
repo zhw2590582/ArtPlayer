@@ -315,7 +315,9 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.seek = 10;
-    art.screenshot();
+    art.once('video:canplay', () => {
+        art.screenshot();
+    })
 });
 ```
 
