@@ -3,7 +3,8 @@ import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEve
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
     const { left } = $progress.getBoundingClientRect();
-    const width = clamp(event.pageX - left, 0, $progress.clientWidth);
+    const eventLeft = event.pageX || event.touches[0].clientX;
+    const width = clamp(eventLeft - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * art.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);
@@ -150,6 +151,26 @@ export default function progress(options) {
                 });
 
                 proxy(document, 'mouseup', () => {
+                    if (isDroging) {
+                        isDroging = false;
+                    }
+                });
+
+                proxy($indicator, 'touchstart', (event) => {
+                    if (event.touches.length === 1) {
+                        isDroging = true;
+                    }
+                });
+
+                proxy(document, 'touchmove', (event) => {
+                    if (event.touches.length === 1 && isDroging) {
+                        const { second, percentage } = getPosFromEvent(art, event);
+                        setBar('played', percentage);
+                        art.seek = second;
+                    }
+                });
+
+                proxy(document, 'touchend', () => {
                     if (isDroging) {
                         isDroging = false;
                     }

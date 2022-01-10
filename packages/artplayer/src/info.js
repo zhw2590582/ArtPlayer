@@ -1,4 +1,4 @@
-import { queryAll } from './utils';
+import { queryAll, isMobile } from './utils';
 import Component from './utils/component';
 
 export default class Info extends Component {
@@ -6,7 +6,9 @@ export default class Info extends Component {
         super(art);
         this.name = 'info';
         art.once('ready', () => {
-            this.init();
+            if (!isMobile) {
+                this.init();
+            }
         });
     }
 

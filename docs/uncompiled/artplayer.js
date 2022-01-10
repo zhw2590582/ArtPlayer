@@ -1248,8 +1248,9 @@
         return $video.currentTime || 0;
       },
       set: function set(time) {
-        // Fixed: The provided double value is non-finite
-        $video.currentTime = clamp(parseFloat(time.toFixed(3)), 0, art.duration);
+        time = parseFloat(time);
+        if (Number.isNaN(time)) return;
+        $video.currentTime = clamp(time, 0, art.duration);
       }
     });
   }
@@ -1458,7 +1459,7 @@
 
   /*!
   * screenfull
-  * v5.0.2 - 2020-02-13
+  * v5.2.0 - 2021-11-03
   * (c) Sindre Sorhus; MIT License
   */
 
@@ -1541,7 +1542,7 @@
   	};
 
   	var screenfull = {
-  		request: function (element) {
+  		request: function (element, options) {
   			return new Promise(function (resolve, reject) {
   				var onFullScreenEntered = function () {
   					this.off('change', onFullScreenEntered);
@@ -1552,7 +1553,7 @@
 
   				element = element || document.documentElement;
 
-  				var returnPromise = element[fn.requestFullscreen]();
+  				var returnPromise = element[fn.requestFullscreen](options);
 
   				if (returnPromise instanceof Promise) {
   					returnPromise.then(onFullScreenEntered).catch(reject);
@@ -1580,8 +1581,8 @@
   				}
   			}.bind(this));
   		},
-  		toggle: function (element) {
-  			return this.isFullscreen ? this.exit() : this.request(element);
+  		toggle: function (element, options) {
+  			return this.isFullscreen ? this.exit() : this.request(element, options);
   		},
   		onchange: function (callback) {
   			this.on('change', callback);
@@ -2779,7 +2780,8 @@
     var _$progress$getBoundin = $progress.getBoundingClientRect(),
         left = _$progress$getBoundin.left;
 
-    var width = clamp(event.pageX - left, 0, $progress.clientWidth);
+    var eventLeft = event.pageX || event.touches[0].clientX;
+    var width = clamp(eventLeft - left, 0, $progress.clientWidth);
     var second = width / $progress.clientWidth * art.duration;
     var time = secondToTime(second);
     var percentage = clamp(width / $progress.clientWidth, 0, 1);
@@ -2919,6 +2921,26 @@
             }
           });
           proxy(document, 'mouseup', function () {
+            if (isDroging) {
+              isDroging = false;
+            }
+          });
+          proxy($indicator, 'touchstart', function (event) {
+            if (event.touches.length === 1) {
+              isDroging = true;
+            }
+          });
+          proxy(document, 'touchmove', function (event) {
+            if (event.touches.length === 1 && isDroging) {
+              var _getPosFromEvent5 = getPosFromEvent(art, event),
+                  second = _getPosFromEvent5.second,
+                  percentage = _getPosFromEvent5.percentage;
+
+              setBar('played', percentage);
+              art.seek = second;
+            }
+          });
+          proxy(document, 'touchend', function () {
             if (isDroging) {
               isDroging = false;
             }
@@ -3493,51 +3515,61 @@
       _classCallCheck(this, Contextmenu);
 
       _this = _super.call(this, art);
+      _this.art = art;
       _this.name = 'contextmenu';
-      var option = art.option,
-          _art$template = art.template,
-          $player = _art$template.$player,
-          $contextmenu = _art$template.$contextmenu,
-          proxy = art.events.proxy;
-      _this.$parent = $contextmenu;
+      _this.$parent = art.template.$contextmenu;
       art.once('ready', function () {
-        _this.add(playbackRate$1({
+        if (!isMobile) {
+          _this.init();
+        }
+      });
+      return _this;
+    }
+
+    _createClass(Contextmenu, [{
+      key: "init",
+      value: function init() {
+        var _this2 = this;
+
+        var _this$art = this.art,
+            option = _this$art.option,
+            _this$art$template = _this$art.template,
+            $player = _this$art$template.$player,
+            $contextmenu = _this$art$template.$contextmenu,
+            proxy = _this$art.events.proxy;
+        this.add(playbackRate$1({
           disable: !option.playbackRate,
           name: 'playbackRate',
           index: 10
         }));
-
-        _this.add(aspectRatio$1({
+        this.add(aspectRatio$1({
           disable: !option.aspectRatio,
           name: 'aspectRatio',
           index: 20
         }));
-
-        _this.add(info({
+        this.add(info({
           disable: false,
           name: 'info',
           index: 30
         }));
-
-        _this.add(version({
+        this.add(version({
           disable: false,
           name: 'version',
           index: 40
         }));
-
-        _this.add(close({
+        this.add(close({
           disable: false,
           name: 'close',
           index: 60
         }));
 
         for (var index = 0; index < option.contextmenu.length; index++) {
-          _this.add(option.contextmenu[index]);
+          this.add(option.contextmenu[index]);
         }
 
         proxy($player, 'contextmenu', function (event) {
           event.preventDefault();
-          _this.show = true;
+          _this2.show = true;
           var mouseX = event.clientX;
           var mouseY = event.clientY;
 
@@ -3569,15 +3601,14 @@
         });
         proxy($player, 'click', function (event) {
           if (!includeFromEvent(event, $contextmenu)) {
-            _this.show = false;
+            _this2.show = false;
           }
         });
-        art.on('blur', function () {
-          _this.show = false;
+        this.art.on('blur', function () {
+          _this2.show = false;
         });
-      });
-      return _this;
-    }
+      }
+    }]);
 
     return Contextmenu;
   }(Component);
@@ -3599,7 +3630,9 @@
       _this = _super.call(this, art);
       _this.name = 'info';
       art.once('ready', function () {
-        _this.init();
+        if (!isMobile) {
+          _this.init();
+        }
       });
       return _this;
     }
@@ -3883,7 +3916,7 @@
           startX = event.touches[0].clientX;
         }
       });
-      events.proxy(document, 'touchmove', function (event) {
+      events.proxy($video, 'touchmove', function (event) {
         if (event.touches.length === 1 && isDroging) {
           var widthDiff = event.touches[0].clientX - startX;
           var proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
@@ -5009,7 +5042,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1641568645931';
+        return '1641776525362';
       }
     }, {
       key: "config",

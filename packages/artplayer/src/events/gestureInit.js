@@ -18,7 +18,7 @@ export default function gestureInit(art, events) {
             }
         });
 
-        events.proxy(document, 'touchmove', (event) => {
+        events.proxy($video, 'touchmove', (event) => {
             if (event.touches.length === 1 && isDroging) {
                 const widthDiff = event.touches[0].clientX - startX;
                 const proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
