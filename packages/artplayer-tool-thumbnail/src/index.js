@@ -18,7 +18,6 @@ class ArtplayerToolThumbnail extends Emitter {
 
     static get DEFAULTS() {
         return {
-            delay: 300,
             number: 60,
             width: 160,
             height: 90,
@@ -28,19 +27,19 @@ class ArtplayerToolThumbnail extends Emitter {
         };
     }
 
-    static ondragover(e) {
-        e.preventDefault();
+    static ondragover(event) {
+        event.preventDefault();
     }
 
-    ondrop(e) {
-        e.preventDefault();
-        const file = e.dataTransfer.files[0];
+    ondrop(event) {
+        event.preventDefault();
+        const file = event.dataTransfer.files[0];
         this.loadVideo(file);
     }
 
     setup(option = {}) {
         this.option = Object.assign({}, this.option, option);
-        const { fileInput, delay, number, width, height, column } = this.option;
+        const { fileInput, number, width, height, column } = this.option;
 
         this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
 
@@ -60,11 +59,10 @@ class ArtplayerToolThumbnail extends Emitter {
             this.option.fileInput = newFileInput;
         }
 
-        ['delay', 'number', 'width', 'height', 'column', 'begin', 'end'].forEach((item) => {
+        ['number', 'width', 'height', 'column', 'begin', 'end'].forEach((item) => {
             this.errorHandle(typeof this.option[item] === 'number', `The '${item}' is not a number`);
         });
 
-        this.option.delay = clamp(delay, 10, 1000);
         this.option.number = clamp(number, 10, 1000);
         this.option.width = clamp(width, 10, 1000);
         this.option.height = clamp(height, 10, 1000);
@@ -83,13 +81,13 @@ class ArtplayerToolThumbnail extends Emitter {
         return video;
     }
 
-    inputChange() {
+    inputChange(event) {
         const file = this.option.fileInput.files[0];
         this.loadVideo(file);
+        event.target.value = '';
     }
 
     loadVideo(file) {
-        const { delay } = this.option;
         if (file) {
             const canPlayType = this.video.canPlayType(file.type);
             this.errorHandle(
@@ -101,20 +99,13 @@ class ArtplayerToolThumbnail extends Emitter {
             this.file = file;
             this.emit('file', this.file);
             this.video.src = videoUrl;
-            sleep(delay)
-                .then(() => {
-                    this.emit('video', this.video);
-                })
-                .catch((err) => {
-                    this.emit('error', err.message);
-                    throw err;
-                });
+            this.emit('video', this.video);
         }
     }
 
     start() {
-        if (!this.video.duration) return sleep(1000).then(this.start);
-        const { width, height, number, delay, begin, end } = this.option;
+        if (!this.video.duration) return sleep(1000).then(() => this.start());
+        const { width, height, number, begin, end } = this.option;
         this.option.begin = clamp(begin, 0, this.video.duration);
         this.option.end = clamp(end || this.video.duration, begin, this.video.duration);
         this.errorHandle(this.option.end > this.option.begin, `End time must be greater than the start time`);
@@ -128,39 +119,28 @@ class ArtplayerToolThumbnail extends Emitter {
         const context2D = canvas.getContext('2d');
         this.emit('canvas', canvas);
         const promiseList = screenshotDate.map((item, index) => () => {
-            this.video.currentTime = item.time;
             return new Promise((resolve) => {
-                sleep(delay)
-                    .then(() => {
-                        context2D.drawImage(this.video, item.x, item.y, width, height);
-                        canvas.toBlob((blob) => {
-                            if (this.thumbnailUrl) {
-                                URL.revokeObjectURL(this.thumbnailUrl);
-                            }
-                            this.thumbnailUrl = URL.createObjectURL(blob);
-                            this.emit('update', this.thumbnailUrl, (index + 1) / number);
-                            resolve();
-                        });
-                    })
-                    .catch((err) => {
-                        throw err;
+                this.video.oncanplay = () => {
+                    context2D.drawImage(this.video, item.x, item.y, width, height);
+                    canvas.toBlob((blob) => {
+                        if (this.thumbnailUrl) {
+                            URL.revokeObjectURL(this.thumbnailUrl);
+                        }
+                        this.thumbnailUrl = URL.createObjectURL(blob);
+                        this.emit('update', this.thumbnailUrl, (index + 1) / number);
+                        this.video.oncanplay = null;
+                        resolve();
                     });
+                };
+                this.video.currentTime = item.time;
             });
         });
         this.processing = true;
         return runPromisesInSeries(promiseList)
-            .then(() =>
-                sleep(delay * 2)
-                    .then(() => {
-                        this.processing = false;
-                        this.emit('done');
-                    })
-                    .catch((err) => {
-                        this.processing = false;
-                        this.emit('error', err.message);
-                        throw err;
-                    }),
-            )
+            .then(() => {
+                this.processing = false;
+                this.emit('done');
+            })
             .catch((err) => {
                 this.processing = false;
                 this.emit('error', err.message);

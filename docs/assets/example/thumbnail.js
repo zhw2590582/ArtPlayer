@@ -9,7 +9,6 @@ var $artplayer = document.querySelector('.artplayer-app');
 $artplayer.innerHTML = 'Drop video file here or click to upload.';
 var thumbnail = new ArtplayerToolThumbnail({
     fileInput: $artplayer,
-    delay: 300, // 延迟
     number: 60, // 数量
     width: 160, // 宽度
     height: 90, // 高度
