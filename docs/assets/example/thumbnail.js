@@ -10,6 +10,8 @@ $artplayer.innerHTML = 'Drop video file here or click to upload.';
 var thumbnail = new ArtplayerToolThumbnail({
     fileInput: $artplayer,
     number: 60, // 数量
+    width: 160, // 宽度
+    height: 90, // 高度
     column: 10, // 列数
     begin: 0, // 开始
     end: NaN, // 结束
