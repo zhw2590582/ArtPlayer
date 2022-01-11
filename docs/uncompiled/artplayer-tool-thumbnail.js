@@ -235,7 +235,6 @@
             fileInput = _this$option.fileInput,
             number = _this$option.number,
             width = _this$option.width,
-            height = _this$option.height,
             column = _this$option.column;
         this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
 
@@ -255,12 +254,11 @@
           this.option.fileInput = newFileInput;
         }
 
-        ['number', 'width', 'height', 'column', 'begin', 'end'].forEach(function (item) {
+        ['number', 'width', 'column', 'begin', 'end'].forEach(function (item) {
           _this2.errorHandle(typeof _this2.option[item] === 'number', "The '".concat(item, "' is not a number"));
         });
         this.option.number = clamp(number, 10, 1000);
         this.option.width = clamp(width, 10, 1000);
-        this.option.height = clamp(height, 10, 1000);
         this.option.column = clamp(column, 1, 1000);
         return this;
       }
@@ -295,10 +293,11 @@
         });
         var _this$option2 = this.option,
             width = _this$option2.width,
-            height = _this$option2.height,
             number = _this$option2.number,
             begin = _this$option2.begin,
             end = _this$option2.end;
+        var height = this.video.videoHeight / this.video.videoWidth * width;
+        this.option.height = height;
         this.option.begin = clamp(begin, 0, this.video.duration);
         this.option.end = clamp(end || this.video.duration, begin, this.video.duration);
         this.errorHandle(this.option.end > this.option.begin, "End time must be greater than the start time");

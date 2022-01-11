@@ -39,7 +39,7 @@ class ArtplayerToolThumbnail extends Emitter {
 
     setup(option = {}) {
         this.option = Object.assign({}, this.option, option);
-        const { fileInput, number, width, height, column } = this.option;
+        const { fileInput, number, width, column } = this.option;
 
         this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
 
@@ -59,13 +59,12 @@ class ArtplayerToolThumbnail extends Emitter {
             this.option.fileInput = newFileInput;
         }
 
-        ['number', 'width', 'height', 'column', 'begin', 'end'].forEach((item) => {
+        ['number', 'width', 'column', 'begin', 'end'].forEach((item) => {
             this.errorHandle(typeof this.option[item] === 'number', `The '${item}' is not a number`);
         });
 
         this.option.number = clamp(number, 10, 1000);
         this.option.width = clamp(width, 10, 1000);
-        this.option.height = clamp(height, 10, 1000);
         this.option.column = clamp(column, 1, 1000);
         return this;
     }
@@ -105,7 +104,9 @@ class ArtplayerToolThumbnail extends Emitter {
 
     start() {
         if (!this.video.duration) return sleep(1000).then(() => this.start());
-        const { width, height, number, begin, end } = this.option;
+        const { width, number, begin, end } = this.option;
+        const height = (this.video.videoHeight / this.video.videoWidth) * width;
+        this.option.height = height;
         this.option.begin = clamp(begin, 0, this.video.duration);
         this.option.end = clamp(end || this.video.duration, begin, this.video.duration);
         this.errorHandle(this.option.end > this.option.begin, `End time must be greater than the start time`);
