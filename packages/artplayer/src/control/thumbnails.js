@@ -7,16 +7,19 @@ export default function thumbnails(options) {
         mounted: ($control) => {
             const {
                 option,
-                template: { $progress },
+                template: { $progress, $video },
                 events: { proxy, loadImg },
             } = art;
 
+            let image = null;
             let loading = false;
             let isLoad = false;
 
             function showThumbnails(event) {
                 const { width: posWidth } = getPosFromEvent(art, event);
-                const { url, height, width, number, column } = option.thumbnails;
+                const { url, number, column } = option.thumbnails;
+                const width = image.naturalWidth / column;
+                const height = width / ($video.videoWidth / $video.videoHeight);
                 const perWidth = $progress.clientWidth / number;
                 const perIndex = Math.floor(posWidth / perWidth);
                 const yIndex = Math.ceil(perIndex / column) - 1;
@@ -37,7 +40,8 @@ export default function thumbnails(options) {
             proxy($progress, 'mousemove', (event) => {
                 if (!loading) {
                     loading = true;
-                    loadImg(option.thumbnails.url).then(() => {
+                    loadImg(option.thumbnails.url).then((img) => {
+                        image = img;
                         isLoad = true;
                     });
                 }

@@ -156,8 +156,6 @@ export default class Artplayer extends Emitter {
             thumbnails: {
                 url: '',
                 number: 60,
-                width: 160,
-                height: 90,
                 column: 10,
             },
             subtitle: {

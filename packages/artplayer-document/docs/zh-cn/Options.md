@@ -923,8 +923,6 @@ var art = new Artplayer({
 | -------- | -------- | ---------- |
 | `url`    | `String` | 预览图地址 |
 | `number` | `Number` | 预览图数量 |
-| `width`  | `Number` | 预览图宽度 |
-| `height` | `Number` | 预览图高度 |
 | `column` | `Number` | 预览图列数 |
 
 <div className="run-code">▶ Run Code</div>
@@ -936,8 +934,6 @@ var art = new Artplayer({
     thumbnails: {
         url: '/assets/sample/thumbnails.png',
         number: 100,
-        width: 160,
-        height: 90,
         column: 10,
     },
 });

@@ -922,8 +922,6 @@ Set a preview map on the progress bar
 | -------- | -------- | -------------- |
 | `url`    | `String` | Preview url    |
 | `number` | `Number` | Preview number |
-| `width`  | `Number` | Preview width  |
-| `height` | `Number` | Preview height |
 | `column` | `Number` | Preview column |
 
 <div className="run-code">▶ Run Code</div>
@@ -935,8 +933,6 @@ var art = new Artplayer({
     thumbnails: {
         url: '/assets/sample/thumbnails.png',
         number: 100,
-        width: 160,
-        height: 90,
         column: 10,
     },
 });

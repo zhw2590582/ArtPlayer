@@ -387,16 +387,6 @@ type Option = {
         number?: number;
 
         /**
-         * The thumbnail item width
-         */
-        width?: number;
-
-        /**
-         * The thumbnail item height
-         */
-        height?: number;
-
-        /**
          * The thumbnail column size
          */
         column?: number;

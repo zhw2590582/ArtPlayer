@@ -77,8 +77,6 @@ var art = new Artplayer({
     thumbnails: {
         url: '/assets/sample/thumbnails.png',
         number: 100,
-        width: 160,
-        height: 90,
         column: 10,
     },
     subtitle: {

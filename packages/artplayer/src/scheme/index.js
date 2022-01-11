@@ -95,8 +95,6 @@ export default {
     thumbnails: {
         url: s,
         number: n,
-        width: n,
-        height: n,
         column: n,
     },
     subtitle: {
