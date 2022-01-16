@@ -3,7 +3,7 @@ import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEve
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
     const { left } = $progress.getBoundingClientRect();
-    const eventLeft = event.pageX || event.touches[0].clientX;
+    const eventLeft = typeof event.pageX === 'number' ? event.pageX : event.touches[0].clientX;
     const width = clamp(eventLeft - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * art.duration;
     const time = secondToTime(second);
