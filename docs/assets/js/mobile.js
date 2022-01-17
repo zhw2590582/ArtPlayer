@@ -8,7 +8,7 @@ var art = new Artplayer({
     autoSize: true,
     loop: true,
     mutex: true,
-    theme: '#ffad00',
+    theme: '#ff0057',
     fullscreen: true,
     fullscreenWeb: true,
     miniProgressBar: true,
@@ -41,8 +41,9 @@ var art = new Artplayer({
         },
     ],
     icons: {
-        loading: '<img src="./assets/img/ploading.gif">',
-        state: '<img src="./assets/img/state.svg">',
+        indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
+        loading: '<img src="/assets/img/ploading.gif">',
+        state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
     },
     plugins: [
         artplayerPluginDanmuku({

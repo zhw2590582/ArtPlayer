@@ -298,4 +298,11 @@
             display: none !important;
         }
     }
+
+    &.art-mobile {
+        .art-progress-indicator {
+            transform: scale(1, 1) !important;
+            visibility: visible !important;
+        }
+    }
 }

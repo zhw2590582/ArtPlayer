@@ -143,7 +143,7 @@ export default class Template {
         }
 
         if (isMobile) {
-            addClass(this.$container, 'art-mobile');
+            addClass(this.$player, 'art-mobile');
         }
     }
 
