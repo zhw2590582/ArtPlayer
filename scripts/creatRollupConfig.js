@@ -9,7 +9,6 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const replace = require('@rollup/plugin-replace');
 const svgo = require('rollup-plugin-svgo');
-const { sizeSnapshot } = require('rollup-plugin-size-snapshot');
 const { terser } = require('rollup-plugin-terser');
 const copyAfterBuild = require('./copyAfterBuild');
 const removeHtmlSpace = require('./removeHtmlSpace');
@@ -85,7 +84,6 @@ module.exports = function creatRollupConfig(projectPath) {
                 __VERSION__: version,
                 __BUILD__: Date.now(),
             }),
-            isProd && sizeSnapshot(),
             isProd && removeHtmlSpace(),
             isProd &&
                 terser({
