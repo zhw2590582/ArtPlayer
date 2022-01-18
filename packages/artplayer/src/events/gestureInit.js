@@ -22,7 +22,7 @@ export default function gestureInit(art, events) {
             if (event.touches.length === 1 && isDroging) {
                 const widthDiff = event.touches[0].clientX - startX;
                 const proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
-                currentTime = clamp(art.currentTime + 60 * proportion, 0, art.duration);
+                currentTime = clamp(art.currentTime + art.duration * proportion, 0, art.duration);
                 notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
             }
         });
