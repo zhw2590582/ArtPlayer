@@ -1,5 +1,5 @@
 import React from 'react';
-import Artplayer from '../../';
+import Artplayer from 'artplayer';
 
 export default class ArtplayerReact extends React.Component {
     constructor(props) {

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Artplayer from '../../';
+import Artplayer from 'artplayer';
 
 export default {
     data() {
