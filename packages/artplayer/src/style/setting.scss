@@ -10,35 +10,43 @@
         max-height: 300px;
         overflow: auto;
         font-size: 13px;
-        padding: 5px 0;
         background-color: rgba(0, 0, 0, 0.9);
         transition: all 0.1s ease;
-
-        .art-setting-item-header {
-            display: flex;
-            align-items: center;
-            height: 35px;
-            line-height: 1;
-            padding-left: 5px;
-            cursor: pointer;
-
-            .art-icon {
-                width: 30px;
-                height: 30px;
-            }
-        }
 
         .art-setting-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 35px;
-            padding: 0 5px 0 15px;
+            padding: 0 5px 0 0;
             line-height: 1;
             cursor: pointer;
 
             &:hover {
                 background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .art-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+            }
+
+            .art-icon-arrowLeft {
+                width: 35px;
+                height: 30px;
+            }
+
+            .art-icon-check {
+                visibility: hidden;
+                width: 35px;
+                height: 15px;
+            }
+
+            &.art-current .art-icon-check {
+                visibility: visible;
             }
 
             .art-setting-item-left {
@@ -51,12 +59,11 @@
                 display: flex;
                 align-items: center;
                 color: rgba(255, 255, 255, 0.95);
-
-                .art-icon {
-                    width: 30px;
-                    height: 30px;
-                }
             }
+        }
+
+        .art-setting-item-back {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
 

@@ -22,6 +22,22 @@ export default function playbackRate(art) {
                         html: '444',
                         click: () => console.log(4),
                     },
+                    {
+                        html: '333',
+                        click: () => console.log(3),
+                    },
+                    {
+                        html: '444',
+                        click: () => console.log(4),
+                    },
+                    {
+                        html: '333',
+                        click: () => console.log(3),
+                    },
+                    {
+                        html: '444',
+                        click: () => console.log(4),
+                    },
                 ],
             },
         ],
