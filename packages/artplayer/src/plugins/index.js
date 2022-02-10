@@ -1,6 +1,4 @@
 import { errorHandle, has, def } from '../utils';
-import localVideo from './localVideo';
-import localSubtitle from './localSubtitle';
 import miniProgressBar from './miniProgressBar';
 
 export default class Plugins {
@@ -12,14 +10,6 @@ export default class Plugins {
 
         if (!option.isLive && option.miniProgressBar) {
             this.add(miniProgressBar);
-        }
-
-        if (option.localVideo) {
-            this.add(localVideo);
-        }
-
-        if (option.localSubtitle) {
-            this.add(localSubtitle);
         }
 
         for (let index = 0; index < option.plugins.length; index++) {

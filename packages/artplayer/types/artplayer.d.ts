@@ -223,11 +223,6 @@ type Option = {
     flip?: boolean;
 
     /**
-     * Whether show video rotate button
-     */
-    rotate?: boolean;
-
-    /**
      * Whether show video playback rate button
      */
     playbackRate?: boolean;
