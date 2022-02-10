@@ -1,8 +1,9 @@
 import Component from '../utils/component';
 import { append, addClass, setStyle, inverseClass } from '../utils/dom';
-import playbackRate from './playbackRate';
-import aspectRatio from './aspectRatio';
+
 import flip from './flip';
+import aspectRatio from './aspectRatio';
+import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 
 function makeRecursion(option) {
@@ -35,8 +36,8 @@ export default class Setting extends Component {
         this.art = art;
         this.name = 'setting';
         this.$parent = $setting;
-        this.events = [];
         this.option = [];
+        this.cache = new Map();
 
         if (option.setting) {
             if (option.playbackRate) {
@@ -73,7 +74,11 @@ export default class Setting extends Component {
         const $left = append($item, `<div class="art-setting-item-left"></div>`);
         const $right = append($item, `<div class="art-setting-item-right"></div>`);
 
-        const { icons } = this.art;
+        const {
+            icons,
+            events: { proxy },
+        } = this.art;
+
         addClass($item, 'art-setting-item');
         const hasItems = item.items && item.items.length;
 
@@ -98,7 +103,7 @@ export default class Setting extends Component {
             append($right, icons.arrowRight);
         }
 
-        const callback = (event) => {
+        proxy($item, 'click', (event) => {
             if (typeof item.click === 'function') {
                 item.click.call(this, event);
             }
@@ -115,10 +120,7 @@ export default class Setting extends Component {
                 item.current = true;
                 inverseClass($item, 'art-current');
             }
-        };
-
-        $item.addEventListener('click', callback);
-        this.events.push(() => $item.removeEventListener('click', callback));
+        });
 
         return $item;
     }
@@ -131,18 +133,21 @@ export default class Setting extends Component {
     }
 
     init(option) {
-        for (let index = 0; index < this.events.length; index++) {
-            this.events[index]();
+        if (this.cache.has(option)) {
+            const $panel = this.cache.get(option);
+            inverseClass($panel, 'art-current');
+        } else {
+            const $panel = document.createElement('div');
+            addClass($panel, 'art-setting-panel');
+            for (let index = 0; index < option.length; index++) {
+                const item = option[index];
+                const $item = this.creatItem(item, option);
+                append($panel, $item);
+            }
+            append(this.$parent, $panel);
+            this.cache.set(option, $panel);
+            inverseClass($panel, 'art-current');
         }
-
-        this.events = [];
-        this.$parent.innerHTML = '';
         setStyle(this.$parent, 'width', '200px');
-
-        for (let index = 0; index < option.length; index++) {
-            const item = option[index];
-            const $item = this.creatItem(item, option);
-            append(this.$parent, $item);
-        }
     }
 }

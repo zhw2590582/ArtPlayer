@@ -13,51 +13,59 @@
         transition: all 0.2s ease;
         background-color: rgba(0, 0, 0, 0.9);
 
-        .art-setting-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 35px;
-            padding: 0 5px;
-            line-height: 1;
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.8);
+        .art-setting-panel {
+            display: none;
 
-            &:hover {
-                color: rgba(255, 255, 255, 0.95);
-                background-color: rgba(255, 255, 255, 0.1);
+            &.art-current {
+                display: block;
             }
 
-            .art-icon {
+            .art-setting-item {
                 display: flex;
-                justify-content: center;
+                justify-content: space-between;
                 align-items: center;
-                width: 30px;
-                height: 30px;
+                height: 35px;
+                padding: 0 5px;
+                line-height: 1;
+                cursor: pointer;
+                color: rgba(255, 255, 255, 0.8);
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.95);
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+
+                .art-icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 30px;
+                    height: 30px;
+                }
+
+                .art-icon-check {
+                    visibility: hidden;
+                    height: 15px;
+                }
+
+                &.art-current .art-icon-check {
+                    visibility: visible;
+                }
+
+                .art-setting-item-left {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .art-setting-item-right {
+                    display: flex;
+                    align-items: center;
+                }
             }
 
-            .art-icon-check {
-                visibility: hidden;
-                height: 15px;
+            .art-setting-item-back {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
-
-            &.art-current .art-icon-check {
-                visibility: visible;
-            }
-
-            .art-setting-item-left {
-                display: flex;
-                align-items: center;
-            }
-
-            .art-setting-item-right {
-                display: flex;
-                align-items: center;
-            }
-        }
-
-        .art-setting-item-back {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
 
