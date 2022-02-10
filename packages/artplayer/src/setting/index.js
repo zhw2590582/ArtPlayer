@@ -1,10 +1,13 @@
 import Component from '../utils/component';
+import { append, addClass } from '../utils/dom';
+
 import playbackRate from './playbackRate';
 
 export default class Setting extends Component {
     constructor(art) {
         super(art);
 
+        this.art = art;
         this.name = 'setting';
 
         const {
@@ -17,6 +20,8 @@ export default class Setting extends Component {
         if (option.setting) {
             art.once('ready', () => {
                 this.add(playbackRate(art));
+                this.add(playbackRate(art));
+                this.add(playbackRate(art));
             });
 
             art.on('blur', () => {
@@ -25,7 +30,18 @@ export default class Setting extends Component {
         }
     }
 
+    creatItme(item) {
+        const { icons } = this.art;
+        const $item = document.createElement('div');
+        addClass($item, 'art-setting-item');
+        append($item, `<div class="art-setting-item-left">${item.html}</div>`);
+        const $right = append($item, `<div class="art-setting-item-right"></div>`);
+        append($right, icons.arrowRight);
+        return $item;
+    }
+
     add(option) {
-        console.log(option);
+        const $item = this.creatItme(option);
+        append(this.$parent, $item);
     }
 }
