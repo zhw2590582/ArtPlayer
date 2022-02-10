@@ -1,5 +1,4 @@
 import { errorHandle, has, def } from '../utils';
-import subtitleOffset from './subtitleOffset';
 import localVideo from './localVideo';
 import localSubtitle from './localSubtitle';
 import miniProgressBar from './miniProgressBar';
@@ -10,10 +9,6 @@ export default class Plugins {
         this.id = 0;
 
         const { option } = art;
-
-        if (option.subtitle.url && option.subtitleOffset) {
-            this.add(subtitleOffset);
-        }
 
         if (!option.isLive && option.miniProgressBar) {
             this.add(miniProgressBar);

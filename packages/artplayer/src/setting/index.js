@@ -3,6 +3,7 @@ import { append, addClass, setStyle, inverseClass } from '../utils/dom';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
 import flip from './flip';
+import subtitleOffset from './subtitleOffset';
 
 function makeRecursion(option) {
     if (!option) return option;
@@ -48,6 +49,10 @@ export default class Setting extends Component {
 
             if (option.flip) {
                 this.option.push(flip(art));
+            }
+
+            if (option.subtitleOffset) {
+                this.option.push(subtitleOffset(art));
             }
 
             this.option = makeRecursion(this.option);
@@ -119,6 +124,7 @@ export default class Setting extends Component {
     }
 
     add(callback) {
+        console.log(callback);
         this.option.push(callback(this.art));
         this.option = makeRecursion(this.option);
         this.init(this.option);

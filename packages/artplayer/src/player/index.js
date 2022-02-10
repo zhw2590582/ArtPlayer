@@ -28,6 +28,7 @@ import autoHeightMix from './autoHeightMix';
 import themeMix from './themeMix';
 import titleMix from './titleMix';
 import exclusiveMix from './exclusiveMix';
+import subtitleOffsetMix from './subtitleOffsetMix';
 import optionInit from './optionInit';
 import eventInit from './eventInit';
 
@@ -63,6 +64,7 @@ export default class Player {
         themeMix(art);
         titleMix(art);
         exclusiveMix(art);
+        subtitleOffsetMix(art);
         eventInit(art);
         optionInit(art);
     }
