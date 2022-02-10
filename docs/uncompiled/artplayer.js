@@ -982,7 +982,7 @@
   	"Fullscreen not supported": "不支持全屏模式",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地视频",
-  	"Subtitle offset time": "字幕偏移时间",
+  	"Subtitle offset time": "字幕偏移",
   	"No subtitles found": "未发现字幕"
   };
 
@@ -1041,7 +1041,7 @@
   	"Fullscreen not supported": "不支持全屏模式",
   	"Local Subtitle": "本地字幕",
   	"Local Video": "本地視頻",
-  	"Subtitle offset time": "字幕偏移時間",
+  	"Subtitle offset time": "字幕偏移",
   	"No subtitles found": "未發現字幕"
   };
 
@@ -2269,6 +2269,47 @@
     });
   }
 
+  function subtitleOffsetMix(art) {
+    var clamp = art.constructor.utils.clamp;
+    var notice = art.notice,
+        template = art.template,
+        i18n = art.i18n,
+        subtitle = art.subtitle;
+    var cuesCache = [];
+    art.on('subtitle:switch', function () {
+      cuesCache = [];
+    });
+    def(art, 'subtitleOffset', {
+      set: function set(value) {
+        if (template.$track && template.$track.track) {
+          var cues = Array.from(template.$track.track.cues);
+          var time = clamp(value, -5, 5);
+
+          for (var index = 0; index < cues.length; index++) {
+            var cue = cues[index];
+
+            if (!cuesCache[index]) {
+              cuesCache[index] = {
+                startTime: cue.startTime,
+                endTime: cue.endTime
+              };
+            }
+
+            cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
+            cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
+          }
+
+          subtitle.update();
+          notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
+          art.emit('subtitleOffset', value);
+        } else {
+          notice.show = "".concat(i18n.get('No subtitles found'));
+          art.emit('subtitleOffset', 0);
+        }
+      }
+    });
+  }
+
   function attrInit(art) {
     var option = art.option,
         storage = art.storage,
@@ -2464,6 +2505,7 @@
     themeMix(art);
     titleMix(art);
     exclusiveMix(art);
+    subtitleOffsetMix(art);
     eventInit(art);
     attrInit(art);
   };
@@ -4372,6 +4414,23 @@
     };
   }
 
+  function subtitleOffset(art) {
+    var i18n = art.i18n;
+    return {
+      width: 150,
+      html: i18n.get('Subtitle offset time'),
+      items: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
+        return {
+          html: item === 0 ? i18n.get('Normal') : item,
+          current: item === 0,
+          click: function click() {
+            art.subtitleOffset = item;
+          }
+        };
+      })
+    };
+  }
+
   function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
   function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
@@ -4428,6 +4487,10 @@
 
         if (option.flip) {
           _this.option.push(playbackRate(art));
+        }
+
+        if (option.subtitleOffset) {
+          _this.option.push(subtitleOffset(art));
         }
 
         _this.option = makeRecursion(_this.option);
@@ -4507,6 +4570,7 @@
     }, {
       key: "add",
       value: function add(callback) {
+        console.log(callback);
         this.option.push(callback(this.art));
         this.option = makeRecursion(this.option);
         this.init(this.option);
@@ -4585,81 +4649,6 @@
 
     return Storage;
   }();
-
-  function settingMix(art) {
-    var i18n = art.i18n,
-        subtitle = art.subtitle,
-        proxy = art.events.proxy;
-    return {
-      title: 'Subtitle',
-      name: 'subtitleOffset',
-      index: 20,
-      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Subtitle offset time'), ": <span class=\"art-subtitle-value\">0</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input class=\"art-subtitle-range\" value=\"0\" type=\"range\" min=\"-5\" max=\"5\" step=\"0.5\">\n            </div>\n        "),
-      mounted: function mounted($setting) {
-        var $range = query('.art-setting-range input', $setting);
-        var $value = query('.art-subtitle-value', $setting);
-        proxy($range, 'change', function () {
-          var value = $range.value;
-          $value.innerText = value;
-          art.plugins.subtitleOffset.offset(Number(value));
-        });
-        art.on('subtitle:switch', function () {
-          $range.value = 0;
-          $value.innerText = 0;
-        });
-        art.on('subtitleOffset', function (value) {
-          subtitle.update();
-
-          if ($range.value !== value) {
-            $range.value = value;
-            $value.innerText = value;
-          }
-        });
-      }
-    };
-  }
-
-  function subtitleOffset(art) {
-    var clamp = art.constructor.utils.clamp;
-    var setting = art.setting,
-        notice = art.notice,
-        template = art.template,
-        i18n = art.i18n;
-    setting.add(settingMix);
-    var cuesCache = [];
-    art.on('subtitle:switch', function () {
-      cuesCache = [];
-    });
-    return {
-      name: 'subtitleOffset',
-      offset: function offset(value) {
-        if (template.$track && template.$track.track) {
-          var cues = Array.from(template.$track.track.cues);
-          var time = clamp(value, -5, 5);
-
-          for (var index = 0; index < cues.length; index++) {
-            var cue = cues[index];
-
-            if (!cuesCache[index]) {
-              cuesCache[index] = {
-                startTime: cue.startTime,
-                endTime: cue.endTime
-              };
-            }
-
-            cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
-            cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
-          }
-
-          notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
-          art.emit('subtitleOffset', value);
-        } else {
-          notice.show = "".concat(i18n.get('No subtitles found'));
-          art.emit('subtitleOffset', 0);
-        }
-      }
-    };
-  }
 
   function localVideo(art) {
     var proxy = art.events.proxy,
@@ -4833,10 +4822,6 @@
       this.art = art;
       this.id = 0;
       var option = art.option;
-
-      if (option.subtitle.url && option.subtitleOffset) {
-        this.add(subtitleOffset);
-      }
 
       if (!option.isLive && option.miniProgressBar) {
         this.add(miniProgressBar);
