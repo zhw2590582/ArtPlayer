@@ -1,6 +1,8 @@
 import Component from '../utils/component';
 import { append, addClass, setStyle, inverseClass } from '../utils/dom';
 import playbackRate from './playbackRate';
+import aspectRatio from './aspectRatio';
+import flip from './flip';
 
 function makeRecursion(option) {
     if (!option) return option;
@@ -35,7 +37,7 @@ export default class Setting extends Component {
         this.events = [];
 
         if (option.setting) {
-            this.option = makeRecursion([playbackRate(art), playbackRate(art), playbackRate(art)]);
+            this.option = makeRecursion([playbackRate(art), aspectRatio(art), flip(art)]);
 
             art.once('ready', () => {
                 this.init(this.option);

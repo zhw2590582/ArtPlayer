@@ -933,7 +933,7 @@
   var Pause$1 = "暂停";
   var Rate$1 = "速度";
   var Mute$1 = "静音";
-  var Flip$1 = "翻转";
+  var Flip$1 = "画面翻转";
   var Rotate$1 = "旋转";
   var Horizontal$1 = "水平";
   var Vertical$1 = "垂直";
@@ -992,7 +992,7 @@
   var Pause = "暫停";
   var Rate = "速度";
   var Mute = "靜音";
-  var Flip = "翻轉";
+  var Flip = "畫面翻轉";
   var Rotate = "旋轉";
   var Horizontal = "水平";
   var Vertical = "垂直";
@@ -3400,7 +3400,7 @@
   function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function playbackRate$1(option) {
+  function playbackRate$2(option) {
     return function (art) {
       var i18n = art.i18n;
       return _objectSpread$6(_objectSpread$6({}, option), {}, {
@@ -3431,7 +3431,7 @@
   function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  function aspectRatio(option) {
+  function aspectRatio$1(option) {
     return function (art) {
       var i18n = art.i18n;
       return _objectSpread$5(_objectSpread$5({}, option), {}, {
@@ -3537,12 +3537,12 @@
             $player = _this$art$template.$player,
             $contextmenu = _this$art$template.$contextmenu,
             proxy = _this$art.events.proxy;
-        this.add(playbackRate$1({
+        this.add(playbackRate$2({
           disable: !option.playbackRate,
           name: 'playbackRate',
           index: 10
         }));
-        this.add(aspectRatio({
+        this.add(aspectRatio$1({
           disable: !option.aspectRatio,
           name: 'aspectRatio',
           index: 20
@@ -4316,7 +4316,7 @@
     });
   };
 
-  function playbackRate(art) {
+  function playbackRate$1(art) {
     var i18n = art.i18n;
     return {
       width: 150,
@@ -4326,6 +4326,43 @@
           html: item === 1.0 ? i18n.get('Normal') : item,
           click: function click() {
             art.playbackRate = item;
+          }
+        };
+      })
+    };
+  }
+
+  function aspectRatio(art) {
+    var i18n = art.i18n;
+    return {
+      width: 150,
+      html: i18n.get('Aspect ratio'),
+      items: ['default', '4:3', '16:9'].map(function (item) {
+        return {
+          html: item === 'default' ? i18n.get('Default') : item,
+          click: function click() {
+            art.aspectRatio = item;
+          }
+        };
+      })
+    };
+  }
+
+  function playbackRate(art) {
+    var i18n = art.i18n;
+    var keys = {
+      normal: 'Normal',
+      horizontal: 'Horizontal',
+      vertical: 'Vertical'
+    };
+    return {
+      width: 150,
+      html: i18n.get('Flip'),
+      items: Object.keys(keys).map(function (key) {
+        return {
+          html: i18n.get(keys[key]),
+          click: function click() {
+            art.flip = key;
           }
         };
       })
@@ -4377,7 +4414,7 @@
       _this.events = [];
 
       if (option.setting) {
-        _this.option = makeRecursion([playbackRate(art), playbackRate(art), playbackRate(art)]);
+        _this.option = makeRecursion([playbackRate$1(art), aspectRatio(art), playbackRate(art)]);
         art.once('ready', function () {
           _this.init(_this.option);
         });
