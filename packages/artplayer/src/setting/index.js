@@ -31,12 +31,26 @@ export default class Setting extends Component {
     }
 
     creatItme(item) {
-        const { icons } = this.art;
+        const {
+            icons,
+            events: { proxy },
+        } = this.art;
+
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
         append($item, `<div class="art-setting-item-left">${item.html}</div>`);
         const $right = append($item, `<div class="art-setting-item-right"></div>`);
-        append($right, icons.arrowRight);
+
+        if (item.items && item.items.length) {
+            append($right, icons.arrowRight);
+        }
+
+        if (typeof item.click === 'function') {
+            proxy($item, 'click', (event) => {
+                item.click.call(this.art, event);
+            });
+        }
+
         return $item;
     }
 
