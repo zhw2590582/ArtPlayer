@@ -118,7 +118,7 @@ export default class Setting extends Component {
 
         proxy($item, 'click', (event) => {
             if (typeof item.click === 'function') {
-                item.click.call(this, event);
+                item.click.call(this.art, this, event);
             }
 
             if (hasItems) {

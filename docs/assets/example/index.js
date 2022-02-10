@@ -29,12 +29,22 @@ var art = new Artplayer({
     },
     settings: [
         {
-            index: 1,
             html: 'Custom setting',
-            click: function (setting) {
-                console.info('You clicked on the custom setting');
-                setting.show = false;
-            },
+            width: 250,
+            items: [
+                {
+                    html: 'Custom setting 01',
+                    click: function () {
+                        console.info('You clicked on the custom setting 01');
+                    },
+                },
+                {
+                    html: 'Custom setting 02',
+                    click: function () {
+                        console.info('You clicked on the custom setting 02');
+                    },
+                },
+            ],
         },
     ],
     contextmenu: [

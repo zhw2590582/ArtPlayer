@@ -4488,7 +4488,7 @@
 
         proxy($item, 'click', function (event) {
           if (typeof item.click === 'function') {
-            item.click.call(_this2, event);
+            item.click.call(_this2.art, _this2, event);
           }
 
           if (hasItems) {
