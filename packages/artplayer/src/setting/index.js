@@ -16,12 +16,12 @@ export default class Setting extends Component {
         } = art;
 
         this.$parent = $setting;
+        this.events = [];
 
         if (option.setting) {
             art.once('ready', () => {
-                this.add(playbackRate(art));
-                this.add(playbackRate(art));
-                this.add(playbackRate(art));
+                this.option = [playbackRate(art), playbackRate(art), playbackRate(art)];
+                this.init(this.option);
             });
 
             art.on('blur', () => {
@@ -31,10 +31,7 @@ export default class Setting extends Component {
     }
 
     creatItme(item) {
-        const {
-            icons,
-            events: { proxy },
-        } = this.art;
+        const { icons } = this.art;
 
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
@@ -45,17 +42,32 @@ export default class Setting extends Component {
             append($right, icons.arrowRight);
         }
 
-        if (typeof item.click === 'function') {
-            proxy($item, 'click', (event) => {
-                item.click.call(this.art, event);
-            });
-        }
+        const callback = (event) => {
+            if (typeof item.click === 'function') {
+                item.click.call(this, event);
+            }
+            if (item.items && item.items.length) {
+                this.init(item.items);
+            }
+        };
+
+        $item.addEventListener('click', callback);
+        this.events.push(() => $item.removeEventListener('click', callback));
 
         return $item;
     }
 
-    add(option) {
-        const $item = this.creatItme(option);
-        append(this.$parent, $item);
+    init(option = []) {
+        for (let index = 0; index < this.events.length; index++) {
+            this.events[index]();
+        }
+
+        this.events = [];
+        this.$parent.innerHTML = '';
+
+        for (let index = 0; index < option.length; index++) {
+            const $item = this.creatItme(option[index]);
+            append(this.$parent, $item);
+        }
     }
 }

@@ -4362,14 +4362,13 @@
       var option = art.option,
           $setting = art.template.$setting;
       _this.$parent = $setting;
+      _this.events = [];
 
       if (option.setting) {
         art.once('ready', function () {
-          _this.add(playbackRate(art));
+          _this.option = [playbackRate(art), playbackRate(art), playbackRate(art)];
 
-          _this.add(playbackRate(art));
-
-          _this.add(playbackRate(art));
+          _this.init(_this.option);
         });
         art.on('blur', function () {
           _this.show = false;
@@ -4384,9 +4383,7 @@
       value: function creatItme(item) {
         var _this2 = this;
 
-        var _this$art = this.art,
-            icons = _this$art.icons,
-            proxy = _this$art.events.proxy;
+        var icons = this.art.icons;
         var $item = document.createElement('div');
         addClass($item, 'art-setting-item');
         append($item, "<div class=\"art-setting-item-left\">".concat(item.html, "</div>"));
@@ -4396,19 +4393,38 @@
           append($right, icons.arrowRight);
         }
 
-        if (typeof item.click === 'function') {
-          proxy($item, 'click', function (event) {
-            item.click.call(_this2.art, event);
-          });
-        }
+        var callback = function callback(event) {
+          if (typeof item.click === 'function') {
+            item.click.call(_this2, event);
+          }
 
+          if (item.items && item.items.length) {
+            _this2.init(item.items);
+          }
+        };
+
+        $item.addEventListener('click', callback);
+        this.events.push(function () {
+          return $item.removeEventListener('click', callback);
+        });
         return $item;
       }
     }, {
-      key: "add",
-      value: function add(option) {
-        var $item = this.creatItme(option);
-        append(this.$parent, $item);
+      key: "init",
+      value: function init() {
+        var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+        for (var index = 0; index < this.events.length; index++) {
+          this.events[index]();
+        }
+
+        this.events = [];
+        this.$parent.innerHTML = '';
+
+        for (var _index = 0; _index < option.length; _index++) {
+          var $item = this.creatItme(option[_index]);
+          append(this.$parent, $item);
+        }
       }
     }]);
 
