@@ -56,6 +56,10 @@ export default class Setting extends Component {
                 this.option.push(subtitleOffset(art));
             }
 
+            for (let index = 0; index < option.settings.length; index++) {
+                this.option.push(option.settings[index]);
+            }
+
             this.option = makeRecursion(this.option);
 
             art.once('ready', () => {

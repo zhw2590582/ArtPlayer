@@ -251,25 +251,6 @@ var art = new Artplayer({
 });
 ```
 
-## rotate
-
--   类型: `Boolean`
--   默认: `false`
-
-是否显示视频旋转功能，需要同时设置 `setting` 和 `autoSize` 为 `true`
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    rotate: true,
-    setting: true,
-    autoSize: true,
-});
-```
-
 ## playbackRate
 
 -   类型: `Boolean`
@@ -487,60 +468,6 @@ var art = new Artplayer({
 });
 ```
 
-## localVideo
-
--   类型: `Boolean`
--   默认: `false`
-
-打开本地视频，需要使用`art.plugins.localVideo.attach`方法挂载打开视频按钮
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    localVideo: true,
-    controls: [
-        {
-            name: 'preview',
-            position: 'right',
-            html: '打开视频',
-            mounted: ($preview) => {
-                art.plugins.localVideo.attach($preview);
-            },
-        },
-    ],
-});
-```
-
-## localSubtitle
-
--   类型: `Boolean`
--   默认: `false`
-
-打开本地字幕，需要使用`art.plugins.localSubtitle.attach`方法挂载打开字幕按钮
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    localSubtitle: true,
-    controls: [
-        {
-            name: 'preview',
-            position: 'right',
-            html: '打开字幕',
-            mounted: ($preview) => {
-                art.plugins.localSubtitle.attach($preview);
-            },
-        },
-    ],
-});
-```
-
 ## useSSR
 
 -   类型: `Boolean`
@@ -623,18 +550,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的设置面板
-
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
+初始化自定义的设置面板，更多信息请访问 [怎么添加设置面板](/document/zh-cn/Questions/)
 
 <div className="run-code">▶ Run Code</div>
 
@@ -645,30 +561,21 @@ var art = new Artplayer({
     setting: true,
     settings: [
         {
-            disable: false,
-            name: 'button',
-            index: 10,
-            html: '自定义按钮',
-            tooltip: '自定义按钮的提示1',
-            style: {
-                color: 'red',
-            },
-            click: function () {
-                console.log('你点击了自定义按钮1');
-            },
-            mounted: function () {
-                console.log('自定义按钮挂载完成1');
-            },
-        },
-        {
-            html: '自定义按钮2',
-            tooltip: '自定义按钮的提示2',
-            style: {
-                color: 'green',
-            },
-            click: function () {
-                console.log('你点击了自定义按钮2');
-            },
+            html: '自定义设置01',
+            items: [
+                {
+                    html: '子菜单01',
+                    click: function() {
+                        console.log('你点击了子菜单01');
+                    }
+                },
+                {
+                    html: '子菜单02',
+                    click: function() {
+                        console.log('你点击了子菜单01');
+                    }
+                },
+            ]
         },
     ],
 });
