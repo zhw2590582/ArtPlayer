@@ -738,46 +738,6 @@ art.on('ready', () => {
 });
 ```
 
-### add
-
--   Type: `Function`
-
-Method `add` can dynamically add a setting items
-
-| Property  | Type                | Description                                                   |
-| --------- | ------------------- | ------------------------------------------------------------- |
-| `disable` | `Boolean`           | Whether to disable the component                              |
-| `name`    | `String`            | The unique name of the component, used to mark the class name |
-| `index`   | `Number`            | Component index, priority for display                         |
-| `html`    | `String`、`Element` | DOM element of the component                                  |
-| `style`   | `Object`            | Component style object                                        |
-| `click`   | `Function`          | Component click event                                         |
-| `mounted` | `Function`          | Triggered after the component is mounted                      |
-| `tooltip` | `String`            | Prompt text of the component                                  |
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    setting: true,
-    autoSize: true,
-});
-
-art.on('ready', () => {
-    art.seek = 20;
-    art.setting.show = true;
-    art.setting.add({
-        html: 'Custom setting',
-        click: function () {
-            console.info('You click on custom settings');
-            art.setting.show = false;
-        },
-    });
-});
-```
-
 ## plugins
 
 -   Type: `Object`

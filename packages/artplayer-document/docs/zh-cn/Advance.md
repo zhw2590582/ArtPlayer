@@ -730,46 +730,6 @@ art.on('ready', () => {
 });
 ```
 
-### add
-
--   类型: `Function`
-
-方法 `add` 可以动态添加设置项
-
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    setting: true,
-    autoSize: true,
-});
-
-art.on('ready', () => {
-    art.seek = 20;
-    art.setting.show = true;
-    art.setting.add({
-        html: '自定义设置',
-        click: function () {
-            console.info('你点击了自定义设置');
-            art.setting.show = false;
-        },
-    });
-});
-```
-
 ## plugins
 
 -   类型: `Object`
