@@ -4425,37 +4425,35 @@
 
     _createClass(Setting, [{
       key: "creatItem",
-      value: function creatItem(item, option) {
+      value: function creatItem(item) {
         var _this2 = this;
 
-        var $item = document.createElement('div');
-        var $left = append($item, "<div class=\"art-setting-item-left\"></div>");
-        var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
         var _this$art = this.art,
             icons = _this$art.icons,
             proxy = _this$art.events.proxy;
-        addClass($item, 'art-setting-item');
+        var $item = document.createElement('div');
         var hasItems = item.items && item.items.length;
+        var $left = append($item, "<div class=\"art-setting-item-left\"></div>");
+        var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
+        addClass($item, 'art-setting-item');
 
-        if (item.current && !hasItems) {
+        if (item.current) {
           addClass($item, 'art-current');
         }
 
         if (item.goBack) {
-          append($left, icons.arrowLeft);
           addClass($item, 'art-setting-item-back');
+          append($left, icons.arrowLeft);
+          append($left, item.html);
         } else {
           if (hasItems) {
             append($left, '<i class="art-icon"></i>');
+            append($right, icons.arrowRight);
           } else {
             append($left, icons.check);
           }
-        }
 
-        append($left, item.html);
-
-        if (hasItems && !item.goBack) {
-          append($right, icons.arrowRight);
+          append($left, item.html);
         }
 
         proxy($item, 'click', function (event) {
@@ -4470,11 +4468,6 @@
               setStyle(_this2.$parent, 'width', "".concat(item.width, "px"));
             }
           } else {
-            for (var index = 0; index < option.length; index++) {
-              option[index].current = false;
-            }
-
-            item.current = true;
             inverseClass($item, 'art-current');
           }
         });
