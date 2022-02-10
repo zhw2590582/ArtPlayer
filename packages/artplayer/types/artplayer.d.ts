@@ -283,16 +283,6 @@ type Option = {
     miniProgressBar?: boolean;
 
     /**
-     * Whether use local video function
-     */
-    localVideo?: boolean;
-
-    /**
-     * Whether use local subtitle function
-     */
-    localSubtitle?: boolean;
-
-    /**
      * Whether use SSR function
      */
     useSSR?: boolean;

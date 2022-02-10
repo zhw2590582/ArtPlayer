@@ -53,8 +53,6 @@ export default {
     fullscreenWeb: b,
     subtitleOffset: b,
     miniProgressBar: b,
-    localVideo: b,
-    localSubtitle: b,
     useSSR: b,
     ads: [
         {

@@ -733,8 +733,6 @@
     fullscreenWeb: b,
     subtitleOffset: b,
     miniProgressBar: b,
-    localVideo: b,
-    localSubtitle: b,
     useSSR: b,
     ads: [{
       url: s
@@ -4896,7 +4894,6 @@
           autoMini: false,
           loop: false,
           flip: false,
-          rotate: false,
           playbackRate: false,
           aspectRatio: false,
           screenshot: false,
@@ -4909,8 +4906,6 @@
           fullscreenWeb: false,
           subtitleOffset: false,
           miniProgressBar: false,
-          localVideo: false,
-          localSubtitle: false,
           useSSR: false,
           ads: [],
           layers: [],
