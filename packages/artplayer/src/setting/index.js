@@ -35,9 +35,22 @@ export default class Setting extends Component {
         this.name = 'setting';
         this.$parent = $setting;
         this.events = [];
+        this.option = [];
 
         if (option.setting) {
-            this.option = makeRecursion([playbackRate(art), aspectRatio(art), flip(art)]);
+            if (option.playbackRate) {
+                this.option.push(playbackRate(art));
+            }
+
+            if (option.aspectRatio) {
+                this.option.push(aspectRatio(art));
+            }
+
+            if (option.flip) {
+                this.option.push(flip(art));
+            }
+
+            this.option = makeRecursion(this.option);
 
             art.once('ready', () => {
                 this.init(this.option);
@@ -51,17 +64,17 @@ export default class Setting extends Component {
     }
 
     creatItem(item, option) {
-        const { icons } = this.art;
-        const hasItems = item.items && item.items.length;
-
         const $item = document.createElement('div');
+        const $left = append($item, `<div class="art-setting-item-left"></div>`);
+        const $right = append($item, `<div class="art-setting-item-right"></div>`);
+
+        const { icons } = this.art;
         addClass($item, 'art-setting-item');
+        const hasItems = item.items && item.items.length;
 
         if (item.current && !hasItems) {
             addClass($item, 'art-current');
         }
-
-        const $left = append($item, `<div class="art-setting-item-left"></div>`);
 
         if (item.goBack) {
             append($left, icons.arrowLeft);
@@ -75,8 +88,6 @@ export default class Setting extends Component {
         }
 
         append($left, item.html);
-
-        const $right = append($item, `<div class="art-setting-item-right"></div>`);
 
         if (hasItems && !item.goBack) {
             append($right, icons.arrowRight);
@@ -107,8 +118,8 @@ export default class Setting extends Component {
         return $item;
     }
 
-    add(item) {
-        this.option.push(item);
+    add(callback) {
+        this.option.push(callback(this.art));
         this.option = makeRecursion(this.option);
         this.init(this.option);
     }
