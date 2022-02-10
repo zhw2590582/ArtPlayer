@@ -1,15 +1,48 @@
 .art-video-player {
     .art-settings {
         display: none;
+        flex-direction: column;
         position: absolute;
         z-index: 90;
         right: 10px;
         bottom: 60px;
         width: 250px;
-        min-height: 100px;
         max-height: 300px;
         overflow: auto;
-        background-color: #000;
+        font-size: 13px;
+        padding: 5px 0;
+        background-color: rgba(0, 0, 0, 0.9);
+
+        .art-setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 35px;
+            padding: 0 5px 0 15px;
+            line-height: 1;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .art-setting-item-left {
+                display: flex;
+                align-items: center;
+                color: rgba(255, 255, 255, 0.75);
+            }
+
+            .art-setting-item-right {
+                display: flex;
+                align-items: center;
+                color: rgba(255, 255, 255, 0.95);
+
+                .art-icon {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
     }
 
     &.art-setting-show {
