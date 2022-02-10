@@ -4464,9 +4464,7 @@
           if (hasItems) {
             _this2.init(item.items);
 
-            if (item.width) {
-              setStyle(_this2.$parent, 'width', "".concat(item.width, "px"));
-            }
+            setStyle(_this2.$parent, 'width', "".concat(item.width || 200, "px"));
           } else {
             inverseClass($item, 'art-current');
           }
@@ -4476,7 +4474,6 @@
     }, {
       key: "add",
       value: function add(callback) {
-        console.log(callback);
         this.option.push(callback(this.art));
         this.option = makeRecursion(this.option);
         this.init(this.option);
@@ -4493,9 +4490,7 @@
           addClass(_$panel, 'art-setting-panel');
 
           for (var index = 0; index < option.length; index++) {
-            var item = option[index];
-            var $item = this.creatItem(item, option);
-            append(_$panel, $item);
+            append(_$panel, this.creatItem(option[index]));
           }
 
           append(this.$parent, _$panel);

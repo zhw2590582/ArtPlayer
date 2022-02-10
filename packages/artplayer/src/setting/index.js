@@ -107,9 +107,7 @@ export default class Setting extends Component {
 
             if (hasItems) {
                 this.init(item.items);
-                if (item.width) {
-                    setStyle(this.$parent, 'width', `${item.width}px`);
-                }
+                setStyle(this.$parent, 'width', `${item.width || 200}px`);
             } else {
                 inverseClass($item, 'art-current');
             }
@@ -119,7 +117,6 @@ export default class Setting extends Component {
     }
 
     add(callback) {
-        console.log(callback);
         this.option.push(callback(this.art));
         this.option = makeRecursion(this.option);
         this.init(this.option);
@@ -133,9 +130,7 @@ export default class Setting extends Component {
             const $panel = document.createElement('div');
             addClass($panel, 'art-setting-panel');
             for (let index = 0; index < option.length; index++) {
-                const item = option[index];
-                const $item = this.creatItem(item, option);
-                append($panel, $item);
+                append($panel, this.creatItem(option[index]));
             }
             append(this.$parent, $panel);
             this.cache.set(option, $panel);
