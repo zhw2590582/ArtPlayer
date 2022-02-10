@@ -1,6 +1,5 @@
 import Component from '../utils/component';
-import { append, addClass, setStyle, inverseClass } from '../utils/dom';
-
+import { append, addClass, setStyle, inverseClass, includeFromEvent } from '../utils';
 import flip from './flip';
 import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
@@ -30,7 +29,8 @@ export default class Setting extends Component {
 
         const {
             option,
-            template: { $setting },
+            events: { proxy },
+            template: { $setting, $player },
         } = art;
 
         this.art = art;
@@ -65,6 +65,17 @@ export default class Setting extends Component {
             art.on('blur', () => {
                 this.show = false;
                 this.init(this.option);
+            });
+
+            proxy($player, 'click', (event) => {
+                if (
+                    this.show &&
+                    !includeFromEvent(event, art.controls.setting) &&
+                    !includeFromEvent(event, this.$parent)
+                ) {
+                    this.show = false;
+                    this.init(this.option);
+                }
             });
         }
     }
