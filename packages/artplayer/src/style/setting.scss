@@ -55,6 +55,12 @@
                 .art-setting-item-left {
                     display: flex;
                     align-items: center;
+
+                    .art-setting-item-left-icon {
+                        height: 24px;
+                        width: 24px;
+                        margin-right: 5px;
+                    }
                 }
 
                 .art-setting-item-right {
