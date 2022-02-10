@@ -16,21 +16,26 @@ export default class Setting extends Component {
         } = art;
 
         this.$parent = $setting;
+
         this.events = [];
+        this.parentItem = null;
+        this.parentList = [];
 
         if (option.setting) {
+            this.option = [playbackRate(art), playbackRate(art), playbackRate(art)];
+
             art.once('ready', () => {
-                this.option = [playbackRate(art), playbackRate(art), playbackRate(art)];
                 this.init(this.option);
             });
 
             art.on('blur', () => {
                 this.show = false;
+                this.init(this.option);
             });
         }
     }
 
-    creatItme(item) {
+    creatItme(item, option) {
         const { icons } = this.art;
 
         const $item = document.createElement('div');
@@ -47,6 +52,8 @@ export default class Setting extends Component {
                 item.click.call(this, event);
             }
             if (item.items && item.items.length) {
+                this.parentItem = item;
+                this.parentList = option;
                 this.init(item.items);
             }
         };
@@ -57,7 +64,7 @@ export default class Setting extends Component {
         return $item;
     }
 
-    init(option = []) {
+    init(option) {
         for (let index = 0; index < this.events.length; index++) {
             this.events[index]();
         }
@@ -65,8 +72,18 @@ export default class Setting extends Component {
         this.events = [];
         this.$parent.innerHTML = '';
 
+        if (this.parentList === this.option) {
+            this.parentItem = null;
+            this.parentList = [];
+        }
+
+        if (this.parentItem) {
+            //
+        }
+
         for (let index = 0; index < option.length; index++) {
-            const $item = this.creatItme(option[index]);
+            const item = option[index];
+            const $item = this.creatItme(item, option);
             append(this.$parent, $item);
         }
     }
