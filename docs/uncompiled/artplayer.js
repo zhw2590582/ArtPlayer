@@ -4285,7 +4285,6 @@
 
   function playbackRate$1(art) {
     var i18n = art.i18n;
-        art.icons;
     var keys = {
       normal: 'Normal',
       horizontal: 'Horizontal',
@@ -4294,7 +4293,6 @@
     return {
       width: 150,
       html: i18n.get('Flip'),
-      icon: '',
       items: Object.keys(keys).map(function (key) {
         return {
           html: i18n.get(keys[key]),
