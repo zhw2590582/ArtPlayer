@@ -1,7 +1,4 @@
 import Component from '../utils/component';
-import flip from './flip';
-import rotate from './rotate';
-import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 
 export default class Setting extends Component {
@@ -12,56 +9,23 @@ export default class Setting extends Component {
 
         const {
             option,
-            template: { $setting, $settingBody },
-            events: { proxy },
+            template: { $setting },
         } = art;
 
-        this.$parent = $settingBody;
+        this.$parent = $setting;
 
         if (option.setting) {
             art.once('ready', () => {
-                proxy($setting, 'click', (event) => {
-                    if (event.target === $setting) {
-                        this.show = false;
-                    }
-                });
-
-                this.add(
-                    flip({
-                        disable: !option.flip,
-                        name: 'flip',
-                    }),
-                );
-
-                this.add(
-                    rotate({
-                        disable: !option.rotate,
-                        name: 'rotate',
-                    }),
-                );
-
-                this.add(
-                    aspectRatio({
-                        disable: !option.aspectRatio,
-                        name: 'aspectRatio',
-                    }),
-                );
-
-                this.add(
-                    playbackRate({
-                        disable: !option.playbackRate,
-                        name: 'playbackRate',
-                    }),
-                );
-
-                for (let index = 0; index < option.settings.length; index++) {
-                    this.add(option.settings[index]);
-                }
+                this.add(playbackRate(art));
             });
 
             art.on('blur', () => {
                 this.show = false;
             });
         }
+    }
+
+    add(option) {
+        console.log(option);
     }
 }
