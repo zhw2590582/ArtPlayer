@@ -103,7 +103,8 @@ export default class Setting extends Component {
             append($left, item.html);
         } else {
             if (hasItems) {
-                append($left, '<i class="art-icon"></i>');
+                const $icon = append($left, item.icon || icons.config);
+                addClass($icon, 'art-setting-item-left-icon');
                 append($right, icons.arrowRight);
             } else {
                 append($left, icons.check);

@@ -1,5 +1,5 @@
 export default function playbackRate(art) {
-    const { i18n } = art;
+    const { i18n, icons } = art;
 
     const keys = {
         normal: 'Normal',
@@ -10,6 +10,7 @@ export default function playbackRate(art) {
     return {
         width: 150,
         html: i18n.get('Flip'),
+        icon: '',
         items: Object.keys(keys).map((key) => {
             return {
                 html: i18n.get(keys[key]),

@@ -13,6 +13,8 @@ import fullscreen from './fullscreen.svg';
 import fullscreenWeb from './fullscreen-web.svg';
 import arrowLeft from './arrow-left.svg';
 import arrowRight from './arrow-right.svg';
+import playbackRate from './playbackRate.svg';
+import config from './config.svg';
 import pip from './pip.svg';
 
 export default class Icons {
@@ -32,6 +34,8 @@ export default class Icons {
             fullscreenWeb,
             arrowLeft,
             arrowRight,
+            playbackRate,
+            config,
             pip,
             ...art.option.icons,
         };
