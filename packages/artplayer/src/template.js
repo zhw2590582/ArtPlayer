@@ -53,11 +53,7 @@ export default class Template {
             <div class="art-notice">
               <div class="art-notice-inner"></div>
             </div>
-            <div class="art-settings">
-              <div class="art-setting-inner">
-                <div class="art-setting-body"></div>
-              </div>
-            </div>
+            <div class="art-settings"></div>
             <div class="art-info">
               <div class="art-info-panel">
                 <div class="art-info-item">
@@ -126,8 +122,6 @@ export default class Template {
         this.$mask = this.query('.art-mask');
         this.$state = this.query('.art-state');
         this.$setting = this.query('.art-settings');
-        this.$settingInner = this.query('.art-setting-inner');
-        this.$settingBody = this.query('.art-setting-body');
         this.$info = this.query('.art-info');
         this.$infoPanel = this.query('.art-info-panel');
         this.$infoClose = this.query('.art-info-close');
@@ -137,7 +131,7 @@ export default class Template {
         this.$contextmenu = this.query('.art-contextmenus');
 
         if (option.backdrop) {
-            addClass(this.$settingInner, 'art-backdrop-filter');
+            addClass(this.$setting, 'art-backdrop-filter');
             addClass(this.$contextmenu, 'art-backdrop-filter');
             addClass(this.$info, 'art-backdrop-filter');
         }
