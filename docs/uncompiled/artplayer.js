@@ -4324,6 +4324,7 @@
       items: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
         return {
           html: item === 1.0 ? i18n.get('Normal') : item,
+          current: item === 1.0,
           click: function click() {
             art.playbackRate = item;
           }
@@ -4340,6 +4341,7 @@
       items: ['default', '4:3', '16:9'].map(function (item) {
         return {
           html: item === 'default' ? i18n.get('Default') : item,
+          current: item === 'default',
           click: function click() {
             art.aspectRatio = item;
           }
@@ -4361,6 +4363,7 @@
       items: Object.keys(keys).map(function (key) {
         return {
           html: i18n.get(keys[key]),
+          current: key === 'normal',
           click: function click() {
             art.flip = key;
           }
@@ -4412,9 +4415,22 @@
       _this.name = 'setting';
       _this.$parent = $setting;
       _this.events = [];
+      _this.option = [];
 
       if (option.setting) {
-        _this.option = makeRecursion([playbackRate$1(art), aspectRatio(art), playbackRate(art)]);
+        if (option.playbackRate) {
+          _this.option.push(playbackRate$1(art));
+        }
+
+        if (option.aspectRatio) {
+          _this.option.push(aspectRatio(art));
+        }
+
+        if (option.flip) {
+          _this.option.push(playbackRate(art));
+        }
+
+        _this.option = makeRecursion(_this.option);
         art.once('ready', function () {
           _this.init(_this.option);
         });
@@ -4433,16 +4449,16 @@
       value: function creatItem(item, option) {
         var _this2 = this;
 
-        var icons = this.art.icons;
-        var hasItems = item.items && item.items.length;
         var $item = document.createElement('div');
+        var $left = append($item, "<div class=\"art-setting-item-left\"></div>");
+        var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
+        var icons = this.art.icons;
         addClass($item, 'art-setting-item');
+        var hasItems = item.items && item.items.length;
 
         if (item.current && !hasItems) {
           addClass($item, 'art-current');
         }
-
-        var $left = append($item, "<div class=\"art-setting-item-left\"></div>");
 
         if (item.goBack) {
           append($left, icons.arrowLeft);
@@ -4456,7 +4472,6 @@
         }
 
         append($left, item.html);
-        var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
 
         if (hasItems && !item.goBack) {
           append($right, icons.arrowRight);
@@ -4491,8 +4506,8 @@
       }
     }, {
       key: "add",
-      value: function add(item) {
-        this.option.push(item);
+      value: function add(callback) {
+        this.option.push(callback(this.art));
         this.option = makeRecursion(this.option);
         this.init(this.option);
       }

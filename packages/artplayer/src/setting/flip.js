@@ -13,6 +13,7 @@ export default function playbackRate(art) {
         items: Object.keys(keys).map((key) => {
             return {
                 html: i18n.get(keys[key]),
+                current: key === 'normal',
                 click() {
                     art.flip = key;
                 },

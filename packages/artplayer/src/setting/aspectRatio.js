@@ -6,6 +6,7 @@ export default function aspectRatio(art) {
         items: ['default', '4:3', '16:9'].map((item) => {
             return {
                 html: item === 'default' ? i18n.get('Default') : item,
+                current: item === 'default',
                 click() {
                     art.aspectRatio = item;
                 },
