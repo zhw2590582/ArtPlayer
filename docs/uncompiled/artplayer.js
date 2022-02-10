@@ -721,7 +721,6 @@
     autoMini: b,
     loop: b,
     flip: b,
-    rotate: b,
     playbackRate: b,
     aspectRatio: b,
     screenshot: b,
@@ -2087,85 +2086,6 @@
     });
   }
 
-  function rotateMix(art) {
-    var _art$template = art.template,
-        $video = _art$template.$video,
-        $player = _art$template.$player,
-        i18n = art.i18n,
-        notice = art.notice;
-    def(art, 'rotate', {
-      get: function get() {
-        return Number($player.dataset.rotate) || 0;
-      },
-      set: function set(deg) {
-        if (!deg) deg = 0;
-        var degList = [-270, -180, -90, 0, 90, 180, 270];
-        errorHandle(degList.includes(deg), "'rotate' only accept ".concat(degList.toString(), " as parameters"));
-
-        if (deg === 0) {
-          delete $player.dataset.rotate;
-          setStyle($video, 'transform', null);
-        } else {
-          art.flip = false;
-          art.autoSize = true;
-          $player.dataset.rotate = deg;
-
-          var getScaleValue = function getScaleValue() {
-            var videoWidth = $video.videoWidth,
-                videoHeight = $video.videoHeight;
-            return videoWidth > videoHeight ? videoHeight / videoWidth : videoWidth / videoHeight;
-          };
-
-          var degValue = 0;
-          var scaleValue = 1;
-
-          switch (deg) {
-            case -270:
-              degValue = 90;
-              scaleValue = getScaleValue();
-              break;
-
-            case -180:
-              degValue = 180;
-              break;
-
-            case -90:
-              degValue = 270;
-              scaleValue = getScaleValue();
-              break;
-
-            case 90:
-              degValue = 90;
-              scaleValue = getScaleValue();
-              break;
-
-            case 180:
-              degValue = 180;
-              break;
-
-            case 270:
-              degValue = 270;
-              scaleValue = getScaleValue();
-              break;
-          }
-
-          setStyle($video, 'transform', "rotate(".concat(degValue, "deg) scale(").concat(scaleValue, ")"));
-        }
-
-        notice.show = "".concat(i18n.get('Rotate'), ": ").concat(deg, "\xB0");
-        art.emit('rotate', deg);
-      }
-    });
-    def(art, 'rotateReset', {
-      set: function set(value) {
-        if (value && art.rotate) {
-          var rotate = art.rotate;
-          art.rotate = rotate;
-        }
-      }
-    });
-  }
-
   function posterMix(art) {
     var option = art.option,
         $poster = art.template.$poster;
@@ -2499,7 +2419,6 @@
     flipMix(art);
     miniMix(art);
     loopMix(art);
-    rotateMix(art);
     posterMix(art);
     autoHeightMix(art);
     themeMix(art);
@@ -4650,141 +4569,6 @@
     return Storage;
   }();
 
-  function localVideo(art) {
-    var proxy = art.events.proxy,
-        _art$template = art.template,
-        $video = _art$template.$video,
-        $player = _art$template.$player,
-        option = art.option,
-        setting = art.setting,
-        i18n = art.i18n;
-
-    function loadVideo(file) {
-      if (file) {
-        var canPlayType = $video.canPlayType(file.type);
-
-        if (canPlayType === 'maybe' || canPlayType === 'probably') {
-          var url = URL.createObjectURL(file);
-          option.title = file.name;
-          art.switchUrl(url, file.name);
-          art.emit('localVideo', file);
-        } else {
-          errorHandle(false, 'Playback of this file format is not supported');
-        }
-      }
-    }
-
-    proxy($player, 'dragover', function (event) {
-      event.preventDefault();
-    });
-    proxy($player, 'drop', function (event) {
-      event.preventDefault();
-      var file = event.dataTransfer.files[0];
-      loadVideo(file);
-    });
-
-    function attach(target) {
-      var $input = append(target, '<input type="file">');
-      setStyle(target, 'position', 'relative');
-      setStyles($input, {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        left: '0',
-        top: '0',
-        opacity: '0'
-      });
-      proxy($input, 'change', function () {
-        var file = $input.files[0];
-        loadVideo(file);
-      });
-    }
-
-    art.once('ready', function () {
-      setting.add({
-        title: 'Local Video',
-        name: 'localVideo',
-        index: 30,
-        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Video'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
-        mounted: function mounted($setting) {
-          var $btn = query('.art-upload-btn', $setting);
-          var $value = query('.art-upload-value', $setting);
-          art.on('localVideo', function (file) {
-            $value.textContent = file.name;
-            $value.title = file.name;
-          });
-          attach($btn);
-        }
-      });
-    });
-    return {
-      name: 'localVideo',
-      attach: attach
-    };
-  }
-
-  function localSubtitle(art) {
-    var proxy = art.events.proxy,
-        subtitle = art.subtitle,
-        setting = art.setting,
-        i18n = art.i18n;
-
-    function loadSubtitle(file) {
-      if (file) {
-        var type = getExt(file.name);
-
-        if (['ass', 'vtt', 'srt'].includes(type)) {
-          subtitle.switch(URL.createObjectURL(file), {
-            name: file.name,
-            ext: type
-          });
-          art.emit('localSubtitle', file);
-        } else {
-          errorHandle(false, 'Only supports subtitle files in .ass, .vtt and .srt format');
-        }
-      }
-    }
-
-    function attach(target) {
-      var $input = append(target, '<input type="file">');
-      setStyle(target, 'position', 'relative');
-      setStyles($input, {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        left: '0',
-        top: '0',
-        opacity: '0'
-      });
-      proxy($input, 'change', function () {
-        var file = $input.files[0];
-        loadSubtitle(file);
-      });
-    }
-
-    art.once('ready', function () {
-      setting.add({
-        title: 'Local Subtitle',
-        name: 'localSubtitle',
-        index: 40,
-        html: "\n                <div class=\"art-setting-header\">\n                    ".concat(i18n.get('Local Subtitle'), "\n                </div>\n                <div class=\"art-setting-upload\">\n                    <div class=\"art-upload-btn\">").concat(i18n.get('Open'), "</div>\n                    <div class=\"art-upload-value\"></div>\n                </div>\n            "),
-        mounted: function mounted($setting) {
-          var $btn = query('.art-upload-btn', $setting);
-          var $value = query('.art-upload-value', $setting);
-          art.on('localSubtitle', function (file) {
-            $value.textContent = file.name;
-            $value.title = file.name;
-          });
-          attach($btn);
-        }
-      });
-    });
-    return {
-      name: 'localSubtitle',
-      attach: attach
-    };
-  }
-
   function miniProgressBar(art) {
     var layers = art.layers;
     layers.add({
@@ -4825,14 +4609,6 @@
 
       if (!option.isLive && option.miniProgressBar) {
         this.add(miniProgressBar);
-      }
-
-      if (option.localVideo) {
-        this.add(localVideo);
-      }
-
-      if (option.localSubtitle) {
-        this.add(localSubtitle);
       }
 
       for (var index = 0; index < option.plugins.length; index++) {

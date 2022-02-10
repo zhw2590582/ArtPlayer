@@ -41,7 +41,6 @@ export default {
     autoMini: b,
     loop: b,
     flip: b,
-    rotate: b,
     playbackRate: b,
     aspectRatio: b,
     screenshot: b,
