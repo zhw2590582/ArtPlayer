@@ -1,28 +1,23 @@
 import Component from '../utils/component';
-import { append, addClass } from '../utils/dom';
-
+import { append, addClass, setStyle } from '../utils/dom';
 import playbackRate from './playbackRate';
 
 export default class Setting extends Component {
     constructor(art) {
         super(art);
 
-        this.art = art;
-        this.name = 'setting';
-
         const {
             option,
             template: { $setting },
         } = art;
 
+        this.art = art;
+        this.name = 'setting';
         this.$parent = $setting;
-
         this.events = [];
-        this.parentItem = null;
-        this.parentList = [];
 
         if (option.setting) {
-            this.option = [playbackRate(art), playbackRate(art), playbackRate(art)];
+            this.option = this.makeRecursion([playbackRate(art), playbackRate(art), playbackRate(art)]);
 
             art.once('ready', () => {
                 this.init(this.option);
@@ -35,26 +30,27 @@ export default class Setting extends Component {
         }
     }
 
-    creatItme(item, option) {
-        const { icons } = this.art;
-
+    creatItem(item) {
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
         append($item, `<div class="art-setting-item-left">${item.html}</div>`);
         const $right = append($item, `<div class="art-setting-item-right"></div>`);
+        const hasItems = item.items && item.items.length;
 
-        if (item.items && item.items.length) {
-            append($right, icons.arrowRight);
+        if (hasItems) {
+            append($right, this.art.icons.arrowRight);
         }
 
         const callback = (event) => {
             if (typeof item.click === 'function') {
                 item.click.call(this, event);
             }
-            if (item.items && item.items.length) {
-                this.parentItem = item;
-                this.parentList = option;
+
+            if (hasItems) {
                 this.init(item.items);
+                if (item.width) {
+                    setStyle(this.$parent, 'width', `${item.width}px`);
+                }
             }
         };
 
@@ -64,6 +60,16 @@ export default class Setting extends Component {
         return $item;
     }
 
+    makeRecursion(option) {
+        return option;
+    }
+
+    add(item) {
+        this.option.push(item);
+        this.option = this.makeRecursion(this.option);
+        this.init(this.option);
+    }
+
     init(option) {
         for (let index = 0; index < this.events.length; index++) {
             this.events[index]();
@@ -71,19 +77,11 @@ export default class Setting extends Component {
 
         this.events = [];
         this.$parent.innerHTML = '';
-
-        if (this.parentList === this.option) {
-            this.parentItem = null;
-            this.parentList = [];
-        }
-
-        if (this.parentItem) {
-            //
-        }
+        setStyle(this.$parent, 'width', '200px');
 
         for (let index = 0; index < option.length; index++) {
             const item = option[index];
-            const $item = this.creatItme(item, option);
+            const $item = this.creatItem(item);
             append(this.$parent, $item);
         }
     }

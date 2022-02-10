@@ -10,6 +10,7 @@ export default function playbackRate(art) {
                 click: () => console.log(1),
             },
             {
+                width: 150,
                 html: '222',
                 click: () => console.log(2),
                 items: [

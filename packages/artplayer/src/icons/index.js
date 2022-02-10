@@ -10,6 +10,7 @@ import screenshot from './screenshot.svg';
 import setting from './setting.svg';
 import fullscreen from './fullscreen.svg';
 import fullscreenWeb from './fullscreen-web.svg';
+import arrowLeft from './arrow-left.svg';
 import arrowRight from './arrow-right.svg';
 import pip from './pip.svg';
 
@@ -27,6 +28,7 @@ export default class Icons {
             setting,
             fullscreen,
             fullscreenWeb,
+            arrowLeft,
             arrowRight,
             pip,
             ...art.option.icons,

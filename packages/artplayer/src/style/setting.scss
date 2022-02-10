@@ -5,7 +5,7 @@
         position: absolute;
         z-index: 90;
         right: 10px;
-        bottom: 60px;
+        bottom: 50px;
         width: 200px;
         max-height: 300px;
         overflow: auto;
@@ -13,6 +13,20 @@
         padding: 5px 0;
         background-color: rgba(0, 0, 0, 0.9);
         transition: all 0.1s ease;
+
+        .art-setting-item-header {
+            display: flex;
+            align-items: center;
+            height: 35px;
+            line-height: 1;
+            padding-left: 5px;
+            cursor: pointer;
+
+            .art-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
 
         .art-setting-item {
             display: flex;
