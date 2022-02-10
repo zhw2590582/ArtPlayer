@@ -1,5 +1,5 @@
 import Component from '../utils/component';
-import { append, addClass, setStyle } from '../utils/dom';
+import { append, addClass, setStyle, inverseClass } from '../utils/dom';
 import playbackRate from './playbackRate';
 
 export default class Setting extends Component {
@@ -30,15 +30,32 @@ export default class Setting extends Component {
         }
     }
 
-    creatItem(item) {
-        const $item = document.createElement('div');
-        addClass($item, 'art-setting-item');
-        append($item, `<div class="art-setting-item-left">${item.html}</div>`);
-        const $right = append($item, `<div class="art-setting-item-right"></div>`);
+    creatItem(item, option) {
+        const { icons } = this.art;
         const hasItems = item.items && item.items.length;
 
-        if (hasItems) {
-            append($right, this.art.icons.arrowRight);
+        const $item = document.createElement('div');
+        addClass($item, 'art-setting-item');
+
+        if (item.current && !hasItems) {
+            addClass($item, 'art-current');
+        }
+
+        const $left = append($item, `<div class="art-setting-item-left"></div>`);
+
+        if (item.goBack) {
+            append($left, icons.arrowLeft);
+            addClass($item, 'art-setting-item-back');
+        } else {
+            append($left, icons.check);
+        }
+
+        append($left, item.html);
+
+        const $right = append($item, `<div class="art-setting-item-right"></div>`);
+
+        if (hasItems && !item.goBack) {
+            append($right, icons.arrowRight);
         }
 
         const callback = (event) => {
@@ -51,6 +68,12 @@ export default class Setting extends Component {
                 if (item.width) {
                     setStyle(this.$parent, 'width', `${item.width}px`);
                 }
+            } else {
+                for (let index = 0; index < option.length; index++) {
+                    option[index].current = false;
+                }
+                item.current = true;
+                inverseClass($item, 'art-current');
             }
         };
 
@@ -61,6 +84,22 @@ export default class Setting extends Component {
     }
 
     makeRecursion(option) {
+        if (!option) return option;
+
+        for (let index = 0; index < option.length; index++) {
+            const item = option[index];
+            if (!item.goBack) {
+                if (item.items) {
+                    item.items.unshift({
+                        html: item.html,
+                        items: option,
+                        goBack: true,
+                    });
+                }
+                this.makeRecursion(item.items);
+            }
+        }
+
         return option;
     }
 
@@ -81,7 +120,7 @@ export default class Setting extends Component {
 
         for (let index = 0; index < option.length; index++) {
             const item = option[index];
-            const $item = this.creatItem(item);
+            const $item = this.creatItem(item, option);
             append(this.$parent, $item);
         }
     }
