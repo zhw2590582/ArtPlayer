@@ -2193,8 +2193,7 @@
     var clamp = art.constructor.utils.clamp;
     var notice = art.notice,
         template = art.template,
-        i18n = art.i18n,
-        subtitle = art.subtitle;
+        i18n = art.i18n;
     var cuesCache = [];
     art.on('subtitle:switch', function () {
       cuesCache = [];
@@ -2219,7 +2218,7 @@
             cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
           }
 
-          subtitle.update();
+          art.subtitle.update();
           notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
           art.emit('subtitleOffset', value);
         } else {
