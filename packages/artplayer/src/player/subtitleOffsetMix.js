@@ -2,7 +2,7 @@ import { def } from '../utils';
 
 export default function subtitleOffsetMix(art) {
     const { clamp } = art.constructor.utils;
-    const { notice, template, i18n, subtitle } = art;
+    const { notice, template, i18n } = art;
 
     let cuesCache = [];
     art.on('subtitle:switch', () => {
@@ -27,7 +27,7 @@ export default function subtitleOffsetMix(art) {
                     cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
                 }
 
-                subtitle.update();
+                art.subtitle.update();
                 notice.show = `${i18n.get('Subtitle offset time')}: ${value}s`;
                 art.emit('subtitleOffset', value);
             } else {
