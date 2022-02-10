@@ -14,7 +14,7 @@ export default function playbackRateMix(art) {
         set(rate) {
             if (rate) {
                 if (rate === $player.dataset.playbackRate) return;
-                const rateList = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+                const rateList = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
                 errorHandle(rateList.includes(rate), `'playbackRate' only accept ${rateList.toString()} as parameters`);
                 $video.playbackRate = rate;
                 $player.dataset.playbackRate = rate;

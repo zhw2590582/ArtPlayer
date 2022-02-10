@@ -1,45 +1,15 @@
 export default function playbackRate(art) {
     const { i18n } = art;
-
     return {
+        width: 150,
         html: i18n.get('Play speed'),
-        click: () => console.log(0),
-        items: [
-            {
-                html: '111',
-                click: () => console.log(1),
-            },
-            {
-                width: 150,
-                html: '222',
-                click: () => console.log(2),
-                items: [
-                    {
-                        html: '333',
-                        click: () => console.log(3),
-                    },
-                    {
-                        html: '444',
-                        click: () => console.log(4),
-                    },
-                    {
-                        html: '333',
-                        click: () => console.log(3),
-                    },
-                    {
-                        html: '444',
-                        click: () => console.log(4),
-                    },
-                    {
-                        html: '333',
-                        click: () => console.log(3),
-                    },
-                    {
-                        html: '444',
-                        click: () => console.log(4),
-                    },
-                ],
-            },
-        ],
+        items: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map((item) => {
+            return {
+                html: item === 1.0 ? i18n.get('Normal') : item,
+                click() {
+                    art.playbackRate = item;
+                },
+            };
+        }),
     };
 }

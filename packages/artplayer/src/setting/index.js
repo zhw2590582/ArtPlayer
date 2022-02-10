@@ -2,6 +2,24 @@ import Component from '../utils/component';
 import { append, addClass, setStyle, inverseClass } from '../utils/dom';
 import playbackRate from './playbackRate';
 
+function makeRecursion(option) {
+    if (!option) return option;
+    for (let index = 0; index < option.length; index++) {
+        const item = option[index];
+        if (!item.goBack) {
+            if (item.items) {
+                item.items.unshift({
+                    html: item.html,
+                    items: option,
+                    goBack: true,
+                });
+            }
+            makeRecursion(item.items);
+        }
+    }
+    return option;
+}
+
 export default class Setting extends Component {
     constructor(art) {
         super(art);
@@ -17,7 +35,7 @@ export default class Setting extends Component {
         this.events = [];
 
         if (option.setting) {
-            this.option = this.makeRecursion([playbackRate(art), playbackRate(art), playbackRate(art)]);
+            this.option = makeRecursion([playbackRate(art), playbackRate(art), playbackRate(art)]);
 
             art.once('ready', () => {
                 this.init(this.option);
@@ -47,7 +65,11 @@ export default class Setting extends Component {
             append($left, icons.arrowLeft);
             addClass($item, 'art-setting-item-back');
         } else {
-            append($left, icons.check);
+            if (hasItems) {
+                append($left, '<i class="art-icon"></i>');
+            } else {
+                append($left, icons.check);
+            }
         }
 
         append($left, item.html);
@@ -83,29 +105,9 @@ export default class Setting extends Component {
         return $item;
     }
 
-    makeRecursion(option) {
-        if (!option) return option;
-
-        for (let index = 0; index < option.length; index++) {
-            const item = option[index];
-            if (!item.goBack) {
-                if (item.items) {
-                    item.items.unshift({
-                        html: item.html,
-                        items: option,
-                        goBack: true,
-                    });
-                }
-                this.makeRecursion(item.items);
-            }
-        }
-
-        return option;
-    }
-
     add(item) {
         this.option.push(item);
-        this.option = this.makeRecursion(this.option);
+        this.option = makeRecursion(this.option);
         this.init(this.option);
     }
 
