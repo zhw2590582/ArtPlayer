@@ -69,38 +69,35 @@ export default class Setting extends Component {
         }
     }
 
-    creatItem(item, option) {
-        const $item = document.createElement('div');
-        const $left = append($item, `<div class="art-setting-item-left"></div>`);
-        const $right = append($item, `<div class="art-setting-item-right"></div>`);
-
+    creatItem(item) {
         const {
             icons,
             events: { proxy },
         } = this.art;
 
-        addClass($item, 'art-setting-item');
+        const $item = document.createElement('div');
         const hasItems = item.items && item.items.length;
 
-        if (item.current && !hasItems) {
+        const $left = append($item, `<div class="art-setting-item-left"></div>`);
+        const $right = append($item, `<div class="art-setting-item-right"></div>`);
+
+        addClass($item, 'art-setting-item');
+        if (item.current) {
             addClass($item, 'art-current');
         }
 
         if (item.goBack) {
-            append($left, icons.arrowLeft);
             addClass($item, 'art-setting-item-back');
+            append($left, icons.arrowLeft);
+            append($left, item.html);
         } else {
             if (hasItems) {
                 append($left, '<i class="art-icon"></i>');
+                append($right, icons.arrowRight);
             } else {
                 append($left, icons.check);
             }
-        }
-
-        append($left, item.html);
-
-        if (hasItems && !item.goBack) {
-            append($right, icons.arrowRight);
+            append($left, item.html);
         }
 
         proxy($item, 'click', (event) => {
@@ -114,10 +111,6 @@ export default class Setting extends Component {
                     setStyle(this.$parent, 'width', `${item.width}px`);
                 }
             } else {
-                for (let index = 0; index < option.length; index++) {
-                    option[index].current = false;
-                }
-                item.current = true;
                 inverseClass($item, 'art-current');
             }
         });
