@@ -4427,6 +4427,10 @@
           _this.option.push(subtitleOffset(art));
         }
 
+        for (var index = 0; index < option.settings.length; index++) {
+          _this.option.push(option.settings[index]);
+        }
+
         _this.option = makeRecursion(_this.option);
         art.once('ready', function () {
           _this.init(_this.option);

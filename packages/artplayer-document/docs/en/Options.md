@@ -251,25 +251,6 @@ var art = new Artplayer({
 });
 ```
 
-## rotate
-
--   Type: `Boolean`
--   Default: `false`
-
-Whether to display a video rotation function, you need to set the `setting` and `autoSize` for `true`
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    rotate: true,
-    setting: true,
-    autoSize: true,
-});
-```
-
 ## playbackRate
 
 -   Type: `Boolean`
@@ -487,60 +468,6 @@ var art = new Artplayer({
 });
 ```
 
-## localVideo
-
--   Type: `Boolean`
--   Default: `false`
-
-To open a local video, you need to use the `art.plugins.localVideo.attach` method to mount the open video button
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    localVideo: true,
-    controls: [
-        {
-            name: 'preview',
-            position: 'right',
-            html: 'Open video',
-            mounted: ($preview) => {
-                art.plugins.localVideo.attach($preview);
-            },
-        },
-    ],
-});
-```
-
-## localSubtitle
-
--   Type: `Boolean`
--   Default: `false`
-
-To open local subtitles, you need to use the `art.plugins.localSubtitle.attach` method to mount the open subtitle button
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    localSubtitle: true,
-    controls: [
-        {
-            name: 'preview',
-            position: 'right',
-            html: 'Open subtitle',
-            mounted: ($preview) => {
-                art.plugins.localSubtitle.attach($preview);
-            },
-        },
-    ],
-});
-```
-
 ## useSSR
 
 -   Type: `Boolean`
@@ -623,18 +550,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-Initialize custom setting panel
-
-| Property  | Type                | Description                                                   |
-| --------- | ------------------- | ------------------------------------------------------------- |
-| `disable` | `Boolean`           | Whether to disable the component                              |
-| `name`    | `String`            | The unique name of the component, used to mark the class name |
-| `index`   | `Number`            | Component index, priority for display                         |
-| `html`    | `String`、`Element` | DOM element of the component                                  |
-| `style`   | `Object`            | Component style object                                        |
-| `click`   | `Function`          | Component click event                                         |
-| `mounted` | `Function`          | Triggered after the component is mounted                      |
-| `tooltip` | `String`            | Prompt text of the component                                  |
+Initialize custom setting panel, please visit [How to add setting](/document/Questions/)
 
 <div className="run-code">▶ Run Code</div>
 
@@ -645,30 +561,21 @@ var art = new Artplayer({
     setting: true,
     settings: [
         {
-            disable: false,
-            name: 'button',
-            index: 10,
-            html: 'Custom button1',
-            tooltip: 'Custom button1',
-            style: {
-                color: 'red',
-            },
-            click: function () {
-                console.log('You clicked custom button 1');
-            },
-            mounted: function () {
-                console.log('Custom button mounting is complete 1');
-            },
-        },
-        {
-            html: 'Custom button2',
-            tooltip: 'Custom button2',
-            style: {
-                color: 'green',
-            },
-            click: function () {
-                console.log('You clicked custom button 2');
-            },
+            html: 'Custom setting 01',
+            items: [
+                {
+                    html: 'Submenu 01',
+                    click: function() {
+                        console.log('You click on the submenu 01');
+                    }
+                },
+                {
+                    html: 'Submenu 02',
+                    click: function() {
+                        console.log('You click on the submenu 02');
+                    }
+                },
+            ]
         },
     ],
 });
