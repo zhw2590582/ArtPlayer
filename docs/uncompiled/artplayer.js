@@ -4385,7 +4385,10 @@
 
       _this = _super.call(this, art);
       var option = art.option,
-          $setting = art.template.$setting;
+          proxy = art.events.proxy,
+          _art$template = art.template,
+          $setting = _art$template.$setting,
+          $player = _art$template.$player;
       _this.art = art;
       _this.name = 'setting';
       _this.$parent = $setting;
@@ -4417,6 +4420,13 @@
           _this.show = false;
 
           _this.init(_this.option);
+        });
+        proxy($player, 'click', function (event) {
+          if (_this.show && !includeFromEvent(event, art.controls.setting) && !includeFromEvent(event, _this.$parent)) {
+            _this.show = false;
+
+            _this.init(_this.option);
+          }
         });
       }
 
