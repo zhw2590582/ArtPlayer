@@ -1,5 +1,4 @@
 import i18n from './i18n';
-import { opacity, size, speed, synchronousPlayback } from './setting';
 import { filter, getRect, getDanmuRef } from './utils';
 import { bilibiliDanmuParseFromUrl } from './bilibili';
 import getDanmuTop from './getDanmuTop';
@@ -7,10 +6,6 @@ import getDanmuTop from './getDanmuTop';
 export default class Danmuku {
     constructor(art, option) {
         art.i18n.update(i18n);
-        art.setting.add(opacity);
-        art.setting.add(size);
-        art.setting.add(speed);
-        art.setting.add(synchronousPlayback);
         this.art = art;
         this.queue = [];
         this.option = {};

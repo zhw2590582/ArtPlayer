@@ -4,16 +4,20 @@ export default function subtitleOffsetMix(art) {
     const { clamp } = art.constructor.utils;
     const { notice, template, i18n } = art;
 
+    let offsetCache = 0;
     let cuesCache = [];
     art.on('subtitle:switch', () => {
         cuesCache = [];
     });
 
     def(art, 'subtitleOffset', {
+        get() {
+            return offsetCache;
+        },
         set(value) {
             if (template.$track && template.$track.track) {
                 const cues = Array.from(template.$track.track.cues);
-                const time = clamp(value, -5, 5);
+                offsetCache = clamp(value, -5, 5);
 
                 for (let index = 0; index < cues.length; index++) {
                     const cue = cues[index];
@@ -23,8 +27,8 @@ export default function subtitleOffsetMix(art) {
                             endTime: cue.endTime,
                         };
                     }
-                    cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
-                    cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
+                    cue.startTime = clamp(cuesCache[index].startTime + offsetCache, 0, art.duration);
+                    cue.endTime = clamp(cuesCache[index].endTime + offsetCache, 0, art.duration);
                 }
 
                 art.subtitle.update();

@@ -33,12 +33,12 @@ export default class Icons {
             setting,
             fullscreen,
             fullscreenWeb,
+            pip,
             arrowLeft,
             arrowRight,
             playbackRate,
             aspectRatio,
             config,
-            pip,
             ...art.option.icons,
         };
 

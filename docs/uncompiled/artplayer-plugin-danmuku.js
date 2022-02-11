@@ -60,107 +60,6 @@
     }
   };
 
-  function opacity(art) {
-    var i18n = art.i18n,
-        proxy = art.events.proxy;
-    return {
-      name: 'danmuku-opacity',
-      index: 10,
-      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu opacity'), ": <span class=\"art-value\">100</span>%\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"1\" min=\"0.1\" max=\"1\" step=\"0.1\">\n            </div>\n        "),
-      mounted: function mounted($setting) {
-        var $range = $setting.querySelector('input[type=range]');
-        var $value = $setting.querySelector('.art-value');
-        proxy($range, 'change', function () {
-          var value = $range.value;
-          $value.innerText = Number(value) * 100;
-          art.plugins.artplayerPluginDanmuku.config({
-            opacity: Number(value)
-          });
-        });
-        art.on('artplayerPluginDanmuku:config', function (config) {
-          if ($range.value !== config.opacity) {
-            $range.value = config.opacity;
-            $value.innerText = config.opacity * 100;
-          }
-        });
-      }
-    };
-  }
-  function size(art) {
-    var i18n = art.i18n,
-        proxy = art.events.proxy;
-    return {
-      name: 'danmuku-size',
-      index: 11,
-      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu size'), ": <span class=\"art-value\">25</span>px\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"25\" min=\"14\" max=\"30\" step=\"1\">\n            </div>\n        "),
-      mounted: function mounted($setting) {
-        var $range = $setting.querySelector('input[type=range]');
-        var $value = $setting.querySelector('.art-value');
-        proxy($range, 'change', function () {
-          var value = $range.value;
-          $value.innerText = value;
-          art.plugins.artplayerPluginDanmuku.config({
-            fontSize: Number(value)
-          });
-        });
-        art.on('artplayerPluginDanmuku:config', function (config) {
-          if ($range.value !== config.fontSize) {
-            $range.value = config.fontSize;
-            $value.innerText = config.fontSize;
-          }
-        });
-      }
-    };
-  }
-  function speed(art) {
-    var i18n = art.i18n,
-        proxy = art.events.proxy;
-    return {
-      name: 'danmuku-speed',
-      index: 12,
-      html: "\n            <div class=\"art-setting-header\">\n                ".concat(i18n.get('Danmu speed'), ": <span class=\"art-value\">5</span>s\n            </div>\n            <div class=\"art-setting-range\">\n                <input type=\"range\" value=\"5\" min=\"1\" max=\"10\" step=\"1\">\n            </div>\n        "),
-      mounted: function mounted($setting) {
-        var $range = $setting.querySelector('input[type=range]');
-        var $value = $setting.querySelector('.art-value');
-        proxy($range, 'change', function () {
-          var value = $range.value;
-          $value.innerText = value;
-          art.plugins.artplayerPluginDanmuku.config({
-            speed: Number(value)
-          });
-        });
-        art.on('artplayerPluginDanmuku:config', function (config) {
-          if ($range.value !== config.speed) {
-            $range.value = config.speed;
-            $value.innerText = config.speed;
-          }
-        });
-      }
-    };
-  }
-  function synchronousPlayback(art) {
-    var i18n = art.i18n,
-        proxy = art.events.proxy;
-    return {
-      name: 'danmuku-synchronousPlayback',
-      index: 13,
-      html: "\n            <label class=\"art-setting-checkbox\">\n                <input type=\"checkbox\"/>".concat(i18n.get('Danmu speed synchronous playback multiple'), "\n            </label>\n        "),
-      mounted: function mounted($setting) {
-        var $checkbox = $setting.querySelector('input[type=checkbox]');
-        proxy($checkbox, 'change', function () {
-          art.plugins.artplayerPluginDanmuku.config({
-            synchronousPlayback: $checkbox.checked
-          });
-        });
-        art.on('artplayerPluginDanmuku:config', function (config) {
-          if ($checkbox.checked !== config.synchronousPlayback) {
-            $checkbox.checked = config.synchronousPlayback;
-          }
-        });
-      }
-    };
-  }
-
   function filter(queue, state, callback) {
     return queue.filter(function (danmu) {
       return danmu.$state === state;
@@ -419,10 +318,6 @@
       _classCallCheck(this, Danmuku);
 
       art.i18n.update(i18n);
-      art.setting.add(opacity);
-      art.setting.add(size);
-      art.setting.add(speed);
-      art.setting.add(synchronousPlayback);
       this.art = art;
       this.queue = [];
       this.option = {};

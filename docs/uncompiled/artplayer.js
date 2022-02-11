@@ -917,7 +917,7 @@
     }], [{
       key: "html",
       get: function get() {
-        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\"></div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.2.7</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
+        return "\n          <div class=\"art-video-player art-subtitle-show art-layer-show\">\n            <video class=\"art-video\"></video>\n            <div class=\"art-poster\"></div>\n            <div class=\"art-subtitle\"></div>\n            <div class=\"art-danmuku\"></div>\n            <div class=\"art-layers\"></div>\n            <div class=\"art-mask\">\n              <div class=\"art-state\"></div>\n            </div>\n            <div class=\"art-bottom\">\n              <div class=\"art-progress\"></div>\n              <div class=\"art-controls\">\n                <div class=\"art-controls-left\"></div>\n                <div class=\"art-controls-right\"></div>\n              </div>\n            </div>\n            <div class=\"art-loading\"></div>\n            <div class=\"art-notice\">\n              <div class=\"art-notice-inner\"></div>\n            </div>\n            <div class=\"art-settings\"></div>\n            <div class=\"art-info\">\n              <div class=\"art-info-panel\">\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Player version:</div>\n                  <div class=\"art-info-content\">4.3.0</div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video url:</div>\n                  <div class=\"art-info-content\" data-video=\"src\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video volume:</div>\n                  <div class=\"art-info-content\" data-video=\"volume\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video time:</div>\n                  <div class=\"art-info-content\" data-video=\"currentTime\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video duration:</div>\n                  <div class=\"art-info-content\" data-video=\"duration\"></div>\n                </div>\n                <div class=\"art-info-item\">\n                  <div class=\"art-info-title\">Video resolution:</div>\n                  <div class=\"art-info-content\">\n                    <span data-video=\"videoWidth\"></span> x <span data-video=\"videoHeight\"></span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"art-info-close\">[x]</div>\n            </div>\n            <div class=\"art-mini-header\">\n              <div class=\"art-mini-title\"></div>\n              <div class=\"art-mini-close\">\xD7</div>\n            </div>\n            <div class=\"art-contextmenus\"></div>\n          </div>\n        ";
       }
     }]);
 
@@ -2176,15 +2176,19 @@
     var notice = art.notice,
         template = art.template,
         i18n = art.i18n;
+    var offsetCache = 0;
     var cuesCache = [];
     art.on('subtitle:switch', function () {
       cuesCache = [];
     });
     def(art, 'subtitleOffset', {
+      get: function get() {
+        return offsetCache;
+      },
       set: function set(value) {
         if (template.$track && template.$track.track) {
           var cues = Array.from(template.$track.track.cues);
-          var time = clamp(value, -5, 5);
+          offsetCache = clamp(value, -5, 5);
 
           for (var index = 0; index < cues.length; index++) {
             var cue = cues[index];
@@ -2196,8 +2200,8 @@
               };
             }
 
-            cue.startTime = clamp(cuesCache[index].startTime + time, 0, art.duration);
-            cue.endTime = clamp(cuesCache[index].endTime + time, 0, art.duration);
+            cue.startTime = clamp(cuesCache[index].startTime + offsetCache, 0, art.duration);
+            cue.endTime = clamp(cuesCache[index].endTime + offsetCache, 0, art.duration);
           }
 
           art.subtitle.update();
@@ -3422,7 +3426,7 @@
 
   function version(option) {
     return _objectSpread$3(_objectSpread$3({}, option), {}, {
-      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.2.7</a>'
+      html: '<a href="https://artplayer.org" target="_blank">ArtPlayer 4.3.0</a>'
     });
   }
 
@@ -4245,12 +4249,12 @@
       setting: setting,
       fullscreen: fullscreen,
       fullscreenWeb: fullscreenWeb,
+      pip: pip,
       arrowLeft: arrowLeft,
       arrowRight: arrowRight,
       playbackRate: playbackRate$2,
       aspectRatio: aspectRatio$1,
-      config: config,
-      pip: pip
+      config: config
     }, art.option.icons);
 
     Object.keys(icons).forEach(function (key) {
@@ -4830,7 +4834,7 @@
     }, {
       key: "version",
       get: function get() {
-        return '4.2.7';
+        return '4.3.0';
       }
     }, {
       key: "env",
@@ -4840,7 +4844,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1644455085043';
+        return '1644544110817';
       }
     }, {
       key: "config",
@@ -4942,7 +4946,7 @@
 
     return Artplayer;
   }(Emitter); // eslint-disable-next-line no-console
-  console.log('%c ArtPlayer %c 4.2.7 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
+  console.log('%c ArtPlayer %c 4.3.0 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;
 

@@ -70,6 +70,33 @@ type ComponentOption = {
     onSelect?(selector: Selector, element: HTMLElement): void;
 };
 
+type SettingOption = {
+    /**
+     * Html string or html element of setting name
+     */
+    html: string | HTMLElement;
+
+    /**
+     * Html string or html element of setting icon
+     */
+    icon?: string | HTMLElement;
+
+    /**
+     * The width of setting
+     */
+    width?: number;
+
+    /**
+     * Whether the default is selected
+     */
+    current?: boolean;
+
+    /**
+     * Html string or html element of component
+     */
+    children?: SettingOption[];
+};
+
 type Component = {
     /**
      * Component self-increasing id
@@ -320,7 +347,7 @@ type Option = {
     /**
      * Custom setting list
      */
-    settings?: ComponentOption[];
+    settings?: SettingOption[];
 
     /**
      * Custom video quality list
@@ -416,7 +443,6 @@ type Option = {
 
 type AspectRatio = 'default' | '4:3' | '16:9' | void;
 type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
-type Rotate = -270 | -180 | -90 | 0 | 90 | 180 | 270 | void;
 type Flip = 'normal' | 'horizontal' | 'vertical' | void;
 
 declare class Player {
@@ -424,8 +450,6 @@ declare class Player {
     set aspectRatio(ratio: AspectRatio);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
-    get rotate(): Rotate;
-    set rotate(deg: Rotate);
     get autoSize(): boolean;
     set autoSize(state: boolean);
     get autoHeight(): boolean;
@@ -474,6 +498,8 @@ declare class Player {
     set title(title: string);
     get theme(): string;
     set theme(theme: string);
+    get subtitleOffset(): number;
+    set subtitleOffset(time: number);
     pause(): any;
     play(): any;
     toggle(): any;
@@ -595,6 +621,7 @@ declare class Artplayer extends Player {
         readonly state: HTMLElement;
         readonly play: HTMLElement;
         readonly pause: HTMLElement;
+        readonly check: HTMLElement;
         readonly volume: HTMLElement;
         readonly volumeClose: HTMLElement;
         readonly subtitle: HTMLElement;
@@ -604,6 +631,11 @@ declare class Artplayer extends Player {
         readonly fullscreenWeb: HTMLElement;
         readonly pip: HTMLElement;
         readonly indicator: HTMLElement;
+        readonly arrowLeft: HTMLElement;
+        readonly arrowRight: HTMLElement;
+        readonly playbackRate: HTMLElement;
+        readonly aspectRatio: HTMLElement;
+        readonly config: HTMLElement;
     };
 
     readonly hotkey: {
