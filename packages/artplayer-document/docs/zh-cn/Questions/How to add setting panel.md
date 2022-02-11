@@ -17,16 +17,6 @@ sidebar_position: 6
 <div className="run-code">▶ Run Code</div>
 
 ```js
-function onSubtitleSelect(item, $dom) {
-    console.info(item, $dom);
-    this.subtitle.url = item.url;
-}
-
-function onQualitySelect(item, $dom) {
-    console.info(item, $dom);
-    this.switchQuality(item.url, item.html);
-}
-
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -104,4 +94,14 @@ var art = new Artplayer({
         },
     ],
 });
+
+function onSubtitleSelect(item, $dom) {
+    console.info(item, $dom);
+    art.subtitle.url = item.url;
+}
+
+function onQualitySelect(item, $dom) {
+    console.info(item, $dom);
+    art.switchQuality(item.url, item.html);
+}
 ```
