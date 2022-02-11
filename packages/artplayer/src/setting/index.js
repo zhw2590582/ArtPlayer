@@ -90,18 +90,15 @@ export default class Setting extends Component {
         } = this.art;
 
         const $item = document.createElement('div');
-        const hasChildren = item.selector && item.selector.length;
-
-        const $left = append($item, `<div class="art-setting-item-left"></div>`);
-        const $right = append($item, `<div class="art-setting-item-right"></div>`);
-
         addClass($item, 'art-setting-item');
-        if (item.default) {
-            addClass($item, 'art-current');
-        }
+        if (item.default) addClass($item, 'art-current');
+
+        const $left = append($item, '<div class="art-setting-item-left"></div>');
+        const $right = append($item, '<div class="art-setting-item-right"></div>');
 
         const $icon = document.createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
+        const hasChildren = item.selector && item.selector.length;
 
         if (item.back) {
             addClass($item, 'art-setting-item-back');

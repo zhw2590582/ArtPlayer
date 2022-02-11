@@ -4444,17 +4444,13 @@
             icons = _this$art.icons,
             proxy = _this$art.events.proxy;
         var $item = document.createElement('div');
-        var hasChildren = item.selector && item.selector.length;
-        var $left = append($item, "<div class=\"art-setting-item-left\"></div>");
-        var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
         addClass($item, 'art-setting-item');
-
-        if (item.default) {
-          addClass($item, 'art-current');
-        }
-
+        if (item.default) addClass($item, 'art-current');
+        var $left = append($item, '<div class="art-setting-item-left"></div>');
+        var $right = append($item, '<div class="art-setting-item-right"></div>');
         var $icon = document.createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
+        var hasChildren = item.selector && item.selector.length;
 
         if (item.back) {
           addClass($item, 'art-setting-item-back');
