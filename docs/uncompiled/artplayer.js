@@ -1609,7 +1609,8 @@
   var screenfull = screenfull$1.exports;
 
   var nativeScreenfull = function nativeScreenfull(art) {
-    var $player = art.template.$player;
+    var notice = art.notice,
+        $player = art.template.$player;
     screenfull.on('change', function () {
       return art.emit('fullscreen', screenfull.isFullscreen);
     });
@@ -1625,6 +1626,7 @@
             art.autoSize = false;
             art.emit('resize');
             art.emit('fullscreen', true);
+            notice.show = '';
           });
         } else {
           screenfull.exit().then(function () {
@@ -1633,6 +1635,7 @@
             art.autoSize = art.option.autoSize;
             art.emit('resize');
             art.emit('fullscreen');
+            notice.show = '';
           });
         }
       }
@@ -1640,7 +1643,8 @@
   };
 
   var webkitScreenfull = function webkitScreenfull(art) {
-    var $video = art.template.$video;
+    var notice = art.notice,
+        $video = art.template.$video;
     def(art, 'fullscreen', {
       get: function get() {
         return $video.webkitDisplayingFullscreen;
@@ -1649,9 +1653,11 @@
         if (value) {
           $video.webkitEnterFullscreen();
           art.emit('fullscreen', true);
+          notice.show = '';
         } else {
           $video.webkitExitFullscreen();
           art.emit('fullscreen');
+          notice.show = '';
         }
       }
     });
@@ -1683,7 +1689,8 @@
   }
 
   function fullscreenWebMix(art) {
-    var $player = art.template.$player;
+    var notice = art.notice,
+        $player = art.template.$player;
     def(art, 'fullscreenWeb', {
       get: function get() {
         return hasClass($player, 'art-fullscreen-web');
@@ -1695,12 +1702,14 @@
           art.autoSize = false;
           art.emit('resize');
           art.emit('fullscreenWeb', true);
+          notice.show = '';
         } else {
           removeClass($player, 'art-fullscreen-web');
           art.aspectRatioReset = true;
           art.autoSize = art.option.autoSize;
           art.emit('resize');
           art.emit('fullscreenWeb');
+          notice.show = '';
         }
       }
     });
@@ -3841,13 +3850,15 @@
   }
 
   function resizeInit(art, events) {
-    var option = art.option;
+    var notice = art.notice,
+        option = art.option;
     var resizeFn = throttle(function () {
       if (art.normalSize) {
         art.autoSize = option.autoSize;
       }
 
       art.aspectRatioReset = true;
+      notice.show = '';
       art.emit('resize');
     }, 500);
     events.proxy(window, ['orientationchange', 'resize'], function () {

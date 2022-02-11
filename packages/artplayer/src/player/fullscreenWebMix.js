@@ -1,7 +1,10 @@
 import { addClass, removeClass, hasClass, def } from '../utils';
 
 export default function fullscreenWebMix(art) {
-    const { $player } = art.template;
+    const {
+        notice,
+        template: { $player },
+    } = art;
 
     def(art, 'fullscreenWeb', {
         get() {
@@ -14,12 +17,14 @@ export default function fullscreenWebMix(art) {
                 art.autoSize = false;
                 art.emit('resize');
                 art.emit('fullscreenWeb', true);
+                notice.show = '';
             } else {
                 removeClass($player, 'art-fullscreen-web');
                 art.aspectRatioReset = true;
                 art.autoSize = art.option.autoSize;
                 art.emit('resize');
                 art.emit('fullscreenWeb');
+                notice.show = '';
             }
         },
     });

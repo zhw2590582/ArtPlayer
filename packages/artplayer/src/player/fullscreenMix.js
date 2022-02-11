@@ -2,7 +2,10 @@ import screenfull from 'screenfull';
 import { addClass, removeClass, def, get } from '../utils';
 
 const nativeScreenfull = (art) => {
-    const { $player } = art.template;
+    const {
+        notice,
+        template: { $player },
+    } = art;
 
     screenfull.on('change', () => art.emit('fullscreen', screenfull.isFullscreen));
 
@@ -18,6 +21,7 @@ const nativeScreenfull = (art) => {
                     art.autoSize = false;
                     art.emit('resize');
                     art.emit('fullscreen', true);
+                    notice.show = '';
                 });
             } else {
                 screenfull.exit().then(() => {
@@ -26,6 +30,7 @@ const nativeScreenfull = (art) => {
                     art.autoSize = art.option.autoSize;
                     art.emit('resize');
                     art.emit('fullscreen');
+                    notice.show = '';
                 });
             }
         },
@@ -33,7 +38,10 @@ const nativeScreenfull = (art) => {
 };
 
 const webkitScreenfull = (art) => {
-    const { $video } = art.template;
+    const {
+        notice,
+        template: { $video },
+    } = art;
 
     def(art, 'fullscreen', {
         get() {
@@ -43,9 +51,11 @@ const webkitScreenfull = (art) => {
             if (value) {
                 $video.webkitEnterFullscreen();
                 art.emit('fullscreen', true);
+                notice.show = '';
             } else {
                 $video.webkitExitFullscreen();
                 art.emit('fullscreen');
+                notice.show = '';
             }
         },
     });
