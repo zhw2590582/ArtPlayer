@@ -8,8 +8,8 @@ import { append, addClass, setStyle, inverseClass, includeFromEvent } from '../u
 function makeRecursion(option, parentItem, parentList) {
     for (let index = 0; index < option.length; index++) {
         const item = option[index];
-        item.parentItem = parentItem;
-        item.parentList = parentList;
+        item._parentItem = parentItem;
+        item._parentList = parentList;
         if (item.selector) {
             makeRecursion(item.selector, item, option);
         }
@@ -94,10 +94,10 @@ export default class Setting extends Component {
         addClass($icon, 'art-setting-item-left-icon');
         append($icon, icons.arrowLeft);
         append($left, $icon);
-        append($left, item.parentItem.html);
+        append($left, item._parentItem.html);
 
         proxy($item, 'click', () => {
-            this.init(item.parentList);
+            this.init(item._parentList);
         });
 
         return $item;
@@ -142,8 +142,8 @@ export default class Setting extends Component {
                 this.init(item.selector, item.width);
             } else {
                 inverseClass($item, 'art-current');
-                if (item.parentItem && item.parentItem.onSelect) {
-                    const result = item.parentItem.onSelect.call(this.art, item, $item, event);
+                if (item._parentItem && item._parentItem.onSelect) {
+                    const result = item._parentItem.onSelect.call(this.art, item, $item, event);
                     if (typeof result === 'string') {
                         $item.innerHTML = result;
                     }
@@ -169,7 +169,7 @@ export default class Setting extends Component {
             const $panel = document.createElement('div');
             addClass($panel, 'art-setting-panel');
 
-            if (option[0] && option[0].parentItem) {
+            if (option[0] && option[0]._parentItem) {
                 append($panel, this.creatHeader(option[0]));
             }
 
@@ -183,8 +183,8 @@ export default class Setting extends Component {
             inverseClass($panel, 'art-current');
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
 
-            if (option[0] && option[0].parentItem && option[0].parentItem.mounted) {
-                option[0].parentItem.mounted.call(this.art, $panel);
+            if (option[0] && option[0]._parentItem && option[0]._parentItem.mounted) {
+                option[0]._parentItem.mounted.call(this.art, $panel);
             }
         }
     }

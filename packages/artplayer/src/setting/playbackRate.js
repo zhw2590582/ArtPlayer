@@ -7,7 +7,7 @@ export default function playbackRate(art) {
         width: 150,
         html: i18n.get('Play Speed'),
         icon: icons.playbackRate,
-        selector: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map((item) => {
+        selector: [0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map((item) => {
             return {
                 value: item,
                 default: item === art.playbackRate,

@@ -4379,7 +4379,7 @@
       width: 150,
       html: i18n.get('Play Speed'),
       icon: icons.playbackRate,
-      selector: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
+      selector: [0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map(function (item) {
         return {
           value: item,
           default: item === art.playbackRate,
@@ -4441,8 +4441,8 @@
   function makeRecursion(option, parentItem, parentList) {
     for (var index = 0; index < option.length; index++) {
       var item = option[index];
-      item.parentItem = parentItem;
-      item.parentList = parentList;
+      item._parentItem = parentItem;
+      item._parentList = parentList;
 
       if (item.selector) {
         makeRecursion(item.selector, item, option);
@@ -4534,9 +4534,9 @@
         addClass($icon, 'art-setting-item-left-icon');
         append($icon, icons.arrowLeft);
         append($left, $icon);
-        append($left, item.parentItem.html);
+        append($left, item._parentItem.html);
         proxy($item, 'click', function () {
-          _this2.init(item.parentList);
+          _this2.init(item._parentList);
         });
         return $item;
       }
@@ -4580,8 +4580,8 @@
           } else {
             inverseClass($item, 'art-current');
 
-            if (item.parentItem && item.parentItem.onSelect) {
-              var result = item.parentItem.onSelect.call(_this3.art, item, $item, event);
+            if (item._parentItem && item._parentItem.onSelect) {
+              var result = item._parentItem.onSelect.call(_this3.art, item, $item, event);
 
               if (typeof result === 'string') {
                 $item.innerHTML = result;
@@ -4610,7 +4610,7 @@
 
           addClass(_$panel, 'art-setting-panel');
 
-          if (option[0] && option[0].parentItem) {
+          if (option[0] && option[0]._parentItem) {
             append(_$panel, this.creatHeader(option[0]));
           }
 
@@ -4624,8 +4624,8 @@
           inverseClass(_$panel, 'art-current');
           setStyle(this.$parent, 'width', "".concat(_$panel.dataset.width, "px"));
 
-          if (option[0] && option[0].parentItem && option[0].parentItem.mounted) {
-            option[0].parentItem.mounted.call(this.art, _$panel);
+          if (option[0] && option[0]._parentItem && option[0]._parentItem.mounted) {
+            option[0]._parentItem.mounted.call(this.art, _$panel);
           }
         }
       }
