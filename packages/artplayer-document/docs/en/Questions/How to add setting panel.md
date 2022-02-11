@@ -43,6 +43,7 @@ var art = new Artplayer({
             onSelect: function onSubtitleSelect(item, $dom) {
                 console.info(item, $dom);
                 art.subtitle.url = item.url;
+                return item.html;
             },
         },
         {
@@ -66,6 +67,7 @@ var art = new Artplayer({
             onSelect: function onQualitySelect(item, $dom) {
                 console.info(item, $dom);
                 art.switchQuality(item.url, item.html);
+                return item.html;
             },
         },
         {
