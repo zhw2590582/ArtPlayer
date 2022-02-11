@@ -89,15 +89,15 @@ type SettingOption = {
     /**
      * Whether the default is selected
      */
-    current?: boolean;
+    default?: boolean;
 
     /**
-     * Custom selector list, use in controls
+     * Custom selector list
      */
     selector?: SettingOption[];
 
     /**
-     * When selector item click, use in controls
+     * When selector item click
      */
     onSelect?(selector: SettingOption, element: HTMLElement, event: Event): void;
 };
