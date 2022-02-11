@@ -3,7 +3,7 @@ import { append, tooltip } from '../utils';
 export default function pip(option) {
     return (art) => ({
         ...option,
-        tooltip: art.i18n.get('PIP mode'),
+        tooltip: art.i18n.get('PIP Mode'),
         mounted: ($control) => {
             const {
                 events: { proxy },
@@ -18,7 +18,7 @@ export default function pip(option) {
             });
 
             art.on('pip', (value) => {
-                tooltip($control, i18n.get(value ? 'Exit PIP mode' : 'PIP mode'));
+                tooltip($control, i18n.get(value ? 'Exit PIP Mode' : 'PIP Mode'));
             });
         },
     });

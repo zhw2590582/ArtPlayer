@@ -9,7 +9,7 @@ export default function playbackRate(art) {
 
     return {
         width: 150,
-        html: i18n.get('Flip'),
+        html: i18n.get('Video Flip'),
         items: Object.keys(keys).map((key) => {
             return {
                 html: i18n.get(keys[key]),

@@ -3,7 +3,7 @@ export default function aspectRatio(art) {
 
     return {
         width: 150,
-        html: i18n.get('Aspect ratio'),
+        html: i18n.get('Aspect Ratio'),
         icon: icons.aspectRatio,
         items: ['default', '4:3', '16:9'].map((item) => {
             return {

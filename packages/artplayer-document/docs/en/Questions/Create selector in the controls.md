@@ -5,7 +5,7 @@ sidebar_position: 1
 
 Sometimes you need to add a list in the controls, then you can use the `selector` and `onSelect` attribute when adding controls
 
-### Switch subtitle
+### Switch Subtitle
 
 <div className="run-code">▶ Run Code</div>
 

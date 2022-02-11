@@ -69,7 +69,7 @@ export default function fullscreenMix(art) {
                     return false;
                 },
                 set() {
-                    notice.show = i18n.get('Fullscreen not supported');
+                    notice.show = i18n.get('Fullscreen Not Supported');
                 },
             });
         }

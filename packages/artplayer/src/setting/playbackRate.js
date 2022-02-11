@@ -3,7 +3,7 @@ export default function playbackRate(art) {
 
     return {
         width: 150,
-        html: i18n.get('Play speed'),
+        html: i18n.get('Play Speed'),
         icon: icons.playbackRate,
         items: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map((item) => {
             return {

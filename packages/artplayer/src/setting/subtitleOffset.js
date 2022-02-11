@@ -3,7 +3,7 @@ export default function subtitleOffset(art) {
 
     return {
         width: 150,
-        html: i18n.get('Subtitle offset time'),
+        html: i18n.get('Subtitle Offset Time'),
         icon: icons.subtitle,
         items: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map((item) => {
             return {

@@ -81,7 +81,7 @@ export default function eventInit(art) {
             art.controls.show = false;
             addClass($player, 'art-error');
             sleep(1000).then(() => {
-                notice.show = i18n.get('Video load failed');
+                notice.show = i18n.get('Video Load Failed');
                 art.destroy(false);
             });
         }

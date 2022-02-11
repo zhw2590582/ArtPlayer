@@ -18,7 +18,7 @@ export default function fullscreen(option) {
             });
 
             art.on('fullscreen', (value) => {
-                tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
+                tooltip($control, i18n.get(value ? 'Exit Fullscreen' : 'Fullscreen'));
             });
         },
     });
