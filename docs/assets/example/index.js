@@ -31,7 +31,7 @@ var art = new Artplayer({
         {
             html: 'Custom setting',
             width: 250,
-            items: [
+            children: [
                 {
                     html: 'Custom setting 01',
                     click: function () {

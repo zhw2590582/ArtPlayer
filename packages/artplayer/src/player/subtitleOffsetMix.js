@@ -28,7 +28,7 @@ export default function subtitleOffsetMix(art) {
                 }
 
                 art.subtitle.update();
-                notice.show = `${i18n.get('Subtitle Offset Time')}: ${value}s`;
+                notice.show = `${i18n.get('Subtitle Offset')}: ${value}s`;
                 art.emit('subtitleOffset', value);
             } else {
                 art.emit('subtitleOffset', 0);
