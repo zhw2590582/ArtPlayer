@@ -1,4 +1,4 @@
-import { inverseClass, query, queryAll } from '../utils';
+import { inverseClass, queryAll } from '../utils';
 
 export default function playbackRate(art) {
     const { i18n, icons } = art;
@@ -23,14 +23,15 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
         },
         mounted: ($panel, item) => {
-            const $desc = query('.art-setting-item-right-desc', item.$item);
-            $desc.innerText = getI18n(art.playbackRate);
+            item.$desc.innerText = getI18n(art.playbackRate);
 
             art.on('playbackRate', (value) => {
-                $desc.innerText = getI18n(art.playbackRate);
+                item.$desc.innerText = getI18n(art.playbackRate);
+
                 const $current = queryAll('.art-setting-item', $panel).find(
                     (item) => Number(item.dataset.value) === value,
                 );
+
                 if ($current) {
                     inverseClass($current, 'art-current');
                 }

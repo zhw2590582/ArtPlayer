@@ -1,4 +1,4 @@
-import { inverseClass, query, queryAll } from '../utils';
+import { inverseClass, queryAll } from '../utils';
 
 export default function aspectRatio(art) {
     const { i18n, icons } = art;
@@ -23,11 +23,11 @@ export default function aspectRatio(art) {
             art.aspectRatio = item.value;
         },
         mounted: ($panel, item) => {
-            const $desc = query('.art-setting-item-right-desc', item.$item);
-            $desc.innerText = getI18n(art.aspectRatio);
+            item.$desc.innerText = getI18n(art.aspectRatio);
 
             art.on('aspectRatio', (value) => {
-                $desc.innerText = getI18n(art.aspectRatio);
+                item.$desc.innerText = getI18n(art.aspectRatio);
+
                 const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
                 if ($current) {
                     inverseClass($current, 'art-current');

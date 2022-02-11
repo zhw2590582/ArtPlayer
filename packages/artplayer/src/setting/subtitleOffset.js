@@ -1,4 +1,4 @@
-import { inverseClass, query, queryAll } from '../utils';
+import { inverseClass, queryAll } from '../utils';
 
 export default function subtitleOffset(art) {
     const { i18n, icons } = art;
@@ -23,11 +23,11 @@ export default function subtitleOffset(art) {
             art.subtitleOffset = item.value;
         },
         mounted: ($panel, item) => {
-            const $desc = query('.art-setting-item-right-desc', item.$item);
-            $desc.innerText = getI18n(art.subtitleOffset);
+            item.$desc.innerText = getI18n(art.subtitleOffset);
 
             art.on('subtitleOffset', (value) => {
-                $desc.innerText = getI18n(art.subtitleOffset);
+                item.$desc.innerText = getI18n(art.subtitleOffset);
+                
                 const $current = queryAll('.art-setting-item', $panel).find(
                     (item) => Number(item.dataset.value) === value,
                 );

@@ -1,4 +1,4 @@
-import { inverseClass, query, queryAll } from '../utils';
+import { inverseClass, queryAll } from '../utils';
 
 export default function flip(art) {
     const { i18n, icons } = art;
@@ -25,11 +25,11 @@ export default function flip(art) {
             art.flip = item.value;
         },
         mounted: ($panel, item) => {
-            const $desc = query('.art-setting-item-right-desc', item.$item);
-            $desc.innerText = i18n.get(keys[art.flip]);
+            item.$desc.innerText = i18n.get(keys[art.flip]);
 
             art.on('flip', (value) => {
-                $desc.innerText = i18n.get(keys[art.flip]);
+                item.$desc.innerText = i18n.get(keys[art.flip]);
+                
                 const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
                 if ($current) {
                     inverseClass($current, 'art-current');

@@ -136,6 +136,8 @@ export default class Setting extends Component {
             const $desc = document.createElement('div');
             addClass($desc, 'art-setting-item-right-desc');
             append($right, $desc);
+            item.$desc = $desc;
+
             if (item.desc) {
                 $desc.innerText = item.desc;
             }
@@ -186,7 +188,6 @@ export default class Setting extends Component {
 
             for (let index = 0; index < option.length; index++) {
                 const $item = this.creatItem(option[index]);
-                option[index].$item = $item;
                 append($panel, $item);
             }
 

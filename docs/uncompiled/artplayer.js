@@ -4307,10 +4307,9 @@
         art.flip = item.value;
       },
       mounted: function mounted($panel, item) {
-        var $desc = query('.art-setting-item-right-desc', item.$item);
-        $desc.innerText = i18n.get(keys[art.flip]);
+        item.$desc.innerText = i18n.get(keys[art.flip]);
         art.on('flip', function (value) {
-          $desc.innerText = i18n.get(keys[art.flip]);
+          item.$desc.innerText = i18n.get(keys[art.flip]);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return item.dataset.value === value;
           });
@@ -4347,10 +4346,9 @@
         art.aspectRatio = item.value;
       },
       mounted: function mounted($panel, item) {
-        var $desc = query('.art-setting-item-right-desc', item.$item);
-        $desc.innerText = getI18n(art.aspectRatio);
+        item.$desc.innerText = getI18n(art.aspectRatio);
         art.on('aspectRatio', function (value) {
-          $desc.innerText = getI18n(art.aspectRatio);
+          item.$desc.innerText = getI18n(art.aspectRatio);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return item.dataset.value === value;
           });
@@ -4387,10 +4385,9 @@
         art.playbackRate = item.value;
       },
       mounted: function mounted($panel, item) {
-        var $desc = query('.art-setting-item-right-desc', item.$item);
-        $desc.innerText = getI18n(art.playbackRate);
+        item.$desc.innerText = getI18n(art.playbackRate);
         art.on('playbackRate', function (value) {
-          $desc.innerText = getI18n(art.playbackRate);
+          item.$desc.innerText = getI18n(art.playbackRate);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return Number(item.dataset.value) === value;
           });
@@ -4427,10 +4424,9 @@
         art.subtitleOffset = item.value;
       },
       mounted: function mounted($panel, item) {
-        var $desc = query('.art-setting-item-right-desc', item.$item);
-        $desc.innerText = getI18n(art.subtitleOffset);
+        item.$desc.innerText = getI18n(art.subtitleOffset);
         art.on('subtitleOffset', function (value) {
-          $desc.innerText = getI18n(art.subtitleOffset);
+          item.$desc.innerText = getI18n(art.subtitleOffset);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return Number(item.dataset.value) === value;
           });
@@ -4583,6 +4579,7 @@
           var $desc = document.createElement('div');
           addClass($desc, 'art-setting-item-right-desc');
           append($right, $desc);
+          item.$desc = $desc;
 
           if (item.desc) {
             $desc.innerText = item.desc;
@@ -4636,7 +4633,6 @@
 
           for (var index = 0; index < option.length; index++) {
             var $item = this.creatItem(option[index]);
-            option[index].$item = $item;
             append(_$panel, $item);
           }
 
