@@ -27,7 +27,6 @@ export default function subtitleOffset(art) {
         }),
         onSelect(item) {
             art.subtitleOffset = item.value;
-            return getI18n(item.value);
         },
         mounted: ($panel, item) => {
             update($panel, item._$description, art.subtitleOffset);

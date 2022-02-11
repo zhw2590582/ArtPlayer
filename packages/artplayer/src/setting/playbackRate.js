@@ -27,7 +27,6 @@ export default function playbackRate(art) {
         }),
         onSelect(item) {
             art.playbackRate = item.value;
-            return getI18n(item.value);
         },
         mounted: ($panel, item) => {
             update($panel, item._$description, art.playbackRate);

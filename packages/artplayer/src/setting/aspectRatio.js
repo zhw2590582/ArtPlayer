@@ -27,7 +27,6 @@ export default function aspectRatio(art) {
         }),
         onSelect(item) {
             art.aspectRatio = item.value;
-            return getI18n(item.value);
         },
         mounted: ($panel, item) => {
             update($panel, item._$description, art.aspectRatio);

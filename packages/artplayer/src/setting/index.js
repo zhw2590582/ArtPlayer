@@ -119,7 +119,7 @@ export default class Setting extends Component {
             addClass($item, 'art-current');
         }
 
-        if (item.value) {
+        if (item.value !== undefined) {
             $item.dataset.value = item.value;
         }
 

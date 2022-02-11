@@ -4325,7 +4325,6 @@
       }),
       onSelect: function onSelect(item) {
         art.flip = item.value;
-        return i18n.get(keys[item.value]);
       },
       mounted: function mounted($panel, item) {
         update($panel, item._$description, art.flip);
@@ -4366,7 +4365,6 @@
       }),
       onSelect: function onSelect(item) {
         art.aspectRatio = item.value;
-        return getI18n(item.value);
       },
       mounted: function mounted($panel, item) {
         update($panel, item._$description, art.aspectRatio);
@@ -4407,7 +4405,6 @@
       }),
       onSelect: function onSelect(item) {
         art.playbackRate = item.value;
-        return getI18n(item.value);
       },
       mounted: function mounted($panel, item) {
         update($panel, item._$description, art.playbackRate);
@@ -4448,7 +4445,6 @@
       }),
       onSelect: function onSelect(item) {
         art.subtitleOffset = item.value;
-        return getI18n(item.value);
       },
       mounted: function mounted($panel, item) {
         update($panel, item._$description, art.subtitleOffset);
@@ -4583,7 +4579,7 @@
           addClass($item, 'art-current');
         }
 
-        if (item.value) {
+        if (item.value !== undefined) {
           $item.dataset.value = item.value;
         }
 

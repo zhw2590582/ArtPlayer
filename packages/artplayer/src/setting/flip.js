@@ -29,7 +29,6 @@ export default function flip(art) {
         }),
         onSelect(item) {
             art.flip = item.value;
-            return i18n.get(keys[item.value]);
         },
         mounted: ($panel, item) => {
             update($panel, item._$description, art.flip);
