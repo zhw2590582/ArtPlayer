@@ -550,7 +550,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的设置面板，更多信息请访问 [怎么添加设置面板](/document/zh-cn/Questions/)
+初始化自定义的设置面板，更多信息请访问 [怎么添加设置面板](/document/zh-cn/Questions/How%20to%20add%20setting%20panel)
 
 <div className="run-code">▶ Run Code</div>
 
@@ -562,7 +562,24 @@ var art = new Artplayer({
     settings: [
         {
             html: '自定义设置01',
-            items: [
+            children: [
+                {
+                    html: '子菜单01',
+                    click: function() {
+                        console.log('你点击了子菜单01');
+                    }
+                },
+                {
+                    html: '子菜单02',
+                    click: function() {
+                        console.log('你点击了子菜单01');
+                    }
+                },
+            ]
+        },
+        {
+            html: '自定义设置02',
+            children: [
                 {
                     html: '子菜单01',
                     click: function() {

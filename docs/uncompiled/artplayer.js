@@ -4280,11 +4280,11 @@
     return {
       width: 150,
       html: i18n.get('Video Flip'),
-      children: Object.keys(keys).map(function (key) {
+      selector: Object.keys(keys).map(function (key) {
         return {
           html: i18n.get(keys[key]),
           current: key === 'normal',
-          click: function click() {
+          onSelect: function onSelect() {
             art.flip = key;
           }
         };
@@ -4299,11 +4299,11 @@
       width: 150,
       html: i18n.get('Aspect Ratio'),
       icon: icons.aspectRatio,
-      children: ['default', '4:3', '16:9'].map(function (item) {
+      selector: ['default', '4:3', '16:9'].map(function (item) {
         return {
           html: item === 'default' ? i18n.get('Default') : item,
           current: item === 'default',
-          click: function click() {
+          onSelect: function onSelect() {
             art.aspectRatio = item;
           }
         };
@@ -4318,11 +4318,11 @@
       width: 150,
       html: i18n.get('Play Speed'),
       icon: icons.playbackRate,
-      children: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
+      selector: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
         return {
           html: item === 1.0 ? i18n.get('Normal') : item,
           current: item === 1.0,
-          click: function click() {
+          onSelect: function onSelect() {
             art.playbackRate = item;
           }
         };
@@ -4337,11 +4337,11 @@
       width: 150,
       html: i18n.get('Subtitle Offset'),
       icon: icons.subtitle,
-      children: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
+      selector: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
         return {
           html: item === 0 ? i18n.get('Normal') : item,
           current: item === 0,
-          click: function click() {
+          onSelect: function onSelect() {
             art.subtitleOffset = item;
           }
         };
@@ -4357,13 +4357,13 @@
     for (var index = 0; index < option.length; index++) {
       var item = option[index];
 
-      if (!item.back && item.children) {
-        item.children.unshift({
+      if (!item.back && item.selector) {
+        item.selector.unshift({
           html: item.html,
-          children: option,
+          selector: option,
           back: true
         });
-        makeRecursion(item.children);
+        makeRecursion(item.selector);
       }
     }
 
@@ -4444,7 +4444,7 @@
             icons = _this$art.icons,
             proxy = _this$art.events.proxy;
         var $item = document.createElement('div');
-        var hasChildren = item.children && item.children.length;
+        var hasChildren = item.selector && item.selector.length;
         var $left = append($item, "<div class=\"art-setting-item-left\"></div>");
         var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
         addClass($item, 'art-setting-item');
@@ -4470,12 +4470,12 @@
         }
 
         proxy($item, 'click', function (event) {
-          if (typeof item.click === 'function') {
-            item.click.call(_this2.art, _this2, event);
+          if (typeof item.onSelect === 'function') {
+            item.onSelect.call(_this2.art, _this2, event);
           }
 
           if (hasChildren) {
-            _this2.init(item.children);
+            _this2.init(item.selector);
 
             setStyle(_this2.$parent, 'width', "".concat(item.width || _this2.width, "px"));
           } else {

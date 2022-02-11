@@ -31,16 +31,16 @@ var art = new Artplayer({
         {
             html: 'Custom setting',
             width: 250,
-            children: [
+            selector: [
                 {
                     html: 'Custom setting 01',
-                    click: function () {
+                    onSelect: function () {
                         console.info('You clicked on the custom setting 01');
                     },
                 },
                 {
                     html: 'Custom setting 02',
-                    click: function () {
+                    onSelect: function () {
                         console.info('You clicked on the custom setting 02');
                     },
                 },
