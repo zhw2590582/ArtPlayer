@@ -30,19 +30,21 @@ var art = new Artplayer({
     settings: [
         {
             width: 200,
-            html: 'Custom setting',
+            html: 'Custom Setting',
+            description: 'Click This',
             icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
             selector: [
                 {
                     default: true,
-                    html: 'Custom setting 01',
+                    html: 'Setting 01',
                 },
                 {
-                    html: 'Custom setting 02',
+                    html: 'Setting 02',
                 },
             ],
             onSelect: function (item) {
                 console.info('You clicked on the custom setting', item.html);
+                return item.html;
             },
         },
     ],

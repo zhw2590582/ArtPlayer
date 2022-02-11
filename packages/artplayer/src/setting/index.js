@@ -133,13 +133,13 @@ export default class Setting extends Component {
         append($left, item.html);
 
         if (hasChildren) {
-            const $desc = document.createElement('div');
-            addClass($desc, 'art-setting-item-right-desc');
-            append($right, $desc);
-            item.$desc = $desc;
+            const $description = document.createElement('div');
+            addClass($description, 'art-setting-item-right-description');
+            append($right, $description);
+            item._$description = $description;
 
-            if (item.desc) {
-                $desc.innerText = item.desc;
+            if (item.description) {
+                $description.innerHTML = item.description;
             }
 
             const $iconRight = document.createElement('div');
@@ -159,7 +159,12 @@ export default class Setting extends Component {
                 }
 
                 if (item._parentItem && item._parentItem.onSelect) {
-                    item._parentItem.onSelect.call(this.art, item, $item, event);
+                    const result = item._parentItem.onSelect.call(this.art, item, $item, event);
+                    if (item._parentItem._$description) {
+                        if (typeof result === 'string' || typeof result === 'number') {
+                            item._parentItem._$description.innerHTML = result;
+                        }
+                    }
                 }
             }
         });

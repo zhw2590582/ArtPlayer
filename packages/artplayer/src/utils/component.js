@@ -133,7 +133,7 @@ export default class Component {
             $value.innerText = $item.innerText;
             if (option.onSelect) {
                 const result = option.onSelect.call(this.art, find, $item, event);
-                if (typeof result === 'string') {
+                if (typeof result === 'string' || typeof result === 'number') {
                     $value.innerHTML = result;
                 }
             }
