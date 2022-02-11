@@ -29,7 +29,7 @@ var art = new Artplayer({
     },
     settings: [
         {
-            width: 250,
+            width: 200,
             html: 'Custom setting',
             icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
             selector: [

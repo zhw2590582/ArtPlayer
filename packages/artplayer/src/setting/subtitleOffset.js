@@ -8,7 +8,7 @@ export default function subtitleOffset(art) {
     }
 
     return {
-        width: 150,
+        width: 200,
         html: i18n.get('Subtitle Offset'),
         desc: getI18n(art.subtitleOffset),
         icon: icons.subtitle,
@@ -27,7 +27,7 @@ export default function subtitleOffset(art) {
 
             art.on('subtitleOffset', (value) => {
                 item.$desc.innerText = getI18n(art.subtitleOffset);
-                
+
                 const $current = queryAll('.art-setting-item', $panel).find(
                     (item) => Number(item.dataset.value) === value,
                 );

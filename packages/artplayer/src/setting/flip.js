@@ -10,7 +10,7 @@ export default function flip(art) {
     };
 
     return {
-        width: 150,
+        width: 200,
         html: i18n.get('Video Flip'),
         desc: i18n.get(keys[art.flip]),
         icon: icons.config,
@@ -29,7 +29,7 @@ export default function flip(art) {
 
             art.on('flip', (value) => {
                 item.$desc.innerText = i18n.get(keys[art.flip]);
-                
+
                 const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
                 if ($current) {
                     inverseClass($current, 'art-current');

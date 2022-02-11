@@ -8,7 +8,7 @@ export default function aspectRatio(art) {
     }
 
     return {
-        width: 150,
+        width: 200,
         html: i18n.get('Aspect Ratio'),
         icon: icons.aspectRatio,
         desc: getI18n(art.aspectRatio),

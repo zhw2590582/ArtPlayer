@@ -8,7 +8,7 @@ export default function playbackRate(art) {
     }
 
     return {
-        width: 150,
+        width: 200,
         html: i18n.get('Play Speed'),
         desc: getI18n(art.playbackRate),
         icon: icons.playbackRate,

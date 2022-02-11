@@ -31,7 +31,7 @@ export default class Setting extends Component {
         this.name = 'setting';
         this.$parent = $setting;
 
-        this.width = 200;
+        this.width = 250;
         this.option = [];
         this.cache = new Map();
 

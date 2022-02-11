@@ -4292,7 +4292,7 @@
       vertical: 'Vertical'
     };
     return {
-      width: 150,
+      width: 200,
       html: i18n.get('Video Flip'),
       desc: i18n.get(keys[art.flip]),
       icon: icons.config,
@@ -4331,7 +4331,7 @@
     }
 
     return {
-      width: 150,
+      width: 200,
       html: i18n.get('Aspect Ratio'),
       icon: icons.aspectRatio,
       desc: getI18n(art.aspectRatio),
@@ -4370,7 +4370,7 @@
     }
 
     return {
-      width: 150,
+      width: 200,
       html: i18n.get('Play Speed'),
       desc: getI18n(art.playbackRate),
       icon: icons.playbackRate,
@@ -4409,7 +4409,7 @@
     }
 
     return {
-      width: 150,
+      width: 200,
       html: i18n.get('Subtitle Offset'),
       desc: getI18n(art.subtitleOffset),
       icon: icons.subtitle,
@@ -4476,7 +4476,7 @@
       _this.art = art;
       _this.name = 'setting';
       _this.$parent = $setting;
-      _this.width = 200;
+      _this.width = 250;
       _this.option = [];
       _this.cache = new Map();
 
