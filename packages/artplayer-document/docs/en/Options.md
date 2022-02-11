@@ -565,34 +565,28 @@ var art = new Artplayer({
             selector: [
                 {
                     html: 'Submenu 01',
-                    onSelect: function() {
-                        console.log('You click on the submenu 01');
-                    }
                 },
                 {
                     html: 'Submenu 02',
-                    onSelect: function() {
-                        console.log('You click on the submenu 02');
-                    }
                 },
-            ]
+            ],
+            onSelect: function(item) {
+                console.log(item.html);
+            }
         },
         {
             html: 'Custom setting 02',
             selector: [
                 {
                     html: 'Submenu 01',
-                    onSelect: function() {
-                        console.log('You click on the submenu 01');
-                    }
                 },
                 {
                     html: 'Submenu 02',
-                    onSelect: function() {
-                        console.log('You click on the submenu 02');
-                    }
                 },
-            ]
+            ],
+            onSelect: function(item) {
+                console.log(item.html);
+            }
         },
     ],
 });

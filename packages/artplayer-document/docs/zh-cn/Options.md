@@ -565,34 +565,28 @@ var art = new Artplayer({
             selector: [
                 {
                     html: '子菜单01',
-                    onSelect: function() {
-                        console.log('你点击了子菜单01');
-                    }
                 },
                 {
                     html: '子菜单02',
-                    onSelect: function() {
-                        console.log('你点击了子菜单02');
-                    }
                 },
-            ]
+            ],
+            onSelect: function(item) {
+                console.log(item.html);
+            }
         },
         {
             html: '自定义设置02',
             selector: [
                 {
                     html: '子菜单01',
-                    onSelect: function() {
-                        console.log('你点击了子菜单01');
-                    }
                 },
                 {
                     html: '子菜单02',
-                    onSelect: function() {
-                        console.log('你点击了子菜单02');
-                    }
                 },
-            ]
+            ],
+            onSelect: function(item) {
+                console.log(item.html);
+            }
         },
     ],
 });

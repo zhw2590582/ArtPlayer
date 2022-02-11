@@ -6,20 +6,20 @@ export default function flip(option) {
         return {
             ...option,
             html: `${i18n.get('Video Flip')}:
-                <span data-flip="normal" class="art-current">${i18n.get('Normal')}</span>
-                <span data-flip="horizontal">${i18n.get('Horizontal')}</span>
-                <span data-flip="vertical">${i18n.get('Vertical')}</span>
+                <span data-value="normal" class="art-current">${i18n.get('Normal')}</span>
+                <span data-value="horizontal">${i18n.get('Horizontal')}</span>
+                <span data-value="vertical">${i18n.get('Vertical')}</span>
             `,
             click: (contextmenu, event) => {
-                const { flip } = event.target.dataset;
-                if (flip) {
-                    art.flip = flip;
+                const { value } = event.target.dataset;
+                if (value) {
+                    art.flip = value;
                     contextmenu.show = false;
                 }
             },
-            mounted: ($menu) => {
-                art.on('flip', (flip) => {
-                    const $current = queryAll('span', $menu).find((item) => item.dataset.flip === flip);
+            mounted: ($panel) => {
+                art.on('flip', (value) => {
+                    const $current = queryAll('span', $panel).find((item) => item.dataset.value === value);
                     if ($current) {
                         inverseClass($current, 'art-current');
                     }

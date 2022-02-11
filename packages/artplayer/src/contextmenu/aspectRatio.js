@@ -6,20 +6,20 @@ export default function aspectRatio(option) {
         return {
             ...option,
             html: `${i18n.get('Aspect Ratio')}:
-                <span data-ratio="default" class="art-current">${i18n.get('Default')}</span>
-                <span data-ratio="4:3">4:3</span>
-                <span data-ratio="16:9">16:9</span>
+                <span data-value="default" class="art-current">${i18n.get('Default')}</span>
+                <span data-value="4:3">4:3</span>
+                <span data-value="16:9">16:9</span>
             `,
             click: (contextmenu, event) => {
-                const { ratio } = event.target.dataset;
-                if (ratio) {
-                    art.aspectRatio = ratio;
+                const { value } = event.target.dataset;
+                if (value) {
+                    art.aspectRatio = value;
                     contextmenu.show = false;
                 }
             },
-            mounted: ($menu) => {
-                art.on('aspectRatio', (ratio) => {
-                    const $current = queryAll('span', $menu).find((item) => item.dataset.ratio === ratio);
+            mounted: ($panel) => {
+                art.on('aspectRatio', (value) => {
+                    const $current = queryAll('span', $panel).find((item) => item.dataset.value === value);
                     if ($current) {
                         inverseClass($current, 'art-current');
                     }

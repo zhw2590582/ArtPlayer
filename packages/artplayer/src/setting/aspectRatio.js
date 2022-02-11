@@ -1,5 +1,9 @@
+import { inverseClass, queryAll } from '../utils';
+
 export default function aspectRatio(art) {
     const { i18n, icons } = art;
+
+    console.log(art.aspectRatio);
 
     return {
         width: 150,
@@ -7,12 +11,21 @@ export default function aspectRatio(art) {
         icon: icons.aspectRatio,
         selector: ['default', '4:3', '16:9'].map((item) => {
             return {
+                value: item,
+                default: item === art.aspectRatio,
                 html: item === 'default' ? i18n.get('Default') : item,
-                default: item === 'default',
-                onSelect() {
-                    art.aspectRatio = item;
-                },
             };
         }),
+        onSelect(item) {
+            art.aspectRatio = item.value;
+        },
+        mounted: ($panel) => {
+            art.on('aspectRatio', (value) => {
+                const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
+                if ($current) {
+                    inverseClass($current, 'art-current');
+                }
+            });
+        },
     };
 }

@@ -33,15 +33,16 @@ var art = new Artplayer({
                     default: true,
                     html: '<span style="color:red">Subtitle 01</span>',
                     url: '/assets/sample/subtitle.srt?id=1',
-                    onSelect: onSubtitleSelect,
                 },
                 {
                     html: '<span style="color:yellow">Subtitle 02</span>',
                     url: '/assets/sample/subtitle.srt?id=2',
-                    onSelect: onSubtitleSelect,
                 },
             ],
-            
+            onSelect: function onSubtitleSelect(item, $dom) {
+                console.info(item, $dom);
+                art.subtitle.url = item.url;
+            }
         },
         {
             html: 'Select Quality',
@@ -51,19 +52,20 @@ var art = new Artplayer({
                     default: true,
                     html: '1080P',
                     url: '/assets/sample/video.mp4?id=1080',
-                    onSelect: onQualitySelect,
                 },
                 {
                     html: '720P',
                     url: '/assets/sample/video.mp4?id=720',
-                    onSelect: onQualitySelect,
                 },
                 {
                     html: '360P',
                     url: '/assets/sample/video.mp4?id=360',
-                    onSelect: onQualitySelect,
                 },
             ],
+            onSelect: function onQualitySelect(item, $dom) {
+                console.info(item, $dom);
+                art.switchQuality(item.url, item.html);
+            },
         },
         {
             html: 'Multi-layer nested',
@@ -94,14 +96,4 @@ var art = new Artplayer({
         },
     ],
 });
-
-function onSubtitleSelect(item, $dom) {
-    console.info(item, $dom);
-    art.subtitle.url = item.url;
-}
-
-function onQualitySelect(item, $dom) {
-    console.info(item, $dom);
-    art.switchQuality(item.url, item.html);
-}
 ```

@@ -1,3 +1,5 @@
+import { inverseClass, queryAll } from '../utils';
+
 export default function flip(art) {
     const { i18n } = art;
 
@@ -10,14 +12,23 @@ export default function flip(art) {
     return {
         width: 150,
         html: i18n.get('Video Flip'),
-        selector: Object.keys(keys).map((key) => {
+        selector: Object.keys(keys).map((item) => {
             return {
-                html: i18n.get(keys[key]),
-                default: key === 'normal',
-                onSelect() {
-                    art.flip = key;
-                },
+                value: item,
+                default: item === art.flip,
+                html: i18n.get(keys[item]),
             };
         }),
+        onSelect(item) {
+            art.flip = item.value;
+        },
+        mounted: ($panel) => {
+            art.on('flip', (value) => {
+                const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
+                if ($current) {
+                    inverseClass($current, 'art-current');
+                }
+            });
+        },
     };
 }

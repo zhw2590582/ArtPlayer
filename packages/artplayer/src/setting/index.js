@@ -5,16 +5,13 @@ import subtitleOffset from './subtitleOffset';
 import Component from '../utils/component';
 import { append, addClass, setStyle, inverseClass, includeFromEvent } from '../utils';
 
-function makeRecursion(option) {
+function makeRecursion(option, parentItem, parentList) {
     for (let index = 0; index < option.length; index++) {
         const item = option[index];
-        if (!item.back && item.selector) {
-            item.selector.unshift({
-                html: item.html,
-                selector: option,
-                back: true,
-            });
-            makeRecursion(item.selector);
+        item.parentItem = parentItem;
+        item.parentList = parentList;
+        if (item.selector) {
+            makeRecursion(item.selector, item, option);
         }
     }
     return option;
@@ -39,29 +36,29 @@ export default class Setting extends Component {
         this.cache = new Map();
 
         if (option.setting) {
-            if (option.playbackRate) {
-                this.option.push(playbackRate(art));
-            }
-
-            if (option.aspectRatio) {
-                this.option.push(aspectRatio(art));
-            }
-
-            if (option.flip) {
-                this.option.push(flip(art));
-            }
-
-            if (option.subtitleOffset) {
-                this.option.push(subtitleOffset(art));
-            }
-
-            for (let index = 0; index < option.settings.length; index++) {
-                this.option.push(option.settings[index]);
-            }
-
-            this.option = makeRecursion(this.option);
-
             art.once('ready', () => {
+                if (option.playbackRate) {
+                    this.option.push(playbackRate(art));
+                }
+
+                if (option.aspectRatio) {
+                    this.option.push(aspectRatio(art));
+                }
+
+                if (option.flip) {
+                    this.option.push(flip(art));
+                }
+
+                if (option.subtitleOffset) {
+                    this.option.push(subtitleOffset(art));
+                }
+
+                for (let index = 0; index < option.settings.length; index++) {
+                    this.option.push(option.settings[index]);
+                }
+
+                this.option = makeRecursion(this.option);
+
                 this.init(this.option);
             });
 
@@ -83,6 +80,29 @@ export default class Setting extends Component {
         }
     }
 
+    creatHeader(item) {
+        const {
+            icons,
+            events: { proxy },
+        } = this.art;
+
+        const $item = document.createElement('div');
+        addClass($item, 'art-setting-item');
+        addClass($item, 'art-setting-item-back');
+        const $left = append($item, '<div class="art-setting-item-left"></div>');
+        const $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+        append($icon, icons.arrowLeft);
+        append($left, $icon);
+        append($left, item.parentItem.html);
+
+        proxy($item, 'click', () => {
+            this.init(item.parentList);
+        });
+
+        return $item;
+    }
+
     creatItem(item) {
         const {
             icons,
@@ -91,7 +111,14 @@ export default class Setting extends Component {
 
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
-        if (item.default) addClass($item, 'art-current');
+
+        if (item.default) {
+            addClass($item, 'art-current');
+        }
+
+        if (item.value) {
+            $item.dataset.value = item.value;
+        }
 
         const $left = append($item, '<div class="art-setting-item-left"></div>');
         const $right = append($item, '<div class="art-setting-item-right"></div>');
@@ -100,16 +127,11 @@ export default class Setting extends Component {
         addClass($icon, 'art-setting-item-left-icon');
         const hasChildren = item.selector && item.selector.length;
 
-        if (item.back) {
-            addClass($item, 'art-setting-item-back');
-            append($icon, icons.arrowLeft);
+        if (hasChildren) {
+            append($icon, item.icon || icons.config);
+            append($right, icons.arrowRight);
         } else {
-            if (hasChildren) {
-                append($icon, item.icon || icons.config);
-                append($right, icons.arrowRight);
-            } else {
-                append($icon, icons.check);
-            }
+            append($icon, icons.check);
         }
 
         append($left, $icon);
@@ -120,8 +142,8 @@ export default class Setting extends Component {
                 this.init(item.selector, item.width);
             } else {
                 inverseClass($item, 'art-current');
-                if (item.onSelect) {
-                    const result = item.onSelect.call(this.art, item, $item, event);
+                if (item.parentItem && item.parentItem.onSelect) {
+                    const result = item.parentItem.onSelect.call(this.art, item, $item, event);
                     if (typeof result === 'string') {
                         $item.innerHTML = result;
                     }
@@ -146,14 +168,24 @@ export default class Setting extends Component {
         } else {
             const $panel = document.createElement('div');
             addClass($panel, 'art-setting-panel');
+
+            if (option[0] && option[0].parentItem) {
+                append($panel, this.creatHeader(option[0]));
+            }
+
             for (let index = 0; index < option.length; index++) {
                 append($panel, this.creatItem(option[index]));
             }
+
             $panel.dataset.width = width || this.width;
             append(this.$parent, $panel);
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
+
+            if (option[0] && option[0].parentItem && option[0].parentItem.mounted) {
+                option[0].parentItem.mounted.call(this.art, $panel);
+            }
         }
     }
 }

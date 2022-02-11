@@ -9,7 +9,7 @@ export default function playbackRateMix(art) {
 
     def(art, 'playbackRate', {
         get() {
-            return $player.dataset.playbackRate;
+            return $player.dataset.playbackRate || 1.0;
         },
         set(rate) {
             if (rate) {

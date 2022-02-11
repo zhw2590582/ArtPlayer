@@ -1294,7 +1294,7 @@
         notice = art.notice;
     def(art, 'playbackRate', {
       get: function get() {
-        return $player.dataset.playbackRate;
+        return $player.dataset.playbackRate || 1.0;
       },
       set: function set(rate) {
         if (rate) {
@@ -1333,7 +1333,7 @@
         notice = art.notice;
     def(art, 'aspectRatio', {
       get: function get() {
-        return $player.dataset.aspectRatio || '';
+        return $player.dataset.aspectRatio || 'default';
       },
       set: function set(ratio) {
         if (!ratio) ratio = 'default';
@@ -1909,7 +1909,7 @@
         notice = art.notice;
     def(art, 'flip', {
       get: function get() {
-        return $player.dataset.flip;
+        return $player.dataset.flip || 'normal';
       },
       set: function set(flip) {
         if (!flip) flip = 'normal';
@@ -3349,19 +3349,19 @@
     return function (art) {
       var i18n = art.i18n;
       return _objectSpread$7(_objectSpread$7({}, option), {}, {
-        html: "".concat(i18n.get('Play Speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "".concat(i18n.get('Play Speed'), ":\n                <span data-value=\"0.5\">0.5</span>\n                <span data-value=\"0.75\">0.75</span>\n                <span data-value=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-value=\"1.25\">1.25</span>\n                <span data-value=\"1.5\">1.5</span>\n                <span data-value=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
-          var rate = event.target.dataset.rate;
+          var value = event.target.dataset.value;
 
-          if (rate) {
-            art.playbackRate = Number(rate);
+          if (value) {
+            art.playbackRate = Number(value);
             contextmenu.show = false;
           }
         },
-        mounted: function mounted($menu) {
-          art.on('playbackRate', function (rate) {
-            var $current = queryAll('span', $menu).find(function (item) {
-              return Number(item.dataset.rate) === rate;
+        mounted: function mounted($panel) {
+          art.on('playbackRate', function (value) {
+            var $current = queryAll('span', $panel).find(function (item) {
+              return Number(item.dataset.value) === value;
             });
 
             if ($current) {
@@ -3380,19 +3380,19 @@
     return function (art) {
       var i18n = art.i18n;
       return _objectSpread$6(_objectSpread$6({}, option), {}, {
-        html: "".concat(i18n.get('Aspect Ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
+        html: "".concat(i18n.get('Aspect Ratio'), ":\n                <span data-value=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-value=\"4:3\">4:3</span>\n                <span data-value=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
-          var ratio = event.target.dataset.ratio;
+          var value = event.target.dataset.value;
 
-          if (ratio) {
-            art.aspectRatio = ratio;
+          if (value) {
+            art.aspectRatio = value;
             contextmenu.show = false;
           }
         },
-        mounted: function mounted($menu) {
-          art.on('aspectRatio', function (ratio) {
-            var $current = queryAll('span', $menu).find(function (item) {
-              return item.dataset.ratio === ratio;
+        mounted: function mounted($panel) {
+          art.on('aspectRatio', function (value) {
+            var $current = queryAll('span', $panel).find(function (item) {
+              return item.dataset.value === value;
             });
 
             if ($current) {
@@ -3411,19 +3411,19 @@
     return function (art) {
       var i18n = art.i18n;
       return _objectSpread$5(_objectSpread$5({}, option), {}, {
-        html: "".concat(i18n.get('Video Flip'), ":\n                <span data-flip=\"normal\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-flip=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                <span data-flip=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n            "),
+        html: "".concat(i18n.get('Video Flip'), ":\n                <span data-value=\"normal\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-value=\"horizontal\">").concat(i18n.get('Horizontal'), "</span>\n                <span data-value=\"vertical\">").concat(i18n.get('Vertical'), "</span>\n            "),
         click: function click(contextmenu, event) {
-          var flip = event.target.dataset.flip;
+          var value = event.target.dataset.value;
 
-          if (flip) {
-            art.flip = flip;
+          if (value) {
+            art.flip = value;
             contextmenu.show = false;
           }
         },
-        mounted: function mounted($menu) {
-          art.on('flip', function (flip) {
-            var $current = queryAll('span', $menu).find(function (item) {
-              return item.dataset.flip === flip;
+        mounted: function mounted($panel) {
+          art.on('flip', function (value) {
+            var $current = queryAll('span', $panel).find(function (item) {
+              return item.dataset.value === value;
             });
 
             if ($current) {
@@ -4316,34 +4316,59 @@
     return {
       width: 150,
       html: i18n.get('Video Flip'),
-      selector: Object.keys(keys).map(function (key) {
+      selector: Object.keys(keys).map(function (item) {
         return {
-          html: i18n.get(keys[key]),
-          default: key === 'normal',
-          onSelect: function onSelect() {
-            art.flip = key;
-          }
+          value: item,
+          default: item === art.flip,
+          html: i18n.get(keys[item])
         };
-      })
+      }),
+      onSelect: function onSelect(item) {
+        art.flip = item.value;
+      },
+      mounted: function mounted($panel) {
+        art.on('flip', function (value) {
+          var $current = queryAll('.art-setting-item', $panel).find(function (item) {
+            return item.dataset.value === value;
+          });
+
+          if ($current) {
+            inverseClass($current, 'art-current');
+          }
+        });
+      }
     };
   }
 
   function aspectRatio(art) {
     var i18n = art.i18n,
         icons = art.icons;
+    console.log(art.aspectRatio);
     return {
       width: 150,
       html: i18n.get('Aspect Ratio'),
       icon: icons.aspectRatio,
       selector: ['default', '4:3', '16:9'].map(function (item) {
         return {
-          html: item === 'default' ? i18n.get('Default') : item,
-          default: item === 'default',
-          onSelect: function onSelect() {
-            art.aspectRatio = item;
-          }
+          value: item,
+          default: item === art.aspectRatio,
+          html: item === 'default' ? i18n.get('Default') : item
         };
-      })
+      }),
+      onSelect: function onSelect(item) {
+        art.aspectRatio = item.value;
+      },
+      mounted: function mounted($panel) {
+        art.on('aspectRatio', function (value) {
+          var $current = queryAll('.art-setting-item', $panel).find(function (item) {
+            return item.dataset.value === value;
+          });
+
+          if ($current) {
+            inverseClass($current, 'art-current');
+          }
+        });
+      }
     };
   }
 
@@ -4356,13 +4381,25 @@
       icon: icons.playbackRate,
       selector: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
         return {
-          html: item === 1.0 ? i18n.get('Normal') : item,
-          default: item === 1.0,
-          onSelect: function onSelect() {
-            art.playbackRate = item;
-          }
+          value: item,
+          default: item === art.playbackRate,
+          html: item === 1.0 ? i18n.get('Normal') : item
         };
-      })
+      }),
+      onSelect: function onSelect(item) {
+        art.playbackRate = item.value;
+      },
+      mounted: function mounted($panel) {
+        art.on('playbackRate', function (value) {
+          var $current = queryAll('.art-setting-item', $panel).find(function (item) {
+            return Number(item.dataset.value) === value;
+          });
+
+          if ($current) {
+            inverseClass($current, 'art-current');
+          }
+        });
+      }
     };
   }
 
@@ -4375,13 +4412,25 @@
       icon: icons.subtitle,
       selector: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
         return {
-          html: item === 0 ? i18n.get('Normal') : item,
-          default: item === 0,
-          onSelect: function onSelect() {
-            art.subtitleOffset = item;
-          }
+          value: item,
+          default: item === art.subtitleOffset,
+          html: item === 0 ? i18n.get('Normal') : item
         };
-      })
+      }),
+      onSelect: function onSelect(item) {
+        art.subtitleOffset = item.value;
+      },
+      mounted: function mounted($panel) {
+        art.on('subtitleOffset', function (value) {
+          var $current = queryAll('.art-setting-item', $panel).find(function (item) {
+            return item.dataset.value === value;
+          });
+
+          if ($current) {
+            inverseClass($current, 'art-current');
+          }
+        });
+      }
     };
   }
 
@@ -4389,17 +4438,14 @@
 
   function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-  function makeRecursion(option) {
+  function makeRecursion(option, parentItem, parentList) {
     for (var index = 0; index < option.length; index++) {
       var item = option[index];
+      item.parentItem = parentItem;
+      item.parentList = parentList;
 
-      if (!item.back && item.selector) {
-        item.selector.unshift({
-          html: item.html,
-          selector: option,
-          back: true
-        });
-        makeRecursion(item.selector);
+      if (item.selector) {
+        makeRecursion(item.selector, item, option);
       }
     }
 
@@ -4430,28 +4476,29 @@
       _this.cache = new Map();
 
       if (option.setting) {
-        if (option.playbackRate) {
-          _this.option.push(playbackRate(art));
-        }
-
-        if (option.aspectRatio) {
-          _this.option.push(aspectRatio(art));
-        }
-
-        if (option.flip) {
-          _this.option.push(flip(art));
-        }
-
-        if (option.subtitleOffset) {
-          _this.option.push(subtitleOffset(art));
-        }
-
-        for (var index = 0; index < option.settings.length; index++) {
-          _this.option.push(option.settings[index]);
-        }
-
-        _this.option = makeRecursion(_this.option);
         art.once('ready', function () {
+          if (option.playbackRate) {
+            _this.option.push(playbackRate(art));
+          }
+
+          if (option.aspectRatio) {
+            _this.option.push(aspectRatio(art));
+          }
+
+          if (option.flip) {
+            _this.option.push(flip(art));
+          }
+
+          if (option.subtitleOffset) {
+            _this.option.push(subtitleOffset(art));
+          }
+
+          for (var index = 0; index < option.settings.length; index++) {
+            _this.option.push(option.settings[index]);
+          }
+
+          _this.option = makeRecursion(_this.option);
+
           _this.init(_this.option);
         });
         art.on('blur', function () {
@@ -4472,8 +4519,8 @@
     }
 
     _createClass(Setting, [{
-      key: "creatItem",
-      value: function creatItem(item) {
+      key: "creatHeader",
+      value: function creatHeader(item) {
         var _this2 = this;
 
         var _this$art = this.art,
@@ -4481,35 +4528,60 @@
             proxy = _this$art.events.proxy;
         var $item = document.createElement('div');
         addClass($item, 'art-setting-item');
-        if (item.default) addClass($item, 'art-current');
+        addClass($item, 'art-setting-item-back');
+        var $left = append($item, '<div class="art-setting-item-left"></div>');
+        var $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+        append($icon, icons.arrowLeft);
+        append($left, $icon);
+        append($left, item.parentItem.html);
+        proxy($item, 'click', function () {
+          _this2.init(item.parentList);
+        });
+        return $item;
+      }
+    }, {
+      key: "creatItem",
+      value: function creatItem(item) {
+        var _this3 = this;
+
+        var _this$art2 = this.art,
+            icons = _this$art2.icons,
+            proxy = _this$art2.events.proxy;
+        var $item = document.createElement('div');
+        addClass($item, 'art-setting-item');
+
+        if (item.default) {
+          addClass($item, 'art-current');
+        }
+
+        if (item.value) {
+          $item.dataset.value = item.value;
+        }
+
         var $left = append($item, '<div class="art-setting-item-left"></div>');
         var $right = append($item, '<div class="art-setting-item-right"></div>');
         var $icon = document.createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
         var hasChildren = item.selector && item.selector.length;
 
-        if (item.back) {
-          addClass($item, 'art-setting-item-back');
-          append($icon, icons.arrowLeft);
+        if (hasChildren) {
+          append($icon, item.icon || icons.config);
+          append($right, icons.arrowRight);
         } else {
-          if (hasChildren) {
-            append($icon, item.icon || icons.config);
-            append($right, icons.arrowRight);
-          } else {
-            append($icon, icons.check);
-          }
+          append($icon, icons.check);
         }
 
         append($left, $icon);
         append($left, item.html);
         proxy($item, 'click', function (event) {
           if (hasChildren) {
-            _this2.init(item.selector, item.width);
+            _this3.init(item.selector, item.width);
           } else {
             inverseClass($item, 'art-current');
 
-            if (item.onSelect) {
-              var result = item.onSelect.call(_this2.art, item, $item, event);
+            if (item.parentItem && item.parentItem.onSelect) {
+              var result = item.parentItem.onSelect.call(_this3.art, item, $item, event);
 
               if (typeof result === 'string') {
                 $item.innerHTML = result;
@@ -4538,6 +4610,10 @@
 
           addClass(_$panel, 'art-setting-panel');
 
+          if (option[0] && option[0].parentItem) {
+            append(_$panel, this.creatHeader(option[0]));
+          }
+
           for (var index = 0; index < option.length; index++) {
             append(_$panel, this.creatItem(option[index]));
           }
@@ -4547,6 +4623,10 @@
           this.cache.set(option, _$panel);
           inverseClass(_$panel, 'art-current');
           setStyle(this.$parent, 'width', "".concat(_$panel.dataset.width, "px"));
+
+          if (option[0] && option[0].parentItem && option[0].parentItem.mounted) {
+            option[0].parentItem.mounted.call(this.art, _$panel);
+          }
         }
       }
     }]);
