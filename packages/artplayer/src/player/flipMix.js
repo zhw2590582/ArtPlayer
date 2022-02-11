@@ -29,13 +29,4 @@ export default function flipMix(art) {
             art.emit('flip', flip);
         },
     });
-
-    def(art, 'flipReset', {
-        set(value) {
-            if (value && art.flip) {
-                const { flip } = art;
-                art.flip = flip;
-            }
-        },
-    });
 }

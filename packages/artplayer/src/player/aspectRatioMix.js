@@ -48,7 +48,7 @@ export default function aspectRatioMix(art) {
 
     def(art, 'aspectRatioReset', {
         set(value) {
-            if (value && art.aspectRatio) {
+            if (value) {
                 const { aspectRatio } = art;
                 art.aspectRatio = aspectRatio;
             }

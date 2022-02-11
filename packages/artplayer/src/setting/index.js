@@ -90,10 +90,10 @@ export default class Setting extends Component {
         addClass($item, 'art-setting-item');
         addClass($item, 'art-setting-item-back');
         const $left = append($item, '<div class="art-setting-item-left"></div>');
-        const $icon = document.createElement('div');
-        addClass($icon, 'art-setting-item-left-icon');
-        append($icon, icons.arrowLeft);
-        append($left, $icon);
+        const $iconLeft = document.createElement('div');
+        addClass($iconLeft, 'art-setting-item-left-icon');
+        append($iconLeft, icons.arrowLeft);
+        append($left, $iconLeft);
         append($left, item._parentItem.html);
 
         proxy($item, 'click', () => {
@@ -109,6 +109,7 @@ export default class Setting extends Component {
             events: { proxy },
         } = this.art;
 
+        const hasChildren = item.selector && item.selector.length;
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
 
@@ -123,19 +124,22 @@ export default class Setting extends Component {
         const $left = append($item, '<div class="art-setting-item-left"></div>');
         const $right = append($item, '<div class="art-setting-item-right"></div>');
 
-        const $icon = document.createElement('div');
-        addClass($icon, 'art-setting-item-left-icon');
-        const hasChildren = item.selector && item.selector.length;
+        const $iconLeft = document.createElement('div');
+        addClass($iconLeft, 'art-setting-item-left-icon');
+        append($iconLeft, hasChildren ? item.icon || icons.config : icons.check);
+        append($left, $iconLeft);
+        append($left, item.html);
 
         if (hasChildren) {
-            append($icon, item.icon || icons.config);
-            append($right, icons.arrowRight);
-        } else {
-            append($icon, icons.check);
-        }
+            const $desc = document.createElement('div');
+            addClass($desc, 'art-setting-item-right-desc');
+            append($right, $desc);
 
-        append($left, $icon);
-        append($left, item.html);
+            const $iconRight = document.createElement('div');
+            addClass($iconRight, 'art-setting-item-right-icon');
+            append($iconRight, icons.arrowRight);
+            append($right, $iconRight);
+        }
 
         proxy($item, 'click', (event) => {
             if (hasChildren) {
@@ -174,7 +178,9 @@ export default class Setting extends Component {
             }
 
             for (let index = 0; index < option.length; index++) {
-                append($panel, this.creatItem(option[index]));
+                const $item = this.creatItem(option[index]);
+                option[index].$item = $item;
+                append($panel, $item);
             }
 
             $panel.dataset.width = width || this.width;
