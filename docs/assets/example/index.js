@@ -34,6 +34,7 @@ var art = new Artplayer({
             icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
             selector: [
                 {
+                    default: true,
                     html: 'Custom setting 01',
                     onSelect: function () {
                         console.info('You clicked on the custom setting 01');
@@ -59,7 +60,7 @@ var art = new Artplayer({
     ],
     layers: [
         {
-            html: '<img style="width: 100px" src="/assets/sample/layer.png">',
+            html: '<img width="100" src="/assets/sample/layer.png">',
             click: function () {
                 console.info('You clicked on the custom layer');
             },
