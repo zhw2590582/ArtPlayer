@@ -27,12 +27,12 @@ export default function subtitleOffset(art) {
             $desc.innerText = getI18n(art.subtitleOffset);
 
             art.on('subtitleOffset', (value) => {
+                $desc.innerText = getI18n(art.subtitleOffset);
                 const $current = queryAll('.art-setting-item', $panel).find(
                     (item) => Number(item.dataset.value) === value,
                 );
                 if ($current) {
                     inverseClass($current, 'art-current');
-                    $desc.innerText = getI18n(art.subtitleOffset);
                 }
             });
         },

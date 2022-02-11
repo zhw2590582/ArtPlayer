@@ -1,10 +1,10 @@
 import { append, tooltip } from '../utils';
 
 export default function setting(option) {
-    return art => ({
+    return (art) => ({
         ...option,
         tooltip: art.i18n.get('Show Setting'),
-        mounted: $control => {
+        mounted: ($control) => {
             const {
                 events: { proxy },
                 icons,
@@ -18,7 +18,7 @@ export default function setting(option) {
                 setting.toggle = true;
             });
 
-            art.on('setting', value => {
+            art.on('setting', (value) => {
                 tooltip($control, i18n.get(value ? 'Hide Setting' : 'Show Setting'));
             });
         },

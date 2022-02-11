@@ -29,10 +29,10 @@ export default function flip(art) {
             $desc.innerText = i18n.get(keys[art.flip]);
 
             art.on('flip', (value) => {
+                $desc.innerText = i18n.get(keys[art.flip]);
                 const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
                 if ($current) {
                     inverseClass($current, 'art-current');
-                    $desc.innerText = i18n.get(keys[art.flip]);
                 }
             });
         },

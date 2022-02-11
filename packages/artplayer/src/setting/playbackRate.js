@@ -27,12 +27,12 @@ export default function playbackRate(art) {
             $desc.innerText = getI18n(art.playbackRate);
 
             art.on('playbackRate', (value) => {
+                $desc.innerText = getI18n(art.playbackRate);
                 const $current = queryAll('.art-setting-item', $panel).find(
                     (item) => Number(item.dataset.value) === value,
                 );
                 if ($current) {
                     inverseClass($current, 'art-current');
-                    $desc.innerText = getI18n(art.playbackRate);
                 }
             });
         },

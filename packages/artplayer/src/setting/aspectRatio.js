@@ -27,10 +27,10 @@ export default function aspectRatio(art) {
             $desc.innerText = getI18n(art.aspectRatio);
 
             art.on('aspectRatio', (value) => {
+                $desc.innerText = getI18n(art.aspectRatio);
                 const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
                 if ($current) {
                     inverseClass($current, 'art-current');
-                    $desc.innerText = getI18n(art.aspectRatio);
                 }
             });
         },

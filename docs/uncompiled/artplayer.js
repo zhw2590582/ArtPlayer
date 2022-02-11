@@ -4310,13 +4310,13 @@
         var $desc = query('.art-setting-item-right-desc', item.$item);
         $desc.innerText = i18n.get(keys[art.flip]);
         art.on('flip', function (value) {
+          $desc.innerText = i18n.get(keys[art.flip]);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return item.dataset.value === value;
           });
 
           if ($current) {
             inverseClass($current, 'art-current');
-            $desc.innerText = i18n.get(keys[art.flip]);
           }
         });
       }
@@ -4350,13 +4350,13 @@
         var $desc = query('.art-setting-item-right-desc', item.$item);
         $desc.innerText = getI18n(art.aspectRatio);
         art.on('aspectRatio', function (value) {
+          $desc.innerText = getI18n(art.aspectRatio);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return item.dataset.value === value;
           });
 
           if ($current) {
             inverseClass($current, 'art-current');
-            $desc.innerText = getI18n(art.aspectRatio);
           }
         });
       }
@@ -4390,13 +4390,13 @@
         var $desc = query('.art-setting-item-right-desc', item.$item);
         $desc.innerText = getI18n(art.playbackRate);
         art.on('playbackRate', function (value) {
+          $desc.innerText = getI18n(art.playbackRate);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return Number(item.dataset.value) === value;
           });
 
           if ($current) {
             inverseClass($current, 'art-current');
-            $desc.innerText = getI18n(art.playbackRate);
           }
         });
       }
@@ -4430,13 +4430,13 @@
         var $desc = query('.art-setting-item-right-desc', item.$item);
         $desc.innerText = getI18n(art.subtitleOffset);
         art.on('subtitleOffset', function (value) {
+          $desc.innerText = getI18n(art.subtitleOffset);
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return Number(item.dataset.value) === value;
           });
 
           if ($current) {
             inverseClass($current, 'art-current');
-            $desc.innerText = getI18n(art.subtitleOffset);
           }
         });
       }
@@ -4511,9 +4511,11 @@
           _this.init(_this.option);
         });
         art.on('blur', function () {
-          _this.show = false;
+          if (_this.show) {
+            _this.show = false;
 
-          _this.init(_this.option);
+            _this.init(_this.option);
+          }
         });
         proxy($player, 'click', function (event) {
           if (_this.show && !includeFromEvent(event, art.controls.setting) && !includeFromEvent(event, _this.$parent)) {
@@ -4598,12 +4600,12 @@
           } else {
             inverseClass($item, 'art-current');
 
-            if (item._parentItem && item._parentItem.onSelect) {
-              var result = item._parentItem.onSelect.call(_this3.art, item, $item, event);
+            if (item._parentList) {
+              _this3.init(item._parentList);
+            }
 
-              if (typeof result === 'string') {
-                $item.innerHTML = result;
-              }
+            if (item._parentItem && item._parentItem.onSelect) {
+              item._parentItem.onSelect.call(_this3.art, item, $item, event);
             }
           }
         });

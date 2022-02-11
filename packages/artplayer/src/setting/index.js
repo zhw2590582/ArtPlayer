@@ -63,8 +63,10 @@ export default class Setting extends Component {
             });
 
             art.on('blur', () => {
-                this.show = false;
-                this.init(this.option);
+                if (this.show) {
+                    this.show = false;
+                    this.init(this.option);
+                }
             });
 
             proxy($player, 'click', (event) => {
@@ -149,11 +151,13 @@ export default class Setting extends Component {
                 this.init(item.selector, item.width);
             } else {
                 inverseClass($item, 'art-current');
+
+                if (item._parentList) {
+                    this.init(item._parentList);
+                }
+
                 if (item._parentItem && item._parentItem.onSelect) {
-                    const result = item._parentItem.onSelect.call(this.art, item, $item, event);
-                    if (typeof result === 'string') {
-                        $item.innerHTML = result;
-                    }
+                    item._parentItem.onSelect.call(this.art, item, $item, event);
                 }
             }
         });
