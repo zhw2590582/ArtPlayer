@@ -4276,7 +4276,7 @@
     return {
       width: 150,
       html: i18n.get('Video Flip'),
-      items: Object.keys(keys).map(function (key) {
+      children: Object.keys(keys).map(function (key) {
         return {
           html: i18n.get(keys[key]),
           current: key === 'normal',
@@ -4295,7 +4295,7 @@
       width: 150,
       html: i18n.get('Aspect Ratio'),
       icon: icons.aspectRatio,
-      items: ['default', '4:3', '16:9'].map(function (item) {
+      children: ['default', '4:3', '16:9'].map(function (item) {
         return {
           html: item === 'default' ? i18n.get('Default') : item,
           current: item === 'default',
@@ -4314,7 +4314,7 @@
       width: 150,
       html: i18n.get('Play Speed'),
       icon: icons.playbackRate,
-      items: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
+      children: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
         return {
           html: item === 1.0 ? i18n.get('Normal') : item,
           current: item === 1.0,
@@ -4333,7 +4333,7 @@
       width: 150,
       html: i18n.get('Subtitle Offset Time'),
       icon: icons.subtitle,
-      items: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
+      children: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
         return {
           html: item === 0 ? i18n.get('Normal') : item,
           current: item === 0,
@@ -4350,21 +4350,16 @@
   function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
   function makeRecursion(option) {
-    if (!option) return option;
-
     for (var index = 0; index < option.length; index++) {
       var item = option[index];
 
-      if (!item.goBack) {
-        if (item.items) {
-          item.items.unshift({
-            html: item.html,
-            items: option,
-            goBack: true
-          });
-        }
-
-        makeRecursion(item.items);
+      if (!item.back && item.children) {
+        item.children.unshift({
+          html: item.html,
+          children: option,
+          back: true
+        });
+        makeRecursion(item.children);
       }
     }
 
@@ -4390,6 +4385,7 @@
       _this.art = art;
       _this.name = 'setting';
       _this.$parent = $setting;
+      _this.width = 200;
       _this.option = [];
       _this.cache = new Map();
 
@@ -4444,7 +4440,7 @@
             icons = _this$art.icons,
             proxy = _this$art.events.proxy;
         var $item = document.createElement('div');
-        var hasItems = item.items && item.items.length;
+        var hasChildren = item.children && item.children.length;
         var $left = append($item, "<div class=\"art-setting-item-left\"></div>");
         var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
         addClass($item, 'art-setting-item');
@@ -4453,12 +4449,12 @@
           addClass($item, 'art-current');
         }
 
-        if (item.goBack) {
+        if (item.back) {
           addClass($item, 'art-setting-item-back');
           append($left, icons.arrowLeft);
           append($left, item.html);
         } else {
-          if (hasItems) {
+          if (hasChildren) {
             var $icon = append($left, item.icon || icons.config);
             addClass($icon, 'art-setting-item-left-icon');
             append($right, icons.arrowRight);
@@ -4474,10 +4470,10 @@
             item.click.call(_this2.art, _this2, event);
           }
 
-          if (hasItems) {
-            _this2.init(item.items);
+          if (hasChildren) {
+            _this2.init(item.children);
 
-            setStyle(_this2.$parent, 'width', "".concat(item.width || 200, "px"));
+            setStyle(_this2.$parent, 'width', "".concat(item.width || _this2.width, "px"));
           } else {
             inverseClass($item, 'art-current');
           }
@@ -4511,7 +4507,7 @@
           inverseClass(_$panel, 'art-current');
         }
 
-        setStyle(this.$parent, 'width', '200px');
+        setStyle(this.$parent, 'width', "".concat(this.width, "px"));
       }
     }]);
 

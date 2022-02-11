@@ -6,18 +6,15 @@ import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 
 function makeRecursion(option) {
-    if (!option) return option;
     for (let index = 0; index < option.length; index++) {
         const item = option[index];
-        if (!item.goBack) {
-            if (item.items) {
-                item.items.unshift({
-                    html: item.html,
-                    items: option,
-                    goBack: true,
-                });
-            }
-            makeRecursion(item.items);
+        if (!item.back && item.children) {
+            item.children.unshift({
+                html: item.html,
+                children: option,
+                back: true,
+            });
+            makeRecursion(item.children);
         }
     }
     return option;
@@ -36,6 +33,8 @@ export default class Setting extends Component {
         this.art = art;
         this.name = 'setting';
         this.$parent = $setting;
+
+        this.width = 200;
         this.option = [];
         this.cache = new Map();
 
@@ -91,7 +90,7 @@ export default class Setting extends Component {
         } = this.art;
 
         const $item = document.createElement('div');
-        const hasItems = item.items && item.items.length;
+        const hasChildren = item.children && item.children.length;
 
         const $left = append($item, `<div class="art-setting-item-left"></div>`);
         const $right = append($item, `<div class="art-setting-item-right"></div>`);
@@ -101,12 +100,12 @@ export default class Setting extends Component {
             addClass($item, 'art-current');
         }
 
-        if (item.goBack) {
+        if (item.back) {
             addClass($item, 'art-setting-item-back');
             append($left, icons.arrowLeft);
             append($left, item.html);
         } else {
-            if (hasItems) {
+            if (hasChildren) {
                 const $icon = append($left, item.icon || icons.config);
                 addClass($icon, 'art-setting-item-left-icon');
                 append($right, icons.arrowRight);
@@ -121,9 +120,9 @@ export default class Setting extends Component {
                 item.click.call(this.art, this, event);
             }
 
-            if (hasItems) {
-                this.init(item.items);
-                setStyle(this.$parent, 'width', `${item.width || 200}px`);
+            if (hasChildren) {
+                this.init(item.children);
+                setStyle(this.$parent, 'width', `${item.width || this.width}px`);
             } else {
                 inverseClass($item, 'art-current');
             }
@@ -152,6 +151,6 @@ export default class Setting extends Component {
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
         }
-        setStyle(this.$parent, 'width', '200px');
+        setStyle(this.$parent, 'width', `${this.width}px`);
     }
 }

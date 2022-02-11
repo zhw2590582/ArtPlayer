@@ -5,7 +5,7 @@ export default function aspectRatio(art) {
         width: 150,
         html: i18n.get('Aspect Ratio'),
         icon: icons.aspectRatio,
-        items: ['default', '4:3', '16:9'].map((item) => {
+        children: ['default', '4:3', '16:9'].map((item) => {
             return {
                 html: item === 'default' ? i18n.get('Default') : item,
                 current: item === 'default',
