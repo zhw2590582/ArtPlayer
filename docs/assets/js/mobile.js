@@ -28,7 +28,7 @@ var art = new Artplayer({
     },
     layers: [
         {
-            html: `<img style="width: 50px" src="/assets/sample/layer.png">`,
+            html: `<img width="50" src="/assets/sample/layer.png">`,
             click: function () {
                 console.info('You clicked on the custom layer');
             },
@@ -41,9 +41,9 @@ var art = new Artplayer({
         },
     ],
     icons: {
-        indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
         loading: '<img src="/assets/img/ploading.gif">',
         state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
+        indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
     },
     plugins: [
         artplayerPluginDanmuku({
