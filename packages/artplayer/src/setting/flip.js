@@ -10,11 +10,11 @@ export default function playbackRate(art) {
     return {
         width: 150,
         html: i18n.get('Video Flip'),
-        children: Object.keys(keys).map((key) => {
+        selector: Object.keys(keys).map((key) => {
             return {
                 html: i18n.get(keys[key]),
                 current: key === 'normal',
-                click() {
+                onSelect() {
                     art.flip = key;
                 },
             };

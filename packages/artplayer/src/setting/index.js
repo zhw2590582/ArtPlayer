@@ -8,13 +8,13 @@ import { append, addClass, setStyle, inverseClass, includeFromEvent } from '../u
 function makeRecursion(option) {
     for (let index = 0; index < option.length; index++) {
         const item = option[index];
-        if (!item.back && item.children) {
-            item.children.unshift({
+        if (!item.back && item.selector) {
+            item.selector.unshift({
                 html: item.html,
-                children: option,
+                selector: option,
                 back: true,
             });
-            makeRecursion(item.children);
+            makeRecursion(item.selector);
         }
     }
     return option;
@@ -90,7 +90,7 @@ export default class Setting extends Component {
         } = this.art;
 
         const $item = document.createElement('div');
-        const hasChildren = item.children && item.children.length;
+        const hasChildren = item.selector && item.selector.length;
 
         const $left = append($item, `<div class="art-setting-item-left"></div>`);
         const $right = append($item, `<div class="art-setting-item-right"></div>`);
@@ -116,12 +116,12 @@ export default class Setting extends Component {
         }
 
         proxy($item, 'click', (event) => {
-            if (typeof item.click === 'function') {
-                item.click.call(this.art, this, event);
+            if (typeof item.onSelect === 'function') {
+                item.onSelect.call(this.art, this, event);
             }
 
             if (hasChildren) {
-                this.init(item.children);
+                this.init(item.selector);
                 setStyle(this.$parent, 'width', `${item.width || this.width}px`);
             } else {
                 inverseClass($item, 'art-current');

@@ -550,7 +550,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-Initialize custom setting panel, please visit [How to add setting](/document/Questions/)
+Initialize custom setting panel, please visit [How to add setting panel](/document/en/Questions/How%20to%20add%20setting%20panel)
 
 <div className="run-code">▶ Run Code</div>
 
@@ -562,7 +562,24 @@ var art = new Artplayer({
     settings: [
         {
             html: 'Custom setting 01',
-            items: [
+            children: [
+                {
+                    html: 'Submenu 01',
+                    click: function() {
+                        console.log('You click on the submenu 01');
+                    }
+                },
+                {
+                    html: 'Submenu 02',
+                    click: function() {
+                        console.log('You click on the submenu 02');
+                    }
+                },
+            ]
+        },
+        {
+            html: 'Custom setting 02',
+            children: [
                 {
                     html: 'Submenu 01',
                     click: function() {

@@ -5,11 +5,11 @@ export default function aspectRatio(art) {
         width: 150,
         html: i18n.get('Aspect Ratio'),
         icon: icons.aspectRatio,
-        children: ['default', '4:3', '16:9'].map((item) => {
+        selector: ['default', '4:3', '16:9'].map((item) => {
             return {
                 html: item === 'default' ? i18n.get('Default') : item,
                 current: item === 'default',
-                click() {
+                onSelect() {
                     art.aspectRatio = item;
                 },
             };

@@ -92,9 +92,14 @@ type SettingOption = {
     current?: boolean;
 
     /**
-     * Html string or html element of component
+     * Custom selector list, use in controls
      */
-    children?: SettingOption[];
+    selector?: SettingOption[];
+
+    /**
+     * When selector item click, use in controls
+     */
+    onSelect?(selector: Selector, element: HTMLElement): void;
 };
 
 type Component = {
