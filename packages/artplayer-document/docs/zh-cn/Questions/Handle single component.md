@@ -3,7 +3,7 @@ title: 处理单个组件
 sidebar_position: 3
 ---
 
-当我们在`layers`、`contextmenu`、`controls`、`setting`里添加自定义组件时，最好带上一个唯一的 `name` 属性，该属性不但会作为类名添加到 dom 元素里，还可以用于快速定位到组件。
+当我们在`layers`、`contextmenu`、`controls`里添加自定义组件时，最好带上一个唯一的 `name` 属性，该属性不但会作为类名添加到 dom 元素里，还可以用于快速定位到组件。
 
 这里有三种方法获取组件的dom元素：组件方法 `mounted`、实例方法 `query`、推荐通过 `name` 直接获取
 
@@ -42,25 +42,15 @@ art.on('ready', () => {
         }
     });
 
-    art.setting.add({
-        name: 'setting1',
-        html: 'your-setting',
-        mounted: function($setting1) {
-            //
-        }
-    });
-
     // 使用查询 query 获取组件的DOM元素
     var $layer1 = art.query('.art-layer-layer1');
     var $contextmenu1 = art.query('.art-contextmenu-contextmenu1');
     var $control1 = art.query('.art-control-control1');
-    var $setting1 = art.query('.art-setting-setting1');
 
     // 推荐使用 name 获取组件的DOM元素
     var $layer1 = art.layers['layer1'];
     var $contextmenu1 = art.contextmenu['contextmenu1'];
     var $control1 = art.controls['control1'];
-    var $setting1 = art.setting['setting1'];
 });
 ```
 
