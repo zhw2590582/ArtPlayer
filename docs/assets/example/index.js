@@ -1,6 +1,6 @@
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'https://6169-aimu-7ggfmae4da13977b-1256594555.tcb.qcloud.la/template/video.mp4',
+    url: 'https://artplayer.org/assets/sample/video.mp4',
     title: 'One More Time One More Chance',
     poster: '/assets/sample/poster.jpg',
     volume: 0.5,
