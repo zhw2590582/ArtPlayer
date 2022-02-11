@@ -4472,11 +4472,7 @@
         append($left, item.html);
         proxy($item, 'click', function (event) {
           if (hasChildren) {
-            _this2.init(item.selector);
-
-            if (item.width) {
-              setStyle(_this2.$parent, 'width', "".concat(item.width, "px"));
-            }
+            _this2.init(item.selector, item.width);
           } else {
             inverseClass($item, 'art-current');
 
@@ -4500,12 +4496,11 @@
       }
     }, {
       key: "init",
-      value: function init(option) {
-        setStyle(this.$parent, 'width', "".concat(this.width, "px"));
-
+      value: function init(option, width) {
         if (this.cache.has(option)) {
           var $panel = this.cache.get(option);
           inverseClass($panel, 'art-current');
+          setStyle(this.$parent, 'width', "".concat($panel.dataset.width, "px"));
         } else {
           var _$panel = document.createElement('div');
 
@@ -4515,9 +4510,11 @@
             append(_$panel, this.creatItem(option[index]));
           }
 
+          _$panel.dataset.width = width || this.width;
           append(this.$parent, _$panel);
           this.cache.set(option, _$panel);
           inverseClass(_$panel, 'art-current');
+          setStyle(this.$parent, 'width', "".concat(_$panel.dataset.width, "px"));
         }
       }
     }]);

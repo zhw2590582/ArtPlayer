@@ -120,10 +120,7 @@ export default class Setting extends Component {
 
         proxy($item, 'click', (event) => {
             if (hasChildren) {
-                this.init(item.selector);
-                if (item.width) {
-                    setStyle(this.$parent, 'width', `${item.width}px`);
-                }
+                this.init(item.selector, item.width);
             } else {
                 inverseClass($item, 'art-current');
                 if (item.onSelect) {
@@ -144,20 +141,22 @@ export default class Setting extends Component {
         this.init(this.option);
     }
 
-    init(option) {
-        setStyle(this.$parent, 'width', `${this.width}px`);
+    init(option, width) {
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             inverseClass($panel, 'art-current');
+            setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
         } else {
             const $panel = document.createElement('div');
             addClass($panel, 'art-setting-panel');
             for (let index = 0; index < option.length; index++) {
                 append($panel, this.creatItem(option[index]));
             }
+            $panel.dataset.width = width || this.width;
             append(this.$parent, $panel);
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
+            setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
         }
     }
 }
