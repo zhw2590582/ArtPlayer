@@ -67,7 +67,7 @@ type ComponentOption = {
     /**
      * When selector item click, use in controls
      */
-    onSelect?(selector: Selector, element: HTMLElement): void;
+    onSelect?(selector: Selector, element: HTMLElement, event: Event): void;
 };
 
 type SettingOption = {
@@ -99,7 +99,7 @@ type SettingOption = {
     /**
      * When selector item click, use in controls
      */
-    onSelect?(selector: Selector, element: HTMLElement): void;
+    onSelect?(selector: SettingOption, element: HTMLElement, event: Event): void;
 };
 
 type Component = {

@@ -132,7 +132,7 @@ export default class Component {
             const find = option.selector[index] || {};
             $value.innerText = $item.innerText;
             if (option.onSelect) {
-                const result = option.onSelect.call(this.art, find, $item);
+                const result = option.onSelect.call(this.art, find, $item, event);
                 if (typeof result === 'string') {
                     $value.innerHTML = result;
                 }

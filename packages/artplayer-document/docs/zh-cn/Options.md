@@ -562,34 +562,34 @@ var art = new Artplayer({
     settings: [
         {
             html: '自定义设置01',
-            children: [
+            selector: [
                 {
                     html: '子菜单01',
-                    click: function() {
+                    onSelect: function() {
                         console.log('你点击了子菜单01');
                     }
                 },
                 {
                     html: '子菜单02',
-                    click: function() {
-                        console.log('你点击了子菜单01');
+                    onSelect: function() {
+                        console.log('你点击了子菜单02');
                     }
                 },
             ]
         },
         {
             html: '自定义设置02',
-            children: [
+            selector: [
                 {
                     html: '子菜单01',
-                    click: function() {
+                    onSelect: function() {
                         console.log('你点击了子菜单01');
                     }
                 },
                 {
                     html: '子菜单02',
-                    click: function() {
-                        console.log('你点击了子菜单01');
+                    onSelect: function() {
+                        console.log('你点击了子菜单02');
                     }
                 },
             ]
