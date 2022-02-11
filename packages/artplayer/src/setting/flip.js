@@ -1,4 +1,4 @@
-export default function playbackRate(art) {
+export default function flip(art) {
     const { i18n } = art;
 
     const keys = {

@@ -2,6 +2,7 @@ import { setStyles, includeFromEvent, isMobile } from '../utils';
 import Component from '../utils/component';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
+import flip from './flip';
 import info from './info';
 import version from './version';
 import close from './close';
@@ -45,10 +46,18 @@ export default class Contextmenu extends Component {
         );
 
         this.add(
+            flip({
+                disable: !option.flip,
+                name: 'flip',
+                index: 30,
+            }),
+        );
+
+        this.add(
             info({
                 disable: false,
                 name: 'info',
-                index: 30,
+                index: 40,
             }),
         );
 
@@ -56,7 +65,7 @@ export default class Contextmenu extends Component {
             version({
                 disable: false,
                 name: 'version',
-                index: 40,
+                index: 50,
             }),
         );
 
