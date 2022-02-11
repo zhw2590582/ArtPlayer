@@ -3,7 +3,7 @@ import { append, tooltip } from '../utils';
 export default function subtitle(option) {
     return art => ({
         ...option,
-        tooltip: art.i18n.get('Hide subtitle'),
+        tooltip: art.i18n.get('Hide Subtitle'),
         mounted: $control => {
             const {
                 events: { proxy },
@@ -19,7 +19,7 @@ export default function subtitle(option) {
             });
 
             art.on('subtitle', value => {
-                tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
+                tooltip($control, i18n.get(value ? 'Hide Subtitle' : 'Show Subtitle'));
             });
         },
     });

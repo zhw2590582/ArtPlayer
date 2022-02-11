@@ -930,8 +930,6 @@
   var Pause$1 = "暂停";
   var Rate$1 = "速度";
   var Mute$1 = "静音";
-  var Flip$1 = "画面翻转";
-  var Rotate$1 = "旋转";
   var Horizontal$1 = "水平";
   var Vertical$1 = "垂直";
   var Reconnect$1 = "重新连接";
@@ -941,46 +939,40 @@
   var Open$1 = "打开";
   var Fullscreen$1 = "全屏";
   var zhCn = {
-  	"Video info": "统计信息",
+  	"Video Info": "统计信息",
   	Close: Close$1,
-  	"Video load failed": "加载失败",
+  	"Video Load Failed": "加载失败",
   	Volume: Volume$1,
   	Play: Play$1,
   	Pause: Pause$1,
   	Rate: Rate$1,
   	Mute: Mute$1,
-  	Flip: Flip$1,
-  	Rotate: Rotate$1,
+  	"Video Flip": "画面翻转",
   	Horizontal: Horizontal$1,
   	Vertical: Vertical$1,
   	Reconnect: Reconnect$1,
-  	"Hide subtitle": "隐藏字幕",
-  	"Show subtitle": "显示字幕",
-  	"Hide danmu": "隐藏弹幕",
-  	"Show danmu": "显示弹幕",
-  	"Show setting": "显示设置",
-  	"Hide setting": "隐藏设置",
+  	"Hide Subtitle": "隐藏字幕",
+  	"Show Subtitle": "显示字幕",
+  	"Show Setting": "显示设置",
+  	"Hide Setting": "隐藏设置",
   	Screenshot: Screenshot$1,
-  	"Play speed": "播放速度",
-  	"Aspect ratio": "画面比例",
+  	"Play Speed": "播放速度",
+  	"Aspect Ratio": "画面比例",
   	Default: Default$1,
   	Normal: Normal$1,
   	Open: Open$1,
-  	"Switch video": "切换",
-  	"Switch subtitle": "切换字幕",
+  	"Switch Video": "切换",
+  	"Switch Subtitle": "切换字幕",
   	Fullscreen: Fullscreen$1,
-  	"Exit fullscreen": "退出全屏",
-  	"Web fullscreen": "网页全屏",
-  	"Exit web fullscreen": "退出网页全屏",
-  	"Mini player": "迷你播放器",
-  	"PIP mode": "画中画模式",
-  	"Exit PIP mode": "退出画中画模式",
-  	"PIP not supported": "不支持画中画模式",
-  	"Fullscreen not supported": "不支持全屏模式",
-  	"Local Subtitle": "本地字幕",
-  	"Local Video": "本地视频",
-  	"Subtitle offset time": "字幕偏移",
-  	"No subtitles found": "未发现字幕"
+  	"Exit Fullscreen": "退出全屏",
+  	"Web Fullscreen": "网页全屏",
+  	"Exit Web Fullscreen": "退出网页全屏",
+  	"Mini Player": "迷你播放器",
+  	"PIP Mode": "画中画模式",
+  	"Exit PIP Mode": "退出画中画模式",
+  	"PIP Not Supported": "不支持画中画模式",
+  	"Fullscreen Not Supported": "不支持全屏模式",
+  	"Subtitle Offset Time": "字幕偏移"
   };
 
   var Close = "關閉";
@@ -989,8 +981,6 @@
   var Pause = "暫停";
   var Rate = "速度";
   var Mute = "靜音";
-  var Flip = "畫面翻轉";
-  var Rotate = "旋轉";
   var Horizontal = "水平";
   var Vertical = "垂直";
   var Reconnect = "重新連接";
@@ -1000,46 +990,40 @@
   var Open = "打開";
   var Fullscreen = "全屏";
   var zhTw = {
-  	"Video info": "統計訊息",
+  	"Video Info": "統計訊息",
   	Close: Close,
-  	"Video load failed": "載入失敗",
+  	"Video Load Failed": "載入失敗",
   	Volume: Volume,
   	Play: Play,
   	Pause: Pause,
   	Rate: Rate,
   	Mute: Mute,
-  	Flip: Flip,
-  	Rotate: Rotate,
+  	"Video Flip": "畫面翻轉",
   	Horizontal: Horizontal,
   	Vertical: Vertical,
   	Reconnect: Reconnect,
-  	"Hide subtitle": "隱藏字幕",
-  	"Show subtitle": "顯示字幕",
-  	"Hide danmu": "隱藏彈幕",
-  	"Show danmu": "顯示彈幕",
-  	"Show setting": "顯示设置",
-  	"Hide setting": "隱藏设置",
+  	"Hide Subtitle": "隱藏字幕",
+  	"Show Subtitle": "顯示字幕",
+  	"Show Setting": "顯示设置",
+  	"Hide Setting": "隱藏设置",
   	Screenshot: Screenshot,
-  	"Play speed": "播放速度",
-  	"Aspect ratio": "畫面比例",
+  	"Play Speed": "播放速度",
+  	"Aspect Ratio": "畫面比例",
   	Default: Default,
   	Normal: Normal,
   	Open: Open,
-  	"Switch video": "切換",
-  	"Switch subtitle": "切換字幕",
+  	"Switch Video": "切換",
+  	"Switch Subtitle": "切換字幕",
   	Fullscreen: Fullscreen,
-  	"Exit fullscreen": "退出全屏",
-  	"Web fullscreen": "網頁全屏",
-  	"Exit web fullscreen": "退出網頁全屏",
-  	"Mini player": "迷你播放器",
-  	"PIP mode": "畫中畫模式",
-  	"Exit PIP mode": "退出畫中畫模式",
-  	"PIP not supported": "不支持畫中畫模式",
-  	"Fullscreen not supported": "不支持全屏模式",
-  	"Local Subtitle": "本地字幕",
-  	"Local Video": "本地視頻",
-  	"Subtitle offset time": "字幕偏移",
-  	"No subtitles found": "未發現字幕"
+  	"Exit Fullscreen": "退出全屏",
+  	"Web Fullscreen": "網頁全屏",
+  	"Exit Web Fullscreen": "退出網頁全屏",
+  	"Mini Player": "迷你播放器",
+  	"PIP Mode": "畫中畫模式",
+  	"Exit PIP Mode": "退出畫中畫模式",
+  	"PIP Not Supported": "不支持畫中畫模式",
+  	"Fullscreen Not Supported": "不支持全屏模式",
+  	"Subtitle Offset Time": "字幕偏移"
   };
 
   var I18n = /*#__PURE__*/function () {
@@ -1281,7 +1265,7 @@
           }
 
           if (name) {
-            notice.show = "".concat(i18n.get('Switch video'), ": ").concat(name);
+            notice.show = "".concat(i18n.get('Switch Video'), ": ").concat(name);
           }
 
           art.emit('switch', url);
@@ -1386,7 +1370,7 @@
           $player.dataset.aspectRatio = ratio;
         }
 
-        notice.show = "".concat(i18n.get('Aspect ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
+        notice.show = "".concat(i18n.get('Aspect Ratio'), ": ").concat(ratio === 'default' ? i18n.get('Default') : ratio);
         art.emit('aspectRatio', ratio);
       }
     });
@@ -1703,7 +1687,7 @@
             return false;
           },
           set: function set() {
-            notice.show = i18n.get('Fullscreen not supported');
+            notice.show = i18n.get('Fullscreen Not Supported');
           }
         });
       } // Asynchronous setting
@@ -1802,7 +1786,7 @@
           return false;
         },
         set: function set() {
-          notice.show = i18n.get('PIP not supported');
+          notice.show = i18n.get('PIP Not Supported');
         }
       });
     }
@@ -1940,7 +1924,7 @@
         }
 
         var word = flip.replace(flip[0], flip[0].toUpperCase());
-        notice.show = "".concat(i18n.get('Flip'), ": ").concat(i18n.get(word));
+        notice.show = "".concat(i18n.get('Video Flip'), ": ").concat(i18n.get(word));
         art.emit('flip', flip);
       }
     });
@@ -1997,7 +1981,7 @@
       isDroging = false;
       removeClass($player, 'art-is-dragging');
     });
-    append($miniTitle, option.title || i18n.get('Mini player'));
+    append($miniTitle, option.title || i18n.get('Mini Player'));
     def(art, 'mini', {
       get: function get() {
         return hasClass($player, 'art-mini');
@@ -2217,10 +2201,9 @@
           }
 
           art.subtitle.update();
-          notice.show = "".concat(i18n.get('Subtitle offset time'), ": ").concat(value, "s");
+          notice.show = "".concat(i18n.get('Subtitle Offset Time'), ": ").concat(value, "s");
           art.emit('subtitleOffset', value);
         } else {
-          notice.show = "".concat(i18n.get('No subtitles found'));
           art.emit('subtitleOffset', 0);
         }
       }
@@ -2335,7 +2318,7 @@
         art.controls.show = false;
         addClass($player, 'art-error');
         sleep(1000).then(function () {
-          notice.show = i18n.get('Video load failed');
+          notice.show = i18n.get('Video Load Failed');
           art.destroy(false);
         });
       }
@@ -2624,7 +2607,7 @@
             art.fullscreen = !art.fullscreen;
           });
           art.on('fullscreen', function (value) {
-            tooltip($control, i18n.get(value ? 'Exit fullscreen' : 'Fullscreen'));
+            tooltip($control, i18n.get(value ? 'Exit Fullscreen' : 'Fullscreen'));
           });
         }
       });
@@ -2637,7 +2620,7 @@
   function fullscreenWeb$1(option) {
     return function (art) {
       return _objectSpread$i(_objectSpread$i({}, option), {}, {
-        tooltip: art.i18n.get('Web fullscreen'),
+        tooltip: art.i18n.get('Web Fullscreen'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2647,7 +2630,7 @@
             art.fullscreenWeb = !art.fullscreenWeb;
           });
           art.on('fullscreenWeb', function (value) {
-            tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
+            tooltip($control, i18n.get(value ? 'Exit Web Fullscreen' : 'Web Fullscreen'));
           });
         }
       });
@@ -2660,7 +2643,7 @@
   function pip$1(option) {
     return function (art) {
       return _objectSpread$h(_objectSpread$h({}, option), {}, {
-        tooltip: art.i18n.get('PIP mode'),
+        tooltip: art.i18n.get('PIP Mode'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2670,7 +2653,7 @@
             art.pip = !art.pip;
           });
           art.on('pip', function (value) {
-            tooltip($control, i18n.get(value ? 'Exit PIP mode' : 'PIP mode'));
+            tooltip($control, i18n.get(value ? 'Exit PIP Mode' : 'PIP Mode'));
           });
         }
       });
@@ -2910,7 +2893,7 @@
   function subtitle$1(option) {
     return function (art) {
       return _objectSpread$e(_objectSpread$e({}, option), {}, {
-        tooltip: art.i18n.get('Hide subtitle'),
+        tooltip: art.i18n.get('Hide Subtitle'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -2921,7 +2904,7 @@
             subtitle.toggle = true;
           });
           art.on('subtitle', function (value) {
-            tooltip($control, i18n.get(value ? 'Hide subtitle' : 'Show subtitle'));
+            tooltip($control, i18n.get(value ? 'Hide Subtitle' : 'Show Subtitle'));
           });
         }
       });
@@ -3042,7 +3025,7 @@
   function setting$1(option) {
     return function (art) {
       return _objectSpread$b(_objectSpread$b({}, option), {}, {
-        tooltip: art.i18n.get('Show setting'),
+        tooltip: art.i18n.get('Show Setting'),
         mounted: function mounted($control) {
           var proxy = art.events.proxy,
               icons = art.icons,
@@ -3053,7 +3036,7 @@
             setting.toggle = true;
           });
           art.on('setting', function (value) {
-            tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
+            tooltip($control, i18n.get(value ? 'Hide Setting' : 'Show Setting'));
           });
         }
       });
@@ -3362,7 +3345,7 @@
     return function (art) {
       var i18n = art.i18n;
       return _objectSpread$6(_objectSpread$6({}, option), {}, {
-        html: "".concat(i18n.get('Play speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
+        html: "".concat(i18n.get('Play Speed'), ":\n                <span data-rate=\"0.5\">0.5</span>\n                <span data-rate=\"0.75\">0.75</span>\n                <span data-rate=\"1.0\" class=\"art-current\">").concat(i18n.get('Normal'), "</span>\n                <span data-rate=\"1.25\">1.25</span>\n                <span data-rate=\"1.5\">1.5</span>\n                <span data-rate=\"2.0\">2.0</span>\n            "),
         click: function click(contextmenu, event) {
           var rate = event.target.dataset.rate;
 
@@ -3393,7 +3376,7 @@
     return function (art) {
       var i18n = art.i18n;
       return _objectSpread$5(_objectSpread$5({}, option), {}, {
-        html: "".concat(i18n.get('Aspect ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
+        html: "".concat(i18n.get('Aspect Ratio'), ":\n                <span data-ratio=\"default\" class=\"art-current\">").concat(i18n.get('Default'), "</span>\n                <span data-ratio=\"4:3\">4:3</span>\n                <span data-ratio=\"16:9\">16:9</span>\n            "),
         click: function click(contextmenu, event) {
           var ratio = event.target.dataset.ratio;
 
@@ -3424,7 +3407,7 @@
   function info(option) {
     return function (art) {
       return _objectSpread$4(_objectSpread$4({}, option), {}, {
-        html: art.i18n.get('Video info'),
+        html: art.i18n.get('Video Info'),
         click: function click(contextmenu) {
           art.info.show = true;
           contextmenu.show = false;
@@ -3734,7 +3717,7 @@
 
         return this.init(subtitleOption).then(function (subUrl) {
           if (newOption.name) {
-            notice.show = "".concat(i18n.get('Switch subtitle'), ": ").concat(newOption.name);
+            notice.show = "".concat(i18n.get('Switch Subtitle'), ": ").concat(newOption.name);
           }
 
           return subUrl;
@@ -4292,7 +4275,7 @@
     };
     return {
       width: 150,
-      html: i18n.get('Flip'),
+      html: i18n.get('Video Flip'),
       items: Object.keys(keys).map(function (key) {
         return {
           html: i18n.get(keys[key]),
@@ -4310,7 +4293,7 @@
         icons = art.icons;
     return {
       width: 150,
-      html: i18n.get('Aspect ratio'),
+      html: i18n.get('Aspect Ratio'),
       icon: icons.aspectRatio,
       items: ['default', '4:3', '16:9'].map(function (item) {
         return {
@@ -4329,7 +4312,7 @@
         icons = art.icons;
     return {
       width: 150,
-      html: i18n.get('Play speed'),
+      html: i18n.get('Play Speed'),
       icon: icons.playbackRate,
       items: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
         return {
@@ -4348,7 +4331,7 @@
         icons = art.icons;
     return {
       width: 150,
-      html: i18n.get('Subtitle offset time'),
+      html: i18n.get('Subtitle Offset Time'),
       icon: icons.subtitle,
       items: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
         return {

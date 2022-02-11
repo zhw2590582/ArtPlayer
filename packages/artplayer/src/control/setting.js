@@ -3,7 +3,7 @@ import { append, tooltip } from '../utils';
 export default function setting(option) {
     return art => ({
         ...option,
-        tooltip: art.i18n.get('Show setting'),
+        tooltip: art.i18n.get('Show Setting'),
         mounted: $control => {
             const {
                 events: { proxy },
@@ -19,7 +19,7 @@ export default function setting(option) {
             });
 
             art.on('setting', value => {
-                tooltip($control, i18n.get(value ? 'Hide setting' : 'Show setting'));
+                tooltip($control, i18n.get(value ? 'Hide Setting' : 'Show Setting'));
             });
         },
     });

@@ -19,7 +19,7 @@ export default function switchMix(art) {
                     art.play();
                 }
                 if (name) {
-                    notice.show = `${i18n.get('Switch video')}: ${name}`;
+                    notice.show = `${i18n.get('Switch Video')}: ${name}`;
                 }
                 art.emit('switch', url);
                 resolve(url);

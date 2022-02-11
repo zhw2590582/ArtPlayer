@@ -3,7 +3,7 @@ import { append, tooltip } from '../utils';
 export default function fullscreenWeb(option) {
     return (art) => ({
         ...option,
-        tooltip: art.i18n.get('Web fullscreen'),
+        tooltip: art.i18n.get('Web Fullscreen'),
         mounted: ($control) => {
             const {
                 events: { proxy },
@@ -18,7 +18,7 @@ export default function fullscreenWeb(option) {
             });
 
             art.on('fullscreenWeb', (value) => {
-                tooltip($control, i18n.get(value ? 'Exit web fullscreen' : 'Web fullscreen'));
+                tooltip($control, i18n.get(value ? 'Exit Web Fullscreen' : 'Web Fullscreen'));
             });
         },
     });

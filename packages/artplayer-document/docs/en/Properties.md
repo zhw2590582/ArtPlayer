@@ -52,7 +52,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-Switch video playback and pause
+Switch Video playback and pause
 
 <div className="run-code">▶ Run Code</div>
 
@@ -422,7 +422,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Boolean`
 
-Set and get player PIP mode
+Set and get player PIP Mode
 
 <div className="run-code">▶ Run Code</div>
 

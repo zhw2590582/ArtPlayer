@@ -28,10 +28,9 @@ export default function subtitleOffsetMix(art) {
                 }
 
                 art.subtitle.update();
-                notice.show = `${i18n.get('Subtitle offset time')}: ${value}s`;
+                notice.show = `${i18n.get('Subtitle Offset Time')}: ${value}s`;
                 art.emit('subtitleOffset', value);
             } else {
-                notice.show = `${i18n.get('No subtitles found')}`;
                 art.emit('subtitleOffset', 0);
             }
         },

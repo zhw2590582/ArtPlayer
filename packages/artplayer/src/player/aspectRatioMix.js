@@ -41,7 +41,7 @@ export default function aspectRatioMix(art) {
                 $player.dataset.aspectRatio = ratio;
             }
 
-            notice.show = `${i18n.get('Aspect ratio')}: ${ratio === 'default' ? i18n.get('Default') : ratio}`;
+            notice.show = `${i18n.get('Aspect Ratio')}: ${ratio === 'default' ? i18n.get('Default') : ratio}`;
             art.emit('aspectRatio', ratio);
         },
     });

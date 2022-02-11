@@ -47,7 +47,7 @@ export default function miniMix(art) {
         removeClass($player, 'art-is-dragging');
     });
 
-    append($miniTitle, option.title || i18n.get('Mini player'));
+    append($miniTitle, option.title || i18n.get('Mini Player'));
 
     def(art, 'mini', {
         get() {

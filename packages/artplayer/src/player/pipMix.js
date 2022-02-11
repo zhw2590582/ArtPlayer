@@ -74,7 +74,7 @@ export default function pipMix(art) {
                 return false;
             },
             set() {
-                notice.show = i18n.get('PIP not supported');
+                notice.show = i18n.get('PIP Not Supported');
             },
         });
     }
