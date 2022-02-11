@@ -7,12 +7,10 @@ export default function aspectRatio(art) {
         return value === 'default' ? i18n.get('Default') : value;
     }
 
-    function update($panel, item, value) {
-        item.$desc.innerText = getI18n(value);
+    function update($panel, $desc, value) {
+        if ($desc) $desc.innerText = getI18n(value);
         const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
-        if ($current) {
-            inverseClass($current, 'art-current');
-        }
+        if ($current) inverseClass($current, 'art-current');
     }
 
     return {
@@ -31,9 +29,9 @@ export default function aspectRatio(art) {
             art.aspectRatio = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item, art.aspectRatio);
+            update($panel, item.$desc, art.aspectRatio);
             art.on('aspectRatio', () => {
-                update($panel, item, art.aspectRatio);
+                update($panel, item.$desc, art.aspectRatio);
             });
         },
     };

@@ -4292,15 +4292,12 @@
       vertical: 'Vertical'
     };
 
-    function update($panel, item, value) {
-      item.$desc.innerText = i18n.get(keys[value]);
+    function update($panel, $desc, value) {
+      if ($desc) $desc.innerText = i18n.get(keys[value]);
       var $current = queryAll('.art-setting-item', $panel).find(function (item) {
         return item.dataset.value === value;
       });
-
-      if ($current) {
-        inverseClass($current, 'art-current');
-      }
+      if ($current) inverseClass($current, 'art-current');
     }
 
     return {
@@ -4319,9 +4316,9 @@
         art.flip = item.value;
       },
       mounted: function mounted($panel, item) {
-        update($panel, item, art.flip);
+        update($panel, item.$desc, art.flip);
         art.on('flip', function () {
-          update($panel, item, art.flip);
+          update($panel, item.$desc, art.flip);
         });
       }
     };
@@ -4335,15 +4332,12 @@
       return value === 'default' ? i18n.get('Default') : value;
     }
 
-    function update($panel, item, value) {
-      item.$desc.innerText = getI18n(value);
+    function update($panel, $desc, value) {
+      if ($desc) $desc.innerText = getI18n(value);
       var $current = queryAll('.art-setting-item', $panel).find(function (item) {
         return item.dataset.value === value;
       });
-
-      if ($current) {
-        inverseClass($current, 'art-current');
-      }
+      if ($current) inverseClass($current, 'art-current');
     }
 
     return {
@@ -4362,9 +4356,9 @@
         art.aspectRatio = item.value;
       },
       mounted: function mounted($panel, item) {
-        update($panel, item, art.aspectRatio);
+        update($panel, item.$desc, art.aspectRatio);
         art.on('aspectRatio', function () {
-          update($panel, item, art.aspectRatio);
+          update($panel, item.$desc, art.aspectRatio);
         });
       }
     };
@@ -4378,15 +4372,12 @@
       return value === 1.0 ? i18n.get('Normal') : value;
     }
 
-    function update($panel, item, value) {
-      item.$desc.innerText = getI18n(value);
+    function update($panel, $desc, value) {
+      if ($desc) $desc.innerText = getI18n(value);
       var $current = queryAll('.art-setting-item', $panel).find(function (item) {
         return Number(item.dataset.value) === value;
       });
-
-      if ($current) {
-        inverseClass($current, 'art-current');
-      }
+      if ($current) inverseClass($current, 'art-current');
     }
 
     return {
@@ -4405,9 +4396,9 @@
         art.playbackRate = item.value;
       },
       mounted: function mounted($panel, item) {
-        update($panel, item, art.playbackRate);
+        update($panel, item.$desc, art.playbackRate);
         art.on('playbackRate', function () {
-          update($panel, item, art.playbackRate);
+          update($panel, item.$desc, art.playbackRate);
         });
       }
     };
@@ -4421,15 +4412,12 @@
       return value === 0 ? i18n.get('Normal') : value;
     }
 
-    function update($panel, item, value) {
-      item.$desc.innerText = getI18n(value);
+    function update($panel, $desc, value) {
+      if ($desc) $desc.innerText = getI18n(value);
       var $current = queryAll('.art-setting-item', $panel).find(function (item) {
         return Number(item.dataset.value) === value;
       });
-
-      if ($current) {
-        inverseClass($current, 'art-current');
-      }
+      if ($current) inverseClass($current, 'art-current');
     }
 
     return {
@@ -4448,9 +4436,9 @@
         art.subtitleOffset = item.value;
       },
       mounted: function mounted($panel, item) {
-        update($panel, item, art.subtitleOffset);
+        update($panel, item.$desc, art.subtitleOffset);
         art.on('subtitleOffset', function () {
-          update($panel, item, art.subtitleOffset);
+          update($panel, item.$desc, art.subtitleOffset);
         });
       }
     };

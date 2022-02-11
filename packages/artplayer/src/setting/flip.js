@@ -9,12 +9,10 @@ export default function flip(art) {
         vertical: 'Vertical',
     };
 
-    function update($panel, item, value) {
-        item.$desc.innerText = i18n.get(keys[value]);
+    function update($panel, $desc, value) {
+        if ($desc) $desc.innerText = i18n.get(keys[value]);
         const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
-        if ($current) {
-            inverseClass($current, 'art-current');
-        }
+        if ($current) inverseClass($current, 'art-current');
     }
 
     return {
@@ -33,9 +31,9 @@ export default function flip(art) {
             art.flip = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item, art.flip);
+            update($panel, item.$desc, art.flip);
             art.on('flip', () => {
-                update($panel, item, art.flip);
+                update($panel, item.$desc, art.flip);
             });
         },
     };

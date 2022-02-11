@@ -7,12 +7,10 @@ export default function playbackRate(art) {
         return value === 1.0 ? i18n.get('Normal') : value;
     }
 
-    function update($panel, item, value) {
-        item.$desc.innerText = getI18n(value);
+    function update($panel, $desc, value) {
+        if ($desc) $desc.innerText = getI18n(value);
         const $current = queryAll('.art-setting-item', $panel).find((item) => Number(item.dataset.value) === value);
-        if ($current) {
-            inverseClass($current, 'art-current');
-        }
+        if ($current) inverseClass($current, 'art-current');
     }
 
     return {
@@ -31,9 +29,9 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item, art.playbackRate);
+            update($panel, item.$desc, art.playbackRate);
             art.on('playbackRate', () => {
-                update($panel, item, art.playbackRate);
+                update($panel, item.$desc, art.playbackRate);
             });
         },
     };
