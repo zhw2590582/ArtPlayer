@@ -100,27 +100,30 @@ export default class Setting extends Component {
             addClass($item, 'art-current');
         }
 
+        const $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+
         if (item.back) {
             addClass($item, 'art-setting-item-back');
-            append($left, icons.arrowLeft);
-            append($left, item.html);
+            append($icon, icons.arrowLeft);
         } else {
             if (hasChildren) {
-                const $icon = document.createElement('div');
-                addClass($icon, 'art-setting-item-left-icon');
                 append($icon, item.icon || icons.config);
-                append($left, $icon);
                 append($right, icons.arrowRight);
             } else {
-                append($left, icons.check);
+                append($icon, icons.check);
             }
-            append($left, item.html);
         }
+
+        append($left, $icon);
+        append($left, item.html);
 
         proxy($item, 'click', (event) => {
             if (hasChildren) {
                 this.init(item.selector);
-                setStyle(this.$parent, 'width', `${item.width || this.width}px`);
+                if (item.width) {
+                    setStyle(this.$parent, 'width', `${item.width}px`);
+                }
             } else {
                 inverseClass($item, 'art-current');
                 if (item.onSelect) {
@@ -142,6 +145,7 @@ export default class Setting extends Component {
     }
 
     init(option) {
+        setStyle(this.$parent, 'width', `${this.width}px`);
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             inverseClass($panel, 'art-current');
@@ -155,6 +159,5 @@ export default class Setting extends Component {
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
         }
-        setStyle(this.$parent, 'width', `${this.width}px`);
     }
 }

@@ -3,7 +3,7 @@ title: Use with React Portal
 sidebar_position: 6
 ---
 
-It is also very easy to use `React Components` in `layers`, `contextmenu`, `controls`, and `setting`. Handle more complex logic through `ReactDOM.createPortal`.
+It is also very easy to use `React Components` in `layers`, `contextmenu`, `controls`. Handle more complex logic through `ReactDOM.createPortal`.
 
 👉 [Click to open an online demo](https://codesandbox.io/s/artplayer-react-portal-5z32h)
 

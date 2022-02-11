@@ -4453,29 +4453,30 @@
           addClass($item, 'art-current');
         }
 
+        var $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+
         if (item.back) {
           addClass($item, 'art-setting-item-back');
-          append($left, icons.arrowLeft);
-          append($left, item.html);
+          append($icon, icons.arrowLeft);
         } else {
           if (hasChildren) {
-            var $icon = document.createElement('div');
-            addClass($icon, 'art-setting-item-left-icon');
             append($icon, item.icon || icons.config);
-            append($left, $icon);
             append($right, icons.arrowRight);
           } else {
-            append($left, icons.check);
+            append($icon, icons.check);
           }
-
-          append($left, item.html);
         }
 
+        append($left, $icon);
+        append($left, item.html);
         proxy($item, 'click', function (event) {
           if (hasChildren) {
             _this2.init(item.selector);
 
-            setStyle(_this2.$parent, 'width', "".concat(item.width || _this2.width, "px"));
+            if (item.width) {
+              setStyle(_this2.$parent, 'width', "".concat(item.width, "px"));
+            }
           } else {
             inverseClass($item, 'art-current');
 
@@ -4500,6 +4501,8 @@
     }, {
       key: "init",
       value: function init(option) {
+        setStyle(this.$parent, 'width', "".concat(this.width, "px"));
+
         if (this.cache.has(option)) {
           var $panel = this.cache.get(option);
           inverseClass($panel, 'art-current');
@@ -4516,8 +4519,6 @@
           this.cache.set(option, _$panel);
           inverseClass(_$panel, 'art-current');
         }
-
-        setStyle(this.$parent, 'width', "".concat(this.width, "px"));
       }
     }]);
 
