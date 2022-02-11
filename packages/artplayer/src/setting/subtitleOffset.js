@@ -8,7 +8,7 @@ export default function subtitleOffset(art) {
         selector: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map((item) => {
             return {
                 html: item === 0 ? i18n.get('Normal') : item,
-                current: item === 0,
+                default: item === 0,
                 onSelect() {
                     art.subtitleOffset = item;
                 },

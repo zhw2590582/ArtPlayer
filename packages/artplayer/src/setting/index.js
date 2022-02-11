@@ -96,7 +96,7 @@ export default class Setting extends Component {
         const $right = append($item, `<div class="art-setting-item-right"></div>`);
 
         addClass($item, 'art-setting-item');
-        if (item.current) {
+        if (item.default) {
             addClass($item, 'art-current');
         }
 
@@ -116,15 +116,17 @@ export default class Setting extends Component {
         }
 
         proxy($item, 'click', (event) => {
-            if (typeof item.onSelect === 'function') {
-                item.onSelect.call(this.art, this, event);
-            }
-
             if (hasChildren) {
                 this.init(item.selector);
                 setStyle(this.$parent, 'width', `${item.width || this.width}px`);
             } else {
                 inverseClass($item, 'art-current');
+                if (item.onSelect) {
+                    const result = item.onSelect.call(this.art, item, $item, event);
+                    if (typeof result === 'string') {
+                        $item.innerHTML = result;
+                    }
+                }
             }
         });
 

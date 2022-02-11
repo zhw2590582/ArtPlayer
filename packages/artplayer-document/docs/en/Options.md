@@ -562,16 +562,16 @@ var art = new Artplayer({
     settings: [
         {
             html: 'Custom setting 01',
-            children: [
+            selector: [
                 {
                     html: 'Submenu 01',
-                    click: function() {
+                    onSelect: function() {
                         console.log('You click on the submenu 01');
                     }
                 },
                 {
                     html: 'Submenu 02',
-                    click: function() {
+                    onSelect: function() {
                         console.log('You click on the submenu 02');
                     }
                 },
@@ -579,16 +579,16 @@ var art = new Artplayer({
         },
         {
             html: 'Custom setting 02',
-            children: [
+            selector: [
                 {
                     html: 'Submenu 01',
-                    click: function() {
+                    onSelect: function() {
                         console.log('You click on the submenu 01');
                     }
                 },
                 {
                     html: 'Submenu 02',
-                    click: function() {
+                    onSelect: function() {
                         console.log('You click on the submenu 02');
                     }
                 },

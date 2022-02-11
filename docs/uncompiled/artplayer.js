@@ -2578,7 +2578,7 @@
           $value.innerText = $item.innerText;
 
           if (option.onSelect) {
-            var result = option.onSelect.call(_this2.art, find, $item);
+            var result = option.onSelect.call(_this2.art, find, $item, event);
 
             if (typeof result === 'string') {
               $value.innerHTML = result;
@@ -4283,7 +4283,7 @@
       selector: Object.keys(keys).map(function (key) {
         return {
           html: i18n.get(keys[key]),
-          current: key === 'normal',
+          default: key === 'normal',
           onSelect: function onSelect() {
             art.flip = key;
           }
@@ -4302,7 +4302,7 @@
       selector: ['default', '4:3', '16:9'].map(function (item) {
         return {
           html: item === 'default' ? i18n.get('Default') : item,
-          current: item === 'default',
+          default: item === 'default',
           onSelect: function onSelect() {
             art.aspectRatio = item;
           }
@@ -4321,7 +4321,7 @@
       selector: [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0].map(function (item) {
         return {
           html: item === 1.0 ? i18n.get('Normal') : item,
-          current: item === 1.0,
+          default: item === 1.0,
           onSelect: function onSelect() {
             art.playbackRate = item;
           }
@@ -4340,7 +4340,7 @@
       selector: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
         return {
           html: item === 0 ? i18n.get('Normal') : item,
-          current: item === 0,
+          default: item === 0,
           onSelect: function onSelect() {
             art.subtitleOffset = item;
           }
@@ -4449,7 +4449,7 @@
         var $right = append($item, "<div class=\"art-setting-item-right\"></div>");
         addClass($item, 'art-setting-item');
 
-        if (item.current) {
+        if (item.default) {
           addClass($item, 'art-current');
         }
 
@@ -4470,16 +4470,20 @@
         }
 
         proxy($item, 'click', function (event) {
-          if (typeof item.onSelect === 'function') {
-            item.onSelect.call(_this2.art, _this2, event);
-          }
-
           if (hasChildren) {
             _this2.init(item.selector);
 
             setStyle(_this2.$parent, 'width', "".concat(item.width || _this2.width, "px"));
           } else {
             inverseClass($item, 'art-current');
+
+            if (item.onSelect) {
+              var result = item.onSelect.call(_this2.art, item, $item, event);
+
+              if (typeof result === 'string') {
+                $item.innerHTML = result;
+              }
+            }
           }
         });
         return $item;

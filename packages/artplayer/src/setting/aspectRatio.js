@@ -8,7 +8,7 @@ export default function aspectRatio(art) {
         selector: ['default', '4:3', '16:9'].map((item) => {
             return {
                 html: item === 'default' ? i18n.get('Default') : item,
-                current: item === 'default',
+                default: item === 'default',
                 onSelect() {
                     art.aspectRatio = item;
                 },
