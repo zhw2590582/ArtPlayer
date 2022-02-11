@@ -29,8 +29,9 @@ var art = new Artplayer({
     },
     settings: [
         {
-            html: 'Custom setting',
             width: 250,
+            html: 'Custom setting',
+            icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
             selector: [
                 {
                     html: 'Custom setting 01',

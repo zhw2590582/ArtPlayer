@@ -106,8 +106,10 @@ export default class Setting extends Component {
             append($left, item.html);
         } else {
             if (hasChildren) {
-                const $icon = append($left, item.icon || icons.config);
+                const $icon = document.createElement('div');
                 addClass($icon, 'art-setting-item-left-icon');
+                append($icon, item.icon || icons.config);
+                append($left, $icon);
                 append($right, icons.arrowRight);
             } else {
                 append($left, icons.check);
