@@ -9,11 +9,15 @@ module.exports = (opts = {}) => ({
         }
 
         if (opts.from && opts.to) {
-            cpy(opts.from, opts.to).then(() => {
-                logger.success(`${opts.from} successfully copied to ${opts.to}`);
-            }).catch(() => {
-                logger.fatal('File copy failed!');
-            });
+            setTimeout(() => {
+                cpy(opts.from, opts.to)
+                    .then(() => {
+                        logger.success(`${opts.from} successfully copied to ${opts.to}`);
+                    })
+                    .catch(() => {
+                        logger.fatal('File copy failed!');
+                    });
+            }, 200);
         }
     },
 });
