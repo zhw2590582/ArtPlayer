@@ -1,9 +1,9 @@
-import Component from '../utils/component';
-import { append, addClass, setStyle, inverseClass, includeFromEvent } from '../utils';
 import flip from './flip';
 import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
+import Component from '../utils/component';
+import { append, addClass, setStyle, inverseClass, includeFromEvent } from '../utils';
 
 function makeRecursion(option) {
     for (let index = 0; index < option.length; index++) {
