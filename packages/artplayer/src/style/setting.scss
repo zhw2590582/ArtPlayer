@@ -27,6 +27,7 @@
                 padding: 0 5px;
                 line-height: 1;
                 cursor: pointer;
+                overflow: hidden;
                 color: rgba(255, 255, 255, 0.8);
 
                 &:hover,
@@ -55,6 +56,7 @@
                 .art-setting-item-left {
                     display: flex;
                     align-items: center;
+                    white-space: nowrap;
 
                     .art-setting-item-left-icon {
                         display: flex;
