@@ -4284,7 +4284,8 @@
   });
 
   function flip(art) {
-    var i18n = art.i18n;
+    var i18n = art.i18n,
+        icons = art.icons;
     var keys = {
       normal: 'Normal',
       horizontal: 'Horizontal',
@@ -4293,6 +4294,8 @@
     return {
       width: 150,
       html: i18n.get('Video Flip'),
+      desc: i18n.get(keys[art.flip]),
+      icon: icons.config,
       selector: Object.keys(keys).map(function (item) {
         return {
           value: item,
@@ -4303,7 +4306,9 @@
       onSelect: function onSelect(item) {
         art.flip = item.value;
       },
-      mounted: function mounted($panel) {
+      mounted: function mounted($panel, item) {
+        var $desc = query('.art-setting-item-right-desc', item.$item);
+        $desc.innerText = i18n.get(keys[art.flip]);
         art.on('flip', function (value) {
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return item.dataset.value === value;
@@ -4311,6 +4316,7 @@
 
           if ($current) {
             inverseClass($current, 'art-current');
+            $desc.innerText = i18n.get(keys[art.flip]);
           }
         });
       }
@@ -4320,22 +4326,29 @@
   function aspectRatio(art) {
     var i18n = art.i18n,
         icons = art.icons;
-    console.log(art.aspectRatio);
+
+    function getI18n(value) {
+      return value === 'default' ? i18n.get('Default') : value;
+    }
+
     return {
       width: 150,
       html: i18n.get('Aspect Ratio'),
       icon: icons.aspectRatio,
+      desc: getI18n(art.aspectRatio),
       selector: ['default', '4:3', '16:9'].map(function (item) {
         return {
           value: item,
           default: item === art.aspectRatio,
-          html: item === 'default' ? i18n.get('Default') : item
+          html: getI18n(item)
         };
       }),
       onSelect: function onSelect(item) {
         art.aspectRatio = item.value;
       },
-      mounted: function mounted($panel) {
+      mounted: function mounted($panel, item) {
+        var $desc = query('.art-setting-item-right-desc', item.$item);
+        $desc.innerText = getI18n(art.aspectRatio);
         art.on('aspectRatio', function (value) {
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return item.dataset.value === value;
@@ -4343,6 +4356,7 @@
 
           if ($current) {
             inverseClass($current, 'art-current');
+            $desc.innerText = getI18n(art.aspectRatio);
           }
         });
       }
@@ -4352,21 +4366,29 @@
   function playbackRate(art) {
     var i18n = art.i18n,
         icons = art.icons;
+
+    function getI18n(value) {
+      return value === 1.0 ? i18n.get('Normal') : value;
+    }
+
     return {
       width: 150,
       html: i18n.get('Play Speed'),
+      desc: getI18n(art.playbackRate),
       icon: icons.playbackRate,
       selector: [0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map(function (item) {
         return {
           value: item,
           default: item === art.playbackRate,
-          html: item === 1.0 ? i18n.get('Normal') : item
+          html: getI18n(item)
         };
       }),
       onSelect: function onSelect(item) {
         art.playbackRate = item.value;
       },
-      mounted: function mounted($panel) {
+      mounted: function mounted($panel, item) {
+        var $desc = query('.art-setting-item-right-desc', item.$item);
+        $desc.innerText = getI18n(art.playbackRate);
         art.on('playbackRate', function (value) {
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
             return Number(item.dataset.value) === value;
@@ -4374,6 +4396,7 @@
 
           if ($current) {
             inverseClass($current, 'art-current');
+            $desc.innerText = getI18n(art.playbackRate);
           }
         });
       }
@@ -4383,28 +4406,37 @@
   function subtitleOffset(art) {
     var i18n = art.i18n,
         icons = art.icons;
+
+    function getI18n(value) {
+      return value === 0 ? i18n.get('Normal') : value;
+    }
+
     return {
       width: 150,
       html: i18n.get('Subtitle Offset'),
+      desc: getI18n(art.subtitleOffset),
       icon: icons.subtitle,
       selector: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map(function (item) {
         return {
           value: item,
           default: item === art.subtitleOffset,
-          html: item === 0 ? i18n.get('Normal') : item
+          html: getI18n(item)
         };
       }),
       onSelect: function onSelect(item) {
         art.subtitleOffset = item.value;
       },
-      mounted: function mounted($panel) {
+      mounted: function mounted($panel, item) {
+        var $desc = query('.art-setting-item-right-desc', item.$item);
+        $desc.innerText = getI18n(art.subtitleOffset);
         art.on('subtitleOffset', function (value) {
           var $current = queryAll('.art-setting-item', $panel).find(function (item) {
-            return item.dataset.value === value;
+            return Number(item.dataset.value) === value;
           });
 
           if ($current) {
             inverseClass($current, 'art-current');
+            $desc.innerText = getI18n(art.subtitleOffset);
           }
         });
       }
@@ -4549,6 +4581,11 @@
           var $desc = document.createElement('div');
           addClass($desc, 'art-setting-item-right-desc');
           append($right, $desc);
+
+          if (item.desc) {
+            $desc.innerText = item.desc;
+          }
+
           var $iconRight = document.createElement('div');
           addClass($iconRight, 'art-setting-item-right-icon');
           append($iconRight, icons.arrowRight);
@@ -4608,7 +4645,7 @@
           setStyle(this.$parent, 'width', "".concat(_$panel.dataset.width, "px"));
 
           if (option[0] && option[0]._parentItem && option[0]._parentItem.mounted) {
-            option[0]._parentItem.mounted.call(this.art, _$panel);
+            option[0]._parentItem.mounted.call(this.art, _$panel, option[0]._parentItem);
           }
         }
       }

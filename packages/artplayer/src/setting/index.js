@@ -134,6 +134,9 @@ export default class Setting extends Component {
             const $desc = document.createElement('div');
             addClass($desc, 'art-setting-item-right-desc');
             append($right, $desc);
+            if (item.desc) {
+                $desc.innerText = item.desc;
+            }
 
             const $iconRight = document.createElement('div');
             addClass($iconRight, 'art-setting-item-right-icon');
@@ -190,7 +193,7 @@ export default class Setting extends Component {
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
 
             if (option[0] && option[0]._parentItem && option[0]._parentItem.mounted) {
-                option[0]._parentItem.mounted.call(this.art, $panel);
+                option[0]._parentItem.mounted.call(this.art, $panel, option[0]._parentItem);
             }
         }
     }
