@@ -7,6 +7,14 @@ export default function playbackRate(art) {
         return value === 1.0 ? i18n.get('Normal') : value;
     }
 
+    function update($panel, item, value) {
+        item.$desc.innerText = getI18n(value);
+        const $current = queryAll('.art-setting-item', $panel).find((item) => Number(item.dataset.value) === value);
+        if ($current) {
+            inverseClass($current, 'art-current');
+        }
+    }
+
     return {
         width: 200,
         html: i18n.get('Play Speed'),
@@ -23,18 +31,9 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
         },
         mounted: ($panel, item) => {
-            item.$desc.innerText = getI18n(art.playbackRate);
-
-            art.on('playbackRate', (value) => {
-                item.$desc.innerText = getI18n(art.playbackRate);
-
-                const $current = queryAll('.art-setting-item', $panel).find(
-                    (item) => Number(item.dataset.value) === value,
-                );
-
-                if ($current) {
-                    inverseClass($current, 'art-current');
-                }
+            update($panel, item, art.playbackRate);
+            art.on('playbackRate', () => {
+                update($panel, item, art.playbackRate);
             });
         },
     };
