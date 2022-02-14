@@ -7,8 +7,8 @@ export default function playbackRate(art) {
         return value === 1.0 ? i18n.get('Normal') : value;
     }
 
-    function update($panel, $description, value) {
-        if ($description) $description.innerText = getI18n(value);
+    function update($panel, $tooltip, value) {
+        if ($tooltip) $tooltip.innerText = getI18n(value);
         const $current = queryAll('.art-setting-item', $panel).find((item) => Number(item.dataset.value) === value);
         if ($current) inverseClass($current, 'art-current');
     }
@@ -16,7 +16,7 @@ export default function playbackRate(art) {
     return {
         width: 200,
         html: i18n.get('Play Speed'),
-        description: getI18n(art.playbackRate),
+        tooltip: getI18n(art.playbackRate),
         icon: icons.playbackRate,
         selector: [0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map((item) => {
             return {
@@ -29,9 +29,9 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item._$description, art.playbackRate);
+            update($panel, item._$tooltip, art.playbackRate);
             art.on('playbackRate', () => {
-                update($panel, item._$description, art.playbackRate);
+                update($panel, item._$tooltip, art.playbackRate);
             });
         },
     };

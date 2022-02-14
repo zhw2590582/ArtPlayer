@@ -87,6 +87,11 @@ type SettingOption = {
     width?: number;
 
     /**
+     * The tooltip of setting
+     */
+    tooltip?: string;
+
+    /**
      * Whether the default is selected
      */
     default?: boolean;
@@ -701,5 +706,5 @@ declare class Artplayer extends Player {
 
     readonly contextmenu: Record<string, HTMLElement> & Component;
 
-    readonly setting: Component;
+    readonly setting: Record<string, HTMLElement> & Component;
 }

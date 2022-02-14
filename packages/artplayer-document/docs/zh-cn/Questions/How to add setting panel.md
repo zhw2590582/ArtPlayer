@@ -5,15 +5,15 @@ sidebar_position: 6
 
 设置面板类似于列表选择的集合，而且支持多层嵌套
 
-| 属性          | 类型                | 描述            |
-| ------------- | ------------------- | --------------- |
-| `html`        | `String`、`Element` | 元素的 DOM 元素 |
-| `icon`        | `String`、`Element` | 元素的图标      |
-| `selector`    | `Array`             | 元素列表        |
-| `onSelect`    | `Function`          | 元素点击事件    |
-| `width`       | `Number`            | 列表宽度        |
-| `default`     | `Boolean`           | 是否默认选中    |
-| `description` | `String`            | 描述文案        |
+| 属性       | 类型                | 描述            |
+| ---------- | ------------------- | --------------- |
+| `html`     | `String`、`Element` | 元素的 DOM 元素 |
+| `icon`     | `String`、`Element` | 元素的图标      |
+| `selector` | `Array`             | 元素列表        |
+| `onSelect` | `Function`          | 元素点击事件    |
+| `width`    | `Number`            | 列表宽度        |
+| `default`  | `Boolean`           | 是否默认选中    |
+| `tooltip`  | `String`            | 描述文案        |
 
 <div className="run-code">▶ Run Code</div>
 

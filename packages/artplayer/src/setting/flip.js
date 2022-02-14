@@ -9,8 +9,8 @@ export default function flip(art) {
         vertical: 'Vertical',
     };
 
-    function update($panel, $description, value) {
-        if ($description) $description.innerText = i18n.get(keys[value]);
+    function update($panel, $tooltip, value) {
+        if ($tooltip) $tooltip.innerText = i18n.get(keys[value]);
         const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
         if ($current) inverseClass($current, 'art-current');
     }
@@ -18,7 +18,7 @@ export default function flip(art) {
     return {
         width: 200,
         html: i18n.get('Video Flip'),
-        description: i18n.get(keys[art.flip]),
+        tooltip: i18n.get(keys[art.flip]),
         icon: icons.config,
         selector: Object.keys(keys).map((item) => {
             return {
@@ -31,9 +31,9 @@ export default function flip(art) {
             art.flip = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item._$description, art.flip);
+            update($panel, item._$tooltip, art.flip);
             art.on('flip', () => {
-                update($panel, item._$description, art.flip);
+                update($panel, item._$tooltip, art.flip);
             });
         },
     };

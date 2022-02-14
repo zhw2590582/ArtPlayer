@@ -133,13 +133,13 @@ export default class Setting extends Component {
         append($left, item.html);
 
         if (hasChildren) {
-            const $description = document.createElement('div');
-            addClass($description, 'art-setting-item-right-description');
-            append($right, $description);
-            item._$description = $description;
+            const $tooltip = document.createElement('div');
+            addClass($tooltip, 'art-setting-item-right-tooltip');
+            append($right, $tooltip);
+            item._$tooltip = $tooltip;
 
-            if (item.description) {
-                $description.innerHTML = item.description;
+            if (item.tooltip) {
+                $tooltip.innerHTML = item.tooltip;
             }
 
             const $iconRight = document.createElement('div');
@@ -160,9 +160,9 @@ export default class Setting extends Component {
 
                 if (item._parentItem && item._parentItem.onSelect) {
                     const result = item._parentItem.onSelect.call(this.art, item, $item, event);
-                    if (item._parentItem._$description) {
+                    if (item._parentItem._$tooltip) {
                         if (typeof result === 'string' || typeof result === 'number') {
-                            item._parentItem._$description.innerHTML = result;
+                            item._parentItem._$tooltip.innerHTML = result;
                         }
                     }
                 }
@@ -173,7 +173,11 @@ export default class Setting extends Component {
     }
 
     add(callback) {
-        this.option.push(callback(this.art));
+        if (typeof callback === 'function') {
+            this.option.push(callback(this.art));
+        } else {
+            this.option.push(callback);
+        }
         this.option = makeRecursion(this.option);
         this.init(this.option);
     }

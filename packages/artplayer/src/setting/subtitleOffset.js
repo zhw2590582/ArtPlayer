@@ -7,8 +7,8 @@ export default function subtitleOffset(art) {
         return value === 0 ? i18n.get('Normal') : value;
     }
 
-    function update($panel, $description, value) {
-        if ($description) $description.innerText = getI18n(value);
+    function update($panel, $tooltip, value) {
+        if ($tooltip) $tooltip.innerText = getI18n(value);
         const $current = queryAll('.art-setting-item', $panel).find((item) => Number(item.dataset.value) === value);
         if ($current) inverseClass($current, 'art-current');
     }
@@ -16,7 +16,7 @@ export default function subtitleOffset(art) {
     return {
         width: 200,
         html: i18n.get('Subtitle Offset'),
-        description: getI18n(art.subtitleOffset),
+        tooltip: getI18n(art.subtitleOffset),
         icon: icons.subtitle,
         selector: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5].map((item) => {
             return {
@@ -29,9 +29,9 @@ export default function subtitleOffset(art) {
             art.subtitleOffset = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item._$description, art.subtitleOffset);
+            update($panel, item._$tooltip, art.subtitleOffset);
             art.on('subtitleOffset', () => {
-                update($panel, item._$description, art.subtitleOffset);
+                update($panel, item._$tooltip, art.subtitleOffset);
             });
         },
     };

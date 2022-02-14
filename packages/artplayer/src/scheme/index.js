@@ -21,6 +21,7 @@ export const ComponentOption = {
     click: `?${f}`,
     mounted: `?${f}`,
     tooltip: `?${s}`,
+    width: `?${n}`,
     selector: `?${a}`,
     onSelect: `?${f}`,
 };

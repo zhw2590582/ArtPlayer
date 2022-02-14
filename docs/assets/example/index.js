@@ -31,7 +31,7 @@ var art = new Artplayer({
         {
             width: 200,
             html: 'Custom Setting',
-            description: 'Click This',
+            tooltip: 'Click This',
             icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
             selector: [
                 {

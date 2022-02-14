@@ -5,15 +5,15 @@ sidebar_position: 6
 
 Settings panels are similar to a collection of list selections, and support multi-layer nested
 
-| Property      | Type                | Description              |
-| ------------- | ------------------- | ------------------------ |
-| `html`        | `String`、`Element` | DOM elements of selector |
-| `icon`        | `String`、`Element` | Icon of selector         |
-| `selector`    | `Array`             | Selector List            |
-| `onSelect`    | `Function`          | Selector Click event     |
-| `width`       | `Number`            | Panel width              |
-| `default`     | `Boolean`           | Default selected         |
-| `description` | `String`            | Description Text         |
+| Property   | Type                | Description              |
+| ---------- | ------------------- | ------------------------ |
+| `html`     | `String`、`Element` | DOM elements of selector |
+| `icon`     | `String`、`Element` | Icon of selector         |
+| `selector` | `Array`             | Selector List            |
+| `onSelect` | `Function`          | Selector Click event     |
+| `width`    | `Number`            | Panel width              |
+| `default`  | `Boolean`           | Default selected         |
+| `tooltip`  | `String`            | Tooltip Text             |
 
 <div className="run-code">▶ Run Code</div>
 
