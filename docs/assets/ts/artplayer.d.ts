@@ -441,6 +441,11 @@ type Option = {
         fullscreenWeb?: HTMLElement | string;
         pip?: HTMLElement | string;
         indicator?: HTMLElement | string;
+        arrowLeft?: HTMLElement | string;
+        arrowRight?: HTMLElement | string;
+        playbackRate?: HTMLElement | string;
+        aspectRatio?: HTMLElement | string;
+        config?: HTMLElement | string;
     };
 
     /**
@@ -591,8 +596,6 @@ declare class Artplayer extends Player {
         readonly $mask: HTMLElement;
         readonly $state: HTMLElement;
         readonly $setting: HTMLElement;
-        readonly $settingInner: HTMLElement;
-        readonly $settingBody: HTMLElement;
         readonly $info: HTMLElement;
         readonly $infoPanel: HTMLElement;
         readonly $infoClose: HTMLElement;
