@@ -9,11 +9,11 @@ Settings panels are similar to a collection of list selections, and support mult
 | ---------- | ------------------- | ------------------------ |
 | `html`     | `String`、`Element` | DOM elements of selector |
 | `icon`     | `String`、`Element` | Icon of selector         |
-| `selector` | `Array`             | Selector List            |
-| `onSelect` | `Function`          | Selector Click event     |
+| `selector` | `Array`             | Selector list            |
+| `onSelect` | `Function`          | Selector click event     |
 | `width`    | `Number`            | Panel width              |
 | `default`  | `Boolean`           | Default selected         |
-| `tooltip`  | `String`            | Tooltip Text             |
+| `tooltip`  | `String`            | Tooltip text             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -29,6 +29,7 @@ var art = new Artplayer({
         {
             html: 'Select Subtitle',
             width: 250,
+            tooltip: 'Subtitle 01',
             selector: [
                 {
                     default: true,
@@ -40,15 +41,18 @@ var art = new Artplayer({
                     url: '/assets/sample/subtitle.srt?id=2',
                 },
             ],
-            onSelect: function onSubtitleSelect(item, $dom) {
+            onSelect: function(item, $dom) {
                 console.info(item, $dom);
                 art.subtitle.url = item.url;
+
+                // Change the tooltip
                 return item.html;
             },
         },
         {
             html: 'Select Quality',
             width: 150,
+            tooltip: '1080P',
             selector: [
                 {
                     default: true,
@@ -64,9 +68,11 @@ var art = new Artplayer({
                     url: '/assets/sample/video.mp4?id=360',
                 },
             ],
-            onSelect: function onQualitySelect(item, $dom) {
+            onSelect: function(item, $dom) {
                 console.info(item, $dom);
                 art.switchQuality(item.url, item.html);
+
+                // Change the tooltip
                 return item.html;
             },
         },

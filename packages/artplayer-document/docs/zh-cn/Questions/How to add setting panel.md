@@ -13,7 +13,7 @@ sidebar_position: 6
 | `onSelect` | `Function`          | 元素点击事件    |
 | `width`    | `Number`            | 列表宽度        |
 | `default`  | `Boolean`           | 是否默认选中    |
-| `tooltip`  | `String`            | 描述文案        |
+| `tooltip`  | `String`            | 提示文本        |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -29,26 +29,30 @@ var art = new Artplayer({
         {
             html: '选择字幕',
             width: 250,
+            tooltip: '字幕 01',
             selector: [
                 {
                     default: true,
-                    html: '<span style="color:red">Subtitle 01</span>',
+                    html: '<span style="color:red">字幕 01</span>',
                     url: '/assets/sample/subtitle.srt?id=1',
                 },
                 {
-                    html: '<span style="color:yellow">Subtitle 02</span>',
+                    html: '<span style="color:yellow">字幕 02</span>',
                     url: '/assets/sample/subtitle.srt?id=2',
                 },
             ],
-            onSelect: function onSubtitleSelect(item, $dom) {
+            onSelect: function(item, $dom) {
                 console.info(item, $dom);
                 art.subtitle.url = item.url;
+
+                // 改变提示文本
                 return item.html;
             },
         },
         {
             html: '选择画质',
             width: 150,
+            tooltip: '1080P',
             selector: [
                 {
                     default: true,
@@ -64,9 +68,11 @@ var art = new Artplayer({
                     url: '/assets/sample/video.mp4?id=360',
                 },
             ],
-            onSelect: function onQualitySelect(item, $dom) {
+            onSelect: function(item, $dom) {
                 console.info(item, $dom);
                 art.switchQuality(item.url, item.html);
+
+                // 改变提示文本
                 return item.html;
             },
         },
