@@ -838,8 +838,8 @@ Set a preview map on the progress bar
 
 | Property | Type     | Description    |
 | -------- | -------- | -------------- |
-| `url`    | `String` | Preview url    |
-| `number` | `Number` | Preview number |
+| `urls`   |`String[]`| Preview urls   |
+| `row`    | `row`    | Preview Row    |
 | `column` | `Number` | Preview column |
 
 <div className="run-code">▶ Run Code</div>
@@ -849,9 +849,10 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     thumbnails: {
-        url: '/assets/sample/thumbnails.png',
-        number: 100,
-        column: 10,
+        // urls: ['/assets/sample/thumbnails.png'], | Single usage
+        urls: ['/assets/sample/thumbnails-1.png','/assets/sample/thumbnails-2.png'],
+        row: 10,
+        column: 5,
     },
 });
 ```

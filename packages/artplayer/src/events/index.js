@@ -12,6 +12,7 @@ export default class Events {
         this.proxy = this.proxy.bind(this);
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
+        this.loadImgBlob= this.loadImgBlob.bind(this);
 
         if (art.whitelist.state) {
             art.once('ready', () => {
@@ -64,6 +65,31 @@ export default class Events {
 
             this.proxy(image, 'load', () => resolve(image));
             this.proxy(image, 'error', () => reject(new ArtPlayerError(`Failed to load Image: ${image.src}`)));
+        });
+    }
+
+    loadImgBlob(img){
+        return new Promise((resolve,reject)=>{
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                
+                var reader = new FileReader();
+                reader.onloadend = () => {
+                    const image= new Image();
+                    image.onload= ()=>{
+                        resolve({blob:reader.result,image});
+                    };
+                    image.src= reader.result;
+                }
+
+                reader.onerror=()=>{
+                    return reject(new ArtPlayerError('Unable to get Image'));
+                }
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.open('GET', img);
+            xhr.responseType = 'blob';
+            xhr.send();
         });
     }
 

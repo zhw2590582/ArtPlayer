@@ -838,9 +838,9 @@ var art = new Artplayer({
 在进度条上设置预览图
 
 | 属性     | 类型     | 描述       |
-| -------- | -------- | ---------- |
-| `url`    | `String` | 预览图地址 |
-| `number` | `Number` | 预览图数量 |
+| -------- | -------- | ----------|
+| `urls`   |`String[]`| 预览图地址 |
+| `row`    | `Number` | 预览图像行数 |
 | `column` | `Number` | 预览图列数 |
 
 <div className="run-code">▶ Run Code</div>
@@ -850,9 +850,10 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     thumbnails: {
-        url: '/assets/sample/thumbnails.png',
-        number: 100,
-        column: 10,
+        // urls: ['/assets/sample/thumbnails.png'], | Single usage
+        urls: ['/assets/sample/thumbnails-1.png','/assets/sample/thumbnails-2.png'],
+        row: 10,
+        column: 5,
     },
 });
 ```

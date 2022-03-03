@@ -399,19 +399,19 @@ type Option = {
      */
     thumbnails?: {
         /**
-         * The thumbnail image url
+         * The thumbnail images
          */
-        url: string;
-
-        /**
-         * The thumbnail item number
-         */
-        number?: number;
+        urls: string[];
 
         /**
          * The thumbnail column size
          */
         column?: number;
+
+        /**
+         * The thumbnail row size
+         */
+         row?: number;
     };
 
     /**

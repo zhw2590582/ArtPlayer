@@ -55,7 +55,7 @@ export default class Control extends Component {
             this.add(
                 thumbnails({
                     name: 'thumbnails',
-                    disable: !option.thumbnails.url || option.isLive,
+                    disable: !option.thumbnails.urls || option.isLive,
                     position: 'top',
                     index: 20,
                 }),

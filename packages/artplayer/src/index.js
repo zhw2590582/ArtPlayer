@@ -152,8 +152,8 @@ export default class Artplayer extends Emitter {
             whitelist: [],
             thumbnails: {
                 url: '',
-                number: 60,
                 column: 10,
+                row:5
             },
             subtitle: {
                 url: '',

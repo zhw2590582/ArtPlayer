@@ -91,9 +91,9 @@ export default {
         },
     ],
     thumbnails: {
-        url: s,
-        number: n,
+        urls: [s],
         column: n,
+        row:n
     },
     subtitle: {
         url: s,
