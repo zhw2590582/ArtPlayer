@@ -12,7 +12,7 @@ async function develop(projectPath) {
         root: 'docs',
         fallback: 'index.html',
         reload: true,
-        port: 8080,
+        port: 8081,
     });
     openBrowser(url);
     const watcher = rollup.watch(config);
