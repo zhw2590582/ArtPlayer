@@ -24,8 +24,14 @@ var art = new Artplayer({
     backdrop: true,
     theme: '#23ade5',
     lang: navigator.language.toLowerCase(),
+    whitelist: ['*'],
     moreVideoAttr: {
         crossOrigin: 'anonymous',
+        playsInline: true,
+        'webkit-playsinline': true,
+        'x5-video-player-type': 'h5',
+        'x5-video-player-fullscreen': false,
+        'x5-video-orientation': 'portraint',
     },
     settings: [
         {
