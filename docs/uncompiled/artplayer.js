@@ -3863,11 +3863,15 @@
       var isDroging = false;
       var startX = 0;
       var currentTime = 0;
+      var pressTimer = null;
       events.proxy($video, 'touchstart', function (event) {
         if (event.touches.length === 1) {
           isDroging = true;
           startX = event.touches[0].clientX;
-          art.playbackRate = 3;
+          clearTimeout(pressTimer);
+          pressTimer = setTimeout(function () {
+            art.playbackRate = 3;
+          }, 1000);
         }
       });
       events.proxy($video, 'touchmove', function (event) {
@@ -3884,10 +3888,11 @@
             art.seek = currentTime;
           }
 
-          art.playbackRate = 1;
           startX = 0;
           currentTime = 0;
           isDroging = false;
+          art.playbackRate = 1;
+          clearTimeout(pressTimer);
         }
       });
     }
