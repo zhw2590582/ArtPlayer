@@ -1,7 +1,7 @@
 import { clamp, secondToTime, isMobile } from '../utils';
 
 export default function gestureInit(art, events) {
-    if (isMobile && !art.option.isLive) {
+    if (isMobile && !art.option.isLive && art.duration) {
         const {
             notice,
             template: { $video },
@@ -15,6 +15,7 @@ export default function gestureInit(art, events) {
             if (event.touches.length === 1) {
                 isDroging = true;
                 startX = event.touches[0].clientX;
+                art.playbackRate = 3;
             }
         });
 
@@ -28,12 +29,13 @@ export default function gestureInit(art, events) {
         });
 
         events.proxy(document, 'touchend', () => {
-            if (isDroging && currentTime) {
+            if (isDroging) {
                 art.seek = currentTime;
+                art.playbackRate = 1;
+                startX = 0;
+                currentTime = 0;
+                isDroging = false;
             }
-            isDroging = false;
-            startX = 0;
-            currentTime = 0;
         });
     }
 }
