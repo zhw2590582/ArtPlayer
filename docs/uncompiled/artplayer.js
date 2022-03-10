@@ -3880,7 +3880,10 @@
       });
       events.proxy(document, 'touchend', function () {
         if (isDroging) {
-          art.seek = currentTime;
+          if (currentTime) {
+            art.seek = currentTime;
+          }
+
           art.playbackRate = 1;
           startX = 0;
           currentTime = 0;

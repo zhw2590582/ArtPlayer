@@ -30,7 +30,9 @@ export default function gestureInit(art, events) {
 
         events.proxy(document, 'touchend', () => {
             if (isDroging) {
-                art.seek = currentTime;
+                if (currentTime) {
+                    art.seek = currentTime;
+                }
                 art.playbackRate = 1;
                 startX = 0;
                 currentTime = 0;
