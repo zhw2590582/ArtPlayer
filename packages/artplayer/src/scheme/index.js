@@ -100,7 +100,6 @@ export default {
         type: s,
         style: o,
         encoding: s,
-        bilingual: b,
     },
     moreVideoAttr: o,
     icons: o,

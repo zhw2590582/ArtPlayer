@@ -262,7 +262,6 @@ var art = new Artplayer({
     subtitle: {
         url: '/assets/sample/subtitle.srt',
         encoding: 'utf-8',
-        bilingual: true,
         style: {
             color: '#03A9F4',
             'font-size': '30px',
@@ -296,7 +295,6 @@ var art = new Artplayer({
     subtitle: {
         url: '/assets/sample/subtitle.srt',
         encoding: 'utf-8',
-        bilingual: true,
         style: {
             color: '#03A9F4',
             'font-size': '30px',
@@ -327,7 +325,6 @@ var art = new Artplayer({
     subtitle: {
         url: '/assets/sample/subtitle.srt',
         encoding: 'utf-8',
-        bilingual: true,
         style: {
             color: 'red',
             'font-size': '30px',
@@ -340,7 +337,6 @@ art.on('ready', () => {
     setTimeout(() => {
         art.subtitle.switch('/assets/sample/subtitle.srt?t=1', {
             name: 'The new subtitle',
-            bilingual: false,
             style: {
                 color: 'green',
                 'font-size': '24px',

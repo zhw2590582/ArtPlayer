@@ -1,16 +1,4 @@
-import {
-    setStyle,
-    setStyles,
-    srtToVtt,
-    vttToBlob,
-    getExt,
-    assToVtt,
-    addClass,
-    escape,
-    removeClass,
-    hasClass,
-    errorHandle,
-} from './utils';
+import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape, errorHandle } from './utils';
 import Component from './utils/component';
 import validator from 'option-validator';
 import scheme from './scheme';
@@ -40,20 +28,6 @@ export default class Subtitle extends Component {
 
     get activeCue() {
         return this.textTrack.activeCues[0];
-    }
-
-    get bilingual() {
-        const { $subtitle } = this.art.template;
-        return hasClass($subtitle, 'art-bilingual');
-    }
-
-    set bilingual(val) {
-        const { $subtitle } = this.art.template;
-        if (val) {
-            addClass($subtitle, 'art-bilingual');
-        } else {
-            removeClass($subtitle, 'art-bilingual');
-        }
     }
 
     style(key, value) {
@@ -107,7 +81,6 @@ export default class Subtitle extends Component {
         }
 
         this.style(subtitleOption.style);
-        this.bilingual = subtitleOption.bilingual;
 
         errorHandle(window.fetch, 'fetch not support');
         return fetch(subtitleOption.url)

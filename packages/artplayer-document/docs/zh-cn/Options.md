@@ -864,13 +864,12 @@ var art = new Artplayer({
 
 设置视频的字幕，支持字幕格式：`vtt`、`srt`、`ass`
 
-| 属性        | 类型      | 描述                               |
-| ----------- | --------- | ---------------------------------- |
-| `url`       | `String`  | 字幕地址                           |
-| `type`      | `String`  | 字幕类型，可选 `vtt`、`srt`、`ass` |
-| `style`     | `Object`  | 字幕样式                           |
-| `encoding`  | `String`  | 字幕编码，默认 `utf-8`             |
-| `bilingual` | `Boolean` | 是否双字幕样式，通过换行区分       |
+| 属性       | 类型     | 描述                               |
+| ---------- | -------- | ---------------------------------- |
+| `url`      | `String` | 字幕地址                           |
+| `type`     | `String` | 字幕类型，可选 `vtt`、`srt`、`ass` |
+| `style`    | `Object` | 字幕样式                           |
+| `encoding` | `String` | 字幕编码，默认 `utf-8`             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -882,7 +881,6 @@ var art = new Artplayer({
         url: '/assets/sample/subtitle.srt',
         type: 'srt',
         encoding: 'utf-8',
-        bilingual: true,
         style: {
             color: '#03A9F4',
             'font-size': '30px',

@@ -160,7 +160,6 @@ export default class Artplayer extends Emitter {
                 type: '',
                 style: {},
                 encoding: 'utf-8',
-                bilingual: false,
             },
             moreVideoAttr: {
                 controls: false,

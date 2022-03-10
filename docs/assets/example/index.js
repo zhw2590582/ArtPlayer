@@ -102,7 +102,6 @@ var art = new Artplayer({
             textShadow: 'rgb(0 0 0) 1px 1px 1px',
         },
         encoding: 'utf-8',
-        bilingual: true,
     },
     highlight: [
         {

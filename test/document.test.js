@@ -144,8 +144,6 @@ describe("Document", function () {
 
         encoding: "utf-8",
 
-        bilingual: true,
-
         style: {
           color: "#03A9F4",
 
@@ -176,8 +174,6 @@ describe("Document", function () {
 
         encoding: "utf-8",
 
-        bilingual: true,
-
         style: {
           color: "#03A9F4",
 
@@ -204,8 +200,6 @@ describe("Document", function () {
 
         encoding: "utf-8",
 
-        bilingual: true,
-
         style: {
           color: "red",
 
@@ -218,8 +212,6 @@ describe("Document", function () {
       setTimeout(() => {
         art.subtitle.switch("./assets/sample/subtitle.srt?t=1", {
           name: "The new subtitle",
-
-          bilingual: false,
 
           style: {
             color: "green",
@@ -900,20 +892,16 @@ describe("Document", function () {
           selector: [
             {
               html: "子菜单01",
-
-              onSelect: function () {
-                console.log("你点击了子菜单01");
-              },
             },
 
             {
               html: "子菜单02",
-
-              onSelect: function () {
-                console.log("你点击了子菜单02");
-              },
             },
           ],
+
+          onSelect: function (item) {
+            console.log(item.html);
+          },
         },
 
         {
@@ -922,20 +910,16 @@ describe("Document", function () {
           selector: [
             {
               html: "子菜单01",
-
-              onSelect: function () {
-                console.log("你点击了子菜单01");
-              },
             },
 
             {
               html: "子菜单02",
-
-              onSelect: function () {
-                console.log("你点击了子菜单02");
-              },
             },
           ],
+
+          onSelect: function (item) {
+            console.log(item.html);
+          },
         },
       ],
     });
@@ -1121,8 +1105,6 @@ describe("Document", function () {
         type: "srt",
 
         encoding: "utf-8",
-
-        bilingual: true,
 
         style: {
           color: "#03A9F4",
@@ -2055,6 +2037,128 @@ describe("Document", function () {
   });
 
   it("Test116", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      setting: true,
+      flip: true,
+      playbackRate: true,
+      aspectRatio: true,
+      settings: [
+        {
+          html: "选择字幕",
+
+          width: 250,
+
+          tooltip: "字幕 01",
+
+          selector: [
+            {
+              default: true,
+
+              html: '<span style="color:red">字幕 01</span>',
+
+              url: "./assets/sample/subtitle.srt?id=1",
+            },
+
+            {
+              html: '<span style="color:yellow">字幕 02</span>',
+
+              url: "./assets/sample/subtitle.srt?id=2",
+            },
+          ],
+
+          onSelect: function (item, $dom) {
+            console.info(item, $dom);
+
+            art.subtitle.url = item.url;
+
+            // 改变提示文本
+
+            return item.html;
+          },
+        },
+
+        {
+          html: "选择画质",
+
+          width: 150,
+
+          tooltip: "1080P",
+
+          selector: [
+            {
+              default: true,
+
+              html: "1080P",
+
+              url: "./assets/sample/video.mp4?id=1080",
+            },
+
+            {
+              html: "720P",
+
+              url: "./assets/sample/video.mp4?id=720",
+            },
+
+            {
+              html: "360P",
+
+              url: "./assets/sample/video.mp4?id=360",
+            },
+          ],
+
+          onSelect: function (item, $dom) {
+            console.info(item, $dom);
+
+            art.switchQuality(item.url, item.html);
+
+            // 改变提示文本
+
+            return item.html;
+          },
+        },
+
+        {
+          html: "多层嵌套",
+
+          selector: [
+            {
+              html: "嵌套01",
+
+              selector: [
+                {
+                  html: "嵌套02",
+                },
+
+                {
+                  html: "嵌套02",
+                },
+              ],
+            },
+
+            {
+              html: "嵌套01",
+
+              selector: [
+                {
+                  html: "嵌套02",
+                },
+
+                {
+                  html: "嵌套02",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test117", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "https://artplayer.org./assets/sample/video.mp4",

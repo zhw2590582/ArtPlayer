@@ -169,11 +169,6 @@ type SubtitleOption = {
      * The subtitle encoding, default utf-8
      */
     encoding?: string;
-
-    /**
-     * Whether bilingual subtitle
-     */
-    bilingual?: boolean;
 };
 
 type AdsOption = {

@@ -20,13 +20,6 @@
         }
     }
 
-    .art-bilingual {
-        p:nth-child(n + 2) {
-            transform: scale(0.6);
-            transform-origin: center top;
-        }
-    }
-
     &.art-subtitle-show {
         .art-subtitle {
             display: block;
