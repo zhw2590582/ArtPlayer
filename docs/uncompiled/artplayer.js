@@ -3888,11 +3888,15 @@
             art.seek = currentTime;
           }
 
+          if (art.playbackRate === 3) {
+            art.playbackRate = 1;
+          }
+
           startX = 0;
           currentTime = 0;
           isDroging = false;
-          art.playbackRate = 1;
           clearTimeout(pressTimer);
+          pressTimer = null;
         }
       });
     }
