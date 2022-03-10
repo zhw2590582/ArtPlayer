@@ -1,7 +1,7 @@
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'https://artplayer.org/assets/sample/video.mp4',
-    title: 'One More Time One More Chance',
+    url: '/assets/sample/video.mp4',
+    title: 'Your Name',
     poster: '/assets/sample/poster.jpg',
     volume: 0.5,
     isLive: false,
@@ -84,37 +84,39 @@ var art = new Artplayer({
     ],
     thumbnails: {
         url: '/assets/sample/thumbnails.png',
-        number: 100,
+        number: 60,
         column: 10,
     },
     subtitle: {
         url: '/assets/sample/subtitle.srt',
         type: 'srt',
         style: {
-            color: '#03A9F4',
+            color: '#fe9200',
+            fontSize: '20px',
+            textShadow: 'rgb(0 0 0) 1px 1px 1px',
         },
         encoding: 'utf-8',
         bilingual: true,
     },
     highlight: [
         {
-            time: 60,
+            time: 15,
             text: 'One more chance',
         },
         {
-            time: 120,
+            time: 30,
             text: '谁でもいいはずなのに',
         },
         {
-            time: 180,
+            time: 45,
             text: '夏の想い出がまわる',
         },
         {
-            time: 240,
+            time: 60,
             text: 'こんなとこにあるはずもないのに',
         },
         {
-            time: 300,
+            time: 75,
             text: '终わり',
         },
     ],
