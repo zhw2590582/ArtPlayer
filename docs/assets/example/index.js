@@ -67,6 +67,7 @@ var art = new Artplayer({
         {
             html: '<img width="100" src="/assets/sample/layer.png">',
             click: function () {
+                window.open('https://aimu.app');
                 console.info('You clicked on the custom layer');
             },
             style: {
