@@ -5,6 +5,8 @@ export default class Mask extends Component {
     constructor(art) {
         super(art);
         this.name = 'mask';
-        append(art.template.$state, art.icons.state);
+        const { template, icons, events } = art;
+        append(template.$state, icons.state);
+        events.proxy(template.$state, 'click', () => art.play());
     }
 }
