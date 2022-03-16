@@ -3203,7 +3203,7 @@
           removeClass($player, 'art-hover');
         }
       });
-      art.once('ready', function () {
+      art.once(isMobile ? 'video:loadedmetadata' : 'ready', function () {
         _this.add(progress({
           name: 'progress',
           disable: option.isLive,
