@@ -320,6 +320,11 @@ type Option = {
     useSSR?: boolean;
 
     /**
+     * Whether use playsInline in mobile
+     */
+    playsInline?: boolean;
+
+    /**
      * Custom plugin list
      */
     plugins?: PluginFunction[];

@@ -496,6 +496,23 @@ SSR is the abbreviation of Server Side Render. The content on the page is genera
 
 :::
 
+## playsInline
+
+-   Type: `Boolean`
+-   Default: `true`
+
+Whether use playsInline in mobile
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: $container,
+    url: '/assets/sample/video.mp4',
+    playsInline: true,
+});
+```
+
 ## layers
 
 -   Type: `Array`

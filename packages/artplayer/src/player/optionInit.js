@@ -32,6 +32,11 @@ export default function attrInit(art) {
         $video.autoplay = option.autoplay;
     }
 
+    if (option.playsInline) {
+        $video.playsInline = true;
+        $video['webkit-playsinline'] = true;
+    }
+
     if (option.theme) {
         art.theme = option.theme;
     }

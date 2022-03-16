@@ -2,7 +2,7 @@ var vConsole = new VConsole();
 
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'https://artplayer.org/assets/sample/video.mp4',
+    url: '/assets/sample/video.mp4',
     title: 'One More Time One More Chance',
     poster: '/assets/sample/poster.jpg',
     autoSize: true,
@@ -13,8 +13,6 @@ var art = new Artplayer({
     fullscreenWeb: true,
     miniProgressBar: true,
     moreVideoAttr: {
-        playsInline: true,
-        'webkit-playsinline': true,
         'x5-video-player-type': 'h5',
         'x5-video-player-fullscreen': false,
         'x5-video-orientation': 'portraint',

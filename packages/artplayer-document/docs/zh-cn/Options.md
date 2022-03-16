@@ -496,6 +496,23 @@ SSR 是 Server Side Render 简称，页面上的内容是通过服务端渲染�
 
 :::
 
+## playsInline
+
+-   类型: `Boolean`
+-   默认: `true`
+
+在移动端是否使用 playsInline 模式
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: $container,
+    url: '/assets/sample/video.mp4',
+    playsInline: true,
+});
+```
+
 ## layers
 
 -   类型: `Array`
@@ -570,9 +587,9 @@ var art = new Artplayer({
                     html: '子菜单02',
                 },
             ],
-            onSelect: function(item) {
+            onSelect: function (item) {
                 console.log(item.html);
-            }
+            },
         },
         {
             html: '自定义设置02',
@@ -584,9 +601,9 @@ var art = new Artplayer({
                     html: '子菜单02',
                 },
             ],
-            onSelect: function(item) {
+            onSelect: function (item) {
                 console.log(item.html);
-            }
+            },
         },
     ],
 });
@@ -820,7 +837,6 @@ var art = new Artplayer({
     // whitelist: ['*'],
     // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
     // whitelist: [/iPhone OS 11/gi],
-    
 });
 ```
 

@@ -55,6 +55,7 @@ export default {
     subtitleOffset: b,
     miniProgressBar: b,
     useSSR: b,
+    playsInline: b,
     ads: [
         {
             url: s,
