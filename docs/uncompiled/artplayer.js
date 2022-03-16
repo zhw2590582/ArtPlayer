@@ -1668,7 +1668,7 @@
     var i18n = art.i18n,
         notice = art.notice,
         $video = art.template.$video;
-    art.once('ready', function () {
+    art.once('video:loadedmetadata', function () {
       if (screenfull.isEnabled) {
         nativeScreenfull(art);
       } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
@@ -3203,7 +3203,7 @@
           removeClass($player, 'art-hover');
         }
       });
-      art.once(isMobile ? 'video:loadedmetadata' : 'ready', function () {
+      art.once('video:loadedmetadata', function () {
         _this.add(progress({
           name: 'progress',
           disable: option.isLive,
@@ -3488,7 +3488,7 @@
       _this.art = art;
       _this.name = 'contextmenu';
       _this.$parent = art.template.$contextmenu;
-      art.once('ready', function () {
+      art.once('video:loadedmetadata', function () {
         if (!isMobile) {
           _this.init();
         }
@@ -3604,7 +3604,7 @@
 
       _this = _super.call(this, art);
       _this.name = 'info';
-      art.once('ready', function () {
+      art.once('video:loadedmetadata', function () {
         if (!isMobile) {
           _this.init();
         }
@@ -3673,7 +3673,7 @@
 
       _this = _super.call(this, art);
       _this.name = 'subtitle';
-      art.once('ready', function () {
+      art.once('video:loadedmetadata', function () {
         _this.init(art.option.subtitle);
       });
       return _this;
@@ -3938,7 +3938,7 @@
       this.loadImg = this.loadImg.bind(this);
 
       if (art.whitelist.state) {
-        art.once('ready', function () {
+        art.once('video:loadedmetadata', function () {
           clickInit(art, _this);
           hoverInit(art, _this);
           mousemoveInitInit(art, _this);
@@ -4032,7 +4032,7 @@
 
       this.art = art;
       this.keys = {};
-      art.once('ready', function () {
+      art.once('video:loadedmetadata', function () {
         if (art.option.hotkey && !isMobile) {
           _this.init();
         }
@@ -4134,7 +4134,7 @@
           $layer = art.template.$layer;
       _this.name = 'layer';
       _this.$parent = $layer;
-      art.once('ready', function () {
+      art.once('video:loadedmetadata', function () {
         for (var index = 0; index < option.layers.length; index++) {
           _this.add(option.layers[index]);
         }
@@ -4502,7 +4502,7 @@
       _this.cache = new Map();
 
       if (option.setting) {
-        art.once('ready', function () {
+        art.once('video:loadedmetadata', function () {
           if (option.playbackRate) {
             _this.option.push(playbackRate(art));
           }

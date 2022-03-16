@@ -36,7 +36,7 @@ export default class Setting extends Component {
         this.cache = new Map();
 
         if (option.setting) {
-            art.once('ready', () => {
+            art.once('video:loadedmetadata', () => {
                 if (option.playbackRate) {
                     this.option.push(playbackRate(art));
                 }

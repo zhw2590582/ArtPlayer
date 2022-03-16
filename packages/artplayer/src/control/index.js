@@ -1,4 +1,4 @@
-import { errorHandle, addClass, removeClass, isMobile } from '../utils';
+import { errorHandle, addClass, removeClass } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -42,7 +42,7 @@ export default class Control extends Component {
             }
         });
 
-        art.once(isMobile ? 'video:loadedmetadata' : 'ready', () => {
+        art.once('video:loadedmetadata', () => {
             this.add(
                 progress({
                     name: 'progress',

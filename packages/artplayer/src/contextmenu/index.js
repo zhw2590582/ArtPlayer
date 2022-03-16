@@ -15,7 +15,7 @@ export default class Contextmenu extends Component {
         this.name = 'contextmenu';
         this.$parent = art.template.$contextmenu;
 
-        art.once('ready', () => {
+        art.once('video:loadedmetadata', () => {
             if (!isMobile) {
                 this.init();
             }

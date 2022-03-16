@@ -14,7 +14,7 @@ export default class Events {
         this.loadImg = this.loadImg.bind(this);
 
         if (art.whitelist.state) {
-            art.once('ready', () => {
+            art.once('video:loadedmetadata', () => {
                 clickInit(art, this);
                 hoverInit(art, this);
                 mousemoveInit(art, this);

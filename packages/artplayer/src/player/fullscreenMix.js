@@ -68,7 +68,7 @@ export default function fullscreenMix(art) {
         template: { $video },
     } = art;
 
-    art.once('ready', () => {
+    art.once('video:loadedmetadata', () => {
         if (screenfull.isEnabled) {
             nativeScreenfull(art);
         } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
