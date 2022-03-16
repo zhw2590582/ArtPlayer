@@ -17,7 +17,7 @@
     "dependencies": {
         "@docusaurus/core": "2.0.0-beta.15",
         "@docusaurus/preset-classic": "2.0.0-beta.15",
-        "@mdx-js/react": "^1.6.22",
+        "@mdx-js/react": "^2.1.0",
         "@svgr/webpack": "^6.1.0",
         "clsx": "^1.1.1",
         "docusaurus-lunr-search": "^2.1.15",
