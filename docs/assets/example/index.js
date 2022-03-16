@@ -28,9 +28,6 @@ var art = new Artplayer({
     whitelist: ['*'],
     moreVideoAttr: {
         crossOrigin: 'anonymous',
-        'x5-video-player-type': 'h5',
-        'x5-video-player-fullscreen': false,
-        'x5-video-orientation': 'portraint',
     },
     settings: [
         {
