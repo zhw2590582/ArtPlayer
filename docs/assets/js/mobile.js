@@ -8,6 +8,10 @@ var art = new Artplayer({
     autoSize: true,
     loop: true,
     mutex: true,
+    setting: true,
+    flip: true,
+    playbackRate: true,
+    aspectRatio: true,
     theme: '#ff0057',
     fullscreen: true,
     fullscreenWeb: true,
@@ -53,6 +57,27 @@ var art = new Artplayer({
             fontSize: 14,
             synchronousPlayback: false,
         }),
+    ],
+    settings: [
+        {
+            width: 200,
+            html: '自定义设置',
+            tooltip: '提示',
+            icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
+            selector: [
+                {
+                    default: true,
+                    html: '设置 01',
+                },
+                {
+                    html: '设置 02',
+                },
+            ],
+            onSelect: function (item) {
+                console.info('你点击了', item.html);
+                return item.html;
+            },
+        },
     ],
     whitelist: ['*'],
 });

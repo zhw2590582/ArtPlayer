@@ -99,4 +99,11 @@
             display: block;
         }
     }
+
+    &.art-mobile {
+        .art-settings {
+            transform: scale(0.85);
+            transform-origin: right bottom;
+        }
+    }
 }
