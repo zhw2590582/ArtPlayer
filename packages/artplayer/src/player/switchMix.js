@@ -6,6 +6,8 @@ export default function switchMix(art) {
     function switchUrl(url, name, currentTime) {
         return new Promise((resolve) => {
             if (url === art.url) return resolve(url);
+            const { playing } = art;
+            art.pause();
             URL.revokeObjectURL(art.url);
             art.url = url;
             art.once('video:canplay', () => {
@@ -15,7 +17,7 @@ export default function switchMix(art) {
                 art.autoSize = option.autoSize;
                 art.currentTime = currentTime;
                 art.notice.show = '';
-                if (art.playing) {
+                if (playing) {
                     art.play();
                 }
                 if (name) {
