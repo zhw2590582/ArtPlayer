@@ -35,6 +35,11 @@ export default class Mobile {
             $video.autoplay = option.autoplay;
         }
 
+        if (option.playsInline) {
+            $video.playsInline = true;
+            $video['webkit-playsinline'] = true;
+        }
+
         const typeName = option.type || getExt(option.url);
         const typeCallback = option.customType[typeName];
         if (typeName && typeCallback) {
