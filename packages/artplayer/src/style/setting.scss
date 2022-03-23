@@ -102,7 +102,8 @@
 
     &.art-mobile {
         .art-settings {
-            transform: scale(0.85);
+            max-height: 200px;
+            transform: scale(0.9);
             transform-origin: right bottom;
         }
     }
