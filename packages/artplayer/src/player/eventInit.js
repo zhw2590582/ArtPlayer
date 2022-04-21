@@ -13,16 +13,6 @@ export default function eventInit(art) {
     let reconnectTime = 0;
     const maxReconnectTime = 5;
 
-    proxy($video, 'click', () => {
-        if (!isMobile) {
-            art.toggle();
-        }
-    });
-
-    proxy($video, 'dblclick', () => {
-        art.fullscreen = !art.fullscreen;
-    });
-
     for (let index = 0; index < config.events.length; index++) {
         proxy($video, config.events[index], (event) => {
             art.emit(`video:${event.type}`, event);

@@ -1,8 +1,8 @@
-import { includeFromEvent } from '../utils';
+import { includeFromEvent, isMobile } from '../utils';
 
 export default function clickInit(art, events) {
     const {
-        template: { $player },
+        template: { $player, $video },
     } = art;
 
     events.proxy(document, ['click', 'contextmenu'], (event) => {
@@ -13,5 +13,28 @@ export default function clickInit(art, events) {
             art.isFocus = false;
             art.emit('blur');
         }
+    });
+
+    let clickTime = 0;
+    events.proxy($video, 'click', () => {
+        const now = Date.now();
+
+        if (now - clickTime <= 300) {
+            art.emit('dblclick');
+
+            if (isMobile) {
+                art.toggle();
+            } else {
+                art.fullscreen = !art.fullscreen;
+            }
+        } else {
+            art.emit('click');
+
+            if (!isMobile) {
+                art.toggle();
+            }
+        }
+
+        clickTime = now;
     });
 }

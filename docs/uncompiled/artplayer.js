@@ -2260,14 +2260,6 @@
         notice = art.notice;
     var reconnectTime = 0;
     var maxReconnectTime = 5;
-    proxy($video, 'click', function () {
-      if (!isMobile) {
-        art.toggle();
-      }
-    });
-    proxy($video, 'dblclick', function () {
-      art.fullscreen = !art.fullscreen;
-    });
 
     for (var index = 0; index < config$1.events.length; index++) {
       proxy($video, config$1.events[index], function (event) {
@@ -3813,7 +3805,9 @@
   }(Component);
 
   function clickInit(art, events) {
-    var $player = art.template.$player;
+    var _art$template = art.template,
+        $player = _art$template.$player,
+        $video = _art$template.$video;
     events.proxy(document, ['click', 'contextmenu'], function (event) {
       if (includeFromEvent(event, $player)) {
         art.isFocus = true;
@@ -3822,6 +3816,28 @@
         art.isFocus = false;
         art.emit('blur');
       }
+    });
+    var clickTime = 0;
+    events.proxy($video, 'click', function () {
+      var now = Date.now();
+
+      if (now - clickTime <= 300) {
+        art.emit('dblclick');
+
+        if (isMobile) {
+          art.toggle();
+        } else {
+          art.fullscreen = !art.fullscreen;
+        }
+      } else {
+        art.emit('click');
+
+        if (!isMobile) {
+          art.toggle();
+        }
+      }
+
+      clickTime = now;
     });
   }
 
@@ -5023,7 +5039,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1650528614270';
+        return '1650531123634';
       }
     }, {
       key: "config",
