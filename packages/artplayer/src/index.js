@@ -28,7 +28,7 @@ import Mobile from './mobile';
 let id = 0;
 const instances = [];
 export default class Artplayer extends Emitter {
-    constructor(option) {
+    constructor(option, readyCallback) {
         super();
 
         this.id = ++id;
@@ -63,6 +63,10 @@ export default class Artplayer extends Emitter {
             this.plugins = new Plugins(this);
         } else {
             this.mobile = new Mobile(this);
+        }
+
+        if (typeof readyCallback === 'function') {
+            this.on('ready', () => readyCallback.call(this));
         }
 
         instances.push(this);

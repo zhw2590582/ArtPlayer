@@ -527,7 +527,7 @@ declare class Player {
 }
 
 declare class Artplayer extends Player {
-    constructor(option: Option);
+    constructor(option: Option, readyCallback: (this: Artplayer) => void);
 
     static instances: Artplayer[];
     static version: string;
