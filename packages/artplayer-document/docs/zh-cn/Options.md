@@ -507,7 +507,7 @@ SSR 是 Server Side Render 简称，页面上的内容是通过服务端渲染�
 
 ```js
 var art = new Artplayer({
-    container: $container,
+    container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     playsInline: true,
 });
@@ -833,10 +833,10 @@ art.on('ready', () => {
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    whitelist: ['iPhone OS 11'],
-    // whitelist: ['*'],
     // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
     // whitelist: [/iPhone OS 11/gi],
+    // whitelist: ['iPhone OS 11'],
+    whitelist: ['*'],
 });
 ```
 

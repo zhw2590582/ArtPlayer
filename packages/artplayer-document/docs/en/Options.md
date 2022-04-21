@@ -507,7 +507,7 @@ Whether use playsInline in mobile
 
 ```js
 var art = new Artplayer({
-    container: $container,
+    container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     playsInline: true,
 });
@@ -833,10 +833,10 @@ Support `string` match, `function` match, `regular` match
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    whitelist: ['iPhone OS 11'],
-    // whitelist: ['*'],
     // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
-    // whitelist: [/iPhone OS 11/gi]
+    // whitelist: [/iPhone OS 11/gi],
+    // whitelist: ['iPhone OS 11'],
+    whitelist: ['*'],
 });
 ```
 
