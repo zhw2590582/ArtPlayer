@@ -1,7 +1,7 @@
 import { clamp, secondToTime, isMobile } from '../utils';
 
 export default function gestureInit(art, events) {
-    if (isMobile && !art.option.isLive && art.duration) {
+    if (isMobile && !art.option.isLive) {
         const {
             notice,
             template: { $video },
@@ -25,7 +25,7 @@ export default function gestureInit(art, events) {
         });
 
         events.proxy($video, 'touchmove', (event) => {
-            if (event.touches.length === 1 && isDroging) {
+            if (event.touches.length === 1 && isDroging && art.duration) {
                 const widthDiff = event.touches[0].clientX - startX;
                 const proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
                 currentTime = clamp(art.currentTime + art.duration * proportion, 0, art.duration);
