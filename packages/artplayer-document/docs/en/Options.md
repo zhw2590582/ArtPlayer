@@ -48,6 +48,31 @@ var art = new Artplayer({
 });
 ```
 
+## Ready Callback
+
+-   Type: `Function`
+-   Default: `undefined`
+
+The constructor accepts a function as the second parameter, fired when the player is initialized and the video can be play, just like `ready` event
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    muted: true,
+}, function() {
+    this.play();
+});
+```
+
+:::tip 提示
+
+The `this` in the callback function is the player instance, but the callback function is used to use the arrow function, `this` is not to point to the player instance
+
+:::
+
 ## poster
 
 -   Type: `String`

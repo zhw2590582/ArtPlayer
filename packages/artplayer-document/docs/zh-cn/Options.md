@@ -48,6 +48,32 @@ var art = new Artplayer({
 });
 ```
 
+## Ready Callback
+
+-   类型: `Function`
+-   默认: `undefined`
+
+构造函数接受一个函数作为第二个参数，播放器初始化成功且视频可以播放时触发，和`ready`事件一样
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    muted: true,
+}, function() {
+    this.play();
+});
+```
+
+:::tip 提示
+
+回调函数里的`this`就是播放器实例，但回调函数假如使用了箭头函数，`this`则不会指向播放器实例
+
+:::
+
+
 ## poster
 
 -   类型: `String`
