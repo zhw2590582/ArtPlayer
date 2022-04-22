@@ -1,37 +1,37 @@
-import { setStyle } from '../utils';
+import { append, setStyle, hasClass, addClass, removeClass } from '../utils';
 
 export default function lock(art) {
-    const { layers, icons } = art;
+    const {
+        layers,
+        icons,
+        template: { $player },
+    } = art;
 
     layers.add({
         name: 'lock',
-        html: icons.unlock,
-        style: {
-            display: 'flex',
-            'align-items': 'center',
-            'justify-content': 'center',
-            position: 'absolute',
-            left: '15px',
-            top: 'calc(50% - 17px)',
-            height: '34px',
-            width: '34px',
-            color: '#fff',
-            'border-radius': '50%',
-            'background-color': 'rgb(0 0 0 / 50%)',
-        },
-        mounted($lock) {
-            let timeout = 0;
+        mounted($el) {
+            const $lock = append($el, icons.lock);
+            const $unlock = append($el, icons.unlock);
+            setStyle($lock, 'display', 'none');
 
-            art.on('click', () => {
-                setStyle($lock, 'display', 'flex');
-                timeout = Date.now();
-            });
-
-            art.on('video:timeupdate', () => {
-                if (art.playing && Date.now() - timeout >= 3000) {
+            art.on('lock', (state) => {
+                if (state) {
+                    setStyle($lock, 'display', 'inline-flex');
+                    setStyle($unlock, 'display', 'none');
+                } else {
                     setStyle($lock, 'display', 'none');
+                    setStyle($unlock, 'display', 'inline-flex');
                 }
             });
+        },
+        click() {
+            if (hasClass($player, 'art-lock')) {
+                removeClass($player, 'art-lock');
+                art.emit('lock', false);
+            } else {
+                addClass($player, 'art-lock');
+                art.emit('lock', true);
+            }
         },
     });
 

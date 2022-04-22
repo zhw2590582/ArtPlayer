@@ -13,7 +13,7 @@ export default class Plugins {
             this.add(miniProgressBar);
         }
 
-        if (isMobile) {
+        if (option.lock && isMobile) {
             this.add(lock);
         }
 

@@ -10,6 +10,7 @@ var art = new Artplayer({
     mutex: true,
     setting: true,
     flip: true,
+    lock: true,
     playbackRate: true,
     aspectRatio: true,
     theme: '#ff0057',

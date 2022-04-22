@@ -56,6 +56,7 @@ export default {
     miniProgressBar: b,
     useSSR: b,
     playsInline: b,
+    lock: b,
     ads: [
         {
             url: s,
