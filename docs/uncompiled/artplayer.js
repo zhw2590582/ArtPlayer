@@ -4280,6 +4280,10 @@
 
   var pip = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
+  var lock$1 = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1650612139149\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"12683\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"20\" height=\"20\"><defs>\n<style type=\"text/css\"></style></defs><path d=\"M298.666667 426.666667V341.333333a213.333333 213.333333 0 1 1 426.666666 0v85.333334h42.666667a85.333333 85.333333 0 0 1 85.333333 85.333333v256a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 1-85.333333-85.333333v-256a85.333333 85.333333 0 0 1 85.333333-85.333333h42.666667z m213.333333-213.333334a128 128 0 0 0-128 128v85.333334h256V341.333333a128 128 0 0 0-128-128z\" fill=\"#ffffff\" p-id=\"12684\"></path>\n</svg>";
+
+  var unlock = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1650612464266\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"14150\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"20\" height=\"20\"><defs>\n<style type=\"text/css\"></style></defs><path d=\"M666.752 194.517333L617.386667 268.629333A128 128 0 0 0 384 341.333333l0.042667 85.333334h384a85.333333 85.333333 0 0 1 85.333333 85.333333v256a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 1-85.333333-85.333333v-256a85.333333 85.333333 0 0 1 85.333333-85.333333h42.666667V341.333333a213.333333 213.333333 0 0 1 368.085333-146.816z\" fill=\"#ffffff\" p-id=\"14151\"></path></svg>";
+
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -4307,7 +4311,9 @@
       arrowRight: arrowRight,
       playbackRate: playbackRate$1,
       aspectRatio: aspectRatio$1,
-      config: config
+      config: config,
+      lock: lock$1,
+      unlock: unlock
     }, art.option.icons);
 
     Object.keys(icons).forEach(function (key) {
@@ -4791,6 +4797,43 @@
     };
   }
 
+  function lock(art) {
+    var layers = art.layers,
+        icons = art.icons;
+    layers.add({
+      name: 'lock',
+      html: icons.unlock,
+      style: {
+        display: 'flex',
+        'align-items': 'center',
+        'justify-content': 'center',
+        position: 'absolute',
+        left: '15px',
+        top: 'calc(50% - 17px)',
+        height: '34px',
+        width: '34px',
+        color: '#fff',
+        'border-radius': '50%',
+        'background-color': 'rgb(0 0 0 / 50%)'
+      },
+      mounted: function mounted($lock) {
+        var timeout = 0;
+        art.on('click', function () {
+          setStyle($lock, 'display', 'flex');
+          timeout = Date.now();
+        });
+        art.on('video:timeupdate', function () {
+          if (art.playing && Date.now() - timeout >= 3000) {
+            setStyle($lock, 'display', 'none');
+          }
+        });
+      }
+    });
+    return {
+      name: 'lock'
+    };
+  }
+
   var Plugins = /*#__PURE__*/function () {
     function Plugins(art) {
       _classCallCheck(this, Plugins);
@@ -4801,6 +4844,10 @@
 
       if (!option.isLive && option.miniProgressBar) {
         this.add(miniProgressBar);
+      }
+
+      if (isMobile) {
+        this.add(lock);
       }
 
       for (var index = 0; index < option.plugins.length; index++) {
@@ -5045,7 +5092,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1650534135171';
+        return '1650611190583';
       }
     }, {
       key: "config",

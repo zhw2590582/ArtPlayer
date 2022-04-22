@@ -1,5 +1,6 @@
-import { errorHandle, has, def } from '../utils';
+import { errorHandle, isMobile, has, def } from '../utils';
 import miniProgressBar from './miniProgressBar';
+import lock from './lock';
 
 export default class Plugins {
     constructor(art) {
@@ -10,6 +11,10 @@ export default class Plugins {
 
         if (!option.isLive && option.miniProgressBar) {
             this.add(miniProgressBar);
+        }
+
+        if (isMobile) {
+            this.add(lock);
         }
 
         for (let index = 0; index < option.plugins.length; index++) {

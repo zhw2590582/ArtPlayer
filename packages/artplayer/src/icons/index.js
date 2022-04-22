@@ -17,6 +17,8 @@ import playbackRate from './playback-rate.svg';
 import aspectRatio from './aspect-ratio.svg';
 import config from './config.svg';
 import pip from './pip.svg';
+import lock from './lock.svg';
+import unlock from './unlock.svg';
 
 export default class Icons {
     constructor(art) {
@@ -39,6 +41,8 @@ export default class Icons {
             playbackRate,
             aspectRatio,
             config,
+            lock,
+            unlock,
             ...art.option.icons,
         };
 
