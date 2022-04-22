@@ -325,6 +325,11 @@ type Option = {
     playsInline?: boolean;
 
     /**
+     * Whether use lock in mobile
+     */
+    lock?: boolean;
+
+    /**
      * Custom plugin list
      */
     plugins?: PluginFunction[];

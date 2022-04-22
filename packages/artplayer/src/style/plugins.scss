@@ -1,20 +1,27 @@
-.art-video-player .art-layers .art-layer-log {
-    display: none;
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    width: 120px;
-    color: #fff;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 3px;
-    padding: 5px;
-    font-size: 13px;
-    pointer-events: none;
-    user-select: none;
+.art-video-player {
+    .art-layer-lock {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 15px;
+        top: calc(50% - 17px);
+        height: 34px;
+        width: 34px;
+        color: #fff;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 
-    p {
-        margin-bottom: 0;
-        word-break: break-all;
+    &.art-control-show {
+        .art-layer-lock {
+            display: flex;
+        }
+    }
+
+    &.art-lock {
+        .art-bottom {
+            display: none !important;
+        }
     }
 }
