@@ -1039,3 +1039,20 @@ var art = new Artplayer({
     lang: 'en',
 });
 ```
+
+## lock
+
+-   Type: `Boolean`
+-   Default: `true`
+
+Whether to display a lock button on the mobile side to hide the bottom control bar
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    lock: true,
+});
+```

@@ -1040,3 +1040,20 @@ var art = new Artplayer({
     lang: 'en',
 });
 ```
+
+## lock
+
+-   类型: `Boolean`
+-   默认: `true`
+
+是否在移动端显示一个锁定按钮，用于隐藏底部控制栏
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    lock: true,
+});
+```
