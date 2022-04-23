@@ -30,6 +30,12 @@
     </a>
 </p>
 
+## Home Page
+[https://artplayer.org](https://artplayer.org)
+
+## Mobile Demo
+<img src="./images/artplayer.png" width="250">
+
 ## Features
 
 [ArtPlayer.js](https://artplayer.org) is an easy-to-use and feature-rich HTML5 video player, and most of the player's functional controls support customization, which makes it easy to connect with your business logic. In addition, it directly supports `.vtt`, `.ass` and `.srt` subtitle formats. Integration with other dependencies such as `flv.js`, `hls.js`, `dash.js`, etc. is also very simple. The code is highly decoupled, the structure and logic are clear, and it is easy to track errors and add new features.
