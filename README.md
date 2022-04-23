@@ -34,7 +34,7 @@
 [https://artplayer.org](https://artplayer.org)
 
 ## Mobile Demo
-<img src="./images/artplayer.png" width="250">
+<img src="./images/qrcode.png" width="250">
 
 ## Features
 
