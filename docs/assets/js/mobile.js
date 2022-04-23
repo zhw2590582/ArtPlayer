@@ -18,6 +18,7 @@ var art = new Artplayer({
     fullscreenWeb: true,
     miniProgressBar: true,
     moreVideoAttr: {
+        preload: 'auto',
         'x5-video-player-type': 'h5',
         'x5-video-player-fullscreen': false,
         'x5-video-orientation': 'portraint',

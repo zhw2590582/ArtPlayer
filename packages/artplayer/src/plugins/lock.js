@@ -37,5 +37,8 @@ export default function lock(art) {
 
     return {
         name: 'lock',
+        get state() {
+            return hasClass($player, 'art-lock');
+        },
     };
 }
