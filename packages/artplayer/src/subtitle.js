@@ -1,4 +1,4 @@
-import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape, errorHandle } from './utils';
+import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape, errorHandle, outline } from './utils';
 import Component from './utils/component';
 import validator from 'option-validator';
 import scheme from './scheme';
@@ -80,7 +80,10 @@ export default class Subtitle extends Component {
             proxy(this.textTrack, 'cuechange', this.update.bind(this));
         }
 
-        this.style(subtitleOption.style);
+        this.style({
+            'text-shadow': outline(),
+            ...subtitleOption.style,
+        });
 
         errorHandle(window.fetch, 'fetch not support');
         return fetch(subtitleOption.url)

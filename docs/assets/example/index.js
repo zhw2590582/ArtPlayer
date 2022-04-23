@@ -96,7 +96,6 @@ var art = new Artplayer({
         style: {
             color: '#fe9200',
             fontSize: '20px',
-            textShadow: 'rgb(0 0 0) 1px 1px 1px',
         },
         encoding: 'utf-8',
     },

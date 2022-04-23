@@ -55,7 +55,7 @@ export function assToVtt(ass) {
 
     return `WEBVTT\n\n${ass
         .split(/\r?\n/)
-        .map(line => {
+        .map((line) => {
             const m = line.match(reAss);
             if (!m) return null;
             return {
@@ -66,17 +66,32 @@ export function assToVtt(ass) {
                     .replace(/(\\N)/g, '\n')
                     .trim()
                     .split(/\r?\n/)
-                    .map(item => item.trim())
+                    .map((item) => item.trim())
                     .join('\n'),
             };
         })
-        .filter(line => line)
+        .filter((line) => line)
         .map((line, index) => {
             if (line) {
                 return `${index + 1}\n${line.start} --> ${line.end}\n${line.text}`;
             }
             return '';
         })
-        .filter(line => line.trim())
+        .filter((line) => line.trim())
         .join('\n\n')}`;
+}
+
+export function outline(outlineColor = '#000', outlineSize = 1, blurSize = 1) {
+    return [
+        [outlineSize, 0],
+        [0, outlineSize],
+        [-outlineSize, 0],
+        [0, -outlineSize],
+        [outlineSize, outlineSize],
+        [-outlineSize, -outlineSize],
+        [outlineSize, -outlineSize],
+        [-outlineSize, outlineSize],
+    ]
+        .map((item) => `${outlineColor} ${item[0]}px ${item[1]}px ${blurSize}px`)
+        .join(',');
 }
