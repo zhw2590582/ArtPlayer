@@ -18,7 +18,6 @@ var art = new Artplayer({
     fullscreenWeb: true,
     miniProgressBar: true,
     moreVideoAttr: {
-        preload: 'auto',
         'x5-video-player-type': 'h5',
         'x5-video-player-fullscreen': false,
         'x5-video-orientation': 'portraint',
@@ -92,4 +91,11 @@ Artplayer.config.events.forEach(function (item) {
 
 if (Artplayer.utils.isWechat) {
     document.querySelector('.tip').textContent = '微信环境需手动触发播放';
+    let isClick = false;
+    document.body.addEventListener('click', () => {
+        if (!isClick) {
+            isClick = true;
+            art.play();
+        }
+    });
 }
