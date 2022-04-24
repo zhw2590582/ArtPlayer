@@ -18,9 +18,7 @@ export default class Plugins {
             this.add(lock);
         }
 
-        if (option.autoPlayback) {
-            this.add(autoPlayback);
-        }
+        this.add(autoPlayback);
 
         for (let index = 0; index < option.plugins.length; index++) {
             this.add(option.plugins[index]);
