@@ -4815,6 +4815,27 @@
     };
   }
 
+  function autoPlayback(art) {
+    var storage = art.storage;
+    art.on('video:timeupdate', function () {
+      var times = storage.get('times') || {};
+      times[art.option.url] = art.currentTime;
+      storage.set('times', times);
+    });
+    art.on('ready', function () {
+      var times = storage.get('times') || {};
+      var currentTime = times[art.option.url];
+
+      if (currentTime) {
+        art.seek = currentTime;
+        art.notice.show = '';
+      }
+    });
+    return {
+      name: 'autoPlayback'
+    };
+  }
+
   var Plugins = /*#__PURE__*/function () {
     function Plugins(art) {
       _classCallCheck(this, Plugins);
@@ -4829,6 +4850,10 @@
 
       if (option.lock && isMobile) {
         this.add(lock);
+      }
+
+      if (option.autoPlayback) {
+        this.add(autoPlayback);
       }
 
       for (var index = 0; index < option.plugins.length; index++) {
