@@ -983,7 +983,8 @@
   	"Exit PIP Mode": "退出画中画模式",
   	"PIP Not Supported": "不支持画中画模式",
   	"Fullscreen Not Supported": "不支持全屏模式",
-  	"Subtitle Offset": "字幕偏移"
+  	"Subtitle Offset": "字幕偏移",
+  	"Auto playback at": "已为您定位至"
   };
 
   var Close = "關閉";
@@ -1034,7 +1035,8 @@
   	"Exit PIP Mode": "退出畫中畫模式",
   	"PIP Not Supported": "不支持畫中畫模式",
   	"Fullscreen Not Supported": "不支持全屏模式",
-  	"Subtitle Offset": "字幕偏移"
+  	"Subtitle Offset": "字幕偏移",
+  	"Auto playback at": "已為您定位至"
   };
 
   var I18n = /*#__PURE__*/function () {
@@ -4816,9 +4818,12 @@
   }
 
   function autoPlayback(art) {
-    var storage = art.storage;
+    var storage = art.storage,
+        i18n = art.i18n;
     art.on('video:timeupdate', function () {
       var times = storage.get('times') || {};
+      var keys = Object.keys(times);
+      if (keys.length > 10) delete times[keys[0]];
       times[art.option.url] = art.currentTime;
       storage.set('times', times);
     });
@@ -4828,7 +4833,7 @@
 
       if (currentTime) {
         art.seek = currentTime;
-        art.notice.show = '';
+        art.notice.show = "".concat(i18n.get('Auto playback at'), " ").concat(secondToTime(currentTime));
       }
     });
     return {
@@ -4852,9 +4857,7 @@
         this.add(lock);
       }
 
-      if (option.autoPlayback) {
-        this.add(autoPlayback);
-      }
+      this.add(autoPlayback);
 
       for (var index = 0; index < option.plugins.length; index++) {
         this.add(option.plugins[index]);
