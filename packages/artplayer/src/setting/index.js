@@ -33,6 +33,7 @@ export default class Setting extends Component {
 
         this.width = 250;
         this.option = [];
+        this.events = [];
         this.cache = new Map();
 
         if (option.setting) {
@@ -98,9 +99,11 @@ export default class Setting extends Component {
         append($left, $iconLeft);
         append($left, item._parentItem.html);
 
-        proxy($item, 'click', () => {
+        const event = proxy($item, 'click', () => {
             this.init(item._parentList);
         });
+
+        this.events.push(event);
 
         return $item;
     }
@@ -158,7 +161,7 @@ export default class Setting extends Component {
             append($right, $iconRight);
         }
 
-        proxy($item, 'click', (event) => {
+        const event = proxy($item, 'click', (event) => {
             if (hasChildren) {
                 this.init(item.selector, item.width);
             } else {
@@ -179,6 +182,8 @@ export default class Setting extends Component {
             }
         });
 
+        this.events.push(event);
+
         return $item;
     }
 
@@ -190,6 +195,9 @@ export default class Setting extends Component {
         }
 
         this.cache = new Map();
+        this.events.forEach((event) => event());
+        this.events = [];
+        this.$parent.innerHTML = '';
         this.option = makeRecursion(this.option);
         this.init(this.option);
     }

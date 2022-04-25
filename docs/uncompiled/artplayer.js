@@ -4510,6 +4510,7 @@
       _this.$parent = $setting;
       _this.width = 250;
       _this.option = [];
+      _this.events = [];
       _this.cache = new Map();
 
       if (option.setting) {
@@ -4574,9 +4575,10 @@
         append($iconLeft, icons.arrowLeft);
         append($left, $iconLeft);
         append($left, item._parentItem.html);
-        proxy($item, 'click', function () {
+        var event = proxy($item, 'click', function () {
           _this2.init(item._parentList);
         });
+        this.events.push(event);
         return $item;
       }
     }, {
@@ -4632,7 +4634,7 @@
           append($right, $iconRight);
         }
 
-        proxy($item, 'click', function (event) {
+        var event = proxy($item, 'click', function (event) {
           if (hasChildren) {
             _this3.init(item.selector, item.width);
           } else {
@@ -4653,6 +4655,7 @@
             }
           }
         });
+        this.events.push(event);
         return $item;
       }
     }, {
@@ -4665,6 +4668,11 @@
         }
 
         this.cache = new Map();
+        this.events.forEach(function (event) {
+          return event();
+        });
+        this.events = [];
+        this.$parent.innerHTML = '';
         this.option = makeRecursion(this.option);
         this.init(this.option);
       }
