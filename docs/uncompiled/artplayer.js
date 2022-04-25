@@ -4769,8 +4769,8 @@
         }
       }
     }, {
-      key: "clean",
-      value: function clean() {
+      key: "clear",
+      value: function clear() {
         try {
           window.localStorage.removeItem(this.name);
         } catch (error) {

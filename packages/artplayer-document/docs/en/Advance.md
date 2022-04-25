@@ -125,7 +125,7 @@ The player will automatically add a json object called `artplayer_settings` to t
 | `get`    | `Function` | Get value    |
 | `set`    | `Function` | Set value    |
 | `del`    | `Function` | Delete value |
-| `clean`  | `Function` | Clean value  |
+| `clear`  | `Function` | Clean value  |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -138,7 +138,7 @@ var art = new Artplayer({
 art.storage.set('your-key', 'your-value');
 art.storage.get('your-key');
 art.storage.del('your-key');
-art.storage.clean();
+art.storage.clear();
 ```
 
 ## icons

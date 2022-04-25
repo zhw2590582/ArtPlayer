@@ -125,7 +125,7 @@ art.proxy(container, 'click', (event) => {
 | `get`   | `Function` | 获取值   |
 | `set`   | `Function` | 设置值   |
 | `del`   | `Function` | 删除值   |
-| `clean` | `Function` | 清空对象 |
+| `clear` | `Function` | 清空对象 |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -138,7 +138,7 @@ var art = new Artplayer({
 art.storage.set('your-key', 'your-value');
 art.storage.get('your-key');
 art.storage.del('your-key');
-art.storage.clean();
+art.storage.clear();
 ```
 
 ## icons

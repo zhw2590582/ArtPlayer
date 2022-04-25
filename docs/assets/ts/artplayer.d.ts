@@ -636,7 +636,7 @@ declare class Artplayer extends Player {
         get(key: string): any;
         set(key: string, value: any): void;
         del(key: string): any;
-        clean(): any;
+        clear(): any;
     };
 
     readonly icons: {

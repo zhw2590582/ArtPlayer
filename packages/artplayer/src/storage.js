@@ -34,7 +34,7 @@ export default class Storage {
         }
     }
 
-    clean() {
+    clear() {
         try {
             window.localStorage.removeItem(this.name);
         } catch (error) {
