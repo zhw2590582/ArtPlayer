@@ -1056,3 +1056,20 @@ var art = new Artplayer({
     lock: true,
 });
 ```
+
+## autoPlayback
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Whether to use auto playback
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoPlayback: true,
+});
+```

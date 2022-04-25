@@ -1,7 +1,7 @@
 import { errorHandle, isMobile, has, def } from '../utils';
 import miniProgressBar from './miniProgressBar';
-import lock from './lock';
 import autoPlayback from './autoPlayback';
+import lock from './lock';
 
 export default class Plugins {
     constructor(art) {
@@ -18,7 +18,9 @@ export default class Plugins {
             this.add(lock);
         }
 
-        this.add(autoPlayback);
+        if (option.autoPlayback) {
+            this.add(autoPlayback);
+        }
 
         for (let index = 0; index < option.plugins.length; index++) {
             this.add(option.plugins[index]);

@@ -746,6 +746,7 @@
     useSSR: b,
     playsInline: b,
     lock: b,
+    autoPlayback: b,
     ads: [{
       url: s
     }],
@@ -1432,176 +1433,210 @@
     });
   }
 
-  /* eslint-disable promise/prefer-await-to-then */
+  var screenfull$1 = {exports: {}};
 
-  const methodMap = [
-  	[
-  		'requestFullscreen',
-  		'exitFullscreen',
-  		'fullscreenElement',
-  		'fullscreenEnabled',
-  		'fullscreenchange',
-  		'fullscreenerror',
-  	],
-  	// New WebKit
-  	[
-  		'webkitRequestFullscreen',
-  		'webkitExitFullscreen',
-  		'webkitFullscreenElement',
-  		'webkitFullscreenEnabled',
-  		'webkitfullscreenchange',
-  		'webkitfullscreenerror',
+  /*!
+  * screenfull
+  * v5.2.0 - 2021-11-03
+  * (c) Sindre Sorhus; MIT License
+  */
 
-  	],
-  	// Old WebKit
-  	[
-  		'webkitRequestFullScreen',
-  		'webkitCancelFullScreen',
-  		'webkitCurrentFullScreenElement',
-  		'webkitCancelFullScreen',
-  		'webkitfullscreenchange',
-  		'webkitfullscreenerror',
+  (function (module) {
+  (function () {
 
-  	],
-  	[
-  		'mozRequestFullScreen',
-  		'mozCancelFullScreen',
-  		'mozFullScreenElement',
-  		'mozFullScreenEnabled',
-  		'mozfullscreenchange',
-  		'mozfullscreenerror',
-  	],
-  	[
-  		'msRequestFullscreen',
-  		'msExitFullscreen',
-  		'msFullscreenElement',
-  		'msFullscreenEnabled',
-  		'MSFullscreenChange',
-  		'MSFullscreenError',
-  	],
-  ];
+  	var document = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {};
+  	var isCommonjs = module.exports;
 
-  const nativeAPI = (() => {
-  	const unprefixedMethods = methodMap[0];
-  	const returnValue = {};
+  	var fn = (function () {
+  		var val;
 
-  	for (const methodList of methodMap) {
-  		const exitFullscreenMethod = methodList?.[1];
-  		if (exitFullscreenMethod in document) {
-  			for (const [index, method] of methodList.entries()) {
-  				returnValue[unprefixedMethods[index]] = method;
+  		var fnMap = [
+  			[
+  				'requestFullscreen',
+  				'exitFullscreen',
+  				'fullscreenElement',
+  				'fullscreenEnabled',
+  				'fullscreenchange',
+  				'fullscreenerror'
+  			],
+  			// New WebKit
+  			[
+  				'webkitRequestFullscreen',
+  				'webkitExitFullscreen',
+  				'webkitFullscreenElement',
+  				'webkitFullscreenEnabled',
+  				'webkitfullscreenchange',
+  				'webkitfullscreenerror'
+
+  			],
+  			// Old WebKit
+  			[
+  				'webkitRequestFullScreen',
+  				'webkitCancelFullScreen',
+  				'webkitCurrentFullScreenElement',
+  				'webkitCancelFullScreen',
+  				'webkitfullscreenchange',
+  				'webkitfullscreenerror'
+
+  			],
+  			[
+  				'mozRequestFullScreen',
+  				'mozCancelFullScreen',
+  				'mozFullScreenElement',
+  				'mozFullScreenEnabled',
+  				'mozfullscreenchange',
+  				'mozfullscreenerror'
+  			],
+  			[
+  				'msRequestFullscreen',
+  				'msExitFullscreen',
+  				'msFullscreenElement',
+  				'msFullscreenEnabled',
+  				'MSFullscreenChange',
+  				'MSFullscreenError'
+  			]
+  		];
+
+  		var i = 0;
+  		var l = fnMap.length;
+  		var ret = {};
+
+  		for (; i < l; i++) {
+  			val = fnMap[i];
+  			if (val && val[1] in document) {
+  				for (i = 0; i < val.length; i++) {
+  					ret[fnMap[0][i]] = val[i];
+  				}
+  				return ret;
   			}
-
-  			return returnValue;
   		}
+
+  		return false;
+  	})();
+
+  	var eventNameMap = {
+  		change: fn.fullscreenchange,
+  		error: fn.fullscreenerror
+  	};
+
+  	var screenfull = {
+  		request: function (element, options) {
+  			return new Promise(function (resolve, reject) {
+  				var onFullScreenEntered = function () {
+  					this.off('change', onFullScreenEntered);
+  					resolve();
+  				}.bind(this);
+
+  				this.on('change', onFullScreenEntered);
+
+  				element = element || document.documentElement;
+
+  				var returnPromise = element[fn.requestFullscreen](options);
+
+  				if (returnPromise instanceof Promise) {
+  					returnPromise.then(onFullScreenEntered).catch(reject);
+  				}
+  			}.bind(this));
+  		},
+  		exit: function () {
+  			return new Promise(function (resolve, reject) {
+  				if (!this.isFullscreen) {
+  					resolve();
+  					return;
+  				}
+
+  				var onFullScreenExit = function () {
+  					this.off('change', onFullScreenExit);
+  					resolve();
+  				}.bind(this);
+
+  				this.on('change', onFullScreenExit);
+
+  				var returnPromise = document[fn.exitFullscreen]();
+
+  				if (returnPromise instanceof Promise) {
+  					returnPromise.then(onFullScreenExit).catch(reject);
+  				}
+  			}.bind(this));
+  		},
+  		toggle: function (element, options) {
+  			return this.isFullscreen ? this.exit() : this.request(element, options);
+  		},
+  		onchange: function (callback) {
+  			this.on('change', callback);
+  		},
+  		onerror: function (callback) {
+  			this.on('error', callback);
+  		},
+  		on: function (event, callback) {
+  			var eventName = eventNameMap[event];
+  			if (eventName) {
+  				document.addEventListener(eventName, callback, false);
+  			}
+  		},
+  		off: function (event, callback) {
+  			var eventName = eventNameMap[event];
+  			if (eventName) {
+  				document.removeEventListener(eventName, callback, false);
+  			}
+  		},
+  		raw: fn
+  	};
+
+  	if (!fn) {
+  		if (isCommonjs) {
+  			module.exports = {isEnabled: false};
+  		} else {
+  			window.screenfull = {isEnabled: false};
+  		}
+
+  		return;
   	}
 
-  	return false;
+  	Object.defineProperties(screenfull, {
+  		isFullscreen: {
+  			get: function () {
+  				return Boolean(document[fn.fullscreenElement]);
+  			}
+  		},
+  		element: {
+  			enumerable: true,
+  			get: function () {
+  				return document[fn.fullscreenElement];
+  			}
+  		},
+  		isEnabled: {
+  			enumerable: true,
+  			get: function () {
+  				// Coerce to boolean in case of old WebKit
+  				return Boolean(document[fn.fullscreenEnabled]);
+  			}
+  		}
+  	});
+
+  	if (isCommonjs) {
+  		module.exports = screenfull;
+  	} else {
+  		window.screenfull = screenfull;
+  	}
   })();
+  }(screenfull$1));
 
-  const eventNameMap = {
-  	change: nativeAPI.fullscreenchange,
-  	error: nativeAPI.fullscreenerror,
-  };
-
-  // eslint-disable-next-line import/no-mutable-exports
-  let screenfull = {
-  	// eslint-disable-next-line default-param-last
-  	request(element = document.documentElement, options) {
-  		return new Promise((resolve, reject) => {
-  			const onFullScreenEntered = () => {
-  				screenfull.off('change', onFullScreenEntered);
-  				resolve();
-  			};
-
-  			screenfull.on('change', onFullScreenEntered);
-
-  			const returnPromise = element[nativeAPI.requestFullscreen](options);
-
-  			if (returnPromise instanceof Promise) {
-  				returnPromise.then(onFullScreenEntered).catch(reject);
-  			}
-  		});
-  	},
-  	exit() {
-  		return new Promise((resolve, reject) => {
-  			if (!screenfull.isFullscreen) {
-  				resolve();
-  				return;
-  			}
-
-  			const onFullScreenExit = () => {
-  				screenfull.off('change', onFullScreenExit);
-  				resolve();
-  			};
-
-  			screenfull.on('change', onFullScreenExit);
-
-  			const returnPromise = document[nativeAPI.exitFullscreen]();
-
-  			if (returnPromise instanceof Promise) {
-  				returnPromise.then(onFullScreenExit).catch(reject);
-  			}
-  		});
-  	},
-  	toggle(element, options) {
-  		return screenfull.isFullscreen ? screenfull.exit() : screenfull.request(element, options);
-  	},
-  	onchange(callback) {
-  		screenfull.on('change', callback);
-  	},
-  	onerror(callback) {
-  		screenfull.on('error', callback);
-  	},
-  	on(event, callback) {
-  		const eventName = eventNameMap[event];
-  		if (eventName) {
-  			document.addEventListener(eventName, callback, false);
-  		}
-  	},
-  	off(event, callback) {
-  		const eventName = eventNameMap[event];
-  		if (eventName) {
-  			document.removeEventListener(eventName, callback, false);
-  		}
-  	},
-  	raw: nativeAPI,
-  };
-
-  Object.defineProperties(screenfull, {
-  	isFullscreen: {
-  		get: () => Boolean(document[nativeAPI.fullscreenElement]),
-  	},
-  	element: {
-  		enumerable: true,
-  		get: () => document[nativeAPI.fullscreenElement] ?? undefined,
-  	},
-  	isEnabled: {
-  		enumerable: true,
-  		// Coerce to boolean in case of old WebKit.
-  		get: () => Boolean(document[nativeAPI.fullscreenEnabled]),
-  	},
-  });
-
-  if (!nativeAPI) {
-  	screenfull = {isEnabled: false};
-  }
-
-  var screenfull$1 = screenfull;
+  var screenfull = screenfull$1.exports;
 
   var nativeScreenfull = function nativeScreenfull(art) {
     var notice = art.notice,
         $player = art.template.$player;
-    screenfull$1.on('change', function () {
-      return art.emit('fullscreen', screenfull$1.isFullscreen);
+    screenfull.on('change', function () {
+      return art.emit('fullscreen', screenfull.isFullscreen);
     });
     def(art, 'fullscreen', {
       get: function get() {
-        return screenfull$1.isFullscreen;
+        return screenfull.isFullscreen;
       },
       set: function set(value) {
         if (value) {
-          screenfull$1.request($player).then(function () {
+          screenfull.request($player).then(function () {
             addClass($player, 'art-fullscreen');
             art.aspectRatioReset = true;
             art.autoSize = false;
@@ -1610,7 +1645,7 @@
             notice.show = '';
           });
         } else {
-          screenfull$1.exit().then(function () {
+          screenfull.exit().then(function () {
             removeClass($player, 'art-fullscreen');
             art.aspectRatioReset = true;
             art.autoSize = art.option.autoSize;
@@ -1649,7 +1684,7 @@
         notice = art.notice,
         $video = art.template.$video;
     art.once('video:loadedmetadata', function () {
-      if (screenfull$1.isEnabled) {
+      if (screenfull.isEnabled) {
         nativeScreenfull(art);
       } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
         webkitScreenfull(art);
@@ -4777,6 +4812,30 @@
     };
   }
 
+  function autoPlayback(art) {
+    var storage = art.storage,
+        i18n = art.i18n;
+    art.on('video:timeupdate', function () {
+      var times = storage.get('times') || {};
+      var keys = Object.keys(times);
+      if (keys.length > 10) delete times[keys[0]];
+      times[art.option.url] = art.currentTime;
+      storage.set('times', times);
+    });
+    art.on('ready', function () {
+      var times = storage.get('times') || {};
+      var currentTime = times[art.option.url];
+
+      if (currentTime) {
+        art.seek = currentTime;
+        art.notice.show = "".concat(i18n.get('Auto playback at'), " ").concat(secondToTime(currentTime));
+      }
+    });
+    return {
+      name: 'autoPlayback'
+    };
+  }
+
   function lock(art) {
     var layers = art.layers,
         icons = art.icons,
@@ -4817,30 +4876,6 @@
     };
   }
 
-  function autoPlayback(art) {
-    var storage = art.storage,
-        i18n = art.i18n;
-    art.on('video:timeupdate', function () {
-      var times = storage.get('times') || {};
-      var keys = Object.keys(times);
-      if (keys.length > 10) delete times[keys[0]];
-      times[art.option.url] = art.currentTime;
-      storage.set('times', times);
-    });
-    art.on('ready', function () {
-      var times = storage.get('times') || {};
-      var currentTime = times[art.option.url];
-
-      if (currentTime) {
-        art.seek = currentTime;
-        art.notice.show = "".concat(i18n.get('Auto playback at'), " ").concat(secondToTime(currentTime));
-      }
-    });
-    return {
-      name: 'autoPlayback'
-    };
-  }
-
   var Plugins = /*#__PURE__*/function () {
     function Plugins(art) {
       _classCallCheck(this, Plugins);
@@ -4857,7 +4892,9 @@
         this.add(lock);
       }
 
-      this.add(autoPlayback);
+      if (option.autoPlayback) {
+        this.add(autoPlayback);
+      }
 
       for (var index = 0; index < option.plugins.length; index++) {
         this.add(option.plugins[index]);
@@ -5101,7 +5138,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1650704462815';
+        return '1650872203054';
       }
     }, {
       key: "config",
@@ -5171,6 +5208,7 @@
           useSSR: false,
           playsInline: true,
           lock: true,
+          autoPlayback: false,
           ads: [],
           layers: [],
           contextmenu: [],

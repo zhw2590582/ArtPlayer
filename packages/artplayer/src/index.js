@@ -147,6 +147,7 @@ export default class Artplayer extends Emitter {
             useSSR: false,
             playsInline: true,
             lock: true,
+            autoPlayback: false,
             ads: [],
             layers: [],
             contextmenu: [],

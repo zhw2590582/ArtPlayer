@@ -11,7 +11,28 @@
     <meta name="description" content="ArtPlayer.js is a modern and full featured HTML5 video player" />
     <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link rel="stylesheet" href="./assets/css/mobile.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .artplayer-app {
+            width: 100%;
+            height: 50%;
+        }
+
+        .tip {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,26 +41,112 @@
         <p class="tip"></p>
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
-    <script src="./uncompiled/artplayer.js?t=6"></script>
+    <script src="./uncompiled/artplayer.js"></script>
     <script src="./uncompiled/artplayer-plugin-danmuku.js"></script>
-    <script src="./assets/js/mobile.js"></script>
     <script>
-        var isLocalhost = Boolean(
-            window.location.hostname === 'localhost' ||
-            window.location.hostname === '[::1]' ||
-            window.location.hostname.match(
-                /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-            )
-        );
-        var _hmt = _hmt || [];
-        (function () {
-            if (!isLocalhost) {
-                var hm = document.createElement('script');
-                hm.src = 'https://hm.baidu.com/hm.js?b6c9b8bafbf5fe7225160101dafbbc7d';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(hm, s);
-            }
-        })();
+        var vConsole = new VConsole();
+
+        var art = new Artplayer({
+            container: '.artplayer-app',
+            url: '/assets/sample/video.mp4',
+            title: 'One More Time One More Chance',
+            poster: '/assets/sample/poster.jpg',
+            autoSize: true,
+            loop: true,
+            mutex: true,
+            setting: true,
+            flip: true,
+            lock: true,
+            playbackRate: true,
+            aspectRatio: true,
+            theme: '#ff0057',
+            fullscreen: true,
+            fullscreenWeb: true,
+            miniProgressBar: true,
+            autoPlayback: true,
+            moreVideoAttr: {
+                'x5-video-player-type': 'h5',
+                'x5-video-player-fullscreen': false,
+                'x5-video-orientation': 'portraint',
+            },
+            subtitle: {
+                url: '/assets/sample/subtitle.srt',
+                style: {
+                    color: '#fff',
+                    fontSize: '14px',
+                },
+            },
+            layers: [
+                {
+                    html: `<img width="50" src="/assets/sample/layer.png">`,
+                    click: function () {
+                        console.info('You clicked on the custom layer');
+                    },
+                    style: {
+                        position: 'absolute',
+                        top: '10px',
+                        right: '10px',
+                        opacity: '.9',
+                    },
+                },
+            ],
+            icons: {
+                loading: '<img src="/assets/img/ploading.gif">',
+                state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
+                indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
+            },
+            plugins: [
+                artplayerPluginDanmuku({
+                    danmuku: '/assets/sample/danmuku.xml',
+                    speed: 5,
+                    maxlength: 100,
+                    margin: [10, 70],
+                    opacity: 1,
+                    fontSize: 14,
+                    synchronousPlayback: false,
+                }),
+            ],
+            settings: [
+                {
+                    width: 200,
+                    html: '自定义设置',
+                    tooltip: '提示',
+                    icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
+                    selector: [
+                        {
+                            default: true,
+                            html: '设置 01',
+                        },
+                        {
+                            html: '设置 02',
+                        },
+                    ],
+                    onSelect: function (item) {
+                        console.info('你点击了', item.html);
+                        return item.html;
+                    },
+                },
+            ],
+            whitelist: ['*'],
+        });
+
+        Artplayer.config.events.forEach(function (item) {
+            art.on('video:' + item, function (event) {
+                console.log('video: ' + event.type);
+            });
+        });
+
+        if (Artplayer.utils.isWechat) {
+            document.querySelector('.tip').textContent = '微信环境需手动触发播放';
+            let isClick = false;
+            document.body.addEventListener('click', () => {
+                if (!isClick) {
+                    isClick = true;
+                    art.play();
+                }
+            });
+        }
+
     </script>
 </body>
 
