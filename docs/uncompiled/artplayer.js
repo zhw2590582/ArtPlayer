@@ -4823,7 +4823,7 @@
       times[art.option.url] = art.currentTime;
       storage.set('times', times);
     });
-    art.once('video:loadedmetadata', function () {
+    art.on('ready', function () {
       var times = storage.get('times') || {};
       var currentTime = times[art.option.url];
 

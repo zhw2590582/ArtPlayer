@@ -15,7 +15,7 @@ export default function autoPlayback(art) {
         storage.set('times', times);
     });
 
-    art.once('video:loadedmetadata', () => {
+    art.on('ready', () => {
         const times = storage.get('times') || {};
         const currentTime = times[art.option.url];
         if (currentTime) {
