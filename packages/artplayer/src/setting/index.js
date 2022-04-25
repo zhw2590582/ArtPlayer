@@ -3,7 +3,7 @@ import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 import Component from '../utils/component';
-import { append, addClass, setStyle, inverseClass, includeFromEvent } from '../utils';
+import { append, addClass, setStyle, inverseClass, includeFromEvent, def } from '../utils';
 
 function makeRecursion(option, parentItem, parentList) {
     for (let index = 0; index < option.length; index++) {
@@ -137,9 +137,19 @@ export default class Setting extends Component {
             addClass($tooltip, 'art-setting-item-right-tooltip');
             append($right, $tooltip);
             item._$tooltip = $tooltip;
+            const { tooltip } = item;
 
-            if (item.tooltip) {
-                $tooltip.innerHTML = item.tooltip;
+            def(item, 'tooltip', {
+                get() {
+                    return $tooltip.innerHTML;
+                },
+                set(value) {
+                    $tooltip.innerHTML = value;
+                },
+            });
+
+            if (tooltip) {
+                item.tooltip = tooltip;
             }
 
             const $iconRight = document.createElement('div');
@@ -178,6 +188,8 @@ export default class Setting extends Component {
         } else {
             this.option.push(callback);
         }
+
+        this.cache = new Map();
         this.option = makeRecursion(this.option);
         this.init(this.option);
     }
