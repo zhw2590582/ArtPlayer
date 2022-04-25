@@ -4813,8 +4813,9 @@
   }
 
   function autoPlayback(art) {
-    var storage = art.storage,
-        i18n = art.i18n;
+    var i18n = art.i18n,
+        storage = art.storage,
+        $poster = art.template.$poster;
     art.on('video:timeupdate', function () {
       var times = storage.get('times') || {};
       var keys = Object.keys(times);
@@ -4828,11 +4829,20 @@
 
       if (currentTime) {
         art.seek = currentTime;
+        setStyle($poster, 'display', 'none');
         art.notice.show = "".concat(i18n.get('Auto playback at'), " ").concat(secondToTime(currentTime));
       }
     });
     return {
-      name: 'autoPlayback'
+      name: 'autoPlayback',
+
+      get times() {
+        return storage.get('times') || {};
+      },
+
+      clear: function clear() {
+        return storage.del('times');
+      }
     };
   }
 
@@ -5138,7 +5148,7 @@
     }, {
       key: "build",
       get: function get() {
-        return '1650872203054';
+        return '1650873214309';
       }
     }, {
       key: "config",

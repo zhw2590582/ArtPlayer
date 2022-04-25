@@ -1,7 +1,11 @@
-import { secondToTime } from '../utils';
+import { secondToTime, setStyle } from '../utils';
 
 export default function autoPlayback(art) {
-    const { storage, i18n } = art;
+    const {
+        i18n,
+        storage,
+        template: { $poster },
+    } = art;
 
     art.on('video:timeupdate', () => {
         const times = storage.get('times') || {};
@@ -16,11 +20,18 @@ export default function autoPlayback(art) {
         const currentTime = times[art.option.url];
         if (currentTime) {
             art.seek = currentTime;
+            setStyle($poster, 'display', 'none');
             art.notice.show = `${i18n.get('Auto playback at')} ${secondToTime(currentTime)}`;
         }
     });
 
     return {
         name: 'autoPlayback',
+        get times() {
+            return storage.get('times') || {};
+        },
+        clear() {
+            return storage.del('times');
+        },
     };
 }
