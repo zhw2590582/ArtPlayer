@@ -1071,6 +1071,8 @@ var art = new Artplayer({
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    muted: true,
+    autoplay: true,
     autoPlayback: true,
 });
 ```
