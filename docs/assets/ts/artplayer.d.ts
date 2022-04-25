@@ -330,6 +330,11 @@ type Option = {
     lock?: boolean;
 
     /**
+     * Whether use auto playback
+     */
+    autoPlayback?: boolean;
+
+    /**
      * Custom plugin list
      */
     plugins?: PluginFunction[];

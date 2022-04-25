@@ -57,6 +57,7 @@ export default {
     useSSR: b,
     playsInline: b,
     lock: b,
+    autoPlayback: b,
     ads: [
         {
             url: s,

@@ -23,6 +23,7 @@ var art = new Artplayer({
     mutex: true,
     backdrop: true,
     playsInline: true,
+    autoPlayback: true,
     theme: '#23ade5',
     lang: navigator.language.toLowerCase(),
     whitelist: ['*'],

@@ -1057,3 +1057,20 @@ var art = new Artplayer({
     lock: true,
 });
 ```
+
+## autoPlayback
+
+-   类型: `Boolean`
+-   默认: `false`
+
+是否使用自动回放功能
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoPlayback: true,
+});
+```
