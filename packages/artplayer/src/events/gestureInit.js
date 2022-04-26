@@ -25,11 +25,14 @@ export default function gestureInit(art, events) {
         });
 
         events.proxy($video, 'touchmove', (event) => {
-            if (event.touches.length === 1 && isDroging && art.duration) {
-                const widthDiff = event.touches[0].clientX - startX;
-                const proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
-                currentTime = clamp(art.currentTime + art.duration * proportion, 0, art.duration);
-                notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
+            if (event.touches.length === 1 && isDroging) {
+                const { clientX } = event.touches[0];
+                const ratioX = clamp((clientX - startX) / $video.clientWidth, -1, 1);
+
+                if (art.duration) {
+                    currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);
+                    notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
+                }
             }
         });
 

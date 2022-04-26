@@ -3917,11 +3917,14 @@
         }
       });
       events.proxy($video, 'touchmove', function (event) {
-        if (event.touches.length === 1 && isDroging && art.duration) {
-          var widthDiff = event.touches[0].clientX - startX;
-          var proportion = clamp(widthDiff / $video.clientWidth, -1, 1);
-          currentTime = clamp(art.currentTime + art.duration * proportion, 0, art.duration);
-          notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(art.duration));
+        if (event.touches.length === 1 && isDroging) {
+          var clientX = event.touches[0].clientX;
+          var ratioX = clamp((clientX - startX) / $video.clientWidth, -1, 1);
+
+          if (art.duration) {
+            currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);
+            notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(art.duration));
+          }
         }
       });
       events.proxy(document, 'touchend', function () {
