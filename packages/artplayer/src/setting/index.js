@@ -83,6 +83,21 @@ export default class Setting extends Component {
         }
     }
 
+    add(callback) {
+        if (typeof callback === 'function') {
+            this.option.push(callback(this.art));
+        } else {
+            this.option.push(callback);
+        }
+
+        this.cache = new Map();
+        this.events.forEach((event) => event());
+        this.events = [];
+        this.$parent.innerHTML = '';
+        this.option = makeRecursion(this.option);
+        this.init(this.option);
+    }
+
     creatHeader(item) {
         const {
             icons,
@@ -93,10 +108,10 @@ export default class Setting extends Component {
         addClass($item, 'art-setting-item');
         addClass($item, 'art-setting-item-back');
         const $left = append($item, '<div class="art-setting-item-left"></div>');
-        const $iconLeft = document.createElement('div');
-        addClass($iconLeft, 'art-setting-item-left-icon');
-        append($iconLeft, icons.arrowLeft);
-        append($left, $iconLeft);
+        const $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+        append($icon, icons.arrowLeft);
+        append($left, $icon);
         append($left, item._parentItem.html);
 
         const event = proxy($item, 'click', () => {
@@ -122,43 +137,65 @@ export default class Setting extends Component {
             addClass($item, 'art-current');
         }
 
-        if (item.value !== undefined) {
-            $item.dataset.value = item.value;
-        }
-
         const $left = append($item, '<div class="art-setting-item-left"></div>');
         const $right = append($item, '<div class="art-setting-item-right"></div>');
 
-        const $iconLeft = document.createElement('div');
-        addClass($iconLeft, 'art-setting-item-left-icon');
-        append($iconLeft, hasChildren ? item.icon || icons.config : icons.check);
-        append($left, $iconLeft);
-        append($left, item.html);
+        const $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+        append($icon, hasChildren ? item.icon || icons.config : icons.check);
+        append($left, $icon);
+        item._$icon = $icon;
+
+        def(item, 'icon', {
+            get() {
+                return $icon.innerHTML;
+            },
+            set(value) {
+                if (typeof value === 'string' || typeof value === 'number') {
+                    $icon.innerHTML = value;
+                }
+            },
+        });
+
+        const $html = document.createElement('div');
+        addClass($html, 'art-setting-item-left-text');
+        append($html, item.html || '');
+        append($left, $html);
+        item._$html = $html;
+
+        def(item, 'html', {
+            get() {
+                return $html.innerHTML;
+            },
+            set(value) {
+                if (typeof value === 'string' || typeof value === 'number') {
+                    $html.innerHTML = value;
+                }
+            },
+        });
 
         if (hasChildren) {
             const $tooltip = document.createElement('div');
             addClass($tooltip, 'art-setting-item-right-tooltip');
+            append($tooltip, item.tooltip || '');
             append($right, $tooltip);
             item._$tooltip = $tooltip;
-            const { tooltip } = item;
 
             def(item, 'tooltip', {
                 get() {
                     return $tooltip.innerHTML;
                 },
                 set(value) {
-                    $tooltip.innerHTML = value;
+                    if (typeof value === 'string' || typeof value === 'number') {
+                        $tooltip.innerHTML = value;
+                    }
                 },
             });
 
-            if (tooltip) {
-                item.tooltip = tooltip;
-            }
-
-            const $iconRight = document.createElement('div');
-            addClass($iconRight, 'art-setting-item-right-icon');
-            append($iconRight, icons.arrowRight);
-            append($right, $iconRight);
+            const $arrow = document.createElement('div');
+            addClass($arrow, 'art-setting-item-right-icon');
+            append($arrow, icons.arrowRight);
+            append($right, $arrow);
         }
 
         const event = proxy($item, 'click', (event) => {
@@ -187,21 +224,6 @@ export default class Setting extends Component {
         return $item;
     }
 
-    add(callback) {
-        if (typeof callback === 'function') {
-            this.option.push(callback(this.art));
-        } else {
-            this.option.push(callback);
-        }
-
-        this.cache = new Map();
-        this.events.forEach((event) => event());
-        this.events = [];
-        this.$parent.innerHTML = '';
-        this.option = makeRecursion(this.option);
-        this.init(this.option);
-    }
-
     init(option, width) {
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
@@ -216,8 +238,7 @@ export default class Setting extends Component {
             }
 
             for (let index = 0; index < option.length; index++) {
-                const $item = this.creatItem(option[index]);
-                append($panel, $item);
+                append($panel, this.creatItem(option[index]));
             }
 
             $panel.dataset.width = width || this.width;

@@ -4593,6 +4593,24 @@
     }
 
     _createClass(Setting, [{
+      key: "add",
+      value: function add(callback) {
+        if (typeof callback === 'function') {
+          this.option.push(callback(this.art));
+        } else {
+          this.option.push(callback);
+        }
+
+        this.cache = new Map();
+        this.events.forEach(function (event) {
+          return event();
+        });
+        this.events = [];
+        this.$parent.innerHTML = '';
+        this.option = makeRecursion(this.option);
+        this.init(this.option);
+      }
+    }, {
       key: "creatHeader",
       value: function creatHeader(item) {
         var _this2 = this;
@@ -4604,10 +4622,10 @@
         addClass($item, 'art-setting-item');
         addClass($item, 'art-setting-item-back');
         var $left = append($item, '<div class="art-setting-item-left"></div>');
-        var $iconLeft = document.createElement('div');
-        addClass($iconLeft, 'art-setting-item-left-icon');
-        append($iconLeft, icons.arrowLeft);
-        append($left, $iconLeft);
+        var $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+        append($icon, icons.arrowLeft);
+        append($left, $icon);
         append($left, item._parentItem.html);
         var event = proxy($item, 'click', function () {
           _this2.init(item._parentList);
@@ -4631,41 +4649,59 @@
           addClass($item, 'art-current');
         }
 
-        if (item.value !== undefined) {
-          $item.dataset.value = item.value;
-        }
-
         var $left = append($item, '<div class="art-setting-item-left"></div>');
         var $right = append($item, '<div class="art-setting-item-right"></div>');
-        var $iconLeft = document.createElement('div');
-        addClass($iconLeft, 'art-setting-item-left-icon');
-        append($iconLeft, hasChildren ? item.icon || icons.config : icons.check);
-        append($left, $iconLeft);
-        append($left, item.html);
+        var $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+        append($icon, hasChildren ? item.icon || icons.config : icons.check);
+        append($left, $icon);
+        item._$icon = $icon;
+        def(item, 'icon', {
+          get: function get() {
+            return $icon.innerHTML;
+          },
+          set: function set(value) {
+            if (typeof value === 'string' || typeof value === 'number') {
+              $icon.innerHTML = value;
+            }
+          }
+        });
+        var $html = document.createElement('div');
+        addClass($html, 'art-setting-item-left-text');
+        append($html, item.html || '');
+        append($left, $html);
+        item._$html = $html;
+        def(item, 'html', {
+          get: function get() {
+            return $html.innerHTML;
+          },
+          set: function set(value) {
+            if (typeof value === 'string' || typeof value === 'number') {
+              $html.innerHTML = value;
+            }
+          }
+        });
 
         if (hasChildren) {
           var $tooltip = document.createElement('div');
           addClass($tooltip, 'art-setting-item-right-tooltip');
+          append($tooltip, item.tooltip || '');
           append($right, $tooltip);
           item._$tooltip = $tooltip;
-          var tooltip = item.tooltip;
           def(item, 'tooltip', {
             get: function get() {
               return $tooltip.innerHTML;
             },
             set: function set(value) {
-              $tooltip.innerHTML = value;
+              if (typeof value === 'string' || typeof value === 'number') {
+                $tooltip.innerHTML = value;
+              }
             }
           });
-
-          if (tooltip) {
-            item.tooltip = tooltip;
-          }
-
-          var $iconRight = document.createElement('div');
-          addClass($iconRight, 'art-setting-item-right-icon');
-          append($iconRight, icons.arrowRight);
-          append($right, $iconRight);
+          var $arrow = document.createElement('div');
+          addClass($arrow, 'art-setting-item-right-icon');
+          append($arrow, icons.arrowRight);
+          append($right, $arrow);
         }
 
         var event = proxy($item, 'click', function (event) {
@@ -4693,24 +4729,6 @@
         return $item;
       }
     }, {
-      key: "add",
-      value: function add(callback) {
-        if (typeof callback === 'function') {
-          this.option.push(callback(this.art));
-        } else {
-          this.option.push(callback);
-        }
-
-        this.cache = new Map();
-        this.events.forEach(function (event) {
-          return event();
-        });
-        this.events = [];
-        this.$parent.innerHTML = '';
-        this.option = makeRecursion(this.option);
-        this.init(this.option);
-      }
-    }, {
       key: "init",
       value: function init(option, width) {
         if (this.cache.has(option)) {
@@ -4727,8 +4745,7 @@
           }
 
           for (var index = 0; index < option.length; index++) {
-            var $item = this.creatItem(option[index]);
-            append(_$panel, $item);
+            append(_$panel, this.creatItem(option[index]));
           }
 
           _$panel.dataset.width = width || this.width;
