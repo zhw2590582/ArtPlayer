@@ -1,5 +1,6 @@
 import { errorHandle, isMobile, has, def } from '../utils';
 import miniProgressBar from './miniProgressBar';
+import autoOrientation from './autoOrientation';
 import autoPlayback from './autoPlayback';
 import lock from './lock';
 
@@ -20,6 +21,10 @@ export default class Plugins {
 
         if (option.autoPlayback) {
             this.add(autoPlayback);
+        }
+
+        if (isMobile) {
+            this.add(autoOrientation);
         }
 
         for (let index = 0; index < option.plugins.length; index++) {
