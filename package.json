@@ -7,6 +7,7 @@
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
     "build:all": "npm run build all",
+    "build:sw": "node ./scripts/build-sw.js",
     "test:create": "npx cross-env NODE_ENV=test node ./scripts/createTests.js",
     "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
     "lint": "npx eslint packages/*/src",
@@ -72,6 +73,7 @@
     "rollup-plugin-svgo": "^1.1.0",
     "rollup-plugin-terser": "^7.0.2",
     "servor": "^4.0.2",
-    "travis-size-report": "^1.1.0"
+    "travis-size-report": "^1.1.0",
+    "workbox-build": "^6.5.3"
   }
 }
