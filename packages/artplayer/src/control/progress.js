@@ -1,4 +1,4 @@
-import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent } from '../utils';
+import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent, isMobile } from '../utils';
 
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
@@ -62,6 +62,7 @@ export default function progress(options) {
                 setStyle($played, 'backgroundColor', 'var(--theme)');
 
                 let indicatorSize = 14;
+
                 if (icons.indicator) {
                     indicatorSize = 16;
                     append($indicator, icons.indicator);
@@ -69,6 +70,10 @@ export default function progress(options) {
                     setStyles($indicator, {
                         backgroundColor: 'var(--theme)',
                     });
+                }
+
+                if (isMobile) {
+                    indicatorSize = 20;
                 }
 
                 setStyles($indicator, {

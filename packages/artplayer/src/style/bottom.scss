@@ -300,6 +300,10 @@
     }
 
     &.art-mobile {
+        .art-bottom {
+            padding-top: 40px !important;
+        }
+
         .art-progress-indicator {
             transform: scale(1, 1) !important;
             visibility: visible !important;
