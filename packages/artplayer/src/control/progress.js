@@ -3,12 +3,33 @@ import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEve
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
     const { left } = $progress.getBoundingClientRect();
-    const eventLeft = typeof event.pageX === 'number' ? event.pageX : event.touches[0].clientX;
+    const eventLeft = event.pageX;
     const width = clamp(eventLeft - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * art.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);
     return { second, time, width, percentage };
+}
+
+export function getPosFromEventMobile(art, event) {
+    const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
+
+    const { $progress } = art.template;
+    const { left, top } = $progress.getBoundingClientRect();
+    const { clientX, clientY } = event.touches[0];
+
+    const width = clamp(clientX - left, 0, $progress.clientWidth);
+    const height = clamp(clientY - top, 0, $progress.clientWidth);
+    const size = autoOrientation ? height : width;
+
+    const secondX = (width / $progress.clientWidth) * art.duration;
+    const secondY = (height / $progress.clientWidth) * art.duration;
+    const second = autoOrientation ? secondY : secondX;
+
+    const time = secondToTime(second);
+    const percentage = clamp(size / $progress.clientWidth, 0, 1);
+
+    return { second, time, size, percentage };
 }
 
 export default function progress(options) {
@@ -164,7 +185,8 @@ export default function progress(options) {
 
                 proxy(document, 'touchmove', (event) => {
                     if (event.touches.length === 1 && isDroging) {
-                        const { second, percentage } = getPosFromEvent(art, event);
+                        const { second, percentage } = getPosFromEventMobile(art, event);
+                        console.log(second, percentage);
                         setBar('played', percentage);
                         art.seek = second;
                     }

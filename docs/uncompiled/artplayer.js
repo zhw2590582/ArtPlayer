@@ -2723,7 +2723,7 @@
     var _$progress$getBoundin = $progress.getBoundingClientRect(),
         left = _$progress$getBoundin.left;
 
-    var eventLeft = typeof event.pageX === 'number' ? event.pageX : event.touches[0].clientX;
+    var eventLeft = event.pageX;
     var width = clamp(eventLeft - left, 0, $progress.clientWidth);
     var second = width / $progress.clientWidth * art.duration;
     var time = secondToTime(second);
@@ -2732,6 +2732,32 @@
       second: second,
       time: time,
       width: width,
+      percentage: percentage
+    };
+  }
+  function getPosFromEventMobile(art, event) {
+    var autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
+    var $progress = art.template.$progress;
+
+    var _$progress$getBoundin2 = $progress.getBoundingClientRect(),
+        left = _$progress$getBoundin2.left,
+        top = _$progress$getBoundin2.top;
+
+    var _event$touches$ = event.touches[0],
+        clientX = _event$touches$.clientX,
+        clientY = _event$touches$.clientY;
+    var width = clamp(clientX - left, 0, $progress.clientWidth);
+    var height = clamp(clientY - top, 0, $progress.clientWidth);
+    var size = autoOrientation ? height : width;
+    var secondX = width / $progress.clientWidth * art.duration;
+    var secondY = height / $progress.clientWidth * art.duration;
+    var second = autoOrientation ? secondY : secondX;
+    var time = secondToTime(second);
+    var percentage = clamp(size / $progress.clientWidth, 0, 1);
+    return {
+      second: second,
+      time: time,
+      size: size,
       percentage: percentage
     };
   }
@@ -2875,10 +2901,11 @@
           });
           proxy(document, 'touchmove', function (event) {
             if (event.touches.length === 1 && isDroging) {
-              var _getPosFromEvent5 = getPosFromEvent(art, event),
-                  second = _getPosFromEvent5.second,
-                  percentage = _getPosFromEvent5.percentage;
+              var _getPosFromEventMobil = getPosFromEventMobile(art, event),
+                  second = _getPosFromEventMobil.second,
+                  percentage = _getPosFromEventMobil.percentage;
 
+              console.log(second, percentage);
               setBar('played', percentage);
               art.seek = second;
             }
@@ -3221,7 +3248,7 @@
 
         _this.add(thumbnails({
           name: 'thumbnails',
-          disable: !option.thumbnails.url || option.isLive,
+          disable: !option.thumbnails.url || option.isLive || isMobile,
           position: 'top',
           index: 20
         }));
@@ -3263,7 +3290,7 @@
 
         _this.add(screenshot$1({
           name: 'screenshot',
-          disable: !option.screenshot,
+          disable: !option.screenshot || isMobile,
           position: 'right',
           index: 20
         }));
@@ -3904,12 +3931,17 @@
           $video = art.template.$video;
       var isDroging = false;
       var startX = 0;
+      var startY = 0;
       var currentTime = 0;
       var pressTimer = null;
       events.proxy($video, 'touchstart', function (event) {
         if (event.touches.length === 1) {
           isDroging = true;
-          startX = event.touches[0].clientX;
+          var _event$touches$ = event.touches[0],
+              clientX = _event$touches$.clientX,
+              clientY = _event$touches$.clientY;
+          startX = clientX;
+          startY = clientY;
           clearTimeout(pressTimer);
           pressTimer = setTimeout(function () {
             art.playbackRate = 3;
@@ -3918,11 +3950,19 @@
       });
       events.proxy($video, 'touchmove', function (event) {
         if (event.touches.length === 1 && isDroging) {
-          var clientX = event.touches[0].clientX;
+          var _event$touches$2 = event.touches[0],
+              clientX = _event$touches$2.clientX,
+              clientY = _event$touches$2.clientY;
           var ratioX = clamp((clientX - startX) / art.width, -1, 1);
+          var ratioY = clamp((clientY - startY) / art.height, -1, 1);
 
           if (art.duration) {
-            currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);
+            if (art.plugins.autoOrientation && art.plugins.autoOrientation.state) {
+              currentTime = clamp(art.currentTime + art.duration * ratioY, 0, art.duration);
+            } else {
+              currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);
+            }
+
             notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(art.duration));
           }
         }
@@ -3938,6 +3978,7 @@
           }
 
           startX = 0;
+          startY = 0;
           currentTime = 0;
           isDroging = false;
           clearTimeout(pressTimer);

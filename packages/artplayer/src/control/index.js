@@ -1,4 +1,4 @@
-import { errorHandle, addClass, removeClass } from '../utils';
+import { errorHandle, addClass, removeClass, isMobile } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -55,7 +55,7 @@ export default class Control extends Component {
             this.add(
                 thumbnails({
                     name: 'thumbnails',
-                    disable: !option.thumbnails.url || option.isLive,
+                    disable: !option.thumbnails.url || option.isLive || isMobile,
                     position: 'top',
                     index: 20,
                 }),
@@ -109,7 +109,7 @@ export default class Control extends Component {
             this.add(
                 screenshot({
                     name: 'screenshot',
-                    disable: !option.screenshot,
+                    disable: !option.screenshot || isMobile,
                     position: 'right',
                     index: 20,
                 }),
