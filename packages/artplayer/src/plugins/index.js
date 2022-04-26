@@ -23,7 +23,7 @@ export default class Plugins {
             this.add(autoPlayback);
         }
 
-        if (isMobile) {
+        if (option.autoOrientation && isMobile) {
             this.add(autoOrientation);
         }
 

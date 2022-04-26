@@ -42,7 +42,6 @@
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
     <script src="./uncompiled/artplayer.js"></script>
-    <script src="./uncompiled/artplayer-plugin-danmuku.js"></script>
     <script>
         var vConsole = new VConsole();
 
@@ -64,6 +63,7 @@
             fullscreenWeb: true,
             miniProgressBar: true,
             autoPlayback: true,
+            autoOrientation: true,
             moreVideoAttr: {
                 'x5-video-player-type': 'h5',
                 'x5-video-player-fullscreen': false,
@@ -95,17 +95,6 @@
                 state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
                 indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
             },
-            plugins: [
-                artplayerPluginDanmuku({
-                    danmuku: '/assets/sample/danmuku.xml',
-                    speed: 5,
-                    maxlength: 100,
-                    margin: [10, 70],
-                    opacity: 1,
-                    fontSize: 14,
-                    synchronousPlayback: false,
-                }),
-            ],
             settings: [
                 {
                     width: 200,

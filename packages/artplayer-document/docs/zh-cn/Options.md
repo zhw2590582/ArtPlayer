@@ -1076,3 +1076,20 @@ var art = new Artplayer({
     autoPlayback: true,
 });
 ```
+
+## autoOrientation
+
+-   类型: `Boolean`
+-   默认: `false`
+
+是否在移动端的网页全屏时，根据视频尺寸和视口尺寸，旋转播放器
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoOrientation: true,
+});
+```
