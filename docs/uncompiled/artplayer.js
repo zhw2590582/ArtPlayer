@@ -3919,7 +3919,7 @@
       events.proxy($video, 'touchmove', function (event) {
         if (event.touches.length === 1 && isDroging) {
           var clientX = event.touches[0].clientX;
-          var ratioX = clamp((clientX - startX) / $video.clientWidth, -1, 1);
+          var ratioX = clamp((clientX - startX) / art.width, -1, 1);
 
           if (art.duration) {
             currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);

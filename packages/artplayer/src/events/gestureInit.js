@@ -27,7 +27,7 @@ export default function gestureInit(art, events) {
         events.proxy($video, 'touchmove', (event) => {
             if (event.touches.length === 1 && isDroging) {
                 const { clientX } = event.touches[0];
-                const ratioX = clamp((clientX - startX) / $video.clientWidth, -1, 1);
+                const ratioX = clamp((clientX - startX) / art.width, -1, 1);
 
                 if (art.duration) {
                     currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);
