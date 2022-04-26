@@ -1,4 +1,4 @@
-import { setStyle } from '../utils';
+import { setStyle, addClass, removeClass, hasClass } from '../utils';
 
 export default function autoOrientation(art) {
     const {
@@ -14,22 +14,33 @@ export default function autoOrientation(art) {
                 (videoWidth > videoHeight && viewWidth < viewHeight) ||
                 (videoWidth < videoHeight && viewWidth > viewHeight)
             ) {
-                setStyle($player, 'width', `${viewHeight}px`);
-                setStyle($player, 'height', `${viewWidth}px`);
-                setStyle($player, 'transform', `rotate(90deg) translate(0,-${viewWidth}px)`);
-                setStyle($player, 'transform-origin', '0 0');
+                // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
+                setTimeout(() => {
+                    setStyle($player, 'width', `${viewHeight}px`);
+                    setStyle($player, 'height', `${viewWidth}px`);
+                    setStyle($player, 'transform-origin', '0 0');
+                    setStyle($player, 'transform', `rotate(90deg) translate(0, -${viewWidth}px)`);
+                    addClass($player, 'art-auto-orientation');
+                }, 100);
             }
         } else {
-            setStyle($player, 'width', null);
-            setStyle($player, 'height', null);
-            setStyle($player, 'transform', null);
-            setStyle($player, 'transform-origin', null);
-            art.autoSize = option.autoSize;
-            art.notice.show = '';
+            if (hasClass($player, 'art-auto-orientation')) {
+                setStyle($player, 'width', null);
+                setStyle($player, 'height', null);
+                setStyle($player, 'transform', null);
+                setStyle($player, 'transform-origin', null);
+                removeClass($player, 'art-auto-orientation');
+                art.aspectRatioReset = true;
+                art.autoSize = option.autoSize;
+                art.notice.show = '';
+            }
         }
     });
 
     return {
         name: 'autoOrientation',
+        get state() {
+            return hasClass($player, 'art-auto-orientation');
+        },
     };
 }

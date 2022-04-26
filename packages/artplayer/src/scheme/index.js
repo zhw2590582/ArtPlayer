@@ -58,6 +58,7 @@ export default {
     playsInline: b,
     lock: b,
     autoPlayback: b,
+    autoOrientation: b,
     ads: [
         {
             url: s,

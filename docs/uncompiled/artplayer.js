@@ -747,6 +747,7 @@
     playsInline: b,
     lock: b,
     autoPlayback: b,
+    autoOrientation: b,
     ads: [{
       url: s
     }],
@@ -4861,22 +4862,35 @@
             viewHeight = _document$documentEle.clientHeight;
 
         if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
-          setStyle($player, 'width', "".concat(viewHeight, "px"));
-          setStyle($player, 'height', "".concat(viewWidth, "px"));
-          setStyle($player, 'transform', "rotate(90deg) translate(0,-".concat(viewWidth, "px)"));
-          setStyle($player, 'transform-origin', '0 0');
+          // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
+          setTimeout(function () {
+            setStyle($player, 'width', "".concat(viewHeight, "px"));
+            setStyle($player, 'height', "".concat(viewWidth, "px"));
+            setStyle($player, 'transform-origin', '0 0');
+            setStyle($player, 'transform', "rotate(90deg) translate(0, -".concat(viewWidth, "px)"));
+            addClass($player, 'art-auto-orientation');
+          }, 100);
         }
       } else {
-        setStyle($player, 'width', null);
-        setStyle($player, 'height', null);
-        setStyle($player, 'transform', null);
-        setStyle($player, 'transform-origin', null);
-        art.autoSize = option.autoSize;
-        art.notice.show = '';
+        if (hasClass($player, 'art-auto-orientation')) {
+          setStyle($player, 'width', null);
+          setStyle($player, 'height', null);
+          setStyle($player, 'transform', null);
+          setStyle($player, 'transform-origin', null);
+          removeClass($player, 'art-auto-orientation');
+          art.aspectRatioReset = true;
+          art.autoSize = option.autoSize;
+          art.notice.show = '';
+        }
       }
     });
     return {
-      name: 'autoOrientation'
+      name: 'autoOrientation',
+
+      get state() {
+        return hasClass($player, 'art-auto-orientation');
+      }
+
     };
   }
 
@@ -4974,7 +4988,7 @@
         this.add(autoPlayback);
       }
 
-      if (isMobile) {
+      if (option.autoOrientation && isMobile) {
         this.add(autoOrientation);
       }
 
@@ -5291,6 +5305,7 @@
           playsInline: true,
           lock: true,
           autoPlayback: false,
+          autoOrientation: false,
           ads: [],
           layers: [],
           contextmenu: [],

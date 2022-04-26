@@ -1075,3 +1075,20 @@ var art = new Artplayer({
     autoPlayback: true,
 });
 ```
+
+## autoOrientation
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Whether to rotate the player according to the video size and viewport size, when the player web-fullscreen in mobile
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoOrientation: true,
+});
+```

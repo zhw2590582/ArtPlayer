@@ -335,6 +335,11 @@ type Option = {
     autoPlayback?: boolean;
 
     /**
+     * Whether use auto orientation in mobile
+     */
+    autoOrientation?: boolean;
+
+    /**
      * Custom plugin list
      */
     plugins?: PluginFunction[];
