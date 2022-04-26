@@ -186,7 +186,6 @@ export default function progress(options) {
                 proxy(document, 'touchmove', (event) => {
                     if (event.touches.length === 1 && isDroging) {
                         const { second, percentage } = getPosFromEventMobile(art, event);
-                        console.log(second, percentage);
                         setBar('played', percentage);
                         art.seek = second;
                     }

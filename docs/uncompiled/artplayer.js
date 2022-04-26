@@ -2905,7 +2905,6 @@
                   second = _getPosFromEventMobil.second,
                   percentage = _getPosFromEventMobil.percentage;
 
-              console.log(second, percentage);
               setBar('played', percentage);
               art.seek = second;
             }
