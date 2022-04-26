@@ -3,7 +3,6 @@ const { generateSW } = require('workbox-build');
 generateSW({
     globDirectory: 'docs/',
     globPatterns: ['assets/**/*.{css,woff2,png,svg,jpg,js}'],
-    maximumFileSizeToCacheInBytes: 1024 * 1024 * 5,
     swDest: 'docs/sw.js',
     sourcemap: false,
 }).then(({ count, size, warnings }) => {
