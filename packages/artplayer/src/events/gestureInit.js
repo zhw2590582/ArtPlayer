@@ -30,7 +30,7 @@ export default function gestureInit(art, events) {
                 const ratioX = clamp((clientX - startX) / art.width, -1, 1);
                 const ratioY = clamp((clientY - startY) / art.height, -1, 1);
                 const ratio = autoOrientation ? ratioY : ratioX;
-                const currentTime = clamp(startTime + art.duration * ratio, 0, art.duration);
+                const currentTime = clamp(startTime + (art.duration * ratio) / 2, 0, art.duration);
                 art.seek = currentTime;
                 art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1));
                 notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
