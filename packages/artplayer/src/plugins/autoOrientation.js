@@ -38,6 +38,29 @@ export default function autoOrientation(art) {
         }
     });
 
+    art.on('fullscreen', (state) => {
+        const lastOrientation = screen.orientation.type;
+        if (state) {
+            const { videoWidth, videoHeight } = $video;
+            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
+            if (
+                (videoWidth > videoHeight && viewWidth < viewHeight) ||
+                (videoWidth < videoHeight && viewWidth > viewHeight)
+            ) {
+                const oppositeOrientation = lastOrientation.startsWith('portrait') ? 'landscape' : 'portrait';
+                screen.orientation.lock(oppositeOrientation).then(() => {
+                    addClass($player, 'art-auto-orientation-fullscreen');
+                });
+            }
+        } else {
+            if (hasClass($player, 'art-auto-orientation-fullscreen')) {
+                screen.orientation.lock(lastOrientation).then(() => {
+                    removeClass($player, 'art-auto-orientation-fullscreen');
+                });
+            }
+        }
+    });
+
     return {
         name: 'autoOrientation',
         get state() {
