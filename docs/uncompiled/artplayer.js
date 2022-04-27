@@ -5663,17 +5663,18 @@
   }();
 
   function miniProgressBar(art) {
-    var layers = art.layers;
-    layers.add({
-      name: 'miniProgressBar',
-      mounted: function mounted($progressBar) {
-        art.on('destroy', function () {
-          $progressBar.style.display = 'none';
-        });
-        art.on('video:timeupdate', function () {
-          $progressBar.style.width = "".concat(art.played * 100, "%");
-        });
-      }
+    art.on('ready', function () {
+      art.layers.add({
+        name: 'miniProgressBar',
+        mounted: function mounted($progressBar) {
+          art.on('destroy', function () {
+            $progressBar.style.display = 'none';
+          });
+          art.on('video:timeupdate', function () {
+            $progressBar.style.width = "".concat(art.played * 100, "%");
+          });
+        }
+      });
     });
     return {
       name: 'miniProgressBar'
