@@ -4947,20 +4947,21 @@
   }
 
   function fastForward(art) {
-    var proxy = art.events.proxy,
+    var constructor = art.constructor,
+        proxy = art.events.proxy,
         _art$template = art.template,
         $player = _art$template.$player,
         $video = _art$template.$video;
-    var isPress = false;
     var timer = null;
+    var isPress = false;
 
-    var onStart = function onStart() {
-      if (art.playing) {
+    var onStart = function onStart(event) {
+      if (event.touches.length === 1 && art.playing) {
         timer = setTimeout(function () {
           isPress = true;
-          art.playbackRate = 3;
+          art.playbackRate = constructor.FAST_FORWARD_VALUE;
           addClass($player, 'art-fast-forward');
-        }, 1000);
+        }, constructor.FAST_FORWARD_TIME);
       }
     };
 
@@ -5423,7 +5424,9 @@
   Artplayer.MOBILE_AUTO_PLAYBACKRATE = 3;
   Artplayer.MOBILE_AUTO_PLAYBACKRATE_TIME = 1000;
   Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 100;
-  Artplayer.INFO_LOOP_TIME = 1000; // eslint-disable-next-line no-console
+  Artplayer.INFO_LOOP_TIME = 1000;
+  Artplayer.FAST_FORWARD_VALUE = 3;
+  Artplayer.FAST_FORWARD_TIME = 1000; // eslint-disable-next-line no-console
 
   console.log('%c ArtPlayer %c 4.3.9 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 

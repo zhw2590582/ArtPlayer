@@ -2,20 +2,21 @@ import { hasClass, addClass, removeClass } from '../utils';
 
 export default function fastForward(art) {
     const {
+        constructor,
         events: { proxy },
         template: { $player, $video },
     } = art;
 
-    let isPress = false;
     let timer = null;
+    let isPress = false;
 
-    const onStart = () => {
-        if (art.playing) {
+    const onStart = (event) => {
+        if (event.touches.length === 1 && art.playing) {
             timer = setTimeout(() => {
                 isPress = true;
-                art.playbackRate = 3;
+                art.playbackRate = constructor.FAST_FORWARD_VALUE;
                 addClass($player, 'art-fast-forward');
-            }, 1000);
+            }, constructor.FAST_FORWARD_TIME);
         }
     };
 

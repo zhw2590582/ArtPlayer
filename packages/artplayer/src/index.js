@@ -218,6 +218,8 @@ Artplayer.MOBILE_AUTO_PLAYBACKRATE = 3;
 Artplayer.MOBILE_AUTO_PLAYBACKRATE_TIME = 1000;
 Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 100;
 Artplayer.INFO_LOOP_TIME = 1000;
+Artplayer.FAST_FORWARD_VALUE = 3;
+Artplayer.FAST_FORWARD_TIME = 1000;
 
 // eslint-disable-next-line no-console
 console.log(
