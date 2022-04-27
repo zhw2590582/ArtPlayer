@@ -1063,7 +1063,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否在移动端显示一个快进按钮
+是否在移动端添加长按视频快进功能
 
 <div className="run-code">▶ Run Code</div>
 

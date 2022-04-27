@@ -1062,7 +1062,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-Whether to display a fast forward button on the mobile
+Whether to add fast forward function on the mobile, when long press the video
 
 <div className="run-code">▶ Run Code</div>
 

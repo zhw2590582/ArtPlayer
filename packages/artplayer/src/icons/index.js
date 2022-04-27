@@ -19,7 +19,6 @@ import config from './config.svg';
 import pip from './pip.svg';
 import lock from './lock.svg';
 import unlock from './unlock.svg';
-import fastForward from './fast-forward.svg';
 
 export default class Icons {
     constructor(art) {
@@ -44,7 +43,6 @@ export default class Icons {
             config,
             lock,
             unlock,
-            fastForward,
             ...art.option.icons,
         };
 

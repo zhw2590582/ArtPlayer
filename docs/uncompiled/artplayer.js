@@ -4313,8 +4313,6 @@
 
   var unlock = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1650612464266\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"14150\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"20\" height=\"20\"><defs>\n<style type=\"text/css\"></style></defs><path d=\"M666.752 194.517333L617.386667 268.629333A128 128 0 0 0 384 341.333333l0.042667 85.333334h384a85.333333 85.333333 0 0 1 85.333333 85.333333v256a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 1-85.333333-85.333333v-256a85.333333 85.333333 0 0 1 85.333333-85.333333h42.666667V341.333333a213.333333 213.333333 0 0 1 368.085333-146.816z\" fill=\"#ffffff\" p-id=\"14151\"></path></svg>";
 
-  var fastForward$1 = "<?xml version=\"1.0\" standalone=\"no\"?><!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1651038028334\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"3595\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"22\" height=\"22\">\n<path d=\"M825.8 498.005l-287.404-248.12c-10.695-9.188-26.396-0.882-26.396 14.023v496.298c0 14.905 15.701 23.182 26.396 13.995L825.8 525.995a18.859 18.859 0 0 0 0-27.99z m-320 0l-287.404-248.12c-10.695-9.188-26.396-0.882-26.396 14.023v496.298c0 14.905 15.701 23.182 26.396 13.995L505.8 525.995A18.603 18.603 0 0 0 512 512a18.603 18.603 0 0 0-6.2-13.995z\" p-id=\"3596\"></path>\n</svg>";
-
   function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -4344,8 +4342,7 @@
       aspectRatio: aspectRatio$1,
       config: config,
       lock: lock$1,
-      unlock: unlock,
-      fastForward: fastForward$1
+      unlock: unlock
     }, art.option.icons);
 
     Object.keys(icons).forEach(function (key) {
@@ -4950,31 +4947,36 @@
   }
 
   function fastForward(art) {
-    var layers = art.layers,
-        icons = art.icons,
-        proxy = art.events.proxy,
-        $player = art.template.$player;
-    layers.add({
-      name: 'fast-forward',
-      html: icons.fastForward,
-      mounted: function mounted($layer) {
-        var isPress = false;
-        proxy($layer, 'touchstart', function () {
-          if (art.playing) {
-            isPress = true;
-            art.playbackRate = 3;
-            addClass($player, 'art-fast-forward');
-          }
-        });
-        proxy(document, 'touchend', function () {
-          if (isPress) {
-            isPress = false;
-            art.playbackRate = 1;
-            removeClass($player, 'art-fast-forward');
-          }
-        });
+    var proxy = art.events.proxy,
+        _art$template = art.template,
+        $player = _art$template.$player,
+        $video = _art$template.$video;
+    var isPress = false;
+    var timer = null;
+
+    var onStart = function onStart() {
+      if (art.playing) {
+        timer = setTimeout(function () {
+          isPress = true;
+          art.playbackRate = 3;
+          addClass($player, 'art-fast-forward');
+        }, 1000);
       }
-    });
+    };
+
+    var onStop = function onStop() {
+      clearTimeout(timer);
+
+      if (isPress) {
+        isPress = false;
+        art.playbackRate = 1;
+        removeClass($player, 'art-fast-forward');
+      }
+    };
+
+    proxy($video, 'touchstart', onStart);
+    proxy(document, 'touchmove', onStop);
+    proxy(document, 'touchend', onStop);
     return {
       name: 'fastForward',
 

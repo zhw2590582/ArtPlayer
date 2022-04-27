@@ -2,35 +2,35 @@ import { hasClass, addClass, removeClass } from '../utils';
 
 export default function fastForward(art) {
     const {
-        layers,
-        icons,
         events: { proxy },
-        template: { $player },
+        template: { $player, $video },
     } = art;
 
-    layers.add({
-        name: 'fast-forward',
-        html: icons.fastForward,
-        mounted($layer) {
-            let isPress = false;
+    let isPress = false;
+    let timer = null;
 
-            proxy($layer, 'touchstart', () => {
-                if (art.playing) {
-                    isPress = true;
-                    art.playbackRate = 3;
-                    addClass($player, 'art-fast-forward');
-                }
-            });
+    const onStart = () => {
+        if (art.playing) {
+            timer = setTimeout(() => {
+                isPress = true;
+                art.playbackRate = 3;
+                addClass($player, 'art-fast-forward');
+            }, 1000);
+        }
+    };
 
-            proxy(document, 'touchend', () => {
-                if (isPress) {
-                    isPress = false;
-                    art.playbackRate = 1;
-                    removeClass($player, 'art-fast-forward');
-                }
-            });
-        },
-    });
+    const onStop = () => {
+        clearTimeout(timer);
+        if (isPress) {
+            isPress = false;
+            art.playbackRate = 1;
+            removeClass($player, 'art-fast-forward');
+        }
+    };
+
+    proxy($video, 'touchstart', onStart);
+    proxy(document, 'touchmove', onStop);
+    proxy(document, 'touchend', onStop);
 
     return {
         name: 'fastForward',
