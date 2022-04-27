@@ -1,7 +1,7 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function aspectRatio(art) {
-    const { i18n, icons } = art;
+    const { i18n, icons, constructor } = art;
 
     function getI18n(value) {
         return value === 'default' ? i18n.get('Default') : value;
@@ -14,7 +14,7 @@ export default function aspectRatio(art) {
     }
 
     return {
-        width: 200,
+        width: constructor.SETTING_ITEM_WIDTH,
         html: i18n.get('Aspect Ratio'),
         icon: icons.aspectRatio,
         tooltip: getI18n(art.aspectRatio),

@@ -11,8 +11,8 @@ export default function volume(option) {
             } = art;
 
             let isDroging = false;
-            const panelWidth = 60; // 音量条宽度
-            const handleWidth = 12; // 音量把手宽度
+            const panelWidth = art.constructor.VOLUME_PANEL_WIDTH;
+            const handleWidth = art.constructor.VOLUME_HANDLE_WIDTH;
             const $volume = append($control, icons.volume);
             const $volumeClose = append($control, icons.volumeClose);
             const $volumePanel = append($control, '<div class="art-volume-panel"></div>');

@@ -2,6 +2,7 @@ import { includeFromEvent, isMobile } from '../utils';
 
 export default function clickInit(art, events) {
     const {
+        constructor,
         template: { $player, $video },
     } = art;
 
@@ -19,7 +20,7 @@ export default function clickInit(art, events) {
     events.proxy($video, 'click', () => {
         const now = Date.now();
 
-        if (now - clickTime <= 300) {
+        if (now - clickTime <= constructor.DB_CLICE_TIME) {
             art.emit('dblclick');
 
             if (isMobile) {

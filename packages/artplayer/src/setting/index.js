@@ -31,7 +31,6 @@ export default class Setting extends Component {
         this.name = 'setting';
         this.$parent = $setting;
 
-        this.width = 250;
         this.option = [];
         this.events = [];
         this.cache = new Map();
@@ -241,7 +240,7 @@ export default class Setting extends Component {
                 append($panel, this.creatItem(option[index]));
             }
 
-            $panel.dataset.width = width || this.width;
+            $panel.dataset.width = width || this.art.constructor.SETTING_WIDTH;
             append(this.$parent, $panel);
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');

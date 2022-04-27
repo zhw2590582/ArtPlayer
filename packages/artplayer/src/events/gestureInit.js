@@ -51,6 +51,7 @@ export default function gestureInit(art, events) {
         const {
             notice,
             plugins,
+            constructor,
             template: { $video },
         } = art;
 
@@ -69,8 +70,8 @@ export default function gestureInit(art, events) {
 
                 clearTimeout(pressTimer);
                 pressTimer = setTimeout(() => {
-                    art.playbackRate = 3;
-                }, 1000);
+                    art.playbackRate = constructor.MOBILE_AUTO_PLAYBACKRATE;
+                }, constructor.MOBILE_AUTO_PLAYBACKRATE_TIME);
             }
         });
 

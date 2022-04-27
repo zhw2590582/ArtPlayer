@@ -41,10 +41,10 @@ export default function progress(options) {
 
                 setStyle($played, 'backgroundColor', 'var(--theme)');
 
-                let indicatorSize = 14;
+                let indicatorSize = art.constructor.INDICATOR_SIZE;
 
                 if (icons.indicator) {
-                    indicatorSize = 16;
+                    indicatorSize = art.constructor.INDICATOR_SIZE_ICON;
                     append($indicator, icons.indicator);
                 } else {
                     setStyles($indicator, {
@@ -53,7 +53,10 @@ export default function progress(options) {
                 }
 
                 if (isMobile) {
-                    indicatorSize = 20;
+                    indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE;
+                    if (icons.indicator) {
+                        indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE_ICON;
+                    }
                 }
 
                 setStyles($indicator, {

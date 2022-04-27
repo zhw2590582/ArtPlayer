@@ -3,6 +3,7 @@ import { setStyle, addClass, removeClass, hasClass } from '../utils';
 export default function autoOrientation(art) {
     const {
         option,
+        constructor,
         template: { $player, $video },
     } = art;
 
@@ -21,7 +22,7 @@ export default function autoOrientation(art) {
                     setStyle($player, 'transform-origin', '0 0');
                     setStyle($player, 'transform', `rotate(90deg) translate(0, -${viewWidth}px)`);
                     addClass($player, 'art-auto-orientation');
-                }, 100);
+                }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
             }
         } else {
             if (hasClass($player, 'art-auto-orientation')) {

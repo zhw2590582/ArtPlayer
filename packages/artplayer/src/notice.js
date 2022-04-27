@@ -3,7 +3,6 @@ import { addClass, removeClass } from './utils';
 export default class Notice {
     constructor(art) {
         this.art = art;
-        this.time = 2000;
         this.timer = null;
     }
 
@@ -16,6 +15,6 @@ export default class Notice {
         this.timer = setTimeout(() => {
             $noticeInner.innerText = '';
             removeClass($player, 'art-notice-show');
-        }, this.time);
+        }, this.art.constructor.NOTICE_TIME);
     }
 }

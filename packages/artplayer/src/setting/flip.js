@@ -1,7 +1,7 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function flip(art) {
-    const { i18n, icons } = art;
+    const { i18n, icons, constructor } = art;
 
     const keys = {
         normal: 'Normal',
@@ -16,7 +16,7 @@ export default function flip(art) {
     }
 
     return {
-        width: 200,
+        width: constructor.SETTING_ITEM_WIDTH,
         html: i18n.get('Video Flip'),
         tooltip: i18n.get(keys[art.flip]),
         icon: icons.config,

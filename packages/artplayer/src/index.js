@@ -196,6 +196,27 @@ export default class Artplayer extends Emitter {
     }
 }
 
+Artplayer.NOTICE_TIME = 2000;
+Artplayer.SETTING_WIDTH = 250;
+Artplayer.SETTING_ITEM_WIDTH = 200;
+Artplayer.INDICATOR_SIZE = 14;
+Artplayer.INDICATOR_SIZE_ICON = 16;
+Artplayer.INDICATOR_SIZE_MOBILE = 20;
+Artplayer.VOLUME_PANEL_WIDTH = 60;
+Artplayer.VOLUME_HANDLE_WIDTH = 12;
+Artplayer.RESIZE_TIME = 500;
+Artplayer.SCROLL_TIME = 200;
+Artplayer.SCROLL_GAP = 50;
+Artplayer.AUTO_PLAYBACK_MAX = 10;
+Artplayer.RECONNECT_TIME_MAX = 5;
+Artplayer.RECONNECT_SLEEP_TIME = 1000;
+Artplayer.CONTROL_HIDE_TIME = 3000;
+Artplayer.DB_CLICE_TIME = 300;
+Artplayer.MOBILE_AUTO_PLAYBACKRATE = 3;
+Artplayer.MOBILE_AUTO_PLAYBACKRATE_TIME = 1000;
+Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 100;
+Artplayer.INFO_LOOP_TIME = 1000;
+
 // eslint-disable-next-line no-console
 console.log(
     '%c ArtPlayer %c __VERSION__ %c https://artplayer.org',

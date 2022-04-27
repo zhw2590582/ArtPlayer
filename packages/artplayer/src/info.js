@@ -14,6 +14,7 @@ export default class Info extends Component {
 
     init() {
         const {
+            constructor,
             events: { proxy },
             template: { $infoPanel, $infoClose, $video },
         } = this.art;
@@ -38,7 +39,7 @@ export default class Info extends Component {
                     item.innerText = innerText;
                 }
             }
-            timer = setTimeout(loop, 1000);
+            timer = setTimeout(loop, constructor.INFO_LOOP_TIME);
         }
 
         loop();

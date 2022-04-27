@@ -2264,16 +2264,16 @@
   }
 
   function eventInit(art) {
-    var option = art.option,
+    var i18n = art.i18n,
+        notice = art.notice,
+        option = art.option,
+        constructor = art.constructor,
         proxy = art.events.proxy,
         _art$template = art.template,
         $player = _art$template.$player,
         $video = _art$template.$video,
-        $poster = _art$template.$poster,
-        i18n = art.i18n,
-        notice = art.notice;
+        $poster = _art$template.$poster;
     var reconnectTime = 0;
-    var maxReconnectTime = 5;
 
     for (var index = 0; index < config$1.events.length; index++) {
       proxy($video, config$1.events[index], function (event) {
@@ -2312,8 +2312,8 @@
       }
     });
     art.on('video:error', function () {
-      if (reconnectTime < maxReconnectTime) {
-        sleep(1000).then(function () {
+      if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
+        sleep(constructor.RECONNECT_SLEEP_TIME).then(function () {
           reconnectTime += 1;
           art.url = option.url;
           notice.show = "".concat(i18n.get('Reconnect'), ": ").concat(reconnectTime);
@@ -2323,7 +2323,7 @@
         art.loading.show = false;
         art.controls.show = false;
         addClass($player, 'art-error');
-        sleep(1000).then(function () {
+        sleep(constructor.RECONNECT_SLEEP_TIME).then(function () {
           notice.show = i18n.get('Video Load Failed');
           art.destroy(false);
         });
@@ -2758,6 +2758,7 @@
     if (isMobile && !art.option.isLive) {
       var notice = art.notice,
           plugins = art.plugins,
+          _constructor = art.constructor,
           $video = art.template.$video;
       var isDroging = false;
       var startX = 0;
@@ -2774,8 +2775,8 @@
           startY = clientY;
           clearTimeout(pressTimer);
           pressTimer = setTimeout(function () {
-            art.playbackRate = 3;
-          }, 1000);
+            art.playbackRate = _constructor.MOBILE_AUTO_PLAYBACKRATE;
+          }, _constructor.MOBILE_AUTO_PLAYBACKRATE_TIME);
         }
       });
       events.proxy($video, 'touchmove', function (event) {
@@ -2855,10 +2856,10 @@
           var $indicator = query('.art-progress-indicator', $control);
           var $tip = query('.art-progress-tip', $control);
           setStyle($played, 'backgroundColor', 'var(--theme)');
-          var indicatorSize = 14;
+          var indicatorSize = art.constructor.INDICATOR_SIZE;
 
           if (icons.indicator) {
-            indicatorSize = 16;
+            indicatorSize = art.constructor.INDICATOR_SIZE_ICON;
             append($indicator, icons.indicator);
           } else {
             setStyles($indicator, {
@@ -2867,7 +2868,11 @@
           }
 
           if (isMobile) {
-            indicatorSize = 20;
+            indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE;
+
+            if (icons.indicator) {
+              indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE_ICON;
+            }
           }
 
           setStyles($indicator, {
@@ -3044,10 +3049,8 @@
               icons = art.icons,
               i18n = art.i18n;
           var isDroging = false;
-          var panelWidth = 60; // 音量条宽度
-
-          var handleWidth = 12; // 音量把手宽度
-
+          var panelWidth = art.constructor.VOLUME_PANEL_WIDTH;
+          var handleWidth = art.constructor.VOLUME_HANDLE_WIDTH;
           var $volume = append($control, icons.volume);
           var $volumeClose = append($control, icons.volumeClose);
           var $volumePanel = append($control, '<div class="art-volume-panel"></div>');
@@ -3286,16 +3289,18 @@
       _this = _super.call(this, art);
       _this.name = 'control';
       var option = art.option,
+          constructor = art.constructor,
+          proxy = art.events.proxy,
           $player = art.template.$player;
-      _this.mouseMoveTime = Date.now();
-      art.on('mousemove', function () {
+      var activeTime = Date.now();
+      proxy($player, ['click', 'mousemove', 'touchstart', 'touchmove'], function () {
         _this.show = true;
         removeClass($player, 'art-hide-cursor');
         addClass($player, 'art-hover');
-        _this.mouseMoveTime = Date.now();
+        activeTime = Date.now();
       });
       art.on('video:timeupdate', function () {
-        if (art.playing && _this.show && Date.now() - _this.mouseMoveTime >= 3000) {
+        if (art.playing && _this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
           _this.show = false;
           addClass($player, 'art-hide-cursor');
           removeClass($player, 'art-hover');
@@ -3716,6 +3721,7 @@
         var _this2 = this;
 
         var _this$art = this.art,
+            constructor = _this$art.constructor,
             proxy = _this$art.events.proxy,
             _this$art$template = _this$art.template,
             $infoPanel = _this$art$template.$infoPanel,
@@ -3741,7 +3747,7 @@
             }
           }
 
-          timer = setTimeout(loop, 1000);
+          timer = setTimeout(loop, constructor.INFO_LOOP_TIME);
         }
 
         loop();
@@ -3911,7 +3917,8 @@
   }(Component);
 
   function clickInit(art, events) {
-    var _art$template = art.template,
+    var constructor = art.constructor,
+        _art$template = art.template,
         $player = _art$template.$player,
         $video = _art$template.$video;
     events.proxy(document, ['click', 'contextmenu'], function (event) {
@@ -3927,7 +3934,7 @@
     events.proxy($video, 'click', function () {
       var now = Date.now();
 
-      if (now - clickTime <= 300) {
+      if (now - clickTime <= constructor.DB_CLICE_TIME) {
         art.emit('dblclick');
 
         if (isMobile) {
@@ -3976,7 +3983,7 @@
       art.aspectRatioReset = true;
       notice.show = '';
       art.emit('resize');
-    }, 500);
+    }, art.constructor.RESIZE_TIME);
     events.proxy(window, ['orientationchange', 'resize'], function () {
       resizeFn();
     });
@@ -3990,10 +3997,11 @@
 
   function viewInit(art, events) {
     var option = art.option,
+        constructor = art.constructor,
         $container = art.template.$container;
     var scrollFn = throttle(function () {
-      art.emit('view', isInViewport($container, 50));
-    }, 200);
+      art.emit('view', isInViewport($container, constructor.SCROLL_GAP));
+    }, constructor.SCROLL_TIME);
     events.proxy(window, 'scroll', function () {
       scrollFn();
     });
@@ -4251,7 +4259,6 @@
       _classCallCheck(this, Notice);
 
       this.art = art;
-      this.time = 2000;
       this.timer = null;
     }
 
@@ -4268,7 +4275,7 @@
         this.timer = setTimeout(function () {
           $noticeInner.innerText = '';
           removeClass($player, 'art-notice-show');
-        }, this.time);
+        }, this.art.constructor.NOTICE_TIME);
       }
     }]);
 
@@ -4391,7 +4398,8 @@
 
   function flip(art) {
     var i18n = art.i18n,
-        icons = art.icons;
+        icons = art.icons,
+        constructor = art.constructor;
     var keys = {
       normal: 'Normal',
       horizontal: 'Horizontal',
@@ -4407,7 +4415,7 @@
     }
 
     return {
-      width: 200,
+      width: constructor.SETTING_ITEM_WIDTH,
       html: i18n.get('Video Flip'),
       tooltip: i18n.get(keys[art.flip]),
       icon: icons.config,
@@ -4432,7 +4440,8 @@
 
   function aspectRatio(art) {
     var i18n = art.i18n,
-        icons = art.icons;
+        icons = art.icons,
+        constructor = art.constructor;
 
     function getI18n(value) {
       return value === 'default' ? i18n.get('Default') : value;
@@ -4447,7 +4456,7 @@
     }
 
     return {
-      width: 200,
+      width: constructor.SETTING_ITEM_WIDTH,
       html: i18n.get('Aspect Ratio'),
       icon: icons.aspectRatio,
       tooltip: getI18n(art.aspectRatio),
@@ -4472,7 +4481,8 @@
 
   function playbackRate(art) {
     var i18n = art.i18n,
-        icons = art.icons;
+        icons = art.icons,
+        constructor = art.constructor;
 
     function getI18n(value) {
       return value === 1.0 ? i18n.get('Normal') : value;
@@ -4487,7 +4497,7 @@
     }
 
     return {
-      width: 200,
+      width: constructor.SETTING_ITEM_WIDTH,
       html: i18n.get('Play Speed'),
       tooltip: getI18n(art.playbackRate),
       icon: icons.playbackRate,
@@ -4512,7 +4522,8 @@
 
   function subtitleOffset(art) {
     var i18n = art.i18n,
-        icons = art.icons;
+        icons = art.icons,
+        constructor = art.constructor;
 
     function getI18n(value) {
       return value === 0 ? i18n.get('Normal') : value;
@@ -4527,7 +4538,7 @@
     }
 
     return {
-      width: 200,
+      width: constructor.SETTING_ITEM_WIDTH,
       html: i18n.get('Subtitle Offset'),
       tooltip: getI18n(art.subtitleOffset),
       icon: icons.subtitle,
@@ -4587,7 +4598,6 @@
       _this.art = art;
       _this.name = 'setting';
       _this.$parent = $setting;
-      _this.width = 250;
       _this.option = [];
       _this.events = [];
       _this.cache = new Map();
@@ -4793,7 +4803,7 @@
             append(_$panel, this.creatItem(option[index]));
           }
 
-          _$panel.dataset.width = width || this.width;
+          _$panel.dataset.width = width || this.art.constructor.SETTING_WIDTH;
           append(this.$parent, _$panel);
           this.cache.set(option, _$panel);
           inverseClass(_$panel, 'art-current');
@@ -4894,6 +4904,7 @@
 
   function autoOrientation(art) {
     var option = art.option,
+        constructor = art.constructor,
         _art$template = art.template,
         $player = _art$template.$player,
         $video = _art$template.$video;
@@ -4913,7 +4924,7 @@
             setStyle($player, 'transform-origin', '0 0');
             setStyle($player, 'transform', "rotate(90deg) translate(0, -".concat(viewWidth, "px)"));
             addClass($player, 'art-auto-orientation');
-          }, 100);
+          }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
         }
       } else {
         if (hasClass($player, 'art-auto-orientation')) {
@@ -4941,11 +4952,12 @@
   function autoPlayback(art) {
     var i18n = art.i18n,
         storage = art.storage,
+        constructor = art.constructor,
         $poster = art.template.$poster;
     art.on('video:timeupdate', function () {
       var times = storage.get('times') || {};
       var keys = Object.keys(times);
-      if (keys.length > 10) delete times[keys[0]];
+      if (keys.length > constructor.AUTO_PLAYBACK_MAX) delete times[keys[0]];
       times[art.option.url] = art.currentTime;
       storage.set('times', times);
     });
@@ -5382,7 +5394,28 @@
     }]);
 
     return Artplayer;
-  }(Emitter); // eslint-disable-next-line no-console
+  }(Emitter);
+  Artplayer.NOTICE_TIME = 2000;
+  Artplayer.SETTING_WIDTH = 250;
+  Artplayer.SETTING_ITEM_WIDTH = 200;
+  Artplayer.INDICATOR_SIZE = 14;
+  Artplayer.INDICATOR_SIZE_ICON = 16;
+  Artplayer.INDICATOR_SIZE_MOBILE = 20;
+  Artplayer.VOLUME_PANEL_WIDTH = 60;
+  Artplayer.VOLUME_HANDLE_WIDTH = 12;
+  Artplayer.RESIZE_TIME = 500;
+  Artplayer.SCROLL_TIME = 200;
+  Artplayer.SCROLL_GAP = 50;
+  Artplayer.AUTO_PLAYBACK_MAX = 10;
+  Artplayer.RECONNECT_TIME_MAX = 5;
+  Artplayer.RECONNECT_SLEEP_TIME = 1000;
+  Artplayer.CONTROL_HIDE_TIME = 3000;
+  Artplayer.DB_CLICE_TIME = 300;
+  Artplayer.MOBILE_AUTO_PLAYBACKRATE = 3;
+  Artplayer.MOBILE_AUTO_PLAYBACKRATE_TIME = 1000;
+  Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 100;
+  Artplayer.INFO_LOOP_TIME = 1000; // eslint-disable-next-line no-console
+
   console.log('%c ArtPlayer %c 4.3.8 %c https://artplayer.org', 'color: #fff; background: #5f5f5f', 'color: #fff; background: #4bc729', '');
 
   return Artplayer;

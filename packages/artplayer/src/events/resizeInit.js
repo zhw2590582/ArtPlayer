@@ -10,7 +10,7 @@ export default function resizeInit(art, events) {
         art.aspectRatioReset = true;
         notice.show = '';
         art.emit('resize');
-    }, 500);
+    }, art.constructor.RESIZE_TIME);
 
     events.proxy(window, ['orientationchange', 'resize'], () => {
         resizeFn();

@@ -22,20 +22,22 @@ export default class Control extends Component {
 
         const {
             option,
+            constructor,
+            events: { proxy },
             template: { $player },
         } = art;
 
-        this.mouseMoveTime = Date.now();
+        let activeTime = Date.now();
 
-        art.on('mousemove', () => {
+        proxy($player, ['click', 'mousemove', 'touchstart', 'touchmove'], () => {
             this.show = true;
             removeClass($player, 'art-hide-cursor');
             addClass($player, 'art-hover');
-            this.mouseMoveTime = Date.now();
+            activeTime = Date.now();
         });
 
         art.on('video:timeupdate', () => {
-            if (art.playing && this.show && Date.now() - this.mouseMoveTime >= 3000) {
+            if (art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
                 this.show = false;
                 addClass($player, 'art-hide-cursor');
                 removeClass($player, 'art-hover');

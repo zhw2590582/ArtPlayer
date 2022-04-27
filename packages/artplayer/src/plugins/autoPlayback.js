@@ -4,13 +4,14 @@ export default function autoPlayback(art) {
     const {
         i18n,
         storage,
+        constructor,
         template: { $poster },
     } = art;
 
     art.on('video:timeupdate', () => {
         const times = storage.get('times') || {};
         const keys = Object.keys(times);
-        if (keys.length > 10) delete times[keys[0]];
+        if (keys.length > constructor.AUTO_PLAYBACK_MAX) delete times[keys[0]];
         times[art.option.url] = art.currentTime;
         storage.set('times', times);
     });

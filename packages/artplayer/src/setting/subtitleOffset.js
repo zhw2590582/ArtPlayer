@@ -1,7 +1,7 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function subtitleOffset(art) {
-    const { i18n, icons } = art;
+    const { i18n, icons, constructor } = art;
 
     function getI18n(value) {
         return value === 0 ? i18n.get('Normal') : value;
@@ -14,7 +14,7 @@ export default function subtitleOffset(art) {
     }
 
     return {
-        width: 200,
+        width: constructor.SETTING_ITEM_WIDTH,
         html: i18n.get('Subtitle Offset'),
         tooltip: getI18n(art.subtitleOffset),
         icon: icons.subtitle,

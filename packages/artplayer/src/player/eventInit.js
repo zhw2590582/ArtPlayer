@@ -3,15 +3,15 @@ import { sleep, addClass, setStyle, isMobile } from '../utils';
 
 export default function eventInit(art) {
     const {
-        option,
-        events: { proxy },
-        template: { $player, $video, $poster },
         i18n,
         notice,
+        option,
+        constructor,
+        events: { proxy },
+        template: { $player, $video, $poster },
     } = art;
 
     let reconnectTime = 0;
-    const maxReconnectTime = 5;
 
     for (let index = 0; index < config.events.length; index++) {
         proxy($video, config.events[index], (event) => {
@@ -61,8 +61,8 @@ export default function eventInit(art) {
     });
 
     art.on('video:error', () => {
-        if (reconnectTime < maxReconnectTime) {
-            sleep(1000).then(() => {
+        if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
+            sleep(constructor.RECONNECT_SLEEP_TIME).then(() => {
                 reconnectTime += 1;
                 art.url = option.url;
                 notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
@@ -72,7 +72,7 @@ export default function eventInit(art) {
             art.loading.show = false;
             art.controls.show = false;
             addClass($player, 'art-error');
-            sleep(1000).then(() => {
+            sleep(constructor.RECONNECT_SLEEP_TIME).then(() => {
                 notice.show = i18n.get('Video Load Failed');
                 art.destroy(false);
             });
