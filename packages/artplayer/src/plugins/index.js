@@ -12,7 +12,7 @@ export default class Plugins {
 
         const { option } = art;
 
-        if (!option.isLive && option.miniProgressBar) {
+        if (option.miniProgressBar && !option.isLive) {
             this.add(miniProgressBar);
         }
 
@@ -28,7 +28,7 @@ export default class Plugins {
             this.add(autoOrientation);
         }
 
-        if (option.fastForward && isMobile) {
+        if (option.fastForward && isMobile && !option.isLive) {
             this.add(fastForward);
         }
 

@@ -15,9 +15,11 @@ export default function fastForward(art) {
             let isPress = false;
 
             proxy($layer, 'touchstart', () => {
-                isPress = true;
-                art.playbackRate = 3;
-                addClass($player, 'art-fast-forward');
+                if (art.playing) {
+                    isPress = true;
+                    art.playbackRate = 3;
+                    addClass($player, 'art-fast-forward');
+                }
             });
 
             proxy(document, 'touchend', () => {

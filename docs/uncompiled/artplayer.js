@@ -4960,9 +4960,11 @@
       mounted: function mounted($layer) {
         var isPress = false;
         proxy($layer, 'touchstart', function () {
-          isPress = true;
-          art.playbackRate = 3;
-          addClass($player, 'art-fast-forward');
+          if (art.playing) {
+            isPress = true;
+            art.playbackRate = 3;
+            addClass($player, 'art-fast-forward');
+          }
         });
         proxy(document, 'touchend', function () {
           if (isPress) {
@@ -5031,7 +5033,7 @@
       this.id = 0;
       var option = art.option;
 
-      if (!option.isLive && option.miniProgressBar) {
+      if (option.miniProgressBar && !option.isLive) {
         this.add(miniProgressBar);
       }
 
@@ -5047,7 +5049,7 @@
         this.add(autoOrientation);
       }
 
-      if (option.fastForward && isMobile) {
+      if (option.fastForward && isMobile && !option.isLive) {
         this.add(fastForward);
       }
 
