@@ -13,19 +13,38 @@
         background-color: rgba(0, 0, 0, 0.5);
     }
 
-    &.art-control-show {
-        .art-layer-lock {
-            display: flex;
-        }
-    }
-
     &.art-lock {
-        .art-bottom {
+        .art-bottom,
+        .art-layer-fast-forward {
             display: none !important;
         }
 
         .art-subtitle {
             bottom: 10px !important;
+        }
+    }
+
+    .art-layer-fast-forward {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 17px);
+        height: 34px;
+        width: 34px;
+        color: #fff;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &.art-control-show {
+        .art-layer-lock {
+            display: flex;
+        }
+
+        .art-layer-fast-forward {
+            display: flex;
         }
     }
 }

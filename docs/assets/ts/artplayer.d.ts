@@ -330,6 +330,11 @@ type Option = {
     lock?: boolean;
 
     /**
+     * Whether use fast forward in mobile
+     */
+    fastForward?: boolean;
+
+    /**
      * Whether use auto playback
      */
     autoPlayback?: boolean;

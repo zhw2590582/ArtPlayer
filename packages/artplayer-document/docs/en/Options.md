@@ -1043,7 +1043,7 @@ var art = new Artplayer({
 ## lock
 
 -   Type: `Boolean`
--   Default: `true`
+-   Default: `false`
 
 Whether to display a lock button on the mobile side to hide the bottom control bar
 
@@ -1054,6 +1054,23 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     lock: true,
+});
+```
+
+## fastForward
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Whether to display a fast forward button on the mobile
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fastForward: true,
 });
 ```
 

@@ -1044,7 +1044,7 @@ var art = new Artplayer({
 ## lock
 
 -   类型: `Boolean`
--   默认: `true`
+-   默认: `false`
 
 是否在移动端显示一个锁定按钮，用于隐藏底部控制栏
 
@@ -1055,6 +1055,23 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     lock: true,
+});
+```
+
+## fastForward
+
+-   类型: `Boolean`
+-   默认: `false`
+
+是否在移动端显示一个快进按钮
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fastForward: true,
 });
 ```
 

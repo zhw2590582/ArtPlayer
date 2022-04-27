@@ -57,6 +57,7 @@ export default {
     useSSR: b,
     playsInline: b,
     lock: b,
+    fastForward: b,
     autoPlayback: b,
     autoOrientation: b,
     ads: [
