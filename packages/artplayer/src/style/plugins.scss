@@ -36,7 +36,7 @@
         color: #fff;
         border-radius: 50%;
         background-color: rgba(0, 0, 0, 0.5);
-        user-select: none;
+        -webkit-touch-callout: none;
     }
 
     &.art-control-show {
