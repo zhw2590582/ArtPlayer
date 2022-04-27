@@ -1,4 +1,14 @@
 .art-video-player {
+    .art-layer-miniProgressBar {
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background-color: var(--theme);
+    }
+
     .art-layer-lock {
         display: none;
         align-items: center;
@@ -22,6 +32,10 @@
         .art-subtitle {
             bottom: 10px !important;
         }
+
+        .art-layer-miniProgressBar {
+            display: block !important;
+        }
     }
 
     .art-layer-fast-forward {
@@ -42,6 +56,10 @@
     }
 
     &.art-control-show {
+        .art-layer-miniProgressBar {
+            display: none;
+        }
+
         .art-layer-lock {
             display: flex;
         }
