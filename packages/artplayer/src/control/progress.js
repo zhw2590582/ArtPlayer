@@ -1,5 +1,4 @@
 import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent, isMobile } from '../utils';
-import { indicatorGestureInit } from '../events/gestureInit';
 
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
@@ -114,6 +113,10 @@ export default function progress(options) {
 
                 setBar('loaded', art.loaded);
 
+                art.on('setBar', (type, percentage) => {
+                    setBar(type, percentage);
+                });
+
                 art.on('video:progress', () => {
                     setBar('loaded', art.loaded);
                 });
@@ -126,46 +129,46 @@ export default function progress(options) {
                     setBar('played', 1);
                 });
 
-                proxy($control, 'mousemove', (event) => {
-                    setStyle($tip, 'display', 'block');
-                    if (includeFromEvent(event, $highlight)) {
-                        showHighlight(event);
-                    } else {
-                        showTime(event);
-                    }
-                });
+                if (!isMobile) {
+                    proxy($control, 'click', (event) => {
+                        if (event.target !== $indicator) {
+                            const { second, percentage } = getPosFromEvent(art, event);
+                            setBar('played', percentage);
+                            art.seek = second;
+                        }
+                    });
 
-                proxy($control, 'mouseout', () => {
-                    setStyle($tip, 'display', 'none');
-                });
+                    proxy($control, 'mousemove', (event) => {
+                        setStyle($tip, 'display', 'block');
+                        if (includeFromEvent(event, $highlight)) {
+                            showHighlight(event);
+                        } else {
+                            showTime(event);
+                        }
+                    });
 
-                proxy($control, 'click', (event) => {
-                    if (event.target !== $indicator) {
-                        const { second, percentage } = getPosFromEvent(art, event);
-                        setBar('played', percentage);
-                        art.seek = second;
-                    }
-                });
+                    proxy($control, 'mouseout', () => {
+                        setStyle($tip, 'display', 'none');
+                    });
 
-                proxy($indicator, 'mousedown', () => {
-                    isDroging = true;
-                });
+                    proxy($indicator, 'mousedown', () => {
+                        isDroging = true;
+                    });
 
-                proxy(document, 'mousemove', (event) => {
-                    if (isDroging) {
-                        const { second, percentage } = getPosFromEvent(art, event);
-                        setBar('played', percentage);
-                        art.seek = second;
-                    }
-                });
+                    proxy(document, 'mousemove', (event) => {
+                        if (isDroging) {
+                            const { second, percentage } = getPosFromEvent(art, event);
+                            setBar('played', percentage);
+                            art.seek = second;
+                        }
+                    });
 
-                proxy(document, 'mouseup', () => {
-                    if (isDroging) {
-                        isDroging = false;
-                    }
-                });
-
-                indicatorGestureInit(art, $indicator, setBar);
+                    proxy(document, 'mouseup', () => {
+                        if (isDroging) {
+                            isDroging = false;
+                        }
+                    });
+                }
             },
         };
     };
