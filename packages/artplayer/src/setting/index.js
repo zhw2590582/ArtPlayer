@@ -197,7 +197,7 @@ export default class Setting extends Component {
             append($right, $arrow);
         }
 
-        const event = proxy($item, 'click', (event) => {
+        const event = proxy($item, 'click', async (event) => {
             if (hasChildren) {
                 this.init(item.selector, item.width);
             } else {
@@ -208,7 +208,7 @@ export default class Setting extends Component {
                 }
 
                 if (item._parentItem && item._parentItem.onSelect) {
-                    const result = item._parentItem.onSelect.call(this.art, item, $item, event);
+                    const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
                     if (item._parentItem._$tooltip) {
                         if (typeof result === 'string' || typeof result === 'number') {
                             item._parentItem._$tooltip.innerHTML = result;

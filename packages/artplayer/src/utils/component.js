@@ -123,7 +123,7 @@ export default class Component {
 
         hover($ref, setLeft);
 
-        proxy($list, 'click', (event) => {
+        proxy($list, 'click', async (event) => {
             const path = event.composedPath() || [];
             const $item = path.find((item) => hasClass(item, 'art-selector-item'));
             if (!$item) return;
@@ -132,7 +132,7 @@ export default class Component {
             const find = option.selector[index] || {};
             $value.innerText = $item.innerText;
             if (option.onSelect) {
-                const result = option.onSelect.call(this.art, find, $item, event);
+                const result = await option.onSelect.call(this.art, find, $item, event);
                 if (typeof result === 'string' || typeof result === 'number') {
                     $value.innerHTML = result;
                 }
