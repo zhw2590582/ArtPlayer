@@ -10,8 +10,8 @@
         color: #fff;
         font-size: 20px;
         pointer-events: none;
-        text-shadow: RGB(0 0 0) 1px 0px 1px, RGB(0 0 0) 0px 1px 1px, RGB(0 0 0) -1px 0px 1px, RGB(0 0 0) 0px -1px 1px,
-            RGB(0 0 0) 1px 1px 1px, RGB(0 0 0) -1px -1px 1px, RGB(0 0 0) 1px -1px 1px, RGB(0 0 0) -1px 1px 1px;
+        text-shadow: #000 1px 0 1px, #000 0 1px 1px, #000 -1px 0 1px, #000 0 -1px 1px, #000 1px 1px 1px,
+            #000 -1px -1px 1px, #000 1px -1px 1px, #000 -1px 1px 1px;
 
         p {
             word-break: break-all;
