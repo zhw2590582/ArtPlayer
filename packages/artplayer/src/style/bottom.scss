@@ -302,13 +302,13 @@
 
     &.art-mobile {
         .art-bottom {
-            padding: 50px 5px 0;
+            padding: 50px 7px 0;
             .art-controls {
                 height: 40px;
-                .art-progress-indicator {
-                    transform: scale(1, 1) !important;
-                    visibility: visible !important;
-                }
+            }
+            .art-progress-indicator {
+                transform: scale(1, 1) !important;
+                visibility: visible !important;
             }
         }
     }
