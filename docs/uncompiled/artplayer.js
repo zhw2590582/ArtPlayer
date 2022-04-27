@@ -2714,6 +2714,111 @@
     };
   }
 
+  function indicatorGestureInit(art, $indicator, setBar) {
+    if (isMobile && !art.option.isLive) {
+      var plugins = art.plugins,
+          $progress = art.template.$progress,
+          proxy = art.events.proxy;
+      var isDroging = false;
+      proxy($indicator, 'touchstart', function (event) {
+        if (event.touches.length === 1) {
+          isDroging = true;
+        }
+      });
+      proxy(document, 'touchmove', function (event) {
+        if (event.touches.length === 1 && isDroging) {
+          var autoOrientation = plugins.autoOrientation && plugins.autoOrientation.state;
+
+          var _$progress$getBoundin = $progress.getBoundingClientRect(),
+              left = _$progress$getBoundin.left,
+              top = _$progress$getBoundin.top;
+
+          var _event$touches$ = event.touches[0],
+              clientX = _event$touches$.clientX,
+              clientY = _event$touches$.clientY;
+          var width = clamp(clientX - left, 0, $progress.clientWidth);
+          var height = clamp(clientY - top, 0, $progress.clientWidth);
+          var size = autoOrientation ? height : width;
+          var secondX = width / $progress.clientWidth * art.duration;
+          var secondY = height / $progress.clientWidth * art.duration;
+          var second = autoOrientation ? secondY : secondX;
+          var percentage = clamp(size / $progress.clientWidth, 0, 1);
+          setBar('played', percentage);
+          art.seek = second;
+        }
+      });
+      proxy(document, 'touchend', function () {
+        if (isDroging) {
+          isDroging = false;
+        }
+      });
+    }
+  }
+  function gestureInit(art, events) {
+    if (isMobile && !art.option.isLive) {
+      var notice = art.notice,
+          plugins = art.plugins,
+          $video = art.template.$video;
+      var isDroging = false;
+      var startX = 0;
+      var startY = 0;
+      var currentTime = 0;
+      var pressTimer = null;
+      events.proxy($video, 'touchstart', function (event) {
+        if (event.touches.length === 1) {
+          isDroging = true;
+          var _event$touches$2 = event.touches[0],
+              clientX = _event$touches$2.clientX,
+              clientY = _event$touches$2.clientY;
+          startX = clientX;
+          startY = clientY;
+          clearTimeout(pressTimer);
+          pressTimer = setTimeout(function () {
+            art.playbackRate = 3;
+          }, 1000);
+        }
+      });
+      events.proxy($video, 'touchmove', function (event) {
+        if (event.touches.length === 1 && isDroging) {
+          var autoOrientation = plugins.autoOrientation && plugins.autoOrientation.state;
+          var _event$touches$3 = event.touches[0],
+              clientX = _event$touches$3.clientX,
+              clientY = _event$touches$3.clientY;
+          var ratioX = clamp((clientX - startX) / art.width, -1, 1);
+          var ratioY = clamp((clientY - startY) / art.height, -1, 1);
+
+          if (art.duration) {
+            if (autoOrientation) {
+              currentTime = clamp(art.currentTime + art.duration * ratioY, 0, art.duration);
+            } else {
+              currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);
+            }
+
+            notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(art.duration));
+          }
+        }
+      });
+      events.proxy(document, 'touchend', function () {
+        if (isDroging) {
+          if (currentTime) {
+            art.seek = currentTime;
+          }
+
+          if (art.playbackRate === 3) {
+            art.playbackRate = 1;
+          }
+
+          startX = 0;
+          startY = 0;
+          currentTime = 0;
+          isDroging = false;
+          clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+      });
+    }
+  }
+
   function ownKeys$g(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$g(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2732,32 +2837,6 @@
       second: second,
       time: time,
       width: width,
-      percentage: percentage
-    };
-  }
-  function getPosFromEventMobile(art, event) {
-    var autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
-    var $progress = art.template.$progress;
-
-    var _$progress$getBoundin2 = $progress.getBoundingClientRect(),
-        left = _$progress$getBoundin2.left,
-        top = _$progress$getBoundin2.top;
-
-    var _event$touches$ = event.touches[0],
-        clientX = _event$touches$.clientX,
-        clientY = _event$touches$.clientY;
-    var width = clamp(clientX - left, 0, $progress.clientWidth);
-    var height = clamp(clientY - top, 0, $progress.clientWidth);
-    var size = autoOrientation ? height : width;
-    var secondX = width / $progress.clientWidth * art.duration;
-    var secondY = height / $progress.clientWidth * art.duration;
-    var second = autoOrientation ? secondY : secondX;
-    var time = secondToTime(second);
-    var percentage = clamp(size / $progress.clientWidth, 0, 1);
-    return {
-      second: second,
-      time: time,
-      size: size,
       percentage: percentage
     };
   }
@@ -2898,26 +2977,7 @@
               isDroging = false;
             }
           });
-          proxy($indicator, 'touchstart', function (event) {
-            if (event.touches.length === 1) {
-              isDroging = true;
-            }
-          });
-          proxy(document, 'touchmove', function (event) {
-            if (event.touches.length === 1 && isDroging) {
-              var _getPosFromEventMobil = getPosFromEventMobile(art, event),
-                  second = _getPosFromEventMobil.second,
-                  percentage = _getPosFromEventMobil.percentage;
-
-              setBar('played', percentage);
-              art.seek = second;
-            }
-          });
-          proxy(document, 'touchend', function () {
-            if (isDroging) {
-              isDroging = false;
-            }
-          });
+          indicatorGestureInit(art, $indicator, setBar);
         }
       });
     };
@@ -3924,69 +3984,6 @@
     if (screen && screen.orientation && screen.orientation.onchange) {
       events.proxy(screen.orientation, 'change', function () {
         resizeFn();
-      });
-    }
-  }
-
-  function gestureInit(art, events) {
-    if (isMobile && !art.option.isLive) {
-      var notice = art.notice,
-          $video = art.template.$video;
-      var isDroging = false;
-      var startX = 0;
-      var startY = 0;
-      var currentTime = 0;
-      var pressTimer = null;
-      events.proxy($video, 'touchstart', function (event) {
-        if (event.touches.length === 1) {
-          isDroging = true;
-          var _event$touches$ = event.touches[0],
-              clientX = _event$touches$.clientX,
-              clientY = _event$touches$.clientY;
-          startX = clientX;
-          startY = clientY;
-          clearTimeout(pressTimer);
-          pressTimer = setTimeout(function () {
-            art.playbackRate = 3;
-          }, 1000);
-        }
-      });
-      events.proxy($video, 'touchmove', function (event) {
-        if (event.touches.length === 1 && isDroging) {
-          var _event$touches$2 = event.touches[0],
-              clientX = _event$touches$2.clientX,
-              clientY = _event$touches$2.clientY;
-          var ratioX = clamp((clientX - startX) / art.width, -1, 1);
-          var ratioY = clamp((clientY - startY) / art.height, -1, 1);
-
-          if (art.duration) {
-            if (art.plugins.autoOrientation && art.plugins.autoOrientation.state) {
-              currentTime = clamp(art.currentTime + art.duration * ratioY, 0, art.duration);
-            } else {
-              currentTime = clamp(art.currentTime + art.duration * ratioX, 0, art.duration);
-            }
-
-            notice.show = "".concat(secondToTime(currentTime), " / ").concat(secondToTime(art.duration));
-          }
-        }
-      });
-      events.proxy(document, 'touchend', function () {
-        if (isDroging) {
-          if (currentTime) {
-            art.seek = currentTime;
-          }
-
-          if (art.playbackRate === 3) {
-            art.playbackRate = 1;
-          }
-
-          startX = 0;
-          startY = 0;
-          currentTime = 0;
-          isDroging = false;
-          clearTimeout(pressTimer);
-          pressTimer = null;
-        }
       });
     }
   }

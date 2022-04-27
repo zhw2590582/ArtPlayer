@@ -1,4 +1,5 @@
 import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEvent, isMobile } from '../utils';
+import { indicatorGestureInit } from '../events/gestureInit';
 
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
@@ -9,27 +10,6 @@ export function getPosFromEvent(art, event) {
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);
     return { second, time, width, percentage };
-}
-
-export function getPosFromEventMobile(art, event) {
-    const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
-
-    const { $progress } = art.template;
-    const { left, top } = $progress.getBoundingClientRect();
-    const { clientX, clientY } = event.touches[0];
-
-    const width = clamp(clientX - left, 0, $progress.clientWidth);
-    const height = clamp(clientY - top, 0, $progress.clientWidth);
-    const size = autoOrientation ? height : width;
-
-    const secondX = (width / $progress.clientWidth) * art.duration;
-    const secondY = (height / $progress.clientWidth) * art.duration;
-    const second = autoOrientation ? secondY : secondX;
-
-    const time = secondToTime(second);
-    const percentage = clamp(size / $progress.clientWidth, 0, 1);
-
-    return { second, time, size, percentage };
 }
 
 export default function progress(options) {
@@ -182,25 +162,7 @@ export default function progress(options) {
                     }
                 });
 
-                proxy($indicator, 'touchstart', (event) => {
-                    if (event.touches.length === 1) {
-                        isDroging = true;
-                    }
-                });
-
-                proxy(document, 'touchmove', (event) => {
-                    if (event.touches.length === 1 && isDroging) {
-                        const { second, percentage } = getPosFromEventMobile(art, event);
-                        setBar('played', percentage);
-                        art.seek = second;
-                    }
-                });
-
-                proxy(document, 'touchend', () => {
-                    if (isDroging) {
-                        isDroging = false;
-                    }
-                });
+                indicatorGestureInit(art, $indicator, setBar);
             },
         };
     };
