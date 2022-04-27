@@ -5673,6 +5673,11 @@
           art.on('video:timeupdate', function () {
             $progressBar.style.width = "".concat(art.played * 100, "%");
           });
+          art.on('setBar', function (type, percentage) {
+            if (type === 'played') {
+              $progressBar.style.width = "".concat(percentage * 100, "%");
+            }
+          });
         }
       });
     });

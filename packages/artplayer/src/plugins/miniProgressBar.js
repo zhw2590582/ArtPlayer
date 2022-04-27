@@ -10,6 +10,12 @@ export default function miniProgressBar(art) {
                 art.on('video:timeupdate', () => {
                     $progressBar.style.width = `${art.played * 100}%`;
                 });
+
+                art.on('setBar', (type, percentage) => {
+                    if (type === 'played') {
+                        $progressBar.style.width = `${percentage * 100}%`;
+                    }
+                });
             },
         });
     });
