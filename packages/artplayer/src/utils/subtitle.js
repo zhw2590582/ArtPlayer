@@ -80,18 +80,3 @@ export function assToVtt(ass) {
         .filter((line) => line.trim())
         .join('\n\n')}`;
 }
-
-export function outline(outlineColor = '#000', outlineSize = 1, blurSize = 1) {
-    return [
-        [outlineSize, 0],
-        [0, outlineSize],
-        [-outlineSize, 0],
-        [0, -outlineSize],
-        [outlineSize, outlineSize],
-        [-outlineSize, -outlineSize],
-        [outlineSize, -outlineSize],
-        [-outlineSize, outlineSize],
-    ]
-        .map((item) => `${outlineColor} ${item[0]}px ${item[1]}px ${blurSize}px`)
-        .join(',');
-}
