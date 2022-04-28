@@ -28,11 +28,23 @@ async function develop(name) {
         },
     });
 
+    const banner =
+        '/*!\n' +
+        ` * ${name}.js v${version}\n` +
+        ` * Github: https://github.com/zhw2590582/ArtPlayer\n` +
+        ` * (c) 2017-${new Date().getFullYear()} Harvey Zack\n` +
+        ' * Released under the MIT License.\n' +
+        ' */\n';
+
     try {
         const { bundleGraph, buildTime } = await bundler.run();
         const bundles = bundleGraph.getBundles();
-        fs.renameSync(`${projects[name]}/dist/index.js`, `${projects[name]}/dist/${name}.js`);
-        console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms!`);
+        const filePath = `${projects[name]}/dist/index.js`;
+        const newFilePath = `${projects[name]}/dist/${name}.js`;
+        const code = banner + fs.readFileSync(filePath);
+        fs.writeFileSync(filePath, code);
+        fs.renameSync(filePath, newFilePath);
+        console.log(`✨ Built ${name} ${bundles.length} bundles in ${buildTime}ms!`);
     } catch (err) {
         console.log(err.diagnostics);
     }
