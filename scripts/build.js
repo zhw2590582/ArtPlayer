@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import inquirer from 'inquirer';
 import projects from './projects.js';
 import { Parcel } from '@parcel/core';
@@ -12,12 +11,14 @@ async function develop(name) {
         entries: `${projects[name]}/src/index.js`,
         defaultConfig: '@parcel/config-default',
         mode: 'production',
-        targets: ['main'],
-        defaultTargetOptions: {
-            sourceMaps: false,
-            outputFormat: 'global',
-            engines: {
-                browsers: ['last 1 Chrome version'],
+        targets: {
+            main: {
+                distDir: `${projects[name]}/dist`,
+                sourceMap: false,
+                outputFormat: 'global',
+                engines: {
+                    browsers: ['last 1 Chrome version'],
+                },
             },
         },
         env: {
@@ -30,6 +31,7 @@ async function develop(name) {
     try {
         const { bundleGraph, buildTime } = await bundler.run();
         const bundles = bundleGraph.getBundles();
+        fs.renameSync(`${projects[name]}/dist/index.js`, `${projects[name]}/dist/${name}.js`);
         console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms!`);
     } catch (err) {
         console.log(err.diagnostics);

@@ -33,13 +33,14 @@
     "@parcel/reporter-cli": "^2.5.0",
     "@parcel/transformer-inline-string": "^2.5.0",
     "@parcel/transformer-less": "^2.5.0",
-    "cpy": "^9.0.1",
     "eslint": "^8.14.0",
     "glob": "^8.0.1",
     "inquirer": "^8.2.3",
     "lerna": "^4.0.0",
     "mocha": "^9.2.2",
     "mocha-chrome": "^2.2.0",
+    "node-html-parser": "^5.3.3",
+    "prettier": "^2.6.2",
     "servor": "^4.0.2",
     "workbox-build": "^6.5.3"
   }
