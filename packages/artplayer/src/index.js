@@ -1,4 +1,4 @@
-import './style/index.scss';
+import './style/index.less';
 import validator from 'option-validator';
 import Emitter from './utils/emitter';
 import * as utils from './utils';

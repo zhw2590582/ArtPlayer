@@ -1,13 +1,11 @@
-const inquirer = require('inquirer');
-const rollup = require('rollup');
-const servor = require('servor');
-const logger = require('./logger');
-const projects = require('./getProjects')();
-const creatRollupConfig = require('./creatRollupConfig');
-const openBrowser = require('servor/utils/openBrowser');
+import inquirer from 'inquirer';
+import servor from 'servor';
+import projects from './projects.js';
+import openBrowser from 'servor/utils/openBrowser.js';
+import { Parcel } from '@parcel/core';
+import { fileURLToPath } from 'url';
 
-async function develop(projectPath) {
-    const config = creatRollupConfig(projectPath);
+async function develop(name) {
     const { url } = await servor({
         root: 'docs',
         fallback: 'index.html',
@@ -15,30 +13,35 @@ async function develop(projectPath) {
         port: 8081,
     });
     openBrowser(url);
-    const watcher = rollup.watch(config);
-    watcher.on('event', (event) => {
-        switch (event.code) {
-            case 'START':
-                logger.log('checking rollup version...');
-                break;
-            case 'BUNDLE_START':
-                logger.log(`bundling ${config.output.file}...`);
-                break;
-            case 'BUNDLE_END':
-                logger.success(`${config.output.file} bundled in ${event.duration}ms.`);
-                logger.success('Watching for changes...');
-                break;
-            case 'END':
-                logger.success('finished building all bundles');
-                break;
-            case 'ERROR':
-                logger.warn(`error: ${event.error}`);
-                break;
-            case 'FATAL':
-                logger.warn(`fatal: ${event.error}`);
-                break;
-            default:
-                logger.warn(`unknown event: ${event.code}`);
+
+    const dir = projects[name];
+    const bundler = new Parcel({
+        entries: `${dir}/src/index.js`,
+        defaultConfig: '@parcel/config-default',
+        mode: 'development',
+        defaultTargetOptions: {
+            engines: {
+                browsers: ['last 1 Chrome version'],
+            },
+        },
+        env: {
+            NODE_ENV: 'development',
+        },
+        additionalReporters: [
+            {
+                packageName: '@parcel/reporter-cli',
+                resolveFrom: fileURLToPath(import.meta.url),
+            },
+        ],
+    });
+
+    bundler.watch(async (error, event) => {
+        if (error) throw error;
+        if (event.type === 'buildSuccess') {
+            const bundles = event.bundleGraph.getBundles();
+            console.log(`[${name}]`, `✨ Built ${bundles.length} bundles in ${event.buildTime}ms!`);
+        } else if (event.type === 'buildFailure') {
+            console.log(`[${name}]`, event.diagnostics);
         }
     });
 }
@@ -53,10 +56,5 @@ inquirer
         },
     ])
     .then((answers) => {
-        develop(projects[answers.project]);
-    })
-    .catch((err) => {
-        logger.fatal(err);
+        develop(answers.project);
     });
-
-module.exports = develop;
