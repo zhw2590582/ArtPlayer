@@ -28,7 +28,7 @@ jobs:
     - name: npm install, lint, build, and test
       run: |
         npm install
-        npx lerna bootstrap --hoist
+        npm run bootstrap
         npm run lint
         npm run build:all
         cd packages/artplayer-document && ls
@@ -37,6 +37,5 @@ jobs:
         cd ../../ && ls
         npm run test:create
         npm run test
-        npm run sizereport
       env:
         CI: true
