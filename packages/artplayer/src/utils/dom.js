@@ -59,10 +59,11 @@ export function inverseClass(target, className) {
     addClass(target, className);
 }
 
-export function tooltip(target, msg, pos = 'up') {
+export function tooltip(target, msg, pos = 'top') {
     if (isMobile) return;
     target.setAttribute('aria-label', msg);
-    target.setAttribute('data-balloon-pos', pos);
+    addClass(target, 'hint--rounded');
+    addClass(target, `hint--${pos}`);
 }
 
 export function isInViewport(el, offset = 0) {

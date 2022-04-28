@@ -126,6 +126,7 @@ var art = new Artplayer({
         {
             position: 'right',
             html: 'Control',
+            tooltip: 'Control Tooltip',
             click: function () {
                 console.info('You clicked on the custom control');
             },
