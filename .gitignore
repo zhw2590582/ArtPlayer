@@ -4,5 +4,4 @@ node_modules
 *.log
 commit.json
 package-lock.json
-.size-snapshot.json
 yarn.lock
