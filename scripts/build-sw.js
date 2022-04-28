@@ -1,4 +1,4 @@
-const { generateSW } = require('workbox-build');
+import { generateSW } from 'workbox-build';
 
 generateSW({
     globDirectory: 'docs/',
