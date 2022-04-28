@@ -12,14 +12,16 @@ async function develop(name) {
         reload: true,
         port: 8081,
     });
+
     openBrowser(url);
 
-    const dir = projects[name];
     const bundler = new Parcel({
-        entries: `${dir}/src/index.js`,
+        entries: `${projects[name]}/src/index.js`,
         defaultConfig: '@parcel/config-default',
         mode: 'development',
+        targets: ['modern'],
         defaultTargetOptions: {
+            distDir: `docs/uncompiled`,
             engines: {
                 browsers: ['last 1 Chrome version'],
             },

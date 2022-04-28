@@ -1,24 +1,24 @@
 import { append, def, addClass } from '../utils';
-import loading from './loading.svg';
-import state from './state.svg';
-import check from './check.svg';
-import play from './play.svg';
-import pause from './pause.svg';
-import volume from './volume.svg';
-import volumeClose from './volume-close.svg';
-import subtitle from './subtitle.svg';
-import screenshot from './screenshot.svg';
-import setting from './setting.svg';
-import fullscreen from './fullscreen.svg';
-import fullscreenWeb from './fullscreen-web.svg';
-import arrowLeft from './arrow-left.svg';
-import arrowRight from './arrow-right.svg';
-import playbackRate from './playback-rate.svg';
-import aspectRatio from './aspect-ratio.svg';
-import config from './config.svg';
-import pip from './pip.svg';
-import lock from './lock.svg';
-import unlock from './unlock.svg';
+import loading from 'bundle-text:./loading.svg';
+import state from 'bundle-text:./state.svg';
+import check from 'bundle-text:./check.svg';
+import play from 'bundle-text:./play.svg';
+import pause from 'bundle-text:./pause.svg';
+import volume from 'bundle-text:./volume.svg';
+import volumeClose from 'bundle-text:./volume-close.svg';
+import subtitle from 'bundle-text:./subtitle.svg';
+import screenshot from 'bundle-text:./screenshot.svg';
+import setting from 'bundle-text:./setting.svg';
+import fullscreen from 'bundle-text:./fullscreen.svg';
+import fullscreenWeb from 'bundle-text:./fullscreen-web.svg';
+import arrowLeft from 'bundle-text:./arrow-left.svg';
+import arrowRight from 'bundle-text:./arrow-right.svg';
+import playbackRate from 'bundle-text:./playback-rate.svg';
+import aspectRatio from 'bundle-text:./aspect-ratio.svg';
+import config from 'bundle-text:./config.svg';
+import pip from 'bundle-text:./pip.svg';
+import lock from 'bundle-text:./lock.svg';
+import unlock from 'bundle-text:./unlock.svg';
 
 export default class Icons {
     constructor(art) {

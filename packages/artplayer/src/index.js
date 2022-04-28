@@ -1,4 +1,4 @@
-import './style/index.less';
+import style from 'bundle-text:./style/index.less';
 import validator from 'option-validator';
 import Emitter from './utils/emitter';
 import * as utils from './utils';
@@ -220,6 +220,10 @@ Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 500;
 Artplayer.INFO_LOOP_TIME = 1000;
 Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
+
+const $style = document.createElement('style');
+$style.textContent = style;
+shadowRoot.appendChild($style);
 
 // eslint-disable-next-line no-console
 console.log(
