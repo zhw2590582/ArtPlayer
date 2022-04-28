@@ -10,6 +10,11 @@
         "docs/**",
         "package.json"
       ]
+    },
+    "bootstrap": {
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
     }
   }
 }
