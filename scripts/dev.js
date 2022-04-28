@@ -1,11 +1,16 @@
-import inquirer from 'inquirer';
+import fs from 'fs';
+import path from 'path';
 import servor from 'servor';
-import projects from './projects.js';
-import openBrowser from 'servor/utils/openBrowser.js';
-import { Parcel } from '@parcel/core';
+import inquirer from 'inquirer';
 import { fileURLToPath } from 'url';
+import projects from './projects.js';
+import { Parcel } from '@parcel/core';
+import openBrowser from 'servor/utils/openBrowser.js';
 
 async function develop(name) {
+    const uncompiledPath = path.resolve(`docs/uncompiled/${name}`);
+    const { version } = JSON.parse(fs.readFileSync(`${projects[name]}/package.json`, 'utf-8'));
+
     const { url } = await servor({
         root: 'docs',
         fallback: 'index.html',
@@ -14,20 +19,25 @@ async function develop(name) {
     });
 
     openBrowser(url);
+    process.chdir(projects[name]);
 
     const bundler = new Parcel({
         entries: `${projects[name]}/src/index.js`,
         defaultConfig: '@parcel/config-default',
         mode: 'development',
-        targets: ['modern'],
-        defaultTargetOptions: {
-            distDir: `docs/uncompiled`,
-            engines: {
-                browsers: ['last 1 Chrome version'],
+        targets: {
+            main: {
+                distDir: uncompiledPath,
+                outputFormat: 'global',
+                engines: {
+                    browsers: ['last 1 Chrome version'],
+                },
             },
         },
         env: {
             NODE_ENV: 'development',
+            APP_VER: version,
+            BUILD_DATE: Date.now(),
         },
         additionalReporters: [
             {

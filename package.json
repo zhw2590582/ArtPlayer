@@ -33,6 +33,7 @@
     "@parcel/reporter-cli": "^2.5.0",
     "@parcel/transformer-inline-string": "^2.5.0",
     "@parcel/transformer-less": "^2.5.0",
+    "cpy": "^9.0.1",
     "eslint": "^8.14.0",
     "glob": "^8.0.1",
     "inquirer": "^8.2.3",

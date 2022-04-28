@@ -1,67 +1,50 @@
-const path = require('path');
-const inquirer = require('inquirer');
-const rollup = require('rollup');
-const del = require('del');
-const logger = require('./logger');
-const projects = require('./getProjects')();
-const creatRollupConfig = require('./creatRollupConfig');
+import fs from 'fs';
+import path from 'path';
+import inquirer from 'inquirer';
+import projects from './projects.js';
+import { Parcel } from '@parcel/core';
 
-const isBuildAll = process.argv.pop() === 'all';
+async function develop(name) {
+    const { version } = JSON.parse(fs.readFileSync(`${projects[name]}/package.json`, 'utf-8'));
+    process.chdir(projects[name]);
 
-function runPromisesInSeries(ps) {
-    return ps.reduce((p, next) => p.then(next), Promise.resolve());
-}
-
-function build(projectPath) {
-    const { input, output, plugins } = creatRollupConfig(projectPath);
-    const dist = path.join(projectPath, 'dist');
-    return del(dist).then(() => {
-        logger.success(`----Delete directory successfully: ${dist}----`);
-        logger.log(`bundling ${output.file}...`);
-        return rollup
-            .rollup({
-                input,
-                plugins,
-            })
-            .then((bundle) => {
-                bundle.write(output);
-                logger.success(`finished building all bundles from ${projectPath}`);
-            });
-    });
-}
-
-if (isBuildAll) {
-    const bundles = [];
-    Object.keys(projects).forEach((item) => {
-        const projectPath = projects[item];
-        bundles.push(() => build(projectPath));
-    });
-
-    const dist = path.join(process.cwd(), 'dist');
-    del(dist).then(() => {
-        logger.success(`----Delete directory successfully: ${dist}----`);
-        runPromisesInSeries(bundles)
-            .then(() => {
-                logger.success('----finished building all packages----');
-            })
-            .catch((err) => {
-                logger.fatal(err);
-            });
-    });
-} else {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                message: 'Which project do you want to build?',
-                name: 'project',
-                choices: Object.keys(projects),
+    const bundler = new Parcel({
+        entries: `${projects[name]}/src/index.js`,
+        defaultConfig: '@parcel/config-default',
+        mode: 'production',
+        targets: ['main'],
+        defaultTargetOptions: {
+            sourceMaps: false,
+            outputFormat: 'global',
+            engines: {
+                browsers: ['last 1 Chrome version'],
             },
-        ])
-        .then((answers) => {
-            build(projects[answers.project]);
-        })
-        .catch((err) => {
-            logger.fatal(err);
-        });
+        },
+        env: {
+            NODE_ENV: 'production',
+            APP_VER: version,
+            BUILD_DATE: Date.now(),
+        },
+    });
+
+    try {
+        const { bundleGraph, buildTime } = await bundler.run();
+        const bundles = bundleGraph.getBundles();
+        console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms!`);
+    } catch (err) {
+        console.log(err.diagnostics);
+    }
 }
+
+inquirer
+    .prompt([
+        {
+            type: 'list',
+            message: 'Which project do you want to build?',
+            name: 'project',
+            choices: Object.keys(projects),
+        },
+    ])
+    .then((answers) => {
+        develop(answers.project);
+    });

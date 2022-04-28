@@ -77,15 +77,15 @@ export default class Artplayer extends Emitter {
     }
 
     static get version() {
-        return '__VERSION__';
+        return process.env.APP_VER;
     }
 
     static get env() {
-        return '__ENV__';
+        return process.env.NODE_ENV;
     }
 
     static get build() {
-        return '__BUILD__';
+        return process.env.BUILD_DATE;
     }
 
     static get config() {
@@ -223,11 +223,13 @@ Artplayer.FAST_FORWARD_TIME = 1000;
 
 const $style = document.createElement('style');
 $style.textContent = style;
-shadowRoot.appendChild($style);
+document.head.appendChild($style);
+
+window['Artplayer'] = Artplayer;
 
 // eslint-disable-next-line no-console
 console.log(
-    '%c ArtPlayer %c __VERSION__ %c https://artplayer.org',
+    `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
     'color: #fff; background: #5f5f5f',
     'color: #fff; background: #4bc729',
     '',
