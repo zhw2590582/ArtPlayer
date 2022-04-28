@@ -1,7 +1,7 @@
 {
+    "license": "MIT",
     "name": "artplayer",
     "version": "4.3.12",
-    "expose": "Artplayer",
     "main": "dist/artplayer.js",
     "types": "types/artplayer.d.ts",
     "homepage": "https://artPlayer.org",
@@ -22,7 +22,5 @@
     "dependencies": {
         "option-validator": "^2.0.6",
         "screenfull": "^6.0.1"
-    },
-    "license": "MIT",
-    "gitHead": "5ea211ef738351668e4acace326af4ff6947e2ee"
+    }
 }

@@ -1,25 +1,21 @@
 {
+  "license": "MIT",
+  "version": "4.3.12",
   "name": "artplayer-plugin-danmuku",
-  "version": "4.3.0",
-  "expose": "artplayerPluginDanmuku",
   "description": "Danmuku plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-danmuku.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "homepage": "https://artPlayer.org",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
   },
-  "keywords": [
-    "video",
-    "player"
-  ],
-  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
-  "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
-  "gitHead": "5ea211ef738351668e4acace326af4ff6947e2ee"
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ]
 }
