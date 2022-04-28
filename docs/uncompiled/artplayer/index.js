@@ -1238,7 +1238,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">__VERSION__</div>
+                  <div class="art-info-content">${"4.3.12"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
