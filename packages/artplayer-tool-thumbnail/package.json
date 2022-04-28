@@ -17,5 +17,8 @@
     "html5",
     "video",
     "player"
-  ]
+  ],
+  "dependencies": {
+    "tiny-emitter": "^2.1.0"
+  }
 }
