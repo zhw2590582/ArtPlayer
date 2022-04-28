@@ -224,27 +224,33 @@ export default class Setting extends Component {
     }
 
     init(option, width) {
+        const { constructor } = this.art;
+
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             inverseClass($panel, 'art-current');
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
+            setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
         } else {
             const $panel = document.createElement('div');
             addClass($panel, 'art-setting-panel');
+            $panel.dataset.width = width || constructor.SETTING_WIDTH;
+            $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
 
             if (option[0] && option[0]._parentItem) {
                 append($panel, this.creatHeader(option[0]));
+                $panel.dataset.height = Number($panel.dataset.height) + constructor.SETTING_ITEM_HEIGHT;
             }
 
             for (let index = 0; index < option.length; index++) {
                 append($panel, this.creatItem(option[index]));
             }
 
-            $panel.dataset.width = width || this.art.constructor.SETTING_WIDTH;
             append(this.$parent, $panel);
             this.cache.set(option, $panel);
             inverseClass($panel, 'art-current');
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
+            setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
 
             if (option[0] && option[0]._parentItem && option[0]._parentItem.mounted) {
                 option[0]._parentItem.mounted.call(this.art, $panel, option[0]._parentItem);

@@ -200,6 +200,7 @@ export default class Artplayer extends Emitter {
 Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;
 Artplayer.SETTING_ITEM_WIDTH = 200;
+Artplayer.SETTING_ITEM_HEIGHT = 35;
 Artplayer.INDICATOR_SIZE = 14;
 Artplayer.INDICATOR_SIZE_ICON = 16;
 Artplayer.INDICATOR_SIZE_MOBILE = 18;
