@@ -28,6 +28,8 @@
   "homepage": "https://artPlayer.org",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-react": "^7.16.7",
     "@parcel/config-default": "^2.5.0",
     "@parcel/core": "^2.5.0",
     "@parcel/reporter-cli": "^2.5.0",

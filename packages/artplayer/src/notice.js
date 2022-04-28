@@ -7,14 +7,21 @@ export default class Notice {
     }
 
     set show(msg) {
-        const { $player, $noticeInner } = this.art.template;
-        if (!msg) return removeClass($player, 'art-notice-show');
-        $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
-        addClass($player, 'art-notice-show');
-        clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-            $noticeInner.innerText = '';
+        const {
+            constructor,
+            template: { $player, $noticeInner },
+        } = this.art;
+
+        if (msg) {
+            $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
+            addClass($player, 'art-notice-show');
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                $noticeInner.innerText = '';
+                removeClass($player, 'art-notice-show');
+            }, constructor.NOTICE_TIME);
+        } else {
             removeClass($player, 'art-notice-show');
-        }, this.art.constructor.NOTICE_TIME);
+        }
     }
 }

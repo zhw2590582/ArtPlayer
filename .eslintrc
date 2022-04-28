@@ -1,36 +1,22 @@
 {
     "parser": "@babel/eslint-parser",
-    "extends": ["standard", "prettier"],
+    "extends": "eslint:recommended",
     "env": {
         "browser": true,
         "es6": true
     },
     "globals": {
-        "Artplayer": false
-    },
-    "rules": {
-        "no-shadow": 0,
-        "no-param-reassign": 0,
-        "no-restricted-exports": 0,
-        "no-loss-of-precision": 0,
-        "no-promise-executor-return": 0,
-        "no-unreachable-loop": 0,
-        "no-unsafe-optional-chaining": 0,
-        "no-useless-backreference": 0,
-        "default-case-last": 0,
-        "no-nonoctal-decimal-escape": 0,
-        "prefer-object-spread": 0,
-        "prefer-destructuring": 0,
-        "arrow-body-style": 0,
-        "accessor-pairs": 0,
-        "import/named": 0
+        "require": "readonly",
+        "process": "readonly"
     },
     "parserOptions": {
         "sourceType": "module",
-        "ecmaVersion": 8,
+        "ecmaVersion": "latest",
         "requireConfigFile": false,
         "babelOptions": {
-            "presets": ["@babel/preset-react"]
+            "presets": [
+                "@babel/preset-react"
+            ]
         }
     }
 }
