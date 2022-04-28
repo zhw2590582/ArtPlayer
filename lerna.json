@@ -3,18 +3,5 @@
   "version": "4.0.0",
   "packages": [
     "packages/*"
-  ],
-  "command": {
-    "publish": {
-      "ignoreChanges": [
-        "docs/**",
-        "package.json"
-      ]
-    },
-    "bootstrap": {
-      "npmClientArgs": [
-        "--no-package-lock"
-      ]
-    }
-  }
+  ]
 }
