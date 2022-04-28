@@ -1,13 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
-const { parse } = require('node-html-parser');
-const prettier = require('prettier');
+import glob from 'glob';
+import { join } from 'path';
+import { parse } from 'node-html-parser';
+import { format as _format } from 'prettier';
+import { readFileSync, writeFileSync } from 'fs';
 
 const htmls = glob
-    .sync(path.join(process.cwd(), 'docs/document/zh-cn/**/*.html'))
+    .sync(join(process.cwd(), 'docs/document/zh-cn/**/*.html'))
     .filter((item) => !item.includes('libraries'))
-    .map((item) => fs.readFileSync(item, 'utf-8'))
+    .map((item) => readFileSync(item, 'utf-8'))
     .map((item) =>
         parse(item, {
             lowerCaseTagName: false,
@@ -78,5 +78,5 @@ describe('Document', function() {
 });
 `;
 
-const format = prettier.format(tests, { semi: true, parser: 'babel' });
-fs.writeFileSync(path.join(process.cwd(), 'test/document.test.js'), format);
+const format = _format(tests, { semi: true, parser: 'babel' });
+writeFileSync(join(process.cwd(), 'test/document.test.js'), format);
