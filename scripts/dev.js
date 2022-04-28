@@ -8,6 +8,7 @@ import { Parcel } from '@parcel/core';
 import openBrowser from 'servor/utils/openBrowser.js';
 
 async function develop(name) {
+    let isOpenBrowser = false;
     const uncompiledPath = path.resolve(`docs/uncompiled/${name}`);
     const { version } = JSON.parse(fs.readFileSync(`${projects[name]}/package.json`, 'utf-8'));
 
@@ -18,7 +19,6 @@ async function develop(name) {
         port: 8081,
     });
 
-    openBrowser(url);
     process.chdir(projects[name]);
 
     const bundler = new Parcel({
@@ -52,6 +52,10 @@ async function develop(name) {
         if (event.type === 'buildSuccess') {
             const bundles = event.bundleGraph.getBundles();
             console.log(`[${name}]`, `✨ Built ${bundles.length} bundles in ${event.buildTime}ms!`);
+            if (!isOpenBrowser) {
+                isOpenBrowser = true;
+                openBrowser(url);
+            }
         } else if (event.type === 'buildFailure') {
             console.log(`[${name}]`, event.diagnostics);
         }

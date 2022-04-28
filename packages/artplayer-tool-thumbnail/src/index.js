@@ -1,7 +1,7 @@
 import Emitter from 'tiny-emitter';
 import { runPromisesInSeries, sleep, getFileName, clamp } from './utils';
 
-class ArtplayerToolThumbnail extends Emitter {
+export default class ArtplayerToolThumbnail extends Emitter {
     constructor(option = {}) {
         super();
         this.processing = false;
@@ -221,4 +221,4 @@ class ArtplayerToolThumbnail extends Emitter {
     }
 }
 
-export default ArtplayerToolThumbnail;
+window['ArtplayerToolThumbnail'] = ArtplayerToolThumbnail;

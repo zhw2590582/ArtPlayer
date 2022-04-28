@@ -15,3 +15,5 @@ export default function artplayerPluginDanmuku(option) {
         };
     };
 }
+
+window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
