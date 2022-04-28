@@ -41,16 +41,6 @@ module.exports = {
                     position: 'right',
                 },
                 {
-                    label: 'v 4.x.x',
-                    position: 'right',
-                    items: [
-                        {
-                            label: 'v 3.x.x',
-                            href: 'https://artplayer.org/document_v3/',
-                        },
-                    ],
-                },
-                {
                     label: 'English',
                     position: 'right',
                     items: [
