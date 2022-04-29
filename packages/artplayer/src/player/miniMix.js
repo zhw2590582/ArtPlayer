@@ -55,6 +55,7 @@ export default function miniMix(art) {
         },
         set(value) {
             if (value) {
+                art.normalSize = 'mini';
                 art.autoSize = false;
                 cacheStyle = $player.style.cssText;
                 addClass($player, 'art-mini');

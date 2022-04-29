@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1651202215098";
+        return "1651223535143";
     }
     static get config() {
         return _configDefault.default;
@@ -1852,22 +1852,26 @@ const nativeScreenfull = (art)=>{
             return _screenfullDefault.default.isFullscreen;
         },
         set (value) {
-            if (value) _screenfullDefault.default.request($player).then(()=>{
-                _utils.addClass($player, 'art-fullscreen');
+            if (value) {
+                art.normalSize = 'fullscreen';
                 art.aspectRatioReset = true;
                 art.autoSize = false;
-                art.emit('resize');
-                art.emit('fullscreen', true);
-                notice.show = '';
-            });
-            else _screenfullDefault.default.exit().then(()=>{
-                _utils.removeClass($player, 'art-fullscreen');
+                _screenfullDefault.default.request($player).then(()=>{
+                    _utils.addClass($player, 'art-fullscreen');
+                    art.emit('resize');
+                    art.emit('fullscreen', true);
+                    notice.show = '';
+                });
+            } else {
                 art.aspectRatioReset = true;
                 art.autoSize = art.option.autoSize;
-                art.emit('resize');
-                art.emit('fullscreen');
-                notice.show = '';
-            });
+                _screenfullDefault.default.exit().then(()=>{
+                    _utils.removeClass($player, 'art-fullscreen');
+                    art.emit('resize');
+                    art.emit('fullscreen');
+                    notice.show = '';
+                });
+            }
         }
     });
 };
@@ -1879,6 +1883,7 @@ const webkitScreenfull = (art)=>{
         },
         set (value) {
             if (value) {
+                art.normalSize = 'fullscreen';
                 $video.webkitEnterFullscreen();
                 art.emit('fullscreen', true);
                 notice.show = '';
@@ -2051,6 +2056,7 @@ function fullscreenWebMix(art) {
         },
         set (value) {
             if (value) {
+                art.normalSize = 'fullscreenWeb';
                 _utils.addClass($player, 'art-fullscreen-web');
                 art.aspectRatioReset = true;
                 art.autoSize = false;
@@ -2082,11 +2088,13 @@ function nativePip(art) {
             return document.pictureInPictureElement;
         },
         set (value) {
-            if (value) $video.requestPictureInPicture().catch((err)=>{
-                notice.show = err;
-                throw err;
-            });
-            else document.exitPictureInPicture().catch((err)=>{
+            if (value) {
+                art.normalSize = 'pip';
+                $video.requestPictureInPicture().catch((err)=>{
+                    notice.show = err;
+                    throw err;
+                });
+            } else document.exitPictureInPicture().catch((err)=>{
                 notice.show = err;
                 throw err;
             });
@@ -2108,6 +2116,7 @@ function webkitPip(art) {
         },
         set (value) {
             if (value) {
+                art.normalSize = 'pip';
                 $video.webkitSetPresentationMode('picture-in-picture');
                 art.emit('pip', true);
             } else {
@@ -2327,6 +2336,7 @@ function miniMix(art) {
         },
         set (value) {
             if (value) {
+                art.normalSize = 'mini';
                 art.autoSize = false;
                 cacheStyle = $player.style.cssText;
                 _utils.addClass($player, 'art-mini');
@@ -2499,22 +2509,16 @@ function exclusiveMix(art) {
         'fullscreen',
         'fullscreenWeb'
     ];
-    function exclusive(props) {
-        for(let index = 0; index < props.length; index++){
-            const name = props[index];
-            art.on(name, ()=>{
-                if (art[name]) props.filter((item)=>item !== name
-                ).forEach((item)=>{
-                    if (art[item]) art[item] = false;
-                });
-            });
-        }
-    }
-    exclusive(sizeProps);
     _utils.def(art, 'normalSize', {
         get () {
             return sizeProps.every((name)=>!art[name]
             );
+        },
+        set (name) {
+            sizeProps.filter((item)=>item !== name
+            ).forEach((item)=>{
+                if (art[item]) art[item] = false;
+            });
         }
     });
 }

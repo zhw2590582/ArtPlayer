@@ -219,7 +219,7 @@ export default class Danmuku {
 
     resize() {
         const { $player } = this.art.template;
-        const { left: playerLeft, width: playerWidth } = this.getRect($player);
+        const { width: playerWidth } = this.getRect($player);
 
         this.filter('wait', (danmu) => {
             if (danmu.$ref) {
@@ -228,32 +228,6 @@ export default class Danmuku {
                 danmu.$ref.style.marginLeft = '0px';
                 danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
                 danmu.$ref.style.transition = 'transform 0s linear 0s';
-            }
-        });
-
-        this.filter('emit', (danmu) => {
-            switch (danmu.mode) {
-                case 0: {
-                    const { left: danmuLeft } = this.getRect(danmu.$ref);
-                    const translateX = playerWidth - (danmuLeft - playerLeft);
-                    danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
-                    break;
-                }
-                default:
-                    break;
-            }
-        });
-
-        this.filter('stop', (danmu) => {
-            switch (danmu.mode) {
-                case 0: {
-                    const { left: danmuLeft } = this.getRect(danmu.$ref);
-                    const translateX = playerWidth - (danmuLeft - playerLeft);
-                    danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
-                    break;
-                }
-                default:
-                    break;
             }
         });
 
@@ -293,7 +267,6 @@ export default class Danmuku {
                     .forEach((danmu) => {
                         danmu.$ref = this.getDanmuRef(this.queue);
                         this.$danmuku.appendChild(danmu.$ref);
-                        danmu.$ref.__danmu__ = danmu;
                         danmu.$ref.style.visibility = 'visible';
                         danmu.$ref.style.opacity = this.option.opacity;
                         danmu.$ref.style.fontSize = `${this.option.fontSize}px`;

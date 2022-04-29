@@ -15,19 +15,20 @@ const nativeScreenfull = (art) => {
         },
         set(value) {
             if (value) {
+                art.normalSize = 'fullscreen';
+                art.aspectRatioReset = true;
+                art.autoSize = false;
                 screenfull.request($player).then(() => {
                     addClass($player, 'art-fullscreen');
-                    art.aspectRatioReset = true;
-                    art.autoSize = false;
                     art.emit('resize');
                     art.emit('fullscreen', true);
                     notice.show = '';
                 });
             } else {
+                art.aspectRatioReset = true;
+                art.autoSize = art.option.autoSize;
                 screenfull.exit().then(() => {
                     removeClass($player, 'art-fullscreen');
-                    art.aspectRatioReset = true;
-                    art.autoSize = art.option.autoSize;
                     art.emit('resize');
                     art.emit('fullscreen');
                     notice.show = '';
@@ -49,6 +50,7 @@ const webkitScreenfull = (art) => {
         },
         set(value) {
             if (value) {
+                art.normalSize = 'fullscreen';
                 $video.webkitEnterFullscreen();
                 art.emit('fullscreen', true);
                 notice.show = '';

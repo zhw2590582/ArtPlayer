@@ -1,7 +1,9 @@
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'https://artplayer.org/assets/sample/video.mp4',
+    url: '/assets/sample/video.mp4',
     autoSize: true,
+    fullscreen: true,
+    fullscreenWeb: true,
     plugins: [
         artplayerPluginDanmuku({
             danmuku: '/assets/sample/danmuku.xml',

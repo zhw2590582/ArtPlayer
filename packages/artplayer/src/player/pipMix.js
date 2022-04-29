@@ -15,6 +15,7 @@ function nativePip(art) {
         },
         set(value) {
             if (value) {
+                art.normalSize = 'pip';
                 $video.requestPictureInPicture().catch((err) => {
                     notice.show = err;
                     throw err;
@@ -48,6 +49,7 @@ function webkitPip(art) {
         },
         set(value) {
             if (value) {
+                art.normalSize = 'pip';
                 $video.webkitSetPresentationMode('picture-in-picture');
                 art.emit('pip', true);
             } else {
