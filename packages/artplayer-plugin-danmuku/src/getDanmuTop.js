@@ -1,59 +1,38 @@
 function calculatedTop(danmus) {
-    let top = 0;
-    const topMap = {};
-    for (let index = 0; index < danmus.length; index += 1) {
-        const item = danmus[index];
-        if (topMap[item.top]) {
-            topMap[item.top].push(item);
-        } else {
-            topMap[item.top] = [item];
-        }
-    }
-    const topMapKeys = Object.keys(topMap);
-
-    let maxDiff = 0;
+    // 方法1：两两对比，只要找到间隔能塞进一条弹幕的高度的，则马上插入
     for (let index = 1; index < danmus.length; index += 1) {
         const item = danmus[index];
         const prev = danmus[index - 1];
-        const prevTop = prev.top + prev.height;
-        const diff = item.top - prevTop;
-        if (diff > maxDiff) {
-            top = prevTop;
-            maxDiff = diff;
+        const prevBottom = prev.top + prev.height;
+        const diff = item.top - prevBottom;
+        if (diff >= danmus[1].height) {
+            return prevBottom;
         }
     }
 
-    if (top === 0) {
-        let maxRight = 0;
-        for (let index = 0; index < topMapKeys.length; index += 1) {
-            let minRight = danmus[0].width;
-            const topKey = topMapKeys[index];
-            const danmuArr = topMap[topKey];
-            for (let index = 0; index < danmuArr.length; index += 1) {
-                const danmu = danmuArr[index];
-                if (danmu.right < minRight) {
-                    minRight = danmu.right;
-                }
+    // 方法2：找出所有弹幕的右侧最多空白的的位置插入
+    const topMap = [];
+    for (let index = 1; index < danmus.length - 1; index += 1) {
+        const item = danmus[index];
+        if (topMap.length) {
+            const last = topMap[topMap.length - 1];
+            if (last[0].top === item.top) {
+                last.push(item);
+            } else {
+                topMap.push([item]);
             }
-
-            if (minRight > maxRight) {
-                maxRight = minRight;
-                [{ top }] = danmuArr;
-            }
+        } else {
+            topMap.push([item]);
         }
     }
 
-    if (top === 0) {
-        [top] = topMapKeys
-            .filter((item, index) => {
-                return index !== 0 && index !== topMapKeys.length - 1;
-            })
-            .sort((prev, next) => {
-                return topMap[prev].length - topMap[next].length;
-            });
-    }
+    topMap.sort((prev, next) => {
+        const nextMinRight = Math.min(...next.map((item) => item.right));
+        const prevMinRight = Math.min(...prev.map((item) => item.right));
+        return nextMinRight * next.length - prevMinRight * prev.length;
+    });
 
-    return top;
+    return topMap[0][0].top;
 }
 
 export default function getDanmuTop(ins, danmu) {

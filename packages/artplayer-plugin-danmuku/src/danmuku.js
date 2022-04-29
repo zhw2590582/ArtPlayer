@@ -23,6 +23,8 @@ export default class Danmuku {
         art.on('video:waiting', this.stop.bind(this));
         art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
+        art.on('fullscreen', this.reset.bind(this));
+        art.on('fullscreenWeb', this.reset.bind(this));
 
         this.load();
     }
@@ -266,6 +268,24 @@ export default class Danmuku {
         });
 
         return this;
+    }
+
+    reset() {
+        const { $player } = this.art.template;
+        const { width: playerWidth } = this.getRect($player);
+
+        this.filter('emit', (danmu) => {
+            if (danmu.$ref) {
+                danmu.$state = 'wait';
+                danmu.$ref.dataset.state = 'wait';
+                danmu.$ref.style.border = 'none';
+                danmu.$ref.style.visibility = 'hidden';
+                danmu.$ref.style.left = `${playerWidth}px`;
+                danmu.$ref.style.marginLeft = '0px';
+                danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+                danmu.$ref.style.transition = 'transform 0s linear 0s';
+            }
+        });
     }
 
     update() {

@@ -192,6 +192,8 @@ class Danmuku {
         art.on('video:waiting', this.stop.bind(this));
         art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
+        art.on('fullscreen', this.reset.bind(this));
+        art.on('fullscreenWeb', this.reset.bind(this));
         this.load();
     }
     static get option() {
@@ -393,6 +395,22 @@ class Danmuku {
             }
         });
         return this;
+    }
+    reset() {
+        const { $player  } = this.art.template;
+        const { width: playerWidth  } = this.getRect($player);
+        this.filter('emit', (danmu)=>{
+            if (danmu.$ref) {
+                danmu.$state = 'wait';
+                danmu.$ref.dataset.state = 'wait';
+                danmu.$ref.style.border = 'none';
+                danmu.$ref.style.visibility = 'hidden';
+                danmu.$ref.style.left = `${playerWidth}px`;
+                danmu.$ref.style.marginLeft = '0px';
+                danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+                danmu.$ref.style.transition = 'transform 0s linear 0s';
+            }
+        });
     }
     update() {
         const { $player  } = this.art.template;
@@ -611,49 +629,36 @@ function bilibiliDanmuParseFromUrl(url) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function calculatedTop(danmus) {
-    let top = 0;
-    const topMap = {};
-    for(let index3 = 0; index3 < danmus.length; index3 += 1){
-        const item = danmus[index3];
-        if (topMap[item.top]) topMap[item.top].push(item);
-        else topMap[item.top] = [
-            item
-        ];
+    // 方法1：两两对比，只要找到间隔能塞进一条弹幕的高度的，则马上插入
+    for(let index = 1; index < danmus.length; index += 1){
+        const item = danmus[index];
+        const prev = danmus[index - 1];
+        const prevBottom = prev.top + prev.height;
+        const diff = item.top - prevBottom;
+        if (diff >= danmus[1].height) return prevBottom;
     }
-    const topMapKeys = Object.keys(topMap);
-    let maxDiff = 0;
-    for(let index1 = 1; index1 < danmus.length; index1 += 1){
+    // 方法2：找出所有弹幕的右侧最多空白的的位置插入
+    const topMap = [];
+    for(let index1 = 1; index1 < danmus.length - 1; index1 += 1){
         const item = danmus[index1];
-        const prev = danmus[index1 - 1];
-        const prevTop = prev.top + prev.height;
-        const diff = item.top - prevTop;
-        if (diff > maxDiff) {
-            top = prevTop;
-            maxDiff = diff;
-        }
+        if (topMap.length) {
+            const last = topMap[topMap.length - 1];
+            if (last[0].top === item.top) last.push(item);
+            else topMap.push([
+                item
+            ]);
+        } else topMap.push([
+            item
+        ]);
     }
-    if (top === 0) {
-        let maxRight = 0;
-        for(let index = 0; index < topMapKeys.length; index += 1){
-            let minRight = danmus[0].width;
-            const topKey = topMapKeys[index];
-            const danmuArr = topMap[topKey];
-            for(let index2 = 0; index2 < danmuArr.length; index2 += 1){
-                const danmu = danmuArr[index2];
-                if (danmu.right < minRight) minRight = danmu.right;
-            }
-            if (minRight > maxRight) {
-                maxRight = minRight;
-                [{ top  }] = danmuArr;
-            }
-        }
-    }
-    if (top === 0) [top] = topMapKeys.filter((item, index)=>{
-        return index !== 0 && index !== topMapKeys.length - 1;
-    }).sort((prev, next)=>{
-        return topMap[prev].length - topMap[next].length;
+    topMap.sort((prev, next)=>{
+        const nextMinRight = Math.min(...next.map((item)=>item.right
+        ));
+        const prevMinRight = Math.min(...prev.map((item)=>item.right
+        ));
+        return nextMinRight * next.length - prevMinRight * prev.length;
     });
-    return top;
+    return topMap[0][0].top;
 }
 function getDanmuTop(ins, danmu) {
     const { $player  } = ins.art.template;
