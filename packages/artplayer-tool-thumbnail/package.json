@@ -5,6 +5,7 @@
   "description": "Thumbnail tool for ArtPlayer",
   "main": "dist/artplayer-tool-thumbnail.js",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "homepage": "https://artPlayer.org",
   "repository": {
     "type": "git",
