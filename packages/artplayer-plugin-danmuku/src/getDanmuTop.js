@@ -57,7 +57,6 @@ function calculatedTop(danmus) {
 }
 
 export default function getDanmuTop(ins, danmu) {
-    const [marginTop, marginBottom] = ins.option.margin;
     const { $player } = ins.art.template;
 
     const danmus = ins.queue
@@ -67,7 +66,7 @@ export default function getDanmuTop(ins, danmu) {
                 item.$state === 'emit' &&
                 item.$ref &&
                 item.$ref.style.fontSize === danmu.$ref.style.fontSize &&
-                item.$ref.offsetTop <= $player.clientHeight - marginBottom
+                item.$ref.offsetTop <= $player.clientHeight - ins.marginBottom
             );
         })
         .map((item) => {
@@ -82,22 +81,22 @@ export default function getDanmuTop(ins, danmu) {
         .sort((prev, next) => prev.top - next.top);
 
     if (danmus.length === 0) {
-        return marginTop;
+        return ins.marginTop;
     }
 
     danmus.unshift({
         top: 0,
         left: 0,
         right: 0,
-        height: marginTop,
+        height: ins.marginTop,
         width: $player.clientWidth,
     });
 
     danmus.push({
-        top: $player.clientHeight - marginBottom,
+        top: $player.clientHeight - ins.marginBottom,
         left: 0,
         right: 0,
-        height: marginBottom,
+        height: ins.marginBottom,
         width: $player.clientWidth,
     });
 

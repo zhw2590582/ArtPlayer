@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"lIf7X":[function(require,module,exports) {
+})({"gEVO5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _danmuku = require("./danmuku");
@@ -165,7 +165,7 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 
-},{"./danmuku":"cv7fe","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
+},{"./danmuku":"igPca","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"igPca":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _i18N = require("./i18n");
@@ -205,6 +205,8 @@ class Danmuku {
             ],
             opacity: 1,
             fontSize: 25,
+            filter: ()=>true
+            ,
             synchronousPlayback: false
         };
     }
@@ -216,11 +218,34 @@ class Danmuku {
             margin: 'array',
             opacity: 'number',
             fontSize: 'number',
+            filter: 'function',
             synchronousPlayback: 'boolean'
         };
     }
     get isRotate() {
         return this.art.plugins.autoOrientation && this.art.plugins.autoOrientation.state;
+    }
+    get marginTop() {
+        const { clamp  } = this.utils;
+        const { $player  } = this.art.template;
+        const value = this.option.margin[0];
+        if (typeof value === 'number') return clamp(value, 0, $player.clientHeight);
+        if (typeof value === 'string' && value.endsWith('%')) {
+            const ratio = parseFloat(value) / 100;
+            return clamp($player.clientHeight * ratio, 0, $player.clientHeight);
+        }
+        return Danmuku.option.margin[0];
+    }
+    get marginBottom() {
+        const { clamp  } = this.utils;
+        const { $player  } = this.art.template;
+        const value = this.option.margin[1];
+        if (typeof value === 'number') return clamp(value, 0, $player.clientHeight);
+        if (typeof value === 'string' && value.endsWith('%')) {
+            const ratio = parseFloat(value) / 100;
+            return clamp($player.clientHeight * ratio, 0, $player.clientHeight);
+        }
+        return Danmuku.option.margin[1];
     }
     filter(state, callback) {
         return this.queue.filter((danmu)=>danmu.$state === state
@@ -307,8 +332,6 @@ class Danmuku {
         this.validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
-        this.option.margin[0] = clamp(this.option.margin[0], 0, 200);
-        this.option.margin[1] = clamp(this.option.margin[1], 0, 200);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.fontSize = clamp(this.option.fontSize, 12, 100);
         this.art.emit('artplayerPluginDanmuku:config', this.option);
@@ -466,6 +489,7 @@ class Danmuku {
             time: 'number|undefined',
             border: 'boolean|undefined'
         });
+        if (!this.option.filter(danmu)) return this;
         if (!danmu.text.trim()) return this;
         if (danmu.text.length > this.option.maxlength) return this;
         if (danmu.time) danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
@@ -484,7 +508,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./i18n":"jX6xP","./bilibili":"95SuC","./getDanmuTop":"2ouQq","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jX6xP":[function(require,module,exports) {
+},{"./i18n":"cJKlZ","./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cJKlZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = {
@@ -506,7 +530,7 @@ exports.default = {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6SDkN":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -536,7 +560,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"95SuC":[function(require,module,exports) {
+},{}],"6a8GK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
@@ -583,7 +607,7 @@ function bilibiliDanmuParseFromUrl(url) {
     );
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2ouQq":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"eLxSm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function calculatedTop(danmus) {
@@ -632,10 +656,9 @@ function calculatedTop(danmus) {
     return top;
 }
 function getDanmuTop(ins, danmu) {
-    const [marginTop, marginBottom] = ins.option.margin;
     const { $player  } = ins.art.template;
     const danmus = ins.queue.filter((item)=>{
-        return item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize && item.$ref.offsetTop <= $player.clientHeight - marginBottom;
+        return item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize && item.$ref.offsetTop <= $player.clientHeight - ins.marginBottom;
     }).map((item)=>{
         return {
             top: item.$ref.offsetTop,
@@ -646,25 +669,25 @@ function getDanmuTop(ins, danmu) {
         };
     }).sort((prev, next)=>prev.top - next.top
     );
-    if (danmus.length === 0) return marginTop;
+    if (danmus.length === 0) return ins.marginTop;
     danmus.unshift({
         top: 0,
         left: 0,
         right: 0,
-        height: marginTop,
+        height: ins.marginTop,
         width: $player.clientWidth
     });
     danmus.push({
-        top: $player.clientHeight - marginBottom,
+        top: $player.clientHeight - ins.marginBottom,
         left: 0,
         right: 0,
-        height: marginBottom,
+        height: ins.marginBottom,
         width: $player.clientWidth
     });
     return calculatedTop(danmus);
 }
 exports.default = getDanmuTop;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
 
 //# sourceMappingURL=index.js.map

@@ -35,6 +35,7 @@ export default class Danmuku {
             margin: [10, 100],
             opacity: 1,
             fontSize: 25,
+            filter: () => true,
             synchronousPlayback: false,
         };
     }
@@ -47,12 +48,47 @@ export default class Danmuku {
             margin: 'array',
             opacity: 'number',
             fontSize: 'number',
+            filter: 'function',
             synchronousPlayback: 'boolean',
         };
     }
 
     get isRotate() {
         return this.art.plugins.autoOrientation && this.art.plugins.autoOrientation.state;
+    }
+
+    get marginTop() {
+        const { clamp } = this.utils;
+        const { $player } = this.art.template;
+        const value = this.option.margin[0];
+
+        if (typeof value === 'number') {
+            return clamp(value, 0, $player.clientHeight);
+        }
+
+        if (typeof value === 'string' && value.endsWith('%')) {
+            const ratio = parseFloat(value) / 100;
+            return clamp($player.clientHeight * ratio, 0, $player.clientHeight);
+        }
+
+        return Danmuku.option.margin[0];
+    }
+
+    get marginBottom() {
+        const { clamp } = this.utils;
+        const { $player } = this.art.template;
+        const value = this.option.margin[1];
+
+        if (typeof value === 'number') {
+            return clamp(value, 0, $player.clientHeight);
+        }
+
+        if (typeof value === 'string' && value.endsWith('%')) {
+            const ratio = parseFloat(value) / 100;
+            return clamp($player.clientHeight * ratio, 0, $player.clientHeight);
+        }
+
+        return Danmuku.option.margin[1];
     }
 
     filter(state, callback) {
@@ -160,8 +196,6 @@ export default class Danmuku {
 
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
-        this.option.margin[0] = clamp(this.option.margin[0], 0, 200);
-        this.option.margin[1] = clamp(this.option.margin[1], 0, 200);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.fontSize = clamp(this.option.fontSize, 12, 100);
 
@@ -348,6 +382,7 @@ export default class Danmuku {
             border: 'boolean|undefined',
         });
 
+        if (!this.option.filter(danmu)) return this;
         if (!danmu.text.trim()) return this;
         if (danmu.text.length > this.option.maxlength) return this;
 
