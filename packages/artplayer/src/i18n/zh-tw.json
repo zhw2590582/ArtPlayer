@@ -28,10 +28,10 @@
     "Web Fullscreen": "網頁全屏",
     "Exit Web Fullscreen": "退出網頁全屏",
     "Mini Player": "迷你播放器",
-    "PIP Mode": "畫中畫模式",
-    "Exit PIP Mode": "退出畫中畫模式",
-    "PIP Not Supported": "不支持畫中畫模式",
-    "Fullscreen Not Supported": "不支持全屏模式",
+    "PIP Mode": "開啟畫中畫",
+    "Exit PIP Mode": "退出畫中畫",
+    "PIP Not Supported": "不支持畫中畫",
+    "Fullscreen Not Supported": "不支持全屏",
     "Subtitle Offset": "字幕偏移",
     "Auto playback at": "已為您定位至"
 }

@@ -1,4 +1,4 @@
-import { append, tooltip } from '../utils';
+import { append, tooltip, setStyle } from '../utils';
 
 export default function fullscreen(option) {
     return (art) => ({
@@ -11,14 +11,24 @@ export default function fullscreen(option) {
                 i18n,
             } = art;
 
-            append($control, icons.fullscreen);
+            const $fullscreenOn = append($control, icons.fullscreenOn);
+            const $fullscreenOff = append($control, icons.fullscreenOff);
+            setStyle($fullscreenOff, 'display', 'none');
 
             proxy($control, 'click', () => {
                 art.fullscreen = !art.fullscreen;
             });
 
             art.on('fullscreen', (value) => {
-                tooltip($control, i18n.get(value ? 'Exit Fullscreen' : 'Fullscreen'));
+                if (value) {
+                    tooltip($control, i18n.get('Exit Fullscreen'));
+                    setStyle($fullscreenOn, 'display', 'none');
+                    setStyle($fullscreenOff, 'display', 'inline-flex');
+                } else {
+                    tooltip($control, i18n.get('Fullscreen'));
+                    setStyle($fullscreenOn, 'display', 'inline-flex');
+                    setStyle($fullscreenOff, 'display', 'none');
+                }
             });
         },
     });

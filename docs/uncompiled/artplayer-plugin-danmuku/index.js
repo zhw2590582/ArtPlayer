@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"lIf7X":[function(require,module,exports) {
+})({"gEVO5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _danmuku = require("./danmuku");
@@ -165,7 +165,37 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 
-},{"./danmuku":"cv7fe","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","./danmuku":"igPca"}],"8MjWm":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"igPca":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _i18N = require("./i18n");
@@ -414,7 +444,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./i18n":"jX6xP","./utils":"9VWnI","./bilibili":"95SuC","./getDanmuTop":"2ouQq","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jX6xP":[function(require,module,exports) {
+},{"./i18n":"cJKlZ","./utils":"5vF3n","./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"cJKlZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = {
@@ -436,37 +466,7 @@ exports.default = {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"9VWnI":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"5vF3n":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "filter", ()=>filter
@@ -509,7 +509,7 @@ function getDanmuRef(queue) {
     return $ref;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"6a8GK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
@@ -556,7 +556,7 @@ function bilibiliDanmuParseFromUrl(url) {
     );
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2ouQq":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"eLxSm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -643,6 +643,6 @@ function getDanmuTop(ins, danmu) {
 }
 exports.default = getDanmuTop;
 
-},{"./utils":"9VWnI","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
+},{"./utils":"5vF3n","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
 
 //# sourceMappingURL=index.js.map

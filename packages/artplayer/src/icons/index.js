@@ -9,8 +9,6 @@ import volumeClose from 'bundle-text:./volume-close.svg';
 import subtitle from 'bundle-text:./subtitle.svg';
 import screenshot from 'bundle-text:./screenshot.svg';
 import setting from 'bundle-text:./setting.svg';
-import fullscreen from 'bundle-text:./fullscreen.svg';
-import fullscreenWeb from 'bundle-text:./fullscreen-web.svg';
 import arrowLeft from 'bundle-text:./arrow-left.svg';
 import arrowRight from 'bundle-text:./arrow-right.svg';
 import playbackRate from 'bundle-text:./playback-rate.svg';
@@ -19,6 +17,10 @@ import config from 'bundle-text:./config.svg';
 import pip from 'bundle-text:./pip.svg';
 import lock from 'bundle-text:./lock.svg';
 import unlock from 'bundle-text:./unlock.svg';
+import fullscreenOff from 'bundle-text:./fullscreen-off.svg';
+import fullscreenOn from 'bundle-text:./fullscreen-on.svg';
+import fullscreenWebOff from 'bundle-text:./fullscreen-web-off.svg';
+import fullscreenWebOn from 'bundle-text:./fullscreen-web-on.svg';
 
 export default class Icons {
     constructor(art) {
@@ -33,8 +35,6 @@ export default class Icons {
             subtitle,
             screenshot,
             setting,
-            fullscreen,
-            fullscreenWeb,
             pip,
             arrowLeft,
             arrowRight,
@@ -43,6 +43,10 @@ export default class Icons {
             config,
             lock,
             unlock,
+            fullscreenOff,
+            fullscreenOn,
+            fullscreenWebOff,
+            fullscreenWebOn,
             ...art.option.icons,
         };
 
