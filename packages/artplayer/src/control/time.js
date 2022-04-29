@@ -3,6 +3,9 @@ import { secondToTime } from '../utils';
 export default function time(option) {
     return (art) => ({
         ...option,
+        style: {
+            cursor: 'auto',
+        },
         mounted: ($control) => {
             function getTime() {
                 const newTime = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
