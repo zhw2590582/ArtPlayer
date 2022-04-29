@@ -411,6 +411,7 @@ class Danmuku {
                         danmu.$state = 'wait';
                         danmu.$ref.dataset.state = 'wait';
                         danmu.$ref.style.border = 'none';
+                        danmu.$ref.style.visibility = 'hidden';
                         danmu.$ref.style.left = `${playerWidth}px`;
                         danmu.$ref.style.marginLeft = '0px';
                         danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
@@ -420,8 +421,9 @@ class Danmuku {
                 this.queue.filter((danmu)=>this.art.currentTime + 0.1 >= danmu.time && danmu.time >= this.art.currentTime - 0.1 && danmu.$state === 'wait'
                 ).forEach((danmu)=>{
                     danmu.$ref = this.getDanmuRef(this.queue);
-                    danmu.$ref.__danmu__ = danmu;
                     this.$danmuku.appendChild(danmu.$ref);
+                    danmu.$ref.__danmu__ = danmu;
+                    danmu.$ref.style.visibility = 'visible';
                     danmu.$ref.style.opacity = this.option.opacity;
                     danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
                     danmu.$ref.innerText = danmu.text;
