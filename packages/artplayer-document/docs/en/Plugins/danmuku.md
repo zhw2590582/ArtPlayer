@@ -37,7 +37,7 @@ Then you can access the plugin function via `window.artplayerPluginDanmuku`
 
 ### Use the damuku array
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -77,9 +77,9 @@ var art = new Artplayer({
             opacity: 1, // Opacity
             color: '#fff', // Font color
             size: 25, // Font size
-            maxlength: 50, // The maximum number of words in the danmu
-            margin: [10, 20], // Margin top and margin bottom
+            margin: ['10%', 20], // Margin top and margin bottom
             synchronousPlayback: false, // Synchronous playback speed
+            filter: (danmu) => danmu.text.length <= 50, // filter function
         }),
     ],
 });
@@ -87,7 +87,7 @@ var art = new Artplayer({
 
 ### Use the XML
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -104,7 +104,7 @@ var art = new Artplayer({
 
 ### Use asynchronous calls
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -144,7 +144,7 @@ var art = new Artplayer({
 
 Hidden or show the danmuku by methods `hide` and `show`
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -180,7 +180,7 @@ var art = new Artplayer({
 
 By attribute `ishide` judgment the current danmuku is hidden or displayed
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -215,7 +215,7 @@ var art = new Artplayer({
 
 Send a real-time danmu by method `emit`
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -249,9 +249,9 @@ var art = new Artplayer({
 
 -   Type: `Function`
 
-Changing the danmu configuration in real time through method `config`, support attributes: `speed`, `maxlength`, `margin`, `opacity`, `fontSize`, `synchronousPlayback`
+Changing the danmu configuration in real time through method `config`, support attributes: `speed`, `margin`, `opacity`, `fontSize`, `synchronousPlayback`, `filter`
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({

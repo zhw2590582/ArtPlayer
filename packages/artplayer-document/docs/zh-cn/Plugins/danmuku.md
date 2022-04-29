@@ -28,7 +28,7 @@ import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
 ### 通过 `script` 安装：
 
 ```html
-<script src="path/to/artplayer-plugin-danmuku.js"></script>
+<script src="path/to/artplayer-plugin-danmuku/index.js"></script>
 ```
 
 然后你可以通过 `window.artplayerPluginDanmuku` 访问到插件函数
@@ -37,7 +37,7 @@ import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
 
 ### 使用弹幕数组
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -77,9 +77,9 @@ var art = new Artplayer({
             opacity: 1, // 全局透明度
             color: '#fff', // 全局字体颜色
             size: 25, // 全局字体大小
-            maxlength: 50, // 全局最大长度
-            margin: [10, 20], // 距离顶部和距离底部的高度值
+            margin: ['10%', 20], // 距离顶部和距离底部的高度值
             synchronousPlayback: false, // 是否同步到播放速度
+            filter: (danmu) => danmu.text.length <= 50, // 弹幕过滤函数
         }),
     ],
 });
@@ -87,7 +87,7 @@ var art = new Artplayer({
 
 ### 使用弹幕 XML
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -104,7 +104,7 @@ var art = new Artplayer({
 
 ### 使用异步调用
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -144,7 +144,7 @@ var art = new Artplayer({
 
 通过方法 `hide` 和 `show` 进行隐藏或者显示弹幕
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -180,7 +180,7 @@ var art = new Artplayer({
 
 通过属性 `isHide` 判断当前弹幕是隐藏或者显示
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -215,7 +215,7 @@ var art = new Artplayer({
 
 通过方法 `emit` 发送一条实时弹幕
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
@@ -249,9 +249,9 @@ var art = new Artplayer({
 
 -   类型: `Function`
 
-通过方法 `config` 实时改变弹幕配置，支持属性有：`speed`、`maxlength`、`margin`、`opacity`、`fontSize`、`synchronousPlayback`
+通过方法 `config` 实时改变弹幕配置，支持属性有：`speed`、`margin`、`opacity`、`fontSize`、`synchronousPlayback`、`filter`
 
-<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku.js">▶ Run Code</div>
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({

@@ -33,7 +33,6 @@ export default class Danmuku {
         return {
             danmuku: [],
             speed: 5,
-            maxlength: 50,
             margin: [10, 100],
             opacity: 1,
             fontSize: 25,
@@ -46,7 +45,6 @@ export default class Danmuku {
         return {
             danmuku: 'array|function|string',
             speed: 'number',
-            maxlength: 'number',
             margin: 'array',
             opacity: 'number',
             fontSize: 'number',
@@ -197,7 +195,6 @@ export default class Danmuku {
         this.validator(this.option, Danmuku.scheme);
 
         this.option.speed = clamp(this.option.speed, 1, 10);
-        this.option.maxlength = clamp(this.option.maxlength, 10, 100);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.fontSize = clamp(this.option.fontSize, 12, 100);
 
@@ -404,7 +401,6 @@ export default class Danmuku {
 
         if (!this.option.filter(danmu)) return this;
         if (!danmu.text.trim()) return this;
-        if (danmu.text.length > this.option.maxlength) return this;
 
         if (danmu.time) {
             danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
