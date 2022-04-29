@@ -37,13 +37,12 @@ export default function thumbnails(options) {
                 }
             }
 
-            proxy($progress, 'mousemove', (event) => {
+            proxy($progress, 'mousemove', async (event) => {
                 if (!loading) {
                     loading = true;
-                    loadImg(option.thumbnails.url).then((img) => {
-                        image = img;
-                        isLoad = true;
-                    });
+                    const img = await loadImg(option.thumbnails.url);
+                    image = img;
+                    isLoad = true;
                 }
 
                 if (isLoad) {

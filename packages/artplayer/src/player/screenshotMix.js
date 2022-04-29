@@ -42,12 +42,11 @@ export default function screenshotMix(art) {
     });
 
     def(art, 'screenshot', {
-        value: () => {
-            return art.getDataURL().then((dataUri) => {
-                download(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
-                art.emit('screenshot', dataUri);
-                return dataUri;
-            });
+        value: async () => {
+            const dataUri = await art.getDataURL();
+            download(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
+            art.emit('screenshot', dataUri);
+            return dataUri;
         },
     });
 }

@@ -1478,14 +1478,14 @@ function urlMix(art) {
         get () {
             return $video.currentSrc;
         },
-        set (url) {
+        async set (url) {
             const typeName = option.type || _utils.getExt(url);
             const typeCallback = option.customType[typeName];
-            if (typeName && typeCallback) _utils.sleep().then(()=>{
+            if (typeName && typeCallback) {
+                await _utils.sleep();
                 art.loading.show = true;
                 typeCallback.call(art, $video, url, art);
-            });
-            else {
+            } else {
                 if (art.url && art.url !== url) art.once('video:canplay', ()=>{
                     if (art.isReady) art.emit('restart');
                 });
@@ -1826,12 +1826,11 @@ function screenshotMix(art) {
             })
     });
     _utils.def(art, 'screenshot', {
-        value: ()=>{
-            return art.getDataURL().then((dataUri)=>{
-                _utils.download(dataUri, `${option.title || 'artplayer'}_${_utils.secondToTime($video.currentTime)}.png`);
-                art.emit('screenshot', dataUri);
-                return dataUri;
-            });
+        value: async ()=>{
+            const dataUri = await art.getDataURL();
+            _utils.download(dataUri, `${option.title || 'artplayer'}_${_utils.secondToTime($video.currentTime)}.png`);
+            art.emit('screenshot', dataUri);
+            return dataUri;
         }
     });
 }
@@ -1851,26 +1850,24 @@ const nativeScreenfull = (art)=>{
         get () {
             return _screenfullDefault.default.isFullscreen;
         },
-        set (value) {
+        async set (value) {
             if (value) {
                 art.normalSize = 'fullscreen';
                 art.aspectRatioReset = true;
                 art.autoSize = false;
-                _screenfullDefault.default.request($player).then(()=>{
-                    _utils.addClass($player, 'art-fullscreen');
-                    art.emit('resize');
-                    art.emit('fullscreen', true);
-                    notice.show = '';
-                });
+                await _screenfullDefault.default.request($player);
+                _utils.addClass($player, 'art-fullscreen');
+                art.emit('resize');
+                art.emit('fullscreen', true);
+                notice.show = '';
             } else {
                 art.aspectRatioReset = true;
                 art.autoSize = art.option.autoSize;
-                _screenfullDefault.default.exit().then(()=>{
-                    _utils.removeClass($player, 'art-fullscreen');
-                    art.emit('resize');
-                    art.emit('fullscreen');
-                    notice.show = '';
-                });
+                await _screenfullDefault.default.exit();
+                _utils.removeClass($player, 'art-fullscreen');
+                art.emit('resize');
+                art.emit('fullscreen');
+                notice.show = '';
             }
         }
     });
@@ -2602,21 +2599,20 @@ function eventInit(art) {
             art.mask.show = true;
         }
     });
-    art.on('video:error', ()=>{
-        if (reconnectTime < constructor.RECONNECT_TIME_MAX) _utils.sleep(constructor.RECONNECT_SLEEP_TIME).then(()=>{
+    art.on('video:error', async ()=>{
+        if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
+            await _utils.sleep(constructor.RECONNECT_SLEEP_TIME);
             reconnectTime += 1;
             art.url = option.url;
             notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
             art.emit('error', reconnectTime);
-        });
-        else {
+        } else {
             art.loading.show = false;
             art.controls.show = false;
             _utils.addClass($player, 'art-error');
-            _utils.sleep(constructor.RECONNECT_SLEEP_TIME).then(()=>{
-                notice.show = i18n.get('Video Load Failed');
-                art.destroy(false);
-            });
+            await _utils.sleep(constructor.RECONNECT_SLEEP_TIME);
+            notice.show = i18n.get('Video Load Failed');
+            art.destroy(false);
         }
     });
     // art.on('video:loadeddata', () => {
@@ -3395,13 +3391,12 @@ function thumbnails(options) {
                     else if (posWidth > $progress.clientWidth - width / 2) _utils.setStyle($control, 'left', `${$progress.clientWidth - width}px`);
                     else _utils.setStyle($control, 'left', `${posWidth - width / 2}px`);
                 }
-                proxy($progress, 'mousemove', (event)=>{
+                proxy($progress, 'mousemove', async (event)=>{
                     if (!loading) {
                         loading = true;
-                        loadImg(option.thumbnails.url).then((img)=>{
-                            image = img;
-                            isLoad = true;
-                        });
+                        const img = await loadImg(option.thumbnails.url);
+                        image = img;
+                        isLoad = true;
                     }
                     if (isLoad) {
                         _utils.setStyle($control, 'display', 'block');
@@ -3793,17 +3788,16 @@ class Subtitle extends _componentDefault.default {
             this.art.emit('subtitleUpdate', this.activeCue.text);
         }
     }
-    switch(url, newOption = {}) {
+    async switch(url, newOption = {}) {
         const { i18n , notice , option  } = this.art;
         const subtitleOption = {
             ...option.subtitle,
             ...newOption,
             url
         };
-        return this.init(subtitleOption).then((subUrl)=>{
-            if (newOption.name) notice.show = `${i18n.get('Switch Subtitle')}: ${newOption.name}`;
-            return subUrl;
-        });
+        const subUrl = await this.init(subtitleOption);
+        if (newOption.name) notice.show = `${i18n.get('Switch Subtitle')}: ${newOption.name}`;
+        return subUrl;
     }
     init(subtitleOption) {
         _optionValidatorDefault.default(subtitleOption, _schemeDefault.default.subtitle);
@@ -4873,20 +4867,20 @@ function autoOrientation(art) {
             art.emit('resize');
         }
     });
-    art.on('fullscreen', (state)=>{
+    art.on('fullscreen', async (state)=>{
         const lastOrientation = screen.orientation.type;
         if (state) {
             const { videoWidth , videoHeight  } = $video;
             const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
             if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
                 const oppositeOrientation = lastOrientation.startsWith('portrait') ? 'landscape' : 'portrait';
-                screen.orientation.lock(oppositeOrientation).then(()=>{
-                    _utils.addClass($player, 'art-auto-orientation-fullscreen');
-                });
+                await screen.orientation.lock(oppositeOrientation);
+                _utils.addClass($player, 'art-auto-orientation-fullscreen');
             }
-        } else if (_utils.hasClass($player, 'art-auto-orientation-fullscreen')) screen.orientation.lock(lastOrientation).then(()=>{
+        } else if (_utils.hasClass($player, 'art-auto-orientation-fullscreen')) {
+            await screen.orientation.lock(lastOrientation);
             _utils.removeClass($player, 'art-auto-orientation-fullscreen');
-        });
+        }
     });
     return {
         name: 'autoOrientation',

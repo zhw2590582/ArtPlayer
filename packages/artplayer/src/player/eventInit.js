@@ -60,22 +60,20 @@ export default function eventInit(art) {
         }
     });
 
-    art.on('video:error', () => {
+    art.on('video:error', async () => {
         if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
-            sleep(constructor.RECONNECT_SLEEP_TIME).then(() => {
-                reconnectTime += 1;
-                art.url = option.url;
-                notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
-                art.emit('error', reconnectTime);
-            });
+            await sleep(constructor.RECONNECT_SLEEP_TIME);
+            reconnectTime += 1;
+            art.url = option.url;
+            notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
+            art.emit('error', reconnectTime);
         } else {
             art.loading.show = false;
             art.controls.show = false;
             addClass($player, 'art-error');
-            sleep(constructor.RECONNECT_SLEEP_TIME).then(() => {
-                notice.show = i18n.get('Video Load Failed');
-                art.destroy(false);
-            });
+            await sleep(constructor.RECONNECT_SLEEP_TIME);
+            notice.show = i18n.get('Video Load Failed');
+            art.destroy(false);
         }
     });
 

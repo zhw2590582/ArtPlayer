@@ -13,26 +13,24 @@ const nativeScreenfull = (art) => {
         get() {
             return screenfull.isFullscreen;
         },
-        set(value) {
+        async set(value) {
             if (value) {
                 art.normalSize = 'fullscreen';
                 art.aspectRatioReset = true;
                 art.autoSize = false;
-                screenfull.request($player).then(() => {
-                    addClass($player, 'art-fullscreen');
-                    art.emit('resize');
-                    art.emit('fullscreen', true);
-                    notice.show = '';
-                });
+                await screenfull.request($player);
+                addClass($player, 'art-fullscreen');
+                art.emit('resize');
+                art.emit('fullscreen', true);
+                notice.show = '';
             } else {
                 art.aspectRatioReset = true;
                 art.autoSize = art.option.autoSize;
-                screenfull.exit().then(() => {
-                    removeClass($player, 'art-fullscreen');
-                    art.emit('resize');
-                    art.emit('fullscreen');
-                    notice.show = '';
-                });
+                await screenfull.exit();
+                removeClass($player, 'art-fullscreen');
+                art.emit('resize');
+                art.emit('fullscreen');
+                notice.show = '';
             }
         },
     });

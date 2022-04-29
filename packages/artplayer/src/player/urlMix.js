@@ -10,14 +10,13 @@ export default function urlMix(art) {
         get() {
             return $video.currentSrc;
         },
-        set(url) {
+        async set(url) {
             const typeName = option.type || getExt(url);
             const typeCallback = option.customType[typeName];
             if (typeName && typeCallback) {
-                sleep().then(() => {
-                    art.loading.show = true;
-                    typeCallback.call(art, $video, url, art);
-                });
+                await sleep();
+                art.loading.show = true;
+                typeCallback.call(art, $video, url, art);
             } else {
                 if (art.url && art.url !== url) {
                     art.once('video:canplay', () => {

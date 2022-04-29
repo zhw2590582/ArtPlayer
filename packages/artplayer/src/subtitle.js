@@ -50,15 +50,14 @@ export default class Subtitle extends Component {
         }
     }
 
-    switch(url, newOption = {}) {
+    async switch(url, newOption = {}) {
         const { i18n, notice, option } = this.art;
         const subtitleOption = { ...option.subtitle, ...newOption, url };
-        return this.init(subtitleOption).then((subUrl) => {
-            if (newOption.name) {
-                notice.show = `${i18n.get('Switch Subtitle')}: ${newOption.name}`;
-            }
-            return subUrl;
-        });
+        const subUrl = await this.init(subtitleOption);
+        if (newOption.name) {
+            notice.show = `${i18n.get('Switch Subtitle')}: ${newOption.name}`;
+        }
+        return subUrl;
     }
 
     init(subtitleOption) {
