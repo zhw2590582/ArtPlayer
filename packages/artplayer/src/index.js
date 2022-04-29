@@ -223,6 +223,7 @@ Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
 
 const $style = document.createElement('style');
+$style.dataset.from = 'artplayer';
 $style.textContent = style;
 document.head.appendChild($style);
 
