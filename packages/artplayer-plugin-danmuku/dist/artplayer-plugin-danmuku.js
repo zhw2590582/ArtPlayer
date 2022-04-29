@@ -1,5 +1,5 @@
 /*!
- * artplayer-plugin-danmuku.js v4.3.0
+ * artplayer-plugin-danmuku.js v4.3.12
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2022 Harvey Zack
  * Released under the MIT License.

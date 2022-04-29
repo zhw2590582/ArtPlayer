@@ -41,7 +41,7 @@ async function build(name) {
     const filePath = `${projects[name]}/dist/index.js`;
     const newFilePath = `${projects[name]}/dist/${name}.js`;
     const code = banner + fs.readFileSync(filePath);
-    fs.writeFileSync(filePath, code);
+    fs.writeFileSync(filePath, code.replace(/\\n*\s*</g, '<').replace(/>\\n*\s*/g, '>'));
     fs.renameSync(filePath, newFilePath);
     console.log(`✨ Built ${name} ${bundles.length} bundles in ${buildTime}ms!`);
 }

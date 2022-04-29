@@ -6,6 +6,7 @@
     "types": "types/artplayer.d.ts",
     "homepage": "https://artPlayer.org",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+    "browserslist": "> 0.5%, last 2 versions, not dead",
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
     "repository": {
         "type": "git",
