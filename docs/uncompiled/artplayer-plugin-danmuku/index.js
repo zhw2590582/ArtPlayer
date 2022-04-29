@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"gEVO5":[function(require,module,exports) {
+})({"lIf7X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _danmuku = require("./danmuku");
@@ -165,37 +165,7 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","./danmuku":"igPca"}],"8MjWm":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"igPca":[function(require,module,exports) {
+},{"./danmuku":"cv7fe","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _i18N = require("./i18n");
@@ -208,6 +178,8 @@ class Danmuku {
     constructor(art, option){
         art.i18n.update(_i18NDefault.default);
         this.art = art;
+        this.utils = art.constructor.utils;
+        this.validator = art.constructor.validator;
         this.queue = [];
         this.option = {};
         this.config(option);
@@ -248,37 +220,34 @@ class Danmuku {
             synchronousPlayback: 'boolean'
         };
     }
-    load() {
-        if (typeof this.option.danmuku === 'function') this.option.danmuku().then((danmus)=>{
-            this.queue = [];
-            this.$danmuku.innerText = '';
+    async load() {
+        this.queue = [];
+        this.$danmuku.innerText = '';
+        let danmus = [];
+        try {
+            if (typeof this.option.danmuku === 'function') danmus = await this.option.danmuku();
+            else if (typeof this.option.danmuku.then === 'function') danmus = await this.option.danmuku;
+            else if (typeof this.option.danmuku === 'string') danmus = await _bilibili.bilibiliDanmuParseFromUrl(this.option.danmuku);
+            else danmus = this.option.danmuku;
+            this.utils.errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result');
+            this.art.emit('artplayerPluginDanmuku:loaded', danmus);
             danmus.forEach(this.emit.bind(this));
-            this.art.emit('artplayerPluginDanmuku:loaded');
-        });
-        else if (typeof this.option.danmuku === 'string') _bilibili.bilibiliDanmuParseFromUrl(this.option.danmuku).then((danmus)=>{
-            this.queue = [];
-            this.$danmuku.innerText = '';
-            danmus.forEach(this.emit.bind(this));
-            this.art.emit('artplayerPluginDanmuku:loaded');
-        });
-        else {
-            this.queue = [];
-            this.$danmuku.innerText = '';
-            this.option.danmuku.forEach(this.emit.bind(this));
-            this.art.emit('artplayerPluginDanmuku:loaded');
+        } catch (error) {
+            this.art.emit('artplayerPluginDanmuku:error', error);
+            throw error;
         }
         return this;
     }
     config(option) {
-        const { utils: { clamp  } , validator ,  } = this.art.constructor;
-        this.option = Object.assign({}, Danmuku.option, this.option, option);
-        validator(this.option, Danmuku.scheme);
+        const { clamp , mergeDeep  } = this.utils;
+        this.option = mergeDeep(Danmuku.option, this.option, option);
+        this.validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
-        this.option.margin[0] = clamp(this.option.margin[0], 0, 100);
-        this.option.margin[1] = clamp(this.option.margin[1], 0, 100);
+        this.option.margin[0] = clamp(this.option.margin[0], 0, 200);
+        this.option.margin[1] = clamp(this.option.margin[1], 0, 200);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.fontSize = clamp(this.option.fontSize, 12, 30);
+        this.option.fontSize = clamp(this.option.fontSize, 12, 100);
         this.art.emit('artplayerPluginDanmuku:config', this.option);
         return this;
     }
@@ -444,7 +413,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./i18n":"cJKlZ","./utils":"5vF3n","./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"cJKlZ":[function(require,module,exports) {
+},{"./i18n":"jX6xP","./utils":"9VWnI","./bilibili":"95SuC","./getDanmuTop":"2ouQq","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jX6xP":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = {
@@ -466,7 +435,37 @@ exports.default = {
     }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"5vF3n":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"9VWnI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "filter", ()=>filter
@@ -509,7 +508,7 @@ function getDanmuRef(queue) {
     return $ref;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"6a8GK":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
@@ -556,7 +555,7 @@ function bilibiliDanmuParseFromUrl(url) {
     );
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"eLxSm":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2ouQq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -643,6 +642,6 @@ function getDanmuTop(ins, danmu) {
 }
 exports.default = getDanmuTop;
 
-},{"./utils":"5vF3n","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
+},{"./utils":"9VWnI","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map

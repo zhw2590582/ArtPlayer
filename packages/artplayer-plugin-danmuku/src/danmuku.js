@@ -7,6 +7,9 @@ export default class Danmuku {
     constructor(art, option) {
         art.i18n.update(i18n);
         this.art = art;
+        this.utils = art.constructor.utils;
+        this.validator = art.constructor.validator;
+
         this.queue = [];
         this.option = {};
         this.config(option);
@@ -14,12 +17,14 @@ export default class Danmuku {
         this.isHide = false;
         this.animationFrameTimer = null;
         this.$danmuku = art.template.$danmuku;
+
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
         art.on('video:waiting', this.stop.bind(this));
         art.on('resize', this.resize.bind(this));
         art.on('destroy', this.stop.bind(this));
+
         this.load();
     }
 
@@ -47,44 +52,48 @@ export default class Danmuku {
         };
     }
 
-    load() {
-        if (typeof this.option.danmuku === 'function') {
-            this.option.danmuku().then((danmus) => {
-                this.queue = [];
-                this.$danmuku.innerText = '';
-                danmus.forEach(this.emit.bind(this));
-                this.art.emit('artplayerPluginDanmuku:loaded');
-            });
-        } else if (typeof this.option.danmuku === 'string') {
-            bilibiliDanmuParseFromUrl(this.option.danmuku).then((danmus) => {
-                this.queue = [];
-                this.$danmuku.innerText = '';
-                danmus.forEach(this.emit.bind(this));
-                this.art.emit('artplayerPluginDanmuku:loaded');
-            });
-        } else {
-            this.queue = [];
-            this.$danmuku.innerText = '';
-            this.option.danmuku.forEach(this.emit.bind(this));
-            this.art.emit('artplayerPluginDanmuku:loaded');
+    async load() {
+        this.queue = [];
+        this.$danmuku.innerText = '';
+        let danmus = [];
+
+        try {
+            if (typeof this.option.danmuku === 'function') {
+                danmus = await this.option.danmuku();
+            } else if (typeof this.option.danmuku.then === 'function') {
+                danmus = await this.option.danmuku;
+            } else if (typeof this.option.danmuku === 'string') {
+                danmus = await bilibiliDanmuParseFromUrl(this.option.danmuku);
+            } else {
+                danmus = this.option.danmuku;
+            }
+
+            this.utils.errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result');
+            this.art.emit('artplayerPluginDanmuku:loaded', danmus);
+            danmus.forEach(this.emit.bind(this));
+        } catch (error) {
+            this.art.emit('artplayerPluginDanmuku:error', error);
+            throw error;
         }
+
         return this;
     }
 
     config(option) {
-        const {
-            utils: { clamp },
-            validator,
-        } = this.art.constructor;
-        this.option = Object.assign({}, Danmuku.option, this.option, option);
-        validator(this.option, Danmuku.scheme);
+        const { clamp, mergeDeep } = this.utils;
+
+        this.option = mergeDeep(Danmuku.option, this.option, option);
+        this.validator(this.option, Danmuku.scheme);
+
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
-        this.option.margin[0] = clamp(this.option.margin[0], 0, 100);
-        this.option.margin[1] = clamp(this.option.margin[1], 0, 100);
+        this.option.margin[0] = clamp(this.option.margin[0], 0, 200);
+        this.option.margin[1] = clamp(this.option.margin[1], 0, 200);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.fontSize = clamp(this.option.fontSize, 12, 30);
+        this.option.fontSize = clamp(this.option.fontSize, 12, 100);
+
         this.art.emit('artplayerPluginDanmuku:config', this.option);
+
         return this;
     }
 

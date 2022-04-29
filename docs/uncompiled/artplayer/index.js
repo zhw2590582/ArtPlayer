@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1651200852444";
+        return "1651202215098";
     }
     static get config() {
         return _configDefault.default;
@@ -4855,6 +4855,7 @@ function autoOrientation(art) {
                 _utils.setStyle($player, 'transform-origin', '0 0');
                 _utils.setStyle($player, 'transform', `rotate(90deg) translate(0, -${viewWidth}px)`);
                 _utils.addClass($player, 'art-auto-orientation');
+                art.emit('resize');
             }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
         } else if (_utils.hasClass($player, 'art-auto-orientation')) {
             _utils.setStyle($player, 'width', null);
@@ -4865,6 +4866,7 @@ function autoOrientation(art) {
             art.aspectRatioReset = true;
             art.autoSize = option.autoSize;
             art.notice.show = '';
+            art.emit('resize');
         }
     });
     art.on('fullscreen', (state)=>{

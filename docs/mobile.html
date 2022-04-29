@@ -42,6 +42,7 @@
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
     <script src="./uncompiled/artplayer/index.js"></script>
+    <script src="./uncompiled/artplayer-plugin-danmuku/index.js"></script>
     <script>
         var vConsole = new VConsole();
 
@@ -115,6 +116,17 @@
                         return item.html;
                     },
                 },
+            ],
+            plugins: [
+                artplayerPluginDanmuku({
+                    danmuku: '/assets/sample/danmuku.xml',
+                    speed: 5,
+                    maxlength: 50,
+                    margin: [10, 50],
+                    opacity: 1,
+                    fontSize: 14,
+                    synchronousPlayback: false,
+                }),
             ],
             whitelist: ['*'],
         });
