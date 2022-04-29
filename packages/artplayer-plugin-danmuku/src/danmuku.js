@@ -231,26 +231,24 @@ export default class Danmuku {
             }
         });
 
-        // this.filter('emit', (danmu) => {
-        //     switch (danmu.mode) {
-        //         case 0: {
-        //             const { left: playerLeft, width: playerWidth } = this.getRect($player);
-        //             const { left: danmuLeft } = this.getRect(danmu.$ref);
-        //             const translateX = playerWidth - (danmuLeft - playerLeft);
-        //             danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
-        //             break;
-        //         }
-        //         default:
-        //             break;
-        //     }
-        // });
+        this.filter('emit', (danmu) => {
+            switch (danmu.mode) {
+                case 0: {
+                    const { left: danmuLeft } = this.getRect(danmu.$ref);
+                    const translateX = playerWidth - (danmuLeft - playerLeft);
+                    danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+                    break;
+                }
+                default:
+                    break;
+            }
+        });
 
         this.filter('stop', (danmu) => {
             switch (danmu.mode) {
                 case 0: {
                     const { left: danmuLeft } = this.getRect(danmu.$ref);
                     const translateX = playerWidth - (danmuLeft - playerLeft);
-                    danmu.$ref.style.left = `${playerWidth}px`;
                     danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                     break;
                 }

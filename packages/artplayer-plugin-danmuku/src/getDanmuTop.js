@@ -58,23 +58,26 @@ function calculatedTop(danmus) {
 
 export default function getDanmuTop(ins, danmu) {
     const [marginTop, marginBottom] = ins.option.margin;
-    const playerData = ins.getRect(ins.art.template.$player);
+    const { $player } = ins.art.template;
+
     const danmus = ins.queue
-        .filter(
-            (item) =>
+        .filter((item) => {
+            return (
                 item.mode === danmu.mode &&
                 item.$state === 'emit' &&
                 item.$ref &&
                 item.$ref.style.fontSize === danmu.$ref.style.fontSize &&
-                parseFloat(item.$ref.style.top) <= playerData.height - marginBottom,
-        )
+                item.$ref.offsetTop <= $player.clientHeight - marginBottom
+            );
+        })
         .map((item) => {
-            const danmuData = ins.getRect(item.$ref);
-            const { width, height } = danmuData;
-            const top = danmuData.top - playerData.top;
-            const left = danmuData.left - playerData.left;
-            const right = playerData.width - left - width;
-            return { top, left, height, width, right };
+            return {
+                top: item.$ref.offsetTop,
+                left: item.$ref.offsetLeft,
+                height: item.$ref.clientHeight,
+                width: item.$ref.clientWidth,
+                right: $player.clientWidth - item.$ref.offsetLeft - item.$ref.clientWidth,
+            };
         })
         .sort((prev, next) => prev.top - next.top);
 
@@ -87,15 +90,15 @@ export default function getDanmuTop(ins, danmu) {
         left: 0,
         right: 0,
         height: marginTop,
-        width: playerData.width,
+        width: $player.clientWidth,
     });
 
     danmus.push({
-        top: playerData.height - marginBottom,
+        top: $player.clientHeight - marginBottom,
         left: 0,
         right: 0,
         height: marginBottom,
-        width: playerData.width,
+        width: $player.clientWidth,
     });
 
     return calculatedTop(danmus);

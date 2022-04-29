@@ -369,26 +369,25 @@ class Danmuku {
                 danmu.$ref.style.transition = 'transform 0s linear 0s';
             }
         });
-        // this.filter('emit', (danmu) => {
-        //     switch (danmu.mode) {
-        //         case 0: {
-        //             const { left: playerLeft, width: playerWidth } = this.getRect($player);
-        //             const { left: danmuLeft } = this.getRect(danmu.$ref);
-        //             const translateX = playerWidth - (danmuLeft - playerLeft);
-        //             danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
-        //             break;
-        //         }
-        //         default:
-        //             break;
-        //     }
-        // });
+        this.filter('emit', (danmu)=>{
+            switch(danmu.mode){
+                case 0:
+                    {
+                        const { left: danmuLeft  } = this.getRect(danmu.$ref);
+                        const translateX = playerWidth - (danmuLeft - playerLeft);
+                        danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+                        break;
+                    }
+                default:
+                    break;
+            }
+        });
         this.filter('stop', (danmu)=>{
             switch(danmu.mode){
                 case 0:
                     {
                         const { left: danmuLeft  } = this.getRect(danmu.$ref);
                         const translateX = playerWidth - (danmuLeft - playerLeft);
-                        danmu.$ref.style.left = `${playerWidth}px`;
                         danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                         break;
                     }
@@ -659,20 +658,16 @@ function calculatedTop(danmus) {
 }
 function getDanmuTop(ins, danmu) {
     const [marginTop, marginBottom] = ins.option.margin;
-    const playerData = ins.getRect(ins.art.template.$player);
-    const danmus = ins.queue.filter((item)=>item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize && parseFloat(item.$ref.style.top) <= playerData.height - marginBottom
-    ).map((item)=>{
-        const danmuData = ins.getRect(item.$ref);
-        const { width , height  } = danmuData;
-        const top = danmuData.top - playerData.top;
-        const left = danmuData.left - playerData.left;
-        const right = playerData.width - left - width;
+    const { $player  } = ins.art.template;
+    const danmus = ins.queue.filter((item)=>{
+        return item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize && item.$ref.offsetTop <= $player.clientHeight - marginBottom;
+    }).map((item)=>{
         return {
-            top,
-            left,
-            height,
-            width,
-            right
+            top: item.$ref.offsetTop,
+            left: item.$ref.offsetLeft,
+            height: item.$ref.clientHeight,
+            width: item.$ref.clientWidth,
+            right: $player.clientWidth - item.$ref.offsetLeft - item.$ref.clientWidth
         };
     }).sort((prev, next)=>prev.top - next.top
     );
@@ -682,14 +677,14 @@ function getDanmuTop(ins, danmu) {
         left: 0,
         right: 0,
         height: marginTop,
-        width: playerData.width
+        width: $player.clientWidth
     });
     danmus.push({
-        top: playerData.height - marginBottom,
+        top: $player.clientHeight - marginBottom,
         left: 0,
         right: 0,
         height: marginBottom,
-        width: playerData.width
+        width: $player.clientWidth
     });
     return calculatedTop(danmus);
 }
