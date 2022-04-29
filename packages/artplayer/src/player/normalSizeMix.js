@@ -1,7 +1,8 @@
 import { def } from '../utils';
 
-export default function exclusiveMix(art) {
+export default function normalSizeMix(art) {
     const sizeProps = ['mini', 'pip', 'fullscreen', 'fullscreenWeb'];
+
     def(art, 'normalSize', {
         get() {
             return sizeProps.every((name) => !art[name]);
