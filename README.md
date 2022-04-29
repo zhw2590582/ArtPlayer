@@ -20,7 +20,7 @@
   <span>・</span>
   <a href="https://artplayer.org/document">API Document</a>
   <span>・</span>
-  <a href="https://artplayer.org/?libs=.%2Funcompiled%2Fartplayer-plugin-danmuku.js&example=danmuku">弹幕演示</a>
+  <a href="https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku">弹幕演示</a>
   <span>・</span>
 </p>
 
