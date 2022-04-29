@@ -170,7 +170,6 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _i18N = require("./i18n");
 var _i18NDefault = parcelHelpers.interopDefault(_i18N);
-var _utils = require("./utils");
 var _bilibili = require("./bilibili");
 var _getDanmuTop = require("./getDanmuTop");
 var _getDanmuTopDefault = parcelHelpers.interopDefault(_getDanmuTop);
@@ -220,6 +219,70 @@ class Danmuku {
             synchronousPlayback: 'boolean'
         };
     }
+    get isRotate() {
+        return this.art.plugins.autoOrientation && this.art.plugins.autoOrientation.state;
+    }
+    filter(state, callback) {
+        return this.queue.filter((danmu)=>danmu.$state === state
+        ).map(callback);
+    }
+    getRect(ref, key) {
+        const rect = ref.getBoundingClientRect();
+        const bottom = rect.bottom;
+        const height = rect.height;
+        const left = rect.left;
+        const right = rect.right;
+        const top = rect.top;
+        const width = rect.width;
+        const x = rect.x;
+        const y = rect.y;
+        const result = {
+            bottom,
+            height,
+            left,
+            right,
+            top,
+            width,
+            x,
+            y
+        };
+        if (this.isRotate) {
+            result.bottom = left;
+            result.left = top;
+            result.top = right;
+            result.right = bottom;
+            result.height = width;
+            result.width = height;
+            result.x = y;
+            result.y = x;
+        }
+        return key ? result[key] : result;
+    }
+    getDanmuRef() {
+        const result = this.queue.find((danmu)=>{
+            return danmu.$ref && danmu.$state === 'wait';
+        });
+        if (result) {
+            const { $ref  } = result;
+            result.$ref = null;
+            return $ref;
+        }
+        const $ref = document.createElement('div');
+        $ref.style.cssText = `
+            user-select: none;
+            position: absolute;
+            white-space: pre;
+            pointer-events: none;
+            perspective: 500px;
+            display: inline-block;
+            will-change: transform;
+            font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            line-height: 1.125;
+            text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
+        `;
+        return $ref;
+    }
     async load() {
         this.queue = [];
         this.$danmuku.innerText = '';
@@ -239,8 +302,8 @@ class Danmuku {
         return this;
     }
     config(option) {
-        const { clamp , mergeDeep  } = this.utils;
-        this.option = mergeDeep(Danmuku.option, this.option, option);
+        const { clamp  } = this.utils;
+        this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.maxlength = clamp(this.option.maxlength, 10, 100);
@@ -252,8 +315,9 @@ class Danmuku {
         return this;
     }
     continue() {
-        _utils.filter(this.queue, 'stop', (danmu)=>{
+        this.filter('stop', (danmu)=>{
             danmu.$state = 'emit';
+            danmu.$ref.dataset.state = 'emit';
             danmu.$lastStartTime = Date.now();
             switch(danmu.mode){
                 case 0:
@@ -268,14 +332,15 @@ class Danmuku {
     }
     suspend() {
         const { $player  } = this.art.template;
-        _utils.filter(this.queue, 'emit', (danmu)=>{
+        this.filter('emit', (danmu)=>{
             danmu.$state = 'stop';
+            danmu.$ref.dataset.state = 'stop';
             switch(danmu.mode){
                 case 0:
                     {
-                        const { left: playerLeft , width: playerWidth  } = _utils.getRect($player);
-                        const { left: danmuLeft  } = _utils.getRect(danmu.$ref);
-                        const translateX = playerWidth - (danmuLeft - playerLeft) + 5;
+                        const { left: playerLeft , width: playerWidth  } = this.getRect($player);
+                        const { left: danmuLeft  } = this.getRect(danmu.$ref);
+                        const translateX = playerWidth - (danmuLeft - playerLeft);
                         danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                         danmu.$ref.style.transition = 'transform 0s linear 0s';
                         break;
@@ -288,8 +353,8 @@ class Danmuku {
     }
     resize() {
         const { $player  } = this.art.template;
-        const danmuLeft = _utils.getRect($player, 'width');
-        _utils.filter(this.queue, 'wait', (danmu)=>{
+        const danmuLeft = this.getRect($player, 'width');
+        this.filter('wait', (danmu)=>{
             if (danmu.$ref) {
                 danmu.$ref.style.border = 'none';
                 danmu.$ref.style.left = `${danmuLeft}px`;
@@ -304,12 +369,13 @@ class Danmuku {
         const { $player  } = this.art.template;
         this.animationFrameTimer = window.requestAnimationFrame(()=>{
             if (this.art.playing && !this.isHide) {
-                const danmuLeft = _utils.getRect($player, 'width');
-                _utils.filter(this.queue, 'emit', (danmu)=>{
+                const danmuLeft = this.getRect($player, 'width');
+                this.filter('emit', (danmu)=>{
                     danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
                     danmu.$lastStartTime = Date.now();
                     if (danmu.$restTime <= 0) {
                         danmu.$state = 'wait';
+                        danmu.$ref.dataset.state = 'wait';
                         danmu.$ref.style.border = 'none';
                         danmu.$ref.style.left = `${danmuLeft}px`;
                         danmu.$ref.style.marginLeft = '0px';
@@ -319,7 +385,8 @@ class Danmuku {
                 });
                 this.queue.filter((danmu)=>this.art.currentTime + 0.1 >= danmu.time && danmu.time >= this.art.currentTime - 0.1 && danmu.$state === 'wait'
                 ).forEach((danmu)=>{
-                    danmu.$ref = _utils.getDanmuRef(this.queue);
+                    danmu.$ref = this.getDanmuRef(this.queue);
+                    danmu.$ref.__danmu__ = danmu;
                     this.$danmuku.appendChild(danmu.$ref);
                     danmu.$ref.style.opacity = this.option.opacity;
                     danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
@@ -328,12 +395,13 @@ class Danmuku {
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
                     danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
                     danmu.$lastStartTime = Date.now();
-                    const danmuWidth = _utils.getRect(danmu.$ref, 'width');
+                    const danmuWidth = this.getRect(danmu.$ref, 'width');
                     const danmuTop = _getDanmuTopDefault.default(this, danmu);
                     danmu.$state = 'emit';
+                    danmu.$ref.dataset.state = 'emit';
                     switch(danmu.mode){
                         case 0:
-                            danmu.$restWidth = danmuLeft + danmuWidth + 5;
+                            danmu.$restWidth = danmuLeft + danmuWidth;
                             danmu.$ref.style.left = `${danmuLeft}px`;
                             danmu.$ref.style.top = `${danmuTop}px`;
                             danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
@@ -380,24 +448,16 @@ class Danmuku {
         return this;
     }
     emit(danmu) {
-        const { notice , i18n  } = this.art;
-        const { utils: { clamp  } , validator ,  } = this.art.constructor;
-        validator(danmu, {
+        this.validator(danmu, {
             text: 'string',
             mode: 'number|undefined',
             color: 'string|undefined',
             time: 'number|undefined',
             border: 'boolean|undefined'
         });
-        if (!danmu.text.trim()) {
-            notice.show = i18n.get('Danmu text cannot be empty');
-            return this;
-        }
-        if (danmu.text.length > this.option.maxlength) {
-            notice.show = `${i18n.get('The length of the danmu does not exceed')} ${this.option.maxlength}`;
-            return this;
-        }
-        if (danmu.time) danmu.time = clamp(danmu.time, 0, Infinity);
+        if (!danmu.text.trim()) return this;
+        if (danmu.text.length > this.option.maxlength) return this;
+        if (danmu.time) danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
         else danmu.time = this.art.currentTime + 0.5;
         this.queue.push({
             mode: 0,
@@ -413,7 +473,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./i18n":"jX6xP","./utils":"9VWnI","./bilibili":"95SuC","./getDanmuTop":"2ouQq","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jX6xP":[function(require,module,exports) {
+},{"./i18n":"jX6xP","./bilibili":"95SuC","./getDanmuTop":"2ouQq","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jX6xP":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = {
@@ -465,50 +525,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"9VWnI":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "filter", ()=>filter
-);
-parcelHelpers.export(exports, "getRect", ()=>getRect
-);
-parcelHelpers.export(exports, "getDanmuRef", ()=>getDanmuRef
-);
-function filter(queue, state, callback) {
-    return queue.filter((danmu)=>danmu.$state === state
-    ).map(callback);
-}
-function getRect(ref, key) {
-    const result = ref.getBoundingClientRect();
-    return key ? result[key] : result;
-}
-function getDanmuRef(queue) {
-    const result = queue.find((danmu)=>{
-        return danmu.$ref && danmu.$state === 'wait';
-    });
-    if (result) {
-        const { $ref  } = result;
-        result.$ref = null;
-        return $ref;
-    }
-    const $ref = document.createElement('div');
-    $ref.style.cssText = `
-        user-select: none;
-        position: absolute;
-        white-space: pre;
-        pointer-events: none;
-        perspective: 500px;
-        display: inline-block;
-        will-change: transform;
-        font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
-        font-weight: normal;
-        line-height: 1.125;
-        text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
-    `;
-    return $ref;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
+},{}],"95SuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
@@ -558,7 +575,6 @@ function bilibiliDanmuParseFromUrl(url) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2ouQq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _utils = require("./utils");
 function calculatedTop(danmus) {
     let top = 0;
     const topMap = {};
@@ -606,10 +622,10 @@ function calculatedTop(danmus) {
 }
 function getDanmuTop(ins, danmu) {
     const [marginTop, marginBottom] = ins.option.margin;
-    const playerData = _utils.getRect(ins.art.template.$player);
+    const playerData = ins.getRect(ins.art.template.$player);
     const danmus = ins.queue.filter((item)=>item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize && parseFloat(item.$ref.style.top) <= playerData.height - marginBottom
     ).map((item)=>{
-        const danmuData = _utils.getRect(item.$ref);
+        const danmuData = ins.getRect(item.$ref);
         const { width , height  } = danmuData;
         const top = danmuData.top - playerData.top;
         const left = danmuData.left - playerData.left;
@@ -642,6 +658,6 @@ function getDanmuTop(ins, danmu) {
 }
 exports.default = getDanmuTop;
 
-},{"./utils":"9VWnI","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map

@@ -1,5 +1,4 @@
 import i18n from './i18n';
-import { filter, getRect, getDanmuRef } from './utils';
 import { bilibiliDanmuParseFromUrl } from './bilibili';
 import getDanmuTop from './getDanmuTop';
 
@@ -52,6 +51,80 @@ export default class Danmuku {
         };
     }
 
+    get isRotate() {
+        return this.art.plugins.autoOrientation && this.art.plugins.autoOrientation.state;
+    }
+
+    filter(state, callback) {
+        return this.queue.filter((danmu) => danmu.$state === state).map(callback);
+    }
+
+    getRect(ref, key) {
+        const rect = ref.getBoundingClientRect();
+
+        const bottom = rect.bottom;
+        const height = rect.height;
+        const left = rect.left;
+        const right = rect.right;
+        const top = rect.top;
+        const width = rect.width;
+        const x = rect.x;
+        const y = rect.y;
+
+        const result = {
+            bottom,
+            height,
+            left,
+            right,
+            top,
+            width,
+            x,
+            y,
+        };
+
+        if (this.isRotate) {
+            result.bottom = left;
+            result.left = top;
+            result.top = right;
+            result.right = bottom;
+            result.height = width;
+            result.width = height;
+            result.x = y;
+            result.y = x;
+        }
+
+        return key ? result[key] : result;
+    }
+
+    getDanmuRef() {
+        const result = this.queue.find((danmu) => {
+            return danmu.$ref && danmu.$state === 'wait';
+        });
+
+        if (result) {
+            const { $ref } = result;
+            result.$ref = null;
+            return $ref;
+        }
+
+        const $ref = document.createElement('div');
+        $ref.style.cssText = `
+            user-select: none;
+            position: absolute;
+            white-space: pre;
+            pointer-events: none;
+            perspective: 500px;
+            display: inline-block;
+            will-change: transform;
+            font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            line-height: 1.125;
+            text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
+        `;
+
+        return $ref;
+    }
+
     async load() {
         this.queue = [];
         this.$danmuku.innerText = '';
@@ -80,9 +153,9 @@ export default class Danmuku {
     }
 
     config(option) {
-        const { clamp, mergeDeep } = this.utils;
+        const { clamp } = this.utils;
 
-        this.option = mergeDeep(Danmuku.option, this.option, option);
+        this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
 
         this.option.speed = clamp(this.option.speed, 1, 10);
@@ -98,8 +171,9 @@ export default class Danmuku {
     }
 
     continue() {
-        filter(this.queue, 'stop', (danmu) => {
+        this.filter('stop', (danmu) => {
             danmu.$state = 'emit';
+            danmu.$ref.dataset.state = 'emit';
             danmu.$lastStartTime = Date.now();
             switch (danmu.mode) {
                 case 0:
@@ -115,13 +189,14 @@ export default class Danmuku {
 
     suspend() {
         const { $player } = this.art.template;
-        filter(this.queue, 'emit', (danmu) => {
+        this.filter('emit', (danmu) => {
             danmu.$state = 'stop';
+            danmu.$ref.dataset.state = 'stop';
             switch (danmu.mode) {
                 case 0: {
-                    const { left: playerLeft, width: playerWidth } = getRect($player);
-                    const { left: danmuLeft } = getRect(danmu.$ref);
-                    const translateX = playerWidth - (danmuLeft - playerLeft) + 5;
+                    const { left: playerLeft, width: playerWidth } = this.getRect($player);
+                    const { left: danmuLeft } = this.getRect(danmu.$ref);
+                    const translateX = playerWidth - (danmuLeft - playerLeft);
                     danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                     danmu.$ref.style.transition = 'transform 0s linear 0s';
                     break;
@@ -135,8 +210,8 @@ export default class Danmuku {
 
     resize() {
         const { $player } = this.art.template;
-        const danmuLeft = getRect($player, 'width');
-        filter(this.queue, 'wait', (danmu) => {
+        const danmuLeft = this.getRect($player, 'width');
+        this.filter('wait', (danmu) => {
             if (danmu.$ref) {
                 danmu.$ref.style.border = 'none';
                 danmu.$ref.style.left = `${danmuLeft}px`;
@@ -152,13 +227,14 @@ export default class Danmuku {
         const { $player } = this.art.template;
         this.animationFrameTimer = window.requestAnimationFrame(() => {
             if (this.art.playing && !this.isHide) {
-                const danmuLeft = getRect($player, 'width');
+                const danmuLeft = this.getRect($player, 'width');
 
-                filter(this.queue, 'emit', (danmu) => {
+                this.filter('emit', (danmu) => {
                     danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
                     danmu.$lastStartTime = Date.now();
                     if (danmu.$restTime <= 0) {
                         danmu.$state = 'wait';
+                        danmu.$ref.dataset.state = 'wait';
                         danmu.$ref.style.border = 'none';
                         danmu.$ref.style.left = `${danmuLeft}px`;
                         danmu.$ref.style.marginLeft = '0px';
@@ -175,7 +251,8 @@ export default class Danmuku {
                             danmu.$state === 'wait',
                     )
                     .forEach((danmu) => {
-                        danmu.$ref = getDanmuRef(this.queue);
+                        danmu.$ref = this.getDanmuRef(this.queue);
+                        danmu.$ref.__danmu__ = danmu;
                         this.$danmuku.appendChild(danmu.$ref);
                         danmu.$ref.style.opacity = this.option.opacity;
                         danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
@@ -187,12 +264,13 @@ export default class Danmuku {
                                 ? this.option.speed / Number(this.art.playbackRate)
                                 : this.option.speed;
                         danmu.$lastStartTime = Date.now();
-                        const danmuWidth = getRect(danmu.$ref, 'width');
+                        const danmuWidth = this.getRect(danmu.$ref, 'width');
                         const danmuTop = getDanmuTop(this, danmu);
                         danmu.$state = 'emit';
+                        danmu.$ref.dataset.state = 'emit';
                         switch (danmu.mode) {
                             case 0: {
-                                danmu.$restWidth = danmuLeft + danmuWidth + 5;
+                                danmu.$restWidth = danmuLeft + danmuWidth;
                                 danmu.$ref.style.left = `${danmuLeft}px`;
                                 danmu.$ref.style.top = `${danmuTop}px`;
                                 danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
@@ -248,14 +326,7 @@ export default class Danmuku {
     }
 
     emit(danmu) {
-        const { notice, i18n } = this.art;
-
-        const {
-            utils: { clamp },
-            validator,
-        } = this.art.constructor;
-
-        validator(danmu, {
+        this.validator(danmu, {
             text: 'string',
             mode: 'number|undefined',
             color: 'string|undefined',
@@ -263,18 +334,11 @@ export default class Danmuku {
             border: 'boolean|undefined',
         });
 
-        if (!danmu.text.trim()) {
-            notice.show = i18n.get('Danmu text cannot be empty');
-            return this;
-        }
-
-        if (danmu.text.length > this.option.maxlength) {
-            notice.show = `${i18n.get('The length of the danmu does not exceed')} ${this.option.maxlength}`;
-            return this;
-        }
+        if (!danmu.text.trim()) return this;
+        if (danmu.text.length > this.option.maxlength) return this;
 
         if (danmu.time) {
-            danmu.time = clamp(danmu.time, 0, Infinity);
+            danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
         } else {
             danmu.time = this.art.currentTime + 0.5;
         }
@@ -288,6 +352,7 @@ export default class Danmuku {
             $lastStartTime: 0,
             $restWidth: 0,
         });
+
         return this;
     }
 }

@@ -1,5 +1,3 @@
-import { getRect } from './utils';
-
 function calculatedTop(danmus) {
     let top = 0;
     const topMap = {};
@@ -60,18 +58,18 @@ function calculatedTop(danmus) {
 
 export default function getDanmuTop(ins, danmu) {
     const [marginTop, marginBottom] = ins.option.margin;
-    const playerData = getRect(ins.art.template.$player);
+    const playerData = ins.getRect(ins.art.template.$player);
     const danmus = ins.queue
         .filter(
-            item =>
+            (item) =>
                 item.mode === danmu.mode &&
                 item.$state === 'emit' &&
                 item.$ref &&
                 item.$ref.style.fontSize === danmu.$ref.style.fontSize &&
                 parseFloat(item.$ref.style.top) <= playerData.height - marginBottom,
         )
-        .map(item => {
-            const danmuData = getRect(item.$ref);
+        .map((item) => {
+            const danmuData = ins.getRect(item.$ref);
             const { width, height } = danmuData;
             const top = danmuData.top - playerData.top;
             const left = danmuData.left - playerData.left;
