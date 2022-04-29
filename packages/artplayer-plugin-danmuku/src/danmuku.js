@@ -171,24 +171,32 @@ export default class Danmuku {
     }
 
     continue() {
+        const { $player } = this.art.template;
+        const playerWidth = this.getRect($player, 'width');
+
         this.filter('stop', (danmu) => {
             danmu.$state = 'emit';
             danmu.$ref.dataset.state = 'emit';
             danmu.$lastStartTime = Date.now();
             switch (danmu.mode) {
-                case 0:
-                    danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
+                case 0: {
+                    const danmuWidth = this.getRect(danmu.$ref, 'width');
+                    const translateX = playerWidth + danmuWidth;
+                    danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                     danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                     break;
+                }
                 default:
                     break;
             }
         });
+
         return this;
     }
 
     suspend() {
         const { $player } = this.art.template;
+
         this.filter('emit', (danmu) => {
             danmu.$state = 'stop';
             danmu.$ref.dataset.state = 'stop';
@@ -205,21 +213,52 @@ export default class Danmuku {
                     break;
             }
         });
+
         return this;
     }
 
     resize() {
         const { $player } = this.art.template;
-        const danmuLeft = this.getRect($player, 'width');
+        const { left: playerLeft, width: playerWidth } = this.getRect($player);
+
         this.filter('wait', (danmu) => {
             if (danmu.$ref) {
                 danmu.$ref.style.border = 'none';
-                danmu.$ref.style.left = `${danmuLeft}px`;
+                danmu.$ref.style.left = `${playerWidth}px`;
                 danmu.$ref.style.marginLeft = '0px';
                 danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
                 danmu.$ref.style.transition = 'transform 0s linear 0s';
             }
         });
+
+        // this.filter('emit', (danmu) => {
+        //     switch (danmu.mode) {
+        //         case 0: {
+        //             const { left: playerLeft, width: playerWidth } = this.getRect($player);
+        //             const { left: danmuLeft } = this.getRect(danmu.$ref);
+        //             const translateX = playerWidth - (danmuLeft - playerLeft);
+        //             danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+        //             break;
+        //         }
+        //         default:
+        //             break;
+        //     }
+        // });
+
+        this.filter('stop', (danmu) => {
+            switch (danmu.mode) {
+                case 0: {
+                    const { left: danmuLeft } = this.getRect(danmu.$ref);
+                    const translateX = playerWidth - (danmuLeft - playerLeft);
+                    danmu.$ref.style.left = `${playerWidth}px`;
+                    danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+                    break;
+                }
+                default:
+                    break;
+            }
+        });
+
         return this;
     }
 
@@ -227,16 +266,18 @@ export default class Danmuku {
         const { $player } = this.art.template;
         this.animationFrameTimer = window.requestAnimationFrame(() => {
             if (this.art.playing && !this.isHide) {
-                const danmuLeft = this.getRect($player, 'width');
+                const playerWidth = this.getRect($player, 'width');
 
                 this.filter('emit', (danmu) => {
-                    danmu.$restTime -= (Date.now() - danmu.$lastStartTime) / 1000;
+                    const time = (Date.now() - danmu.$lastStartTime) / 1000;
+                    danmu.$emitTime += time;
+                    danmu.$restTime -= time;
                     danmu.$lastStartTime = Date.now();
                     if (danmu.$restTime <= 0) {
                         danmu.$state = 'wait';
                         danmu.$ref.dataset.state = 'wait';
                         danmu.$ref.style.border = 'none';
-                        danmu.$ref.style.left = `${danmuLeft}px`;
+                        danmu.$ref.style.left = `${playerWidth}px`;
                         danmu.$ref.style.marginLeft = '0px';
                         danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
                         danmu.$ref.style.transition = 'transform 0s linear 0s';
@@ -263,17 +304,17 @@ export default class Danmuku {
                             this.option.synchronousPlayback && this.art.playbackRate
                                 ? this.option.speed / Number(this.art.playbackRate)
                                 : this.option.speed;
-                        danmu.$lastStartTime = Date.now();
                         const danmuWidth = this.getRect(danmu.$ref, 'width');
                         const danmuTop = getDanmuTop(this, danmu);
                         danmu.$state = 'emit';
                         danmu.$ref.dataset.state = 'emit';
+                        danmu.$lastStartTime = Date.now();
                         switch (danmu.mode) {
                             case 0: {
-                                danmu.$restWidth = danmuLeft + danmuWidth;
-                                danmu.$ref.style.left = `${danmuLeft}px`;
+                                danmu.$ref.style.left = `${playerWidth}px`;
                                 danmu.$ref.style.top = `${danmuTop}px`;
-                                danmu.$ref.style.transform = `translateX(${-danmu.$restWidth}px) translateY(0px) translateZ(0px)`;
+                                const translateX = playerWidth + danmuWidth;
+                                danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                                 danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                 break;
                             }
@@ -348,9 +389,9 @@ export default class Danmuku {
             ...danmu,
             $state: 'wait',
             $ref: null,
+            $emitTime: 0,
             $restTime: 0,
             $lastStartTime: 0,
-            $restWidth: 0,
         });
 
         return this;
