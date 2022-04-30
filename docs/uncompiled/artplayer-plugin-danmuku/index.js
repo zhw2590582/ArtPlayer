@@ -647,13 +647,28 @@ function calculatedTop(danmus, danmu) {
             item
         ]);
     }
-    topMap.sort((prev, next)=>{
-        const nextMinRight = Math.min(...next.map((item)=>item.right
-        ));
-        const prevMinRight = Math.min(...prev.map((item)=>item.right
-        ));
-        return nextMinRight * next.length - prevMinRight * prev.length;
-    });
+    switch(danmu.mode){
+        case 0:
+            topMap.sort((prev, next)=>{
+                const nextMinRight = Math.min(...next.map((item)=>item.right
+                ));
+                const prevMinRight = Math.min(...prev.map((item)=>item.right
+                ));
+                return nextMinRight * next.length - prevMinRight * prev.length;
+            });
+            break;
+        case 1:
+            topMap.sort((prev, next)=>{
+                const nextMaxWidth = Math.max(...next.map((item)=>item.width
+                ));
+                const prevMaxWidth = Math.max(...prev.map((item)=>item.width
+                ));
+                return prevMaxWidth * prev.length - nextMaxWidth * next.length;
+            });
+            break;
+        default:
+            break;
+    }
     return topMap[0][0].top;
 }
 function getDanmuTop(ins, danmu) {
