@@ -604,7 +604,14 @@ function getDanmuTop(ins, danmu) {
             item
         ]);
     }
-    if (antiOverlap) ;
+    if (antiOverlap) switch(danmu.mode){
+        case 0:
+            break;
+        case 1:
+            return undefined;
+        default:
+            break;
+    }
     else {
         switch(danmu.mode){
             case 0:

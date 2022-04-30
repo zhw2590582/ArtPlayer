@@ -68,7 +68,14 @@ export default function getDanmuTop(ins, danmu) {
     }
 
     if (antiOverlap) {
-        //
+        switch (danmu.mode) {
+            case 0:
+                break;
+            case 1:
+                return undefined;
+            default:
+                break;
+        }
     } else {
         switch (danmu.mode) {
             case 0:
