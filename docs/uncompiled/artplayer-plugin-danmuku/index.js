@@ -275,6 +275,7 @@ class Danmuku {
             will-change: transform;
             font-weight: normal;
             line-height: 1.125;
+            visibility: hidden;
             font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
             text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
         `;
@@ -317,7 +318,6 @@ class Danmuku {
     makeWait(danmu) {
         danmu.$state = 'wait';
         if (danmu.$ref) {
-            danmu.$ref.dataset.state = 'wait';
             danmu.$ref.style.border = 'none';
             danmu.$ref.style.visibility = 'hidden';
             danmu.$ref.style.marginLeft = '0px';
@@ -329,7 +329,6 @@ class Danmuku {
         const { clientWidth  } = this.$player;
         this.filter('stop', (danmu)=>{
             danmu.$state = 'emit';
-            danmu.$ref.dataset.state = 'emit';
             danmu.$lastStartTime = Date.now();
             switch(danmu.mode){
                 case 0:
@@ -349,7 +348,6 @@ class Danmuku {
         const { clientWidth  } = this.$player;
         this.filter('emit', (danmu)=>{
             danmu.$state = 'stop';
-            danmu.$ref.dataset.state = 'stop';
             switch(danmu.mode){
                 case 0:
                     {
@@ -384,24 +382,23 @@ class Danmuku {
                 });
                 this.queue.filter((danmu)=>this.getReady(danmu)
                 ).forEach((danmu)=>{
-                    danmu.$ref = this.getRef(this.queue);
+                    danmu.$ref = danmu.$ref || this.getRef();
                     danmu.$ref.innerText = danmu.text;
                     this.$danmuku.appendChild(danmu.$ref);
-                    danmu.$ref.style.visibility = 'visible';
                     danmu.$ref.style.opacity = this.option.opacity;
                     danmu.$ref.style.fontSize = `${this.option.fontSize || danmu.fontSize}px`;
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
-                    const danmuTop = _getDanmuTopDefault.default(this, danmu);
-                    if (danmuTop !== undefined) {
+                    danmu.$lastStartTime = Date.now();
+                    danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
+                    const top = _getDanmuTopDefault.default(this, danmu);
+                    if (top !== undefined) {
                         danmu.$state = 'emit';
-                        danmu.$ref.dataset.state = 'emit';
-                        danmu.$lastStartTime = Date.now();
-                        danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
+                        danmu.$ref.style.visibility = 'visible';
                         switch(danmu.mode){
                             case 0:
                                 {
-                                    danmu.$ref.style.top = `${danmuTop}px`;
+                                    danmu.$ref.style.top = `${top}px`;
                                     danmu.$ref.style.left = `${clientWidth}px`;
                                     const translateX = clientWidth + danmu.$ref.clientWidth;
                                     danmu.$ref.style.transform = `translateX(${-translateX}px)`;
@@ -410,7 +407,7 @@ class Danmuku {
                                 }
                             case 1:
                                 danmu.$ref.style.left = '50%';
-                                danmu.$ref.style.top = `${danmuTop}px`;
+                                danmu.$ref.style.top = `${top}px`;
                                 danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
                                 break;
                             default:
@@ -418,7 +415,6 @@ class Danmuku {
                         }
                     } else {
                         danmu.$state = 'ready';
-                        danmu.$ref.dataset.state = 'ready';
                         danmu.$ref.style.visibility = 'hidden';
                     }
                 });
