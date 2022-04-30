@@ -124,6 +124,21 @@
                     },
                 },
             ],
+            controls: [
+                {
+                    position: 'right',
+                    html: '<img width="22" heigth="22" src="/assets/img/danmu-on.svg">',
+                    click: function (_, event) {
+                        if (art.plugins.artplayerPluginDanmuku.isHide) {
+                            art.plugins.artplayerPluginDanmuku.show();
+                            event.target.src = '/assets/img/danmu-on.svg';
+                        } else {
+                            art.plugins.artplayerPluginDanmuku.hide();
+                            event.target.src = '/assets/img/danmu-off.svg';
+                        }
+                    },
+                },
+            ],
             plugins: [
                 artplayerPluginDanmuku({
                     danmuku: '/assets/sample/danmuku.xml',
