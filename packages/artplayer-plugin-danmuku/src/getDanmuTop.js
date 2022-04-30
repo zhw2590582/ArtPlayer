@@ -1,53 +1,3 @@
-function calculatedTop(danmus, danmu) {
-    // 方法1：两两对比，只要找到间隔能塞进一条弹幕的高度的，则马上插入
-    for (let index = 1; index < danmus.length; index += 1) {
-        const item = danmus[index];
-        const prev = danmus[index - 1];
-        const prevBottom = prev.top + prev.height;
-        const diff = item.top - prevBottom;
-        if (diff >= danmu.$ref.clientHeight) {
-            return prevBottom;
-        }
-    }
-
-    // 方法2：找出所有弹幕的右侧最多空白的的位置插入
-    const topMap = [];
-    for (let index = 1; index < danmus.length - 1; index += 1) {
-        const item = danmus[index];
-        if (topMap.length) {
-            const last = topMap[topMap.length - 1];
-            if (last[0].top === item.top) {
-                last.push(item);
-            } else {
-                topMap.push([item]);
-            }
-        } else {
-            topMap.push([item]);
-        }
-    }
-
-    switch (danmu.mode) {
-        case 0:
-            topMap.sort((prev, next) => {
-                const nextMinRight = Math.min(...next.map((item) => item.right));
-                const prevMinRight = Math.min(...prev.map((item) => item.right));
-                return nextMinRight * next.length - prevMinRight * prev.length;
-            });
-            break;
-        case 1:
-            topMap.sort((prev, next) => {
-                const nextMaxWidth = Math.max(...next.map((item) => item.width));
-                const prevMaxWidth = Math.max(...prev.map((item) => item.width));
-                return prevMaxWidth * prev.length - nextMaxWidth * next.length;
-            });
-            break;
-        default:
-            break;
-    }
-
-    return topMap[0][0].top;
-}
-
 export default function getDanmuTop(ins, danmu) {
     const { $player } = ins.art.template;
 
@@ -91,5 +41,49 @@ export default function getDanmuTop(ins, danmu) {
         width: $player.clientWidth,
     });
 
-    return calculatedTop(danmus, danmu);
+    for (let index = 1; index < danmus.length; index += 1) {
+        const item = danmus[index];
+        const prev = danmus[index - 1];
+        const prevBottom = prev.top + prev.height;
+        const diff = item.top - prevBottom;
+        if (diff >= danmu.$ref.clientHeight) {
+            return prevBottom;
+        }
+    }
+
+    const topMap = [];
+    for (let index = 1; index < danmus.length - 1; index += 1) {
+        const item = danmus[index];
+        if (topMap.length) {
+            const last = topMap[topMap.length - 1];
+            if (last[0].top === item.top) {
+                last.push(item);
+            } else {
+                topMap.push([item]);
+            }
+        } else {
+            topMap.push([item]);
+        }
+    }
+
+    switch (danmu.mode) {
+        case 0:
+            topMap.sort((prev, next) => {
+                const nextMinRight = Math.min(...next.map((item) => item.right));
+                const prevMinRight = Math.min(...prev.map((item) => item.right));
+                return nextMinRight * next.length - prevMinRight * prev.length;
+            });
+            break;
+        case 1:
+            topMap.sort((prev, next) => {
+                const nextMaxWidth = Math.max(...next.map((item) => item.width));
+                const prevMaxWidth = Math.max(...prev.map((item) => item.width));
+                return prevMaxWidth * prev.length - nextMaxWidth * next.length;
+            });
+            break;
+        default:
+            break;
+    }
+
+    return topMap[0][0].top;
 }
