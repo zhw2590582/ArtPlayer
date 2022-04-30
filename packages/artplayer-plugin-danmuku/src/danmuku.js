@@ -101,7 +101,7 @@ export default class Danmuku {
         return this.isRotate ? rect.top : rect.left;
     }
 
-    getDanmuRef() {
+    getRef() {
         const result = this.queue.find((danmu) => {
             return danmu.$ref && danmu.$state === 'wait';
         });
@@ -173,6 +173,19 @@ export default class Danmuku {
         return this;
     }
 
+    makeWait(danmu) {
+        danmu.$state = 'wait';
+        if (danmu.$ref) {
+            danmu.$ref.dataset.state = 'wait';
+            danmu.$ref.style.border = 'none';
+            danmu.$ref.style.visibility = 'hidden';
+            danmu.$ref.style.marginLeft = '0px';
+            danmu.$ref.style.left = `${this.$player.clientWidth}px`;
+            danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+            danmu.$ref.style.transition = 'transform 0s linear 0s';
+        }
+    }
+
     continue() {
         const { clientWidth } = this.$player;
         this.filter('stop', (danmu) => {
@@ -215,35 +228,12 @@ export default class Danmuku {
     }
 
     resize() {
-        const { clientWidth } = this.$player;
-
-        this.queue.forEach((danmu) => {
-            if (danmu.$ref) {
-                danmu.$ref.style.border = 'none';
-                danmu.$ref.style.marginLeft = '0px';
-                danmu.$ref.style.left = `${clientWidth}px`;
-                danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
-                danmu.$ref.style.transition = 'transform 0s linear 0s';
-            }
-        });
-
+        console.log('resize');
         return this;
     }
 
     reset() {
-        const { clientWidth } = this.$player;
-        this.filter('emit', (danmu) => {
-            if (danmu.$ref) {
-                danmu.$state = 'wait';
-                danmu.$ref.dataset.state = 'wait';
-                danmu.$ref.style.border = 'none';
-                danmu.$ref.style.visibility = 'hidden';
-                danmu.$ref.style.marginLeft = '0px';
-                danmu.$ref.style.left = `${clientWidth}px`;
-                danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
-                danmu.$ref.style.transition = 'transform 0s linear 0s';
-            }
-        });
+        this.queue.forEach((danmu) => this.makeWait(danmu));
     }
 
     update() {
@@ -256,14 +246,7 @@ export default class Danmuku {
                     danmu.$restTime -= time;
                     danmu.$lastStartTime = Date.now();
                     if (danmu.$restTime <= 0) {
-                        danmu.$state = 'wait';
-                        danmu.$ref.dataset.state = 'wait';
-                        danmu.$ref.style.border = 'none';
-                        danmu.$ref.style.visibility = 'hidden';
-                        danmu.$ref.style.marginLeft = '0px';
-                        danmu.$ref.style.left = `${clientWidth}px`;
-                        danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
-                        danmu.$ref.style.transition = 'transform 0s linear 0s';
+                        this.makeWait(danmu);
                     }
                 });
 
@@ -275,7 +258,7 @@ export default class Danmuku {
                             danmu.$state === 'wait',
                     )
                     .forEach((danmu) => {
-                        danmu.$ref = this.getDanmuRef(this.queue);
+                        danmu.$ref = this.getRef(this.queue);
                         this.$danmuku.appendChild(danmu.$ref);
                         danmu.$ref.style.visibility = 'visible';
                         danmu.$ref.style.opacity = this.option.opacity;
