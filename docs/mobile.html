@@ -71,9 +71,8 @@
                 'x5-video-orientation': 'portraint',
             },
             subtitle: {
-                url: '/assets/sample/subtitle.srt',
                 style: {
-                    color: '#fff',
+                    color: '#48aff0',
                     fontSize: '14px',
                 },
             },
@@ -99,20 +98,28 @@
             settings: [
                 {
                     width: 200,
-                    html: '自定义设置',
-                    tooltip: '提示',
+                    html: '切换字幕',
+                    tooltip: '中日双语',
                     icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
                     selector: [
                         {
                             default: true,
-                            html: '设置 01',
+                            html: '中日双语',
+                            url: '/assets/sample/subtitle.srt'
                         },
                         {
-                            html: '设置 02',
+                            html: '中文',
+                            url: '/assets/sample/subtitle.cn.srt'
+                        },
+                        {
+                            html: '日文',
+                            url: '/assets/sample/subtitle.jp.srt'
                         },
                     ],
                     onSelect: function (item) {
-                        console.info('你点击了', item.html);
+                        art.subtitle.switch(item.url, {
+                            name: item.html
+                        });
                         return item.html;
                     },
                 },
