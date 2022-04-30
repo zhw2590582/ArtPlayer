@@ -103,7 +103,7 @@ export default class Danmuku {
 
     getRef() {
         const result = this.queue.find((danmu) => {
-            return danmu.$ref && danmu.$state === 'wait';
+            return danmu.$ref && (danmu.$state === 'wait' || danmu.$state === 'ready');
         });
 
         if (result) {
@@ -255,7 +255,7 @@ export default class Danmuku {
                 this.queue
                     .filter((danmu) => this.getReady(danmu))
                     .forEach((danmu) => {
-                        danmu.$ref = danmu.$ref || this.getRef();
+                        danmu.$ref = this.getRef();
                         danmu.$ref.innerText = danmu.text;
                         this.$danmuku.appendChild(danmu.$ref);
 
