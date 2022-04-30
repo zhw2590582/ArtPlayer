@@ -1,7 +1,11 @@
 import fs from 'fs';
+import cpy from 'cpy';
+import path from 'path';
 import prompts from 'prompts';
 import projects from './projects.js';
 import { Parcel } from '@parcel/core';
+
+const compiledPath = path.resolve(`docs/compiled`);
 
 async function build(name) {
     const { version } = JSON.parse(fs.readFileSync(`${projects[name]}/package.json`, 'utf-8'));
@@ -43,6 +47,7 @@ async function build(name) {
     const code = banner + fs.readFileSync(filePath);
     fs.writeFileSync(filePath, code.replace(/\\n*\s*</g, '<').replace(/>\\n*\s*/g, '>'));
     fs.renameSync(filePath, newFilePath);
+    await cpy(newFilePath, compiledPath);
     console.log(`✨ Built ${name} ${bundles.length} bundles in ${buildTime}ms!`);
 }
 
