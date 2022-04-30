@@ -316,8 +316,7 @@ class Danmuku {
             danmu.$ref.style.border = 'none';
             danmu.$ref.style.visibility = 'hidden';
             danmu.$ref.style.marginLeft = '0px';
-            danmu.$ref.style.left = `${this.$player.clientWidth}px`;
-            danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
+            danmu.$ref.style.transform = 'translateX(0px)';
             danmu.$ref.style.transition = 'transform 0s linear 0s';
         }
     }
@@ -331,7 +330,7 @@ class Danmuku {
                 case 0:
                     {
                         const translateX = clientWidth + danmu.$ref.clientWidth;
-                        danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+                        danmu.$ref.style.transform = `translateX(${-translateX}px)`;
                         danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                         break;
                     }
@@ -350,7 +349,7 @@ class Danmuku {
                 case 0:
                     {
                         const translateX = clientWidth - (this.getLeft(danmu.$ref) - this.getLeft(this.$player));
-                        danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+                        danmu.$ref.style.transform = `translateX(${-translateX}px)`;
                         danmu.$ref.style.transition = 'transform 0s linear 0s';
                         break;
                     }
@@ -400,7 +399,7 @@ class Danmuku {
                                 danmu.$ref.style.top = `${danmuTop}px`;
                                 danmu.$ref.style.left = `${clientWidth}px`;
                                 const translateX = clientWidth + danmu.$ref.clientWidth;
-                                danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
+                                danmu.$ref.style.transform = `translateX(${-translateX}px)`;
                                 danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                 break;
                             }
