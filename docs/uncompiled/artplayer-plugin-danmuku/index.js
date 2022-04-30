@@ -280,6 +280,11 @@ class Danmuku {
         `;
         return $ref;
     }
+    getReady(danmu) {
+        const { $state , time  } = danmu;
+        const { currentTime  } = this.art;
+        return $state === 'ready' || $state === 'wait' && currentTime + 0.1 >= time && time >= currentTime - 0.1;
+    }
     async load() {
         try {
             let danmus = [];
@@ -372,13 +377,12 @@ class Danmuku {
         this.animationFrameTimer = window.requestAnimationFrame(()=>{
             if (this.art.playing && !this.isHide) {
                 this.filter('emit', (danmu)=>{
-                    const time = (Date.now() - danmu.$lastStartTime) / 1000;
-                    danmu.$emitTime += time;
-                    danmu.$restTime -= time;
+                    const emitTime = (Date.now() - danmu.$lastStartTime) / 1000;
+                    danmu.$restTime -= emitTime;
                     danmu.$lastStartTime = Date.now();
                     if (danmu.$restTime <= 0) this.makeWait(danmu);
                 });
-                this.queue.filter((danmu)=>this.art.currentTime + 0.1 >= danmu.time && danmu.time >= this.art.currentTime - 0.1 && danmu.$state === 'wait'
+                this.queue.filter((danmu)=>this.getReady(danmu)
                 ).forEach((danmu)=>{
                     danmu.$ref = this.getRef(this.queue);
                     danmu.$ref.innerText = danmu.text;
@@ -388,12 +392,12 @@ class Danmuku {
                     danmu.$ref.style.fontSize = `${this.option.fontSize || danmu.fontSize}px`;
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
-                    danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
                     const danmuTop = _getDanmuTopDefault.default(this, danmu);
                     if (danmuTop !== undefined) {
                         danmu.$state = 'emit';
                         danmu.$ref.dataset.state = 'emit';
                         danmu.$lastStartTime = Date.now();
+                        danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
                         switch(danmu.mode){
                             case 0:
                                 {
@@ -412,7 +416,11 @@ class Danmuku {
                             default:
                                 break;
                         }
-                    } else this.makeWait(danmu);
+                    } else {
+                        danmu.$state = 'ready';
+                        danmu.$ref.dataset.state = 'ready';
+                        danmu.$ref.style.visibility = 'hidden';
+                    }
                 });
             }
             if (!this.isStop) this.update();
@@ -462,7 +470,6 @@ class Danmuku {
             ...danmu,
             $state: 'wait',
             $ref: null,
-            $emitTime: 0,
             $restTime: 0,
             $lastStartTime: 0
         });
