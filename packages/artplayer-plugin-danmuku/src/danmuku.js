@@ -258,37 +258,45 @@ export default class Danmuku {
                     )
                     .forEach((danmu) => {
                         danmu.$ref = this.getRef(this.queue);
+                        danmu.$ref.innerText = danmu.text;
                         this.$danmuku.appendChild(danmu.$ref);
+
                         danmu.$ref.style.visibility = 'visible';
                         danmu.$ref.style.opacity = this.option.opacity;
                         danmu.$ref.style.fontSize = `${this.option.fontSize || danmu.fontSize}px`;
-                        danmu.$ref.innerText = danmu.text;
                         danmu.$ref.style.color = danmu.color || '#fff';
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
+
                         danmu.$restTime =
                             this.option.synchronousPlayback && this.art.playbackRate
                                 ? this.option.speed / Number(this.art.playbackRate)
                                 : this.option.speed;
+
                         const danmuTop = getDanmuTop(this, danmu);
-                        danmu.$state = 'emit';
-                        danmu.$ref.dataset.state = 'emit';
-                        danmu.$lastStartTime = Date.now();
-                        switch (danmu.mode) {
-                            case 0: {
-                                danmu.$ref.style.top = `${danmuTop}px`;
-                                danmu.$ref.style.left = `${clientWidth}px`;
-                                const translateX = clientWidth + danmu.$ref.clientWidth;
-                                danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                                danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
-                                break;
+
+                        if (danmuTop !== undefined) {
+                            danmu.$state = 'emit';
+                            danmu.$ref.dataset.state = 'emit';
+                            danmu.$lastStartTime = Date.now();
+                            switch (danmu.mode) {
+                                case 0: {
+                                    danmu.$ref.style.top = `${danmuTop}px`;
+                                    danmu.$ref.style.left = `${clientWidth}px`;
+                                    const translateX = clientWidth + danmu.$ref.clientWidth;
+                                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                                    break;
+                                }
+                                case 1:
+                                    danmu.$ref.style.left = '50%';
+                                    danmu.$ref.style.top = `${danmuTop}px`;
+                                    danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
+                                    break;
+                                default:
+                                    break;
                             }
-                            case 1:
-                                danmu.$ref.style.top = `${danmuTop}px`;
-                                danmu.$ref.style.left = '50%';
-                                danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
-                                break;
-                            default:
-                                break;
+                        } else {
+                            this.makeWait(danmu);
                         }
                     });
             }
