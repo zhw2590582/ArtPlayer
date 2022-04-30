@@ -236,13 +236,13 @@ class Artplayer extends _emitterDefault.default {
         return instances;
     }
     static get version() {
-        return "4.3.13";
+        return "4.3.14";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "1651313007253";
+        return "1651326972253";
     }
     static get config() {
         return _configDefault.default;
@@ -363,7 +363,7 @@ Artplayer.CONTROL_HIDE_TIME = 3000;
 Artplayer.DB_CLICE_TIME = 300;
 Artplayer.MOBILE_AUTO_PLAYBACKRATE = 3;
 Artplayer.MOBILE_AUTO_PLAYBACKRATE_TIME = 1000;
-Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 500;
+Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 200;
 Artplayer.INFO_LOOP_TIME = 1000;
 Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
@@ -1247,7 +1247,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.3.13"}</div>
+                  <div class="art-info-content">${"4.3.14"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3695,7 +3695,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.13"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.14"}</a>`
     };
 }
 exports.default = version;
