@@ -236,13 +236,13 @@ class Artplayer extends _emitterDefault.default {
         return instances;
     }
     static get version() {
-        return "4.3.12";
+        return "4.3.13";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "1651296659960";
+        return "1651313007253";
     }
     static get config() {
         return _configDefault.default;
@@ -762,8 +762,16 @@ parcelHelpers.export(exports, "vttToBlob", ()=>vttToBlob
 );
 parcelHelpers.export(exports, "assToVtt", ()=>assToVtt
 );
+function fixSrt(srt) {
+    return srt.replace(/(\d\d:\d\d:\d\d)[,.](\d+)/g, (_, $1, $2)=>{
+        let ms = $2.slice(0, 3);
+        if ($2.length === 1) ms = $2 + '00';
+        if ($2.length === 2) ms = $2 + '0';
+        return `${$1},${ms}`;
+    });
+}
 function srtToVtt(srtText) {
-    return 'WEBVTT \r\n\r\n'.concat(srtText.replace(/{[\s\S]*?}/g, '').replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').concat('\r\n\r\n'));
+    return 'WEBVTT \r\n\r\n'.concat(fixSrt(srtText).replace(/\{\\([ibu])\}/g, '</$1>').replace(/\{\\([ibu])1\}/g, '<$1>').replace(/\{([ibu])\}/g, '<$1>').replace(/\{\/([ibu])\}/g, '</$1>').replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2').replace(/{[\s\S]*?}/g, '').concat('\r\n\r\n'));
 }
 function vttToBlob(vttText) {
     return URL.createObjectURL(new Blob([
@@ -1239,7 +1247,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.3.12"}</div>
+                  <div class="art-info-content">${"4.3.13"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3687,7 +3695,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.12"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.13"}</a>`
     };
 }
 exports.default = version;

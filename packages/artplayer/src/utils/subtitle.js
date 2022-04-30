@@ -1,12 +1,25 @@
+function fixSrt(srt) {
+    return srt.replace(/(\d\d:\d\d:\d\d)[,.](\d+)/g, (_, $1, $2) => {
+        let ms = $2.slice(0, 3);
+        if ($2.length === 1) {
+            ms = $2 + '00';
+        }
+        if ($2.length === 2) {
+            ms = $2 + '0';
+        }
+        return `${$1},${ms}`;
+    });
+}
+
 export function srtToVtt(srtText) {
     return 'WEBVTT \r\n\r\n'.concat(
-        srtText
-            .replace(/{[\s\S]*?}/g, '')
+        fixSrt(srtText)
             .replace(/\{\\([ibu])\}/g, '</$1>')
             .replace(/\{\\([ibu])1\}/g, '<$1>')
             .replace(/\{([ibu])\}/g, '<$1>')
             .replace(/\{\/([ibu])\}/g, '</$1>')
             .replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2')
+            .replace(/{[\s\S]*?}/g, '')
             .concat('\r\n\r\n'),
     );
 }
