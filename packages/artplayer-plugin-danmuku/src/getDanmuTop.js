@@ -1,11 +1,11 @@
-function calculatedTop(danmus) {
+function calculatedTop(danmus, danmu) {
     // 方法1：两两对比，只要找到间隔能塞进一条弹幕的高度的，则马上插入
     for (let index = 1; index < danmus.length; index += 1) {
         const item = danmus[index];
         const prev = danmus[index - 1];
         const prevBottom = prev.top + prev.height;
         const diff = item.top - prevBottom;
-        if (diff >= danmus[1].height) {
+        if (diff >= danmu.$ref.clientHeight) {
             return prevBottom;
         }
     }
@@ -41,10 +41,9 @@ export default function getDanmuTop(ins, danmu) {
     const danmus = ins.queue
         .filter((item) => {
             return (
-                item.mode === danmu.mode &&
-                item.$state === 'emit' &&
                 item.$ref &&
-                item.$ref.style.fontSize === danmu.$ref.style.fontSize &&
+                item.$state === 'emit' &&
+                item.mode === danmu.mode &&
                 item.$ref.offsetTop <= $player.clientHeight - ins.marginBottom
             );
         })
@@ -79,5 +78,5 @@ export default function getDanmuTop(ins, danmu) {
         width: $player.clientWidth,
     });
 
-    return calculatedTop(danmus);
+    return calculatedTop(danmus, danmu);
 }

@@ -332,7 +332,7 @@ class Danmuku {
         this.validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.fontSize = clamp(this.option.fontSize, 12, 100);
+        this.option.fontSize = clamp(this.option.fontSize, 0, 100);
         this.art.emit('artplayerPluginDanmuku:config', this.option);
         return this;
     }
@@ -436,7 +436,7 @@ class Danmuku {
                     this.$danmuku.appendChild(danmu.$ref);
                     danmu.$ref.style.visibility = 'visible';
                     danmu.$ref.style.opacity = this.option.opacity;
-                    danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
+                    danmu.$ref.style.fontSize = `${this.option.fontSize || danmu.fontSize}px`;
                     danmu.$ref.innerText = danmu.text;
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
@@ -624,14 +624,14 @@ function bilibiliDanmuParseFromUrl(url) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"eLxSm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-function calculatedTop(danmus) {
+function calculatedTop(danmus, danmu) {
     // 方法1：两两对比，只要找到间隔能塞进一条弹幕的高度的，则马上插入
     for(let index = 1; index < danmus.length; index += 1){
         const item = danmus[index];
         const prev = danmus[index - 1];
         const prevBottom = prev.top + prev.height;
         const diff = item.top - prevBottom;
-        if (diff >= danmus[1].height) return prevBottom;
+        if (diff >= danmu.$ref.clientHeight) return prevBottom;
     }
     // 方法2：找出所有弹幕的右侧最多空白的的位置插入
     const topMap = [];
@@ -659,7 +659,7 @@ function calculatedTop(danmus) {
 function getDanmuTop(ins, danmu) {
     const { $player  } = ins.art.template;
     const danmus = ins.queue.filter((item)=>{
-        return item.mode === danmu.mode && item.$state === 'emit' && item.$ref && item.$ref.style.fontSize === danmu.$ref.style.fontSize && item.$ref.offsetTop <= $player.clientHeight - ins.marginBottom;
+        return item.$ref && item.$state === 'emit' && item.mode === danmu.mode && item.$ref.offsetTop <= $player.clientHeight - ins.marginBottom;
     }).map((item)=>{
         return {
             top: item.$ref.offsetTop,
@@ -685,7 +685,7 @@ function getDanmuTop(ins, danmu) {
         height: ins.marginBottom,
         width: $player.clientWidth
     });
-    return calculatedTop(danmus);
+    return calculatedTop(danmus, danmu);
 }
 exports.default = getDanmuTop;
 
