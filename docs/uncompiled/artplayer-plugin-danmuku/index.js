@@ -168,14 +168,11 @@ window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 },{"./danmuku":"igPca","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"igPca":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _i18N = require("./i18n");
-var _i18NDefault = parcelHelpers.interopDefault(_i18N);
 var _bilibili = require("./bilibili");
 var _getDanmuTop = require("./getDanmuTop");
 var _getDanmuTopDefault = parcelHelpers.interopDefault(_getDanmuTop);
 class Danmuku {
     constructor(art, option){
-        art.i18n.update(_i18NDefault.default);
         this.art = art;
         this.utils = art.constructor.utils;
         this.validator = art.constructor.validator;
@@ -186,6 +183,7 @@ class Danmuku {
         this.isHide = false;
         this.animationFrameTimer = null;
         this.$danmuku = art.template.$danmuku;
+        this.$player = art.template.$player;
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
@@ -208,6 +206,7 @@ class Danmuku {
             fontSize: 25,
             filter: ()=>true
             ,
+            antiOverlap: false,
             synchronousPlayback: false
         };
     }
@@ -219,6 +218,7 @@ class Danmuku {
             opacity: 'number',
             fontSize: 'number',
             filter: 'function',
+            antiOverlap: 'boolean',
             synchronousPlayback: 'boolean'
         };
     }
@@ -251,37 +251,9 @@ class Danmuku {
         return this.queue.filter((danmu)=>danmu.$state === state
         ).map(callback);
     }
-    getRect(ref, key) {
-        const rect = ref.getBoundingClientRect();
-        const bottom = rect.bottom;
-        const height = rect.height;
-        const left = rect.left;
-        const right = rect.right;
-        const top = rect.top;
-        const width = rect.width;
-        const x = rect.x;
-        const y = rect.y;
-        const result = {
-            bottom,
-            height,
-            left,
-            right,
-            top,
-            width,
-            x,
-            y
-        };
-        if (this.isRotate) {
-            result.bottom = left;
-            result.left = top;
-            result.top = right;
-            result.right = bottom;
-            result.height = width;
-            result.width = height;
-            result.x = y;
-            result.y = x;
-        }
-        return key ? result[key] : result;
+    getLeft($ref) {
+        const rect = $ref.getBoundingClientRect();
+        return this.isRotate ? rect.top : rect.left;
     }
     getDanmuRef() {
         const result = this.queue.find((danmu)=>{
@@ -337,8 +309,6 @@ class Danmuku {
         return this;
     }
     continue() {
-        const { $player  } = this.art.template;
-        const playerWidth = this.getRect($player, 'width');
         this.filter('stop', (danmu)=>{
             danmu.$state = 'emit';
             danmu.$ref.dataset.state = 'emit';
@@ -346,8 +316,7 @@ class Danmuku {
             switch(danmu.mode){
                 case 0:
                     {
-                        const danmuWidth = this.getRect(danmu.$ref, 'width');
-                        const translateX = playerWidth + danmuWidth;
+                        const translateX = this.$player.clientWidth + danmu.$ref.clientWidth;
                         danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                         danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                         break;
@@ -359,16 +328,13 @@ class Danmuku {
         return this;
     }
     suspend() {
-        const { $player  } = this.art.template;
         this.filter('emit', (danmu)=>{
             danmu.$state = 'stop';
             danmu.$ref.dataset.state = 'stop';
             switch(danmu.mode){
                 case 0:
                     {
-                        const { left: playerLeft , width: playerWidth  } = this.getRect($player);
-                        const { left: danmuLeft  } = this.getRect(danmu.$ref);
-                        const translateX = playerWidth - (danmuLeft - playerLeft);
+                        const translateX = this.$player.clientWidth - (this.getLeft(danmu.$ref) - this.getLeft(this.$player));
                         danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                         danmu.$ref.style.transition = 'transform 0s linear 0s';
                         break;
@@ -380,13 +346,11 @@ class Danmuku {
         return this;
     }
     resize() {
-        const { $player  } = this.art.template;
-        const { width: playerWidth  } = this.getRect($player);
         this.filter('wait', (danmu)=>{
             if (danmu.$ref) {
                 danmu.$ref.style.border = 'none';
-                danmu.$ref.style.left = `${playerWidth}px`;
                 danmu.$ref.style.marginLeft = '0px';
+                danmu.$ref.style.left = `${this.$player.clientWidth}px`;
                 danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
                 danmu.$ref.style.transition = 'transform 0s linear 0s';
             }
@@ -394,26 +358,22 @@ class Danmuku {
         return this;
     }
     reset() {
-        const { $player  } = this.art.template;
-        const { width: playerWidth  } = this.getRect($player);
         this.filter('emit', (danmu)=>{
             if (danmu.$ref) {
                 danmu.$state = 'wait';
                 danmu.$ref.dataset.state = 'wait';
                 danmu.$ref.style.border = 'none';
                 danmu.$ref.style.visibility = 'hidden';
-                danmu.$ref.style.left = `${playerWidth}px`;
                 danmu.$ref.style.marginLeft = '0px';
+                danmu.$ref.style.left = `${this.$player.clientWidth}px`;
                 danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
                 danmu.$ref.style.transition = 'transform 0s linear 0s';
             }
         });
     }
     update() {
-        const { $player  } = this.art.template;
         this.animationFrameTimer = window.requestAnimationFrame(()=>{
             if (this.art.playing && !this.isHide) {
-                const playerWidth = this.getRect($player, 'width');
                 this.filter('emit', (danmu)=>{
                     const time = (Date.now() - danmu.$lastStartTime) / 1000;
                     danmu.$emitTime += time;
@@ -424,8 +384,8 @@ class Danmuku {
                         danmu.$ref.dataset.state = 'wait';
                         danmu.$ref.style.border = 'none';
                         danmu.$ref.style.visibility = 'hidden';
-                        danmu.$ref.style.left = `${playerWidth}px`;
                         danmu.$ref.style.marginLeft = '0px';
+                        danmu.$ref.style.left = `${this.$player.clientWidth}px`;
                         danmu.$ref.style.transform = 'translateX(0px) translateY(0px) translateZ(0px)';
                         danmu.$ref.style.transition = 'transform 0s linear 0s';
                     }
@@ -441,7 +401,6 @@ class Danmuku {
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
                     danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
-                    const danmuWidth = this.getRect(danmu.$ref, 'width');
                     const danmuTop = _getDanmuTopDefault.default(this, danmu);
                     danmu.$state = 'emit';
                     danmu.$ref.dataset.state = 'emit';
@@ -449,9 +408,9 @@ class Danmuku {
                     switch(danmu.mode){
                         case 0:
                             {
-                                danmu.$ref.style.left = `${playerWidth}px`;
                                 danmu.$ref.style.top = `${danmuTop}px`;
-                                const translateX = playerWidth + danmuWidth;
+                                danmu.$ref.style.left = `${this.$player.clientWidth}px`;
+                                const translateX = this.$player.clientWidth + danmu.$ref.clientWidth;
                                 danmu.$ref.style.transform = `translateX(${-translateX}px) translateY(0px) translateZ(0px)`;
                                 danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                 break;
@@ -459,7 +418,7 @@ class Danmuku {
                         case 1:
                             danmu.$ref.style.top = `${danmuTop}px`;
                             danmu.$ref.style.left = '50%';
-                            danmu.$ref.style.marginLeft = `-${danmuWidth / 2}px`;
+                            danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
                             break;
                         default:
                             break;
@@ -504,8 +463,8 @@ class Danmuku {
             time: 'number|undefined',
             border: 'boolean|undefined'
         });
-        if (!this.option.filter(danmu)) return this;
         if (!danmu.text.trim()) return this;
+        if (!this.option.filter(danmu)) return this;
         if (danmu.time) danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
         else danmu.time = this.art.currentTime + 0.5;
         this.queue.push({
@@ -522,59 +481,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./i18n":"cJKlZ","./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cJKlZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-exports.default = {
-    'zh-cn': {
-        'Danmu opacity': '弹幕透明度',
-        'Danmu speed': '弹幕速度',
-        'Danmu size': '弹幕大小',
-        'Danmu text cannot be empty': '弹幕文本不能为空',
-        'The length of the danmu does not exceed': '弹幕文本字数不能超过',
-        'Danmu speed synchronous playback multiple': '弹幕速度同步播放倍数'
-    },
-    'zh-tw': {
-        'Danmu opacity': '彈幕透明度',
-        'Danmu speed': '彈幕速度',
-        'Danmu size': '弹幕大小',
-        'Danmu text cannot be empty': '彈幕文本不能為空',
-        'The length of the danmu does not exceed': '彈幕文本字數不能超過',
-        'Danmu speed synchronous playback multiple': '彈幕速度同步播放倍數'
-    }
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6SDkN":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"6a8GK":[function(require,module,exports) {
+},{"./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6a8GK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
@@ -621,7 +528,37 @@ function bilibiliDanmuParseFromUrl(url) {
     );
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"eLxSm":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6SDkN":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"eLxSm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function calculatedTop(danmus, danmu) {
