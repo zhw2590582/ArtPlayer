@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import servor from 'servor';
-import inquirer from 'inquirer';
+import prompts from 'prompts';
 import { fileURLToPath } from 'url';
 import projects from './projects.js';
 import { Parcel } from '@parcel/core';
@@ -62,15 +62,22 @@ async function develop(name) {
     });
 }
 
-inquirer
-    .prompt([
-        {
-            type: 'list',
-            message: 'Which project do you want to develop?',
-            name: 'project',
-            choices: Object.keys(projects),
-        },
-    ])
-    .then((answers) => {
-        develop(answers.project);
+(async () => {
+    const response = await prompts({
+        type: 'select',
+        name: 'value',
+        message: 'Which project do you want to develop?',
+        choices: Object.keys(projects).map((name) => {
+            return {
+                title: name,
+                value: name,
+                description: projects[name],
+            };
+        }),
+        initial: 0,
     });
+
+    if (response.value) {
+        develop(response.value);
+    }
+})();

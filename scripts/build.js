@@ -1,5 +1,5 @@
 import fs from 'fs';
-import inquirer from 'inquirer';
+import prompts from 'prompts';
 import projects from './projects.js';
 import { Parcel } from '@parcel/core';
 
@@ -56,16 +56,23 @@ if (process.argv.pop() === 'all') {
         console.log(`✨ Finished building all packages!`);
     });
 } else {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                message: 'Which project do you want to build?',
-                name: 'project',
-                choices: Object.keys(projects),
-            },
-        ])
-        .then((answers) => {
-            build(answers.project);
+    (async () => {
+        const response = await prompts({
+            type: 'select',
+            name: 'value',
+            message: 'Which project do you want to build?',
+            choices: Object.keys(projects).map((name) => {
+                return {
+                    title: name,
+                    value: name,
+                    description: projects[name],
+                };
+            }),
+            initial: 0,
         });
+
+        if (response.value) {
+            build(response.value);
+        }
+    })();
 }
