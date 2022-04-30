@@ -148,7 +148,7 @@
                     maxlength: 100,
                     margin: ['10%', 60],
                     synchronousPlayback: false,
-                    filter: (danmu) => danmu.mode === 0,
+                    filter: (danmu) => danmu.text.length < 50,
                 }),
             ],
             whitelist: ['*'],
