@@ -555,16 +555,17 @@ exports.export = function(dest, destName, get) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getDanmuTop(ins, danmu) {
-    const { $player  } = ins.art.template;
+    const { clientWidth , clientHeight  } = ins.$player;
+    const { antiOverlap  } = ins.option;
     const danmus = ins.queue.filter((item)=>{
-        return item.$ref && item.$state === 'emit' && item.mode === danmu.mode && item.$ref.offsetTop <= $player.clientHeight - ins.marginBottom;
+        return item.$ref && item.$state === 'emit' && item.mode === danmu.mode && item.$ref.offsetTop <= clientHeight - ins.marginBottom;
     }).map((item)=>{
         return {
             top: item.$ref.offsetTop,
             left: item.$ref.offsetLeft,
             height: item.$ref.clientHeight,
             width: item.$ref.clientWidth,
-            right: $player.clientWidth - item.$ref.offsetLeft - item.$ref.clientWidth
+            right: clientWidth - item.$ref.offsetLeft - item.$ref.clientWidth
         };
     }).sort((prev, next)=>prev.top - next.top
     );
@@ -574,14 +575,14 @@ function getDanmuTop(ins, danmu) {
         left: 0,
         right: 0,
         height: ins.marginTop,
-        width: $player.clientWidth
+        width: clientWidth
     });
     danmus.push({
-        top: $player.clientHeight - ins.marginBottom,
+        top: clientHeight - ins.marginBottom,
         left: 0,
         right: 0,
         height: ins.marginBottom,
-        width: $player.clientWidth
+        width: clientWidth
     });
     for(let index = 1; index < danmus.length; index += 1){
         const item = danmus[index];
@@ -603,29 +604,32 @@ function getDanmuTop(ins, danmu) {
             item
         ]);
     }
-    switch(danmu.mode){
-        case 0:
-            topMap.sort((prev, next)=>{
-                const nextMinRight = Math.min(...next.map((item)=>item.right
-                ));
-                const prevMinRight = Math.min(...prev.map((item)=>item.right
-                ));
-                return nextMinRight * next.length - prevMinRight * prev.length;
-            });
-            break;
-        case 1:
-            topMap.sort((prev, next)=>{
-                const nextMaxWidth = Math.max(...next.map((item)=>item.width
-                ));
-                const prevMaxWidth = Math.max(...prev.map((item)=>item.width
-                ));
-                return prevMaxWidth * prev.length - nextMaxWidth * next.length;
-            });
-            break;
-        default:
-            break;
+    if (antiOverlap) ;
+    else {
+        switch(danmu.mode){
+            case 0:
+                topMap.sort((prev, next)=>{
+                    const nextMinRight = Math.min(...next.map((item)=>item.right
+                    ));
+                    const prevMinRight = Math.min(...prev.map((item)=>item.right
+                    ));
+                    return nextMinRight * next.length - prevMinRight * prev.length;
+                });
+                break;
+            case 1:
+                topMap.sort((prev, next)=>{
+                    const nextMaxWidth = Math.max(...next.map((item)=>item.width
+                    ));
+                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width
+                    ));
+                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;
+                });
+                break;
+            default:
+                break;
+        }
+        return topMap[0][0].top;
     }
-    return topMap[0][0].top;
 }
 exports.default = getDanmuTop;
 
