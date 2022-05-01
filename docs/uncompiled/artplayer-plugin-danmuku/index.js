@@ -554,17 +554,21 @@ exports.export = function(dest, destName, get) {
 },{}],"eLxSm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-function getData(clientWidth, item) {
+function getData(ins, clientLeft, clientWidth, item) {
     const top = item.$ref.offsetTop;
-    const left = item.$ref.offsetLeft;
+    const left = ins.getLeft(item.$ref) - clientLeft;
     const height = item.$ref.clientHeight;
     const width = item.$ref.clientWidth;
     const distance = left + width;
     const right = clientWidth - distance;
     const speed = distance / item.$restTime;
     const mode = item.mode;
+    const time = item.$restTime;
+    const $ref = item.$ref;
     return {
+        $ref,
         mode,
+        time,
         top,
         left,
         height,
@@ -575,13 +579,14 @@ function getData(clientWidth, item) {
     };
 }
 function getDanmuTop(ins, danmu) {
+    const clientLeft = ins.getLeft(ins.$player);
     const { clientWidth , clientHeight  } = ins.$player;
     const { antiOverlap  } = ins.option;
     const { marginBottom , marginTop  } = ins;
-    const target = getData(clientWidth, danmu);
+    const target = getData(ins, clientLeft, clientWidth, danmu);
     const danmus = ins.queue.filter((item)=>{
         return item.$ref && item.$state === 'emit' && item.mode === target.mode && item.$ref.offsetTop <= clientHeight - marginBottom;
-    }).map((item)=>getData(clientWidth, item)
+    }).map((item)=>getData(ins, clientLeft, clientWidth, item)
     ).sort((prev, next)=>prev.top - next.top
     );
     if (danmus.length === 0) return marginTop;
@@ -623,6 +628,12 @@ function getDanmuTop(ins, danmu) {
             item
         ]);
     }
+    // const test = topMap.map((list) => {
+    //     return list.map((item) => {
+    //         return target.speed * item.time;
+    //     });
+    // });
+    console.log(topMap);
     if (antiOverlap) switch(target.mode){
         case 0:
             break;
