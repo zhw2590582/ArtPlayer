@@ -9,6 +9,7 @@ export default class Danmuku {
 
         this.queue = [];
         this.option = {};
+        this.$refs = [];
         this.config(option);
         this.isStop = false;
         this.isHide = false;
@@ -102,16 +103,10 @@ export default class Danmuku {
     }
 
     getRef() {
-        const result = this.queue.find((danmu) => {
-            return danmu.$ref && danmu.$state === 'wait';
-        });
+        const $refCache = this.$refs.pop();
+        if ($refCache) return $refCache;
 
-        if (result) {
-            const { $ref } = result;
-            result.$ref = null;
-            return $ref;
-        }
-
+        console.log(this.$danmuku.children.length, this.$refs.length);
         const $ref = document.createElement('div');
 
         $ref.style.cssText = `
@@ -132,10 +127,14 @@ export default class Danmuku {
         return $ref;
     }
 
-    getReady(danmu) {
-        const { $state, time } = danmu;
+    getReady() {
         const { currentTime } = this.art;
-        return $state === 'ready' || ($state === 'wait' && currentTime + 0.1 >= time && time >= currentTime - 0.1);
+        return this.queue.filter((danmu) => {
+            return (
+                danmu.$state === 'ready' ||
+                (danmu.$state === 'wait' && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1)
+            );
+        });
     }
 
     async load() {
@@ -184,11 +183,12 @@ export default class Danmuku {
     makeWait(danmu) {
         danmu.$state = 'wait';
         if (danmu.$ref) {
-            danmu.$ref.style.border = 'none';
             danmu.$ref.style.visibility = 'hidden';
             danmu.$ref.style.marginLeft = '0px';
             danmu.$ref.style.transform = 'translateX(0px)';
             danmu.$ref.style.transition = 'transform 0s linear 0s';
+            this.$refs.push(danmu.$ref);
+            danmu.$ref = null;
         }
     }
 
@@ -252,53 +252,52 @@ export default class Danmuku {
                     }
                 });
 
-                this.queue
-                    .filter((danmu) => this.getReady(danmu))
-                    .forEach((danmu) => {
-                        danmu.$ref = this.getRef();
-                        danmu.$ref.innerText = danmu.text;
-                        this.$danmuku.appendChild(danmu.$ref);
+                this.getReady().forEach((danmu) => {
+                    danmu.$ref = this.getRef();
+                    danmu.$ref.innerText = danmu.text;
+                    this.$danmuku.appendChild(danmu.$ref);
 
-                        danmu.$ref.style.left = `${clientWidth}px`;
-                        danmu.$ref.style.opacity = this.option.opacity;
-                        danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
-                        danmu.$ref.style.color = danmu.color || '#fff';
-                        danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
-                        danmu.$ref.style.marginLeft = '0px';
+                    danmu.$ref.style.left = `${clientWidth}px`;
+                    danmu.$ref.style.opacity = this.option.opacity;
+                    danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
+                    danmu.$ref.style.color = danmu.color || '#fff';
+                    danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
+                    danmu.$ref.style.marginLeft = '0px';
 
-                        danmu.$lastStartTime = Date.now();
-                        danmu.$restTime =
-                            this.option.synchronousPlayback && this.art.playbackRate
-                                ? this.option.speed / Number(this.art.playbackRate)
-                                : this.option.speed;
+                    danmu.$lastStartTime = Date.now();
+                    danmu.$restTime =
+                        this.option.synchronousPlayback && this.art.playbackRate
+                            ? this.option.speed / Number(this.art.playbackRate)
+                            : this.option.speed;
 
-                        const top = getDanmuTop(this, danmu);
+                    const top = getDanmuTop(this, danmu);
 
-                        if (top !== undefined) {
-                            danmu.$state = 'emit';
-                            danmu.$ref.style.visibility = 'visible';
+                    if (top !== undefined) {
+                        danmu.$state = 'emit';
+                        danmu.$ref.style.visibility = 'visible';
 
-                            switch (danmu.mode) {
-                                case 0: {
-                                    danmu.$ref.style.top = `${top}px`;
-                                    const translateX = clientWidth + danmu.$ref.clientWidth;
-                                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
-                                    break;
-                                }
-                                case 1:
-                                    danmu.$ref.style.left = '50%';
-                                    danmu.$ref.style.top = `${top}px`;
-                                    danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
-                                    break;
-                                default:
-                                    break;
+                        switch (danmu.mode) {
+                            case 0: {
+                                danmu.$ref.style.top = `${top}px`;
+                                const translateX = clientWidth + danmu.$ref.clientWidth;
+                                danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                                danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                                break;
                             }
-                        } else {
-                            danmu.$state = 'ready';
-                            this.$danmuku.removeChild(danmu.$ref);
+                            case 1:
+                                danmu.$ref.style.left = '50%';
+                                danmu.$ref.style.top = `${top}px`;
+                                danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
+                                break;
+                            default:
+                                break;
                         }
-                    });
+                    } else {
+                        danmu.$state = 'ready';
+                        this.$refs.push(danmu.$ref);
+                        danmu.$ref = null;
+                    }
+                });
             }
 
             if (!this.isStop) {

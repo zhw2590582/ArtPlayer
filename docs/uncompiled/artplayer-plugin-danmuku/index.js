@@ -178,6 +178,7 @@ class Danmuku {
         this.validator = art.constructor.validator;
         this.queue = [];
         this.option = {};
+        this.$refs = [];
         this.config(option);
         this.isStop = false;
         this.isHide = false;
@@ -256,14 +257,9 @@ class Danmuku {
         return this.isRotate ? rect.top : rect.left;
     }
     getRef() {
-        const result = this.queue.find((danmu)=>{
-            return danmu.$ref && danmu.$state === 'wait';
-        });
-        if (result) {
-            const { $ref  } = result;
-            result.$ref = null;
-            return $ref;
-        }
+        const $refCache = this.$refs.pop();
+        if ($refCache) return $refCache;
+        console.log(this.$danmuku.children.length, this.$refs.length);
         const $ref = document.createElement('div');
         $ref.style.cssText = `
             user-select: none;
@@ -281,10 +277,11 @@ class Danmuku {
         `;
         return $ref;
     }
-    getReady(danmu) {
-        const { $state , time  } = danmu;
+    getReady() {
         const { currentTime  } = this.art;
-        return $state === 'ready' || $state === 'wait' && currentTime + 0.1 >= time && time >= currentTime - 0.1;
+        return this.queue.filter((danmu)=>{
+            return danmu.$state === 'ready' || danmu.$state === 'wait' && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1;
+        });
     }
     async load() {
         try {
@@ -319,11 +316,12 @@ class Danmuku {
     makeWait(danmu) {
         danmu.$state = 'wait';
         if (danmu.$ref) {
-            danmu.$ref.style.border = 'none';
             danmu.$ref.style.visibility = 'hidden';
             danmu.$ref.style.marginLeft = '0px';
             danmu.$ref.style.transform = 'translateX(0px)';
             danmu.$ref.style.transition = 'transform 0s linear 0s';
+            this.$refs.push(danmu.$ref);
+            danmu.$ref = null;
         }
     }
     continue() {
@@ -380,8 +378,7 @@ class Danmuku {
                     danmu.$lastStartTime = Date.now();
                     if (danmu.$restTime <= 0) this.makeWait(danmu);
                 });
-                this.queue.filter((danmu)=>this.getReady(danmu)
-                ).forEach((danmu)=>{
+                this.getReady().forEach((danmu)=>{
                     danmu.$ref = this.getRef();
                     danmu.$ref.innerText = danmu.text;
                     this.$danmuku.appendChild(danmu.$ref);
@@ -416,7 +413,8 @@ class Danmuku {
                         }
                     } else {
                         danmu.$state = 'ready';
-                        this.$danmuku.removeChild(danmu.$ref);
+                        this.$refs.push(danmu.$ref);
+                        danmu.$ref = null;
                     }
                 });
             }
