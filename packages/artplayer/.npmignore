@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
+.parcel-cache
 yarn.lock
 package-lock.json
 test
