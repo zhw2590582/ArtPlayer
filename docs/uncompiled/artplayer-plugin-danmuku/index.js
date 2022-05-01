@@ -579,12 +579,12 @@ function getData(ins, clientLeft, clientWidth, item) {
         distance
     };
 }
-function getDanmuTop(ins, danmu) {
+function getDanmuTop(ins, danmu1) {
     const clientLeft = ins.getLeft(ins.$player);
     const { clientWidth , clientHeight  } = ins.$player;
     const { antiOverlap  } = ins.option;
     const { marginBottom , marginTop  } = ins;
-    const target = getData(ins, clientLeft, clientWidth, danmu);
+    const target = getData(ins, clientLeft, clientWidth, danmu1);
     const danmus = ins.queue.filter((item)=>{
         return item.$ref && item.$state === 'emit' && item.mode === target.mode && item.$ref.offsetTop <= clientHeight - marginBottom;
     }).map((item)=>getData(ins, clientLeft, clientWidth, item)
@@ -629,21 +629,20 @@ function getDanmuTop(ins, danmu) {
             item
         ]);
     }
-    const test = topMap.map((list)=>{
-        return list.map((item)=>{
-            return target.speed * item.time;
-        });
-    });
-    console.log(test);
-    // topMap.sort((prev, next) => {
-    //     const nextMinRight = Math.min(...next.map((item) => target.speed * item.time));
-    //     const prevMinRight = Math.min(...prev.map((item) => target.speed * item.time));
-    //     return prevMinRight - nextMinRight;
-    // });
-    // console.log(JSON.parse(JSON.stringify(topMap)));
     if (antiOverlap) switch(target.mode){
         case 0:
-            break;
+            {
+                const result = topMap.find((list)=>{
+                    return list.every((danmu)=>{
+                        if (clientWidth < danmu.distance) return false;
+                        if (target.speed < danmu.speed) return true;
+                        const overlapTime = danmu.right / (target.speed - danmu.speed);
+                        if (overlapTime > danmu.time) return true;
+                        return false;
+                    });
+                });
+                return result && result[0] ? result[0].top : undefined;
+            }
         case 1:
             return undefined;
         default:
