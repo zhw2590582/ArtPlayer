@@ -286,7 +286,7 @@ class Danmuku {
     getReady() {
         const { currentTime  } = this.art;
         return this.queue.filter((danmu)=>{
-            return danmu.$state === 'ready' || danmu.$state === 'wait' && currentTime + 0.2 >= danmu.time && danmu.time >= currentTime - 0.2;
+            return danmu.$state === 'ready' || danmu.$state === 'wait' && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1;
         });
     }
     getEmits() {
