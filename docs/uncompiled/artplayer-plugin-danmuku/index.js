@@ -173,26 +173,27 @@ var _getDanmuTop = require("./getDanmuTop");
 var _getDanmuTopDefault = parcelHelpers.interopDefault(_getDanmuTop);
 class Danmuku {
     constructor(art, option){
+        const { constructor , template  } = art;
+        this.utils = constructor.utils;
+        this.validator = constructor.validator;
+        this.$danmuku = template.$danmuku;
+        this.$player = template.$player;
         this.art = art;
-        this.utils = art.constructor.utils;
-        this.validator = art.constructor.validator;
         this.queue = [];
         this.option = {};
         this.$refs = [];
-        this.config(option);
         this.isStop = false;
         this.isHide = false;
-        this.animationFrameTimer = null;
-        this.$danmuku = art.template.$danmuku;
-        this.$player = art.template.$player;
+        this.timer = null;
+        this.config(option);
+        this.worker = new Worker(require("85d40535eae5f839"));
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
         art.on('video:waiting', this.stop.bind(this));
-        art.on('resize', this.resize.bind(this));
-        art.on('destroy', this.stop.bind(this));
         art.on('fullscreen', this.reset.bind(this));
         art.on('fullscreenWeb', this.reset.bind(this));
+        art.on('destroy', this.stop.bind(this));
         this.load();
     }
     static get option() {
@@ -282,6 +283,16 @@ class Danmuku {
             return danmu.$state === 'ready' || danmu.$state === 'wait' && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1;
         });
     }
+    postMessage(message = {}) {
+        return new Promise((resolve)=>{
+            message.id = Date.now();
+            this.worker.postMessage(message);
+            this.worker.onmessage = (event)=>{
+                const { data  } = event;
+                if (data.id === message.id) resolve(data);
+            };
+        });
+    }
     async load() {
         try {
             let danmus = [];
@@ -360,16 +371,13 @@ class Danmuku {
         });
         return this;
     }
-    resize() {
-        return this;
-    }
     reset() {
         this.queue.forEach((danmu)=>this.makeWait(danmu)
         );
     }
     update() {
         const { clientWidth  } = this.$player;
-        this.animationFrameTimer = window.requestAnimationFrame(()=>{
+        this.timer = window.requestAnimationFrame(()=>{
             if (this.art.playing && !this.isHide) {
                 this.filter('emit', (danmu)=>{
                     const emitTime = (Date.now() - danmu.$lastStartTime) / 1000;
@@ -424,7 +432,7 @@ class Danmuku {
     stop() {
         this.isStop = true;
         this.suspend();
-        window.cancelAnimationFrame(this.animationFrameTimer);
+        window.cancelAnimationFrame(this.timer);
         this.art.emit('artplayerPluginDanmuku:stop');
         return this;
     }
@@ -472,7 +480,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6a8GK":[function(require,module,exports) {
+},{"./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN","85d40535eae5f839":"cDlY2"}],"6a8GK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
@@ -673,6 +681,9 @@ function getDanmuTop(ins, danmu1) {
 }
 exports.default = getDanmuTop;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cDlY2":[function(require,module,exports) {
+module.exports = "data:application/javascript,onmessage%20%3D%20%28event%29%3D%3E%7B%0A%20%20%20%20const%20%7B%20data%20%20%7D%20%3D%20event%3B%0A%20%20%20%20self.postMessage%28%7B%0A%20%20%20%20%20%20%20%20id%3A%20data.id%2C%0A%20%20%20%20%20%20%20%20test%3A%20%27fuck%27%0A%20%20%20%20%7D%29%3B%0A%7D%3B%0A%0A";
+
+},{}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
 
 //# sourceMappingURL=index.js.map

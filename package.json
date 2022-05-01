@@ -33,6 +33,7 @@
     "@babel/preset-react": "^7.16.7",
     "@parcel/config-default": "^2.5.0",
     "@parcel/core": "^2.5.0",
+    "@parcel/optimizer-data-url": "^2.5.0",
     "@parcel/reporter-cli": "^2.5.0",
     "@parcel/transformer-inline-string": "^2.5.0",
     "@parcel/transformer-less": "^2.5.0",

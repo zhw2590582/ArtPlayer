@@ -3,28 +3,31 @@ import getDanmuTop from './getDanmuTop';
 
 export default class Danmuku {
     constructor(art, option) {
-        this.art = art;
-        this.utils = art.constructor.utils;
-        this.validator = art.constructor.validator;
+        const { constructor, template } = art;
 
+        this.utils = constructor.utils;
+        this.validator = constructor.validator;
+        this.$danmuku = template.$danmuku;
+        this.$player = template.$player;
+
+        this.art = art;
         this.queue = [];
         this.option = {};
         this.$refs = [];
-        this.config(option);
         this.isStop = false;
         this.isHide = false;
-        this.animationFrameTimer = null;
-        this.$danmuku = art.template.$danmuku;
-        this.$player = art.template.$player;
+        this.timer = null;
+        this.config(option);
+
+        this.worker = new Worker(new URL('data-url:./worker.js', import.meta.url));
 
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
         art.on('video:waiting', this.stop.bind(this));
-        art.on('resize', this.resize.bind(this));
-        art.on('destroy', this.stop.bind(this));
         art.on('fullscreen', this.reset.bind(this));
         art.on('fullscreenWeb', this.reset.bind(this));
+        art.on('destroy', this.stop.bind(this));
 
         this.load();
     }
@@ -136,6 +139,19 @@ export default class Danmuku {
         });
     }
 
+    postMessage(message = {}) {
+        return new Promise((resolve) => {
+            message.id = Date.now();
+            this.worker.postMessage(message);
+            this.worker.onmessage = (event) => {
+                const { data } = event;
+                if (data.id === message.id) {
+                    resolve(data);
+                }
+            };
+        });
+    }
+
     async load() {
         try {
             let danmus = [];
@@ -230,17 +246,13 @@ export default class Danmuku {
         return this;
     }
 
-    resize() {
-        return this;
-    }
-
     reset() {
         this.queue.forEach((danmu) => this.makeWait(danmu));
     }
 
     update() {
         const { clientWidth } = this.$player;
-        this.animationFrameTimer = window.requestAnimationFrame(() => {
+        this.timer = window.requestAnimationFrame(() => {
             if (this.art.playing && !this.isHide) {
                 this.filter('emit', (danmu) => {
                     const emitTime = (Date.now() - danmu.$lastStartTime) / 1000;
@@ -309,7 +321,7 @@ export default class Danmuku {
     stop() {
         this.isStop = true;
         this.suspend();
-        window.cancelAnimationFrame(this.animationFrameTimer);
+        window.cancelAnimationFrame(this.timer);
         this.art.emit('artplayerPluginDanmuku:stop');
         return this;
     }
