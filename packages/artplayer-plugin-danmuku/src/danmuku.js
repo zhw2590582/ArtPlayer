@@ -397,6 +397,7 @@ export default class Danmuku {
 
     show() {
         this.isHide = false;
+        this.start();
         this.$danmuku.style.display = 'block';
         this.art.emit('artplayerPluginDanmuku:show');
         return this;
@@ -404,6 +405,8 @@ export default class Danmuku {
 
     hide() {
         this.isHide = true;
+        this.stop();
+        this.queue.forEach((item) => this.makeWait(item));
         this.$danmuku.style.display = 'none';
         this.art.emit('artplayerPluginDanmuku:hide');
         return this;
