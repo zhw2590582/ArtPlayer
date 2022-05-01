@@ -1,4 +1,5 @@
 import { bilibiliDanmuParseFromUrl } from './bilibili';
+import getDanmuTop from './getDanmuTop';
 
 export default class Danmuku {
     constructor(art, option) {
@@ -171,14 +172,19 @@ export default class Danmuku {
 
     postMessage(message = {}) {
         return new Promise((resolve) => {
-            message.id = Date.now();
-            this.worker.postMessage(message);
-            this.worker.onmessage = (event) => {
-                const { data } = event;
-                if (data.id === message.id) {
-                    resolve(data);
-                }
-            };
+            if (this.worker && this.worker.postMessage) {
+                message.id = Date.now();
+                this.worker.postMessage(message);
+                this.worker.onmessage = (event) => {
+                    const { data } = event;
+                    if (data.id === message.id) {
+                        resolve(data);
+                    }
+                };
+            } else {
+                const top = getDanmuTop(message);
+                resolve({ top });
+            }
         });
     }
 

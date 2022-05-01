@@ -169,6 +169,8 @@ window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _bilibili = require("./bilibili");
+var _getDanmuTop = require("./getDanmuTop");
+var _getDanmuTopDefault = parcelHelpers.interopDefault(_getDanmuTop);
 class Danmuku {
     constructor(art, option){
         const { constructor , template  } = art;
@@ -309,12 +311,19 @@ class Danmuku {
     }
     postMessage(message = {}) {
         return new Promise((resolve)=>{
-            message.id = Date.now();
-            this.worker.postMessage(message);
-            this.worker.onmessage = (event)=>{
-                const { data  } = event;
-                if (data.id === message.id) resolve(data);
-            };
+            if (this.worker && this.worker.postMessage) {
+                message.id = Date.now();
+                this.worker.postMessage(message);
+                this.worker.onmessage = (event)=>{
+                    const { data  } = event;
+                    if (data.id === message.id) resolve(data);
+                };
+            } else {
+                const top = _getDanmuTopDefault.default(message);
+                resolve({
+                    top
+                });
+            }
         });
     }
     async load() {
@@ -519,7 +528,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./bilibili":"6a8GK","85d40535eae5f839":"cDlY2","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6a8GK":[function(require,module,exports) {
+},{"./bilibili":"6a8GK","./getDanmuTop":"eLxSm","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN","85d40535eae5f839":"cDlY2"}],"6a8GK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
@@ -596,7 +605,100 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"cDlY2":[function(require,module,exports) {
+},{}],"eLxSm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function getDanmuTop({ target , emits , clientWidth , clientHeight , marginBottom , marginTop , antiOverlap ,  }) {
+    const danmus = emits.filter((item)=>item.mode === target.mode && item.top <= clientHeight - marginBottom
+    ).sort((prev, next)=>prev.top - next.top
+    );
+    if (danmus.length === 0) return marginTop;
+    danmus.unshift({
+        top: 0,
+        left: 0,
+        right: 0,
+        height: marginTop,
+        width: clientWidth,
+        speed: 0,
+        distance: clientWidth
+    });
+    danmus.push({
+        top: clientHeight - marginBottom,
+        left: 0,
+        right: 0,
+        height: marginBottom,
+        width: clientWidth,
+        speed: 0,
+        distance: clientWidth
+    });
+    for(let index = 1; index < danmus.length; index += 1){
+        const item = danmus[index];
+        const prev = danmus[index - 1];
+        const prevBottom = prev.top + prev.height;
+        const diff = item.top - prevBottom;
+        if (diff >= target.height) return prevBottom;
+    }
+    const topMap = [];
+    for(let index1 = 1; index1 < danmus.length - 1; index1 += 1){
+        const item = danmus[index1];
+        if (topMap.length) {
+            const last = topMap[topMap.length - 1];
+            if (last[0].top === item.top) last.push(item);
+            else topMap.push([
+                item
+            ]);
+        } else topMap.push([
+            item
+        ]);
+    }
+    if (antiOverlap) switch(target.mode){
+        case 0:
+            {
+                const result = topMap.find((list)=>{
+                    return list.every((danmu)=>{
+                        if (clientWidth < danmu.distance) return false;
+                        if (target.speed < danmu.speed) return true;
+                        const overlapTime = danmu.right / (target.speed - danmu.speed);
+                        if (overlapTime > danmu.time) return true;
+                        return false;
+                    });
+                });
+                return result && result[0] ? result[0].top : undefined;
+            }
+        case 1:
+            return undefined;
+        default:
+            break;
+    }
+    else {
+        switch(target.mode){
+            case 0:
+                topMap.sort((prev, next)=>{
+                    const nextMinRight = Math.min(...next.map((item)=>item.right
+                    ));
+                    const prevMinRight = Math.min(...prev.map((item)=>item.right
+                    ));
+                    return nextMinRight * next.length - prevMinRight * prev.length;
+                });
+                break;
+            case 1:
+                topMap.sort((prev, next)=>{
+                    const nextMaxWidth = Math.max(...next.map((item)=>item.width
+                    ));
+                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width
+                    ));
+                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;
+                });
+                break;
+            default:
+                break;
+        }
+        return topMap[0][0].top;
+    }
+}
+exports.default = getDanmuTop;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cDlY2":[function(require,module,exports) {
 module.exports = "data:application/javascript,function%20getDanmuTop%28%7B%20target%20%2C%20emits%20%2C%20clientWidth%20%2C%20clientHeight%20%2C%20marginBottom%20%2C%20marginTop%20%2C%20antiOverlap%20%20%7D%29%20%7B%0A%20%20%20%20const%20danmus%20%3D%20emits.filter%28%28item%29%3D%3Eitem.mode%20%3D%3D%3D%20target.mode%20%26%26%20item.top%20%3C%3D%20clientHeight%20-%20marginBottom%0A%20%20%20%20%29.sort%28%28prev%2C%20next%29%3D%3Eprev.top%20-%20next.top%0A%20%20%20%20%29%3B%0A%20%20%20%20if%20%28danmus.length%20%3D%3D%3D%200%29%20return%20marginTop%3B%0A%20%20%20%20danmus.unshift%28%7B%0A%20%20%20%20%20%20%20%20top%3A%200%2C%0A%20%20%20%20%20%20%20%20left%3A%200%2C%0A%20%20%20%20%20%20%20%20right%3A%200%2C%0A%20%20%20%20%20%20%20%20height%3A%20marginTop%2C%0A%20%20%20%20%20%20%20%20width%3A%20clientWidth%2C%0A%20%20%20%20%20%20%20%20speed%3A%200%2C%0A%20%20%20%20%20%20%20%20distance%3A%20clientWidth%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20danmus.push%28%7B%0A%20%20%20%20%20%20%20%20top%3A%20clientHeight%20-%20marginBottom%2C%0A%20%20%20%20%20%20%20%20left%3A%200%2C%0A%20%20%20%20%20%20%20%20right%3A%200%2C%0A%20%20%20%20%20%20%20%20height%3A%20marginBottom%2C%0A%20%20%20%20%20%20%20%20width%3A%20clientWidth%2C%0A%20%20%20%20%20%20%20%20speed%3A%200%2C%0A%20%20%20%20%20%20%20%20distance%3A%20clientWidth%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20for%28let%20index%20%3D%201%3B%20index%20%3C%20danmus.length%3B%20index%20%2B%3D%201%29%7B%0A%20%20%20%20%20%20%20%20const%20item%20%3D%20danmus%5Bindex%5D%3B%0A%20%20%20%20%20%20%20%20const%20prev%20%3D%20danmus%5Bindex%20-%201%5D%3B%0A%20%20%20%20%20%20%20%20const%20prevBottom%20%3D%20prev.top%20%2B%20prev.height%3B%0A%20%20%20%20%20%20%20%20const%20diff%20%3D%20item.top%20-%20prevBottom%3B%0A%20%20%20%20%20%20%20%20if%20%28diff%20%3E%3D%20target.height%29%20return%20prevBottom%3B%0A%20%20%20%20%7D%0A%20%20%20%20const%20topMap%20%3D%20%5B%5D%3B%0A%20%20%20%20for%28let%20index1%20%3D%201%3B%20index1%20%3C%20danmus.length%20-%201%3B%20index1%20%2B%3D%201%29%7B%0A%20%20%20%20%20%20%20%20const%20item%20%3D%20danmus%5Bindex1%5D%3B%0A%20%20%20%20%20%20%20%20if%20%28topMap.length%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20last%20%3D%20topMap%5BtopMap.length%20-%201%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28last%5B0%5D.top%20%3D%3D%3D%20item.top%29%20last.push%28item%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20else%20topMap.push%28%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20item%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20topMap.push%28%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20item%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20if%20%28antiOverlap%29%20switch%28target.mode%29%7B%0A%20%20%20%20%20%20%20%20case%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20result%20%3D%20topMap.find%28%28list%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20list.every%28%28danmu%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28clientWidth%20%3C%20danmu.distance%29%20return%20false%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28target.speed%20%3C%20danmu.speed%29%20return%20true%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20overlapTime%20%3D%20danmu.right%20%2F%20%28target.speed%20-%20danmu.speed%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28overlapTime%20%3E%20danmu.time%29%20return%20true%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%20%26%26%20result%5B0%5D%20%3F%20result%5B0%5D.top%20%3A%20undefined%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20undefined%3B%0A%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%7D%0A%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20switch%28target.mode%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20case%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20topMap.sort%28%28prev%2C%20next%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20nextMinRight%20%3D%20Math.min%28...next.map%28%28item%29%3D%3Eitem.right%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20prevMinRight%20%3D%20Math.min%28...prev.map%28%28item%29%3D%3Eitem.right%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20nextMinRight%20%2a%20next.length%20-%20prevMinRight%20%2a%20prev.length%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20topMap.sort%28%28prev%2C%20next%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20nextMaxWidth%20%3D%20Math.max%28...next.map%28%28item%29%3D%3Eitem.width%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20prevMaxWidth%20%3D%20Math.max%28...prev.map%28%28item%29%3D%3Eitem.width%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20prevMaxWidth%20%2a%20prev.length%20-%20nextMaxWidth%20%2a%20next.length%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20topMap%5B0%5D%5B0%5D.top%3B%0A%20%20%20%20%7D%0A%7D%0Aonmessage%20%3D%20%28event%29%3D%3E%7B%0A%20%20%20%20const%20%7B%20data%20%20%7D%20%3D%20event%3B%0A%20%20%20%20const%20top%20%3D%20getDanmuTop%28data%29%3B%0A%20%20%20%20self.postMessage%28%7B%0A%20%20%20%20%20%20%20%20top%2C%0A%20%20%20%20%20%20%20%20id%3A%20data.id%0A%20%20%20%20%7D%29%3B%0A%7D%3B%0A%0A";
 
 },{}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
