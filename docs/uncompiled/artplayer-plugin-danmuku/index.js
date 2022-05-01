@@ -186,7 +186,11 @@ class Danmuku {
         this.isHide = false;
         this.timer = null;
         this.config(option);
-        this.worker = new Worker(require("85d40535eae5f839"));
+        if (this.option.useWorker) try {
+            this.worker = new Worker(require("85d40535eae5f839"));
+        } catch (error) {
+        //
+        }
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
         art.on('video:pause', this.stop.bind(this));
@@ -209,6 +213,7 @@ class Danmuku {
             filter: ()=>true
             ,
             antiOverlap: true,
+            useWorker: true,
             synchronousPlayback: false
         };
     }
@@ -221,6 +226,7 @@ class Danmuku {
             fontSize: 'number',
             filter: 'function',
             antiOverlap: 'boolean',
+            useWorker: 'boolean',
             synchronousPlayback: 'boolean'
         };
     }
@@ -311,7 +317,7 @@ class Danmuku {
     }
     postMessage(message = {}) {
         return new Promise((resolve)=>{
-            if (this.worker && this.worker.postMessage) {
+            if (this.option.useWorker && this.worker && this.worker.postMessage) {
                 message.id = Date.now();
                 this.worker.postMessage(message);
                 this.worker.onmessage = (event)=>{

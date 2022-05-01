@@ -19,7 +19,13 @@ export default class Danmuku {
         this.timer = null;
         this.config(option);
 
-        this.worker = new Worker(new URL('data-url:./worker.js', import.meta.url));
+        if (this.option.useWorker) {
+            try {
+                this.worker = new Worker(new URL('data-url:./worker.js', import.meta.url));
+            } catch (error) {
+                //
+            }
+        }
 
         art.on('video:play', this.start.bind(this));
         art.on('video:playing', this.start.bind(this));
@@ -41,6 +47,7 @@ export default class Danmuku {
             fontSize: 25,
             filter: () => true,
             antiOverlap: true,
+            useWorker: true,
             synchronousPlayback: false,
         };
     }
@@ -54,6 +61,7 @@ export default class Danmuku {
             fontSize: 'number',
             filter: 'function',
             antiOverlap: 'boolean',
+            useWorker: 'boolean',
             synchronousPlayback: 'boolean',
         };
     }
@@ -172,7 +180,7 @@ export default class Danmuku {
 
     postMessage(message = {}) {
         return new Promise((resolve) => {
-            if (this.worker && this.worker.postMessage) {
+            if (this.option.useWorker && this.worker && this.worker.postMessage) {
                 message.id = Date.now();
                 this.worker.postMessage(message);
                 this.worker.onmessage = (event) => {
