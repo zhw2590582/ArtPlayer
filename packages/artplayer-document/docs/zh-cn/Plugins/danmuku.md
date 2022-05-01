@@ -79,6 +79,7 @@ var art = new Artplayer({
             size: 25, // 全局字体大小
             margin: ['10%', 20], // 距离顶部和距离底部的高度值
             antiOverlap: true, // 防重叠
+            useWorker: true, // 是否使用 web worker
             synchronousPlayback: false, // 是否同步到播放速度
             filter: (danmu) => danmu.text.length <= 50, // 弹幕过滤函数
         }),

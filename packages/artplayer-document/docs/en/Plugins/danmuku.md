@@ -79,6 +79,7 @@ var art = new Artplayer({
             size: 25, // Font size
             margin: ['10%', 20], // Margin top and margin bottom
             antiOverlap: true, // Anti overlap
+            useWorker: true, // Use web worker or not
             synchronousPlayback: false, // Synchronous playback speed
             filter: (danmu) => danmu.text.length <= 50, // filter function
         }),
