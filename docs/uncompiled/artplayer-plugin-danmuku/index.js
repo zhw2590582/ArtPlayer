@@ -206,7 +206,7 @@ class Danmuku {
             fontSize: 25,
             filter: ()=>true
             ,
-            antiOverlap: false,
+            antiOverlap: true,
             synchronousPlayback: false
         };
     }
@@ -363,7 +363,6 @@ class Danmuku {
         return this;
     }
     resize() {
-        console.log('resize');
         return this;
     }
     reset() {

@@ -12,6 +12,7 @@ var art = new Artplayer({
             fontSize: 20,
             maxlength: 100,
             margin: ['10%', 60],
+            antiOverlap: true,
             synchronousPlayback: false,
             filter: (danmu) => danmu.text.length < 50,
         }),
