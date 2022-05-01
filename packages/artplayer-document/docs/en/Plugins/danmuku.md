@@ -78,6 +78,7 @@ var art = new Artplayer({
             color: '#fff', // Font color
             size: 25, // Font size
             margin: ['10%', 20], // Margin top and margin bottom
+            antiOverlap: true, // Anti overlap
             synchronousPlayback: false, // Synchronous playback speed
             filter: (danmu) => danmu.text.length <= 50, // filter function
         }),
