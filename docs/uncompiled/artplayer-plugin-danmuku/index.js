@@ -556,33 +556,47 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getDanmuTop(ins, danmu) {
     const { clientWidth , clientHeight  } = ins.$player;
+    const { marginBottom , marginTop  } = ins;
     const { antiOverlap  } = ins.option;
     const danmus = ins.queue.filter((item)=>{
-        return item.$ref && item.$state === 'emit' && item.mode === danmu.mode && item.$ref.offsetTop <= clientHeight - ins.marginBottom;
+        return item.$ref && item.$state === 'emit' && item.mode === danmu.mode && item.$ref.offsetTop <= clientHeight - marginBottom;
     }).map((item)=>{
+        const top = item.$ref.offsetTop;
+        const left = item.$ref.offsetLeft;
+        const height = item.$ref.clientHeight;
+        const width = item.$ref.clientWidth;
+        const distance = left + width;
+        const right = clientWidth - distance;
+        const speed = distance / item.$restTime;
         return {
-            top: item.$ref.offsetTop,
-            left: item.$ref.offsetLeft,
-            height: item.$ref.clientHeight,
-            width: item.$ref.clientWidth,
-            right: clientWidth - item.$ref.offsetLeft - item.$ref.clientWidth
+            top,
+            left,
+            height,
+            width,
+            right,
+            speed,
+            distance
         };
     }).sort((prev, next)=>prev.top - next.top
     );
-    if (danmus.length === 0) return ins.marginTop;
+    if (danmus.length === 0) return marginTop;
     danmus.unshift({
         top: 0,
         left: 0,
         right: 0,
-        height: ins.marginTop,
-        width: clientWidth
+        height: marginTop,
+        width: clientWidth,
+        speed: 0,
+        distance: clientWidth
     });
     danmus.push({
-        top: clientHeight - ins.marginBottom,
+        top: clientHeight - marginBottom,
         left: 0,
         right: 0,
-        height: ins.marginBottom,
-        width: clientWidth
+        height: marginBottom,
+        width: clientWidth,
+        speed: 0,
+        distance: clientWidth
     });
     for(let index = 1; index < danmus.length; index += 1){
         const item = danmus[index];
