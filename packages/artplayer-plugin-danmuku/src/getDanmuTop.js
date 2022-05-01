@@ -92,13 +92,21 @@ export default function getDanmuTop(ins, danmu) {
         }
     }
 
-    // const test = topMap.map((list) => {
-    //     return list.map((item) => {
-    //         return target.speed * item.time;
-    //     });
+    const test = topMap.map((list) => {
+        return list.map((item) => {
+            return target.speed * item.time;
+        });
+    });
+
+    console.log(test);
+
+    // topMap.sort((prev, next) => {
+    //     const nextMinRight = Math.min(...next.map((item) => target.speed * item.time));
+    //     const prevMinRight = Math.min(...prev.map((item) => target.speed * item.time));
+    //     return prevMinRight - nextMinRight;
     // });
 
-    console.log(target);
+    // console.log(JSON.parse(JSON.stringify(topMap)));
 
     if (antiOverlap) {
         switch (target.mode) {
