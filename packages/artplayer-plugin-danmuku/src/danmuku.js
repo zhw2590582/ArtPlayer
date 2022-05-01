@@ -36,7 +36,7 @@ export default class Danmuku {
             opacity: 1,
             fontSize: 25,
             filter: () => true,
-            antiOverlap: false,
+            antiOverlap: true,
             synchronousPlayback: false,
         };
     }
@@ -231,7 +231,6 @@ export default class Danmuku {
     }
 
     resize() {
-        console.log('resize');
         return this;
     }
 
