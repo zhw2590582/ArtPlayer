@@ -6,7 +6,7 @@ var art = new Artplayer({
     fullscreenWeb: true,
     plugins: [
         artplayerPluginDanmuku({
-            danmuku: '/assets/sample/danmuku.xml',
+            danmuku: '/assets/sample/danmuku-v2.xml',
             speed: 5,
             opacity: 1,
             fontSize: 20,

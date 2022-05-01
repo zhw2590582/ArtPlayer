@@ -1,5 +1,4 @@
 import { bilibiliDanmuParseFromUrl } from './bilibili';
-import getDanmuTop from './getDanmuTop';
 
 export default class Danmuku {
     constructor(art, option) {
@@ -139,6 +138,37 @@ export default class Danmuku {
         });
     }
 
+    getEmits() {
+        const result = [];
+        const { clientWidth } = this.$player;
+        const clientLeft = this.getLeft(this.$player);
+
+        this.filter('emit', (danmu) => {
+            const top = danmu.$ref.offsetTop;
+            const left = this.getLeft(danmu.$ref) - clientLeft;
+            const height = danmu.$ref.clientHeight;
+            const width = danmu.$ref.clientWidth;
+            const distance = left + width;
+            const right = clientWidth - distance;
+            const speed = distance / danmu.$restTime;
+
+            const emit = {};
+            emit.top = top;
+            emit.left = left;
+            emit.height = height;
+            emit.width = width;
+            emit.right = right;
+            emit.speed = speed;
+            emit.distance = distance;
+            emit.time = danmu.$restTime;
+            emit.mode = danmu.mode;
+
+            result.push(emit);
+        });
+
+        return result;
+    }
+
     postMessage(message = {}) {
         return new Promise((resolve) => {
             message.id = Date.now();
@@ -252,7 +282,8 @@ export default class Danmuku {
 
     update() {
         const { clientWidth } = this.$player;
-        this.timer = window.requestAnimationFrame(() => {
+
+        this.timer = window.requestAnimationFrame(async () => {
             if (this.art.playing && !this.isHide) {
                 this.filter('emit', (danmu) => {
                     const emitTime = (Date.now() - danmu.$lastStartTime) / 1000;
@@ -263,7 +294,9 @@ export default class Danmuku {
                     }
                 });
 
-                this.getReady().forEach((danmu) => {
+                const readys = this.getReady();
+                for (let index = 0; index < readys.length; index++) {
+                    const danmu = readys[index];
                     danmu.$ref = this.getRef();
                     danmu.$ref.innerText = danmu.text;
                     this.$danmuku.appendChild(danmu.$ref);
@@ -281,9 +314,23 @@ export default class Danmuku {
                             ? this.option.speed / Number(this.art.playbackRate)
                             : this.option.speed;
 
-                    const top = getDanmuTop(this, danmu);
+                    const target = {
+                        mode: danmu.mode,
+                        height: danmu.$ref.clientHeight,
+                        speed: (clientWidth + danmu.$ref.clientWidth) / danmu.$restTime,
+                    };
 
-                    if (top !== undefined) {
+                    const { top } = await this.postMessage({
+                        target,
+                        emits: this.getEmits(),
+                        antiOverlap: this.option.antiOverlap,
+                        clientWidth: this.$player.clientWidth,
+                        clientHeight: this.$player.clientHeight,
+                        marginBottom: this.marginBottom,
+                        marginTop: this.marginTop,
+                    });
+
+                    if (!this.isStop && top !== undefined) {
                         danmu.$state = 'emit';
                         danmu.$ref.style.visibility = 'visible';
 
@@ -308,7 +355,7 @@ export default class Danmuku {
                         this.$refs.push(danmu.$ref);
                         danmu.$ref = null;
                     }
-                });
+                }
             }
 
             if (!this.isStop) {
