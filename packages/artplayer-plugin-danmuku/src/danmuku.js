@@ -259,10 +259,12 @@ export default class Danmuku {
                         danmu.$ref.innerText = danmu.text;
                         this.$danmuku.appendChild(danmu.$ref);
 
+                        danmu.$ref.style.left = `${clientWidth}px`;
                         danmu.$ref.style.opacity = this.option.opacity;
                         danmu.$ref.style.fontSize = `${this.option.fontSize || danmu.fontSize}px`;
                         danmu.$ref.style.color = danmu.color || '#fff';
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
+                        danmu.$ref.style.marginLeft = '0px';
 
                         danmu.$lastStartTime = Date.now();
                         danmu.$restTime =
@@ -279,7 +281,6 @@ export default class Danmuku {
                             switch (danmu.mode) {
                                 case 0: {
                                     danmu.$ref.style.top = `${top}px`;
-                                    danmu.$ref.style.left = `${clientWidth}px`;
                                     const translateX = clientWidth + danmu.$ref.clientWidth;
                                     danmu.$ref.style.transform = `translateX(${-translateX}px)`;
                                     danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
