@@ -98,7 +98,7 @@ export default function getDanmuTop(ins, danmu) {
     //     });
     // });
 
-    console.log(topMap);
+    console.log(target);
 
     if (antiOverlap) {
         switch (target.mode) {
