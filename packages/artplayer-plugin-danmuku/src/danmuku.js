@@ -133,7 +133,7 @@ export default class Danmuku {
         return this.queue.filter((danmu) => {
             return (
                 danmu.$state === 'ready' ||
-                (danmu.$state === 'wait' && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1)
+                (danmu.$state === 'wait' && currentTime + 0.2 >= danmu.time && danmu.time >= currentTime - 0.2)
             );
         });
     }
@@ -410,7 +410,7 @@ export default class Danmuku {
         if (danmu.time) {
             danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
         } else {
-            danmu.time = this.art.currentTime + 0.5;
+            danmu.time = this.art.currentTime + 1;
         }
 
         this.queue.push({

@@ -278,7 +278,7 @@ class Danmuku {
     getReady() {
         const { currentTime  } = this.art;
         return this.queue.filter((danmu)=>{
-            return danmu.$state === 'ready' || danmu.$state === 'wait' && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1;
+            return danmu.$state === 'ready' || danmu.$state === 'wait' && currentTime + 0.2 >= danmu.time && danmu.time >= currentTime - 0.2;
         });
     }
     getEmits() {
@@ -505,7 +505,7 @@ class Danmuku {
         if (!danmu.text.trim()) return this;
         if (!this.option.filter(danmu)) return this;
         if (danmu.time) danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
-        else danmu.time = this.art.currentTime + 0.5;
+        else danmu.time = this.art.currentTime + 1;
         this.queue.push({
             mode: 0,
             ...danmu,
@@ -519,7 +519,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./bilibili":"6a8GK","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN","85d40535eae5f839":"cDlY2"}],"6a8GK":[function(require,module,exports) {
+},{"./bilibili":"6a8GK","85d40535eae5f839":"cDlY2","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6a8GK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode
