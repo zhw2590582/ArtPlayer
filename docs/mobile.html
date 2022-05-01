@@ -149,6 +149,7 @@
                     margin: ['10%', 60],
                     synchronousPlayback: false,
                     filter: (danmu) => danmu.text.length < 50,
+                    filter: (danmu) => danmu.mode === 0,
                 }),
             ],
             whitelist: ['*'],
