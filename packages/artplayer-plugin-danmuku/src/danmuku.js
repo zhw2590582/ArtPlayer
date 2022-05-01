@@ -103,7 +103,7 @@ export default class Danmuku {
 
     getRef() {
         const result = this.queue.find((danmu) => {
-            return danmu.$ref && (danmu.$state === 'wait' || danmu.$state === 'ready');
+            return danmu.$ref && danmu.$state === 'wait';
         });
 
         if (result) {
@@ -296,7 +296,7 @@ export default class Danmuku {
                             }
                         } else {
                             danmu.$state = 'ready';
-                            danmu.$ref.style.visibility = 'hidden';
+                            this.$danmuku.removeChild(danmu.$ref);
                         }
                     });
             }
