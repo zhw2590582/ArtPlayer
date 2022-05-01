@@ -106,7 +106,6 @@ export default class Danmuku {
         const $refCache = this.$refs.pop();
         if ($refCache) return $refCache;
 
-        console.log(this.$danmuku.children.length, this.$refs.length);
         const $ref = document.createElement('div');
 
         $ref.style.cssText = `
