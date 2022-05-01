@@ -554,30 +554,35 @@ exports.export = function(dest, destName, get) {
 },{}],"eLxSm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+function getData(clientWidth, item) {
+    const top = item.$ref.offsetTop;
+    const left = item.$ref.offsetLeft;
+    const height = item.$ref.clientHeight;
+    const width = item.$ref.clientWidth;
+    const distance = left + width;
+    const right = clientWidth - distance;
+    const speed = distance / item.$restTime;
+    const mode = item.mode;
+    return {
+        mode,
+        top,
+        left,
+        height,
+        width,
+        right,
+        speed,
+        distance
+    };
+}
 function getDanmuTop(ins, danmu) {
     const { clientWidth , clientHeight  } = ins.$player;
-    const { marginBottom , marginTop  } = ins;
     const { antiOverlap  } = ins.option;
+    const { marginBottom , marginTop  } = ins;
+    const target = getData(clientWidth, danmu);
     const danmus = ins.queue.filter((item)=>{
-        return item.$ref && item.$state === 'emit' && item.mode === danmu.mode && item.$ref.offsetTop <= clientHeight - marginBottom;
-    }).map((item)=>{
-        const top = item.$ref.offsetTop;
-        const left = item.$ref.offsetLeft;
-        const height = item.$ref.clientHeight;
-        const width = item.$ref.clientWidth;
-        const distance = left + width;
-        const right = clientWidth - distance;
-        const speed = distance / item.$restTime;
-        return {
-            top,
-            left,
-            height,
-            width,
-            right,
-            speed,
-            distance
-        };
-    }).sort((prev, next)=>prev.top - next.top
+        return item.$ref && item.$state === 'emit' && item.mode === target.mode && item.$ref.offsetTop <= clientHeight - marginBottom;
+    }).map((item)=>getData(clientWidth, item)
+    ).sort((prev, next)=>prev.top - next.top
     );
     if (danmus.length === 0) return marginTop;
     danmus.unshift({
@@ -603,7 +608,7 @@ function getDanmuTop(ins, danmu) {
         const prev = danmus[index - 1];
         const prevBottom = prev.top + prev.height;
         const diff = item.top - prevBottom;
-        if (diff >= danmu.$ref.clientHeight) return prevBottom;
+        if (diff >= target.height) return prevBottom;
     }
     const topMap = [];
     for(let index1 = 1; index1 < danmus.length - 1; index1 += 1){
@@ -618,7 +623,7 @@ function getDanmuTop(ins, danmu) {
             item
         ]);
     }
-    if (antiOverlap) switch(danmu.mode){
+    if (antiOverlap) switch(target.mode){
         case 0:
             break;
         case 1:
@@ -627,7 +632,7 @@ function getDanmuTop(ins, danmu) {
             break;
     }
     else {
-        switch(danmu.mode){
+        switch(target.mode){
             case 0:
                 topMap.sort((prev, next)=>{
                     const nextMinRight = Math.min(...next.map((item)=>item.right
