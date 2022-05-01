@@ -309,9 +309,10 @@ class Danmuku {
         const { clamp  } = this.utils;
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
+        if (option.fontSize) this.reset();
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.fontSize = clamp(this.option.fontSize, 0, 100);
+        this.option.fontSize = clamp(this.option.fontSize, 12, 100);
         this.art.emit('artplayerPluginDanmuku:config', this.option);
         return this;
     }
@@ -386,7 +387,7 @@ class Danmuku {
                     this.$danmuku.appendChild(danmu.$ref);
                     danmu.$ref.style.left = `${clientWidth}px`;
                     danmu.$ref.style.opacity = this.option.opacity;
-                    danmu.$ref.style.fontSize = `${this.option.fontSize || danmu.fontSize}px`;
+                    danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
                     danmu.$ref.style.marginLeft = '0px';
