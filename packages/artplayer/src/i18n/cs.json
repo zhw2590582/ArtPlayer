@@ -28,10 +28,10 @@
     "Web Fullscreen": "Celá stránka",
     "Exit Web Fullscreen": "Zavřít režim celé stránky",
     "Mini Player": "Mini přehrávač",
-    "PIP Mode": "PIP mód",
-    "Exit PIP Mode": "Opustit PIP mód",
-    "PIP Not Supported": "PIP mód není podporován",
+    "PIP Mode": "Režim PIP",
+    "Exit PIP Mode": "Opustit režim PIP",
+    "PIP Not Supported": "Režim PIP není podporován",
     "Fullscreen Not Supported": "Režim celé obrazovky není podporován",
     "Subtitle Offset": "Posun titulků",
-    "Auto playback at": "Automatické přehrávání při"
+    "Auto playback at": "Automatické přehrávání za"
 }
