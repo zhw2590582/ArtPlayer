@@ -10,8 +10,8 @@ export default class I18n {
         this.languages = {
             'zh-cn': zhCn,
             'zh-tw': zhTw,
-            "pl": pl,
-            "cs": cs,
+            'pl': pl,
+            'cs': cs,
         };
         this.init();
     }
