@@ -222,12 +222,16 @@ Artplayer.INFO_LOOP_TIME = 1000;
 Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
 
-const $style = document.createElement('style');
-$style.dataset.from = 'artplayer';
-$style.textContent = style;
-document.head.appendChild($style);
+if (typeof document !== 'undefined') {
+    const $style = document.createElement('style');
+    $style.dataset.from = 'artplayer';
+    $style.textContent = style;
+    document.head.appendChild($style);
+}
 
-window['Artplayer'] = Artplayer;
+if (typeof window !== 'undefined') {
+    window['Artplayer'] = Artplayer;
+}
 
 // eslint-disable-next-line no-console
 console.log(

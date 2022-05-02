@@ -1,72 +1,64 @@
-import screenfull from 'screenfull';
+import getScreenfull from '../libs/screenfull';
 import { addClass, removeClass, def, get } from '../utils';
-
-const nativeScreenfull = (art) => {
-    const {
-        notice,
-        template: { $player },
-    } = art;
-
-    screenfull.on('change', () => art.emit('fullscreen', screenfull.isFullscreen));
-
-    def(art, 'fullscreen', {
-        get() {
-            return screenfull.isFullscreen;
-        },
-        async set(value) {
-            if (value) {
-                art.normalSize = 'fullscreen';
-                art.aspectRatioReset = true;
-                art.autoSize = false;
-                await screenfull.request($player);
-                addClass($player, 'art-fullscreen');
-                art.emit('resize');
-                art.emit('fullscreen', true);
-                notice.show = '';
-            } else {
-                art.aspectRatioReset = true;
-                art.autoSize = art.option.autoSize;
-                await screenfull.exit();
-                removeClass($player, 'art-fullscreen');
-                art.emit('resize');
-                art.emit('fullscreen');
-                notice.show = '';
-            }
-        },
-    });
-};
-
-const webkitScreenfull = (art) => {
-    const {
-        notice,
-        template: { $video },
-    } = art;
-
-    def(art, 'fullscreen', {
-        get() {
-            return $video.webkitDisplayingFullscreen;
-        },
-        set(value) {
-            if (value) {
-                art.normalSize = 'fullscreen';
-                $video.webkitEnterFullscreen();
-                art.emit('fullscreen', true);
-                notice.show = '';
-            } else {
-                $video.webkitExitFullscreen();
-                art.emit('fullscreen');
-                notice.show = '';
-            }
-        },
-    });
-};
 
 export default function fullscreenMix(art) {
     const {
         i18n,
         notice,
-        template: { $video },
+        template: { $video, $player },
     } = art;
+
+    const screenfull = getScreenfull();
+
+    const nativeScreenfull = (art) => {
+        screenfull.on('change', () => art.emit('fullscreen', screenfull.isFullscreen));
+
+        def(art, 'fullscreen', {
+            get() {
+                return screenfull.isFullscreen;
+            },
+            async set(value) {
+                if (value) {
+                    art.normalSize = 'fullscreen';
+                    art.aspectRatioReset = true;
+                    art.autoSize = false;
+                    await screenfull.request($player);
+                    addClass($player, 'art-fullscreen');
+                    art.emit('resize');
+                    art.emit('fullscreen', true);
+                    notice.show = '';
+                } else {
+                    art.aspectRatioReset = true;
+                    art.autoSize = art.option.autoSize;
+                    await screenfull.exit();
+                    removeClass($player, 'art-fullscreen');
+                    art.emit('resize');
+                    art.emit('fullscreen');
+                    notice.show = '';
+                }
+            },
+        });
+    };
+
+    const webkitScreenfull = (art) => {
+        def(art, 'fullscreen', {
+            get() {
+                return $video.webkitDisplayingFullscreen;
+            },
+            set(value) {
+                if (value) {
+                    art.normalSize = 'fullscreen';
+                    $video.webkitEnterFullscreen();
+                    art.emit('fullscreen', true);
+                    notice.show = '';
+                } else {
+                    $video.webkitExitFullscreen();
+                    art.emit('fullscreen');
+                    notice.show = '';
+                }
+            },
+        });
+    };
 
     art.once('video:loadedmetadata', () => {
         if (screenfull.isEnabled) {
