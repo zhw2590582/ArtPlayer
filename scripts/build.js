@@ -48,7 +48,7 @@ async function build(name) {
     fs.writeFileSync(filePath, code.replace(/\\n*\s*</g, '<').replace(/>\\n*\s*/g, '>'));
     fs.renameSync(filePath, newFilePath);
     await cpy(newFilePath, compiledPath);
-    console.log(`✨ Built ${name} ${bundles.length} bundles in ${buildTime}ms!`);
+    console.log(`✨ Built ${name}@${version} ${bundles.length} bundles in ${buildTime}ms!`);
 }
 
 function runPromisesInSeries(ps) {

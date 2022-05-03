@@ -344,30 +344,32 @@ export default class Danmuku {
                         marginTop: this.marginTop,
                     });
 
-                    if (!this.isStop && top !== undefined) {
-                        danmu.$state = 'emit';
-                        danmu.$ref.style.visibility = 'visible';
+                    if (danmu.$ref) {
+                        if (!this.isStop && top !== undefined) {
+                            danmu.$state = 'emit';
+                            danmu.$ref.style.visibility = 'visible';
 
-                        switch (danmu.mode) {
-                            case 0: {
-                                danmu.$ref.style.top = `${top}px`;
-                                const translateX = clientWidth + danmu.$ref.clientWidth;
-                                danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                                danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
-                                break;
+                            switch (danmu.mode) {
+                                case 0: {
+                                    danmu.$ref.style.top = `${top}px`;
+                                    const translateX = clientWidth + danmu.$ref.clientWidth;
+                                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                                    break;
+                                }
+                                case 1:
+                                    danmu.$ref.style.left = '50%';
+                                    danmu.$ref.style.top = `${top}px`;
+                                    danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
+                                    break;
+                                default:
+                                    break;
                             }
-                            case 1:
-                                danmu.$ref.style.left = '50%';
-                                danmu.$ref.style.top = `${top}px`;
-                                danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
-                                break;
-                            default:
-                                break;
+                        } else {
+                            danmu.$state = 'ready';
+                            this.$refs.push(danmu.$ref);
+                            danmu.$ref = null;
                         }
-                    } else {
-                        danmu.$state = 'ready';
-                        this.$refs.push(danmu.$ref);
-                        danmu.$ref = null;
                     }
                 }
             }
