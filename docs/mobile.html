@@ -71,9 +71,10 @@
                 'x5-video-orientation': 'portraint',
             },
             subtitle: {
+                url: '/assets/sample/subtitle.srt',
                 style: {
                     color: '#48aff0',
-                    fontSize: '14px',
+                    fontSize: '18px',
                 },
             },
             layers: [
@@ -144,13 +145,12 @@
                     danmuku: '/assets/sample/danmuku-v2.xml',
                     speed: 5,
                     opacity: 1,
-                    fontSize: 14,
+                    fontSize: 16,
                     maxlength: 100,
                     margin: ['10%', 60],
                     antiOverlap: true,
                     synchronousPlayback: false,
                     filter: (danmu) => danmu.text.length < 50,
-                    // filter: (danmu) => danmu.mode === 1,
                 }),
             ],
             whitelist: ['*'],
