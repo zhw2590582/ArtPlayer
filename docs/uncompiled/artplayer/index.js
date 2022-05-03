@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1651480057739";
+        return "1651539682464";
     }
     static get config() {
         return _configDefault.default;
@@ -1345,12 +1345,18 @@ var _zhCnJson = require("./zh-cn.json");
 var _zhCnJsonDefault = parcelHelpers.interopDefault(_zhCnJson);
 var _zhTwJson = require("./zh-tw.json");
 var _zhTwJsonDefault = parcelHelpers.interopDefault(_zhTwJson);
+var _plJson = require("./pl.json");
+var _plJsonDefault = parcelHelpers.interopDefault(_plJson);
+var _csJson = require("./cs.json");
+var _csJsonDefault = parcelHelpers.interopDefault(_csJson);
 class I18n {
     constructor(art){
         this.art = art;
         this.languages = {
             'zh-cn': _zhCnJsonDefault.default,
-            'zh-tw': _zhTwJsonDefault.default
+            'zh-tw': _zhTwJsonDefault.default,
+            'pl': _plJsonDefault.default,
+            'cs': _csJsonDefault.default
         };
         this.init();
     }
@@ -1368,11 +1374,17 @@ class I18n {
 }
 exports.default = I18n;
 
-},{"../utils":"euhMG","./zh-cn.json":"b9Y6f","./zh-tw.json":"9Kly9","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"b9Y6f":[function(require,module,exports) {
+},{"../utils":"euhMG","./zh-cn.json":"b9Y6f","./zh-tw.json":"9Kly9","./pl.json":"krPOm","./cs.json":"jNcs5","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"b9Y6f":[function(require,module,exports) {
 module.exports = JSON.parse("{\"Video Info\":\"统计信息\",\"Close\":\"关闭\",\"Video Load Failed\":\"加载失败\",\"Volume\":\"音量\",\"Play\":\"播放\",\"Pause\":\"暂停\",\"Rate\":\"速度\",\"Mute\":\"静音\",\"Video Flip\":\"画面翻转\",\"Horizontal\":\"水平\",\"Vertical\":\"垂直\",\"Reconnect\":\"重新连接\",\"Hide Subtitle\":\"隐藏字幕\",\"Show Subtitle\":\"显示字幕\",\"Show Setting\":\"显示设置\",\"Hide Setting\":\"隐藏设置\",\"Screenshot\":\"截图\",\"Play Speed\":\"播放速度\",\"Aspect Ratio\":\"画面比例\",\"Default\":\"默认\",\"Normal\":\"正常\",\"Open\":\"打开\",\"Switch Video\":\"切换\",\"Switch Subtitle\":\"切换字幕\",\"Fullscreen\":\"全屏\",\"Exit Fullscreen\":\"退出全屏\",\"Web Fullscreen\":\"网页全屏\",\"Exit Web Fullscreen\":\"退出网页全屏\",\"Mini Player\":\"迷你播放器\",\"PIP Mode\":\"开启画中画\",\"Exit PIP Mode\":\"退出画中画\",\"PIP Not Supported\":\"不支持画中画\",\"Fullscreen Not Supported\":\"不支持全屏\",\"Subtitle Offset\":\"字幕偏移\",\"Auto playback at\":\"已为您定位至\"}");
 
 },{}],"9Kly9":[function(require,module,exports) {
 module.exports = JSON.parse("{\"Video Info\":\"統計訊息\",\"Close\":\"關閉\",\"Video Load Failed\":\"載入失敗\",\"Volume\":\"音量\",\"Play\":\"播放\",\"Pause\":\"暫停\",\"Rate\":\"速度\",\"Mute\":\"靜音\",\"Video Flip\":\"畫面翻轉\",\"Horizontal\":\"水平\",\"Vertical\":\"垂直\",\"Reconnect\":\"重新連接\",\"Hide Subtitle\":\"隱藏字幕\",\"Show Subtitle\":\"顯示字幕\",\"Show Setting\":\"顯示设置\",\"Hide Setting\":\"隱藏设置\",\"Screenshot\":\"截圖\",\"Play Speed\":\"播放速度\",\"Aspect Ratio\":\"畫面比例\",\"Default\":\"默認\",\"Normal\":\"正常\",\"Open\":\"打開\",\"Switch Video\":\"切換\",\"Switch Subtitle\":\"切換字幕\",\"Fullscreen\":\"全屏\",\"Exit Fullscreen\":\"退出全屏\",\"Web Fullscreen\":\"網頁全屏\",\"Exit Web Fullscreen\":\"退出網頁全屏\",\"Mini Player\":\"迷你播放器\",\"PIP Mode\":\"開啟畫中畫\",\"Exit PIP Mode\":\"退出畫中畫\",\"PIP Not Supported\":\"不支持畫中畫\",\"Fullscreen Not Supported\":\"不支持全屏\",\"Subtitle Offset\":\"字幕偏移\",\"Auto playback at\":\"已為您定位至\"}");
+
+},{}],"krPOm":[function(require,module,exports) {
+module.exports = JSON.parse("{\"Video Info\":\"Informacje o wideo\",\"Close\":\"Zamknij\",\"Video Load Failed\":\"Błąd ładowania wideo\",\"Volume\":\"Głośność\",\"Play\":\"Odtwórz\",\"Pause\":\"Wstrzymaj\",\"Rate\":\"Oceń\",\"Mute\":\"Wycisz\",\"Video Flip\":\"Rotacja wideo\",\"Horizontal\":\"Pozioma\",\"Vertical\":\"Pionowa\",\"Reconnect\":\"Połącz ponownie\",\"Hide Subtitle\":\"Ukryj napisy\",\"Show Subtitle\":\"Pokaż napisy\",\"Show Setting\":\"Pokaż ustawienia\",\"Hide Setting\":\"Ukryj ustawienia\",\"Screenshot\":\"Zrzut ekranu\",\"Play Speed\":\"Prędkość odtwarzania\",\"Aspect Ratio\":\"Współczynnik proporcji\",\"Default\":\"Domyślny\",\"Normal\":\"Normalny\",\"Open\":\"Otwórz\",\"Switch Video\":\"Przełącz wideo\",\"Switch Subtitle\":\"Przełącz napisy\",\"Fullscreen\":\"Pełny ekran\",\"Exit Fullscreen\":\"Zamknij pełny ekran\",\"Web Fullscreen\":\"Tryb pełnej strony\",\"Exit Web Fullscreen\":\"Zamknij tryb pełnej strony\",\"Mini Player\":\"Miniodtwarzacz\",\"PIP Mode\":\"Tryb PiP\",\"Exit PIP Mode\":\"Zamknij tryb PiP\",\"PIP Not Supported\":\"Tryb PiP nieobsługiwany\",\"Fullscreen Not Supported\":\"Pełny ekran nieobsługiwany\",\"Subtitle Offset\":\"Przesunięcie napisów\",\"Auto playback at\":\"Automatyczne odtwarzanie za\"}");
+
+},{}],"jNcs5":[function(require,module,exports) {
+module.exports = JSON.parse("{\"Video Info\":\"Info o videu\",\"Close\":\"Zavřít\",\"Video Load Failed\":\"Nahrání videa selhalo\",\"Volume\":\"Hlasitost\",\"Play\":\"Přehrát\",\"Pause\":\"Pozastavit\",\"Rate\":\"Hodnocení\",\"Mute\":\"Ztlumit\",\"Video Flip\":\"Otočit video\",\"Horizontal\":\"Horizontálně\",\"Vertical\":\"Vertikálně\",\"Reconnect\":\"Opětovné připojení\",\"Hide Subtitle\":\"Skrýt titulky\",\"Show Subtitle\":\"Ukázat titulky\",\"Show Setting\":\"Zobrazit nastavení\",\"Hide Setting\":\"Skrýt nastavení\",\"Screenshot\":\"Snímek obrazovky\",\"Play Speed\":\"Rychlost přehrávání\",\"Aspect Ratio\":\"Poměr stran\",\"Default\":\"Výchozí\",\"Normal\":\"Normální\",\"Open\":\"Otevřít\",\"Switch Video\":\"Přepnout video\",\"Switch Subtitle\":\"Přepnout titulky\",\"Fullscreen\":\"Celá obrazovka\",\"Exit Fullscreen\":\"Opustit režim celé obrazovky\",\"Web Fullscreen\":\"Celá stránka\",\"Exit Web Fullscreen\":\"Zavřít režim celé stránky\",\"Mini Player\":\"Mini přehrávač\",\"PIP Mode\":\"Režim PIP\",\"Exit PIP Mode\":\"Opustit režim PIP\",\"PIP Not Supported\":\"Režim PIP není podporován\",\"Fullscreen Not Supported\":\"Režim celé obrazovky není podporován\",\"Subtitle Offset\":\"Posun titulků\",\"Auto playback at\":\"Automatické přehrávání za\"}");
 
 },{}],"kmRM5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

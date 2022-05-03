@@ -582,6 +582,31 @@ declare class Artplayer extends Player {
     readonly isFocus: boolean;
     readonly isDestroy: boolean;
 
+    static NOTICE_TIME: number;
+    static SETTING_WIDTH: number;
+    static SETTING_ITEM_WIDTH: number;
+    static SETTING_ITEM_HEIGHT: number;
+    static INDICATOR_SIZE: number;
+    static INDICATOR_SIZE_ICON: number;
+    static INDICATOR_SIZE_MOBILE: number;
+    static INDICATOR_SIZE_MOBILE_ICON: number;
+    static VOLUME_PANEL_WIDTH: number;
+    static VOLUME_HANDLE_WIDTH: number;
+    static RESIZE_TIME: number;
+    static SCROLL_TIME: number;
+    static SCROLL_GAP: number;
+    static AUTO_PLAYBACK_MAX: number;
+    static RECONNECT_TIME_MAX: number;
+    static RECONNECT_SLEEP_TIME: number;
+    static CONTROL_HIDE_TIME: number;
+    static DB_CLICE_TIME: number;
+    static MOBILE_AUTO_PLAYBACKRAT: number;
+    static MOBILE_AUTO_PLAYBACKRATE_TIME: number;
+    static MOBILE_AUTO_ORIENTATION_TIME: number;
+    static INFO_LOOP_TIME: number;
+    static FAST_FORWARD_VALUE: number;
+    static FAST_FORWARD_TIME: number;
+
     on(name: string, fn: Function, ctx?: object): void;
     once(name: string, fn: Function, ctx?: object): void;
     emit(name: string): void;
