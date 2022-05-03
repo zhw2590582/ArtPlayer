@@ -8,7 +8,7 @@ export default function getDanmuTop({
     antiOverlap,
 }) {
     const danmus = emits
-        .filter((item) => item.mode === target.mode && item.top >= marginTop && item.top <= clientHeight - marginBottom)
+        .filter((item) => item.mode === target.mode && item.top <= clientHeight - marginBottom)
         .sort((prev, next) => prev.top - next.top);
 
     if (danmus.length === 0) {
