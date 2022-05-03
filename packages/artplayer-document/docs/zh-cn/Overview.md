@@ -79,95 +79,18 @@ const Artplayer = require('artplayer');
 </html>
 ```
 
-### 与 `Vue` 使用
+### 与 `Vue.js` 使用
 
-👉 [点击打开在线演示](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
+[artplayer-template/vue.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/vue.js)
 
-```jsx
-<template>
-  <Artplayer @get-instance="getInstance" :option="option" :style="style" />
-</template>
+### 与 `React.js` 使用
 
-<script>
-import Artplayer from "artplayer/examples/vue/Artplayer";
+[artplayer-template/react.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/react.js)
 
-export default {
-  data() {
-    return {
-      option: {
-        url: "https://artplayer.org/assets/sample/video.mp4",
-      },
-      style: {
-        width: "600px",
-        height: "400px",
-        margin: "60px auto 0",
-      },
-    };
-  },
-  components: {
-    Artplayer,
-  },
-  methods: {
-    getInstance(art) {
-      console.log(art);
-    },
-  },
-};
-</script>
-```
+### 与 `Next.js` 使用
 
-### 与 `React` 使用
+[artplayer-template/next.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/next.js)
 
-👉 [点击打开在线演示](https://codesandbox.io/s/artplayer-react-demo-n74859y9rl?file=/src/index.js)
+### 与 `Nuxt.js` 使用
 
-```jsx
-import React from "react";
-import ReactDOM from "react-dom";
-import Artplayer from "artplayer/examples/react/Artplayer";
-
-function App() {
-  return (
-    <div>
-      <Artplayer
-        option={{
-          url: "https://artplayer.org/assets/sample/video.mp4"
-        }}
-        style={{
-          width: "600px",
-          height: "400px",
-          margin: "60px auto 0"
-        }}
-        getInstance={(art) => console.log(art)}
-      />
-    </div>
-  );
-}
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
-```
-
-:::caution 提示
-
-在 `Vue` 和 `React` 里修改 `option` 不能动态修改 `Artplayer` 实例
-
-:::
-
-## 演示
-
-:::tip 提示
-
-本文档里，通过点击代码块前的 `Run Code` 按钮，可以马上进入演示
-
-:::
-
-----------------------------------------------
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-```
+[artplayer-template/nuxt.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/nuxt.js)

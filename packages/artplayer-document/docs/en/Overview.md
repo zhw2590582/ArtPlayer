@@ -80,95 +80,18 @@ The size of the player depends on the size of the `container`, so your `containe
 </html>
 ```
 
-### Use in `Vue`
+### Use in `Vue.js`
 
-👉 [Click to open an online demo](https://codesandbox.io/s/artplayer-vue-demo-3lz7m?file=/src/App.vue)
+[artplayer-template/vue.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/vue.js)
 
-```jsx
-<template>
-  <Artplayer @get-instance="getInstance" :option="option" :style="style" />
-</template>
+### Use in `React.js`
 
-<script>
-import Artplayer from "artplayer/examples/vue/Artplayer";
+[artplayer-template/react.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/react.js)
 
-export default {
-  data() {
-    return {
-      option: {
-        url: "https://artplayer.org/assets/sample/video.mp4",
-      },
-      style: {
-        width: "600px",
-        height: "400px",
-        margin: "60px auto 0",
-      },
-    };
-  },
-  components: {
-    Artplayer,
-  },
-  methods: {
-    getInstance(art) {
-      console.log(art);
-    },
-  },
-};
-</script>
-```
+### Use in `Next.js`
 
-### Use in `React`
+[artplayer-template/next.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/next.js)
 
-👉 [Click to open an online demo](https://codesandbox.io/s/artplayer-react-demo-n74859y9rl?file=/src/index.js)
+### Use in `Nuxt.js`
 
-```jsx
-import React from "react";
-import ReactDOM from "react-dom";
-import Artplayer from "artplayer/examples/react/Artplayer";
-
-function App() {
-  return (
-    <div>
-      <Artplayer
-        option={{
-          url: "https://artplayer.org/assets/sample/video.mp4"
-        }}
-        style={{
-          width: "600px",
-          height: "400px",
-          margin: "60px auto 0"
-        }}
-        getInstance={(art) => console.log(art)}
-      />
-    </div>
-  );
-}
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
-```
-
-:::caution Tip
-
-Modifying `option` not dynamically modified ArtPlayer instances in `Vue` and `React`
-
-:::
-
-## Demo
-
-:::tip Tip
-
-In this document, by clicking the `Run Code` button before the code block, you can immediately enter the demo.
-
-:::
-
-----------------------------------------------
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-```
+[artplayer-template/nuxt.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/nuxt.js)
