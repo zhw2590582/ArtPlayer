@@ -1,36 +1,26 @@
-import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
 
-export default class ArtplayerReact extends React.Component {
-    constructor(props) {
-        super(props);
-        this.instance = null;
-        this.artRef = React.createRef();
-    }
+export default function ({ option, getInstance, ...rest }) {
+    const artRef = useRef();
 
-    componentDidMount() {
-        const { option, getInstance } = this.props;
-        this.instance = new Artplayer({
+    useEffect(() => {
+        const art = new Artplayer({
             ...option,
-            container: this.artRef.current,
+            container: artRef.current,
         });
 
         if (getInstance && typeof getInstance === 'function') {
-            getInstance(this.instance);
+            getInstance(art);
         }
-    }
 
-    componentWillUnmount() {
-        if (this.instance && this.instance.destroy) {
-            this.instance.destroy();
-        }
-    }
+        return () => {
+            if (art && art.destroy) {
+                art.destroy(false);
+            }
+        };
+    }, [option, getInstance]);
 
-    render() {
-        const { option, getInstance, ...rest } = this.props;
-        return React.createElement('div', {
-            ref: this.artRef,
-            ...rest,
-        });
-    }
+    return <div ref={artRef} {...rest}></div>;
 }
