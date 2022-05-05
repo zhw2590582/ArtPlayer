@@ -22,8 +22,5 @@ export default function Player({ option, getInstance, ...rest }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return React.createElement('div', {
-        ref: artRef,
-        ...rest,
-    });
+    return <div ref={artRef} {...rest}></div>;
 }
