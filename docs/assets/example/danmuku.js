@@ -21,7 +21,7 @@ var art = new Artplayer(
         ],
     },
     function () {
-        const danmuku = document.querySelector('.danmuku');
+        const danmuku = document.querySelector('.artplayer-danmuku');
         art.plugins.artplayerPluginDanmuku.mount(danmuku);
     },
 );

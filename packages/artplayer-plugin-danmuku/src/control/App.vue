@@ -1,8 +1,8 @@
 <template>
     <div class="artplayer-plugin-danmuku">
-        <div class="apd-toggle"></div>
-        <div class="apd-config"></div>
-        <div class="apd-input"></div>
+        <div class="apd-toggle">toggle</div>
+        <div class="apd-config">config</div>
+        <div class="apd-input">input</div>
     </div>
 </template>
 
@@ -10,7 +10,6 @@
 export default {
     data() {
         return {
-            test: 'test',
             option: {
                 danmuku: [],
                 speed: 5,

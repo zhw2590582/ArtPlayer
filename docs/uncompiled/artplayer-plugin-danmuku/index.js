@@ -9925,7 +9925,6 @@ parcelHelpers.defineInteropFlag(exports);
 exports.default = {
     data () {
         return {
-            test: 'test',
             option: {
                 danmuku: [],
                 speed: 5,
@@ -9966,13 +9965,13 @@ const _hoisted_1 = {
 };
 const _hoisted_2 = /*#__PURE__*/ _vue.createElementVNode("div", {
     class: "apd-toggle"
-}, null, -1 /* HOISTED */ );
+}, "toggle", -1 /* HOISTED */ );
 const _hoisted_3 = /*#__PURE__*/ _vue.createElementVNode("div", {
     class: "apd-config"
-}, null, -1 /* HOISTED */ );
+}, "config", -1 /* HOISTED */ );
 const _hoisted_4 = /*#__PURE__*/ _vue.createElementVNode("div", {
     class: "apd-input"
-}, null, -1 /* HOISTED */ );
+}, "input", -1 /* HOISTED */ );
 const _hoisted_5 = [
     _hoisted_2,
     _hoisted_3,
@@ -9989,7 +9988,7 @@ let NOOP = ()=>{};
 exports.default = (script)=>{};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"24DKH":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-danmuku {\n  position: relative;\n}\n\n";
+module.exports = ".artplayer-plugin-danmuku {\n  justify-content: space-between;\n  align-items: center;\n  font-family: Roboto, Arial, Helvetica, sans-serif;\n  font-size: 14px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku * {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n.artplayer-plugin-danmuku ::-webkit-scrollbar {\n  width: 5px;\n  height: 5px;\n}\n\n.artplayer-plugin-danmuku ::-webkit-scrollbar-thumb {\n  background-color: #666;\n}\n\n.artplayer-plugin-danmuku ::-webkit-scrollbar-thumb:hover {\n  background-color: #ccc;\n}\n\n.artplayer-plugin-danmuku .apd-toggle, .artplayer-plugin-danmuku .apd-config {\n  width: 50px;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  flex: 1;\n}\n\n";
 
 },{}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
 
