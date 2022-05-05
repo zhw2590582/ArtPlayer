@@ -153,7 +153,7 @@ function artplayerPluginDanmuku(option) {
     return (art)=>{
         const danmuku = new _danmukuDefault.default(art, option);
         const control = new _controlDefault.default(art, danmuku);
-        if (option.mount) control.mount(option.mount);
+        if (option.el) control.mount(option.el);
         return {
             name: 'artplayerPluginDanmuku',
             emit: danmuku.emit.bind(danmuku),
