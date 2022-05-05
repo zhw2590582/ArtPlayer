@@ -153,6 +153,7 @@ function artplayerPluginDanmuku(option) {
     return (art)=>{
         const danmuku = new _danmukuDefault.default(art, option);
         const control = new _controlDefault.default(art, danmuku);
+        if (option.mount) control.mount(option.mount);
         return {
             name: 'artplayerPluginDanmuku',
             emit: danmuku.emit.bind(danmuku),
@@ -9960,8 +9961,22 @@ var _vue = require("vue");
 const _hoisted_1 = {
     class: "artplayer-plugin-danmuku"
 };
+const _hoisted_2 = /*#__PURE__*/ _vue.createElementVNode("div", {
+    class: "apd-toggle"
+}, null, -1 /* HOISTED */ );
+const _hoisted_3 = /*#__PURE__*/ _vue.createElementVNode("div", {
+    class: "apd-config"
+}, null, -1 /* HOISTED */ );
+const _hoisted_4 = /*#__PURE__*/ _vue.createElementVNode("div", {
+    class: "apd-input"
+}, null, -1 /* HOISTED */ );
+const _hoisted_5 = [
+    _hoisted_2,
+    _hoisted_3,
+    _hoisted_4
+];
 function render(_ctx, _cache) {
-    return _vue.openBlock(), _vue.createElementBlock("div", _hoisted_1, _vue.toDisplayString(_ctx.test), 1 /* TEXT */ );
+    return _vue.openBlock(), _vue.createElementBlock("div", _hoisted_1, _hoisted_5);
 }
 
 },{"vue":"5Gshn","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"3vOzU":[function(require,module,exports) {
