@@ -16,7 +16,7 @@ async function develop(name) {
         root: 'docs',
         fallback: 'index.html',
         reload: true,
-        port: 8081,
+        port: 8082,
     });
 
     process.chdir(projects[name]);

@@ -189,6 +189,7 @@ img {
     height: 70%;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -199,6 +200,7 @@ img {
     font-size: 20px;
     width: 90%;
     height: 65%;
+    margin-bottom: 10px;
     background-color: rgb(0 0 0 / 20%);
     border: 1px dashed rgba(255, 255, 255, 0.1);
 }

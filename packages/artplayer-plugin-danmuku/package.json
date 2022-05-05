@@ -18,5 +18,8 @@
     "html5",
     "video",
     "player"
-  ]
+  ],
+  "dependencies": {
+    "vue": "^3.2.33"
+  }
 }

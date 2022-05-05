@@ -37,6 +37,7 @@
     "@parcel/reporter-cli": "^2.5.0",
     "@parcel/transformer-inline-string": "^2.5.0",
     "@parcel/transformer-less": "^2.5.0",
+    "@parcel/transformer-vue": "^2.5.0",
     "chai": "^4.3.6",
     "cpy": "^9.0.1",
     "cross-env": "^7.0.3",
