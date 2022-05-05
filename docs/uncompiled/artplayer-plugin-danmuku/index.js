@@ -164,6 +164,9 @@ function artplayerPluginDanmuku(option) {
             unmount: control.unmount.bind(control),
             get isHide () {
                 return danmuku.isHide;
+            },
+            get isStop () {
+                return danmuku.isStop;
             }
         };
     };
