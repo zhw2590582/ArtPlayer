@@ -27,13 +27,18 @@ export default class Danmuku {
             }
         }
 
-        art.on('video:play', this.start.bind(this));
-        art.on('video:playing', this.start.bind(this));
-        art.on('video:pause', this.stop.bind(this));
-        art.on('video:waiting', this.stop.bind(this));
-        art.on('fullscreen', this.reset.bind(this));
-        art.on('fullscreenWeb', this.reset.bind(this));
-        art.on('destroy', this.destroy.bind(this));
+        this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
+        this.reset = this.reset.bind(this);
+        this.destroy = this.destroy.bind(this);
+
+        art.on('video:play', this.start);
+        art.on('video:playing', this.start);
+        art.on('video:pause', this.stop);
+        art.on('video:waiting', this.stop);
+        art.on('fullscreen', this.reset);
+        art.on('fullscreenWeb', this.reset);
+        art.on('destroy', this.destroy);
 
         this.load();
     }
@@ -447,6 +452,13 @@ export default class Danmuku {
     destroy() {
         this.stop();
         if (this.worker && this.worker.terminate) this.worker.terminate();
+        this.art.off('video:play', this.start);
+        this.art.off('video:playing', this.start);
+        this.art.off('video:pause', this.stop);
+        this.art.off('video:waiting', this.stop);
+        this.art.off('fullscreen', this.reset);
+        this.art.off('fullscreenWeb', this.reset);
+        this.art.off('destroy', this.destroy);
         this.art.emit('artplayerPluginDanmuku:destroy');
     }
 }
