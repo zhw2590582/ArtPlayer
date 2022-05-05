@@ -738,9 +738,19 @@ module.exports = "data:application/javascript,function%20getDanmuTop%28%7B%20tar
 },{}],"nK2ZQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _styleLess = require("bundle-text:./style.less");
+var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 var _vue = require("vue");
 var _appVue = require("./App.vue");
 var _appVueDefault = parcelHelpers.interopDefault(_appVue);
+if (typeof document !== 'undefined') {
+    if (!document.getElementById('artplayer-plugin-danmuku-style')) {
+        const $style = document.createElement('style');
+        $style.id = 'artplayer-plugin-danmuku-style';
+        $style.textContent = _styleLessDefault.default;
+        document.head.appendChild($style);
+    }
+}
 class Control {
     constructor(art, danmuku){
         this.art = art;
@@ -770,7 +780,7 @@ class Control {
 }
 exports.default = Control;
 
-},{"vue":"5Gshn","./App.vue":"b6WPi","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"5Gshn":[function(require,module,exports) {
+},{"vue":"5Gshn","./App.vue":"b6WPi","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","bundle-text:./style.less":"24DKH"}],"5Gshn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "compile", ()=>compile
@@ -9937,7 +9947,7 @@ exports.default = {
         };
     },
     mounted () {
-        this.option = this.$danmuku.option;
+        this.option = Object.assign(this.option, this.$danmuku.option);
     }
 };
 
@@ -9947,8 +9957,11 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "render", ()=>render
 );
 var _vue = require("vue");
+const _hoisted_1 = {
+    class: "artplayer-plugin-danmuku"
+};
 function render(_ctx, _cache) {
-    return _vue.openBlock(), _vue.createElementBlock("div", null, _vue.toDisplayString(_ctx.test), 1 /* TEXT */ );
+    return _vue.openBlock(), _vue.createElementBlock("div", _hoisted_1, _vue.toDisplayString(_ctx.test), 1 /* TEXT */ );
 }
 
 },{"vue":"5Gshn","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"3vOzU":[function(require,module,exports) {
@@ -9957,6 +9970,9 @@ parcelHelpers.defineInteropFlag(exports);
 let NOOP = ()=>{};
 exports.default = (script)=>{};
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"24DKH":[function(require,module,exports) {
+module.exports = ".artplayer-plugin-danmuku {\n  position: relative;\n}\n\n";
+
+},{}]},["gEVO5"], "gEVO5", "parcelRequire93cf")
 
 //# sourceMappingURL=index.js.map

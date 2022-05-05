@@ -1,5 +1,15 @@
+import style from 'bundle-text:./style.less';
 import { createApp } from 'vue';
 import App from './App.vue';
+
+if (typeof document !== 'undefined') {
+    if (!document.getElementById('artplayer-plugin-danmuku-style')) {
+        const $style = document.createElement('style');
+        $style.id = 'artplayer-plugin-danmuku-style';
+        $style.textContent = style;
+        document.head.appendChild($style);
+    }
+}
 
 export default class Control {
     constructor(art, danmuku) {
