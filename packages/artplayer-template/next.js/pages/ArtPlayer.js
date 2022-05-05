@@ -1,25 +1,25 @@
-import { useEffect, useRef } from "react";
-import Artplayer from "artplayer";
+import { useEffect, useRef } from 'react';
+import Artplayer from 'artplayer';
 
 export default function ({ option, getInstance, ...rest }) {
-  const artRef = useRef();
+    const artRef = useRef();
 
-  useEffect(() => {
-    const art = new Artplayer({
-      ...option,
-      container: artRef.current,
-    });
+    useEffect(() => {
+        const art = new Artplayer({
+            ...option,
+            container: artRef.current,
+        });
 
-    if (getInstance && typeof getInstance === "function") {
-      getInstance(art);
-    }
+        if (getInstance && typeof getInstance === 'function') {
+            getInstance(art);
+        }
 
-    return () => {
-      if (art && art.destroy) {
-        art.destroy(false);
-      }
-    };
-  }, [option, getInstance]);
+        return () => {
+            if (art && art.destroy) {
+                art.destroy(false);
+            }
+        };
+    }, []);
 
-  return <div ref={artRef} {...rest}></div>;
+    return <div ref={artRef} {...rest}></div>;
 }
