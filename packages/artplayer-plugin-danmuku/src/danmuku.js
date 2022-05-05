@@ -33,7 +33,7 @@ export default class Danmuku {
         art.on('video:waiting', this.stop.bind(this));
         art.on('fullscreen', this.reset.bind(this));
         art.on('fullscreenWeb', this.reset.bind(this));
-        art.on('destroy', this.stop.bind(this));
+        art.on('destroy', this.destroy.bind(this));
 
         this.load();
     }
@@ -442,5 +442,11 @@ export default class Danmuku {
         });
 
         return this;
+    }
+
+    destroy() {
+        this.stop();
+        if (this.worker && this.worker.terminate) this.worker.terminate();
+        this.art.emit('artplayerPluginDanmuku:destroy');
     }
 }
