@@ -75,7 +75,6 @@ var art = new Artplayer({
             ],
             speed: 5, // Animation time
             opacity: 1, // Opacity
-            color: '#fff', // Font color
             size: 25, // Font size
             margin: ['10%', 20], // Margin top and margin bottom
             antiOverlap: true, // Anti overlap

@@ -75,7 +75,6 @@ var art = new Artplayer({
             ],
             speed: 5, // 全局持续时间
             opacity: 1, // 全局透明度
-            color: '#fff', // 全局字体颜色
             size: 25, // 全局字体大小
             margin: ['10%', 20], // 距离顶部和距离底部的高度值
             antiOverlap: true, // 防重叠
