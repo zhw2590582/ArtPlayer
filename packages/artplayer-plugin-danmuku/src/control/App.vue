@@ -1,5 +1,5 @@
 <template>
-    <div>{{ test }}</div>
+    <div class="artplayer-plugin-danmuku">{{ test }}</div>
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
         };
     },
     mounted() {
-        this.option = this.$danmuku.option;
+        this.option = Object.assign(this.option, this.$danmuku.option);
     },
 };
 </script>

@@ -223,10 +223,12 @@ Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
 
 if (typeof document !== 'undefined') {
-    const $style = document.createElement('style');
-    $style.dataset.from = 'artplayer';
-    $style.textContent = style;
-    document.head.appendChild($style);
+    if (!document.getElementById('artplayer-style')) {
+        const $style = document.createElement('style');
+        $style.id = 'artplayer-style';
+        $style.textContent = style;
+        document.head.appendChild($style);
+    }
 }
 
 if (typeof window !== 'undefined') {
