@@ -21,6 +21,9 @@ export default function artplayerPluginDanmuku(option) {
             get isHide() {
                 return danmuku.isHide;
             },
+            get isStop() {
+                return danmuku.isStop;
+            },
         };
     };
 }
