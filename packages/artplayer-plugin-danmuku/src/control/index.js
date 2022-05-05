@@ -18,7 +18,7 @@ export default class Control {
         this.apps = new Map();
     }
 
-    mount($el) {
+    mount(el) {
         const that = this;
         const app = createApp(App);
 
@@ -29,17 +29,17 @@ export default class Control {
             },
         });
 
-        app.mount($el);
-        this.apps.set($el, app);
+        app.mount(el);
+        this.apps.set(el, app);
 
         return app;
     }
 
-    unmount($el) {
-        const app = this.apps.get($el);
+    unmount(el) {
+        const app = this.apps.get(el);
         if (app) {
             app.unmount();
-            this.apps.delete($el);
+            this.apps.delete(el);
         }
     }
 }
