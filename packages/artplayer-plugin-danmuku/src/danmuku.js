@@ -72,16 +72,16 @@ export default class Danmuku {
 
     get marginTop() {
         const { clamp } = this.utils;
-        const { $player } = this.art.template;
         const value = this.option.margin[0];
+        const { clientHeight } = this.$player;
 
         if (typeof value === 'number') {
-            return clamp(value, 0, $player.clientHeight);
+            return clamp(value, 0, clientHeight);
         }
 
         if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
-            return clamp($player.clientHeight * ratio, 0, $player.clientHeight);
+            return clamp(clientHeight * ratio, 0, clientHeight);
         }
 
         return Danmuku.option.margin[0];
@@ -89,16 +89,16 @@ export default class Danmuku {
 
     get marginBottom() {
         const { clamp } = this.utils;
-        const { $player } = this.art.template;
         const value = this.option.margin[1];
+        const { clientHeight } = this.$player;
 
         if (typeof value === 'number') {
-            return clamp(value, 0, $player.clientHeight);
+            return clamp(value, 0, clientHeight);
         }
 
         if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
-            return clamp($player.clientHeight * ratio, 0, $player.clientHeight);
+            return clamp(clientHeight * ratio, 0, clientHeight);
         }
 
         return Danmuku.option.margin[1];
@@ -295,8 +295,6 @@ export default class Danmuku {
     }
 
     update() {
-        const { clientWidth } = this.$player;
-
         this.timer = window.requestAnimationFrame(async () => {
             if (this.art.playing && !this.isHide) {
                 this.filter('emit', (danmu) => {
@@ -309,6 +307,7 @@ export default class Danmuku {
                 });
 
                 const readys = this.getReady();
+                const { clientWidth, clientHeight } = this.$player;
                 for (let index = 0; index < readys.length; index++) {
                     const danmu = readys[index];
                     danmu.$ref = this.getRef();
@@ -338,8 +337,8 @@ export default class Danmuku {
                         target,
                         emits: this.getEmits(),
                         antiOverlap: this.option.antiOverlap,
-                        clientWidth: this.$player.clientWidth,
-                        clientHeight: this.$player.clientHeight,
+                        clientWidth: clientWidth,
+                        clientHeight: clientHeight,
                         marginBottom: this.marginBottom,
                         marginTop: this.marginTop,
                     });
