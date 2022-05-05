@@ -4,7 +4,7 @@ import Control from './control';
 export default function artplayerPluginDanmuku(option) {
     return (art) => {
         const danmuku = new Danmuku(art, option);
-        const control = new Control(danmuku);
+        const control = new Control(art, danmuku);
 
         return {
             name: 'artplayerPluginDanmuku',
