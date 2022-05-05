@@ -205,6 +205,10 @@ img {
     border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
+.part-right .video-wrap .artplayer-danmuku {
+    width: 300px;
+}
+
 .part-right .console {
     position: relative;
     z-index: 8;

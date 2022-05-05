@@ -1,15 +1,39 @@
 .artplayer-plugin-danmuku {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #666;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #ccc;
+    }
 
     .apd-toggle {
-
+        width: 50px;
     }
 
     .apd-config {
-
+        width: 50px;
     }
 
     .apd-input {
-
+        flex: 1;
     }
 }
