@@ -6,6 +6,10 @@ export default function artplayerPluginDanmuku(option) {
         const danmuku = new Danmuku(art, option);
         const control = new Control(art, danmuku);
 
+        if (option.mount) {
+            control.mount(option.mount);
+        }
+
         return {
             name: 'artplayerPluginDanmuku',
             emit: danmuku.emit.bind(danmuku),

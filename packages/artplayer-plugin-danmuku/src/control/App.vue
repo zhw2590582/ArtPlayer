@@ -1,5 +1,9 @@
 <template>
-    <div class="artplayer-plugin-danmuku">{{ test }}</div>
+    <div class="artplayer-plugin-danmuku">
+        <div class="apd-toggle"></div>
+        <div class="apd-config"></div>
+        <div class="apd-input"></div>
+    </div>
 </template>
 
 <script>
