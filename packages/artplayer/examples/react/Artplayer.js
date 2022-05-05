@@ -19,7 +19,7 @@ export default function Player({ option, getInstance, ...rest }) {
                 art.destroy(false);
             }
         };
-    }, [option, getInstance]);
+    }, []);
 
     return React.createElement('div', {
         ref: artRef,
