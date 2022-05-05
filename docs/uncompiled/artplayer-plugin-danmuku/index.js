@@ -761,7 +761,7 @@ class Control {
         this.danmuku = danmuku;
         this.apps = new Map();
     }
-    mount($el) {
+    mount(el) {
         const that = this;
         const app1 = _vue.createApp(_appVueDefault.default);
         app1.use({
@@ -770,15 +770,15 @@ class Control {
                 app.config.globalProperties.$danmuku = that.danmuku;
             }
         });
-        app1.mount($el);
-        this.apps.set($el, app1);
+        app1.mount(el);
+        this.apps.set(el, app1);
         return app1;
     }
-    unmount($el) {
-        const app = this.apps.get($el);
+    unmount(el) {
+        const app = this.apps.get(el);
         if (app) {
             app.unmount();
-            this.apps.delete($el);
+            this.apps.delete(el);
         }
     }
 }
