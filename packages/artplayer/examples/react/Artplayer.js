@@ -1,8 +1,7 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
 
-export default function ({ option, getInstance, ...rest }) {
+export default function Player({ option, getInstance, ...rest }) {
     const artRef = useRef();
 
     useEffect(() => {
@@ -22,5 +21,8 @@ export default function ({ option, getInstance, ...rest }) {
         };
     }, [option, getInstance]);
 
-    return <div ref={artRef} {...rest}></div>;
+    return React.createElement('div', {
+        ref: artRef,
+        ...rest,
+    });
 }
