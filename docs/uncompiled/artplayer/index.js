@@ -236,13 +236,13 @@ class Artplayer extends _emitterDefault.default {
         return instances;
     }
     static get version() {
-        return "4.3.22";
+        return "4.3.23";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "1651825308574";
+        return "1651825638537";
     }
     static get config() {
         return _configDefault.default;
@@ -1251,7 +1251,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.3.22"}</div>
+                  <div class="art-info-content">${"4.3.23"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -2052,7 +2052,7 @@ function getScreenfull() {
         },
         element: {
             enumerable: true,
-            get: ()=>document[nativeAPI.fullscreenElement] ?? undefined
+            get: ()=>document[nativeAPI.fullscreenElement]
         },
         isEnabled: {
             enumerable: true,
@@ -3712,7 +3712,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.22"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.23"}</a>`
     };
 }
 exports.default = version;

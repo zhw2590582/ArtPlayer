@@ -138,7 +138,7 @@ export default function getScreenfull() {
         },
         element: {
             enumerable: true,
-            get: () => document[nativeAPI.fullscreenElement] ?? undefined,
+            get: () => document[nativeAPI.fullscreenElement],
         },
         isEnabled: {
             enumerable: true,
