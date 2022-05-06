@@ -236,13 +236,13 @@ class Artplayer extends _emitterDefault.default {
         return instances;
     }
     static get version() {
-        return "4.3.21";
+        return "4.3.22";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "1651807466198";
+        return "1651825308574";
     }
     static get config() {
         return _configDefault.default;
@@ -1251,7 +1251,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.3.21"}</div>
+                  <div class="art-info-content">${"4.3.22"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -1935,7 +1935,7 @@ function fullscreenMix(art1) {
 }
 exports.default = fullscreenMix;
 
-},{"../libs/screenfull":"kv2jZ","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kv2jZ":[function(require,module,exports) {
+},{"../libs/screenfull":"eQous","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eQous":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function getScreenfull() {
@@ -1987,7 +1987,7 @@ function getScreenfull() {
         const unprefixedMethods = methodMap[0];
         const returnValue = {};
         for (const methodList of methodMap){
-            const exitFullscreenMethod = methodList?.[1];
+            const exitFullscreenMethod = methodList[1];
             if (exitFullscreenMethod in document) {
                 for (const [index, method] of methodList.entries())returnValue[unprefixedMethods[index]] = method;
                 return returnValue;
@@ -3712,7 +3712,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.21"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.3.22"}</a>`
     };
 }
 exports.default = version;

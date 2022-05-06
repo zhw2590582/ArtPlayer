@@ -1,3 +1,5 @@
+// https://github.com/sindresorhus/screenfull@6.0.1
+
 export default function getScreenfull() {
     const methodMap = [
         [
@@ -49,7 +51,7 @@ export default function getScreenfull() {
         const returnValue = {};
 
         for (const methodList of methodMap) {
-            const exitFullscreenMethod = methodList?.[1];
+            const exitFullscreenMethod = methodList[1];
             if (exitFullscreenMethod in document) {
                 for (const [index, method] of methodList.entries()) {
                     returnValue[unprefixedMethods[index]] = method;
