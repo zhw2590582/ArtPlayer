@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
 
-export default function ({ option, getInstance, ...rest }) {
+export default function Player({ option, getInstance, ...rest }) {
     const artRef = useRef();
 
     useEffect(() => {
@@ -19,6 +19,7 @@ export default function ({ option, getInstance, ...rest }) {
                 art.destroy(false);
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return <div ref={artRef} {...rest}></div>;

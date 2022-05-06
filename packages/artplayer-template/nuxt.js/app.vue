@@ -1,18 +1,11 @@
 <template>
-    <div>
-        <client-only placeholder="loading...">
-            <Artplayer @get-instance="getInstance" :option="option" :style="style" />
-        </client-only>
-    </div>
+    <Artplayer @get-instance="getInstance" :option="option" :style="style" />
 </template>
 
 <script>
 import Artplayer from './Artplayer.vue';
 
 export default {
-    components: {
-        Artplayer,
-    },
     data() {
         return {
             option: {
@@ -25,6 +18,9 @@ export default {
                 margin: '60px auto 0',
             },
         };
+    },
+    components: {
+        Artplayer,
     },
     methods: {
         getInstance(art) {

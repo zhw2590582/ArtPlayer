@@ -79,7 +79,7 @@ The size of the player depends on the size of the `container`, so your `containe
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ArtPlayer Demo</title>
+        <title>ArtPlayer</title>
         <meta charset="UTF-8" />
         <style>
             .artplayer-app {
@@ -104,12 +104,12 @@ The size of the player depends on the size of the `container`, so your `containe
 ### Use in `Vue.js` or `Nuxt.js`
 
 <Tabs>
-<TabItem value="Vue.js" label="Vue.js">
+<TabItem value="Vue.js" label="Vue.js Template">
 
 [artplayer-template/vue.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/vue.js)
 
 </TabItem>
-<TabItem value="Nuxt.js" label="Nuxt.js">
+<TabItem value="Nuxt.js" label="Nuxt.js Template">
 
 [artplayer-template/nuxt.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/nuxt.js)
 
@@ -200,12 +200,12 @@ export default {
 ### Use in `React.js` or `Next.js`
 
 <Tabs>
-<TabItem value="React.js" label="React.js">
+<TabItem value="React.js" label="React.js Template">
 
 [artplayer-template/react.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/react.js)
 
 </TabItem>
-<TabItem value="Next.js" label="Next.js">
+<TabItem value="Next.js" label="Next.js Template">
 
 [artplayer-template/next.js](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template/next.js)
 
@@ -216,7 +216,7 @@ export default {
 <TabItem value="ArtPlayer.jsx" label="ArtPlayer.jsx">
 
 ```jsx showLineNumbers
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Artplayer from 'artplayer';
 
 export default function Player({ option, getInstance, ...rest }) {

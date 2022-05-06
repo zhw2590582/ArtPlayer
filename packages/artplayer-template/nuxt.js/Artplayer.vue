@@ -29,7 +29,7 @@ export default {
     },
     beforeUnmount() {
         if (this.instance && this.instance.destroy) {
-            this.instance.destroy();
+            this.instance.destroy(false);
         }
     },
 };
