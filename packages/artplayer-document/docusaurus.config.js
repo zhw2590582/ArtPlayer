@@ -13,7 +13,11 @@ module.exports = {
     favicon: 'img/favicon.ico',
     clientModules: [require.resolve('./src/script/main.js')],
     themeConfig: {
-        hideableSidebar: true,
+        docs: {
+            sidebar: {
+                hideable: true,
+            },
+        },
         navbar: {
             title: 'Artplayer.js',
             logo: {
