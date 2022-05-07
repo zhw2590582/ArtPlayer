@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/zhw2590582/ArtPlayer/issues"
   },
-  "homepage": "https://artPlayer.org",
+  "homepage": "https://artplayer.org",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
     "@babel/eslint-parser": "^7.17.0",

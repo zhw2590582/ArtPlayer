@@ -4,7 +4,7 @@
     "version": "4.3.23",
     "main": "dist/artplayer.js",
     "types": "types/artplayer.d.ts",
-    "homepage": "https://artPlayer.org",
+    "homepage": "https://artplayer.org",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
