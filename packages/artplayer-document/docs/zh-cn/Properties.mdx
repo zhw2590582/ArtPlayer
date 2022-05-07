@@ -583,29 +583,6 @@ art.on('ready', () => {
 });
 ```
 
-## rotate
-
--   类型: `Setter/Getter`
--   参数: `Number`
-
-设置和获取播放器旋转，支持 `-270`、`-180`、`-90`、`0`、`90`、`180`、`270`
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    autoSize: true,
-});
-
-art.on('ready', () => {
-    console.info(art.rotate);
-    art.rotate = 90;
-    console.info(art.rotate);
-});
-```
-
 ## playbackRate
 
 -   类型: `Setter/Getter`

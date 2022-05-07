@@ -20,7 +20,6 @@ export default function flipMix(art) {
             if (flip === 'normal') {
                 delete $player.dataset.flip;
             } else {
-                art.rotate = false;
                 $player.dataset.flip = flip;
             }
 

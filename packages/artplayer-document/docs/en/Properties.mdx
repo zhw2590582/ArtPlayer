@@ -583,29 +583,6 @@ art.on('ready', () => {
 });
 ```
 
-## rotate
-
--   Type: `Setter/Getter`
--   Parameter: `Number`
-
-Set and get player rotation, support `-270`, `-180`, `-90`, `0`, `90`, `180`, `270`
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    autoSize: true,
-});
-
-art.on('ready', () => {
-    console.info(art.rotate);
-    art.rotate = 90;
-    console.info(art.rotate);
-});
-```
-
 ## playbackRate
 
 -   Type: `Setter/Getter`
