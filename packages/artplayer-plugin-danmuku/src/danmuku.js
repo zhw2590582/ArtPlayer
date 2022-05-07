@@ -434,7 +434,7 @@ export default class Danmuku {
         if (danmu.time) {
             danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
         } else {
-            danmu.time = this.art.currentTime + 1;
+            danmu.time = this.art.currentTime + 0.5;
         }
 
         this.queue.push({
