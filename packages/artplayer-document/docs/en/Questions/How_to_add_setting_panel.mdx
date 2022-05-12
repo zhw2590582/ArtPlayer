@@ -3,6 +3,8 @@ title: How to add setting panel
 sidebar_position: 6
 ---
 
+## Add selector list
+
 Settings panels are similar to a collection of list selections, and support multi-layer nested
 
 | Property   | Type                | Description              |
@@ -41,8 +43,8 @@ var art = new Artplayer({
                     url: '/assets/sample/subtitle.srt?id=2',
                 },
             ],
-            onSelect: function(item, $dom) {
-                console.info(item, $dom);
+            onSelect: function (item, $dom, event) {
+                console.info(item, $dom, event);
                 art.subtitle.url = item.url;
 
                 // Change the tooltip
@@ -68,8 +70,8 @@ var art = new Artplayer({
                     url: '/assets/sample/video.mp4?id=360',
                 },
             ],
-            onSelect: function(item, $dom) {
-                console.info(item, $dom);
+            onSelect: function (item, $dom, event) {
+                console.info(item, $dom, event);
                 art.switchQuality(item.url, item.html);
 
                 // Change the tooltip
@@ -100,6 +102,70 @@ var art = new Artplayer({
                             html: 'Nested 02',
                         },
                     ],
+                },
+            ],
+        },
+    ],
+});
+```
+
+## Add switch button
+
+| Property   | Type                | Description              |
+| ---------- | ------------------- | ------------------------ |
+| `html`     | `String`、`Element` | DOM elements of selector |
+| `icon`     | `String`、`Element` | Icon of selector         |
+| `switch`   | `Boolean`           | Button default state     |
+| `onSwitch` | `Function`          | Button toggle event      |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    flip: true,
+    playbackRate: true,
+    aspectRatio: true,
+    settings: [
+        {
+            html: 'PIP Mode',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            switch: false,
+            onSwitch: function (item, $dom, event) {
+                console.info(item, $dom, event);
+                const nextState = !item.switch;
+                art.pip = nextState;
+
+                // Change the switch state
+                return nextState;
+            },
+        },
+        {
+            html: 'Use with selector',
+            width: 200,
+            selector: [
+                {
+                    default: true,
+                    html: 'Setting 01',
+                },
+                {
+                    html: 'Setting 02',
+                },
+                {
+                    html: 'Setting 03',
+                    switch: false,
+                    onSwitch: function (item, $dom, event) {
+                        return !item.switch;
+                    },
+                },
+                {
+                    html: 'Setting 04',
+                    switch: true,
+                    onSwitch: function (item, $dom, event) {
+                        return !item.switch;
+                    },
                 },
             ],
         },

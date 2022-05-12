@@ -3,6 +3,8 @@ title: 怎么添加设置面板
 sidebar_position: 6
 ---
 
+## 添加选择列表
+
 设置面板类似于列表选择的集合，而且支持多层嵌套
 
 | 属性       | 类型                | 描述            |
@@ -41,8 +43,8 @@ var art = new Artplayer({
                     url: '/assets/sample/subtitle.srt?id=2',
                 },
             ],
-            onSelect: function(item, $dom) {
-                console.info(item, $dom);
+            onSelect: function (item, $dom, event) {
+                console.info(item, $dom, event);
                 art.subtitle.url = item.url;
 
                 // 改变提示文本
@@ -68,8 +70,8 @@ var art = new Artplayer({
                     url: '/assets/sample/video.mp4?id=360',
                 },
             ],
-            onSelect: function(item, $dom) {
-                console.info(item, $dom);
+            onSelect: function (item, $dom, event) {
+                console.info(item, $dom, event);
                 art.switchQuality(item.url, item.html);
 
                 // 改变提示文本
@@ -100,6 +102,72 @@ var art = new Artplayer({
                             html: '嵌套02',
                         },
                     ],
+                },
+            ],
+        },
+    ],
+});
+```
+
+## 添加切换按钮
+
+设置面板类似于列表选择的集合，而且支持多层嵌套
+
+| 属性       | 类型                | 描述            |
+| ---------- | ------------------- | --------------- |
+| `html`     | `String`、`Element` | 元素的 DOM 元素 |
+| `icon`     | `String`、`Element` | 元素的图标      |
+| `switch`   | `Boolean`           | 按钮默认状态    |
+| `onSwitch` | `Function`          | 按钮切换事件    |
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    flip: true,
+    playbackRate: true,
+    aspectRatio: true,
+    settings: [
+        {
+            html: '画中画模式',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            switch: false,
+            onSwitch: function (item, $dom, event) {
+                console.info(item, $dom, event);
+                const nextState = !item.switch;
+                art.pip = nextState;
+
+                // 改变按钮状态
+                return nextState;
+            },
+        },
+        {
+            html: '和列表组合',
+            width: 200,
+            selector: [
+                {
+                    default: true,
+                    html: '设置 01',
+                },
+                {
+                    html: '设置 02',
+                },
+                {
+                    html: '设置 03',
+                    switch: false,
+                    onSwitch: function (item, $dom, event) {
+                        return !item.switch;
+                    },
+                },
+                {
+                    html: '设置 04',
+                    switch: true,
+                    onSwitch: function (item, $dom, event) {
+                        return !item.switch;
+                    },
                 },
             ],
         },

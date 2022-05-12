@@ -240,22 +240,63 @@ export default class Setting extends Component {
         append($icon, item.icon || icons.config);
         append($left, $icon);
 
+        item._$icon = $icon;
+
+        def(item, 'icon', {
+            get() {
+                return $icon.innerHTML;
+            },
+            set(value) {
+                if (typeof value === 'string' || typeof value === 'number') {
+                    $icon.innerHTML = value;
+                }
+            },
+        });
+
         const $html = document.createElement('div');
         addClass($html, 'art-setting-item-left-text');
         append($html, item.html || '');
         append($left, $html);
+        item._$html = $html;
+
+        def(item, 'html', {
+            get() {
+                return $html.innerHTML;
+            },
+            set(value) {
+                if (typeof value === 'string' || typeof value === 'number') {
+                    $html.innerHTML = value;
+                }
+            },
+        });
 
         const $switch = document.createElement('div');
-        addClass($switch, 'art-setting-item-right-switch');
-        append($switch, item.switch ? icons.switchOn : icons.switchOff);
+        addClass($switch, 'art-setting-item-right-icon');
+        const $switchOn = append($switch, icons.switchOn);
+        const $switchOff = append($switch, icons.switchOff);
+        setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
         append($right, $switch);
+        item._$switch = item.switch;
+
+        def(item, 'switch', {
+            get() {
+                return item._$switch;
+            },
+            set(value) {
+                item._$switch = value;
+                if (value) {
+                    setStyle($switchOff, 'display', 'none');
+                    setStyle($switchOn, 'display', null);
+                } else {
+                    setStyle($switchOff, 'display', null);
+                    setStyle($switchOn, 'display', 'none');
+                }
+            },
+        });
 
         const event = proxy($item, 'click', async (event) => {
             if (item.onSwitch) {
-                const result = await item.onSwitch.call(this.art, item, $item, event);
-                item.switch = result;
-                $switch.innerHTML = '';
-                append($switch, result ? icons.switchOn : icons.switchOff);
+                item.switch = await item.onSwitch.call(this.art, item, $item, event);
             }
         });
 
