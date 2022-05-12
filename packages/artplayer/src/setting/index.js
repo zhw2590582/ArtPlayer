@@ -122,7 +122,7 @@ export default class Setting extends Component {
         return $item;
     }
 
-    creatItem(item) {
+    creatSelector(item) {
         const {
             icons,
             events: { proxy },
@@ -223,6 +223,10 @@ export default class Setting extends Component {
         return $item;
     }
 
+    creatSwitch() {
+        //
+    }
+
     init(option, width) {
         const { constructor } = this.art;
 
@@ -243,7 +247,7 @@ export default class Setting extends Component {
             }
 
             for (let index = 0; index < option.length; index++) {
-                append($panel, this.creatItem(option[index]));
+                append($panel, this.creatSelector(option[index]));
             }
 
             append(this.$parent, $panel);
