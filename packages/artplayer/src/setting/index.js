@@ -3,7 +3,7 @@ import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 import Component from '../utils/component';
-import { append, addClass, setStyle, inverseClass, includeFromEvent, def } from '../utils';
+import { append, addClass, setStyle, inverseClass, includeFromEvent, def, has } from '../utils';
 
 function makeRecursion(option, parentItem, parentList) {
     for (let index = 0; index < option.length; index++) {
@@ -223,8 +223,45 @@ export default class Setting extends Component {
         return $item;
     }
 
-    creatSwitch() {
-        //
+    creatSwitch(item) {
+        const {
+            icons,
+            events: { proxy },
+        } = this.art;
+
+        const $item = document.createElement('div');
+        addClass($item, 'art-setting-item');
+
+        const $left = append($item, '<div class="art-setting-item-left"></div>');
+        const $right = append($item, '<div class="art-setting-item-right"></div>');
+
+        const $icon = document.createElement('div');
+        addClass($icon, 'art-setting-item-left-icon');
+        append($icon, item.icon || icons.config);
+        append($left, $icon);
+
+        const $html = document.createElement('div');
+        addClass($html, 'art-setting-item-left-text');
+        append($html, item.html || '');
+        append($left, $html);
+
+        const $switch = document.createElement('div');
+        addClass($switch, 'art-setting-item-right-switch');
+        append($switch, item.switch ? icons.switchOn : icons.switchOff);
+        append($right, $switch);
+
+        const event = proxy($item, 'click', async (event) => {
+            if (item.onSwitch) {
+                const result = await item.onSwitch.call(this.art, item, $item, event);
+                item.switch = result;
+                $switch.innerHTML = '';
+                append($switch, result ? icons.switchOn : icons.switchOff);
+            }
+        });
+
+        this.events.push(event);
+
+        return $item;
     }
 
     init(option, width) {
@@ -247,7 +284,12 @@ export default class Setting extends Component {
             }
 
             for (let index = 0; index < option.length; index++) {
-                append($panel, this.creatSelector(option[index]));
+                const item = option[index];
+                if (has(item, 'switch')) {
+                    append($panel, this.creatSwitch(item));
+                } else {
+                    append($panel, this.creatSelector(item));
+                }
             }
 
             append(this.$parent, $panel);
