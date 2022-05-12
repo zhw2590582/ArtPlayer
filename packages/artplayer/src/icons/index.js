@@ -21,6 +21,8 @@ import fullscreenOff from 'bundle-text:./fullscreen-off.svg';
 import fullscreenOn from 'bundle-text:./fullscreen-on.svg';
 import fullscreenWebOff from 'bundle-text:./fullscreen-web-off.svg';
 import fullscreenWebOn from 'bundle-text:./fullscreen-web-on.svg';
+import switchOn from 'bundle-text:./switch-on.svg';
+import switchOff from 'bundle-text:./switch-off.svg';
 
 export default class Icons {
     constructor(art) {
@@ -47,6 +49,8 @@ export default class Icons {
             fullscreenOn,
             fullscreenWebOff,
             fullscreenWebOn,
+            switchOn,
+            switchOff,
             ...art.option.icons,
         };
 
