@@ -33,7 +33,7 @@ var art = new Artplayer({
     settings: [
         {
             width: 200,
-            html: 'Custom Setting',
+            html: 'Custom Selector',
             tooltip: 'Click This',
             icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
             selector: [
@@ -44,10 +44,26 @@ var art = new Artplayer({
                 {
                     html: 'Setting 02',
                 },
+                {
+                    html: 'Setting 03',
+                    switch: false,
+                    onSwitch: function (item) {
+                        return !item.switch;
+                    },
+                },
             ],
             onSelect: function (item) {
-                console.info('You clicked on the custom setting', item.html);
+                console.info('You clicked on the custom selector', item.html);
                 return item.html;
+            },
+        },
+        {
+            html: 'Custom Switch',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            switch: false,
+            onSwitch: function (item) {
+                console.info('You clicked on the custom switch', item.switch);
+                return !item.switch;
             },
         },
     ],
