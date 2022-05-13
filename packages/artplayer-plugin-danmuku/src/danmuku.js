@@ -343,7 +343,8 @@ export default class Danmuku {
                     danmu.$ref.style.opacity = this.option.opacity;
                     danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
                     danmu.$ref.style.color = danmu.color || '#fff';
-                    danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
+                    danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : null;
+                    danmu.$ref.style.backgroundColor = danmu.border ? 'rgb(0 0 0 / 50%)' : null;
                     danmu.$ref.style.marginLeft = '0px';
 
                     danmu.$lastStartTime = Date.now();
