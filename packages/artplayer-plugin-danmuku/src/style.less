@@ -11,14 +11,56 @@
     background-color: rgb(255 255 255 / 30%);
 
     .art-danmuku-style {
+        position: relative;
         display: flex;
         width: 30px;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
+
+        .art-danmuku-style-panel {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            left: -65px;
+            bottom: 29px;
+            width: 150px;
+            padding: 10px 10px 5px;
+            border-radius: 3px;
+            background-color: rgba(0, 0, 0, 0.9);
+
+            .art-danmuku-style-panel-title {
+                margin-bottom: 10px;
+            }
+
+            .art-danmuku-style-panel-modes {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+
+                .art-danmuku-style-panel-mode {
+                    display: flex;
+                    justify-content: center;
+                    width: 48%;
+                    padding: 4px 0;
+                    cursor: pointer;
+                    color: #fff;
+                    border: 1px solid #fff;
+
+                    &.art-current {
+                        background-color: #00a1d6;
+                        border: 1px solid #00a1d6;
+                    }
+                }
+            }
+        }
+
+        &:hover .art-danmuku-style-panel{
+            display: flex;
+        }
 
         .art-icon {
             opacity: 0.75;
+            cursor: pointer;
 
             &:hover {
                 opacity: 1;
