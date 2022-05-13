@@ -17,6 +17,10 @@ function makeRecursion(option, parentItem, parentList) {
     return option;
 }
 
+function isHtmlType(val) {
+    return ['string', 'number'].includes(typeof val);
+}
+
 export default class Setting extends Component {
     constructor(art) {
         super(art);
@@ -160,7 +164,9 @@ export default class Setting extends Component {
                 return $icon.innerHTML;
             },
             set(value) {
-                $icon.innerHTML = String(value || '');
+                if (isHtmlType(value)) {
+                    $icon.innerHTML = value;
+                }
             },
         });
 
@@ -175,7 +181,9 @@ export default class Setting extends Component {
                 return $html.innerHTML;
             },
             set(value) {
-                $html.innerHTML = String(value || '');
+                if (isHtmlType(value)) {
+                    $html.innerHTML = value;
+                }
             },
         });
 
@@ -190,7 +198,9 @@ export default class Setting extends Component {
                 return $tooltip.innerHTML;
             },
             set(value) {
-                $tooltip.innerHTML = String(value || '');
+                if (isHtmlType(value)) {
+                    $tooltip.innerHTML = value;
+                }
             },
         });
 
@@ -252,8 +262,8 @@ export default class Setting extends Component {
 
                         if (item._parentItem && item._parentItem.onSelect) {
                             const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                            if (item._parentItem._$tooltip) {
-                                item._parentItem._$tooltip.innerHTML = String(result || '');
+                            if (item._parentItem._$tooltip && isHtmlType(result)) {
+                                item._parentItem._$tooltip.innerHTML = result;
                             }
                         }
                     }

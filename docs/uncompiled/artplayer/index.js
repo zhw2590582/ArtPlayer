@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652416838935";
+        return "1652417963768";
     }
     static get config() {
         return _configDefault.default;
@@ -4380,6 +4380,12 @@ function makeRecursion(option, parentItem, parentList) {
     }
     return option;
 }
+function isHtmlType(val) {
+    return [
+        'string',
+        'number'
+    ].includes(typeof val);
+}
 class Setting extends _componentDefault.default {
     constructor(art){
         super(art);
@@ -4468,7 +4474,7 @@ class Setting extends _componentDefault.default {
                 return $icon.innerHTML;
             },
             set (value) {
-                $icon.innerHTML = String(value || '');
+                if (isHtmlType(value)) $icon.innerHTML = value;
             }
         });
         const $html = document.createElement('div');
@@ -4481,7 +4487,7 @@ class Setting extends _componentDefault.default {
                 return $html.innerHTML;
             },
             set (value) {
-                $html.innerHTML = String(value || '');
+                if (isHtmlType(value)) $html.innerHTML = value;
             }
         });
         const $tooltip = document.createElement('div');
@@ -4494,7 +4500,7 @@ class Setting extends _componentDefault.default {
                 return $tooltip.innerHTML;
             },
             set (value) {
-                $tooltip.innerHTML = String(value || '');
+                if (isHtmlType(value)) $tooltip.innerHTML = value;
             }
         });
         switch(type){
@@ -4547,7 +4553,7 @@ class Setting extends _componentDefault.default {
                         if (item._parentList) this.init(item._parentList);
                         if (item._parentItem && item._parentItem.onSelect) {
                             const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                            if (item._parentItem._$tooltip) item._parentItem._$tooltip.innerHTML = String(result || '');
+                            if (item._parentItem._$tooltip && isHtmlType(result)) item._parentItem._$tooltip.innerHTML = result;
                         }
                     }
                     break;
