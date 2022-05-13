@@ -47,7 +47,7 @@ export default class Danmuku {
         return {
             danmuku: [],
             speed: 5,
-            margin: [10, 100],
+            margin: ['2%', '25%'],
             opacity: 1,
             fontSize: 25,
             filter: () => true,

@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652429126365";
+        return "1652430092564";
     }
     static get config() {
         return _configDefault.default;
@@ -4463,7 +4463,8 @@ class Setting extends _componentDefault.default {
                 _utils.append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
                 break;
             case 'selector':
-                _utils.append($icon, item.selector && item.selector.length ? item.icon || icons.config : icons.check);
+                if (item.selector && item.selector.length) _utils.append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
+                else _utils.append($icon, icons.check);
                 break;
             default:
                 break;

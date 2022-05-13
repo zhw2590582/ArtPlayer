@@ -154,7 +154,11 @@ export default class Setting extends Component {
                 append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
                 break;
             case 'selector':
-                append($icon, item.selector && item.selector.length ? item.icon || icons.config : icons.check);
+                if (item.selector && item.selector.length) {
+                    append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
+                } else {
+                    append($icon, icons.check);
+                }
                 break;
             default:
                 break;

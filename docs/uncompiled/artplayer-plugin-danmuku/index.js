@@ -215,8 +215,8 @@ class Danmuku {
             danmuku: [],
             speed: 5,
             margin: [
-                10,
-                100
+                '2%',
+                '25%'
             ],
             opacity: 1,
             fontSize: 25,
@@ -744,7 +744,7 @@ var _danmuOnSvgDefault = parcelHelpers.interopDefault(_danmuOnSvg);
 var _danmuOffSvg = require("bundle-text:./img/danmu-off.svg");
 var _danmuOffSvgDefault = parcelHelpers.interopDefault(_danmuOffSvg);
 function setting(art, danmuku) {
-    const { addClass , append , setStyle  } = art.constructor.utils;
+    const { addClass , append , setStyle , tooltip  } = art.constructor.utils;
     function getIcon(svg, key) {
         const icon = document.createElement('i');
         append(icon, svg);
@@ -776,6 +776,7 @@ function setting(art, danmuku) {
             mounted ($ref) {
                 append($ref, $danmuOn);
                 append($ref, $danmuOff);
+                tooltip($ref, '弹幕开关');
                 setStyle($danmuOff, 'display', 'none');
             }
         });
@@ -795,7 +796,7 @@ function setting(art, danmuku) {
                     }
                 },
                 {
-                    html: '同步播放速度',
+                    html: '同步视频速度',
                     icon: '',
                     switch: danmuku.option.synchronousPlayback,
                     onSwitch (item) {
@@ -803,6 +804,154 @@ function setting(art, danmuku) {
                             synchronousPlayback: !item.switch
                         });
                         return !item.switch;
+                    }
+                },
+                {
+                    width: 200,
+                    html: '播放速度',
+                    icon: '',
+                    tooltip: '适中',
+                    selector: [
+                        {
+                            html: '极慢',
+                            time: 10
+                        },
+                        {
+                            html: '较慢',
+                            time: 7.5
+                        },
+                        {
+                            default: true,
+                            html: '适中',
+                            time: 5
+                        },
+                        {
+                            html: '较快',
+                            time: 2.5
+                        },
+                        {
+                            html: '极快',
+                            time: 1
+                        }, 
+                    ],
+                    onSelect: function(item) {
+                        danmuku.config({
+                            speed: item.time
+                        });
+                        return item.html;
+                    }
+                },
+                {
+                    width: 200,
+                    html: '字体大小',
+                    icon: '',
+                    tooltip: '适中',
+                    selector: [
+                        {
+                            html: '极慢',
+                            fontSize: 12
+                        },
+                        {
+                            html: '较慢',
+                            fontSize: 7.5
+                        },
+                        {
+                            default: true,
+                            html: '适中',
+                            fontSize: 5
+                        },
+                        {
+                            html: '较快',
+                            fontSize: 2.5
+                        },
+                        {
+                            html: '极快',
+                            fontSize: 1
+                        }, 
+                    ],
+                    onSelect: function(item) {
+                        danmuku.config({
+                            speed: item.time
+                        });
+                        return item.html;
+                    }
+                },
+                {
+                    width: 200,
+                    html: '不透明度',
+                    icon: '',
+                    tooltip: '100%',
+                    selector: [
+                        {
+                            default: true,
+                            opacity: 1,
+                            html: '100%'
+                        },
+                        {
+                            opacity: 0.75,
+                            html: '75%'
+                        },
+                        {
+                            opacity: 0.5,
+                            html: '50%'
+                        },
+                        {
+                            opacity: 0.25,
+                            html: '25%'
+                        },
+                        {
+                            opacity: 0,
+                            html: '0%'
+                        }, 
+                    ],
+                    onSelect: function(item) {
+                        danmuku.config({
+                            opacity: item.opacity
+                        });
+                        return item.html;
+                    }
+                },
+                {
+                    width: 200,
+                    html: '显示范围',
+                    icon: '',
+                    tooltip: '3/4',
+                    selector: [
+                        {
+                            html: '1/4',
+                            margin: [
+                                '2%',
+                                '75%'
+                            ]
+                        },
+                        {
+                            html: '半屏',
+                            margin: [
+                                '2%',
+                                '50%'
+                            ]
+                        },
+                        {
+                            default: true,
+                            html: '3/4',
+                            margin: [
+                                '2%',
+                                '75%'
+                            ]
+                        },
+                        {
+                            html: '满屏',
+                            margin: [
+                                '2%',
+                                '2%'
+                            ]
+                        }, 
+                    ],
+                    onSelect: function(item) {
+                        danmuku.config({
+                            margin: item.margin
+                        });
+                        return item.html;
                     }
                 }, 
             ]

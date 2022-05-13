@@ -10,8 +10,9 @@ var art = new Artplayer({
             danmuku: '/assets/sample/danmuku-v2.xml',
             speed: 5, // 弹幕持续时间，单位秒
             opacity: 1, // 弹幕透明度
-            margin: ['10%', 60], // 弹幕上下边距
+            margin: ['2%', 60], // 弹幕上下边距
             antiOverlap: true, // 是否防重叠
+            fontSize: 25, // 字体大小
             useWorker: true, // 是否使用 web worker
             synchronousPlayback: false, // 是否同步到播放速度
             filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数
