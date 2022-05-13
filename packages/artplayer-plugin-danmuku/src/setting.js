@@ -110,30 +110,30 @@ export default function setting(art, danmuku) {
                     tooltip: '适中',
                     selector: [
                         {
-                            html: '极慢',
-                            fontSize: 12,
+                            html: '极小',
+                            fontSize: '2%',
                         },
                         {
-                            html: '较慢',
-                            fontSize: 7.5,
+                            html: '较小',
+                            fontSize: '4%',
                         },
                         {
                             default: true,
                             html: '适中',
-                            fontSize: 5,
+                            fontSize: '6%',
                         },
                         {
-                            html: '较快',
-                            fontSize: 2.5,
+                            html: '较大',
+                            fontSize: '8%',
                         },
                         {
-                            html: '极快',
-                            fontSize: 1,
+                            html: '极大',
+                            fontSize: '10%',
                         },
                     ],
                     onSelect: function (item) {
                         danmuku.config({
-                            speed: item.time,
+                            fontSize: item.fontSize,
                         });
                         return item.html;
                     },

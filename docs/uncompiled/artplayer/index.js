@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652430092564";
+        return "1652437809760";
     }
     static get config() {
         return _configDefault.default;
@@ -4380,7 +4380,7 @@ function makeRecursion(option, parentItem, parentList) {
     }
     return option;
 }
-function isHtmlType(val) {
+function isStringOrNumber(val) {
     return [
         'string',
         'number'
@@ -4452,18 +4452,18 @@ class Setting extends _componentDefault.default {
         const { icons , events: { proxy  } ,  } = this.art;
         const $item = document.createElement('div');
         _utils.addClass($item, 'art-setting-item');
-        if (isHtmlType(item.name)) $item.dataset.name = item.name;
-        if (isHtmlType(item.value)) $item.dataset.value = item.value;
+        if (isStringOrNumber(item.name)) $item.dataset.name = item.name;
+        if (isStringOrNumber(item.value)) $item.dataset.value = item.value;
         const $left = _utils.append($item, '<div class="art-setting-item-left"></div>');
         const $right = _utils.append($item, '<div class="art-setting-item-right"></div>');
         const $icon = document.createElement('div');
         _utils.addClass($icon, 'art-setting-item-left-icon');
         switch(type){
             case 'switch':
-                _utils.append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
+                _utils.append($icon, isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 break;
             case 'selector':
-                if (item.selector && item.selector.length) _utils.append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
+                if (item.selector && item.selector.length) _utils.append($icon, isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 else _utils.append($icon, icons.check);
                 break;
             default:
@@ -4476,7 +4476,7 @@ class Setting extends _componentDefault.default {
                 return $icon.innerHTML;
             },
             set (value) {
-                if (isHtmlType(value)) $icon.innerHTML = value;
+                if (isStringOrNumber(value)) $icon.innerHTML = value;
             }
         });
         const $html = document.createElement('div');
@@ -4489,7 +4489,7 @@ class Setting extends _componentDefault.default {
                 return $html.innerHTML;
             },
             set (value) {
-                if (isHtmlType(value)) $html.innerHTML = value;
+                if (isStringOrNumber(value)) $html.innerHTML = value;
             }
         });
         const $tooltip = document.createElement('div');
@@ -4502,7 +4502,7 @@ class Setting extends _componentDefault.default {
                 return $tooltip.innerHTML;
             },
             set (value) {
-                if (isHtmlType(value)) $tooltip.innerHTML = value;
+                if (isStringOrNumber(value)) $tooltip.innerHTML = value;
             }
         });
         switch(type){
@@ -4555,7 +4555,7 @@ class Setting extends _componentDefault.default {
                         if (item._parentList) this.init(item._parentList);
                         if (item._parentItem && item._parentItem.onSelect) {
                             const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                            if (item._parentItem._$tooltip && isHtmlType(result)) item._parentItem._$tooltip.innerHTML = result;
+                            if (item._parentItem._$tooltip && isStringOrNumber(result)) item._parentItem._$tooltip.innerHTML = result;
                         }
                     }
                     break;

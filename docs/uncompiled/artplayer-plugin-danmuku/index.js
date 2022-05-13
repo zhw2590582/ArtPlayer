@@ -265,17 +265,6 @@ class Danmuku {
         }
         return Danmuku.option.margin[1];
     }
-    get fontSize() {
-        const { clamp  } = this.utils;
-        const value = this.option.fontSize;
-        const { clientHeight  } = this.$player;
-        if (typeof value === 'number') return clamp(value, 12, 200);
-        if (typeof value === 'string' && value.endsWith('%')) {
-            const ratio = parseFloat(value) / 100;
-            return clamp(clientHeight * ratio, 12, 200);
-        }
-        return this.option.fontSize;
-    }
     filter(state, callback) {
         return this.queue.filter((danmu)=>danmu.$state === state
         ).map(callback);
@@ -336,6 +325,16 @@ class Danmuku {
         });
         return result;
     }
+    getFontSize(fontSize) {
+        const { clamp  } = this.utils;
+        const { clientHeight  } = this.$player;
+        if (typeof fontSize === 'number') return clamp(fontSize, 12, clientHeight);
+        if (typeof fontSize === 'string' && fontSize.endsWith('%')) {
+            const ratio = parseFloat(fontSize) / 100;
+            return clamp(clientHeight * ratio, 12, clientHeight);
+        }
+        return Danmuku.option.fontSize;
+    }
     postMessage(message = {}) {
         return new Promise((resolve)=>{
             if (this.option.useWorker && this.worker && this.worker.postMessage) {
@@ -376,9 +375,12 @@ class Danmuku {
         const { clamp  } = this.utils;
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
-        if (option.fontSize) this.reset();
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
+        if (option.fontSize) {
+            this.option.fontSize = this.getFontSize(this.option.fontSize);
+            this.reset();
+        }
         this.art.emit('artplayerPluginDanmuku:config', this.option);
         return this;
     }
@@ -453,7 +455,7 @@ class Danmuku {
                     this.$danmuku.appendChild(danmu.$ref);
                     danmu.$ref.style.left = `${clientWidth}px`;
                     danmu.$ref.style.opacity = this.option.opacity;
-                    danmu.$ref.style.fontSize = `${this.fontSize}px`;
+                    danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
                     danmu.$ref.style.marginLeft = '0px';
@@ -858,30 +860,30 @@ function setting(art, danmuku) {
                     tooltip: '适中',
                     selector: [
                         {
-                            html: '极慢',
-                            fontSize: 12
+                            html: '极小',
+                            fontSize: '2%'
                         },
                         {
-                            html: '较慢',
-                            fontSize: 7.5
+                            html: '较小',
+                            fontSize: '4%'
                         },
                         {
                             default: true,
                             html: '适中',
-                            fontSize: 5
+                            fontSize: '6%'
                         },
                         {
-                            html: '较快',
-                            fontSize: 2.5
+                            html: '较大',
+                            fontSize: '8%'
                         },
                         {
-                            html: '极快',
-                            fontSize: 1
+                            html: '极大',
+                            fontSize: '10%'
                         }, 
                     ],
                     onSelect: function(item) {
                         danmuku.config({
-                            speed: item.time
+                            fontSize: item.fontSize
                         });
                         return item.html;
                     }

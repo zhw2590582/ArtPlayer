@@ -42,7 +42,6 @@
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
     <script src="./uncompiled/artplayer/index.js"></script>
-    <script src="./uncompiled/artplayer-plugin-danmuku/index.js"></script>
     <script>
         var vConsole = new VConsole();
 
@@ -135,35 +134,6 @@
                         return item.html;
                     },
                 },
-                {
-                    html: '弹幕开关',
-                    icon: '<img width="22" heigth="22" src="/assets/img/danmu-on.svg">',
-                    switch: true,
-                    tooltip: '显示',
-                    onSwitch: function (item) {
-                        if (item.switch) {
-                            item.tooltip = '隐藏';
-                            art.plugins.artplayerPluginDanmuku.hide();
-                        } else {
-                            item.tooltip = '显示';
-                            art.plugins.artplayerPluginDanmuku.show()
-                        }
-                        return !item.switch;
-                    },
-                },
-            ],
-            plugins: [
-                artplayerPluginDanmuku({
-                    danmuku: '/assets/sample/danmuku-v2.xml',
-                    speed: 5,
-                    opacity: 1,
-                    fontSize: 16,
-                    maxlength: 100,
-                    margin: ['10%', 60],
-                    antiOverlap: true,
-                    synchronousPlayback: false,
-                    filter: (danmu) => danmu.text.length < 50,
-                }),
             ],
         });
 

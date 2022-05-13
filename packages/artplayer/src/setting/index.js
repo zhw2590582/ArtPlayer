@@ -17,7 +17,7 @@ function makeRecursion(option, parentItem, parentList) {
     return option;
 }
 
-function isHtmlType(val) {
+function isStringOrNumber(val) {
     return ['string', 'number'].includes(typeof val);
 }
 
@@ -135,11 +135,11 @@ export default class Setting extends Component {
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
 
-        if (isHtmlType(item.name)) {
+        if (isStringOrNumber(item.name)) {
             $item.dataset.name = item.name;
         }
 
-        if (isHtmlType(item.value)) {
+        if (isStringOrNumber(item.value)) {
             $item.dataset.value = item.value;
         }
 
@@ -151,11 +151,14 @@ export default class Setting extends Component {
 
         switch (type) {
             case 'switch':
-                append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
+                append($icon, isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 break;
             case 'selector':
                 if (item.selector && item.selector.length) {
-                    append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
+                    append(
+                        $icon,
+                        isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config,
+                    );
                 } else {
                     append($icon, icons.check);
                 }
@@ -172,7 +175,7 @@ export default class Setting extends Component {
                 return $icon.innerHTML;
             },
             set(value) {
-                if (isHtmlType(value)) {
+                if (isStringOrNumber(value)) {
                     $icon.innerHTML = value;
                 }
             },
@@ -189,7 +192,7 @@ export default class Setting extends Component {
                 return $html.innerHTML;
             },
             set(value) {
-                if (isHtmlType(value)) {
+                if (isStringOrNumber(value)) {
                     $html.innerHTML = value;
                 }
             },
@@ -206,7 +209,7 @@ export default class Setting extends Component {
                 return $tooltip.innerHTML;
             },
             set(value) {
-                if (isHtmlType(value)) {
+                if (isStringOrNumber(value)) {
                     $tooltip.innerHTML = value;
                 }
             },
@@ -270,7 +273,7 @@ export default class Setting extends Component {
 
                         if (item._parentItem && item._parentItem.onSelect) {
                             const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                            if (item._parentItem._$tooltip && isHtmlType(result)) {
+                            if (item._parentItem._$tooltip && isStringOrNumber(result)) {
                                 item._parentItem._$tooltip.innerHTML = result;
                             }
                         }

@@ -109,23 +109,6 @@ export default class Danmuku {
         return Danmuku.option.margin[1];
     }
 
-    get fontSize() {
-        const { clamp } = this.utils;
-        const value = this.option.fontSize;
-        const { clientHeight } = this.$player;
-
-        if (typeof value === 'number') {
-            return clamp(value, 12, 200);
-        }
-
-        if (typeof value === 'string' && value.endsWith('%')) {
-            const ratio = parseFloat(value) / 100;
-            return clamp(clientHeight * ratio, 12, 200);
-        }
-
-        return this.option.fontSize;
-    }
-
     filter(state, callback) {
         return this.queue.filter((danmu) => danmu.$state === state).map(callback);
     }
@@ -200,6 +183,22 @@ export default class Danmuku {
         return result;
     }
 
+    getFontSize(fontSize) {
+        const { clamp } = this.utils;
+        const { clientHeight } = this.$player;
+
+        if (typeof fontSize === 'number') {
+            return clamp(fontSize, 12, clientHeight);
+        }
+
+        if (typeof fontSize === 'string' && fontSize.endsWith('%')) {
+            const ratio = parseFloat(fontSize) / 100;
+            return clamp(clientHeight * ratio, 12, clientHeight);
+        }
+
+        return Danmuku.option.fontSize;
+    }
+
     postMessage(message = {}) {
         return new Promise((resolve) => {
             if (this.option.useWorker && this.worker && this.worker.postMessage) {
@@ -250,10 +249,14 @@ export default class Danmuku {
 
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
-        if (option.fontSize) this.reset();
 
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
+
+        if (option.fontSize) {
+            this.option.fontSize = this.getFontSize(this.option.fontSize);
+            this.reset();
+        }
 
         this.art.emit('artplayerPluginDanmuku:config', this.option);
 
@@ -338,7 +341,7 @@ export default class Danmuku {
 
                     danmu.$ref.style.left = `${clientWidth}px`;
                     danmu.$ref.style.opacity = this.option.opacity;
-                    danmu.$ref.style.fontSize = `${this.fontSize}px`;
+                    danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
                     danmu.$ref.style.marginLeft = '0px';
