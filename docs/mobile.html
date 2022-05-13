@@ -65,6 +65,7 @@
             fullscreenWeb: true,
             miniProgressBar: true,
             autoOrientation: true,
+            whitelist: ['*'],
             moreVideoAttr: {
                 'x5-video-player-type': 'h5',
                 'x5-video-player-fullscreen': false,
@@ -81,7 +82,7 @@
                 {
                     html: `<img width="50" src="/assets/sample/layer.png">`,
                     click: function () {
-                        console.info('You clicked on the custom layer');
+                        art.notice.show = "你点击了自定义层";
                     },
                     style: {
                         position: 'absolute',
@@ -104,6 +105,16 @@
                     icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
                     selector: [
                         {
+                            html: '显示字幕',
+                            switch: true,
+                            tooltip: '显示',
+                            onSwitch: function (item) {
+                                item.tooltip = item.switch ? '隐藏' : '显示';
+                                art.subtitle.show = !item.switch;
+                                return !item.switch;
+                            },
+                        },
+                        {
                             default: true,
                             html: '中日双语',
                             url: '/assets/sample/subtitle.srt'
@@ -124,19 +135,20 @@
                         return item.html;
                     },
                 },
-            ],
-            controls: [
                 {
-                    position: 'right',
-                    html: '<img width="22" heigth="22" src="/assets/img/danmu-on.svg">',
-                    click: function (_, event) {
-                        if (art.plugins.artplayerPluginDanmuku.isHide) {
-                            art.plugins.artplayerPluginDanmuku.show();
-                            event.target.src = '/assets/img/danmu-on.svg';
-                        } else {
+                    html: '弹幕开关',
+                    icon: '<img width="22" heigth="22" src="/assets/img/danmu-on.svg">',
+                    switch: true,
+                    tooltip: '显示',
+                    onSwitch: function (item) {
+                        if (item.switch) {
+                            item.tooltip = '隐藏';
                             art.plugins.artplayerPluginDanmuku.hide();
-                            event.target.src = '/assets/img/danmu-off.svg';
+                        } else {
+                            item.tooltip = '显示';
+                            art.plugins.artplayerPluginDanmuku.show()
                         }
+                        return !item.switch;
                     },
                 },
             ],
@@ -153,7 +165,6 @@
                     filter: (danmu) => danmu.text.length < 50,
                 }),
             ],
-            whitelist: ['*'],
         });
 
         Artplayer.config.events.forEach(function (item) {

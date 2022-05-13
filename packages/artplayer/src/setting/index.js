@@ -270,6 +270,23 @@ export default class Setting extends Component {
             },
         });
 
+        const $tooltip = document.createElement('div');
+        addClass($tooltip, 'art-setting-item-right-tooltip');
+        append($tooltip, item.tooltip || '');
+        append($right, $tooltip);
+        item._$tooltip = $tooltip;
+
+        def(item, 'tooltip', {
+            get() {
+                return $tooltip.innerHTML;
+            },
+            set(value) {
+                if (typeof value === 'string' || typeof value === 'number') {
+                    $tooltip.innerHTML = value;
+                }
+            },
+        });
+
         const $switch = document.createElement('div');
         addClass($switch, 'art-setting-item-right-icon');
         const $switchOn = append($switch, icons.switchOn);
