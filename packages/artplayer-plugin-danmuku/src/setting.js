@@ -8,7 +8,7 @@ export default function setting(art, danmuku) {
     const {
         template: { $controlsCenter },
         constructor: {
-            utils: { removeClass, addClass, append, setStyle, tooltip, query },
+            utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass },
         },
     } = art;
 
@@ -32,7 +32,16 @@ export default function setting(art, danmuku) {
             $controlsCenter,
             `
             <div class="art-danmuku-emitter">
-                <div class="art-danmuku-style"></div>
+                <div class="art-danmuku-style">
+                    <div class="art-danmuku-style-panel">
+                        <div class="art-danmuku-style-panel-title">模式</div>
+                        <div class="art-danmuku-style-panel-modes">
+                            <div class="art-danmuku-style-panel-mode art-current" data-mode="0">滚动</div>
+                            <div class="art-danmuku-style-panel-mode" data-mode="1">静止</div>
+                        </div>
+                        <div class="art-danmuku-style-panel-title">颜色</div>
+                    </div>
+                </div>
                 <input class="art-danmuku-input" maxlength="100" placeholder="发个弹幕见证当下" />
                 <div class="art-danmuku-send">发送</div>
             </div>
@@ -42,7 +51,14 @@ export default function setting(art, danmuku) {
         const $style = query('.art-danmuku-style', $emitter);
         const $input = query('.art-danmuku-input', $emitter);
         const $send = query('.art-danmuku-send', $emitter);
+        const $panel = query('.art-danmuku-style-panel', $emitter);
+        const $modes = query('.art-danmuku-style-panel-modes', $emitter);
 
+        if (art.option.backdrop) {
+            addClass($panel, 'art-backdrop-filter');
+        }
+
+        let mode = 0;
         let timer = null;
         append($style, $danmuStyle);
 
@@ -63,7 +79,7 @@ export default function setting(art, danmuku) {
 
             const danmu = {
                 text,
-                mode: 0,
+                mode,
                 color: '#ffffff',
                 border: true,
             };
@@ -76,10 +92,19 @@ export default function setting(art, danmuku) {
         }
 
         art.proxy($send, 'click', onSend);
+
         art.proxy($input, 'keypress', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 onSend();
+            }
+        });
+
+        art.proxy($modes, 'click', (event) => {
+            const { dataset } = event.target;
+            if (dataset.mode) {
+                mode = Number(dataset.mode);
+                inverseClass(event.target, 'art-current');
             }
         });
     }
