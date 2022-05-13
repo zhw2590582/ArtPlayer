@@ -190,7 +190,7 @@ export default function setting(art, danmuku) {
                         {
                             default: true,
                             html: '3/4',
-                            margin: ['2%', '75%'],
+                            margin: ['2%', '25%'],
                         },
                         {
                             html: '满屏',

@@ -948,7 +948,7 @@ function setting(art, danmuku) {
                             html: '3/4',
                             margin: [
                                 '2%',
-                                '75%'
+                                '25%'
                             ]
                         },
                         {
