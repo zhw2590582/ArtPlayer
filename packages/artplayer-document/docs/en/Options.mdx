@@ -58,13 +58,16 @@ The constructor accepts a function as the second parameter, fired when the playe
 <div className="run-code">▶ Run Code</div>
 
 ```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    muted: true,
-}, function() {
-    this.play();
-});
+var art = new Artplayer(
+    {
+        container: '.artplayer-app',
+        url: '/assets/sample/video.mp4',
+        muted: true,
+    },
+    function () {
+        this.play();
+    },
+);
 ```
 
 :::tip 提示
@@ -612,9 +615,9 @@ var art = new Artplayer({
                     html: 'Submenu 02',
                 },
             ],
-            onSelect: function(item) {
+            onSelect: function (item) {
                 console.log(item.html);
-            }
+            },
         },
         {
             html: 'Custom setting 02',
@@ -626,9 +629,9 @@ var art = new Artplayer({
                     html: 'Submenu 02',
                 },
             ],
-            onSelect: function(item) {
+            onSelect: function (item) {
                 console.log(item.html);
-            }
+            },
         },
     ],
 });
@@ -966,14 +969,11 @@ var art = new Artplayer({
     icons: {
         loading: '<img src="/assets/img/ploading.gif">',
         state: '<img src="/assets/img/state.png">',
-        loading: '',
-        state: '',
         play: '',
         pause: '',
         check: '',
         volume: '',
         volumeClose: '',
-        subtitle: '',
         screenshot: '',
         setting: '',
         pip: '',
@@ -983,11 +983,14 @@ var art = new Artplayer({
         aspectRatio: '',
         config: '',
         lock: '',
+        flip: '',
         unlock: '',
         fullscreenOff: '',
         fullscreenOn: '',
         fullscreenWebOff: '',
         fullscreenWebOn: '',
+        switchOn: '',
+        switchOff: '',
         indicator: '',
     },
 });
