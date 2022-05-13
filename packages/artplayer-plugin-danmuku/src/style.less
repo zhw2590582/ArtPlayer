@@ -1,0 +1,62 @@
+.art-danmuku-emitter {
+    position: relative;
+    display: flex;
+    height: 30px;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1;
+    max-width: 400px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: rgb(255 255 255 / 30%);
+
+    .art-danmuku-style {
+        display: flex;
+        width: 30px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .art-icon {
+            opacity: 0.75;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    .art-danmuku-input {
+        flex: 1;
+        display: flex;
+        padding: 0 10px 0 0;
+        border: none;
+        outline: none;
+        color: #ffffff;
+        background-color: transparent;
+
+        &::placeholder, &::-webkit-input-placeholder {
+            color: rgb(255 255 255 / 50%);
+        }
+    }
+
+    .art-danmuku-send {
+        display: flex;
+        width: 50px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: #00a1d6;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+
+        &:hover {
+            background-color: #00b5e5;
+        }
+
+        &.art-disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+}

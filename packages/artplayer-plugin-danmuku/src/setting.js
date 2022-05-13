@@ -1,9 +1,16 @@
+import style from 'bundle-text:./style.less';
 import danmuOn from 'bundle-text:./img/danmu-on.svg';
 import danmuOff from 'bundle-text:./img/danmu-off.svg';
 import danmuConfig from 'bundle-text:./img/danmu-config.svg';
+import danmuStyle from 'bundle-text:./img/danmu-style.svg';
 
 export default function setting(art, danmuku) {
-    const { addClass, append, setStyle, tooltip } = art.constructor.utils;
+    const {
+        template: { $controlsCenter },
+        constructor: {
+            utils: { removeClass, addClass, append, setStyle, tooltip, query },
+        },
+    } = art;
 
     function getIcon(svg, key) {
         const icon = document.createElement('i');
@@ -18,8 +25,66 @@ export default function setting(art, danmuku) {
     const $danmuOn = getIcon(danmuOn, 'danmu-on');
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
+    const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
 
-    art.on('ready', () => {
+    function addEmitter() {
+        const $emitter = append(
+            $controlsCenter,
+            `
+            <div class="art-danmuku-emitter">
+                <div class="art-danmuku-style"></div>
+                <input class="art-danmuku-input" maxlength="100" placeholder="发个弹幕见证当下" />
+                <div class="art-danmuku-send">发送</div>
+            </div>
+            `,
+        );
+
+        const $style = query('.art-danmuku-style', $emitter);
+        const $input = query('.art-danmuku-input', $emitter);
+        const $send = query('.art-danmuku-send', $emitter);
+
+        let timer = null;
+        append($style, $danmuStyle);
+
+        function countdown(time) {
+            if (time === 0) {
+                timer = null;
+                $send.innerText = '发送';
+                removeClass($send, 'art-disabled');
+            } else {
+                $send.innerText = time;
+                timer = setTimeout(() => countdown(time - 1), 1000);
+            }
+        }
+
+        function onSend() {
+            const text = $input.value.trim();
+            if (!text || timer) return;
+
+            const danmu = {
+                text,
+                mode: 0,
+                color: '#ffffff',
+                border: true,
+            };
+
+            countdown(5);
+            $input.value = '';
+            danmuku.emit(danmu);
+            addClass($send, 'art-disabled');
+            art.emit('artplayerPluginDanmuku:emit', danmu);
+        }
+
+        art.proxy($send, 'click', onSend);
+        art.proxy($input, 'keypress', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                onSend();
+            }
+        });
+    }
+
+    function addControl() {
         art.controls.add({
             position: 'right',
             name: 'danmuku',
@@ -43,7 +108,9 @@ export default function setting(art, danmuku) {
                 setStyle($danmuOff, 'display', 'none');
             },
         });
+    }
 
+    function addSetting() {
         art.setting.add({
             name: 'danmuku',
             html: '弹幕设置',
@@ -214,5 +281,20 @@ export default function setting(art, danmuku) {
                 },
             ],
         });
+    }
+
+    art.on('ready', () => {
+        addEmitter();
+        addControl();
+        addSetting();
     });
+}
+
+if (typeof document !== 'undefined') {
+    if (!document.getElementById('artplayer-plugin-danmuku')) {
+        const $style = document.createElement('style');
+        $style.id = 'artplayer-plugin-danmuku';
+        $style.textContent = style;
+        document.head.appendChild($style);
+    }
 }
