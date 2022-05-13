@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652416596717";
+        return "1652416838935";
     }
     static get config() {
         return _configDefault.default;
@@ -4566,66 +4566,6 @@ class Setting extends _componentDefault.default {
             default:
                 break;
         }
-        return $item;
-    }
-    creatSwitch(item) {
-        const { icons , events: { proxy  } ,  } = this.art;
-        const $item = document.createElement('div');
-        _utils.addClass($item, 'art-setting-item');
-        const $left = _utils.append($item, '<div class="art-setting-item-left"></div>');
-        const $right = _utils.append($item, '<div class="art-setting-item-right"></div>');
-        const $icon = document.createElement('div');
-        _utils.addClass($icon, 'art-setting-item-left-icon');
-        _utils.append($icon, item.icon || icons.config);
-        _utils.append($left, $icon);
-        item._$icon = $icon;
-        _utils.def(item, 'icon', {
-            get () {
-                return $icon.innerHTML;
-            },
-            set (value) {
-                if (typeof value === 'string' || typeof value === 'number') $icon.innerHTML = value;
-            }
-        });
-        const $html = document.createElement('div');
-        _utils.addClass($html, 'art-setting-item-left-text');
-        _utils.append($html, item.html || '');
-        _utils.append($left, $html);
-        item._$html = $html;
-        _utils.def(item, 'html', {
-            get () {
-                return $html.innerHTML;
-            },
-            set (value) {
-                if (typeof value === 'string' || typeof value === 'number') $html.innerHTML = value;
-            }
-        });
-        const $switch = document.createElement('div');
-        _utils.addClass($switch, 'art-setting-item-right-icon');
-        const $switchOn = _utils.append($switch, icons.switchOn);
-        const $switchOff = _utils.append($switch, icons.switchOff);
-        _utils.setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
-        _utils.append($right, $switch);
-        item._$switch = item.switch;
-        _utils.def(item, 'switch', {
-            get () {
-                return item._$switch;
-            },
-            set (value) {
-                item._$switch = value;
-                if (value) {
-                    _utils.setStyle($switchOff, 'display', 'none');
-                    _utils.setStyle($switchOn, 'display', null);
-                } else {
-                    _utils.setStyle($switchOff, 'display', null);
-                    _utils.setStyle($switchOn, 'display', 'none');
-                }
-            }
-        });
-        const event2 = proxy($item, 'click', async (event)=>{
-            if (item.onSwitch) item.switch = await item.onSwitch.call(this.art, item, $item, event);
-        });
-        this.events.push(event2);
         return $item;
     }
     init(option, width) {

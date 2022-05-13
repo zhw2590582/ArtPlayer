@@ -60,13 +60,6 @@ var art = new Artplayer({
                     html: 'Japanese',
                     url: '/assets/sample/subtitle.jp.srt',
                 },
-                {
-                    html: 'Setting 03',
-                    switch: false,
-                    onSwitch: function (item) {
-                        return !item.switch;
-                    },
-                },
             ],
             onSelect: function (item) {
                 art.subtitle.switch(item.url, {
