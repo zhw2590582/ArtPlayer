@@ -4468,7 +4468,7 @@ class Setting extends _componentDefault.default {
                 return $icon.innerHTML;
             },
             set (value) {
-                if (typeof value === 'string' || typeof value === 'number') $icon.innerHTML = value;
+                $icon.innerHTML = String(value || '');
             }
         });
         const $html = document.createElement('div');
@@ -4481,7 +4481,7 @@ class Setting extends _componentDefault.default {
                 return $html.innerHTML;
             },
             set (value) {
-                if (typeof value === 'string' || typeof value === 'number') $html.innerHTML = value;
+                $html.innerHTML = String(value || '');
             }
         });
         const $tooltip = document.createElement('div');

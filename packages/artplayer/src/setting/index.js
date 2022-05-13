@@ -160,9 +160,7 @@ export default class Setting extends Component {
                 return $icon.innerHTML;
             },
             set(value) {
-                if (typeof value === 'string' || typeof value === 'number') {
-                    $icon.innerHTML = value;
-                }
+                $icon.innerHTML = String(value || '');
             },
         });
 
@@ -177,9 +175,7 @@ export default class Setting extends Component {
                 return $html.innerHTML;
             },
             set(value) {
-                if (typeof value === 'string' || typeof value === 'number') {
-                    $html.innerHTML = value;
-                }
+                $html.innerHTML = String(value || '');
             },
         });
 
