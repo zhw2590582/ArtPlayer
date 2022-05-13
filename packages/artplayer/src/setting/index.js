@@ -122,11 +122,7 @@ export default class Setting extends Component {
         return $item;
     }
 
-<<<<<<< HEAD
-    creatSelector(item) {
-=======
     creatItem(type, item) {
->>>>>>> setting-switch
         const {
             icons,
             events: { proxy },
@@ -391,15 +387,9 @@ export default class Setting extends Component {
             for (let index = 0; index < option.length; index++) {
                 const item = option[index];
                 if (has(item, 'switch')) {
-<<<<<<< HEAD
-                    append($panel, this.creatSwitch(item));
-                } else {
-                    append($panel, this.creatSelector(item));
-=======
                     append($panel, this.creatItem('switch', item));
                 } else {
                     append($panel, this.creatItem('selector', item));
->>>>>>> setting-switch
                 }
             }
 
