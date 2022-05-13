@@ -19,7 +19,7 @@ export default function flip(art) {
         width: constructor.SETTING_ITEM_WIDTH,
         html: i18n.get('Video Flip'),
         tooltip: i18n.get(keys[art.flip]),
-        icon: icons.config,
+        icon: icons.flip,
         selector: Object.keys(keys).map((item) => {
             return {
                 value: item,

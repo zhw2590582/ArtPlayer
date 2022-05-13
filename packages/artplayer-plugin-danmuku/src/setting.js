@@ -1,5 +1,6 @@
 import danmuOn from 'bundle-text:./img/danmu-on.svg';
 import danmuOff from 'bundle-text:./img/danmu-off.svg';
+import danmuConfig from 'bundle-text:./img/danmu-config.svg';
 
 export default function setting(art, danmuku) {
     const { addClass, append, setStyle, tooltip } = art.constructor.utils;
@@ -16,6 +17,7 @@ export default function setting(art, danmuku) {
 
     const $danmuOn = getIcon(danmuOn, 'danmu-on');
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
+    const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
 
     art.on('ready', () => {
         art.controls.add({
@@ -45,6 +47,8 @@ export default function setting(art, danmuku) {
         art.setting.add({
             name: 'danmuku',
             html: '弹幕设置',
+            tooltip: '更多',
+            icon: $danmuConfig,
             selector: [
                 {
                     width: 200,
