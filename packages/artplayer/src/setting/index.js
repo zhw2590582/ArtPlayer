@@ -122,108 +122,7 @@ export default class Setting extends Component {
         return $item;
     }
 
-    creatSelector(item) {
-        const {
-            icons,
-            events: { proxy },
-        } = this.art;
-
-        const hasChildren = item.selector && item.selector.length;
-        const $item = document.createElement('div');
-        addClass($item, 'art-setting-item');
-
-        if (item.default) {
-            addClass($item, 'art-current');
-        }
-
-        const $left = append($item, '<div class="art-setting-item-left"></div>');
-        const $right = append($item, '<div class="art-setting-item-right"></div>');
-
-        const $icon = document.createElement('div');
-        addClass($icon, 'art-setting-item-left-icon');
-        append($icon, hasChildren ? item.icon || icons.config : icons.check);
-        append($left, $icon);
-        item._$icon = $icon;
-
-        def(item, 'icon', {
-            get() {
-                return $icon.innerHTML;
-            },
-            set(value) {
-                if (typeof value === 'string' || typeof value === 'number') {
-                    $icon.innerHTML = value;
-                }
-            },
-        });
-
-        const $html = document.createElement('div');
-        addClass($html, 'art-setting-item-left-text');
-        append($html, item.html || '');
-        append($left, $html);
-        item._$html = $html;
-
-        def(item, 'html', {
-            get() {
-                return $html.innerHTML;
-            },
-            set(value) {
-                if (typeof value === 'string' || typeof value === 'number') {
-                    $html.innerHTML = value;
-                }
-            },
-        });
-
-        if (hasChildren) {
-            const $tooltip = document.createElement('div');
-            addClass($tooltip, 'art-setting-item-right-tooltip');
-            append($tooltip, item.tooltip || '');
-            append($right, $tooltip);
-            item._$tooltip = $tooltip;
-
-            def(item, 'tooltip', {
-                get() {
-                    return $tooltip.innerHTML;
-                },
-                set(value) {
-                    if (typeof value === 'string' || typeof value === 'number') {
-                        $tooltip.innerHTML = value;
-                    }
-                },
-            });
-
-            const $arrow = document.createElement('div');
-            addClass($arrow, 'art-setting-item-right-icon');
-            append($arrow, icons.arrowRight);
-            append($right, $arrow);
-        }
-
-        const event = proxy($item, 'click', async (event) => {
-            if (hasChildren) {
-                this.init(item.selector, item.width);
-            } else {
-                inverseClass($item, 'art-current');
-
-                if (item._parentList) {
-                    this.init(item._parentList);
-                }
-
-                if (item._parentItem && item._parentItem.onSelect) {
-                    const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                    if (item._parentItem._$tooltip) {
-                        if (typeof result === 'string' || typeof result === 'number') {
-                            item._parentItem._$tooltip.innerHTML = result;
-                        }
-                    }
-                }
-            }
-        });
-
-        this.events.push(event);
-
-        return $item;
-    }
-
-    creatSwitch(item) {
+    creatItem(type, item) {
         const {
             icons,
             events: { proxy },
@@ -232,14 +131,28 @@ export default class Setting extends Component {
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
 
+        if (item.name) {
+            addClass($item, `art-setting-item-${item.name}`);
+        }
+
         const $left = append($item, '<div class="art-setting-item-left"></div>');
         const $right = append($item, '<div class="art-setting-item-right"></div>');
 
         const $icon = document.createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
-        append($icon, item.icon || icons.config);
-        append($left, $icon);
 
+        switch (type) {
+            case 'switch':
+                append($icon, item.icon || icons.config);
+                break;
+            case 'selector':
+                append($icon, item.selector && item.selector.length ? item.icon || icons.config : icons.check);
+                break;
+            default:
+                break;
+        }
+
+        append($left, $icon);
         item._$icon = $icon;
 
         def(item, 'icon', {
@@ -281,43 +194,95 @@ export default class Setting extends Component {
                 return $tooltip.innerHTML;
             },
             set(value) {
-                if (typeof value === 'string' || typeof value === 'number') {
-                    $tooltip.innerHTML = value;
-                }
+                $tooltip.innerHTML = String(value || '');
             },
         });
 
-        const $switch = document.createElement('div');
-        addClass($switch, 'art-setting-item-right-icon');
-        const $switchOn = append($switch, icons.switchOn);
-        const $switchOff = append($switch, icons.switchOff);
-        setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
-        append($right, $switch);
-        item._$switch = item.switch;
+        switch (type) {
+            case 'switch': {
+                const $state = document.createElement('div');
+                addClass($state, 'art-setting-item-right-icon');
+                const $switchOn = append($state, icons.switchOn);
+                const $switchOff = append($state, icons.switchOff);
+                setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
+                append($right, $state);
+                item._$switch = item.switch;
 
-        def(item, 'switch', {
-            get() {
-                return item._$switch;
-            },
-            set(value) {
-                item._$switch = value;
-                if (value) {
-                    setStyle($switchOff, 'display', 'none');
-                    setStyle($switchOn, 'display', null);
-                } else {
-                    setStyle($switchOff, 'display', null);
-                    setStyle($switchOn, 'display', 'none');
+                def(item, 'switch', {
+                    get() {
+                        return item._$switch;
+                    },
+                    set(value) {
+                        item._$switch = value;
+                        if (value) {
+                            setStyle($switchOff, 'display', 'none');
+                            setStyle($switchOn, 'display', null);
+                        } else {
+                            setStyle($switchOff, 'display', null);
+                            setStyle($switchOn, 'display', 'none');
+                        }
+                    },
+                });
+                break;
+            }
+            case 'selector':
+                if (item.selector && item.selector.length) {
+                    const $state = document.createElement('div');
+                    addClass($state, 'art-setting-item-right-icon');
+                    append($state, icons.arrowRight);
+                    append($right, $state);
                 }
-            },
-        });
+                break;
+            default:
+                break;
+        }
 
         const event = proxy($item, 'click', async (event) => {
-            if (item.onSwitch) {
-                item.switch = await item.onSwitch.call(this.art, item, $item, event);
+            switch (type) {
+                case 'switch':
+                    if (item.onSwitch) {
+                        item.switch = await item.onSwitch.call(this.art, item, $item, event);
+                    }
+                    break;
+                case 'selector':
+                    if (item.selector && item.selector.length) {
+                        this.init(item.selector, item.width);
+                    } else {
+                        inverseClass($item, 'art-current');
+
+                        if (item._parentList) {
+                            this.init(item._parentList);
+                        }
+
+                        if (item._parentItem && item._parentItem.onSelect) {
+                            const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
+                            if (item._parentItem._$tooltip) {
+                                item._parentItem._$tooltip.innerHTML = String(result || '');
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
         });
 
         this.events.push(event);
+
+        switch (type) {
+            case 'switch':
+                if (item.mounted) {
+                    item.mounted.call(this.art, item, $item);
+                }
+                break;
+            case 'selector':
+                if (item.default) {
+                    addClass($item, 'art-current');
+                }
+                break;
+            default:
+                break;
+        }
 
         return $item;
     }
@@ -344,9 +309,9 @@ export default class Setting extends Component {
             for (let index = 0; index < option.length; index++) {
                 const item = option[index];
                 if (has(item, 'switch')) {
-                    append($panel, this.creatSwitch(item));
+                    append($panel, this.creatItem('switch', item));
                 } else {
-                    append($panel, this.creatSelector(item));
+                    append($panel, this.creatItem('selector', item));
                 }
             }
 
