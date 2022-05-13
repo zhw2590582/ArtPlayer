@@ -122,18 +122,21 @@ export default class Setting extends Component {
         return $item;
     }
 
+<<<<<<< HEAD
     creatSelector(item) {
+=======
+    creatItem(type, item) {
+>>>>>>> setting-switch
         const {
             icons,
             events: { proxy },
         } = this.art;
 
-        const hasChildren = item.selector && item.selector.length;
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
 
-        if (item.default) {
-            addClass($item, 'art-current');
+        if (item.name) {
+            addClass($item, `art-setting-item-${item.name}`);
         }
 
         const $left = append($item, '<div class="art-setting-item-left"></div>');
@@ -141,7 +144,18 @@ export default class Setting extends Component {
 
         const $icon = document.createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
-        append($icon, hasChildren ? item.icon || icons.config : icons.check);
+
+        switch (type) {
+            case 'switch':
+                append($icon, item.icon || icons.config);
+                break;
+            case 'selector':
+                append($icon, item.selector && item.selector.length ? item.icon || icons.config : icons.check);
+                break;
+            default:
+                break;
+        }
+
         append($left, $icon);
         item._$icon = $icon;
 
@@ -150,9 +164,7 @@ export default class Setting extends Component {
                 return $icon.innerHTML;
             },
             set(value) {
-                if (typeof value === 'string' || typeof value === 'number') {
-                    $icon.innerHTML = value;
-                }
+                $icon.innerHTML = String(value || '');
             },
         });
 
@@ -167,58 +179,110 @@ export default class Setting extends Component {
                 return $html.innerHTML;
             },
             set(value) {
-                if (typeof value === 'string' || typeof value === 'number') {
-                    $html.innerHTML = value;
-                }
+                $html.innerHTML = String(value || '');
             },
         });
 
-        if (hasChildren) {
-            const $tooltip = document.createElement('div');
-            addClass($tooltip, 'art-setting-item-right-tooltip');
-            append($tooltip, item.tooltip || '');
-            append($right, $tooltip);
-            item._$tooltip = $tooltip;
+        const $tooltip = document.createElement('div');
+        addClass($tooltip, 'art-setting-item-right-tooltip');
+        append($tooltip, item.tooltip || '');
+        append($right, $tooltip);
+        item._$tooltip = $tooltip;
 
-            def(item, 'tooltip', {
-                get() {
-                    return $tooltip.innerHTML;
-                },
-                set(value) {
-                    if (typeof value === 'string' || typeof value === 'number') {
-                        $tooltip.innerHTML = value;
-                    }
-                },
-            });
+        def(item, 'tooltip', {
+            get() {
+                return $tooltip.innerHTML;
+            },
+            set(value) {
+                $tooltip.innerHTML = String(value || '');
+            },
+        });
 
-            const $arrow = document.createElement('div');
-            addClass($arrow, 'art-setting-item-right-icon');
-            append($arrow, icons.arrowRight);
-            append($right, $arrow);
+        switch (type) {
+            case 'switch': {
+                const $state = document.createElement('div');
+                addClass($state, 'art-setting-item-right-icon');
+                const $switchOn = append($state, icons.switchOn);
+                const $switchOff = append($state, icons.switchOff);
+                setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
+                append($right, $state);
+                item._$switch = item.switch;
+
+                def(item, 'switch', {
+                    get() {
+                        return item._$switch;
+                    },
+                    set(value) {
+                        item._$switch = value;
+                        if (value) {
+                            setStyle($switchOff, 'display', 'none');
+                            setStyle($switchOn, 'display', null);
+                        } else {
+                            setStyle($switchOff, 'display', null);
+                            setStyle($switchOn, 'display', 'none');
+                        }
+                    },
+                });
+                break;
+            }
+            case 'selector':
+                if (item.selector && item.selector.length) {
+                    const $state = document.createElement('div');
+                    addClass($state, 'art-setting-item-right-icon');
+                    append($state, icons.arrowRight);
+                    append($right, $state);
+                }
+                break;
+            default:
+                break;
         }
 
         const event = proxy($item, 'click', async (event) => {
-            if (hasChildren) {
-                this.init(item.selector, item.width);
-            } else {
-                inverseClass($item, 'art-current');
+            switch (type) {
+                case 'switch':
+                    if (item.onSwitch) {
+                        item.switch = await item.onSwitch.call(this.art, item, $item, event);
+                    }
+                    break;
+                case 'selector':
+                    if (item.selector && item.selector.length) {
+                        this.init(item.selector, item.width);
+                    } else {
+                        inverseClass($item, 'art-current');
 
-                if (item._parentList) {
-                    this.init(item._parentList);
-                }
+                        if (item._parentList) {
+                            this.init(item._parentList);
+                        }
 
-                if (item._parentItem && item._parentItem.onSelect) {
-                    const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                    if (item._parentItem._$tooltip) {
-                        if (typeof result === 'string' || typeof result === 'number') {
-                            item._parentItem._$tooltip.innerHTML = result;
+                        if (item._parentItem && item._parentItem.onSelect) {
+                            const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
+                            if (item._parentItem._$tooltip) {
+                                item._parentItem._$tooltip.innerHTML = String(result || '');
+                            }
                         }
                     }
-                }
+                    break;
+                default:
+                    break;
             }
         });
 
         this.events.push(event);
+
+        switch (type) {
+            case 'switch':
+                if (item.mounted) {
+                    item.mounted.call(this.art, item, $item);
+                }
+                break;
+            case 'selector':
+                if (item.default) {
+                    addClass($item, 'art-current');
+                }
+                break;
+            default:
+                break;
+        }
 
         return $item;
     }
@@ -327,9 +391,15 @@ export default class Setting extends Component {
             for (let index = 0; index < option.length; index++) {
                 const item = option[index];
                 if (has(item, 'switch')) {
+<<<<<<< HEAD
                     append($panel, this.creatSwitch(item));
                 } else {
                     append($panel, this.creatSelector(item));
+=======
+                    append($panel, this.creatItem('switch', item));
+                } else {
+                    append($panel, this.creatItem('selector', item));
+>>>>>>> setting-switch
                 }
             }
 

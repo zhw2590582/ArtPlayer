@@ -5,7 +5,6 @@ import fullscreenWeb from './fullscreenWeb';
 import pip from './pip';
 import playAndPause from './playAndPause';
 import progress from './progress';
-import subtitle from './subtitle';
 import time from './time';
 import volume from './volume';
 import setting from './setting';
@@ -118,20 +117,11 @@ export default class Control extends Component {
             );
 
             this.add(
-                subtitle({
-                    name: 'subtitle',
-                    disable: !option.subtitle.url,
-                    position: 'right',
-                    index: 30,
-                }),
-            );
-
-            this.add(
                 setting({
                     name: 'setting',
                     disable: !option.setting,
                     position: 'right',
-                    index: 40,
+                    index: 30,
                 }),
             );
 
@@ -140,7 +130,7 @@ export default class Control extends Component {
                     name: 'pip',
                     disable: !option.pip,
                     position: 'right',
-                    index: 50,
+                    index: 40,
                 }),
             );
 
@@ -149,7 +139,7 @@ export default class Control extends Component {
                     name: 'fullscreenWeb',
                     disable: !option.fullscreenWeb,
                     position: 'right',
-                    index: 60,
+                    index: 50,
                 }),
             );
 
@@ -158,7 +148,7 @@ export default class Control extends Component {
                     name: 'fullscreen',
                     disable: !option.fullscreen,
                     position: 'right',
-                    index: 70,
+                    index: 60,
                 }),
             );
 
