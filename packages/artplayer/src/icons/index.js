@@ -6,7 +6,6 @@ import play from 'bundle-text:./play.svg';
 import pause from 'bundle-text:./pause.svg';
 import volume from 'bundle-text:./volume.svg';
 import volumeClose from 'bundle-text:./volume-close.svg';
-import subtitle from 'bundle-text:./subtitle.svg';
 import screenshot from 'bundle-text:./screenshot.svg';
 import setting from 'bundle-text:./setting.svg';
 import arrowLeft from 'bundle-text:./arrow-left.svg';
@@ -34,7 +33,6 @@ export default class Icons {
             check,
             volume,
             volumeClose,
-            subtitle,
             screenshot,
             setting,
             pip,

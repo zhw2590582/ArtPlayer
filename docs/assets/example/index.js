@@ -33,27 +33,38 @@ var art = new Artplayer({
     settings: [
         {
             width: 200,
-            html: 'Custom Selector',
-            tooltip: 'Click This',
-            icon: '<img width="22" heigth="22" src="/assets/img/indicator.svg">',
+            html: 'Switch Subtitle',
+            tooltip: 'Bilingual',
+            icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
             selector: [
                 {
-                    default: true,
-                    html: 'Setting 01',
-                },
-                {
-                    html: 'Setting 02',
-                },
-                {
-                    html: 'Setting 03',
-                    switch: false,
+                    html: 'Display',
+                    switch: true,
+                    tooltip: 'Show',
                     onSwitch: function (item) {
+                        item.tooltip = item.switch ? 'Hide' : 'Show';
+                        art.subtitle.show = !item.switch;
                         return !item.switch;
                     },
                 },
+                {
+                    default: true,
+                    html: 'Bilingual',
+                    url: '/assets/sample/subtitle.srt',
+                },
+                {
+                    html: 'Chinese',
+                    url: '/assets/sample/subtitle.cn.srt',
+                },
+                {
+                    html: 'Japanese',
+                    url: '/assets/sample/subtitle.jp.srt',
+                },
             ],
             onSelect: function (item) {
-                console.info('You clicked on the custom selector', item.html);
+                art.subtitle.switch(item.url, {
+                    name: item.html,
+                });
                 return item.html;
             },
         },
