@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652449776298";
+        return "1652453322523";
     }
     static get config() {
         return _configDefault.default;
@@ -2763,7 +2763,7 @@ class Control extends _componentDefault.default {
             activeTime = Date.now();
         });
         art.on('video:timeupdate', ()=>{
-            if (art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
+            if (!art.isFocus && art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
                 this.show = false;
                 _utils.addClass($player, 'art-hide-cursor');
                 _utils.removeClass($player, 'art-hover');

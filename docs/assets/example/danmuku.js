@@ -26,7 +26,7 @@ var art = new Artplayer({
     ],
 });
 
-// 监听手动输入的弹幕
+// 监听手动输入的弹幕，保存到数据库
 art.on('artplayerPluginDanmuku:emit', (danmu) => {
-    console.info('---->', danmu);
+    console.info(danmu);
 });
