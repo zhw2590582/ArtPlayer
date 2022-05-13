@@ -63,7 +63,7 @@ export default class Danmuku {
             speed: 'number',
             margin: 'array',
             opacity: 'number',
-            fontSize: 'number',
+            fontSize: 'number|string',
             filter: 'function',
             antiOverlap: 'boolean',
             useWorker: 'boolean',
@@ -107,6 +107,23 @@ export default class Danmuku {
         }
 
         return Danmuku.option.margin[1];
+    }
+
+    get fontSize() {
+        const { clamp } = this.utils;
+        const value = this.option.fontSize;
+        const { clientHeight } = this.$player;
+
+        if (typeof value === 'number') {
+            return clamp(value, 12, 200);
+        }
+
+        if (typeof value === 'string' && value.endsWith('%')) {
+            const ratio = parseFloat(value) / 100;
+            return clamp(clientHeight * ratio, 12, 200);
+        }
+
+        return this.option.fontSize;
     }
 
     filter(state, callback) {
@@ -237,7 +254,6 @@ export default class Danmuku {
 
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.fontSize = clamp(this.option.fontSize, 12, 100);
 
         this.art.emit('artplayerPluginDanmuku:config', this.option);
 
@@ -322,7 +338,7 @@ export default class Danmuku {
 
                     danmu.$ref.style.left = `${clientWidth}px`;
                     danmu.$ref.style.opacity = this.option.opacity;
-                    danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
+                    danmu.$ref.style.fontSize = `${this.fontSize}px`;
                     danmu.$ref.style.color = danmu.color || '#fff';
                     danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : 'none';
                     danmu.$ref.style.marginLeft = '0px';
