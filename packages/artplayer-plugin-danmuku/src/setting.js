@@ -47,28 +47,6 @@ export default function setting(art, danmuku) {
             html: '弹幕设置',
             selector: [
                 {
-                    html: '弹幕防重叠',
-                    icon: '',
-                    switch: danmuku.option.antiOverlap,
-                    onSwitch(item) {
-                        danmuku.config({
-                            antiOverlap: !item.switch,
-                        });
-                        return !item.switch;
-                    },
-                },
-                {
-                    html: '同步视频速度',
-                    icon: '',
-                    switch: danmuku.option.synchronousPlayback,
-                    onSwitch(item) {
-                        danmuku.config({
-                            synchronousPlayback: !item.switch,
-                        });
-                        return !item.switch;
-                    },
-                },
-                {
                     width: 200,
                     html: '播放速度',
                     icon: '',
@@ -202,6 +180,32 @@ export default function setting(art, danmuku) {
                             margin: item.margin,
                         });
                         return item.html;
+                    },
+                },
+                {
+                    html: '弹幕防重叠',
+                    icon: '',
+                    tooltip: danmuku.option.antiOverlap ? '开启' : '关闭',
+                    switch: danmuku.option.antiOverlap,
+                    onSwitch(item) {
+                        danmuku.config({
+                            antiOverlap: !item.switch,
+                        });
+                        item.tooltip = item.switch ? '关闭' : '开启';
+                        return !item.switch;
+                    },
+                },
+                {
+                    html: '同步视频速度',
+                    icon: '',
+                    tooltip: danmuku.option.synchronousPlayback ? '开启' : '关闭',
+                    switch: danmuku.option.synchronousPlayback,
+                    onSwitch(item) {
+                        danmuku.config({
+                            synchronousPlayback: !item.switch,
+                        });
+                        item.tooltip = item.switch ? '关闭' : '开启';
+                        return !item.switch;
                     },
                 },
             ],
