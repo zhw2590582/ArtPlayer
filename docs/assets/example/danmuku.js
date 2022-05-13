@@ -1,3 +1,6 @@
+// 使用文档
+// https://artplayer.org/document/zh-cn/Plugins/danmuku
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -21,20 +24,9 @@ var art = new Artplayer({
             filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数
         }),
     ],
-    controls: [
-        {
-            position: 'right',
-            html: '发送',
-            click: function () {
-                var text = prompt('请输入弹幕文本', '弹幕测试文本');
-                if (!text || !text.trim()) return;
-                var color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
-                art.plugins.artplayerPluginDanmuku.emit({
-                    text: text,
-                    color: color,
-                    border: true,
-                });
-            },
-        },
-    ],
+});
+
+// 监听手动输入的弹幕
+art.on('artplayerPluginDanmuku:emit', (danmu) => {
+    console.info('---->', danmu);
 });
