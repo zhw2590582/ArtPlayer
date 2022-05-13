@@ -4452,7 +4452,8 @@ class Setting extends _componentDefault.default {
         const { icons , events: { proxy  } ,  } = this.art;
         const $item = document.createElement('div');
         _utils.addClass($item, 'art-setting-item');
-        if (item.name) _utils.addClass($item, `art-setting-item-${item.name}`);
+        if (isHtmlType(item.name)) $item.dataset.name = item.name;
+        if (isHtmlType(item.value)) $item.dataset.value = item.value;
         const $left = _utils.append($item, '<div class="art-setting-item-left"></div>');
         const $right = _utils.append($item, '<div class="art-setting-item-right"></div>');
         const $icon = document.createElement('div');

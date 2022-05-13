@@ -135,8 +135,12 @@ export default class Setting extends Component {
         const $item = document.createElement('div');
         addClass($item, 'art-setting-item');
 
-        if (item.name) {
-            addClass($item, `art-setting-item-${item.name}`);
+        if (isHtmlType(item.name)) {
+            $item.dataset.name = item.name;
+        }
+
+        if (isHtmlType(item.value)) {
+            $item.dataset.value = item.value;
         }
 
         const $left = append($item, '<div class="art-setting-item-left"></div>');
