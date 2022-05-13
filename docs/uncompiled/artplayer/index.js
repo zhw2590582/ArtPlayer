@@ -242,7 +242,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652417963768";
+        return "1652429126365";
     }
     static get config() {
         return _configDefault.default;
@@ -4460,7 +4460,7 @@ class Setting extends _componentDefault.default {
         _utils.addClass($icon, 'art-setting-item-left-icon');
         switch(type){
             case 'switch':
-                _utils.append($icon, item.icon || icons.config);
+                _utils.append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
                 break;
             case 'selector':
                 _utils.append($icon, item.selector && item.selector.length ? item.icon || icons.config : icons.check);

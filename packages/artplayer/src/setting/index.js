@@ -151,7 +151,7 @@ export default class Setting extends Component {
 
         switch (type) {
             case 'switch':
-                append($icon, item.icon || icons.config);
+                append($icon, isHtmlType(item.icon) ? item.icon : icons.config);
                 break;
             case 'selector':
                 append($icon, item.selector && item.selector.length ? item.icon || icons.config : icons.check);
