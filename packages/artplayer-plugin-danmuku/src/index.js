@@ -9,7 +9,7 @@ function checkVersion(art) {
     const arr = version.split('.').map(Number);
     const major = arr[0];
     const minor = arr[1] / 100;
-    errorHandle(major + minor >= 4.04, `Artplayer.js@${version}不兼容该弹幕库，请更新到 4.4.x 版本以上`);
+    errorHandle(major + minor >= 4.04, `Artplayer.js@${version} 不兼容该弹幕库，请更新到 4.4.x 版本以上`);
 }
 
 export default function artplayerPluginDanmuku(option) {
@@ -32,6 +32,10 @@ export default function artplayerPluginDanmuku(option) {
         };
     };
 }
+
+artplayerPluginDanmuku.env = process.env.NODE_ENV;
+artplayerPluginDanmuku.version = process.env.APP_VER;
+artplayerPluginDanmuku.build = process.env.BUILD_DATE;
 
 if (typeof window !== 'undefined') {
     window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;

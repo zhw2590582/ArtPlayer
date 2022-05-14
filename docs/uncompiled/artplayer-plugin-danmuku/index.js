@@ -154,7 +154,7 @@ function checkVersion(art) {
     const arr = version.split('.').map(Number);
     const major = arr[0];
     const minor = arr[1] / 100;
-    errorHandle(major + minor >= 4.04, `Artplayer.js@${version}不兼容该弹幕库，请更新到 4.4.x 版本以上`);
+    errorHandle(major + minor >= 4.04, `Artplayer.js@${version} 不兼容该弹幕库，请更新到 4.4.x 版本以上`);
 }
 function artplayerPluginDanmuku(option) {
     return (art)=>{
@@ -177,6 +177,9 @@ function artplayerPluginDanmuku(option) {
     };
 }
 exports.default = artplayerPluginDanmuku;
+artplayerPluginDanmuku.env = "development";
+artplayerPluginDanmuku.version = "4.4.0";
+artplayerPluginDanmuku.build = "1652537024275";
 if (typeof window !== 'undefined') window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 
 },{"./danmuku":"igPca","./setting":"8npWO","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"igPca":[function(require,module,exports) {
