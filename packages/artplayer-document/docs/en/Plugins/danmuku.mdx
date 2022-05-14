@@ -73,14 +73,16 @@ var art = new Artplayer({
                     mode: 1,
                 },
             ],
-            speed: 5, // Animation time
-            opacity: 1, // Opacity
-            size: 25, // Font size
-            margin: ['10%', 20], // Margin top and margin bottom
-            antiOverlap: true, // Anti overlap
-            useWorker: true, // Use web worker or not
-            synchronousPlayback: false, // Synchronous playback speed
-            filter: (danmu) => danmu.text.length <= 50, // filter function
+            speed: 5, // The duration of the barrage, in seconds, in the range [1 ~ 10]
+            opacity: 1, // Barrage transparency, the range is [0 ~ 1]
+            fontSize: 25, // Font size, supports numbers and percentages
+            color: '#FFFFFF', // Default font color
+            mode: 0, // Default mode, 0-scroll, 1-still
+            margin: ['2%', 60], // Barrage top and bottom margins, supports numbers and percentages
+            antiOverlap: true, // Whether to prevent overlapping
+            useWorker: true, // whether to use web workers
+            synchronousPlayback: false, // Whether to sync to playback speed
+            filter: (danmu) => danmu.text.length < 50, // Barrage filter function
         }),
     ],
 });
