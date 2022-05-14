@@ -140,6 +140,10 @@ export default function setting(art, danmuku) {
                 inverseClass(event.target, 'art-current');
             }
         });
+
+        art.on('resize', () => {
+            setStyle($emitter, 'display', $controlsCenter.clientWidth < 150 ? 'none' : null);
+        });
     }
 
     function addControl() {
