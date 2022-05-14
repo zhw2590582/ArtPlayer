@@ -1,8 +1,21 @@
 import Danmuku from './danmuku';
 import setting from './setting';
 
+function checkVersion(art) {
+    const {
+        version,
+        utils: { errorHandle },
+    } = art.constructor;
+
+    const arr = version.split('.').map(Number);
+    const major = arr[0];
+    const minor = arr[1] / 100;
+    errorHandle(major + minor >= 4.04, '弹幕库版本不兼容');
+}
+
 export default function artplayerPluginDanmuku(option) {
     return (art) => {
+        checkVersion(art);
         const danmuku = new Danmuku(art, option);
         setting(art, danmuku);
         return {
