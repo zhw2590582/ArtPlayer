@@ -28,6 +28,26 @@ export default function setting(art, danmuku) {
     const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
 
     function addEmitter() {
+        const colors = [
+            '#FE0302',
+            '#FF7204',
+            '#FFAA02',
+            '#FFD302',
+            '#FFFF00',
+            '#A0EE00',
+            '#00CD00',
+            '#019899',
+            '#4266BE',
+            '#89D5FF',
+            '#CC0273',
+            '#222222',
+            '#9B9B9B',
+            '#FFFFFF',
+        ].map((item) => {
+            const isCurrent = danmuku.option.color === item ? ' art-current' : '';
+            return `<div class="art-danmuku-style-panel-color${isCurrent}" data-color="${item}" style="background-color:${item}"></div>`;
+        });
+
         const $emitter = append(
             $controlsCenter,
             `
@@ -40,6 +60,9 @@ export default function setting(art, danmuku) {
                             <div class="art-danmuku-style-panel-mode" data-mode="1">静止</div>
                         </div>
                         <div class="art-danmuku-style-panel-title">颜色</div>
+                        <div class="art-danmuku-style-panel-colors">
+                            ${colors.join('')}
+                        </div>
                     </div>
                 </div>
                 <input class="art-danmuku-input" maxlength="100" placeholder="发个弹幕见证当下" />
@@ -53,13 +76,15 @@ export default function setting(art, danmuku) {
         const $send = query('.art-danmuku-send', $emitter);
         const $panel = query('.art-danmuku-style-panel', $emitter);
         const $modes = query('.art-danmuku-style-panel-modes', $emitter);
+        const $colors = query('.art-danmuku-style-panel-colors', $emitter);
 
         if (art.option.backdrop) {
             addClass($panel, 'art-backdrop-filter');
         }
 
-        let mode = 0;
         let timer = null;
+        let mode = danmuku.option.mode;
+        let color = danmuku.option.color;
         append($style, $danmuStyle);
 
         function countdown(time) {
@@ -80,7 +105,7 @@ export default function setting(art, danmuku) {
             const danmu = {
                 text,
                 mode,
-                color: '#ffffff',
+                color,
                 border: true,
             };
 
@@ -104,6 +129,14 @@ export default function setting(art, danmuku) {
             const { dataset } = event.target;
             if (dataset.mode) {
                 mode = Number(dataset.mode);
+                inverseClass(event.target, 'art-current');
+            }
+        });
+
+        art.proxy($colors, 'click', (event) => {
+            const { dataset } = event.target;
+            if (dataset.color) {
+                color = dataset.color;
                 inverseClass(event.target, 'art-current');
             }
         });

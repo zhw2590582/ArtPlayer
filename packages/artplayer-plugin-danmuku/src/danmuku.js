@@ -49,6 +49,8 @@ export default class Danmuku {
             speed: 5,
             margin: ['2%', '25%'],
             opacity: 1,
+            color: '#FFFFFF',
+            mode: 0,
             fontSize: 25,
             filter: () => true,
             antiOverlap: true,
@@ -63,6 +65,8 @@ export default class Danmuku {
             speed: 'number',
             margin: 'array',
             opacity: 'number',
+            color: 'string',
+            mode: 'number',
             fontSize: 'number|string',
             filter: 'function',
             antiOverlap: 'boolean',
@@ -342,8 +346,8 @@ export default class Danmuku {
                     danmu.$ref.style.left = `${clientWidth}px`;
                     danmu.$ref.style.opacity = this.option.opacity;
                     danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
-                    danmu.$ref.style.color = danmu.color || '#fff';
-                    danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color || '#fff'}` : null;
+                    danmu.$ref.style.color = danmu.color;
+                    danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
                     danmu.$ref.style.backgroundColor = danmu.border ? 'rgb(0 0 0 / 50%)' : null;
                     danmu.$ref.style.marginLeft = '0px';
 
@@ -458,7 +462,8 @@ export default class Danmuku {
         }
 
         this.queue.push({
-            mode: 0,
+            mode: this.option.mode,
+            color: this.option.color,
             ...danmu,
             $state: 'wait',
             $ref: null,
