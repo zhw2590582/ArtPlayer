@@ -461,9 +461,15 @@ export default class Danmuku {
             danmu.time = this.art.currentTime + 0.5;
         }
 
+        if (danmu.mode === undefined) {
+            danmu.mode = this.option.mode;
+        }
+
+        if (danmu.color === undefined) {
+            danmu.color = this.option.color;
+        }
+
         this.queue.push({
-            mode: this.option.mode,
-            color: this.option.color,
             ...danmu,
             $state: 'wait',
             $ref: null,

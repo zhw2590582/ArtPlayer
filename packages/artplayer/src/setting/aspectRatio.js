@@ -29,9 +29,9 @@ export default function aspectRatio(art) {
             art.aspectRatio = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item._$tooltip, art.aspectRatio);
+            update($panel, item.$tooltip, art.aspectRatio);
             art.on('aspectRatio', () => {
-                update($panel, item._$tooltip, art.aspectRatio);
+                update($panel, item.$tooltip, art.aspectRatio);
             });
         },
     };

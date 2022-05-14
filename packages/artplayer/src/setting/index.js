@@ -168,7 +168,7 @@ export default class Setting extends Component {
         }
 
         append($left, $icon);
-        item._$icon = $icon;
+        item.$icon = $icon;
 
         def(item, 'icon', {
             get() {
@@ -185,7 +185,7 @@ export default class Setting extends Component {
         addClass($html, 'art-setting-item-left-text');
         append($html, item.html || '');
         append($left, $html);
-        item._$html = $html;
+        item.$html = $html;
 
         def(item, 'html', {
             get() {
@@ -202,7 +202,7 @@ export default class Setting extends Component {
         addClass($tooltip, 'art-setting-item-right-tooltip');
         append($tooltip, item.tooltip || '');
         append($right, $tooltip);
-        item._$tooltip = $tooltip;
+        item.$tooltip = $tooltip;
 
         def(item, 'tooltip', {
             get() {
@@ -223,14 +223,14 @@ export default class Setting extends Component {
                 const $switchOff = append($state, icons.switchOff);
                 setStyle(item.switch ? $switchOff : $switchOn, 'display', 'none');
                 append($right, $state);
-                item._$switch = item.switch;
+                item.$switch = item.switch;
 
                 def(item, 'switch', {
                     get() {
-                        return item._$switch;
+                        return item.$switch;
                     },
                     set(value) {
-                        item._$switch = value;
+                        item.$switch = value;
                         if (value) {
                             setStyle($switchOff, 'display', 'none');
                             setStyle($switchOn, 'display', null);
@@ -273,8 +273,8 @@ export default class Setting extends Component {
 
                         if (item._parentItem && item._parentItem.onSelect) {
                             const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                            if (item._parentItem._$tooltip && isStringOrNumber(result)) {
-                                item._parentItem._$tooltip.innerHTML = result;
+                            if (item._parentItem.$tooltip && isStringOrNumber(result)) {
+                                item._parentItem.$tooltip.innerHTML = result;
                             }
                         }
                     }

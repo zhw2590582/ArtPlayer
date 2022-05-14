@@ -109,10 +109,10 @@ export default function setting(art, danmuku) {
                 border: true,
             };
 
-            countdown(5);
             $input.value = '';
             danmuku.emit(danmu);
             addClass($send, 'art-disabled');
+            countdown(danmuku.option.timeout || 5);
             art.emit('artplayerPluginDanmuku:emit', danmu);
         }
 

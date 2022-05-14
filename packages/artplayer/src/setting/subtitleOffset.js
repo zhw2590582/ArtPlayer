@@ -29,9 +29,9 @@ export default function subtitleOffset(art) {
             art.subtitleOffset = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item._$tooltip, art.subtitleOffset);
+            update($panel, item.$tooltip, art.subtitleOffset);
             art.on('subtitleOffset', () => {
-                update($panel, item._$tooltip, art.subtitleOffset);
+                update($panel, item.$tooltip, art.subtitleOffset);
             });
         },
     };

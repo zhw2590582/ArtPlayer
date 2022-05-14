@@ -31,9 +31,9 @@ export default function flip(art) {
             art.flip = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item._$tooltip, art.flip);
+            update($panel, item.$tooltip, art.flip);
             art.on('flip', () => {
-                update($panel, item._$tooltip, art.flip);
+                update($panel, item.$tooltip, art.flip);
             });
         },
     };

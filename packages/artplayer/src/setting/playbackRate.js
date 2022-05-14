@@ -29,9 +29,9 @@ export default function playbackRate(art) {
             art.playbackRate = item.value;
         },
         mounted: ($panel, item) => {
-            update($panel, item._$tooltip, art.playbackRate);
+            update($panel, item.$tooltip, art.playbackRate);
             art.on('playbackRate', () => {
-                update($panel, item._$tooltip, art.playbackRate);
+                update($panel, item.$tooltip, art.playbackRate);
             });
         },
     };
