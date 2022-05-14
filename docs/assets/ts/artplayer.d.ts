@@ -104,7 +104,17 @@ type SettingOption = {
     /**
      * When selector item click
      */
-    onSelect?(selector: SettingOption, element: HTMLElement, event: Event): void;
+    onSelect?(item: SettingOption, element: HTMLElement, event: Event): void;
+
+    /**
+     * Custom switch item
+     */
+    switch?: boolean;
+
+    /**
+     * When switch item click
+     */
+    onSwitch?(item: SettingOption, element: HTMLElement, event: Event): void;
 };
 
 type Component = {
