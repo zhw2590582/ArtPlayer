@@ -8,9 +8,11 @@ export default function clickInit(art, events) {
 
     events.proxy(document, ['click', 'contextmenu'], (event) => {
         if (includeFromEvent(event, $player)) {
+            art.isInput = event.target.tagName === 'INPUT';
             art.isFocus = true;
             art.emit('focus');
         } else {
+            art.isInput = false;
             art.isFocus = false;
             art.emit('blur');
         }

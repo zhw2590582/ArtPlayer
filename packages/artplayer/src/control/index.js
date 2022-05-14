@@ -36,7 +36,7 @@ export default class Control extends Component {
         });
 
         art.on('video:timeupdate', () => {
-            if (!art.isFocus && art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
+            if (!art.isInput && art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
                 this.show = false;
                 addClass($player, 'art-hide-cursor');
                 removeClass($player, 'art-hover');

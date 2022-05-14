@@ -206,6 +206,7 @@ class Artplayer extends _emitterDefault.default {
         this.option = _optionValidatorDefault.default(mergeOption, _schemeDefault.default);
         this.isReady = false;
         this.isFocus = false;
+        this.isInput = false;
         this.isDestroy = false;
         this.whitelist = new _whitelistDefault.default(this);
         this.template = new _templateDefault.default(this);
@@ -242,7 +243,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652536933186";
+        return "1652571170551";
     }
     static get config() {
         return _configDefault.default;
@@ -2763,7 +2764,7 @@ class Control extends _componentDefault.default {
             activeTime = Date.now();
         });
         art.on('video:timeupdate', ()=>{
-            if (!art.isFocus && art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
+            if (!art.isInput && art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
                 this.show = false;
                 _utils.addClass($player, 'art-hide-cursor');
                 _utils.removeClass($player, 'art-hover');
@@ -3914,9 +3915,11 @@ function clickInit(art, events) {
         'contextmenu'
     ], (event)=>{
         if (_utils.includeFromEvent(event, $player)) {
+            art.isInput = event.target.tagName === 'INPUT';
             art.isFocus = true;
             art.emit('focus');
         } else {
+            art.isInput = false;
             art.isFocus = false;
             art.emit('blur');
         }
