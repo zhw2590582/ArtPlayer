@@ -184,34 +184,18 @@ export default function setting(art, danmuku) {
                     html: '播放速度',
                     icon: '',
                     tooltip: '适中',
-                    selector: [
-                        {
-                            html: '极慢',
-                            time: 10,
-                        },
-                        {
-                            html: '较慢',
-                            time: 7.5,
-                        },
-                        {
-                            default: true,
-                            html: '适中',
-                            time: 5,
-                        },
-                        {
-                            html: '较快',
-                            time: 2.5,
-                        },
-                        {
-                            html: '极快',
-                            time: 1,
-                        },
-                    ],
-                    onSelect: function (item) {
+                    range: [5, 0, 10, 2.5],
+                    onRange: function (item) {
                         danmuku.config({
-                            speed: item.time,
+                            speed: item.range,
                         });
-                        return item.html;
+                        return {
+                            0: '极快',
+                            2.5: '较快',
+                            5: '适中',
+                            7.5: '较慢',
+                            10: '极慢',
+                        }[item.range];
                     },
                 },
                 {
@@ -219,34 +203,18 @@ export default function setting(art, danmuku) {
                     html: '字体大小',
                     icon: '',
                     tooltip: '适中',
-                    selector: [
-                        {
-                            html: '极小',
-                            fontSize: '2%',
-                        },
-                        {
-                            html: '较小',
-                            fontSize: '4%',
-                        },
-                        {
-                            default: true,
-                            html: '适中',
-                            fontSize: '6%',
-                        },
-                        {
-                            html: '较大',
-                            fontSize: '8%',
-                        },
-                        {
-                            html: '极大',
-                            fontSize: '10%',
-                        },
-                    ],
-                    onSelect: function (item) {
+                    range: [6, 2, 10, 2],
+                    onRange: function (item) {
                         danmuku.config({
-                            fontSize: item.fontSize,
+                            fontSize: item.range + '%',
                         });
-                        return item.html;
+                        return {
+                            2: '极小',
+                            5: '较小',
+                            6: '适中',
+                            8: '较大',
+                            10: '极大',
+                        }[item.range];
                     },
                 },
                 {
@@ -254,34 +222,12 @@ export default function setting(art, danmuku) {
                     html: '不透明度',
                     icon: '',
                     tooltip: '100%',
-                    selector: [
-                        {
-                            default: true,
-                            opacity: 1,
-                            html: '100%',
-                        },
-                        {
-                            opacity: 0.75,
-                            html: '75%',
-                        },
-                        {
-                            opacity: 0.5,
-                            html: '50%',
-                        },
-                        {
-                            opacity: 0.25,
-                            html: '25%',
-                        },
-                        {
-                            opacity: 0,
-                            html: '0%',
-                        },
-                    ],
-                    onSelect: function (item) {
+                    range: [1, 0, 1, 0.01],
+                    onRange: function (item) {
                         danmuku.config({
-                            opacity: item.opacity,
+                            opacity: item.range,
                         });
-                        return item.html;
+                        return Math.floor(item.range * 100) + '%';
                     },
                 },
                 {
@@ -289,30 +235,17 @@ export default function setting(art, danmuku) {
                     html: '显示范围',
                     icon: '',
                     tooltip: '3/4',
-                    selector: [
-                        {
-                            html: '1/4',
-                            margin: ['2%', '75%'],
-                        },
-                        {
-                            html: '半屏',
-                            margin: ['2%', '50%'],
-                        },
-                        {
-                            default: true,
-                            html: '3/4',
-                            margin: ['2%', '25%'],
-                        },
-                        {
-                            html: '满屏',
-                            margin: ['2%', '2%'],
-                        },
-                    ],
-                    onSelect: function (item) {
+                    range: [50, 0, 75, 25],
+                    onRange: function (item) {
                         danmuku.config({
-                            margin: item.margin,
+                            margin: ['0%', item.range + '%'],
                         });
-                        return item.html;
+                        return {
+                            0: '满屏',
+                            25: '3/4',
+                            50: '半屏',
+                            75: '1/4',
+                        }[item.range];
                     },
                 },
                 {

@@ -85,12 +85,12 @@ export default class Danmuku {
         const { clientHeight } = this.$player;
 
         if (typeof value === 'number') {
-            return clamp(value, 0, clientHeight);
+            return clamp(value, 10, clientHeight);
         }
 
         if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
-            return clamp(clientHeight * ratio, 0, clientHeight);
+            return clamp(clientHeight * ratio, 10, clientHeight);
         }
 
         return Danmuku.option.margin[0];
@@ -102,12 +102,12 @@ export default class Danmuku {
         const { clientHeight } = this.$player;
 
         if (typeof value === 'number') {
-            return clamp(value, 0, clientHeight);
+            return clamp(value, 10, clientHeight);
         }
 
         if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
-            return clamp(clientHeight * ratio, 0, clientHeight);
+            return clamp(clientHeight * ratio, 10, clientHeight);
         }
 
         return Danmuku.option.margin[1];
