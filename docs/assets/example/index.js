@@ -39,8 +39,8 @@ var art = new Artplayer({
             selector: [
                 {
                     html: 'Display',
-                    switch: true,
                     tooltip: 'Show',
+                    switch: true,
                     onSwitch: function (item) {
                         item.tooltip = item.switch ? 'Hide' : 'Show';
                         art.subtitle.show = !item.switch;
@@ -71,8 +71,10 @@ var art = new Artplayer({
         {
             html: 'Custom Switch',
             icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            tooltip: 'OFF',
             switch: false,
             onSwitch: function (item) {
+                item.tooltip = item.switch ? 'OFF' : 'ON';
                 console.info('You clicked on the custom switch', item.switch);
                 return !item.switch;
             },
