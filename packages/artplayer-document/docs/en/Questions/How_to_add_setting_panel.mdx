@@ -132,12 +132,16 @@ var art = new Artplayer({
     settings: [
         {
             html: 'PIP Mode',
+            tooltip: 'OFF',
             icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
             switch: false,
             onSwitch: function (item, $dom, event) {
                 console.info(item, $dom, event);
                 const nextState = !item.switch;
                 art.pip = nextState;
+
+                // Change the tooltip
+                item.tooltip = nextState ? 'ON' : 'OFF';
 
                 // Change the switch state
                 return nextState;
@@ -163,12 +167,16 @@ var art = new Artplayer({
                 },
                 {
                     html: 'Setting 04',
+                    icon: '',
                     switch: true,
                     onSwitch: function (item, $dom, event) {
                         return !item.switch;
                     },
                 },
             ],
+            onSelect: function (item) {
+                return item.html;
+            },
         },
     ],
 });

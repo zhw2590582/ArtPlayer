@@ -134,12 +134,16 @@ var art = new Artplayer({
     settings: [
         {
             html: '画中画模式',
+            tooltip: '关闭',
             icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
             switch: false,
             onSwitch: function (item, $dom, event) {
                 console.info(item, $dom, event);
                 const nextState = !item.switch;
                 art.pip = nextState;
+
+                // 改变提示文本
+                item.tooltip = nextState ? '开启' : '关闭';
 
                 // 改变按钮状态
                 return nextState;
@@ -165,12 +169,16 @@ var art = new Artplayer({
                 },
                 {
                     html: '设置 04',
+                    icon: '',
                     switch: true,
                     onSwitch: function (item, $dom, event) {
                         return !item.switch;
                     },
                 },
             ],
+            onSelect: function (item) {
+                return item.html;
+            },
         },
     ],
 });
