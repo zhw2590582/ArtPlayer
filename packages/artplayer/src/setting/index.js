@@ -151,6 +151,7 @@ export default class Setting extends Component {
 
         switch (type) {
             case 'switch':
+            case 'range':
                 append($icon, isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 break;
             case 'selector':
@@ -242,6 +243,29 @@ export default class Setting extends Component {
                 });
                 break;
             }
+            case 'range':
+                {
+                    const $state = document.createElement('div');
+                    addClass($state, 'art-setting-item-right-icon');
+                    const $range = append($state, '<input type="range">');
+                    $range.value = item.range[0] || 0;
+                    $range.min = item.range[1] || 0;
+                    $range.max = item.range[2] || 10;
+                    $range.step = item.range[3] || 1;
+                    addClass($range, 'art-setting-range');
+                    append($right, $state);
+                    item.$range = $range;
+
+                    def(item, 'range', {
+                        get() {
+                            return $range.valueAsNumber;
+                        },
+                        set(value) {
+                            $range.value = Number(value);
+                        },
+                    });
+                }
+                break;
             case 'selector':
                 if (item.selector && item.selector.length) {
                     const $state = document.createElement('div');
@@ -254,47 +278,53 @@ export default class Setting extends Component {
                 break;
         }
 
-        const event = proxy($item, 'click', async (event) => {
-            switch (type) {
-                case 'switch':
-                    if (item.onSwitch) {
-                        item.switch = await item.onSwitch.call(this.art, item, $item, event);
-                    }
-                    break;
-                case 'selector':
-                    if (item.selector && item.selector.length) {
-                        this.init(item.selector, item.width);
-                    } else {
-                        inverseClass($item, 'art-current');
-
-                        if (item._parentList) {
-                            this.init(item._parentList);
-                        }
-
-                        if (item._parentItem && item._parentItem.onSelect) {
-                            const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                            if (item._parentItem.$tooltip && isStringOrNumber(result)) {
-                                item._parentItem.$tooltip.innerHTML = result;
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        });
-
-        this.events.push(event);
-
         switch (type) {
-            case 'switch':
-                if (item.mounted) {
-                    item.mounted.call(this.art, item, $item);
+            case 'switch': {
+                if (item.onSwitch) {
+                    const event = proxy($item, 'click', async (event) => {
+                        item.switch = await item.onSwitch.call(this.art, item, $item, event);
+                    });
+
+                    this.events.push(event);
                 }
                 break;
+            }
+            case 'range': {
+                if (item.onRange && item.$range) {
+                    const event = proxy(item.$range, 'change', async (event) => {
+                        item.tooltip = await item.onRange.call(this.art, item, $item, event);
+                    });
+
+                    this.events.push(event);
+                }
+                break;
+            }
             case 'selector':
-                if (item.default) {
-                    addClass($item, 'art-current');
+                {
+                    const event = proxy($item, 'click', async (event) => {
+                        if (item.selector && item.selector.length) {
+                            this.init(item.selector, item.width);
+                        } else {
+                            inverseClass($item, 'art-current');
+
+                            if (item._parentList) {
+                                this.init(item._parentList);
+                            }
+
+                            if (item._parentItem && item._parentItem.onSelect) {
+                                const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
+                                if (item._parentItem.$tooltip && isStringOrNumber(result)) {
+                                    item._parentItem.$tooltip.innerHTML = result;
+                                }
+                            }
+                        }
+                    });
+
+                    this.events.push(event);
+
+                    if (item.default) {
+                        addClass($item, 'art-current');
+                    }
                 }
                 break;
             default:
@@ -327,6 +357,8 @@ export default class Setting extends Component {
                 const item = option[index];
                 if (has(item, 'switch')) {
                     append($panel, this.creatItem('switch', item));
+                } else if (has(item, 'range')) {
+                    append($panel, this.creatItem('range', item));
                 } else {
                     append($panel, this.creatItem('selector', item));
                 }

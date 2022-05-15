@@ -20,10 +20,14 @@ export const ComponentOption = {
     style: `?${o}`,
     click: `?${f}`,
     mounted: `?${f}`,
-    tooltip: `?${s}`,
+    tooltip: `?${s}|${n}`,
     width: `?${n}`,
     selector: `?${a}`,
     onSelect: `?${f}`,
+    switch: `?${b}`,
+    onSwitch: `?${f}`,
+    range: `?${a}`,
+    onRange: `?${f}`,
 };
 
 export default {

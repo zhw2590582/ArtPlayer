@@ -181,3 +181,79 @@ var art = new Artplayer({
     ],
 });
 ```
+
+## Add range slider
+
+| Property  | Type                | Description              |
+| --------- | ------------------- | ------------------------ |
+| `html`    | `String`、`Element` | DOM elements of selector |
+| `icon`    | `String`、`Element` | Icon of selector         |
+| `range`   | `Array`             | Range default state      |
+| `onRange` | `Function`          | Range change event       |
+| `tooltip` | `String`            | Tooltip text             |
+
+```js
+const range = [5, 1, 10, 1];
+const value = range[0];
+const min = range[1];
+const max = range[2];
+const step = range[3];
+```
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    flip: true,
+    playbackRate: true,
+    aspectRatio: true,
+    settings: [
+        {
+            html: 'Range',
+            tooltip: '5x',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            range: [5, 1, 10, 1],
+            onRange: function (item) {
+                // Change the tooltip
+                return item.range + 'x';
+            },
+        },
+        {
+            html: 'Use with selector',
+            width: 240,
+            selector: [
+                {
+                    default: true,
+                    html: 'Setting 01',
+                },
+                {
+                    html: 'Setting 02',
+                },
+                {
+                    html: 'Setting 03',
+                    tooltip: '5x',
+                    range: [5, 1, 10, 1],
+                    onRange: function (item) {
+                        return item.range + 'x';
+                    },
+                },
+                {
+                    html: 'Setting 04',
+                    icon: '',
+                    tooltip: '5x',
+                    range: [5, 1, 10, 1],
+                    onRange: function (item) {
+                        return item.range + 'x';
+                    },
+                },
+            ],
+            onSelect: function (item) {
+                return item.html;
+            },
+        },
+    ],
+});
+```

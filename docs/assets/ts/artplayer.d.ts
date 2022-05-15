@@ -115,6 +115,16 @@ type SettingOption = {
      * When switch item click
      */
     onSwitch?(item: SettingOption, element: HTMLElement, event: Event): void;
+
+    /**
+     * Custom range item
+     */
+    range?: number[];
+
+    /**
+     * When range item change
+     */
+    onRange?(item: SettingOption, element: HTMLElement, event: Event): void;
 };
 
 type Component = {

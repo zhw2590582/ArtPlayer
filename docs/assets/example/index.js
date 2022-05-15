@@ -33,7 +33,7 @@ var art = new Artplayer({
     settings: [
         {
             width: 200,
-            html: 'Switch Subtitle',
+            html: 'Subtitle',
             tooltip: 'Bilingual',
             icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
             selector: [
@@ -69,7 +69,7 @@ var art = new Artplayer({
             },
         },
         {
-            html: 'Custom Switch',
+            html: 'Switcher',
             icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
             tooltip: 'OFF',
             switch: false,
@@ -77,6 +77,15 @@ var art = new Artplayer({
                 item.tooltip = item.switch ? 'OFF' : 'ON';
                 console.info('You clicked on the custom switch', item.switch);
                 return !item.switch;
+            },
+        },
+        {
+            html: 'Slider',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            tooltip: '5x',
+            range: [5, 1, 10, 0.1],
+            onRange: function (item) {
+                return item.range + 'x';
             },
         },
     ],
