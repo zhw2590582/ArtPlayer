@@ -89,6 +89,14 @@ var art = new Artplayer({
 });
 ```
 
+## Changelog
+
+[CHANGELOG_CN.md](./CHANGELOG_CN.md)
+
+## Contributing
+
+[CONTRIBUTING.md](./CONTRIBUTING.md)
+
 ## Donations
 
 We accept donations through these channels:
