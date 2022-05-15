@@ -9,7 +9,10 @@ const f = 'function';
 const r = 'regexp';
 
 function validElement(value, type, paths) {
-    return errorHandle(type === s || value instanceof Element, `${paths.join('.')} require '${s}' or 'Element' type`);
+    return errorHandle(
+        type === s || type === n || value instanceof Element,
+        `${paths.join('.')} require '${s}' or 'Element' type`,
+    );
 }
 
 export const ComponentOption = {
