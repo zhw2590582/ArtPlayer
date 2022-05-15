@@ -292,20 +292,20 @@ export default function setting(art, danmuku) {
                     selector: [
                         {
                             html: '1/4',
-                            margin: ['2%', '75%'],
+                            margin: [10, '75%'],
                         },
                         {
                             html: '半屏',
-                            margin: ['2%', '50%'],
+                            margin: [10, '50%'],
                         },
                         {
                             default: true,
                             html: '3/4',
-                            margin: ['2%', '25%'],
+                            margin: [10, '25%'],
                         },
                         {
                             html: '满屏',
-                            margin: ['2%', '2%'],
+                            margin: [10, 10],
                         },
                     ],
                     onSelect: function (item) {

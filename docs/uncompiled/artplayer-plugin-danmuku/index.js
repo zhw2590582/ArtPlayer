@@ -1040,14 +1040,14 @@ function setting(art, danmuku) {
                         {
                             html: '1/4',
                             margin: [
-                                '2%',
+                                10,
                                 '75%'
                             ]
                         },
                         {
                             html: '半屏',
                             margin: [
-                                '2%',
+                                10,
                                 '50%'
                             ]
                         },
@@ -1055,15 +1055,15 @@ function setting(art, danmuku) {
                             default: true,
                             html: '3/4',
                             margin: [
-                                '2%',
+                                10,
                                 '25%'
                             ]
                         },
                         {
                             html: '满屏',
                             margin: [
-                                '2%',
-                                '2%'
+                                10,
+                                10
                             ]
                         }, 
                     ],
