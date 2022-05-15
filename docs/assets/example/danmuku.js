@@ -16,7 +16,7 @@ var art = new Artplayer({
             fontSize: 25, // 字体大小，支持数字和百分比
             color: '#FFFFFF', // 默认字体颜色
             mode: 0, // 默认模式，0-滚动，1-静止
-            margin: ['2%', 60], // 弹幕上下边距，支持数字和百分比
+            margin: [10, '25%'], // 弹幕上下边距，支持数字和百分比
             antiOverlap: true, // 是否防重叠
             useWorker: true, // 是否使用 web worker
             synchronousPlayback: false, // 是否同步到播放速度

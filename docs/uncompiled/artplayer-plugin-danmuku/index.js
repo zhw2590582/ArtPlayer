@@ -262,10 +262,10 @@ class Danmuku {
         const { clamp  } = this.utils;
         const value = this.option.margin[0];
         const { clientHeight  } = this.$player;
-        if (typeof value === 'number') return clamp(value, 10, clientHeight);
+        if (typeof value === 'number') return clamp(value, 0, clientHeight);
         if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
-            return clamp(clientHeight * ratio, 10, clientHeight);
+            return clamp(clientHeight * ratio, 0, clientHeight);
         }
         return Danmuku.option.margin[0];
     }
@@ -273,10 +273,10 @@ class Danmuku {
         const { clamp  } = this.utils;
         const value = this.option.margin[1];
         const { clientHeight  } = this.$player;
-        if (typeof value === 'number') return clamp(value, 10, clientHeight);
+        if (typeof value === 'number') return clamp(value, 0, clientHeight);
         if (typeof value === 'string' && value.endsWith('%')) {
             const ratio = parseFloat(value) / 100;
-            return clamp(clientHeight * ratio, 10, clientHeight);
+            return clamp(clientHeight * ratio, 0, clientHeight);
         }
         return Danmuku.option.margin[1];
     }
@@ -931,23 +931,34 @@ function setting(art, danmuku) {
                     html: '播放速度',
                     icon: '',
                     tooltip: '适中',
-                    range: [
-                        5,
-                        0,
-                        10,
-                        2.5
+                    selector: [
+                        {
+                            html: '极慢',
+                            time: 10
+                        },
+                        {
+                            html: '较慢',
+                            time: 7.5
+                        },
+                        {
+                            default: true,
+                            html: '适中',
+                            time: 5
+                        },
+                        {
+                            html: '较快',
+                            time: 2.5
+                        },
+                        {
+                            html: '极快',
+                            time: 1
+                        }, 
                     ],
-                    onRange: function(item) {
+                    onSelect: function(item) {
                         danmuku.config({
-                            speed: item.range
+                            speed: item.time
                         });
-                        return ({
-                            0: '极快',
-                            2.5: '较快',
-                            5: '适中',
-                            7.5: '较慢',
-                            10: '极慢'
-                        })[item.range];
+                        return item.html;
                     }
                 },
                 {
@@ -955,23 +966,34 @@ function setting(art, danmuku) {
                     html: '字体大小',
                     icon: '',
                     tooltip: '适中',
-                    range: [
-                        6,
-                        2,
-                        10,
-                        2
+                    selector: [
+                        {
+                            html: '极小',
+                            fontSize: '2%'
+                        },
+                        {
+                            html: '较小',
+                            fontSize: '4%'
+                        },
+                        {
+                            default: true,
+                            html: '适中',
+                            fontSize: '6%'
+                        },
+                        {
+                            html: '较大',
+                            fontSize: '8%'
+                        },
+                        {
+                            html: '极大',
+                            fontSize: '10%'
+                        }, 
                     ],
-                    onRange: function(item) {
+                    onSelect: function(item) {
                         danmuku.config({
-                            fontSize: item.range + '%'
+                            fontSize: item.fontSize
                         });
-                        return ({
-                            2: '极小',
-                            5: '较小',
-                            6: '适中',
-                            8: '较大',
-                            10: '极大'
-                        })[item.range];
+                        return item.html;
                     }
                 },
                 {
@@ -979,17 +1001,34 @@ function setting(art, danmuku) {
                     html: '不透明度',
                     icon: '',
                     tooltip: '100%',
-                    range: [
-                        1,
-                        0,
-                        1,
-                        0.01
+                    selector: [
+                        {
+                            default: true,
+                            opacity: 1,
+                            html: '100%'
+                        },
+                        {
+                            opacity: 0.75,
+                            html: '75%'
+                        },
+                        {
+                            opacity: 0.5,
+                            html: '50%'
+                        },
+                        {
+                            opacity: 0.25,
+                            html: '25%'
+                        },
+                        {
+                            opacity: 0,
+                            html: '0%'
+                        }, 
                     ],
-                    onRange: function(item) {
+                    onSelect: function(item) {
                         danmuku.config({
-                            opacity: item.range
+                            opacity: item.opacity
                         });
-                        return Math.floor(item.range * 100) + '%';
+                        return item.html;
                     }
                 },
                 {
@@ -997,25 +1036,42 @@ function setting(art, danmuku) {
                     html: '显示范围',
                     icon: '',
                     tooltip: '3/4',
-                    range: [
-                        50,
-                        0,
-                        75,
-                        25
-                    ],
-                    onRange: function(item) {
-                        danmuku.config({
+                    selector: [
+                        {
+                            html: '1/4',
                             margin: [
-                                '0%',
-                                item.range + '%'
+                                '2%',
+                                '75%'
                             ]
+                        },
+                        {
+                            html: '半屏',
+                            margin: [
+                                '2%',
+                                '50%'
+                            ]
+                        },
+                        {
+                            default: true,
+                            html: '3/4',
+                            margin: [
+                                '2%',
+                                '25%'
+                            ]
+                        },
+                        {
+                            html: '满屏',
+                            margin: [
+                                '2%',
+                                '2%'
+                            ]
+                        }, 
+                    ],
+                    onSelect: function(item) {
+                        danmuku.config({
+                            margin: item.margin
                         });
-                        return ({
-                            0: '满屏',
-                            25: '3/4',
-                            50: '半屏',
-                            75: '1/4'
-                        })[item.range];
+                        return item.html;
                     }
                 },
                 {
