@@ -244,7 +244,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652677719314";
+        return "1652678265078";
     }
     static get config() {
         return _configDefault.default;
@@ -4015,7 +4015,7 @@ function gestureInit(art, events) {
         let startY = 0;
         let startTime = 0;
         const onTouchStart = (event)=>{
-            if (event.touches.length === 1) {
+            if (event.touches.length === 1 && !art.isLock) {
                 isDroging = true;
                 const { clientX , clientY  } = event.touches[0];
                 startX = clientX;

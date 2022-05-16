@@ -14,7 +14,7 @@ export default function gestureInit(art, events) {
         let startTime = 0;
 
         const onTouchStart = (event) => {
-            if (event.touches.length === 1) {
+            if (event.touches.length === 1 && !art.isLock) {
                 isDroging = true;
                 const { clientX, clientY } = event.touches[0];
                 startX = clientX;
