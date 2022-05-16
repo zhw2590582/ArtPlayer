@@ -18,8 +18,6 @@ export default function setting(art, danmuku) {
         append(icon, svg);
         addClass(icon, 'art-icon');
         addClass(icon, `art-icon-${key}`);
-        setStyle(icon, 'width', '22px');
-        setStyle(icon, 'height', '22px');
         return icon;
     }
 
@@ -58,7 +56,7 @@ export default function setting(art, danmuku) {
         const $emitter = append(
             $control,
             `
-            <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : null}">
+            <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : '100%'}">
                 <div class="art-danmuku-style">
                     <div class="art-danmuku-style-panel">
                         <div class="art-danmuku-style-panel-inner">
