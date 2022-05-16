@@ -57,6 +57,9 @@ export default class Danmuku {
             useWorker: true,
             synchronousPlayback: false,
             lockTime: 5,
+            maxLength: 100,
+            minWidth: 0,
+            maxWidth: 0,
         };
     }
 
@@ -74,6 +77,9 @@ export default class Danmuku {
             useWorker: 'boolean',
             synchronousPlayback: 'boolean',
             lockTime: 'number',
+            maxLength: 'number',
+            minWidth: 'number',
+            maxWidth: 'number',
         };
     }
 
@@ -259,6 +265,9 @@ export default class Danmuku {
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.lockTime = clamp(this.option.lockTime, 0, 60);
+        this.option.maxLength = clamp(this.option.maxLength, 0, 500);
+        this.option.minWidth = clamp(this.option.minWidth, 0, 500);
+        this.option.maxWidth = clamp(this.option.maxWidth, 0, Infinity);
 
         if (option.fontSize) {
             this.option.fontSize = this.getFontSize(this.option.fontSize);

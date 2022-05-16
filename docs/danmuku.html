@@ -30,6 +30,9 @@
         }
 
         .danmuku-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 5px;
             background-color: #000;
         }
@@ -154,6 +157,9 @@
                     synchronousPlayback: false,
                     filter: (danmu) => danmu.text.length < 50,
                     lockTime: 5,
+                    maxLength: 100,
+                    minWidth: 150,
+                    maxWidth: 0,
                     mount: document.querySelector('.danmuku-input'),
                 }),
             ],

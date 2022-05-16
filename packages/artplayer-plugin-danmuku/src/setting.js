@@ -5,6 +5,7 @@ import danmuConfig from 'bundle-text:./img/danmu-config.svg';
 import danmuStyle from 'bundle-text:./img/danmu-style.svg';
 
 export default function setting(art, danmuku) {
+    const { option } = danmuku;
     const {
         template: { $controlsCenter },
         constructor: {
@@ -29,8 +30,8 @@ export default function setting(art, danmuku) {
 
     let $control = $controlsCenter;
 
-    if (danmuku.option.mount instanceof Element) {
-        $control = danmuku.option.mount;
+    if (option.mount instanceof Element) {
+        $control = option.mount;
     }
 
     function addEmitter() {
@@ -50,14 +51,14 @@ export default function setting(art, danmuku) {
             '#9B9B9B',
             '#FFFFFF',
         ].map((item) => {
-            const isCurrent = danmuku.option.color === item ? ' art-current' : '';
+            const isCurrent = option.color === item ? ' art-current' : '';
             return `<div class="art-danmuku-style-panel-color${isCurrent}" data-color="${item}" style="background-color:${item}"></div>`;
         });
 
         const $emitter = append(
             $control,
             `
-            <div class="art-danmuku-emitter">
+            <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : null}">
                 <div class="art-danmuku-style">
                     <div class="art-danmuku-style-panel">
                         <div class="art-danmuku-style-panel-inner">
@@ -73,7 +74,7 @@ export default function setting(art, danmuku) {
                         </div>
                     </div>
                 </div>
-                <input class="art-danmuku-input" maxlength="100" placeholder="发个弹幕见证当下" />
+                <input class="art-danmuku-input" maxlength="${option.maxLength}" placeholder="发个弹幕见证当下" />
                 <div class="art-danmuku-send">发送</div>
             </div>
             `,
@@ -99,8 +100,8 @@ export default function setting(art, danmuku) {
         }
 
         let timer = null;
-        let mode = danmuku.option.mode;
-        let color = danmuku.option.color;
+        let mode = option.mode;
+        let color = option.color;
         append($style, $danmuStyle);
 
         function countdown(time) {
@@ -128,12 +129,14 @@ export default function setting(art, danmuku) {
             $input.value = '';
             danmuku.emit(danmu);
             addClass($send, 'art-disabled');
-            countdown(danmuku.option.lockTime);
+            countdown(option.lockTime);
             art.emit('artplayerPluginDanmuku:emit', danmu);
         }
 
         function resize() {
-            setStyle($emitter, 'display', $control.clientWidth < 150 ? 'none' : null);
+            if (option.minWidth) {
+                setStyle($emitter, 'display', $control.clientWidth < option.minWidth ? 'none' : null);
+            }
         }
 
         art.proxy($send, 'click', onSend);
@@ -343,8 +346,8 @@ export default function setting(art, danmuku) {
                 {
                     html: '弹幕防重叠',
                     icon: '',
-                    tooltip: danmuku.option.antiOverlap ? '开启' : '关闭',
-                    switch: danmuku.option.antiOverlap,
+                    tooltip: option.antiOverlap ? '开启' : '关闭',
+                    switch: option.antiOverlap,
                     onSwitch(item) {
                         danmuku.config({
                             antiOverlap: !item.switch,
@@ -356,8 +359,8 @@ export default function setting(art, danmuku) {
                 {
                     html: '同步视频速度',
                     icon: '',
-                    tooltip: danmuku.option.synchronousPlayback ? '开启' : '关闭',
-                    switch: danmuku.option.synchronousPlayback,
+                    tooltip: option.synchronousPlayback ? '开启' : '关闭',
+                    switch: option.synchronousPlayback,
                     onSwitch(item) {
                         danmuku.config({
                             synchronousPlayback: !item.switch,
