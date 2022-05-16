@@ -11,12 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 修复弹幕输入框的固定宽度 bug
 - 设置面板支持 range 和 onRange 选项
 - 添加 isAndroid 和 isiOS 工具函数
-- 弹幕库添加 mount 选项，可自定义弹幕输入框的挂载位置
 - 弹幕库添加 lockTime 选项，可自定义输入框的锁定时间
 - 弹幕库添加 maxLength 选项，控制输入最大可输入字数
 - 弹幕库添加 minWidth 选项，控制输入框最小宽度
 - 弹幕库添加 maxWidth 选项，控制输入框最大宽度
-- 弹幕库添加 moveOnFullscreen 选项，控制全屏时是否移动输入框
 
 ## [4.4.0] - 2022-05-15
 

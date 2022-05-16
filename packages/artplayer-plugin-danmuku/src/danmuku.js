@@ -58,8 +58,8 @@ export default class Danmuku {
             synchronousPlayback: false,
             lockTime: 5,
             maxLength: 100,
-            minWidth: 0,
-            maxWidth: 0,
+            minWidth: 200,
+            maxWidth: 600,
         };
     }
 

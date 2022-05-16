@@ -7,9 +7,9 @@ import danmuStyle from 'bundle-text:./img/danmu-style.svg';
 export default function setting(art, danmuku) {
     const { option } = danmuku;
     const {
-        template: { $controlsCenter },
+        template: { $controlsCenter, $player },
         constructor: {
-            utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass, isMobile },
+            utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass },
         },
     } = art;
 
@@ -72,29 +72,13 @@ export default function setting(art, danmuku) {
             `,
         );
 
-        const $control = art.layers.add({
-            name: 'danmuku-emitter',
-            style: {
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                bottom: '-38px',
-                height: '38px',
-                width: '100%',
-                padding: '2px',
-            },
-        });
-
-        if (isMobile) {
-            addClass($emitter, 'art-danmuku-mobile');
-        }
-
         const $style = query('.art-danmuku-style', $emitter);
         const $input = query('.art-danmuku-input', $emitter);
         const $send = query('.art-danmuku-send', $emitter);
         const $panel = query('.art-danmuku-style-panel-inner', $emitter);
         const $modes = query('.art-danmuku-style-panel-modes', $emitter);
         const $colors = query('.art-danmuku-style-panel-colors', $emitter);
+        const $layer = append($player, '<div class="art-layer-danmuku-emitter"></div>');
 
         if (art.option.backdrop) {
             addClass($panel, 'art-backdrop-filter');
@@ -136,11 +120,11 @@ export default function setting(art, danmuku) {
 
         function onResize() {
             if ($controlsCenter.clientWidth < option.minWidth) {
-                append($control, $emitter);
-                setStyle($control, 'display', 'flex');
+                append($layer, $emitter);
+                setStyle($layer, 'display', 'flex');
             } else {
                 append($controlsCenter, $emitter);
-                setStyle($control, 'display', 'none');
+                setStyle($layer, 'display', 'none');
             }
         }
 
@@ -372,7 +356,7 @@ export default function setting(art, danmuku) {
         });
     }
 
-    art.on(isMobile ? 'video:loadedmetadata' : 'ready', () => {
+    art.once('video:loadedmetadata', () => {
         addEmitter();
         addControl();
         addSetting();

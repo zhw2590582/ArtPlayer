@@ -23,13 +23,8 @@ var art = new Artplayer({
             filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数
             lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
             maxLength: 100, // 输入框最大可输入的字数，范围在[0 ~ 500]
-            minWidth: 150, // 输入框最少宽度，范围在[0 ~ 500]，超出则隐藏，填 0 则永不隐藏
-            maxWidth: 400, // 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则 100% 宽度
-            moveOnFullscreen: true, // 自定义挂载输入框时，当全屏状态下是否自动把输入框移动到控制栏里
-
-            // mount 选项用于自定义弹幕输入框的挂载位置，默认挂载在播放器控制栏中间
-            // 但在移动端下控制栏宽度不足，所以最好自己决定弹幕输入框放在那里
-            // mount: document.querySelector('.your-danmu-input'),
+            minWidth: 200, // 输入框最少宽度，范围在[0 ~ 500]，填 0 则为无限制
+            maxWidth: 600, // 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则为 100% 宽度
         }),
     ],
 });

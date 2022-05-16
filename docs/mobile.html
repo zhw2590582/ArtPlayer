@@ -20,21 +20,13 @@
 
         .container {
             height: 100%;
-            padding: 50px 10px;
+            padding: 10px;
             box-sizing: border-box;
         }
 
         .artplayer-app {
             width: 100%;
             height: 50%;
-        }
-
-        .artplayer-danmuku {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5px;
-            background-color: #000;
         }
 
         .tip {
@@ -46,7 +38,6 @@
 <body>
     <div class="container">
         <div class="artplayer-app"></div>
-        <div class="artplayer-danmuku"></div>
         <p class="tip"></p>
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
@@ -166,12 +157,6 @@
                 }),
             ],
         });
-
-        // 移动端默认不会预加载数据，所以不会默认触发 ready 事件
-        // 但这里可监听 loadedmetadata 事件，自动适应高度
-        art.on('video:loadedmetadata', () => {
-            art.autoHeight = true;
-        })
 
         Artplayer.config.events.forEach(function (item) {
             art.on('video:' + item, function (event) {

@@ -10,35 +10,6 @@
         max-width: 100%;
         color: #ffffff;
         background-color: rgb(255 255 255 / 30%);
-        font-family: Roboto, Arial, Helvetica, sans-serif;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        touch-action: manipulation;
-        -ms-high-contrast-adjust: none;
-    
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    
-        .art-icon {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            line-height: 1.5;
-            
-            svg {
-                fill: #fff;
-            }
-        }
-    
-        @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
-            .art-backdrop-filter {
-                -webkit-backdrop-filter: saturate(180%) blur(20px);
-                backdrop-filter: saturate(180%) blur(20px);
-                background-color: rgba(0, 0, 0, 0.7) !important;
-            }
-        }
     
         .art-danmuku-style {
             position: relative;
@@ -173,7 +144,20 @@
         }
     }
 
-    &.art-mobile {
+    .art-layer-danmuku-emitter {
+        position: absolute;
+        z-index: 999;
+        left: 0;
+        right: 0;
+        bottom: -42px;
+        height: 42px;
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+
         .art-danmuku-style .art-danmuku-style-panel {
             left: 0;
         }
