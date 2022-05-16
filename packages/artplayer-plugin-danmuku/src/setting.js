@@ -25,7 +25,6 @@ export default function setting(art, danmuku) {
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
     const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
-    const $control = option.mount || $controlsCenter;
 
     function addEmitter() {
         const colors = [
@@ -49,7 +48,7 @@ export default function setting(art, danmuku) {
         });
 
         const $emitter = append(
-            $control,
+            $controlsCenter,
             `
             <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : '100%'}">
                 <div class="art-danmuku-style">
@@ -73,12 +72,21 @@ export default function setting(art, danmuku) {
             `,
         );
 
+        const $control = art.layers.add({
+            name: 'danmuku-emitter',
+            style: {
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: '-38px',
+                height: '38px',
+                width: '100%',
+                padding: '2px',
+            },
+        });
+
         if (isMobile) {
             addClass($emitter, 'art-danmuku-mobile');
-        }
-
-        if ($control !== $controlsCenter) {
-            addClass($emitter, 'art-danmuku-mount');
         }
 
         const $style = query('.art-danmuku-style', $emitter);
@@ -127,24 +135,12 @@ export default function setting(art, danmuku) {
         }
 
         function onResize() {
-            if (option.minWidth) {
-                setStyle($emitter, 'display', $control.clientWidth < option.minWidth ? 'none' : null);
-            }
-        }
-
-        function onFullscreen(state) {
-            if (option.moveOnFullscreen && $control !== $controlsCenter) {
-                if (state) {
-                    append($controlsCenter, $emitter);
-                } else {
-                    append($control, $emitter);
-                }
-            }
-        }
-
-        function onDestroy() {
-            if ($control !== $controlsCenter) {
-                $control.removeChild($emitter);
+            if ($controlsCenter.clientWidth < option.minWidth) {
+                append($control, $emitter);
+                setStyle($control, 'display', 'flex');
+            } else {
+                append($controlsCenter, $emitter);
+                setStyle($control, 'display', 'none');
             }
         }
 
@@ -175,9 +171,6 @@ export default function setting(art, danmuku) {
 
         onResize();
         art.on('resize', onResize);
-        art.on('fullscreen', onFullscreen);
-        art.on('fullscreenWeb', onFullscreen);
-        art.on('destroy', onDestroy);
     }
 
     function addControl() {
