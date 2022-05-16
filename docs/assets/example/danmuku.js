@@ -24,7 +24,7 @@ var art = new Artplayer({
             lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
             maxLength: 100, // 输入框最大可输入的字数，范围在[0 ~ 500]
             minWidth: 200, // 输入框最少宽度，范围在[0 ~ 500]，填 0 则为无限制
-            maxWidth: 600, // 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则为 100% 宽度
+            maxWidth: 400, // 输入框最大宽度，范围在[minWidth ~ Infinity]，填 0 则为 100% 宽度
         }),
     ],
 });
