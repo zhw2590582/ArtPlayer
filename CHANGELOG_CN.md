@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 弹幕库监听 resize 事件，当输入框少于 150px 时，自动隐藏弹幕输入框
 - 修复弹幕输入框的固定宽度 bug
 - 设置面板支持 range 和 onRange 选项
+- 添加 isAndroid 和 isiOS 工具函数
 
 ## [4.4.0] - 2022-05-15
 
