@@ -26,7 +26,9 @@ export default function clickInit(art, events) {
             art.emit('dblclick');
 
             if (isMobile) {
-                art.toggle();
+                if (!art.isLock) {
+                    art.toggle();
+                }
             } else {
                 art.fullscreen = !art.fullscreen;
             }

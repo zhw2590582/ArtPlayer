@@ -11,7 +11,7 @@ export default function fastForward(art) {
     let isPress = false;
 
     const onStart = (event) => {
-        if (event.touches.length === 1 && art.playing) {
+        if (event.touches.length === 1 && art.playing && !art.isLock) {
             timer = setTimeout(() => {
                 isPress = true;
                 art.playbackRate = constructor.FAST_FORWARD_VALUE;

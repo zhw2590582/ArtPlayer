@@ -26,6 +26,7 @@ export default function setting(art, danmuku) {
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
     const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
+    const $control = danmuku.option.mount || $controlsCenter;
 
     function addEmitter() {
         const colors = [
@@ -49,7 +50,7 @@ export default function setting(art, danmuku) {
         });
 
         const $emitter = append(
-            $controlsCenter,
+            $control,
             `
             <div class="art-danmuku-emitter">
                 <div class="art-danmuku-style">
@@ -142,7 +143,7 @@ export default function setting(art, danmuku) {
         });
 
         art.on('resize', () => {
-            setStyle($emitter, 'display', $controlsCenter.clientWidth < 150 ? 'none' : null);
+            setStyle($emitter, 'display', $control.clientWidth < 150 ? 'none' : null);
         });
     }
 

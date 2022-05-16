@@ -27,9 +27,11 @@ export default function lock(art) {
         click() {
             if (hasClass($player, 'art-lock')) {
                 removeClass($player, 'art-lock');
+                this.isLock = false;
                 art.emit('lock', false);
             } else {
                 addClass($player, 'art-lock');
+                this.isLock = true;
                 art.emit('lock', true);
             }
         },

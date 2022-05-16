@@ -9,6 +9,34 @@
     border-radius: 3px;
     color: #ffffff;
     background-color: rgb(255 255 255 / 30%);
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: manipulation;
+    -ms-high-contrast-adjust: none;
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .art-icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.5;
+        svg {
+            fill: #fff;
+        }
+    }
+
+    @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
+        .art-backdrop-filter {
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            background-color: rgba(0, 0, 0, 0.7) !important;
+        }
+    }
 
     .art-danmuku-style {
         position: relative;
