@@ -29,6 +29,14 @@
             height: 50%;
         }
 
+        .artplayer-danmuku {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            background-color: #000;
+        }
+
         .tip {
             text-align: center;
         }
@@ -38,11 +46,13 @@
 <body>
     <div class="container">
         <div class="artplayer-app"></div>
+        <div class="artplayer-danmuku"></div>
         <p class="tip"></p>
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
     <script>var vConsole = new VConsole();</script>
     <script src="./uncompiled/artplayer/index.js"></script>
+    <script src="./uncompiled/artplayer-plugin-danmuku/index.js"></script>
     <script>
         var art = new Artplayer({
             container: '.artplayer-app',
@@ -133,6 +143,27 @@
                         return item.html;
                     },
                 },
+            ],
+            plugins: [
+                artplayerPluginDanmuku({
+                    danmuku: '/assets/sample/danmuku.xml',
+                    speed: 5,
+                    opacity: 1,
+                    fontSize: 14,
+                    color: '#FFFFFF',
+                    mode: 0,
+                    margin: [10, '25%'],
+                    antiOverlap: true,
+                    useWorker: true,
+                    synchronousPlayback: false,
+                    filter: (danmu) => danmu.text.length < 50,
+                    lockTime: 5,
+                    maxLength: 100,
+                    minWidth: 150,
+                    maxWidth: 0,
+                    moveOnFullscreen: true,
+                    mount: document.querySelector('.artplayer-danmuku'),
+                }),
             ],
         });
 

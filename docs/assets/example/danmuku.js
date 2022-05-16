@@ -29,7 +29,6 @@ var art = new Artplayer({
 
             // mount 选项用于自定义弹幕输入框的挂载位置，默认挂载在播放器控制栏中间
             // 但在移动端下控制栏宽度不足，所以最好自己决定弹幕输入框放在那里
-            // 移动端弹幕DEMO：http://artplayer.org/danmuku.html
             // mount: document.querySelector('.your-danmu-input'),
         }),
     ],
