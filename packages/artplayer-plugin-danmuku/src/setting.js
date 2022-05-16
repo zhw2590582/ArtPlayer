@@ -371,7 +371,7 @@ export default function setting(art, danmuku) {
         });
     }
 
-    art.on('ready', () => {
+    art.on(isMobile ? 'video:loadedmetadata' : 'ready', () => {
         addEmitter();
         addControl();
         addSetting();
