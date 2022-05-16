@@ -4,4 +4,4 @@ export const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
 export const isWechat = /MicroMessenger/i.test(userAgent);
 export const isIE = /MSIE|Trident/i.test(userAgent);
 export const isAndroid = /android/i.test(userAgent);
-export const isiOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+export const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;

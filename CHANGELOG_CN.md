@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 添加 art.isLock 属性，在移动端当为 true 的时候不能操作快进、开始和暂停
 - 修复弹幕输入框的固定宽度 bug
 - 设置面板支持 range 和 onRange 选项
-- 添加 isAndroid 和 isiOS 工具函数
+- 添加 isAndroid 和 isIOS 工具函数
 - 弹幕库添加 lockTime 选项，可自定义输入框的锁定时间
 - 弹幕库添加 maxLength 选项，控制输入最大可输入字数
 - 弹幕库添加 minWidth 选项，控制输入框最小宽度
