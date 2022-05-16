@@ -136,6 +136,12 @@
             ],
         });
 
+        // 移动端默认不会预加载数据，所以不会默认触发 ready 事件
+        // 但这里可监听 loadedmetadata 事件，自动适应高度
+        art.on('video:loadedmetadata', () => {
+            art.autoHeight = true;
+        })
+
         Artplayer.config.events.forEach(function (item) {
             art.on('video:' + item, function (event) {
                 console.log('video: ' + event.type);
