@@ -1,6 +1,6 @@
 {
   "license": "MIT",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "name": "artplayer-plugin-danmuku",
   "description": "Danmuku plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-danmuku.js",
