@@ -25,12 +25,7 @@ export default function setting(art, danmuku) {
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
     const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
-
-    let $control = $controlsCenter;
-
-    if (option.mount instanceof Element) {
-        $control = option.mount;
-    }
+    const $control = option.mount || $controlsCenter;
 
     function addEmitter() {
         const colors = [
@@ -131,9 +126,25 @@ export default function setting(art, danmuku) {
             art.emit('artplayerPluginDanmuku:emit', danmu);
         }
 
-        function resize() {
+        function onResize() {
             if (option.minWidth) {
                 setStyle($emitter, 'display', $control.clientWidth < option.minWidth ? 'none' : null);
+            }
+        }
+
+        function onFullscreen(state) {
+            if (option.moveOnFullscreen && $control !== $controlsCenter) {
+                if (state) {
+                    append($controlsCenter, $emitter);
+                } else {
+                    append($control, $emitter);
+                }
+            }
+        }
+
+        function onDestroy() {
+            if ($control !== $controlsCenter) {
+                $control.removeChild($emitter);
             }
         }
 
@@ -162,14 +173,11 @@ export default function setting(art, danmuku) {
             }
         });
 
-        resize();
-        art.on('resize', resize);
-
-        art.on('destroy', () => {
-            if ($control !== $controlsCenter) {
-                $control.removeChild($emitter);
-            }
-        });
+        onResize();
+        art.on('resize', onResize);
+        art.on('fullscreen', onFullscreen);
+        art.on('fullscreenWeb', onFullscreen);
+        art.on('destroy', onDestroy);
     }
 
     function addControl() {

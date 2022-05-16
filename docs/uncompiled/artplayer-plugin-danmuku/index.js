@@ -241,7 +241,9 @@ class Danmuku {
             lockTime: 5,
             maxLength: 100,
             minWidth: 0,
-            maxWidth: 0
+            maxWidth: 0,
+            moveOnFullscreen: true,
+            mount: undefined
         };
     }
     static get scheme() {
@@ -260,7 +262,9 @@ class Danmuku {
             lockTime: 'number',
             maxLength: 'number',
             minWidth: 'number',
-            maxWidth: 'number'
+            maxWidth: 'number',
+            moveOnFullscreen: 'boolean',
+            mount: '?htmldivelement'
         };
     }
     get isRotate() {
@@ -804,8 +808,7 @@ function setting(art, danmuku) {
     const $danmuOff = getIcon(_danmuOffSvgDefault.default, 'danmu-off');
     const $danmuConfig = getIcon(_danmuConfigSvgDefault.default, 'danmu-config');
     const $danmuStyle = getIcon(_danmuStyleSvgDefault.default, 'danmu-config');
-    let $control = $controlsCenter;
-    if (option.mount instanceof Element) $control = option.mount;
+    const $control = option.mount || $controlsCenter;
     function addEmitter() {
         const colors = [
             '#FE0302',
@@ -886,8 +889,17 @@ function setting(art, danmuku) {
             countdown(option.lockTime);
             art.emit('artplayerPluginDanmuku:emit', danmu);
         }
-        function resize() {
+        function onResize() {
             if (option.minWidth) setStyle($emitter, 'display', $control.clientWidth < option.minWidth ? 'none' : null);
+        }
+        function onFullscreen(state) {
+            if (option.moveOnFullscreen && $control !== $controlsCenter) {
+                if (state) append($controlsCenter, $emitter);
+                else append($control, $emitter);
+            }
+        }
+        function onDestroy() {
+            if ($control !== $controlsCenter) $control.removeChild($emitter);
         }
         art.proxy($send, 'click', onSend);
         art.proxy($input, 'keypress', (event)=>{
@@ -910,11 +922,11 @@ function setting(art, danmuku) {
                 inverseClass(event.target, 'art-current');
             }
         });
-        resize();
-        art.on('resize', resize);
-        art.on('destroy', ()=>{
-            if ($control !== $controlsCenter) $control.removeChild($emitter);
-        });
+        onResize();
+        art.on('resize', onResize);
+        art.on('fullscreen', onFullscreen);
+        art.on('fullscreenWeb', onFullscreen);
+        art.on('destroy', onDestroy);
     }
     function addControl() {
         art.controls.add({

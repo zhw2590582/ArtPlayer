@@ -60,6 +60,8 @@ export default class Danmuku {
             maxLength: 100,
             minWidth: 0,
             maxWidth: 0,
+            moveOnFullscreen: true,
+            mount: undefined,
         };
     }
 
@@ -80,6 +82,8 @@ export default class Danmuku {
             maxLength: 'number',
             minWidth: 'number',
             maxWidth: 'number',
+            moveOnFullscreen: 'boolean',
+            mount: '?htmldivelement',
         };
     }
 
