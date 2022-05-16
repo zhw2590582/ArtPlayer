@@ -26,7 +26,7 @@ export default function setting(art, danmuku) {
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
     const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
-    const $control = danmuku.option.mount || $controlsCenter;
+    const $control = danmuku.option.mount instanceof Element ? danmuku.option.mount : $controlsCenter;
 
     function addEmitter() {
         const colors = [
@@ -113,7 +113,7 @@ export default function setting(art, danmuku) {
             $input.value = '';
             danmuku.emit(danmu);
             addClass($send, 'art-disabled');
-            countdown(danmuku.option.timeout || 5);
+            countdown(danmuku.option.lockTime);
             art.emit('artplayerPluginDanmuku:emit', danmu);
         }
 
@@ -144,6 +144,12 @@ export default function setting(art, danmuku) {
 
         art.on('resize', () => {
             setStyle($emitter, 'display', $control.clientWidth < 150 ? 'none' : null);
+        });
+
+        art.on('destroy', () => {
+            if ($control !== $controlsCenter) {
+                $control.removeChild($emitter);
+            }
         });
     }
 

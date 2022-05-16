@@ -21,6 +21,9 @@ var art = new Artplayer({
             useWorker: true, // 是否使用 web worker
             synchronousPlayback: false, // 是否同步到播放速度
             filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数
+            lockTime: 5, // 弹幕输入框的锁定时间，单位秒，范围在[0 ~ 60]
+            // 自定义弹幕输入框的挂载位置，默认挂载在播放器控制栏中间
+            // mount: document.querySelector('.your-danmu-input'),
         }),
     ],
 });

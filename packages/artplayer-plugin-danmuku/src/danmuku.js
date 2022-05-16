@@ -56,6 +56,7 @@ export default class Danmuku {
             antiOverlap: true,
             useWorker: true,
             synchronousPlayback: false,
+            lockTime: 5,
         };
     }
 
@@ -72,6 +73,7 @@ export default class Danmuku {
             antiOverlap: 'boolean',
             useWorker: 'boolean',
             synchronousPlayback: 'boolean',
+            lockTime: 'number',
         };
     }
 
@@ -256,6 +258,7 @@ export default class Danmuku {
 
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
+        this.option.lockTime = clamp(this.option.lockTime, 0, 60);
 
         if (option.fontSize) {
             this.option.fontSize = this.getFontSize(this.option.fontSize);
