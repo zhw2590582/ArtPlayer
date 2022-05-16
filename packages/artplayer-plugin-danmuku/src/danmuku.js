@@ -267,7 +267,7 @@ export default class Danmuku {
         this.option.lockTime = clamp(this.option.lockTime, 0, 60);
         this.option.maxLength = clamp(this.option.maxLength, 0, 500);
         this.option.minWidth = clamp(this.option.minWidth, 0, 500);
-        this.option.maxWidth = clamp(this.option.maxWidth, this.option.minWidth, Infinity);
+        this.option.maxWidth = clamp(this.option.maxWidth, 0, Infinity);
 
         if (option.fontSize) {
             this.option.fontSize = this.getFontSize(this.option.fontSize);
