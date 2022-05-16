@@ -1,179 +1,182 @@
-.art-danmuku-emitter {
-    position: relative;
-    display: flex;
-    height: 32px;
-    width: 100%;
-    font-size: 12px;
-    line-height: 1;
-    border-radius: 3px;
-    max-width: 100%;
-    color: #ffffff;
-    background-color: rgb(255 255 255 / 30%);
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    touch-action: manipulation;
-    -ms-high-contrast-adjust: none;
-
-    *, *::before, *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    .art-icon {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        line-height: 1.5;
-        
-        svg {
-            fill: #fff;
-        }
-    }
-
-    @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
-        .art-backdrop-filter {
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            backdrop-filter: saturate(180%) blur(20px);
-            background-color: rgba(0, 0, 0, 0.7) !important;
-        }
-    }
-
-    .art-danmuku-style {
+.art-video-player {
+    .art-danmuku-emitter {
         position: relative;
         display: flex;
-        width: 32px;
-        align-items: center;
-        justify-content: center;
-
-        .art-danmuku-style-panel {
-            display: none;
-            position: absolute;
-            z-index: 999;
-            left: -85px;
-            bottom: 30px;
-            width: 200px;
-            padding-bottom: 10px;
-
-            .art-danmuku-style-panel-inner {
-                display: flex;
-                flex-direction: column;
-                padding: 10px 10px 0;
-                border-radius: 3px;
-                background-color: rgba(0, 0, 0, 0.9);
-
-                .art-danmuku-style-panel-title {
-                    font-size: 13px;
-                    margin-bottom: 10px;
-                }
+        height: 32px;
+        width: 100%;
+        font-size: 12px;
+        line-height: 1;
+        border-radius: 3px;
+        max-width: 100%;
+        color: #ffffff;
+        background-color: rgb(255 255 255 / 30%);
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        touch-action: manipulation;
+        -ms-high-contrast-adjust: none;
     
-                .art-danmuku-style-panel-modes {
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        .art-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.5;
+            
+            svg {
+                fill: #fff;
+            }
+        }
+    
+        @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
+            .art-backdrop-filter {
+                -webkit-backdrop-filter: saturate(180%) blur(20px);
+                backdrop-filter: saturate(180%) blur(20px);
+                background-color: rgba(0, 0, 0, 0.7) !important;
+            }
+        }
+    
+        .art-danmuku-style {
+            position: relative;
+            display: flex;
+            width: 32px;
+            align-items: center;
+            justify-content: center;
+    
+            .art-danmuku-style-panel {
+                display: none;
+                position: absolute;
+                z-index: 999;
+                left: -85px;
+                bottom: 30px;
+                width: 200px;
+                padding-bottom: 10px;
+    
+                .art-danmuku-style-panel-inner {
                     display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 15px;
+                    flex-direction: column;
+                    padding: 10px 10px 0;
+                    border-radius: 3px;
+                    background-color: rgba(0, 0, 0, 0.9);
     
-                    .art-danmuku-style-panel-mode {
-                        display: flex;
-                        justify-content: center;
-                        width: 47%;
-                        padding: 5px 0;
-                        cursor: pointer;
-                        color: #fff;
-                        border: 1px solid #fff;
-    
-                        &.art-current {
-                            background-color: #00a1d6;
-                            border: 1px solid #00a1d6;
-                        }
+                    .art-danmuku-style-panel-title {
+                        font-size: 13px;
+                        margin-bottom: 10px;
                     }
-                }
-    
-                .art-danmuku-style-panel-colors {
-                    display: flex;
-                    gap: 5px;
-                    flex-wrap: wrap;
-                    margin-bottom: 10px;
-                    justify-content: space-between;
-    
-                    .art-danmuku-style-panel-color {
-                        cursor: pointer;
-                        width: 20px;
-                        height: 20px;
-                        border: 1px solid #fff;
-    
-                        &.art-current{
-                            position: relative;
-                            box-shadow: 0 0 2px #fff;
-                            &::before {
-                                content: '';
-                                position: absolute;
-                                width: 100%;
-                                height: 100%;
-                                left: 0;
-                                top: 0;
-                                right: 0;
-                                bottom: 0;
-                                border: 2px solid #000;
+        
+                    .art-danmuku-style-panel-modes {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 15px;
+        
+                        .art-danmuku-style-panel-mode {
+                            display: flex;
+                            justify-content: center;
+                            width: 47%;
+                            padding: 5px 0;
+                            cursor: pointer;
+                            color: #fff;
+                            border: 1px solid #fff;
+        
+                            &.art-current {
+                                background-color: #00a1d6;
+                                border: 1px solid #00a1d6;
                             }
                         }
                     }
+        
+                    .art-danmuku-style-panel-colors {
+                        display: flex;
+                        gap: 5px;
+                        flex-wrap: wrap;
+                        margin-bottom: 10px;
+                        justify-content: space-between;
+        
+                        .art-danmuku-style-panel-color {
+                            cursor: pointer;
+                            width: 20px;
+                            height: 20px;
+                            border: 1px solid #fff;
+        
+                            &.art-current{
+                                position: relative;
+                                box-shadow: 0 0 2px #fff;
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    width: 100%;
+                                    height: 100%;
+                                    left: 0;
+                                    top: 0;
+                                    right: 0;
+                                    bottom: 0;
+                                    border: 2px solid #000;
+                                }
+                            }
+                        }
+        
+                    }
+                }
+            }
     
+            &:hover .art-danmuku-style-panel{
+                display: flex;
+            }
+    
+            .art-icon {
+                opacity: 0.75;
+                cursor: pointer;
+    
+                &:hover {
+                    opacity: 1;
                 }
             }
         }
-
-        &:hover .art-danmuku-style-panel{
+    
+        .art-danmuku-input {
+            flex: 1;
             display: flex;
+            padding: 0 10px 0 0;
+            border: none;
+            outline: none;
+            width: 100%;
+            color: #ffffff;
+            background-color: transparent;
+    
+            &::placeholder, &::-webkit-input-placeholder {
+                color: rgb(255 255 255 / 50%);
+            }
         }
-
-        .art-icon {
-            opacity: 0.75;
+    
+        .art-danmuku-send {
+            display: flex;
+            width: 50px;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-
+            background-color: #00a1d6;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+    
             &:hover {
-                opacity: 1;
+                background-color: #00b5e5;
+            }
+    
+            &.art-disabled {
+                opacity: 0.5;
+                pointer-events: none;
             }
         }
     }
 
-    .art-danmuku-input {
-        flex: 1;
-        display: flex;
-        padding: 0 10px 0 0;
-        border: none;
-        outline: none;
-        width: 100%;
-        color: #ffffff;
-        background-color: transparent;
-
-        &::placeholder, &::-webkit-input-placeholder {
-            color: rgb(255 255 255 / 50%);
-        }
-    }
-
-    .art-danmuku-send {
-        display: flex;
-        width: 50px;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        background-color: #00a1d6;
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-
-        &:hover {
-            background-color: #00b5e5;
-        }
-
-        &.art-disabled {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-    }
-
-    &.art-danmuku-mobile {
+    &.art-mobile {
         .art-danmuku-style .art-danmuku-style-panel {
             left: 0;
         }
     }
 }
+
