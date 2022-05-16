@@ -8,7 +8,7 @@ export default function setting(art, danmuku) {
     const {
         template: { $controlsCenter },
         constructor: {
-            utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass },
+            utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass, isMobile },
         },
     } = art;
 
@@ -26,7 +26,12 @@ export default function setting(art, danmuku) {
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
     const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
-    const $control = danmuku.option.mount instanceof Element ? danmuku.option.mount : $controlsCenter;
+
+    let $control = $controlsCenter;
+
+    if (danmuku.option.mount instanceof Element) {
+        $control = danmuku.option.mount;
+    }
 
     function addEmitter() {
         const colors = [
@@ -55,14 +60,16 @@ export default function setting(art, danmuku) {
             <div class="art-danmuku-emitter">
                 <div class="art-danmuku-style">
                     <div class="art-danmuku-style-panel">
-                        <div class="art-danmuku-style-panel-title">模式</div>
-                        <div class="art-danmuku-style-panel-modes">
-                            <div class="art-danmuku-style-panel-mode art-current" data-mode="0">滚动</div>
-                            <div class="art-danmuku-style-panel-mode" data-mode="1">静止</div>
-                        </div>
-                        <div class="art-danmuku-style-panel-title">颜色</div>
-                        <div class="art-danmuku-style-panel-colors">
-                            ${colors.join('')}
+                        <div class="art-danmuku-style-panel-inner">
+                            <div class="art-danmuku-style-panel-title">模式</div>
+                            <div class="art-danmuku-style-panel-modes">
+                                <div class="art-danmuku-style-panel-mode art-current" data-mode="0">滚动</div>
+                                <div class="art-danmuku-style-panel-mode" data-mode="1">静止</div>
+                            </div>
+                            <div class="art-danmuku-style-panel-title">颜色</div>
+                            <div class="art-danmuku-style-panel-colors">
+                                ${colors.join('')}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,10 +79,18 @@ export default function setting(art, danmuku) {
             `,
         );
 
+        if (isMobile) {
+            addClass($emitter, 'art-danmuku-mobile');
+        }
+
+        if ($control !== $controlsCenter) {
+            addClass($emitter, 'art-danmuku-mount');
+        }
+
         const $style = query('.art-danmuku-style', $emitter);
         const $input = query('.art-danmuku-input', $emitter);
         const $send = query('.art-danmuku-send', $emitter);
-        const $panel = query('.art-danmuku-style-panel', $emitter);
+        const $panel = query('.art-danmuku-style-panel-inner', $emitter);
         const $modes = query('.art-danmuku-style-panel-modes', $emitter);
         const $colors = query('.art-danmuku-style-panel-colors', $emitter);
 
@@ -117,6 +132,10 @@ export default function setting(art, danmuku) {
             art.emit('artplayerPluginDanmuku:emit', danmu);
         }
 
+        function resize() {
+            setStyle($emitter, 'display', $control.clientWidth < 150 ? 'none' : null);
+        }
+
         art.proxy($send, 'click', onSend);
 
         art.proxy($input, 'keypress', (event) => {
@@ -142,9 +161,8 @@ export default function setting(art, danmuku) {
             }
         });
 
-        art.on('resize', () => {
-            setStyle($emitter, 'display', $control.clientWidth < 150 ? 'none' : null);
-        });
+        resize();
+        art.on('resize', resize);
 
         art.on('destroy', () => {
             if ($control !== $controlsCenter) {

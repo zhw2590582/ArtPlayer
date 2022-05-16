@@ -29,6 +29,11 @@
             height: 50%;
         }
 
+        .danmuku-input {
+            padding: 5px;
+            background-color: #000;
+        }
+
         .tip {
             text-align: center;
         }
@@ -38,14 +43,130 @@
 <body>
     <div class="container">
         <div class="artplayer-app"></div>
+        <div class="danmuku-input"></div>
         <p class="tip"></p>
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
     <script>var vConsole = new VConsole();</script>
     <script src="./uncompiled/artplayer/index.js"></script>
     <script src="./uncompiled/artplayer-plugin-danmuku/index.js"></script>
-    <script src="./assets/example/danmuku.js"></script>
     <script>
+        var art = new Artplayer({
+            container: '.artplayer-app',
+            url: '/assets/sample/video.mp4',
+            title: 'One More Time One More Chance',
+            poster: '/assets/sample/poster.jpg',
+            loop: true,
+            mutex: true,
+            setting: true,
+            flip: true,
+            lock: true,
+            fastForward: true,
+            playbackRate: true,
+            aspectRatio: true,
+            theme: '#ff0057',
+            fullscreen: true,
+            fullscreenWeb: true,
+            miniProgressBar: true,
+            autoOrientation: true,
+            whitelist: ['*'],
+            moreVideoAttr: {
+                'x5-video-player-type': 'h5',
+                'x5-video-player-fullscreen': false,
+                'x5-video-orientation': 'portraint',
+            },
+            subtitle: {
+                url: '/assets/sample/subtitle.srt',
+                style: {
+                    color: '#48aff0',
+                    fontSize: '16px',
+                },
+            },
+            layers: [
+                {
+                    html: `<img width="50" src="/assets/sample/layer.png">`,
+                    click: function () {
+                        art.notice.show = "你点击了自定义层";
+                    },
+                    style: {
+                        position: 'absolute',
+                        top: '10px',
+                        right: '10px',
+                        opacity: '.9',
+                    },
+                },
+            ],
+            icons: {
+                loading: '<img src="/assets/img/ploading.gif">',
+                state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
+                indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
+            },
+            settings: [
+                {
+                    width: 200,
+                    html: '切换字幕',
+                    tooltip: '双语',
+                    icon: '<img width="22" heigth="22" src="/assets/img/subtitle.svg">',
+                    selector: [
+                        {
+                            html: '开关',
+                            switch: true,
+                            tooltip: '显示',
+                            onSwitch: function (item) {
+                                item.tooltip = item.switch ? '隐藏' : '显示';
+                                art.subtitle.show = !item.switch;
+                                return !item.switch;
+                            },
+                        },
+                        {
+                            default: true,
+                            html: '双语',
+                            url: '/assets/sample/subtitle.srt'
+                        },
+                        {
+                            html: '中文',
+                            url: '/assets/sample/subtitle.cn.srt'
+                        },
+                        {
+                            html: '日文',
+                            url: '/assets/sample/subtitle.jp.srt'
+                        },
+                    ],
+                    onSelect: function (item) {
+                        art.subtitle.switch(item.url, {
+                            name: item.html
+                        });
+                        return item.html;
+                    },
+                },
+            ],
+            plugins: [
+                artplayerPluginDanmuku({
+                    danmuku: '/assets/sample/danmuku.xml',
+                    speed: 5,
+                    opacity: 1,
+                    fontSize: 14,
+                    color: '#FFFFFF',
+                    mode: 0,
+                    margin: [10, '25%'],
+                    antiOverlap: true,
+                    useWorker: true,
+                    synchronousPlayback: false,
+                    filter: (danmu) => danmu.text.length < 50,
+                    lockTime: 5,
+                    mount: document.querySelector('.danmuku-input'),
+                }),
+            ],
+        }, function () {
+            this.autoHeight = true;
+        });
+
+        Artplayer.config.events.forEach(function (item) {
+            art.on('video:' + item, function (event) {
+                console.log('video: ' + event.type);
+            });
+        });
+
         if (Artplayer.utils.isWechat) {
             document.querySelector('.tip').textContent = '微信环境需手动触发播放';
             let isClick = false;

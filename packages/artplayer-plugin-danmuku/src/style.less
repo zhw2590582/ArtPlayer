@@ -14,7 +14,7 @@
     touch-action: manipulation;
     -ms-high-contrast-adjust: none;
 
-    * {
+    *, *::before, *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -47,71 +47,77 @@
 
         .art-danmuku-style-panel {
             display: none;
-            flex-direction: column;
             position: absolute;
-            left: -70px;
-            bottom: 29px;
+            z-index: 999;
+            left: -65px;
+            bottom: 30px;
             width: 160px;
-            padding: 10px 10px 0;
-            border-radius: 3px;
-            background-color: rgba(0, 0, 0, 0.9);
+            padding-bottom: 10px;
 
-            .art-danmuku-style-panel-title {
-                font-size: 13px;
-                margin-bottom: 10px;
-            }
-
-            .art-danmuku-style-panel-modes {
+            .art-danmuku-style-panel-inner {
                 display: flex;
-                justify-content: space-between;
-                margin-bottom: 15px;
+                flex-direction: column;
+                padding: 10px 10px 0;
+                border-radius: 3px;
+                background-color: rgba(0, 0, 0, 0.9);
 
-                .art-danmuku-style-panel-mode {
-                    display: flex;
-                    justify-content: center;
-                    width: 47%;
-                    padding: 4px 0;
-                    cursor: pointer;
-                    color: #fff;
-                    border: 1px solid #fff;
-
-                    &.art-current {
-                        background-color: #00a1d6;
-                        border: 1px solid #00a1d6;
-                    }
+                .art-danmuku-style-panel-title {
+                    font-size: 13px;
+                    margin-bottom: 10px;
                 }
-            }
-
-            .art-danmuku-style-panel-colors {
-                display: flex;
-                gap: 5px;
-                flex-wrap: wrap;
-                margin-bottom: 10px;
-                justify-content: space-between;
-
-                .art-danmuku-style-panel-color {
-                    cursor: pointer;
-                    width: 15px;
-                    height: 15px;
-                    border: 1px solid #fff;
-
-                    &.art-current{
-                        position: relative;
-                        box-shadow: 0 0 2px #fff;
-                        &::before {
-                            content: '';
-                            position: absolute;
-                            width: 100%;
-                            height: 100%;
-                            left: 0;
-                            top: 0;
-                            right: 0;
-                            bottom: 0;
-                            border: 1px solid #000;
+    
+                .art-danmuku-style-panel-modes {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 15px;
+    
+                    .art-danmuku-style-panel-mode {
+                        display: flex;
+                        justify-content: center;
+                        width: 47%;
+                        padding: 4px 0;
+                        cursor: pointer;
+                        color: #fff;
+                        border: 1px solid #fff;
+    
+                        &.art-current {
+                            background-color: #00a1d6;
+                            border: 1px solid #00a1d6;
                         }
                     }
                 }
-
+    
+                .art-danmuku-style-panel-colors {
+                    display: flex;
+                    gap: 5px;
+                    flex-wrap: wrap;
+                    margin-bottom: 10px;
+                    justify-content: space-between;
+    
+                    .art-danmuku-style-panel-color {
+                        cursor: pointer;
+                        width: 15px;
+                        height: 15px;
+                        border: 1px solid #fff;
+    
+                        &.art-current{
+                            position: relative;
+                            box-shadow: 0 0 2px #fff;
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                left: 0;
+                                top: 0;
+                                right: 0;
+                                bottom: 0;
+                                border: 1px solid #000;
+                            }
+                        }
+                    }
+    
+                }
             }
         }
 
@@ -161,6 +167,12 @@
         &.art-disabled {
             opacity: 0.5;
             pointer-events: none;
+        }
+    }
+
+    &.art-danmuku-mobile {
+        .art-danmuku-style .art-danmuku-style-panel {
+            left: 0;
         }
     }
 }
