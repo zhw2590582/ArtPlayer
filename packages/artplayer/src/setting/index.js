@@ -8,8 +8,8 @@ import { append, addClass, setStyle, inverseClass, includeFromEvent, def, has } 
 function makeRecursion(option, parentItem, parentList) {
     for (let index = 0; index < option.length; index++) {
         const item = option[index];
-        item._parentItem = parentItem;
-        item._parentList = parentList;
+        item.$parentItem = parentItem;
+        item.$parentList = parentList;
         if (item.selector) {
             makeRecursion(item.selector, item, option);
         }
@@ -115,10 +115,10 @@ export default class Setting extends Component {
         addClass($icon, 'art-setting-item-left-icon');
         append($icon, icons.arrowLeft);
         append($left, $icon);
-        append($left, item._parentItem.html);
+        append($left, item.$parentItem.html);
 
         const event = proxy($item, 'click', () => {
-            this.init(item._parentList);
+            this.init(item.$parentList);
         });
 
         this.events.push(event);
@@ -307,14 +307,14 @@ export default class Setting extends Component {
                         } else {
                             inverseClass($item, 'art-current');
 
-                            if (item._parentList) {
-                                this.init(item._parentList);
+                            if (item.$parentList) {
+                                this.init(item.$parentList);
                             }
 
-                            if (item._parentItem && item._parentItem.onSelect) {
-                                const result = await item._parentItem.onSelect.call(this.art, item, $item, event);
-                                if (item._parentItem.$tooltip && isStringOrNumber(result)) {
-                                    item._parentItem.$tooltip.innerHTML = result;
+                            if (item.$parentItem && item.$parentItem.onSelect) {
+                                const result = await item.$parentItem.onSelect.call(this.art, item, $item, event);
+                                if (item.$parentItem.$tooltip && isStringOrNumber(result)) {
+                                    item.$parentItem.$tooltip.innerHTML = result;
                                 }
                             }
                         }
@@ -348,7 +348,7 @@ export default class Setting extends Component {
             $panel.dataset.width = width || constructor.SETTING_WIDTH;
             $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
 
-            if (option[0] && option[0]._parentItem) {
+            if (option[0] && option[0].$parentItem) {
                 append($panel, this.creatHeader(option[0]));
                 $panel.dataset.height = Number($panel.dataset.height) + constructor.SETTING_ITEM_HEIGHT;
             }
@@ -370,8 +370,8 @@ export default class Setting extends Component {
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
             setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
 
-            if (option[0] && option[0]._parentItem && option[0]._parentItem.mounted) {
-                option[0]._parentItem.mounted.call(this.art, $panel, option[0]._parentItem);
+            if (option[0] && option[0].$parentItem && option[0].$parentItem.mounted) {
+                option[0].$parentItem.mounted.call(this.art, $panel, option[0].$parentItem);
             }
         }
     }

@@ -10,7 +10,7 @@ type Selector = {
     /**
      * Html string of selector
      */
-    html: string;
+    html: string | HTMLElement;
 };
 
 type ComponentOption = {
@@ -89,7 +89,7 @@ type SettingOption = {
     /**
      * The tooltip of setting
      */
-    tooltip?: string;
+    tooltip?: string | HTMLElement;
 
     /**
      * Whether the default is selected
@@ -119,12 +119,20 @@ type SettingOption = {
     /**
      * Custom range item
      */
-    range?: number[];
+    range?: number[] | number;
 
     /**
      * When range item change
      */
     onRange?(item: SettingOption, element: HTMLElement, event: Event): void;
+
+    $icon?: HTMLElement;
+    $html?: HTMLElement;
+    $tooltip?: HTMLElement;
+    $switch?: boolean;
+    $range?: HTMLElement;
+    $parentItem?: SettingOption;
+    $parentList?: SettingOption[];
 };
 
 type Component = {
@@ -411,7 +419,7 @@ type Option = {
         /**
          * Html string of quality
          */
-        html: string;
+        html: string | HTMLElement;
 
         /**
          * Video quality url
