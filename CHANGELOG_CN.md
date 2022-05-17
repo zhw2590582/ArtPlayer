@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.4.1] - 2022-05-17
+
 ### Added
 - 添加 art.isInput 属性，当为 true 的时候不自动隐藏控制栏，如弹幕正在输入时
 - 添加 art.isLock 属性，在移动端当为 true 的时候不能操作快进、开始和暂停
