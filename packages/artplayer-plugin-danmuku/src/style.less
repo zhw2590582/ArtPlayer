@@ -182,24 +182,32 @@
         height: 34px;
 
         .art-danmuku-left {
-            border: 1px solid #dadada;
-            background: #f4f4f4;
-
             .art-danmuku-style {
                 .art-danmuku-style-panel {
                     left: 0;
                 }
+            }
+        }
+
+        .art-danmuku-send {
+            width: 60px;
+        }
+
+        &.art-danmuku-theme-light {
+            .art-danmuku-left {
+                border: 1px solid #dadada;
+                background: #f4f4f4;
     
-                .art-icon svg {
+                .art-danmuku-style .art-icon svg {
                     fill: #666;
                 }
-            }
-    
-            .art-danmuku-input {
-                color: #000000;
-    
-                &::placeholder, &::-webkit-input-placeholder {
-                    color: rgb(0 0 0 / 50%);
+        
+                .art-danmuku-input {
+                    color: #000000;
+        
+                    &::placeholder, &::-webkit-input-placeholder {
+                        color: rgb(0 0 0 / 50%);
+                    }
                 }
             }
         }

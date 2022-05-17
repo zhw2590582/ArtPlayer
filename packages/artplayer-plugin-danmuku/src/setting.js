@@ -86,6 +86,10 @@ export default function setting(art, danmuku) {
             addClass($panel, 'art-backdrop-filter');
         }
 
+        if (option.theme) {
+            addClass($emitter, `art-danmuku-theme-${option.theme}`);
+        }
+
         let timer = null;
         let mode = option.mode;
         let color = option.color;

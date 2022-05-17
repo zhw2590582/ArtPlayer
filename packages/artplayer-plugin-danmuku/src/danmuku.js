@@ -61,6 +61,7 @@ export default class Danmuku {
             minWidth: 200,
             maxWidth: 400,
             mount: undefined,
+            theme: 'dark',
             beforeEmit: () => true,
         };
     }
@@ -83,6 +84,7 @@ export default class Danmuku {
             minWidth: 'number',
             maxWidth: 'number',
             mount: 'undefined|htmldivelement',
+            theme: 'string',
             beforeEmit: 'function',
         };
     }
