@@ -20,7 +20,7 @@ var art = new Artplayer({
             antiOverlap: true, // 是否防重叠
             useWorker: true, // 是否使用 web worker
             synchronousPlayback: false, // 是否同步到播放速度
-            filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数
+            filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数，返回 true 则可以发送
             lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
             maxLength: 100, // 输入框最大可输入的字数，范围在[0 ~ 500]
             minWidth: 200, // 输入框最小宽度，范围在[0 ~ 500]，填 0 则为无限制
