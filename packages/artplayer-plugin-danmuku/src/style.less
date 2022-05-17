@@ -1,16 +1,49 @@
-.art-video-player {
-    .art-danmuku-emitter {
-        position: relative;
+.art-danmuku-emitter {
+    position: relative;
+    display: flex;
+    height: 32px;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 3px;
+    max-width: 100%;
+    color: #ffffff;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    background-color: rgb(255 255 255 / 30%);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: manipulation;
+    -ms-high-contrast-adjust: none;
+
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .art-icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.5;
+
+        svg {
+            fill: #fff;
+        }
+    }
+
+    @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
+        .art-backdrop-filter {
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            background-color: rgba(0, 0, 0, 0.7) !important;
+        }
+    }
+
+    .art-danmuku-left {
         display: flex;
-        height: 32px;
-        width: 100%;
-        font-size: 12px;
-        line-height: 1;
-        border-radius: 3px;
-        max-width: 100%;
-        color: #ffffff;
-        background-color: rgb(255 255 255 / 30%);
-    
+        flex: 1;
+        border-radius: 3px 0 0 3px;
+
         .art-danmuku-style {
             position: relative;
             display: flex;
@@ -122,52 +155,61 @@
                 color: rgb(255 255 255 / 50%);
             }
         }
-    
-        .art-danmuku-send {
-            display: flex;
-            width: 50px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background-color: #00a1d6;
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-    
-            &:hover {
-                background-color: #00b5e5;
-            }
-    
-            &.art-disabled {
-                opacity: 0.5;
-                pointer-events: none;
-            }
+    }
+
+    .art-danmuku-send {
+        display: flex;
+        width: 50px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: #00a1d6;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+
+        &:hover {
+            background-color: #00b5e5;
+        }
+
+        &.art-disabled {
+            opacity: 0.5;
+            pointer-events: none;
         }
     }
 
-    .art-layer-danmuku-emitter {
-        position: absolute;
-        z-index: 999;
-        left: 0;
-        right: 0;
-        bottom: -42px;
-        height: 42px;
-        width: 100%;
-        padding: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #000;
+    &.art-danmuku-mount {
+        max-width: 100% !important;
 
-        .art-danmuku-emitter {
-            max-width: 100% !important;
-            
+        .art-danmuku-left {
+            border: 1px solid #dadada;
+            background: #f4f4f4;
+
             .art-danmuku-style {
                 .art-danmuku-style-panel {
                     left: 0;
                 }
+    
+                .art-icon svg {
+                    fill: #666;
+                }
+            }
+    
+            .art-danmuku-input {
+                color: #000000;
+    
+                &::placeholder, &::-webkit-input-placeholder {
+                    color: rgb(0 0 0 / 50%);
+                }
             }
         }
-
     }
 }
 
+.art-layer-danmuku-emitter {
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    right: 0;
+    bottom: -40px;
+    width: 100%;
+}

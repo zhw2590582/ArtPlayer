@@ -24,7 +24,7 @@ export default function setting(art, danmuku) {
     const $danmuOn = getIcon(danmuOn, 'danmu-on');
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
-    const $danmuStyle = getIcon(danmuStyle, 'danmu-config');
+    const $danmuStyle = getIcon(danmuStyle, 'danmu-style');
 
     function addEmitter() {
         const colors = [
@@ -51,22 +51,24 @@ export default function setting(art, danmuku) {
             $controlsCenter,
             `
             <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : '100%'}">
-                <div class="art-danmuku-style">
-                    <div class="art-danmuku-style-panel">
-                        <div class="art-danmuku-style-panel-inner">
-                            <div class="art-danmuku-style-panel-title">模式</div>
-                            <div class="art-danmuku-style-panel-modes">
-                                <div class="art-danmuku-style-panel-mode art-current" data-mode="0">滚动</div>
-                                <div class="art-danmuku-style-panel-mode" data-mode="1">静止</div>
-                            </div>
-                            <div class="art-danmuku-style-panel-title">颜色</div>
-                            <div class="art-danmuku-style-panel-colors">
-                                ${colors.join('')}
+                <div class="art-danmuku-left">
+                    <div class="art-danmuku-style">
+                        <div class="art-danmuku-style-panel">
+                            <div class="art-danmuku-style-panel-inner">
+                                <div class="art-danmuku-style-panel-title">模式</div>
+                                <div class="art-danmuku-style-panel-modes">
+                                    <div class="art-danmuku-style-panel-mode art-current" data-mode="0">滚动</div>
+                                    <div class="art-danmuku-style-panel-mode" data-mode="1">静止</div>
+                                </div>
+                                <div class="art-danmuku-style-panel-title">颜色</div>
+                                <div class="art-danmuku-style-panel-colors">
+                                    ${colors.join('')}
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <input class="art-danmuku-input" maxlength="${option.maxLength}" placeholder="发个弹幕见证当下" />
                 </div>
-                <input class="art-danmuku-input" maxlength="${option.maxLength}" placeholder="发个弹幕见证当下" />
                 <div class="art-danmuku-send">发送</div>
             </div>
             `,
@@ -78,7 +80,7 @@ export default function setting(art, danmuku) {
         const $panel = query('.art-danmuku-style-panel-inner', $emitter);
         const $modes = query('.art-danmuku-style-panel-modes', $emitter);
         const $colors = query('.art-danmuku-style-panel-colors', $emitter);
-        const $layer = append($player, '<div class="art-layer-danmuku-emitter"></div>');
+        const $layer = option.mount || append($player, '<div class="art-layer-danmuku-emitter"></div>');
 
         if (art.option.backdrop) {
             addClass($panel, 'art-backdrop-filter');
@@ -90,7 +92,7 @@ export default function setting(art, danmuku) {
         append($style, $danmuStyle);
 
         function countdown(time) {
-            if (time === 0) {
+            if (time <= 0) {
                 timer = null;
                 $send.innerText = '发送';
                 removeClass($send, 'art-disabled');
@@ -101,30 +103,39 @@ export default function setting(art, danmuku) {
         }
 
         function onSend() {
-            const text = $input.value.trim();
-            if (!text || timer) return;
-
             const danmu = {
-                text,
                 mode,
                 color,
                 border: true,
+                text: $input.value.trim(),
             };
 
-            $input.value = '';
-            danmuku.emit(danmu);
-            addClass($send, 'art-disabled');
-            countdown(option.lockTime);
-            art.emit('artplayerPluginDanmuku:emit', danmu);
+            if (timer === null && option.beforeEmit(danmu)) {
+                $input.value = '';
+                danmuku.emit(danmu);
+                addClass($send, 'art-disabled');
+                countdown(option.lockTime);
+                art.emit('artplayerPluginDanmuku:emit', danmu);
+            }
         }
 
         function onResize() {
             if ($controlsCenter.clientWidth < option.minWidth) {
                 append($layer, $emitter);
                 setStyle($layer, 'display', 'flex');
+                addClass($emitter, 'art-danmuku-mount');
+
+                if (!option.mount) {
+                    setStyle($player, 'marginBottom', '40px');
+                }
             } else {
                 append($controlsCenter, $emitter);
                 setStyle($layer, 'display', 'none');
+                removeClass($emitter, 'art-danmuku-mount');
+
+                if (!option.mount) {
+                    setStyle($player, 'marginBottom', null);
+                }
             }
         }
 

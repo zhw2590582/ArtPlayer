@@ -87,8 +87,12 @@ var art = new Artplayer({
             filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数
             lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
             maxLength: 100, // 输入框最大可输入的字数，范围在[0 ~ 500]
-            minWidth: 200, // 输入框最少宽度，范围在[0 ~ 500]，填 0 则为无限制
+            minWidth: 200, // 输入框最小宽度，范围在[0 ~ 500]，填 0 则为无限制
             maxWidth: 400, // 输入框最大宽度，范围在[minWidth ~ Infinity]，填 0 则为 100% 宽度
+            beforeEmit: (danmu) => !!danmu.text.trim(), // 发送弹幕前的自定义校验，返回 true 则可以发送
+
+            // 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
+            // mount: document.querySelector('.artplayer-danmuku'),
         }),
     ],
 });

@@ -60,6 +60,8 @@ export default class Danmuku {
             maxLength: 100,
             minWidth: 200,
             maxWidth: 400,
+            mount: undefined,
+            beforeEmit: () => true,
         };
     }
 
@@ -80,6 +82,8 @@ export default class Danmuku {
             maxLength: 'number',
             minWidth: 'number',
             maxWidth: 'number',
+            mount: 'undefined|htmldivelement',
+            beforeEmit: 'function',
         };
     }
 
@@ -264,7 +268,7 @@ export default class Danmuku {
 
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.lockTime = clamp(this.option.lockTime, 0, 60);
+        this.option.lockTime = clamp(Math.floor(this.option.lockTime), 0, 60);
         this.option.maxLength = clamp(this.option.maxLength, 0, 500);
         this.option.minWidth = clamp(this.option.minWidth, 0, 500);
         this.option.maxWidth = clamp(this.option.maxWidth, 0, Infinity);

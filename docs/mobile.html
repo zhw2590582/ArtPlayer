@@ -38,6 +38,7 @@
 <body>
     <div class="container">
         <div class="artplayer-app"></div>
+        <div class="artplayer-danmuku"></div>
         <p class="tip"></p>
     </div>
     <script src="./assets/js/vconsole.min.js"></script>
@@ -152,8 +153,8 @@
                     maxLength: 100,
                     minWidth: 150,
                     maxWidth: 0,
-                    moveOnFullscreen: true,
-                    mount: document.querySelector('.artplayer-danmuku'),
+                    beforeEmit: (danmu) => !!danmu.text.trim(),
+                    // mount: document.querySelector('.artplayer-danmuku'),
                 }),
             ],
         });

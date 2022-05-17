@@ -15,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 弹幕库添加 maxLength 选项，控制输入最大可输入字数
 - 弹幕库添加 minWidth 选项，控制输入框最小宽度
 - 弹幕库添加 maxWidth 选项，控制输入框最大宽度
+- 弹幕库添加 mount 选项，控制输入框自定义挂载位置
+- 弹幕库添加 beforeEmit 选项，控制弹幕发送前的校验
 
 ## [4.4.0] - 2022-05-15
 
