@@ -2,11 +2,7 @@ import { clamp, secondToTime, isMobile, includeFromEvent } from '../utils';
 
 export default function gestureInit(art, events) {
     if (isMobile && !art.option.isLive) {
-        const {
-            notice,
-            plugins,
-            template: { $video, $bottom, $controls },
-        } = art;
+        const { $video, $bottom, $controls } = art.template;
 
         let isDroging = false;
         let startX = 0;
@@ -25,7 +21,7 @@ export default function gestureInit(art, events) {
 
         const onTouchMove = (event) => {
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const autoOrientation = plugins.autoOrientation && plugins.autoOrientation.state;
+                const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
                 const { clientX, clientY } = event.touches[0];
                 const ratioX = clamp((clientX - startX) / art.width, -1, 1);
                 const ratioY = clamp((clientY - startY) / art.height, -1, 1);
@@ -33,7 +29,7 @@ export default function gestureInit(art, events) {
                 const currentTime = clamp(startTime + (art.duration * ratio) / 2, 0, art.duration);
                 art.seek = currentTime;
                 art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1));
-                notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
+                art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
             }
         };
 

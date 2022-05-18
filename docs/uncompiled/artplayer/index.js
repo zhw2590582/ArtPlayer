@@ -244,7 +244,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652875028775";
+        return "1652875410930";
     }
     static get config() {
         return _configDefault.default;
@@ -4005,7 +4005,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function gestureInit(art, events) {
     if (_utils.isMobile && !art.option.isLive) {
-        const { notice , plugins , template: { $video , $bottom , $controls  } ,  } = art;
+        const { $video , $bottom , $controls  } = art.template;
         let isDroging = false;
         let startX = 0;
         let startY = 0;
@@ -4021,7 +4021,7 @@ function gestureInit(art, events) {
         };
         const onTouchMove = (event)=>{
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const autoOrientation = plugins.autoOrientation && plugins.autoOrientation.state;
+                const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
                 const { clientX , clientY  } = event.touches[0];
                 const ratioX = _utils.clamp((clientX - startX) / art.width, -1, 1);
                 const ratioY = _utils.clamp((clientY - startY) / art.height, -1, 1);
@@ -4029,7 +4029,7 @@ function gestureInit(art, events) {
                 const currentTime = _utils.clamp(startTime + art.duration * ratio / 2, 0, art.duration);
                 art.seek = currentTime;
                 art.emit('setBar', 'played', _utils.clamp(currentTime / art.duration, 0, 1));
-                notice.show = `${_utils.secondToTime(currentTime)} / ${_utils.secondToTime(art.duration)}`;
+                art.notice.show = `${_utils.secondToTime(currentTime)} / ${_utils.secondToTime(art.duration)}`;
             }
         };
         const onTouchEnd = ()=>{
