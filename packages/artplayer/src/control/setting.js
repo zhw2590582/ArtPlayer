@@ -9,13 +9,12 @@ export default function setting(option) {
                 events: { proxy },
                 icons,
                 i18n,
-                setting,
             } = art;
 
             append($control, icons.setting);
 
             proxy($control, 'click', () => {
-                setting.toggle = true;
+                art.setting.toggle = true;
             });
 
             art.on('setting', (value) => {

@@ -1,14 +1,14 @@
 import { throttle } from '../utils';
 
 export default function resizeInit(art, events) {
-    const { notice, option } = art;
+    const { option } = art;
 
     const resizeFn = throttle(() => {
         if (art.normalSize) {
             art.autoSize = option.autoSize;
         }
         art.aspectRatioReset = true;
-        notice.show = '';
+        art.notice.show = '';
         art.emit('resize');
     }, art.constructor.RESIZE_TIME);
 
