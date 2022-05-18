@@ -1238,7 +1238,7 @@ class Template {
     }
     static get html() {
         return `
-          <div class="art-video-player art-subtitle-show art-layer-show art-control-show">
+          <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
             <video class="art-video"></video>
             <div class="art-poster"></div>
             <div class="art-subtitle"></div>
@@ -2692,6 +2692,7 @@ function eventInit(art) {
     art.on('video:loadstart', ()=>{
         art.loading.show = true;
         art.controls.show = true;
+        art.mask.show = true;
     });
     art.on('video:pause', ()=>{
         art.controls.show = true;

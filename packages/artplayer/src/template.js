@@ -33,7 +33,7 @@ export default class Template {
 
     static get html() {
         return `
-          <div class="art-video-player art-subtitle-show art-layer-show art-control-show">
+          <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
             <video class="art-video"></video>
             <div class="art-poster"></div>
             <div class="art-subtitle"></div>
