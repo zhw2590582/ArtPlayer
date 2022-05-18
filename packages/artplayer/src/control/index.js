@@ -20,7 +20,6 @@ export default class Control extends Component {
         this.name = 'control';
 
         const {
-            option,
             constructor,
             events: { proxy },
             template: { $player },
@@ -43,119 +42,123 @@ export default class Control extends Component {
             }
         });
 
-        art.once('video:loadedmetadata', () => {
-            this.add(
-                progress({
-                    name: 'progress',
-                    disable: option.isLive,
-                    position: 'top',
-                    index: 10,
-                }),
-            );
+        this.init();
+    }
 
-            this.add(
-                thumbnails({
-                    name: 'thumbnails',
-                    disable: !option.thumbnails.url || option.isLive || isMobile,
-                    position: 'top',
-                    index: 20,
-                }),
-            );
+    init() {
+        const { option } = this.art;
 
-            this.add(
-                loop({
-                    name: 'loop',
-                    disable: false,
-                    position: 'top',
-                    index: 30,
-                }),
-            );
+        this.add(
+            progress({
+                name: 'progress',
+                disable: option.isLive,
+                position: 'top',
+                index: 10,
+            }),
+        );
 
-            this.add(
-                playAndPause({
-                    name: 'playAndPause',
-                    disable: false,
-                    position: 'left',
-                    index: 10,
-                }),
-            );
+        this.add(
+            thumbnails({
+                name: 'thumbnails',
+                disable: !option.thumbnails.url || option.isLive || isMobile,
+                position: 'top',
+                index: 20,
+            }),
+        );
 
-            this.add(
-                volume({
-                    name: 'volume',
-                    disable: false,
-                    position: 'left',
-                    index: 20,
-                }),
-            );
+        this.add(
+            loop({
+                name: 'loop',
+                disable: false,
+                position: 'top',
+                index: 30,
+            }),
+        );
 
-            this.add(
-                time({
-                    name: 'time',
-                    disable: option.isLive,
-                    position: 'left',
-                    index: 30,
-                }),
-            );
+        this.add(
+            playAndPause({
+                name: 'playAndPause',
+                disable: false,
+                position: 'left',
+                index: 10,
+            }),
+        );
 
-            this.add(
-                quality({
-                    name: 'quality',
-                    disable: option.quality.length === 0,
-                    position: 'right',
-                    index: 10,
-                }),
-            );
+        this.add(
+            volume({
+                name: 'volume',
+                disable: false,
+                position: 'left',
+                index: 20,
+            }),
+        );
 
-            this.add(
-                screenshot({
-                    name: 'screenshot',
-                    disable: !option.screenshot || isMobile,
-                    position: 'right',
-                    index: 20,
-                }),
-            );
+        this.add(
+            time({
+                name: 'time',
+                disable: option.isLive,
+                position: 'left',
+                index: 30,
+            }),
+        );
 
-            this.add(
-                setting({
-                    name: 'setting',
-                    disable: !option.setting,
-                    position: 'right',
-                    index: 30,
-                }),
-            );
+        this.add(
+            quality({
+                name: 'quality',
+                disable: option.quality.length === 0,
+                position: 'right',
+                index: 10,
+            }),
+        );
 
-            this.add(
-                pip({
-                    name: 'pip',
-                    disable: !option.pip,
-                    position: 'right',
-                    index: 40,
-                }),
-            );
+        this.add(
+            screenshot({
+                name: 'screenshot',
+                disable: !option.screenshot || isMobile,
+                position: 'right',
+                index: 20,
+            }),
+        );
 
-            this.add(
-                fullscreenWeb({
-                    name: 'fullscreenWeb',
-                    disable: !option.fullscreenWeb,
-                    position: 'right',
-                    index: 50,
-                }),
-            );
+        this.add(
+            setting({
+                name: 'setting',
+                disable: !option.setting,
+                position: 'right',
+                index: 30,
+            }),
+        );
 
-            this.add(
-                fullscreen({
-                    name: 'fullscreen',
-                    disable: !option.fullscreen,
-                    position: 'right',
-                    index: 60,
-                }),
-            );
+        this.add(
+            pip({
+                name: 'pip',
+                disable: !option.pip,
+                position: 'right',
+                index: 40,
+            }),
+        );
 
-            for (let index = 0; index < option.controls.length; index++) {
-                this.add(option.controls[index]);
-            }
-        });
+        this.add(
+            fullscreenWeb({
+                name: 'fullscreenWeb',
+                disable: !option.fullscreenWeb,
+                position: 'right',
+                index: 50,
+            }),
+        );
+
+        this.add(
+            fullscreen({
+                name: 'fullscreen',
+                disable: !option.fullscreen,
+                position: 'right',
+                index: 60,
+            }),
+        );
+
+        for (let index = 0; index < option.controls.length; index++) {
+            this.add(option.controls[index]);
+        }
     }
 
     add(getOption) {

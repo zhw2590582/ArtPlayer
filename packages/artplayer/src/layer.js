@@ -12,10 +12,8 @@ export default class Layer extends Component {
         this.name = 'layer';
         this.$parent = $layer;
 
-        art.once('video:loadedmetadata', () => {
-            for (let index = 0; index < option.layers.length; index++) {
-                this.add(option.layers[index]);
-            }
-        });
+        for (let index = 0; index < option.layers.length; index++) {
+            this.add(option.layers[index]);
+        }
     }
 }

@@ -5,11 +5,9 @@ export default class Hotkey {
         this.art = art;
         this.keys = {};
 
-        art.once('video:loadedmetadata', () => {
-            if (art.option.hotkey && !isMobile) {
-                this.init();
-            }
-        });
+        if (art.option.hotkey && !isMobile) {
+            this.init();
+        }
     }
 
     init() {

@@ -14,14 +14,12 @@ export default class Events {
         this.loadImg = this.loadImg.bind(this);
 
         if (art.whitelist.state) {
-            art.once('video:loadedmetadata', () => {
-                clickInit(art, this);
-                hoverInit(art, this);
-                mousemoveInit(art, this);
-                resizeInit(art, this);
-                gestureInit(art, this);
-                viewInit(art, this);
-            });
+            clickInit(art, this);
+            hoverInit(art, this);
+            mousemoveInit(art, this);
+            resizeInit(art, this);
+            gestureInit(art, this);
+            viewInit(art, this);
         }
     }
 

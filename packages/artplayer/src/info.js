@@ -5,11 +5,10 @@ export default class Info extends Component {
     constructor(art) {
         super(art);
         this.name = 'info';
-        art.once('video:loadedmetadata', () => {
-            if (!isMobile) {
-                this.init();
-            }
-        });
+        
+        if (!isMobile) {
+            this.init();
+        }
     }
 
     init() {

@@ -31,7 +31,6 @@ export default class Setting extends Component {
             template: { $setting, $player },
         } = art;
 
-        this.art = art;
         this.name = 'setting';
         this.$parent = $setting;
 
@@ -40,31 +39,29 @@ export default class Setting extends Component {
         this.cache = new Map();
 
         if (option.setting) {
-            art.once('video:loadedmetadata', () => {
-                if (option.playbackRate) {
-                    this.option.push(playbackRate(art));
-                }
+            if (option.playbackRate) {
+                this.option.push(playbackRate(art));
+            }
 
-                if (option.aspectRatio) {
-                    this.option.push(aspectRatio(art));
-                }
+            if (option.aspectRatio) {
+                this.option.push(aspectRatio(art));
+            }
 
-                if (option.flip) {
-                    this.option.push(flip(art));
-                }
+            if (option.flip) {
+                this.option.push(flip(art));
+            }
 
-                if (option.subtitleOffset) {
-                    this.option.push(subtitleOffset(art));
-                }
+            if (option.subtitleOffset) {
+                this.option.push(subtitleOffset(art));
+            }
 
-                for (let index = 0; index < option.settings.length; index++) {
-                    this.option.push(option.settings[index]);
-                }
+            for (let index = 0; index < option.settings.length; index++) {
+                this.option.push(option.settings[index]);
+            }
 
-                this.option = makeRecursion(this.option);
+            this.option = makeRecursion(this.option);
 
-                this.init(this.option);
-            });
+            this.init(this.option);
 
             art.on('blur', () => {
                 if (this.show) {

@@ -9,9 +9,7 @@ export default class Subtitle extends Component {
 
         this.name = 'subtitle';
 
-        art.once('video:loadedmetadata', () => {
-            this.init(art.option.subtitle);
-        });
+        this.init(art.option.subtitle);
     }
 
     get url() {

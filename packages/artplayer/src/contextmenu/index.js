@@ -11,15 +11,12 @@ export default class Contextmenu extends Component {
     constructor(art) {
         super(art);
 
-        this.art = art;
         this.name = 'contextmenu';
         this.$parent = art.template.$contextmenu;
 
-        art.once('video:loadedmetadata', () => {
-            if (!isMobile) {
-                this.init();
-            }
-        });
+        if (!isMobile) {
+            this.init();
+        }
     }
 
     init() {
