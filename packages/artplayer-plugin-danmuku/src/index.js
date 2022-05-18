@@ -20,6 +20,7 @@ export default function artplayerPluginDanmuku(option) {
         return {
             name: 'artplayerPluginDanmuku',
             emit: danmuku.emit.bind(danmuku),
+            load: danmuku.load.bind(danmuku),
             config: danmuku.config.bind(danmuku),
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),

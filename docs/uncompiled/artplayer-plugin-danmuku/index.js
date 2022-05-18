@@ -164,6 +164,7 @@ function artplayerPluginDanmuku(option) {
         return {
             name: 'artplayerPluginDanmuku',
             emit: danmuku.emit.bind(danmuku),
+            load: danmuku.load.bind(danmuku),
             config: danmuku.config.bind(danmuku),
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
@@ -178,8 +179,8 @@ function artplayerPluginDanmuku(option) {
 }
 exports.default = artplayerPluginDanmuku;
 artplayerPluginDanmuku.env = "development";
-artplayerPluginDanmuku.version = "4.4.1";
-artplayerPluginDanmuku.build = "1652764315441";
+artplayerPluginDanmuku.version = "4.4.2";
+artplayerPluginDanmuku.build = "1652848364915";
 if (typeof window !== 'undefined') window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 
 },{"./danmuku":"igPca","./setting":"8npWO","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"igPca":[function(require,module,exports) {

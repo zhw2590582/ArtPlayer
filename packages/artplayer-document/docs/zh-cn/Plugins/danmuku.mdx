@@ -21,14 +21,17 @@ $ npm install artplayer-plugin-danmuku
 $ yarn add artplayer-plugin-danmuku
 ```
 
-```js
-import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
-```
-
 ### 通过 `script` 安装：
 
 ```html
+<!-- 本地 -->
 <script src="path/to/artplayer-plugin-danmuku/index.js"></script>
+
+<!-- jsdelivr -->
+<script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js"></script>
+
+<!-- unpkg -->
+<script src="https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js"></script>
 ```
 
 然后你可以通过 `window.artplayerPluginDanmuku` 访问到插件函数
@@ -273,7 +276,20 @@ var art = new Artplayer({
 
 -   类型: `Function`
 
-通过方法 `config` 实时改变弹幕配置，支持属性有：`speed`、`margin`、`opacity`、`fontSize`、`synchronousPlayback`、`filter`
+通过方法 `config` 实时改变弹幕配置，支持属性有：
+
+-   danmuku
+-   speed
+-   opacity
+-   fontSize
+-   color
+-   mode
+-   margin
+-   antiOverlap
+-   synchronousPlayback
+-   filter
+-   lockTime
+-   beforeEmit
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -306,5 +322,106 @@ var art = new Artplayer({
             },
         },
     ],
+});
+```
+
+### load
+
+-   类型: `Function`
+
+通过 load 方法可以重载弹幕源，或者切换新弹幕
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    plugins: [
+        artplayerPluginDanmuku({
+            danmuku: '/assets/sample/danmuku.xml',
+        }),
+    ],
+    controls: [
+        {
+            position: 'right',
+            html: '重载弹幕',
+            click: function () {
+                art.plugins.artplayerPluginDanmuku.load();
+            },
+        },
+        {
+            position: 'right',
+            html: '切换弹幕',
+            click: function () {
+                art.plugins.artplayerPluginDanmuku.config({
+                    danmuku: '/assets/sample/danmuku-v2.xml',
+                });
+                art.plugins.artplayerPluginDanmuku.load();
+            },
+        },
+    ],
+});
+```
+
+## 事件
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    plugins: [
+        artplayerPluginDanmuku({
+            danmuku: '/assets/sample/danmuku.xml',
+        }),
+    ],
+});
+
+// 监听手动输入的弹幕，保存到数据库
+art.on('artplayerPluginDanmuku:emit', (danmu) => {
+    console.info('新增弹幕', danmu);
+});
+
+// 监听加载到的弹幕数组
+art.on('artplayerPluginDanmuku:loaded', (danmus) => {
+    console.info('加载弹幕', danmus.length);
+});
+
+// 监听加载到弹幕的错误
+art.on('artplayerPluginDanmuku:error', (error) => {
+    console.info('加载错误', error);
+});
+
+// 监听弹幕配置变化
+art.on('artplayerPluginDanmuku:config', (option) => {
+    console.info('配置变化', option);
+});
+
+// 监听弹幕停止
+art.on('artplayerPluginDanmuku:stop', () => {
+    console.info('弹幕停止');
+});
+
+// 监听弹幕开始
+art.on('artplayerPluginDanmuku:start', () => {
+    console.info('弹幕开始');
+});
+
+// 监听弹幕隐藏
+art.on('artplayerPluginDanmuku:hide', () => {
+    console.info('弹幕隐藏');
+});
+
+// 监听弹幕显示
+art.on('artplayerPluginDanmuku:show', () => {
+    console.info('弹幕显示');
+});
+
+// 监听弹幕销毁
+art.on('artplayerPluginDanmuku:destroy', () => {
+    console.info('弹幕销毁');
 });
 ```
