@@ -238,13 +238,13 @@ class Artplayer extends _emitterDefault.default {
         return instances;
     }
     static get version() {
-        return "4.4.1";
+        return "4.4.2";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "1652843574720";
+        return "1652850311707";
     }
     static get config() {
         return _configDefault.default;
@@ -1264,7 +1264,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.4.1"}</div>
+                  <div class="art-info-content">${"4.4.2"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -2670,8 +2670,9 @@ function eventInit(art) {
             notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
             art.emit('error', reconnectTime);
         } else {
+            art.mask.show = true;
             art.loading.show = false;
-            art.controls.show = false;
+            art.controls.show = true;
             _utils.addClass($player, 'art-error');
             await _utils.sleep(constructor.RECONNECT_SLEEP_TIME);
             notice.show = i18n.get('Video Load Failed');
@@ -3691,7 +3692,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.4.1"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.4.2"}</a>`
     };
 }
 exports.default = version;
@@ -4196,7 +4197,13 @@ class Mask extends _componentDefault.default {
         super(art);
         this.name = 'mask';
         const { template , icons , events  } = art;
-        _utils.append(template.$state, icons.state);
+        const $state = _utils.append(template.$state, icons.state);
+        const $error = _utils.append(template.$state, icons.error);
+        _utils.setStyle($error, 'display', 'none');
+        art.on('destroy', ()=>{
+            _utils.setStyle($state, 'display', 'none');
+            _utils.setStyle($error, 'display', null);
+        });
         events.proxy(template.$state, 'click', ()=>art.play()
         );
     }
@@ -4255,6 +4262,8 @@ var _switchOffSvg = require("bundle-text:./switch-off.svg");
 var _switchOffSvgDefault = parcelHelpers.interopDefault(_switchOffSvg);
 var _flipSvg = require("bundle-text:./flip.svg");
 var _flipSvgDefault = parcelHelpers.interopDefault(_flipSvg);
+var _errorSvg = require("bundle-text:./error.svg");
+var _errorSvgDefault = parcelHelpers.interopDefault(_errorSvg);
 class Icons {
     constructor(art){
         const icons = {
@@ -4282,6 +4291,7 @@ class Icons {
             fullscreenWebOn: _fullscreenWebOnSvgDefault.default,
             switchOn: _switchOnSvgDefault.default,
             switchOff: _switchOffSvgDefault.default,
+            error: _errorSvgDefault.default,
             ...art.option.icons
         };
         Object.keys(icons).forEach((key)=>{
@@ -4299,7 +4309,7 @@ class Icons {
 }
 exports.default = Icons;
 
-},{"../utils":"jmgNb","bundle-text:./loading.svg":"kQAWs","bundle-text:./state.svg":"fv62Y","bundle-text:./check.svg":"hpwmG","bundle-text:./play.svg":"ez3XI","bundle-text:./pause.svg":"cXb2s","bundle-text:./volume.svg":"9ziFm","bundle-text:./volume-close.svg":"gHdy5","bundle-text:./screenshot.svg":"7uQ3x","bundle-text:./setting.svg":"23jGe","bundle-text:./arrow-left.svg":"2m0J3","bundle-text:./arrow-right.svg":"d9iPY","bundle-text:./playback-rate.svg":"iFVXO","bundle-text:./aspect-ratio.svg":"4qJAN","bundle-text:./config.svg":"6iK2N","bundle-text:./pip.svg":"f0XBL","bundle-text:./lock.svg":"kCaVg","bundle-text:./unlock.svg":"lWIPo","bundle-text:./fullscreen-off.svg":"a6qSz","bundle-text:./fullscreen-on.svg":"2cUeR","bundle-text:./fullscreen-web-off.svg":"9P4Tw","bundle-text:./fullscreen-web-on.svg":"lv7bb","bundle-text:./switch-on.svg":"iaKl1","bundle-text:./switch-off.svg":"47VYR","bundle-text:./flip.svg":"kQBsA","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQAWs":[function(require,module,exports) {
+},{"../utils":"jmgNb","bundle-text:./loading.svg":"kQAWs","bundle-text:./state.svg":"fv62Y","bundle-text:./check.svg":"hpwmG","bundle-text:./play.svg":"ez3XI","bundle-text:./pause.svg":"cXb2s","bundle-text:./volume.svg":"9ziFm","bundle-text:./volume-close.svg":"gHdy5","bundle-text:./screenshot.svg":"7uQ3x","bundle-text:./setting.svg":"23jGe","bundle-text:./arrow-left.svg":"2m0J3","bundle-text:./arrow-right.svg":"d9iPY","bundle-text:./playback-rate.svg":"iFVXO","bundle-text:./aspect-ratio.svg":"4qJAN","bundle-text:./config.svg":"6iK2N","bundle-text:./pip.svg":"f0XBL","bundle-text:./lock.svg":"kCaVg","bundle-text:./unlock.svg":"lWIPo","bundle-text:./fullscreen-off.svg":"a6qSz","bundle-text:./fullscreen-on.svg":"2cUeR","bundle-text:./fullscreen-web-off.svg":"9P4Tw","bundle-text:./fullscreen-web-on.svg":"lv7bb","bundle-text:./switch-on.svg":"iaKl1","bundle-text:./switch-off.svg":"47VYR","bundle-text:./flip.svg":"kQBsA","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./error.svg":"gHC6Z"}],"kQAWs":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</svg>";
 
 },{}],"fv62Y":[function(require,module,exports) {
@@ -4370,6 +4380,9 @@ module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLI
 
 },{}],"kQBsA":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1652445277062\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"6034\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"24\" height=\"24\">\n<path d=\"M554.666667 810.666667v85.333333h-85.333334v-85.333333h85.333334zM170.666667 178.005333a42.666667 42.666667 0 0 1 34.986666 18.218667l203.904 291.328a42.666667 42.666667 0 0 1 0 48.896l-203.946666 291.328A42.666667 42.666667 0 0 1 128 803.328V220.672a42.666667 42.666667 0 0 1 42.666667-42.666667z m682.666666 0a42.666667 42.666667 0 0 1 42.368 37.717334l0.298667 4.949333v582.656a42.666667 42.666667 0 0 1-74.24 28.629333l-3.413333-4.181333-203.904-291.328a42.666667 42.666667 0 0 1-3.029334-43.861333l3.029334-5.034667 203.946666-291.328A42.666667 42.666667 0 0 1 853.333333 178.005333zM554.666667 640v85.333333h-85.333334v-85.333333h85.333334zM196.266667 319.104V716.8L335.957333 512 196.309333 319.104zM554.666667 469.333333v85.333334h-85.333334v-85.333334h85.333334z m0-170.666666v85.333333h-85.333334V298.666667h85.333334z m0-170.666667v85.333333h-85.333334V128h85.333334z\" fill=\"#ffffff\" p-id=\"6035\">\n</path>\n</svg>";
+
+},{}],"gHC6Z":[function(require,module,exports) {
+module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1652850026663\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"2749\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"50\" height=\"50\">\n<path d=\"M593.8176 168.5504l356.00384 595.21024c26.15296 43.74528 10.73152 99.7376-34.44736 125.05088-14.39744 8.06912-30.72 12.30848-47.37024 12.30848H155.97568C103.75168 901.12 61.44 860.16 61.44 809.61536c0-16.09728 4.38272-31.92832 12.71808-45.8752L430.16192 168.5504c26.17344-43.7248 84.00896-58.65472 129.20832-33.34144a93.0816 93.0816 0 0 1 34.44736 33.34144zM512 819.2a61.44 61.44 0 1 0 0-122.88 61.44 61.44 0 0 0 0 122.88z m0-512a72.31488 72.31488 0 0 0-71.76192 81.3056l25.72288 205.7216a46.40768 46.40768 0 0 0 92.07808 0l25.72288-205.74208A72.31488 72.31488 0 0 0 512 307.2z\" p-id=\"2750\">\n</path>\n</svg>";
 
 },{}],"e5Aaq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

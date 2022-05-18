@@ -68,8 +68,9 @@ export default function eventInit(art) {
             notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
             art.emit('error', reconnectTime);
         } else {
+            art.mask.show = true;
             art.loading.show = false;
-            art.controls.show = false;
+            art.controls.show = true;
             addClass($player, 'art-error');
             await sleep(constructor.RECONNECT_SLEEP_TIME);
             notice.show = i18n.get('Video Load Failed');
