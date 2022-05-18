@@ -244,7 +244,7 @@ class Artplayer extends _emitterDefault.default {
         return "development";
     }
     static get build() {
-        return "1652875410930";
+        return "1652915508724";
     }
     static get config() {
         return _configDefault.default;
@@ -2691,6 +2691,7 @@ function eventInit(art) {
     });
     art.on('video:loadstart', ()=>{
         art.loading.show = true;
+        art.controls.show = true;
     });
     art.on('video:pause', ()=>{
         art.controls.show = true;
@@ -3197,11 +3198,13 @@ function progress(options) {
                         _utils.setStyle($indicator, 'left', `calc(${percentage * 100}% - ${indicatorSize / 2}px)`);
                     }
                 }
-                for(let index = 0; index < option.highlight.length; index++){
-                    const item = option.highlight[index];
-                    const left = _utils.clamp(item.time, 0, art.duration) / art.duration * 100;
-                    _utils.append($highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`);
-                }
+                art.once('video:loadedmetadata', ()=>{
+                    for(let index = 0; index < option.highlight.length; index++){
+                        const item = option.highlight[index];
+                        const left = _utils.clamp(item.time, 0, art.duration) / art.duration * 100;
+                        _utils.append($highlight, `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`);
+                    }
+                });
                 setBar('loaded', art.loaded);
                 art.on('setBar', (type, percentage)=>{
                     setBar(type, percentage);

@@ -93,6 +93,7 @@ export default function eventInit(art) {
 
     art.on('video:loadstart', () => {
         art.loading.show = true;
+        art.controls.show = true;
     });
 
     art.on('video:pause', () => {
