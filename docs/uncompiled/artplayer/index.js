@@ -2691,8 +2691,8 @@ function eventInit(art) {
     });
     art.on('video:loadstart', ()=>{
         art.loading.show = true;
+        art.mask.show = false;
         art.controls.show = true;
-        art.mask.show = true;
     });
     art.on('video:pause', ()=>{
         art.controls.show = true;
@@ -2714,6 +2714,7 @@ function eventInit(art) {
     });
     art.on('video:seeking', ()=>{
         art.loading.show = true;
+        art.mask.show = false;
     });
     // art.on('video:stalled', () => {
     // });
@@ -2726,6 +2727,7 @@ function eventInit(art) {
     // });
     art.on('video:waiting', ()=>{
         art.loading.show = true;
+        art.mask.show = false;
     });
 }
 exports.default = eventInit;
