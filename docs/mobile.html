@@ -165,18 +165,6 @@
                 console.log('video: ' + event.type);
             });
         });
-
-        if (Artplayer.utils.isWechat) {
-            document.querySelector('.tip').textContent = '微信环境需手动触发播放';
-            let isClick = false;
-            document.body.addEventListener('click', () => {
-                if (!isClick) {
-                    isClick = true;
-                    art.play();
-                }
-            });
-        }
-
     </script>
 </body>
 
