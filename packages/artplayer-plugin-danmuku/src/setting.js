@@ -371,11 +371,9 @@ export default function setting(art, danmuku) {
         });
     }
 
-    art.once('video:loadedmetadata', () => {
-        addEmitter();
-        addControl();
-        addSetting();
-    });
+    addEmitter();
+    addControl();
+    addSetting();
 }
 
 if (typeof document !== 'undefined') {

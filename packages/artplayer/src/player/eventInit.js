@@ -82,7 +82,7 @@ export default function eventInit(art) {
 
     // });
 
-    art.once('video:loadedmetadata', () => {
+    art.on('video:loadedmetadata', () => {
         art.autoSize = option.autoSize;
         if (isMobile) {
             art.loading.show = false;

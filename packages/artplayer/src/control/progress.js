@@ -102,7 +102,7 @@ export default function progress(options) {
                     }
                 }
 
-                art.once('video:loadedmetadata', () => {
+                art.on('video:loadedmetadata', () => {
                     for (let index = 0; index < option.highlight.length; index++) {
                         const item = option.highlight[index];
                         const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
