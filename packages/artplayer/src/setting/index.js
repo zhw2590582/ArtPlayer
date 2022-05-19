@@ -169,6 +169,7 @@ export default class Setting extends Component {
         item.$icon = $icon;
 
         def(item, 'icon', {
+            configurable: true,
             get() {
                 return $icon.innerHTML;
             },
@@ -186,6 +187,7 @@ export default class Setting extends Component {
         item.$html = $html;
 
         def(item, 'html', {
+            configurable: true,
             get() {
                 return $html.innerHTML;
             },
@@ -203,6 +205,7 @@ export default class Setting extends Component {
         item.$tooltip = $tooltip;
 
         def(item, 'tooltip', {
+            configurable: true,
             get() {
                 return $tooltip.innerHTML;
             },
@@ -224,6 +227,7 @@ export default class Setting extends Component {
                 item.$switch = item.switch;
 
                 def(item, 'switch', {
+                    configurable: true,
                     get() {
                         return item.$switch;
                     },
@@ -254,6 +258,7 @@ export default class Setting extends Component {
                     item.$range = $range;
 
                     def(item, 'range', {
+                        configurable: true,
                         get() {
                             return $range.valueAsNumber;
                         },
