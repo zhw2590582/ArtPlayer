@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 移除播放器 UI 初始化的 video:loadedmetadata 事件
 - 弹幕库暴露 load 方法，用于切换弹幕源
 - 添加 error 图标，出现于视频加载错误达到上限后
+- 修复 setting 多次初始化时产生的 bug
 
 ## [4.4.1] - 2022-05-17
 
