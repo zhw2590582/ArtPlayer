@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.4.2] - 2022-05-20
+
 ### Added
 - 移除播放器 UI 初始化的 video:loadedmetadata 事件
 - 弹幕库暴露 load 方法，用于切换弹幕源
