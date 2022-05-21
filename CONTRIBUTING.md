@@ -2,8 +2,14 @@ This project uses `parcel` as a development and packaging tool, so there are few
 
 ## 1. Install dependencies
 
-```base
-npm install && npm run bootstrap
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn
 ```
 
 ## 2. Develop the project and open the demo page
@@ -12,8 +18,18 @@ npm install && npm run bootstrap
 npm run dev
 ```
 
+or
+
+```bash
+yarn dev
+```
+
 ## 3. Package the project
 
-```base
+```bash
 npm run build
+```
+
+```bash
+yarn build
 ```
