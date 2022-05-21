@@ -11,7 +11,8 @@
     "test:create": "node ./scripts/createTests.js",
     "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
     "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
-    "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'"
+    "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
+    "postinstall": "npm run bootstrap"
   },
   "repository": {
     "type": "git",
