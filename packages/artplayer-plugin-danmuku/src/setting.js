@@ -170,6 +170,12 @@ export default function setting(art, danmuku) {
 
         onResize();
         art.on('resize', onResize);
+
+        art.on('destroy', () => {
+            if (option.mount) {
+                option.mount.removeChild($emitter);
+            }
+        });
     }
 
     function addControl() {
