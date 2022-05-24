@@ -172,7 +172,7 @@ export default function setting(art, danmuku) {
         art.on('resize', onResize);
 
         art.on('destroy', () => {
-            if (option.mount) {
+            if (option.mount && $emitter.parentElement === option.mount) {
                 option.mount.removeChild($emitter);
             }
         });
