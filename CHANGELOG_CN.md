@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [4.4.3] - 2022-05-26
 - 修复弹幕库销毁时，自定义挂载输入框的残留
+- 修复迷你模式的尺寸计算错误
 
 ## [4.4.2] - 2022-05-20
 

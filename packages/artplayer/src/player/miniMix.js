@@ -70,9 +70,8 @@ export default function miniMix(art) {
                         art.mini = true;
                     }
                 } else {
-                    const $body = document.body;
-                    const top = $body.clientHeight - art.height - 50;
-                    const left = $body.clientWidth - art.width - 50;
+                    const top = window.innerHeight - art.height - 50;
+                    const left = window.innerWidth - art.width - 50;
                     storage.set('top', top);
                     storage.set('left', left);
                     setStyle($player, 'top', `${top}px`);
