@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
 ## [4.4.3] - 2022-05-26
+
+### Added
 - 修复弹幕库销毁时，自定义挂载输入框的残留
 - 修复迷你模式的尺寸计算错误
 
