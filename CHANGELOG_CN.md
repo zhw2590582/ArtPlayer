@@ -7,6 +7,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+## [4.4.5] - 2022-65-2
+
+### Added
+- 修复迷你模式时，主题色缺失的bug
+
 ## [4.4.3] - 2022-05-26
 
 ### Added

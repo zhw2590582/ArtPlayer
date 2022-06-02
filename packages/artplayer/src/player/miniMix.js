@@ -9,7 +9,6 @@ export default function miniMix(art) {
         template: { $player, $miniClose, $miniTitle, $miniHeader },
     } = art;
 
-    let cacheStyle = '';
     let isDroging = false;
     let lastPageX = 0;
     let lastPageY = 0;
@@ -57,7 +56,6 @@ export default function miniMix(art) {
             if (value) {
                 art.normalSize = 'mini';
                 art.autoSize = false;
-                cacheStyle = $player.style.cssText;
                 addClass($player, 'art-mini');
                 const top = storage.get('top');
                 const left = storage.get('left');
@@ -82,7 +80,6 @@ export default function miniMix(art) {
                 art.notice.show = '';
                 art.emit('mini', true);
             } else {
-                $player.style.cssText = cacheStyle;
                 removeClass($player, 'art-mini');
                 setStyle($player, 'top', null);
                 setStyle($player, 'left', null);
