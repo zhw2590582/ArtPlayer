@@ -172,9 +172,9 @@ type Component = {
     add(option: ComponentOption): HTMLElement;
 };
 
-type PluginFunction = (art: Artplayer) => any;
-type WhitelistFunction = (ua: string) => Boolean;
+type PluginFunction = (art: Artplayer) => any | ((option: any) => (art: Artplayer) => any);
 type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
+type WhitelistFunction = (ua: string) => Boolean;
 type EventCallback = (event: Event) => any;
 
 type SubtitleOption = {
@@ -375,7 +375,7 @@ type Option = {
     /**
      * Custom plugin list
      */
-    plugins?: PluginFunction[] | (() => any);
+    plugins?: PluginFunction[];
 
     /**
      * Custom mobile whitelist
