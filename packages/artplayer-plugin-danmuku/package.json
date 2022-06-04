@@ -1,7 +1,8 @@
 {
   "license": "MIT",
-  "version": "4.4.3",
+  "version": "4.4.6",
   "name": "artplayer-plugin-danmuku",
+  "types": "types/artplayer-plugin-danmuku.d.ts",
   "description": "Danmuku plugin for ArtPlayer",
   "main": "dist/artplayer-plugin-danmuku.js",
   "author": "Harvey Zack <laozhaochaguan@gmail.com>",
@@ -18,8 +19,5 @@
     "html5",
     "video",
     "player"
-  ],
-  "dependencies": {
-    "vue": "^3.2.33"
-  }
+  ]
 }

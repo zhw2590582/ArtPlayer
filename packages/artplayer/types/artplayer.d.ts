@@ -375,7 +375,7 @@ type Option = {
     /**
      * Custom plugin list
      */
-    plugins?: PluginFunction[];
+    plugins?: PluginFunction[] | (() => any);
 
     /**
      * Custom mobile whitelist
@@ -731,6 +731,7 @@ declare class Artplayer extends Player {
     readonly plugins: {
         readonly id: number;
         add(plugin: PluginFunction): Artplayer['plugins'];
+        [pluginName: string]: any;
     };
 
     readonly i18n: {
