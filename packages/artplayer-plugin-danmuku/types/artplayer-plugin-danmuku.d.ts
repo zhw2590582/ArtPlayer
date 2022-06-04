@@ -42,7 +42,7 @@ type Option = {
     speed?: number;
 
     /**
-     * 弹幕上下边距，支持数字和百分比
+     * 弹幕上下边距，支持数字和高度的百分比
      */
     margin?: [number | `${number}%`, number | `${number}%`];
 
