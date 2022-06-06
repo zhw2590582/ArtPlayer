@@ -254,11 +254,11 @@ export default function setting(art, danmuku) {
                     selector: [
                         {
                             html: '极小',
-                            fontSize: '2%',
+                            fontSize: '4%',
                         },
                         {
                             html: '较小',
-                            fontSize: '4%',
+                            fontSize: '5%',
                         },
                         {
                             default: true,
@@ -267,11 +267,11 @@ export default function setting(art, danmuku) {
                         },
                         {
                             html: '较大',
-                            fontSize: '8%',
+                            fontSize: '7%',
                         },
                         {
                             html: '极大',
-                            fontSize: '10%',
+                            fontSize: '8%',
                         },
                     ],
                     onSelect: function (item) {
