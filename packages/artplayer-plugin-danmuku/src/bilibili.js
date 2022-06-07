@@ -14,26 +14,26 @@ export function getMode(key) {
 
 export function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
-    const srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
-    return srtList && srtList.length
-        ? srtList.map((item) => {
-              const [, attrStr, text] = item.match(/<d p="(.+)">(.+)<\/d>/);
-              const attr = attrStr.split(',');
-              return attr.length === 8 && text.trim()
-                  ? {
-                        text,
-                        time: Number(attr[0]),
-                        mode: getMode(Number(attr[1])),
-                        fontSize: Number(attr[2]),
-                        color: `#${Number(attr[3]).toString(16)}`,
-                        timestamp: Number(attr[4]),
-                        pool: Number(attr[5]),
-                        userID: attr[6],
-                        rowID: Number(attr[7]),
-                    }
-                  : null;
-          })
-        : [];
+    try {
+        let parsedXml = (new DOMParser()).parseFromString(xmlString, 'text/xml');
+        return Array.from(parsedXml.querySelectorAll('d')).map((d) => {
+            let attr = d.attributes.p.value.split(',');
+            return {
+                text: d.textContent,
+                time: Number(attr[0]),
+                mode: getMode(Number(attr[1])),
+                fontSize: Number(attr[2]),
+                color: `#${Number(attr[3]).toString(16)}`,
+                timestamp: Number(attr[4]),
+                pool: Number(attr[5]),
+                userID: attr[6],
+                rowID: Number(attr[7])
+            }
+        }
+        )
+    } catch (error) {
+        return [];
+    }
 }
 
 export function bilibiliDanmuParseFromUrl(url) {
