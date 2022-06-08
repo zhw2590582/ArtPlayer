@@ -14,26 +14,31 @@ export function getMode(key) {
 
 export function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
-    const srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
-    return srtList && srtList.length
-        ? srtList.map((item) => {
-              const [, attrStr, text] = item.match(/<d p="(.+)">(.+)<\/d>/);
-              const attr = attrStr.split(',');
-              return attr.length === 8 && text.trim()
-                  ? {
-                        text,
-                        time: Number(attr[0]),
-                        mode: getMode(Number(attr[1])),
-                        fontSize: Number(attr[2]),
-                        color: `#${Number(attr[3]).toString(16)}`,
-                        timestamp: Number(attr[4]),
-                        pool: Number(attr[5]),
-                        userID: attr[6],
-                        rowID: Number(attr[7]),
-                    }
-                  : null;
-          })
-        : [];
+    const matches = xmlString.matchAll(/<d (?:.*? )??p="(?<p>.+?)"(?: .*?)?>(?<text>.+?)<\/d>/gs);
+    return Array.from(matches).map(match => {
+        const attr = match.groups.p.split(',');
+        if (attr.length === 8) {
+            const text = match.groups.text.trim()
+                .replaceAll('&quot;', '\"')
+                .replaceAll('&apos;', '\'')
+                .replaceAll('&lt;', '<')
+                .replaceAll('&gt;', '>')
+                .replaceAll('&amp;', '&');
+            return {
+                text,
+                time: Number(attr[0]),
+                mode: getMode(Number(attr[1])),
+                fontSize: Number(attr[2]),
+                color: `#${Number(attr[3]).toString(16)}`,
+                timestamp: Number(attr[4]),
+                pool: Number(attr[5]),
+                userID: attr[6],
+                rowID: Number(attr[7]),
+            }
+        } else {
+            return null;
+        }
+    }).filter(d => d);
 }
 
 export function bilibiliDanmuParseFromUrl(url) {
