@@ -15,9 +15,9 @@ export function getMode(key) {
 export function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
     try {
-        let parsedXml = (new DOMParser()).parseFromString(xmlString, 'text/xml');
+        const parsedXml = new DOMParser().parseFromString(xmlString, 'text/xml');
         return Array.from(parsedXml.querySelectorAll('d')).map((d) => {
-            let attr = d.attributes.p.value.split(',');
+            const attr = d.attributes.p.value.split(',');
             return {
                 text: d.textContent,
                 time: Number(attr[0]),
@@ -27,10 +27,9 @@ export function bilibiliDanmuParseFromXml(xmlString) {
                 timestamp: Number(attr[4]),
                 pool: Number(attr[5]),
                 userID: attr[6],
-                rowID: Number(attr[7])
-            }
-        }
-        )
+                rowID: Number(attr[7]),
+            };
+        });
     } catch (error) {
         return [];
     }

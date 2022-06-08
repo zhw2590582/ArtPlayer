@@ -180,7 +180,7 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 artplayerPluginDanmuku.env = "development";
 artplayerPluginDanmuku.version = "4.4.6";
-artplayerPluginDanmuku.build = "1654498540382";
+artplayerPluginDanmuku.build = "1654653489776";
 if (typeof window !== 'undefined') window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 
 },{"./danmuku":"igPca","./setting":"8npWO","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"igPca":[function(require,module,exports) {
@@ -635,22 +635,25 @@ function getMode(key) {
 }
 function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
-    const srtList = xmlString.match(/<d([\S ]*?>[\S ]*?)<\/d>/gi);
-    return srtList && srtList.length ? srtList.map((item)=>{
-        const [, attrStr, text] = item.match(/<d p="(.+)">(.+)<\/d>/);
-        const attr = attrStr.split(',');
-        return attr.length === 8 && text.trim() ? {
-            text,
-            time: Number(attr[0]),
-            mode: getMode(Number(attr[1])),
-            fontSize: Number(attr[2]),
-            color: `#${Number(attr[3]).toString(16)}`,
-            timestamp: Number(attr[4]),
-            pool: Number(attr[5]),
-            userID: attr[6],
-            rowID: Number(attr[7])
-        } : null;
-    }) : [];
+    try {
+        const parsedXml = new DOMParser().parseFromString(xmlString, 'text/xml');
+        return Array.from(parsedXml.querySelectorAll('d')).map((d)=>{
+            const attr = d.attributes.p.value.split(',');
+            return {
+                text: d.textContent,
+                time: Number(attr[0]),
+                mode: getMode(Number(attr[1])),
+                fontSize: Number(attr[2]),
+                color: `#${Number(attr[3]).toString(16)}`,
+                timestamp: Number(attr[4]),
+                pool: Number(attr[5]),
+                userID: attr[6],
+                rowID: Number(attr[7])
+            };
+        });
+    } catch (error) {
+        return [];
+    }
 }
 function bilibiliDanmuParseFromUrl(url) {
     return fetch(url).then((res)=>res.text()
