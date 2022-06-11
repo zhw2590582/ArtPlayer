@@ -6,11 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 ### Added
+
+## [4.4.6] - 2022-6-11
+
+### Added
 - 添加弹幕库 d.ts
 - 调整字幕字体大小参数
 - 优化正则解析xml弹幕
 
-## [4.4.5] - 2022-65-2
+## [4.4.5] - 2022-6-2
 
 ### Added
 - 修复迷你模式时，主题色缺失的bug
