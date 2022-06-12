@@ -18,7 +18,7 @@ export function bilibiliDanmuParseFromXml(xmlString) {
     return Array.from(matches)
         .map((match) => {
             const attr = match.groups.p.split(',');
-            if (attr.length === 8) {
+            if (attr.length >= 8) {
                 const text = match.groups.text
                     .trim()
                     .replaceAll('&quot;', '"')
@@ -42,7 +42,7 @@ export function bilibiliDanmuParseFromXml(xmlString) {
                 return null;
             }
         })
-        .filter((d) => d);
+        .filter(Boolean);
 }
 
 export function bilibiliDanmuParseFromUrl(url) {
