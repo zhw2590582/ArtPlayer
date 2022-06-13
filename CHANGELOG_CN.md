@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
+## [4.4.7] - 2022-6-13
+
+### Added
+- 兼容弹幕库 d.ts
+- 更新依赖库
+
 ## [4.4.6] - 2022-6-11
 
 ### Added
