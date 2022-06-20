@@ -41,7 +41,5 @@ export default function attrInit(art) {
         art.theme = option.theme;
     }
 
-    if (option.ads.length === 0) {
-        art.url = option.url;
-    }
+    art.url = option.url;
 }

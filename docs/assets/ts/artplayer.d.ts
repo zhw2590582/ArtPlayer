@@ -172,9 +172,9 @@ type Component = {
     add(option: ComponentOption): HTMLElement;
 };
 
-type PluginFunction = (art: Artplayer) => any;
-type WhitelistFunction = (ua: string) => Boolean;
+type PluginFunction = (art: Artplayer) => any | ((option: any) => (art: Artplayer) => any);
 type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
+type WhitelistFunction = (ua: string) => Boolean;
 type EventCallback = (event: Event) => any;
 
 type SubtitleOption = {
@@ -197,13 +197,6 @@ type SubtitleOption = {
      * The subtitle encoding, default utf-8
      */
     encoding?: string;
-};
-
-type AdsOption = {
-    /**
-     * The ads video url
-     */
-    url: string;
 };
 
 type Option = {
@@ -381,11 +374,6 @@ type Option = {
      * Custom mobile whitelist
      */
     whitelist?: (string | WhitelistFunction | RegExp)[];
-
-    /**
-     * Custom ads list
-     */
-    ads?: AdsOption[];
 
     /**
      * Custom layer list
@@ -731,6 +719,7 @@ declare class Artplayer extends Player {
     readonly plugins: {
         readonly id: number;
         add(plugin: PluginFunction): Artplayer['plugins'];
+        [pluginName: string]: any;
     };
 
     readonly i18n: {
@@ -754,16 +743,6 @@ declare class Artplayer extends Player {
         set url(url: string);
         style(name: string | CSSStyleDeclaration, value?: string): HTMLElement;
         switch(url: string, option?: SubtitleOption): Promise<string>;
-    };
-
-    readonly ads: {
-        index: number;
-        isEnd: boolean;
-        playing: boolean;
-        current: AdsOption;
-        prev: AdsOption;
-        next: AdsOption;
-        end(): void;
     };
 
     readonly mobile: object;

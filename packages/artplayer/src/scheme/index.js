@@ -67,11 +67,6 @@ export default {
     fastForward: b,
     autoPlayback: b,
     autoOrientation: b,
-    ads: [
-        {
-            url: s,
-        },
-    ],
     plugins: [f],
     whitelist: [`${s}|${f}|${r}`],
     layers: [ComponentOption],
