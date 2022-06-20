@@ -142,20 +142,20 @@
       this[globalName] = mainExports;
     }
   }
-})({"gEVO5":[function(require,module,exports) {
+})({"3H9sA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAds(option) {
     return (art)=>{
-        const { template: { $player  } , icons: { volume , volumeClose , fullscreenOn , fullscreenOff  } , constructor: { validator , utils: { query , append , setStyle , errorHandle  } ,  } ,  } = art;
+        const { template: { $player  } , icons: { volume , volumeClose , fullscreenOn , fullscreenOff  } , constructor: { validator , utils: { query , append , setStyle  } ,  } ,  } = art;
         option = validator(option, {
-            html: "?string",
-            video: "?string",
-            url: "?string",
-            playDuration: "number",
-            totalDuration: "number"
+            html: '?string',
+            video: '?string',
+            url: '?string',
+            playDuration: 'number',
+            totalDuration: 'number'
         });
         let $ads = null;
         let $timer = null;
@@ -169,8 +169,8 @@ function artplayerPluginAds(option) {
             isEnd = true;
             art.play();
             if (option.video) $ads.pause();
-            setStyle(art.template.$ads, "display", "none");
-            art.emit("artplayerPluginAds:skip", option);
+            setStyle(art.template.$ads, 'display', 'none');
+            art.emit('artplayerPluginAds:skip', option);
         }
         function play() {
             if (isEnd) return;
@@ -179,8 +179,8 @@ function artplayerPluginAds(option) {
                 const playDuration = option.playDuration - time;
                 if (playDuration >= 1) $close.innerHTML = `${playDuration}秒后可关闭广告`;
                 else {
-                    $close.innerHTML = "\u5173\u95ED\u5E7F\u544A";
-                    art.proxy($close, "click", skip);
+                    $close.innerHTML = '关闭广告';
+                    art.proxy($close, 'click', skip);
                 }
                 $countdown.innerHTML = `${option.totalDuration - time}秒`;
                 if (time >= option.totalDuration) skip();
@@ -198,85 +198,87 @@ function artplayerPluginAds(option) {
                     <div class="artplayer-plugin-ads-close">${option.playDuration}秒后可关闭广告</div>
                     <div class="artplayer-plugin-ads-countdown">${option.totalDuration}秒</div>
                 </div>`);
-            $close = query(".artplayer-plugin-ads-close", $timer);
-            $countdown = query(".artplayer-plugin-ads-countdown", $timer);
+            $close = query('.artplayer-plugin-ads-close', $timer);
+            $countdown = query('.artplayer-plugin-ads-countdown', $timer);
             $control = append(art.template.$ads, `<div class="artplayer-plugin-ads-control">
                     <div class="artplayer-plugin-ads-detail">查看详情</div>
                     <div class="artplayer-plugin-ads-muted"></div>
                     <div class="artplayer-plugin-ads-fullscreen"></div>
                 </div>`);
-            const $detail = query(".artplayer-plugin-ads-detail", $control);
-            const $muted = query(".artplayer-plugin-ads-muted", $control);
-            const $fullscreen = query(".artplayer-plugin-ads-fullscreen", $control);
+            const $detail = query('.artplayer-plugin-ads-detail', $control);
+            const $muted = query('.artplayer-plugin-ads-muted', $control);
+            const $fullscreen = query('.artplayer-plugin-ads-fullscreen', $control);
             if (option.video) {
                 const $volume = append($muted, volume);
                 const $volumeClose = append($muted, volumeClose);
-                setStyle($volumeClose, "display", "none");
-                art.proxy($ads, "loadedmetadata", ()=>{
+                setStyle($volumeClose, 'display', 'none');
+                art.proxy($ads, 'loadedmetadata', ()=>{
                     if ($ads.muted) {
-                        setStyle($volume, "display", "none");
-                        setStyle($volumeClose, "display", "inline-flex");
+                        setStyle($volume, 'display', 'none');
+                        setStyle($volumeClose, 'display', 'inline-flex');
                     } else {
-                        setStyle($volume, "display", "inline-flex");
-                        setStyle($volumeClose, "display", "none");
+                        setStyle($volume, 'display', 'inline-flex');
+                        setStyle($volumeClose, 'display', 'none');
                     }
                 });
-                art.proxy($muted, "click", ()=>{
+                art.proxy($muted, 'click', ()=>{
                     $ads.muted = !$ads.muted;
                     if ($ads.muted) {
-                        setStyle($volume, "display", "none");
-                        setStyle($volumeClose, "display", "inline-flex");
+                        setStyle($volume, 'display', 'none');
+                        setStyle($volumeClose, 'display', 'inline-flex');
                     } else {
-                        setStyle($volume, "display", "inline-flex");
-                        setStyle($volumeClose, "display", "none");
+                        setStyle($volume, 'display', 'inline-flex');
+                        setStyle($volumeClose, 'display', 'none');
                     }
                 });
-            } else setStyle($muted, "display", "none");
+            } else setStyle($muted, 'display', 'none');
             const $fullscreenOn = append($fullscreen, fullscreenOn);
             const $fullscreenOff = append($fullscreen, fullscreenOff);
-            setStyle($fullscreenOff, "display", "none");
-            art.proxy($fullscreen, "click", ()=>{
+            setStyle($fullscreenOff, 'display', 'none');
+            art.proxy($fullscreen, 'click', ()=>{
                 art.fullscreen = !art.fullscreen;
                 if (art.fullscreen) {
-                    setStyle($fullscreenOn, "display", "inline-flex");
-                    setStyle($fullscreenOff, "display", "none");
+                    setStyle($fullscreenOn, 'display', 'inline-flex');
+                    setStyle($fullscreenOff, 'display', 'none');
                 } else {
-                    setStyle($fullscreenOn, "display", "none");
-                    setStyle($fullscreenOff, "display", "inline-flex");
+                    setStyle($fullscreenOn, 'display', 'none');
+                    setStyle($fullscreenOff, 'display', 'inline-flex');
                 }
             });
-            art.proxy($ads, "click", ()=>{
+            art.proxy($ads, 'click', ()=>{
                 if (option.url) window.open(option.url);
-                art.emit("artplayerPluginAds:click", option);
+                art.emit('artplayerPluginAds:click', option);
             });
-            art.proxy($detail, "click", ()=>{
+            art.proxy($detail, 'click', ()=>{
                 if (option.url) window.open(option.url);
-                art.emit("artplayerPluginAds:click", option);
+                art.emit('artplayerPluginAds:click', option);
             });
         }
-        art.on("ready", ()=>{
-            art.once("play", ()=>{
+        art.on('ready', ()=>{
+            art.once('play', ()=>{
                 init();
                 art.pause();
                 if (option.video) {
-                    art.proxy($ads, "error", skip);
-                    art.proxy($ads, "loadedmetadata", ()=>{
+                    art.loading.show = true;
+                    art.proxy($ads, 'error', skip);
+                    art.proxy($ads, 'loadedmetadata', ()=>{
                         play();
                         $ads.play();
-                        setStyle($timer, "display", "flex");
+                        art.loading.show = false;
+                        setStyle($timer, 'display', 'flex');
                     });
                 } else {
                     play();
-                    setStyle($timer, "display", "flex");
+                    setStyle($timer, 'display', 'flex');
                 }
             });
-            art.proxy(document, "visibilitychange", ()=>{
+            art.proxy(document, 'visibilitychange', ()=>{
                 if (document.hidden) pause();
                 else play();
             });
         });
         return {
-            name: "artplayerPluginAds",
+            name: 'artplayerPluginAds',
             skip,
             pause,
             play
@@ -286,31 +288,34 @@ function artplayerPluginAds(option) {
 exports.default = artplayerPluginAds;
 artplayerPluginAds.env = "development";
 artplayerPluginAds.version = "4.4.8";
-artplayerPluginAds.build = "1655692550967";
-if (typeof document !== "undefined") {
-    if (!document.getElementById("artplayer-plugin-ads")) {
-        const $style = document.createElement("style");
-        $style.id = "artplayer-plugin-ads";
-        $style.textContent = (0, _styleLessDefault.default);
+artplayerPluginAds.build = "1655733759532";
+if (typeof document !== 'undefined') {
+    if (!document.getElementById('artplayer-plugin-ads')) {
+        const $style = document.createElement('style');
+        $style.id = 'artplayer-plugin-ads';
+        $style.textContent = _styleLessDefault.default;
         document.head.appendChild($style);
     }
 }
-if (typeof window !== "undefined") window["artplayerPluginAds"] = artplayerPluginAds;
+if (typeof window !== 'undefined') window['artplayerPluginAds'] = artplayerPluginAds;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","bundle-text:./style.less":"1ZB0H"}],"8MjWm":[function(require,module,exports) {
+},{"bundle-text:./style.less":"juGHU","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"juGHU":[function(require,module,exports) {
+module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  font-size: 13px;\n  line-height: 1;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  display: none;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control {\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg {\n  width: 20px;\n  height: 20px;\n}\n\n";
+
+},{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
+    Object.defineProperty(a, '__esModule', {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -327,9 +332,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"1ZB0H":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  font-size: 13px;\n  line-height: 1;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  display: none;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control {\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg {\n  width: 20px;\n  height: 20px;\n}\n\n";
-
-},{}]},["gEVO5"], "gEVO5", "parcelRequirea5da")
+},{}]},["3H9sA"], "3H9sA", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map

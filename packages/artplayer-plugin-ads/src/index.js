@@ -7,7 +7,7 @@ export default function artplayerPluginAds(option) {
             icons: { volume, volumeClose, fullscreenOn, fullscreenOff },
             constructor: {
                 validator,
-                utils: { query, append, setStyle, errorHandle },
+                utils: { query, append, setStyle },
             },
         } = art;
 
@@ -160,10 +160,12 @@ export default function artplayerPluginAds(option) {
                 init();
                 art.pause();
                 if (option.video) {
+                    art.loading.show = true;
                     art.proxy($ads, 'error', skip);
                     art.proxy($ads, 'loadedmetadata', () => {
                         play();
                         $ads.play();
+                        art.loading.show = false;
                         setStyle($timer, 'display', 'flex');
                     });
                 } else {
