@@ -150,13 +150,35 @@ var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAds(option) {
     return (art)=>{
         const { constructor: { utils: { append  } ,  } , template: { $player  } ,  } = art;
-        const $ads = append($player, '<div class="artplayer-plugin-ads"></div>');
-        append($ads, option.video ? `<video src="${option.video}" controls="false"></video>` : option.html);
+        function skip() {
+        //
+        }
+        function toggleFullscreen() {
+        //
+        }
+        function toggleMuted() {
+        //
+        }
+        function show() {
+            art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
+            const html = option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" controls="false"></video>` : option.html;
+            const $ads = append(art.template.$ads, html);
+            art.proxy($ads, "click", ()=>{
+                if (option.url) window.open(option.url);
+                art.emit("artplayerPluginAds:click", option);
+            });
+            return $ads;
+        }
+        art.on("ready", ()=>{
+            art.once("play", ()=>{
+                art.pause();
+                const $ads = show();
+                const isVideo = $ads instanceof HTMLVideoElement;
+            });
+        });
         return {
             name: "artplayerPluginAds",
-            skip () {
-            //
-            }
+            skip
         };
     };
 }
@@ -205,7 +227,7 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"1ZB0H":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n";
+module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n";
 
 },{}]},["gEVO5"], "gEVO5", "parcelRequirea5da")
 
