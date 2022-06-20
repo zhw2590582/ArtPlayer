@@ -6,28 +6,22 @@ var art = new Artplayer({
     fullscreenWeb: true,
     plugins: [
         artplayerPluginAds({
-            // html广告，假如存在视频广告则忽略该值
-            html: '123456',
+            // html广告，假如是视频广告则忽略该值
+            html: '<img src="/assets/sample/layer.png">',
 
             // 视频广告
-            video: '',
+            // video: '/assets/sample/test1.mp4',
 
             // 广告跳转网址，为空则不跳转
             url: 'http://artplayer.org',
 
             // 必须观看的时长，期间不能被跳过
-            playDuration: 0,
+            playDuration: 5,
 
             // 广告总时长，假如是视频广告则自动获取
-            totalDuration: 0,
+            totalDuration: 10,
 
-            // 是否允许广告全屏
-            fullscreen: true,
-
-            // 是否允许视频广告静音
-            muted: true,
-
-            // 多语言支持
+            // 多语言
             i18n: {
                 //
             },

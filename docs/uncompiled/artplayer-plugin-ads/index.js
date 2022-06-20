@@ -149,20 +149,36 @@ var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAds(option) {
     return (art)=>{
-        const { constructor: { utils: { append  } ,  } , template: { $player  } ,  } = art;
+        const { template: { $player  } , constructor: { utils: { append , setStyle  } ,  } ,  } = art;
+        let isEnd = false;
+        let $ads = null;
+        let $timer = null;
+        let time = 0;
+        let timer = null;
         function skip() {
-        //
+            isEnd = true;
+            art.play();
+            if (option.video) $ads.pause();
+            setStyle(art.template.$ads, "display", "none");
+            art.emit("artplayerPluginAds:skip", option);
         }
-        function toggleFullscreen() {
-        //
+        function play() {
+            if (isEnd) return;
+            timer = setTimeout(()=>{
+                time += 1;
+                $timer.innerHTML = time;
+                if (time >= option.totalDuration) skip();
+                else play();
+            }, 1000);
         }
-        function toggleMuted() {
-        //
+        function pause() {
+            if (isEnd) return;
+            clearTimeout(timer);
         }
         function show() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
-            const html = option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" controls="false"></video>` : option.html;
-            const $ads = append(art.template.$ads, html);
+            $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}"></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
+            $timer = append(art.template.$ads, '<div class="artplayer-plugin-ads-timer"></div>');
             art.proxy($ads, "click", ()=>{
                 if (option.url) window.open(option.url);
                 art.emit("artplayerPluginAds:click", option);
@@ -171,14 +187,24 @@ function artplayerPluginAds(option) {
         }
         art.on("ready", ()=>{
             art.once("play", ()=>{
+                show();
                 art.pause();
-                const $ads = show();
-                const isVideo = $ads instanceof HTMLVideoElement;
+                if (option.video) {
+                    art.proxy($ads, "ended", skip);
+                    art.proxy($ads, "error", skip);
+                    art.proxy($ads, "loadedmetadata", ()=>{
+                        play();
+                        $ads.play();
+                        if ($ads.duration && $ads.duration !== Infinity) option.totalDuration = $ads.duration;
+                    });
+                } else play();
             });
         });
         return {
             name: "artplayerPluginAds",
-            skip
+            skip,
+            pause,
+            play
         };
     };
 }
@@ -227,7 +253,7 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"1ZB0H":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n";
+module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n}\n\n";
 
 },{}]},["gEVO5"], "gEVO5", "parcelRequirea5da")
 
