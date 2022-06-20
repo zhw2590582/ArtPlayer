@@ -6,9 +6,18 @@ export default function artplayerPluginAds(option) {
             template: { $player },
             icons: { volume, volumeClose, fullscreenOn, fullscreenOff },
             constructor: {
+                validator,
                 utils: { query, append, setStyle },
             },
         } = art;
+
+        option = validator(option, {
+            html: '?string',
+            video: '?string',
+            url: '?string',
+            playDuration: '?number',
+            totalDuration: '?number',
+        });
 
         let $ads = null;
         let $timer = null;

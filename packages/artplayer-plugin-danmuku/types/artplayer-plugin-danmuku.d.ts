@@ -122,33 +122,33 @@ type Option = {
     beforeEmit?: (danmu: Danmu) => boolean;
 };
 
-type danmuku = {
+type Danmuku = {
     name: 'artplayerPluginDanmuku';
 
     /**
      * 发送一条实时弹幕
      */
-    emit: (danmu: Danmu) => danmuku;
+    emit: (danmu: Danmu) => Danmuku;
 
     /**
      * 重载弹幕源，或者切换新弹幕
      */
-    load: () => Promise<danmuku>;
+    load: () => Promise<Danmuku>;
 
     /**
      * 实时改变弹幕配置
      */
-    config: (option: Option) => danmuku;
+    config: (option: Option) => Danmuku;
 
     /**
      * 隐藏弹幕层
      */
-    hide: () => danmuku;
+    hide: () => Danmuku;
 
     /**
      * 显示弹幕层
      */
-    show: () => danmuku;
+    show: () => Danmuku;
 
     /**
      * 是否隐藏弹幕层
@@ -161,4 +161,4 @@ type danmuku = {
     isStop: boolean;
 };
 
-declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => danmuku;
+declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Danmuku;

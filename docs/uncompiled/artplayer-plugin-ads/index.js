@@ -149,7 +149,14 @@ var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAds(option) {
     return (art)=>{
-        const { template: { $player  } , icons: { volume , volumeClose , fullscreenOn , fullscreenOff  } , constructor: { utils: { query , append , setStyle  } ,  } ,  } = art;
+        const { template: { $player  } , icons: { volume , volumeClose , fullscreenOn , fullscreenOff  } , constructor: { validator , utils: { query , append , setStyle  } ,  } ,  } = art;
+        option = validator(option, {
+            html: "?string",
+            video: "?string",
+            url: "?string",
+            playDuration: "?number",
+            totalDuration: "?number"
+        });
         let $ads = null;
         let $timer = null;
         let $close = null;
