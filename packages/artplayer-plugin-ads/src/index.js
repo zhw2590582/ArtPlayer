@@ -7,7 +7,7 @@ export default function artplayerPluginAds(option) {
             icons: { volume, volumeClose, fullscreenOn, fullscreenOff },
             constructor: {
                 validator,
-                utils: { query, append, setStyle },
+                utils: { query, append, setStyle, errorHandle },
             },
         } = art;
 
@@ -15,8 +15,8 @@ export default function artplayerPluginAds(option) {
             html: '?string',
             video: '?string',
             url: '?string',
-            playDuration: '?number',
-            totalDuration: '?number',
+            playDuration: 'number',
+            totalDuration: 'number',
         });
 
         let $ads = null;
