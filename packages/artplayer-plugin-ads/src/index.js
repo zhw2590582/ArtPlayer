@@ -4,6 +4,7 @@ export default function artplayerPluginAds(option) {
     return (art) => {
         const {
             template: { $player },
+            icons: { volume, volumeClose, fullscreenOn, fullscreenOff },
             constructor: {
                 utils: { query, append, setStyle },
             },
@@ -13,6 +14,7 @@ export default function artplayerPluginAds(option) {
         let $timer = null;
         let $close = null;
         let $countdown = null;
+        let $control = null;
 
         let time = 0;
         let timer = null;
@@ -28,7 +30,6 @@ export default function artplayerPluginAds(option) {
 
         function play() {
             if (isEnd) return;
-            setStyle($timer, 'display', 'flex');
 
             timer = setTimeout(() => {
                 time += 1;
@@ -56,7 +57,7 @@ export default function artplayerPluginAds(option) {
             clearTimeout(timer);
         }
 
-        function show() {
+        function init() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
 
             $ads = append(
@@ -77,25 +78,94 @@ export default function artplayerPluginAds(option) {
             $close = query('.artplayer-plugin-ads-close', $timer);
             $countdown = query('.artplayer-plugin-ads-countdown', $timer);
 
+            $control = append(
+                art.template.$ads,
+                `<div class="artplayer-plugin-ads-control">
+                    <div class="artplayer-plugin-ads-detail">查看详情</div>
+                    <div class="artplayer-plugin-ads-muted"></div>
+                    <div class="artplayer-plugin-ads-fullscreen"></div>
+                </div>`,
+            );
+
+            const $detail = query('.artplayer-plugin-ads-detail', $control);
+            const $muted = query('.artplayer-plugin-ads-muted', $control);
+            const $fullscreen = query('.artplayer-plugin-ads-fullscreen', $control);
+
+            if (option.video) {
+                const $volume = append($muted, volume);
+                const $volumeClose = append($muted, volumeClose);
+                setStyle($volumeClose, 'display', 'none');
+
+                art.proxy($ads, 'loadedmetadata', () => {
+                    if ($ads.muted) {
+                        setStyle($volume, 'display', 'none');
+                        setStyle($volumeClose, 'display', 'inline-flex');
+                    } else {
+                        setStyle($volume, 'display', 'inline-flex');
+                        setStyle($volumeClose, 'display', 'none');
+                    }
+                });
+
+                art.proxy($muted, 'click', () => {
+                    $ads.muted = !$ads.muted;
+                    if ($ads.muted) {
+                        setStyle($volume, 'display', 'none');
+                        setStyle($volumeClose, 'display', 'inline-flex');
+                    } else {
+                        setStyle($volume, 'display', 'inline-flex');
+                        setStyle($volumeClose, 'display', 'none');
+                    }
+                });
+            } else {
+                setStyle($muted, 'display', 'none');
+            }
+
+            const $fullscreenOn = append($fullscreen, fullscreenOn);
+            const $fullscreenOff = append($fullscreen, fullscreenOff);
+            setStyle($fullscreenOff, 'display', 'none');
+
+            art.proxy($fullscreen, 'click', () => {
+                art.fullscreen = !art.fullscreen;
+                if (art.fullscreen) {
+                    setStyle($fullscreenOn, 'display', 'inline-flex');
+                    setStyle($fullscreenOff, 'display', 'none');
+                } else {
+                    setStyle($fullscreenOn, 'display', 'none');
+                    setStyle($fullscreenOff, 'display', 'inline-flex');
+                }
+            });
+
             art.proxy($ads, 'click', () => {
                 if (option.url) window.open(option.url);
                 art.emit('artplayerPluginAds:click', option);
             });
 
-            return $ads;
+            art.proxy($detail, 'click', () => {
+                if (option.url) window.open(option.url);
+                art.emit('artplayerPluginAds:click', option);
+            });
         }
 
         art.on('ready', () => {
             art.once('play', () => {
-                show();
+                init();
                 art.pause();
                 if (option.video) {
-                    art.proxy($ads, 'ended', skip);
                     art.proxy($ads, 'error', skip);
                     art.proxy($ads, 'loadedmetadata', () => {
                         play();
                         $ads.play();
+                        setStyle($timer, 'display', 'flex');
                     });
+                } else {
+                    play();
+                    setStyle($timer, 'display', 'flex');
+                }
+            });
+
+            art.proxy(document, 'visibilitychange', () => {
+                if (document.hidden) {
+                    pause();
                 } else {
                     play();
                 }
