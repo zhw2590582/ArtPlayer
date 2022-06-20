@@ -7,10 +7,10 @@ var art = new Artplayer({
     plugins: [
         artplayerPluginAds({
             // html广告，假如是视频广告则忽略该值
-            html: '<img src="/assets/sample/layer.png">',
+            html: '<img src="/assets/sample/poster.jpg">',
 
             // 视频广告
-            // video: '/assets/sample/test1.mp4',
+            video: '/assets/sample/test1.mp4',
 
             // 广告跳转网址，为空则不跳转
             url: 'http://artplayer.org',
@@ -18,7 +18,7 @@ var art = new Artplayer({
             // 必须观看的时长，期间不能被跳过
             playDuration: 5,
 
-            // 广告总时长，假如是视频广告则自动获取
+            // 广告总时长
             totalDuration: 10,
 
             // 多语言

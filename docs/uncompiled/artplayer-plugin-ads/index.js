@@ -149,12 +149,14 @@ var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAds(option) {
     return (art)=>{
-        const { template: { $player  } , constructor: { utils: { append , setStyle  } ,  } ,  } = art;
-        let isEnd = false;
+        const { template: { $player  } , constructor: { utils: { query , append , setStyle  } ,  } ,  } = art;
         let $ads = null;
         let $timer = null;
+        let $close = null;
+        let $countdown = null;
         let time = 0;
         let timer = null;
+        let isEnd = false;
         function skip() {
             isEnd = true;
             art.play();
@@ -164,9 +166,16 @@ function artplayerPluginAds(option) {
         }
         function play() {
             if (isEnd) return;
+            setStyle($timer, "display", "flex");
             timer = setTimeout(()=>{
                 time += 1;
-                $timer.innerHTML = time;
+                const playDuration = option.playDuration - time;
+                if (playDuration >= 1) $close.innerHTML = `${playDuration}秒后可关闭广告`;
+                else {
+                    $close.innerHTML = "\u5173\u95ED\u5E7F\u544A";
+                    art.proxy($close, "click", skip);
+                }
+                $countdown.innerHTML = `${option.totalDuration - time}秒`;
                 if (time >= option.totalDuration) skip();
                 else play();
             }, 1000);
@@ -178,7 +187,12 @@ function artplayerPluginAds(option) {
         function show() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
             $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}"></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
-            $timer = append(art.template.$ads, '<div class="artplayer-plugin-ads-timer"></div>');
+            $timer = append(art.template.$ads, `<div class="artplayer-plugin-ads-timer">
+                    <div class="artplayer-plugin-ads-close">${option.playDuration}秒后可关闭广告</div>
+                    <div class="artplayer-plugin-ads-countdown">${option.totalDuration}秒</div>
+                </div>`);
+            $close = query(".artplayer-plugin-ads-close", $timer);
+            $countdown = query(".artplayer-plugin-ads-countdown", $timer);
             art.proxy($ads, "click", ()=>{
                 if (option.url) window.open(option.url);
                 art.emit("artplayerPluginAds:click", option);
@@ -195,7 +209,6 @@ function artplayerPluginAds(option) {
                     art.proxy($ads, "loadedmetadata", ()=>{
                         play();
                         $ads.play();
-                        if ($ads.duration && $ads.duration !== Infinity) option.totalDuration = $ads.duration;
                     });
                 } else play();
             });
@@ -253,7 +266,7 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"1ZB0H":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n}\n\n";
+module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  font-size: 14px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer .artplayer-plugin-ads-close {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  margin-right: 5px;\n  padding: 5px 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer .artplayer-plugin-ads-countdown {\n  background-color: #000000bf;\n  border-radius: 15px;\n  padding: 5px 10px;\n}\n\n";
 
 },{}]},["gEVO5"], "gEVO5", "parcelRequirea5da")
 

@@ -5,16 +5,18 @@ export default function artplayerPluginAds(option) {
         const {
             template: { $player },
             constructor: {
-                utils: { append, setStyle },
+                utils: { query, append, setStyle },
             },
         } = art;
 
-        let isEnd = false;
         let $ads = null;
         let $timer = null;
+        let $close = null;
+        let $countdown = null;
 
         let time = 0;
         let timer = null;
+        let isEnd = false;
 
         function skip() {
             isEnd = true;
@@ -26,9 +28,21 @@ export default function artplayerPluginAds(option) {
 
         function play() {
             if (isEnd) return;
+            setStyle($timer, 'display', 'flex');
+
             timer = setTimeout(() => {
                 time += 1;
-                $timer.innerHTML = time;
+
+                const playDuration = option.playDuration - time;
+                if (playDuration >= 1) {
+                    $close.innerHTML = `${playDuration}秒后可关闭广告`;
+                } else {
+                    $close.innerHTML = '关闭广告';
+                    art.proxy($close, 'click', skip);
+                }
+
+                $countdown.innerHTML = `${option.totalDuration - time}秒`;
+
                 if (time >= option.totalDuration) {
                     skip();
                 } else {
@@ -52,7 +66,16 @@ export default function artplayerPluginAds(option) {
                     : `<div class="artplayer-plugin-ads-html">${option.html}</div>`,
             );
 
-            $timer = append(art.template.$ads, '<div class="artplayer-plugin-ads-timer"></div>');
+            $timer = append(
+                art.template.$ads,
+                `<div class="artplayer-plugin-ads-timer">
+                    <div class="artplayer-plugin-ads-close">${option.playDuration}秒后可关闭广告</div>
+                    <div class="artplayer-plugin-ads-countdown">${option.totalDuration}秒</div>
+                </div>`,
+            );
+
+            $close = query('.artplayer-plugin-ads-close', $timer);
+            $countdown = query('.artplayer-plugin-ads-countdown', $timer);
 
             art.proxy($ads, 'click', () => {
                 if (option.url) window.open(option.url);
@@ -72,9 +95,6 @@ export default function artplayerPluginAds(option) {
                     art.proxy($ads, 'loadedmetadata', () => {
                         play();
                         $ads.play();
-                        if ($ads.duration && $ads.duration !== Infinity) {
-                            option.totalDuration = $ads.duration;
-                        }
                     });
                 } else {
                     play();
