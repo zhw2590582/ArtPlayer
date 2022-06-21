@@ -186,15 +186,23 @@ export default function artplayerPluginAds(option) {
         }
 
         art.on('ready', () => {
+            console.log(0);
             art.once('play', () => {
+                console.log(1);
                 init();
+                console.log(2);
                 art.pause();
+                console.log(3);
 
                 if (option.video) {
+                    console.log(4);
                     art.proxy($ads, 'error', skip);
                     art.proxy($ads, 'loadedmetadata', () => {
+                        console.log(5);
                         play();
+                        console.log(6);
                         $ads.play();
+                        console.log(7);
                         setStyle($timer, 'display', 'flex');
                         setStyle($control, 'display', 'flex');
                         setStyle($loading, 'display', 'none');
