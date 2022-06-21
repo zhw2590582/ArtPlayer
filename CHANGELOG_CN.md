@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - 移除内置广告功能
+- 新增广告插件
 
 ## [4.4.7] - 2022-6-13
 
