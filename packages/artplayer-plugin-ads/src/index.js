@@ -4,7 +4,7 @@ export default function artplayerPluginAds(option) {
     return (art) => {
         const {
             template: { $player },
-            icons: { volume, volumeClose, fullscreenOn, fullscreenOff },
+            icons: { volume, volumeClose, fullscreenOn, fullscreenOff, loading },
             constructor: {
                 validator,
                 utils: { query, append, setStyle },
@@ -46,6 +46,7 @@ export default function artplayerPluginAds(option) {
         let $close = null;
         let $countdown = null;
         let $control = null;
+        let $loading = null;
 
         let time = 0;
         let timer = null;
@@ -101,6 +102,9 @@ export default function artplayerPluginAds(option) {
                     ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop></video>`
                     : `<div class="artplayer-plugin-ads-html">${option.html}</div>`,
             );
+
+            $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
+            append($loading, loading);
 
             $timer = append(
                 art.template.$ads,
@@ -181,27 +185,30 @@ export default function artplayerPluginAds(option) {
             art.once('play', () => {
                 init();
                 art.pause();
+
                 if (option.video) {
-                    art.loading.show = true;
                     art.proxy($ads, 'error', skip);
                     art.proxy($ads, 'loadedmetadata', () => {
                         play();
                         $ads.play();
-                        art.loading.show = false;
                         setStyle($timer, 'display', 'flex');
+                        setStyle($control, 'display', 'flex');
+                        setStyle($loading, 'display', 'none');
                     });
                 } else {
                     play();
                     setStyle($timer, 'display', 'flex');
+                    setStyle($control, 'display', 'flex');
+                    setStyle($loading, 'display', 'none');
                 }
-            });
 
-            art.proxy(document, 'visibilitychange', () => {
-                if (document.hidden) {
-                    pause();
-                } else {
-                    play();
-                }
+                art.proxy(document, 'visibilitychange', () => {
+                    if (document.hidden) {
+                        pause();
+                    } else {
+                        play();
+                    }
+                });
             });
         });
 

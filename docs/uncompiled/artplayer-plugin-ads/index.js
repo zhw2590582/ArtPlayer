@@ -149,7 +149,7 @@ var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginAds(option) {
     return (art)=>{
-        const { template: { $player  } , icons: { volume , volumeClose , fullscreenOn , fullscreenOff  } , constructor: { validator , utils: { query , append , setStyle  } ,  } ,  } = art;
+        const { template: { $player  } , icons: { volume , volumeClose , fullscreenOn , fullscreenOff , loading  } , constructor: { validator , utils: { query , append , setStyle  } ,  } ,  } = art;
         option = validator({
             html: "",
             video: "",
@@ -181,6 +181,7 @@ function artplayerPluginAds(option) {
         let $close = null;
         let $countdown = null;
         let $control = null;
+        let $loading = null;
         let time = 0;
         let timer = null;
         let isEnd = false;
@@ -216,6 +217,8 @@ function artplayerPluginAds(option) {
         function init() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
             $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
+            $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
+            append($loading, loading);
             $timer = append(art.template.$ads, `<div class="artplayer-plugin-ads-timer">
                     <div class="artplayer-plugin-ads-close">${getI18n(option.playDuration, option.i18n.canBeClosed)}</div>
                     <div class="artplayer-plugin-ads-countdown">${getI18n(option.totalDuration, option.i18n.countdown)}</div>
@@ -272,22 +275,24 @@ function artplayerPluginAds(option) {
                 init();
                 art.pause();
                 if (option.video) {
-                    art.loading.show = true;
                     art.proxy($ads, "error", skip);
                     art.proxy($ads, "loadedmetadata", ()=>{
                         play();
                         $ads.play();
-                        art.loading.show = false;
                         setStyle($timer, "display", "flex");
+                        setStyle($control, "display", "flex");
+                        setStyle($loading, "display", "none");
                     });
                 } else {
                     play();
                     setStyle($timer, "display", "flex");
+                    setStyle($control, "display", "flex");
+                    setStyle($loading, "display", "none");
                 }
-            });
-            art.proxy(document, "visibilitychange", ()=>{
-                if (document.hidden) pause();
-                else play();
+                art.proxy(document, "visibilitychange", ()=>{
+                    if (document.hidden) pause();
+                    else play();
+                });
             });
         });
         return {
@@ -300,8 +305,8 @@ function artplayerPluginAds(option) {
 }
 exports.default = artplayerPluginAds;
 artplayerPluginAds.env = "development";
-artplayerPluginAds.version = "4.4.8";
-artplayerPluginAds.build = "1655692550967";
+artplayerPluginAds.version = "1.0.0";
+artplayerPluginAds.build = "1655777748933";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-ads")) {
         const $style = document.createElement("style");
@@ -312,7 +317,10 @@ if (typeof document !== "undefined") {
 }
 if (typeof window !== "undefined") window["artplayerPluginAds"] = artplayerPluginAds;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","bundle-text:./style.less":"1ZB0H"}],"8MjWm":[function(require,module,exports) {
+},{"bundle-text:./style.less":"1ZB0H","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"1ZB0H":[function(require,module,exports) {
+module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  font-size: 13px;\n  line-height: 1;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  display: none;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control {\n  display: none;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg {\n  width: 20px;\n  height: 20px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-loading {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n";
+
+},{}],"8MjWm":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -341,9 +349,6 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
-
-},{}],"1ZB0H":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-ads {\n  z-index: 150;\n  width: 100%;\n  height: 100%;\n  color: #fff;\n  background-color: #000;\n  font-size: 13px;\n  line-height: 1;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-html {\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-video {\n  width: 100%;\n  height: 100%;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer {\n  display: none;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-timer > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control {\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control > div {\n  cursor: pointer;\n  background-color: #000000bf;\n  border-radius: 15px;\n  align-items: center;\n  margin-left: 5px;\n  padding: 5px 10px;\n  display: flex;\n}\n\n.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg {\n  width: 20px;\n  height: 20px;\n}\n\n";
 
 },{}]},["gEVO5"], "gEVO5", "parcelRequirea5da")
 
