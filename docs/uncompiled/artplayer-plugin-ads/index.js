@@ -216,7 +216,7 @@ function artplayerPluginAds(option) {
         }
         function init() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
-            $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
+            $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop playsInline></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
             $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
             append($loading, loading);
             $timer = append(art.template.$ads, `<div class="artplayer-plugin-ads-timer">
@@ -233,6 +233,11 @@ function artplayerPluginAds(option) {
             const $detail = query(".artplayer-plugin-ads-detail", $control);
             const $muted = query(".artplayer-plugin-ads-muted", $control);
             const $fullscreen = query(".artplayer-plugin-ads-fullscreen", $control);
+            if (option.url) art.proxy($detail, "click", ()=>{
+                window.open(option.url);
+                art.emit("artplayerPluginAds:click", option);
+            });
+            else setStyle($detail, "display", "none");
             if (option.video) {
                 const $volume = append($muted, volume);
                 const $volumeClose = append($muted, volumeClose);
@@ -262,10 +267,6 @@ function artplayerPluginAds(option) {
                 }
             });
             art.proxy($ads, "click", ()=>{
-                if (option.url) window.open(option.url);
-                art.emit("artplayerPluginAds:click", option);
-            });
-            art.proxy($detail, "click", ()=>{
                 if (option.url) window.open(option.url);
                 art.emit("artplayerPluginAds:click", option);
             });
@@ -306,7 +307,7 @@ function artplayerPluginAds(option) {
 exports.default = artplayerPluginAds;
 artplayerPluginAds.env = "development";
 artplayerPluginAds.version = "1.0.0";
-artplayerPluginAds.build = "1655777748933";
+artplayerPluginAds.build = "1655790320716";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-ads")) {
         const $style = document.createElement("style");

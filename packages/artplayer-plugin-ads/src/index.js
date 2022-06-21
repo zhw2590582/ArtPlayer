@@ -99,7 +99,7 @@ export default function artplayerPluginAds(option) {
             $ads = append(
                 art.template.$ads,
                 option.video
-                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop></video>`
+                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop playsInline></video>`
                     : `<div class="artplayer-plugin-ads-html">${option.html}</div>`,
             );
 
@@ -136,6 +136,15 @@ export default function artplayerPluginAds(option) {
             const $muted = query('.artplayer-plugin-ads-muted', $control);
             const $fullscreen = query('.artplayer-plugin-ads-fullscreen', $control);
 
+            if (option.url) {
+                art.proxy($detail, 'click', () => {
+                    window.open(option.url);
+                    art.emit('artplayerPluginAds:click', option);
+                });
+            } else {
+                setStyle($detail, 'display', 'none');
+            }
+
             if (option.video) {
                 const $volume = append($muted, volume);
                 const $volumeClose = append($muted, volumeClose);
@@ -171,11 +180,6 @@ export default function artplayerPluginAds(option) {
             });
 
             art.proxy($ads, 'click', () => {
-                if (option.url) window.open(option.url);
-                art.emit('artplayerPluginAds:click', option);
-            });
-
-            art.proxy($detail, 'click', () => {
                 if (option.url) window.open(option.url);
                 art.emit('artplayerPluginAds:click', option);
             });
