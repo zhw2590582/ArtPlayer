@@ -1292,6 +1292,59 @@ describe("Document", function () {
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
       autoSize: true,
+      fullscreen: true,
+      fullscreenWeb: true,
+      plugins: [
+        artplayerPluginAds({
+          // html广告，假如是视频广告则忽略该值
+
+          html: '<img src="./assets/sample/poster.jpg">',
+
+          // 视频广告的地址
+
+          video: "./assets/sample/test1.mp4",
+
+          // 广告跳转网址，为空则不跳转
+
+          url: "http://artplayer.org",
+
+          // 必须观看的时长，期间不能被跳过，单位为秒
+
+          playDuration: 5,
+
+          // 广告总时长，单位为秒
+
+          totalDuration: 10,
+
+          // 多语言支持
+
+          i18n: {
+            close: "关闭广告",
+
+            countdown: "%s秒",
+
+            detail: "查看详情",
+
+            canBeClosed: "%s秒后可关闭广告",
+          },
+        }),
+      ],
+    });
+    art.on("artplayerPluginAds:click", (ads) => {
+      console.info("广告被点击", ads);
+    });
+    art.on("artplayerPluginAds:skip", (ads) => {
+      console.info("广告被跳过", ads);
+    });
+
+    testAll(art, done);
+  });
+
+  it("Test79", function (done) {
+    var art = new Artplayer({
+      container: ".artplayer-app",
+      url: "./assets/sample/video.mp4",
+      autoSize: true,
       setting: true,
       playbackRate: true,
       fullscreenWeb: true,
@@ -1379,7 +1432,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test79", function (done) {
+  it("Test80", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1395,7 +1448,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test80", function (done) {
+  it("Test81", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1433,7 +1486,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test81", function (done) {
+  it("Test82", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1468,7 +1521,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test82", function (done) {
+  it("Test83", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1501,7 +1554,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test83", function (done) {
+  it("Test84", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1538,7 +1591,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test84", function (done) {
+  it("Test85", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1575,7 +1628,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test85", function (done) {
+  it("Test86", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1614,7 +1667,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test86", function (done) {
+  it("Test87", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1656,7 +1709,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test87", function (done) {
+  it("Test88", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1669,7 +1722,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test88", function (done) {
+  it("Test89", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1685,7 +1738,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test89", function (done) {
+  it("Test90", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1701,7 +1754,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test90", function (done) {
+  it("Test91", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1713,7 +1766,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test91", function (done) {
+  it("Test92", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1725,7 +1778,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test92", function (done) {
+  it("Test93", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1740,7 +1793,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test93", function (done) {
+  it("Test94", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1754,7 +1807,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test94", function (done) {
+  it("Test95", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1768,7 +1821,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test95", function (done) {
+  it("Test96", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1783,7 +1836,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test96", function (done) {
+  it("Test97", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1798,7 +1851,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test97", function (done) {
+  it("Test98", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1812,7 +1865,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test98", function (done) {
+  it("Test99", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1826,7 +1879,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test99", function (done) {
+  it("Test100", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1838,7 +1891,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test100", function (done) {
+  it("Test101", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1853,7 +1906,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test101", function (done) {
+  it("Test102", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1866,7 +1919,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test102", function (done) {
+  it("Test103", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1879,7 +1932,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test103", function (done) {
+  it("Test104", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1895,7 +1948,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test104", function (done) {
+  it("Test105", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1911,7 +1964,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test105", function (done) {
+  it("Test106", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1927,7 +1980,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test106", function (done) {
+  it("Test107", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1942,7 +1995,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test107", function (done) {
+  it("Test108", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1954,7 +2007,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test108", function (done) {
+  it("Test109", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1969,7 +2022,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test109", function (done) {
+  it("Test110", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1983,7 +2036,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test110", function (done) {
+  it("Test111", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -1995,7 +2048,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test111", function (done) {
+  it("Test112", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2009,7 +2062,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test112", function (done) {
+  it("Test113", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2023,7 +2076,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test113", function (done) {
+  it("Test114", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2037,7 +2090,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test114", function (done) {
+  it("Test115", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2051,7 +2104,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test115", function (done) {
+  it("Test116", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2065,7 +2118,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test116", function (done) {
+  it("Test117", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2079,7 +2132,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test117", function (done) {
+  it("Test118", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2093,7 +2146,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test118", function (done) {
+  it("Test119", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2107,7 +2160,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test119", function (done) {
+  it("Test120", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2119,7 +2172,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test120", function (done) {
+  it("Test121", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2159,7 +2212,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test121", function (done) {
+  it("Test122", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2208,7 +2261,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test122", function (done) {
+  it("Test123", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2330,7 +2383,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test123", function (done) {
+  it("Test124", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2414,7 +2467,7 @@ describe("Document", function () {
     testAll(art, done);
   });
 
-  it("Test124", function (done) {
+  it("Test125", function (done) {
     var art = new Artplayer({
       container: ".artplayer-app",
       url: "./assets/sample/video.mp4",
@@ -2487,77 +2540,6 @@ describe("Document", function () {
           },
         },
       ],
-    });
-
-    testAll(art, done);
-  });
-
-  it("Test125", function (done) {
-    var art = new Artplayer({
-      container: ".artplayer-app",
-      url: "https://artplayer.org./assets/sample/video.mp4",
-      muted: true,
-      autoSize: true,
-      autoplay: true,
-      ads: [
-        {
-          url: "./assets/sample/test1.mp4",
-        },
-
-        {
-          url: "./assets/sample/test2.webm",
-        },
-      ],
-      controls: [
-        {
-          position: "right",
-
-          html: "跳过广告",
-
-          click: function () {
-            art.ads.end();
-          },
-        },
-      ],
-      layers: [
-        {
-          html: "跳过广告",
-
-          style: {
-            position: "absolute",
-
-            top: "20px",
-
-            right: "20px",
-          },
-
-          click: function () {
-            art.ads.end();
-          },
-        },
-      ],
-    });
-    art.on("ready", function () {
-      // 当每个视频广告播放时触发
-      art.on("ads:start", function (item) {
-        console.info("广告开始播放: " + item.url);
-      });
-      // 当全部视频广告播放完成
-      art.on("ads:end", function () {
-        console.info("广告已经结束");
-      });
-      // 当前广告的下标
-      console.info(art.ads.index);
-      // 广告是否已经结束
-      console.info(art.ads.isEnd);
-      // 广告是否正在播放
-      console.info(art.ads.playing);
-      // 上一个广告的对象
-      console.info(art.ads.prev);
-      // 当前广告的对象
-      console.info(art.ads.current);
-      // 下一个广告的对象
-      console.info(art.ads.next);
     });
 
     testAll(art, done);
