@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.5.0] - 2022-6-21
+
 ### Added
 - 移除内置广告功能
 - 新增广告插件
