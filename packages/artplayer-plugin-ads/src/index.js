@@ -51,6 +51,7 @@ export default function artplayerPluginAds(option) {
         let time = 0;
         let timer = null;
         let isEnd = false;
+        let isInit = false;
 
         function getI18n(val, str) {
             return str.replace('%s', val);
@@ -93,7 +94,7 @@ export default function artplayerPluginAds(option) {
             clearTimeout(timer);
         }
 
-        function init() {
+        function show() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
 
             $ads = append(
@@ -185,43 +186,41 @@ export default function artplayerPluginAds(option) {
             });
         }
 
-        art.on('ready', () => {
-            console.log(0);
-            art.once('play', () => {
-                console.log(1);
-                init();
-                console.log(2);
-                art.pause();
-                console.log(3);
+        function init() {
+            if (isInit) return;
+            isInit = true;
 
-                if (option.video) {
-                    console.log(4);
-                    art.proxy($ads, 'error', skip);
-                    art.proxy($ads, 'loadedmetadata', () => {
-                        console.log(5);
-                        play();
-                        console.log(6);
-                        $ads.play();
-                        console.log(7);
-                        setStyle($timer, 'display', 'flex');
-                        setStyle($control, 'display', 'flex');
-                        setStyle($loading, 'display', 'none');
-                    });
-                } else {
+            show();
+            art.pause();
+
+            if (option.video) {
+                art.proxy($ads, 'error', skip);
+                art.proxy($ads, 'loadedmetadata', () => {
                     play();
+                    $ads.play();
                     setStyle($timer, 'display', 'flex');
                     setStyle($control, 'display', 'flex');
                     setStyle($loading, 'display', 'none');
-                }
-
-                art.proxy(document, 'visibilitychange', () => {
-                    if (document.hidden) {
-                        pause();
-                    } else {
-                        play();
-                    }
                 });
+            } else {
+                play();
+                setStyle($timer, 'display', 'flex');
+                setStyle($control, 'display', 'flex');
+                setStyle($loading, 'display', 'none');
+            }
+
+            art.proxy(document, 'visibilitychange', () => {
+                if (document.hidden) {
+                    pause();
+                } else {
+                    play();
+                }
             });
+        }
+
+        art.on('ready', () => {
+            art.once('play', init);
+            art.once('video:playing', init);
         });
 
         return {
