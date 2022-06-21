@@ -11,13 +11,35 @@ export default function artplayerPluginAds(option) {
             },
         } = art;
 
-        option = validator(option, {
-            html: '?string',
-            video: '?string',
-            url: '?string',
-            playDuration: 'number',
-            totalDuration: 'number',
-        });
+        option = validator(
+            {
+                html: '',
+                video: '',
+                url: '',
+                playDuration: 5,
+                totalDuration: 10,
+                i18n: {
+                    close: '关闭广告',
+                    countdown: '%s秒',
+                    detail: '查看详情',
+                    canBeClosed: '%s秒后可关闭广告',
+                },
+                ...option,
+            },
+            {
+                html: '?string',
+                video: '?string',
+                url: '?string',
+                playDuration: 'number',
+                totalDuration: 'number',
+                i18n: {
+                    close: 'string',
+                    countdown: 'string',
+                    detail: 'string',
+                    canBeClosed: 'string',
+                },
+            },
+        );
 
         let $ads = null;
         let $timer = null;
@@ -28,6 +50,10 @@ export default function artplayerPluginAds(option) {
         let time = 0;
         let timer = null;
         let isEnd = false;
+
+        function getI18n(val, str) {
+            return str.replace('%s', val);
+        }
 
         function skip() {
             isEnd = true;
@@ -45,13 +71,13 @@ export default function artplayerPluginAds(option) {
 
                 const playDuration = option.playDuration - time;
                 if (playDuration >= 1) {
-                    $close.innerHTML = `${playDuration}秒后可关闭广告`;
+                    $close.innerHTML = getI18n(playDuration, option.i18n.canBeClosed);
                 } else {
-                    $close.innerHTML = '关闭广告';
+                    $close.innerHTML = option.i18n.close;
                     art.proxy($close, 'click', skip);
                 }
 
-                $countdown.innerHTML = `${option.totalDuration - time}秒`;
+                $countdown.innerHTML = getI18n(option.totalDuration - time, option.i18n.countdown);
 
                 if (time >= option.totalDuration) {
                     skip();
@@ -72,15 +98,21 @@ export default function artplayerPluginAds(option) {
             $ads = append(
                 art.template.$ads,
                 option.video
-                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}"></video>`
+                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop></video>`
                     : `<div class="artplayer-plugin-ads-html">${option.html}</div>`,
             );
 
             $timer = append(
                 art.template.$ads,
                 `<div class="artplayer-plugin-ads-timer">
-                    <div class="artplayer-plugin-ads-close">${option.playDuration}秒后可关闭广告</div>
-                    <div class="artplayer-plugin-ads-countdown">${option.totalDuration}秒</div>
+                    <div class="artplayer-plugin-ads-close">${getI18n(
+                        option.playDuration,
+                        option.i18n.canBeClosed,
+                    )}</div>
+                    <div class="artplayer-plugin-ads-countdown">${getI18n(
+                        option.totalDuration,
+                        option.i18n.countdown,
+                    )}</div>
                 </div>`,
             );
 
@@ -90,7 +122,7 @@ export default function artplayerPluginAds(option) {
             $control = append(
                 art.template.$ads,
                 `<div class="artplayer-plugin-ads-control">
-                    <div class="artplayer-plugin-ads-detail">查看详情</div>
+                    <div class="artplayer-plugin-ads-detail">${option.i18n.detail}</div>
                     <div class="artplayer-plugin-ads-muted"></div>
                     <div class="artplayer-plugin-ads-fullscreen"></div>
                 </div>`,
@@ -104,16 +136,6 @@ export default function artplayerPluginAds(option) {
                 const $volume = append($muted, volume);
                 const $volumeClose = append($muted, volumeClose);
                 setStyle($volumeClose, 'display', 'none');
-
-                art.proxy($ads, 'loadedmetadata', () => {
-                    if ($ads.muted) {
-                        setStyle($volume, 'display', 'none');
-                        setStyle($volumeClose, 'display', 'inline-flex');
-                    } else {
-                        setStyle($volume, 'display', 'inline-flex');
-                        setStyle($volumeClose, 'display', 'none');
-                    }
-                });
 
                 art.proxy($muted, 'click', () => {
                     $ads.muted = !$ads.muted;

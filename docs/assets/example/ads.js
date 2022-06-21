@@ -21,9 +21,12 @@ var art = new Artplayer({
             // 广告总时长，单位为秒
             totalDuration: 10,
 
-            // 多语言
+            // 多语言支持
             i18n: {
-                //
+                close: '关闭广告',
+                countdown: '%s秒',
+                detail: '查看详情',
+                canBeClosed: '%s秒后可关闭广告',
             },
         }),
     ],
