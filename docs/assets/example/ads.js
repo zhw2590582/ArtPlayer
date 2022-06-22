@@ -16,6 +16,7 @@ var art = new Artplayer({
             url: 'http://artplayer.org',
 
             // 必须观看的时长，期间不能被跳过，单位为秒
+            // 当该值大于或等于totalDuration时，不能提前关闭广告
             playDuration: 5,
 
             // 广告总时长，单位为秒

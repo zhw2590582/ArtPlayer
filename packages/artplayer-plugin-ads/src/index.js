@@ -124,6 +124,10 @@ export default function artplayerPluginAds(option) {
             $close = query('.artplayer-plugin-ads-close', $timer);
             $countdown = query('.artplayer-plugin-ads-countdown', $timer);
 
+            if (option.playDuration >= option.totalDuration) {
+                setStyle($close, 'display', 'none');
+            }
+
             $control = append(
                 art.template.$ads,
                 `<div class="artplayer-plugin-ads-control">

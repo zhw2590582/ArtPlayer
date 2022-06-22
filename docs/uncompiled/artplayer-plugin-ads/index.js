@@ -226,6 +226,7 @@ function artplayerPluginAds(option) {
                 </div>`);
             $close = query(".artplayer-plugin-ads-close", $timer);
             $countdown = query(".artplayer-plugin-ads-countdown", $timer);
+            if (option.playDuration >= option.totalDuration) setStyle($close, "display", "none");
             $control = append(art.template.$ads, `<div class="artplayer-plugin-ads-control">
                     <div class="artplayer-plugin-ads-detail">${option.i18n.detail}</div>
                     <div class="artplayer-plugin-ads-muted"></div>
@@ -311,8 +312,8 @@ function artplayerPluginAds(option) {
 }
 exports.default = artplayerPluginAds;
 artplayerPluginAds.env = "development";
-artplayerPluginAds.version = "1.0.0";
-artplayerPluginAds.build = "1655790320716";
+artplayerPluginAds.version = "1.0.3";
+artplayerPluginAds.build = "1655860694742";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-ads")) {
         const $style = document.createElement("style");
