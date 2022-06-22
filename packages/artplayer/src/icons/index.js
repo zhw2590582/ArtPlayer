@@ -24,6 +24,7 @@ import switchOn from 'bundle-text:./switch-on.svg';
 import switchOff from 'bundle-text:./switch-off.svg';
 import flip from 'bundle-text:./flip.svg';
 import error from 'bundle-text:./error.svg';
+import close from 'bundle-text:./close.svg';
 
 export default class Icons {
     constructor(art) {
@@ -53,6 +54,7 @@ export default class Icons {
             switchOn,
             switchOff,
             error,
+            close,
             ...art.option.icons,
         };
 

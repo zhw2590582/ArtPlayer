@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- 优化自动回放功能，让用户自行选择
+
 ## [4.5.0] - 2022-6-21
 
 ### Added

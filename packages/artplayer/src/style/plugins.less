@@ -23,6 +23,41 @@
         background-color: rgba(0, 0, 0, 0.5);
     }
 
+    .art-layer-autoPlayback {
+        display: none;
+        align-items: center;
+        position: absolute;
+        left: 20px;
+        bottom: 60px;
+        border-radius: 3px;
+        padding: 10px;
+        font-size: 13px;
+        line-height: 1;
+        background-color: rgb(0 0 0 / 80%);
+
+        .art-autoPlayback-close {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            cursor: pointer;
+
+            svg {
+                width: 15px;
+                height: 15px;
+                fill: #00c9ff;
+            }
+        }
+
+        .art-autoPlayback-last {
+            margin-right: 10px;
+        }
+
+        .art-autoPlayback-jump {
+            color: #00c9ff;
+            cursor: pointer;
+        }
+    }
+
     &.art-lock {
         .art-bottom {
             display: none !important;
