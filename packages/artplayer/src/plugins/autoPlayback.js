@@ -54,8 +54,10 @@ export default function autoPlayback(art) {
                 setStyle($autoPlayback, 'display', 'none');
             });
 
-            art.on('video:timeupdate', () => {
-                setStyle($autoPlayback, 'display', 'none');
+            art.once('video:timeupdate', () => {
+                setTimeout(() => {
+                    setStyle($autoPlayback, 'display', 'none');
+                }, constructor.AUTO_PLAYBACK_TIMEOUT);
             });
         }
     });

@@ -234,13 +234,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "4.5.1";
+        return "4.5.2";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "1655879612208";
+        return "1655888143078";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -354,6 +354,7 @@ Artplayer.RESIZE_TIME = 500;
 Artplayer.SCROLL_TIME = 200;
 Artplayer.SCROLL_GAP = 50;
 Artplayer.AUTO_PLAYBACK_MAX = 10;
+Artplayer.AUTO_PLAYBACK_TIMEOUT = 3000;
 Artplayer.RECONNECT_TIME_MAX = 5;
 Artplayer.RECONNECT_SLEEP_TIME = 1000;
 Artplayer.CONTROL_HIDE_TIME = 3000;
@@ -1203,7 +1204,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.5.1"}</div>
+                  <div class="art-info-content">${"4.5.2"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3606,7 +3607,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.1"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.2"}</a>`
     };
 }
 exports.default = version;
@@ -4965,8 +4966,10 @@ function autoPlayback(art) {
                 (0, _utils.setStyle)($poster, "display", "none");
                 (0, _utils.setStyle)($autoPlayback, "display", "none");
             });
-            art.on("video:timeupdate", ()=>{
-                (0, _utils.setStyle)($autoPlayback, "display", "none");
+            art.once("video:timeupdate", ()=>{
+                setTimeout(()=>{
+                    (0, _utils.setStyle)($autoPlayback, "display", "none");
+                }, constructor.AUTO_PLAYBACK_TIMEOUT);
             });
         }
     });
