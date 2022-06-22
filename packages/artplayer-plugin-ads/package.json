@@ -1,6 +1,6 @@
 {
   "license": "MIT",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "artplayer-plugin-ads",
   "types": "types/artplayer-plugin-ads.d.ts",
   "description": "Ads plugin for ArtPlayer",

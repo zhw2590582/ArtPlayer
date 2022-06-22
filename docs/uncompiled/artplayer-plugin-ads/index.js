@@ -186,6 +186,7 @@ function artplayerPluginAds(option) {
         let timer = null;
         let isEnd = false;
         let isInit = false;
+        let isCanClose = false;
         function getI18n(val, str) {
             return str.replace("%s", val);
         }
@@ -204,7 +205,7 @@ function artplayerPluginAds(option) {
                 if (playDuration >= 1) $close.innerHTML = getI18n(playDuration, option.i18n.canBeClosed);
                 else {
                     $close.innerHTML = option.i18n.close;
-                    art.proxy($close, "click", skip);
+                    if (!isCanClose) isCanClose = true;
                 }
                 $countdown.innerHTML = getI18n(option.totalDuration - time, option.i18n.countdown);
                 if (time >= option.totalDuration) skip();
@@ -221,12 +222,15 @@ function artplayerPluginAds(option) {
             $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
             append($loading, loading);
             $timer = append(art.template.$ads, `<div class="artplayer-plugin-ads-timer">
-                    <div class="artplayer-plugin-ads-close">${getI18n(option.playDuration, option.i18n.canBeClosed)}</div>
+                    <div class="artplayer-plugin-ads-close">${option.playDuration <= 0 ? option.i18n.close : getI18n(option.playDuration, option.i18n.canBeClosed)}</div>
                     <div class="artplayer-plugin-ads-countdown">${getI18n(option.totalDuration, option.i18n.countdown)}</div>
                 </div>`);
             $close = query(".artplayer-plugin-ads-close", $timer);
             $countdown = query(".artplayer-plugin-ads-countdown", $timer);
             if (option.playDuration >= option.totalDuration) setStyle($close, "display", "none");
+            art.proxy($close, "click", ()=>{
+                if (isCanClose) skip();
+            });
             $control = append(art.template.$ads, `<div class="artplayer-plugin-ads-control">
                     <div class="artplayer-plugin-ads-detail">${option.i18n.detail}</div>
                     <div class="artplayer-plugin-ads-muted"></div>
@@ -313,7 +317,7 @@ function artplayerPluginAds(option) {
 exports.default = artplayerPluginAds;
 artplayerPluginAds.env = "development";
 artplayerPluginAds.version = "1.0.3";
-artplayerPluginAds.build = "1655860694742";
+artplayerPluginAds.build = "1655862769558";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-ads")) {
         const $style = document.createElement("style");

@@ -52,6 +52,7 @@ export default function artplayerPluginAds(option) {
         let timer = null;
         let isEnd = false;
         let isInit = false;
+        let isCanClose = false;
 
         function getI18n(val, str) {
             return str.replace('%s', val);
@@ -76,7 +77,9 @@ export default function artplayerPluginAds(option) {
                     $close.innerHTML = getI18n(playDuration, option.i18n.canBeClosed);
                 } else {
                     $close.innerHTML = option.i18n.close;
-                    art.proxy($close, 'click', skip);
+                    if (!isCanClose) {
+                        isCanClose = true;
+                    }
                 }
 
                 $countdown.innerHTML = getI18n(option.totalDuration - time, option.i18n.countdown);
@@ -110,10 +113,11 @@ export default function artplayerPluginAds(option) {
             $timer = append(
                 art.template.$ads,
                 `<div class="artplayer-plugin-ads-timer">
-                    <div class="artplayer-plugin-ads-close">${getI18n(
-                        option.playDuration,
-                        option.i18n.canBeClosed,
-                    )}</div>
+                    <div class="artplayer-plugin-ads-close">${
+                        option.playDuration <= 0
+                            ? option.i18n.close
+                            : getI18n(option.playDuration, option.i18n.canBeClosed)
+                    }</div>
                     <div class="artplayer-plugin-ads-countdown">${getI18n(
                         option.totalDuration,
                         option.i18n.countdown,
@@ -127,6 +131,12 @@ export default function artplayerPluginAds(option) {
             if (option.playDuration >= option.totalDuration) {
                 setStyle($close, 'display', 'none');
             }
+
+            art.proxy($close, 'click', () => {
+                if (isCanClose) {
+                    skip();
+                }
+            });
 
             $control = append(
                 art.template.$ads,

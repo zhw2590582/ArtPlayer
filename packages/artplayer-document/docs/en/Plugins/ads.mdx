@@ -62,6 +62,7 @@ var art = new Artplayer({
 
             // The length of time that must be watched, the period cannot be skipped, the unit is seconds
             // When the value is greater than or equal to totalDuration, the ad cannot be closed early
+            // When the value is equal to or less than 0, the ad can be turned off at any time
             playDuration: 5,
 
             // The total duration of the ad, in seconds
