@@ -10,15 +10,10 @@ export default function playMix(art) {
     } = art;
 
     def(art, 'play', {
-        value() {
-            const promise = $video.play();
-
-            if (promise && promise.then) {
-                promise.then().catch((err) => {
-                    notice.show = err;
-                    throw err;
-                });
-            }
+        value: async function () {
+            const result = await $video.play();
+            notice.show = i18n.get('Play');
+            art.emit('play');
 
             if (option.mutex) {
                 for (let index = 0; index < instances.length; index++) {
@@ -29,10 +24,7 @@ export default function playMix(art) {
                 }
             }
 
-            notice.show = i18n.get('Play');
-            art.emit('play');
-
-            return promise;
+            return result;
         },
     });
 }

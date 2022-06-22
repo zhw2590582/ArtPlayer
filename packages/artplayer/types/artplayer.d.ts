@@ -552,7 +552,7 @@ declare class Player {
     get subtitleOffset(): number;
     set subtitleOffset(time: number);
     pause(): any;
-    play(): any;
+    play(): Promise<unknown>;
     toggle(): any;
     attr(key: string, value: any): void;
     switchUrl(url: string): Promise<string>;

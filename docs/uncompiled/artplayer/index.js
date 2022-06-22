@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1655888143078";
+        return "1655889433954";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1499,19 +1499,15 @@ var _utils = require("../utils");
 function playMix(art) {
     const { i18n , notice , option , constructor: { instances  } , template: { $video  } ,  } = art;
     (0, _utils.def)(art, "play", {
-        value () {
-            const promise = $video.play();
-            if (promise && promise.then) promise.then().catch((err)=>{
-                notice.show = err;
-                throw err;
-            });
+        value: async function() {
+            const result = await $video.play();
+            notice.show = i18n.get("Play");
+            art.emit("play");
             if (option.mutex) for(let index = 0; index < instances.length; index++){
                 const instance = instances[index];
                 if (instance !== art) instance.pause();
             }
-            notice.show = i18n.get("Play");
-            art.emit("play");
-            return promise;
+            return result;
         }
     });
 }
