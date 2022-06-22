@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- art.play() 方法统一返回 Promise
+
 ## [4.5.2] - 2022-6-22
 
 ### Added
