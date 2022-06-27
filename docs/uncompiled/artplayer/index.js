@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1656294635259";
+        return "1656296990952";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1458,19 +1458,24 @@ function urlMix(art) {
             return $video.currentSrc;
         },
         async set (url) {
-            const typeName = option.type || (0, _utils.getExt)(url);
-            const typeCallback = option.customType[typeName];
-            if (typeName && typeCallback) {
+            if (url) {
+                const typeName = option.type || (0, _utils.getExt)(url);
+                const typeCallback = option.customType[typeName];
+                if (typeName && typeCallback) {
+                    await (0, _utils.sleep)();
+                    art.loading.show = true;
+                    typeCallback.call(art, $video, url, art);
+                } else {
+                    if (art.url && art.url !== url) art.once("video:canplay", ()=>{
+                        if (art.isReady) art.emit("restart");
+                    });
+                    $video.src = url;
+                    art.option.url = url;
+                    art.emit("url", url);
+                }
+            } else {
                 await (0, _utils.sleep)();
                 art.loading.show = true;
-                typeCallback.call(art, $video, url, art);
-            } else {
-                if (art.url && art.url !== url) art.once("video:canplay", ()=>{
-                    if (art.isReady) art.emit("restart");
-                });
-                $video.src = url;
-                art.option.url = url;
-                art.emit("url", url);
             }
         }
     });

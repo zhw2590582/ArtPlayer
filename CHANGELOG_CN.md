@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 ### Added
+- url 选项允许传空字符串，可用于异步设置 art.url
+
+### Added
 - art.play() 方法统一返回 Promise
 - play 事件改为异步触发
 
