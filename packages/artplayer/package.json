@@ -21,6 +21,7 @@
         "player"
     ],
     "dependencies": {
-        "option-validator": "^2.0.6"
+        "option-validator": "^2.0.6",
+        "screenfull": "^6.0.2"
     }
 }

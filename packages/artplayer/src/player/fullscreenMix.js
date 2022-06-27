@@ -1,4 +1,4 @@
-import getScreenfull from '../libs/screenfull';
+import screenfull from 'screenfull';
 import { addClass, removeClass, def, get } from '../utils';
 
 export default function fullscreenMix(art) {
@@ -7,8 +7,6 @@ export default function fullscreenMix(art) {
         notice,
         template: { $video, $player },
     } = art;
-
-    const screenfull = getScreenfull();
 
     const nativeScreenfull = (art) => {
         screenfull.on('change', () => art.emit('fullscreen', screenfull.isFullscreen));
