@@ -495,6 +495,67 @@ type Option = {
 type AspectRatio = 'default' | '4:3' | '16:9' | void;
 type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
 type Flip = 'normal' | 'horizontal' | 'vertical' | void;
+type Events =
+    | 'video:canplay'
+    | 'video:canplaythrough'
+    | 'video:complete'
+    | 'video:durationchange'
+    | 'video:emptied'
+    | 'video:ended'
+    | 'video:loadeddata'
+    | 'video:loadeddata'
+    | 'video:loadedmetadata'
+    | 'video:pause'
+    | 'video:play'
+    | 'video:playing'
+    | 'video:progress'
+    | 'video:ratechange'
+    | 'video:seeked'
+    | 'video:seeking'
+    | 'video:stalled'
+    | 'video:suspend'
+    | 'video:timeupdate'
+    | 'video:volumechange'
+    | 'video:waiting'
+    | 'hotkey'
+    | 'destroy'
+    | 'customType'
+    | 'url'
+    | 'subtitleUpdate'
+    | 'subtitleLoad'
+    | 'subtitleSwitch'
+    | 'focus'
+    | 'blur'
+    | 'dblclick'
+    | 'click'
+    | 'setBar'
+    | 'hover'
+    | 'mousemove'
+    | 'resize'
+    | 'view'
+    | 'aspectRatio'
+    | 'autoHeight'
+    | 'autoSize'
+    | 'ready'
+    | 'error'
+    | 'flip'
+    | 'fullscreen'
+    | 'fullscreenWeb'
+    | 'loop'
+    | 'mini'
+    | 'pause'
+    | 'pip'
+    | 'playbackRate'
+    | 'play'
+    | 'screenshot'
+    | 'seek'
+    | 'subtitleOffset'
+    | 'switch'
+    | 'restart'
+    | 'volume'
+    | 'lock'
+    | 'selector'
+    | string;
 
 declare class Player {
     get aspectRatio(): AspectRatio;
@@ -623,10 +684,11 @@ declare class Artplayer extends Player {
     static FAST_FORWARD_VALUE: number;
     static FAST_FORWARD_TIME: number;
 
-    on(name: string, fn: Function, ctx?: object): void;
-    once(name: string, fn: Function, ctx?: object): void;
-    emit(name: string): void;
-    off(name: string, callback?: Function): void;
+    on(name: Events, fn: Function, ctx?: object): void;
+    once(name: Events, fn: Function, ctx?: object): void;
+    emit(name: Events): void;
+    off(name: Events, callback?: Function): void;
+
     query(selector: string): HTMLElement;
     proxy(
         target: HTMLElement,

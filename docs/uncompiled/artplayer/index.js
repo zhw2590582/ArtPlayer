@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1656296990952";
+        return "1657509322912";
     }
     static get config() {
         return 0, _configDefault.default;
