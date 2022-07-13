@@ -32,5 +32,7 @@
     "Fullscreen Not Supported": "Pełny ekran nieobsługiwany",
     "Subtitle Offset": "Przesunięcie napisów",
     "Last Seen": "Ostatnio widziany",
-    "Jump Play": "Skocz do gry"
+    "Jump Play": "Skocz do gry",
+    "AirPlay": "AirPlay",
+    "AirPlay Not Available": "AirPlay nie jest dostępny"
 }

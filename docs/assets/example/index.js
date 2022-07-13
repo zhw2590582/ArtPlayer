@@ -24,6 +24,7 @@ var art = new Artplayer({
     backdrop: true,
     playsInline: true,
     autoPlayback: true,
+    airplay: true,
     theme: '#23ade5',
     lang: navigator.language.toLowerCase(),
     whitelist: ['*'],

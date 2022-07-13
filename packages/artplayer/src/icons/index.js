@@ -25,6 +25,7 @@ import switchOff from 'bundle-text:./switch-off.svg';
 import flip from 'bundle-text:./flip.svg';
 import error from 'bundle-text:./error.svg';
 import close from 'bundle-text:./close.svg';
+import airplay from 'bundle-text:./airplay.svg';
 
 export default class Icons {
     constructor(art) {
@@ -55,6 +56,7 @@ export default class Icons {
             switchOff,
             error,
             close,
+            airplay,
             ...art.option.icons,
         };
 

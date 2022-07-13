@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1657509322912";
+        return "1657694221737";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -297,6 +297,7 @@ class Artplayer extends (0, _emitterDefault.default) {
             fastForward: false,
             autoPlayback: false,
             autoOrientation: false,
+            airplay: false,
             layers: [],
             contextmenu: [],
             controls: [],
@@ -980,6 +981,7 @@ exports.default = {
     fastForward: b,
     autoPlayback: b,
     autoOrientation: b,
+    airplay: b,
     plugins: [
         f
     ],
@@ -1331,16 +1333,16 @@ class I18n {
 exports.default = I18n;
 
 },{"../utils":"euhMG","./zh-cn.json":"b9Y6f","./zh-tw.json":"9Kly9","./pl.json":"krPOm","./cs.json":"jNcs5","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"b9Y6f":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"\u7EDF\u8BA1\u4FE1\u606F","Close":"\u5173\u95ED","Video Load Failed":"\u52A0\u8F7D\u5931\u8D25","Volume":"\u97F3\u91CF","Play":"\u64AD\u653E","Pause":"\u6682\u505C","Rate":"\u901F\u5EA6","Mute":"\u9759\u97F3","Video Flip":"\u753B\u9762\u7FFB\u8F6C","Horizontal":"\u6C34\u5E73","Vertical":"\u5782\u76F4","Reconnect":"\u91CD\u65B0\u8FDE\u63A5","Show Setting":"\u663E\u793A\u8BBE\u7F6E","Hide Setting":"\u9690\u85CF\u8BBE\u7F6E","Screenshot":"\u622A\u56FE","Play Speed":"\u64AD\u653E\u901F\u5EA6","Aspect Ratio":"\u753B\u9762\u6BD4\u4F8B","Default":"\u9ED8\u8BA4","Normal":"\u6B63\u5E38","Open":"\u6253\u5F00","Switch Video":"\u5207\u6362","Switch Subtitle":"\u5207\u6362\u5B57\u5E55","Fullscreen":"\u5168\u5C4F","Exit Fullscreen":"\u9000\u51FA\u5168\u5C4F","Web Fullscreen":"\u7F51\u9875\u5168\u5C4F","Exit Web Fullscreen":"\u9000\u51FA\u7F51\u9875\u5168\u5C4F","Mini Player":"\u8FF7\u4F60\u64AD\u653E\u5668","PIP Mode":"\u5F00\u542F\u753B\u4E2D\u753B","Exit PIP Mode":"\u9000\u51FA\u753B\u4E2D\u753B","PIP Not Supported":"\u4E0D\u652F\u6301\u753B\u4E2D\u753B","Fullscreen Not Supported":"\u4E0D\u652F\u6301\u5168\u5C4F","Subtitle Offset":"\u5B57\u5E55\u504F\u79FB","Last Seen":"\u4E0A\u6B21\u770B\u5230","Jump Play":"\u8DF3\u8F6C\u64AD\u653E"}');
+module.exports = JSON.parse('{"Video Info":"\u7EDF\u8BA1\u4FE1\u606F","Close":"\u5173\u95ED","Video Load Failed":"\u52A0\u8F7D\u5931\u8D25","Volume":"\u97F3\u91CF","Play":"\u64AD\u653E","Pause":"\u6682\u505C","Rate":"\u901F\u5EA6","Mute":"\u9759\u97F3","Video Flip":"\u753B\u9762\u7FFB\u8F6C","Horizontal":"\u6C34\u5E73","Vertical":"\u5782\u76F4","Reconnect":"\u91CD\u65B0\u8FDE\u63A5","Show Setting":"\u663E\u793A\u8BBE\u7F6E","Hide Setting":"\u9690\u85CF\u8BBE\u7F6E","Screenshot":"\u622A\u56FE","Play Speed":"\u64AD\u653E\u901F\u5EA6","Aspect Ratio":"\u753B\u9762\u6BD4\u4F8B","Default":"\u9ED8\u8BA4","Normal":"\u6B63\u5E38","Open":"\u6253\u5F00","Switch Video":"\u5207\u6362","Switch Subtitle":"\u5207\u6362\u5B57\u5E55","Fullscreen":"\u5168\u5C4F","Exit Fullscreen":"\u9000\u51FA\u5168\u5C4F","Web Fullscreen":"\u7F51\u9875\u5168\u5C4F","Exit Web Fullscreen":"\u9000\u51FA\u7F51\u9875\u5168\u5C4F","Mini Player":"\u8FF7\u4F60\u64AD\u653E\u5668","PIP Mode":"\u5F00\u542F\u753B\u4E2D\u753B","Exit PIP Mode":"\u9000\u51FA\u753B\u4E2D\u753B","PIP Not Supported":"\u4E0D\u652F\u6301\u753B\u4E2D\u753B","Fullscreen Not Supported":"\u4E0D\u652F\u6301\u5168\u5C4F","Subtitle Offset":"\u5B57\u5E55\u504F\u79FB","Last Seen":"\u4E0A\u6B21\u770B\u5230","Jump Play":"\u8DF3\u8F6C\u64AD\u653E","AirPlay":"\u9694\u7A7A\u64AD\u653E","AirPlay Not Available":"\u9694\u7A7A\u64AD\u653E\u4E0D\u53EF\u7528"}');
 
 },{}],"9Kly9":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"\u7D71\u8A08\u8A0A\u606F","Close":"\u95DC\u9589","Video Load Failed":"\u8F09\u5165\u5931\u6557","Volume":"\u97F3\u91CF","Play":"\u64AD\u653E","Pause":"\u66AB\u505C","Rate":"\u901F\u5EA6","Mute":"\u975C\u97F3","Video Flip":"\u756B\u9762\u7FFB\u8F49","Horizontal":"\u6C34\u5E73","Vertical":"\u5782\u76F4","Reconnect":"\u91CD\u65B0\u9023\u63A5","Show Setting":"\u986F\u793A\u8BBE\u7F6E","Hide Setting":"\u96B1\u85CF\u8BBE\u7F6E","Screenshot":"\u622A\u5716","Play Speed":"\u64AD\u653E\u901F\u5EA6","Aspect Ratio":"\u756B\u9762\u6BD4\u4F8B","Default":"\u9ED8\u8A8D","Normal":"\u6B63\u5E38","Open":"\u6253\u958B","Switch Video":"\u5207\u63DB","Switch Subtitle":"\u5207\u63DB\u5B57\u5E55","Fullscreen":"\u5168\u5C4F","Exit Fullscreen":"\u9000\u51FA\u5168\u5C4F","Web Fullscreen":"\u7DB2\u9801\u5168\u5C4F","Exit Web Fullscreen":"\u9000\u51FA\u7DB2\u9801\u5168\u5C4F","Mini Player":"\u8FF7\u4F60\u64AD\u653E\u5668","PIP Mode":"\u958B\u555F\u756B\u4E2D\u756B","Exit PIP Mode":"\u9000\u51FA\u756B\u4E2D\u756B","PIP Not Supported":"\u4E0D\u652F\u6301\u756B\u4E2D\u756B","Fullscreen Not Supported":"\u4E0D\u652F\u6301\u5168\u5C4F","Subtitle Offset":"\u5B57\u5E55\u504F\u79FB","Last Seen":"\u4E0A\u6B21\u770B\u5230","Jump Play":"\u8DF3\u8F49\u64AD\u653E"}');
+module.exports = JSON.parse('{"Video Info":"\u7D71\u8A08\u8A0A\u606F","Close":"\u95DC\u9589","Video Load Failed":"\u8F09\u5165\u5931\u6557","Volume":"\u97F3\u91CF","Play":"\u64AD\u653E","Pause":"\u66AB\u505C","Rate":"\u901F\u5EA6","Mute":"\u975C\u97F3","Video Flip":"\u756B\u9762\u7FFB\u8F49","Horizontal":"\u6C34\u5E73","Vertical":"\u5782\u76F4","Reconnect":"\u91CD\u65B0\u9023\u63A5","Show Setting":"\u986F\u793A\u8BBE\u7F6E","Hide Setting":"\u96B1\u85CF\u8BBE\u7F6E","Screenshot":"\u622A\u5716","Play Speed":"\u64AD\u653E\u901F\u5EA6","Aspect Ratio":"\u756B\u9762\u6BD4\u4F8B","Default":"\u9ED8\u8A8D","Normal":"\u6B63\u5E38","Open":"\u6253\u958B","Switch Video":"\u5207\u63DB","Switch Subtitle":"\u5207\u63DB\u5B57\u5E55","Fullscreen":"\u5168\u5C4F","Exit Fullscreen":"\u9000\u51FA\u5168\u5C4F","Web Fullscreen":"\u7DB2\u9801\u5168\u5C4F","Exit Web Fullscreen":"\u9000\u51FA\u7DB2\u9801\u5168\u5C4F","Mini Player":"\u8FF7\u4F60\u64AD\u653E\u5668","PIP Mode":"\u958B\u555F\u756B\u4E2D\u756B","Exit PIP Mode":"\u9000\u51FA\u756B\u4E2D\u756B","PIP Not Supported":"\u4E0D\u652F\u6301\u756B\u4E2D\u756B","Fullscreen Not Supported":"\u4E0D\u652F\u6301\u5168\u5C4F","Subtitle Offset":"\u5B57\u5E55\u504F\u79FB","Last Seen":"\u4E0A\u6B21\u770B\u5230","Jump Play":"\u8DF3\u8F49\u64AD\u653E","AirPlay":"\u9694\u7A7A\u64AD\u653E","AirPlay Not Available":"\u9694\u7A7A\u64AD\u653E\u4E0D\u53EF\u7528"}');
 
 },{}],"krPOm":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Informacje o wideo","Close":"Zamknij","Video Load Failed":"B\u0142\u0105d \u0142adowania wideo","Volume":"G\u0142o\u015Bno\u015B\u0107","Play":"Odtw\xf3rz","Pause":"Wstrzymaj","Rate":"Oce\u0144","Mute":"Wycisz","Video Flip":"Rotacja wideo","Horizontal":"Pozioma","Vertical":"Pionowa","Reconnect":"Po\u0142\u0105cz ponownie","Show Setting":"Poka\u017C ustawienia","Hide Setting":"Ukryj ustawienia","Screenshot":"Zrzut ekranu","Play Speed":"Pr\u0119dko\u015B\u0107 odtwarzania","Aspect Ratio":"Wsp\xf3\u0142czynnik proporcji","Default":"Domy\u015Blny","Normal":"Normalny","Open":"Otw\xf3rz","Switch Video":"Prze\u0142\u0105cz wideo","Switch Subtitle":"Prze\u0142\u0105cz napisy","Fullscreen":"Pe\u0142ny ekran","Exit Fullscreen":"Zamknij pe\u0142ny ekran","Web Fullscreen":"Tryb pe\u0142nej strony","Exit Web Fullscreen":"Zamknij tryb pe\u0142nej strony","Mini Player":"Miniodtwarzacz","PIP Mode":"Tryb PiP","Exit PIP Mode":"Zamknij tryb PiP","PIP Not Supported":"Tryb PiP nieobs\u0142ugiwany","Fullscreen Not Supported":"Pe\u0142ny ekran nieobs\u0142ugiwany","Subtitle Offset":"Przesuni\u0119cie napis\xf3w","Last Seen":"Ostatnio widziany","Jump Play":"Skocz do gry"}');
+module.exports = JSON.parse('{"Video Info":"Informacje o wideo","Close":"Zamknij","Video Load Failed":"B\u0142\u0105d \u0142adowania wideo","Volume":"G\u0142o\u015Bno\u015B\u0107","Play":"Odtw\xf3rz","Pause":"Wstrzymaj","Rate":"Oce\u0144","Mute":"Wycisz","Video Flip":"Rotacja wideo","Horizontal":"Pozioma","Vertical":"Pionowa","Reconnect":"Po\u0142\u0105cz ponownie","Show Setting":"Poka\u017C ustawienia","Hide Setting":"Ukryj ustawienia","Screenshot":"Zrzut ekranu","Play Speed":"Pr\u0119dko\u015B\u0107 odtwarzania","Aspect Ratio":"Wsp\xf3\u0142czynnik proporcji","Default":"Domy\u015Blny","Normal":"Normalny","Open":"Otw\xf3rz","Switch Video":"Prze\u0142\u0105cz wideo","Switch Subtitle":"Prze\u0142\u0105cz napisy","Fullscreen":"Pe\u0142ny ekran","Exit Fullscreen":"Zamknij pe\u0142ny ekran","Web Fullscreen":"Tryb pe\u0142nej strony","Exit Web Fullscreen":"Zamknij tryb pe\u0142nej strony","Mini Player":"Miniodtwarzacz","PIP Mode":"Tryb PiP","Exit PIP Mode":"Zamknij tryb PiP","PIP Not Supported":"Tryb PiP nieobs\u0142ugiwany","Fullscreen Not Supported":"Pe\u0142ny ekran nieobs\u0142ugiwany","Subtitle Offset":"Przesuni\u0119cie napis\xf3w","Last Seen":"Ostatnio widziany","Jump Play":"Skocz do gry","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nie jest dost\u0119pny"}');
 
 },{}],"jNcs5":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Info o videu","Close":"Zav\u0159\xedt","Video Load Failed":"Nahr\xe1n\xed videa selhalo","Volume":"Hlasitost","Play":"P\u0159ehr\xe1t","Pause":"Pozastavit","Rate":"Hodnocen\xed","Mute":"Ztlumit","Video Flip":"Oto\u010Dit video","Horizontal":"Horizont\xe1ln\u011B","Vertical":"Vertik\xe1ln\u011B","Reconnect":"Op\u011Btovn\xe9 p\u0159ipojen\xed","Show Setting":"Zobrazit nastaven\xed","Hide Setting":"Skr\xfdt nastaven\xed","Screenshot":"Sn\xedmek obrazovky","Play Speed":"Rychlost p\u0159ehr\xe1v\xe1n\xed","Aspect Ratio":"Pom\u011Br stran","Default":"V\xfdchoz\xed","Normal":"Norm\xe1ln\xed","Open":"Otev\u0159\xedt","Switch Video":"P\u0159epnout video","Switch Subtitle":"P\u0159epnout titulky","Fullscreen":"Cel\xe1 obrazovka","Exit Fullscreen":"Opustit re\u017Eim cel\xe9 obrazovky","Web Fullscreen":"Cel\xe1 str\xe1nka","Exit Web Fullscreen":"Zav\u0159\xedt re\u017Eim cel\xe9 str\xe1nky","Mini Player":"Mini p\u0159ehr\xe1va\u010D","PIP Mode":"Re\u017Eim PIP","Exit PIP Mode":"Opustit re\u017Eim PIP","PIP Not Supported":"Re\u017Eim PIP nen\xed podporov\xe1n","Fullscreen Not Supported":"Re\u017Eim cel\xe9 obrazovky nen\xed podporov\xe1n","Subtitle Offset":"Posun titulk\u016F","Last Seen":"Naposledy vid\u011Bn","Jump Play":"Hra na skok"}');
+module.exports = JSON.parse('{"Video Info":"Info o videu","Close":"Zav\u0159\xedt","Video Load Failed":"Nahr\xe1n\xed videa selhalo","Volume":"Hlasitost","Play":"P\u0159ehr\xe1t","Pause":"Pozastavit","Rate":"Hodnocen\xed","Mute":"Ztlumit","Video Flip":"Oto\u010Dit video","Horizontal":"Horizont\xe1ln\u011B","Vertical":"Vertik\xe1ln\u011B","Reconnect":"Op\u011Btovn\xe9 p\u0159ipojen\xed","Show Setting":"Zobrazit nastaven\xed","Hide Setting":"Skr\xfdt nastaven\xed","Screenshot":"Sn\xedmek obrazovky","Play Speed":"Rychlost p\u0159ehr\xe1v\xe1n\xed","Aspect Ratio":"Pom\u011Br stran","Default":"V\xfdchoz\xed","Normal":"Norm\xe1ln\xed","Open":"Otev\u0159\xedt","Switch Video":"P\u0159epnout video","Switch Subtitle":"P\u0159epnout titulky","Fullscreen":"Cel\xe1 obrazovka","Exit Fullscreen":"Opustit re\u017Eim cel\xe9 obrazovky","Web Fullscreen":"Cel\xe1 str\xe1nka","Exit Web Fullscreen":"Zav\u0159\xedt re\u017Eim cel\xe9 str\xe1nky","Mini Player":"Mini p\u0159ehr\xe1va\u010D","PIP Mode":"Re\u017Eim PIP","Exit PIP Mode":"Opustit re\u017Eim PIP","PIP Not Supported":"Re\u017Eim PIP nen\xed podporov\xe1n","Fullscreen Not Supported":"Re\u017Eim cel\xe9 obrazovky nen\xed podporov\xe1n","Subtitle Offset":"Posun titulk\u016F","Last Seen":"Naposledy vid\u011Bn","Jump Play":"Hra na skok","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nen\xed k dispozici"}');
 
 },{}],"kmRM5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1405,6 +1407,8 @@ var _normalSizeMix = require("./normalSizeMix");
 var _normalSizeMixDefault = parcelHelpers.interopDefault(_normalSizeMix);
 var _subtitleOffsetMix = require("./subtitleOffsetMix");
 var _subtitleOffsetMixDefault = parcelHelpers.interopDefault(_subtitleOffsetMix);
+var _airplayMix = require("./airplayMix");
+var _airplayMixDefault = parcelHelpers.interopDefault(_airplayMix);
 var _optionInit = require("./optionInit");
 var _optionInitDefault = parcelHelpers.interopDefault(_optionInit);
 var _eventInit = require("./eventInit");
@@ -1441,13 +1445,14 @@ class Player {
         (0, _titleMixDefault.default)(art);
         (0, _normalSizeMixDefault.default)(art);
         (0, _subtitleOffsetMixDefault.default)(art);
+        (0, _airplayMixDefault.default)(art);
         (0, _eventInitDefault.default)(art);
         (0, _optionInitDefault.default)(art);
     }
 }
 exports.default = Player;
 
-},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./loopMix":"dvgcH","./posterMix":"lglHp","./autoHeightMix":"58Y02","./themeMix":"lga3g","./titleMix":"i382h","./normalSizeMix":"jW7b0","./subtitleOffsetMix":"4Ny6z","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"haOhz":[function(require,module,exports) {
+},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./loopMix":"dvgcH","./posterMix":"lglHp","./autoHeightMix":"58Y02","./themeMix":"lga3g","./titleMix":"i382h","./normalSizeMix":"jW7b0","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"haOhz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2523,6 +2528,34 @@ function subtitleOffsetMix(art) {
 }
 exports.default = subtitleOffsetMix;
 
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"gcYqJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function airplayMix(art) {
+    const { i18n , notice , events: { proxy  } , template: { $video  } ,  } = art;
+    let available = false;
+    if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) proxy($video, "webkitplaybacktargetavailabilitychanged", (event)=>{
+        switch(event.availability){
+            case "available":
+                available = true;
+                break;
+            case "not-available":
+                available = false;
+                break;
+        }
+    });
+    (0, _utils.def)(art, "airplay", {
+        value () {
+            if (available) {
+                $video.webkitShowPlaybackTargetPicker();
+                art.emit("airplay");
+            } else notice.show = i18n.get("AirPlay Not Available");
+        }
+    });
+}
+exports.default = airplayMix;
+
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"vGIPW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -2689,6 +2722,8 @@ var _quality = require("./quality");
 var _qualityDefault = parcelHelpers.interopDefault(_quality);
 var _loop = require("./loop");
 var _loopDefault = parcelHelpers.interopDefault(_loop);
+var _airplay = require("./airplay");
+var _airplayDefault = parcelHelpers.interopDefault(_airplay);
 class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
@@ -2777,17 +2812,23 @@ class Control extends (0, _componentDefault.default) {
             position: "right",
             index: 40
         }));
+        this.add((0, _airplayDefault.default)({
+            name: "airplay",
+            disable: !option.airplay || !window.WebKitPlaybackTargetAvailabilityEvent,
+            position: "right",
+            index: 50
+        }));
         this.add((0, _fullscreenWebDefault.default)({
             name: "fullscreenWeb",
             disable: !option.fullscreenWeb,
             position: "right",
-            index: 50
+            index: 60
         }));
         this.add((0, _fullscreenDefault.default)({
             name: "fullscreen",
             disable: !option.fullscreen,
             position: "right",
-            index: 60
+            index: 70
         }));
         for(let index = 0; index < option.controls.length; index++)this.add(option.controls[index]);
     }
@@ -2813,7 +2854,7 @@ class Control extends (0, _componentDefault.default) {
 }
 exports.default = Control;
 
-},{"../utils":"euhMG","../utils/component":"1UWqI","./fullscreen":"d7VBA","./fullscreenWeb":"iE4ux","./pip":"03ERY","./playAndPause":"2tuF0","./progress":"afGEi","./time":"e6eX5","./volume":"ezhk3","./setting":"3Vg4s","./thumbnails":"8AAYm","./screenshot":"lcqMk","./quality":"349DU","./loop":"8hCXR","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"1UWqI":[function(require,module,exports) {
+},{"../utils":"euhMG","../utils/component":"1UWqI","./fullscreen":"d7VBA","./fullscreenWeb":"iE4ux","./pip":"03ERY","./playAndPause":"2tuF0","./progress":"afGEi","./time":"e6eX5","./volume":"ezhk3","./setting":"3Vg4s","./thumbnails":"8AAYm","./screenshot":"lcqMk","./quality":"349DU","./loop":"8hCXR","./airplay":"4dMTc","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"1UWqI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
@@ -3401,6 +3442,23 @@ function loop(option) {
         });
 }
 exports.default = loop;
+
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"4dMTc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function pip(option) {
+    return (art)=>({
+            ...option,
+            tooltip: art.i18n.get("AirPlay"),
+            mounted: ($control)=>{
+                const { events: { proxy  } , icons ,  } = art;
+                (0, _utils.append)($control, icons.airplay);
+                proxy($control, "click", ()=>art.airplay());
+            }
+        });
+}
+exports.default = pip;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"iygWX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4172,6 +4230,8 @@ var _errorSvg = require("bundle-text:./error.svg");
 var _errorSvgDefault = parcelHelpers.interopDefault(_errorSvg);
 var _closeSvg = require("bundle-text:./close.svg");
 var _closeSvgDefault = parcelHelpers.interopDefault(_closeSvg);
+var _airplaySvg = require("bundle-text:./airplay.svg");
+var _airplaySvgDefault = parcelHelpers.interopDefault(_airplaySvg);
 class Icons {
     constructor(art){
         const icons = {
@@ -4201,6 +4261,7 @@ class Icons {
             switchOff: (0, _switchOffSvgDefault.default),
             error: (0, _errorSvgDefault.default),
             close: (0, _closeSvgDefault.default),
+            airplay: (0, _airplaySvgDefault.default),
             ...art.option.icons
         };
         Object.keys(icons).forEach((key)=>{
@@ -4218,7 +4279,7 @@ class Icons {
 }
 exports.default = Icons;
 
-},{"../utils":"euhMG","bundle-text:./loading.svg":"az5uz","bundle-text:./state.svg":"79igA","bundle-text:./check.svg":"8ANvd","bundle-text:./play.svg":"1rOT8","bundle-text:./pause.svg":"34ClM","bundle-text:./volume.svg":"k1lcw","bundle-text:./volume-close.svg":"lAkPF","bundle-text:./screenshot.svg":"dJavv","bundle-text:./setting.svg":"lQaIM","bundle-text:./arrow-left.svg":"3bhbH","bundle-text:./arrow-right.svg":"aq1mg","bundle-text:./playback-rate.svg":"knRE0","bundle-text:./aspect-ratio.svg":"2obxu","bundle-text:./config.svg":"8Oelc","bundle-text:./pip.svg":"l19Zs","bundle-text:./lock.svg":"5Jt44","bundle-text:./unlock.svg":"lp1YA","bundle-text:./fullscreen-off.svg":"4Ymtn","bundle-text:./fullscreen-on.svg":"03aZy","bundle-text:./fullscreen-web-off.svg":"jtnf4","bundle-text:./fullscreen-web-on.svg":"gMb2L","bundle-text:./switch-on.svg":"kS8FF","bundle-text:./switch-off.svg":"4tVW6","bundle-text:./flip.svg":"aPFz2","bundle-text:./error.svg":"fVWm4","bundle-text:./close.svg":"cSL0g","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"az5uz":[function(require,module,exports) {
+},{"../utils":"euhMG","bundle-text:./loading.svg":"az5uz","bundle-text:./state.svg":"79igA","bundle-text:./check.svg":"8ANvd","bundle-text:./play.svg":"1rOT8","bundle-text:./pause.svg":"34ClM","bundle-text:./volume.svg":"k1lcw","bundle-text:./volume-close.svg":"lAkPF","bundle-text:./screenshot.svg":"dJavv","bundle-text:./setting.svg":"lQaIM","bundle-text:./arrow-left.svg":"3bhbH","bundle-text:./arrow-right.svg":"aq1mg","bundle-text:./playback-rate.svg":"knRE0","bundle-text:./aspect-ratio.svg":"2obxu","bundle-text:./config.svg":"8Oelc","bundle-text:./pip.svg":"l19Zs","bundle-text:./lock.svg":"5Jt44","bundle-text:./unlock.svg":"lp1YA","bundle-text:./fullscreen-off.svg":"4Ymtn","bundle-text:./fullscreen-on.svg":"03aZy","bundle-text:./fullscreen-web-off.svg":"jtnf4","bundle-text:./fullscreen-web-on.svg":"gMb2L","bundle-text:./switch-on.svg":"kS8FF","bundle-text:./switch-off.svg":"4tVW6","bundle-text:./flip.svg":"aPFz2","bundle-text:./error.svg":"fVWm4","bundle-text:./close.svg":"cSL0g","bundle-text:./airplay.svg":"QV1FD","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"az5uz":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</svg>";
 
 },{}],"79igA":[function(require,module,exports) {
@@ -4295,6 +4356,9 @@ module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLI
 
 },{}],"cSL0g":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1655876154826\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"22\" height=\"22\">\n<path d=\"M571.733333 512l268.8-268.8c17.066667-17.066667 17.066667-42.666667 0-59.733333-17.066667-17.066667-42.666667-17.066667-59.733333 0L512 452.266667 243.2 183.466667c-17.066667-17.066667-42.666667-17.066667-59.733333 0-17.066667 17.066667-17.066667 42.666667 0 59.733333L452.266667 512 183.466667 780.8c-17.066667 17.066667-17.066667 42.666667 0 59.733333 8.533333 8.533333 19.2 12.8 29.866666 12.8s21.333333-4.266667 29.866667-12.8L512 571.733333l268.8 268.8c8.533333 8.533333 19.2 12.8 29.866667 12.8s21.333333-4.266667 29.866666-12.8c17.066667-17.066667 17.066667-42.666667 0-59.733333L571.733333 512z\" p-id=\"2131\">\n</path>\n</svg>";
+
+},{}],"QV1FD":[function(require,module,exports) {
+module.exports = "<svg width=\"18px\" height=\"18px\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\">\n    <g>\n        <path fill=\"#fff\" d=\"M16,1 L2,1 C1.447,1 1,1.447 1,2 L1,12 C1,12.553 1.447,13 2,13 L5,13 L5,11 L3,11 L3,3 L15,3 L15,11 L13,11 L13,13 L16,13 C16.553,13 17,12.553 17,12 L17,2 C17,1.447 16.553,1 16,1 L16,1 Z\"></path>\n        <polygon fill=\"#fff\" points=\"4 17 14 17 9 11\"></polygon>\n    </g>\n</svg>";
 
 },{}],"i2oRN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

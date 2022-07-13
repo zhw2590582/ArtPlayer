@@ -150,6 +150,7 @@ export default class Artplayer extends Emitter {
             fastForward: false,
             autoPlayback: false,
             autoOrientation: false,
+            airplay: false,
             layers: [],
             contextmenu: [],
             controls: [],

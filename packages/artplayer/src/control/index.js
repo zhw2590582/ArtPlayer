@@ -12,6 +12,7 @@ import thumbnails from './thumbnails';
 import screenshot from './screenshot';
 import quality from './quality';
 import loop from './loop';
+import airplay from './airplay';
 
 export default class Control extends Component {
     constructor(art) {
@@ -139,11 +140,20 @@ export default class Control extends Component {
         );
 
         this.add(
+            airplay({
+                name: 'airplay',
+                disable: !option.airplay || !window.WebKitPlaybackTargetAvailabilityEvent,
+                position: 'right',
+                index: 50,
+            }),
+        );
+
+        this.add(
             fullscreenWeb({
                 name: 'fullscreenWeb',
                 disable: !option.fullscreenWeb,
                 position: 'right',
-                index: 50,
+                index: 60,
             }),
         );
 
@@ -152,7 +162,7 @@ export default class Control extends Component {
                 name: 'fullscreen',
                 disable: !option.fullscreen,
                 position: 'right',
-                index: 60,
+                index: 70,
             }),
         );
 

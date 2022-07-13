@@ -32,5 +32,7 @@
     "Fullscreen Not Supported": "Režim celé obrazovky není podporován",
     "Subtitle Offset": "Posun titulků",
     "Last Seen": "Naposledy viděn",
-    "Jump Play": "Hra na skok"
+    "Jump Play": "Hra na skok",
+    "AirPlay": "AirPlay",
+    "AirPlay Not Available": "AirPlay není k dispozici"
 }

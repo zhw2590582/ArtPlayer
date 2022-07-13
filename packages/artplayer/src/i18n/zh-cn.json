@@ -32,5 +32,7 @@
     "Fullscreen Not Supported": "不支持全屏",
     "Subtitle Offset": "字幕偏移",
     "Last Seen": "上次看到",
-    "Jump Play": "跳转播放"
+    "Jump Play": "跳转播放",
+    "AirPlay": "隔空播放",
+    "AirPlay Not Available": "隔空播放不可用"
 }

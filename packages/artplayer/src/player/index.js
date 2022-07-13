@@ -28,6 +28,7 @@ import themeMix from './themeMix';
 import titleMix from './titleMix';
 import normalSizeMix from './normalSizeMix';
 import subtitleOffsetMix from './subtitleOffsetMix';
+import airplayMix from './airplayMix';
 import optionInit from './optionInit';
 import eventInit from './eventInit';
 
@@ -63,6 +64,7 @@ export default class Player {
         titleMix(art);
         normalSizeMix(art);
         subtitleOffsetMix(art);
+        airplayMix(art);
         eventInit(art);
         optionInit(art);
     }

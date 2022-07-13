@@ -366,6 +366,11 @@ type Option = {
     autoOrientation?: boolean;
 
     /**
+     * Whether use airplay
+     */
+    airplay?: boolean;
+
+    /**
      * Custom plugin list
      */
     plugins?: PluginFunction[];
