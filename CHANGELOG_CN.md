@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.5.3] - 2022-7-13
+
 ### Added
 - `url` 选项允许传空字符串，可用于异步设置 `art.url`
 
@@ -32,7 +34,7 @@ art.on('ready', async () => {
         await art.play();
         console.log('播放成功');
     } catch (error) {
-        console.log('播放失败');
+        console.log('播放失败', error.message);
     }
 })
 ```

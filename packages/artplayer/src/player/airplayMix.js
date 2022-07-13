@@ -8,7 +8,7 @@ export default function airplayMix(art) {
         template: { $video },
     } = art;
 
-    let available = false;
+    let available = true;
 
     if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) {
         proxy($video, 'webkitplaybacktargetavailabilitychanged', (event) => {
@@ -21,6 +21,8 @@ export default function airplayMix(art) {
                     break;
             }
         });
+    } else {
+        available = false;
     }
 
     def(art, 'airplay', {
