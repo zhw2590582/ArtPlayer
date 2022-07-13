@@ -6,11 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 ### Added
-- url 选项允许传空字符串，可用于异步设置 art.url
-- art.play() 方法统一返回 Promise
-- play 事件改为异步触发
-- 添加事件列表到 d.ts
-- 新增 airplay (隔空播放) 功能
+- `url` 选项允许传空字符串，可用于异步设置 `art.url`
+
+```js
+const art = new Artplayer({
+    url: '',
+    container: '.artplayer-app',
+});
+
+setTimeout(() => {
+    art.url = '/assets/sample/video.mp4';
+}, 1000);
+```
+
+- `art.play()` 方法统一返回 `Promise`, `play` 事件也改为异步触发
+
+```js
+const art = new Artplayer({
+    url: '/assets/sample/video.mp4',
+    container: '.artplayer-app',
+});
+
+art.on('ready', async () => {
+    try {
+        await art.play();
+        console.log('播放成功');
+    } catch (error) {
+        console.log('播放失败');
+    }
+})
+```
+
+- 新增 `airplay` (隔空播放) 功能，当前只在 Safari 下可用
+
+```js
+const art = new Artplayer({
+    url: '/assets/sample/video.mp4',
+    container: '.artplayer-app',
+    airplay: true,
+});
+```
 
 ## [4.5.2] - 2022-6-22
 

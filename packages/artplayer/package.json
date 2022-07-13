@@ -1,7 +1,7 @@
 {
     "license": "MIT",
     "name": "artplayer",
-    "version": "4.5.2",
+    "version": "4.5.3",
     "main": "dist/artplayer.js",
     "types": "types/artplayer.d.ts",
     "homepage": "https://artplayer.org",

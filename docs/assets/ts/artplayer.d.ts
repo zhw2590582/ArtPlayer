@@ -617,15 +617,16 @@ declare class Player {
     set theme(theme: string);
     get subtitleOffset(): number;
     set subtitleOffset(time: number);
-    pause(): any;
-    play(): Promise<unknown>;
-    toggle(): any;
+    pause(): void;
+    play(): Promise<void>;
+    toggle(): void;
     attr(key: string, value: any): void;
     switchUrl(url: string): Promise<string>;
     switchQuality(url: string): Promise<string>;
     getDataURL(): Promise<string>;
     getBlobUrl(): Promise<string>;
     screenshot(): Promise<string>;
+    airplay(): void;
 }
 
 declare class Artplayer extends Player {
