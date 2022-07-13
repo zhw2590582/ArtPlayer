@@ -317,7 +317,7 @@ art.on('ready', () => {
     art.seek = 10;
     art.once('video:canplay', () => {
         art.screenshot();
-    })
+    });
 });
 ```
 
@@ -740,6 +740,31 @@ art.on('ready', () => {
     console.info(art.theme);
     art.theme = '#000';
     console.info(art.theme);
+});
+```
+
+## airplay
+
+-   Type: `Function`
+
+Open the Airplay
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    controls: [
+        {
+            name: 'airplay',
+            position: 'right',
+            html: 'AirPlay',
+            click: function () {
+                art.airplay();
+            },
+        },
+    ],
 });
 ```
 

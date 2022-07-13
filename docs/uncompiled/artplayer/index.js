@@ -1452,7 +1452,7 @@ class Player {
 }
 exports.default = Player;
 
-},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./loopMix":"dvgcH","./posterMix":"lglHp","./autoHeightMix":"58Y02","./themeMix":"lga3g","./titleMix":"i382h","./normalSizeMix":"jW7b0","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"haOhz":[function(require,module,exports) {
+},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./loopMix":"dvgcH","./posterMix":"lglHp","./autoHeightMix":"58Y02","./themeMix":"lga3g","./titleMix":"i382h","./normalSizeMix":"jW7b0","./subtitleOffsetMix":"4Ny6z","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","./airplayMix":"gcYqJ"}],"haOhz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2528,34 +2528,6 @@ function subtitleOffsetMix(art) {
 }
 exports.default = subtitleOffsetMix;
 
-},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"gcYqJ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _utils = require("../utils");
-function airplayMix(art) {
-    const { i18n , notice , events: { proxy  } , template: { $video  } ,  } = art;
-    let available = false;
-    if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) proxy($video, "webkitplaybacktargetavailabilitychanged", (event)=>{
-        switch(event.availability){
-            case "available":
-                available = true;
-                break;
-            case "not-available":
-                available = false;
-                break;
-        }
-    });
-    (0, _utils.def)(art, "airplay", {
-        value () {
-            if (available) {
-                $video.webkitShowPlaybackTargetPicker();
-                art.emit("airplay");
-            } else notice.show = i18n.get("AirPlay Not Available");
-        }
-    });
-}
-exports.default = airplayMix;
-
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"vGIPW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -2692,7 +2664,35 @@ function eventInit(art) {
 }
 exports.default = eventInit;
 
-},{"../config":"1hSww","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"nK2ZQ":[function(require,module,exports) {
+},{"../config":"1hSww","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"gcYqJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function airplayMix(art) {
+    const { i18n , notice , events: { proxy  } , template: { $video  } ,  } = art;
+    let available = false;
+    if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) proxy($video, "webkitplaybacktargetavailabilitychanged", (event)=>{
+        switch(event.availability){
+            case "available":
+                available = true;
+                break;
+            case "not-available":
+                available = false;
+                break;
+        }
+    });
+    (0, _utils.def)(art, "airplay", {
+        value () {
+            if (available) {
+                $video.webkitShowPlaybackTargetPicker();
+                art.emit("airplay");
+            } else notice.show = i18n.get("AirPlay Not Available");
+        }
+    });
+}
+exports.default = airplayMix;
+
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"nK2ZQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2854,7 +2854,7 @@ class Control extends (0, _componentDefault.default) {
 }
 exports.default = Control;
 
-},{"../utils":"euhMG","../utils/component":"1UWqI","./fullscreen":"d7VBA","./fullscreenWeb":"iE4ux","./pip":"03ERY","./playAndPause":"2tuF0","./progress":"afGEi","./time":"e6eX5","./volume":"ezhk3","./setting":"3Vg4s","./thumbnails":"8AAYm","./screenshot":"lcqMk","./quality":"349DU","./loop":"8hCXR","./airplay":"4dMTc","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"1UWqI":[function(require,module,exports) {
+},{"../utils":"euhMG","../utils/component":"1UWqI","./fullscreen":"d7VBA","./fullscreenWeb":"iE4ux","./pip":"03ERY","./playAndPause":"2tuF0","./progress":"afGEi","./time":"e6eX5","./volume":"ezhk3","./setting":"3Vg4s","./thumbnails":"8AAYm","./screenshot":"lcqMk","./quality":"349DU","./loop":"8hCXR","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","./airplay":"4dMTc"}],"1UWqI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
@@ -4279,7 +4279,7 @@ class Icons {
 }
 exports.default = Icons;
 
-},{"../utils":"euhMG","bundle-text:./loading.svg":"az5uz","bundle-text:./state.svg":"79igA","bundle-text:./check.svg":"8ANvd","bundle-text:./play.svg":"1rOT8","bundle-text:./pause.svg":"34ClM","bundle-text:./volume.svg":"k1lcw","bundle-text:./volume-close.svg":"lAkPF","bundle-text:./screenshot.svg":"dJavv","bundle-text:./setting.svg":"lQaIM","bundle-text:./arrow-left.svg":"3bhbH","bundle-text:./arrow-right.svg":"aq1mg","bundle-text:./playback-rate.svg":"knRE0","bundle-text:./aspect-ratio.svg":"2obxu","bundle-text:./config.svg":"8Oelc","bundle-text:./pip.svg":"l19Zs","bundle-text:./lock.svg":"5Jt44","bundle-text:./unlock.svg":"lp1YA","bundle-text:./fullscreen-off.svg":"4Ymtn","bundle-text:./fullscreen-on.svg":"03aZy","bundle-text:./fullscreen-web-off.svg":"jtnf4","bundle-text:./fullscreen-web-on.svg":"gMb2L","bundle-text:./switch-on.svg":"kS8FF","bundle-text:./switch-off.svg":"4tVW6","bundle-text:./flip.svg":"aPFz2","bundle-text:./error.svg":"fVWm4","bundle-text:./close.svg":"cSL0g","bundle-text:./airplay.svg":"QV1FD","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"az5uz":[function(require,module,exports) {
+},{"../utils":"euhMG","bundle-text:./loading.svg":"az5uz","bundle-text:./state.svg":"79igA","bundle-text:./check.svg":"8ANvd","bundle-text:./play.svg":"1rOT8","bundle-text:./pause.svg":"34ClM","bundle-text:./volume.svg":"k1lcw","bundle-text:./volume-close.svg":"lAkPF","bundle-text:./screenshot.svg":"dJavv","bundle-text:./setting.svg":"lQaIM","bundle-text:./arrow-left.svg":"3bhbH","bundle-text:./arrow-right.svg":"aq1mg","bundle-text:./playback-rate.svg":"knRE0","bundle-text:./aspect-ratio.svg":"2obxu","bundle-text:./config.svg":"8Oelc","bundle-text:./pip.svg":"l19Zs","bundle-text:./lock.svg":"5Jt44","bundle-text:./unlock.svg":"lp1YA","bundle-text:./fullscreen-off.svg":"4Ymtn","bundle-text:./fullscreen-on.svg":"03aZy","bundle-text:./fullscreen-web-off.svg":"jtnf4","bundle-text:./fullscreen-web-on.svg":"gMb2L","bundle-text:./switch-on.svg":"kS8FF","bundle-text:./switch-off.svg":"4tVW6","bundle-text:./flip.svg":"aPFz2","bundle-text:./error.svg":"fVWm4","bundle-text:./close.svg":"cSL0g","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm","bundle-text:./airplay.svg":"QV1FD"}],"az5uz":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</svg>";
 
 },{}],"79igA":[function(require,module,exports) {
