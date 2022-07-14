@@ -679,6 +679,7 @@ declare class Artplayer extends Player {
     static SCROLL_TIME: number;
     static SCROLL_GAP: number;
     static AUTO_PLAYBACK_MAX: number;
+    static AUTO_PLAYBACK_MIN: number;
     static RECONNECT_TIME_MAX: number;
     static RECONNECT_SLEEP_TIME: number;
     static CONTROL_HIDE_TIME: number;
