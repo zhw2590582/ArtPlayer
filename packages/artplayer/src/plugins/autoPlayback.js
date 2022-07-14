@@ -36,7 +36,7 @@ export default function autoPlayback(art) {
     art.on('ready', () => {
         const times = storage.get('times') || {};
         const currentTime = times[art.option.url];
-        if (currentTime) {
+        if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
             append($close, icons.close);
             setStyle($autoPlayback, 'display', 'flex');
 

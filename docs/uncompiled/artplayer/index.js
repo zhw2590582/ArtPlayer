@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1657699819186";
+        return "1657765310616";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -355,6 +355,7 @@ Artplayer.RESIZE_TIME = 500;
 Artplayer.SCROLL_TIME = 200;
 Artplayer.SCROLL_GAP = 50;
 Artplayer.AUTO_PLAYBACK_MAX = 10;
+Artplayer.AUTO_PLAYBACK_MIN = 5;
 Artplayer.AUTO_PLAYBACK_TIMEOUT = 3000;
 Artplayer.RECONNECT_TIME_MAX = 5;
 Artplayer.RECONNECT_SLEEP_TIME = 1000;
@@ -2753,81 +2754,68 @@ class Control extends (0, _componentDefault.default) {
     }
     init() {
         const { option  } = this.art;
-        this.add((0, _progressDefault.default)({
+        if (!option.isLive) this.add((0, _progressDefault.default)({
             name: "progress",
-            disable: option.isLive,
             position: "top",
             index: 10
         }));
-        this.add((0, _thumbnailsDefault.default)({
+        if (option.thumbnails.url && !option.isLive && !(0, _utils.isMobile)) this.add((0, _thumbnailsDefault.default)({
             name: "thumbnails",
-            disable: !option.thumbnails.url || option.isLive || (0, _utils.isMobile),
             position: "top",
             index: 20
         }));
         this.add((0, _loopDefault.default)({
             name: "loop",
-            disable: false,
             position: "top",
             index: 30
         }));
         this.add((0, _playAndPauseDefault.default)({
             name: "playAndPause",
-            disable: false,
             position: "left",
             index: 10
         }));
         this.add((0, _volumeDefault.default)({
             name: "volume",
-            disable: false,
             position: "left",
             index: 20
         }));
-        this.add((0, _timeDefault.default)({
+        if (!option.isLive) this.add((0, _timeDefault.default)({
             name: "time",
-            disable: option.isLive,
             position: "left",
             index: 30
         }));
-        this.add((0, _qualityDefault.default)({
+        if (option.quality.length) this.add((0, _qualityDefault.default)({
             name: "quality",
-            disable: option.quality.length === 0,
             position: "right",
             index: 10
         }));
-        this.add((0, _screenshotDefault.default)({
+        if (option.screenshot && !(0, _utils.isMobile)) this.add((0, _screenshotDefault.default)({
             name: "screenshot",
-            disable: !option.screenshot || (0, _utils.isMobile),
             position: "right",
             index: 20
         }));
-        this.add((0, _settingDefault.default)({
+        if (option.setting) this.add((0, _settingDefault.default)({
             name: "setting",
-            disable: !option.setting,
             position: "right",
             index: 30
         }));
-        this.add((0, _pipDefault.default)({
+        if (option.pip) this.add((0, _pipDefault.default)({
             name: "pip",
-            disable: !option.pip,
             position: "right",
             index: 40
         }));
-        this.add((0, _airplayDefault.default)({
+        if (option.airplay && window.WebKitPlaybackTargetAvailabilityEvent) this.add((0, _airplayDefault.default)({
             name: "airplay",
-            disable: !option.airplay || !window.WebKitPlaybackTargetAvailabilityEvent,
             position: "right",
             index: 50
         }));
-        this.add((0, _fullscreenWebDefault.default)({
+        if (option.fullscreenWeb) this.add((0, _fullscreenWebDefault.default)({
             name: "fullscreenWeb",
-            disable: !option.fullscreenWeb,
             position: "right",
             index: 60
         }));
-        this.add((0, _fullscreenDefault.default)({
+        if (option.fullscreen) this.add((0, _fullscreenDefault.default)({
             name: "fullscreen",
-            disable: !option.fullscreen,
             position: "right",
             index: 70
         }));
@@ -3488,33 +3476,27 @@ class Contextmenu extends (0, _componentDefault.default) {
     }
     init() {
         const { option , template: { $player , $contextmenu  } , events: { proxy  } ,  } = this.art;
-        this.add((0, _playbackRateDefault.default)({
-            disable: !option.playbackRate,
+        if (option.playbackRate) this.add((0, _playbackRateDefault.default)({
             name: "playbackRate",
             index: 10
         }));
-        this.add((0, _aspectRatioDefault.default)({
-            disable: !option.aspectRatio,
+        if (option.aspectRatio) this.add((0, _aspectRatioDefault.default)({
             name: "aspectRatio",
             index: 20
         }));
-        this.add((0, _flipDefault.default)({
-            disable: !option.flip,
+        if (option.flip) this.add((0, _flipDefault.default)({
             name: "flip",
             index: 30
         }));
         this.add((0, _infoDefault.default)({
-            disable: false,
             name: "info",
             index: 40
         }));
         this.add((0, _versionDefault.default)({
-            disable: false,
             name: "version",
             index: 50
         }));
         this.add((0, _closeDefault.default)({
-            disable: false,
             name: "close",
             index: 60
         }));
@@ -4890,7 +4872,7 @@ class Plugins {
         const { option  } = art;
         if (option.miniProgressBar && !option.isLive) this.add((0, _miniProgressBarDefault.default));
         if (option.lock && (0, _utils.isMobile)) this.add((0, _lockDefault.default));
-        if (option.autoPlayback) this.add((0, _autoPlaybackDefault.default));
+        if (option.autoPlayback && !option.isLive) this.add((0, _autoPlaybackDefault.default));
         if (option.autoOrientation && (0, _utils.isMobile)) this.add((0, _autoOrientationDefault.default));
         if (option.fastForward && (0, _utils.isMobile) && !option.isLive) this.add((0, _fastForwardDefault.default));
         for(let index = 0; index < option.plugins.length; index++)this.add(option.plugins[index]);
@@ -5016,7 +4998,7 @@ function autoPlayback(art) {
     art.on("ready", ()=>{
         const times = storage.get("times") || {};
         const currentTime = times[art.option.url];
-        if (currentTime) {
+        if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
             (0, _utils.append)($close, icons.close);
             (0, _utils.setStyle)($autoPlayback, "display", "flex");
             $last.innerText = `${i18n.get("Last Seen")} ${(0, _utils.secondToTime)(currentTime)}`;

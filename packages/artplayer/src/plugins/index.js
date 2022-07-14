@@ -20,7 +20,7 @@ export default class Plugins {
             this.add(lock);
         }
 
-        if (option.autoPlayback) {
+        if (option.autoPlayback && !option.isLive) {
             this.add(autoPlayback);
         }
 
