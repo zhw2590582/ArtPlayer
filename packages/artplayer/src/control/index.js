@@ -49,28 +49,29 @@ export default class Control extends Component {
     init() {
         const { option } = this.art;
 
-        this.add(
-            progress({
-                name: 'progress',
-                disable: option.isLive,
-                position: 'top',
-                index: 10,
-            }),
-        );
+        if (!option.isLive) {
+            this.add(
+                progress({
+                    name: 'progress',
+                    position: 'top',
+                    index: 10,
+                }),
+            );
+        }
 
-        this.add(
-            thumbnails({
-                name: 'thumbnails',
-                disable: !option.thumbnails.url || option.isLive || isMobile,
-                position: 'top',
-                index: 20,
-            }),
-        );
+        if (option.thumbnails.url && !option.isLive && !isMobile) {
+            this.add(
+                thumbnails({
+                    name: 'thumbnails',
+                    position: 'top',
+                    index: 20,
+                }),
+            );
+        }
 
         this.add(
             loop({
                 name: 'loop',
-                disable: false,
                 position: 'top',
                 index: 30,
             }),
@@ -79,7 +80,6 @@ export default class Control extends Component {
         this.add(
             playAndPause({
                 name: 'playAndPause',
-                disable: false,
                 position: 'left',
                 index: 10,
             }),
@@ -88,83 +88,90 @@ export default class Control extends Component {
         this.add(
             volume({
                 name: 'volume',
-                disable: false,
                 position: 'left',
                 index: 20,
             }),
         );
 
-        this.add(
-            time({
-                name: 'time',
-                disable: option.isLive,
-                position: 'left',
-                index: 30,
-            }),
-        );
+        if (!option.isLive) {
+            this.add(
+                time({
+                    name: 'time',
+                    position: 'left',
+                    index: 30,
+                }),
+            );
+        }
 
-        this.add(
-            quality({
-                name: 'quality',
-                disable: option.quality.length === 0,
-                position: 'right',
-                index: 10,
-            }),
-        );
+        if (option.quality.length) {
+            this.add(
+                quality({
+                    name: 'quality',
+                    position: 'right',
+                    index: 10,
+                }),
+            );
+        }
 
-        this.add(
-            screenshot({
-                name: 'screenshot',
-                disable: !option.screenshot || isMobile,
-                position: 'right',
-                index: 20,
-            }),
-        );
+        if (option.screenshot && !isMobile) {
+            this.add(
+                screenshot({
+                    name: 'screenshot',
+                    position: 'right',
+                    index: 20,
+                }),
+            );
+        }
 
-        this.add(
-            setting({
-                name: 'setting',
-                disable: !option.setting,
-                position: 'right',
-                index: 30,
-            }),
-        );
+        if (option.setting) {
+            this.add(
+                setting({
+                    name: 'setting',
+                    position: 'right',
+                    index: 30,
+                }),
+            );
+        }
 
-        this.add(
-            pip({
-                name: 'pip',
-                disable: !option.pip,
-                position: 'right',
-                index: 40,
-            }),
-        );
+        if (option.pip) {
+            this.add(
+                pip({
+                    name: 'pip',
+                    position: 'right',
+                    index: 40,
+                }),
+            );
+        }
 
-        this.add(
-            airplay({
-                name: 'airplay',
-                disable: !option.airplay || !window.WebKitPlaybackTargetAvailabilityEvent,
-                position: 'right',
-                index: 50,
-            }),
-        );
+        if (option.airplay && window.WebKitPlaybackTargetAvailabilityEvent) {
+            this.add(
+                airplay({
+                    name: 'airplay',
+                    position: 'right',
+                    index: 50,
+                }),
+            );
+        }
 
-        this.add(
-            fullscreenWeb({
-                name: 'fullscreenWeb',
-                disable: !option.fullscreenWeb,
-                position: 'right',
-                index: 60,
-            }),
-        );
+        if (option.fullscreenWeb) {
+            this.add(
+                fullscreenWeb({
+                    name: 'fullscreenWeb',
+                    position: 'right',
+                    index: 60,
+                }),
+            );
+        }
 
-        this.add(
-            fullscreen({
-                name: 'fullscreen',
-                disable: !option.fullscreen,
-                position: 'right',
-                index: 70,
-            }),
-        );
+        if (option.fullscreen) {
+            this.add(
+                fullscreen({
+                    name: 'fullscreen',
+                    position: 'right',
+                    index: 70,
+                }),
+            );
+        }
 
         for (let index = 0; index < option.controls.length; index++) {
             this.add(option.controls[index]);

@@ -26,33 +26,35 @@ export default class Contextmenu extends Component {
             events: { proxy },
         } = this.art;
 
-        this.add(
-            playbackRate({
-                disable: !option.playbackRate,
-                name: 'playbackRate',
-                index: 10,
-            }),
-        );
+        if (option.playbackRate) {
+            this.add(
+                playbackRate({
+                    name: 'playbackRate',
+                    index: 10,
+                }),
+            );
+        }
 
-        this.add(
-            aspectRatio({
-                disable: !option.aspectRatio,
-                name: 'aspectRatio',
-                index: 20,
-            }),
-        );
+        if (option.aspectRatio) {
+            this.add(
+                aspectRatio({
+                    name: 'aspectRatio',
+                    index: 20,
+                }),
+            );
+        }
 
-        this.add(
-            flip({
-                disable: !option.flip,
-                name: 'flip',
-                index: 30,
-            }),
-        );
+        if (option.flip) {
+            this.add(
+                flip({
+                    name: 'flip',
+                    index: 30,
+                }),
+            );
+        }
 
         this.add(
             info({
-                disable: false,
                 name: 'info',
                 index: 40,
             }),
@@ -60,7 +62,6 @@ export default class Contextmenu extends Component {
 
         this.add(
             version({
-                disable: false,
                 name: 'version',
                 index: 50,
             }),
@@ -68,7 +69,6 @@ export default class Contextmenu extends Component {
 
         this.add(
             close({
-                disable: false,
                 name: 'close',
                 index: 60,
             }),
