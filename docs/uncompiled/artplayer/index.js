@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1657765310616";
+        return "1658107281533";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1822,7 +1822,7 @@ exports.default = screenshotMix;
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"juJAD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _screenfull = require("screenfull");
+var _screenfull = require("../libs/screenfull");
 var _screenfullDefault = parcelHelpers.interopDefault(_screenfull);
 var _utils = require("../utils");
 function fullscreenMix(art1) {
@@ -1891,10 +1891,10 @@ function fullscreenMix(art1) {
 }
 exports.default = fullscreenMix;
 
-},{"screenfull":"8H2on","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"8H2on":[function(require,module,exports) {
+},{"../libs/screenfull":"4XLC7","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"4XLC7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-/* eslint-disable promise/prefer-await-to-then */ const methodMap = [
+const methodMap = [
     [
         "requestFullscreen",
         "exitFullscreen",
@@ -1943,7 +1943,7 @@ const nativeAPI = (()=>{
     const unprefixedMethods = methodMap[0];
     const returnValue = {};
     for (const methodList of methodMap){
-        const exitFullscreenMethod = methodList?.[1];
+        const exitFullscreenMethod = methodList[1];
         if (exitFullscreenMethod in document) {
             for (const [index, method] of methodList.entries())returnValue[unprefixedMethods[index]] = method;
             return returnValue;
@@ -1955,9 +1955,7 @@ const eventNameMap = {
     change: nativeAPI.fullscreenchange,
     error: nativeAPI.fullscreenerror
 };
-// eslint-disable-next-line import/no-mutable-exports
 let screenfull = {
-    // eslint-disable-next-line default-param-last
     request (element = document.documentElement, options) {
         return new Promise((resolve, reject)=>{
             const onFullScreenEntered = ()=>{
@@ -2009,11 +2007,10 @@ Object.defineProperties(screenfull, {
     },
     element: {
         enumerable: true,
-        get: ()=>document[nativeAPI.fullscreenElement] ?? undefined
+        get: ()=>document[nativeAPI.fullscreenElement]
     },
     isEnabled: {
         enumerable: true,
-        // Coerce to boolean in case of old WebKit.
         get: ()=>Boolean(document[nativeAPI.fullscreenEnabled])
     }
 });

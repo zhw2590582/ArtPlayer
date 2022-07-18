@@ -1,4 +1,4 @@
-import screenfull from 'screenfull';
+import screenfull from '../libs/screenfull';
 import { addClass, removeClass, def, get } from '../utils';
 
 export default function fullscreenMix(art) {
