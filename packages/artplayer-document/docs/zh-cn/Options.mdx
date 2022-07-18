@@ -58,13 +58,16 @@ var art = new Artplayer({
 <div className="run-code">▶ Run Code</div>
 
 ```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    muted: true,
-}, function() {
-    this.play();
-});
+var art = new Artplayer(
+    {
+        container: '.artplayer-app',
+        url: '/assets/sample/video.mp4',
+        muted: true,
+    },
+    function () {
+        this.play();
+    },
+);
 ```
 
 :::tip 提示
@@ -72,7 +75,6 @@ var art = new Artplayer({
 回调函数里的`this`就是播放器实例，但回调函数假如使用了箭头函数，`this`则不会指向播放器实例
 
 :::
-
 
 ## poster
 
@@ -884,6 +886,8 @@ var art = new Artplayer({
 | `url`    | `String` | 预览图地址 |
 | `number` | `Number` | 预览图数量 |
 | `column` | `Number` | 预览图列数 |
+| `width`  | `Number` | 预览图宽度 |
+| `height` | `Number` | 预览图高度 |
 
 <div className="run-code">▶ Run Code</div>
 

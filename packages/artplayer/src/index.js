@@ -163,6 +163,8 @@ export default class Artplayer extends Emitter {
                 url: '',
                 number: 60,
                 column: 10,
+                width: 0,
+                height: 0,
             },
             subtitle: {
                 url: '',

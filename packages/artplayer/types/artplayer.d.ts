@@ -453,6 +453,16 @@ type Option = {
          * The thumbnail column size
          */
         column?: number;
+
+        /**
+         * The thumbnail width
+         */
+        width?: number;
+
+        /**
+         * The thumbnail height
+         */
+        height?: number;
     };
 
     /**

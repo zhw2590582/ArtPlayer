@@ -102,6 +102,8 @@ export default {
         url: s,
         number: n,
         column: n,
+        width: n,
+        height: n,
     },
     subtitle: {
         url: s,

@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - 新增 `Artplayer.AUTO_PLAYBACK_MIN` 用于控制最小可以记忆播放的进度值，默认为 `5` 秒
+- `option.thumbnails` 添加可选的 `width` 和 `height`
 
 ## [4.5.3] - 2022-7-13
 
