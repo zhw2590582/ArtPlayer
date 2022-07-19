@@ -39,7 +39,7 @@
     "@parcel/transformer-inline-string": "^2.6.2",
     "@parcel/transformer-less": "^2.6.2",
     "@parcel/transformer-vue": "^2.6.2",
-    "artplayer": "^4.5.3",
+    "artplayer": "latest",
     "chai": "^4.3.6",
     "cpy": "^9.0.1",
     "cross-env": "^7.0.3",
