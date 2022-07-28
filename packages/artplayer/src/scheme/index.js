@@ -34,6 +34,7 @@ export const ComponentOption = {
 };
 
 export default {
+    id: s,
     container: validElement,
     url: s,
     poster: s,

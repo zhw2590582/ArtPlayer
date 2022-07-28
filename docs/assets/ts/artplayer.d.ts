@@ -201,6 +201,11 @@ type SubtitleOption = {
 
 type Option = {
     /**
+     * The player id
+     */
+    id: string;
+
+    /**
      * The container mounted by the player
      */
     container: string | HTMLElement;

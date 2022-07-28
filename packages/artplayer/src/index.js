@@ -118,6 +118,7 @@ export default class Artplayer extends Emitter {
 
     static get option() {
         return {
+            id: '',
             container: '#artplayer',
             url: '',
             poster: '',

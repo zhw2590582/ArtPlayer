@@ -29,13 +29,13 @@ export default function autoPlayback(art) {
         if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
             delete times[keys[0]];
         }
-        times[art.option.url] = art.currentTime;
+        times[art.option.id || art.option.url] = art.currentTime;
         storage.set('times', times);
     });
 
     art.on('ready', () => {
         const times = storage.get('times') || {};
-        const currentTime = times[art.option.url];
+        const currentTime = times[art.option.id || art.option.url];
         if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
             append($close, icons.close);
             setStyle($autoPlayback, 'display', 'flex');
@@ -69,6 +69,12 @@ export default function autoPlayback(art) {
         },
         clear() {
             return storage.del('times');
+        },
+        delete(id) {
+            const times = storage.get('times') || {};
+            delete times[id];
+            storage.set('times', times);
+            return times;
         },
     };
 }
