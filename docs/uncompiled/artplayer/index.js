@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1658973006786";
+        return "1659001032618";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -370,6 +370,7 @@ Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 200;
 Artplayer.INFO_LOOP_TIME = 1000;
 Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
+Artplayer.TOUCH_MOVE_RATIO = 0.5;
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-style")) {
         const $style = document.createElement("style");
@@ -3977,7 +3978,7 @@ function gestureInit(art, events) {
                 const ratioX = (0, _utils.clamp)((clientX - startX) / art.width, -1, 1);
                 const ratioY = (0, _utils.clamp)((clientY - startY) / art.height, -1, 1);
                 const ratio = autoOrientation ? ratioY : ratioX;
-                const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio / 2, 0, art.duration);
+                const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * art.constructor.TOUCH_MOVE_RATIO, 0, art.duration);
                 art.seek = currentTime;
                 art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1));
                 art.notice.show = `${(0, _utils.secondToTime)(currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;

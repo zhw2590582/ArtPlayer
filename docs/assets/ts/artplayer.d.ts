@@ -705,6 +705,7 @@ declare class Artplayer extends Player {
     static INFO_LOOP_TIME: number;
     static FAST_FORWARD_VALUE: number;
     static FAST_FORWARD_TIME: number;
+    static TOUCH_MOVE_RATIO: number;
 
     on(name: Events, fn: Function, ctx?: object): void;
     once(name: Events, fn: Function, ctx?: object): void;
