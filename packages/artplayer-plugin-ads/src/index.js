@@ -18,6 +18,7 @@ export default function artplayerPluginAds(option) {
                 url: '',
                 playDuration: 5,
                 totalDuration: 10,
+                muted: false,
                 i18n: {
                     close: '关闭广告',
                     countdown: '%s秒',
@@ -32,6 +33,7 @@ export default function artplayerPluginAds(option) {
                 url: '?string',
                 playDuration: 'number',
                 totalDuration: 'number',
+                muted: 'boolean',
                 i18n: {
                     close: 'string',
                     countdown: 'string',
@@ -103,7 +105,7 @@ export default function artplayerPluginAds(option) {
             $ads = append(
                 art.template.$ads,
                 option.video
-                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop playsInline></video>`
+                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}" ${option.muted ? 'muted' : ''} loop playsInline></video>`
                     : `<div class="artplayer-plugin-ads-html">${option.html}</div>`,
             );
 
@@ -164,6 +166,13 @@ export default function artplayerPluginAds(option) {
                 const $volume = append($muted, volume);
                 const $volumeClose = append($muted, volumeClose);
                 setStyle($volumeClose, 'display', 'none');
+
+                // If the ad was set to muted initially, match the icon
+                if (option.muted) {
+                    $ads.muted = true;
+                    setStyle($volume, 'display', 'none');
+                    setStyle($volumeClose, 'display', 'inline-flex');
+                }
 
                 art.proxy($muted, 'click', () => {
                     $ads.muted = !$ads.muted;
