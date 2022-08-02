@@ -220,7 +220,7 @@ function artplayerPluginAds(option) {
         }
         function show() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
-            $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" ${option.muted ? "muted" : ""} loop playsInline></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
+            $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop playsInline></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
             $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
             append($loading, loading);
             $timer = append(art.template.$ads, `<div class="artplayer-plugin-ads-timer">
