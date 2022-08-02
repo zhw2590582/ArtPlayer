@@ -156,6 +156,7 @@ function artplayerPluginAds(option) {
             url: "",
             playDuration: 5,
             totalDuration: 10,
+            muted: false,
             i18n: {
                 close: "\u5173\u95ED\u5E7F\u544A",
                 countdown: "%s\u79D2",
@@ -169,6 +170,7 @@ function artplayerPluginAds(option) {
             url: "?string",
             playDuration: "number",
             totalDuration: "number",
+            muted: "?boolean",
             i18n: {
                 close: "string",
                 countdown: "string",
@@ -218,7 +220,7 @@ function artplayerPluginAds(option) {
         }
         function show() {
             art.template.$ads = append($player, '<div class="artplayer-plugin-ads"></div>');
-            $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" loop playsInline></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
+            $ads = append(art.template.$ads, option.video ? `<video class="artplayer-plugin-ads-video" src="${option.video}" ${option.muted ? "muted" : ""} loop playsInline></video>` : `<div class="artplayer-plugin-ads-html">${option.html}</div>`);
             $loading = append(art.template.$ads, '<div class="artplayer-plugin-ads-loading"></div>');
             append($loading, loading);
             $timer = append(art.template.$ads, `<div class="artplayer-plugin-ads-timer">
@@ -248,6 +250,12 @@ function artplayerPluginAds(option) {
                 const $volume = append($muted, volume);
                 const $volumeClose = append($muted, volumeClose);
                 setStyle($volumeClose, "display", "none");
+                // If the ad was set to muted initially, match the icon
+                if (option.muted) {
+                    $ads.muted = true;
+                    setStyle($volume, "display", "none");
+                    setStyle($volumeClose, "display", "inline-flex");
+                }
                 art.proxy($muted, "click", ()=>{
                     $ads.muted = !$ads.muted;
                     if ($ads.muted) {
@@ -316,8 +324,8 @@ function artplayerPluginAds(option) {
 }
 exports.default = artplayerPluginAds;
 artplayerPluginAds.env = "development";
-artplayerPluginAds.version = "1.0.3";
-artplayerPluginAds.build = "1655862769558";
+artplayerPluginAds.version = "1.0.5";
+artplayerPluginAds.build = "1659407621565";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-ads")) {
         const $style = document.createElement("style");
