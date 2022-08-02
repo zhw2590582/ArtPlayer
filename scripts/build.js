@@ -22,6 +22,7 @@ async function build(name) {
                 outputFormat: 'global',
                 engines: {
                     browsers: ['last 1 Chrome version'],
+                    // "browsers": "> 0.5%, last 2 versions, not dead"
                 },
             },
         },
