@@ -33,7 +33,7 @@ export default function artplayerPluginAds(option) {
                 url: '?string',
                 playDuration: 'number',
                 totalDuration: 'number',
-                muted: 'boolean',
+                muted: '?boolean',
                 i18n: {
                     close: 'string',
                     countdown: 'string',
@@ -105,7 +105,9 @@ export default function artplayerPluginAds(option) {
             $ads = append(
                 art.template.$ads,
                 option.video
-                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}" ${option.muted ? 'muted' : ''} loop playsInline></video>`
+                    ? `<video class="artplayer-plugin-ads-video" src="${option.video}" ${
+                          option.muted ? 'muted' : ''
+                      } loop playsInline></video>`
                     : `<div class="artplayer-plugin-ads-html">${option.html}</div>`,
             );
 

@@ -28,6 +28,11 @@ type Option = {
      * 广告总时长，单位为秒
      */
     totalDuration?: string;
+
+    /**
+     * 视频广告是否默认静音
+     */
+     muted?: boolean;
 };
 
 type Ads = {
