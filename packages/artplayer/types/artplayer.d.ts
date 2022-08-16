@@ -575,7 +575,7 @@ type Events =
     | 'volume'
     | 'lock'
     | 'selector'
-    | string;
+    | (string & Record<never, never>);
 
 declare class Player {
     get aspectRatio(): AspectRatio;
