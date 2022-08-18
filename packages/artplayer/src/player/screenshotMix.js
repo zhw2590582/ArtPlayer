@@ -1,4 +1,4 @@
-import { secondToTime, download, def } from '../utils';
+import { secondToTime, download, def, createElement } from '../utils';
 
 export default function screenshotMix(art) {
     const {
@@ -7,7 +7,7 @@ export default function screenshotMix(art) {
         template: { $video },
     } = art;
 
-    const $canvas = document.createElement('canvas');
+    const $canvas = createElement('canvas');
 
     def(art, 'getDataURL', {
         value: () =>

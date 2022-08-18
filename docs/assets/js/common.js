@@ -49,7 +49,7 @@
                         [
                             'var art = new Artplayer({',
                             "\tcontainer: '.artplayer-app',",
-                            "\turl: 'https://artplayer.org/assets/sample/video.mp4',",
+                            "\turl: '/assets/sample/video.mp4',",
                             '});',
                         ].join('\n'),
                         'javascript',

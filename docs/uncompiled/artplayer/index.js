@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1660634084987";
+        return "1660786773540";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -373,7 +373,7 @@ Artplayer.FAST_FORWARD_TIME = 1000;
 Artplayer.TOUCH_MOVE_RATIO = 0.5;
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-style")) {
-        const $style = document.createElement("style");
+        const $style = _utils.createElement("style");
         $style.id = "artplayer-style";
         $style.textContent = (0, _indexLessDefault.default);
         document.head.appendChild($style);
@@ -638,6 +638,7 @@ parcelHelpers.export(exports, "tooltip", ()=>tooltip);
 parcelHelpers.export(exports, "isInViewport", ()=>isInViewport);
 parcelHelpers.export(exports, "includeFromEvent", ()=>includeFromEvent);
 parcelHelpers.export(exports, "replaceElement", ()=>replaceElement);
+parcelHelpers.export(exports, "createElement", ()=>createElement);
 var _compatibility = require("./compatibility");
 function query(selector, parent = document) {
     return parent.querySelector(selector);
@@ -703,6 +704,9 @@ function includeFromEvent(event, target) {
 function replaceElement(newChild, oldChild) {
     oldChild.parentNode.replaceChild(newChild, oldChild);
     return newChild;
+}
+function createElement(tag) {
+    return document.createElement(tag);
 }
 
 },{"./compatibility":"bRDYJ","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"bRDYJ":[function(require,module,exports) {
@@ -1786,7 +1790,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function screenshotMix(art) {
     const { option , notice , template: { $video  } ,  } = art;
-    const $canvas = document.createElement("canvas");
+    const $canvas = (0, _utils.createElement)("canvas");
     (0, _utils.def)(art, "getDataURL", {
         value: ()=>new Promise((resolve, reject)=>{
                 try {
@@ -2883,7 +2887,7 @@ class Component {
         const name = option.name || `${this.name}${this.id}`;
         (0, _error.errorHandle)(!(0, _property.has)(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
         this.id += 1;
-        const $ref = document.createElement("div");
+        const $ref = (0, _dom.createElement)("div");
         (0, _dom.addClass)($ref, `art-${this.name}`);
         (0, _dom.addClass)($ref, `art-${this.name}-${name}`);
         const childs = Array.from(this.$parent.children);
@@ -2912,13 +2916,13 @@ class Component {
     selector(option, $ref) {
         const { hover , proxy  } = this.art.events;
         (0, _dom.addClass)($ref, "art-control-selector");
-        const $value = document.createElement("div");
+        const $value = (0, _dom.createElement)("div");
         (0, _dom.addClass)($value, "art-selector-value");
         (0, _dom.append)($value, option.html);
         $ref.innerText = "";
         (0, _dom.append)($ref, $value);
         const list = option.selector.map((item, index)=>`<div class="art-selector-item ${item.default ? "art-current" : ""}" data-index="${index}">${item.html}</div>`).join("");
-        const $list = document.createElement("div");
+        const $list = (0, _dom.createElement)("div");
         (0, _dom.addClass)($list, "art-selector-list");
         (0, _dom.append)($list, list);
         (0, _dom.append)($ref, $list);
@@ -3763,7 +3767,7 @@ class Subtitle extends (0, _componentDefault.default) {
         if (!subtitleOption.url) return;
         const { notice , events: { proxy  } , template: { $subtitle , $video , $track  } ,  } = this.art;
         if (!$track) {
-            const $track = document.createElement("track");
+            const $track = (0, _utils.createElement)("track");
             $track.default = true;
             $track.kind = "metadata";
             $video.appendChild($track);
@@ -4254,7 +4258,7 @@ class Icons {
         Object.keys(icons).forEach((key)=>{
             (0, _utils.def)(this, key, {
                 get: ()=>{
-                    const icon = document.createElement("i");
+                    const icon = (0, _utils.createElement)("i");
                     (0, _utils.addClass)(icon, "art-icon");
                     (0, _utils.addClass)(icon, `art-icon-${key}`);
                     (0, _utils.append)(icon, icons[key]);
@@ -4419,11 +4423,11 @@ class Setting extends (0, _componentDefault.default) {
     }
     creatHeader(item) {
         const { icons , events: { proxy  } ,  } = this.art;
-        const $item = document.createElement("div");
+        const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         (0, _utils.addClass)($item, "art-setting-item-back");
         const $left = (0, _utils.append)($item, '<div class="art-setting-item-left"></div>');
-        const $icon = document.createElement("div");
+        const $icon = (0, _utils.createElement)("div");
         (0, _utils.addClass)($icon, "art-setting-item-left-icon");
         (0, _utils.append)($icon, icons.arrowLeft);
         (0, _utils.append)($left, $icon);
@@ -4436,13 +4440,13 @@ class Setting extends (0, _componentDefault.default) {
     }
     creatItem(type, item) {
         const { icons , events: { proxy  } ,  } = this.art;
-        const $item = document.createElement("div");
+        const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         if (isStringOrNumber(item.name)) $item.dataset.name = item.name;
         if (isStringOrNumber(item.value)) $item.dataset.value = item.value;
         const $left = (0, _utils.append)($item, '<div class="art-setting-item-left"></div>');
         const $right = (0, _utils.append)($item, '<div class="art-setting-item-right"></div>');
-        const $icon = document.createElement("div");
+        const $icon = (0, _utils.createElement)("div");
         (0, _utils.addClass)($icon, "art-setting-item-left-icon");
         switch(type){
             case "switch":
@@ -4467,7 +4471,7 @@ class Setting extends (0, _componentDefault.default) {
                 if (isStringOrNumber(value)) $icon.innerHTML = value;
             }
         });
-        const $html = document.createElement("div");
+        const $html = (0, _utils.createElement)("div");
         (0, _utils.addClass)($html, "art-setting-item-left-text");
         (0, _utils.append)($html, item.html || "");
         (0, _utils.append)($left, $html);
@@ -4481,7 +4485,7 @@ class Setting extends (0, _componentDefault.default) {
                 if (isStringOrNumber(value)) $html.innerHTML = value;
             }
         });
-        const $tooltip = document.createElement("div");
+        const $tooltip = (0, _utils.createElement)("div");
         (0, _utils.addClass)($tooltip, "art-setting-item-right-tooltip");
         (0, _utils.append)($tooltip, item.tooltip || "");
         (0, _utils.append)($right, $tooltip);
@@ -4498,7 +4502,7 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
                 {
-                    const $state = document.createElement("div");
+                    const $state = (0, _utils.createElement)("div");
                     (0, _utils.addClass)($state, "art-setting-item-right-icon");
                     const $switchOn = (0, _utils.append)($state, icons.switchOn);
                     const $switchOff = (0, _utils.append)($state, icons.switchOff);
@@ -4525,7 +4529,7 @@ class Setting extends (0, _componentDefault.default) {
                 }
             case "range":
                 {
-                    const $state = document.createElement("div");
+                    const $state = (0, _utils.createElement)("div");
                     (0, _utils.addClass)($state, "art-setting-item-right-icon");
                     const $range = (0, _utils.append)($state, '<input type="range">');
                     $range.value = item.range[0] || 0;
@@ -4548,7 +4552,7 @@ class Setting extends (0, _componentDefault.default) {
                 break;
             case "selector":
                 if (item.selector && item.selector.length) {
-                    const $state = document.createElement("div");
+                    const $state = (0, _utils.createElement)("div");
                     (0, _utils.addClass)($state, "art-setting-item-right-icon");
                     (0, _utils.append)($state, icons.arrowRight);
                     (0, _utils.append)($right, $state);
@@ -4604,7 +4608,7 @@ class Setting extends (0, _componentDefault.default) {
             (0, _utils.setStyle)(this.$parent, "width", `${$panel.dataset.width}px`);
             (0, _utils.setStyle)(this.$parent, "height", `${$panel.dataset.height}px`);
         } else {
-            const $panel = document.createElement("div");
+            const $panel = (0, _utils.createElement)("div");
             (0, _utils.addClass)($panel, "art-setting-panel");
             $panel.dataset.width = width || constructor.SETTING_WIDTH;
             $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;

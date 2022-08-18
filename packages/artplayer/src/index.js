@@ -230,7 +230,7 @@ Artplayer.TOUCH_MOVE_RATIO = 0.5;
 
 if (typeof document !== 'undefined') {
     if (!document.getElementById('artplayer-style')) {
-        const $style = document.createElement('style');
+        const $style = utils.createElement('style');
         $style.id = 'artplayer-style';
         $style.textContent = style;
         document.head.appendChild($style);

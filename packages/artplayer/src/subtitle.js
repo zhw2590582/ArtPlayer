@@ -1,4 +1,4 @@
-import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape, errorHandle } from './utils';
+import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape, errorHandle, createElement } from './utils';
 import Component from './utils/component';
 import validator from 'option-validator';
 import scheme from './scheme';
@@ -69,7 +69,7 @@ export default class Subtitle extends Component {
         } = this.art;
 
         if (!$track) {
-            const $track = document.createElement('track');
+            const $track = createElement('track');
             $track.default = true;
             $track.kind = 'metadata';
             $video.appendChild($track);

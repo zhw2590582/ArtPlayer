@@ -83,3 +83,7 @@ export function replaceElement(newChild, oldChild) {
     oldChild.parentNode.replaceChild(newChild, oldChild);
     return newChild;
 }
+
+export function createElement(tag) {
+    return document.createElement(tag);
+}

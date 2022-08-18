@@ -3,7 +3,7 @@ import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 import Component from '../utils/component';
-import { append, addClass, setStyle, inverseClass, includeFromEvent, def, has } from '../utils';
+import { append, addClass, setStyle, inverseClass, includeFromEvent, def, has, createElement } from '../utils';
 
 function makeRecursion(option, parentItem, parentList) {
     for (let index = 0; index < option.length; index++) {
@@ -104,11 +104,11 @@ export default class Setting extends Component {
             events: { proxy },
         } = this.art;
 
-        const $item = document.createElement('div');
+        const $item = createElement('div');
         addClass($item, 'art-setting-item');
         addClass($item, 'art-setting-item-back');
         const $left = append($item, '<div class="art-setting-item-left"></div>');
-        const $icon = document.createElement('div');
+        const $icon = createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
         append($icon, icons.arrowLeft);
         append($left, $icon);
@@ -129,7 +129,7 @@ export default class Setting extends Component {
             events: { proxy },
         } = this.art;
 
-        const $item = document.createElement('div');
+        const $item = createElement('div');
         addClass($item, 'art-setting-item');
 
         if (isStringOrNumber(item.name)) {
@@ -143,7 +143,7 @@ export default class Setting extends Component {
         const $left = append($item, '<div class="art-setting-item-left"></div>');
         const $right = append($item, '<div class="art-setting-item-right"></div>');
 
-        const $icon = document.createElement('div');
+        const $icon = createElement('div');
         addClass($icon, 'art-setting-item-left-icon');
 
         switch (type) {
@@ -180,7 +180,7 @@ export default class Setting extends Component {
             },
         });
 
-        const $html = document.createElement('div');
+        const $html = createElement('div');
         addClass($html, 'art-setting-item-left-text');
         append($html, item.html || '');
         append($left, $html);
@@ -198,7 +198,7 @@ export default class Setting extends Component {
             },
         });
 
-        const $tooltip = document.createElement('div');
+        const $tooltip = createElement('div');
         addClass($tooltip, 'art-setting-item-right-tooltip');
         append($tooltip, item.tooltip || '');
         append($right, $tooltip);
@@ -218,7 +218,7 @@ export default class Setting extends Component {
 
         switch (type) {
             case 'switch': {
-                const $state = document.createElement('div');
+                const $state = createElement('div');
                 addClass($state, 'art-setting-item-right-icon');
                 const $switchOn = append($state, icons.switchOn);
                 const $switchOff = append($state, icons.switchOff);
@@ -246,7 +246,7 @@ export default class Setting extends Component {
             }
             case 'range':
                 {
-                    const $state = document.createElement('div');
+                    const $state = createElement('div');
                     addClass($state, 'art-setting-item-right-icon');
                     const $range = append($state, '<input type="range">');
                     $range.value = item.range[0] || 0;
@@ -270,7 +270,7 @@ export default class Setting extends Component {
                 break;
             case 'selector':
                 if (item.selector && item.selector.length) {
-                    const $state = document.createElement('div');
+                    const $state = createElement('div');
                     addClass($state, 'art-setting-item-right-icon');
                     append($state, icons.arrowRight);
                     append($right, $state);
@@ -345,7 +345,7 @@ export default class Setting extends Component {
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
             setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
         } else {
-            const $panel = document.createElement('div');
+            const $panel = createElement('div');
             addClass($panel, 'art-setting-panel');
             $panel.dataset.width = width || constructor.SETTING_WIDTH;
             $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;

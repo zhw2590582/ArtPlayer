@@ -1,4 +1,4 @@
-import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle, inverseClass } from './dom';
+import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle, inverseClass, createElement } from './dom';
 import validator from 'option-validator';
 import { ComponentOption } from '../scheme';
 import { has, def } from './property';
@@ -42,7 +42,7 @@ export default class Component {
         errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
 
         this.id += 1;
-        const $ref = document.createElement('div');
+        const $ref = createElement('div');
         addClass($ref, `art-${this.name}`);
         addClass($ref, `art-${this.name}-${name}`);
 
@@ -97,7 +97,7 @@ export default class Component {
         const { hover, proxy } = this.art.events;
 
         addClass($ref, 'art-control-selector');
-        const $value = document.createElement('div');
+        const $value = createElement('div');
         addClass($value, 'art-selector-value');
         append($value, option.html);
         $ref.innerText = '';
@@ -111,7 +111,7 @@ export default class Component {
                     }</div>`,
             )
             .join('');
-        const $list = document.createElement('div');
+        const $list = createElement('div');
         addClass($list, 'art-selector-list');
         append($list, list);
         append($ref, $list);
