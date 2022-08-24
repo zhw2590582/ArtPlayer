@@ -238,7 +238,7 @@ type Option = {
     /**
      * Player language
      */
-    lang?: 'en' | 'zh-cn' | 'zh-tw';
+    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl';
 
     /**
      * Player default volume
