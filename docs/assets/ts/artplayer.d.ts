@@ -753,7 +753,7 @@ declare class Artplayer extends Player {
             eventName: KW | KH,
             handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
             options?: boolean | AddEventListenerOptions,
-        ): void;
+        ): () => void;
         hover(element: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): void;
         loadImg(element: HTMLImageElement | string): Promise<HTMLImageElement>;
     };
