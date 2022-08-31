@@ -174,7 +174,7 @@ type Component = {
 
 type PluginFunction = (art: Artplayer) => any | ((option: any) => (art: Artplayer) => any);
 type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
-type WhitelistFunction = (ua: string) => Boolean;
+type WhitelistFunction = (ua: string) => boolean;
 type EventCallback = (event: Event) => any;
 
 type SubtitleOption = {
@@ -712,13 +712,9 @@ declare class Artplayer extends Player {
     emit(name: Events): void;
     off(name: Events, callback?: Function): void;
 
-    query(selector: string): HTMLElement;
-    proxy(
-        target: HTMLElement,
-        name: string,
-        callback: EventCallback,
-        option?: { passive?: boolean; once?: boolean; capture?: boolean } | Boolean,
-    ): Function;
+    query: Artplayer['template']['query'];
+    proxy: Artplayer['events']['proxy'];
+
     destroy(removeHtml?: boolean): void;
 
     readonly template: {
@@ -752,11 +748,11 @@ declare class Artplayer extends Player {
     };
 
     readonly events: {
-        proxy(
-            target: HTMLElement,
-            name: string,
-            callback: EventCallback,
-            option?: { passive?: boolean; once?: boolean; capture?: boolean } | Boolean,
+        proxy<K extends keyof WindowEventMap, T extends HTMLElement = HTMLDivElement>(
+            target: T,
+            name: K,
+            callback: (event: WindowEventMap[K]) => void,
+            options?: boolean | AddEventListenerOptions,
         ): Function;
         hover(target: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): Function;
         loadImg(target: HTMLImageElement | string): Promise<HTMLImageElement>;
