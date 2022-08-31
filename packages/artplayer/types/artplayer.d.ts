@@ -748,14 +748,14 @@ declare class Artplayer extends Player {
     };
 
     readonly events: {
-        proxy<K extends keyof HTMLElementEventMap, T extends HTMLElement = HTMLDivElement>(
-            target: T,
-            name: K,
-            callback: (event: HTMLElementEventMap[K]) => void,
+        proxy<KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap>(
+            element: HTMLDivElement | Document | Window,
+            eventName: KW | KH,
+            handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
             options?: boolean | AddEventListenerOptions,
-        ): Function;
-        hover(target: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): Function;
-        loadImg(target: HTMLImageElement | string): Promise<HTMLImageElement>;
+        ): void;
+        hover(element: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): void;
+        loadImg(element: HTMLImageElement | string): Promise<HTMLImageElement>;
     };
 
     readonly whitelist: {
