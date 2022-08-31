@@ -748,10 +748,10 @@ declare class Artplayer extends Player {
     };
 
     readonly events: {
-        proxy<K extends keyof WindowEventMap, T extends HTMLElement = HTMLDivElement>(
+        proxy<K extends keyof Event, T extends HTMLElement = HTMLDivElement>(
             target: T,
             name: K,
-            callback: (event: WindowEventMap[K]) => void,
+            callback: (event: Event[K]) => void,
             options?: boolean | AddEventListenerOptions,
         ): Function;
         hover(target: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): Function;
