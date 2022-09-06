@@ -24,6 +24,7 @@ export default function artplayerPluginDanmuku(option) {
             config: danmuku.config.bind(danmuku),
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
+            reset: danmuku.reset.bind(danmuku),
             get isHide() {
                 return danmuku.isHide;
             },
