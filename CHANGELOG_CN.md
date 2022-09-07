@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 - 广告插件添加 `option.muted` 选项，用于静音自动播放广告
 - 弹幕库暴露 `reset` 方法，用于清空当前弹幕显示
+- 修复在 `IOS` 全屏模式下，字幕失效的问题
 
 ## [4.5.4] - 2022-8-1
 

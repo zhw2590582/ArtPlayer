@@ -21,13 +21,13 @@ export default class Subtitle extends Component {
         this.eventDestroy = () => null;
         this.init(art.option.subtitle);
 
-        art.on('fullscreen', (state) => {
+        let lastState = false;
+        art.on('video:timeupdate', () => {
             if (!this.url) return;
-            const { $video } = this.art.template;
-            if (state && $video.webkitDisplayingFullscreen) {
-                this.createTrack('subtitles', this.url);
-            } else {
-                this.createTrack('metadata', this.url);
+            const state = this.art.template.$video.webkitDisplayingFullscreen;
+            if (state !== lastState) {
+                lastState = state;
+                this.createTrack(state ? 'subtitles' : 'metadata', this.url);
             }
         });
     }
