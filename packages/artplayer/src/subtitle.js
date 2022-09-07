@@ -8,7 +8,6 @@ import {
     escape,
     remove,
     append,
-    isMobile,
     createElement,
 } from './utils';
 import Component from './utils/component';
@@ -23,7 +22,7 @@ export default class Subtitle extends Component {
         this.init(art.option.subtitle);
 
         art.on('fullscreen', (state) => {
-            if (!this.url || !isMobile) return;
+            if (!this.url) return;
             const { $video } = this.art.template;
             if (state && $video.webkitDisplayingFullscreen) {
                 this.createTrack('subtitles', this.url);

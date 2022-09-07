@@ -9,8 +9,6 @@ export default function fullscreenMix(art) {
     } = art;
 
     const nativeScreenfull = (art) => {
-        screenfull.on('change', () => art.emit('fullscreen', screenfull.isFullscreen));
-
         def(art, 'fullscreen', {
             get() {
                 return screenfull.isFullscreen;

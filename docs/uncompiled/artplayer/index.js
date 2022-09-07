@@ -1842,7 +1842,6 @@ var _utils = require("../utils");
 function fullscreenMix(art1) {
     const { i18n , notice , template: { $video , $player  } ,  } = art1;
     const nativeScreenfull = (art)=>{
-        (0, _screenfullDefault.default).on("change", ()=>art.emit("fullscreen", (0, _screenfullDefault.default).isFullscreen));
         (0, _utils.def)(art, "fullscreen", {
             get () {
                 return (0, _screenfullDefault.default).isFullscreen;
@@ -3730,7 +3729,7 @@ class Subtitle extends (0, _componentDefault.default) {
         this.eventDestroy = ()=>null;
         this.init(art.option.subtitle);
         art.on("fullscreen", (state)=>{
-            if (!this.url || !(0, _utils.isMobile)) return;
+            if (!this.url) return;
             const { $video  } = this.art.template;
             if (state && $video.webkitDisplayingFullscreen) this.createTrack("subtitles", this.url);
             else this.createTrack("metadata", this.url);
