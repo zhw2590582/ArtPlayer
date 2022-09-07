@@ -34,7 +34,7 @@ function nativePip(art) {
     });
 
     proxy($video, 'leavepictureinpicture', () => {
-        art.emit('pip');
+        art.emit('pip', false);
     });
 }
 
@@ -54,7 +54,7 @@ function webkitPip(art) {
                 art.emit('pip', true);
             } else {
                 $video.webkitSetPresentationMode('inline');
-                art.emit('pip');
+                art.emit('pip', false);
             }
         },
     });

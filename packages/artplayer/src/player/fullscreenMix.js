@@ -31,7 +31,7 @@ export default function fullscreenMix(art) {
                     await screenfull.exit();
                     removeClass($player, 'art-fullscreen');
                     art.emit('resize');
-                    art.emit('fullscreen');
+                    art.emit('fullscreen', false);
                     notice.show = '';
                 }
             },
@@ -51,7 +51,7 @@ export default function fullscreenMix(art) {
                     notice.show = '';
                 } else {
                     $video.webkitExitFullscreen();
-                    art.emit('fullscreen');
+                    art.emit('fullscreen', false);
                     notice.show = '';
                 }
             },

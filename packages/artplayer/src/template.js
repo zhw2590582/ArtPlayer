@@ -34,7 +34,9 @@ export default class Template {
     static get html() {
         return `
           <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
-            <video class="art-video"></video>
+            <video class="art-video">
+              <track default kind="metadata"></track>
+            </video>
             <div class="art-poster"></div>
             <div class="art-subtitle"></div>
             <div class="art-danmuku"></div>
@@ -108,6 +110,7 @@ export default class Template {
 
         this.$player = this.query('.art-video-player');
         this.$video = this.query('.art-video');
+        this.$track = this.query('track');
         this.$poster = this.query('.art-poster');
         this.$subtitle = this.query('.art-subtitle');
         this.$danmuku = this.query('.art-danmuku');

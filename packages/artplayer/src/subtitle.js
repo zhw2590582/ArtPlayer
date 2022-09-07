@@ -1,4 +1,16 @@
-import { setStyle, setStyles, srtToVtt, vttToBlob, getExt, assToVtt, escape, errorHandle, createElement } from './utils';
+import {
+    setStyle,
+    setStyles,
+    srtToVtt,
+    vttToBlob,
+    getExt,
+    assToVtt,
+    escape,
+    remove,
+    append,
+    isMobile,
+    createElement,
+} from './utils';
 import Component from './utils/component';
 import validator from 'option-validator';
 import scheme from './scheme';
@@ -6,10 +18,19 @@ import scheme from './scheme';
 export default class Subtitle extends Component {
     constructor(art) {
         super(art);
-
         this.name = 'subtitle';
-
+        this.eventDestroy = () => null;
         this.init(art.option.subtitle);
+
+        art.on('fullscreen', (state) => {
+            if (!this.url || !isMobile) return;
+            const { $video } = this.art.template;
+            if (state && $video.webkitDisplayingFullscreen) {
+                this.createTrack('subtitles', this.url);
+            } else {
+                this.createTrack('metadata', this.url);
+            }
+        });
     }
 
     get url() {
@@ -58,32 +79,36 @@ export default class Subtitle extends Component {
         return subUrl;
     }
 
-    init(subtitleOption) {
-        validator(subtitleOption, scheme.subtitle);
-        if (!subtitleOption.url) return;
+    createTrack(kind, url) {
+        const { template, proxy } = this.art;
+        const { $video, $track } = template;
 
+        const $newTrack = createElement('track');
+        $newTrack.default = true;
+        $newTrack.kind = kind;
+        $newTrack.src = url;
+
+        this.eventDestroy();
+        remove($track);
+
+        append($video, $newTrack);
+        template.$track = $newTrack;
+        this.eventDestroy = proxy(this.textTrack, 'cuechange', () => this.update());
+    }
+
+    async init(subtitleOption) {
         const {
             notice,
-            events: { proxy },
-            template: { $subtitle, $video, $track },
+            template: { $subtitle },
         } = this.art;
 
-        if (!$track) {
-            const $track = createElement('track');
-            $track.default = true;
-            $track.kind = 'metadata';
-            $video.appendChild($track);
-            this.art.template.$track = $track;
-            proxy(this.textTrack, 'cuechange', this.update.bind(this));
-        }
-
+        validator(subtitleOption, scheme.subtitle);
+        if (!subtitleOption.url) return;
         this.style(subtitleOption.style);
 
-        errorHandle(window.fetch, 'fetch not support');
         return fetch(subtitleOption.url)
             .then((response) => response.arrayBuffer())
             .then((buffer) => {
-                errorHandle(window.TextDecoder, 'TextDecoder not support');
                 const decoder = new TextDecoder(subtitleOption.encoding);
                 const text = decoder.decode(buffer);
 
@@ -103,7 +128,7 @@ export default class Subtitle extends Component {
                 $subtitle.innerHTML = '';
                 if (this.url === subUrl) return subUrl;
                 URL.revokeObjectURL(this.url);
-                this.art.template.$track.src = subUrl;
+                this.createTrack('metadata', subUrl);
                 this.art.emit('subtitleSwitch', subUrl);
                 return subUrl;
             })

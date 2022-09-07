@@ -87,7 +87,7 @@ export default function miniMix(art) {
                 art.playbackRate = false;
                 art.autoSize = option.autoSize;
                 art.notice.show = '';
-                art.emit('mini');
+                art.emit('mini', false);
             }
         },
     });

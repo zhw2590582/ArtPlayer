@@ -240,7 +240,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1660786773540";
+        return "1662532087791";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1193,7 +1193,9 @@ class Template {
     static get html() {
         return `
           <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
-            <video class="art-video"></video>
+            <video class="art-video">
+              <track default kind="metadata"></track>
+            </video>
             <div class="art-poster"></div>
             <div class="art-subtitle"></div>
             <div class="art-danmuku"></div>
@@ -1261,6 +1263,7 @@ class Template {
         if (!option.useSSR) this.$container.innerHTML = Template.html;
         this.$player = this.query(".art-video-player");
         this.$video = this.query(".art-video");
+        this.$track = this.query("track");
         this.$poster = this.query(".art-poster");
         this.$subtitle = this.query(".art-subtitle");
         this.$danmuku = this.query(".art-danmuku");
@@ -1860,7 +1863,7 @@ function fullscreenMix(art1) {
                     await (0, _screenfullDefault.default).exit();
                     (0, _utils.removeClass)($player, "art-fullscreen");
                     art.emit("resize");
-                    art.emit("fullscreen");
+                    art.emit("fullscreen", false);
                     notice.show = "";
                 }
             }
@@ -1879,7 +1882,7 @@ function fullscreenMix(art1) {
                     notice.show = "";
                 } else {
                     $video.webkitExitFullscreen();
-                    art.emit("fullscreen");
+                    art.emit("fullscreen", false);
                     notice.show = "";
                 }
             }
@@ -2054,7 +2057,7 @@ function fullscreenWebMix(art) {
                 art.aspectRatioReset = true;
                 art.autoSize = art.option.autoSize;
                 art.emit("resize");
-                art.emit("fullscreenWeb");
+                art.emit("fullscreenWeb", false);
                 notice.show = "";
             }
         }
@@ -2090,7 +2093,7 @@ function nativePip(art) {
         art.emit("pip", true);
     });
     proxy($video, "leavepictureinpicture", ()=>{
-        art.emit("pip");
+        art.emit("pip", false);
     });
 }
 function webkitPip(art) {
@@ -2107,7 +2110,7 @@ function webkitPip(art) {
                 art.emit("pip", true);
             } else {
                 $video.webkitSetPresentationMode("inline");
-                art.emit("pip");
+                art.emit("pip", false);
             }
         }
     });
@@ -2351,7 +2354,7 @@ function miniMix(art) {
                 art.playbackRate = false;
                 art.autoSize = option.autoSize;
                 art.notice.show = "";
-                art.emit("mini");
+                art.emit("mini", false);
             }
         }
     });
@@ -3724,7 +3727,14 @@ class Subtitle extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "subtitle";
+        this.eventDestroy = ()=>null;
         this.init(art.option.subtitle);
+        art.on("fullscreen", (state)=>{
+            if (!this.url || !(0, _utils.isMobile)) return;
+            const { $video  } = this.art.template;
+            if (state && $video.webkitDisplayingFullscreen) this.createTrack("subtitles", this.url);
+            else this.createTrack("metadata", this.url);
+        });
     }
     get url() {
         return this.art.template.$track.src;
@@ -3762,22 +3772,25 @@ class Subtitle extends (0, _componentDefault.default) {
         if (newOption.name) notice.show = `${i18n.get("Switch Subtitle")}: ${newOption.name}`;
         return subUrl;
     }
-    init(subtitleOption) {
+    createTrack(kind, url) {
+        const { template , proxy  } = this.art;
+        const { $video , $track  } = template;
+        const $newTrack = (0, _utils.createElement)("track");
+        $newTrack.default = true;
+        $newTrack.kind = kind;
+        $newTrack.src = url;
+        this.eventDestroy();
+        (0, _utils.remove)($track);
+        (0, _utils.append)($video, $newTrack);
+        template.$track = $newTrack;
+        this.eventDestroy = proxy(this.textTrack, "cuechange", ()=>this.update());
+    }
+    async init(subtitleOption) {
+        const { notice , template: { $subtitle  } ,  } = this.art;
         (0, _optionValidatorDefault.default)(subtitleOption, (0, _schemeDefault.default).subtitle);
         if (!subtitleOption.url) return;
-        const { notice , events: { proxy  } , template: { $subtitle , $video , $track  } ,  } = this.art;
-        if (!$track) {
-            const $track = (0, _utils.createElement)("track");
-            $track.default = true;
-            $track.kind = "metadata";
-            $video.appendChild($track);
-            this.art.template.$track = $track;
-            proxy(this.textTrack, "cuechange", this.update.bind(this));
-        }
         this.style(subtitleOption.style);
-        (0, _utils.errorHandle)(window.fetch, "fetch not support");
         return fetch(subtitleOption.url).then((response)=>response.arrayBuffer()).then((buffer)=>{
-            (0, _utils.errorHandle)(window.TextDecoder, "TextDecoder not support");
             const decoder = new TextDecoder(subtitleOption.encoding);
             const text = decoder.decode(buffer);
             this.art.emit("subtitleLoad", subtitleOption.url);
@@ -3795,7 +3808,7 @@ class Subtitle extends (0, _componentDefault.default) {
             $subtitle.innerHTML = "";
             if (this.url === subUrl) return subUrl;
             URL.revokeObjectURL(this.url);
-            this.art.template.$track.src = subUrl;
+            this.createTrack("metadata", subUrl);
             this.art.emit("subtitleSwitch", subUrl);
             return subUrl;
         }).catch((err)=>{
@@ -3915,7 +3928,7 @@ function hoverInit(art, events) {
         art.emit("hover", true);
     }, ()=>{
         (0, _utils.removeClass)($player, "art-hover");
-        art.emit("hover");
+        art.emit("hover", false);
     });
 }
 exports.default = hoverInit;

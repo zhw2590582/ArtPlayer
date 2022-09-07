@@ -24,7 +24,7 @@ export default function fullscreenWebMix(art) {
                 art.aspectRatioReset = true;
                 art.autoSize = art.option.autoSize;
                 art.emit('resize');
-                art.emit('fullscreenWeb');
+                art.emit('fullscreenWeb', false);
                 notice.show = '';
             }
         },
