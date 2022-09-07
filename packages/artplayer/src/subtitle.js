@@ -25,6 +25,7 @@ export default class Subtitle extends Component {
         art.on('video:timeupdate', () => {
             if (!this.url) return;
             const state = this.art.template.$video.webkitDisplayingFullscreen;
+            if (typeof state !== 'boolean') return;
             if (state !== lastState) {
                 lastState = state;
                 this.createTrack(state ? 'subtitles' : 'metadata', this.url);
