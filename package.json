@@ -48,7 +48,7 @@
     "lerna": "^5.1.8",
     "mocha": "^10.0.0",
     "mocha-chrome": "^2.2.0",
-    "node-html-parser": "^5.3.3",
+    "node-html-parser": "^6.0.0",
     "prettier": "^2.7.1",
     "prompts": "^2.4.2",
     "servor": "^4.0.2",
