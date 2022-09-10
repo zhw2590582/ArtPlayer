@@ -213,139 +213,68 @@ export default function setting(art, danmuku) {
             selector: [
                 {
                     width: 200,
-                    html: '播放速度',
+                    html: '持续时间',
                     icon: '',
-                    tooltip: '适中',
-                    selector: [
-                        {
-                            html: '极慢',
-                            time: 10,
-                        },
-                        {
-                            html: '较慢',
-                            time: 7.5,
-                        },
-                        {
-                            default: true,
-                            html: '适中',
-                            time: 5,
-                        },
-                        {
-                            html: '较快',
-                            time: 2.5,
-                        },
-                        {
-                            html: '极快',
-                            time: 1,
-                        },
-                    ],
-                    onSelect: function (item) {
+                    tooltip: parseInt(option.speed)+'秒',
+                    range : [parseInt(option.speed), 1, 10, 1],
+                    onRange: function (item) {
                         danmuku.config({
-                            speed: item.time,
+                            speed: item.range
                         });
-                        return item.html;
-                    },
+                        return item.range+'秒';
+                    }
                 },
                 {
                     width: 200,
                     html: '字体大小',
                     icon: '',
-                    tooltip: '适中',
-                    selector: [
-                        {
-                            html: '极小',
-                            fontSize: '4%',
-                        },
-                        {
-                            html: '较小',
-                            fontSize: '5%',
-                        },
-                        {
-                            default: true,
-                            html: '适中',
-                            fontSize: '6%',
-                        },
-                        {
-                            html: '较大',
-                            fontSize: '7%',
-                        },
-                        {
-                            html: '极大',
-                            fontSize: '8%',
-                        },
-                    ],
-                    onSelect: function (item) {
+                    tooltip: option.fontSize,
+                    range : [parseInt(option.fontSize), 1, 30, 1],
+                    onRange: function (item) {
                         danmuku.config({
-                            fontSize: item.fontSize,
+                            fontSize: item.range+'%'
                         });
-                        return item.html;
-                    },
+                        return item.range+'%';
+                    }
                 },
                 {
                     width: 200,
                     html: '不透明度',
                     icon: '',
-                    tooltip: '100%',
-                    selector: [
-                        {
-                            default: true,
-                            opacity: 1,
-                            html: '100%',
-                        },
-                        {
-                            opacity: 0.75,
-                            html: '75%',
-                        },
-                        {
-                            opacity: 0.5,
-                            html: '50%',
-                        },
-                        {
-                            opacity: 0.25,
-                            html: '25%',
-                        },
-                        {
-                            opacity: 0,
-                            html: '0%',
-                        },
-                    ],
-                    onSelect: function (item) {
+                    tooltip: parseInt(option.opacity*100)+'%',
+                    range : [parseInt(option.opacity*100), 0, 100, 1],
+                    onRange: function (item) {
                         danmuku.config({
-                            opacity: item.opacity,
+                            opacity: item.range/100
                         });
-                        return item.html;
-                    },
+                        return item.range+'%';
+                    }
                 },
                 {
                     width: 200,
-                    html: '显示范围',
+                    html: '距屏幕上端',
                     icon: '',
-                    tooltip: '3/4',
-                    selector: [
-                        {
-                            html: '1/4',
-                            margin: [10, '75%'],
-                        },
-                        {
-                            html: '半屏',
-                            margin: [10, '50%'],
-                        },
-                        {
-                            default: true,
-                            html: '3/4',
-                            margin: [10, '25%'],
-                        },
-                        {
-                            html: '满屏',
-                            margin: [10, 10],
-                        },
-                    ],
-                    onSelect: function (item) {
+                    tooltip:option.margin[0],
+                    range : [parseInt(option.margin[0]), 0, 100, 1],
+                    onRange: function (item) {
                         danmuku.config({
-                            margin: item.margin,
+                            margin: [item.range+'%',option.margin[1]]
                         });
-                        return item.html;
-                    },
+                        return item.range+'%';
+                    }
+                },
+                {
+                    width: 200,
+                    html: '距屏幕下端',
+                    icon: '',
+                    tooltip:option.margin[1],
+                    range : [parseInt(option.margin[1]), 0, 100, 1],
+                    onRange: function (item) {
+                        danmuku.config({
+                            margin: [option.margin[0],item.range+'%']
+                        });
+                        return item.range+'%';
+                    }
                 },
                 {
                     html: '弹幕防重叠',
