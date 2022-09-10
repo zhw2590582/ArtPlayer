@@ -1,10 +1,4 @@
 describe("Document", function () {
-  beforeEach(function () {
-    [...Artplayer.instances].forEach((art) => {
-      art.destroy(true);
-    });
-  });
-
   afterEach(function () {
     [...Artplayer.instances].forEach((art) => {
       art.destroy(true);
