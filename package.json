@@ -46,7 +46,7 @@
     "eslint": "^8.23.0",
     "glob": "^8.0.3",
     "lerna": "^5.5.0",
-    "mocha": "^9.2.2",
+    "mocha": "^10.0.0",
     "mocha-chrome": "^2.2.0",
     "node-html-parser": "^6.0.0",
     "prettier": "^2.7.1",
