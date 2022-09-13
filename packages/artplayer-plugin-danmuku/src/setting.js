@@ -50,7 +50,7 @@ export default function setting(art, danmuku) {
         const $emitter = append(
             $controlsCenter,
             `
-            <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : '100%'}">
+            <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : '100%'}; display:${option.showInput ? 'flex' : 'none'};">
                 <div class="art-danmuku-left">
                     <div class="art-danmuku-style">
                         <div class="art-danmuku-style-panel">
@@ -299,6 +299,19 @@ export default function setting(art, danmuku) {
                             synchronousPlayback: !item.switch,
                         });
                         item.tooltip = item.switch ? '关闭' : '开启';
+                        return !item.switch;
+                    },
+                },
+                {
+                    html: '显示输入框',
+                    icon: '',
+                    tooltip: option.showInput ? '显示' : '隐藏',
+                    switch: option.showInput,
+                    onSwitch(item) {
+                        danmuku.config({
+                            showInput: !item.switch,
+                        });
+                        item.tooltip = item.switch ? '隐藏' : '显示';
                         return !item.switch;
                     },
                 },

@@ -64,6 +64,7 @@ export default class Danmuku {
             mount: undefined,
             theme: 'dark',
             beforeEmit: () => true,
+            showInput: true
         };
     }
 
@@ -87,6 +88,7 @@ export default class Danmuku {
             mount: 'undefined|htmldivelement',
             theme: 'string',
             beforeEmit: 'function',
+            showInput: 'boolean'
         };
     }
 
@@ -314,6 +316,17 @@ export default class Danmuku {
 
         if (option.margin) {
             this.convertMarginPercent();
+        }
+
+        if ('showInput' in option) {
+            var danmuku_emitter_element = this.art.query('.art-danmuku-emitter');
+            if (danmuku_emitter_element != null){
+                if (option.showInput) {
+                    danmuku_emitter_element.style.display = 'flex';
+                } else {
+                    danmuku_emitter_element.style.display = 'none';
+                }
+            }
         }
 
         this.reset();
