@@ -57,7 +57,7 @@ type ComponentOption = {
     /**
      * Component position, use in controls
      */
-    position?: 'top' | 'left' | 'right';
+    position?: 'top' | 'left' | 'right' | (string & Record<never, never>);
 
     /**
      * Custom selector list, use in controls
@@ -186,7 +186,7 @@ type SubtitleOption = {
     /**
      * The subtitle type
      */
-    type?: 'vtt' | 'srt' | 'ass';
+    type?: 'vtt' | 'srt' | 'ass' | (string & Record<never, never>);
 
     /**
      * The subtitle style object
@@ -238,7 +238,7 @@ type Option = {
     /**
      * Player language
      */
-    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl';
+    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl' | 'es' | (string & Record<never, never>);
 
     /**
      * Player default volume
