@@ -4,6 +4,7 @@ import zhTw from './zh-tw.json';
 import pl from './pl.json';
 import cs from './cs.json';
 import es from './es.json';
+
 export default class I18n {
     constructor(art) {
         this.art = art;
