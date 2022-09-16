@@ -36,8 +36,8 @@ export default class Danmuku {
         art.on('video:playing', this.start);
         art.on('video:pause', this.stop);
         art.on('video:waiting', this.stop);
-        //art.on('fullscreen', this.reset);
-        //art.on('fullscreenWeb', this.reset);
+        art.on('fullscreen', this.reset);
+        art.on('fullscreenWeb', this.reset);
         art.on('destroy', this.destroy);
         art.on('resize', this.reset);
 

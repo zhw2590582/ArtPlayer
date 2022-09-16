@@ -31,7 +31,7 @@ export default function artplayerPluginDanmuku(option) {
             get isStop() {
                 return danmuku.isStop;
             },
-            get getConfig() {
+            get option() {
                 return danmuku.option;
             }
         };
