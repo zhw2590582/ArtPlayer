@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.5.6] - 2022-9-19
+- 修复 `hls.js` 在 `Safari` 播放失效的问题
+
 ## [4.5.5] - 2022-9-19
 - 广告插件添加 `option.muted` 选项，用于静音自动播放广告
 - 弹幕库插件暴露 `art.plugins.artplayerPluginDanmuku.reset()` 方法，用于清空当前弹幕显示
