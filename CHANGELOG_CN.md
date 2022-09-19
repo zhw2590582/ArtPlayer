@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [4.5.5] - 2022-9-19
 - 广告插件添加 `option.muted` 选项，用于静音自动播放广告
 - 弹幕库暴露 `reset` 方法，用于清空当前弹幕显示
 - 弹幕库暴露 `option` 属性，用于获取当前弹幕配置
