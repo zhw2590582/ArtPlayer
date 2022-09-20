@@ -4,7 +4,7 @@ export default function airplayMix(art) {
     const {
         i18n,
         notice,
-        events: { proxy },
+        proxy,
         template: { $video },
     } = art;
 

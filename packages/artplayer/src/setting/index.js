@@ -27,7 +27,7 @@ export default class Setting extends Component {
 
         const {
             option,
-            events: { proxy },
+            proxy,
             template: { $setting, $player },
         } = art;
 
@@ -99,10 +99,7 @@ export default class Setting extends Component {
     }
 
     creatHeader(item) {
-        const {
-            icons,
-            events: { proxy },
-        } = this.art;
+        const { icons, proxy } = this.art;
 
         const $item = createElement('div');
         addClass($item, 'art-setting-item');
@@ -124,10 +121,7 @@ export default class Setting extends Component {
     }
 
     creatItem(type, item) {
-        const {
-            icons,
-            events: { proxy },
-        } = this.art;
+        const { icons, proxy } = this.art;
 
         const $item = createElement('div');
         addClass($item, 'art-setting-item');

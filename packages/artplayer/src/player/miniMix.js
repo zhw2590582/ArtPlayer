@@ -5,7 +5,7 @@ export default function miniMix(art) {
         i18n,
         option,
         storage,
-        events: { proxy },
+        proxy,
         template: { $player, $miniClose, $miniTitle, $miniHeader },
     } = art;
 

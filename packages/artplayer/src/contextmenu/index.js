@@ -22,8 +22,8 @@ export default class Contextmenu extends Component {
     init() {
         const {
             option,
+            proxy,
             template: { $player, $contextmenu },
-            events: { proxy },
         } = this.art;
 
         if (option.playbackRate) {

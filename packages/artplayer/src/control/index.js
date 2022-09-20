@@ -21,8 +21,8 @@ export default class Control extends Component {
         this.name = 'control';
 
         const {
+            proxy,
             constructor,
-            events: { proxy },
             template: { $player },
         } = art;
 

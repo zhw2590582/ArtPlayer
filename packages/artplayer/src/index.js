@@ -227,6 +227,8 @@ Artplayer.INFO_LOOP_TIME = 1000;
 Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
 Artplayer.TOUCH_MOVE_RATIO = 0.5;
+Artplayer.VOLUME_STEP = 0.1;
+Artplayer.SEEK_STEP = 5;
 
 if (typeof document !== 'undefined') {
     if (!document.getElementById('artplayer-style')) {

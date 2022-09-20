@@ -5,7 +5,7 @@ export default class Info extends Component {
     constructor(art) {
         super(art);
         this.name = 'info';
-        
+
         if (!isMobile) {
             this.init();
         }
@@ -13,8 +13,8 @@ export default class Info extends Component {
 
     init() {
         const {
+            proxy,
             constructor,
-            events: { proxy },
             template: { $infoPanel, $infoClose, $video },
         } = this.art;
 

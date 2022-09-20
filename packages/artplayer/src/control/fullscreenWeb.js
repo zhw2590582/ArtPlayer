@@ -5,11 +5,7 @@ export default function fullscreenWeb(option) {
         ...option,
         tooltip: art.i18n.get('Web Fullscreen'),
         mounted: ($control) => {
-            const {
-                events: { proxy },
-                icons,
-                i18n,
-            } = art;
+            const { proxy, icons, i18n } = art;
 
             const $fullscreenWebOn = append($control, icons.fullscreenWebOn);
             const $fullscreenWebOff = append($control, icons.fullscreenWebOff);

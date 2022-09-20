@@ -4,11 +4,7 @@ export default function volume(option) {
     return (art) => ({
         ...option,
         mounted: ($control) => {
-            const {
-                events: { proxy },
-                icons,
-                i18n,
-            } = art;
+            const { proxy, icons, i18n } = art;
 
             let isDroging = false;
             const panelWidth = art.constructor.VOLUME_PANEL_WIDTH;

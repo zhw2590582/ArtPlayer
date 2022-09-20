@@ -4,11 +4,7 @@ export default function playAndPause(option) {
     return (art) => ({
         ...option,
         mounted: ($control) => {
-            const {
-                events: { proxy },
-                icons,
-                i18n,
-            } = art;
+            const { proxy, icons, i18n } = art;
 
             const $play = append($control, icons.play);
             const $pause = append($control, icons.pause);

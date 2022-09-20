@@ -13,11 +13,7 @@ export function getPosFromEvent(art, event) {
 
 export default function progress(options) {
     return (art) => {
-        const {
-            icons,
-            option,
-            events: { proxy },
-        } = art;
+        const { icons, option, proxy } = art;
 
         return {
             ...options,

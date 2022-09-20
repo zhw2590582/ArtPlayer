@@ -5,11 +5,7 @@ export default function pip(option) {
         ...option,
         tooltip: art.i18n.get('PIP Mode'),
         mounted: ($control) => {
-            const {
-                events: { proxy },
-                icons,
-                i18n,
-            } = art;
+            const { proxy, icons, i18n } = art;
 
             append($control, icons.pip);
 

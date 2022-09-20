@@ -11,7 +11,7 @@ export default class Hotkey {
     }
 
     init() {
-        const { proxy } = this.art.events;
+        const { proxy, constructor } = this.art;
 
         this.add(27, () => {
             if (this.art.fullscreenWeb) {
@@ -24,19 +24,19 @@ export default class Hotkey {
         });
 
         this.add(37, () => {
-            this.art.backward = 5;
+            this.art.backward = constructor.SEEK_STEP;
         });
 
         this.add(38, () => {
-            this.art.volume += 0.1;
+            this.art.volume += constructor.VOLUME_STEP;
         });
 
         this.add(39, () => {
-            this.art.forward = 5;
+            this.art.forward = constructor.SEEK_STEP;
         });
 
         this.add(40, () => {
-            this.art.volume -= 0.1;
+            this.art.volume -= constructor.VOLUME_STEP;
         });
 
         proxy(window, 'keydown', (event) => {
