@@ -131,15 +131,15 @@ export default function progress(options) {
                     setBar('played', 1);
                 });
 
-                if (!isMobile) {
-                    proxy($control, 'click', (event) => {
-                        if (event.target !== $indicator) {
-                            const { second, percentage } = getPosFromEvent(art, event);
-                            setBar('played', percentage);
-                            art.seek = second;
-                        }
-                    });
+                proxy($control, 'click', (event) => {
+                    if (event.target !== $indicator) {
+                        const { second, percentage } = getPosFromEvent(art, event);
+                        setBar('played', percentage);
+                        art.seek = second;
+                    }
+                });
 
+                if (!isMobile) {
                     proxy($control, 'mousemove', (event) => {
                         setStyle($tip, 'display', 'block');
                         if (includeFromEvent(event, $highlight)) {
