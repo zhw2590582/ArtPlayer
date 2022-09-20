@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- 在移动端可以点击进度条
 
 ## [4.5.6] - 2022-9-19
 - 修复 `hls.js` 在 `Safari` 播放失效的问题
