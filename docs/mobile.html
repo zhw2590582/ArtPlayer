@@ -40,9 +40,9 @@
     <img src="/assets/sample/test.png" style="display: none;">
     <script src="./assets/js/vconsole.min.js"></script>
     <script>var vConsole = new VConsole();</script>
-    <script src="./uncompiled/artplayer/index.js"></script>
-    <script src="./uncompiled/artplayer-plugin-danmuku/index.js"></script>
-    <script src="./uncompiled/artplayer-plugin-ads/index.js"></script>
+    <script src="./compiled/artplayer/index.js"></script>
+    <script src="./compiled/artplayer-plugin-danmuku/index.js"></script>
+    <script src="./compiled/artplayer-plugin-ads/index.js"></script>
     <script>
         var art = new Artplayer({
             container: '.artplayer-app',
@@ -184,11 +184,6 @@
         console.debug('Artplayer@' + Artplayer.version);
         console.debug('Env@' + Artplayer.env);
         console.debug('Build@' + formatDate(Artplayer.build));
-
-        art.on('fullscreen', (state) => {
-            console.log('state --->', state);
-            console.log('html --->', document.querySelector('video').innerHTML.trim());
-        });
     </script>
 </body>
 
