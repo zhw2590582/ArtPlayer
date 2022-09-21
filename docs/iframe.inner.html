@@ -43,17 +43,29 @@
         });
 
         art.on('fullscreenWeb', state => {
-            // 向父窗口发送信息
             window.parent.postMessage({
-                from: 'child',
                 type: 'fullscreenWeb',
                 data: state,
             }, '*');
         });
 
-        // 接收父窗口的信息
         window.addEventListener('message', (event) => {
-            console.log('来自父窗口的信息 -->', event.data);
+            const { template: { $player }, plugins: { autoOrientation } } = art;
+            const { type, data: { clientHeight, clientWidth } } = event.data;
+            switch (type) {
+                case 'autoOrientation':
+                    setTimeout(() => {
+                        if (autoOrientation?.state) {
+                            $player.style.width = `${clientHeight}px`;
+                            $player.style.height = `${clientWidth}px`;
+                            $player.style.transform = `rotate(90deg) translate(0, -${clientWidth}px)`;
+                        }
+                    }, Artplayer.MOBILE_AUTO_ORIENTATION_TIME)
+
+                    break;
+                default:
+                    break;
+            }
         });
     </script>
 </body>
