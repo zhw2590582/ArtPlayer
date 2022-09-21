@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artplayer Iframe Fullscreen Web</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .artplayer-app {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="artplayer-app"></div>
+    </div>
+    <script src="./uncompiled/artplayer/index.js"></script>
+    <script>
+        var art = new Artplayer({
+            container: '.artplayer-app',
+            url: '/assets/sample/video.mp4',
+            fullscreen: true,
+            fullscreenWeb: true,
+            autoOrientation: true,
+            whitelist: ['*'],
+        });
+
+        art.on('fullscreenWeb', state => {
+            // 向父窗口发送信息
+            window.parent.postMessage({
+                from: 'child',
+                type: 'fullscreenWeb',
+                data: state,
+            }, '*');
+        });
+
+        // 接收父窗口的信息
+        window.addEventListener('message', (event) => {
+            console.log('来自父窗口的信息 -->', event.data);
+        });
+    </script>
+</body>
+
+</html>
