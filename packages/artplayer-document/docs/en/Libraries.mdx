@@ -55,7 +55,7 @@ var art = new Artplayer({
                 hls.attachMedia(video);
             } else {
                 const canPlay = video.canPlayType('application/vnd.apple.mpegurl');
-                if (canPlay === 'probably' || canPlay == 'maybe') {
+                if (canPlay === 'probably' || canPlay === 'maybe') {
                     video.src = url;
                 } else {
                     art.notice.show = 'Does not support playback of m3u8';
