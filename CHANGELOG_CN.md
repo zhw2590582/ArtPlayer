@@ -19,7 +19,6 @@ var art = new Artplayer({
     settings: [
         {
             html: 'Slider',
-            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
             tooltip: '5x',
             range: [5, 1, 10, 0.1],
             onChange: function (item) {
