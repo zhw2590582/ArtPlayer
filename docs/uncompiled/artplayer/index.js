@@ -206,6 +206,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         this.isReady = false;
         this.isFocus = false;
         this.isInput = false;
+        this.isRotate = false;
         this.isDestroy = false;
         this.whitelist = new (0, _whitelistDefault.default)(this);
         this.template = new (0, _templateDefault.default)(this);
@@ -240,7 +241,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1664151937110";
+        return "1664188235149";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3190,8 +3191,7 @@ function progress(options) {
                 });
                 proxy($control, "click", (event)=>{
                     if (event.target !== $indicator) {
-                        const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
-                        if (autoOrientation) {
+                        if (art.isRotate) {
                             const { clientHeight  } = document.documentElement;
                             const percentage = event.pageY / clientHeight;
                             const second = percentage * art.duration;
@@ -4010,11 +4010,10 @@ function gestureInit(art, events) {
         };
         const onTouchMove = (event)=>{
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
                 const { clientX , clientY  } = event.touches[0];
                 const ratioX = (0, _utils.clamp)((clientX - startX) / art.width, -1, 1);
                 const ratioY = (0, _utils.clamp)((clientY - startY) / art.height, -1, 1);
-                const ratio = autoOrientation ? ratioY : ratioX;
+                const ratio = art.isRotate ? ratioY : ratioX;
                 const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * art.constructor.TOUCH_MOVE_RATIO, 0, art.duration);
                 art.seek = currentTime;
                 art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1));
@@ -4982,6 +4981,7 @@ function autoOrientation(art) {
                 (0, _utils.setStyle)($player, "transform-origin", "0 0");
                 (0, _utils.setStyle)($player, "transform", `rotate(90deg) translate(0, -${viewWidth}px)`);
                 (0, _utils.addClass)($player, "art-auto-orientation");
+                art.isRotate = true;
                 art.emit("resize");
             }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
         } else if ((0, _utils.hasClass)($player, "art-auto-orientation")) {
@@ -4990,6 +4990,7 @@ function autoOrientation(art) {
             (0, _utils.setStyle)($player, "transform", null);
             (0, _utils.setStyle)($player, "transform-origin", null);
             (0, _utils.removeClass)($player, "art-auto-orientation");
+            art.isRotate = false;
             art.aspectRatioReset = true;
             art.autoSize = option.autoSize;
             art.notice.show = "";
