@@ -3188,14 +3188,23 @@ function progress(options) {
                 art.on("video:ended", ()=>{
                     setBar("played", 1);
                 });
-                if (!(0, _utils.isMobile)) {
-                    proxy($control, "click", (event)=>{
-                        if (event.target !== $indicator) {
-                            const { second , percentage  } = getPosFromEvent(art, event);
+                proxy($control, "click", (event)=>{
+                    if (event.target !== $indicator) {
+                        const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
+                        if (autoOrientation) {
+                            const { clientHeight  } = document.documentElement;
+                            const percentage = event.pageY / clientHeight;
+                            const second = percentage * art.duration;
                             setBar("played", percentage);
                             art.seek = second;
+                        } else {
+                            const { second: second1 , percentage: percentage1  } = getPosFromEvent(art, event);
+                            setBar("played", percentage1);
+                            art.seek = second1;
                         }
-                    });
+                    }
+                });
+                if (!(0, _utils.isMobile)) {
                     proxy($control, "mousemove", (event)=>{
                         (0, _utils.setStyle)($tip, "display", "block");
                         if ((0, _utils.includeFromEvent)(event, $highlight)) showHighlight(event);

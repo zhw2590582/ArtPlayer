@@ -127,15 +127,24 @@ export default function progress(options) {
                     setBar('played', 1);
                 });
 
-                if (!isMobile) {
-                    proxy($control, 'click', (event) => {
-                        if (event.target !== $indicator) {
+                proxy($control, 'click', (event) => {
+                    if (event.target !== $indicator) {
+                        const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
+                        if (autoOrientation) {
+                            const { clientHeight } = document.documentElement;
+                            const percentage = event.pageY / clientHeight;
+                            const second = percentage * art.duration;
+                            setBar('played', percentage);
+                            art.seek = second;
+                        } else {
                             const { second, percentage } = getPosFromEvent(art, event);
                             setBar('played', percentage);
                             art.seek = second;
                         }
-                    });
+                    }
+                });
 
+                if (!isMobile) {
                     proxy($control, 'mousemove', (event) => {
                         setStyle($tip, 'display', 'block');
                         if (includeFromEvent(event, $highlight)) {

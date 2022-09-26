@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 新增 `Artplayer.SEEK_STEP` 用于控制调整 `快进/快退` 的步长，默认为 `5` 秒
 - 修复部分 `svg` 图标在移动端不显示的问题
 - 修复在桌面端进度条不能拖动的问题
+- 修复在移动端进度条不能点击的问题
 - 设置面板 `range` 添加 `onChange` 选项，可以实时获取当前值
 
 ```js
