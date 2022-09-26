@@ -149,7 +149,7 @@ export default function progress(options) {
                         setStyle($tip, 'display', 'none');
                     });
 
-                    proxy($indicator, 'mousedown', () => {
+                    proxy($control, 'mousedown', () => {
                         isDroging = true;
                     });
 

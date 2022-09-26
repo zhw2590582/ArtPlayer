@@ -3204,7 +3204,7 @@ function progress(options) {
                     proxy($control, "mouseout", ()=>{
                         (0, _utils.setStyle)($tip, "display", "none");
                     });
-                    proxy($indicator, "mousedown", ()=>{
+                    proxy($control, "mousedown", ()=>{
                         isDroging = true;
                     });
                     proxy(document, "mousemove", (event)=>{
