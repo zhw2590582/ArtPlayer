@@ -126,6 +126,11 @@ type SettingOption = {
      */
     onRange?(item: SettingOption, element: HTMLElement, event: Event): void;
 
+    /**
+     * When range item change in real time
+     */
+    onChange?(item: SettingOption, element: HTMLElement, event: Event): void;
+
     $icon?: HTMLElement;
     $html?: HTMLElement;
     $tooltip?: HTMLElement;

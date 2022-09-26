@@ -286,12 +286,20 @@ export default class Setting extends Component {
                 break;
             }
             case 'range': {
-                if (item.onRange && item.$range) {
-                    const event = proxy(item.$range, 'change', async (event) => {
-                        item.tooltip = await item.onRange.call(this.art, item, $item, event);
-                    });
+                if (item.$range) {
+                    if (item.onRange) {
+                        const event = proxy(item.$range, 'change', async (event) => {
+                            item.tooltip = await item.onRange.call(this.art, item, $item, event);
+                        });
+                        this.events.push(event);
+                    }
 
-                    this.events.push(event);
+                    if (item.onChange) {
+                        const event = proxy(item.$range, 'input', async (event) => {
+                            item.tooltip = await item.onChange.call(this.art, item, $item, event);
+                        });
+                        this.events.push(event);
+                    }
                 }
                 break;
             }

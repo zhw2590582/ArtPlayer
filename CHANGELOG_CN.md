@@ -7,6 +7,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 新增 `Artplayer.VOLUME_STEP` 用于控制调整 `音量` 的步长，默认为 `0.1`
 - 新增 `Artplayer.SEEK_STEP` 用于控制调整 `快进/快退` 的步长，默认为 `5` 秒
 - 修复部分 `svg` 图标在移动端不显示的问题
+- 设置面板 `range` 添加 `onChange` 选项，可以实时获取当前值
+
+```js
+var art = new Artplayer({
+	container: '.artplayer-app',
+	url: '/assets/sample/video.mp4',
+	setting: true,
+	settings: [
+		{
+			html: 'Slider',
+			icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+			tooltip: '5x',
+			range: [5, 1, 10, 0.1],
+			onChange: function (item) {
+				return item.range + 'x';
+			},
+		},
+	],
+});
+```
 
 ## [4.5.6] - 2022-9-19
 - 修复 `hls.js` 在 `Safari` 播放失效的问题
