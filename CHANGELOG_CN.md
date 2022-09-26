@@ -13,20 +13,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ```js
 var art = new Artplayer({
-	container: '.artplayer-app',
-	url: '/assets/sample/video.mp4',
-	setting: true,
-	settings: [
-		{
-			html: 'Slider',
-			icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
-			tooltip: '5x',
-			range: [5, 1, 10, 0.1],
-			onChange: function (item) {
-				return item.range + 'x';
-			},
-		},
-	],
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    settings: [
+        {
+            html: 'Slider',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            tooltip: '5x',
+            range: [5, 1, 10, 0.1],
+            onChange: function (item) {
+                return item.range + 'x';
+            },
+        },
+    ],
 });
 ```
 
