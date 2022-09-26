@@ -129,8 +129,7 @@ export default function progress(options) {
 
                 proxy($control, 'click', (event) => {
                     if (event.target !== $indicator) {
-                        const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
-                        if (autoOrientation) {
+                        if (art.isRotate) {
                             const { clientHeight } = document.documentElement;
                             const percentage = event.pageY / clientHeight;
                             const second = percentage * art.duration;

@@ -21,11 +21,10 @@ export default function gestureInit(art, events) {
 
         const onTouchMove = (event) => {
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
                 const { clientX, clientY } = event.touches[0];
                 const ratioX = clamp((clientX - startX) / art.width, -1, 1);
                 const ratioY = clamp((clientY - startY) / art.height, -1, 1);
-                const ratio = autoOrientation ? ratioY : ratioX;
+                const ratio = art.isRotate ? ratioY : ratioX;
                 const currentTime = clamp(
                     startTime + art.duration * ratio * art.constructor.TOUCH_MOVE_RATIO,
                     0,

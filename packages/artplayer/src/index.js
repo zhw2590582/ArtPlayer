@@ -39,6 +39,7 @@ export default class Artplayer extends Emitter {
         this.isReady = false;
         this.isFocus = false;
         this.isInput = false;
+        this.isRotate = false;
         this.isDestroy = false;
 
         this.whitelist = new Whitelist(this);
