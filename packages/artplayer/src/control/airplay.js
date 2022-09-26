@@ -5,11 +5,7 @@ export default function pip(option) {
         ...option,
         tooltip: art.i18n.get('AirPlay'),
         mounted: ($control) => {
-            const {
-                events: { proxy },
-                icons,
-            } = art;
-
+            const { proxy, icons } = art;
             append($control, icons.airplay);
             proxy($control, 'click', () => art.airplay());
         },

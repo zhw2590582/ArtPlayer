@@ -3,6 +3,7 @@ import zhCn from './zh-cn.json';
 import zhTw from './zh-tw.json';
 import pl from './pl.json';
 import cs from './cs.json';
+import es from './es.json';
 
 export default class I18n {
     constructor(art) {
@@ -12,6 +13,7 @@ export default class I18n {
             'zh-tw': zhTw,
             'pl': pl,
             'cs': cs,
+            'es': es
         };
         this.init();
     }

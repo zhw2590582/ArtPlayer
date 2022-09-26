@@ -5,11 +5,7 @@ export default function fullscreen(option) {
         ...option,
         tooltip: art.i18n.get('Fullscreen'),
         mounted: ($control) => {
-            const {
-                events: { proxy },
-                icons,
-                i18n,
-            } = art;
+            const { proxy, icons, i18n } = art;
 
             const $fullscreenOn = append($control, icons.fullscreenOn);
             const $fullscreenOff = append($control, icons.fullscreenOff);

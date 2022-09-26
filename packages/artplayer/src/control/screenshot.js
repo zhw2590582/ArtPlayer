@@ -5,10 +5,7 @@ export default function screenshot(option) {
         ...option,
         tooltip: art.i18n.get('Screenshot'),
         mounted: ($control) => {
-            const {
-                events: { proxy },
-                icons,
-            } = art;
+            const { proxy, icons } = art;
 
             append($control, icons.screenshot);
             proxy($control, 'click', () => {

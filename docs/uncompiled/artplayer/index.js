@@ -206,6 +206,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         this.isReady = false;
         this.isFocus = false;
         this.isInput = false;
+        this.isRotate = false;
         this.isDestroy = false;
         this.whitelist = new (0, _whitelistDefault.default)(this);
         this.template = new (0, _templateDefault.default)(this);
@@ -234,13 +235,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "4.5.4";
+        return "4.5.6";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "1662532087791";
+        return "1664188235149";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -371,6 +372,8 @@ Artplayer.INFO_LOOP_TIME = 1000;
 Artplayer.FAST_FORWARD_VALUE = 3;
 Artplayer.FAST_FORWARD_TIME = 1000;
 Artplayer.TOUCH_MOVE_RATIO = 0.5;
+Artplayer.VOLUME_STEP = 0.1;
+Artplayer.SEEK_STEP = 5;
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-style")) {
         const $style = _utils.createElement("style");
@@ -383,57 +386,57 @@ if (typeof window !== "undefined") window["Artplayer"] = Artplayer;
 // eslint-disable-next-line no-console
 console.log(`%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`, "color: #fff; background: #5f5f5f", "color: #fff; background: #4bc729", "");
 
-},{"bundle-text:./style/index.less":"k6dFQ","option-validator":"2tbdu","./utils/emitter":"8uSwy","./utils":"euhMG","./scheme":"jVxq1","./config":"1hSww","./whitelist":"eCrHi","./template":"eG0JW","./i18n":"6Q0In","./player":"kmRM5","./control":"nK2ZQ","./contextmenu":"iygWX","./info":"6tuCt","./subtitle":"1kFyE","./events":"akAUN","./hotkey":"f1oWx","./layer":"bKuSu","./loading":"4AfId","./notice":"aKncc","./mask":"1R5LH","./icons":"bPpva","./setting":"i2oRN","./storage":"9ruid","./plugins":"7Fd4c","./mobile":"hMVZh","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"k6dFQ":[function(require,module,exports) {
+},{"bundle-text:./style/index.less":"k6dFQ","option-validator":"jUcJF","./utils/emitter":"8uSwy","./utils":"euhMG","./scheme":"jVxq1","./config":"1hSww","./whitelist":"eCrHi","./template":"eG0JW","./i18n":"6Q0In","./player":"kmRM5","./control":"nK2ZQ","./contextmenu":"iygWX","./info":"6tuCt","./subtitle":"1kFyE","./events":"akAUN","./hotkey":"f1oWx","./layer":"bKuSu","./loading":"4AfId","./notice":"aKncc","./mask":"1R5LH","./icons":"bPpva","./setting":"i2oRN","./storage":"9ruid","./plugins":"7Fd4c","./mobile":"hMVZh","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"k6dFQ":[function(require,module,exports) {
 module.exports = ".art-video-player {\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  zoom: 1;\n  color: #eee;\n  text-align: left;\n  direction: ltr;\n  user-select: none;\n  -webkit-tap-highlight-color: #0000;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n  background-color: #000;\n  outline: 0;\n  margin: 0 auto;\n  font-family: Roboto, Arial, Helvetica, sans-serif;\n  font-size: 14px;\n  line-height: 1.3;\n  display: flex;\n  position: relative;\n}\n\n.art-video-player *, .art-video-player :before, .art-video-player :after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n.art-video-player ::-webkit-scrollbar {\n  width: 5px;\n  height: 5px;\n}\n\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: #666;\n}\n\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: #ccc;\n}\n\n.art-video-player .art-icon {\n  justify-content: center;\n  align-items: center;\n  line-height: 1.5;\n  display: inline-flex;\n}\n\n.art-video-player .art-icon svg {\n  fill: #fff;\n}\n\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n\n@supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {\n  .art-video-player .art-backdrop-filter {\n    -webkit-backdrop-filter: saturate(180%) blur(20px);\n    backdrop-filter: saturate(180%) blur(20px);\n    background-color: #000000b3 !important;\n  }\n}\n\n.art-video-player .art-video {\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  cursor: pointer;\n  background-color: #000;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-poster {\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  user-select: none;\n  pointer-events: none;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-subtitle {\n  z-index: 20;\n  width: 100%;\n  text-align: center;\n  color: #fff;\n  pointer-events: none;\n  text-shadow: 1px 0 1px #000, 0 1px 1px #000, -1px 0 1px #000, 0 -1px 1px #000, 1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000;\n  padding: 0 20px;\n  font-size: 20px;\n  display: none;\n  position: absolute;\n  bottom: 10px;\n}\n\n.art-video-player .art-subtitle p {\n  word-break: break-all;\n  height: fit-content;\n  margin: 5px 0 0;\n  line-height: 1.2;\n}\n\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: block;\n}\n\n.art-video-player.art-control-show .art-subtitle {\n  bottom: 50px;\n}\n\n.art-video-player .art-danmuku {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-layers {\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n\n.art-video-player.art-layer-show .art-layers {\n  display: block;\n}\n\n.art-video-player .art-mask {\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-mask .art-state {\n  width: 60px;\n  height: 60px;\n  opacity: .85;\n  cursor: pointer;\n  pointer-events: all;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  bottom: 65px;\n  right: 30px;\n}\n\n.art-video-player.art-mask-show .art-mask {\n  display: flex;\n}\n\n.art-video-player.art-mobile .art-state {\n  position: static;\n}\n\n.art-video-player .art-loading {\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n\n.art-video-player .art-bottom {\n  z-index: 60;\n  height: 100px;\n  opacity: 0;\n  visibility: hidden;\n  pointer-events: none;\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n  flex-direction: column;\n  justify-content: space-between;\n  padding: 50px 10px 0;\n  transition: all .2s ease-in-out;\n  display: flex;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n\n.art-video-player .art-bottom .art-progress {\n  z-index: 0;\n  pointer-events: auto;\n  flex: 1;\n  position: relative;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress {\n  height: 4px;\n  cursor: pointer;\n  flex-direction: row;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  height: 50%;\n  width: 100%;\n  background: #fff3;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  z-index: 10;\n  height: 100%;\n  width: 0;\n  background: #fff6;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  z-index: 20;\n  height: 100%;\n  width: 0;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  z-index: 30;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  width: 7px;\n  height: 100%;\n  pointer-events: auto;\n  background: #fff;\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  visibility: hidden;\n  z-index: 40;\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  transition: transform .1s ease-in-out;\n  position: absolute;\n  transform: scale(.1);\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  user-select: none;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  z-index: 50;\n  height: 20px;\n  color: #fff;\n  text-align: center;\n  white-space: nowrap;\n  background: #000000b3;\n  border-radius: 3px;\n  padding: 0 5px;\n  font-size: 12px;\n  font-weight: bold;\n  line-height: 20px;\n  display: none;\n  position: absolute;\n  top: -25px;\n  left: 0;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-thumbnails {\n  pointer-events: none;\n  background-color: #000000b3;\n  display: none;\n  position: absolute;\n  bottom: 8px;\n  left: 0;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-loop {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-bottom .art-progress .art-control-loop .art-loop-point {\n  width: 2px;\n  height: 8px;\n  background: #ffffffbf;\n  position: absolute;\n  top: -2px;\n  left: 0;\n}\n\n.art-video-player .art-bottom .art-controls {\n  z-index: 1;\n  pointer-events: auto;\n  height: 45px;\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-video-player .art-bottom .art-controls .art-controls-left, .art-video-player .art-bottom .art-controls .art-controls-right {\n  display: flex;\n}\n\n.art-video-player .art-bottom .art-controls .art-controls-center {\n  height: 100%;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  padding: 0 10px;\n  display: flex;\n}\n\n.art-video-player .art-bottom .art-controls .art-controls-right {\n  justify-content: flex-end;\n}\n\n.art-video-player .art-bottom .art-controls .art-control {\n  opacity: .9;\n  min-height: 36px;\n  min-width: 36px;\n  text-align: center;\n  cursor: pointer;\n  white-space: nowrap;\n  justify-content: center;\n  align-items: center;\n  font-size: 12px;\n  line-height: 1;\n  display: flex;\n}\n\n.art-video-player .art-bottom .art-controls .art-control .art-icon {\n  float: left;\n  height: 36px;\n  width: 36px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-bottom .art-controls .art-control:hover {\n  opacity: 1;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-onlyText {\n  padding: 0 10px;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel {\n  float: left;\n  width: 0;\n  height: 100%;\n  transition: margin .2s cubic-bezier(.4, 0, 1, 1), width .2s cubic-bezier(.4, 0, 1, 1);\n  position: relative;\n  overflow: hidden;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle {\n  width: 12px;\n  height: 12px;\n  background: #fff;\n  border-radius: 12px;\n  margin-top: -6px;\n  position: absolute;\n  top: 50%;\n  left: 0;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:before {\n  background: #fff;\n  left: -54px;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:after {\n  background: #fff3;\n  left: 6px;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:before, .art-video-player .art-bottom .art-controls .art-control-volume .art-volume-panel .art-volume-slider-handle:after {\n  content: \"\";\n  height: 3px;\n  width: 60px;\n  margin-top: -2px;\n  display: block;\n  position: absolute;\n  top: 50%;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-volume:hover .art-volume-panel {\n  width: 60px;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-quality {\n  z-index: 30;\n  position: relative;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-quality .art-qualitys {\n  width: 100px;\n  text-align: center;\n  color: #fff;\n  background: #000c;\n  border-radius: 3px;\n  padding: 5px 0;\n  display: none;\n  position: absolute;\n  bottom: 35px;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-quality .art-qualitys .art-quality-item {\n  height: 30px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  text-shadow: 0 0 2px #00000080;\n  line-height: 30px;\n  overflow: hidden;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-quality .art-qualitys .art-quality-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-bottom .art-controls .art-control-quality:hover .art-qualitys {\n  display: block;\n}\n\n.art-video-player .art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner {\n  height: 100%;\n}\n\n.art-video-player .art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  visibility: visible;\n  transform: scale(1);\n}\n\n.art-video-player.art-control-show .art-bottom, .art-video-player.art-hover .art-bottom {\n  opacity: 1;\n  visibility: visible;\n}\n\n.art-video-player.art-error .art-progress-indicator, .art-video-player.art-destroy .art-progress-indicator, .art-video-player.art-error .art-progress-tip, .art-video-player.art-destroy .art-progress-tip {\n  display: none !important;\n}\n\n.art-video-player.art-mobile .art-bottom {\n  padding: 50px 7px 0;\n}\n\n.art-video-player.art-mobile .art-bottom .art-controls {\n  height: 40px;\n}\n\n.art-video-player.art-mobile .art-bottom .art-progress-indicator {\n  visibility: visible !important;\n  transform: scale(1) !important;\n}\n\n.art-video-player .art-notice {\n  z-index: 80;\n  width: 100%;\n  pointer-events: none;\n  padding: 10px;\n  font-size: 14px;\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n\n.art-video-player .art-notice .art-notice-inner {\n  color: #fff;\n  background-color: #0009;\n  border-radius: 3px;\n  padding: 5px 10px;\n  display: inline-block;\n}\n\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n\n.art-video-player .art-contextmenus {\n  z-index: 120;\n  min-width: 200px;\n  background-color: #000000e6;\n  border-radius: 3px;\n  flex-direction: column;\n  padding: 5px 0;\n  display: none;\n  position: absolute;\n  top: 10px;\n  left: 10px;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  color: #fff;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  text-shadow: 0 0 2px #00000080;\n  border-bottom: 1px solid #ffffff1a;\n  padding: 10px 15px;\n  font-size: 12px;\n  display: block;\n  overflow: hidden;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu a {\n  color: #fff;\n  text-decoration: none;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 7px;\n  display: inline-block;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span:hover, .art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: #00c9ff;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n\n.art-video-player .art-settings {\n  z-index: 90;\n  height: auto;\n  max-height: 300px;\n  background-color: #000000e6;\n  border-radius: 3px;\n  font-size: 13px;\n  transition: all .2s;\n  display: none;\n  position: absolute;\n  bottom: 50px;\n  right: 10px;\n  overflow: auto;\n}\n\n.art-video-player .art-settings .art-setting-panel {\n  display: none;\n}\n\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: block;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  height: 35px;\n  cursor: pointer;\n  color: #fffc;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 5px;\n  line-height: 1;\n  display: flex;\n  overflow: hidden;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover, .art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: #fff;\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon {\n  width: 30px;\n  height: 30px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  white-space: nowrap;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  height: 24px;\n  width: 24px;\n  justify-content: center;\n  align-items: center;\n  margin-right: 10px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  white-space: nowrap;\n  color: #ffffff80;\n  margin-right: 5px;\n  font-size: 12px;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  height: 24px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  appearance: none;\n  background-color: #fff3;\n  outline: none;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid #ffffff1a;\n}\n\n.art-video-player.art-setting-show .art-settings {\n  display: block;\n}\n\n.art-video-player.art-mobile .art-settings {\n  max-height: 200px;\n}\n\n.art-video-player .art-info {\n  z-index: 100;\n  width: 350px;\n  color: #fff;\n  -webkit-font-smoothing: antialiased;\n  background-color: #000000e6;\n  flex-direction: column;\n  padding: 10px;\n  font-family: Noto Sans CJK SC DemiLight, Roboto, Segoe UI, Tahoma, Arial, Helvetica, sans-serif;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n  top: 10px;\n  left: 10px;\n}\n\n.art-video-player .art-info .art-info-item {\n  margin-bottom: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n\n.art-video-player .art-info .art-info-item .art-info-content {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  flex: 1;\n  padding-left: 5px;\n  overflow: hidden;\n}\n\n.art-video-player .art-info .art-info-item:last-child {\n  margin-bottom: 0;\n}\n\n.art-video-player .art-info .art-info-close {\n  cursor: pointer;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n\n.art-video-player.art-hide-cursor * {\n  cursor: none !important;\n}\n\n.art-video-player[data-aspect-ratio] video {\n  box-sizing: content-box;\n  object-fit: fill;\n}\n\n.art-video-player.art-fullscreen-web {\n  z-index: 9999;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  inset: 0;\n}\n\n.art-video-player .art-mini-header {\n  z-index: 110;\n  height: 35px;\n  color: #fff;\n  opacity: 0;\n  visibility: hidden;\n  background-color: #00000080;\n  justify-content: space-between;\n  align-items: center;\n  line-height: 35px;\n  transition: all .2s ease-in-out;\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n}\n\n.art-video-player .art-mini-header .art-mini-title {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  cursor: move;\n  flex: 1;\n  padding: 0 10px;\n  overflow: hidden;\n}\n\n.art-video-player .art-mini-header .art-mini-close {\n  width: 35px;\n  text-align: center;\n  cursor: pointer;\n  font-size: 22px;\n}\n\n.art-video-player.art-is-dragging {\n  opacity: .7;\n}\n\n.art-video-player.art-mini {\n  z-index: 9999;\n  width: 400px;\n  height: 225px;\n  position: fixed;\n  box-shadow: 0 2px 5px #00000029, 0 3px 6px #0003;\n}\n\n.art-video-player.art-mini .art-mini-header {\n  user-select: none;\n  display: flex;\n}\n\n.art-video-player.art-mini.art-hover .art-mini-header {\n  opacity: 1;\n  visibility: visible;\n}\n\n.art-video-player.art-mini .art-mask .art-state {\n  position: static;\n}\n\n.art-video-player.art-mini .art-contextmenu, .art-video-player.art-mini .art-bottom, .art-video-player.art-mini .art-danmu, .art-video-player.art-mini .art-info, .art-video-player.art-mini .art-layers, .art-video-player.art-mini .art-notice, .art-video-player.art-mini .art-settings, .art-video-player.art-mini .art-subtitle {\n  display: none !important;\n}\n\n.art-auto-size {\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-auto-size .art-video-player {\n  transition: all .2s;\n}\n\n.art-video-player[data-flip=\"horizontal\"] .art-video {\n  transform: scaleX(-1);\n}\n\n.art-video-player[data-flip=\"vertical\"] .art-video {\n  transform: scaleY(-1);\n}\n\n.art-video-player .art-layer-miniProgressBar {\n  height: 2px;\n  background-color: var(--theme);\n  display: block;\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n\n.art-video-player .art-layer-lock {\n  height: 34px;\n  width: 34px;\n  color: #fff;\n  background-color: #00000080;\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  top: calc(50% - 17px);\n  left: 15px;\n}\n\n.art-video-player .art-layer-autoPlayback {\n  background-color: #000c;\n  border-radius: 3px;\n  align-items: center;\n  padding: 10px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  bottom: 60px;\n  left: 20px;\n}\n\n.art-video-player .art-layer-autoPlayback .art-autoPlayback-close {\n  cursor: pointer;\n  align-items: center;\n  margin-right: 10px;\n  display: flex;\n}\n\n.art-video-player .art-layer-autoPlayback .art-autoPlayback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: #00c9ff;\n}\n\n.art-video-player .art-layer-autoPlayback .art-autoPlayback-last {\n  margin-right: 10px;\n}\n\n.art-video-player .art-layer-autoPlayback .art-autoPlayback-jump {\n  color: #00c9ff;\n  cursor: pointer;\n}\n\n.art-video-player.art-lock .art-bottom {\n  display: none !important;\n}\n\n.art-video-player.art-lock .art-subtitle {\n  bottom: 10px !important;\n}\n\n.art-video-player.art-lock .art-layer-miniProgressBar {\n  display: block !important;\n}\n\n.art-video-player.art-control-show .art-layer-miniProgressBar {\n  display: none;\n}\n\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n\n.art-video-player .art-control-selector {\n  position: relative;\n}\n\n.art-video-player .art-control-selector .art-selector-list {\n  min-width: 100px;\n  max-width: 200px;\n  max-height: 200px;\n  text-align: center;\n  color: #fff;\n  background-color: #000c;\n  border-radius: 3px;\n  padding: 5px 0;\n  display: none;\n  position: absolute;\n  bottom: 35px;\n  overflow: auto;\n}\n\n.art-video-player .art-control-selector .art-selector-list .art-selector-item {\n  height: 30px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  text-shadow: 0 0 2px #00000080;\n  padding: 0 5px;\n  line-height: 30px;\n  overflow: hidden;\n}\n\n.art-video-player .art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-control-selector .art-selector-list .art-selector-item:hover, .art-video-player .art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: #00c9ff;\n}\n\n.art-video-player .art-control-selector:hover .art-selector-list {\n  display: block;\n}\n\n[class*=\"hint--\"] {\n  font-style: normal;\n  display: inline-block;\n  position: relative;\n}\n\n[class*=\"hint--\"]:before, [class*=\"hint--\"]:after {\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  transition: all .3s;\n  transition-delay: 0s;\n  position: absolute;\n  transform: translate3d(0, 0, 0);\n}\n\n[class*=\"hint--\"]:hover:before, [class*=\"hint--\"]:hover:after {\n  visibility: visible;\n  opacity: 1;\n  transition-delay: .1s;\n}\n\n[class*=\"hint--\"]:before {\n  content: \"\";\n  z-index: 1000001;\n  background: none;\n  border: 6px solid #0000;\n  position: absolute;\n}\n\n[class*=\"hint--\"]:after {\n  color: #fff;\n  white-space: nowrap;\n  background: #000;\n  padding: 8px 10px;\n  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  line-height: 12px;\n}\n\n[class*=\"hint--\"][aria-label]:after {\n  content: attr(aria-label);\n}\n\n[class*=\"hint--\"][data-hint]:after {\n  content: attr(data-hint);\n}\n\n[aria-label=\"\"]:before, [aria-label=\"\"]:after, [data-hint=\"\"]:before, [data-hint=\"\"]:after {\n  display: none !important;\n}\n\n.hint--top-left:before, .hint--top-right:before, .hint--top:before {\n  border-top-color: #000;\n}\n\n.hint--bottom-left:before, .hint--bottom-right:before, .hint--bottom:before {\n  border-bottom-color: #000;\n}\n\n.hint--left:before {\n  border-left-color: #000;\n}\n\n.hint--right:before {\n  border-right-color: #000;\n}\n\n.hint--top:before {\n  margin-bottom: -11px;\n}\n\n.hint--top:before, .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top:after {\n  transform: translateX(-50%);\n}\n\n.hint--top:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top:hover:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--bottom:before {\n  margin-top: -11px;\n}\n\n.hint--bottom:before, .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom:after {\n  transform: translateX(-50%);\n}\n\n.hint--bottom:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom:hover:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--right:before {\n  margin-bottom: -6px;\n  margin-left: -11px;\n}\n\n.hint--right:after {\n  margin-bottom: -14px;\n}\n\n.hint--right:before, .hint--right:after {\n  bottom: 50%;\n  left: 100%;\n}\n\n.hint--right:hover:before, .hint--right:hover:after {\n  transform: translateX(8px);\n}\n\n.hint--left:before {\n  margin-bottom: -6px;\n  margin-right: -11px;\n}\n\n.hint--left:after {\n  margin-bottom: -14px;\n}\n\n.hint--left:before, .hint--left:after {\n  bottom: 50%;\n  right: 100%;\n}\n\n.hint--left:hover:before, .hint--left:hover:after {\n  transform: translateX(-8px);\n}\n\n.hint--top-left:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-left:before, .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--top-left:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top-left:hover:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--top-right:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-right:before, .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--top-right:hover:before, .hint--top-right:hover:after {\n  transform: translateY(-8px);\n}\n\n.hint--bottom-left:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-left:before, .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--bottom-left:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom-left:hover:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--bottom-right:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-right:before, .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--bottom-right:hover:before, .hint--bottom-right:hover:after {\n  transform: translateY(8px);\n}\n\n.hint--small:after, .hint--medium:after, .hint--large:after {\n  white-space: normal;\n  word-wrap: break-word;\n  line-height: 1.4em;\n}\n\n.hint--small:after {\n  width: 80px;\n}\n\n.hint--medium:after {\n  width: 150px;\n}\n\n.hint--large:after {\n  width: 300px;\n}\n\n[class*=\"hint--\"]:after {\n  text-shadow: 0 -1px #000;\n  box-shadow: 4px 4px 8px #0000004d;\n}\n\n.hint--error:after {\n  text-shadow: 0 -1px #592726;\n  background-color: #b34e4d;\n}\n\n.hint--error.hint--top-left:before, .hint--error.hint--top-right:before, .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n\n.hint--error.hint--bottom-left:before, .hint--error.hint--bottom-right:before, .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n\n.hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n\n.hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n\n.hint--warning:after {\n  text-shadow: 0 -1px #6c5328;\n  background-color: #c09854;\n}\n\n.hint--warning.hint--top-left:before, .hint--warning.hint--top-right:before, .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n\n.hint--warning.hint--bottom-left:before, .hint--warning.hint--bottom-right:before, .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n\n.hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n\n.hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n\n.hint--info:after {\n  text-shadow: 0 -1px #1a3c4d;\n  background-color: #3986ac;\n}\n\n.hint--info.hint--top-left:before, .hint--info.hint--top-right:before, .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n\n.hint--info.hint--bottom-left:before, .hint--info.hint--bottom-right:before, .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n\n.hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n\n.hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n\n.hint--success:after {\n  text-shadow: 0 -1px #1a321a;\n  background-color: #458746;\n}\n\n.hint--success.hint--top-left:before, .hint--success.hint--top-right:before, .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n\n.hint--success.hint--bottom-left:before, .hint--success.hint--bottom-right:before, .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n\n.hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n\n.hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n\n.hint--always:after, .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n\n.hint--always.hint--top:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--always.hint--top-left:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top-left:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--always.hint--top-right:before, .hint--always.hint--top-right:after {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--bottom:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--always.hint--bottom-left:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom-left:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--always.hint--bottom-right:before, .hint--always.hint--bottom-right:after {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--left:before, .hint--always.hint--left:after {\n  transform: translateX(-8px);\n}\n\n.hint--always.hint--right:before, .hint--always.hint--right:after {\n  transform: translateX(8px);\n}\n\n.hint--rounded:after {\n  border-radius: 4px;\n}\n\n.hint--no-animate:before, .hint--no-animate:after {\n  transition-duration: 0s;\n}\n\n.hint--bounce:before, .hint--bounce:after {\n  -webkit-transition: opacity .3s, visibility .3s, -webkit-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  -moz-transition: opacity .3s, visibility .3s, -moz-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n}\n\n.hint--no-shadow:before, .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n\n.hint--no-arrow:before {\n  display: none;\n}\n\n";
 
-},{}],"2tbdu":[function(require,module,exports) {
+},{}],"jUcJF":[function(require,module,exports) {
 !function(r, t) {
     module.exports = t();
 }(this, function() {
     "use strict";
-    function e1(r1) {
-        return (e1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(r) {
+    function e(r) {
+        return (e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(r) {
             return typeof r;
         } : function(r) {
             return r && "function" == typeof Symbol && r.constructor === Symbol && r !== Symbol.prototype ? "symbol" : typeof r;
-        })(r1);
+        })(r);
     }
-    var n1 = Object.prototype.toString, c = function(r2) {
-        if (void 0 === r2) return "undefined";
-        if (null === r2) return "null";
-        var t = e1(r2);
+    var n = Object.prototype.toString, c = function(r) {
+        if (void 0 === r) return "undefined";
+        if (null === r) return "null";
+        var t = e(r);
         if ("boolean" === t) return "boolean";
         if ("string" === t) return "string";
         if ("number" === t) return "number";
         if ("symbol" === t) return "symbol";
         if ("function" === t) return function(r) {
-            return "GeneratorFunction" === o1(r);
-        }(r2) ? "generatorfunction" : "function";
+            return "GeneratorFunction" === o(r);
+        }(r) ? "generatorfunction" : "function";
         if (function(r) {
             return Array.isArray ? Array.isArray(r) : r instanceof Array;
-        }(r2)) return "array";
+        }(r)) return "array";
         if (function(r) {
             if (r.constructor && "function" == typeof r.constructor.isBuffer) return r.constructor.isBuffer(r);
             return !1;
-        }(r2)) return "buffer";
+        }(r)) return "buffer";
         if (function(r) {
             try {
                 if ("number" == typeof r.length && "function" == typeof r.callee) return !0;
-            } catch (r3) {
-                if (-1 !== r3.message.indexOf("callee")) return !0;
+            } catch (r1) {
+                if (-1 !== r1.message.indexOf("callee")) return !0;
             }
             return !1;
-        }(r2)) return "arguments";
+        }(r)) return "arguments";
         if (function(r) {
             return r instanceof Date || "function" == typeof r.toDateString && "function" == typeof r.getDate && "function" == typeof r.setDate;
-        }(r2)) return "date";
+        }(r)) return "date";
         if (function(r) {
             return r instanceof Error || "string" == typeof r.message && r.constructor && "number" == typeof r.constructor.stackTraceLimit;
-        }(r2)) return "error";
+        }(r)) return "error";
         if (function(r) {
             return r instanceof RegExp || "string" == typeof r.flags && "boolean" == typeof r.ignoreCase && "boolean" == typeof r.multiline && "boolean" == typeof r.global;
-        }(r2)) return "regexp";
-        switch(o1(r2)){
+        }(r)) return "regexp";
+        switch(o(r)){
             case "Symbol":
                 return "symbol";
             case "Promise":
@@ -467,8 +470,8 @@ module.exports = ".art-video-player {\n  z-index: 20;\n  width: 100%;\n  height:
         }
         if (function(r) {
             return "function" == typeof r.throw && "function" == typeof r.return && "function" == typeof r.next;
-        }(r2)) return "generator";
-        switch(t = n1.call(r2)){
+        }(r)) return "generator";
+        switch(t = n.call(r)){
             case "[object Object]":
                 return "object";
             case "[object Map Iterator]":
@@ -482,34 +485,34 @@ module.exports = ".art-video-player {\n  z-index: 20;\n  width: 100%;\n  height:
         }
         return t.slice(8, -1).toLowerCase().replace(/\s/g, "");
     };
-    function o1(r) {
+    function o(r) {
         return r.constructor ? r.constructor.name : null;
     }
-    function f(r4, t1) {
-        var e2 = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : [
+    function f(r, t) {
+        var e = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : [
             "option"
         ];
-        return s(r4, t1, e2), y(r4, t1, e2), function(a, i, u) {
-            var r5 = c(i), t2 = c(a);
-            if ("object" === r5) {
-                if ("object" !== t2) throw new Error("[Type Error]: '".concat(u.join("."), "' require 'object' type, but got '").concat(t2, "'"));
+        return s(r, t, e), y(r, t, e), function(a, i, u) {
+            var r = c(i), t = c(a);
+            if ("object" === r) {
+                if ("object" !== t) throw new Error("[Type Error]: '".concat(u.join("."), "' require 'object' type, but got '").concat(t, "'"));
                 Object.keys(i).forEach(function(r) {
                     var t = a[r], e = i[r], n = u.slice();
                     n.push(r), s(t, e, n), y(t, e, n), f(t, e, n);
                 });
             }
-            if ("array" === r5) {
-                if ("array" !== t2) throw new Error("[Type Error]: '".concat(u.join("."), "' require 'array' type, but got '").concat(t2, "'"));
+            if ("array" === r) {
+                if ("array" !== t) throw new Error("[Type Error]: '".concat(u.join("."), "' require 'array' type, but got '").concat(t, "'"));
                 a.forEach(function(r, t) {
                     var e = a[t], n = i[t] || i[0], o = u.slice();
                     o.push(t), s(e, n, o), y(e, n, o), f(e, n, o);
                 });
             }
-        }(r4, t1, e2), r4;
+        }(r, t, e), r;
     }
-    function s(r6, t, e) {
+    function s(r, t, e) {
         if ("string" === c(t)) {
-            var n = c(r6);
+            var n = c(r);
             if ("?" === t[0] && (t = t.slice(1) + "|undefined"), !(-1 < t.indexOf("|") ? t.split("|").map(function(r) {
                 return r.toLowerCase().trim();
             }).filter(Boolean).some(function(r) {
@@ -1194,7 +1197,7 @@ class Template {
         return `
           <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
             <video class="art-video">
-              <track default kind="metadata"></track>
+              <track default kind="metadata" src=""></track>
             </video>
             <div class="art-poster"></div>
             <div class="art-subtitle"></div>
@@ -1220,7 +1223,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.5.4"}</div>
+                  <div class="art-info-content">${"4.5.6"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -1322,6 +1325,8 @@ var _plJson = require("./pl.json");
 var _plJsonDefault = parcelHelpers.interopDefault(_plJson);
 var _csJson = require("./cs.json");
 var _csJsonDefault = parcelHelpers.interopDefault(_csJson);
+var _esJson = require("./es.json");
+var _esJsonDefault = parcelHelpers.interopDefault(_esJson);
 class I18n {
     constructor(art){
         this.art = art;
@@ -1329,7 +1334,8 @@ class I18n {
             "zh-cn": (0, _zhCnJsonDefault.default),
             "zh-tw": (0, _zhTwJsonDefault.default),
             "pl": (0, _plJsonDefault.default),
-            "cs": (0, _csJsonDefault.default)
+            "cs": (0, _csJsonDefault.default),
+            "es": (0, _esJsonDefault.default)
         };
         this.init();
     }
@@ -1347,17 +1353,20 @@ class I18n {
 }
 exports.default = I18n;
 
-},{"../utils":"euhMG","./zh-cn.json":"b9Y6f","./zh-tw.json":"9Kly9","./pl.json":"krPOm","./cs.json":"jNcs5","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"b9Y6f":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"\u7EDF\u8BA1\u4FE1\u606F","Close":"\u5173\u95ED","Video Load Failed":"\u52A0\u8F7D\u5931\u8D25","Volume":"\u97F3\u91CF","Play":"\u64AD\u653E","Pause":"\u6682\u505C","Rate":"\u901F\u5EA6","Mute":"\u9759\u97F3","Video Flip":"\u753B\u9762\u7FFB\u8F6C","Horizontal":"\u6C34\u5E73","Vertical":"\u5782\u76F4","Reconnect":"\u91CD\u65B0\u8FDE\u63A5","Show Setting":"\u663E\u793A\u8BBE\u7F6E","Hide Setting":"\u9690\u85CF\u8BBE\u7F6E","Screenshot":"\u622A\u56FE","Play Speed":"\u64AD\u653E\u901F\u5EA6","Aspect Ratio":"\u753B\u9762\u6BD4\u4F8B","Default":"\u9ED8\u8BA4","Normal":"\u6B63\u5E38","Open":"\u6253\u5F00","Switch Video":"\u5207\u6362","Switch Subtitle":"\u5207\u6362\u5B57\u5E55","Fullscreen":"\u5168\u5C4F","Exit Fullscreen":"\u9000\u51FA\u5168\u5C4F","Web Fullscreen":"\u7F51\u9875\u5168\u5C4F","Exit Web Fullscreen":"\u9000\u51FA\u7F51\u9875\u5168\u5C4F","Mini Player":"\u8FF7\u4F60\u64AD\u653E\u5668","PIP Mode":"\u5F00\u542F\u753B\u4E2D\u753B","Exit PIP Mode":"\u9000\u51FA\u753B\u4E2D\u753B","PIP Not Supported":"\u4E0D\u652F\u6301\u753B\u4E2D\u753B","Fullscreen Not Supported":"\u4E0D\u652F\u6301\u5168\u5C4F","Subtitle Offset":"\u5B57\u5E55\u504F\u79FB","Last Seen":"\u4E0A\u6B21\u770B\u5230","Jump Play":"\u8DF3\u8F6C\u64AD\u653E","AirPlay":"\u9694\u7A7A\u64AD\u653E","AirPlay Not Available":"\u9694\u7A7A\u64AD\u653E\u4E0D\u53EF\u7528"}');
+},{"../utils":"euhMG","./zh-cn.json":"b9Y6f","./zh-tw.json":"9Kly9","./pl.json":"krPOm","./cs.json":"jNcs5","./es.json":"2LP8P","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"b9Y6f":[function(require,module,exports) {
+module.exports = JSON.parse('{"Video Info":"统计信息","Close":"关闭","Video Load Failed":"加载失败","Volume":"音量","Play":"播放","Pause":"暂停","Rate":"速度","Mute":"静音","Video Flip":"画面翻转","Horizontal":"水平","Vertical":"垂直","Reconnect":"重新连接","Show Setting":"显示设置","Hide Setting":"隐藏设置","Screenshot":"截图","Play Speed":"播放速度","Aspect Ratio":"画面比例","Default":"默认","Normal":"正常","Open":"打开","Switch Video":"切换","Switch Subtitle":"切换字幕","Fullscreen":"全屏","Exit Fullscreen":"退出全屏","Web Fullscreen":"网页全屏","Exit Web Fullscreen":"退出网页全屏","Mini Player":"迷你播放器","PIP Mode":"开启画中画","Exit PIP Mode":"退出画中画","PIP Not Supported":"不支持画中画","Fullscreen Not Supported":"不支持全屏","Subtitle Offset":"字幕偏移","Last Seen":"上次看到","Jump Play":"跳转播放","AirPlay":"隔空播放","AirPlay Not Available":"隔空播放不可用"}');
 
 },{}],"9Kly9":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"\u7D71\u8A08\u8A0A\u606F","Close":"\u95DC\u9589","Video Load Failed":"\u8F09\u5165\u5931\u6557","Volume":"\u97F3\u91CF","Play":"\u64AD\u653E","Pause":"\u66AB\u505C","Rate":"\u901F\u5EA6","Mute":"\u975C\u97F3","Video Flip":"\u756B\u9762\u7FFB\u8F49","Horizontal":"\u6C34\u5E73","Vertical":"\u5782\u76F4","Reconnect":"\u91CD\u65B0\u9023\u63A5","Show Setting":"\u986F\u793A\u8BBE\u7F6E","Hide Setting":"\u96B1\u85CF\u8BBE\u7F6E","Screenshot":"\u622A\u5716","Play Speed":"\u64AD\u653E\u901F\u5EA6","Aspect Ratio":"\u756B\u9762\u6BD4\u4F8B","Default":"\u9ED8\u8A8D","Normal":"\u6B63\u5E38","Open":"\u6253\u958B","Switch Video":"\u5207\u63DB","Switch Subtitle":"\u5207\u63DB\u5B57\u5E55","Fullscreen":"\u5168\u5C4F","Exit Fullscreen":"\u9000\u51FA\u5168\u5C4F","Web Fullscreen":"\u7DB2\u9801\u5168\u5C4F","Exit Web Fullscreen":"\u9000\u51FA\u7DB2\u9801\u5168\u5C4F","Mini Player":"\u8FF7\u4F60\u64AD\u653E\u5668","PIP Mode":"\u958B\u555F\u756B\u4E2D\u756B","Exit PIP Mode":"\u9000\u51FA\u756B\u4E2D\u756B","PIP Not Supported":"\u4E0D\u652F\u6301\u756B\u4E2D\u756B","Fullscreen Not Supported":"\u4E0D\u652F\u6301\u5168\u5C4F","Subtitle Offset":"\u5B57\u5E55\u504F\u79FB","Last Seen":"\u4E0A\u6B21\u770B\u5230","Jump Play":"\u8DF3\u8F49\u64AD\u653E","AirPlay":"\u9694\u7A7A\u64AD\u653E","AirPlay Not Available":"\u9694\u7A7A\u64AD\u653E\u4E0D\u53EF\u7528"}');
+module.exports = JSON.parse('{"Video Info":"統計訊息","Close":"關閉","Video Load Failed":"載入失敗","Volume":"音量","Play":"播放","Pause":"暫停","Rate":"速度","Mute":"靜音","Video Flip":"畫面翻轉","Horizontal":"水平","Vertical":"垂直","Reconnect":"重新連接","Show Setting":"顯示设置","Hide Setting":"隱藏设置","Screenshot":"截圖","Play Speed":"播放速度","Aspect Ratio":"畫面比例","Default":"默認","Normal":"正常","Open":"打開","Switch Video":"切換","Switch Subtitle":"切換字幕","Fullscreen":"全屏","Exit Fullscreen":"退出全屏","Web Fullscreen":"網頁全屏","Exit Web Fullscreen":"退出網頁全屏","Mini Player":"迷你播放器","PIP Mode":"開啟畫中畫","Exit PIP Mode":"退出畫中畫","PIP Not Supported":"不支持畫中畫","Fullscreen Not Supported":"不支持全屏","Subtitle Offset":"字幕偏移","Last Seen":"上次看到","Jump Play":"跳轉播放","AirPlay":"隔空播放","AirPlay Not Available":"隔空播放不可用"}');
 
 },{}],"krPOm":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Informacje o wideo","Close":"Zamknij","Video Load Failed":"B\u0142\u0105d \u0142adowania wideo","Volume":"G\u0142o\u015Bno\u015B\u0107","Play":"Odtw\xf3rz","Pause":"Wstrzymaj","Rate":"Oce\u0144","Mute":"Wycisz","Video Flip":"Rotacja wideo","Horizontal":"Pozioma","Vertical":"Pionowa","Reconnect":"Po\u0142\u0105cz ponownie","Show Setting":"Poka\u017C ustawienia","Hide Setting":"Ukryj ustawienia","Screenshot":"Zrzut ekranu","Play Speed":"Pr\u0119dko\u015B\u0107 odtwarzania","Aspect Ratio":"Wsp\xf3\u0142czynnik proporcji","Default":"Domy\u015Blny","Normal":"Normalny","Open":"Otw\xf3rz","Switch Video":"Prze\u0142\u0105cz wideo","Switch Subtitle":"Prze\u0142\u0105cz napisy","Fullscreen":"Pe\u0142ny ekran","Exit Fullscreen":"Zamknij pe\u0142ny ekran","Web Fullscreen":"Tryb pe\u0142nej strony","Exit Web Fullscreen":"Zamknij tryb pe\u0142nej strony","Mini Player":"Miniodtwarzacz","PIP Mode":"Tryb PiP","Exit PIP Mode":"Zamknij tryb PiP","PIP Not Supported":"Tryb PiP nieobs\u0142ugiwany","Fullscreen Not Supported":"Pe\u0142ny ekran nieobs\u0142ugiwany","Subtitle Offset":"Przesuni\u0119cie napis\xf3w","Last Seen":"Ostatnio widziany","Jump Play":"Skocz do gry","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nie jest dost\u0119pny"}');
+module.exports = JSON.parse('{"Video Info":"Informacje o wideo","Close":"Zamknij","Video Load Failed":"Błąd ładowania wideo","Volume":"Głośność","Play":"Odtw\xf3rz","Pause":"Wstrzymaj","Rate":"Oceń","Mute":"Wycisz","Video Flip":"Rotacja wideo","Horizontal":"Pozioma","Vertical":"Pionowa","Reconnect":"Połącz ponownie","Show Setting":"Pokaż ustawienia","Hide Setting":"Ukryj ustawienia","Screenshot":"Zrzut ekranu","Play Speed":"Prędkość odtwarzania","Aspect Ratio":"Wsp\xf3łczynnik proporcji","Default":"Domyślny","Normal":"Normalny","Open":"Otw\xf3rz","Switch Video":"Przełącz wideo","Switch Subtitle":"Przełącz napisy","Fullscreen":"Pełny ekran","Exit Fullscreen":"Zamknij pełny ekran","Web Fullscreen":"Tryb pełnej strony","Exit Web Fullscreen":"Zamknij tryb pełnej strony","Mini Player":"Miniodtwarzacz","PIP Mode":"Tryb PiP","Exit PIP Mode":"Zamknij tryb PiP","PIP Not Supported":"Tryb PiP nieobsługiwany","Fullscreen Not Supported":"Pełny ekran nieobsługiwany","Subtitle Offset":"Przesunięcie napis\xf3w","Last Seen":"Ostatnio widziany","Jump Play":"Skocz do gry","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nie jest dostępny"}');
 
 },{}],"jNcs5":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Info o videu","Close":"Zav\u0159\xedt","Video Load Failed":"Nahr\xe1n\xed videa selhalo","Volume":"Hlasitost","Play":"P\u0159ehr\xe1t","Pause":"Pozastavit","Rate":"Hodnocen\xed","Mute":"Ztlumit","Video Flip":"Oto\u010Dit video","Horizontal":"Horizont\xe1ln\u011B","Vertical":"Vertik\xe1ln\u011B","Reconnect":"Op\u011Btovn\xe9 p\u0159ipojen\xed","Show Setting":"Zobrazit nastaven\xed","Hide Setting":"Skr\xfdt nastaven\xed","Screenshot":"Sn\xedmek obrazovky","Play Speed":"Rychlost p\u0159ehr\xe1v\xe1n\xed","Aspect Ratio":"Pom\u011Br stran","Default":"V\xfdchoz\xed","Normal":"Norm\xe1ln\xed","Open":"Otev\u0159\xedt","Switch Video":"P\u0159epnout video","Switch Subtitle":"P\u0159epnout titulky","Fullscreen":"Cel\xe1 obrazovka","Exit Fullscreen":"Opustit re\u017Eim cel\xe9 obrazovky","Web Fullscreen":"Cel\xe1 str\xe1nka","Exit Web Fullscreen":"Zav\u0159\xedt re\u017Eim cel\xe9 str\xe1nky","Mini Player":"Mini p\u0159ehr\xe1va\u010D","PIP Mode":"Re\u017Eim PIP","Exit PIP Mode":"Opustit re\u017Eim PIP","PIP Not Supported":"Re\u017Eim PIP nen\xed podporov\xe1n","Fullscreen Not Supported":"Re\u017Eim cel\xe9 obrazovky nen\xed podporov\xe1n","Subtitle Offset":"Posun titulk\u016F","Last Seen":"Naposledy vid\u011Bn","Jump Play":"Hra na skok","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nen\xed k dispozici"}');
+module.exports = JSON.parse('{"Video Info":"Info o videu","Close":"Zavř\xedt","Video Load Failed":"Nahr\xe1n\xed videa selhalo","Volume":"Hlasitost","Play":"Přehr\xe1t","Pause":"Pozastavit","Rate":"Hodnocen\xed","Mute":"Ztlumit","Video Flip":"Otočit video","Horizontal":"Horizont\xe1lně","Vertical":"Vertik\xe1lně","Reconnect":"Opětovn\xe9 připojen\xed","Show Setting":"Zobrazit nastaven\xed","Hide Setting":"Skr\xfdt nastaven\xed","Screenshot":"Sn\xedmek obrazovky","Play Speed":"Rychlost přehr\xe1v\xe1n\xed","Aspect Ratio":"Poměr stran","Default":"V\xfdchoz\xed","Normal":"Norm\xe1ln\xed","Open":"Otevř\xedt","Switch Video":"Přepnout video","Switch Subtitle":"Přepnout titulky","Fullscreen":"Cel\xe1 obrazovka","Exit Fullscreen":"Opustit režim cel\xe9 obrazovky","Web Fullscreen":"Cel\xe1 str\xe1nka","Exit Web Fullscreen":"Zavř\xedt režim cel\xe9 str\xe1nky","Mini Player":"Mini přehr\xe1vač","PIP Mode":"Režim PIP","Exit PIP Mode":"Opustit režim PIP","PIP Not Supported":"Režim PIP nen\xed podporov\xe1n","Fullscreen Not Supported":"Režim cel\xe9 obrazovky nen\xed podporov\xe1n","Subtitle Offset":"Posun titulků","Last Seen":"Naposledy viděn","Jump Play":"Hra na skok","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nen\xed k dispozici"}');
+
+},{}],"2LP8P":[function(require,module,exports) {
+module.exports = JSON.parse('{"Video Info":"Informaci\xf3n del video","Close":"Cerrar","Video Load Failed":"Fall\xf3 carga de video","Volume":"Volumen","Play":"Reproduciendo","Pause":"Pausa","Rate":"Velocidad","Mute":"Silencio","Video Flip":"Rotar video","Horizontal":"Horizontal","Vertical":"Vertical","Reconnect":"Reconectando","Show Setting":"Mostrar ajustes","Hide Setting":"Ocultar ajustes","Screenshot":"Captura de Pantalla","Play Speed":"Velocidad de reproducci\xf3n","Aspect Ratio":"Relaci\xf3n de aspecto","Default":"Por defecto","Normal":"Normal","Open":"Abrir","Switch Video":"Cambiar video","Switch Subtitle":"Cambiar subt\xedtulo","Fullscreen":"Pantalla completa","Exit Fullscreen":"Salir de Pantalla completa","Web Fullscreen":"Pantalla completa Web","Exit Web Fullscreen":"Salir de Pantalla completa","Mini Player":"Mini reproductor","PIP Mode":"Modo PiP","Exit PIP Mode":"Cerrar modo PiP","PIP Not Supported":"Modo PiP no compatible","Fullscreen Not Supported":"Pantalla completa no soportada","Subtitle Offset":"Ajuste subt\xedtulo","Last Seen":"Visto \xfaltima vez","Jump Play":"Saltar","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay no disponible"}');
 
 },{}],"kmRM5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1765,10 +1774,10 @@ function aspectRatioMix(art) {
                     (0, _utils.setStyle)($video, "height", "100%");
                     (0, _utils.setStyle)($video, "padding", `0 ${(clientWidth - clientWidth * percentage) / 2}px`);
                 } else {
-                    const percentage = videoWidth / setupRatio / videoHeight;
+                    const percentage1 = videoWidth / setupRatio / videoHeight;
                     (0, _utils.setStyle)($video, "width", "100%");
-                    (0, _utils.setStyle)($video, "height", `${percentage * 100}%`);
-                    (0, _utils.setStyle)($video, "padding", `${(clientHeight - clientHeight * percentage) / 2}px 0`);
+                    (0, _utils.setStyle)($video, "height", `${percentage1 * 100}%`);
+                    (0, _utils.setStyle)($video, "padding", `${(clientHeight - clientHeight * percentage1) / 2}px 0`);
                 }
                 $player.dataset.aspectRatio = ratio;
             }
@@ -1839,8 +1848,8 @@ parcelHelpers.defineInteropFlag(exports);
 var _screenfull = require("../libs/screenfull");
 var _screenfullDefault = parcelHelpers.interopDefault(_screenfull);
 var _utils = require("../utils");
-function fullscreenMix(art1) {
-    const { i18n , notice , template: { $video , $player  } ,  } = art1;
+function fullscreenMix(art) {
+    const { i18n , notice , template: { $video , $player  } ,  } = art;
     const nativeScreenfull = (art)=>{
         (0, _utils.def)(art, "fullscreen", {
             get () {
@@ -1887,10 +1896,10 @@ function fullscreenMix(art1) {
             }
         });
     };
-    art1.once("video:loadedmetadata", ()=>{
-        if ((0, _screenfullDefault.default).isEnabled) nativeScreenfull(art1);
-        else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) webkitScreenfull(art1);
-        else (0, _utils.def)(art1, "fullscreen", {
+    art.once("video:loadedmetadata", ()=>{
+        if ((0, _screenfullDefault.default).isEnabled) nativeScreenfull(art);
+        else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) webkitScreenfull(art);
+        else (0, _utils.def)(art, "fullscreen", {
             get () {
                 return false;
             },
@@ -1899,7 +1908,7 @@ function fullscreenMix(art1) {
             }
         });
         // Asynchronous setting
-        (0, _utils.def)(art1, "fullscreen", (0, _utils.get)(art1, "fullscreen"));
+        (0, _utils.def)(art, "fullscreen", (0, _utils.get)(art, "fullscreen"));
     });
 }
 exports.default = fullscreenMix;
@@ -2069,7 +2078,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function nativePip(art) {
-    const { template: { $video  } , events: { proxy  } , notice ,  } = art;
+    const { template: { $video  } , proxy , notice ,  } = art;
     $video.disablePictureInPicture = false;
     (0, _utils.def)(art, "pip", {
         get () {
@@ -2189,9 +2198,9 @@ function resizeMix(art) {
                     (0, _utils.setStyle)($player, "width", `${percentage}%`);
                     (0, _utils.setStyle)($player, "height", "100%");
                 } else {
-                    const percentage = width / videoRatio / height * 100;
+                    const percentage1 = width / videoRatio / height * 100;
                     (0, _utils.setStyle)($player, "width", "100%");
-                    (0, _utils.setStyle)($player, "height", `${percentage}%`);
+                    (0, _utils.setStyle)($player, "height", `${percentage1}%`);
                 }
                 art.emit("autoSize", {
                     width: art.width,
@@ -2280,7 +2289,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function miniMix(art) {
-    const { i18n , option , storage , events: { proxy  } , template: { $player , $miniClose , $miniTitle , $miniHeader  } ,  } = art;
+    const { i18n , option , storage , proxy , template: { $player , $miniClose , $miniTitle , $miniHeader  } ,  } = art;
     let isDroging = false;
     let lastPageX = 0;
     let lastPageY = 0;
@@ -2334,12 +2343,12 @@ function miniMix(art) {
                         art.mini = true;
                     }
                 } else {
-                    const top = window.innerHeight - art.height - 50;
-                    const left = window.innerWidth - art.width - 50;
-                    storage.set("top", top);
-                    storage.set("left", left);
-                    (0, _utils.setStyle)($player, "top", `${top}px`);
-                    (0, _utils.setStyle)($player, "left", `${left}px`);
+                    const top1 = window.innerHeight - art.height - 50;
+                    const left1 = window.innerWidth - art.width - 50;
+                    storage.set("top", top1);
+                    storage.set("left", left1);
+                    (0, _utils.setStyle)($player, "top", `${top1}px`);
+                    (0, _utils.setStyle)($player, "left", `${left1}px`);
                 }
                 art.aspectRatio = false;
                 art.playbackRate = false;
@@ -2544,7 +2553,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function airplayMix(art) {
-    const { i18n , notice , events: { proxy  } , template: { $video  } ,  } = art;
+    const { i18n , notice , proxy , template: { $video  } ,  } = art;
     let available = true;
     if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) proxy($video, "webkitplaybacktargetavailabilitychanged", (event)=>{
         switch(event.availability){
@@ -2599,7 +2608,7 @@ var _config = require("../config");
 var _configDefault = parcelHelpers.interopDefault(_config);
 var _utils = require("../utils");
 function eventInit(art) {
-    const { i18n , notice , option , constructor , events: { proxy  } , template: { $player , $video , $poster  } ,  } = art;
+    const { i18n , notice , option , constructor , proxy , template: { $player , $video , $poster  } ,  } = art;
     let reconnectTime = 0;
     for(let index = 0; index < (0, _configDefault.default).events.length; index++)proxy($video, (0, _configDefault.default).events[index], (event)=>{
         art.emit(`video:${event.type}`, event);
@@ -2740,7 +2749,7 @@ class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "control";
-        const { constructor , events: { proxy  } , template: { $player  } ,  } = art;
+        const { proxy , constructor , template: { $player  } ,  } = art;
         let activeTime = Date.now();
         proxy($player, [
             "click",
@@ -2952,7 +2961,7 @@ class Component {
 }
 exports.default = Component;
 
-},{"./dom":"iWXW0","option-validator":"2tbdu","../scheme":"jVxq1","./property":"amiWs","./error":"kCmly","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"d7VBA":[function(require,module,exports) {
+},{"./dom":"iWXW0","option-validator":"jUcJF","../scheme":"jVxq1","./property":"amiWs","./error":"kCmly","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"d7VBA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2961,7 +2970,7 @@ function fullscreen(option) {
             ...option,
             tooltip: art.i18n.get("Fullscreen"),
             mounted: ($control)=>{
-                const { events: { proxy  } , icons , i18n ,  } = art;
+                const { proxy , icons , i18n  } = art;
                 const $fullscreenOn = (0, _utils.append)($control, icons.fullscreenOn);
                 const $fullscreenOff = (0, _utils.append)($control, icons.fullscreenOff);
                 (0, _utils.setStyle)($fullscreenOff, "display", "none");
@@ -2993,7 +3002,7 @@ function fullscreenWeb(option) {
             ...option,
             tooltip: art.i18n.get("Web Fullscreen"),
             mounted: ($control)=>{
-                const { events: { proxy  } , icons , i18n ,  } = art;
+                const { proxy , icons , i18n  } = art;
                 const $fullscreenWebOn = (0, _utils.append)($control, icons.fullscreenWebOn);
                 const $fullscreenWebOff = (0, _utils.append)($control, icons.fullscreenWebOff);
                 (0, _utils.setStyle)($fullscreenWebOff, "display", "none");
@@ -3025,7 +3034,7 @@ function pip(option) {
             ...option,
             tooltip: art.i18n.get("PIP Mode"),
             mounted: ($control)=>{
-                const { events: { proxy  } , icons , i18n ,  } = art;
+                const { proxy , icons , i18n  } = art;
                 (0, _utils.append)($control, icons.pip);
                 proxy($control, "click", ()=>{
                     art.pip = !art.pip;
@@ -3046,7 +3055,7 @@ function playAndPause(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { events: { proxy  } , icons , i18n ,  } = art;
+                const { proxy , icons , i18n  } = art;
                 const $play = (0, _utils.append)($control, icons.play);
                 const $pause = (0, _utils.append)($control, icons.pause);
                 (0, _utils.tooltip)($play, i18n.get("Play"));
@@ -3100,7 +3109,7 @@ function getPosFromEvent(art, event) {
 }
 function progress(options) {
     return (art)=>{
-        const { icons , option , events: { proxy  } ,  } = art;
+        const { icons , option , proxy  } = art;
         return {
             ...options,
             html: `
@@ -3180,14 +3189,22 @@ function progress(options) {
                 art.on("video:ended", ()=>{
                     setBar("played", 1);
                 });
-                if (!(0, _utils.isMobile)) {
-                    proxy($control, "click", (event)=>{
-                        if (event.target !== $indicator) {
-                            const { second , percentage  } = getPosFromEvent(art, event);
+                proxy($control, "click", (event)=>{
+                    if (event.target !== $indicator) {
+                        if (art.isRotate) {
+                            const { clientHeight  } = document.documentElement;
+                            const percentage = event.pageY / clientHeight;
+                            const second = percentage * art.duration;
                             setBar("played", percentage);
                             art.seek = second;
+                        } else {
+                            const { second: second1 , percentage: percentage1  } = getPosFromEvent(art, event);
+                            setBar("played", percentage1);
+                            art.seek = second1;
                         }
-                    });
+                    }
+                });
+                if (!(0, _utils.isMobile)) {
                     proxy($control, "mousemove", (event)=>{
                         (0, _utils.setStyle)($tip, "display", "block");
                         if ((0, _utils.includeFromEvent)(event, $highlight)) showHighlight(event);
@@ -3196,7 +3213,7 @@ function progress(options) {
                     proxy($control, "mouseout", ()=>{
                         (0, _utils.setStyle)($tip, "display", "none");
                     });
-                    proxy($indicator, "mousedown", ()=>{
+                    proxy($control, "mousedown", ()=>{
                         isDroging = true;
                     });
                     proxy(document, "mousemove", (event)=>{
@@ -3251,7 +3268,7 @@ function volume(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { events: { proxy  } , icons , i18n ,  } = art;
+                const { proxy , icons , i18n  } = art;
                 let isDroging = false;
                 const panelWidth = art.constructor.VOLUME_PANEL_WIDTH;
                 const handleWidth = art.constructor.VOLUME_HANDLE_WIDTH;
@@ -3319,7 +3336,7 @@ function setting(option) {
             ...option,
             tooltip: art.i18n.get("Show Setting"),
             mounted: ($control)=>{
-                const { events: { proxy  } , icons , i18n ,  } = art;
+                const { proxy , icons , i18n  } = art;
                 (0, _utils.append)($control, icons.setting);
                 proxy($control, "click", ()=>{
                     art.setting.toggle = true;
@@ -3391,7 +3408,7 @@ function screenshot(option) {
             ...option,
             tooltip: art.i18n.get("Screenshot"),
             mounted: ($control)=>{
-                const { events: { proxy  } , icons ,  } = art;
+                const { proxy , icons  } = art;
                 (0, _utils.append)($control, icons.screenshot);
                 proxy($control, "click", ()=>{
                     art.screenshot();
@@ -3451,7 +3468,7 @@ function pip(option) {
             ...option,
             tooltip: art.i18n.get("AirPlay"),
             mounted: ($control)=>{
-                const { events: { proxy  } , icons ,  } = art;
+                const { proxy , icons  } = art;
                 (0, _utils.append)($control, icons.airplay);
                 proxy($control, "click", ()=>art.airplay());
             }
@@ -3485,7 +3502,7 @@ class Contextmenu extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { option , template: { $player , $contextmenu  } , events: { proxy  } ,  } = this.art;
+        const { option , proxy , template: { $player , $contextmenu  } ,  } = this.art;
         if (option.playbackRate) this.add((0, _playbackRateDefault.default)({
             name: "playbackRate",
             index: 10
@@ -3657,7 +3674,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.4"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.6"}</a>`
     };
 }
 exports.default = version;
@@ -3689,7 +3706,7 @@ class Info extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { constructor , events: { proxy  } , template: { $infoPanel , $infoClose , $video  } ,  } = this.art;
+        const { proxy , constructor , template: { $infoPanel , $infoClose , $video  } ,  } = this.art;
         proxy($infoClose, "click", ()=>{
             this.show = false;
         });
@@ -3822,7 +3839,7 @@ class Subtitle extends (0, _componentDefault.default) {
 }
 exports.default = Subtitle;
 
-},{"./utils":"euhMG","./utils/component":"1UWqI","option-validator":"2tbdu","./scheme":"jVxq1","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"akAUN":[function(require,module,exports) {
+},{"./utils":"euhMG","./utils/component":"1UWqI","option-validator":"jUcJF","./scheme":"jVxq1","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"akAUN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _error = require("../utils/error");
@@ -3993,11 +4010,10 @@ function gestureInit(art, events) {
         };
         const onTouchMove = (event)=>{
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const autoOrientation = art.plugins.autoOrientation && art.plugins.autoOrientation.state;
                 const { clientX , clientY  } = event.touches[0];
                 const ratioX = (0, _utils.clamp)((clientX - startX) / art.width, -1, 1);
                 const ratioY = (0, _utils.clamp)((clientY - startY) / art.height, -1, 1);
-                const ratio = autoOrientation ? ratioY : ratioX;
+                const ratio = art.isRotate ? ratioY : ratioX;
                 const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * art.constructor.TOUCH_MOVE_RATIO, 0, art.duration);
                 art.seek = currentTime;
                 art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1));
@@ -4052,7 +4068,7 @@ class Hotkey {
         if (art.option.hotkey && !(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy  } = this.art.events;
+        const { proxy , constructor  } = this.art;
         this.add(27, ()=>{
             if (this.art.fullscreenWeb) this.art.fullscreenWeb = false;
         });
@@ -4060,16 +4076,16 @@ class Hotkey {
             this.art.toggle();
         });
         this.add(37, ()=>{
-            this.art.backward = 5;
+            this.art.backward = constructor.SEEK_STEP;
         });
         this.add(38, ()=>{
-            this.art.volume += 0.1;
+            this.art.volume += constructor.VOLUME_STEP;
         });
         this.add(39, ()=>{
-            this.art.forward = 5;
+            this.art.forward = constructor.SEEK_STEP;
         });
         this.add(40, ()=>{
-            this.art.volume -= 0.1;
+            this.art.volume -= constructor.VOLUME_STEP;
         });
         proxy(window, "keydown", (event)=>{
             if (this.art.isFocus) {
@@ -4314,10 +4330,10 @@ module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
 },{}],"3bhbH":[function(require,module,exports) {
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"100%\" version=\"1.1\" viewBox=\"0 0 32 32\" width=\"100%\">\n    <path d=\"M 19.41,20.09 14.83,15.5 19.41,10.91 18,9.5 l -6,6 6,6 z\" fill=\"#fff\"></path>\n</svg>";
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"32\" width=\"32\" version=\"1.1\" viewBox=\"0 0 32 32\">\n    <path d=\"M 19.41,20.09 14.83,15.5 19.41,10.91 18,9.5 l -6,6 6,6 z\" fill=\"#fff\"></path>\n</svg>";
 
 },{}],"aq1mg":[function(require,module,exports) {
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"100%\" version=\"1.1\" viewBox=\"0 0 32 32\" width=\"100%\">\n    <path d=\"m 12.59,20.34 4.58,-4.59 -4.58,-4.59 1.41,-1.41 6,6 -6,6 z\" fill=\"#fff\"></path>\n</svg>";
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"32\" width=\"32\" version=\"1.1\" viewBox=\"0 0 32 32\">\n    <path d=\"m 12.59,20.34 4.58,-4.59 -4.58,-4.59 1.41,-1.41 6,6 -6,6 z\" fill=\"#fff\"></path>\n</svg>";
 
 },{}],"knRE0":[function(require,module,exports) {
 module.exports = "<svg height=\"24\" viewBox=\"0 0 24 24\" width=\"24\"><path d=\"M10,8v8l6-4L10,8L10,8z M6.3,5L5.7,4.2C7.2,3,9,2.2,11,2l0.1,1C9.3,3.2,7.7,3.9,6.3,5z            M5,6.3L4.2,5.7C3,7.2,2.2,9,2,11 l1,.1C3.2,9.3,3.9,7.7,5,6.3z            M5,17.7c-1.1-1.4-1.8-3.1-2-4.8L2,13c0.2,2,1,3.8,2.2,5.4L5,17.7z            M11.1,21c-1.8-0.2-3.4-0.9-4.8-2 l-0.6,.8C7.2,21,9,21.8,11,22L11.1,21z            M22,12c0-5.2-3.9-9.4-9-10l-0.1,1c4.6,.5,8.1,4.3,8.1,9s-3.5,8.5-8.1,9l0.1,1 C18.2,21.5,22,17.2,22,12z\" fill=\"white\" data-darkreader-inline-fill=\"\" style=\"--darkreader-inline-fill: #a8a6a4\"></path></svg>";
@@ -4399,7 +4415,7 @@ function isStringOrNumber(val) {
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option , events: { proxy  } , template: { $setting , $player  } ,  } = art;
+        const { option , proxy , template: { $setting , $player  } ,  } = art;
         this.name = "setting";
         this.$parent = $setting;
         this.option = [];
@@ -4438,7 +4454,7 @@ class Setting extends (0, _componentDefault.default) {
         this.init(this.option);
     }
     creatHeader(item) {
-        const { icons , events: { proxy  } ,  } = this.art;
+        const { icons , proxy  } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         (0, _utils.addClass)($item, "art-setting-item-back");
@@ -4455,7 +4471,7 @@ class Setting extends (0, _componentDefault.default) {
         return $item;
     }
     creatItem(type, item) {
-        const { icons , events: { proxy  } ,  } = this.art;
+        const { icons , proxy  } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         if (isStringOrNumber(item.name)) $item.dataset.name = item.name;
@@ -4545,15 +4561,15 @@ class Setting extends (0, _componentDefault.default) {
                 }
             case "range":
                 {
-                    const $state = (0, _utils.createElement)("div");
-                    (0, _utils.addClass)($state, "art-setting-item-right-icon");
-                    const $range = (0, _utils.append)($state, '<input type="range">');
+                    const $state1 = (0, _utils.createElement)("div");
+                    (0, _utils.addClass)($state1, "art-setting-item-right-icon");
+                    const $range = (0, _utils.append)($state1, '<input type="range">');
                     $range.value = item.range[0] || 0;
                     $range.min = item.range[1] || 0;
                     $range.max = item.range[2] || 10;
                     $range.step = item.range[3] || 1;
                     (0, _utils.addClass)($range, "art-setting-range");
-                    (0, _utils.append)($right, $state);
+                    (0, _utils.append)($right, $state1);
                     item.$range = $range;
                     (0, _utils.def)(item, "range", {
                         configurable: true,
@@ -4568,10 +4584,10 @@ class Setting extends (0, _componentDefault.default) {
                 break;
             case "selector":
                 if (item.selector && item.selector.length) {
-                    const $state = (0, _utils.createElement)("div");
-                    (0, _utils.addClass)($state, "art-setting-item-right-icon");
-                    (0, _utils.append)($state, icons.arrowRight);
-                    (0, _utils.append)($right, $state);
+                    const $state2 = (0, _utils.createElement)("div");
+                    (0, _utils.addClass)($state2, "art-setting-item-right-icon");
+                    (0, _utils.append)($state2, icons.arrowRight);
+                    (0, _utils.append)($right, $state2);
                 }
                 break;
             default:
@@ -4580,23 +4596,31 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
                 if (item.onSwitch) {
-                    const event1 = proxy($item, "click", async (event)=>{
+                    const event = proxy($item, "click", async (event)=>{
                         item.switch = await item.onSwitch.call(this.art, item, $item, event);
                     });
-                    this.events.push(event1);
+                    this.events.push(event);
                 }
                 break;
             case "range":
-                if (item.onRange && item.$range) {
-                    const event3 = proxy(item.$range, "change", async (event)=>{
-                        item.tooltip = await item.onRange.call(this.art, item, $item, event);
-                    });
-                    this.events.push(event3);
+                if (item.$range) {
+                    if (item.onRange) {
+                        const event1 = proxy(item.$range, "change", async (event)=>{
+                            item.tooltip = await item.onRange.call(this.art, item, $item, event);
+                        });
+                        this.events.push(event1);
+                    }
+                    if (item.onChange) {
+                        const event2 = proxy(item.$range, "input", async (event)=>{
+                            item.tooltip = await item.onChange.call(this.art, item, $item, event);
+                        });
+                        this.events.push(event2);
+                    }
                 }
                 break;
             case "selector":
                 {
-                    const event5 = proxy($item, "click", async (event)=>{
+                    const event3 = proxy($item, "click", async (event)=>{
                         if (item.selector && item.selector.length) this.init(item.selector, item.width);
                         else {
                             (0, _utils.inverseClass)($item, "art-current");
@@ -4607,7 +4631,7 @@ class Setting extends (0, _componentDefault.default) {
                             }
                         }
                     });
-                    this.events.push(event5);
+                    this.events.push(event3);
                     if (item.default) (0, _utils.addClass)($item, "art-current");
                 }
                 break;
@@ -4624,26 +4648,26 @@ class Setting extends (0, _componentDefault.default) {
             (0, _utils.setStyle)(this.$parent, "width", `${$panel.dataset.width}px`);
             (0, _utils.setStyle)(this.$parent, "height", `${$panel.dataset.height}px`);
         } else {
-            const $panel = (0, _utils.createElement)("div");
-            (0, _utils.addClass)($panel, "art-setting-panel");
-            $panel.dataset.width = width || constructor.SETTING_WIDTH;
-            $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
+            const $panel1 = (0, _utils.createElement)("div");
+            (0, _utils.addClass)($panel1, "art-setting-panel");
+            $panel1.dataset.width = width || constructor.SETTING_WIDTH;
+            $panel1.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
             if (option[0] && option[0].$parentItem) {
-                (0, _utils.append)($panel, this.creatHeader(option[0]));
-                $panel.dataset.height = Number($panel.dataset.height) + constructor.SETTING_ITEM_HEIGHT;
+                (0, _utils.append)($panel1, this.creatHeader(option[0]));
+                $panel1.dataset.height = Number($panel1.dataset.height) + constructor.SETTING_ITEM_HEIGHT;
             }
             for(let index = 0; index < option.length; index++){
                 const item = option[index];
-                if ((0, _utils.has)(item, "switch")) (0, _utils.append)($panel, this.creatItem("switch", item));
-                else if ((0, _utils.has)(item, "range")) (0, _utils.append)($panel, this.creatItem("range", item));
-                else (0, _utils.append)($panel, this.creatItem("selector", item));
+                if ((0, _utils.has)(item, "switch")) (0, _utils.append)($panel1, this.creatItem("switch", item));
+                else if ((0, _utils.has)(item, "range")) (0, _utils.append)($panel1, this.creatItem("range", item));
+                else (0, _utils.append)($panel1, this.creatItem("selector", item));
             }
-            (0, _utils.append)(this.$parent, $panel);
-            this.cache.set(option, $panel);
-            (0, _utils.inverseClass)($panel, "art-current");
-            (0, _utils.setStyle)(this.$parent, "width", `${$panel.dataset.width}px`);
-            (0, _utils.setStyle)(this.$parent, "height", `${$panel.dataset.height}px`);
-            if (option[0] && option[0].$parentItem && option[0].$parentItem.mounted) option[0].$parentItem.mounted.call(this.art, $panel, option[0].$parentItem);
+            (0, _utils.append)(this.$parent, $panel1);
+            this.cache.set(option, $panel1);
+            (0, _utils.inverseClass)($panel1, "art-current");
+            (0, _utils.setStyle)(this.$parent, "width", `${$panel1.dataset.width}px`);
+            (0, _utils.setStyle)(this.$parent, "height", `${$panel1.dataset.height}px`);
+            if (option[0] && option[0].$parentItem && option[0].$parentItem.mounted) option[0].$parentItem.mounted.call(this.art, $panel1, option[0].$parentItem);
         }
     }
 }
@@ -4957,6 +4981,7 @@ function autoOrientation(art) {
                 (0, _utils.setStyle)($player, "transform-origin", "0 0");
                 (0, _utils.setStyle)($player, "transform", `rotate(90deg) translate(0, -${viewWidth}px)`);
                 (0, _utils.addClass)($player, "art-auto-orientation");
+                art.isRotate = true;
                 art.emit("resize");
             }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
         } else if ((0, _utils.hasClass)($player, "art-auto-orientation")) {
@@ -4965,6 +4990,7 @@ function autoOrientation(art) {
             (0, _utils.setStyle)($player, "transform", null);
             (0, _utils.setStyle)($player, "transform-origin", null);
             (0, _utils.removeClass)($player, "art-auto-orientation");
+            art.isRotate = false;
             art.aspectRatioReset = true;
             art.autoSize = option.autoSize;
             art.notice.show = "";
@@ -5000,7 +5026,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function autoPlayback(art) {
-    const { i18n , icons , storage , constructor , events: { proxy  } , template: { $poster  } ,  } = art;
+    const { i18n , icons , storage , constructor , proxy , template: { $poster  } ,  } = art;
     const $autoPlayback = art.layers.add({
         name: "autoPlayback",
         html: `
@@ -5066,7 +5092,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function fastForward(art) {
-    const { constructor , events: { proxy  } , template: { $player , $video  } ,  } = art;
+    const { constructor , proxy , template: { $player , $video  } ,  } = art;
     let timer = null;
     let isPress = false;
     const onStart = (event)=>{
@@ -5147,7 +5173,7 @@ var _configDefault = parcelHelpers.interopDefault(_config);
 var _utils = require("./utils");
 class Mobile {
     constructor(art){
-        const { option , events: { proxy  } , template: { $video  } ,  } = art;
+        const { option , proxy , template: { $video  } ,  } = art;
         for(let index = 0; index < (0, _configDefault.default).events.length; index++)proxy($video, (0, _configDefault.default).events[index], (event)=>{
             art.emit(`video:${event.type}`, event);
         });

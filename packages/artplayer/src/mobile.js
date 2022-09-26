@@ -5,7 +5,7 @@ export default class Mobile {
     constructor(art) {
         const {
             option,
-            events: { proxy },
+            proxy,
             template: { $video },
         } = art;
 

@@ -3,7 +3,7 @@ import { def } from '../utils';
 function nativePip(art) {
     const {
         template: { $video },
-        events: { proxy },
+        proxy,
         notice,
     } = art;
 

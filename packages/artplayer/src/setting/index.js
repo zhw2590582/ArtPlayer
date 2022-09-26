@@ -27,7 +27,7 @@ export default class Setting extends Component {
 
         const {
             option,
-            events: { proxy },
+            proxy,
             template: { $setting, $player },
         } = art;
 
@@ -99,10 +99,7 @@ export default class Setting extends Component {
     }
 
     creatHeader(item) {
-        const {
-            icons,
-            events: { proxy },
-        } = this.art;
+        const { icons, proxy } = this.art;
 
         const $item = createElement('div');
         addClass($item, 'art-setting-item');
@@ -124,10 +121,7 @@ export default class Setting extends Component {
     }
 
     creatItem(type, item) {
-        const {
-            icons,
-            events: { proxy },
-        } = this.art;
+        const { icons, proxy } = this.art;
 
         const $item = createElement('div');
         addClass($item, 'art-setting-item');
@@ -292,12 +286,20 @@ export default class Setting extends Component {
                 break;
             }
             case 'range': {
-                if (item.onRange && item.$range) {
-                    const event = proxy(item.$range, 'change', async (event) => {
-                        item.tooltip = await item.onRange.call(this.art, item, $item, event);
-                    });
+                if (item.$range) {
+                    if (item.onRange) {
+                        const event = proxy(item.$range, 'change', async (event) => {
+                            item.tooltip = await item.onRange.call(this.art, item, $item, event);
+                        });
+                        this.events.push(event);
+                    }
 
-                    this.events.push(event);
+                    if (item.onChange) {
+                        const event = proxy(item.$range, 'input', async (event) => {
+                            item.tooltip = await item.onChange.call(this.art, item, $item, event);
+                        });
+                        this.events.push(event);
+                    }
                 }
                 break;
             }

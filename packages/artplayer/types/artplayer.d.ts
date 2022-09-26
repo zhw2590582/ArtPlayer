@@ -57,7 +57,7 @@ type ComponentOption = {
     /**
      * Component position, use in controls
      */
-    position?: 'top' | 'left' | 'right';
+    position?: 'top' | 'left' | 'right' | (string & Record<never, never>);
 
     /**
      * Custom selector list, use in controls
@@ -126,6 +126,11 @@ type SettingOption = {
      */
     onRange?(item: SettingOption, element: HTMLElement, event: Event): void;
 
+    /**
+     * When range item change in real time
+     */
+    onChange?(item: SettingOption, element: HTMLElement, event: Event): void;
+
     $icon?: HTMLElement;
     $html?: HTMLElement;
     $tooltip?: HTMLElement;
@@ -186,7 +191,7 @@ type SubtitleOption = {
     /**
      * The subtitle type
      */
-    type?: 'vtt' | 'srt' | 'ass';
+    type?: 'vtt' | 'srt' | 'ass' | (string & Record<never, never>);
 
     /**
      * The subtitle style object
@@ -238,7 +243,7 @@ type Option = {
     /**
      * Player language
      */
-    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl';
+    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl' | 'es' | (string & Record<never, never>);
 
     /**
      * Player default volume
@@ -706,6 +711,8 @@ declare class Artplayer extends Player {
     static FAST_FORWARD_VALUE: number;
     static FAST_FORWARD_TIME: number;
     static TOUCH_MOVE_RATIO: number;
+    static VOLUME_STEP: number;
+    static SEEK_STEP: number;
 
     on(name: Events, fn: Function, ctx?: object): void;
     once(name: Events, fn: Function, ctx?: object): void;

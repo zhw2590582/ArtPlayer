@@ -3,7 +3,7 @@ import { hasClass, addClass, removeClass } from '../utils';
 export default function fastForward(art) {
     const {
         constructor,
-        events: { proxy },
+        proxy,
         template: { $player, $video },
     } = art;
 

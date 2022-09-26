@@ -366,6 +366,60 @@ var art = new Artplayer({
 });
 ```
 
+### reset
+
+-   类型: `Function`
+
+用于清空当前显示的弹幕
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    plugins: [
+        artplayerPluginDanmuku({
+            danmuku: '/assets/sample/danmuku.xml',
+        }),
+    ],
+});
+
+art.on('resize', () => {
+    art.plugins.artplayerPluginDanmuku.reset();
+});
+```
+
+### option
+
+-   类型: `Object`
+
+用于获取当前弹幕配置
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    plugins: [
+        artplayerPluginDanmuku({
+            danmuku: '/assets/sample/danmuku.xml',
+        }),
+    ],
+});
+
+art.on('ready', () => {
+    console.log(art.plugins.artplayerPluginDanmuku.option);
+});
+```
+
 ## 事件
 
 ```js

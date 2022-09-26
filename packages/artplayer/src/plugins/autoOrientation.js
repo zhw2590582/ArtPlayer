@@ -22,6 +22,7 @@ export default function autoOrientation(art) {
                     setStyle($player, 'transform-origin', '0 0');
                     setStyle($player, 'transform', `rotate(90deg) translate(0, -${viewWidth}px)`);
                     addClass($player, 'art-auto-orientation');
+                    art.isRotate = true;
                     art.emit('resize');
                 }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
             }
@@ -32,6 +33,7 @@ export default function autoOrientation(art) {
                 setStyle($player, 'transform', null);
                 setStyle($player, 'transform-origin', null);
                 removeClass($player, 'art-auto-orientation');
+                art.isRotate = false;
                 art.aspectRatioReset = true;
                 art.autoSize = option.autoSize;
                 art.notice.show = '';

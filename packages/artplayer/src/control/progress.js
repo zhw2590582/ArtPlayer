@@ -13,11 +13,7 @@ export function getPosFromEvent(art, event) {
 
 export default function progress(options) {
     return (art) => {
-        const {
-            icons,
-            option,
-            events: { proxy },
-        } = art;
+        const { icons, option, proxy } = art;
 
         return {
             ...options,
@@ -131,15 +127,23 @@ export default function progress(options) {
                     setBar('played', 1);
                 });
 
-                if (!isMobile) {
-                    proxy($control, 'click', (event) => {
-                        if (event.target !== $indicator) {
+                proxy($control, 'click', (event) => {
+                    if (event.target !== $indicator) {
+                        if (art.isRotate) {
+                            const { clientHeight } = document.documentElement;
+                            const percentage = event.pageY / clientHeight;
+                            const second = percentage * art.duration;
+                            setBar('played', percentage);
+                            art.seek = second;
+                        } else {
                             const { second, percentage } = getPosFromEvent(art, event);
                             setBar('played', percentage);
                             art.seek = second;
                         }
-                    });
+                    }
+                });
 
+                if (!isMobile) {
                     proxy($control, 'mousemove', (event) => {
                         setStyle($tip, 'display', 'block');
                         if (includeFromEvent(event, $highlight)) {
@@ -153,7 +157,7 @@ export default function progress(options) {
                         setStyle($tip, 'display', 'none');
                     });
 
-                    proxy($indicator, 'mousedown', () => {
+                    proxy($control, 'mousedown', () => {
                         isDroging = true;
                     });
 

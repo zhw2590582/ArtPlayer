@@ -7,7 +7,7 @@ export default function eventInit(art) {
         notice,
         option,
         constructor,
-        events: { proxy },
+        proxy,
         template: { $player, $video, $poster },
     } = art;
 

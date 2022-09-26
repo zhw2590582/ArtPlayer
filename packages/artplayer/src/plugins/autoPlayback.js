@@ -6,7 +6,7 @@ export default function autoPlayback(art) {
         icons,
         storage,
         constructor,
-        events: { proxy },
+        proxy,
         template: { $poster },
     } = art;
 

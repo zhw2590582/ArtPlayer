@@ -35,7 +35,7 @@ export default class Template {
         return `
           <div class="art-video-player art-subtitle-show art-layer-show art-control-show art-mask-show">
             <video class="art-video">
-              <track default kind="metadata"></track>
+              <track default kind="metadata" src=""></track>
             </video>
             <div class="art-poster"></div>
             <div class="art-subtitle"></div>
