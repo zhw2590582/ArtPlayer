@@ -44,7 +44,7 @@ export default function gestureInit(art, events) {
                 isDroging = false;
             }
         };
-
+        /*
         events.proxy($bottom, 'touchstart', (event) => {
             if (!includeFromEvent(event, $controls)) {
                 onTouchStart(event);
@@ -52,6 +52,7 @@ export default function gestureInit(art, events) {
         });
 
         events.proxy($bottom, 'touchmove', onTouchMove);
+        */
         events.proxy($video, 'touchstart', onTouchStart);
         events.proxy($video, 'touchmove', onTouchMove);
         events.proxy(document, 'touchend', onTouchEnd);

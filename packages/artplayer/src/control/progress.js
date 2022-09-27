@@ -3,7 +3,7 @@ import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEve
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
     const { left } = $progress.getBoundingClientRect();
-    const eventLeft = event.pageX;
+    const eventLeft = isMobile ? event.touches[0].pageX : event.pageX;
     const width = clamp(eventLeft - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * art.duration;
     const time = secondToTime(second);
@@ -98,6 +98,20 @@ export default function progress(options) {
                     }
                 }
 
+                function mobileSeek(event) {
+                    if (art.isRotate) {
+                        const { clientHeight } = document.documentElement;
+                        const percentage = (isMobile ? event.touches[0].pageY : event.pageY) / clientHeight;
+                        const second = percentage * art.duration;
+                        setBar('played', percentage);
+                        art.seek = second;
+                    } else {
+                        const { second, percentage } = getPosFromEvent(art, event);
+                        setBar('played', percentage);
+                        art.seek = second;
+                    }
+                }
+
                 art.on('video:loadedmetadata', () => {
                     for (let index = 0; index < option.highlight.length; index++) {
                         const item = option.highlight[index];
@@ -127,23 +141,15 @@ export default function progress(options) {
                     setBar('played', 1);
                 });
 
-                proxy($control, 'click', (event) => {
-                    if (event.target !== $indicator) {
-                        if (art.isRotate) {
-                            const { clientHeight } = document.documentElement;
-                            const percentage = event.pageY / clientHeight;
-                            const second = percentage * art.duration;
-                            setBar('played', percentage);
-                            art.seek = second;
-                        } else {
+                if (!isMobile) {
+                    proxy($control, 'click', (event) => {
+                        if (event.target !== $indicator) {
                             const { second, percentage } = getPosFromEvent(art, event);
                             setBar('played', percentage);
                             art.seek = second;
                         }
-                    }
-                });
+                    });
 
-                if (!isMobile) {
                     proxy($control, 'mousemove', (event) => {
                         setStyle($tip, 'display', 'block');
                         if (includeFromEvent(event, $highlight)) {
@@ -172,6 +178,23 @@ export default function progress(options) {
                     proxy(document, 'mouseup', () => {
                         if (isDroging) {
                             isDroging = false;
+                        }
+                    });
+                } else {
+                    proxy($control, 'touchstart', (event) => {
+                        isDroging = true;
+                        setStyle($tip, 'display', 'block');
+                        mobileSeek(event);
+                    });
+                    proxy($control, 'touchend', () => {
+                        setStyle($tip, 'display', 'none');
+                        if (isDroging) {
+                            isDroging = false;
+                        }
+                    });
+                    proxy($control, 'touchmove', (event) => {
+                        if (isDroging) {
+                            mobileSeek(event);
                         }
                     });
                 }
