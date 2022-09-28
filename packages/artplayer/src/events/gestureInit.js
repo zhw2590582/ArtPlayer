@@ -1,4 +1,5 @@
 import { clamp, secondToTime, isMobile } from '../utils';
+import { setCurrentTime } from '../control/progress';
 
 export default function gestureInit(art, events) {
     if (isMobile && !art.option.isLive) {
@@ -12,6 +13,10 @@ export default function gestureInit(art, events) {
 
         const onTouchStart = (event) => {
             if (event.touches.length === 1 && !art.isLock) {
+                if (touchTarget === $progress) {
+                    setCurrentTime(art, event);
+                }
+
                 isDroging = true;
                 const { clientX, clientY } = event.touches[0];
                 startX = clientX;

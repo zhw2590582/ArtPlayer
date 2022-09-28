@@ -3,12 +3,25 @@ import { query, clamp, append, setStyle, setStyles, secondToTime, includeFromEve
 export function getPosFromEvent(art, event) {
     const { $progress } = art.template;
     const { left } = $progress.getBoundingClientRect();
-    const eventLeft = event.pageX;
+    const eventLeft = isMobile ? event.touches[0].clientX : event.pageX;
     const width = clamp(eventLeft - left, 0, $progress.clientWidth);
     const second = (width / $progress.clientWidth) * art.duration;
     const time = secondToTime(second);
     const percentage = clamp(width / $progress.clientWidth, 0, 1);
     return { second, time, width, percentage };
+}
+
+export function setCurrentTime(art, event) {
+    if (art.isRotate) {
+        const percentage = event.touches[0].clientY / art.height;
+        const second = percentage * art.duration;
+        art.emit('setBar', 'played', percentage);
+        art.seek = second;
+    } else {
+        const { second, percentage } = getPosFromEvent(art, event);
+        art.emit('setBar', 'played', percentage);
+        art.seek = second;
+    }
 }
 
 export default function progress(options) {
@@ -127,22 +140,13 @@ export default function progress(options) {
                     setBar('played', 1);
                 });
 
-                proxy($control, 'click', (event) => {
-                    if (event.target !== $indicator) {
-                        if (art.isRotate) {
-                            const percentage = event.pageY / art.height;
-                            const second = percentage * art.duration;
-                            setBar('played', percentage);
-                            art.seek = second;
-                        } else {
-                            const { second, percentage } = getPosFromEvent(art, event);
-                            setBar('played', percentage);
-                            art.seek = second;
-                        }
-                    }
-                });
-
                 if (!isMobile) {
+                    proxy($control, 'click', (event) => {
+                        if (event.target !== $indicator) {
+                            setCurrentTime(art, event);
+                        }
+                    });
+
                     proxy($control, 'mousemove', (event) => {
                         setStyle($tip, 'display', 'block');
                         if (includeFromEvent(event, $highlight)) {
