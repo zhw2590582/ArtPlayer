@@ -130,8 +130,7 @@ export default function progress(options) {
                 proxy($control, 'click', (event) => {
                     if (event.target !== $indicator) {
                         if (art.isRotate) {
-                            const { clientHeight } = document.documentElement;
-                            const percentage = event.pageY / clientHeight;
+                            const percentage = event.pageY / art.height;
                             const second = percentage * art.duration;
                             setBar('played', percentage);
                             art.seek = second;

@@ -241,7 +241,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "1664188235149";
+        return "1664328685794";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3192,8 +3192,7 @@ function progress(options) {
                 proxy($control, "click", (event)=>{
                     if (event.target !== $indicator) {
                         if (art.isRotate) {
-                            const { clientHeight  } = document.documentElement;
-                            const percentage = event.pageY / clientHeight;
+                            const percentage = event.pageY / art.height;
                             const second = percentage * art.duration;
                             setBar("played", percentage);
                             art.seek = second;
@@ -3994,7 +3993,8 @@ parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function gestureInit(art, events) {
     if ((0, _utils.isMobile) && !art.option.isLive) {
-        const { $video , $bottom , $controls  } = art.template;
+        const { $video , $progress  } = art.template;
+        let touchTarget = null;
         let isDroging = false;
         let startX = 0;
         let startY = 0;
@@ -4014,7 +4014,8 @@ function gestureInit(art, events) {
                 const ratioX = (0, _utils.clamp)((clientX - startX) / art.width, -1, 1);
                 const ratioY = (0, _utils.clamp)((clientY - startY) / art.height, -1, 1);
                 const ratio = art.isRotate ? ratioY : ratioX;
-                const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * art.constructor.TOUCH_MOVE_RATIO, 0, art.duration);
+                const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
+                const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
                 art.seek = currentTime;
                 art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1));
                 art.notice.show = `${(0, _utils.secondToTime)(currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;
@@ -4026,14 +4027,19 @@ function gestureInit(art, events) {
                 startY = 0;
                 startTime = 0;
                 isDroging = false;
+                touchTarget = null;
             }
         };
-        events.proxy($bottom, "touchstart", (event)=>{
-            if (!(0, _utils.includeFromEvent)(event, $controls)) onTouchStart(event);
+        events.proxy($progress, "touchstart", (event)=>{
+            touchTarget = $progress;
+            onTouchStart(event);
         });
-        events.proxy($bottom, "touchmove", onTouchMove);
-        events.proxy($video, "touchstart", onTouchStart);
+        events.proxy($video, "touchstart", (event)=>{
+            touchTarget = $video;
+            onTouchStart(event);
+        });
         events.proxy($video, "touchmove", onTouchMove);
+        events.proxy($progress, "touchmove", onTouchMove);
         events.proxy(document, "touchend", onTouchEnd);
     }
 }

@@ -1,9 +1,10 @@
-import { clamp, secondToTime, isMobile, includeFromEvent } from '../utils';
+import { clamp, secondToTime, isMobile } from '../utils';
 
 export default function gestureInit(art, events) {
     if (isMobile && !art.option.isLive) {
-        const { $video, $bottom, $controls } = art.template;
+        const { $video, $progress } = art.template;
 
+        let touchTarget = null;
         let isDroging = false;
         let startX = 0;
         let startY = 0;
@@ -25,11 +26,8 @@ export default function gestureInit(art, events) {
                 const ratioX = clamp((clientX - startX) / art.width, -1, 1);
                 const ratioY = clamp((clientY - startY) / art.height, -1, 1);
                 const ratio = art.isRotate ? ratioY : ratioX;
-                const currentTime = clamp(
-                    startTime + art.duration * ratio * art.constructor.TOUCH_MOVE_RATIO,
-                    0,
-                    art.duration,
-                );
+                const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
+                const currentTime = clamp(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
                 art.seek = currentTime;
                 art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1));
                 art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
@@ -42,18 +40,22 @@ export default function gestureInit(art, events) {
                 startY = 0;
                 startTime = 0;
                 isDroging = false;
+                touchTarget = null;
             }
         };
 
-        events.proxy($bottom, 'touchstart', (event) => {
-            if (!includeFromEvent(event, $controls)) {
-                onTouchStart(event);
-            }
+        events.proxy($progress, 'touchstart', (event) => {
+            touchTarget = $progress;
+            onTouchStart(event);
         });
 
-        events.proxy($bottom, 'touchmove', onTouchMove);
-        events.proxy($video, 'touchstart', onTouchStart);
+        events.proxy($video, 'touchstart', (event) => {
+            touchTarget = $video;
+            onTouchStart(event);
+        });
+
         events.proxy($video, 'touchmove', onTouchMove);
+        events.proxy($progress, 'touchmove', onTouchMove);
         events.proxy(document, 'touchend', onTouchEnd);
     }
 }
