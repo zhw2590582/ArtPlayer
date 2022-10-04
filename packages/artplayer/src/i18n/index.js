@@ -5,16 +5,17 @@ import pl from './pl.json';
 import cs from './cs.json';
 import es from './es.json';
 import fa from './fa.json';
+
 export default class I18n {
     constructor(art) {
         this.art = art;
         this.languages = {
             'zh-cn': zhCn,
             'zh-tw': zhTw,
-            'pl': pl,
-            'cs': cs,
-            'es': es,
-            'fa':fa
+            pl: pl,
+            cs: cs,
+            es: es,
+            fa: fa,
         };
         this.init();
     }

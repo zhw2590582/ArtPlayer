@@ -1,8 +1,8 @@
 {
-       "Video Info": "اطلاعات ویدیو",
+    "Video Info": "اطلاعات ویدیو",
     "Close": "بستن",
     "Video Load Failed": "بارگذاری ناموفق",
-	"Play":"پخش"
+    "Play": "پخش",
     "Volume": "میزان صدا",
     "Pause": "توقف",
     "Rate": "نرخ",

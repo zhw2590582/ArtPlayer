@@ -243,7 +243,7 @@ type Option = {
     /**
      * Player language
      */
-    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl' | 'es' | (string & Record<never, never>);
+    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl' | 'es' | 'fa' | (string & Record<never, never>);
 
     /**
      * Player default volume
