@@ -682,7 +682,11 @@ declare class Artplayer extends Player {
 
     readonly id: number;
     readonly option: Option;
+    readonly isLock: boolean;
+    readonly isReady: boolean;
     readonly isFocus: boolean;
+    readonly isInput: boolean;
+    readonly isRotate: boolean;
     readonly isDestroy: boolean;
 
     static DEGUG: boolean;
