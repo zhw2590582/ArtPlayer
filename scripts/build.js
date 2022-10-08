@@ -2,9 +2,10 @@ import fs from 'fs';
 import cpy from 'cpy';
 import path from 'path';
 import prompts from 'prompts';
-import projects from './projects.js';
 import { Parcel } from '@parcel/core';
+import { formatDate, getProjects } from './utils.js';
 
+const projects = getProjects();
 const compiledPath = path.resolve(`docs/compiled`);
 
 async function build(name) {
@@ -29,7 +30,7 @@ async function build(name) {
         env: {
             NODE_ENV: 'production',
             APP_VER: version,
-            BUILD_DATE: Date.now(),
+            BUILD_DATE: formatDate(Date.now()),
         },
     });
 
@@ -49,7 +50,8 @@ async function build(name) {
     fs.writeFileSync(filePath, code.replace(/\\n*\s*</g, '<').replace(/>\\n*\s*/g, '>'));
     fs.renameSync(filePath, newFilePath);
     await cpy(newFilePath, compiledPath);
-    console.log(`✨ Built ${name}@${version} ${bundles.length} bundles in ${buildTime}ms!`);
+    const size = fs.statSync(newFilePath).size / 1024;
+    console.log(`✨ Built ${name}@${version}`, `Bundles@${bundles.length}`, `Time@${buildTime}ms`, `Size@${size}kb`);
 }
 
 function runPromisesInSeries(ps) {

@@ -1,4 +1,6 @@
 (function () {
+    Artplayer.DEGUG = true;
+
     var userAgent = window.navigator.userAgent;
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
     var isIE = /MSIE|Trident/.test(userAgent);
@@ -57,15 +59,6 @@
                 });
             });
     });
-
-    function initArt(art) {
-        Artplayer.config.events.forEach(function (item) {
-            art &&
-                art.on('video:' + item, function (event) {
-                    console.log('video: ' + event.type);
-                });
-        });
-    }
 
     function getURLParameters(url) {
         return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(function (a, v) {
@@ -163,27 +156,12 @@
         }
     }
 
-    function formatDate(date) {
-        var date = new Date(Number(date));
-        var YY = date.getFullYear() + '-';
-        var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-        var DD = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-        var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-        var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-        var ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-        return YY + MM + DD + ' ' + hh + mm + ss;
-    }
-
     function runCode() {
         Artplayer.instances.forEach(function (art) {
             art.destroy(true);
         });
         var code = editor.getValue();
         eval(code);
-        initArt(Artplayer.instances[0]);
-        console.debug('Artplayer@' + Artplayer.version);
-        console.debug('Env@' + Artplayer.env);
-        console.debug('Build@' + formatDate(Artplayer.build));
     }
 
     function initApp() {

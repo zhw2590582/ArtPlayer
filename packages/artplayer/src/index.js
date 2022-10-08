@@ -70,6 +70,16 @@ export default class Artplayer extends Emitter {
             this.on('ready', () => readyCallback.call(this));
         }
 
+        if (Artplayer.DEGUG) {
+            const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
+            log('Version@' + Artplayer.version);
+            log('Env@' + Artplayer.env);
+            log('Build@' + Artplayer.build);
+            for (let index = 0; index < config.events.length; index++) {
+                this.on('video:' + config.events[index], (event) => log('Event@' + event.type));
+            }
+        }
+
         instances.push(this);
     }
 
@@ -201,6 +211,7 @@ export default class Artplayer extends Emitter {
     }
 }
 
+Artplayer.DEGUG = false;
 Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;
 Artplayer.SETTING_ITEM_WIDTH = 200;

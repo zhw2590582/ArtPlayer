@@ -685,6 +685,7 @@ declare class Artplayer extends Player {
     readonly isFocus: boolean;
     readonly isDestroy: boolean;
 
+    static DEGUG: boolean;
     static NOTICE_TIME: number;
     static SETTING_WIDTH: number;
     static SETTING_ITEM_WIDTH: number;

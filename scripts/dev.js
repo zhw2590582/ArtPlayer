@@ -3,9 +3,11 @@ import path from 'path';
 import servor from 'servor';
 import prompts from 'prompts';
 import { fileURLToPath } from 'url';
-import projects from './projects.js';
 import { Parcel } from '@parcel/core';
+import { formatDate, getProjects } from './utils.js';
 import openBrowser from 'servor/utils/openBrowser.js';
+
+const projects = getProjects();
 
 async function develop(name) {
     let isOpenBrowser = false;
@@ -37,7 +39,7 @@ async function develop(name) {
         env: {
             NODE_ENV: 'development',
             APP_VER: version,
-            BUILD_DATE: Date.now(),
+            BUILD_DATE: formatDate(Date.now()),
         },
         additionalReporters: [
             {

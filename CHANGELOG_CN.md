@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 - 添加 `farsi` 语言
+- 新增 `Artplayer.DEGUG` 用于打印 `debug` 信息，默认为 `false`
 
 ## [4.5.7] - 2022-9-28
 - 新增 `Artplayer.VOLUME_STEP` 用于控制调整 `音量` 的步长，默认为 `0.1`
