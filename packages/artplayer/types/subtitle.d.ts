@@ -5,6 +5,11 @@ export type Subtitle = {
     url?: string;
 
     /**
+     * The subtitle name
+     */
+    name?: string;
+
+    /**
      * The subtitle type
      */
     type?: 'vtt' | 'srt' | 'ass' | (string & Record<never, never>);

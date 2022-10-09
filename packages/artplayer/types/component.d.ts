@@ -73,7 +73,7 @@ export type ComponentOption = {
     /**
      * Component style object
      */
-    style?: CSSStyleDeclaration;
+    style?: Partial<CSSStyleDeclaration>;
 
     /**
      * Component click event

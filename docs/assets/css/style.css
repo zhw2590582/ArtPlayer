@@ -71,6 +71,23 @@ img {
     margin-right: 10px;
 }
 
+.header .tool {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.header .typeScript {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.header .typeScript input {
+    margin-right: 5px;
+}
+
 .header .menus {
     display: flex;
     align-items: center;
@@ -144,6 +161,7 @@ img {
     display: flex;
     flex: 1;
     height: 100%;
+    overflow: hidden;
 }
 
 .main .part-left {
@@ -172,12 +190,10 @@ img {
 
 .main .part-left .code {
     flex: 1;
-    overflow: auto;
 }
 
 .main .part-left .code .codeMirrorWrap {
     height: 100%;
-    overflow: hidden;
 }
 
 .main .part-right {

@@ -286,7 +286,7 @@ export type Option = {
     /**
      * Other video attribute
      */
-    moreVideoAttr?: HTMLVideoElement;
+    moreVideoAttr?: Partial<HTMLVideoElement>;
 
     /**
      * Custom default icons

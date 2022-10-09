@@ -143,6 +143,8 @@ declare class Artplayer extends Player {
     };
 }
 
+
+
 type Selector = {
     /**
      * Whether the default is selected
@@ -216,7 +218,7 @@ export type ComponentOption = {
     /**
      * Component style object
      */
-    style?: CSSStyleDeclaration;
+    style?: Partial<CSSStyleDeclaration>;
 
     /**
      * Component click event
@@ -472,6 +474,9 @@ export type Icons = {
 
 
 
+
+type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>);
+
 export type Option = {
     /**
      * The player id
@@ -501,7 +506,7 @@ export type Option = {
     /**
      * Video url type
      */
-    type?: string;
+    type?: CustomType;
 
     /**
      * Player color theme
@@ -751,7 +756,7 @@ export type Option = {
     /**
      * Other video attribute
      */
-    moreVideoAttr?: HTMLVideoElement;
+    moreVideoAttr?: Partial<HTMLVideoElement>;
 
     /**
      * Custom default icons
@@ -763,7 +768,9 @@ export type Option = {
     /**
      * Custom video type function
      */
-    customType?: Record<string, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>;
+    customType?: Partial<
+        Record<CustomType, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>
+    >;
 };
 
 export default Option;
@@ -839,15 +846,20 @@ export declare class Player {
     airplay(): void;
 }
 
-type Props = {
-    $icon?: HTMLDivElement;
-    $html?: HTMLDivElement;
-    $tooltip?: HTMLDivElement;
-    $switch?: boolean;
-    $range?: HTMLInputElement;
-    $parentItem?: Setting;
-    $parentList?: Setting[];
-};
+
+
+type Props<T> = {
+    html: string;
+    icon: string;
+    tooltip: string;
+    $icon: HTMLDivElement;
+    $html: HTMLDivElement;
+    $tooltip: HTMLDivElement;
+    $switch: boolean;
+    $range: HTMLInputElement;
+    $parentItem: Setting;
+    $parentList: Setting[];
+} & Omit<T, 'html' | 'icon' | 'tooltip'>;
 
 export type Setting = {
     /**
@@ -888,7 +900,7 @@ export type Setting = {
     /**
      * When selector item click
      */
-    onSelect?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onSelect?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom switch item
@@ -898,7 +910,7 @@ export type Setting = {
     /**
      * When switch item click
      */
-    onSwitch?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onSwitch?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom range item
@@ -908,12 +920,14 @@ export type Setting = {
     /**
      * When range item change
      */
-    onRange?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onRange?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
 
     /**
      * When range item change in real time
      */
-    onChange?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onChange?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
+
+    [key: string]: any;
 };
 
 export type Subtitle = {
@@ -921,6 +935,11 @@ export type Subtitle = {
      * The subtitle url
      */
     url?: string;
+
+    /**
+     * The subtitle name
+     */
+    name?: string;
 
     /**
      * The subtitle type

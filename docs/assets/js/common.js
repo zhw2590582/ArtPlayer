@@ -19,6 +19,9 @@
 
     window.consoleLog($console);
 
+    var $typeScript = document.querySelector('#typeScript');
+    $typeScript.checked = getURLParameters(window.location.href).typeScript === 'true';
+
     var editor = null;
     require.config({ paths: { vs: './assets/js/vs' } });
     require(['vs/editor/editor.main'], function () {
@@ -54,7 +57,7 @@
                             "\turl: '/assets/sample/video.mp4',",
                             '});',
                         ].join('\n'),
-                        'javascript',
+                        $typeScript.checked ? 'typescript' : 'javascript',
                     ),
                 });
             });
@@ -183,7 +186,16 @@
     function restart() {
         var libs = encodeURIComponent($lib.value);
         var code = encodeURIComponent(editor.getValue());
-        var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
+        var useTS = $typeScript.checked ? 'true' : 'false';
+        var url =
+            window.location.origin +
+            window.location.pathname +
+            '?libs=' +
+            libs +
+            '&code=' +
+            code +
+            '&typeScript=' +
+            useTS;
         history.pushState(null, null, url);
         initApp();
     }
@@ -196,6 +208,11 @@
         if (event.target === this) {
             this.style.display = 'none';
         }
+    });
+
+    $typeScript.addEventListener('change', function () {
+        restart();
+        window.location.reload();
     });
 
     window.addEventListener('error', function (err) {
