@@ -7,7 +7,9 @@ import Subtitle from './subtitle';
 import Plugin from './plugin';
 import Icons from './icons';
 import Template from './template';
-import { I18nKeys, I18nValue } from './i18n';
+import I18n from './i18n';
+import Setting from './setting';
+import { Component } from './component';
 
 export = Artplayer;
 export as namespace Artplayer;
@@ -23,8 +25,8 @@ declare class Artplayer extends Player {
     static readonly utils: Utils;
     static readonly scheme: object;
     static readonly Emitter: Function;
-    static readonly validator: Function;
-    static readonly kindOf: Function;
+    static readonly validator: <T extends object>(option: T, scheme: object) => T;
+    static readonly kindOf: (item: any) => string;
     static readonly html: Artplayer['template']['html'];
     static readonly option: Option;
 
@@ -109,9 +111,9 @@ declare class Artplayer extends Player {
     readonly icons: Icons;
 
     readonly i18n: {
-        readonly languages: Record<I18nKeys, I18nValue>;
+        readonly languages: I18n;
         get(key: string): string;
-        update(language: Record<I18nKeys, I18nValue>): void;
+        update(language: Partial<I18n>): void;
     };
 
     readonly notice: {
@@ -128,7 +130,7 @@ declare class Artplayer extends Player {
     readonly subtitle: {
         get url(): string;
         set url(url: string);
-        style(name: string | CSSStyleDeclaration, value?: string): HTMLElement;
+        style(name: string | CSSStyleDeclaration, value?: string): void;
         switch(url: string, option?: Subtitle): Promise<string>;
     } & Component;
 
@@ -143,7 +145,11 @@ declare class Artplayer extends Player {
 
     readonly mask: Component;
 
-    readonly setting: Record<string, HTMLElement> & Component;
+    readonly setting: {
+        option: Setting[];
+        add(setting: Setting): Artplayer['setting'];
+        update(): Artplayer['setting'];
+    } & Component;
 
     readonly plugins: {
         readonly id: number;
