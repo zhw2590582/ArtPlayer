@@ -1,3 +1,5 @@
+import Artplayer = require('./artplayer');
+
 type Selector = {
     /**
      * Whether the default is selected
@@ -76,12 +78,12 @@ export type ComponentOption = {
     /**
      * Component click event
      */
-    click?(component: Component, event: Event): void;
+    click?(this: Artplayer, component: Component, event: Event): void;
 
     /**
      * Wnen the component was mounted
      */
-    mounted?(element: HTMLElement): void;
+    mounted?(this: Artplayer, element: HTMLElement): void;
 
     /**
      * Component tooltip, use in controls
@@ -101,5 +103,5 @@ export type ComponentOption = {
     /**
      * When selector item click, use in controls
      */
-    onSelect?(selector: Selector, element: HTMLElement, event: Event): void;
+    onSelect?(this: Artplayer, selector: Selector, element: HTMLElement, event: Event): void;
 };

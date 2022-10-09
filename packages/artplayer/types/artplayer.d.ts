@@ -14,7 +14,7 @@ export = Artplayer;
 export as namespace Artplayer;
 
 declare class Artplayer extends Player {
-    constructor(option: Option, readyCallback?: (this: Artplayer) => unknown);
+    constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown);
 
     static readonly instances: Artplayer[];
     static readonly version: string;
@@ -138,7 +138,7 @@ declare class Artplayer extends Player {
 
     readonly hotkey: {
         keys: Record<string, ((event: Event) => any)[]>;
-        add(key: number, callback: (event: Event) => any): Artplayer['hotkey'];
+        add(key: number, callback: (this: Artplayer, event: Event) => any): Artplayer['hotkey'];
     };
 
     readonly mask: Component;
@@ -150,7 +150,7 @@ declare class Artplayer extends Player {
     } & Component;
 
     readonly plugins: {
-        add(plugin: (art: Artplayer) => unknown): Artplayer['plugins'];
+        add(plugin: (this: Artplayer, art: Artplayer) => unknown): Artplayer['plugins'];
         [pluginName: string]: any;
     };
 }

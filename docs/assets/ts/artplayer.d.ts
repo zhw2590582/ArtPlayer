@@ -2,7 +2,7 @@ export = Artplayer;
 export as namespace Artplayer;
 
 declare class Artplayer extends Player {
-    constructor(option: Option, readyCallback?: (this: Artplayer) => unknown);
+    constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown);
 
     static readonly instances: Artplayer[];
     static readonly version: string;
@@ -87,7 +87,6 @@ declare class Artplayer extends Player {
     };
 
     readonly storage: {
-        name: 'artplayer_settings';
         settings: Record<string, any>;
         get(key: string): any;
         set(key: string, value: any): void;
@@ -127,7 +126,7 @@ declare class Artplayer extends Player {
 
     readonly hotkey: {
         keys: Record<string, ((event: Event) => any)[]>;
-        add(key: number, callback: (event: Event) => any): Artplayer['hotkey'];
+        add(key: number, callback: (this: Artplayer, event: Event) => any): Artplayer['hotkey'];
     };
 
     readonly mask: Component;
@@ -139,12 +138,11 @@ declare class Artplayer extends Player {
     } & Component;
 
     readonly plugins: {
-        add(plugin: (art: Artplayer) => unknown): Artplayer['plugins'];
+        add(plugin: (this: Artplayer, art: Artplayer) => unknown): Artplayer['plugins'];
         [pluginName: string]: any;
     };
-
-    readonly mobile: object;
 }
+
 type Selector = {
     /**
      * Whether the default is selected
@@ -223,12 +221,12 @@ export type ComponentOption = {
     /**
      * Component click event
      */
-    click?(component: Component, event: Event): void;
+    click?(this: Artplayer, component: Component, event: Event): void;
 
     /**
      * Wnen the component was mounted
      */
-    mounted?(element: HTMLElement): void;
+    mounted?(this: Artplayer, element: HTMLElement): void;
 
     /**
      * Component tooltip, use in controls
@@ -248,8 +246,9 @@ export type ComponentOption = {
     /**
      * When selector item click, use in controls
      */
-    onSelect?(selector: Selector, element: HTMLElement, event: Event): void;
+    onSelect?(this: Artplayer, selector: Selector, element: HTMLElement, event: Event): void;
 };
+
 export type Config = {
     propertys: [
         'audioTracks',
@@ -330,7 +329,8 @@ export type Config = {
         'webkitExitFullScreen',
         'webkitExitFullscreen',
     ];
-};export type Events =
+};
+export type Events =
     | 'video:canplay'
     | 'video:canplaythrough'
     | 'video:complete'
@@ -391,6 +391,7 @@ export type Config = {
     | 'lock'
     | 'selector'
     | (string & Record<never, never>);
+
 type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | (string & Record<never, never>);
 
 type I18nValue = {
@@ -433,6 +434,7 @@ type I18nValue = {
 };
 
 export type I18n = Record<I18nKeys, Partial<I18nValue>>;
+
 export type Icons = {
     readonly loading: HTMLDivElement;
     readonly state: HTMLDivElement;
@@ -463,6 +465,7 @@ export type Icons = {
     readonly airplay: HTMLDivElement;
     readonly [key: string]: HTMLDivElement;
 };
+
 
 
 
@@ -648,7 +651,7 @@ export type Option = {
     /**
      * Custom plugin list
      */
-    plugins?: ((art: Artplayer) => unknown)[];
+    plugins?: ((this: Artplayer, art: Artplayer) => unknown)[];
 
     /**
      * Custom mobile whitelist
@@ -760,10 +763,11 @@ export type Option = {
     /**
      * Custom video type function
      */
-    customType?: Record<string, (video: HTMLVideoElement, url: string, art: Artplayer) => any>;
+    customType?: Record<string, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>;
 };
 
 export default Option;
+
 type AspectRatio = 'default' | '4:3' | '16:9' | void;
 type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
 type Flip = 'normal' | 'horizontal' | 'vertical' | void;
@@ -834,6 +838,17 @@ export declare class Player {
     screenshot(): Promise<string>;
     airplay(): void;
 }
+
+type Props = {
+    $icon?: HTMLDivElement;
+    $html?: HTMLDivElement;
+    $tooltip?: HTMLDivElement;
+    $switch?: boolean;
+    $range?: HTMLInputElement;
+    $parentItem?: Setting;
+    $parentList?: Setting[];
+};
+
 export type Setting = {
     /**
      * Html string or html element of setting name
@@ -866,9 +881,14 @@ export type Setting = {
     selector?: Setting[];
 
     /**
+     * Wnen the setting was mounted
+     */
+    mounted?(this: Artplayer, panel: HTMLDivElement, item: Setting): void;
+
+    /**
      * When selector item click
      */
-    onSelect?(item: Setting, element: HTMLDivElement, event: Event): void;
+    onSelect?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom switch item
@@ -878,7 +898,7 @@ export type Setting = {
     /**
      * When switch item click
      */
-    onSwitch?(item: Setting, element: HTMLDivElement, event: Event): void;
+    onSwitch?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom range item
@@ -888,21 +908,14 @@ export type Setting = {
     /**
      * When range item change
      */
-    onRange?(item: Setting, element: HTMLDivElement, event: Event): void;
+    onRange?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * When range item change in real time
      */
-    onChange?(item: Setting, element: HTMLDivElement, event: Event): void;
-
-    $icon?: HTMLDivElement;
-    $html?: HTMLDivElement;
-    $tooltip?: HTMLDivElement;
-    $switch?: boolean;
-    $range?: HTMLInputElement;
-    $parentItem?: Setting;
-    $parentList?: Setting[];
+    onChange?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 };
+
 export type Subtitle = {
     /**
      * The subtitle url
@@ -924,6 +937,7 @@ export type Subtitle = {
      */
     encoding?: string;
 };
+
 export type Template = {
     readonly $container: HTMLDivElement;
     readonly $original: HTMLDivElement;
@@ -953,6 +967,7 @@ export type Template = {
     readonly $miniClose: HTMLDivElement;
     readonly $contextmenu: HTMLDivElement;
 };
+
 export type Utils = {
     userAgent: string;
     isMobile: boolean;

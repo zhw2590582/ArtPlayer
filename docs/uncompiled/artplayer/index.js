@@ -228,7 +228,7 @@ class Artplayer extends (0, _emitterDefault.default) {
             this.setting = new (0, _settingDefault.default)(this);
             this.plugins = new (0, _pluginsDefault.default)(this);
         } else this.mobile = new (0, _mobileDefault.default)(this);
-        if (typeof readyCallback === "function") this.on("ready", ()=>readyCallback.call(this));
+        if (typeof readyCallback === "function") this.on("ready", ()=>readyCallback.call(this, this));
         if (Artplayer.DEGUG) {
             const log = (msg)=>console.log(`[ART.${this.id}] -> ${msg}`);
             log("Version@" + Artplayer.version);
@@ -4957,7 +4957,7 @@ class Plugins {
     }
     add(plugin) {
         this.id += 1;
-        const result = plugin.call(this, this.art);
+        const result = plugin.call(this.art, this.art);
         const pluginName = result && result.name || plugin.name || `plugin${this.id}`;
         (0, _utils.errorHandle)(!(0, _utils.has)(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
         (0, _utils.def)(this, pluginName, {

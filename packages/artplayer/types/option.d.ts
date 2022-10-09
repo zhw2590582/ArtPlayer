@@ -3,6 +3,7 @@ import { Setting } from './setting';
 import { Icons } from './icons';
 import { I18n } from './i18n';
 import { ComponentOption } from './component';
+import Artplayer = require('./artplayer');
 
 export type Option = {
     /**
@@ -183,7 +184,7 @@ export type Option = {
     /**
      * Custom plugin list
      */
-    plugins?: ((art: Artplayer) => unknown)[];
+    plugins?: ((this: Artplayer, art: Artplayer) => unknown)[];
 
     /**
      * Custom mobile whitelist
@@ -295,7 +296,7 @@ export type Option = {
     /**
      * Custom video type function
      */
-    customType?: Record<string, (video: HTMLVideoElement, url: string, art: Artplayer) => any>;
+    customType?: Record<string, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>;
 };
 
 export default Option;

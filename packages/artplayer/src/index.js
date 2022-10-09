@@ -67,7 +67,7 @@ export default class Artplayer extends Emitter {
         }
 
         if (typeof readyCallback === 'function') {
-            this.on('ready', () => readyCallback.call(this));
+            this.on('ready', () => readyCallback.call(this, this));
         }
 
         if (Artplayer.DEGUG) {

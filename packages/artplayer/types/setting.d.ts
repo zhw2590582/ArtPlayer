@@ -1,3 +1,5 @@
+import Artplayer = require('./artplayer');
+
 type Props = {
     $icon?: HTMLDivElement;
     $html?: HTMLDivElement;
@@ -42,12 +44,12 @@ export type Setting = {
     /**
      * Wnen the setting was mounted
      */
-    mounted?(panel: HTMLDivElement, item: Setting): void;
+    mounted?(this: Artplayer, panel: HTMLDivElement, item: Setting): void;
 
     /**
      * When selector item click
      */
-    onSelect?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onSelect?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom switch item
@@ -57,7 +59,7 @@ export type Setting = {
     /**
      * When switch item click
      */
-    onSwitch?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onSwitch?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom range item
@@ -67,10 +69,10 @@ export type Setting = {
     /**
      * When range item change
      */
-    onRange?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onRange?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * When range item change in real time
      */
-    onChange?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
+    onChange?(this: Artplayer, item: Setting & Props, element: HTMLDivElement, event: Event): void;
 };
