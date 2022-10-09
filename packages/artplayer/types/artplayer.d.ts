@@ -153,6 +153,4 @@ declare class Artplayer extends Player {
         add(plugin: (art: Artplayer) => unknown): Artplayer['plugins'];
         [pluginName: string]: any;
     };
-
-    readonly mobile: object;
 }
