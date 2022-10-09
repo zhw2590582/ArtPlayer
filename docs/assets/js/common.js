@@ -20,7 +20,7 @@
     window.consoleLog($console);
 
     var $typeScript = document.querySelector('#typeScript');
-    $typeScript.checked = getURLParameters(window.location.href).typeScript === 'true';
+    $typeScript.checked = localStorage.getItem('typeScript') === 'true';
 
     var editor = null;
     require.config({ paths: { vs: './assets/js/vs' } });
@@ -186,16 +186,7 @@
     function restart() {
         var libs = encodeURIComponent($lib.value);
         var code = encodeURIComponent(editor.getValue());
-        var useTS = $typeScript.checked ? 'true' : 'false';
-        var url =
-            window.location.origin +
-            window.location.pathname +
-            '?libs=' +
-            libs +
-            '&code=' +
-            code +
-            '&typeScript=' +
-            useTS;
+        var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
         history.pushState(null, null, url);
         initApp();
     }
@@ -211,7 +202,7 @@
     });
 
     $typeScript.addEventListener('change', function () {
-        restart();
+        localStorage.setItem('typeScript', $typeScript.checked ? 'true' : 'false');
         window.location.reload();
     });
 
