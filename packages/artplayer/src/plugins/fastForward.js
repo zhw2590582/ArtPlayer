@@ -9,11 +9,13 @@ export default function fastForward(art) {
 
     let timer = null;
     let isPress = false;
+    let lastPlaybackRate = 1;
 
     const onStart = (event) => {
         if (event.touches.length === 1 && art.playing && !art.isLock) {
             timer = setTimeout(() => {
                 isPress = true;
+                lastPlaybackRate = art.playbackRate;
                 art.playbackRate = constructor.FAST_FORWARD_VALUE;
                 addClass($player, 'art-fast-forward');
             }, constructor.FAST_FORWARD_TIME);
@@ -24,7 +26,7 @@ export default function fastForward(art) {
         clearTimeout(timer);
         if (isPress) {
             isPress = false;
-            art.playbackRate = 1;
+            art.playbackRate = lastPlaybackRate;
             removeClass($player, 'art-fast-forward');
         }
     };
