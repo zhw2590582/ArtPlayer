@@ -31,6 +31,7 @@ export const ComponentOption = {
     onSwitch: `?${f}`,
     range: `?${a}`,
     onRange: `?${f}`,
+    onChange: `?${f}`,
 };
 
 export default {

@@ -3,7 +3,7 @@ import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 import Component from '../utils/component';
-import { append, addClass, setStyle, inverseClass, includeFromEvent, def, has, createElement } from '../utils';
+import { def, has, append, addClass, setStyle, inverseClass, createElement, includeFromEvent } from '../utils';
 
 function makeRecursion(option, parentItem, parentList) {
     for (let index = 0; index < option.length; index++) {
@@ -59,9 +59,7 @@ export default class Setting extends Component {
                 this.option.push(option.settings[index]);
             }
 
-            this.option = makeRecursion(this.option);
-
-            this.init(this.option);
+            this.update();
 
             art.on('blur', () => {
                 if (this.show) {
@@ -83,24 +81,24 @@ export default class Setting extends Component {
         }
     }
 
-    add(callback) {
-        if (typeof callback === 'function') {
-            this.option.push(callback(this.art));
-        } else {
-            this.option.push(callback);
-        }
-
+    update() {
         this.cache = new Map();
         this.events.forEach((event) => event());
         this.events = [];
         this.$parent.innerHTML = '';
         this.option = makeRecursion(this.option);
         this.init(this.option);
+        return this;
+    }
+
+    add(setting) {
+        this.option.push(setting);
+        this.update();
+        return this;
     }
 
     creatHeader(item) {
         const { icons, proxy } = this.art;
-
         const $item = createElement('div');
         addClass($item, 'art-setting-item');
         addClass($item, 'art-setting-item-back');
@@ -110,13 +108,8 @@ export default class Setting extends Component {
         append($icon, icons.arrowLeft);
         append($left, $icon);
         append($left, item.$parentItem.html);
-
-        const event = proxy($item, 'click', () => {
-            this.init(item.$parentList);
-        });
-
+        const event = proxy($item, 'click', () => this.init(item.$parentList));
         this.events.push(event);
-
         return $item;
     }
 
@@ -310,6 +303,11 @@ export default class Setting extends Component {
                             this.init(item.selector, item.width);
                         } else {
                             inverseClass($item, 'art-current');
+
+                            for (let index = 0; index < item.$parentItem.selector.length; index++) {
+                                const element = item.$parentItem.selector[index];
+                                element.default = element === item;
+                            }
 
                             if (item.$parentList) {
                                 this.init(item.$parentList);

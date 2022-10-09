@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-10-08 09:14:23";
+        return "2022-10-09 08:34:12";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -965,7 +965,8 @@ const ComponentOption = {
     switch: `?${b}`,
     onSwitch: `?${f}`,
     range: `?${a}`,
-    onRange: `?${f}`
+    onRange: `?${f}`,
+    onChange: `?${f}`
 };
 exports.default = {
     id: s,
@@ -4451,8 +4452,7 @@ class Setting extends (0, _componentDefault.default) {
             if (option.flip) this.option.push((0, _flipDefault.default)(art));
             if (option.subtitleOffset) this.option.push((0, _subtitleOffsetDefault.default)(art));
             for(let index = 0; index < option.settings.length; index++)this.option.push(option.settings[index]);
-            this.option = makeRecursion(this.option);
-            this.init(this.option);
+            this.update();
             art.on("blur", ()=>{
                 if (this.show) {
                     this.show = false;
@@ -4467,15 +4467,19 @@ class Setting extends (0, _componentDefault.default) {
             });
         }
     }
-    add(callback) {
-        if (typeof callback === "function") this.option.push(callback(this.art));
-        else this.option.push(callback);
+    update() {
         this.cache = new Map();
         this.events.forEach((event)=>event());
         this.events = [];
         this.$parent.innerHTML = "";
         this.option = makeRecursion(this.option);
         this.init(this.option);
+        return this;
+    }
+    add(setting) {
+        this.option.push(setting);
+        this.update();
+        return this;
     }
     creatHeader(item) {
         const { icons , proxy  } = this.art;
@@ -4488,9 +4492,7 @@ class Setting extends (0, _componentDefault.default) {
         (0, _utils.append)($icon, icons.arrowLeft);
         (0, _utils.append)($left, $icon);
         (0, _utils.append)($left, item.$parentItem.html);
-        const event = proxy($item, "click", ()=>{
-            this.init(item.$parentList);
-        });
+        const event = proxy($item, "click", ()=>this.init(item.$parentList));
         this.events.push(event);
         return $item;
     }
@@ -4648,6 +4650,10 @@ class Setting extends (0, _componentDefault.default) {
                         if (item.selector && item.selector.length) this.init(item.selector, item.width);
                         else {
                             (0, _utils.inverseClass)($item, "art-current");
+                            for(let index = 0; index < item.$parentItem.selector.length; index++){
+                                const element = item.$parentItem.selector[index];
+                                element.default = element === item;
+                            }
                             if (item.$parentList) this.init(item.$parentList);
                             if (item.$parentItem && item.$parentItem.onSelect) {
                                 const result = await item.$parentItem.onSelect.call(this.art, item, $item, event);
