@@ -1,16 +1,3 @@
-import Config from './config';
-import Events from './events';
-import Utils from './utils';
-import Player from './player';
-import Option from './option';
-import Subtitle from './subtitle';
-import Plugin from './plugin';
-import Icons from './icons';
-import Template from './template';
-import I18n from './i18n';
-import Setting from './setting';
-import { Component } from './component';
-
 export = Artplayer;
 export as namespace Artplayer;
 
@@ -130,7 +117,7 @@ declare class Artplayer extends Player {
     readonly subtitle: {
         get url(): string;
         set url(url: string);
-        style(name: string | CSSStyleDeclaration, value?: string): void;
+        style(name: string | Partial<CSSStyleDeclaration>, value?: string): void;
         switch(url: string, option?: Subtitle): Promise<string>;
     } & Component;
 
@@ -152,10 +139,859 @@ declare class Artplayer extends Player {
     } & Component;
 
     readonly plugins: {
-        readonly id: number;
-        add(plugin: Plugin): Artplayer['plugins'];
+        add(plugin: (art: Artplayer) => unknown): Artplayer['plugins'];
         [pluginName: string]: any;
     };
 
     readonly mobile: object;
 }
+type Selector = {
+    /**
+     * Whether the default is selected
+     */
+    default?: boolean;
+
+    /**
+     * Html string of selector
+     */
+    html: string | HTMLElement;
+};
+
+export type Component = {
+    /**
+     * Component self-increasing id
+     */
+    readonly id: number;
+
+    /**
+     * Component parent name
+     */
+    readonly name: string | void;
+
+    /**
+     * Component parent element
+     */
+    readonly $parent: HTMLElement | void;
+
+    /**
+     * Whether to show component parent
+     */
+    get show(): boolean;
+
+    /**
+     * Whether to show component parent
+     */
+    set show(state: boolean);
+
+    /**
+     * Toggle the component parent
+     */
+    set toggle(state: boolean);
+
+    /**
+     * Dynamic add a component
+     */
+    add(option: ComponentOption): HTMLElement;
+};
+
+export type ComponentOption = {
+    /**
+     * Html string or html element of component
+     */
+    html: string | HTMLElement;
+
+    /**
+     * Whether to disable component
+     */
+    disable?: boolean;
+
+    /**
+     * Unique name for component
+     */
+    name?: string;
+
+    /**
+     * Component sort index
+     */
+    index?: number;
+
+    /**
+     * Component style object
+     */
+    style?: CSSStyleDeclaration;
+
+    /**
+     * Component click event
+     */
+    click?(component: Component, event: Event): void;
+
+    /**
+     * Wnen the component was mounted
+     */
+    mounted?(element: HTMLElement): void;
+
+    /**
+     * Component tooltip, use in controls
+     */
+    tooltip?: string;
+
+    /**
+     * Component position, use in controls
+     */
+    position?: 'top' | 'left' | 'right' | (string & Record<never, never>);
+
+    /**
+     * Custom selector list, use in controls
+     */
+    selector?: Selector[];
+
+    /**
+     * When selector item click, use in controls
+     */
+    onSelect?(selector: Selector, element: HTMLElement, event: Event): void;
+};
+export type Config = {
+    propertys: [
+        'audioTracks',
+        'autoplay',
+        'buffered',
+        'controller',
+        'controls',
+        'crossOrigin',
+        'currentSrc',
+        'currentTime',
+        'defaultMuted',
+        'defaultPlaybackRate',
+        'duration',
+        'ended',
+        'error',
+        'loop',
+        'mediaGroup',
+        'muted',
+        'networkState',
+        'paused',
+        'playbackRate',
+        'played',
+        'preload',
+        'readyState',
+        'seekable',
+        'seeking',
+        'src',
+        'startDate',
+        'textTracks',
+        'videoTracks',
+        'volume',
+    ];
+    methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'];
+    events: [
+        'abort',
+        'canplay',
+        'canplaythrough',
+        'durationchange',
+        'emptied',
+        'ended',
+        'error',
+        'loadeddata',
+        'loadedmetadata',
+        'loadstart',
+        'pause',
+        'play',
+        'playing',
+        'progress',
+        'ratechange',
+        'seeked',
+        'seeking',
+        'stalled',
+        'suspend',
+        'timeupdate',
+        'volumechange',
+        'waiting',
+    ];
+    prototypes: [
+        'width',
+        'height',
+        'videoWidth',
+        'videoHeight',
+        'poster',
+        'webkitDecodedFrameCount',
+        'webkitDroppedFrameCount',
+        'playsInline',
+        'webkitSupportsFullscreen',
+        'webkitDisplayingFullscreen',
+        'onenterpictureinpicture',
+        'onleavepictureinpicture',
+        'disablePictureInPicture',
+        'cancelVideoFrameCallback',
+        'requestVideoFrameCallback',
+        'getVideoPlaybackQuality',
+        'requestPictureInPicture',
+        'webkitEnterFullScreen',
+        'webkitEnterFullscreen',
+        'webkitExitFullScreen',
+        'webkitExitFullscreen',
+    ];
+};export type Events =
+    | 'video:canplay'
+    | 'video:canplaythrough'
+    | 'video:complete'
+    | 'video:durationchange'
+    | 'video:emptied'
+    | 'video:ended'
+    | 'video:loadeddata'
+    | 'video:loadeddata'
+    | 'video:loadedmetadata'
+    | 'video:pause'
+    | 'video:play'
+    | 'video:playing'
+    | 'video:progress'
+    | 'video:ratechange'
+    | 'video:seeked'
+    | 'video:seeking'
+    | 'video:stalled'
+    | 'video:suspend'
+    | 'video:timeupdate'
+    | 'video:volumechange'
+    | 'video:waiting'
+    | 'hotkey'
+    | 'destroy'
+    | 'customType'
+    | 'url'
+    | 'subtitleUpdate'
+    | 'subtitleLoad'
+    | 'subtitleSwitch'
+    | 'focus'
+    | 'blur'
+    | 'dblclick'
+    | 'click'
+    | 'setBar'
+    | 'hover'
+    | 'mousemove'
+    | 'resize'
+    | 'view'
+    | 'aspectRatio'
+    | 'autoHeight'
+    | 'autoSize'
+    | 'ready'
+    | 'error'
+    | 'flip'
+    | 'fullscreen'
+    | 'fullscreenWeb'
+    | 'loop'
+    | 'mini'
+    | 'pause'
+    | 'pip'
+    | 'playbackRate'
+    | 'play'
+    | 'screenshot'
+    | 'seek'
+    | 'subtitleOffset'
+    | 'switch'
+    | 'restart'
+    | 'volume'
+    | 'lock'
+    | 'selector'
+    | (string & Record<never, never>);
+type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | (string & Record<never, never>);
+
+type I18nValue = {
+    'Video Info': string;
+    Close: string;
+    'Video Load Failed': string;
+    Volume: string;
+    Play: string;
+    Pause: string;
+    Rate: string;
+    Mute: string;
+    'Video Flip': string;
+    Horizontal: string;
+    Vertical: string;
+    Reconnect: string;
+    'Show Setting': string;
+    'Hide Setting': string;
+    Screenshot: string;
+    'Play Speed': string;
+    'Aspect Ratio': string;
+    Default: string;
+    Normal: string;
+    Open: string;
+    'Switch Video': string;
+    'Switch Subtitle': string;
+    Fullscreen: string;
+    'Exit Fullscreen': string;
+    'Web Fullscreen': string;
+    'Exit Web Fullscreen': string;
+    'Mini Player': string;
+    'PIP Mode': string;
+    'Exit PIP Mode': string;
+    'PIP Not Supported': string;
+    'Fullscreen Not Supported': string;
+    'Subtitle Offset': string;
+    'Last Seen': string;
+    'Jump Play': string;
+    AirPlay: string;
+    'AirPlay Not Available': string;
+};
+
+export type I18n = Record<I18nKeys, Partial<I18nValue>>;
+export type Icons = {
+    readonly loading: HTMLDivElement;
+    readonly state: HTMLDivElement;
+    readonly play: HTMLDivElement;
+    readonly pause: HTMLDivElement;
+    readonly check: HTMLDivElement;
+    readonly volume: HTMLDivElement;
+    readonly volumeClose: HTMLDivElement;
+    readonly screenshot: HTMLDivElement;
+    readonly setting: HTMLDivElement;
+    readonly pip: HTMLDivElement;
+    readonly arrowLeft: HTMLDivElement;
+    readonly arrowRight: HTMLDivElement;
+    readonly playbackRate: HTMLDivElement;
+    readonly aspectRatio: HTMLDivElement;
+    readonly config: HTMLDivElement;
+    readonly lock: HTMLDivElement;
+    readonly flip: HTMLDivElement;
+    readonly unlock: HTMLDivElement;
+    readonly fullscreenOff: HTMLDivElement;
+    readonly fullscreenOn: HTMLDivElement;
+    readonly fullscreenWebOff: HTMLDivElement;
+    readonly fullscreenWebOn: HTMLDivElement;
+    readonly switchOn: HTMLDivElement;
+    readonly switchOff: HTMLDivElement;
+    readonly error: HTMLDivElement;
+    readonly close: HTMLDivElement;
+    readonly airplay: HTMLDivElement;
+    readonly [key: string]: HTMLDivElement;
+};
+
+
+
+
+
+
+export type Option = {
+    /**
+     * The player id
+     */
+    id?: string;
+
+    /**
+     * The container mounted by the player
+     */
+    container: string | HTMLDivElement;
+
+    /**
+     * Video url
+     */
+    url: string;
+
+    /**
+     * Video poster image url
+     */
+    poster?: string;
+
+    /**
+     * Video title
+     */
+    title?: string;
+
+    /**
+     * Video url type
+     */
+    type?: string;
+
+    /**
+     * Player color theme
+     */
+    theme?: string;
+
+    /**
+     * Player language
+     */
+    lang?: keyof I18n;
+
+    /**
+     * Player default volume
+     */
+    volume?: number;
+
+    /**
+     * Whether live broadcast mode
+     */
+    isLive?: boolean;
+
+    /**
+     * Whether video muted
+     */
+    muted?: boolean;
+
+    /**
+     * Whether video auto play
+     */
+    autoplay?: boolean;
+
+    /**
+     * Whether player auto resize
+     */
+    autoSize?: boolean;
+
+    /**
+     * Whether player auto run mini mode
+     */
+    autoMini?: boolean;
+
+    /**
+     * Whether video auto loop
+     */
+    loop?: boolean;
+
+    /**
+     * Whether show video flip button
+     */
+    flip?: boolean;
+
+    /**
+     * Whether show video playback rate button
+     */
+    playbackRate?: boolean;
+
+    /**
+     * Whether show video aspect ratio button
+     */
+    aspectRatio?: boolean;
+
+    /**
+     * Whether show video screenshot button
+     */
+    screenshot?: boolean;
+
+    /**
+     * Whether show video setting button
+     */
+    setting?: boolean;
+
+    /**
+     * Whether to enable player hotkey
+     */
+    hotkey?: boolean;
+
+    /**
+     * Whether show video pip button
+     */
+    pip?: boolean;
+
+    /**
+     * Do you want to run only one player at a time
+     */
+    mutex?: boolean;
+
+    /**
+     * Whether use backdrop in UI
+     */
+    backdrop?: boolean;
+
+    /**
+     * Whether show video window fullscreen button
+     */
+    fullscreen?: boolean;
+
+    /**
+     * Whether show video web fullscreen button
+     */
+    fullscreenWeb?: boolean;
+
+    /**
+     * Whether to enable player subtitle offset
+     */
+    subtitleOffset?: boolean;
+
+    /**
+     * Whether to enable player mini progress bar
+     */
+    miniProgressBar?: boolean;
+
+    /**
+     * Whether use SSR function
+     */
+    useSSR?: boolean;
+
+    /**
+     * Whether use playsInline in mobile
+     */
+    playsInline?: boolean;
+
+    /**
+     * Whether use lock in mobile
+     */
+    lock?: boolean;
+
+    /**
+     * Whether use fast forward in mobile
+     */
+    fastForward?: boolean;
+
+    /**
+     * Whether use auto playback
+     */
+    autoPlayback?: boolean;
+
+    /**
+     * Whether use auto orientation in mobile
+     */
+    autoOrientation?: boolean;
+
+    /**
+     * Whether use airplay
+     */
+    airplay?: boolean;
+
+    /**
+     * Custom plugin list
+     */
+    plugins?: ((art: Artplayer) => unknown)[];
+
+    /**
+     * Custom mobile whitelist
+     */
+    whitelist?: (string | ((ua: string) => boolean) | RegExp)[];
+
+    /**
+     * Custom layer list
+     */
+    layers?: ComponentOption[];
+
+    /**
+     * Custom contextmenu list
+     */
+    contextmenu?: ComponentOption[];
+
+    /**
+     * Custom control list
+     */
+    controls?: ComponentOption[];
+
+    /**
+     * Custom setting list
+     */
+    settings?: Setting[];
+
+    /**
+     * Custom video quality list
+     */
+    quality?: {
+        /**
+         * Whether the default is selected
+         */
+        default?: boolean;
+
+        /**
+         * Html string of quality
+         */
+        html: string | HTMLElement;
+
+        /**
+         * Video quality url
+         */
+        url: string;
+    }[];
+
+    /**
+     * Custom highlight list
+     */
+    highlight?: {
+        /**
+         * The highlight time
+         */
+        time: number;
+
+        /**
+         * The highlight text
+         */
+        text: string;
+    }[];
+
+    /**
+     * Custom thumbnail
+     */
+    thumbnails?: {
+        /**
+         * The thumbnail image url
+         */
+        url: string;
+
+        /**
+         * The thumbnail item number
+         */
+        number?: number;
+
+        /**
+         * The thumbnail column size
+         */
+        column?: number;
+
+        /**
+         * The thumbnail width
+         */
+        width?: number;
+
+        /**
+         * The thumbnail height
+         */
+        height?: number;
+    };
+
+    /**
+     * Custom subtitle option
+     */
+    subtitle?: Subtitle;
+
+    /**
+     * Other video attribute
+     */
+    moreVideoAttr?: HTMLVideoElement;
+
+    /**
+     * Custom default icons
+     */
+    icons?: {
+        [key in keyof Icons]?: HTMLElement | string;
+    };
+
+    /**
+     * Custom video type function
+     */
+    customType?: Record<string, (video: HTMLVideoElement, url: string, art: Artplayer) => any>;
+};
+
+export default Option;
+type AspectRatio = 'default' | '4:3' | '16:9' | void;
+type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
+type Flip = 'normal' | 'horizontal' | 'vertical' | void;
+
+export declare class Player {
+    get aspectRatio(): AspectRatio;
+    set aspectRatio(ratio: AspectRatio);
+    get playbackRate(): PlaybackRate;
+    set playbackRate(rate: PlaybackRate);
+    get autoSize(): boolean;
+    set autoSize(state: boolean);
+    get autoHeight(): boolean;
+    set autoHeight(state: boolean);
+    get currentTime(): number;
+    set currentTime(time: number);
+    get duration(): number;
+    get played(): number;
+    get playing(): boolean;
+    get flip(): Flip;
+    set flip(state: Flip);
+    get fullscreen(): boolean;
+    set fullscreen(state: boolean);
+    set fullscreenToggle(state: boolean);
+    get fullscreenWeb(): boolean;
+    set fullscreenWeb(state: boolean);
+    set fullscreenWebToggle(state: boolean);
+    get loaded(): number;
+    get loop(): number[];
+    set loop(value: number[]);
+    get mini(): boolean;
+    set mini(state: boolean);
+    get pip(): boolean;
+    set pip(state: boolean);
+    get poster(): string;
+    set poster(url: string);
+    get rect(): DOMRect;
+    get bottom(): number;
+    get height(): number;
+    get left(): number;
+    get right(): number;
+    get top(): number;
+    get width(): number;
+    get x(): number;
+    get y(): number;
+    set seek(time: number);
+    set forward(time: number);
+    set backward(time: number);
+    get url(): string;
+    set url(url: string);
+    get volume(): number;
+    set volume(percentage: number);
+    get muted(): boolean;
+    set muted(state: boolean);
+    get title(): string;
+    set title(title: string);
+    get theme(): string;
+    set theme(theme: string);
+    get subtitleOffset(): number;
+    set subtitleOffset(time: number);
+    pause(): void;
+    play(): Promise<void>;
+    toggle(): void;
+    attr(key: string, value: any): void;
+    switchUrl(url: string): Promise<string>;
+    switchQuality(url: string): Promise<string>;
+    getDataURL(): Promise<string>;
+    getBlobUrl(): Promise<string>;
+    screenshot(): Promise<string>;
+    airplay(): void;
+}
+export type Setting = {
+    /**
+     * Html string or html element of setting name
+     */
+    html: string | HTMLElement;
+
+    /**
+     * Html string or html element of setting icon
+     */
+    icon?: string | HTMLElement;
+
+    /**
+     * The width of setting
+     */
+    width?: number;
+
+    /**
+     * The tooltip of setting
+     */
+    tooltip?: string | HTMLElement;
+
+    /**
+     * Whether the default is selected
+     */
+    default?: boolean;
+
+    /**
+     * Custom selector list
+     */
+    selector?: Setting[];
+
+    /**
+     * When selector item click
+     */
+    onSelect?(item: Setting, element: HTMLDivElement, event: Event): void;
+
+    /**
+     * Custom switch item
+     */
+    switch?: boolean;
+
+    /**
+     * When switch item click
+     */
+    onSwitch?(item: Setting, element: HTMLDivElement, event: Event): void;
+
+    /**
+     * Custom range item
+     */
+    range?: number[] | number;
+
+    /**
+     * When range item change
+     */
+    onRange?(item: Setting, element: HTMLDivElement, event: Event): void;
+
+    /**
+     * When range item change in real time
+     */
+    onChange?(item: Setting, element: HTMLDivElement, event: Event): void;
+
+    $icon?: HTMLDivElement;
+    $html?: HTMLDivElement;
+    $tooltip?: HTMLDivElement;
+    $switch?: boolean;
+    $range?: HTMLInputElement;
+    $parentItem?: Setting;
+    $parentList?: Setting[];
+};
+export type Subtitle = {
+    /**
+     * The subtitle url
+     */
+    url?: string;
+
+    /**
+     * The subtitle type
+     */
+    type?: 'vtt' | 'srt' | 'ass' | (string & Record<never, never>);
+
+    /**
+     * The subtitle style object
+     */
+    style?: Partial<CSSStyleDeclaration>;
+
+    /**
+     * The subtitle encoding, default utf-8
+     */
+    encoding?: string;
+};
+export type Template = {
+    readonly $container: HTMLDivElement;
+    readonly $original: HTMLDivElement;
+    readonly $player: HTMLDivElement;
+    readonly $video: HTMLVideoElement;
+    readonly $track: HTMLTrackElement;
+    readonly $poster: HTMLDivElement;
+    readonly $subtitle: HTMLDivElement;
+    readonly $danmuku: HTMLDivElement;
+    readonly $bottom: HTMLDivElement;
+    readonly $progress: HTMLDivElement;
+    readonly $controls: HTMLDivElement;
+    readonly $controlsLeft: HTMLDivElement;
+    readonly $controlsRight: HTMLDivElement;
+    readonly $layer: HTMLDivElement;
+    readonly $loading: HTMLDivElement;
+    readonly $notice: HTMLDivElement;
+    readonly $noticeInner: HTMLDivElement;
+    readonly $mask: HTMLDivElement;
+    readonly $state: HTMLDivElement;
+    readonly $setting: HTMLDivElement;
+    readonly $info: HTMLDivElement;
+    readonly $infoPanel: HTMLDivElement;
+    readonly $infoClose: HTMLDivElement;
+    readonly $miniHeader: HTMLDivElement;
+    readonly $miniTitle: HTMLDivElement;
+    readonly $miniClose: HTMLDivElement;
+    readonly $contextmenu: HTMLDivElement;
+};
+export type Utils = {
+    userAgent: string;
+    isMobile: boolean;
+    isSafari: boolean;
+    isWechat: boolean;
+    isIE: boolean;
+    isAndroid: boolean;
+    isIOS: boolean;
+    query(selector: string, parent?: HTMLElement): HTMLElement;
+    queryAll(selector: string, parent?: HTMLElement): HTMLElement[];
+    addClass(target: HTMLElement, className: string): void;
+    removeClass(target: HTMLElement, className: string): void;
+    hasClass(target: HTMLElement, className: string): boolean;
+    append(target: HTMLElement, className: HTMLElement): HTMLElement;
+    remove(target: HTMLElement): void;
+    setStyle(element: HTMLElement, key: string, value: string): HTMLElement;
+    setStyles(element: HTMLElement, styles: Partial<CSSStyleDeclaration>): HTMLElement;
+    getStyle<T>(element: HTMLElement, key: string, numberType?: T): T extends true ? number : string;
+    sublings(target: HTMLElement): HTMLElement[];
+    inverseClass(target: HTMLElement, className: string): void;
+    tooltip(target: HTMLElement, msg: string, pos?: string): void;
+    isInViewport(target: HTMLElement, offset?: number): boolean;
+    includeFromEvent(event: Event, target: HTMLElement): boolean;
+    replaceElement(newChild: HTMLElement, oldChild: HTMLElement): HTMLElement;
+    createElement(tag: keyof HTMLElementTagNameMap): HTMLElement;
+    errorHandle<T extends boolean>(condition: T, msg: string): T extends true ? T : never;
+    srtToVtt(srtText: string): string;
+    vttToBlob(vttText: string): string;
+    assToVtt(assText: string): string;
+    getExt(url: string): string;
+    download(url: string, name: string): void;
+    def(obj: object, name: string, value: any): void;
+    has(obj: object, name: string): boolean;
+    get(obj: object, name: string): PropertyDescriptor;
+    mergeDeep<T>(...args: T[]): T;
+    sleep(ms: number): Promise<null>;
+    debounce(func: (...arg: any[]) => any, wait: number, context?: object): (...arg: any[]) => any;
+    throttle(func: (...arg: any[]) => any, wait: number): (...arg: any[]) => any;
+    clamp(num: number, a: number, b: number): number;
+    secondToTime(second: number): string;
+    escape(str: string): string;
+};
