@@ -1,2 +1,2 @@
-type Plugin = (art: Artplayer) => any | ((option: any) => (art: Artplayer) => any);
+type Plugin = (art: Artplayer) => unknown | ((option: unknown) => (art: Artplayer) => unknown);
 export default Plugin;

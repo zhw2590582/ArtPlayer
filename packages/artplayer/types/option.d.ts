@@ -1,17 +1,19 @@
 import Plugin from './plugin';
 import Subtitle from './subtitle';
 import Setting from './setting';
+import Icons from './icons';
+import { I18nKeys } from './i18n';
 
 type Option = {
     /**
      * The player id
      */
-    id: string;
+    id?: string;
 
     /**
      * The container mounted by the player
      */
-    container: string | HTMLElement;
+    container: string | HTMLDivElement;
 
     /**
      * Video url
@@ -41,7 +43,7 @@ type Option = {
     /**
      * Player language
      */
-    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl' | 'es' | 'fa' | (string & Record<never, never>);
+    lang?: I18nKeys;
 
     /**
      * Player default volume
@@ -287,24 +289,7 @@ type Option = {
      * Custom default icons
      */
     icons?: {
-        loading?: HTMLElement | string;
-        state?: HTMLElement | string;
-        play?: HTMLElement | string;
-        pause?: HTMLElement | string;
-        volume?: HTMLElement | string;
-        volumeClose?: HTMLElement | string;
-        subtitle?: HTMLElement | string;
-        screenshot?: HTMLElement | string;
-        setting?: HTMLElement | string;
-        fullscreen?: HTMLElement | string;
-        fullscreenWeb?: HTMLElement | string;
-        pip?: HTMLElement | string;
-        indicator?: HTMLElement | string;
-        arrowLeft?: HTMLElement | string;
-        arrowRight?: HTMLElement | string;
-        playbackRate?: HTMLElement | string;
-        aspectRatio?: HTMLElement | string;
-        config?: HTMLElement | string;
+        [key in keyof Icons]?: HTMLElement | string;
     };
 
     /**

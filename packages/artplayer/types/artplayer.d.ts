@@ -5,13 +5,15 @@ import Player from './player';
 import Option from './option';
 import Subtitle from './subtitle';
 import Plugin from './plugin';
+import Icons from './icons';
+import Template from './template';
 import { I18nKeys, I18nValue } from './i18n';
 
 export = Artplayer;
 export as namespace Artplayer;
 
 declare class Artplayer extends Player {
-    constructor(option: Option, readyCallback?: (this: Artplayer) => void);
+    constructor(option: Option, readyCallback?: (this: Artplayer) => unknown);
 
     static readonly instances: Artplayer[];
     static readonly version: string;
@@ -82,34 +84,7 @@ declare class Artplayer extends Player {
     readonly template: {
         get html(): string;
         query(str: string): HTMLElement;
-        readonly $container: HTMLDivElement;
-        readonly $original: HTMLDivElement;
-        readonly $player: HTMLDivElement;
-        readonly $video: HTMLVideoElement;
-        readonly $track: HTMLTrackElement;
-        readonly $poster: HTMLDivElement;
-        readonly $subtitle: HTMLDivElement;
-        readonly $danmuku: HTMLDivElement;
-        readonly $bottom: HTMLDivElement;
-        readonly $progress: HTMLDivElement;
-        readonly $controls: HTMLDivElement;
-        readonly $controlsLeft: HTMLDivElement;
-        readonly $controlsRight: HTMLDivElement;
-        readonly $layer: HTMLDivElement;
-        readonly $loading: HTMLDivElement;
-        readonly $notice: HTMLDivElement;
-        readonly $noticeInner: HTMLDivElement;
-        readonly $mask: HTMLDivElement;
-        readonly $state: HTMLDivElement;
-        readonly $setting: HTMLDivElement;
-        readonly $info: HTMLDivElement;
-        readonly $infoPanel: HTMLDivElement;
-        readonly $infoClose: HTMLDivElement;
-        readonly $miniHeader: HTMLDivElement;
-        readonly $miniTitle: HTMLDivElement;
-        readonly $miniClose: HTMLDivElement;
-        readonly $contextmenu: HTMLDivElement;
-    };
+    } & Template;
 
     readonly events: {
         proxy<KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap>(
@@ -131,36 +106,7 @@ declare class Artplayer extends Player {
         clear(): void;
     };
 
-    readonly icons: {
-        readonly loading: HTMLDivElement;
-        readonly state: HTMLDivElement;
-        readonly play: HTMLDivElement;
-        readonly pause: HTMLDivElement;
-        readonly check: HTMLDivElement;
-        readonly volume: HTMLDivElement;
-        readonly volumeClose: HTMLDivElement;
-        readonly screenshot: HTMLDivElement;
-        readonly setting: HTMLDivElement;
-        readonly pip: HTMLDivElement;
-        readonly arrowLeft: HTMLDivElement;
-        readonly arrowRight: HTMLDivElement;
-        readonly playbackRate: HTMLDivElement;
-        readonly aspectRatio: HTMLDivElement;
-        readonly config: HTMLDivElement;
-        readonly lock: HTMLDivElement;
-        readonly flip: HTMLDivElement;
-        readonly unlock: HTMLDivElement;
-        readonly fullscreenOff: HTMLDivElement;
-        readonly fullscreenOn: HTMLDivElement;
-        readonly fullscreenWebOff: HTMLDivElement;
-        readonly fullscreenWebOn: HTMLDivElement;
-        readonly switchOn: HTMLDivElement;
-        readonly switchOff: HTMLDivElement;
-        readonly error: HTMLDivElement;
-        readonly close: HTMLDivElement;
-        readonly airplay: HTMLDivElement;
-        readonly [key: string]: HTMLDivElement;
-    };
+    readonly icons: Icons;
 
     readonly i18n: {
         readonly languages: Record<I18nKeys, I18nValue>;
