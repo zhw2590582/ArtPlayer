@@ -1,0 +1,23 @@
+type Subtitle = {
+    /**
+     * The subtitle url
+     */
+    url: string;
+
+    /**
+     * The subtitle type
+     */
+    type?: 'vtt' | 'srt' | 'ass' | (string & Record<never, never>);
+
+    /**
+     * The subtitle style object
+     */
+    style?: CSSStyleDeclaration;
+
+    /**
+     * The subtitle encoding, default utf-8
+     */
+    encoding?: string;
+};
+
+export default Subtitle;
