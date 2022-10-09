@@ -1,3 +1,13 @@
+type Props = {
+    $icon?: HTMLDivElement;
+    $html?: HTMLDivElement;
+    $tooltip?: HTMLDivElement;
+    $switch?: boolean;
+    $range?: HTMLInputElement;
+    $parentItem?: Setting;
+    $parentList?: Setting[];
+};
+
 export type Setting = {
     /**
      * Html string or html element of setting name
@@ -30,9 +40,14 @@ export type Setting = {
     selector?: Setting[];
 
     /**
+     * Wnen the setting was mounted
+     */
+    mounted?(panel: HTMLDivElement, item: Setting): void;
+
+    /**
      * When selector item click
      */
-    onSelect?(item: Setting, element: HTMLDivElement, event: Event): void;
+    onSelect?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom switch item
@@ -42,7 +57,7 @@ export type Setting = {
     /**
      * When switch item click
      */
-    onSwitch?(item: Setting, element: HTMLDivElement, event: Event): void;
+    onSwitch?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom range item
@@ -52,18 +67,10 @@ export type Setting = {
     /**
      * When range item change
      */
-    onRange?(item: Setting, element: HTMLDivElement, event: Event): void;
+    onRange?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
 
     /**
      * When range item change in real time
      */
-    onChange?(item: Setting, element: HTMLDivElement, event: Event): void;
-
-    $icon?: HTMLDivElement;
-    $html?: HTMLDivElement;
-    $tooltip?: HTMLDivElement;
-    $switch?: boolean;
-    $range?: HTMLInputElement;
-    $parentItem?: Setting;
-    $parentList?: Setting[];
+    onChange?(item: Setting & Props, element: HTMLDivElement, event: Event): void;
 };
