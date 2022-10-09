@@ -5,6 +5,8 @@ import { I18n } from './i18n';
 import { ComponentOption } from './component';
 import Artplayer = require('./artplayer');
 
+type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>);
+
 export type Option = {
     /**
      * The player id
@@ -34,7 +36,7 @@ export type Option = {
     /**
      * Video url type
      */
-    type?: string;
+    type?: CustomType;
 
     /**
      * Player color theme
@@ -296,7 +298,9 @@ export type Option = {
     /**
      * Custom video type function
      */
-    customType?: Record<string, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>;
+    customType?: Partial<
+        Record<CustomType, (this: Artplayer, video: HTMLVideoElement, url: string, art: Artplayer) => any>
+    >;
 };
 
 export default Option;
