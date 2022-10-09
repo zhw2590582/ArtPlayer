@@ -2,7 +2,7 @@
 
 // ======================== ES6 Module ==========================
 
-import Artplayer from '../packages/artplayer/types/artplayer';
+import Artplayer from '../packages/artplayer';
 
 const art1 = new Artplayer({
     container: '.artplayer-app',
@@ -11,7 +11,7 @@ const art1 = new Artplayer({
 
 // ======================== CommonJS Module ==========================
 
-const Artplayer = require('../packages/artplayer/types/artplayer');
+const Artplayer = require('../packages/artplayer');
 
 const art2 = new Artplayer({
     container: '.artplayer-app',
@@ -20,7 +20,7 @@ const art2 = new Artplayer({
 
 // ======================== Triple-Slash Directives ==========================
 
-/// <reference path="../packages/artplayer/types/artplayer.d.ts" />
+/// <reference path="../packages/artplayer" />
 
 /**
  * @type {Artplayer} - An Artplayer instance.
@@ -37,7 +37,7 @@ function getInstance(art4) {
 // ======================== @typedef ==========================
 
 /**
- * @typedef { import("../packages/artplayer/types/artplayer") } Artplayer
+ * @typedef { import("../packages/artplayer") } Artplayer
  */
 
 /**
@@ -55,7 +55,7 @@ function getInstance(art6) {
 // ======================== @param ==========================
 
 /**
- * @param { import("../packages/artplayer/types/artplayer") } art7 - An Artplayer instance.
+ * @param { import("../packages/artplayer") } art7 - An Artplayer instance.
  */
 function getInstance(art7) {
     //

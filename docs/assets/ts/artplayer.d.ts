@@ -1,6 +1,150 @@
 export = Artplayer;
 export as namespace Artplayer;
 
+declare class Artplayer extends Player {
+    constructor(option: Option, readyCallback?: (this: Artplayer) => unknown);
+
+    static readonly instances: Artplayer[];
+    static readonly version: string;
+    static readonly env: string;
+    static readonly build: string;
+    static readonly config: Config;
+    static readonly utils: Utils;
+    static readonly scheme: object;
+    static readonly Emitter: Function;
+    static readonly validator: <T extends object>(option: T, scheme: object) => T;
+    static readonly kindOf: (item: any) => string;
+    static readonly html: Artplayer['template']['html'];
+    static readonly option: Option;
+
+    static DEGUG: boolean;
+    static NOTICE_TIME: number;
+    static SETTING_WIDTH: number;
+    static SETTING_ITEM_WIDTH: number;
+    static SETTING_ITEM_HEIGHT: number;
+    static INDICATOR_SIZE: number;
+    static INDICATOR_SIZE_ICON: number;
+    static INDICATOR_SIZE_MOBILE: number;
+    static INDICATOR_SIZE_MOBILE_ICON: number;
+    static VOLUME_PANEL_WIDTH: number;
+    static VOLUME_HANDLE_WIDTH: number;
+    static RESIZE_TIME: number;
+    static SCROLL_TIME: number;
+    static SCROLL_GAP: number;
+    static AUTO_PLAYBACK_MAX: number;
+    static AUTO_PLAYBACK_MIN: number;
+    static RECONNECT_TIME_MAX: number;
+    static RECONNECT_SLEEP_TIME: number;
+    static CONTROL_HIDE_TIME: number;
+    static DB_CLICE_TIME: number;
+    static MOBILE_AUTO_PLAYBACKRAT: number;
+    static MOBILE_AUTO_PLAYBACKRATE_TIME: number;
+    static MOBILE_AUTO_ORIENTATION_TIME: number;
+    static INFO_LOOP_TIME: number;
+    static FAST_FORWARD_VALUE: number;
+    static FAST_FORWARD_TIME: number;
+    static TOUCH_MOVE_RATIO: number;
+    static VOLUME_STEP: number;
+    static SEEK_STEP: number;
+
+    readonly id: number;
+    readonly option: Option;
+    readonly isLock: boolean;
+    readonly isReady: boolean;
+    readonly isFocus: boolean;
+    readonly isInput: boolean;
+    readonly isRotate: boolean;
+    readonly isDestroy: boolean;
+
+    on(name: Events, fn: Function, ctx?: object): void;
+    once(name: Events, fn: Function, ctx?: object): void;
+    emit(name: Events): void;
+    off(name: Events, callback?: Function): void;
+
+    query: Artplayer['template']['query'];
+    proxy: Artplayer['events']['proxy'];
+
+    destroy(removeHtml?: boolean): void;
+
+    readonly whitelist: {
+        get state(): boolean;
+    };
+
+    readonly template: {
+        get html(): string;
+        query(str: string): HTMLElement;
+    } & Template;
+
+    readonly events: {
+        proxy<KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap>(
+            element: HTMLDivElement | Document | Window,
+            eventName: KW | KH,
+            handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
+            options?: boolean | AddEventListenerOptions,
+        ): () => void;
+        hover(element: HTMLElement, mouseenter?: (event: Event) => any, mouseleave?: (event: Event) => any): void;
+        loadImg(element: HTMLImageElement | string): Promise<HTMLImageElement>;
+    };
+
+    readonly storage: {
+        name: 'artplayer_settings';
+        settings: Record<string, any>;
+        get(key: string): any;
+        set(key: string, value: any): void;
+        del(key: string): boolean;
+        clear(): void;
+    };
+
+    readonly icons: Icons;
+
+    readonly i18n: {
+        readonly languages: I18n;
+        get(key: string): string;
+        update(language: Partial<I18n>): void;
+    };
+
+    readonly notice: {
+        time: number;
+        set show(msg: string);
+    };
+
+    readonly layers: Record<string, HTMLElement> & Component;
+
+    readonly controls: Record<string, HTMLElement> & Component;
+
+    readonly contextmenu: Record<string, HTMLElement> & Component;
+
+    readonly subtitle: {
+        get url(): string;
+        set url(url: string);
+        style(name: string | Partial<CSSStyleDeclaration>, value?: string): void;
+        switch(url: string, option?: Subtitle): Promise<string>;
+    } & Component;
+
+    readonly info: Component;
+
+    readonly loading: Component;
+
+    readonly hotkey: {
+        keys: Record<string, ((event: Event) => any)[]>;
+        add(key: number, callback: (event: Event) => any): Artplayer['hotkey'];
+    };
+
+    readonly mask: Component;
+
+    readonly setting: {
+        option: Setting[];
+        add(setting: Setting): Artplayer['setting'];
+        update(): Artplayer['setting'];
+    } & Component;
+
+    readonly plugins: {
+        add(plugin: (art: Artplayer) => unknown): Artplayer['plugins'];
+        [pluginName: string]: any;
+    };
+
+    readonly mobile: object;
+}
 type Selector = {
     /**
      * Whether the default is selected
@@ -13,7 +157,44 @@ type Selector = {
     html: string | HTMLElement;
 };
 
-type ComponentOption = {
+export type Component = {
+    /**
+     * Component self-increasing id
+     */
+    readonly id: number;
+
+    /**
+     * Component parent name
+     */
+    readonly name: string | void;
+
+    /**
+     * Component parent element
+     */
+    readonly $parent: HTMLElement | void;
+
+    /**
+     * Whether to show component parent
+     */
+    get show(): boolean;
+
+    /**
+     * Whether to show component parent
+     */
+    set show(state: boolean);
+
+    /**
+     * Toggle the component parent
+     */
+    set toggle(state: boolean);
+
+    /**
+     * Dynamic add a component
+     */
+    add(option: ComponentOption): HTMLElement;
+};
+
+export type ComponentOption = {
     /**
      * Html string or html element of component
      */
@@ -69,151 +250,235 @@ type ComponentOption = {
      */
     onSelect?(selector: Selector, element: HTMLElement, event: Event): void;
 };
+export type Config = {
+    propertys: [
+        'audioTracks',
+        'autoplay',
+        'buffered',
+        'controller',
+        'controls',
+        'crossOrigin',
+        'currentSrc',
+        'currentTime',
+        'defaultMuted',
+        'defaultPlaybackRate',
+        'duration',
+        'ended',
+        'error',
+        'loop',
+        'mediaGroup',
+        'muted',
+        'networkState',
+        'paused',
+        'playbackRate',
+        'played',
+        'preload',
+        'readyState',
+        'seekable',
+        'seeking',
+        'src',
+        'startDate',
+        'textTracks',
+        'videoTracks',
+        'volume',
+    ];
+    methods: ['addTextTrack', 'canPlayType', 'load', 'play', 'pause'];
+    events: [
+        'abort',
+        'canplay',
+        'canplaythrough',
+        'durationchange',
+        'emptied',
+        'ended',
+        'error',
+        'loadeddata',
+        'loadedmetadata',
+        'loadstart',
+        'pause',
+        'play',
+        'playing',
+        'progress',
+        'ratechange',
+        'seeked',
+        'seeking',
+        'stalled',
+        'suspend',
+        'timeupdate',
+        'volumechange',
+        'waiting',
+    ];
+    prototypes: [
+        'width',
+        'height',
+        'videoWidth',
+        'videoHeight',
+        'poster',
+        'webkitDecodedFrameCount',
+        'webkitDroppedFrameCount',
+        'playsInline',
+        'webkitSupportsFullscreen',
+        'webkitDisplayingFullscreen',
+        'onenterpictureinpicture',
+        'onleavepictureinpicture',
+        'disablePictureInPicture',
+        'cancelVideoFrameCallback',
+        'requestVideoFrameCallback',
+        'getVideoPlaybackQuality',
+        'requestPictureInPicture',
+        'webkitEnterFullScreen',
+        'webkitEnterFullscreen',
+        'webkitExitFullScreen',
+        'webkitExitFullscreen',
+    ];
+};export type Events =
+    | 'video:canplay'
+    | 'video:canplaythrough'
+    | 'video:complete'
+    | 'video:durationchange'
+    | 'video:emptied'
+    | 'video:ended'
+    | 'video:loadeddata'
+    | 'video:loadeddata'
+    | 'video:loadedmetadata'
+    | 'video:pause'
+    | 'video:play'
+    | 'video:playing'
+    | 'video:progress'
+    | 'video:ratechange'
+    | 'video:seeked'
+    | 'video:seeking'
+    | 'video:stalled'
+    | 'video:suspend'
+    | 'video:timeupdate'
+    | 'video:volumechange'
+    | 'video:waiting'
+    | 'hotkey'
+    | 'destroy'
+    | 'customType'
+    | 'url'
+    | 'subtitleUpdate'
+    | 'subtitleLoad'
+    | 'subtitleSwitch'
+    | 'focus'
+    | 'blur'
+    | 'dblclick'
+    | 'click'
+    | 'setBar'
+    | 'hover'
+    | 'mousemove'
+    | 'resize'
+    | 'view'
+    | 'aspectRatio'
+    | 'autoHeight'
+    | 'autoSize'
+    | 'ready'
+    | 'error'
+    | 'flip'
+    | 'fullscreen'
+    | 'fullscreenWeb'
+    | 'loop'
+    | 'mini'
+    | 'pause'
+    | 'pip'
+    | 'playbackRate'
+    | 'play'
+    | 'screenshot'
+    | 'seek'
+    | 'subtitleOffset'
+    | 'switch'
+    | 'restart'
+    | 'volume'
+    | 'lock'
+    | 'selector'
+    | (string & Record<never, never>);
+type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | (string & Record<never, never>);
 
-type SettingOption = {
-    /**
-     * Html string or html element of setting name
-     */
-    html: string | HTMLElement;
-
-    /**
-     * Html string or html element of setting icon
-     */
-    icon?: string | HTMLElement;
-
-    /**
-     * The width of setting
-     */
-    width?: number;
-
-    /**
-     * The tooltip of setting
-     */
-    tooltip?: string | HTMLElement;
-
-    /**
-     * Whether the default is selected
-     */
-    default?: boolean;
-
-    /**
-     * Custom selector list
-     */
-    selector?: SettingOption[];
-
-    /**
-     * When selector item click
-     */
-    onSelect?(item: SettingOption, element: HTMLElement, event: Event): void;
-
-    /**
-     * Custom switch item
-     */
-    switch?: boolean;
-
-    /**
-     * When switch item click
-     */
-    onSwitch?(item: SettingOption, element: HTMLElement, event: Event): void;
-
-    /**
-     * Custom range item
-     */
-    range?: number[] | number;
-
-    /**
-     * When range item change
-     */
-    onRange?(item: SettingOption, element: HTMLElement, event: Event): void;
-
-    /**
-     * When range item change in real time
-     */
-    onChange?(item: SettingOption, element: HTMLElement, event: Event): void;
-
-    $icon?: HTMLElement;
-    $html?: HTMLElement;
-    $tooltip?: HTMLElement;
-    $switch?: boolean;
-    $range?: HTMLElement;
-    $parentItem?: SettingOption;
-    $parentList?: SettingOption[];
+type I18nValue = {
+    'Video Info': string;
+    Close: string;
+    'Video Load Failed': string;
+    Volume: string;
+    Play: string;
+    Pause: string;
+    Rate: string;
+    Mute: string;
+    'Video Flip': string;
+    Horizontal: string;
+    Vertical: string;
+    Reconnect: string;
+    'Show Setting': string;
+    'Hide Setting': string;
+    Screenshot: string;
+    'Play Speed': string;
+    'Aspect Ratio': string;
+    Default: string;
+    Normal: string;
+    Open: string;
+    'Switch Video': string;
+    'Switch Subtitle': string;
+    Fullscreen: string;
+    'Exit Fullscreen': string;
+    'Web Fullscreen': string;
+    'Exit Web Fullscreen': string;
+    'Mini Player': string;
+    'PIP Mode': string;
+    'Exit PIP Mode': string;
+    'PIP Not Supported': string;
+    'Fullscreen Not Supported': string;
+    'Subtitle Offset': string;
+    'Last Seen': string;
+    'Jump Play': string;
+    AirPlay: string;
+    'AirPlay Not Available': string;
 };
 
-type Component = {
-    /**
-     * Component self-increasing id
-     */
-    readonly id: number;
-
-    /**
-     * Component parent name
-     */
-    readonly name: string | void;
-
-    /**
-     * Component parent element
-     */
-    readonly $parent: HTMLElement | void;
-
-    /**
-     * Whether to show component parent
-     */
-    get show(): boolean;
-
-    /**
-     * Whether to show component parent
-     */
-    set show(state: boolean);
-
-    /**
-     * Toggle the component parent
-     */
-    set toggle(state: boolean);
-
-    /**
-     * Dynamic add a component
-     */
-    add(option: ComponentOption): HTMLElement;
+export type I18n = Record<I18nKeys, Partial<I18nValue>>;
+export type Icons = {
+    readonly loading: HTMLDivElement;
+    readonly state: HTMLDivElement;
+    readonly play: HTMLDivElement;
+    readonly pause: HTMLDivElement;
+    readonly check: HTMLDivElement;
+    readonly volume: HTMLDivElement;
+    readonly volumeClose: HTMLDivElement;
+    readonly screenshot: HTMLDivElement;
+    readonly setting: HTMLDivElement;
+    readonly pip: HTMLDivElement;
+    readonly arrowLeft: HTMLDivElement;
+    readonly arrowRight: HTMLDivElement;
+    readonly playbackRate: HTMLDivElement;
+    readonly aspectRatio: HTMLDivElement;
+    readonly config: HTMLDivElement;
+    readonly lock: HTMLDivElement;
+    readonly flip: HTMLDivElement;
+    readonly unlock: HTMLDivElement;
+    readonly fullscreenOff: HTMLDivElement;
+    readonly fullscreenOn: HTMLDivElement;
+    readonly fullscreenWebOff: HTMLDivElement;
+    readonly fullscreenWebOn: HTMLDivElement;
+    readonly switchOn: HTMLDivElement;
+    readonly switchOff: HTMLDivElement;
+    readonly error: HTMLDivElement;
+    readonly close: HTMLDivElement;
+    readonly airplay: HTMLDivElement;
+    readonly [key: string]: HTMLDivElement;
 };
 
-type PluginFunction = (art: Artplayer) => any | ((option: any) => (art: Artplayer) => any);
-type CustomType = (video: HTMLVideoElement, url: string, art: Artplayer) => any;
-type WhitelistFunction = (ua: string) => boolean;
-type EventCallback = (event: Event) => any;
 
-type SubtitleOption = {
-    /**
-     * The subtitle url
-     */
-    url: string;
 
-    /**
-     * The subtitle type
-     */
-    type?: 'vtt' | 'srt' | 'ass' | (string & Record<never, never>);
 
-    /**
-     * The subtitle style object
-     */
-    style?: CSSStyleDeclaration;
 
-    /**
-     * The subtitle encoding, default utf-8
-     */
-    encoding?: string;
-};
 
-type Option = {
+export type Option = {
     /**
      * The player id
      */
-    id: string;
+    id?: string;
 
     /**
      * The container mounted by the player
      */
-    container: string | HTMLElement;
+    container: string | HTMLDivElement;
 
     /**
      * Video url
@@ -243,7 +508,7 @@ type Option = {
     /**
      * Player language
      */
-    lang?: 'en' | 'zh-cn' | 'zh-tw' | 'cs' | 'pl' | 'es' | 'fa' | (string & Record<never, never>);
+    lang?: keyof I18n;
 
     /**
      * Player default volume
@@ -383,12 +648,12 @@ type Option = {
     /**
      * Custom plugin list
      */
-    plugins?: PluginFunction[];
+    plugins?: ((art: Artplayer) => unknown)[];
 
     /**
      * Custom mobile whitelist
      */
-    whitelist?: (string | WhitelistFunction | RegExp)[];
+    whitelist?: (string | ((ua: string) => boolean) | RegExp)[];
 
     /**
      * Custom layer list
@@ -408,7 +673,7 @@ type Option = {
     /**
      * Custom setting list
      */
-    settings?: SettingOption[];
+    settings?: Setting[];
 
     /**
      * Custom video quality list
@@ -478,7 +743,7 @@ type Option = {
     /**
      * Custom subtitle option
      */
-    subtitle?: SubtitleOption;
+    subtitle?: Subtitle;
 
     /**
      * Other video attribute
@@ -489,100 +754,21 @@ type Option = {
      * Custom default icons
      */
     icons?: {
-        loading?: HTMLElement | string;
-        state?: HTMLElement | string;
-        play?: HTMLElement | string;
-        pause?: HTMLElement | string;
-        volume?: HTMLElement | string;
-        volumeClose?: HTMLElement | string;
-        subtitle?: HTMLElement | string;
-        screenshot?: HTMLElement | string;
-        setting?: HTMLElement | string;
-        fullscreen?: HTMLElement | string;
-        fullscreenWeb?: HTMLElement | string;
-        pip?: HTMLElement | string;
-        indicator?: HTMLElement | string;
-        arrowLeft?: HTMLElement | string;
-        arrowRight?: HTMLElement | string;
-        playbackRate?: HTMLElement | string;
-        aspectRatio?: HTMLElement | string;
-        config?: HTMLElement | string;
+        [key in keyof Icons]?: HTMLElement | string;
     };
 
     /**
      * Custom video type function
      */
-    customType?: {
-        [key: string]: CustomType;
-    };
+    customType?: Record<string, (video: HTMLVideoElement, url: string, art: Artplayer) => any>;
 };
 
+export default Option;
 type AspectRatio = 'default' | '4:3' | '16:9' | void;
 type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
 type Flip = 'normal' | 'horizontal' | 'vertical' | void;
-type Events =
-    | 'video:canplay'
-    | 'video:canplaythrough'
-    | 'video:complete'
-    | 'video:durationchange'
-    | 'video:emptied'
-    | 'video:ended'
-    | 'video:loadeddata'
-    | 'video:loadeddata'
-    | 'video:loadedmetadata'
-    | 'video:pause'
-    | 'video:play'
-    | 'video:playing'
-    | 'video:progress'
-    | 'video:ratechange'
-    | 'video:seeked'
-    | 'video:seeking'
-    | 'video:stalled'
-    | 'video:suspend'
-    | 'video:timeupdate'
-    | 'video:volumechange'
-    | 'video:waiting'
-    | 'hotkey'
-    | 'destroy'
-    | 'customType'
-    | 'url'
-    | 'subtitleUpdate'
-    | 'subtitleLoad'
-    | 'subtitleSwitch'
-    | 'focus'
-    | 'blur'
-    | 'dblclick'
-    | 'click'
-    | 'setBar'
-    | 'hover'
-    | 'mousemove'
-    | 'resize'
-    | 'view'
-    | 'aspectRatio'
-    | 'autoHeight'
-    | 'autoSize'
-    | 'ready'
-    | 'error'
-    | 'flip'
-    | 'fullscreen'
-    | 'fullscreenWeb'
-    | 'loop'
-    | 'mini'
-    | 'pause'
-    | 'pip'
-    | 'playbackRate'
-    | 'play'
-    | 'screenshot'
-    | 'seek'
-    | 'subtitleOffset'
-    | 'switch'
-    | 'restart'
-    | 'volume'
-    | 'lock'
-    | 'selector'
-    | (string & Record<never, never>);
 
-declare class Player {
+export declare class Player {
     get aspectRatio(): AspectRatio;
     set aspectRatio(ratio: AspectRatio);
     get playbackRate(): PlaybackRate;
@@ -648,211 +834,164 @@ declare class Player {
     screenshot(): Promise<string>;
     airplay(): void;
 }
+export type Setting = {
+    /**
+     * Html string or html element of setting name
+     */
+    html: string | HTMLElement;
 
-declare class Artplayer extends Player {
-    constructor(option: Option, readyCallback?: (this: Artplayer) => void);
+    /**
+     * Html string or html element of setting icon
+     */
+    icon?: string | HTMLElement;
 
-    static instances: Artplayer[];
-    static version: string;
-    static env: string;
-    static build: string;
-    static config: {
-        propertys: {
-            [key: string]: string[];
-        };
-        methods: {
-            [key: string]: string[];
-        };
-        events: {
-            [key: string]: string[];
-        };
-        prototypes: {
-            [key: string]: string[];
-        };
-    };
-    static utils: {
-        [key: string]: string | Function;
-    };
-    static scheme: object;
-    static Emitter: Function;
-    static validator: Function;
-    static kindOf: Function;
-    static html: string;
-    static option: Option;
+    /**
+     * The width of setting
+     */
+    width?: number;
 
-    readonly id: number;
-    readonly option: Option;
-    readonly isLock: boolean;
-    readonly isReady: boolean;
-    readonly isFocus: boolean;
-    readonly isInput: boolean;
-    readonly isRotate: boolean;
-    readonly isDestroy: boolean;
+    /**
+     * The tooltip of setting
+     */
+    tooltip?: string | HTMLElement;
 
-    static DEGUG: boolean;
-    static NOTICE_TIME: number;
-    static SETTING_WIDTH: number;
-    static SETTING_ITEM_WIDTH: number;
-    static SETTING_ITEM_HEIGHT: number;
-    static INDICATOR_SIZE: number;
-    static INDICATOR_SIZE_ICON: number;
-    static INDICATOR_SIZE_MOBILE: number;
-    static INDICATOR_SIZE_MOBILE_ICON: number;
-    static VOLUME_PANEL_WIDTH: number;
-    static VOLUME_HANDLE_WIDTH: number;
-    static RESIZE_TIME: number;
-    static SCROLL_TIME: number;
-    static SCROLL_GAP: number;
-    static AUTO_PLAYBACK_MAX: number;
-    static AUTO_PLAYBACK_MIN: number;
-    static RECONNECT_TIME_MAX: number;
-    static RECONNECT_SLEEP_TIME: number;
-    static CONTROL_HIDE_TIME: number;
-    static DB_CLICE_TIME: number;
-    static MOBILE_AUTO_PLAYBACKRAT: number;
-    static MOBILE_AUTO_PLAYBACKRATE_TIME: number;
-    static MOBILE_AUTO_ORIENTATION_TIME: number;
-    static INFO_LOOP_TIME: number;
-    static FAST_FORWARD_VALUE: number;
-    static FAST_FORWARD_TIME: number;
-    static TOUCH_MOVE_RATIO: number;
-    static VOLUME_STEP: number;
-    static SEEK_STEP: number;
+    /**
+     * Whether the default is selected
+     */
+    default?: boolean;
 
-    on(name: Events, fn: Function, ctx?: object): void;
-    once(name: Events, fn: Function, ctx?: object): void;
-    emit(name: Events): void;
-    off(name: Events, callback?: Function): void;
+    /**
+     * Custom selector list
+     */
+    selector?: Setting[];
 
-    query: Artplayer['template']['query'];
-    proxy: Artplayer['events']['proxy'];
+    /**
+     * When selector item click
+     */
+    onSelect?(item: Setting, element: HTMLDivElement, event: Event): void;
 
-    destroy(removeHtml?: boolean): void;
+    /**
+     * Custom switch item
+     */
+    switch?: boolean;
 
-    readonly template: {
-        query(str: string): HTMLElement;
-        readonly $container: HTMLElement;
-        readonly $original: HTMLElement;
-        readonly $player: HTMLElement;
-        readonly $video: HTMLElement;
-        readonly $poster: HTMLElement;
-        readonly $subtitle: HTMLElement;
-        readonly $danmuku: HTMLElement;
-        readonly $bottom: HTMLElement;
-        readonly $progress: HTMLElement;
-        readonly $controls: HTMLElement;
-        readonly $controlsLeft: HTMLElement;
-        readonly $controlsRight: HTMLElement;
-        readonly $layer: HTMLElement;
-        readonly $loading: HTMLElement;
-        readonly $notice: HTMLElement;
-        readonly $noticeInner: HTMLElement;
-        readonly $mask: HTMLElement;
-        readonly $state: HTMLElement;
-        readonly $setting: HTMLElement;
-        readonly $info: HTMLElement;
-        readonly $infoPanel: HTMLElement;
-        readonly $infoClose: HTMLElement;
-        readonly $miniHeader: HTMLElement;
-        readonly $miniTitle: HTMLElement;
-        readonly $miniClose: HTMLElement;
-        readonly $contextmenu: HTMLElement;
-    };
+    /**
+     * When switch item click
+     */
+    onSwitch?(item: Setting, element: HTMLDivElement, event: Event): void;
 
-    readonly events: {
-        proxy<KW extends keyof WindowEventMap, KH extends keyof HTMLElementEventMap>(
-            element: HTMLDivElement | Document | Window,
-            eventName: KW | KH,
-            handler: (event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event) => void,
-            options?: boolean | AddEventListenerOptions,
-        ): () => void;
-        hover(element: HTMLElement, mouseenter?: EventCallback, mouseleave?: EventCallback): void;
-        loadImg(element: HTMLImageElement | string): Promise<HTMLImageElement>;
-    };
+    /**
+     * Custom range item
+     */
+    range?: number[] | number;
 
-    readonly whitelist: {
-        readonly state: boolean;
-    };
+    /**
+     * When range item change
+     */
+    onRange?(item: Setting, element: HTMLDivElement, event: Event): void;
 
-    readonly storage: {
-        readonly name: string;
-        readonly settings: object;
-        get(key: string): any;
-        set(key: string, value: any): void;
-        del(key: string): any;
-        clear(): any;
-    };
+    /**
+     * When range item change in real time
+     */
+    onChange?(item: Setting, element: HTMLDivElement, event: Event): void;
 
-    readonly icons: {
-        readonly loading: HTMLElement;
-        readonly state: HTMLElement;
-        readonly play: HTMLElement;
-        readonly pause: HTMLElement;
-        readonly check: HTMLElement;
-        readonly volume: HTMLElement;
-        readonly volumeClose: HTMLElement;
-        readonly subtitle: HTMLElement;
-        readonly screenshot: HTMLElement;
-        readonly setting: HTMLElement;
-        readonly fullscreen: HTMLElement;
-        readonly fullscreenWeb: HTMLElement;
-        readonly pip: HTMLElement;
-        readonly indicator: HTMLElement;
-        readonly arrowLeft: HTMLElement;
-        readonly arrowRight: HTMLElement;
-        readonly playbackRate: HTMLElement;
-        readonly aspectRatio: HTMLElement;
-        readonly config: HTMLElement;
-    };
+    $icon?: HTMLDivElement;
+    $html?: HTMLDivElement;
+    $tooltip?: HTMLDivElement;
+    $switch?: boolean;
+    $range?: HTMLInputElement;
+    $parentItem?: Setting;
+    $parentList?: Setting[];
+};
+export type Subtitle = {
+    /**
+     * The subtitle url
+     */
+    url?: string;
 
-    readonly hotkey: {
-        add(key: number, callback: EventCallback): Artplayer['hotkey'];
-    };
+    /**
+     * The subtitle type
+     */
+    type?: 'vtt' | 'srt' | 'ass' | (string & Record<never, never>);
 
-    readonly plugins: {
-        readonly id: number;
-        add(plugin: PluginFunction): Artplayer['plugins'];
-        [pluginName: string]: any;
-    };
+    /**
+     * The subtitle style object
+     */
+    style?: Partial<CSSStyleDeclaration>;
 
-    readonly i18n: {
-        readonly languages: {
-            [key: string]: object;
-        };
-        get(key: string): string;
-        update(language: object): void;
-    };
-
-    readonly notice: {
-        time: number;
-        set show(msg: string);
-    };
-
-    readonly subtitle: {
-        get show(): boolean;
-        set show(state: boolean);
-        set toggle(state: boolean);
-        get url(): string;
-        set url(url: string);
-        style(name: string | CSSStyleDeclaration, value?: string): HTMLElement;
-        switch(url: string, option?: SubtitleOption): Promise<string>;
-    };
-
-    readonly mobile: object;
-
-    readonly player: Player;
-
-    readonly info: Component;
-
-    readonly loading: Component;
-
-    readonly mask: Component;
-
-    readonly layers: Record<string, HTMLElement> & Component;
-
-    readonly controls: Record<string, HTMLElement> & Component;
-
-    readonly contextmenu: Record<string, HTMLElement> & Component;
-
-    readonly setting: Record<string, HTMLElement> & Component;
-}
+    /**
+     * The subtitle encoding, default utf-8
+     */
+    encoding?: string;
+};
+export type Template = {
+    readonly $container: HTMLDivElement;
+    readonly $original: HTMLDivElement;
+    readonly $player: HTMLDivElement;
+    readonly $video: HTMLVideoElement;
+    readonly $track: HTMLTrackElement;
+    readonly $poster: HTMLDivElement;
+    readonly $subtitle: HTMLDivElement;
+    readonly $danmuku: HTMLDivElement;
+    readonly $bottom: HTMLDivElement;
+    readonly $progress: HTMLDivElement;
+    readonly $controls: HTMLDivElement;
+    readonly $controlsLeft: HTMLDivElement;
+    readonly $controlsRight: HTMLDivElement;
+    readonly $layer: HTMLDivElement;
+    readonly $loading: HTMLDivElement;
+    readonly $notice: HTMLDivElement;
+    readonly $noticeInner: HTMLDivElement;
+    readonly $mask: HTMLDivElement;
+    readonly $state: HTMLDivElement;
+    readonly $setting: HTMLDivElement;
+    readonly $info: HTMLDivElement;
+    readonly $infoPanel: HTMLDivElement;
+    readonly $infoClose: HTMLDivElement;
+    readonly $miniHeader: HTMLDivElement;
+    readonly $miniTitle: HTMLDivElement;
+    readonly $miniClose: HTMLDivElement;
+    readonly $contextmenu: HTMLDivElement;
+};
+export type Utils = {
+    userAgent: string;
+    isMobile: boolean;
+    isSafari: boolean;
+    isWechat: boolean;
+    isIE: boolean;
+    isAndroid: boolean;
+    isIOS: boolean;
+    query(selector: string, parent?: HTMLElement): HTMLElement;
+    queryAll(selector: string, parent?: HTMLElement): HTMLElement[];
+    addClass(target: HTMLElement, className: string): void;
+    removeClass(target: HTMLElement, className: string): void;
+    hasClass(target: HTMLElement, className: string): boolean;
+    append(target: HTMLElement, className: HTMLElement): HTMLElement;
+    remove(target: HTMLElement): void;
+    setStyle(element: HTMLElement, key: string, value: string): HTMLElement;
+    setStyles(element: HTMLElement, styles: Partial<CSSStyleDeclaration>): HTMLElement;
+    getStyle<T>(element: HTMLElement, key: string, numberType?: T): T extends true ? number : string;
+    sublings(target: HTMLElement): HTMLElement[];
+    inverseClass(target: HTMLElement, className: string): void;
+    tooltip(target: HTMLElement, msg: string, pos?: string): void;
+    isInViewport(target: HTMLElement, offset?: number): boolean;
+    includeFromEvent(event: Event, target: HTMLElement): boolean;
+    replaceElement(newChild: HTMLElement, oldChild: HTMLElement): HTMLElement;
+    createElement(tag: keyof HTMLElementTagNameMap): HTMLElement;
+    errorHandle<T extends boolean>(condition: T, msg: string): T extends true ? T : never;
+    srtToVtt(srtText: string): string;
+    vttToBlob(vttText: string): string;
+    assToVtt(assText: string): string;
+    getExt(url: string): string;
+    download(url: string, name: string): void;
+    def(obj: object, name: string, value: any): void;
+    has(obj: object, name: string): boolean;
+    get(obj: object, name: string): PropertyDescriptor;
+    mergeDeep<T>(...args: T[]): T;
+    sleep(ms: number): Promise<null>;
+    debounce(func: (...arg: any[]) => any, wait: number, context?: object): (...arg: any[]) => any;
+    throttle(func: (...arg: any[]) => any, wait: number): (...arg: any[]) => any;
+    clamp(num: number, a: number, b: number): number;
+    secondToTime(second: number): string;
+    escape(str: string): string;
+};
