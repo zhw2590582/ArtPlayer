@@ -1,11 +1,10 @@
-import Plugin from './plugin';
-import Subtitle from './subtitle';
-import Setting from './setting';
-import Icons from './icons';
-import I18n from './i18n';
+import { Subtitle } from './subtitle';
+import { Setting } from './setting';
+import { Icons } from './icons';
+import { I18n } from './i18n';
 import { ComponentOption } from './component';
 
-type Option = {
+export type Option = {
     /**
      * The player id
      */
@@ -184,7 +183,7 @@ type Option = {
     /**
      * Custom plugin list
      */
-    plugins?: Plugin[];
+    plugins?: ((art: Artplayer) => unknown)[];
 
     /**
      * Custom mobile whitelist

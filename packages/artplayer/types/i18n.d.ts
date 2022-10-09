@@ -39,6 +39,4 @@ type I18nValue = {
     'AirPlay Not Available': string;
 };
 
-type I18n = Record<I18nKeys, Partial<I18nValue>>;
-
-export default I18n;
+export type I18n = Record<I18nKeys, Partial<I18nValue>>;

@@ -1,14 +1,13 @@
-import Config from './config';
-import Events from './events';
-import Utils from './utils';
-import Player from './player';
-import Option from './option';
-import Subtitle from './subtitle';
-import Plugin from './plugin';
-import Icons from './icons';
-import Template from './template';
-import I18n from './i18n';
-import Setting from './setting';
+import { Config } from './config';
+import { Events } from './events';
+import { Utils } from './utils';
+import { Player } from './player';
+import { Option } from './option';
+import { Subtitle } from './subtitle';
+import { Icons } from './icons';
+import { Template } from './template';
+import { I18n } from './i18n';
+import { Setting } from './setting';
 import { Component } from './component';
 
 export = Artplayer;
@@ -130,7 +129,7 @@ declare class Artplayer extends Player {
     readonly subtitle: {
         get url(): string;
         set url(url: string);
-        style(name: string | CSSStyleDeclaration, value?: string): void;
+        style(name: string | Partial<CSSStyleDeclaration>, value?: string): void;
         switch(url: string, option?: Subtitle): Promise<string>;
     } & Component;
 
@@ -152,8 +151,7 @@ declare class Artplayer extends Player {
     } & Component;
 
     readonly plugins: {
-        readonly id: number;
-        add(plugin: Plugin): Artplayer['plugins'];
+        add(plugin: (art: Artplayer) => unknown): Artplayer['plugins'];
         [pluginName: string]: any;
     };
 

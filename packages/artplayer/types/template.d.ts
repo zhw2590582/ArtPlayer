@@ -1,4 +1,4 @@
-type Template = {
+export type Template = {
     readonly $container: HTMLDivElement;
     readonly $original: HTMLDivElement;
     readonly $player: HTMLDivElement;
@@ -27,5 +27,3 @@ type Template = {
     readonly $miniClose: HTMLDivElement;
     readonly $contextmenu: HTMLDivElement;
 };
-
-export default Template;

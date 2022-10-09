@@ -1,4 +1,4 @@
-type Subtitle = {
+export type Subtitle = {
     /**
      * The subtitle url
      */
@@ -19,5 +19,3 @@ type Subtitle = {
      */
     encoding?: string;
 };
-
-export default Subtitle;

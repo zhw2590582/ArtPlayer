@@ -2,7 +2,7 @@ type AspectRatio = 'default' | '4:3' | '16:9' | void;
 type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
 type Flip = 'normal' | 'horizontal' | 'vertical' | void;
 
-declare class Player {
+export declare class Player {
     get aspectRatio(): AspectRatio;
     set aspectRatio(ratio: AspectRatio);
     get playbackRate(): PlaybackRate;
@@ -68,5 +68,3 @@ declare class Player {
     screenshot(): Promise<string>;
     airplay(): void;
 }
-
-export default Player;

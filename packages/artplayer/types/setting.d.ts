@@ -1,4 +1,4 @@
-type Setting = {
+export type Setting = {
     /**
      * Html string or html element of setting name
      */
@@ -67,5 +67,3 @@ type Setting = {
     $parentItem?: Setting;
     $parentList?: Setting[];
 };
-
-export default Setting;

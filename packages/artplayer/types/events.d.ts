@@ -1,4 +1,4 @@
-type Events =
+export type Events =
     | 'video:canplay'
     | 'video:canplaythrough'
     | 'video:complete'
@@ -59,5 +59,3 @@ type Events =
     | 'lock'
     | 'selector'
     | (string & Record<never, never>);
-
-export default Events;

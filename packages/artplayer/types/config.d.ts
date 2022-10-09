@@ -1,4 +1,4 @@
-type Config = {
+export type Config = {
     propertys: [
         'audioTracks',
         'autoplay',
@@ -79,5 +79,3 @@ type Config = {
         'webkitExitFullscreen',
     ];
 };
-
-export default Config;

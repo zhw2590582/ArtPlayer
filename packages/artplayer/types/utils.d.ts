@@ -1,4 +1,4 @@
-type Utils = {
+export type Utils = {
     userAgent: string;
     isMobile: boolean;
     isSafari: boolean;
@@ -14,7 +14,7 @@ type Utils = {
     append(target: HTMLElement, className: HTMLElement): HTMLElement;
     remove(target: HTMLElement): void;
     setStyle(element: HTMLElement, key: string, value: string): HTMLElement;
-    setStyles(element: HTMLElement, styles: CSSStyleDeclaration): HTMLElement;
+    setStyles(element: HTMLElement, styles: Partial<CSSStyleDeclaration>): HTMLElement;
     getStyle<T>(element: HTMLElement, key: string, numberType?: T): T extends true ? number : string;
     sublings(target: HTMLElement): HTMLElement[];
     inverseClass(target: HTMLElement, className: string): void;
@@ -40,5 +40,3 @@ type Utils = {
     secondToTime(second: number): string;
     escape(str: string): string;
 };
-
-export default Utils;

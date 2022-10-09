@@ -1,4 +1,4 @@
-type Icons = {
+export type Icons = {
     readonly loading: HTMLDivElement;
     readonly state: HTMLDivElement;
     readonly play: HTMLDivElement;
@@ -28,5 +28,3 @@ type Icons = {
     readonly airplay: HTMLDivElement;
     readonly [key: string]: HTMLDivElement;
 };
-
-export default Icons;
