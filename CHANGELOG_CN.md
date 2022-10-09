@@ -4,9 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [4.5.8] - 2022-10-9
 - 添加 `farsi` 语言
 - 新增 `Artplayer.DEGUG` 用于打印 `debug` 信息，默认为 `false`
 - 新增 `art.setting.update()` 用于动态更新设置面板
+- 优化 `artplayer.d.ts`
 
 ## [4.5.7] - 2022-9-28
 - 新增 `Artplayer.VOLUME_STEP` 用于控制调整 `音量` 的步长，默认为 `0.1`
