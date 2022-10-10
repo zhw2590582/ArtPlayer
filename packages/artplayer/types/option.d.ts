@@ -286,7 +286,9 @@ export type Option = {
     /**
      * Other video attribute
      */
-    moreVideoAttr?: Partial<HTMLVideoElement>;
+    moreVideoAttr?: Partial<{
+        [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends Function ? never : key]: HTMLVideoElement[key];
+    }>;
 
     /**
      * Custom default icons
