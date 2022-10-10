@@ -50,6 +50,11 @@
                 editor = monaco.editor.create($codeMirror, {
                     theme: 'vs-dark',
                     automaticLayout: true,
+                    quickSuggestions: {
+                        other: true,
+                        comments: true,
+                        strings: true,
+                    },
                     model: monaco.editor.createModel(
                         [
                             'var art = new Artplayer({',
