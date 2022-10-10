@@ -13,9 +13,17 @@ export type Utils = {
     hasClass(target: HTMLElement, className: string): boolean;
     append(target: HTMLElement, className: HTMLElement): HTMLElement;
     remove(target: HTMLElement): void;
-    setStyle(element: HTMLElement, key: string, value: string): HTMLElement;
+    setStyle<T extends keyof CSSStyleDeclaration>(
+        element: HTMLElement,
+        key: T,
+        value: CSSStyleDeclaration[T],
+    ): HTMLElement;
     setStyles(element: HTMLElement, styles: Partial<CSSStyleDeclaration>): HTMLElement;
-    getStyle<T>(element: HTMLElement, key: string, numberType?: T): T extends true ? number : string;
+    getStyle<T, K extends keyof CSSStyleDeclaration>(
+        element: HTMLElement,
+        key: K,
+        numberType?: T,
+    ): T extends true ? number : string;
     sublings(target: HTMLElement): HTMLElement[];
     inverseClass(target: HTMLElement, className: string): void;
     tooltip(target: HTMLElement, msg: string, pos?: string): void;
