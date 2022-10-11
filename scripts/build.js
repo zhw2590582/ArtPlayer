@@ -33,7 +33,7 @@ async function build(name, targetName) {
 
     const names = {
         main: name,
-        legacy: `${name}.legacy.js`,
+        legacy: `${name}.legacy`,
     };
 
     const bundler = new Parcel({
