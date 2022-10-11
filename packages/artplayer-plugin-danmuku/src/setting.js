@@ -169,7 +169,11 @@ export default function setting(art, danmuku) {
         });
 
         onResize();
-        art.on('resize', onResize);
+        art.on('resize', () => {
+            if (!art.isInput) {
+                onResize();
+            }
+        });
 
         art.on('destroy', () => {
             if (option.mount && $emitter.parentElement === option.mount) {

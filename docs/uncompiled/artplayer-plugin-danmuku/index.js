@@ -184,7 +184,7 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 artplayerPluginDanmuku.env = "development";
 artplayerPluginDanmuku.version = "4.4.10";
-artplayerPluginDanmuku.build = "1663552561234";
+artplayerPluginDanmuku.build = "2022-10-11 10:26:47";
 if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerPluginDanmuku;
 
 },{"./danmuku":"igPca","./setting":"8npWO","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"igPca":[function(require,module,exports) {
@@ -917,7 +917,9 @@ function setting(art, danmuku) {
             }
         });
         onResize();
-        art.on("resize", onResize);
+        art.on("resize", ()=>{
+            if (!art.isInput) onResize();
+        });
         art.on("destroy", ()=>{
             if (option.mount && $emitter.parentElement === option.mount) option.mount.removeChild($emitter);
         });
