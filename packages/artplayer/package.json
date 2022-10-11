@@ -3,6 +3,7 @@
     "name": "artplayer",
     "version": "4.5.8",
     "main": "dist/artplayer.js",
+    "legacy": "dist/artplayer.legacy.js",
     "types": "types/artplayer.d.ts",
     "homepage": "https://artplayer.org",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
