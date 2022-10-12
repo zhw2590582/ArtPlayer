@@ -53,13 +53,10 @@ var art = new Artplayer({
                 const hls = new Hls();
                 hls.loadSource(url);
                 hls.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
             } else {
-                const canPlay = video.canPlayType('application/vnd.apple.mpegurl');
-                if (canPlay === 'probably' || canPlay === 'maybe') {
-                    video.src = url;
-                } else {
-                    art.notice.show = '不支持播放格式：m3u8';
-                }
+                art.notice.show = '不支持播放格式：m3u8';
             }
         },
     },
