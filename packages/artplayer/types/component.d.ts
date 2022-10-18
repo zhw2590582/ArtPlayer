@@ -1,6 +1,6 @@
 import Artplayer = require('./artplayer');
 
-type Selector = {
+export type Selector = {
     /**
      * Whether the default is selected
      */

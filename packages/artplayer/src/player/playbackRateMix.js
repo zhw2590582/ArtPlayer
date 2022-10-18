@@ -21,7 +21,7 @@ export default function playbackRateMix(art) {
                 art.emit('playbackRate', rate);
             } else {
                 art.playbackRate = 1;
-                art.emit('playbackRate');
+                art.emit('playbackRate', 1);
             }
         },
     });

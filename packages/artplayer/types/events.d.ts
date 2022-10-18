@@ -1,61 +1,63 @@
-export type Events =
-    | 'video:canplay'
-    | 'video:canplaythrough'
-    | 'video:complete'
-    | 'video:durationchange'
-    | 'video:emptied'
-    | 'video:ended'
-    | 'video:loadeddata'
-    | 'video:loadeddata'
-    | 'video:loadedmetadata'
-    | 'video:pause'
-    | 'video:play'
-    | 'video:playing'
-    | 'video:progress'
-    | 'video:ratechange'
-    | 'video:seeked'
-    | 'video:seeking'
-    | 'video:stalled'
-    | 'video:suspend'
-    | 'video:timeupdate'
-    | 'video:volumechange'
-    | 'video:waiting'
-    | 'hotkey'
-    | 'destroy'
-    | 'customType'
-    | 'url'
-    | 'subtitleUpdate'
-    | 'subtitleLoad'
-    | 'subtitleSwitch'
-    | 'focus'
-    | 'blur'
-    | 'dblclick'
-    | 'click'
-    | 'setBar'
-    | 'hover'
-    | 'mousemove'
-    | 'resize'
-    | 'view'
-    | 'aspectRatio'
-    | 'autoHeight'
-    | 'autoSize'
-    | 'ready'
-    | 'error'
-    | 'flip'
-    | 'fullscreen'
-    | 'fullscreenWeb'
-    | 'loop'
-    | 'mini'
-    | 'pause'
-    | 'pip'
-    | 'playbackRate'
-    | 'play'
-    | 'screenshot'
-    | 'seek'
-    | 'subtitleOffset'
-    | 'switch'
-    | 'restart'
-    | 'volume'
-    | 'lock'
-    | 'selector'
-    | (string & Record<never, never>);
+import { AspectRatio, Flip, PlaybackRate } from './player';
+import { Selector } from './component';
+
+export type Events = {
+    'video:canplay': [event: Event];
+    'video:canplaythrough': [event: Event];
+    'video:complete': [event: Event];
+    'video:durationchange': [event: Event];
+    'video:emptied': [event: Event];
+    'video:ended': [event: Event];
+    'video:loadeddata': [event: Event];
+    'video:loadedmetadata': [event: Event];
+    'video:pause': [event: Event];
+    'video:play': [event: Event];
+    'video:playing': [event: Event];
+    'video:progress': [event: Event];
+    'video:ratechange': [event: Event];
+    'video:seeked': [event: Event];
+    'video:seeking': [event: Event];
+    'video:stalled': [event: Event];
+    'video:suspend': [event: Event];
+    'video:timeupdate': [event: Event];
+    'video:volumechange': [event: Event];
+    'video:waiting': [event: Event];
+    hotkey: [event: Event];
+    destroy: [];
+    customType: [typeName: string];
+    url: [url: string];
+    subtitleUpdate: [text: string];
+    subtitleLoad: [url: string];
+    subtitleSwitch: [url: string];
+    focus: [];
+    blur: [];
+    dblclick: [];
+    click: [];
+    setBar: [type: 'loaded' | 'played', percentage: number];
+    hover: [state: boolean];
+    mousemove: [event: Event];
+    resize: [];
+    view: [state: boolean];
+    aspectRatio: [aspectRatio: AspectRatio];
+    autoHeight: [height: number];
+    autoSize: [];
+    ready: [];
+    error: [error: Error, reconnectTime: number];
+    flip: [flip: Flip];
+    fullscreen: [state: boolean];
+    fullscreenWeb: [state: boolean];
+    loop: [interval: [start: number, end: number]];
+    mini: [state: boolean];
+    pause: [];
+    pip: [state: boolean];
+    playbackRate: [playbackRate: PlaybackRate];
+    play: [];
+    screenshot: [dataUri: string];
+    seek: [currentTime: number];
+    subtitleOffset: [offset: number];
+    switch: [url: string];
+    restart: [];
+    volume: [volume: number];
+    lock: [state: boolean];
+    selector: [selector: Selector, $item: HTMLDivElement];
+};

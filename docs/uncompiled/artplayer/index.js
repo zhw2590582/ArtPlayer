@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-10-11 10:16:49";
+        return "2022-10-18 18:05:11";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1747,7 +1747,7 @@ function playbackRateMix(art) {
                 art.emit("playbackRate", rate);
             } else {
                 art.playbackRate = 1;
-                art.emit("playbackRate");
+                art.emit("playbackRate", 1);
             }
         }
     });
@@ -2404,11 +2404,11 @@ function loopMix(art) {
                     art.emit("loop", interval);
                 } else {
                     interval = [];
-                    art.emit("loop");
+                    art.emit("loop", []);
                 }
             } else {
                 interval = [];
-                art.emit("loop");
+                art.emit("loop", []);
             }
         }
     });
@@ -2658,13 +2658,13 @@ function eventInit(art) {
             art.mask.show = true;
         }
     });
-    art.on("video:error", async ()=>{
+    art.on("video:error", async (error)=>{
         if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
             await (0, _utils.sleep)(constructor.RECONNECT_SLEEP_TIME);
             reconnectTime += 1;
             art.url = option.url;
             notice.show = `${i18n.get("Reconnect")}: ${reconnectTime}`;
-            art.emit("error", reconnectTime);
+            art.emit("error", error, reconnectTime);
         } else {
             art.mask.show = true;
             art.loading.show = false;

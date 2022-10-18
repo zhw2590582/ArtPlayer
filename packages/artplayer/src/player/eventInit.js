@@ -60,13 +60,13 @@ export default function eventInit(art) {
         }
     });
 
-    art.on('video:error', async () => {
+    art.on('video:error', async (error) => {
         if (reconnectTime < constructor.RECONNECT_TIME_MAX) {
             await sleep(constructor.RECONNECT_SLEEP_TIME);
             reconnectTime += 1;
             art.url = option.url;
             notice.show = `${i18n.get('Reconnect')}: ${reconnectTime}`;
-            art.emit('error', reconnectTime);
+            art.emit('error', error, reconnectTime);
         } else {
             art.mask.show = true;
             art.loading.show = false;

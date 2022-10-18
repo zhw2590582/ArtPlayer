@@ -1,6 +1,6 @@
-type AspectRatio = 'default' | '4:3' | '16:9' | void;
-type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | void;
-type Flip = 'normal' | 'horizontal' | 'vertical' | void;
+export type AspectRatio = 'default' | '4:3' | '16:9' | (string & Record<never, never>);
+export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>);
+export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>);
 
 export declare class Player {
     get aspectRatio(): AspectRatio;

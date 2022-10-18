@@ -13,11 +13,11 @@ export default function loopMix(art) {
                     art.emit('loop', interval);
                 } else {
                     interval = [];
-                    art.emit('loop');
+                    art.emit('loop', []);
                 }
             } else {
                 interval = [];
-                art.emit('loop');
+                art.emit('loop', []);
             }
         },
     });

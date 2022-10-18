@@ -68,10 +68,10 @@ declare class Artplayer extends Player {
     readonly isRotate: boolean;
     readonly isDestroy: boolean;
 
-    on(name: Events, fn: Function, ctx?: object): void;
-    once(name: Events, fn: Function, ctx?: object): void;
-    emit(name: Events): void;
-    off(name: Events, callback?: Function): void;
+    on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown;
+    once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown;
+    emit<T extends keyof Events>(name: T, ...args: unknown[]): unknown;
+    off<T extends keyof Events>(name: T, callback?: Function): unknown;
 
     query: Artplayer['template']['query'];
     proxy: Artplayer['events']['proxy'];
