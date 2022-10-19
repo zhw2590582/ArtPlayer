@@ -152,7 +152,7 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
+    padding: 0 10px;
     height: 100%;
     line-height: 1;
     cursor: pointer;
