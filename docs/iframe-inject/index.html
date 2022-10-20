@@ -24,6 +24,17 @@
             padding: 50px;
             box-sizing: border-box;
         }
+
+        .fullscreenWeb {
+            position: fixed;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
     </style>
 </head>
 
@@ -34,10 +45,27 @@
     <script src="./iframe.helper.js"></script>
     <script>
         (async function () {
+            const $iframe = document.getElementById('iframe');
+
             // Init iframe helper
             const helper = new IframeHelper({
-                iframe: document.getElementById('iframe'),
+                iframe: $iframe,
                 url: './inner.html',
+            });
+
+            // Listen messages from the iframe
+            helper.message(({ type, data }) => {
+                switch (type) {
+                    case 'fullscreenWeb':
+                        if (data) {
+                            $iframe.classList.add('fullscreenWeb');
+                        } else {
+                            $iframe.classList.remove('fullscreenWeb');
+                        }
+                        break;
+                    default:
+                        break;
+                }
             });
 
             // Instantiate the player and mount the instance in the window
@@ -45,6 +73,13 @@
                 window.art = new Artplayer({
                     container: '.artplayer-app',
                     url: '../assets/sample/video.mp4',
+                    fullscreen: true,
+                    fullscreenWeb: true,
+                });
+
+                // Send message to parent window
+                window.art.on('fullscreenWeb', state => {
+                    IframeHelper.postMessage({ type: 'fullscreenWeb', data: state })
                 });
             });
 
