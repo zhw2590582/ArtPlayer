@@ -27,28 +27,14 @@ export default class ArtplayerHelperIframe {
                     ArtplayerHelperIframe.postMessage({ type: 'error', data: error.message, id });
                 }
                 break;
-            case 'destroy':
-                if (!ArtplayerHelperIframe.isDestroy) {
-                    ArtplayerHelperIframe.destroy();
-                }
-                break;
             default:
                 break;
         }
     }
 
     static inject() {
-        ArtplayerHelperIframe.isInject = true;
-        ArtplayerHelperIframe.isDestroy = false;
         ArtplayerHelperIframe.postMessage({ type: 'inject' });
         window.addEventListener('message', ArtplayerHelperIframe.onMessage);
-    }
-
-    static destroy() {
-        ArtplayerHelperIframe.isInject = false;
-        ArtplayerHelperIframe.isDestroy = true;
-        ArtplayerHelperIframe.postMessage({ type: 'destroy' });
-        window.removeEventListener('message', ArtplayerHelperIframe.onMessage);
     }
 
     constructor({ iframe, url }) {
@@ -63,8 +49,8 @@ export default class ArtplayerHelperIframe {
         this.url = url;
         this.$iframe = iframe;
         this.promises = {};
-        this.isInject = false;
-        this.isDestroy = false;
+        this.injected = false;
+        this.destroyed = false;
         this.messageCallback = () => null;
         this.onMessage = this.onMessage.bind(this);
         window.addEventListener('message', this.onMessage);
@@ -76,13 +62,7 @@ export default class ArtplayerHelperIframe {
 
         switch (type) {
             case 'inject':
-                this.isInject = true;
-                break;
-            case 'destroy':
-                this.isInject = false;
-                if (!this.isDestroy) {
-                    this.destroy();
-                }
+                this.injected = true;
                 break;
             default:
                 break;
@@ -105,19 +85,21 @@ export default class ArtplayerHelperIframe {
     postMessage({ type, data }) {
         return new Promise((resove, reject) => {
             (function loop() {
-                if (this.isInject) {
-                    const id = Date.now();
-                    this.promises[id] = { resove, reject };
-                    this.$iframe.contentWindow.postMessage(
-                        {
-                            type: type,
-                            data: data,
-                            id: id,
-                        },
-                        '*',
-                    );
+                if (this.destroyed) {
+                    reject(new Error('the instance has been destroyed'));
                 } else {
-                    if (!this.isDestroy) {
+                    if (this.injected) {
+                        const id = Date.now();
+                        this.promises[id] = { resove, reject };
+                        this.$iframe.contentWindow.postMessage(
+                            {
+                                type: type,
+                                data: data,
+                                id: id,
+                            },
+                            '*',
+                        );
+                    } else {
                         setTimeout(loop.bind(this), 200);
                     }
                 }
@@ -142,7 +124,7 @@ export default class ArtplayerHelperIframe {
     }
 
     destroy() {
-        this.isDestroy = true;
+        this.destroyed = true;
         window.removeEventListener('message', this.onMessage);
     }
 }

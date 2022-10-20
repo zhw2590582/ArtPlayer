@@ -13,13 +13,10 @@ class ArtplayerHelperIframe {
     static postMessage(message: Message): void;
     static onMessage(event: MessageEvent & { data: Message }): void;
     static inject(): void;
-    static destroy(): void;
-    static isInject: boolean;
-    static isDestroy: boolean;
 
     readonly promises: Record<number, { resove: Function; reject: Function }>;
-    readonly isInject: boolean;
-    readonly isDestroy: boolean;
+    readonly injected: boolean;
+    readonly destroyed: boolean;
     readonly $iframe: HTMLIFrameElement;
     readonly url: string;
     readonly messageCallback: Function;
