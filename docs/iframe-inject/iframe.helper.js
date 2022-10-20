@@ -20,7 +20,8 @@ class IframeHelper {
                         const result = await new Function(string)();
                         IframeHelper.postMessage({ type: 'response', data: result, id });
                     } else {
-                        IframeHelper.postMessage({ type: 'response', data: new Function(data)(), id });
+                        const result = new Function(data)();
+                        IframeHelper.postMessage({ type: 'response', data: result, id });
                     }
                 } catch (error) {
                     IframeHelper.postMessage({ type: 'error', data: error.message, id });
