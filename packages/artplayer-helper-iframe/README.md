@@ -1,14 +1,12 @@
-# artplayer-iframe
+# artplayer-helper-iframe
 
 Iframe helper for ArtPlayer
 
 ## Demo
 
-[https://artplayer.org](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads)
+[https://artplayer.org/iframe-inject/](https://artplayer.org/iframe-inject/)
 
 ## Usage
-
-[https://artplayer.org/document/en/Plugins/ads](https://artplayer.org/document/en/Plugins/ads)
 
 ## License
 
