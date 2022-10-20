@@ -15,7 +15,7 @@ class IframeHelper {
         switch (type) {
             case 'commit':
                 try {
-                    if (data.match(/resolve\((.*?)\)/)) {
+                    if (data.match(/\bresolve\((.*?)\)/)) {
                         const string = `return new Promise(function(resolve){\n${data}\n})`;
                         const result = await new Function(string)();
                         IframeHelper.postMessage({ type: 'response', data: result, id });
