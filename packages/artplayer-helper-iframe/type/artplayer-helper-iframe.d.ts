@@ -7,7 +7,7 @@ type Message = {
     id?: number;
 };
 
-class ArtplayerHelperIframe {
+declare class ArtplayerHelperIframe {
     constructor(option: { iframe: string; url: string });
 
     static postMessage(message: Message): void;
