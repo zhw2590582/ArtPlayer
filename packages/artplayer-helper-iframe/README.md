@@ -4,7 +4,7 @@ Iframe helper for ArtPlayer
 
 ## Demo
 
-[https://artplayer.org/iframe-inject/](https://artplayer.org/iframe-inject/)
+[https://artplayer.org/iframe/](https://artplayer.org/iframe/)
 
 ## Usage
 
