@@ -19,11 +19,11 @@ declare class ArtplayerHelperIframe {
     readonly destroyed: boolean;
     readonly $iframe: HTMLIFrameElement;
     readonly url: string;
-    readonly messageCallback: Function;
+    readonly messageCallback: (...args: any[]) => any;
 
     onMessage(event: MessageEvent & { data: Message }): void;
     postMessage(message: Message): Promise<any>;
-    commit(callback: Function): Promise<any>;
-    message(callback: Function): void;
+    commit<T extends (...args: any[]) => any>(callback: T): Promise<ReturnType<T>>;
+    message(callback: (...args: any[]) => any): void;
     destroy(): void;
 }
