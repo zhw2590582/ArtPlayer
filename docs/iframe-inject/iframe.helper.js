@@ -1,23 +1,29 @@
 class IframeHelper {
-    static postMessage(id, type, data) {
+    static postMessage(type, data, id = 0) {
         window.parent.postMessage(
             {
-                id: id,
                 type: type,
                 data: data,
+                id: id,
             },
             '*',
         );
     }
 
-    static onMessage(event) {
-        const { id, type, data } = event.data;
+    static async onMessage(event) {
+        const { type, data, id } = event.data;
         switch (type) {
             case 'commit':
                 try {
-                    IframeHelper.postMessage(id, 'response', new Function(data)());
+                    if (data.match(/resolve\((.*?)\)/)) {
+                        const string = `return new Promise(function(resolve){\n${data}\n})`;
+                        const result = await new Function(string)();
+                        IframeHelper.postMessage('response', result, id);
+                    } else {
+                        IframeHelper.postMessage('response', new Function(data)(), id);
+                    }
                 } catch (error) {
-                    IframeHelper.postMessage(id, 'error', error.message);
+                    IframeHelper.postMessage('error', error.message, id);
                 }
                 break;
             default:
@@ -26,7 +32,7 @@ class IframeHelper {
     }
 
     static inject() {
-        IframeHelper.postMessage(0, 'inject');
+        IframeHelper.postMessage('inject');
         window.addEventListener('message', IframeHelper.onMessage);
     }
 
@@ -37,6 +43,7 @@ class IframeHelper {
     constructor({ iframe, url }) {
         this.promises = {};
         this.isInject = false;
+        this.isDestroy = false;
         this.$iframe = iframe;
         this.onMessage = this.onMessage.bind(this);
         window.addEventListener('message', this.onMessage);
@@ -44,7 +51,7 @@ class IframeHelper {
     }
 
     onMessage(event) {
-        const { id, type, data } = event.data;
+        const { type, data, id } = event.data;
 
         switch (type) {
             case 'inject':
@@ -59,7 +66,7 @@ class IframeHelper {
 
         if (this.promises[id]) {
             if (type === 'error') {
-                this.promises[id].reject(data);
+                this.promises[id].reject(new Error(data));
             } else {
                 this.promises[id].resove(data);
             }
@@ -76,14 +83,16 @@ class IframeHelper {
                     this.promises[id] = { resove, reject };
                     this.$iframe.contentWindow.postMessage(
                         {
-                            id: id,
                             type: type,
                             data: data,
+                            id: id,
                         },
                         '*',
                     );
                 } else {
-                    setTimeout(loop.bind(this), 200);
+                    if (!this.isDestroy) {
+                        setTimeout(loop.bind(this), 200);
+                    }
                 }
             }.call(this));
         });
@@ -98,6 +107,7 @@ class IframeHelper {
     }
 
     destroy() {
+        this.isDestroy = true;
         window.removeEventListener('message', this.onMessage);
     }
 }

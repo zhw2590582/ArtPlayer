@@ -29,17 +29,18 @@
 
 <body>
     <div class="container">
-        <iframe id="iframe" frameborder="0" width="100%" height="100%" allowfullscreen="true">
-        </iframe>
+        <iframe id="iframe" frameborder="0" width="100%" height="100%" allowfullscreen="true"></iframe>
     </div>
     <script src="./iframe.helper.js"></script>
     <script>
         (async function () {
+            // Init iframe helper
             const helper = new IframeHelper({
                 iframe: document.getElementById('iframe'),
                 url: './inner.html',
             });
 
+            // Instantiate the player and mount the instance in the window
             await helper.commit(() => {
                 window.art = new Artplayer({
                     container: '.artplayer-app',
@@ -47,17 +48,22 @@
                 });
             });
 
-            await helper.commit(() => {
+            // The value of the player can be returned through the resolve method
+            const currentTime = await helper.commit((resolve) => {
                 window.art.on('ready', () => {
                     window.art.seek = 5;
+                    resolve(window.art.currentTime);
                 });
             });
 
-            const id = await helper.commit(() => {
-                return window.art.id;
+            console.log(currentTime);
+
+            // The value of the player can be returned through the return
+            const currentTime2 = await helper.commit(() => {
+                return window.art.currentTime;
             });
 
-            console.log(id);
+            console.log(currentTime2);
         })();
 
     </script>
