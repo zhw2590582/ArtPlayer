@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artplayer Iframe Fullscreen Web</title>
+    <title>Artplayer Iframe Inject</title>
     <style>
         html,
         body {
@@ -40,26 +40,22 @@
 
 <body>
     <div class="container">
-        <iframe id="iframe" src="./inner.html" frameborder="0" width="100%" height="100%"
-            allowfullscreen="true"></iframe>
+        <iframe id="iframe" frameborder="0" width="100%" height="100%" allowfullscreen="true"></iframe>
     </div>
+    <script src="../uncompiled/artplayer-helper-iframe/index.js"></script>
     <script>
         const $iframe = document.getElementById('iframe');
 
-        window.addEventListener('message', event => {
-            const { type, data } = event.data;
+        const helper = new ArtplayerHelperIframe({
+            iframe: $iframe,
+            url: './inner.html',
+        });
+
+        helper.message(({ type, data }) => {
             switch (type) {
                 case 'fullscreenWeb':
                     if (data) {
                         $iframe.classList.add('fullscreenWeb');
-                        const { clientWidth, clientHeight } = document.documentElement;
-                        $iframe.contentWindow.postMessage({
-                            type: 'autoOrientation',
-                            data: {
-                                clientWidth,
-                                clientHeight
-                            },
-                        }, '*');
                     } else {
                         $iframe.classList.remove('fullscreenWeb');
                     }
@@ -67,6 +63,22 @@
                 default:
                     break;
             }
+        });
+
+        helper.commit(() => {
+            window.art = new Artplayer({
+                container: '.artplayer-app',
+                url: '../assets/sample/video.mp4',
+                fullscreen: true,
+                fullscreenWeb: true,
+            });
+
+            window.art.on('fullscreenWeb', state => {
+                ArtplayerHelperIframe.postMessage({
+                    type: 'fullscreenWeb',
+                    data: state
+                });
+            });
         });
     </script>
 </body>
