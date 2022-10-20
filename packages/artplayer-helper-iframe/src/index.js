@@ -52,6 +52,14 @@ export default class ArtplayerHelperIframe {
     }
 
     constructor({ iframe, url }) {
+        if (iframe instanceof HTMLIFrameElement === false) {
+            throw new Error('option.iframe needs to be a HTMLIFrameElement');
+        }
+
+        if (typeof url !== 'string') {
+            throw new Error('option.url needs to be a string');
+        }
+
         this.url = url;
         this.$iframe = iframe;
         this.promises = {};
@@ -118,12 +126,18 @@ export default class ArtplayerHelperIframe {
     }
 
     commit(callback) {
+        if (typeof callback !== 'function') {
+            throw new Error('commit.callback needs to be a function');
+        }
         const callbackString = callback.toString();
         const bodyString = callbackString.substring(callbackString.indexOf('{') + 1, callbackString.lastIndexOf('}'));
         return this.postMessage({ type: 'commit', data: bodyString });
     }
 
     message(callback) {
+        if (typeof callback !== 'function') {
+            throw new Error('message.callback needs to be a function');
+        }
         this.messageCallback = callback;
     }
 
