@@ -52,14 +52,15 @@ export default class ArtplayerHelperIframe {
     }
 
     constructor({ iframe, url }) {
+        this.url = url;
+        this.$iframe = iframe;
         this.promises = {};
         this.isInject = false;
         this.isDestroy = false;
-        this.$iframe = iframe;
-        this.messageCallback = null;
+        this.messageCallback = () => null;
         this.onMessage = this.onMessage.bind(this);
         window.addEventListener('message', this.onMessage);
-        this.$iframe.src = url;
+        this.$iframe.src = this.url;
     }
 
     onMessage(event) {
