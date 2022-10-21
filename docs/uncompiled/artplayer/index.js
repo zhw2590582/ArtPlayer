@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-10-20 12:17:12";
+        return "2022-10-21 11:25:22";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1442,6 +1442,8 @@ var _themeMix = require("./themeMix");
 var _themeMixDefault = parcelHelpers.interopDefault(_themeMix);
 var _titleMix = require("./titleMix");
 var _titleMixDefault = parcelHelpers.interopDefault(_titleMix);
+var _typeMix = require("./typeMix");
+var _typeMixDefault = parcelHelpers.interopDefault(_typeMix);
 var _normalSizeMix = require("./normalSizeMix");
 var _normalSizeMixDefault = parcelHelpers.interopDefault(_normalSizeMix);
 var _subtitleOffsetMix = require("./subtitleOffsetMix");
@@ -1482,6 +1484,7 @@ class Player {
         (0, _autoHeightMixDefault.default)(art);
         (0, _themeMixDefault.default)(art);
         (0, _titleMixDefault.default)(art);
+        (0, _typeMixDefault.default)(art);
         (0, _normalSizeMixDefault.default)(art);
         (0, _subtitleOffsetMixDefault.default)(art);
         (0, _airplayMixDefault.default)(art);
@@ -1491,7 +1494,7 @@ class Player {
 }
 exports.default = Player;
 
-},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./loopMix":"dvgcH","./posterMix":"lglHp","./autoHeightMix":"58Y02","./themeMix":"lga3g","./titleMix":"i382h","./normalSizeMix":"jW7b0","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"haOhz":[function(require,module,exports) {
+},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./loopMix":"dvgcH","./posterMix":"lglHp","./autoHeightMix":"58Y02","./themeMix":"lga3g","./titleMix":"i382h","./typeMix":"dnAFx","./normalSizeMix":"jW7b0","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"haOhz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2500,6 +2503,22 @@ function titleMix(art) {
     });
 }
 exports.default = titleMix;
+
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"dnAFx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function typeMix(art) {
+    (0, _utils.def)(art, "type", {
+        get () {
+            return art.option.type;
+        },
+        set (type) {
+            art.option.type = type;
+        }
+    });
+}
+exports.default = typeMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"jW7b0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

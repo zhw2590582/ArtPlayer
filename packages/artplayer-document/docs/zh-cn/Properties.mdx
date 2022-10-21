@@ -721,6 +721,28 @@ art.on('ready', () => {
 });
 ```
 
+## type
+
+-   类型: `Setter/Getter`
+-   参数: `String`
+
+动态获取和设置视频类型
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.info(art.type);
+    art.type = 'm3u8';
+    console.info(art.type);
+});
+```
+
 ## theme
 
 -   类型: `Setter/Getter`

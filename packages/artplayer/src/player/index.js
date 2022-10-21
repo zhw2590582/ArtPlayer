@@ -26,6 +26,7 @@ import posterMix from './posterMix';
 import autoHeightMix from './autoHeightMix';
 import themeMix from './themeMix';
 import titleMix from './titleMix';
+import typeMix from './typeMix';
 import normalSizeMix from './normalSizeMix';
 import subtitleOffsetMix from './subtitleOffsetMix';
 import airplayMix from './airplayMix';
@@ -62,6 +63,7 @@ export default class Player {
         autoHeightMix(art);
         themeMix(art);
         titleMix(art);
+        typeMix(art);
         normalSizeMix(art);
         subtitleOffsetMix(art);
         airplayMix(art);
