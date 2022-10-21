@@ -1,5 +1,5 @@
-export = ArtplayerHelperIframe;
-export as namespace ArtplayerHelperIframe;
+export = ArtplayerPluginIframe;
+export as namespace ArtplayerPluginIframe;
 
 type Message = {
     type: string;
@@ -7,8 +7,8 @@ type Message = {
     id?: number;
 };
 
-declare class ArtplayerHelperIframe {
-    constructor(option: { iframe: string; url: string });
+declare class ArtplayerPluginIframe {
+    constructor(option: { iframe: HTMLIFrameElement; url: string });
 
     static postMessage(message: Message): void;
     static onMessage(event: MessageEvent & { data: Message }): void;

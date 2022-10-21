@@ -1,4 +1,4 @@
-export default class ArtplayerHelperIframe {
+export default class ArtplayerPluginIframe {
     static postMessage({ type, data, id = 0 }) {
         window.parent.postMessage(
             {
@@ -18,13 +18,13 @@ export default class ArtplayerHelperIframe {
                     if (data.match(/\bresolve\((.*?)\)/)) {
                         const string = `return new Promise(function(resolve){\n${data}\n})`;
                         const result = await new Function(string)();
-                        ArtplayerHelperIframe.postMessage({ type: 'response', data: result, id });
+                        ArtplayerPluginIframe.postMessage({ type: 'response', data: result, id });
                     } else {
                         const result = new Function(data)();
-                        ArtplayerHelperIframe.postMessage({ type: 'response', data: result, id });
+                        ArtplayerPluginIframe.postMessage({ type: 'response', data: result, id });
                     }
                 } catch (error) {
-                    ArtplayerHelperIframe.postMessage({ type: 'error', data: error.message, id });
+                    ArtplayerPluginIframe.postMessage({ type: 'error', data: error.message, id });
                 }
                 break;
             default:
@@ -33,8 +33,8 @@ export default class ArtplayerHelperIframe {
     }
 
     static inject() {
-        ArtplayerHelperIframe.postMessage({ type: 'inject' });
-        window.addEventListener('message', ArtplayerHelperIframe.onMessage);
+        ArtplayerPluginIframe.postMessage({ type: 'inject' });
+        window.addEventListener('message', ArtplayerPluginIframe.onMessage);
     }
 
     constructor({ iframe, url }) {
@@ -130,5 +130,5 @@ export default class ArtplayerHelperIframe {
 }
 
 if (typeof window !== 'undefined') {
-    window['ArtplayerHelperIframe'] = ArtplayerHelperIframe;
+    window['ArtplayerPluginIframe'] = ArtplayerPluginIframe;
 }

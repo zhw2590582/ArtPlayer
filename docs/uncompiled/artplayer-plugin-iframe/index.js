@@ -142,10 +142,10 @@
       this[globalName] = mainExports;
     }
   }
-})({"au9zQ":[function(require,module,exports) {
+})({"2DXkq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-class ArtplayerHelperIframe {
+class ArtplayerPluginIframe {
     static postMessage({ type , data , id =0  }) {
         window.parent.postMessage({
             type: type,
@@ -161,21 +161,21 @@ class ArtplayerHelperIframe {
                     if (data.match(/\bresolve\((.*?)\)/)) {
                         const string = `return new Promise(function(resolve){\n${data}\n})`;
                         const result = await new Function(string)();
-                        ArtplayerHelperIframe.postMessage({
+                        ArtplayerPluginIframe.postMessage({
                             type: "response",
                             data: result,
                             id
                         });
                     } else {
                         const result1 = new Function(data)();
-                        ArtplayerHelperIframe.postMessage({
+                        ArtplayerPluginIframe.postMessage({
                             type: "response",
                             data: result1,
                             id
                         });
                     }
                 } catch (error) {
-                    ArtplayerHelperIframe.postMessage({
+                    ArtplayerPluginIframe.postMessage({
                         type: "error",
                         data: error.message,
                         id
@@ -187,10 +187,10 @@ class ArtplayerHelperIframe {
         }
     }
     static inject() {
-        ArtplayerHelperIframe.postMessage({
+        ArtplayerPluginIframe.postMessage({
             type: "inject"
         });
-        window.addEventListener("message", ArtplayerHelperIframe.onMessage);
+        window.addEventListener("message", ArtplayerPluginIframe.onMessage);
     }
     constructor({ iframe , url  }){
         if (iframe instanceof HTMLIFrameElement === false) throw new Error("option.iframe needs to be a HTMLIFrameElement");
@@ -261,8 +261,8 @@ class ArtplayerHelperIframe {
         window.removeEventListener("message", this.onMessage);
     }
 }
-exports.default = ArtplayerHelperIframe;
-if (typeof window !== "undefined") window["ArtplayerHelperIframe"] = ArtplayerHelperIframe;
+exports.default = ArtplayerPluginIframe;
+if (typeof window !== "undefined") window["ArtplayerPluginIframe"] = ArtplayerPluginIframe;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -294,6 +294,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["au9zQ"], "au9zQ", "parcelRequire4dc0")
+},{}]},["2DXkq"], "2DXkq", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map
