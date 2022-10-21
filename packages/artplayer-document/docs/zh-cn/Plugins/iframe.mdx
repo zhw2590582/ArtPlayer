@@ -1,0 +1,196 @@
+---
+title: Iframe 插件
+sidebar_position: 3
+---
+
+## 演示
+
+👉 [View Demo](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe)
+
+## 安装
+
+### 通过 `npm` 安装：
+
+```bash
+$ npm install artplayer-plugin-iframe
+```
+
+### 通过 `yarn` 安装：
+
+```bash
+$ yarn add artplayer-plugin-iframe
+```
+
+### 通过 `script` 安装：
+
+```html
+<!-- 本地 -->
+<script src="path/to/artplayer-plugin-iframe.js"></script>
+
+<!-- jsdelivr -->
+<script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js"></script>
+
+<!-- unpkg -->
+<script src="https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js"></script>
+```
+
+然后你可以通过 `window.artplayerPluginIframe` 访问到插件函数
+
+## 使用
+
+### index.html
+
+```html showLineNumbers title="index.html"
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ArtPlayer</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <iframe id="iframe"></iframe>
+        <script src="path/to/artplayer-plugin-iframe.js"></script>
+        <script>
+            const iframe = new ArtplayerPluginIframe({
+                // iframe 元素
+                iframe: document.querySelector('#iframe'),
+                // iframe 地址
+                url: 'path/to/iframe.html',
+            });
+
+            // 向 iframe 发送消息
+            iframe.commit(() => {
+                var art = new Artplayer({
+                    container: '.artplayer-app',
+                    url: 'path/to/video.mp4',
+                });
+            });
+        </script>
+    </body>
+</html>
+```
+
+### iframe.html
+
+```html showLineNumbers title="iframe.html"
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ArtPlayer</title>
+        <meta charset="UTF-8" />
+        <style>
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="artplayer-app" style="width: 100%; height: 100%;"></div>
+        <script src="path/to/artplayer.js"></script>
+        <script src="path/to/artplayer-plugin-iframe.js"></script>
+        <script>
+            // 注入脚本，接收来自实例的消息
+            ArtplayerPluginIframe.inject();
+        </script>
+    </body>
+</html>
+```
+
+## 实例接口
+
+### commit
+
+-   类型: `Function`
+
+将消息推送到 iframe，该函数将在 iframe 内部运行
+
+```js
+iframe.commit(() => {
+    var art = new Artplayer({
+        container: '.artplayer-app',
+        url: 'path/to/video.mp4',
+    });
+});
+
+iframe.commit(() => {
+    art.seek = 5;
+});
+
+// 获取来自 iframe 的值
+(async function () {
+    // 使用 return 关键词
+    var currentTime = await iframe.commit(() => {
+        return art.currentTime;
+    });
+
+    // 或者使用 resolve 方法
+    var currentTime2 = await iframe.commit((resolve) => {
+        setTimeout(() => {
+            resolve(art.currentTime);
+        }, 1000);
+    });
+})();
+```
+
+### message
+
+-   类型: `Function`
+
+接收来自 iframe 的消息
+
+```js
+iframe.message((event) => {
+    console.log(event);
+});
+```
+
+### destroy
+
+-   类型: `Function`
+
+销毁实例，销毁后无法与 iframe 通信
+
+```js
+iframe.destroy();
+```
+
+## Iframe 接口
+
+:::danger Tip
+
+`Iframe 接口` 只能运行在 `iframe` 里
+
+:::
+
+### inject
+
+-   类型: `Function`
+
+注入脚本，接收来自实例的消息
+
+```js
+ArtplayerPluginIframe.inject();
+```
+
+### postMessage
+
+-   类型: `Function`
+
+将消息推送到实例
+
+```js
+iframe.message((event) => {
+    console.log(event);
+});
+
+iframe.commit(() => {
+    ArtplayerPluginIframe.postMessage({
+        type: 'currentTime',
+        data: art.currentTime,
+    });
+});
+```

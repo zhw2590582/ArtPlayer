@@ -10,6 +10,7 @@ type Message = {
 declare class ArtplayerPluginIframe {
     constructor(option: { iframe: HTMLIFrameElement; url: string });
 
+    static iframe: boolean;
     static postMessage(message: Message): void;
     static onMessage(event: MessageEvent & { data: Message }): void;
     static inject(): void;

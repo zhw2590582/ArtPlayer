@@ -7,12 +7,12 @@ const $container = document.querySelector('.artplayer-app');
 $container.innerHTML = '';
 $container.appendChild($iframe);
 
-const helper = new ArtplayerPluginIframe({
+const iframe = new ArtplayerPluginIframe({
     iframe: $iframe,
     url: '/iframe.html',
 });
 
-helper.message(({ type, data }) => {
+iframe.message(({ type, data }) => {
     switch (type) {
         case 'fullscreenWeb':
             if (data) {
@@ -26,7 +26,7 @@ helper.message(({ type, data }) => {
     }
 });
 
-helper.commit(() => {
+iframe.commit(() => {
     var art = new Artplayer({
         container: '.artplayer-app',
         url: '/assets/sample/video.mp4',

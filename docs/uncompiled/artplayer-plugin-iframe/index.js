@@ -146,7 +146,11 @@
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class ArtplayerPluginIframe {
+    static get iframe() {
+        return window.top !== window;
+    }
     static postMessage({ type , data , id =0  }) {
+        if (!ArtplayerPluginIframe.iframe) throw new Error("The postMessage method can only be used in iframe");
         window.parent.postMessage({
             type: type,
             data: data,
@@ -154,6 +158,7 @@ class ArtplayerPluginIframe {
         }, "*");
     }
     static async onMessage(event) {
+        if (!ArtplayerPluginIframe.iframe) throw new Error("The onMessage method can only be used in iframe");
         const { type , data , id  } = event.data;
         switch(type){
             case "commit":
@@ -187,6 +192,7 @@ class ArtplayerPluginIframe {
         }
     }
     static inject() {
+        if (!ArtplayerPluginIframe.iframe) throw new Error("The inject method can only be used in iframe");
         ArtplayerPluginIframe.postMessage({
             type: "inject"
         });

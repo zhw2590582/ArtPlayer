@@ -1,0 +1,196 @@
+---
+title: Iframe Plugin
+sidebar_position: 3
+---
+
+## Demo
+
+👉 [View Demo](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe)
+
+## Install
+
+### Install from `npm`:
+
+```bash
+$ npm install artplayer-plugin-iframe
+```
+
+### Install from `yarn`:
+
+```bash
+$ yarn add artplayer-plugin-iframe
+```
+
+### Install from `script`:
+
+```html
+<!-- local -->
+<script src="path/to/artplayer-plugin-iframe.js"></script>
+
+<!-- jsdelivr -->
+<script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js"></script>
+
+<!-- unpkg -->
+<script src="https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js"></script>
+```
+
+Then you can access the plugin function through `window.artplayerPluginIframe`
+
+## Use
+
+### index.html
+
+```html showLineNumbers title="index.html"
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ArtPlayer</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <iframe id="iframe"></iframe>
+        <script src="path/to/artplayer-plugin-iframe.js"></script>
+        <script>
+            const iframe = new ArtplayerPluginIframe({
+                // iframe element
+                iframe: document.querySelector('#iframe'),
+                // iframe url
+                url: 'path/to/iframe.html',
+            });
+
+            // Push message to iframe
+            iframe.commit(() => {
+                var art = new Artplayer({
+                    container: '.artplayer-app',
+                    url: 'path/to/video.mp4',
+                });
+            });
+        </script>
+    </body>
+</html>
+```
+
+### iframe.html
+
+```html showLineNumbers title="iframe.html"
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ArtPlayer</title>
+        <meta charset="UTF-8" />
+        <style>
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="artplayer-app" style="width: 100%; height: 100%;"></div>
+        <script src="path/to/artplayer.js"></script>
+        <script src="path/to/artplayer-plugin-iframe.js"></script>
+        <script>
+            // Inject the script, receive messages from the instance
+            ArtplayerPluginIframe.inject();
+        </script>
+    </body>
+</html>
+```
+
+## Instance Api
+
+### commit
+
+-   Type: `Function`
+
+Push message to iframe, the function will run inside the iframe
+
+```js
+iframe.commit(() => {
+    var art = new Artplayer({
+        container: '.artplayer-app',
+        url: 'path/to/video.mp4',
+    });
+});
+
+iframe.commit(() => {
+    art.seek = 5;
+});
+
+// Get the value from the iframe
+(async function () {
+    // Use return keyword
+    var currentTime = await iframe.commit(() => {
+        return art.currentTime;
+    });
+
+    // Or use resolve method
+    var currentTime2 = await iframe.commit((resolve) => {
+        setTimeout(() => {
+            resolve(art.currentTime);
+        }, 1000);
+    });
+})();
+```
+
+### message
+
+-   Type: `Function`
+
+Receive message from the iframe
+
+```js
+iframe.message((event) => {
+    console.log(event);
+});
+```
+
+### destroy
+
+-   Type: `Function`
+
+Destroy the instance, cannot communicate with the iframe after destroy
+
+```js
+iframe.destroy();
+```
+
+## Iframe Api
+
+:::danger Tip
+
+The `Iframe Api` can only be used in `iframe`.
+
+:::
+
+### inject
+
+-   Type: `Function`
+
+Inject the script, then can receive messages from the instance
+
+```js
+ArtplayerPluginIframe.inject();
+```
+
+### postMessage
+
+-   Type: `Function`
+
+Push message to instance
+
+```js
+iframe.message((event) => {
+    console.log(event);
+});
+
+iframe.commit(() => {
+    ArtplayerPluginIframe.postMessage({
+        type: 'currentTime',
+        data: art.currentTime,
+    });
+});
+```

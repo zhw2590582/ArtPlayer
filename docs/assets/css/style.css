@@ -75,6 +75,7 @@ img {
     display: flex;
     justify-content: space-between;
     height: 100%;
+    line-height: 1;
 }
 
 .header .qq {
