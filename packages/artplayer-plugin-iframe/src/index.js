@@ -5,7 +5,7 @@ export default class ArtplayerPluginIframe {
 
     static postMessage({ type, data, id = 0 }) {
         if (!ArtplayerPluginIframe.iframe) {
-            throw new Error('The "postMessage" method can only be used in iframe');
+            throw new Error('The "ArtplayerPluginIframe.postMessage" method can only be used in iframe');
         }
 
         window.parent.postMessage(
@@ -20,7 +20,7 @@ export default class ArtplayerPluginIframe {
 
     static async onMessage(event) {
         if (!ArtplayerPluginIframe.iframe) {
-            throw new Error('The "onMessage" method can only be used in iframe');
+            throw new Error('The "ArtplayerPluginIframe.onMessage" method can only be used in iframe');
         }
 
         const { type, data, id } = event.data;
@@ -37,6 +37,7 @@ export default class ArtplayerPluginIframe {
                     }
                 } catch (error) {
                     ArtplayerPluginIframe.postMessage({ type: 'error', data: error.message, id });
+                    throw error;
                 }
                 break;
             default:
@@ -46,7 +47,7 @@ export default class ArtplayerPluginIframe {
 
     static inject() {
         if (!ArtplayerPluginIframe.iframe) {
-            throw new Error('The "inject" method can only be used in iframe');
+            throw new Error('The "ArtplayerPluginIframe.inject" method can only be used in iframe');
         }
 
         ArtplayerPluginIframe.postMessage({ type: 'inject' });
