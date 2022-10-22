@@ -5,7 +5,7 @@ export default class ArtplayerPluginIframe {
 
     static postMessage({ type, data, id = 0 }) {
         if (!ArtplayerPluginIframe.iframe) {
-            throw new Error('The postMessage method can only be used in iframe');
+            throw new Error('The "postMessage" method can only be used in iframe');
         }
 
         window.parent.postMessage(
@@ -20,7 +20,7 @@ export default class ArtplayerPluginIframe {
 
     static async onMessage(event) {
         if (!ArtplayerPluginIframe.iframe) {
-            throw new Error('The onMessage method can only be used in iframe');
+            throw new Error('The "onMessage" method can only be used in iframe');
         }
 
         const { type, data, id } = event.data;
@@ -46,7 +46,7 @@ export default class ArtplayerPluginIframe {
 
     static inject() {
         if (!ArtplayerPluginIframe.iframe) {
-            throw new Error('The inject method can only be used in iframe');
+            throw new Error('The "inject" method can only be used in iframe');
         }
 
         ArtplayerPluginIframe.postMessage({ type: 'inject' });
@@ -55,11 +55,11 @@ export default class ArtplayerPluginIframe {
 
     constructor({ iframe, url }) {
         if (iframe instanceof HTMLIFrameElement === false) {
-            throw new Error('option.iframe needs to be a HTMLIFrameElement');
+            throw new Error('"option.iframe" needs to be a HTMLIFrameElement');
         }
 
         if (typeof url !== 'string') {
-            throw new Error('option.url needs to be a string');
+            throw new Error('"option.url" needs to be a string');
         }
 
         this.url = url;
@@ -102,7 +102,7 @@ export default class ArtplayerPluginIframe {
         return new Promise((resove, reject) => {
             (function loop() {
                 if (this.destroyed) {
-                    reject(new Error('the instance has been destroyed'));
+                    reject(new Error('The instance has been destroyed'));
                 } else {
                     if (this.injected) {
                         const id = Date.now();
@@ -125,7 +125,7 @@ export default class ArtplayerPluginIframe {
 
     commit(callback) {
         if (typeof callback !== 'function') {
-            throw new Error('commit.callback needs to be a function');
+            throw new Error('"commit.callback" needs to be a function');
         }
         const callbackString = callback.toString();
         const bodyString = callbackString.substring(callbackString.indexOf('{') + 1, callbackString.lastIndexOf('}'));
@@ -134,7 +134,7 @@ export default class ArtplayerPluginIframe {
 
     message(callback) {
         if (typeof callback !== 'function') {
-            throw new Error('message.callback needs to be a function');
+            throw new Error('"message.callback" needs to be a function');
         }
         this.messageCallback = callback;
     }
