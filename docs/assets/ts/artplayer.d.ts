@@ -10,7 +10,7 @@ declare class Artplayer extends Player {
     static readonly build: string;
     static readonly config: Config;
     static readonly utils: Utils;
-    static readonly scheme: object;
+    static readonly scheme: Record<keyof Option, any>;
     static readonly Emitter: Function;
     static readonly validator: <T extends object>(option: T, scheme: object) => T;
     static readonly kindOf: (item: any) => string;
