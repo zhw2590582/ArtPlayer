@@ -1,4 +1,4 @@
-import Emitter from 'tiny-emitter';
+import Emitter from './emitter';
 import { runPromisesInSeries, sleep, getFileName, clamp } from './utils';
 
 export default class ArtplayerToolThumbnail extends Emitter {
