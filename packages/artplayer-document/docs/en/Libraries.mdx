@@ -4,6 +4,76 @@ sidebar_position: 7
 slug: /libraries
 ---
 
+## Overview
+
+-   With the option `customType`, it is easy to integrate third-party video decoding libraries.
+    When there are multiple decoders, you can add them to `customType`. When the decoding library is too large, you can also use `js` to dynamically import
+
+-   By default, the player will parse the video type of the `url` option (such as `m3u8`, `flv`, `mpd`).
+    If the correct video type cannot be parsed, you can add the `type` option to indicate the video type
+
+```js
+// Now this player can play: m3u8, flv, mpd
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.m3u8',
+    type: 'm3u8', // Optional, but it is better to fill in
+    customType: {
+        m3u8: async function (video, url) {
+            const { default: Hls } = await import('hls.js');
+        },
+        flv: async function (video, url) {
+            const { default: flvjs } = await import('flv.js').default;
+        },
+        mpd: async function (video, url) {
+            const { default: dashjs } = await import('dash.js').default;
+        },
+    },
+});
+
+// You can switch to a new video address
+art.url = '/assets/sample/video-new.m3u8';
+
+// You can also switch new video type
+art.type = 'flv';
+art.url = '/assets/sample/video.flv';
+
+art.type = 'mpd';
+art.url = '/assets/sample/video.mpd';
+```
+
+:::tip Tip
+
+If `customType` is used, the previous decoder instance must be destroyed before switching addresses, otherwise memory leakage will occur
+
+:::
+
+```js
+var hls = null;
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.m3u8',
+    type: 'm3u8',
+    customType: {
+        m3u8: async function (video, url) {
+            const { default: Hls } = await import('hls.js');
+
+            // Destroy the last decoder instance before switching addresses
+            if (hls) {
+                hls.destroy();
+            }
+
+            hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+        },
+    },
+});
+
+// Switch to a new video address
+art.url = '/assets/sample/video-new.m3u8';
+```
+
 ## flv.js
 
 -   Homepage: [https://github.com/Bilibili/flv.js](https://github.com/Bilibili/flv.js)
