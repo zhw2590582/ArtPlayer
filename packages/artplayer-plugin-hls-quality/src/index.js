@@ -39,6 +39,7 @@ export default function artplayerPluginHlsQuality(option) {
                     tooltip: defaultHtml,
                     html: title,
                     icon: image,
+                    width: 200,
                     selector: hls.levels.map((item, index) => {
                         return {
                             html: item.height + 'P',
