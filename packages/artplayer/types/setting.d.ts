@@ -13,6 +13,8 @@ type Props<T> = {
     $parentList: Setting[];
 } & Omit<T, 'html' | 'icon' | 'tooltip'>;
 
+export type SettingOption = Props<Setting>;
+
 export type Setting = {
     /**
      * Html string or html element of setting name
@@ -52,7 +54,7 @@ export type Setting = {
     /**
      * When selector item click
      */
-    onSelect?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
+    onSelect?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom switch item
@@ -62,7 +64,7 @@ export type Setting = {
     /**
      * When switch item click
      */
-    onSwitch?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
+    onSwitch?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
 
     /**
      * Custom range item
@@ -72,12 +74,12 @@ export type Setting = {
     /**
      * When range item change
      */
-    onRange?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
+    onRange?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
 
     /**
      * When range item change in real time
      */
-    onChange?(this: Artplayer, item: Props<Setting>, element: HTMLDivElement, event: Event): void;
+    onChange?(this: Artplayer, item: SettingOption, element: HTMLDivElement, event: Event): void;
 
     [key: string]: any;
 };

@@ -7,7 +7,7 @@ import { Subtitle } from './subtitle';
 import { Icons } from './icons';
 import { Template } from './template';
 import { I18n } from './i18n';
-import { Setting } from './setting';
+import { Setting, SettingOption } from './setting';
 import { Component } from './component';
 
 export = Artplayer;
@@ -145,8 +145,8 @@ declare class Artplayer extends Player {
 
     readonly setting: {
         option: Setting[];
-        add(setting: Setting): Artplayer['setting'];
-        update(): Artplayer['setting'];
+        add(setting: Setting): SettingOption;
+        update(): SettingOption[];
     } & Component;
 
     readonly plugins: {

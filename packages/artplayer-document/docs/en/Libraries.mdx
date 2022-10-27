@@ -63,6 +63,13 @@ var art = new Artplayer({
                 hls.destroy();
             }
 
+            // When the player is destroyed, the decoder instance must also be destroyed
+            art.on('destroy', () => {
+                if (hls) {
+                    hls.destroy();
+                }
+            });
+
             hls = new Hls();
             hls.loadSource(url);
             hls.attachMedia(video);

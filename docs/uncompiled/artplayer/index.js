@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-10-21 11:25:22";
+        return "2022-10-27 12:44:25";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -4493,12 +4493,12 @@ class Setting extends (0, _componentDefault.default) {
         this.$parent.innerHTML = "";
         this.option = makeRecursion(this.option);
         this.init(this.option);
-        return this;
+        return this.option;
     }
     add(setting) {
         this.option.push(setting);
         this.update();
-        return this;
+        return setting;
     }
     creatHeader(item) {
         const { icons , proxy  } = this.art;
