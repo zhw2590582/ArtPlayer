@@ -88,13 +88,13 @@ export default class Setting extends Component {
         this.$parent.innerHTML = '';
         this.option = makeRecursion(this.option);
         this.init(this.option);
-        return this;
+        return this.option;
     }
 
     add(setting) {
         this.option.push(setting);
         this.update();
-        return this;
+        return setting;
     }
 
     creatHeader(item) {

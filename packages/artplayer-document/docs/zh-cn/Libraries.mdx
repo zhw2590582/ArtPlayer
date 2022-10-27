@@ -61,6 +61,13 @@ var art = new Artplayer({
                 hls.destroy();
             }
 
+            // 播放器销毁时，也要销毁解码器实例
+            art.on('destroy', () => {
+                if (hls) {
+                    hls.destroy();
+                }
+            });
+
             hls = new Hls();
             hls.loadSource(url);
             hls.attachMedia(video);
