@@ -21,10 +21,10 @@ var art = new Artplayer({
             const { default: Hls } = await import('hls.js');
         },
         flv: async function (video, url) {
-            const { default: flvjs } = await import('flv.js').default;
+            const { default: flvjs } = await import('flv.js');
         },
         mpd: async function (video, url) {
-            const { default: dashjs } = await import('dash.js').default;
+            const { default: dashjs } = await import('dash.js');
         },
     },
 });
