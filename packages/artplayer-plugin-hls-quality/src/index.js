@@ -1,21 +1,17 @@
+import image from 'bundle-text:./image.svg';
+
 export default function artplayerPluginHlsQuality(option) {
     return (art) => {
-        const { errorHandle } = art.constructor.utils;
         const { $video } = art.template;
+        const { errorHandle } = art.constructor.utils;
 
         function update() {
             const hls = art.hls || window.hls;
-
-            errorHandle(
-                hls && hls.media === $video,
-                'Cannot find instance of HLS from "option.hls", "art.hls" or "window.hls"',
-            );
-
-            // https://github.com/video-dev/hls.js/blob/master/docs/API.md#runtime-events
-            // const Hls = hls.constructor;
-
+            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
+            const auto = option.auto || 'Auto';
+            const title = option.title || 'Quality';
             const defaultLevel = hls.levels[hls.currentLevel];
-            const defaultHtml = defaultLevel ? defaultLevel.height + 'P' : 'Auto';
+            const defaultHtml = defaultLevel ? defaultLevel.height + 'P' : auto;
 
             if (option.control) {
                 art.controls.add({
@@ -41,7 +37,8 @@ export default function artplayerPluginHlsQuality(option) {
                 art.setting.add({
                     name: 'hls-quality',
                     tooltip: defaultHtml,
-                    html: option.name || 'Quality',
+                    html: title,
+                    icon: image,
                     selector: hls.levels.map((item, index) => {
                         return {
                             html: item.height + 'P',

@@ -44,7 +44,7 @@ art.url = '/assets/sample/video.mpd';
 
 :::tip Tip
 
-If `customType` is used, the previous decoder instance must be destroyed before switching addresses, otherwise memory leakage will occur
+If `customType` is used, the previous decoder instance must be destroyed before switching url, otherwise memory leakage will occur
 
 :::
 
@@ -58,7 +58,7 @@ var art = new Artplayer({
         m3u8: async function (video, url) {
             const { default: Hls } = await import('hls.js');
 
-            // Destroy the last decoder instance before switching addresses
+            // Destroy the last decoder instance before switching url
             if (hls) {
                 hls.destroy();
             }

@@ -145,17 +145,19 @@
 })({"hMiLQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _imageSvg = require("bundle-text:./image.svg");
+var _imageSvgDefault = parcelHelpers.interopDefault(_imageSvg);
 function artplayerPluginHlsQuality(option) {
     return (art)=>{
-        const { errorHandle  } = art.constructor.utils;
         const { $video  } = art.template;
+        const { errorHandle  } = art.constructor.utils;
         function update() {
             const hls = art.hls || window.hls;
-            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "option.hls", "art.hls" or "window.hls"');
-            // https://github.com/video-dev/hls.js/blob/master/docs/API.md#runtime-events
-            // const Hls = hls.constructor;
+            errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
+            const auto = option.auto || "Auto";
+            const title = option.title || "Quality";
             const defaultLevel = hls.levels[hls.currentLevel];
-            const defaultHtml = defaultLevel ? defaultLevel.height + "P" : "Auto";
+            const defaultHtml = defaultLevel ? defaultLevel.height + "P" : auto;
             if (option.control) art.controls.add({
                 name: "hls-quality",
                 position: "right",
@@ -178,7 +180,8 @@ function artplayerPluginHlsQuality(option) {
             if (option.setting) art.setting.add({
                 name: "hls-quality",
                 tooltip: defaultHtml,
-                html: option.name || "Quality",
+                html: title,
+                icon: (0, _imageSvgDefault.default),
                 selector: hls.levels.map((item, index)=>{
                     return {
                         html: item.height + "P",
@@ -201,10 +204,10 @@ function artplayerPluginHlsQuality(option) {
 exports.default = artplayerPluginHlsQuality;
 artplayerPluginHlsQuality.env = "development";
 artplayerPluginHlsQuality.version = "1.0.0";
-artplayerPluginHlsQuality.build = "2022-10-27 12:44:36";
+artplayerPluginHlsQuality.build = "2022-10-27 15:46:38";
 if (typeof window !== "undefined") window["artplayerPluginHlsQuality"] = artplayerPluginHlsQuality;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./image.svg":"1HFaU"}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -233,6 +236,9 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
+
+},{}],"1HFaU":[function(require,module,exports) {
+module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1666857514489\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"2580\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"24\" height=\"24\"><path d=\"M870.4 176 153.6 176C104.128 176 64 216.128 64 265.6l0 492.736c0 49.472 40.128 89.6 89.6 89.6L870.4 847.936c49.472 0 89.6-40.128 89.6-89.6L960 265.6C960 216.128 919.872 176 870.4 176zM870.4 668.8 825.6 668.8c0 0-29.696-65.792-89.6-89.6s-134.4 89.6-134.4 89.6S535.04 596.992 467.2 444.8C399.36 292.608 153.6 624 153.6 624l0-358.4L870.4 265.6 870.4 668.8zM668.8 489.6c37.056 0 67.2-30.144 67.2-67.264 0-37.056-30.144-67.2-67.2-67.2C631.68 355.2 601.6 385.344 601.6 422.4 601.6 459.52 631.68 489.6 668.8 489.6z\" p-id=\"2581\" fill=\"#ffffff\"></path>\n</svg>";
 
 },{}]},["hMiLQ"], "hMiLQ", "parcelRequire4dc0")
 
