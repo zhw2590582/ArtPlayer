@@ -4,6 +4,74 @@ sidebar_position: 7
 slug: /zh-cn/libraries
 ---
 
+## 简介
+
+-   通过选项 `customType` 可以很容易的集成第三方的视频解码库，存在多个解码器时，你可以把他们都添加到 `customType` 里，解码库太大时，你还可以使用 `js` 动态导入
+
+-   播放器默认会解析出 `url` 选项的视频类型（如 `m3u8`, `flv`, `mpd`）, 假如无法解析出正确的视频类型时，你可以添加 `type` 选项指明视频类型
+
+```js
+// 现在这个播放器可以同时播放: m3u8, flv, mpd
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.m3u8',
+    type: 'm3u8', // 可选，但最好填上
+    customType: {
+        m3u8: async function (video, url) {
+            const { default: Hls } = await import('hls.js');
+        },
+        flv: async function (video, url) {
+            const { default: flvjs } = await import('flv.js').default;
+        },
+        mpd: async function (video, url) {
+            const { default: dashjs } = await import('dash.js').default;
+        },
+    },
+});
+
+// 你可以切换新的视频地址
+art.url = '/assets/sample/video-new.m3u8';
+
+// 你还可以切换新的视频类型
+art.type = 'flv';
+art.url = '/assets/sample/video.flv';
+
+art.type = 'mpd';
+art.url = '/assets/sample/video.mpd';
+```
+
+:::tip 提示
+
+假如使用了 `customType`，那么切换地址前，要销毁上一个解码器实例，否则会引起内存泄漏
+
+:::
+
+```js
+var hls = null;
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.m3u8',
+    type: 'm3u8',
+    customType: {
+        m3u8: async function (video, url) {
+            const { default: Hls } = await import('hls.js');
+
+            // 切换地址前，要销毁上一个解码器实例
+            if (hls) {
+                hls.destroy();
+            }
+
+            hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+        },
+    },
+});
+
+// 切换新的视频地址
+art.url = '/assets/sample/video-new.m3u8';
+```
+
 ## flv.js
 
 -   主页: [https://github.com/Bilibili/flv.js](https://github.com/Bilibili/flv.js)
