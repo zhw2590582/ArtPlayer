@@ -4,18 +4,20 @@ var art = new Artplayer({
     setting: true,
     plugins: [
         artplayerPluginHlsQuality({
-            // Show quality in control ?
+            // Show quality in control
             control: true,
-            // Show quality in setting ?
+            // Show quality in setting
             setting: true,
+            // Name of setting panel
+            name: 'Hls Quality',
         }),
     ],
     customType: {
         m3u8: function (video, url) {
             if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
+                art.hls = new Hls();
+                art.hls.loadSource(url);
+                art.hls.attachMedia(video);
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = url;
             } else {
