@@ -396,9 +396,9 @@ Artplayer.ASPECT_RATIO = [
     "16:9"
 ];
 Artplayer.FLIP = [
-    "Normal",
-    "Horizontal",
-    "Vertical"
+    "normal",
+    "horizontal",
+    "vertical"
 ];
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-style")) {
@@ -3658,7 +3658,7 @@ function flip(option) {
         return {
             ...option,
             html: `${i18n.get("Video Flip")}:
-                ${FLIP.map((item)=>`<span data-value="${item}">${i18n.get(item)}</span>`).join("")}
+                ${FLIP.map((item)=>`<span data-value="${item}">${i18n.get((0, _utils.capitalize)(item))}</span>`).join("")}
             `,
             click: (contextmenu, event)=>{
                 const { value  } = event.target.dataset;
@@ -4719,27 +4719,22 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function flip(art) {
-    const { i18n , icons , constructor  } = art;
-    const keys = {
-        normal: "Normal",
-        horizontal: "Horizontal",
-        vertical: "Vertical"
-    };
+    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , FLIP  } ,  } = art;
     function update($panel, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = i18n.get(keys[value]);
+        if ($tooltip) $tooltip.innerText = i18n.get((0, _utils.capitalize)(value));
         const $current = (0, _utils.queryAll)(".art-setting-item", $panel).find((item)=>item.dataset.value === value);
         if ($current) (0, _utils.inverseClass)($current, "art-current");
     }
     return {
-        width: constructor.SETTING_ITEM_WIDTH,
+        width: SETTING_ITEM_WIDTH,
         html: i18n.get("Video Flip"),
-        tooltip: i18n.get(keys[art.flip]),
+        tooltip: i18n.get((0, _utils.capitalize)(art.flip)),
         icon: icons.flip,
-        selector: Object.keys(keys).map((item)=>{
+        selector: FLIP.map((item)=>{
             return {
                 value: item,
                 default: item === art.flip,
-                html: i18n.get(keys[item])
+                html: i18n.get((0, _utils.capitalize)(item))
             };
         }),
         onSelect (item) {

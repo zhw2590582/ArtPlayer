@@ -1,4 +1,4 @@
-import { inverseClass, query, queryAll } from '../utils';
+import { inverseClass, query, queryAll, capitalize } from '../utils';
 
 export default function flip(option) {
     return (art) => {
@@ -10,7 +10,7 @@ export default function flip(option) {
         return {
             ...option,
             html: `${i18n.get('Video Flip')}:
-                ${FLIP.map((item) => `<span data-value="${item}">${i18n.get(item)}</span>`).join('')}
+                ${FLIP.map((item) => `<span data-value="${item}">${i18n.get(capitalize(item))}</span>`).join('')}
             `,
             click: (contextmenu, event) => {
                 const { value } = event.target.dataset;

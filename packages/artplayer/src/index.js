@@ -243,7 +243,7 @@ Artplayer.VOLUME_STEP = 0.1;
 Artplayer.SEEK_STEP = 5;
 Artplayer.PLAYBACK_RATE = [0.5, 0.75, 1, 1.25, 1.5, 2];
 Artplayer.ASPECT_RATIO = ['default', '4:3', '16:9'];
-Artplayer.FLIP = ['Normal', 'Horizontal', 'Vertical'];
+Artplayer.FLIP = ['normal', 'horizontal', 'vertical'];
 
 if (typeof document !== 'undefined') {
     if (!document.getElementById('artplayer-style')) {
