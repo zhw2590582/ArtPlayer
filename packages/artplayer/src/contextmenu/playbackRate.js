@@ -1,17 +1,18 @@
-import { inverseClass, queryAll } from '../utils';
+import { inverseClass, query, queryAll } from '../utils';
 
 export default function playbackRate(option) {
     return (art) => {
-        const { i18n } = art;
+        const {
+            i18n,
+            constructor: { PLAYBACK_RATE },
+        } = art;
+
         return {
             ...option,
             html: `${i18n.get('Play Speed')}:
-                <span data-value="0.5">0.5</span>
-                <span data-value="0.75">0.75</span>
-                <span data-value="1.0" class="art-current">${i18n.get('Normal')}</span>
-                <span data-value="1.25">1.25</span>
-                <span data-value="1.5">1.5</span>
-                <span data-value="2.0">2.0</span>
+                ${PLAYBACK_RATE.map(
+                    (item) => `<span data-value="${item}">${item === 1 ? i18n.get('Normal') : item}</span>`,
+                ).join('')}
             `,
             click: (contextmenu, event) => {
                 const { value } = event.target.dataset;
@@ -21,6 +22,8 @@ export default function playbackRate(option) {
                 }
             },
             mounted: ($panel) => {
+                const $default = query('[data-value="1"]', $panel);
+                if ($default) inverseClass($default, 'art-current');
                 art.on('playbackRate', (value) => {
                     const $current = queryAll('span', $panel).find((item) => Number(item.dataset.value) === value);
                     if ($current) {
