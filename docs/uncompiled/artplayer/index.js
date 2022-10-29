@@ -923,10 +923,14 @@ function throttle(callback, delay) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "clamp", ()=>clamp);
+parcelHelpers.export(exports, "capitalize", ()=>capitalize);
 parcelHelpers.export(exports, "secondToTime", ()=>secondToTime);
 parcelHelpers.export(exports, "escape", ()=>escape);
 function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+}
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 function secondToTime(second) {
     const add0 = (num)=>num < 10 ? `0${num}` : String(num);
@@ -2284,16 +2288,9 @@ function flipMix(art) {
         },
         set (flip) {
             if (!flip) flip = "normal";
-            const flipList = [
-                "normal",
-                "horizontal",
-                "vertical"
-            ];
-            (0, _utils.errorHandle)(flipList.includes(flip), `'flip' only accept ${flipList.toString()} as parameters`);
             if (flip === "normal") delete $player.dataset.flip;
             else $player.dataset.flip = flip;
-            const word = flip.replace(flip[0], flip[0].toUpperCase());
-            notice.show = `${i18n.get("Video Flip")}: ${i18n.get(word)}`;
+            notice.show = `${i18n.get("Video Flip")}: ${i18n.get((0, _utils.capitalize)(flip))}`;
             art.emit("flip", flip);
         }
     });
