@@ -343,6 +343,9 @@ class Artplayer extends (0, _emitterDefault.default) {
     get query() {
         return this.template.query;
     }
+    get video() {
+        return this.template.$video;
+    }
     destroy(removeHtml = true) {
         this.events.destroy();
         this.template.destroy(removeHtml);
@@ -1775,8 +1778,7 @@ function aspectRatioMix(art) {
         get () {
             return $player.dataset.aspectRatio || "default";
         },
-        set (ratio) {
-            if (!ratio) ratio = "default";
+        set (ratio = "default") {
             if (ratio === "default") {
                 (0, _utils.setStyle)($video, "width", null);
                 (0, _utils.setStyle)($video, "height", null);
@@ -2286,8 +2288,7 @@ function flipMix(art) {
         get () {
             return $player.dataset.flip || "normal";
         },
-        set (flip) {
-            if (!flip) flip = "normal";
+        set (flip = "normal") {
             if (flip === "normal") delete $player.dataset.flip;
             else $player.dataset.flip = flip;
             notice.show = `${i18n.get("Video Flip")}: ${i18n.get((0, _utils.capitalize)(flip))}`;

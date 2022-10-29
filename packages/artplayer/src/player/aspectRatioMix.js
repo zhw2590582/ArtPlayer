@@ -11,8 +11,7 @@ export default function aspectRatioMix(art) {
         get() {
             return $player.dataset.aspectRatio || 'default';
         },
-        set(ratio) {
-            if (!ratio) ratio = 'default';
+        set(ratio = 'default') {
             if (ratio === 'default') {
                 setStyle($video, 'width', null);
                 setStyle($video, 'height', null);

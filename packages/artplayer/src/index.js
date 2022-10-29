@@ -202,6 +202,10 @@ export default class Artplayer extends Emitter {
         return this.template.query;
     }
 
+    get video() {
+        return this.template.$video;
+    }
+
     destroy(removeHtml = true) {
         this.events.destroy();
         this.template.destroy(removeHtml);

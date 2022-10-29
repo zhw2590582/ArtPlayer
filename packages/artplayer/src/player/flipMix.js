@@ -11,9 +11,7 @@ export default function flipMix(art) {
         get() {
             return $player.dataset.flip || 'normal';
         },
-        set(flip) {
-            if (!flip) flip = 'normal';
-
+        set(flip = 'normal') {
             if (flip === 'normal') {
                 delete $player.dataset.flip;
             } else {
