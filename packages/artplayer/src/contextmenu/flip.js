@@ -1,23 +1,27 @@
-import { inverseClass, queryAll } from '../utils';
+import { inverseClass, query, queryAll, capitalize } from '../utils';
 
 export default function flip(option) {
     return (art) => {
-        const { i18n } = art;
+        const {
+            i18n,
+            constructor: { FLIP },
+        } = art;
+
         return {
             ...option,
             html: `${i18n.get('Video Flip')}:
-                <span data-value="normal" class="art-current">${i18n.get('Normal')}</span>
-                <span data-value="horizontal">${i18n.get('Horizontal')}</span>
-                <span data-value="vertical">${i18n.get('Vertical')}</span>
+                ${FLIP.map((item) => `<span data-value="${item}">${i18n.get(capitalize(item))}</span>`).join('')}
             `,
             click: (contextmenu, event) => {
                 const { value } = event.target.dataset;
                 if (value) {
-                    art.flip = value;
+                    art.flip = value.toLowerCase();
                     contextmenu.show = false;
                 }
             },
             mounted: ($panel) => {
+                const $default = query('[data-value="normal"]', $panel);
+                if ($default) inverseClass($default, 'art-current');
                 art.on('flip', (value) => {
                     const $current = queryAll('span', $panel).find((item) => item.dataset.value === value);
                     if ($current) {

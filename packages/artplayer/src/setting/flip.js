@@ -1,30 +1,28 @@
-import { inverseClass, queryAll } from '../utils';
+import { inverseClass, queryAll, capitalize } from '../utils';
 
 export default function flip(art) {
-    const { i18n, icons, constructor } = art;
-
-    const keys = {
-        normal: 'Normal',
-        horizontal: 'Horizontal',
-        vertical: 'Vertical',
-    };
+    const {
+        i18n,
+        icons,
+        constructor: { SETTING_ITEM_WIDTH, FLIP },
+    } = art;
 
     function update($panel, $tooltip, value) {
-        if ($tooltip) $tooltip.innerText = i18n.get(keys[value]);
+        if ($tooltip) $tooltip.innerText = i18n.get(capitalize(value));
         const $current = queryAll('.art-setting-item', $panel).find((item) => item.dataset.value === value);
         if ($current) inverseClass($current, 'art-current');
     }
 
     return {
-        width: constructor.SETTING_ITEM_WIDTH,
+        width: SETTING_ITEM_WIDTH,
         html: i18n.get('Video Flip'),
-        tooltip: i18n.get(keys[art.flip]),
+        tooltip: i18n.get(capitalize(art.flip)),
         icon: icons.flip,
-        selector: Object.keys(keys).map((item) => {
+        selector: FLIP.map((item) => {
             return {
                 value: item,
                 default: item === art.flip,
-                html: i18n.get(keys[item]),
+                html: i18n.get(capitalize(item)),
             };
         }),
         onSelect(item) {

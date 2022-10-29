@@ -58,6 +58,9 @@ declare class Artplayer extends Player {
     static TOUCH_MOVE_RATIO: number;
     static VOLUME_STEP: number;
     static SEEK_STEP: number;
+    static PLAYBACK_RATE: number[];
+    static ASPECT_RATIO: string[];
+    static FLIP: string[];
 
     readonly id: number;
     readonly option: Option;
@@ -75,6 +78,7 @@ declare class Artplayer extends Player {
 
     query: Artplayer['template']['query'];
     proxy: Artplayer['events']['proxy'];
+    video: Artplayer['template']['$video'];
 
     destroy(removeHtml?: boolean): void;
 

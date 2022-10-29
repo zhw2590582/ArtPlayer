@@ -1,7 +1,11 @@
 import { inverseClass, queryAll } from '../utils';
 
 export default function playbackRate(art) {
-    const { i18n, icons, constructor } = art;
+    const {
+        i18n,
+        icons,
+        constructor: { SETTING_ITEM_WIDTH, PLAYBACK_RATE },
+    } = art;
 
     function getI18n(value) {
         return value === 1.0 ? i18n.get('Normal') : value;
@@ -14,11 +18,11 @@ export default function playbackRate(art) {
     }
 
     return {
-        width: constructor.SETTING_ITEM_WIDTH,
+        width: SETTING_ITEM_WIDTH,
         html: i18n.get('Play Speed'),
         tooltip: getI18n(art.playbackRate),
         icon: icons.playbackRate,
-        selector: [0.5, 0.75, 1.0, 1.25, 1.5, 2.0].map((item) => {
+        selector: PLAYBACK_RATE.map((item) => {
             return {
                 value: item,
                 default: item === art.playbackRate,
