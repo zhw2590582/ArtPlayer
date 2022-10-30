@@ -47,4 +47,6 @@ export type Utils = {
     clamp(num: number, a: number, b: number): number;
     secondToTime(second: number): string;
     escape(str: string): string;
+    capitalize(str: string): string;
+    isStringOrNumber(val: any): boolean;
 };

@@ -3,23 +3,17 @@ import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 import Component from '../utils/component';
-import { def, has, append, addClass, setStyle, inverseClass, createElement, includeFromEvent } from '../utils';
-
-function makeRecursion(option, parentItem, parentList) {
-    for (let index = 0; index < option.length; index++) {
-        const item = option[index];
-        item.$parentItem = parentItem;
-        item.$parentList = parentList;
-        if (item.selector) {
-            makeRecursion(item.selector, item, option);
-        }
-    }
-    return option;
-}
-
-function isStringOrNumber(val) {
-    return ['string', 'number'].includes(typeof val);
-}
+import {
+    def,
+    has,
+    append,
+    addClass,
+    setStyle,
+    inverseClass,
+    createElement,
+    includeFromEvent,
+    isStringOrNumber,
+} from '../utils';
 
 export default class Setting extends Component {
     constructor(art) {
@@ -81,12 +75,24 @@ export default class Setting extends Component {
         }
     }
 
+    static makeRecursion(option, parentItem, parentList) {
+        for (let index = 0; index < option.length; index++) {
+            const item = option[index];
+            item.$parentItem = parentItem;
+            item.$parentList = parentList;
+            if (item.selector) {
+                Setting.makeRecursion(item.selector, item, option);
+            }
+        }
+        return option;
+    }
+
     update() {
         this.cache = new Map();
         this.events.forEach((event) => event());
         this.events = [];
         this.$parent.innerHTML = '';
-        this.option = makeRecursion(this.option);
+        this.option = Setting.makeRecursion(this.option);
         this.init(this.option);
         return this.option;
     }

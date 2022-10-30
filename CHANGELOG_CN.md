@@ -8,9 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 添加 `art.video` 属性，用于获取 `video` 元素
 - 添加 `artplayer-plugin-iframe` 插件，用于控制 `iframe` 里的播放器
 - 添加 `artplayer-plugin-hls-quality` 插件，用于添加 `Hls` 画质列表到播放器
-- 新增 `Artplayer.PLAYBACK_RATE` 用于设置默认播放速度
-- 新增 `Artplayer.ASPECT_RATIO` 用于设置默认长宽比
-- 新增 `Artplayer.FLIP` 用于设置默认翻转
+- 新增 `Artplayer.PLAYBACK_RATE` 用于设置默认播放速度，默认 `[0.5, 0.75, 1, 1.25, 1.5, 2]`
+- 新增 `Artplayer.ASPECT_RATIO` 用于设置默认长宽比，默认 `['default', '4:3', '16:9']`
+- 新增 `Artplayer.FLIP` 用于设置默认翻转功能，默认 `['normal', 'horizontal', 'vertical']`
 - 打包添加 `legacy.js` 版本，用于兼容更老的浏览器，但相对体积较大
 
 ## [4.5.8] - 2022-10-9

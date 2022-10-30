@@ -242,13 +242,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "4.5.8";
+        return "4.5.9";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2022-10-29 19:55:59";
+        return "2022-10-30 10:00:25";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -927,6 +927,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "clamp", ()=>clamp);
 parcelHelpers.export(exports, "capitalize", ()=>capitalize);
+parcelHelpers.export(exports, "isStringOrNumber", ()=>isStringOrNumber);
 parcelHelpers.export(exports, "secondToTime", ()=>secondToTime);
 parcelHelpers.export(exports, "escape", ()=>escape);
 function clamp(num, a, b) {
@@ -934,6 +935,12 @@ function clamp(num, a, b) {
 }
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+function isStringOrNumber(val) {
+    return [
+        "string",
+        "number"
+    ].includes(typeof val);
 }
 function secondToTime(second) {
     const add0 = (num)=>num < 10 ? `0${num}` : String(num);
@@ -1256,7 +1263,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.5.8"}</div>
+                  <div class="art-info-content">${"4.5.9"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3702,7 +3709,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.8"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.9"}</a>`
     };
 }
 exports.default = version;
@@ -4434,21 +4441,6 @@ var _subtitleOffsetDefault = parcelHelpers.interopDefault(_subtitleOffset);
 var _component = require("../utils/component");
 var _componentDefault = parcelHelpers.interopDefault(_component);
 var _utils = require("../utils");
-function makeRecursion(option, parentItem, parentList) {
-    for(let index = 0; index < option.length; index++){
-        const item = option[index];
-        item.$parentItem = parentItem;
-        item.$parentList = parentList;
-        if (item.selector) makeRecursion(item.selector, item, option);
-    }
-    return option;
-}
-function isStringOrNumber(val) {
-    return [
-        "string",
-        "number"
-    ].includes(typeof val);
-}
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
@@ -4479,12 +4471,21 @@ class Setting extends (0, _componentDefault.default) {
             });
         }
     }
+    static makeRecursion(option, parentItem, parentList) {
+        for(let index = 0; index < option.length; index++){
+            const item = option[index];
+            item.$parentItem = parentItem;
+            item.$parentList = parentList;
+            if (item.selector) Setting.makeRecursion(item.selector, item, option);
+        }
+        return option;
+    }
     update() {
         this.cache = new Map();
         this.events.forEach((event)=>event());
         this.events = [];
         this.$parent.innerHTML = "";
-        this.option = makeRecursion(this.option);
+        this.option = Setting.makeRecursion(this.option);
         this.init(this.option);
         return this.option;
     }
@@ -4512,8 +4513,8 @@ class Setting extends (0, _componentDefault.default) {
         const { icons , proxy  } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
-        if (isStringOrNumber(item.name)) $item.dataset.name = item.name;
-        if (isStringOrNumber(item.value)) $item.dataset.value = item.value;
+        if ((0, _utils.isStringOrNumber)(item.name)) $item.dataset.name = item.name;
+        if ((0, _utils.isStringOrNumber)(item.value)) $item.dataset.value = item.value;
         const $left = (0, _utils.append)($item, '<div class="art-setting-item-left"></div>');
         const $right = (0, _utils.append)($item, '<div class="art-setting-item-right"></div>');
         const $icon = (0, _utils.createElement)("div");
@@ -4521,10 +4522,10 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
             case "range":
-                (0, _utils.append)($icon, isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
+                (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 break;
             case "selector":
-                if (item.selector && item.selector.length) (0, _utils.append)($icon, isStringOrNumber(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
+                if (item.selector && item.selector.length) (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 else (0, _utils.append)($icon, icons.check);
                 break;
             default:
@@ -4538,7 +4539,7 @@ class Setting extends (0, _componentDefault.default) {
                 return $icon.innerHTML;
             },
             set (value) {
-                if (isStringOrNumber(value)) $icon.innerHTML = value;
+                if ((0, _utils.isStringOrNumber)(value)) $icon.innerHTML = value;
             }
         });
         const $html = (0, _utils.createElement)("div");
@@ -4552,7 +4553,7 @@ class Setting extends (0, _componentDefault.default) {
                 return $html.innerHTML;
             },
             set (value) {
-                if (isStringOrNumber(value)) $html.innerHTML = value;
+                if ((0, _utils.isStringOrNumber)(value)) $html.innerHTML = value;
             }
         });
         const $tooltip = (0, _utils.createElement)("div");
@@ -4566,7 +4567,7 @@ class Setting extends (0, _componentDefault.default) {
                 return $tooltip.innerHTML;
             },
             set (value) {
-                if (isStringOrNumber(value)) $tooltip.innerHTML = value;
+                if ((0, _utils.isStringOrNumber)(value)) $tooltip.innerHTML = value;
             }
         });
         switch(type){
@@ -4669,7 +4670,7 @@ class Setting extends (0, _componentDefault.default) {
                             if (item.$parentList) this.init(item.$parentList);
                             if (item.$parentItem && item.$parentItem.onSelect) {
                                 const result = await item.$parentItem.onSelect.call(this.art, item, $item, event);
-                                if (item.$parentItem.$tooltip && isStringOrNumber(result)) item.$parentItem.$tooltip.innerHTML = result;
+                                if (item.$parentItem.$tooltip && (0, _utils.isStringOrNumber)(result)) item.$parentItem.$tooltip.innerHTML = result;
                             }
                         }
                     });
