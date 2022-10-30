@@ -165,11 +165,11 @@
     }
 
     function runCode() {
-        Artplayer.instances.forEach(function (art) {
+        [...Artplayer.instances].forEach(function (art) {
             art.destroy(true);
         });
-        var code = editor.getValue();
-        eval(code);
+        eval(editor.getValue());
+        window.art = Artplayer.instances[0];
     }
 
     function initApp() {

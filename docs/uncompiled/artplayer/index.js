@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-10-30 10:00:25";
+        return "2022-10-30 10:58:55";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1785,7 +1785,8 @@ function aspectRatioMix(art) {
         get () {
             return $player.dataset.aspectRatio || "default";
         },
-        set (ratio = "default") {
+        set (ratio) {
+            if (!ratio) ratio = "default";
             if (ratio === "default") {
                 (0, _utils.setStyle)($video, "width", null);
                 (0, _utils.setStyle)($video, "height", null);
@@ -2295,7 +2296,8 @@ function flipMix(art) {
         get () {
             return $player.dataset.flip || "normal";
         },
-        set (flip = "normal") {
+        set (flip) {
+            if (!flip) flip = "normal";
             if (flip === "normal") delete $player.dataset.flip;
             else $player.dataset.flip = flip;
             notice.show = `${i18n.get("Video Flip")}: ${i18n.get((0, _utils.capitalize)(flip))}`;
