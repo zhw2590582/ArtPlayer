@@ -926,7 +926,7 @@ export type Setting = {
     /**
      * Custom range item
      */
-    range?: number[] | number;
+    range?: [value?: number, min?: number, max?: number, step?: number];
 
     /**
      * When range item change
