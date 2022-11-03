@@ -47,12 +47,21 @@ export default function progress(options) {
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
 
+                const {
+                    PROGRESS_HEIGHT,
+                    INDICATOR_SIZE,
+                    INDICATOR_SIZE_ICON,
+                    INDICATOR_SIZE_MOBILE,
+                    INDICATOR_SIZE_MOBILE_ICON,
+                } = art.constructor;
+
+                setStyle($control, 'height', `${PROGRESS_HEIGHT}px`);
                 setStyle($played, 'backgroundColor', 'var(--theme)');
 
-                let indicatorSize = art.constructor.INDICATOR_SIZE;
+                let indicatorSize = INDICATOR_SIZE;
 
                 if (icons.indicator) {
-                    indicatorSize = art.constructor.INDICATOR_SIZE_ICON;
+                    indicatorSize = INDICATOR_SIZE_ICON;
                     append($indicator, icons.indicator);
                 } else {
                     setStyles($indicator, {
@@ -61,9 +70,9 @@ export default function progress(options) {
                 }
 
                 if (isMobile) {
-                    indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE;
+                    indicatorSize = INDICATOR_SIZE_MOBILE;
                     if (icons.indicator) {
-                        indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE_ICON;
+                        indicatorSize = INDICATOR_SIZE_MOBILE_ICON;
                     }
                 }
 

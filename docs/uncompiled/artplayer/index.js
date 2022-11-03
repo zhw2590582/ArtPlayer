@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-11-03 21:58:59";
+        return "2022-11-03 22:03:25";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -385,6 +385,7 @@ Artplayer.FAST_FORWARD_TIME = 1000;
 Artplayer.TOUCH_MOVE_RATIO = 0.5;
 Artplayer.VOLUME_STEP = 0.1;
 Artplayer.SEEK_STEP = 5;
+Artplayer.PROGRESS_HEIGHT = 4;
 Artplayer.PLAYBACK_RATE = [
     0.5,
     0.75,
@@ -3180,17 +3181,19 @@ function progress(options) {
                 const $highlight = (0, _utils.query)(".art-progress-highlight", $control);
                 const $indicator = (0, _utils.query)(".art-progress-indicator", $control);
                 const $tip = (0, _utils.query)(".art-progress-tip", $control);
+                const { PROGRESS_HEIGHT , INDICATOR_SIZE , INDICATOR_SIZE_ICON , INDICATOR_SIZE_MOBILE , INDICATOR_SIZE_MOBILE_ICON ,  } = art.constructor;
+                (0, _utils.setStyle)($control, "height", `${PROGRESS_HEIGHT}px`);
                 (0, _utils.setStyle)($played, "backgroundColor", "var(--theme)");
-                let indicatorSize = art.constructor.INDICATOR_SIZE;
+                let indicatorSize = INDICATOR_SIZE;
                 if (icons.indicator) {
-                    indicatorSize = art.constructor.INDICATOR_SIZE_ICON;
+                    indicatorSize = INDICATOR_SIZE_ICON;
                     (0, _utils.append)($indicator, icons.indicator);
                 } else (0, _utils.setStyles)($indicator, {
                     backgroundColor: "var(--theme)"
                 });
                 if (0, _utils.isMobile) {
-                    indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE;
-                    if (icons.indicator) indicatorSize = art.constructor.INDICATOR_SIZE_MOBILE_ICON;
+                    indicatorSize = INDICATOR_SIZE_MOBILE;
+                    if (icons.indicator) indicatorSize = INDICATOR_SIZE_MOBILE_ICON;
                 }
                 (0, _utils.setStyles)($indicator, {
                     left: `-${indicatorSize / 2}px`,

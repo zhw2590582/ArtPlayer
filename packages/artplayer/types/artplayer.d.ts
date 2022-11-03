@@ -58,6 +58,7 @@ declare class Artplayer extends Player {
     static TOUCH_MOVE_RATIO: number;
     static VOLUME_STEP: number;
     static SEEK_STEP: number;
+    static PROGRESS_HEIGHT: number;
     static PLAYBACK_RATE: number[];
     static ASPECT_RATIO: string[];
     static FLIP: string[];
