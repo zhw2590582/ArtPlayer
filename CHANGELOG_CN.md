@@ -12,7 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - 新增 `Artplayer.ASPECT_RATIO` 用于设置默认长宽比，默认 `['default', '4:3', '16:9']`
 - 新增 `Artplayer.FLIP` 用于设置默认翻转功能，默认 `['normal', 'horizontal', 'vertical']`
 - 新增 `Artplayer.PROGRESS_HEIGHT` 用于设置进度条高度，默认为 `4`
-- 打包添加 `legacy.js` 版本，用于兼容更老的浏览器，但相对体积较大
+- 添加 `legacy.js` 版本，用于兼容更老的浏览器，但相对体积较大
+- 移除 `examples` 目录，不再提供 `vue.js` 和 `react.js` 的例子文件
 
 ## [4.5.8] - 2022-10-9
 - 添加 `farsi` 语言
