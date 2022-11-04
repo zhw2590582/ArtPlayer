@@ -6,7 +6,7 @@ const footerPrefix = `${prefix}-footer`;
 /* eslint-disable max-len */
 
 const templates = {
-  suggestion: `
+    suggestion: `
   <a class="${suggestionPrefix}
     {{#isCategoryHeader}}${suggestionPrefix}__main{{/isCategoryHeader}}
     {{#isSubCategoryHeader}}${suggestionPrefix}__secondary{{/isSubCategoryHeader}}
@@ -31,7 +31,7 @@ const templates = {
     </div>
   </a>
   `,
-  suggestionSimple: `
+    suggestionSimple: `
   <div class="${suggestionPrefix}
     {{#isCategoryHeader}}${suggestionPrefix}__main{{/isCategoryHeader}}
     {{#isSubCategoryHeader}}${suggestionPrefix}__secondary{{/isSubCategoryHeader}}
@@ -69,11 +69,11 @@ const templates = {
     </div>
   </div>
   `,
-  footer: `
+    footer: `
     <div class="${footerPrefix}">
     </div>
   `,
-  empty: `
+    empty: `
   <div class="${suggestionPrefix}">
     <div class="${suggestionPrefix}--wrapper">
         <div class="${suggestionPrefix}--content ${suggestionPrefix}--no-results">
@@ -86,7 +86,7 @@ const templates = {
     </div>
   </div>
   `,
-  searchBox: `
+    searchBox: `
   <form novalidate="novalidate" onsubmit="return false;" class="searchbox">
     <div role="search" class="searchbox__wrapper">
       <input id="docsearch" type="search" name="search" placeholder="Search the docs" autocomplete="off" required="required" class="searchbox__input"/>

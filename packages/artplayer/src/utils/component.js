@@ -1,4 +1,14 @@
-import { hasClass, addClass, removeClass, append, setStyles, tooltip, getStyle, inverseClass, createElement } from './dom';
+import {
+    hasClass,
+    addClass,
+    removeClass,
+    append,
+    setStyles,
+    tooltip,
+    getStyle,
+    inverseClass,
+    createElement,
+} from './dom';
 import validator from 'option-validator';
 import { ComponentOption } from '../scheme';
 import { has, def } from './property';

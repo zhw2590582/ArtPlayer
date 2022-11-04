@@ -14,7 +14,9 @@
     touch-action: manipulation;
     -ms-high-contrast-adjust: none;
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -50,7 +52,7 @@
             width: 32px;
             align-items: center;
             justify-content: center;
-    
+
             .art-danmuku-style-panel {
                 display: none;
                 position: absolute;
@@ -59,24 +61,24 @@
                 bottom: 30px;
                 width: 200px;
                 padding-bottom: 10px;
-    
+
                 .art-danmuku-style-panel-inner {
                     display: flex;
                     flex-direction: column;
                     padding: 10px 10px 0;
                     border-radius: 3px;
                     background-color: rgba(0, 0, 0, 0.9);
-    
+
                     .art-danmuku-style-panel-title {
                         font-size: 13px;
                         margin-bottom: 10px;
                     }
-        
+
                     .art-danmuku-style-panel-modes {
                         display: flex;
                         justify-content: space-between;
                         margin-bottom: 15px;
-        
+
                         .art-danmuku-style-panel-mode {
                             display: flex;
                             justify-content: center;
@@ -85,28 +87,28 @@
                             cursor: pointer;
                             color: #fff;
                             border: 1px solid #fff;
-        
+
                             &.art-current {
                                 background-color: #00a1d6;
                                 border: 1px solid #00a1d6;
                             }
                         }
                     }
-        
+
                     .art-danmuku-style-panel-colors {
                         display: flex;
                         gap: 5px;
                         flex-wrap: wrap;
                         margin-bottom: 10px;
                         justify-content: space-between;
-        
+
                         .art-danmuku-style-panel-color {
                             cursor: pointer;
                             width: 20px;
                             height: 20px;
                             border: 1px solid #fff;
-        
-                            &.art-current{
+
+                            &.art-current {
                                 position: relative;
                                 box-shadow: 0 0 2px #fff;
                                 &::before {
@@ -122,25 +124,24 @@
                                 }
                             }
                         }
-        
                     }
                 }
             }
-    
-            &:hover .art-danmuku-style-panel{
+
+            &:hover .art-danmuku-style-panel {
                 display: flex;
             }
-    
+
             .art-icon {
                 opacity: 0.75;
                 cursor: pointer;
-    
+
                 &:hover {
                     opacity: 1;
                 }
             }
         }
-    
+
         .art-danmuku-input {
             flex: 1;
             display: flex;
@@ -150,8 +151,9 @@
             width: 100%;
             color: #ffffff;
             background-color: transparent;
-    
-            &::placeholder, &::-webkit-input-placeholder {
+
+            &::placeholder,
+            &::-webkit-input-placeholder {
                 color: rgb(255 255 255 / 50%);
             }
         }
@@ -196,15 +198,16 @@
             .art-danmuku-left {
                 border: 1px solid #dadada;
                 background: #f4f4f4;
-    
+
                 .art-danmuku-style .art-icon svg {
                     fill: #666;
                 }
-        
+
                 .art-danmuku-input {
                     color: #000000;
-        
-                    &::placeholder, &::-webkit-input-placeholder {
+
+                    &::placeholder,
+                    &::-webkit-input-placeholder {
                         color: rgb(0 0 0 / 50%);
                     }
                 }

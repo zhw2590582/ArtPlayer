@@ -32,7 +32,7 @@ type Option = {
     /**
      * 视频广告是否默认静音
      */
-     muted?: boolean;
+    muted?: boolean;
 };
 
 type Ads = {

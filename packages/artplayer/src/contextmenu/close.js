@@ -1,8 +1,8 @@
 export default function close(option) {
-    return art => ({
+    return (art) => ({
         ...option,
         html: art.i18n.get('Close'),
-        click: contextmenu => {
+        click: (contextmenu) => {
             contextmenu.show = false;
         },
     });

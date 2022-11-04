@@ -31,9 +31,11 @@
 </p>
 
 ## Home Page
+
 [https://artplayer.org](https://artplayer.org)
 
 ## Mobile Demo
+
 <img src="./images/qrcode.png" width="250">
 
 ## Features
