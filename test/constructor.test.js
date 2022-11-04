@@ -1,19 +1,19 @@
-describe('Constructor', function() {
+describe('Constructor', function () {
     var url = './assets/sample/video.mp4';
 
-    afterEach(function() {
-        [...Artplayer.instances].forEach(art => {
+    afterEach(function () {
+        [...Artplayer.instances].forEach((art) => {
             art.destroy(true);
         });
     });
 
-    it('Constructor is a global variable', function() {
+    it('Constructor is a global variable', function () {
         expect(Artplayer).to.be.an('function');
         expect(Artplayer.instances).to.be.an('array');
         expect(Artplayer.instances.length).to.be.equal(0);
     });
 
-    it('Instance state', function() {
+    it('Instance state', function () {
         var sample1 = new Artplayer({ container: '.sample1', url: url });
         expect(sample1.id).to.equal(1);
         var sample2 = new Artplayer({ container: '.sample2', url: url });

@@ -2,11 +2,7 @@ node_modules
 .docusaurus
 .parcel-cache
 .github
-*.log
-*.lock
-test
 docs
-scripts
 packages/*/dist
 packages/*/node_modules
 packages/*/.parcel-cache
