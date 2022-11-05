@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.5.9] - 2022-11-5
+
 -   添加 `art.type` 属性，用于获取和设置视频类型
 -   添加 `art.video` 属性，用于获取 `video` 元素
 -   添加 `artplayer-plugin-iframe` 插件，用于控制 `iframe` 里的播放器

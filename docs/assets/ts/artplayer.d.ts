@@ -340,6 +340,7 @@ export type Config = {
 
 
 
+
 export type Events = {
     'video:canplay': [event: Event];
     'video:canplaythrough': [event: Event];
