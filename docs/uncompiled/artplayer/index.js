@@ -242,13 +242,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "4.5.9";
+        return "4.5.10";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2022-11-05 11:40:31";
+        return "2022-11-05 11:58:33";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1264,7 +1264,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.5.9"}</div>
+                  <div class="art-info-content">${"4.5.10"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3714,7 +3714,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.9"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.10"}</a>`
     };
 }
 exports.default = version;
@@ -3839,6 +3839,7 @@ class Subtitle extends (0, _componentDefault.default) {
         $newTrack.default = true;
         $newTrack.kind = kind;
         $newTrack.src = url;
+        $newTrack.track.mode = "hidden";
         this.eventDestroy();
         (0, _utils.remove)($track);
         (0, _utils.append)($video, $newTrack);
