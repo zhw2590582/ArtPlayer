@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [4.5.10] - 2022-11-6
+## [4.5.10] - 2022-11-5
 
 -   修复字幕在 `firefox` 不显示的问题：[#pull/415](https://github.com/zhw2590582/ArtPlayer/pull/415)
 -   信息弹窗支持点击选中视频属性文本值
