@@ -87,6 +87,7 @@ export default class Subtitle extends Component {
         $newTrack.default = true;
         $newTrack.kind = kind;
         $newTrack.src = url;
+        $newTrack.track.mode = 'hidden';
 
         this.eventDestroy();
         remove($track);
