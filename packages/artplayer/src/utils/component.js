@@ -92,10 +92,6 @@ export default class Component {
             option.mounted.call(this.art, $ref);
         }
 
-        if ($ref.childNodes.length === 1 && $ref.childNodes[0].nodeType === 3) {
-            addClass($ref, 'art-control-onlyText');
-        }
-
         def(this, name, {
             value: $ref,
         });

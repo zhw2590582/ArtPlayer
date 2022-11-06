@@ -4,6 +4,9 @@ export default function quality(option) {
         const qualityDefault = qualityOption.find((item) => item.default) || qualityOption[0];
         return {
             ...option,
+            style: {
+                marginRight: '10px',
+            },
             html: qualityDefault ? qualityDefault.html : '',
             selector: qualityOption,
             onSelect(item) {

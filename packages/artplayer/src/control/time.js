@@ -5,6 +5,7 @@ export default function time(option) {
         ...option,
         style: {
             cursor: 'auto',
+            marginLeft: '10px',
         },
         mounted: ($control) => {
             function getTime() {
