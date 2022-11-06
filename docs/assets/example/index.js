@@ -168,7 +168,7 @@ var art = new Artplayer({
             index: 1,
             tooltip: 'Control Tooltip',
             style: {
-                marginRight: '15px',
+                marginRight: '20px',
             },
             click: function () {
                 console.info('You clicked on the custom control');
