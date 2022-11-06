@@ -60,7 +60,7 @@ export declare class Player {
     pause(): void;
     play(): Promise<void>;
     toggle(): void;
-    attr(key: string, value: any): void;
+    attr(key: string, value?: any): unknown;
     switchUrl(url: string): Promise<string>;
     switchQuality(url: string): Promise<string>;
     getDataURL(): Promise<string>;
