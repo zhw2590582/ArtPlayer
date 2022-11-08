@@ -19,6 +19,8 @@ export default class Mobile {
             $video[key] = option.moreVideoAttr[key];
         });
 
+        $video.controls = true;
+
         if (option.muted) {
             $video.muted = option.muted;
         }

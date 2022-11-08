@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-11-08 08:16:00";
+        return "2022-11-08 20:24:10";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -5218,6 +5218,7 @@ class Mobile {
         Object.keys(option.moreVideoAttr).forEach((key)=>{
             $video[key] = option.moreVideoAttr[key];
         });
+        $video.controls = true;
         if (option.muted) $video.muted = option.muted;
         if (option.volume) $video.volume = (0, _utils.clamp)(option.volume, 0, 1);
         if (option.poster) $video.poster = option.poster;
