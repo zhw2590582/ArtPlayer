@@ -242,13 +242,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "4.5.10";
+        return "4.5.11";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2022-11-08 20:24:10";
+        return "2022-11-10 18:00:45";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -356,6 +356,7 @@ class Artplayer extends (0, _emitterDefault.default) {
 }
 exports.default = Artplayer;
 Artplayer.DEGUG = false;
+Artplayer.CONTEXTMENU = true;
 Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;
 Artplayer.SETTING_ITEM_WIDTH = 200;
@@ -1264,7 +1265,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"4.5.10"}</div>
+                  <div class="art-info-content">${"4.5.11"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3576,6 +3577,7 @@ class Contextmenu extends (0, _componentDefault.default) {
         for(let index = 0; index < option.contextmenu.length; index++)this.add(option.contextmenu[index]);
         proxy($player, "contextmenu", (event)=>{
             event.preventDefault();
+            if (!this.art.constructor.CONTEXTMENU) return;
             this.show = true;
             const mouseX = event.clientX;
             const mouseY = event.clientY;
@@ -3717,7 +3719,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.10"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"4.5.11"}</a>`
     };
 }
 exports.default = version;

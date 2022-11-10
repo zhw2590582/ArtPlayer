@@ -216,6 +216,7 @@ export default class Artplayer extends Emitter {
 }
 
 Artplayer.DEGUG = false;
+Artplayer.CONTEXTMENU = true;
 Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;
 Artplayer.SETTING_ITEM_WIDTH = 200;

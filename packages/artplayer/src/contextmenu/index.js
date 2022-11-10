@@ -80,6 +80,8 @@ export default class Contextmenu extends Component {
 
         proxy($player, 'contextmenu', (event) => {
             event.preventDefault();
+            if (!this.art.constructor.CONTEXTMENU) return;
+
             this.show = true;
 
             const mouseX = event.clientX;

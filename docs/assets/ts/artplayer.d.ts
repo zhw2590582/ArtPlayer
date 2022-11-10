@@ -18,6 +18,7 @@ declare class Artplayer extends Player {
     static readonly option: Option;
 
     static DEGUG: boolean;
+    static CONTEXTMENU: boolean;
     static NOTICE_TIME: number;
     static SETTING_WIDTH: number;
     static SETTING_ITEM_WIDTH: number;
