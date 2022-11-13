@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-11-10 18:00:45";
+        return "2022-11-13 22:49:08";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1197,7 +1197,7 @@ class Whitelist {
     }
     get state() {
         const { option , constructor: { kindOf  } ,  } = this.art;
-        return !(0, _utils.isMobile) || option.whitelist.some((item)=>{
+        return !(0, _utils.isMobile) || !option.whitelist.length || option.whitelist.some((item)=>{
             switch(kindOf(item)){
                 case "string":
                     return item === "*" || (0, _utils.userAgent).indexOf(item) > -1;

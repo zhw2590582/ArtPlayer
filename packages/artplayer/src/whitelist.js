@@ -13,6 +13,7 @@ export default class Whitelist {
 
         return (
             !isMobile ||
+            !option.whitelist.length ||
             option.whitelist.some((item) => {
                 switch (kindOf(item)) {
                     case 'string':
