@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-11-13 22:49:08";
+        return "2022-11-14 23:17:18";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3495,7 +3495,7 @@ function loop(option) {
                 const $left = (0, _utils.append)($control, `<span class="art-loop-point"></span>`);
                 const $right = (0, _utils.append)($control, `<span class="art-loop-point"></span>`);
                 art.on("loop", (value)=>{
-                    if (value) {
+                    if (value && value.length) {
                         (0, _utils.setStyle)($control, "display", "block");
                         (0, _utils.setStyle)($left, "left", `calc(${value[0] / art.duration * 100}% - ${$left.clientWidth}px)`);
                         (0, _utils.setStyle)($right, "left", `${value[1] / art.duration * 100}%`);

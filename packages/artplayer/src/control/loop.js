@@ -8,7 +8,7 @@ export default function loop(option) {
             const $right = append($control, `<span class="art-loop-point"></span>`);
 
             art.on('loop', (value) => {
-                if (value) {
+                if (value && value.length) {
                     setStyle($control, 'display', 'block');
                     setStyle($left, 'left', `calc(${(value[0] / art.duration) * 100}% - ${$left.clientWidth}px)`);
                     setStyle($right, 'left', `${(value[1] / art.duration) * 100}%`);

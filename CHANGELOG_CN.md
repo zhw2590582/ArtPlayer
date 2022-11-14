@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   修复 `art.loop = []` 的显示 `bug`
+
 ## [4.5.11] - 2022-11-6
 
 -   新增 `Artplayer.CONTEXTMENU` 用于设置是否显示右键菜单，默认为 `true`
