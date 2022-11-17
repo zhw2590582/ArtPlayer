@@ -8,6 +8,7 @@ export type Events = {
     'video:durationchange': [event: Event];
     'video:emptied': [event: Event];
     'video:ended': [event: Event];
+    'video:error': [event: Error];
     'video:loadeddata': [event: Event];
     'video:loadedmetadata': [event: Event];
     'video:pause': [event: Event];
