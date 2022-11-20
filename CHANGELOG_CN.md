@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.5.12] - 2022-11-20
+
 -   修复 `art.loop = []` 的显示 `bug`
 
 ## [4.5.11] - 2022-11-6
