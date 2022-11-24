@@ -70,6 +70,8 @@ declare class Artplayer extends Player {
     proxy: Artplayer['events']['proxy'];
     video: Artplayer['template']['$video'];
 
+    e: Record<keyof Events, { fn: Function; ctx: unknown }[]>;
+
     destroy(removeHtml?: boolean): void;
 
     readonly whitelist: {
