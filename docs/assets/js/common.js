@@ -1,5 +1,5 @@
 (function () {
-    Artplayer.DEGUG = true;
+    Artplayer.DEBUG = true;
 
     var userAgent = window.navigator.userAgent;
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);

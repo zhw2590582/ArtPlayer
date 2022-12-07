@@ -1,66 +1,67 @@
 {
-    "name": "artplayer-packages",
-    "version": "4.4.1",
-    "type": "module",
-    "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
-    "scripts": {
-        "build:all": "npm run build all && npm run build:sw && npm run build:ts",
-        "bootstrap": "npx lerna bootstrap --hoist",
-        "lint": "npx eslint packages/*/src",
-        "build:sw": "node ./scripts/build-sw.js",
-        "build:ts": "node ./scripts/build-ts.js",
-        "test:create": "node ./scripts/createTests.js",
-        "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
-        "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
-        "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
-        "prettier": "npx prettier --write .",
-        "postinstall": "npm run bootstrap"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
-    },
-    "keywords": [
-        "video",
-        "player"
-    ],
-    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
-    },
-    "homepage": "https://artplayer.org",
-    "browserslist": "> 0.5%, last 2 versions, not dead",
-    "dependencies": {
-        "@babel/eslint-parser": "^7.19.1",
-        "@babel/preset-react": "^7.18.6",
-        "@parcel/config-default": "^2.7.0",
-        "@parcel/core": "^2.7.0",
-        "@parcel/optimizer-data-url": "^2.7.0",
-        "@parcel/reporter-cli": "^2.7.0",
-        "@parcel/transformer-inline-string": "^2.7.0",
-        "@parcel/transformer-less": "^2.7.0",
-        "@parcel/transformer-vue": "^2.7.0",
-        "artplayer": "latest",
-        "chai": "^4.3.6",
-        "cpy": "^9.0.1",
-        "cross-env": "^7.0.3",
-        "eslint": "^8.26.0",
-        "glob": "^8.0.3",
-        "lerna": "^6.0.1",
-        "mocha": "^10.1.0",
-        "mocha-chrome": "^2.2.0",
-        "node-html-parser": "^6.1.1",
-        "pre-commit": "^1.2.2",
-        "prettier": "^2.7.1",
-        "prompts": "^2.4.2",
-        "servor": "^4.0.2",
-        "workbox-build": "^6.5.4"
-    },
-    "engines": {
-        "node": ">= 16.0.0"
-    },
-    "pre-commit": [
-        "prettier"
-    ]
+  "name": "artplayer-packages",
+  "version": "4.4.1",
+  "type": "module",
+  "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+  "scripts": {
+    "build:all": "npm run build all && npm run build:sw && npm run build:ts",
+    "bootstrap": "npx lerna bootstrap --hoist",
+    "lint": "npx eslint packages/*/src",
+    "build:sw": "node ./scripts/build-sw.js",
+    "build:ts": "node ./scripts/build-ts.js",
+    "test:create": "node ./scripts/createTests.js",
+    "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
+    "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
+    "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
+    "prettier": "npx prettier --write .",
+    "postinstall": "npm run bootstrap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "keywords": [
+    "video",
+    "player"
+  ],
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "homepage": "https://artplayer.org",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "dependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-react": "^7.18.6",
+    "@parcel/config-default": "^2.7.0",
+    "@parcel/core": "^2.7.0",
+    "@parcel/optimizer-data-url": "^2.7.0",
+    "@parcel/reporter-cli": "^2.7.0",
+    "@parcel/transformer-inline-string": "^2.7.0",
+    "@parcel/transformer-less": "^2.7.0",
+    "@parcel/transformer-vue": "^2.7.0",
+    "artplayer": "latest",
+    "chai": "^4.3.6",
+    "cpy": "^9.0.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.26.0",
+    "glob": "^8.0.3",
+    "lerna": "^6.0.1",
+    "mocha": "^10.1.0",
+    "mocha-chrome": "^2.2.0",
+    "node-html-parser": "^6.1.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.7.1",
+    "prompts": "^2.4.2",
+    "servor": "^4.0.2",
+    "workbox-build": "^6.5.4"
+  },
+  "engines": {
+    "node": ">= 16.0.0"
+  },
+  "pre-commit": [
+    "prettier"
+  ],
+  "__npminstall_done": false
 }

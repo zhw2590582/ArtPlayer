@@ -229,7 +229,7 @@ class Artplayer extends (0, _emitterDefault.default) {
             this.plugins = new (0, _pluginsDefault.default)(this);
         } else this.mobile = new (0, _mobileDefault.default)(this);
         if (typeof readyCallback === "function") this.on("ready", ()=>readyCallback.call(this, this));
-        if (Artplayer.DEGUG) {
+        if (Artplayer.DEBUG) {
             const log = (msg)=>console.log(`[ART.${this.id}] -> ${msg}`);
             log("Version@" + Artplayer.version);
             log("Env@" + Artplayer.env);
@@ -355,7 +355,7 @@ class Artplayer extends (0, _emitterDefault.default) {
     }
 }
 exports.default = Artplayer;
-Artplayer.DEGUG = false;
+Artplayer.DEBUG = false;
 Artplayer.CONTEXTMENU = true;
 Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;

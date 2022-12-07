@@ -70,7 +70,7 @@ export default class Artplayer extends Emitter {
             this.on('ready', () => readyCallback.call(this, this));
         }
 
-        if (Artplayer.DEGUG) {
+        if (Artplayer.DEBUG) {
             const log = (msg) => console.log(`[ART.${this.id}] -> ${msg}`);
             log('Version@' + Artplayer.version);
             log('Env@' + Artplayer.env);
@@ -215,7 +215,7 @@ export default class Artplayer extends Emitter {
     }
 }
 
-Artplayer.DEGUG = false;
+Artplayer.DEBUG = false;
 Artplayer.CONTEXTMENU = true;
 Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;
