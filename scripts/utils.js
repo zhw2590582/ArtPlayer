@@ -14,11 +14,11 @@ export function formatDate(date) {
 
 export function getProjects() {
     return glob
-        .sync(path.join(process.cwd(), 'packages/*'))
+        .sync('packages/*')
         .filter((item) => !item.endsWith('artplayer-document') && !item.endsWith('artplayer-template'))
         .reduce((result, item) => {
-            const name = item.split(path.sep).pop();
-            result[name] = item;
+            const name = item.split(/\/|\\/g).pop();
+            result[name] = path.resolve(process.cwd(), item);
             return result;
         }, {});
 }
