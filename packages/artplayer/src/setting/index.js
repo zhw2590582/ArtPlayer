@@ -351,11 +351,17 @@ export default class Setting extends Component {
         } = this.art;
 
         if (controls.setting && !isMobile) {
+            const settingWidth = width || constructor.SETTING_WIDTH;
             const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
-            const { left: playerlLeft } = $player.getBoundingClientRect();
-            const settingLeft = controlLeft - playerlLeft + controlWidth / 2 - (width || constructor.SETTING_WIDTH) / 2;
-            setStyle($setting, 'left', `${settingLeft}px`);
-            setStyle($setting, 'right', 'auto');
+            const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
+            const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
+            if (settingLeft + settingWidth > playerWidth) {
+                setStyle($setting, 'left', 'auto');
+                setStyle($setting, 'right', '10px');
+            } else {
+                setStyle($setting, 'left', `${settingLeft}px`);
+                setStyle($setting, 'right', 'auto');
+            }
         } else {
             setStyle($setting, 'left', 'auto');
             setStyle($setting, 'right', '10px');
