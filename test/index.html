@@ -1,53 +1,51 @@
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Mocha Tests</title>
+        <link href="../node_modules/mocha/mocha.css" rel="stylesheet" />
+        <script src="../node_modules/chai/chai.js"></script>
+        <script src="../node_modules/mocha/mocha.js"></script>
+        <style>
+            .artplayer-app {
+                display: flex;
+                height: 300px;
+                border-bottom: 1px solid #999;
+            }
 
-<head>
-    <meta charset="utf-8" />
-    <title>Mocha Tests</title>
-    <link href="../node_modules/mocha/mocha.css" rel="stylesheet" />
-    <script src="../node_modules/chai/chai.js"></script>
-    <script src="../node_modules/mocha/mocha.js"></script>
-    <style>
-        .artplayer-app {
-            display: flex;
-            height: 300px;
-            border-bottom: 1px solid #999;
-        }
+            .artplayer-app > div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex: 1;
+                padding: 10px;
+                border-right: 1px solid #999;
+            }
+        </style>
+    </head>
 
-        .artplayer-app>div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-            padding: 10px;
-            border-right: 1px solid #999;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="artplayer-app">
-        <div class="sample1">sample1</div>
-        <div class="sample2">sample2</div>
-        <div class="sample3">sample3</div>
-    </div>
-    <div id="mocha"></div>
-    <script>
-        window.mocha.setup('bdd');
-        window.expect = window.chai.expect;
-    </script>
-    <script src="../packages/artplayer/dist/artplayer.js"></script>
-    <script src="../packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js"></script>
-    <script src="../packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js"></script>
-    <script src="../packages/artplayer-plugin-iframe/dist/artplayer-helper-iframe.js"></script>
-    <script src="../packages/artplayer-plugin-control/dist/artplayer-plugin-control.js"></script>
-    <!-- Test start -->
-    <script src="./document.test.js"></script>
-    <script src="./option.test.js"></script>
-    <!-- Test end -->
-    <script>
-        mocha.checkLeaks();
-        mocha.run();
-    </script>
-</body>
-
+    <body>
+        <div class="artplayer-app">
+            <div class="sample1">sample1</div>
+            <div class="sample2">sample2</div>
+            <div class="sample3">sample3</div>
+        </div>
+        <div id="mocha"></div>
+        <script>
+            window.mocha.setup('bdd');
+            window.expect = window.chai.expect;
+        </script>
+        <script src="../packages/artplayer/dist/artplayer.js"></script>
+        <script src="../packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js"></script>
+        <script src="../packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js"></script>
+        <script src="../packages/artplayer-plugin-iframe/dist/artplayer-helper-iframe.js"></script>
+        <script src="../packages/artplayer-plugin-control/dist/artplayer-plugin-control.js"></script>
+        <!-- Test start -->
+        <script src="./document.test.js"></script>
+        <script src="./option.test.js"></script>
+        <!-- Test end -->
+        <script>
+            mocha.checkLeaks();
+            mocha.run();
+        </script>
+    </body>
 </html>
