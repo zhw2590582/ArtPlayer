@@ -19,13 +19,13 @@ export default function artplayerPluginAliyundrive() {
         checkVersion(art);
 
         const {
-            template: { $bottom },
+            template: { $bottom, $player },
             constructor: {
                 utils: { append, secondToTime, addClass },
             },
         } = art;
 
-        addClass($bottom, 'artplayer-plugin-aliyundrive');
+        addClass($player, 'artplayer-plugin-aliyundrive');
         const $current = append($bottom, `<div class="apa-control-current"></div>`);
         const $duration = append($bottom, `<div class="apa-control-duration"></div>`);
         const events = ['video:loadedmetadata', 'video:timeupdate', 'video:progress'];
