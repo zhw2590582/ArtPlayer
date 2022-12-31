@@ -10,11 +10,11 @@ function checkVersion(art) {
     const minor = arr[1] / 100;
     errorHandle(
         major + minor >= 4.06,
-        `Artplayer.js@${version} is not compatible the artplayerPluginAliyundrive@${artplayerPluginAliyundrive.version}. Please update it to version Artplayer.js@4.6.x`,
+        `Artplayer.js@${version} is not compatible the artplayerPluginControl@${artplayerPluginControl.version}. Please update it to version Artplayer.js@4.6.x`,
     );
 }
 
-export default function artplayerPluginAliyundrive() {
+export default function artplayerPluginControl() {
     return (art) => {
         checkVersion(art);
 
@@ -25,7 +25,7 @@ export default function artplayerPluginAliyundrive() {
             },
         } = art;
 
-        addClass($player, 'artplayer-plugin-aliyundrive');
+        addClass($player, 'artplayer-plugin-control');
         const $current = append($bottom, `<div class="apa-control-current"></div>`);
         const $duration = append($bottom, `<div class="apa-control-duration"></div>`);
         const events = ['video:loadedmetadata', 'video:timeupdate', 'video:progress'];
@@ -38,24 +38,24 @@ export default function artplayerPluginAliyundrive() {
         }
 
         return {
-            name: 'artplayerPluginAliyundrive',
+            name: 'artplayerPluginControl',
         };
     };
 }
 
-artplayerPluginAliyundrive.env = process.env.NODE_ENV;
-artplayerPluginAliyundrive.version = process.env.APP_VER;
-artplayerPluginAliyundrive.build = process.env.BUILD_DATE;
+artplayerPluginControl.env = process.env.NODE_ENV;
+artplayerPluginControl.version = process.env.APP_VER;
+artplayerPluginControl.build = process.env.BUILD_DATE;
 
 if (typeof document !== 'undefined') {
-    if (!document.getElementById('artplayer-plugin-aliyundrive')) {
+    if (!document.getElementById('artplayer-plugin-control')) {
         const $style = document.createElement('style');
-        $style.id = 'artplayer-plugin-aliyundrive';
+        $style.id = 'artplayer-plugin-control';
         $style.textContent = style;
         document.head.appendChild($style);
     }
 }
 
 if (typeof window !== 'undefined') {
-    window['artplayerPluginAliyundrive'] = artplayerPluginAliyundrive;
+    window['artplayerPluginControl'] = artplayerPluginControl;
 }

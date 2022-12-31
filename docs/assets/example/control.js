@@ -67,6 +67,6 @@ var art = new Artplayer({
         indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
     },
     plugins: [
-        artplayerPluginAliyundrive()
+        artplayerPluginControl()
     ],
 });
