@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-12-31 23:37:20";
+        return "2022-12-31 23:43:36";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -4699,7 +4699,7 @@ class Setting extends (0, _componentDefault.default) {
     }
     updateStyle(width) {
         const { controls , constructor , template: { $player , $setting  } ,  } = this.art;
-        if (controls.setting && !(0, _utils.isMobile)) {
+        if (controls.setting) {
             const settingWidth = width || constructor.SETTING_WIDTH;
             const { left: controlLeft , width: controlWidth  } = controls.setting.getBoundingClientRect();
             const { left: playerLeft , width: playerWidth  } = $player.getBoundingClientRect();
