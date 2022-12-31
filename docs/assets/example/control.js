@@ -14,17 +14,6 @@ var art = new Artplayer({
     miniProgressBar: true,
     airplay: true,
     theme: '#23ade5',
-    quality: [
-        {
-            default: true,
-            html: 'SD 480P',
-            url: '/assets/sample/video.mp4',
-        },
-        {
-            html: 'HD 720P',
-            url: '/assets/sample/video.mp4',
-        },
-    ],
     thumbnails: {
         url: '/assets/sample/thumbnails.png',
         number: 60,
@@ -66,6 +55,21 @@ var art = new Artplayer({
         state: '<img width="150" heigth="150" src="/assets/img/state.svg">',
         indicator: '<img width="16" heigth="16" src="/assets/img/indicator.svg">',
     },
+    settings: [
+        {
+            html: 'Control UI',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            tooltip: 'OFF',
+            switch: true,
+            onSwitch: async function (item) {
+                item.tooltip = item.switch ? 'OFF' : 'ON';
+                art.plugins.artplayerPluginControl.enable = !item.switch;
+                await Artplayer.utils.sleep(300);
+                art.setting.updateStyle();
+                return !item.switch;
+            },
+        },
+    ],
     plugins: [
         artplayerPluginControl()
     ],
