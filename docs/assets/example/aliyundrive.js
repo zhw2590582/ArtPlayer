@@ -31,11 +31,11 @@ var art = new Artplayer({
                         {
                             default: true,
                             html: '1080P',
-                            url: '/assets/sample/video.mp4?p=1080',
+                            url: '/assets/sample/test1.mp4?p=1080',
                         },
                         {
                             html: '720P',
-                            url: '/assets/sample/video.mp4?p=720',
+                            url: '/assets/sample/test1.mp4?p=720',
                         },
                     ],
                 }
