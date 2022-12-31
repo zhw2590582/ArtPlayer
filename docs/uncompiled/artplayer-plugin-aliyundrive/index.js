@@ -147,10 +147,89 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
-function artplayerPluginAliyundrive(option) {
+function artplayerPluginAliyundrive(option = {
+    onlyOnFullscreen: true,
+    playlist: []
+}) {
     return (art)=>{
+        const { template: { $player , $bottom  } , constructor: { utils: { append , query , secondToTime , setStyle  }  }  } = art;
+        let index = 0;
+        function play() {
+            const playItme = option.playlist[index];
+            if (!playItme) return;
+            art.poster = playItme.poster || "";
+            playItme.quality = playItme.quality || [];
+            const quality = playItme.quality.find((item)=>item.default) || playItme.quality[0];
+            art.url = playItme.url || quality.url || "";
+        }
+        function next() {
+            const nextIndex = index + 1;
+            index = nextIndex > option.playlist.length - 1 ? 0 : nextIndex;
+            play();
+        }
+        function prev() {
+            const prevIndex = index - 1;
+            index = prevIndex < 0 ? 0 : prevIndex;
+            play();
+        }
+        function initControl() {
+            const $control = append($player, `
+                    <div class="artplayer-plugin-aliyundrive">
+                        <div class="apa-control">
+                            <div class="apa-control-current"></div>
+                            <div class="apa-control-progress">
+                                <div class="apa-control-progress-inner">
+                                    <div class="apa-control-loaded"></div>
+                                    <div class="apa-control-played">
+                                        <div class="apa-control-indicator"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="apa-control-duration"></div>
+                        </div>
+                        <div class="apa-tool"></div>
+                    </div>
+                `);
+            const $current = query(".apa-control-current", $control);
+            const $duration = query(".apa-control-duration", $control);
+            const $played = query(".apa-control-played", $control);
+            const $loaded = query(".apa-control-loaded", $control);
+            const events = [
+                "video:loadedmetadata",
+                "video:timeupdate",
+                "video:progress"
+            ];
+            for(let index = 0; index < events.length; index++)art.on(events[index], ()=>{
+                $current.innerText = secondToTime(art.currentTime);
+                $duration.innerText = secondToTime(art.duration);
+                setStyle($played, "width", `${art.played * 100}%`);
+                setStyle($loaded, "width", `${art.loaded * 100}%`);
+            });
+            if (option.onlyOnFullscreen) {
+                setStyle($control, "display", "none");
+                setStyle($bottom, "display", null);
+                const events1 = [
+                    "fullscreen",
+                    "fullscreenWeb"
+                ];
+                for(let index1 = 0; index1 < events1.length; index1++)art.on(events1[index1], (state)=>{
+                    if (state) {
+                        setStyle($control, "display", null);
+                        setStyle($bottom, "display", "none");
+                    } else {
+                        setStyle($control, "display", "none");
+                        setStyle($bottom, "display", null);
+                    }
+                });
+            } else setStyle($bottom, "display", "none");
+        }
+        initControl();
+        play();
         return {
-            name: "artplayerPluginAliyundrive"
+            name: "artplayerPluginAliyundrive",
+            play,
+            next,
+            prev
         };
     };
 }
@@ -169,7 +248,7 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") window["artplayerPluginAliyundrive"] = artplayerPluginAliyundrive;
 
 },{"bundle-text:./style.less":"5Amth","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5Amth":[function(require,module,exports) {
-module.exports = "\n\n";
+module.exports = ".art-video-player .artplayer-plugin-aliyundrive {\n  z-index: 130;\n  height: 68px;\n  width: 520px;\n  user-select: none;\n  opacity: 0;\n  background-color: #313136;\n  border-radius: 10px;\n  flex-direction: row;\n  font-size: 13px;\n  transition: opacity .3s;\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  transform: translateX(-50%);\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control {\n  width: 100%;\n  height: 40px;\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control .apa-control-current, .art-video-player .artplayer-plugin-aliyundrive .apa-control .apa-control-duration {\n  width: 70px;\n  justify-content: center;\n  line-height: 1;\n  display: flex;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control .apa-control-progress {\n  height: 12px;\n  cursor: pointer;\n  border-radius: 4px;\n  flex: 1;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control .apa-control-progress .apa-control-progress-inner {\n  height: 4px;\n  width: 100%;\n  background-color: #ffffff40;\n  position: relative;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control .apa-control-progress .apa-control-progress-inner .apa-control-loaded {\n  z-index: 0;\n  background-color: #ffffff40;\n  border-radius: 4px;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control .apa-control-progress .apa-control-progress-inner .apa-control-played {\n  z-index: 10;\n  background-color: var(--theme);\n  border-radius: 4px;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control .apa-control-progress .apa-control-progress-inner .apa-control-played .apa-control-indicator {\n  width: 2px;\n  height: 14px;\n  background-color: #fff;\n  position: absolute;\n  top: -5px;\n  right: 0;\n}\n\n.art-video-player.art-control-show .artplayer-plugin-aliyundrive, .art-video-player.art-hover .artplayer-plugin-aliyundrive {\n  opacity: 1;\n  visibility: visible;\n}\n\n";
 
 },{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {

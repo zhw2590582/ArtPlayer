@@ -1,3 +1,88 @@
-.artplayer-plugin-aliyundrive {
-    //
+.art-video-player {
+    .artplayer-plugin-aliyundrive {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        z-index: 130;
+        height: 68px;
+        width: 520px;
+        user-select: none;
+        border-radius: 10px;
+        opacity: 0;
+        transition: opacity .3s ease;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        font-size: 13px;
+        background-color: #313136;
+
+        .apa-control {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .apa-control-current, .apa-control-duration {
+                display: flex;
+                justify-content: center;
+                line-height: 1;
+                width: 70px;
+            }
+
+            .apa-control-progress {
+                display: flex;
+                align-items: center;
+                flex: 1;
+                height: 12px;
+                border-radius: 4px;
+                cursor: pointer;
+
+                .apa-control-progress-inner {
+                    position: relative;
+                    height: 4px;
+                    width: 100%;
+                    background-color: rgb(255 255 255 / 25%);
+
+                    .apa-control-loaded {
+                        position: absolute;
+                        z-index: 0;
+                        left: 0;
+                        top: 0;
+                        bottom: 0;
+                        border-radius: 4px;
+                        background-color: rgb(255 255 255 / 25%);
+                    }
+
+                    .apa-control-played {
+                        position: absolute;
+                        z-index: 10;
+                        left: 0;
+                        top: 0;
+                        bottom: 0;
+                        border-radius: 4px;
+                        background-color: var(--theme);
+
+                        .apa-control-indicator {
+                            position: absolute;
+                            right: 0;
+                            top: -5px;
+                            width: 2px;
+                            height: 14px;
+                            background-color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.art-control-show,
+    &.art-hover {
+        .artplayer-plugin-aliyundrive {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
 }
+
