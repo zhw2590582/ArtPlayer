@@ -1,4 +1,3 @@
-import screenfull from '../libs/screenfull';
 import { append, tooltip, setStyle } from '../utils';
 
 export default function fullscreen(option) {
@@ -16,8 +15,8 @@ export default function fullscreen(option) {
                 art.fullscreen = !art.fullscreen;
             });
 
-            screenfull.on('change', () => {
-                if (art.fullscreen) {
+            art.on('fullscreen', (state) => {
+                if (state) {
                     tooltip($control, i18n.get('Exit Fullscreen'));
                     setStyle($fullscreenOn, 'display', 'none');
                     setStyle($fullscreenOff, 'display', 'inline-flex');

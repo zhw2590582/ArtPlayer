@@ -9,6 +9,10 @@ export default function fullscreenMix(art) {
     } = art;
 
     const nativeScreenfull = (art) => {
+        screenfull.on('change', () => {
+            art.emit('fullscreen', screenfull.isFullscreen);
+        });
+
         def(art, 'fullscreen', {
             get() {
                 return screenfull.isFullscreen;
@@ -21,7 +25,6 @@ export default function fullscreenMix(art) {
                     await screenfull.request($player);
                     addClass($player, 'art-fullscreen');
                     art.emit('resize');
-                    art.emit('fullscreen', true);
                     notice.show = '';
                 } else {
                     art.aspectRatioReset = true;
@@ -29,7 +32,6 @@ export default function fullscreenMix(art) {
                     await screenfull.exit();
                     removeClass($player, 'art-fullscreen');
                     art.emit('resize');
-                    art.emit('fullscreen', false);
                     notice.show = '';
                 }
             },

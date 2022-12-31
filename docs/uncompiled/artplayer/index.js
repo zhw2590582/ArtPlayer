@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-12-31 21:05:45";
+        return "2022-12-31 21:35:32";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1883,6 +1883,9 @@ var _utils = require("../utils");
 function fullscreenMix(art) {
     const { i18n , notice , template: { $video , $player  }  } = art;
     const nativeScreenfull = (art)=>{
+        (0, _screenfullDefault.default).on("change", ()=>{
+            art.emit("fullscreen", (0, _screenfullDefault.default).isFullscreen);
+        });
         (0, _utils.def)(art, "fullscreen", {
             get () {
                 return (0, _screenfullDefault.default).isFullscreen;
@@ -1895,7 +1898,6 @@ function fullscreenMix(art) {
                     await (0, _screenfullDefault.default).request($player);
                     (0, _utils.addClass)($player, "art-fullscreen");
                     art.emit("resize");
-                    art.emit("fullscreen", true);
                     notice.show = "";
                 } else {
                     art.aspectRatioReset = true;
@@ -1903,7 +1905,6 @@ function fullscreenMix(art) {
                     await (0, _screenfullDefault.default).exit();
                     (0, _utils.removeClass)($player, "art-fullscreen");
                     art.emit("resize");
-                    art.emit("fullscreen", false);
                     notice.show = "";
                 }
             }
@@ -3005,8 +3006,6 @@ exports.default = Component;
 },{"./dom":"dNynC","option-validator":"2tbdu","../scheme":"gL38d","./property":"91nLd","./error":"622b3","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _screenfull = require("../libs/screenfull");
-var _screenfullDefault = parcelHelpers.interopDefault(_screenfull);
 var _utils = require("../utils");
 function fullscreen(option) {
     return (art)=>({
@@ -3020,8 +3019,8 @@ function fullscreen(option) {
                 proxy($control, "click", ()=>{
                     art.fullscreen = !art.fullscreen;
                 });
-                (0, _screenfullDefault.default).on("change", ()=>{
-                    if (art.fullscreen) {
+                art.on("fullscreen", (state)=>{
+                    if (state) {
                         (0, _utils.tooltip)($control, i18n.get("Exit Fullscreen"));
                         (0, _utils.setStyle)($fullscreenOn, "display", "none");
                         (0, _utils.setStyle)($fullscreenOff, "display", "inline-flex");
@@ -3036,7 +3035,7 @@ function fullscreen(option) {
 }
 exports.default = fullscreen;
 
-},{"../libs/screenfull":"eQous","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8HUSd":[function(require,module,exports) {
+},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8HUSd":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");

@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.6.0] - 2022-12-31
+
+-   优化控制栏图标的样式效果
+-   优化设置面板的样式效果
+-   修复 `art.fullscreen` 监听状态错误的问题
+-   添加 `artplayer-plugin-control` 插件，用于改变控制栏样式
+
 ## [4.5.12] - 2022-11-20
 
 -   修复 `art.loop = []` 的显示 `bug`
