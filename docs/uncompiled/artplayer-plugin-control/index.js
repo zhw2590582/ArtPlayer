@@ -157,8 +157,9 @@ function checkVersion(art) {
 function artplayerPluginControl() {
     return (art)=>{
         checkVersion(art);
-        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass  }  }  } = art;
-        addClass($player, "artplayer-plugin-control");
+        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass , removeClass , hasClass  }  }  } = art;
+        const className = "artplayer-plugin-control";
+        addClass($player, className);
         const $current = append($bottom, `<div class="apa-control-current"></div>`);
         const $duration = append($bottom, `<div class="apa-control-duration"></div>`);
         const events = [
@@ -171,14 +172,21 @@ function artplayerPluginControl() {
             $duration.innerText = secondToTime(art.duration);
         });
         return {
-            name: "artplayerPluginControl"
+            name: "artplayerPluginControl",
+            get enable () {
+                return hasClass($player, className);
+            },
+            set enable (state){
+                if (state) addClass($player, className);
+                else removeClass($player, className);
+            }
         };
     };
 }
 exports.default = artplayerPluginControl;
 artplayerPluginControl.env = "development";
 artplayerPluginControl.version = "1.0.0";
-artplayerPluginControl.build = "2022-12-31 21:03:16";
+artplayerPluginControl.build = "2022-12-31 21:07:41";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-control")) {
         const $style = document.createElement("style");
@@ -190,7 +198,7 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") window["artplayerPluginControl"] = artplayerPluginControl;
 
 },{"bundle-text:./style.less":"cLvfB","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cLvfB":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-control .art-bottom {\n  height: 68px;\n  max-width: 520px;\n  user-select: none;\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000b3;\n  background-image: none;\n  border-radius: 10px;\n  flex-direction: column;\n  align-items: center;\n  padding: 0;\n  font-size: 13px;\n  transition: opacity .3s;\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  transform: translateX(-50%);\n  box-shadow: 0 10px 15px -3px #0003, 0 4px 6px -4px #0003;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress {\n  width: 70%;\n  justify-content: space-between;\n  align-items: center;\n  gap: 10px;\n  display: flex;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-thumbnails {\n  bottom: 35px;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-progress {\n  width: 100%;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-progress-tip {\n  top: -40px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls {\n  width: 100%;\n  height: auto;\n  flex: 1;\n  padding: 0 5px;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls .art-control-time {\n  display: none;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls .art-volume-panel {\n  width: 60px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-selector-list {\n  background-color: #000c !important;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current, .artplayer-plugin-control .art-bottom .apa-control-duration {\n  width: 15%;\n  justify-content: center;\n  line-height: 1;\n  display: flex;\n  position: absolute;\n  top: 10px;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current {\n  left: 0;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-duration {\n  right: 0;\n}\n\n.artplayer-plugin-control .art-settings {\n  bottom: 85px;\n}\n\n.artplayer-plugin-control.art-control-show .art-subtitle {\n  bottom: 80px;\n}\n\n.apa-control-current, .apa-control-duration {\n  display: none;\n}\n\n";
+module.exports = ".artplayer-plugin-control .art-bottom {\n  height: 68px;\n  max-width: 520px;\n  user-select: none;\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000b3;\n  background-image: none;\n  border-radius: 10px;\n  flex-direction: column;\n  align-items: center;\n  padding: 0;\n  font-size: 13px;\n  transition: opacity .3s;\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  transform: translateX(-50%);\n  box-shadow: 0 10px 15px -3px #0003, 0 4px 6px -4px #0003;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress {\n  width: 65%;\n  justify-content: space-between;\n  align-items: center;\n  gap: 10px;\n  display: flex;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-thumbnails {\n  bottom: 35px;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-progress {\n  width: 100%;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-progress-tip {\n  top: -40px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls {\n  width: 100%;\n  height: auto;\n  flex: 1;\n  padding: 0 5px;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls .art-control-time {\n  display: none;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls .art-volume-panel {\n  width: 60px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-selector-list {\n  background-color: #000c !important;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current, .artplayer-plugin-control .art-bottom .apa-control-duration {\n  width: 17.5%;\n  justify-content: center;\n  line-height: 1;\n  display: flex;\n  position: absolute;\n  top: 10px;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current {\n  left: 0;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-duration {\n  right: 0;\n}\n\n.artplayer-plugin-control .art-settings {\n  bottom: 85px;\n}\n\n.artplayer-plugin-control.art-control-show .art-subtitle {\n  bottom: 80px;\n}\n\n.apa-control-current, .apa-control-duration {\n  display: none;\n}\n\n";
 
 },{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {

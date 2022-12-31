@@ -21,13 +21,16 @@ export default function artplayerPluginControl() {
         const {
             template: { $bottom, $player },
             constructor: {
-                utils: { append, secondToTime, addClass },
+                utils: { append, secondToTime, addClass, removeClass, hasClass },
             },
         } = art;
 
-        addClass($player, 'artplayer-plugin-control');
+        const className = 'artplayer-plugin-control';
+        addClass($player, className);
+
         const $current = append($bottom, `<div class="apa-control-current"></div>`);
         const $duration = append($bottom, `<div class="apa-control-duration"></div>`);
+
         const events = ['video:loadedmetadata', 'video:timeupdate', 'video:progress'];
 
         for (let index = 0; index < events.length; index++) {
@@ -39,6 +42,16 @@ export default function artplayerPluginControl() {
 
         return {
             name: 'artplayerPluginControl',
+            get enable() {
+                return hasClass($player, className);
+            },
+            set enable(state) {
+                if (state) {
+                    addClass($player, className);
+                } else {
+                    removeClass($player, className);
+                }
+            },
         };
     };
 }

@@ -7,6 +7,7 @@ type Option = {};
 
 type Control = {
     name: 'artplayerPluginControl';
+    enable: Boolean;
 };
 
 declare const artplayerPluginControl: (option?: Option) => (art: Artplayer) => Control;
