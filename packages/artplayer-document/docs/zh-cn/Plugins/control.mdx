@@ -1,5 +1,5 @@
 ---
-title: 控制栏插件
+title: 控制器插件
 sidebar_position: 5
 ---
 
@@ -53,3 +53,37 @@ var art = new Artplayer({
     ],
 });
 ```
+
+## 接口
+
+### enable
+
+-   类型: `Getter/Setter`
+
+是否启用新的控制器UI
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-control/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreen: true,
+    fullscreenWeb: true,
+    controls: [
+        {
+            position: 'right',
+            html: '<button type="button">切换 UI</button>',
+            click: function () {
+                const { enable } = art.plugins.artplayerPluginControl;
+                art.plugins.artplayerPluginControl.enable = !enable;
+            },
+        },
+    ],
+    plugins: [
+        artplayerPluginControl(),
+    ],
+});
+``

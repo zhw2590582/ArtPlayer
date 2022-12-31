@@ -53,3 +53,37 @@ var art = new Artplayer({
     ],
 });
 ```
+
+## Api
+
+### enable
+
+-   Type: `Getter/Setter`
+
+Whether to enable the new control UI
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-control/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreen: true,
+    fullscreenWeb: true,
+    controls: [
+        {
+            position: 'right',
+            html: '<button type="button">Switcher UI</button>',
+            click: function () {
+                const { enable } = art.plugins.artplayerPluginControl;
+                art.plugins.artplayerPluginControl.enable = !enable;
+            },
+        },
+    ],
+    plugins: [
+        artplayerPluginControl(),
+    ],
+});
+``
