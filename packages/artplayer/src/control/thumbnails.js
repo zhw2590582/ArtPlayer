@@ -51,7 +51,7 @@ export default function thumbnails(options) {
                 }
             });
 
-            proxy($progress, 'mouseout', () => {
+            proxy($progress, 'mouseleave', () => {
                 setStyle($control, 'display', 'none');
             });
         },

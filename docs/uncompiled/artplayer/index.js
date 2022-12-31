@@ -3255,7 +3255,7 @@ function progress(options) {
                         if ((0, _utils.includeFromEvent)(event, $highlight)) showHighlight(event);
                         else showTime(event);
                     });
-                    proxy($control, "mouseout", ()=>{
+                    proxy($control, "mouseleave", ()=>{
                         (0, _utils.setStyle)($tip, "display", "none");
                     });
                     proxy($control, "mousedown", ()=>{
@@ -3438,7 +3438,7 @@ function thumbnails(options) {
                         showThumbnails(event);
                     }
                 });
-                proxy($progress, "mouseout", ()=>{
+                proxy($progress, "mouseleave", ()=>{
                     (0, _utils.setStyle)($control, "display", "none");
                 });
             }

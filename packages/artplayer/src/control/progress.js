@@ -165,7 +165,7 @@ export default function progress(options) {
                         }
                     });
 
-                    proxy($control, 'mouseout', () => {
+                    proxy($control, 'mouseleave', () => {
                         setStyle($tip, 'display', 'none');
                     });
 
