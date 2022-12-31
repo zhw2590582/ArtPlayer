@@ -1,0 +1,55 @@
+---
+title: Control Plugin
+sidebar_position: 5
+---
+
+## Demo
+
+👉 [View Demo](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-control/index.js&example=control)
+
+## Install
+
+### Install from `npm`:
+
+```bash
+$ npm install artplayer-plugin-control
+```
+
+### Install from `yarn`:
+
+```bash
+$ yarn add artplayer-plugin-control
+```
+
+### Install from `script`:
+
+```html
+<!-- local -->
+<script src="path/to/artplayer-plugin-control.js"></script>
+
+<!-- jsdelivr -->
+<script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-control/dist/artplayer-plugin-control.js"></script>
+
+<!-- unpkg -->
+<script src="https://unpkg.com/artplayer-plugin-control/dist/artplayer-plugin-control.js"></script>
+```
+
+Then you can access the plugin function through `window.artplayerPluginControl`
+
+## Use
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-control/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreen: true,
+    fullscreenWeb: true,
+    plugins: [
+        artplayerPluginControl(),
+    ],
+});
+```

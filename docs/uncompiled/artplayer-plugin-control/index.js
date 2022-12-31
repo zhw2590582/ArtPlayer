@@ -148,7 +148,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function checkVersion(art) {
-    const { version , utils: { errorHandle  }  } = art.constructor;
+    const { version , utils: { errorHandle  } ,  } = art.constructor;
     const arr = version.split(".").map(Number);
     const major = arr[0];
     const minor = arr[1] / 100;
@@ -157,7 +157,7 @@ function checkVersion(art) {
 function artplayerPluginControl() {
     return (art)=>{
         checkVersion(art);
-        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass , removeClass , hasClass  }  }  } = art;
+        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass , removeClass , hasClass  } ,  } ,  } = art;
         const className = "artplayer-plugin-control";
         addClass($player, className);
         const $current = append($bottom, `<div class="apa-control-current"></div>`);
@@ -186,7 +186,7 @@ function artplayerPluginControl() {
 exports.default = artplayerPluginControl;
 artplayerPluginControl.env = "development";
 artplayerPluginControl.version = "1.0.0";
-artplayerPluginControl.build = "2022-12-31 21:46:11";
+artplayerPluginControl.build = "2022-12-31 22:28:14";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-control")) {
         const $style = document.createElement("style");
