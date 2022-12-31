@@ -1,14 +1,14 @@
 {
     "license": "MIT",
-    "name": "artplayer",
-    "version": "4.6.0",
-    "main": "dist/artplayer.js",
-    "legacy": "dist/artplayer.legacy.js",
-    "types": "types/artplayer.d.ts",
-    "homepage": "https://artplayer.org",
+    "version": "1.0.0",
+    "name": "artplayer-plugin-control",
+    "types": "types/artplayer-plugin-control.d.ts",
+    "description": "Control plugin for ArtPlayer",
+    "main": "dist/artplayer-plugin-control.js",
+    "legacy": "dist/artplayer-plugin-control.legacy.js",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
     "browserslist": "> 0.5%, last 2 versions, not dead",
-    "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+    "homepage": "https://artplayer.org",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
@@ -20,8 +20,5 @@
         "html5",
         "video",
         "player"
-    ],
-    "dependencies": {
-        "option-validator": "^2.0.6"
-    }
+    ]
 }

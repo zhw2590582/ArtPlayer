@@ -1,0 +1,95 @@
+.artplayer-plugin-control {
+    .art-bottom {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        height: 68px;
+        max-width: 520px;
+        user-select: none;
+        border-radius: 10px;
+        transition: opacity 0.3s ease;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        font-size: 13px;
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        backdrop-filter: saturate(180%) blur(20px);
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+        background-image: none;
+        padding: 0;
+
+        .art-progress {
+            width: 65%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            .art-control-thumbnails {
+                bottom: 35px;
+            }
+
+            .art-control-progress {
+                width: 100%;
+            }
+
+            .art-progress-tip {
+                top: -40px !important;
+            }
+        }
+
+        .art-controls {
+            width: 100%;
+            height: auto;
+            flex: 1;
+            padding: 0 5px;
+
+            .art-control-time {
+                display: none;
+            }
+
+            .art-volume-panel {
+                width: 60px !important;
+            }
+        }
+
+        .art-selector-list {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+        }
+
+        .apa-control-current,
+        .apa-control-duration {
+            display: flex;
+            justify-content: center;
+            line-height: 1;
+            width: 17.5%;
+            position: absolute;
+            top: 10px;
+        }
+
+        .apa-control-current {
+            left: 0;
+        }
+
+        .apa-control-duration {
+            right: 0;
+        }
+    }
+
+    .art-settings {
+        bottom: 85px;
+    }
+
+    &.art-control-show {
+        .art-subtitle {
+            bottom: 80px;
+        }
+    }
+}
+
+.apa-control-current,
+.apa-control-duration {
+    display: none;
+}
