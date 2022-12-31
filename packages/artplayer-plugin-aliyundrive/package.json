@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "version": "1.0.6",
+    "version": "1.0.0",
     "name": "artplayer-plugin-aliyundrive",
     "types": "types/artplayer-plugin-aliyundrive.d.ts",
     "description": "Aliyundrive plugin for ArtPlayer",

@@ -1,7 +1,23 @@
 import style from 'bundle-text:./style.less';
 
+function checkVersion(art) {
+    const {
+        version,
+        utils: { errorHandle },
+    } = art.constructor;
+    const arr = version.split('.').map(Number);
+    const major = arr[0];
+    const minor = arr[1] / 100;
+    errorHandle(
+        major + minor >= 4.06,
+        `Artplayer.js@${version} is not compatible the artplayerPluginAliyundrive@${artplayerPluginAliyundrive.version}. Please update it to version Artplayer.js@4.6.x`,
+    );
+}
+
 export default function artplayerPluginAliyundrive() {
     return (art) => {
+        checkVersion(art);
+
         const {
             template: { $bottom },
             constructor: {

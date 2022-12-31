@@ -29,21 +29,14 @@
 
             .art-control-thumbnails {
                 bottom: 35px;
-                border-radius: 5px;
             }
 
             .art-control-progress {
                 width: 100%;
+            }
 
-                .art-control-progress-inner {
-                    height: 100%;
-                    border-radius: 5px;
-                }
-
-                .art-progress-loaded,
-                .art-progress-played {
-                    border-radius: 5px;
-                }
+            .art-progress-tip {
+                top: -40px !important;
             }
         }
 
@@ -60,6 +53,10 @@
             .art-volume-panel {
                 width: 60px !important;
             }
+        }
+
+        .art-selector-list {
+            background-color: rgba(0, 0, 0, 0.8) !important;
         }
 
         .apa-control-current,
@@ -79,6 +76,11 @@
         .apa-control-duration {
             right: 0;
         }
+    }
+
+    .apa-control-current,
+    .apa-control-duration {
+        display: none;
     }
 
     &.art-control-show {

@@ -147,8 +147,16 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
+function checkVersion(art) {
+    const { version , utils: { errorHandle  }  } = art.constructor;
+    const arr = version.split(".").map(Number);
+    const major = arr[0];
+    const minor = arr[1] / 100;
+    errorHandle(major + minor >= 4.06, `Artplayer.js@${version} is not compatible the artplayerPluginAliyundrive@${artplayerPluginAliyundrive.version}. Please update it to version Artplayer.js@4.6.x`);
+}
 function artplayerPluginAliyundrive() {
     return (art)=>{
+        checkVersion(art);
         const { template: { $bottom  } , constructor: { utils: { append , secondToTime , addClass  }  }  } = art;
         addClass($bottom, "artplayer-plugin-aliyundrive");
         const $current = append($bottom, `<div class="apa-control-current"></div>`);
@@ -169,8 +177,8 @@ function artplayerPluginAliyundrive() {
 }
 exports.default = artplayerPluginAliyundrive;
 artplayerPluginAliyundrive.env = "development";
-artplayerPluginAliyundrive.version = "1.0.6";
-artplayerPluginAliyundrive.build = "2022-12-31 10:36:57";
+artplayerPluginAliyundrive.version = "1.0.0";
+artplayerPluginAliyundrive.build = "2022-12-31 19:56:02";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-aliyundrive")) {
         const $style = document.createElement("style");
@@ -182,7 +190,7 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") window["artplayerPluginAliyundrive"] = artplayerPluginAliyundrive;
 
 },{"bundle-text:./style.less":"5Amth","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5Amth":[function(require,module,exports) {
-module.exports = ".art-video-player .artplayer-plugin-aliyundrive {\n  height: 68px;\n  max-width: 520px;\n  user-select: none;\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000b3;\n  background-image: none;\n  border-radius: 10px;\n  flex-direction: column;\n  align-items: center;\n  padding: 0;\n  font-size: 13px;\n  transition: opacity .3s;\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  transform: translateX(-50%);\n  box-shadow: 0 10px 15px -3px #0003, 0 4px 6px -4px #0003;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress {\n  width: 70%;\n  justify-content: space-between;\n  align-items: center;\n  gap: 10px;\n  display: flex;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress .art-control-thumbnails {\n  border-radius: 5px;\n  bottom: 35px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress .art-control-progress {\n  width: 100%;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress .art-control-progress .art-control-progress-inner {\n  height: 100%;\n  border-radius: 5px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress .art-control-progress .art-progress-loaded, .art-video-player .artplayer-plugin-aliyundrive .art-progress .art-control-progress .art-progress-played {\n  border-radius: 5px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-controls {\n  width: 100%;\n  height: auto;\n  flex: 1;\n  padding: 0 5px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-controls .art-control-time {\n  display: none;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-controls .art-volume-panel {\n  width: 60px !important;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control-current, .art-video-player .artplayer-plugin-aliyundrive .apa-control-duration {\n  width: 15%;\n  justify-content: center;\n  line-height: 1;\n  display: flex;\n  position: absolute;\n  top: 10px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control-current {\n  left: 0;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control-duration {\n  right: 0;\n}\n\n.art-video-player.art-control-show .art-subtitle {\n  bottom: 80px;\n}\n\n";
+module.exports = ".art-video-player .artplayer-plugin-aliyundrive {\n  height: 68px;\n  max-width: 520px;\n  user-select: none;\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000b3;\n  background-image: none;\n  border-radius: 10px;\n  flex-direction: column;\n  align-items: center;\n  padding: 0;\n  font-size: 13px;\n  transition: opacity .3s;\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  transform: translateX(-50%);\n  box-shadow: 0 10px 15px -3px #0003, 0 4px 6px -4px #0003;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress {\n  width: 70%;\n  justify-content: space-between;\n  align-items: center;\n  gap: 10px;\n  display: flex;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress .art-control-thumbnails {\n  bottom: 35px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress .art-control-progress {\n  width: 100%;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-progress .art-progress-tip {\n  top: -40px !important;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-controls {\n  width: 100%;\n  height: auto;\n  flex: 1;\n  padding: 0 5px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-controls .art-control-time {\n  display: none;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-controls .art-volume-panel {\n  width: 60px !important;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .art-selector-list {\n  background-color: #000c !important;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control-current, .art-video-player .artplayer-plugin-aliyundrive .apa-control-duration {\n  width: 15%;\n  justify-content: center;\n  line-height: 1;\n  display: flex;\n  position: absolute;\n  top: 10px;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control-current {\n  left: 0;\n}\n\n.art-video-player .artplayer-plugin-aliyundrive .apa-control-duration {\n  right: 0;\n}\n\n.art-video-player .apa-control-current, .art-video-player .apa-control-duration {\n  display: none;\n}\n\n.art-video-player.art-control-show .art-subtitle {\n  bottom: 80px;\n}\n\n";
 
 },{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
