@@ -21,9 +21,11 @@ export default function artplayerPluginControl() {
         const {
             template: { $bottom, $player },
             constructor: {
-                utils: { append, secondToTime, addClass, removeClass, hasClass },
+                utils: { append, secondToTime, addClass, removeClass, hasClass, isMobile },
             },
         } = art;
+
+        if (isMobile) return;
 
         const className = 'artplayer-plugin-control';
         addClass($player, className);

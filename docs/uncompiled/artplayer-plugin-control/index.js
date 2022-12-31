@@ -157,7 +157,8 @@ function checkVersion(art) {
 function artplayerPluginControl() {
     return (art)=>{
         checkVersion(art);
-        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass , removeClass , hasClass  } ,  } ,  } = art;
+        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass , removeClass , hasClass , isMobile  } ,  } ,  } = art;
+        if (isMobile) return;
         const className = "artplayer-plugin-control";
         addClass($player, className);
         const $current = append($bottom, `<div class="apa-control-current"></div>`);
@@ -186,7 +187,7 @@ function artplayerPluginControl() {
 exports.default = artplayerPluginControl;
 artplayerPluginControl.env = "development";
 artplayerPluginControl.version = "1.0.0";
-artplayerPluginControl.build = "2022-12-31 23:39:50";
+artplayerPluginControl.build = "2022-12-31 23:46:57";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-control")) {
         const $style = document.createElement("style");
