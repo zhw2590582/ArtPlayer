@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2022-12-31 23:43:36";
+        return "2023-01-01 10:14:01";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3440,6 +3440,9 @@ function thumbnails(options) {
                 });
                 proxy($progress, "mouseleave", ()=>{
                     (0, _utils.setStyle)($control, "display", "none");
+                });
+                art.on("hover", (state)=>{
+                    if (!state) (0, _utils.setStyle)($control, "display", "none");
                 });
             }
         });
