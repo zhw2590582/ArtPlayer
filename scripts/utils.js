@@ -15,7 +15,12 @@ export function formatDate(date) {
 export function getProjects() {
     return glob
         .sync('packages/*')
-        .filter((item) => !item.endsWith('artplayer-document') && !item.endsWith('artplayer-template'))
+        .filter(
+            (item) =>
+                !item.endsWith('artplayer-document') &&
+                !item.endsWith('artplayer-template') &&
+                !item.endsWith('artplayer-vitepress'),
+        )
         .reduce((result, item) => {
             const name = item.split(/\/|\\/g).pop();
             result[name] = path.resolve(process.cwd(), item);
