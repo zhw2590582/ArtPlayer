@@ -21,7 +21,6 @@ const config = {
           { text: 'Item B', link: '/item-2' },
           { text: 'Item C', link: '/item-3' },
           {
-            // You may also omit the title.
             items: [
               { text: 'Section A Item A', link: '...' },
               { text: 'Section B Item B', link: '...' }
@@ -66,7 +65,11 @@ const config = {
   head: [
     [
       'script',
-      { src:"/main.js" }
+      { src:"/docs/main.js" }
+    ],
+    [
+      'link',
+      { rel:"shortcut icon", href: "/docs/favicon.ico" }
     ]
   ]
 }
