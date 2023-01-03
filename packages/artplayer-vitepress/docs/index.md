@@ -2,6 +2,11 @@
 
 ## Hello VitePress
 
+### Title <Badge type="info" text="default" />
+### Title <Badge type="tip" text="^1.9.0" />
+### Title <Badge type="warning" text="beta" />
+### Title <Badge type="danger" text="caution" />
+
 ## Hello VitePress
 
 ## Hello VitePress
@@ -63,3 +68,8 @@ const line3 = 'This is line 3'
 const line2 = 'This is line 2'
 const line3 = 'This is line 3'
 ```
+
+---
+title: Docs with VitePress
+editLink: true
+---
