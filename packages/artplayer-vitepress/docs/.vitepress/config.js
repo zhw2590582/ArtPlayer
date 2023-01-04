@@ -2,7 +2,7 @@
  * @type {import('vitepress').UserConfig}
  */
 const config = {
-  base: '/docs/',
+  base: '/document/',
   title: 'Artplayer',
   appearance: 'dark',
   lastUpdated: true,
@@ -11,26 +11,19 @@ const config = {
     siteTitle: 'Artplayer',
     logo: '/logo.png',
     nav: [
-      { text: 'Guide', link: '/guide' },
-      { text: 'Configs', link: '/configs' },
-      { text: 'Changelog', link: 'https://github.com/...' },
+      { text: '🚩中文版', link: '/' },
+      { text: '🚩English', link: '/en/' },
+      { text: 'Online Editor', link: 'https://artplayer.org' },
+      { text: 'QQ群: 320881312', link: '#' },
       {
-        text: 'Dropdown Menu',
+        text: '4.6.0',
         items: [
-          { text: 'Item A', link: '/item-1' },
-          { text: 'Item B', link: '/item-2' },
-          { text: 'Item C', link: '/item-3' },
-          {
-            items: [
-              { text: 'Section A Item A', link: '...' },
-              { text: 'Section B Item B', link: '...' }
-            ]
-          }
+          { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG_CN.md' },
         ]
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'github', link: 'https://github.com/zhw2590582/ArtPlayer' },
     ],
     sidebar: [
       {
@@ -51,13 +44,9 @@ const config = {
       }
     ],
     editLink: {
-      pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
+      pattern: 'https://github.com/zhw2590582/ArtPlayer/packages/artplayer-vitepress/docs/:path',
       text: 'Edit this page on GitHub'
     },
-    footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2019-present Evan You'
-    }
   },
   markdown: {
     lineNumbers: true
