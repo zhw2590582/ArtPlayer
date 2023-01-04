@@ -3,12 +3,12 @@
  */
 const config = {
   base: '/document/',
-  title: 'Artplayer',
+  title: 'Artplayer.js',
   appearance: 'dark',
   lastUpdated: true,
   description: 'ArtPlayer.js is a modern and full featured HTML5 video player',
   themeConfig: {
-    siteTitle: 'Artplayer',
+    siteTitle: 'Artplayer.js',
     logo: '/logo.png',
     nav: [
       { text: '中文版', link: '/' },
@@ -16,7 +16,7 @@ const config = {
       { text: 'Online Editor', link: 'https://artplayer.org' },
       { text: 'QQ群: 320881312', link: '#' },
       {
-        text: '4.6.0',
+        text: '4.6.x',
         items: [
           { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG_CN.md' },
         ]
