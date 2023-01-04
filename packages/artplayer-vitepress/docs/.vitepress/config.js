@@ -41,6 +41,7 @@ const config = {
           items: [
             { text: '实例属性', link: '/advanced/property' },
             { text: '实例事件', link: '/advanced/event' },
+            { text: '内置属性', link: '/advanced/built-in' },
             { text: '静态属性', link: '/advanced/class' },
             { text: '全局属性', link: '/advanced/global' },
           ]
@@ -52,8 +53,8 @@ const config = {
             { text: '弹幕库', link: '/plugin/danmuku' },
             { text: '广告', link: '/plugin/ads' },
             { text: 'Iframe', link: '/plugin/iframe' },
-            { text: 'Hls 画质', link: '/plugin/hls' },
-            { text: '控制器 UI', link: '/plugin/control' },
+            { text: 'Hls 画质', link: '/plugin/hls-quality' },
+            { text: '控制器 UI', link: '/plugin/control-ui' },
           ]
         },
         {
@@ -63,6 +64,15 @@ const config = {
             { text: 'hls.js', link: '/library/hls' },
             { text: 'flv.js', link: '/library/flv' },
             { text: 'dash.js', link: '/library/dash' },
+          ]
+        },
+        {
+          text: '常见问题',
+          collapsible: true,
+          items: [
+            { text: '问题1', link: '/question/hls' },
+            { text: '问题2', link: '/question/flv' },
+            { text: '问题3', link: '/question/dash' },
           ]
         },
       ],
@@ -81,6 +91,7 @@ const config = {
           items: [
             { text: 'Instance Properties', link: '/en/advanced/property' },
             { text: 'Instance Events', link: '/en/advanced/event' },
+            { text: 'Built In Properties', link: '/advanced/built-in' },
             { text: 'Static Properties', link: '/en/advanced/class' },
             { text: 'Global Properties', link: '/en/advanced/global' },
           ]
@@ -92,8 +103,8 @@ const config = {
             { text: 'Danmuku', link: '/en/plugin/danmuku' },
             { text: 'Ads', link: '/en/plugin/ads' },
             { text: 'Iframe', link: '/en/plugin/iframe' },
-            { text: 'Hls Quality', link: '/en/plugin/hls' },
-            { text: 'Control UI', link: '/en/plugin/control' },
+            { text: 'Hls Quality', link: '/en/plugin/hls-quality' },
+            { text: 'Control UI', link: '/en/plugin/control-ui' },
           ]
         },
         {
@@ -103,6 +114,15 @@ const config = {
             { text: 'hls.js', link: '/en/library/hls' },
             { text: 'flv.js', link: '/en/library/flv' },
             { text: 'dash.js', link: '/en/library/dash' },
+          ]
+        },
+        {
+          text: 'Questions',
+          collapsible: true,
+          items: [
+            { text: 'question1', link: '/question/1' },
+            { text: 'question2', link: '/question/2' },
+            { text: 'question3', link: '/question/3' },
           ]
         },
       ],
