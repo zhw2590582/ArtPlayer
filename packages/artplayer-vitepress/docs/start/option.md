@@ -1197,7 +1197,7 @@ var art = new Artplayer({
 
 :::tip i18n 写法参考
 
-https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts
+[artplayer/types/i18n.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts)
 
 :::
 

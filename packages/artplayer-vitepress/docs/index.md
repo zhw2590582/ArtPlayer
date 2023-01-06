@@ -77,7 +77,7 @@ const art = new Artplayer({
 
 ::: tip 以下链接可以看到更多的使用例子
 
-https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template
+[/packages/artplayer-template](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-template)
 
 :::
 
