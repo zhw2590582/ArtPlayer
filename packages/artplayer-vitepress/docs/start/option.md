@@ -23,6 +23,12 @@ var art = new Artplayer({
 }
 ```
 
+:::tip 提示
+
+全部选项里，只有 `container` 是必填的
+
+:::
+
 ## url
 
 -   类型: `String`
@@ -39,7 +45,36 @@ var art = new Artplayer({
 });
 ```
 
+有时候 `url` 地址没那么快知道，这时候你可以异步设置 `url`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+});
+
+setTimeout(() => {
+    art.url = '/assets/sample/video.mp4';
+}, 1000);
+```
+
 ## id
+
+-   类型: `String`
+-   默认: `''`
+
+播放器的唯一标识，目前主要用于视频的记忆播放
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    id: 'artplayer-01',
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+```
 
 ## Ready Callback
 
