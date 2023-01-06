@@ -31,7 +31,7 @@ const config = {
           text: '开始',
           collapsible: true,
           items: [
-            { text: '安装使用', link: '/start/install' },
+            { text: '安装使用', link: '/' },
             { text: '基础选项', link: '/start/option' },
           ]
         },
@@ -81,7 +81,7 @@ const config = {
           text: 'Quick start',
           collapsible: true,
           items: [
-            { text: 'Install', link: '/en/start/install' },
+            { text: 'Install', link: '/en/' },
             { text: 'Option', link: '/en/start/option' },
           ]
         },
