@@ -1,6 +1,6 @@
 # 设置面板
 
-需先打开设置面板，播放器默认自带三个设置项：`flip`、`playbackRate`、`aspectRatio`
+需先打开设置面板，播放器默认自带四个设置项：`flip`、`playbackRate`、`aspectRatio`、`subtitleOffset`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -12,6 +12,7 @@ var art = new Artplayer({
     flip: true,
     playbackRate: true,
     aspectRatio: true,
+    subtitleOffset: true,
 });
 ```
 

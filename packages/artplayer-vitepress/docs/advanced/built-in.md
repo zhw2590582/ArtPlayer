@@ -4,7 +4,7 @@
 
 ## whitelist
 
-管理移动设备的白名单功能，当前只有一个属性 `state` 返回是否启用播放器功能
+管理移动设备的白名单功能，只有一个属性 `state` 返回是否启用播放器功能
 
 <div className="run-code">▶ Run Code</div>
 
@@ -51,7 +51,11 @@ console.log(art.template.$video);
 
 ## events
 
-管理播放器所有的 `DOM` 事件
+管理播放器所有的 `DOM` 事件，实质上是代理了 `addEventListener` 和 `removeEventListener`, 当使用以下方法来处理事件，播放器销毁时也会自动销毁该事件
+
+- `proxy` 方法用于代理 `DOM` 事件
+- `hover` 方法用于代理自定义的 `hover` 事件
+- `loadImg` 方法用于监听图片的 `load` 加载事件
 
 <div className="run-code">▶ Run Code</div>
 
@@ -87,6 +91,12 @@ art.events.loadImg('/assets/sample/poster.jpg').then(img => {
 ## storage
 
 管理播放器的本地存储
+
+- `name` 属性用于设置缓存的 `key`
+- `set` 方法用于设置缓存
+- `get` 方法用于获取缓存
+- `del` 方法用于删除缓存
+- `clear` 方法用于清空缓存
 
 <div className="run-code">▶ Run Code</div>
 
@@ -148,6 +158,9 @@ console.log(art.icons.loading);
 
 管理播放器的 `i18n`
 
+- `get` 方法用于获取 `i18n` 的值
+- `update` 方法用于更新 `i18n` 对象
+
 <div className="run-code">▶ Run Code</div>
 
 ```js
@@ -174,7 +187,7 @@ art.i18n.update({
 
 ## notice
 
-管理播放器的提示语，只有一个 `show` 属性
+管理播放器的提示语，只有一个 `show` 属性用于显示提示语
 
 <div className="run-code">▶ Run Code</div>
 
@@ -401,6 +414,70 @@ art.on('ready', () => {
 
 ## setting
 
+管理播放器的设置面板
+
+- `add` 方法用于动态添加设置项
+- `show` 属性用于设置是否显示全部设置项
+- `toggle` 属性用于切换是否显示全部设置项
+- `update` 方法动态更新设置项
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+    flip: true,
+    playbackRate: true,
+    aspectRatio: true,
+    subtitleOffset: true,
+});
+
+art.on('ready', () => {
+    art.setting.show = true;
+	setTimeout(() => {
+		art.setting.show = false;
+	}, 1000);
+});
+```
+
+:::warning `设置面板` 请参考以下地址
+
+[/start/setting.html](/start/setting.html)
+
+:::
+
 ## plugins
 
-## mobile
+管理播放器的插件功能，只有一个方法 `add` 用于动态添加插件
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+function myPlugin(art) {
+    console.info('你可以在插件里访问到播放器的实例');
+    return {
+        name: 'myPlugin',
+        something: '自定义导出的属性',
+        doSomething: function () {
+            console.info('自定义导出的方法');
+        },
+    };
+}
+
+art.on('ready', () => {
+    art.plugins.add(myPlugin);
+});
+```
+
+:::warning 编写插件请参考以下地址
+
+[/question/plugin.html](/question/plugin.html)
+
+:::

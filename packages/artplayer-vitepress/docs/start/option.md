@@ -627,7 +627,6 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-
 [/start/component.html](/start/component.html)
 
 :::
@@ -681,7 +680,6 @@ var art = new Artplayer({
 
 :::warning `设置面板` 请参考以下地址
 
-
 [/start/setting.html](/start/setting.html)
 
 :::
@@ -712,7 +710,6 @@ var art = new Artplayer({
 ```
 
 :::warning `组件配置` 请参考以下地址：
-
 
 [/start/component.html](/start/component.html)
 
@@ -748,7 +745,6 @@ var art = new Artplayer({
 ```
 
 :::warning `组件配置` 请参考以下地址：
-
 
 [/start/component.html](/start/component.html)
 
@@ -859,7 +855,6 @@ var art = new Artplayer({
 ```
 
 :::warning 编写插件请参考以下地址
-
 
 [/question/plugin.html](/question/plugin.html)
 
