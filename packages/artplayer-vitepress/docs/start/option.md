@@ -6,11 +6,13 @@
 -   默认: `#artplayer`
 -   必填: `是`
 
+播放器挂载的 `dom` 容器
+
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{2}
 var art = new Artplayer({
-    container: '.artplayer-app',
+    container: '.artplayer-app', 
     // container: document.querySelector('.artplayer-app'),
     url: '/assets/sample/video.mp4',
 });
@@ -18,7 +20,7 @@ var art = new Artplayer({
 
 您可能需要初始化容器元素的大小，如:
 
-```css
+```css{2-3}
 .artplayer-app {
     width: 400px;
     height: 300px;
@@ -40,7 +42,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{3}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -51,7 +53,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{6}
 var art = new Artplayer({
     container: '.artplayer-app',
 });
@@ -70,7 +72,7 @@ setTimeout(() => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{2}
 var art = new Artplayer({
     id: 'artplayer-01',
     container: '.artplayer-app',
@@ -87,7 +89,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{7-9}
 var art = new Artplayer(
     {
         container: '.artplayer-app',
@@ -115,7 +117,7 @@ var art = new Artplayer(
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -132,7 +134,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -150,7 +152,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -167,7 +169,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -190,7 +192,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -208,7 +210,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -225,7 +227,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -249,8 +251,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
-// 缩放浏览器窗口查看效果
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -267,7 +268,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -284,7 +285,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -301,7 +302,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -319,7 +320,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -337,7 +338,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -355,7 +356,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -382,7 +383,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -399,7 +400,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -430,7 +431,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -447,7 +448,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -464,7 +465,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -481,7 +482,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -498,15 +499,15 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    subtitleOffset: true,
     subtitle: {
         url: '/assets/sample/subtitle.srt',
     },
     setting: true,
-    subtitleOffset: true,
 });
 ```
 
@@ -519,7 +520,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -538,7 +539,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{7}
 var $container = document.querySelector('.artplayer-app');
 $container.innerHTML = Artplayer.html;
 
@@ -558,7 +559,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -575,7 +576,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{5-23}
 var img = '/assets/sample/layer.png';
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -618,7 +619,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{5-34}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -672,7 +673,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-12}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
