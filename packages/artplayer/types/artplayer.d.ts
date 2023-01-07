@@ -107,6 +107,7 @@ declare class Artplayer extends Player {
     };
 
     readonly storage: {
+        name: String;
         settings: Record<string, any>;
         get(key: string): any;
         set(key: string, value: any): void;

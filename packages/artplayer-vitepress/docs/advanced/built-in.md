@@ -56,12 +56,26 @@ console.log(art.template.$video);
 <div className="run-code">▶ Run Code</div>
 
 ```js
+var container = document.querySelector('.artplayer-app');
+
 var art = new Artplayer({
-    container: '.artplayer-app',
+    container: container,
     url: '/assets/sample/video.mp4',
 });
 
-console.log(art.events);
+art.events.proxy(container, 'click', event => {
+	console.log('click', event);
+});
+
+art.events.hover(container, (event) => {
+    console.log('mouseenter', event);
+}, (event) => {
+    console.log('mouseleave', event);
+});
+
+art.events.loadImg('/assets/sample/poster.jpg').then(img => {
+    console.log('loadImg', img);
+});
 ```
 
 :::warning 提示
@@ -72,29 +86,318 @@ console.log(art.events);
 
 ## storage
 
+管理播放器的本地存储
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.storage.set('test', { foo: 'bar' });
+const test = art.storage.get('test');
+console.log(test);
+art.storage.del('test');
+art.storage.clear();
+```
+
+:::warning 提示
+
+默认所有播放器实例都是共享同一个 `localStorage` 的，而且默认的 `key` 是 `artplayer_settings`
+
+如果你想不同的播放器使用不同的 `localStorage`，你可以修改 `art.storage.name` 即可
+
+:::
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.storage.name = 'your-storage-key'
+art.storage.set('test', { foo: 'bar' });
+```
+
 ## icons
+
+管理播放器所有的 `svg` 图标
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+console.log(art.icons.loading);
+```
+
+:::warning 这是所有图标的定义：
+
+[artplayer/types/icons.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts)
+
+:::
 
 ## i18n
 
+管理播放器的 `i18n`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+console.log(art.i18n.get('Play'));
+
+art.i18n.update({
+    'zh-cn': {
+        Play: '你的播放'
+    }
+});
+```
+
+:::warning
+
+使用 `art.i18n.update` 只能更新实例化之后的 `i18n`，假如想在实例化之前更新 `i18n`，请使用基础选项的 `i18n` 来更新
+
+:::
+
+
 ## notice
 
-## player
+管理播放器的提示语，只有一个 `show` 属性
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.notice.show = '视频准备就绪';
+})
+```
+
+:::warning
+
+如果想马上隐藏 `notice` 的显示：`art.notice.show = '';`
+
+:::
 
 ## layers
 
+管理播放器的层
+
+- `add` 方法用于动态添加层
+- `show` 属性用于设置是否显示全部层
+- `toggle` 属性用于切换是否显示全部层
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.layers.add({
+        html: '文字',
+    });
+
+	setTimeout(() => {
+		art.layers.show = false;
+	}, 1000);
+});
+```
+
+:::warning `组件配置` 请参考以下地址：
+
+[/start/component.html](/start/component.html)
+
+:::
+
 ## controls
+
+管理播放器的控制器
+
+- `add` 方法用于动态添加控制器
+- `show` 属性用于设置是否显示全部控制器
+- `toggle` 属性用于切换是否显示全部控制器
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.controls.add({
+        html: '文字',
+        position: 'left',
+    });
+
+	setTimeout(() => {
+		art.controls.show = false;
+	}, 1000);
+});
+```
+
+:::warning `组件配置` 请参考以下地址：
+
+[/start/component.html](/start/component.html)
+
+:::
 
 ## contextmenu
 
+管理播放器的右键菜单
+
+- `add` 方法用于动态添加菜单
+- `show` 属性用于设置是否显示全部菜单
+- `toggle` 属性用于切换是否显示全部菜单
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.contextmenu.add({
+        html: '文字',
+    });
+
+    art.contextmenu.show = true;
+	setTimeout(() => {
+		art.contextmenu.show = false;
+	}, 1000);
+});
+```
+
+:::warning `组件配置` 请参考以下地址：
+
+[/start/component.html](/start/component.html)
+
+:::
+
 ## subtitle
 
-## info
+管理播放器的字幕功能
+
+- `url` 属性设置和返回当前字幕地址
+- `style` 方法设置当前字幕的样式
+- `switch` 方法设置当前字幕地址和选项
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.subtitle.url = '/assets/sample/subtitle.srt'
+    art.subtitle.style({
+        color: 'red',
+    });
+});
+```
 
 ## loading
 
+管理播放器的加载层
+
+- `show` 属性用于设置是否显示加载层
+- `toggle` 属性用于切换是否显示加载层
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.loading.show = true;
+	setTimeout(() => {
+		art.loading.show = false;
+	}, 1000);
+});
+```
+
 ## hotkey
 
+管理播放器的快捷键功能
+
+- `add` 方法用于添加快捷键
+- `remove` 方法用于删除快捷键
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+function hotkeyEvent(event) {
+    console.log('你点击了空格键', event);
+}
+
+art.on('ready', () => {
+    art.hotkey.add(32, hotkeyEvent);
+    setTimeout(() => {
+		art.hotkey.remove(32, hotkeyEvent);
+	}, 5000);
+});
+```
+
+:::warning 提示
+
+只在播放器获得焦点后（如点击了播放器后），这些快捷键才会生效
+
+:::
+
 ## mask
+
+管理播放器的遮罩层
+
+- `show` 属性用于设置是否显示遮罩层
+- `toggle` 属性用于切换是否显示遮罩层
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.mask.show = false;
+	setTimeout(() => {
+		art.mask.show = true;
+	}, 1000);
+});
+```
 
 ## setting
 
