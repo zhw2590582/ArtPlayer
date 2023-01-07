@@ -5,7 +5,7 @@
 -   类型: `String、Element`
 -   默认: `#artplayer`
 
-播放器挂载的 `dom` 容器
+播放器挂载的 `DOM` 容器
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1049,7 +1049,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.m3u8',
     customType: {
         m3u8: function (video, url, art) {
-            // video: 视频 dom 元素
+            // video: 视频 DOM 元素
             // url: 视频地址
             // art: 当前实例
         },

@@ -841,3 +841,64 @@ art.on('video:timeupdate', () => {
     console.info(art.played);
 });
 ```
+
+## proxy
+
+-   类型: `Function`
+
+`DOM` 事件的代理函数，实质上代理了 `addEventListener` 和 `removeEventListener`, 当使用 `proxy` 来处理事件，播放器销毁时也会自动销毁该事件
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7-10}
+var container = document.querySelector('.artplayer-app');
+
+var art = new Artplayer({
+	container: container,
+	url: '/assets/sample/video.mp4',
+});
+
+art.proxy(container, 'click', event => {
+	console.log(event);
+});
+```
+
+:::warning 提示
+
+假如你需要一些 `DOM` 事件只存在于播放器的生命周期上时，强烈建议使用该函数，以避免造成内存泄漏
+
+:::
+
+## query
+
+-   类型: `Function`
+
+`DOM` 的查询函数，类似 `document.querySelector`，但被查询的对象局限于当前播放器内，可以避免同类名的错误
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+	container: '.artplayer-app',
+	url: '/assets/sample/video.mp4',
+});
+
+console.log(art.query('.art-video'));
+```
+
+## video
+
+-   类型: `Element`
+
+快捷返回播放器的 `video` 元素
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+	container: '.artplayer-app',
+	url: '/assets/sample/video.mp4',
+});
+
+console.log(art.video);
+```
