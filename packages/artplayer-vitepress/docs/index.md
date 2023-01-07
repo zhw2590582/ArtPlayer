@@ -81,7 +81,7 @@ const art = new Artplayer({
 
 :::
 
-## `Vue.js` 或 `Nuxt.js`
+## Vue.js
 
 ::: code-group
 
@@ -165,7 +165,7 @@ export default {
 
 :::
 
-## `React.js` 或 `Next.js`
+## React.js
 
 ::: code-group
 
