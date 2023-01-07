@@ -38,7 +38,7 @@ var art = new Artplayer({
 -   类型: `String`
 -   默认: `''`
 
-视频源地址，默认支持三种视频文件格式：`.mp4`、`.ogg`、`.webm`
+视频源地址
 
 <div className="run-code">▶ Run Code</div>
 
@@ -63,18 +63,27 @@ setTimeout(() => {
 }, 1000);
 ```
 
+:::warning 提示
+
+默认支持三种视频文件格式：`.mp4`、`.ogg`、`.webm`
+
+如需要播放 `.m3u8` 或者 `.flv` 等其它格式，请参考左侧的 `第三方库`
+
+:::
+
+
 ## id
 
 -   类型: `String`
 -   默认: `''`
 
-播放器的唯一标识，目前主要用于记忆播放的标识
+播放器的唯一标识，目前只用于记忆播放 `autoplayback`
 
 <div className="run-code">▶ Run Code</div>
 
 ```js{2}
 var art = new Artplayer({
-    id: 'artplayer-01',
+    id: 'your-url-id',
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
 });
@@ -100,6 +109,20 @@ var art = new Artplayer(
         this.play();
     },
 );
+```
+
+等同于:
+
+```js{7-9}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    muted: true,
+});
+
+art.on('ready', () => {
+    art.play();
+});
 ```
 
 :::warning 提示
@@ -130,7 +153,7 @@ var art = new Artplayer({
 -   类型: `String`
 -   默认: `''`
 
-视频标题，目前会出现在视频截图和迷你模式下
+视频标题，目前会出现在 `视频截图` 和 `迷你模式` 下
 
 <div className="run-code">▶ Run Code</div>
 
@@ -148,7 +171,7 @@ var art = new Artplayer({
 -   类型: `String`
 -   默认: `#f00`
 
-播放器主题颜色，目前作用于进度条和高亮元素上
+播放器主题颜色，目前作用于 `进度条` 和 `高亮元素` 上
 
 <div className="run-code">▶ Run Code</div>
 
@@ -264,7 +287,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-当播放器滚动到浏览器视口以外时，自动进入迷你播放模式
+当播放器滚动到浏览器视口以外时，自动进入 `迷你播放` 模式
 
 <div className="run-code">▶ Run Code</div>
 
@@ -352,7 +375,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否在底部控制栏里显示视频截图功能
+是否在底部控制栏里显示 `视频截图` 功能
 
 <div className="run-code">▶ Run Code</div>
 
@@ -379,7 +402,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否在底部控制栏里显示设置面板的开关按钮
+是否在底部控制栏里显示 `设置面板` 的开关按钮
 
 <div className="run-code">▶ Run Code</div>
 
@@ -427,7 +450,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否在底部控制栏里显示画中画的开关按钮
+是否在底部控制栏里显示 `画中画` 的开关按钮
 
 <div className="run-code">▶ Run Code</div>
 
@@ -461,7 +484,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否在底部控制栏里显示播放器窗口全屏按钮
+是否在底部控制栏里显示播放器 `窗口全屏` 按钮
 
 <div className="run-code">▶ Run Code</div>
 
@@ -478,7 +501,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否在底部控制栏里显示播放器网页全屏按钮
+是否在底部控制栏里显示播放器 `网页全屏` 按钮
 
 <div className="run-code">▶ Run Code</div>
 
@@ -555,7 +578,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `true`
 
-在移动端是否使用 playsInline 模式
+在移动端是否使用 `playsInline` 模式
 
 <div className="run-code">▶ Run Code</div>
 
@@ -572,7 +595,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的业务图层
+初始化自定义的 `图层`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -615,7 +638,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的设置面板
+初始化自定义的 `设置面板`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -669,7 +692,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的右键菜单
+初始化自定义的 `右键菜单`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -687,10 +710,6 @@ var art = new Artplayer({
         },
     ],
 });
-
-art.on('ready', () => {
-    art.contextmenu.show = true;
-});
 ```
 
 :::warning `组件配置` 请参考以下地址：
@@ -705,32 +724,15 @@ art.on('ready', () => {
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的底部控制栏
+初始化自定义的底部 `控制栏`
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-16}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     controls: [
-        {
-            disable: false,
-            name: 'button',
-            index: 10,
-            position: 'right',
-            html: '自定义按钮',
-            tooltip: '自定义按钮的提示1',
-            style: {
-                color: 'red',
-            },
-            click: function () {
-                console.log('你点击了自定义按钮1');
-            },
-            mounted: function () {
-                console.log('自定义按钮挂载完成1');
-            },
-        },
         {
             position: 'left',
             html: '自定义按钮2',
@@ -758,7 +760,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-是否在底部控制栏里显示画质选择列表
+是否在底部控制栏里显示 `画质选择` 列表
 
 | 属性      | 类型      | 描述     |
 | --------- | --------- | -------- |
@@ -768,7 +770,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-14}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -791,7 +793,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-在进度条上显示高亮信息点
+在进度条上显示 `高亮信息`
 
 | 属性   | 类型     | 描述               |
 | ------ | -------- | ------------------ |
@@ -800,7 +802,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-25}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -834,11 +836,11 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的插件
+初始化自定义的 `插件`
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{15}
 function myPlugin(art) {
     console.info('你可以在插件里访问到播放器的实例');
     return {
@@ -854,11 +856,6 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     plugins: [myPlugin],
-});
-
-art.on('ready', () => {
-    console.info(art.plugins.myPlugin.something);
-    console.info(art.plugins.myPlugin.doSomething());
 });
 ```
 
@@ -882,11 +879,11 @@ art.on('ready', () => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
+    whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
     // whitelist: [/iPhone OS 11/gi],
     // whitelist: ['iPhone OS 11'],
 });
@@ -903,7 +900,7 @@ var art = new Artplayer({
 -   类型: `Object`
 -   默认: `{}`
 
-在进度条上设置预览图
+在进度条上设置 `预览图`
 
 | 属性     | 类型     | 描述       |
 | -------- | -------- | ---------- |
@@ -915,7 +912,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-8}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -949,7 +946,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-12}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -974,7 +971,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-7}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -994,7 +991,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-7}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -1020,7 +1017,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.m3u8',
@@ -1047,13 +1044,13 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-10}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.m3u8',
     customType: {
         m3u8: function (video, url, art) {
-            // video: 视频dom元素
+            // video: 视频 dom 元素
             // url: 视频地址
             // art: 当前实例
         },
@@ -1070,7 +1067,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -1087,7 +1084,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{5-10}
 // 新增你的语言
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -1103,7 +1100,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{5-12}
 // 或者修改现有的语言
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -1130,11 +1127,11 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否在移动端显示一个锁定按钮，用于隐藏底部控制栏
+是否在移动端显示一个 `锁定按钮` ，用于隐藏底部 `控制栏`
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -1151,7 +1148,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -1164,17 +1161,26 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否使用自动回放功能
+是否使用自动 `回放功能`
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4-5}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
+    id: 'your-url-id',
     autoPlayback: true,
 });
 ```
+
+:::warning 提示
+
+因为播放器默认使用 `url` 作为 `key` 来缓存播放进度的
+
+但假如你的同一个视频的 `url` 是不同的话，那么你需要使用 `id` 来标识视频的唯一 `key`
+
+:::
 
 ## autoOrientation
 
@@ -1185,7 +1191,7 @@ var art = new Artplayer({
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -1198,11 +1204,11 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否显示 airplay 按钮，当前只在 Safari 下可用
+是否显示 `airplay` 按钮，当前只有部分浏览器支持该功能
 
 <div className="run-code">▶ Run Code</div>
 
-```js
+```js{4}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',

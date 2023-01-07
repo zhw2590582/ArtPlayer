@@ -159,6 +159,12 @@ export default {
 
 :::
 
+::: warning Artplayer 非响应式：
+
+在 `Vue.js` 里直接修改 `option` 是不会改变播放器的
+
+:::
+
 ## `React.js` 或 `Next.js`
 
 ::: code-group
@@ -218,30 +224,47 @@ export default App;
 
 :::
 
+::: warning Artplayer 非响应式：
+
+在 `React.js` 里直接修改 `option` 是不会改变播放器的
+
+:::
+
 ## 语法提示
 
-有时你的 `js` 文件会丢失 `TypeScript` 的语法提示，这时候你可以手动导入类型 
+有时你的 `js` 文件会丢失 `TypeScript` 的类型提示，这时候你可以手动导入类型 
+
+变量：
 
 ```js
 /**
- * @typedef { import("artplayer/types/artplayer") } Artplayer
+ * @type {import("artplayer")}
  */
-
-/**
- * @type {Artplayer} - 一个 Artplayer 实例
- */
-const art = {};
+let art = null;
 ```
 
+参数：
+
 ```js
 /**
- * @typedef { import("artplayer/types/artplayer") } Artplayer
- */
-
-/**
- * @param {Artplayer}  art - 一个 Artplayer 实例
+ * @param {import("artplayer")} art
  */
 function getInstance(art) {
   //
+}
+```
+
+属性：
+
+```js
+export default {
+  data() {
+    return {
+      /**
+       * @type {import("artplayer")}
+       */
+      art: null,
+    }
+  }
 }
 ```

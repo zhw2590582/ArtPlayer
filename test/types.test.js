@@ -43,7 +43,7 @@ function getInstance(art4) {
 /**
  * @type {Artplayer} - An Artplayer instance.
  */
-const art5 = {};
+const art5 = null;
 
 /**
  * @param {Artplayer}  art6 - An Artplayer instance.
