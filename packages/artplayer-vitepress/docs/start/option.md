@@ -4,7 +4,6 @@
 
 -   类型: `String、Element`
 -   默认: `#artplayer`
--   必填: `是`
 
 播放器挂载的 `dom` 容器
 
