@@ -1,3 +1,5 @@
+# 基础选项
+
 ## container
 
 -   类型: `String、Element`
@@ -23,7 +25,7 @@ var art = new Artplayer({
 }
 ```
 
-:::tip 提示
+:::warning 提示
 
 全部选项里，只有 `container` 是必填的
 
@@ -64,7 +66,7 @@ setTimeout(() => {
 -   类型: `String`
 -   默认: `''`
 
-播放器的唯一标识，目前主要用于视频的记忆播放
+播放器的唯一标识，目前主要用于记忆播放的标识
 
 <div className="run-code">▶ Run Code</div>
 
@@ -98,7 +100,7 @@ var art = new Artplayer(
 );
 ```
 
-:::tip 提示
+:::warning 提示
 
 回调函数里的`this`就是播放器实例，但回调函数假如使用了箭头函数，`this`则不会指向播放器实例
 
@@ -119,6 +121,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     poster: '/assets/sample/poster.jpg',
 });
+```
 
 ## title
 
@@ -143,7 +146,7 @@ var art = new Artplayer({
 -   类型: `String`
 -   默认: `#f00`
 
-播放器主题颜色，目前只作用于进度条上
+播放器主题颜色，目前作用于进度条和高亮元素上
 
 <div className="run-code">▶ Run Code</div>
 
@@ -172,7 +175,7 @@ var art = new Artplayer({
 });
 ```
 
-:::tip 提示
+:::warning 提示
 
 播放器会缓存最后一次音量的大小，下次初始化时（如刷新页面）播放器会读取该缓存值
 
@@ -231,7 +234,7 @@ var art = new Artplayer({
 });
 ```
 
-:::tip 提示
+:::warning 提示
 
 假如希望默认进入页面就能自动播放视频，`muted` 必需为 `true`，更多信息请阅读 [Autoplay Policy Changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
 
@@ -294,7 +297,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否显示视频翻转功能，目前只出现在 `设置面板` 里，所以需要同时设置 `setting` 为 `true`
+是否显示视频翻转功能，目前只出现在 `设置面板` 和 `右键菜单` 里
 
 <div className="run-code">▶ Run Code</div>
 
@@ -364,7 +367,7 @@ var art = new Artplayer({
 });
 ```
 
-:::tip 提示
+:::warning 提示
 
 由于浏览器安全机制，假如视频源地址和网站是跨域的，可能会出现截图失败
 
@@ -412,9 +415,9 @@ var art = new Artplayer({
 | `→`     | 快退 5 秒     |
 | `space` | 切换播放/暂停 |
 
-:::tip 提示
+:::warning 提示
 
-只在播放器获得焦点后（如点击了播放器后），该快捷键才会生效
+只在播放器获得焦点后（如点击了播放器后），这些快捷键才会生效
 
 :::
 
@@ -491,7 +494,7 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-字幕时间偏移，范围在 `[-5s, 5s]`
+字幕时间偏移，范围在 `[-5s, 5s]`，出现在 `设置面板` 里
 
 <div className="run-code">▶ Run Code</div>
 
@@ -529,9 +532,9 @@ var art = new Artplayer({
 -   类型: `Boolean`
 -   默认: `false`
 
-是否使用 `SSR` 挂载模式，假如你希望在播放器挂载前，就提前渲染好播放器所需的`HTML`时有用
+是否使用 `SSR` 挂载模式，假如你希望在播放器挂载前，就提前渲染好播放器所需的 `HTML` 时有用
 
-你可以通过`Artplayer.html`访问到播放器所需的`HTML`
+你可以通过 `Artplayer.html` 访问到播放器所需的 `HTML`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -545,12 +548,6 @@ var art = new Artplayer({
     useSSR: true,
 });
 ```
-
-:::tip 提示
-
-SSR 是 Server Side Render 简称，页面上的内容是通过服务端渲染生成的，浏览器直接显示服务端返回的 HTML 就可以了。
-
-:::
 
 ## playsInline
 
@@ -576,17 +573,6 @@ var art = new Artplayer({
 
 初始化自定义的业务图层
 
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
-
 <div className="run-code">▶ Run Code</div>
 
 ```js
@@ -596,9 +582,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            index: 1,
             name: 'potser',
-            disable: false,
             html: `<img style="width: 100px" src="${img}">`,
             style: {
                 position: 'absolute',
@@ -618,12 +602,19 @@ var art = new Artplayer({
 });
 ```
 
+:::warning `组件配置` 请参考以下地址：
+
+
+[/start/component.html](/start/component.html)
+
+:::
+
 ## settings
 
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的设置面板，更多信息请访问 [怎么添加设置面板](/document/zh-cn/Questions/How%20to%20add%20setting%20panel)
+初始化自定义的设置面板
 
 <div className="run-code">▶ Run Code</div>
 
@@ -665,23 +656,19 @@ var art = new Artplayer({
 });
 ```
 
+:::warning `设置面板` 请参考以下地址
+
+
+[/start/setting.html](/start/setting.html)
+
+:::
+
 ## contextmenu
 
 -   类型: `Array`
 -   默认: `[]`
 
 初始化自定义的右键菜单
-
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -705,24 +692,19 @@ art.on('ready', () => {
 });
 ```
 
+:::warning `组件配置` 请参考以下地址：
+
+
+[/start/component.html](/start/component.html)
+
+:::
+
 ## controls
 
 -   类型: `Array`
 -   默认: `[]`
 
 初始化自定义的底部控制栏
-
-| 属性       | 类型                | 描述                       |
-| ---------- | ------------------- | -------------------------- |
-| `disable`  | `Boolean`           | 是否禁用组件               |
-| `name`     | `String`            | 组件唯一名称，用于标记类名 |
-| `index`    | `Number`            | 组件索引，用于显示的优先级 |
-| `html`     | `String`、`Element` | 组件的 DOM 元素            |
-| `style`    | `Object`            | 组件样式对象               |
-| `click`    | `Function`          | 组件点击事件               |
-| `mounted`  | `Function`          | 组件挂载后触发             |
-| `tooltip`  | `String`            | 组件的提示文本             |
-| `position` | `String`            | 位置在 `left` 或者 `right` |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -762,6 +744,13 @@ var art = new Artplayer({
     ],
 });
 ```
+
+:::warning `组件配置` 请参考以下地址：
+
+
+[/start/component.html](/start/component.html)
+
+:::
 
 ## quality
 
@@ -872,16 +861,23 @@ art.on('ready', () => {
 });
 ```
 
+:::warning 编写插件请参考以下地址
+
+
+[/question/plugin.html](/question/plugin.html)
+
+:::
+
 ## whitelist
 
 -   类型: `Array`
 -   默认: `[]`
 
-因为不同的移动设备存在多种差异和限制，所以本播放器默认在移动设备上使用原生方法挂载视频，假如你想在移动设备上使用本播放器，需要手动开启白名单
+因为不同的移动设备存在多种差异和限制，有时候你希望在某些移动设备上不使用本播放器，而是直接使用原生的功能时，可以通过该选项控制
 
 白名单是一个数组类型，分别与 `window.navigator.userAgent` 进行匹配，只要其中一项匹配成功则启用播放器
 
-支持`字符串`匹配、`函数`匹配、`正则`匹配
+支持 `字符串` 匹配、 `函数` 匹配、 `正则` 匹配
 
 <div className="run-code">▶ Run Code</div>
 
@@ -892,13 +888,12 @@ var art = new Artplayer({
     // whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
     // whitelist: [/iPhone OS 11/gi],
     // whitelist: ['iPhone OS 11'],
-    whitelist: ['*'],
 });
 ```
 
-:::tip 提示
+:::warning 提示
 
-假如希望全部类型的移动设备都启用播放器，设置 `whitelist` 为通配符 `['*']` 即可
+假如该选项不填，则默认使用本播放器
 
 :::
 
@@ -930,6 +925,12 @@ var art = new Artplayer({
     },
 });
 ```
+
+:::warning 在线生成预览图
+
+[artplayer-tool-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=thumbnail)
+
+:::
 
 ## subtitle
 
@@ -988,7 +989,7 @@ var art = new Artplayer({
 -   类型: `Object`
 -   默认: `{}`
 
-用于替换默认图标，支持 `Html` 字符串
+用于替换默认图标，支持 `Html` 字符串和 `HTMLElement`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -999,68 +1000,58 @@ var art = new Artplayer({
     icons: {
         loading: '<img src="/assets/img/ploading.gif">',
         state: '<img src="/assets/img/state.png">',
-        play: '',
-        pause: '',
-        check: '',
-        volume: '',
-        volumeClose: '',
-        screenshot: '',
-        setting: '',
-        pip: '',
-        arrowLeft: '',
-        arrowRight: '',
-        playbackRate: '',
-        aspectRatio: '',
-        config: '',
-        lock: '',
-        flip: '',
-        unlock: '',
-        fullscreenOff: '',
-        fullscreenOn: '',
-        fullscreenWebOff: '',
-        fullscreenWebOn: '',
-        switchOn: '',
-        switchOff: '',
-        error: '',
-        indicator: '',
     },
 });
 ```
+
+:::warning 全部图标的定义
+
+[artplayer/types/icons.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts)
+
+:::
 
 ## type
 
 -   类型: `String`
 -   默认: `''`
 
-用于指明视频的格式，需要配合 `customType` 一起使用，更多信息请访问 [第三方库](/document/zh-cn/libraries)
-
-默认视频的格式就是视频地址的后缀（如 `.flv`、`.mkv`、`.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
+用于指明视频的格式，需要配合 `customType` 一起使用，默认视频的格式就是视频地址的后缀（如 `.m3u8`、`.mkv`、`.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: '/assets/sample/video.flv',
-    type: 'flv',
+    url: '/assets/sample/video.m3u8',
+    type: 'm3u8',
 });
 ```
+
+:::warning 后缀的识别
+
+播放器只能解析这种后缀：`/assets/sample/video.m3u8`
+
+但无法解析这种后缀：`/assets/sample/video?type=m3u8`
+
+所以假如你使用了 `customType`，最好同时要指明 `type`
+
+:::
 
 ## customType
 
 -   类型: `Object`
 -   默认: `{}`
 
-通过视频的格式进行匹配，把视频解码权交给第三方程序进行处理，更多信息请访问 [第三方库](/document/zh-cn/libraries)
+通过视频的 `type` 进行匹配，把视频解码权交给第三方程序进行处理
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: '/assets/sample/video.flv',
+    url: '/assets/sample/video.m3u8',
     customType: {
-        flv: function (video, url, art) {
+        m3u8: function (video, url, art) {
             // video: 视频dom元素
             // url: 视频地址
             // art: 当前实例
@@ -1085,6 +1076,53 @@ var art = new Artplayer({
     lang: 'en',
 });
 ```
+
+## i18n
+
+-   Type: `Object`
+-   Default: `{}`
+
+自定义 `i18n` 配置，该配置会和自带的 `i18n` 进行深度合并
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+// 新增你的语言
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    lang: 'your-lang',
+    i18n: {
+        'your-lang': {
+            Play: 'Your Play'
+        },
+    },
+});
+```
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+// 或者修改现有的语言
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    i18n: {
+        'zh-cn': {
+            Play: 'Your Play'
+        },
+        'zh-tw': {
+            Play: 'Your Play'
+        },
+    },
+});
+```
+
+:::warning i18n 写法参考
+
+[artplayer/types/i18n.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts)
+
+:::
 
 ## lock
 
@@ -1170,35 +1208,3 @@ var art = new Artplayer({
     airplay: true,
 });
 ```
-
-## i18n
-
--   Type: `Object`
--   Default: `{}`
-
-自定义 `i18n` 配置，该配置会和自带的 `i18n` 进行深度合并
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    i18n: {
-        'zh-cn': {
-            //
-        },
-        'zh-tw': {
-            //
-        },
-    },
-});
-```
-
-:::tip i18n 写法参考
-
-[artplayer/types/i18n.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts)
-
-:::
-
-

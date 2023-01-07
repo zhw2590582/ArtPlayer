@@ -33,6 +33,8 @@ const config = {
           items: [
             { text: '安装使用', link: '/' },
             { text: '基础选项', link: '/start/option' },
+            { text: '组件配置', link: '/start/component' },
+            { text: '设置面板', link: '/start/setting' },
           ]
         },
         {
@@ -70,7 +72,7 @@ const config = {
           text: '常见问题',
           collapsible: true,
           items: [
-            { text: '问题1', link: '/question/hls' },
+            { text: '编写插件', link: '/question/plugin' },
             { text: '问题2', link: '/question/flv' },
             { text: '问题3', link: '/question/dash' },
           ]
@@ -83,6 +85,7 @@ const config = {
           items: [
             { text: 'Install', link: '/en/' },
             { text: 'Option', link: '/en/start/option' },
+            { text: 'Component', link: '/start/component' },
           ]
         },
         {
