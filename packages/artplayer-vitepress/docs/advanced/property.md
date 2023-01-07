@@ -1,5 +1,7 @@
 # 实例属性
 
+这里的 `实例属性` 是指挂载在 `实例 `的 `一级属性`
+
 ## play
 
 -   类型: `Function`
@@ -65,6 +67,26 @@ art.on('ready', () => {
     setTimeout(() => {
         art.toggle();
     }, 3000);
+});
+```
+
+## destroy
+
+-   类型: `Function`
+-   参数: `Boolean`
+
+销毁播放器，接受一个参数表示是否销毁后同时移除播放器的 `html`，默认为 `true`
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.destroy();
 });
 ```
 
@@ -653,7 +675,7 @@ art.on('ready', () => {
 -   类型: `Setter/Getter`
 -   参数: `Boolean`
 
-当容器只有宽度，该属性可以自动计算出并设置视频的高度，设置时只会触发一次
+当容器只有宽度，该属性可以自动计算出并设置视频的高度，设置为 `true` 之后它会只执行一次
 
 <div className="run-code">▶ Run Code</div>
 
@@ -760,7 +782,7 @@ art.on('ready', () => {
 
 ## airplay
 
--   Type: `Function`
+-   类型: `Function`
 
 开启隔空播放
 
@@ -782,12 +804,11 @@ var art = new Artplayer({
 });
 ```
 
-## destroy
+## loaded
 
--   类型: `Function`
--   参数: `Boolean`
+-   类型: `Getter`
 
-销毁播放器，接受一个参数表示是否销毁后同时移除播放器的 `html`，默认为 `true`
+视频缓存的比例，范围是 `[0, 1]`，常配合 `video:timeupdate` 事件使用
 
 <div className="run-code">▶ Run Code</div>
 
@@ -797,7 +818,26 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('ready', () => {
-    art.destroy();
+art.on('video:timeupdate', () => {
+    console.info(art.loaded);
+});
+```
+
+## played
+
+-   类型: `Getter`
+
+视频播放的比例，范围是 `[0, 1]`，常配合 `video:timeupdate` 事件使用
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('video:timeupdate', () => {
+    console.info(art.played);
 });
 ```

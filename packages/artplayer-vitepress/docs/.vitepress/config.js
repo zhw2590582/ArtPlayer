@@ -42,10 +42,9 @@ const config = {
           collapsible: true,
           items: [
             { text: '实例属性', link: '/advanced/property' },
-            { text: '实例事件', link: '/advanced/event' },
-            { text: '内置属性', link: '/advanced/built-in' },
+            { text: '高级属性', link: '/advanced/built-in' },
             { text: '静态属性', link: '/advanced/class' },
-            { text: '全局属性', link: '/advanced/global' },
+            { text: '实例事件', link: '/advanced/event' },
           ]
         },
         {
@@ -93,10 +92,9 @@ const config = {
           collapsible: true,
           items: [
             { text: 'Instance Properties', link: '/en/advanced/property' },
-            { text: 'Instance Events', link: '/en/advanced/event' },
             { text: 'Built In Properties', link: '/advanced/built-in' },
             { text: 'Static Properties', link: '/en/advanced/class' },
-            { text: 'Global Properties', link: '/en/advanced/global' },
+            { text: 'Instance Events', link: '/en/advanced/event' },
           ]
         },
         {
