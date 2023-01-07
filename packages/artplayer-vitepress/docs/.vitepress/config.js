@@ -45,6 +45,7 @@ const config = {
             { text: '高级属性', link: '/advanced/built-in' },
             { text: '静态属性', link: '/advanced/class' },
             { text: '实例事件', link: '/advanced/event' },
+            { text: '编写插件', link: '/advanced/plugin' },
           ]
         },
         {
@@ -65,15 +66,6 @@ const config = {
             { text: 'hls.js', link: '/library/hls' },
             { text: 'flv.js', link: '/library/flv' },
             { text: 'dash.js', link: '/library/dash' },
-          ]
-        },
-        {
-          text: '常见问题',
-          collapsible: true,
-          items: [
-            { text: '编写插件', link: '/question/plugin' },
-            { text: '问题2', link: '/question/flv' },
-            { text: '问题3', link: '/question/dash' },
           ]
         },
       ],
