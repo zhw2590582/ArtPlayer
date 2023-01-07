@@ -594,7 +594,7 @@ var art = new Artplayer({
 -   类型: `Array`
 -   默认: `[]`
 
-初始化自定义的 `图层`
+初始化自定义的 `层`
 
 <div className="run-code">▶ Run Code</div>
 
