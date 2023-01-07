@@ -58,6 +58,10 @@ duration 属性的值改变时触发
 
 视频停止播放，因为 media 已经到达结束点
 
+## `video:error`
+
+获取媒体数据时出错，或者资源类型不是受支持的媒体格式
+
 ## `video:loadeddata`
 
 media 中的首帧已经完成加载
@@ -113,3 +117,4 @@ currentTime 属性指定的时间发生变化
 ## `video:waiting`
 
 由于暂时缺少数据，播放已停止
+
