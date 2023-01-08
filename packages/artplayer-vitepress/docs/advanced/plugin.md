@@ -62,60 +62,64 @@ art.on('ready', () => {
 <div className="run-code">▶ Run Code</div>
 
 ```js
-function adsPlugin(art) {
-    var img = '/assets/sample/layer.png';
+function adsPlugin(option) {
+    return (art) => {
+        art.layers.add({
+            name: 'ads',
+            html: `<img style="width: 100px" src="${option.url}">`,
+            style: {
+                display: 'none',
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+            },
+        });
 
-    art.layers.add({
-        name: 'ads',
-        html: `<img style="width: 100px" src="${img}">`,
-        style: {
-            display: 'none',
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-        },
-    });
-
-    function show() {
-        art.layers.ads.style.display = 'block';
-    }
-
-    function hide() {
-        art.layers.ads.style.display = 'none';
-    }
-
-    art.controls.add({
-        name: 'hide-ads',
-        position: 'right',
-        html: '隐藏广告',
-        tooltip: '隐藏广告',
-        click: hide,
-        style: {
-            marginRight: '20px'
+        function show() {
+            art.layers.ads.style.display = 'block';
         }
-    });
 
-    art.controls.add({
-        name: 'show-ads',
-        position: 'right',
-        html: '显示广告',
-        tooltip: '显示广告',
-        click: show,
-    });
+        function hide() {
+            art.layers.ads.style.display = 'none';
+        }
 
-    art.on('play', hide);
-    art.on('pause', show);
+        art.controls.add({
+            name: 'hide-ads',
+            position: 'right',
+            html: '隐藏广告',
+            tooltip: '隐藏广告',
+            click: hide,
+            style: {
+                marginRight: '20px'
+            }
+        });
 
-    return {
-        name: 'adsPlugin',
-        show,
-        hide
-    };
+        art.controls.add({
+            name: 'show-ads',
+            position: 'right',
+            html: '显示广告',
+            tooltip: '显示广告',
+            click: show,
+        });
+
+        art.on('play', hide);
+        art.on('pause', show);
+
+        return {
+            name: 'adsPlugin',
+            show,
+            hide
+        };
+    }
 }
 
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    plugins: [adsPlugin],
+    plugins: [
+        adsPlugin({
+            url: '/assets/sample/layer.png'
+        })
+    ],
 });
 ```
