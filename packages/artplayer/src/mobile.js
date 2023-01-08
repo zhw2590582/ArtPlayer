@@ -46,7 +46,6 @@ export default class Mobile {
         const typeCallback = option.customType[typeName];
         if (typeName && typeCallback) {
             typeCallback($video, option.url, art);
-            art.emit('customType', typeName);
         } else {
             $video.src = option.url;
             art.emit('url', $video.src);

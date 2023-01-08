@@ -16,10 +16,8 @@ export default function playbackRateMix(art) {
                 if (rate === $video.playbackRate) return;
                 $video.playbackRate = rate;
                 notice.show = `${i18n.get('Rate')}: ${rate === 1.0 ? i18n.get('Normal') : `${rate}x`}`;
-                art.emit('playbackRate', rate);
             } else {
                 art.playbackRate = 1;
-                art.emit('playbackRate', 1);
             }
         },
     });

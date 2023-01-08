@@ -4,35 +4,202 @@
 
 监听事件：
 
-```js
-art.on('video:canplay', () => {
-    console.log('video:canplay');
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
 });
 
-art.on('ready', () => {
-    console.log('ready');
+art.on('video:canplay', () => {
+    console.log('video:canplay');
 });
 ```
 
 只监听一次事件：
 
-```js
-art.once('video:canplay', () => {
-    console.log('video:canplay');
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
 });
 
-art.once('ready', () => {
-    console.log('ready');
+art.once('video:canplay', () => {
+    console.log('video:canplay');
 });
 ```
 
 手动触发事件：
 
-```js
-art.emit('video:canplay');
+<div className="run-code">▶ Run Code</div>
 
-art.emit('ready');
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.emit('focus');
 ```
+
+移除事件：
+
+<div className="run-code">▶ Run Code</div>
+
+```js{8}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+const onReady = () => {
+    console.log('ready');
+    art.off('ready', onReady);
+}
+
+art.on('ready', onReady);
+```
+
+:::warning 全部事件请参考以下地址：
+
+[artplayer/types/events.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/events.d.ts)
+
+:::
+
+## `ready`
+
+当播放器首次可以播放器时
+
+## `restart`
+
+当播放器切换地址后并可以播放时
+
+## `pause`
+
+当播放器暂停时
+
+## `play`
+
+当播放器播放时
+
+## `hotkey`
+
+当热键触发时
+
+## `destroy`
+
+当播放器销毁时
+
+## `url`
+
+当视频地址变化时
+
+## `focus`
+
+当播放器获得焦点时
+
+## `blur`
+
+当播放器失去焦点时
+
+## `dblclick`
+
+当播放器被双击时
+
+## `click`
+
+当播放器被单击时
+
+## `error`
+
+当播放器加载视频发生错误时
+
+## `setBar`
+
+当进度条更新时
+
+## `hover`
+
+当播放器被鼠标移出或者移入时
+
+## `mousemove`
+
+当播放器被鼠标经过时
+
+## `resize`
+
+当播放器尺寸变化时
+
+## `view`
+
+当播放器出现在视口时
+
+## `aspectRatio`
+
+当播放器长宽比变化时
+
+## `autoHeight`
+
+当播放器自动设置高度时
+
+## `autoSize`
+
+当播放器自动设置尺寸时
+
+## `flip`
+
+当播放器发生翻转时
+
+## `fullscreen`
+
+当播放器发生窗口全屏时
+
+## `fullscreenWeb`
+
+当播放器发生网页全屏时
+
+## `loop`
+
+当播放器发生区间循环播放时
+
+## `mini`
+
+当播放器进入迷你模式时
+
+## `pip`
+
+当播放器进入画中画时
+
+## `screenshot`
+
+当播放器发生截图时
+
+## `seek`
+
+当播放器发生时间跳转时
+
+## `subtitleOffset`
+
+当播放器发生字幕偏移时
+
+## `subtitleUpdate`
+
+当字幕更新时
+
+## `subtitleLoad`
+
+当字幕加载时
+
+## `subtitleSwitch`
+
+当字幕切换时
+
+## `lock`
+
+当播放器发生锁定时
 
 ## `video:canplay`
 
