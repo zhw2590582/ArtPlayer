@@ -46,7 +46,6 @@ export type Events = {
     flip: [flip: Flip];
     fullscreen: [state: boolean];
     fullscreenWeb: [state: boolean];
-    loop: [interval: [start: number, end: number]];
     mini: [state: boolean];
     pause: [];
     pip: [state: boolean];
@@ -56,5 +55,4 @@ export type Events = {
     subtitleOffset: [offset: number];
     switch: [url: string];
     restart: [];
-    lock: [state: boolean];
 };

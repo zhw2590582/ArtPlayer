@@ -10,14 +10,11 @@ export default function loopMix(art) {
                 const end = clamp(value[1], start, art.duration);
                 if (end - start >= 1) {
                     interval = [start, end];
-                    art.emit('loop', interval);
                 } else {
                     interval = [];
-                    art.emit('loop', []);
                 }
             } else {
                 interval = [];
-                art.emit('loop', []);
             }
         },
     });

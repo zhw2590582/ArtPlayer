@@ -119,7 +119,7 @@ art.on('ready', onReady);
 
 ## `setBar`
 
-当进度条更新时
+当播放器的进度条更新时
 
 ## `hover`
 
@@ -161,10 +161,6 @@ art.on('ready', onReady);
 
 当播放器发生网页全屏时
 
-## `loop`
-
-当播放器发生区间循环播放时
-
 ## `mini`
 
 当播放器进入迷你模式时
@@ -196,10 +192,6 @@ art.on('ready', onReady);
 ## `subtitleSwitch`
 
 当字幕切换时
-
-## `lock`
-
-当播放器发生锁定时
 
 ## `video:canplay`
 
