@@ -150,7 +150,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.storage.name = 'your-storage-key'
+art.storage.name = 'your-storage-key';
 art.storage.set('test', { foo: 'bar' });
 ```
 
@@ -194,7 +194,7 @@ console.info(art.i18n.get('Play'));
 
 art.i18n.update({
     'zh-cn': {
-        Play: '你的播放'
+        Play: 'Your Play'
     }
 });
 ```
@@ -219,7 +219,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    art.notice.show = '视频准备就绪';
+    art.notice.show = 'Video Ready To Play';
 })
 ```
 
@@ -247,7 +247,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.layers.add({
-        html: '文字',
+        html: 'Some Text',
     });
 
 	setTimeout(() => {
@@ -280,7 +280,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.controls.add({
-        html: '文字',
+        html: 'Some Text',
         position: 'left',
     });
 
@@ -314,7 +314,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     art.contextmenu.add({
-        html: '文字',
+        html: 'Some Text',
     });
 
     art.contextmenu.show = true;
@@ -393,7 +393,7 @@ var art = new Artplayer({
 });
 
 function hotkeyEvent(event) {
-    console.info('你点击了空格键', event);
+    console.info('click', event);
 }
 
 art.on('ready', () => {
@@ -482,12 +482,12 @@ var art = new Artplayer({
 });
 
 function myPlugin(art) {
-    console.info('你可以在插件里访问到播放器的实例');
+    console.info(art);
     return {
         name: 'myPlugin',
-        something: '自定义导出的属性',
+        something: 'something',
         doSomething: function () {
-            console.info('自定义导出的方法');
+            console.info('doSomething');
         },
     };
 }
