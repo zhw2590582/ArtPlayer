@@ -1,6 +1,6 @@
 # flv.js
 
-[https://github.com/Bilibili/flv.js](https://github.com/Bilibili/flv.js)
+👉 [https://github.com/Bilibili/flv.js](https://github.com/Bilibili/flv.js)
 
 <div className="run-code" data-libs="https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js">
     ▶ Run Code

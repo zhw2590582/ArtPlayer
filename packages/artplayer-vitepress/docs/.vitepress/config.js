@@ -53,10 +53,10 @@ const config = {
           collapsible: true,
           items: [
             { text: '弹幕库', link: '/plugin/danmuku' },
-            { text: '广告', link: '/plugin/ads' },
-            { text: 'Iframe', link: '/plugin/iframe' },
-            { text: 'Hls 画质', link: '/plugin/hls-quality' },
-            { text: '控制器 UI', link: '/plugin/control-ui' },
+            { text: '视频广告', link: '/plugin/ads' },
+            { text: 'Iframe 控制', link: '/plugin/iframe' },
+            { text: 'HLS 画质', link: '/plugin/hls-quality' },
+            { text: '控制器皮肤', link: '/plugin/control-ui' },
           ]
         },
         {

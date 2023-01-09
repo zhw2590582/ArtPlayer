@@ -1,6 +1,6 @@
 # hls.js
 
-[https://github.com/video-dev/hls.js](https://github.com/video-dev/hls.js)
+👉 [https://github.com/video-dev/hls.js](https://github.com/video-dev/hls.js)
 
 <div className="run-code" data-libs="https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js">
     ▶ Run Code
