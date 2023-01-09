@@ -58,13 +58,13 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
         <script src="path/to/artplayer-plugin-iframe.js"></script>
         <script>
             const iframe = new ArtplayerPluginIframe({
-                // iframe 元素
+                // Iframe element
                 iframe: document.querySelector('#iframe'),
-                // iframe 地址
+                // Iframe url
                 url: 'path/to/iframe.html',
             });
 
-            // 向 iframe 发送消息
+            // Send message to iframe
             iframe.commit(() => {
                 var art = new Artplayer({
                     container: '.artplayer-app',
@@ -99,7 +99,7 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
         <script src="path/to/artplayer.js"></script>
         <script src="path/to/artplayer-plugin-iframe.js"></script>
         <script>
-            // 注入脚本，接收来自实例的消息
+            // Inject scripts to receive messages from instances
             ArtplayerPluginIframe.inject();
         </script>
     </body>
@@ -124,14 +124,14 @@ iframe.commit(() => {
     art.seek = 5;
 });
 
-// 获取来自 iframe 的值
+// Get the value from the iframe
 (async function () {
-    // 使用 return 关键词
+    // Use the return keyword
     var currentTime = await iframe.commit(() => {
         return art.currentTime;
     });
 
-    // 或者使用 resolve 方法
+    // or use the resolve method
     var currentTime2 = await iframe.commit((resolve) => {
         setTimeout(() => {
             resolve(art.currentTime);

@@ -86,11 +86,13 @@ var art = new Artplayer({
     ],
 });
 
+// ad is clicked
 art.on('artplayerPluginAds:click', (ads) => {
-    console.info('广告被点击', ads);
+    console.info(ads);
 });
 
+// Ad skipped
 art.on('artplayerPluginAds:skip', (ads) => {
-    console.info('广告被跳过', ads);
+    console.info(ads);
 });
 ```

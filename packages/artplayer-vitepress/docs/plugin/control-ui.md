@@ -75,7 +75,7 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: '<button type="button">切换 UI</button>',
+            html: '<button type="button">Switch UI</button>',
             click: function () {
                 const { enable } = art.plugins.artplayerPluginControl;
                 art.plugins.artplayerPluginControl.enable = !enable;
