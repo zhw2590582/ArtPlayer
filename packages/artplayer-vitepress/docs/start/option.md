@@ -160,7 +160,7 @@ var art = new Artplayer({
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    title: '【新海诚动画】『秒速5センチメートル』',
+    title: 'your-video-title',
     screenshot: true,
 });
 ```
@@ -383,10 +383,6 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     screenshot: true,
-    // 可选
-    moreVideoAttr: {
-        crossOrigin: 'anonymous',
-    },
 });
 ```
 
@@ -614,11 +610,11 @@ var art = new Artplayer({
                 opacity: '.9',
             },
             click: function (...args) {
-                console.info('你点击了组件');
+                console.info(args);
                 art.layers.show = false;
             },
             mounted: function (...args) {
-                console.info('组件挂载完成');
+                console.info(args);
             },
         },
     ],
@@ -647,31 +643,31 @@ var art = new Artplayer({
     setting: true,
     settings: [
         {
-            html: '自定义设置01',
+            html: 'setting01',
             selector: [
                 {
-                    html: '子菜单01',
+                    html: 'setting01-01',
                 },
                 {
-                    html: '子菜单02',
+                    html: 'setting01-02',
                 },
             ],
-            onSelect: function (item) {
-                console.log(item.html);
+            onSelect: function (...args) {
+                console.log(args);
             },
         },
         {
-            html: '自定义设置02',
+            html: 'setting02',
             selector: [
                 {
-                    html: '子菜单01',
+                    html: 'setting02-01',
                 },
                 {
-                    html: '子菜单02',
+                    html: 'setting02-02',
                 },
             ],
-            onSelect: function (item) {
-                console.log(item.html);
+            onSelect: function (...args) {
+                console.log(args);
             },
         },
     ],
@@ -699,9 +695,9 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     contextmenu: [
         {
-            html: '自定义菜单',
-            click: function () {
-                console.info('你点击了自定义菜单');
+            html: 'your-menu',
+            click: function (...args) {
+                console.info(args);
                 art.contextmenu.show = false;
             },
         },
@@ -731,13 +727,13 @@ var art = new Artplayer({
     controls: [
         {
             position: 'left',
-            html: '自定义按钮2',
-            tooltip: '自定义按钮的提示2',
+            html: 'your-control',
+            tooltip: 'Your Control',
             style: {
                 color: 'green',
             },
-            click: function () {
-                console.log('你点击了自定义按钮2');
+            click: function (...args) {
+                console.log(args);
             },
         },
     ],
@@ -837,12 +833,12 @@ var art = new Artplayer({
 
 ```js{15}
 function myPlugin(art) {
-    console.info('你可以在插件里访问到播放器的实例');
+    console.info(art);
     return {
         name: 'myPlugin',
-        something: '自定义导出的属性',
+        something: 'something',
         doSomething: function () {
-            console.info('自定义导出的方法');
+            console.info('doSomething');
         },
     };
 }
@@ -1034,19 +1030,21 @@ var art = new Artplayer({
 -   类型: `Object`
 -   默认: `{}`
 
-通过视频的 `type` 进行匹配，把视频解码权交给第三方程序进行处理
+通过视频的 `type` 进行匹配，把视频解码权交给第三方程序进行处理，处理的函数能接收三个参数
+
+- `video` : 视频 `DOM` 元素
+- `url` : 视频地址
+- `art` : 当前实例
 
 <div className="run-code">▶ Run Code</div>
 
-```js{4-10}
+```js{4-8}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.m3u8',
     customType: {
         m3u8: function (video, url, art) {
-            // video: 视频 DOM 元素
-            // url: 视频地址
-            // art: 当前实例
+            //
         },
     },
 });
@@ -1076,10 +1074,11 @@ var art = new Artplayer({
 
 自定义 `i18n` 配置，该配置会和自带的 `i18n` 进行深度合并
 
+新增你的语言:
+
 <div className="run-code">▶ Run Code</div>
 
-```js{5-10}
-// 新增你的语言
+```js{4-9}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -1092,10 +1091,11 @@ var art = new Artplayer({
 });
 ```
 
+修改现有的语言
+
 <div className="run-code">▶ Run Code</div>
 
-```js{5-12}
-// 或者修改现有的语言
+```js{4-11}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
