@@ -150,7 +150,7 @@ export default {
   },
   methods: {
     getInstance(art) {
-      console.log(art);
+      console.info(art);
     },
   },
 };
@@ -213,7 +213,7 @@ function App() {
                     height: '400px',
                     margin: '60px auto 0',
                 }}
-                getInstance={(art) => console.log(art)}
+                getInstance={(art) => console.info(art)}
             />
         </div>
     );

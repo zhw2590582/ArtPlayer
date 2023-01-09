@@ -146,7 +146,7 @@ iframe.commit(() => {
 
 ```js
 iframe.message((event) => {
-    console.log(event);
+    console.info(event);
 });
 ```
 
@@ -180,7 +180,7 @@ ArtplayerPluginIframe.inject();
 
 ```js
 iframe.message((event) => {
-    console.log(event);
+    console.info(event);
 });
 
 iframe.commit(() => {

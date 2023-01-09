@@ -13,7 +13,7 @@ var art = new Artplayer({
 });
 
 art.on('video:canplay', () => {
-    console.log('video:canplay');
+    console.info('video:canplay');
 });
 ```
 
@@ -28,7 +28,7 @@ var art = new Artplayer({
 });
 
 art.once('video:canplay', () => {
-    console.log('video:canplay');
+    console.info('video:canplay');
 });
 ```
 
@@ -56,7 +56,7 @@ var art = new Artplayer({
 });
 
 const onReady = () => {
-    console.log('ready');
+    console.info('ready');
     art.off('ready', onReady);
 }
 
@@ -82,7 +82,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.log('ready');
+    console.info('ready');
 });
 ```
 
@@ -103,7 +103,7 @@ art.on('ready', () => {
 });
 
 art.on('restart', () => {
-    console.log('restart');
+    console.info('restart');
 });
 ```
 
@@ -120,7 +120,7 @@ var art = new Artplayer({
 });
 
 art.on('pause', () => {
-    console.log('pause');
+    console.info('pause');
 });
 ```
 
@@ -137,7 +137,7 @@ var art = new Artplayer({
 });
 
 art.on('play', () => {
-    console.log('play');
+    console.info('play');
 });
 ```
 
@@ -154,7 +154,7 @@ var art = new Artplayer({
 });
 
 art.on('hotkey', (event) => {
-    console.log('hotkey', event);
+    console.info('hotkey', event);
 });
 ```
 
@@ -175,7 +175,7 @@ art.on('ready', () => {
 });
 
 art.on('destroy', () => {
-    console.log('destroy');
+    console.info('destroy');
 });
 ```
 
@@ -196,7 +196,7 @@ art.on('ready', () => {
 });
 
 art.on('url', (url) => {
-    console.log('url', url);
+    console.info('url', url);
 });
 ```
 
@@ -213,7 +213,7 @@ var art = new Artplayer({
 });
 
 art.on('focus', () => {
-    console.log('focus');
+    console.info('focus');
 });
 ```
 
@@ -230,7 +230,7 @@ var art = new Artplayer({
 });
 
 art.on('blur', () => {
-    console.log('blur');
+    console.info('blur');
 });
 ```
 
@@ -247,7 +247,7 @@ var art = new Artplayer({
 });
 
 art.on('dblclick', () => {
-    console.log('dblclick');
+    console.info('dblclick');
 });
 ```
 
@@ -264,7 +264,7 @@ var art = new Artplayer({
 });
 
 art.on('click', () => {
-    console.log('click');
+    console.info('click');
 });
 ```
 
@@ -281,7 +281,7 @@ var art = new Artplayer({
 });
 
 art.on('error', (error, reconnectTime) => {
-    console.log(error, reconnectTime);
+    console.info(error, reconnectTime);
 });
 ```
 
@@ -298,7 +298,7 @@ var art = new Artplayer({
 });
 
 art.on('hover', (state) => {
-    console.log('hover', state);
+    console.info('hover', state);
 });
 ```
 
@@ -315,7 +315,7 @@ var art = new Artplayer({
 });
 
 art.on('mousemove', (event) => {
-    console.log('mousemove', event);
+    console.info('mousemove', event);
 });
 ```
 
@@ -332,7 +332,7 @@ var art = new Artplayer({
 });
 
 art.on('resize', () => {
-    console.log('resize');
+    console.info('resize');
 });
 ```
 
@@ -349,7 +349,7 @@ var art = new Artplayer({
 });
 
 art.on('view', (state) => {
-    console.log('view', state);
+    console.info('view', state);
 });
 ```
 
@@ -368,7 +368,7 @@ var art = new Artplayer({
 });
 
 art.on('aspectRatio', (aspectRatio) => {
-    console.log('aspectRatio', aspectRatio);
+    console.info('aspectRatio', aspectRatio);
 });
 ```
 
@@ -389,7 +389,7 @@ art.on('ready', () => {
 });
 
 art.on('autoHeight', (height) => {
-    console.log('autoHeight', height);
+    console.info('autoHeight', height);
 });
 ```
 
@@ -407,7 +407,7 @@ var art = new Artplayer({
 });
 
 art.on('autoSize', () => {
-    console.log('autoSize');
+    console.info('autoSize');
 });
 ```
 
@@ -426,7 +426,7 @@ var art = new Artplayer({
 });
 
 art.on('flip', (flip) => {
-    console.log('flip', flip);
+    console.info('flip', flip);
 });
 ```
 
@@ -444,7 +444,7 @@ var art = new Artplayer({
 });
 
 art.on('fullscreen', (state) => {
-    console.log('fullscreen', state);
+    console.info('fullscreen', state);
 });
 ```
 
@@ -462,7 +462,7 @@ var art = new Artplayer({
 });
 
 art.on('fullscreenWeb', (state) => {
-    console.log('fullscreenWeb', state);
+    console.info('fullscreenWeb', state);
 });
 ```
 
@@ -483,7 +483,7 @@ art.on('ready', () => {
 });
 
 art.on('mini', (state) => {
-    console.log('mini', state);
+    console.info('mini', state);
 });
 ```
 
@@ -501,7 +501,7 @@ var art = new Artplayer({
 });
 
 art.on('pip', (state) => {
-    console.log('pip', state);
+    console.info('pip', state);
 });
 ```
 
@@ -519,7 +519,7 @@ var art = new Artplayer({
 });
 
 art.on('screenshot', (dataUri) => {
-    console.log('screenshot', dataUri);
+    console.info('screenshot', dataUri);
 });
 ```
 
@@ -536,7 +536,7 @@ var art = new Artplayer({
 });
 
 art.on('seek', (currentTime) => {
-    console.log('seek', currentTime);
+    console.info('seek', currentTime);
 });
 ```
 
@@ -558,7 +558,7 @@ var art = new Artplayer({
 });
 
 art.on('subtitleOffset', (offset) => {
-    console.log('subtitleOffset', offset);
+    console.info('subtitleOffset', offset);
 });
 ```
 
@@ -578,7 +578,7 @@ var art = new Artplayer({
 });
 
 art.on('subtitleUpdate', (text) => {
-    console.log('subtitleUpdate', text);
+    console.info('subtitleUpdate', text);
 });
 ```
 
@@ -598,7 +598,7 @@ var art = new Artplayer({
 });
 
 art.on('subtitleLoad', (url) => {
-    console.log('subtitleLoad', url);
+    console.info('subtitleLoad', url);
 });
 ```
 
@@ -622,7 +622,7 @@ art.on('ready', () => {
 });
 
 art.on('subtitleSwitch', (url) => {
-    console.log('subtitleSwitch', url);
+    console.info('subtitleSwitch', url);
 });
 ```
 

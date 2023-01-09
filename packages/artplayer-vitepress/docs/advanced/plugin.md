@@ -25,7 +25,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.log(art.plugins.myPlugin);
+    console.info(art.plugins.myPlugin);
 });
 ```
 
@@ -53,7 +53,7 @@ var art = new Artplayer({
 art.plugins.add(myPlugin);
 
 art.on('ready', () => {
-    console.log(art.plugins.myPlugin);
+    console.info(art.plugins.myPlugin);
 });
 ```
 

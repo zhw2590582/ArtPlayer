@@ -610,11 +610,11 @@ var art = new Artplayer({
                 opacity: '.9',
             },
             click: function (...args) {
-                console.info(args);
+                console.info('click', args);
                 art.layers.show = false;
             },
             mounted: function (...args) {
-                console.info(args);
+                console.info('mounted', args);
             },
         },
     ],
@@ -653,7 +653,7 @@ var art = new Artplayer({
                 },
             ],
             onSelect: function (...args) {
-                console.log(args);
+                console.info(args);
             },
         },
         {
@@ -667,7 +667,7 @@ var art = new Artplayer({
                 },
             ],
             onSelect: function (...args) {
-                console.log(args);
+                console.info(args);
             },
         },
     ],
@@ -697,7 +697,7 @@ var art = new Artplayer({
         {
             html: 'your-menu',
             click: function (...args) {
-                console.info(args);
+                console.info('click', args);
                 art.contextmenu.show = false;
             },
         },
@@ -733,7 +733,7 @@ var art = new Artplayer({
                 color: 'green',
             },
             click: function (...args) {
-                console.log(args);
+                console.info('click', args);
             },
         },
     ],
@@ -1161,7 +1161,7 @@ var art = new Artplayer({
 
 ```js{4-5}
 var art = new Artplayer({
-    container: '.artplayer-app',
+    container: '.artplayer-app',gb
     url: '/assets/sample/video.mp4',
     id: 'your-url-id',
     autoPlayback: true,

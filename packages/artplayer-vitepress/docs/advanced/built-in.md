@@ -14,7 +14,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-console.log(art.option);
+console.info(art.option);
 ```
 
 :::warning 提示
@@ -36,7 +36,7 @@ var art = new Artplayer({
     whitelist: [(ua) => /iPhone/gi.test(ua)],
 });
 
-console.log(art.whitelist.state);
+console.info(art.whitelist.state);
 ```
 
 :::warning 提示
@@ -58,8 +58,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-console.log(art.template);
-console.log(art.template.$video);
+console.info(art.template);
+console.info(art.template.$video);
 ```
 
 :::warning 提示
@@ -89,17 +89,17 @@ var art = new Artplayer({
 });
 
 art.events.proxy(container, 'click', event => {
-	console.log('click', event);
+	console.info('click', event);
 });
 
 art.events.hover(container, (event) => {
-    console.log('mouseenter', event);
+    console.info('mouseenter', event);
 }, (event) => {
-    console.log('mouseleave', event);
+    console.info('mouseleave', event);
 });
 
 art.events.loadImg('/assets/sample/poster.jpg').then(img => {
-    console.log('loadImg', img);
+    console.info('loadImg', img);
 });
 ```
 
@@ -129,7 +129,7 @@ var art = new Artplayer({
 
 art.storage.set('test', { foo: 'bar' });
 const test = art.storage.get('test');
-console.log(test);
+console.info(test);
 art.storage.del('test');
 art.storage.clear();
 ```
@@ -166,7 +166,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-console.log(art.icons.loading);
+console.info(art.icons.loading);
 ```
 
 :::warning 这是所有图标的定义：
@@ -190,7 +190,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-console.log(art.i18n.get('Play'));
+console.info(art.i18n.get('Play'));
 
 art.i18n.update({
     'zh-cn': {
@@ -393,7 +393,7 @@ var art = new Artplayer({
 });
 
 function hotkeyEvent(event) {
-    console.log('你点击了空格键', event);
+    console.info('你点击了空格键', event);
 }
 
 art.on('ready', () => {

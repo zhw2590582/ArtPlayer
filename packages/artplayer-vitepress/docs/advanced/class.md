@@ -15,14 +15,14 @@
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log([...Artplayer.instances]);
+console.info([...Artplayer.instances]);
 
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
 });
 
-console.log([...Artplayer.instances]);
+console.info([...Artplayer.instances]);
 ```
 
 ## version
@@ -32,7 +32,7 @@ console.log([...Artplayer.instances]);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.version);
+console.info(Artplayer.version);
 ```
 
 ## env
@@ -42,7 +42,7 @@ console.log(Artplayer.version);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.env);
+console.info(Artplayer.env);
 ```
 
 ## build
@@ -52,7 +52,7 @@ console.log(Artplayer.env);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.build);
+console.info(Artplayer.build);
 ```
 
 ## config
@@ -62,7 +62,7 @@ console.log(Artplayer.build);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.config);
+console.info(Artplayer.config);
 ```
 
 ## utils
@@ -72,7 +72,7 @@ console.log(Artplayer.config);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.utils);
+console.info(Artplayer.utils);
 ```
 
 :::warning 全部工具函数请参考以下地址：
@@ -88,7 +88,7 @@ console.log(Artplayer.utils);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.scheme);
+console.info(Artplayer.scheme);
 ```
 
 ## Emitter
@@ -98,7 +98,7 @@ console.log(Artplayer.scheme);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.Emitter);
+console.info(Artplayer.Emitter);
 ```
 
 ## validator
@@ -108,7 +108,7 @@ console.log(Artplayer.Emitter);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.validator);
+console.info(Artplayer.validator);
 ```
 
 ## kindOf
@@ -118,7 +118,7 @@ console.log(Artplayer.validator);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.kindOf);
+console.info(Artplayer.kindOf);
 ```
 
 ## html
@@ -128,7 +128,7 @@ console.log(Artplayer.kindOf);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.html);
+console.info(Artplayer.html);
 ```
 
 ## option
@@ -138,7 +138,7 @@ console.log(Artplayer.html);
 <div className="run-code">▶ Run Code</div>
 
 ```js
-console.log(Artplayer.option);
+console.info(Artplayer.option);
 ```
 
 ## DEBUG

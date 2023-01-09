@@ -36,23 +36,23 @@ var art = new Artplayer({
         {
             name: 'potser',
             html: `<img style="width: 100px" src="${img}">`,
-            tooltip: '组件提示',
+            tooltip: 'Potser Tip',
             style: {
                 position: 'absolute',
                 top: '50px',
                 right: '50px',
             },
             click: function (...args) {
-                console.info('你点击了组件');
+                console.info('click', args);
             },
             mounted: function (...args) {
-                console.info('组件挂载完成');
+                console.info('mounted', args);
             },
         },
     ],
 });
 
-console.log(art.layers.potser);
+console.info(art.layers.potser);
 ```
 
 也可以实例化之后添加一个层
@@ -69,21 +69,21 @@ var art = new Artplayer({
 art.layers.add({
     name: 'potser',
     html: `<img style="width: 100px" src="${img}">`,
-    tooltip: '组件提示',
+    tooltip: 'Potser Tip',
     style: {
         position: 'absolute',
         top: '50px',
         right: '50px',
     },
     click: function (...args) {
-        console.info('你点击了组件');
+        console.info('click', args);
     },
     mounted: function (...args) {
-        console.info('组件挂载完成');
+        console.info('mounted', args);
     },
-})
+});
 
-console.log(art.layers.potser);
+console.info(art.layers.potser);
 ```
 
 ## controls
@@ -106,44 +106,44 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     controls: [
         {
-            name: 'button1',
+            name: 'your-button',
             index: 10,
             position: 'left',
-            html: '自定义按钮1',
-            tooltip: '自定义按钮的提示1',
+            html: 'Your Button',
+            tooltip: 'Your Button',
             style: {
                 color: 'red',
             },
             click: function (...args) {
-                console.log('你点击了自定义按钮1');
+                console.info('click', args);
             },
             mounted: function (...args) {
-                console.log('自定义按钮挂载完成1');
+                console.info('mounted', args);
             },
         },
         {
             name: 'subtitle',
             position: 'right',
-            html: '字幕选项',
+            html: 'Subtitle',
             selector: [
                 {
                     default: true,
-                    html: '<span style="color:red">字幕 01</span>',
+                    html: '<span style="color:red">subtitle 01</span>',
                 },
                 {
-                    html: '<span style="color:yellow">字幕 02</span>',
+                    html: '<span style="color:yellow">subtitle 02</span>',
                 },
             ],
             onSelect: function (item, $dom) {
                 console.info(item, $dom);
-                return '点击了' + item.html;
+                return 'Your ' + item.html;
             },
         },
     ],
 });
 
-console.log(art.controls.button1);
-console.log(art.controls.subtitle);
+console.info(art.controls['your-button']);
+console.info(art.controls.subtitle);
 ```
 
 也可以实例化之后添加一个控制器
@@ -158,20 +158,20 @@ art.controls.add({
     name: 'button1',
     index: 10,
     position: 'left',
-    html: '自定义按钮1',
-    tooltip: '自定义按钮的提示1',
+    html: 'Your Button',
+    tooltip: 'Your Button',
     style: {
         color: 'red',
     },
-    click: function () {
-        console.log('你点击了自定义按钮1');
+    click: function (...args) {
+        console.info('click', args);
     },
-    mounted: function () {
-        console.log('自定义按钮挂载完成1');
+    mounted: function (...args) {
+        console.info('mounted', args);
     },
 });
 
-console.log(art.controls.button1);
+console.info(art.controls.button1);
 ```
 
 ## contextmenu
@@ -186,17 +186,17 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     contextmenu: [
         {
-            name: 'menu01',
-            html: '自定义菜单',
-            click: function () {
-                console.info('你点击了自定义菜单');
+            name: 'your-menu',
+            html: 'Your Menu',
+            click: function (...args) {
+                console.info(args);
                 art.contextmenu.show = false;
             },
         },
     ],
 });
 
-console.log(art.contextmenu.menu01);
+console.info(art.contextmenu['your-menu']);
 ```
 
 也可以实例化之后添加一个右键菜单
@@ -210,13 +210,13 @@ var art = new Artplayer({
 });
 
 art.contextmenu.add({
-    name: 'menu01',
-    html: '自定义菜单',
-    click: function () {
-        console.info('你点击了自定义菜单');
+    name: 'your-menu',
+    html: 'Your Menu',
+    click: function (...args) {
+        console.info(args);
         art.contextmenu.show = false;
     },
 });
 
-console.log(art.contextmenu.menu01);
+console.info(art.contextmenu['your-menu']);
 ```

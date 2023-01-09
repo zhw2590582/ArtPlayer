@@ -406,7 +406,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.log(art.plugins.artplayerPluginDanmuku.option);
+    console.info(art.plugins.artplayerPluginDanmuku.option);
 });
 ```
 

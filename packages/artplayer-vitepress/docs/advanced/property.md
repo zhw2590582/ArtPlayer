@@ -865,7 +865,7 @@ var art = new Artplayer({
 });
 
 art.proxy(container, 'click', event => {
-	console.log(event);
+	console.info(event);
 });
 ```
 
@@ -889,7 +889,7 @@ var art = new Artplayer({
 	url: '/assets/sample/video.mp4',
 });
 
-console.log(art.query('.art-video'));
+console.info(art.query('.art-video'));
 ```
 
 ## video
@@ -906,5 +906,5 @@ var art = new Artplayer({
 	url: '/assets/sample/video.mp4',
 });
 
-console.log(art.video);
+console.info(art.video);
 ```
