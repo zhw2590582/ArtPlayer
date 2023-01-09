@@ -86,8 +86,8 @@ function adsPlugin(option) {
         art.controls.add({
             name: 'hide-ads',
             position: 'right',
-            html: '隐藏广告',
-            tooltip: '隐藏广告',
+            html: 'Hide Ads',
+            tooltip: 'Hide Ads',
             click: hide,
             style: {
                 marginRight: '20px'
@@ -97,8 +97,8 @@ function adsPlugin(option) {
         art.controls.add({
             name: 'show-ads',
             position: 'right',
-            html: '显示广告',
-            tooltip: '显示广告',
+            html: 'Show Ads',
+            tooltip: 'Show Ads',
             click: show,
         });
 
