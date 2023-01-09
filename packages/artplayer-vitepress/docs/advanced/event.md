@@ -71,127 +71,560 @@ art.on('ready', onReady);
 
 ## `ready`
 
-当播放器首次可以播放器时
+当播放器首次可以播放器时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.log('ready');
+});
+```
 
 ## `restart`
 
-当播放器切换地址后并可以播放时
+当播放器切换地址后并可以播放时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{10}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.url = '/assets/sample/video.mp4'
+});
+
+art.on('restart', () => {
+    console.log('restart');
+});
+```
 
 ## `pause`
 
-当播放器暂停时
+当播放器暂停时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('pause', () => {
+    console.log('pause');
+});
+```
 
 ## `play`
 
-当播放器播放时
+当播放器播放时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('play', () => {
+    console.log('play');
+});
+```
 
 ## `hotkey`
 
-当热键触发时
+当播放器热键被按下时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('hotkey', (event) => {
+    console.log('hotkey', event);
+});
+```
 
 ## `destroy`
 
-当播放器销毁时
+当播放器销毁时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{10}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.destroy();
+});
+
+art.on('destroy', () => {
+    console.log('destroy');
+});
+```
 
 ## `url`
 
-当视频地址变化时
+当视频地址变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{10}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.url = '/assets/sample/video.mp4?t=0'
+});
+
+art.on('url', (url) => {
+    console.log('url', url);
+});
+```
 
 ## `focus`
 
-当播放器获得焦点时
+当播放器获得焦点时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('focus', () => {
+    console.log('focus');
+});
+```
 
 ## `blur`
 
-当播放器失去焦点时
+当播放器失去焦点时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('blur', () => {
+    console.log('blur');
+});
+```
 
 ## `dblclick`
 
-当播放器被双击时
+当播放器被双击时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('dblclick', () => {
+    console.log('dblclick');
+});
+```
 
 ## `click`
 
-当播放器被单击时
+当播放器被单击时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('click', () => {
+    console.log('click');
+});
+```
 
 ## `error`
 
-当播放器加载视频发生错误时
+当播放器加载视频发生错误时触发
 
-## `setBar`
+<div className="run-code">▶ Run Code</div>
 
-当播放器的进度条更新时
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/404.mp4',
+});
+
+art.on('error', (error, reconnectTime) => {
+    console.log(error, reconnectTime);
+});
+```
 
 ## `hover`
 
-当播放器被鼠标移出或者移入时
+当播放器被鼠标移出或者移入时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('hover', (state) => {
+    console.log('hover', state);
+});
+```
 
 ## `mousemove`
 
-当播放器被鼠标经过时
+当播放器被鼠标经过时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('mousemove', (event) => {
+    console.log('mousemove', event);
+});
+```
 
 ## `resize`
 
-当播放器尺寸变化时
+当播放器尺寸变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('resize', () => {
+    console.log('resize');
+});
+```
 
 ## `view`
 
-当播放器出现在视口时
+当播放器出现在视口时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('view', (state) => {
+    console.log('view', state);
+});
+```
 
 ## `aspectRatio`
 
-当播放器长宽比变化时
+当播放器长宽比变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{8}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    aspectRatio: true,
+    setting: true,
+});
+
+art.on('aspectRatio', (aspectRatio) => {
+    console.log('aspectRatio', aspectRatio);
+});
+```
 
 ## `autoHeight`
 
-当播放器自动设置高度时
+当播放器自动设置高度时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{10}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.autoHeight = true;
+});
+
+art.on('autoHeight', (height) => {
+    console.log('autoHeight', height);
+});
+```
 
 ## `autoSize`
 
-当播放器自动设置尺寸时
+当播放器自动设置尺寸时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    autoSize: true,
+});
+
+art.on('autoSize', () => {
+    console.log('autoSize');
+});
+```
 
 ## `flip`
 
-当播放器发生翻转时
+当播放器发生翻转时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{8}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    flip: true,
+    setting: true,
+});
+
+art.on('flip', (flip) => {
+    console.log('flip', flip);
+});
+```
 
 ## `fullscreen`
 
-当播放器发生窗口全屏时
+当播放器发生窗口全屏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreen: true,
+});
+
+art.on('fullscreen', (state) => {
+    console.log('fullscreen', state);
+});
+```
 
 ## `fullscreenWeb`
 
-当播放器发生网页全屏时
+当播放器发生网页全屏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreenWeb: true,
+});
+
+art.on('fullscreenWeb', (state) => {
+    console.log('fullscreenWeb', state);
+});
+```
 
 ## `mini`
 
-当播放器进入迷你模式时
+当播放器进入迷你模式时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{10}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.mini = true;
+});
+
+art.on('mini', (state) => {
+    console.log('mini', state);
+});
+```
 
 ## `pip`
 
-当播放器进入画中画时
+当播放器进入画中画时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    pip: true,
+});
+
+art.on('pip', (state) => {
+    console.log('pip', state);
+});
+```
 
 ## `screenshot`
 
-当播放器发生截图时
+当播放器被截图时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{7}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    screenshot: true,
+});
+
+art.on('screenshot', (dataUri) => {
+    console.log('screenshot', dataUri);
+});
+```
 
 ## `seek`
 
-当播放器发生时间跳转时
+当播放器发生时间跳转时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('seek', (currentTime) => {
+    console.log('seek', currentTime);
+});
+```
 
 ## `subtitleOffset`
 
-当播放器发生字幕偏移时
+当播放器发生字幕偏移时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{11}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitleOffset: true,
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+    },
+    setting: true,
+});
+
+art.on('subtitleOffset', (offset) => {
+    console.log('subtitleOffset', offset);
+});
+```
 
 ## `subtitleUpdate`
 
-当字幕更新时
+当字幕更新时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{9}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+    },
+});
+
+art.on('subtitleUpdate', (text) => {
+    console.log('subtitleUpdate', text);
+});
+```
 
 ## `subtitleLoad`
 
-当字幕加载时
+当字幕加载时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{9}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+    },
+});
+
+art.on('subtitleLoad', (url) => {
+    console.log('subtitleLoad', url);
+});
+```
 
 ## `subtitleSwitch`
 
-当字幕切换时
+当字幕切换时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{13}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    subtitle: {
+        url: '/assets/sample/subtitle.srt',
+    },
+});
+
+art.on('ready', () => {
+    art.subtitle.url = '/assets/sample/subtitle.ass';
+});
+
+art.on('subtitleSwitch', (url) => {
+    console.log('subtitleSwitch', url);
+});
+```
 
 ## `video:canplay`
 

@@ -33,8 +33,7 @@ export type Events = {
     blur: [];
     dblclick: [];
     click: [];
-    setBar: [type: 'loaded' | 'played', percentage: number];
-    hover: [state: boolean];
+    hover: [state: boolean, event: Event];
     mousemove: [event: Event];
     resize: [];
     view: [state: boolean];
@@ -53,6 +52,5 @@ export type Events = {
     screenshot: [dataUri: string];
     seek: [currentTime: number];
     subtitleOffset: [offset: number];
-    switch: [url: string];
     restart: [];
 };

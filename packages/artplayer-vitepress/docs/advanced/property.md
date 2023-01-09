@@ -185,16 +185,14 @@ art.on('ready', () => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js{8}
+```js{7}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
 });
 
 art.on('ready', () => {
-    console.info(art.url);
     art.url = '/assets/sample/video.mp4?t=0';
-    console.info(art.url);
 });
 ```
 
@@ -679,18 +677,26 @@ art.on('ready', () => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js{8}
+```js{7,11}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
 });
 
 art.on('ready', () => {
-    console.info(art.autoHeight);
     art.autoHeight = true;
-    console.info(art.autoHeight);
+});
+
+art.on('resize', () => {
+    art.autoHeight = true;
 });
 ```
+
+:::warning 提示
+
+当你的容器只有宽度，但不知道具体高度时，这个属性很有用，它能自动计算出视频的高度，但你需要确定设置这个属性的时机
+
+:::
 
 ## attr
 

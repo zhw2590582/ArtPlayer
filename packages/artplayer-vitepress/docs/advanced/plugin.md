@@ -1,6 +1,6 @@
 # 编写插件
 
-但你已经知道播放器的`属性`、`方法`和`事件`后，再编写插件时非常简单的事
+但你已经知道播放器的`属性`、`方法`和`事件`后，再编写插件是非常简单的事
 
 可以在实例化的时候加载插件的函数
 
@@ -8,12 +8,12 @@
 
 ```js{15}
 function myPlugin(art) {
-    console.info('你可以在插件里访问到播放器的实例');
+    console.info(art);
     return {
         name: 'myPlugin',
-        something: '自定义导出的属性',
+        something: 'something',
         doSomething: function () {
-            console.info('自定义导出的方法');
+            console.info('doSomething');
         },
     };
 }
@@ -35,12 +35,12 @@ art.on('ready', () => {
 
 ```js{17}
 function myPlugin(art) {
-    console.info('你可以在插件里访问到播放器的实例');
+    console.info(art);
     return {
         name: 'myPlugin',
-        something: '自定义导出的属性',
+        something: 'something',
         doSomething: function () {
-            console.info('自定义导出的方法');
+            console.info('doSomething');
         },
     };
 }

@@ -35,9 +35,6 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     setting: true,
-    flip: true,
-    playbackRate: true,
-    aspectRatio: true,
     settings: [
         {
             html: '选择字幕',
@@ -138,9 +135,6 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     setting: true,
-    flip: true,
-    playbackRate: true,
-    aspectRatio: true,
     settings: [
         {
             html: '画中画模式',
@@ -220,9 +214,6 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     setting: true,
-    flip: true,
-    playbackRate: true,
-    aspectRatio: true,
     settings: [
         {
             html: '滑块',

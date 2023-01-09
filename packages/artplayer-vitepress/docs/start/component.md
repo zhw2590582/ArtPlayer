@@ -180,7 +180,7 @@ console.log(art.controls.button1);
 
 <div className="run-code">▶ Run Code</div>
 
-```js{4-12}
+```js{4-13}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -203,7 +203,7 @@ console.log(art.contextmenu.menu01);
 
 <div className="run-code">▶ Run Code</div>
 
-```js{6-12}
+```js{6-13}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',

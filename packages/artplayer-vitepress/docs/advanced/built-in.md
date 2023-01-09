@@ -2,6 +2,27 @@
 
 这里的 `高级属性` 是指挂载在 `实例` 的 `二级属性`，比较少用
 
+## option
+
+播放器的选项
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+console.log(art.option);
+```
+
+:::warning 提示
+
+假如直接修改这个 `option` 对象，播放器不会马上做出响应
+
+:::
+
 ## whitelist
 
 管理移动设备的白名单功能，只有一个属性 `state` 返回是否启用播放器功能

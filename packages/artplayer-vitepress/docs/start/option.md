@@ -88,7 +88,7 @@ var art = new Artplayer({
 });
 ```
 
-## Ready Callback
+## onReady
 
 -   类型: `Function`
 -   默认: `undefined`
@@ -104,8 +104,8 @@ var art = new Artplayer(
         url: '/assets/sample/video.mp4',
         muted: true,
     },
-    function () {
-        this.play();
+    function onReady(art) {
+        this.play()
     },
 );
 ```
