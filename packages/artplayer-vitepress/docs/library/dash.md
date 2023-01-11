@@ -6,11 +6,14 @@
     ▶ Run Code
 </div>
 
-```js{15-18}
+```js{18-21,25}
 function playMpd(video, url, art) {
     if (dashjs.supportsMediaSource()) {
         const dash = dashjs.MediaPlayer().create();
         dash.initialize(video, url, art.option.autoplay);
+
+        // optional
+        art.dash = dash; 
         art.once('url', () => dash.destroy());
         art.once('destroy', () => dash.destroy());
     } else {
@@ -25,5 +28,9 @@ var art = new Artplayer({
     customType: {
         mpd: playMpd
     },
+});
+
+art.on('ready', () => {
+    console.info(art.dash);
 });
 ```

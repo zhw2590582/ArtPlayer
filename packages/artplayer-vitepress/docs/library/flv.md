@@ -6,12 +6,15 @@
     ▶ Run Code
 </div>
 
-```js{16-19}
+```js{19-22,26}
 function playFlv(video, url, art) {
     if (flvjs.isSupported()) {
         const flv = flvjs.createPlayer({ type: 'flv', url });
         flv.attachMediaElement(video);
         flv.load();
+
+        // optional
+        art.flv = flv; 
         art.once('url', () => flv.destroy());
         art.once('destroy', () => flv.destroy());
     } else {
@@ -26,5 +29,9 @@ var art = new Artplayer({
     customType: {
         flv: playFlv,
     },
+});
+
+art.on('ready', () => {
+    console.info(art.flv);
 });
 ```
