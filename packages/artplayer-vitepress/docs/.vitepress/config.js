@@ -3,7 +3,7 @@
  */
 const config = {
   base: '/document/',
-  outDir: '../../docs/document',
+  outDir: '../../../docs/document',
   title: 'Artplayer.js',
   appearance: 'dark',
   lastUpdated: true,
