@@ -114,7 +114,7 @@ const config = {
       ],
     },
     editLink: {
-      pattern: 'https://github.com/zhw2590582/ArtPlayer/packages/artplayer-vitepress/docs/:path',
+      pattern: 'https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer-vitepress/docs/:path',
       text: 'Edit this page on GitHub'
     },
   },
