@@ -8,9 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [4.6.1] - 2023-1-11
 
+-   编写全新的文档
 -   优化`d.ts`
 -   移除多余的事件
 -   优化部分样式
+-   添加`i18n`选项
 
 ## [4.6.0] - 2022-12-31
 
