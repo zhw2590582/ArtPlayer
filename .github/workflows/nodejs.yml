@@ -30,10 +30,6 @@ jobs:
         npm install
         npm run lint
         npm run build:all
-        cd packages/artplayer-document && ls
-        npm run build
-        cd ../../ && ls
-        npm run test:create
         npm run test
       env:
         CI: true
