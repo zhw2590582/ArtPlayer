@@ -1,0 +1,9 @@
+.run-code {
+    display: inline-block;
+    padding: 3px 7px;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #25c2a0;
+    font-size: 14px;
+    cursor: pointer;
+}
