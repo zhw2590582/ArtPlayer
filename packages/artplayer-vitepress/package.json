@@ -4,7 +4,8 @@
     "scripts": {
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
-        "docs:preview": "vitepress preview docs"
+        "docs:preview": "vitepress preview docs",
+        "remove": "rm -rf ../../docs/document"
     },
     "devDependencies": {
         "flexsearch": "^0.7.31",
