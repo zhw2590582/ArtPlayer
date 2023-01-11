@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.6.1] - 2023-1-11
+
+-   优化`d.ts`
+-   移除多余的事件
+-   优化部分样式
+
 ## [4.6.0] - 2022-12-31
 
 -   优化控制栏图标的样式效果
