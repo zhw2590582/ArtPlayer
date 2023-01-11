@@ -2,9 +2,9 @@
 
 这里的 `实例属性` 是指挂载在 `实例` 的 `一级属性`，比较常用
 
-## play
+## `play`
 
--   类型: `Function`
+-   Type: `Function`
 
 播放视频
 
@@ -22,9 +22,9 @@ art.on('ready', () => {
 });
 ```
 
-## pause
+## `pause`
 
--   类型: `Function`
+-   Type: `Function`
 
 暂停视频
 
@@ -46,9 +46,9 @@ art.on('ready', () => {
 });
 ```
 
-## toggle
+## `toggle`
 
--   类型: `Function`
+-   Type: `Function`
 
 切换视频的播放和暂停
 
@@ -70,10 +70,10 @@ art.on('ready', () => {
 });
 ```
 
-## destroy
+## `destroy`
 
--   类型: `Function`
--   参数: `Boolean`
+-   Type: `Function`
+-   Parameter: `Boolean`
 
 销毁播放器，接受一个参数表示是否销毁后同时移除播放器的 `html`，默认为 `true`
 
@@ -90,10 +90,10 @@ art.on('ready', () => {
 });
 ```
 
-## seek
+## `seek`
 
--   类型: `Setter`
--   参数: `Number`
+-   Type: `Setter`
+-   Parameter: `Number`
 
 视频时间跳转，单位秒
 
@@ -110,10 +110,10 @@ art.on('ready', () => {
 });
 ```
 
-## forward
+## `forward`
 
--   类型: `Setter`
--   参数: `Number`
+-   Type: `Setter`
+-   Parameter: `Number`
 
 视频时间快进，单位秒
 
@@ -130,10 +130,10 @@ art.on('ready', () => {
 });
 ```
 
-## backward
+## `backward`
 
--   类型: `Setter`
--   参数: `Number`
+-   Type: `Setter`
+-   Parameter: `Number`
 
 视频时间快退，单位秒
 
@@ -154,10 +154,10 @@ art.on('ready', () => {
 });
 ```
 
-## volume
+## `volume`
 
--   类型: `Setter/Getter`
--   参数: `Number`
+-   Type: `Setter/Getter`
+-   Parameter: `Number`
 
 设置和获取视频音量，范围在：`[0, 1]`
 
@@ -176,10 +176,10 @@ art.on('ready', () => {
 });
 ```
 
-## url
+## `url`
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
 设置和获取视频地址
 
@@ -196,10 +196,10 @@ art.on('ready', () => {
 });
 ```
 
-## switchUrl
+## `switchUrl`
 
--   类型: `Function`
--   参数: `String`
+-   Type: `Function`
+-   Parameter: `String`
 
 设置视频地址，设置时和 `url` 类似，但会执行一些优化操作
 
@@ -221,10 +221,10 @@ art.on('ready', () => {
 });
 ```
 
-## switchQuality
+## `switchQuality`
 
--   类型: `Function`
--   参数: `String`
+-   Type: `Function`
+-   Parameter: `String`
 
 设置视频画质地址，和 `switchUrl` 类似，但会带上之前的播放进度
 
@@ -246,10 +246,10 @@ art.on('ready', () => {
 });
 ```
 
-## muted
+## `muted`
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
 设置和获取视频是否静音
 
@@ -268,10 +268,10 @@ art.on('ready', () => {
 });
 ```
 
-## currentTime
+## `currentTime`
 
--   类型: `Setter/Getter`
--   参数: `Number`
+-   Type: `Setter/Getter`
+-   Parameter: `Number`
 
 设置和获取视频当前时间，设置时间时和 `seek` 类似，但它不会触发额外的事件
 
@@ -290,9 +290,9 @@ art.on('ready', () => {
 });
 ```
 
-## duration
+## `duration`
 
--   类型: `Getter`
+-   Type: `Getter`
 
 获取视频时长
 
@@ -315,9 +315,9 @@ art.on('ready', () => {
 
 :::
 
-## screenshot
+## `screenshot`
 
--   类型: `Function`
+-   Type: `Function`
 
 下载当前视频帧的截图
 
@@ -334,9 +334,9 @@ art.on('ready', () => {
 });
 ```
 
-## getDataURL
+## `getDataURL`
 
--   类型: `Function`
+-   Type: `Function`
 
 获取当前视频帧的截图的`base64`地址，返回的是一个 `Promise`
 
@@ -354,9 +354,9 @@ art.on('ready', async () => {
 });
 ```
 
-## getBlobUrl
+## `getBlobUrl`
 
--   类型: `Function`
+-   Type: `Function`
 
 获取当前视频帧的截图的`blob`地址，返回的是一个 `Promise`
 
@@ -374,10 +374,10 @@ art.on('ready', async () => {
 });
 ```
 
-## fullscreen
+## `fullscreen`
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
 设置和获取播放器窗口全屏
 
@@ -405,10 +405,10 @@ var art = new Artplayer({
 
 :::
 
-## fullscreenWeb
+## `fullscreenWeb`
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
 设置和获取播放器网页全屏
 
@@ -430,10 +430,10 @@ art.on('ready', () => {
 });
 ```
 
-## pip
+## `pip`
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
 设置和获取播放器画中画模式
 
@@ -461,10 +461,10 @@ var art = new Artplayer({
 
 :::
 
-## poster
+## `poster`
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
 设置和获取视频海报，只有在视频播放前才能看到海报效果
 
@@ -484,10 +484,10 @@ art.on('ready', () => {
 });
 ```
 
-## mini
+## `mini`
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
 设置和获取播放器迷你模式
 
@@ -504,10 +504,10 @@ art.on('ready', () => {
 });
 ```
 
-## playing
+## `playing`
 
--   类型: `Getter`
--   参数: `Boolean`
+-   Type: `Getter`
+-   Parameter: `Boolean`
 
 获取视频是否正在播放中
 
@@ -525,10 +525,10 @@ art.on('ready', () => {
 });
 ```
 
-## autoSize
+## `autoSize`
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
 设置视频是否自适应尺寸，设置为 `true` 之后它会只执行一次
 
@@ -547,9 +547,9 @@ art.on('ready', () => {
 });
 ```
 
-## rect
+## `rect`
 
--   类型: `Getter`
+-   Type: `Getter`
 
 获取播放器的尺寸和坐标信息
 
@@ -572,10 +572,10 @@ art.on('ready', () => {
 
 :::
 
-## flip
+## `flip`
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
 设置和获取播放器翻转，支持`normal`,  `horizontal`,  `vertical`
 
@@ -594,10 +594,10 @@ art.on('ready', () => {
 });
 ```
 
-## playbackRate
+## `playbackRate`
 
--   类型: `Setter/Getter`
--   参数: `Number`
+-   Type: `Setter/Getter`
+-   Parameter: `Number`
 
 设置和获取播放器播放速度
 
@@ -616,10 +616,10 @@ art.on('ready', () => {
 });
 ```
 
-## aspectRatio
+## `aspectRatio`
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
 设置和获取播放器长宽比
 
@@ -638,10 +638,10 @@ art.on('ready', () => {
 });
 ```
 
-## loop
+## `loop`
 
--   类型: `Setter/Getter`
--   参数: `Array`
+-   Type: `Setter/Getter`
+-   Parameter: `Array`
 
 设置和获取区间循序播放，单位秒
 
@@ -668,10 +668,10 @@ art.on('ready', () => {
 
 :::
 
-## autoHeight
+## `autoHeight`
 
--   类型: `Setter/Getter`
--   参数: `Boolean`
+-   Type: `Setter/Getter`
+-   Parameter: `Boolean`
 
 当容器只有宽度，该属性可以自动计算出并设置视频的高度，设置为 `true` 之后它会只执行一次
 
@@ -698,10 +698,10 @@ art.on('resize', () => {
 
 :::
 
-## attr
+## `attr`
 
--   类型: `Function`
--   参数: `String`
+-   Type: `Function`
+-   Parameter: `String`
 
 动态获取和设置 video 元素的属性
 
@@ -720,10 +720,10 @@ art.on('ready', () => {
 });
 ```
 
-## title
+## `title`
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
 动态获取和设置播放器标题
 
@@ -742,10 +742,10 @@ art.on('ready', () => {
 });
 ```
 
-## type
+## `type`
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
 动态获取和设置视频类型
 
@@ -764,10 +764,10 @@ art.on('ready', () => {
 });
 ```
 
-## theme
+## `theme`
 
--   类型: `Setter/Getter`
--   参数: `String`
+-   Type: `Setter/Getter`
+-   Parameter: `String`
 
 动态获取和设置播放器主题颜色
 
@@ -786,9 +786,9 @@ art.on('ready', () => {
 });
 ```
 
-## airplay
+## `airplay`
 
--   类型: `Function`
+-   Type: `Function`
 
 开启隔空播放
 
@@ -810,9 +810,9 @@ var art = new Artplayer({
 });
 ```
 
-## loaded
+## `loaded`
 
--   类型: `Getter`
+-   Type: `Getter`
 
 视频缓存的比例，范围是 `[0, 1]`，常配合 `video:timeupdate` 事件使用
 
@@ -829,9 +829,9 @@ art.on('video:timeupdate', () => {
 });
 ```
 
-## played
+## `played`
 
--   类型: `Getter`
+-   Type: `Getter`
 
 视频播放的比例，范围是 `[0, 1]`，常配合 `video:timeupdate` 事件使用
 
@@ -848,9 +848,9 @@ art.on('video:timeupdate', () => {
 });
 ```
 
-## proxy
+## `proxy`
 
--   类型: `Function`
+-   Type: `Function`
 
 `DOM` 事件的代理函数，实质上代理了 `addEventListener` 和 `removeEventListener`, 当使用 `proxy` 来处理事件，播放器销毁时也会自动销毁该事件
 
@@ -875,9 +875,9 @@ art.proxy(container, 'click', event => {
 
 :::
 
-## query
+## `query`
 
--   类型: `Function`
+-   Type: `Function`
 
 `DOM` 的查询函数，类似 `document.querySelector`，但被查询的对象局限于当前播放器内，可以避免同类名的错误
 
@@ -892,9 +892,9 @@ var art = new Artplayer({
 console.info(art.query('.art-video'));
 ```
 
-## video
+## `video`
 
--   类型: `Element`
+-   Type: `Element`
 
 快捷返回播放器的 `video` 元素
 

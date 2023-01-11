@@ -61,6 +61,7 @@ var art = new Artplayer({
 ## `enable`
 
 - Type: `Getter/Setter`
+- Parameter: `Boolean`
 
 是否启用新的控制器皮肤
 
