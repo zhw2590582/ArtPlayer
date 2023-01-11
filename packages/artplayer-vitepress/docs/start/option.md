@@ -64,7 +64,7 @@ setTimeout(() => {
 
 :::warning 提示
 
-默认支持三种视频文件格式：`.mp4`、`.ogg`、`.webm`
+默认支持三种视频文件格式：`.mp4`, `.ogg`, `.webm`
 
 如需要播放 `.m3u8` 或者 `.flv` 等其它格式，请参考左侧的 `第三方库`
 
@@ -864,7 +864,7 @@ var art = new Artplayer({
 
 白名单是一个数组类型，分别与 `window.navigator.userAgent` 进行匹配，只要其中一项匹配成功则启用播放器
 
-支持 `字符串` 匹配、 `函数` 匹配、 `正则` 匹配
+支持 `字符串` 匹配,  `函数` 匹配,  `正则` 匹配
 
 <div className="run-code">▶ Run Code</div>
 
@@ -924,12 +924,12 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-设置视频的字幕，支持字幕格式：`vtt`、`srt`、`ass`
+设置视频的字幕，支持字幕格式：`vtt`, `srt`, `ass`
 
 | 属性       | 类型     | 描述                               |
 | ---------- | -------- | ---------------------------------- |
 | `url`      | `String` | 字幕地址                           |
-| `type`     | `String` | 字幕类型，可选 `vtt`、`srt`、`ass` |
+| `type`     | `String` | 字幕类型，可选 `vtt`, `srt`, `ass` |
 | `style`    | `Object` | 字幕样式                           |
 | `encoding` | `String` | 字幕编码，默认 `utf-8`             |
 
@@ -1002,7 +1002,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-用于指明视频的格式，需要配合 `customType` 一起使用，默认视频的格式就是视频地址的后缀（如 `.m3u8`、`.mkv`、`.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
+用于指明视频的格式，需要配合 `customType` 一起使用，默认视频的格式就是视频地址的后缀（如 `.m3u8`, `.mkv`, `.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1054,7 +1054,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `navigator.language.toLowerCase()`
 
-默认显示语言，目前支持：`en`、`zh-cn`、`zh-tw`、`cs`、`pl`、`es`、`fa`
+默认显示语言，目前支持：`en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`
 
 <div className="run-code">▶ Run Code</div>
 

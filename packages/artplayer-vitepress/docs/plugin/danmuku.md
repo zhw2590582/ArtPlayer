@@ -44,7 +44,7 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 ```js
 {
-    danmuku: [], // 弹幕库，支持数组、xml 地址、Promise返回数组
+    danmuku: [], // 弹幕库，支持数组, xml 地址, Promise返回数组
     speed: 5, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
     opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
     fontSize: 25, // 字体大小，支持数字和百分比
@@ -86,7 +86,7 @@ var art = new Artplayer({
                     time: 1, // 发送时间，单位秒
                     color: '#fff', // 弹幕局部颜色
                     border: false, // 是否显示描边
-                    mode: 0, // 弹幕模式: 0表示滚动、1静止
+                    mode: 0, // 弹幕模式: 0表示滚动, 1静止
                 },
                 {
                     text: '222',

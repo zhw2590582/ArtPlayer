@@ -1,6 +1,6 @@
 # 设置面板
 
-需先打开设置面板，播放器默认自带四个设置项：`flip`、`playbackRate`、`aspectRatio`、`subtitleOffset`
+需先打开设置面板，播放器默认自带四个设置项：`flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -20,8 +20,8 @@ var art = new Artplayer({
 
 | 属性       | 类型                | 描述            |
 | ---------- | ------------------- | --------------- |
-| `html`     | `String`、`Element` | 元素的 DOM 元素 |
-| `icon`     | `String`、`Element` | 元素的图标      |
+| `html`     | `String`, `Element` | 元素的 DOM 元素 |
+| `icon`     | `String`, `Element` | 元素的图标      |
 | `selector` | `Array`             | 元素列表        |
 | `onSelect` | `Function`          | 元素点击事件    |
 | `width`    | `Number`            | 列表宽度        |
@@ -141,8 +141,8 @@ var art = new Artplayer({
 
 | 属性       | 类型                | 描述            |
 | ---------- | ------------------- | --------------- |
-| `html`     | `String`、`Element` | 元素的 DOM 元素 |
-| `icon`     | `String`、`Element` | 元素的图标      |
+| `html`     | `String`, `Element` | 元素的 DOM 元素 |
+| `icon`     | `String`, `Element` | 元素的图标      |
 | `switch`   | `Boolean`           | 按钮默认状态    |
 | `onSwitch` | `Function`          | 按钮切换事件    |
 | `tooltip`  | `String`            | 提示文本        |
@@ -176,8 +176,8 @@ var art = new Artplayer({
 
 | 属性       | 类型                | 描述             |
 | ---------- | ------------------- | ---------------- |
-| `html`     | `String`、`Element` | 元素的 DOM 元素  |
-| `icon`     | `String`、`Element` | 元素的图标       |
+| `html`     | `String`, `Element` | 元素的 DOM 元素  |
+| `icon`     | `String`, `Element` | 元素的图标       |
 | `range`    | `Array`             | 默认状态数组     |
 | `onRange`  | `Function`          | 完成时触发的事件 |
 | `onChange` | `Function`          | 变化时触发的事件 |

@@ -1,13 +1,13 @@
 # 组件配置
 
-这里所说的组件配置主要是指：`(layers)层`、`(controls)控制器` 、`(contextmenu)右键菜单`这三个共用的配置:
+这里所说的组件配置主要是指：`(layers)层`, `(controls)控制器` , `(contextmenu)右键菜单`这三个共用的配置:
 
 | 属性      | 类型                | 描述                       |
 | --------- | ------------------- | -------------------------- |
 | `disable` | `Boolean`           | 是否禁用组件               |
 | `name`    | `String`            | 组件唯一名称，用于标记类名 |
 | `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`、`Element` | 组件的 DOM 元素            |
+| `html`    | `String`, `Element` | 组件的 DOM 元素            |
 | `style`   | `Object`            | 组件样式对象               |
 | `click`   | `Function`          | 组件点击事件               |
 | `mounted` | `Function`          | 组件挂载后触发             |

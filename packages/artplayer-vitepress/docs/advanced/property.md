@@ -577,7 +577,7 @@ art.on('ready', () => {
 -   类型: `Setter/Getter`
 -   参数: `String`
 
-设置和获取播放器翻转，支持`normal`、 `horizontal`、 `vertical`
+设置和获取播放器翻转，支持`normal`,  `horizontal`,  `vertical`
 
 <div className="run-code">▶ Run Code</div>
 
