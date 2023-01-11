@@ -15,11 +15,11 @@ const config = {
       { text: '中文版', link: '/' },
       { text: 'English', link: '/en/', activeMatch: '/en/' },
       { text: 'Online Editor', link: 'https://artplayer.org' },
-      { text: 'QQ群: 320881312', link: '#' },
       {
         text: '4.6.x',
         items: [
           { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG_CN.md' },
+          { text: 'Q群: 320881312', link: 'https://raw.githubusercontent.com/zhw2590582/ArtPlayer/master/images/qqgroup.png' },
         ]
       }
     ],
