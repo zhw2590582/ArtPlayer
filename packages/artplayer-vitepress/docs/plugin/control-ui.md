@@ -58,9 +58,11 @@ var art = new Artplayer({
 });
 ```
 
-## enable
+## `enable`
 
-是否启用新的控制器UI
+- Type: `Getter/Setter`
+
+是否启用新的控制器皮肤
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-control/index.js">
     ▶ Run Code

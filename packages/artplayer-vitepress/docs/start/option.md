@@ -1,9 +1,9 @@
 # 基础选项
 
-## container
+## `container`
 
--   类型: `String、Element`
--   默认: `#artplayer`
+-   Type: `String、Element`
+-   Default: `#artplayer`
 
 播放器挂载的 `DOM` 容器
 
@@ -32,10 +32,10 @@ var art = new Artplayer({
 
 :::
 
-## url
+## `url`
 
--   类型: `String`
--   默认: `''`
+-   Type: `String`
+-   Default: `''`
 
 视频源地址
 
@@ -71,10 +71,10 @@ setTimeout(() => {
 :::
 
 
-## id
+## `id`
 
--   类型: `String`
--   默认: `''`
+-   Type: `String`
+-   Default: `''`
 
 播放器的唯一标识，目前只用于记忆播放 `autoplayback`
 
@@ -88,10 +88,10 @@ var art = new Artplayer({
 });
 ```
 
-## onReady
+## `onReady`
 
--   类型: `Function`
--   默认: `undefined`
+-   Type: `Function`
+-   Default: `undefined`
 
 构造函数接受一个函数作为第二个参数，播放器初始化成功且视频可以播放时触发，和`ready`事件一样
 
@@ -130,10 +130,10 @@ art.on('ready', () => {
 
 :::
 
-## poster
+## `poster`
 
--   类型: `String`
--   默认: `''`
+-   Type: `String`
+-   Default: `''`
 
 视频的海报，只会出现在播放器初始化且未播放的状态下
 
@@ -147,10 +147,10 @@ var art = new Artplayer({
 });
 ```
 
-## title
+## `title`
 
--   类型: `String`
--   默认: `''`
+-   Type: `String`
+-   Default: `''`
 
 视频标题，目前会出现在 `视频截图` 和 `迷你模式` 下
 
@@ -165,10 +165,10 @@ var art = new Artplayer({
 });
 ```
 
-## theme
+## `theme`
 
--   类型: `String`
--   默认: `#f00`
+-   Type: `String`
+-   Default: `#f00`
 
 播放器主题颜色，目前作用于 `进度条` 和 `高亮元素` 上
 
@@ -182,10 +182,10 @@ var art = new Artplayer({
 });
 ```
 
-## volume
+## `volume`
 
--   类型: `Number`
--   默认: `0.7`
+-   Type: `Number`
+-   Default: `0.7`
 
 播放器的默认音量
 
@@ -205,10 +205,10 @@ var art = new Artplayer({
 
 :::
 
-## isLive
+## `isLive`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 使用直播模式，会隐藏进度条和播放时间
 
@@ -222,11 +222,10 @@ var art = new Artplayer({
 });
 ```
 
+## `muted`
 
-## muted
-
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否默认静音
 
@@ -240,10 +239,10 @@ var art = new Artplayer({
 });
 ```
 
-## autoplay
+## `autoplay`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否自动播放
 
@@ -264,10 +263,10 @@ var art = new Artplayer({
 
 :::
 
-## autoSize
+## `autoSize`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 播放器的尺寸默认会填充整个 `container` 容器尺寸，所以经常出现黑边，该值能自动调整播放器尺寸以隐藏黑边
 
@@ -281,10 +280,10 @@ var art = new Artplayer({
 });
 ```
 
-## autoMini
+## `autoMini`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 当播放器滚动到浏览器视口以外时，自动进入 `迷你播放` 模式
 
@@ -298,10 +297,10 @@ var art = new Artplayer({
 });
 ```
 
-## loop
+## `loop`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否循环播放
 
@@ -315,10 +314,10 @@ var art = new Artplayer({
 });
 ```
 
-## flip
+## `flip`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否显示视频翻转功能，目前只出现在 `设置面板` 和 `右键菜单` 里
 
@@ -333,10 +332,10 @@ var art = new Artplayer({
 });
 ```
 
-## playbackRate
+## `playbackRate`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否显示视频播放速度功能，会出现在 `设置面板` 和 `右键菜单` 里
 
@@ -351,10 +350,10 @@ var art = new Artplayer({
 });
 ```
 
-## aspectRatio
+## `aspectRatio`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否显示视频长宽比功能，会出现在 `设置面板` 和 `右键菜单` 里
 
@@ -369,10 +368,10 @@ var art = new Artplayer({
 });
 ```
 
-## screenshot
+## `screenshot`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在底部控制栏里显示 `视频截图` 功能
 
@@ -392,10 +391,10 @@ var art = new Artplayer({
 
 :::
 
-## setting
+## `setting`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在底部控制栏里显示 `设置面板` 的开关按钮
 
@@ -409,10 +408,10 @@ var art = new Artplayer({
 });
 ```
 
-## hotkey
+## `hotkey`
 
--   类型: `Boolean`
--   默认: `true`
+-   Type: `Boolean`
+-   Default: `true`
 
 是否使用快捷键
 
@@ -440,10 +439,10 @@ var art = new Artplayer({
 
 :::
 
-## pip
+## `pip`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在底部控制栏里显示 `画中画` 的开关按钮
 
@@ -457,10 +456,10 @@ var art = new Artplayer({
 });
 ```
 
-## mutex
+## `mutex`
 
--   类型: `Boolean`
--   默认: `true`
+-   Type: `Boolean`
+-   Default: `true`
 
 假如页面里同时存在多个播放器，是否只能让一个播放器播放
 
@@ -474,10 +473,10 @@ var art = new Artplayer({
 });
 ```
 
-## fullscreen
+## `fullscreen`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在底部控制栏里显示播放器 `窗口全屏` 按钮
 
@@ -491,10 +490,10 @@ var art = new Artplayer({
 });
 ```
 
-## fullscreenWeb
+## `fullscreenWeb`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在底部控制栏里显示播放器 `网页全屏` 按钮
 
@@ -508,10 +507,10 @@ var art = new Artplayer({
 });
 ```
 
-## subtitleOffset
+## `subtitleOffset`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 字幕时间偏移，范围在 `[-5s, 5s]`，出现在 `设置面板` 里
 
@@ -529,10 +528,10 @@ var art = new Artplayer({
 });
 ```
 
-## miniProgressBar
+## `miniProgressBar`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 迷你进度条，只在播放器失去焦点后且正在播放时出现
 
@@ -546,10 +545,10 @@ var art = new Artplayer({
 });
 ```
 
-## useSSR
+## `useSSR`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否使用 `SSR` 挂载模式，假如你希望在播放器挂载前，就提前渲染好播放器所需的 `HTML` 时有用
 
@@ -568,10 +567,10 @@ var art = new Artplayer({
 });
 ```
 
-## playsInline
+## `playsInline`
 
--   类型: `Boolean`
--   默认: `true`
+-   Type: `Boolean`
+-   Default: `true`
 
 在移动端是否使用 `playsInline` 模式
 
@@ -585,10 +584,10 @@ var art = new Artplayer({
 });
 ```
 
-## layers
+## `layers`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 初始化自定义的 `层`
 
@@ -627,10 +626,10 @@ var art = new Artplayer({
 
 :::
 
-## settings
+## `settings`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 初始化自定义的 `设置面板`
 
@@ -680,10 +679,10 @@ var art = new Artplayer({
 
 :::
 
-## contextmenu
+## `contextmenu`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 初始化自定义的 `右键菜单`
 
@@ -707,14 +706,14 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/start/component.html](/start/component.html)-   Type:
 
 :::
 
-## controls
+## `controls`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 初始化自定义的底部 `控制栏`
 
@@ -746,10 +745,10 @@ var art = new Artplayer({
 
 :::
 
-## quality
+## `quality`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 是否在底部控制栏里显示 `画质选择` 列表
 
@@ -779,10 +778,10 @@ var art = new Artplayer({
 });
 ```
 
-## highlight
+## `highlight`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 在进度条上显示 `高亮信息`
 
@@ -822,10 +821,10 @@ var art = new Artplayer({
 });
 ```
 
-## plugins
+## `plugins`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 初始化自定义的 `插件`
 
@@ -856,10 +855,10 @@ var art = new Artplayer({
 
 :::
 
-## whitelist
+## `whitelist`
 
--   类型: `Array`
--   默认: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 因为不同的移动设备存在多种差异和限制，有时候你希望在某些移动设备上不使用本播放器，而是直接使用原生的功能时，可以通过该选项控制
 
@@ -885,10 +884,10 @@ var art = new Artplayer({
 
 :::
 
-## thumbnails
+## `thumbnails`
 
--   类型: `Object`
--   默认: `{}`
+-   Type: `Object`
+-   Default: `{}`
 
 在进度条上设置 `预览图`
 
@@ -920,10 +919,10 @@ var art = new Artplayer({
 
 :::
 
-## subtitle
+## `subtitle`
 
--   类型: `Object`
--   默认: `{}`
+-   Type: `Object`
+-   Default: `{}`
 
 设置视频的字幕，支持字幕格式：`vtt`、`srt`、`ass`
 
@@ -952,10 +951,10 @@ var art = new Artplayer({
 });
 ```
 
-## moreVideoAttr
+## `moreVideoAttr`
 
--   类型: `Object`
--   默认: `{'controls': false,'preload': 'metadata'}`
+-   Type: `Object`
+-   Default: `{'controls': false,'preload': 'metadata'}`
 
 更多视频属性，这些属性将直接写入视频元素里
 
@@ -972,10 +971,10 @@ var art = new Artplayer({
 });
 ```
 
-## icons
+## `icons`
 
--   类型: `Object`
--   默认: `{}`
+-   Type: `Object`
+-   Default: `{}`
 
 用于替换默认图标，支持 `Html` 字符串和 `HTMLElement`
 
@@ -998,10 +997,10 @@ var art = new Artplayer({
 
 :::
 
-## type
+## `type`
 
--   类型: `String`
--   默认: `''`
+-   Type: `String`
+-   Default: `''`
 
 用于指明视频的格式，需要配合 `customType` 一起使用，默认视频的格式就是视频地址的后缀（如 `.m3u8`、`.mkv`、`.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
 
@@ -1025,10 +1024,10 @@ var art = new Artplayer({
 
 :::
 
-## customType
+## `customType`
 
--   类型: `Object`
--   默认: `{}`
+-   Type: `Object`
+-   Default: `{}`
 
 通过视频的 `type` 进行匹配，把视频解码权交给第三方程序进行处理，处理的函数能接收三个参数
 
@@ -1050,10 +1049,10 @@ var art = new Artplayer({
 });
 ```
 
-## lang
+## `lang`
 
--   类型: `String`
--   默认: `navigator.language.toLowerCase()`
+-   Type: `String`
+-   Default: `navigator.language.toLowerCase()`
 
 默认显示语言，目前支持：`en`、`zh-cn`、`zh-tw`、`cs`、`pl`、`es`、`fa`
 
@@ -1067,7 +1066,7 @@ var art = new Artplayer({
 });
 ```
 
-## i18n
+## `i18n`
 
 -   Type: `Object`
 -   Default: `{}`
@@ -1116,10 +1115,10 @@ var art = new Artplayer({
 
 :::
 
-## lock
+## `lock`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在移动端显示一个 `锁定按钮` ，用于隐藏底部 `控制栏`
 
@@ -1133,10 +1132,10 @@ var art = new Artplayer({
 });
 ```
 
-## fastForward
+## `fastForward`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在移动端添加长按视频快进功能
 
@@ -1150,10 +1149,10 @@ var art = new Artplayer({
 });
 ```
 
-## autoPlayback
+## `autoPlayback`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否使用自动 `回放功能`
 
@@ -1176,10 +1175,10 @@ var art = new Artplayer({
 
 :::
 
-## autoOrientation
+## `autoOrientation`
 
--   类型: `Boolean`
--   默认: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 是否在移动端的网页全屏时，根据视频尺寸和视口尺寸，旋转播放器
 
@@ -1193,7 +1192,7 @@ var art = new Artplayer({
 });
 ```
 
-## airplay
+## `airplay`
 
 -   Type: `Boolean`
 -   Default: `false`
