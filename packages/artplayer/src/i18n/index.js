@@ -9,6 +9,7 @@ import fa from './fa.json';
 export default class I18n {
     constructor(art) {
         this.art = art;
+
         this.languages = {
             'zh-cn': zhCn,
             'zh-tw': zhTw,
@@ -17,7 +18,8 @@ export default class I18n {
             es: es,
             fa: fa,
         };
-        this.init();
+
+        this.update(art.option.i18n);
     }
 
     init() {

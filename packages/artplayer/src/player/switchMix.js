@@ -23,7 +23,6 @@ export default function switchMix(art) {
                 if (name) {
                     notice.show = `${i18n.get('Switch Video')}: ${name}`;
                 }
-                art.emit('switch', url);
                 resolve(url);
             });
         });

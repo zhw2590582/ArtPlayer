@@ -95,6 +95,7 @@ declare class Artplayer extends Player {
     };
 
     readonly storage: {
+        name: String;
         settings: Record<string, any>;
         get(key: string): any;
         set(key: string, value: any): void;
@@ -368,7 +369,6 @@ export type Events = {
     'video:waiting': [event: Event];
     hotkey: [event: Event];
     destroy: [];
-    customType: [typeName: string];
     url: [url: string];
     subtitleUpdate: [text: string];
     subtitleLoad: [url: string];
@@ -377,8 +377,7 @@ export type Events = {
     blur: [];
     dblclick: [];
     click: [];
-    setBar: [type: 'loaded' | 'played', percentage: number];
-    hover: [state: boolean];
+    hover: [state: boolean, event: Event];
     mousemove: [event: Event];
     resize: [];
     view: [state: boolean];
@@ -390,20 +389,14 @@ export type Events = {
     flip: [flip: Flip];
     fullscreen: [state: boolean];
     fullscreenWeb: [state: boolean];
-    loop: [interval: [start: number, end: number]];
     mini: [state: boolean];
     pause: [];
     pip: [state: boolean];
-    playbackRate: [playbackRate: PlaybackRate];
     play: [];
     screenshot: [dataUri: string];
     seek: [currentTime: number];
     subtitleOffset: [offset: number];
-    switch: [url: string];
     restart: [];
-    volume: [volume: number];
-    lock: [state: boolean];
-    selector: [selector: Selector, $item: HTMLDivElement];
 };
 
 type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | (string & Record<never, never>);
@@ -771,6 +764,11 @@ export type Option = {
     moreVideoAttr?: Partial<{
         [key in keyof HTMLVideoElement as HTMLVideoElement[key] extends Function ? never : key]: HTMLVideoElement[key];
     }>;
+
+    /**
+     * Custom i18n
+     */
+    i18n?: I18n;
 
     /**
      * Custom default icons

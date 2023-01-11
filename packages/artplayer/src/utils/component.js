@@ -148,7 +148,6 @@ export default class Component {
                 }
             }
             setLeft();
-            this.art.emit('selector', find, $item);
         });
     }
 }

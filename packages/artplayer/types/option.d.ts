@@ -291,6 +291,11 @@ export type Option = {
     }>;
 
     /**
+     * Custom i18n
+     */
+    i18n?: I18n;
+
+    /**
      * Custom default icons
      */
     icons?: {

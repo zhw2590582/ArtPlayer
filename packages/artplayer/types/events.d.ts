@@ -25,7 +25,6 @@ export type Events = {
     'video:waiting': [event: Event];
     hotkey: [event: Event];
     destroy: [];
-    customType: [typeName: string];
     url: [url: string];
     subtitleUpdate: [text: string];
     subtitleLoad: [url: string];
@@ -34,8 +33,7 @@ export type Events = {
     blur: [];
     dblclick: [];
     click: [];
-    setBar: [type: 'loaded' | 'played', percentage: number];
-    hover: [state: boolean];
+    hover: [state: boolean, event: Event];
     mousemove: [event: Event];
     resize: [];
     view: [state: boolean];
@@ -47,18 +45,12 @@ export type Events = {
     flip: [flip: Flip];
     fullscreen: [state: boolean];
     fullscreenWeb: [state: boolean];
-    loop: [interval: [start: number, end: number]];
     mini: [state: boolean];
     pause: [];
     pip: [state: boolean];
-    playbackRate: [playbackRate: PlaybackRate];
     play: [];
     screenshot: [dataUri: string];
     seek: [currentTime: number];
     subtitleOffset: [offset: number];
-    switch: [url: string];
     restart: [];
-    volume: [volume: number];
-    lock: [state: boolean];
-    selector: [selector: Selector, $item: HTMLDivElement];
 };

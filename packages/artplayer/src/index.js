@@ -188,6 +188,7 @@ export default class Artplayer extends Emitter {
                 controls: false,
                 preload: utils.isSafari ? 'auto' : 'metadata',
             },
+            i18n: {},
             icons: {},
             customType: {},
             lang: navigator.language.toLowerCase(),
