@@ -124,15 +124,15 @@ const config = {
   head: [
     [
       'script',
-      { src: "/main.js" }
+      { src: "/document/main.js" }
     ],
     [
       'link',
-      { rel: "stylesheet", href: "/style.css" }
+      { rel: "stylesheet", href: "/document/style.css" }
     ],
     [
       'link',
-      { rel: "shortcut icon", href: "/favicon.ico" }
+      { rel: "shortcut icon", href: "/document/favicon.ico" }
     ]
   ]
 }
