@@ -144,6 +144,7 @@ declare class Artplayer extends Player {
         option: Setting[];
         add(setting: Setting): SettingOption;
         update(): SettingOption[];
+        updateStyle(width?: number): void;
     } & Component;
 
     readonly plugins: {
