@@ -4,11 +4,12 @@
     "type": "module",
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
     "scripts": {
-        "build:all": "npm run build all && npm run build:sw && npm run build:ts",
+        "build:all": "npm run build all && npm run build:sw && npm run build:ts && npm run build:docs",
         "bootstrap": "npx lerna bootstrap --hoist",
         "lint": "npx eslint packages/*/src",
         "build:sw": "node ./scripts/build-sw.js",
         "build:ts": "node ./scripts/build-ts.js",
+        "build:docs": "node ./scripts/build-docs.js",
         "dev": "npx cross-env NODE_ENV=development node ./scripts/dev.js",
         "build": "npx cross-env NODE_ENV=production node ./scripts/build.js",
         "test": "npx cross-env NODE_ENV=test mocha-chrome ./test/index.html --mocha '{\"ui\":\"bdd\"}'",
