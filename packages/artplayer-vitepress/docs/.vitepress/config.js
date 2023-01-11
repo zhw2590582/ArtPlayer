@@ -77,27 +77,28 @@ const config = {
           items: [
             { text: 'Install', link: '/en/' },
             { text: 'Option', link: '/en/start/option' },
-            { text: 'Component', link: '/start/component' },
+            { text: 'Component', link: '/en/start/component' },
+            { text: 'Setting', link: '/en/start/setting' },
           ]
         },
         {
           text: 'Advanced',
           collapsible: true,
           items: [
-            { text: 'Instance Properties', link: '/en/advanced/property' },
-            { text: 'Built In Properties', link: '/advanced/built-in' },
-            { text: 'Static Properties', link: '/en/advanced/class' },
-            { text: 'Instance Events', link: '/en/advanced/event' },
+            { text: 'Instance Property', link: '/en/advanced/property' },
+            { text: 'Advanced Property', link: '/en/advanced/built-in' },
+            { text: 'Static Property', link: '/en/advanced/class' },
+            { text: 'Instance Event', link: '/en/advanced/event' },
+            { text: 'Writing Plugin', link: '/en/advanced/plugin' },
           ]
         },
         {
           text: 'Plugins',
           collapsible: true,
           items: [
-            { text: 'Danmuku', link: '/en/plugin/danmuku' },
-            { text: 'Ads', link: '/en/plugin/ads' },
-            { text: 'Iframe', link: '/en/plugin/iframe' },
-            { text: 'Hls Quality', link: '/en/plugin/hls-quality' },
+            { text: 'Video Ads', link: '/en/plugin/ads' },
+            { text: 'Iframe Control', link: '/en/plugin/iframe' },
+            { text: 'HLS Quality', link: '/en/plugin/hls-quality' },
             { text: 'Control UI', link: '/en/plugin/control-ui' },
           ]
         },
@@ -108,15 +109,6 @@ const config = {
             { text: 'hls.js', link: '/en/library/hls' },
             { text: 'flv.js', link: '/en/library/flv' },
             { text: 'dash.js', link: '/en/library/dash' },
-          ]
-        },
-        {
-          text: 'Questions',
-          collapsible: true,
-          items: [
-            { text: 'question1', link: '/question/1' },
-            { text: 'question2', link: '/question/2' },
-            { text: 'question3', link: '/question/3' },
           ]
         },
       ],
