@@ -8,7 +8,7 @@
 
 :::
 
-## instances
+## `instances`
 
 返回全部播放器实例的数组，假如你想同时管理多个播放器的时候，可以用到该属性
 
@@ -25,7 +25,7 @@ var art = new Artplayer({
 console.info([...Artplayer.instances]);
 ```
 
-## version
+## `version`
 
 返回播放器的版本信息
 
@@ -35,7 +35,7 @@ console.info([...Artplayer.instances]);
 console.info(Artplayer.version);
 ```
 
-## env
+## `env`
 
 返回播放器的环境变量
 
@@ -45,7 +45,7 @@ console.info(Artplayer.version);
 console.info(Artplayer.env);
 ```
 
-## build
+## `build`
 
 返回播放器的打包时间
 
@@ -55,7 +55,7 @@ console.info(Artplayer.env);
 console.info(Artplayer.build);
 ```
 
-## config
+## `config`
 
 返回视频的默认配置
 
@@ -65,7 +65,7 @@ console.info(Artplayer.build);
 console.info(Artplayer.config);
 ```
 
-## utils
+## `utils`
 
 返回播放器的工具函数集合
 
@@ -81,7 +81,7 @@ console.info(Artplayer.utils);
 
 :::
 
-## scheme
+## `scheme`
 
 返回播放器选项的校验方案
 
@@ -91,7 +91,7 @@ console.info(Artplayer.utils);
 console.info(Artplayer.scheme);
 ```
 
-## Emitter
+## `Emitter`
 
 返回事件分发器的构造函数
 
@@ -101,7 +101,7 @@ console.info(Artplayer.scheme);
 console.info(Artplayer.Emitter);
 ```
 
-## validator
+## `validator`
 
 返回选项的校验函数
 
@@ -111,7 +111,7 @@ console.info(Artplayer.Emitter);
 console.info(Artplayer.validator);
 ```
 
-## kindOf
+## `kindOf`
 
 返回类型检测的函数工具
 
@@ -121,7 +121,7 @@ console.info(Artplayer.validator);
 console.info(Artplayer.kindOf);
 ```
 
-## html
+## `html`
 
 返回播放器所需的 `html` 字符串
 
@@ -131,7 +131,7 @@ console.info(Artplayer.kindOf);
 console.info(Artplayer.html);
 ```
 
-## option
+## `option`
 
 返回播放器的默认选项
 
@@ -141,72 +141,72 @@ console.info(Artplayer.html);
 console.info(Artplayer.option);
 ```
 
-## DEBUG
+## `DEBUG`
 
-## CONTEXTMENU
+## `CONTEXTMENU`
 
-## NOTICE_TIME
+## `NOTICE_TIME`
 
-## SETTING_WIDTH
+## `SETTING_WIDTH`
 
-## SETTING_ITEM_WIDTH
+## `SETTING_ITEM_WIDTH`
 
-## SETTING_ITEM_HEIGHT
+## `SETTING_ITEM_HEIGHT`
 
-## INDICATOR_SIZE
+## `INDICATOR_SIZE`
 
-## INDICATOR_SIZE_ICON
+## `INDICATOR_SIZE_ICON`
 
-## INDICATOR_SIZE_MOBILE
+## `INDICATOR_SIZE_MOBILE`
 
-## INDICATOR_SIZE_MOBILE_ICON
+## `INDICATOR_SIZE_MOBILE_ICON`
 
-## VOLUME_PANEL_WIDTH
+## `VOLUME_PANEL_WIDTH`
 
-## VOLUME_HANDLE_WIDTH
+## `VOLUME_HANDLE_WIDTH`
 
-## RESIZE_TIME
+## `RESIZE_TIME`
 
-## SCROLL_TIME
+## `SCROLL_TIME`
 
-## SCROLL_GAP
+## `SCROLL_GAP`
 
-## AUTO_PLAYBACK_MAX
+## `AUTO_PLAYBACK_MAX`
 
-## AUTO_PLAYBACK_MIN
+## `AUTO_PLAYBACK_MIN`
 
-## AUTO_PLAYBACK_TIMEOUT
+## `AUTO_PLAYBACK_TIMEOUT`
 
-## RECONNECT_TIME_MAX
+## `RECONNECT_TIME_MAX`
 
-## RECONNECT_SLEEP_TIME
+## `RECONNECT_SLEEP_TIME`
 
-## CONTROL_HIDE_TIME
+## `CONTROL_HIDE_TIME`
 
-## DB_CLICE_TIME
+## `DB_CLICE_TIME`
 
-## MOBILE_AUTO_PLAYBACKRATE
+## `MOBILE_AUTO_PLAYBACKRATE`
 
-## MOBILE_AUTO_PLAYBACKRATE_TIME
+## `MOBILE_AUTO_PLAYBACKRATE_TIME`
 
-## MOBILE_AUTO_ORIENTATION_TIME
+## `MOBILE_AUTO_ORIENTATION_TIME`
 
-## INFO_LOOP_TIME
+## `INFO_LOOP_TIME`
 
-## FAST_FORWARD_VALUE
+## `FAST_FORWARD_VALUE`
 
-## FAST_FORWARD_TIME
+## `FAST_FORWARD_TIME`
 
-## TOUCH_MOVE_RATIO
+## `TOUCH_MOVE_RATIO`
 
-## VOLUME_STEP
+## `VOLUME_STEP`
 
-## SEEK_STEP
+## `SEEK_STEP`
 
-## PROGRESS_HEIGHT
+## `PROGRESS_HEIGHT`
 
-## PLAYBACK_RATE
+## `PLAYBACK_RATE`
 
-## ASPECT_RATIO
+## `ASPECT_RATIO`
 
-## FLIP
+## `FLIP`

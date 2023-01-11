@@ -2,7 +2,7 @@
 
 这里的 `高级属性` 是指挂载在 `实例` 的 `二级属性`，比较少用
 
-## option
+## `option`
 
 播放器的选项
 
@@ -23,7 +23,7 @@ console.info(art.option);
 
 :::
 
-## whitelist
+## `whitelist`
 
 管理移动设备的白名单功能，只有一个属性 `state` 返回是否启用播放器功能
 
@@ -46,7 +46,7 @@ console.info(art.whitelist.state);
 :::
 
 
-## template
+## `template`
 
 管理播放器所有的 `DOM` 元素
 
@@ -70,7 +70,7 @@ console.info(art.template.$video);
 
 :::
 
-## events
+## `events`
 
 管理播放器所有的 `DOM` 事件，实质上是代理了 `addEventListener` 和 `removeEventListener`, 当使用以下方法来处理事件，播放器销毁时也会自动销毁该事件
 
@@ -109,7 +109,7 @@ art.events.loadImg('/assets/sample/poster.jpg').then(img => {
 
 :::
 
-## storage
+## `storage`
 
 管理播放器的本地存储
 
@@ -154,7 +154,7 @@ art.storage.name = 'your-storage-key';
 art.storage.set('test', { foo: 'bar' });
 ```
 
-## icons
+## `icons`
 
 管理播放器所有的 `svg` 图标
 
@@ -175,7 +175,7 @@ console.info(art.icons.loading);
 
 :::
 
-## i18n
+## `i18n`
 
 管理播放器的 `i18n`
 
@@ -206,7 +206,7 @@ art.i18n.update({
 :::
 
 
-## notice
+## `notice`
 
 管理播放器的提示语，只有一个 `show` 属性用于显示提示语
 
@@ -229,7 +229,7 @@ art.on('ready', () => {
 
 :::
 
-## layers
+## `layers`
 
 管理播放器的层
 
@@ -262,7 +262,7 @@ art.on('ready', () => {
 
 :::
 
-## controls
+## `controls`
 
 管理播放器的控制器
 
@@ -296,7 +296,7 @@ art.on('ready', () => {
 
 :::
 
-## contextmenu
+## `contextmenu`
 
 管理播放器的右键菜单
 
@@ -330,7 +330,7 @@ art.on('ready', () => {
 
 :::
 
-## subtitle
+## `subtitle`
 
 管理播放器的字幕功能
 
@@ -354,7 +354,7 @@ art.on('ready', () => {
 });
 ```
 
-## loading
+## `loading`
 
 管理播放器的加载层
 
@@ -377,7 +377,7 @@ art.on('ready', () => {
 });
 ```
 
-## hotkey
+## `hotkey`
 
 管理播放器的快捷键功能
 
@@ -410,7 +410,7 @@ art.on('ready', () => {
 
 :::
 
-## mask
+## `mask`
 
 管理播放器的遮罩层
 
@@ -433,7 +433,7 @@ art.on('ready', () => {
 });
 ```
 
-## setting
+## `setting`
 
 管理播放器的设置面板
 
@@ -469,7 +469,7 @@ art.on('ready', () => {
 
 :::
 
-## plugins
+## `plugins`
 
 管理播放器的插件功能，只有一个方法 `add` 用于动态添加插件
 
