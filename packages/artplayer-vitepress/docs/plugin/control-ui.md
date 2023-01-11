@@ -46,7 +46,7 @@ https://unpkg.com/artplayer-plugin-control/dist/artplayer-plugin-control.js
     ▶ Run Code
 </div>
 
-```js
+```js{7}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
