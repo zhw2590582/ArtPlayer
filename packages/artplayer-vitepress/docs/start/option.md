@@ -2,7 +2,7 @@
 
 ## `container`
 
--   Type: `String、Element`
+-   Type: `String, Element`
 -   Default: `#artplayer`
 
 播放器挂载的 `DOM` 容器
@@ -268,7 +268,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-播放器的尺寸默认会填充整个 `container` 容器尺寸，所以经常出现黑边，该值能自动调整播放器尺寸以隐藏黑边
+播放器的尺寸默认会填充整个 `container` 容器尺寸，所以经常出现黑边，该值能自动调整播放器尺寸以隐藏黑边，类似 `css` 的 `object-fit: cover;`
 
 <div className="run-code">▶ Run Code</div>
 

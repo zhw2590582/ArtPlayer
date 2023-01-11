@@ -22,7 +22,7 @@ pnpm add artplayer
 
 :::
 
-## CDN
+## `CDN`
 
 ::: code-group
 
@@ -81,7 +81,7 @@ const art = new Artplayer({
 
 :::
 
-## Vue.js
+## `Vue.js`
 
 ::: code-group
 
@@ -165,7 +165,7 @@ export default {
 
 :::
 
-## React.js
+## `React.js`
 
 ::: code-group
 

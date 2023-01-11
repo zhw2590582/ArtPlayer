@@ -21,7 +21,7 @@
 
 :::
 
-## layers
+## `layers`
 
 实例化时添加一个层，例如可以添加 `logo` 或者 `广告` 等等
 
@@ -86,7 +86,7 @@ art.layers.add({
 console.info(art.layers.potser);
 ```
 
-## controls
+## `controls`
 
 实例化时添加一个控制器
 
@@ -174,7 +174,7 @@ art.controls.add({
 console.info(art.controls.button1);
 ```
 
-## contextmenu
+## `contextmenu`
 
 实例化时添加一个右键菜单
 
