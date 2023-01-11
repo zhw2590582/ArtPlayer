@@ -2,7 +2,7 @@
 
 ## 说明
 
-通过该插件，你可以轻松在 `主页面` 里控制 `iframe` 页面里的播放器。如在 `主页面` 里通过代码控制 `iframe` 播放器的功能，或者获取 `iframe` 播放器的值等等
+通过该插件，你可以轻松在 `index.html` 里控制跨域 `iframe.html` 页面里的播放器，如在 `index.html` 里通过代码控制 `iframe.html` 播放器的功能，或者获取 `iframe.html` 播放器的值
 
 ## 演示
 
@@ -30,7 +30,7 @@ pnpm add artplayer-plugin-iframe
 
 :::
 
-## CDN
+## `CDN`
 
 ::: code-group
 
@@ -44,9 +44,11 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
 
 :::
 
-## index.html
+## 使用
 
-```html showLineNumbers title="index.html"
+::: code-group
+
+```html [index.html]
 <!DOCTYPE html>
 <html>
     <head>
@@ -76,9 +78,7 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
 </html>
 ```
 
-## iframe.html
-
-```html showLineNumbers title="iframe.html"
+```html [iframe.html]
 <!DOCTYPE html>
 <html>
     <head>
@@ -105,6 +105,8 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
     </body>
 </html>
 ```
+
+:::
 
 ## 实例接口
 
@@ -158,11 +160,11 @@ iframe.message((event) => {
 iframe.destroy();
 ```
 
-## Iframe 接口
+## `Iframe` 接口
 
 :::warning 提示
 
-`Iframe 接口` 只能运行在 `iframe` 里
+`Iframe` 接口 只能运行在 `iframe` 里
 
 :::
 

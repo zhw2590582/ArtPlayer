@@ -496,9 +496,3 @@ art.on('ready', () => {
     art.plugins.add(myPlugin);
 });
 ```
-
-:::warning 编写插件请参考以下地址
-
-[/question/plugin.html](/question/plugin.html)
-
-:::
