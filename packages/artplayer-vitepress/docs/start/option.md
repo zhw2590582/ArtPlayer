@@ -755,7 +755,7 @@ var art = new Artplayer({
 | 属性      | 类型      | 描述     |
 | --------- | --------- | -------- |
 | `default` | `Boolean` | 默认画质 |
-| `name`    | `String`  | 画质名字 |
+| `html`    | `String`  | 画质名字 |
 | `url`     | `String`  | 画质地址 |
 
 <div className="run-code">▶ Run Code</div>
