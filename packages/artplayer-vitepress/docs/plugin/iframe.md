@@ -108,7 +108,7 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
 
 :::
 
-## 实例接口
+## `index.html` 接口
 
 ### `commit`
 
@@ -154,23 +154,23 @@ iframe.message((event) => {
 
 ### `destroy`
 
-销毁实例，销毁后 `index.html` 无法与 `iframe.html` 通信
+销毁后 `index.html` 无法与 `iframe.html` 通信
 
 ```js
 iframe.destroy();
 ```
 
-## `Iframe` 接口
+## `iframe.html` 接口
 
 :::warning 提示
 
-`Iframe` 接口 只能运行在 `iframe.html` 里
+`iframe.html` 接口 只能运行在 `iframe.html` 里
 
 :::
 
 ### `inject`
 
-注入脚本，接收来自实例的消息
+注入脚本，接收来自 `index.html` 的消息
 
 ```js
 ArtplayerPluginIframe.inject();
@@ -178,7 +178,7 @@ ArtplayerPluginIframe.inject();
 
 ### `postMessage`
 
-将消息推送到实例
+将消息推送到 `index.html`
 
 ```js
 iframe.message((event) => {
