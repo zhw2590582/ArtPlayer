@@ -112,7 +112,7 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
 
 ### `commit`
 
-将消息推送到 iframe，该函数将在 iframe 内部运行
+从 `index.html` 将消息推送到 `iframe.html`，该函数将在 `iframe.html` 内部运行
 
 ```js
 iframe.commit(() => {
@@ -126,7 +126,7 @@ iframe.commit(() => {
     art.seek = 5;
 });
 
-// Get the value from the iframe
+// Get the value from the iframe.html
 (async function () {
     // Use the return keyword
     var currentTime = await iframe.commit(() => {
@@ -144,7 +144,7 @@ iframe.commit(() => {
 
 ### `message`
 
-接收来自 iframe 的消息
+在 `index.html` 接收来自 `iframe.html` 的消息
 
 ```js
 iframe.message((event) => {
@@ -154,7 +154,7 @@ iframe.message((event) => {
 
 ### `destroy`
 
-销毁实例，销毁后无法与 iframe 通信
+销毁实例，销毁后 `index.html` 无法与 `iframe.html` 通信
 
 ```js
 iframe.destroy();
@@ -164,7 +164,7 @@ iframe.destroy();
 
 :::warning 提示
 
-`Iframe` 接口 只能运行在 `iframe` 里
+`Iframe` 接口 只能运行在 `iframe.html` 里
 
 :::
 
