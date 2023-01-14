@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   `Artplayer.PROGRESS_HEIGHT` 默认值改为 `6`
 -   添加 `artplayer-plugin-vtt-thumbnail` 用于使用 `vtt` 字幕文件生成视频预览图
+-   修改字幕偏移的方式为滑块
 
 ## [4.6.1] - 2023-1-11
 
