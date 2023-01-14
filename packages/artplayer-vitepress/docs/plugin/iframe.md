@@ -112,7 +112,7 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
 
 ### `commit`
 
-从 `index.html` 将消息推送到 `iframe.html`，该函数将在 `iframe.html` 内部运行
+从 `index.html` 将消息推送到 `iframe.html`，该函数将在 `iframe.html` 内部运行，同时它也能用于异步获取 `iframe.html` 里的值
 
 ```js
 iframe.commit(() => {
@@ -192,3 +192,102 @@ iframe.commit(() => {
     });
 });
 ```
+
+## 例子
+
+最常遇到的问题是，播放器在 `iframe.html` 里进行网页全屏，但在 `index.html` 是不生效的，这时候只要监听 `iframe.html` 里的 `fullscreenWeb` 事件并通知到 `index.html` 即可
+
+::: code-group
+
+```html [index.html]
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ArtPlayer</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <iframe id="iframe"></iframe>
+        <script src="path/to/artplayer-plugin-iframe.js"></script>
+        <style>
+            .fullscreenWeb {
+                position: fixed;
+                z-index: 9999;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+            }
+        </style>
+        <script>
+            const iframe = new ArtplayerPluginIframe({
+                iframe: document.querySelector('#iframe'),
+                url: 'path/to/iframe.html',
+            });
+
+            iframe.message(({ type, data }) => {
+                switch (type) {
+                    case 'fullscreenWeb':
+                        if (data) {
+                            $iframe.classList.add('fullscreenWeb');
+                        } else {
+                            $iframe.classList.remove('fullscreenWeb');
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            iframe.commit(() => {
+                var art = new Artplayer({
+                    container: '.artplayer-app',
+                    url: 'path/to/video.mp4',
+                });
+
+                art.on('fullscreenWeb', (state) => {
+                    ArtplayerPluginIframe.postMessage({
+                        type: 'fullscreenWeb',
+                        data: state,
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
+
+```
+
+```html [iframe.html]
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ArtPlayer</title>
+        <meta charset="UTF-8" />
+        <style>
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="artplayer-app" style="width: 100%; height: 100%;"></div>
+        <script src="path/to/artplayer.js"></script>
+        <script src="path/to/artplayer-plugin-iframe.js"></script>
+        <script>
+            ArtplayerPluginIframe.inject();
+        </script>
+    </body>
+</html>
+
+```
+
+:::
