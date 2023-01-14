@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-01-14 12:27:04";
+        return "2023-01-14 14:52:27";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -387,7 +387,7 @@ Artplayer.FAST_FORWARD_TIME = 1000;
 Artplayer.TOUCH_MOVE_RATIO = 0.5;
 Artplayer.VOLUME_STEP = 0.1;
 Artplayer.SEEK_STEP = 5;
-Artplayer.PROGRESS_HEIGHT = 4;
+Artplayer.PROGRESS_HEIGHT = 6;
 Artplayer.PLAYBACK_RATE = [
     0.5,
     0.75,
