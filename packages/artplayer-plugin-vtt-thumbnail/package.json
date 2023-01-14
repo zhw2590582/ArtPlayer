@@ -1,0 +1,24 @@
+{
+    "license": "MIT",
+    "version": "1.0.0",
+    "name": "artplayer-plugin-vtt-thumbnail",
+    "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
+    "description": "vtt thumbnail plugin for ArtPlayer",
+    "main": "dist/artplayer-plugin-vtt-thumbnail.js",
+    "legacy": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+    "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "homepage": "https://artplayer.org",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+    },
+    "keywords": [
+        "html5",
+        "video",
+        "player"
+    ]
+}

@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-01-08 17:38:33";
+        return "2023-01-14 12:27:04";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3981,12 +3981,12 @@ parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function hoverInit(art, events) {
     const { $player  } = art.template;
-    events.hover($player, ()=>{
+    events.hover($player, (event)=>{
         (0, _utils.addClass)($player, "art-hover");
-        art.emit("hover", true);
-    }, ()=>{
+        art.emit("hover", true, event);
+    }, (event)=>{
         (0, _utils.removeClass)($player, "art-hover");
-        art.emit("hover", false);
+        art.emit("hover", false, event);
     });
 }
 exports.default = hoverInit;
