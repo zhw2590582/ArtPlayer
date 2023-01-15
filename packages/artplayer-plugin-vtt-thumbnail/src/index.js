@@ -51,7 +51,9 @@ export default function artplayerPluginVttThumbnail(option) {
                 });
 
                 art.on('hover', (state) => {
-                    setStyle($control, 'display', state ? 'block' : 'none');
+                    if (!state) {
+                        setStyle($control, 'display', 'none');
+                    }
                 });
             },
         });

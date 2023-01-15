@@ -184,7 +184,7 @@ function artplayerPluginVttThumbnail(option) {
                     setStyle($control, "display", "none");
                 });
                 art.on("hover", (state)=>{
-                    setStyle($control, "display", state ? "block" : "none");
+                    if (!state) setStyle($control, "display", "none");
                 });
             }
         });
@@ -196,40 +196,10 @@ function artplayerPluginVttThumbnail(option) {
 exports.default = artplayerPluginVttThumbnail;
 artplayerPluginVttThumbnail.env = "development";
 artplayerPluginVttThumbnail.version = "1.0.0";
-artplayerPluginVttThumbnail.build = "2023-01-14 13:32:26";
+artplayerPluginVttThumbnail.build = "2023-01-15 10:25:17";
 if (typeof window !== "undefined") window["artplayerPluginVttThumbnail"] = artplayerPluginVttThumbnail;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./getVttArray":"gSM1I"}],"5dUr6":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"gSM1I":[function(require,module,exports) {
+},{"./getVttArray":"gSM1I","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gSM1I":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function padEnd(str, targetLength, padString) {
@@ -282,6 +252,36 @@ async function getVttArray(vttUrl = "") {
 }
 exports.default = getVttArray;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["1gq8W"], "1gq8W", "parcelRequire4dc0")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}]},["1gq8W"], "1gq8W", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map
