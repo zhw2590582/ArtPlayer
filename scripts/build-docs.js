@@ -1,6 +1,6 @@
 import spawn from 'cross-spawn';
 
-const proc = spawn('npm', ['run', 'docs:build'], {
+const proc = spawn('npm', ['run', 'build'], {
     cwd: './packages/artplayer-vitepress/',
 });
 

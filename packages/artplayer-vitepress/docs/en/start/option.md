@@ -1139,7 +1139,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否在移动端添加长按视频快进功能
+Whether to add long-press video fast-forward function on the mobile terminal
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1156,7 +1156,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否使用自动 `回放功能`
+Whether to use automatic playback function
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1169,11 +1169,11 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 提示
+:::warning Tip
 
-因为播放器默认使用 `url` 作为 `key` 来缓存播放进度的
+Because the player uses `url` as `key` by default to cache the playback progress
 
-但假如你的同一个视频的 `url` 是不同的话，那么你需要使用 `id` 来标识视频的唯一 `key`
+But if your `url` of the same video is different, you need to use `id` to identify the unique `key` of the video
 
 :::
 
@@ -1182,7 +1182,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否在移动端的网页全屏时，根据视频尺寸和视口尺寸，旋转播放器
+Whether to rotate the player according to the video size and viewport size when the mobile page is full screen
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1199,7 +1199,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否显示 `airplay` 按钮，当前只有部分浏览器支持该功能
+Whether to display the `airplay` button. Currently, only some browsers support this function
 
 <div className="run-code">▶ Run Code</div>
 
