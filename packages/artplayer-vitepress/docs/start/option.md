@@ -874,9 +874,9 @@ var art = new Artplayer({
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
-    // whitelist: [/iPhone OS 11/gi],
-    // whitelist: ['iPhone OS 11'],
+    whitelist: [(ua) => /iPhone/gi.test(ua)],
+    // whitelist: [/iPhone/gi],
+    // whitelist: ['iPhone'],
 });
 ```
 

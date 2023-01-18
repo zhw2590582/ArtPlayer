@@ -692,7 +692,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的 `右键菜单`
+Initialize the customized `Contextmenu`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -712,9 +712,9 @@ var art = new Artplayer({
 });
 ```
 
-:::warning `组件配置` 请参考以下地址：
+:::warning Please refer to the following address for `Component`:
 
-[/start/component.html](/start/component.html)-   Type:
+[/start/component.html](/start/component.html)
 
 :::
 
@@ -723,7 +723,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的底部 `控制栏`
+Initialize the customized `Controls`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -747,9 +747,9 @@ var art = new Artplayer({
 });
 ```
 
-:::warning `组件配置` 请参考以下地址：
+:::warning Please refer to the following address for `Setting`
 
-[/start/component.html](/start/component.html)
+[/start/setting.html](/start/setting.html)
 
 :::
 
@@ -758,13 +758,13 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-是否在底部控制栏里显示 `画质选择` 列表
+Whether to display the `Quality` list in the bottom control bar
 
-| 属性      | 类型      | 描述     |
-| --------- | --------- | -------- |
-| `default` | `Boolean` | 默认画质 |
-| `html`    | `String`  | 画质名字 |
-| `url`     | `String`  | 画质地址 |
+| Property  | Type      | Describe        |
+| --------- | --------- | --------------- |
+| `default` | `Boolean` | Default quality |
+| `html`    | `String`  | Quality name    |
+| `url`     | `String`  | Quality name    |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -791,12 +791,12 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-在进度条上显示 `高亮信息`
+Display `highlight` on the progress bar
 
-| 属性   | 类型     | 描述               |
-| ------ | -------- | ------------------ |
-| `time` | `Number` | 高亮时间（单位秒） |
-| `text` | `String` | 高亮文本           |
+| Property | Type     | Describe       |
+| -------- | -------- | -------------- |
+| `time`   | `Number` | Highlight time |
+| `text`   | `String` | Highlight text |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -834,7 +834,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的 `插件`
+Initialize customized `plugins`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -862,11 +862,11 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-因为不同的移动设备存在多种差异和限制，有时候你希望在某些移动设备上不使用本播放器，而是直接使用原生的功能时，可以通过该选项控制
+Because different mobile devices have many differences and limitations, sometimes you want to use native functions directly instead of using this player on some mobile devices, you can use this option to control
 
-白名单是一个数组类型，分别与 `window.navigator.userAgent` 进行匹配，只要其中一项匹配成功则启用播放器
+The whitelist is an array type, which is matched with `window.navigator.userAgent` respectively. The player will be enabled as long as one of the matches is successful
 
-支持 `字符串` 匹配,  `函数` 匹配,  `正则` 匹配
+Support `string` matching, `function` matching and `regular` matching
 
 <div className="run-code">▶ Run Code</div>
 
@@ -874,15 +874,15 @@ var art = new Artplayer({
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    whitelist: [(ua) => /iPhone OS 11/gi.test(ua)],
-    // whitelist: [/iPhone OS 11/gi],
-    // whitelist: ['iPhone OS 11'],
+    whitelist: [(ua) => /iPhone/gi.test(ua)],
+    // whitelist: [/iPhone/gi],
+    // whitelist: ['iPhone'],
 });
 ```
 
-:::warning 提示
+:::warning Tip
 
-假如该选项不填，则默认使用本播放器
+If this option is not filled in, the player will be used by default
 
 :::
 
@@ -891,15 +891,15 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-在进度条上设置 `预览图`
+Set the thumbnails image on the progress bar
 
-| 属性     | 类型     | 描述       |
-| -------- | -------- | ---------- |
-| `url`    | `String` | 预览图地址 |
-| `number` | `Number` | 预览图数量 |
-| `column` | `Number` | 预览图列数 |
-| `width`  | `Number` | 预览图宽度 |
-| `height` | `Number` | 预览图高度 |
+| Property | Type     | Describe         |
+| -------- | -------- | ---------------- |
+| `url`    | `String` | Thumbnail url    |
+| `number` | `Number` | Thumbnail number |
+| `column` | `Number` | Thumbnail column |
+| `width`  | `Number` | Thumbnail width  |
+| `height` | `Number` | Thumbnail height |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -915,7 +915,7 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 在线生成预览图
+:::warning Generate preview thumbnails online
 
 [artplayer-tool-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=thumbnail)
 
@@ -926,14 +926,14 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-设置视频的字幕，支持字幕格式：`vtt`, `srt`, `ass`
+Set the subtitle of the video and support the subtitle format: `vtt`, `srt`, `ass`
 
-| 属性       | 类型     | 描述                               |
+| Property   | Type     | Describe                           |
 | ---------- | -------- | ---------------------------------- |
-| `url`      | `String` | 字幕地址                           |
-| `type`     | `String` | 字幕类型，可选 `vtt`, `srt`, `ass` |
-| `style`    | `Object` | 字幕样式                           |
-| `encoding` | `String` | 字幕编码，默认 `utf-8`             |
+| `url`      | `String` | Subtitle url                       |
+| `type`     | `String` | Subtitle type: `vtt`, `srt`, `ass` |
+| `style`    | `Object` | Subtitle style                     |
+| `encoding` | `String` | Subtitle code, Default: `utf-8`    |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -958,7 +958,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{'controls': false,'preload': 'metadata'}`
 
-更多视频属性，这些属性将直接写入视频元素里
+More video attributes, which will be directly written into the video element
 
 <div className="run-code">▶ Run Code</div>
 
@@ -978,7 +978,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-用于替换默认图标，支持 `Html` 字符串和 `HTMLElement`
+It is used to replace the default icon and supports `Html String` and `HTMLElement`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -993,7 +993,7 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 全部图标的定义
+:::warning Definition of all icons
 
 [artplayer/types/icons.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts)
 
@@ -1004,7 +1004,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-用于指明视频的格式，需要配合 `customType` 一起使用，默认视频的格式就是视频地址的后缀（如 `.m3u8`, `.mkv`, `.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
+It is used to indicate the format of the video. It needs to be used together with the `customType`. The default format of the video is the suffix of the video address (such as `.m3u8`, `.mkv`, `.ts`). But sometimes the video address does not have the correct suffix, so it needs to be specially specified
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1016,13 +1016,13 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 后缀的识别
+:::warning Identification of suffix
 
-播放器只能解析这种后缀：`/assets/sample/video.m3u8`
+The player can only resolve this suffix: `/assets/sample/video.m3u8`
 
-但无法解析这种后缀：`/assets/sample/video?type=m3u8`
+However, this suffix cannot be resolved: `/assets/sample/video?type=m3u8`
 
-所以假如你使用了 `customType`，最好同时要指明 `type`
+So if you use `customType`, it is better to specify `type` at the same time
 
 :::
 
@@ -1031,11 +1031,11 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-通过视频的 `type` 进行匹配，把视频解码权交给第三方程序进行处理，处理的函数能接收三个参数
+By matching the video's `type`, the video decoding right is handed over to a third-party program for processing. The processing function can receive three parameters
 
-- `video` : 视频 `DOM` 元素
-- `url` : 视频地址
-- `art` : 当前实例
+- `video` : Video `DOM` element
+- `url` : Video url
+- `art` : Player instance
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1056,7 +1056,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `navigator.language.toLowerCase()`
 
-默认显示语言，目前支持：`en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`
+The default display language currently supports: `en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1073,9 +1073,9 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-自定义 `i18n` 配置，该配置会和自带的 `i18n` 进行深度合并
+Customize the `i18n` configuration, which will be deeply merged with the built-in `i18n`
 
-新增你的语言:
+Add your language:
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1092,7 +1092,7 @@ var art = new Artplayer({
 });
 ```
 
-修改现有的语言
+Modify existing language:
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1111,7 +1111,7 @@ var art = new Artplayer({
 });
 ```
 
-:::warning i18n 写法参考
+:::warning `i18n` definitions
 
 [artplayer/types/i18n.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts)
 
@@ -1122,7 +1122,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否在移动端显示一个 `锁定按钮` ，用于隐藏底部 `控制栏`
+Whether to display a `lock button` on the mobile end to hide the bottom control bar
 
 <div className="run-code">▶ Run Code</div>
 
