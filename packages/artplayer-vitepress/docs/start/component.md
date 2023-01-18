@@ -93,7 +93,7 @@ console.info(art.layers.potser);
 :::warning controls 还有三个额外的选项
 
 - `position`: `left` 和 `right` 控制控制器出现的左右位置
-- `selector`: 快速创建选择列表的对象数组
+- `selector`: 选择列表的对象数组
 - `onSelect`: 选择列表的元素被点击时触发的函数
 
 :::

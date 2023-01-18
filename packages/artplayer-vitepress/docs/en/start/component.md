@@ -1,29 +1,29 @@
-# 组件配置
+# Component
 
-这里所说的组件配置主要是指：`layers` , `controls` , `contextmenu` 这三个共用的配置:
+The component configuration mentioned here mainly refers to three common configurations: `layers`, `controls` and `contextmenu`:
 
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`, `Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
+| Property  | Type                | Describe                                           |
+| --------- | ------------------- | -------------------------------------------------- |
+| `disable` | `Boolean`           | Whether to disable components                      |
+| `name`    | `String`            | Component unique name, used to mark the class name |
+| `index`   | `Number`            | Component index, used to display the priority of   |
+| `html`    | `String`, `Element` | DOM element of component                           |
+| `style`   | `Object`            | Component Style Object                             |
+| `click`   | `Function`          | Component click event                              |
+| `mounted` | `Function`          | Triggered after the component is mounted           |
+| `tooltip` | `String`            | Prompt text for component                          |
 
-:::warning 提示
+:::warning Tip
 
-- 当前组件只能添加，并没有销毁的功能
-- 通过 `name` 选项可以快速获取组件的 `DOM` 元素
-- 通过 `index` 选项可以控制组件出现的顺序
+- The current component can only be added, not destroyed
+- Use the 'name' option to quickly obtain the 'DOM' element of a component
+- The order in which components appear can be controlled through the 'index' option
 
 :::
 
 ## `layers`
 
-实例化时添加一个层，例如可以添加 `logo` 或者 `广告` 等等
+Add a layer during instantiation, such as `logo` or `advertisement`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -55,7 +55,7 @@ var art = new Artplayer({
 console.info(art.layers.potser);
 ```
 
-也可以实例化之后添加一个层
+You can also add a layer after instantiation
 
 <div className="run-code">▶ Run Code</div>
 
@@ -88,13 +88,13 @@ console.info(art.layers.potser);
 
 ## `controls`
 
-实例化时添加一个控制器
+Add a control during instantiation
 
-:::warning controls 还有三个额外的选项
+:::warning There are three additional options for controls
 
-- `position`: `left` 和 `right` 控制控制器出现的左右位置
-- `selector`: 快速创建选择列表的对象数组
-- `onSelect`: 选择列表的元素被点击时触发的函数
+- `position`: `left` and `right` positions of control controller
+- `selector`: Object array of selection list
+- `onSelect`: Function triggered when an element of the selection list is clicked
 
 :::
 
@@ -146,7 +146,7 @@ console.info(art.controls['your-button']);
 console.info(art.controls.subtitle);
 ```
 
-也可以实例化之后添加一个控制器
+You can also add a control after instantiation
 
 ```js{6-22}
 var art = new Artplayer({
@@ -176,7 +176,7 @@ console.info(art.controls.button1);
 
 ## `contextmenu`
 
-实例化时添加一个右键菜单
+Add a contextmenu during instantiation
 
 <div className="run-code">▶ Run Code</div>
 
@@ -199,7 +199,7 @@ var art = new Artplayer({
 console.info(art.contextmenu['your-menu']);
 ```
 
-也可以实例化之后添加一个右键菜单
+You can also add a contextmenu after instantiation
 
 <div className="run-code">▶ Run Code</div>
 
