@@ -26,6 +26,14 @@ You may need to initialize the size of container elements, such as:
 }
 ```
 
+Or use `aspect-ratio`：
+
+```css{2}
+.artplayer-app {
+    aspect-ratio: 16/9;
+}
+```
+
 :::warning Tip
 
 Of all options, only `container` is required

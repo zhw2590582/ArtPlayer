@@ -26,6 +26,14 @@ var art = new Artplayer({
 }
 ```
 
+或者使用 `aspect-ratio`：
+
+```css{2}
+.artplayer-app {
+    aspect-ratio: 16/9;
+}
+```
+
 :::warning 提示
 
 全部选项里，只有 `container` 是必填的
