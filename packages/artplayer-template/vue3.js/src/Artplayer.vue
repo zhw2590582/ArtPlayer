@@ -2,35 +2,35 @@
     <div ref="artRef"></div>
 </template>
 
-<script>
+<script setup>
 import Artplayer from 'artplayer';
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 
-export default {
-    data() {
-        return {
-            instance: null,
-        };
-    },
-    props: {
-        option: {
-            type: Object,
-            required: true,
-        },
-    },
-    mounted() {
-        this.instance = new Artplayer({
-            ...this.option,
-            container: this.$refs.artRef,
-        });
+const emit = defineEmits(['get-instance']);
 
-        this.$nextTick(() => {
-            this.$emit('get-instance', this.instance);
-        });
+const props = defineProps({
+    option: {
+        type: Object,
+        required: true,
     },
-    beforeUnmount() {
-        if (this.instance && this.instance.destroy) {
-            this.instance.destroy(false);
-        }
-    },
-};
+});
+
+const instance = ref(null);
+const artRef = ref(null);
+
+onMounted(() => {
+    instance.value = new Artplayer({
+        ...props.option,
+        container: artRef.value,
+    });
+    nextTick(() => {
+        emit('get-instance', instance.value);
+    });
+});
+
+onBeforeUnmount(() => {
+    if (instance.value) {
+        instance.value.destroy(false);
+    }
+});
 </script>
