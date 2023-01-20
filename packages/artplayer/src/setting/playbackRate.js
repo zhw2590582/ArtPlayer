@@ -31,6 +31,7 @@ export default function playbackRate(art) {
         }),
         onSelect(item) {
             art.playbackRate = item.value;
+            return item.value;
         },
         mounted: ($panel, item) => {
             update($panel, item.$tooltip, art.playbackRate);

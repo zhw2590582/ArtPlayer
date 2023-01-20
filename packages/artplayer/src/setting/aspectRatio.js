@@ -31,6 +31,7 @@ export default function aspectRatio(art) {
         }),
         onSelect(item) {
             art.aspectRatio = item.value;
+            return item.value;
         },
         mounted: ($panel, item) => {
             update($panel, item.$tooltip, art.aspectRatio);

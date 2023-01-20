@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-01-14 18:40:47";
+        return "2023-01-20 15:46:18";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -4765,6 +4765,7 @@ function flip(art) {
         }),
         onSelect (item) {
             art.flip = item.value;
+            return item.value;
         },
         mounted: ($panel, item)=>{
             update($panel, item.$tooltip, art.flip);
@@ -4804,6 +4805,7 @@ function aspectRatio(art) {
         }),
         onSelect (item) {
             art.aspectRatio = item.value;
+            return item.value;
         },
         mounted: ($panel, item)=>{
             update($panel, item.$tooltip, art.aspectRatio);
@@ -4843,6 +4845,7 @@ function playbackRate(art) {
         }),
         onSelect (item) {
             art.playbackRate = item.value;
+            return item.value;
         },
         mounted: ($panel, item)=>{
             update($panel, item.$tooltip, art.playbackRate);
