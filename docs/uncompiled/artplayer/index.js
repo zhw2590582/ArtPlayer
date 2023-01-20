@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-01-20 15:46:18";
+        return "2023-01-20 15:51:19";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3616,8 +3616,8 @@ function playbackRate(option) {
             mounted: ($panel)=>{
                 const $default = (0, _utils.query)('[data-value="1"]', $panel);
                 if ($default) (0, _utils.inverseClass)($default, "art-current");
-                art.on("playbackRate", (value)=>{
-                    const $current = (0, _utils.queryAll)("span", $panel).find((item)=>Number(item.dataset.value) === value);
+                art.on("video:ratechange", ()=>{
+                    const $current = (0, _utils.queryAll)("span", $panel).find((item)=>Number(item.dataset.value) === art.playbackRate);
                     if ($current) (0, _utils.inverseClass)($current, "art-current");
                 });
             }
@@ -4849,7 +4849,7 @@ function playbackRate(art) {
         },
         mounted: ($panel, item)=>{
             update($panel, item.$tooltip, art.playbackRate);
-            art.on("playbackRate", ()=>{
+            art.on("video:ratechange", ()=>{
                 update($panel, item.$tooltip, art.playbackRate);
             });
         }

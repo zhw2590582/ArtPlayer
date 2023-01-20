@@ -35,7 +35,7 @@ export default function playbackRate(art) {
         },
         mounted: ($panel, item) => {
             update($panel, item.$tooltip, art.playbackRate);
-            art.on('playbackRate', () => {
+            art.on('video:ratechange', () => {
                 update($panel, item.$tooltip, art.playbackRate);
             });
         },

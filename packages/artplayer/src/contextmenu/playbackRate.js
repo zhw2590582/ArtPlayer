@@ -24,8 +24,10 @@ export default function playbackRate(option) {
             mounted: ($panel) => {
                 const $default = query('[data-value="1"]', $panel);
                 if ($default) inverseClass($default, 'art-current');
-                art.on('playbackRate', (value) => {
-                    const $current = queryAll('span', $panel).find((item) => Number(item.dataset.value) === value);
+                art.on('video:ratechange', () => {
+                    const $current = queryAll('span', $panel).find(
+                        (item) => Number(item.dataset.value) === art.playbackRate,
+                    );
                     if ($current) {
                         inverseClass($current, 'art-current');
                     }
