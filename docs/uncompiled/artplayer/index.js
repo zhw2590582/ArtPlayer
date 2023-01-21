@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-01-20 15:51:19";
+        return "2023-01-21 11:21:21";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -406,6 +406,7 @@ Artplayer.FLIP = [
     "horizontal",
     "vertical"
 ];
+Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-style")) {
         const $style = _utils.createElement("style");
@@ -2074,13 +2075,14 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function fullscreenWebMix(art) {
-    const { notice , template: { $player  }  } = art;
+    const { notice , constructor , template: { $container , $player  }  } = art;
     (0, _utils.def)(art, "fullscreenWeb", {
         get () {
             return (0, _utils.hasClass)($player, "art-fullscreen-web");
         },
         set (value) {
             if (value) {
+                if (constructor.FULLSCREEN_WEB_IN_BODY) (0, _utils.append)(document.body, $player);
                 art.normalSize = "fullscreenWeb";
                 (0, _utils.addClass)($player, "art-fullscreen-web");
                 art.aspectRatioReset = true;
@@ -2089,6 +2091,7 @@ function fullscreenWebMix(art) {
                 art.emit("fullscreenWeb", true);
                 notice.show = "";
             } else {
+                if (constructor.FULLSCREEN_WEB_IN_BODY) (0, _utils.append)($container, $player);
                 (0, _utils.removeClass)($player, "art-fullscreen-web");
                 art.aspectRatioReset = true;
                 art.autoSize = art.option.autoSize;

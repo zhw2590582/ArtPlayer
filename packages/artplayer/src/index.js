@@ -251,6 +251,7 @@ Artplayer.PROGRESS_HEIGHT = 6;
 Artplayer.PLAYBACK_RATE = [0.5, 0.75, 1, 1.25, 1.5, 2];
 Artplayer.ASPECT_RATIO = ['default', '4:3', '16:9'];
 Artplayer.FLIP = ['normal', 'horizontal', 'vertical'];
+Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 
 if (typeof document !== 'undefined') {
     if (!document.getElementById('artplayer-style')) {

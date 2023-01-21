@@ -51,6 +51,7 @@ declare class Artplayer extends Player {
     static PLAYBACK_RATE: number[];
     static ASPECT_RATIO: string[];
     static FLIP: string[];
+    static FULLSCREEN_WEB_IN_BODY: boolean;
 
     readonly id: number;
     readonly option: Option;
