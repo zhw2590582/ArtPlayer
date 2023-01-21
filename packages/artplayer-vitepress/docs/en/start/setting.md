@@ -1,6 +1,6 @@
 # 设置面板
 
-需先打开设置面板，播放器默认自带四个设置项：`flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
+You need to open the settings panel first. The player has four settings by default: `flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -16,17 +16,16 @@ var art = new Artplayer({
 });
 ```
 
-## 选择列表
+## Selection list
 
-| 属性       | 类型                | 描述            |
-| ---------- | ------------------- | --------------- |
-| `html`     | `String`, `Element` | 元素的 DOM 元素 |
-| `icon`     | `String`, `Element` | 元素的图标      |
-| `selector` | `Array`             | 元素列表        |
-| `onSelect` | `Function`          | 元素点击事件    |
-| `width`    | `Number`            | 列表宽度        |
-| `default`  | `Boolean`           | 是否默认选中    |
-| `tooltip`  | `String`            | 提示文本        |
+| Property   | Type                | Describe            |
+| ---------- | ------------------- | ------------------- |
+| `html`     | `String`, `Element` | DOM of element      |
+| `icon`     | `String`, `Element` | Icon of element     |
+| `selector` | `Array`             | Element list        |
+| `onSelect` | `Function`          | Element click event |
+| `width`    | `Number`            | List width          |
+| `tooltip`  | `String`            | Prompt text         |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -86,7 +85,7 @@ var art = new Artplayer({
 });
 ```
 
-## 列表嵌套
+## List nesting
 
 <div className="run-code">▶ Run Code</div>
 
@@ -137,15 +136,15 @@ var art = new Artplayer({
 });
 ```
 
-## 切换按钮
+## Toggle button
 
-| 属性       | 类型                | 描述            |
-| ---------- | ------------------- | --------------- |
-| `html`     | `String`, `Element` | 元素的 DOM 元素 |
-| `icon`     | `String`, `Element` | 元素的图标      |
-| `switch`   | `Boolean`           | 按钮默认状态    |
-| `onSwitch` | `Function`          | 按钮切换事件    |
-| `tooltip`  | `String`            | 提示文本        |
+| Property   | Type                | Describe               |
+| ---------- | ------------------- | ---------------------- |
+| `html`     | `String`, `Element` | DOM of element         |
+| `icon`     | `String`, `Element` | Icon of element        |
+| `switch`   | `Boolean`           | Button default state   |
+| `onSwitch` | `Function`          | Button switching event |
+| `tooltip`  | `String`            | Prompt text            |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -172,16 +171,16 @@ var art = new Artplayer({
 });
 ```
 
-## 范围滑块
+## Range Slider
 
-| 属性       | 类型                | 描述             |
-| ---------- | ------------------- | ---------------- |
-| `html`     | `String`, `Element` | 元素的 DOM 元素  |
-| `icon`     | `String`, `Element` | 元素的图标       |
-| `range`    | `Array`             | 默认状态数组     |
-| `onRange`  | `Function`          | 完成时触发的事件 |
-| `onChange` | `Function`          | 变化时触发的事件 |
-| `tooltip`  | `String`            | 提示文本         |
+| Property   | Type                | Describe                       |
+| ---------- | ------------------- | ------------------------------ |
+| `html`     | `String`, `Element` | DOM of element                 |
+| `icon`     | `String`, `Element` | Icon of element                |
+| `range`    | `Array`             | Default state array            |
+| `onRange`  | `Function`          | Event triggered on completion  |
+| `onChange` | `Function`          | Events triggered when changing |
+| `tooltip`  | `String`            | Prompt text                    |
 
 ```js
 const range = [5, 1, 10, 1];

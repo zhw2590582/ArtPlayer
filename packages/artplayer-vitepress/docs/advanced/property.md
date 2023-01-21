@@ -216,7 +216,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchUrl('/assets/sample/video.mp4?t=0', '新视频名字');
+        art.switchUrl('/assets/sample/video.mp4?t=0', 'New Video Name');
     }, 3000);
 });
 ```
@@ -390,7 +390,7 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: '全屏开关',
+            html: 'Fullscreen Switch',
             click: function () {
                 art.fullscreen = !art.fullscreen;
             },
@@ -737,7 +737,7 @@ var art = new Artplayer({
 
 art.on('ready', () => {
     console.info(art.title);
-    art.title = '新标题';
+    art.title = 'New Title';
     console.info(art.title);
 });
 ```
