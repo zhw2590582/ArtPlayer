@@ -210,3 +210,5 @@ console.info(Artplayer.option);
 ## `ASPECT_RATIO`
 
 ## `FLIP`
+
+## `FULLSCREEN_WEB_IN_BODY`
