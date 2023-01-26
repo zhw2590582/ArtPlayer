@@ -928,12 +928,13 @@ var art = new Artplayer({
 
 设置视频的字幕，支持字幕格式：`vtt`, `srt`, `ass`
 
-| 属性       | 类型     | 描述                               |
-| ---------- | -------- | ---------------------------------- |
-| `url`      | `String` | 字幕地址                           |
-| `type`     | `String` | 字幕类型，可选 `vtt`, `srt`, `ass` |
-| `style`    | `Object` | 字幕样式                           |
-| `encoding` | `String` | 字幕编码，默认 `utf-8`             |
+| 属性       | 类型      | 描述                                |
+| ---------- | --------- | ----------------------------------- |
+| `url`      | `String`  | 字幕地址                            |
+| `type`     | `String`  | 字幕类型，可选 `vtt`, `srt`, `ass`  |
+| `style`    | `Object`  | 字幕样式                            |
+| `encoding` | `String`  | 字幕编码，默认 `utf-8`              |
+| `escape`   | `Boolean` | 是否转义 `html` 标签，默认为 `true` |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -945,6 +946,7 @@ var art = new Artplayer({
         url: '/assets/sample/subtitle.srt',
         type: 'srt',
         encoding: 'utf-8',
+        escape: true,
         style: {
             color: '#03A9F4',
             'font-size': '30px',

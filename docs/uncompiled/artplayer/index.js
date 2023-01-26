@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-01-21 11:21:21";
+        return "2023-01-26 15:22:41";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -326,6 +326,7 @@ class Artplayer extends (0, _emitterDefault.default) {
                 url: "",
                 type: "",
                 style: {},
+                escape: true,
                 encoding: "utf-8"
             },
             moreVideoAttr: {
@@ -1091,6 +1092,7 @@ exports.default = {
         url: s,
         type: s,
         style: o,
+        escape: b,
         encoding: s
     },
     moreVideoAttr: o,
@@ -3817,7 +3819,8 @@ class Subtitle extends (0, _componentDefault.default) {
         const { $subtitle  } = this.art.template;
         $subtitle.innerHTML = "";
         if (this.activeCue) {
-            $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map((item)=>`<p>${(0, _utils.escape)(item)}</p>`).join("");
+            if (this.art.option.subtitle.escape) $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map((item)=>`<p>${(0, _utils.escape)(item)}</p>`).join("");
+            else $subtitle.innerHTML = this.activeCue.text;
             this.art.emit("subtitleUpdate", this.activeCue.text);
         }
     }

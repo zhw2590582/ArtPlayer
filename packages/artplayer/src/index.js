@@ -182,6 +182,7 @@ export default class Artplayer extends Emitter {
                 url: '',
                 type: '',
                 style: {},
+                escape: true,
                 encoding: 'utf-8',
             },
             moreVideoAttr: {

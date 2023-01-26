@@ -928,12 +928,13 @@ var art = new Artplayer({
 
 Set the subtitle of the video and support the subtitle format: `vtt`, `srt`, `ass`
 
-| Property   | Type     | Describe                           |
-| ---------- | -------- | ---------------------------------- |
-| `url`      | `String` | Subtitle url                       |
-| `type`     | `String` | Subtitle type: `vtt`, `srt`, `ass` |
-| `style`    | `Object` | Subtitle style                     |
-| `encoding` | `String` | Subtitle code, Default: `utf-8`    |
+| Property   | Type      | Describe                                         |
+| ---------- | --------- | ------------------------------------------------ |
+| `url`      | `String`  | Subtitle url                                     |
+| `type`     | `String`  | Subtitle type: `vtt`, `srt`, `ass`               |
+| `style`    | `Object`  | Subtitle style                                   |
+| `encoding` | `String`  | Subtitle code, Default: `utf-8`                  |
+| `escape`   | `Boolean` | Whether to escape the `html` tag,Default: `true` |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -945,6 +946,7 @@ var art = new Artplayer({
         url: '/assets/sample/subtitle.srt',
         type: 'srt',
         encoding: 'utf-8',
+        escape: true,
         style: {
             color: '#03A9F4',
             'font-size': '30px',

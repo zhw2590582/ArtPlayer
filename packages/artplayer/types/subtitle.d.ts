@@ -23,4 +23,9 @@ export type Subtitle = {
      * The subtitle encoding, default utf-8
      */
     encoding?: string;
+
+    /**
+     * Whether use escape, default true
+     */
+    escape?: boolean;
 };

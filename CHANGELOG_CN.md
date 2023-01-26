@@ -8,8 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   `Artplayer.PROGRESS_HEIGHT` 默认值改为 `6`
 -   添加 `artplayer-plugin-vtt-thumbnail` 用于使用 `vtt` 字幕文件生成视频预览图
--   添加 `Artplayer.FULLSCREEN_WEB_IN_BODY ` 用于网页全屏时，是否把播放器挂载于 `document.body` 上
+-   添加 `Artplayer.FULLSCREEN_WEB_IN_BODY` 用于网页全屏时，是否把播放器挂载于 `document.body` 上，默认为 `false`
 -   修改字幕偏移的方式为滑块
+-   字幕选项添加 `escape`，用于是否转义 `html` 标签，默认为 `true`
 
 ## [4.6.1] - 2023-1-11
 
