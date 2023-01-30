@@ -5,6 +5,7 @@ import pl from './pl.json';
 import cs from './cs.json';
 import es from './es.json';
 import fa from './fa.json';
+import fr from './fr.json';
 
 export default class I18n {
     constructor(art) {
@@ -17,6 +18,7 @@ export default class I18n {
             cs: cs,
             es: es,
             fa: fa,
+            fr: fr,
         };
 
         this.update(art.option.i18n);
