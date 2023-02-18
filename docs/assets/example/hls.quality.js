@@ -10,17 +10,28 @@ var art = new Artplayer({
             // Show quality in setting
             setting: true,
 
+            // Get the resolution text from level
+			getResolution: (level) => level.height + 'P',
+
             // I18n
             title: 'Quality',
             auto: 'Auto',
         }),
     ],
     customType: {
-        m3u8: function (video, url) {
-            // Attach the Hls instance to the Artplayer instance
-            art.hls = new Hls();
-            art.hls.loadSource(url);
-            art.hls.attachMedia(video);
-        },
+        m3u8: function playM3u8(video, url, art) {
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                art.hls = hls;
+                art.once('url', () => hls.destroy());
+                art.once('destroy', () => hls.destroy());
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+            } else {
+                art.notice.show = 'Unsupported playback format: m3u8';
+            }
+        }
     },
 });

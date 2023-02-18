@@ -10,8 +10,9 @@ export default function artplayerPluginHlsQuality(option) {
             errorHandle(hls && hls.media === $video, 'Cannot find instance of HLS from "art.hls" or "window.hls"');
             const auto = option.auto || 'Auto';
             const title = option.title || 'Quality';
+            const getResolution = option.getResolution || ((level) => (level.height || 'Unknown ') + 'P');
             const defaultLevel = hls.levels[hls.currentLevel];
-            const defaultHtml = defaultLevel ? defaultLevel.height + 'P' : auto;
+            const defaultHtml = defaultLevel ? getResolution(defaultLevel) : auto;
 
             if (option.control) {
                 art.controls.add({
@@ -21,7 +22,7 @@ export default function artplayerPluginHlsQuality(option) {
                     style: { padding: '0 10px' },
                     selector: hls.levels.map((item, index) => {
                         return {
-                            html: item.height + 'P',
+                            html: getResolution(item),
                             level: item.level || index,
                             default: defaultLevel === item,
                         };
@@ -42,7 +43,7 @@ export default function artplayerPluginHlsQuality(option) {
                     width: 200,
                     selector: hls.levels.map((item, index) => {
                         return {
-                            html: item.height + 'P',
+                            html: getResolution(item),
                             level: item.level || index,
                             default: defaultLevel === item,
                         };

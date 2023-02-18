@@ -8,6 +8,7 @@ declare const artplayerPluginHlsQuality: (option: {
     setting?: boolean;
     title?: string;
     auto?: string;
+    getResolution?(level: any): String;
 }) => (art: Artplayer) => {
     name: 'artplayerPluginHlsQuality';
 };
