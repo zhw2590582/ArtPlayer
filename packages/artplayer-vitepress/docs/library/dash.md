@@ -23,7 +23,7 @@ function playMpd(video, url, art) {
 
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: 'https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd',
+    url: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
     type: 'mpd',
     customType: {
         mpd: playMpd

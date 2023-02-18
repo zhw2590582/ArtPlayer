@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
--   插件 `artplayerPluginHlsQuality` 添加 `getResolution` 函数选项，用于获取从 `level` 中分辨率的文本
+-   插件 `artplayer-plugin-hls-quality` 添加 `getResolution` 函数选项，用于获取从 `level` 中分辨率的文本
+-   新增 `artplayer-plugin-dash-quality` 插件，用于添加 `Dash` 画质列表到播放器
 
 ## [4.6.2] - 2023-1-26
 
