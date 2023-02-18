@@ -37,6 +37,7 @@ export type Events = {
     mousemove: [event: Event];
     resize: [];
     view: [state: boolean];
+    lock: [state: boolean];
     aspectRatio: [aspectRatio: AspectRatio];
     autoHeight: [height: number];
     autoSize: [];

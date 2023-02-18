@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-02-18 11:50:14";
+        return "2023-02-18 19:26:19";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -5189,9 +5189,11 @@ function lock(art) {
             if ((0, _utils.hasClass)($player, "art-lock")) {
                 (0, _utils.removeClass)($player, "art-lock");
                 this.isLock = false;
+                art.emit("lock", false);
             } else {
                 (0, _utils.addClass)($player, "art-lock");
                 this.isLock = true;
+                art.emit("lock", true);
             }
         }
     });
