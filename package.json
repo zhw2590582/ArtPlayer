@@ -60,5 +60,8 @@
     "engines": {
         "node": ">= 16.0.0"
     },
+    "pre-commit": [
+        "prettier"
+    ],
     "__npminstall_done": false
 }
