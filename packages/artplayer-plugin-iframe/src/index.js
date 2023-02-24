@@ -120,7 +120,7 @@ export default class ArtplayerPluginIframe {
                         setTimeout(loop.bind(this), 200);
                     }
                 }
-            }.call(this));
+            }).call(this);
         });
     }
 

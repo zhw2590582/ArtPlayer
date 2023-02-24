@@ -369,6 +369,14 @@ export type Events = {
     'video:timeupdate': [event: Event];
     'video:volumechange': [event: Event];
     'video:waiting': [event: Event];
+    info: [state: boolean];
+    layer: [state: boolean];
+    loading: [state: boolean];
+    mask: [state: boolean];
+    subtitle: [state: boolean];
+    contextmenu: [state: boolean];
+    control: [state: boolean];
+    setting: [state: boolean];
     hotkey: [event: Event];
     destroy: [];
     url: [url: string];
@@ -402,7 +410,7 @@ export type Events = {
     restart: [];
 };
 
-type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | 'id' (string & Record<never, never>);
+type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | `id` (string & Record<never, never>);
 
 type I18nValue = {
     'Video Info': string;
