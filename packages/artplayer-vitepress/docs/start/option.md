@@ -1164,7 +1164,7 @@ var art = new Artplayer({
 
 ```js{4-5}
 var art = new Artplayer({
-    container: '.artplayer-app',gb
+    container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     id: 'your-url-id',
     autoPlayback: true,
