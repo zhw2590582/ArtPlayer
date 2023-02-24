@@ -115,7 +115,7 @@ export default {
       this.$emit("get-instance", this.instance);
     });
   },
-  beforeUnmount() {
+  beforeDestroy() {
     if (this.instance && this.instance.destroy) {
       this.instance.destroy(false);
     }
