@@ -626,6 +626,143 @@ art.on('subtitleSwitch', (url) => {
 });
 ```
 
+## `info`
+
+当信息面板显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('info', (state) => {
+    console.log(state);
+});
+```
+
+## `layer`
+
+当自定义层显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('layer', (state) => {
+    console.log(state);
+});
+```
+
+## `loading`
+
+当加载器显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('loading', (state) => {
+    console.log(state);
+});
+```
+
+## `mask`
+
+当遮罩层显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('mask', (state) => {
+    console.log(state);
+});
+```
+
+## `subtitle`
+
+当字幕层显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('subtitle', (state) => {
+    console.log(state);
+});
+```
+
+## `contextmenu`
+
+当右键菜单显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('contextmenu', (state) => {
+    console.log(state);
+});
+```
+
+## `control`
+
+当控制器显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('control', (state) => {
+    console.log(state);
+});
+```
+
+## `setting`
+
+当设置面板显示或隐藏时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    setting: true,
+});
+
+art.on('setting', (state) => {
+    console.log(state);
+});
+```
+
 ## `video:canplay`
 
 浏览器可以播放媒体文件了，但估计没有足够的数据来支撑播放到结束，不必停下来进一步缓冲内容

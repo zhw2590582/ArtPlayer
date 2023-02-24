@@ -23,6 +23,14 @@ export type Events = {
     'video:timeupdate': [event: Event];
     'video:volumechange': [event: Event];
     'video:waiting': [event: Event];
+    info: [state: boolean];
+    layer: [state: boolean];
+    loading: [state: boolean];
+    mask: [state: boolean];
+    subtitle: [state: boolean];
+    contextmenu: [state: boolean];
+    control: [state: boolean];
+    setting: [state: boolean];
     hotkey: [event: Event];
     destroy: [];
     url: [url: string];
