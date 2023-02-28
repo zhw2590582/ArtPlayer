@@ -47,7 +47,7 @@
         "cross-env": "^7.0.3",
         "cross-spawn": "^7.0.3",
         "eslint": "^8.31.0",
-        "glob": "^8.0.3",
+        "glob": "^9.0.1",
         "lerna": "^6.4.1",
         "mocha": "^10.2.0",
         "mocha-chrome": "^2.2.0",
