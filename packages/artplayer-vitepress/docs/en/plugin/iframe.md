@@ -223,8 +223,9 @@ iframe.commit(() => {
             }
         </style>
         <script>
+            const $iframe = document.querySelector('#iframe');
             const iframe = new ArtplayerPluginIframe({
-                iframe: document.querySelector('#iframe'),
+                iframe: $iframe,
                 url: 'path/to/iframe.html',
             });
 
