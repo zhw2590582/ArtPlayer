@@ -8,8 +8,8 @@
         .art-control-progress {
             position: relative;
             .art-center();
-            height: var(--art-progress-height);
             cursor: pointer;
+            height: var(--art-progress-height);
 
             .art-control-progress-inner {
                 display: flex;
@@ -21,26 +21,26 @@
                 background-color: rgba(255, 255, 255, 0.2);
 
                 .art-progress-loaded {
-                    .art-abs-full(10);
+                    .art-full(10);
                     width: 0%;
                     background-color: rgba(255, 255, 255, 0.2);
                 }
 
                 .art-progress-played {
-                    .art-abs-full(20);
+                    .art-full(20);
                     width: 0%;
                 }
 
                 .art-progress-highlight {
-                    .art-abs-full(30);
+                    .art-full(30);
                     pointer-events: none;
 
                     span {
-                        .art-abs-full();
+                        .art-full();
                         right: auto;
                         pointer-events: auto;
                         width: var(--art-highlight-width);
-                        margin-left: calc(var(--art-highlight-width) / -2);
+                        transform: translateX(calc(var(--art-highlight-width) / -2));
                         background-color: rgba(255, 255, 255, 0.5);
                     }
                 }
@@ -75,16 +75,13 @@
                     z-index: 50;
                     top: -25px;
                     left: 0;
-                    height: 20px;
-                    padding: 0 5px;
-                    line-height: 20px;
+                    padding: 3px 5px;
+                    line-height: 1;
                     color: #fff;
                     font-size: 12px;
-                    text-align: center;
-                    background: rgba(0, 0, 0, 0.7);
                     border-radius: 3px;
-                    font-weight: bold;
                     white-space: nowrap;
+                    background-color: rgba(0, 0, 0, 0.75);
                 }
             }
 
@@ -102,7 +99,7 @@
             left: 0;
             border-radius: 3px;
             pointer-events: none;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.75);
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.2);
         }
 
@@ -123,7 +120,7 @@
                 top: -2px;
                 width: 2px;
                 height: 8px;
-                background: rgba(255, 255, 255, 0.75);
+                background-color: rgba(255, 255, 255, 0.75);
             }
         }
     }
