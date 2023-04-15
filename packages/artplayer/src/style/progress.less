@@ -1,0 +1,125 @@
+.art-progress {
+    flex: 1;
+    position: relative;
+    z-index: 0;
+    pointer-events: auto;
+
+    .art-control-progress {
+        position: relative;
+        .art-center();
+        height: var(--art-progress-height);
+        cursor: pointer;
+
+        .art-control-progress-inner {
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 50%;
+            width: 100%;
+            transition: height 0.2s ease;
+            background-color: rgba(255, 255, 255, 0.2);
+
+            .art-progress-loaded {
+                .art-abs-full(10);
+                width: 0%;
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .art-progress-played {
+                .art-abs-full(20);
+                width: 0%;
+            }
+
+            .art-progress-highlight {
+                .art-abs-full(30);
+                pointer-events: none;
+
+                span {
+                    .art-abs-full();
+                    right: auto;
+                    pointer-events: auto;
+                    width: var(--art-highlight-width);
+                    margin-left: calc(var(--art-highlight-width) / -2);
+                    background-color: rgba(255, 255, 255, 0.5);
+                }
+            }
+
+            .art-progress-indicator {
+                visibility: hidden;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                z-index: 40;
+                border-radius: 50%;
+                transform: scale(0.1, 0.1);
+                transition: transform 0.1s ease-in-out;
+
+                .art-icon {
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                }
+
+                &:hover {
+                    transform: scale(1.2, 1.2) !important;
+                }
+            }
+
+            .art-progress-tip {
+                display: none;
+                position: absolute;
+                z-index: 50;
+                top: -25px;
+                left: 0;
+                height: 20px;
+                padding: 0 5px;
+                line-height: 20px;
+                color: #fff;
+                font-size: 12px;
+                text-align: center;
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 3px;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+        }
+
+        &:hover {
+            .art-control-progress-inner {
+                height: 100%;
+            }
+        }
+    }
+
+    .art-control-thumbnails {
+        display: none;
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        border-radius: 3px;
+        pointer-events: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.2);
+    }
+
+    .art-control-loop {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+
+        .art-loop-point {
+            position: absolute;
+            left: 0;
+            top: -2px;
+            width: 2px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.75);
+        }
+    }
+}

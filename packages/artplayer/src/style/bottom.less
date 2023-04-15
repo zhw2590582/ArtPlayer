@@ -3,305 +3,21 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        position: absolute;
-        z-index: 60;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100px;
-        padding: 50px 10px 0;
+        .art-abs-full(60);
+        top: auto;
+        bottom: var(--art-bottom-offset);
+        height: var(--art-bottom-height);
+        padding: calc(var(--art-bottom-height) - var(--art-control-height)) 10px 0;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.2s ease-in-out;
         pointer-events: none;
-        background-image: linear-gradient(to top, #000, rgb(0 0 0 / 40%), transparent);
-        background-repeat: repeat-x;
-        background-position: center bottom;
-
-        .art-progress {
-            flex: 1;
-            position: relative;
-            z-index: 0;
-            pointer-events: auto;
-
-            .art-control-progress {
-                position: relative;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                height: 4px;
-                cursor: pointer;
-
-                .art-control-progress-inner {
-                    display: flex;
-                    align-items: center;
-                    position: relative;
-                    height: 50%;
-                    width: 100%;
-                    transition: all 0.2s ease;
-                    background: rgba(255, 255, 255, 0.2);
-
-                    .art-progress-loaded {
-                        position: absolute;
-                        z-index: 10;
-                        left: 0;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        height: 100%;
-                        width: 0;
-                        background: rgba(255, 255, 255, 0.4);
-                    }
-
-                    .art-progress-played {
-                        position: absolute;
-                        z-index: 20;
-                        left: 0;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        height: 100%;
-                        width: 0;
-                    }
-
-                    .art-progress-highlight {
-                        position: absolute;
-                        z-index: 30;
-                        left: 0;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        height: 100%;
-                        pointer-events: none;
-
-                        span {
-                            display: inline-block;
-                            position: absolute;
-                            left: 0;
-                            top: 0;
-                            width: 7px;
-                            height: 100%;
-                            background: rgba(255, 255, 255, 0.5);
-                            pointer-events: auto;
-                        }
-                    }
-
-                    .art-progress-indicator {
-                        visibility: hidden;
-                        align-items: center;
-                        justify-content: center;
-                        position: absolute;
-                        z-index: 40;
-                        border-radius: 50%;
-                        transform: scale(0.1, 0.1);
-                        transition: transform 0.1s ease-in-out;
-
-                        .art-icon {
-                            width: 100%;
-                            height: 100%;
-                            pointer-events: none;
-                        }
-
-                        &:hover {
-                            transform: scale(1.2, 1.2) !important;
-                        }
-                    }
-
-                    .art-progress-tip {
-                        display: none;
-                        position: absolute;
-                        z-index: 50;
-                        top: -25px;
-                        left: 0;
-                        height: 20px;
-                        padding: 0 5px;
-                        line-height: 20px;
-                        color: #fff;
-                        font-size: 12px;
-                        text-align: center;
-                        background: rgba(0, 0, 0, 0.7);
-                        border-radius: 3px;
-                        font-weight: bold;
-                        white-space: nowrap;
-                    }
-                }
-            }
-
-            .art-control-thumbnails {
-                display: none;
-                position: absolute;
-                bottom: 10px;
-                left: 0;
-                border-radius: 3px;
-                pointer-events: none;
-                background-color: rgba(0, 0, 0, 0.7);
-                box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.2);
-            }
-
-            .art-control-loop {
-                display: none;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                left: 0;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                pointer-events: none;
-
-                .art-loop-point {
-                    position: absolute;
-                    left: 0;
-                    top: -2px;
-                    width: 2px;
-                    height: 8px;
-                    background: rgba(255, 255, 255, 0.75);
-                }
-            }
-        }
-
-        .art-controls {
-            position: relative;
-            z-index: 1;
-            pointer-events: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 45px;
-
-            .art-controls-left,
-            .art-controls-right {
-                display: flex;
-            }
-
-            .art-controls-center {
-                flex: 1;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 0 10px;
-            }
-
-            .art-controls-right {
-                justify-content: flex-end;
-            }
-
-            .art-control {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                opacity: 0.75;
-                font-size: 12px;
-                min-height: 36px;
-                min-width: 36px;
-                line-height: 1;
-                text-align: center;
-                cursor: pointer;
-                white-space: nowrap;
-                transition: opacity 0.1s ease-in-out;
-                .art-icon {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    float: left;
-                    height: 36px;
-                    width: 36px;
-                    transform: scale(1);
-                    transition: transform 0.2s ease-in-out;
-                    &:active {
-                        transform: scale(0.85);
-                    }
-                }
-                &:hover {
-                    opacity: 1;
-                }
-            }
-
-            .art-control-volume {
-                .art-volume-panel {
-                    position: relative;
-                    float: left;
-                    width: 0;
-                    height: 100%;
-                    transition: margin 0.2s cubic-bezier(0.4, 0, 1, 1), width 0.2s cubic-bezier(0.4, 0, 1, 1);
-                    overflow: hidden;
-
-                    .art-volume-slider-handle {
-                        position: absolute;
-                        top: 50%;
-                        left: 0;
-                        width: 12px;
-                        height: 12px;
-                        border-radius: 12px;
-                        margin-top: -6px;
-                        background: #fff;
-
-                        &::before {
-                            left: -54px;
-                            background: #fff;
-                        }
-
-                        &::after {
-                            left: 6px;
-                            background: rgba(255, 255, 255, 0.2);
-                        }
-
-                        &::before,
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            display: block;
-                            top: 50%;
-                            height: 3px;
-                            margin-top: -2px;
-                            width: 60px;
-                        }
-                    }
-                }
-
-                &:hover .art-volume-panel {
-                    width: 60px;
-                }
-            }
-
-            .art-control-quality {
-                position: relative;
-                z-index: 30;
-                .art-qualitys {
-                    display: none;
-                    position: absolute;
-                    bottom: 35px;
-                    width: 100px;
-                    padding: 5px 0;
-                    text-align: center;
-                    color: #fff;
-                    background: rgba(0, 0, 0, 0.8);
-                    border-radius: 3px;
-                    .art-quality-item {
-                        height: 30px;
-                        line-height: 30px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-                        &:hover {
-                            background-color: rgba(255, 255, 255, 0.1);
-                        }
-                    }
-                }
-                &:hover .art-qualitys {
-                    display: block;
-                }
-            }
-        }
+        transition: all 0.2s ease;
+        .art-bottom-gradient();
 
         &:hover {
-            .art-progress .art-control-progress .art-control-progress-inner {
-                .art-progress-indicator {
-                    transform: scale(1, 1);
-                    visibility: visible;
-                }
+            .art-progress-indicator {
+                transform: scale(1, 1) !important;
+                visibility: visible !important;
             }
         }
     }
@@ -309,30 +25,16 @@
     &.art-control-show,
     &.art-hover {
         .art-bottom {
+            bottom: 0;
             opacity: 1;
             visibility: visible;
         }
     }
 
-    &.art-error,
-    &.art-destroy {
-        .art-progress-indicator,
-        .art-progress-tip {
-            display: none !important;
-        }
-    }
-
     &.art-mobile {
-        .art-bottom {
-            height: 105px;
-            padding: 50px 7px 0;
-            .art-controls {
-                height: 40px;
-            }
-            .art-progress-indicator {
-                transform: scale(1, 1) !important;
-                visibility: visible !important;
-            }
+        .art-progress-indicator {
+            transform: scale(1, 1) !important;
+            visibility: visible !important;
         }
     }
 }

@@ -9,6 +9,14 @@
             width: var(--art-state-size);
             height: var(--art-state-size);
             opacity: var(--art-state-opacity);
+            cursor: pointer;
+            transform: scale(1);
+            pointer-events: auto;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 

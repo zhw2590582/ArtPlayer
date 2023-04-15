@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-.art-abs-full(@index, @position: absolute) {
+.art-abs-full(@index: 0, @position: absolute) {
     position: absolute;
     inset: 0;
     z-index: @index;
@@ -21,4 +21,10 @@
 .art-text-border{
     text-shadow: #000 1px 0 1px, #000 0 1px 1px, #000 -1px 0 1px, #000 0 -1px 1px, #000 1px 1px 1px,
     #000 -1px -1px 1px, #000 1px -1px 1px, #000 -1px 1px 1px;
+}
+
+.art-bottom-gradient {
+    background-image: linear-gradient(to top, #000, rgb(0 0 0 / 40%), transparent);
+    background-repeat: repeat-x;
+    background-position: center bottom;
 }
