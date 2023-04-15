@@ -1,6 +1,6 @@
 .art-video-player {
     .art-mask {
-        .art-center(none);
+        .art-center();
         .art-full(50);
         pointer-events: none;
 
@@ -9,20 +9,16 @@
             width: var(--art-state-size);
             height: var(--art-state-size);
             opacity: var(--art-state-opacity);
-            cursor: pointer;
-            transform: scale(1);
-            pointer-events: auto;
-            transition: opacity 0.2s ease;
-
-            &:hover {
-                opacity: 1;
-            }
+            transform: scale(2);
+            opacity: 0;
+            transition: all 0.2s ease;
         }
     }
 
     &.art-mask-show {
-        .art-mask {
-            display: flex;
+        .art-state {
+            opacity: 1;
+            transform: scale(1);
         }
     }
 }
