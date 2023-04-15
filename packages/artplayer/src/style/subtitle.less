@@ -1,6 +1,7 @@
 .art-video-player {
     .art-subtitle {
         display: none;
+        justify-content: center;
         position: absolute;
         z-index: 20;
         bottom: 10px;
@@ -11,8 +12,7 @@
         font-size: 20px;
         pointer-events: none;
         transition: bottom 0.2s ease;
-        text-shadow: #000 1px 0 1px, #000 0 1px 1px, #000 -1px 0 1px, #000 0 -1px 1px, #000 1px 1px 1px,
-            #000 -1px -1px 1px, #000 1px -1px 1px, #000 -1px 1px 1px;
+        .art-text-border();
 
         p {
             word-break: break-all;
@@ -24,7 +24,7 @@
 
     &.art-subtitle-show {
         .art-subtitle {
-            display: block;
+            display: flex;
         }
     }
 
