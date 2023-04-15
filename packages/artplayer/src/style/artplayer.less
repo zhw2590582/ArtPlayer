@@ -42,11 +42,6 @@
         background-color: #ccc;
     }
 
-    .art-icon {
-        line-height: 1;
-        .art-center();
-    }
-
     img {
         max-width: 100%;
         vertical-align: top;
@@ -54,13 +49,5 @@
 
     svg {
         fill: #fff;
-    }
-
-    @supports ((-webkit-backdrop-filter: initial) or (backdrop-filter: initial)) {
-        .art-backdrop-filter {
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            backdrop-filter: saturate(180%) blur(20px);
-            background-color: rgba(0, 0, 0, 0.7) !important;
-        }
     }
 }
