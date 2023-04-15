@@ -113,6 +113,7 @@ export default {
         style: o,
         escape: b,
         encoding: s,
+        onVttLoad: f,
     },
     moreVideoAttr: o,
     i18n: o,

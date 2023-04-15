@@ -28,4 +28,9 @@ export type Subtitle = {
      * Whether use escape, default true
      */
     escape?: boolean;
+
+    /**
+     * Change the vtt text
+     */
+    onVttLoad?(vtt: string): string;
 };

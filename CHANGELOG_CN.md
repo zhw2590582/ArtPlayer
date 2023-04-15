@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   插件 `artplayer-plugin-hls-quality` 添加 `getResolution` 函数选项，用于获取从 `level` 中分辨率的文本
 -   新增 `artplayer-plugin-dash-quality` 插件，用于添加 `Dash` 画质列表到播放器
 -   修复 `lock` 事件失效问题
+-   添加俄语 `ru` 和印度尼西亚 `id` 语言
+-   字幕添加 `onVttLoad` 函数选项，用于修改 `vtt` 字幕文本
 
 ## [4.6.2] - 2023-1-26
 
@@ -105,7 +107,7 @@ var art = new Artplayer({
 -   弹幕库插件暴露 `art.plugins.artplayerPluginDanmuku.reset()` 方法，用于清空当前弹幕显示
 -   弹幕库插件暴露 `art.plugins.artplayerPluginDanmuku.option` 属性，用于获取当前弹幕配置
 -   修复在 `IOS` 全屏模式下，字幕失效的问题
--   添加西班牙语支持
+-   添加 `es` 语言
 
 ## [4.5.4] - 2022-8-1
 

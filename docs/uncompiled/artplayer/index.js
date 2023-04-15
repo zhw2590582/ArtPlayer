@@ -1093,7 +1093,8 @@ exports.default = {
         type: s,
         style: o,
         escape: b,
-        encoding: s
+        encoding: s,
+        onVttLoad: f
     },
     moreVideoAttr: o,
     i18n: o,
@@ -3873,13 +3874,20 @@ class Subtitle extends (0, _componentDefault.default) {
             const decoder = new TextDecoder(subtitleOption.encoding);
             const text = decoder.decode(buffer);
             this.art.emit("subtitleLoad", subtitleOption.url);
+            const onVttLoad = subtitleOption.onVttLoad || ((vtt)=>vtt);
             switch(subtitleOption.type || (0, _utils.getExt)(subtitleOption.url)){
                 case "srt":
-                    return (0, _utils.vttToBlob)((0, _utils.srtToVtt)(text));
+                    {
+                        const vtt = (0, _utils.srtToVtt)(text);
+                        return (0, _utils.vttToBlob)(onVttLoad(vtt));
+                    }
                 case "ass":
-                    return (0, _utils.vttToBlob)((0, _utils.assToVtt)(text));
+                    {
+                        const vtt = (0, _utils.assToVtt)(text);
+                        return (0, _utils.vttToBlob)(onVttLoad(vtt));
+                    }
                 case "vtt":
-                    return (0, _utils.vttToBlob)(text);
+                    return (0, _utils.vttToBlob)(onVttLoad(text));
                 default:
                     return subtitleOption.url;
             }

@@ -118,13 +118,19 @@ export default class Subtitle extends Component {
                 const text = decoder.decode(buffer);
 
                 this.art.emit('subtitleLoad', subtitleOption.url);
+                const onVttLoad = subtitleOption.onVttLoad || ((vtt) => vtt);
                 switch (subtitleOption.type || getExt(subtitleOption.url)) {
-                    case 'srt':
-                        return vttToBlob(srtToVtt(text));
-                    case 'ass':
-                        return vttToBlob(assToVtt(text));
-                    case 'vtt':
-                        return vttToBlob(text);
+                    case 'srt': {
+                        const vtt = srtToVtt(text);
+                        return vttToBlob(onVttLoad(vtt));
+                    }
+                    case 'ass': {
+                        const vtt = assToVtt(text);
+                        return vttToBlob(onVttLoad(vtt));
+                    }
+                    case 'vtt': {
+                        return vttToBlob(onVttLoad(text));
+                    }
                     default:
                         return subtitleOption.url;
                 }
