@@ -18,12 +18,12 @@
                 height: 50%;
                 width: 100%;
                 transition: height 0.2s ease;
-                background-color: rgba(255, 255, 255, 0.2);
+                background-color: var(--art-progress-color);
 
                 .art-progress-loaded {
                     .art-full(10);
                     width: 0%;
-                    background-color: rgba(255, 255, 255, 0.2);
+                    background-color: var(--art-loaded-color);
                 }
 
                 .art-progress-played {
@@ -41,7 +41,7 @@
                         pointer-events: auto;
                         width: var(--art-highlight-width);
                         transform: translateX(calc(var(--art-highlight-width) / -2));
-                        background-color: rgba(255, 255, 255, 0.5);
+                        background-color: var(--art-highlight-color);
                     }
                 }
 
@@ -104,23 +104,16 @@
         }
 
         .art-control-loop {
+            .art-full();
             display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
             pointer-events: none;
 
             .art-loop-point {
-                position: absolute;
-                left: 0;
-                top: -2px;
-                width: 2px;
-                height: 8px;
-                background-color: rgba(255, 255, 255, 0.75);
+                .art-full();
+                left: 0%;
+                width: var(--art-loop-width);
+                background-color: var(--art-loop-color);
+                transform: translateX(calc(var(--art-loop-width) / -2)) scaleY(1.5);
             }
         }
     }

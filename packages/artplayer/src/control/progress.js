@@ -155,7 +155,7 @@ export default function progress(options) {
                     });
 
                     proxy($control, 'mousemove', (event) => {
-                        setStyle($tip, 'display', 'block');
+                        setStyle($tip, 'display', 'flex');
                         if (includeFromEvent(event, $highlight)) {
                             showHighlight(event);
                         } else {

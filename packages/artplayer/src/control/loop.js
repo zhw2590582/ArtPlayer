@@ -9,7 +9,7 @@ export default function loop(option) {
 
             art.on('loop', (value) => {
                 if (value && value.length) {
-                    setStyle($control, 'display', 'block');
+                    setStyle($control, 'display', 'flex');
                     setStyle($left, 'left', `calc(${(value[0] / art.duration) * 100}% - ${$left.clientWidth}px)`);
                     setStyle($right, 'left', `${(value[1] / art.duration) * 100}%`);
                 } else {

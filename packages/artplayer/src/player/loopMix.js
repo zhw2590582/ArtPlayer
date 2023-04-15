@@ -16,6 +16,7 @@ export default function loopMix(art) {
             } else {
                 interval = [];
             }
+            art.emit('loop', interval);
         },
     });
 
