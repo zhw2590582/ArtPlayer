@@ -327,7 +327,8 @@ class Artplayer extends (0, _emitterDefault.default) {
                 type: "",
                 style: {},
                 escape: true,
-                encoding: "utf-8"
+                encoding: "utf-8",
+                onVttLoad: (vtt)=>vtt
             },
             moreVideoAttr: {
                 controls: false,
@@ -3874,20 +3875,24 @@ class Subtitle extends (0, _componentDefault.default) {
             const decoder = new TextDecoder(subtitleOption.encoding);
             const text = decoder.decode(buffer);
             this.art.emit("subtitleLoad", subtitleOption.url);
-            const onVttLoad = subtitleOption.onVttLoad || ((vtt)=>vtt);
             switch(subtitleOption.type || (0, _utils.getExt)(subtitleOption.url)){
                 case "srt":
                     {
                         const vtt = (0, _utils.srtToVtt)(text);
-                        return (0, _utils.vttToBlob)(onVttLoad(vtt));
+                        const vttNew = subtitleOption.onVttLoad(vtt);
+                        return (0, _utils.vttToBlob)(vttNew);
                     }
                 case "ass":
                     {
                         const vtt = (0, _utils.assToVtt)(text);
-                        return (0, _utils.vttToBlob)(onVttLoad(vtt));
+                        const vttNew = subtitleOption.onVttLoad(vtt);
+                        return (0, _utils.vttToBlob)(vttNew);
                     }
                 case "vtt":
-                    return (0, _utils.vttToBlob)(onVttLoad(text));
+                    {
+                        const vttNew = subtitleOption.onVttLoad(text);
+                        return (0, _utils.vttToBlob)(vttNew);
+                    }
                 default:
                     return subtitleOption.url;
             }

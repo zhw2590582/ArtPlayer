@@ -184,6 +184,7 @@ export default class Artplayer extends Emitter {
                 style: {},
                 escape: true,
                 encoding: 'utf-8',
+                onVttLoad: (vtt) => vtt,
             },
             moreVideoAttr: {
                 controls: false,
