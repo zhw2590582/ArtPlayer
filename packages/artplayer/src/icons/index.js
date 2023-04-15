@@ -1,4 +1,4 @@
-import { append, def, addClass, createElement } from '../utils';
+import { def, getIcon } from '../utils';
 import loading from 'bundle-text:./loading.svg';
 import state from 'bundle-text:./state.svg';
 import check from 'bundle-text:./check.svg';
@@ -62,13 +62,7 @@ export default class Icons {
 
         Object.keys(icons).forEach((key) => {
             def(this, key, {
-                get: () => {
-                    const icon = createElement('i');
-                    addClass(icon, 'art-icon');
-                    addClass(icon, `art-icon-${key}`);
-                    append(icon, icons[key]);
-                    return icon;
-                },
+                get: () => getIcon(key, icons[key]),
             });
         });
     }

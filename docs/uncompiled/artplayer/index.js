@@ -676,6 +676,7 @@ parcelHelpers.export(exports, "isInViewport", ()=>isInViewport);
 parcelHelpers.export(exports, "includeFromEvent", ()=>includeFromEvent);
 parcelHelpers.export(exports, "replaceElement", ()=>replaceElement);
 parcelHelpers.export(exports, "createElement", ()=>createElement);
+parcelHelpers.export(exports, "getIcon", ()=>getIcon);
 var _compatibility = require("./compatibility");
 function query(selector, parent = document) {
     return parent.querySelector(selector);
@@ -744,6 +745,13 @@ function replaceElement(newChild, oldChild) {
 }
 function createElement(tag) {
     return document.createElement(tag);
+}
+function getIcon(key = "", html = "") {
+    const icon = createElement("i");
+    addClass(icon, "art-icon");
+    addClass(icon, `art-icon-${key}`);
+    append(icon, html);
+    return icon;
 }
 
 },{"./compatibility":"gotDS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gotDS":[function(require,module,exports) {
@@ -4370,13 +4378,7 @@ class Icons {
         };
         Object.keys(icons).forEach((key)=>{
             (0, _utils.def)(this, key, {
-                get: ()=>{
-                    const icon = (0, _utils.createElement)("i");
-                    (0, _utils.addClass)(icon, "art-icon");
-                    (0, _utils.addClass)(icon, `art-icon-${key}`);
-                    (0, _utils.append)(icon, icons[key]);
-                    return icon;
-                }
+                get: ()=>(0, _utils.getIcon)(key, icons[key])
             });
         });
     }
