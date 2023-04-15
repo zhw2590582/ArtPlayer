@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-15 11:05:10";
+        return "2023-04-15 11:16:38";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3624,11 +3624,10 @@ var _utils = require("../utils");
 function playbackRate(option) {
     return (art)=>{
         const { i18n , constructor: { PLAYBACK_RATE  }  } = art;
+        const html = PLAYBACK_RATE.map((item)=>`<span data-value="${item}">${item === 1 ? i18n.get("Normal") : item}</span>`).join("");
         return {
             ...option,
-            html: `${i18n.get("Play Speed")}:
-                ${PLAYBACK_RATE.map((item)=>`<span data-value="${item}">${item === 1 ? i18n.get("Normal") : item}</span>`).join("")}
-            `,
+            html: `${i18n.get("Play Speed")}: ${html}`,
             click: (contextmenu, event)=>{
                 const { value  } = event.target.dataset;
                 if (value) {
@@ -3656,11 +3655,10 @@ var _utils = require("../utils");
 function aspectRatio(option) {
     return (art)=>{
         const { i18n , constructor: { ASPECT_RATIO  }  } = art;
+        const html = ASPECT_RATIO.map((item)=>`<span data-value="${item}">${item === "default" ? i18n.get("Default") : item}</span>`).join("");
         return {
             ...option,
-            html: `${i18n.get("Aspect Ratio")}:
-                ${ASPECT_RATIO.map((item)=>`<span data-value="${item}">${item === "default" ? i18n.get("Default") : item}</span>`).join("")}
-            `,
+            html: `${i18n.get("Aspect Ratio")}: ${html}`,
             click: (contextmenu, event)=>{
                 const { value  } = event.target.dataset;
                 if (value) {
@@ -3688,11 +3686,10 @@ var _utils = require("../utils");
 function flip(option) {
     return (art)=>{
         const { i18n , constructor: { FLIP  }  } = art;
+        const html = FLIP.map((item)=>`<span data-value="${item}">${i18n.get((0, _utils.capitalize)(item))}</span>`).join("");
         return {
             ...option,
-            html: `${i18n.get("Video Flip")}:
-                ${FLIP.map((item)=>`<span data-value="${item}">${i18n.get((0, _utils.capitalize)(item))}</span>`).join("")}
-            `,
+            html: `${i18n.get("Video Flip")}: ${html}`,
             click: (contextmenu, event)=>{
                 const { value  } = event.target.dataset;
                 if (value) {
