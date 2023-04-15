@@ -1,15 +1,16 @@
 .art-video-player {
     .art-subtitle {
         display: none;
+        flex-direction: column;
         justify-content: center;
+        text-align: center;
         position: absolute;
         z-index: 20;
-        bottom: 10px;
         width: 100%;
-        padding: 0 20px;
-        text-align: center;
-        color: #fff;
-        font-size: 20px;
+        padding: 0 5%;
+        gap: var(--art-subtitle-gap);
+        bottom: var(--art-subtitle-bottom);
+        font-size: var(--art-subtitle-font-size);
         pointer-events: none;
         transition: bottom 0.2s ease;
         .art-text-border();
@@ -17,7 +18,6 @@
         p {
             word-break: break-all;
             height: fit-content;
-            margin: 5px 0 0;
             line-height: 1.2;
         }
     }
@@ -30,7 +30,7 @@
 
     &.art-control-show {
         .art-subtitle {
-            bottom: 50px;
+            bottom: var(--art-control-height);
         }
     }
 }
