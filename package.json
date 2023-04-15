@@ -58,6 +58,5 @@
     },
     "engines": {
         "node": ">= 16.0.0"
-    },
-    "__npminstall_done": false
+    }
 }
