@@ -56,7 +56,7 @@ export default function progress(options) {
                 } = art.constructor;
 
                 setStyle($control, 'height', `${PROGRESS_HEIGHT}px`);
-                setStyle($played, 'backgroundColor', 'var(--theme)');
+                setStyle($played, 'backgroundColor', 'var(--art-theme)');
 
                 let indicatorSize = INDICATOR_SIZE;
 
@@ -65,7 +65,7 @@ export default function progress(options) {
                     append($indicator, icons.indicator);
                 } else {
                     setStyles($indicator, {
-                        backgroundColor: 'var(--theme)',
+                        backgroundColor: 'var(--art-theme)',
                     });
                 }
 
