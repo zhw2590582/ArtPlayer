@@ -2,7 +2,7 @@
     position: relative;
 
     .art-volume-panel {
-        .art-center(none);
+        .art-center(flex);
         position: absolute;
         left: 0;
         right: 0;
@@ -13,6 +13,10 @@
         font-size: 12px;
         text-align: center;
         cursor: default;
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: all var(--art-duration) ease;
 
         .art-volume-inner {
             display: flex;
@@ -21,6 +25,7 @@
             gap: 10px;
             height: 100%;
             width: 100%;
+            
             padding: 10px 0 12px;
             border-radius: 3px;
             background-color: var(--art-background);
@@ -71,7 +76,9 @@
 
     &:hover {
         .art-volume-panel {
-            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
         }
     }
 }

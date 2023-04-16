@@ -2,7 +2,7 @@
     position: relative;
     
     .art-selector-list {
-        display: none;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         text-align: center;
@@ -10,6 +10,10 @@
         border-radius: 3px;
         bottom: var(--art-control-height);
         background-color: var(--art-background);
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: all var(--art-duration) ease;
 
         .art-selector-item {
             .art-center();
@@ -30,7 +34,9 @@
 
     &:hover {
         .art-selector-list {
-            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
         }
     }
 }
