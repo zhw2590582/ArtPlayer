@@ -1,0 +1,46 @@
+.art-control-volume {
+    .art-volume-panel {
+        position: relative;
+        float: left;
+        width: 0;
+        height: 100%;
+        transition: margin 0.2s cubic-bezier(0.4, 0, 1, 1), width 0.2s cubic-bezier(0.4, 0, 1, 1);
+        overflow: hidden;
+
+        .art-volume-slider-handle {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 12px;
+            margin-top: -6px;
+            background-color: #fff;
+
+            &::before {
+                left: -54px;
+                background-color: #fff;
+            }
+
+            &::after {
+                left: 6px;
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                display: flex;
+                top: 50%;
+                height: 3px;
+                margin-top: -2px;
+                width: 60px;
+            }
+        }
+    }
+
+    &:hover .art-volume-panel {
+        width: 60px;
+    }
+}

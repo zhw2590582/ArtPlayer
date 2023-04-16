@@ -1,24 +1,21 @@
 .art-controls {
     position: relative;
-    z-index: 1;
+    z-index: 10;
     pointer-events: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 45px;
+    height: var(--art-control-height);
 
     .art-controls-left,
     .art-controls-right {
         display: flex;
+        height: 100%;
     }
 
     .art-controls-center {
         flex: 1;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 10px;
+        .art-center();
     }
 
     .art-controls-right {
@@ -26,86 +23,35 @@
     }
 
     .art-control {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        .art-center();
         opacity: 0.75;
-        font-size: 12px;
-        min-height: 36px;
-        min-width: 36px;
-        line-height: 1;
-        text-align: center;
+        transform: scale(1);
+        min-height: var(--art-control-height);
+        min-width: var(--art-control-height);
         cursor: pointer;
         white-space: nowrap;
-        transition: opacity 0.1s ease-in-out;
+        transition: opacity 0.2s ease;
+
         .art-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            float: left;
             height: 36px;
             width: 36px;
-            transform: scale(1);
-            transition: transform 0.2s ease-in-out;
+            transform: scale(1.15);
+            transition: transform 0.2s ease;
+
             &:active {
-                transform: scale(0.85);
+                transform: scale(0.9);
             }
         }
+
         &:hover {
             opacity: 1;
-        }
-    }
-
-    .art-control-volume {
-        .art-volume-panel {
-            position: relative;
-            float: left;
-            width: 0;
-            height: 100%;
-            transition: margin 0.2s cubic-bezier(0.4, 0, 1, 1), width 0.2s cubic-bezier(0.4, 0, 1, 1);
-            overflow: hidden;
-
-            .art-volume-slider-handle {
-                position: absolute;
-                top: 50%;
-                left: 0;
-                width: 12px;
-                height: 12px;
-                border-radius: 12px;
-                margin-top: -6px;
-                background-color: #fff;
-
-                &::before {
-                    left: -54px;
-                    background-color: #fff;
-                }
-
-                &::after {
-                    left: 6px;
-                    background-color: rgba(255, 255, 255, 0.2);
-                }
-
-                &::before,
-                &::after {
-                    content: '';
-                    position: absolute;
-                    display: flex;
-                    top: 50%;
-                    height: 3px;
-                    margin-top: -2px;
-                    width: 60px;
-                }
-            }
-        }
-
-        &:hover .art-volume-panel {
-            width: 60px;
         }
     }
 
     .art-control-quality {
         position: relative;
         z-index: 30;
+
         .art-qualitys {
             display: none;
             position: absolute;
@@ -128,6 +74,7 @@
                 }
             }
         }
+
         &:hover .art-qualitys {
             display: flex;
         }

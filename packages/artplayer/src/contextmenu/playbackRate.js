@@ -8,7 +8,7 @@ export default function playbackRate(option) {
         } = art;
 
         const html = PLAYBACK_RATE.map(
-            (item) => `<span data-value="${item}">${item === 1 ? i18n.get('Normal') : item}</span>`,
+            (item) => `<span data-value="${item}">${item === 1 ? i18n.get('Normal') : item.toFixed(1)}</span>`,
         ).join('');
 
         return {
