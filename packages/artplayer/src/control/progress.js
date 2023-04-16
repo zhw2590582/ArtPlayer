@@ -32,6 +32,7 @@ export default function progress(options) {
             ...options,
             html: `
                 <div class="art-control-progress-inner">
+                    <div class="art-progress-hover"></div>
                     <div class="art-progress-loaded"></div>
                     <div class="art-progress-played"></div>
                     <div class="art-progress-highlight"></div>
@@ -41,6 +42,7 @@ export default function progress(options) {
             `,
             mounted: ($control) => {
                 let isDroging = false;
+                const $hover = query('.art-progress-hover', $control);
                 const $loaded = query('.art-progress-loaded', $control);
                 const $played = query('.art-progress-played', $control);
                 const $highlight = query('.art-progress-highlight', $control);
@@ -120,6 +122,12 @@ export default function progress(options) {
                     }
                 }
 
+                function setHover(event) {
+                    const { width } = getPosFromEvent(art, event);
+                    setStyle($hover, 'width', `${width}px`);
+                    setStyle($hover, 'display', 'flex');
+                }
+
                 art.on('video:loadedmetadata', () => {
                     for (let index = 0; index < option.highlight.length; index++) {
                         const item = option.highlight[index];
@@ -155,6 +163,7 @@ export default function progress(options) {
                     });
 
                     proxy($control, 'mousemove', (event) => {
+                        setHover(event);
                         setStyle($tip, 'display', 'flex');
                         if (includeFromEvent(event, $highlight)) {
                             showHighlight(event);
@@ -165,6 +174,7 @@ export default function progress(options) {
 
                     proxy($control, 'mouseleave', () => {
                         setStyle($tip, 'display', 'none');
+                        setStyle($hover, 'display', 'none');
                     });
 
                     proxy($control, 'mousedown', () => {

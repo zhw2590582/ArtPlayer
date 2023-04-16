@@ -19,6 +19,13 @@
                 transition: height var(--art-duration) ease;
                 background-color: var(--art-progress-color);
 
+                .art-progress-hover {
+                    display: none;
+                    .art-full(0);
+                    width: 0%;
+                    background-color: var(--art-hover-color);
+                }
+
                 .art-progress-loaded {
                     .art-full(10);
                     width: 0%;
