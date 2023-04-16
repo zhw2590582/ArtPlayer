@@ -1,7 +1,7 @@
 export default function miniProgressBar(art) {
     art.on('ready', () => {
         art.layers.add({
-            name: 'miniProgressBar',
+            name: 'mini-progress-bar',
             mounted($progressBar) {
                 art.on('destroy', () => {
                     $progressBar.style.display = 'none';
@@ -21,6 +21,6 @@ export default function miniProgressBar(art) {
     });
 
     return {
-        name: 'miniProgressBar',
+        name: 'mini-progress-bar',
     };
 }

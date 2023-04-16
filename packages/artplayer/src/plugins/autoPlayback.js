@@ -1,4 +1,4 @@
-import { secondToTime, setStyle, query, append } from '../utils';
+import { secondToTime, setStyle, query, append, addClass } from '../utils';
 
 export default function autoPlayback(art) {
     const {
@@ -11,17 +11,21 @@ export default function autoPlayback(art) {
     } = art;
 
     const $autoPlayback = art.layers.add({
-        name: 'autoPlayback',
+        name: 'auto-playback',
         html: `
-            <div class="art-autoPlayback-close"></div>
-            <div class="art-autoPlayback-last"></div>
-            <div class="art-autoPlayback-jump"></div>
+            <div class="art-auto-playback-close"></div>
+            <div class="art-auto-playback-last"></div>
+            <div class="art-auto-playback-jump"></div>
         `,
     });
 
-    const $last = query('.art-autoPlayback-last', $autoPlayback);
-    const $jump = query('.art-autoPlayback-jump', $autoPlayback);
-    const $close = query('.art-autoPlayback-close', $autoPlayback);
+    const $last = query('.art-auto-playback-last', $autoPlayback);
+    const $jump = query('.art-auto-playback-jump', $autoPlayback);
+    const $close = query('.art-auto-playback-close', $autoPlayback);
+
+    if (art.option.backdrop) {
+        addClass($autoPlayback, 'art-backdrop-filter');
+    }
 
     art.on('video:timeupdate', () => {
         const times = storage.get('times') || {};
@@ -63,7 +67,7 @@ export default function autoPlayback(art) {
     });
 
     return {
-        name: 'autoPlayback',
+        name: 'auto-playback',
         get times() {
             return storage.get('times') || {};
         },
