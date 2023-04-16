@@ -1,46 +1,61 @@
 .art-control-volume {
+    position: relative;
+
     .art-volume-panel {
-        position: relative;
-        float: left;
-        width: 0;
-        height: 100%;
-        transition: margin 0.2s cubic-bezier(0.4, 0, 1, 1), width 0.2s cubic-bezier(0.4, 0, 1, 1);
-        overflow: hidden;
+        .art-center(none);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: var(--art-control-height);
+        width: var(--art-control-height);
+        height: 120px;
+        padding: 0 5px;
+        font-size: 12px;
+        text-align: center;
+        cursor: default;
 
-        .art-volume-slider-handle {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 12px;
-            height: 12px;
-            border-radius: 12px;
-            margin-top: -6px;
-            background-color: #fff;
+        .art-volume-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 3px;
+            background-color: rgba(0, 0, 0, 0.85);
 
-            &::before {
-                left: -54px;
-                background-color: #fff;
-            }
-
-            &::after {
-                left: 6px;
-                background-color: rgba(255, 255, 255, 0.2);
-            }
-
-            &::before,
-            &::after {
-                content: '';
-                position: absolute;
+            .art-volume-slider {
+                position: relative;
                 display: flex;
-                top: 50%;
-                height: 3px;
-                margin-top: -2px;
-                width: 60px;
+                justify-content: center;
+                width: 2px;
+                flex: 1;
+                border-radius: 3px;
+                background-color: rgba(255, 255, 255, 0.25);
+
+                .art-volume-handle {
+                    width: 14px;
+                    height: 14px;
+                    margin-top: -7px;
+                    flex-shrink: 0;
+                    cursor: pointer;
+                    transform: scale(1);
+                    border-radius: 100%;
+                    background-color: var(--art-theme);
+                    transition: transform var(--art-duration) ease;
+
+                    &:active {
+                        transform: scale(0.85);
+                    }
+                }
             }
         }
     }
 
-    &:hover .art-volume-panel {
-        width: 60px;
+    &:hover {
+        .art-volume-panel {
+            display: flex;
+        }
     }
 }
