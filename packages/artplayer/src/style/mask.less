@@ -8,7 +8,6 @@
             .art-center();
             width: var(--art-state-size);
             height: var(--art-state-size);
-            opacity: var(--art-state-opacity);
             opacity: 0;
             transform: scale(2);
             transition: all 0.2s ease;
@@ -17,7 +16,7 @@
 
     &.art-mask-show {
         .art-state {
-            opacity: 1;
+            opacity: var(--art-state-opacity);
             transform: scale(1);
         }
     }

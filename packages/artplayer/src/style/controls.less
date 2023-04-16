@@ -14,7 +14,9 @@
     }
 
     .art-controls-center {
+        display: none;
         flex: 1;
+        padding: 0 10px;
         .art-center();
     }
 
@@ -33,50 +35,18 @@
         transition: opacity 0.2s ease;
 
         .art-icon {
-            height: 36px;
-            width: 36px;
-            transform: scale(1.15);
+            height: var(--art-control-icon-size);
+            width: var(--art-control-icon-size);
+            transform: scale(var(--art-control-icon-scale));
             transition: transform 0.2s ease;
 
             &:active {
-                transform: scale(0.9);
+                transform: scale(calc(var(--art-control-icon-scale) * 0.8));
             }
         }
 
         &:hover {
             opacity: 1;
-        }
-    }
-
-    .art-control-quality {
-        position: relative;
-        z-index: 30;
-
-        .art-qualitys {
-            display: none;
-            position: absolute;
-            bottom: 35px;
-            width: 100px;
-            padding: 5px 0;
-            text-align: center;
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 3px;
-            .art-quality-item {
-                height: 30px;
-                line-height: 30px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-                &:hover {
-                    background-color: rgba(255, 255, 255, 0.1);
-                }
-            }
-        }
-
-        &:hover .art-qualitys {
-            display: flex;
         }
     }
 }
