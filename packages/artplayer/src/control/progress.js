@@ -49,15 +49,9 @@ export default function progress(options) {
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
 
-                const {
-                    PROGRESS_HEIGHT,
-                    INDICATOR_SIZE,
-                    INDICATOR_SIZE_ICON,
-                    INDICATOR_SIZE_MOBILE,
-                    INDICATOR_SIZE_MOBILE_ICON,
-                } = art.constructor;
+                const { INDICATOR_SIZE, INDICATOR_SIZE_ICON, INDICATOR_SIZE_MOBILE, INDICATOR_SIZE_MOBILE_ICON } =
+                    art.constructor;
 
-                setStyle($control, 'height', `${PROGRESS_HEIGHT}px`);
                 setStyle($played, 'backgroundColor', 'var(--art-theme)');
 
                 let indicatorSize = INDICATOR_SIZE;
