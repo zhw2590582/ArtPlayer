@@ -14,11 +14,10 @@
     }
 
     .art-controls-center {
-        display: none;
+        .art-center(none);
         flex: 1;
         height: 100%;
         padding: 0 10px;
-        .art-center();
     }
 
     .art-controls-right {
@@ -27,6 +26,7 @@
 
     .art-control {
         .art-center();
+        flex-shrink: 0;
         opacity: var(--art-control-opacity);
         min-height: var(--art-control-height);
         min-width: var(--art-control-height);
