@@ -16,7 +16,7 @@
                 position: relative;
                 height: 50%;
                 width: 100%;
-                transition: height 0.2s ease;
+                transition: height var(--art-duration) ease;
                 background-color: var(--art-progress-color);
 
                 .art-progress-loaded {
@@ -50,7 +50,7 @@
                     z-index: 40;
                     border-radius: 50%;
                     transform: scale(0);
-                    transition: transform 0.2s ease;
+                    transition: transform var(--art-duration) ease;
 
                     .art-icon {
                         width: 100%;

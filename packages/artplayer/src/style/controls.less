@@ -26,19 +26,18 @@
 
     .art-control {
         .art-center();
-        opacity: 0.75;
-        transform: scale(1);
+        opacity: var(--art-control-opacity);
         min-height: var(--art-control-height);
         min-width: var(--art-control-height);
         cursor: pointer;
         white-space: nowrap;
-        transition: opacity 0.2s ease;
+        transition: opacity var(--art-duration) ease;
 
         .art-icon {
             height: var(--art-control-icon-size);
             width: var(--art-control-icon-size);
             transform: scale(var(--art-control-icon-scale));
-            transition: transform 0.2s ease;
+            transition: transform var(--art-duration) ease;
 
             &:active {
                 transform: scale(calc(var(--art-control-icon-scale) * 0.8));
