@@ -1,20 +1,18 @@
 .art-video-player {
     .art-settings {
         display: none;
+        flex-direction: column;
         position: absolute;
         z-index: 90;
         left: 0;
-        bottom: 60px;
-        height: auto;
-        overflow: auto;
-        font-size: 13px;
         border-radius: 3px;
-        max-height: 300px;
+        bottom: var(--art-control-height);
         transition: all var(--art-duration) ease;
-        background-color: rgba(0, 0, 0, 0.9);
+        background-color: var(--art-settings-background);
 
         .art-setting-panel {
             display: none;
+            flex-direction: column;
 
             &.art-current {
                 display: flex;
@@ -29,7 +27,7 @@
                 line-height: 1;
                 cursor: pointer;
                 overflow: hidden;
-                color: rgba(255, 255, 255, 0.8);
+                color: rgba(255, 255, 255, 0.75);
 
                 &:hover {
                     color: #fff;
@@ -38,14 +36,6 @@
 
                 &.art-current {
                     color: var(--art-theme);
-                }
-
-                .art-icon {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 30px;
-                    height: 30px;
                 }
 
                 .art-icon-check {
@@ -58,35 +48,29 @@
                 }
 
                 .art-setting-item-left {
-                    display: flex;
-                    align-items: center;
-                    white-space: nowrap;
+                    .art-center();
+                    gap: 5px;
 
                     .art-setting-item-left-icon {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 24px;
-                        width: 24px;
-                        margin-right: 10px;
+                        .art-center();
+                        height: var(--art-settings-icon-size);
+                        width: var(--art-settings-icon-size);
                     }
                 }
 
                 .art-setting-item-right {
-                    display: flex;
-                    align-items: center;
+                    .art-center();
+                    gap: 5px;
+                    font-size: 12px;
 
                     .art-setting-item-right-tooltip {
-                        font-size: 12px;
-                        margin-right: 5px;
                         white-space: nowrap;
                         color: rgba(255, 255, 255, 0.5);
                     }
 
                     .art-setting-item-right-icon {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
+                        .art-center();
+                        min-width: 32px;
                         height: 24px;
                     }
 
