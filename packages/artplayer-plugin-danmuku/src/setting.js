@@ -21,6 +21,7 @@ export default function setting(art, danmuku) {
         return icon;
     }
 
+    setStyle($controlsCenter, 'display', 'flex');
     const $danmuOn = getIcon(danmuOn, 'danmu-on');
     const $danmuOff = getIcon(danmuOff, 'danmu-off');
     const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
