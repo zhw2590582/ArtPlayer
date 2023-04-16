@@ -13,4 +13,24 @@
     .art-video {
         pointer-events: none;
     }
+
+    .art-mini-close {
+        position: absolute;
+        z-index: 20;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+
+        svg {
+            fill: #fff;
+        }
+    }
+
+    &:hover {
+        .art-mini-close {
+            opacity: 1;
+        }
+    }
 }

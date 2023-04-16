@@ -2,8 +2,9 @@ import { append, setStyle, addClass, removeClass, hasClass, def, isInViewport, c
 
 export default function miniMix(art) {
     const {
-        storage,
+        icons,
         proxy,
+        storage,
         template: { $player, $video },
     } = art;
 
@@ -29,6 +30,10 @@ export default function miniMix(art) {
             append(document.body, $mini);
             art.template.$mini = $mini;
             append($mini, $video);
+            const $close = append($mini, `<div class="art-mini-close"></div>`);
+            append($close, icons.close);
+
+            proxy($close, 'click', hideMini);
 
             proxy($mini, 'mousedown', (event) => {
                 isDroging = event.button === 0;
