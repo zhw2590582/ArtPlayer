@@ -2,7 +2,7 @@
     position: relative;
 
     .art-volume-panel {
-        .art-center(none);
+        .art-center(flex);
         position: absolute;
         left: 0;
         right: 0;
@@ -26,27 +26,42 @@
             background-color: rgba(0, 0, 0, 0.85);
 
             .art-volume-slider {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                width: 2px;
                 flex: 1;
-                border-radius: 3px;
-                background-color: rgba(255, 255, 255, 0.25);
+                width: 100%;
+                display: flex;
+                cursor: pointer;
+                justify-content: center;
 
                 .art-volume-handle {
-                    width: 14px;
-                    height: 14px;
-                    margin-top: -7px;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    width: 2px;
+                    border-radius: 3px;
+                    overflow: hidden;
+                    background-color: rgba(255, 255, 255, 0.25);
+
+                    .art-volume-loaded {
+                        .art-full(0);
+                        background-color: var(--art-theme);
+                    }
+                }
+
+                .art-volume-indicator {
+                    position: absolute;
+                    width: var(--art-volume-handle-size);
+                    height: var(--art-volume-handle-size);
+                    margin-top: calc(var(--art-volume-handle-size) / -2);
                     flex-shrink: 0;
-                    cursor: pointer;
                     transform: scale(1);
                     border-radius: 100%;
                     background-color: var(--art-theme);
                     transition: transform var(--art-duration) ease;
+                }
 
-                    &:active {
-                        transform: scale(0.85);
+                &:active {
+                    .art-volume-indicator {
+                        transform: scale(0.9);
                     }
                 }
             }

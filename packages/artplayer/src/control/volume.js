@@ -5,6 +5,8 @@ export default function volume(option) {
         ...option,
         mounted: ($control) => {
             const { proxy, icons } = art;
+
+            let isDroging = false;
             const $volume = append($control, icons.volume);
             const $close = append($control, icons.volumeClose);
             const $panel = append($control, '<div class="art-volume-panel"></div>');
@@ -12,6 +14,8 @@ export default function volume(option) {
             const $value = append($inner, `<div class="art-volume-val"></div>`);
             const $slider = append($inner, `<div class="art-volume-slider"></div>`);
             const $handle = append($slider, `<div class="art-volume-handle"></div>`);
+            const $loaded = append($handle, `<div class="art-volume-loaded"></div>`);
+            const $indicator = append($slider, `<div class="art-volume-indicator"></div>`);
 
             if (isMobile) {
                 setStyle($panel, 'display', 'none');
@@ -21,11 +25,16 @@ export default function volume(option) {
                 if (art.muted || art.volume === 0) {
                     setStyle($volume, 'display', 'none');
                     setStyle($close, 'display', 'flex');
+                    setStyle($indicator, 'top', '100%');
+                    setStyle($loaded, 'top', '100%');
                     $value.innerText = 0;
                 } else {
+                    const percentage = art.volume * 100;
                     setStyle($volume, 'display', 'flex');
                     setStyle($close, 'display', 'none');
-                    $value.innerText = Math.floor(art.volume * 100);
+                    setStyle($indicator, 'top', `${100 - percentage}%`);
+                    setStyle($loaded, 'top', `${100 - percentage}%`);
+                    $value.innerText = Math.floor(percentage);
                 }
             }
 
@@ -38,6 +47,23 @@ export default function volume(option) {
 
             proxy($close, 'click', () => {
                 art.muted = false;
+            });
+
+            proxy($indicator, 'mousedown', () => {
+                isDroging = true;
+            });
+
+            proxy(document, 'mousemove', (event) => {
+                if (isDroging) {
+                    art.muted = false;
+                    // art.volume = volumeChangeFromEvent(event);
+                }
+            });
+
+            proxy(document, 'mouseup', () => {
+                if (isDroging) {
+                    isDroging = false;
+                }
             });
         },
     });
