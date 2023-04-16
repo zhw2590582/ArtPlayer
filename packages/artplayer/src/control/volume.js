@@ -1,72 +1,68 @@
-import { append, clamp, tooltip, setStyle, isMobile } from '../utils';
+import { append, setStyle, isMobile } from '../utils';
 
 export default function volume(option) {
     return (art) => ({
         ...option,
         mounted: ($control) => {
-            const { proxy, icons, i18n } = art;
+            const { proxy, icons } = art;
 
-            let isDroging = false;
-            const panelWidth = art.constructor.VOLUME_PANEL_WIDTH;
-            const handleWidth = art.constructor.VOLUME_HANDLE_WIDTH;
             const $volume = append($control, icons.volume);
-            const $volumeClose = append($control, icons.volumeClose);
-            const $volumePanel = append($control, '<div class="art-volume-panel"></div>');
-            const $volumeHandle = append($volumePanel, '<div class="art-volume-slider-handle"></div>');
-            tooltip($volume, i18n.get('Mute'));
-            setStyle($volumeClose, 'display', 'none');
+            const $close = append($control, icons.volumeClose);
+            const $panel = append($control, '<div class="art-volume-panel"></div>');
+            const $inner = append($panel, '<div class="art-volume-inner"></div>');
+            const $value = append($inner, `<div class="art-volume-val"></div>`);
+            const $slider = append($inner, `<div class="art-volume-slider"></div>`);
+            const $handle = append($slider, `<div class="art-volume-handle"></div>`);
+            const $loaded = append($handle, `<div class="art-volume-loaded"></div>`);
+            const $indicator = append($slider, `<div class="art-volume-indicator"></div>`);
 
             if (isMobile) {
-                setStyle($volumePanel, 'display', 'none');
+                setStyle($panel, 'display', 'none');
             }
 
-            function volumeChangeFromEvent(event) {
-                const { left: panelLeft } = $volumePanel.getBoundingClientRect();
-                const percentage =
-                    clamp(event.pageX - panelLeft - handleWidth / 2, 0, panelWidth - handleWidth / 2) /
-                    (panelWidth - handleWidth);
-                return percentage;
+            function getVolumeFromEvent(event) {
+                const { top, height } = $slider.getBoundingClientRect();
+                return 1 - (event.pageY - top) / height;
             }
 
-            function setVolumeHandle(percentage = 0.7) {
-                if (art.muted || percentage === 0) {
+            function update() {
+                if (art.muted || art.volume === 0) {
                     setStyle($volume, 'display', 'none');
-                    setStyle($volumeClose, 'display', 'flex');
-                    setStyle($volumeHandle, 'left', '0');
+                    setStyle($close, 'display', 'flex');
+                    setStyle($indicator, 'top', '100%');
+                    setStyle($loaded, 'top', '100%');
+                    $value.innerText = 0;
                 } else {
-                    const width = (panelWidth - handleWidth) * percentage;
+                    const percentage = art.volume * 100;
                     setStyle($volume, 'display', 'flex');
-                    setStyle($volumeClose, 'display', 'none');
-                    setStyle($volumeHandle, 'left', `${width}px`);
+                    setStyle($close, 'display', 'none');
+                    setStyle($indicator, 'top', `${100 - percentage}%`);
+                    setStyle($loaded, 'top', `${100 - percentage}%`);
+                    $value.innerText = Math.floor(percentage);
                 }
             }
 
-            setVolumeHandle(art.volume);
-            art.on('video:volumechange', () => {
-                setVolumeHandle(art.volume);
-            });
+            update();
+            art.on('video:volumechange', update);
 
             proxy($volume, 'click', () => {
                 art.muted = true;
             });
 
-            proxy($volumeClose, 'click', () => {
+            proxy($close, 'click', () => {
                 art.muted = false;
             });
 
-            proxy($volumePanel, 'click', (event) => {
-                art.muted = false;
-                art.volume = volumeChangeFromEvent(event);
-            });
-
-            proxy($volumeHandle, 'mousedown', () => {
+            let isDroging = false;
+            proxy($slider, 'mousedown', (event) => {
                 isDroging = true;
+                art.volume = getVolumeFromEvent(event);
             });
 
-            proxy($control, 'mousemove', (event) => {
+            proxy(document, 'mousemove', (event) => {
                 if (isDroging) {
                     art.muted = false;
-                    art.volume = volumeChangeFromEvent(event);
+                    art.volume = getVolumeFromEvent(event);
                 }
             });
 

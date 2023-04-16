@@ -7,13 +7,13 @@ export default function playbackRate(option) {
             constructor: { PLAYBACK_RATE },
         } = art;
 
+        const html = PLAYBACK_RATE.map(
+            (item) => `<span data-value="${item}">${item === 1 ? i18n.get('Normal') : item.toFixed(1)}</span>`,
+        ).join('');
+
         return {
             ...option,
-            html: `${i18n.get('Play Speed')}:
-                ${PLAYBACK_RATE.map(
-                    (item) => `<span data-value="${item}">${item === 1 ? i18n.get('Normal') : item}</span>`,
-                ).join('')}
-            `,
+            html: `${i18n.get('Play Speed')}: ${html}`,
             click: (contextmenu, event) => {
                 const { value } = event.target.dataset;
                 if (value) {

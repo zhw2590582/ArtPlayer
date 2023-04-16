@@ -8,7 +8,7 @@ export default function playbackRate(art) {
     } = art;
 
     function getI18n(value) {
-        return value === 1.0 ? i18n.get('Normal') : value;
+        return value === 1.0 ? i18n.get('Normal') : value.toFixed(1);
     }
 
     function update($panel, $tooltip, value) {

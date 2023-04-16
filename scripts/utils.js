@@ -1,5 +1,5 @@
 import path from 'path';
-import glob from 'glob';
+import { glob } from 'glob';
 
 export function formatDate(date) {
     var date = new Date(Number(date));

@@ -1,36 +1,33 @@
 .art-video-player {
     .art-subtitle {
-        display: none;
+        .art-center(none);
+        flex-direction: column;
         position: absolute;
         z-index: 20;
-        bottom: 10px;
         width: 100%;
-        padding: 0 20px;
-        text-align: center;
-        color: #fff;
-        font-size: 20px;
+        padding: 0 5%;
+        gap: var(--art-subtitle-gap);
+        bottom: var(--art-subtitle-bottom);
+        font-size: var(--art-subtitle-font-size);
         pointer-events: none;
-        transition: bottom 0.2s ease;
-        text-shadow: #000 1px 0 1px, #000 0 1px 1px, #000 -1px 0 1px, #000 0 -1px 1px, #000 1px 1px 1px,
-            #000 -1px -1px 1px, #000 1px -1px 1px, #000 -1px 1px 1px;
+        transition: bottom var(--art-duration) ease;
+        .art-text-border();
 
         p {
             word-break: break-all;
             height: fit-content;
-            margin: 5px 0 0;
-            line-height: 1.2;
         }
     }
 
     &.art-subtitle-show {
         .art-subtitle {
-            display: block;
+            display: flex;
         }
     }
 
     &.art-control-show {
         .art-subtitle {
-            bottom: 50px;
+            bottom: calc(var(--art-control-height) + var(--art-subtitle-bottom));
         }
     }
 }

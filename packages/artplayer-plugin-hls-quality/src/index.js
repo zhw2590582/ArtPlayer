@@ -28,7 +28,8 @@ export default function artplayerPluginHlsQuality(option) {
                         };
                     }),
                     onSelect(item) {
-                        hls.nextLevel = item.level;
+                        hls.currentLevel = item.level;
+                        art.loading.show = true;
                         return item.html;
                     },
                 });
@@ -49,7 +50,8 @@ export default function artplayerPluginHlsQuality(option) {
                         };
                     }),
                     onSelect: function (item) {
-                        hls.nextLevel = item.level;
+                        hls.currentLevel = item.level;
+                        art.loading.show = true;
                         return item.html;
                     },
                 });

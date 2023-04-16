@@ -1,74 +1,62 @@
-.art-video-player {
-    .art-mini-header {
-        display: none;
+.art-mini-popup {
+    position: fixed;
+    z-index: 9999;
+    width: 320px;
+    height: 180px;
+    background: #000;
+    border-radius: 3px;
+    cursor: move;
+    user-select: none;
+    overflow: hidden;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+
+    svg {
+        fill: #fff;
+    }
+
+    .art-video {
+        pointer-events: none;
+    }
+
+    .art-mini-close {
         position: absolute;
-        z-index: 110;
-        left: 0;
-        top: 0;
-        right: 0;
-        height: 35px;
-        line-height: 35px;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.5);
-        align-items: center;
-        justify-content: space-between;
+        z-index: 20;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
         opacity: 0;
-        visibility: hidden;
-        transition: all 0.2s ease-in-out;
-        .art-mini-title {
-            flex: 1;
-            padding: 0 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            cursor: move;
-        }
-        .art-mini-close {
-            width: 35px;
-            text-align: center;
-            font-size: 22px;
+        transition: opacity 0.2s ease;
+    }
+
+    .art-mini-state {
+        .art-full(30);
+        .art-center();
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        background-color: rgba(0, 0, 0, 0.25);
+
+        .art-icon {
+            opacity: 0.75;
             cursor: pointer;
+            transform: scale(3);
+            pointer-events: auto;
+            transition: transform 0.2s ease;
+
+            &:active {
+                transform: scale(2.5);
+            }
         }
     }
 
-    &.art-is-dragging {
-        opacity: 0.7;
+    &.art-mini-droging {
+        opacity: 0.9;
     }
 
-    &.art-mini {
-        position: fixed;
-        z-index: 9999;
-        width: 400px;
-        height: 225px;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-
-        .art-mini-header {
-            display: flex;
-            user-select: none;
-        }
-
-        &.art-hover {
-            .art-mini-header {
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-
-        .art-mask {
-            .art-state {
-                position: static;
-            }
-        }
-
-        .art-contextmenu,
-        .art-bottom,
-        .art-danmu,
-        .art-info,
-        .art-layers,
-        .art-notice,
-        .art-settings,
-        .art-subtitle {
-            display: none !important;
+    &:hover {
+        .art-mini-close, .art-mini-state {
+            opacity: 1;
         }
     }
 }

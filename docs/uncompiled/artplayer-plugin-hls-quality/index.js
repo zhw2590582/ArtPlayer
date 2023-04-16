@@ -174,7 +174,8 @@ function artplayerPluginHlsQuality(option) {
                     };
                 }),
                 onSelect (item) {
-                    hls.nextLevel = item.level;
+                    hls.currentLevel = item.level;
+                    art.loading.show = true;
                     return item.html;
                 }
             });
@@ -192,7 +193,8 @@ function artplayerPluginHlsQuality(option) {
                     };
                 }),
                 onSelect: function(item) {
-                    hls.nextLevel = item.level;
+                    hls.currentLevel = item.level;
+                    art.loading.show = true;
                     return item.html;
                 }
             });
@@ -205,8 +207,8 @@ function artplayerPluginHlsQuality(option) {
 }
 exports.default = artplayerPluginHlsQuality;
 artplayerPluginHlsQuality.env = "development";
-artplayerPluginHlsQuality.version = "1.0.1";
-artplayerPluginHlsQuality.build = "2023-02-18 11:28:03";
+artplayerPluginHlsQuality.version = "1.0.2";
+artplayerPluginHlsQuality.build = "2023-04-16 22:04:16";
 if (typeof window !== "undefined") window["artplayerPluginHlsQuality"] = artplayerPluginHlsQuality;
 
 },{"bundle-text:./image.svg":"1HFaU","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1HFaU":[function(require,module,exports) {

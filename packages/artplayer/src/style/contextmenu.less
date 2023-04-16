@@ -4,36 +4,24 @@
         flex-direction: column;
         position: absolute;
         z-index: 120;
-        left: 10px;
-        top: 10px;
-        min-width: 200px;
         padding: 5px 0;
-        background-color: rgba(0, 0, 0, 0.9);
         border-radius: 3px;
+        font-size: 12px;
+        background-color: var(--art-background);
+        min-width: var(--art-contextmenus-min-width);
 
         .art-contextmenu {
             cursor: pointer;
-            font-size: 12px;
-            display: block;
-            color: #fff;
+            display: flex;
             padding: 10px 15px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
-            a {
-                color: #fff;
-                text-decoration: none;
-            }
-
             span {
-                display: inline-block;
-                padding: 0 7px;
+                padding: 0 8px;
+
                 &:hover,
                 &.art-current {
-                    color: var(--theme);
+                    color: var(--art-theme);
                 }
             }
 

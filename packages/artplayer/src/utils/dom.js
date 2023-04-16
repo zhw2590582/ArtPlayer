@@ -87,3 +87,11 @@ export function replaceElement(newChild, oldChild) {
 export function createElement(tag) {
     return document.createElement(tag);
 }
+
+export function getIcon(key = '', html = '') {
+    const icon = createElement('i');
+    addClass(icon, 'art-icon');
+    addClass(icon, `art-icon-${key}`);
+    append(icon, html);
+    return icon;
+}

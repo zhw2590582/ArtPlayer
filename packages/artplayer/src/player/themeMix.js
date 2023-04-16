@@ -8,11 +8,11 @@ export default function themeMix(art) {
 
     def(art, 'theme', {
         get() {
-            return getComputedStyle($player).getPropertyValue('--theme');
+            return getComputedStyle($player).getPropertyValue('--art-theme');
         },
         set(theme) {
             option.theme = theme;
-            $player.style.setProperty('--theme', theme);
+            $player.style.setProperty('--art-theme', theme);
         },
     });
 }

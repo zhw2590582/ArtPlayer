@@ -1,17 +1,9 @@
 .art-video-player {
     .art-layers {
+        .art-full(40);
         display: none;
-        position: absolute;
-        z-index: 40;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
         pointer-events: none;
-
+        
         .art-layer {
             pointer-events: auto;
         }
@@ -19,7 +11,7 @@
 
     &.art-layer-show {
         .art-layers {
-            display: block;
+            display: flex;
         }
     }
 }

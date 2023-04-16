@@ -32,6 +32,7 @@ export default function progress(options) {
             ...options,
             html: `
                 <div class="art-control-progress-inner">
+                    <div class="art-progress-hover"></div>
                     <div class="art-progress-loaded"></div>
                     <div class="art-progress-played"></div>
                     <div class="art-progress-highlight"></div>
@@ -41,22 +42,17 @@ export default function progress(options) {
             `,
             mounted: ($control) => {
                 let isDroging = false;
+                const $hover = query('.art-progress-hover', $control);
                 const $loaded = query('.art-progress-loaded', $control);
                 const $played = query('.art-progress-played', $control);
                 const $highlight = query('.art-progress-highlight', $control);
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
 
-                const {
-                    PROGRESS_HEIGHT,
-                    INDICATOR_SIZE,
-                    INDICATOR_SIZE_ICON,
-                    INDICATOR_SIZE_MOBILE,
-                    INDICATOR_SIZE_MOBILE_ICON,
-                } = art.constructor;
+                const { INDICATOR_SIZE, INDICATOR_SIZE_ICON, INDICATOR_SIZE_MOBILE, INDICATOR_SIZE_MOBILE_ICON } =
+                    art.constructor;
 
-                setStyle($control, 'height', `${PROGRESS_HEIGHT}px`);
-                setStyle($played, 'backgroundColor', 'var(--theme)');
+                setStyle($played, 'backgroundColor', 'var(--art-theme)');
 
                 let indicatorSize = INDICATOR_SIZE;
 
@@ -65,7 +61,7 @@ export default function progress(options) {
                     append($indicator, icons.indicator);
                 } else {
                     setStyles($indicator, {
-                        backgroundColor: 'var(--theme)',
+                        backgroundColor: 'var(--art-theme)',
                     });
                 }
 
@@ -120,14 +116,18 @@ export default function progress(options) {
                     }
                 }
 
+                function setHover(event) {
+                    const { width } = getPosFromEvent(art, event);
+                    setStyle($hover, 'width', `${width}px`);
+                    setStyle($hover, 'display', 'flex');
+                }
+
                 art.on('video:loadedmetadata', () => {
                     for (let index = 0; index < option.highlight.length; index++) {
                         const item = option.highlight[index];
                         const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
-                        append(
-                            $highlight,
-                            `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`,
-                        );
+                        const html = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`;
+                        append($highlight, html);
                     }
                 });
 
@@ -157,7 +157,8 @@ export default function progress(options) {
                     });
 
                     proxy($control, 'mousemove', (event) => {
-                        setStyle($tip, 'display', 'block');
+                        setHover(event);
+                        setStyle($tip, 'display', 'flex');
                         if (includeFromEvent(event, $highlight)) {
                             showHighlight(event);
                         } else {
@@ -167,6 +168,7 @@ export default function progress(options) {
 
                     proxy($control, 'mouseleave', () => {
                         setStyle($tip, 'display', 'none');
+                        setStyle($hover, 'display', 'none');
                     });
 
                     proxy($control, 'mousedown', () => {

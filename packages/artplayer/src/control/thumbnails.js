@@ -46,7 +46,7 @@ export default function thumbnails(options) {
                 }
 
                 if (isLoad) {
-                    setStyle($control, 'display', 'block');
+                    setStyle($control, 'display', 'flex');
                     showThumbnails(event);
                 }
             });

@@ -122,12 +122,10 @@ export default class Component {
         append($list, list);
         append($ref, $list);
 
-        if (this.art.option.backdrop) {
-            addClass($list, 'art-backdrop-filter');
-        }
-
         const setLeft = () => {
-            const left = getStyle($ref, 'width') / 2 - getStyle($list, 'width') / 2;
+            const refWidth = getStyle($ref, 'width');
+            const listWidth = getStyle($list, 'width');
+            const left = refWidth / 2 - listWidth / 2;
             $list.style.left = `${left}px`;
         };
 

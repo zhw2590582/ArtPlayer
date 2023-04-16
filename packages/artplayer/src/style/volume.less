@@ -1,0 +1,84 @@
+.art-control-volume {
+    position: relative;
+
+    .art-volume-panel {
+        .art-center(flex);
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: var(--art-control-height);
+        width: var(--art-control-height);
+        height: 120px;
+        padding: 0 5px;
+        font-size: 12px;
+        text-align: center;
+        cursor: default;
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: all var(--art-duration) ease;
+
+        .art-volume-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+            width: 100%;
+            
+            padding: 10px 0 12px;
+            border-radius: 3px;
+            background-color: var(--art-background);
+
+            .art-volume-slider {
+                flex: 1;
+                width: 100%;
+                display: flex;
+                cursor: pointer;
+                position: relative;
+                justify-content: center;
+
+                .art-volume-handle {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    width: 2px;
+                    border-radius: 3px;
+                    overflow: hidden;
+                    background-color: rgba(255, 255, 255, 0.25);
+
+                    .art-volume-loaded {
+                        .art-full(0);
+                        background-color: var(--art-theme);
+                    }
+                }
+
+                .art-volume-indicator {
+                    position: absolute;
+                    width: var(--art-volume-handle-size);
+                    height: var(--art-volume-handle-size);
+                    margin-top: calc(var(--art-volume-handle-size) / -2);
+                    flex-shrink: 0;
+                    transform: scale(1);
+                    border-radius: 100%;
+                    background-color: var(--art-theme);
+                    transition: transform var(--art-duration) ease;
+                }
+
+                &:active {
+                    .art-volume-indicator {
+                        transform: scale(0.9);
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover {
+        .art-volume-panel {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+    }
+}

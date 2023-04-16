@@ -1,43 +1,29 @@
 .art-video-player {
     .art-mask {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        z-index: 50;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+        .art-center();
+        .art-full(50);
         pointer-events: none;
 
         .art-state {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            right: 30px;
-            bottom: 65px;
-            width: 60px;
-            height: 60px;
-            opacity: 0.85;
-            cursor: pointer;
-            pointer-events: auto;
+            .art-center();
+            opacity: 0;
+            transform: scale(2);
+            width: var(--art-state-size);
+            height: var(--art-state-size);
+            transition: all var(--art-duration) ease;
         }
     }
 
     &.art-mask-show {
-        .art-mask {
-            display: flex;
+        .art-state {
+            opacity: var(--art-state-opacity);
+            transform: scale(1);
         }
     }
 
-    &.art-mobile {
+    &.art-loading-show {
         .art-state {
-            position: static;
+            display: none;
         }
     }
 }

@@ -148,16 +148,16 @@ parcelHelpers.defineInteropFlag(exports);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function checkVersion(art) {
-    const { version , utils: { errorHandle  } ,  } = art.constructor;
+    const { version , utils: { errorHandle  }  } = art.constructor;
     const arr = version.split(".").map(Number);
     const major = arr[0];
     const minor = arr[1] / 100;
-    errorHandle(major + minor >= 4.06, `Artplayer.js@${version} is not compatible the artplayerPluginControl@${artplayerPluginControl.version}. Please update it to version Artplayer.js@4.6.x`);
+    errorHandle(major + minor >= 5, `Artplayer.js@${version} is not compatible the artplayerPluginControl@${artplayerPluginControl.version}. Please update it to version Artplayer.js@4.6.x`);
 }
 function artplayerPluginControl() {
     return (art)=>{
         checkVersion(art);
-        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass , removeClass , hasClass , isMobile  } ,  } ,  } = art;
+        const { template: { $bottom , $player  } , constructor: { utils: { append , secondToTime , addClass , removeClass , hasClass , isMobile  }  }  } = art;
         if (isMobile) return;
         const className = "artplayer-plugin-control";
         addClass($player, className);
@@ -186,8 +186,8 @@ function artplayerPluginControl() {
 }
 exports.default = artplayerPluginControl;
 artplayerPluginControl.env = "development";
-artplayerPluginControl.version = "1.0.0";
-artplayerPluginControl.build = "2022-12-31 23:46:57";
+artplayerPluginControl.version = "2.0.0";
+artplayerPluginControl.build = "2023-04-16 22:13:48";
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-plugin-control")) {
         const $style = document.createElement("style");
@@ -199,7 +199,7 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") window["artplayerPluginControl"] = artplayerPluginControl;
 
 },{"bundle-text:./style.less":"cLvfB","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cLvfB":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-control .art-bottom {\n  height: 68px;\n  min-width: 400px;\n  max-width: 600px;\n  user-select: none;\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  pointer-events: auto;\n  background-color: #000000b3;\n  background-image: none;\n  border-radius: 10px;\n  flex-direction: column;\n  align-items: center;\n  padding: 0;\n  font-size: 13px;\n  display: flex;\n  position: absolute;\n  bottom: 10px;\n  left: 50%;\n  transform: translateX(-50%);\n  box-shadow: 0 10px 15px -3px #0003, 0 4px 6px -4px #0003;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress {\n  width: 65%;\n  justify-content: space-between;\n  align-items: center;\n  gap: 10px;\n  display: flex;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-thumbnails {\n  bottom: 35px;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-progress {\n  width: 100%;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-progress .art-control-progress-inner, .artplayer-plugin-control .art-bottom .art-progress .art-control-progress .art-progress-loaded, .artplayer-plugin-control .art-bottom .art-progress .art-control-progress .art-progress-played {\n  border-radius: 5px;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-progress-tip {\n  top: -40px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls {\n  width: 100%;\n  height: auto;\n  flex: 1;\n  padding: 0 5px;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls .art-control-time, .artplayer-plugin-control .art-bottom .art-controls .art-controls-center {\n  display: none;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls .art-volume-panel {\n  width: 60px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-selector-list {\n  background-color: #000c !important;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current, .artplayer-plugin-control .art-bottom .apa-control-duration {\n  width: 17.5%;\n  justify-content: center;\n  line-height: 1;\n  display: flex;\n  position: absolute;\n  top: 10px;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current {\n  left: 0;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-duration {\n  right: 0;\n}\n\n.artplayer-plugin-control .art-settings {\n  bottom: 85px;\n}\n\n.artplayer-plugin-control.art-control-show .art-subtitle {\n  bottom: 80px;\n}\n\n.apa-control-current, .apa-control-duration {\n  display: none;\n}\n\n";
+module.exports = ".artplayer-plugin-control .art-bottom {\n  height: 68px;\n  width: 400px;\n  user-select: none;\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  pointer-events: auto;\n  background-color: #000000b3;\n  background-image: none;\n  border-radius: 10px;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  padding: 13px 0 0;\n  font-size: 13px;\n  display: flex;\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  box-shadow: 0 10px 15px -3px #0003, 0 4px 6px -4px #0003;\n  bottom: 10px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress {\n  width: 65%;\n  justify-content: space-between;\n  align-items: center;\n  gap: 10px;\n  display: flex;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-thumbnails {\n  bottom: 25px;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-progress {\n  width: 100%;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-control-progress .art-control-progress-inner, .artplayer-plugin-control .art-bottom .art-progress .art-control-progress .art-progress-loaded, .artplayer-plugin-control .art-bottom .art-progress .art-control-progress .art-progress-played {\n  border-radius: 5px;\n}\n\n.artplayer-plugin-control .art-bottom .art-progress .art-progress-tip {\n  top: -40px !important;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls {\n  width: 100%;\n  flex: 1;\n}\n\n.artplayer-plugin-control .art-bottom .art-controls .art-control-time, .artplayer-plugin-control .art-bottom .art-controls .art-controls-center {\n  display: none;\n}\n\n.artplayer-plugin-control .art-bottom .art-selector-list {\n  background-color: #000c !important;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current, .artplayer-plugin-control .art-bottom .apa-control-duration {\n  width: 17.5%;\n  justify-content: center;\n  line-height: 1;\n  display: flex;\n  position: absolute;\n  top: 10px;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-current {\n  left: 0;\n}\n\n.artplayer-plugin-control .art-bottom .apa-control-duration {\n  right: 0;\n}\n\n.artplayer-plugin-control .art-settings {\n  bottom: 85px;\n}\n\n.artplayer-plugin-control .art-layer-auto-playback {\n  bottom: 90px;\n}\n\n.artplayer-plugin-control.art-control-show .art-subtitle {\n  bottom: 80px;\n}\n\n.apa-control-current, .apa-control-duration {\n  display: none;\n}\n\n";
 
 },{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {

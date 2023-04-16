@@ -5,6 +5,7 @@ export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never
 export declare class Player {
     get aspectRatio(): AspectRatio;
     set aspectRatio(ratio: AspectRatio);
+    set aspectRatioReset(state: boolean);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
     get autoSize(): boolean;
@@ -25,6 +26,7 @@ export declare class Player {
     set fullscreenWeb(state: boolean);
     set fullscreenWebToggle(state: boolean);
     get loaded(): number;
+    get loadedTime(): number;
     get loop(): number[];
     set loop(value: number[]);
     get mini(): boolean;
