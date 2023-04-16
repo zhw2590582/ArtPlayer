@@ -2,7 +2,7 @@
     position: relative;
 
     .art-volume-panel {
-        .art-center(flex);
+        .art-center(none);
         position: absolute;
         left: 0;
         right: 0;
@@ -21,15 +21,16 @@
             gap: 10px;
             height: 100%;
             width: 100%;
-            padding: 10px 0;
+            padding: 10px 0 12px;
             border-radius: 3px;
-            background-color: rgba(0, 0, 0, 0.85);
+            background-color: var(--art-background);
 
             .art-volume-slider {
                 flex: 1;
                 width: 100%;
                 display: flex;
                 cursor: pointer;
+                position: relative;
                 justify-content: center;
 
                 .art-volume-handle {

@@ -1,4 +1,4 @@
-import { append, clamp, setStyle, isMobile } from '../utils';
+import { append, setStyle, isMobile } from '../utils';
 
 export default function volume(option) {
     return (art) => ({
@@ -6,7 +6,6 @@ export default function volume(option) {
         mounted: ($control) => {
             const { proxy, icons } = art;
 
-            let isDroging = false;
             const $volume = append($control, icons.volume);
             const $close = append($control, icons.volumeClose);
             const $panel = append($control, '<div class="art-volume-panel"></div>');
@@ -19,6 +18,11 @@ export default function volume(option) {
 
             if (isMobile) {
                 setStyle($panel, 'display', 'none');
+            }
+
+            function getVolumeFromEvent(event) {
+                const { top, height } = $slider.getBoundingClientRect();
+                return 1 - (event.pageY - top) / height;
             }
 
             function update() {
@@ -49,14 +53,16 @@ export default function volume(option) {
                 art.muted = false;
             });
 
-            proxy($indicator, 'mousedown', () => {
+            let isDroging = false;
+            proxy($slider, 'mousedown', (event) => {
                 isDroging = true;
+                art.volume = getVolumeFromEvent(event);
             });
 
             proxy(document, 'mousemove', (event) => {
                 if (isDroging) {
                     art.muted = false;
-                    // art.volume = volumeChangeFromEvent(event);
+                    art.volume = getVolumeFromEvent(event);
                 }
             });
 
