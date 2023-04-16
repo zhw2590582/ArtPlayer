@@ -1,72 +1,16 @@
-.art-video-player {
-    .art-mini-header {
-        display: none;
-        position: absolute;
-        z-index: 110;
-        left: 0;
-        top: 0;
-        right: 0;
-        height: 35px;
-        line-height: 35px;
-        background-color: rgba(0, 0, 0, 0.5);
-        align-items: center;
-        justify-content: space-between;
-        opacity: 0;
-        visibility: hidden;
-        transition: all var(--art-duration) ease;
-        .art-mini-title {
-            flex: 1;
-            padding: 0 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            cursor: move;
-        }
-        .art-mini-close {
-            width: 35px;
-            text-align: center;
-            font-size: 22px;
-            cursor: pointer;
-        }
-    }
+.art-mini-popup {
+    position: fixed;
+    z-index: 9999;
+    width: 320px;
+    height: 180px;
+    background: #000;
+    border-radius: 3px;
+    cursor: move;
+    user-select: none;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 
-    &.art-is-dragging {
-        opacity: 0.7;
-    }
-
-    &.art-mini {
-        position: fixed;
-        z-index: 9999;
-        width: 400px;
-        height: 225px;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-
-        .art-mini-header {
-            display: flex;
-        }
-
-        &.art-hover {
-            .art-mini-header {
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-
-        .art-mask {
-            .art-state {
-                position: static;
-            }
-        }
-
-        .art-contextmenu,
-        .art-bottom,
-        .art-danmu,
-        .art-info,
-        .art-layers,
-        .art-notice,
-        .art-settings,
-        .art-subtitle {
-            display: none !important;
-        }
+    .art-video {
+        pointer-events: none;
     }
 }
