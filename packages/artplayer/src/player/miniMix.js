@@ -15,7 +15,20 @@ export default function miniMix(art) {
     function hideMini() {
         const { $mini } = art.template;
         if ($mini) {
-            return setStyle($mini, 'display', 'none');
+            removeClass($player, 'art-mini');
+            setStyle($mini, 'display', 'none');
+            $player.prepend($video);
+            art.emit('mini', false);
+        }
+    }
+
+    function initState($play, $pause) {
+        if (art.playing) {
+            setStyle($play, 'display', `none`);
+            setStyle($pause, 'display', `flex`);
+        } else {
+            setStyle($play, 'display', `flex`);
+            setStyle($pause, 'display', `none`);
         }
     }
 
@@ -30,10 +43,20 @@ export default function miniMix(art) {
             append(document.body, $mini);
             art.template.$mini = $mini;
             append($mini, $video);
+
             const $close = append($mini, `<div class="art-mini-close"></div>`);
             append($close, icons.close);
-
             proxy($close, 'click', hideMini);
+
+            const $state = append($mini, `<div class="art-mini-state"></div>`);
+            const $play = append($state, icons.play);
+            const $pause = append($state, icons.pause);
+            proxy($play, 'click', () => art.play());
+            proxy($pause, 'click', () => art.pause());
+            initState($play, $pause);
+            art.on('video:playing', () => initState($play, $pause));
+            art.on('video:pause', () => initState($play, $pause));
+            art.on('video:timeupdate', () => initState($play, $pause));
 
             proxy($mini, 'mousedown', (event) => {
                 isDroging = event.button === 0;
@@ -43,6 +66,7 @@ export default function miniMix(art) {
 
             proxy(document, 'mousemove', (event) => {
                 if (isDroging) {
+                    addClass($mini, 'art-mini-droging');
                     const x = event.pageX - lastPageX;
                     const y = event.pageY - lastPageY;
                     setStyle($mini, 'transform', `translate(${x}px, ${y}px)`);
@@ -52,6 +76,7 @@ export default function miniMix(art) {
             proxy(document, 'mouseup', () => {
                 if (isDroging) {
                     isDroging = false;
+                    removeClass($mini, 'art-mini-droging');
                     const rect = $mini.getBoundingClientRect();
                     storage.set('left', rect.left);
                     storage.set('top', rect.top);
@@ -98,8 +123,6 @@ export default function miniMix(art) {
                 art.emit('mini', true);
             } else {
                 hideMini();
-                removeClass($player, 'art-mini');
-                art.emit('mini', false);
             }
         },
     });
