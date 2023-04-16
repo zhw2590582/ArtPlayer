@@ -3,15 +3,15 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        justify-content: space-between;
         position: absolute;
         height: 68px;
-        min-width: 400px;
-        max-width: 600px;
+        width: 400px;
         user-select: none;
         border-radius: 10px;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 10px;
+        bottom: 10px !important;
         font-size: 13px;
         -webkit-backdrop-filter: saturate(180%) blur(20px);
         backdrop-filter: saturate(180%) blur(20px);
@@ -19,7 +19,7 @@
         box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
         background-image: none;
         pointer-events: auto;
-        padding: 0;
+        padding: 13px 0 0;
 
         .art-progress {
             width: 65%;
@@ -29,7 +29,7 @@
             gap: 10px;
 
             .art-control-thumbnails {
-                bottom: 35px;
+                bottom: 25px;
             }
 
             .art-control-progress {
@@ -49,17 +49,11 @@
 
         .art-controls {
             width: 100%;
-            height: auto;
             flex: 1;
-            padding: 0 5px;
 
             .art-control-time,
             .art-controls-center {
                 display: none;
-            }
-
-            .art-volume-panel {
-                width: 60px !important;
             }
         }
 
@@ -88,6 +82,10 @@
 
     .art-settings {
         bottom: 85px;
+    }
+
+    .art-layer-auto-playback {
+        bottom: 90px;
     }
 
     &.art-control-show {
