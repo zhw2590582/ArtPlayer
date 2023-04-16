@@ -4,18 +4,17 @@
         flex-direction: column;
         position: absolute;
         z-index: 120;
-        min-width: 300px;
+        min-width: var(--art-contextmenus-min-width);
         padding: 5px 0;
         border-radius: 3px;
         font-size: 12px;
-        background-color: rgba(0, 0, 0, 0.75);
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        background-color: var(--art-contextmenus-background);
 
         .art-contextmenu {
             cursor: pointer;
             display: flex;
-            .art-truncate();
             padding: 10px 15px;
-            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
             span {

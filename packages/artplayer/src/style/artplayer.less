@@ -13,7 +13,7 @@
     overflow: hidden;
     user-select: none;
     background-color: #000;
-    font-family: PingFang SC, HarmonyOS_Regular, Helvetica Neue, Microsoft YaHei, sans-serif;
+    font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, sans-serif;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -ms-touch-action: manipulation;
     touch-action: manipulation;
@@ -28,17 +28,17 @@
     }
 
     ::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-        border-radius: 2px;
+        width: var(--art-scrollbar-size);
+        height: var(--art-scrollbar-size);
+        border-radius: 3px;
     }
 
     ::-webkit-scrollbar-thumb {
-        background-color: var(--art-scrollbar);
+        background-color: var(--art-scrollbar-background);
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background-color: var(--art-scrollbar-hover);
+        background-color: var(--art-scrollbar-background-hover);
     }
 
     img {
