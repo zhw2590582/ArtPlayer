@@ -1,41 +1,37 @@
-.art-video-player {
-    .art-control-selector {
-        position: relative;
-        .art-selector-list {
-            display: none;
-            position: absolute;
-            bottom: 35px;
-            min-width: 100px;
-            max-width: 200px;
-            max-height: 200px;
-            overflow: auto;
-            padding: 5px 0;
-            text-align: center;
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 3px;
+.art-control-selector {
+    position: relative;
+    
+    .art-selector-list {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        position: absolute;
+        overflow: auto;
+        border-radius: 3px;
+        bottom: var(--art-control-height);
+        max-height: var(--art-selector-max-height);
+        background-color: var(--art-selector-background);
 
-            .art-selector-item {
-                height: 30px;
-                line-height: 30px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                padding: 0 5px;
-                text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        .art-selector-item {
+            .art-center();
+            padding: 10px 15px;
+            flex-shrink: 0;
+            line-height: 1;
 
-                &:hover {
-                    background-color: rgba(255, 255, 255, 0.1);
-                }
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
 
-                &:hover,
-                &.art-current {
-                    color: var(--art-theme);
-                }
+            &:hover,
+            &.art-current {
+                color: var(--art-theme);
             }
         }
+    }
 
-        &:hover .art-selector-list {
+    &:hover {
+        .art-selector-list {
             display: flex;
         }
     }
