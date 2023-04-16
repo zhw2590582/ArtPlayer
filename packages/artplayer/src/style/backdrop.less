@@ -1,5 +1,10 @@
-.art-backdrop-filter {
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    background-color: rgba(0, 0, 0, 0.75) !important;
-}
+ .art-video-player.art-backdrop {
+    .art-contextmenus, 
+    .art-info, 
+    .art-settings, 
+    .art-layer-auto-playback, 
+    .art-selector-list, 
+    .art-volume-inner {
+        .art-backdrop-filter();
+    }
+ }

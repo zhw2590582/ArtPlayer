@@ -129,9 +129,7 @@ export default class Template {
         this.$contextmenu = this.query('.art-contextmenus');
 
         if (option.backdrop) {
-            addClass(this.$setting, 'art-backdrop-filter');
-            addClass(this.$contextmenu, 'art-backdrop-filter');
-            addClass(this.$info, 'art-backdrop-filter');
+            addClass(this.$player, 'art-backdrop');
         }
 
         if (isMobile) {

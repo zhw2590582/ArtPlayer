@@ -1,4 +1,4 @@
-import { secondToTime, setStyle, query, append, addClass } from '../utils';
+import { secondToTime, setStyle, query, append } from '../utils';
 
 export default function autoPlayback(art) {
     const {
@@ -22,10 +22,6 @@ export default function autoPlayback(art) {
     const $last = query('.art-auto-playback-last', $autoPlayback);
     const $jump = query('.art-auto-playback-jump', $autoPlayback);
     const $close = query('.art-auto-playback-close', $autoPlayback);
-
-    if (art.option.backdrop) {
-        addClass($autoPlayback, 'art-backdrop-filter');
-    }
 
     art.on('video:timeupdate', () => {
         const times = storage.get('times') || {};
