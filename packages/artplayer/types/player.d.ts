@@ -63,6 +63,7 @@ export declare class Player {
     play(): Promise<void>;
     toggle(): void;
     attr(key: string, value?: any): unknown;
+    cssVar(key: `--art-${string}`, value?: string): unknown;
     switchUrl(url: string): Promise<string>;
     switchQuality(url: string): Promise<string>;
     getDataURL(): Promise<string>;

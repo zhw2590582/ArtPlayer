@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-17 22:43:27";
+        return "2023-04-17 22:48:49";
     }
     static get config() {
         return 0, _configDefault.default;
