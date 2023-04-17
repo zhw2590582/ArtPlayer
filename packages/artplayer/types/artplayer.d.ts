@@ -35,12 +35,6 @@ declare class Artplayer extends Player {
     static SETTING_WIDTH: number;
     static SETTING_ITEM_WIDTH: number;
     static SETTING_ITEM_HEIGHT: number;
-    static INDICATOR_SIZE: number;
-    static INDICATOR_SIZE_ICON: number;
-    static INDICATOR_SIZE_MOBILE: number;
-    static INDICATOR_SIZE_MOBILE_ICON: number;
-    static VOLUME_PANEL_WIDTH: number;
-    static VOLUME_HANDLE_WIDTH: number;
     static RESIZE_TIME: number;
     static SCROLL_TIME: number;
     static SCROLL_GAP: number;
@@ -59,7 +53,6 @@ declare class Artplayer extends Player {
     static TOUCH_MOVE_RATIO: number;
     static VOLUME_STEP: number;
     static SEEK_STEP: number;
-    static PROGRESS_HEIGHT: number;
     static PLAYBACK_RATE: number[];
     static ASPECT_RATIO: string[];
     static FLIP: string[];
