@@ -33,27 +33,7 @@ export default class Setting extends Component {
         this.cache = new Map();
 
         if (option.setting) {
-            if (option.playbackRate) {
-                this.option.push(playbackRate(art));
-            }
-
-            if (option.aspectRatio) {
-                this.option.push(aspectRatio(art));
-            }
-
-            if (option.flip) {
-                this.option.push(flip(art));
-            }
-
-            if (option.subtitleOffset) {
-                this.option.push(subtitleOffset(art));
-            }
-
-            for (let index = 0; index < option.settings.length; index++) {
-                this.option.push(option.settings[index]);
-            }
-
-            this.update();
+            this.update(option.settings);
 
             art.on('blur', () => {
                 if (this.show) {
@@ -87,12 +67,45 @@ export default class Setting extends Component {
         return option;
     }
 
-    update() {
-        this.cache = new Map();
-        this.events.forEach((event) => event());
+    get defaultSettings() {
+        const result = [];
+        const { option } = this.art;
+
+        if (option.playbackRate) {
+            result.push(playbackRate(this.art));
+        }
+
+        if (option.aspectRatio) {
+            result.push(aspectRatio(this.art));
+        }
+
+        if (option.flip) {
+            result.push(flip(this.art));
+        }
+
+        if (option.subtitleOffset) {
+            result.push(subtitleOffset(this.art));
+        }
+
+        return result;
+    }
+
+    update(settings = []) {
+        const { option, events } = this.art;
+        if (!option.setting) return;
+
+        for (let index = 0; index < this.events.length; index++) {
+            const destroyEvent = this.events[index];
+            events.remove(destroyEvent);
+            destroyEvent();
+        }
+
         this.events = [];
+        this.show = false;
+        this.cache = new Map();
         this.$parent.innerHTML = '';
-        this.option = Setting.makeRecursion(this.option);
+        const mergeSettings = [...this.defaultSettings, ...settings];
+        this.option = Setting.makeRecursion(mergeSettings);
         this.init(this.option);
         return this.option;
     }

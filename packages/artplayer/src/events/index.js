@@ -67,6 +67,11 @@ export default class Events {
         });
     }
 
+    remove(event) {
+        const index = this.destroyEvents.indexOf(event);
+        if (index > -1) this.destroyEvents.splice(index, 1);
+    }
+
     destroy() {
         for (let index = 0; index < this.destroyEvents.length; index++) {
             this.destroyEvents[index]();

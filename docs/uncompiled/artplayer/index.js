@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-17 22:58:09";
+        return "2023-04-18 00:04:26";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3947,8 +3947,8 @@ var _clickInit = require("./clickInit");
 var _clickInitDefault = parcelHelpers.interopDefault(_clickInit);
 var _hoverInit = require("./hoverInit");
 var _hoverInitDefault = parcelHelpers.interopDefault(_hoverInit);
-var _mouseMoveInit = require("./mouseMoveInit");
-var _mouseMoveInitDefault = parcelHelpers.interopDefault(_mouseMoveInit);
+var _moveInit = require("./moveInit");
+var _moveInitDefault = parcelHelpers.interopDefault(_moveInit);
 var _resizeInit = require("./resizeInit");
 var _resizeInitDefault = parcelHelpers.interopDefault(_resizeInit);
 var _gestureInit = require("./gestureInit");
@@ -3966,7 +3966,7 @@ class Events {
         if (art.whitelist.state) {
             (0, _clickInitDefault.default)(art, this);
             (0, _hoverInitDefault.default)(art, this);
-            (0, _mouseMoveInitDefault.default)(art, this);
+            (0, _moveInitDefault.default)(art, this);
             (0, _resizeInitDefault.default)(art, this);
             (0, _gestureInitDefault.default)(art, this);
             (0, _viewInitDefault.default)(art, this);
@@ -3997,13 +3997,17 @@ class Events {
             this.proxy(image, "error", ()=>reject(new (0, _error.ArtPlayerError)(`Failed to load Image: ${image.src}`)));
         });
     }
+    remove(event) {
+        const index = this.destroyEvents.indexOf(event);
+        if (index > -1) this.destroyEvents.splice(index, 1);
+    }
     destroy() {
         for(let index = 0; index < this.destroyEvents.length; index++)this.destroyEvents[index]();
     }
 }
 exports.default = Events;
 
-},{"../utils/error":"622b3","./clickInit":"3fsfH","./hoverInit":"jr1ic","./mouseMoveInit":"fkl33","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
+},{"../utils/error":"622b3","./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -4056,16 +4060,16 @@ function hoverInit(art, events) {
 }
 exports.default = hoverInit;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fkl33":[function(require,module,exports) {
+},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jnUlq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-function mousemoveInitInit(art, events) {
+function moveInit(art, events) {
     const { $player  } = art.template;
     events.proxy($player, "mousemove", (event)=>{
         art.emit("mousemove", event);
     });
 }
-exports.default = mousemoveInitInit;
+exports.default = moveInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2r19L":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4524,12 +4528,7 @@ class Setting extends (0, _componentDefault.default) {
         this.events = [];
         this.cache = new Map();
         if (option.setting) {
-            if (option.playbackRate) this.option.push((0, _playbackRateDefault.default)(art));
-            if (option.aspectRatio) this.option.push((0, _aspectRatioDefault.default)(art));
-            if (option.flip) this.option.push((0, _flipDefault.default)(art));
-            if (option.subtitleOffset) this.option.push((0, _subtitleOffsetDefault.default)(art));
-            for(let index = 0; index < option.settings.length; index++)this.option.push(option.settings[index]);
-            this.update();
+            this.update(option.settings);
             art.on("blur", ()=>{
                 if (this.show) {
                     this.show = false;
@@ -4553,12 +4552,32 @@ class Setting extends (0, _componentDefault.default) {
         }
         return option;
     }
-    update() {
-        this.cache = new Map();
-        this.events.forEach((event)=>event());
+    get defaultSettings() {
+        const result = [];
+        const { option  } = this.art;
+        if (option.playbackRate) result.push((0, _playbackRateDefault.default)(this.art));
+        if (option.aspectRatio) result.push((0, _aspectRatioDefault.default)(this.art));
+        if (option.flip) result.push((0, _flipDefault.default)(this.art));
+        if (option.subtitleOffset) result.push((0, _subtitleOffsetDefault.default)(this.art));
+        return result;
+    }
+    update(settings = []) {
+        const { option , events  } = this.art;
+        if (!option.setting) return;
+        for(let index = 0; index < this.events.length; index++){
+            const destroyEvent = this.events[index];
+            events.remove(destroyEvent);
+            destroyEvent();
+        }
         this.events = [];
+        this.show = false;
+        this.cache = new Map();
         this.$parent.innerHTML = "";
-        this.option = Setting.makeRecursion(this.option);
+        const mergeSettings = [
+            ...this.defaultSettings,
+            ...settings
+        ];
+        this.option = Setting.makeRecursion(mergeSettings);
         this.init(this.option);
         return this.option;
     }

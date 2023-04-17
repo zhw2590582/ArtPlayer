@@ -105,6 +105,7 @@ declare class Artplayer extends Player {
         ): () => void;
         hover(element: HTMLElement, mouseenter?: (event: Event) => any, mouseleave?: (event: Event) => any): void;
         loadImg(element: HTMLImageElement | string): Promise<HTMLImageElement>;
+        remove(event: Event): void;
     };
 
     readonly storage: {
@@ -156,7 +157,7 @@ declare class Artplayer extends Player {
     readonly setting: {
         option: Setting[];
         add(setting: Setting): SettingOption;
-        update(): SettingOption[];
+        update(settings: Setting[]): SettingOption[];
         updateStyle(width?: number): void;
     } & Component;
 
