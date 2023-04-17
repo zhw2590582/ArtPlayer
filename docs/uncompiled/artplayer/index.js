@@ -3365,7 +3365,6 @@ function volume(option) {
                 const $handle = (0, _utils.append)($slider, `<div class="art-volume-handle"></div>`);
                 const $loaded = (0, _utils.append)($handle, `<div class="art-volume-loaded"></div>`);
                 const $indicator = (0, _utils.append)($slider, `<div class="art-volume-indicator"></div>`);
-                if (0, _utils.isMobile) (0, _utils.setStyle)($panel, "display", "none");
                 function getVolumeFromEvent(event) {
                     const { top , height  } = $slider.getBoundingClientRect();
                     return 1 - (event.pageY - top) / height;
@@ -3394,20 +3393,23 @@ function volume(option) {
                 proxy($close, "click", ()=>{
                     art.muted = false;
                 });
-                let isDroging = false;
-                proxy($slider, "mousedown", (event)=>{
-                    isDroging = true;
-                    art.volume = getVolumeFromEvent(event);
-                });
-                proxy(document, "mousemove", (event)=>{
-                    if (isDroging) {
-                        art.muted = false;
+                if (0, _utils.isMobile) (0, _utils.setStyle)($panel, "display", "none");
+                else {
+                    let isDroging = false;
+                    proxy($slider, "mousedown", (event)=>{
+                        isDroging = true;
                         art.volume = getVolumeFromEvent(event);
-                    }
-                });
-                proxy(document, "mouseup", ()=>{
-                    if (isDroging) isDroging = false;
-                });
+                    });
+                    proxy(document, "mousemove", (event)=>{
+                        if (isDroging) {
+                            art.muted = false;
+                            art.volume = getVolumeFromEvent(event);
+                        }
+                    });
+                    proxy(document, "mouseup", ()=>{
+                        if (isDroging) isDroging = false;
+                    });
+                }
             }
         });
 }
