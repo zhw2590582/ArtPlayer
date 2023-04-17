@@ -2,6 +2,7 @@ import { Subtitle } from './subtitle';
 import { Setting } from './setting';
 import { Icons } from './icons';
 import { I18n } from './i18n';
+import { CssVar } from './cssVar';
 import { ComponentOption } from './component';
 import Artplayer = require('./artplayer');
 
@@ -301,6 +302,11 @@ export type Option = {
     icons?: {
         [key in keyof Icons]?: HTMLElement | string;
     };
+
+    /**
+     * Custom css variables
+     */
+    cssVar?: CssVar;
 
     /**
      * Custom video type function

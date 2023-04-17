@@ -1,5 +1,4 @@
-import { AspectRatio, Flip, PlaybackRate } from './player';
-import { Selector } from './component';
+import { AspectRatio, Flip } from './player';
 
 export type Events = {
     'video:canplay': [event: Event];

@@ -118,5 +118,6 @@ export default {
     moreVideoAttr: o,
     i18n: o,
     icons: o,
+    cssVar: o,
     customType: o,
 };

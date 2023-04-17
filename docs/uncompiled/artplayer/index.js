@@ -336,6 +336,7 @@ class Artplayer extends (0, _emitterDefault.default) {
             },
             i18n: {},
             icons: {},
+            cssVar: {},
             customType: {},
             lang: navigator.language.toLowerCase()
         };
@@ -1101,6 +1102,7 @@ exports.default = {
     moreVideoAttr: o,
     i18n: o,
     icons: o,
+    cssVar: o,
     customType: o
 };
 
