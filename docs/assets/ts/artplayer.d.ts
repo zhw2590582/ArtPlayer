@@ -630,7 +630,7 @@ export type Icons = {
     readonly [key: string]: HTMLDivElement;
 };
 
-type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | `id` (string & Record<never, never>);
+type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | `id` | (string & Record<never, never>);
 
 type I18nValue = {
     'Video Info': string;
