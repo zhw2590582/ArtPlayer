@@ -64,7 +64,7 @@ export default function miniMix(art) {
                 lastPageY = event.pageY;
             });
 
-            proxy(document, 'mousemove', (event) => {
+            art.on('document:mousemove', (event) => {
                 if (isDroging) {
                     addClass($mini, 'art-mini-droging');
                     const x = event.pageX - lastPageX;
@@ -73,7 +73,7 @@ export default function miniMix(art) {
                 }
             });
 
-            proxy(document, 'mouseup', () => {
+            art.on('document:mouseup', () => {
                 if (isDroging) {
                     isDroging = false;
                     removeClass($mini, 'art-mini-droging');

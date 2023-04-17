@@ -49,34 +49,15 @@ export default function progress(options) {
                 const $indicator = query('.art-progress-indicator', $control);
                 const $tip = query('.art-progress-tip', $control);
 
-                const { INDICATOR_SIZE, INDICATOR_SIZE_ICON, INDICATOR_SIZE_MOBILE, INDICATOR_SIZE_MOBILE_ICON } =
-                    art.constructor;
-
                 setStyle($played, 'backgroundColor', 'var(--art-theme)');
 
-                let indicatorSize = INDICATOR_SIZE;
-
                 if (icons.indicator) {
-                    indicatorSize = INDICATOR_SIZE_ICON;
                     append($indicator, icons.indicator);
                 } else {
                     setStyles($indicator, {
                         backgroundColor: 'var(--art-theme)',
                     });
                 }
-
-                if (isMobile) {
-                    indicatorSize = INDICATOR_SIZE_MOBILE;
-                    if (icons.indicator) {
-                        indicatorSize = INDICATOR_SIZE_MOBILE_ICON;
-                    }
-                }
-
-                setStyles($indicator, {
-                    left: `-${indicatorSize / 2}px`,
-                    width: `${indicatorSize}px`,
-                    height: `${indicatorSize}px`,
-                });
 
                 function showHighlight(event) {
                     const { width } = getPosFromEvent(art, event);
@@ -112,7 +93,7 @@ export default function progress(options) {
 
                     if (type === 'played') {
                         setStyle($played, 'width', `${percentage * 100}%`);
-                        setStyle($indicator, 'left', `calc(${percentage * 100}% - ${indicatorSize / 2}px)`);
+                        setStyle($indicator, 'left', `calc(${percentage * 100}% - var(--art-indicator-size) / 2)`);
                     }
                 }
 
@@ -175,7 +156,7 @@ export default function progress(options) {
                         isDroging = event.button === 0;
                     });
 
-                    proxy(document, 'mousemove', (event) => {
+                    art.on('document:mousemove', (event) => {
                         if (isDroging) {
                             const { second, percentage } = getPosFromEvent(art, event);
                             setBar('played', percentage);
@@ -183,7 +164,7 @@ export default function progress(options) {
                         }
                     });
 
-                    proxy(document, 'mouseup', () => {
+                    art.on('document:mouseup', () => {
                         if (isDroging) {
                             isDroging = false;
                         }

@@ -23,6 +23,8 @@ export type Events = {
     'video:timeupdate': [event: Event];
     'video:volumechange': [event: Event];
     'video:waiting': [event: Event];
+    'document:mousemove': [event: Event];
+    'document:mouseup': [event: Event];
     info: [state: boolean];
     layer: [state: boolean];
     loading: [state: boolean];

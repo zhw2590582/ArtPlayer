@@ -1,10 +1,11 @@
 import { ArtPlayerError } from '../utils/error';
 import clickInit from './clickInit';
 import hoverInit from './hoverInit';
-import mousemoveInit from './mousemoveInit';
+import mouseMoveInit from './mouseMoveInit';
 import resizeInit from './resizeInit';
 import gestureInit from './gestureInit';
 import viewInit from './viewInit';
+import documentInit from './documentInit';
 
 export default class Events {
     constructor(art) {
@@ -16,10 +17,11 @@ export default class Events {
         if (art.whitelist.state) {
             clickInit(art, this);
             hoverInit(art, this);
-            mousemoveInit(art, this);
+            mouseMoveInit(art, this);
             resizeInit(art, this);
             gestureInit(art, this);
             viewInit(art, this);
+            documentInit(art, this);
         }
     }
 

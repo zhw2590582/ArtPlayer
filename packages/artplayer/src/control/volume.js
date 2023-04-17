@@ -59,14 +59,14 @@ export default function volume(option) {
                     art.volume = getVolumeFromEvent(event);
                 });
 
-                proxy(document, 'mousemove', (event) => {
+                art.on('document:mousemove', (event) => {
                     if (isDroging) {
                         art.muted = false;
                         art.volume = getVolumeFromEvent(event);
                     }
                 });
 
-                proxy(document, 'mouseup', () => {
+                art.on('document:mouseup', () => {
                     if (isDroging) {
                         isDroging = false;
                     }
