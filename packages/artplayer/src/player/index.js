@@ -24,7 +24,7 @@ import miniMix from './miniMix';
 import loopMix from './loopMix';
 import posterMix from './posterMix';
 import autoHeightMix from './autoHeightMix';
-import cssPropertyMix from './cssPropertyMix';
+import cssVarMix from './cssVarMix';
 import themeMix from './themeMix';
 import titleMix from './titleMix';
 import typeMix from './typeMix';
@@ -62,7 +62,7 @@ export default class Player {
         loopMix(art);
         posterMix(art);
         autoHeightMix(art);
-        cssPropertyMix(art);
+        cssVarMix(art);
         themeMix(art);
         titleMix(art);
         typeMix(art);
