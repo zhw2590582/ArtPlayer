@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-17 21:53:28";
+        return "2023-04-17 22:43:27";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1335,8 +1335,6 @@ class Template {
         this.$contextmenu = this.query(".art-contextmenus");
         if (option.backdrop) (0, _utils.addClass)(this.$player, "art-backdrop");
         if (0, _utils.isMobile) (0, _utils.addClass)(this.$player, "art-mobile");
-        if (option.theme) option.cssVar["--art-theme"] = option.theme;
-        for(const key in option.cssVar)this.$player.style.setProperty(key, option.cssVar[key]);
     }
     mobile() {
         this.$container.innerHTML = `
@@ -1488,8 +1486,8 @@ var _posterMix = require("./posterMix");
 var _posterMixDefault = parcelHelpers.interopDefault(_posterMix);
 var _autoHeightMix = require("./autoHeightMix");
 var _autoHeightMixDefault = parcelHelpers.interopDefault(_autoHeightMix);
-var _cssPropertyMix = require("./cssPropertyMix");
-var _cssPropertyMixDefault = parcelHelpers.interopDefault(_cssPropertyMix);
+var _cssVarMix = require("./cssVarMix");
+var _cssVarMixDefault = parcelHelpers.interopDefault(_cssVarMix);
 var _themeMix = require("./themeMix");
 var _themeMixDefault = parcelHelpers.interopDefault(_themeMix);
 var _titleMix = require("./titleMix");
@@ -1534,7 +1532,7 @@ class Player {
         (0, _loopMixDefault.default)(art);
         (0, _posterMixDefault.default)(art);
         (0, _autoHeightMixDefault.default)(art);
-        (0, _cssPropertyMixDefault.default)(art);
+        (0, _cssVarMixDefault.default)(art);
         (0, _themeMixDefault.default)(art);
         (0, _titleMixDefault.default)(art);
         (0, _typeMixDefault.default)(art);
@@ -1547,7 +1545,7 @@ class Player {
 }
 exports.default = Player;
 
-},{"./urlMix":"aIS34","./attrMix":"jDj6f","./playMix":"agXpy","./pauseMix":"zMuGC","./toggleMix":"fvNrm","./seekMix":"3CiN1","./volumeMix":"1LKRL","./currentTimeMix":"bjUCm","./durationMix":"l8grT","./switchMix":"bIvi5","./playbackRateMix":"3EFen","./aspectRatioMix":"8ucW5","./screenshotMix":"12WvT","./fullscreenMix":"gNUzM","./fullscreenWebMix":"f2xmf","./pipMix":"i5i0P","./loadedMix":"8X9EY","./playedMix":"1ziBX","./playingMix":"9898W","./autoSizeMix":"b1yGg","./rectMix":"eKKgI","./flipMix":"ad3ay","./miniMix":"hUF3v","./loopMix":"gXFcr","./posterMix":"6j7ij","./autoHeightMix":"8Mzuu","./themeMix":"dv3lF","./titleMix":"5I0kK","./typeMix":"2FCQH","./normalSizeMix":"9U4Nw","./subtitleOffsetMix":"lTNEf","./airplayMix":"bIjnH","./optionInit":"9Us4p","./eventInit":"4hZCW","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./cssPropertyMix":"4FyKL"}],"aIS34":[function(require,module,exports) {
+},{"./urlMix":"aIS34","./attrMix":"jDj6f","./playMix":"agXpy","./pauseMix":"zMuGC","./toggleMix":"fvNrm","./seekMix":"3CiN1","./volumeMix":"1LKRL","./currentTimeMix":"bjUCm","./durationMix":"l8grT","./switchMix":"bIvi5","./playbackRateMix":"3EFen","./aspectRatioMix":"8ucW5","./screenshotMix":"12WvT","./fullscreenMix":"gNUzM","./fullscreenWebMix":"f2xmf","./pipMix":"i5i0P","./loadedMix":"8X9EY","./playedMix":"1ziBX","./playingMix":"9898W","./autoSizeMix":"b1yGg","./rectMix":"eKKgI","./flipMix":"ad3ay","./miniMix":"hUF3v","./loopMix":"gXFcr","./posterMix":"6j7ij","./autoHeightMix":"8Mzuu","./cssVarMix":"fypct","./themeMix":"dv3lF","./titleMix":"5I0kK","./typeMix":"2FCQH","./normalSizeMix":"9U4Nw","./subtitleOffsetMix":"lTNEf","./airplayMix":"bIjnH","./optionInit":"9Us4p","./eventInit":"4hZCW","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aIS34":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2511,6 +2509,21 @@ function autoHeightMix(art) {
 }
 exports.default = autoHeightMix;
 
+},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fypct":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function cssVarMix(art) {
+    const { $player  } = art.template;
+    (0, _utils.def)(art, "cssVar", {
+        value (key, value) {
+            if (value) return $player.style.setProperty(key, value);
+            else return getComputedStyle($player).getPropertyValue(key);
+        }
+    });
+}
+exports.default = cssVarMix;
+
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dv3lF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -2669,6 +2682,8 @@ function attrInit(art) {
         $video.playsInline = true;
         $video["webkit-playsinline"] = true;
     }
+    if (option.theme) option.cssVar["--art-theme"] = option.theme;
+    for(const key in option.cssVar)art.cssVar(key, option.cssVar[key]);
     art.url = option.url;
 }
 exports.default = attrInit;
@@ -2785,22 +2800,7 @@ function eventInit(art) {
 }
 exports.default = eventInit;
 
-},{"../config":"2ZnKD","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4FyKL":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _utils = require("../utils");
-function cssPropertyMix(art) {
-    const { $player  } = art.template;
-    (0, _utils.def)(art, "cssProperty", {
-        value (key, value) {
-            if (value) return $player.style.setProperty(key, value);
-            else return getComputedStyle($player).getPropertyValue(key);
-        }
-    });
-}
-exports.default = cssPropertyMix;
-
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"faO0X":[function(require,module,exports) {
+},{"../config":"2ZnKD","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"faO0X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");

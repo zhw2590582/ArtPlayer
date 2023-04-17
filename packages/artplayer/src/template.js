@@ -135,14 +135,6 @@ export default class Template {
         if (isMobile) {
             addClass(this.$player, 'art-mobile');
         }
-
-        if (option.theme) {
-            option.cssVar['--art-theme'] = option.theme;
-        }
-
-        for (const key in option.cssVar) {
-            this.$player.style.setProperty(key, option.cssVar[key]);
-        }
     }
 
     mobile() {
