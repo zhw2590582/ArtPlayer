@@ -39,9 +39,9 @@ export function setStyle(element, key, value) {
 }
 
 export function setStyles(element, styles) {
-    Object.keys(styles).forEach((key) => {
+    for (const key in styles) {
         setStyle(element, key, styles[key]);
-    });
+    }
     return element;
 }
 

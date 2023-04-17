@@ -1,18 +1,15 @@
 import { def } from '../utils';
 
 export default function themeMix(art) {
-    const {
-        option,
-        template: { $player },
-    } = art;
+    const { option } = art;
 
     def(art, 'theme', {
         get() {
-            return getComputedStyle($player).getPropertyValue('--art-theme');
+            return art.cssProperty('--art-theme');
         },
         set(theme) {
             option.theme = theme;
-            $player.style.setProperty('--art-theme', theme);
+            art.cssProperty('--art-theme', theme);
         },
     });
 }

@@ -7,9 +7,9 @@ export default function attrInit(art) {
         template: { $video, $poster },
     } = art;
 
-    Object.keys(option.moreVideoAttr).forEach((key) => {
+    for (const key in option.moreVideoAttr) {
         art.attr(key, option.moreVideoAttr[key]);
-    });
+    }
 
     if (option.muted) {
         art.muted = option.muted;
@@ -35,10 +35,6 @@ export default function attrInit(art) {
     if (option.playsInline) {
         $video.playsInline = true;
         $video['webkit-playsinline'] = true;
-    }
-
-    if (option.theme) {
-        art.theme = option.theme;
     }
 
     art.url = option.url;

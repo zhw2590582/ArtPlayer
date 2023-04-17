@@ -15,9 +15,9 @@ export default class Mobile {
             });
         }
 
-        Object.keys(option.moreVideoAttr).forEach((key) => {
+        for (const key in option.moreVideoAttr) {
             $video[key] = option.moreVideoAttr[key];
-        });
+        }
 
         $video.controls = true;
 

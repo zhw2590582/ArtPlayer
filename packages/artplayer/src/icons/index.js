@@ -60,10 +60,10 @@ export default class Icons {
             ...art.option.icons,
         };
 
-        Object.keys(icons).forEach((key) => {
+        for (const key in icons) {
             def(this, key, {
                 get: () => getIcon(key, icons[key]),
             });
-        });
+        }
     }
 }
