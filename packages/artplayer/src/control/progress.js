@@ -171,8 +171,8 @@ export default function progress(options) {
                         setStyle($hover, 'display', 'none');
                     });
 
-                    proxy($control, 'mousedown', () => {
-                        isDroging = true;
+                    proxy($control, 'mousedown', (event) => {
+                        isDroging = event.button === 0;
                     });
 
                     proxy(document, 'mousemove', (event) => {

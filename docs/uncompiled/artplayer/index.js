@@ -3299,8 +3299,8 @@ function progress(options) {
                         (0, _utils.setStyle)($tip, "display", "none");
                         (0, _utils.setStyle)($hover, "display", "none");
                     });
-                    proxy($control, "mousedown", ()=>{
-                        isDroging = true;
+                    proxy($control, "mousedown", (event)=>{
+                        isDroging = event.button === 0;
                     });
                     proxy(document, "mousemove", (event)=>{
                         if (isDroging) {
@@ -3397,7 +3397,7 @@ function volume(option) {
                 else {
                     let isDroging = false;
                     proxy($slider, "mousedown", (event)=>{
-                        isDroging = true;
+                        isDroging = event.button === 0;
                         art.volume = getVolumeFromEvent(event);
                     });
                     proxy(document, "mousemove", (event)=>{

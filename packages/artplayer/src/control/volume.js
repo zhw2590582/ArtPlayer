@@ -55,7 +55,7 @@ export default function volume(option) {
                 let isDroging = false;
 
                 proxy($slider, 'mousedown', (event) => {
-                    isDroging = true;
+                    isDroging = event.button === 0;
                     art.volume = getVolumeFromEvent(event);
                 });
 
