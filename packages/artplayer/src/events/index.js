@@ -1,7 +1,7 @@
 import { ArtPlayerError } from '../utils/error';
 import clickInit from './clickInit';
 import hoverInit from './hoverInit';
-import mouseMoveInit from './mouseMoveInit';
+import moveInit from './moveInit';
 import resizeInit from './resizeInit';
 import gestureInit from './gestureInit';
 import viewInit from './viewInit';
@@ -17,7 +17,7 @@ export default class Events {
         if (art.whitelist.state) {
             clickInit(art, this);
             hoverInit(art, this);
-            mouseMoveInit(art, this);
+            moveInit(art, this);
             resizeInit(art, this);
             gestureInit(art, this);
             viewInit(art, this);

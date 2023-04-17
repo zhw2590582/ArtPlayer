@@ -1,4 +1,4 @@
-export default function mousemoveInitInit(art, events) {
+export default function moveInit(art, events) {
     const { $player } = art.template;
 
     events.proxy($player, 'mousemove', (event) => {
