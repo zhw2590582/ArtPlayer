@@ -49,9 +49,9 @@ export type Component = {
     add(option: ComponentOption): HTMLElement;
 
     /**
-     * Dynamic remove a component
+     * Dynamic remove a component by name
      */
-    remove(): void;
+    remove(name: string): void;
 
     /**
      * Dynamic update a component
