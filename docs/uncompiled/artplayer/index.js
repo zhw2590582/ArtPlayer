@@ -2979,7 +2979,7 @@ class Component {
     toggle() {
         this.show = !this.show;
     }
-    async add(getOption) {
+    add(getOption) {
         const option = typeof getOption === "function" ? getOption(this.art) : getOption;
         option.html = option.html || "";
         (0, _optionValidatorDefault.default)(option, (0, _scheme.ComponentOption));
@@ -3017,7 +3017,7 @@ class Component {
             events,
             option
         });
-        if (option.mounted) await option.mounted.call(this.art, $ref);
+        if (option.mounted) option.mounted.call(this.art, $ref);
         return $ref;
     }
     addSelector(option, $ref, events) {
@@ -3056,10 +3056,10 @@ class Component {
         });
         events.push(destroyEvent);
     }
-    async remove(name) {
+    remove(name) {
         const item = this.cache.get(name);
         (0, _error.errorHandle)(item, `Can't find [${name}] from the [${this.name}]`);
-        if (item.option.beforeUnmount) await item.option.beforeUnmount.call(this.art, item.$ref);
+        if (item.option.beforeUnmount) item.option.beforeUnmount.call(this.art, item.$ref);
         for(let index = 0; index < item.events.length; index++){
             const destroyEvent = item.events[index];
             this.art.events.remove(destroyEvent);
@@ -3068,9 +3068,9 @@ class Component {
         (0, _dom.remove)(item.$ref);
         delete this[name];
     }
-    async update(option) {
+    update(option) {
         const item = this.cache.get(option.name);
-        if (item) await this.remove(option.name);
+        if (item) this.remove(option.name);
         return this.add(option);
     }
 }
