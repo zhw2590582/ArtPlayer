@@ -15,7 +15,7 @@
         height: 34px;
         width: 34px;
         border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: var(--art-tip-background);
     }
 
     .art-layer-auto-playback {
@@ -23,12 +23,12 @@
         gap: 10px;
         align-items: center;
         position: absolute;
-        left: 10px;
         border-radius: 3px;
         padding: 10px;
         line-height: 1;
+        left: var(--art-padding);
         bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);
-        background-color: var(--art-background);
+        background-color: var(--art-widget-background);
 
         .art-auto-playback-close {
             .art-center();
