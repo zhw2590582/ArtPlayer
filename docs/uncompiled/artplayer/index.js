@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-18 18:17:53";
+        return "2023-04-19 02:53:09";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3073,7 +3073,7 @@ class Component {
 }
 exports.default = Component;
 
-},{"./dom":"dNynC","option-validator":"2tbdu","../scheme":"gL38d","./error":"622b3","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
+},{"./dom":"dNynC","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -4048,23 +4048,23 @@ function clickInit(art, events) {
         if ((0, _utils.includeFromEvent)(event, $player)) {
             art.isInput = event.target.tagName === "INPUT";
             art.isFocus = true;
-            art.emit("focus");
+            art.emit("focus", event);
         } else {
             art.isInput = false;
             art.isFocus = false;
-            art.emit("blur");
+            art.emit("blur", event);
         }
     });
     let clickTime = 0;
-    events.proxy($video, "click", ()=>{
+    events.proxy($video, "click", (event)=>{
         const now = Date.now();
         if (now - clickTime <= constructor.DB_CLICE_TIME) {
-            art.emit("dblclick");
+            art.emit("dblclick", event);
             if (0, _utils.isMobile) {
                 if (!art.isLock) art.toggle();
             } else art.fullscreen = !art.fullscreen;
         } else {
-            art.emit("click");
+            art.emit("click", event);
             if (!(0, _utils.isMobile)) art.toggle();
         }
         clickTime = now;
@@ -4549,7 +4549,7 @@ var _utils = require("../utils");
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option , proxy , template: { $setting , $player  }  } = art;
+        const { option , controls , template: { $setting  }  } = art;
         this.name = "setting";
         this.$parent = $setting;
         this.option = [];
@@ -4563,8 +4563,10 @@ class Setting extends (0, _componentDefault.default) {
                     this.render(this.option);
                 }
             });
-            proxy($player, "click", (event)=>{
-                if (this.show && !(0, _utils.includeFromEvent)(event, art.controls.setting) && !(0, _utils.includeFromEvent)(event, this.$parent)) {
+            art.on("focus", (event)=>{
+                const isSetting = (0, _utils.includeFromEvent)(event, controls.setting);
+                const isParent = (0, _utils.includeFromEvent)(event, this.$parent);
+                if (this.show && !isSetting && !isParent) {
                     this.show = false;
                     this.render(this.option);
                 }

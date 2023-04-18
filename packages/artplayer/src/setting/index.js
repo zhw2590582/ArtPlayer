@@ -22,8 +22,8 @@ export default class Setting extends Component {
 
         const {
             option,
-            proxy,
-            template: { $setting, $player },
+            controls,
+            template: { $setting },
         } = art;
 
         this.name = 'setting';
@@ -43,12 +43,10 @@ export default class Setting extends Component {
                 }
             });
 
-            proxy($player, 'click', (event) => {
-                if (
-                    this.show &&
-                    !includeFromEvent(event, art.controls.setting) &&
-                    !includeFromEvent(event, this.$parent)
-                ) {
+            art.on('focus', (event) => {
+                const isSetting = includeFromEvent(event, controls.setting);
+                const isParent = includeFromEvent(event, this.$parent);
+                if (this.show && !isSetting && !isParent) {
                     this.show = false;
                     this.render(this.option);
                 }

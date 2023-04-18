@@ -38,10 +38,10 @@ export type Events = {
     subtitleUpdate: [text: string];
     subtitleLoad: [url: string];
     subtitleSwitch: [url: string];
-    focus: [];
-    blur: [];
-    dblclick: [];
-    click: [];
+    focus: [event: Event];
+    blur: [event: Event];
+    dblclick: [event: Event];
+    click: [event: Event];
     hover: [state: boolean, event: Event];
     mousemove: [event: Event];
     resize: [];

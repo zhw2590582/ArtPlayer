@@ -10,20 +10,20 @@ export default function clickInit(art, events) {
         if (includeFromEvent(event, $player)) {
             art.isInput = event.target.tagName === 'INPUT';
             art.isFocus = true;
-            art.emit('focus');
+            art.emit('focus', event);
         } else {
             art.isInput = false;
             art.isFocus = false;
-            art.emit('blur');
+            art.emit('blur', event);
         }
     });
 
     let clickTime = 0;
-    events.proxy($video, 'click', () => {
+    events.proxy($video, 'click', (event) => {
         const now = Date.now();
 
         if (now - clickTime <= constructor.DB_CLICE_TIME) {
-            art.emit('dblclick');
+            art.emit('dblclick', event);
 
             if (isMobile) {
                 if (!art.isLock) {
@@ -33,7 +33,7 @@ export default function clickInit(art, events) {
                 art.fullscreen = !art.fullscreen;
             }
         } else {
-            art.emit('click');
+            art.emit('click', event);
 
             if (!isMobile) {
                 art.toggle();
