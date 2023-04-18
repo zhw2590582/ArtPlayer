@@ -44,7 +44,7 @@ export default class Component {
         this.show = !this.show;
     }
 
-    add(getOption) {
+    async add(getOption) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
         option.html = option.html || '';
         validator(option, ComponentOption);
@@ -92,12 +92,12 @@ export default class Component {
             this.addSelector(option, $ref, events);
         }
 
-        if (option.mounted) {
-            option.mounted.call(this.art, $ref);
-        }
-
         this[name] = $ref;
         this.cache.set(name, { $ref, events, option });
+
+        if (option.mounted) {
+            await option.mounted.call(this.art, $ref);
+        }
 
         return $ref;
     }
@@ -154,12 +154,12 @@ export default class Component {
         events.push(destroyEvent);
     }
 
-    remove(name) {
+    async remove(name) {
         const item = this.cache.get(name);
         errorHandle(item, `Can't find [${name}] from the [${this.name}]`);
 
         if (item.option.beforeUnmount) {
-            item.option.beforeUnmount.call(this.art, item.$ref);
+            await item.option.beforeUnmount.call(this.art, item.$ref);
         }
 
         for (let index = 0; index < item.events.length; index++) {
@@ -172,9 +172,9 @@ export default class Component {
         delete this[name];
     }
 
-    update(option) {
+    async update(option) {
         const item = this.cache.get(option.name);
-        if (item) this.remove(option.name);
+        if (item) await this.remove(option.name);
         return this.add(option);
     }
 }
