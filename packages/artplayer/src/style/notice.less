@@ -1,12 +1,10 @@
 .art-video-player {
     .art-notice {
         display: none;
-        position: absolute;
-        z-index: 80;
-        left: 0;
-        top: 0;
-        padding: 10px;
-        width: 100%;
+        .art-full(80);
+        height: auto;
+        bottom: auto;
+        padding: var(--art-padding);
         pointer-events: none;
 
         .art-notice-inner {
@@ -14,7 +12,7 @@
             padding: 5px;
             line-height: 1;
             border-radius: 3px;
-            background-color: var(--art-background);
+            background-color: var(--art-tip-background);
         }
     }
 

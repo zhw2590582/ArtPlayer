@@ -9,6 +9,7 @@ import {
     append,
     addClass,
     setStyle,
+    isMobile,
     inverseClass,
     createElement,
     includeFromEvent,
@@ -60,9 +61,7 @@ export default class Setting extends Component {
             const item = option[index];
             item.$parentItem = parentItem;
             item.$parentList = parentList;
-            if (item.selector) {
-                Setting.makeRecursion(item.selector, item, option);
-            }
+            Setting.makeRecursion(item.selector || [], item, option);
         }
         return option;
     }
@@ -362,7 +361,7 @@ export default class Setting extends Component {
             template: { $player, $setting },
         } = this.art;
 
-        if (controls.setting) {
+        if (controls.setting && !isMobile) {
             const settingWidth = width || constructor.SETTING_WIDTH;
             const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
             const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
@@ -374,9 +373,6 @@ export default class Setting extends Component {
                 setStyle($setting, 'left', `${settingLeft}px`);
                 setStyle($setting, 'right', 'auto');
             }
-        } else {
-            setStyle($setting, 'left', 'auto');
-            setStyle($setting, 'right', '10px');
         }
     }
 
