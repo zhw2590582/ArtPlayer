@@ -2953,16 +2953,18 @@ exports.default = Control;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
+var _error = require("./error");
 var _optionValidator = require("option-validator");
 var _optionValidatorDefault = parcelHelpers.interopDefault(_optionValidator);
 var _scheme = require("../scheme");
-var _property = require("./property");
-var _error = require("./error");
 class Component {
     constructor(art){
         this.id = 0;
         this.art = art;
+        this.cache = new Map();
         this.add = this.add.bind(this);
+        this.remove = this.remove.bind(this);
+        this.update = this.update.bind(this);
     }
     get show() {
         return (0, _dom.hasClass)(this.art.template.$player, `art-${this.name}-show`);
@@ -2983,7 +2985,8 @@ class Component {
         (0, _optionValidatorDefault.default)(option, (0, _scheme.ComponentOption));
         if (!this.$parent || !this.name || option.disable) return;
         const name = option.name || `${this.name}${this.id}`;
-        (0, _error.errorHandle)(!(0, _property.has)(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
+        const item = this.cache.get(name);
+        (0, _error.errorHandle)(!item, `Can't add an existing name [${name}] to the [${this.name}]`);
         this.id += 1;
         const $ref = (0, _dom.createElement)("div");
         (0, _dom.addClass)($ref, `art-${this.name}`);
@@ -2996,21 +2999,27 @@ class Component {
         if (option.html) (0, _dom.append)($ref, option.html);
         if (option.style) (0, _dom.setStyles)($ref, option.style);
         if (option.tooltip) (0, _dom.tooltip)($ref, option.tooltip);
-        if (option.click) this.art.events.proxy($ref, "click", (event)=>{
-            event.preventDefault();
-            option.click.call(this.art, this, event);
-        });
+        const events = [];
+        if (option.click) {
+            const destroyEvent = this.art.events.proxy($ref, "click", (event)=>{
+                event.preventDefault();
+                option.click.call(this.art, this, event);
+            });
+            events.push(destroyEvent);
+        }
         if (option.selector && [
             "left",
             "right"
-        ].includes(option.position)) this.selector(option, $ref);
+        ].includes(option.position)) this.addSelector(option, $ref, events);
         if (option.mounted) option.mounted.call(this.art, $ref);
-        (0, _property.def)(this, name, {
-            value: $ref
+        this[name] = $ref;
+        this.cache.set(name, {
+            $ref,
+            events
         });
         return $ref;
     }
-    selector(option, $ref) {
+    addSelector(option, $ref, events) {
         const { hover , proxy  } = this.art.events;
         (0, _dom.addClass)($ref, "art-control-selector");
         const $value = (0, _dom.createElement)("div");
@@ -3030,7 +3039,7 @@ class Component {
             $list.style.left = `${left}px`;
         };
         hover($ref, setLeft);
-        proxy($list, "click", async (event)=>{
+        const destroyEvent = proxy($list, "click", async (event)=>{
             const path = event.composedPath() || [];
             const $item = path.find((item)=>(0, _dom.hasClass)(item, "art-selector-item"));
             if (!$item) return;
@@ -3044,11 +3053,28 @@ class Component {
             }
             setLeft();
         });
+        events.push(destroyEvent);
+    }
+    remove(name) {
+        const item = this.cache.get(name);
+        (0, _error.errorHandle)(item, `Can't find name [${name}] to the [${this.name}]`);
+        for(let index = 0; index < item.events.length; index++){
+            const destroyEvent = item.events[index];
+            this.art.events.remove(destroyEvent);
+            destroyEvent();
+        }
+        (0, _dom.remove)(item.$ref);
+        delete this[name];
+    }
+    update(option = {}) {
+        const item = this.cache.get(option.name);
+        if (item) this.remove(option.name);
+        this.add(option);
     }
 }
 exports.default = Component;
 
-},{"./dom":"dNynC","option-validator":"2tbdu","../scheme":"gL38d","./property":"91nLd","./error":"622b3","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
+},{"./dom":"dNynC","option-validator":"2tbdu","../scheme":"gL38d","./error":"622b3","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");

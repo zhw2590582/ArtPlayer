@@ -1,25 +1,28 @@
 import {
+    remove,
+    append,
+    tooltip,
     hasClass,
     addClass,
-    removeClass,
-    append,
-    setStyles,
-    tooltip,
     getStyle,
+    setStyles,
+    removeClass,
     inverseClass,
     createElement,
     isStringOrNumber,
 } from './dom';
+import { errorHandle } from './error';
 import validator from 'option-validator';
 import { ComponentOption } from '../scheme';
-import { has, def } from './property';
-import { errorHandle } from './error';
 
 export default class Component {
     constructor(art) {
         this.id = 0;
         this.art = art;
+        this.cache = new Map();
         this.add = this.add.bind(this);
+        this.remove = this.remove.bind(this);
+        this.update = this.update.bind(this);
     }
 
     get show() {
@@ -50,7 +53,8 @@ export default class Component {
 
         if (!this.$parent || !this.name || option.disable) return;
         const name = option.name || `${this.name}${this.id}`;
-        errorHandle(!has(this, name), `Cannot add an existing name [${name}] to the [${this.name}]`);
+        const item = this.cache.get(name);
+        errorHandle(!item, `Can't add an existing name [${name}] to the [${this.name}]`);
 
         this.id += 1;
         const $ref = createElement('div');
@@ -78,29 +82,30 @@ export default class Component {
             tooltip($ref, option.tooltip);
         }
 
+        const events = [];
         if (option.click) {
-            this.art.events.proxy($ref, 'click', (event) => {
+            const destroyEvent = this.art.events.proxy($ref, 'click', (event) => {
                 event.preventDefault();
                 option.click.call(this.art, this, event);
             });
+            events.push(destroyEvent);
         }
 
         if (option.selector && ['left', 'right'].includes(option.position)) {
-            this.selector(option, $ref);
+            this.addSelector(option, $ref, events);
         }
 
         if (option.mounted) {
             option.mounted.call(this.art, $ref);
         }
 
-        def(this, name, {
-            value: $ref,
-        });
+        this[name] = $ref;
+        this.cache.set(name, { $ref, events });
 
         return $ref;
     }
 
-    selector(option, $ref) {
+    addSelector(option, $ref, events) {
         const { hover, proxy } = this.art.events;
 
         addClass($ref, 'art-control-selector');
@@ -132,7 +137,7 @@ export default class Component {
 
         hover($ref, setLeft);
 
-        proxy($list, 'click', async (event) => {
+        const destroyEvent = proxy($list, 'click', async (event) => {
             const path = event.composedPath() || [];
             const $item = path.find((item) => hasClass(item, 'art-selector-item'));
             if (!$item) return;
@@ -148,5 +153,27 @@ export default class Component {
             }
             setLeft();
         });
+
+        events.push(destroyEvent);
+    }
+
+    remove(name) {
+        const item = this.cache.get(name);
+        errorHandle(item, `Can't find name [${name}] to the [${this.name}]`);
+
+        for (let index = 0; index < item.events.length; index++) {
+            const destroyEvent = item.events[index];
+            this.art.events.remove(destroyEvent);
+            destroyEvent();
+        }
+
+        remove(item.$ref);
+        delete this[name];
+    }
+
+    update(option = {}) {
+        const item = this.cache.get(option.name);
+        if (item) this.remove(option.name);
+        this.add(option);
     }
 }
