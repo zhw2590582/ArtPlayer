@@ -41,12 +41,22 @@ export type Component = {
     /**
      * Toggle the component parent
      */
-    set toggle(state: boolean);
+    toggle(): void;
 
     /**
      * Dynamic add a component
      */
     add(option: ComponentOption): HTMLElement;
+
+    /**
+     * Dynamic remove a component
+     */
+    remove(): void;
+
+    /**
+     * Dynamic update a component
+     */
+    update(option: ComponentOption): HTMLElement;
 };
 
 export type ComponentOption = {

@@ -48,11 +48,10 @@ export default class Component {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
         option.html = option.html || '';
         validator(option, ComponentOption);
-
         if (!this.$parent || !this.name || option.disable) return;
         const name = option.name || `${this.name}${this.id}`;
         const item = this.cache.get(name);
-        errorHandle(!item, `Can't add an existing name [${name}] to the [${this.name}]`);
+        errorHandle(!item, `Can't add an existing [${name}] to the [${this.name}]`);
 
         this.id += 1;
         const $ref = createElement('div');
@@ -157,7 +156,7 @@ export default class Component {
 
     remove(name) {
         const item = this.cache.get(name);
-        errorHandle(item, `Can't find name [${name}] to the [${this.name}]`);
+        errorHandle(item, `Can't find [${name}] from the [${this.name}]`);
 
         for (let index = 0; index < item.events.length; index++) {
             const destroyEvent = item.events[index];
@@ -169,9 +168,9 @@ export default class Component {
         delete this[name];
     }
 
-    update(option = {}) {
+    update(option) {
         const item = this.cache.get(option.name);
         if (item) this.remove(option.name);
-        this.add(option);
+        return this.add(option);
     }
 }

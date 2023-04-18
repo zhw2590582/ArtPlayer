@@ -39,7 +39,7 @@ export default class Setting extends Component {
             art.on('blur', () => {
                 if (this.show) {
                     this.show = false;
-                    this.init(this.option);
+                    this.render(this.option);
                 }
             });
 
@@ -50,7 +50,7 @@ export default class Setting extends Component {
                     !includeFromEvent(event, this.$parent)
                 ) {
                     this.show = false;
-                    this.init(this.option);
+                    this.render(this.option);
                 }
             });
         }
@@ -89,23 +89,24 @@ export default class Setting extends Component {
         return result;
     }
 
-    update(settings = []) {
-        const { option, events } = this.art;
-        if (!option.setting) return;
-
+    remove() {
         for (let index = 0; index < this.events.length; index++) {
             const destroyEvent = this.events[index];
-            events.remove(destroyEvent);
+            this.art.events.remove(destroyEvent);
             destroyEvent();
         }
-
-        this.events = [];
-        this.show = false;
-        this.cache = new Map();
         this.$parent.innerHTML = '';
+    }
+
+    update(settings = []) {
+        const { option } = this.art;
+        if (!option.setting) return;
+        this.remove();
+        this.events = [];
+        this.cache = new Map();
         const mergeSettings = [...this.defaultSettings, ...settings];
         this.option = Setting.makeRecursion(mergeSettings);
-        this.init(this.option);
+        this.render(this.option);
         return this.option;
     }
 
@@ -126,7 +127,7 @@ export default class Setting extends Component {
         append($icon, icons.arrowLeft);
         append($left, $icon);
         append($left, item.$parentItem.html);
-        const event = proxy($item, 'click', () => this.init(item.$parentList));
+        const event = proxy($item, 'click', () => this.render(item.$parentList));
         this.events.push(event);
         return $item;
     }
@@ -318,7 +319,7 @@ export default class Setting extends Component {
                 {
                     const event = proxy($item, 'click', async (event) => {
                         if (item.selector && item.selector.length) {
-                            this.init(item.selector, item.width);
+                            this.render(item.selector, item.width);
                         } else {
                             inverseClass($item, 'art-current');
 
@@ -328,7 +329,7 @@ export default class Setting extends Component {
                             }
 
                             if (item.$parentList) {
-                                this.init(item.$parentList);
+                                this.render(item.$parentList);
                             }
 
                             if (item.$parentItem && item.$parentItem.onSelect) {
@@ -376,7 +377,7 @@ export default class Setting extends Component {
         }
     }
 
-    init(option, width) {
+    render(option, width) {
         const { constructor } = this.art;
 
         if (this.cache.has(option)) {
