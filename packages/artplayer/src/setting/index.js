@@ -60,9 +60,7 @@ export default class Setting extends Component {
             const item = option[index];
             item.$parentItem = parentItem;
             item.$parentList = parentList;
-            if (item.selector) {
-                Setting.makeRecursion(item.selector, item, option);
-            }
+            Setting.makeRecursion(item.selector || [], item, option);
         }
         return option;
     }
