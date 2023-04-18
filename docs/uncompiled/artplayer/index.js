@@ -3065,8 +3065,9 @@ class Component {
             this.art.events.remove(destroyEvent);
             destroyEvent();
         }
-        (0, _dom.remove)(item.$ref);
+        this.cache.delete(name);
         delete this[name];
+        (0, _dom.remove)(item.$ref);
     }
     update(option) {
         const item = this.cache.get(option.name);

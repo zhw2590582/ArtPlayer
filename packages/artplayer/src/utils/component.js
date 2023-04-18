@@ -168,8 +168,9 @@ export default class Component {
             destroyEvent();
         }
 
-        remove(item.$ref);
+        this.cache.delete(name);
         delete this[name];
+        remove(item.$ref);
     }
 
     update(option) {
