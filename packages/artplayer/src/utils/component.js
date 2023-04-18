@@ -163,9 +163,7 @@ export default class Component {
         }
 
         for (let index = 0; index < item.events.length; index++) {
-            const destroyEvent = item.events[index];
-            this.art.events.remove(destroyEvent);
-            destroyEvent();
+            this.art.events.remove(item.events[index]);
         }
 
         this.cache.delete(name);

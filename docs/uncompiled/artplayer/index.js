@@ -3060,11 +3060,7 @@ class Component {
         const item = this.cache.get(name);
         (0, _error.errorHandle)(item, `Can't find [${name}] from the [${this.name}]`);
         if (item.option.beforeUnmount) item.option.beforeUnmount.call(this.art, item.$ref);
-        for(let index = 0; index < item.events.length; index++){
-            const destroyEvent = item.events[index];
-            this.art.events.remove(destroyEvent);
-            destroyEvent();
-        }
+        for(let index = 0; index < item.events.length; index++)this.art.events.remove(item.events[index]);
         this.cache.delete(name);
         delete this[name];
         (0, _dom.remove)(item.$ref);
@@ -4026,9 +4022,12 @@ class Events {
             this.proxy(image, "error", ()=>reject(new (0, _error.ArtPlayerError)(`Failed to load Image: ${image.src}`)));
         });
     }
-    remove(event) {
-        const index = this.destroyEvents.indexOf(event);
-        if (index > -1) this.destroyEvents.splice(index, 1);
+    remove(destroyEvent) {
+        const index = this.destroyEvents.indexOf(destroyEvent);
+        if (index > -1) {
+            destroyEvent();
+            this.destroyEvents.splice(index, 1);
+        }
     }
     destroy() {
         for(let index = 0; index < this.destroyEvents.length; index++)this.destroyEvents[index]();
@@ -4591,16 +4590,10 @@ class Setting extends (0, _componentDefault.default) {
         return result;
     }
     remove() {
-        for(let index = 0; index < this.events.length; index++){
-            const destroyEvent = this.events[index];
-            this.art.events.remove(destroyEvent);
-            destroyEvent();
-        }
+        for(let index = 0; index < this.events.length; index++)this.art.events.remove(this.events[index]);
         this.$parent.innerHTML = "";
     }
     update(settings = []) {
-        const { option  } = this.art;
-        if (!option.setting) return;
         this.remove();
         this.events = [];
         this.cache = new Map();

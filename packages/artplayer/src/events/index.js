@@ -67,9 +67,12 @@ export default class Events {
         });
     }
 
-    remove(event) {
-        const index = this.destroyEvents.indexOf(event);
-        if (index > -1) this.destroyEvents.splice(index, 1);
+    remove(destroyEvent) {
+        const index = this.destroyEvents.indexOf(destroyEvent);
+        if (index > -1) {
+            destroyEvent();
+            this.destroyEvents.splice(index, 1);
+        }
     }
 
     destroy() {

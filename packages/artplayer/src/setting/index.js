@@ -91,16 +91,12 @@ export default class Setting extends Component {
 
     remove() {
         for (let index = 0; index < this.events.length; index++) {
-            const destroyEvent = this.events[index];
-            this.art.events.remove(destroyEvent);
-            destroyEvent();
+            this.art.events.remove(this.events[index]);
         }
         this.$parent.innerHTML = '';
     }
 
     update(settings = []) {
-        const { option } = this.art;
-        if (!option.setting) return;
         this.remove();
         this.events = [];
         this.cache = new Map();
