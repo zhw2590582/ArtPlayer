@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-18 16:27:09";
+        return "2023-04-18 18:17:53";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3040,7 +3040,7 @@ class Component {
             $value.innerText = $item.innerText;
             if (option.onSelect) {
                 const result = await option.onSelect.call(this.art, find, $item, event);
-                if (typeof result === "string" || typeof result === "number") $value.innerHTML = result;
+                if ((0, _dom.isStringOrNumber)(result)) $value.innerHTML = result;
             }
             setLeft();
         });

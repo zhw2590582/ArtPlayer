@@ -8,6 +8,7 @@ import {
     getStyle,
     inverseClass,
     createElement,
+    isStringOrNumber,
 } from './dom';
 import validator from 'option-validator';
 import { ComponentOption } from '../scheme';
@@ -141,7 +142,7 @@ export default class Component {
             $value.innerText = $item.innerText;
             if (option.onSelect) {
                 const result = await option.onSelect.call(this.art, find, $item, event);
-                if (typeof result === 'string' || typeof result === 'number') {
+                if (isStringOrNumber(result)) {
                     $value.innerHTML = result;
                 }
             }
