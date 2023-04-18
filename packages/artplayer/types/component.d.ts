@@ -91,9 +91,14 @@ export type ComponentOption = {
     click?(this: Artplayer, component: Component, event: Event): void;
 
     /**
-     * Wnen the component was mounted
+     * When the component was mounted
      */
     mounted?(this: Artplayer, element: HTMLElement): void;
+
+    /**
+     * When the component was before unmount
+     */
+    beforeUnmount?(this: Artplayer, element: HTMLElement): void;
 
     /**
      * Component tooltip, use in controls

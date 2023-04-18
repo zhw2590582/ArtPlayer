@@ -97,7 +97,7 @@ export default class Component {
         }
 
         this[name] = $ref;
-        this.cache.set(name, { $ref, events });
+        this.cache.set(name, { $ref, events, option });
 
         return $ref;
     }
@@ -157,6 +157,10 @@ export default class Component {
     remove(name) {
         const item = this.cache.get(name);
         errorHandle(item, `Can't find [${name}] from the [${this.name}]`);
+
+        if (item.option.beforeUnmount) {
+            item.option.beforeUnmount.call(this.art, item.$ref);
+        }
 
         for (let index = 0; index < item.events.length; index++) {
             const destroyEvent = item.events[index];

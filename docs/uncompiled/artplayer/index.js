@@ -3015,7 +3015,8 @@ class Component {
         this[name] = $ref;
         this.cache.set(name, {
             $ref,
-            events
+            events,
+            option
         });
         return $ref;
     }
@@ -3058,6 +3059,7 @@ class Component {
     remove(name) {
         const item = this.cache.get(name);
         (0, _error.errorHandle)(item, `Can't find [${name}] from the [${this.name}]`);
+        if (item.option.beforeUnmount) item.option.beforeUnmount.call(this.art, item.$ref);
         for(let index = 0; index < item.events.length; index++){
             const destroyEvent = item.events[index];
             this.art.events.remove(destroyEvent);
