@@ -367,8 +367,8 @@ export default class Setting extends Component {
             const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
             if (settingLeft + settingWidth > playerWidth) {
-                setStyle($setting, 'left', 'auto');
-                setStyle($setting, 'right', '10px');
+                setStyle($setting, 'left', null);
+                setStyle($setting, 'right', null);
             } else {
                 setStyle($setting, 'left', `${settingLeft}px`);
                 setStyle($setting, 'right', 'auto');
