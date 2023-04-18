@@ -10,7 +10,7 @@ export default function setting(option) {
             append($control, icons.setting);
 
             proxy($control, 'click', () => {
-                art.setting.toggle = true;
+                art.setting.toggle();
                 art.setting.updateStyle();
             });
 

@@ -2976,8 +2976,8 @@ class Component {
         else (0, _dom.removeClass)($player, className);
         this.art.emit(this.name, value);
     }
-    set toggle(value) {
-        if (value) this.show = !this.show;
+    toggle() {
+        this.show = !this.show;
     }
     add(getOption) {
         const option = typeof getOption === "function" ? getOption(this.art) : getOption;
@@ -3450,7 +3450,7 @@ function setting(option) {
                 const { proxy , icons , i18n  } = art;
                 (0, _utils.append)($control, icons.setting);
                 proxy($control, "click", ()=>{
-                    art.setting.toggle = true;
+                    art.setting.toggle();
                     art.setting.updateStyle();
                 });
                 art.on("setting", (value)=>{

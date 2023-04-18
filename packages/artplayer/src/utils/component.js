@@ -40,10 +40,8 @@ export default class Component {
         this.art.emit(this.name, value);
     }
 
-    set toggle(value) {
-        if (value) {
-            this.show = !this.show;
-        }
+    toggle() {
+        this.show = !this.show;
     }
 
     add(getOption) {
