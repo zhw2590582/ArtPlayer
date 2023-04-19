@@ -43,7 +43,10 @@ declare class Artplayer extends Player {
     static RECONNECT_TIME_MAX: number;
     static RECONNECT_SLEEP_TIME: number;
     static CONTROL_HIDE_TIME: number;
-    static DB_CLICE_TIME: number;
+    static DBCLICK_TIME: number;
+    static DBCLICK_FULLSCREEN: boolean;
+    static MOBILE_DBCLICK_PLAY: boolean;
+    static MOBILE_CLICK_PLAY: boolean;
     static MOBILE_AUTO_PLAYBACKRAT: number;
     static MOBILE_AUTO_PLAYBACKRATE_TIME: number;
     static MOBILE_AUTO_ORIENTATION_TIME: number;

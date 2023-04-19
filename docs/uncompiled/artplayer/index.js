@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-19 02:53:09";
+        return "2023-04-19 11:26:40";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -374,7 +374,10 @@ Artplayer.AUTO_PLAYBACK_TIMEOUT = 3000;
 Artplayer.RECONNECT_TIME_MAX = 5;
 Artplayer.RECONNECT_SLEEP_TIME = 1000;
 Artplayer.CONTROL_HIDE_TIME = 3000;
-Artplayer.DB_CLICE_TIME = 300;
+Artplayer.DBCLICK_TIME = 300;
+Artplayer.DBCLICK_FULLSCREEN = true;
+Artplayer.MOBILE_DBCLICK_PLAY = true;
+Artplayer.MOBILE_CLICK_PLAY = false;
 Artplayer.MOBILE_AUTO_PLAYBACKRATE = 3;
 Artplayer.MOBILE_AUTO_PLAYBACKRATE_TIME = 1000;
 Artplayer.MOBILE_AUTO_ORIENTATION_TIME = 200;
@@ -4058,14 +4061,17 @@ function clickInit(art, events) {
     let clickTime = 0;
     events.proxy($video, "click", (event)=>{
         const now = Date.now();
-        if (now - clickTime <= constructor.DB_CLICE_TIME) {
+        const { MOBILE_CLICK_PLAY , DBCLICK_TIME , MOBILE_DBCLICK_PLAY , DBCLICK_FULLSCREEN  } = constructor;
+        if (now - clickTime <= DBCLICK_TIME) {
             art.emit("dblclick", event);
             if (0, _utils.isMobile) {
-                if (!art.isLock) art.toggle();
-            } else art.fullscreen = !art.fullscreen;
+                if (!art.isLock && MOBILE_DBCLICK_PLAY) art.toggle();
+            } else if (DBCLICK_FULLSCREEN) art.fullscreen = !art.fullscreen;
         } else {
             art.emit("click", event);
-            if (!(0, _utils.isMobile)) art.toggle();
+            if (0, _utils.isMobile) {
+                if (!art.isLock && MOBILE_CLICK_PLAY) art.toggle();
+            } else art.toggle();
         }
         clickTime = now;
     });

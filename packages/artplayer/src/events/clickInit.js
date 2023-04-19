@@ -21,21 +21,28 @@ export default function clickInit(art, events) {
     let clickTime = 0;
     events.proxy($video, 'click', (event) => {
         const now = Date.now();
+        const { MOBILE_CLICK_PLAY, DBCLICK_TIME, MOBILE_DBCLICK_PLAY, DBCLICK_FULLSCREEN } = constructor;
 
-        if (now - clickTime <= constructor.DB_CLICE_TIME) {
+        if (now - clickTime <= DBCLICK_TIME) {
             art.emit('dblclick', event);
 
             if (isMobile) {
-                if (!art.isLock) {
+                if (!art.isLock && MOBILE_DBCLICK_PLAY) {
                     art.toggle();
                 }
             } else {
-                art.fullscreen = !art.fullscreen;
+                if (DBCLICK_FULLSCREEN) {
+                    art.fullscreen = !art.fullscreen;
+                }
             }
         } else {
             art.emit('click', event);
 
-            if (!isMobile) {
+            if (isMobile) {
+                if (!art.isLock && MOBILE_CLICK_PLAY) {
+                    art.toggle();
+                }
+            } else {
                 art.toggle();
             }
         }
