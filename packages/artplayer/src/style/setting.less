@@ -5,9 +5,11 @@
         position: absolute;
         z-index: 90;
         left: auto;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
         border-radius: 3px;
         transform-origin: bottom right;
+        max-height: var(--art-settings-max-height);
         right: var(--art-padding);
         bottom: var(--art-control-height);
         transform: scale(var(--art-settings-scale));

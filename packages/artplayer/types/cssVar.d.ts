@@ -29,6 +29,8 @@ export type CssVar = {
     '--art-fullscreen-web-index': 9999;
     '--art-settings-scale': number;
     '--art-settings-icon-size': string;
+    '--art-settings-max-height': string;
+    '--art-selector-max-height': string;
     '--art-contextmenus-min-width': string;
     '--art-subtitle-font-size': string;
     '--art-subtitle-gap': string;

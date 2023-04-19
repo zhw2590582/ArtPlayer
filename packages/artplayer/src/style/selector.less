@@ -8,11 +8,14 @@
         text-align: center;
         position: absolute;
         border-radius: 3px;
-        bottom: var(--art-control-height);
-        background-color: var(--art-widget-background);
+        overflow-y: auto;
+        overflow-x: hidden;
         opacity: 0;
         transform: translateY(10px);
         pointer-events: none;
+        bottom: var(--art-control-height);
+        max-height: var(--art-selector-max-height);
+        background-color: var(--art-widget-background);
         transition: all var(--art-transition-duration) ease;
 
         .art-selector-item {
