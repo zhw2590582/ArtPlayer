@@ -1,16 +1,16 @@
 .art-video-player {
     .art-bottom {
+        .art-full(60);
+        top: auto;
         display: flex;
         flex-direction: column;
         justify-content: end;
-        .art-full(60);
-        top: auto;
+        opacity: 0;
+        pointer-events: none;
         gap: var(--art-bottom-gap);
         bottom: var(--art-bottom-offset);
         height: var(--art-bottom-height);
         padding: 0 var(--art-player-padding);
-        opacity: 0;
-        pointer-events: none;
         transition: all var(--art-transition-duration) ease;
         .art-bottom-gradient();
     }

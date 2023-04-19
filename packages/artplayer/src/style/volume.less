@@ -6,9 +6,6 @@
         position: absolute;
         left: 0;
         right: 0;
-        bottom: var(--art-control-height);
-        width: var(--art-control-height);
-        height: 120px;
         padding: 0 5px;
         font-size: 12px;
         text-align: center;
@@ -16,6 +13,9 @@
         opacity: 0;
         transform: translateY(10px);
         pointer-events: none;
+        bottom: var(--art-control-height);
+        width: var(--art-control-height);
+        height: var(--art-volume-height);
         transition: all var(--art-transition-duration) ease;
 
         .art-volume-inner {
@@ -25,7 +25,6 @@
             gap: 10px;
             height: 100%;
             width: 100%;
-            
             padding: 10px 0 12px;
             border-radius: 3px;
             background-color: var(--art-widget-background);
