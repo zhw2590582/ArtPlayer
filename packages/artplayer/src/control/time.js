@@ -1,12 +1,17 @@
-import { secondToTime } from '../utils';
+import { secondToTime, isMobile } from '../utils';
 
 export default function time(option) {
     return (art) => ({
         ...option,
-        style: {
-            cursor: 'auto',
-            margin: '0 10px',
-        },
+        style: isMobile
+            ? {
+                  fontSize: '12px',
+                  padding: '0 5px',
+              }
+            : {
+                  cursor: 'auto',
+                  padding: '0 10px',
+              },
         mounted: ($control) => {
             function getTime() {
                 const newTime = `${secondToTime(art.currentTime)} / ${secondToTime(art.duration)}`;
