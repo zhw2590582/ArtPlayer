@@ -713,10 +713,10 @@ export type Events = {
     subtitleUpdate: [text: string];
     subtitleLoad: [url: string];
     subtitleSwitch: [url: string];
-    focus: [];
-    blur: [];
-    dblclick: [];
-    click: [];
+    focus: [event: Event];
+    blur: [event: Event];
+    dblclick: [event: Event];
+    click: [event: Event];
     hover: [state: boolean, event: Event];
     mousemove: [event: Event];
     resize: [];
@@ -742,7 +742,50 @@ export type Events = {
 };
 
 export type CssVar = {
-    //
+    '--art-theme': string;
+    '--art-font-color': string;
+    '--art-background-color': string;
+    '--art-text-shadow-color': string;
+    '--art-transition-duration': string;
+    '--art-padding': string;
+    '--art-border-radius': string;
+    '--art-progress-height': string;
+    '--art-progress-color': string;
+    '--art-hover-color': string;
+    '--art-loaded-color': string;
+    '--art-loop-color': string;
+    '--art-state-size': string;
+    '--art-state-opacity': number;
+    '--art-bottom-height': string;
+    '--art-bottom-offset': string;
+    '--art-bottom-gap': string;
+    '--art-highlight-width': string;
+    '--art-highlight-color': string;
+    '--art-loop-width': string;
+    '--art-control-height': string;
+    '--art-control-opacity': number;
+    '--art-control-icon-size': string;
+    '--art-control-icon-scale': number;
+    '--art-volume-height': string;
+    '--art-volume-handle-size': string;
+    '--art-lock-size': string;
+    '--art-indicator-size': string;
+    '--art-fullscreen-web-index': 9999;
+    '--art-settings-scale': number;
+    '--art-settings-icon-size': string;
+    '--art-settings-max-height': string;
+    '--art-selector-max-height': string;
+    '--art-contextmenus-min-width': string;
+    '--art-subtitle-font-size': string;
+    '--art-subtitle-gap': string;
+    '--art-subtitle-bottom': string;
+    '--art-subtitle-border': string;
+    '--art-widget-background': string;
+    '--art-tip-background': string;
+    '--art-scrollbar-size': string;
+    '--art-scrollbar-background': string;
+    '--art-scrollbar-background-hover': string;
+    '--art-mini-progress-height': string;
 };
 
 export type Config = {
@@ -870,12 +913,22 @@ export type Component = {
     /**
      * Toggle the component parent
      */
-    set toggle(state: boolean);
+    toggle(): void;
 
     /**
      * Dynamic add a component
      */
     add(option: ComponentOption): HTMLElement;
+
+    /**
+     * Dynamic remove a component by name
+     */
+    remove(name: string): void;
+
+    /**
+     * Dynamic update a component
+     */
+    update(option: ComponentOption): HTMLElement;
 };
 
 export type ComponentOption = {
@@ -910,9 +963,14 @@ export type ComponentOption = {
     click?(this: Artplayer, component: Component, event: Event): void;
 
     /**
-     * Wnen the component was mounted
+     * When the component was mounted
      */
     mounted?(this: Artplayer, element: HTMLElement): void;
+
+    /**
+     * When the component was before unmount
+     */
+    beforeUnmount?(this: Artplayer, element: HTMLElement): void;
 
     /**
      * Component tooltip, use in controls
@@ -972,12 +1030,6 @@ declare class Artplayer extends Player {
     static SETTING_WIDTH: number;
     static SETTING_ITEM_WIDTH: number;
     static SETTING_ITEM_HEIGHT: number;
-    static INDICATOR_SIZE: number;
-    static INDICATOR_SIZE_ICON: number;
-    static INDICATOR_SIZE_MOBILE: number;
-    static INDICATOR_SIZE_MOBILE_ICON: number;
-    static VOLUME_PANEL_WIDTH: number;
-    static VOLUME_HANDLE_WIDTH: number;
     static RESIZE_TIME: number;
     static SCROLL_TIME: number;
     static SCROLL_GAP: number;
@@ -996,7 +1048,6 @@ declare class Artplayer extends Player {
     static TOUCH_MOVE_RATIO: number;
     static VOLUME_STEP: number;
     static SEEK_STEP: number;
-    static PROGRESS_HEIGHT: number;
     static PLAYBACK_RATE: number[];
     static ASPECT_RATIO: string[];
     static FLIP: string[];
@@ -1042,6 +1093,7 @@ declare class Artplayer extends Player {
         ): () => void;
         hover(element: HTMLElement, mouseenter?: (event: Event) => any, mouseleave?: (event: Event) => any): void;
         loadImg(element: HTMLImageElement | string): Promise<HTMLImageElement>;
+        remove(event: Event): void;
     };
 
     readonly storage: {
@@ -1093,7 +1145,7 @@ declare class Artplayer extends Player {
     readonly setting: {
         option: Setting[];
         add(setting: Setting): SettingOption;
-        update(): SettingOption[];
+        update(settings: Setting[]): SettingOption[];
         updateStyle(width?: number): void;
     } & Component;
 
