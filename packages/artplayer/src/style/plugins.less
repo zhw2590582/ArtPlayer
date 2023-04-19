@@ -3,7 +3,7 @@
         display: flex;
         .art-full();
         top: auto;
-        height: 2px;
+        height: var(--art-mini-progress-height);
         background-color: var(--art-theme);
     }
 
@@ -15,7 +15,7 @@
         transform: translateY(-50%);
         height: var(--art-lock-size);
         width: var(--art-lock-size);
-        left: var(--art-player-padding);
+        left: var(--art-padding);
         background-color: var(--art-tip-background);
     }
 
@@ -27,7 +27,7 @@
         border-radius: 3px;
         padding: 10px;
         line-height: 1;
-        left: var(--art-player-padding);
+        left: var(--art-padding);
         bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);
         background-color: var(--art-widget-background);
 
