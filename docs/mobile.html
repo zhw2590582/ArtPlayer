@@ -40,7 +40,6 @@
     <script>var vConsole = new VConsole();</script>
     <script src="./uncompiled/artplayer/index.js"></script>
     <script src="./uncompiled/artplayer-plugin-danmuku/index.js"></script>
-    <script src="./uncompiled/artplayer-plugin-ads/index.js"></script>
     <script>
         Artplayer.DEBUG = true;
 
@@ -154,11 +153,6 @@
                     maxWidth: 0,
                     theme: 'light',
                     beforeEmit: (danmu) => !!danmu.text.trim(),
-                }),
-                artplayerPluginAds({
-                    html: '<img src="/assets/sample/test.png"></img>',
-                    playDuration: 5,
-                    totalDuration: 10,
                 }),
             ],
         });
