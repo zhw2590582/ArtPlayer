@@ -5,29 +5,24 @@ export as namespace artplayerPluginAds;
 
 type Option = {
     /**
-     * html广告，假如是视频广告则忽略该值
+     * 广告源文本，支持视频链接、图片链接、HTML文本
      */
-    html?: string;
+    source: string;
 
     /**
-     * 视频广告的地址
+     * 知名广告的类型：'video' | 'image' | 'html'
      */
-    video?: string;
+    type: 'video' | 'image' | 'html';
 
     /**
-     * 广告跳转网址，为空则不跳转
-     */
-    url?: string;
-
-    /**
-     * 必须观看的时长，期间不能被跳过，单位为秒
+     * 广告必看的时长，单位为秒
      */
     playDuration?: number;
 
     /**
-     * 广告总时长，单位为秒
+     * 广告总的时长，单位为秒
      */
-    totalDuration?: string;
+    totalDuration?: number;
 
     /**
      * 视频广告是否默认静音
