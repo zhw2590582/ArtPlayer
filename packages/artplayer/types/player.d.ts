@@ -5,7 +5,8 @@ export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never
 export declare class Player {
     get aspectRatio(): AspectRatio;
     set aspectRatio(ratio: AspectRatio);
-    set aspectRatioReset(state: boolean);
+    get normalSize(): string;
+    set normalSize(name: string);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
     get autoSize(): boolean;
@@ -70,4 +71,5 @@ export declare class Player {
     getBlobUrl(): Promise<string>;
     screenshot(): Promise<string>;
     airplay(): void;
+    aspectRatioReset(state: boolean): void;
 }

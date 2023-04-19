@@ -1832,11 +1832,9 @@ function aspectRatioMix(art) {
         }
     });
     (0, _utils.def)(art, "aspectRatioReset", {
-        set (value) {
-            if (value) {
-                const { aspectRatio  } = art;
-                art.aspectRatio = aspectRatio;
-            }
+        value () {
+            const { aspectRatio  } = art;
+            art.aspectRatio = aspectRatio;
         }
     });
 }
@@ -1907,14 +1905,14 @@ function fullscreenMix(art) {
             async set (value) {
                 if (value) {
                     art.normalSize = "fullscreen";
-                    art.aspectRatioReset = true;
+                    art.aspectRatioReset();
                     art.autoSize = false;
                     await (0, _screenfullDefault.default).request($player);
                     (0, _utils.addClass)($player, "art-fullscreen");
                     art.emit("resize");
                     notice.show = "";
                 } else {
-                    art.aspectRatioReset = true;
+                    art.aspectRatioReset();
                     art.autoSize = art.option.autoSize;
                     await (0, _screenfullDefault.default).exit();
                     (0, _utils.removeClass)($player, "art-fullscreen");
@@ -2093,26 +2091,32 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function fullscreenWebMix(art) {
-    const { notice , constructor , template: { $container , $player  }  } = art;
+    const { option , notice , constructor , template: { $container , $player  }  } = art;
+    let cssText = "";
     (0, _utils.def)(art, "fullscreenWeb", {
         get () {
             return (0, _utils.hasClass)($player, "art-fullscreen-web");
         },
         set (value) {
             if (value) {
+                cssText = $player.style.cssText;
                 if (constructor.FULLSCREEN_WEB_IN_BODY) (0, _utils.append)(document.body, $player);
                 art.normalSize = "fullscreenWeb";
                 (0, _utils.addClass)($player, "art-fullscreen-web");
-                art.aspectRatioReset = true;
+                art.aspectRatioReset();
                 art.autoSize = false;
                 art.emit("resize");
                 art.emit("fullscreenWeb", true);
                 notice.show = "";
             } else {
                 if (constructor.FULLSCREEN_WEB_IN_BODY) (0, _utils.append)($container, $player);
+                if (cssText) {
+                    $player.style.cssText = cssText;
+                    cssText = "";
+                }
                 (0, _utils.removeClass)($player, "art-fullscreen-web");
-                art.aspectRatioReset = true;
-                art.autoSize = art.option.autoSize;
+                art.aspectRatioReset();
+                art.autoSize = option.autoSize;
                 art.emit("resize");
                 art.emit("fullscreenWeb", false);
                 notice.show = "";
@@ -2590,7 +2594,7 @@ function normalSizeMix(art) {
     ];
     (0, _utils.def)(art, "normalSize", {
         get () {
-            return sizeProps.every((name)=>!art[name]);
+            return sizeProps.find((name)=>art[name]) || "";
         },
         set (name) {
             sizeProps.filter((item)=>item !== name).forEach((item)=>{
@@ -4116,7 +4120,7 @@ function resizeInit(art, events) {
     const { option  } = art;
     const resizeFn = (0, _utils.throttle)(()=>{
         if (art.normalSize) art.autoSize = option.autoSize;
-        art.aspectRatioReset = true;
+        art.aspectRatioReset();
         art.notice.show = "";
         art.emit("resize");
     }, art.constructor.RESIZE_TIME);
@@ -5113,7 +5117,7 @@ class Plugins {
 }
 exports.default = Plugins;
 
-},{"../utils":"jmgNb","./miniProgressBar":"dMA6v","./autoOrientation":"aROGj","./autoPlayback":"kQ2fc","./fastForward":"fgbhT","./lock":"j2mDF","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dMA6v":[function(require,module,exports) {
+},{"../utils":"jmgNb","./miniProgressBar":"dMA6v","./autoPlayback":"kQ2fc","./fastForward":"fgbhT","./lock":"j2mDF","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./autoOrientation":"aROGj"}],"dMA6v":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function miniProgressBar(art) {
@@ -5139,64 +5143,7 @@ function miniProgressBar(art) {
 }
 exports.default = miniProgressBar;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aROGj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _utils = require("../utils");
-function autoOrientation(art) {
-    const { option , constructor , template: { $player , $video  }  } = art;
-    art.on("fullscreenWeb", (state)=>{
-        if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
-            setTimeout(()=>{
-                (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
-                (0, _utils.setStyle)($player, "height", `${viewWidth}px`);
-                (0, _utils.setStyle)($player, "transform-origin", "0 0");
-                (0, _utils.setStyle)($player, "transform", `rotate(90deg) translate(0, -${viewWidth}px)`);
-                (0, _utils.addClass)($player, "art-auto-orientation");
-                art.isRotate = true;
-                art.emit("resize");
-            }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
-        } else if ((0, _utils.hasClass)($player, "art-auto-orientation")) {
-            (0, _utils.setStyle)($player, "width", null);
-            (0, _utils.setStyle)($player, "height", null);
-            (0, _utils.setStyle)($player, "transform", null);
-            (0, _utils.setStyle)($player, "transform-origin", null);
-            (0, _utils.removeClass)($player, "art-auto-orientation");
-            art.isRotate = false;
-            art.aspectRatioReset = true;
-            art.autoSize = option.autoSize;
-            art.notice.show = "";
-            art.emit("resize");
-        }
-    });
-    art.on("fullscreen", async (state)=>{
-        const lastOrientation = screen.orientation.type;
-        if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
-                const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
-                await screen.orientation.lock(oppositeOrientation);
-                (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
-            }
-        } else if ((0, _utils.hasClass)($player, "art-auto-orientation-fullscreen")) {
-            await screen.orientation.lock(lastOrientation);
-            (0, _utils.removeClass)($player, "art-auto-orientation-fullscreen");
-        }
-    });
-    return {
-        name: "autoOrientation",
-        get state () {
-            return (0, _utils.hasClass)($player, "art-auto-orientation");
-        }
-    };
-}
-exports.default = autoOrientation;
-
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQ2fc":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQ2fc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -5341,6 +5288,57 @@ function lock(art) {
     };
 }
 exports.default = lock;
+
+},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aROGj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function autoOrientation(art) {
+    const { constructor , template: { $player , $video  }  } = art;
+    art.on("fullscreenWeb", (state)=>{
+        if (state) {
+            const { videoWidth , videoHeight  } = $video;
+            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
+            setTimeout(()=>{
+                (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
+                (0, _utils.setStyle)($player, "height", `${viewWidth}px`);
+                (0, _utils.setStyle)($player, "transform-origin", "0 0");
+                (0, _utils.setStyle)($player, "transform", `rotate(90deg) translate(0, -${viewWidth}px)`);
+                (0, _utils.addClass)($player, "art-auto-orientation");
+                art.isRotate = true;
+                art.emit("resize");
+            }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
+        } else if ((0, _utils.hasClass)($player, "art-auto-orientation")) {
+            (0, _utils.removeClass)($player, "art-auto-orientation");
+            art.isRotate = false;
+            art.notice.show = "";
+            art.emit("resize");
+        }
+    });
+    art.on("fullscreen", async (state)=>{
+        const lastOrientation = screen.orientation.type;
+        if (state) {
+            const { videoWidth , videoHeight  } = $video;
+            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
+                const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
+                await screen.orientation.lock(oppositeOrientation);
+                (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
+            }
+        } else if ((0, _utils.hasClass)($player, "art-auto-orientation-fullscreen")) {
+            await screen.orientation.lock(lastOrientation);
+            (0, _utils.removeClass)($player, "art-auto-orientation-fullscreen");
+        }
+    });
+    return {
+        name: "autoOrientation",
+        get state () {
+            return (0, _utils.hasClass)($player, "art-auto-orientation");
+        }
+    };
+}
+exports.default = autoOrientation;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"c9n1Y":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

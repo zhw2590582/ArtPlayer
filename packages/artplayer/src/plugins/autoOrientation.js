@@ -2,7 +2,6 @@ import { setStyle, addClass, removeClass, hasClass } from '../utils';
 
 export default function autoOrientation(art) {
     const {
-        option,
         constructor,
         template: { $player, $video },
     } = art;
@@ -28,14 +27,8 @@ export default function autoOrientation(art) {
             }
         } else {
             if (hasClass($player, 'art-auto-orientation')) {
-                setStyle($player, 'width', null);
-                setStyle($player, 'height', null);
-                setStyle($player, 'transform', null);
-                setStyle($player, 'transform-origin', null);
                 removeClass($player, 'art-auto-orientation');
                 art.isRotate = false;
-                art.aspectRatioReset = true;
-                art.autoSize = option.autoSize;
                 art.notice.show = '';
                 art.emit('resize');
             }

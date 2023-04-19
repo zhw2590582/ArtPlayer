@@ -7,7 +7,7 @@ export default function resizeInit(art, events) {
         if (art.normalSize) {
             art.autoSize = option.autoSize;
         }
-        art.aspectRatioReset = true;
+        art.aspectRatioReset();
         art.notice.show = '';
         art.emit('resize');
     }, art.constructor.RESIZE_TIME);

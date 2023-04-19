@@ -5,7 +5,7 @@ export default function normalSizeMix(art) {
 
     def(art, 'normalSize', {
         get() {
-            return sizeProps.every((name) => !art[name]);
+            return sizeProps.find((name) => art[name]) || '';
         },
         set(name) {
             sizeProps

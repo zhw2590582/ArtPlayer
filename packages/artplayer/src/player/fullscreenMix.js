@@ -20,14 +20,14 @@ export default function fullscreenMix(art) {
             async set(value) {
                 if (value) {
                     art.normalSize = 'fullscreen';
-                    art.aspectRatioReset = true;
+                    art.aspectRatioReset();
                     art.autoSize = false;
                     await screenfull.request($player);
                     addClass($player, 'art-fullscreen');
                     art.emit('resize');
                     notice.show = '';
                 } else {
-                    art.aspectRatioReset = true;
+                    art.aspectRatioReset();
                     art.autoSize = art.option.autoSize;
                     await screenfull.exit();
                     removeClass($player, 'art-fullscreen');
