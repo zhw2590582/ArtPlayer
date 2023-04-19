@@ -7,9 +7,11 @@
         left: auto;
         overflow: hidden;
         border-radius: 3px;
-        right: var(--art-padding);
+        transform-origin: bottom right;
+        right: var(--art-player-padding);
         bottom: var(--art-control-height);
-        transition: all var(--art-duration) ease;
+        transform: scale(var(--art-settings-scale));
+        transition: all var(--art-transition-duration) ease;
         background-color: var(--art-widget-background);
 
         .art-setting-panel {

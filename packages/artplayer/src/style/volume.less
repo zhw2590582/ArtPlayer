@@ -16,7 +16,7 @@
         opacity: 0;
         transform: translateY(10px);
         pointer-events: none;
-        transition: all var(--art-duration) ease;
+        transition: all var(--art-transition-duration) ease;
 
         .art-volume-inner {
             display: flex;
@@ -62,7 +62,7 @@
                     transform: scale(1);
                     border-radius: 100%;
                     background-color: var(--art-theme);
-                    transition: transform var(--art-duration) ease;
+                    transition: transform var(--art-transition-duration) ease;
                 }
 
                 &:active {

@@ -10,11 +10,12 @@
     .art-layer-lock {
         .art-center(none);
         position: absolute;
-        left: 15px;
-        top: calc(50% - 17px);
-        height: 34px;
-        width: 34px;
+        top: 50%;
         border-radius: 50%;
+        transform: translateY(-50%);
+        height: var(--art-lock-size);
+        width: var(--art-lock-size);
+        left: var(--art-player-padding);
         background-color: var(--art-tip-background);
     }
 
@@ -26,7 +27,7 @@
         border-radius: 3px;
         padding: 10px;
         line-height: 1;
-        left: var(--art-padding);
+        left: var(--art-player-padding);
         bottom: calc(var(--art-control-height) + var(--art-bottom-gap) + 10px);
         background-color: var(--art-widget-background);
 

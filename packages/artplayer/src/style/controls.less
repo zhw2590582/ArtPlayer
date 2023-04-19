@@ -32,13 +32,13 @@
         opacity: var(--art-control-opacity);
         min-height: var(--art-control-height);
         min-width: var(--art-control-height);
-        transition: opacity var(--art-duration) ease;
+        transition: opacity var(--art-transition-duration) ease;
 
         .art-icon {
             height: var(--art-control-icon-size);
             width: var(--art-control-icon-size);
             transform: scale(var(--art-control-icon-scale));
-            transition: transform var(--art-duration) ease;
+            transition: transform var(--art-transition-duration) ease;
 
             &:active {
                 transform: scale(calc(var(--art-control-icon-scale) * 0.8));

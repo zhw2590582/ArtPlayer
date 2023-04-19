@@ -89,7 +89,7 @@ export default function progress(options) {
 
                     if (type === 'played') {
                         setStyle($played, 'width', `${percentage * 100}%`);
-                        setStyle($indicator, 'left', `calc(${percentage * 100}% - var(--art-indicator-size) / 2)`);
+                        setStyle($indicator, 'left', `${percentage * 100}%`);
                     }
                 }
 
