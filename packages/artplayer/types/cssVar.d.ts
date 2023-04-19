@@ -5,6 +5,7 @@ export type CssVar = {
     '--art-text-shadow-color': string;
     '--art-transition-duration': string;
     '--art-padding': string;
+    '--art-border-radius': string;
     '--art-progress-height': string;
     '--art-progress-color': string;
     '--art-hover-color': string;
