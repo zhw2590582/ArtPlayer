@@ -19,7 +19,7 @@ export default function fullscreenMix(art) {
             },
             async set(value) {
                 if (value) {
-                    art.normalSize = 'fullscreen';
+                    art.state = 'fullscreen';
                     art.aspectRatioReset();
                     art.autoSize = false;
                     await screenfull.request($player);
@@ -45,7 +45,7 @@ export default function fullscreenMix(art) {
             },
             set(value) {
                 if (value) {
-                    art.normalSize = 'fullscreen';
+                    art.state = 'fullscreen';
                     $video.webkitEnterFullscreen();
                     art.emit('fullscreen', true);
                     notice.show = '';

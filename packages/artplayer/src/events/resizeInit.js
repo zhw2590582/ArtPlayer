@@ -4,7 +4,7 @@ export default function resizeInit(art, events) {
     const { option } = art;
 
     const resizeFn = throttle(() => {
-        if (art.normalSize) {
+        if (!art.state) {
             art.autoSize = option.autoSize;
         }
         art.aspectRatioReset();

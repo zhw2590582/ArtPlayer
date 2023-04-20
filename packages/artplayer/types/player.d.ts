@@ -5,8 +5,8 @@ export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never
 export declare class Player {
     get aspectRatio(): AspectRatio;
     set aspectRatio(ratio: AspectRatio);
-    get normalSize(): string;
-    set normalSize(name: string);
+    get enable(): string;
+    set enable(state: string);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
     get autoSize(): boolean;

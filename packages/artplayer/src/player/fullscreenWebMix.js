@@ -19,7 +19,7 @@ export default function fullscreenWebMix(art) {
                 if (constructor.FULLSCREEN_WEB_IN_BODY) {
                     append(document.body, $player);
                 }
-                art.normalSize = 'fullscreenWeb';
+                art.state = 'fullscreenWeb';
                 addClass($player, 'art-fullscreen-web');
                 art.aspectRatioReset();
                 art.autoSize = false;
