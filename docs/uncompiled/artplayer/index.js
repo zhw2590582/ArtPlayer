@@ -2799,7 +2799,7 @@ function stateMix(art) {
         set (name) {
             for(let index = 0; index < states.length; index++){
                 const prop = states[index];
-                if (prop !== name) art[prop] = false;
+                if (prop !== name && art[prop]) art[prop] = false;
             }
         }
     });
