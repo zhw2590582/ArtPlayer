@@ -1,12 +1,13 @@
 export type AspectRatio = 'default' | '4:3' | '16:9' | (string & Record<never, never>);
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>);
 export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>);
+export type State = 'standard' | 'mini' | 'pip' | 'fullscreen' | 'fullscreenWeb';
 
 export declare class Player {
     get aspectRatio(): AspectRatio;
     set aspectRatio(ratio: AspectRatio);
-    get enable(): string;
-    set enable(state: string);
+    get state(): State;
+    set state(state: State);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
     get autoSize(): boolean;

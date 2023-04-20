@@ -2795,7 +2795,7 @@ function stateMix(art) {
         "fullscreenWeb"
     ];
     (0, _utils.def)(art, "state", {
-        get: ()=>states.find((name)=>art[name]) || "",
+        get: ()=>states.find((name)=>art[name]) || "standard",
         set (name) {
             for(let index = 0; index < states.length; index++){
                 const prop = states[index];
@@ -4118,7 +4118,7 @@ var _utils = require("../utils");
 function resizeInit(art, events) {
     const { option  } = art;
     const resizeFn = (0, _utils.throttle)(()=>{
-        if (!art.state) art.autoSize = option.autoSize;
+        if (art.state === "standard") art.autoSize = option.autoSize;
         art.aspectRatioReset();
         art.notice.show = "";
         art.emit("resize");
