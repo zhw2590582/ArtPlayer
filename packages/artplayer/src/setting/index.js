@@ -94,7 +94,7 @@ export default class Setting extends Component {
         this.$parent.innerHTML = '';
     }
 
-    update(settings = []) {
+    update(settings) {
         this.remove();
         this.events = [];
         this.cache = new Map();
@@ -106,8 +106,7 @@ export default class Setting extends Component {
 
     add(setting) {
         this.option.push(setting);
-        this.update();
-        return setting;
+        return this.update(this.option);
     }
 
     creatHeader(item) {

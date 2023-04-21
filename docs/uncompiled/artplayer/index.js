@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-21 21:10:30";
+        return "2023-04-21 22:49:38";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1556,23 +1556,24 @@ function urlMix(art) {
     const { option , template: { $video  }  } = art;
     (0, _utils.def)(art, "url", {
         get () {
-            return $video.currentSrc;
+            return $video.src;
         },
         async set (url) {
             if (url) {
+                const oldUrl = art.url;
                 const typeName = option.type || (0, _utils.getExt)(url);
                 const typeCallback = option.customType[typeName];
                 if (typeName && typeCallback) {
                     await (0, _utils.sleep)();
                     art.loading.show = true;
                     typeCallback.call(art, $video, url, art);
-                } else {
-                    if (art.url && art.url !== url) art.once("video:canplay", ()=>{
-                        if (art.isReady) art.emit("restart");
-                    });
-                    $video.src = url;
+                } else $video.src = url;
+                if (oldUrl !== art.url) {
                     art.option.url = url;
                     art.emit("url", url);
+                    if (art.isReady && oldUrl) art.once("video:canplay", ()=>{
+                        art.emit("restart", url);
+                    });
                 }
             } else {
                 await (0, _utils.sleep)();
@@ -4634,7 +4635,7 @@ class Setting extends (0, _componentDefault.default) {
         for(let index = 0; index < this.events.length; index++)this.art.events.remove(this.events[index]);
         this.$parent.innerHTML = "";
     }
-    update(settings = []) {
+    update(settings) {
         this.remove();
         this.events = [];
         this.cache = new Map();
@@ -4648,8 +4649,7 @@ class Setting extends (0, _componentDefault.default) {
     }
     add(setting) {
         this.option.push(setting);
-        this.update();
-        return setting;
+        return this.update(this.option);
     }
     creatHeader(item) {
         const { icons , proxy  } = this.art;

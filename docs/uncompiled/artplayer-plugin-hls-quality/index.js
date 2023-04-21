@@ -159,7 +159,7 @@ function artplayerPluginHlsQuality(option) {
             const getResolution = option.getResolution || ((level)=>(level.height || "Unknown ") + "P");
             const defaultLevel = hls.levels[hls.currentLevel];
             const defaultHtml = defaultLevel ? getResolution(defaultLevel) : auto;
-            if (option.control) art.controls.add({
+            if (option.control) art.controls.update({
                 name: "hls-quality",
                 position: "right",
                 html: defaultHtml,
@@ -179,7 +179,7 @@ function artplayerPluginHlsQuality(option) {
                     return item.html;
                 }
             });
-            if (option.setting) art.setting.add({
+            if (option.setting) art.setting.update({
                 name: "hls-quality",
                 tooltip: defaultHtml,
                 html: title,
@@ -200,6 +200,7 @@ function artplayerPluginHlsQuality(option) {
             });
         }
         art.on("ready", update);
+        art.on("restart", update);
         return {
             name: "artplayerPluginHlsQuality"
         };
@@ -208,7 +209,7 @@ function artplayerPluginHlsQuality(option) {
 exports.default = artplayerPluginHlsQuality;
 artplayerPluginHlsQuality.env = "development";
 artplayerPluginHlsQuality.version = "1.0.2";
-artplayerPluginHlsQuality.build = "2023-04-16 22:04:16";
+artplayerPluginHlsQuality.build = "2023-04-21 22:45:44";
 if (typeof window !== "undefined") window["artplayerPluginHlsQuality"] = artplayerPluginHlsQuality;
 
 },{"bundle-text:./image.svg":"1HFaU","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1HFaU":[function(require,module,exports) {

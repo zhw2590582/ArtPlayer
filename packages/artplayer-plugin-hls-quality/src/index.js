@@ -15,7 +15,7 @@ export default function artplayerPluginHlsQuality(option) {
             const defaultHtml = defaultLevel ? getResolution(defaultLevel) : auto;
 
             if (option.control) {
-                art.controls.add({
+                art.controls.update({
                     name: 'hls-quality',
                     position: 'right',
                     html: defaultHtml,
@@ -36,7 +36,7 @@ export default function artplayerPluginHlsQuality(option) {
             }
 
             if (option.setting) {
-                art.setting.add({
+                art.setting.update({
                     name: 'hls-quality',
                     tooltip: defaultHtml,
                     html: title,
@@ -59,6 +59,7 @@ export default function artplayerPluginHlsQuality(option) {
         }
 
         art.on('ready', update);
+        art.on('restart', update);
 
         return {
             name: 'artplayerPluginHlsQuality',

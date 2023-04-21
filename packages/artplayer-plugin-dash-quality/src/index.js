@@ -29,7 +29,7 @@ export default function artplayerPluginDashQuality(option) {
             };
 
             if (option.control) {
-                art.controls.add({
+                art.controls.update({
                     name: 'dash-quality',
                     position: 'right',
                     html: defaultHtml,
@@ -51,7 +51,7 @@ export default function artplayerPluginDashQuality(option) {
             }
 
             if (option.setting) {
-                art.setting.add({
+                art.setting.update({
                     name: 'dash-quality',
                     tooltip: defaultHtml,
                     html: title,
@@ -75,6 +75,7 @@ export default function artplayerPluginDashQuality(option) {
         }
 
         art.on('ready', update);
+        art.on('restart', update);
 
         return {
             name: 'artplayerPluginDashQuality',
