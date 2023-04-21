@@ -22,8 +22,6 @@ export type Template = {
     readonly $info: HTMLDivElement;
     readonly $infoPanel: HTMLDivElement;
     readonly $infoClose: HTMLDivElement;
-    readonly $miniHeader: HTMLDivElement;
-    readonly $miniTitle: HTMLDivElement;
-    readonly $miniClose: HTMLDivElement;
     readonly $contextmenu: HTMLDivElement;
+    readonly $mini: HTMLDivElement;
 };

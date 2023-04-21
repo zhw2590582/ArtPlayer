@@ -1,3 +1,5 @@
+import { CssVar } from './cssVar';
+
 export type AspectRatio = 'default' | '4:3' | '16:9' | (string & Record<never, never>);
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>);
 export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>);
@@ -65,7 +67,7 @@ export declare class Player {
     play(): Promise<void>;
     toggle(): void;
     attr(key: string, value?: any): unknown;
-    cssVar(key: `--art-${string}`, value?: string): unknown;
+    cssVar<T extends keyof CssVar>(key: T, value?: CssVar[T]): CssVar[T];
     switchUrl(url: string): Promise<string>;
     switchQuality(url: string): Promise<string>;
     getDataURL(): Promise<string>;

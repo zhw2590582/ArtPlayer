@@ -40,6 +40,7 @@ declare class Artplayer extends Player {
     static SCROLL_GAP: number;
     static AUTO_PLAYBACK_MAX: number;
     static AUTO_PLAYBACK_MIN: number;
+    static AUTO_PLAYBACK_TIMEOUT: number;
     static RECONNECT_TIME_MAX: number;
     static RECONNECT_SLEEP_TIME: number;
     static CONTROL_HIDE_TIME: number;
@@ -122,7 +123,7 @@ declare class Artplayer extends Player {
     };
 
     readonly notice: {
-        time: number;
+        timer: number;
         set show(msg: string);
     };
 
@@ -146,6 +147,7 @@ declare class Artplayer extends Player {
     readonly hotkey: {
         keys: Record<string, ((event: Event) => any)[]>;
         add(key: number, callback: (this: Artplayer, event: Event) => any): Artplayer['hotkey'];
+        remove(key: number, callback: Function): Artplayer['hotkey'];
     };
 
     readonly mask: Component;
@@ -155,6 +157,7 @@ declare class Artplayer extends Player {
         add(setting: Setting): SettingOption;
         update(settings: Setting[]): SettingOption[];
         updateStyle(width?: number): void;
+        remove(): void;
     } & Component;
 
     readonly plugins: {

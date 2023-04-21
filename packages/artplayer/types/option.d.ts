@@ -306,7 +306,7 @@ export type Option = {
     /**
      * Custom css variables
      */
-    cssVar?: CssVar;
+    cssVar?: Partial<CssVar>;
 
     /**
      * Custom video type function
