@@ -248,7 +248,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-19 14:01:42";
+        return "2023-04-21 21:10:30";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1548,7 +1548,7 @@ class Player {
 }
 exports.default = Player;
 
-},{"./urlMix":"aIS34","./attrMix":"jDj6f","./playMix":"agXpy","./pauseMix":"zMuGC","./toggleMix":"fvNrm","./seekMix":"3CiN1","./volumeMix":"1LKRL","./currentTimeMix":"bjUCm","./durationMix":"l8grT","./switchMix":"bIvi5","./playbackRateMix":"3EFen","./aspectRatioMix":"8ucW5","./screenshotMix":"12WvT","./fullscreenMix":"gNUzM","./fullscreenWebMix":"f2xmf","./pipMix":"i5i0P","./loadedMix":"8X9EY","./playedMix":"1ziBX","./playingMix":"9898W","./autoSizeMix":"b1yGg","./rectMix":"eKKgI","./flipMix":"ad3ay","./miniMix":"hUF3v","./loopMix":"gXFcr","./posterMix":"6j7ij","./autoHeightMix":"8Mzuu","./cssVarMix":"fypct","./themeMix":"dv3lF","./titleMix":"5I0kK","./typeMix":"2FCQH","./subtitleOffsetMix":"lTNEf","./airplayMix":"bIjnH","./optionInit":"9Us4p","./eventInit":"4hZCW","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./stateMix":"iG6Jk"}],"aIS34":[function(require,module,exports) {
+},{"./urlMix":"aIS34","./attrMix":"jDj6f","./playMix":"agXpy","./pauseMix":"zMuGC","./toggleMix":"fvNrm","./seekMix":"3CiN1","./volumeMix":"1LKRL","./currentTimeMix":"bjUCm","./durationMix":"l8grT","./switchMix":"bIvi5","./playbackRateMix":"3EFen","./aspectRatioMix":"8ucW5","./screenshotMix":"12WvT","./fullscreenMix":"gNUzM","./fullscreenWebMix":"f2xmf","./pipMix":"i5i0P","./loadedMix":"8X9EY","./playedMix":"1ziBX","./playingMix":"9898W","./autoSizeMix":"b1yGg","./rectMix":"eKKgI","./flipMix":"ad3ay","./miniMix":"hUF3v","./loopMix":"gXFcr","./posterMix":"6j7ij","./autoHeightMix":"8Mzuu","./cssVarMix":"fypct","./themeMix":"dv3lF","./titleMix":"5I0kK","./typeMix":"2FCQH","./stateMix":"iG6Jk","./subtitleOffsetMix":"lTNEf","./airplayMix":"bIjnH","./optionInit":"9Us4p","./eventInit":"4hZCW","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aIS34":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2581,6 +2581,29 @@ function typeMix(art) {
 }
 exports.default = typeMix;
 
+},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iG6Jk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function stateMix(art) {
+    const states = [
+        "mini",
+        "pip",
+        "fullscreen",
+        "fullscreenWeb"
+    ];
+    (0, _utils.def)(art, "state", {
+        get: ()=>states.find((name)=>art[name]) || "standard",
+        set (name) {
+            for(let index = 0; index < states.length; index++){
+                const prop = states[index];
+                if (prop !== name && art[prop]) art[prop] = false;
+            }
+        }
+    });
+}
+exports.default = stateMix;
+
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"lTNEf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -2783,30 +2806,7 @@ function eventInit(art) {
 }
 exports.default = eventInit;
 
-},{"../config":"2ZnKD","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iG6Jk":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _utils = require("../utils");
-function stateMix(art) {
-    const states = [
-        "mini",
-        "pip",
-        "fullscreen",
-        "fullscreenWeb"
-    ];
-    (0, _utils.def)(art, "state", {
-        get: ()=>states.find((name)=>art[name]) || "standard",
-        set (name) {
-            for(let index = 0; index < states.length; index++){
-                const prop = states[index];
-                if (prop !== name && art[prop]) art[prop] = false;
-            }
-        }
-    });
-}
-exports.default = stateMix;
-
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"faO0X":[function(require,module,exports) {
+},{"../config":"2ZnKD","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"faO0X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -5116,7 +5116,7 @@ class Plugins {
 }
 exports.default = Plugins;
 
-},{"../utils":"jmgNb","./miniProgressBar":"dMA6v","./autoPlayback":"kQ2fc","./fastForward":"fgbhT","./lock":"j2mDF","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./autoOrientation":"aROGj"}],"dMA6v":[function(require,module,exports) {
+},{"../utils":"jmgNb","./miniProgressBar":"dMA6v","./autoOrientation":"aROGj","./autoPlayback":"kQ2fc","./fastForward":"fgbhT","./lock":"j2mDF","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dMA6v":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 function miniProgressBar(art) {
@@ -5142,7 +5142,58 @@ function miniProgressBar(art) {
 }
 exports.default = miniProgressBar;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQ2fc":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aROGj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _utils = require("../utils");
+function autoOrientation(art) {
+    const { constructor , template: { $player , $video  }  } = art;
+    art.on("fullscreenWeb", (state)=>{
+        if (state) {
+            const { videoWidth , videoHeight  } = $video;
+            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
+            setTimeout(()=>{
+                (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
+                (0, _utils.setStyle)($player, "height", `${viewWidth}px`);
+                (0, _utils.setStyle)($player, "transform-origin", "0 0");
+                (0, _utils.setStyle)($player, "transform", `rotate(90deg) translate(0, -${viewWidth}px)`);
+                (0, _utils.addClass)($player, "art-auto-orientation");
+                art.isRotate = true;
+                art.emit("resize");
+            }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
+        } else if ((0, _utils.hasClass)($player, "art-auto-orientation")) {
+            (0, _utils.removeClass)($player, "art-auto-orientation");
+            art.isRotate = false;
+            art.notice.show = "";
+            art.emit("resize");
+        }
+    });
+    art.on("fullscreen", async (state)=>{
+        const lastOrientation = screen.orientation.type;
+        if (state) {
+            const { videoWidth , videoHeight  } = $video;
+            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
+                const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
+                await screen.orientation.lock(oppositeOrientation);
+                (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
+            }
+        } else if ((0, _utils.hasClass)($player, "art-auto-orientation-fullscreen")) {
+            await screen.orientation.lock(lastOrientation);
+            (0, _utils.removeClass)($player, "art-auto-orientation-fullscreen");
+        }
+    });
+    return {
+        name: "autoOrientation",
+        get state () {
+            return (0, _utils.hasClass)($player, "art-auto-orientation");
+        }
+    };
+}
+exports.default = autoOrientation;
+
+},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQ2fc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -5160,11 +5211,13 @@ function autoPlayback(art) {
     const $jump = (0, _utils.query)(".art-auto-playback-jump", $autoPlayback);
     const $close = (0, _utils.query)(".art-auto-playback-close", $autoPlayback);
     art.on("video:timeupdate", ()=>{
-        const times = storage.get("times") || {};
-        const keys = Object.keys(times);
-        if (keys.length > constructor.AUTO_PLAYBACK_MAX) delete times[keys[0]];
-        times[art.option.id || art.option.url] = art.currentTime;
-        storage.set("times", times);
+        if (art.playing) {
+            const times = storage.get("times") || {};
+            const keys = Object.keys(times);
+            if (keys.length > constructor.AUTO_PLAYBACK_MAX) delete times[keys[0]];
+            times[art.option.id || art.option.url] = art.currentTime;
+            storage.set("times", times);
+        }
     });
     art.on("ready", ()=>{
         const times = storage.get("times") || {};
@@ -5287,57 +5340,6 @@ function lock(art) {
     };
 }
 exports.default = lock;
-
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aROGj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _utils = require("../utils");
-function autoOrientation(art) {
-    const { constructor , template: { $player , $video  }  } = art;
-    art.on("fullscreenWeb", (state)=>{
-        if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
-            setTimeout(()=>{
-                (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
-                (0, _utils.setStyle)($player, "height", `${viewWidth}px`);
-                (0, _utils.setStyle)($player, "transform-origin", "0 0");
-                (0, _utils.setStyle)($player, "transform", `rotate(90deg) translate(0, -${viewWidth}px)`);
-                (0, _utils.addClass)($player, "art-auto-orientation");
-                art.isRotate = true;
-                art.emit("resize");
-            }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
-        } else if ((0, _utils.hasClass)($player, "art-auto-orientation")) {
-            (0, _utils.removeClass)($player, "art-auto-orientation");
-            art.isRotate = false;
-            art.notice.show = "";
-            art.emit("resize");
-        }
-    });
-    art.on("fullscreen", async (state)=>{
-        const lastOrientation = screen.orientation.type;
-        if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
-                const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
-                await screen.orientation.lock(oppositeOrientation);
-                (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
-            }
-        } else if ((0, _utils.hasClass)($player, "art-auto-orientation-fullscreen")) {
-            await screen.orientation.lock(lastOrientation);
-            (0, _utils.removeClass)($player, "art-auto-orientation-fullscreen");
-        }
-    });
-    return {
-        name: "autoOrientation",
-        get state () {
-            return (0, _utils.hasClass)($player, "art-auto-orientation");
-        }
-    };
-}
-exports.default = autoOrientation;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"c9n1Y":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

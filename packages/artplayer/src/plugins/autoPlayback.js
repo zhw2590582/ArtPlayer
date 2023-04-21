@@ -24,13 +24,15 @@ export default function autoPlayback(art) {
     const $close = query('.art-auto-playback-close', $autoPlayback);
 
     art.on('video:timeupdate', () => {
-        const times = storage.get('times') || {};
-        const keys = Object.keys(times);
-        if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
-            delete times[keys[0]];
+        if (art.playing) {
+            const times = storage.get('times') || {};
+            const keys = Object.keys(times);
+            if (keys.length > constructor.AUTO_PLAYBACK_MAX) {
+                delete times[keys[0]];
+            }
+            times[art.option.id || art.option.url] = art.currentTime;
+            storage.set('times', times);
         }
-        times[art.option.id || art.option.url] = art.currentTime;
-        storage.set('times', times);
     });
 
     art.on('ready', () => {
