@@ -34,7 +34,6 @@ export type Events = {
     setting: [state: boolean];
     hotkey: [event: Event];
     destroy: [];
-    url: [url: string];
     subtitleUpdate: [text: string];
     subtitleLoad: [url: string];
     subtitleSwitch: [url: string];
