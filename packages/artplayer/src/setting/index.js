@@ -10,6 +10,7 @@ import {
     addClass,
     setStyle,
     isMobile,
+    mergeDeep,
     inverseClass,
     createElement,
     includeFromEvent,
@@ -98,7 +99,8 @@ export default class Setting extends Component {
         this.remove();
         this.events = [];
         this.cache = new Map();
-        const mergeSettings = [...this.defaultSettings, ...settings];
+        const settingsCopy = settings.map((item) => mergeDeep({}, item));
+        const mergeSettings = [...this.defaultSettings, ...settingsCopy];
         this.option = Setting.makeRecursion(mergeSettings);
         this.render(this.option);
         return this.option;

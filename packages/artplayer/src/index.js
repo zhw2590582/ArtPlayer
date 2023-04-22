@@ -33,6 +33,11 @@ export default class Artplayer extends Emitter {
         this.id = ++id;
 
         const mergeOption = utils.mergeDeep(Artplayer.option, option);
+
+        if (option.container instanceof Element) {
+            mergeOption.container = option.container;
+        }
+
         this.option = validator(mergeOption, scheme);
 
         this.isLock = false;

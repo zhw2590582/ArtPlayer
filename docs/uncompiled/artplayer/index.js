@@ -201,6 +201,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         super();
         this.id = ++id;
         const mergeOption = _utils.mergeDeep(Artplayer.option, option);
+        if (option.container instanceof Element) mergeOption.container = option.container;
         this.option = (0, _optionValidatorDefault.default)(mergeOption, (0, _schemeDefault.default));
         this.isLock = false;
         this.isReady = false;
@@ -876,7 +877,7 @@ function mergeDeep(...objects) {
             const pVal = prev[key];
             const oVal = obj[key];
             if (Array.isArray(pVal) && Array.isArray(oVal)) prev[key] = pVal.concat(...oVal);
-            else if (isObject(pVal) && isObject(oVal) && !(oVal instanceof Element)) prev[key] = mergeDeep(pVal, oVal);
+            else if (isObject(pVal) && isObject(oVal)) prev[key] = mergeDeep(pVal, oVal);
             else prev[key] = oVal;
         });
         return prev;
@@ -4639,9 +4640,10 @@ class Setting extends (0, _componentDefault.default) {
         this.remove();
         this.events = [];
         this.cache = new Map();
+        const settingsCopy = settings.map((item)=>(0, _utils.mergeDeep)({}, item));
         const mergeSettings = [
             ...this.defaultSettings,
-            ...settings
+            ...settingsCopy
         ];
         this.option = Setting.makeRecursion(mergeSettings);
         this.render(this.option);
