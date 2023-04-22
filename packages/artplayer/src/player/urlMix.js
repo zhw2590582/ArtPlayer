@@ -26,7 +26,6 @@ export default function urlMix(art) {
 
                 if (oldUrl !== art.url) {
                     art.option.url = url;
-                    art.emit('url', url);
                     if (art.isReady && oldUrl) {
                         art.once('video:canplay', () => {
                             art.emit('restart', url);

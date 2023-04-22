@@ -9,8 +9,8 @@ import {
     removeClass,
     inverseClass,
     createElement,
-    isStringOrNumber,
 } from './dom';
+import { isStringOrNumber } from './format';
 import { errorHandle } from './error';
 import validator from 'option-validator';
 import { ComponentOption } from '../scheme';

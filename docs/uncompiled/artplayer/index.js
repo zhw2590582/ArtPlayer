@@ -249,7 +249,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-21 22:49:38";
+        return "2023-04-23 00:03:34";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1571,7 +1571,6 @@ function urlMix(art) {
                 } else $video.src = url;
                 if (oldUrl !== art.url) {
                     art.option.url = url;
-                    art.emit("url", url);
                     if (art.isReady && oldUrl) art.once("video:canplay", ()=>{
                         art.emit("restart", url);
                     });
@@ -2961,6 +2960,7 @@ exports.default = Control;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
+var _format = require("./format");
 var _error = require("./error");
 var _optionValidator = require("option-validator");
 var _optionValidatorDefault = parcelHelpers.interopDefault(_optionValidator);
@@ -3058,7 +3058,7 @@ class Component {
             $value.innerText = $item.innerText;
             if (option.onSelect) {
                 const result = await option.onSelect.call(this.art, find, $item, event);
-                if ((0, _dom.isStringOrNumber)(result)) $value.innerHTML = result;
+                if ((0, _format.isStringOrNumber)(result)) $value.innerHTML = result;
             }
             setLeft();
         });
@@ -3081,7 +3081,7 @@ class Component {
 }
 exports.default = Component;
 
-},{"./dom":"dNynC","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
+},{"./dom":"dNynC","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./format":"eWip5"}],"bHDMy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");

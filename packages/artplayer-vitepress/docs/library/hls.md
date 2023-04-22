@@ -9,14 +9,12 @@
 ```js{21-24,28}
 function playM3u8(video, url, art) {
     if (Hls.isSupported()) {
+        if (art.hls) art.hls.destroy();
         const hls = new Hls();
         hls.loadSource(url);
         hls.attachMedia(video);
-
-        // optional
         art.hls = hls;
-        art.once('url', () => hls.destroy());
-        art.once('destroy', () => hls.destroy());
+        art.on('destroy', () => hls.destroy());
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = url;
     } else {

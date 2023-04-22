@@ -21,12 +21,12 @@ var art = new Artplayer({
     customType: {
         m3u8: function playM3u8(video, url, art) {
             if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                art.hls = hls;
-                art.once('url', () => hls.destroy());
-                art.once('destroy', () => hls.destroy());
+				if (art.hls) art.hls.destroy();
+				const hls = new Hls();
+				hls.loadSource(url);
+				hls.attachMedia(video);
+				art.hls = hls;
+				art.on('destroy', () => hls.destroy());
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 video.src = url;
             } else {

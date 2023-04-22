@@ -8,6 +8,7 @@
 
 ```js{21-24,28}
 function playTorrent(video, url, art) {
+    if (art.torrent) art.torrent.destroy();
     const torrent = new WebTorrent();
     torrent.add(url, function (torrent) {
         var file = torrent.files[0];
@@ -15,11 +16,8 @@ function playTorrent(video, url, art) {
             autoplay: art.option.autoplay,
         });
     });
-
-    // optional
     art.torrent = torrent;
-    art.once('url', () => torrent.destroy());
-    art.once('destroy', () => torrent.destroy());
+    art.on('destroy', () => torrent.destroy());
 }
 
 var art = new Artplayer({

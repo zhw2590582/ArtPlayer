@@ -9,14 +9,12 @@
 ```js{19-22,26}
 function playFlv(video, url, art) {
     if (flvjs.isSupported()) {
+        if (art.flv) art.flv.destroy();
         const flv = flvjs.createPlayer({ type: 'flv', url });
         flv.attachMediaElement(video);
         flv.load();
-
-        // optional
         art.flv = flv; 
-        art.once('url', () => flv.destroy());
-        art.once('destroy', () => flv.destroy());
+        art.on('destroy', () => flv.destroy());
     } else {
         art.notice.show = 'Unsupported playback format: flv';
     }
