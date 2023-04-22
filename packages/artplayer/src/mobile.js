@@ -48,7 +48,6 @@ export default class Mobile {
             typeCallback($video, option.url, art);
         } else {
             $video.src = option.url;
-            art.emit('url', $video.src);
         }
     }
 }

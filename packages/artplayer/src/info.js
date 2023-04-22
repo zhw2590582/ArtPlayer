@@ -24,10 +24,7 @@ export default class Info extends Component {
 
         let timer = null;
         const $types = queryAll('[data-video]', $infoPanel) || [];
-
-        this.art.on('destroy', () => {
-            clearTimeout(timer);
-        });
+        this.art.on('destroy', () => clearTimeout(timer));
 
         function loop() {
             for (let index = 0; index < $types.length; index++) {
