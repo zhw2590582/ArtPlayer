@@ -4643,7 +4643,8 @@ class Setting extends (0, _componentDefault.default) {
     }
     add(setting) {
         this.remove();
-        this.option.push(setting);
+        const settingCopy = (0, _utils.mergeDeep)({}, setting);
+        this.option.push(settingCopy);
         this.option = Setting.makeRecursion(this.option);
         this.render(this.option);
         return this.option;

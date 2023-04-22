@@ -108,7 +108,8 @@ export default class Setting extends Component {
 
     add(setting) {
         this.remove();
-        this.option.push(setting);
+        const settingCopy = mergeDeep({}, setting);
+        this.option.push(settingCopy);
         this.option = Setting.makeRecursion(this.option);
         this.render(this.option);
         return this.option;
