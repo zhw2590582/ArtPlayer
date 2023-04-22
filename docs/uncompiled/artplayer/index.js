@@ -4635,11 +4635,11 @@ class Setting extends (0, _componentDefault.default) {
     remove() {
         for(let index = 0; index < this.events.length; index++)this.art.events.remove(this.events[index]);
         this.$parent.innerHTML = "";
+        this.events = [];
+        this.cache = new Map();
     }
     update(settings) {
         this.remove();
-        this.events = [];
-        this.cache = new Map();
         const settingsCopy = settings.map((item)=>(0, _utils.mergeDeep)({}, item));
         const mergeSettings = [
             ...this.defaultSettings,
@@ -4650,8 +4650,11 @@ class Setting extends (0, _componentDefault.default) {
         return this.option;
     }
     add(setting) {
+        this.remove();
         this.option.push(setting);
-        return this.update(this.option);
+        this.option = Setting.makeRecursion(this.option);
+        this.render(this.option);
+        return this.option;
     }
     creatHeader(item) {
         const { icons , proxy  } = this.art;
