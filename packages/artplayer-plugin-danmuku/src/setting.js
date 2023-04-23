@@ -204,6 +204,7 @@ export default function setting(art, danmuku) {
 
     function addSetting() {
         art.setting.add({
+            width: 270,
             name: 'danmuku',
             html: '弹幕设置',
             tooltip: '更多',

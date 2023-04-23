@@ -184,7 +184,7 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 artplayerPluginDanmuku.env = "development";
 artplayerPluginDanmuku.version = "5.0.0";
-artplayerPluginDanmuku.build = "2023-04-23 14:21:45";
+artplayerPluginDanmuku.build = "2023-04-23 15:35:01";
 if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerPluginDanmuku;
 
 },{"./danmuku":"cv7fe","./setting":"cI0ih","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
@@ -944,6 +944,7 @@ function setting(art, danmuku) {
     }
     function addSetting() {
         art.setting.add({
+            width: 270,
             name: "danmuku",
             html: "弹幕设置",
             tooltip: "更多",
