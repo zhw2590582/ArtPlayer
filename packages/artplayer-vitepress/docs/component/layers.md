@@ -112,7 +112,7 @@ art.on('ready', () => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js{20-28}
+```js{21-29}
 var img = '/assets/sample/layer.png';
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -130,16 +130,18 @@ var art = new Artplayer({
     ],
 });
 
-setTimeout(() => {
-    // Update the layer by name
-    art.layers.update({
-        name: 'potser',
-        html: `<img style="width: 200px" src="${img}">`,
-        style: {
-            position: 'absolute',
-            top: '50px',
-            left: '50px',
-        },
-    });
-}, 3000);
+art.on('ready', () => {
+    setTimeout(() => {
+        // Update the layer by name
+        art.layers.update({
+            name: 'potser',
+            html: `<img style="width: 200px" src="${img}">`,
+            style: {
+                position: 'absolute',
+                top: '50px',
+                left: '50px',
+            },
+        });
+    }, 3000);
+});
 ```
