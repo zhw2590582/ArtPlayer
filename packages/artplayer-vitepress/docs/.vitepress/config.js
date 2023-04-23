@@ -87,8 +87,16 @@ const config = {
           items: [
             { text: 'Install', link: '/en/' },
             { text: 'Option', link: '/en/start/option' },
-            { text: 'Component', link: '/en/start/component' },
-            { text: 'Setting', link: '/en/start/setting' },
+          ]
+        },
+        {
+          text: 'Component',
+          collapsible: true,
+          items: [
+            { text: 'Layers', link: '/en/component/layers' },
+            { text: 'Controls', link: '/en/component/controls' },
+            { text: 'Contextmenu', link: '/en/component/contextmenu' },
+            { text: 'Setting', link: '/en/component/setting' },
           ]
         },
         {
@@ -120,7 +128,6 @@ const config = {
             { text: 'hls.js', link: '/en/library/hls' },
             { text: 'flv.js', link: '/en/library/flv' },
             { text: 'dash.js', link: '/en/library/dash' },
-            { text: 'webtorrent.js', link: '/en/library/webtorrent' },
           ]
         },
       ],

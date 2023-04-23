@@ -630,7 +630,7 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/component/layers.html](/component/layers.html)
 
 :::
 
@@ -683,7 +683,7 @@ var art = new Artplayer({
 
 :::warning `设置面板` 请参考以下地址
 
-[/start/setting.html](/start/setting.html)
+[/component/setting.html](/component/setting.html)
 
 :::
 
@@ -714,7 +714,7 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)-   Type:
+[/component/contextmenu.html](/component/contextmenu.html)-   Type:
 
 :::
 
@@ -749,7 +749,7 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/component/controls.html](/component/controls.html)
 
 :::
 
@@ -1219,7 +1219,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-改变内置的css变量
+用于改变内置的css变量
 
 <div className="run-code">▶ Run Code</div>
 
