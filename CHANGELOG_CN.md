@@ -6,11 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   修复在移动端下，进度拖动的角度不正确的问题
+-   重写了 `mini` 模式，现在这个模式下，视频会脱离原来的容器
+-   全部组件（层，控制器，右键菜单，设置面板）支持动态删除和动态更新
+-   字幕选项添加了 `onVttLoad` 方法，用于在字幕输出前修改 `vtt` 文本
+-   重写了全部样式，添加了许多 `css` 变量
+-   添加 `cssVar` 选项，用于初始化 `css` 变量
+-   添加 `cssVar` 方法，用于设置和获取 `css` 变量
 -   插件 `artplayer-plugin-hls-quality` 添加 `getResolution` 函数选项，用于获取从 `level` 中分辨率的文本
 -   新增 `artplayer-plugin-dash-quality` 插件，用于添加 `Dash` 画质列表到播放器
--   修复 `lock` 事件失效问题
+-   修复 `lock` 和 `loop` 事件失效问题
 -   添加俄语 `ru` 和印度尼西亚 `id` 语言
--   字幕添加 `onVttLoad` 函数选项，用于修改 `vtt` 字幕文本
+-   更新 `artplayer-plugin-control`，用于兼容`artplayer@5.0.0`
+-   更新 `artplayer-plugin-dash-quality`，用于兼容`artplayer@5.0.0`
+-   更新 `artplayer-plugin-hls-quality`，用于兼容`artplayer@5.0.0`
+-   更新 `artplayer-plugin-danmuku`，用于兼容`artplayer@5.0.0`
 
 ## [4.6.2] - 2023-1-26
 
