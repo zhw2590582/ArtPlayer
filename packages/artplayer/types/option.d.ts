@@ -6,7 +6,7 @@ import { CssVar } from './cssVar';
 import { ComponentOption } from './component';
 import Artplayer = require('./artplayer');
 
-type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>);
+export type CustomType = 'flv' | 'm3u8' | 'hls' | 'ts' | 'mpd' | 'torrent' | (string & Record<never, never>);
 
 export type Option = {
     /**

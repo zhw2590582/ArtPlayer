@@ -13,7 +13,8 @@
         background-size: 100% var(--art-bottom-height);
         .art-bottom-gradient();
 
-        .art-controls, .art-progress {
+        .art-controls,
+        .art-progress {
             transform: translateY(var(--art-bottom-offset));
             transition: transform var(--art-transition-duration) ease;
         }
@@ -23,7 +24,8 @@
     &.art-hover {
         .art-bottom {
             opacity: 1;
-            .art-controls, .art-progress {
+            .art-controls,
+            .art-progress {
                 transform: translateY(0);
             }
         }

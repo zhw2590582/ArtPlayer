@@ -2,12 +2,6 @@
 
 这里的 `静态属性` 是指挂载在 `构造函数` 的 `一级属性`，非常少使用
 
-:::warning 提示
-
-有些属性是全大写的，说明这些属性是不稳定的，可能会在将来被更改
-
-:::
-
 ## `instances`
 
 返回全部播放器实例的数组，假如你想同时管理多个播放器的时候，可以用到该属性
@@ -140,75 +134,3 @@ console.info(Artplayer.html);
 ```js
 console.info(Artplayer.option);
 ```
-
-## `DEBUG`
-
-## `CONTEXTMENU`
-
-## `NOTICE_TIME`
-
-## `SETTING_WIDTH`
-
-## `SETTING_ITEM_WIDTH`
-
-## `SETTING_ITEM_HEIGHT`
-
-## `INDICATOR_SIZE`
-
-## `INDICATOR_SIZE_ICON`
-
-## `INDICATOR_SIZE_MOBILE`
-
-## `INDICATOR_SIZE_MOBILE_ICON`
-
-## `VOLUME_PANEL_WIDTH`
-
-## `VOLUME_HANDLE_WIDTH`
-
-## `RESIZE_TIME`
-
-## `SCROLL_TIME`
-
-## `SCROLL_GAP`
-
-## `AUTO_PLAYBACK_MAX`
-
-## `AUTO_PLAYBACK_MIN`
-
-## `AUTO_PLAYBACK_TIMEOUT`
-
-## `RECONNECT_TIME_MAX`
-
-## `RECONNECT_SLEEP_TIME`
-
-## `CONTROL_HIDE_TIME`
-
-## `DB_CLICE_TIME`
-
-## `MOBILE_AUTO_PLAYBACKRATE`
-
-## `MOBILE_AUTO_PLAYBACKRATE_TIME`
-
-## `MOBILE_AUTO_ORIENTATION_TIME`
-
-## `INFO_LOOP_TIME`
-
-## `FAST_FORWARD_VALUE`
-
-## `FAST_FORWARD_TIME`
-
-## `TOUCH_MOVE_RATIO`
-
-## `VOLUME_STEP`
-
-## `SEEK_STEP`
-
-## `PROGRESS_HEIGHT`
-
-## `PLAYBACK_RATE`
-
-## `ASPECT_RATIO`
-
-## `FLIP`
-
-## `FULLSCREEN_WEB_IN_BODY`

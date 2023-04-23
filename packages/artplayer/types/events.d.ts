@@ -61,6 +61,6 @@ export type Events = {
     screenshot: [dataUri: string];
     seek: [currentTime: number];
     subtitleOffset: [offset: number];
-    restart: [];
+    restart: [url: string];
     loop: [start?: number, end?: number];
 };

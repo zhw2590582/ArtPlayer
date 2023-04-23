@@ -1,4 +1,5 @@
 import { CssVar } from './cssVar';
+import { CustomType } from './option';
 
 export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>);
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>);
@@ -10,6 +11,8 @@ export declare class Player {
     set aspectRatio(ratio: AspectRatio);
     get state(): State;
     set state(state: State);
+    get type(): CustomType;
+    set type(name: CustomType);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
     get autoSize(): boolean;

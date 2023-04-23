@@ -234,8 +234,10 @@ art.on('ready', () => {
 管理播放器的层
 
 - `add` 方法用于动态添加层
+- `remove` 方法用于动态删除层
+- `update` 方法用于动态更新层
 - `show` 属性用于设置是否显示全部层
-- `toggle` 属性用于切换是否显示全部层
+- `toggle` 方法用于切换是否显示全部层
 
 <div className="run-code">▶ Run Code</div>
 
@@ -267,8 +269,10 @@ art.on('ready', () => {
 管理播放器的控制器
 
 - `add` 方法用于动态添加控制器
+- `remove` 方法用于动态删除控制器
+- `update` 方法用于动态更新控制器
 - `show` 属性用于设置是否显示全部控制器
-- `toggle` 属性用于切换是否显示全部控制器
+- `toggle` 方法用于切换是否显示全部控制器
 
 <div className="run-code">▶ Run Code</div>
 
@@ -301,8 +305,10 @@ art.on('ready', () => {
 管理播放器的右键菜单
 
 - `add` 方法用于动态添加菜单
+- `remove` 方法用于动态删除菜单
+- `update` 方法用于动态更新菜单
 - `show` 属性用于设置是否显示全部菜单
-- `toggle` 属性用于切换是否显示全部菜单
+- `toggle` 方法用于切换是否显示全部菜单
 
 <div className="run-code">▶ Run Code</div>
 
@@ -438,9 +444,10 @@ art.on('ready', () => {
 管理播放器的设置面板
 
 - `add` 方法用于动态添加设置项
+- `remove` 方法用于动态删除设置项
+- `update` 方法用于动态更新设置项
 - `show` 属性用于设置是否显示全部设置项
-- `toggle` 属性用于切换是否显示全部设置项
-- `update` 方法动态更新设置项
+- `toggle` 方法用于切换是否显示全部设置项
 
 <div className="run-code">▶ Run Code</div>
 

@@ -64,7 +64,7 @@ var art = new Artplayer({
 
 // Get the Element of control by name
 console.info(art.controls['your-button']);
-console.info(art.controls.subtitle);
+console.info(art.controls['subtitle']);
 ```
 
 ## 添加
@@ -95,7 +95,7 @@ art.controls.add({
 });
 
 // Get the Element of control by name
-console.info(art.controls.button1);
+console.info(art.controls['button1']);
 ```
 
 ## 删除

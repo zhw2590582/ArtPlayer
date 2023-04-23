@@ -908,3 +908,24 @@ var art = new Artplayer({
 
 console.info(art.video);
 ```
+
+## `cssVar`
+
+-   Type: `Function`
+
+动态获取或设置 `css` 变量
+
+<div className="run-code">▶ Run Code</div>
+
+```js{8}
+var art = new Artplayer({
+	container: '.artplayer-app',
+	url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.log(art.cssVar('--art-theme'));
+    art.cssVar('--art-theme', 'green');
+    console.log(art.cssVar('--art-theme'));
+});
+```
