@@ -9,23 +9,16 @@ export default function setting(art, danmuku) {
     const {
         template: { $controlsCenter, $player },
         constructor: {
-            utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass },
+            utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass, getIcon },
         },
     } = art;
 
-    function getIcon(svg, key) {
-        const icon = document.createElement('i');
-        append(icon, svg);
-        addClass(icon, 'art-icon');
-        addClass(icon, `art-icon-${key}`);
-        return icon;
-    }
-
     setStyle($controlsCenter, 'display', 'flex');
-    const $danmuOn = getIcon(danmuOn, 'danmu-on');
-    const $danmuOff = getIcon(danmuOff, 'danmu-off');
-    const $danmuConfig = getIcon(danmuConfig, 'danmu-config');
-    const $danmuStyle = getIcon(danmuStyle, 'danmu-style');
+
+    const $danmuOn = getIcon('danmu-on', danmuOn);
+    const $danmuOff = getIcon('danmu-off', danmuOff);
+    const $danmuConfig = getIcon('danmu-config', danmuConfig);
+    const $danmuStyle = getIcon('danmu-style', danmuStyle);
 
     function addEmitter() {
         const colors = [
