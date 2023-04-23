@@ -249,7 +249,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-23 00:03:34";
+        return "2023-04-23 08:21:04";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3081,7 +3081,7 @@ class Component {
 }
 exports.default = Component;
 
-},{"./dom":"dNynC","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./format":"eWip5"}],"bHDMy":[function(require,module,exports) {
+},{"./dom":"dNynC","./format":"eWip5","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -4578,6 +4578,7 @@ var _subtitleOffset = require("./subtitleOffset");
 var _subtitleOffsetDefault = parcelHelpers.interopDefault(_subtitleOffset);
 var _component = require("../utils/component");
 var _componentDefault = parcelHelpers.interopDefault(_component);
+var _error = require("../utils/error");
 var _utils = require("../utils");
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
@@ -4589,7 +4590,7 @@ class Setting extends (0, _componentDefault.default) {
         this.events = [];
         this.cache = new Map();
         if (option.setting) {
-            this.update(option.settings);
+            this.init();
             art.on("blur", ()=>{
                 if (this.show) {
                     this.show = false;
@@ -4624,28 +4625,56 @@ class Setting extends (0, _componentDefault.default) {
         if (option.subtitleOffset) result.push((0, _subtitleOffsetDefault.default)(this.art));
         return result;
     }
-    remove() {
+    init() {
+        const { option  } = this.art;
+        const mergeSettings = [
+            ...this.defaultSettings,
+            ...option.settings
+        ];
+        this.option = Setting.makeRecursion(mergeSettings);
+        this.destroy();
+        this.render(this.option);
+    }
+    destroy() {
         for(let index = 0; index < this.events.length; index++)this.art.events.remove(this.events[index]);
         this.$parent.innerHTML = "";
         this.events = [];
         this.cache = new Map();
     }
-    update(settings) {
-        this.remove();
-        const settingsCopy = settings.map((item)=>(0, _utils.mergeDeep)({}, item));
-        const mergeSettings = [
-            ...this.defaultSettings,
-            ...settingsCopy
-        ];
-        this.option = Setting.makeRecursion(mergeSettings);
+    find(name = "", option = this.option) {
+        for(let index = 0; index < option.length; index++){
+            const item = option[index];
+            if (item.name === name) return item;
+            else {
+                const result = this.find(name, item.selector || []);
+                if (result) return result;
+            }
+        }
+    }
+    remove(name) {
+        const item = this.find(name);
+        (0, _error.errorHandle)(item, `Can't find [${name}] from the [setting]`);
+        const parent = item.$parentItem?.selector || this.option;
+        parent.splice(parent.indexOf(item), 1);
+        this.option = Setting.makeRecursion(this.option);
+        this.destroy();
         this.render(this.option);
         return this.option;
     }
+    update(setting) {
+        const item = this.find(setting.name);
+        if (item) {
+            Object.assign(item, setting);
+            this.option = Setting.makeRecursion(this.option);
+            this.destroy();
+            this.render(this.option);
+        } else this.add(setting);
+        return this.option;
+    }
     add(setting) {
-        this.remove();
-        const settingCopy = (0, _utils.mergeDeep)({}, setting);
-        this.option.push(settingCopy);
+        this.option.push(setting);
         this.option = Setting.makeRecursion(this.option);
+        this.destroy();
         this.render(this.option);
         return this.option;
     }
@@ -4889,7 +4918,7 @@ class Setting extends (0, _componentDefault.default) {
 }
 exports.default = Setting;
 
-},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils/component":"bgug2","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7rVpZ":[function(require,module,exports) {
+},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils/component":"bgug2","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","../utils/error":"622b3"}],"7rVpZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -4902,12 +4931,14 @@ function flip(art) {
     }
     return {
         width: SETTING_ITEM_WIDTH,
+        name: "flip",
         html: i18n.get("Video Flip"),
         tooltip: i18n.get((0, _utils.capitalize)(art.flip)),
         icon: icons.flip,
         selector: FLIP.map((item)=>{
             return {
                 value: item,
+                name: `aspect-ratio-${item}`,
                 default: item === art.flip,
                 html: i18n.get((0, _utils.capitalize)(item))
             };
@@ -4942,12 +4973,14 @@ function aspectRatio(art) {
     }
     return {
         width: SETTING_ITEM_WIDTH,
+        name: "aspect-ratio",
         html: i18n.get("Aspect Ratio"),
         icon: icons.aspectRatio,
         tooltip: getI18n(art.aspectRatio),
         selector: ASPECT_RATIO.map((item)=>{
             return {
                 value: item,
+                name: `aspect-ratio-${item}`,
                 default: item === art.aspectRatio,
                 html: getI18n(item)
             };
@@ -4982,12 +5015,14 @@ function playbackRate(art) {
     }
     return {
         width: SETTING_ITEM_WIDTH,
+        name: "playback-rate",
         html: i18n.get("Play Speed"),
         tooltip: getI18n(art.playbackRate),
         icon: icons.playbackRate,
         selector: PLAYBACK_RATE.map((item)=>{
             return {
                 value: item,
+                name: `aspect-ratio-${item}`,
                 default: item === art.playbackRate,
                 html: getI18n(item)
             };
@@ -5013,6 +5048,7 @@ function subtitleOffset(art) {
     const { i18n , icons , constructor  } = art;
     return {
         width: constructor.SETTING_ITEM_WIDTH,
+        name: "subtitle-offset",
         html: i18n.get("Subtitle Offset"),
         icon: icons.subtitle,
         tooltip: "0s",

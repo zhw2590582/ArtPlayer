@@ -19,12 +19,14 @@ export default function aspectRatio(art) {
 
     return {
         width: SETTING_ITEM_WIDTH,
+        name: 'aspect-ratio',
         html: i18n.get('Aspect Ratio'),
         icon: icons.aspectRatio,
         tooltip: getI18n(art.aspectRatio),
         selector: ASPECT_RATIO.map((item) => {
             return {
                 value: item,
+                name: `aspect-ratio-${item}`,
                 default: item === art.aspectRatio,
                 html: getI18n(item),
             };
