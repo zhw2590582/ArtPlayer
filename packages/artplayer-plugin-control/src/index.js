@@ -10,7 +10,7 @@ function checkVersion(art) {
     const minor = arr[1] / 100;
     errorHandle(
         major + minor >= 5,
-        `Artplayer.js@${version} is not compatible the artplayerPluginControl@${artplayerPluginControl.version}. Please update it to version Artplayer.js@4.6.x`,
+        `Artplayer.js@${version} is not compatible the artplayerPluginControl@${artplayerPluginControl.version}. Please update it to version Artplayer.js@5.x.x`,
     );
 }
 

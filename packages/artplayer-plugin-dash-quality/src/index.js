@@ -1,7 +1,23 @@
 import image from 'bundle-text:./image.svg';
 
+function checkVersion(art) {
+    const {
+        version,
+        utils: { errorHandle },
+    } = art.constructor;
+    const arr = version.split('.').map(Number);
+    const major = arr[0];
+    const minor = arr[1] / 100;
+    errorHandle(
+        major + minor >= 5,
+        `Artplayer.js@${version} is not compatible the artplayerPluginDashQuality@${artplayerPluginDashQuality.version}. Please update it to version Artplayer.js@5.x.x`,
+    );
+}
+
 export default function artplayerPluginDashQuality(option) {
     return (art) => {
+        checkVersion(art);
+
         const { $video } = art.template;
         const { errorHandle } = art.constructor.utils;
 

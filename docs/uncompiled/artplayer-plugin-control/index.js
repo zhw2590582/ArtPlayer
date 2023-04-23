@@ -152,7 +152,7 @@ function checkVersion(art) {
     const arr = version.split(".").map(Number);
     const major = arr[0];
     const minor = arr[1] / 100;
-    errorHandle(major + minor >= 5, `Artplayer.js@${version} is not compatible the artplayerPluginControl@${artplayerPluginControl.version}. Please update it to version Artplayer.js@4.6.x`);
+    errorHandle(major + minor >= 5, `Artplayer.js@${version} is not compatible the artplayerPluginControl@${artplayerPluginControl.version}. Please update it to version Artplayer.js@5.x.x`);
 }
 function artplayerPluginControl() {
     return (art)=>{

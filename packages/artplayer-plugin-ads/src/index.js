@@ -1,7 +1,23 @@
 import style from 'bundle-text:./style.less';
 
+function checkVersion(art) {
+    const {
+        version,
+        utils: { errorHandle },
+    } = art.constructor;
+    const arr = version.split('.').map(Number);
+    const major = arr[0];
+    const minor = arr[1] / 100;
+    errorHandle(
+        major + minor >= 5,
+        `Artplayer.js@${version} is not compatible the artplayerPluginAds@${artplayerPluginAds.version}. Please update it to version Artplayer.js@5.x.x`,
+    );
+}
+
 export default function artplayerPluginAds(option) {
     return (art) => {
+        checkVersion(art);
+
         const {
             template: { $player },
             icons: { volume, volumeClose, fullscreenOn, fullscreenOff, loading },

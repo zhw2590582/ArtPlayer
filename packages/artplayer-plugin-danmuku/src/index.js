@@ -9,7 +9,7 @@ function checkVersion(art) {
     const arr = version.split('.').map(Number);
     const major = arr[0];
     const minor = arr[1] / 100;
-    errorHandle(major + minor >= 5, `Artplayer.js@${version} 不兼容该弹幕库，请更新到 5 版本以上`);
+    errorHandle(major + minor >= 5, `Artplayer.js@${version} 不兼容该弹幕库，请更新到 Artplayer.js@5.x.x 版本以上`);
 }
 
 export default function artplayerPluginDanmuku(option) {
