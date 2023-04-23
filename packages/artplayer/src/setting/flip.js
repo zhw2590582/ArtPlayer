@@ -29,7 +29,7 @@ export default function flip(art) {
         }),
         onSelect(item) {
             art.flip = item.value;
-            return item.value;
+            return item.html;
         },
         mounted: ($panel, item) => {
             update($panel, item.$tooltip, art.flip);

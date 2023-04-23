@@ -4945,7 +4945,7 @@ function flip(art) {
         }),
         onSelect (item) {
             art.flip = item.value;
-            return item.value;
+            return item.html;
         },
         mounted: ($panel, item)=>{
             update($panel, item.$tooltip, art.flip);
@@ -4987,7 +4987,7 @@ function aspectRatio(art) {
         }),
         onSelect (item) {
             art.aspectRatio = item.value;
-            return item.value;
+            return item.html;
         },
         mounted: ($panel, item)=>{
             update($panel, item.$tooltip, art.aspectRatio);
@@ -5029,7 +5029,7 @@ function playbackRate(art) {
         }),
         onSelect (item) {
             art.playbackRate = item.value;
-            return item.value;
+            return item.html;
         },
         mounted: ($panel, item)=>{
             update($panel, item.$tooltip, art.playbackRate);
