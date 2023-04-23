@@ -240,19 +240,16 @@ art.setting.add({
 
 <div className="run-code">▶ Run Code</div>
 
-```js{25}
+```js{22}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     setting: true,
     flip: true,
-    playbackRate: true,
-    aspectRatio: true,
-    subtitleOffset: true,
     settings: [
         {
-            html: 'Slider',
             name: 'slider',
+            html: 'Slider',
             tooltip: '5x',
             icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
             range: [5, 1, 10, 1],
@@ -274,19 +271,15 @@ art.on('ready', () => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js{25}
+```js{21-27}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     setting: true,
-    flip: true,
-    playbackRate: true,
-    aspectRatio: true,
-    subtitleOffset: true,
     settings: [
         {
-            html: 'Slider',
             name: 'slider',
+            html: 'Slider',
             tooltip: '5x',
             icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
             range: [5, 1, 10, 1],
@@ -298,8 +291,14 @@ art.setting.show = true;
 
 art.on('ready', () => {
     setTimeout(() => {
-        // Delete the setting by name
-        // art.setting.remove('slider');
+        // Update the setting by name
+        art.setting.update({
+            name: 'slider',
+            html: 'PIP Mode',
+            tooltip: 'Close',
+            icon: '<img width="22" heigth="22" src="/assets/img/state.svg">',
+            switch: false,
+        });
     }, 3000);
 });
 ```
