@@ -19,12 +19,14 @@ export default function playbackRate(art) {
 
     return {
         width: SETTING_ITEM_WIDTH,
+        name: 'playback-rate',
         html: i18n.get('Play Speed'),
         tooltip: getI18n(art.playbackRate),
         icon: icons.playbackRate,
         selector: PLAYBACK_RATE.map((item) => {
             return {
                 value: item,
+                name: `aspect-ratio-${item}`,
                 default: item === art.playbackRate,
                 html: getI18n(item),
             };

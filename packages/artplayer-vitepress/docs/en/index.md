@@ -1,3 +1,7 @@
+::: danger Important Note
+The English document has not yet been completed, everything is subject to the Chinese document.
+:::
+
 # Install
 
 ## Install

@@ -1,24 +1,24 @@
 .art-video-player {
     .art-bottom {
         .art-full(60);
-        top: auto;
         display: flex;
         flex-direction: column;
         justify-content: end;
         opacity: 0;
+        overflow: hidden;
         pointer-events: none;
         gap: var(--art-bottom-gap);
-        bottom: var(--art-bottom-offset);
-        height: var(--art-bottom-height);
         padding: 0 var(--art-padding);
+        transform: translateY(var(--art-bottom-offset));
         transition: all var(--art-transition-duration) ease;
+        background-size: 100% var(--art-bottom-height);
         .art-bottom-gradient();
     }
 
     &.art-control-show,
     &.art-hover {
         .art-bottom {
-            bottom: 0;
+            transform: translateY(0);
             opacity: 1;
         }
     }

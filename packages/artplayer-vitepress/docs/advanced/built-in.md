@@ -258,7 +258,7 @@ art.on('ready', () => {
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/component/layers.html](/component/layers.html)
 
 :::
 
@@ -292,7 +292,7 @@ art.on('ready', () => {
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/component/controls.html](/component/controls.html)
 
 :::
 
@@ -326,7 +326,7 @@ art.on('ready', () => {
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/component/contextmenu.html](/component/contextmenu.html)
 
 :::
 
@@ -465,7 +465,7 @@ art.on('ready', () => {
 
 :::warning `设置面板` 请参考以下地址
 
-[/start/setting.html](/start/setting.html)
+[/component/setting.html](/component/setting.html)
 
 :::
 

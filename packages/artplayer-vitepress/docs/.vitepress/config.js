@@ -16,7 +16,7 @@ const config = {
       { text: 'English', link: '/en/', activeMatch: '/en/' },
       { text: 'Online Editor', link: 'https://artplayer.org' },
       {
-        text: '4.6.x',
+        text: '5.0.x',
         items: [
           { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG_CN.md' },
           { text: 'Donation', link: 'https://github.com/zhw2590582/ArtPlayer#donations' },
@@ -35,8 +35,16 @@ const config = {
           items: [
             { text: '安装使用', link: '/' },
             { text: '基础选项', link: '/start/option' },
-            { text: '组件配置', link: '/start/component' },
-            { text: '设置面板', link: '/start/setting' },
+          ]
+        },
+        {
+          text: '组件',
+          collapsible: true,
+          items: [
+            { text: '业务层', link: '/component/layers' },
+            { text: '控制器', link: '/component/controls' },
+            { text: '右键菜单', link: '/component/contextmenu' },
+            { text: '设置面板', link: '/component/setting' },
           ]
         },
         {
@@ -69,7 +77,6 @@ const config = {
             { text: 'hls.js', link: '/library/hls' },
             { text: 'flv.js', link: '/library/flv' },
             { text: 'dash.js', link: '/library/dash' },
-            { text: 'webtorrent.js', link: '/library/webtorrent' },
           ]
         },
       ],
@@ -80,8 +87,16 @@ const config = {
           items: [
             { text: 'Install', link: '/en/' },
             { text: 'Option', link: '/en/start/option' },
-            { text: 'Component', link: '/en/start/component' },
-            { text: 'Setting', link: '/en/start/setting' },
+          ]
+        },
+        {
+          text: 'Component',
+          collapsible: true,
+          items: [
+            { text: 'Layers', link: '/en/component/layers' },
+            { text: 'Controls', link: '/en/component/controls' },
+            { text: 'Contextmenu', link: '/en/component/contextmenu' },
+            { text: 'Setting', link: '/en/component/setting' },
           ]
         },
         {
@@ -113,7 +128,6 @@ const config = {
             { text: 'hls.js', link: '/en/library/hls' },
             { text: 'flv.js', link: '/en/library/flv' },
             { text: 'dash.js', link: '/en/library/dash' },
-            { text: 'webtorrent.js', link: '/en/library/webtorrent' },
           ]
         },
       ],

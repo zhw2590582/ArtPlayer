@@ -3,6 +3,7 @@ import aspectRatio from './aspectRatio';
 import playbackRate from './playbackRate';
 import subtitleOffset from './subtitleOffset';
 import Component from '../utils/component';
+import { errorHandle } from '../utils/error';
 import {
     def,
     has,
@@ -10,7 +11,6 @@ import {
     addClass,
     setStyle,
     isMobile,
-    mergeDeep,
     inverseClass,
     createElement,
     includeFromEvent,
@@ -35,7 +35,7 @@ export default class Setting extends Component {
         this.cache = new Map();
 
         if (option.setting) {
-            this.update(option.settings);
+            this.init();
 
             art.on('blur', () => {
                 if (this.show) {
@@ -88,7 +88,15 @@ export default class Setting extends Component {
         return result;
     }
 
-    remove() {
+    init() {
+        const { option } = this.art;
+        const mergeSettings = [...this.defaultSettings, ...option.settings];
+        this.option = Setting.makeRecursion(mergeSettings);
+        this.destroy();
+        this.render(this.option);
+    }
+
+    destroy() {
         for (let index = 0; index < this.events.length; index++) {
             this.art.events.remove(this.events[index]);
         }
@@ -97,20 +105,46 @@ export default class Setting extends Component {
         this.cache = new Map();
     }
 
-    update(settings) {
-        this.remove();
-        const settingsCopy = settings.map((item) => mergeDeep({}, item));
-        const mergeSettings = [...this.defaultSettings, ...settingsCopy];
-        this.option = Setting.makeRecursion(mergeSettings);
+    find(name = '', option = this.option) {
+        for (let index = 0; index < option.length; index++) {
+            const item = option[index];
+            if (item.name === name) {
+                return item;
+            } else {
+                const result = this.find(name, item.selector || []);
+                if (result) return result;
+            }
+        }
+    }
+
+    remove(name) {
+        const item = this.find(name);
+        errorHandle(item, `Can't find [${name}] from the [setting]`);
+        const parent = item.$parentItem?.selector || this.option;
+        parent.splice(parent.indexOf(item), 1);
+        this.option = Setting.makeRecursion(this.option);
+        this.destroy();
         this.render(this.option);
         return this.option;
     }
 
+    update(setting) {
+        const item = this.find(setting.name);
+        if (item) {
+            Object.assign(item, setting);
+            this.option = Setting.makeRecursion(this.option);
+            this.destroy();
+            this.render(this.option);
+        } else {
+            this.add(setting);
+        }
+        return this.option;
+    }
+
     add(setting) {
-        this.remove();
-        const settingCopy = mergeDeep({}, setting);
-        this.option.push(settingCopy);
+        this.option.push(setting);
         this.option = Setting.makeRecursion(this.option);
+        this.destroy();
         this.render(this.option);
         return this.option;
     }

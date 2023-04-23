@@ -630,7 +630,7 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/component/layers.html](/component/layers.html)
 
 :::
 
@@ -683,7 +683,7 @@ var art = new Artplayer({
 
 :::warning `设置面板` 请参考以下地址
 
-[/start/setting.html](/start/setting.html)
+[/component/setting.html](/component/setting.html)
 
 :::
 
@@ -714,7 +714,7 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)-   Type:
+[/component/contextmenu.html](/component/contextmenu.html)-   Type:
 
 :::
 
@@ -749,7 +749,7 @@ var art = new Artplayer({
 
 :::warning `组件配置` 请参考以下地址：
 
-[/start/component.html](/start/component.html)
+[/component/controls.html](/component/controls.html)
 
 :::
 
@@ -928,13 +928,14 @@ var art = new Artplayer({
 
 设置视频的字幕，支持字幕格式：`vtt`, `srt`, `ass`
 
-| 属性       | 类型      | 描述                                |
-| ---------- | --------- | ----------------------------------- |
-| `url`      | `String`  | 字幕地址                            |
-| `type`     | `String`  | 字幕类型，可选 `vtt`, `srt`, `ass`  |
-| `style`    | `Object`  | 字幕样式                            |
-| `encoding` | `String`  | 字幕编码，默认 `utf-8`              |
-| `escape`   | `Boolean` | 是否转义 `html` 标签，默认为 `true` |
+| 属性        | 类型       | 描述                                |
+| ----------- | ---------- | ----------------------------------- |
+| `url`       | `String`   | 字幕地址                            |
+| `type`      | `String`   | 字幕类型，可选 `vtt`, `srt`, `ass`  |
+| `style`     | `Object`   | 字幕样式                            |
+| `encoding`  | `String`   | 字幕编码，默认 `utf-8`              |
+| `escape`    | `Boolean`  | 是否转义 `html` 标签，默认为 `true` |
+| `onVttLoad` | `Function` | 用于修改 `vtt` 文本的函数           |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1212,3 +1213,28 @@ var art = new Artplayer({
     airplay: true,
 });
 ```
+
+## `cssVar`
+
+-   Type: `Object`
+-   Default: `{}`
+
+用于改变内置的css变量
+
+<div className="run-code">▶ Run Code</div>
+
+```js{4}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    cssVar: {
+        //
+    },
+});
+```
+
+:::warning cssVar 写法参考
+
+[artplayer/types/cssVar.d.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
+
+:::

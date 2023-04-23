@@ -209,7 +209,7 @@ function artplayerPluginHlsQuality(option) {
 exports.default = artplayerPluginHlsQuality;
 artplayerPluginHlsQuality.env = "development";
 artplayerPluginHlsQuality.version = "1.0.2";
-artplayerPluginHlsQuality.build = "2023-04-22 23:57:31";
+artplayerPluginHlsQuality.build = "2023-04-23 09:44:07";
 if (typeof window !== "undefined") window["artplayerPluginHlsQuality"] = artplayerPluginHlsQuality;
 
 },{"bundle-text:./image.svg":"1HFaU","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1HFaU":[function(require,module,exports) {

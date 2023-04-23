@@ -153,11 +153,12 @@ declare class Artplayer extends Player {
     readonly mask: Component;
 
     readonly setting: {
-        option: Setting[];
-        add(setting: Setting): SettingOption[];
-        update(settings: Setting[]): SettingOption[];
+        option: SettingOption[];
         updateStyle(width?: number): void;
-        remove(): void;
+        find(name: string): SettingOption;
+        add(setting: Setting): SettingOption[];
+        update(settings: Setting): SettingOption[];
+        remove(name: string): SettingOption[];
     } & Component;
 
     readonly plugins: {

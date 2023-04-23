@@ -630,7 +630,7 @@ var art = new Artplayer({
 
 :::warning Please refer to the following address for `Component`:
 
-[/start/component.html](/start/component.html)
+[/component/layers.html](/component/layers.html)
 
 :::
 
@@ -683,7 +683,7 @@ var art = new Artplayer({
 
 :::warning Please refer to the following address for `Setting`
 
-[/start/setting.html](/start/setting.html)
+[/component/setting.html](/component/setting.html)
 
 :::
 
@@ -714,7 +714,7 @@ var art = new Artplayer({
 
 :::warning Please refer to the following address for `Component`:
 
-[/start/component.html](/start/component.html)
+[/component/contextmenu.html](/component/contextmenu.html)
 
 :::
 
@@ -749,7 +749,7 @@ var art = new Artplayer({
 
 :::warning Please refer to the following address for `Setting`
 
-[/start/setting.html](/start/setting.html)
+[/component/controls.html](/component/controls.html)
 
 :::
 
@@ -928,13 +928,14 @@ var art = new Artplayer({
 
 Set the subtitle of the video and support the subtitle format: `vtt`, `srt`, `ass`
 
-| Property   | Type      | Describe                                         |
-| ---------- | --------- | ------------------------------------------------ |
-| `url`      | `String`  | Subtitle url                                     |
-| `type`     | `String`  | Subtitle type: `vtt`, `srt`, `ass`               |
-| `style`    | `Object`  | Subtitle style                                   |
-| `encoding` | `String`  | Subtitle code, Default: `utf-8`                  |
-| `escape`   | `Boolean` | Whether to escape the `html` tag,Default: `true` |
+| Property    | Type       | Describe                                         |
+| ----------- | ---------- | ------------------------------------------------ |
+| `url`       | `String`   | Subtitle url                                     |
+| `type`      | `String`   | Subtitle type: `vtt`, `srt`, `ass`               |
+| `style`     | `Object`   | Subtitle style                                   |
+| `encoding`  | `String`   | Subtitle code, Default: `utf-8`                  |
+| `escape`    | `Boolean`  | Whether to escape the `html` tag,Default: `true` |
+| `onVttLoad` | `Function` | Functions for modifying `vtt` text               |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1212,3 +1213,28 @@ var art = new Artplayer({
     airplay: true,
 });
 ```
+
+## `cssVar`
+
+-   Type: `Object`
+-   Default: `{}`
+
+Used to change built-in CSS variables
+
+<div className="run-code">▶ Run Code</div>
+
+```js{4}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    cssVar: {
+        //
+    },
+});
+```
+
+:::warning cssVar definitions
+
+[artplayer/types/cssVar.d.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
+
+:::

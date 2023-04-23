@@ -3,6 +3,7 @@ export default function subtitleOffset(art) {
 
     return {
         width: constructor.SETTING_ITEM_WIDTH,
+        name: 'subtitle-offset',
         html: i18n.get('Subtitle Offset'),
         icon: icons.subtitle,
         tooltip: '0s',

@@ -15,12 +15,14 @@ export default function flip(art) {
 
     return {
         width: SETTING_ITEM_WIDTH,
+        name: 'flip',
         html: i18n.get('Video Flip'),
         tooltip: i18n.get(capitalize(art.flip)),
         icon: icons.flip,
         selector: FLIP.map((item) => {
             return {
                 value: item,
+                name: `aspect-ratio-${item}`,
                 default: item === art.flip,
                 html: i18n.get(capitalize(item)),
             };
