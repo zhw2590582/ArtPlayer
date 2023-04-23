@@ -6,7 +6,7 @@
     ▶ Run Code
 </div>
 
-```js{19-22,26}
+```js{19,24}
 function playFlv(video, url, art) {
     if (flvjs.isSupported()) {
         if (art.flv) art.flv.destroy();
