@@ -21,11 +21,11 @@ var art = new Artplayer({
     customType: {
         mpd: function playMpd(video, url, art) {
             if (dashjs.supportsMediaSource()) {
+                if (art.dash) art.dash.destroy();
                 const dash = dashjs.MediaPlayer().create();
                 dash.initialize(video, url, art.option.autoplay);
                 art.dash = dash; 
-                art.once('url', () => dash.destroy());
-                art.once('destroy', () => dash.destroy());
+                art.on('destroy', () => dash.destroy());
             } else {
                 art.notice.show = 'Unsupported playback format: mpd';
             }

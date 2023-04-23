@@ -169,7 +169,7 @@ function artplayerPluginDashQuality(option) {
                     }
                 }
             };
-            if (option.control) art.controls.add({
+            if (option.control) art.controls.update({
                 name: "dash-quality",
                 position: "right",
                 html: defaultHtml,
@@ -190,7 +190,7 @@ function artplayerPluginDashQuality(option) {
                     return item.html;
                 }
             });
-            if (option.setting) art.setting.add({
+            if (option.setting) art.setting.update({
                 name: "dash-quality",
                 tooltip: defaultHtml,
                 html: title,
@@ -212,6 +212,7 @@ function artplayerPluginDashQuality(option) {
             });
         }
         art.on("ready", update);
+        art.on("restart", update);
         return {
             name: "artplayerPluginDashQuality"
         };
@@ -219,8 +220,8 @@ function artplayerPluginDashQuality(option) {
 }
 exports.default = artplayerPluginDashQuality;
 artplayerPluginDashQuality.env = "development";
-artplayerPluginDashQuality.version = "1.0.1";
-artplayerPluginDashQuality.build = "2023-02-18 12:24:09";
+artplayerPluginDashQuality.version = "2.0.0";
+artplayerPluginDashQuality.build = "2023-04-23 09:50:27";
 if (typeof window !== "undefined") window["artplayerPluginDashQuality"] = artplayerPluginDashQuality;
 
 },{"bundle-text:./image.svg":"78FlN","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"78FlN":[function(require,module,exports) {

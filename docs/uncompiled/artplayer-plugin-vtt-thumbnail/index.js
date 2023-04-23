@@ -196,7 +196,7 @@ function artplayerPluginVttThumbnail(option) {
 exports.default = artplayerPluginVttThumbnail;
 artplayerPluginVttThumbnail.env = "development";
 artplayerPluginVttThumbnail.version = "1.0.0";
-artplayerPluginVttThumbnail.build = "2023-01-15 10:25:17";
+artplayerPluginVttThumbnail.build = "2023-04-23 09:57:46";
 if (typeof window !== "undefined") window["artplayerPluginVttThumbnail"] = artplayerPluginVttThumbnail;
 
 },{"./getVttArray":"gSM1I","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gSM1I":[function(require,module,exports) {
