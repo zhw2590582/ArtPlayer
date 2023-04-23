@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   重写了音量控制器
 -   修复在移动端下，进度拖动的角度不正确的问题
 -   重写了 `mini` 模式，现在这个模式下，视频会脱离原来的容器
 -   全部组件（层，控制器，右键菜单，设置面板）支持动态删除和动态更新
