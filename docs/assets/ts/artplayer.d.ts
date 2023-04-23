@@ -76,10 +76,8 @@ export type Template = {
     readonly $info: HTMLDivElement;
     readonly $infoPanel: HTMLDivElement;
     readonly $infoClose: HTMLDivElement;
-    readonly $miniHeader: HTMLDivElement;
-    readonly $miniTitle: HTMLDivElement;
-    readonly $miniClose: HTMLDivElement;
     readonly $contextmenu: HTMLDivElement;
+    readonly $mini: HTMLDivElement;
 };
 
 export type Subtitle = {
@@ -205,14 +203,18 @@ export type Setting = {
     [key: string]: any;
 };
 
-export type AspectRatio = 'default' | '4:3' | '16:9' | (string & Record<never, never>);
+
+
+export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>);
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>);
 export type Flip = 'normal' | 'horizontal' | 'vertical' | (string & Record<never, never>);
+export type State = 'standard' | 'mini' | 'pip' | 'fullscreen' | 'fullscreenWeb';
 
 export declare class Player {
     get aspectRatio(): AspectRatio;
     set aspectRatio(ratio: AspectRatio);
-    set aspectRatioReset(state: boolean);
+    get state(): State;
+    set state(state: State);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
     get autoSize(): boolean;
@@ -270,13 +272,14 @@ export declare class Player {
     play(): Promise<void>;
     toggle(): void;
     attr(key: string, value?: any): unknown;
-    cssVar(key: `--art-${string}`, value?: string): unknown;
+    cssVar<T extends keyof CssVar>(key: T, value?: CssVar[T]): CssVar[T];
     switchUrl(url: string): Promise<string>;
     switchQuality(url: string): Promise<string>;
     getDataURL(): Promise<string>;
     getBlobUrl(): Promise<string>;
     screenshot(): Promise<string>;
     airplay(): void;
+    aspectRatioReset(state: boolean): void;
 }
 
 
@@ -587,7 +590,7 @@ export type Option = {
     /**
      * Custom css variables
      */
-    cssVar?: CssVar;
+    cssVar?: Partial<CssVar>;
 
     /**
      * Custom video type function
@@ -630,7 +633,18 @@ export type Icons = {
     readonly [key: string]: HTMLDivElement;
 };
 
-type I18nKeys = 'en' | 'zh-cn' | 'zh-tw' | 'pl' | 'cs' | 'es' | 'fa' | 'fr' | `id` | (string & Record<never, never>);
+type I18nKeys =
+    | 'en'
+    | 'zh-cn'
+    | 'zh-tw'
+    | 'pl'
+    | 'cs'
+    | 'es'
+    | 'fa'
+    | 'fr'
+    | `id`
+    | `ru`
+    | (string & Record<never, never>);
 
 type I18nValue = {
     'Video Info': string;
@@ -709,7 +723,6 @@ export type Events = {
     setting: [state: boolean];
     hotkey: [event: Event];
     destroy: [];
-    url: [url: string];
     subtitleUpdate: [text: string];
     subtitleLoad: [url: string];
     subtitleSwitch: [url: string];
@@ -769,6 +782,7 @@ export type CssVar = {
     '--art-volume-height': string;
     '--art-volume-handle-size': string;
     '--art-lock-size': string;
+    '--art-indicator-scale': number;
     '--art-indicator-size': string;
     '--art-fullscreen-web-index': 9999;
     '--art-settings-scale': number;
@@ -1035,10 +1049,14 @@ declare class Artplayer extends Player {
     static SCROLL_GAP: number;
     static AUTO_PLAYBACK_MAX: number;
     static AUTO_PLAYBACK_MIN: number;
+    static AUTO_PLAYBACK_TIMEOUT: number;
     static RECONNECT_TIME_MAX: number;
     static RECONNECT_SLEEP_TIME: number;
     static CONTROL_HIDE_TIME: number;
-    static DB_CLICE_TIME: number;
+    static DBCLICK_TIME: number;
+    static DBCLICK_FULLSCREEN: boolean;
+    static MOBILE_DBCLICK_PLAY: boolean;
+    static MOBILE_CLICK_PLAY: boolean;
     static MOBILE_AUTO_PLAYBACKRAT: number;
     static MOBILE_AUTO_PLAYBACKRATE_TIME: number;
     static MOBILE_AUTO_ORIENTATION_TIME: number;
@@ -1114,7 +1132,7 @@ declare class Artplayer extends Player {
     };
 
     readonly notice: {
-        time: number;
+        timer: number;
         set show(msg: string);
     };
 
@@ -1138,15 +1156,18 @@ declare class Artplayer extends Player {
     readonly hotkey: {
         keys: Record<string, ((event: Event) => any)[]>;
         add(key: number, callback: (this: Artplayer, event: Event) => any): Artplayer['hotkey'];
+        remove(key: number, callback: Function): Artplayer['hotkey'];
     };
 
     readonly mask: Component;
 
     readonly setting: {
-        option: Setting[];
-        add(setting: Setting): SettingOption;
-        update(settings: Setting[]): SettingOption[];
+        option: SettingOption[];
         updateStyle(width?: number): void;
+        find(name: string): SettingOption;
+        add(setting: Setting): SettingOption[];
+        update(settings: Setting): SettingOption[];
+        remove(name: string): SettingOption[];
     } & Component;
 
     readonly plugins: {
