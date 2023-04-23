@@ -77,7 +77,6 @@ const config = {
             { text: 'hls.js', link: '/library/hls' },
             { text: 'flv.js', link: '/library/flv' },
             { text: 'dash.js', link: '/library/dash' },
-            { text: 'webtorrent.js', link: '/library/webtorrent' },
           ]
         },
       ],
