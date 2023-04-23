@@ -201,7 +201,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         super();
         this.id = ++id;
         const mergeOption = _utils.mergeDeep(Artplayer.option, option);
-        if (option.container instanceof Element) mergeOption.container = option.container;
+        mergeOption.container = option.container;
         this.option = (0, _optionValidatorDefault.default)(mergeOption, (0, _schemeDefault.default));
         this.isLock = false;
         this.isReady = false;
