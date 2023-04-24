@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.0.2] - 2023-4-24
+
+-   修复控制栏位置的样式兼容问题
+
 ## [5.0.1] - 2023-4-24
 
 -   修复网页全屏的样式错误
