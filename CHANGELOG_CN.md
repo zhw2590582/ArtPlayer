@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.0.1] - 2023-4-24
+
+-   修复网页全屏的样式错误
+-   修改内置设置项的文本错误
+
 ## [5.0.0] - 2023-4-23
 
 -   重写了音量控制器
