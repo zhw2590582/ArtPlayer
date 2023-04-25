@@ -111,9 +111,11 @@ export default function eventInit(art) {
         art.mask.show = false;
     });
 
-    // art.on('video:progress', () => {
-
-    // });
+    art.on('video:progress', () => {
+        if (art.playing) {
+            art.loading.show = false;
+        }
+    });
 
     // art.on('video:ratechange', () => {
 

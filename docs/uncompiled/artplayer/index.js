@@ -249,7 +249,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-24 22:47:05";
+        return "2023-04-25 21:53:08";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2780,8 +2780,9 @@ function eventInit(art) {
     art.on("video:playing", ()=>{
         art.mask.show = false;
     });
-    // art.on('video:progress', () => {
-    // });
+    art.on("video:progress", ()=>{
+        if (art.playing) art.loading.show = false;
+    });
     // art.on('video:ratechange', () => {
     // });
     art.on("video:seeked", ()=>{
