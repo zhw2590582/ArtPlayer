@@ -26,7 +26,7 @@ async function build(name, targetName) {
             sourceMap: false,
             outputFormat: 'global',
             engines: {
-                browsers: '> 0.5%, last 2 versions, not dead',
+                browsers: 'IE 11',
             },
         },
     };
