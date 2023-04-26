@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.0.3] - 2023-4-26
+
+修改构建配置，`artplayer.legacy.js` 可以兼容到 `IE 11`
+
 ## [5.0.2] - 2023-4-24
 
 -   修复控制栏位置的样式兼容问题

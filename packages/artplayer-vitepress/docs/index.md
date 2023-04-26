@@ -268,3 +268,31 @@ export default {
   }
 }
 ```
+
+## 古老的浏览器
+
+生产构建的 `artplayer.js` 只兼容最新一个主版本的 `Chrome`：`last 1 Chrome version`
+
+对于古老的浏览器，可以使用 `artplayer.legacy.js` 文件，可以兼容到：`IE 11`
+
+```js
+import Artplayer from 'artplayer/dist/artplayer.legacy.js';
+```
+
+::: code-group
+
+```bash [jsdelivr.net]
+https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.legacy.js
+```
+
+```bash [unpkg.com]
+https://unpkg.com/artplayer/dist/artplayer.legacy.js
+```
+
+:::
+
+假如你要兼容更古老的浏览器时，请修改以下配置然后自行构建：
+
+构建配置：[scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
+
+参考文档：[browserslist](https://github.com/browserslist/browserslist#full-list)

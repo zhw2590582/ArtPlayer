@@ -120,7 +120,7 @@ export default class Setting extends Component {
     remove(name) {
         const item = this.find(name);
         errorHandle(item, `Can't find [${name}] from the [setting]`);
-        const parent = item.$parentItem ? item.$parentItem.selector : this.option;
+        const parent = item.$parentItem?.selector || this.option;
         parent.splice(parent.indexOf(item), 1);
         this.option = Setting.makeRecursion(this.option);
         this.destroy();

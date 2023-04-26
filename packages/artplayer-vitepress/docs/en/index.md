@@ -272,3 +272,31 @@ export default {
   }
 }
 ```
+
+## Old browsers
+
+Production builds of `artplayer.js` are only compatible with the last major version of `Chrome`: `last 1 Chrome version`
+
+For older browsers, use the `artplayer.legacy.js` file, compatible up to: `IE 11`
+
+```js
+import Artplayer from 'artplayer/dist/artplayer.legacy.js';
+```
+
+::: code-group
+
+```bash [jsdelivr.net]
+https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.legacy.js
+```
+
+```bash [unpkg.com]
+https://unpkg.com/artplayer/dist/artplayer.legacy.js
+```
+
+:::
+
+If you want to be compatible with older browsers, please modify the following configuration and build it yourself:
+
+Build configuration: [/scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
+
+Reference documents: [browserslist](https://github.com/browserslist/browserslist#full-list)
