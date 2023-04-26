@@ -249,7 +249,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-25 21:53:08";
+        return "2023-04-26 08:58:57";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -4655,7 +4655,7 @@ class Setting extends (0, _componentDefault.default) {
     remove(name) {
         const item = this.find(name);
         (0, _error.errorHandle)(item, `Can't find [${name}] from the [setting]`);
-        const parent = item.$parentItem?.selector || this.option;
+        const parent = item.$parentItem ? item.$parentItem.selector : this.option;
         parent.splice(parent.indexOf(item), 1);
         this.option = Setting.makeRecursion(this.option);
         this.destroy();
