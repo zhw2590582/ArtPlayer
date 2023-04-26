@@ -249,7 +249,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-04-26 10:26:26";
+        return "2023-04-26 11:04:27";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3217,7 +3217,7 @@ var _utils = require("../utils");
 function getPosFromEvent(art, event) {
     const { $progress  } = art.template;
     const { left  } = $progress.getBoundingClientRect();
-    const eventLeft = (0, _utils.isMobile) ? event.touches[0].clientX : event.pageX;
+    const eventLeft = (0, _utils.isMobile) ? event.touches[0].clientX : event.clientX;
     const width = (0, _utils.clamp)(eventLeft - left, 0, $progress.clientWidth);
     const second = width / $progress.clientWidth * art.duration;
     const time = (0, _utils.secondToTime)(second);
@@ -3401,7 +3401,7 @@ function volume(option) {
                 const $indicator = (0, _utils.append)($slider, `<div class="art-volume-indicator"></div>`);
                 function getVolumeFromEvent(event) {
                     const { top , height  } = $slider.getBoundingClientRect();
-                    return 1 - (event.pageY - top) / height;
+                    return 1 - (event.clientY - top) / height;
                 }
                 function update() {
                     if (art.muted || art.volume === 0) {

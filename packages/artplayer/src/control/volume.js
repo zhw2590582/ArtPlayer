@@ -18,7 +18,7 @@ export default function volume(option) {
 
             function getVolumeFromEvent(event) {
                 const { top, height } = $slider.getBoundingClientRect();
-                return 1 - (event.pageY - top) / height;
+                return 1 - (event.clientY - top) / height;
             }
 
             function update() {

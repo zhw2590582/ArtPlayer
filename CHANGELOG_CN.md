@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [5.0.3] - 2023-4-26
 
-修改构建配置，`artplayer.legacy.js` 可以兼容到 `IE 11`
+-   修复音量控制器 `event.pageY` 取值错误
+-   修改构建配置，`artplayer.legacy.js` 可以兼容到 `IE 11`
 
 ## [5.0.2] - 2023-4-24
 
