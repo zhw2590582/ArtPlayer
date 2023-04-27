@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.0.4] - 2023-4-27
+
+-   修复控制器的上拉列表的样式 bug
+
 ## [5.0.3] - 2023-4-26
 
 -   修复音量控制器 `event.pageY` 取值错误
