@@ -1059,7 +1059,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `navigator.language.toLowerCase()`
 
-The default display language currently supports: `en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`, `fr`, `id`
+The default display language currently supports: `en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`, `fr`, `id`, `ru`
 
 <div className="run-code">▶ Run Code</div>
 

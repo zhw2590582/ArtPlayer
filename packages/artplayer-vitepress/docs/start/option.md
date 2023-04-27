@@ -1059,7 +1059,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `navigator.language.toLowerCase()`
 
-默认显示语言，目前支持：`en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`, `fr`, `id`
+默认显示语言，目前支持：`en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`, `fr`, `id`, `ru`
 
 <div className="run-code">▶ Run Code</div>
 
