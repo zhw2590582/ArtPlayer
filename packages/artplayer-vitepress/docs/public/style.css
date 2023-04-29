@@ -1,4 +1,4 @@
-.run-code {
+.run-code, [classname="run-code"] {
     display: inline-block;
     padding: 3px 7px;
     color: #fff;
