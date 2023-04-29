@@ -2,7 +2,7 @@
 
 ## 内置
 
-需先打开设置面板，然后自带四个内置项：`flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
+须先打开设置面板，然后自带四个内置项：`flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
 
 <div className="run-code">▶ Run Code</div>
 

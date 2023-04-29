@@ -54,6 +54,7 @@ const config = {
             { text: '实例属性', link: '/advanced/property' },
             { text: '高级属性', link: '/advanced/built-in' },
             { text: '静态属性', link: '/advanced/class' },
+            { text: '全局属性', link: '/advanced/global' },
             { text: '实例事件', link: '/advanced/event' },
             { text: '编写插件', link: '/advanced/plugin' },
           ]
@@ -106,6 +107,7 @@ const config = {
             { text: 'Instance Property', link: '/en/advanced/property' },
             { text: 'Advanced Property', link: '/en/advanced/built-in' },
             { text: 'Static Property', link: '/en/advanced/class' },
+            { text: 'Global Property', link: '/en/advanced/global' },
             { text: 'Instance Event', link: '/en/advanced/event' },
             { text: 'Writing Plugin', link: '/en/advanced/plugin' },
           ]
