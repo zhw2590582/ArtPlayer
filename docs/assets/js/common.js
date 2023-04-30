@@ -6,7 +6,7 @@
     var isIE = /MSIE|Trident/.test(userAgent);
 
     if (isMobile || isIE) {
-        window.location.href = './mobile.html';
+        window.location.href = './mobile.html' + location.search;
         return;
     }
 
