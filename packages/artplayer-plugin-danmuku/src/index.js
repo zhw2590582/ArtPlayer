@@ -1,5 +1,6 @@
 import Danmuku from './danmuku';
 import setting from './setting';
+import heatmap from './heatmap';
 
 function checkVersion(art) {
     const {
@@ -17,6 +18,7 @@ export default function artplayerPluginDanmuku(option) {
         checkVersion(art);
         const danmuku = new Danmuku(art, option);
         setting(art, danmuku);
+        if (option.heatmap) heatmap(art, danmuku);
         return {
             name: 'artplayerPluginDanmuku',
             emit: danmuku.emit.bind(danmuku),
