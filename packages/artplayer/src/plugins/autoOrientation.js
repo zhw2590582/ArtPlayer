@@ -23,7 +23,7 @@ export default function autoOrientation(art) {
                     addClass($player, 'art-auto-orientation');
                     art.isRotate = true;
                     art.emit('resize');
-                }, constructor.MOBILE_AUTO_ORIENTATION_TIME);
+                }, constructor.AUTO_ORIENTATION_TIME);
             }
         } else {
             if (hasClass($player, 'art-auto-orientation')) {

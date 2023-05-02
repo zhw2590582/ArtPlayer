@@ -48,9 +48,7 @@ declare class Artplayer extends Player {
     static DBCLICK_FULLSCREEN: boolean;
     static MOBILE_DBCLICK_PLAY: boolean;
     static MOBILE_CLICK_PLAY: boolean;
-    static MOBILE_AUTO_PLAYBACKRAT: number;
-    static MOBILE_AUTO_PLAYBACKRATE_TIME: number;
-    static MOBILE_AUTO_ORIENTATION_TIME: number;
+    static AUTO_ORIENTATION_TIME: number;
     static INFO_LOOP_TIME: number;
     static FAST_FORWARD_VALUE: number;
     static FAST_FORWARD_TIME: number;
