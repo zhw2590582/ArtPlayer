@@ -230,13 +230,37 @@ export default App;
 
 :::
 
-## 语法提示
+## TypeScript
+
+导入 `Artplayer` 时会自动导入的 `artplayer.d.ts`，但你也可以单独导入选项的类型
+
+```ts{2}
+import Artplayer from 'artplayer';
+import { type Option } from 'artplayer/types/option';
+
+const option: Option = {
+    container: '.artplayer-app',
+    url: './assets/sample/video.mp4',
+};
+
+option.volume = 0.5;
+
+const art = new Artplayer(option);
+```
+
+::: tip 全部 TypeScript 定义
+
+[packages/artplayer/types](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer/types)
+
+:::
+
+## JavaScript
 
 有时你的 `js` 文件会丢失 `TypeScript` 的类型提示，这时候你可以手动导入类型 
 
 变量：
 
-```js
+```js{1-3}
 /**
  * @type {import("artplayer")}
  */
@@ -245,7 +269,7 @@ let art = null;
 
 参数：
 
-```js
+```js{1-3}
 /**
  * @param {import("artplayer")} art
  */
@@ -256,7 +280,7 @@ function getInstance(art) {
 
 属性：
 
-```js
+```js{4-6}
 export default {
   data() {
     return {
@@ -267,6 +291,23 @@ export default {
     }
   }
 }
+```
+
+选项：
+
+```js{1-3}
+/**
+ * @type {import("artplayer/types/option").Option}
+ */
+
+const option = {
+    container: '.artplayer-app',
+    url: './assets/sample/video.mp4',
+};
+
+option.volume = 0.5;
+
+const art8 = new Artplayer(option);
 ```
 
 ## 古老的浏览器
@@ -291,8 +332,11 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 :::
 
-假如你要兼容更古老的浏览器时，请修改以下配置然后自行构建：
+::: tip 假如你要兼容更古老的浏览器时，请修改以下配置然后自行构建：
 
 构建配置：[scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
 
 参考文档：[browserslist](https://github.com/browserslist/browserslist#full-list)
+
+:::
+

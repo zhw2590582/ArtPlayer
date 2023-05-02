@@ -60,3 +60,18 @@ function getInstance(art6) {
 function getInstance(art7) {
     //
 }
+
+// ======================== @option ==========================
+
+/**
+ * @type {import("artplayer/types/option").Option}
+ */
+
+const option = {
+    container: '.artplayer-app',
+    url: './assets/sample/video.mp4',
+};
+
+option.volume = 0.5;
+
+const art8 = new Artplayer(option);

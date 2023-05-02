@@ -63,7 +63,7 @@ export type ComponentOption = {
     /**
      * Html string or html element of component
      */
-    html: string | HTMLElement;
+    html?: string | HTMLElement;
 
     /**
      * Whether to disable component

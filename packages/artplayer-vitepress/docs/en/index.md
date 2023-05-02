@@ -234,13 +234,38 @@ Modifying `option` directly in `React.js` will not change the player
 
 :::
 
-## Syntax hint
+## TypeScript
+
+The `artplayer.d.ts` that is automatically imported when importing `Artplayer`, but you can also import the type of options individually
+
+```ts{2}
+import Artplayer from 'artplayer';
+import { type Option } from 'artplayer/types/option';
+
+const option: Option = {
+    container: '.artplayer-app',
+    url: './assets/sample/video.mp4',
+};
+
+option.volume = 0.5;
+
+const art = new Artplayer(option);
+```
+
+::: tip All TypeScript definitions
+
+[packages/artplayer/types](https://github.com/zhw2590582/ArtPlayer/tree/master/packages/artplayer/types)
+
+:::
+
+
+## JavaScript
 
 Sometimes your `js` file will lose the type prompt of `TypeScript`. At this time, you can manually import the type
 
 Variable:
 
-```js
+```js{1-3}
 /**
  * @type {import("artplayer")}
  */
@@ -249,7 +274,7 @@ let art = null;
 
 Parameters:
 
-```js
+```js{1-3}
 /**
  * @param {import("artplayer")} art
  */
@@ -260,7 +285,7 @@ function getInstance(art) {
 
 Properties:
 
-```js
+```js{4-6}
 export default {
   data() {
     return {
@@ -271,6 +296,23 @@ export default {
     }
   }
 }
+```
+
+Option:
+
+```js{1-3}
+/**
+ * @type {import("artplayer/types/option").Option}
+ */
+
+const option = {
+    container: '.artplayer-app',
+    url: './assets/sample/video.mp4',
+};
+
+option.volume = 0.5;
+
+const art8 = new Artplayer(option);
 ```
 
 ## Old browsers
@@ -295,8 +337,11 @@ https://unpkg.com/artplayer/dist/artplayer.legacy.js
 
 :::
 
-If you want to be compatible with older browsers, please modify the following configuration and build it yourself:
+::: tip If you want to be compatible with older browsers, please modify the following configuration and build it yourself:
 
 Build configuration: [/scripts/build.js](https://github.com/zhw2590582/ArtPlayer/blob/master/scripts/build.js#L29)
 
 Reference documents: [browserslist](https://github.com/browserslist/browserslist#full-list)
+
+:::
+
