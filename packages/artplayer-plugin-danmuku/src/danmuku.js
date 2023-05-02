@@ -506,8 +506,7 @@ export default class Danmuku {
         this.art.off('video:playing', this.start);
         this.art.off('video:pause', this.stop);
         this.art.off('video:waiting', this.stop);
-        this.art.off('fullscreen', this.reset);
-        this.art.off('fullscreenWeb', this.reset);
+        this.art.off('resize', this.reset);
         this.art.off('destroy', this.destroy);
         this.art.emit('artplayerPluginDanmuku:destroy');
     }

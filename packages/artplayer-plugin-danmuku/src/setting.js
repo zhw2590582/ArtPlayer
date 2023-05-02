@@ -9,6 +9,7 @@ export default function setting(art, danmuku) {
     const {
         template: { $controlsCenter, $player },
         constructor: {
+            SETTING_ITEM_WIDTH,
             utils: { removeClass, addClass, append, setStyle, tooltip, query, inverseClass, getIcon },
         },
     } = art;
@@ -198,20 +199,30 @@ export default function setting(art, danmuku) {
                 append($ref, $danmuOff);
                 tooltip($ref, '弹幕开关');
                 setStyle($danmuOff, 'display', 'none');
+
+                art.on('artplayerPluginDanmuku:hide', () => {
+                    setStyle($danmuOn, 'display', 'none');
+                    setStyle($danmuOff, 'display', null);
+                });
+
+                art.on('artplayerPluginDanmuku:show', () => {
+                    setStyle($danmuOn, 'display', null);
+                    setStyle($danmuOff, 'display', 'none');
+                });
             },
         });
     }
 
     function addSetting() {
         art.setting.add({
-            width: 270,
+            width: 260,
             name: 'danmuku',
             html: '弹幕设置',
             tooltip: '更多',
             icon: $danmuConfig,
             selector: [
                 {
-                    width: 200,
+                    width: SETTING_ITEM_WIDTH,
                     html: '播放速度',
                     icon: '',
                     tooltip: '适中',
@@ -246,7 +257,7 @@ export default function setting(art, danmuku) {
                     },
                 },
                 {
-                    width: 200,
+                    width: SETTING_ITEM_WIDTH,
                     html: '字体大小',
                     icon: '',
                     tooltip: '适中',
@@ -281,7 +292,7 @@ export default function setting(art, danmuku) {
                     },
                 },
                 {
-                    width: 200,
+                    width: SETTING_ITEM_WIDTH,
                     html: '不透明度',
                     icon: '',
                     tooltip: '100%',
@@ -316,7 +327,7 @@ export default function setting(art, danmuku) {
                     },
                 },
                 {
-                    width: 200,
+                    width: SETTING_ITEM_WIDTH,
                     html: '显示范围',
                     icon: '',
                     tooltip: '3/4',

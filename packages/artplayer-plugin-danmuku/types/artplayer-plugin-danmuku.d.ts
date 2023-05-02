@@ -117,6 +117,11 @@ type Option = {
     theme?: 'dark' | 'light';
 
     /**
+     * 是否开启弹幕热度图
+     */
+    heatmap?: boolean;
+
+    /**
      * 发送弹幕前的自定义校验，返回 true 则可以发送
      */
     beforeEmit?: (danmu: Danmu) => boolean;

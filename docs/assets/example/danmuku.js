@@ -24,8 +24,8 @@ var art = new Artplayer({
             lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
             maxLength: 100, // 输入框最大可输入的字数，范围在[0 ~ 500]
             minWidth: 200, // 输入框最小宽度，范围在[0 ~ 500]，填 0 则为无限制
-            maxWidth: 400, // 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则为 100% 宽度
-            theme: 'dark', // 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light
+            maxWidth: 600, // 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则为 100% 宽度
+            theme: 'light', // 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light
             heatmap: true, // 是否开启弹幕热度图
             beforeEmit: (danmu) => !!danmu.text.trim(), // 发送弹幕前的自定义校验，返回 true 则可以发送
 
