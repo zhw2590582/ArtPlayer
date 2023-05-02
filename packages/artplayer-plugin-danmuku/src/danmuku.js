@@ -11,6 +11,7 @@ export default class Danmuku {
         this.$player = template.$player;
 
         this.art = art;
+        this.danmus = [];
         this.queue = [];
         this.option = {};
         this.$refs = [];
@@ -61,6 +62,7 @@ export default class Danmuku {
             maxWidth: 400,
             mount: undefined,
             theme: 'dark',
+            heatmap: false,
             beforeEmit: () => true,
         };
     }
@@ -84,6 +86,7 @@ export default class Danmuku {
             maxWidth: 'number',
             mount: 'undefined|htmldivelement',
             theme: 'string',
+            heatmap: 'boolean',
             beforeEmit: 'function',
         };
     }
@@ -236,23 +239,22 @@ export default class Danmuku {
 
     async load() {
         try {
-            let danmus = [];
             if (typeof this.option.danmuku === 'function') {
-                danmus = await this.option.danmuku();
+                this.danmus = await this.option.danmuku();
             } else if (typeof this.option.danmuku.then === 'function') {
-                danmus = await this.option.danmuku;
+                this.danmus = await this.option.danmuku;
             } else if (typeof this.option.danmuku === 'string') {
-                danmus = await bilibiliDanmuParseFromUrl(this.option.danmuku);
+                this.danmus = await bilibiliDanmuParseFromUrl(this.option.danmuku);
             } else {
-                danmus = this.option.danmuku;
+                this.danmus = this.option.danmuku;
             }
 
-            this.utils.errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result');
-            this.art.emit('artplayerPluginDanmuku:loaded', danmus);
+            this.utils.errorHandle(Array.isArray(this.danmus), 'Danmuku need return an array as result');
+            this.art.emit('artplayerPluginDanmuku:loaded', this.danmus);
 
             this.queue = [];
             this.$danmuku.innerText = '';
-            danmus.forEach((danmu) => this.emit(danmu));
+            this.danmus.forEach((danmu) => this.emit(danmu));
         } catch (error) {
             this.art.emit('artplayerPluginDanmuku:error', error);
             throw error;

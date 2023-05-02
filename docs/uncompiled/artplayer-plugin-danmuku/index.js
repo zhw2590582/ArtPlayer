@@ -149,18 +149,21 @@ var _danmuku = require("./danmuku");
 var _danmukuDefault = parcelHelpers.interopDefault(_danmuku);
 var _setting = require("./setting");
 var _settingDefault = parcelHelpers.interopDefault(_setting);
+var _heatmap = require("./heatmap");
+var _heatmapDefault = parcelHelpers.interopDefault(_heatmap);
 function checkVersion(art) {
     const { version , utils: { errorHandle  }  } = art.constructor;
     const arr = version.split(".").map(Number);
     const major = arr[0];
     const minor = arr[1] / 100;
-    errorHandle(major + minor >= 5, `Artplayer.js@${version} 不兼容该弹幕库，请更新到 5 版本以上`);
+    errorHandle(major + minor >= 5, `Artplayer.js@${version} 不兼容该弹幕库，请更新到 Artplayer.js@5.x.x 版本以上`);
 }
 function artplayerPluginDanmuku(option) {
     return (art)=>{
         checkVersion(art);
         const danmuku = new (0, _danmukuDefault.default)(art, option);
         (0, _settingDefault.default)(art, danmuku);
+        if (option.heatmap) (0, _heatmapDefault.default)(art, danmuku);
         return {
             name: "artplayerPluginDanmuku",
             emit: danmuku.emit.bind(danmuku),
@@ -184,10 +187,10 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 artplayerPluginDanmuku.env = "development";
 artplayerPluginDanmuku.version = "5.0.0";
-artplayerPluginDanmuku.build = "2023-04-23 15:35:01";
+artplayerPluginDanmuku.build = "2023-05-02 13:14:10";
 if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerPluginDanmuku;
 
-},{"./danmuku":"cv7fe","./setting":"cI0ih","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
+},{"./danmuku":"cv7fe","./setting":"cI0ih","./heatmap":"bZziT","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _bilibili = require("./bilibili");
@@ -201,6 +204,7 @@ class Danmuku {
         this.$danmuku = template.$danmuku;
         this.$player = template.$player;
         this.art = art;
+        this.danmus = [];
         this.queue = [];
         this.option = {};
         this.$refs = [];
@@ -209,7 +213,7 @@ class Danmuku {
         this.timer = null;
         this.config(option);
         if (this.option.useWorker) try {
-            this.worker = new Worker(require("85d40535eae5f839"));
+            this.worker = new Worker(require("12ceab24749100d0"));
         } catch (error) {
         //
         }
@@ -247,6 +251,7 @@ class Danmuku {
             maxWidth: 400,
             mount: undefined,
             theme: "dark",
+            heatmap: false,
             beforeEmit: ()=>true
         };
     }
@@ -269,6 +274,7 @@ class Danmuku {
             maxWidth: "number",
             mount: "undefined|htmldivelement",
             theme: "string",
+            heatmap: "boolean",
             beforeEmit: "function"
         };
     }
@@ -385,16 +391,15 @@ class Danmuku {
     }
     async load() {
         try {
-            let danmus = [];
-            if (typeof this.option.danmuku === "function") danmus = await this.option.danmuku();
-            else if (typeof this.option.danmuku.then === "function") danmus = await this.option.danmuku;
-            else if (typeof this.option.danmuku === "string") danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(this.option.danmuku);
-            else danmus = this.option.danmuku;
-            this.utils.errorHandle(Array.isArray(danmus), "Danmuku need return an array as result");
-            this.art.emit("artplayerPluginDanmuku:loaded", danmus);
+            if (typeof this.option.danmuku === "function") this.danmus = await this.option.danmuku();
+            else if (typeof this.option.danmuku.then === "function") this.danmus = await this.option.danmuku;
+            else if (typeof this.option.danmuku === "string") this.danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(this.option.danmuku);
+            else this.danmus = this.option.danmuku;
+            this.utils.errorHandle(Array.isArray(this.danmus), "Danmuku need return an array as result");
+            this.art.emit("artplayerPluginDanmuku:loaded", this.danmus);
             this.queue = [];
             this.$danmuku.innerText = "";
-            danmus.forEach((danmu)=>this.emit(danmu));
+            this.danmus.forEach((danmu)=>this.emit(danmu));
         } catch (error) {
             this.art.emit("artplayerPluginDanmuku:error", error);
             throw error;
@@ -609,7 +614,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./bilibili":"95SuC","./getDanmuTop":"2ouQq","85d40535eae5f839":"jYsHS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
+},{"./bilibili":"95SuC","./getDanmuTop":"2ouQq","12ceab24749100d0":"jYsHS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode);
@@ -1145,17 +1150,130 @@ if (typeof document !== "undefined") {
 module.exports = ".art-danmuku-emitter {\n  height: var(--art-control-icon-size, 32px);\n  width: 100%;\n  max-width: 100%;\n  background-color: #ffffff4d;\n  border-radius: 3px;\n  font-size: 12px;\n  line-height: 1;\n  display: flex;\n  position: relative;\n}\n\n.art-danmuku-emitter .art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000b3 !important;\n}\n\n.art-danmuku-emitter .art-danmuku-left {\n  border-radius: 3px 0 0 3px;\n  flex: 1;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style {\n  width: 32px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel {\n  z-index: 999;\n  width: 200px;\n  padding-bottom: 10px;\n  display: none;\n  position: absolute;\n  bottom: 30px;\n  left: -85px;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner {\n  background-color: #000000e6;\n  border-radius: 3px;\n  flex-direction: column;\n  padding: 10px 10px 0;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-title {\n  margin-bottom: 10px;\n  font-size: 13px;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-modes {\n  justify-content: space-between;\n  margin-bottom: 15px;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-modes .art-danmuku-style-panel-mode {\n  width: 47%;\n  cursor: pointer;\n  color: #fff;\n  border: 1px solid #fff;\n  justify-content: center;\n  padding: 5px 0;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-modes .art-danmuku-style-panel-mode.art-current {\n  background-color: #00a1d6;\n  border: 1px solid #00a1d6;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors {\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 5px;\n  margin-bottom: 10px;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors .art-danmuku-style-panel-color {\n  cursor: pointer;\n  width: 20px;\n  height: 20px;\n  border: 1px solid #fff;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors .art-danmuku-style-panel-color.art-current {\n  position: relative;\n  box-shadow: 0 0 2px #fff;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors .art-danmuku-style-panel-color.art-current:before {\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  border: 2px solid #000;\n  position: absolute;\n  inset: 0;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style:hover .art-danmuku-style-panel {\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-icon {\n  opacity: .75;\n  cursor: pointer;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-icon:hover {\n  opacity: 1;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-input {\n  width: 100%;\n  color: #fff;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  flex: 1;\n  padding: 0 10px 0 0;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-input::placeholder, .art-danmuku-emitter .art-danmuku-left .art-danmuku-input::-webkit-input-placeholder {\n  color: #ffffff80;\n}\n\n.art-danmuku-emitter .art-danmuku-send {\n  width: 50px;\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-radius: 0 3px 3px 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-send:hover {\n  background-color: #00b5e5;\n}\n\n.art-danmuku-emitter .art-danmuku-send.art-disabled {\n  opacity: .5;\n  pointer-events: none;\n}\n\n.art-danmuku-emitter.art-danmuku-mount {\n  max-width: 100% !important;\n}\n\n.art-danmuku-emitter.art-danmuku-mount .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel {\n  left: 0;\n}\n\n.art-danmuku-emitter.art-danmuku-mount .art-danmuku-send {\n  width: 60px;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left {\n  background: #f4f4f4;\n  border: 1px solid #dadada;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-style .art-icon svg {\n  fill: #666;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-input {\n  color: #000;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-input::placeholder, .art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-input::-webkit-input-placeholder {\n  color: #00000080;\n}\n\n.art-layer-danmuku-emitter {\n  z-index: 99;\n  width: 100%;\n  position: absolute;\n  bottom: -40px;\n  left: 0;\n  right: 0;\n}\n\n";
 
 },{}],"qeJXh":[function(require,module,exports) {
-module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg viewBox=\"0 0 1152 1024\" width=\"22\" height=\"22\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#fff\" d=\"M311.466667 661.333333c0 4.266667-4.266667 8.533333-8.533334 12.8 0 4.266667 0 4.266667-4.266666 8.533334h-12.8c-4.266667 0-8.533333-4.266667-17.066667-8.533334-8.533333-8.533333-17.066667-8.533333-25.6-8.533333-8.533333 0-12.8 4.266667-17.066667 12.8-4.266667 12.8-8.533333 21.333333-4.266666 29.866667 4.266667 8.533333 12.8 17.066667 25.6 21.333333 17.066667 8.533333 34.133333 17.066667 46.933333 17.066667 12.8 0 21.333333-4.266667 34.133333-8.533334 8.533333-4.266667 17.066667-17.066667 25.6-29.866666 8.533333-12.8 12.8-34.133333 17.066667-55.466667 4.266667-21.333333 4.266667-51.2 4.266667-85.333333 0-12.8 0-21.333333-4.266667-29.866667 0-8.533333-4.266667-12.8-8.533333-17.066667-4.266667-4.266667-8.533333-8.533333-12.8-8.533333-4.266667 0-12.8-4.266667-21.333334-4.266667H273.066667s-4.266667-4.266667 0-8.533333l4.266666-38.4c0-4.266667 0-8.533333 4.266667-8.533333h46.933333c17.066667 0 25.6-4.266667 34.133334-12.8 8.533333-8.533333 12.8-21.333333 12.8-42.666667V324.266667c0-17.066667-4.266667-34.133333-8.533334-42.666667-12.8-12.8-25.6-17.066667-42.666666-17.066667H243.2c-8.533333 0-17.066667 0-21.333333 4.266667-4.266667 8.533333-4.266667 12.8-4.266667 25.6 0 8.533333 0 17.066667 4.266667 21.333333 4.266667 4.266667 12.8 8.533333 21.333333 8.533334h64c4.266667 0 8.533333 0 8.533333 4.266666v34.133334c0 8.533333 0 12.8-4.266666 12.8 0 0-4.266667 4.266667-8.533334 4.266666h-34.133333c-8.533333 0-12.8 0-21.333333 4.266667-4.266667 0-8.533333 4.266667-8.533334 4.266667-4.266667 4.266667-8.533333 12.8-8.533333 17.066666 0 8.533333-4.266667 17.066667-4.266667 25.6l-8.533333 72.533334v29.866666c0 8.533333 4.266667 12.8 8.533333 17.066667 4.266667 4.266667 8.533333 4.266667 17.066667 8.533333h68.266667c4.266667 0 8.533333 0 8.533333 4.266667s4.266667 8.533333 4.266667 17.066667c0 21.333333 0 42.666667-4.266667 55.466666 0 8.533333-4.266667 21.333333-8.533333 25.6zM896 486.4c-93.866667 0-174.933333 51.2-217.6 123.733333h-106.666667v-34.133333H640c21.333333 0 34.133333-4.266667 42.666667-12.8 8.533333-8.533333 12.8-21.333333 12.8-42.666667V358.4c0-21.333333-4.266667-34.133333-12.8-42.666667-8.533333-8.533333-21.333333-12.8-42.666667-12.8 0-4.266667 4.266667-4.266667 4.266667-8.533333-4.266667 0-4.266667-4.266667-4.266667-4.266667 4.266667-12.8 8.533333-21.333333 4.266667-25.6 0-8.533333-4.266667-12.8-12.8-21.333333-8.533333-4.266667-17.066667-4.266667-21.333334-4.266667-8.533333 4.266667-12.8 8.533333-21.333333 21.333334-4.266667 8.533333-8.533333 12.8-12.8 21.333333-4.266667 8.533333-8.533333 12.8-12.8 21.333333H512c-4.266667-8.533333-8.533333-17.066667-8.533333-21.333333-4.266667-8.533333-8.533333-12.8-12.8-21.333333-4.266667-12.8-12.8-17.066667-21.333334-17.066667s-17.066667 0-25.6 8.533333c-8.533333 8.533333-12.8 12.8-12.8 21.333334s0 17.066667 8.533334 25.6l4.266666 4.266666 4.266667 4.266667c-17.066667 0-29.866667 4.266667-38.4 12.8-8.533333 4.266667-12.8 21.333333-12.8 38.4v157.866667c0 21.333333 4.266667 34.133333 12.8 42.666666 8.533333 8.533333 21.333333 12.8 42.666667 12.8H512v34.133334H413.866667c-12.8 0-21.333333 0-25.6 4.266666-4.266667 4.266667-8.533333 8.533333-8.533334 21.333334v17.066666c0 4.266667 4.266667 8.533333 4.266667 8.533334 4.266667 0 4.266667 4.266667 8.533333 4.266666H512v55.466667c0 12.8 4.266667 21.333333 8.533333 25.6 4.266667 4.266667 12.8 8.533333 21.333334 8.533333 12.8 0 21.333333-4.266667 25.6-8.533333 4.266667-4.266667 4.266667-12.8 4.266666-25.6v-55.466667h81.066667c-8.533333 25.6-12.8 51.2-12.8 76.8 0 140.8 115.2 256 256 256s256-115.2 256-256-115.2-251.733333-256-251.733333z m-328.533333-128h55.466666c4.266667 0 4.266667 0 4.266667 4.266667v46.933333h-59.733333V358.4z m0 102.4h59.733333V512h-55.466667v-51.2zM512 516.266667h-55.466667V465.066667H512v51.2z m0-102.4h-59.733333V366.933333v-4.266666H512v51.2z m384 499.2c-93.866667 0-170.666667-76.8-170.666667-170.666667s76.8-170.666667 170.666667-170.666667 170.666667 76.8 170.666667 170.666667-76.8 170.666667-170.666667 170.666667z\"></path>\n<path fill=\"#fff\" d=\"M951.466667 669.866667l-72.533334 72.533333-29.866666-25.6c-17.066667-17.066667-42.666667-12.8-59.733334 4.266667-17.066667 17.066667-12.8 42.666667 4.266667 59.733333l59.733333 51.2c8.533333 8.533333 17.066667 8.533333 29.866667 8.533333 12.8 0 21.333333-4.266667 29.866667-12.8l102.4-102.4c17.066667-17.066667 17.066667-42.666667 0-59.733333-21.333333-12.8-46.933333-12.8-64 4.266667zM580.266667 878.933333H213.333333c-72.533333 0-128-55.466667-128-119.466666V230.4c0-64 55.466667-119.466667 128-119.466667h512c72.533333 0 128 55.466667 128 119.466667v140.8c0 25.6 17.066667 42.666667 42.666667 42.666667s42.666667-17.066667 42.666667-42.666667V230.4c0-115.2-93.866667-204.8-213.333334-204.8H213.333333C93.866667 25.6 0 119.466667 0 230.4v529.066667c0 115.2 93.866667 204.8 213.333333 204.8h366.933334c25.6 0 42.666667-17.066667 42.666666-42.666667s-21.333333-42.666667-42.666666-42.666667z\"></path>\n</svg>";
+module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\r\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\r\n<svg viewBox=\"0 0 1152 1024\" width=\"22\" height=\"22\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\r\n<path fill=\"#fff\" d=\"M311.466667 661.333333c0 4.266667-4.266667 8.533333-8.533334 12.8 0 4.266667 0 4.266667-4.266666 8.533334h-12.8c-4.266667 0-8.533333-4.266667-17.066667-8.533334-8.533333-8.533333-17.066667-8.533333-25.6-8.533333-8.533333 0-12.8 4.266667-17.066667 12.8-4.266667 12.8-8.533333 21.333333-4.266666 29.866667 4.266667 8.533333 12.8 17.066667 25.6 21.333333 17.066667 8.533333 34.133333 17.066667 46.933333 17.066667 12.8 0 21.333333-4.266667 34.133333-8.533334 8.533333-4.266667 17.066667-17.066667 25.6-29.866666 8.533333-12.8 12.8-34.133333 17.066667-55.466667 4.266667-21.333333 4.266667-51.2 4.266667-85.333333 0-12.8 0-21.333333-4.266667-29.866667 0-8.533333-4.266667-12.8-8.533333-17.066667-4.266667-4.266667-8.533333-8.533333-12.8-8.533333-4.266667 0-12.8-4.266667-21.333334-4.266667H273.066667s-4.266667-4.266667 0-8.533333l4.266666-38.4c0-4.266667 0-8.533333 4.266667-8.533333h46.933333c17.066667 0 25.6-4.266667 34.133334-12.8 8.533333-8.533333 12.8-21.333333 12.8-42.666667V324.266667c0-17.066667-4.266667-34.133333-8.533334-42.666667-12.8-12.8-25.6-17.066667-42.666666-17.066667H243.2c-8.533333 0-17.066667 0-21.333333 4.266667-4.266667 8.533333-4.266667 12.8-4.266667 25.6 0 8.533333 0 17.066667 4.266667 21.333333 4.266667 4.266667 12.8 8.533333 21.333333 8.533334h64c4.266667 0 8.533333 0 8.533333 4.266666v34.133334c0 8.533333 0 12.8-4.266666 12.8 0 0-4.266667 4.266667-8.533334 4.266666h-34.133333c-8.533333 0-12.8 0-21.333333 4.266667-4.266667 0-8.533333 4.266667-8.533334 4.266667-4.266667 4.266667-8.533333 12.8-8.533333 17.066666 0 8.533333-4.266667 17.066667-4.266667 25.6l-8.533333 72.533334v29.866666c0 8.533333 4.266667 12.8 8.533333 17.066667 4.266667 4.266667 8.533333 4.266667 17.066667 8.533333h68.266667c4.266667 0 8.533333 0 8.533333 4.266667s4.266667 8.533333 4.266667 17.066667c0 21.333333 0 42.666667-4.266667 55.466666 0 8.533333-4.266667 21.333333-8.533333 25.6zM896 486.4c-93.866667 0-174.933333 51.2-217.6 123.733333h-106.666667v-34.133333H640c21.333333 0 34.133333-4.266667 42.666667-12.8 8.533333-8.533333 12.8-21.333333 12.8-42.666667V358.4c0-21.333333-4.266667-34.133333-12.8-42.666667-8.533333-8.533333-21.333333-12.8-42.666667-12.8 0-4.266667 4.266667-4.266667 4.266667-8.533333-4.266667 0-4.266667-4.266667-4.266667-4.266667 4.266667-12.8 8.533333-21.333333 4.266667-25.6 0-8.533333-4.266667-12.8-12.8-21.333333-8.533333-4.266667-17.066667-4.266667-21.333334-4.266667-8.533333 4.266667-12.8 8.533333-21.333333 21.333334-4.266667 8.533333-8.533333 12.8-12.8 21.333333-4.266667 8.533333-8.533333 12.8-12.8 21.333333H512c-4.266667-8.533333-8.533333-17.066667-8.533333-21.333333-4.266667-8.533333-8.533333-12.8-12.8-21.333333-4.266667-12.8-12.8-17.066667-21.333334-17.066667s-17.066667 0-25.6 8.533333c-8.533333 8.533333-12.8 12.8-12.8 21.333334s0 17.066667 8.533334 25.6l4.266666 4.266666 4.266667 4.266667c-17.066667 0-29.866667 4.266667-38.4 12.8-8.533333 4.266667-12.8 21.333333-12.8 38.4v157.866667c0 21.333333 4.266667 34.133333 12.8 42.666666 8.533333 8.533333 21.333333 12.8 42.666667 12.8H512v34.133334H413.866667c-12.8 0-21.333333 0-25.6 4.266666-4.266667 4.266667-8.533333 8.533333-8.533334 21.333334v17.066666c0 4.266667 4.266667 8.533333 4.266667 8.533334 4.266667 0 4.266667 4.266667 8.533333 4.266666H512v55.466667c0 12.8 4.266667 21.333333 8.533333 25.6 4.266667 4.266667 12.8 8.533333 21.333334 8.533333 12.8 0 21.333333-4.266667 25.6-8.533333 4.266667-4.266667 4.266667-12.8 4.266666-25.6v-55.466667h81.066667c-8.533333 25.6-12.8 51.2-12.8 76.8 0 140.8 115.2 256 256 256s256-115.2 256-256-115.2-251.733333-256-251.733333z m-328.533333-128h55.466666c4.266667 0 4.266667 0 4.266667 4.266667v46.933333h-59.733333V358.4z m0 102.4h59.733333V512h-55.466667v-51.2zM512 516.266667h-55.466667V465.066667H512v51.2z m0-102.4h-59.733333V366.933333v-4.266666H512v51.2z m384 499.2c-93.866667 0-170.666667-76.8-170.666667-170.666667s76.8-170.666667 170.666667-170.666667 170.666667 76.8 170.666667 170.666667-76.8 170.666667-170.666667 170.666667z\"></path>\r\n<path fill=\"#fff\" d=\"M951.466667 669.866667l-72.533334 72.533333-29.866666-25.6c-17.066667-17.066667-42.666667-12.8-59.733334 4.266667-17.066667 17.066667-12.8 42.666667 4.266667 59.733333l59.733333 51.2c8.533333 8.533333 17.066667 8.533333 29.866667 8.533333 12.8 0 21.333333-4.266667 29.866667-12.8l102.4-102.4c17.066667-17.066667 17.066667-42.666667 0-59.733333-21.333333-12.8-46.933333-12.8-64 4.266667zM580.266667 878.933333H213.333333c-72.533333 0-128-55.466667-128-119.466666V230.4c0-64 55.466667-119.466667 128-119.466667h512c72.533333 0 128 55.466667 128 119.466667v140.8c0 25.6 17.066667 42.666667 42.666667 42.666667s42.666667-17.066667 42.666667-42.666667V230.4c0-115.2-93.866667-204.8-213.333334-204.8H213.333333C93.866667 25.6 0 119.466667 0 230.4v529.066667c0 115.2 93.866667 204.8 213.333333 204.8h366.933334c25.6 0 42.666667-17.066667 42.666666-42.666667s-21.333333-42.666667-42.666666-42.666667z\"></path>\r\n</svg>";
 
 },{}],"7RwEf":[function(require,module,exports) {
-module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg viewBox=\"0 0 1152 1024\" width=\"22\" height=\"22\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#fff\" d=\"M311.296 661.504c0 4.096-4.096 8.704-8.704 12.8 0 4.096 0 4.096-4.096 8.704h-12.8c-4.096 0-8.704-4.096-16.896-8.704-8.704-8.704-16.896-8.704-25.6-8.704s-12.8 4.096-16.896 12.8c-4.096 12.8-8.704 21.504-4.096 29.696 4.096 8.704 12.8 16.896 25.6 21.504 16.896 8.704 34.304 16.896 47.104 16.896 12.8 0 21.504-4.096 34.304-8.704 8.704-4.096 16.896-16.896 25.6-29.696 8.704-12.8 12.8-34.304 16.896-55.296 4.096-21.504 4.096-51.2 4.096-85.504 0-12.8 0-21.504-4.096-29.696 0-8.704-4.096-12.8-8.704-16.896-4.096-4.096-8.704-8.704-12.8-8.704s-12.8-4.096-21.504-4.096H272.896s-4.096-4.096 0-8.704l4.096-38.4c0-4.096 0-8.704 4.096-8.704h47.104c16.896 0 25.6-4.096 34.304-12.8 8.704-8.704 12.8-21.504 12.8-42.496V324.096c0-16.896-4.096-34.304-8.704-42.496-12.8-12.8-25.6-16.896-42.496-16.896H243.2c-8.704 0-16.896 0-21.504 4.096-4.096 8.704-4.096 12.8-4.096 25.6 0 8.704 0 16.896 4.096 21.504 4.096 4.096 12.8 8.704 21.504 8.704H307.2c4.096 0 8.704 0 8.704 4.096v34.304c0 8.704 0 12.8-4.096 12.8 0 0-4.096 4.096-8.704 4.096h-34.304c-8.704 0-12.8 0-21.504 4.096-4.096 0-8.704 4.096-8.704 4.096-4.096 4.096-8.704 12.8-8.704 16.896 0 8.704-4.096 16.896-4.096 25.6l-8.704 72.704v29.696c0 8.704 4.096 12.8 8.704 16.896s8.704 4.096 16.896 8.704h68.096c4.096 0 8.704 0 8.704 4.096s4.096 8.704 4.096 16.896c0 21.504 0 42.496-4.096 55.296 0.512 9.216-3.584 22.016-8.192 26.624zM896 486.4c-93.696 0-175.104 51.2-217.6 123.904h-106.496v-34.304H640c21.504 0 34.304-4.096 42.496-12.8 8.704-8.704 12.8-21.504 12.8-42.496V358.4c0-21.504-4.096-34.304-12.8-42.496-8.704-8.704-21.504-12.8-42.496-12.8 0-4.096 4.096-4.096 4.096-8.704-4.096 0-4.096-4.096-4.096-4.096 4.096-12.8 8.704-21.504 4.096-25.6 0-8.704-4.096-12.8-12.8-21.504-8.704-4.096-16.896-4.096-21.504-4.096-8.704 4.096-12.8 8.704-21.504 21.504-4.096 8.704-8.704 12.8-12.8 21.504-4.096 8.704-8.704 12.8-12.8 21.504h-51.2c-4.096-8.704-8.704-16.896-8.704-21.504-4.096-8.704-8.704-12.8-12.8-21.504-4.096-12.8-12.8-16.896-21.504-16.896s-16.896 0-25.6 8.704C434.176 261.12 430.08 265.216 430.08 273.92c0 8.704 0 16.896 8.704 25.6l4.096 4.096 4.096 4.096c-16.896 0-29.696 4.096-38.4 12.8-8.704 4.096-12.8 21.504-12.8 38.4v157.696c0 21.504 4.096 34.304 12.8 42.496 8.704 8.704 21.504 12.8 42.496 12.8H512v34.304H413.696c-12.8 0-21.504 0-25.6 4.096-4.096 4.096-8.704 8.704-8.704 21.504v16.896c0 4.096 4.096 8.704 4.096 8.704 4.096 0 4.096 4.096 8.704 4.096H512V716.8c0 12.8 4.096 21.504 8.704 25.6 4.096 4.096 12.8 8.704 21.504 8.704 12.8 0 21.504-4.096 25.6-8.704 4.096-4.096 4.096-12.8 4.096-25.6v-55.296h80.896c-8.704 25.6-12.8 51.2-12.8 76.8 0 140.8 115.2 256 256 256s256-115.2 256-256S1036.8 486.4 896 486.4z m-328.704-128h55.296c4.096 0 4.096 0 4.096 4.096V409.6h-59.904V358.4z m0 102.4h59.904v51.2h-55.296V460.8h-4.608zM512 516.096H456.704v-51.2H512v51.2z m0-102.4H452.096v-51.2H512v51.2z m384 499.2c-93.696 0-170.496-76.8-170.496-170.496s76.8-170.496 170.496-170.496 170.496 76.8 170.496 170.496-76.8 170.496-170.496 170.496z\"></path>\n<path fill=\"#fff\" d=\"M580.096 879.104H213.504c-72.704 0-128-55.296-128-119.296V230.4c0-64 55.296-119.296 128-119.296h512c72.704 0 128 55.296 128 119.296v140.8c0 25.6 16.896 42.496 42.496 42.496s42.496-16.896 42.496-42.496V230.4c0-115.2-93.696-204.8-213.504-204.8h-512C93.696 25.6 0 119.296 0 230.4v528.896c0 115.2 93.696 204.8 213.504 204.8h367.104c25.6 0 42.496-16.896 42.496-42.496 0-25.6-21.504-42.496-43.008-42.496z m171.52 10.752c-15.36-15.36-15.36-40.96 0-56.32l237.568-237.568c15.36-15.36 40.96-15.36 56.32 0s15.36 40.96 0 56.32l-237.568 237.568c-15.36 15.36-40.448 15.36-56.32 0z\"></path>\n</svg>";
+module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\r\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\r\n<svg viewBox=\"0 0 1152 1024\" width=\"22\" height=\"22\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\r\n<path fill=\"#fff\" d=\"M311.296 661.504c0 4.096-4.096 8.704-8.704 12.8 0 4.096 0 4.096-4.096 8.704h-12.8c-4.096 0-8.704-4.096-16.896-8.704-8.704-8.704-16.896-8.704-25.6-8.704s-12.8 4.096-16.896 12.8c-4.096 12.8-8.704 21.504-4.096 29.696 4.096 8.704 12.8 16.896 25.6 21.504 16.896 8.704 34.304 16.896 47.104 16.896 12.8 0 21.504-4.096 34.304-8.704 8.704-4.096 16.896-16.896 25.6-29.696 8.704-12.8 12.8-34.304 16.896-55.296 4.096-21.504 4.096-51.2 4.096-85.504 0-12.8 0-21.504-4.096-29.696 0-8.704-4.096-12.8-8.704-16.896-4.096-4.096-8.704-8.704-12.8-8.704s-12.8-4.096-21.504-4.096H272.896s-4.096-4.096 0-8.704l4.096-38.4c0-4.096 0-8.704 4.096-8.704h47.104c16.896 0 25.6-4.096 34.304-12.8 8.704-8.704 12.8-21.504 12.8-42.496V324.096c0-16.896-4.096-34.304-8.704-42.496-12.8-12.8-25.6-16.896-42.496-16.896H243.2c-8.704 0-16.896 0-21.504 4.096-4.096 8.704-4.096 12.8-4.096 25.6 0 8.704 0 16.896 4.096 21.504 4.096 4.096 12.8 8.704 21.504 8.704H307.2c4.096 0 8.704 0 8.704 4.096v34.304c0 8.704 0 12.8-4.096 12.8 0 0-4.096 4.096-8.704 4.096h-34.304c-8.704 0-12.8 0-21.504 4.096-4.096 0-8.704 4.096-8.704 4.096-4.096 4.096-8.704 12.8-8.704 16.896 0 8.704-4.096 16.896-4.096 25.6l-8.704 72.704v29.696c0 8.704 4.096 12.8 8.704 16.896s8.704 4.096 16.896 8.704h68.096c4.096 0 8.704 0 8.704 4.096s4.096 8.704 4.096 16.896c0 21.504 0 42.496-4.096 55.296 0.512 9.216-3.584 22.016-8.192 26.624zM896 486.4c-93.696 0-175.104 51.2-217.6 123.904h-106.496v-34.304H640c21.504 0 34.304-4.096 42.496-12.8 8.704-8.704 12.8-21.504 12.8-42.496V358.4c0-21.504-4.096-34.304-12.8-42.496-8.704-8.704-21.504-12.8-42.496-12.8 0-4.096 4.096-4.096 4.096-8.704-4.096 0-4.096-4.096-4.096-4.096 4.096-12.8 8.704-21.504 4.096-25.6 0-8.704-4.096-12.8-12.8-21.504-8.704-4.096-16.896-4.096-21.504-4.096-8.704 4.096-12.8 8.704-21.504 21.504-4.096 8.704-8.704 12.8-12.8 21.504-4.096 8.704-8.704 12.8-12.8 21.504h-51.2c-4.096-8.704-8.704-16.896-8.704-21.504-4.096-8.704-8.704-12.8-12.8-21.504-4.096-12.8-12.8-16.896-21.504-16.896s-16.896 0-25.6 8.704C434.176 261.12 430.08 265.216 430.08 273.92c0 8.704 0 16.896 8.704 25.6l4.096 4.096 4.096 4.096c-16.896 0-29.696 4.096-38.4 12.8-8.704 4.096-12.8 21.504-12.8 38.4v157.696c0 21.504 4.096 34.304 12.8 42.496 8.704 8.704 21.504 12.8 42.496 12.8H512v34.304H413.696c-12.8 0-21.504 0-25.6 4.096-4.096 4.096-8.704 8.704-8.704 21.504v16.896c0 4.096 4.096 8.704 4.096 8.704 4.096 0 4.096 4.096 8.704 4.096H512V716.8c0 12.8 4.096 21.504 8.704 25.6 4.096 4.096 12.8 8.704 21.504 8.704 12.8 0 21.504-4.096 25.6-8.704 4.096-4.096 4.096-12.8 4.096-25.6v-55.296h80.896c-8.704 25.6-12.8 51.2-12.8 76.8 0 140.8 115.2 256 256 256s256-115.2 256-256S1036.8 486.4 896 486.4z m-328.704-128h55.296c4.096 0 4.096 0 4.096 4.096V409.6h-59.904V358.4z m0 102.4h59.904v51.2h-55.296V460.8h-4.608zM512 516.096H456.704v-51.2H512v51.2z m0-102.4H452.096v-51.2H512v51.2z m384 499.2c-93.696 0-170.496-76.8-170.496-170.496s76.8-170.496 170.496-170.496 170.496 76.8 170.496 170.496-76.8 170.496-170.496 170.496z\"></path>\r\n<path fill=\"#fff\" d=\"M580.096 879.104H213.504c-72.704 0-128-55.296-128-119.296V230.4c0-64 55.296-119.296 128-119.296h512c72.704 0 128 55.296 128 119.296v140.8c0 25.6 16.896 42.496 42.496 42.496s42.496-16.896 42.496-42.496V230.4c0-115.2-93.696-204.8-213.504-204.8h-512C93.696 25.6 0 119.296 0 230.4v528.896c0 115.2 93.696 204.8 213.504 204.8h367.104c25.6 0 42.496-16.896 42.496-42.496 0-25.6-21.504-42.496-43.008-42.496z m171.52 10.752c-15.36-15.36-15.36-40.96 0-56.32l237.568-237.568c15.36-15.36 40.96-15.36 56.32 0s15.36 40.96 0 56.32l-237.568 237.568c-15.36 15.36-40.448 15.36-56.32 0z\"></path>\r\n</svg>";
 
 },{}],"3yRfx":[function(require,module,exports) {
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" width=\"22\" height=\"22\">\n    <path d=\"M16.5 8c1.289 0 2.49.375 3.5 1.022V6a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2h7.022A6.5 6.5 0 0116.5 8zM7 13H5a1 1 0 010-2h2a1 1 0 010 2zm2-4H5a1 1 0 010-2h4a1 1 0 010 2z\"></path>\n    <path d=\"M20.587 13.696l-.787-.131a3.503 3.503 0 00-.593-1.051l.301-.804a.46.46 0 00-.21-.56l-1.005-.581a.52.52 0 00-.656.113l-.499.607a3.53 3.53 0 00-1.276 0l-.499-.607a.52.52 0 00-.656-.113l-1.005.581a.46.46 0 00-.21.56l.301.804c-.254.31-.456.665-.593 1.051l-.787.131a.48.48 0 00-.413.465v1.209a.48.48 0 00.413.465l.811.135c.144.382.353.733.614 1.038l-.292.78a.46.46 0 00.21.56l1.005.581a.52.52 0 00.656-.113l.515-.626a3.549 3.549 0 001.136 0l.515.626a.52.52 0 00.656.113l1.005-.581a.46.46 0 00.21-.56l-.292-.78c.261-.305.47-.656.614-1.038l.811-.135A.48.48 0 0021 15.37v-1.209a.48.48 0 00-.413-.465zM16.5 16.057a1.29 1.29 0 11.002-2.582 1.29 1.29 0 01-.002 2.582z\"></path>\n</svg>";
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" width=\"22\" height=\"22\">\r\n    <path d=\"M16.5 8c1.289 0 2.49.375 3.5 1.022V6a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2h7.022A6.5 6.5 0 0116.5 8zM7 13H5a1 1 0 010-2h2a1 1 0 010 2zm2-4H5a1 1 0 010-2h4a1 1 0 010 2z\"></path>\r\n    <path d=\"M20.587 13.696l-.787-.131a3.503 3.503 0 00-.593-1.051l.301-.804a.46.46 0 00-.21-.56l-1.005-.581a.52.52 0 00-.656.113l-.499.607a3.53 3.53 0 00-1.276 0l-.499-.607a.52.52 0 00-.656-.113l-1.005.581a.46.46 0 00-.21.56l.301.804c-.254.31-.456.665-.593 1.051l-.787.131a.48.48 0 00-.413.465v1.209a.48.48 0 00.413.465l.811.135c.144.382.353.733.614 1.038l-.292.78a.46.46 0 00.21.56l1.005.581a.52.52 0 00.656-.113l.515-.626a3.549 3.549 0 001.136 0l.515.626a.52.52 0 00.656.113l1.005-.581a.46.46 0 00.21-.56l-.292-.78c.261-.305.47-.656.614-1.038l.811-.135A.48.48 0 0021 15.37v-1.209a.48.48 0 00-.413-.465zM16.5 16.057a1.29 1.29 0 11.002-2.582 1.29 1.29 0 01-.002 2.582z\"></path>\r\n</svg>";
 
 },{}],"hoOta":[function(require,module,exports) {
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" width=\"24\" height=\"24\">\n    <path d=\"M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98L12.87 11H9.13L11 5.98z\"></path>\n</svg>";
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" width=\"24\" height=\"24\">\r\n    <path d=\"M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98L12.87 11H9.13L11 5.98z\"></path>\r\n</svg>";
 
-},{}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
+},{}],"bZziT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const lib = {
+    map (value, inMin, inMax, outMin, outMax) {
+        return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+    },
+    range (start, end, tick) {
+        const s = Math.round(start / tick) * tick;
+        return Array.from({
+            length: Math.floor((end - start) / tick)
+        }, (v, k)=>{
+            return k * tick + s;
+        });
+    }
+};
+const line = (pointA, pointB)=>{
+    const lengthX = pointB[0] - pointA[0];
+    const lengthY = pointB[1] - pointA[1];
+    return {
+        length: Math.sqrt(Math.pow(lengthX, 2) + Math.pow(lengthY, 2)),
+        angle: Math.atan2(lengthY, lengthX)
+    };
+};
+function heatmap(art, danmuku) {
+    art.controls.add({
+        name: "heatmap",
+        position: "top",
+        html: "",
+        style: {
+            height: "50px",
+            width: "100%",
+            pointerEvents: "none"
+        },
+        mounted ($heatmap) {
+            function update() {
+                const svg = {
+                    w: $heatmap.offsetWidth,
+                    h: $heatmap.offsetHeight
+                };
+                const options = {
+                    xMin: 0,
+                    xMax: svg.w,
+                    yMin: 0,
+                    yMax: 128,
+                    scale: 0.2,
+                    minHeight: Math.floor(svg.h * 0.1),
+                    sampling: Math.floor(svg.w / 100),
+                    fill: "rgba(255, 255, 255, 0.5)",
+                    smoothing: 0.2,
+                    flattening: 0
+                };
+                const points = [];
+                const gap = art.duration / svg.w;
+                for(let x = 0; x <= svg.w; x += options.sampling){
+                    const y = danmuku.danmus.filter(({ time  })=>time > x * gap && time <= (x + options.sampling) * gap).length;
+                    points.push([
+                        x,
+                        y + options.minHeight
+                    ]);
+                }
+                const yPoints = points.map((point)=>point[1]);
+                const yMin = Math.min(...yPoints);
+                const yMax = Math.max(...yPoints);
+                const yMid = (yMin + yMax) / 2;
+                for(let i = 0; i < points.length; i++){
+                    const point = points[i];
+                    const y = point[1];
+                    point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale);
+                }
+                const controlPoint = (current, previous, next, reverse)=>{
+                    const p = previous || current;
+                    const n = next || current;
+                    const o = line(p, n);
+                    const flat = lib.map(Math.cos(o.angle) * options.flattening, 0, 1, 1, 0);
+                    const angle = o.angle * flat + (reverse ? Math.PI : 0);
+                    const length = o.length * options.smoothing;
+                    const x = current[0] + Math.cos(angle) * length;
+                    const y = current[1] + Math.sin(angle) * length;
+                    return [
+                        x,
+                        y
+                    ];
+                };
+                const bezierCommand = (point, i, a)=>{
+                    const cps = controlPoint(a[i - 1], a[i - 2], point);
+                    const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
+                    const close = i === a.length - 1 ? " z" : "";
+                    return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point[0]},${point[1]}${close}`;
+                };
+                const pointsPositions = points.map((e)=>{
+                    const x = lib.map(e[0], options.xMin, options.xMax, 0, svg.w);
+                    const y = lib.map(e[1], options.yMin, options.yMax, svg.h, 0);
+                    return [
+                        x,
+                        y
+                    ];
+                });
+                const pathD = pointsPositions.reduce((acc, e, i, a)=>i === 0 ? `M ${a[a.length - 1][0]},${svg.h} L ${e[0]},${svg.h} L ${e[0]},${e[1]}` : `${acc} ${bezierCommand(e, i, a)}`, "");
+                $heatmap.innerHTML = `
+                  <svg viewBox="0 0 ${svg.w} ${svg.h}">
+                      <path style="fill: var(--art-progress-color, ${options.fill})" d="${pathD}"></path>
+                  </svg>
+                `;
+            }
+            art.on("ready", update);
+            art.on("resize", update);
+            art.emit("artplayerPluginDanmuku:loaded", update);
+        }
+    });
+}
+exports.default = heatmap;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map
