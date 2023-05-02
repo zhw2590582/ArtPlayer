@@ -86,7 +86,7 @@ export default class Danmuku {
             maxWidth: 'number',
             mount: 'undefined|htmldivelement',
             theme: 'string',
-            heatmap: 'boolean',
+            heatmap: 'object|boolean',
             beforeEmit: 'function',
         };
     }

@@ -24,18 +24,29 @@ const line = (pointA, pointB) => {
     };
 };
 
-export default function heatmap(art, danmuku) {
+export default function heatmap(art, danmuku, option) {
+    const { query } = art.constructor.utils;
+
     art.controls.add({
         name: 'heatmap',
         position: 'top',
         html: '',
         style: {
-            height: '50px',
+            height: '100px',
             width: '100%',
             pointerEvents: 'none',
         },
         mounted($heatmap) {
+            let $start = null;
+            let $stop = null;
+
             function update() {
+                $start = null;
+                $stop = null;
+                $heatmap.innerHTML = '';
+
+                if (danmuku.danmus.length === 0) return;
+
                 const svg = {
                     w: $heatmap.offsetWidth,
                     h: $heatmap.offsetHeight,
@@ -46,13 +57,17 @@ export default function heatmap(art, danmuku) {
                     xMax: svg.w,
                     yMin: 0,
                     yMax: 128,
-                    scale: 0.2,
-                    minHeight: Math.floor(svg.h * 0.1),
+                    scale: 0.25,
+                    opacity: 0.2,
+                    minHeight: Math.floor(svg.h * 0.05),
                     sampling: Math.floor(svg.w / 100),
-                    fill: 'rgba(255, 255, 255, 0.5)',
                     smoothing: 0.2,
-                    flattening: 0,
+                    flattening: 0.2,
                 };
+
+                if (typeof option === 'object') {
+                    Object.assign(options, option);
+                }
 
                 const points = [];
                 const gap = art.duration / svg.w;
@@ -60,7 +75,14 @@ export default function heatmap(art, danmuku) {
                     const y = danmuku.danmus.filter(
                         ({ time }) => time > x * gap && time <= (x + options.sampling) * gap,
                     ).length;
-                    points.push([x, y + options.minHeight]);
+                    points.push([x, y]);
+                }
+
+                const lastPoint = points[points.length - 1];
+                const lastX = lastPoint[0];
+                const lastY = lastPoint[1];
+                if (lastX !== svg.w) {
+                    points.push([svg.w, lastY]);
                 }
 
                 const yPoints = points.map((point) => point[1]);
@@ -71,7 +93,7 @@ export default function heatmap(art, danmuku) {
                 for (let i = 0; i < points.length; i++) {
                     const point = points[i];
                     const y = point[1];
-                    point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale);
+                    point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale) + options.minHeight;
                 }
 
                 const controlPoint = (current, previous, next, reverse) => {
@@ -108,15 +130,42 @@ export default function heatmap(art, danmuku) {
                 );
 
                 $heatmap.innerHTML = `
-                  <svg viewBox="0 0 ${svg.w} ${svg.h}">
-                      <path style="fill: var(--art-progress-color, ${options.fill})" d="${pathD}"></path>
-                  </svg>
+                    <svg viewBox="0 0 ${svg.w} ${svg.h}">
+                        <defs>
+                            <linearGradient id="heatmap-solids" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" />
+                                <stop offset="0%" style="stop-color:var(--art-theme);stop-opacity:${options.opacity}" id="heatmap-start" />
+                                <stop offset="0%" style="stop-color:var(--art-progress-color);stop-opacity:1" id="heatmap-stop" />
+                                <stop offset="100%" style="stop-color:var(--art-progress-color);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#heatmap-solids)" d="${pathD}"></path>
+                    </svg>
                 `;
+
+                $start = query('#heatmap-start', $heatmap);
+                $stop = query('#heatmap-stop', $heatmap);
+                $start.setAttribute('offset', `${art.played * 100}%`);
+                $stop.setAttribute('offset', `${art.played * 100}%`);
             }
+
+            art.on('video:timeupdate', () => {
+                if ($start && $stop) {
+                    $start.setAttribute('offset', `${art.played * 100}%`);
+                    $stop.setAttribute('offset', `${art.played * 100}%`);
+                }
+            });
+
+            art.on('setBar', (type, percentage) => {
+                if ($start && $stop && type === 'played') {
+                    $start.setAttribute('offset', `${percentage * 100}%`);
+                    $stop.setAttribute('offset', `${percentage * 100}%`);
+                }
+            });
 
             art.on('ready', update);
             art.on('resize', update);
-            art.emit('artplayerPluginDanmuku:loaded', update);
+            art.on('artplayerPluginDanmuku:loaded', update);
         },
     });
 }
