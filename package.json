@@ -43,7 +43,7 @@
         "@parcel/transformer-vue": "^2.8.3",
         "artplayer": "latest",
         "chai": "^4.3.7",
-        "cpy": "^9.0.1",
+        "cpy": "^10.0.0",
         "cross-env": "^7.0.3",
         "cross-spawn": "^7.0.3",
         "eslint": "^8.38.0",
