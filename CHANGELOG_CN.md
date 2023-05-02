@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   弹幕插件添加 `heatmap` 选项，用于是否开启热度图
+
 ## [5.0.4] - 2023-4-27
 
 -   修复控制器的上拉列表的样式 bug
