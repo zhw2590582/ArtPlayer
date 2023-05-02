@@ -160,7 +160,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-Video title, which currently appears in `video screenshot` and `mini mode`
+Video title, which currently appears in `video screenshot`
 
 <div className="run-code">▶ Run Code</div>
 

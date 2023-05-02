@@ -160,7 +160,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-视频标题，目前会出现在 `视频截图` 和 `迷你模式` 下
+视频标题，目前会出现在 `视频截图` 下
 
 <div className="run-code">▶ Run Code</div>
 

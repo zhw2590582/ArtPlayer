@@ -27,7 +27,7 @@ var art = new Artplayer({
             minWidth: 200, // 输入框最小宽度，范围在[0 ~ 500]，填 0 则为无限制
             maxWidth: 600, // 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则为 100% 宽度
             theme: 'light', // 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light
-            heatmap: true, // 是否开启弹幕热度图
+            heatmap: true, // 是否开启弹幕热度图, 默认为 false
             beforeEmit: (danmu) => !!danmu.text.trim(), // 发送弹幕前的自定义校验，返回 true 则可以发送
 
             // 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
