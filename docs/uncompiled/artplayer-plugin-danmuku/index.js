@@ -187,7 +187,7 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 artplayerPluginDanmuku.env = "development";
 artplayerPluginDanmuku.version = "5.0.1";
-artplayerPluginDanmuku.build = "2023-05-02 18:01:36";
+artplayerPluginDanmuku.build = "2023-05-02 19:29:48";
 if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerPluginDanmuku;
 
 },{"./danmuku":"cv7fe","./setting":"cI0ih","./heatmap":"bZziT","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
@@ -1199,6 +1199,10 @@ function heatmap(art, danmuku, option) {
         position: "top",
         html: "",
         style: {
+            position: "absolute",
+            top: "-100px",
+            left: "0px",
+            right: "0px",
             height: "100px",
             width: "100%",
             pointerEvents: "none"

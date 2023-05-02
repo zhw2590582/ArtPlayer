@@ -32,6 +32,10 @@ export default function heatmap(art, danmuku, option) {
         position: 'top',
         html: '',
         style: {
+            position: 'absolute',
+            top: '-100px',
+            left: '0px',
+            right: '0px',
             height: '100px',
             width: '100%',
             pointerEvents: 'none',
