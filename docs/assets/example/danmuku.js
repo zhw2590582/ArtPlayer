@@ -4,6 +4,7 @@ var art = new Artplayer({
     autoSize: true,
     fullscreen: true,
     fullscreenWeb: true,
+    autoOrientation: true,
     flip: true,
     playbackRate: true,
     aspectRatio: true,
