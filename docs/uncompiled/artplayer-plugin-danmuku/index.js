@@ -1214,7 +1214,7 @@ function heatmap(art, danmuku, option) {
                 $start = null;
                 $stop = null;
                 $heatmap.innerHTML = "";
-                if (danmuku.danmus.length === 0) return;
+                if (!danmuku.danmus.length || !art.duration) return;
                 const svg = {
                     w: $heatmap.offsetWidth,
                     h: $heatmap.offsetHeight
