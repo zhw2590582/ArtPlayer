@@ -1,66 +1,117 @@
+const lib = {
+    map(value, inMin, inMax, outMin, outMax) {
+        return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+    },
+    range(start, end, tick) {
+        const s = Math.round(start / tick) * tick;
+        return Array.from(
+            {
+                length: Math.floor((end - start) / tick),
+            },
+            (v, k) => {
+                return k * tick + s;
+            },
+        );
+    },
+};
+
+const line = (pointA, pointB) => {
+    const lengthX = pointB[0] - pointA[0];
+    const lengthY = pointB[1] - pointA[1];
+    return {
+        length: Math.sqrt(Math.pow(lengthX, 2) + Math.pow(lengthY, 2)),
+        angle: Math.atan2(lengthY, lengthX),
+    };
+};
+
 export default function heatmap(art, danmuku) {
-    const {
-        constructor: {
-            utils: { query, setStyles },
-        },
-        template: { $progress },
-    } = art;
-
-    const height = 30;
-    const color = 'rgba(255, 255, 255, 0.5)';
-
     art.controls.add({
         name: 'heatmap',
         position: 'top',
-        html: '<canvas></canvas>',
+        html: '',
         style: {
-            height: height + 'px',
+            height: '50px',
             width: '100%',
             pointerEvents: 'none',
         },
         mounted($heatmap) {
-            const $canvas = query('canvas', $heatmap);
-            setStyles($canvas, { height: '100%', width: '100%' });
-            const ctx = $canvas.getContext('2d');
-
             function update() {
-                $canvas.height = height;
-                $canvas.width = $progress.clientWidth;
-                ctx.fillStyle = color;
-                ctx.clearRect(0, 0, $canvas.width, $canvas.height);
-                const gap = art.duration / $canvas.width;
+                const svg = {
+                    w: $heatmap.offsetWidth,
+                    h: $heatmap.offsetHeight,
+                };
+
+                const options = {
+                    xMin: 0,
+                    xMax: svg.w,
+                    yMin: 0,
+                    yMax: 128,
+                    scale: 0.2,
+                    minHeight: Math.floor(svg.h * 0.1),
+                    sampling: Math.floor(svg.w / 100),
+                    fill: 'rgba(255, 255, 255, 0.5)',
+                    smoothing: 0.2,
+                    flattening: 0,
+                };
 
                 const points = [];
-                for (let index = 1; index <= $canvas.width; index += 1) {
-                    const length =
-                        danmuku.danmus.filter((item) => item.time > (index - 1) * gap && item.time <= index * gap)
-                            .length + 5;
-                    points.push({ x: index - 1, y: height - length });
+                const gap = art.duration / svg.w;
+                for (let x = 0; x <= svg.w; x += options.sampling) {
+                    const y = danmuku.danmus.filter(
+                        ({ time }) => time > x * gap && time <= (x + options.sampling) * gap,
+                    ).length;
+                    points.push([x, y + options.minHeight]);
                 }
 
-                function drawCurve(points, tension) {
-                    ctx.beginPath();
-                    ctx.moveTo(points[0].x, points[0].y);
+                const yPoints = points.map((point) => point[1]);
+                const yMin = Math.min(...yPoints);
+                const yMax = Math.max(...yPoints);
+                const yMid = (yMin + yMax) / 2;
 
-                    var t = tension != null ? tension : 1;
-                    for (var i = 0; i < points.length - 1; i++) {
-                        var p0 = i > 0 ? points[i - 1] : points[0];
-                        var p1 = points[i];
-                        var p2 = points[i + 1];
-                        var p3 = i != points.length - 2 ? points[i + 2] : p2;
-
-                        var cp1x = p1.x + ((p2.x - p0.x) / 6) * t;
-                        var cp1y = p1.y + ((p2.y - p0.y) / 6) * t;
-
-                        var cp2x = p2.x - ((p3.x - p1.x) / 6) * t;
-                        var cp2y = p2.y - ((p3.y - p1.y) / 6) * t;
-
-                        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
-                    }
-                    ctx.stroke();
+                for (let i = 0; i < points.length; i++) {
+                    const point = points[i];
+                    const y = point[1];
+                    point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale);
                 }
 
-                drawCurve(points);
+                const controlPoint = (current, previous, next, reverse) => {
+                    const p = previous || current;
+                    const n = next || current;
+                    const o = line(p, n);
+                    const flat = lib.map(Math.cos(o.angle) * options.flattening, 0, 1, 1, 0);
+                    const angle = o.angle * flat + (reverse ? Math.PI : 0);
+                    const length = o.length * options.smoothing;
+                    const x = current[0] + Math.cos(angle) * length;
+                    const y = current[1] + Math.sin(angle) * length;
+                    return [x, y];
+                };
+
+                const bezierCommand = (point, i, a) => {
+                    const cps = controlPoint(a[i - 1], a[i - 2], point);
+                    const cpe = controlPoint(point, a[i - 1], a[i + 1], true);
+                    const close = i === a.length - 1 ? ' z' : '';
+                    return `C ${cps[0]},${cps[1]} ${cpe[0]},${cpe[1]} ${point[0]},${point[1]}${close}`;
+                };
+
+                const pointsPositions = points.map((e) => {
+                    const x = lib.map(e[0], options.xMin, options.xMax, 0, svg.w);
+                    const y = lib.map(e[1], options.yMin, options.yMax, svg.h, 0);
+                    return [x, y];
+                });
+
+                const pathD = pointsPositions.reduce(
+                    (acc, e, i, a) =>
+                        i === 0
+                            ? `M ${a[a.length - 1][0]},${svg.h} L ${e[0]},${svg.h} L ${e[0]},${e[1]}`
+                            : `${acc} ${bezierCommand(e, i, a)}`,
+                    '',
+                );
+
+                $heatmap.innerHTML = `
+                  <svg viewBox="0 0 ${svg.w} ${svg.h}">
+                      <path style="fill: var(--art-progress-color, ${options.fill})" d="${pathD}"></path>
+                  </svg>
+                `;
             }
 
             art.on('ready', update);
