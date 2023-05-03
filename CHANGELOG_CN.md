@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.0.6] - 2023-5-3
+
+-   修复设置面板的样式错误
+
 ## [5.0.5] - 2023-5-3
 
 -   弹幕插件添加 `heatmap` 选项，用于是否开启热度图，默认为关闭

@@ -150,8 +150,9 @@ export default class Setting extends Component {
     }
 
     creatHeader(item) {
-        const { icons, proxy } = this.art;
+        const { icons, proxy, constructor } = this.art;
         const $item = createElement('div');
+        setStyle($item, 'height', `${constructor.SETTING_ITEM_HEIGHT}px`);
         addClass($item, 'art-setting-item');
         addClass($item, 'art-setting-item-back');
         const $left = append($item, '<div class="art-setting-item-left"></div>');
@@ -166,10 +167,11 @@ export default class Setting extends Component {
     }
 
     creatItem(type, item) {
-        const { icons, proxy } = this.art;
+        const { icons, proxy, constructor } = this.art;
 
         const $item = createElement('div');
         addClass($item, 'art-setting-item');
+        setStyle($item, 'height', `${constructor.SETTING_ITEM_HEIGHT}px`);
 
         if (isStringOrNumber(item.name)) {
             $item.dataset.name = item.name;
