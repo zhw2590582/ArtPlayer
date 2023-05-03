@@ -30,11 +30,6 @@ export type Option = {
     poster?: string;
 
     /**
-     * Video title
-     */
-    title?: string;
-
-    /**
      * Video url type
      */
     type?: CustomType;
@@ -188,11 +183,6 @@ export type Option = {
      * Custom plugin list
      */
     plugins?: ((this: Artplayer, art: Artplayer) => unknown)[];
-
-    /**
-     * Custom mobile whitelist
-     */
-    whitelist?: (string | ((ua: string) => boolean) | RegExp)[];
 
     /**
      * Custom layer list

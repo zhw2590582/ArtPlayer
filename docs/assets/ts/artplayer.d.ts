@@ -317,11 +317,6 @@ export type Option = {
     poster?: string;
 
     /**
-     * Video title
-     */
-    title?: string;
-
-    /**
      * Video url type
      */
     type?: CustomType;
@@ -475,11 +470,6 @@ export type Option = {
      * Custom plugin list
      */
     plugins?: ((this: Artplayer, art: Artplayer) => unknown)[];
-
-    /**
-     * Custom mobile whitelist
-     */
-    whitelist?: (string | ((ua: string) => boolean) | RegExp)[];
 
     /**
      * Custom layer list
@@ -952,7 +942,7 @@ export type ComponentOption = {
     /**
      * Html string or html element of component
      */
-    html: string | HTMLElement;
+    html?: string | HTMLElement;
 
     /**
      * Whether to disable component
@@ -1093,10 +1083,6 @@ declare class Artplayer extends Player {
     e: Record<keyof Events, { fn: Function; ctx: unknown }[]>;
 
     destroy(removeHtml?: boolean): void;
-
-    readonly whitelist: {
-        get state(): boolean;
-    };
 
     readonly template: {
         get html(): string;

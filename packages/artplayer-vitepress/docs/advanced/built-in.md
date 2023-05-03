@@ -23,29 +23,6 @@ console.info(art.option);
 
 :::
 
-## `whitelist`
-
-管理移动设备的白名单功能，只有一个属性 `state` 返回是否启用播放器功能
-
-<div className="run-code">▶ Run Code</div>
-
-```js
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    whitelist: [(ua) => /iPhone/gi.test(ua)],
-});
-
-console.info(art.whitelist.state);
-```
-
-:::warning 提示
-
-在上面这个例子中，当使用 `iPhone` 访问播放器时，`art.whitelist.state` 会返回 `false`，即使用原生的播放器，而不是 `Artplayer` 播放器
-
-:::
-
-
 ## `template`
 
 管理播放器所有的 `DOM` 元素

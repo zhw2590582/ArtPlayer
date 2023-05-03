@@ -2,7 +2,6 @@ import { secondToTime, download, def, createElement } from '../utils';
 
 export default function screenshotMix(art) {
     const {
-        option,
         notice,
         template: { $video },
     } = art;
@@ -44,7 +43,7 @@ export default function screenshotMix(art) {
     def(art, 'screenshot', {
         value: async () => {
             const dataUri = await art.getDataURL();
-            download(dataUri, `${option.title || 'artplayer'}_${secondToTime($video.currentTime)}.png`);
+            download(dataUri, `artplayer_${secondToTime($video.currentTime)}.png`);
             art.emit('screenshot', dataUri);
             return dataUri;
         },

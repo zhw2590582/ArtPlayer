@@ -4,7 +4,6 @@ import Emitter from './utils/emitter';
 import * as utils from './utils';
 import scheme from './scheme';
 import config from './config';
-import Whitelist from './whitelist';
 import Template from './template';
 import I18n from './i18n';
 import Player from './player';
@@ -22,7 +21,6 @@ import Icons from './icons';
 import Setting from './setting';
 import Storage from './storage';
 import Plugins from './plugins';
-import Mobile from './mobile';
 
 let id = 0;
 const instances = [];
@@ -44,29 +42,23 @@ export default class Artplayer extends Emitter {
         this.isRotate = false;
         this.isDestroy = false;
 
-        this.whitelist = new Whitelist(this);
         this.template = new Template(this);
         this.events = new Events(this);
-
-        if (this.whitelist.state) {
-            this.storage = new Storage(this);
-            this.icons = new Icons(this);
-            this.i18n = new I18n(this);
-            this.notice = new Notice(this);
-            this.player = new Player(this);
-            this.layers = new Layer(this);
-            this.controls = new Control(this);
-            this.contextmenu = new Contextmenu(this);
-            this.subtitle = new Subtitle(this);
-            this.info = new Info(this);
-            this.loading = new Loading(this);
-            this.hotkey = new Hotkey(this);
-            this.mask = new Mask(this);
-            this.setting = new Setting(this);
-            this.plugins = new Plugins(this);
-        } else {
-            this.mobile = new Mobile(this);
-        }
+        this.storage = new Storage(this);
+        this.icons = new Icons(this);
+        this.i18n = new I18n(this);
+        this.notice = new Notice(this);
+        this.player = new Player(this);
+        this.layers = new Layer(this);
+        this.controls = new Control(this);
+        this.contextmenu = new Contextmenu(this);
+        this.subtitle = new Subtitle(this);
+        this.info = new Info(this);
+        this.loading = new Loading(this);
+        this.hotkey = new Hotkey(this);
+        this.mask = new Mask(this);
+        this.setting = new Setting(this);
+        this.plugins = new Plugins(this);
 
         if (typeof readyCallback === 'function') {
             this.on('ready', () => readyCallback.call(this, this));
@@ -135,7 +127,6 @@ export default class Artplayer extends Emitter {
             container: '#artplayer',
             url: '',
             poster: '',
-            title: '',
             type: '',
             theme: '#f00',
             volume: 0.7,
@@ -172,7 +163,6 @@ export default class Artplayer extends Emitter {
             quality: [],
             highlight: [],
             plugins: [],
-            whitelist: [],
             thumbnails: {
                 url: '',
                 number: 60,

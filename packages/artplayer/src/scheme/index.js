@@ -6,7 +6,6 @@ const s = 'string';
 const n = 'number';
 const o = 'object';
 const f = 'function';
-const r = 'regexp';
 
 function validElement(value, type, paths) {
     return errorHandle(
@@ -39,7 +38,6 @@ export default {
     container: validElement,
     url: s,
     poster: s,
-    title: s,
     type: s,
     theme: s,
     lang: s,
@@ -71,7 +69,6 @@ export default {
     autoOrientation: b,
     airplay: b,
     plugins: [f],
-    whitelist: [`${s}|${f}|${r}`],
     layers: [ComponentOption],
     contextmenu: [ComponentOption],
     settings: [ComponentOption],

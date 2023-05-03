@@ -6,7 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
--   弹幕插件添加 `heatmap` 选项，用于是否开启热度图
+-   弹幕插件添加 `heatmap` 选项，用于是否开启热度图，默认为关闭
+-   修复英文字幕换行的样式错误
+-   修复设置面板的样式错误
+-   移除多余的全局属性
+-   移除 `title` 选项，因为目前用处不大
+-   移除 `whitelist` 选项，因为目前用处不大
 
 ## [5.0.4] - 2023-4-27
 

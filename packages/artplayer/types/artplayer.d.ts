@@ -82,10 +82,6 @@ declare class Artplayer extends Player {
 
     destroy(removeHtml?: boolean): void;
 
-    readonly whitelist: {
-        get state(): boolean;
-    };
-
     readonly template: {
         get html(): string;
         query(str: string): HTMLElement;

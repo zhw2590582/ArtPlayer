@@ -14,15 +14,13 @@ export default class Events {
         this.hover = this.hover.bind(this);
         this.loadImg = this.loadImg.bind(this);
 
-        if (art.whitelist.state) {
-            clickInit(art, this);
-            hoverInit(art, this);
-            moveInit(art, this);
-            resizeInit(art, this);
-            gestureInit(art, this);
-            viewInit(art, this);
-            documentInit(art, this);
-        }
+        clickInit(art, this);
+        hoverInit(art, this);
+        moveInit(art, this);
+        resizeInit(art, this);
+        gestureInit(art, this);
+        viewInit(art, this);
+        documentInit(art, this);
     }
 
     proxy(target, name, callback, option = {}) {

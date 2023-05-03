@@ -3,7 +3,7 @@ import { errorHandle, query, addClass, replaceElement, isMobile } from './utils'
 export default class Template {
     constructor(art) {
         this.art = art;
-        const { option, constructor, whitelist } = art;
+        const { option, constructor } = art;
 
         if (option.container instanceof Element) {
             this.$container = option.container;
@@ -24,11 +24,7 @@ export default class Template {
         this.$container.dataset.artId = art.id;
         this.$original = this.$container.cloneNode(true);
 
-        if (whitelist.state) {
-            this.desktop();
-        } else {
-            this.mobile();
-        }
+        this.init();
     }
 
     static get html() {
@@ -97,7 +93,7 @@ export default class Template {
         return query(className, this.$container);
     }
 
-    desktop() {
+    init() {
         const { option } = this.art;
 
         if (!option.useSSR) {
@@ -135,16 +131,6 @@ export default class Template {
         if (isMobile) {
             addClass(this.$player, 'art-mobile');
         }
-    }
-
-    mobile() {
-        this.$container.innerHTML = `
-          <div class="art-video-player">
-            <video class="art-video"></video>
-          </div>
-        `;
-        this.$player = this.query('.art-video-player');
-        this.$video = this.query('.art-video');
     }
 
     destroy(removeHtml) {

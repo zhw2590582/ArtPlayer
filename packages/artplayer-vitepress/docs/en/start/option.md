@@ -155,24 +155,6 @@ var art = new Artplayer({
 });
 ```
 
-## `title`
-
--   Type: `String`
--   Default: `''`
-
-Video title, which currently appears in `video screenshot`
-
-<div className="run-code">▶ Run Code</div>
-
-```js{4}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    title: 'your-video-title',
-    screenshot: true,
-});
-```
-
 ## `theme`
 
 -   Type: `String`
@@ -856,35 +838,6 @@ var art = new Artplayer({
     plugins: [myPlugin],
 });
 ```
-
-## `whitelist`
-
--   Type: `Array`
--   Default: `[]`
-
-Because different mobile devices have many differences and limitations, sometimes you want to use native functions directly instead of using this player on some mobile devices, you can use this option to control
-
-The whitelist is an array type, which is matched with `window.navigator.userAgent` respectively. The player will be enabled as long as one of the matches is successful
-
-Support `string` matching, `function` matching and `regular` matching
-
-<div className="run-code">▶ Run Code</div>
-
-```js{4}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    whitelist: [(ua) => /iPhone/gi.test(ua)],
-    // whitelist: [/iPhone/gi],
-    // whitelist: ['iPhone'],
-});
-```
-
-:::warning Tip
-
-If this option is not filled in, the player will be used by default
-
-:::
 
 ## `thumbnails`
 

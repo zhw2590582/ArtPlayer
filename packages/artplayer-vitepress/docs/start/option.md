@@ -155,24 +155,6 @@ var art = new Artplayer({
 });
 ```
 
-## `title`
-
--   Type: `String`
--   Default: `''`
-
-视频标题，目前会出现在 `视频截图` 下
-
-<div className="run-code">▶ Run Code</div>
-
-```js{4}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    title: 'your-video-title',
-    screenshot: true,
-});
-```
-
 ## `theme`
 
 -   Type: `String`
@@ -856,35 +838,6 @@ var art = new Artplayer({
     plugins: [myPlugin],
 });
 ```
-
-## `whitelist`
-
--   Type: `Array`
--   Default: `[]`
-
-因为不同的移动设备存在多种差异和限制，有时候你希望在某些移动设备上不使用本播放器，而是直接使用原生的功能时，可以通过该选项控制
-
-白名单是一个数组类型，分别与 `window.navigator.userAgent` 进行匹配，只要其中一项匹配成功则启用播放器
-
-支持 `字符串` 匹配,  `函数` 匹配,  `正则` 匹配
-
-<div className="run-code">▶ Run Code</div>
-
-```js{4}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-    whitelist: [(ua) => /iPhone/gi.test(ua)],
-    // whitelist: [/iPhone/gi],
-    // whitelist: ['iPhone'],
-});
-```
-
-:::warning 提示
-
-假如该选项不填，则默认使用本播放器
-
-:::
 
 ## `thumbnails`
 

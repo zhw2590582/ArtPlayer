@@ -1,7 +1,6 @@
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    title: 'Your Name',
     poster: '/assets/sample/poster.jpg',
     volume: 0.5,
     isLive: false,
@@ -27,7 +26,6 @@ var art = new Artplayer({
     airplay: true,
     theme: '#23ade5',
     lang: navigator.language.toLowerCase(),
-    whitelist: ['*'],
     moreVideoAttr: {
         crossOrigin: 'anonymous',
     },
