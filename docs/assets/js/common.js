@@ -1,13 +1,8 @@
 (function () {
     Artplayer.DEBUG = true;
 
-    var userAgent = window.navigator.userAgent;
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-    var isIE = /MSIE|Trident/.test(userAgent);
-
-    if (isMobile || isIE) {
+    if (Artplayer.utils.isMobile) {
         window.location.href = './mobile.html' + location.search;
-        return;
     }
 
     var $codeMirror = document.querySelector('.codeMirrorWrap');
@@ -15,57 +10,65 @@
     var $run = document.querySelector('.run');
     var $popups = document.querySelector('.popups');
     var $console = document.querySelector('.console');
-    var loaddLib = [];
-
-    window.consoleLog($console);
-
     var $typeScript = document.querySelector('#typeScript');
+
+    var loadedLibs = [];
+    window['consoleLog']($console);
     $typeScript.checked = localStorage.getItem('typeScript') === 'true';
 
     var editor = null;
     require.config({ paths: { vs: './assets/js/vs' } });
-    require(['vs/editor/editor.main'], function () {
-        var libUri = './assets/ts/artplayer.d.ts';
-        fetch(libUri)
-            .then((res) => res.text())
-            .then((libSource) => {
-                monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
-                    noSemanticValidation: true,
-                    noSyntaxValidation: false,
-                });
+    require(['vs/editor/editor.main'], async function () {
+        monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+            noSemanticValidation: true,
+            noSyntaxValidation: false,
+        });
 
-                monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
-                    target: monaco.languages.typescript.ScriptTarget.ES6,
-                    allowNonTsExtensions: true,
-                });
+        monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+            target: monaco.languages.typescript.ScriptTarget.ES6,
+            allowNonTsExtensions: true,
+        });
 
-                monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri);
-                monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri));
+        var libUris = [
+            './assets/ts/artplayer.d.ts',
+            './assets/ts/artplayer-plugin-ads.d.ts',
+            './assets/ts/artplayer-plugin-control.d.ts',
+            './assets/ts/artplayer-plugin-danmuku.d.ts',
+            './assets/ts/artplayer-plugin-dash-quality.d.ts',
+            './assets/ts/artplayer-plugin-hls-quality.d.ts',
+            './assets/ts/artplayer-plugin-iframe.d.ts',
+        ];
+        
+        for (let index = 0; index < libUris.length; index++) {
+            var libUri = libUris[index];
+            var libSource = await (await fetch(libUri)).text();
+            monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri);
+            monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri));
+        }
 
-                var disposable = monaco.editor.onDidCreateEditor(function () {
-                    disposable.dispose();
-                    setTimeout(initApp, 1000);
-                });
+        var disposable = monaco.editor.onDidCreateEditor(function () {
+            disposable.dispose();
+            setTimeout(initApp, 1000);
+        });
 
-                editor = monaco.editor.create($codeMirror, {
-                    theme: 'vs-dark',
-                    automaticLayout: true,
-                    quickSuggestions: {
-                        other: true,
-                        comments: true,
-                        strings: true,
-                    },
-                    model: monaco.editor.createModel(
-                        [
-                            'var art = new Artplayer({',
-                            "\tcontainer: '.artplayer-app',",
-                            "\turl: '/assets/sample/video.mp4',",
-                            '});',
-                        ].join('\n'),
-                        $typeScript.checked ? 'typescript' : 'javascript',
-                    ),
-                });
-            });
+        editor = monaco.editor.create($codeMirror, {
+            theme: 'vs-dark',
+            automaticLayout: true,
+            quickSuggestions: {
+                other: true,
+                comments: true,
+                strings: true,
+            },
+            model: monaco.editor.createModel(
+                [
+                    'var art = new Artplayer({',
+                    "\tcontainer: '.artplayer-app',",
+                    "\turl: '/assets/sample/video.mp4',",
+                    '});',
+                ].join('\n'),
+                $typeScript.checked ? 'typescript' : 'javascript',
+            ),
+        });
     });
 
     function getURLParameters(url) {
@@ -125,7 +128,7 @@
         libsDecode
             .split(/\r?\n/)
             .filter(function (url) {
-                return !loaddLib.includes(url);
+                return !loadedLibs.includes(url);
             })
             .forEach(function (url) {
                 var ext = getExt(url);
@@ -180,7 +183,7 @@
 
         loadLib(libs)
             .then(function (result) {
-                loaddLib = loaddLib.concat(result);
+                loadedLibs = loadedLibs.concat(result);
                 loadCode(code, example);
             })
             .catch(function (err) {
