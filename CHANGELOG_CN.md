@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
--   使用 `switchUrl` 或者 `switchQuality` 方法切换播放器地址后，保持原有播放器的尺寸调整，包含：`aspectRatio`, `playbackRate`, `flip`, `autoSize`
+-   使用 `switchUrl` 或者 `switchQuality` 方法切换播放器地址后会保持原有的调整：`aspectRatio`, `playbackRate`, `flip`, `autoSize`
 -   删除 `switchUrl` 方法和 `switchQuality` 方法的第二个 `name` 参数
 
 ## [5.0.6] - 2023-5-3
