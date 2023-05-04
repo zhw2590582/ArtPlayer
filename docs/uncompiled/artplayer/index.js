@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-05-03 12:24:09";
+        return "2023-05-04 12:34:32";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1504,20 +1504,23 @@ function urlMix(art) {
         get () {
             return $video.src;
         },
-        async set (url) {
-            if (url) {
+        async set (newUrl) {
+            if (newUrl) {
                 const oldUrl = art.url;
-                const typeName = option.type || (0, _utils.getExt)(url);
+                const typeName = option.type || (0, _utils.getExt)(newUrl);
                 const typeCallback = option.customType[typeName];
                 if (typeName && typeCallback) {
                     await (0, _utils.sleep)();
                     art.loading.show = true;
-                    typeCallback.call(art, $video, url, art);
-                } else $video.src = url;
+                    typeCallback.call(art, $video, newUrl, art);
+                } else {
+                    URL.revokeObjectURL(oldUrl);
+                    $video.src = newUrl;
+                }
                 if (oldUrl !== art.url) {
-                    art.option.url = url;
+                    art.option.url = newUrl;
                     if (art.isReady && oldUrl) art.once("video:canplay", ()=>{
-                        art.emit("restart", url);
+                        art.emit("restart", newUrl);
                     });
                 }
             } else {
@@ -1682,36 +1685,36 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function switchMix(art) {
-    const { i18n , option , notice  } = art;
-    function switchUrl(url, name, currentTime) {
-        return new Promise((resolve)=>{
-            if (url === art.url) return resolve(url);
-            const { playing  } = art;
+    function switchUrl(url, currentTime) {
+        return new Promise((resolve, reject)=>{
+            if (url === art.url) return;
+            const { playing , aspectRatio , playbackRate , option  } = art;
             art.pause();
-            URL.revokeObjectURL(art.url);
             art.url = url;
+            art.once("video:error", reject);
             art.once("video:canplay", ()=>{
-                art.playbackRate = false;
-                art.aspectRatio = false;
-                art.flip = "normal";
-                art.autoSize = option.autoSize;
+                art.playbackRate = playbackRate;
+                art.aspectRatio = aspectRatio;
                 art.currentTime = currentTime;
                 art.notice.show = "";
+                if (option.autoSize) art.autoSize = true;
                 if (playing) art.play();
-                if (name) notice.show = `${i18n.get("Switch Video")}: ${name}`;
-                resolve(url);
+                resolve();
             });
         });
     }
     (0, _utils.def)(art, "switchQuality", {
-        value: (url, name)=>{
-            return switchUrl(url, name, art.currentTime);
+        value: (url)=>{
+            return switchUrl(url, art.currentTime);
         }
     });
     (0, _utils.def)(art, "switchUrl", {
-        value: (url, name)=>{
-            return switchUrl(url, name, 0);
+        value: (url)=>{
+            return switchUrl(url, 0);
         }
+    });
+    (0, _utils.def)(art, "switch", {
+        set: art.switchUrl
     });
 }
 exports.default = switchMix;

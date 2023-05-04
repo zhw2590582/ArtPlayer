@@ -203,8 +203,6 @@ art.on('ready', () => {
 
 设置视频地址，设置时和 `url` 类似，但会执行一些优化操作
 
-函数支持两个参数，第一个为新的视频地址，第二个为可选新的视频名字
-
 <div className="run-code">▶ Run Code</div>
 
 ```js{9}
@@ -216,7 +214,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchUrl('/assets/sample/video.mp4?t=0', 'New Video Name');
+        art.switchUrl('/assets/sample/video.mp4?t=0');
     }, 3000);
 });
 ```
@@ -228,8 +226,6 @@ art.on('ready', () => {
 
 设置视频画质地址，和 `switchUrl` 类似，但会带上之前的播放进度
 
-函数支持两个参数，第一个为新的视频地址，第二个为可选新的视频名字
-
 <div className="run-code">▶ Run Code</div>
 
 ```js{9}
@@ -241,7 +237,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchQuality('/assets/sample/video.mp4?t=0', '新视频地址');
+        art.switchQuality('/assets/sample/video.mp4?t=0');
     }, 3000);
 });
 ```

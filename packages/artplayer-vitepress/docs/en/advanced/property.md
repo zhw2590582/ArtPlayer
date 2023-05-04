@@ -203,8 +203,6 @@ art.on('ready', () => {
 
 Setting the video url is similar to that of `url`, but some optimization operations will be performed
 
-The function supports two parameters, the first is the new video url, and the second is the optional new video name
-
 <div className="run-code">▶ Run Code</div>
 
 ```js{9}
@@ -216,7 +214,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchUrl('/assets/sample/video.mp4?t=0', 'New Video Name');
+        art.switchUrl('/assets/sample/video.mp4?t=0');
     }, 3000);
 });
 ```
@@ -228,8 +226,6 @@ art.on('ready', () => {
 
 Set the video quality address, similar to `switchUrl`, but with the previous playback progress
 
-The function supports two parameters, the first is the new video url, and the second is the optional new video name
-
 <div className="run-code">▶ Run Code</div>
 
 ```js{9}
@@ -241,7 +237,7 @@ var art = new Artplayer({
 art.on('ready', () => {
     art.seek = 10;
     setTimeout(() => {
-        art.switchQuality('/assets/sample/video.mp4?t=0', 'New Video Name');
+        art.switchQuality('/assets/sample/video.mp4?t=0');
     }, 3000);
 });
 ```
