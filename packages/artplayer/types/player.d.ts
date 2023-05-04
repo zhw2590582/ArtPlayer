@@ -66,13 +66,14 @@ export declare class Player {
     set theme(theme: string);
     get subtitleOffset(): number;
     set subtitleOffset(time: number);
+    set switch(url: string);
     pause(): void;
     play(): Promise<void>;
     toggle(): void;
     attr(key: string, value?: any): unknown;
     cssVar<T extends keyof CssVar>(key: T, value?: CssVar[T]): CssVar[T];
-    switchUrl(url: string): Promise<string>;
-    switchQuality(url: string): Promise<string>;
+    switchUrl(url: string): Promise<void>;
+    switchQuality(url: string): Promise<void>;
     getDataURL(): Promise<string>;
     getBlobUrl(): Promise<string>;
     screenshot(): Promise<string>;
