@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-05-04 12:34:32";
+        return "2023-05-05 15:57:15";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -743,19 +743,21 @@ function getIcon(key = "", html = "") {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "userAgent", ()=>userAgent);
-parcelHelpers.export(exports, "isMobile", ()=>isMobile);
 parcelHelpers.export(exports, "isSafari", ()=>isSafari);
 parcelHelpers.export(exports, "isWechat", ()=>isWechat);
 parcelHelpers.export(exports, "isIE", ()=>isIE);
 parcelHelpers.export(exports, "isAndroid", ()=>isAndroid);
 parcelHelpers.export(exports, "isIOS", ()=>isIOS);
-const userAgent = typeof window !== "undefined" ? window.navigator.userAgent : "";
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+parcelHelpers.export(exports, "isIOS13", ()=>isIOS13);
+parcelHelpers.export(exports, "isMobile", ()=>isMobile);
+const userAgent = typeof navigator !== "undefined" ? navigator.userAgent : "";
 const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
 const isWechat = /MicroMessenger/i.test(userAgent);
 const isIE = /MSIE|Trident/i.test(userAgent);
 const isAndroid = /android/i.test(userAgent);
 const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
+const isIOS13 = isIOS || userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"622b3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
