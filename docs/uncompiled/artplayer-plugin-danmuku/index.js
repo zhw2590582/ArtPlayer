@@ -163,7 +163,7 @@ function artplayerPluginDanmuku(option) {
         checkVersion(art);
         const danmuku = new (0, _danmukuDefault.default)(art, option);
         (0, _settingDefault.default)(art, danmuku);
-        if (option.heatmap && !art.option.isLive) (0, _heatmapDefault.default)(art, danmuku, option.heatmap);
+        if (option.heatmap) (0, _heatmapDefault.default)(art, danmuku, option.heatmap);
         return {
             name: "artplayerPluginDanmuku",
             emit: danmuku.emit.bind(danmuku),
@@ -187,7 +187,7 @@ function artplayerPluginDanmuku(option) {
 exports.default = artplayerPluginDanmuku;
 artplayerPluginDanmuku.env = "development";
 artplayerPluginDanmuku.version = "5.0.1";
-artplayerPluginDanmuku.build = "2023-05-02 19:29:48";
+artplayerPluginDanmuku.build = "2023-05-05 22:22:13";
 if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerPluginDanmuku;
 
 },{"./danmuku":"cv7fe","./setting":"cI0ih","./heatmap":"bZziT","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
@@ -252,6 +252,7 @@ class Danmuku {
             mount: undefined,
             theme: "dark",
             heatmap: false,
+            points: [],
             beforeEmit: ()=>true
         };
     }
@@ -275,6 +276,7 @@ class Danmuku {
             mount: "undefined|htmldivelement",
             theme: "string",
             heatmap: "object|boolean",
+            points: "array",
             beforeEmit: "function"
         };
     }
@@ -1210,11 +1212,11 @@ function heatmap(art, danmuku, option) {
         mounted ($heatmap) {
             let $start = null;
             let $stop = null;
-            function update() {
+            function update(arg = []) {
                 $start = null;
                 $stop = null;
                 $heatmap.innerHTML = "";
-                if (!danmuku.danmus.length || !art.duration) return;
+                if (!art.duration || art.option.isLive) return;
                 const svg = {
                     w: $heatmap.offsetWidth,
                     h: $heatmap.offsetHeight
@@ -1232,15 +1234,21 @@ function heatmap(art, danmuku, option) {
                     flattening: 0.2
                 };
                 if (typeof option === "object") Object.assign(options, option);
-                const points = [];
-                const gap = art.duration / svg.w;
-                for(let x = 0; x <= svg.w; x += options.sampling){
-                    const y = danmuku.danmus.filter(({ time  })=>time > x * gap && time <= (x + options.sampling) * gap).length;
-                    points.push([
-                        x,
-                        y
-                    ]);
+                let points = [];
+                if (Array.isArray(arg) && arg.length) points = [
+                    ...arg
+                ];
+                else {
+                    const gap = art.duration / svg.w;
+                    for(let x = 0; x <= svg.w; x += options.sampling){
+                        const y = danmuku.danmus.filter(({ time  })=>time > x * gap && time <= (x + options.sampling) * gap).length;
+                        points.push([
+                            x,
+                            y
+                        ]);
+                    }
                 }
+                if (points.length === 0) return;
                 const lastPoint = points[points.length - 1];
                 const lastX = lastPoint[0];
                 const lastY = lastPoint[1];
@@ -1316,9 +1324,10 @@ function heatmap(art, danmuku, option) {
                     $stop.setAttribute("offset", `${percentage * 100}%`);
                 }
             });
-            art.on("ready", update);
-            art.on("resize", update);
-            art.on("artplayerPluginDanmuku:loaded", update);
+            art.on("ready", ()=>update());
+            art.on("resize", ()=>update());
+            art.on("artplayerPluginDanmuku:loaded", ()=>update());
+            art.on("artplayerPluginDanmuku:points", (points)=>update(points));
         }
     });
 }

@@ -44,12 +44,12 @@ export default function heatmap(art, danmuku, option) {
             let $start = null;
             let $stop = null;
 
-            function update() {
+            function update(arg = []) {
                 $start = null;
                 $stop = null;
                 $heatmap.innerHTML = '';
 
-                if (!danmuku.danmus.length || !art.duration) return;
+                if (!art.duration || art.option.isLive) return;
 
                 const svg = {
                     w: $heatmap.offsetWidth,
@@ -73,14 +73,21 @@ export default function heatmap(art, danmuku, option) {
                     Object.assign(options, option);
                 }
 
-                const points = [];
-                const gap = art.duration / svg.w;
-                for (let x = 0; x <= svg.w; x += options.sampling) {
-                    const y = danmuku.danmus.filter(
-                        ({ time }) => time > x * gap && time <= (x + options.sampling) * gap,
-                    ).length;
-                    points.push([x, y]);
+                let points = [];
+
+                if (Array.isArray(arg) && arg.length) {
+                    points = [...arg];
+                } else {
+                    const gap = art.duration / svg.w;
+                    for (let x = 0; x <= svg.w; x += options.sampling) {
+                        const y = danmuku.danmus.filter(
+                            ({ time }) => time > x * gap && time <= (x + options.sampling) * gap,
+                        ).length;
+                        points.push([x, y]);
+                    }
                 }
+
+                if (points.length === 0) return;
 
                 const lastPoint = points[points.length - 1];
                 const lastX = lastPoint[0];
@@ -167,9 +174,10 @@ export default function heatmap(art, danmuku, option) {
                 }
             });
 
-            art.on('ready', update);
-            art.on('resize', update);
-            art.on('artplayerPluginDanmuku:loaded', update);
+            art.on('ready', () => update());
+            art.on('resize', () => update());
+            art.on('artplayerPluginDanmuku:loaded', () => update());
+            art.on('artplayerPluginDanmuku:points', (points) => update(points));
         },
     });
 }

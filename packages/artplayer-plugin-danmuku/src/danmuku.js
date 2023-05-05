@@ -63,6 +63,7 @@ export default class Danmuku {
             mount: undefined,
             theme: 'dark',
             heatmap: false,
+            points: [],
             beforeEmit: () => true,
         };
     }
@@ -87,6 +88,7 @@ export default class Danmuku {
             mount: 'undefined|htmldivelement',
             theme: 'string',
             heatmap: 'object|boolean',
+            points: 'array',
             beforeEmit: 'function',
         };
     }

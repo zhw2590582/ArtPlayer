@@ -18,7 +18,7 @@ export default function artplayerPluginDanmuku(option) {
         checkVersion(art);
         const danmuku = new Danmuku(art, option);
         setting(art, danmuku);
-        if (option.heatmap && !art.option.isLive) {
+        if (option.heatmap) {
             heatmap(art, danmuku, option.heatmap);
         }
         return {
