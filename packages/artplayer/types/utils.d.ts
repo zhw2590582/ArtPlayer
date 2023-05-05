@@ -6,6 +6,7 @@ export type Utils = {
     isIE: boolean;
     isAndroid: boolean;
     isIOS: boolean;
+    isIOS13: boolean;
     query(selector: string, parent?: HTMLElement): HTMLElement;
     queryAll(selector: string, parent?: HTMLElement): HTMLElement[];
     addClass(target: HTMLElement, className: string): void;

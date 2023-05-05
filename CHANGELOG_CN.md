@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   使用 `switchUrl` 或者 `switchQuality` 方法切换地址后会保持原有的调整如：`aspectRatio`, `playbackRate`, `flip`, `autoSize`
 -   删除 `switchUrl` 方法和 `switchQuality` 方法的第二个 `name` 参数
+-   添加 `isIOS13` 工具，用于修复在 `IOS13` 以上版本的设备上的 `isMobile` 判断不准确的问题
 
 ## [5.0.6] - 2023-5-3
 
