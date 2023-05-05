@@ -7,7 +7,7 @@
     "main": "dist/artplayer-plugin-vtt-thumbnail.js",
     "legacy": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
-    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "browserslist": "last 1 Chrome version",
     "homepage": "https://artplayer.org",
     "repository": {
         "type": "git",
