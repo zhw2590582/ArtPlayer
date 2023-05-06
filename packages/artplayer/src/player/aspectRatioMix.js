@@ -2,9 +2,9 @@ import { setStyle, def } from '../utils';
 
 export default function aspectRatioMix(art) {
     const {
-        template: { $video, $player },
         i18n,
         notice,
+        template: { $video, $player },
     } = art;
 
     def(art, 'aspectRatio', {
