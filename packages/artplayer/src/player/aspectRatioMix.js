@@ -22,8 +22,11 @@ export default function aspectRatioMix(art) {
                 const ratioArray = ratio.split(':').map(Number);
                 const { videoWidth, videoHeight } = $video;
                 const { clientWidth, clientHeight } = $player;
+
                 const videoRatio = videoWidth / videoHeight;
+                const playerRatio = clientWidth / clientHeight;
                 const setupRatio = ratioArray[0] / ratioArray[1];
+
                 if (videoRatio > setupRatio) {
                     const percentage = (setupRatio * videoHeight) / videoWidth;
                     setStyle($video, 'width', `${percentage * 100}%`);
@@ -35,6 +38,7 @@ export default function aspectRatioMix(art) {
                     setStyle($video, 'height', `${percentage * 100}%`);
                     setStyle($video, 'padding', `${(clientHeight - clientHeight * percentage) / 2}px 0`);
                 }
+
                 $player.dataset.aspectRatio = ratio;
             }
 
