@@ -1,23 +1,14 @@
-import { throttle, setStyle } from '../utils';
+import { throttle } from '../utils';
 
 export default function resizeInit(art, events) {
-    const {
-        option,
-        constructor,
-        template: { $player },
-    } = art;
+    const { option, constructor } = art;
 
     art.on('resize', () => {
         const { aspectRatio, notice } = art;
-        if (art.state === 'standard') {
-            art.aspectRatio = aspectRatio;
-            if (option.autoSize) art.autoSize();
-        } else {
-            // TODO: 全屏时计算不准确
-            art.aspectRatio = 'default';
-            setStyle($player, 'width', null);
-            setStyle($player, 'height', null);
+        if (art.state === 'standard' && option.autoSize) {
+            art.autoSize();
         }
+        art.aspectRatio = aspectRatio;
         notice.show = '';
     });
 

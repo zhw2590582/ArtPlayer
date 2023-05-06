@@ -4011,18 +4011,11 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function resizeInit(art, events) {
-    const { option , constructor , template: { $player  }  } = art;
+    const { option , constructor  } = art;
     art.on("resize", ()=>{
         const { aspectRatio , notice  } = art;
-        if (art.state === "standard") {
-            art.aspectRatio = aspectRatio;
-            if (option.autoSize) art.autoSize();
-        } else {
-            // TODO: 全屏时计算不准确
-            art.aspectRatio = "default";
-            (0, _utils.setStyle)($player, "width", null);
-            (0, _utils.setStyle)($player, "height", null);
-        }
+        if (art.state === "standard" && option.autoSize) art.autoSize();
+        art.aspectRatio = aspectRatio;
         notice.show = "";
     });
     const resizeFn = (0, _utils.throttle)(()=>art.emit("resize"), constructor.RESIZE_TIME);
