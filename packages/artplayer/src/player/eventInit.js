@@ -83,7 +83,7 @@ export default function eventInit(art) {
     // });
 
     art.on('video:loadedmetadata', () => {
-        art.autoSize = option.autoSize;
+        art.emit('resize');
         if (isMobile) {
             art.loading.show = false;
             art.controls.show = true;

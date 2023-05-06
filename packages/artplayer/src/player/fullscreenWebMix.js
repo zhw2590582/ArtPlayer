@@ -2,7 +2,6 @@ import { addClass, removeClass, hasClass, def, append } from '../utils';
 
 export default function fullscreenWebMix(art) {
     const {
-        option,
         notice,
         constructor,
         template: { $container, $player },
@@ -21,8 +20,6 @@ export default function fullscreenWebMix(art) {
                 }
                 art.state = 'fullscreenWeb';
                 addClass($player, 'art-fullscreen-web');
-                art.aspectRatioReset();
-                art.autoSize = false;
                 art.emit('resize');
                 art.emit('fullscreenWeb', true);
                 notice.show = '';
@@ -35,8 +32,6 @@ export default function fullscreenWebMix(art) {
                     cssText = '';
                 }
                 removeClass($player, 'art-fullscreen-web');
-                art.aspectRatioReset();
-                art.autoSize = option.autoSize;
                 art.emit('resize');
                 art.emit('fullscreenWeb', false);
                 notice.show = '';

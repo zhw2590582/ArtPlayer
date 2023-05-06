@@ -523,10 +523,9 @@ art.on('ready', () => {
 
 ## `autoSize`
 
--   Type: `Setter/Getter`
--   Parameter: `Boolean`
+-   Type: `Function`
 
-设置视频是否自适应尺寸，设置为 `true` 之后它会只执行一次
+设置视频是否自适应尺寸
 
 <div className="run-code">▶ Run Code</div>
 
@@ -537,9 +536,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.autoSize);
-    art.autoSize = true;
-    console.info(art.autoSize);
+    art.autoSize();
 });
 ```
 
@@ -666,10 +663,9 @@ art.on('ready', () => {
 
 ## `autoHeight`
 
--   Type: `Setter/Getter`
--   Parameter: `Boolean`
+-   Type: `Function`
 
-当容器只有宽度，该属性可以自动计算出并设置视频的高度，设置为 `true` 之后它会只执行一次
+当容器只有宽度，该属性可以自动计算出并设置视频的高度
 
 <div className="run-code">▶ Run Code</div>
 
@@ -680,11 +676,11 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    art.autoHeight = true;
+    art.autoHeight();
 });
 
 art.on('resize', () => {
-    art.autoHeight = true;
+    art.autoHeight();
 });
 ```
 

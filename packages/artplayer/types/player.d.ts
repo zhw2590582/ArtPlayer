@@ -15,10 +15,6 @@ export declare class Player {
     set type(name: CustomType);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
-    get autoSize(): boolean;
-    set autoSize(state: boolean);
-    get autoHeight(): boolean;
-    set autoHeight(state: boolean);
     get currentTime(): number;
     set currentTime(time: number);
     get duration(): number;
@@ -78,5 +74,6 @@ export declare class Player {
     getBlobUrl(): Promise<string>;
     screenshot(): Promise<string>;
     airplay(): void;
-    aspectRatioReset(state: boolean): void;
+    autoSize(): void;
+    autoHeight(): void;
 }

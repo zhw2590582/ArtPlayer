@@ -42,11 +42,4 @@ export default function aspectRatioMix(art) {
             art.emit('aspectRatio', ratio);
         },
     });
-
-    def(art, 'aspectRatioReset', {
-        value() {
-            const { aspectRatio } = art;
-            art.aspectRatio = aspectRatio;
-        },
-    });
 }
