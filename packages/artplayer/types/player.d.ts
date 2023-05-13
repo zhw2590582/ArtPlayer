@@ -1,5 +1,6 @@
 import { CssVar } from './cssVar';
 import { CustomType } from './option';
+import { quality } from './quality';
 
 export type AspectRatio = 'default' | '4:3' | '16:9' | (`${number}:${number}` & Record<never, never>);
 export type PlaybackRate = 0.5 | 0.75 | 1.0 | 1.25 | 1.5 | 1.75 | 2.0 | (number & Record<never, never>);
@@ -63,6 +64,7 @@ export declare class Player {
     get subtitleOffset(): number;
     set subtitleOffset(time: number);
     set switch(url: string);
+    set quality(quality: quality[]);
     pause(): void;
     play(): Promise<void>;
     toggle(): void;

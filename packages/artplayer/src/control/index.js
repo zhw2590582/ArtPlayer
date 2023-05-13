@@ -1,4 +1,4 @@
-import { errorHandle, addClass, removeClass, isMobile } from '../utils';
+import { errorHandle, addClass, removeClass, isMobile, sleep } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -10,7 +10,6 @@ import volume from './volume';
 import setting from './setting';
 import thumbnails from './thumbnails';
 import screenshot from './screenshot';
-import quality from './quality';
 import loop from './loop';
 import airplay from './airplay';
 
@@ -104,13 +103,9 @@ export default class Control extends Component {
         }
 
         if (option.quality.length) {
-            this.add(
-                quality({
-                    name: 'quality',
-                    position: 'right',
-                    index: 10,
-                }),
-            );
+            sleep().then(() => {
+                this.art.quality = option.quality;
+            });
         }
 
         if (option.screenshot && !isMobile) {
