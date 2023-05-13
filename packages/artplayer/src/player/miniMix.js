@@ -107,6 +107,7 @@ export default function miniMix(art) {
         },
         set(value) {
             if (value) {
+                art.state = 'mini';
                 addClass($player, 'art-mini');
                 const $mini = createMini();
                 const top = storage.get('top');
