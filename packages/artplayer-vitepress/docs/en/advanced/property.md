@@ -196,12 +196,35 @@ art.on('ready', () => {
 });
 ```
 
+## `switch`
+
+-   Type: `Setter`
+-   Parameter: `String`
+
+Setting the video url is similar to that of `art.url`, but some optimization operations will be performed
+
+<div className="run-code">▶ Run Code</div>
+
+```js{9}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.seek = 10;
+    setTimeout(() => {
+        art.switch = '/assets/sample/video.mp4?t=0';
+    }, 3000);
+});
+```
+
 ## `switchUrl`
 
 -   Type: `Function`
 -   Parameter: `String`
 
-Setting the video url is similar to that of `url`, but some optimization operations will be performed
+Setting the video url is similar to that of `art.url`, but some optimization operations will be performed
 
 <div className="run-code">▶ Run Code</div>
 
@@ -219,12 +242,18 @@ art.on('ready', () => {
 });
 ```
 
+:::warning Tip
+
+The functions of `art.switch` and `art.switchUrl` are the same, except that the `art.switchUrl` method will return `Promise`, when `resolve` means that the new address can be played, and `reject` means that the new address is loaded error
+
+:::
+
 ## `switchQuality`
 
 -   Type: `Function`
 -   Parameter: `String`
 
-Set the video quality address, similar to `switchUrl`, but with the previous playback progress
+Set the video quality address, similar to `art.switchUrl`, but with the previous playback progress
 
 <div className="run-code">▶ Run Code</div>
 

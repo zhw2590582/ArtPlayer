@@ -196,12 +196,35 @@ art.on('ready', () => {
 });
 ```
 
+## `switch`
+
+-   Type: `Setter`
+-   Parameter: `String`
+
+设置视频地址，设置时和 `art.url` 类似，但会执行一些优化操作
+
+<div className="run-code">▶ Run Code</div>
+
+```js{9}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.seek = 10;
+    setTimeout(() => {
+        art.switch = '/assets/sample/video.mp4?t=0';
+    }, 3000);
+});
+```
+
 ## `switchUrl`
 
 -   Type: `Function`
 -   Parameter: `String`
 
-设置视频地址，设置时和 `url` 类似，但会执行一些优化操作
+设置视频地址，设置时和 `art.url` 类似，但会执行一些优化操作
 
 <div className="run-code">▶ Run Code</div>
 
@@ -219,12 +242,18 @@ art.on('ready', () => {
 });
 ```
 
+:::warning 提示
+
+`art.switch` 和 `art.switchUrl` 的功能是一样的，只是 `art.switchUrl` 方法会返回 `Promise`，当 `resolve` 时表示新地址是可以播放，`reject` 时表示新地址加载错误
+
+:::
+
 ## `switchQuality`
 
 -   Type: `Function`
 -   Parameter: `String`
 
-设置视频画质地址，和 `switchUrl` 类似，但会带上之前的播放进度
+设置视频画质地址，和 `art.switchUrl` 类似，但会带上之前的播放进度
 
 <div className="run-code">▶ Run Code</div>
 
@@ -925,6 +954,7 @@ art.on('ready', () => {
 ## `quality`
 
 -   Type: `Setter`
+-   Parameter: `Array`
 
 动态设置画质列表
 
