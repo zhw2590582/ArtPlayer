@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-05-13 21:28:02";
+        return "2023-05-13 21:49:56";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -357,7 +357,7 @@ Artplayer.NOTICE_TIME = 2000;
 Artplayer.SETTING_WIDTH = 250;
 Artplayer.SETTING_ITEM_WIDTH = 200;
 Artplayer.SETTING_ITEM_HEIGHT = 35;
-Artplayer.RESIZE_TIME = 500;
+Artplayer.RESIZE_TIME = 200;
 Artplayer.SCROLL_TIME = 200;
 Artplayer.SCROLL_GAP = 50;
 Artplayer.AUTO_PLAYBACK_MAX = 10;
@@ -884,43 +884,28 @@ parcelHelpers.export(exports, "throttle", ()=>throttle);
 function sleep(ms = 0) {
     return new Promise((resolve)=>setTimeout(resolve, ms));
 }
-function debounce(func, wait, context) {
+function debounce(func, duration) {
     let timeout;
-    function fn(...args) {
-        const later = function later() {
+    return function(...args) {
+        const effect = ()=>{
             timeout = null;
-            func.apply(context, args);
+            return func.apply(this, args);
         };
         clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    }
-    fn.clearTimeout = function ct() {
-        clearTimeout(timeout);
+        timeout = setTimeout(effect, duration);
     };
-    return fn;
 }
-function throttle(callback, delay) {
-    let isThrottled = false;
-    let args;
-    let context;
-    function fn(...args2) {
-        if (isThrottled) {
-            args = args2;
-            context = this;
-            return;
+function throttle(func, duration) {
+    let shouldWait = false;
+    return function(...args) {
+        if (!shouldWait) {
+            func.apply(this, args);
+            shouldWait = true;
+            setTimeout(function() {
+                shouldWait = false;
+            }, duration);
         }
-        isThrottled = true;
-        callback.apply(this, args2);
-        setTimeout(()=>{
-            isThrottled = false;
-            if (args) {
-                fn.apply(context, args);
-                args = null;
-                context = null;
-            }
-        }, delay);
-    }
-    return fn;
+    };
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eWip5":[function(require,module,exports) {
@@ -4018,7 +4003,7 @@ function resizeInit(art, events) {
         art.aspectRatio = aspectRatio;
         notice.show = "";
     });
-    const resizeFn = (0, _utils.throttle)(()=>art.emit("resize"), constructor.RESIZE_TIME);
+    const resizeFn = (0, _utils.debounce)(()=>art.emit("resize"), constructor.RESIZE_TIME);
     events.proxy(window, [
         "orientationchange",
         "resize"

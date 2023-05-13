@@ -1,4 +1,4 @@
-import { throttle } from '../utils';
+import { debounce } from '../utils';
 
 export default function resizeInit(art, events) {
     const { option, constructor } = art;
@@ -12,7 +12,7 @@ export default function resizeInit(art, events) {
         notice.show = '';
     });
 
-    const resizeFn = throttle(() => art.emit('resize'), constructor.RESIZE_TIME);
+    const resizeFn = debounce(() => art.emit('resize'), constructor.RESIZE_TIME);
     events.proxy(window, ['orientationchange', 'resize'], () => resizeFn());
     if (screen && screen.orientation && screen.orientation.onchange) {
         events.proxy(screen.orientation, 'change', () => resizeFn());

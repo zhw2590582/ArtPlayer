@@ -109,12 +109,12 @@ var art = new Artplayer({
 
 ## RESIZE_TIME
 
-`resize` 事件的节流时间，单位为毫秒，默认为 `500`
+`resize` 事件的节流时间，单位为毫秒，默认为 `200`
 
 <div className="run-code">▶ Run Code</div>
 
 ```js
-Artplayer.RESIZE_TIME = 1000;
+Artplayer.RESIZE_TIME = 500;
 
 var art = new Artplayer({
     container: '.artplayer-app',
