@@ -1,8 +1,10 @@
 .art-video-player {
     &[data-aspect-ratio] {
-        video {
-            box-sizing: content-box;
+        overflow: hidden;
+        .art-video {
             object-fit: fill;
+            box-sizing: content-box;
+            transition: all var(--art-transition-duration) ease;
         }
     }
 }

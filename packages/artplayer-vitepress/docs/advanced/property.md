@@ -921,3 +921,45 @@ art.on('ready', () => {
     console.log(art.cssVar('--art-theme'));
 });
 ```
+
+## `quality`
+
+-   Type: `Setter`
+
+动态设置画质列表
+
+<div className="run-code">▶ Run Code</div>
+
+```js{19-29}
+var art = new Artplayer({
+	container: '.artplayer-app',
+	url: '/assets/sample/video.mp4',
+	quality: [
+		{
+			default: true,
+			html: 'SD 480P',
+			url: '/assets/sample/video.mp4',
+		},
+		{
+			html: 'HD 720P',
+			url: '/assets/sample/video.mp4',
+		},
+	],
+});
+
+art.on('ready', () => {
+	setTimeout(() => {
+		art.quality = [
+			{
+				default: true,
+				html: '1080P',
+				url: '/assets/sample/video.mp4',
+			},
+			{
+				html: '4K',
+				url: '/assets/sample/video.mp4',
+			},
+		];
+	}, 3000);
+})
+```

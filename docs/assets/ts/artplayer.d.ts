@@ -6,6 +6,7 @@ export type Utils = {
     isIE: boolean;
     isAndroid: boolean;
     isIOS: boolean;
+    isIOS13: boolean;
     query(selector: string, parent?: HTMLElement): HTMLElement;
     queryAll(selector: string, parent?: HTMLElement): HTMLElement[];
     addClass(target: HTMLElement, className: string): void;
@@ -203,6 +204,24 @@ export type Setting = {
     [key: string]: any;
 };
 
+export type quality = {
+    /**
+     * Whether the default is selected
+     */
+    default?: boolean;
+
+    /**
+     * Html string of quality
+     */
+    html: string | HTMLElement;
+
+    /**
+     * Video quality url
+     */
+    url: string;
+};
+
+
 
 
 
@@ -220,10 +239,6 @@ export declare class Player {
     set type(name: CustomType);
     get playbackRate(): PlaybackRate;
     set playbackRate(rate: PlaybackRate);
-    get autoSize(): boolean;
-    set autoSize(state: boolean);
-    get autoHeight(): boolean;
-    set autoHeight(state: boolean);
     get currentTime(): number;
     set currentTime(time: number);
     get duration(): number;
@@ -271,19 +286,23 @@ export declare class Player {
     set theme(theme: string);
     get subtitleOffset(): number;
     set subtitleOffset(time: number);
+    set switch(url: string);
+    set quality(quality: quality[]);
     pause(): void;
     play(): Promise<void>;
     toggle(): void;
     attr(key: string, value?: any): unknown;
     cssVar<T extends keyof CssVar>(key: T, value?: CssVar[T]): CssVar[T];
-    switchUrl(url: string): Promise<string>;
-    switchQuality(url: string): Promise<string>;
+    switchUrl(url: string): Promise<void>;
+    switchQuality(url: string): Promise<void>;
     getDataURL(): Promise<string>;
     getBlobUrl(): Promise<string>;
     screenshot(): Promise<string>;
     airplay(): void;
-    aspectRatioReset(state: boolean): void;
+    autoSize(): void;
+    autoHeight(): void;
 }
+
 
 
 
@@ -494,22 +513,7 @@ export type Option = {
     /**
      * Custom video quality list
      */
-    quality?: {
-        /**
-         * Whether the default is selected
-         */
-        default?: boolean;
-
-        /**
-         * Html string of quality
-         */
-        html: string | HTMLElement;
-
-        /**
-         * Video quality url
-         */
-        url: string;
-    }[];
+    quality?: quality[];
 
     /**
      * Custom highlight list
@@ -778,7 +782,6 @@ export type CssVar = {
     '--art-indicator-scale': number;
     '--art-indicator-size': string;
     '--art-fullscreen-web-index': 9999;
-    '--art-settings-scale': number;
     '--art-settings-icon-size': string;
     '--art-settings-max-height': string;
     '--art-selector-max-height': string;

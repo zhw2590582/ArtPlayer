@@ -3,6 +3,7 @@ import { Setting } from './setting';
 import { Icons } from './icons';
 import { I18n } from './i18n';
 import { CssVar } from './cssVar';
+import { quality } from './quality';
 import { ComponentOption } from './component';
 import Artplayer = require('./artplayer');
 
@@ -207,22 +208,7 @@ export type Option = {
     /**
      * Custom video quality list
      */
-    quality?: {
-        /**
-         * Whether the default is selected
-         */
-        default?: boolean;
-
-        /**
-         * Html string of quality
-         */
-        html: string | HTMLElement;
-
-        /**
-         * Video quality url
-         */
-        url: string;
-    }[];
+    quality?: quality[];
 
     /**
      * Custom highlight list

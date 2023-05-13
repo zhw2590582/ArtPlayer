@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   删除 `switchUrl` 方法和 `switchQuality` 方法的第二个 `name` 参数
 -   添加 `isIOS13` 工具，用于修复在 `IOS13` 以上版本的设备上的 `isMobile` 判断不准确的问题
 -   `art.autoSize` 和 `art.autoHeight` 改为方法的形式调用，即 `art.autoSize()` 和 `art.autoHeight()`
+-   添加新的属性 `art.quality`，用于动态更新画质列表
+-   修复 `art.aspectRatio` 不正确的问题
 
 ## [5.0.6] - 2023-5-3
 
