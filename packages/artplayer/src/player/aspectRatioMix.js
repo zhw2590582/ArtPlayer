@@ -1,4 +1,4 @@
-import { setStyle, def } from '../utils';
+import { setStyle, def, clamp } from '../utils';
 
 export default function aspectRatioMix(art) {
     const {
@@ -20,23 +20,20 @@ export default function aspectRatioMix(art) {
                 delete $player.dataset.aspectRatio;
             } else {
                 const ratioArray = ratio.split(':').map(Number);
-                const { videoWidth, videoHeight } = $video;
                 const { clientWidth, clientHeight } = $player;
-
-                const videoRatio = videoWidth / videoHeight;
                 const playerRatio = clientWidth / clientHeight;
                 const setupRatio = ratioArray[0] / ratioArray[1];
 
-                if (videoRatio > setupRatio) {
-                    const percentage = (setupRatio * videoHeight) / videoWidth;
-                    setStyle($video, 'width', `${percentage * 100}%`);
+                if (playerRatio > setupRatio) {
+                    const width = clamp(setupRatio * clientHeight, 0, clientWidth);
+                    setStyle($video, 'width', `${width}px`);
                     setStyle($video, 'height', '100%');
-                    setStyle($video, 'padding', `0 ${(clientWidth - clientWidth * percentage) / 2}px`);
+                    setStyle($video, 'padding', `0 ${(clientWidth - width) / 2}px`);
                 } else {
-                    const percentage = videoWidth / setupRatio / videoHeight;
+                    const height = clamp(clientWidth / setupRatio, 0, clientHeight);
                     setStyle($video, 'width', '100%');
-                    setStyle($video, 'height', `${percentage * 100}%`);
-                    setStyle($video, 'padding', `${(clientHeight - clientHeight * percentage) / 2}px 0`);
+                    setStyle($video, 'height', `${height}px`);
+                    setStyle($video, 'padding', `${(clientHeight - height) / 2}px 0`);
                 }
 
                 $player.dataset.aspectRatio = ratio;

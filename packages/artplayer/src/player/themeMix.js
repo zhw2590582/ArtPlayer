@@ -1,15 +1,12 @@
 import { def } from '../utils';
 
 export default function themeMix(art) {
-    const { option } = art;
-
     def(art, 'theme', {
         get() {
-            return art.cssProperty('--art-theme');
+            return art.cssVar('--art-theme');
         },
         set(theme) {
-            option.theme = theme;
-            art.cssProperty('--art-theme', theme);
+            art.cssVar('--art-theme', theme);
         },
     });
 }
