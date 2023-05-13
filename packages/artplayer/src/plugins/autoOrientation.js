@@ -29,7 +29,6 @@ export default function autoOrientation(art) {
             if (hasClass($player, 'art-auto-orientation')) {
                 removeClass($player, 'art-auto-orientation');
                 art.isRotate = false;
-                art.notice.show = '';
                 art.emit('resize');
             }
         }
