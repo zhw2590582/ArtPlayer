@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.0.8] - 2023-5-13
+
+-   修复 `art.mini` 的互斥关系
+-   修复 `art.aspectRatio` 动画效果问题
+
 ## [5.0.7] - 2023-5-13
 
 -   使用 `switchUrl` 或者 `switchQuality` 方法切换地址后会保持原有的调整如：`aspectRatio`, `playbackRate`, `flip`, `autoSize`

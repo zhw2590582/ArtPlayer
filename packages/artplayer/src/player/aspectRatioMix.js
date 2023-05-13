@@ -1,4 +1,4 @@
-import { setStyle, def, clamp } from '../utils';
+import { setStyle, def } from '../utils';
 
 export default function aspectRatioMix(art) {
     const {
@@ -16,7 +16,7 @@ export default function aspectRatioMix(art) {
             if (ratio === 'default') {
                 setStyle($video, 'width', null);
                 setStyle($video, 'height', null);
-                setStyle($video, 'padding', null);
+                setStyle($video, 'margin', null);
                 delete $player.dataset.aspectRatio;
             } else {
                 const ratioArray = ratio.split(':').map(Number);
@@ -25,15 +25,13 @@ export default function aspectRatioMix(art) {
                 const setupRatio = ratioArray[0] / ratioArray[1];
 
                 if (playerRatio > setupRatio) {
-                    const width = clamp(setupRatio * clientHeight, 0, clientWidth);
-                    setStyle($video, 'width', `${width}px`);
+                    setStyle($video, 'width', `${setupRatio * clientHeight}px`);
                     setStyle($video, 'height', '100%');
-                    setStyle($video, 'padding', `0 ${(clientWidth - width) / 2}px`);
+                    setStyle($video, 'margin', '0 auto');
                 } else {
-                    const height = clamp(clientWidth / setupRatio, 0, clientHeight);
                     setStyle($video, 'width', '100%');
-                    setStyle($video, 'height', `${height}px`);
-                    setStyle($video, 'padding', `${(clientHeight - height) / 2}px 0`);
+                    setStyle($video, 'height', `${clientWidth / setupRatio}px`);
+                    setStyle($video, 'margin', 'auto 0');
                 }
 
                 $player.dataset.aspectRatio = ratio;
