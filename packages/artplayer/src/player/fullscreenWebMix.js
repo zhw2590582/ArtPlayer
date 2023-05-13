@@ -2,7 +2,6 @@ import { addClass, removeClass, hasClass, def, append } from '../utils';
 
 export default function fullscreenWebMix(art) {
     const {
-        notice,
         constructor,
         template: { $container, $player },
     } = art;
@@ -20,9 +19,7 @@ export default function fullscreenWebMix(art) {
                 }
                 art.state = 'fullscreenWeb';
                 addClass($player, 'art-fullscreen-web');
-                art.emit('resize');
                 art.emit('fullscreenWeb', true);
-                notice.show = '';
             } else {
                 if (constructor.FULLSCREEN_WEB_IN_BODY) {
                     append($container, $player);
@@ -32,10 +29,10 @@ export default function fullscreenWebMix(art) {
                     cssText = '';
                 }
                 removeClass($player, 'art-fullscreen-web');
-                art.emit('resize');
                 art.emit('fullscreenWeb', false);
-                notice.show = '';
             }
+
+            art.emit('resize');
         },
     });
 }

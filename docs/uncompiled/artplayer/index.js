@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.0.6";
+        return "5.0.7";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2023-05-13 19:31:26";
+        return "2023-05-13 21:28:02";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1236,7 +1236,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.0.6"}</div>
+                  <div class="art-info-content">${"5.0.7"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -1693,17 +1693,17 @@ function switchMix(art) {
     function switchUrl(url, currentTime) {
         return new Promise((resolve, reject)=>{
             if (url === art.url) return;
-            const { playing , aspectRatio , playbackRate , option  } = art;
+            const { playing , aspectRatio , playbackRate  } = art;
             art.pause();
             art.url = url;
+            art.notice.show = "";
             art.once("video:error", reject);
-            art.once("video:canplay", ()=>{
+            art.once("video:canplay", async ()=>{
                 art.playbackRate = playbackRate;
                 art.aspectRatio = aspectRatio;
                 art.currentTime = currentTime;
+                if (playing) await art.play();
                 art.notice.show = "";
-                if (option.autoSize) art.autoSize = true;
-                if (playing) art.play();
                 resolve();
             });
         });
@@ -1854,14 +1854,11 @@ function fullscreenMix(art) {
                     art.state = "fullscreen";
                     await (0, _screenfullDefault.default).request($player);
                     (0, _utils.addClass)($player, "art-fullscreen");
-                    art.emit("resize");
-                    notice.show = "";
                 } else {
                     await (0, _screenfullDefault.default).exit();
                     (0, _utils.removeClass)($player, "art-fullscreen");
-                    art.emit("resize");
-                    notice.show = "";
                 }
+                art.emit("resize");
             }
         });
     };
@@ -1875,12 +1872,11 @@ function fullscreenMix(art) {
                     art.state = "fullscreen";
                     $video.webkitEnterFullscreen();
                     art.emit("fullscreen", true);
-                    notice.show = "";
                 } else {
                     $video.webkitExitFullscreen();
                     art.emit("fullscreen", false);
-                    notice.show = "";
                 }
+                art.emit("resize");
             }
         });
     };
@@ -2034,7 +2030,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function fullscreenWebMix(art) {
-    const { notice , constructor , template: { $container , $player  }  } = art;
+    const { constructor , template: { $container , $player  }  } = art;
     let cssText = "";
     (0, _utils.def)(art, "fullscreenWeb", {
         get () {
@@ -2046,9 +2042,7 @@ function fullscreenWebMix(art) {
                 if (constructor.FULLSCREEN_WEB_IN_BODY) (0, _utils.append)(document.body, $player);
                 art.state = "fullscreenWeb";
                 (0, _utils.addClass)($player, "art-fullscreen-web");
-                art.emit("resize");
                 art.emit("fullscreenWeb", true);
-                notice.show = "";
             } else {
                 if (constructor.FULLSCREEN_WEB_IN_BODY) (0, _utils.append)($container, $player);
                 if (cssText) {
@@ -2056,10 +2050,9 @@ function fullscreenWebMix(art) {
                     cssText = "";
                 }
                 (0, _utils.removeClass)($player, "art-fullscreen-web");
-                art.emit("resize");
                 art.emit("fullscreenWeb", false);
-                notice.show = "";
             }
+            art.emit("resize");
         }
     });
 }
@@ -3701,7 +3694,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.0.6"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.0.7"}</a>`
     };
 }
 exports.default = version;
@@ -5104,7 +5097,6 @@ function autoOrientation(art) {
         } else if ((0, _utils.hasClass)($player, "art-auto-orientation")) {
             (0, _utils.removeClass)($player, "art-auto-orientation");
             art.isRotate = false;
-            art.notice.show = "";
             art.emit("resize");
         }
     });

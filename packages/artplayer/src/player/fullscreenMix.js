@@ -22,14 +22,11 @@ export default function fullscreenMix(art) {
                     art.state = 'fullscreen';
                     await screenfull.request($player);
                     addClass($player, 'art-fullscreen');
-                    art.emit('resize');
-                    notice.show = '';
                 } else {
                     await screenfull.exit();
                     removeClass($player, 'art-fullscreen');
-                    art.emit('resize');
-                    notice.show = '';
                 }
+                art.emit('resize');
             },
         });
     };
@@ -44,12 +41,11 @@ export default function fullscreenMix(art) {
                     art.state = 'fullscreen';
                     $video.webkitEnterFullscreen();
                     art.emit('fullscreen', true);
-                    notice.show = '';
                 } else {
                     $video.webkitExitFullscreen();
                     art.emit('fullscreen', false);
-                    notice.show = '';
                 }
+                art.emit('resize');
             },
         });
     };

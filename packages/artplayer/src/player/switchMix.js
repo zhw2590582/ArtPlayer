@@ -4,24 +4,23 @@ export default function switchMix(art) {
     function switchUrl(url, currentTime) {
         return new Promise((resolve, reject) => {
             if (url === art.url) return;
-            const { playing, aspectRatio, playbackRate, option } = art;
+            const { playing, aspectRatio, playbackRate } = art;
 
             art.pause();
             art.url = url;
+            art.notice.show = '';
+
             art.once('video:error', reject);
-            art.once('video:canplay', () => {
+            art.once('video:canplay', async () => {
                 art.playbackRate = playbackRate;
                 art.aspectRatio = aspectRatio;
                 art.currentTime = currentTime;
-                art.notice.show = '';
-
-                if (option.autoSize) {
-                    art.autoSize = true;
-                }
 
                 if (playing) {
-                    art.play();
+                    await art.play();
                 }
+
+                art.notice.show = '';
 
                 resolve();
             });
