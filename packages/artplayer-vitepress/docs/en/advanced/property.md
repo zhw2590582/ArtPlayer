@@ -745,28 +745,6 @@ art.on('ready', () => {
 });
 ```
 
-## `title`
-
--   Type: `Setter/Getter`
--   Parameter: `String`
-
-Get and set player titles dynamically
-
-<div className="run-code">▶ Run Code</div>
-
-```js{8}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-
-art.on('ready', () => {
-    console.info(art.title);
-    art.title = 'New Title';
-    console.info(art.title);
-});
-```
-
 ## `type`
 
 -   Type: `Setter/Getter`
@@ -819,7 +797,7 @@ Enable airplay
 
 <div className="run-code">▶ Run Code</div>
 
-```js{10}
+```js{9}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -881,7 +859,7 @@ The proxy function of DOM event essentially proxies `addEventListener` and `remo
 
 <div className="run-code">▶ Run Code</div>
 
-```js{7-10}
+```js{8-10}
 var container = document.querySelector('.artplayer-app');
 
 var art = new Artplayer({

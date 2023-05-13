@@ -741,28 +741,6 @@ art.on('ready', () => {
 });
 ```
 
-## `title`
-
--   Type: `Setter/Getter`
--   Parameter: `String`
-
-动态获取和设置播放器标题
-
-<div className="run-code">▶ Run Code</div>
-
-```js{8}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-
-art.on('ready', () => {
-    console.info(art.title);
-    art.title = 'New Title';
-    console.info(art.title);
-});
-```
-
 ## `type`
 
 -   Type: `Setter/Getter`
@@ -815,7 +793,7 @@ art.on('ready', () => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js{10}
+```js{9}
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
@@ -877,7 +855,7 @@ art.on('video:timeupdate', () => {
 
 <div className="run-code">▶ Run Code</div>
 
-```js{7-10}
+```js{8-10}
 var container = document.querySelector('.artplayer-app');
 
 var art = new Artplayer({
