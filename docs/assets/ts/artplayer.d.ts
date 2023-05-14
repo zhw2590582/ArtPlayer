@@ -1074,6 +1074,13 @@ declare class Artplayer extends Player {
     readonly isRotate: boolean;
     readonly isDestroy: boolean;
 
+    flv: any;
+    m3u8: any;
+    hls: any;
+    ts: any;
+    mpd: any;
+    torrent: any;
+
     on<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown;
     once<T extends keyof Events>(name: T, fn: (...args: Events[T]) => unknown, ctx?: object): unknown;
     emit<T extends keyof Events>(name: T, ...args: unknown[]): unknown;
