@@ -1,4 +1,4 @@
-import { addClass, removeClass, hasClass, def, append } from '../utils';
+import { addClass, removeClass, hasClass, def, append, setStyle } from '../utils';
 
 export default function fullscreenWebMix(art) {
     const {
@@ -18,6 +18,8 @@ export default function fullscreenWebMix(art) {
                     append(document.body, $player);
                 }
                 art.state = 'fullscreenWeb';
+                setStyle($player, 'width', '100%');
+                setStyle($player, 'height', '100%');
                 addClass($player, 'art-fullscreen-web');
                 art.emit('fullscreenWeb', true);
             } else {

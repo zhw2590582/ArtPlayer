@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.0.9] - 2023-5-14
+
+-   修复 `art.autoOrientation` 样式错误问题
+-   移除播放器容器的动画效果
+
 ## [5.0.8] - 2023-5-13
 
 -   修复 `art.mini` 的互斥关系
