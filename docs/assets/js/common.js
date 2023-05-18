@@ -11,6 +11,7 @@
     var $popups = document.querySelector('.popups');
     var $console = document.querySelector('.console');
     var $typeScript = document.querySelector('#typeScript');
+    var $file = document.querySelector('#file');
 
     var loadedLibs = [];
     window['consoleLog']($console);
@@ -199,6 +200,14 @@
         initApp();
     }
 
+    function readFile(file) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.readAsText(file);
+        })
+    }
+
     $run.addEventListener('click', function () {
         restart();
     });
@@ -212,6 +221,29 @@
     $typeScript.addEventListener('change', function () {
         localStorage.setItem('typeScript', $typeScript.checked ? 'true' : 'false');
         window.location.reload();
+    });
+
+    $file.addEventListener('change', async function () {
+        for (let index = 0; index < $file.files.length; index++) {
+            const file = $file.files[index];
+            const name = file.name.toLowerCase().trim()
+            if (name.endsWith('.css')) {
+                const text = await readFile(file);
+                const $style = document.createElement('style');
+                $style.textContent = text;
+                document.body.appendChild($style);
+                $lib.value = `\n[${name}]`;
+                $lib.value = $lib.value.trim();
+            }
+            if (name.endsWith('.js')) {
+                const text = await readFile(file);
+                const $script = document.createElement('script');
+                $script.textContent = text;
+                document.body.appendChild($script);
+                $lib.value = `\n[${name}]`;
+                $lib.value = $lib.value.trim();
+            }
+        }
     });
 
     window.addEventListener('error', function (err) {

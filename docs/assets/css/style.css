@@ -36,6 +36,10 @@ img {
     vertical-align: top;
 }
 
+input[type="file"] {
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -179,19 +183,41 @@ img {
 }
 
 .main .part-left .libs {
-    height: 55px;
+    display: flex;
+    height: 50px;
+    border-bottom: 1px solid rgb(17, 21, 24);
+}
+
+.main .part-left .upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    height: 100%;
+    font-size: 13px;
+    color: #f1fa8c;
+    border-right: 1px solid rgb(17, 21, 24);
+    background-color: rgb(39, 41, 54);
+}
+
+.main .part-left #file {
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .main .part-left .libsInput {
     height: 100%;
-    width: 100%;
+    flex: 1;
     padding: 10px;
     outline: none;
     resize: none;
     border: none;
     font-size: 13px;
     color: #ccc;
-    border-bottom: 1px solid rgb(17, 21, 24);
     background-color: rgb(28, 32, 34);
 }
 
