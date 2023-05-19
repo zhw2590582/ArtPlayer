@@ -385,7 +385,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    art.autoHeight = true;
+    art.autoHeight();
 });
 
 art.on('autoHeight', (height) => {

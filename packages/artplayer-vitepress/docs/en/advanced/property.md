@@ -566,9 +566,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    console.info(art.autoSize);
-    art.autoSize = true;
-    console.info(art.autoSize);
+    art.autoSize();
 });
 ```
 
@@ -709,11 +707,11 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    art.autoHeight = true;
+    art.autoHeight();
 });
 
 art.on('resize', () => {
-    art.autoHeight = true;
+    art.autoHeight();
 });
 ```
 
