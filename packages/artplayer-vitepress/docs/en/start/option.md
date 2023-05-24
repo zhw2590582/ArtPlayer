@@ -862,7 +862,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     thumbnails: {
         url: '/assets/sample/thumbnails.png',
-        number: 100,
+        number: 60,
         column: 10,
     },
 });
