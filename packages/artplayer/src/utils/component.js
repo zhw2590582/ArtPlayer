@@ -173,7 +173,10 @@ export default class Component {
 
     update(option) {
         const item = this.cache.get(option.name);
-        if (item) this.remove(option.name);
+        if (item) {
+            option = Object.assign(item.option, option);
+            this.remove(option.name);
+        }
         return this.add(option);
     }
 }
