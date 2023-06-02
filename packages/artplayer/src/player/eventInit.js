@@ -74,7 +74,6 @@ export default function eventInit(art) {
             addClass($player, 'art-error');
             await sleep(constructor.RECONNECT_SLEEP_TIME);
             notice.show = i18n.get('Video Load Failed');
-            art.destroy(false);
         }
     });
 

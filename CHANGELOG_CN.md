@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   当播放地址发生错误到达上限后，不会再主动销毁播放器
+-   更新组件时，支持填写只更新的字段 [pull/549](https://github.com/zhw2590582/ArtPlayer/pull/549)
+-   当 `autoPlayback` 和 `autoplay` 同时为 `true` 时，会自动跳转播放
+
 ## [5.0.9] - 2023-5-14
 
 -   修复 `art.autoOrientation` 样式错误问题
