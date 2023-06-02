@@ -50,7 +50,7 @@
         "prettier": "^2.8.8",
         "prompts": "^2.4.2",
         "servor": "^4.0.2",
-        "workbox-build": "^6.5.4"
+        "workbox-build": "^7.0.0"
     },
     "engines": {
         "node": ">= 16.0.0"
