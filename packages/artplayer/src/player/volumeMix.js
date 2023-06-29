@@ -23,6 +23,7 @@ export default function volumeMix(art) {
         get: () => $video.muted,
         set: (muted) => {
             $video.muted = muted;
+            art.emit('muted', muted);
         },
     });
 }

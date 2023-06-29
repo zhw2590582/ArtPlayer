@@ -102,8 +102,25 @@ art.on('ready', () => {
     art.url = '/assets/sample/video.mp4'
 });
 
-art.on('restart', () => {
-    console.info('restart');
+art.on('restart', (url) => {
+    console.info('restart', url);
+});
+```
+
+## `loop`
+
+当出现区间循环时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('loop', (start, end) => {
+    console.info('loop', start, end);
 });
 ```
 
@@ -179,27 +196,6 @@ art.on('destroy', () => {
 });
 ```
 
-## `url`
-
-当视频地址变化时触发
-
-<div className="run-code">▶ Run Code</div>
-
-```js{10}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-
-art.on('ready', () => {
-    art.url = '/assets/sample/video.mp4?t=0'
-});
-
-art.on('url', (url) => {
-    console.info('url', url);
-});
-```
-
 ## `focus`
 
 当播放器获得焦点时触发
@@ -212,8 +208,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('focus', () => {
-    console.info('focus');
+art.on('focus', (event) => {
+    console.info('focus', event);
 });
 ```
 
@@ -229,8 +225,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('blur', () => {
-    console.info('blur');
+art.on('blur', (event) => {
+    console.info('blur', event);
 });
 ```
 
@@ -246,8 +242,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('dblclick', () => {
-    console.info('dblclick');
+art.on('dblclick', (event) => {
+    console.info('dblclick', event);
 });
 ```
 
@@ -263,8 +259,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('click', () => {
-    console.info('click');
+art.on('click', (event) => {
+    console.info('click', event);
 });
 ```
 
@@ -297,8 +293,8 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 
-art.on('hover', (state) => {
-    console.info('hover', state);
+art.on('hover', (state, event) => {
+    console.info('hover', state, event);
 });
 ```
 
@@ -350,6 +346,24 @@ var art = new Artplayer({
 
 art.on('view', (state) => {
     console.info('view', state);
+});
+```
+
+## `lock`
+
+在移动端，当锁定的状态发生变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    lock: true,
+});
+
+art.on('lock', (state) => {
+    console.info('lock', state);
 });
 ```
 
@@ -759,6 +773,23 @@ var art = new Artplayer({
 });
 
 art.on('setting', (state) => {
+    console.log(state);
+});
+```
+
+## `muted`
+
+当静音的状态变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('muted', (state) => {
     console.log(state);
 });
 ```

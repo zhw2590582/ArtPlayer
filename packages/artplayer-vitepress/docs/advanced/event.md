@@ -777,6 +777,23 @@ art.on('setting', (state) => {
 });
 ```
 
+## `muted`
+
+当静音的状态变化时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js{6}
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('muted', (state) => {
+    console.log(state);
+});
+```
+
 ## `video:canplay`
 
 浏览器可以播放媒体文件了，但估计没有足够的数据来支撑播放到结束，不必停下来进一步缓冲内容
