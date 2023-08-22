@@ -2699,6 +2699,7 @@ function eventInit(art) {
     // });
     art.on("video:seeked", ()=>{
         art.loading.show = false;
+        art.mask.show = true;
     });
     art.on("video:seeking", ()=>{
         art.loading.show = true;

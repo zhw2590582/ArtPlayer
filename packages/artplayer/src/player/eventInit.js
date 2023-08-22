@@ -122,6 +122,7 @@ export default function eventInit(art) {
 
     art.on('video:seeked', () => {
         art.loading.show = false;
+        art.mask.show = true;
     });
 
     art.on('video:seeking', () => {
