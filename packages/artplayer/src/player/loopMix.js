@@ -22,7 +22,7 @@ export default function loopMix(art) {
 
     art.on('video:timeupdate', () => {
         if (interval.length) {
-            if (art.currentTime < interval[0] || art.currentTime > interval[1]) {
+            if (art.currentTime < interval[0] ?? art.currentTime > interval[1]) {
                 art.seek = interval[0];
             }
         }

@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.0.9";
+        return "5.1.0";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2023-05-18 11:30:49";
+        return "2023-08-22 20:37:01";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -396,6 +396,7 @@ Artplayer.FLIP = [
     "vertical"
 ];
 Artplayer.FULLSCREEN_WEB_IN_BODY = false;
+Artplayer.LOG_VERSION = true;
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-style")) {
         const $style = _utils.createElement("style");
@@ -405,7 +406,9 @@ if (typeof document !== "undefined") {
     }
 }
 if (typeof window !== "undefined") window["Artplayer"] = Artplayer;
-console.log(`%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`, "color: #fff; background: #5f5f5f", "color: #fff; background: #4bc729", "");
+setTimeout(()=>{
+    if (Artplayer.LOG_VERSION) console.log(`%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`, "color: #fff; background: #5f5f5f", "color: #fff; background: #4bc729", "");
+});
 
 },{"bundle-text:./style/index.less":"SvnDa","option-validator":"2tbdu","./utils/emitter":"elSLF","./utils":"jmgNb","./scheme":"gL38d","./config":"2ZnKD","./template":"bDTDS","./i18n":"k0CtI","./player":"35XKf","./control":"faO0X","./contextmenu":"5npaZ","./info":"6vVKE","./subtitle":"4exyO","./events":"dz5ul","./hotkey":"1nFqF","./layer":"fvy8V","./loading":"h8KPY","./notice":"cr1XY","./mask":"llnR4","./icons":"gP6M7","./setting":"e5Aaq","./storage":"feFxw","./plugins":"h1hfO","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"SvnDa":[function(require,module,exports) {
 module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: #00000080;\n  --art-transition-duration: .2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: #fff3;\n  --art-hover-color: #ffffff80;\n  --art-loaded-color: #fff3;\n  --art-loop-color: #ffffffbf;\n  --art-state-size: 80px;\n  --art-state-opacity: .8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: #ffffff80;\n  --art-loop-width: 2px;\n  --art-control-height: 46px;\n  --art-control-opacity: .75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: #000000d9;\n  --art-tip-background: #00000080;\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: #ffffff40;\n  --art-scrollbar-background-hover: #ffffff80;\n  --art-mini-progress-height: 2px;\n}\n\n.art-bg-cover {\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n}\n\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-truncate {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.art-video-player {\n  width: 100%;\n  height: 100%;\n  zoom: 1;\n  text-align: left;\n  direction: ltr;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  -webkit-tap-highlight-color: #0000;\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n  outline: 0;\n  margin: 0 auto;\n  padding: 0;\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.3;\n  position: relative;\n}\n\n.art-video-player *, .art-video-player :before, .art-video-player :after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n\n.art-icon {\n  justify-content: center;\n  align-items: center;\n  line-height: 1;\n  display: flex;\n}\n\n.art-video-player.art-backdrop .art-contextmenus, .art-video-player.art-backdrop .art-info, .art-video-player.art-backdrop .art-settings, .art-video-player.art-backdrop .art-layer-auto-playback, .art-video-player.art-backdrop .art-selector-list, .art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-video {\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  cursor: pointer;\n  position: absolute;\n  inset: 0;\n}\n\n.art-poster {\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-subtitle {\n  z-index: 20;\n  width: 100%;\n  text-align: center;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n  flex-direction: column;\n  padding: 0 5%;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-control-height)  + var(--art-subtitle-bottom));\n}\n\n.art-danmuku {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-layers {\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n\n.art-video-player .art-mask {\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-mask .art-state {\n  opacity: 0;\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  transform: scale(2);\n}\n\n.art-video-player.art-mask-show .art-state {\n  cursor: pointer;\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n\n.art-video-player .art-loading {\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n\n.art-video-player .art-bottom {\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  pointer-events: none;\n  justify-content: flex-end;\n  gap: var(--art-bottom-gap);\n  padding: 0 var(--art-padding);\n  transition: opacity var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n  flex-direction: column;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-bottom .art-controls, .art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-video-player.art-control-show .art-bottom, .art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n\n.art-video-player.art-control-show .art-bottom .art-controls, .art-video-player.art-hover .art-bottom .art-controls, .art-video-player.art-control-show .art-bottom .art-progress, .art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n\n.art-bottom .art-progress {\n  z-index: 0;\n  pointer-events: auto;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress {\n  cursor: pointer;\n  height: var(--art-progress-height);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  pointer-events: auto;\n  width: var(--art-highlight-width);\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n  position: absolute;\n  inset: 0 auto 0 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  z-index: 40;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  z-index: 50;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  padding: 3px 5px;\n  font-size: 12px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: -25px;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner {\n  height: 100%;\n}\n\n.art-bottom .art-progress .art-control-thumbnails {\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  display: none;\n  position: absolute;\n  bottom: 10px;\n  left: 0;\n  box-shadow: 0 1px 3px #0003, 0 1px 2px -1px #0003;\n}\n\n.art-bottom .art-progress .art-control-loop {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-loop .art-loop-point {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: var(--art-loop-width);\n  background-color: var(--art-loop-color);\n  transform: translateX(calc(var(--art-loop-width) / -2)) scaleY(1.5);\n  position: absolute;\n  inset: 0 0 0 0%;\n}\n\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n\n.art-controls {\n  z-index: 10;\n  pointer-events: auto;\n  height: var(--art-control-height);\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-controls .art-controls-left, .art-controls .art-controls-right {\n  height: 100%;\n  display: flex;\n}\n\n.art-controls .art-controls-center {\n  height: 100%;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  padding: 0 10px;\n  display: none;\n}\n\n.art-controls .art-controls-right {\n  justify-content: flex-end;\n}\n\n.art-controls .art-control {\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * .8));\n}\n\n.art-controls .art-control:hover {\n  opacity: 1;\n}\n\n.art-control-volume {\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel {\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  pointer-events: none;\n  left: 0;\n  right: 0;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  padding: 0 5px;\n  font-size: 12px;\n  display: flex;\n  position: absolute;\n  transform: translateY(10px);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner {\n  height: 100%;\n  width: 100%;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 0 12px;\n  display: flex;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  width: 100%;\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  display: flex;\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  background-color: #ffffff40;\n  justify-content: center;\n  display: flex;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n  position: absolute;\n  inset: 0;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 100%;\n  flex-shrink: 0;\n  position: absolute;\n  transform: scale(1);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(.9);\n}\n\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n.art-video-player .art-notice {\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0 0 auto;\n}\n\n.art-video-player .art-notice .art-notice-inner {\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n  padding: 5px;\n  line-height: 1;\n  display: inline-flex;\n}\n\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n\n.art-video-player .art-contextmenus {\n  z-index: 120;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n  flex-direction: column;\n  padding: 5px 0;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  border-bottom: 1px solid #ffffff1a;\n  padding: 10px 15px;\n  display: flex;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span:hover, .art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n\n.art-video-player .art-settings {\n  z-index: 90;\n  border-radius: var(--art-border-radius);\n  transform-origin: 100% 100%;\n  max-height: var(--art-settings-max-height);\n  left: auto;\n  right: var(--art-padding);\n  bottom: var(--art-control-height);\n  transform: scale(var(--art-settings-scale));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  display: none;\n  position: absolute;\n  overflow: hidden auto;\n}\n\n.art-video-player .art-settings .art-setting-panel {\n  flex-direction: column;\n  display: none;\n}\n\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  cursor: pointer;\n  transition: background-color var(--art-transition-duration) ease;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 5px;\n  display: flex;\n  overflow: hidden;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  font-size: 12px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  white-space: nowrap;\n  color: #ffffff80;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  min-width: 32px;\n  height: 24px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  appearance: none;\n  background-color: #fff3;\n  outline: none;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid #ffffff1a;\n}\n\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n\n.art-video-player .art-info {\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  padding: 10px;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-info .art-info-panel {\n  flex-direction: column;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item {\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n  overflow: hidden;\n}\n\n.art-video-player .art-info .art-info-close {\n  cursor: pointer;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n\n.art-hide-cursor * {\n  cursor: none !important;\n}\n\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n\n.art-fullscreen {\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n\n.art-fullscreen-web {\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  inset: 0;\n}\n\n.art-mini-popup {\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  background: #000;\n  transition: opacity .2s;\n  position: fixed;\n  overflow: hidden;\n  box-shadow: 0 0 5px #00000080;\n}\n\n.art-mini-popup svg {\n  fill: #fff;\n}\n\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n\n.art-mini-popup .art-mini-close {\n  z-index: 20;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .2s;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.art-mini-popup .art-mini-state {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  opacity: 0;\n  background-color: #00000040;\n  justify-content: center;\n  align-items: center;\n  transition: opacity .2s;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: .75;\n  cursor: pointer;\n  pointer-events: auto;\n  transition: transform .2s;\n  transform: scale(3);\n}\n\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n\n.art-mini-popup.art-mini-droging {\n  opacity: .9;\n}\n\n.art-mini-popup:hover .art-mini-close, .art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n\n.art-video-player[data-flip=\"horizontal\"] .art-video {\n  transform: scaleX(-1);\n}\n\n.art-video-player[data-flip=\"vertical\"] .art-video {\n  transform: scaleY(-1);\n}\n\n.art-video-player .art-layer-mini-progress-bar {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  height: var(--art-mini-progress-height);\n  background-color: var(--art-theme);\n  display: flex;\n  position: absolute;\n  inset: auto 0 0;\n}\n\n.art-video-player .art-layer-lock {\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  top: 50%;\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  transform: translateY(-50%);\n}\n\n.art-video-player .art-layer-auto-playback {\n  border-radius: var(--art-border-radius);\n  left: var(--art-padding);\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + 10px);\n  background-color: var(--art-widget-background);\n  align-items: center;\n  gap: 10px;\n  padding: 10px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  cursor: pointer;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n\n.art-video-player.art-lock .art-bottom {\n  display: none !important;\n}\n\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n\n.art-video-player.art-lock .art-layer-mini-progress-bar {\n  display: flex !important;\n}\n\n.art-video-player.art-control-show .art-layer-mini-progress-bar {\n  display: none;\n}\n\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n\n.art-control-selector {\n  position: relative;\n}\n\n.art-control-selector .art-selector-list {\n  text-align: center;\n  border-radius: var(--art-border-radius);\n  opacity: 0;\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n  flex-direction: column;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  overflow: hidden auto;\n  transform: translateY(10px);\n}\n\n.art-control-selector .art-selector-list .art-selector-item {\n  width: 100%;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  padding: 10px 15px;\n  line-height: 1;\n  display: flex;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover, .art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n[class*=\"hint--\"] {\n  font-style: normal;\n  display: inline-block;\n  position: relative;\n}\n\n[class*=\"hint--\"]:before, [class*=\"hint--\"]:after {\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  transition: all .3s;\n  transition-delay: 0s;\n  position: absolute;\n  transform: translate3d(0, 0, 0);\n}\n\n[class*=\"hint--\"]:hover:before, [class*=\"hint--\"]:hover:after {\n  visibility: visible;\n  opacity: 1;\n  transition-delay: .1s;\n}\n\n[class*=\"hint--\"]:before {\n  content: \"\";\n  z-index: 1000001;\n  background: none;\n  border: 6px solid #0000;\n  position: absolute;\n}\n\n[class*=\"hint--\"]:after {\n  color: #fff;\n  white-space: nowrap;\n  background: #000;\n  padding: 8px 10px;\n  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  line-height: 12px;\n}\n\n[class*=\"hint--\"][aria-label]:after {\n  content: attr(aria-label);\n}\n\n[class*=\"hint--\"][data-hint]:after {\n  content: attr(data-hint);\n}\n\n[aria-label=\"\"]:before, [aria-label=\"\"]:after, [data-hint=\"\"]:before, [data-hint=\"\"]:after {\n  display: none !important;\n}\n\n.hint--top-left:before, .hint--top-right:before, .hint--top:before {\n  border-top-color: #000;\n}\n\n.hint--bottom-left:before, .hint--bottom-right:before, .hint--bottom:before {\n  border-bottom-color: #000;\n}\n\n.hint--left:before {\n  border-left-color: #000;\n}\n\n.hint--right:before {\n  border-right-color: #000;\n}\n\n.hint--top:before {\n  margin-bottom: -11px;\n}\n\n.hint--top:before, .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top:after {\n  transform: translateX(-50%);\n}\n\n.hint--top:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top:hover:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--bottom:before {\n  margin-top: -11px;\n}\n\n.hint--bottom:before, .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom:after {\n  transform: translateX(-50%);\n}\n\n.hint--bottom:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom:hover:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--right:before {\n  margin-bottom: -6px;\n  margin-left: -11px;\n}\n\n.hint--right:after {\n  margin-bottom: -14px;\n}\n\n.hint--right:before, .hint--right:after {\n  bottom: 50%;\n  left: 100%;\n}\n\n.hint--right:hover:before, .hint--right:hover:after {\n  transform: translateX(8px);\n}\n\n.hint--left:before {\n  margin-bottom: -6px;\n  margin-right: -11px;\n}\n\n.hint--left:after {\n  margin-bottom: -14px;\n}\n\n.hint--left:before, .hint--left:after {\n  bottom: 50%;\n  right: 100%;\n}\n\n.hint--left:hover:before, .hint--left:hover:after {\n  transform: translateX(-8px);\n}\n\n.hint--top-left:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-left:before, .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--top-left:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top-left:hover:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--top-right:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-right:before, .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--top-right:hover:before, .hint--top-right:hover:after {\n  transform: translateY(-8px);\n}\n\n.hint--bottom-left:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-left:before, .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--bottom-left:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom-left:hover:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--bottom-right:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-right:before, .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--bottom-right:hover:before, .hint--bottom-right:hover:after {\n  transform: translateY(8px);\n}\n\n.hint--small:after, .hint--medium:after, .hint--large:after {\n  white-space: normal;\n  word-wrap: break-word;\n  line-height: 1.4em;\n}\n\n.hint--small:after {\n  width: 80px;\n}\n\n.hint--medium:after {\n  width: 150px;\n}\n\n.hint--large:after {\n  width: 300px;\n}\n\n[class*=\"hint--\"]:after {\n  text-shadow: 0 -1px #000;\n  box-shadow: 4px 4px 8px #0000004d;\n}\n\n.hint--error:after {\n  text-shadow: 0 -1px #592726;\n  background-color: #b34e4d;\n}\n\n.hint--error.hint--top-left:before, .hint--error.hint--top-right:before, .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n\n.hint--error.hint--bottom-left:before, .hint--error.hint--bottom-right:before, .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n\n.hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n\n.hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n\n.hint--warning:after {\n  text-shadow: 0 -1px #6c5328;\n  background-color: #c09854;\n}\n\n.hint--warning.hint--top-left:before, .hint--warning.hint--top-right:before, .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n\n.hint--warning.hint--bottom-left:before, .hint--warning.hint--bottom-right:before, .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n\n.hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n\n.hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n\n.hint--info:after {\n  text-shadow: 0 -1px #1a3c4d;\n  background-color: #3986ac;\n}\n\n.hint--info.hint--top-left:before, .hint--info.hint--top-right:before, .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n\n.hint--info.hint--bottom-left:before, .hint--info.hint--bottom-right:before, .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n\n.hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n\n.hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n\n.hint--success:after {\n  text-shadow: 0 -1px #1a321a;\n  background-color: #458746;\n}\n\n.hint--success.hint--top-left:before, .hint--success.hint--top-right:before, .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n\n.hint--success.hint--bottom-left:before, .hint--success.hint--bottom-right:before, .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n\n.hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n\n.hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n\n.hint--always:after, .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n\n.hint--always.hint--top:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--always.hint--top-left:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top-left:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--always.hint--top-right:before, .hint--always.hint--top-right:after {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--bottom:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--always.hint--bottom-left:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom-left:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--always.hint--bottom-right:before, .hint--always.hint--bottom-right:after {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--left:before, .hint--always.hint--left:after {\n  transform: translateX(-8px);\n}\n\n.hint--always.hint--right:before, .hint--always.hint--right:after {\n  transform: translateX(8px);\n}\n\n.hint--rounded:after {\n  border-radius: 4px;\n}\n\n.hint--no-animate:before, .hint--no-animate:after {\n  transition-duration: 0s;\n}\n\n.hint--bounce:before, .hint--bounce:after {\n  -webkit-transition: opacity .3s, visibility .3s, -webkit-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  -moz-transition: opacity .3s, visibility .3s, -moz-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n}\n\n.hint--no-shadow:before, .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n\n.hint--no-arrow:before {\n  display: none;\n}\n\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n\n";
@@ -558,8 +561,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Emitter {
     on(name, fn, ctx) {
-        const e = this.e || (this.e = {});
-        (e[name] || (e[name] = [])).push({
+        const e = this.e ?? (this.e = {});
+        (e[name] ?? (e[name] = [])).push({
             fn,
             ctx
         });
@@ -575,12 +578,12 @@ class Emitter {
         return this.on(name, listener, ctx);
     }
     emit(name, ...data) {
-        const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+        const evtArr = ((this.e ?? (this.e = {}))[name] ?? []).slice();
         for(let i = 0; i < evtArr.length; i += 1)evtArr[i].fn.apply(evtArr[i].ctx, data);
         return this;
     }
     off(name, callback) {
-        const e = this.e || (this.e = {});
+        const e = this.e ?? (this.e = {});
         const evts = e[name];
         const liveEvents = [];
         if (evts && callback) {
@@ -683,7 +686,7 @@ function hasClass(target, className) {
 function append(parent, child) {
     if (child instanceof Element) parent.appendChild(child);
     else parent.insertAdjacentHTML("beforeend", String(child));
-    return parent.lastElementChild || parent.lastChild;
+    return parent.lastElementChild ?? parent.lastChild;
 }
 function remove(child) {
     return child.parentNode.removeChild(child);
@@ -715,8 +718,8 @@ function tooltip(target, msg, pos = "top") {
 }
 function isInViewport(el, offset = 0) {
     const rect = el.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+    const windowHeight = window.innerHeight ?? document.documentElement.clientHeight;
+    const windowWidth = window.innerWidth ?? document.documentElement.clientWidth;
     const vertInView = rect.top - offset <= windowHeight && rect.top + rect.height + offset >= 0;
     const horInView = rect.left - offset <= windowWidth + offset && rect.left + rect.width + offset >= 0;
     return vertInView && horInView;
@@ -756,8 +759,8 @@ const isWechat = /MicroMessenger/i.test(userAgent);
 const isIE = /MSIE|Trident/i.test(userAgent);
 const isAndroid = /android/i.test(userAgent);
 const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
-const isIOS13 = isIOS || userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1;
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
+const isIOS13 = isIOS ?? (userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1);
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) ?? isIOS13;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"622b3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -767,7 +770,7 @@ parcelHelpers.export(exports, "errorHandle", ()=>errorHandle);
 class ArtPlayerError extends Error {
     constructor(message, context){
         super(message);
-        if (typeof Error.captureStackTrace === "function") Error.captureStackTrace(this, context || this.constructor);
+        if (typeof Error.captureStackTrace === "function") Error.captureStackTrace(this, context ?? this.constructor);
         this.name = "ArtPlayerError";
     }
 }
@@ -929,6 +932,7 @@ function isStringOrNumber(val) {
     ].includes(typeof val);
 }
 function secondToTime(second) {
+    if (!second) return "00:00";
     const add0 = (num)=>num < 10 ? `0${num}` : String(num);
     const hour = Math.floor(second / 3600);
     const min = Math.floor((second - hour * 3600) / 60);
@@ -949,7 +953,7 @@ function escape(str) {
             ">": "&gt;",
             "'": "&#39;",
             '"': "&quot;"
-        })[tag] || tag);
+        })[tag] ?? tag);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gL38d":[function(require,module,exports) {
@@ -964,7 +968,7 @@ const n = "number";
 const o = "object";
 const f = "function";
 function validElement(value, type, paths) {
-    return (0, _utils.errorHandle)(type === s || type === n || value instanceof Element, `${paths.join(".")} require '${s}' or 'Element' type`);
+    return (0, _utils.errorHandle)((type === s) ?? type === n ?? value instanceof Element, `${paths.join(".")} require '${s}' or 'Element' type`);
 }
 const ComponentOption = {
     html: validElement,
@@ -1221,7 +1225,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.0.9"}</div>
+                  <div class="art-info-content">${"5.1.0"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -1331,10 +1335,10 @@ class I18n {
     }
     init() {
         const lang = this.art.option.lang.toLowerCase();
-        this.language = this.languages[lang] || {};
+        this.language = this.languages[lang] ?? {};
     }
     get(key) {
-        return this.language[key] || key;
+        return this.language[key] ?? key;
     }
     update(value) {
         this.languages = (0, _utils.mergeDeep)(this.languages, value);
@@ -1497,7 +1501,7 @@ function urlMix(art) {
         async set (newUrl) {
             if (newUrl) {
                 const oldUrl = art.url;
-                const typeName = option.type || (0, _utils.getExt)(newUrl);
+                const typeName = option.type ?? (0, _utils.getExt)(newUrl);
                 const typeCallback = option.customType[typeName];
                 if (typeName && typeCallback) {
                     await (0, _utils.sleep)();
@@ -1622,7 +1626,7 @@ var _utils = require("../utils");
 function volumeMix(art) {
     const { template: { $video  } , i18n , notice , storage  } = art;
     (0, _utils.def)(art, "volume", {
-        get: ()=>$video.volume || 0,
+        get: ()=>$video.volume ?? 0,
         set: (percentage)=>{
             $video.volume = (0, _utils.clamp)(percentage, 0, 1);
             notice.show = `${i18n.get("Volume")}: ${parseInt($video.volume * 100, 10)}`;
@@ -1633,6 +1637,7 @@ function volumeMix(art) {
         get: ()=>$video.muted,
         set: (muted)=>{
             $video.muted = muted;
+            art.emit("muted", muted);
         }
     });
 }
@@ -1645,7 +1650,7 @@ var _utils = require("../utils");
 function currentTimeMix(art) {
     const { $video  } = art.template;
     (0, _utils.def)(art, "currentTime", {
-        get: ()=>$video.currentTime || 0,
+        get: ()=>$video.currentTime ?? 0,
         set: (time)=>{
             time = parseFloat(time);
             if (Number.isNaN(time)) return;
@@ -1664,7 +1669,7 @@ function durationMix(art) {
         get: ()=>{
             const { duration  } = art.template.$video;
             if (duration === Infinity) return 0;
-            return duration || 0;
+            return duration ?? 0;
         }
     });
 }
@@ -1738,7 +1743,7 @@ function aspectRatioMix(art) {
     const { i18n , notice , template: { $video , $player  }  } = art;
     (0, _utils.def)(art, "aspectRatio", {
         get () {
-            return $player.dataset.aspectRatio || "default";
+            return $player.dataset.aspectRatio ?? "default";
         },
         set (ratio) {
             if (!ratio) ratio = "default";
@@ -1865,7 +1870,7 @@ function fullscreenMix(art) {
     };
     art.once("video:loadedmetadata", ()=>{
         if ((0, _screenfullDefault.default).isEnabled) nativeScreenfull(art);
-        else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) webkitScreenfull(art);
+        else if (document.fullscreenEnabled ?? $video.webkitSupportsFullscreen) webkitScreenfull(art);
         else (0, _utils.def)(art, "fullscreen", {
             get () {
                 return false;
@@ -2223,7 +2228,7 @@ function flipMix(art) {
     const { template: { $player  } , i18n , notice  } = art;
     (0, _utils.def)(art, "flip", {
         get () {
-            return $player.dataset.flip || "normal";
+            return $player.dataset.flip ?? "normal";
         },
         set (flip) {
             if (!flip) flip = "normal";
@@ -2370,7 +2375,7 @@ function loopMix(art) {
     });
     art.on("video:timeupdate", ()=>{
         if (interval.length) {
-            if (art.currentTime < interval[0] || art.currentTime > interval[1]) art.seek = interval[0];
+            if ((art.currentTime < interval[0]) ?? art.currentTime > interval[1]) art.seek = interval[0];
         }
     });
 }
@@ -2474,7 +2479,7 @@ function stateMix(art) {
         "fullscreenWeb"
     ];
     (0, _utils.def)(art, "state", {
-        get: ()=>states.find((name)=>art[name]) || "standard",
+        get: ()=>states.find((name)=>art[name]) ?? "standard",
         set (name) {
             for(let index = 0; index < states.length; index++){
                 const prop = states[index];
@@ -2560,7 +2565,7 @@ function qualityMix(art) {
     (0, _utils.def)(art, "quality", {
         set (quality) {
             const { controls , notice , i18n  } = art;
-            const qualityDefault = quality.find((item)=>item.default) || quality[0];
+            const qualityDefault = quality.find((item)=>item.default) ?? quality[0];
             controls.update({
                 name: "quality",
                 position: "right",
@@ -2659,7 +2664,6 @@ function eventInit(art) {
             (0, _utils.addClass)($player, "art-error");
             await (0, _utils.sleep)(constructor.RECONNECT_SLEEP_TIME);
             notice.show = i18n.get("Video Load Failed");
-            art.destroy(false);
         }
     });
     // art.on('video:loadeddata', () => {
@@ -2894,10 +2898,10 @@ class Component {
     }
     add(getOption) {
         const option = typeof getOption === "function" ? getOption(this.art) : getOption;
-        option.html = option.html || "";
+        option.html = option.html ?? "";
         (0, _optionValidatorDefault.default)(option, (0, _scheme.ComponentOption));
-        if (!this.$parent || !this.name || option.disable) return;
-        const name = option.name || `${this.name}${this.id}`;
+        if (!this.$parent ?? !this.name ?? option.disable) return;
+        const name = option.name ?? `${this.name}${this.id}`;
         const item = this.cache.get(name);
         (0, _error.errorHandle)(!item, `Can't add an existing [${name}] to the [${this.name}]`);
         this.id += 1;
@@ -2905,7 +2909,7 @@ class Component {
         (0, _dom.addClass)($ref, `art-${this.name}`);
         (0, _dom.addClass)($ref, `art-${this.name}-${name}`);
         const childs = Array.from(this.$parent.children);
-        $ref.dataset.index = option.index || this.id;
+        $ref.dataset.index = option.index ?? this.id;
         const nextChild = childs.find((item)=>Number(item.dataset.index) >= Number($ref.dataset.index));
         if (nextChild) nextChild.insertAdjacentElement("beforebegin", $ref);
         else (0, _dom.append)(this.$parent, $ref);
@@ -2954,12 +2958,12 @@ class Component {
         };
         hover($ref, setLeft);
         const destroyEvent = proxy($list, "click", async (event)=>{
-            const path = event.composedPath() || [];
+            const path = event.composedPath() ?? [];
             const $item = path.find((item)=>(0, _dom.hasClass)(item, "art-selector-item"));
             if (!$item) return;
             (0, _dom.inverseClass)($item, "art-current");
             const index = Number($item.dataset.index);
-            const find = option.selector[index] || {};
+            const find = option.selector[index] ?? {};
             $value.innerText = $item.innerText;
             if (option.onSelect) {
                 const result = await option.onSelect.call(this.art, find, $item, event);
@@ -2980,7 +2984,10 @@ class Component {
     }
     update(option) {
         const item = this.cache.get(option.name);
-        if (item) this.remove(option.name);
+        if (item) {
+            option = Object.assign(item.option, option);
+            this.remove(option.name);
+        }
         return this.add(option);
     }
 }
@@ -3308,7 +3315,7 @@ function volume(option) {
                     return 1 - (event.clientY - top) / height;
                 }
                 function update() {
-                    if (art.muted || art.volume === 0) {
+                    if (art.muted ?? art.volume === 0) {
                         (0, _utils.setStyle)($volume, "display", "none");
                         (0, _utils.setStyle)($close, "display", "flex");
                         (0, _utils.setStyle)($indicator, "top", "100%");
@@ -3392,12 +3399,12 @@ function thumbnails(options) {
                 function showThumbnails(event) {
                     const { width: posWidth  } = (0, _progress.getPosFromEvent)(art, event);
                     const { url , number , column , width , height  } = option.thumbnails;
-                    const width2 = width || image.naturalWidth / column;
-                    const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
+                    const width2 = width ?? image.naturalWidth / column;
+                    const height2 = height ?? width2 / ($video.videoWidth / $video.videoHeight);
                     const perWidth = $progress.clientWidth / number;
                     const perIndex = Math.floor(posWidth / perWidth);
                     const yIndex = Math.ceil(perIndex / column) - 1;
-                    const xIndex = perIndex % column || column - 1;
+                    const xIndex = (perIndex % column) ?? column - 1;
                     (0, _utils.setStyle)($control, "backgroundImage", `url(${url})`);
                     (0, _utils.setStyle)($control, "height", `${height2}px`);
                     (0, _utils.setStyle)($control, "width", `${width2}px`);
@@ -3680,7 +3687,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.0.9"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.0"}</a>`
     };
 }
 exports.default = version;
@@ -3717,7 +3724,7 @@ class Info extends (0, _componentDefault.default) {
             this.show = false;
         });
         let timer = null;
-        const $types = (0, _utils.queryAll)("[data-video]", $infoPanel) || [];
+        const $types = (0, _utils.queryAll)("[data-video]", $infoPanel) ?? [];
         this.art.on("destroy", ()=>clearTimeout(timer));
         function loop() {
             for(let index = 0; index < $types.length; index++){
@@ -3820,7 +3827,7 @@ class Subtitle extends (0, _componentDefault.default) {
             const decoder = new TextDecoder(subtitleOption.encoding);
             const text = decoder.decode(buffer);
             this.art.emit("subtitleLoad", subtitleOption.url);
-            switch(subtitleOption.type || (0, _utils.getExt)(subtitleOption.url)){
+            switch(subtitleOption.type ?? (0, _utils.getExt)(subtitleOption.url)){
                 case "srt":
                     {
                         const vtt = (0, _utils.srtToVtt)(text);
@@ -3849,6 +3856,7 @@ class Subtitle extends (0, _componentDefault.default) {
             this.art.emit("subtitleSwitch", subUrl);
             return subUrl;
         }).catch((err)=>{
+            $subtitle.innerHTML = "";
             notice.show = err;
             throw err;
         });
@@ -4030,7 +4038,7 @@ function GetSlideDirection(startX, startY, endX, endY) {
     if (angle >= -45 && angle < 45) result = 4;
     else if (angle >= 45 && angle < 135) result = 1;
     else if (angle >= -135 && angle < -45) result = 2;
-    else if (angle >= 135 && angle <= 180 || angle >= -180 && angle < -135) result = 3;
+    else if ((angle >= 135 && angle <= 180) ?? (angle >= -180 && angle < -135)) result = 3;
     return result;
 }
 function gestureInit(art, events) {
@@ -4063,7 +4071,7 @@ function gestureInit(art, events) {
                     1,
                     2
                 ].includes(direction);
-                const isLegal = isHorizontal && !art.isRotate || isVertical && art.isRotate;
+                const isLegal = (isHorizontal && !art.isRotate) ?? (isVertical && art.isRotate);
                 if (isLegal) {
                     const ratioX = (0, _utils.clamp)((pageX - startX) / art.width, -1, 1);
                     const ratioY = (0, _utils.clamp)((pageY - startY) / art.height, -1, 1);
@@ -4494,7 +4502,7 @@ class Setting extends (0, _componentDefault.default) {
             const item = option[index];
             item.$parentItem = parentItem;
             item.$parentList = parentList;
-            Setting.makeRecursion(item.selector || [], item, option);
+            Setting.makeRecursion(item.selector ?? [], item, option);
         }
         return option;
     }
@@ -4528,7 +4536,7 @@ class Setting extends (0, _componentDefault.default) {
             const item = option[index];
             if (item.name === name) return item;
             else {
-                const result = this.find(name, item.selector || []);
+                const result = this.find(name, item.selector ?? []);
                 if (result) return result;
             }
         }
@@ -4536,7 +4544,7 @@ class Setting extends (0, _componentDefault.default) {
     remove(name) {
         const item = this.find(name);
         (0, _error.errorHandle)(item, `Can't find [${name}] from the [setting]`);
-        const parent = item.$parentItem?.selector || this.option;
+        const parent = item.$parentItem?.selector ?? this.option;
         parent.splice(parent.indexOf(item), 1);
         this.option = Setting.makeRecursion(this.option);
         this.destroy();
@@ -4590,10 +4598,10 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
             case "range":
-                (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
+                (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) ?? item.icon instanceof Element ? item.icon : icons.config);
                 break;
             case "selector":
-                if (item.selector && item.selector.length) (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
+                if (item.selector && item.selector.length) (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) ?? item.icon instanceof Element ? item.icon : icons.config);
                 else (0, _utils.append)($icon, icons.check);
                 break;
             default:
@@ -4612,7 +4620,7 @@ class Setting extends (0, _componentDefault.default) {
         });
         const $html = (0, _utils.createElement)("div");
         (0, _utils.addClass)($html, "art-setting-item-left-text");
-        (0, _utils.append)($html, item.html || "");
+        (0, _utils.append)($html, item.html ?? "");
         (0, _utils.append)($left, $html);
         item.$html = $html;
         (0, _utils.def)(item, "html", {
@@ -4626,7 +4634,7 @@ class Setting extends (0, _componentDefault.default) {
         });
         const $tooltip = (0, _utils.createElement)("div");
         (0, _utils.addClass)($tooltip, "art-setting-item-right-tooltip");
-        (0, _utils.append)($tooltip, item.tooltip || "");
+        (0, _utils.append)($tooltip, item.tooltip ?? "");
         (0, _utils.append)($right, $tooltip);
         item.$tooltip = $tooltip;
         (0, _utils.def)(item, "tooltip", {
@@ -4671,10 +4679,10 @@ class Setting extends (0, _componentDefault.default) {
                     const $state = (0, _utils.createElement)("div");
                     (0, _utils.addClass)($state, "art-setting-item-right-icon");
                     const $range = (0, _utils.append)($state, '<input type="range">');
-                    $range.value = item.range[0] || 0;
-                    $range.min = item.range[1] || 0;
-                    $range.max = item.range[2] || 10;
-                    $range.step = item.range[3] || 1;
+                    $range.value = item.range[0] ?? 0;
+                    $range.min = item.range[1] ?? 0;
+                    $range.max = item.range[2] ?? 10;
+                    $range.step = item.range[3] ?? 1;
                     (0, _utils.addClass)($range, "art-setting-range");
                     (0, _utils.append)($right, $state);
                     item.$range = $range;
@@ -4754,7 +4762,7 @@ class Setting extends (0, _componentDefault.default) {
     updateStyle(width) {
         const { controls , constructor , template: { $player , $setting  }  } = this.art;
         if (controls.setting && !(0, _utils.isMobile)) {
-            const settingWidth = width || constructor.SETTING_WIDTH;
+            const settingWidth = width ?? constructor.SETTING_WIDTH;
             const { left: controlLeft , width: controlWidth  } = controls.setting.getBoundingClientRect();
             const { left: playerLeft , width: playerWidth  } = $player.getBoundingClientRect();
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
@@ -4778,7 +4786,7 @@ class Setting extends (0, _componentDefault.default) {
         } else {
             const $panel = (0, _utils.createElement)("div");
             (0, _utils.addClass)($panel, "art-setting-panel");
-            $panel.dataset.width = width || constructor.SETTING_WIDTH;
+            $panel.dataset.width = width ?? constructor.SETTING_WIDTH;
             $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
             if (option[0] && option[0].$parentItem) {
                 (0, _utils.append)($panel, this.creatHeader(option[0]));
@@ -4960,7 +4968,7 @@ class Storage {
     }
     get(key) {
         try {
-            const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+            const storage = JSON.parse(window.localStorage.getItem(this.name)) ?? {};
             return key ? storage[key] : storage;
         } catch (error) {
             return key ? this.settings[key] : this.settings;
@@ -5024,7 +5032,7 @@ class Plugins {
     add(plugin) {
         this.id += 1;
         const result = plugin.call(this.art, this.art);
-        const pluginName = result && result.name || plugin.name || `plugin${this.id}`;
+        const pluginName = (result && result.name) ?? plugin.name ?? `plugin${this.id}`;
         (0, _utils.errorHandle)(!(0, _utils.has)(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
         (0, _utils.def)(this, pluginName, {
             value: result
@@ -5070,7 +5078,7 @@ function autoOrientation(art) {
         if (state) {
             const { videoWidth , videoHeight  } = $video;
             const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
+            if ((videoWidth > videoHeight && viewWidth < viewHeight) ?? (videoWidth < videoHeight && viewWidth > viewHeight)) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
             setTimeout(()=>{
                 (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
                 (0, _utils.setStyle)($player, "height", `${viewWidth}px`);
@@ -5091,7 +5099,7 @@ function autoOrientation(art) {
         if (state) {
             const { videoWidth , videoHeight  } = $video;
             const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
+            if ((videoWidth > videoHeight && viewWidth < viewHeight) ?? (videoWidth < videoHeight && viewWidth > viewHeight)) {
                 const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
                 await screen.orientation.lock(oppositeOrientation);
                 (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
@@ -5129,16 +5137,16 @@ function autoPlayback(art) {
     const $close = (0, _utils.query)(".art-auto-playback-close", $autoPlayback);
     art.on("video:timeupdate", ()=>{
         if (art.playing) {
-            const times = storage.get("times") || {};
+            const times = storage.get("times") ?? {};
             const keys = Object.keys(times);
             if (keys.length > constructor.AUTO_PLAYBACK_MAX) delete times[keys[0]];
-            times[art.option.id || art.option.url] = art.currentTime;
+            times[art.option.id ?? art.option.url] = art.currentTime;
             storage.set("times", times);
         }
     });
     art.on("ready", ()=>{
-        const times = storage.get("times") || {};
-        const currentTime = times[art.option.id || art.option.url];
+        const times = storage.get("times") ?? {};
+        const currentTime = times[art.option.id ?? art.option.url];
         if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
             (0, _utils.append)($close, icons.close);
             (0, _utils.setStyle)($autoPlayback, "display", "flex");
@@ -5163,13 +5171,13 @@ function autoPlayback(art) {
     return {
         name: "auto-playback",
         get times () {
-            return storage.get("times") || {};
+            return storage.get("times") ?? {};
         },
         clear () {
             return storage.del("times");
         },
         delete (id) {
-            const times = storage.get("times") || {};
+            const times = storage.get("times") ?? {};
             delete times[id];
             storage.set("times", times);
             return times;

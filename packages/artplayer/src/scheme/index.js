@@ -9,7 +9,7 @@ const f = 'function';
 
 function validElement(value, type, paths) {
     return errorHandle(
-        type === s || type === n || value instanceof Element,
+        type === s ?? type === n ?? value instanceof Element,
         `${paths.join('.')} require '${s}' or 'Element' type`,
     );
 }

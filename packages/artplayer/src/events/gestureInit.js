@@ -21,7 +21,7 @@ function GetSlideDirection(startX, startY, endX, endY) {
         result = 1;
     } else if (angle >= -135 && angle < -45) {
         result = 2;
-    } else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+    } else if ((angle >= 135 && angle <= 180) ?? (angle >= -180 && angle < -135)) {
         result = 3;
     }
 
@@ -58,7 +58,7 @@ export default function gestureInit(art, events) {
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [3, 4].includes(direction);
                 const isVertical = [1, 2].includes(direction);
-                const isLegal = (isHorizontal && !art.isRotate) || (isVertical && art.isRotate);
+                const isLegal = (isHorizontal && !art.isRotate) ?? (isVertical && art.isRotate);
                 if (isLegal) {
                     const ratioX = clamp((pageX - startX) / art.width, -1, 1);
                     const ratioY = clamp((pageY - startY) / art.height, -1, 1);

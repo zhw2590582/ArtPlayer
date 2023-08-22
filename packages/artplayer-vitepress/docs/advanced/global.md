@@ -506,3 +506,18 @@ var art = new Artplayer({
     fullscreenWeb: true,
 });
 ```
+
+## LOG_VERSION
+
+设置是否打印播放器版本，默认为 `true`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+Artplayer.LOG_VERSION = false;
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+```

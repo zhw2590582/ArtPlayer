@@ -117,7 +117,7 @@ export default class Subtitle extends Component {
                 const decoder = new TextDecoder(subtitleOption.encoding);
                 const text = decoder.decode(buffer);
                 this.art.emit('subtitleLoad', subtitleOption.url);
-                switch (subtitleOption.type || getExt(subtitleOption.url)) {
+                switch (subtitleOption.type ?? getExt(subtitleOption.url)) {
                     case 'srt': {
                         const vtt = srtToVtt(text);
                         const vttNew = subtitleOption.onVttLoad(vtt);
@@ -145,6 +145,7 @@ export default class Subtitle extends Component {
                 return subUrl;
             })
             .catch((err) => {
+                $subtitle.innerHTML = '';
                 notice.show = err;
                 throw err;
             });

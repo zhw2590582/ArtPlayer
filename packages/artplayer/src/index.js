@@ -241,6 +241,7 @@ Artplayer.PLAYBACK_RATE = [0.5, 0.75, 1, 1.25, 1.5, 2];
 Artplayer.ASPECT_RATIO = ['default', '4:3', '16:9'];
 Artplayer.FLIP = ['normal', 'horizontal', 'vertical'];
 Artplayer.FULLSCREEN_WEB_IN_BODY = false;
+Artplayer.LOG_VERSION = true;
 
 if (typeof document !== 'undefined') {
     if (!document.getElementById('artplayer-style')) {
@@ -255,9 +256,13 @@ if (typeof window !== 'undefined') {
     window['Artplayer'] = Artplayer;
 }
 
-console.log(
-    `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
-    'color: #fff; background: #5f5f5f',
-    'color: #fff; background: #4bc729',
-    '',
-);
+setTimeout(() => {
+    if (Artplayer.LOG_VERSION) {
+        console.log(
+            `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
+            'color: #fff; background: #5f5f5f',
+            'color: #fff; background: #4bc729',
+            '',
+        );
+    }
+});

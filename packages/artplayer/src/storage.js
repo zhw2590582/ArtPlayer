@@ -6,7 +6,7 @@ export default class Storage {
 
     get(key) {
         try {
-            const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
+            const storage = JSON.parse(window.localStorage.getItem(this.name)) ?? {};
             return key ? storage[key] : storage;
         } catch (error) {
             return key ? this.settings[key] : this.settings;
