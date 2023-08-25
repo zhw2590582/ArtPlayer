@@ -7,9 +7,15 @@ export default function miniProgressBar(art) {
                     $progressBar.style.display = 'none';
                 });
 
-                art.on('video:timeupdate', () => {
-                    $progressBar.style.width = `${art.played * 100}%`;
-                });
+                if (art.constructor.USE_RAF) {
+                    art.on('raf', () => {
+                        $progressBar.style.width = `${art.played * 100}%`;
+                    });
+                } else {
+                    art.on('video:timeupdate', () => {
+                        $progressBar.style.width = `${art.played * 100}%`;
+                    });
+                }
 
                 art.on('setBar', (type, percentage) => {
                     if (type === 'played') {

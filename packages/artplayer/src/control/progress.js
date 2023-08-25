@@ -118,9 +118,15 @@ export default function progress(options) {
                     setBar('loaded', art.loaded);
                 });
 
-                art.on('video:timeupdate', () => {
-                    setBar('played', art.played);
-                });
+                if (art.constructor.USE_RAF) {
+                    art.on('raf', () => {
+                        setBar('played', art.played);
+                    });
+                } else {
+                    art.on('video:timeupdate', () => {
+                        setBar('played', art.played);
+                    });
+                }
 
                 art.on('video:ended', () => {
                     setBar('played', 1);

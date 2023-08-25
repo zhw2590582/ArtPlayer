@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   更新组件时，支持填写只更新的字段 [pull/549](https://github.com/zhw2590582/ArtPlayer/pull/549)
 -   添加 `muted` 事件，当静音的状态变化时触发
 -   添加 `Artplayer.LOG_VERSION` 全局配置，设置是否打印播放器版本，默认为 `true`
+-   添加 `Artplayer.USE_RAF` 全局配置，设置是否使用 `requestAnimationFrame` ，默认为 `false`，目前主要用于进度条的平滑效果
 
 ## [5.0.9] - 2023-5-14
 

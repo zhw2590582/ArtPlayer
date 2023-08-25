@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-08-25 21:48:04";
+        return "2023-08-25 23:53:33";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -397,6 +397,7 @@ Artplayer.FLIP = [
 ];
 Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 Artplayer.LOG_VERSION = true;
+Artplayer.USE_RAF = false;
 if (typeof document !== "undefined") {
     if (!document.getElementById("artplayer-style")) {
         const $style = _utils.createElement("style");
@@ -3222,7 +3223,10 @@ function progress(options) {
                 art.on("video:progress", ()=>{
                     setBar("loaded", art.loaded);
                 });
-                art.on("video:timeupdate", ()=>{
+                if (art.constructor.USE_RAF) art.on("raf", ()=>{
+                    setBar("played", art.played);
+                });
+                else art.on("video:timeupdate", ()=>{
                     setBar("played", art.played);
                 });
                 art.on("video:ended", ()=>{
@@ -3883,6 +3887,8 @@ var _viewInit = require("./viewInit");
 var _viewInitDefault = parcelHelpers.interopDefault(_viewInit);
 var _documentInit = require("./documentInit");
 var _documentInitDefault = parcelHelpers.interopDefault(_documentInit);
+var _updateInit = require("./updateInit");
+var _updateInitDefault = parcelHelpers.interopDefault(_updateInit);
 class Events {
     constructor(art){
         this.destroyEvents = [];
@@ -3896,6 +3902,7 @@ class Events {
         (0, _gestureInitDefault.default)(art, this);
         (0, _viewInitDefault.default)(art, this);
         (0, _documentInitDefault.default)(art, this);
+        (0, _updateInitDefault.default)(art, this);
     }
     proxy(target, name, callback, option = {}) {
         if (Array.isArray(name)) return name.map((item)=>this.proxy(target, item, callback, option));
@@ -3934,7 +3941,7 @@ class Events {
 }
 exports.default = Events;
 
-},{"../utils/error":"622b3","./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
+},{"../utils/error":"622b3","./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","./updateInit":"4Xp2q","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -4137,6 +4144,23 @@ function documentInit(art, events) {
     });
 }
 exports.default = documentInit;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4Xp2q":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+function updateInit(art) {
+    if (art.constructor.USE_RAF) {
+        let timer = null;
+        (function update() {
+            if (art.playing) art.emit("raf");
+            if (!art.isDestroy) timer = requestAnimationFrame(update);
+        })();
+        art.on("destroy", ()=>{
+            cancelAnimationFrame(timer);
+        });
+    }
+}
+exports.default = updateInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1nFqF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -5054,7 +5078,10 @@ function miniProgressBar(art) {
                 art.on("destroy", ()=>{
                     $progressBar.style.display = "none";
                 });
-                art.on("video:timeupdate", ()=>{
+                if (art.constructor.USE_RAF) art.on("raf", ()=>{
+                    $progressBar.style.width = `${art.played * 100}%`;
+                });
+                else art.on("video:timeupdate", ()=>{
                     $progressBar.style.width = `${art.played * 100}%`;
                 });
                 art.on("setBar", (type, percentage)=>{

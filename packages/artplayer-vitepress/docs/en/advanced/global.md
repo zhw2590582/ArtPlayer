@@ -521,3 +521,19 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 ```
+
+## USE_RAF
+
+设置是否使用 `requestAnimationFrame` ，默认为 `false`，目前主要用于进度条的平滑效果
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+Artplayer.USE_RAF = true;
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    miniProgressBar: true,
+});
+```

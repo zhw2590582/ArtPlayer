@@ -242,6 +242,7 @@ Artplayer.ASPECT_RATIO = ['default', '4:3', '16:9'];
 Artplayer.FLIP = ['normal', 'horizontal', 'vertical'];
 Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 Artplayer.LOG_VERSION = true;
+Artplayer.USE_RAF = false;
 
 if (typeof document !== 'undefined') {
     if (!document.getElementById('artplayer-style')) {
