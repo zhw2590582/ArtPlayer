@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 -   当播放地址发生错误到达上限后，不会再主动销毁播放器
 -   更新组件时，支持填写只更新的字段 [pull/549](https://github.com/zhw2590582/ArtPlayer/pull/549)
--   当 `autoPlayback` 和 `autoplay` 同时为 `true` 时，会自动跳转播放
 -   添加 `muted` 事件，当静音的状态变化时触发
 -   添加 `Artplayer.LOG_VERSION` 全局配置，设置是否打印播放器版本，默认为 `true`
 
