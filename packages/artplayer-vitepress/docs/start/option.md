@@ -1012,7 +1012,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `navigator.language.toLowerCase()`
 
-默认显示语言，目前支持：`en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`, `fr`, `id`, `ru`
+默认显示语言，目前支持：`en`, `zh-cn`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1023,6 +1023,12 @@ var art = new Artplayer({
     lang: 'en',
 });
 ```
+
+:::warning 更多的语言设置
+
+[/start/i18n.html](/start/i18n.html)
+
+:::
 
 ## `i18n`
 
@@ -1067,9 +1073,9 @@ var art = new Artplayer({
 });
 ```
 
-:::warning i18n 写法参考
+:::warning 更多的语言设置
 
-[artplayer/types/i18n.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts)
+[/start/i18n.html](/start/i18n.html)
 
 :::
 
