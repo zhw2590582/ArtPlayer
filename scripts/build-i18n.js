@@ -35,7 +35,7 @@ const entries = glob.sync(
     try {
         const { bundleGraph, buildTime } = await bundler.run();
         const bundles = bundleGraph.getBundles();
-        console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms`);
+        console.log(`✨ Built [i18n] ${bundles.length} bundles in ${buildTime}ms`);
     } catch (err) {
         console.log(err.diagnostics);
     }

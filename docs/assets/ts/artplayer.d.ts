@@ -749,6 +749,7 @@ export type Events = {
     subtitleOffset: [offset: number];
     restart: [url: string];
     loop: [start?: number, end?: number];
+    muted: [state: boolean];
 };
 
 export type CssVar = {
