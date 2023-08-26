@@ -1,4 +1,4 @@
-{
+const id = {
     "Video Info": "Informasi Video",
     "Close": "Tutup",
     "Video Load Failed": "Gagal Memuat Video",
@@ -35,4 +35,10 @@
     "Jump Play": "Lompat Putar",
     "AirPlay": "AirPlay",
     "AirPlay Not Available": "AirPlay Tidak Tersedia"
+}
+
+export default id;
+
+if (typeof window !== 'undefined') {
+    window['artplayer-i18n-id'] = id;
 }

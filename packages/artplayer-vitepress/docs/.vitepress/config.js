@@ -35,6 +35,7 @@ const config = {
           items: [
             { text: '安装使用', link: '/' },
             { text: '基础选项', link: '/start/option' },
+            { text: '语言设置', link: '/start/i18n' },
           ]
         },
         {

@@ -1,4 +1,4 @@
-{
+const fa = {
     "Video Info": "اطلاعات ویدیو",
     "Close": "بستن",
     "Video Load Failed": "بارگذاری ناموفق",
@@ -35,4 +35,10 @@
     "Jump Play": "جامپ پلی",
     "AirPlay": "ایر پلی",
     "AirPlay Not Available": "عدم پشتیبانی از ایرپلی"
+}
+
+export default fa;
+
+if (typeof window !== 'undefined') {
+    window['artplayer-i18n-fa'] = fa;
 }

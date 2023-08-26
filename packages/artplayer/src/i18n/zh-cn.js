@@ -1,4 +1,4 @@
-{
+const zhCn = {
     "Video Info": "统计信息",
     "Close": "关闭",
     "Video Load Failed": "加载失败",
@@ -35,4 +35,10 @@
     "Jump Play": "跳转播放",
     "AirPlay": "隔空播放",
     "AirPlay Not Available": "隔空播放不可用"
+}
+
+export default zhCn;
+
+if (typeof window !== 'undefined') {
+    window['artplayer-i18n-zh-cn'] = zhCn;
 }

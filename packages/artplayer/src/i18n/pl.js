@@ -1,4 +1,4 @@
-{
+const pl = {
     "Video Info": "Informacje o wideo",
     "Close": "Zamknij",
     "Video Load Failed": "Błąd ładowania wideo",
@@ -35,4 +35,10 @@
     "Jump Play": "Skocz do gry",
     "AirPlay": "AirPlay",
     "AirPlay Not Available": "AirPlay nie jest dostępny"
+}
+
+export default pl;
+
+if (typeof window !== 'undefined') {
+    window['artplayer-i18n-pl'] = pl;
 }

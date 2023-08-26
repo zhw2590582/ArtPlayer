@@ -1,4 +1,4 @@
-{
+const es = {
     "Video Info": "Información del video",
     "Close": "Cerrar",
     "Video Load Failed": "Falló carga de video",
@@ -35,4 +35,10 @@
     "Jump Play": "Saltar",
     "AirPlay": "AirPlay",
     "AirPlay Not Available": "AirPlay no disponible"
+}
+
+export default es;
+
+if (typeof window !== 'undefined') {
+    window['artplayer-i18n-es'] = es;
 }
