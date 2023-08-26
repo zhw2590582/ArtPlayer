@@ -1,0 +1,18 @@
+!// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+function(e,t,n,o,r){/* eslint-disable no-undef */var i="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{},u="function"==typeof i[o]&&i[o],l=u.cache||{},f="undefined"!=typeof module&&"function"==typeof module.require&&module.require.bind(module);function d(t,n){if(!l[t]){if(!e[t]){// if we cannot find the module within our internal map or
+// cache jump to the current global require ie. the last bundle
+// that was added to the page.
+var r="function"==typeof i[o]&&i[o];if(!n&&r)return r(t,!0);// If there are other bundles on this page the require from the
+// previous one is saved to 'previousRequire'. Repeat this as
+// many times as there are bundles until the module is found or
+// we exhaust the require chain.
+if(u)return u(t,!0);// Try the node require function if it exists.
+if(f&&"string"==typeof t)return f(t);var c=Error("Cannot find module '"+t+"'");throw c.code="MODULE_NOT_FOUND",c}s.resolve=function(n){var o=e[t][1][n];return null!=o?o:n},s.cache={};var a=l[t]=new d.Module(t);e[t][0].call(a.exports,s,a,a.exports,this)}return l[t].exports;function s(e){var t=s.resolve(e);return!1===t?{}:d(t)}}d.isParcelRequire=!0,d.Module=function(e){this.id=e,this.bundle=d,this.exports={}},d.modules=e,d.cache=l,d.parent=u,d.register=function(t,n){e[t]=[function(e,t){t.exports=n},{}]},Object.defineProperty(d,"root",{get:function(){return i[o]}}),i[o]=d;for(var c=0;c<t.length;c++)d(t[c]);if(n){// Expose entry point to Node, AMD or browser globals
+// Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+var a=d(n);"object"==typeof exports&&"undefined"!=typeof module?module.exports=a:"function"==typeof define&&define.amd?define(function(){return a}):r&&(this[r]=a)}}({"5cbXb":[function(e,t,n){e("@parcel/transformer-js/src/esmodule-helpers.js").defineInteropFlag(n);let o={"Video Info":"اطلاعات ویدیو",Close:"بستن","Video Load Failed":"بارگذاری ناموفق",Play:"پخش",Volume:"میزان صدا",Pause:"توقف",Rate:"نرخ",Mute:"سکوت","Video Flip":"چرخش تصویر",Horizontal:"افقی",Vertical:"عمودی",Reconnect:"اتصال مجدد","Show Setting":"تنظیمات","Hide Setting":"بستن تنظیمات",Screenshot:"عکس از صفحه","Play Speed":"سرعت پخش","Aspect Ratio":"نسبت تصویر",Default:"حالت پیشفرض",Normal:" حالت عادی",Open:"بازکردن","Switch Video":"تغییر ویدیو","Switch Subtitle":"نغییر زیرنویس",Fullscreen:"تمام صفحه","Exit Fullscreen":"کوچک کردن","Web Fullscreen":"حالت تئاتر","Exit Web Fullscreen":"خروج از حالت تئاتر","Mini Player":"حالت پخش کوچک","PIP Mode":" مینی پلیر","Exit PIP Mode":"خروج از مینی پلیر","PIP Not Supported":"عدم پشتیبانی از مینی پلیر","Fullscreen Not Supported":"عدم پشتیبانی از حالت تمام صفحه","Subtitle Offset":"افست زیرنویس","Last Seen":"آخرین بازدید","Jump Play":"جامپ پلی",AirPlay:"ایر پلی","AirPlay Not Available":"عدم پشتیبانی از ایرپلی"};n.default=o,"undefined"!=typeof window&&(window["artplayer-i18n-fa"]=o)},{"@parcel/transformer-js/src/esmodule-helpers.js":"hcdCS"}],hcdCS:[function(e,t,n){n.interopDefault=function(e){return e&&e.__esModule?e:{default:e}},n.defineInteropFlag=function(e){Object.defineProperty(e,"__esModule",{value:!0})},n.exportAll=function(e,t){return Object.keys(e).forEach(function(n){"default"===n||"__esModule"===n||t.hasOwnProperty(n)||Object.defineProperty(t,n,{enumerable:!0,get:function(){return e[n]}})}),t},n.export=function(e,t,n){Object.defineProperty(e,t,{enumerable:!0,get:n})}},{}]},["5cbXb"],"5cbXb","parcelRequire4dc0");

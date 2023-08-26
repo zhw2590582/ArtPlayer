@@ -1,4 +1,4 @@
-{
+const cs = {
     "Video Info": "Info o videu",
     "Close": "Zavřít",
     "Video Load Failed": "Nahrání videa selhalo",
@@ -35,4 +35,10 @@
     "Jump Play": "Hra na skok",
     "AirPlay": "AirPlay",
     "AirPlay Not Available": "AirPlay není k dispozici"
+}
+
+export default cs;
+
+if (typeof window !== 'undefined') {
+    window['artplayer-i18n-cs'] = cs;
 }

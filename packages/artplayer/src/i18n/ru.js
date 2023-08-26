@@ -1,4 +1,4 @@
-{
+const ru = {
     "Video Info": "Информация",
     "Close": "Закрыть",
     "Video Load Failed": "Ошибка загрузки видео",
@@ -35,4 +35,10 @@
     "Jump Play": "Перейти",
     "AirPlay": "AirPlay",
     "AirPlay Not Available": "AirPlay недоступен"
+}
+
+export default ru;
+
+if (typeof window !== 'undefined') {
+    window['artplayer-i18n-ru'] = ru;
 }

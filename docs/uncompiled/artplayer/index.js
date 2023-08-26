@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-08-25 23:53:33";
+        return "2023-08-26 11:55:35";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -858,7 +858,7 @@ parcelHelpers.export(exports, "has", ()=>has);
 parcelHelpers.export(exports, "get", ()=>get);
 parcelHelpers.export(exports, "mergeDeep", ()=>mergeDeep);
 const def = Object.defineProperty;
-const { hasOwnProperty  } = Object.prototype;
+const { hasOwnProperty } = Object.prototype;
 function has(obj, name) {
     return hasOwnProperty.call(obj, name);
 }
@@ -1182,7 +1182,7 @@ var _utils = require("./utils");
 class Template {
     constructor(art){
         this.art = art;
-        const { option , constructor  } = art;
+        const { option, constructor } = art;
         if (option.container instanceof Element) this.$container = option.container;
         else {
             this.$container = (0, _utils.query)(option.container);
@@ -1261,7 +1261,7 @@ class Template {
         return (0, _utils.query)(className, this.$container);
     }
     init() {
-        const { option  } = this.art;
+        const { option } = this.art;
         if (!option.useSSR) this.$container.innerHTML = Template.html;
         this.$player = this.query(".art-video-player");
         this.$video = this.query(".art-video");
@@ -1300,38 +1300,15 @@ exports.default = Template;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
-var _zhCnJson = require("./zh-cn.json");
-var _zhCnJsonDefault = parcelHelpers.interopDefault(_zhCnJson);
-var _zhTwJson = require("./zh-tw.json");
-var _zhTwJsonDefault = parcelHelpers.interopDefault(_zhTwJson);
-var _plJson = require("./pl.json");
-var _plJsonDefault = parcelHelpers.interopDefault(_plJson);
-var _csJson = require("./cs.json");
-var _csJsonDefault = parcelHelpers.interopDefault(_csJson);
-var _esJson = require("./es.json");
-var _esJsonDefault = parcelHelpers.interopDefault(_esJson);
-var _faJson = require("./fa.json");
-var _faJsonDefault = parcelHelpers.interopDefault(_faJson);
-var _frJson = require("./fr.json");
-var _frJsonDefault = parcelHelpers.interopDefault(_frJson);
-var _idJson = require("./id.json");
-var _idJsonDefault = parcelHelpers.interopDefault(_idJson);
-var _ruJson = require("./ru.json");
-var _ruJsonDefault = parcelHelpers.interopDefault(_ruJson);
+var _zhCn = require("./zh-cn");
+var _zhCnDefault = parcelHelpers.interopDefault(_zhCn);
 class I18n {
     constructor(art){
         this.art = art;
         this.languages = {
-            "zh-cn": (0, _zhCnJsonDefault.default),
-            "zh-tw": (0, _zhTwJsonDefault.default),
-            pl: (0, _plJsonDefault.default),
-            cs: (0, _csJsonDefault.default),
-            es: (0, _esJsonDefault.default),
-            fa: (0, _faJsonDefault.default),
-            fr: (0, _frJsonDefault.default),
-            id: (0, _idJsonDefault.default),
-            ru: (0, _ruJsonDefault.default)
+            "zh-cn": (0, _zhCnDefault.default)
         };
+        this.language = {};
         this.update(art.option.i18n);
     }
     init() {
@@ -1348,34 +1325,51 @@ class I18n {
 }
 exports.default = I18n;
 
-},{"../utils":"jmgNb","./zh-cn.json":"cVMb8","./zh-tw.json":"fS55m","./pl.json":"1JuQe","./cs.json":"4wwD8","./es.json":"8dpuu","./fa.json":"6RGPV","./fr.json":"32X2d","./id.json":"irByr","./ru.json":"y5k8S","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cVMb8":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"统计信息","Close":"关闭","Video Load Failed":"加载失败","Volume":"音量","Play":"播放","Pause":"暂停","Rate":"速度","Mute":"静音","Video Flip":"画面翻转","Horizontal":"水平","Vertical":"垂直","Reconnect":"重新连接","Show Setting":"显示设置","Hide Setting":"隐藏设置","Screenshot":"截图","Play Speed":"播放速度","Aspect Ratio":"画面比例","Default":"默认","Normal":"正常","Open":"打开","Switch Video":"切换","Switch Subtitle":"切换字幕","Fullscreen":"全屏","Exit Fullscreen":"退出全屏","Web Fullscreen":"网页全屏","Exit Web Fullscreen":"退出网页全屏","Mini Player":"迷你播放器","PIP Mode":"开启画中画","Exit PIP Mode":"退出画中画","PIP Not Supported":"不支持画中画","Fullscreen Not Supported":"不支持全屏","Subtitle Offset":"字幕偏移","Last Seen":"上次看到","Jump Play":"跳转播放","AirPlay":"隔空播放","AirPlay Not Available":"隔空播放不可用"}');
+},{"../utils":"jmgNb","./zh-cn":"4PBSu","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4PBSu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const zhCn = {
+    "Video Info": "统计信息",
+    "Close": "关闭",
+    "Video Load Failed": "加载失败",
+    "Volume": "音量",
+    "Play": "播放",
+    "Pause": "暂停",
+    "Rate": "速度",
+    "Mute": "静音",
+    "Video Flip": "画面翻转",
+    "Horizontal": "水平",
+    "Vertical": "垂直",
+    "Reconnect": "重新连接",
+    "Show Setting": "显示设置",
+    "Hide Setting": "隐藏设置",
+    "Screenshot": "截图",
+    "Play Speed": "播放速度",
+    "Aspect Ratio": "画面比例",
+    "Default": "默认",
+    "Normal": "正常",
+    "Open": "打开",
+    "Switch Video": "切换",
+    "Switch Subtitle": "切换字幕",
+    "Fullscreen": "全屏",
+    "Exit Fullscreen": "退出全屏",
+    "Web Fullscreen": "网页全屏",
+    "Exit Web Fullscreen": "退出网页全屏",
+    "Mini Player": "迷你播放器",
+    "PIP Mode": "开启画中画",
+    "Exit PIP Mode": "退出画中画",
+    "PIP Not Supported": "不支持画中画",
+    "Fullscreen Not Supported": "不支持全屏",
+    "Subtitle Offset": "字幕偏移",
+    "Last Seen": "上次看到",
+    "Jump Play": "跳转播放",
+    "AirPlay": "隔空播放",
+    "AirPlay Not Available": "隔空播放不可用"
+};
+exports.default = zhCn;
+if (typeof window !== "undefined") window["artplayer-i18n-zh-cn"] = zhCn;
 
-},{}],"fS55m":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"統計訊息","Close":"關閉","Video Load Failed":"載入失敗","Volume":"音量","Play":"播放","Pause":"暫停","Rate":"速度","Mute":"靜音","Video Flip":"畫面翻轉","Horizontal":"水平","Vertical":"垂直","Reconnect":"重新連接","Show Setting":"顯示设置","Hide Setting":"隱藏设置","Screenshot":"截圖","Play Speed":"播放速度","Aspect Ratio":"畫面比例","Default":"默認","Normal":"正常","Open":"打開","Switch Video":"切換","Switch Subtitle":"切換字幕","Fullscreen":"全屏","Exit Fullscreen":"退出全屏","Web Fullscreen":"網頁全屏","Exit Web Fullscreen":"退出網頁全屏","Mini Player":"迷你播放器","PIP Mode":"開啟畫中畫","Exit PIP Mode":"退出畫中畫","PIP Not Supported":"不支持畫中畫","Fullscreen Not Supported":"不支持全屏","Subtitle Offset":"字幕偏移","Last Seen":"上次看到","Jump Play":"跳轉播放","AirPlay":"隔空播放","AirPlay Not Available":"隔空播放不可用"}');
-
-},{}],"1JuQe":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Informacje o wideo","Close":"Zamknij","Video Load Failed":"Błąd ładowania wideo","Volume":"Głośność","Play":"Odtw\xf3rz","Pause":"Wstrzymaj","Rate":"Oceń","Mute":"Wycisz","Video Flip":"Rotacja wideo","Horizontal":"Pozioma","Vertical":"Pionowa","Reconnect":"Połącz ponownie","Show Setting":"Pokaż ustawienia","Hide Setting":"Ukryj ustawienia","Screenshot":"Zrzut ekranu","Play Speed":"Prędkość odtwarzania","Aspect Ratio":"Wsp\xf3łczynnik proporcji","Default":"Domyślny","Normal":"Normalny","Open":"Otw\xf3rz","Switch Video":"Przełącz wideo","Switch Subtitle":"Przełącz napisy","Fullscreen":"Pełny ekran","Exit Fullscreen":"Zamknij pełny ekran","Web Fullscreen":"Tryb pełnej strony","Exit Web Fullscreen":"Zamknij tryb pełnej strony","Mini Player":"Miniodtwarzacz","PIP Mode":"Tryb PiP","Exit PIP Mode":"Zamknij tryb PiP","PIP Not Supported":"Tryb PiP nieobsługiwany","Fullscreen Not Supported":"Pełny ekran nieobsługiwany","Subtitle Offset":"Przesunięcie napis\xf3w","Last Seen":"Ostatnio widziany","Jump Play":"Skocz do gry","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nie jest dostępny"}');
-
-},{}],"4wwD8":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Info o videu","Close":"Zavř\xedt","Video Load Failed":"Nahr\xe1n\xed videa selhalo","Volume":"Hlasitost","Play":"Přehr\xe1t","Pause":"Pozastavit","Rate":"Hodnocen\xed","Mute":"Ztlumit","Video Flip":"Otočit video","Horizontal":"Horizont\xe1lně","Vertical":"Vertik\xe1lně","Reconnect":"Opětovn\xe9 připojen\xed","Show Setting":"Zobrazit nastaven\xed","Hide Setting":"Skr\xfdt nastaven\xed","Screenshot":"Sn\xedmek obrazovky","Play Speed":"Rychlost přehr\xe1v\xe1n\xed","Aspect Ratio":"Poměr stran","Default":"V\xfdchoz\xed","Normal":"Norm\xe1ln\xed","Open":"Otevř\xedt","Switch Video":"Přepnout video","Switch Subtitle":"Přepnout titulky","Fullscreen":"Cel\xe1 obrazovka","Exit Fullscreen":"Opustit režim cel\xe9 obrazovky","Web Fullscreen":"Cel\xe1 str\xe1nka","Exit Web Fullscreen":"Zavř\xedt režim cel\xe9 str\xe1nky","Mini Player":"Mini přehr\xe1vač","PIP Mode":"Režim PIP","Exit PIP Mode":"Opustit režim PIP","PIP Not Supported":"Režim PIP nen\xed podporov\xe1n","Fullscreen Not Supported":"Režim cel\xe9 obrazovky nen\xed podporov\xe1n","Subtitle Offset":"Posun titulků","Last Seen":"Naposledy viděn","Jump Play":"Hra na skok","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay nen\xed k dispozici"}');
-
-},{}],"8dpuu":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Informaci\xf3n del video","Close":"Cerrar","Video Load Failed":"Fall\xf3 carga de video","Volume":"Volumen","Play":"Reproduciendo","Pause":"Pausa","Rate":"Velocidad","Mute":"Silencio","Video Flip":"Rotar video","Horizontal":"Horizontal","Vertical":"Vertical","Reconnect":"Reconectando","Show Setting":"Mostrar ajustes","Hide Setting":"Ocultar ajustes","Screenshot":"Captura de Pantalla","Play Speed":"Velocidad de reproducci\xf3n","Aspect Ratio":"Relaci\xf3n de aspecto","Default":"Por defecto","Normal":"Normal","Open":"Abrir","Switch Video":"Cambiar video","Switch Subtitle":"Cambiar subt\xedtulo","Fullscreen":"Pantalla completa","Exit Fullscreen":"Salir de Pantalla completa","Web Fullscreen":"Pantalla completa Web","Exit Web Fullscreen":"Salir de Pantalla completa","Mini Player":"Mini reproductor","PIP Mode":"Modo PiP","Exit PIP Mode":"Cerrar modo PiP","PIP Not Supported":"Modo PiP no compatible","Fullscreen Not Supported":"Pantalla completa no soportada","Subtitle Offset":"Ajuste subt\xedtulo","Last Seen":"Visto \xfaltima vez","Jump Play":"Saltar","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay no disponible"}');
-
-},{}],"6RGPV":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"اطلاعات ویدیو","Close":"بستن","Video Load Failed":"بارگذاری ناموفق","Play":"پخش","Volume":"میزان صدا","Pause":"توقف","Rate":"نرخ","Mute":"سکوت","Video Flip":"چرخش تصویر","Horizontal":"افقی","Vertical":"عمودی","Reconnect":"اتصال مجدد","Show Setting":"تنظیمات","Hide Setting":"بستن تنظیمات","Screenshot":"عکس از صفحه","Play Speed":"سرعت پخش","Aspect Ratio":"نسبت تصویر","Default":"حالت پیشفرض","Normal":" حالت عادی","Open":"بازکردن","Switch Video":"تغییر ویدیو","Switch Subtitle":"نغییر زیرنویس","Fullscreen":"تمام صفحه","Exit Fullscreen":"کوچک کردن","Web Fullscreen":"حالت تئاتر","Exit Web Fullscreen":"خروج از حالت تئاتر","Mini Player":"حالت پخش کوچک","PIP Mode":" مینی پلیر","Exit PIP Mode":"خروج از مینی پلیر","PIP Not Supported":"عدم پشتیبانی از مینی پلیر","Fullscreen Not Supported":"عدم پشتیبانی از حالت تمام صفحه","Subtitle Offset":"افست زیرنویس","Last Seen":"آخرین بازدید","Jump Play":"جامپ پلی","AirPlay":"ایر پلی","AirPlay Not Available":"عدم پشتیبانی از ایرپلی"}');
-
-},{}],"32X2d":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Informations de la vid\xe9o","Close":"Fermer","Video Load Failed":"T\xe9l\xe9chargement de la vid\xe9o \xe9chou\xe9","Volume":"Volume","Play":"Lire","Pause":"Pause","Rate":"Vitesse","Mute":"Muet","Video Flip":"Rotation de la vid\xe9o","Horizontal":"Horizontal","Vertical":"Vertical","Reconnect":"Reconnexion","Show Setting":"Afficher les param\xe8tres","Hide Setting":"Cacher les param\xe8tres","Screenshot":"Capture d\'\xe9cran","Play Speed":"Vitesse de lecture","Aspect Ratio":"Rapport d\'aspect","Default":"D\xe9faut","Normal":"Normal","Open":"Ouvrir","Switch Video":"Basculer la vid\xe9o","Switch Subtitle":"Basculer le sous-titre","Fullscreen":"Plein \xe9cran","Exit Fullscreen":"Quitter le plein \xe9cran","Web Fullscreen":"Plein \xe9cran Web","Exit Web Fullscreen":"Quitter le plein \xe9cran Web","Mini Player":"Mini lecteur","PIP Mode":"Mode PiP","Exit PIP Mode":"Fermer le mode PiP","PIP Not Supported":"Mode PiP non support\xe9","Fullscreen Not Supported":"Plein \xe9cran non support\xe9","Subtitle Offset":"R\xe9glage des sous-titres","Last Seen":"Derni\xe8re position","Jump Play":"Continuer","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay non disponible"}');
-
-},{}],"irByr":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Informasi Video","Close":"Tutup","Video Load Failed":"Gagal Memuat Video","Volume":"Volume","Play":"Putar","Pause":"Jeda","Rate":"Kecepatan","Mute":"Senyap","Video Flip":"Memutar Video","Horizontal":"Horizontal","Vertical":"Vertikal","Reconnect":"Menyambung Kembali","Show Setting":"Tampilkan Pengaturan","Hide Setting":"Sembunyikan Pengaturan","Screenshot":"Tangkapan Layar","Play Speed":"Kecepatan Putar","Aspect Ratio":"Rasio Aspek","Default":"Default","Normal":"Normal","Open":"Buka","Switch Video":"Ganti Video","Switch Subtitle":"Ganti Subtitle","Fullscreen":"Layar Penuh","Exit Fullscreen":"Keluar dari Layar Penuh","Web Fullscreen":"Layar Penuh Web","Exit Web Fullscreen":"Keluar dari Layar Penuh Web","Mini Player":"Pemutar Mini","PIP Mode":"Mode PIP","Exit PIP Mode":"Keluar dari Mode PIP","PIP Not Supported":"PIP Tidak Didukung","Fullscreen Not Supported":"Layar Penuh Tidak Didukung","Subtitle Offset":"Pergeseran Subtitle","Last Seen":"Terakhir Dilihat","Jump Play":"Lompat Putar","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay Tidak Tersedia"}');
-
-},{}],"y5k8S":[function(require,module,exports) {
-module.exports = JSON.parse('{"Video Info":"Информация","Close":"Закрыть","Video Load Failed":"Ошибка загрузки видео","Volume":"Громкость","Play":"Играть","Pause":"Пауза","Rate":"Скорость","Mute":"Заглушить","Video Flip":"Развернуть видео","Horizontal":"Горизонтально","Vertical":"Вертикально","Reconnect":"Переподключенине","Show Setting":"Показать настройки","Hide Setting":"Скрыть настройки","Screenshot":"Скриншот","Play Speed":"Скорость воспроизведения","Aspect Ratio":"Соотношение сторон","Default":"По-умолчанию","Normal":"Нормальный","Open":"Открыть","Switch Video":"Переключить видео","Switch Subtitle":"Переключить субтитры","Fullscreen":"Полноэкранный режим","Exit Fullscreen":"Выход из полноэкранного режима","Web Fullscreen":"На все окно браузера","Exit Web Fullscreen":"Выход из режима полного окна","Mini Player":"Мини проигрыватель","PIP Mode":"Картинка в картинке","Exit PIP Mode":"Закрыть картинку в картинке","PIP Not Supported":"Картинка в картинке не поддерживается","Fullscreen Not Supported":"Полноэкранный режим не поддерживается","Subtitle Offset":"Настройка субтитров","Last Seen":"Последнее просмотренное","Jump Play":"Перейти","AirPlay":"AirPlay","AirPlay Not Available":"AirPlay недоступен"}');
-
-},{}],"35XKf":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"35XKf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _urlMix = require("./urlMix");
@@ -1492,9 +1486,10 @@ exports.default = Player;
 },{"./urlMix":"aIS34","./attrMix":"jDj6f","./playMix":"agXpy","./pauseMix":"zMuGC","./toggleMix":"fvNrm","./seekMix":"3CiN1","./volumeMix":"1LKRL","./currentTimeMix":"bjUCm","./durationMix":"l8grT","./switchMix":"bIvi5","./playbackRateMix":"3EFen","./aspectRatioMix":"8ucW5","./screenshotMix":"12WvT","./fullscreenMix":"gNUzM","./fullscreenWebMix":"f2xmf","./pipMix":"i5i0P","./loadedMix":"8X9EY","./playedMix":"1ziBX","./playingMix":"9898W","./autoSizeMix":"b1yGg","./rectMix":"eKKgI","./flipMix":"ad3ay","./miniMix":"hUF3v","./loopMix":"gXFcr","./posterMix":"6j7ij","./autoHeightMix":"8Mzuu","./cssVarMix":"fypct","./themeMix":"dv3lF","./typeMix":"2FCQH","./stateMix":"iG6Jk","./subtitleOffsetMix":"lTNEf","./airplayMix":"bIjnH","./qualityMix":"ke1N4","./optionInit":"9Us4p","./eventInit":"4hZCW","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aIS34":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>urlMix);
 var _utils = require("../utils");
 function urlMix(art) {
-    const { option , template: { $video  }  } = art;
+    const { option, template: { $video } } = art;
     (0, _utils.def)(art, "url", {
         get () {
             return $video.src;
@@ -1525,14 +1520,14 @@ function urlMix(art) {
         }
     });
 }
-exports.default = urlMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jDj6f":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>attrMix);
 var _utils = require("../utils");
 function attrMix(art) {
-    const { template: { $video  }  } = art;
+    const { template: { $video } } = art;
     (0, _utils.def)(art, "attr", {
         value (key, value) {
             if (value === undefined) return $video[key];
@@ -1540,14 +1535,14 @@ function attrMix(art) {
         }
     });
 }
-exports.default = attrMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"agXpy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playMix);
 var _utils = require("../utils");
 function playMix(art) {
-    const { i18n , notice , option , constructor: { instances  } , template: { $video  }  } = art;
+    const { i18n, notice, option, constructor: { instances }, template: { $video } } = art;
     (0, _utils.def)(art, "play", {
         value: async function() {
             const result = await $video.play();
@@ -1561,14 +1556,14 @@ function playMix(art) {
         }
     });
 }
-exports.default = playMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"zMuGC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pauseMix);
 var _utils = require("../utils");
 function pauseMix(art) {
-    const { template: { $video  } , i18n , notice  } = art;
+    const { template: { $video }, i18n, notice } = art;
     (0, _utils.def)(art, "pause", {
         value () {
             const result = $video.pause();
@@ -1578,11 +1573,11 @@ function pauseMix(art) {
         }
     });
 }
-exports.default = pauseMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fvNrm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>toggleMix);
 var _utils = require("../utils");
 function toggleMix(art) {
     (0, _utils.def)(art, "toggle", {
@@ -1592,14 +1587,14 @@ function toggleMix(art) {
         }
     });
 }
-exports.default = toggleMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3CiN1":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>seekMix);
 var _utils = require("../utils");
 function seekMix(art) {
-    const { notice  } = art;
+    const { notice } = art;
     (0, _utils.def)(art, "seek", {
         set (time) {
             art.currentTime = time;
@@ -1618,14 +1613,14 @@ function seekMix(art) {
         }
     });
 }
-exports.default = seekMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1LKRL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>volumeMix);
 var _utils = require("../utils");
 function volumeMix(art) {
-    const { template: { $video  } , i18n , notice , storage  } = art;
+    const { template: { $video }, i18n, notice, storage } = art;
     (0, _utils.def)(art, "volume", {
         get: ()=>$video.volume ?? 0,
         set: (percentage)=>{
@@ -1642,14 +1637,14 @@ function volumeMix(art) {
         }
     });
 }
-exports.default = volumeMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bjUCm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>currentTimeMix);
 var _utils = require("../utils");
 function currentTimeMix(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     (0, _utils.def)(art, "currentTime", {
         get: ()=>$video.currentTime ?? 0,
         set: (time)=>{
@@ -1659,32 +1654,32 @@ function currentTimeMix(art) {
         }
     });
 }
-exports.default = currentTimeMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"l8grT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>durationMix);
 var _utils = require("../utils");
 function durationMix(art) {
     (0, _utils.def)(art, "duration", {
         get: ()=>{
-            const { duration  } = art.template.$video;
+            const { duration } = art.template.$video;
             if (duration === Infinity) return 0;
             return duration ?? 0;
         }
     });
 }
-exports.default = durationMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bIvi5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>switchMix);
 var _utils = require("../utils");
 function switchMix(art) {
     function switchUrl(url, currentTime) {
         return new Promise((resolve, reject)=>{
             if (url === art.url) return;
-            const { playing , aspectRatio , playbackRate  } = art;
+            const { playing, aspectRatio, playbackRate } = art;
             art.pause();
             art.url = url;
             art.notice.show = "";
@@ -1713,14 +1708,14 @@ function switchMix(art) {
         set: art.switchUrl
     });
 }
-exports.default = switchMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3EFen":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playbackRateMix);
 var _utils = require("../utils");
 function playbackRateMix(art) {
-    const { template: { $video  } , i18n , notice  } = art;
+    const { template: { $video }, i18n, notice } = art;
     (0, _utils.def)(art, "playbackRate", {
         get () {
             return $video.playbackRate;
@@ -1734,14 +1729,14 @@ function playbackRateMix(art) {
         }
     });
 }
-exports.default = playbackRateMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8ucW5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>aspectRatioMix);
 var _utils = require("../utils");
 function aspectRatioMix(art) {
-    const { i18n , notice , template: { $video , $player  }  } = art;
+    const { i18n, notice, template: { $video, $player } } = art;
     (0, _utils.def)(art, "aspectRatio", {
         get () {
             return $player.dataset.aspectRatio ?? "default";
@@ -1755,7 +1750,7 @@ function aspectRatioMix(art) {
                 delete $player.dataset.aspectRatio;
             } else {
                 const ratioArray = ratio.split(":").map(Number);
-                const { clientWidth , clientHeight  } = $player;
+                const { clientWidth, clientHeight } = $player;
                 const playerRatio = clientWidth / clientHeight;
                 const setupRatio = ratioArray[0] / ratioArray[1];
                 if (playerRatio > setupRatio) {
@@ -1774,14 +1769,14 @@ function aspectRatioMix(art) {
         }
     });
 }
-exports.default = aspectRatioMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"12WvT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>screenshotMix);
 var _utils = require("../utils");
 function screenshotMix(art) {
-    const { notice , template: { $video  }  } = art;
+    const { notice, template: { $video } } = art;
     const $canvas = (0, _utils.createElement)("canvas");
     (0, _utils.def)(art, "getDataURL", {
         value: ()=>new Promise((resolve, reject)=>{
@@ -1820,16 +1815,16 @@ function screenshotMix(art) {
         }
     });
 }
-exports.default = screenshotMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gNUzM":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreenMix);
 var _screenfull = require("../libs/screenfull");
 var _screenfullDefault = parcelHelpers.interopDefault(_screenfull);
 var _utils = require("../utils");
 function fullscreenMix(art) {
-    const { i18n , notice , template: { $video , $player  }  } = art;
+    const { i18n, notice, template: { $video, $player } } = art;
     const nativeScreenfull = (art)=>{
         (0, _screenfullDefault.default).on("change", ()=>{
             art.emit("fullscreen", (0, _screenfullDefault.default).isFullscreen);
@@ -1884,7 +1879,6 @@ function fullscreenMix(art) {
         (0, _utils.def)(art, "fullscreen", (0, _utils.get)(art, "fullscreen"));
     });
 }
-exports.default = fullscreenMix;
 
 },{"../libs/screenfull":"eQous","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eQous":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2017,9 +2011,10 @@ exports.default = screenfull;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"f2xmf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreenWebMix);
 var _utils = require("../utils");
 function fullscreenWebMix(art) {
-    const { constructor , template: { $container , $player  }  } = art;
+    const { constructor, template: { $container, $player } } = art;
     let cssText = "";
     (0, _utils.def)(art, "fullscreenWeb", {
         get () {
@@ -2047,14 +2042,14 @@ function fullscreenWebMix(art) {
         }
     });
 }
-exports.default = fullscreenWebMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"i5i0P":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pipMix);
 var _utils = require("../utils");
 function nativePip(art) {
-    const { template: { $video  } , proxy , notice  } = art;
+    const { template: { $video }, proxy, notice } = art;
     $video.disablePictureInPicture = false;
     (0, _utils.def)(art, "pip", {
         get () {
@@ -2081,7 +2076,7 @@ function nativePip(art) {
     });
 }
 function webkitPip(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     $video.webkitSetPresentationMode("inline");
     (0, _utils.def)(art, "pip", {
         get () {
@@ -2100,7 +2095,7 @@ function webkitPip(art) {
     });
 }
 function pipMix(art) {
-    const { i18n , notice , template: { $video  }  } = art;
+    const { i18n, notice, template: { $video } } = art;
     if (document.pictureInPictureEnabled) nativePip(art);
     else if ($video.webkitSupportsPresentationMode) webkitPip(art);
     else (0, _utils.def)(art, "pip", {
@@ -2112,14 +2107,14 @@ function pipMix(art) {
         }
     });
 }
-exports.default = pipMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8X9EY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>seekMix);
 var _utils = require("../utils");
 function seekMix(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     (0, _utils.def)(art, "loaded", {
         get: ()=>art.loadedTime / $video.duration
     });
@@ -2127,41 +2122,41 @@ function seekMix(art) {
         get: ()=>$video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0
     });
 }
-exports.default = seekMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1ziBX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playedMix);
 var _utils = require("../utils");
 function playedMix(art) {
     (0, _utils.def)(art, "played", {
         get: ()=>art.currentTime / art.duration
     });
 }
-exports.default = playedMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9898W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playingMix);
 var _utils = require("../utils");
 function playingMix(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     (0, _utils.def)(art, "playing", {
         get: ()=>!!($video.currentTime > 0 && !$video.paused && !$video.ended && $video.readyState > 2)
     });
 }
-exports.default = playingMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"b1yGg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>resizeMix);
 var _utils = require("../utils");
 function resizeMix(art) {
-    const { $container , $player , $video  } = art.template;
+    const { $container, $player, $video } = art.template;
     (0, _utils.def)(art, "autoSize", {
         value () {
-            const { videoWidth , videoHeight  } = $video;
-            const { width , height  } = $container.getBoundingClientRect();
+            const { videoWidth, videoHeight } = $video;
+            const { width, height } = $container.getBoundingClientRect();
             const videoRatio = videoWidth / videoHeight;
             const containerRatio = width / height;
             if (containerRatio > videoRatio) {
@@ -2180,11 +2175,11 @@ function resizeMix(art) {
         }
     });
 }
-exports.default = resizeMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eKKgI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>rectMix);
 var _utils = require("../utils");
 function rectMix(art) {
     (0, _utils.def)(art, "rect", {
@@ -2219,14 +2214,14 @@ function rectMix(art) {
         }
     });
 }
-exports.default = rectMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"ad3ay":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>flipMix);
 var _utils = require("../utils");
 function flipMix(art) {
-    const { template: { $player  } , i18n , notice  } = art;
+    const { template: { $player }, i18n, notice } = art;
     (0, _utils.def)(art, "flip", {
         get () {
             return $player.dataset.flip ?? "normal";
@@ -2240,19 +2235,19 @@ function flipMix(art) {
         }
     });
 }
-exports.default = flipMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hUF3v":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>miniMix);
 var _utils = require("../utils");
 function miniMix(art) {
-    const { icons , proxy , storage , template: { $player , $video  }  } = art;
+    const { icons, proxy, storage, template: { $player, $video } } = art;
     let isDroging = false;
     let lastPageX = 0;
     let lastPageY = 0;
     function hideMini() {
-        const { $mini  } = art.template;
+        const { $mini } = art.template;
         if ($mini) {
             (0, _utils.removeClass)($player, "art-mini");
             (0, _utils.setStyle)($mini, "display", "none");
@@ -2270,7 +2265,7 @@ function miniMix(art) {
         }
     }
     function createMini() {
-        const { $mini  } = art.template;
+        const { $mini } = art.template;
         if ($mini) {
             (0, _utils.append)($mini, $video);
             return (0, _utils.setStyle)($mini, "display", "flex");
@@ -2321,7 +2316,7 @@ function miniMix(art) {
         }
     }
     function initMini() {
-        const { $mini  } = art.template;
+        const { $mini } = art.template;
         const rect = $mini.getBoundingClientRect();
         const top = window.innerHeight - rect.height - 50;
         const left = window.innerWidth - rect.width - 50;
@@ -2351,11 +2346,11 @@ function miniMix(art) {
         }
     });
 }
-exports.default = miniMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gXFcr":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>loopMix);
 var _utils = require("../utils");
 function loopMix(art) {
     let interval = [];
@@ -2380,14 +2375,14 @@ function loopMix(art) {
         }
     });
 }
-exports.default = loopMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6j7ij":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>posterMix);
 var _utils = require("../utils");
 function posterMix(art) {
-    const { template: { $poster  }  } = art;
+    const { template: { $poster } } = art;
     (0, _utils.def)(art, "poster", {
         get: ()=>{
             try {
@@ -2401,32 +2396,32 @@ function posterMix(art) {
         }
     });
 }
-exports.default = posterMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8Mzuu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>autoHeightMix);
 var _utils = require("../utils");
 function autoHeightMix(art) {
-    const { template: { $container , $video  }  } = art;
+    const { template: { $container, $video } } = art;
     (0, _utils.def)(art, "autoHeight", {
         value () {
-            const { clientWidth  } = $container;
-            const { videoHeight , videoWidth  } = $video;
+            const { clientWidth } = $container;
+            const { videoHeight, videoWidth } = $video;
             const height = videoHeight * (clientWidth / videoWidth);
             (0, _utils.setStyle)($container, "height", height + "px");
             art.emit("autoHeight", height);
         }
     });
 }
-exports.default = autoHeightMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fypct":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>cssVarMix);
 var _utils = require("../utils");
 function cssVarMix(art) {
-    const { $player  } = art.template;
+    const { $player } = art.template;
     (0, _utils.def)(art, "cssVar", {
         value (key, value) {
             if (value) return $player.style.setProperty(key, value);
@@ -2434,11 +2429,11 @@ function cssVarMix(art) {
         }
     });
 }
-exports.default = cssVarMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dv3lF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>themeMix);
 var _utils = require("../utils");
 function themeMix(art) {
     (0, _utils.def)(art, "theme", {
@@ -2450,11 +2445,11 @@ function themeMix(art) {
         }
     });
 }
-exports.default = themeMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2FCQH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>typeMix);
 var _utils = require("../utils");
 function typeMix(art) {
     (0, _utils.def)(art, "type", {
@@ -2466,11 +2461,11 @@ function typeMix(art) {
         }
     });
 }
-exports.default = typeMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iG6Jk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>stateMix);
 var _utils = require("../utils");
 function stateMix(art) {
     const states = [
@@ -2489,15 +2484,15 @@ function stateMix(art) {
         }
     });
 }
-exports.default = stateMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"lTNEf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>subtitleOffsetMix);
 var _utils = require("../utils");
 function subtitleOffsetMix(art) {
-    const { clamp  } = art.constructor.utils;
-    const { notice , template , i18n  } = art;
+    const { clamp } = art.constructor.utils;
+    const { notice, template, i18n } = art;
     let offsetCache = 0;
     let cuesCache = [];
     art.on("subtitle:switch", ()=>{
@@ -2527,14 +2522,14 @@ function subtitleOffsetMix(art) {
         }
     });
 }
-exports.default = subtitleOffsetMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bIjnH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>airplayMix);
 var _utils = require("../utils");
 function airplayMix(art) {
-    const { i18n , notice , proxy , template: { $video  }  } = art;
+    const { i18n, notice, proxy, template: { $video } } = art;
     let available = true;
     if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) proxy($video, "webkitplaybacktargetavailabilitychanged", (event)=>{
         switch(event.availability){
@@ -2556,16 +2551,16 @@ function airplayMix(art) {
         }
     });
 }
-exports.default = airplayMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"ke1N4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>qualityMix);
 var _utils = require("../utils");
 function qualityMix(art) {
     (0, _utils.def)(art, "quality", {
         set (quality) {
-            const { controls , notice , i18n  } = art;
+            const { controls, notice, i18n } = art;
             const qualityDefault = quality.find((item)=>item.default) ?? quality[0];
             controls.update({
                 name: "quality",
@@ -2584,14 +2579,14 @@ function qualityMix(art) {
         }
     });
 }
-exports.default = qualityMix;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9Us4p":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>attrInit);
 var _utils = require("../utils");
 function attrInit(art) {
-    const { option , storage , template: { $video , $poster  }  } = art;
+    const { option, storage, template: { $video, $poster } } = art;
     for(const key in option.moreVideoAttr)art.attr(key, option.moreVideoAttr[key]);
     if (option.muted) art.muted = option.muted;
     if (option.volume) $video.volume = (0, _utils.clamp)(option.volume, 0, 1);
@@ -2607,16 +2602,16 @@ function attrInit(art) {
     for(const key in option.cssVar)art.cssVar(key, option.cssVar[key]);
     art.url = option.url;
 }
-exports.default = attrInit;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4hZCW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>eventInit);
 var _config = require("../config");
 var _configDefault = parcelHelpers.interopDefault(_config);
 var _utils = require("../utils");
 function eventInit(art) {
-    const { i18n , notice , option , constructor , proxy , template: { $player , $video , $poster  }  } = art;
+    const { i18n, notice, option, constructor, proxy, template: { $player, $video, $poster } } = art;
     let reconnectTime = 0;
     for(let index = 0; index < (0, _configDefault.default).events.length; index++)proxy($video, (0, _configDefault.default).events[index], (event)=>{
         art.emit(`video:${event.type}`, event);
@@ -2720,7 +2715,6 @@ function eventInit(art) {
         art.mask.show = false;
     });
 }
-exports.default = eventInit;
 
 },{"../config":"2ZnKD","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"faO0X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2756,7 +2750,7 @@ class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "control";
-        const { proxy , constructor , template: { $player  }  } = art;
+        const { proxy, constructor, template: { $player } } = art;
         let activeTime = Date.now();
         proxy($player, [
             "click",
@@ -2779,7 +2773,7 @@ class Control extends (0, _componentDefault.default) {
         this.init();
     }
     init() {
-        const { option  } = this.art;
+        const { option } = this.art;
         if (!option.isLive) this.add((0, _progressDefault.default)({
             name: "progress",
             position: "top",
@@ -2847,7 +2841,7 @@ class Control extends (0, _componentDefault.default) {
     }
     add(getOption) {
         const option = typeof getOption === "function" ? getOption(this.art) : getOption;
-        const { $progress , $controlsLeft , $controlsRight  } = this.art.template;
+        const { $progress, $controlsLeft, $controlsRight } = this.art.template;
         switch(option.position){
             case "top":
                 this.$parent = $progress;
@@ -2889,7 +2883,7 @@ class Component {
         return (0, _dom.hasClass)(this.art.template.$player, `art-${this.name}-show`);
     }
     set show(value) {
-        const { $player  } = this.art.template;
+        const { $player } = this.art.template;
         const className = `art-${this.name}-show`;
         if (value) (0, _dom.addClass)($player, className);
         else (0, _dom.removeClass)($player, className);
@@ -2940,7 +2934,7 @@ class Component {
         return $ref;
     }
     addSelector(option, $ref, events) {
-        const { hover , proxy  } = this.art.events;
+        const { hover, proxy } = this.art.events;
         (0, _dom.addClass)($ref, "art-control-selector");
         const $value = (0, _dom.createElement)("div");
         (0, _dom.addClass)($value, "art-selector-value");
@@ -2998,13 +2992,14 @@ exports.default = Component;
 },{"./dom":"dNynC","./format":"eWip5","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreen);
 var _utils = require("../utils");
 function fullscreen(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Fullscreen"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 const $fullscreenOn = (0, _utils.append)($control, icons.fullscreenOn);
                 const $fullscreenOff = (0, _utils.append)($control, icons.fullscreenOff);
                 (0, _utils.setStyle)($fullscreenOff, "display", "none");
@@ -3025,18 +3020,18 @@ function fullscreen(option) {
             }
         });
 }
-exports.default = fullscreen;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8HUSd":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreenWeb);
 var _utils = require("../utils");
 function fullscreenWeb(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Web Fullscreen"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 const $fullscreenWebOn = (0, _utils.append)($control, icons.fullscreenWebOn);
                 const $fullscreenWebOff = (0, _utils.append)($control, icons.fullscreenWebOff);
                 (0, _utils.setStyle)($fullscreenWebOff, "display", "none");
@@ -3057,18 +3052,18 @@ function fullscreenWeb(option) {
             }
         });
 }
-exports.default = fullscreenWeb;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5nd2H":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pip);
 var _utils = require("../utils");
 function pip(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("PIP Mode"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 (0, _utils.append)($control, icons.pip);
                 proxy($control, "click", ()=>{
                     art.pip = !art.pip;
@@ -3079,17 +3074,17 @@ function pip(option) {
             }
         });
 }
-exports.default = pip;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gt2F0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playAndPause);
 var _utils = require("../utils");
 function playAndPause(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 const $play = (0, _utils.append)($control, icons.play);
                 const $pause = (0, _utils.append)($control, icons.pause);
                 (0, _utils.tooltip)($play, i18n.get("Play"));
@@ -3119,17 +3114,17 @@ function playAndPause(option) {
             }
         });
 }
-exports.default = playAndPause;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aHyb0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getPosFromEvent", ()=>getPosFromEvent);
 parcelHelpers.export(exports, "setCurrentTime", ()=>setCurrentTime);
+parcelHelpers.export(exports, "default", ()=>progress);
 var _utils = require("../utils");
 function getPosFromEvent(art, event) {
-    const { $progress  } = art.template;
-    const { left  } = $progress.getBoundingClientRect();
+    const { $progress } = art.template;
+    const { left } = $progress.getBoundingClientRect();
     const eventLeft = (0, _utils.isMobile) ? event.touches[0].clientX : event.clientX;
     const width = (0, _utils.clamp)(eventLeft - left, 0, $progress.clientWidth);
     const second = width / $progress.clientWidth * art.duration;
@@ -3149,14 +3144,14 @@ function setCurrentTime(art, event) {
         art.emit("setBar", "played", percentage);
         art.seek = second;
     } else {
-        const { second , percentage  } = getPosFromEvent(art, event);
+        const { second, percentage } = getPosFromEvent(art, event);
         art.emit("setBar", "played", percentage);
         art.seek = second;
     }
 }
 function progress(options) {
     return (art)=>{
-        const { icons , option , proxy  } = art;
+        const { icons, option, proxy } = art;
         return {
             ...options,
             html: `
@@ -3180,8 +3175,8 @@ function progress(options) {
                 if (icons.indicator) (0, _utils.append)($indicator, icons.indicator);
                 else (0, _utils.setStyle)($indicator, "backgroundColor", "var(--art-theme)");
                 function showHighlight(event) {
-                    const { width  } = getPosFromEvent(art, event);
-                    const { text  } = event.target.dataset;
+                    const { width } = getPosFromEvent(art, event);
+                    const { text } = event.target.dataset;
                     $tip.innerHTML = text;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
@@ -3189,7 +3184,7 @@ function progress(options) {
                     else (0, _utils.setStyle)($tip, "left", `${width - tipWidth / 2}px`);
                 }
                 function showTime(event) {
-                    const { width , time  } = getPosFromEvent(art, event);
+                    const { width, time } = getPosFromEvent(art, event);
                     $tip.innerHTML = time;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
@@ -3204,7 +3199,7 @@ function progress(options) {
                     }
                 }
                 function setHover(event) {
-                    const { width  } = getPosFromEvent(art, event);
+                    const { width } = getPosFromEvent(art, event);
                     (0, _utils.setStyle)($hover, "width", `${width}px`);
                     (0, _utils.setStyle)($hover, "display", "flex");
                 }
@@ -3251,7 +3246,7 @@ function progress(options) {
                     });
                     art.on("document:mousemove", (event)=>{
                         if (isDroging) {
-                            const { second , percentage  } = getPosFromEvent(art, event);
+                            const { second, percentage } = getPosFromEvent(art, event);
                             setBar("played", percentage);
                             art.seek = second;
                         }
@@ -3264,11 +3259,11 @@ function progress(options) {
         };
     };
 }
-exports.default = progress;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hL9ry":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>time);
 var _utils = require("../utils");
 function time(option) {
     return (art)=>({
@@ -3295,17 +3290,17 @@ function time(option) {
             }
         });
 }
-exports.default = time;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3G9Wa":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>volume);
 var _utils = require("../utils");
 function volume(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { proxy , icons  } = art;
+                const { proxy, icons } = art;
                 const $volume = (0, _utils.append)($control, icons.volume);
                 const $close = (0, _utils.append)($control, icons.volumeClose);
                 const $panel = (0, _utils.append)($control, '<div class="art-volume-panel"></div>');
@@ -3316,7 +3311,7 @@ function volume(option) {
                 const $loaded = (0, _utils.append)($handle, `<div class="art-volume-loaded"></div>`);
                 const $indicator = (0, _utils.append)($slider, `<div class="art-volume-indicator"></div>`);
                 function getVolumeFromEvent(event) {
-                    const { top , height  } = $slider.getBoundingClientRect();
+                    const { top, height } = $slider.getBoundingClientRect();
                     return 1 - (event.clientY - top) / height;
                 }
                 function update() {
@@ -3363,18 +3358,18 @@ function volume(option) {
             }
         });
 }
-exports.default = volume;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jQ9Bw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>setting);
 var _utils = require("../utils");
 function setting(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Show Setting"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 (0, _utils.append)($control, icons.setting);
                 proxy($control, "click", ()=>{
                     art.setting.toggle();
@@ -3386,24 +3381,24 @@ function setting(option) {
             }
         });
 }
-exports.default = setting;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8HBQN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>thumbnails);
 var _utils = require("../utils");
 var _progress = require("./progress");
 function thumbnails(options) {
     return (art)=>({
             ...options,
             mounted: ($control)=>{
-                const { option , template: { $progress , $video  } , events: { proxy , loadImg  }  } = art;
+                const { option, template: { $progress, $video }, events: { proxy, loadImg } } = art;
                 let image = null;
                 let loading = false;
                 let isLoad = false;
                 function showThumbnails(event) {
-                    const { width: posWidth  } = (0, _progress.getPosFromEvent)(art, event);
-                    const { url , number , column , width , height  } = option.thumbnails;
+                    const { width: posWidth } = (0, _progress.getPosFromEvent)(art, event);
+                    const { url, number, column, width, height } = option.thumbnails;
                     const width2 = width ?? image.naturalWidth / column;
                     const height2 = height ?? width2 / ($video.videoWidth / $video.videoHeight);
                     const perWidth = $progress.clientWidth / number;
@@ -3439,18 +3434,18 @@ function thumbnails(options) {
             }
         });
 }
-exports.default = thumbnails;
 
 },{"../utils":"jmgNb","./progress":"aHyb0","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aA6wc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>screenshot);
 var _utils = require("../utils");
 function screenshot(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Screenshot"),
             mounted: ($control)=>{
-                const { proxy , icons  } = art;
+                const { proxy, icons } = art;
                 (0, _utils.append)($control, icons.screenshot);
                 proxy($control, "click", ()=>{
                     art.screenshot();
@@ -3458,11 +3453,11 @@ function screenshot(option) {
             }
         });
 }
-exports.default = screenshot;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3bPO6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>loop);
 var _utils = require("../utils");
 function loop(option) {
     return (art)=>({
@@ -3480,24 +3475,23 @@ function loop(option) {
             }
         });
 }
-exports.default = loop;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iKTFA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pip);
 var _utils = require("../utils");
 function pip(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("AirPlay"),
             mounted: ($control)=>{
-                const { proxy , icons  } = art;
+                const { proxy, icons } = art;
                 (0, _utils.append)($control, icons.airplay);
                 proxy($control, "click", ()=>art.airplay());
             }
         });
 }
-exports.default = pip;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5npaZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -3525,7 +3519,7 @@ class Contextmenu extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { option , proxy , template: { $player , $contextmenu  }  } = this.art;
+        const { option, proxy, template: { $player, $contextmenu } } = this.art;
         if (option.playbackRate) this.add((0, _playbackRateDefault.default)({
             name: "playbackRate",
             index: 10
@@ -3557,8 +3551,8 @@ class Contextmenu extends (0, _componentDefault.default) {
             this.show = true;
             const mouseX = event.clientX;
             const mouseY = event.clientY;
-            const { height: cHeight , width: cWidth , left: cLeft , top: cTop  } = $player.getBoundingClientRect();
-            const { height: mHeight , width: mWidth  } = $contextmenu.getBoundingClientRect();
+            const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
+            const { height: mHeight, width: mWidth } = $contextmenu.getBoundingClientRect();
             let menuLeft = mouseX - cLeft;
             let menuTop = mouseY - cTop;
             if (mouseX + mWidth > cLeft + cWidth) menuLeft = cWidth - mWidth;
@@ -3581,16 +3575,17 @@ exports.default = Contextmenu;
 },{"../utils":"jmgNb","../utils/component":"bgug2","./playbackRate":"eoKzP","./aspectRatio":"7ejUt","./flip":"dAW0A","./info":"1jWhq","./version":"dapbx","./close":"9E5SI","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eoKzP":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playbackRate);
 var _utils = require("../utils");
 function playbackRate(option) {
     return (art)=>{
-        const { i18n , constructor: { PLAYBACK_RATE  }  } = art;
+        const { i18n, constructor: { PLAYBACK_RATE } } = art;
         const html = PLAYBACK_RATE.map((item)=>`<span data-value="${item}">${item === 1 ? i18n.get("Normal") : item.toFixed(1)}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Play Speed")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value  } = event.target.dataset;
+                const { value } = event.target.dataset;
                 if (value) {
                     art.playbackRate = Number(value);
                     contextmenu.show = false;
@@ -3607,21 +3602,21 @@ function playbackRate(option) {
         };
     };
 }
-exports.default = playbackRate;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7ejUt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>aspectRatio);
 var _utils = require("../utils");
 function aspectRatio(option) {
     return (art)=>{
-        const { i18n , constructor: { ASPECT_RATIO  }  } = art;
+        const { i18n, constructor: { ASPECT_RATIO } } = art;
         const html = ASPECT_RATIO.map((item)=>`<span data-value="${item}">${item === "default" ? i18n.get("Default") : item}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Aspect Ratio")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value  } = event.target.dataset;
+                const { value } = event.target.dataset;
                 if (value) {
                     art.aspectRatio = value;
                     contextmenu.show = false;
@@ -3638,21 +3633,21 @@ function aspectRatio(option) {
         };
     };
 }
-exports.default = aspectRatio;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dAW0A":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>flip);
 var _utils = require("../utils");
 function flip(option) {
     return (art)=>{
-        const { i18n , constructor: { FLIP  }  } = art;
+        const { i18n, constructor: { FLIP } } = art;
         const html = FLIP.map((item)=>`<span data-value="${item}">${i18n.get((0, _utils.capitalize)(item))}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Video Flip")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value  } = event.target.dataset;
+                const { value } = event.target.dataset;
                 if (value) {
                     art.flip = value.toLowerCase();
                     contextmenu.show = false;
@@ -3669,11 +3664,11 @@ function flip(option) {
         };
     };
 }
-exports.default = flip;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1jWhq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>info);
 function info(option) {
     return (art)=>({
             ...option,
@@ -3684,22 +3679,22 @@ function info(option) {
             }
         });
 }
-exports.default = info;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dapbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
         html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.0"}</a>`
     };
 }
-exports.default = version;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9E5SI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>close);
 function close(option) {
     return (art)=>({
             ...option,
@@ -3709,7 +3704,6 @@ function close(option) {
             }
         });
 }
-exports.default = close;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6vVKE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -3724,7 +3718,7 @@ class Info extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy , constructor , template: { $infoPanel , $infoClose , $video  }  } = this.art;
+        const { proxy, constructor, template: { $infoPanel, $infoClose, $video } } = this.art;
         proxy($infoClose, "click", ()=>{
             this.show = false;
         });
@@ -3785,12 +3779,12 @@ class Subtitle extends (0, _componentDefault.default) {
         return this.textTrack.activeCues[0];
     }
     style(key, value) {
-        const { $subtitle  } = this.art.template;
+        const { $subtitle } = this.art.template;
         if (typeof key === "object") return (0, _utils.setStyles)($subtitle, key);
         return (0, _utils.setStyle)($subtitle, key, value);
     }
     update() {
-        const { $subtitle  } = this.art.template;
+        const { $subtitle } = this.art.template;
         $subtitle.innerHTML = "";
         if (this.activeCue) {
             if (this.art.option.subtitle.escape) $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map((item)=>`<p>${(0, _utils.escape)(item)}</p>`).join("");
@@ -3799,7 +3793,7 @@ class Subtitle extends (0, _componentDefault.default) {
         }
     }
     async switch(url, newOption = {}) {
-        const { i18n , notice , option  } = this.art;
+        const { i18n, notice, option } = this.art;
         const subtitleOption = {
             ...option.subtitle,
             ...newOption,
@@ -3810,8 +3804,8 @@ class Subtitle extends (0, _componentDefault.default) {
         return subUrl;
     }
     createTrack(kind, url) {
-        const { template , proxy  } = this.art;
-        const { $video , $track  } = template;
+        const { template, proxy } = this.art;
+        const { $video, $track } = template;
         const $newTrack = (0, _utils.createElement)("track");
         $newTrack.default = true;
         $newTrack.kind = kind;
@@ -3824,7 +3818,7 @@ class Subtitle extends (0, _componentDefault.default) {
         this.eventDestroy = proxy(this.textTrack, "cuechange", ()=>this.update());
     }
     async init(subtitleOption) {
-        const { notice , template: { $subtitle  }  } = this.art;
+        const { notice, template: { $subtitle } } = this.art;
         (0, _optionValidatorDefault.default)(subtitleOption, (0, _schemeDefault.default).subtitle);
         if (!subtitleOption.url) return;
         this.style(subtitleOption.style);
@@ -3944,9 +3938,10 @@ exports.default = Events;
 },{"../utils/error":"622b3","./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","./updateInit":"4Xp2q","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>clickInit);
 var _utils = require("../utils");
 function clickInit(art, events) {
-    const { constructor , template: { $player , $video  }  } = art;
+    const { constructor, template: { $player, $video } } = art;
     events.proxy(document, [
         "click",
         "contextmenu"
@@ -3964,7 +3959,7 @@ function clickInit(art, events) {
     let clickTime = 0;
     events.proxy($video, "click", (event)=>{
         const now = Date.now();
-        const { MOBILE_CLICK_PLAY , DBCLICK_TIME , MOBILE_DBCLICK_PLAY , DBCLICK_FULLSCREEN  } = constructor;
+        const { MOBILE_CLICK_PLAY, DBCLICK_TIME, MOBILE_DBCLICK_PLAY, DBCLICK_FULLSCREEN } = constructor;
         if (now - clickTime <= DBCLICK_TIME) {
             art.emit("dblclick", event);
             if (0, _utils.isMobile) {
@@ -3979,14 +3974,14 @@ function clickInit(art, events) {
         clickTime = now;
     });
 }
-exports.default = clickInit;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jr1ic":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>hoverInit);
 var _utils = require("../utils");
 function hoverInit(art, events) {
-    const { $player  } = art.template;
+    const { $player } = art.template;
     events.hover($player, (event)=>{
         (0, _utils.addClass)($player, "art-hover");
         art.emit("hover", true, event);
@@ -3995,27 +3990,27 @@ function hoverInit(art, events) {
         art.emit("hover", false, event);
     });
 }
-exports.default = hoverInit;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jnUlq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>moveInit);
 function moveInit(art, events) {
-    const { $player  } = art.template;
+    const { $player } = art.template;
     events.proxy($player, "mousemove", (event)=>{
         art.emit("mousemove", event);
     });
 }
-exports.default = moveInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2r19L":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>resizeInit);
 var _utils = require("../utils");
 function resizeInit(art, events) {
-    const { option , constructor  } = art;
+    const { option, constructor } = art;
     art.on("resize", ()=>{
-        const { aspectRatio , notice  } = art;
+        const { aspectRatio, notice } = art;
         if (art.state === "standard" && option.autoSize) art.autoSize();
         art.aspectRatio = aspectRatio;
         notice.show = "";
@@ -4027,11 +4022,11 @@ function resizeInit(art, events) {
     ], ()=>resizeFn());
     if (screen && screen.orientation && screen.orientation.onchange) events.proxy(screen.orientation, "change", ()=>resizeFn());
 }
-exports.default = resizeInit;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2IPOb":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>gestureInit);
 var _utils = require("../utils");
 var _progress = require("../control/progress");
 function GetSlideAngle(dx, dy) {
@@ -4051,7 +4046,7 @@ function GetSlideDirection(startX, startY, endX, endY) {
 }
 function gestureInit(art, events) {
     if ((0, _utils.isMobile) && !art.option.isLive) {
-        const { $video , $progress  } = art.template;
+        const { $video, $progress } = art.template;
         let touchTarget = null;
         let isDroging = false;
         let startX = 0;
@@ -4061,7 +4056,7 @@ function gestureInit(art, events) {
             if (event.touches.length === 1 && !art.isLock) {
                 if (touchTarget === $progress) (0, _progress.setCurrentTime)(art, event);
                 isDroging = true;
-                const { pageX , pageY  } = event.touches[0];
+                const { pageX, pageY } = event.touches[0];
                 startX = pageX;
                 startY = pageY;
                 startTime = art.currentTime;
@@ -4069,7 +4064,7 @@ function gestureInit(art, events) {
         };
         const onTouchMove = (event)=>{
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const { pageX , pageY  } = event.touches[0];
+                const { pageX, pageY } = event.touches[0];
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [
                     3,
@@ -4114,14 +4109,14 @@ function gestureInit(art, events) {
         events.proxy(document, "touchend", onTouchEnd);
     }
 }
-exports.default = gestureInit;
 
 },{"../utils":"jmgNb","../control/progress":"aHyb0","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fmrIX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>viewInit);
 var _utils = require("../utils");
 function viewInit(art, events) {
-    const { option , constructor , template: { $container  }  } = art;
+    const { option, constructor, template: { $container } } = art;
     const scrollFn = (0, _utils.throttle)(()=>{
         art.emit("view", (0, _utils.isInViewport)($container, constructor.SCROLL_GAP));
     }, constructor.SCROLL_TIME);
@@ -4130,11 +4125,11 @@ function viewInit(art, events) {
         if (option.autoMini) art.mini = !state;
     });
 }
-exports.default = viewInit;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bIWxm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>documentInit);
 function documentInit(art, events) {
     events.proxy(document, "mousemove", (event)=>{
         art.emit("document:mousemove", event);
@@ -4143,11 +4138,11 @@ function documentInit(art, events) {
         art.emit("document:mouseup", event);
     });
 }
-exports.default = documentInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4Xp2q":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>updateInit);
 function updateInit(art) {
     if (art.constructor.USE_RAF) {
         let timer = null;
@@ -4160,7 +4155,6 @@ function updateInit(art) {
         });
     }
 }
-exports.default = updateInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1nFqF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4173,7 +4167,7 @@ class Hotkey {
         if (art.option.hotkey && !(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy , constructor  } = this.art;
+        const { proxy, constructor } = this.art;
         this.add(27, ()=>{
             if (this.art.fullscreenWeb) this.art.fullscreenWeb = false;
         });
@@ -4232,7 +4226,7 @@ var _componentDefault = parcelHelpers.interopDefault(_component);
 class Layer extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option , template: { $layer  }  } = art;
+        const { option, template: { $layer } } = art;
         this.name = "layer";
         this.$parent = $layer;
         for(let index = 0; index < option.layers.length; index++)this.add(option.layers[index]);
@@ -4265,7 +4259,7 @@ class Notice {
         this.timer = null;
     }
     set show(msg) {
-        const { constructor , template: { $player , $noticeInner  }  } = this.art;
+        const { constructor, template: { $player, $noticeInner } } = this.art;
         if (msg) {
             $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
             (0, _utils.addClass)($player, "art-notice-show");
@@ -4289,7 +4283,7 @@ class Mask extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "mask";
-        const { template , icons , events  } = art;
+        const { template, icons, events } = art;
         const $state = (0, _utils.append)(template.$state, icons.state);
         const $error = (0, _utils.append)(template.$state, icons.error);
         (0, _utils.setStyle)($error, "display", "none");
@@ -4498,7 +4492,7 @@ var _utils = require("../utils");
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option , controls , template: { $setting  }  } = art;
+        const { option, controls, template: { $setting } } = art;
         this.name = "setting";
         this.$parent = $setting;
         this.option = [];
@@ -4533,7 +4527,7 @@ class Setting extends (0, _componentDefault.default) {
     }
     get defaultSettings() {
         const result = [];
-        const { option  } = this.art;
+        const { option } = this.art;
         if (option.playbackRate) result.push((0, _playbackRateDefault.default)(this.art));
         if (option.aspectRatio) result.push((0, _aspectRatioDefault.default)(this.art));
         if (option.flip) result.push((0, _flipDefault.default)(this.art));
@@ -4541,7 +4535,7 @@ class Setting extends (0, _componentDefault.default) {
         return result;
     }
     init() {
-        const { option  } = this.art;
+        const { option } = this.art;
         const mergeSettings = [
             ...this.defaultSettings,
             ...option.settings
@@ -4594,7 +4588,7 @@ class Setting extends (0, _componentDefault.default) {
         return this.option;
     }
     creatHeader(item) {
-        const { icons , proxy , constructor  } = this.art;
+        const { icons, proxy, constructor } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.setStyle)($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
         (0, _utils.addClass)($item, "art-setting-item");
@@ -4610,7 +4604,7 @@ class Setting extends (0, _componentDefault.default) {
         return $item;
     }
     creatItem(type, item) {
-        const { icons , proxy , constructor  } = this.art;
+        const { icons, proxy, constructor } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         (0, _utils.setStyle)($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
@@ -4785,11 +4779,11 @@ class Setting extends (0, _componentDefault.default) {
         return $item;
     }
     updateStyle(width) {
-        const { controls , constructor , template: { $player , $setting  }  } = this.art;
+        const { controls, constructor, template: { $player, $setting } } = this.art;
         if (controls.setting && !(0, _utils.isMobile)) {
             const settingWidth = width ?? constructor.SETTING_WIDTH;
-            const { left: controlLeft , width: controlWidth  } = controls.setting.getBoundingClientRect();
-            const { left: playerLeft , width: playerWidth  } = $player.getBoundingClientRect();
+            const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
+            const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
             if (settingLeft + settingWidth > playerWidth) {
                 (0, _utils.setStyle)($setting, "left", null);
@@ -4801,7 +4795,7 @@ class Setting extends (0, _componentDefault.default) {
         }
     }
     render(option, width) {
-        const { constructor  } = this.art;
+        const { constructor } = this.art;
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             (0, _utils.inverseClass)($panel, "art-current");
@@ -4838,9 +4832,10 @@ exports.default = Setting;
 },{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils/component":"bgug2","../utils/error":"622b3","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7rVpZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>flip);
 var _utils = require("../utils");
 function flip(art) {
-    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , FLIP  }  } = art;
+    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, FLIP } } = art;
     function update($panel, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = i18n.get((0, _utils.capitalize)(value));
         const $current = (0, _utils.queryAll)(".art-setting-item", $panel).find((item)=>item.dataset.value === value);
@@ -4872,14 +4867,14 @@ function flip(art) {
         }
     };
 }
-exports.default = flip;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9hfUt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>aspectRatio);
 var _utils = require("../utils");
 function aspectRatio(art) {
-    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , ASPECT_RATIO  }  } = art;
+    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, ASPECT_RATIO } } = art;
     function getI18n(value) {
         return value === "default" ? i18n.get("Default") : value;
     }
@@ -4914,14 +4909,14 @@ function aspectRatio(art) {
         }
     };
 }
-exports.default = aspectRatio;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8RIYy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playbackRate);
 var _utils = require("../utils");
 function playbackRate(art) {
-    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , PLAYBACK_RATE  }  } = art;
+    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, PLAYBACK_RATE } } = art;
     function getI18n(value) {
         return value === 1.0 ? i18n.get("Normal") : value.toFixed(1);
     }
@@ -4956,13 +4951,13 @@ function playbackRate(art) {
         }
     };
 }
-exports.default = playbackRate;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aVPfi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>subtitleOffset);
 function subtitleOffset(art) {
-    const { i18n , icons , constructor  } = art;
+    const { i18n, icons, constructor } = art;
     return {
         width: constructor.SETTING_ITEM_WIDTH,
         name: "subtitle-offset",
@@ -4981,7 +4976,6 @@ function subtitleOffset(art) {
         }
     };
 }
-exports.default = subtitleOffset;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -5046,7 +5040,7 @@ class Plugins {
     constructor(art){
         this.art = art;
         this.id = 0;
-        const { option  } = art;
+        const { option } = art;
         if (option.miniProgressBar && !option.isLive) this.add((0, _miniProgressBarDefault.default));
         if (option.lock && (0, _utils.isMobile)) this.add((0, _lockDefault.default));
         if (option.autoPlayback && !option.isLive) this.add((0, _autoPlaybackDefault.default));
@@ -5070,6 +5064,7 @@ exports.default = Plugins;
 },{"../utils":"jmgNb","./miniProgressBar":"dMA6v","./autoOrientation":"aROGj","./autoPlayback":"kQ2fc","./fastForward":"fgbhT","./lock":"j2mDF","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dMA6v":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>miniProgressBar);
 function miniProgressBar(art) {
     art.on("ready", ()=>{
         art.layers.add({
@@ -5094,18 +5089,18 @@ function miniProgressBar(art) {
         name: "mini-progress-bar"
     };
 }
-exports.default = miniProgressBar;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aROGj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>autoOrientation);
 var _utils = require("../utils");
 function autoOrientation(art) {
-    const { constructor , template: { $player , $video  }  } = art;
+    const { constructor, template: { $player, $video } } = art;
     art.on("fullscreenWeb", (state)=>{
         if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            const { videoWidth, videoHeight } = $video;
+            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
             if ((videoWidth > videoHeight && viewWidth < viewHeight) ?? (videoWidth < videoHeight && viewWidth > viewHeight)) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
             setTimeout(()=>{
                 (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
@@ -5125,8 +5120,8 @@ function autoOrientation(art) {
     art.on("fullscreen", async (state)=>{
         const lastOrientation = screen.orientation.type;
         if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            const { videoWidth, videoHeight } = $video;
+            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
             if ((videoWidth > videoHeight && viewWidth < viewHeight) ?? (videoWidth < videoHeight && viewWidth > viewHeight)) {
                 const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
                 await screen.orientation.lock(oppositeOrientation);
@@ -5144,14 +5139,14 @@ function autoOrientation(art) {
         }
     };
 }
-exports.default = autoOrientation;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQ2fc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>autoPlayback);
 var _utils = require("../utils");
 function autoPlayback(art) {
-    const { i18n , icons , storage , constructor , proxy , template: { $poster  }  } = art;
+    const { i18n, icons, storage, constructor, proxy, template: { $poster } } = art;
     const $autoPlayback = art.layers.add({
         name: "auto-playback",
         html: `
@@ -5212,14 +5207,14 @@ function autoPlayback(art) {
         }
     };
 }
-exports.default = autoPlayback;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fgbhT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fastForward);
 var _utils = require("../utils");
 function fastForward(art) {
-    const { constructor , proxy , template: { $player , $video  }  } = art;
+    const { constructor, proxy, template: { $player, $video } } = art;
     let timer = null;
     let isPress = false;
     let lastPlaybackRate = 1;
@@ -5249,14 +5244,14 @@ function fastForward(art) {
         }
     };
 }
-exports.default = fastForward;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"j2mDF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>lock);
 var _utils = require("../utils");
 function lock(art) {
-    const { layers , icons , template: { $player  }  } = art;
+    const { layers, icons, template: { $player } } = art;
     layers.add({
         name: "lock",
         mounted ($el) {
@@ -5292,7 +5287,6 @@ function lock(art) {
         }
     };
 }
-exports.default = lock;
 
 },{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["eFv8l"], "eFv8l", "parcelRequire4dc0")
 

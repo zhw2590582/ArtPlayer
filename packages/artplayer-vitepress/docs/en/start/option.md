@@ -1012,7 +1012,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `navigator.language.toLowerCase()`
 
-The default display language currently supports: `en`, `zh-cn`, `zh-tw`, `cs`, `pl`, `es`, `fa`, `fr`, `id`, `ru`
+The default display language currently supports: `en`, `zh-cn`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1023,6 +1023,12 @@ var art = new Artplayer({
     lang: 'en',
 });
 ```
+
+:::warning More language setting
+
+[/en/start/i18n.html](/en/start/i18n.html)
+
+:::
 
 ## `i18n`
 
@@ -1067,9 +1073,9 @@ var art = new Artplayer({
 });
 ```
 
-:::warning `i18n` definitions
+:::warning More language setting
 
-[artplayer/types/i18n.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/i18n.d.ts)
+[/en/start/i18n.html](/en/start/i18n.html)
 
 :::
 

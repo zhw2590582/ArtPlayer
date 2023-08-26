@@ -16,7 +16,7 @@ const config = {
       { text: 'English', link: '/en/', activeMatch: '/en/' },
       { text: 'Online Editor', link: 'https://artplayer.org' },
       {
-        text: '5.0.x',
+        text: '5.1.x',
         items: [
           { text: 'Changelog', link: 'https://github.com/zhw2590582/ArtPlayer/blob/master/CHANGELOG_CN.md' },
           { text: 'Donation', link: 'https://github.com/zhw2590582/ArtPlayer#donations' },
@@ -35,6 +35,7 @@ const config = {
           items: [
             { text: '安装使用', link: '/' },
             { text: '基础选项', link: '/start/option' },
+            { text: '语言设置', link: '/start/i18n' },
           ]
         },
         {
@@ -88,6 +89,7 @@ const config = {
           items: [
             { text: 'Install', link: '/en/' },
             { text: 'Option', link: '/en/start/option' },
+            { text: 'Language', link: '/en/start/i18n' },
           ]
         },
         {
