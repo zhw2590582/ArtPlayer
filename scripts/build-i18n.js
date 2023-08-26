@@ -21,7 +21,8 @@ const entries = glob.sync(
         defaultTargetOptions: {
             distDir: 'packages/artplayer/dist/i18n',
             sourceMaps: false,
-            outputFormat: 'global',
+            outputFormat: 'esmodule',
+            optimize: true,
             isLibrary: true,
             engines: {
                 browsers: ['last 1 Chrome version'],

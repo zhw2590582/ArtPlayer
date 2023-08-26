@@ -14,6 +14,7 @@ async function build(name, targetName) {
 
     const targets = {
         main: {
+            context: "browser",
             distDir: `${projects[name]}/dist`,
             sourceMap: false,
             outputFormat: 'global',
@@ -22,6 +23,7 @@ async function build(name, targetName) {
             },
         },
         legacy: {
+            context: "browser",
             distDir: `${projects[name]}/dist`,
             sourceMap: false,
             outputFormat: 'global',
