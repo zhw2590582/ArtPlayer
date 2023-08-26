@@ -59,6 +59,8 @@ declare class Artplayer extends Player {
     static ASPECT_RATIO: string[];
     static FLIP: string[];
     static FULLSCREEN_WEB_IN_BODY: boolean;
+    static LOG_VERSION: boolean;
+    static USE_RAF: boolean;
 
     readonly id: number;
     readonly option: Option;

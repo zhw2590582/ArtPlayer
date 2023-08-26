@@ -7,8 +7,9 @@ type I18nKeys =
     | 'es'
     | 'fa'
     | 'fr'
-    | `id`
-    | `ru`
+    | 'id'
+    | 'ru'
+    | 'tr'
     | (string & Record<never, never>);
 
 type I18nValue = {
