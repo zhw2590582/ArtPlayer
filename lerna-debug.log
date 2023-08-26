@@ -33,75 +33,70 @@
 22 silly hasDependencyInstalled artplayer-packages @parcel/reporter-cli
 23 silly hasDependencyInstalled artplayer-packages @parcel/transformer-inline-string
 24 silly hasDependencyInstalled artplayer-packages @parcel/transformer-less
-25 silly hasDependencyInstalled artplayer-packages @parcel/transformer-vue
-26 silly hasDependencyInstalled artplayer-packages artplayer
-27 silly hasDependencyInstalled artplayer-packages cpy
-28 silly hasDependencyInstalled artplayer-packages cross-env
-29 silly hasDependencyInstalled artplayer-packages cross-spawn
-30 silly hasDependencyInstalled artplayer-packages eslint
-31 silly hasDependencyInstalled artplayer-packages glob
-32 silly hasDependencyInstalled artplayer-packages lerna
-33 silly hasDependencyInstalled artplayer-packages prettier
-34 silly hasDependencyInstalled artplayer-packages prompts
-35 silly hasDependencyInstalled artplayer-packages servor
-36 silly hasDependencyInstalled artplayer-packages workbox-build
-37 silly hasDependencyInstalled artplayer-packages flexsearch
-38 silly hasDependencyInstalled artplayer-packages markdown-it
-39 silly hasDependencyInstalled artplayer-packages vitepress
-40 silly hasDependencyInstalled artplayer-packages vitepress-plugin-search
-41 silly hasDependencyInstalled artplayer-packages vue
-42 silly hasDependencyInstalled artplayer-packages option-validator
-43 silly root dependencies {}
-44 silly leaf dependencies {}
-45 info Installing external dependencies
-46 verbose actions 2 actions, concurrency 8
-47 info hoist Installing hoisted dependencies into root
-48 silly npmInstallDependencies artplayer-packages [
-48 silly npmInstallDependencies   '@babel/eslint-parser@^7.22.11',
-48 silly npmInstallDependencies   '@babel/preset-react@^7.22.5',
-48 silly npmInstallDependencies   '@parcel/config-default@^2.9.3',
-48 silly npmInstallDependencies   '@parcel/core@^2.9.3',
-48 silly npmInstallDependencies   '@parcel/optimizer-data-url@^2.9.3',
-48 silly npmInstallDependencies   '@parcel/reporter-cli@^2.9.3',
-48 silly npmInstallDependencies   '@parcel/transformer-inline-string@^2.9.3',
-48 silly npmInstallDependencies   '@parcel/transformer-less@^2.9.3',
-48 silly npmInstallDependencies   '@parcel/transformer-vue@^2.9.3',
-48 silly npmInstallDependencies   'artplayer@latest',
-48 silly npmInstallDependencies   'cpy@^10.1.0',
-48 silly npmInstallDependencies   'cross-env@^7.0.3',
-48 silly npmInstallDependencies   'cross-spawn@^7.0.3',
-48 silly npmInstallDependencies   'eslint@^8.48.0',
-48 silly npmInstallDependencies   'glob@^10.3.3',
-48 silly npmInstallDependencies   'lerna@^6.6.2',
-48 silly npmInstallDependencies   'prettier@^3.0.2',
-48 silly npmInstallDependencies   'prompts@^2.4.2',
-48 silly npmInstallDependencies   'servor@^4.0.2',
-48 silly npmInstallDependencies   'workbox-build@^7.0.0',
-48 silly npmInstallDependencies   'flexsearch@^0.7.31',
-48 silly npmInstallDependencies   'markdown-it@^13.0.1',
-48 silly npmInstallDependencies   'vitepress@^1.0.0-alpha.73',
-48 silly npmInstallDependencies   'vitepress-plugin-search@^1.0.4-alpha.20',
-48 silly npmInstallDependencies   'vue@^3.2.47',
-48 silly npmInstallDependencies   'option-validator@^2.0.6'
-48 silly npmInstallDependencies ]
-49 silly npmInstallDependencies backup /Users/zhaohaiwei/Desktop/github/ArtPlayer/package.json
-50 info hoist Pruning hoisted dependencies
-51 silly prune [
-51 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/flexsearch',
-51 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/markdown-it',
-51 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress',
-51 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress-plugin-search',
-51 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vue',
-51 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer/node_modules/option-validator'
-51 silly prune ]
-52 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/flexsearch
-53 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/markdown-it
-54 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress
-55 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress-plugin-search
-56 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vue
-57 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer/node_modules/option-validator
-58 verbose prune /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer/node_modules/option-validator
-59 error AssertionError [ERR_ASSERTION]: rimraf: callback function required
-59 error     at rimraf (/Users/zhaohaiwei/Desktop/github/ArtPlayer/node_modules/rimraf/rimraf.js:56:10)
-59 error     at rimrafDir (/Users/zhaohaiwei/Desktop/github/ArtPlayer/node_modules/@lerna/legacy-package-management/dist/index.js:3575:56)
-59 error     at concurrency (/Users/zhaohaiwei/Desktop/github/ArtPlayer/node_modules/@lerna/legacy-package-management/dist/index.js:4371:42)
+25 silly hasDependencyInstalled artplayer-packages cpy
+26 silly hasDependencyInstalled artplayer-packages cross-env
+27 silly hasDependencyInstalled artplayer-packages cross-spawn
+28 silly hasDependencyInstalled artplayer-packages eslint
+29 silly hasDependencyInstalled artplayer-packages glob
+30 silly hasDependencyInstalled artplayer-packages lerna
+31 silly hasDependencyInstalled artplayer-packages prettier
+32 silly hasDependencyInstalled artplayer-packages prompts
+33 silly hasDependencyInstalled artplayer-packages servor
+34 silly hasDependencyInstalled artplayer-packages workbox-build
+35 silly hasDependencyInstalled artplayer-packages flexsearch
+36 silly hasDependencyInstalled artplayer-packages markdown-it
+37 silly hasDependencyInstalled artplayer-packages vitepress
+38 silly hasDependencyInstalled artplayer-packages vitepress-plugin-search
+39 silly hasDependencyInstalled artplayer-packages vue
+40 silly hasDependencyInstalled artplayer-packages option-validator
+41 silly root dependencies {}
+42 silly leaf dependencies {}
+43 info Installing external dependencies
+44 verbose actions 2 actions, concurrency 8
+45 info hoist Installing hoisted dependencies into root
+46 silly npmInstallDependencies artplayer-packages [
+46 silly npmInstallDependencies   '@babel/eslint-parser@^7.22.11',
+46 silly npmInstallDependencies   '@babel/preset-react@^7.22.5',
+46 silly npmInstallDependencies   '@parcel/config-default@2.8.3',
+46 silly npmInstallDependencies   '@parcel/core@2.8.3',
+46 silly npmInstallDependencies   '@parcel/optimizer-data-url@2.8.3',
+46 silly npmInstallDependencies   '@parcel/reporter-cli@2.8.3',
+46 silly npmInstallDependencies   '@parcel/transformer-inline-string@2.8.3',
+46 silly npmInstallDependencies   '@parcel/transformer-less@2.8.3',
+46 silly npmInstallDependencies   'cpy@^10.1.0',
+46 silly npmInstallDependencies   'cross-env@^7.0.3',
+46 silly npmInstallDependencies   'cross-spawn@^7.0.3',
+46 silly npmInstallDependencies   'eslint@^8.48.0',
+46 silly npmInstallDependencies   'glob@^10.3.3',
+46 silly npmInstallDependencies   'lerna@^6.6.2',
+46 silly npmInstallDependencies   'prettier@^3.0.2',
+46 silly npmInstallDependencies   'prompts@^2.4.2',
+46 silly npmInstallDependencies   'servor@^4.0.2',
+46 silly npmInstallDependencies   'workbox-build@^7.0.0',
+46 silly npmInstallDependencies   'flexsearch@^0.7.31',
+46 silly npmInstallDependencies   'markdown-it@^13.0.1',
+46 silly npmInstallDependencies   'vitepress@^1.0.0-alpha.73',
+46 silly npmInstallDependencies   'vitepress-plugin-search@^1.0.4-alpha.20',
+46 silly npmInstallDependencies   'vue@^3.2.47',
+46 silly npmInstallDependencies   'option-validator@^2.0.6'
+46 silly npmInstallDependencies ]
+47 silly npmInstallDependencies backup /Users/zhaohaiwei/Desktop/github/ArtPlayer/package.json
+48 info hoist Pruning hoisted dependencies
+49 silly prune [
+49 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/flexsearch',
+49 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/markdown-it',
+49 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress',
+49 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress-plugin-search',
+49 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vue',
+49 silly prune   '/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer/node_modules/option-validator'
+49 silly prune ]
+50 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/flexsearch
+51 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/markdown-it
+52 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress
+53 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress-plugin-search
+54 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vue
+55 silly rimrafDir /Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer/node_modules/option-validator
+56 error AssertionError [ERR_ASSERTION]: rimraf: callback function required
+56 error     at rimraf (/Users/zhaohaiwei/Desktop/github/ArtPlayer/node_modules/rimraf/rimraf.js:56:10)
+56 error     at rimrafDir (/Users/zhaohaiwei/Desktop/github/ArtPlayer/node_modules/@lerna/legacy-package-management/dist/index.js:3575:56)
+56 error     at concurrency (/Users/zhaohaiwei/Desktop/github/ArtPlayer/node_modules/@lerna/legacy-package-management/dist/index.js:4371:42)
