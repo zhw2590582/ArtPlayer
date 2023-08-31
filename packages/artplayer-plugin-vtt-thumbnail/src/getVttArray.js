@@ -43,10 +43,14 @@ export default async function getVttArray(vttUrl = '') {
         const start = Math.floor(t2d(timeMatch[1]));
         const end = Math.floor(t2d(timeMatch[2]));
 
-        const urlArr = vttUrl.split('/');
-        urlArr.pop();
-        urlArr.push(textMatch[1]);
-        const url = urlArr.join('/');
+        let url = textMatch[1];
+        const isAbsoluteUrl = /^\/|((https?|ftp|file):\/\/)/i.test(url);
+        if (!isAbsoluteUrl) {
+            const urlArr = vttUrl.split('/');
+            urlArr.pop();
+            urlArr.push(url);
+            url = urlArr.join('/');
+        }
 
         const result = { start, end, url };
 
