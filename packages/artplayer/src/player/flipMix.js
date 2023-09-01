@@ -9,7 +9,7 @@ export default function flipMix(art) {
 
     def(art, 'flip', {
         get() {
-            return $player.dataset.flip ?? 'normal';
+            return $player.dataset.flip || 'normal';
         },
         set(flip) {
             if (!flip) flip = 'normal';

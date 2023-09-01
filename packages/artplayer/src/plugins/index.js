@@ -40,7 +40,7 @@ export default class Plugins {
     add(plugin) {
         this.id += 1;
         const result = plugin.call(this.art, this.art);
-        const pluginName = (result && result.name) ?? plugin.name ?? `plugin${this.id}`;
+        const pluginName = (result && result.name) || plugin.name || `plugin${this.id}`;
         errorHandle(!has(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
         def(this, pluginName, {
             value: result,

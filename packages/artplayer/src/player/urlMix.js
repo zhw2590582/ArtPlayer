@@ -13,7 +13,7 @@ export default function urlMix(art) {
         async set(newUrl) {
             if (newUrl) {
                 const oldUrl = art.url;
-                const typeName = option.type ?? getExt(newUrl);
+                const typeName = option.type || getExt(newUrl);
                 const typeCallback = option.customType[typeName];
 
                 if (typeName && typeCallback) {

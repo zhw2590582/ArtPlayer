@@ -1,7 +1,7 @@
 export default class Emitter {
     on(name, fn, ctx) {
-        const e = this.e ?? (this.e = {});
-        (e[name] ?? (e[name] = [])).push({ fn, ctx });
+        const e = this.e || (this.e = {});
+        (e[name] || (e[name] = [])).push({ fn, ctx });
         return this;
     }
 
@@ -16,7 +16,7 @@ export default class Emitter {
     }
 
     emit(name, ...data) {
-        const evtArr = ((this.e ?? (this.e = {}))[name] ?? []).slice();
+        const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
         for (let i = 0; i < evtArr.length; i += 1) {
             evtArr[i].fn.apply(evtArr[i].ctx, data);
         }
@@ -24,7 +24,7 @@ export default class Emitter {
     }
 
     off(name, callback) {
-        const e = this.e ?? (this.e = {});
+        const e = this.e || (this.e = {});
         const evts = e[name];
         const liveEvents = [];
         if (evts && callback) {

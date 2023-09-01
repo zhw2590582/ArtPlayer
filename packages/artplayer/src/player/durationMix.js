@@ -5,7 +5,7 @@ export default function durationMix(art) {
         get: () => {
             const { duration } = art.template.$video;
             if (duration === Infinity) return 0;
-            return duration ?? 0;
+            return duration || 0;
         },
     });
 }

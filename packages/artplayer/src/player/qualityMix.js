@@ -4,7 +4,7 @@ export default function qualityMix(art) {
     def(art, 'quality', {
         set(quality) {
             const { controls, notice, i18n } = art;
-            const qualityDefault = quality.find((item) => item.default) ?? quality[0];
+            const qualityDefault = quality.find((item) => item.default) || quality[0];
             controls.update({
                 name: 'quality',
                 position: 'right',

@@ -23,7 +23,7 @@ export default class Info extends Component {
         });
 
         let timer = null;
-        const $types = queryAll('[data-video]', $infoPanel) ?? [];
+        const $types = queryAll('[data-video]', $infoPanel) || [];
         this.art.on('destroy', () => clearTimeout(timer));
 
         function loop() {

@@ -46,10 +46,10 @@ export default class Component {
 
     add(getOption) {
         const option = typeof getOption === 'function' ? getOption(this.art) : getOption;
-        option.html = option.html ?? '';
+        option.html = option.html || '';
         validator(option, ComponentOption);
-        if (!this.$parent ?? !this.name ?? option.disable) return;
-        const name = option.name ?? `${this.name}${this.id}`;
+        if (!this.$parent || !this.name || option.disable) return;
+        const name = option.name || `${this.name}${this.id}`;
         const item = this.cache.get(name);
         errorHandle(!item, `Can't add an existing [${name}] to the [${this.name}]`);
 
@@ -59,7 +59,7 @@ export default class Component {
         addClass($ref, `art-${this.name}-${name}`);
 
         const childs = Array.from(this.$parent.children);
-        $ref.dataset.index = option.index ?? this.id;
+        $ref.dataset.index = option.index || this.id;
         const nextChild = childs.find((item) => Number(item.dataset.index) >= Number($ref.dataset.index));
         if (nextChild) {
             nextChild.insertAdjacentElement('beforebegin', $ref);
@@ -135,12 +135,12 @@ export default class Component {
         hover($ref, setLeft);
 
         const destroyEvent = proxy($list, 'click', async (event) => {
-            const path = event.composedPath() ?? [];
+            const path = event.composedPath() || [];
             const $item = path.find((item) => hasClass(item, 'art-selector-item'));
             if (!$item) return;
             inverseClass($item, 'art-current');
             const index = Number($item.dataset.index);
-            const find = option.selector[index] ?? {};
+            const find = option.selector[index] || {};
             $value.innerText = $item.innerText;
             if (option.onSelect) {
                 const result = await option.onSelect.call(this.art, find, $item, event);

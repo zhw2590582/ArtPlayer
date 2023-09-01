@@ -22,7 +22,7 @@ export default function volume(option) {
             }
 
             function update() {
-                if (art.muted ?? art.volume === 0) {
+                if (art.muted || art.volume === 0) {
                     setStyle($volume, 'display', 'none');
                     setStyle($close, 'display', 'flex');
                     setStyle($indicator, 'top', '100%');

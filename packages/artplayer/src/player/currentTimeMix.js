@@ -4,7 +4,7 @@ export default function currentTimeMix(art) {
     const { $video } = art.template;
 
     def(art, 'currentTime', {
-        get: () => $video.currentTime ?? 0,
+        get: () => $video.currentTime || 0,
         set: (time) => {
             time = parseFloat(time);
             if (Number.isNaN(time)) return;

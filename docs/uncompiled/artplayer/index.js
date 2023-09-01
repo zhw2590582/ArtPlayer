@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"eFv8l":[function(require,module,exports) {
+})({"gEVO5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _indexLess = require("bundle-text:./style/index.less");
@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-08-26 11:55:35";
+        return "2023-09-01 21:13:37";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -411,7 +411,7 @@ setTimeout(()=>{
     if (Artplayer.LOG_VERSION) console.log(`%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`, "color: #fff; background: #5f5f5f", "color: #fff; background: #4bc729", "");
 });
 
-},{"bundle-text:./style/index.less":"SvnDa","option-validator":"2tbdu","./utils/emitter":"elSLF","./utils":"jmgNb","./scheme":"gL38d","./config":"2ZnKD","./template":"bDTDS","./i18n":"k0CtI","./player":"35XKf","./control":"faO0X","./contextmenu":"5npaZ","./info":"6vVKE","./subtitle":"4exyO","./events":"dz5ul","./hotkey":"1nFqF","./layer":"fvy8V","./loading":"h8KPY","./notice":"cr1XY","./mask":"llnR4","./icons":"gP6M7","./setting":"e5Aaq","./storage":"feFxw","./plugins":"h1hfO","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"SvnDa":[function(require,module,exports) {
+},{"bundle-text:./style/index.less":"doPnH","option-validator":"2tbdu","./utils/emitter":"8uSwy","./utils":"euhMG","./scheme":"jVxq1","./config":"1hSww","./template":"eG0JW","./i18n":"6Q0In","./player":"kmRM5","./control":"nK2ZQ","./contextmenu":"iygWX","./info":"6tuCt","./subtitle":"1kFyE","./events":"akAUN","./hotkey":"f1oWx","./layer":"bKuSu","./loading":"4AfId","./notice":"aKncc","./mask":"1R5LH","./icons":"bPpva","./setting":"i2oRN","./storage":"9ruid","./plugins":"7Fd4c","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"doPnH":[function(require,module,exports) {
 module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: #00000080;\n  --art-transition-duration: .2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: #fff3;\n  --art-hover-color: #ffffff80;\n  --art-loaded-color: #fff3;\n  --art-loop-color: #ffffffbf;\n  --art-state-size: 80px;\n  --art-state-opacity: .8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: #ffffff80;\n  --art-loop-width: 2px;\n  --art-control-height: 46px;\n  --art-control-opacity: .75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: #000000d9;\n  --art-tip-background: #00000080;\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: #ffffff40;\n  --art-scrollbar-background-hover: #ffffff80;\n  --art-mini-progress-height: 2px;\n}\n\n.art-bg-cover {\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n}\n\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-truncate {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.art-video-player {\n  width: 100%;\n  height: 100%;\n  zoom: 1;\n  text-align: left;\n  direction: ltr;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  -webkit-tap-highlight-color: #0000;\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n  outline: 0;\n  margin: 0 auto;\n  padding: 0;\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.3;\n  position: relative;\n}\n\n.art-video-player *, .art-video-player :before, .art-video-player :after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n\n.art-icon {\n  justify-content: center;\n  align-items: center;\n  line-height: 1;\n  display: flex;\n}\n\n.art-video-player.art-backdrop .art-contextmenus, .art-video-player.art-backdrop .art-info, .art-video-player.art-backdrop .art-settings, .art-video-player.art-backdrop .art-layer-auto-playback, .art-video-player.art-backdrop .art-selector-list, .art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-video {\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  cursor: pointer;\n  position: absolute;\n  inset: 0;\n}\n\n.art-poster {\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-subtitle {\n  z-index: 20;\n  width: 100%;\n  text-align: center;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n  flex-direction: column;\n  padding: 0 5%;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-control-height)  + var(--art-subtitle-bottom));\n}\n\n.art-danmuku {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-layers {\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n\n.art-video-player .art-mask {\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-mask .art-state {\n  opacity: 0;\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  transform: scale(2);\n}\n\n.art-video-player.art-mask-show .art-state {\n  cursor: pointer;\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n\n.art-video-player .art-loading {\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n\n.art-video-player .art-bottom {\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  pointer-events: none;\n  justify-content: flex-end;\n  gap: var(--art-bottom-gap);\n  padding: 0 var(--art-padding);\n  transition: opacity var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n  flex-direction: column;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-bottom .art-controls, .art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-video-player.art-control-show .art-bottom, .art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n\n.art-video-player.art-control-show .art-bottom .art-controls, .art-video-player.art-hover .art-bottom .art-controls, .art-video-player.art-control-show .art-bottom .art-progress, .art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n\n.art-bottom .art-progress {\n  z-index: 0;\n  pointer-events: auto;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress {\n  cursor: pointer;\n  height: var(--art-progress-height);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  pointer-events: auto;\n  width: var(--art-highlight-width);\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n  position: absolute;\n  inset: 0 auto 0 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  z-index: 40;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  z-index: 50;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  padding: 3px 5px;\n  font-size: 12px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: -25px;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner {\n  height: 100%;\n}\n\n.art-bottom .art-progress .art-control-thumbnails {\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  display: none;\n  position: absolute;\n  bottom: 10px;\n  left: 0;\n  box-shadow: 0 1px 3px #0003, 0 1px 2px -1px #0003;\n}\n\n.art-bottom .art-progress .art-control-loop {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-loop .art-loop-point {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: var(--art-loop-width);\n  background-color: var(--art-loop-color);\n  transform: translateX(calc(var(--art-loop-width) / -2)) scaleY(1.5);\n  position: absolute;\n  inset: 0 0 0 0%;\n}\n\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n\n.art-controls {\n  z-index: 10;\n  pointer-events: auto;\n  height: var(--art-control-height);\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-controls .art-controls-left, .art-controls .art-controls-right {\n  height: 100%;\n  display: flex;\n}\n\n.art-controls .art-controls-center {\n  height: 100%;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  padding: 0 10px;\n  display: none;\n}\n\n.art-controls .art-controls-right {\n  justify-content: flex-end;\n}\n\n.art-controls .art-control {\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * .8));\n}\n\n.art-controls .art-control:hover {\n  opacity: 1;\n}\n\n.art-control-volume {\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel {\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  pointer-events: none;\n  left: 0;\n  right: 0;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  padding: 0 5px;\n  font-size: 12px;\n  display: flex;\n  position: absolute;\n  transform: translateY(10px);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner {\n  height: 100%;\n  width: 100%;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 0 12px;\n  display: flex;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  width: 100%;\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  display: flex;\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  background-color: #ffffff40;\n  justify-content: center;\n  display: flex;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n  position: absolute;\n  inset: 0;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 100%;\n  flex-shrink: 0;\n  position: absolute;\n  transform: scale(1);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(.9);\n}\n\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n.art-video-player .art-notice {\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0 0 auto;\n}\n\n.art-video-player .art-notice .art-notice-inner {\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n  padding: 5px;\n  line-height: 1;\n  display: inline-flex;\n}\n\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n\n.art-video-player .art-contextmenus {\n  z-index: 120;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n  flex-direction: column;\n  padding: 5px 0;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  border-bottom: 1px solid #ffffff1a;\n  padding: 10px 15px;\n  display: flex;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span:hover, .art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n\n.art-video-player .art-settings {\n  z-index: 90;\n  border-radius: var(--art-border-radius);\n  transform-origin: 100% 100%;\n  max-height: var(--art-settings-max-height);\n  left: auto;\n  right: var(--art-padding);\n  bottom: var(--art-control-height);\n  transform: scale(var(--art-settings-scale));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  display: none;\n  position: absolute;\n  overflow: hidden auto;\n}\n\n.art-video-player .art-settings .art-setting-panel {\n  flex-direction: column;\n  display: none;\n}\n\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  cursor: pointer;\n  transition: background-color var(--art-transition-duration) ease;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 5px;\n  display: flex;\n  overflow: hidden;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  font-size: 12px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  white-space: nowrap;\n  color: #ffffff80;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  min-width: 32px;\n  height: 24px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  appearance: none;\n  background-color: #fff3;\n  outline: none;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid #ffffff1a;\n}\n\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n\n.art-video-player .art-info {\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  padding: 10px;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-info .art-info-panel {\n  flex-direction: column;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item {\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n  overflow: hidden;\n}\n\n.art-video-player .art-info .art-info-close {\n  cursor: pointer;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n\n.art-hide-cursor * {\n  cursor: none !important;\n}\n\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n\n.art-fullscreen {\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n\n.art-fullscreen-web {\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  inset: 0;\n}\n\n.art-mini-popup {\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  background: #000;\n  transition: opacity .2s;\n  position: fixed;\n  overflow: hidden;\n  box-shadow: 0 0 5px #00000080;\n}\n\n.art-mini-popup svg {\n  fill: #fff;\n}\n\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n\n.art-mini-popup .art-mini-close {\n  z-index: 20;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .2s;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.art-mini-popup .art-mini-state {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  opacity: 0;\n  background-color: #00000040;\n  justify-content: center;\n  align-items: center;\n  transition: opacity .2s;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: .75;\n  cursor: pointer;\n  pointer-events: auto;\n  transition: transform .2s;\n  transform: scale(3);\n}\n\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n\n.art-mini-popup.art-mini-droging {\n  opacity: .9;\n}\n\n.art-mini-popup:hover .art-mini-close, .art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n\n.art-video-player[data-flip=\"horizontal\"] .art-video {\n  transform: scaleX(-1);\n}\n\n.art-video-player[data-flip=\"vertical\"] .art-video {\n  transform: scaleY(-1);\n}\n\n.art-video-player .art-layer-mini-progress-bar {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  height: var(--art-mini-progress-height);\n  background-color: var(--art-theme);\n  display: flex;\n  position: absolute;\n  inset: auto 0 0;\n}\n\n.art-video-player .art-layer-lock {\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  top: 50%;\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  transform: translateY(-50%);\n}\n\n.art-video-player .art-layer-auto-playback {\n  border-radius: var(--art-border-radius);\n  left: var(--art-padding);\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + 10px);\n  background-color: var(--art-widget-background);\n  align-items: center;\n  gap: 10px;\n  padding: 10px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  cursor: pointer;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n\n.art-video-player.art-lock .art-bottom {\n  display: none !important;\n}\n\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n\n.art-video-player.art-lock .art-layer-mini-progress-bar {\n  display: flex !important;\n}\n\n.art-video-player.art-control-show .art-layer-mini-progress-bar {\n  display: none;\n}\n\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n\n.art-control-selector {\n  position: relative;\n}\n\n.art-control-selector .art-selector-list {\n  text-align: center;\n  border-radius: var(--art-border-radius);\n  opacity: 0;\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n  flex-direction: column;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  overflow: hidden auto;\n  transform: translateY(10px);\n}\n\n.art-control-selector .art-selector-list .art-selector-item {\n  width: 100%;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  padding: 10px 15px;\n  line-height: 1;\n  display: flex;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover, .art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n[class*=\"hint--\"] {\n  font-style: normal;\n  display: inline-block;\n  position: relative;\n}\n\n[class*=\"hint--\"]:before, [class*=\"hint--\"]:after {\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  transition: all .3s;\n  transition-delay: 0s;\n  position: absolute;\n  transform: translate3d(0, 0, 0);\n}\n\n[class*=\"hint--\"]:hover:before, [class*=\"hint--\"]:hover:after {\n  visibility: visible;\n  opacity: 1;\n  transition-delay: .1s;\n}\n\n[class*=\"hint--\"]:before {\n  content: \"\";\n  z-index: 1000001;\n  background: none;\n  border: 6px solid #0000;\n  position: absolute;\n}\n\n[class*=\"hint--\"]:after {\n  color: #fff;\n  white-space: nowrap;\n  background: #000;\n  padding: 8px 10px;\n  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  line-height: 12px;\n}\n\n[class*=\"hint--\"][aria-label]:after {\n  content: attr(aria-label);\n}\n\n[class*=\"hint--\"][data-hint]:after {\n  content: attr(data-hint);\n}\n\n[aria-label=\"\"]:before, [aria-label=\"\"]:after, [data-hint=\"\"]:before, [data-hint=\"\"]:after {\n  display: none !important;\n}\n\n.hint--top-left:before, .hint--top-right:before, .hint--top:before {\n  border-top-color: #000;\n}\n\n.hint--bottom-left:before, .hint--bottom-right:before, .hint--bottom:before {\n  border-bottom-color: #000;\n}\n\n.hint--left:before {\n  border-left-color: #000;\n}\n\n.hint--right:before {\n  border-right-color: #000;\n}\n\n.hint--top:before {\n  margin-bottom: -11px;\n}\n\n.hint--top:before, .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top:after {\n  transform: translateX(-50%);\n}\n\n.hint--top:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top:hover:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--bottom:before {\n  margin-top: -11px;\n}\n\n.hint--bottom:before, .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom:after {\n  transform: translateX(-50%);\n}\n\n.hint--bottom:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom:hover:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--right:before {\n  margin-bottom: -6px;\n  margin-left: -11px;\n}\n\n.hint--right:after {\n  margin-bottom: -14px;\n}\n\n.hint--right:before, .hint--right:after {\n  bottom: 50%;\n  left: 100%;\n}\n\n.hint--right:hover:before, .hint--right:hover:after {\n  transform: translateX(8px);\n}\n\n.hint--left:before {\n  margin-bottom: -6px;\n  margin-right: -11px;\n}\n\n.hint--left:after {\n  margin-bottom: -14px;\n}\n\n.hint--left:before, .hint--left:after {\n  bottom: 50%;\n  right: 100%;\n}\n\n.hint--left:hover:before, .hint--left:hover:after {\n  transform: translateX(-8px);\n}\n\n.hint--top-left:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-left:before, .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--top-left:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top-left:hover:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--top-right:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-right:before, .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--top-right:hover:before, .hint--top-right:hover:after {\n  transform: translateY(-8px);\n}\n\n.hint--bottom-left:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-left:before, .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--bottom-left:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom-left:hover:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--bottom-right:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-right:before, .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--bottom-right:hover:before, .hint--bottom-right:hover:after {\n  transform: translateY(8px);\n}\n\n.hint--small:after, .hint--medium:after, .hint--large:after {\n  white-space: normal;\n  word-wrap: break-word;\n  line-height: 1.4em;\n}\n\n.hint--small:after {\n  width: 80px;\n}\n\n.hint--medium:after {\n  width: 150px;\n}\n\n.hint--large:after {\n  width: 300px;\n}\n\n[class*=\"hint--\"]:after {\n  text-shadow: 0 -1px #000;\n  box-shadow: 4px 4px 8px #0000004d;\n}\n\n.hint--error:after {\n  text-shadow: 0 -1px #592726;\n  background-color: #b34e4d;\n}\n\n.hint--error.hint--top-left:before, .hint--error.hint--top-right:before, .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n\n.hint--error.hint--bottom-left:before, .hint--error.hint--bottom-right:before, .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n\n.hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n\n.hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n\n.hint--warning:after {\n  text-shadow: 0 -1px #6c5328;\n  background-color: #c09854;\n}\n\n.hint--warning.hint--top-left:before, .hint--warning.hint--top-right:before, .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n\n.hint--warning.hint--bottom-left:before, .hint--warning.hint--bottom-right:before, .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n\n.hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n\n.hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n\n.hint--info:after {\n  text-shadow: 0 -1px #1a3c4d;\n  background-color: #3986ac;\n}\n\n.hint--info.hint--top-left:before, .hint--info.hint--top-right:before, .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n\n.hint--info.hint--bottom-left:before, .hint--info.hint--bottom-right:before, .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n\n.hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n\n.hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n\n.hint--success:after {\n  text-shadow: 0 -1px #1a321a;\n  background-color: #458746;\n}\n\n.hint--success.hint--top-left:before, .hint--success.hint--top-right:before, .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n\n.hint--success.hint--bottom-left:before, .hint--success.hint--bottom-right:before, .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n\n.hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n\n.hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n\n.hint--always:after, .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n\n.hint--always.hint--top:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--always.hint--top-left:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top-left:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--always.hint--top-right:before, .hint--always.hint--top-right:after {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--bottom:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--always.hint--bottom-left:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom-left:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--always.hint--bottom-right:before, .hint--always.hint--bottom-right:after {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--left:before, .hint--always.hint--left:after {\n  transform: translateX(-8px);\n}\n\n.hint--always.hint--right:before, .hint--always.hint--right:after {\n  transform: translateX(8px);\n}\n\n.hint--rounded:after {\n  border-radius: 4px;\n}\n\n.hint--no-animate:before, .hint--no-animate:after {\n  transition-duration: 0s;\n}\n\n.hint--bounce:before, .hint--bounce:after {\n  -webkit-transition: opacity .3s, visibility .3s, -webkit-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  -moz-transition: opacity .3s, visibility .3s, -moz-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n}\n\n.hint--no-shadow:before, .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n\n.hint--no-arrow:before {\n  display: none;\n}\n\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n\n";
 
 },{}],"2tbdu":[function(require,module,exports) {
@@ -557,13 +557,13 @@ module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: 
     return f.kindOf = c, f;
 });
 
-},{}],"elSLF":[function(require,module,exports) {
+},{}],"8uSwy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Emitter {
     on(name, fn, ctx) {
-        const e = this.e ?? (this.e = {});
-        (e[name] ?? (e[name] = [])).push({
+        const e = this.e || (this.e = {});
+        (e[name] || (e[name] = [])).push({
             fn,
             ctx
         });
@@ -579,12 +579,12 @@ class Emitter {
         return this.on(name, listener, ctx);
     }
     emit(name, ...data) {
-        const evtArr = ((this.e ?? (this.e = {}))[name] ?? []).slice();
+        const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
         for(let i = 0; i < evtArr.length; i += 1)evtArr[i].fn.apply(evtArr[i].ctx, data);
         return this;
     }
     off(name, callback) {
-        const e = this.e ?? (this.e = {});
+        const e = this.e || (this.e = {});
         const evts = e[name];
         const liveEvents = [];
         if (evts && callback) {
@@ -597,7 +597,7 @@ class Emitter {
 }
 exports.default = Emitter;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6SDkN":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -627,7 +627,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"jmgNb":[function(require,module,exports) {
+},{}],"euhMG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
@@ -647,7 +647,7 @@ parcelHelpers.exportAll(_format, exports);
 var _compatibility = require("./compatibility");
 parcelHelpers.exportAll(_compatibility, exports);
 
-},{"./dom":"dNynC","./error":"622b3","./subtitle":"bGuws","./file":"luB4T","./property":"91nLd","./time":"f9kBR","./format":"eWip5","./compatibility":"gotDS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dNynC":[function(require,module,exports) {
+},{"./dom":"iWXW0","./error":"kCmly","./subtitle":"2bAfM","./file":"jIGsL","./property":"amiWs","./time":"4movt","./format":"9vUua","./compatibility":"bRDYJ","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"iWXW0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "query", ()=>query);
@@ -687,7 +687,7 @@ function hasClass(target, className) {
 function append(parent, child) {
     if (child instanceof Element) parent.appendChild(child);
     else parent.insertAdjacentHTML("beforeend", String(child));
-    return parent.lastElementChild ?? parent.lastChild;
+    return parent.lastElementChild || parent.lastChild;
 }
 function remove(child) {
     return child.parentNode.removeChild(child);
@@ -719,8 +719,8 @@ function tooltip(target, msg, pos = "top") {
 }
 function isInViewport(el, offset = 0) {
     const rect = el.getBoundingClientRect();
-    const windowHeight = window.innerHeight ?? document.documentElement.clientHeight;
-    const windowWidth = window.innerWidth ?? document.documentElement.clientWidth;
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
     const vertInView = rect.top - offset <= windowHeight && rect.top + rect.height + offset >= 0;
     const horInView = rect.left - offset <= windowWidth + offset && rect.left + rect.width + offset >= 0;
     return vertInView && horInView;
@@ -743,7 +743,7 @@ function getIcon(key = "", html = "") {
     return icon;
 }
 
-},{"./compatibility":"gotDS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gotDS":[function(require,module,exports) {
+},{"./compatibility":"bRDYJ","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"bRDYJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "userAgent", ()=>userAgent);
@@ -760,10 +760,10 @@ const isWechat = /MicroMessenger/i.test(userAgent);
 const isIE = /MSIE|Trident/i.test(userAgent);
 const isAndroid = /android/i.test(userAgent);
 const isIOS = /iPad|iPhone|iPod/i.test(userAgent) && !window.MSStream;
-const isIOS13 = isIOS ?? (userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1);
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) ?? isIOS13;
+const isIOS13 = isIOS || userAgent.includes("Macintosh") && navigator.maxTouchPoints >= 1;
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) || isIOS13;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"622b3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"kCmly":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ArtPlayerError", ()=>ArtPlayerError);
@@ -771,7 +771,7 @@ parcelHelpers.export(exports, "errorHandle", ()=>errorHandle);
 class ArtPlayerError extends Error {
     constructor(message, context){
         super(message);
-        if (typeof Error.captureStackTrace === "function") Error.captureStackTrace(this, context ?? this.constructor);
+        if (typeof Error.captureStackTrace === "function") Error.captureStackTrace(this, context || this.constructor);
         this.name = "ArtPlayerError";
     }
 }
@@ -780,7 +780,7 @@ function errorHandle(condition, msg) {
     return condition;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bGuws":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"2bAfM":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "srtToVtt", ()=>srtToVtt);
@@ -830,7 +830,7 @@ function assToVtt(ass) {
     }).filter((line)=>line.trim()).join("\n\n")}`;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"luB4T":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jIGsL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getExt", ()=>getExt);
@@ -850,7 +850,7 @@ function download(url, name) {
     document.body.removeChild(elink);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"91nLd":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"amiWs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "def", ()=>def);
@@ -858,7 +858,7 @@ parcelHelpers.export(exports, "has", ()=>has);
 parcelHelpers.export(exports, "get", ()=>get);
 parcelHelpers.export(exports, "mergeDeep", ()=>mergeDeep);
 const def = Object.defineProperty;
-const { hasOwnProperty } = Object.prototype;
+const { hasOwnProperty  } = Object.prototype;
 function has(obj, name) {
     return hasOwnProperty.call(obj, name);
 }
@@ -879,7 +879,7 @@ function mergeDeep(...objects) {
     }, {});
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"f9kBR":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4movt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "sleep", ()=>sleep);
@@ -912,7 +912,7 @@ function throttle(func, duration) {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eWip5":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"9vUua":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "clamp", ()=>clamp);
@@ -954,10 +954,10 @@ function escape(str) {
             ">": "&gt;",
             "'": "&#39;",
             '"': "&quot;"
-        })[tag] ?? tag);
+        })[tag] || tag);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gL38d":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jVxq1":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ComponentOption", ()=>ComponentOption);
@@ -969,7 +969,7 @@ const n = "number";
 const o = "object";
 const f = "function";
 function validElement(value, type, paths) {
-    return (0, _utils.errorHandle)((type === s) ?? type === n ?? value instanceof Element, `${paths.join(".")} require '${s}' or 'Element' type`);
+    return (0, _utils.errorHandle)(type === s || type === n || value instanceof Element, `${paths.join(".")} require '${s}' or 'Element' type`);
 }
 const ComponentOption = {
     html: validElement,
@@ -1084,7 +1084,7 @@ exports.default = {
     customType: o
 };
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2ZnKD":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1hSww":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = {
@@ -1175,14 +1175,14 @@ exports.default = {
     ]
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bDTDS":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"eG0JW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
 class Template {
     constructor(art){
         this.art = art;
-        const { option, constructor } = art;
+        const { option , constructor  } = art;
         if (option.container instanceof Element) this.$container = option.container;
         else {
             this.$container = (0, _utils.query)(option.container);
@@ -1261,7 +1261,7 @@ class Template {
         return (0, _utils.query)(className, this.$container);
     }
     init() {
-        const { option } = this.art;
+        const { option  } = this.art;
         if (!option.useSSR) this.$container.innerHTML = Template.html;
         this.$player = this.query(".art-video-player");
         this.$video = this.query(".art-video");
@@ -1296,7 +1296,7 @@ class Template {
 }
 exports.default = Template;
 
-},{"./utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"k0CtI":[function(require,module,exports) {
+},{"./utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6Q0In":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -1313,10 +1313,10 @@ class I18n {
     }
     init() {
         const lang = this.art.option.lang.toLowerCase();
-        this.language = this.languages[lang] ?? {};
+        this.language = this.languages[lang] || {};
     }
     get(key) {
-        return this.language[key] ?? key;
+        return this.language[key] || key;
     }
     update(value) {
         this.languages = (0, _utils.mergeDeep)(this.languages, value);
@@ -1325,7 +1325,7 @@ class I18n {
 }
 exports.default = I18n;
 
-},{"../utils":"jmgNb","./zh-cn":"4PBSu","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4PBSu":[function(require,module,exports) {
+},{"../utils":"euhMG","./zh-cn":"iSymG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"iSymG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const zhCn = {
@@ -1369,7 +1369,7 @@ const zhCn = {
 exports.default = zhCn;
 if (typeof window !== "undefined") window["artplayer-i18n-zh-cn"] = zhCn;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"35XKf":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"kmRM5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _urlMix = require("./urlMix");
@@ -1483,13 +1483,12 @@ class Player {
 }
 exports.default = Player;
 
-},{"./urlMix":"aIS34","./attrMix":"jDj6f","./playMix":"agXpy","./pauseMix":"zMuGC","./toggleMix":"fvNrm","./seekMix":"3CiN1","./volumeMix":"1LKRL","./currentTimeMix":"bjUCm","./durationMix":"l8grT","./switchMix":"bIvi5","./playbackRateMix":"3EFen","./aspectRatioMix":"8ucW5","./screenshotMix":"12WvT","./fullscreenMix":"gNUzM","./fullscreenWebMix":"f2xmf","./pipMix":"i5i0P","./loadedMix":"8X9EY","./playedMix":"1ziBX","./playingMix":"9898W","./autoSizeMix":"b1yGg","./rectMix":"eKKgI","./flipMix":"ad3ay","./miniMix":"hUF3v","./loopMix":"gXFcr","./posterMix":"6j7ij","./autoHeightMix":"8Mzuu","./cssVarMix":"fypct","./themeMix":"dv3lF","./typeMix":"2FCQH","./stateMix":"iG6Jk","./subtitleOffsetMix":"lTNEf","./airplayMix":"bIjnH","./qualityMix":"ke1N4","./optionInit":"9Us4p","./eventInit":"4hZCW","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aIS34":[function(require,module,exports) {
+},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./loopMix":"dvgcH","./posterMix":"lglHp","./autoHeightMix":"58Y02","./cssVarMix":"fPbnY","./themeMix":"lga3g","./typeMix":"dnAFx","./stateMix":"8mwXw","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./qualityMix":"1L7ST","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"haOhz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>urlMix);
 var _utils = require("../utils");
 function urlMix(art) {
-    const { option, template: { $video } } = art;
+    const { option , template: { $video  }  } = art;
     (0, _utils.def)(art, "url", {
         get () {
             return $video.src;
@@ -1497,7 +1496,7 @@ function urlMix(art) {
         async set (newUrl) {
             if (newUrl) {
                 const oldUrl = art.url;
-                const typeName = option.type ?? (0, _utils.getExt)(newUrl);
+                const typeName = option.type || (0, _utils.getExt)(newUrl);
                 const typeCallback = option.customType[typeName];
                 if (typeName && typeCallback) {
                     await (0, _utils.sleep)();
@@ -1520,14 +1519,14 @@ function urlMix(art) {
         }
     });
 }
+exports.default = urlMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jDj6f":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cSnpy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>attrMix);
 var _utils = require("../utils");
 function attrMix(art) {
-    const { template: { $video } } = art;
+    const { template: { $video  }  } = art;
     (0, _utils.def)(art, "attr", {
         value (key, value) {
             if (value === undefined) return $video[key];
@@ -1535,14 +1534,14 @@ function attrMix(art) {
         }
     });
 }
+exports.default = attrMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"agXpy":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ftnB3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>playMix);
 var _utils = require("../utils");
 function playMix(art) {
-    const { i18n, notice, option, constructor: { instances }, template: { $video } } = art;
+    const { i18n , notice , option , constructor: { instances  } , template: { $video  }  } = art;
     (0, _utils.def)(art, "play", {
         value: async function() {
             const result = await $video.play();
@@ -1556,14 +1555,14 @@ function playMix(art) {
         }
     });
 }
+exports.default = playMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"zMuGC":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"kDy9r":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>pauseMix);
 var _utils = require("../utils");
 function pauseMix(art) {
-    const { template: { $video }, i18n, notice } = art;
+    const { template: { $video  } , i18n , notice  } = art;
     (0, _utils.def)(art, "pause", {
         value () {
             const result = $video.pause();
@@ -1573,11 +1572,11 @@ function pauseMix(art) {
         }
     });
 }
+exports.default = pauseMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fvNrm":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"12BL6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>toggleMix);
 var _utils = require("../utils");
 function toggleMix(art) {
     (0, _utils.def)(art, "toggle", {
@@ -1587,14 +1586,14 @@ function toggleMix(art) {
         }
     });
 }
+exports.default = toggleMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3CiN1":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8x3vZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>seekMix);
 var _utils = require("../utils");
 function seekMix(art) {
-    const { notice } = art;
+    const { notice  } = art;
     (0, _utils.def)(art, "seek", {
         set (time) {
             art.currentTime = time;
@@ -1613,16 +1612,16 @@ function seekMix(art) {
         }
     });
 }
+exports.default = seekMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1LKRL":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lsF5V":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>volumeMix);
 var _utils = require("../utils");
 function volumeMix(art) {
-    const { template: { $video }, i18n, notice, storage } = art;
+    const { template: { $video  } , i18n , notice , storage  } = art;
     (0, _utils.def)(art, "volume", {
-        get: ()=>$video.volume ?? 0,
+        get: ()=>$video.volume || 0,
         set: (percentage)=>{
             $video.volume = (0, _utils.clamp)(percentage, 0, 1);
             notice.show = `${i18n.get("Volume")}: ${parseInt($video.volume * 100, 10)}`;
@@ -1637,16 +1636,16 @@ function volumeMix(art) {
         }
     });
 }
+exports.default = volumeMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bjUCm":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"75HaL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>currentTimeMix);
 var _utils = require("../utils");
 function currentTimeMix(art) {
-    const { $video } = art.template;
+    const { $video  } = art.template;
     (0, _utils.def)(art, "currentTime", {
-        get: ()=>$video.currentTime ?? 0,
+        get: ()=>$video.currentTime || 0,
         set: (time)=>{
             time = parseFloat(time);
             if (Number.isNaN(time)) return;
@@ -1654,32 +1653,32 @@ function currentTimeMix(art) {
         }
     });
 }
+exports.default = currentTimeMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"l8grT":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5Ud6d":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>durationMix);
 var _utils = require("../utils");
 function durationMix(art) {
     (0, _utils.def)(art, "duration", {
         get: ()=>{
-            const { duration } = art.template.$video;
+            const { duration  } = art.template.$video;
             if (duration === Infinity) return 0;
-            return duration ?? 0;
+            return duration || 0;
         }
     });
 }
+exports.default = durationMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bIvi5":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"emcjh":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>switchMix);
 var _utils = require("../utils");
 function switchMix(art) {
     function switchUrl(url, currentTime) {
         return new Promise((resolve, reject)=>{
             if (url === art.url) return;
-            const { playing, aspectRatio, playbackRate } = art;
+            const { playing , aspectRatio , playbackRate  } = art;
             art.pause();
             art.url = url;
             art.notice.show = "";
@@ -1708,14 +1707,14 @@ function switchMix(art) {
         set: art.switchUrl
     });
 }
+exports.default = switchMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3EFen":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"78DYM":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>playbackRateMix);
 var _utils = require("../utils");
 function playbackRateMix(art) {
-    const { template: { $video }, i18n, notice } = art;
+    const { template: { $video  } , i18n , notice  } = art;
     (0, _utils.def)(art, "playbackRate", {
         get () {
             return $video.playbackRate;
@@ -1729,17 +1728,17 @@ function playbackRateMix(art) {
         }
     });
 }
+exports.default = playbackRateMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8ucW5":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"chjHL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>aspectRatioMix);
 var _utils = require("../utils");
 function aspectRatioMix(art) {
-    const { i18n, notice, template: { $video, $player } } = art;
+    const { i18n , notice , template: { $video , $player  }  } = art;
     (0, _utils.def)(art, "aspectRatio", {
         get () {
-            return $player.dataset.aspectRatio ?? "default";
+            return $player.dataset.aspectRatio || "default";
         },
         set (ratio) {
             if (!ratio) ratio = "default";
@@ -1750,7 +1749,7 @@ function aspectRatioMix(art) {
                 delete $player.dataset.aspectRatio;
             } else {
                 const ratioArray = ratio.split(":").map(Number);
-                const { clientWidth, clientHeight } = $player;
+                const { clientWidth , clientHeight  } = $player;
                 const playerRatio = clientWidth / clientHeight;
                 const setupRatio = ratioArray[0] / ratioArray[1];
                 if (playerRatio > setupRatio) {
@@ -1769,14 +1768,14 @@ function aspectRatioMix(art) {
         }
     });
 }
+exports.default = aspectRatioMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"12WvT":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jDAYl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>screenshotMix);
 var _utils = require("../utils");
 function screenshotMix(art) {
-    const { notice, template: { $video } } = art;
+    const { notice , template: { $video  }  } = art;
     const $canvas = (0, _utils.createElement)("canvas");
     (0, _utils.def)(art, "getDataURL", {
         value: ()=>new Promise((resolve, reject)=>{
@@ -1815,16 +1814,16 @@ function screenshotMix(art) {
         }
     });
 }
+exports.default = screenshotMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gNUzM":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"juJAD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>fullscreenMix);
 var _screenfull = require("../libs/screenfull");
 var _screenfullDefault = parcelHelpers.interopDefault(_screenfull);
 var _utils = require("../utils");
 function fullscreenMix(art) {
-    const { i18n, notice, template: { $video, $player } } = art;
+    const { i18n , notice , template: { $video , $player  }  } = art;
     const nativeScreenfull = (art)=>{
         (0, _screenfullDefault.default).on("change", ()=>{
             art.emit("fullscreen", (0, _screenfullDefault.default).isFullscreen);
@@ -1866,7 +1865,7 @@ function fullscreenMix(art) {
     };
     art.once("video:loadedmetadata", ()=>{
         if ((0, _screenfullDefault.default).isEnabled) nativeScreenfull(art);
-        else if (document.fullscreenEnabled ?? $video.webkitSupportsFullscreen) webkitScreenfull(art);
+        else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) webkitScreenfull(art);
         else (0, _utils.def)(art, "fullscreen", {
             get () {
                 return false;
@@ -1879,8 +1878,9 @@ function fullscreenMix(art) {
         (0, _utils.def)(art, "fullscreen", (0, _utils.get)(art, "fullscreen"));
     });
 }
+exports.default = fullscreenMix;
 
-},{"../libs/screenfull":"eQous","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eQous":[function(require,module,exports) {
+},{"../libs/screenfull":"4XLC7","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4XLC7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const methodMap = [
@@ -2008,13 +2008,12 @@ if (!nativeAPI) screenfull = {
 };
 exports.default = screenfull;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"f2xmf":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5f725":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>fullscreenWebMix);
 var _utils = require("../utils");
 function fullscreenWebMix(art) {
-    const { constructor, template: { $container, $player } } = art;
+    const { constructor , template: { $container , $player  }  } = art;
     let cssText = "";
     (0, _utils.def)(art, "fullscreenWeb", {
         get () {
@@ -2042,14 +2041,14 @@ function fullscreenWebMix(art) {
         }
     });
 }
+exports.default = fullscreenWebMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"i5i0P":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jWhCt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>pipMix);
 var _utils = require("../utils");
 function nativePip(art) {
-    const { template: { $video }, proxy, notice } = art;
+    const { template: { $video  } , proxy , notice  } = art;
     $video.disablePictureInPicture = false;
     (0, _utils.def)(art, "pip", {
         get () {
@@ -2076,7 +2075,7 @@ function nativePip(art) {
     });
 }
 function webkitPip(art) {
-    const { $video } = art.template;
+    const { $video  } = art.template;
     $video.webkitSetPresentationMode("inline");
     (0, _utils.def)(art, "pip", {
         get () {
@@ -2095,7 +2094,7 @@ function webkitPip(art) {
     });
 }
 function pipMix(art) {
-    const { i18n, notice, template: { $video } } = art;
+    const { i18n , notice , template: { $video  }  } = art;
     if (document.pictureInPictureEnabled) nativePip(art);
     else if ($video.webkitSupportsPresentationMode) webkitPip(art);
     else (0, _utils.def)(art, "pip", {
@@ -2107,14 +2106,14 @@ function pipMix(art) {
         }
     });
 }
+exports.default = pipMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8X9EY":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jhDPX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>seekMix);
 var _utils = require("../utils");
 function seekMix(art) {
-    const { $video } = art.template;
+    const { $video  } = art.template;
     (0, _utils.def)(art, "loaded", {
         get: ()=>art.loadedTime / $video.duration
     });
@@ -2122,41 +2121,41 @@ function seekMix(art) {
         get: ()=>$video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0
     });
 }
+exports.default = seekMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1ziBX":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"3bU8P":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>playedMix);
 var _utils = require("../utils");
 function playedMix(art) {
     (0, _utils.def)(art, "played", {
         get: ()=>art.currentTime / art.duration
     });
 }
+exports.default = playedMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9898W":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5Ctiw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>playingMix);
 var _utils = require("../utils");
 function playingMix(art) {
-    const { $video } = art.template;
+    const { $video  } = art.template;
     (0, _utils.def)(art, "playing", {
         get: ()=>!!($video.currentTime > 0 && !$video.paused && !$video.ended && $video.readyState > 2)
     });
 }
+exports.default = playingMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"b1yGg":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6fRkJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>resizeMix);
 var _utils = require("../utils");
 function resizeMix(art) {
-    const { $container, $player, $video } = art.template;
+    const { $container , $player , $video  } = art.template;
     (0, _utils.def)(art, "autoSize", {
         value () {
-            const { videoWidth, videoHeight } = $video;
-            const { width, height } = $container.getBoundingClientRect();
+            const { videoWidth , videoHeight  } = $video;
+            const { width , height  } = $container.getBoundingClientRect();
             const videoRatio = videoWidth / videoHeight;
             const containerRatio = width / height;
             if (containerRatio > videoRatio) {
@@ -2175,11 +2174,11 @@ function resizeMix(art) {
         }
     });
 }
+exports.default = resizeMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eKKgI":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lOJRK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>rectMix);
 var _utils = require("../utils");
 function rectMix(art) {
     (0, _utils.def)(art, "rect", {
@@ -2214,17 +2213,17 @@ function rectMix(art) {
         }
     });
 }
+exports.default = rectMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"ad3ay":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"fSa7B":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>flipMix);
 var _utils = require("../utils");
 function flipMix(art) {
-    const { template: { $player }, i18n, notice } = art;
+    const { template: { $player  } , i18n , notice  } = art;
     (0, _utils.def)(art, "flip", {
         get () {
-            return $player.dataset.flip ?? "normal";
+            return $player.dataset.flip || "normal";
         },
         set (flip) {
             if (!flip) flip = "normal";
@@ -2235,19 +2234,19 @@ function flipMix(art) {
         }
     });
 }
+exports.default = flipMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hUF3v":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"fy4qC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>miniMix);
 var _utils = require("../utils");
 function miniMix(art) {
-    const { icons, proxy, storage, template: { $player, $video } } = art;
+    const { icons , proxy , storage , template: { $player , $video  }  } = art;
     let isDroging = false;
     let lastPageX = 0;
     let lastPageY = 0;
     function hideMini() {
-        const { $mini } = art.template;
+        const { $mini  } = art.template;
         if ($mini) {
             (0, _utils.removeClass)($player, "art-mini");
             (0, _utils.setStyle)($mini, "display", "none");
@@ -2265,7 +2264,7 @@ function miniMix(art) {
         }
     }
     function createMini() {
-        const { $mini } = art.template;
+        const { $mini  } = art.template;
         if ($mini) {
             (0, _utils.append)($mini, $video);
             return (0, _utils.setStyle)($mini, "display", "flex");
@@ -2316,7 +2315,7 @@ function miniMix(art) {
         }
     }
     function initMini() {
-        const { $mini } = art.template;
+        const { $mini  } = art.template;
         const rect = $mini.getBoundingClientRect();
         const top = window.innerHeight - rect.height - 50;
         const left = window.innerWidth - rect.width - 50;
@@ -2346,11 +2345,11 @@ function miniMix(art) {
         }
     });
 }
+exports.default = miniMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gXFcr":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"dvgcH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>loopMix);
 var _utils = require("../utils");
 function loopMix(art) {
     let interval = [];
@@ -2371,18 +2370,18 @@ function loopMix(art) {
     });
     art.on("video:timeupdate", ()=>{
         if (interval.length) {
-            if ((art.currentTime < interval[0]) ?? art.currentTime > interval[1]) art.seek = interval[0];
+            if (art.currentTime < interval[0] || art.currentTime > interval[1]) art.seek = interval[0];
         }
     });
 }
+exports.default = loopMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6j7ij":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lglHp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>posterMix);
 var _utils = require("../utils");
 function posterMix(art) {
-    const { template: { $poster } } = art;
+    const { template: { $poster  }  } = art;
     (0, _utils.def)(art, "poster", {
         get: ()=>{
             try {
@@ -2396,32 +2395,32 @@ function posterMix(art) {
         }
     });
 }
+exports.default = posterMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8Mzuu":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"58Y02":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>autoHeightMix);
 var _utils = require("../utils");
 function autoHeightMix(art) {
-    const { template: { $container, $video } } = art;
+    const { template: { $container , $video  }  } = art;
     (0, _utils.def)(art, "autoHeight", {
         value () {
-            const { clientWidth } = $container;
-            const { videoHeight, videoWidth } = $video;
+            const { clientWidth  } = $container;
+            const { videoHeight , videoWidth  } = $video;
             const height = videoHeight * (clientWidth / videoWidth);
             (0, _utils.setStyle)($container, "height", height + "px");
             art.emit("autoHeight", height);
         }
     });
 }
+exports.default = autoHeightMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fypct":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"fPbnY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>cssVarMix);
 var _utils = require("../utils");
 function cssVarMix(art) {
-    const { $player } = art.template;
+    const { $player  } = art.template;
     (0, _utils.def)(art, "cssVar", {
         value (key, value) {
             if (value) return $player.style.setProperty(key, value);
@@ -2429,11 +2428,11 @@ function cssVarMix(art) {
         }
     });
 }
+exports.default = cssVarMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dv3lF":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lga3g":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>themeMix);
 var _utils = require("../utils");
 function themeMix(art) {
     (0, _utils.def)(art, "theme", {
@@ -2445,11 +2444,11 @@ function themeMix(art) {
         }
     });
 }
+exports.default = themeMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2FCQH":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"dnAFx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>typeMix);
 var _utils = require("../utils");
 function typeMix(art) {
     (0, _utils.def)(art, "type", {
@@ -2461,11 +2460,11 @@ function typeMix(art) {
         }
     });
 }
+exports.default = typeMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iG6Jk":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8mwXw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>stateMix);
 var _utils = require("../utils");
 function stateMix(art) {
     const states = [
@@ -2475,7 +2474,7 @@ function stateMix(art) {
         "fullscreenWeb"
     ];
     (0, _utils.def)(art, "state", {
-        get: ()=>states.find((name)=>art[name]) ?? "standard",
+        get: ()=>states.find((name)=>art[name]) || "standard",
         set (name) {
             for(let index = 0; index < states.length; index++){
                 const prop = states[index];
@@ -2484,15 +2483,15 @@ function stateMix(art) {
         }
     });
 }
+exports.default = stateMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"lTNEf":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4Ny6z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>subtitleOffsetMix);
 var _utils = require("../utils");
 function subtitleOffsetMix(art) {
-    const { clamp } = art.constructor.utils;
-    const { notice, template, i18n } = art;
+    const { clamp  } = art.constructor.utils;
+    const { notice , template , i18n  } = art;
     let offsetCache = 0;
     let cuesCache = [];
     art.on("subtitle:switch", ()=>{
@@ -2522,14 +2521,14 @@ function subtitleOffsetMix(art) {
         }
     });
 }
+exports.default = subtitleOffsetMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bIjnH":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"gcYqJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>airplayMix);
 var _utils = require("../utils");
 function airplayMix(art) {
-    const { i18n, notice, proxy, template: { $video } } = art;
+    const { i18n , notice , proxy , template: { $video  }  } = art;
     let available = true;
     if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) proxy($video, "webkitplaybacktargetavailabilitychanged", (event)=>{
         switch(event.availability){
@@ -2551,17 +2550,17 @@ function airplayMix(art) {
         }
     });
 }
+exports.default = airplayMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"ke1N4":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1L7ST":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>qualityMix);
 var _utils = require("../utils");
 function qualityMix(art) {
     (0, _utils.def)(art, "quality", {
         set (quality) {
-            const { controls, notice, i18n } = art;
-            const qualityDefault = quality.find((item)=>item.default) ?? quality[0];
+            const { controls , notice , i18n  } = art;
+            const qualityDefault = quality.find((item)=>item.default) || quality[0];
             controls.update({
                 name: "quality",
                 position: "right",
@@ -2579,14 +2578,14 @@ function qualityMix(art) {
         }
     });
 }
+exports.default = qualityMix;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9Us4p":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"vGIPW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>attrInit);
 var _utils = require("../utils");
 function attrInit(art) {
-    const { option, storage, template: { $video, $poster } } = art;
+    const { option , storage , template: { $video , $poster  }  } = art;
     for(const key in option.moreVideoAttr)art.attr(key, option.moreVideoAttr[key]);
     if (option.muted) art.muted = option.muted;
     if (option.volume) $video.volume = (0, _utils.clamp)(option.volume, 0, 1);
@@ -2602,16 +2601,16 @@ function attrInit(art) {
     for(const key in option.cssVar)art.cssVar(key, option.cssVar[key]);
     art.url = option.url;
 }
+exports.default = attrInit;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4hZCW":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5D1O8":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>eventInit);
 var _config = require("../config");
 var _configDefault = parcelHelpers.interopDefault(_config);
 var _utils = require("../utils");
 function eventInit(art) {
-    const { i18n, notice, option, constructor, proxy, template: { $player, $video, $poster } } = art;
+    const { i18n , notice , option , constructor , proxy , template: { $player , $video , $poster  }  } = art;
     let reconnectTime = 0;
     for(let index = 0; index < (0, _configDefault.default).events.length; index++)proxy($video, (0, _configDefault.default).events[index], (event)=>{
         art.emit(`video:${event.type}`, event);
@@ -2715,8 +2714,9 @@ function eventInit(art) {
         art.mask.show = false;
     });
 }
+exports.default = eventInit;
 
-},{"../config":"2ZnKD","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"faO0X":[function(require,module,exports) {
+},{"../config":"1hSww","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"nK2ZQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2750,7 +2750,7 @@ class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "control";
-        const { proxy, constructor, template: { $player } } = art;
+        const { proxy , constructor , template: { $player  }  } = art;
         let activeTime = Date.now();
         proxy($player, [
             "click",
@@ -2773,7 +2773,7 @@ class Control extends (0, _componentDefault.default) {
         this.init();
     }
     init() {
-        const { option } = this.art;
+        const { option  } = this.art;
         if (!option.isLive) this.add((0, _progressDefault.default)({
             name: "progress",
             position: "top",
@@ -2841,7 +2841,7 @@ class Control extends (0, _componentDefault.default) {
     }
     add(getOption) {
         const option = typeof getOption === "function" ? getOption(this.art) : getOption;
-        const { $progress, $controlsLeft, $controlsRight } = this.art.template;
+        const { $progress , $controlsLeft , $controlsRight  } = this.art.template;
         switch(option.position){
             case "top":
                 this.$parent = $progress;
@@ -2861,7 +2861,7 @@ class Control extends (0, _componentDefault.default) {
 }
 exports.default = Control;
 
-},{"../utils":"jmgNb","../utils/component":"bgug2","./fullscreen":"bHDMy","./fullscreenWeb":"8HUSd","./pip":"5nd2H","./playAndPause":"gt2F0","./progress":"aHyb0","./time":"hL9ry","./volume":"3G9Wa","./setting":"jQ9Bw","./thumbnails":"8HBQN","./screenshot":"aA6wc","./loop":"3bPO6","./airplay":"iKTFA","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bgug2":[function(require,module,exports) {
+},{"../utils":"euhMG","../utils/component":"1UWqI","./fullscreen":"d7VBA","./fullscreenWeb":"iE4ux","./pip":"03ERY","./playAndPause":"2tuF0","./progress":"afGEi","./time":"e6eX5","./volume":"ezhk3","./setting":"3Vg4s","./thumbnails":"8AAYm","./screenshot":"lcqMk","./loop":"8hCXR","./airplay":"4dMTc","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1UWqI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
@@ -2883,7 +2883,7 @@ class Component {
         return (0, _dom.hasClass)(this.art.template.$player, `art-${this.name}-show`);
     }
     set show(value) {
-        const { $player } = this.art.template;
+        const { $player  } = this.art.template;
         const className = `art-${this.name}-show`;
         if (value) (0, _dom.addClass)($player, className);
         else (0, _dom.removeClass)($player, className);
@@ -2894,10 +2894,10 @@ class Component {
     }
     add(getOption) {
         const option = typeof getOption === "function" ? getOption(this.art) : getOption;
-        option.html = option.html ?? "";
+        option.html = option.html || "";
         (0, _optionValidatorDefault.default)(option, (0, _scheme.ComponentOption));
-        if (!this.$parent ?? !this.name ?? option.disable) return;
-        const name = option.name ?? `${this.name}${this.id}`;
+        if (!this.$parent || !this.name || option.disable) return;
+        const name = option.name || `${this.name}${this.id}`;
         const item = this.cache.get(name);
         (0, _error.errorHandle)(!item, `Can't add an existing [${name}] to the [${this.name}]`);
         this.id += 1;
@@ -2905,7 +2905,7 @@ class Component {
         (0, _dom.addClass)($ref, `art-${this.name}`);
         (0, _dom.addClass)($ref, `art-${this.name}-${name}`);
         const childs = Array.from(this.$parent.children);
-        $ref.dataset.index = option.index ?? this.id;
+        $ref.dataset.index = option.index || this.id;
         const nextChild = childs.find((item)=>Number(item.dataset.index) >= Number($ref.dataset.index));
         if (nextChild) nextChild.insertAdjacentElement("beforebegin", $ref);
         else (0, _dom.append)(this.$parent, $ref);
@@ -2934,7 +2934,7 @@ class Component {
         return $ref;
     }
     addSelector(option, $ref, events) {
-        const { hover, proxy } = this.art.events;
+        const { hover , proxy  } = this.art.events;
         (0, _dom.addClass)($ref, "art-control-selector");
         const $value = (0, _dom.createElement)("div");
         (0, _dom.addClass)($value, "art-selector-value");
@@ -2954,12 +2954,12 @@ class Component {
         };
         hover($ref, setLeft);
         const destroyEvent = proxy($list, "click", async (event)=>{
-            const path = event.composedPath() ?? [];
+            const path = event.composedPath() || [];
             const $item = path.find((item)=>(0, _dom.hasClass)(item, "art-selector-item"));
             if (!$item) return;
             (0, _dom.inverseClass)($item, "art-current");
             const index = Number($item.dataset.index);
-            const find = option.selector[index] ?? {};
+            const find = option.selector[index] || {};
             $value.innerText = $item.innerText;
             if (option.onSelect) {
                 const result = await option.onSelect.call(this.art, find, $item, event);
@@ -2989,17 +2989,16 @@ class Component {
 }
 exports.default = Component;
 
-},{"./dom":"dNynC","./format":"eWip5","./error":"622b3","option-validator":"2tbdu","../scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bHDMy":[function(require,module,exports) {
+},{"./dom":"iWXW0","./format":"9vUua","./error":"kCmly","option-validator":"2tbdu","../scheme":"jVxq1","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"d7VBA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>fullscreen);
 var _utils = require("../utils");
 function fullscreen(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Fullscreen"),
             mounted: ($control)=>{
-                const { proxy, icons, i18n } = art;
+                const { proxy , icons , i18n  } = art;
                 const $fullscreenOn = (0, _utils.append)($control, icons.fullscreenOn);
                 const $fullscreenOff = (0, _utils.append)($control, icons.fullscreenOff);
                 (0, _utils.setStyle)($fullscreenOff, "display", "none");
@@ -3020,18 +3019,18 @@ function fullscreen(option) {
             }
         });
 }
+exports.default = fullscreen;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8HUSd":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"iE4ux":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>fullscreenWeb);
 var _utils = require("../utils");
 function fullscreenWeb(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Web Fullscreen"),
             mounted: ($control)=>{
-                const { proxy, icons, i18n } = art;
+                const { proxy , icons , i18n  } = art;
                 const $fullscreenWebOn = (0, _utils.append)($control, icons.fullscreenWebOn);
                 const $fullscreenWebOff = (0, _utils.append)($control, icons.fullscreenWebOff);
                 (0, _utils.setStyle)($fullscreenWebOff, "display", "none");
@@ -3052,18 +3051,18 @@ function fullscreenWeb(option) {
             }
         });
 }
+exports.default = fullscreenWeb;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5nd2H":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"03ERY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>pip);
 var _utils = require("../utils");
 function pip(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("PIP Mode"),
             mounted: ($control)=>{
-                const { proxy, icons, i18n } = art;
+                const { proxy , icons , i18n  } = art;
                 (0, _utils.append)($control, icons.pip);
                 proxy($control, "click", ()=>{
                     art.pip = !art.pip;
@@ -3074,17 +3073,17 @@ function pip(option) {
             }
         });
 }
+exports.default = pip;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gt2F0":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"2tuF0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>playAndPause);
 var _utils = require("../utils");
 function playAndPause(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { proxy, icons, i18n } = art;
+                const { proxy , icons , i18n  } = art;
                 const $play = (0, _utils.append)($control, icons.play);
                 const $pause = (0, _utils.append)($control, icons.pause);
                 (0, _utils.tooltip)($play, i18n.get("Play"));
@@ -3114,17 +3113,17 @@ function playAndPause(option) {
             }
         });
 }
+exports.default = playAndPause;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aHyb0":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"afGEi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getPosFromEvent", ()=>getPosFromEvent);
 parcelHelpers.export(exports, "setCurrentTime", ()=>setCurrentTime);
-parcelHelpers.export(exports, "default", ()=>progress);
 var _utils = require("../utils");
 function getPosFromEvent(art, event) {
-    const { $progress } = art.template;
-    const { left } = $progress.getBoundingClientRect();
+    const { $progress  } = art.template;
+    const { left  } = $progress.getBoundingClientRect();
     const eventLeft = (0, _utils.isMobile) ? event.touches[0].clientX : event.clientX;
     const width = (0, _utils.clamp)(eventLeft - left, 0, $progress.clientWidth);
     const second = width / $progress.clientWidth * art.duration;
@@ -3144,14 +3143,14 @@ function setCurrentTime(art, event) {
         art.emit("setBar", "played", percentage);
         art.seek = second;
     } else {
-        const { second, percentage } = getPosFromEvent(art, event);
+        const { second , percentage  } = getPosFromEvent(art, event);
         art.emit("setBar", "played", percentage);
         art.seek = second;
     }
 }
 function progress(options) {
     return (art)=>{
-        const { icons, option, proxy } = art;
+        const { icons , option , proxy  } = art;
         return {
             ...options,
             html: `
@@ -3175,8 +3174,8 @@ function progress(options) {
                 if (icons.indicator) (0, _utils.append)($indicator, icons.indicator);
                 else (0, _utils.setStyle)($indicator, "backgroundColor", "var(--art-theme)");
                 function showHighlight(event) {
-                    const { width } = getPosFromEvent(art, event);
-                    const { text } = event.target.dataset;
+                    const { width  } = getPosFromEvent(art, event);
+                    const { text  } = event.target.dataset;
                     $tip.innerHTML = text;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
@@ -3184,7 +3183,7 @@ function progress(options) {
                     else (0, _utils.setStyle)($tip, "left", `${width - tipWidth / 2}px`);
                 }
                 function showTime(event) {
-                    const { width, time } = getPosFromEvent(art, event);
+                    const { width , time  } = getPosFromEvent(art, event);
                     $tip.innerHTML = time;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
@@ -3199,7 +3198,7 @@ function progress(options) {
                     }
                 }
                 function setHover(event) {
-                    const { width } = getPosFromEvent(art, event);
+                    const { width  } = getPosFromEvent(art, event);
                     (0, _utils.setStyle)($hover, "width", `${width}px`);
                     (0, _utils.setStyle)($hover, "display", "flex");
                 }
@@ -3246,7 +3245,7 @@ function progress(options) {
                     });
                     art.on("document:mousemove", (event)=>{
                         if (isDroging) {
-                            const { second, percentage } = getPosFromEvent(art, event);
+                            const { second , percentage  } = getPosFromEvent(art, event);
                             setBar("played", percentage);
                             art.seek = second;
                         }
@@ -3259,11 +3258,11 @@ function progress(options) {
         };
     };
 }
+exports.default = progress;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hL9ry":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"e6eX5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>time);
 var _utils = require("../utils");
 function time(option) {
     return (art)=>({
@@ -3290,17 +3289,17 @@ function time(option) {
             }
         });
 }
+exports.default = time;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3G9Wa":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ezhk3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>volume);
 var _utils = require("../utils");
 function volume(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { proxy, icons } = art;
+                const { proxy , icons  } = art;
                 const $volume = (0, _utils.append)($control, icons.volume);
                 const $close = (0, _utils.append)($control, icons.volumeClose);
                 const $panel = (0, _utils.append)($control, '<div class="art-volume-panel"></div>');
@@ -3311,11 +3310,11 @@ function volume(option) {
                 const $loaded = (0, _utils.append)($handle, `<div class="art-volume-loaded"></div>`);
                 const $indicator = (0, _utils.append)($slider, `<div class="art-volume-indicator"></div>`);
                 function getVolumeFromEvent(event) {
-                    const { top, height } = $slider.getBoundingClientRect();
+                    const { top , height  } = $slider.getBoundingClientRect();
                     return 1 - (event.clientY - top) / height;
                 }
                 function update() {
-                    if (art.muted ?? art.volume === 0) {
+                    if (art.muted || art.volume === 0) {
                         (0, _utils.setStyle)($volume, "display", "none");
                         (0, _utils.setStyle)($close, "display", "flex");
                         (0, _utils.setStyle)($indicator, "top", "100%");
@@ -3358,18 +3357,18 @@ function volume(option) {
             }
         });
 }
+exports.default = volume;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jQ9Bw":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"3Vg4s":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>setting);
 var _utils = require("../utils");
 function setting(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Show Setting"),
             mounted: ($control)=>{
-                const { proxy, icons, i18n } = art;
+                const { proxy , icons , i18n  } = art;
                 (0, _utils.append)($control, icons.setting);
                 proxy($control, "click", ()=>{
                     art.setting.toggle();
@@ -3381,30 +3380,30 @@ function setting(option) {
             }
         });
 }
+exports.default = setting;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8HBQN":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8AAYm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>thumbnails);
 var _utils = require("../utils");
 var _progress = require("./progress");
 function thumbnails(options) {
     return (art)=>({
             ...options,
             mounted: ($control)=>{
-                const { option, template: { $progress, $video }, events: { proxy, loadImg } } = art;
+                const { option , template: { $progress , $video  } , events: { proxy , loadImg  }  } = art;
                 let image = null;
                 let loading = false;
                 let isLoad = false;
                 function showThumbnails(event) {
-                    const { width: posWidth } = (0, _progress.getPosFromEvent)(art, event);
-                    const { url, number, column, width, height } = option.thumbnails;
-                    const width2 = width ?? image.naturalWidth / column;
-                    const height2 = height ?? width2 / ($video.videoWidth / $video.videoHeight);
+                    const { width: posWidth  } = (0, _progress.getPosFromEvent)(art, event);
+                    const { url , number , column , width , height  } = option.thumbnails;
+                    const width2 = width || image.naturalWidth / column;
+                    const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
                     const perWidth = $progress.clientWidth / number;
                     const perIndex = Math.floor(posWidth / perWidth);
                     const yIndex = Math.ceil(perIndex / column) - 1;
-                    const xIndex = (perIndex % column) ?? column - 1;
+                    const xIndex = perIndex % column || column - 1;
                     (0, _utils.setStyle)($control, "backgroundImage", `url(${url})`);
                     (0, _utils.setStyle)($control, "height", `${height2}px`);
                     (0, _utils.setStyle)($control, "width", `${width2}px`);
@@ -3434,18 +3433,18 @@ function thumbnails(options) {
             }
         });
 }
+exports.default = thumbnails;
 
-},{"../utils":"jmgNb","./progress":"aHyb0","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aA6wc":[function(require,module,exports) {
+},{"../utils":"euhMG","./progress":"afGEi","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>screenshot);
 var _utils = require("../utils");
 function screenshot(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Screenshot"),
             mounted: ($control)=>{
-                const { proxy, icons } = art;
+                const { proxy , icons  } = art;
                 (0, _utils.append)($control, icons.screenshot);
                 proxy($control, "click", ()=>{
                     art.screenshot();
@@ -3453,11 +3452,11 @@ function screenshot(option) {
             }
         });
 }
+exports.default = screenshot;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3bPO6":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8hCXR":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>loop);
 var _utils = require("../utils");
 function loop(option) {
     return (art)=>({
@@ -3475,25 +3474,26 @@ function loop(option) {
             }
         });
 }
+exports.default = loop;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"iKTFA":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4dMTc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>pip);
 var _utils = require("../utils");
 function pip(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("AirPlay"),
             mounted: ($control)=>{
-                const { proxy, icons } = art;
+                const { proxy , icons  } = art;
                 (0, _utils.append)($control, icons.airplay);
                 proxy($control, "click", ()=>art.airplay());
             }
         });
 }
+exports.default = pip;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5npaZ":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"iygWX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -3519,7 +3519,7 @@ class Contextmenu extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { option, proxy, template: { $player, $contextmenu } } = this.art;
+        const { option , proxy , template: { $player , $contextmenu  }  } = this.art;
         if (option.playbackRate) this.add((0, _playbackRateDefault.default)({
             name: "playbackRate",
             index: 10
@@ -3551,8 +3551,8 @@ class Contextmenu extends (0, _componentDefault.default) {
             this.show = true;
             const mouseX = event.clientX;
             const mouseY = event.clientY;
-            const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
-            const { height: mHeight, width: mWidth } = $contextmenu.getBoundingClientRect();
+            const { height: cHeight , width: cWidth , left: cLeft , top: cTop  } = $player.getBoundingClientRect();
+            const { height: mHeight , width: mWidth  } = $contextmenu.getBoundingClientRect();
             let menuLeft = mouseX - cLeft;
             let menuTop = mouseY - cTop;
             if (mouseX + mWidth > cLeft + cWidth) menuLeft = cWidth - mWidth;
@@ -3572,20 +3572,19 @@ class Contextmenu extends (0, _componentDefault.default) {
 }
 exports.default = Contextmenu;
 
-},{"../utils":"jmgNb","../utils/component":"bgug2","./playbackRate":"eoKzP","./aspectRatio":"7ejUt","./flip":"dAW0A","./info":"1jWhq","./version":"dapbx","./close":"9E5SI","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eoKzP":[function(require,module,exports) {
+},{"../utils":"euhMG","../utils/component":"1UWqI","./playbackRate":"aEEkc","./aspectRatio":"jQvOA","./flip":"gcvCz","./info":"2g4ET","./version":"6YbWR","./close":"kM2pD","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"aEEkc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>playbackRate);
 var _utils = require("../utils");
 function playbackRate(option) {
     return (art)=>{
-        const { i18n, constructor: { PLAYBACK_RATE } } = art;
+        const { i18n , constructor: { PLAYBACK_RATE  }  } = art;
         const html = PLAYBACK_RATE.map((item)=>`<span data-value="${item}">${item === 1 ? i18n.get("Normal") : item.toFixed(1)}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Play Speed")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value } = event.target.dataset;
+                const { value  } = event.target.dataset;
                 if (value) {
                     art.playbackRate = Number(value);
                     contextmenu.show = false;
@@ -3602,21 +3601,21 @@ function playbackRate(option) {
         };
     };
 }
+exports.default = playbackRate;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7ejUt":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jQvOA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>aspectRatio);
 var _utils = require("../utils");
 function aspectRatio(option) {
     return (art)=>{
-        const { i18n, constructor: { ASPECT_RATIO } } = art;
+        const { i18n , constructor: { ASPECT_RATIO  }  } = art;
         const html = ASPECT_RATIO.map((item)=>`<span data-value="${item}">${item === "default" ? i18n.get("Default") : item}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Aspect Ratio")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value } = event.target.dataset;
+                const { value  } = event.target.dataset;
                 if (value) {
                     art.aspectRatio = value;
                     contextmenu.show = false;
@@ -3633,21 +3632,21 @@ function aspectRatio(option) {
         };
     };
 }
+exports.default = aspectRatio;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dAW0A":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"gcvCz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>flip);
 var _utils = require("../utils");
 function flip(option) {
     return (art)=>{
-        const { i18n, constructor: { FLIP } } = art;
+        const { i18n , constructor: { FLIP  }  } = art;
         const html = FLIP.map((item)=>`<span data-value="${item}">${i18n.get((0, _utils.capitalize)(item))}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Video Flip")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value } = event.target.dataset;
+                const { value  } = event.target.dataset;
                 if (value) {
                     art.flip = value.toLowerCase();
                     contextmenu.show = false;
@@ -3664,11 +3663,11 @@ function flip(option) {
         };
     };
 }
+exports.default = flip;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1jWhq":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"2g4ET":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>info);
 function info(option) {
     return (art)=>({
             ...option,
@@ -3679,22 +3678,22 @@ function info(option) {
             }
         });
 }
+exports.default = info;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dapbx":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6YbWR":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
         html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.0"}</a>`
     };
 }
+exports.default = version;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9E5SI":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"kM2pD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>close);
 function close(option) {
     return (art)=>({
             ...option,
@@ -3704,8 +3703,9 @@ function close(option) {
             }
         });
 }
+exports.default = close;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"6vVKE":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6tuCt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -3718,12 +3718,12 @@ class Info extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy, constructor, template: { $infoPanel, $infoClose, $video } } = this.art;
+        const { proxy , constructor , template: { $infoPanel , $infoClose , $video  }  } = this.art;
         proxy($infoClose, "click", ()=>{
             this.show = false;
         });
         let timer = null;
-        const $types = (0, _utils.queryAll)("[data-video]", $infoPanel) ?? [];
+        const $types = (0, _utils.queryAll)("[data-video]", $infoPanel) || [];
         this.art.on("destroy", ()=>clearTimeout(timer));
         function loop() {
             for(let index = 0; index < $types.length; index++){
@@ -3739,7 +3739,7 @@ class Info extends (0, _componentDefault.default) {
 }
 exports.default = Info;
 
-},{"./utils":"jmgNb","./utils/component":"bgug2","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4exyO":[function(require,module,exports) {
+},{"./utils":"euhMG","./utils/component":"1UWqI","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1kFyE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -3779,12 +3779,12 @@ class Subtitle extends (0, _componentDefault.default) {
         return this.textTrack.activeCues[0];
     }
     style(key, value) {
-        const { $subtitle } = this.art.template;
+        const { $subtitle  } = this.art.template;
         if (typeof key === "object") return (0, _utils.setStyles)($subtitle, key);
         return (0, _utils.setStyle)($subtitle, key, value);
     }
     update() {
-        const { $subtitle } = this.art.template;
+        const { $subtitle  } = this.art.template;
         $subtitle.innerHTML = "";
         if (this.activeCue) {
             if (this.art.option.subtitle.escape) $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map((item)=>`<p>${(0, _utils.escape)(item)}</p>`).join("");
@@ -3793,7 +3793,7 @@ class Subtitle extends (0, _componentDefault.default) {
         }
     }
     async switch(url, newOption = {}) {
-        const { i18n, notice, option } = this.art;
+        const { i18n , notice , option  } = this.art;
         const subtitleOption = {
             ...option.subtitle,
             ...newOption,
@@ -3804,8 +3804,8 @@ class Subtitle extends (0, _componentDefault.default) {
         return subUrl;
     }
     createTrack(kind, url) {
-        const { template, proxy } = this.art;
-        const { $video, $track } = template;
+        const { template , proxy  } = this.art;
+        const { $video , $track  } = template;
         const $newTrack = (0, _utils.createElement)("track");
         $newTrack.default = true;
         $newTrack.kind = kind;
@@ -3818,7 +3818,7 @@ class Subtitle extends (0, _componentDefault.default) {
         this.eventDestroy = proxy(this.textTrack, "cuechange", ()=>this.update());
     }
     async init(subtitleOption) {
-        const { notice, template: { $subtitle } } = this.art;
+        const { notice , template: { $subtitle  }  } = this.art;
         (0, _optionValidatorDefault.default)(subtitleOption, (0, _schemeDefault.default).subtitle);
         if (!subtitleOption.url) return;
         this.style(subtitleOption.style);
@@ -3826,7 +3826,7 @@ class Subtitle extends (0, _componentDefault.default) {
             const decoder = new TextDecoder(subtitleOption.encoding);
             const text = decoder.decode(buffer);
             this.art.emit("subtitleLoad", subtitleOption.url);
-            switch(subtitleOption.type ?? (0, _utils.getExt)(subtitleOption.url)){
+            switch(subtitleOption.type || (0, _utils.getExt)(subtitleOption.url)){
                 case "srt":
                     {
                         const vtt = (0, _utils.srtToVtt)(text);
@@ -3863,7 +3863,7 @@ class Subtitle extends (0, _componentDefault.default) {
 }
 exports.default = Subtitle;
 
-},{"./utils":"jmgNb","./utils/component":"bgug2","option-validator":"2tbdu","./scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dz5ul":[function(require,module,exports) {
+},{"./utils":"euhMG","./utils/component":"1UWqI","option-validator":"2tbdu","./scheme":"jVxq1","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"akAUN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _error = require("../utils/error");
@@ -3935,13 +3935,12 @@ class Events {
 }
 exports.default = Events;
 
-},{"../utils/error":"622b3","./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","./updateInit":"4Xp2q","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
+},{"../utils/error":"kCmly","./clickInit":"4xN0W","./hoverInit":"bO8Cy","./moveInit":"l5Ock","./resizeInit":"1e06H","./gestureInit":"1Cim3","./viewInit":"xZUxN","./documentInit":"jKzGQ","./updateInit":"ONlxE","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4xN0W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>clickInit);
 var _utils = require("../utils");
 function clickInit(art, events) {
-    const { constructor, template: { $player, $video } } = art;
+    const { constructor , template: { $player , $video  }  } = art;
     events.proxy(document, [
         "click",
         "contextmenu"
@@ -3959,7 +3958,7 @@ function clickInit(art, events) {
     let clickTime = 0;
     events.proxy($video, "click", (event)=>{
         const now = Date.now();
-        const { MOBILE_CLICK_PLAY, DBCLICK_TIME, MOBILE_DBCLICK_PLAY, DBCLICK_FULLSCREEN } = constructor;
+        const { MOBILE_CLICK_PLAY , DBCLICK_TIME , MOBILE_DBCLICK_PLAY , DBCLICK_FULLSCREEN  } = constructor;
         if (now - clickTime <= DBCLICK_TIME) {
             art.emit("dblclick", event);
             if (0, _utils.isMobile) {
@@ -3974,14 +3973,14 @@ function clickInit(art, events) {
         clickTime = now;
     });
 }
+exports.default = clickInit;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jr1ic":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"bO8Cy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>hoverInit);
 var _utils = require("../utils");
 function hoverInit(art, events) {
-    const { $player } = art.template;
+    const { $player  } = art.template;
     events.hover($player, (event)=>{
         (0, _utils.addClass)($player, "art-hover");
         art.emit("hover", true, event);
@@ -3990,27 +3989,27 @@ function hoverInit(art, events) {
         art.emit("hover", false, event);
     });
 }
+exports.default = hoverInit;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jnUlq":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"l5Ock":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>moveInit);
 function moveInit(art, events) {
-    const { $player } = art.template;
+    const { $player  } = art.template;
     events.proxy($player, "mousemove", (event)=>{
         art.emit("mousemove", event);
     });
 }
+exports.default = moveInit;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2r19L":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1e06H":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>resizeInit);
 var _utils = require("../utils");
 function resizeInit(art, events) {
-    const { option, constructor } = art;
+    const { option , constructor  } = art;
     art.on("resize", ()=>{
-        const { aspectRatio, notice } = art;
+        const { aspectRatio , notice  } = art;
         if (art.state === "standard" && option.autoSize) art.autoSize();
         art.aspectRatio = aspectRatio;
         notice.show = "";
@@ -4022,11 +4021,11 @@ function resizeInit(art, events) {
     ], ()=>resizeFn());
     if (screen && screen.orientation && screen.orientation.onchange) events.proxy(screen.orientation, "change", ()=>resizeFn());
 }
+exports.default = resizeInit;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"2IPOb":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1Cim3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>gestureInit);
 var _utils = require("../utils");
 var _progress = require("../control/progress");
 function GetSlideAngle(dx, dy) {
@@ -4041,12 +4040,12 @@ function GetSlideDirection(startX, startY, endX, endY) {
     if (angle >= -45 && angle < 45) result = 4;
     else if (angle >= 45 && angle < 135) result = 1;
     else if (angle >= -135 && angle < -45) result = 2;
-    else if ((angle >= 135 && angle <= 180) ?? (angle >= -180 && angle < -135)) result = 3;
+    else if (angle >= 135 && angle <= 180 || angle >= -180 && angle < -135) result = 3;
     return result;
 }
 function gestureInit(art, events) {
     if ((0, _utils.isMobile) && !art.option.isLive) {
-        const { $video, $progress } = art.template;
+        const { $video , $progress  } = art.template;
         let touchTarget = null;
         let isDroging = false;
         let startX = 0;
@@ -4056,7 +4055,7 @@ function gestureInit(art, events) {
             if (event.touches.length === 1 && !art.isLock) {
                 if (touchTarget === $progress) (0, _progress.setCurrentTime)(art, event);
                 isDroging = true;
-                const { pageX, pageY } = event.touches[0];
+                const { pageX , pageY  } = event.touches[0];
                 startX = pageX;
                 startY = pageY;
                 startTime = art.currentTime;
@@ -4064,7 +4063,7 @@ function gestureInit(art, events) {
         };
         const onTouchMove = (event)=>{
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const { pageX, pageY } = event.touches[0];
+                const { pageX , pageY  } = event.touches[0];
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [
                     3,
@@ -4074,7 +4073,7 @@ function gestureInit(art, events) {
                     1,
                     2
                 ].includes(direction);
-                const isLegal = (isHorizontal && !art.isRotate) ?? (isVertical && art.isRotate);
+                const isLegal = isHorizontal && !art.isRotate || isVertical && art.isRotate;
                 if (isLegal) {
                     const ratioX = (0, _utils.clamp)((pageX - startX) / art.width, -1, 1);
                     const ratioY = (0, _utils.clamp)((pageY - startY) / art.height, -1, 1);
@@ -4109,14 +4108,14 @@ function gestureInit(art, events) {
         events.proxy(document, "touchend", onTouchEnd);
     }
 }
+exports.default = gestureInit;
 
-},{"../utils":"jmgNb","../control/progress":"aHyb0","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fmrIX":[function(require,module,exports) {
+},{"../utils":"euhMG","../control/progress":"afGEi","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"xZUxN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>viewInit);
 var _utils = require("../utils");
 function viewInit(art, events) {
-    const { option, constructor, template: { $container } } = art;
+    const { option , constructor , template: { $container  }  } = art;
     const scrollFn = (0, _utils.throttle)(()=>{
         art.emit("view", (0, _utils.isInViewport)($container, constructor.SCROLL_GAP));
     }, constructor.SCROLL_TIME);
@@ -4125,11 +4124,11 @@ function viewInit(art, events) {
         if (option.autoMini) art.mini = !state;
     });
 }
+exports.default = viewInit;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"bIWxm":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jKzGQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>documentInit);
 function documentInit(art, events) {
     events.proxy(document, "mousemove", (event)=>{
         art.emit("document:mousemove", event);
@@ -4138,11 +4137,11 @@ function documentInit(art, events) {
         art.emit("document:mouseup", event);
     });
 }
+exports.default = documentInit;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"4Xp2q":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ONlxE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>updateInit);
 function updateInit(art) {
     if (art.constructor.USE_RAF) {
         let timer = null;
@@ -4155,8 +4154,9 @@ function updateInit(art) {
         });
     }
 }
+exports.default = updateInit;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"1nFqF":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"f1oWx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -4167,7 +4167,7 @@ class Hotkey {
         if (art.option.hotkey && !(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy, constructor } = this.art;
+        const { proxy , constructor  } = this.art;
         this.add(27, ()=>{
             if (this.art.fullscreenWeb) this.art.fullscreenWeb = false;
         });
@@ -4218,7 +4218,7 @@ class Hotkey {
 }
 exports.default = Hotkey;
 
-},{"./utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fvy8V":[function(require,module,exports) {
+},{"./utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"bKuSu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _component = require("./utils/component");
@@ -4226,7 +4226,7 @@ var _componentDefault = parcelHelpers.interopDefault(_component);
 class Layer extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option, template: { $layer } } = art;
+        const { option , template: { $layer  }  } = art;
         this.name = "layer";
         this.$parent = $layer;
         for(let index = 0; index < option.layers.length; index++)this.add(option.layers[index]);
@@ -4234,7 +4234,7 @@ class Layer extends (0, _componentDefault.default) {
 }
 exports.default = Layer;
 
-},{"./utils/component":"bgug2","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"h8KPY":[function(require,module,exports) {
+},{"./utils/component":"1UWqI","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4AfId":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -4249,7 +4249,7 @@ class Loading extends (0, _componentDefault.default) {
 }
 exports.default = Loading;
 
-},{"./utils":"jmgNb","./utils/component":"bgug2","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cr1XY":[function(require,module,exports) {
+},{"./utils":"euhMG","./utils/component":"1UWqI","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"aKncc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -4259,7 +4259,7 @@ class Notice {
         this.timer = null;
     }
     set show(msg) {
-        const { constructor, template: { $player, $noticeInner } } = this.art;
+        const { constructor , template: { $player , $noticeInner  }  } = this.art;
         if (msg) {
             $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
             (0, _utils.addClass)($player, "art-notice-show");
@@ -4273,7 +4273,7 @@ class Notice {
 }
 exports.default = Notice;
 
-},{"./utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"llnR4":[function(require,module,exports) {
+},{"./utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1R5LH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("./utils");
@@ -4283,7 +4283,7 @@ class Mask extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "mask";
-        const { template, icons, events } = art;
+        const { template , icons , events  } = art;
         const $state = (0, _utils.append)(template.$state, icons.state);
         const $error = (0, _utils.append)(template.$state, icons.error);
         (0, _utils.setStyle)($error, "display", "none");
@@ -4296,7 +4296,7 @@ class Mask extends (0, _componentDefault.default) {
 }
 exports.default = Mask;
 
-},{"./utils":"jmgNb","./utils/component":"bgug2","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gP6M7":[function(require,module,exports) {
+},{"./utils":"euhMG","./utils/component":"1UWqI","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"bPpva":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -4393,88 +4393,88 @@ class Icons {
 }
 exports.default = Icons;
 
-},{"../utils":"jmgNb","bundle-text:./loading.svg":"kQAWs","bundle-text:./state.svg":"fv62Y","bundle-text:./check.svg":"hpwmG","bundle-text:./play.svg":"ez3XI","bundle-text:./pause.svg":"cXb2s","bundle-text:./volume.svg":"9ziFm","bundle-text:./volume-close.svg":"gHdy5","bundle-text:./screenshot.svg":"7uQ3x","bundle-text:./setting.svg":"23jGe","bundle-text:./arrow-left.svg":"2m0J3","bundle-text:./arrow-right.svg":"d9iPY","bundle-text:./playback-rate.svg":"iFVXO","bundle-text:./aspect-ratio.svg":"4qJAN","bundle-text:./config.svg":"6iK2N","bundle-text:./pip.svg":"f0XBL","bundle-text:./lock.svg":"kCaVg","bundle-text:./unlock.svg":"lWIPo","bundle-text:./fullscreen-off.svg":"a6qSz","bundle-text:./fullscreen-on.svg":"2cUeR","bundle-text:./fullscreen-web-off.svg":"9P4Tw","bundle-text:./fullscreen-web-on.svg":"lv7bb","bundle-text:./switch-on.svg":"iaKl1","bundle-text:./switch-off.svg":"47VYR","bundle-text:./flip.svg":"kQBsA","bundle-text:./error.svg":"gHC6Z","bundle-text:./close.svg":"dSIbz","bundle-text:./airplay.svg":"2G32R","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQAWs":[function(require,module,exports) {
+},{"../utils":"euhMG","bundle-text:./loading.svg":"kSZpY","bundle-text:./state.svg":"l1cGI","bundle-text:./check.svg":"ihtKw","bundle-text:./play.svg":"aCrjI","bundle-text:./pause.svg":"djndS","bundle-text:./volume.svg":"3Mi6x","bundle-text:./volume-close.svg":"jxG45","bundle-text:./screenshot.svg":"eXfwA","bundle-text:./setting.svg":"kXSEM","bundle-text:./arrow-left.svg":"etyqn","bundle-text:./arrow-right.svg":"fU9m5","bundle-text:./playback-rate.svg":"wh93r","bundle-text:./aspect-ratio.svg":"2OSVS","bundle-text:./config.svg":"1WMKP","bundle-text:./pip.svg":"gGDL8","bundle-text:./lock.svg":"bDVqH","bundle-text:./unlock.svg":"b8r9U","bundle-text:./fullscreen-off.svg":"1F5ib","bundle-text:./fullscreen-on.svg":"6Nkxe","bundle-text:./fullscreen-web-off.svg":"akUW2","bundle-text:./fullscreen-web-on.svg":"5ohBx","bundle-text:./switch-on.svg":"2V2BU","bundle-text:./switch-off.svg":"cIVbn","bundle-text:./flip.svg":"eBNt7","bundle-text:./error.svg":"32zQ7","bundle-text:./close.svg":"9rzgA","bundle-text:./airplay.svg":"foceu","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"kSZpY":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"50px\" height=\"50px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\" class=\"uil-default\">\n  <rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"none\" class=\"bk\"></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(0 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-1s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(30 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.9166666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(60 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.8333333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(90 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.75s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(120 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.6666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(150 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5833333333333334s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(180 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.5s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(210 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.4166666666666667s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(240 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.3333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(270 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.25s\" repeatCount=\"indefinite\"></animate></rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(300 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.16666666666666666s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n  <rect x=\"47\" y=\"40\" width=\"6\" height=\"20\" rx=\"5\" ry=\"5\" fill=\"#ffffff\" transform=\"rotate(330 50 50) translate(0 -30)\">\n    <animate attributeName=\"opacity\" from=\"1\" to=\"0\" dur=\"1s\" begin=\"-0.08333333333333333s\" repeatCount=\"indefinite\"></animate>\n  </rect>\n</svg>";
 
-},{}],"fv62Y":[function(require,module,exports) {
+},{}],"l1cGI":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"80\" height=\"80\" viewBox=\"0 0 24 24\">\n<path fill=\"#fff\" d=\"M9.5 9.325v5.35q0 .575.525.875t1.025-.05l4.15-2.65q.475-.3.475-.85t-.475-.85L11.05 8.5q-.5-.35-1.025-.05t-.525.875ZM12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z\"></path>\n</svg>\n";
 
-},{}],"hpwmG":[function(require,module,exports) {
+},{}],"ihtKw":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 24 24\" style=\"width: 100%; height: 100%\">\n<path d=\"M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z\" fill=\"#fff\"></path>\n</svg>";
 
-},{}],"ez3XI":[function(require,module,exports) {
+},{}],"aCrjI":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n  <path d=\"M17.982 9.275L8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z\"></path>\n</svg>";
 
-},{}],"cXb2s":[function(require,module,exports) {
+},{}],"djndS":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M7 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2zM15 3a2 2 0 0 0-2 2v12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2z\"></path>\n</svg>";
 
-},{}],"9ziFm":[function(require,module,exports) {
+},{}],"3Mi6x":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M10.188 4.65L6 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39V5.04a.498.498 0 0 0-.812-.39zM14.446 3.778a1 1 0 0 0-.862 1.804 6.002 6.002 0 0 1-.007 10.838 1 1 0 0 0 .86 1.806A8.001 8.001 0 0 0 19 11a8.001 8.001 0 0 0-4.554-7.222z\"></path>\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v6.93A3.998 3.998 0 0 0 15 11z\"></path>\n</svg>";
 
-},{}],"gHdy5":[function(require,module,exports) {
+},{}],"jxG45":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <path d=\"M15 11a3.998 3.998 0 0 0-2-3.465v2.636l1.865 1.865A4.02 4.02 0 0 0 15 11z\"></path>\n    <path d=\"M13.583 5.583A5.998 5.998 0 0 1 17 11a6 6 0 0 1-.585 2.587l1.477 1.477a8.001 8.001 0 0 0-3.446-11.286 1 1 0 0 0-.863 1.805zM18.778 18.778l-2.121-2.121-1.414-1.414-1.415-1.415L13 13l-2-2-3.889-3.889-3.889-3.889a.999.999 0 1 0-1.414 1.414L5.172 8H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1l4.188 3.35a.5.5 0 0 0 .812-.39v-3.131l2.587 2.587-.01.005a1 1 0 0 0 .86 1.806c.215-.102.424-.214.627-.333l2.3 2.3a1.001 1.001 0 0 0 1.414-1.416zM11 5.04a.5.5 0 0 0-.813-.39L8.682 5.854 11 8.172V5.04z\"></path>\n</svg>";
 
-},{}],"7uQ3x":[function(require,module,exports) {
+},{}],"eXfwA":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 50 50\">\n\t<path d=\"M 19.402344 6 C 17.019531 6 14.96875 7.679688 14.5 10.011719 L 14.097656 12 L 9 12 C 6.238281 12 4 14.238281 4 17 L 4 38 C 4 40.761719 6.238281 43 9 43 L 41 43 C 43.761719 43 46 40.761719 46 38 L 46 17 C 46 14.238281 43.761719 12 41 12 L 35.902344 12 L 35.5 10.011719 C 35.03125 7.679688 32.980469 6 30.597656 6 Z M 25 17 C 30.519531 17 35 21.480469 35 27 C 35 32.519531 30.519531 37 25 37 C 19.480469 37 15 32.519531 15 27 C 15 21.480469 19.480469 17 25 17 Z M 25 19 C 20.589844 19 17 22.589844 17 27 C 17 31.410156 20.589844 35 25 35 C 29.410156 35 33 31.410156 33 27 C 33 22.589844 29.410156 19 25 19 Z \"></path>\n</svg>\n";
 
-},{}],"23jGe":[function(require,module,exports) {
+},{}],"kXSEM":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"22\" width=\"22\" viewBox=\"0 0 22 22\">\n    <circle cx=\"11\" cy=\"11\" r=\"2\"></circle>\n    <path d=\"M19.164 8.861L17.6 8.6a6.978 6.978 0 0 0-1.186-2.099l.574-1.533a1 1 0 0 0-.436-1.217l-1.997-1.153a1.001 1.001 0 0 0-1.272.23l-1.008 1.225a7.04 7.04 0 0 0-2.55.001L8.716 2.829a1 1 0 0 0-1.272-.23L5.447 3.751a1 1 0 0 0-.436 1.217l.574 1.533A6.997 6.997 0 0 0 4.4 8.6l-1.564.261A.999.999 0 0 0 2 9.847v2.306c0 .489.353.906.836.986l1.613.269a7 7 0 0 0 1.228 2.075l-.558 1.487a1 1 0 0 0 .436 1.217l1.997 1.153c.423.244.961.147 1.272-.23l1.04-1.263a7.089 7.089 0 0 0 2.272 0l1.04 1.263a1 1 0 0 0 1.272.23l1.997-1.153a1 1 0 0 0 .436-1.217l-.557-1.487c.521-.61.94-1.31 1.228-2.075l1.613-.269a.999.999 0 0 0 .835-.986V9.847a.999.999 0 0 0-.836-.986zM11 15a4 4 0 1 1 0-8 4 4 0 0 1 0 8z\"></path>\n</svg>";
 
-},{}],"2m0J3":[function(require,module,exports) {
+},{}],"etyqn":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"32\" width=\"32\" version=\"1.1\" viewBox=\"0 0 32 32\">\n    <path d=\"M 19.41,20.09 14.83,15.5 19.41,10.91 18,9.5 l -6,6 6,6 z\" fill=\"#fff\"></path>\n</svg>";
 
-},{}],"d9iPY":[function(require,module,exports) {
+},{}],"fU9m5":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"32\" width=\"32\" version=\"1.1\" viewBox=\"0 0 32 32\">\n    <path d=\"m 12.59,20.34 4.58,-4.59 -4.58,-4.59 1.41,-1.41 6,6 -6,6 z\" fill=\"#fff\"></path>\n</svg>";
 
-},{}],"iFVXO":[function(require,module,exports) {
+},{}],"wh93r":[function(require,module,exports) {
 module.exports = "<svg height=\"24\" viewBox=\"0 0 24 24\" width=\"24\"><path d=\"M10,8v8l6-4L10,8L10,8z M6.3,5L5.7,4.2C7.2,3,9,2.2,11,2l0.1,1C9.3,3.2,7.7,3.9,6.3,5z            M5,6.3L4.2,5.7C3,7.2,2.2,9,2,11 l1,.1C3.2,9.3,3.9,7.7,5,6.3z            M5,17.7c-1.1-1.4-1.8-3.1-2-4.8L2,13c0.2,2,1,3.8,2.2,5.4L5,17.7z            M11.1,21c-1.8-0.2-3.4-0.9-4.8-2 l-0.6,.8C7.2,21,9,21.8,11,22L11.1,21z            M22,12c0-5.2-3.9-9.4-9-10l-0.1,1c4.6,.5,8.1,4.3,8.1,9s-3.5,8.5-8.1,9l0.1,1 C18.2,21.5,22,17.2,22,12z\" fill=\"white\" data-darkreader-inline-fill=\"\" style=\"--darkreader-inline-fill: #a8a6a4\"></path></svg>";
 
-},{}],"4qJAN":[function(require,module,exports) {
+},{}],"2OSVS":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 88 88\" preserveAspectRatio=\"xMidYMid meet\" style=\"width: 100%; height: 100%; transform: translate3d(0, 0, 0)\"><defs><clipPath id=\"__lottie_element_216\"><rect width=\"88\" height=\"88\" x=\"0\" y=\"0\"></rect></clipPath></defs><g clip-path=\"url('#__lottie_element_216')\"><g transform=\"matrix(1,0,0,1,44,44)\" opacity=\"1\" style=\"display: block\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,0,0)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M12.437999725341797,-12.70199966430664 C12.437999725341797,-12.70199966430664 9.618000030517578,-9.881999969482422 9.618000030517578,-9.881999969482422 C8.82800006866455,-9.092000007629395 8.82800006866455,-7.831999778747559 9.618000030517578,-7.052000045776367 C9.618000030517578,-7.052000045776367 16.687999725341797,0.017999999225139618 16.687999725341797,0.017999999225139618 C16.687999725341797,0.017999999225139618 9.618000030517578,7.0879998207092285 9.618000030517578,7.0879998207092285 C8.82800006866455,7.877999782562256 8.82800006866455,9.137999534606934 9.618000030517578,9.918000221252441 C9.618000030517578,9.918000221252441 12.437999725341797,12.748000144958496 12.437999725341797,12.748000144958496 C13.227999687194824,13.527999877929688 14.48799991607666,13.527999877929688 15.267999649047852,12.748000144958496 C15.267999649047852,12.748000144958496 26.58799934387207,1.437999963760376 26.58799934387207,1.437999963760376 C27.368000030517578,0.6579999923706055 27.368000030517578,-0.6119999885559082 26.58799934387207,-1.3919999599456787 C26.58799934387207,-1.3919999599456787 15.267999649047852,-12.70199966430664 15.267999649047852,-12.70199966430664 C14.48799991607666,-13.491999626159668 13.227999687194824,-13.491999626159668 12.437999725341797,-12.70199966430664z M-12.442000389099121,-12.70199966430664 C-13.182000160217285,-13.442000389099121 -14.362000465393066,-13.482000350952148 -15.142000198364258,-12.821999549865723 C-15.142000198364258,-12.821999549865723 -15.272000312805176,-12.70199966430664 -15.272000312805176,-12.70199966430664 C-15.272000312805176,-12.70199966430664 -26.582000732421875,-1.3919999599456787 -26.582000732421875,-1.3919999599456787 C-27.32200050354004,-0.6520000100135803 -27.36199951171875,0.5180000066757202 -26.70199966430664,1.3079999685287476 C-26.70199966430664,1.3079999685287476 -26.582000732421875,1.437999963760376 -26.582000732421875,1.437999963760376 C-26.582000732421875,1.437999963760376 -15.272000312805176,12.748000144958496 -15.272000312805176,12.748000144958496 C-14.531999588012695,13.48799991607666 -13.362000465393066,13.527999877929688 -12.571999549865723,12.868000030517578 C-12.571999549865723,12.868000030517578 -12.442000389099121,12.748000144958496 -12.442000389099121,12.748000144958496 C-12.442000389099121,12.748000144958496 -9.612000465393066,9.918000221252441 -9.612000465393066,9.918000221252441 C-8.871999740600586,9.178000450134277 -8.831999778747559,8.008000373840332 -9.501999855041504,7.2179999351501465 C-9.501999855041504,7.2179999351501465 -9.612000465393066,7.0879998207092285 -9.612000465393066,7.0879998207092285 C-9.612000465393066,7.0879998207092285 -16.68199920654297,0.017999999225139618 -16.68199920654297,0.017999999225139618 C-16.68199920654297,0.017999999225139618 -9.612000465393066,-7.052000045776367 -9.612000465393066,-7.052000045776367 C-8.871999740600586,-7.791999816894531 -8.831999778747559,-8.961999893188477 -9.501999855041504,-9.751999855041504 C-9.501999855041504,-9.751999855041504 -9.612000465393066,-9.881999969482422 -9.612000465393066,-9.881999969482422 C-9.612000465393066,-9.881999969482422 -12.442000389099121,-12.70199966430664 -12.442000389099121,-12.70199966430664z M28,-28 C32.41999816894531,-28 36,-24.420000076293945 36,-20 C36,-20 36,20 36,20 C36,24.420000076293945 32.41999816894531,28 28,28 C28,28 -28,28 -28,28 C-32.41999816894531,28 -36,24.420000076293945 -36,20 C-36,20 -36,-20 -36,-20 C-36,-24.420000076293945 -32.41999816894531,-28 -28,-28 C-28,-28 28,-28 28,-28z\" data-darkreader-inline-fill=\"\" style=\"--darkreader-inline-fill: #a8a6a4\"></path></g></g></g></svg>";
 
-},{}],"6iK2N":[function(require,module,exports) {
+},{}],"1WMKP":[function(require,module,exports) {
 module.exports = "<svg height=\"24\" viewBox=\"0 0 24 24\" width=\"24\"><path d=\"M15,17h6v1h-6V17z M11,17H3v1h8v2h1v-2v-1v-2h-1V17z M14,8h1V6V5V3h-1v2H3v1h11V8z            M18,5v1h3V5H18z M6,14h1v-2v-1V9H6v2H3v1 h3V14z M10,12h11v-1H10V12z\" fill=\"white\" data-darkreader-inline-fill=\"\" style=\"--darkreader-inline-fill: #a8a6a4\"></path></svg>";
 
-},{}],"f0XBL":[function(require,module,exports) {
+},{}],"gGDL8":[function(require,module,exports) {
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 36 36\" height=\"32\" width=\"32\">\n    <path d=\"M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 Z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 Z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 Z\"></path>\n</svg>";
 
-},{}],"kCaVg":[function(require,module,exports) {
+},{}],"bDVqH":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1650612139149\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"12683\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"20\" height=\"20\"><defs>\n<style type=\"text/css\"></style></defs><path d=\"M298.666667 426.666667V341.333333a213.333333 213.333333 0 1 1 426.666666 0v85.333334h42.666667a85.333333 85.333333 0 0 1 85.333333 85.333333v256a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 1-85.333333-85.333333v-256a85.333333 85.333333 0 0 1 85.333333-85.333333h42.666667z m213.333333-213.333334a128 128 0 0 0-128 128v85.333334h256V341.333333a128 128 0 0 0-128-128z\" fill=\"#ffffff\" p-id=\"12684\"></path>\n</svg>";
 
-},{}],"lWIPo":[function(require,module,exports) {
+},{}],"b8r9U":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1650612464266\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"14150\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"20\" height=\"20\"><defs>\n<style type=\"text/css\"></style></defs><path d=\"M666.752 194.517333L617.386667 268.629333A128 128 0 0 0 384 341.333333l0.042667 85.333334h384a85.333333 85.333333 0 0 1 85.333333 85.333333v256a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 1-85.333333-85.333333v-256a85.333333 85.333333 0 0 1 85.333333-85.333333h42.666667V341.333333a213.333333 213.333333 0 0 1 368.085333-146.816z\" fill=\"#ffffff\" p-id=\"14151\"></path></svg>";
 
-},{}],"a6qSz":[function(require,module,exports) {
+},{}],"1F5ib":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg class=\"icon\" width=\"22\" height=\"22\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#ffffff\" d=\"M768 298.666667h170.666667v85.333333h-256V128h85.333333v170.666667zM341.333333 384H85.333333V298.666667h170.666667V128h85.333333v256z m426.666667 341.333333v170.666667h-85.333333v-256h256v85.333333h-170.666667zM341.333333 640v256H256v-170.666667H85.333333v-85.333333h256z\"></path>\n</svg>";
 
-},{}],"2cUeR":[function(require,module,exports) {
+},{}],"6Nkxe":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg class=\"icon\" width=\"22\" height=\"22\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#ffffff\" d=\"M625.777778 256h142.222222V398.222222h113.777778V142.222222H625.777778v113.777778zM256 398.222222V256H398.222222v-113.777778H142.222222V398.222222h113.777778zM768 625.777778v142.222222H625.777778v113.777778h256V625.777778h-113.777778zM398.222222 768H256V625.777778h-113.777778v256H398.222222v-113.777778z\"></path>\n</svg>";
 
-},{}],"9P4Tw":[function(require,module,exports) {
+},{}],"akUW2":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg class=\"icon\" width=\"18\" height=\"18\" viewBox=\"0 0 1152 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#ffffff\" d=\"M1075.2 0H76.8A76.8 76.8 0 0 0 0 76.8v870.4A76.8 76.8 0 0 0 76.8 1024h998.4a76.8 76.8 0 0 0 76.8-76.8V76.8A76.8 76.8 0 0 0 1075.2 0zM1024 128v768H128V128h896zM896 512a64 64 0 0 1 7.488 127.552L896 640h-128v128a64 64 0 0 1-56.512 63.552L704 832a64 64 0 0 1-63.552-56.512L640 768V582.592c0-34.496 25.024-66.112 61.632-70.208L709.632 512H896zM256 512a64 64 0 0 1-7.488-127.552L256 384h128V256a64 64 0 0 1 56.512-63.552L448 192a64 64 0 0 1 63.552 56.512L512 256v185.408c0 34.432-25.024 66.112-61.632 70.144L442.368 512H256z\"></path>\n</svg>";
 
-},{}],"lv7bb":[function(require,module,exports) {
+},{}],"5ohBx":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg class=\"icon\" width=\"18\" height=\"18\" viewBox=\"0 0 1152 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#ffffff\" d=\"M1075.2 0H76.8A76.8 76.8 0 0 0 0 76.8v870.4A76.8 76.8 0 0 0 76.8 1024h998.4a76.8 76.8 0 0 0 76.8-76.8V76.8A76.8 76.8 0 0 0 1075.2 0zM1024 128v768H128V128h896zM448 192a64 64 0 0 1 7.488 127.552L448 320H320v128a64 64 0 0 1-56.512 63.552L256 512a64 64 0 0 1-63.552-56.512L192 448V262.592c0-34.432 25.024-66.112 61.632-70.144L261.632 192H448zM704 832a64 64 0 0 1-7.488-127.552L704 704h128V576a64 64 0 0 1 56.512-63.552L896 512a64 64 0 0 1 63.552 56.512L960 576v185.408c0 34.496-25.024 66.112-61.632 70.208l-8 0.384H704z\"></path>\n</svg>";
 
-},{}],"iaKl1":[function(require,module,exports) {
+},{}],"2V2BU":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg class=\"icon\" width=\"26\" height=\"26\" viewBox=\"0 0 1664 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill=\"#648FFC\" d=\"M1152 0H512a512 512 0 0 0 0 1024h640a512 512 0 0 0 0-1024z m0 960a448 448 0 1 1 448-448 448 448 0 0 1-448 448z\"></path>\n</svg>";
 
-},{}],"47VYR":[function(require,module,exports) {
+},{}],"cIVbn":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg class=\"icon\" width=\"26\" height=\"26\" viewBox=\"0 0 1740 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill=\"#ffffff\" d=\"M511.8976 1024h670.5152c282.4192-0.4096 511.1808-229.4784 511.1808-511.8976 0-282.4192-228.7616-511.488-511.1808-511.8976H511.8976C229.4784 0.6144 0.7168 229.6832 0.7168 512.1024c0 282.4192 228.7616 511.488 511.1808 511.8976zM511.3344 48.64A464.5888 464.5888 0 1 1 48.0256 513.024 463.872 463.872 0 0 1 511.3344 48.4352V48.64z\"></path>\n</svg>";
 
-},{}],"kQBsA":[function(require,module,exports) {
+},{}],"eBNt7":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1652445277062\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"6034\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"24\" height=\"24\">\n<path d=\"M554.666667 810.666667v85.333333h-85.333334v-85.333333h85.333334zM170.666667 178.005333a42.666667 42.666667 0 0 1 34.986666 18.218667l203.904 291.328a42.666667 42.666667 0 0 1 0 48.896l-203.946666 291.328A42.666667 42.666667 0 0 1 128 803.328V220.672a42.666667 42.666667 0 0 1 42.666667-42.666667z m682.666666 0a42.666667 42.666667 0 0 1 42.368 37.717334l0.298667 4.949333v582.656a42.666667 42.666667 0 0 1-74.24 28.629333l-3.413333-4.181333-203.904-291.328a42.666667 42.666667 0 0 1-3.029334-43.861333l3.029334-5.034667 203.946666-291.328A42.666667 42.666667 0 0 1 853.333333 178.005333zM554.666667 640v85.333333h-85.333334v-85.333333h85.333334zM196.266667 319.104V716.8L335.957333 512 196.309333 319.104zM554.666667 469.333333v85.333334h-85.333334v-85.333334h85.333334z m0-170.666666v85.333333h-85.333334V298.666667h85.333334z m0-170.666667v85.333333h-85.333334V128h85.333334z\" fill=\"#ffffff\" p-id=\"6035\">\n</path>\n</svg>";
 
-},{}],"gHC6Z":[function(require,module,exports) {
+},{}],"32zQ7":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1652850026663\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"2749\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"50\" height=\"50\">\n<path d=\"M593.8176 168.5504l356.00384 595.21024c26.15296 43.74528 10.73152 99.7376-34.44736 125.05088-14.39744 8.06912-30.72 12.30848-47.37024 12.30848H155.97568C103.75168 901.12 61.44 860.16 61.44 809.61536c0-16.09728 4.38272-31.92832 12.71808-45.8752L430.16192 168.5504c26.17344-43.7248 84.00896-58.65472 129.20832-33.34144a93.0816 93.0816 0 0 1 34.44736 33.34144zM512 819.2a61.44 61.44 0 1 0 0-122.88 61.44 61.44 0 0 0 0 122.88z m0-512a72.31488 72.31488 0 0 0-71.76192 81.3056l25.72288 205.7216a46.40768 46.40768 0 0 0 92.07808 0l25.72288-205.74208A72.31488 72.31488 0 0 0 512 307.2z\" p-id=\"2750\">\n</path>\n</svg>";
 
-},{}],"dSIbz":[function(require,module,exports) {
+},{}],"9rzgA":[function(require,module,exports) {
 module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg t=\"1655876154826\" class=\"icon\" viewBox=\"0 0 1024 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"22\" height=\"22\">\n<path d=\"M571.733333 512l268.8-268.8c17.066667-17.066667 17.066667-42.666667 0-59.733333-17.066667-17.066667-42.666667-17.066667-59.733333 0L512 452.266667 243.2 183.466667c-17.066667-17.066667-42.666667-17.066667-59.733333 0-17.066667 17.066667-17.066667 42.666667 0 59.733333L452.266667 512 183.466667 780.8c-17.066667 17.066667-17.066667 42.666667 0 59.733333 8.533333 8.533333 19.2 12.8 29.866666 12.8s21.333333-4.266667 29.866667-12.8L512 571.733333l268.8 268.8c8.533333 8.533333 19.2 12.8 29.866667 12.8s21.333333-4.266667 29.866666-12.8c17.066667-17.066667 17.066667-42.666667 0-59.733333L571.733333 512z\" p-id=\"2131\">\n</path>\n</svg>";
 
-},{}],"2G32R":[function(require,module,exports) {
+},{}],"foceu":[function(require,module,exports) {
 module.exports = "<svg width=\"18px\" height=\"18px\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\">\n    <g>\n        <path fill=\"#fff\" d=\"M16,1 L2,1 C1.447,1 1,1.447 1,2 L1,12 C1,12.553 1.447,13 2,13 L5,13 L5,11 L3,11 L3,3 L15,3 L15,11 L13,11 L13,13 L16,13 C16.553,13 17,12.553 17,12 L17,2 C17,1.447 16.553,1 16,1 L16,1 Z\"></path>\n        <polygon fill=\"#fff\" points=\"4 17 14 17 9 11\"></polygon>\n    </g>\n</svg>";
 
-},{}],"e5Aaq":[function(require,module,exports) {
+},{}],"i2oRN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _flip = require("./flip");
@@ -4492,7 +4492,7 @@ var _utils = require("../utils");
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option, controls, template: { $setting } } = art;
+        const { option , controls , template: { $setting  }  } = art;
         this.name = "setting";
         this.$parent = $setting;
         this.option = [];
@@ -4521,13 +4521,13 @@ class Setting extends (0, _componentDefault.default) {
             const item = option[index];
             item.$parentItem = parentItem;
             item.$parentList = parentList;
-            Setting.makeRecursion(item.selector ?? [], item, option);
+            Setting.makeRecursion(item.selector || [], item, option);
         }
         return option;
     }
     get defaultSettings() {
         const result = [];
-        const { option } = this.art;
+        const { option  } = this.art;
         if (option.playbackRate) result.push((0, _playbackRateDefault.default)(this.art));
         if (option.aspectRatio) result.push((0, _aspectRatioDefault.default)(this.art));
         if (option.flip) result.push((0, _flipDefault.default)(this.art));
@@ -4535,7 +4535,7 @@ class Setting extends (0, _componentDefault.default) {
         return result;
     }
     init() {
-        const { option } = this.art;
+        const { option  } = this.art;
         const mergeSettings = [
             ...this.defaultSettings,
             ...option.settings
@@ -4555,7 +4555,7 @@ class Setting extends (0, _componentDefault.default) {
             const item = option[index];
             if (item.name === name) return item;
             else {
-                const result = this.find(name, item.selector ?? []);
+                const result = this.find(name, item.selector || []);
                 if (result) return result;
             }
         }
@@ -4563,7 +4563,7 @@ class Setting extends (0, _componentDefault.default) {
     remove(name) {
         const item = this.find(name);
         (0, _error.errorHandle)(item, `Can't find [${name}] from the [setting]`);
-        const parent = item.$parentItem?.selector ?? this.option;
+        const parent = item.$parentItem?.selector || this.option;
         parent.splice(parent.indexOf(item), 1);
         this.option = Setting.makeRecursion(this.option);
         this.destroy();
@@ -4588,7 +4588,7 @@ class Setting extends (0, _componentDefault.default) {
         return this.option;
     }
     creatHeader(item) {
-        const { icons, proxy, constructor } = this.art;
+        const { icons , proxy , constructor  } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.setStyle)($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
         (0, _utils.addClass)($item, "art-setting-item");
@@ -4604,7 +4604,7 @@ class Setting extends (0, _componentDefault.default) {
         return $item;
     }
     creatItem(type, item) {
-        const { icons, proxy, constructor } = this.art;
+        const { icons , proxy , constructor  } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         (0, _utils.setStyle)($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
@@ -4617,10 +4617,10 @@ class Setting extends (0, _componentDefault.default) {
         switch(type){
             case "switch":
             case "range":
-                (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) ?? item.icon instanceof Element ? item.icon : icons.config);
+                (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 break;
             case "selector":
-                if (item.selector && item.selector.length) (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) ?? item.icon instanceof Element ? item.icon : icons.config);
+                if (item.selector && item.selector.length) (0, _utils.append)($icon, (0, _utils.isStringOrNumber)(item.icon) || item.icon instanceof Element ? item.icon : icons.config);
                 else (0, _utils.append)($icon, icons.check);
                 break;
             default:
@@ -4639,7 +4639,7 @@ class Setting extends (0, _componentDefault.default) {
         });
         const $html = (0, _utils.createElement)("div");
         (0, _utils.addClass)($html, "art-setting-item-left-text");
-        (0, _utils.append)($html, item.html ?? "");
+        (0, _utils.append)($html, item.html || "");
         (0, _utils.append)($left, $html);
         item.$html = $html;
         (0, _utils.def)(item, "html", {
@@ -4653,7 +4653,7 @@ class Setting extends (0, _componentDefault.default) {
         });
         const $tooltip = (0, _utils.createElement)("div");
         (0, _utils.addClass)($tooltip, "art-setting-item-right-tooltip");
-        (0, _utils.append)($tooltip, item.tooltip ?? "");
+        (0, _utils.append)($tooltip, item.tooltip || "");
         (0, _utils.append)($right, $tooltip);
         item.$tooltip = $tooltip;
         (0, _utils.def)(item, "tooltip", {
@@ -4698,10 +4698,10 @@ class Setting extends (0, _componentDefault.default) {
                     const $state = (0, _utils.createElement)("div");
                     (0, _utils.addClass)($state, "art-setting-item-right-icon");
                     const $range = (0, _utils.append)($state, '<input type="range">');
-                    $range.value = item.range[0] ?? 0;
-                    $range.min = item.range[1] ?? 0;
-                    $range.max = item.range[2] ?? 10;
-                    $range.step = item.range[3] ?? 1;
+                    $range.value = item.range[0] || 0;
+                    $range.min = item.range[1] || 0;
+                    $range.max = item.range[2] || 10;
+                    $range.step = item.range[3] || 1;
                     (0, _utils.addClass)($range, "art-setting-range");
                     (0, _utils.append)($right, $state);
                     item.$range = $range;
@@ -4779,11 +4779,11 @@ class Setting extends (0, _componentDefault.default) {
         return $item;
     }
     updateStyle(width) {
-        const { controls, constructor, template: { $player, $setting } } = this.art;
+        const { controls , constructor , template: { $player , $setting  }  } = this.art;
         if (controls.setting && !(0, _utils.isMobile)) {
-            const settingWidth = width ?? constructor.SETTING_WIDTH;
-            const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
-            const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
+            const settingWidth = width || constructor.SETTING_WIDTH;
+            const { left: controlLeft , width: controlWidth  } = controls.setting.getBoundingClientRect();
+            const { left: playerLeft , width: playerWidth  } = $player.getBoundingClientRect();
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
             if (settingLeft + settingWidth > playerWidth) {
                 (0, _utils.setStyle)($setting, "left", null);
@@ -4795,7 +4795,7 @@ class Setting extends (0, _componentDefault.default) {
         }
     }
     render(option, width) {
-        const { constructor } = this.art;
+        const { constructor  } = this.art;
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             (0, _utils.inverseClass)($panel, "art-current");
@@ -4805,7 +4805,7 @@ class Setting extends (0, _componentDefault.default) {
         } else {
             const $panel = (0, _utils.createElement)("div");
             (0, _utils.addClass)($panel, "art-setting-panel");
-            $panel.dataset.width = width ?? constructor.SETTING_WIDTH;
+            $panel.dataset.width = width || constructor.SETTING_WIDTH;
             $panel.dataset.height = option.length * constructor.SETTING_ITEM_HEIGHT;
             if (option[0] && option[0].$parentItem) {
                 (0, _utils.append)($panel, this.creatHeader(option[0]));
@@ -4829,13 +4829,12 @@ class Setting extends (0, _componentDefault.default) {
 }
 exports.default = Setting;
 
-},{"./flip":"7rVpZ","./aspectRatio":"9hfUt","./playbackRate":"8RIYy","./subtitleOffset":"aVPfi","../utils/component":"bgug2","../utils/error":"622b3","../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"7rVpZ":[function(require,module,exports) {
+},{"./flip":"cyEw6","./aspectRatio":"l7RGi","./playbackRate":"l9tWN","./subtitleOffset":"lQoyH","../utils/component":"1UWqI","../utils/error":"kCmly","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cyEw6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>flip);
 var _utils = require("../utils");
 function flip(art) {
-    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, FLIP } } = art;
+    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , FLIP  }  } = art;
     function update($panel, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = i18n.get((0, _utils.capitalize)(value));
         const $current = (0, _utils.queryAll)(".art-setting-item", $panel).find((item)=>item.dataset.value === value);
@@ -4867,14 +4866,14 @@ function flip(art) {
         }
     };
 }
+exports.default = flip;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"9hfUt":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"l7RGi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>aspectRatio);
 var _utils = require("../utils");
 function aspectRatio(art) {
-    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, ASPECT_RATIO } } = art;
+    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , ASPECT_RATIO  }  } = art;
     function getI18n(value) {
         return value === "default" ? i18n.get("Default") : value;
     }
@@ -4909,14 +4908,14 @@ function aspectRatio(art) {
         }
     };
 }
+exports.default = aspectRatio;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8RIYy":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"l9tWN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>playbackRate);
 var _utils = require("../utils");
 function playbackRate(art) {
-    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, PLAYBACK_RATE } } = art;
+    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , PLAYBACK_RATE  }  } = art;
     function getI18n(value) {
         return value === 1.0 ? i18n.get("Normal") : value.toFixed(1);
     }
@@ -4951,13 +4950,13 @@ function playbackRate(art) {
         }
     };
 }
+exports.default = playbackRate;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aVPfi":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lQoyH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>subtitleOffset);
 function subtitleOffset(art) {
-    const { i18n, icons, constructor } = art;
+    const { i18n , icons , constructor  } = art;
     return {
         width: constructor.SETTING_ITEM_WIDTH,
         name: "subtitle-offset",
@@ -4976,8 +4975,9 @@ function subtitleOffset(art) {
         }
     };
 }
+exports.default = subtitleOffset;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"feFxw":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"9ruid":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Storage {
@@ -4987,7 +4987,7 @@ class Storage {
     }
     get(key) {
         try {
-            const storage = JSON.parse(window.localStorage.getItem(this.name)) ?? {};
+            const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
             return key ? storage[key] : storage;
         } catch (error) {
             return key ? this.settings[key] : this.settings;
@@ -5022,7 +5022,7 @@ class Storage {
 }
 exports.default = Storage;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"h1hfO":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"7Fd4c":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -5040,7 +5040,7 @@ class Plugins {
     constructor(art){
         this.art = art;
         this.id = 0;
-        const { option } = art;
+        const { option  } = art;
         if (option.miniProgressBar && !option.isLive) this.add((0, _miniProgressBarDefault.default));
         if (option.lock && (0, _utils.isMobile)) this.add((0, _lockDefault.default));
         if (option.autoPlayback && !option.isLive) this.add((0, _autoPlaybackDefault.default));
@@ -5051,7 +5051,7 @@ class Plugins {
     add(plugin) {
         this.id += 1;
         const result = plugin.call(this.art, this.art);
-        const pluginName = (result && result.name) ?? plugin.name ?? `plugin${this.id}`;
+        const pluginName = result && result.name || plugin.name || `plugin${this.id}`;
         (0, _utils.errorHandle)(!(0, _utils.has)(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
         (0, _utils.def)(this, pluginName, {
             value: result
@@ -5061,10 +5061,9 @@ class Plugins {
 }
 exports.default = Plugins;
 
-},{"../utils":"jmgNb","./miniProgressBar":"dMA6v","./autoOrientation":"aROGj","./autoPlayback":"kQ2fc","./fastForward":"fgbhT","./lock":"j2mDF","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dMA6v":[function(require,module,exports) {
+},{"../utils":"euhMG","./miniProgressBar":"3al9F","./autoOrientation":"ocofD","./autoPlayback":"6aLII","./fastForward":"i0uB0","./lock":"cuQyc","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"3al9F":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>miniProgressBar);
 function miniProgressBar(art) {
     art.on("ready", ()=>{
         art.layers.add({
@@ -5089,19 +5088,19 @@ function miniProgressBar(art) {
         name: "mini-progress-bar"
     };
 }
+exports.default = miniProgressBar;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"aROGj":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ocofD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>autoOrientation);
 var _utils = require("../utils");
 function autoOrientation(art) {
-    const { constructor, template: { $player, $video } } = art;
+    const { constructor , template: { $player , $video  }  } = art;
     art.on("fullscreenWeb", (state)=>{
         if (state) {
-            const { videoWidth, videoHeight } = $video;
-            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
-            if ((videoWidth > videoHeight && viewWidth < viewHeight) ?? (videoWidth < videoHeight && viewWidth > viewHeight)) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
+            const { videoWidth , videoHeight  } = $video;
+            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
             setTimeout(()=>{
                 (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
                 (0, _utils.setStyle)($player, "height", `${viewWidth}px`);
@@ -5120,9 +5119,9 @@ function autoOrientation(art) {
     art.on("fullscreen", async (state)=>{
         const lastOrientation = screen.orientation.type;
         if (state) {
-            const { videoWidth, videoHeight } = $video;
-            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
-            if ((videoWidth > videoHeight && viewWidth < viewHeight) ?? (videoWidth < videoHeight && viewWidth > viewHeight)) {
+            const { videoWidth , videoHeight  } = $video;
+            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
                 const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
                 await screen.orientation.lock(oppositeOrientation);
                 (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
@@ -5139,14 +5138,14 @@ function autoOrientation(art) {
         }
     };
 }
+exports.default = autoOrientation;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"kQ2fc":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6aLII":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>autoPlayback);
 var _utils = require("../utils");
 function autoPlayback(art) {
-    const { i18n, icons, storage, constructor, proxy, template: { $poster } } = art;
+    const { i18n , icons , storage , constructor , proxy , template: { $poster  }  } = art;
     const $autoPlayback = art.layers.add({
         name: "auto-playback",
         html: `
@@ -5160,16 +5159,16 @@ function autoPlayback(art) {
     const $close = (0, _utils.query)(".art-auto-playback-close", $autoPlayback);
     art.on("video:timeupdate", ()=>{
         if (art.playing) {
-            const times = storage.get("times") ?? {};
+            const times = storage.get("times") || {};
             const keys = Object.keys(times);
             if (keys.length > constructor.AUTO_PLAYBACK_MAX) delete times[keys[0]];
-            times[art.option.id ?? art.option.url] = art.currentTime;
+            times[art.option.id || art.option.url] = art.currentTime;
             storage.set("times", times);
         }
     });
     art.on("ready", ()=>{
-        const times = storage.get("times") ?? {};
-        const currentTime = times[art.option.id ?? art.option.url];
+        const times = storage.get("times") || {};
+        const currentTime = times[art.option.id || art.option.url];
         if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
             (0, _utils.append)($close, icons.close);
             (0, _utils.setStyle)($autoPlayback, "display", "flex");
@@ -5194,27 +5193,27 @@ function autoPlayback(art) {
     return {
         name: "auto-playback",
         get times () {
-            return storage.get("times") ?? {};
+            return storage.get("times") || {};
         },
         clear () {
             return storage.del("times");
         },
         delete (id) {
-            const times = storage.get("times") ?? {};
+            const times = storage.get("times") || {};
             delete times[id];
             storage.set("times", times);
             return times;
         }
     };
 }
+exports.default = autoPlayback;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"fgbhT":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"i0uB0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>fastForward);
 var _utils = require("../utils");
 function fastForward(art) {
-    const { constructor, proxy, template: { $player, $video } } = art;
+    const { constructor , proxy , template: { $player , $video  }  } = art;
     let timer = null;
     let isPress = false;
     let lastPlaybackRate = 1;
@@ -5244,14 +5243,14 @@ function fastForward(art) {
         }
     };
 }
+exports.default = fastForward;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"j2mDF":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cuQyc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>lock);
 var _utils = require("../utils");
 function lock(art) {
-    const { layers, icons, template: { $player } } = art;
+    const { layers , icons , template: { $player  }  } = art;
     layers.add({
         name: "lock",
         mounted ($el) {
@@ -5287,7 +5286,8 @@ function lock(art) {
         }
     };
 }
+exports.default = lock;
 
-},{"../utils":"jmgNb","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["eFv8l"], "eFv8l", "parcelRequire4dc0")
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}]},["gEVO5"], "gEVO5", "parcelRequireb749")
 
 //# sourceMappingURL=index.js.map

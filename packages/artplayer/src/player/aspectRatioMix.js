@@ -9,7 +9,7 @@ export default function aspectRatioMix(art) {
 
     def(art, 'aspectRatio', {
         get() {
-            return $player.dataset.aspectRatio ?? 'default';
+            return $player.dataset.aspectRatio || 'default';
         },
         set(ratio) {
             if (!ratio) ratio = 'default';

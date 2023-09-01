@@ -9,7 +9,7 @@ export default function volumeMix(art) {
     } = art;
 
     def(art, 'volume', {
-        get: () => $video.volume ?? 0,
+        get: () => $video.volume || 0,
         set: (percentage) => {
             $video.volume = clamp(percentage, 0, 1);
             notice.show = `${i18n.get('Volume')}: ${parseInt($video.volume * 100, 10)}`;

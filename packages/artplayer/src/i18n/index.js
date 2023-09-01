@@ -16,11 +16,11 @@ export default class I18n {
 
     init() {
         const lang = this.art.option.lang.toLowerCase();
-        this.language = this.languages[lang] ?? {};
+        this.language = this.languages[lang] || {};
     }
 
     get(key) {
-        return this.language[key] ?? key;
+        return this.language[key] || key;
     }
 
     update(value) {

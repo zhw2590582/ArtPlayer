@@ -29,6 +29,6 @@ export function escape(str) {
                 '>': '&gt;',
                 "'": '&#39;',
                 '"': '&quot;',
-            }[tag] ?? tag),
+            })[tag] || tag,
     );
 }
