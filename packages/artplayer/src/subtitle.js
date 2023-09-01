@@ -64,7 +64,7 @@ export default class Subtitle extends Component {
             if (this.art.option.subtitle.escape) {
                 $subtitle.innerHTML = this.activeCue.text
                     .split(/\r?\n/)
-                    .map((item) => `<p>${escape(item)}</p>`)
+                    .map((item) => `<div class="art-subtitle-line">${escape(item)}</div>`)
                     .join('');
             } else {
                 $subtitle.innerHTML = this.activeCue.text;

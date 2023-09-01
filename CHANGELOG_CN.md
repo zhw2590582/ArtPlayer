@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   添加 `muted` 事件，当静音的状态变化时触发
 -   添加 `Artplayer.LOG_VERSION` 全局配置，设置是否打印播放器版本，默认为 `true`
 -   添加 `Artplayer.USE_RAF` 全局配置，设置是否使用 `requestAnimationFrame` ，默认为 `false`，目前主要用于进度条的平滑效果
+-   移除默认样式 `margin:0;padding:0;`，因为容易与第三方库起样式冲突，导致难以覆写
+-   字幕行从 `p` 标签改为 `div` 标签，并且添加类名 `art-subtitle-line`
 
 ## [5.0.9] - 2023-5-14
 
