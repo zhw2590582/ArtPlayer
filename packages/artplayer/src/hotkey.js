@@ -39,6 +39,14 @@ export default class Hotkey {
             this.art.volume -= constructor.VOLUME_STEP;
         });
 
+        this.add(65, () => {
+            this.art.aspectRatio =
+                constructor.ASPECT_RATIO[
+                    (constructor.ASPECT_RATIO.findIndex((val) => val === this.art.aspectRatio) + 1) %
+                        constructor.ASPECT_RATIO.length
+                ];
+        });
+
         proxy(window, 'keydown', (event) => {
             if (this.art.isFocus) {
                 const tag = document.activeElement.tagName.toUpperCase();

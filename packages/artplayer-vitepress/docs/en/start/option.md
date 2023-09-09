@@ -422,6 +422,7 @@ var art = new Artplayer({
 | `←`     | Fast forward      |
 | `→`     | Fast rewind       |
 | `space` | Toggle play/pause |
+| `a`     | Toggle b/w aspect ratios |
 
 :::warning Tip
 
