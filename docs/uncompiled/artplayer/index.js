@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-09-01 21:13:37";
+        return "2023-09-10 11:17:51";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -399,7 +399,9 @@ Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 Artplayer.LOG_VERSION = true;
 Artplayer.USE_RAF = false;
 if (typeof document !== "undefined") {
-    if (!document.getElementById("artplayer-style")) {
+    const $style = document.getElementById("artplayer-style");
+    if ($style) $style.textContent = (0, _indexLessDefault.default);
+    else {
         const $style = _utils.createElement("style");
         $style.id = "artplayer-style";
         $style.textContent = (0, _indexLessDefault.default);

@@ -245,7 +245,10 @@ Artplayer.LOG_VERSION = true;
 Artplayer.USE_RAF = false;
 
 if (typeof document !== 'undefined') {
-    if (!document.getElementById('artplayer-style')) {
+    const $style = document.getElementById('artplayer-style');
+    if ($style) {
+        $style.textContent = style;
+    } else {
         const $style = utils.createElement('style');
         $style.id = 'artplayer-style';
         $style.textContent = style;
