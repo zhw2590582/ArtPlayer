@@ -39,7 +39,7 @@
         "@parcel/optimizer-data-url": "2.8.3",
         "@parcel/reporter-cli": "2.8.3",
         "@parcel/transformer-inline-string": "2.8.3",
-        "@parcel/transformer-less": "2.8.3",
+        "@parcel/transformer-less": "2.10.0",
         "cpy": "^10.1.0",
         "cross-env": "^7.0.3",
         "cross-spawn": "^7.0.3",
