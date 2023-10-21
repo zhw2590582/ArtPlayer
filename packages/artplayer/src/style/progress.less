@@ -3,6 +3,7 @@
         position: relative;
         z-index: 0;
         pointer-events: auto;
+        padding-bottom: var(--art-bottom-gap);
 
         .art-control-progress {
             position: relative;
@@ -104,7 +105,7 @@
         .art-control-thumbnails {
             display: none;
             position: absolute;
-            bottom: 10px;
+            bottom: calc(var(--art-bottom-gap) + 10px);
             left: 0;
             border-radius: var(--art-border-radius);
             pointer-events: none;
