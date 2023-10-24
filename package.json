@@ -35,7 +35,7 @@
         "@babel/eslint-parser": "^7.22.11",
         "@babel/preset-react": "^7.22.5",
         "@parcel/config-default": "2.8.3",
-        "@parcel/core": "2.8.3",
+        "@parcel/core": "2.10.1",
         "@parcel/optimizer-data-url": "2.8.3",
         "@parcel/reporter-cli": "2.8.3",
         "@parcel/transformer-inline-string": "2.8.3",
