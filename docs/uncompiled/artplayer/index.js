@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-10-24 22:17:28";
+        return "2023-10-24 23:39:20";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2753,14 +2753,13 @@ class Control extends (0, _componentDefault.default) {
         super(art);
         this.name = "control";
         this.timer = Date.now();
-        const { proxy , constructor , template: { $video  }  } = art;
-        proxy($video, [
-            "click",
-            "mousemove"
-        ], (event)=>{
-            if (0, _utils.isMobile) {
-                if (event.type === "click") this.show = !this.show;
-            } else this.show = true;
+        const { constructor  } = art;
+        art.on("mousemove", ()=>{
+            if (!(0, _utils.isMobile)) this.show = true;
+        });
+        art.on("click", ()=>{
+            if (0, _utils.isMobile) this.toggle();
+            else this.show = true;
         });
         art.on("video:timeupdate", ()=>{
             if (!art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) this.show = false;
@@ -2781,6 +2780,9 @@ class Control extends (0, _componentDefault.default) {
     }
     get show() {
         return super.show;
+    }
+    toggle() {
+        this.show = !this.show;
     }
     init() {
         const { option  } = this.art;

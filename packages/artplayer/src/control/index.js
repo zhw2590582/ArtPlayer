@@ -20,17 +20,17 @@ export default class Control extends Component {
         this.name = 'control';
         this.timer = Date.now();
 
-        const {
-            proxy,
-            constructor,
-            template: { $video },
-        } = art;
+        const { constructor } = art;
 
-        proxy($video, ['click', 'mousemove'], (event) => {
+        art.on('mousemove', () => {
+            if (!isMobile) {
+                this.show = true;
+            }
+        });
+
+        art.on('click', () => {
             if (isMobile) {
-                if (event.type === 'click') {
-                    this.show = !this.show;
-                }
+                this.toggle();
             } else {
                 this.show = true;
             }
@@ -62,6 +62,10 @@ export default class Control extends Component {
 
     get show() {
         return super.show;
+    }
+
+    toggle() {
+        this.show = !this.show;
     }
 
     init() {
