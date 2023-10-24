@@ -18,31 +18,50 @@ export default class Control extends Component {
         super(art);
 
         this.name = 'control';
+        this.timer = Date.now();
 
         const {
             proxy,
             constructor,
-            template: { $player },
+            template: { $video },
         } = art;
 
-        let activeTime = Date.now();
-
-        proxy($player, ['click', 'mousemove', 'touchstart', 'touchmove'], () => {
-            this.show = true;
-            removeClass($player, 'art-hide-cursor');
-            addClass($player, 'art-hover');
-            activeTime = Date.now();
+        proxy($video, ['click', 'mousemove'], (event) => {
+            if (isMobile) {
+                if (event.type === 'click') {
+                    this.show = !this.show;
+                }
+            } else {
+                this.show = true;
+            }
         });
 
         art.on('video:timeupdate', () => {
-            if (!art.isInput && art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
+            if (!art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) {
                 this.show = false;
-                addClass($player, 'art-hide-cursor');
-                removeClass($player, 'art-hover');
             }
         });
 
         this.init();
+    }
+
+    set show(state) {
+        const { $player } = this.art.template;
+
+        if (state) {
+            removeClass($player, 'art-hide-cursor');
+            addClass($player, 'art-hover');
+            this.timer = Date.now();
+        } else {
+            addClass($player, 'art-hide-cursor');
+            removeClass($player, 'art-hover');
+        }
+
+        super.show = state;
+    }
+
+    get show() {
+        return super.show;
     }
 
     init() {

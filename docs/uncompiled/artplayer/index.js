@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-10-21 12:02:42";
+        return "2023-10-24 22:17:28";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2752,27 +2752,35 @@ class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "control";
-        const { proxy , constructor , template: { $player  }  } = art;
-        let activeTime = Date.now();
-        proxy($player, [
+        this.timer = Date.now();
+        const { proxy , constructor , template: { $video  }  } = art;
+        proxy($video, [
             "click",
-            "mousemove",
-            "touchstart",
-            "touchmove"
-        ], ()=>{
-            this.show = true;
-            (0, _utils.removeClass)($player, "art-hide-cursor");
-            (0, _utils.addClass)($player, "art-hover");
-            activeTime = Date.now();
+            "mousemove"
+        ], (event)=>{
+            if (0, _utils.isMobile) {
+                if (event.type === "click") this.show = !this.show;
+            } else this.show = true;
         });
         art.on("video:timeupdate", ()=>{
-            if (!art.isInput && art.playing && this.show && Date.now() - activeTime >= constructor.CONTROL_HIDE_TIME) {
-                this.show = false;
-                (0, _utils.addClass)($player, "art-hide-cursor");
-                (0, _utils.removeClass)($player, "art-hover");
-            }
+            if (!art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) this.show = false;
         });
         this.init();
+    }
+    set show(state) {
+        const { $player  } = this.art.template;
+        if (state) {
+            (0, _utils.removeClass)($player, "art-hide-cursor");
+            (0, _utils.addClass)($player, "art-hover");
+            this.timer = Date.now();
+        } else {
+            (0, _utils.addClass)($player, "art-hide-cursor");
+            (0, _utils.removeClass)($player, "art-hover");
+        }
+        super.show = state;
+    }
+    get show() {
+        return super.show;
     }
     init() {
         const { option  } = this.art;
