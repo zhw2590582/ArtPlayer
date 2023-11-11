@@ -47,7 +47,7 @@
                         .art-full();
                         right: auto;
                         pointer-events: auto;
-                        width: var(--art-highlight-width);
+                        width: var(--art-highlight-width) !important;
                         transform: translateX(calc(var(--art-highlight-width) / -2));
                         background-color: var(--art-highlight-color);
                     }
@@ -111,20 +111,6 @@
             pointer-events: none;
             background-color: var(--art-widget-background);
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.2);
-        }
-
-        .art-control-loop {
-            .art-full();
-            display: none;
-            pointer-events: none;
-
-            .art-loop-point {
-                .art-full();
-                left: 0%;
-                width: var(--art-loop-width);
-                background-color: var(--art-loop-color);
-                transform: translateX(calc(var(--art-loop-width) / -2)) scaleY(1.5);
-            }
         }
     }
 

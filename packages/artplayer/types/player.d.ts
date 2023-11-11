@@ -31,8 +31,6 @@ export declare class Player {
     set fullscreenWebToggle(state: boolean);
     get loaded(): number;
     get loadedTime(): number;
-    get loop(): number[];
-    set loop(value: number[]);
     get mini(): boolean;
     set mini(state: boolean);
     get pip(): boolean;

@@ -21,7 +21,6 @@ import autoSizeMix from './autoSizeMix';
 import rectMix from './rectMix';
 import flipMix from './flipMix';
 import miniMix from './miniMix';
-import loopMix from './loopMix';
 import posterMix from './posterMix';
 import autoHeightMix from './autoHeightMix';
 import cssVarMix from './cssVarMix';
@@ -59,7 +58,6 @@ export default class Player {
         rectMix(art);
         flipMix(art);
         miniMix(art);
-        loopMix(art);
         posterMix(art);
         autoHeightMix(art);
         cssVarMix(art);

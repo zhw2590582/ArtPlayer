@@ -10,7 +10,6 @@ export type CssVar = {
     '--art-progress-color': string;
     '--art-hover-color': string;
     '--art-loaded-color': string;
-    '--art-loop-color': string;
     '--art-state-size': string;
     '--art-state-opacity': number;
     '--art-bottom-height': string;
@@ -18,7 +17,6 @@ export type CssVar = {
     '--art-bottom-gap': string;
     '--art-highlight-width': string;
     '--art-highlight-color': string;
-    '--art-loop-width': string;
     '--art-control-height': string;
     '--art-control-opacity': number;
     '--art-control-icon-size': string;

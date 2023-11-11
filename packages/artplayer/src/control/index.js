@@ -10,7 +10,6 @@ import volume from './volume';
 import setting from './setting';
 import thumbnails from './thumbnails';
 import screenshot from './screenshot';
-import loop from './loop';
 import airplay from './airplay';
 
 export default class Control extends Component {
@@ -21,6 +20,7 @@ export default class Control extends Component {
         this.timer = Date.now();
 
         const { constructor } = art;
+        const { $player } = this.art.template;
 
         art.on('mousemove', () => {
             if (!isMobile) {
@@ -42,30 +42,18 @@ export default class Control extends Component {
             }
         });
 
+        art.on('control', (state) => {
+            if (state) {
+                removeClass($player, 'art-hide-cursor');
+                addClass($player, 'art-hover');
+                this.timer = Date.now();
+            } else {
+                addClass($player, 'art-hide-cursor');
+                removeClass($player, 'art-hover');
+            }
+        });
+
         this.init();
-    }
-
-    set show(state) {
-        const { $player } = this.art.template;
-
-        if (state) {
-            removeClass($player, 'art-hide-cursor');
-            addClass($player, 'art-hover');
-            this.timer = Date.now();
-        } else {
-            addClass($player, 'art-hide-cursor');
-            removeClass($player, 'art-hover');
-        }
-
-        super.show = state;
-    }
-
-    get show() {
-        return super.show;
-    }
-
-    toggle() {
-        this.show = !this.show;
     }
 
     init() {
@@ -90,14 +78,6 @@ export default class Control extends Component {
                 }),
             );
         }
-
-        this.add(
-            loop({
-                name: 'loop',
-                position: 'top',
-                index: 30,
-            }),
-        );
 
         this.add(
             playAndPause({

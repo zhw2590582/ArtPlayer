@@ -62,6 +62,5 @@ export type Events = {
     seek: [currentTime: number];
     subtitleOffset: [offset: number];
     restart: [url: string];
-    loop: [start?: number, end?: number];
     muted: [state: boolean];
 };
