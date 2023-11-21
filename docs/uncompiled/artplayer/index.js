@@ -318,6 +318,7 @@ class Artplayer extends (0, _emitterDefault.default) {
                 url: "",
                 type: "",
                 style: {},
+                name: "",
                 escape: true,
                 encoding: "utf-8",
                 onVttLoad: (vtt)=>vtt
@@ -1073,6 +1074,7 @@ exports.default = {
     },
     subtitle: {
         url: s,
+        name: s,
         type: s,
         style: o,
         escape: b,
@@ -3748,13 +3750,13 @@ class Subtitle extends (0, _componentDefault.default) {
         return subUrl;
     }
     createTrack(kind, url) {
-        const { template, proxy } = this.art;
+        const { template, proxy, option } = this.art;
         const { $video, $track } = template;
         const $newTrack = (0, _utils.createElement)("track");
         $newTrack.default = true;
         $newTrack.kind = kind;
         $newTrack.src = url;
-        $newTrack.label = "Artplayer";
+        $newTrack.label = option.subtitle.name || "Artplayer";
         $newTrack.track.mode = "hidden";
         this.eventDestroy();
         (0, _utils.remove)($track);
@@ -4508,7 +4510,7 @@ class Setting extends (0, _componentDefault.default) {
     remove(name) {
         const item = this.find(name);
         (0, _error.errorHandle)(item, `Can't find [${name}] from the [setting]`);
-        const parent = item.$parentItem?.selector || this.option;
+        const parent = item.$parentItem ? item.$parentItem.selector : this.option;
         parent.splice(parent.indexOf(item), 1);
         this.option = Setting.makeRecursion(this.option);
         this.destroy();

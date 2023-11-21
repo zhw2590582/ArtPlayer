@@ -174,6 +174,7 @@ export default class Artplayer extends Emitter {
                 url: '',
                 type: '',
                 style: {},
+                name: '',
                 escape: true,
                 encoding: 'utf-8',
                 onVttLoad: (vtt) => vtt,

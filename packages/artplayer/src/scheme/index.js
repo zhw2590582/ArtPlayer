@@ -106,6 +106,7 @@ export default {
     },
     subtitle: {
         url: s,
+        name: s,
         type: s,
         style: o,
         escape: b,

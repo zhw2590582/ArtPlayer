@@ -84,14 +84,14 @@ export default class Subtitle extends Component {
     }
 
     createTrack(kind, url) {
-        const { template, proxy } = this.art;
+        const { template, proxy, option } = this.art;
         const { $video, $track } = template;
 
         const $newTrack = createElement('track');
         $newTrack.default = true;
         $newTrack.kind = kind;
         $newTrack.src = url;
-        $newTrack.label = 'Artplayer';
+        $newTrack.label = option.subtitle.name || 'Artplayer';
         $newTrack.track.mode = 'hidden';
 
         this.eventDestroy();

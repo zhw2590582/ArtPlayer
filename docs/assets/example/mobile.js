@@ -24,6 +24,7 @@ var art = new Artplayer({
         preload: "metadata"
     },
     subtitle: {
+        name: '中日双语',
         url: '/assets/sample/subtitle.srt',
         style: {
             color: '#48aff0',
