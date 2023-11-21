@@ -883,6 +883,7 @@ var art = new Artplayer({
 
 | 属性        | 类型       | 描述                                |
 | ----------- | ---------- | ----------------------------------- |
+| `name`       | `String`   | 字幕名字                            |
 | `url`       | `String`   | 字幕地址                            |
 | `type`      | `String`   | 字幕类型，可选 `vtt`, `srt`, `ass`  |
 | `style`     | `Object`   | 字幕样式                            |

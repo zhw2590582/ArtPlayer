@@ -107,23 +107,6 @@ art.on('restart', (url) => {
 });
 ```
 
-## `loop`
-
-当出现区间循环时触发
-
-<div className="run-code">▶ Run Code</div>
-
-```js{6}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-
-art.on('loop', (start, end) => {
-    console.info('loop', start, end);
-});
-```
-
 ## `pause`
 
 当播放器暂停时触发
