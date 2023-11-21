@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   移除默认样式 `margin:0;padding:0;`，因为容易与第三方库起样式冲突，导致难以覆写
 -   字幕行从 `p` 标签改为 `div` 标签，并且添加类名 `art-subtitle-line`
 -   在移动端，点击视频会切换控制栏的显示与隐藏
+-   由于功能不常用，删除 `art.loop` 区间播放功能
 
 ## [5.0.9] - 2023-5-14
 

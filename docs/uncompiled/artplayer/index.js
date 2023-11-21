@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-11-11 10:04:02";
+        return "2023-11-21 10:50:03";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3754,6 +3754,7 @@ class Subtitle extends (0, _componentDefault.default) {
         $newTrack.default = true;
         $newTrack.kind = kind;
         $newTrack.src = url;
+        $newTrack.label = "Artplayer";
         $newTrack.track.mode = "hidden";
         this.eventDestroy();
         (0, _utils.remove)($track);

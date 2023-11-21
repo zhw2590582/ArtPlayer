@@ -91,6 +91,7 @@ export default class Subtitle extends Component {
         $newTrack.default = true;
         $newTrack.kind = kind;
         $newTrack.src = url;
+        $newTrack.label = 'Artplayer';
         $newTrack.track.mode = 'hidden';
 
         this.eventDestroy();
