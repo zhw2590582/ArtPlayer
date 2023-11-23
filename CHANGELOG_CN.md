@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   在移动端，点击视频会切换控制栏的显示与隐藏
 -   由于功能不常用，删除 `art.loop` 区间播放功能
 -   字幕轨添加 `label` 属性，用于在移动设备上显示字幕名字
--   添加 `unescape` 和 `isBrowser` 工具函数
+-   添加 `unescape`, `isBrowser`, `setStyleText` 工具函数
 -   添加 `artplayerPluginMultipleSubtitles` 插件，用于显示合并后的字幕文件
 
 ## [5.0.9] - 2023-5-14

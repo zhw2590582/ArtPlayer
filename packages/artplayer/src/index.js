@@ -248,15 +248,7 @@ Artplayer.USE_RAF = false;
 if (utils.isBrowser) {
     window['Artplayer'] = Artplayer;
 
-    const $style = document.getElementById('artplayer-style');
-    if ($style) {
-        $style.textContent = style;
-    } else {
-        const $style = utils.createElement('style');
-        $style.id = 'artplayer-style';
-        $style.textContent = style;
-        document.head.appendChild($style);
-    }
+    utils.setStyleText('artplayer-style', style);
 
     setTimeout(() => {
         if (Artplayer.LOG_VERSION) {

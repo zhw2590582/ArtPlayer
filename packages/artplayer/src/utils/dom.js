@@ -95,3 +95,15 @@ export function getIcon(key = '', html = '') {
     append(icon, html);
     return icon;
 }
+
+export function setStyleText(id, style) {
+    const $style = document.getElementById(id);
+    if ($style) {
+        $style.textContent = style;
+    } else {
+        const $style = createElement('style');
+        $style.id = id;
+        $style.textContent = style;
+        document.head.appendChild($style);
+    }
+}
