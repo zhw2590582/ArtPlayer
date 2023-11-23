@@ -158,8 +158,8 @@ function unescape(str) {
     const reg = new RegExp(`(${Object.keys(map).join("|")})`, "g");
     return str.replace(reg, (tag)=>map[tag] || tag);
 }
-async function loadSubtitleAsVtt(option) {
-    const { getExt, srtToVtt, assToVtt } = Artplayer.utils;
+async function loadSubtitleAsVtt(option, art) {
+    const { getExt, srtToVtt, assToVtt } = art.constructor.utils;
     const response = await fetch(option.url);
     const buffer = await response.arrayBuffer();
     const decoder = new TextDecoder(option.encoding || "utf-8");
@@ -175,13 +175,12 @@ async function loadSubtitleAsVtt(option) {
             return "";
     }
 }
-function mergeVtts(vtts, subtitles) {
+function mergeTrees(trees, subtitles) {
     const parser = new (0, _parser.WebVTTParser)();
-    const seri = new (0, _parser.WebVTTSerializer)();
     const result = parser.parse("", "metadata");
-    for(let i = 0; i < vtts.length; i++){
+    for(let i = 0; i < trees.length; i++){
+        const tree = trees[i];
         const option = subtitles[i];
-        const tree = parser.parse(vtts[i], "metadata");
         for(let j = 0; j < tree.cues.length; j++){
             const cue = tree.cues[j];
             for(let k = 0; k < cue.tree.children.length; k++){
@@ -192,66 +191,44 @@ function mergeVtts(vtts, subtitles) {
         if (result.cues.length === 0) result.cues = tree.cues;
         else for(let l = 0; l < result.cues.length; l++)result.cues[l].tree.children.push(...tree.cues[l]?.tree?.children || []);
     }
-    return seri.serialize(result.cues);
+    return result;
 }
-function artplayerPluginMultipleSubtitles({ subtitles }) {
+function artplayerPluginMultipleSubtitles({ subtitles, onMerge = ()=>null }) {
     return async (art)=>{
-        const vtts = await Promise.all(subtitles.map(loadSubtitleAsVtt));
-        const vtt = mergeVtts(vtts, subtitles);
-        const url = URL.createObjectURL(new Blob([
-            vtt
-        ], {
-            type: "text/vtt"
-        }));
-        art.option.subtitle.escape = false;
-        art.subtitle.init({
-            ...art.option.subtitle,
-            url,
-            type: "vtt",
-            onVttLoad: unescape
-        });
+        const vtts = await Promise.all(subtitles.map((option)=>loadSubtitleAsVtt(option, art)));
+        const parser = new (0, _parser.WebVTTParser)();
+        const trees = vtts.map((vtt)=>parser.parse(vtt, "metadata"));
+        const seri = new (0, _parser.WebVTTSerializer)();
+        const tree = onMerge(trees, subtitles) || mergeTrees(trees, subtitles);
+        if (tree?.cues?.length) {
+            const vtt = seri.serialize(tree.cues);
+            const url = URL.createObjectURL(new Blob([
+                vtt
+            ], {
+                type: "text/vtt"
+            }));
+            art.option.subtitle.escape = false;
+            art.subtitle.init({
+                ...art.option.subtitle,
+                url,
+                type: "vtt",
+                onVttLoad: unescape
+            });
+        } else throw new Error("No subtitle found");
     };
 }
 artplayerPluginMultipleSubtitles.env = "development";
 artplayerPluginMultipleSubtitles.version = "1.0.0";
-artplayerPluginMultipleSubtitles.build = "2023-11-23 22:22:14";
+artplayerPluginMultipleSubtitles.build = "2023-11-24 00:15:21";
+artplayerPluginMultipleSubtitles.WebVTTParser = (0, _parser.WebVTTParser);
+artplayerPluginMultipleSubtitles.WebVTTSerializer = (0, _parser.WebVTTSerializer);
 if (typeof window !== "undefined") window["artplayerPluginMultipleSubtitles"] = artplayerPluginMultipleSubtitles;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","./parser":"eko7u"}],"5dUr6":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"eko7u":[function(require,module,exports) {
+},{"./parser":"eko7u","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"eko7u":[function(require,module,exports) {
 // Any copyright is dedicated to the Public Domain.
 // http://creativecommons.org/publicdomain/zero/1.0/
 // Not intended to be fast, but if you can make it faster, please help out!
-(function() {
+/* eslint-disable */ (function() {
     var defaultCueSettings = {
         direction: "horizontal",
         snapToLines: true,
@@ -325,6 +302,7 @@ exports.export = function(dest, destName, get) {
              Not part of the specification's parser as these would just be ignored. However,
              we want them to be conforming and not get "Cue identifier cannot be standalone".
            */ if (/^NOTE($|[ \t])/.test(cue.id)) {
+                        // .startsWith fails in Chrome
                         linePos++;
                         while(lines[linePos] != "" && lines[linePos] != undefined){
                             if (lines[linePos].indexOf("-->") != -1) err("Cannot have timestamp in a comment.");
@@ -506,12 +484,14 @@ exports.export = function(dest, destName, get) {
                     return;
                 }
                 if (setting == "vertical") {
+                    // writing direction
                     if (value != "rl" && value != "lr") {
                         err("Writing direction can only be set to 'rl' or 'rl'.");
                         continue;
                     }
                     cue.direction = value;
                 } else if (setting == "line") {
+                    // line position and optionally line alignment
                     if (/,/.test(value)) {
                         var comp = value.split(",");
                         value = comp[0];
@@ -562,6 +542,7 @@ exports.export = function(dest, destName, get) {
                     cue.linePosition = parseFloat(numVal);
                     if (parseFloat(numVal).toString() !== numVal) cue.nonSerializable = true;
                 } else if (setting == "position") {
+                    // text position and optional positionAlign
                     if (/,/.test(value)) {
                         var comp = value.split(",");
                         value = comp[0];
@@ -593,6 +574,7 @@ exports.export = function(dest, destName, get) {
                     }
                     cue.textPosition = parseFloat(numVal);
                 } else if (setting == "size") {
+                    // size
                     if (value[value.length - 1] != "%") {
                         err("Size must be a percentage.");
                         continue;
@@ -615,6 +597,7 @@ exports.export = function(dest, destName, get) {
                     }
                     cue.size = size;
                 } else if (setting == "align") {
+                    // alignment
                     var alignValues = [
                         "start",
                         "center",
@@ -725,13 +708,11 @@ exports.export = function(dest, destName, get) {
                     else if (name == "v") {
                         if (inScope("v")) err("<v> cannot be nested inside itself.");
                         attach(token);
-                        current.value = token[3] // annotation
-                        ;
+                        current.value = token[3]; // annotation
                         if (!token[3]) err("<v> requires an annotation.");
                     } else if (name == "lang") {
                         attach(token);
-                        current.value = token[3] // language
-                        ;
+                        current.value = token[3]; // language
                     } else err("Incorrect start tag.");
                 } else if (token[0] == "end tag") {
                     if (mode == "chapters") err("End tags not allowed in chapter title text.");
@@ -795,7 +776,8 @@ exports.export = function(dest, destName, get) {
                         if (m = buffer.match(/^&#(x?[0-9]+)$/)) // we prepend "0" so that x20 be interpreted as hexadecim (0x20)
                         result += String.fromCharCode("0" + m[1]);
                         else if (self.entities[buffer + c]) result += self.entities[buffer + c];
-                        else if (m = Object.keys(entities).find((n)=>buffer.startsWith(n))) result += self.entities[m] + buffer.slice(m.length) + c;
+                        else if (m = Object.keys(entities).find((n)=>buffer.startsWith(n))) // partial match
+                        result += self.entities[m] + buffer.slice(m.length) + c;
                         else {
                             err("Incorrect escape.");
                             result += buffer + ";";
@@ -891,8 +873,7 @@ exports.export = function(dest, destName, get) {
                             result
                         ];
                     } else result += c;
-                } else err("Never happens.") // The joke is it might.
-                ;
+                } else err("Never happens."); // The joke is it might.
                 // 8
                 pos++;
             }
@@ -956,6 +937,36 @@ exports.export = function(dest, destName, get) {
     if (typeof window !== "undefined") exportify(window);
     exportify(exports);
 })();
+
+},{}],"5dUr6":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["LGGZX"], "LGGZX", "parcelRequire4dc0")
 

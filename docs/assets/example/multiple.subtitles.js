@@ -12,11 +12,13 @@ var art = new Artplayer({
 					name: 'japanese',
 					url: '/assets/sample/subtitle.jp.srt',
 				}
-			]
+			],
+			onMerge(trees) {
+				console.log(trees)
+			}
 		})
 	]
 });
-
 
 // 自定义你自己的样式，请勿复制以下代码
 // Customize your own style, please do not copy the following code

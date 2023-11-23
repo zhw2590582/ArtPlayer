@@ -9,6 +9,7 @@ declare const artplayerPluginMultipleSubtitles: (option: {
         name?: string;
         type?: 'vtt' | 'srt' | 'ass';
         encoding?: string;
+        onParser?(...args: object[]): object;
     }[];
 }) => (art: Artplayer) => {
     name: 'artplayerPluginMultipleSubtitles';

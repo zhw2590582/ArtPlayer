@@ -33,14 +33,13 @@ async function loadSubtitleAsVtt(option, art) {
     }
 }
 
-function mergeVtts(vtts, subtitles) {
+function mergeTrees(trees, subtitles) {
     const parser = new WebVTTParser();
-    const seri = new WebVTTSerializer();
     const result = parser.parse('', 'metadata');
 
-    for (let i = 0; i < vtts.length; i++) {
+    for (let i = 0; i < trees.length; i++) {
+        const tree = trees[i];
         const option = subtitles[i];
-        const tree = parser.parse(vtts[i], 'metadata');
 
         for (let j = 0; j < tree.cues.length; j++) {
             const cue = tree.cues[j];
@@ -59,28 +58,37 @@ function mergeVtts(vtts, subtitles) {
         }
     }
 
-    return seri.serialize(result.cues);
+    return result;
 }
 
-export default function artplayerPluginMultipleSubtitles({ subtitles }) {
+export default function artplayerPluginMultipleSubtitles({ subtitles, onMerge = () => null }) {
     return async (art) => {
         const vtts = await Promise.all(subtitles.map((option) => loadSubtitleAsVtt(option, art)));
-        const vtt = mergeVtts(vtts, subtitles);
-        const url = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }));
-
-        art.option.subtitle.escape = false;
-
-        art.subtitle.init({
-            ...art.option.subtitle,
-            url,
-            type: 'vtt',
-            onVttLoad: unescape,
-        });
+        const parser = new WebVTTParser();
+        const trees = vtts.map((vtt) => parser.parse(vtt, 'metadata'));
+        const seri = new WebVTTSerializer();
+        const tree = onMerge(trees, subtitles) || mergeTrees(trees, subtitles);
+        if (tree?.cues?.length) {
+            const vtt = seri.serialize(tree.cues);
+            const url = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }));
+            art.option.subtitle.escape = false;
+            art.subtitle.init({
+                ...art.option.subtitle,
+                url,
+                type: 'vtt',
+                onVttLoad: unescape,
+            });
+        } else {
+            throw new Error('No subtitle found');
+        }
     };
 }
+
 artplayerPluginMultipleSubtitles.env = process.env.NODE_ENV;
 artplayerPluginMultipleSubtitles.version = process.env.APP_VER;
 artplayerPluginMultipleSubtitles.build = process.env.BUILD_DATE;
+artplayerPluginMultipleSubtitles.WebVTTParser = WebVTTParser;
+artplayerPluginMultipleSubtitles.WebVTTSerializer = WebVTTSerializer;
 
 if (typeof window !== 'undefined') {
     window['artplayerPluginMultipleSubtitles'] = artplayerPluginMultipleSubtitles;
