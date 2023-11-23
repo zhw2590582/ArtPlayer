@@ -32,3 +32,15 @@ export function escape(str) {
             })[tag] || tag,
     );
 }
+
+export function unescape(str) {
+    const map = {
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&#39;': "'",
+        '&quot;': '"',
+    };
+    const reg = new RegExp(`(${Object.keys(map).join('|')})`, 'g');
+    return str.replace(reg, (tag) => map[tag] || tag);
+}

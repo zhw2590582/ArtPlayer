@@ -661,36 +661,6 @@ art.on('ready', () => {
 });
 ```
 
-## `loop`
-
--   Type: `Setter/Getter`
--   Parameter: `Array`
-
-Set and obtain interval sequential playback in seconds
-
-<div className="run-code">▶ Run Code</div>
-
-```js{8}
-var art = new Artplayer({
-    container: '.artplayer-app',
-    url: '/assets/sample/video.mp4',
-});
-
-art.on('ready', () => {
-    console.info(art.loop);
-    art.loop = [5, 10];
-    console.info(art.loop);
-});
-```
-
-:::warning Tip
-
-To delete interval looping, just set `loop` to `[]`
-
-`art.loop` and `art.option.loop` aer two different things, please don't mix them up
-
-:::
-
 ## `autoHeight`
 
 -   Type: `Setter/Getter`
