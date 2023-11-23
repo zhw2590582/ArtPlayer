@@ -12,8 +12,8 @@ function unescape(str) {
     return str.replace(reg, (tag) => map[tag] || tag);
 }
 
-async function loadSubtitleAsVtt(option) {
-    const { getExt, srtToVtt, assToVtt } = Artplayer.utils;
+async function loadSubtitleAsVtt(option, art) {
+    const { getExt, srtToVtt, assToVtt } = art.constructor.utils;
     const response = await fetch(option.url);
     const buffer = await response.arrayBuffer();
     const decoder = new TextDecoder(option.encoding || 'utf-8');
@@ -64,7 +64,7 @@ function mergeVtts(vtts, subtitles) {
 
 export default function artplayerPluginMultipleSubtitles({ subtitles }) {
     return async (art) => {
-        const vtts = await Promise.all(subtitles.map(loadSubtitleAsVtt));
+        const vtts = await Promise.all(subtitles.map((option) => loadSubtitleAsVtt(option, art)));
         const vtt = mergeVtts(vtts, subtitles);
         const url = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }));
 
