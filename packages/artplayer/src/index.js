@@ -245,7 +245,9 @@ Artplayer.FULLSCREEN_WEB_IN_BODY = false;
 Artplayer.LOG_VERSION = true;
 Artplayer.USE_RAF = false;
 
-if (typeof document !== 'undefined') {
+if (utils.isBrowser) {
+    window['Artplayer'] = Artplayer;
+
     const $style = document.getElementById('artplayer-style');
     if ($style) {
         $style.textContent = style;
@@ -255,19 +257,15 @@ if (typeof document !== 'undefined') {
         $style.textContent = style;
         document.head.appendChild($style);
     }
-}
 
-if (typeof window !== 'undefined') {
-    window['Artplayer'] = Artplayer;
+    setTimeout(() => {
+        if (Artplayer.LOG_VERSION) {
+            console.log(
+                `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
+                'color: #fff; background: #5f5f5f',
+                'color: #fff; background: #4bc729',
+                '',
+            );
+        }
+    }, 100);
 }
-
-setTimeout(() => {
-    if (Artplayer.LOG_VERSION) {
-        console.log(
-            `%c ArtPlayer %c ${Artplayer.version} %c https://artplayer.org`,
-            'color: #fff; background: #5f5f5f',
-            'color: #fff; background: #4bc729',
-            '',
-        );
-    }
-});
