@@ -12,7 +12,7 @@ function unescape(str) {
     return str.replace(reg, (tag) => map[tag] || tag);
 }
 
-async function loadSubtitleAsVtt(option, art) {
+async function loadVtt(option, art) {
     const { getExt, srtToVtt, assToVtt } = art.constructor.utils;
     const response = await fetch(option.url);
     const buffer = await response.arrayBuffer();
@@ -61,14 +61,18 @@ function mergeTrees(trees, subtitles) {
     return result;
 }
 
+const all = '_ALL_';
 export default function artplayerPluginMultipleSubtitles({ subtitles, onMerge = () => null }) {
     return async (art) => {
-        const vtts = await Promise.all(subtitles.map((option) => loadSubtitleAsVtt(option, art)));
         const parser = new WebVTTParser();
-        const trees = vtts.map((vtt) => parser.parse(vtt, 'metadata'));
         const seri = new WebVTTSerializer();
+
+        const vtts = await Promise.all(subtitles.map((option) => loadVtt(option, art)));
+        const trees = vtts.map((vtt) => parser.parse(vtt, 'metadata'));
         const tree = onMerge(trees, subtitles) || mergeTrees(trees, subtitles);
-        if (tree?.cues?.length) {
+
+        function setTree(tree) {
+            if (!tree?.cues) return;
             const vtt = seri.serialize(tree.cues);
             const url = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }));
             art.option.subtitle.escape = false;
@@ -78,15 +82,39 @@ export default function artplayerPluginMultipleSubtitles({ subtitles, onMerge = 
                 type: 'vtt',
                 onVttLoad: unescape,
             });
-        } else {
-            throw new Error('No subtitle found');
         }
+
+        setTree(tree);
+        let _track = all;
+
+        return {
+            name: 'multipleSubtitles',
+            get track() {
+                return _track;
+            },
+            set track(name) {
+                if (name === all || name === '') {
+                    _track = all;
+                    setTree(tree);
+                } else {
+                    const index = subtitles.findIndex((item) => item.name === name);
+                    if (index === -1) {
+                        throw new Error(`The subtitle "${name}" is not found`);
+                    } else {
+                        _track = name;
+                        setTree(trees[index]);
+                    }
+                }
+            },
+        };
     };
 }
 
 artplayerPluginMultipleSubtitles.env = process.env.NODE_ENV;
 artplayerPluginMultipleSubtitles.version = process.env.APP_VER;
 artplayerPluginMultipleSubtitles.build = process.env.BUILD_DATE;
+
+artplayerPluginMultipleSubtitles.all = all;
 artplayerPluginMultipleSubtitles.WebVTTParser = WebVTTParser;
 artplayerPluginMultipleSubtitles.WebVTTSerializer = WebVTTSerializer;
 
