@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   插件函数改为支持异步返回
 -   当播放地址发生错误到达上限后，不会再主动销毁播放器
 -   分离语言文件，核心代码不再捆绑多国语言 [语言设置](https://artplayer.org/document/start/i18n.html)
 -   更新组件时，支持填写只更新的字段 [pull/549](https://github.com/zhw2590582/ArtPlayer/pull/549)
@@ -18,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   由于功能不常用，删除 `art.loop` 区间播放功能
 -   字幕轨添加 `label` 属性，用于在移动设备上显示字幕名字
 -   添加 `unescape`, `isBrowser`, `setStyleText` 工具函数
--   添加 `artplayerPluginMultipleSubtitles` 插件，用于显示合并后的字幕文件
+-   添加 `artplayerPluginMultipleSubtitles` 插件，用于显示合并后的字幕文件: [demo](https://www.artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles)
 
 ## [5.0.9] - 2023-5-14
 
