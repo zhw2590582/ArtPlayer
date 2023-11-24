@@ -69,7 +69,6 @@ const config = {
             { text: 'Iframe 控制', link: '/plugin/iframe' },
             { text: 'Hls 画质', link: '/plugin/hls-quality' },
             { text: 'Dash 画质', link: '/plugin/dash-quality' },
-            { text: '控制器皮肤', link: '/plugin/control-ui' },
           ]
         },
         {
@@ -122,7 +121,6 @@ const config = {
             { text: 'Iframe Control', link: '/en/plugin/iframe' },
             { text: 'Hls Quality', link: '/en/plugin/hls-quality' },
             { text: 'Dash Quality', link: '/en/plugin/dash-quality' },
-            { text: 'Control UI', link: '/en/plugin/control-ui' },
           ]
         },
         {

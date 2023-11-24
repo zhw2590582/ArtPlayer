@@ -12,5 +12,5 @@ declare const artplayerPluginMultipleSubtitles: (option: {
         onParser?(...args: object[]): object;
     }[];
 }) => (art: Artplayer) => {
-    name: 'artplayerPluginMultipleSubtitles';
+    name: 'multipleSubtitles';
 };
