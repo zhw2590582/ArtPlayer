@@ -1,19 +1,6 @@
 import { WebVTTParser, WebVTTSerializer } from './parser';
 
-function unescape(str) {
-    const map = {
-        '&amp;': '&',
-        '&lt;': '<',
-        '&gt;': '>',
-        '&#39;': "'",
-        '&quot;': '"',
-    };
-    const reg = new RegExp(`(${Object.keys(map).join('|')})`, 'g');
-    return str.replace(reg, (tag) => map[tag] || tag);
-}
-
-async function loadVtt(option, art) {
-    const { getExt, srtToVtt, assToVtt } = art.constructor.utils;
+async function loadVtt(option, { getExt, srtToVtt, assToVtt }) {
     const response = await fetch(option.url);
     const buffer = await response.arrayBuffer();
     const decoder = new TextDecoder(option.encoding || 'utf-8');
@@ -33,27 +20,31 @@ async function loadVtt(option, art) {
     }
 }
 
-function mergeTrees(trees, subtitles) {
+function mergeTrees(trees) {
     const parser = new WebVTTParser();
     const result = parser.parse('', 'metadata');
 
     for (let i = 0; i < trees.length; i++) {
         const tree = trees[i];
-        const option = subtitles[i];
 
-        for (let j = 0; j < tree.cues.length; j++) {
-            const cue = tree.cues[j];
-            for (let k = 0; k < cue.tree.children.length; k++) {
-                const children = cue.tree.children[k];
-                children.value = `<div class="art-subtitle-${option.name}">${children.value}</div>`;
+        if (!tree.updated) {
+            tree.updated = true;
+            for (let j = 0; j < tree.cues.length; j++) {
+                const cue = tree.cues[j];
+                for (let k = 0; k < cue.tree.children.length; k++) {
+                    const children = cue.tree.children[k];
+                    children.value = `<div class="art-subtitle-${tree.name}">${children.value}</div>`;
+                }
             }
         }
 
         if (result.cues.length === 0) {
-            result.cues = tree.cues;
+            result.cues = [...tree.cues];
         } else {
             for (let l = 0; l < result.cues.length; l++) {
-                result.cues[l].tree.children.push(...(tree.cues[l]?.tree?.children || []));
+                const a = result.cues[l].tree.children;
+                const b = tree.cues[l]?.tree?.children;
+                result.cues[l] = { ...result.cues[l], tree: { children: [...a, ...b] } };
             }
         }
     }
@@ -61,20 +52,33 @@ function mergeTrees(trees, subtitles) {
     return result;
 }
 
-const all = '_ALL_';
-export default function artplayerPluginMultipleSubtitles({ subtitles, onMerge = () => null }) {
+export default function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
     return async (art) => {
+        const { unescape, getExt, srtToVtt, assToVtt } = art.constructor.utils;
+
         const parser = new WebVTTParser();
         const seri = new WebVTTSerializer();
 
-        const vtts = await Promise.all(subtitles.map((option) => loadVtt(option, art)));
-        const trees = vtts.map((vtt) => parser.parse(vtt, 'metadata'));
-        const tree = onMerge(trees, subtitles) || mergeTrees(trees, subtitles);
+        const vtts = await Promise.all(
+            subtitles.map((option) => {
+                return loadVtt(option, { getExt, srtToVtt, assToVtt });
+            }),
+        );
 
-        function setTree(tree) {
-            if (!tree?.cues) return;
+        const trees = vtts.map((vtt, index) => {
+            const tree = parser.parse(vtt, 'metadata');
+            tree.url = subtitles[index].url;
+            tree.name = subtitles[index].name;
+            return tree;
+        });
+
+        let lastUrl = '';
+        function setTracks(trees = []) {
+            const tree = mergeTrees(trees);
             const vtt = seri.serialize(tree.cues);
+            URL.revokeObjectURL(lastUrl);
             const url = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }));
+            lastUrl = url;
             art.option.subtitle.escape = false;
             art.subtitle.init({
                 ...art.option.subtitle,
@@ -84,27 +88,15 @@ export default function artplayerPluginMultipleSubtitles({ subtitles, onMerge = 
             });
         }
 
-        setTree(tree);
-        let _track = all;
+        setTracks(trees);
 
         return {
             name: 'multipleSubtitles',
-            get track() {
-                return _track;
+            tracks(names = []) {
+                return setTracks(names.map((name) => trees.find((tree) => tree.name === name)));
             },
-            set track(name) {
-                if (name === all || name === '') {
-                    _track = all;
-                    setTree(tree);
-                } else {
-                    const index = subtitles.findIndex((item) => item.name === name);
-                    if (index === -1) {
-                        throw new Error(`The subtitle "${name}" is not found`);
-                    } else {
-                        _track = name;
-                        setTree(trees[index]);
-                    }
-                }
+            reset() {
+                return setTracks(trees);
             },
         };
     };
@@ -113,10 +105,6 @@ export default function artplayerPluginMultipleSubtitles({ subtitles, onMerge = 
 artplayerPluginMultipleSubtitles.env = process.env.NODE_ENV;
 artplayerPluginMultipleSubtitles.version = process.env.APP_VER;
 artplayerPluginMultipleSubtitles.build = process.env.BUILD_DATE;
-
-artplayerPluginMultipleSubtitles.all = all;
-artplayerPluginMultipleSubtitles.WebVTTParser = WebVTTParser;
-artplayerPluginMultipleSubtitles.WebVTTSerializer = WebVTTSerializer;
 
 if (typeof window !== 'undefined') {
     window['artplayerPluginMultipleSubtitles'] = artplayerPluginMultipleSubtitles;

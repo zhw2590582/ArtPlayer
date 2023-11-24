@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-11-23 23:55:34";
+        return "2023-11-24 09:21:31";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -5013,9 +5013,9 @@ class Plugins {
         if (option.fastForward && (0, _utils.isMobile) && !option.isLive) this.add((0, _fastForwardDefault.default));
         for(let index = 0; index < option.plugins.length; index++)this.add(option.plugins[index]);
     }
-    add(plugin) {
+    async add(plugin) {
         this.id += 1;
-        const result = plugin.call(this.art, this.art);
+        const result = await plugin.call(this.art, this.art);
         const pluginName = result && result.name || plugin.name || `plugin${this.id}`;
         (0, _utils.errorHandle)(!(0, _utils.has)(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
         (0, _utils.def)(this, pluginName, {
