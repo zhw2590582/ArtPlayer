@@ -1,12 +1,4 @@
 .art-video-player {
-    .art-layer-mini-progress-bar {
-        display: flex;
-        .art-full();
-        top: auto;
-        height: var(--art-mini-progress-height) !important;
-        background-color: var(--art-theme);
-    }
-
     .art-layer-lock {
         .art-center(none);
         position: absolute;
@@ -49,24 +41,29 @@
     }
 
     &.art-lock {
-        .art-bottom {
-            display: none !important;
-        }
-
         .art-subtitle {
             bottom: var(--art-subtitle-bottom) !important;
         }
+    }
 
-        .art-layer-mini-progress-bar {
-            display: flex !important;
+    &.art-mini-progress-bar, &.art-lock {
+        .art-bottom {
+            opacity: 1;
+            padding: 0;
+            background-image: none;
+            
+            .art-controls,
+            .art-progress {
+                transform: translateY(calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4));
+            }
+
+            .art-progress-indicator {
+                display: none !important;
+            }
         }
     }
 
     &.art-control-show {
-        .art-layer-mini-progress-bar {
-            display: none;
-        }
-
         .art-layer-lock {
             display: flex;
         }
