@@ -83,10 +83,6 @@ export default function artplayerPluginHlsQuality(option) {
     };
 }
 
-artplayerPluginHlsQuality.env = process.env.NODE_ENV;
-artplayerPluginHlsQuality.version = process.env.APP_VER;
-artplayerPluginHlsQuality.build = process.env.BUILD_DATE;
-
 if (typeof window !== 'undefined') {
     window['artplayerPluginHlsQuality'] = artplayerPluginHlsQuality;
 }

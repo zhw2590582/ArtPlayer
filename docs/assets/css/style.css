@@ -116,7 +116,6 @@ input[type="file"] {
 
 .header .menus .has-sub-menu {
     position: relative;
-    cursor: pointer;
 }
 
 .header .menus .has-sub-menu:hover .sub-menu {
@@ -127,28 +126,36 @@ input[type="file"] {
     display: none;
     position: absolute;
     z-index: 9;
-    top: 45px;
+    top: 40px;
     left: 0;
     width: 250px;
     padding: 0 10px;
-    background: #2b2b2b;
+    background: #1b1b1b;
+    border-radius: 3px;
+    border: 1px solid rgb(255, 255, 255, 0.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .header .menus .has-sub-menu .sub-menu ul {
     padding: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .header .menus .has-sub-menu .sub-menu li {
     display: block;
     list-style: none;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .header .menus .has-sub-menu .sub-menu li.title {
     color: #fff;
     font-size: 16px;
     margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.header .menus .has-sub-menu .sub-menu li a:hover {
+    text-decoration: underline;
 }
 
 .header .run {

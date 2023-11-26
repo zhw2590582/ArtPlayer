@@ -42,10 +42,6 @@ export default function artplayerPluginDanmuku(option) {
     };
 }
 
-artplayerPluginDanmuku.env = process.env.NODE_ENV;
-artplayerPluginDanmuku.version = process.env.APP_VER;
-artplayerPluginDanmuku.build = process.env.BUILD_DATE;
-
 if (typeof window !== 'undefined') {
     window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
 }

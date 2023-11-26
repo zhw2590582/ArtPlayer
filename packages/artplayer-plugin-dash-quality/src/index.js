@@ -99,10 +99,6 @@ export default function artplayerPluginDashQuality(option) {
     };
 }
 
-artplayerPluginDashQuality.env = process.env.NODE_ENV;
-artplayerPluginDashQuality.version = process.env.APP_VER;
-artplayerPluginDashQuality.build = process.env.BUILD_DATE;
-
 if (typeof window !== 'undefined') {
     window['artplayerPluginDashQuality'] = artplayerPluginDashQuality;
 }

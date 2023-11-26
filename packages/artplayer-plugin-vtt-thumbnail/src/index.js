@@ -64,10 +64,6 @@ export default function artplayerPluginVttThumbnail(option) {
     };
 }
 
-artplayerPluginVttThumbnail.env = process.env.NODE_ENV;
-artplayerPluginVttThumbnail.version = process.env.APP_VER;
-artplayerPluginVttThumbnail.build = process.env.BUILD_DATE;
-
 if (typeof window !== 'undefined') {
     window['artplayerPluginVttThumbnail'] = artplayerPluginVttThumbnail;
 }

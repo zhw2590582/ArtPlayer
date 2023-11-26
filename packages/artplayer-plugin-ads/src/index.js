@@ -271,10 +271,6 @@ export default function artplayerPluginAds(option) {
     };
 }
 
-artplayerPluginAds.env = process.env.NODE_ENV;
-artplayerPluginAds.version = process.env.APP_VER;
-artplayerPluginAds.build = process.env.BUILD_DATE;
-
 if (typeof document !== 'undefined') {
     if (!document.getElementById('artplayer-plugin-ads')) {
         const $style = document.createElement('style');

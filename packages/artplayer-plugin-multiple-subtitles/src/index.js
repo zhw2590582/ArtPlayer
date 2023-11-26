@@ -102,10 +102,6 @@ export default function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
     };
 }
 
-artplayerPluginMultipleSubtitles.env = process.env.NODE_ENV;
-artplayerPluginMultipleSubtitles.version = process.env.APP_VER;
-artplayerPluginMultipleSubtitles.build = process.env.BUILD_DATE;
-
 if (typeof window !== 'undefined') {
     window['artplayerPluginMultipleSubtitles'] = artplayerPluginMultipleSubtitles;
 }
