@@ -8,9 +8,9 @@
     },
     "devDependencies": {
         "flexsearch": "^0.7.31",
-        "markdown-it": "^13.0.1",
-        "vitepress": "^1.0.0-alpha.73",
+        "markdown-it": "^13.0.2",
+        "vitepress": "^1.0.0-rc.31",
         "vitepress-plugin-search": "^1.0.4-alpha.20",
-        "vue": "^3.2.47"
+        "vue": "^3.3.9"
     }
 }

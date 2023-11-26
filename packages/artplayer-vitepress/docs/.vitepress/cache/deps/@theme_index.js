@@ -6,8 +6,9 @@ import {
   onScopeDispose,
   ref,
   unref,
+  watch,
   watchEffect
-} from "./chunk-V634PGSD.js";
+} from "./chunk-CSMLHSNT.js";
 
 // node_modules/vitepress/dist/client/theme-default/index.js
 import "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/styles/fonts.css";
@@ -23,14 +24,17 @@ import "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/
 import "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/styles/components/vp-sponsor.css";
 import VPBadge from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPBadge.vue";
 import Layout from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/Layout.vue";
-import { default as default2 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPHomeHero.vue";
-import { default as default3 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPHomeFeatures.vue";
-import { default as default4 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPHomeSponsors.vue";
-import { default as default5 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideSponsors.vue";
-import { default as default6 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamPage.vue";
-import { default as default7 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageTitle.vue";
-import { default as default8 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageSection.vue";
-import { default as default9 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembers.vue";
+import { default as default2 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPImage.vue";
+import { default as default3 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPButton.vue";
+import { default as default4 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPHomeHero.vue";
+import { default as default5 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPHomeFeatures.vue";
+import { default as default6 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPHomeSponsors.vue";
+import { default as default7 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideSponsors.vue";
+import { default as default8 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPSponsors.vue";
+import { default as default9 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamPage.vue";
+import { default as default10 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageTitle.vue";
+import { default as default11 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageSection.vue";
+import { default as default12 } from "/Users/zhaohaiwei/Desktop/github/ArtPlayer/packages/artplayer-vitepress/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembers.vue";
 
 // node_modules/@vueuse/shared/index.mjs
 function tryOnScopeDispose(fn) {
@@ -44,6 +48,7 @@ function toValue(r) {
   return typeof r === "function" ? r() : unref(r);
 }
 var isClient = typeof window !== "undefined" && typeof document !== "undefined";
+var isWorker = typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
 var isIOS = getIsIOS();
 function getIsIOS() {
   var _a;
@@ -57,9 +62,7 @@ function cacheStringFunction(fn) {
   };
 }
 var hyphenateRE = /\B([A-Z])/g;
-var hyphenate = cacheStringFunction(
-  (str) => str.replace(hyphenateRE, "-$1").toLowerCase()
-);
+var hyphenate = cacheStringFunction((str) => str.replace(hyphenateRE, "-$1").toLowerCase());
 var camelizeRE = /-(\w)/g;
 var camelize = cacheStringFunction((str) => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : "");
@@ -244,10 +247,15 @@ function useSidebar() {
   const { frontmatter, page, theme: theme2 } = useData();
   const is960 = useMediaQuery("(min-width: 960px)");
   const isOpen = ref(false);
-  const sidebar = computed(() => {
+  const _sidebar = computed(() => {
     const sidebarConfig = theme2.value.sidebar;
     const relativePath = page.value.relativePath;
     return sidebarConfig ? getSidebar(sidebarConfig, relativePath) : [];
+  });
+  const sidebar = ref(_sidebar.value);
+  watch(_sidebar, (next, prev) => {
+    if (JSON.stringify(next) !== JSON.stringify(prev))
+      sidebar.value = _sidebar.value;
   });
   const hasSidebar = computed(() => {
     return frontmatter.value.sidebar !== false && sidebar.value.length > 0 && frontmatter.value.layout !== "home";
@@ -306,14 +314,17 @@ var theme = {
 };
 var without_fonts_default = theme;
 export {
-  default5 as VPDocAsideSponsors,
-  default3 as VPHomeFeatures,
-  default2 as VPHomeHero,
-  default4 as VPHomeSponsors,
-  default9 as VPTeamMembers,
-  default6 as VPTeamPage,
-  default8 as VPTeamPageSection,
-  default7 as VPTeamPageTitle,
+  default3 as VPButton,
+  default7 as VPDocAsideSponsors,
+  default5 as VPHomeFeatures,
+  default4 as VPHomeHero,
+  default6 as VPHomeSponsors,
+  default2 as VPImage,
+  default8 as VPSponsors,
+  default12 as VPTeamMembers,
+  default9 as VPTeamPage,
+  default11 as VPTeamPageSection,
+  default10 as VPTeamPageTitle,
   without_fonts_default as default,
   useSidebar
 };
