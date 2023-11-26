@@ -1,8 +1,8 @@
-# Setting
+# 设置面板
 
-## Build-in
+## 内置
 
-You must open the settings panel first, and then come with four built-in items：`flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
+须先打开设置面板，然后自带四个内置项：`flip`, `playbackRate`, `aspectRatio`, `subtitleOffset`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -19,16 +19,16 @@ var art = new Artplayer({
 ```
 
 
-## Init - Select list
+## 创建 - 选择列表
 
-| Property   | Type                | Describe            |
-| ---------- | ------------------- | ------------------- |
-| `html`     | `String`, `Element` | Element DOM         |
-| `icon`     | `String`, `Element` | Element icon        |
-| `selector` | `Array`             | Element list        |
-| `onSelect` | `Function`          | Element click event |
-| `width`    | `Number`            | List width          |
-| `tooltip`  | `String`            | Prompt text         |
+| 属性       | 类型                | 描述         |
+| ---------- | ------------------- | ------------ |
+| `html`     | `String`, `Element` | 元素的 DOM   |
+| `icon`     | `String`, `Element` | 元素的图标   |
+| `selector` | `Array`             | 元素列表     |
+| `onSelect` | `Function`          | 元素点击事件 |
+| `width`    | `Number`            | 列表宽度     |
+| `tooltip`  | `String`            | 提示文本     |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -88,7 +88,7 @@ var art = new Artplayer({
 });
 ```
 
-## Init - list nesting
+## 创建 - 列表嵌套
 
 <div className="run-code">▶ Run Code</div>
 
@@ -139,15 +139,15 @@ var art = new Artplayer({
 });
 ```
 
-## Init - Switch button
+## 创建 - 切换按钮
 
-| Property   | Type                | Describe             |
-| ---------- | ------------------- | -------------------- |
-| `html`     | `String`, `Element` | Element DOM          |
-| `icon`     | `String`, `Element` | Element icon         |
-| `switch`   | `Boolean`           | Button default state |
-| `onSwitch` | `Function`          | Button toggle event  |
-| `tooltip`  | `String`            | Prompt text          |
+| 属性       | 类型                | 描述            |
+| ---------- | ------------------- | --------------- |
+| `html`     | `String`, `Element` | 元素的 DOM 元素 |
+| `icon`     | `String`, `Element` | 元素的图标      |
+| `switch`   | `Boolean`           | 按钮默认状态    |
+| `onSwitch` | `Function`          | 按钮切换事件    |
+| `tooltip`  | `String`            | 提示文本        |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -174,16 +174,16 @@ var art = new Artplayer({
 });
 ```
 
-## Init - Range slider
+## 创建 - 范围滑块
 
-| Property   | Type                | Describe                  |
-| ---------- | ------------------- | ------------------------- |
-| `html`     | `String`, `Element` | Element DOM               |
-| `icon`     | `String`, `Element` | Element icon              |
-| `range`    | `Array`             | Default state array       |
-| `onRange`  | `Function`          | Event fired on completion |
-| `onChange` | `Function`          | Event fired on change     |
-| `tooltip`  | `String`            | Prompt text               |
+| 属性       | 类型                | 描述             |
+| ---------- | ------------------- | ---------------- |
+| `html`     | `String`, `Element` | 元素的 DOM 元素  |
+| `icon`     | `String`, `Element` | 元素的图标       |
+| `range`    | `Array`             | 默认状态数组     |
+| `onRange`  | `Function`          | 完成时触发的事件 |
+| `onChange` | `Function`          | 变化时触发的事件 |
+| `tooltip`  | `String`            | 提示文本         |
 
 ```js
 const range = [5, 1, 10, 1];
@@ -215,7 +215,7 @@ var art = new Artplayer({
 });
 ```
 
-## Add
+## 添加
 
 <div className="run-code">▶ Run Code</div>
 
@@ -236,7 +236,7 @@ art.setting.add({
 });
 ```
 
-## Remove
+## 删除
 
 <div className="run-code">▶ Run Code</div>
 
@@ -267,7 +267,7 @@ art.on('ready', () => {
 });
 ```
 
-## Update
+## 更新
 
 <div className="run-code">▶ Run Code</div>
 

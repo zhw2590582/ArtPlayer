@@ -6,7 +6,7 @@
     ▶ Run Code
 </div>
 
-```js{18-21,25}
+```js{18,23}
 function playMpd(video, url, art) {
     if (dashjs.supportsMediaSource()) {
         if (art.dash) art.dash.destroy();

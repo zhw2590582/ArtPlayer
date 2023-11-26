@@ -1,19 +1,19 @@
-# Layers
+# 业务层
 
-## Config
+## 配置
 
-| Property  | Type                | Describe                                       |
-| --------- | ------------------- | ---------------------------------------------- |
-| `disable` | `Boolean`           | Whether to disable the component               |
-| `name`    | `String`            | Component unique name, used to mark class name |
-| `index`   | `Number`            | Component index, used for display priority     |
-| `html`    | `String`, `Element` | DOM element of the component                   |
-| `style`   | `Object`            | component style object                         |
-| `click`   | `Function`          | Component click event                          |
-| `mounted` | `Function`          | Triggered after the component is mounted       |
-| `tooltip` | `String`            | Tooltip text for the component                 |
+| 属性      | 类型                | 描述                       |
+| --------- | ------------------- | -------------------------- |
+| `disable` | `Boolean`           | 是否禁用组件               |
+| `name`    | `String`            | 组件唯一名称，用于标记类名 |
+| `index`   | `Number`            | 组件索引，用于显示的优先级 |
+| `html`    | `String`, `Element` | 组件的 DOM 元素            |
+| `style`   | `Object`            | 组件样式对象               |
+| `click`   | `Function`          | 组件点击事件               |
+| `mounted` | `Function`          | 组件挂载后触发             |
+| `tooltip` | `String`            | 组件的提示文本             |
 
-## Init
+## 创建
 
 <div className="run-code">▶ Run Code</div>
 
@@ -46,7 +46,7 @@ var art = new Artplayer({
 console.info(art.layers['potser']);
 ```
 
-## Add
+## 添加
 
 <div className="run-code">▶ Run Code</div>
 
@@ -78,7 +78,7 @@ art.layers.add({
 console.info(art.layers['potser']);
 ```
 
-## Remove
+## 删除
 
 <div className="run-code">▶ Run Code</div>
 
@@ -108,7 +108,7 @@ art.on('ready', () => {
 });
 ```
 
-## Update
+## 更新
 
 <div className="run-code">▶ Run Code</div>
 

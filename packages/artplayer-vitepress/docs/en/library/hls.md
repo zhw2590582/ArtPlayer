@@ -6,7 +6,7 @@
     ▶ Run Code
 </div>
 
-```js{21-24,28}
+```js{21,26}
 function playM3u8(video, url, art) {
     if (Hls.isSupported()) {
         if (art.hls) art.hls.destroy();

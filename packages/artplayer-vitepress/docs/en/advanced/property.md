@@ -1,12 +1,12 @@
-# Instance Property
+# 实例属性
 
-The `Instance Property` here refers to the `Primary Property` attached to the `Instance`, which is more commonly used
+这里的 `实例属性` 是指挂载在 `实例` 的 `一级属性`，比较常用
 
 ## `play`
 
 -   Type: `Function`
 
-Play video
+播放视频
 
 <div className="run-code">▶ Run Code</div>
 
@@ -26,7 +26,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-Pause video
+暂停视频
 
 <div className="run-code">▶ Run Code</div>
 
@@ -50,7 +50,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-Toggle video playback and pause
+切换视频的播放和暂停
 
 <div className="run-code">▶ Run Code</div>
 
@@ -75,7 +75,7 @@ art.on('ready', () => {
 -   Type: `Function`
 -   Parameter: `Boolean`
 
-To destroy the player, accept a parameter indicating whether to remove the player's html after destruction. The default value is `true`
+销毁播放器，接受一个参数表示是否销毁后同时移除播放器的 `html`，默认为 `true`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -95,7 +95,7 @@ art.on('ready', () => {
 -   Type: `Setter`
 -   Parameter: `Number`
 
-Video time jump in seconds
+视频时间跳转，单位秒
 
 <div className="run-code">▶ Run Code</div>
 
@@ -115,7 +115,7 @@ art.on('ready', () => {
 -   Type: `Setter`
 -   Parameter: `Number`
 
-Video time fast forward in seconds
+视频时间快进，单位秒
 
 <div className="run-code">▶ Run Code</div>
 
@@ -135,7 +135,7 @@ art.on('ready', () => {
 -   Type: `Setter`
 -   Parameter: `Number`
 
-Video time rewind in seconds
+视频时间快退，单位秒
 
 <div className="run-code">▶ Run Code</div>
 
@@ -159,7 +159,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Number`
 
-Set and get video volume, range: `[0, 1]`
+设置和获取视频音量，范围在：`[0, 1]`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -181,7 +181,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Set and get video url
+设置和获取视频地址
 
 <div className="run-code">▶ Run Code</div>
 
@@ -201,7 +201,7 @@ art.on('ready', () => {
 -   Type: `Setter`
 -   Parameter: `String`
 
-Setting the video url is similar to that of `art.url`, but some optimization operations will be performed
+设置视频地址，设置时和 `art.url` 类似，但会执行一些优化操作
 
 <div className="run-code">▶ Run Code</div>
 
@@ -224,7 +224,7 @@ art.on('ready', () => {
 -   Type: `Function`
 -   Parameter: `String`
 
-Setting the video url is similar to that of `art.url`, but some optimization operations will be performed
+设置视频地址，设置时和 `art.url` 类似，但会执行一些优化操作
 
 <div className="run-code">▶ Run Code</div>
 
@@ -242,9 +242,9 @@ art.on('ready', () => {
 });
 ```
 
-:::warning Tip
+:::warning 提示
 
-The functions of `art.switch` and `art.switchUrl` are the same, except that the `art.switchUrl` method will return `Promise`, when `resolve` means that the new address can be played, and `reject` means that the new address is loaded error
+`art.switch` 和 `art.switchUrl` 的功能是一样的，只是 `art.switchUrl` 方法会返回 `Promise`，当 `resolve` 时表示新地址是可以播放，`reject` 时表示新地址加载错误
 
 :::
 
@@ -253,7 +253,7 @@ The functions of `art.switch` and `art.switchUrl` are the same, except that the 
 -   Type: `Function`
 -   Parameter: `String`
 
-Set the video quality address, similar to `art.switchUrl`, but with the previous playback progress
+设置视频画质地址，和 `art.switchUrl` 类似，但会带上之前的播放进度
 
 <div className="run-code">▶ Run Code</div>
 
@@ -276,7 +276,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Boolean`
 
-Set and get whether the video is muted
+设置和获取视频是否静音
 
 <div className="run-code">▶ Run Code</div>
 
@@ -298,7 +298,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Number`
 
-Set and get the current time of the video. Setting the time is similar to `seek`, but it will not trigger additional events
+设置和获取视频当前时间，设置时间时和 `seek` 类似，但它不会触发额外的事件
 
 <div className="run-code">▶ Run Code</div>
 
@@ -319,7 +319,7 @@ art.on('ready', () => {
 
 -   Type: `Getter`
 
-Get video duration
+获取视频时长
 
 <div className="run-code">▶ Run Code</div>
 
@@ -334,9 +334,9 @@ art.on('ready', () => {
 });
 ```
 
-:::warning Tip
+:::warning 提示
 
-Some videos have no duration, such as live videos or videos that have not been decoded. The duration obtained at this time will be `0`
+有的视频是没有时长的，例如直播中的视频或者没被解码完成的视频，这个时候获取的时长会是 `0`
 
 :::
 
@@ -344,7 +344,7 @@ Some videos have no duration, such as live videos or videos that have not been d
 
 -   Type: `Function`
 
-Download a screenshot of the current video frame
+下载当前视频帧的截图
 
 <div className="run-code">▶ Run Code</div>
 
@@ -363,7 +363,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-Get the `base64` address of the screenshot of the current video frame, and return a `Promise`
+获取当前视频帧的截图的`base64`地址，返回的是一个 `Promise`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -383,7 +383,7 @@ art.on('ready', async () => {
 
 -   Type: `Function`
 
-Get the `blob` address of the screenshot of the current video frame, and return a `Promise`
+获取当前视频帧的截图的`blob`地址，返回的是一个 `Promise`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -404,7 +404,7 @@ art.on('ready', async () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Boolean`
 
-Set and get full screen of player window
+设置和获取播放器窗口全屏
 
 <div className="run-code">▶ Run Code</div>
 
@@ -424,9 +424,9 @@ var art = new Artplayer({
 });
 ```
 
-:::warning Tip
+:::warning 提示
 
-Due to the browser security mechanism, the page must have interaction before triggering the full screen of the window (for example, the user has clicked on the page)
+由于浏览器安全机制，触发窗口全屏前，页面必须先存在交互（例如用户点击过页面）
 
 :::
 
@@ -435,7 +435,7 @@ Due to the browser security mechanism, the page must have interaction before tri
 -   Type: `Setter/Getter`
 -   Parameter: `Boolean`
 
-Set and get full screen of player web page
+设置和获取播放器网页全屏
 
 <div className="run-code">▶ Run Code</div>
 
@@ -460,7 +460,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Boolean`
 
-Set and get the picture-in-picture mode of the player
+设置和获取播放器画中画模式
 
 <div className="run-code">▶ Run Code</div>
 
@@ -480,9 +480,9 @@ var art = new Artplayer({
 });
 ```
 
-:::warning Tip
+:::warning 提示
 
-Due to the browser security mechanism, before triggering picture-in-picture, the page must have interaction (for example, the user has clicked on the page)
+由于浏览器安全机制，触发画中画前，页面必须先存在交互（例如用户点击过页面）
 
 :::
 
@@ -491,7 +491,7 @@ Due to the browser security mechanism, before triggering picture-in-picture, the
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Set and obtain video posters. You can only see the poster effect before the video is played
+设置和获取视频海报，只有在视频播放前才能看到海报效果
 
 <div className="run-code">▶ Run Code</div>
 
@@ -514,7 +514,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Boolean`
 
-Set and get player mini mode
+设置和获取播放器迷你模式
 
 <div className="run-code">▶ Run Code</div>
 
@@ -534,7 +534,7 @@ art.on('ready', () => {
 -   Type: `Getter`
 -   Parameter: `Boolean`
 
-Get whether the video is playing
+获取视频是否正在播放中
 
 <div className="run-code">▶ Run Code</div>
 
@@ -552,10 +552,9 @@ art.on('ready', () => {
 
 ## `autoSize`
 
--   Type: `Setter/Getter`
--   Parameter: `Boolean`
+-   Type: `Function`
 
-Set whether the video is adaptive size. After setting it to `true`, it will only be executed once
+设置视频是否自适应尺寸
 
 <div className="run-code">▶ Run Code</div>
 
@@ -574,7 +573,7 @@ art.on('ready', () => {
 
 -   Type: `Getter`
 
-Get the size and coordinate information of the player
+获取播放器的尺寸和坐标信息
 
 <div className="run-code">▶ Run Code</div>
 
@@ -589,9 +588,9 @@ art.on('ready', () => {
 });
 ```
 
-:::warning Tip
+:::warning 提示
 
-Dimension and coordinate information are obtained through `getBoundingClientRect`
+尺寸和坐标信息是通过 `getBoundingClientRect` 获取的
 
 :::
 
@@ -600,7 +599,7 @@ Dimension and coordinate information are obtained through `getBoundingClientRect
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Set and get player rollover, support `normal`,  `horizontal`,  `vertical`
+设置和获取播放器翻转，支持`normal`,  `horizontal`,  `vertical`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -622,7 +621,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `Number`
 
-Set and get player playback speed
+设置和获取播放器播放速度
 
 <div className="run-code">▶ Run Code</div>
 
@@ -644,7 +643,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Set and obtain the player aspect ratio
+设置和获取播放器长宽比
 
 <div className="run-code">▶ Run Code</div>
 
@@ -663,10 +662,9 @@ art.on('ready', () => {
 
 ## `autoHeight`
 
--   Type: `Setter/Getter`
--   Parameter: `Boolean`
+-   Type: `Function`
 
-When the container has only width, this attribute can automatically calculate and set the height of the video. After it is set to `true`, it will only be executed once
+当容器只有宽度，该属性可以自动计算出并设置视频的高度
 
 <div className="run-code">▶ Run Code</div>
 
@@ -687,7 +685,7 @@ art.on('resize', () => {
 
 :::warning 提示
 
-This attribute is useful when your container has only width but does not know the specific height. It can automatically calculate the height of the video, but you need to determine the time to set this attribute
+当你的容器只有宽度，但不知道具体高度时，这个属性很有用，它能自动计算出视频的高度，但你需要确定设置这个属性的时机
 
 :::
 
@@ -696,7 +694,7 @@ This attribute is useful when your container has only width but does not know th
 -   Type: `Function`
 -   Parameter: `String`
 
-Get and set the attributes of the video element dynamically
+动态获取和设置 video 元素的属性
 
 <div className="run-code">▶ Run Code</div>
 
@@ -718,7 +716,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Get and set video types dynamically
+动态获取和设置视频类型
 
 <div className="run-code">▶ Run Code</div>
 
@@ -740,7 +738,7 @@ art.on('ready', () => {
 -   Type: `Setter/Getter`
 -   Parameter: `String`
 
-Get and set player theme color dynamically
+动态获取和设置播放器主题颜色
 
 <div className="run-code">▶ Run Code</div>
 
@@ -761,7 +759,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-Enable airplay
+开启隔空播放
 
 <div className="run-code">▶ Run Code</div>
 
@@ -785,7 +783,7 @@ var art = new Artplayer({
 
 -   Type: `Getter`
 
-The proportion of video cache, with the range of `[0, 1]`, is often used in conjunction with the `video:timeupdate` event
+视频缓存的比例，范围是 `[0, 1]`，常配合 `video:timeupdate` 事件使用
 
 <div className="run-code">▶ Run Code</div>
 
@@ -804,7 +802,7 @@ art.on('video:timeupdate', () => {
 
 -   Type: `Getter`
 
-The proportion of video playback, with the range of `[0, 1]`, is often used in conjunction with the `video:timeupdate` event
+视频播放的比例，范围是 `[0, 1]`，常配合 `video:timeupdate` 事件使用
 
 <div className="run-code">▶ Run Code</div>
 
@@ -823,7 +821,7 @@ art.on('video:timeupdate', () => {
 
 -   Type: `Function`
 
-The proxy function of DOM event essentially proxies `addEventListener` and `removeEventListener`. When `proxy` is used to process the event, the player will also automatically destroy the event when it is destroyed
+`DOM` 事件的代理函数，实质上代理了 `addEventListener` 和 `removeEventListener`, 当使用 `proxy` 来处理事件，播放器销毁时也会自动销毁该事件
 
 <div className="run-code">▶ Run Code</div>
 
@@ -840,9 +838,9 @@ art.proxy(container, 'click', event => {
 });
 ```
 
-:::warning Tip
+:::warning 提示
 
-If you need some DOM events only exist in the life cycle of the player, we strongly recommend using this function to avoid memory leakage
+假如你需要一些 `DOM` 事件只存在于播放器的生命周期上时，强烈建议使用该函数，以避免造成内存泄漏
 
 :::
 
@@ -850,7 +848,7 @@ If you need some DOM events only exist in the life cycle of the player, we stron
 
 -   Type: `Function`
 
-The query function of DOM is similar to `document.querySelector`, but the queried object is limited to the current player, which can avoid errors of the same class name
+`DOM` 的查询函数，类似 `document.querySelector`，但被查询的对象局限于当前播放器内，可以避免同类名的错误
 
 <div className="run-code">▶ Run Code</div>
 
@@ -867,7 +865,7 @@ console.info(art.query('.art-video'));
 
 -   Type: `Element`
 
-Return the `video` element of the player
+快捷返回播放器的 `video` 元素
 
 <div className="run-code">▶ Run Code</div>
 
@@ -880,11 +878,33 @@ var art = new Artplayer({
 console.info(art.video);
 ```
 
+## `cssVar`
+
+-   Type: `Function`
+
+动态获取或设置 `css` 变量
+
+<div className="run-code">▶ Run Code</div>
+
+```js{8}
+var art = new Artplayer({
+	container: '.artplayer-app',
+	url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    console.log(art.cssVar('--art-theme'));
+    art.cssVar('--art-theme', 'green');
+    console.log(art.cssVar('--art-theme'));
+});
+```
+
 ## `quality`
 
 -   Type: `Setter`
+-   Parameter: `Array`
 
-Dynamically set the quality list
+动态设置画质列表
 
 <div className="run-code">▶ Run Code</div>
 
