@@ -1,10 +1,10 @@
-# Dash Video Quality
+# Dash 画质
 
-## Demo
+## 演示
 
-👉 [View Full Demo](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-quality/index.js&example=dash.quality)
+👉 [查看完整演示](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-quality/index.js&example=dash.quality)
 
-## Installation
+## 安装
 
 ::: code-group
 

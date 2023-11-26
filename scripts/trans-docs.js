@@ -43,10 +43,11 @@ function splitMarkdown(text, maxChars) {
 
 const translateContent = async (content, targetLanguage) => {
     try {
+        console.log('Content:', content.length);
         const response = await axios.post(
             'https://api.aimu.app/openai/chat',
             {
-                content: `Translate the following text to ${targetLanguage}:\n\n${content}`,
+                content: `The following is the text in markdown format and translate it to ${targetLanguage}:\n\n${content}`,
             },
             {
                 headers: {
@@ -55,14 +56,17 @@ const translateContent = async (content, targetLanguage) => {
                 timeout: 60000,
             },
         );
-        return response.data.data;
+
+        const result = response.data.data;
+        console.log('Result:', result.length);
+        return result;
     } catch (error) {
-        console.error('Error during translation:', error);
+        console.error(error.message);
         return '';
     }
 };
 
-const translateMarkdownFiles = async (filePaths, targetLanguage, openAIKey, maxCharsPerRequest) => {
+const translateMarkdownFiles = async (filePaths, targetLanguage, maxCharsPerRequest) => {
     for (const filePath of filePaths) {
         const content = fs.readFileSync(filePath, 'utf-8');
         const parts = splitMarkdown(content, maxCharsPerRequest);
@@ -70,7 +74,7 @@ const translateMarkdownFiles = async (filePaths, targetLanguage, openAIKey, maxC
         console.log('Parts:', parts.length);
         const translatedParts = [];
         for (const part of parts) {
-            const translatedPart = await translateContent(part, targetLanguage, openAIKey);
+            const translatedPart = await translateContent(part, targetLanguage);
             translatedParts.push(translatedPart);
         }
         const translatedContent = translatedParts.join('');
