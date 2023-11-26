@@ -117,6 +117,7 @@ const config = {
           text: 'Plugins',
           collapsible: true,
           items: [
+            { text: 'Danmuku', link: '/en/plugin/danmuku' },
             { text: 'Video Ads', link: '/en/plugin/ads' },
             { text: 'Iframe Control', link: '/en/plugin/iframe' },
             { text: 'Hls Quality', link: '/en/plugin/hls-quality' },

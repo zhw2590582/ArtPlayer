@@ -40,7 +40,7 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 :::
 
-## 选项
+## Option
 
 ```js
 {
@@ -108,7 +108,6 @@ var art = new Artplayer({
     ],
 });
 ```
-Sure, below is the translation of the provided Markdown content into English, maintaining the original Markdown formatting:
 
 ## Using Danmuku XML
 
@@ -134,6 +133,7 @@ var art = new Artplayer({
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
 </div>
+
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -163,6 +163,7 @@ var art = new Artplayer({
     ],
 });
 ```
+
 ## `hide/show`
 
 Hide or show the bullet comments with the methods `hide` and `show`.
@@ -232,6 +233,7 @@ var art = new Artplayer({
     ],
 });
 ```
+
 ## `emit`
 
 Send a real-time danmaku message through the `emit` method
@@ -387,8 +389,6 @@ Used to get the current barrage configuration
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
 </div>
-    ▶ Run Code
-</div>
 
 ```js
 var art = new Artplayer({
@@ -407,7 +407,7 @@ art.on('ready', () => {
 });
 ```
 
-## 事件
+## Event
 
 ```js
 var art = new Artplayer({
@@ -456,29 +456,4 @@ art.on('artplayerPluginDanmuku:show', () => {
 art.on('artplayerPluginDanmuku:destroy', () => {
     console.info('弹幕销毁');
 });
-```
-
-Here is the translation of the VitePress extended Markdown syntax into English:
-
-```markdown
-# Welcome to VitePress
-
-## Project setup
-
-```bash
-yarn
-yarn docs:dev
-```
-
-## Build
-
-To build the documentation site, run the following command:
-
-```bash
-yarn docs:build
-```
-
-## Deployment
-
-To deploy the documentation site, you can use any static site hosting services.
 ```
