@@ -4,37 +4,42 @@ import path from 'path';
 import axios from 'axios';
 import { glob } from 'glob';
 import { removeDir } from './utils.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 function splitMarkdown(text, maxChars) {
     const parts = [];
     let currentPart = '';
-    let buffer = '';
     let inCodeBlock = false;
+    let inSpecialBlock = false;
 
     const lines = text.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
 
-    for (let line of lines) {
-        if (line.startsWith('```')) {
+        // 检测代码块
+        if (line.trim().startsWith('```')) {
             inCodeBlock = !inCodeBlock;
         }
 
-        buffer += line + '\n';
+        // 检测特殊块
+        if (line.trim().startsWith(':::')) {
+            inSpecialBlock = !inSpecialBlock;
+        }
 
-        if (!inCodeBlock && buffer.length > maxChars) {
-            // 如果当前不在代码块内，且缓冲区字符数超过限制，进行分割
-            let splitPoint = buffer.lastIndexOf('\n\n', maxChars);
-            if (splitPoint === -1) splitPoint = maxChars;
+        // 添加当前行到当前部分
+        currentPart += line + '\n';
 
-            currentPart += buffer.substring(0, splitPoint);
+        // 检测是否达到字符限制
+        if (!inCodeBlock && !inSpecialBlock && currentPart.length > maxChars && i < lines.length - 1) {
             parts.push(currentPart);
             currentPart = '';
-            buffer = buffer.substring(splitPoint).trimStart() + '\n';
         }
     }
 
-    // 处理剩余的缓冲区
-    currentPart += buffer;
-    if (currentPart.trim() !== '') {
+    // 添加最后一部分
+    if (currentPart !== '') {
         parts.push(currentPart);
     }
 
@@ -43,11 +48,11 @@ function splitMarkdown(text, maxChars) {
 
 const translateContent = async (content, targetLanguage) => {
     try {
-        console.log('Content:', content.length);
+        const TRANSLATE_URL = process.env.TRANSLATE_URL;
         const response = await axios.post(
-            'https://api.aimu.app/openai/chat',
+            TRANSLATE_URL,
             {
-                content: `The following is the text in markdown format and translate it to ${targetLanguage}:\n\n${content}`,
+                content: `The following text is written in VitePress's extended Markdown syntax, Please translate it into ${targetLanguage}, and keep the Markdown format and don't add your explanation:\n\n${content}`,
             },
             {
                 headers: {
@@ -56,29 +61,43 @@ const translateContent = async (content, targetLanguage) => {
                 timeout: 60000,
             },
         );
-
-        const result = response.data.data;
-        console.log('Result:', result.length);
-        return result;
+        return response.data.data;
     } catch (error) {
         console.error(error.message);
-        return '';
+        return content;
     }
 };
 
 const translateMarkdownFiles = async (filePaths, targetLanguage, maxCharsPerRequest) => {
+    let totalParts = 0;
+    let translatedPartsCount = 0;
+
     for (const filePath of filePaths) {
         const content = fs.readFileSync(filePath, 'utf-8');
         const parts = splitMarkdown(content, maxCharsPerRequest);
-        console.log('Translating:', filePath);
-        console.log('Parts:', parts.length);
+        totalParts += parts.length;
+    }
+
+    console.log(`开始翻译 ${filePaths.length} 个文件，总共 ${totalParts} 部分。`);
+
+    for (const filePath of filePaths) {
+        console.log(`翻译开始: ${filePath}`);
+
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const parts = splitMarkdown(content, maxCharsPerRequest);
         const translatedParts = [];
+
         for (const part of parts) {
             const translatedPart = await translateContent(part, targetLanguage);
             translatedParts.push(translatedPart);
+            translatedPartsCount++;
+            const progressPercentage = ((translatedPartsCount / totalParts) * 100).toFixed(2);
+            console.log(`总体翻译进度: ${progressPercentage}%`);
         }
-        const translatedContent = translatedParts.join('');
+
+        const translatedContent = translatedParts.join('\n');
         fs.writeFileSync(filePath, translatedContent);
+        console.log(`翻译结束: ${filePath}`);
     }
 };
 
@@ -93,6 +112,6 @@ const translateMarkdownFiles = async (filePaths, targetLanguage, maxCharsPerRequ
         await cpy(path.resolve(basePath, dir), path.resolve(enPath, dir), { flat: true });
     }
     const mdsPaths = glob.sync(path.resolve(enPath, '**/*.md'));
-    const maxCharsPerRequest = 1024;
+    const maxCharsPerRequest = 512;
     await translateMarkdownFiles(mdsPaths, 'English', maxCharsPerRequest);
 })();

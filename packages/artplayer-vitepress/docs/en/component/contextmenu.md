@@ -1,19 +1,19 @@
-# 右键菜单
+# Context Menu
 
-## 配置
+## Configuration
 
-| 属性      | 类型                | 描述                       |
-| --------- | ------------------- | -------------------------- |
-| `disable` | `Boolean`           | 是否禁用组件               |
-| `name`    | `String`            | 组件唯一名称，用于标记类名 |
-| `index`   | `Number`            | 组件索引，用于显示的优先级 |
-| `html`    | `String`, `Element` | 组件的 DOM 元素            |
-| `style`   | `Object`            | 组件样式对象               |
-| `click`   | `Function`          | 组件点击事件               |
-| `mounted` | `Function`          | 组件挂载后触发             |
-| `tooltip` | `String`            | 组件的提示文本             |
+| Property  | Type                | Description                 |
+| --------- | ------------------- | ----------------------------|
+| `disable` | `Boolean`           | Whether to disable the component |
+| `name`    | `String`            | Unique name of the component, used for marking the class name |
+| `index`   | `Number`            | Component index, used for display priority |
+| `html`    | `String`, `Element` | The DOM element of the component |
+| `style`   | `Object`            | Style object for the component |
+| `click`   | `Function`          | Click event for the component |
+| `mounted` | `Function`          | Triggered after the component is mounted |
+| `tooltip` | `String`            | Tooltip text for the component             |
 
-## 创建
+## Creation
 
 <div className="run-code">▶ Run Code</div>
 
@@ -38,8 +38,7 @@ art.contextmenu.show = true;
 // Get the Element of contextmenu by name
 console.info(art.contextmenu['your-menu']);
 ```
-
-## 添加
+## Add
 
 <div className="run-code">▶ Run Code</div>
 
@@ -64,7 +63,7 @@ art.contextmenu.show = true;
 console.info(art.contextmenu['your-menu']);
 ```
 
-## 删除
+## Delete
 
 <div className="run-code">▶ Run Code</div>
 
@@ -88,13 +87,13 @@ art.contextmenu.show = true;
 
 art.on('ready', () => {
     setTimeout(() => {
-        // Delete the contextmenu by name
+        // Delete the context menu by name
         art.contextmenu.remove('your-menu')
     }, 3000);
 });
 ```
 
-## 更新
+## Updates
 
 <div className="run-code">▶ Run Code</div>
 

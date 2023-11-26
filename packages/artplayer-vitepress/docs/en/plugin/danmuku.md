@@ -1,10 +1,10 @@
-# 弹幕库
+# Danmuku Library
 
-## 演示
+## Demo
 
-👉 [查看完整演示](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku)
+👉 [View Full Demo](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku)
 
-## 安装
+## Installation
 
 ::: code-group
 
@@ -67,7 +67,7 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 }
 ```
 
-## 使用弹幕数组
+## Using Danmuku Array
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -80,14 +80,14 @@ var art = new Artplayer({
     setting: true,
     plugins: [
         artplayerPluginDanmuku({
-            // 弹幕数组
+            // Danmuku array
             danmuku: [
                 {
-                    text: '111', // 弹幕文本
-                    time: 1, // 发送时间，单位秒
-                    color: '#fff', // 弹幕局部颜色
-                    border: false, // 是否显示描边
-                    mode: 0, // 弹幕模式: 0表示滚动, 1静止
+                    text: '111', // Danmuku text
+                    time: 1, // Send time, in seconds
+                    color: '#fff', // Danmuku local color
+                    border: false, // Whether to display outline
+                    mode: 0, // Danmuku mode: 0 for scrolling, 1 for stationary
                 },
                 {
                     text: '222',
@@ -108,8 +108,9 @@ var art = new Artplayer({
     ],
 });
 ```
+Sure, below is the translation of the provided Markdown content into English, maintaining the original Markdown formatting:
 
-## 使用弹幕 XML
+## Using Danmuku XML
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -121,29 +122,28 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     plugins: [
         artplayerPluginDanmuku({
-            // 弹幕 XML 文件，和 Bilibili 网站的弹幕格式一致
+            // Danmuku XML file, consistent with the danmuku format of the Bilibili website
             danmuku: '/assets/sample/danmuku.xml',
         }),
     ],
 });
 ```
 
-## 使用异步调用
+## Using Asynchronous Call
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
 </div>
-
 ```js
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     plugins: [
         artplayerPluginDanmuku({
-            // 使用 Promise 异步返回
+            // Use Promise to return asynchronously
             danmuku: function () {
-                return new Promise((resovle) => {
-                    return resovle([
+                return new Promise((resolve) => {
+                    return resolve([
                         {
                             text: '111',
                             time: 1,
@@ -163,10 +163,9 @@ var art = new Artplayer({
     ],
 });
 ```
-
 ## `hide/show`
 
-通过方法 `hide` 和 `show` 进行隐藏或者显示弹幕
+Hide or show the bullet comments with the methods `hide` and `show`.
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -184,14 +183,14 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: '隐藏弹幕',
+            html: 'Hide Danmuku',
             click: function () {
                 art.plugins.artplayerPluginDanmuku.hide();
             },
         },
         {
             position: 'right',
-            html: '显示弹幕',
+            html: 'Show Danmuku',
             click: function () {
                 art.plugins.artplayerPluginDanmuku.show();
             },
@@ -199,10 +198,9 @@ var art = new Artplayer({
     ],
 });
 ```
-
 ## `isHide`
 
-通过属性 `isHide` 判断当前弹幕是隐藏或者显示
+Judge whether the current barrage is hidden or displayed with the `isHide` property.
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -220,24 +218,23 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: '隐藏弹幕',
+            html: 'Hide Barrage',
             click: function (_, event) {
                 if (art.plugins.artplayerPluginDanmuku.isHide) {
                     art.plugins.artplayerPluginDanmuku.show();
-                    event.target.innerText = '隐藏弹幕';
+                    event.target.innerText = 'Hide Barrage';
                 } else {
                     art.plugins.artplayerPluginDanmuku.hide();
-                    event.target.innerText = '显示弹幕';
+                    event.target.innerText = 'Show Barrage';
                 }
             },
         },
     ],
 });
 ```
-
 ## `emit`
 
-通过方法 `emit` 发送一条实时弹幕
+Send a real-time danmaku message through the `emit` method
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -255,9 +252,9 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: '发送弹幕',
+            html: 'Send Danmaku',
             click: function () {
-                var text = prompt('请输入弹幕文本', '弹幕测试文本');
+                var text = prompt('Please enter the danmaku text', 'Danmaku test text');
                 if (!text || !text.trim()) return;
                 var color = '#' + Math.floor(Math.random() * 0xffffff).toString(16);
                 art.plugins.artplayerPluginDanmuku.emit({
@@ -270,10 +267,9 @@ var art = new Artplayer({
     ],
 });
 ```
-
 ## `config`
 
-通过方法 `config` 实时改变弹幕配置，支持属性有：
+Change the barrage configuration in real-time with the `config` method, supported attributes include:
 
 -   `danmuku`
 -   `speed`
@@ -304,7 +300,7 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: '弹幕大小：<input type="range" min="12" max="50" step="1" value="25">',
+            html: 'Danmaku size：<input type="range" min="12" max="50" step="1" value="25">',
             style: {
                 display: 'flex',
                 alignItems: 'center',
@@ -321,10 +317,9 @@ var art = new Artplayer({
     ],
 });
 ```
-
 ## `load`
 
-通过 load 方法可以重载弹幕源，或者切换新弹幕
+The load method can be used to reload the danmu data source or switch to new danmu.
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -342,14 +337,14 @@ var art = new Artplayer({
     controls: [
         {
             position: 'right',
-            html: '重载弹幕',
+            html: 'Reload Danmu',
             click: function () {
                 art.plugins.artplayerPluginDanmuku.load();
             },
         },
         {
             position: 'right',
-            html: '切换弹幕',
+            html: 'Switch Danmu',
             click: function () {
                 art.plugins.artplayerPluginDanmuku.config({
                     danmuku: '/assets/sample/danmuku-v2.xml',
@@ -360,10 +355,9 @@ var art = new Artplayer({
     ],
 });
 ```
-
 ## `reset`
 
-用于清空当前显示的弹幕
+Used to clear the current displayed barrages
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -388,9 +382,11 @@ art.on('resize', () => {
 
 ## `option`
 
-用于获取当前弹幕配置
+Used to get the current barrage configuration
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
     ▶ Run Code
 </div>
 
@@ -460,4 +456,29 @@ art.on('artplayerPluginDanmuku:show', () => {
 art.on('artplayerPluginDanmuku:destroy', () => {
     console.info('弹幕销毁');
 });
+```
+
+Here is the translation of the VitePress extended Markdown syntax into English:
+
+```markdown
+# Welcome to VitePress
+
+## Project setup
+
+```bash
+yarn
+yarn docs:dev
+```
+
+## Build
+
+To build the documentation site, run the following command:
+
+```bash
+yarn docs:build
+```
+
+## Deployment
+
+To deploy the documentation site, you can use any static site hosting services.
 ```

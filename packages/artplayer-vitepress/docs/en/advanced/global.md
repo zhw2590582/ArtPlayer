@@ -1,10 +1,10 @@
-# 全局属性
+# Global Attributes
 
-这里的 `全局属性` 也是指挂载在 `构造函数` 的 `一级属性`，属性名字全部都是大写的形式，未来容易发生变动，基本上用不到
+Here, `Global Attributes` refer to the `first-level properties` mounted on the `constructor`. Property names are all in uppercase, subject to change in the future and basically not needed.
 
 ## DEBUG
 
-是否开始 `debug` 模式，可以打印出视频全部的内置事件，默认关闭
+Whether to start `debug` mode, which can print out all built-in events of the video by default is turned off.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -19,7 +19,7 @@ var art = new Artplayer({
 
 ## CONTEXTMENU
 
-是否开启右键菜单，默认开启
+Whether to enable the right-click context menu, enabled by default.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -31,10 +31,9 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
 });
 ```
-
 ## NOTICE_TIME
 
-提示信息的显示时长，单位为毫秒，默认为 `2000`
+The display duration of the notification message, in milliseconds, defaults to `2000`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -49,7 +48,7 @@ var art = new Artplayer({
 
 ## SETTING_WIDTH
 
-设置面板的默认宽度，单位为像素，默认为 `250`
+The default width of the settings panel, in pixels, defaults to `250`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -66,10 +65,9 @@ var art = new Artplayer({
     aspectRatio: true,
 });
 ```
-
 ## SETTING_ITEM_WIDTH
 
-设置面板的设置项的默认宽度，单位为像素，默认为 `200`
+Set the default width of the settings items in the panel, in pixels, the default is `200`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -89,7 +87,7 @@ var art = new Artplayer({
 
 ## SETTING_ITEM_HEIGHT
 
-设置面板的设置项的默认高度，单位为像素，默认为 `35`
+Set the default height of the settings items in the panel, in pixels, the default is `35`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -109,7 +107,7 @@ var art = new Artplayer({
 
 ## RESIZE_TIME
 
-`resize` 事件的节流时间，单位为毫秒，默认为 `200`
+Throttle time for the `resize` event, in milliseconds, defaults to `200`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -128,7 +126,7 @@ art.on('resize', () => {
 
 ## SCROLL_TIME
 
-`scroll` 事件的节流时间，单位为毫秒，默认为 `200`
+Throttle time for the `scroll` event, in milliseconds, defaults to `200`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -144,10 +142,9 @@ art.on('scroll', () => {
     console.log('scroll');
 });
 ```
-
 ## SCROLL_GAP
 
-`view` 事件的边界容差距离，单位为像素，默认为 `50`
+The boundary tolerance distance for the `view` event, in pixels, default is `50`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -166,7 +163,7 @@ art.on('scroll', () => {
 
 ## AUTO_PLAYBACK_MAX
 
-自动回放功能的最大记录数，默认为 `10`
+The maximum number of records for the automatic playback feature, default is `10`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -182,7 +179,7 @@ var art = new Artplayer({
 
 ## AUTO_PLAYBACK_MIN
 
-自动回放功能的最小记录时长，单位为秒，默认为 `5`
+The minimum duration for the auto playback feature, in seconds, with a default of `5`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -198,7 +195,7 @@ var art = new Artplayer({
 
 ## AUTO_PLAYBACK_TIMEOUT
 
-自动回放功能的隐藏延迟时长，单位为毫秒，默认为 `3000`
+The delay duration for hiding the auto playback feature, in milliseconds, with a default of `3000`.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -214,7 +211,7 @@ var art = new Artplayer({
 
 ## RECONNECT_TIME_MAX
 
-发生连接错误时，自动连接的最大次数，默认为 `5`
+The maximum number of automatic reconnection attempts when a connection error occurs, default is `5`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -229,7 +226,7 @@ var art = new Artplayer({
 
 ## RECONNECT_SLEEP_TIME
 
-发生连接错误时，自动连接的延迟时间，单位为毫秒，默认为 `1000`
+The delay time for the automatic reconnection attempt when a connection error occurs, in milliseconds, default is `1000`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -244,7 +241,9 @@ var art = new Artplayer({
 
 ## CONTROL_HIDE_TIME
 
-底部控制栏的自动隐藏的延迟时间，单位为毫秒，默认为 `3000`
+...
+
+Auto-hide delay time for the bottom control bar, measured in milliseconds, default is `3000`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -259,7 +258,7 @@ var art = new Artplayer({
 
 ## DBCLICK_TIME
 
-双击事件的延迟事件，单位为毫秒，默认为 `300`
+Double-click event delay time, measured in milliseconds, default is `300`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -278,7 +277,7 @@ art.on('dblclick', () => {
 
 ## DBCLICK_FULLSCREEN
 
-在桌面端，是否双击切换全屏，默认为 `true`
+On desktop, whether to switch to fullscreen on double click, default is `true`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -293,7 +292,7 @@ var art = new Artplayer({
 
 ## MOBILE_DBCLICK_PLAY
 
-在移动端，是否双击切换播放暂停，默认为 `true`
+On mobile, whether to toggle play/pause on double click, default is `true`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -308,7 +307,19 @@ var art = new Artplayer({
 
 ## MOBILE_CLICK_PLAY
 
-在移动端，是否单击切换播放暂停，默认为 `false`
+On mobile, whether to play/pause on single click, default is `false`
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+Artplayer.MOBILE_CLICK_PLAY = true;
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+```
+On mobile devices, whether a tap toggles play/pause, defaults to `false`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -323,7 +334,7 @@ var art = new Artplayer({
 
 ## AUTO_ORIENTATION_TIME
 
-在移动端，自动旋屏的延迟时间，单位为毫秒，默认为 `200`
+On mobile devices, the delay time for auto-rotation, in milliseconds, defaults to `200`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -338,8 +349,7 @@ var art = new Artplayer({
 ```
 
 ## INFO_LOOP_TIME
-
-信息面板的刷新时间，单位为毫秒，默认为 `1000`
+Info panel refresh time, unit in milliseconds, default is `1000`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -356,7 +366,7 @@ art.info.show = true;
 
 ## FAST_FORWARD_VALUE
 
-在移动端，长按加速的速率倍数，默认为 `3`
+On mobile, the multiplier rate of the speed when long-pressing for fast-forward, default is `3`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -372,7 +382,8 @@ var art = new Artplayer({
 
 ## FAST_FORWARD_TIME
 
-在移动端，长按加速的延迟时间，单位为毫秒，默认为 `1000`
+The time, in milliseconds, to fast-forward when double-tapped, default is `10`
+On mobile, the delay time of the long-press acceleration, in milliseconds, default is `1000`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -388,7 +399,7 @@ var art = new Artplayer({
 
 ## TOUCH_MOVE_RATIO
 
-在移动端，左右滑动进度的速率倍数，默认为 `0.5`
+On mobile, the ratio of the speed of sliding left and right to seek, default is `0.5`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -403,7 +414,7 @@ var art = new Artplayer({
 
 ## VOLUME_STEP
 
-快捷键调节音量的幅度比例，默认为 `0.1`
+The step ratio of adjusting volume with shortcuts, default is `0.1`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -418,7 +429,7 @@ var art = new Artplayer({
 
 ## SEEK_STEP
 
-快捷键调节播放进度的幅度，单位为秒，默认为 `5`
+The increment by which the playback progress is adjusted via keyboard shortcuts, in seconds, the default is `5`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -433,7 +444,7 @@ var art = new Artplayer({
 
 ## PLAYBACK_RATE
 
-内置播放速率的列表，默认为 `[0.5, 0.75, 1, 1.25, 1.5, 2]`
+The list of built-in playback speeds, by default `[0.5, 0.75, 1, 1.25, 1.5, 2]`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -453,7 +464,7 @@ art.setting.show = true;
 
 ## ASPECT_RATIO
 
-内置视频长宽比的列表，默认为 `['default', '4:3', '16:9']`
+Built-in list of video aspect ratios, default is `['default', '4:3', '16:9']`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -470,10 +481,9 @@ var art = new Artplayer({
 art.contextmenu.show = true;
 art.setting.show = true;
 ```
-
 ## FLIP
 
-内置视频翻转的列表，默认为 `['normal', 'horizontal', 'vertical']`
+Built-in list of video flips, defaults to `['normal', 'horizontal', 'vertical']`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -493,7 +503,7 @@ art.setting.show = true;
 
 ## FULLSCREEN_WEB_IN_BODY
 
-网页全屏时，是否把播放器挂在在 `body` 元素下，默认为 `false`
+When in web fullscreen, whether to mount the player under the `body` element, defaults to `false`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -506,10 +516,9 @@ var art = new Artplayer({
     fullscreenWeb: true,
 });
 ```
-
 ## LOG_VERSION
 
-设置是否打印播放器版本，默认为 `true`
+Setting whether to print the player version, the default is `true`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -524,7 +533,7 @@ var art = new Artplayer({
 
 ## USE_RAF
 
-设置是否使用 `requestAnimationFrame` ，默认为 `false`，目前主要用于进度条的平滑效果
+Setting whether to use `requestAnimationFrame`, the default is `false`, currently mainly used for smooth progress bar effects
 
 <div className="run-code">▶ Run Code</div>
 

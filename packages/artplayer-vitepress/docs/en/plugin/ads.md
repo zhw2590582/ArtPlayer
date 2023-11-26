@@ -1,10 +1,10 @@
-# 视频广告
+# Video Ads
 
-## 演示
+## Demo
 
-👉 [查看完整演示](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads)
+👉 [View Full Demo](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads)
 
-## 安装
+## Installation
 
 ::: code-group
 
@@ -39,8 +39,7 @@ https://unpkg.com/artplayer-plugin-ads/dist/artplayer-plugin-ads.js
 ```
 
 :::
-
-## 使用
+## Usage
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-ads/index.js">
     ▶ Run Code
@@ -55,32 +54,32 @@ var art = new Artplayer({
     fullscreenWeb: true,
     plugins: [
         artplayerPluginAds({
-            // html广告，假如是视频广告则忽略该值
+            // HTML ad, ignored if it's a video ad
             html: '<img src="/assets/sample/poster.jpg">',
 
-            // 视频广告的地址
+            // URL of the video ad
             video: '/assets/sample/test1.mp4',
 
-            // 广告跳转网址，为空则不跳转
+            // Ad redirect URL, no redirection if empty
             url: 'http://artplayer.org',
 
-            // 必须观看的时长，期间不能被跳过，单位为秒
-            // 当该值大于或等于totalDuration时，不能提前关闭广告
-            // 当该值等于或小于0时，则随时都可以关闭广告
+            // The duration that must be watched, which can't be skipped, in seconds
+            // If this value is greater than or equal to totalDuration, the ad can't be closed early
+            // If this value is less than or equal to 0, then the ad can be closed at any time
             playDuration: 5,
 
-            // 广告总时长，单位为秒
+            // Total duration of the ad, in seconds
             totalDuration: 10,
 
-            // 视频广告是否默认静音
+            // Whether the video ad is muted by default
             muted: false,
 
-            // 多语言支持
+            // Multilingual support
             i18n: {
-                close: '关闭广告',
-                countdown: '%s秒',
-                detail: '查看详情',
-                canBeClosed: '%s秒后可关闭广告',
+                close: 'Close ad',
+                countdown: '%s seconds',
+                detail: 'See details',
+                canBeClosed: '%s seconds until the ad can be closed',
             },
         }),
     ],

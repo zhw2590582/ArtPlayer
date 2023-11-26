@@ -1,14 +1,14 @@
-# Iframe 控制
+# Iframe Control
 
-## 说明
+## Description
 
-通过该插件，你可以轻松在 `index.html` 里控制跨域 `iframe.html` 页面里的播放器，如在 `index.html` 里通过代码控制 `iframe.html` 播放器的功能，或者获取 `iframe.html` 播放器的值
+With this plugin, you can easily control the player inside the cross-domain `iframe.html` page from within `index.html`. For example, you can control the functionalities of the `iframe.html` player from `index.html` or retrieve the values of the `iframe.html` player.
 
-## 演示
+## Demonstration
 
-👉 [查看完整演示](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe)
+👉 [View full demonstration](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe)
 
-## 安装
+## Installation
 
 ::: code-group
 
@@ -29,7 +29,6 @@ pnpm add artplayer-plugin-iframe
 ```
 
 :::
-
 ## `CDN`
 
 ::: code-group
@@ -44,7 +43,7 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
 
 :::
 
-## 使用
+## Usage
 
 ::: code-group
 
@@ -107,12 +106,11 @@ https://unpkg.com/artplayer-plugin-iframe/dist/artplayer-plugin-iframe.js
 ```
 
 :::
-
-## `index.html` 接口
+## `index.html` Interface
 
 ### `commit`
 
-从 `index.html` 将消息推送到 `iframe.html`，该函数将在 `iframe.html` 内部运行，同时它也能用于异步获取 `iframe.html` 里的值
+Push messages from `index.html` to `iframe.html`. This function will run inside `iframe.html` and can also be used to asynchronously retrieve values from within `iframe.html`.
 
 ```js
 iframe.commit(() => {
@@ -141,10 +139,9 @@ iframe.commit(() => {
     });
 })();
 ```
-
 ### `message`
 
-在 `index.html` 接收来自 `iframe.html` 的消息
+Receive messages from `iframe.html` in `index.html`
 
 ```js
 iframe.message((event) => {
@@ -154,23 +151,23 @@ iframe.message((event) => {
 
 ### `destroy`
 
-销毁后 `index.html` 无法与 `iframe.html` 通信
+After destruction, `index.html` can no longer communicate with `iframe.html`
 
 ```js
 iframe.destroy();
 ```
 
-## `iframe.html` 接口
+## `iframe.html` Interface
 
-:::warning 提示
+:::warning Warning
 
-`iframe.html` 接口 只能运行在 `iframe.html` 里
+The `iframe.html` interface can only run inside `iframe.html`
 
 :::
 
 ### `inject`
 
-注入脚本，接收来自 `index.html` 的消息
+Inject a script, receive messages from `index.html`
 
 ```js
 ArtplayerPluginIframe.inject();
@@ -178,7 +175,7 @@ ArtplayerPluginIframe.inject();
 
 ### `postMessage`
 
-将消息推送到 `index.html`
+Push messages to `index.html`
 
 ```js
 iframe.message((event) => {

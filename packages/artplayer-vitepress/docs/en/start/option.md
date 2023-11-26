@@ -1,11 +1,11 @@
-# 基础选项
+# Basic Options
 
 ## `container`
 
--   Type: `String, Element`
--   Default: `#artplayer`
+- Type: `String, Element`
+- Default: `#artplayer`
 
-播放器挂载的 `DOM` 容器
+The `DOM` container where the player mounts
 
 <div className="run-code">▶ Run Code</div>
 
@@ -17,7 +17,7 @@ var art = new Artplayer({
 });
 ```
 
-您可能需要初始化容器元素的大小，如:
+You may need to initialize the size of the container element, like:
 
 ```css{2-3}
 .artplayer-app {
@@ -26,7 +26,7 @@ var art = new Artplayer({
 }
 ```
 
-或者使用 `aspect-ratio`：
+Or use `aspect-ratio`:
 
 ```css{2}
 .artplayer-app {
@@ -34,18 +34,17 @@ var art = new Artplayer({
 }
 ```
 
-:::warning 提示
+:::warning Tip
 
-全部选项里，只有 `container` 是必填的
+Among all options, only `container` is mandatory.
 
 :::
-
 ## `url`
 
--   Type: `String`
--   Default: `''`
+- Type: `String`
+- Default: `''`
 
-视频源地址
+The video source address
 
 <div className="run-code">▶ Run Code</div>
 
@@ -56,7 +55,7 @@ var art = new Artplayer({
 });
 ```
 
-有时候 `url` 地址没那么快知道，这时候你可以异步设置 `url`
+Sometimes the `url` is not known so quickly, in which case you can set the `url` asynchronously.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -70,21 +69,19 @@ setTimeout(() => {
 }, 1000);
 ```
 
-:::warning 提示
+:::warning Note
 
-默认支持三种视频文件格式：`.mp4`, `.ogg`, `.webm`
+The default support is for three video file formats: `.mp4`, `.ogg`, `.webm`.
 
-如需要播放 `.m3u8` 或者 `.flv` 等其它格式，请参考左侧的 `第三方库`
+If you need to play other formats such as `.m3u8` or `.flv`, please refer to the `Third-party Libraries` on the left side.
 
 :::
-
-
 ## `id`
 
--   Type: `String`
--   Default: `''`
+- Type: `String`
+- Default: `''`
 
-播放器的唯一标识，目前只用于记忆播放 `autoplayback`
+The unique identifier of the player, currently used only for remembering playback with `autoplayback`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -98,10 +95,10 @@ var art = new Artplayer({
 
 ## `onReady`
 
--   Type: `Function`
--   Default: `undefined`
+- Type: `Function`
+- Default: `undefined`
 
-构造函数接受一个函数作为第二个参数，播放器初始化成功且视频可以播放时触发，和`ready`事件一样
+The constructor accepts a function as the second argument, which is triggered when the player is successfully initialized and the video is ready to play, similar to the `ready` event
 
 <div className="run-code">▶ Run Code</div>
 
@@ -117,8 +114,7 @@ var art = new Artplayer(
     },
 );
 ```
-
-等同于:
+Equivalent to:
 
 ```js{7-9}
 var art = new Artplayer({
@@ -132,9 +128,9 @@ art.on('ready', () => {
 });
 ```
 
-:::warning 提示
+:::warning Warning
 
-回调函数里的`this`就是播放器实例，但回调函数假如使用了箭头函数，`this`则不会指向播放器实例
+The `this` inside the callback function refers to the player instance, but if an arrow function is used for the callback, `this` will not point to the player instance.
 
 :::
 
@@ -143,7 +139,7 @@ art.on('ready', () => {
 -   Type: `String`
 -   Default: `''`
 
-视频的海报，只会出现在播放器初始化且未播放的状态下
+The poster of the video, which only appears when the player is initialized and before it starts playing.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -154,13 +150,12 @@ var art = new Artplayer({
     poster: '/assets/sample/poster.jpg',
 });
 ```
-
 ## `theme`
 
--   Type: `String`
--   Default: `#f00`
+- Type: `String`
+- Default: `#f00`
 
-播放器主题颜色，目前用于 `进度条` 和 `高亮元素` 上
+Player theme color, currently used for `progress bar` and `highlight elements`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -174,10 +169,10 @@ var art = new Artplayer({
 
 ## `volume`
 
--   Type: `Number`
--   Default: `0.7`
+- Type: `Number`
+- Default: `0.7`
 
-播放器的默认音量
+The default volume of the player
 
 <div className="run-code">▶ Run Code</div>
 
@@ -189,18 +184,17 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 提示
+:::warning Warning
 
-播放器会缓存最后一次音量的大小，下次初始化时（如刷新页面）播放器会读取该缓存值
+The player will cache the size of the last volume. When the player is initialized next time (such as refreshing the page), it will read this cached value.
 
 :::
-
 ## `isLive`
 
 -   Type: `Boolean`
 -   Default: `false`
 
-使用直播模式，会隐藏进度条和播放时间
+Use live mode, which will hide the progress bar and playback time
 
 <div className="run-code">▶ Run Code</div>
 
@@ -217,7 +211,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否默认静音
+Whether to mute by default
 
 <div className="run-code">▶ Run Code</div>
 
@@ -234,7 +228,10 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否自动播放
+Whether to play automatically
+- Default: `false`
+
+Autoplay
 
 <div className="run-code">▶ Run Code</div>
 
@@ -247,18 +244,18 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 提示
+:::warning Warning
 
-假如希望默认进入页面就能自动播放视频，`muted` 必需为 `true`，更多信息请阅读 [Autoplay Policy Changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
+If you want the video to autoplay by default upon entering the page, `muted` must be set to `true`. For more information, please read [Autoplay Policy Changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes)
 
 :::
 
 ## `autoSize`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-播放器的尺寸默认会填充整个 `container` 容器尺寸，所以经常出现黑边，该值能自动调整播放器尺寸以隐藏黑边，类似 `css` 的 `object-fit: cover;`
+The size of the player will by default fill the entire `container`, which often results in black bars. This value can automatically adjust the player size to hide the black bars, similar to `css`'s `object-fit: cover;`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -275,7 +272,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-当播放器滚动到浏览器视口以外时，自动进入 `迷你播放` 模式
+Automatically enter `mini mode` when the player scrolls out of the browser viewport
 
 <div className="run-code">▶ Run Code</div>
 
@@ -292,7 +289,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否循环播放
+Whether to loop the video
 
 <div className="run-code">▶ Run Code</div>
 
@@ -306,10 +303,10 @@ var art = new Artplayer({
 
 ## `flip`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-是否显示视频翻转功能，目前只出现在 `设置面板` 和 `右键菜单` 里
+Whether to show the video flip feature, currently only available in `Settings Panel` and `Context Menu`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -324,10 +321,10 @@ var art = new Artplayer({
 
 ## `playbackRate`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-是否显示视频播放速度功能，会出现在 `设置面板` 和 `右键菜单` 里
+Whether to show the playback speed feature of the video, it will appear in `Settings Panel` and `Context Menu`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -345,7 +342,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否显示视频长宽比功能，会出现在 `设置面板` 和 `右键菜单` 里
+Displays the video aspect ratio feature, it will appear in the `Settings Panel` and `Context Menu`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -363,7 +360,8 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否在底部控制栏里显示 `视频截图` 功能
+Whether to show the screenshot button, it will appear in the `toolbar` and `context menu`
+Display `Screenshot` function in the bottom control bar
 
 <div className="run-code">▶ Run Code</div>
 
@@ -375,18 +373,18 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 提示
+:::warning Warning
 
-由于浏览器安全机制，假如视频源地址和网站是跨域的，可能会出现截图失败
+Due to browser security mechanisms, if the video source address and the website are cross-origin, screenshot failure may occur
 
 :::
 
 ## `setting`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-是否在底部控制栏里显示 `设置面板` 的开关按钮
+Display the toggle button for the `Settings Panel` in the bottom control bar
 
 <div className="run-code">▶ Run Code</div>
 
@@ -397,13 +395,12 @@ var art = new Artplayer({
     setting: true,
 });
 ```
-
 ## `hotkey`
 
--   Type: `Boolean`
--   Default: `true`
+- Type: `Boolean`
+- Default: `true`
 
-是否使用快捷键
+Whether to use hotkeys
 
 <div className="run-code">▶ Run Code</div>
 
@@ -415,26 +412,25 @@ var art = new Artplayer({
 });
 ```
 
-| 热键    | 描述          |
-| ------- | ------------- |
-| `↑`     | 增加音量      |
-| `↓`     | 降低音量      |
-| `←`     | 视频快进      |
-| `→`     | 视频快退      |
-| `space` | 切换播放/暂停 |
+| Hotkey  | Description          |
+| ------- | --------------------- |
+| `↑`     | Increase volume       |
+| `↓`     | Decrease volume       |
+| `←`     | Fast forward video    |
+| `→`     | Rewind video          |
+| `space` | Toggle play/pause     |
 
-:::warning 提示
+:::warning Tip
 
-只在播放器获得焦点后（如点击了播放器后），这些快捷键才会生效
+These hotkeys will only work after the player gains focus (such as after clicking on the player).
 
 :::
 
 ## `pip`
 
--   Type: `Boolean`
--   Default: `false`
-
-是否在底部控制栏里显示 `画中画` 的开关按钮
+- Type: `Boolean`
+- Default: `false`
+Show the `Picture in Picture` switch button on the bottom control bar
 
 <div className="run-code">▶ Run Code</div>
 
@@ -451,7 +447,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `true`
 
-假如页面里同时存在多个播放器，是否只能让一个播放器播放
+If there are multiple players on the page, should only one player be allowed to play at a time
 
 <div className="run-code">▶ Run Code</div>
 
@@ -467,8 +463,7 @@ var art = new Artplayer({
 
 -   Type: `Boolean`
 -   Default: `false`
-
-是否在底部控制栏里显示播放器 `窗口全屏` 按钮
+Display the `Window Fullscreen` button on the control bar at the bottom
 
 <div className="run-code">▶ Run Code</div>
 
@@ -485,7 +480,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否在底部控制栏里显示播放器 `网页全屏` 按钮
+Display the `Web Fullscreen` button on the control bar at the bottom
 
 <div className="run-code">▶ Run Code</div>
 
@@ -500,9 +495,10 @@ var art = new Artplayer({
 ## `subtitleOffset`
 
 -   Type: `Boolean`
+
 -   Default: `false`
 
-字幕时间偏移，范围在 `[-5s, 5s]`，出现在 `设置面板` 里
+Subtitle time offset, the range is `[-5s, 5s]`, appearing in the `Settings panel`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -523,7 +519,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-迷你进度条，只在播放器失去焦点后且正在播放时出现
+Mini progress bar, only appears when the player loses focus and is playing
 
 <div className="run-code">▶ Run Code</div>
 
@@ -540,9 +536,9 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否使用 `SSR` 挂载模式，假如你希望在播放器挂载前，就提前渲染好播放器所需的 `HTML` 时有用
+Whether to use `SSR` (Server-Side Rendering) mount mode, useful if you want to pre-render the player's required `HTML` before the player mounts
 
-你可以通过 `Artplayer.html` 访问到播放器所需的 `HTML`
+You can access the player's required `HTML` through `Artplayer.html`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -562,7 +558,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `true`
 
-在移动端是否使用 `playsInline` 模式
+Whether to use `playsInline` mode on mobile devices
 
 <div className="run-code">▶ Run Code</div>
 
@@ -579,7 +575,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的 `层`
+Initializes custom `layers`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -590,7 +586,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     layers: [
         {
-            name: 'potser',
+            name: 'poster',
             html: `<img style="width: 100px" src="${img}">`,
             style: {
                 position: 'absolute',
@@ -609,8 +605,7 @@ var art = new Artplayer({
     ],
 });
 ```
-
-:::warning `组件配置` 请参考以下地址：
+:::warning `Component Configuration` Please refer to the following address:
 
 [/component/layers.html](/component/layers.html)
 
@@ -621,7 +616,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的 `设置面板`
+Initializes custom `settings panel`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -662,8 +657,7 @@ var art = new Artplayer({
     ],
 });
 ```
-
-:::warning `设置面板` 请参考以下地址
+:::warning `Settings Panel` Please refer to the following address
 
 [/component/setting.html](/component/setting.html)
 
@@ -674,7 +668,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的 `右键菜单`
+Initialize custom `context menu`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -693,8 +687,7 @@ var art = new Artplayer({
     ],
 });
 ```
-
-:::warning `组件配置` 请参考以下地址：
+:::warning `Component Configuration` Please refer to the following address:
 
 [/component/contextmenu.html](/component/contextmenu.html)-   Type:
 
@@ -705,7 +698,7 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的底部 `控制栏`
+Initializes custom bottom `control bar`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -728,8 +721,7 @@ var art = new Artplayer({
     ],
 });
 ```
-
-:::warning `组件配置` 请参考以下地址：
+:::warning `Component Configuration` Refer to the following address:
 
 [/component/controls.html](/component/controls.html)
 
@@ -740,13 +732,13 @@ var art = new Artplayer({
 -   Type: `Array`
 -   Default: `[]`
 
-是否在底部控制栏里显示 `画质选择` 列表
+Whether to show the `quality selection` list in the bottom control bar
 
-| 属性      | 类型      | 描述     |
-| --------- | --------- | -------- |
-| `default` | `Boolean` | 默认画质 |
-| `html`    | `String`  | 画质名字 |
-| `url`     | `String`  | 画质地址 |
+| Property   | Type      | Description    |
+| ---------- | --------- | -------------- |
+| `default`  | `Boolean` | Default quality|
+| `html`     | `String`  | Quality name   |
+| `url`      | `String`  | Quality URL    |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -767,18 +759,17 @@ var art = new Artplayer({
     ],
 });
 ```
-
 ## `highlight`
 
--   Type: `Array`
--   Default: `[]`
+- Type: `Array`
+- Default: `[]`
 
-在进度条上显示 `高亮信息`
+Show `highlight information` on the progress bar
 
-| 属性   | 类型     | 描述               |
-| ------ | -------- | ------------------ |
-| `time` | `Number` | 高亮时间（单位秒） |
-| `text` | `String` | 高亮文本           |
+| Property | Type     | Description          |
+| -------- | -------- | -------------------- |
+| `time`   | `Number` | Highlight time (in seconds)|
+| `text`   | `String` | Highlight text       |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -810,13 +801,12 @@ var art = new Artplayer({
     ],
 });
 ```
-
 ## `plugins`
 
 -   Type: `Array`
 -   Default: `[]`
 
-初始化自定义的 `插件`
+Initialize custom `plugins`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -844,15 +834,15 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-在进度条上设置 `预览图`
+Set `thumbnails` on the progress bar
 
-| 属性     | 类型     | 描述       |
-| -------- | -------- | ---------- |
-| `url`    | `String` | 预览图地址 |
-| `number` | `Number` | 预览图数量 |
-| `column` | `Number` | 预览图列数 |
-| `width`  | `Number` | 预览图宽度 |
-| `height` | `Number` | 预览图高度 |
+| Property | Type     | Description         |
+| -------- | -------- | ------------------- |
+| `url`    | `String` | Thumbnail URL       |
+| `number` | `Number` | Number of thumbnails|
+| `column` | `Number` | Columns of thumbnails|
+| `width`  | `Number` | Thumbnail width     |
+| `height` | `Number` | Thumbnail height    |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -867,8 +857,7 @@ var art = new Artplayer({
     },
 });
 ```
-
-:::warning 在线生成预览图
+:::warning Online thumbnail generation
 
 [artplayer-tool-thumbnail](https://artplayer.org/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=thumbnail)
 
@@ -879,17 +868,18 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-设置视频的字幕，支持字幕格式：`vtt`, `srt`, `ass`
+Set the video subtitles, supporting subtitle formats: `vtt`, `srt`, `ass`
 
-| 属性        | 类型       | 描述                                |
+| Property    | Type       | Description                          |
 | ----------- | ---------- | ----------------------------------- |
-| `name`       | `String`   | 字幕名字                            |
-| `url`       | `String`   | 字幕地址                            |
-| `type`      | `String`   | 字幕类型，可选 `vtt`, `srt`, `ass`  |
-| `style`     | `Object`   | 字幕样式                            |
-| `encoding`  | `String`   | 字幕编码，默认 `utf-8`              |
-| `escape`    | `Boolean`  | 是否转义 `html` 标签，默认为 `true` |
-| `onVttLoad` | `Function` | 用于修改 `vtt` 文本的函数           |
+| `name`      | `String`   | Subtitle name                       |
+| `url`       | `String`   | Subtitle URL                        |
+| `type`      | `String`   | Subtitle type, options: `vtt`, `srt`, `ass` |
+
+| `style`     | `Object`   | Subtitle style                      |
+| `encoding`  | `String`   | Subtitle encoding, default `utf-8`  |
+| `escape`    | `Boolean`  | Whether to escape `html` tags, default `true` |
+| `onVttLoad` | `Function` | Function to modify `vtt` text       |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -909,13 +899,12 @@ var art = new Artplayer({
     },
 });
 ```
-
 ## `moreVideoAttr`
 
 -   Type: `Object`
--   Default: `{'controls': false,'preload': 'metadata'}`
+-   Default: `{'controls': false, 'preload': 'metadata'}`
 
-更多视频属性，这些属性将直接写入视频元素里
+Additional video attributes, these attributes will be directly written into the video element
 
 <div className="run-code">▶ Run Code</div>
 
@@ -935,7 +924,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-用于替换默认图标，支持 `Html` 字符串和 `HTMLElement`
+Used to replace default icons, supports `Html` strings and `HTMLElement`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -944,13 +933,12 @@ var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     icons: {
-        loading: '<img src="/assets/img/ploading.gif">',
+        loading: '<img src="/assets/img/loading.gif">',
         state: '<img src="/assets/img/state.png">',
     },
 });
 ```
-
-:::warning 全部图标的定义
+:::warning Definition of all icons
 
 [artplayer/types/icons.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts)
 
@@ -961,7 +949,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `''`
 
-用于指明视频的格式，需要配合 `customType` 一起使用，默认视频的格式就是视频地址的后缀（如 `.m3u8`, `.mkv`, `.ts`），但有时候视频地地址没有正确的后缀，所以需要特别指明
+Used to specify the format of the video, which is used in conjunction with `customType`. By default, the video format is the same as the file extension of the video URL (such as `.m3u8`, `.mkv`, `.ts`). However, sometimes the video URL does not have the correct file extension, so it needs to be specifically stated.
 
 <div className="run-code">▶ Run Code</div>
 
@@ -973,26 +961,25 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 后缀的识别
+:::warning Recognition of file extensions
 
-播放器只能解析这种后缀：`/assets/sample/video.m3u8`
+The player can only parse this type of file extension: `/assets/sample/video.m3u8`
 
-但无法解析这种后缀：`/assets/sample/video?type=m3u8`
+But it cannot parse this type of file extension: `/assets/sample/video?type=m3u8`
 
-所以假如你使用了 `customType`，最好同时要指明 `type`
+Therefore, if you use `customType`, it is best to specify `type` as well
 
 :::
-
 ## `customType`
 
 -   Type: `Object`
 -   Default: `{}`
 
-通过视频的 `type` 进行匹配，把视频解码权交给第三方程序进行处理，处理的函数能接收三个参数
+Matches the video's `type` to delegate the video decoding to a third-party program for processing. The processing function can receive three parameters:
 
-- `video` : 视频 `DOM` 元素
-- `url` : 视频地址
-- `art` : 当前实例
+- `video`: Video `DOM` element
+- `url`: Video address
+- `art`: Current instance
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1013,8 +1000,7 @@ var art = new Artplayer({
 -   Type: `String`
 -   Default: `navigator.language.toLowerCase()`
 
-默认显示语言，目前支持：`en`, `zh-cn`
-
+Default display language, currently supports: `en`, `zh-cn`
 <div className="run-code">▶ Run Code</div>
 
 ```js{4}
@@ -1025,7 +1011,7 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 更多的语言设置
+:::warning More language settings
 
 [/start/i18n.html](/start/i18n.html)
 
@@ -1036,9 +1022,9 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-自定义 `i18n` 配置，该配置会和自带的 `i18n` 进行深度合并
+Custom `i18n` configuration, which will be deeply merged with the built-in `i18n`
 
-新增你的语言:
+Add your language:
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1054,8 +1040,7 @@ var art = new Artplayer({
     },
 });
 ```
-
-修改现有的语言
+Modifying the existing language
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1074,7 +1059,7 @@ var art = new Artplayer({
 });
 ```
 
-:::warning 更多的语言设置
+:::warning More language settings
 
 [/start/i18n.html](/start/i18n.html)
 
@@ -1085,7 +1070,7 @@ var art = new Artplayer({
 -   Type: `Boolean`
 -   Default: `false`
 
-是否在移动端显示一个 `锁定按钮` ，用于隐藏底部 `控制栏`
+Whether to display a `lock button` on mobile to hide the bottom `control bar`
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1099,10 +1084,10 @@ var art = new Artplayer({
 
 ## `fastForward`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-是否在移动端添加长按视频快进功能
+Whether to add fast forward function by long pressing on the video on mobile devices
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1116,10 +1101,10 @@ var art = new Artplayer({
 
 ## `autoPlayback`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-是否使用自动 `回放功能`
+Whether to use the automatic playback feature
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1131,21 +1116,20 @@ var art = new Artplayer({
     autoPlayback: true,
 });
 ```
+:::warning Warning
 
-:::warning 提示
+Because the player by default uses `url` as the `key` to cache the playback progress
 
-因为播放器默认使用 `url` 作为 `key` 来缓存播放进度的
-
-但假如你的同一个视频的 `url` 是不同的话，那么你需要使用 `id` 来标识视频的唯一 `key`
+But if the `url` of the same video is different, then you need to use `id` to identify the unique `key` of the video
 
 :::
 
 ## `autoOrientation`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-是否在移动端的网页全屏时，根据视频尺寸和视口尺寸，旋转播放器
+Whether to rotate the player on mobile web pages in full screen according to the video size and the viewport dimensions
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1159,10 +1143,10 @@ var art = new Artplayer({
 
 ## `airplay`
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
-是否显示 `airplay` 按钮，当前只有部分浏览器支持该功能
+Whether to display the `airplay` button, currently only some browsers support this feature
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1179,7 +1163,7 @@ var art = new Artplayer({
 -   Type: `Object`
 -   Default: `{}`
 
-用于改变内置的css变量
+Used to change built-in CSS variables
 
 <div className="run-code">▶ Run Code</div>
 
@@ -1193,8 +1177,8 @@ var art = new Artplayer({
 });
 ```
 
-:::warning cssVar 写法参考
+:::warning Reference for cssVar syntax
 
-[artplayer/types/cssVar.d.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
+[artplayer/types/cssVar.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/cssVar.d.ts)
 
 :::
