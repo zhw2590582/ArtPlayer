@@ -47,10 +47,10 @@ function splitMarkdown(text, maxChars) {
 const translateContent = async (content, targetLanguage, openAIKey) => {
     try {
         const response = await axios.post(
-            'https://api.openai.com/v1/engines/gpt-3.5-turbo/completions',
+            'https://api.openai.com/v1/engines/gpt-4-1106-preview/completions',
             {
                 prompt: `Translate the following text to ${targetLanguage}:\n\n${content}`,
-                max_tokens: 1024,
+                max_tokens: 2048,
             },
             {
                 headers: {
@@ -95,7 +95,7 @@ const translateMarkdownFiles = async (filePaths, targetLanguage, openAIKey, maxC
     }
     const mdsPaths = glob.sync(path.resolve(enPath, '**/*.md'));
     const openAIKey = process.env.OPENAI_KEY;
-    const maxCharsPerRequest = 1000;
+    const maxCharsPerRequest = 2000;
     if (openAIKey) {
         await translateMarkdownFiles(mdsPaths, 'English', openAIKey, maxCharsPerRequest);
     } else {
