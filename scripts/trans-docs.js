@@ -3,10 +3,7 @@ import cpy from 'cpy';
 import path from 'path';
 import axios from 'axios';
 import { glob } from 'glob';
-import dotenv from 'dotenv';
 import { removeDir } from './utils.js';
-
-dotenv.config();
 
 function splitMarkdown(text, maxChars) {
     const parts = [];
@@ -44,23 +41,21 @@ function splitMarkdown(text, maxChars) {
     return parts;
 }
 
-const translateContent = async (content, targetLanguage, openAIKey) => {
+const translateContent = async (content, targetLanguage) => {
     try {
         const response = await axios.post(
-            'https://api.openai.com/v1/engines/gpt-4-1106-preview/completions',
+            'https://api.aimu.app/openai/chat',
             {
-                prompt: `Translate the following text to ${targetLanguage}:\n\n${content}`,
-                max_tokens: 2048,
+                content: `Translate the following text to ${targetLanguage}:\n\n${content}`,
             },
             {
                 headers: {
-                    Authorization: `Bearer ${openAIKey}`,
                     'Content-Type': 'application/json',
                 },
+                timeout: 60000,
             },
         );
-
-        return response.data.choices[0].text;
+        return response.data.data;
     } catch (error) {
         console.error('Error during translation:', error);
         return '';
@@ -94,11 +89,6 @@ const translateMarkdownFiles = async (filePaths, targetLanguage, openAIKey, maxC
         await cpy(path.resolve(basePath, dir), path.resolve(enPath, dir), { flat: true });
     }
     const mdsPaths = glob.sync(path.resolve(enPath, '**/*.md'));
-    const openAIKey = process.env.OPENAI_KEY;
-    const maxCharsPerRequest = 2000;
-    if (openAIKey) {
-        await translateMarkdownFiles(mdsPaths, 'English', openAIKey, maxCharsPerRequest);
-    } else {
-        console.log('OPENAI_KEY is not set');
-    }
+    const maxCharsPerRequest = 1024;
+    await translateMarkdownFiles(mdsPaths, 'English', maxCharsPerRequest);
 })();

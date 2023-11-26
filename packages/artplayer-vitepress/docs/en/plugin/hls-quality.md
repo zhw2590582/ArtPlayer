@@ -1,10 +1,10 @@
-# HLS 画质
+# HLS Quality
 
-## 演示
+## Demo
 
-👉 [查看完整演示](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-quality/index.js&example=hls.quality)
+👉 [View Full Demo](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-quality/index.js&example=hls.quality)
 
-## 安装
+## Installation
 
 ::: code-group
 
