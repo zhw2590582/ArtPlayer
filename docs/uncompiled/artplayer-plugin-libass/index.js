@@ -147,17 +147,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _adapter = require("./adapter");
 var _adapterDefault = parcelHelpers.interopDefault(_adapter);
-function checkVersion(art) {
-    const { version , utils: { errorHandle  }  } = art.constructor;
-    const arr = version.split(".").map(Number);
-    const major = arr[0];
-    const minor = arr[1] / 100;
-    errorHandle(major + minor >= 5, `Artplayer.js@${version} is not compatible the artplayerPluginLibass@${artplayerPluginLibass.version}. Please update it to version Artplayer.js@5.x.x`);
-}
 function artplayerPluginLibass(option) {
     return (art)=>{
-        checkVersion(art);
-        let adapter = new (0, _adapterDefault.default)(art, option);
+        const adapter = new (0, _adapterDefault.default)(art, option);
         return {
             name: "artplayerPluginLibass",
             libass: adapter.libass,
@@ -171,12 +163,9 @@ function artplayerPluginLibass(option) {
     };
 }
 exports.default = artplayerPluginLibass;
-artplayerPluginLibass.env = "development";
-artplayerPluginLibass.version = "1.0.0";
-artplayerPluginLibass.build = "2023-11-14 11:34:31";
 if (typeof window !== "undefined") window["artplayerPluginLibass"] = artplayerPluginLibass;
 
-},{"./adapter":"k93pI","@parcel/transformer-js/src/esmodule-helpers.js":"gONhf"}],"k93pI":[function(require,module,exports) {
+},{"./adapter":"k93pI","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"k93pI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _libassWasm = require("libass-wasm");
@@ -339,7 +328,7 @@ class LibassAdapter {
 }
 exports.default = LibassAdapter;
 
-},{"libass-wasm":"2htC1","@parcel/transformer-js/src/esmodule-helpers.js":"gONhf"}],"2htC1":[function(require,module,exports) {
+},{"libass-wasm":"5YbrE","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5YbrE":[function(require,module,exports) {
 // # The following lists all copyright notices and licenses for the
 // # work contained in JavascriptSubtitlesOctopus per project.
 // 
@@ -1878,7 +1867,7 @@ var SubtitlesOctopus = function(options) {
 if (typeof SubtitlesOctopusOnLoad == "function") SubtitlesOctopusOnLoad();
 if (0, module.exports) exports = module.exports = SubtitlesOctopus;
 
-},{}],"gONhf":[function(require,module,exports) {
+},{}],"6SDkN":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
