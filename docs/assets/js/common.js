@@ -172,7 +172,8 @@
         [...Artplayer.instances].forEach(function (art) {
             art.destroy(true);
         });
-        eval(editor.getValue());
+        const value = editor.getValue();
+        eval(value);
         window.art = Artplayer.instances[0];
     }
 
