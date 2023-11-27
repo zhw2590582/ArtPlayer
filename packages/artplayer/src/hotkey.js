@@ -43,7 +43,7 @@ export default class Hotkey {
             if (this.art.isFocus) {
                 const tag = document.activeElement.tagName.toUpperCase();
                 const editable = document.activeElement.getAttribute('contenteditable');
-                if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true') {
+                if (tag !== 'INPUT' && tag !== 'TEXTAREA' && editable !== '' && editable !== 'true' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
                     const events = this.keys[event.keyCode];
                     if (events) {
                         event.preventDefault();
