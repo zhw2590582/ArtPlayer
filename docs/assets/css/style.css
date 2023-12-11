@@ -60,6 +60,7 @@ input[type="file"] {
     font-size: 13px;
     height: 48px;
     width: 100%;
+    flex-shrink: 0;
     padding: 0 0 0 20px;
     border-bottom: 1px solid rgb(17, 21, 24);
     background-color: rgb(28, 32, 34);
@@ -82,11 +83,11 @@ input[type="file"] {
     line-height: 1;
 }
 
-.header .qq {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-    color: rgb(255 255 255 / 50%);
+.qq {
+    height: 48px;
+    line-height: 48px;
+    padding-left: 15px;
+    color: rgb(255 255 255 / 30%);
 }
 
 .header .checkbox {
