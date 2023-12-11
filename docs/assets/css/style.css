@@ -89,13 +89,13 @@ input[type="file"] {
     color: rgb(255 255 255 / 50%);
 }
 
-.header .typeScript {
+.header .checkbox {
     display: flex;
     align-items: center;
     margin-right: 15px;
 }
 
-.header .typeScript input {
+.header .checkbox input {
     margin-right: 5px;
 }
 

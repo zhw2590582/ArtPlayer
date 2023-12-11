@@ -93,8 +93,11 @@
                 </div>
                 <div class="tool">
                     <div class="qq">QQ群: 320881312</div>
-                    <div class="typeScript">
+                    <div class="checkbox">
                         <input type="checkbox" id="typeScript"><label for="typeScript">TS</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="pro"><label for="pro">PRO</label>
                     </div>
                     <div class="run">▶ Run Code</div>
                 </div>
@@ -123,10 +126,24 @@
         <div class="popinner"></div>
     </div>
     <script src="./assets/js/console.js"></script>
-    <script src="./uncompiled/artplayer/index.js"></script>
-    <!-- <script src="./compiled/artplayer.js"></script> -->
     <script src="./assets/js/vs/loader.js"></script>
-    <script src="./assets/js/common.js"></script>
+    <script>
+        var artplayer = document.createElement('script');
+        var common = document.createElement('script');
+
+        artplayer.onload = function () {
+            common.src = "./assets/js/common.js";
+            document.body.appendChild(common);
+        }
+
+        if (localStorage.getItem('pro') === 'true') {
+            artplayer.src = "./compiled/artplayer.js"
+        } else {
+            artplayer.src = "./uncompiled/artplayer/index.js"
+        }
+
+        document.body.appendChild(artplayer);
+    </script>
     <script>
         var isLocalhost = Boolean(
             window.location.hostname === 'localhost' ||

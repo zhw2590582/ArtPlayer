@@ -10,11 +10,13 @@
     var $run = document.querySelector('.run');
     var $popups = document.querySelector('.popups');
     var $console = document.querySelector('.console');
+    var $pro = document.querySelector('#pro');
     var $typeScript = document.querySelector('#typeScript');
     var $file = document.querySelector('#file');
 
     var loadedLibs = [];
     window['consoleLog']($console);
+    $pro.checked = localStorage.getItem('pro') === 'true';
     $typeScript.checked = localStorage.getItem('typeScript') === 'true';
 
     var editor = null;
@@ -217,6 +219,11 @@
         if (event.target === this) {
             this.style.display = 'none';
         }
+    });
+
+    $pro.addEventListener('change', function () {
+        localStorage.setItem('pro', $pro.checked ? 'true' : 'false');
+        window.location.reload();
     });
 
     $typeScript.addEventListener('change', function () {
