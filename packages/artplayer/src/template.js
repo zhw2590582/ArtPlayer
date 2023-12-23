@@ -1,4 +1,4 @@
-import { errorHandle, query, addClass, replaceElement, isMobile } from './utils';
+import { errorHandle, query, addClass, isMobile } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -22,8 +22,6 @@ export default class Template {
 
         this.query = this.query.bind(this);
         this.$container.dataset.artId = art.id;
-        this.$original = this.$container.cloneNode(true);
-
         this.init();
     }
 
@@ -135,7 +133,7 @@ export default class Template {
 
     destroy(removeHtml) {
         if (removeHtml) {
-            replaceElement(this.$original, this.$container);
+            this.$container.innerHTML = '';
         } else {
             addClass(this.$player, 'art-destroy');
         }

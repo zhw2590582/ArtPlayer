@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2023-12-11 17:29:28";
+        return "2023-12-23 12:00:24";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1215,7 +1215,6 @@ class Template {
         (0, _utils.errorHandle)(constructor.instances.every((ins)=>ins.template.$container !== this.$container), "Cannot mount multiple instances on the same dom element");
         this.query = this.query.bind(this);
         this.$container.dataset.artId = art.id;
-        this.$original = this.$container.cloneNode(true);
         this.init();
     }
     static get html() {
@@ -1312,7 +1311,7 @@ class Template {
         if (0, _utils.isMobile) (0, _utils.addClass)(this.$player, "art-mobile");
     }
     destroy(removeHtml) {
-        if (removeHtml) (0, _utils.replaceElement)(this.$original, this.$container);
+        if (removeHtml) this.$container.innerHTML = "";
         else (0, _utils.addClass)(this.$player, "art-destroy");
     }
 }

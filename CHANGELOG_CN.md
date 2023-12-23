@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [5.1.0] - 2023-12-23
+
 -   插件函数改为支持异步返回
 -   当播放地址发生错误到达上限后，不会再主动销毁播放器
 -   分离语言文件，核心代码不再捆绑多国语言 [语言设置](https://artplayer.org/document/start/i18n.html)
