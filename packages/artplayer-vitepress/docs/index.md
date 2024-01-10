@@ -232,9 +232,31 @@ export default App;
 
 ## TypeScript
 
-导入 `Artplayer` 时会自动导入的 `artplayer.d.ts`，但你也可以单独导入选项的类型
+导入 `Artplayer` 时会自动导入的 `artplayer.d.ts`
 
-```ts{2}
+### Vue.js
+
+```vue{3}
+<script setup>
+import Artplayer from 'artplayer';
+const art = ref<Artplayer>(null);
+art.value = new Artplayer();
+</script>
+```
+
+### React.js
+
+```jsx{2}
+import Artplayer from 'artplayer';
+const art = useRef<Artplayer>(null);
+art.current = new Artplayer();
+```
+
+### Option
+
+你也可以单独导入选项的类型
+
+```ts{2,4}
 import Artplayer from 'artplayer';
 import { type Option } from 'artplayer/types/option';
 

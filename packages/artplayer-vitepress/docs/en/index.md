@@ -229,9 +229,31 @@ In `React.js`, directly modifying the `option` will not change the player
 
 ## TypeScript
 
-Importing `Artplayer` will automatically import `artplayer.d.ts`, but you can also separately import the type for options
+Importing `Artplayer` will automatically import `artplayer.d.ts`
 
-```ts{2}
+### Vue.js
+
+```vue{3}
+<script setup>
+import Artplayer from 'artplayer';
+const art = ref<Artplayer>(null);
+art.value = new Artplayer();
+</script>
+```
+
+### React.js
+
+```jsx{2}
+import Artplayer from 'artplayer';
+const art = useRef<Artplayer>(null);
+art.current = new Artplayer();
+```
+
+### Option
+
+you can also separately import the type for options
+
+```ts{2,4}
 import Artplayer from 'artplayer';
 import { type Option } from 'artplayer/types/option';
 
