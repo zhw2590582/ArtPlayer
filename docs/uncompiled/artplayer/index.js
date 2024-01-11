@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.1.0";
+        return "5.1.1";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2023-12-23 12:00:24";
+        return "2024-01-11 10:39:07";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1247,7 +1247,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.1.0"}</div>
+                  <div class="art-info-content">${"5.1.1"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3649,7 +3649,7 @@ parcelHelpers.defineInteropFlag(exports);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.0"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.1"}</a>`
     };
 }
 exports.default = version;
@@ -5012,9 +5012,13 @@ class Plugins {
         if (option.fastForward && (0, _utils.isMobile) && !option.isLive) this.add((0, _fastForwardDefault.default));
         for(let index = 0; index < option.plugins.length; index++)this.add(option.plugins[index]);
     }
-    async add(plugin) {
+    add(plugin) {
         this.id += 1;
-        const result = await plugin.call(this.art, this.art);
+        const result = plugin.call(this.art, this.art);
+        if (result instanceof Promise) return result.then((res)=>this.next(plugin, res));
+        else return this.next(plugin, result);
+    }
+    next(plugin, result) {
         const pluginName = result && result.name || plugin.name || `plugin${this.id}`;
         (0, _utils.errorHandle)(!(0, _utils.has)(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
         (0, _utils.def)(this, pluginName, {

@@ -165,7 +165,9 @@ declare class Artplayer extends Player {
     } & Component;
 
     readonly plugins: {
-        add(plugin: (this: Artplayer, art: Artplayer) => unknown): Artplayer['plugins'];
+        add(
+            plugin: (this: Artplayer, art: Artplayer) => any | Promise<any>,
+        ): Promise<Artplayer['plugins']> | Artplayer['plugins'];
         [pluginName: string]: any;
     };
 }

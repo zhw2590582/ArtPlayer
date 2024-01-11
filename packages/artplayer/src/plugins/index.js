@@ -37,9 +37,17 @@ export default class Plugins {
         }
     }
 
-    async add(plugin) {
+    add(plugin) {
         this.id += 1;
-        const result = await plugin.call(this.art, this.art);
+        const result = plugin.call(this.art, this.art);
+        if (result instanceof Promise) {
+            return result.then((res) => this.next(plugin, res));
+        } else {
+            return this.next(plugin, result);
+        }
+    }
+
+    next(plugin, result) {
         const pluginName = (result && result.name) || plugin.name || `plugin${this.id}`;
         errorHandle(!has(this, pluginName), `Cannot add a plugin that already has the same name: ${pluginName}`);
         def(this, pluginName, {
