@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [5.1.1] - 2023-1-11
+## [5.1.1] - 2024-1-11
 
 -   插件函数支持同步和异步返回
 
