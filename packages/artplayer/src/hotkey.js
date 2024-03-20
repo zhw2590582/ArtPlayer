@@ -39,6 +39,14 @@ export default class Hotkey {
             this.art.volume -= constructor.VOLUME_STEP;
         });
 
+        this.add(70, () => {
+            this.art.fullscreen = !this.art.fullscreen;
+        });
+
+        this.add(77, () => {
+            this.art.muted = !this.art.muted;
+        });
+
         proxy(window, 'keydown', (event) => {
             if (this.art.isFocus) {
                 const tag = document.activeElement.tagName.toUpperCase();

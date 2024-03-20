@@ -58,8 +58,8 @@ export default function gestureInit(art, events) {
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [3, 4].includes(direction);
                 const isVertical = [1, 2].includes(direction);
-                const isLegal = (isHorizontal && !art.isRotate) || (isVertical && art.isRotate);
-                if (isLegal) {
+                const isProgress = (isHorizontal && !art.isRotate) || (isVertical && art.isRotate);
+                if (isProgress) {
                     const ratioX = clamp((pageX - startX) / art.width, -1, 1);
                     const ratioY = clamp((pageY - startY) / art.height, -1, 1);
                     const ratio = art.isRotate ? ratioY : ratioX;
@@ -68,6 +68,10 @@ export default function gestureInit(art, events) {
                     art.seek = currentTime;
                     art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1));
                     art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
+                } else {
+                    const ratioY = clamp((startY - pageY) / art.height, -1, 1);
+                    const volumeChange = ratioY * 0.1;
+                    art.volume = clamp(art.volume + volumeChange, 0, 1);
                 }
             }
         };
