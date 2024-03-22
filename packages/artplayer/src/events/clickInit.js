@@ -37,6 +37,7 @@ export default function clickInit(art, events) {
                     art.toggle();
                 }
                 clickTimes = clicks;
+                break;
             case 2:            
                 art.emit('dblclick', event);
 
@@ -50,6 +51,7 @@ export default function clickInit(art, events) {
                     }
                 }
                 clickTimes = [];
+                break;
             default:
                 clickTimes = [];
         }
