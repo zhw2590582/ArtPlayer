@@ -18,35 +18,40 @@ export default function clickInit(art, events) {
         }
     });
 
-    let clickTime = 0;
+    let clickTimes = [];
     events.proxy($video, 'click', (event) => {
         const now = Date.now();
+        clickTimes.push(now);
         const { MOBILE_CLICK_PLAY, DBCLICK_TIME, MOBILE_DBCLICK_PLAY, DBCLICK_FULLSCREEN } = constructor;
 
-        if (now - clickTime <= DBCLICK_TIME) {
-            art.emit('dblclick', event);
+        const clicks = clickTimes.filter((t) => now - t <= DBCLICK_TIME);
+        switch (clicks.length) {
+            case 1:
+                art.emit('click', event);
 
-            if (isMobile) {
-                if (!art.isLock && MOBILE_DBCLICK_PLAY) {
+                if (isMobile) {
+                    if (!art.isLock && MOBILE_CLICK_PLAY) {
+                        art.toggle();
+                    }
+                } else {
                     art.toggle();
                 }
-            } else {
-                if (DBCLICK_FULLSCREEN) {
-                    art.fullscreen = !art.fullscreen;
-                }
-            }
-        } else {
-            art.emit('click', event);
+                clickTimes = clicks;
+            case 2:            
+                art.emit('dblclick', event);
 
-            if (isMobile) {
-                if (!art.isLock && MOBILE_CLICK_PLAY) {
-                    art.toggle();
+                if (isMobile) {
+                    if (!art.isLock && MOBILE_DBCLICK_PLAY) {
+                        art.toggle();
+                    }
+                } else {
+                    if (DBCLICK_FULLSCREEN) {
+                        art.fullscreen = !art.fullscreen;
+                    }
                 }
-            } else {
-                art.toggle();
-            }
+                clickTimes = [];
+            default:
+                clickTimes = [];
         }
-
-        clickTime = now;
     });
 }
