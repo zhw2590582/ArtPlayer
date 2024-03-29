@@ -1,7 +1,7 @@
 {
     "license": "MIT",
     "name": "artplayer",
-    "version": "5.1.1",
+    "version": "5.1.2",
     "main": "dist/artplayer.js",
     "legacy": "dist/artplayer.legacy.js",
     "types": "types/artplayer.d.ts",
