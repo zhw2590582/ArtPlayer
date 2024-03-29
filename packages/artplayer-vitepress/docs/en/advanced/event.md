@@ -784,7 +784,7 @@ Triggered when the value of the duration property changes
 ## `video:emptied`
 
 The media content becomes empty; for example, when this media has been completely loaded (or partially loaded), this event is sent and the load() method is called to reload it
-```
+
 ## `video:ended`
 
 The video has stopped because the media reached the end point
