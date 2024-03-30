@@ -107,3 +107,9 @@ export function setStyleText(id, style) {
         document.head.appendChild($style);
     }
 }
+
+export function supportsFlex() {
+    const div = document.createElement('div');
+    div.style.display = 'flex';
+    return div.style.display === 'flex';
+}

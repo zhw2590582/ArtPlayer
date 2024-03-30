@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-03-30 10:23:56";
+        return "2024-03-30 10:47:12";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -665,6 +665,7 @@ parcelHelpers.export(exports, "replaceElement", ()=>replaceElement);
 parcelHelpers.export(exports, "createElement", ()=>createElement);
 parcelHelpers.export(exports, "getIcon", ()=>getIcon);
 parcelHelpers.export(exports, "setStyleText", ()=>setStyleText);
+parcelHelpers.export(exports, "supportsFlex", ()=>supportsFlex);
 var _compatibility = require("./compatibility");
 function query(selector, parent = document) {
     return parent.querySelector(selector);
@@ -748,6 +749,11 @@ function setStyleText(id, style) {
         $style.textContent = style;
         document.head.appendChild($style);
     }
+}
+function supportsFlex() {
+    const div = document.createElement("div");
+    div.style.display = "flex";
+    return div.style.display === "flex";
 }
 
 },{"./compatibility":"gotDS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gotDS":[function(require,module,exports) {
@@ -1210,6 +1216,7 @@ class Template {
             this.$container = (0, _utils.query)(option.container);
             (0, _utils.errorHandle)(this.$container, `No container element found by ${option.container}`);
         }
+        (0, _utils.errorHandle)((0, _utils.supportsFlex)(), "The current browser does not support flex layout");
         const type = this.$container.tagName.toLowerCase();
         (0, _utils.errorHandle)(type === "div", `Unsupported container element type, only support 'div' but got '${type}'`);
         (0, _utils.errorHandle)(constructor.instances.every((ins)=>ins.template.$container !== this.$container), "Cannot mount multiple instances on the same dom element");

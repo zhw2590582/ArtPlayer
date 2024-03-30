@@ -1,4 +1,4 @@
-import { errorHandle, query, addClass, isMobile } from './utils';
+import { supportsFlex, errorHandle, query, addClass, isMobile } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -11,6 +11,8 @@ export default class Template {
             this.$container = query(option.container);
             errorHandle(this.$container, `No container element found by ${option.container}`);
         }
+
+        errorHandle(supportsFlex(), 'The current browser does not support flex layout');
 
         const type = this.$container.tagName.toLowerCase();
         errorHandle(type === 'div', `Unsupported container element type, only support 'div' but got '${type}'`);
