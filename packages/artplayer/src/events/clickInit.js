@@ -38,7 +38,7 @@ export default function clickInit(art, events) {
                 }
                 clickTimes = clicks;
                 break;
-            case 2:            
+            case 2:
                 art.emit('dblclick', event);
 
                 if (isMobile) {
