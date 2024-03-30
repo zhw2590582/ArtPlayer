@@ -738,6 +738,7 @@ export type Events = {
     error: [error: Error, reconnectTime: number];
     flip: [flip: Flip];
     fullscreen: [state: boolean];
+    fullscreenError: [event: Event];
     fullscreenWeb: [state: boolean];
     mini: [state: boolean];
     pause: [];

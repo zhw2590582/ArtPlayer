@@ -13,6 +13,10 @@ export default function fullscreenMix(art) {
             art.emit('fullscreen', screenfull.isFullscreen);
         });
 
+        screenfull.on('error', (event) => {
+            art.emit('fullscreenError', event);
+        });
+
         def(art, 'fullscreen', {
             get() {
                 return screenfull.isFullscreen;

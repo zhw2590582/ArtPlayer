@@ -438,6 +438,28 @@ art.on('fullscreen', (state) => {
     console.info('fullscreen', state);
 });
 ```
+
+## `fullscreenError`
+
+Triggered when the player goes into full screen error
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+	art.fullscreen = true;
+});
+
+art.on('fullscreenError', (event) => {
+    console.info('fullscreenError', event);
+});
+```
+
 ## `fullscreenWeb`
 
 Triggered when the player enters web fullscreen

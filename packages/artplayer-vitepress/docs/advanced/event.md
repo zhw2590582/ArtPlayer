@@ -445,6 +445,27 @@ art.on('fullscreen', (state) => {
 });
 ```
 
+## `fullscreenError`
+
+当播放器发生窗口全屏错误时触发
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+	art.fullscreen = true;
+});
+
+art.on('fullscreenError', (event) => {
+    console.info('fullscreenError', event);
+});
+```
+
 ## `fullscreenWeb`
 
 当播放器发生网页全屏时触发
