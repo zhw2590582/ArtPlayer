@@ -14,93 +14,95 @@
 </head>
 
 <body>
-    <section class="main">
+    <header class="header">
+        <a href="./" class="logo">
+            <img src="./assets/img/logo.png" height="20" alt="">
+            Artplayer.js
+        </a>
+        <div class="menus">
+            <div class="item has-sub-menu">
+                Ecosystem•生态
+                <div class="sub-menu">
+                    <ul>
+                        <li class="title">Plugins</li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku">artplayer-plugin-danmuku</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads">artplayer-plugin-ads</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe">artplayer-plugin-iframe</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-quality/index.js&example=hls.quality">artplayer-plugin-hls-quality</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-quality/index.js&example=dash.quality">artplayer-plugin-dash-quality</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail">artplayer-plugin-vtt-thumbnail</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles">artplayer-plugin-multiple-subtitles</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass">artplayer-plugin-libass</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="title">Library</li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js&example=hls">hls.js</a>
+                        </li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash">dash.js</a>
+                        </li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv">flv.js</a>
+                        </li>
+                        <li style="display: inline-block;margin-right: 10px;">
+                            <a
+                                href="/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts">mpegts.js</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="title">Tools</li>
+                        <li>
+                            <a
+                                href="/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=thumbnail">artplayer-tool-thumbnail</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <a class="item" href="./document/">Document•文档</a>
+            <a class="item" href="./donate/">Donate•捐助</a>
+            <a class="item" href="https://github.com/zhw2590582/ArtPlayer">Github</a>
+        </div>
+        <div class="tool">
+            <div class="qq">QQ群: 320881312</div>
+            <div class="checkbox">
+                <input type="checkbox" id="typeScript"><label for="typeScript">TS</label>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" id="pro"><label for="pro">PROD</label>
+            </div>
+            <div class="run">▶ Run Code</div>
+        </div>
+    </header>
+    <div class="main">
         <div class="part-left">
-            <header class="header">
-                <a href="./" class="logo">
-                    <img src="./assets/img/logo.png" height="20" alt="">
-                    Artplayer.js
-                </a>
-                <div class="menus">
-                    <div class="item has-sub-menu">
-                        Ecosystem
-                        <div class="sub-menu">
-                            <ul>
-                                <li class="title">Plugins</li>
-                                <li>
-                                    <a
-                                        href="/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku">artplayer-plugin-danmuku</a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads">artplayer-plugin-ads</a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/?libs=./uncompiled/artplayer-plugin-iframe/index.js&example=iframe">artplayer-plugin-iframe</a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js%0A./uncompiled/artplayer-plugin-hls-quality/index.js&example=hls.quality">artplayer-plugin-hls-quality</a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-quality/index.js&example=dash.quality">artplayer-plugin-dash-quality</a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/?libs=./uncompiled/artplayer-plugin-vtt-thumbnail/index.js&example=vtt.thumbnail">artplayer-plugin-vtt-thumbnail</a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles">artplayer-plugin-multiple-subtitles</a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass">artplayer-plugin-libass</a>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li class="title">Library</li>
-                                <li style="display: inline-block;margin-right: 10px;">
-                                    <a
-                                        href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/8.0.0-beta.3/hls.min.js&example=hls">hls.js</a>
-                                </li>
-                                <li style="display: inline-block;margin-right: 10px;">
-                                    <a
-                                        href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash">dash.js</a>
-                                </li>
-                                <li style="display: inline-block;margin-right: 10px;">
-                                    <a
-                                        href="/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv">flv.js</a>
-                                </li>
-                                <li style="display: inline-block;margin-right: 10px;">
-                                    <a
-                                        href="/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts">mpegts.js</a>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li class="title">Tools</li>
-                                <li>
-                                    <a
-                                        href="/?libs=./uncompiled/artplayer-tool-thumbnail/index.js&example=thumbnail">artplayer-tool-thumbnail</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a class="item" href="./document/">Document</a>
-                    <a class="item" href="https://github.com/zhw2590582/ArtPlayer">Github</a>
-                </div>
-                <div class="tool">
-                    <div class="checkbox">
-                        <input type="checkbox" id="typeScript"><label for="typeScript">TS</label>
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" id="pro"><label for="pro">PRO</label>
-                    </div>
-                    <div class="run">▶ Run Code</div>
-                </div>
-            </header>
             <div class="libs">
                 <div class="upload">
                     Upload Files
@@ -115,13 +117,12 @@
             </div>
         </div>
         <div class="part-right">
-            <div class="qq">QQ群: 320881312</div>
             <div class="video-wrap">
                 <div class="artplayer-app"></div>
             </div>
             <div class="console"></div>
         </div>
-    </section>
+    </div>
     <div class="popups">
         <div class="popinner"></div>
     </div>

@@ -14,6 +14,9 @@ body {
     padding: 0;
     color: #ccc;
     background: rgb(16, 17, 19);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 *,
@@ -57,7 +60,7 @@ input[type="file"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
+    font-size: 14px;
     height: 48px;
     width: 100%;
     flex-shrink: 0;
@@ -70,6 +73,7 @@ input[type="file"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: 30px;
 }
 
 .header .logo img {
@@ -78,22 +82,17 @@ input[type="file"] {
 
 .header .tool {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     height: 100%;
     line-height: 1;
-}
-
-.qq {
-    height: 48px;
-    line-height: 48px;
-    padding-left: 15px;
-    color: rgb(255 255 255 / 30%);
+    gap: 30px;
+    color: #777777;
 }
 
 .header .checkbox {
     display: flex;
     align-items: center;
-    margin-right: 15px;
 }
 
 .header .checkbox input {
@@ -105,12 +104,12 @@ input[type="file"] {
     align-items: center;
     flex: 1;
     height: 100%;
+    gap: 30px;
 }
 
 .header .menus .item {
     display: flex;
     align-items: center;
-    margin-left: 15px;
     height: 100%;
     line-height: 1;
 }
@@ -129,7 +128,7 @@ input[type="file"] {
     z-index: 9;
     top: 40px;
     left: 0;
-    width: 250px;
+    width: 280px;
     padding: 0 10px;
     background: #1b1b1b;
     border-radius: 3px;
@@ -163,7 +162,7 @@ input[type="file"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 15px;
     height: 100%;
     line-height: 1;
     cursor: pointer;
@@ -239,11 +238,13 @@ input[type="file"] {
 
 .main .part-right {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .part-right .video-wrap {
     display: flex;
-    height: 70%;
+    flex: 1;
     align-items: center;
     justify-content: center;
     flex-direction: column;
