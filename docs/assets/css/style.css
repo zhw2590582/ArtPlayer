@@ -87,7 +87,6 @@ input[type="file"] {
     height: 100%;
     line-height: 1;
     gap: 30px;
-    color: #777777;
 }
 
 .header .checkbox {
