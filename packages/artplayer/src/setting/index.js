@@ -290,10 +290,10 @@ export default class Setting extends Component {
                     const $state = createElement('div');
                     addClass($state, 'art-setting-item-right-icon');
                     const $range = append($state, '<input type="range">');
-                    $range.value = Number(item.$range.value) || item.range[0] || 0;
-                    $range.min = Number(item.$range.min) || item.range[1] || 0;
-                    $range.max = Number(item.$range.max) || item.range[2] || 10;
-                    $range.step = Number(item.$range.step) || item.range[3] || 1;
+                    $range.value = item.$range?.valueAsNumber || item.range[0] || 0;
+                    $range.min = Number(item.$range?.min) || item.range[1] || 0;
+                    $range.max = Number(item.$range?.max) || item.range[2] || 10;
+                    $range.step = Number(item.$range?.step) || item.range[3] || 1;
                     addClass($range, 'art-setting-range');
                     append($right, $state);
                     item.$range = $range;
