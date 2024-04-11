@@ -157,7 +157,6 @@ declare class Artplayer extends Player {
 
     readonly setting: {
         option: SettingOption[];
-        updateStyle(width?: number): void;
         find(name: string): SettingOption;
         add(setting: Setting): SettingOption[];
         update(settings: Setting): SettingOption[];
