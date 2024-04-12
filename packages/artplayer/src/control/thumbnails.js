@@ -14,6 +14,7 @@ export default function thumbnails(options) {
             let image = null;
             let loading = false;
             let isLoad = false;
+            let isHover = false;
 
             function showThumbnails(event) {
                 const { width: posWidth } = getPosFromEvent(art, event);
@@ -38,6 +39,7 @@ export default function thumbnails(options) {
             }
 
             proxy($progress, 'mousemove', async (event) => {
+                isHover = true;
                 if (!loading) {
                     loading = true;
                     const img = await loadImg(option.thumbnails.url);
@@ -45,13 +47,14 @@ export default function thumbnails(options) {
                     isLoad = true;
                 }
 
-                if (isLoad) {
+                if (isLoad && isHover) {
                     setStyle($control, 'display', 'flex');
                     showThumbnails(event);
                 }
             });
 
             proxy($progress, 'mouseleave', () => {
+                isHover = false;
                 setStyle($control, 'display', 'none');
             });
 
