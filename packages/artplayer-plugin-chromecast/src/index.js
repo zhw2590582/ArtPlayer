@@ -32,7 +32,6 @@ export default function artplayerPluginChromecast(option) {
     const DEFAULT_SDK = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1';
 
     window['__onGCastApiAvailable'] = function (isAvailable) {
-        artplayerPluginChromecast.isAvailable = isAvailable;
         if (isAvailable) {
             cast.framework.CastContext.getInstance().setOptions({
                 receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
@@ -42,7 +41,9 @@ export default function artplayerPluginChromecast(option) {
     };
 
     return async (art) => {
-        await loadScript(option.sdk || DEFAULT_SDK);
+        if (!window.chrome || !window.chrome.cast) {
+            await loadScript(option.sdk || DEFAULT_SDK);
+        }
 
         function castVideo(session) {
             const url = option.url || art.option.url;
@@ -66,11 +67,6 @@ export default function artplayerPluginChromecast(option) {
             tooltip: 'Chromecast',
             html: `<i class="art-icon art-icon-cast">${option.icon || DEFAULT_ICON}</i>`,
             click() {
-                if (!artplayerPluginChromecast.isAvailable) {
-                    art.notice.show = 'Cast API is not available';
-                    return;
-                }
-
                 const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
 
                 if (castSession) {
