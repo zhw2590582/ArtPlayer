@@ -11,10 +11,12 @@ export default function switchMix(art) {
             art.notice.show = '';
 
             art.once('video:error', reject);
+            art.once('video:loadedmetadata', () => {
+                art.currentTime = currentTime;
+            });
             art.once('video:canplay', async () => {
                 art.playbackRate = playbackRate;
                 art.aspectRatio = aspectRatio;
-                art.currentTime = currentTime;
 
                 if (playing) {
                     await art.play();
