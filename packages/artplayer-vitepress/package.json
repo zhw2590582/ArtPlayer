@@ -9,7 +9,7 @@
     "devDependencies": {
         "flexsearch": "^0.7.31",
         "markdown-it": "^13.0.2",
-        "vitepress": "1.0.0-rc.31",
+        "vitepress": "1.1.3",
         "vitepress-plugin-search": "^1.0.4-alpha.20",
         "vue": "^3.3.9"
     }
