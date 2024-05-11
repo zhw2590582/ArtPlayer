@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-04-11 10:58:05";
+        return "2024-05-11 12:42:10";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3390,6 +3390,7 @@ function thumbnails(options) {
                 let image = null;
                 let loading = false;
                 let isLoad = false;
+                let isHover = false;
                 function showThumbnails(event) {
                     const { width: posWidth  } = (0, _progress.getPosFromEvent)(art, event);
                     const { url , number , column , width , height  } = option.thumbnails;
@@ -3408,18 +3409,20 @@ function thumbnails(options) {
                     else (0, _utils.setStyle)($control, "left", `${posWidth - width2 / 2}px`);
                 }
                 proxy($progress, "mousemove", async (event)=>{
+                    isHover = true;
                     if (!loading) {
                         loading = true;
                         const img = await loadImg(option.thumbnails.url);
                         image = img;
                         isLoad = true;
                     }
-                    if (isLoad) {
+                    if (isLoad && isHover) {
                         (0, _utils.setStyle)($control, "display", "flex");
                         showThumbnails(event);
                     }
                 });
                 proxy($progress, "mouseleave", ()=>{
+                    isHover = false;
                     (0, _utils.setStyle)($control, "display", "none");
                 });
                 art.on("hover", (state)=>{
@@ -5223,6 +5226,19 @@ parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
 function lock(art) {
     const { layers , icons , template: { $player  }  } = art;
+    function getState() {
+        return (0, _utils.hasClass)($player, "art-lock");
+    }
+    function setLock() {
+        (0, _utils.addClass)($player, "art-lock");
+        art.isLock = true;
+        art.emit("lock", true);
+    }
+    function setUnlock() {
+        (0, _utils.removeClass)($player, "art-lock");
+        art.isLock = false;
+        art.emit("lock", false);
+    }
     layers.add({
         name: "lock",
         mounted ($el) {
@@ -5240,21 +5256,18 @@ function lock(art) {
             });
         },
         click () {
-            if ((0, _utils.hasClass)($player, "art-lock")) {
-                (0, _utils.removeClass)($player, "art-lock");
-                this.isLock = false;
-                art.emit("lock", false);
-            } else {
-                (0, _utils.addClass)($player, "art-lock");
-                this.isLock = true;
-                art.emit("lock", true);
-            }
+            if (getState()) setUnlock();
+            else setLock();
         }
     });
     return {
         name: "lock",
         get state () {
-            return (0, _utils.hasClass)($player, "art-lock");
+            return getState();
+        },
+        set state (value){
+            if (value) setLock();
+            else setUnlock();
         }
     };
 }

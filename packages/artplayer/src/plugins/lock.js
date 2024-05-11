@@ -7,6 +7,22 @@ export default function lock(art) {
         template: { $player },
     } = art;
 
+    function getState() {
+        return hasClass($player, 'art-lock');
+    }
+
+    function setLock() {
+        addClass($player, 'art-lock');
+        art.isLock = true;
+        art.emit('lock', true);
+    }
+
+    function setUnlock() {
+        removeClass($player, 'art-lock');
+        art.isLock = false;
+        art.emit('lock', false);
+    }
+
     layers.add({
         name: 'lock',
         mounted($el) {
@@ -25,14 +41,10 @@ export default function lock(art) {
             });
         },
         click() {
-            if (hasClass($player, 'art-lock')) {
-                removeClass($player, 'art-lock');
-                this.isLock = false;
-                art.emit('lock', false);
+            if (getState()) {
+                setUnlock();
             } else {
-                addClass($player, 'art-lock');
-                this.isLock = true;
-                art.emit('lock', true);
+                setLock();
             }
         },
     });
@@ -40,7 +52,14 @@ export default function lock(art) {
     return {
         name: 'lock',
         get state() {
-            return hasClass($player, 'art-lock');
+            return getState();
+        },
+        set state(value) {
+            if (value) {
+                setLock();
+            } else {
+                setUnlock();
+            }
         },
     };
 }
