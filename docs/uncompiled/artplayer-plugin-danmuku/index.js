@@ -154,8 +154,7 @@ var _heatmapDefault = parcelHelpers.interopDefault(_heatmap);
 function artplayerPluginDanmuku(option) {
     return (art)=>{
         const danmuku = new (0, _danmukuDefault.default)(art, option);
-        let setting = null;
-        if (danmuku.option.mount) setting = new (0, _settingDefault.default)(art, danmuku);
+        const setting = new (0, _settingDefault.default)(art, danmuku);
         if (option.heatmap) (0, _heatmapDefault.default)(art, danmuku, option.heatmap);
         return {
             name: "artplayerPluginDanmuku",
@@ -165,7 +164,7 @@ function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
-            mount: setting?.mount,
+            mount: setting.mount,
             get option () {
                 return danmuku.option;
             },
