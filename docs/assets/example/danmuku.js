@@ -15,8 +15,8 @@ var art = new Artplayer({
             speed: 5, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
             opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
             fontSize: 25, // 字体大小，支持数字和百分比
-            color: '#FFFFFF', // 默认字体颜色
-            mode: 0, // 默认模式，0-滚动，1-静止
+            color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
+            mode: 0, // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
             margin: [10, '25%'], // 弹幕上下边距，支持数字和百分比
             antiOverlap: true, // 是否防重叠
             synchronousPlayback: false, // 是否同步到播放速度

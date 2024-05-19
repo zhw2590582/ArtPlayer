@@ -1,13 +1,15 @@
 import Danmuku from './danmuku';
-import setting from './setting';
+import Setting from './setting';
 import heatmap from './heatmap';
 
 export default function artplayerPluginDanmuku(option) {
     return (art) => {
         const danmuku = new Danmuku(art, option);
 
-        // 返回挂载函数，用于手动挂载
-        const { mount } = setting(art, danmuku);
+        let setting = null;
+        if (danmuku.option.mount) {
+            setting = new Setting(art, danmuku);
+        }
 
         if (option.heatmap) {
             heatmap(art, danmuku, option.heatmap);
@@ -21,7 +23,7 @@ export default function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
-            mount,
+            mount: setting?.mount, // 弹幕发射器挂载函数
             get option() {
                 return danmuku.option;
             },

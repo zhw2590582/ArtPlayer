@@ -94,7 +94,7 @@ type Option = {
     /**
      * 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
      */
-    mount?: Element;
+    mount?: Element | string;
 
     /**
      * 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light

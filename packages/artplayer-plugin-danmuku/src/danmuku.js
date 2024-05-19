@@ -54,7 +54,7 @@ export default class Danmuku {
             filter: () => true, // 从“原始弹幕”到“实际弹幕”的过滤器
             antiOverlap: true, // 弹幕是否防重叠
             synchronousPlayback: false, // 是否同步播放速度
-            mount: undefined, // 弹幕挂载点, 默认为播放器控制栏中部
+            mount: '.art-controls-center', // 弹幕发射器挂载点, 默认为播放器控制栏中部
             theme: 'dark', // 弹幕主题
             heatmap: false, // 是否开启热力图
             points: [], // 热力图数据
@@ -75,7 +75,7 @@ export default class Danmuku {
             filter: 'function',
             antiOverlap: 'boolean',
             synchronousPlayback: 'boolean',
-            mount: 'undefined|htmldivelement',
+            mount: '?htmldivelement|string',
             theme: 'string',
             heatmap: 'object|boolean',
             points: 'array',
