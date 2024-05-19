@@ -2,6 +2,7 @@ import style from 'bundle-text:./style.less';
 import $on from 'bundle-text:./img/on.svg';
 import $off from 'bundle-text:./img/off.svg';
 import $config from 'bundle-text:./img/config.svg';
+import $style from 'bundle-text:./img/style.svg';
 
 export default class Setting {
     constructor(art, danmuku) {
@@ -26,19 +27,34 @@ export default class Setting {
     static get DEFAULT() {
         return {
             show: true,
+            maxLength: 200,
         };
     }
 
     get TEMPLATE() {
+        const { config } = this;
+
         return `
             <div class="apd-toggle">
-                <div class="apd-toggle-on">${$on}</div>
-                <div class="apd-toggle-off">${$off}</div>
+                <div class="apd-icon apd-toggle-on">${$on}</div>
+                <div class="apd-icon apd-toggle-off">${$off}</div>
             </div>
             <div class="apd-config">
-                ${$config}
+                <div class="apd-config-icon">${$config}</div>
+                <div class="apd-config-panel">
+                    <div class="apd-config-panel-inner">1234</div>
+                </div>
             </div>
-            <div class="">123</div>
+            <div class="apd-emitter">
+                <div class="apd-style">
+                    <div class="apd-style-icon">${$style}</div>
+                    <div class="apd-style-panel">
+                        <div class="apd-style-panel-inner">1234</div>
+                    </div>
+                </div>
+                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${config.maxLength}" />
+                <div class="apd-sender">发送</div>
+            </div>
         `;
     }
 
@@ -85,7 +101,7 @@ export default class Setting {
         const { setStyle } = this.utils;
         const { $toggleOn, $toggleOff } = this.template;
         setStyle(config.show ? $toggleOff : $toggleOn, 'display', 'none');
-        setStyle(config.show ? $toggleOn : $toggleOff, 'display', 'block');
+        setStyle(config.show ? $toggleOn : $toggleOff, 'display', 'flex');
     }
 
     mount(target) {

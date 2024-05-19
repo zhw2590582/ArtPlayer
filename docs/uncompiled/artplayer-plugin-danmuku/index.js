@@ -753,6 +753,8 @@ var _offSvg = require("bundle-text:./img/off.svg");
 var _offSvgDefault = parcelHelpers.interopDefault(_offSvg);
 var _configSvg = require("bundle-text:./img/config.svg");
 var _configSvgDefault = parcelHelpers.interopDefault(_configSvg);
+var _styleSvg = require("bundle-text:./img/style.svg");
+var _styleSvgDefault = parcelHelpers.interopDefault(_styleSvg);
 class Setting {
     constructor(art, danmuku){
         this.art = art;
@@ -775,19 +777,33 @@ class Setting {
     }
     static get DEFAULT() {
         return {
-            show: true
+            show: true,
+            maxLength: 200
         };
     }
     get TEMPLATE() {
+        const { config  } = this;
         return `
             <div class="apd-toggle">
-                <div class="apd-toggle-on">${0, _onSvgDefault.default}</div>
-                <div class="apd-toggle-off">${0, _offSvgDefault.default}</div>
+                <div class="apd-icon apd-toggle-on">${0, _onSvgDefault.default}</div>
+                <div class="apd-icon apd-toggle-off">${0, _offSvgDefault.default}</div>
             </div>
             <div class="apd-config">
-                ${0, _configSvgDefault.default}
+                <div class="apd-config-icon">${0, _configSvgDefault.default}</div>
+                <div class="apd-config-panel">
+                    <div class="apd-config-panel-inner">1234</div>
+                </div>
             </div>
-            <div class="">123</div>
+            <div class="apd-emitter">
+                <div class="apd-style">
+                    <div class="apd-style-icon">${0, _styleSvgDefault.default}</div>
+                    <div class="apd-style-panel">
+                        <div class="apd-style-panel-inner">1234</div>
+                    </div>
+                </div>
+                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${config.maxLength}" />
+                <div class="apd-sender">发送</div>
+            </div>
         `;
     }
     initTemplate() {
@@ -826,7 +842,7 @@ class Setting {
         const { setStyle  } = this.utils;
         const { $toggleOn , $toggleOff  } = this.template;
         setStyle(config.show ? $toggleOff : $toggleOn, "display", "none");
-        setStyle(config.show ? $toggleOn : $toggleOff, "display", "block");
+        setStyle(config.show ? $toggleOn : $toggleOff, "display", "flex");
     }
     mount(target) {
         if (!target) return;
@@ -846,8 +862,8 @@ if (typeof document !== "undefined") {
     }
 }
 
-},{"bundle-text:./style.less":"uaCsY","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV"}],"uaCsY":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-danmuku {\n  align-items: center;\n  gap: 10px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle, .artplayer-plugin-danmuku .apd-config {\n  cursor: pointer;\n  opacity: .75;\n  width: 24px;\n  height: 24px;\n  justify-content: center;\n  align-items: center;\n  transition: all .2s;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle:hover, .artplayer-plugin-danmuku .apd-config:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-toggle-on, .artplayer-plugin-danmuku .apd-toggle-off {\n  width: 100%;\n  height: 100%;\n}\n\n";
+},{"bundle-text:./style.less":"uaCsY","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV","bundle-text:./img/style.svg":"1Aemm"}],"uaCsY":[function(require,module,exports) {
+module.exports = ".artplayer-plugin-danmuku {\n  height: 30px;\n  align-items: center;\n  gap: 8px;\n  font-size: 13px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle, .artplayer-plugin-danmuku .apd-config, .artplayer-plugin-danmuku .apd-style {\n  opacity: .6;\n  height: 100%;\n  aspect-ratio: 1;\n  justify-content: center;\n  align-items: center;\n  transition: all .2s;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle svg, .artplayer-plugin-danmuku .apd-config svg, .artplayer-plugin-danmuku .apd-style svg {\n  width: 80%;\n  height: 80%;\n}\n\n.artplayer-plugin-danmuku .apd-toggle:hover, .artplayer-plugin-danmuku .apd-config:hover, .artplayer-plugin-danmuku .apd-style:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-toggle-on, .artplayer-plugin-danmuku .apd-toggle-off, .artplayer-plugin-danmuku .apd-config-icon, .artplayer-plugin-danmuku .apd-style-icon {\n  cursor: pointer;\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  width: 100%;\n  background: var(--art-widget-background);\n  border-radius: var(--art-border-radius);\n  background-color: #000;\n  padding: 10px;\n  box-shadow: 0 0 10px #00000080;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  height: 100%;\n  background-color: #fff3;\n  border-radius: 5px;\n  align-items: center;\n  margin-left: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  width: 100%;\n  background: var(--art-widget-background);\n  border-radius: var(--art-border-radius);\n  background-color: #000;\n  padding: 10px;\n  box-shadow: 0 0 10px #00000080;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  height: 100%;\n  width: 170px;\n  color: #fff;\n  min-width: none;\n  background-color: #0000;\n  border: none;\n  outline: none;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-sender {\n  height: 100%;\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  padding: 0 12px;\n  display: flex;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  height: 36px;\n  gap: 10px;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-input, .art-fullscreen-web .artplayer-plugin-danmuku .apd-input {\n  width: 360px;\n}\n\n";
 
 },{}],"a9r0e":[function(require,module,exports) {
 module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z\" clip-rule=\"evenodd\" fill=\"#fff\"></path><path fill=\"#00AEEC\" fill-rule=\"evenodd\" d=\"M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z\" clip-rule=\"evenodd\"></path></svg>";
@@ -857,6 +873,9 @@ module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http
 
 },{}],"lo6sV":[function(require,module,exports) {
 module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"m15.645 4.881 1.06-1.473a.998.998 0 1 0-1.622-1.166L13.22 4.835a110.67 110.67 0 0 0-1.1-.007h-.131c-.47 0-.975.004-1.515.012L8.783 2.3A.998.998 0 0 0 7.12 3.408l.988 1.484c-.688.019-1.418.042-2.188.069a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363c1.903.094 3.317.141 5.513.141a.988.988 0 0 0 0-1.975 97.58 97.58 0 0 1-5.416-.139 2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.005.183.01.07.014-.038.004-.096.008-.189.011-.081a.987.987 0 1 0 1.974-.069c-.004-.105-.007-.009-.011.09-.002.056-.004.112-.007.135l-.002.01a.574.574 0 0 1-.005-.091v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.905-.032-1.752-.058-2.543-.079Zm-3.113 4.703h-1.307v4.643h2.2v.04l.651-1.234c.113-.215.281-.389.482-.509v-.11h.235c.137-.049.283-.074.433-.074h1.553V9.584h-1.264a8.5 8.5 0 0 0 .741-1.405l-1.078-.381c-.24.631-.501 1.23-.806 1.786h-1.503l.686-.305c-.228-.501-.5-.959-.806-1.394l-1.034.348c.294.392.566.839.817 1.35Zm-1.7 5.502h2.16l-.564 1.068h-1.595v-1.068Zm-2.498-1.863.152-1.561h1.96V8.289H7.277v.969h2.048v1.435h-1.84l-.306 3.51h2.254c0 1.155-.043 1.906-.12 2.255-.076.348-.38.523-.925.523-.305 0-.61-.022-.893-.055l.294 1.056.061.005c.282.02.546.039.81.039.991-.065 1.547-.414 1.677-1.046.11-.631.175-1.883.175-3.757H8.334Zm5.09-.8v.85h-1.188v-.85h1.187Zm-1.188-.955h1.187v-.893h-1.187v.893Zm2.322.007v-.893h1.241v.893h-1.241Zm.528 2.757a1.26 1.26 0 0 1 1.087-.627l4.003-.009a1.26 1.26 0 0 1 1.094.63l1.721 2.982c.226.39.225.872-.001 1.263l-1.743 3a1.26 1.26 0 0 1-1.086.628l-4.003.009a1.26 1.26 0 0 1-1.094-.63l-1.722-2.982a1.26 1.26 0 0 1 .002-1.263l1.742-3Zm1.967.858a1.26 1.26 0 0 0-1.08.614l-.903 1.513a1.26 1.26 0 0 0-.002 1.289l.885 1.492c.227.384.64.62 1.086.618l2.192-.005a1.26 1.26 0 0 0 1.08-.615l.904-1.518a1.26 1.26 0 0 0 .001-1.288l-.884-1.489a1.26 1.26 0 0 0-1.086-.616l-2.193.005Zm2.517 2.76a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0Z\" clip-rule=\"evenodd\" fill=\"#fff\"></path></svg>";
+
+},{}],"1Aemm":[function(require,module,exports) {
+module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 22 22\" viewBox=\"0 0 22 22\" width=\"36\" height=\"24\"><path d=\"M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98 12.87 11H9.13L11 5.98z\" fill=\"#fff\"></path></svg>";
 
 },{}],"bZziT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
