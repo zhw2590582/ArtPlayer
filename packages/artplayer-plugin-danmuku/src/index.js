@@ -6,7 +6,8 @@ export default function artplayerPluginDanmuku(option) {
     return (art) => {
         const danmuku = new Danmuku(art, option);
 
-        setting(art, danmuku);
+        // 返回挂载函数，用于手动挂载
+        const { mount } = setting(art, danmuku);
 
         if (option.heatmap) {
             heatmap(art, danmuku, option.heatmap);
@@ -20,6 +21,7 @@ export default function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
+            mount,
             get option() {
                 return danmuku.option;
             },

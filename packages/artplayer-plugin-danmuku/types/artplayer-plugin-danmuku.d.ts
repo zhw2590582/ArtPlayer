@@ -10,9 +10,9 @@ type Danmu = {
     text: string;
 
     /**
-     * 弹幕发送模式，0为滚动，1为静止
+     * 弹幕发送模式: 0: 滚动，1: 静止，2: 顶部，3: 底部
      */
-    mode?: 0 | 1;
+    mode?: 0 | 1 | 2 | 3;
 
     /**
      * 弹幕颜色
@@ -25,9 +25,19 @@ type Danmu = {
     time?: number;
 
     /**
-     * 弹幕是否有描边
+     * 弹幕是否有描边, 默认为 false
      */
     border?: boolean;
+
+    /**
+     * 弹幕自定义样式
+     */
+    style?: Partial<CSSStyleDeclaration>;
+
+    /**
+     * 弹幕文本是否转义, 默认为 true
+     */
+    escape?: boolean;
 };
 
 type Option = {
@@ -77,34 +87,9 @@ type Option = {
     antiOverlap?: boolean;
 
     /**
-     * 是否使用 web worker
-     */
-    useWorker?: boolean;
-
-    /**
      * 是否同步到播放速度
      */
     synchronousPlayback?: boolean;
-
-    /**
-     * 输入框锁定时间，单位秒，范围在[1 ~ 60]
-     */
-    lockTime?: number;
-
-    /**
-     * 输入框最大可输入的字数，范围在[0 ~ 500]
-     */
-    maxLength?: number;
-
-    /**
-     * 输入框最小宽度，范围在[0 ~ 500]，填 0 则为无限制
-     */
-    minWidth?: number;
-
-    /**
-     * 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则为 100% 宽度
-     */
-    maxWidth?: number;
 
     /**
      * 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
@@ -167,6 +152,11 @@ type Danmuku = {
      * 显示弹幕层
      */
     show: () => Danmuku;
+
+    /**
+     * 挂载弹幕输入框
+     */
+    mount: () => void;
 
     /**
      * 是否隐藏弹幕层

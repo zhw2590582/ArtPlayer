@@ -390,6 +390,8 @@ export default function setting(art, danmuku) {
     addEmitter();
     addControl();
     addSetting();
+
+    return {};
 }
 
 if (typeof document !== 'undefined') {

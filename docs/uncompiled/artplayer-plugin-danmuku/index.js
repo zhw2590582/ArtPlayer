@@ -154,7 +154,8 @@ var _heatmapDefault = parcelHelpers.interopDefault(_heatmap);
 function artplayerPluginDanmuku(option) {
     return (art)=>{
         const danmuku = new (0, _danmukuDefault.default)(art, option);
-        (0, _settingDefault.default)(art, danmuku);
+        // 返回挂载函数，用于手动挂载
+        const { mount  } = (0, _settingDefault.default)(art, danmuku);
         if (option.heatmap) (0, _heatmapDefault.default)(art, danmuku, option.heatmap);
         return {
             name: "artplayerPluginDanmuku",
@@ -164,6 +165,7 @@ function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
+            mount,
             get option () {
                 return danmuku.option;
             },
@@ -183,39 +185,41 @@ if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerP
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _bilibili = require("./bilibili");
-var _getDanmuTop = require("./getDanmuTop");
-var _getDanmuTopDefault = parcelHelpers.interopDefault(_getDanmuTop);
+var _worker = require("bundle-text:./worker");
+var _workerDefault = parcelHelpers.interopDefault(_worker);
 class Danmuku {
     constructor(art, option){
         const { constructor , template  } = art;
         this.utils = constructor.utils; // 工具库
         this.validator = constructor.validator; // 配置校验器
-        this.$danmuku = template.$danmuku; // 弹幕容器
+        this.$danmuku = template.$danmuku; // 弹幕层容器
         this.$player = template.$player; // 播放器容器
         this.art = art;
         this.danmus = []; // 原始弹幕数据
         this.queue = []; // 实际弹幕队列
-        this.option = {}; // 配置项
+        this.option = {}; // 格式化后的配置项
         this.$refs = []; // 弹幕DOM节点池
         this.isStop = false; // 是否停止
         this.isHide = false; // 是否隐藏
         this.timer = null; // 定时器
         this.config(option); // 动态配置
-        if (this.option.useWorker) try {
-            this.worker = new Worker(require("85d40535eae5f839"));
-        } catch (error) {
-        //
-        }
+        // 创建 Web Worker, 用于计算弹幕的 top 值
+        this.worker = new Worker(URL.createObjectURL(new Blob([
+            (0, _workerDefault.default)
+        ])));
+        // 绑定公用事件
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
         this.reset = this.reset.bind(this);
         this.destroy = this.destroy.bind(this);
+        // 监听事件
         art.on("video:play", this.start);
         art.on("video:playing", this.start);
         art.on("video:pause", this.stop);
         art.on("video:waiting", this.stop);
         art.on("resize", this.reset);
         art.on("destroy", this.destroy);
+        // 开始加载弹幕
         this.load();
     }
     // 默认配置
@@ -233,7 +237,6 @@ class Danmuku {
             fontSize: 25,
             filter: ()=>true,
             antiOverlap: true,
-            useWorker: true,
             synchronousPlayback: false,
             mount: undefined,
             theme: "dark",
@@ -254,7 +257,6 @@ class Danmuku {
             fontSize: "number|string",
             filter: "function",
             antiOverlap: "boolean",
-            useWorker: "boolean",
             synchronousPlayback: "boolean",
             mount: "undefined|htmldivelement",
             theme: "string",
@@ -280,11 +282,11 @@ class Danmuku {
             text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
         `;
     }
-    // 是否在移动端使用了自动旋屏
+    // 是否在移动端使用了自动旋屏，会影响弹幕的left和top值
     get isRotate() {
-        return this.art.plugins.autoOrientation && this.art.plugins.autoOrientation.state;
+        return this.art.plugins?.autoOrientation?.state;
     }
-    // 计算上边距
+    // 计算上空白边距
     get marginTop() {
         const { clamp  } = this.utils;
         const value = this.option.margin[0];
@@ -296,7 +298,7 @@ class Danmuku {
         }
         return Danmuku.option.margin[0];
     }
-    // 计算下边距
+    // 计算下空白边距
     get marginBottom() {
         const { clamp  } = this.utils;
         const value = this.option.margin[1];
@@ -310,16 +312,17 @@ class Danmuku {
     }
     // 加载弹幕
     async load() {
+        const { errorHandle  } = this.utils;
         try {
             if (typeof this.option.danmuku === "function") this.danmus = await this.option.danmuku();
             else if (typeof this.option.danmuku.then === "function") this.danmus = await this.option.danmuku;
             else if (typeof this.option.danmuku === "string") this.danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(this.option.danmuku);
             else this.danmus = this.option.danmuku;
-            this.utils.errorHandle(Array.isArray(this.danmus), "Danmuku need return an array as result");
-            this.art.emit("artplayerPluginDanmuku:loaded", this.danmus);
+            errorHandle(Array.isArray(this.danmus), "Danmuku need return an array as result");
             this.queue = []; // 清空实际弹幕队列
             this.$danmuku.innerText = ""; // 清空弹幕层
             this.danmus.forEach((danmu)=>this.emit(danmu)); // 逐个验证原始弹幕并转换为实际弹幕
+            this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
         // TODO: 按时间从小到大排序，用于减少弹幕的遍历次数，待优化...
         // this.queue = this.queue.sort((a, b) => a.time - b.time);
         } catch (error) {
@@ -344,6 +347,8 @@ class Danmuku {
         if (!danmu.text.trim()) return this;
         // 过滤弹幕
         if (!this.option.filter(danmu)) return this;
+        // 校验弹幕模式
+        danmu.mode = clamp(danmu.mode, 0, 3);
         // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
         if (danmu.time) danmu.time = clamp(danmu.time, 0, Infinity);
         else danmu.time = this.art.currentTime + 0.5;
@@ -394,6 +399,7 @@ class Danmuku {
     getRef() {
         const $ref = this.$refs.pop() || document.createElement("div");
         $ref.style.cssText = Danmuku.cssText;
+        // 为了移除用户自定义的样式
         $ref.className = "";
         $ref.id = "";
         return $ref;
@@ -412,26 +418,19 @@ class Danmuku {
     // 计算弹幕的top值
     postMessage(message = {}) {
         return new Promise((resolve)=>{
-            if (this.option.useWorker && this.worker && this.worker.postMessage) {
-                message.id = Date.now();
-                this.worker.postMessage(message);
-                this.worker.onmessage = (event)=>{
-                    const { data  } = event;
-                    if (data.id === message.id) resolve(data);
-                };
-            } else {
-                const top = (0, _getDanmuTopDefault.default)(message);
-                resolve({
-                    top
-                });
-            }
+            message.id = Date.now();
+            this.worker.postMessage(message);
+            this.worker.onmessage = (event)=>{
+                const { data  } = event;
+                if (data.id === message.id) resolve(data);
+            };
         });
     }
     // 根据状态，获取弹幕队列中的弹幕
     filter(state, callback) {
         return this.queue.filter((danmu)=>danmu.$state === state).map(callback);
     }
-    // 获取准备好发送的弹幕
+    // 获取准备好发送的弹幕：有的是ready状态（如之前因为弹幕太多而暂停发送的弹幕），有的是wait状态
     getReady() {
         const { currentTime  } = this.art;
         return this.queue.filter((danmu)=>{
@@ -531,6 +530,7 @@ class Danmuku {
                             danmu.$state = "emit"; // 转换为emit状态
                             danmu.$ref.style.visibility = "visible";
                             switch(danmu.mode){
+                                // 滚动的弹幕
                                 case 0:
                                     {
                                         danmu.$ref.style.top = `${top}px`;
@@ -539,17 +539,24 @@ class Danmuku {
                                         danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                         break;
                                     }
+                                // 静止的弹幕
                                 case 1:
                                     danmu.$ref.style.left = "50%";
                                     danmu.$ref.style.top = `${top}px`;
                                     danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
                                     break;
+                                // 顶部的弹幕
+                                case 2:
+                                    break;
+                                // 底部的弹幕
+                                case 3:
+                                    break;
                                 default:
                                     break;
                             }
-                            this.art.emit("artplayerPluginDanmuku:emit", danmu);
+                            this.art.emit("artplayerPluginDanmuku:visible", danmu);
                         } else {
-                            // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点
+                            // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点，等待下次发送
                             danmu.$state = "ready";
                             this.$refs.push(danmu.$ref);
                             danmu.$ref = null;
@@ -650,7 +657,7 @@ class Danmuku {
 }
 exports.default = Danmuku;
 
-},{"./bilibili":"95SuC","./getDanmuTop":"2ouQq","85d40535eae5f839":"jYsHS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
+},{"./bilibili":"95SuC","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./worker":"el0Wt"}],"95SuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getMode", ()=>getMode);
@@ -726,95 +733,8 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"2ouQq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-function getDanmuTop({ target , emits , clientWidth , clientHeight , marginBottom , marginTop , antiOverlap  }) {
-    const danmus = emits.filter((item)=>item.mode === target.mode && item.top <= clientHeight - marginBottom).sort((prev, next)=>prev.top - next.top);
-    if (danmus.length === 0) return marginTop;
-    danmus.unshift({
-        top: 0,
-        left: 0,
-        right: 0,
-        height: marginTop,
-        width: clientWidth,
-        speed: 0,
-        distance: clientWidth
-    });
-    danmus.push({
-        top: clientHeight - marginBottom,
-        left: 0,
-        right: 0,
-        height: marginBottom,
-        width: clientWidth,
-        speed: 0,
-        distance: clientWidth
-    });
-    for(let index = 1; index < danmus.length; index += 1){
-        const item = danmus[index];
-        const prev = danmus[index - 1];
-        const prevBottom = prev.top + prev.height;
-        const diff = item.top - prevBottom;
-        if (diff >= target.height) return prevBottom;
-    }
-    const topMap = [];
-    for(let index = 1; index < danmus.length - 1; index += 1){
-        const item = danmus[index];
-        if (topMap.length) {
-            const last = topMap[topMap.length - 1];
-            if (last[0].top === item.top) last.push(item);
-            else topMap.push([
-                item
-            ]);
-        } else topMap.push([
-            item
-        ]);
-    }
-    if (antiOverlap) switch(target.mode){
-        case 0:
-            {
-                const result = topMap.find((list)=>{
-                    return list.every((danmu)=>{
-                        if (clientWidth < danmu.distance) return false;
-                        if (target.speed < danmu.speed) return true;
-                        const overlapTime = danmu.right / (target.speed - danmu.speed);
-                        if (overlapTime > danmu.time) return true;
-                        return false;
-                    });
-                });
-                return result && result[0] ? result[0].top : undefined;
-            }
-        case 1:
-            return undefined;
-        default:
-            break;
-    }
-    else {
-        switch(target.mode){
-            case 0:
-                topMap.sort((prev, next)=>{
-                    const nextMinRight = Math.min(...next.map((item)=>item.right));
-                    const prevMinRight = Math.min(...prev.map((item)=>item.right));
-                    return nextMinRight * next.length - prevMinRight * prev.length;
-                });
-                break;
-            case 1:
-                topMap.sort((prev, next)=>{
-                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));
-                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));
-                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;
-                });
-                break;
-            default:
-                break;
-        }
-        return topMap[0][0].top;
-    }
-}
-exports.default = getDanmuTop;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"jYsHS":[function(require,module,exports) {
-module.exports = "data:application/javascript,function%20getDanmuTop%28%7B%20target%20%2C%20emits%20%2C%20clientWidth%20%2C%20clientHeight%20%2C%20marginBottom%20%2C%20marginTop%20%2C%20antiOverlap%20%20%7D%29%20%7B%0A%20%20%20%20const%20danmus%20%3D%20emits.filter%28%28item%29%3D%3Eitem.mode%20%3D%3D%3D%20target.mode%20%26%26%20item.top%20%3C%3D%20clientHeight%20-%20marginBottom%29.sort%28%28prev%2C%20next%29%3D%3Eprev.top%20-%20next.top%29%3B%0A%20%20%20%20if%20%28danmus.length%20%3D%3D%3D%200%29%20return%20marginTop%3B%0A%20%20%20%20danmus.unshift%28%7B%0A%20%20%20%20%20%20%20%20top%3A%200%2C%0A%20%20%20%20%20%20%20%20left%3A%200%2C%0A%20%20%20%20%20%20%20%20right%3A%200%2C%0A%20%20%20%20%20%20%20%20height%3A%20marginTop%2C%0A%20%20%20%20%20%20%20%20width%3A%20clientWidth%2C%0A%20%20%20%20%20%20%20%20speed%3A%200%2C%0A%20%20%20%20%20%20%20%20distance%3A%20clientWidth%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20danmus.push%28%7B%0A%20%20%20%20%20%20%20%20top%3A%20clientHeight%20-%20marginBottom%2C%0A%20%20%20%20%20%20%20%20left%3A%200%2C%0A%20%20%20%20%20%20%20%20right%3A%200%2C%0A%20%20%20%20%20%20%20%20height%3A%20marginBottom%2C%0A%20%20%20%20%20%20%20%20width%3A%20clientWidth%2C%0A%20%20%20%20%20%20%20%20speed%3A%200%2C%0A%20%20%20%20%20%20%20%20distance%3A%20clientWidth%0A%20%20%20%20%7D%29%3B%0A%20%20%20%20for%28let%20index%20%3D%201%3B%20index%20%3C%20danmus.length%3B%20index%20%2B%3D%201%29%7B%0A%20%20%20%20%20%20%20%20const%20item%20%3D%20danmus%5Bindex%5D%3B%0A%20%20%20%20%20%20%20%20const%20prev%20%3D%20danmus%5Bindex%20-%201%5D%3B%0A%20%20%20%20%20%20%20%20const%20prevBottom%20%3D%20prev.top%20%2B%20prev.height%3B%0A%20%20%20%20%20%20%20%20const%20diff%20%3D%20item.top%20-%20prevBottom%3B%0A%20%20%20%20%20%20%20%20if%20%28diff%20%3E%3D%20target.height%29%20return%20prevBottom%3B%0A%20%20%20%20%7D%0A%20%20%20%20const%20topMap%20%3D%20%5B%5D%3B%0A%20%20%20%20for%28let%20index%20%3D%201%3B%20index%20%3C%20danmus.length%20-%201%3B%20index%20%2B%3D%201%29%7B%0A%20%20%20%20%20%20%20%20const%20item%20%3D%20danmus%5Bindex%5D%3B%0A%20%20%20%20%20%20%20%20if%20%28topMap.length%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20last%20%3D%20topMap%5BtopMap.length%20-%201%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28last%5B0%5D.top%20%3D%3D%3D%20item.top%29%20last.push%28item%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20else%20topMap.push%28%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20item%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20topMap.push%28%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20item%0A%20%20%20%20%20%20%20%20%5D%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20if%20%28antiOverlap%29%20switch%28target.mode%29%7B%0A%20%20%20%20%20%20%20%20case%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20result%20%3D%20topMap.find%28%28list%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20list.every%28%28danmu%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28clientWidth%20%3C%20danmu.distance%29%20return%20false%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28target.speed%20%3C%20danmu.speed%29%20return%20true%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20overlapTime%20%3D%20danmu.right%20%2F%20%28target.speed%20-%20danmu.speed%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20%28overlapTime%20%3E%20danmu.time%29%20return%20true%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%20%26%26%20result%5B0%5D%20%3F%20result%5B0%5D.top%20%3A%20undefined%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20undefined%3B%0A%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%7D%0A%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20switch%28target.mode%29%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20case%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20topMap.sort%28%28prev%2C%20next%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20nextMinRight%20%3D%20Math.min%28...next.map%28%28item%29%3D%3Eitem.right%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20prevMinRight%20%3D%20Math.min%28...prev.map%28%28item%29%3D%3Eitem.right%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20nextMinRight%20%2a%20next.length%20-%20prevMinRight%20%2a%20prev.length%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20topMap.sort%28%28prev%2C%20next%29%3D%3E%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20nextMaxWidth%20%3D%20Math.max%28...next.map%28%28item%29%3D%3Eitem.width%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20prevMaxWidth%20%3D%20Math.max%28...prev.map%28%28item%29%3D%3Eitem.width%29%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20prevMaxWidth%20%2a%20prev.length%20-%20nextMaxWidth%20%2a%20next.length%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20return%20topMap%5B0%5D%5B0%5D.top%3B%0A%20%20%20%20%7D%0A%7D%0Aonmessage%20%3D%20%28event%29%3D%3E%7B%0A%20%20%20%20const%20%7B%20data%20%20%7D%20%3D%20event%3B%0A%20%20%20%20const%20top%20%3D%20getDanmuTop%28data%29%3B%0A%20%20%20%20self.postMessage%28%7B%0A%20%20%20%20%20%20%20%20top%2C%0A%20%20%20%20%20%20%20%20id%3A%20data.id%0A%20%20%20%20%7D%29%3B%0A%7D%3B%0A%0A";
+},{}],"el0Wt":[function(require,module,exports) {
+module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (modules, entry, mainEntry, parcelRequireName, globalName) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        this\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n\n      // <script>\n    } else if (globalName) {\n      this[globalName] = mainExports;\n    }\n  }\n})({\"fHwfs\":[function(require,module,exports) {\nfunction getDanmuTop({ target , emits , clientWidth , clientHeight , marginBottom , marginTop , antiOverlap  }) {\n    const danmus = emits.filter((item)=>item.mode === target.mode && item.top <= clientHeight - marginBottom).sort((prev, next)=>prev.top - next.top);\n    if (danmus.length === 0) return marginTop;\n    danmus.unshift({\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        top: clientHeight - marginBottom,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        case 1:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data  } = event;\n    if (!data.id) return;\n    const top = getDanmuTop(data);\n    self.postMessage({\n        top,\n        id: data.id\n    });\n};\n\n},{}]},[\"fHwfs\"], \"fHwfs\", \"parcelRequire4dc0\")\n\n";
 
 },{}],"cI0ih":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1181,6 +1101,7 @@ function setting(art, danmuku) {
     addEmitter();
     addControl();
     addSetting();
+    return {};
 }
 exports.default = setting;
 if (typeof document !== "undefined") {

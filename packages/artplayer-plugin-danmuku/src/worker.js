@@ -98,6 +98,7 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
 
 onmessage = (event) => {
     const { data } = event;
+    if (!data.id) return;
     const top = getDanmuTop(data);
     self.postMessage({
         top,
