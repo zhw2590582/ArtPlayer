@@ -5,10 +5,6 @@ var art = new Artplayer({
     fullscreen: true,
     fullscreenWeb: true,
     autoOrientation: true,
-    flip: true,
-    playbackRate: true,
-    aspectRatio: true,
-    setting: true,
     plugins: [
         artplayerPluginDanmuku({
             danmuku: '/assets/sample/danmuku.xml',

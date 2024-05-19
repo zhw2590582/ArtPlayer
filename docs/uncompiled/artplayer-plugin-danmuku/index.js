@@ -239,12 +239,12 @@ class Danmuku {
             antiOverlap: true,
             synchronousPlayback: false,
             mount: ".art-controls-center",
-            style: {
-                "--art-theme-color": "#FF0000"
-            },
             heatmap: false,
             points: [],
-            beforeEmit: ()=>true
+            beforeEmit: ()=>true,
+            style: {
+                "--art-theme-color": "#FF0000"
+            }
         };
     }
     // 配置校验
@@ -406,9 +406,7 @@ class Danmuku {
     getRef() {
         const $ref = this.$refs.pop() || document.createElement("div");
         $ref.style.cssText = Danmuku.cssText;
-        // 为了移除用户自定义的样式
-        $ref.className = "";
-        $ref.id = "";
+        $ref.dataset.mode = "";
         return $ref;
     }
     // 计算弹幕字体大小
@@ -493,76 +491,81 @@ class Danmuku {
                     // 超过时间即重置弹幕
                     if (danmu.$restTime <= 0) this.makeWait(danmu);
                 });
-                // 获取准备好发送的弹幕
-                const readys = this.getReady(); // 可能包含ready和wait状态的弹幕
-                const { clientWidth , clientHeight  } = this.$player;
+                // 获取准备好发送的弹幕，可能包含ready和wait状态的弹幕
+                const readys = this.getReady();
                 for(let index = 0; index < readys.length; index++){
                     const danmu = readys[index];
-                    danmu.$ref = this.getRef(); // 获取弹幕DOM节点
-                    // 设置弹幕文本
-                    if (danmu.escape) danmu.$ref.innerText = danmu.text;
-                    else danmu.$ref.innerHTML = danmu.text;
-                    // 提前添加到弹幕层中，用于计算top值
-                    this.$danmuku.appendChild(danmu.$ref);
-                    // 设置初始弹幕样式
-                    danmu.$ref.style.left = `${clientWidth}px`;
-                    danmu.$ref.style.opacity = this.option.opacity;
-                    danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
-                    danmu.$ref.style.color = danmu.color;
-                    danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
-                    danmu.$ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
-                    danmu.$ref.style.marginLeft = "0px";
-                    // 设置单独弹幕样式
-                    setStyles(danmu.$ref, danmu.style);
-                    // 记录弹幕时间戳
-                    danmu.$lastStartTime = Date.now();
-                    // 计算弹幕剩余时间
-                    danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
-                    // 计算弹幕的top值
-                    const { top  } = await this.postMessage({
-                        target: {
-                            mode: danmu.mode,
-                            height: danmu.$ref.clientHeight,
-                            speed: (clientWidth + danmu.$ref.clientWidth) / danmu.$restTime
-                        },
-                        emits: this.getEmits(),
-                        antiOverlap: this.option.antiOverlap,
-                        clientWidth: clientWidth,
-                        clientHeight: clientHeight,
-                        marginBottom: this.marginBottom,
-                        marginTop: this.marginTop
-                    });
-                    if (danmu.$ref) {
-                        if (!this.isStop && top !== undefined) {
-                            danmu.$state = "emit"; // 转换为emit状态
-                            danmu.$ref.style.visibility = "visible";
-                            switch(danmu.mode){
-                                // 滚动的弹幕
-                                case 0:
-                                    {
+                    // 弹幕发送前的过滤器
+                    const state = await this.option.beforeEmit(danmu);
+                    if (state) {
+                        const { clientWidth , clientHeight  } = this.$player;
+                        danmu.$ref = this.getRef(); // 获取弹幕DOM节点
+                        // 设置弹幕文本
+                        if (danmu.escape) danmu.$ref.innerText = danmu.text;
+                        else danmu.$ref.innerHTML = danmu.text;
+                        // 提前添加到弹幕层中，用于计算top值
+                        this.$danmuku.appendChild(danmu.$ref);
+                        // 设置初始弹幕样式
+                        danmu.$ref.style.left = `${clientWidth}px`;
+                        danmu.$ref.style.opacity = this.option.opacity;
+                        danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
+                        danmu.$ref.style.color = danmu.color;
+                        danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
+                        danmu.$ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
+                        danmu.$ref.style.marginLeft = "0px";
+                        // 设置单独弹幕样式
+                        setStyles(danmu.$ref, danmu.style);
+                        // 记录弹幕时间戳
+                        danmu.$lastStartTime = Date.now();
+                        // 计算弹幕剩余时间
+                        danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
+                        // 计算弹幕的top值
+                        const { top  } = await this.postMessage({
+                            target: {
+                                mode: danmu.mode,
+                                height: danmu.$ref.clientHeight,
+                                speed: (clientWidth + danmu.$ref.clientWidth) / danmu.$restTime
+                            },
+                            emits: this.getEmits(),
+                            antiOverlap: this.option.antiOverlap,
+                            clientWidth: clientWidth,
+                            clientHeight: clientHeight,
+                            marginBottom: this.marginBottom,
+                            marginTop: this.marginTop
+                        });
+                        if (danmu.$ref) {
+                            if (!this.isStop && top !== undefined) {
+                                danmu.$state = "emit"; // 转换为emit状态
+                                danmu.$ref.style.visibility = "visible";
+                                danmu.$ref.dataset.mode = danmu.mode; // CSS控制模式的显示和隐藏
+                                this.art.emit("artplayerPluginDanmuku:visible", danmu);
+                                switch(danmu.mode){
+                                    // 滚动的弹幕
+                                    case 0:
+                                        {
+                                            danmu.$ref.style.top = `${top}px`;
+                                            const translateX = clientWidth + danmu.$ref.clientWidth;
+                                            danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                                            danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                                            break;
+                                        }
+                                    // 顶部的弹幕
+                                    case 1:
+                                    // 底部的弹幕
+                                    case 2:
+                                        danmu.$ref.style.left = "50%";
                                         danmu.$ref.style.top = `${top}px`;
-                                        const translateX = clientWidth + danmu.$ref.clientWidth;
-                                        danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                                        danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                                        danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
                                         break;
-                                    }
-                                // 顶部的弹幕
-                                case 1:
-                                // 底部的弹幕
-                                case 2:
-                                    danmu.$ref.style.left = "50%";
-                                    danmu.$ref.style.top = `${top}px`;
-                                    danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
-                                    break;
-                                default:
-                                    break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点，等待下次发送
+                                danmu.$state = "ready";
+                                this.$refs.push(danmu.$ref);
+                                danmu.$ref = null;
                             }
-                            this.art.emit("artplayerPluginDanmuku:visible", danmu);
-                        } else {
-                            // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点，等待下次发送
-                            danmu.$state = "ready";
-                            this.$refs.push(danmu.$ref);
-                            danmu.$ref = null;
                         }
                     }
                 }
