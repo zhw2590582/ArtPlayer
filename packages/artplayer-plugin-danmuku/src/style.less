@@ -1,199 +1,27 @@
-.art-danmuku-emitter {
-    position: relative;
+.artplayer-plugin-danmuku {
     display: flex;
-    height: 32px;
-    width: 100%;
-    font-size: 12px;
-    line-height: 1;
-    border-radius: 5px;
-    max-width: 100%;
-    background-color: rgb(255 255 255 / 30%);
+    align-items: center;
+    gap: 10px;
 
-    .art-backdrop-filter {
-        -webkit-backdrop-filter: saturate(180%) blur(20px);
-        backdrop-filter: saturate(180%) blur(20px);
-        background-color: rgba(0, 0, 0, 0.7) !important;
-    }
-
-    .art-danmuku-left {
+    .apd-toggle,
+    .apd-config {
         display: flex;
-        flex: 1;
-        border-radius: 3px 0 0 3px;
-
-        .art-danmuku-style {
-            position: relative;
-            display: flex;
-            width: 32px;
-            align-items: center;
-            justify-content: center;
-
-            .art-danmuku-style-panel {
-                display: none;
-                position: absolute;
-                z-index: 999;
-                left: -85px;
-                bottom: 30px;
-                width: 200px;
-                padding-bottom: 10px;
-
-                .art-danmuku-style-panel-inner {
-                    display: flex;
-                    flex-direction: column;
-                    padding: 10px 10px 0;
-                    border-radius: 3px;
-                    background-color: rgba(0, 0, 0, 0.9);
-
-                    .art-danmuku-style-panel-title {
-                        font-size: 13px;
-                        margin-bottom: 10px;
-                    }
-
-                    .art-danmuku-style-panel-modes {
-                        display: flex;
-                        justify-content: space-between;
-                        margin-bottom: 15px;
-
-                        .art-danmuku-style-panel-mode {
-                            display: flex;
-                            justify-content: center;
-                            width: 47%;
-                            padding: 5px 0;
-                            cursor: pointer;
-                            color: #fff;
-                            border: 1px solid #fff;
-
-                            &.art-current {
-                                background-color: #00a1d6;
-                                border: 1px solid #00a1d6;
-                            }
-                        }
-                    }
-
-                    .art-danmuku-style-panel-colors {
-                        display: flex;
-                        gap: 5px;
-                        flex-wrap: wrap;
-                        margin-bottom: 10px;
-                        justify-content: space-between;
-
-                        .art-danmuku-style-panel-color {
-                            cursor: pointer;
-                            width: 20px;
-                            height: 20px;
-                            border: 1px solid #fff;
-
-                            &.art-current {
-                                position: relative;
-                                box-shadow: 0 0 2px #fff;
-                                &::before {
-                                    content: '';
-                                    position: absolute;
-                                    width: 100%;
-                                    height: 100%;
-                                    left: 0;
-                                    top: 0;
-                                    right: 0;
-                                    bottom: 0;
-                                    border: 2px solid #000;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            &:hover .art-danmuku-style-panel {
-                display: flex;
-            }
-
-            .art-icon {
-                opacity: 0.75;
-                cursor: pointer;
-
-                &:hover {
-                    opacity: 1;
-                }
-            }
-        }
-
-        .art-danmuku-input {
-            flex: 1;
-            display: flex;
-            padding: 0 10px 0 0;
-            border: none;
-            outline: none;
-            width: 100%;
-            color: #ffffff;
-            background-color: transparent;
-
-            &::placeholder,
-            &::-webkit-input-placeholder {
-                color: rgb(255 255 255 / 50%);
-            }
-        }
-    }
-
-    .art-danmuku-send {
-        display: flex;
-        width: 50px;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        background-color: #00a1d6;
-        border-radius: 0 5px 5px 0;
+        opacity: 0.75;
+        width: 24px;
+        height: 24px;
+        transition: all 0.2s ease;
 
         &:hover {
-            background-color: #00b5e5;
-        }
-
-        &.art-disabled {
-            opacity: 0.5;
-            pointer-events: none;
+            opacity: 1;
         }
     }
 
-    &.art-danmuku-mount {
-        max-width: 100% !important;
-
-        .art-danmuku-left {
-            .art-danmuku-style {
-                .art-danmuku-style-panel {
-                    left: 0;
-                }
-            }
-        }
-
-        .art-danmuku-send {
-            width: 60px;
-        }
-
-        &.art-danmuku-theme-light {
-            .art-danmuku-left {
-                border: 1px solid #dadada;
-                background: #f4f4f4;
-
-                .art-danmuku-style .art-icon svg {
-                    fill: #666;
-                }
-
-                .art-danmuku-input {
-                    color: #000000;
-
-                    &::placeholder,
-                    &::-webkit-input-placeholder {
-                        color: rgb(0 0 0 / 50%);
-                    }
-                }
-            }
-        }
+    .apd-toggle-on,
+    .apd-toggle-off {
+        width: 100%;
+        height: 100%;
     }
-}
-
-.art-layer-danmuku-emitter {
-    position: absolute;
-    z-index: 99;
-    left: 0;
-    right: 0;
-    bottom: -40px;
-    width: 100%;
 }
