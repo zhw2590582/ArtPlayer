@@ -541,12 +541,11 @@ class Danmuku {
                                     }
                                 // 顶部的弹幕
                                 case 1:
+                                // 底部的弹幕
+                                case 2:
                                     danmu.$ref.style.left = "50%";
                                     danmu.$ref.style.top = `${top}px`;
                                     danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
-                                    break;
-                                // 底部的弹幕
-                                case 2:
                                     break;
                                 default:
                                     break;
