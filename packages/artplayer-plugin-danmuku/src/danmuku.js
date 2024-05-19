@@ -5,20 +5,20 @@ export default class Danmuku {
     constructor(art, option) {
         const { constructor, template } = art;
 
-        this.utils = constructor.utils;
-        this.validator = constructor.validator;
-        this.$danmuku = template.$danmuku;
-        this.$player = template.$player;
+        this.utils = constructor.utils; // 工具库
+        this.validator = constructor.validator; // 配置校验器
+        this.$danmuku = template.$danmuku; // 弹幕容器
+        this.$player = template.$player; // 播放器容器
 
         this.art = art;
-        this.danmus = [];
-        this.queue = [];
-        this.option = {};
-        this.$refs = [];
-        this.isStop = false;
-        this.isHide = false;
-        this.timer = null;
-        this.config(option);
+        this.danmus = []; // 原始弹幕数据
+        this.queue = []; // 实际弹幕队列
+        this.option = {}; // 配置项
+        this.$refs = []; // 弹幕DOM节点池
+        this.isStop = false; // 是否停止
+        this.isHide = false; // 是否隐藏
+        this.timer = null; // 定时器
+        this.config(option); // 动态配置
 
         if (this.option.useWorker) {
             try {
@@ -43,31 +43,28 @@ export default class Danmuku {
         this.load();
     }
 
+    // 默认配置
     static get option() {
         return {
-            danmuku: [],
-            speed: 5,
-            margin: ['2%', '25%'],
-            opacity: 1,
-            color: '#FFFFFF',
-            mode: 0,
-            fontSize: 25,
-            filter: () => true,
-            antiOverlap: true,
-            useWorker: true,
-            synchronousPlayback: false,
-            lockTime: 5,
-            maxLength: 100,
-            minWidth: 200,
-            maxWidth: 400,
-            mount: undefined,
-            theme: 'dark',
-            heatmap: false,
-            points: [],
-            beforeEmit: () => true,
+            danmuku: [], // 弹幕数据
+            speed: 5, // 弹幕持续时间
+            margin: ['2%', '25%'], // 弹幕上下边距，支持像素数字和百分比
+            opacity: 1, // 整体弹幕透明度
+            color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
+            mode: 0, // 默认弹幕模式，0: 滚动，1: 静止
+            fontSize: 25, // 弹幕字体大小，支持像素数字和百分比，不可以被单独弹幕项覆盖
+            filter: () => true, // 从“原始弹幕”到“实际弹幕”的过滤器
+            antiOverlap: true, // 弹幕是否防重叠
+            useWorker: true, // 是否使用 Web Worker
+            synchronousPlayback: false, // 是否同步播放速度
+            theme: 'dark', // 弹幕主题
+            heatmap: false, // 是否开启热力图
+            points: [], // 热力图数据
+            beforeEmit: () => true, // 弹幕输入框发送前的过滤器
         };
     }
 
+    // 配置校验
     static get scheme() {
         return {
             danmuku: 'array|function|string',
@@ -81,10 +78,6 @@ export default class Danmuku {
             antiOverlap: 'boolean',
             useWorker: 'boolean',
             synchronousPlayback: 'boolean',
-            lockTime: 'number',
-            maxLength: 'number',
-            minWidth: 'number',
-            maxWidth: 'number',
             mount: 'undefined|htmldivelement',
             theme: 'string',
             heatmap: 'object|boolean',
@@ -93,10 +86,30 @@ export default class Danmuku {
         };
     }
 
+    // 初始弹幕样式
+    static get cssText() {
+        return `
+            user-select: none;
+            position: absolute;
+            white-space: pre;
+            pointer-events: none;
+            perspective: 500px;
+            display: inline-block;
+            will-change: transform;
+            font-weight: normal;
+            line-height: 1.125;
+            visibility: hidden;
+            font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
+            text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
+        `;
+    }
+
+    // 是否在移动端使用了自动旋屏
     get isRotate() {
         return this.art.plugins.autoOrientation && this.art.plugins.autoOrientation.state;
     }
 
+    // 计算上边距
     get marginTop() {
         const { clamp } = this.utils;
         const value = this.option.margin[0];
@@ -114,6 +127,7 @@ export default class Danmuku {
         return Danmuku.option.margin[0];
     }
 
+    // 计算下边距
     get marginBottom() {
         const { clamp } = this.utils;
         const value = this.option.margin[1];
@@ -131,39 +145,179 @@ export default class Danmuku {
         return Danmuku.option.margin[1];
     }
 
-    filter(state, callback) {
-        return this.queue.filter((danmu) => danmu.$state === state).map(callback);
+    // 加载弹幕
+    async load() {
+        try {
+            if (typeof this.option.danmuku === 'function') {
+                this.danmus = await this.option.danmuku();
+            } else if (typeof this.option.danmuku.then === 'function') {
+                this.danmus = await this.option.danmuku;
+            } else if (typeof this.option.danmuku === 'string') {
+                this.danmus = await bilibiliDanmuParseFromUrl(this.option.danmuku);
+            } else {
+                this.danmus = this.option.danmuku;
+            }
+
+            this.utils.errorHandle(Array.isArray(this.danmus), 'Danmuku need return an array as result');
+            this.art.emit('artplayerPluginDanmuku:loaded', this.danmus);
+
+            this.queue = []; // 清空实际弹幕队列
+            this.$danmuku.innerText = ''; // 清空弹幕层
+            this.danmus.forEach((danmu) => this.emit(danmu)); // 逐个验证原始弹幕并转换为实际弹幕
+
+            // TODO: 按时间从小到大排序，用于减少弹幕的遍历次数，待优化...
+            // this.queue = this.queue.sort((a, b) => a.time - b.time);
+        } catch (error) {
+            this.art.emit('artplayerPluginDanmuku:error', error);
+            throw error;
+        }
+
+        return this;
     }
 
+    // 把原始弹幕转换为实际弹幕
+    emit(danmu) {
+        const { clamp } = this.utils;
+
+        this.validator(danmu, {
+            text: 'string', // 弹幕文本
+            mode: '?number', // 弹幕模式: 0: 滚动，1: 静止，2: 顶部，3: 底部
+            color: '?string', // 弹幕颜色
+            time: '?number', // 弹幕时间
+            border: '?boolean', // 弹幕是否有边框
+            style: '?object', // 弹幕样式
+            escape: '?boolean', // 弹幕是否转义
+        });
+
+        // 弹幕文本为空则直接忽略
+        if (!danmu.text.trim()) return this;
+
+        // 过滤弹幕
+        if (!this.option.filter(danmu)) return this;
+
+        // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
+        if (danmu.time) {
+            danmu.time = clamp(danmu.time, 0, Infinity);
+        } else {
+            danmu.time = this.art.currentTime + 0.5;
+        }
+
+        // 设置弹幕模式，如果没有则默认为全局配置
+        if (danmu.mode === undefined) {
+            danmu.mode = this.option.mode;
+        }
+
+        // 设置弹幕单独样式，如果没有则默认为空对象
+        if (danmu.style === undefined) {
+            danmu.style = {};
+        }
+
+        // 设置弹幕弹幕是否转义，如果没有则默认为 true，即不会显示 HTML 标签
+        if (danmu.escape === undefined) {
+            danmu.escape = true;
+        }
+
+        // 设置弹幕颜色，如果没有则默认为全局配置
+        if (danmu.color === undefined) {
+            danmu.color = this.option.color;
+        }
+
+        // 添加到实际弹幕队列
+        this.queue.push({
+            ...danmu,
+            $state: 'wait', // 弹幕状态
+            $ref: null, // 弹幕 DOM 节点
+            $restTime: 0, // 弹幕剩余时间
+            $lastStartTime: 0, // 弹幕上次开始时间
+        });
+
+        // 弹幕有四个状态：
+        // - wait: 弹幕还未开始显示，没有被添加到 DOM 中
+        // - ready: 弹幕准备好显示，没有被添加到 DOM 中
+        // - emit: 弹幕正在显示，已经被添加到 DOM 中
+        // - stop: 弹幕正在停止显示，已经被添加到 DOM 中
+
+        return this;
+    }
+
+    // 动态配置
+    config(option) {
+        const { clamp } = this.utils;
+
+        this.option = Object.assign({}, Danmuku.option, this.option, option);
+        this.validator(this.option, Danmuku.scheme);
+
+        this.option.speed = clamp(this.option.speed, 1, 10);
+        this.option.opacity = clamp(this.option.opacity, 0, 1);
+
+        // 重新计算弹幕字体大小，需要重新渲染
+        if (option.fontSize) {
+            this.option.fontSize = this.getFontSize(this.option.fontSize);
+            this.reset();
+        }
+
+        this.art.emit('artplayerPluginDanmuku:config', this.option);
+
+        return this;
+    }
+
+    // 计算DOM的left值，受到旋屏影响
     getLeft($ref) {
         const rect = $ref.getBoundingClientRect();
         return this.isRotate ? rect.top : rect.left;
     }
 
+    // 获取弹幕DOM节点
     getRef() {
-        const $refCache = this.$refs.pop();
-        if ($refCache) return $refCache;
-
-        const $ref = document.createElement('div');
-
-        $ref.style.cssText = `
-            user-select: none;
-            position: absolute;
-            white-space: pre;
-            pointer-events: none;
-            perspective: 500px;
-            display: inline-block;
-            will-change: transform;
-            font-weight: normal;
-            line-height: 1.125;
-            visibility: hidden;
-            font-family: SimHei, "Microsoft JhengHei", Arial, Helvetica, sans-serif;
-            text-shadow: rgb(0, 0, 0) 1px 0px 1px, rgb(0, 0, 0) 0px 1px 1px, rgb(0, 0, 0) 0px -1px 1px, rgb(0, 0, 0) -1px 0px 1px;
-        `;
-
+        const $ref = this.$refs.pop() || document.createElement('div');
+        $ref.style.cssText = Danmuku.cssText;
+        $ref.className = '';
+        $ref.id = '';
         return $ref;
     }
 
+    // 计算弹幕字体大小
+    getFontSize(fontSize) {
+        const { clamp } = this.utils;
+        const { clientHeight } = this.$player;
+
+        if (typeof fontSize === 'number') {
+            return clamp(fontSize, 12, clientHeight);
+        }
+
+        if (typeof fontSize === 'string' && fontSize.endsWith('%')) {
+            const ratio = parseFloat(fontSize) / 100;
+            return clamp(clientHeight * ratio, 12, clientHeight);
+        }
+
+        return Danmuku.option.fontSize;
+    }
+
+    // 计算弹幕的top值
+    postMessage(message = {}) {
+        return new Promise((resolve) => {
+            if (this.option.useWorker && this.worker && this.worker.postMessage) {
+                message.id = Date.now();
+                this.worker.postMessage(message);
+                this.worker.onmessage = (event) => {
+                    const { data } = event;
+                    if (data.id === message.id) {
+                        resolve(data);
+                    }
+                };
+            } else {
+                const top = getDanmuTop(message);
+                resolve({ top });
+            }
+        });
+    }
+
+    // 根据状态，获取弹幕队列中的弹幕
+    filter(state, callback) {
+        return this.queue.filter((danmu) => danmu.$state === state).map(callback);
+    }
+
+    // 获取准备好发送的弹幕
     getReady() {
         const { currentTime } = this.art;
         return this.queue.filter((danmu) => {
@@ -174,6 +328,7 @@ export default class Danmuku {
         });
     }
 
+    // 获取正在发送的弹幕，用于计算下一个弹幕的top值
     getEmits() {
         const result = [];
         const { clientWidth } = this.$player;
@@ -205,165 +360,52 @@ export default class Danmuku {
         return result;
     }
 
-    getFontSize(fontSize) {
-        const { clamp } = this.utils;
-        const { clientHeight } = this.$player;
-
-        if (typeof fontSize === 'number') {
-            return clamp(fontSize, 12, clientHeight);
-        }
-
-        if (typeof fontSize === 'string' && fontSize.endsWith('%')) {
-            const ratio = parseFloat(fontSize) / 100;
-            return clamp(clientHeight * ratio, 12, clientHeight);
-        }
-
-        return Danmuku.option.fontSize;
-    }
-
-    postMessage(message = {}) {
-        return new Promise((resolve) => {
-            if (this.option.useWorker && this.worker && this.worker.postMessage) {
-                message.id = Date.now();
-                this.worker.postMessage(message);
-                this.worker.onmessage = (event) => {
-                    const { data } = event;
-                    if (data.id === message.id) {
-                        resolve(data);
-                    }
-                };
-            } else {
-                const top = getDanmuTop(message);
-                resolve({ top });
-            }
-        });
-    }
-
-    async load() {
-        try {
-            if (typeof this.option.danmuku === 'function') {
-                this.danmus = await this.option.danmuku();
-            } else if (typeof this.option.danmuku.then === 'function') {
-                this.danmus = await this.option.danmuku;
-            } else if (typeof this.option.danmuku === 'string') {
-                this.danmus = await bilibiliDanmuParseFromUrl(this.option.danmuku);
-            } else {
-                this.danmus = this.option.danmuku;
-            }
-
-            this.utils.errorHandle(Array.isArray(this.danmus), 'Danmuku need return an array as result');
-            this.art.emit('artplayerPluginDanmuku:loaded', this.danmus);
-
-            this.queue = [];
-            this.$danmuku.innerText = '';
-            this.danmus.forEach((danmu) => this.emit(danmu));
-        } catch (error) {
-            this.art.emit('artplayerPluginDanmuku:error', error);
-            throw error;
-        }
-
-        return this;
-    }
-
-    config(option) {
-        const { clamp } = this.utils;
-
-        this.option = Object.assign({}, Danmuku.option, this.option, option);
-        this.validator(this.option, Danmuku.scheme);
-
-        this.option.speed = clamp(this.option.speed, 1, 10);
-        this.option.opacity = clamp(this.option.opacity, 0, 1);
-        this.option.lockTime = clamp(Math.floor(this.option.lockTime), 0, 60);
-        this.option.maxLength = clamp(this.option.maxLength, 0, 500);
-        this.option.minWidth = clamp(this.option.minWidth, 0, 500);
-        this.option.maxWidth = clamp(this.option.maxWidth, 0, Infinity);
-
-        if (option.fontSize) {
-            this.option.fontSize = this.getFontSize(this.option.fontSize);
-            this.reset();
-        }
-
-        this.art.emit('artplayerPluginDanmuku:config', this.option);
-
-        return this;
-    }
-
+    // 重置弹幕到wait状态，回收弹幕DOM节点
     makeWait(danmu) {
         danmu.$state = 'wait';
         if (danmu.$ref) {
-            danmu.$ref.style.visibility = 'hidden';
-            danmu.$ref.style.marginLeft = '0px';
-            danmu.$ref.style.transform = 'translateX(0px)';
-            danmu.$ref.style.transition = 'transform 0s linear 0s';
+            danmu.$ref.style.cssText = Danmuku.cssText;
             this.$refs.push(danmu.$ref);
             danmu.$ref = null;
         }
     }
 
-    continue() {
-        const { clientWidth } = this.$player;
-        this.filter('stop', (danmu) => {
-            danmu.$state = 'emit';
-            danmu.$lastStartTime = Date.now();
-            switch (danmu.mode) {
-                case 0: {
-                    const translateX = clientWidth + danmu.$ref.clientWidth;
-                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
-                    break;
-                }
-                default:
-                    break;
-            }
-        });
-
-        return this;
-    }
-
-    suspend() {
-        const { clientWidth } = this.$player;
-        this.filter('emit', (danmu) => {
-            danmu.$state = 'stop';
-            switch (danmu.mode) {
-                case 0: {
-                    const translateX = clientWidth - (this.getLeft(danmu.$ref) - this.getLeft(this.$player));
-                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                    danmu.$ref.style.transition = 'transform 0s linear 0s';
-                    break;
-                }
-                default:
-                    break;
-            }
-        });
-
-        return this;
-    }
-
-    reset() {
-        this.queue.forEach((danmu) => this.makeWait(danmu));
-        return this;
-    }
-
+    // 实时更新弹幕
     update() {
+        const { setStyles } = this.utils;
+
         this.timer = window.requestAnimationFrame(async () => {
             if (this.art.playing && !this.isHide) {
+                // 实时计算弹幕的剩余显示时间
                 this.filter('emit', (danmu) => {
                     const emitTime = (Date.now() - danmu.$lastStartTime) / 1000;
                     danmu.$restTime -= emitTime;
                     danmu.$lastStartTime = Date.now();
+                    // 超过时间即重置弹幕
                     if (danmu.$restTime <= 0) {
                         this.makeWait(danmu);
                     }
                 });
 
-                const readys = this.getReady();
+                // 获取准备好发送的弹幕
+                const readys = this.getReady(); // 可能包含ready和wait状态的弹幕
                 const { clientWidth, clientHeight } = this.$player;
+
                 for (let index = 0; index < readys.length; index++) {
                     const danmu = readys[index];
-                    danmu.$ref = this.getRef();
-                    danmu.$ref.innerText = danmu.text;
+                    danmu.$ref = this.getRef(); // 获取弹幕DOM节点
+
+                    // 设置弹幕文本
+                    if (danmu.escape) {
+                        danmu.$ref.innerText = danmu.text;
+                    } else {
+                        danmu.$ref.innerHTML = danmu.text;
+                    }
+
+                    // 提前添加到弹幕层中，用于计算top值
                     this.$danmuku.appendChild(danmu.$ref);
 
+                    // 设置初始弹幕样式
                     danmu.$ref.style.left = `${clientWidth}px`;
                     danmu.$ref.style.opacity = this.option.opacity;
                     danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
@@ -372,21 +414,26 @@ export default class Danmuku {
                     danmu.$ref.style.backgroundColor = danmu.border ? 'rgb(0 0 0 / 50%)' : null;
                     danmu.$ref.style.marginLeft = '0px';
 
+                    // 设置单独弹幕样式
+                    setStyles(danmu.$ref, danmu.style);
+
+                    // 记录弹幕时间戳
                     danmu.$lastStartTime = Date.now();
+
+                    // 计算弹幕剩余时间
                     danmu.$restTime =
                         this.option.synchronousPlayback && this.art.playbackRate
                             ? this.option.speed / Number(this.art.playbackRate)
                             : this.option.speed;
 
-                    const target = {
-                        mode: danmu.mode,
-                        height: danmu.$ref.clientHeight,
-                        speed: (clientWidth + danmu.$ref.clientWidth) / danmu.$restTime,
-                    };
-
+                    // 计算弹幕的top值
                     const { top } = await this.postMessage({
-                        target,
-                        emits: this.getEmits(),
+                        target: {
+                            mode: danmu.mode,
+                            height: danmu.$ref.clientHeight,
+                            speed: (clientWidth + danmu.$ref.clientWidth) / danmu.$restTime,
+                        }, // 当前弹幕信息
+                        emits: this.getEmits(), // 正在发送的其它弹幕
                         antiOverlap: this.option.antiOverlap,
                         clientWidth: clientWidth,
                         clientHeight: clientHeight,
@@ -396,7 +443,7 @@ export default class Danmuku {
 
                     if (danmu.$ref) {
                         if (!this.isStop && top !== undefined) {
-                            danmu.$state = 'emit';
+                            danmu.$state = 'emit'; // 转换为emit状态
                             danmu.$ref.style.visibility = 'visible';
 
                             switch (danmu.mode) {
@@ -415,7 +462,10 @@ export default class Danmuku {
                                 default:
                                     break;
                             }
+
+                            this.art.emit('artplayerPluginDanmuku:emit', danmu);
                         } else {
+                            // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点
                             danmu.$state = 'ready';
                             this.$refs.push(danmu.$ref);
                             danmu.$ref = null;
@@ -424,10 +474,54 @@ export default class Danmuku {
                 }
             }
 
+            // 递归调用
             if (!this.isStop) {
                 this.update();
             }
         });
+        return this;
+    }
+
+    // 继续弹幕
+    continue() {
+        const { clientWidth } = this.$player;
+        this.filter('stop', (danmu) => {
+            danmu.$state = 'emit'; // 转换为emit状态
+            danmu.$lastStartTime = Date.now();
+            switch (danmu.mode) {
+                // 继续滚动的弹幕
+                case 0: {
+                    const translateX = clientWidth + danmu.$ref.clientWidth;
+                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                    break;
+                }
+                default:
+                    break;
+            }
+        });
+
+        return this;
+    }
+
+    // 暂停弹幕
+    suspend() {
+        const { clientWidth } = this.$player;
+        this.filter('emit', (danmu) => {
+            danmu.$state = 'stop'; // 转换为stop状态
+            switch (danmu.mode) {
+                // 停止滚动的弹幕
+                case 0: {
+                    const translateX = clientWidth - (this.getLeft(danmu.$ref) - this.getLeft(this.$player));
+                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                    danmu.$ref.style.transition = 'transform 0s linear 0s';
+                    break;
+                }
+                default:
+                    break;
+            }
+        });
+
         return this;
     }
 
@@ -447,10 +541,15 @@ export default class Danmuku {
         return this;
     }
 
+    reset() {
+        this.queue.forEach((danmu) => this.makeWait(danmu));
+        return this;
+    }
+
     show() {
         this.isHide = false;
         this.start();
-        this.$danmuku.style.display = 'block';
+        this.$danmuku.style.display = '';
         this.art.emit('artplayerPluginDanmuku:show');
         return this;
     }
@@ -464,46 +563,9 @@ export default class Danmuku {
         return this;
     }
 
-    emit(danmu) {
-        this.validator(danmu, {
-            text: 'string',
-            mode: 'number|undefined',
-            color: 'string|undefined',
-            time: 'number|undefined',
-            border: 'boolean|undefined',
-        });
-
-        if (!danmu.text.trim()) return this;
-        if (!this.option.filter(danmu)) return this;
-
-        if (danmu.time) {
-            danmu.time = this.utils.clamp(danmu.time, 0, Infinity);
-        } else {
-            danmu.time = this.art.currentTime + 0.5;
-        }
-
-        if (danmu.mode === undefined) {
-            danmu.mode = this.option.mode;
-        }
-
-        if (danmu.color === undefined) {
-            danmu.color = this.option.color;
-        }
-
-        this.queue.push({
-            ...danmu,
-            $state: 'wait',
-            $ref: null,
-            $restTime: 0,
-            $lastStartTime: 0,
-        });
-
-        return this;
-    }
-
     destroy() {
         this.stop();
-        if (this.worker && this.worker.terminate) this.worker.terminate();
+        this.worker?.terminate?.();
         this.art.off('video:play', this.start);
         this.art.off('video:playing', this.start);
         this.art.off('video:pause', this.stop);

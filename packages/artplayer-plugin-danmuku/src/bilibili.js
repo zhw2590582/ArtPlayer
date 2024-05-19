@@ -45,8 +45,8 @@ export function bilibiliDanmuParseFromXml(xmlString) {
         .filter(Boolean);
 }
 
-export function bilibiliDanmuParseFromUrl(url) {
-    return fetch(url)
-        .then((res) => res.text())
-        .then((xmlString) => bilibiliDanmuParseFromXml(xmlString));
+export async function bilibiliDanmuParseFromUrl(url) {
+    const res = await fetch(url);
+    const xmlString = await res.text();
+    return bilibiliDanmuParseFromXml(xmlString);
 }
