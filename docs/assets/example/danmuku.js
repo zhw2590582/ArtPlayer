@@ -23,7 +23,7 @@ var art = new Artplayer({
             // 在发送弹幕前的校验，返回 true 则可以发送，支持Promise，可用于在发送前做存库操作
             beforeEmit: (danmu) => !!danmu.text.trim(), 
             // 在显示弹幕前的校验，返回 true 则可以显示，支持Promise，可用于在显示前做屏蔽词操作
-            beforeVisible: (danmu) => !danmu.text.test(/fuck/ig), 
+            beforeVisible: (danmu) => !/fuck/ig.test(danmu.text), 
 
             // 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部
             // mount: document.querySelector('.artplayer-danmuku'),
