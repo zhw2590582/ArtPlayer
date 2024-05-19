@@ -237,14 +237,11 @@ class Danmuku {
             filter: ()=>true,
             antiOverlap: true,
             synchronousPlayback: false,
-            mount: ".art-controls-center",
+            mount: undefined,
             heatmap: false,
             points: [],
             beforeEmit: ()=>true,
-            beforeVisible: ()=>true,
-            style: {
-                "--art-theme-color": "#FF0000"
-            }
+            beforeVisible: ()=>true
         };
     }
     // 配置校验
@@ -260,8 +257,7 @@ class Danmuku {
             filter: "function",
             antiOverlap: "boolean",
             synchronousPlayback: "boolean",
-            mount: "?htmldivelement|string",
-            style: "object",
+            mount: "?htmldivelement",
             heatmap: "object|boolean",
             points: "array",
             beforeEmit: "function",
@@ -749,358 +745,21 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
-var _danmuOnSvg = require("bundle-text:./img/danmu-on.svg");
-var _danmuOnSvgDefault = parcelHelpers.interopDefault(_danmuOnSvg);
-var _danmuOffSvg = require("bundle-text:./img/danmu-off.svg");
-var _danmuOffSvgDefault = parcelHelpers.interopDefault(_danmuOffSvg);
-var _danmuConfigSvg = require("bundle-text:./img/danmu-config.svg");
-var _danmuConfigSvgDefault = parcelHelpers.interopDefault(_danmuConfigSvg);
-var _danmuStyleSvg = require("bundle-text:./img/danmu-style.svg");
-var _danmuStyleSvgDefault = parcelHelpers.interopDefault(_danmuStyleSvg);
 class Setting {
     constructor(art, danmuku){
-        return {};
-        function addEmitter() {
-            const colors = [
-                "#FE0302",
-                "#FF7204",
-                "#FFAA02",
-                "#FFD302",
-                "#FFFF00",
-                "#A0EE00",
-                "#00CD00",
-                "#019899",
-                "#4266BE",
-                "#89D5FF",
-                "#CC0273",
-                "#222222",
-                "#9B9B9B",
-                "#FFFFFF"
-            ].map((item)=>{
-                const isCurrent = option.color === item ? " art-current" : "";
-                return `<div class="art-danmuku-style-panel-color${isCurrent}" data-color="${item}" style="background-color:${item}"></div>`;
-            });
-            const $emitter = append($controlsCenter, `
-            <div class="art-danmuku-emitter" style="max-width: ${option.maxWidth ? `${option.maxWidth}px` : "100%"}">
-                <div class="art-danmuku-left">
-                    <div class="art-danmuku-style">
-                        <div class="art-danmuku-style-panel">
-                            <div class="art-danmuku-style-panel-inner">
-                                <div class="art-danmuku-style-panel-title">模式</div>
-                                <div class="art-danmuku-style-panel-modes">
-                                    <div class="art-danmuku-style-panel-mode art-current" data-mode="0">滚动</div>
-                                    <div class="art-danmuku-style-panel-mode" data-mode="1">静止</div>
-                                </div>
-                                <div class="art-danmuku-style-panel-title">颜色</div>
-                                <div class="art-danmuku-style-panel-colors">
-                                    ${colors.join("")}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input class="art-danmuku-input" maxlength="${option.maxLength}" placeholder="发个弹幕见证当下" />
-                </div>
-                <div class="art-danmuku-send">发送</div>
-            </div>
-            `);
-            const $style = query(".art-danmuku-style", $emitter);
-            const $input = query(".art-danmuku-input", $emitter);
-            const $send = query(".art-danmuku-send", $emitter);
-            const $panel = query(".art-danmuku-style-panel-inner", $emitter);
-            const $modes = query(".art-danmuku-style-panel-modes", $emitter);
-            const $colors = query(".art-danmuku-style-panel-colors", $emitter);
-            const $layer = option.mount || append($player, '<div class="art-layer-danmuku-emitter"></div>');
-            if (art.option.backdrop) addClass($panel, "art-backdrop-filter");
-            if (option.theme) addClass($emitter, `art-danmuku-theme-${option.theme}`);
-            let timer = null;
-            let mode = option.mode;
-            let color = option.color;
-            append($style, $danmuStyle);
-            function countdown(time) {
-                if (time <= 0) {
-                    timer = null;
-                    $send.innerText = "发送";
-                    removeClass($send, "art-disabled");
-                } else {
-                    $send.innerText = time;
-                    timer = setTimeout(()=>countdown(time - 1), 1000);
-                }
-            }
-            function onSend() {
-                const danmu = {
-                    mode,
-                    color,
-                    border: true,
-                    text: $input.value.trim()
-                };
-                if (timer === null && option.beforeEmit(danmu)) {
-                    $input.value = "";
-                    danmuku.emit(danmu);
-                    addClass($send, "art-disabled");
-                    countdown(option.lockTime);
-                    art.emit("artplayerPluginDanmuku:emit", danmu);
-                }
-            }
-            function onResize() {
-                if ($controlsCenter.clientWidth < option.minWidth) {
-                    append($layer, $emitter);
-                    setStyle($layer, "display", "flex");
-                    addClass($emitter, "art-danmuku-mount");
-                    if (!option.mount) setStyle($player, "marginBottom", "40px");
-                } else {
-                    append($controlsCenter, $emitter);
-                    setStyle($layer, "display", "none");
-                    removeClass($emitter, "art-danmuku-mount");
-                    if (!option.mount) setStyle($player, "marginBottom", null);
-                }
-            }
-            art.proxy($send, "click", onSend);
-            art.proxy($input, "keypress", (event)=>{
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    onSend();
-                }
-            });
-            art.proxy($modes, "click", (event)=>{
-                const { dataset  } = event.target;
-                if (dataset.mode) {
-                    mode = Number(dataset.mode);
-                    inverseClass(event.target, "art-current");
-                }
-            });
-            art.proxy($colors, "click", (event)=>{
-                const { dataset  } = event.target;
-                if (dataset.color) {
-                    color = dataset.color;
-                    inverseClass(event.target, "art-current");
-                }
-            });
-            onResize();
-            art.on("resize", ()=>{
-                if (!art.isInput) onResize();
-            });
-            art.on("destroy", ()=>{
-                if (option.mount && $emitter.parentElement === option.mount) option.mount.removeChild($emitter);
-            });
-        }
-        function addControl() {
-            art.controls.add({
-                position: "right",
-                name: "danmuku",
-                click: function() {
-                    if (danmuku.isHide) {
-                        danmuku.show();
-                        art.notice.show = "弹幕显示";
-                        setStyle($danmuOn, "display", null);
-                        setStyle($danmuOff, "display", "none");
-                    } else {
-                        danmuku.hide();
-                        art.notice.show = "弹幕隐藏";
-                        setStyle($danmuOn, "display", "none");
-                        setStyle($danmuOff, "display", null);
-                    }
-                },
-                mounted ($ref) {
-                    append($ref, $danmuOn);
-                    append($ref, $danmuOff);
-                    tooltip($ref, "弹幕开关");
-                    setStyle($danmuOff, "display", "none");
-                    art.on("artplayerPluginDanmuku:hide", ()=>{
-                        setStyle($danmuOn, "display", "none");
-                        setStyle($danmuOff, "display", null);
-                    });
-                    art.on("artplayerPluginDanmuku:show", ()=>{
-                        setStyle($danmuOn, "display", null);
-                        setStyle($danmuOff, "display", "none");
-                    });
-                }
-            });
-        }
-        function addSetting() {
-            art.setting.add({
-                width: 260,
-                name: "danmuku",
-                html: "弹幕设置",
-                tooltip: "更多",
-                icon: $danmuConfig,
-                selector: [
-                    {
-                        width: SETTING_ITEM_WIDTH,
-                        html: "播放速度",
-                        icon: "",
-                        tooltip: "适中",
-                        selector: [
-                            {
-                                html: "极慢",
-                                time: 10
-                            },
-                            {
-                                html: "较慢",
-                                time: 7.5
-                            },
-                            {
-                                default: true,
-                                html: "适中",
-                                time: 5
-                            },
-                            {
-                                html: "较快",
-                                time: 2.5
-                            },
-                            {
-                                html: "极快",
-                                time: 1
-                            }
-                        ],
-                        onSelect: function(item) {
-                            danmuku.config({
-                                speed: item.time
-                            });
-                            return item.html;
-                        }
-                    },
-                    {
-                        width: SETTING_ITEM_WIDTH,
-                        html: "字体大小",
-                        icon: "",
-                        tooltip: "适中",
-                        selector: [
-                            {
-                                html: "极小",
-                                fontSize: "4%"
-                            },
-                            {
-                                html: "较小",
-                                fontSize: "5%"
-                            },
-                            {
-                                default: true,
-                                html: "适中",
-                                fontSize: "6%"
-                            },
-                            {
-                                html: "较大",
-                                fontSize: "7%"
-                            },
-                            {
-                                html: "极大",
-                                fontSize: "8%"
-                            }
-                        ],
-                        onSelect: function(item) {
-                            danmuku.config({
-                                fontSize: item.fontSize
-                            });
-                            return item.html;
-                        }
-                    },
-                    {
-                        width: SETTING_ITEM_WIDTH,
-                        html: "不透明度",
-                        icon: "",
-                        tooltip: "100%",
-                        selector: [
-                            {
-                                default: true,
-                                opacity: 1,
-                                html: "100%"
-                            },
-                            {
-                                opacity: 0.75,
-                                html: "75%"
-                            },
-                            {
-                                opacity: 0.5,
-                                html: "50%"
-                            },
-                            {
-                                opacity: 0.25,
-                                html: "25%"
-                            },
-                            {
-                                opacity: 0,
-                                html: "0%"
-                            }
-                        ],
-                        onSelect: function(item) {
-                            danmuku.config({
-                                opacity: item.opacity
-                            });
-                            return item.html;
-                        }
-                    },
-                    {
-                        width: SETTING_ITEM_WIDTH,
-                        html: "显示范围",
-                        icon: "",
-                        tooltip: "3/4",
-                        selector: [
-                            {
-                                html: "1/4",
-                                margin: [
-                                    10,
-                                    "75%"
-                                ]
-                            },
-                            {
-                                html: "半屏",
-                                margin: [
-                                    10,
-                                    "50%"
-                                ]
-                            },
-                            {
-                                default: true,
-                                html: "3/4",
-                                margin: [
-                                    10,
-                                    "25%"
-                                ]
-                            },
-                            {
-                                html: "满屏",
-                                margin: [
-                                    10,
-                                    10
-                                ]
-                            }
-                        ],
-                        onSelect: function(item) {
-                            danmuku.config({
-                                margin: item.margin
-                            });
-                            return item.html;
-                        }
-                    },
-                    {
-                        html: "弹幕防重叠",
-                        icon: "",
-                        tooltip: option.antiOverlap ? "开启" : "关闭",
-                        switch: option.antiOverlap,
-                        onSwitch (item) {
-                            danmuku.config({
-                                antiOverlap: !item.switch
-                            });
-                            item.tooltip = item.switch ? "关闭" : "开启";
-                            return !item.switch;
-                        }
-                    },
-                    {
-                        html: "同步视频速度",
-                        icon: "",
-                        tooltip: option.synchronousPlayback ? "开启" : "关闭",
-                        switch: option.synchronousPlayback,
-                        onSwitch (item) {
-                            danmuku.config({
-                                synchronousPlayback: !item.switch
-                            });
-                            item.tooltip = item.switch ? "关闭" : "开启";
-                            return !item.switch;
-                        }
-                    }
-                ]
-            });
-        }
+        this.art = art;
+        this.danmuku = danmuku;
+        this.option = danmuku.option;
+        this.init();
+    }
+    init() {
+        console.log("setting init");
+    }
+    addEmitter() {
+        console.log("setting addEmitter");
+    }
+    mount(target) {
+    //
     }
 }
 exports.default = Setting;
@@ -1113,20 +772,8 @@ if (typeof document !== "undefined") {
     }
 }
 
-},{"bundle-text:./style.less":"uaCsY","bundle-text:./img/danmu-on.svg":"qeJXh","bundle-text:./img/danmu-off.svg":"7RwEf","bundle-text:./img/danmu-config.svg":"3yRfx","bundle-text:./img/danmu-style.svg":"hoOta","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"uaCsY":[function(require,module,exports) {
+},{"bundle-text:./style.less":"uaCsY","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"uaCsY":[function(require,module,exports) {
 module.exports = ".art-danmuku-emitter {\n  height: 32px;\n  width: 100%;\n  max-width: 100%;\n  background-color: #ffffff4d;\n  border-radius: 5px;\n  font-size: 12px;\n  line-height: 1;\n  display: flex;\n  position: relative;\n}\n\n.art-danmuku-emitter .art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000b3 !important;\n}\n\n.art-danmuku-emitter .art-danmuku-left {\n  border-radius: 3px 0 0 3px;\n  flex: 1;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style {\n  width: 32px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel {\n  z-index: 999;\n  width: 200px;\n  padding-bottom: 10px;\n  display: none;\n  position: absolute;\n  bottom: 30px;\n  left: -85px;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner {\n  background-color: #000000e6;\n  border-radius: 3px;\n  flex-direction: column;\n  padding: 10px 10px 0;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-title {\n  margin-bottom: 10px;\n  font-size: 13px;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-modes {\n  justify-content: space-between;\n  margin-bottom: 15px;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-modes .art-danmuku-style-panel-mode {\n  width: 47%;\n  cursor: pointer;\n  color: #fff;\n  border: 1px solid #fff;\n  justify-content: center;\n  padding: 5px 0;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-modes .art-danmuku-style-panel-mode.art-current {\n  background-color: #00a1d6;\n  border: 1px solid #00a1d6;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors {\n  flex-wrap: wrap;\n  justify-content: space-between;\n  gap: 5px;\n  margin-bottom: 10px;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors .art-danmuku-style-panel-color {\n  cursor: pointer;\n  width: 20px;\n  height: 20px;\n  border: 1px solid #fff;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors .art-danmuku-style-panel-color.art-current {\n  position: relative;\n  box-shadow: 0 0 2px #fff;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel .art-danmuku-style-panel-inner .art-danmuku-style-panel-colors .art-danmuku-style-panel-color.art-current:before {\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  border: 2px solid #000;\n  position: absolute;\n  inset: 0;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style:hover .art-danmuku-style-panel {\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-icon {\n  opacity: .75;\n  cursor: pointer;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-style .art-icon:hover {\n  opacity: 1;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-input {\n  width: 100%;\n  color: #fff;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  flex: 1;\n  padding: 0 10px 0 0;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-left .art-danmuku-input::placeholder, .art-danmuku-emitter .art-danmuku-left .art-danmuku-input::-webkit-input-placeholder {\n  color: #ffffff80;\n}\n\n.art-danmuku-emitter .art-danmuku-send {\n  width: 50px;\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-radius: 0 5px 5px 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-danmuku-emitter .art-danmuku-send:hover {\n  background-color: #00b5e5;\n}\n\n.art-danmuku-emitter .art-danmuku-send.art-disabled {\n  opacity: .5;\n  pointer-events: none;\n}\n\n.art-danmuku-emitter.art-danmuku-mount {\n  max-width: 100% !important;\n}\n\n.art-danmuku-emitter.art-danmuku-mount .art-danmuku-left .art-danmuku-style .art-danmuku-style-panel {\n  left: 0;\n}\n\n.art-danmuku-emitter.art-danmuku-mount .art-danmuku-send {\n  width: 60px;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left {\n  background: #f4f4f4;\n  border: 1px solid #dadada;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-style .art-icon svg {\n  fill: #666;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-input {\n  color: #000;\n}\n\n.art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-input::placeholder, .art-danmuku-emitter.art-danmuku-mount.art-danmuku-theme-light .art-danmuku-left .art-danmuku-input::-webkit-input-placeholder {\n  color: #00000080;\n}\n\n.art-layer-danmuku-emitter {\n  z-index: 99;\n  width: 100%;\n  position: absolute;\n  bottom: -40px;\n  left: 0;\n  right: 0;\n}\n\n";
-
-},{}],"qeJXh":[function(require,module,exports) {
-module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg viewBox=\"0 0 1152 1024\" width=\"22\" height=\"22\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#fff\" d=\"M311.466667 661.333333c0 4.266667-4.266667 8.533333-8.533334 12.8 0 4.266667 0 4.266667-4.266666 8.533334h-12.8c-4.266667 0-8.533333-4.266667-17.066667-8.533334-8.533333-8.533333-17.066667-8.533333-25.6-8.533333-8.533333 0-12.8 4.266667-17.066667 12.8-4.266667 12.8-8.533333 21.333333-4.266666 29.866667 4.266667 8.533333 12.8 17.066667 25.6 21.333333 17.066667 8.533333 34.133333 17.066667 46.933333 17.066667 12.8 0 21.333333-4.266667 34.133333-8.533334 8.533333-4.266667 17.066667-17.066667 25.6-29.866666 8.533333-12.8 12.8-34.133333 17.066667-55.466667 4.266667-21.333333 4.266667-51.2 4.266667-85.333333 0-12.8 0-21.333333-4.266667-29.866667 0-8.533333-4.266667-12.8-8.533333-17.066667-4.266667-4.266667-8.533333-8.533333-12.8-8.533333-4.266667 0-12.8-4.266667-21.333334-4.266667H273.066667s-4.266667-4.266667 0-8.533333l4.266666-38.4c0-4.266667 0-8.533333 4.266667-8.533333h46.933333c17.066667 0 25.6-4.266667 34.133334-12.8 8.533333-8.533333 12.8-21.333333 12.8-42.666667V324.266667c0-17.066667-4.266667-34.133333-8.533334-42.666667-12.8-12.8-25.6-17.066667-42.666666-17.066667H243.2c-8.533333 0-17.066667 0-21.333333 4.266667-4.266667 8.533333-4.266667 12.8-4.266667 25.6 0 8.533333 0 17.066667 4.266667 21.333333 4.266667 4.266667 12.8 8.533333 21.333333 8.533334h64c4.266667 0 8.533333 0 8.533333 4.266666v34.133334c0 8.533333 0 12.8-4.266666 12.8 0 0-4.266667 4.266667-8.533334 4.266666h-34.133333c-8.533333 0-12.8 0-21.333333 4.266667-4.266667 0-8.533333 4.266667-8.533334 4.266667-4.266667 4.266667-8.533333 12.8-8.533333 17.066666 0 8.533333-4.266667 17.066667-4.266667 25.6l-8.533333 72.533334v29.866666c0 8.533333 4.266667 12.8 8.533333 17.066667 4.266667 4.266667 8.533333 4.266667 17.066667 8.533333h68.266667c4.266667 0 8.533333 0 8.533333 4.266667s4.266667 8.533333 4.266667 17.066667c0 21.333333 0 42.666667-4.266667 55.466666 0 8.533333-4.266667 21.333333-8.533333 25.6zM896 486.4c-93.866667 0-174.933333 51.2-217.6 123.733333h-106.666667v-34.133333H640c21.333333 0 34.133333-4.266667 42.666667-12.8 8.533333-8.533333 12.8-21.333333 12.8-42.666667V358.4c0-21.333333-4.266667-34.133333-12.8-42.666667-8.533333-8.533333-21.333333-12.8-42.666667-12.8 0-4.266667 4.266667-4.266667 4.266667-8.533333-4.266667 0-4.266667-4.266667-4.266667-4.266667 4.266667-12.8 8.533333-21.333333 4.266667-25.6 0-8.533333-4.266667-12.8-12.8-21.333333-8.533333-4.266667-17.066667-4.266667-21.333334-4.266667-8.533333 4.266667-12.8 8.533333-21.333333 21.333334-4.266667 8.533333-8.533333 12.8-12.8 21.333333-4.266667 8.533333-8.533333 12.8-12.8 21.333333H512c-4.266667-8.533333-8.533333-17.066667-8.533333-21.333333-4.266667-8.533333-8.533333-12.8-12.8-21.333333-4.266667-12.8-12.8-17.066667-21.333334-17.066667s-17.066667 0-25.6 8.533333c-8.533333 8.533333-12.8 12.8-12.8 21.333334s0 17.066667 8.533334 25.6l4.266666 4.266666 4.266667 4.266667c-17.066667 0-29.866667 4.266667-38.4 12.8-8.533333 4.266667-12.8 21.333333-12.8 38.4v157.866667c0 21.333333 4.266667 34.133333 12.8 42.666666 8.533333 8.533333 21.333333 12.8 42.666667 12.8H512v34.133334H413.866667c-12.8 0-21.333333 0-25.6 4.266666-4.266667 4.266667-8.533333 8.533333-8.533334 21.333334v17.066666c0 4.266667 4.266667 8.533333 4.266667 8.533334 4.266667 0 4.266667 4.266667 8.533333 4.266666H512v55.466667c0 12.8 4.266667 21.333333 8.533333 25.6 4.266667 4.266667 12.8 8.533333 21.333334 8.533333 12.8 0 21.333333-4.266667 25.6-8.533333 4.266667-4.266667 4.266667-12.8 4.266666-25.6v-55.466667h81.066667c-8.533333 25.6-12.8 51.2-12.8 76.8 0 140.8 115.2 256 256 256s256-115.2 256-256-115.2-251.733333-256-251.733333z m-328.533333-128h55.466666c4.266667 0 4.266667 0 4.266667 4.266667v46.933333h-59.733333V358.4z m0 102.4h59.733333V512h-55.466667v-51.2zM512 516.266667h-55.466667V465.066667H512v51.2z m0-102.4h-59.733333V366.933333v-4.266666H512v51.2z m384 499.2c-93.866667 0-170.666667-76.8-170.666667-170.666667s76.8-170.666667 170.666667-170.666667 170.666667 76.8 170.666667 170.666667-76.8 170.666667-170.666667 170.666667z\"></path>\n<path fill=\"#fff\" d=\"M951.466667 669.866667l-72.533334 72.533333-29.866666-25.6c-17.066667-17.066667-42.666667-12.8-59.733334 4.266667-17.066667 17.066667-12.8 42.666667 4.266667 59.733333l59.733333 51.2c8.533333 8.533333 17.066667 8.533333 29.866667 8.533333 12.8 0 21.333333-4.266667 29.866667-12.8l102.4-102.4c17.066667-17.066667 17.066667-42.666667 0-59.733333-21.333333-12.8-46.933333-12.8-64 4.266667zM580.266667 878.933333H213.333333c-72.533333 0-128-55.466667-128-119.466666V230.4c0-64 55.466667-119.466667 128-119.466667h512c72.533333 0 128 55.466667 128 119.466667v140.8c0 25.6 17.066667 42.666667 42.666667 42.666667s42.666667-17.066667 42.666667-42.666667V230.4c0-115.2-93.866667-204.8-213.333334-204.8H213.333333C93.866667 25.6 0 119.466667 0 230.4v529.066667c0 115.2 93.866667 204.8 213.333333 204.8h366.933334c25.6 0 42.666667-17.066667 42.666666-42.666667s-21.333333-42.666667-42.666666-42.666667z\"></path>\n</svg>";
-
-},{}],"7RwEf":[function(require,module,exports) {
-module.exports = "<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg viewBox=\"0 0 1152 1024\" width=\"22\" height=\"22\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n<path fill=\"#fff\" d=\"M311.296 661.504c0 4.096-4.096 8.704-8.704 12.8 0 4.096 0 4.096-4.096 8.704h-12.8c-4.096 0-8.704-4.096-16.896-8.704-8.704-8.704-16.896-8.704-25.6-8.704s-12.8 4.096-16.896 12.8c-4.096 12.8-8.704 21.504-4.096 29.696 4.096 8.704 12.8 16.896 25.6 21.504 16.896 8.704 34.304 16.896 47.104 16.896 12.8 0 21.504-4.096 34.304-8.704 8.704-4.096 16.896-16.896 25.6-29.696 8.704-12.8 12.8-34.304 16.896-55.296 4.096-21.504 4.096-51.2 4.096-85.504 0-12.8 0-21.504-4.096-29.696 0-8.704-4.096-12.8-8.704-16.896-4.096-4.096-8.704-8.704-12.8-8.704s-12.8-4.096-21.504-4.096H272.896s-4.096-4.096 0-8.704l4.096-38.4c0-4.096 0-8.704 4.096-8.704h47.104c16.896 0 25.6-4.096 34.304-12.8 8.704-8.704 12.8-21.504 12.8-42.496V324.096c0-16.896-4.096-34.304-8.704-42.496-12.8-12.8-25.6-16.896-42.496-16.896H243.2c-8.704 0-16.896 0-21.504 4.096-4.096 8.704-4.096 12.8-4.096 25.6 0 8.704 0 16.896 4.096 21.504 4.096 4.096 12.8 8.704 21.504 8.704H307.2c4.096 0 8.704 0 8.704 4.096v34.304c0 8.704 0 12.8-4.096 12.8 0 0-4.096 4.096-8.704 4.096h-34.304c-8.704 0-12.8 0-21.504 4.096-4.096 0-8.704 4.096-8.704 4.096-4.096 4.096-8.704 12.8-8.704 16.896 0 8.704-4.096 16.896-4.096 25.6l-8.704 72.704v29.696c0 8.704 4.096 12.8 8.704 16.896s8.704 4.096 16.896 8.704h68.096c4.096 0 8.704 0 8.704 4.096s4.096 8.704 4.096 16.896c0 21.504 0 42.496-4.096 55.296 0.512 9.216-3.584 22.016-8.192 26.624zM896 486.4c-93.696 0-175.104 51.2-217.6 123.904h-106.496v-34.304H640c21.504 0 34.304-4.096 42.496-12.8 8.704-8.704 12.8-21.504 12.8-42.496V358.4c0-21.504-4.096-34.304-12.8-42.496-8.704-8.704-21.504-12.8-42.496-12.8 0-4.096 4.096-4.096 4.096-8.704-4.096 0-4.096-4.096-4.096-4.096 4.096-12.8 8.704-21.504 4.096-25.6 0-8.704-4.096-12.8-12.8-21.504-8.704-4.096-16.896-4.096-21.504-4.096-8.704 4.096-12.8 8.704-21.504 21.504-4.096 8.704-8.704 12.8-12.8 21.504-4.096 8.704-8.704 12.8-12.8 21.504h-51.2c-4.096-8.704-8.704-16.896-8.704-21.504-4.096-8.704-8.704-12.8-12.8-21.504-4.096-12.8-12.8-16.896-21.504-16.896s-16.896 0-25.6 8.704C434.176 261.12 430.08 265.216 430.08 273.92c0 8.704 0 16.896 8.704 25.6l4.096 4.096 4.096 4.096c-16.896 0-29.696 4.096-38.4 12.8-8.704 4.096-12.8 21.504-12.8 38.4v157.696c0 21.504 4.096 34.304 12.8 42.496 8.704 8.704 21.504 12.8 42.496 12.8H512v34.304H413.696c-12.8 0-21.504 0-25.6 4.096-4.096 4.096-8.704 8.704-8.704 21.504v16.896c0 4.096 4.096 8.704 4.096 8.704 4.096 0 4.096 4.096 8.704 4.096H512V716.8c0 12.8 4.096 21.504 8.704 25.6 4.096 4.096 12.8 8.704 21.504 8.704 12.8 0 21.504-4.096 25.6-8.704 4.096-4.096 4.096-12.8 4.096-25.6v-55.296h80.896c-8.704 25.6-12.8 51.2-12.8 76.8 0 140.8 115.2 256 256 256s256-115.2 256-256S1036.8 486.4 896 486.4z m-328.704-128h55.296c4.096 0 4.096 0 4.096 4.096V409.6h-59.904V358.4z m0 102.4h59.904v51.2h-55.296V460.8h-4.608zM512 516.096H456.704v-51.2H512v51.2z m0-102.4H452.096v-51.2H512v51.2z m384 499.2c-93.696 0-170.496-76.8-170.496-170.496s76.8-170.496 170.496-170.496 170.496 76.8 170.496 170.496-76.8 170.496-170.496 170.496z\"></path>\n<path fill=\"#fff\" d=\"M580.096 879.104H213.504c-72.704 0-128-55.296-128-119.296V230.4c0-64 55.296-119.296 128-119.296h512c72.704 0 128 55.296 128 119.296v140.8c0 25.6 16.896 42.496 42.496 42.496s42.496-16.896 42.496-42.496V230.4c0-115.2-93.696-204.8-213.504-204.8h-512C93.696 25.6 0 119.296 0 230.4v528.896c0 115.2 93.696 204.8 213.504 204.8h367.104c25.6 0 42.496-16.896 42.496-42.496 0-25.6-21.504-42.496-43.008-42.496z m171.52 10.752c-15.36-15.36-15.36-40.96 0-56.32l237.568-237.568c15.36-15.36 40.96-15.36 56.32 0s15.36 40.96 0 56.32l-237.568 237.568c-15.36 15.36-40.448 15.36-56.32 0z\"></path>\n</svg>";
-
-},{}],"3yRfx":[function(require,module,exports) {
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" width=\"22\" height=\"22\">\n    <path d=\"M16.5 8c1.289 0 2.49.375 3.5 1.022V6a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2h7.022A6.5 6.5 0 0116.5 8zM7 13H5a1 1 0 010-2h2a1 1 0 010 2zm2-4H5a1 1 0 010-2h4a1 1 0 010 2z\"></path>\n    <path d=\"M20.587 13.696l-.787-.131a3.503 3.503 0 00-.593-1.051l.301-.804a.46.46 0 00-.21-.56l-1.005-.581a.52.52 0 00-.656.113l-.499.607a3.53 3.53 0 00-1.276 0l-.499-.607a.52.52 0 00-.656-.113l-1.005.581a.46.46 0 00-.21.56l.301.804c-.254.31-.456.665-.593 1.051l-.787.131a.48.48 0 00-.413.465v1.209a.48.48 0 00.413.465l.811.135c.144.382.353.733.614 1.038l-.292.78a.46.46 0 00.21.56l1.005.581a.52.52 0 00.656-.113l.515-.626a3.549 3.549 0 001.136 0l.515.626a.52.52 0 00.656.113l1.005-.581a.46.46 0 00.21-.56l-.292-.78c.261-.305.47-.656.614-1.038l.811-.135A.48.48 0 0021 15.37v-1.209a.48.48 0 00-.413-.465zM16.5 16.057a1.29 1.29 0 11.002-2.582 1.29 1.29 0 01-.002 2.582z\"></path>\n</svg>";
-
-},{}],"hoOta":[function(require,module,exports) {
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 22 22\" width=\"24\" height=\"24\">\n    <path d=\"M17 16H5c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1zM6.96 15c.39 0 .74-.24.89-.6l.65-1.6h5l.66 1.6c.15.36.5.6.89.6.69 0 1.15-.71.88-1.34l-3.88-8.97C11.87 4.27 11.46 4 11 4s-.87.27-1.05.69l-3.88 8.97c-.27.63.2 1.34.89 1.34zM11 5.98L12.87 11H9.13L11 5.98z\"></path>\n</svg>";
 
 },{}],"bZziT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

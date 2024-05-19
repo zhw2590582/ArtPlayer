@@ -102,7 +102,7 @@ type Option = {
     /**
      * 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
      */
-    mount?: Element | string;
+    mount?: Element;
 
     /**
      * 自定义弹幕输入框样式
