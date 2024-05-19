@@ -3,6 +3,14 @@ import type Artplayer from 'artplayer';
 export = artplayerPluginDanmuku;
 export as namespace artplayerPluginDanmuku;
 
+type CssVar = {
+    '--art-theme': string;
+    '--art-font-color': string;
+    '--art-background-color': string;
+    '--art-text-shadow-color': string;
+    '--art-transition-duration': string;
+};
+
 type Danmu = {
     /**
      * 弹幕文本
@@ -97,9 +105,9 @@ type Option = {
     mount?: Element | string;
 
     /**
-     * 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light
+     * 自定义弹幕输入框样式
      */
-    theme?: 'dark' | 'light';
+    style?: Partial<CssVar>;
 
     /**
      * 是否开启弹幕热度图

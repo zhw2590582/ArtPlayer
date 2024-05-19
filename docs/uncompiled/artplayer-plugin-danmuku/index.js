@@ -239,7 +239,9 @@ class Danmuku {
             antiOverlap: true,
             synchronousPlayback: false,
             mount: ".art-controls-center",
-            theme: "dark",
+            style: {
+                "--art-theme-color": "#FF0000"
+            },
             heatmap: false,
             points: [],
             beforeEmit: ()=>true
@@ -259,7 +261,7 @@ class Danmuku {
             antiOverlap: "boolean",
             synchronousPlayback: "boolean",
             mount: "?htmldivelement|string",
-            theme: "string",
+            style: "object",
             heatmap: "object|boolean",
             points: "array",
             beforeEmit: "function"
@@ -345,10 +347,14 @@ class Danmuku {
         });
         // 弹幕文本为空则直接忽略
         if (!danmu.text.trim()) return this;
-        // 过滤弹幕
+        // 弹幕模式只能是 0, 1, 2
+        if (![
+            0,
+            1,
+            2
+        ].includes(danmu.mode)) return this;
+        // 自定义弹幕过滤函数
         if (!this.option.filter(danmu)) return this;
-        // 校验弹幕模式
-        danmu.mode = clamp(danmu.mode, 0, 2);
         // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
         if (danmu.time) danmu.time = clamp(danmu.time, 0, Infinity);
         else danmu.time = this.art.currentTime + 0.5;
@@ -382,6 +388,7 @@ class Danmuku {
         this.validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
+        this.option.style = Object.assign({}, Danmuku.option.style, this.option.style);
         // 重新计算弹幕字体大小，需要重新渲染
         if (option.fontSize) {
             this.option.fontSize = this.getFontSize(this.option.fontSize);

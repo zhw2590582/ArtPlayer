@@ -55,10 +55,12 @@ export default class Danmuku {
             antiOverlap: true, // 弹幕是否防重叠
             synchronousPlayback: false, // 是否同步播放速度
             mount: '.art-controls-center', // 弹幕发射器挂载点, 默认为播放器控制栏中部
-            theme: 'dark', // 弹幕主题
+            style: {
+                '--art-theme-color': '#FF0000',
+            }, // 弹幕输入框样式
             heatmap: false, // 是否开启热力图
             points: [], // 热力图数据
-            beforeEmit: () => true, // 弹幕输入框发送前的过滤器
+            beforeEmit: () => true, // 弹幕输入框发送前的过滤器，支持返回 Promise
         };
     }
 
@@ -76,7 +78,7 @@ export default class Danmuku {
             antiOverlap: 'boolean',
             synchronousPlayback: 'boolean',
             mount: '?htmldivelement|string',
-            theme: 'string',
+            style: 'object',
             heatmap: 'object|boolean',
             points: 'array',
             beforeEmit: 'function',
@@ -191,11 +193,11 @@ export default class Danmuku {
         // 弹幕文本为空则直接忽略
         if (!danmu.text.trim()) return this;
 
-        // 过滤弹幕
-        if (!this.option.filter(danmu)) return this;
+        // 弹幕模式只能是 0, 1, 2
+        if (![0, 1, 2].includes(danmu.mode)) return this;
 
-        // 校验弹幕模式
-        danmu.mode = clamp(danmu.mode, 0, 2);
+        // 自定义弹幕过滤函数
+        if (!this.option.filter(danmu)) return this;
 
         // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
         if (danmu.time) {
@@ -251,6 +253,7 @@ export default class Danmuku {
 
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
+        this.option.style = Object.assign({}, Danmuku.option.style, this.option.style);
 
         // 重新计算弹幕字体大小，需要重新渲染
         if (option.fontSize) {

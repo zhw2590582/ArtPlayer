@@ -21,9 +21,15 @@ var art = new Artplayer({
             antiOverlap: true, // 是否防重叠
             synchronousPlayback: false, // 是否同步到播放速度
             filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数，返回 true 则可以发送
-            theme: 'light', // 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light
             heatmap: true, // 是否开启弹幕热度图, 默认为 false
-            beforeEmit: (danmu) => !!danmu.text.trim(), // 发送弹幕前的自定义校验，返回 true 则可以发送
+
+            // 自定义弹幕输入框样式
+            style: {
+                //
+            },
+
+            // 发送弹幕前的自定义校验，返回 true 则可以发送，支持返回 Promise，可以异步校验
+            beforeEmit: (danmu) => !!danmu.text.trim(), 
 
             // 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部
             // mount: document.querySelector('.artplayer-danmuku'),
