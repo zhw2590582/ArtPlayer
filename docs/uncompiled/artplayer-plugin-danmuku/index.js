@@ -234,12 +234,12 @@ class Danmuku {
             color: "#FFFFFF",
             mode: 0,
             fontSize: 25,
-            filter: ()=>true,
             antiOverlap: true,
             synchronousPlayback: false,
             mount: undefined,
             heatmap: false,
             points: [],
+            filter: ()=>true,
             beforeEmit: ()=>true,
             beforeVisible: ()=>true
         };

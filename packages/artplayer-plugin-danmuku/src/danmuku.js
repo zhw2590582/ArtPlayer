@@ -51,12 +51,12 @@ export default class Danmuku {
             color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
             mode: 0, // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
             fontSize: 25, // 弹幕字体大小，支持像素数字和百分比，不可以被单独弹幕项覆盖
-            filter: () => true, // 从“原始弹幕”到“实际弹幕”的过滤器
             antiOverlap: true, // 弹幕是否防重叠
             synchronousPlayback: false, // 是否同步播放速度
             mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
             heatmap: false, // 是否开启热力图
             points: [], // 热力图数据
+            filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
             beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
             beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
         };
