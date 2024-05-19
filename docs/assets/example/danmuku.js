@@ -38,7 +38,7 @@ art.on('artplayerPluginDanmuku:emit', (danmu) => {
     console.info('新增弹幕', danmu);
 });
 
-// 监听正在显示中的弹幕，可以对弹幕dom进行操作
+// 监听即将显示的弹幕，可以对弹幕dom进行操作
 art.on('artplayerPluginDanmuku:visible', (danmu) => {
     console.info('显示弹幕', danmu);
 });

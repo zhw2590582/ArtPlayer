@@ -34,8 +34,8 @@ export default class Danmuku {
         art.on('video:playing', this.start);
         art.on('video:pause', this.stop);
         art.on('video:waiting', this.stop);
-        art.on('resize', this.reset);
         art.on('destroy', this.destroy);
+        // art.on('resize', this.reset);
 
         // 开始加载弹幕
         this.load();
@@ -58,6 +58,7 @@ export default class Danmuku {
             heatmap: false, // 是否开启热力图
             points: [], // 热力图数据
             beforeEmit: () => true, // 弹幕输入框发送前的过滤器，支持返回 Promise
+            beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
             style: {
                 '--art-theme-color': '#FF0000',
             }, // 弹幕输入框样式
@@ -82,6 +83,7 @@ export default class Danmuku {
             heatmap: 'object|boolean',
             points: 'array',
             beforeEmit: 'function',
+            beforeVisible: 'function',
         };
     }
 
@@ -392,7 +394,7 @@ export default class Danmuku {
                     const danmu = readys[index];
 
                     // 弹幕发送前的过滤器
-                    const state = await this.option.beforeEmit(danmu);
+                    const state = await this.option.beforeVisible(danmu);
 
                     if (state) {
                         const { clientWidth, clientHeight } = this.$player;
@@ -573,7 +575,7 @@ export default class Danmuku {
 
     destroy() {
         this.stop();
-        this.worker?.terminate?.();
+        this.worker.terminate();
         this.art.off('video:play', this.start);
         this.art.off('video:playing', this.start);
         this.art.off('video:pause', this.stop);

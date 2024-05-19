@@ -217,8 +217,8 @@ class Danmuku {
         art.on("video:playing", this.start);
         art.on("video:pause", this.stop);
         art.on("video:waiting", this.stop);
-        art.on("resize", this.reset);
         art.on("destroy", this.destroy);
+        // art.on('resize', this.reset);
         // 开始加载弹幕
         this.load();
     }
@@ -242,6 +242,7 @@ class Danmuku {
             heatmap: false,
             points: [],
             beforeEmit: ()=>true,
+            beforeVisible: ()=>true,
             style: {
                 "--art-theme-color": "#FF0000"
             }
@@ -264,7 +265,8 @@ class Danmuku {
             style: "object",
             heatmap: "object|boolean",
             points: "array",
-            beforeEmit: "function"
+            beforeEmit: "function",
+            beforeVisible: "function"
         };
     }
     // 初始弹幕样式
@@ -496,7 +498,7 @@ class Danmuku {
                 for(let index = 0; index < readys.length; index++){
                     const danmu = readys[index];
                     // 弹幕发送前的过滤器
-                    const state = await this.option.beforeEmit(danmu);
+                    const state = await this.option.beforeVisible(danmu);
                     if (state) {
                         const { clientWidth , clientHeight  } = this.$player;
                         danmu.$ref = this.getRef(); // 获取弹幕DOM节点
@@ -651,7 +653,7 @@ class Danmuku {
     }
     destroy() {
         this.stop();
-        this.worker?.terminate?.();
+        this.worker.terminate();
         this.art.off("video:play", this.start);
         this.art.off("video:playing", this.start);
         this.art.off("video:pause", this.stop);
