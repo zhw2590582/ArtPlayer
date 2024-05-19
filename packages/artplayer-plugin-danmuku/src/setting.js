@@ -17,6 +17,8 @@ export default class Setting {
             $toggle: null,
             $toggleOn: null,
             $toggleOff: null,
+            $input: null,
+            $send: null,
         };
 
         this.initTemplate();
@@ -28,6 +30,10 @@ export default class Setting {
         return {
             show: true,
             maxLength: 200,
+            placeholder: '发个友善的弹幕见证当下',
+            toggleOn: '关闭弹幕',
+            toggleOff: '开启弹幕',
+            send: '发送',
         };
     }
 
@@ -52,8 +58,8 @@ export default class Setting {
                         <div class="apd-style-panel-inner">1234</div>
                     </div>
                 </div>
-                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${config.maxLength}" />
-                <div class="apd-sender">发送</div>
+                <input class="apd-input" placeholder="${config.placeholder}" autocomplete="off" maxLength="${config.maxLength}" />
+                <div class="apd-send">${config.send}</div>
             </div>
         `;
     }
@@ -61,6 +67,7 @@ export default class Setting {
     initTemplate() {
         const { setStyle, createElement, query, tooltip } = this.utils;
         const { $container } = this.template;
+        const { config } = this;
 
         const $danmuku = createElement('div');
         $danmuku.className = 'artplayer-plugin-danmuku';
@@ -73,9 +80,15 @@ export default class Setting {
         this.template.$toggle = $toggle;
         this.template.$toggleOn = $toggleOn;
         this.template.$toggleOff = $toggleOff;
-        tooltip($toggleOn, '关闭弹幕');
-        tooltip($toggleOff, '开启弹幕');
+        tooltip($toggleOn, config.toggleOn);
+        tooltip($toggleOff, config.toggleOff);
         this.initToggle();
+
+        const $input = query('.apd-input', $danmuku);
+        this.template.$input = $input;
+
+        const $send = query('.apd-send', $danmuku);
+        this.template.$send = $send;
 
         this.mount($container);
         setStyle($container, 'display', 'flex');
@@ -105,7 +118,6 @@ export default class Setting {
     }
 
     mount(target) {
-        if (!target) return;
         target.appendChild(this.template.$danmuku);
     }
 }
