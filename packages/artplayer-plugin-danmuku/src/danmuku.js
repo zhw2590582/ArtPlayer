@@ -49,7 +49,7 @@ export default class Danmuku {
             margin: ['2%', '25%'], // 弹幕上下边距，支持像素数字和百分比
             opacity: 1, // 默认弹幕透明度
             color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
-            mode: 0, // 默认弹幕模式: 0: 滚动，1: 静止，2: 顶部，3: 底部
+            mode: 0, // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
             fontSize: 25, // 弹幕字体大小，支持像素数字和百分比，不可以被单独弹幕项覆盖
             filter: () => true, // 从“原始弹幕”到“实际弹幕”的过滤器
             antiOverlap: true, // 弹幕是否防重叠
@@ -180,7 +180,7 @@ export default class Danmuku {
 
         this.validator(danmu, {
             text: 'string', // 弹幕文本
-            mode: '?number', // 弹幕模式: 0: 滚动，1: 静止，2: 顶部，3: 底部
+            mode: '?number', // 弹幕模式: 0: 滚动，1: 顶部，2: 底部
             color: '?string', // 弹幕颜色
             time: '?number', // 弹幕时间
             border: '?boolean', // 弹幕是否有边框
@@ -195,7 +195,7 @@ export default class Danmuku {
         if (!this.option.filter(danmu)) return this;
 
         // 校验弹幕模式
-        danmu.mode = clamp(danmu.mode, 0, 3);
+        danmu.mode = clamp(danmu.mode, 0, 2);
 
         // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
         if (danmu.time) {
@@ -454,17 +454,14 @@ export default class Danmuku {
                                     danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                     break;
                                 }
-                                // 静止的弹幕
+                                // 顶部的弹幕
                                 case 1:
                                     danmu.$ref.style.left = '50%';
                                     danmu.$ref.style.top = `${top}px`;
                                     danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
                                     break;
-                                // 顶部的弹幕
-                                case 2:
-                                    break;
                                 // 底部的弹幕
-                                case 3:
+                                case 2:
                                     break;
                                 default:
                                     break;
