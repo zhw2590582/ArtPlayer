@@ -57,6 +57,7 @@ export default class Danmuku {
             antiOverlap: true, // 弹幕是否防重叠
             useWorker: true, // 是否使用 Web Worker
             synchronousPlayback: false, // 是否同步播放速度
+            mount: undefined, // 弹幕挂载点, 默认为播放器控制栏中部
             theme: 'dark', // 弹幕主题
             heatmap: false, // 是否开启热力图
             points: [], // 热力图数据

@@ -235,6 +235,7 @@ class Danmuku {
             antiOverlap: true,
             useWorker: true,
             synchronousPlayback: false,
+            mount: undefined,
             theme: "dark",
             heatmap: false,
             points: [],
