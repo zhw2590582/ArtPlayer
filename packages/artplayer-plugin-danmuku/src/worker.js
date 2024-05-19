@@ -68,6 +68,7 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
                 return result && result[0] ? result[0].top : undefined;
             }
             case 1:
+            case 2:
                 return undefined;
             default:
                 break;
@@ -82,6 +83,7 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
                 });
                 break;
             case 1:
+            case 2:
                 topMap.sort((prev, next) => {
                     const nextMaxWidth = Math.max(...next.map((item) => item.width));
                     const prevMaxWidth = Math.max(...prev.map((item) => item.width));
