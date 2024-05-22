@@ -30,10 +30,6 @@ export default class Setting {
         return {
             show: true,
             maxLength: 200,
-            placeholder: '发个友善的弹幕见证当下',
-            toggleOn: '关闭弹幕',
-            toggleOff: '开启弹幕',
-            send: '发送',
         };
     }
 
@@ -48,7 +44,9 @@ export default class Setting {
             <div class="apd-config">
                 <div class="apd-config-icon">${$config}</div>
                 <div class="apd-config-panel">
-                    <div class="apd-config-panel-inner">1234</div>
+                    <div class="apd-config-panel-inner">
+                        <div>按类型屏蔽</div>
+                    </div>
                 </div>
             </div>
             <div class="apd-emitter">
@@ -58,8 +56,8 @@ export default class Setting {
                         <div class="apd-style-panel-inner">1234</div>
                     </div>
                 </div>
-                <input class="apd-input" placeholder="${config.placeholder}" autocomplete="off" maxLength="${config.maxLength}" />
-                <div class="apd-send">${config.send}</div>
+                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${config.maxLength}" />
+                <div class="apd-send">发送</div>
             </div>
         `;
     }
@@ -80,8 +78,8 @@ export default class Setting {
         this.template.$toggle = $toggle;
         this.template.$toggleOn = $toggleOn;
         this.template.$toggleOff = $toggleOff;
-        tooltip($toggleOn, config.toggleOn);
-        tooltip($toggleOff, config.toggleOff);
+        tooltip($toggleOn, '关闭弹幕');
+        tooltip($toggleOff, '开启弹幕');
         this.initToggle();
 
         const $input = query('.apd-input', $danmuku);
