@@ -74,9 +74,8 @@ async function build(name, targetName) {
 
     const filePath = `${projects[name]}/dist/index.js`;
     const newFilePath = `${projects[name]}/dist/${names[targetName]}.js`;
-    const code = banner + fs.readFileSync(filePath);
-    const newCode = compressString(code);
-    fs.writeFileSync(filePath, newCode);
+    const code = String(fs.readFileSync(filePath));
+    fs.writeFileSync(filePath, banner + compressString(code));
     fs.renameSync(filePath, newFilePath);
     await cpy(newFilePath, compiledPath);
     const size = fs.statSync(newFilePath).size / 1024;
