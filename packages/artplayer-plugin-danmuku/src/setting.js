@@ -65,7 +65,6 @@ export default class Setting {
     initTemplate() {
         const { setStyle, createElement, query, tooltip } = this.utils;
         const { $container } = this.template;
-        const { config } = this;
 
         const $danmuku = createElement('div');
         $danmuku.className = 'artplayer-plugin-danmuku';
@@ -88,8 +87,8 @@ export default class Setting {
         const $send = query('.apd-send', $danmuku);
         this.template.$send = $send;
 
-        this.mount($container);
         setStyle($container, 'display', 'flex');
+        this.mount();
     }
 
     initEvents() {
@@ -115,7 +114,7 @@ export default class Setting {
         setStyle(config.show ? $toggleOn : $toggleOff, 'display', 'flex');
     }
 
-    mount(target) {
+    mount(target = this.template.$container) {
         target.appendChild(this.template.$danmuku);
     }
 }
