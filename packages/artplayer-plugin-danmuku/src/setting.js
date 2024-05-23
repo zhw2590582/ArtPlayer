@@ -59,7 +59,7 @@ export default class Setting {
                 <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${config.maxLength}" />
                 <div class="apd-send">发送</div>
             </div>
-        `;
+        `.replace(/\s/g, '');
     }
 
     initTemplate() {
