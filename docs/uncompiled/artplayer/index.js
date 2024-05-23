@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-05-22 22:25:16";
+        return "2024-05-23 21:20:26";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -827,7 +827,6 @@ function assToVtt(ass) {
                 if (item.length === 1) return `.${item}00`;
                 if (item.length === 2) return `.${item}0`;
             } else if (item.length === 1) return (index === 0 ? "0" : ":0") + item;
-            // eslint-disable-next-line no-nested-ternary
             return index === 0 ? item : index === arr.length - 1 ? `.${item}` : `:${item}`;
         }).join("");
     }
@@ -1358,28 +1357,28 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const zhCn = {
     "Video Info": "\u7EDF\u8BA1\u4FE1\u606F",
-    "Close": "\u5173\u95ED",
+    Close: "\u5173\u95ED",
     "Video Load Failed": "\u52A0\u8F7D\u5931\u8D25",
-    "Volume": "\u97F3\u91CF",
-    "Play": "\u64AD\u653E",
-    "Pause": "\u6682\u505C",
-    "Rate": "\u901F\u5EA6",
-    "Mute": "\u9759\u97F3",
+    Volume: "\u97F3\u91CF",
+    Play: "\u64AD\u653E",
+    Pause: "\u6682\u505C",
+    Rate: "\u901F\u5EA6",
+    Mute: "\u9759\u97F3",
     "Video Flip": "\u753B\u9762\u7FFB\u8F6C",
-    "Horizontal": "\u6C34\u5E73",
-    "Vertical": "\u5782\u76F4",
-    "Reconnect": "\u91CD\u65B0\u8FDE\u63A5",
+    Horizontal: "\u6C34\u5E73",
+    Vertical: "\u5782\u76F4",
+    Reconnect: "\u91CD\u65B0\u8FDE\u63A5",
     "Show Setting": "\u663E\u793A\u8BBE\u7F6E",
     "Hide Setting": "\u9690\u85CF\u8BBE\u7F6E",
-    "Screenshot": "\u622A\u56FE",
+    Screenshot: "\u622A\u56FE",
     "Play Speed": "\u64AD\u653E\u901F\u5EA6",
     "Aspect Ratio": "\u753B\u9762\u6BD4\u4F8B",
-    "Default": "\u9ED8\u8BA4",
-    "Normal": "\u6B63\u5E38",
-    "Open": "\u6253\u5F00",
+    Default: "\u9ED8\u8BA4",
+    Normal: "\u6B63\u5E38",
+    Open: "\u6253\u5F00",
     "Switch Video": "\u5207\u6362",
     "Switch Subtitle": "\u5207\u6362\u5B57\u5E55",
-    "Fullscreen": "\u5168\u5C4F",
+    Fullscreen: "\u5168\u5C4F",
     "Exit Fullscreen": "\u9000\u51FA\u5168\u5C4F",
     "Web Fullscreen": "\u7F51\u9875\u5168\u5C4F",
     "Exit Web Fullscreen": "\u9000\u51FA\u7F51\u9875\u5168\u5C4F",
@@ -1391,7 +1390,7 @@ const zhCn = {
     "Subtitle Offset": "\u5B57\u5E55\u504F\u79FB",
     "Last Seen": "\u4E0A\u6B21\u770B\u5230",
     "Jump Play": "\u8DF3\u8F6C\u64AD\u653E",
-    "AirPlay": "\u9694\u7A7A\u64AD\u653E",
+    AirPlay: "\u9694\u7A7A\u64AD\u653E",
     "AirPlay Not Available": "\u9694\u7A7A\u64AD\u653E\u4E0D\u53EF\u7528"
 };
 exports.default = zhCn;
@@ -2386,6 +2385,7 @@ function posterMix(art) {
         get: ()=>{
             try {
                 return $poster.style["backgroundImage"].match(/"(.*)"/)[1];
+            // eslint-disable-next-line no-unused-vars
             } catch (error) {
                 return "";
             }
@@ -4974,6 +4974,7 @@ class Storage {
         try {
             const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
             return key ? storage[key] : storage;
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             return key ? this.settings[key] : this.settings;
         }
@@ -4984,6 +4985,7 @@ class Storage {
                 [key]: value
             });
             window.localStorage.setItem(this.name, JSON.stringify(storage));
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.settings[key] = value;
         }
@@ -4993,6 +4995,7 @@ class Storage {
             const storage = this.get();
             delete storage[key];
             window.localStorage.setItem(this.name, JSON.stringify(storage));
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             delete this.settings[key];
         }
@@ -5000,6 +5003,7 @@ class Storage {
     clear() {
         try {
             window.localStorage.removeItem(this.name);
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.settings = {};
         }
