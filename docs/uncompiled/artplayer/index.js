@@ -2750,7 +2750,7 @@ class Control extends (0, _componentDefault.default) {
         this.name = "control";
         this.timer = Date.now();
         const { constructor } = art;
-        const { $player, $controls } = this.art.template;
+        const { $player, $bottom } = this.art.template;
         art.on("mousemove", ()=>{
             if (!(0, _utils.isMobile)) this.show = true;
         });
@@ -2759,7 +2759,7 @@ class Control extends (0, _componentDefault.default) {
             else this.show = true;
         });
         art.on("document:mousemove", (event)=>{
-            this.isHover = (0, _utils.includeFromEvent)(event, $controls);
+            this.isHover = (0, _utils.includeFromEvent)(event, $bottom);
         });
         art.on("video:timeupdate", ()=>{
             if (!art.setting.show && !this.isHover && !art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) this.show = false;

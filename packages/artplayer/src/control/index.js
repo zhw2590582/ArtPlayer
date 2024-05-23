@@ -21,7 +21,7 @@ export default class Control extends Component {
         this.timer = Date.now();
 
         const { constructor } = art;
-        const { $player, $controls } = this.art.template;
+        const { $player, $bottom } = this.art.template;
 
         art.on('mousemove', () => {
             if (!isMobile) {
@@ -38,7 +38,7 @@ export default class Control extends Component {
         });
 
         art.on('document:mousemove', (event) => {
-            this.isHover = includeFromEvent(event, $controls);
+            this.isHover = includeFromEvent(event, $bottom);
         });
 
         art.on('video:timeupdate', () => {
