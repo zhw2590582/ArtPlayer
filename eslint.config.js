@@ -16,7 +16,7 @@ export default [
             'no-console': 'off',
             indent: ['error', 4],
             'linebreak-style': ['error', 'unix'],
-            quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }], // 允许在需要时使用双引号
+            quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
             semi: ['error', 'always'],
             'no-unused-vars': ['warn', { args: 'none' }],
         },
