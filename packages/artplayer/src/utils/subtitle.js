@@ -60,7 +60,6 @@ export function assToVtt(ass) {
                     return (index === 0 ? '0' : ':0') + item;
                 }
 
-                // eslint-disable-next-line no-nested-ternary
                 return index === 0 ? item : index === arr.length - 1 ? `.${item}` : `:${item}`;
             })
             .join('');

@@ -6,7 +6,7 @@
     "scripts": {
         "build:all": "npm run build all && npm run build:i18n && npm run build:sw && npm run build:ts && npm run build:docs",
         "bootstrap": "npx lerna bootstrap --hoist",
-        "lint": "npx eslint packages/*/src",
+        "lint": "npx eslint packages/*/src --fix",
         "build:sw": "node ./scripts/build-sw.js",
         "build:ts": "node ./scripts/build-ts.js",
         "build:docs": "node ./scripts/build-docs.js",

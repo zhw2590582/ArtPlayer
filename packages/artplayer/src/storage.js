@@ -8,6 +8,7 @@ export default class Storage {
         try {
             const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
             return key ? storage[key] : storage;
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             return key ? this.settings[key] : this.settings;
         }
@@ -19,6 +20,7 @@ export default class Storage {
                 [key]: value,
             });
             window.localStorage.setItem(this.name, JSON.stringify(storage));
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.settings[key] = value;
         }
@@ -29,6 +31,7 @@ export default class Storage {
             const storage = this.get();
             delete storage[key];
             window.localStorage.setItem(this.name, JSON.stringify(storage));
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             delete this.settings[key];
         }
@@ -37,6 +40,7 @@ export default class Storage {
     clear() {
         try {
             window.localStorage.removeItem(this.name);
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.settings = {};
         }

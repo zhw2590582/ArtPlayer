@@ -460,9 +460,8 @@ export default class Danmuku {
                                         danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                         break;
                                     }
-                                    // 顶部的弹幕
                                     case 1:
-                                    // 底部的弹幕
+                                    // falls through
                                     case 2:
                                         danmu.$ref.style.left = '50%';
                                         danmu.$ref.style.top = `${top}px`;
