@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-05-23 21:20:26";
+        return "2024-05-23 22:40:09";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2746,10 +2746,11 @@ var _airplayDefault = parcelHelpers.interopDefault(_airplay);
 class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
+        this.isHover = false;
         this.name = "control";
         this.timer = Date.now();
         const { constructor } = art;
-        const { $player } = this.art.template;
+        const { $player, $controls } = this.art.template;
         art.on("mousemove", ()=>{
             if (!(0, _utils.isMobile)) this.show = true;
         });
@@ -2757,8 +2758,11 @@ class Control extends (0, _componentDefault.default) {
             if (0, _utils.isMobile) this.toggle();
             else this.show = true;
         });
+        art.on("document:mousemove", (event)=>{
+            this.isHover = (0, _utils.includeFromEvent)(event, $controls);
+        });
         art.on("video:timeupdate", ()=>{
-            if (!art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) this.show = false;
+            if (!art.setting.show && !this.isHover && !art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) this.show = false;
         });
         art.on("control", (state)=>{
             if (state) {

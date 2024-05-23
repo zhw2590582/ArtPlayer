@@ -145,6 +145,7 @@
 })({"lIf7X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>artplayerPluginDanmuku);
 var _danmuku = require("./danmuku");
 var _danmukuDefault = parcelHelpers.interopDefault(_danmuku);
 var _setting = require("./setting");
@@ -177,7 +178,6 @@ function artplayerPluginDanmuku(option) {
         };
     };
 }
-exports.default = artplayerPluginDanmuku;
 if (typeof window !== "undefined") window["artplayerPluginDanmuku"] = artplayerPluginDanmuku;
 
 },{"./danmuku":"cv7fe","./setting":"cI0ih","./heatmap":"bZziT","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"cv7fe":[function(require,module,exports) {
@@ -188,7 +188,7 @@ var _worker = require("bundle-text:./worker");
 var _workerDefault = parcelHelpers.interopDefault(_worker);
 class Danmuku {
     constructor(art, option){
-        const { constructor , template  } = art;
+        const { constructor, template } = art;
         this.utils = constructor.utils; // 工具库
         this.validator = constructor.validator; // 配置校验器
         this.$danmuku = template.$danmuku; // 弹幕层容器
@@ -289,9 +289,9 @@ class Danmuku {
     }
     // 计算上空白边距
     get marginTop() {
-        const { clamp  } = this.utils;
+        const { clamp } = this.utils;
         const value = this.option.margin[0];
-        const { clientHeight  } = this.$player;
+        const { clientHeight } = this.$player;
         if (typeof value === "number") return clamp(value, 0, clientHeight);
         if (typeof value === "string" && value.endsWith("%")) {
             const ratio = parseFloat(value) / 100;
@@ -301,9 +301,9 @@ class Danmuku {
     }
     // 计算下空白边距
     get marginBottom() {
-        const { clamp  } = this.utils;
+        const { clamp } = this.utils;
         const value = this.option.margin[1];
-        const { clientHeight  } = this.$player;
+        const { clientHeight } = this.$player;
         if (typeof value === "number") return clamp(value, 0, clientHeight);
         if (typeof value === "string" && value.endsWith("%")) {
             const ratio = parseFloat(value) / 100;
@@ -313,7 +313,7 @@ class Danmuku {
     }
     // 加载弹幕
     async load() {
-        const { errorHandle  } = this.utils;
+        const { errorHandle } = this.utils;
         try {
             if (typeof this.option.danmuku === "function") this.danmus = await this.option.danmuku();
             else if (typeof this.option.danmuku.then === "function") this.danmus = await this.option.danmuku;
@@ -334,7 +334,7 @@ class Danmuku {
     }
     // 把原始弹幕转换为实际弹幕
     emit(danmu) {
-        const { clamp  } = this.utils;
+        const { clamp } = this.utils;
         this.validator(danmu, {
             text: "string",
             mode: "?number",
@@ -382,7 +382,7 @@ class Danmuku {
     }
     // 动态配置
     config(option) {
-        const { clamp  } = this.utils;
+        const { clamp } = this.utils;
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
         this.option.speed = clamp(this.option.speed, 1, 10);
@@ -410,8 +410,8 @@ class Danmuku {
     }
     // 计算弹幕字体大小
     getFontSize(fontSize) {
-        const { clamp  } = this.utils;
-        const { clientHeight  } = this.$player;
+        const { clamp } = this.utils;
+        const { clientHeight } = this.$player;
         if (typeof fontSize === "number") return clamp(fontSize, 12, clientHeight);
         if (typeof fontSize === "string" && fontSize.endsWith("%")) {
             const ratio = parseFloat(fontSize) / 100;
@@ -425,7 +425,7 @@ class Danmuku {
             message.id = Date.now();
             this.worker.postMessage(message);
             this.worker.onmessage = (event)=>{
-                const { data  } = event;
+                const { data } = event;
                 if (data.id === message.id) resolve(data);
             };
         });
@@ -436,7 +436,7 @@ class Danmuku {
     }
     // 获取准备好发送的弹幕：有的是ready状态（如之前因为弹幕太多而暂停发送的弹幕），有的是wait状态
     getReady() {
-        const { currentTime  } = this.art;
+        const { currentTime } = this.art;
         return this.queue.filter((danmu)=>{
             return danmu.$state === "ready" || danmu.$state === "wait" && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1;
         });
@@ -444,7 +444,7 @@ class Danmuku {
     // 获取正在发送的弹幕，用于计算下一个弹幕的top值
     getEmits() {
         const result = [];
-        const { clientWidth  } = this.$player;
+        const { clientWidth } = this.$player;
         const clientLeft = this.getLeft(this.$player);
         this.filter("emit", (danmu)=>{
             const top = danmu.$ref.offsetTop;
@@ -479,7 +479,7 @@ class Danmuku {
     }
     // 实时更新弹幕
     update() {
-        const { setStyles  } = this.utils;
+        const { setStyles } = this.utils;
         this.timer = window.requestAnimationFrame(async ()=>{
             if (this.art.playing && !this.isHide) {
                 // 实时计算弹幕的剩余显示时间
@@ -497,7 +497,7 @@ class Danmuku {
                     // 弹幕发送前的过滤器
                     const state = await this.option.beforeVisible(danmu);
                     if (state) {
-                        const { clientWidth , clientHeight  } = this.$player;
+                        const { clientWidth, clientHeight } = this.$player;
                         danmu.$ref = this.getRef(); // 获取弹幕DOM节点
                         // 设置弹幕文本
                         if (danmu.escape) danmu.$ref.innerText = danmu.text;
@@ -519,7 +519,7 @@ class Danmuku {
                         // 计算弹幕剩余时间
                         danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
                         // 计算弹幕的top值
-                        const { top  } = await this.postMessage({
+                        const { top } = await this.postMessage({
                             target: {
                                 mode: danmu.mode,
                                 height: danmu.$ref.clientHeight,
@@ -548,9 +548,8 @@ class Danmuku {
                                             danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                             break;
                                         }
-                                    // 顶部的弹幕
                                     case 1:
-                                    // 底部的弹幕
+                                    // falls through
                                     case 2:
                                         danmu.$ref.style.left = "50%";
                                         danmu.$ref.style.top = `${top}px`;
@@ -576,7 +575,7 @@ class Danmuku {
     }
     // 继续弹幕
     continue() {
-        const { clientWidth  } = this.$player;
+        const { clientWidth } = this.$player;
         this.filter("stop", (danmu)=>{
             danmu.$state = "emit"; // 转换为emit状态
             danmu.$lastStartTime = Date.now();
@@ -597,7 +596,7 @@ class Danmuku {
     }
     // 暂停弹幕
     suspend() {
-        const { clientWidth  } = this.$player;
+        const { clientWidth } = this.$player;
         this.filter("emit", (danmu)=>{
             danmu.$state = "stop"; // 转换为stop状态
             switch(danmu.mode){
@@ -722,7 +721,7 @@ exports.defineInteropFlag = function(a) {
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -740,7 +739,7 @@ exports.export = function(dest, destName, get) {
 };
 
 },{}],"el0Wt":[function(require,module,exports) {
-module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (modules, entry, mainEntry, parcelRequireName, globalName) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        this\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n\n      // <script>\n    } else if (globalName) {\n      this[globalName] = mainExports;\n    }\n  }\n})({\"fHwfs\":[function(require,module,exports) {\nfunction getDanmuTop({ target , emits , clientWidth , clientHeight , marginBottom , marginTop , antiOverlap  }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = emits.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: \"top\",\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: \"bottom\",\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data  } = event;\n    if (!data.id) return;\n    const top = getDanmuTop(data);\n    self.postMessage({\n        top,\n        id: data.id\n    });\n};\n\n},{}]},[\"fHwfs\"], \"fHwfs\", \"parcelRequire4dc0\")\n\n";
+module.exports = "// modules are defined as an array\n// [ module function, map of requires ]\n//\n// map of requires is short require name -> numeric require\n//\n// anything defined in a previous bundle is accessed via the\n// orig method which is the require for previous bundles\n\n(function (modules, entry, mainEntry, parcelRequireName, globalName) {\n  /* eslint-disable no-undef */\n  var globalObject =\n    typeof globalThis !== 'undefined'\n      ? globalThis\n      : typeof self !== 'undefined'\n      ? self\n      : typeof window !== 'undefined'\n      ? window\n      : typeof global !== 'undefined'\n      ? global\n      : {};\n  /* eslint-enable no-undef */\n\n  // Save the require from previous bundle to this closure if any\n  var previousRequire =\n    typeof globalObject[parcelRequireName] === 'function' &&\n    globalObject[parcelRequireName];\n\n  var cache = previousRequire.cache || {};\n  // Do not use `require` to prevent Webpack from trying to bundle this call\n  var nodeRequire =\n    typeof module !== 'undefined' &&\n    typeof module.require === 'function' &&\n    module.require.bind(module);\n\n  function newRequire(name, jumped) {\n    if (!cache[name]) {\n      if (!modules[name]) {\n        // if we cannot find the module within our internal map or\n        // cache jump to the current global require ie. the last bundle\n        // that was added to the page.\n        var currentRequire =\n          typeof globalObject[parcelRequireName] === 'function' &&\n          globalObject[parcelRequireName];\n        if (!jumped && currentRequire) {\n          return currentRequire(name, true);\n        }\n\n        // If there are other bundles on this page the require from the\n        // previous one is saved to 'previousRequire'. Repeat this as\n        // many times as there are bundles until the module is found or\n        // we exhaust the require chain.\n        if (previousRequire) {\n          return previousRequire(name, true);\n        }\n\n        // Try the node require function if it exists.\n        if (nodeRequire && typeof name === 'string') {\n          return nodeRequire(name);\n        }\n\n        var err = new Error(\"Cannot find module '\" + name + \"'\");\n        err.code = 'MODULE_NOT_FOUND';\n        throw err;\n      }\n\n      localRequire.resolve = resolve;\n      localRequire.cache = {};\n\n      var module = (cache[name] = new newRequire.Module(name));\n\n      modules[name][0].call(\n        module.exports,\n        localRequire,\n        module,\n        module.exports,\n        this\n      );\n    }\n\n    return cache[name].exports;\n\n    function localRequire(x) {\n      var res = localRequire.resolve(x);\n      return res === false ? {} : newRequire(res);\n    }\n\n    function resolve(x) {\n      var id = modules[name][1][x];\n      return id != null ? id : x;\n    }\n  }\n\n  function Module(moduleName) {\n    this.id = moduleName;\n    this.bundle = newRequire;\n    this.exports = {};\n  }\n\n  newRequire.isParcelRequire = true;\n  newRequire.Module = Module;\n  newRequire.modules = modules;\n  newRequire.cache = cache;\n  newRequire.parent = previousRequire;\n  newRequire.register = function (id, exports) {\n    modules[id] = [\n      function (require, module) {\n        module.exports = exports;\n      },\n      {},\n    ];\n  };\n\n  Object.defineProperty(newRequire, 'root', {\n    get: function () {\n      return globalObject[parcelRequireName];\n    },\n  });\n\n  globalObject[parcelRequireName] = newRequire;\n\n  for (var i = 0; i < entry.length; i++) {\n    newRequire(entry[i]);\n  }\n\n  if (mainEntry) {\n    // Expose entry point to Node, AMD or browser globals\n    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js\n    var mainExports = newRequire(mainEntry);\n\n    // CommonJS\n    if (typeof exports === 'object' && typeof module !== 'undefined') {\n      module.exports = mainExports;\n\n      // RequireJS\n    } else if (typeof define === 'function' && define.amd) {\n      define(function () {\n        return mainExports;\n      });\n\n      // <script>\n    } else if (globalName) {\n      this[globalName] = mainExports;\n    }\n  }\n})({\"fHwfs\":[function(require,module,exports) {\nfunction getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n    // 弹幕最大高度\n    const maxTop = clientHeight - marginBottom;\n    // 过滤同模式的弹幕，即每种模式各不影响\n    const danmus = emits.filter((item)=>item.mode === target.mode && item.top <= maxTop).sort((prev, next)=>prev.top - next.top);\n    // 如果没有同模式的弹幕，直接返回\n    if (danmus.length === 0) {\n        if (target.mode === 2) return maxTop - target.height;\n        else return marginTop;\n    }\n    // 上下各加一个虚拟弹幕，方便计算\n    danmus.unshift({\n        type: \"top\",\n        top: 0,\n        left: 0,\n        right: 0,\n        height: marginTop,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    danmus.push({\n        type: \"bottom\",\n        top: maxTop,\n        left: 0,\n        right: 0,\n        height: marginBottom,\n        width: clientWidth,\n        speed: 0,\n        distance: clientWidth\n    });\n    // 查找是否有多余的缝隙足以容纳当前弹幕\n    if (target.mode === 2) // 倒序查找\n    for(let index = danmus.length - 2; index >= 0; index -= 1){\n        const item = danmus[index];\n        const prev = danmus[index + 1];\n        const itemBottom = item.top + item.height;\n        const diff = prev.top - itemBottom;\n        if (diff >= target.height) return prev.top - target.height;\n    }\n    else // 顺序查找\n    for(let index = 1; index < danmus.length; index += 1){\n        const item = danmus[index];\n        const prev = danmus[index - 1];\n        const prevBottom = prev.top + prev.height;\n        const diff = item.top - prevBottom;\n        if (diff >= target.height) return prevBottom;\n    }\n    const topMap = [];\n    for(let index = 1; index < danmus.length - 1; index += 1){\n        const item = danmus[index];\n        if (topMap.length) {\n            const last = topMap[topMap.length - 1];\n            if (last[0].top === item.top) last.push(item);\n            else topMap.push([\n                item\n            ]);\n        } else topMap.push([\n            item\n        ]);\n    }\n    if (antiOverlap) switch(target.mode){\n        case 0:\n            {\n                const result = topMap.find((list)=>{\n                    return list.every((danmu)=>{\n                        if (clientWidth < danmu.distance) return false;\n                        if (target.speed < danmu.speed) return true;\n                        const overlapTime = danmu.right / (target.speed - danmu.speed);\n                        if (overlapTime > danmu.time) return true;\n                        return false;\n                    });\n                });\n                return result && result[0] ? result[0].top : undefined;\n            }\n        // 静止弹幕没有重叠问题\n        case 1:\n        case 2:\n            return undefined;\n        default:\n            break;\n    }\n    else {\n        switch(target.mode){\n            case 0:\n                topMap.sort((prev, next)=>{\n                    const nextMinRight = Math.min(...next.map((item)=>item.right));\n                    const prevMinRight = Math.min(...prev.map((item)=>item.right));\n                    return nextMinRight * next.length - prevMinRight * prev.length;\n                });\n                break;\n            case 1:\n            case 2:\n                topMap.sort((prev, next)=>{\n                    const nextMaxWidth = Math.max(...next.map((item)=>item.width));\n                    const prevMaxWidth = Math.max(...prev.map((item)=>item.width));\n                    return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n                });\n                break;\n            default:\n                break;\n        }\n        return topMap[0][0].top;\n    }\n}\nonmessage = (event)=>{\n    const { data } = event;\n    if (!data.id) return;\n    const top = getDanmuTop(data);\n    self.postMessage({\n        top,\n        id: data.id\n    });\n};\n\n},{}]},[\"fHwfs\"], \"fHwfs\", \"parcelRequire4dc0\")\n\n";
 
 },{}],"cI0ih":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -784,7 +783,7 @@ class Setting {
         };
     }
     get TEMPLATE() {
-        const { config  } = this;
+        const { config } = this;
         return `
             <div class="apd-toggle">
                 <div class="apd-icon apd-toggle-on">${0, _onSvgDefault.default}</div>
@@ -794,7 +793,7 @@ class Setting {
                 <div class="apd-config-icon">${0, _configSvgDefault.default}</div>
                 <div class="apd-config-panel">
                     <div class="apd-config-panel-inner">
-                        <div>按类型屏蔽</div>
+                        <div>\u{6309}\u{7C7B}\u{578B}\u{5C4F}\u{853D}</div>
                     </div>
                 </div>
             </div>
@@ -805,15 +804,14 @@ class Setting {
                         <div class="apd-style-panel-inner">1234</div>
                     </div>
                 </div>
-                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${config.maxLength}" />
-                <div class="apd-send">发送</div>
+                <input class="apd-input" placeholder="\u{53D1}\u{4E2A}\u{53CB}\u{5584}\u{7684}\u{5F39}\u{5E55}\u{89C1}\u{8BC1}\u{5F53}\u{4E0B}" autocomplete="off" maxLength="${config.maxLength}" />
+                <div class="apd-send">\u{53D1}\u{9001}</div>
             </div>
         `;
     }
     initTemplate() {
-        const { setStyle , createElement , query , tooltip  } = this.utils;
-        const { $container  } = this.template;
-        const { config  } = this;
+        const { setStyle, createElement, query, tooltip } = this.utils;
+        const { $container } = this.template;
         const $danmuku = createElement("div");
         $danmuku.className = "artplayer-plugin-danmuku";
         $danmuku.innerHTML = this.TEMPLATE;
@@ -824,18 +822,18 @@ class Setting {
         this.template.$toggle = $toggle;
         this.template.$toggleOn = $toggleOn;
         this.template.$toggleOff = $toggleOff;
-        tooltip($toggleOn, "关闭弹幕");
-        tooltip($toggleOff, "开启弹幕");
+        tooltip($toggleOn, "\u5173\u95ED\u5F39\u5E55");
+        tooltip($toggleOff, "\u5F00\u542F\u5F39\u5E55");
         this.initToggle();
         const $input = query(".apd-input", $danmuku);
         this.template.$input = $input;
         const $send = query(".apd-send", $danmuku);
         this.template.$send = $send;
-        this.mount($container);
         setStyle($container, "display", "flex");
+        this.mount();
     }
     initEvents() {
-        const { config  } = this;
+        const { config } = this;
         this.art.proxy(this.template.$toggle, "click", ()=>{
             config.show = !config.show;
             this.initToggle();
@@ -843,17 +841,17 @@ class Setting {
         });
     }
     initState() {
-        const { config  } = this;
+        const { config } = this;
         this.danmuku[config.show ? "show" : "hide"]();
     }
     initToggle() {
-        const { config  } = this;
-        const { setStyle  } = this.utils;
-        const { $toggleOn , $toggleOff  } = this.template;
+        const { config } = this;
+        const { setStyle } = this.utils;
+        const { $toggleOn, $toggleOff } = this.template;
         setStyle(config.show ? $toggleOff : $toggleOn, "display", "none");
         setStyle(config.show ? $toggleOn : $toggleOff, "display", "flex");
     }
-    mount(target) {
+    mount(target = this.template.$container) {
         target.appendChild(this.template.$danmuku);
     }
 }
@@ -871,7 +869,7 @@ if (typeof document !== "undefined") {
 }
 
 },{"bundle-text:./style.less":"uaCsY","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV","bundle-text:./img/style.svg":"1Aemm","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"uaCsY":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-danmuku {\n  height: 100%;\n  align-items: center;\n  gap: 5px;\n  padding: 8px 0;\n  font-size: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle, .artplayer-plugin-danmuku .apd-config, .artplayer-plugin-danmuku .apd-style {\n  opacity: .6;\n  height: 100%;\n  aspect-ratio: 1;\n  justify-content: center;\n  align-items: center;\n  transition: all .2s;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle svg, .artplayer-plugin-danmuku .apd-config svg, .artplayer-plugin-danmuku .apd-style svg {\n  width: 80%;\n  height: 80%;\n}\n\n.artplayer-plugin-danmuku .apd-toggle:hover, .artplayer-plugin-danmuku .apd-config:hover, .artplayer-plugin-danmuku .apd-style:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-toggle-on, .artplayer-plugin-danmuku .apd-toggle-off, .artplayer-plugin-danmuku .apd-config-icon, .artplayer-plugin-danmuku .apd-style-icon {\n  cursor: pointer;\n  width: 100%;\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  width: 100%;\n  background-color: #000c;\n  border-radius: 3px;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  height: 100%;\n  background-color: #fff3;\n  border-radius: 5px;\n  align-items: center;\n  margin-left: 6px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  width: 100%;\n  background-color: #000c;\n  border-radius: 3px;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  height: 100%;\n  width: 170px;\n  color: #fff;\n  min-width: none;\n  background-color: #0000;\n  border: none;\n  outline: none;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  height: 100%;\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  padding: 0 12px;\n  display: flex;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  padding: 12px 0;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-input, .art-fullscreen-web .artplayer-plugin-danmuku .apd-input {\n  width: 360px;\n}\n\n";
+module.exports = ".artplayer-plugin-danmuku {\n  align-items: center;\n  gap: 5px;\n  height: 100%;\n  padding: 8px 0;\n  font-size: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle, .artplayer-plugin-danmuku .apd-config, .artplayer-plugin-danmuku .apd-style {\n  opacity: .6;\n  aspect-ratio: 1;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  transition: all .2s;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-toggle svg, .artplayer-plugin-danmuku .apd-config svg, .artplayer-plugin-danmuku .apd-style svg {\n  width: 80%;\n  height: 80%;\n}\n\n.artplayer-plugin-danmuku .apd-toggle:hover, .artplayer-plugin-danmuku .apd-config:hover, .artplayer-plugin-danmuku .apd-style:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-toggle-on, .artplayer-plugin-danmuku .apd-toggle-off, .artplayer-plugin-danmuku .apd-config-icon, .artplayer-plugin-danmuku .apd-style-icon {\n  cursor: pointer;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000c;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #fff3;\n  border-radius: 5px;\n  align-items: center;\n  height: 100%;\n  margin-left: 6px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000c;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  min-width: none;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  width: 170px;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  padding: 0 12px;\n  display: flex;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  padding: 12px 0;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-input, .art-fullscreen-web .artplayer-plugin-danmuku .apd-input {\n  width: 360px;\n}\n";
 
 },{}],"a9r0e":[function(require,module,exports) {
 module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z\" clip-rule=\"evenodd\" fill=\"#fff\"></path><path fill=\"#00AEEC\" fill-rule=\"evenodd\" d=\"M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z\" clip-rule=\"evenodd\"></path></svg>";
@@ -888,6 +886,7 @@ module.exports = "<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http
 },{}],"bZziT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>heatmap);
 const lib = {
     map (value, inMin, inMax, outMin, outMax) {
         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
@@ -910,7 +909,7 @@ const line = (pointA, pointB)=>{
     };
 };
 function heatmap(art, danmuku, option) {
-    const { query  } = art.constructor.utils;
+    const { query } = art.constructor.utils;
     art.controls.add({
         name: "heatmap",
         position: "top",
@@ -956,7 +955,7 @@ function heatmap(art, danmuku, option) {
                 else {
                     const gap = art.duration / svg.w;
                     for(let x = 0; x <= svg.w; x += options.sampling){
-                        const y = danmuku.danmus.filter(({ time  })=>time > x * gap && time <= (x + options.sampling) * gap).length;
+                        const y = danmuku.danmus.filter(({ time })=>time > x * gap && time <= (x + options.sampling) * gap).length;
                         points.push([
                             x,
                             y
@@ -1046,7 +1045,6 @@ function heatmap(art, danmuku, option) {
         }
     });
 }
-exports.default = heatmap;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}]},["lIf7X"], "lIf7X", "parcelRequire4dc0")
 
