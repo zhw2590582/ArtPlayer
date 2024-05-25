@@ -30,9 +30,9 @@ export default class Setting {
             $opacity: null,
             $opacitySlider: null,
             $opacityValue: null,
-            $area: null,
-            $areaSlider: null,
-            $areaValue: null,
+            $margin: null,
+            $marginSlider: null,
+            $marginValue: null,
             $fontSize: null,
             $fontSizeSlider: null,
             $fontSizeValue: null,
@@ -41,6 +41,13 @@ export default class Setting {
             $speedValue: null,
             $input: null,
             $send: null,
+        };
+
+        this.slider = {
+            opacity: null,
+            margin: null,
+            fontSize: null,
+            speed: null,
         };
 
         this.initTemplate();
@@ -55,7 +62,6 @@ export default class Setting {
 
     get TEMPLATE() {
         const { option } = this;
-
         return `
             <div class="apd-toggle">
                 ${$on}${$off}
@@ -86,7 +92,7 @@ export default class Setting {
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-slider apd-config-area">
+                        <div class="apd-config-slider apd-config-margin">
                             <div class="apd-title">显示区域</div>
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
@@ -115,6 +121,52 @@ export default class Setting {
                 <div class="apd-send">发送</div>
             </div>
         `;
+    }
+
+    get MARGIN() {
+        return [
+            {
+                name: '1/4',
+                value: [10, '75%'],
+            },
+            {
+                name: '半屏',
+                value: [10, '50%'],
+            },
+            {
+                name: '3/4',
+                value: [10, '25%'],
+            },
+            {
+                name: '满屏',
+                value: [10, 10],
+            },
+        ];
+    }
+
+    get SPEED() {
+        return [
+            {
+                name: '极慢',
+                value: 10,
+            },
+            {
+                name: '较慢',
+                value: 7.5,
+            },
+            {
+                name: '适中',
+                value: 5,
+            },
+            {
+                name: '较快',
+                value: 2.5,
+            },
+            {
+                name: '极快',
+                value: 1,
+            },
+        ];
     }
 
     query(selector) {
@@ -152,9 +204,9 @@ export default class Setting {
         this.template.$opacitySlider = this.query('.apd-config-opacity .apd-slider');
         this.template.$opacityValue = this.query('.apd-config-opacity .apd-value');
 
-        this.template.$area = this.query('.apd-config-area');
-        this.template.$areaSlider = this.query('.apd-config-area .apd-slider');
-        this.template.$areaValue = this.query('.apd-config-area .apd-value');
+        this.template.$margin = this.query('.apd-config-margin');
+        this.template.$marginSlider = this.query('.apd-config-margin .apd-slider');
+        this.template.$marginValue = this.query('.apd-config-margin .apd-value');
 
         this.template.$fontSize = this.query('.apd-config-fontSize');
         this.template.$fontSizeSlider = this.query('.apd-config-fontSize .apd-slider');
@@ -200,86 +252,66 @@ export default class Setting {
     }
 
     initSliders() {
-        this.createSlider({
+        this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,
-            type: 'opacity',
-            defaultValue: this.option.opacity * 100,
+            steps: [],
             container: this.template.$opacitySlider,
-            onChange: (value) => this.onOpacityChange(value),
+            onChange: (index) => {
+                const { $opacityValue } = this.template;
+                $opacityValue.textContent = `${index}%`;
+                this.danmuku.config({
+                    opacity: index / 100,
+                });
+            },
         });
 
-        this.createSlider({
+        this.slider.margin = this.createSlider({
             min: 0,
             max: 3,
-            type: 'area',
-            defaultValue: this.option.margin,
-            container: this.template.$areaSlider,
-            onChange: (value) => this.onAreaChange(value),
-            steps: [
-                {
-                    name: '1/4',
-                    value: [10, '75%'],
-                },
-                {
-                    name: '半屏',
-                    value: [10, '50%'],
-                },
-                {
-                    name: '3/4',
-                    value: [10, '25%'],
-                },
-                {
-                    name: '满屏',
-                    value: [10, 10],
-                },
-            ],
+            steps: this.MARGIN,
+            container: this.template.$marginSlider,
+            onChange: (index) => {
+                const margin = this.MARGIN[index];
+                const { $marginValue } = this.template;
+                $marginValue.textContent = margin.name;
+                this.danmuku.config({
+                    margin: margin.value,
+                });
+            },
         });
 
-        this.createSlider({
-            min: 50,
-            max: 170,
-            type: 'fontSize',
-            defaultValue: this.option.fontSize,
+        this.slider.fontSize = this.createSlider({
+            min: 1,
+            max: 25,
+            steps: [],
             container: this.template.$fontSizeSlider,
-            onChange: (value) => this.onFontSizeChange(value),
+            onChange: (index) => {
+                const { $fontSizeValue } = this.template;
+                $fontSizeValue.textContent = `${index}%`;
+                this.danmuku.config({
+                    fontSize: `${index}%`,
+                });
+            },
         });
 
-        this.createSlider({
+        this.slider.speed = this.createSlider({
             min: 0,
             max: 4,
-            type: 'speed',
-            defaultValue: this.option.speed,
+            steps: this.SPEED,
             container: this.template.$speedSlider,
-            onChange: (value) => this.onSpeedChange(value),
-            steps: [
-                {
-                    name: '极慢',
-                    value: 10,
-                },
-                {
-                    name: '较慢',
-                    value: 7.5,
-                    hide: true,
-                },
-                {
-                    name: '适中',
-                    value: 5,
-                },
-                {
-                    name: '较快',
-                    value: 2.5,
-                    hide: true,
-                },
-                {
-                    name: '极快',
-                    value: 1,
-                },
-            ],
+            onChange: (index) => {
+                const speed = this.SPEED[index];
+                const { $speedValue } = this.template;
+                $speedValue.textContent = speed.name;
+                this.danmuku.config({
+                    speed: speed.value,
+                });
+            },
         });
     }
 
-    createSlider({ min, max, type, container, onChange, steps = [] }) {
+    createSlider({ min, max, container, onChange, steps = [] }) {
         const { query, clamp } = this.utils;
 
         container.innerHTML = `
@@ -300,16 +332,25 @@ export default class Setting {
 
         let isDroging = false;
 
-        function updateLeft(event) {
-            const { left, width } = container.getBoundingClientRect();
-            const value = clamp(event.clientX - left, 0, width);
-            $dot.style.left = `${(value / width) * 100}%`;
+        function init(index) {
+            const percentage = (index - min) / (max - min);
+            $dot.style.left = `${percentage * 100}%`;
             if (steps.length === 0) {
-                $progress.style.width = `${(value / width) * 100}%`;
+                $progress.style.width = $dot.style.left;
             }
         }
 
-        this.art.proxy(container, 'click', updateLeft);
+        function updateLeft(event) {
+            const { left, width } = container.getBoundingClientRect();
+            const value = clamp(event.clientX - left, 0, width);
+            const index = Math.round((value / width) * (max - min) + min);
+            init(index);
+            onChange(index);
+        }
+
+        this.art.proxy(container, 'click', (event) => {
+            updateLeft(event);
+        });
 
         this.art.proxy(container, 'mousedown', (event) => {
             isDroging = event.button === 0;
@@ -327,22 +368,15 @@ export default class Setting {
                 updateLeft(event);
             }
         });
-    }
 
-    onOpacityChange(opacity) {
-        //
-    }
-
-    onAreaChange(area) {
-        //
-    }
-
-    onFontSizeChange(font) {
-        //
-    }
-
-    onSpeedChange(speed) {
-        //
+        return {
+            min,
+            max,
+            init,
+            steps,
+            onChange,
+            container,
+        };
     }
 
     mount(target) {

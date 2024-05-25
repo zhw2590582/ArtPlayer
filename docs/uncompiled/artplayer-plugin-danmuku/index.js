@@ -796,9 +796,9 @@ class Setting {
             $opacity: null,
             $opacitySlider: null,
             $opacityValue: null,
-            $area: null,
-            $areaSlider: null,
-            $areaValue: null,
+            $margin: null,
+            $marginSlider: null,
+            $marginValue: null,
             $fontSize: null,
             $fontSizeSlider: null,
             $fontSizeValue: null,
@@ -807,6 +807,12 @@ class Setting {
             $speedValue: null,
             $input: null,
             $send: null
+        };
+        this.slider = {
+            opacity: null,
+            margin: null,
+            fontSize: null,
+            speed: null
         };
         this.initTemplate();
         this.initSliders();
@@ -848,7 +854,7 @@ class Setting {
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-slider apd-config-area">
+                        <div class="apd-config-slider apd-config-margin">
                             <div class="apd-title">\u{663E}\u{793A}\u{533A}\u{57DF}</div>
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
@@ -878,6 +884,62 @@ class Setting {
             </div>
         `;
     }
+    get MARGIN() {
+        return [
+            {
+                name: "1/4",
+                value: [
+                    10,
+                    "75%"
+                ]
+            },
+            {
+                name: "\u534A\u5C4F",
+                value: [
+                    10,
+                    "50%"
+                ]
+            },
+            {
+                name: "3/4",
+                value: [
+                    10,
+                    "25%"
+                ]
+            },
+            {
+                name: "\u6EE1\u5C4F",
+                value: [
+                    10,
+                    10
+                ]
+            }
+        ];
+    }
+    get SPEED() {
+        return [
+            {
+                name: "\u6781\u6162",
+                value: 10
+            },
+            {
+                name: "\u8F83\u6162",
+                value: 7.5
+            },
+            {
+                name: "\u9002\u4E2D",
+                value: 5
+            },
+            {
+                name: "\u8F83\u5FEB",
+                value: 2.5
+            },
+            {
+                name: "\u6781\u5FEB",
+                value: 1
+            }
+        ];
+    }
     query(selector) {
         const { query } = this.utils;
         const { $danmuku } = this.template;
@@ -904,9 +966,9 @@ class Setting {
         this.template.$opacity = this.query(".apd-config-opacity");
         this.template.$opacitySlider = this.query(".apd-config-opacity .apd-slider");
         this.template.$opacityValue = this.query(".apd-config-opacity .apd-value");
-        this.template.$area = this.query(".apd-config-area");
-        this.template.$areaSlider = this.query(".apd-config-area .apd-slider");
-        this.template.$areaValue = this.query(".apd-config-area .apd-value");
+        this.template.$margin = this.query(".apd-config-margin");
+        this.template.$marginSlider = this.query(".apd-config-margin .apd-slider");
+        this.template.$marginValue = this.query(".apd-config-margin .apd-value");
         this.template.$fontSize = this.query(".apd-config-fontSize");
         this.template.$fontSizeSlider = this.query(".apd-config-fontSize .apd-slider");
         this.template.$fontSizeValue = this.query(".apd-config-fontSize .apd-value");
@@ -941,94 +1003,62 @@ class Setting {
         this.setData("danmukuMode2", option.modes.includes(2));
     }
     initSliders() {
-        this.createSlider({
+        this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,
-            type: "opacity",
-            defaultValue: this.option.opacity * 100,
+            steps: [],
             container: this.template.$opacitySlider,
-            onChange: (value)=>this.onOpacityChange(value)
+            onChange: (index)=>{
+                const { $opacityValue } = this.template;
+                $opacityValue.textContent = `${index}%`;
+                this.danmuku.config({
+                    opacity: index / 100
+                });
+            }
         });
-        this.createSlider({
+        this.slider.margin = this.createSlider({
             min: 0,
             max: 3,
-            type: "area",
-            defaultValue: this.option.margin,
-            container: this.template.$areaSlider,
-            onChange: (value)=>this.onAreaChange(value),
-            steps: [
-                {
-                    name: "1/4",
-                    value: [
-                        10,
-                        "75%"
-                    ]
-                },
-                {
-                    name: "\u534A\u5C4F",
-                    value: [
-                        10,
-                        "50%"
-                    ]
-                },
-                {
-                    name: "3/4",
-                    value: [
-                        10,
-                        "25%"
-                    ]
-                },
-                {
-                    name: "\u6EE1\u5C4F",
-                    value: [
-                        10,
-                        10
-                    ]
-                }
-            ]
+            steps: this.MARGIN,
+            container: this.template.$marginSlider,
+            onChange: (index)=>{
+                const margin = this.MARGIN[index];
+                const { $marginValue } = this.template;
+                $marginValue.textContent = margin.name;
+                this.danmuku.config({
+                    margin: margin.value
+                });
+            }
         });
-        this.createSlider({
-            min: 50,
-            max: 170,
-            type: "fontSize",
-            defaultValue: this.option.fontSize,
+        this.slider.fontSize = this.createSlider({
+            min: 1,
+            max: 25,
+            steps: [],
             container: this.template.$fontSizeSlider,
-            onChange: (value)=>this.onFontSizeChange(value)
+            onChange: (index)=>{
+                const { $fontSizeValue } = this.template;
+                $fontSizeValue.textContent = `${index}%`;
+                this.danmuku.config({
+                    fontSize: `${index}%`
+                });
+            }
         });
-        this.createSlider({
+        this.slider.speed = this.createSlider({
             min: 0,
             max: 4,
-            type: "speed",
-            defaultValue: this.option.speed,
+            steps: this.SPEED,
             container: this.template.$speedSlider,
-            onChange: (value)=>this.onSpeedChange(value),
-            steps: [
-                {
-                    name: "\u6781\u6162",
-                    value: 10
-                },
-                {
-                    name: "\u8F83\u6162",
-                    value: 7.5,
-                    hide: true
-                },
-                {
-                    name: "\u9002\u4E2D",
-                    value: 5
-                },
-                {
-                    name: "\u8F83\u5FEB",
-                    value: 2.5,
-                    hide: true
-                },
-                {
-                    name: "\u6781\u5FEB",
-                    value: 1
-                }
-            ]
+            onChange: (index)=>{
+                const speed = this.SPEED[index];
+                const { $speedValue } = this.template;
+                $speedValue.textContent = speed.name;
+                this.danmuku.config({
+                    speed: speed.value
+                });
+            }
         });
     }
-    createSlider({ min, max, type, container, onChange, steps = [] }) {
+    createSlider({ min, max, container, onChange, steps = [] }) {
         const { query, clamp } = this.utils;
         container.innerHTML = `
             <div class="apd-slider-line">
@@ -1045,13 +1075,21 @@ class Setting {
         const $dot = query(".apd-slider-dot", container);
         const $progress = query(".apd-slider-progress", container);
         let isDroging = false;
+        function init(index) {
+            const percentage = (index - min) / (max - min);
+            $dot.style.left = `${percentage * 100}%`;
+            if (steps.length === 0) $progress.style.width = $dot.style.left;
+        }
         function updateLeft(event) {
             const { left, width } = container.getBoundingClientRect();
             const value = clamp(event.clientX - left, 0, width);
-            $dot.style.left = `${value / width * 100}%`;
-            if (steps.length === 0) $progress.style.width = `${value / width * 100}%`;
+            const index = Math.round(value / width * (max - min) + min);
+            init(index);
+            onChange(index);
         }
-        this.art.proxy(container, "click", updateLeft);
+        this.art.proxy(container, "click", (event)=>{
+            updateLeft(event);
+        });
         this.art.proxy(container, "mousedown", (event)=>{
             isDroging = event.button === 0;
         });
@@ -1064,18 +1102,14 @@ class Setting {
                 updateLeft(event);
             }
         });
-    }
-    onOpacityChange(opacity) {
-    //
-    }
-    onAreaChange(area) {
-    //
-    }
-    onFontSizeChange(font) {
-    //
-    }
-    onSpeedChange(speed) {
-    //
+        return {
+            min,
+            max,
+            init,
+            steps,
+            onChange,
+            container
+        };
     }
     mount(target) {
         this.template.$mount = target;
@@ -1098,7 +1132,7 @@ if (typeof document !== "undefined") {
 }
 
 },{"bundle-text:./style.less":"uaCsY","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV","bundle-text:./img/style.svg":"1Aemm","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./img/mode_0_off.svg":"jKvDJ","bundle-text:./img/mode_0_on.svg":"7eesQ","bundle-text:./img/mode_1_off.svg":"DalV6","bundle-text:./img/mode_1_on.svg":"i0F2W","bundle-text:./img/mode_2_off.svg":"1phDW","bundle-text:./img/mode_2_on.svg":"iHUBM"}],"uaCsY":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-danmuku {\n  align-items: center;\n  gap: 5px;\n  height: 100%;\n  padding: 8px 0;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  width: 24px;\n  height: 24px;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  width: 320px;\n  padding: 10px;\n  display: flex;\n  position: absolute;\n  bottom: 24px;\n  left: -148px;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-slider {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  color: #ffffff80;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 50%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #fff3;\n  border-radius: 5px;\n  align-items: center;\n  height: 100%;\n  margin-left: 6px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000c;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  min-width: none;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  width: 170px;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  padding: 0 12px;\n  display: flex;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  padding: 12px 0;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-input, .art-fullscreen-web .artplayer-plugin-danmuku .apd-input {\n  width: 360px;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on, [data-danmuku-mode0=\"false\"] .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-on, [data-danmuku-mode1=\"false\"] .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-on, [data-danmuku-mode2=\"false\"] .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-on {\n  display: block;\n}\n";
+module.exports = ".artplayer-plugin-danmuku {\n  align-items: center;\n  gap: 5px;\n  height: 100%;\n  padding: 8px 0;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  width: 24px;\n  height: 24px;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  width: 320px;\n  padding: 10px;\n  display: flex;\n  position: absolute;\n  bottom: 24px;\n  left: -148px;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-slider {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  color: #ffffff80;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 0%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #fff3;\n  border-radius: 5px;\n  align-items: center;\n  height: 100%;\n  margin-left: 6px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000c;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  min-width: none;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  width: 170px;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  padding: 0 12px;\n  display: flex;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  padding: 12px 0;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-input, .art-fullscreen-web .artplayer-plugin-danmuku .apd-input {\n  width: 360px;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on, [data-danmuku-mode0=\"false\"] .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-on, [data-danmuku-mode1=\"false\"] .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-on, [data-danmuku-mode2=\"false\"] .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-on {\n  display: block;\n}\n";
 
 },{}],"a9r0e":[function(require,module,exports) {
 module.exports = "<svg class=\"apd-icon apd-toggle-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z\" clip-rule=\"evenodd\" fill=\"#fff\"></path><path fill=\"#00AEEC\" fill-rule=\"evenodd\" d=\"M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z\" clip-rule=\"evenodd\"></path></svg>";
