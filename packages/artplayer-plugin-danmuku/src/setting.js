@@ -49,6 +49,10 @@ export default class Setting {
             speed: null,
         };
 
+        this.emitting = false;
+        this.isLock = false;
+        this.timer = null;
+
         this.createTemplate();
         this.createSliders();
         this.createEvents();
@@ -161,70 +165,76 @@ export default class Setting {
     }
 
     get MARGIN() {
-        return [
-            {
-                name: '1/4',
-                value: [10, '75%'],
-            },
-            {
-                name: '半屏',
-                value: [10, '50%'],
-            },
-            {
-                name: '3/4',
-                value: [10, '25%'],
-            },
-            {
-                name: '满屏',
-                value: [10, 10],
-            },
-        ];
+        return (
+            this.option.MARGIN || [
+                {
+                    name: '1/4',
+                    value: [10, '75%'],
+                },
+                {
+                    name: '半屏',
+                    value: [10, '50%'],
+                },
+                {
+                    name: '3/4',
+                    value: [10, '25%'],
+                },
+                {
+                    name: '满屏',
+                    value: [10, 10],
+                },
+            ]
+        );
     }
 
     get SPEED() {
-        return [
-            {
-                name: '极慢',
-                value: 10,
-            },
-            {
-                name: '较慢',
-                value: 7.5,
-                hide: true,
-            },
-            {
-                name: '适中',
-                value: 5,
-            },
-            {
-                name: '较快',
-                value: 2.5,
-                hide: true,
-            },
-            {
-                name: '极快',
-                value: 1,
-            },
-        ];
+        return (
+            this.option.SPEED || [
+                {
+                    name: '极慢',
+                    value: 10,
+                },
+                {
+                    name: '较慢',
+                    value: 7.5,
+                    hide: true,
+                },
+                {
+                    name: '适中',
+                    value: 5,
+                },
+                {
+                    name: '较快',
+                    value: 2.5,
+                    hide: true,
+                },
+                {
+                    name: '极快',
+                    value: 1,
+                },
+            ]
+        );
     }
 
     get COLOR() {
-        return [
-            '#FE0302',
-            '#FF7204',
-            '#FFAA02',
-            '#FFD302',
-            '#FFFF00',
-            '#A0EE00',
-            '#00CD00',
-            '#019899',
-            '#4266BE',
-            '#89D5FF',
-            '#CC0273',
-            '#222222',
-            '#9B9B9B',
-            '#FFFFFF',
-        ];
+        return (
+            this.option.COLOR || [
+                '#FE0302',
+                '#FF7204',
+                '#FFAA02',
+                '#FFD302',
+                '#FFFF00',
+                '#A0EE00',
+                '#00CD00',
+                '#019899',
+                '#4266BE',
+                '#89D5FF',
+                '#CC0273',
+                '#222222',
+                '#9B9B9B',
+                '#FFFFFF',
+            ]
+        );
     }
 
     query(selector) {
@@ -259,10 +269,8 @@ export default class Setting {
         this.template.$configModes = this.query('.apd-config-mode .apd-modes');
         this.template.$styleModes = this.query('.apd-style-mode .apd-modes');
         this.template.$colors = this.query('.apd-colors');
-
         this.template.$antiOverlap = this.query('.apd-anti-overlap');
         this.template.$syncVideo = this.query('.apd-sync-video');
-
         this.template.$opacitySlider = this.query('.apd-config-opacity .apd-slider');
         this.template.$opacityValue = this.query('.apd-config-opacity .apd-value');
         this.template.$marginSlider = this.query('.apd-config-margin .apd-slider');
@@ -271,13 +279,12 @@ export default class Setting {
         this.template.$fontSizeValue = this.query('.apd-config-fontSize .apd-value');
         this.template.$speedSlider = this.query('.apd-config-speed .apd-slider');
         this.template.$speedValue = this.query('.apd-config-speed .apd-value');
-
         this.template.$input = this.query('.apd-input');
         this.template.$send = this.query('.apd-send');
     }
 
     createEvents() {
-        const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo } = this.template;
+        const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo, $send, $input } = this.template;
 
         this.art.proxy($toggle, 'click', () => {
             this.danmuku.config({
@@ -333,6 +340,15 @@ export default class Setting {
                 color: $color.dataset.color,
             });
             this.reset();
+        });
+
+        this.art.proxy($send, 'click', () => this.send());
+
+        this.art.proxy($input, 'keypress', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                this.send();
+            }
         });
     }
 
@@ -477,6 +493,72 @@ export default class Setting {
         });
 
         return { reset };
+    }
+
+    async send() {
+        const { $input } = this.template;
+
+        const text = $input.value.trim();
+        if (!text.length) return;
+        if (this.isLock) return;
+        if (this.emitting) return;
+
+        const danmu = {
+            text: text,
+            mode: this.option.mode,
+            color: this.option.color,
+            time: this.art.currentTime,
+        };
+
+        try {
+            this.emitting = true;
+            const state = await this.option.beforeEmit(danmu);
+            this.emitting = false;
+
+            if (state !== true) return;
+
+            danmu.border = true;
+            delete danmu.time;
+            this.danmuku.emit(danmu);
+            $input.value = '';
+
+            this.lock();
+        } catch (error) {
+            this.emitting = false;
+        }
+    }
+
+    lock() {
+        const { addClass } = this.utils;
+        const { $send } = this.template;
+
+        this.isLock = true;
+        let time = this.option.lockTime;
+        $send.innerText = time;
+        addClass($send, 'apd-lock');
+
+        const loop = () => {
+            this.timer = setTimeout(() => {
+                if (time === 0) {
+                    this.unlock();
+                } else {
+                    time -= 1;
+                    $send.innerText = time;
+                    loop();
+                }
+            }, 1000);
+        };
+
+        loop();
+    }
+
+    unlock() {
+        const { removeClass } = this.utils;
+        const { $send } = this.template;
+        clearTimeout(this.timer);
+        this.isLock = false;
+        $send.innerText = '发送';
+        removeClass($send, 'apd-lock');
     }
 
     reset() {

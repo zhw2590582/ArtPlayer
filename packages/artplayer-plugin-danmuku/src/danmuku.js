@@ -63,6 +63,7 @@ export default class Danmuku {
             modes: [0, 1, 2], // 弹幕模式
             visible: true, // 弹幕是否可见
             maxLength: 200, // 弹幕最大长度
+            lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
         };
     }
 
@@ -88,6 +89,7 @@ export default class Danmuku {
             modes: 'array',
             visible: 'boolean',
             maxLength: 'number',
+            lockTime: 'number',
         };
     }
 
@@ -260,6 +262,8 @@ export default class Danmuku {
 
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
+        this.option.lockTime = clamp(this.option.lockTime, 1, 60);
+        this.option.maxLength = clamp(this.option.maxLength, 1, 1000);
         this.option.style = Object.assign({}, Danmuku.option.style, this.option.style);
         this.option.mount = this.option.mount || $controlsCenter;
 

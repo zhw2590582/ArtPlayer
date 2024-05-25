@@ -230,7 +230,7 @@
         width: 170px;
         border: none;
         color: #fff;
-        min-width: none;
+        line-height: 1;
         background-color: transparent;
 
         &::placeholder {
@@ -243,12 +243,19 @@
         align-items: center;
         justify-content: center;
         height: 100%;
-        padding: 0 12px;
+        width: 60px;
         flex-shrink: 0;
         cursor: pointer;
+        text-shadow: none;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         background-color: @color;
+
+        &.apd-lock {
+            cursor: not-allowed;
+            color: #666;
+            background-color: #e7e7e7;
+        }
     }
 }
 
