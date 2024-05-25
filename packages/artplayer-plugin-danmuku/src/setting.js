@@ -21,8 +21,6 @@ export default class Setting {
             $container: art.template.$controlsCenter,
             $danmuku: null,
             $toggle: null,
-            $toggleOn: null,
-            $toggleOff: null,
             $input: null,
             $send: null,
         };
@@ -43,25 +41,43 @@ export default class Setting {
                 ${$config}
                 <div class="apd-config-panel">
                     <div class="apd-config-panel-inner">
-                        <div>按类型屏蔽</div>
-                        <div class="apd-modes">
-                            <div data-mode="0" class="apd-mode">
-                                ${$mode_0_off}
-                                ${$mode_0_on}
-                            </div>
-                            <div data-mode="1" class="apd-mode">
-                                ${$mode_1_off}
-                                ${$mode_1_on}
-                            </div>
-                            <div data-mode="2" class="apd-mode">
-                                ${$mode_2_off}
-                                ${$mode_2_on}
+                        <div class="apd-config-mode">
+                            <div class="apd-title">按类型屏蔽</div>
+                            <div class="apd-modes">
+                                <div data-mode="0" class="apd-mode">
+                                    ${$mode_0_off}${$mode_0_on}
+                                    <div>滚动</div>
+                                </div>
+                                <div data-mode="1" class="apd-mode">
+                                    ${$mode_1_off}${$mode_1_on}
+                                    <div>顶部</div>
+                                </div>
+                                <div data-mode="2" class="apd-mode">
+                                    ${$mode_2_off}${$mode_2_on}
+                                    <div>底部</div>
+                                </div>
                             </div>
                         </div>
-                        <div>不透明度</div>
-                        <div>显示区域</div>
-                        <div>弹幕字号</div>
-                        <div>弹幕速度</div>
+                        <div class="apd-config-slider apd-config-opacity">
+                            <div class="apd-title">不透明度</div>
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">100%</div>
+                        </div>
+                        <div class="apd-config-slider apd-config-area">
+                            <div class="apd-title">显示区域</div>
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">3/4</div>
+                        </div>
+                        <div class="apd-config-slider apd-config-font">
+                            <div class="apd-title">弹幕字号</div>
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">170%</div>
+                        </div>
+                        <div class="apd-config-slider apd-config-speed">
+                            <div class="apd-title">弹幕速度</div>
+                            <div class="apd-slider"></div>
+                            <div class="apd-value">极快</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,14 +111,11 @@ export default class Setting {
         $danmuku.innerHTML = this.TEMPLATE;
         this.template.$danmuku = $danmuku;
 
-        const $toggle = this.query('.apd-toggle');
         const $toggleOn = this.query('.apd-toggle-on');
         const $toggleOff = this.query('.apd-toggle-off');
-        this.template.$toggle = $toggle;
-        this.template.$toggleOn = $toggleOn;
-        this.template.$toggleOff = $toggleOff;
         tooltip($toggleOn, '关闭弹幕');
         tooltip($toggleOff, '开启弹幕');
+        this.template.$toggle = this.query('.apd-toggle');
         $player.dataset.danmukuVisible = option.visible;
 
         this.template.$modes = this.query('.apd-modes');
@@ -110,11 +123,13 @@ export default class Setting {
         $player.dataset.danmukuMode1 = option.modes.includes(1);
         $player.dataset.danmukuMode2 = option.modes.includes(2);
 
-        const $input = this.query('.apd-input');
-        this.template.$input = $input;
+        this.template.$opacity = this.query('.apd-config-opacity');
+        this.template.$area = this.query('.apd-config-area');
+        this.template.$font = this.query('.apd-config-font');
+        this.template.$speed = this.query('.apd-config-speed');
 
-        const $send = this.query('.apd-send');
-        this.template.$send = $send;
+        this.template.$input = this.query('.apd-input');
+        this.template.$send = this.query('.apd-send');
 
         setStyle($container, 'display', 'flex');
         this.mount();
