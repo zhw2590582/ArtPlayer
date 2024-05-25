@@ -1028,11 +1028,8 @@ class Setting {
         $danmuku.className = "artplayer-plugin-danmuku";
         $danmuku.innerHTML = this.TEMPLATE;
         this.template.$danmuku = $danmuku;
-        const $toggleOn = this.query(".apd-toggle-on");
-        const $toggleOff = this.query(".apd-toggle-off");
-        tooltip($toggleOn, "\u5173\u95ED\u5F39\u5E55");
-        tooltip($toggleOff, "\u5F00\u542F\u5F39\u5E55");
         this.template.$toggle = this.query(".apd-toggle");
+        tooltip(this.template.$toggle, "\u5F39\u5E55\u5F00\u5173");
         this.template.$configModes = this.query(".apd-config-mode .apd-modes");
         this.template.$styleModes = this.query(".apd-style-mode .apd-modes");
         this.template.$colors = this.query(".apd-colors");

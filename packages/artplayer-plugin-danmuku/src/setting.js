@@ -260,12 +260,9 @@ export default class Setting {
         $danmuku.innerHTML = this.TEMPLATE;
         this.template.$danmuku = $danmuku;
 
-        const $toggleOn = this.query('.apd-toggle-on');
-        const $toggleOff = this.query('.apd-toggle-off');
-        tooltip($toggleOn, '关闭弹幕');
-        tooltip($toggleOff, '开启弹幕');
-
         this.template.$toggle = this.query('.apd-toggle');
+        tooltip(this.template.$toggle, '弹幕开关');
+
         this.template.$configModes = this.query('.apd-config-mode .apd-modes');
         this.template.$styleModes = this.query('.apd-style-mode .apd-modes');
         this.template.$colors = this.query('.apd-colors');
