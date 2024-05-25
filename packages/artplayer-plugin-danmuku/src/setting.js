@@ -492,6 +492,11 @@ export default class Setting {
         this.setData('danmukuMode2', this.option.modes.includes(2));
         this.setData('danmukuAntiOverlap', this.option.antiOverlap);
         this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
+
+        const { inverseClass } = this.utils;
+        const colors = this.template.$colors.children;
+        const $color = Array.from(colors).find((item) => item.dataset.color === this.option.color.toUpperCase());
+        inverseClass($color, 'apd-active');
     }
 
     mount(target = this.template.$controlsCenter) {
