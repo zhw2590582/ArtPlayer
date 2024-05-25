@@ -20,8 +20,7 @@
     }
 
     .apd-config {
-        width: 24px;
-        height: 24px;
+        display: flex;
         position: relative;
 
         .apd-config-panel {
@@ -262,7 +261,16 @@
 .art-fullscreen,
 .art-fullscreen-web {
     .artplayer-plugin-danmuku {
+        gap: 10px;
         padding: 12px 0;
+
+        .apd-config-icon,
+        .apd-toggle-off,
+        .apd-toggle-on {
+            width: 28px;
+            height: 28px;
+        }
+
         .apd-input {
             width: 360px;
         }
