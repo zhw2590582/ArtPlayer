@@ -19,7 +19,8 @@ export default function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
-            mount: setting.mount, // 弹幕发射器挂载函数
+            mount: setting.mount.bind(setting),
+            reset: setting.reset.bind(setting),
             get option() {
                 return danmuku.option;
             },

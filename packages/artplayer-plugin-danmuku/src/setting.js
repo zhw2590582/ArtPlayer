@@ -426,10 +426,12 @@ export default class Setting {
         this.slider.speed.reset();
     }
 
-    mount(target) {
+    mount(target = this.template.$controlsCenter) {
         target.appendChild(this.template.$danmuku);
         this.template.$mount = target;
-        this.option.mount = target;
+        this.danmuku.config({
+            mount: target,
+        });
         this.reset();
     }
 }

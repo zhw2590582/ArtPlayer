@@ -165,7 +165,8 @@ function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
-            mount: setting.mount,
+            mount: setting.mount.bind(setting),
+            reset: setting.reset.bind(setting),
             get option () {
                 return danmuku.option;
             },
@@ -1160,10 +1161,12 @@ class Setting {
         this.slider.fontSize.reset();
         this.slider.speed.reset();
     }
-    mount(target) {
+    mount(target = this.template.$controlsCenter) {
         target.appendChild(this.template.$danmuku);
         this.template.$mount = target;
-        this.option.mount = target;
+        this.danmuku.config({
+            mount: target
+        });
         this.reset();
     }
 }
