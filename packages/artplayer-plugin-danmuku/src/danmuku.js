@@ -253,6 +253,7 @@ export default class Danmuku {
     // 动态配置
     config(option) {
         const { clamp } = this.utils;
+        const { $controlsCenter } = this.art.template;
 
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
@@ -260,6 +261,7 @@ export default class Danmuku {
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.style = Object.assign({}, Danmuku.option.style, this.option.style);
+        this.option.mount = this.option.mount || $controlsCenter;
 
         // 重新计算弹幕字体大小，需要重新渲染
         if (option.fontSize) {

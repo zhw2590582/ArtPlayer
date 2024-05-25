@@ -17,17 +17,30 @@ export default class Setting {
         this.utils = art.constructor.utils;
         this.option = danmuku.option;
 
+        const { setStyle } = this.utils;
+        const { $controlsCenter } = art.template;
+        setStyle($controlsCenter, 'display', 'flex');
+
         this.template = {
-            $container: art.template.$controlsCenter,
+            $controlsCenter,
+            $mount: $controlsCenter,
             $danmuku: null,
             $toggle: null,
+            $modes: null,
+            $opacity: null,
+            $area: null,
+            $font: null,
+            $speed: null,
             $input: null,
             $send: null,
         };
 
         this.initTemplate();
         this.initEvents();
-        this.initState();
+    }
+
+    get outside() {
+        return this.template.$mount !== this.template.$controlsCenter;
     }
 
     get TEMPLATE() {
@@ -100,11 +113,17 @@ export default class Setting {
         return query(selector, $danmuku);
     }
 
-    initTemplate() {
-        const { option } = this;
+    setData(key, value) {
         const { $player } = this.art.template;
-        const { $container } = this.template;
-        const { setStyle, createElement, tooltip } = this.utils;
+        const { $mount } = this.template;
+        $player.dataset[key] = value;
+        if (this.outside) {
+            $mount.dataset[key] = value;
+        }
+    }
+
+    initTemplate() {
+        const { createElement, tooltip } = this.utils;
 
         const $danmuku = createElement('div');
         $danmuku.className = 'artplayer-plugin-danmuku';
@@ -115,35 +134,27 @@ export default class Setting {
         const $toggleOff = this.query('.apd-toggle-off');
         tooltip($toggleOn, '关闭弹幕');
         tooltip($toggleOff, '开启弹幕');
+
         this.template.$toggle = this.query('.apd-toggle');
-        $player.dataset.danmukuVisible = option.visible;
-
         this.template.$modes = this.query('.apd-modes');
-        $player.dataset.danmukuMode0 = option.modes.includes(0);
-        $player.dataset.danmukuMode1 = option.modes.includes(1);
-        $player.dataset.danmukuMode2 = option.modes.includes(2);
-
         this.template.$opacity = this.query('.apd-config-opacity');
         this.template.$area = this.query('.apd-config-area');
         this.template.$font = this.query('.apd-config-font');
         this.template.$speed = this.query('.apd-config-speed');
-
         this.template.$input = this.query('.apd-input');
         this.template.$send = this.query('.apd-send');
 
-        setStyle($container, 'display', 'flex');
-        this.mount();
+        this.mount(this.option.mount);
     }
 
     initEvents() {
         const { option } = this;
-        const { $player } = this.art.template;
         const { $toggle, $modes } = this.template;
 
         this.art.proxy($toggle, 'click', () => {
             option.visible = !option.visible;
             this.danmuku[option.visible ? 'show' : 'hide']();
-            $player.dataset.danmukuVisible = option.visible;
+            this.initState();
         });
 
         this.art.proxy($modes, 'click', (event) => {
@@ -155,17 +166,22 @@ export default class Setting {
             } else {
                 option.modes.push(mode);
             }
-            $player.dataset[`danmukuMode${mode}`] = option.modes.includes(mode);
+            this.initState();
         });
     }
 
     initState() {
         const { option } = this;
-        this.danmuku[option.visible ? 'show' : 'hide']();
+        this.setData('danmukuVisible', option.visible);
+        this.setData('danmukuMode0', option.modes.includes(0));
+        this.setData('danmukuMode1', option.modes.includes(1));
+        this.setData('danmukuMode2', option.modes.includes(2));
     }
 
-    mount(target = this.template.$container) {
+    mount(target) {
+        this.template.$mount = target;
         target.appendChild(this.template.$danmuku);
+        this.initState();
     }
 }
 
