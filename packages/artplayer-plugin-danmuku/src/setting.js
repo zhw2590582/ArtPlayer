@@ -342,12 +342,12 @@ export default class Setting {
             this.reset();
         });
 
-        this.art.proxy($send, 'click', () => this.send());
+        this.art.proxy($send, 'click', () => this.emit());
 
         this.art.proxy($input, 'keypress', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
-                this.send();
+                this.emit();
             }
         });
     }
@@ -495,7 +495,7 @@ export default class Setting {
         return { reset };
     }
 
-    async send() {
+    async emit() {
         const { $input } = this.template;
 
         const text = $input.value.trim();

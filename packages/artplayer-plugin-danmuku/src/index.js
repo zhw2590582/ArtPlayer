@@ -21,6 +21,8 @@ export default function artplayerPluginDanmuku(option) {
             reset: danmuku.reset.bind(danmuku),
             mount: setting.mount.bind(setting),
             reset: setting.reset.bind(setting),
+            lock: setting.lock.bind(setting),
+            unlock: setting.unlock.bind(setting),
             get option() {
                 return danmuku.option;
             },

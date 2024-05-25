@@ -167,6 +167,8 @@ function artplayerPluginDanmuku(option) {
             reset: danmuku.reset.bind(danmuku),
             mount: setting.mount.bind(setting),
             reset: setting.reset.bind(setting),
+            lock: setting.lock.bind(setting),
+            unlock: setting.unlock.bind(setting),
             get option () {
                 return danmuku.option;
             },
@@ -1099,11 +1101,11 @@ class Setting {
             });
             this.reset();
         });
-        this.art.proxy($send, "click", ()=>this.send());
+        this.art.proxy($send, "click", ()=>this.emit());
         this.art.proxy($input, "keypress", (event)=>{
             if (event.key === "Enter") {
                 event.preventDefault();
-                this.send();
+                this.emit();
             }
         });
     }
@@ -1226,7 +1228,7 @@ class Setting {
             reset
         };
     }
-    async send() {
+    async emit() {
         const { $input } = this.template;
         const text = $input.value.trim();
         if (!text.length) return;
