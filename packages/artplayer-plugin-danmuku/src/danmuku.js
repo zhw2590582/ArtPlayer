@@ -269,6 +269,13 @@ export default class Danmuku {
             this.reset();
         }
 
+        // 通过配置项控制弹幕的显示和隐藏
+        if (this.option.visible) {
+            this.show();
+        } else {
+            this.hide();
+        }
+
         this.art.emit('artplayerPluginDanmuku:config', this.option);
 
         return this;
@@ -563,7 +570,6 @@ export default class Danmuku {
 
     show() {
         this.isHide = false;
-        this.option.visible = true;
         this.start();
         this.$danmuku.style.display = '';
         this.art.emit('artplayerPluginDanmuku:show');
@@ -572,7 +578,6 @@ export default class Danmuku {
 
     hide() {
         this.isHide = true;
-        this.option.visible = false;
         this.stop();
         this.queue.forEach((item) => this.makeWait(item));
         this.$danmuku.style.display = 'none';

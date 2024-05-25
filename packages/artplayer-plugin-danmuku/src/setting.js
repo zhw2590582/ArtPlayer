@@ -233,8 +233,10 @@ export default class Setting {
         const { $toggle, $modes, $antiOverlap, $syncVideo } = this.template;
 
         this.art.proxy($toggle, 'click', () => {
-            this.danmuku[this.option.visible ? 'hide' : 'show']();
-            this.initState();
+            this.danmuku.config({
+                visible: !this.option.visible,
+            });
+            this.reset();
         });
 
         this.art.proxy($modes, 'click', (event) => {
@@ -250,35 +252,22 @@ export default class Setting {
                     modes: [...this.option.modes, mode],
                 });
             }
-            this.initState();
+            this.reset();
         });
 
         this.art.proxy($antiOverlap, 'click', () => {
             this.danmuku.config({
                 antiOverlap: !this.option.antiOverlap,
             });
-            this.initState();
+            this.reset();
         });
 
         this.art.proxy($syncVideo, 'click', () => {
             this.danmuku.config({
                 synchronousPlayback: !this.option.synchronousPlayback,
             });
-            this.initState();
+            this.reset();
         });
-    }
-
-    initState() {
-        this.setData('danmukuVisible', this.option.visible);
-        this.setData('danmukuMode0', this.option.modes.includes(0));
-        this.setData('danmukuMode1', this.option.modes.includes(1));
-        this.setData('danmukuMode2', this.option.modes.includes(2));
-        this.setData('danmukuAntiOverlap', this.option.antiOverlap);
-        this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
-        this.slider.opacity.init();
-        this.slider.margin.init();
-        this.slider.fontSize.init();
-        this.slider.speed.init();
     }
 
     initSliders() {
@@ -383,7 +372,7 @@ export default class Setting {
 
         let isDroging = false;
 
-        function init(index = findIndex()) {
+        function reset(index = findIndex()) {
             const value = clamp(index, min, max);
             const percentage = (value - min) / (max - min);
             $dot.style.left = `${percentage * 100}%`;
@@ -397,7 +386,7 @@ export default class Setting {
             const { left, width } = container.getBoundingClientRect();
             const value = clamp(event.clientX - left, 0, width);
             const index = Math.round((value / width) * (max - min) + min);
-            init(index);
+            reset(index);
         }
 
         this.art.proxy(container, 'click', (event) => {
@@ -421,14 +410,27 @@ export default class Setting {
             }
         });
 
-        return { init };
+        return { reset };
+    }
+
+    reset() {
+        this.setData('danmukuVisible', this.option.visible);
+        this.setData('danmukuMode0', this.option.modes.includes(0));
+        this.setData('danmukuMode1', this.option.modes.includes(1));
+        this.setData('danmukuMode2', this.option.modes.includes(2));
+        this.setData('danmukuAntiOverlap', this.option.antiOverlap);
+        this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
+        this.slider.opacity.reset();
+        this.slider.margin.reset();
+        this.slider.fontSize.reset();
+        this.slider.speed.reset();
     }
 
     mount(target) {
+        target.appendChild(this.template.$danmuku);
         this.template.$mount = target;
         this.option.mount = target;
-        target.appendChild(this.template.$danmuku);
-        this.initState();
+        this.reset();
     }
 }
 
