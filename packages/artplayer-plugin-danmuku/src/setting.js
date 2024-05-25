@@ -47,9 +47,9 @@ export default class Setting {
             speed: null,
         };
 
-        this.initTemplate();
-        this.initSliders();
-        this.initEvents();
+        this.createTemplate();
+        this.createSliders();
+        this.createEvents();
         this.mount(this.option.mount);
     }
 
@@ -197,7 +197,7 @@ export default class Setting {
         }
     }
 
-    initTemplate() {
+    createTemplate() {
         const { createElement, tooltip } = this.utils;
 
         const $danmuku = createElement('div');
@@ -229,7 +229,7 @@ export default class Setting {
         this.template.$send = this.query('.apd-send');
     }
 
-    initEvents() {
+    createEvents() {
         const { $toggle, $modes, $antiOverlap, $syncVideo } = this.template;
 
         this.art.proxy($toggle, 'click', () => {
@@ -270,7 +270,7 @@ export default class Setting {
         });
     }
 
-    initSliders() {
+    createSliders() {
         this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,

@@ -817,9 +817,9 @@ class Setting {
             fontSize: null,
             speed: null
         };
-        this.initTemplate();
-        this.initSliders();
-        this.initEvents();
+        this.createTemplate();
+        this.createSliders();
+        this.createEvents();
         this.mount(this.option.mount);
     }
     get option() {
@@ -969,7 +969,7 @@ class Setting {
         $player.dataset[key] = value;
         if (this.outside) $mount.dataset[key] = value;
     }
-    initTemplate() {
+    createTemplate() {
         const { createElement, tooltip } = this.utils;
         const $danmuku = createElement("div");
         $danmuku.className = "artplayer-plugin-danmuku";
@@ -994,7 +994,7 @@ class Setting {
         this.template.$input = this.query(".apd-input");
         this.template.$send = this.query(".apd-send");
     }
-    initEvents() {
+    createEvents() {
         const { $toggle, $modes, $antiOverlap, $syncVideo } = this.template;
         this.art.proxy($toggle, "click", ()=>{
             this.danmuku.config({
@@ -1030,7 +1030,7 @@ class Setting {
             this.reset();
         });
     }
-    initSliders() {
+    createSliders() {
         this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,
