@@ -74,7 +74,7 @@ type Option = {
     mode?: Mode;
 
     /**
-     *  弹幕模式: 0: 滚动，1: 顶部，2: 底部
+     *  幕可见的模式
      */
     modes?: Mode[];
 
