@@ -260,12 +260,14 @@ export default class Setting {
                 },
                 {
                     name: '较慢',
+                    hide: true,
                 },
                 {
                     name: '适中',
                 },
                 {
                     name: '较快',
+                    hide: true,
                 },
                 {
                     name: '极快',
@@ -279,13 +281,20 @@ export default class Setting {
 
         container.innerHTML = `
             <div class="apd-slider-line">
+                <div class="apd-slider-points">
+                    ${steps.map(() => `<div class="apd-slider-point"></div>`).join('')}
+                </div>
                 <div class="apd-slider-progress"></div>
             </div>
             <div class="apd-slider-dot"></div>
+            <div class="apd-slider-steps">
+                ${steps.map((step) => (step.hide ? '' : `<div class="apd-slider-step">${step.name}</div>`)).join('')}
+            </div>
         `;
 
         const $progress = query('.apd-slider-progress', container);
         const $dot = query('.apd-slider-dot', container);
+        const $steps = query('.apd-slider-steps', container);
     }
 
     onOpacityChange(opacity) {

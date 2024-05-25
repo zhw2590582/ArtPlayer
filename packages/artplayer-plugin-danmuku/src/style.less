@@ -25,9 +25,9 @@
         .apd-config-panel {
             position: absolute;
             bottom: 24px;
-            left: -138px;
-            display: none;
-            width: 300px;
+            left: -148px;
+            display: flex;
+            width: 320px;
             padding: 10px;
 
             .apd-config-panel-inner {
@@ -47,18 +47,14 @@
 
     .apd-config-mode,
     .apd-config-slider {
-        margin-bottom: 10px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
+        margin-bottom: 15px;
     }
 
     .apd-modes {
         display: flex;
         align-items: center;
         margin-top: 5px;
-        gap: 16px;
+        gap: 20px;
 
         .apd-mode {
             cursor: pointer;
@@ -69,7 +65,7 @@
     .apd-config-slider {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 12px;
 
         .apd-value {
             width: 32px;
@@ -83,15 +79,32 @@
         display: flex;
         height: 20px;
         align-items: center;
-        padding: 0 5px;
+        justify-content: center;
         cursor: pointer;
+        color: rgba(255, 255, 255, 0.5);
 
         .apd-slider-line {
+            position: relative;
             height: 2px;
             width: 100%;
             overflow: hidden;
             border-radius: 3px;
             background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .apd-slider-points {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .apd-slider-point {
+                width: 2px;
+                height: 2px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.5);
+            }
         }
 
         .apd-slider-progress {
@@ -102,11 +115,28 @@
 
         .apd-slider-dot {
             position: absolute;
-            left: 0%;
+            transform: translateX(-6px);
+            left: 50%;
             width: 12px;
             height: 12px;
             border-radius: 50%;
             background-color: #00a1d6;
+        }
+
+        .apd-slider-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            bottom: -12px;
+            width: calc(100% + 32px);
+
+            .apd-slider-step {
+                flex-shrink: 0;
+                width: 36px;
+                text-align: center;
+                scale: 0.95;
+            }
         }
     }
 
