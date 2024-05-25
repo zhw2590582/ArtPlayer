@@ -33,9 +33,9 @@ export default class Setting {
             $area: null,
             $areaSlider: null,
             $areaValue: null,
-            $font: null,
-            $fontSlider: null,
-            $fontValue: null,
+            $fontSize: null,
+            $fontSizeSlider: null,
+            $fontSizeValue: null,
             $speed: null,
             $speedSlider: null,
             $speedValue: null,
@@ -90,7 +90,7 @@ export default class Setting {
                             <div class="apd-slider"></div>
                             <div class="apd-value">3/4</div>
                         </div>
-                        <div class="apd-config-slider apd-config-font">
+                        <div class="apd-config-slider apd-config-fontSize">
                             <div class="apd-title">弹幕字号</div>
                             <div class="apd-slider"></div>
                             <div class="apd-value">170%</div>
@@ -155,9 +155,9 @@ export default class Setting {
         this.template.$areaSlider = this.query('.apd-config-area .apd-slider');
         this.template.$areaValue = this.query('.apd-config-area .apd-value');
 
-        this.template.$font = this.query('.apd-config-font');
-        this.template.$fontSlider = this.query('.apd-config-font .apd-slider');
-        this.template.$fontValue = this.query('.apd-config-font .apd-value');
+        this.template.$fontSize = this.query('.apd-config-fontSize');
+        this.template.$fontSizeSlider = this.query('.apd-config-fontSize .apd-slider');
+        this.template.$fontSizeValue = this.query('.apd-config-fontSize .apd-value');
 
         this.template.$speed = this.query('.apd-config-speed');
         this.template.$speedSlider = this.query('.apd-config-speed .apd-slider');
@@ -205,6 +205,7 @@ export default class Setting {
             min: 0,
             max: 100,
             type: 'opacity',
+            defaultValue: this.option.opacity * 100,
             container: this.template.$opacitySlider,
             onChange: (value) => this.onOpacityChange(value),
             steps: [],
@@ -214,6 +215,7 @@ export default class Setting {
             min: 0,
             max: 4,
             type: 'area',
+            defaultValue: this.option.margin,
             container: this.template.$areaSlider,
             onChange: (value) => this.onAreaChange(value),
             steps: [
@@ -238,9 +240,10 @@ export default class Setting {
         this.createSlider({
             min: 50,
             max: 170,
-            type: 'font',
-            container: this.template.$fontSlider,
-            onChange: (value) => this.onFontChange(value),
+            type: 'fontSize',
+            defaultValue: this.option.fontSize,
+            container: this.template.$fontSizeSlider,
+            onChange: (value) => this.onFontSizeChange(value),
             steps: [],
         });
 
@@ -248,6 +251,7 @@ export default class Setting {
             min: 0,
             max: 4,
             type: 'speed',
+            defaultValue: this.option.speed,
             container: this.template.$speedSlider,
             onChange: (value) => this.onSpeedChange(value),
             steps: [
@@ -255,13 +259,13 @@ export default class Setting {
                     name: '极慢',
                 },
                 {
-                    name: '',
+                    name: '较慢',
                 },
                 {
                     name: '适中',
                 },
                 {
-                    name: '',
+                    name: '较快',
                 },
                 {
                     name: '极快',
@@ -292,7 +296,7 @@ export default class Setting {
         //
     }
 
-    onFontChange(font) {
+    onFontSizeChange(font) {
         //
     }
 
