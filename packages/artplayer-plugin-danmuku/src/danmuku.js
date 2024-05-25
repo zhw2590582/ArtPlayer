@@ -61,7 +61,7 @@ export default class Danmuku {
             beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
             beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
             visible: true, // 弹幕是否可见
-            maxLength: 200, // 弹幕输入框最大长度
+            maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
             lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
         };
     }
