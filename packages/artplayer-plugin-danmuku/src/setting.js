@@ -28,9 +28,17 @@ export default class Setting {
             $toggle: null,
             $modes: null,
             $opacity: null,
+            $opacitySlider: null,
+            $opacityValue: null,
             $area: null,
+            $areaSlider: null,
+            $areaValue: null,
             $font: null,
+            $fontSlider: null,
+            $fontValue: null,
             $speed: null,
+            $speedSlider: null,
+            $speedValue: null,
             $input: null,
             $send: null,
         };
@@ -137,10 +145,66 @@ export default class Setting {
 
         this.template.$toggle = this.query('.apd-toggle');
         this.template.$modes = this.query('.apd-modes');
+
         this.template.$opacity = this.query('.apd-config-opacity');
+        this.template.$opacitySlider = this.query('.apd-config-opacity .apd-slider');
+        this.template.$opacityValue = this.query('.apd-config-opacity .apd-value');
+
+        this.createSlider({
+            min: 0,
+            max: 100,
+            type: 'opacity',
+            container: this.template.$opacitySlider,
+            onChange: (value) => this.onOpacityChange(value),
+            steps: [],
+        });
+
         this.template.$area = this.query('.apd-config-area');
+        this.template.$areaSlider = this.query('.apd-config-area .apd-slider');
+        this.template.$areaValue = this.query('.apd-config-area .apd-value');
+
+        this.createSlider({
+            min: 0,
+            max: 4,
+            type: 'area',
+            container: this.template.$areaSlider,
+            onChange: (value) => this.onAreaChange(value),
+            steps: [
+                {
+                    name: '1/4',
+                },
+                {
+                    name: '半屏',
+                },
+                {
+                    name: '3/4',
+                },
+                {
+                    name: '不重叠',
+                },
+                {
+                    name: '不限',
+                },
+            ],
+        });
+
         this.template.$font = this.query('.apd-config-font');
+        this.template.$fontSlider = this.query('.apd-config-font .apd-slider');
+        this.template.$fontValue = this.query('.apd-config-font .apd-value');
+
+        this.createSlider({
+            min: 50,
+            max: 170,
+            type: 'font',
+            container: this.template.$fontSlider,
+            onChange: (value) => this.onFontChange(value),
+            steps: [],
+        });
+
         this.template.$speed = this.query('.apd-config-speed');
+        this.template.$speedSlider = this.query('.apd-config-speed .apd-slider');
+        this.template.$speedValue = this.query('.apd-config-speed .apd-value');
+
         this.template.$input = this.query('.apd-input');
         this.template.$send = this.query('.apd-send');
 
@@ -176,6 +240,22 @@ export default class Setting {
         this.setData('danmukuMode0', option.modes.includes(0));
         this.setData('danmukuMode1', option.modes.includes(1));
         this.setData('danmukuMode2', option.modes.includes(2));
+    }
+
+    onOpacityChange(opacity) {
+        //
+    }
+
+    onAreaChange(area) {
+        //
+    }
+
+    onFontChange(font) {
+        //
+    }
+
+    createSlider() {
+        //
     }
 
     mount(target) {

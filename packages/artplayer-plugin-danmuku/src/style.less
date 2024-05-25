@@ -144,100 +144,6 @@
     }
 }
 
-.art-video-player {
-    &[data-danmuku-visible='false'] {
-        .apd-toggle-off {
-            display: block;
-        }
-
-        .apd-toggle-on {
-            display: none;
-        }
-    }
-
-    &[data-danmuku-visible='true'] {
-        .apd-toggle-off {
-            display: none;
-        }
-
-        .apd-toggle-on {
-            display: block;
-        }
-    }
-
-    &[data-danmuku-mode0='false'] {
-        .apd-mode-0-off {
-            display: block;
-        }
-
-        .apd-mode-0-on {
-            display: none;
-        }
-
-        .art-danmuku [data-mode='0'] {
-            opacity: 0 !important;
-        }
-    }
-
-    &[data-danmuku-mode0='true'] {
-        .apd-mode-0-off {
-            display: none;
-        }
-
-        .apd-mode-0-on {
-            display: block;
-        }
-    }
-
-    &[data-danmuku-mode1='false'] {
-        .apd-mode-1-off {
-            display: block;
-        }
-
-        .apd-mode-1-on {
-            display: none;
-        }
-
-        .art-danmuku [data-mode='1'] {
-            opacity: 0 !important;
-        }
-    }
-
-    &[data-danmuku-mode1='true'] {
-        .apd-mode-1-off {
-            display: none;
-        }
-
-        .apd-mode-1-on {
-            display: block;
-        }
-    }
-
-    &[data-danmuku-mode2='false'] {
-        .apd-mode-2-off {
-            display: block;
-        }
-
-        .apd-mode-2-on {
-            display: none;
-        }
-
-        .art-danmuku [data-mode='2'] {
-            opacity: 0 !important;
-        }
-    }
-
-    &[data-danmuku-mode2='true'] {
-        .apd-mode-2-off {
-            display: none;
-        }
-
-        .apd-mode-2-on {
-            display: block;
-        }
-    }
-}
-
 .art-fullscreen,
 .art-fullscreen-web {
     .artplayer-plugin-danmuku {
@@ -245,5 +151,97 @@
         .apd-input {
             width: 360px;
         }
+    }
+}
+
+[data-danmuku-visible='false'] {
+    .apd-toggle-off {
+        display: block;
+    }
+
+    .apd-toggle-on {
+        display: none;
+    }
+}
+
+[data-danmuku-visible='true'] {
+    .apd-toggle-off {
+        display: none;
+    }
+
+    .apd-toggle-on {
+        display: block;
+    }
+}
+
+[data-danmuku-mode0='false'] {
+    .apd-mode-0-off {
+        display: block;
+    }
+
+    .apd-mode-0-on {
+        display: none;
+    }
+
+    .art-danmuku [data-mode='0'] {
+        opacity: 0 !important;
+    }
+}
+
+[data-danmuku-mode0='true'] {
+    .apd-mode-0-off {
+        display: none;
+    }
+
+    .apd-mode-0-on {
+        display: block;
+    }
+}
+
+[data-danmuku-mode1='false'] {
+    .apd-mode-1-off {
+        display: block;
+    }
+
+    .apd-mode-1-on {
+        display: none;
+    }
+
+    .art-danmuku [data-mode='1'] {
+        opacity: 0 !important;
+    }
+}
+
+[data-danmuku-mode1='true'] {
+    .apd-mode-1-off {
+        display: none;
+    }
+
+    .apd-mode-1-on {
+        display: block;
+    }
+}
+
+[data-danmuku-mode2='false'] {
+    .apd-mode-2-off {
+        display: block;
+    }
+
+    .apd-mode-2-on {
+        display: none;
+    }
+
+    .art-danmuku [data-mode='2'] {
+        opacity: 0 !important;
+    }
+}
+
+[data-danmuku-mode2='true'] {
+    .apd-mode-2-off {
+        display: none;
+    }
+
+    .apd-mode-2-on {
+        display: block;
     }
 }
