@@ -1228,7 +1228,7 @@ class Setting {
         const { inverseClass } = this.utils;
         const colors = this.template.$colors.children;
         const $color = Array.from(colors).find((item)=>item.dataset.color === this.option.color.toUpperCase());
-        inverseClass($color, "apd-active");
+        $color && inverseClass($color, "apd-active");
     }
     mount(target = this.template.$controlsCenter) {
         target.appendChild(this.template.$danmuku);
