@@ -3,14 +3,6 @@ import type Artplayer from 'artplayer';
 export = artplayerPluginDanmuku;
 export as namespace artplayerPluginDanmuku;
 
-type CssVar = {
-    '--art-theme': string;
-    '--art-font-color': string;
-    '--art-background-color': string;
-    '--art-text-shadow-color': string;
-    '--art-transition-duration': string;
-};
-
 type Danmu = {
     /**
      * 弹幕文本
@@ -103,11 +95,6 @@ type Option = {
      * 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
      */
     mount?: Element;
-
-    /**
-     * 自定义弹幕输入框样式
-     */
-    style?: Partial<CssVar>;
 
     /**
      * 是否开启弹幕热度图

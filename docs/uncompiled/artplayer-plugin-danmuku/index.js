@@ -220,7 +220,7 @@ class Danmuku {
         art.on("video:pause", this.stop);
         art.on("video:waiting", this.stop);
         art.on("destroy", this.destroy);
-        // art.on('resize', this.reset);
+        art.on("resize", this.reset);
         // 开始加载弹幕
         this.load();
     }
@@ -236,21 +236,20 @@ class Danmuku {
             opacity: 1,
             color: "#FFFFFF",
             mode: 0,
+            modes: [
+                0,
+                1,
+                2
+            ],
             fontSize: 25,
             antiOverlap: true,
             synchronousPlayback: false,
             mount: undefined,
             heatmap: false,
             points: [],
-            setting: {},
             filter: ()=>true,
             beforeEmit: ()=>true,
             beforeVisible: ()=>true,
-            modes: [
-                0,
-                1,
-                2
-            ],
             visible: true,
             maxLength: 200,
             lockTime: 5
@@ -265,17 +264,16 @@ class Danmuku {
             opacity: "number",
             color: "string",
             mode: "number",
+            modes: "array",
             fontSize: "number|string",
-            filter: "function",
             antiOverlap: "boolean",
             synchronousPlayback: "boolean",
             mount: "?htmldivelement",
             heatmap: "object|boolean",
             points: "array",
-            setting: "object",
+            filter: "function",
             beforeEmit: "function",
             beforeVisible: "function",
-            modes: "array",
             visible: "boolean",
             maxLength: "number",
             lockTime: "number"
@@ -401,11 +399,11 @@ class Danmuku {
         const { $controlsCenter } = this.art.template;
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
+        this.option.mode = clamp(this.option.mode, 0, 2);
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.lockTime = clamp(this.option.lockTime, 1, 60);
         this.option.maxLength = clamp(this.option.maxLength, 1, 1000);
-        this.option.style = Object.assign({}, Danmuku.option.style, this.option.style);
         this.option.mount = this.option.mount || $controlsCenter;
         // 重新计算弹幕字体大小，需要重新渲染
         if (option.fontSize) {

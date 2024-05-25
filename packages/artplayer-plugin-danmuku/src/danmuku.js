@@ -35,7 +35,7 @@ export default class Danmuku {
         art.on('video:pause', this.stop);
         art.on('video:waiting', this.stop);
         art.on('destroy', this.destroy);
-        // art.on('resize', this.reset);
+        art.on('resize', this.reset);
 
         // 开始加载弹幕
         this.load();
@@ -44,26 +44,25 @@ export default class Danmuku {
     // 默认配置
     static get option() {
         return {
-            danmuku: [], // 弹幕数据
-            speed: 5, // 弹幕持续时间
+            danmuku: [], // 弹幕数据: 函数，数组，Promise，URL
+            speed: 5, // 弹幕持续时间，范围在[1 ~ 10]
             margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
-            opacity: 1, // 默认弹幕透明度
+            opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
             color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
-            mode: 0, // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
-            fontSize: 25, // 弹幕字体大小，支持像素数字和百分比，不可以被单独弹幕项覆盖
+            mode: 0, // 弹幕模式: 0: 滚动，1: 顶部，2: 底部
+            modes: [0, 1, 2], // 弹幕可见的模式
+            fontSize: 25, // 弹幕字体大小，支持像素数字和百分比
             antiOverlap: true, // 弹幕是否防重叠
             synchronousPlayback: false, // 是否同步播放速度
             mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
             heatmap: false, // 是否开启热力图
             points: [], // 热力图数据
-            setting: {}, // 弹幕发射器设置
             filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
             beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
             beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
-            modes: [0, 1, 2], // 弹幕模式
             visible: true, // 弹幕是否可见
-            maxLength: 200, // 弹幕最大长度
-            lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
+            maxLength: 200, // 弹幕输入框最大长度
+            lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
         };
     }
 
@@ -76,17 +75,16 @@ export default class Danmuku {
             opacity: 'number',
             color: 'string',
             mode: 'number',
+            modes: 'array',
             fontSize: 'number|string',
-            filter: 'function',
             antiOverlap: 'boolean',
             synchronousPlayback: 'boolean',
             mount: '?htmldivelement',
             heatmap: 'object|boolean',
             points: 'array',
-            setting: 'object',
+            filter: 'function',
             beforeEmit: 'function',
             beforeVisible: 'function',
-            modes: 'array',
             visible: 'boolean',
             maxLength: 'number',
             lockTime: 'number',
@@ -260,11 +258,11 @@ export default class Danmuku {
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
 
+        this.option.mode = clamp(this.option.mode, 0, 2);
         this.option.speed = clamp(this.option.speed, 1, 10);
         this.option.opacity = clamp(this.option.opacity, 0, 1);
         this.option.lockTime = clamp(this.option.lockTime, 1, 60);
         this.option.maxLength = clamp(this.option.maxLength, 1, 1000);
-        this.option.style = Object.assign({}, Danmuku.option.style, this.option.style);
         this.option.mount = this.option.mount || $controlsCenter;
 
         // 重新计算弹幕字体大小，需要重新渲染
