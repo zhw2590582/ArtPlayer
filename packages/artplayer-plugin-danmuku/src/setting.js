@@ -46,6 +46,7 @@ export default class Setting {
         this.initTemplate();
         this.initSliders();
         this.initEvents();
+        this.mount(this.option.mount);
     }
 
     get outside() {
@@ -83,22 +84,22 @@ export default class Setting {
                         <div class="apd-config-slider apd-config-opacity">
                             <div class="apd-title">不透明度</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">100%</div>
+                            <div class="apd-value"></div>
                         </div>
                         <div class="apd-config-slider apd-config-area">
                             <div class="apd-title">显示区域</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">3/4</div>
+                            <div class="apd-value"></div>
                         </div>
                         <div class="apd-config-slider apd-config-fontSize">
                             <div class="apd-title">弹幕字号</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">170%</div>
+                            <div class="apd-value"></div>
                         </div>
                         <div class="apd-config-slider apd-config-speed">
                             <div class="apd-title">弹幕速度</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">极快</div>
+                            <div class="apd-value"></div>
                         </div>
                     </div>
                 </div>
@@ -165,8 +166,6 @@ export default class Setting {
 
         this.template.$input = this.query('.apd-input');
         this.template.$send = this.query('.apd-send');
-
-        this.mount(this.option.mount);
     }
 
     initEvents() {
@@ -208,12 +207,11 @@ export default class Setting {
             defaultValue: this.option.opacity * 100,
             container: this.template.$opacitySlider,
             onChange: (value) => this.onOpacityChange(value),
-            steps: [],
         });
 
         this.createSlider({
             min: 0,
-            max: 4,
+            max: 3,
             type: 'area',
             defaultValue: this.option.margin,
             container: this.template.$areaSlider,
@@ -221,18 +219,19 @@ export default class Setting {
             steps: [
                 {
                     name: '1/4',
+                    value: [10, '75%'],
                 },
                 {
                     name: '半屏',
+                    value: [10, '50%'],
                 },
                 {
                     name: '3/4',
+                    value: [10, '25%'],
                 },
                 {
-                    name: '不重叠',
-                },
-                {
-                    name: '不限',
+                    name: '满屏',
+                    value: [10, 10],
                 },
             ],
         });
@@ -244,7 +243,6 @@ export default class Setting {
             defaultValue: this.option.fontSize,
             container: this.template.$fontSizeSlider,
             onChange: (value) => this.onFontSizeChange(value),
-            steps: [],
         });
 
         this.createSlider({
@@ -257,27 +255,32 @@ export default class Setting {
             steps: [
                 {
                     name: '极慢',
+                    value: 10,
                 },
                 {
                     name: '较慢',
+                    value: 7.5,
                     hide: true,
                 },
                 {
                     name: '适中',
+                    value: 5,
                 },
                 {
                     name: '较快',
+                    value: 2.5,
                     hide: true,
                 },
                 {
                     name: '极快',
+                    value: 1,
                 },
             ],
         });
     }
 
-    createSlider({ min, max, type, container, onChange, steps }) {
-        const { query } = this.utils;
+    createSlider({ min, max, type, container, onChange, steps = [] }) {
+        const { query, clamp } = this.utils;
 
         container.innerHTML = `
             <div class="apd-slider-line">
@@ -292,9 +295,38 @@ export default class Setting {
             </div>
         `;
 
-        const $progress = query('.apd-slider-progress', container);
         const $dot = query('.apd-slider-dot', container);
-        const $steps = query('.apd-slider-steps', container);
+        const $progress = query('.apd-slider-progress', container);
+
+        let isDroging = false;
+
+        function updateLeft(event) {
+            const { left, width } = container.getBoundingClientRect();
+            const value = clamp(event.clientX - left, 0, width);
+            $dot.style.left = `${(value / width) * 100}%`;
+            if (steps.length === 0) {
+                $progress.style.width = `${(value / width) * 100}%`;
+            }
+        }
+
+        this.art.proxy(container, 'click', updateLeft);
+
+        this.art.proxy(container, 'mousedown', (event) => {
+            isDroging = event.button === 0;
+        });
+
+        this.art.on('document:mousemove', (event) => {
+            if (isDroging) {
+                updateLeft(event);
+            }
+        });
+
+        this.art.on('document:mouseup', (event) => {
+            if (isDroging) {
+                isDroging = false;
+                updateLeft(event);
+            }
+        });
     }
 
     onOpacityChange(opacity) {

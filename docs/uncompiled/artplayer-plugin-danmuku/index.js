@@ -811,6 +811,7 @@ class Setting {
         this.initTemplate();
         this.initSliders();
         this.initEvents();
+        this.mount(this.option.mount);
     }
     get outside() {
         return this.template.$mount !== this.template.$controlsCenter;
@@ -845,22 +846,22 @@ class Setting {
                         <div class="apd-config-slider apd-config-opacity">
                             <div class="apd-title">\u{4E0D}\u{900F}\u{660E}\u{5EA6}</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">100%</div>
+                            <div class="apd-value"></div>
                         </div>
                         <div class="apd-config-slider apd-config-area">
                             <div class="apd-title">\u{663E}\u{793A}\u{533A}\u{57DF}</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">3/4</div>
+                            <div class="apd-value"></div>
                         </div>
                         <div class="apd-config-slider apd-config-fontSize">
                             <div class="apd-title">\u{5F39}\u{5E55}\u{5B57}\u{53F7}</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">170%</div>
+                            <div class="apd-value"></div>
                         </div>
                         <div class="apd-config-slider apd-config-speed">
                             <div class="apd-title">\u{5F39}\u{5E55}\u{901F}\u{5EA6}</div>
                             <div class="apd-slider"></div>
-                            <div class="apd-value">\u{6781}\u{5FEB}</div>
+                            <div class="apd-value"></div>
                         </div>
                     </div>
                 </div>
@@ -914,7 +915,6 @@ class Setting {
         this.template.$speedValue = this.query(".apd-config-speed .apd-value");
         this.template.$input = this.query(".apd-input");
         this.template.$send = this.query(".apd-send");
-        this.mount(this.option.mount);
     }
     initEvents() {
         const { option } = this;
@@ -947,31 +947,43 @@ class Setting {
             type: "opacity",
             defaultValue: this.option.opacity * 100,
             container: this.template.$opacitySlider,
-            onChange: (value)=>this.onOpacityChange(value),
-            steps: []
+            onChange: (value)=>this.onOpacityChange(value)
         });
         this.createSlider({
             min: 0,
-            max: 4,
+            max: 3,
             type: "area",
             defaultValue: this.option.margin,
             container: this.template.$areaSlider,
             onChange: (value)=>this.onAreaChange(value),
             steps: [
                 {
-                    name: "1/4"
+                    name: "1/4",
+                    value: [
+                        10,
+                        "75%"
+                    ]
                 },
                 {
-                    name: "\u534A\u5C4F"
+                    name: "\u534A\u5C4F",
+                    value: [
+                        10,
+                        "50%"
+                    ]
                 },
                 {
-                    name: "3/4"
+                    name: "3/4",
+                    value: [
+                        10,
+                        "25%"
+                    ]
                 },
                 {
-                    name: "\u4E0D\u91CD\u53E0"
-                },
-                {
-                    name: "\u4E0D\u9650"
+                    name: "\u6EE1\u5C4F",
+                    value: [
+                        10,
+                        10
+                    ]
                 }
             ]
         });
@@ -981,8 +993,7 @@ class Setting {
             type: "fontSize",
             defaultValue: this.option.fontSize,
             container: this.template.$fontSizeSlider,
-            onChange: (value)=>this.onFontSizeChange(value),
-            steps: []
+            onChange: (value)=>this.onFontSizeChange(value)
         });
         this.createSlider({
             min: 0,
@@ -993,27 +1004,32 @@ class Setting {
             onChange: (value)=>this.onSpeedChange(value),
             steps: [
                 {
-                    name: "\u6781\u6162"
+                    name: "\u6781\u6162",
+                    value: 10
                 },
                 {
                     name: "\u8F83\u6162",
+                    value: 7.5,
                     hide: true
                 },
                 {
-                    name: "\u9002\u4E2D"
+                    name: "\u9002\u4E2D",
+                    value: 5
                 },
                 {
                     name: "\u8F83\u5FEB",
+                    value: 2.5,
                     hide: true
                 },
                 {
-                    name: "\u6781\u5FEB"
+                    name: "\u6781\u5FEB",
+                    value: 1
                 }
             ]
         });
     }
-    createSlider({ min, max, type, container, onChange, steps }) {
-        const { query } = this.utils;
+    createSlider({ min, max, type, container, onChange, steps = [] }) {
+        const { query, clamp } = this.utils;
         container.innerHTML = `
             <div class="apd-slider-line">
                 <div class="apd-slider-points">
@@ -1026,9 +1042,28 @@ class Setting {
                 ${steps.map((step)=>step.hide ? "" : `<div class="apd-slider-step">${step.name}</div>`).join("")}
             </div>
         `;
-        const $progress = query(".apd-slider-progress", container);
         const $dot = query(".apd-slider-dot", container);
-        const $steps = query(".apd-slider-steps", container);
+        const $progress = query(".apd-slider-progress", container);
+        let isDroging = false;
+        function updateLeft(event) {
+            const { left, width } = container.getBoundingClientRect();
+            const value = clamp(event.clientX - left, 0, width);
+            $dot.style.left = `${value / width * 100}%`;
+            if (steps.length === 0) $progress.style.width = `${value / width * 100}%`;
+        }
+        this.art.proxy(container, "click", updateLeft);
+        this.art.proxy(container, "mousedown", (event)=>{
+            isDroging = event.button === 0;
+        });
+        this.art.on("document:mousemove", (event)=>{
+            if (isDroging) updateLeft(event);
+        });
+        this.art.on("document:mouseup", (event)=>{
+            if (isDroging) {
+                isDroging = false;
+                updateLeft(event);
+            }
+        });
     }
     onOpacityChange(opacity) {
     //
