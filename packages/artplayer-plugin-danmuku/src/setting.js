@@ -27,7 +27,9 @@ export default class Setting {
             $mount: $controlsCenter,
             $danmuku: null,
             $toggle: null,
-            $modes: null,
+            $configModes: null,
+            $styleModes: null,
+            $colors: null,
             $opacitySlider: null,
             $opacityValue: null,
             $marginSlider: null,
@@ -45,11 +47,6 @@ export default class Setting {
             margin: null,
             fontSize: null,
             speed: null,
-        };
-
-        this.style = {
-            mode: 0,
-            color: '#fff',
         };
 
         this.createTemplate();
@@ -150,6 +147,9 @@ export default class Setting {
                             </div>
                             <div class="apd-style-color">
                                 颜色
+                                <div class="apd-colors">
+                                    ${this.COLOR.map((color) => `<div data-color="${color}" class="apd-color" style="background-color: ${color}"></div>`).join('')}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -208,6 +208,25 @@ export default class Setting {
         ];
     }
 
+    get COLOR() {
+        return [
+            '#FE0302',
+            '#FF7204',
+            '#FFAA02',
+            '#FFD302',
+            '#FFFF00',
+            '#A0EE00',
+            '#00CD00',
+            '#019899',
+            '#4266BE',
+            '#89D5FF',
+            '#CC0273',
+            '#222222',
+            '#9B9B9B',
+            '#FFFFFF',
+        ];
+    }
+
     query(selector) {
         const { query } = this.utils;
         const { $danmuku } = this.template;
@@ -237,7 +256,9 @@ export default class Setting {
         tooltip($toggleOff, '开启弹幕');
 
         this.template.$toggle = this.query('.apd-toggle');
-        this.template.$modes = this.query('.apd-modes');
+        this.template.$configModes = this.query('.apd-config-mode .apd-modes');
+        this.template.$styleModes = this.query('.apd-style-mode .apd-modes');
+        this.template.$colors = this.query('.apd-colors');
 
         this.template.$antiOverlap = this.query('.apd-anti-overlap');
         this.template.$syncVideo = this.query('.apd-sync-video');
@@ -256,7 +277,7 @@ export default class Setting {
     }
 
     createEvents() {
-        const { $toggle, $modes, $antiOverlap, $syncVideo } = this.template;
+        const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo } = this.template;
 
         this.art.proxy($toggle, 'click', () => {
             this.danmuku.config({
@@ -265,7 +286,7 @@ export default class Setting {
             this.reset();
         });
 
-        this.art.proxy($modes, 'click', (event) => {
+        this.art.proxy($configModes, 'click', (event) => {
             const $mode = event.target.closest('.apd-mode');
             if (!$mode) return;
             const mode = Number($mode.dataset.mode);
@@ -291,6 +312,25 @@ export default class Setting {
         this.art.proxy($syncVideo, 'click', () => {
             this.danmuku.config({
                 synchronousPlayback: !this.option.synchronousPlayback,
+            });
+            this.reset();
+        });
+
+        this.art.proxy($styleModes, 'click', (event) => {
+            const $mode = event.target.closest('.apd-mode');
+            if (!$mode) return;
+            const mode = Number($mode.dataset.mode);
+            this.danmuku.config({
+                mode: mode,
+            });
+            this.reset();
+        });
+
+        this.art.proxy($colors, 'click', (event) => {
+            const $color = event.target.closest('.apd-color');
+            if (!$color) return;
+            this.danmuku.config({
+                color: $color.dataset.color,
             });
             this.reset();
         });
@@ -440,16 +480,18 @@ export default class Setting {
     }
 
     reset() {
+        this.slider.opacity.reset();
+        this.slider.margin.reset();
+        this.slider.fontSize.reset();
+        this.slider.speed.reset();
         this.setData('danmukuVisible', this.option.visible);
+        this.setData('danmukuMode', this.option.mode);
+        this.setData('danmukuColor', this.option.color);
         this.setData('danmukuMode0', this.option.modes.includes(0));
         this.setData('danmukuMode1', this.option.modes.includes(1));
         this.setData('danmukuMode2', this.option.modes.includes(2));
         this.setData('danmukuAntiOverlap', this.option.antiOverlap);
         this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
-        this.slider.opacity.reset();
-        this.slider.margin.reset();
-        this.slider.fontSize.reset();
-        this.slider.speed.reset();
     }
 
     mount(target = this.template.$controlsCenter) {

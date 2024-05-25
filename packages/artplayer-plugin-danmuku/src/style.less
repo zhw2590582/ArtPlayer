@@ -1,3 +1,5 @@
+@color: #00a1d6;
+
 .artplayer-plugin-danmuku {
     display: flex;
     align-items: center;
@@ -61,10 +63,6 @@
         .apd-mode {
             cursor: pointer;
             text-align: center;
-
-            &:hover {
-                color: #00a1d6;
-            }
         }
     }
 
@@ -116,7 +114,7 @@
         .apd-slider-progress {
             width: 0%;
             height: 100%;
-            background-color: #00a1d6;
+            background-color: @color;
         }
 
         .apd-slider-dot {
@@ -126,7 +124,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: #00a1d6;
+            background-color: @color;
         }
 
         .apd-slider-steps {
@@ -164,7 +162,7 @@
             gap: 2px;
 
             &:hover {
-                color: #00a1d6;
+                color: @color;
             }
         }
     }
@@ -187,15 +185,15 @@
         .apd-style-panel {
             position: absolute;
             bottom: 24px;
-            left: -98px;
+            left: -88px;
             display: none;
-            width: 220px;
+            width: 200px;
             padding: 10px;
 
             .apd-style-panel-inner {
                 width: 100%;
                 border-radius: 3px;
-                background-color: rgba(0, 0, 0, 0.8);
+                background-color: rgba(0, 0, 0, 0.85);
                 padding: 10px;
             }
         }
@@ -204,6 +202,20 @@
             .apd-style-panel {
                 display: flex;
             }
+        }
+    }
+
+    .apd-colors {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 5px;
+        gap: 8px;
+
+        .apd-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+            cursor: pointer;
         }
     }
 
@@ -231,7 +243,7 @@
         cursor: pointer;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
-        background-color: #00a1d6;
+        background-color: @color;
     }
 }
 
@@ -262,90 +274,6 @@
 
     .apd-toggle-on {
         display: block;
-    }
-}
-
-[data-danmuku-mode0='false'] {
-    .apd-config-mode {
-        .apd-mode-0-off {
-            display: block;
-        }
-
-        .apd-mode-0-on {
-            display: none;
-        }
-    }
-
-    .art-danmuku [data-mode='0'] {
-        opacity: 0 !important;
-    }
-}
-
-[data-danmuku-mode0='true'] {
-    .apd-config-mode {
-        .apd-mode-0-off {
-            display: none;
-        }
-
-        .apd-mode-0-on {
-            display: block;
-        }
-    }
-}
-
-[data-danmuku-mode1='false'] {
-    .apd-config-mode {
-        .apd-mode-1-off {
-            display: block;
-        }
-
-        .apd-mode-1-on {
-            display: none;
-        }
-    }
-
-    .art-danmuku [data-mode='1'] {
-        opacity: 0 !important;
-    }
-}
-
-[data-danmuku-mode1='true'] {
-    .apd-config-mode {
-        .apd-mode-1-off {
-            display: none;
-        }
-
-        .apd-mode-1-on {
-            display: block;
-        }
-    }
-}
-
-[data-danmuku-mode2='false'] {
-    .apd-config-mode {
-        .apd-mode-2-off {
-            display: block;
-        }
-
-        .apd-mode-2-on {
-            display: none;
-        }
-    }
-
-    .art-danmuku [data-mode='2'] {
-        opacity: 0 !important;
-    }
-}
-
-[data-danmuku-mode2='true'] {
-    .apd-config-mode {
-        .apd-mode-2-off {
-            display: none;
-        }
-
-        .apd-mode-2-on {
-            display: block;
-        }
     }
 }
 
@@ -396,3 +324,50 @@
         }
     }
 }
+
+.generate-mode-styles(@index) when (@index >= 0) {
+    .generate-mode-styles(@index - 1);
+
+    @mode: ~'data-danmuku-mode@{index}';
+
+    [@{mode}='false'] {
+        .apd-config-mode {
+            .apd-mode-@{index}-off {
+                display: block;
+            }
+
+            .apd-mode-@{index}-on {
+                display: none;
+            }
+        }
+
+        .art-danmuku [data-mode='@{index}'] {
+            opacity: 0 !important;
+        }
+    }
+
+    [@{mode}='true'] {
+        .apd-config-mode {
+            .apd-mode-@{index}-off {
+                display: none;
+            }
+
+            .apd-mode-@{index}-on {
+                display: block;
+            }
+        }
+    }
+
+    [data-danmuku-mode='@{index}'] {
+        .apd-style-mode {
+            [data-mode='@{index}'] {
+                color: @color;
+                path {
+                    fill: @color;
+                }
+            }
+        }
+    }
+}
+
+.generate-mode-styles(2);
