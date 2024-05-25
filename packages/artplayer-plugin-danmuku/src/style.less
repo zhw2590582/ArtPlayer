@@ -6,40 +6,19 @@
     padding: 8px 0;
     gap: 5px;
 
-    .apd-toggle,
-    .apd-config,
-    .apd-style {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .apd-icon {
+        cursor: pointer;
         opacity: 0.6;
-        height: 100%;
-        aspect-ratio: 1;
         transition: all 0.2s ease;
-
-        svg {
-            width: 80%;
-            height: 80%;
-        }
 
         &:hover {
             opacity: 1;
         }
     }
 
-    .apd-toggle-on,
-    .apd-toggle-off,
-    .apd-config-icon,
-    .apd-style-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        width: 100%;
-        height: 100%;
-    }
-
     .apd-config {
+        width: 24px;
+        height: 24px;
         position: relative;
 
         .apd-config-panel {

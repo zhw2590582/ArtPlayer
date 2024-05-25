@@ -3,6 +3,12 @@ import $on from 'bundle-text:./img/on.svg';
 import $off from 'bundle-text:./img/off.svg';
 import $config from 'bundle-text:./img/config.svg';
 import $style from 'bundle-text:./img/style.svg';
+import $mode_0_off from 'bundle-text:./img/mode_0_off.svg';
+import $mode_0_on from 'bundle-text:./img/mode_0_on.svg';
+import $mode_1_off from 'bundle-text:./img/mode_1_off.svg';
+import $mode_1_on from 'bundle-text:./img/mode_1_on.svg';
+import $mode_2_off from 'bundle-text:./img/mode_2_off.svg';
+import $mode_2_on from 'bundle-text:./img/mode_2_on.svg';
 
 export default class Setting {
     constructor(art, danmuku) {
@@ -38,20 +44,37 @@ export default class Setting {
 
         return `
             <div class="apd-toggle">
-                <div class="apd-icon apd-toggle-on">${$on}</div>
-                <div class="apd-icon apd-toggle-off">${$off}</div>
+                ${$on}${$off}
             </div>
             <div class="apd-config">
-                <div class="apd-config-icon">${$config}</div>
+                ${$config}
                 <div class="apd-config-panel">
                     <div class="apd-config-panel-inner">
                         <div>按类型屏蔽</div>
+                        <div class="apd-config-mode">
+                            <div>
+                                ${$mode_0_off}
+                                ${$mode_0_on}
+                            </div>
+                            <div>
+                                ${$mode_1_off}
+                                ${$mode_1_on}
+                            </div>
+                            <div>
+                                ${$mode_2_off}
+                                ${$mode_2_on}
+                            </div>
+                        </div>
+                        <div>不透明度</div>
+                        <div>显示区域</div>
+                        <div>弹幕字号</div>
+                        <div>弹幕速度</div>
                     </div>
                 </div>
             </div>
             <div class="apd-emitter">
                 <div class="apd-style">
-                    <div class="apd-style-icon">${$style}</div>
+                    ${$style}
                     <div class="apd-style-panel">
                         <div class="apd-style-panel-inner">1234</div>
                     </div>
@@ -80,6 +103,14 @@ export default class Setting {
         tooltip($toggleOn, '关闭弹幕');
         tooltip($toggleOff, '开启弹幕');
         this.initToggle();
+
+        const $mode_0_off = query('.apd-mode-0-off', $danmuku);
+        const $mode_0_on = query('.apd-mode-0-on', $danmuku);
+        const $mode_1_off = query('.apd-mode-1-off', $danmuku);
+        const $mode_1_on = query('.apd-mode-1-on', $danmuku);
+        const $mode_2_off = query('.apd-mode-2-off', $danmuku);
+        const $mode_2_on = query('.apd-mode-2-on', $danmuku);
+        this.initMode();
 
         const $input = query('.apd-input', $danmuku);
         this.template.$input = $input;
@@ -112,6 +143,10 @@ export default class Setting {
         const { $toggleOn, $toggleOff } = this.template;
         setStyle(config.show ? $toggleOff : $toggleOn, 'display', 'none');
         setStyle(config.show ? $toggleOn : $toggleOff, 'display', 'flex');
+    }
+
+    initMode() {
+        //
     }
 
     mount(target = this.template.$container) {
