@@ -27,16 +27,12 @@ export default class Setting {
             $danmuku: null,
             $toggle: null,
             $modes: null,
-            $opacity: null,
             $opacitySlider: null,
             $opacityValue: null,
-            $margin: null,
             $marginSlider: null,
             $marginValue: null,
-            $fontSize: null,
             $fontSizeSlider: null,
             $fontSizeValue: null,
-            $speed: null,
             $speedSlider: null,
             $speedValue: null,
             $input: null,
@@ -87,22 +83,22 @@ export default class Setting {
                                 </div>
                             </div>
                         </div>
-                        <div class="apd-config-slider apd-config-opacity">
+                        <div class="apd-config-item apd-config-opacity">
                             <div class="apd-title">不透明度</div>
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-slider apd-config-margin">
+                        <div class="apd-config-item apd-config-margin">
                             <div class="apd-title">显示区域</div>
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-slider apd-config-fontSize">
+                        <div class="apd-config-item apd-config-fontSize">
                             <div class="apd-title">弹幕字号</div>
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-slider apd-config-speed">
+                        <div class="apd-config-item apd-config-speed">
                             <div class="apd-title">弹幕速度</div>
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
@@ -200,19 +196,12 @@ export default class Setting {
         this.template.$toggle = this.query('.apd-toggle');
         this.template.$modes = this.query('.apd-modes');
 
-        this.template.$opacity = this.query('.apd-config-opacity');
         this.template.$opacitySlider = this.query('.apd-config-opacity .apd-slider');
         this.template.$opacityValue = this.query('.apd-config-opacity .apd-value');
-
-        this.template.$margin = this.query('.apd-config-margin');
         this.template.$marginSlider = this.query('.apd-config-margin .apd-slider');
         this.template.$marginValue = this.query('.apd-config-margin .apd-value');
-
-        this.template.$fontSize = this.query('.apd-config-fontSize');
         this.template.$fontSizeSlider = this.query('.apd-config-fontSize .apd-slider');
         this.template.$fontSizeValue = this.query('.apd-config-fontSize .apd-value');
-
-        this.template.$speed = this.query('.apd-config-speed');
         this.template.$speedSlider = this.query('.apd-config-speed .apd-slider');
         this.template.$speedValue = this.query('.apd-config-speed .apd-value');
 
@@ -249,6 +238,10 @@ export default class Setting {
         this.setData('danmukuMode0', option.modes.includes(0));
         this.setData('danmukuMode1', option.modes.includes(1));
         this.setData('danmukuMode2', option.modes.includes(2));
+        this.slider.opacity.init();
+        this.slider.margin.init();
+        this.slider.fontSize.init();
+        this.slider.speed.init();
     }
 
     initSliders() {
@@ -393,7 +386,6 @@ export default class Setting {
             }
         });
 
-        init();
         return { init };
     }
 
