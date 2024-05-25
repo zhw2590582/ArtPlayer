@@ -47,6 +47,11 @@ export default class Setting {
             speed: null,
         };
 
+        this.style = {
+            mode: 0,
+            color: '#fff',
+        };
+
         this.createTemplate();
         this.createSliders();
         this.createEvents();
@@ -125,7 +130,28 @@ export default class Setting {
                 <div class="apd-style">
                     ${$style}
                     <div class="apd-style-panel">
-                        <div class="apd-style-panel-inner">1234</div>
+                        <div class="apd-style-panel-inner">
+                            <div class="apd-style-mode">
+                                模式
+                                <div class="apd-modes">
+                                    <div data-mode="0" class="apd-mode">
+                                        ${$mode_0_on}
+                                        <div>滚动</div>
+                                    </div>
+                                    <div data-mode="1" class="apd-mode">
+                                        ${$mode_1_on}
+                                        <div>顶部</div>
+                                    </div>
+                                    <div data-mode="2" class="apd-mode">
+                                        ${$mode_2_on}
+                                        <div>底部</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="apd-style-color">
+                                颜色
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${option.maxLength}" />

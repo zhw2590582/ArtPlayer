@@ -47,7 +47,8 @@
 
     .apd-config-mode,
     .apd-config-slider,
-    .apd-config-other {
+    .apd-config-other,
+    .apd-style-mode {
         margin-bottom: 15px;
     }
 
@@ -60,6 +61,10 @@
         .apd-mode {
             cursor: pointer;
             text-align: center;
+
+            &:hover {
+                color: #00a1d6;
+            }
         }
     }
 
@@ -261,12 +266,14 @@
 }
 
 [data-danmuku-mode0='false'] {
-    .apd-mode-0-off {
-        display: block;
-    }
+    .apd-config-mode {
+        .apd-mode-0-off {
+            display: block;
+        }
 
-    .apd-mode-0-on {
-        display: none;
+        .apd-mode-0-on {
+            display: none;
+        }
     }
 
     .art-danmuku [data-mode='0'] {
@@ -275,22 +282,26 @@
 }
 
 [data-danmuku-mode0='true'] {
-    .apd-mode-0-off {
-        display: none;
-    }
+    .apd-config-mode {
+        .apd-mode-0-off {
+            display: none;
+        }
 
-    .apd-mode-0-on {
-        display: block;
+        .apd-mode-0-on {
+            display: block;
+        }
     }
 }
 
 [data-danmuku-mode1='false'] {
-    .apd-mode-1-off {
-        display: block;
-    }
+    .apd-config-mode {
+        .apd-mode-1-off {
+            display: block;
+        }
 
-    .apd-mode-1-on {
-        display: none;
+        .apd-mode-1-on {
+            display: none;
+        }
     }
 
     .art-danmuku [data-mode='1'] {
@@ -299,22 +310,26 @@
 }
 
 [data-danmuku-mode1='true'] {
-    .apd-mode-1-off {
-        display: none;
-    }
+    .apd-config-mode {
+        .apd-mode-1-off {
+            display: none;
+        }
 
-    .apd-mode-1-on {
-        display: block;
+        .apd-mode-1-on {
+            display: block;
+        }
     }
 }
 
 [data-danmuku-mode2='false'] {
-    .apd-mode-2-off {
-        display: block;
-    }
+    .apd-config-mode {
+        .apd-mode-2-off {
+            display: block;
+        }
 
-    .apd-mode-2-on {
-        display: none;
+        .apd-mode-2-on {
+            display: none;
+        }
     }
 
     .art-danmuku [data-mode='2'] {
@@ -323,12 +338,14 @@
 }
 
 [data-danmuku-mode2='true'] {
-    .apd-mode-2-off {
-        display: none;
-    }
+    .apd-config-mode {
+        .apd-mode-2-off {
+            display: none;
+        }
 
-    .apd-mode-2-on {
-        display: block;
+        .apd-mode-2-on {
+            display: block;
+        }
     }
 }
 
