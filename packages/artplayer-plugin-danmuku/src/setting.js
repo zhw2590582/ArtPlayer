@@ -44,6 +44,7 @@ export default class Setting {
         };
 
         this.initTemplate();
+        this.initSliders();
         this.initEvents();
     }
 
@@ -150,56 +151,13 @@ export default class Setting {
         this.template.$opacitySlider = this.query('.apd-config-opacity .apd-slider');
         this.template.$opacityValue = this.query('.apd-config-opacity .apd-value');
 
-        this.createSlider({
-            min: 0,
-            max: 100,
-            type: 'opacity',
-            container: this.template.$opacitySlider,
-            onChange: (value) => this.onOpacityChange(value),
-            steps: [],
-        });
-
         this.template.$area = this.query('.apd-config-area');
         this.template.$areaSlider = this.query('.apd-config-area .apd-slider');
         this.template.$areaValue = this.query('.apd-config-area .apd-value');
 
-        this.createSlider({
-            min: 0,
-            max: 4,
-            type: 'area',
-            container: this.template.$areaSlider,
-            onChange: (value) => this.onAreaChange(value),
-            steps: [
-                {
-                    name: '1/4',
-                },
-                {
-                    name: '半屏',
-                },
-                {
-                    name: '3/4',
-                },
-                {
-                    name: '不重叠',
-                },
-                {
-                    name: '不限',
-                },
-            ],
-        });
-
         this.template.$font = this.query('.apd-config-font');
         this.template.$fontSlider = this.query('.apd-config-font .apd-slider');
         this.template.$fontValue = this.query('.apd-config-font .apd-value');
-
-        this.createSlider({
-            min: 50,
-            max: 170,
-            type: 'font',
-            container: this.template.$fontSlider,
-            onChange: (value) => this.onFontChange(value),
-            steps: [],
-        });
 
         this.template.$speed = this.query('.apd-config-speed');
         this.template.$speedSlider = this.query('.apd-config-speed .apd-slider');
@@ -242,6 +200,80 @@ export default class Setting {
         this.setData('danmukuMode2', option.modes.includes(2));
     }
 
+    initSliders() {
+        this.createSlider({
+            min: 0,
+            max: 100,
+            type: 'opacity',
+            container: this.template.$opacitySlider,
+            onChange: (value) => this.onOpacityChange(value),
+            steps: [],
+        });
+
+        this.createSlider({
+            min: 0,
+            max: 4,
+            type: 'area',
+            container: this.template.$areaSlider,
+            onChange: (value) => this.onAreaChange(value),
+            steps: [
+                {
+                    name: '1/4',
+                },
+                {
+                    name: '半屏',
+                },
+                {
+                    name: '3/4',
+                },
+                {
+                    name: '不重叠',
+                },
+                {
+                    name: '不限',
+                },
+            ],
+        });
+
+        this.createSlider({
+            min: 50,
+            max: 170,
+            type: 'font',
+            container: this.template.$fontSlider,
+            onChange: (value) => this.onFontChange(value),
+            steps: [],
+        });
+
+        this.createSlider({
+            min: 0,
+            max: 4,
+            type: 'speed',
+            container: this.template.$speedSlider,
+            onChange: (value) => this.onSpeedChange(value),
+            steps: [
+                {
+                    name: '极慢',
+                },
+                {
+                    name: '',
+                },
+                {
+                    name: '适中',
+                },
+                {
+                    name: '',
+                },
+                {
+                    name: '极快',
+                },
+            ],
+        });
+    }
+
+    createSlider({ min, max, type, container, onChange, steps }) {
+        console.log(min, max, type, container, onChange, steps);
+    }
+
     onOpacityChange(opacity) {
         //
     }
@@ -254,7 +286,7 @@ export default class Setting {
         //
     }
 
-    createSlider() {
+    onSpeedChange(speed) {
         //
     }
 
