@@ -271,7 +271,17 @@ export default class Setting {
     }
 
     createSlider({ min, max, type, container, onChange, steps }) {
-        console.log(min, max, type, container, onChange, steps);
+        const { query } = this.utils;
+
+        container.innerHTML = `
+            <div class="apd-slider-line">
+                <div class="apd-slider-progress"></div>
+            </div>
+            <div class="apd-slider-dot"></div>
+        `;
+
+        const $progress = query('.apd-slider-progress', container);
+        const $dot = query('.apd-slider-dot', container);
     }
 
     onOpacityChange(opacity) {
@@ -292,6 +302,7 @@ export default class Setting {
 
     mount(target) {
         this.template.$mount = target;
+        this.option.mount = target;
         target.appendChild(this.template.$danmuku);
         this.initState();
     }

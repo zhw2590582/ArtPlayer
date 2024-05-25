@@ -25,10 +25,10 @@
         .apd-config-panel {
             position: absolute;
             bottom: 24px;
-            left: -118px;
+            left: -138px;
             display: none;
-            width: 260px;
-            padding: 7px;
+            width: 300px;
+            padding: 10px;
 
             .apd-config-panel-inner {
                 width: 100%;
@@ -47,7 +47,7 @@
 
     .apd-config-mode,
     .apd-config-slider {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
 
         &:last-child {
             margin-bottom: 0;
@@ -71,15 +71,42 @@
         align-items: center;
         gap: 5px;
 
-        .apd-slider {
-            flex: 1;
-            display: flex;
-            align-items: center;
-        }
-
         .apd-value {
             width: 32px;
             text-align: right;
+        }
+    }
+
+    .apd-slider {
+        position: relative;
+        flex: 1;
+        display: flex;
+        height: 20px;
+        align-items: center;
+        padding: 0 5px;
+        cursor: pointer;
+
+        .apd-slider-line {
+            height: 2px;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 3px;
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .apd-slider-progress {
+            width: 40%;
+            height: 100%;
+            background-color: #00a1d6;
+        }
+
+        .apd-slider-dot {
+            position: absolute;
+            left: 40%;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #00a1d6;
         }
     }
 
