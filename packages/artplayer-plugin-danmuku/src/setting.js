@@ -252,11 +252,16 @@ export default class Setting {
     }
 
     initSliders() {
+        const { option } = this;
+
         this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,
             steps: [],
             container: this.template.$opacitySlider,
+            findIndex: () => {
+                return Math.round(option.opacity * 100) || 100;
+            },
             onChange: (index) => {
                 const { $opacityValue } = this.template;
                 $opacityValue.textContent = `${index}%`;
@@ -271,6 +276,13 @@ export default class Setting {
             max: 3,
             steps: this.MARGIN,
             container: this.template.$marginSlider,
+            findIndex: () => {
+                return (
+                    this.MARGIN.findIndex(
+                        (item) => item.value[0] === option.margin[0] && item.value[1] === option.margin[1],
+                    ) || 2
+                );
+            },
             onChange: (index) => {
                 const margin = this.MARGIN[index];
                 const { $marginValue } = this.template;
@@ -286,6 +298,14 @@ export default class Setting {
             max: 25,
             steps: [],
             container: this.template.$fontSizeSlider,
+            findIndex: () => {
+                const { clientHeight } = this.art.template.$player;
+                if (typeof option.fontSize === 'number') {
+                    return Math.round((option.fontSize / clientHeight) * 100) || 5;
+                } else {
+                    return Math.round(option.fontSize.replace('%', '')) || 5;
+                }
+            },
             onChange: (index) => {
                 const { $fontSizeValue } = this.template;
                 $fontSizeValue.textContent = `${index}%`;
@@ -300,6 +320,9 @@ export default class Setting {
             max: 4,
             steps: this.SPEED,
             container: this.template.$speedSlider,
+            findIndex: () => {
+                return this.SPEED.findIndex((item) => item.value === option.speed) || 2;
+            },
             onChange: (index) => {
                 const speed = this.SPEED[index];
                 const { $speedValue } = this.template;
@@ -311,7 +334,7 @@ export default class Setting {
         });
     }
 
-    createSlider({ min, max, container, onChange, steps = [] }) {
+    createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
         const { query, clamp } = this.utils;
 
         container.innerHTML = `
@@ -332,12 +355,14 @@ export default class Setting {
 
         let isDroging = false;
 
-        function init(index) {
-            const percentage = (index - min) / (max - min);
+        function init(index = findIndex()) {
+            const value = clamp(index, min, max);
+            const percentage = (value - min) / (max - min);
             $dot.style.left = `${percentage * 100}%`;
             if (steps.length === 0) {
                 $progress.style.width = $dot.style.left;
             }
+            onChange(value);
         }
 
         function updateLeft(event) {
@@ -345,7 +370,6 @@ export default class Setting {
             const value = clamp(event.clientX - left, 0, width);
             const index = Math.round((value / width) * (max - min) + min);
             init(index);
-            onChange(index);
         }
 
         this.art.proxy(container, 'click', (event) => {
@@ -369,14 +393,8 @@ export default class Setting {
             }
         });
 
-        return {
-            min,
-            max,
-            init,
-            steps,
-            onChange,
-            container,
-        };
+        init();
+        return { init };
     }
 
     mount(target) {

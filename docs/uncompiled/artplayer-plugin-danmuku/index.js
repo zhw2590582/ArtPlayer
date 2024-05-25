@@ -227,7 +227,7 @@ class Danmuku {
             danmuku: [],
             speed: 5,
             margin: [
-                "2%",
+                10,
                 "25%"
             ],
             opacity: 1,
@@ -1003,11 +1003,15 @@ class Setting {
         this.setData("danmukuMode2", option.modes.includes(2));
     }
     initSliders() {
+        const { option } = this;
         this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,
             steps: [],
             container: this.template.$opacitySlider,
+            findIndex: ()=>{
+                return Math.round(option.opacity * 100) || 100;
+            },
             onChange: (index)=>{
                 const { $opacityValue } = this.template;
                 $opacityValue.textContent = `${index}%`;
@@ -1021,6 +1025,9 @@ class Setting {
             max: 3,
             steps: this.MARGIN,
             container: this.template.$marginSlider,
+            findIndex: ()=>{
+                return this.MARGIN.findIndex((item)=>item.value[0] === option.margin[0] && item.value[1] === option.margin[1]) || 2;
+            },
             onChange: (index)=>{
                 const margin = this.MARGIN[index];
                 const { $marginValue } = this.template;
@@ -1035,6 +1042,11 @@ class Setting {
             max: 25,
             steps: [],
             container: this.template.$fontSizeSlider,
+            findIndex: ()=>{
+                const { clientHeight } = this.art.template.$player;
+                if (typeof option.fontSize === "number") return Math.round(option.fontSize / clientHeight * 100) || 5;
+                else return Math.round(option.fontSize.replace("%", "")) || 5;
+            },
             onChange: (index)=>{
                 const { $fontSizeValue } = this.template;
                 $fontSizeValue.textContent = `${index}%`;
@@ -1048,6 +1060,9 @@ class Setting {
             max: 4,
             steps: this.SPEED,
             container: this.template.$speedSlider,
+            findIndex: ()=>{
+                return this.SPEED.findIndex((item)=>item.value === option.speed) || 2;
+            },
             onChange: (index)=>{
                 const speed = this.SPEED[index];
                 const { $speedValue } = this.template;
@@ -1058,7 +1073,7 @@ class Setting {
             }
         });
     }
-    createSlider({ min, max, container, onChange, steps = [] }) {
+    createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
         const { query, clamp } = this.utils;
         container.innerHTML = `
             <div class="apd-slider-line">
@@ -1075,17 +1090,18 @@ class Setting {
         const $dot = query(".apd-slider-dot", container);
         const $progress = query(".apd-slider-progress", container);
         let isDroging = false;
-        function init(index) {
-            const percentage = (index - min) / (max - min);
+        function init(index = findIndex()) {
+            const value = clamp(index, min, max);
+            const percentage = (value - min) / (max - min);
             $dot.style.left = `${percentage * 100}%`;
             if (steps.length === 0) $progress.style.width = $dot.style.left;
+            onChange(value);
         }
         function updateLeft(event) {
             const { left, width } = container.getBoundingClientRect();
             const value = clamp(event.clientX - left, 0, width);
             const index = Math.round(value / width * (max - min) + min);
             init(index);
-            onChange(index);
         }
         this.art.proxy(container, "click", (event)=>{
             updateLeft(event);
@@ -1102,13 +1118,9 @@ class Setting {
                 updateLeft(event);
             }
         });
+        init();
         return {
-            min,
-            max,
-            init,
-            steps,
-            onChange,
-            container
+            init
         };
     }
     mount(target) {
