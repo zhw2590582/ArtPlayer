@@ -15,7 +15,7 @@ export default class Setting {
         this.art = art;
         this.danmuku = danmuku;
         this.utils = art.constructor.utils;
-        this.config = { ...Setting.DEFAULT, ...danmuku.option.setting };
+        this.option = danmuku.option;
 
         this.template = {
             $container: art.template.$controlsCenter,
@@ -32,15 +32,8 @@ export default class Setting {
         this.initState();
     }
 
-    static get DEFAULT() {
-        return {
-            show: true,
-            maxLength: 200,
-        };
-    }
-
     get TEMPLATE() {
-        const { config } = this;
+        const { option } = this;
 
         return `
             <div class="apd-toggle">
@@ -51,16 +44,16 @@ export default class Setting {
                 <div class="apd-config-panel">
                     <div class="apd-config-panel-inner">
                         <div>按类型屏蔽</div>
-                        <div class="apd-config-mode">
-                            <div>
+                        <div class="apd-modes">
+                            <div data-mode="0" class="apd-mode">
                                 ${$mode_0_off}
                                 ${$mode_0_on}
                             </div>
-                            <div>
+                            <div data-mode="1" class="apd-mode">
                                 ${$mode_1_off}
                                 ${$mode_1_on}
                             </div>
-                            <div>
+                            <div data-mode="2" class="apd-mode">
                                 ${$mode_2_off}
                                 ${$mode_2_on}
                             </div>
@@ -79,43 +72,48 @@ export default class Setting {
                         <div class="apd-style-panel-inner">1234</div>
                     </div>
                 </div>
-                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${config.maxLength}" />
+                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${option.maxLength}" />
                 <div class="apd-send">发送</div>
             </div>
         `;
     }
 
+    query(selector) {
+        const { query } = this.utils;
+        const { $danmuku } = this.template;
+        return query(selector, $danmuku);
+    }
+
     initTemplate() {
-        const { setStyle, createElement, query, tooltip } = this.utils;
+        const { option } = this;
+        const { $player } = this.art.template;
         const { $container } = this.template;
+        const { setStyle, createElement, tooltip } = this.utils;
 
         const $danmuku = createElement('div');
         $danmuku.className = 'artplayer-plugin-danmuku';
         $danmuku.innerHTML = this.TEMPLATE;
         this.template.$danmuku = $danmuku;
 
-        const $toggle = query('.apd-toggle', $danmuku);
-        const $toggleOn = query('.apd-toggle-on', $danmuku);
-        const $toggleOff = query('.apd-toggle-off', $danmuku);
+        const $toggle = this.query('.apd-toggle');
+        const $toggleOn = this.query('.apd-toggle-on');
+        const $toggleOff = this.query('.apd-toggle-off');
         this.template.$toggle = $toggle;
         this.template.$toggleOn = $toggleOn;
         this.template.$toggleOff = $toggleOff;
         tooltip($toggleOn, '关闭弹幕');
         tooltip($toggleOff, '开启弹幕');
-        this.initToggle();
+        $player.dataset.danmukuVisible = option.visible;
 
-        const $mode_0_off = query('.apd-mode-0-off', $danmuku);
-        const $mode_0_on = query('.apd-mode-0-on', $danmuku);
-        const $mode_1_off = query('.apd-mode-1-off', $danmuku);
-        const $mode_1_on = query('.apd-mode-1-on', $danmuku);
-        const $mode_2_off = query('.apd-mode-2-off', $danmuku);
-        const $mode_2_on = query('.apd-mode-2-on', $danmuku);
-        this.initMode();
+        this.template.$modes = this.query('.apd-modes');
+        $player.dataset.danmukuMode0 = option.modes.includes(0);
+        $player.dataset.danmukuMode1 = option.modes.includes(1);
+        $player.dataset.danmukuMode2 = option.modes.includes(2);
 
-        const $input = query('.apd-input', $danmuku);
+        const $input = this.query('.apd-input');
         this.template.$input = $input;
 
-        const $send = query('.apd-send', $danmuku);
+        const $send = this.query('.apd-send');
         this.template.$send = $send;
 
         setStyle($container, 'display', 'flex');
@@ -123,30 +121,32 @@ export default class Setting {
     }
 
     initEvents() {
-        const { config } = this;
+        const { option } = this;
+        const { $player } = this.art.template;
+        const { $toggle, $modes } = this.template;
 
-        this.art.proxy(this.template.$toggle, 'click', () => {
-            config.show = !config.show;
-            this.initToggle();
-            this.danmuku[config.show ? 'show' : 'hide']();
+        this.art.proxy($toggle, 'click', () => {
+            option.visible = !option.visible;
+            this.danmuku[option.visible ? 'show' : 'hide']();
+            $player.dataset.danmukuVisible = option.visible;
+        });
+
+        this.art.proxy($modes, 'click', (event) => {
+            const $mode = event.target.closest('.apd-mode');
+            if (!$mode) return;
+            const mode = Number($mode.dataset.mode);
+            if (option.modes.includes(mode)) {
+                option.modes = option.modes.filter((m) => m !== mode);
+            } else {
+                option.modes.push(mode);
+            }
+            $player.dataset[`danmukuMode${mode}`] = option.modes.includes(mode);
         });
     }
 
     initState() {
-        const { config } = this;
-        this.danmuku[config.show ? 'show' : 'hide']();
-    }
-
-    initToggle() {
-        const { config } = this;
-        const { setStyle } = this.utils;
-        const { $toggleOn, $toggleOff } = this.template;
-        setStyle(config.show ? $toggleOff : $toggleOn, 'display', 'none');
-        setStyle(config.show ? $toggleOn : $toggleOff, 'display', 'flex');
-    }
-
-    initMode() {
-        //
+        const { option } = this;
+        this.danmuku[option.visible ? 'show' : 'hide']();
     }
 
     mount(target = this.template.$container) {

@@ -60,6 +60,9 @@ export default class Danmuku {
             filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
             beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
             beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
+            modes: [0, 1, 2], // 弹幕模式
+            visible: true, // 弹幕是否可见
+            maxLength: 200, // 弹幕最大长度
         };
     }
 
@@ -82,6 +85,9 @@ export default class Danmuku {
             setting: 'object',
             beforeEmit: 'function',
             beforeVisible: 'function',
+            modes: 'array',
+            visible: 'boolean',
+            maxLength: 'number',
         };
     }
 
