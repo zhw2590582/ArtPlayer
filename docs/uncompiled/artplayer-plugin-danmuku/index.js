@@ -646,6 +646,7 @@ class Danmuku {
     }
     show() {
         this.isHide = false;
+        this.option.visible = true;
         this.start();
         this.$danmuku.style.display = "";
         this.art.emit("artplayerPluginDanmuku:show");
@@ -653,6 +654,7 @@ class Danmuku {
     }
     hide() {
         this.isHide = true;
+        this.option.visible = false;
         this.stop();
         this.queue.forEach((item)=>this.makeWait(item));
         this.$danmuku.style.display = "none";
@@ -778,12 +780,15 @@ var _mode2OffSvg = require("bundle-text:./img/mode_2_off.svg");
 var _mode2OffSvgDefault = parcelHelpers.interopDefault(_mode2OffSvg);
 var _mode2OnSvg = require("bundle-text:./img/mode_2_on.svg");
 var _mode2OnSvgDefault = parcelHelpers.interopDefault(_mode2OnSvg);
+var _checkOnSvg = require("bundle-text:./img/check_on.svg");
+var _checkOnSvgDefault = parcelHelpers.interopDefault(_checkOnSvg);
+var _checkOffSvg = require("bundle-text:./img/check_off.svg");
+var _checkOffSvgDefault = parcelHelpers.interopDefault(_checkOffSvg);
 class Setting {
     constructor(art, danmuku){
         this.art = art;
         this.danmuku = danmuku;
         this.utils = art.constructor.utils;
-        this.option = danmuku.option;
         const { setStyle } = this.utils;
         const { $controlsCenter } = art.template;
         setStyle($controlsCenter, "display", "flex");
@@ -815,6 +820,9 @@ class Setting {
         this.initEvents();
         this.mount(this.option.mount);
     }
+    get option() {
+        return this.danmuku.option;
+    }
     get outside() {
         return this.template.$mount !== this.template.$controlsCenter;
     }
@@ -829,7 +837,7 @@ class Setting {
                 <div class="apd-config-panel">
                     <div class="apd-config-panel-inner">
                         <div class="apd-config-mode">
-                            <div class="apd-title">\u{6309}\u{7C7B}\u{578B}\u{5C4F}\u{853D}</div>
+                            \u{6309}\u{7C7B}\u{578B}\u{5C4F}\u{853D}
                             <div class="apd-modes">
                                 <div data-mode="0" class="apd-mode">
                                     ${0, _mode0OffSvgDefault.default}${0, _mode0OnSvgDefault.default}
@@ -845,23 +853,33 @@ class Setting {
                                 </div>
                             </div>
                         </div>
-                        <div class="apd-config-item apd-config-opacity">
-                            <div class="apd-title">\u{4E0D}\u{900F}\u{660E}\u{5EA6}</div>
+                        <div class="apd-config-other">
+                            <div class="apd-other apd-anti-overlap">
+                                ${0, _checkOnSvgDefault.default}${0, _checkOffSvgDefault.default}
+                                \u{9632}\u{6B62}\u{5F39}\u{5E55}\u{91CD}\u{53E0}
+                            </div>
+                            <div class="apd-other apd-sync-video">
+                                ${0, _checkOnSvgDefault.default}${0, _checkOffSvgDefault.default}
+                                \u{540C}\u{6B65}\u{89C6}\u{9891}\u{901F}\u{5EA6}
+                            </div>
+                        </div>
+                        <div class="apd-config-slider apd-config-opacity">
+                            \u{4E0D}\u{900F}\u{660E}\u{5EA6}
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-item apd-config-margin">
-                            <div class="apd-title">\u{663E}\u{793A}\u{533A}\u{57DF}</div>
+                        <div class="apd-config-slider apd-config-margin">
+                            \u{663E}\u{793A}\u{533A}\u{57DF}
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-item apd-config-fontSize">
-                            <div class="apd-title">\u{5F39}\u{5E55}\u{5B57}\u{53F7}</div>
+                        <div class="apd-config-slider apd-config-fontSize">
+                            \u{5F39}\u{5E55}\u{5B57}\u{53F7}
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-item apd-config-speed">
-                            <div class="apd-title">\u{5F39}\u{5E55}\u{901F}\u{5EA6}</div>
+                        <div class="apd-config-slider apd-config-speed">
+                            \u{5F39}\u{5E55}\u{901F}\u{5EA6}
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
@@ -920,7 +938,8 @@ class Setting {
             },
             {
                 name: "\u8F83\u6162",
-                value: 7.5
+                value: 7.5,
+                hide: true
             },
             {
                 name: "\u9002\u4E2D",
@@ -928,7 +947,8 @@ class Setting {
             },
             {
                 name: "\u8F83\u5FEB",
-                value: 2.5
+                value: 2.5,
+                hide: true
             },
             {
                 name: "\u6781\u5FEB",
@@ -959,6 +979,8 @@ class Setting {
         tooltip($toggleOff, "\u5F00\u542F\u5F39\u5E55");
         this.template.$toggle = this.query(".apd-toggle");
         this.template.$modes = this.query(".apd-modes");
+        this.template.$antiOverlap = this.query(".apd-anti-overlap");
+        this.template.$syncVideo = this.query(".apd-sync-video");
         this.template.$opacitySlider = this.query(".apd-config-opacity .apd-slider");
         this.template.$opacityValue = this.query(".apd-config-opacity .apd-value");
         this.template.$marginSlider = this.query(".apd-config-margin .apd-slider");
@@ -971,42 +993,59 @@ class Setting {
         this.template.$send = this.query(".apd-send");
     }
     initEvents() {
-        const { option } = this;
-        const { $toggle, $modes } = this.template;
+        const { $toggle, $modes, $antiOverlap, $syncVideo } = this.template;
         this.art.proxy($toggle, "click", ()=>{
-            option.visible = !option.visible;
-            this.danmuku[option.visible ? "show" : "hide"]();
+            this.danmuku[this.option.visible ? "hide" : "show"]();
             this.initState();
         });
         this.art.proxy($modes, "click", (event)=>{
             const $mode = event.target.closest(".apd-mode");
             if (!$mode) return;
             const mode = Number($mode.dataset.mode);
-            if (option.modes.includes(mode)) option.modes = option.modes.filter((m)=>m !== mode);
-            else option.modes.push(mode);
+            if (this.option.modes.includes(mode)) this.danmuku.config({
+                modes: this.option.modes.filter((m)=>m !== mode)
+            });
+            else this.danmuku.config({
+                modes: [
+                    ...this.option.modes,
+                    mode
+                ]
+            });
+            this.initState();
+        });
+        this.art.proxy($antiOverlap, "click", ()=>{
+            this.danmuku.config({
+                antiOverlap: !this.option.antiOverlap
+            });
+            this.initState();
+        });
+        this.art.proxy($syncVideo, "click", ()=>{
+            this.danmuku.config({
+                synchronousPlayback: !this.option.synchronousPlayback
+            });
             this.initState();
         });
     }
     initState() {
-        const { option } = this;
-        this.setData("danmukuVisible", option.visible);
-        this.setData("danmukuMode0", option.modes.includes(0));
-        this.setData("danmukuMode1", option.modes.includes(1));
-        this.setData("danmukuMode2", option.modes.includes(2));
+        this.setData("danmukuVisible", this.option.visible);
+        this.setData("danmukuMode0", this.option.modes.includes(0));
+        this.setData("danmukuMode1", this.option.modes.includes(1));
+        this.setData("danmukuMode2", this.option.modes.includes(2));
+        this.setData("danmukuAntiOverlap", this.option.antiOverlap);
+        this.setData("danmukuSyncVideo", this.option.synchronousPlayback);
         this.slider.opacity.init();
         this.slider.margin.init();
         this.slider.fontSize.init();
         this.slider.speed.init();
     }
     initSliders() {
-        const { option } = this;
         this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,
             steps: [],
             container: this.template.$opacitySlider,
             findIndex: ()=>{
-                return Math.round(option.opacity * 100) || 100;
+                return Math.round(this.option.opacity * 100) || 100;
             },
             onChange: (index)=>{
                 const { $opacityValue } = this.template;
@@ -1022,7 +1061,7 @@ class Setting {
             steps: this.MARGIN,
             container: this.template.$marginSlider,
             findIndex: ()=>{
-                return this.MARGIN.findIndex((item)=>item.value[0] === option.margin[0] && item.value[1] === option.margin[1]) || 2;
+                return this.MARGIN.findIndex((item)=>item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1]) || 2;
             },
             onChange: (index)=>{
                 const margin = this.MARGIN[index];
@@ -1040,8 +1079,8 @@ class Setting {
             container: this.template.$fontSizeSlider,
             findIndex: ()=>{
                 const { clientHeight } = this.art.template.$player;
-                if (typeof option.fontSize === "number") return Math.round(option.fontSize / clientHeight * 100) || 5;
-                else return Math.round(option.fontSize.replace("%", "")) || 5;
+                if (typeof this.option.fontSize === "number") return Math.round(this.option.fontSize / clientHeight * 100) || 5;
+                else return Math.round(this.option.fontSize.replace("%", "")) || 5;
             },
             onChange: (index)=>{
                 const { $fontSizeValue } = this.template;
@@ -1057,7 +1096,7 @@ class Setting {
             steps: this.SPEED,
             container: this.template.$speedSlider,
             findIndex: ()=>{
-                return this.SPEED.findIndex((item)=>item.value === option.speed) || 2;
+                return this.SPEED.findIndex((item)=>item.value === this.option.speed) || 2;
             },
             onChange: (index)=>{
                 const speed = this.SPEED[index];
@@ -1138,8 +1177,8 @@ if (typeof document !== "undefined") {
     }
 }
 
-},{"bundle-text:./style.less":"uaCsY","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV","bundle-text:./img/style.svg":"1Aemm","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./img/mode_0_off.svg":"jKvDJ","bundle-text:./img/mode_0_on.svg":"7eesQ","bundle-text:./img/mode_1_off.svg":"DalV6","bundle-text:./img/mode_1_on.svg":"i0F2W","bundle-text:./img/mode_2_off.svg":"1phDW","bundle-text:./img/mode_2_on.svg":"iHUBM"}],"uaCsY":[function(require,module,exports) {
-module.exports = ".artplayer-plugin-danmuku {\n  align-items: center;\n  gap: 5px;\n  height: 100%;\n  padding: 8px 0;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  width: 24px;\n  height: 24px;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  width: 320px;\n  padding: 10px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -148px;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-item {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-config-item {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-item .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  color: #ffffff80;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 0%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #fff3;\n  border-radius: 5px;\n  align-items: center;\n  height: 100%;\n  margin-left: 6px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000c;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  min-width: none;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  width: 170px;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  padding: 0 12px;\n  display: flex;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  padding: 12px 0;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-input, .art-fullscreen-web .artplayer-plugin-danmuku .apd-input {\n  width: 360px;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on, [data-danmuku-mode0=\"false\"] .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-on, [data-danmuku-mode1=\"false\"] .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-on, [data-danmuku-mode2=\"false\"] .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-on {\n  display: block;\n}\n";
+},{"bundle-text:./style.less":"uaCsY","bundle-text:./img/on.svg":"a9r0e","bundle-text:./img/off.svg":"luia6","bundle-text:./img/config.svg":"lo6sV","bundle-text:./img/style.svg":"1Aemm","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6","bundle-text:./img/mode_0_off.svg":"jKvDJ","bundle-text:./img/mode_0_on.svg":"7eesQ","bundle-text:./img/mode_1_off.svg":"DalV6","bundle-text:./img/mode_1_on.svg":"i0F2W","bundle-text:./img/mode_2_off.svg":"1phDW","bundle-text:./img/mode_2_on.svg":"iHUBM","bundle-text:./img/check_on.svg":"fQ6fo","bundle-text:./img/check_off.svg":"dz3tU"}],"uaCsY":[function(require,module,exports) {
+module.exports = ".artplayer-plugin-danmuku {\n  align-items: center;\n  gap: 5px;\n  height: 100%;\n  padding: 8px 0;\n  font-size: 12px;\n  font-weight: 300;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-icon {\n  cursor: pointer;\n  opacity: .75;\n  transition: all .2s;\n}\n\n.artplayer-plugin-danmuku .apd-icon:hover {\n  opacity: 1;\n}\n\n.artplayer-plugin-danmuku .apd-config {\n  width: 24px;\n  height: 24px;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel {\n  width: 320px;\n  padding: 10px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -148px;\n}\n\n.artplayer-plugin-danmuku .apd-config .apd-config-panel .apd-config-panel-inner {\n  background-color: #000000d9;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-config:hover .apd-config-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-mode, .artplayer-plugin-danmuku .apd-config-slider, .artplayer-plugin-danmuku .apd-config-other {\n  margin-bottom: 15px;\n}\n\n.artplayer-plugin-danmuku .apd-modes {\n  align-items: center;\n  gap: 20px;\n  margin-top: 5px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-modes .apd-mode {\n  cursor: pointer;\n  text-align: center;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider {\n  align-items: center;\n  gap: 12px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-slider .apd-value {\n  text-align: right;\n  width: 32px;\n}\n\n.artplayer-plugin-danmuku .apd-slider {\n  cursor: pointer;\n  color: #ffffff80;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 20px;\n  display: flex;\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-line {\n  background-color: #ffffff40;\n  border-radius: 3px;\n  width: 100%;\n  height: 2px;\n  position: relative;\n  overflow: hidden;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points {\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-points .apd-slider-point {\n  background-color: #ffffff80;\n  border-radius: 50%;\n  width: 2px;\n  height: 2px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-progress {\n  background-color: #00a1d6;\n  width: 0%;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-dot {\n  background-color: #00a1d6;\n  border-radius: 50%;\n  width: 12px;\n  height: 12px;\n  position: absolute;\n  left: 0%;\n  transform: translateX(-6px);\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps {\n  justify-content: space-between;\n  align-items: center;\n  width: calc(100% + 32px);\n  display: flex;\n  position: absolute;\n  bottom: -12px;\n}\n\n.artplayer-plugin-danmuku .apd-slider .apd-slider-steps .apd-slider-step {\n  text-align: center;\n  flex-shrink: 0;\n  width: 36px;\n  scale: .95;\n}\n\n.artplayer-plugin-danmuku .apd-config-other {\n  align-items: center;\n  gap: 20px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-check-off, .artplayer-plugin-danmuku .apd-config-other .apd-check-on {\n  width: 16px;\n  height: 16px;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other {\n  cursor: pointer;\n  align-items: center;\n  gap: 2px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-config-other .apd-other:hover {\n  color: #00a1d6;\n}\n\n.artplayer-plugin-danmuku .apd-emitter {\n  background-color: #fff3;\n  border-radius: 5px;\n  align-items: center;\n  height: 100%;\n  margin-left: 6px;\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-style {\n  position: relative;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel {\n  width: 250px;\n  padding: 7px;\n  display: none;\n  position: absolute;\n  bottom: 24px;\n  left: -113px;\n}\n\n.artplayer-plugin-danmuku .apd-style .apd-style-panel .apd-style-panel-inner {\n  background-color: #000c;\n  border-radius: 3px;\n  width: 100%;\n  padding: 10px;\n}\n\n.artplayer-plugin-danmuku .apd-style:hover .apd-style-panel {\n  display: flex;\n}\n\n.artplayer-plugin-danmuku .apd-input {\n  color: #fff;\n  min-width: none;\n  background-color: #0000;\n  border: none;\n  outline: none;\n  width: 170px;\n  height: 100%;\n}\n\n.artplayer-plugin-danmuku .apd-input::placeholder {\n  color: #ffffff80;\n}\n\n.artplayer-plugin-danmuku .apd-send {\n  cursor: pointer;\n  background-color: #00a1d6;\n  border-top-right-radius: 5px;\n  border-bottom-right-radius: 5px;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  padding: 0 12px;\n  display: flex;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku, .art-fullscreen-web .artplayer-plugin-danmuku {\n  padding: 12px 0;\n}\n\n.art-fullscreen .artplayer-plugin-danmuku .apd-input, .art-fullscreen-web .artplayer-plugin-danmuku .apd-input {\n  width: 360px;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-off {\n  display: block;\n}\n\n[data-danmuku-visible=\"false\"] .apd-toggle-on, [data-danmuku-visible=\"true\"] .apd-toggle-off {\n  display: none;\n}\n\n[data-danmuku-visible=\"true\"] .apd-toggle-on, [data-danmuku-mode0=\"false\"] .apd-mode-0-off {\n  display: block;\n}\n\n[data-danmuku-mode0=\"false\"] .apd-mode-0-on {\n  display: none;\n}\n\n[data-danmuku-mode0=\"false\"] .art-danmuku [data-mode=\"0\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-off {\n  display: none;\n}\n\n[data-danmuku-mode0=\"true\"] .apd-mode-0-on, [data-danmuku-mode1=\"false\"] .apd-mode-1-off {\n  display: block;\n}\n\n[data-danmuku-mode1=\"false\"] .apd-mode-1-on {\n  display: none;\n}\n\n[data-danmuku-mode1=\"false\"] .art-danmuku [data-mode=\"1\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-off {\n  display: none;\n}\n\n[data-danmuku-mode1=\"true\"] .apd-mode-1-on, [data-danmuku-mode2=\"false\"] .apd-mode-2-off {\n  display: block;\n}\n\n[data-danmuku-mode2=\"false\"] .apd-mode-2-on {\n  display: none;\n}\n\n[data-danmuku-mode2=\"false\"] .art-danmuku [data-mode=\"2\"] {\n  opacity: 0 !important;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-off {\n  display: none;\n}\n\n[data-danmuku-mode2=\"true\"] .apd-mode-2-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-anti-overlap=\"false\"] .apd-anti-overlap .apd-check-off, [data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-anti-overlap=\"true\"] .apd-anti-overlap .apd-check-off, [data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-on {\n  display: none;\n}\n\n[data-danmuku-sync-video=\"false\"] .apd-sync-video .apd-check-off, [data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-on {\n  display: block;\n}\n\n[data-danmuku-sync-video=\"true\"] .apd-sync-video .apd-check-off {\n  display: none;\n}\n";
 
 },{}],"a9r0e":[function(require,module,exports) {
 module.exports = "<svg class=\"apd-icon apd-toggle-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill-rule=\"evenodd\" d=\"M11.989 4.828c-.47 0-.975.004-1.515.012l-1.71-2.566a1.008 1.008 0 0 0-1.678 1.118l.999 1.5c-.681.018-1.403.04-2.164.068a4.013 4.013 0 0 0-3.83 3.44c-.165 1.15-.245 2.545-.245 4.185 0 1.965.115 3.67.35 5.116a4.012 4.012 0 0 0 3.763 3.363l.906.046c1.205.063 1.808.095 3.607.095a.988.988 0 0 0 0-1.975c-1.758 0-2.339-.03-3.501-.092l-.915-.047a2.037 2.037 0 0 1-1.91-1.708c-.216-1.324-.325-2.924-.325-4.798 0-1.563.076-2.864.225-3.904.14-.977.96-1.713 1.945-1.747 2.444-.087 4.465-.13 6.063-.131 1.598 0 3.62.044 6.064.13.96.034 1.71.81 1.855 1.814.075.524.113 1.962.141 3.065v.002c.01.342.017.65.025.88a.987.987 0 1 0 1.974-.068c-.008-.226-.016-.523-.025-.856v-.027c-.03-1.118-.073-2.663-.16-3.276-.273-1.906-1.783-3.438-3.74-3.507-.9-.032-1.743-.058-2.531-.078l1.05-1.46a1.008 1.008 0 0 0-1.638-1.177l-1.862 2.59c-.38-.004-.744-.007-1.088-.007h-.13Zm.521 4.775h-1.32v4.631h2.222v.847h-2.618v1.078h2.618l.003.678c.36.026.714.163 1.01.407h.11v-1.085h2.694v-1.078h-2.695v-.847H16.8v-4.63h-1.276a8.59 8.59 0 0 0 .748-1.42L15.183 7.8a14.232 14.232 0 0 1-.814 1.804h-1.518l.693-.308a8.862 8.862 0 0 0-.814-1.408l-1.045.352c.297.396.572.847.825 1.364Zm-4.18 3.564.154-1.485h1.98V8.294h-3.2v.98H9.33v1.43H7.472l-.308 3.453h2.277c0 1.166-.044 1.925-.12 2.277-.078.352-.386.528-.936.528-.308 0-.616-.022-.902-.055l.297 1.067.062.005c.285.02.551.04.818.04 1.001-.067 1.562-.419 1.694-1.057.11-.638.176-1.903.176-3.795h-2.2Zm7.458.11v-.858h-1.254v.858h1.254Zm-2.376-.858v.858h-1.199v-.858h1.2Zm-1.199-.946h1.2v-.902h-1.2v.902Zm2.321 0v-.902h1.254v.902h-1.254Z\" clip-rule=\"evenodd\" fill=\"#fff\"></path><path fill=\"#00AEEC\" fill-rule=\"evenodd\" d=\"M22.846 14.627a1 1 0 0 0-1.412.075l-5.091 5.703-2.216-2.275-.097-.086-.008-.005a1 1 0 0 0-1.322 1.493l2.963 3.041.093.083.007.005c.407.315 1 .27 1.354-.124l5.81-6.505.08-.102.005-.008a1 1 0 0 0-.166-1.295Z\" clip-rule=\"evenodd\"></path></svg>";
@@ -1170,6 +1209,12 @@ module.exports = "<svg class=\"apd-icon apd-mode-2-off\" xmlns:xlink=\"http://ww
 
 },{}],"iHUBM":[function(require,module,exports) {
 module.exports = "<svg class=\"apd-icon apd-mode-2-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" data-pointer=\"none\" style=\"enable-background: new 0 0 28 28\" viewBox=\"0 0 28 28\" width=\"28\" height=\"28\"><path d=\"M23 3H5a4 4 0 0 0-4 4v14a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4V7a4 4 0 0 0-4-4zM9 21H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z\" fill=\"#FFFFFF\"></path></svg>";
+
+},{}],"fQ6fo":[function(require,module,exports) {
+module.exports = "<svg class=\"apd-icon apd-check-on\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"m13 18.25-1.8-1.8c-.6-.6-1.65-.6-2.25 0s-.6 1.5 0 2.25l2.85 2.85c.318.318.762.468 1.2.448.438.02.882-.13 1.2-.448l8.85-8.85c.6-.6.6-1.65 0-2.25s-1.65-.6-2.25 0l-7.8 7.8zM8 4h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#00AEEC\"></path></svg>";
+
+},{}],"dz3tU":[function(require,module,exports) {
+module.exports = "<svg class=\"apd-icon apd-check-off\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns=\"http://www.w3.org/2000/svg\" data-pointer=\"none\" viewBox=\"0 0 32 32\" width=\"32\" height=\"32\"><path d=\"M8 6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H8zm0-2h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H8c-2.21 0-4-1.79-4-4V8c0-2.21 1.79-4 4-4z\" fill=\"#FFFFFF\"></path></svg>";
 
 },{}],"bZziT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

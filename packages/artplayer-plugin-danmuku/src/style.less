@@ -46,7 +46,8 @@
     }
 
     .apd-config-mode,
-    .apd-config-item {
+    .apd-config-slider,
+    .apd-config-other {
         margin-bottom: 15px;
     }
 
@@ -62,7 +63,7 @@
         }
     }
 
-    .apd-config-item {
+    .apd-config-slider {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -136,6 +137,29 @@
                 width: 36px;
                 text-align: center;
                 scale: 0.95;
+            }
+        }
+    }
+
+    .apd-config-other {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .apd-check-off,
+        .apd-check-on {
+            width: 16px;
+            height: 16px;
+        }
+
+        .apd-other {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: 2px;
+
+            &:hover {
+                color: #00a1d6;
             }
         }
     }
@@ -302,5 +326,53 @@
 
     .apd-mode-2-on {
         display: block;
+    }
+}
+
+[data-danmuku-anti-overlap='false'] {
+    .apd-anti-overlap {
+        .apd-check-on {
+            display: none;
+        }
+
+        .apd-check-off {
+            display: block;
+        }
+    }
+}
+
+[data-danmuku-anti-overlap='true'] {
+    .apd-anti-overlap {
+        .apd-check-on {
+            display: block;
+        }
+
+        .apd-check-off {
+            display: none;
+        }
+    }
+}
+
+[data-danmuku-sync-video='false'] {
+    .apd-sync-video {
+        .apd-check-on {
+            display: none;
+        }
+
+        .apd-check-off {
+            display: block;
+        }
+    }
+}
+
+[data-danmuku-sync-video='true'] {
+    .apd-sync-video {
+        .apd-check-on {
+            display: block;
+        }
+
+        .apd-check-off {
+            display: none;
+        }
     }
 }

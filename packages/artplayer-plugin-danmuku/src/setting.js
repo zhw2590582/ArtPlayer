@@ -9,13 +9,14 @@ import $mode_1_off from 'bundle-text:./img/mode_1_off.svg';
 import $mode_1_on from 'bundle-text:./img/mode_1_on.svg';
 import $mode_2_off from 'bundle-text:./img/mode_2_off.svg';
 import $mode_2_on from 'bundle-text:./img/mode_2_on.svg';
+import $check_on from 'bundle-text:./img/check_on.svg';
+import $check_off from 'bundle-text:./img/check_off.svg';
 
 export default class Setting {
     constructor(art, danmuku) {
         this.art = art;
         this.danmuku = danmuku;
         this.utils = art.constructor.utils;
-        this.option = danmuku.option;
 
         const { setStyle } = this.utils;
         const { $controlsCenter } = art.template;
@@ -52,6 +53,10 @@ export default class Setting {
         this.mount(this.option.mount);
     }
 
+    get option() {
+        return this.danmuku.option;
+    }
+
     get outside() {
         return this.template.$mount !== this.template.$controlsCenter;
     }
@@ -67,7 +72,7 @@ export default class Setting {
                 <div class="apd-config-panel">
                     <div class="apd-config-panel-inner">
                         <div class="apd-config-mode">
-                            <div class="apd-title">按类型屏蔽</div>
+                            按类型屏蔽
                             <div class="apd-modes">
                                 <div data-mode="0" class="apd-mode">
                                     ${$mode_0_off}${$mode_0_on}
@@ -83,23 +88,33 @@ export default class Setting {
                                 </div>
                             </div>
                         </div>
-                        <div class="apd-config-item apd-config-opacity">
-                            <div class="apd-title">不透明度</div>
+                        <div class="apd-config-other">
+                            <div class="apd-other apd-anti-overlap">
+                                ${$check_on}${$check_off}
+                                防止弹幕重叠
+                            </div>
+                            <div class="apd-other apd-sync-video">
+                                ${$check_on}${$check_off}
+                                同步视频速度
+                            </div>
+                        </div>
+                        <div class="apd-config-slider apd-config-opacity">
+                            不透明度
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-item apd-config-margin">
-                            <div class="apd-title">显示区域</div>
+                        <div class="apd-config-slider apd-config-margin">
+                            显示区域
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-item apd-config-fontSize">
-                            <div class="apd-title">弹幕字号</div>
+                        <div class="apd-config-slider apd-config-fontSize">
+                            弹幕字号
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
-                        <div class="apd-config-item apd-config-speed">
-                            <div class="apd-title">弹幕速度</div>
+                        <div class="apd-config-slider apd-config-speed">
+                            弹幕速度
                             <div class="apd-slider"></div>
                             <div class="apd-value"></div>
                         </div>
@@ -149,6 +164,7 @@ export default class Setting {
             {
                 name: '较慢',
                 value: 7.5,
+                hide: true,
             },
             {
                 name: '适中',
@@ -157,6 +173,7 @@ export default class Setting {
             {
                 name: '较快',
                 value: 2.5,
+                hide: true,
             },
             {
                 name: '极快',
@@ -196,6 +213,9 @@ export default class Setting {
         this.template.$toggle = this.query('.apd-toggle');
         this.template.$modes = this.query('.apd-modes');
 
+        this.template.$antiOverlap = this.query('.apd-anti-overlap');
+        this.template.$syncVideo = this.query('.apd-sync-video');
+
         this.template.$opacitySlider = this.query('.apd-config-opacity .apd-slider');
         this.template.$opacityValue = this.query('.apd-config-opacity .apd-value');
         this.template.$marginSlider = this.query('.apd-config-margin .apd-slider');
@@ -210,12 +230,10 @@ export default class Setting {
     }
 
     initEvents() {
-        const { option } = this;
-        const { $toggle, $modes } = this.template;
+        const { $toggle, $modes, $antiOverlap, $syncVideo } = this.template;
 
         this.art.proxy($toggle, 'click', () => {
-            option.visible = !option.visible;
-            this.danmuku[option.visible ? 'show' : 'hide']();
+            this.danmuku[this.option.visible ? 'hide' : 'show']();
             this.initState();
         });
 
@@ -223,21 +241,40 @@ export default class Setting {
             const $mode = event.target.closest('.apd-mode');
             if (!$mode) return;
             const mode = Number($mode.dataset.mode);
-            if (option.modes.includes(mode)) {
-                option.modes = option.modes.filter((m) => m !== mode);
+            if (this.option.modes.includes(mode)) {
+                this.danmuku.config({
+                    modes: this.option.modes.filter((m) => m !== mode),
+                });
             } else {
-                option.modes.push(mode);
+                this.danmuku.config({
+                    modes: [...this.option.modes, mode],
+                });
             }
+            this.initState();
+        });
+
+        this.art.proxy($antiOverlap, 'click', () => {
+            this.danmuku.config({
+                antiOverlap: !this.option.antiOverlap,
+            });
+            this.initState();
+        });
+
+        this.art.proxy($syncVideo, 'click', () => {
+            this.danmuku.config({
+                synchronousPlayback: !this.option.synchronousPlayback,
+            });
             this.initState();
         });
     }
 
     initState() {
-        const { option } = this;
-        this.setData('danmukuVisible', option.visible);
-        this.setData('danmukuMode0', option.modes.includes(0));
-        this.setData('danmukuMode1', option.modes.includes(1));
-        this.setData('danmukuMode2', option.modes.includes(2));
+        this.setData('danmukuVisible', this.option.visible);
+        this.setData('danmukuMode0', this.option.modes.includes(0));
+        this.setData('danmukuMode1', this.option.modes.includes(1));
+        this.setData('danmukuMode2', this.option.modes.includes(2));
+        this.setData('danmukuAntiOverlap', this.option.antiOverlap);
+        this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
         this.slider.opacity.init();
         this.slider.margin.init();
         this.slider.fontSize.init();
@@ -245,15 +282,13 @@ export default class Setting {
     }
 
     initSliders() {
-        const { option } = this;
-
         this.slider.opacity = this.createSlider({
             min: 0,
             max: 100,
             steps: [],
             container: this.template.$opacitySlider,
             findIndex: () => {
-                return Math.round(option.opacity * 100) || 100;
+                return Math.round(this.option.opacity * 100) || 100;
             },
             onChange: (index) => {
                 const { $opacityValue } = this.template;
@@ -272,7 +307,7 @@ export default class Setting {
             findIndex: () => {
                 return (
                     this.MARGIN.findIndex(
-                        (item) => item.value[0] === option.margin[0] && item.value[1] === option.margin[1],
+                        (item) => item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1],
                     ) || 2
                 );
             },
@@ -293,10 +328,10 @@ export default class Setting {
             container: this.template.$fontSizeSlider,
             findIndex: () => {
                 const { clientHeight } = this.art.template.$player;
-                if (typeof option.fontSize === 'number') {
-                    return Math.round((option.fontSize / clientHeight) * 100) || 5;
+                if (typeof this.option.fontSize === 'number') {
+                    return Math.round((this.option.fontSize / clientHeight) * 100) || 5;
                 } else {
-                    return Math.round(option.fontSize.replace('%', '')) || 5;
+                    return Math.round(this.option.fontSize.replace('%', '')) || 5;
                 }
             },
             onChange: (index) => {
@@ -314,7 +349,7 @@ export default class Setting {
             steps: this.SPEED,
             container: this.template.$speedSlider,
             findIndex: () => {
-                return this.SPEED.findIndex((item) => item.value === option.speed) || 2;
+                return this.SPEED.findIndex((item) => item.value === this.option.speed) || 2;
             },
             onChange: (index) => {
                 const speed = this.SPEED[index];
