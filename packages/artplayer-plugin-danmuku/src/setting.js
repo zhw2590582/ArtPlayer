@@ -63,20 +63,22 @@ export default class Setting {
         art.on('fullscreenWeb', (state) => this.onFullscreen(state));
     }
 
-    static icons = {
-        $on,
-        $off,
-        $config,
-        $style,
-        $mode_0_off,
-        $mode_0_on,
-        $mode_1_off,
-        $mode_1_on,
-        $mode_2_off,
-        $mode_2_on,
-        $check_on,
-        $check_off,
-    };
+    static get icons() {
+        return {
+            $on,
+            $off,
+            $config,
+            $style,
+            $mode_0_off,
+            $mode_0_on,
+            $mode_1_off,
+            $mode_1_on,
+            $mode_2_off,
+            $mode_2_on,
+            $check_on,
+            $check_off,
+        };
+    }
 
     get option() {
         return this.danmuku.option;

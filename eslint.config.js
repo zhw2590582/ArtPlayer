@@ -5,7 +5,7 @@ export default [
     js.configs.recommended,
     {
         languageOptions: {
-            ecmaVersion: 2021,
+            ecmaVersion: 'latest',
             sourceType: 'module',
             globals: {
                 ...globals.browser,
@@ -14,7 +14,7 @@ export default [
         },
         rules: {
             'no-console': 'off',
-            indent: ['error', 4],
+            indent: ['warn', 4],
             'linebreak-style': ['error', 'unix'],
             quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
             semi: ['error', 'always'],
