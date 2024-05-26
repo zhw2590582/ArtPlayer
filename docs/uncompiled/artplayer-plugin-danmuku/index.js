@@ -898,22 +898,22 @@ class Setting {
                         <div class="apd-config-slider apd-config-opacity">
                             \u{4E0D}\u{900F}\u{660E}\u{5EA6}
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">\u{672A}\u{77E5}</div>
                         </div>
                         <div class="apd-config-slider apd-config-margin">
                             \u{663E}\u{793A}\u{533A}\u{57DF}
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">\u{672A}\u{77E5}</div>
                         </div>
                         <div class="apd-config-slider apd-config-fontSize">
                             \u{5F39}\u{5E55}\u{5B57}\u{53F7}
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">\u{672A}\u{77E5}</div>
                         </div>
                         <div class="apd-config-slider apd-config-speed">
                             \u{5F39}\u{5E55}\u{901F}\u{5EA6}
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">\u{672A}\u{77E5}</div>
                         </div>
                     </div>
                 </div>
@@ -1132,7 +1132,7 @@ class Setting {
             steps: [],
             container: this.template.$opacitySlider,
             findIndex: ()=>{
-                return Math.round(this.option.opacity * 100) || 100;
+                return Math.round(this.option.opacity * 100);
             },
             onChange: (index)=>{
                 const { $opacityValue } = this.template;
@@ -1149,10 +1149,11 @@ class Setting {
             steps: this.MARGIN,
             container: this.template.$marginSlider,
             findIndex: ()=>{
-                return this.MARGIN.findIndex((item)=>item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1]) || 2;
+                return this.MARGIN.findIndex((item)=>item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1]);
             },
             onChange: (index)=>{
                 const margin = this.MARGIN[index];
+                if (!margin) return;
                 const { $marginValue } = this.template;
                 $marginValue.textContent = margin.name;
                 const value = margin.value;
@@ -1168,7 +1169,7 @@ class Setting {
             container: this.template.$fontSizeSlider,
             findIndex: ()=>{
                 const { clientHeight } = this.art.template.$player;
-                return Math.round(this.option.fontSize / clientHeight * 100) || 5;
+                return Math.round(this.option.fontSize / clientHeight * 100);
             },
             onChange: (index)=>{
                 const { $fontSizeValue } = this.template;
@@ -1186,13 +1187,15 @@ class Setting {
             steps: this.SPEED,
             container: this.template.$speedSlider,
             findIndex: ()=>{
-                return this.SPEED.findIndex((item)=>item.value === this.option.speed) || 2;
+                return this.SPEED.findIndex((item)=>item.value === this.option.speed);
             },
             onChange: (index)=>{
                 const speed = this.SPEED[index];
+                if (!speed) return;
                 const { $speedValue } = this.template;
                 $speedValue.textContent = speed.name;
                 const value = speed.value;
+                console.log(index, value);
                 if (value !== this.option.speed) this.danmuku.config({
                     speed: value
                 });
@@ -1217,11 +1220,11 @@ class Setting {
         const $progress = query(".apd-slider-progress", container);
         let isDroging = false;
         function reset(index = findIndex()) {
-            const value = clamp(index, min, max);
-            const percentage = (value - min) / (max - min);
+            if (index < min || index > max) return;
+            const percentage = (index - min) / (max - min);
             $dot.style.left = `${percentage * 100}%`;
             if (steps.length === 0) $progress.style.width = $dot.style.left;
-            onChange(value);
+            onChange(index);
         }
         function updateLeft(event) {
             const { left, width } = container.getBoundingClientRect();

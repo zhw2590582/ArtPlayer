@@ -128,22 +128,22 @@ export default class Setting {
                         <div class="apd-config-slider apd-config-opacity">
                             不透明度
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">未知</div>
                         </div>
                         <div class="apd-config-slider apd-config-margin">
                             显示区域
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">未知</div>
                         </div>
                         <div class="apd-config-slider apd-config-fontSize">
                             弹幕字号
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">未知</div>
                         </div>
                         <div class="apd-config-slider apd-config-speed">
                             弹幕速度
                             <div class="apd-slider"></div>
-                            <div class="apd-value"></div>
+                            <div class="apd-value">未知</div>
                         </div>
                     </div>
                 </div>
@@ -377,7 +377,7 @@ export default class Setting {
             steps: [],
             container: this.template.$opacitySlider,
             findIndex: () => {
-                return Math.round(this.option.opacity * 100) || 100;
+                return Math.round(this.option.opacity * 100);
             },
             onChange: (index) => {
                 const { $opacityValue } = this.template;
@@ -397,14 +397,13 @@ export default class Setting {
             steps: this.MARGIN,
             container: this.template.$marginSlider,
             findIndex: () => {
-                return (
-                    this.MARGIN.findIndex(
-                        (item) => item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1],
-                    ) || 2
+                return this.MARGIN.findIndex(
+                    (item) => item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1],
                 );
             },
             onChange: (index) => {
                 const margin = this.MARGIN[index];
+                if (!margin) return;
                 const { $marginValue } = this.template;
                 $marginValue.textContent = margin.name;
                 const value = margin.value;
@@ -423,7 +422,7 @@ export default class Setting {
             container: this.template.$fontSizeSlider,
             findIndex: () => {
                 const { clientHeight } = this.art.template.$player;
-                return Math.round((this.option.fontSize / clientHeight) * 100) || 5;
+                return Math.round((this.option.fontSize / clientHeight) * 100);
             },
             onChange: (index) => {
                 const { $fontSizeValue } = this.template;
@@ -444,13 +443,15 @@ export default class Setting {
             steps: this.SPEED,
             container: this.template.$speedSlider,
             findIndex: () => {
-                return this.SPEED.findIndex((item) => item.value === this.option.speed) || 2;
+                return this.SPEED.findIndex((item) => item.value === this.option.speed);
             },
             onChange: (index) => {
                 const speed = this.SPEED[index];
+                if (!speed) return;
                 const { $speedValue } = this.template;
                 $speedValue.textContent = speed.name;
                 const value = speed.value;
+                console.log(index, value);
                 if (value !== this.option.speed) {
                     this.danmuku.config({
                         speed: value,
@@ -482,13 +483,13 @@ export default class Setting {
         let isDroging = false;
 
         function reset(index = findIndex()) {
-            const value = clamp(index, min, max);
-            const percentage = (value - min) / (max - min);
+            if (index < min || index > max) return;
+            const percentage = (index - min) / (max - min);
             $dot.style.left = `${percentage * 100}%`;
             if (steps.length === 0) {
                 $progress.style.width = $dot.style.left;
             }
-            onChange(value);
+            onChange(index);
         }
 
         function updateLeft(event) {
