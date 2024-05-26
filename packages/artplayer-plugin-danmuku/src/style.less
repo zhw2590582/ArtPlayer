@@ -2,10 +2,13 @@
 
 .artplayer-plugin-danmuku {
     display: flex;
+    position: relative;
+    z-index: 100;
     align-items: center;
+    justify-content: center;
     font-size: 12px;
-    height: 100%;
-    padding: 8px 0;
+    height: 32px;
+    width: 100%;
     font-weight: 300;
     gap: 5px;
 
@@ -168,6 +171,7 @@
 
     .apd-emitter {
         display: flex;
+        flex: 1;
         align-items: center;
         height: 100%;
         margin-left: 6px;
@@ -226,7 +230,8 @@
     .apd-input {
         outline: none;
         height: 100%;
-        width: 170px;
+        // width: 170px;
+        flex: 1;
         border: none;
         color: #fff;
         line-height: 1;
@@ -261,8 +266,8 @@
 .art-fullscreen,
 .art-fullscreen-web {
     .artplayer-plugin-danmuku {
+        height: 38px;
         gap: 10px;
-        padding: 12px 0;
 
         .apd-config-icon,
         .apd-toggle-off,
@@ -271,8 +276,9 @@
             height: 28px;
         }
 
-        .apd-input {
-            width: 360px;
+        .apd-emitter {
+            width: 390px;
+            flex: none;
         }
     }
 }
