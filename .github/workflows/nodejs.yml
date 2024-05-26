@@ -20,9 +20,9 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
     - name: npm install, lint, build, and test
@@ -40,6 +40,6 @@ jobs:
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git add -f docs
         git commit -m 'Deploy to GitHub Pages'
-        git push --force origin `git subtree split --prefix docs master`:gh-pages
+        git push --force-with-lease origin `git subtree split --prefix docs master`:gh-pages
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
