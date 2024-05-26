@@ -40,31 +40,113 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 :::
 
-## 选项
+## 弹幕结构
+
+每一个弹幕是一个对象，多个弹幕组成的数组就是弹幕源，通常只需要`text`就可以发送一个弹幕，其余都是非必要参数
 
 ```js
 {
-    danmuku: [], // 弹幕库，支持数组, xml 地址, Promise返回数组
-    speed: 5, // 弹幕持续时间，单位秒，范围在[1 ~ 10]
-    opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
-    fontSize: 25, // 字体大小，支持数字和百分比
-    color: '#FFFFFF', // 默认字体颜色
-    mode: 0, // 默认模式，0-滚动，1-静止
-    margin: [10, '25%'], // 弹幕上下边距，支持数字和百分比
-    antiOverlap: true, // 是否防重叠
-    useWorker: true, // 是否使用 web worker
-    synchronousPlayback: false, // 是否同步到播放速度
-    filter: (danmu) => danmu.text.length < 50, // 弹幕过滤函数，返回 true 则可以发送
-    lockTime: 5, // 输入框锁定时间，单位秒，范围在[1 ~ 60]
-    maxLength: 100, // 输入框最大可输入的字数，范围在[0 ~ 500]
-    minWidth: 200, // 输入框最小宽度，范围在[0 ~ 500]，填 0 则为无限制
-    maxWidth: 400, // 输入框最大宽度，范围在[0 ~ Infinity]，填 0 则为 100% 宽度
-    theme: 'dark', // 输入框自定义挂载时的主题色，默认为 dark，可以选填亮色 light
-    heatmap: true, // 是否开启弹幕热度图, 默认为 false
-    beforeEmit: (danmu) => !!danmu.text.trim(), // 发送弹幕前的自定义校验，返回 true 则可以发送
-    // 通过 mount 选项可以自定义输入框挂载的位置，默认挂载于播放器底部，仅在当宽度小于最小值时生效
-    mount: document.querySelector('.artplayer-danmuku'),
+    text: '', // 弹幕文本
+    time: 10, // 弹幕时间, 默认为当前播放器时间
+    mode: 0, // 弹幕模式: 0: 滚动(默认)，1: 顶部，2: 底部
+    color: '#FFFFFF', // 弹幕颜色，默认为白色
+    border: false, // 弹幕是否有描边, 默认为 false
+    style: {}, // 弹幕自定义样式, 默认为空对象
+    escape: true, // 弹幕文本是否转义, 默认为 true
 }
+```
+
+## 全部选项
+
+只有`danmuku`是必须的参数，其余都是非必填
+
+```js
+{
+    danmuku: [], // 弹幕源
+    speed: 5, // 弹幕持续时间，范围在[1 ~ 10]
+    margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
+    opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
+    color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
+    mode: 0, // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
+    modes: [0, 1, 2], // 弹幕可见的模式
+    fontSize: 25, // 弹幕字体大小，支持像素数字和百分比
+    antiOverlap: true, // 弹幕是否防重叠
+    synchronousPlayback: false, // 是否同步播放速度
+    mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
+    heatmap: false, // 是否开启热力图
+    points: [], // 热力图数据
+    filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
+    beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
+    beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
+    visible: true, // 弹幕层是否可见
+    maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
+    lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
+    theme: 'dark', // 弹幕主题，支持 dark 和 light，只在自定义挂载时生效
+}
+```
+
+## 生命周期
+
+来自用户输入的弹幕: 
+
+`beforeEmit -> filter -> beforeVisible -> artplayerPluginDanmuku:visible`
+
+来自服务器的弹幕: 
+
+`filter -> beforeVisible -> artplayerPluginDanmuku:visible`
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
+
+```js
+// 保存到数据库
+function saveDanmu(danmu) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(true);
+        }, 1000);
+    })
+}
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    plugins: [
+        artplayerPluginDanmuku({
+            danmuku: '/assets/sample/danmuku.xml',
+
+            // 这是用户在输入框输入弹幕文本，然后点击发送按钮后触发的函数
+            // 你可以对弹幕做合法校验，或者做存库处理
+            // 当返回true后才表示把弹幕加入到弹幕队列
+            async beforeEmit(danmu) {
+               const isDirty = (/fuck/i).test(danmu.text);
+               if (isDirty) return false;
+               const state = await saveDanmu(danmu);
+               return state;
+            },
+
+            // 这里是所有弹幕的过滤器，包含来自服务端的和来自用户输入的
+            // 你可以对弹幕做合法校验
+            // 当返回true后才表示把弹幕加入到弹幕队列
+            filter(danmu) {
+                return danmu.text.length <= 200;
+            },
+
+            // 这是弹幕即将显示的时触发的函数
+            // 你可以对弹幕做合法校验
+            // 当返回true后才表示可以马上发送到播放器里
+            async beforeVisible(danmu) {
+               return true;
+            },
+        }),
+    ],
+});
+
+// 弹幕已经出现在播放器里，你可以访问到弹幕的dom元素里
+art.on('artplayerPluginDanmuku:visible', danmu => {
+    danmu.$ref.innerHTML = 'ଘ(੭ˊᵕˋ)੭: ' + danmu.$ref.innerHTML;
+})
 ```
 
 ## 使用弹幕数组
@@ -77,31 +159,11 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    setting: true,
     plugins: [
         artplayerPluginDanmuku({
-            // 弹幕数组
             danmuku: [
                 {
-                    text: '111', // 弹幕文本
-                    time: 1, // 发送时间，单位秒
-                    color: '#fff', // 弹幕局部颜色
-                    border: false, // 是否显示描边
-                    mode: 0, // 弹幕模式: 0表示滚动, 1静止
-                },
-                {
-                    text: '222',
-                    time: 2,
-                    color: 'red',
-                    border: true,
-                    mode: 0,
-                },
-                {
-                    text: '333',
-                    time: 3,
-                    color: 'green',
-                    border: false,
-                    mode: 1,
+                    text: '使用数组',
                 },
             ],
         }),
@@ -111,6 +173,8 @@ var art = new Artplayer({
 
 ## 使用弹幕 XML
 
+弹幕 XML 文件，和 Bilibili 网站的弹幕格式一致
+
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
 </div>
@@ -121,14 +185,13 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     plugins: [
         artplayerPluginDanmuku({
-            // 弹幕 XML 文件，和 Bilibili 网站的弹幕格式一致
             danmuku: '/assets/sample/danmuku.xml',
         }),
     ],
 });
 ```
 
-## 使用异步调用
+## 使用异步返回
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -140,21 +203,11 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     plugins: [
         artplayerPluginDanmuku({
-            // 使用 Promise 异步返回
             danmuku: function () {
                 return new Promise((resovle) => {
                     return resovle([
                         {
-                            text: '111',
-                            time: 1,
-                        },
-                        {
-                            text: '222',
-                            time: 2,
-                        },
-                        {
-                            text: '333',
-                            time: 3,
+                            text: '使用 Promise 异步返回',
                         },
                     ]);
                 });

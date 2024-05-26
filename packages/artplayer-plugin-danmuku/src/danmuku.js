@@ -49,7 +49,7 @@ export default class Danmuku {
             margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
             opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
             color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
-            mode: 0, // 弹幕模式: 0: 滚动，1: 顶部，2: 底部
+            mode: 0, // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
             modes: [0, 1, 2], // 弹幕可见的模式
             fontSize: 25, // 弹幕字体大小，支持像素数字和百分比
             antiOverlap: true, // 弹幕是否防重叠
@@ -63,8 +63,7 @@ export default class Danmuku {
             visible: true, // 弹幕层是否可见
             maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
             lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
-            setting: true, // 是否显示弹幕发射器
-            theme: 'dark', // 弹幕主题，只在自定义挂载时生效
+            theme: 'dark', // 弹幕主题，支持 dark 和 light，只在自定义挂载时生效
         };
     }
 
@@ -90,7 +89,6 @@ export default class Danmuku {
             visible: 'boolean',
             maxLength: 'number',
             lockTime: 'number',
-            setting: 'boolean',
             theme: 'string',
         };
     }

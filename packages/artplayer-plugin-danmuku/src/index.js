@@ -5,11 +5,7 @@ import heatmap from './heatmap';
 export default function artplayerPluginDanmuku(option) {
     return (art) => {
         const danmuku = new Danmuku(art, option);
-
-        let setting = null;
-        if (danmuku.option.setting) {
-            setting = new Setting(art, danmuku);
-        }
+        const setting = new Setting(art, danmuku);
 
         if (danmuku.option.heatmap) {
             heatmap(art, danmuku, danmuku.option.heatmap);
@@ -23,7 +19,7 @@ export default function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
-            mount: setting ? setting.mount.bind(setting) : null,
+            mount: setting.mount.bind(setting),
             get option() {
                 return danmuku.option;
             },
@@ -36,6 +32,8 @@ export default function artplayerPluginDanmuku(option) {
         };
     };
 }
+
+artplayerPluginDanmuku.icons = Setting.icons;
 
 if (typeof window !== 'undefined') {
     window['artplayerPluginDanmuku'] = artplayerPluginDanmuku;
