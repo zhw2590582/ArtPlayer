@@ -254,7 +254,6 @@ export default class Danmuku {
 
     // 动态配置
     config(option) {
-        console.log('option', option);
         const { clamp } = this.utils;
         const { $controlsCenter } = this.art.template;
 
