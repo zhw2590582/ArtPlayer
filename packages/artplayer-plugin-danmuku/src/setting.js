@@ -59,8 +59,8 @@ export default class Setting {
 
         this.mount(this.option.mount);
 
-        this.art.on('fullscreen', (state) => this.onFullscreen(state));
-        this.art.on('fullscreenWeb', (state) => this.onFullscreen(state));
+        art.on('fullscreen', (state) => this.onFullscreen(state));
+        art.on('fullscreenWeb', (state) => this.onFullscreen(state));
     }
 
     get option() {
