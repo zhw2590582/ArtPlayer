@@ -1,3 +1,6 @@
+// npm i dashjs
+// import dashjs from 'dashjs';
+
 function playMpd(video, url, art) {
     if (dashjs.supportsMediaSource()) {
         if (art.dash) art.dash.destroy();

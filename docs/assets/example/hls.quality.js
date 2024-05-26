@@ -1,3 +1,9 @@
+// npm i hls.js
+// npm i artplayer-plugin-hls-quality
+
+// import Hls from 'hls.js';
+// import artplayerPluginHlsQuality from 'artplayer-plugin-hls-quality';
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',

@@ -1,3 +1,6 @@
+// npm i artplayer-plugin-ads
+// import artplayerPluginAds from 'artplayer-plugin-ads';
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',

@@ -1,3 +1,6 @@
+// npm i hls.js
+// import Hls from 'hls.js';
+
 function playM3u8(video, url, art) {
     if (Hls.isSupported()) {
         if (art.hls) art.hls.destroy();

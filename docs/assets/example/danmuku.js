@@ -1,3 +1,6 @@
+// npm i artplayer-plugin-danmuku
+// import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',

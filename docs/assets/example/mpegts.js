@@ -1,3 +1,6 @@
+// npm i mpegts
+// import mpegts from 'mpegts';
+
 function playFlv(video, url, art) {
 	if (mpegts.isSupported()) {
 		if (art.flv) art.flv.destroy();

@@ -1,3 +1,6 @@
+// npm i flv.js
+// import flvjs from 'flv.js';
+
 function playFlv(video, url, art) {
     if (flvjs.isSupported()) {
         if (art.flv) art.flv.destroy();

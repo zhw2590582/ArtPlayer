@@ -1,3 +1,6 @@
+// npm i artplayer-plugin-iframe
+// import ArtplayerPluginIframe from 'artplayer-plugin-iframe';
+
 const $iframe = document.createElement('iframe');
 $iframe.allowFullscreen = true;
 $iframe.width = '100%';

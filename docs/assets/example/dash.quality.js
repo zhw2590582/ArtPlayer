@@ -1,3 +1,9 @@
+// npm i dashjs
+// npm i artplayer-plugin-dash-quality
+
+// import dashjs from 'dashjs';
+// import artplayerPluginDashQuality from 'artplayer-plugin-dash-quality';
+
 var art = new Artplayer({
     container: '.artplayer-app',
     url: 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd',
