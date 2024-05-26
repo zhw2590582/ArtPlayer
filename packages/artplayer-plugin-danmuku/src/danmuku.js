@@ -44,7 +44,7 @@ export default class Danmuku {
     // 默认配置
     static get option() {
         return {
-            danmuku: [], // 弹幕数据: 函数，数组，Promise，URL
+            danmuku: [], // 弹幕数据
             speed: 5, // 弹幕持续时间，范围在[1 ~ 10]
             margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
             opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
@@ -60,7 +60,7 @@ export default class Danmuku {
             filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
             beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
             beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
-            visible: true, // 弹幕是否可见
+            visible: true, // 弹幕层是否可见
             maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
             lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
             setting: true, // 是否显示弹幕发射器
