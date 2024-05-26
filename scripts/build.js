@@ -8,13 +8,22 @@ import { formatDate, getProjects } from './utils.js';
 const projects = getProjects();
 const compiledPath = path.resolve(`docs/compiled`);
 
+function compressString(input) {
+    const compressedHtmlString = input.replace(/\s*(<[^>]+>)\s*/g, '$1');
+    const compressedCssString = compressedHtmlString
+        .replace(/\s*([{}:;,])\s*/g, '$1')
+        .replace(/\s+/g, ' ')
+        .trim();
+    return compressedCssString;
+}
+
 async function build(name, targetName) {
     const { version } = JSON.parse(fs.readFileSync(`${projects[name]}/package.json`, 'utf-8'));
     process.chdir(projects[name]);
 
     const targets = {
         main: {
-            context: "browser",
+            context: 'browser',
             distDir: `${projects[name]}/dist`,
             sourceMap: false,
             outputFormat: 'global',
@@ -23,7 +32,7 @@ async function build(name, targetName) {
             },
         },
         legacy: {
-            context: "browser",
+            context: 'browser',
             distDir: `${projects[name]}/dist`,
             sourceMap: false,
             outputFormat: 'global',
@@ -65,8 +74,8 @@ async function build(name, targetName) {
 
     const filePath = `${projects[name]}/dist/index.js`;
     const newFilePath = `${projects[name]}/dist/${names[targetName]}.js`;
-    const code = banner + fs.readFileSync(filePath);
-    fs.writeFileSync(filePath, code.replace(/\\n*\s*</g, '<').replace(/>\\n*\s*/g, '>'));
+    const code = String(fs.readFileSync(filePath));
+    fs.writeFileSync(filePath, banner + compressString(code));
     fs.renameSync(filePath, newFilePath);
     await cpy(newFilePath, compiledPath);
     const size = fs.statSync(newFilePath).size / 1024;

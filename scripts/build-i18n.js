@@ -5,15 +5,9 @@ import { Parcel } from '@parcel/core';
 
 const basePath = 'packages/artplayer';
 
-const entries = glob.sync(
-    path.join(basePath, 'src/i18n/*.js'),
-    {
-        ignore: [
-            path.join(basePath, 'src/i18n/index.js'),
-            path.join(basePath, 'src/i18n/zh-cn.js'),
-        ]
-    }
-);
+const entries = glob.sync(path.join(basePath, 'src/i18n/*.js'), {
+    ignore: [path.join(basePath, 'src/i18n/index.js'), path.join(basePath, 'src/i18n/zh-cn.js')],
+});
 
 const packagePath = path.join(basePath, 'package.json');
 const backupPackagePath = path.join(basePath, 'package_backup.json');

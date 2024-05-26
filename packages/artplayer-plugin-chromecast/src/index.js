@@ -33,9 +33,9 @@ export default function artplayerPluginChromecast(option) {
 
     window['__onGCastApiAvailable'] = function (isAvailable) {
         if (isAvailable) {
-            cast.framework.CastContext.getInstance().setOptions({
-                receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
-                autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
+            window.cast.framework.CastContext.getInstance().setOptions({
+                receiverApplicationId: window.chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+                autoJoinPolicy: window.chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
             });
         }
     };
@@ -48,8 +48,8 @@ export default function artplayerPluginChromecast(option) {
         function castVideo(session) {
             const url = option.url || art.option.url;
             const mimeType = option.mimeType || getMimeType(url);
-            const mediaInfo = new chrome.cast.media.MediaInfo(url, mimeType);
-            const request = new chrome.cast.media.LoadRequest(mediaInfo);
+            const mediaInfo = new window.chrome.cast.media.MediaInfo(url, mimeType);
+            const request = new window.chrome.cast.media.LoadRequest(mediaInfo);
             session.loadMedia(request).then(
                 function () {
                     console.log('Media loaded successfully');
@@ -67,12 +67,12 @@ export default function artplayerPluginChromecast(option) {
             tooltip: 'Chromecast',
             html: `<i class="art-icon art-icon-cast">${option.icon || DEFAULT_ICON}</i>`,
             click() {
-                const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+                const castSession = window.cast.framework.CastContext.getInstance().getCurrentSession();
 
                 if (castSession) {
                     castVideo(castSession);
                 } else {
-                    cast.framework.CastContext.getInstance()
+                    window.cast.framework.CastContext.getInstance()
                         .requestSession()
                         .then(
                             function (session) {

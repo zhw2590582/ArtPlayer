@@ -46,15 +46,18 @@
         }
     }
 
-    &.art-mini-progress-bar, &.art-lock {
+    &.art-mini-progress-bar,
+    &.art-lock {
         .art-bottom {
             opacity: 1;
             padding: 0;
             background-image: none;
-            
+
             .art-controls,
             .art-progress {
-                transform: translateY(calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4));
+                transform: translateY(
+                    calc(var(--art-control-height) + var(--art-bottom-gap) + var(--art-progress-height) / 4)
+                );
             }
 
             .art-progress-indicator {

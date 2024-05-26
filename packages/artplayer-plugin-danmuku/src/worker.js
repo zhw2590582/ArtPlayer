@@ -1,13 +1,24 @@
 function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {
+    // 弹幕最大高度
+    const maxTop = clientHeight - marginBottom;
+
+    // 过滤同模式的弹幕，即每种模式各不影响
     const danmus = emits
-        .filter((item) => item.mode === target.mode && item.top <= clientHeight - marginBottom)
+        .filter((item) => item.mode === target.mode && item.top <= maxTop)
         .sort((prev, next) => prev.top - next.top);
 
+    // 如果没有同模式的弹幕，直接返回
     if (danmus.length === 0) {
-        return marginTop;
+        if (target.mode === 2) {
+            return maxTop - target.height;
+        } else {
+            return marginTop;
+        }
     }
 
+    // 上下各加一个虚拟弹幕，方便计算
     danmus.unshift({
+        type: 'top',
         top: 0,
         left: 0,
         right: 0,
@@ -18,7 +29,8 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
     });
 
     danmus.push({
-        top: clientHeight - marginBottom,
+        type: 'bottom',
+        top: maxTop,
         left: 0,
         right: 0,
         height: marginBottom,
@@ -27,13 +39,28 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
         distance: clientWidth,
     });
 
-    for (let index = 1; index < danmus.length; index += 1) {
-        const item = danmus[index];
-        const prev = danmus[index - 1];
-        const prevBottom = prev.top + prev.height;
-        const diff = item.top - prevBottom;
-        if (diff >= target.height) {
-            return prevBottom;
+    // 查找是否有多余的缝隙足以容纳当前弹幕
+    if (target.mode === 2) {
+        // 倒序查找
+        for (let index = danmus.length - 2; index >= 0; index -= 1) {
+            const item = danmus[index];
+            const prev = danmus[index + 1];
+            const itemBottom = item.top + item.height;
+            const diff = prev.top - itemBottom;
+            if (diff >= target.height) {
+                return prev.top - target.height;
+            }
+        }
+    } else {
+        // 顺序查找
+        for (let index = 1; index < danmus.length; index += 1) {
+            const item = danmus[index];
+            const prev = danmus[index - 1];
+            const prevBottom = prev.top + prev.height;
+            const diff = item.top - prevBottom;
+            if (diff >= target.height) {
+                return prevBottom;
+            }
         }
     }
 
@@ -67,7 +94,10 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
 
                 return result && result[0] ? result[0].top : undefined;
             }
+
+            // 静止弹幕没有重叠问题
             case 1:
+            case 2:
                 return undefined;
             default:
                 break;
@@ -82,6 +112,7 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
                 });
                 break;
             case 1:
+            case 2:
                 topMap.sort((prev, next) => {
                     const nextMaxWidth = Math.max(...next.map((item) => item.width));
                     const prevMaxWidth = Math.max(...prev.map((item) => item.width));
@@ -98,6 +129,7 @@ function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, m
 
 onmessage = (event) => {
     const { data } = event;
+    if (!data.id) return;
     const top = getDanmuTop(data);
     self.postMessage({
         top,

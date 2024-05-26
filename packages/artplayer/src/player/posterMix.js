@@ -9,6 +9,7 @@ export default function posterMix(art) {
         get: () => {
             try {
                 return $poster.style['backgroundImage'].match(/"(.*)"/)[1];
+                // eslint-disable-next-line no-unused-vars
             } catch (error) {
                 return '';
             }

@@ -3,10 +3,11 @@ export function getMode(key) {
         case 1:
         case 2:
         case 3:
-            return 0;
+            return 0; // 滚动
         case 4:
+            return 2; // 底部
         case 5:
-            return 1;
+            return 1; // 顶部
         default:
             return 0;
     }
@@ -45,8 +46,8 @@ export function bilibiliDanmuParseFromXml(xmlString) {
         .filter(Boolean);
 }
 
-export function bilibiliDanmuParseFromUrl(url) {
-    return fetch(url)
-        .then((res) => res.text())
-        .then((xmlString) => bilibiliDanmuParseFromXml(xmlString));
+export async function bilibiliDanmuParseFromUrl(url) {
+    const res = await fetch(url);
+    const xmlString = await res.text();
+    return bilibiliDanmuParseFromXml(xmlString);
 }

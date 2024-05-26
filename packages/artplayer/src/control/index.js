@@ -1,4 +1,4 @@
-import { errorHandle, addClass, removeClass, isMobile, sleep } from '../utils';
+import { errorHandle, addClass, removeClass, isMobile, sleep, includeFromEvent } from '../utils';
 import Component from '../utils/component';
 import fullscreen from './fullscreen';
 import fullscreenWeb from './fullscreenWeb';
@@ -16,11 +16,12 @@ export default class Control extends Component {
     constructor(art) {
         super(art);
 
+        this.isHover = false;
         this.name = 'control';
         this.timer = Date.now();
 
         const { constructor } = art;
-        const { $player } = this.art.template;
+        const { $player, $bottom } = this.art.template;
 
         art.on('mousemove', () => {
             if (!isMobile) {
@@ -36,8 +37,19 @@ export default class Control extends Component {
             }
         });
 
+        art.on('document:mousemove', (event) => {
+            this.isHover = includeFromEvent(event, $bottom);
+        });
+
         art.on('video:timeupdate', () => {
-            if (!art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) {
+            if (
+                !art.setting.show &&
+                !this.isHover &&
+                !art.isInput &&
+                art.playing &&
+                this.show &&
+                Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME
+            ) {
                 this.show = false;
             }
         });

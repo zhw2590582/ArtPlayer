@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-05-11 12:42:10";
+        return "2024-05-23 22:40:09";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -408,7 +408,7 @@ if (_utils.isBrowser) {
 }
 
 },{"bundle-text:./style/index.less":"doPnH","option-validator":"2tbdu","./utils/emitter":"8uSwy","./utils":"euhMG","./scheme":"jVxq1","./config":"1hSww","./template":"eG0JW","./i18n":"6Q0In","./player":"kmRM5","./control":"nK2ZQ","./contextmenu":"iygWX","./info":"6tuCt","./subtitle":"1kFyE","./events":"akAUN","./hotkey":"f1oWx","./layer":"bKuSu","./loading":"4AfId","./notice":"aKncc","./mask":"1R5LH","./icons":"bPpva","./setting":"i2oRN","./storage":"9ruid","./plugins":"7Fd4c","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"doPnH":[function(require,module,exports) {
-module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: #00000080;\n  --art-transition-duration: .2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: #fff3;\n  --art-hover-color: #fff3;\n  --art-loaded-color: #fff3;\n  --art-state-size: 80px;\n  --art-state-opacity: .8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: #ffffff80;\n  --art-control-height: 46px;\n  --art-control-opacity: .75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: #000000d9;\n  --art-tip-background: #00000080;\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: #ffffff40;\n  --art-scrollbar-background-hover: #ffffff80;\n  --art-mini-progress-height: 2px;\n}\n\n.art-bg-cover {\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n}\n\n.art-backdrop-filter {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-truncate {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.art-video-player {\n  width: 100%;\n  height: 100%;\n  zoom: 1;\n  text-align: left;\n  direction: ltr;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  -webkit-tap-highlight-color: #0000;\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n  outline: 0;\n  margin: 0 auto;\n  padding: 0;\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.3;\n  position: relative;\n}\n\n.art-video-player *, .art-video-player :before, .art-video-player :after {\n  box-sizing: border-box;\n}\n\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n\n.art-video-player img {\n  max-width: 100%;\n  vertical-align: top;\n}\n\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n\n.art-icon {\n  justify-content: center;\n  align-items: center;\n  line-height: 1;\n  display: flex;\n}\n\n.art-video-player.art-backdrop .art-contextmenus, .art-video-player.art-backdrop .art-info, .art-video-player.art-backdrop .art-settings, .art-video-player.art-backdrop .art-layer-auto-playback, .art-video-player.art-backdrop .art-selector-list, .art-video-player.art-backdrop .art-volume-inner {\n  -webkit-backdrop-filter: saturate(180%) blur(20px);\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-video {\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  cursor: pointer;\n  position: absolute;\n  inset: 0;\n}\n\n.art-poster {\n  z-index: 11;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-subtitle {\n  z-index: 20;\n  width: 100%;\n  text-align: center;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n  flex-direction: column;\n  padding: 0 5%;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-control-height)  + var(--art-subtitle-bottom));\n}\n\n.art-danmuku {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-layers {\n  z-index: 40;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n\n.art-video-player .art-mask {\n  z-index: 50;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-mask .art-state {\n  opacity: 0;\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  transform: scale(2);\n}\n\n.art-video-player.art-mask-show .art-state {\n  cursor: pointer;\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n\n.art-video-player .art-loading {\n  z-index: 70;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n\n.art-video-player .art-bottom {\n  z-index: 60;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  pointer-events: none;\n  padding: 0 var(--art-padding);\n  transition: all var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n  flex-direction: column;\n  justify-content: flex-end;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-bottom .art-controls, .art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-video-player.art-control-show .art-bottom, .art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n\n.art-video-player.art-control-show .art-bottom .art-controls, .art-video-player.art-hover .art-bottom .art-controls, .art-video-player.art-control-show .art-bottom .art-progress, .art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n\n.art-bottom .art-progress {\n  z-index: 0;\n  pointer-events: auto;\n  padding-bottom: var(--art-bottom-gap);\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress {\n  cursor: pointer;\n  height: var(--art-progress-height);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  height: 50%;\n  width: 100%;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-hover-color);\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  z-index: 10;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-loaded-color);\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  z-index: 20;\n  width: 100%;\n  height: 100%;\n  width: 0%;\n  background-color: var(--art-theme);\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  pointer-events: auto;\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n  position: absolute;\n  inset: 0 auto 0 0;\n  width: var(--art-highlight-width) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  z-index: 40;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  z-index: 50;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  padding: 3px 5px;\n  font-size: 12px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: -25px;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner {\n  height: 100%;\n}\n\n.art-bottom .art-progress .art-control-thumbnails {\n  bottom: calc(var(--art-bottom-gap)  + 10px);\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  display: none;\n  position: absolute;\n  left: 0;\n  box-shadow: 0 1px 3px #0003, 0 1px 2px -1px #0003;\n}\n\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n\n.art-controls {\n  z-index: 10;\n  pointer-events: auto;\n  height: var(--art-control-height);\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-controls .art-controls-left, .art-controls .art-controls-right {\n  height: 100%;\n  display: flex;\n}\n\n.art-controls .art-controls-center {\n  height: 100%;\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  padding: 0 10px;\n  display: none;\n}\n\n.art-controls .art-controls-right {\n  justify-content: flex-end;\n}\n\n.art-controls .art-control {\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * .8));\n}\n\n.art-controls .art-control:hover {\n  opacity: 1;\n}\n\n.art-control-volume {\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel {\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  pointer-events: none;\n  left: 0;\n  right: 0;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  padding: 0 5px;\n  font-size: 12px;\n  display: flex;\n  position: absolute;\n  transform: translateY(10px);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner {\n  height: 100%;\n  width: 100%;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 0 12px;\n  display: flex;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  width: 100%;\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  display: flex;\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  width: 2px;\n  border-radius: var(--art-border-radius);\n  background-color: #ffffff40;\n  justify-content: center;\n  display: flex;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  z-index: 0;\n  width: 100%;\n  height: 100%;\n  background-color: var(--art-theme);\n  position: absolute;\n  inset: 0;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 100%;\n  flex-shrink: 0;\n  position: absolute;\n  transform: scale(1);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(.9);\n}\n\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n.art-video-player .art-notice {\n  z-index: 80;\n  width: 100%;\n  height: 100%;\n  height: auto;\n  padding: var(--art-padding);\n  pointer-events: none;\n  display: none;\n  position: absolute;\n  inset: 0 0 auto;\n}\n\n.art-video-player .art-notice .art-notice-inner {\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n  padding: 5px;\n  line-height: 1;\n  display: inline-flex;\n}\n\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n\n.art-video-player .art-contextmenus {\n  z-index: 120;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n  flex-direction: column;\n  padding: 5px 0;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  border-bottom: 1px solid #ffffff1a;\n  padding: 10px 15px;\n  display: flex;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span:hover, .art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n\n.art-video-player .art-settings {\n  z-index: 90;\n  border-radius: var(--art-border-radius);\n  transform-origin: 100% 100%;\n  max-height: var(--art-settings-max-height);\n  left: auto;\n  right: var(--art-padding);\n  bottom: var(--art-control-height);\n  transform: scale(var(--art-settings-scale));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  display: none;\n  position: absolute;\n  overflow: hidden auto;\n}\n\n.art-video-player .art-settings .art-setting-panel {\n  flex-direction: column;\n  display: none;\n}\n\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  cursor: pointer;\n  transition: background-color var(--art-transition-duration) ease;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 5px;\n  display: flex;\n  overflow: hidden;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  font-size: 12px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  white-space: nowrap;\n  color: #ffffff80;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  min-width: 32px;\n  height: 24px;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  height: 3px;\n  width: 80px;\n  appearance: none;\n  background-color: #fff3;\n  outline: none;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid #ffffff1a;\n}\n\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n\n.art-video-player .art-info {\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  padding: 10px;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-info .art-info-panel {\n  flex-direction: column;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item {\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  width: 100px;\n  text-align: right;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  width: 250px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n  overflow: hidden;\n}\n\n.art-video-player .art-info .art-info-close {\n  cursor: pointer;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n\n.art-hide-cursor * {\n  cursor: none !important;\n}\n\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n\n.art-fullscreen {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n\n.art-fullscreen-web {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  z-index: var(--art-fullscreen-web-index);\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  inset: 0;\n}\n\n.art-mini-popup {\n  z-index: 9999;\n  width: 320px;\n  height: 180px;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  background: #000;\n  transition: opacity .2s;\n  position: fixed;\n  overflow: hidden;\n  box-shadow: 0 0 5px #00000080;\n}\n\n.art-mini-popup svg {\n  fill: #fff;\n}\n\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n\n.art-mini-popup .art-mini-close {\n  z-index: 20;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .2s;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.art-mini-popup .art-mini-state {\n  z-index: 30;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  opacity: 0;\n  background-color: #00000040;\n  justify-content: center;\n  align-items: center;\n  transition: opacity .2s;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: .75;\n  cursor: pointer;\n  pointer-events: auto;\n  transition: transform .2s;\n  transform: scale(3);\n}\n\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n\n.art-mini-popup.art-mini-droging {\n  opacity: .9;\n}\n\n.art-mini-popup:hover .art-mini-close, .art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n\n.art-video-player[data-flip=\"horizontal\"] .art-video {\n  transform: scaleX(-1);\n}\n\n.art-video-player[data-flip=\"vertical\"] .art-video {\n  transform: scaleY(-1);\n}\n\n.art-video-player .art-layer-lock {\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  top: 50%;\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  transform: translateY(-50%);\n}\n\n.art-video-player .art-layer-auto-playback {\n  border-radius: var(--art-border-radius);\n  left: var(--art-padding);\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + 10px);\n  background-color: var(--art-widget-background);\n  align-items: center;\n  gap: 10px;\n  padding: 10px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  cursor: pointer;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  width: 15px;\n  height: 15px;\n  fill: var(--art-theme);\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n\n.art-video-player.art-mini-progress-bar .art-bottom, .art-video-player.art-lock .art-bottom {\n  opacity: 1;\n  background-image: none;\n  padding: 0;\n}\n\n.art-video-player.art-mini-progress-bar .art-bottom .art-controls, .art-video-player.art-lock .art-bottom .art-controls, .art-video-player.art-mini-progress-bar .art-bottom .art-progress, .art-video-player.art-lock .art-bottom .art-progress {\n  transform: translateY(calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-progress-height) / 4));\n}\n\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator, .art-video-player.art-lock .art-bottom .art-progress-indicator {\n  display: none !important;\n}\n\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n\n.art-control-selector {\n  position: relative;\n}\n\n.art-control-selector .art-selector-list {\n  text-align: center;\n  border-radius: var(--art-border-radius);\n  opacity: 0;\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n  flex-direction: column;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  overflow: hidden auto;\n  transform: translateY(10px);\n}\n\n.art-control-selector .art-selector-list .art-selector-item {\n  width: 100%;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  padding: 10px 15px;\n  line-height: 1;\n  display: flex;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover, .art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n[class*=\"hint--\"] {\n  font-style: normal;\n  display: inline-block;\n  position: relative;\n}\n\n[class*=\"hint--\"]:before, [class*=\"hint--\"]:after {\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  transition: all .3s;\n  transition-delay: 0s;\n  position: absolute;\n  transform: translate3d(0, 0, 0);\n}\n\n[class*=\"hint--\"]:hover:before, [class*=\"hint--\"]:hover:after {\n  visibility: visible;\n  opacity: 1;\n  transition-delay: .1s;\n}\n\n[class*=\"hint--\"]:before {\n  content: \"\";\n  z-index: 1000001;\n  background: none;\n  border: 6px solid #0000;\n  position: absolute;\n}\n\n[class*=\"hint--\"]:after {\n  color: #fff;\n  white-space: nowrap;\n  background: #000;\n  padding: 8px 10px;\n  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  line-height: 12px;\n}\n\n[class*=\"hint--\"][aria-label]:after {\n  content: attr(aria-label);\n}\n\n[class*=\"hint--\"][data-hint]:after {\n  content: attr(data-hint);\n}\n\n[aria-label=\"\"]:before, [aria-label=\"\"]:after, [data-hint=\"\"]:before, [data-hint=\"\"]:after {\n  display: none !important;\n}\n\n.hint--top-left:before, .hint--top-right:before, .hint--top:before {\n  border-top-color: #000;\n}\n\n.hint--bottom-left:before, .hint--bottom-right:before, .hint--bottom:before {\n  border-bottom-color: #000;\n}\n\n.hint--left:before {\n  border-left-color: #000;\n}\n\n.hint--right:before {\n  border-right-color: #000;\n}\n\n.hint--top:before {\n  margin-bottom: -11px;\n}\n\n.hint--top:before, .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top:after {\n  transform: translateX(-50%);\n}\n\n.hint--top:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top:hover:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--bottom:before {\n  margin-top: -11px;\n}\n\n.hint--bottom:before, .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom:after {\n  transform: translateX(-50%);\n}\n\n.hint--bottom:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom:hover:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--right:before {\n  margin-bottom: -6px;\n  margin-left: -11px;\n}\n\n.hint--right:after {\n  margin-bottom: -14px;\n}\n\n.hint--right:before, .hint--right:after {\n  bottom: 50%;\n  left: 100%;\n}\n\n.hint--right:hover:before, .hint--right:hover:after {\n  transform: translateX(8px);\n}\n\n.hint--left:before {\n  margin-bottom: -6px;\n  margin-right: -11px;\n}\n\n.hint--left:after {\n  margin-bottom: -14px;\n}\n\n.hint--left:before, .hint--left:after {\n  bottom: 50%;\n  right: 100%;\n}\n\n.hint--left:hover:before, .hint--left:hover:after {\n  transform: translateX(-8px);\n}\n\n.hint--top-left:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-left:before, .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--top-left:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top-left:hover:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--top-right:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-right:before, .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--top-right:hover:before, .hint--top-right:hover:after {\n  transform: translateY(-8px);\n}\n\n.hint--bottom-left:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-left:before, .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--bottom-left:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom-left:hover:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--bottom-right:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-right:before, .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--bottom-right:hover:before, .hint--bottom-right:hover:after {\n  transform: translateY(8px);\n}\n\n.hint--small:after, .hint--medium:after, .hint--large:after {\n  white-space: normal;\n  word-wrap: break-word;\n  line-height: 1.4em;\n}\n\n.hint--small:after {\n  width: 80px;\n}\n\n.hint--medium:after {\n  width: 150px;\n}\n\n.hint--large:after {\n  width: 300px;\n}\n\n[class*=\"hint--\"]:after {\n  text-shadow: 0 -1px #000;\n  box-shadow: 4px 4px 8px #0000004d;\n}\n\n.hint--error:after {\n  text-shadow: 0 -1px #592726;\n  background-color: #b34e4d;\n}\n\n.hint--error.hint--top-left:before, .hint--error.hint--top-right:before, .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n\n.hint--error.hint--bottom-left:before, .hint--error.hint--bottom-right:before, .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n\n.hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n\n.hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n\n.hint--warning:after {\n  text-shadow: 0 -1px #6c5328;\n  background-color: #c09854;\n}\n\n.hint--warning.hint--top-left:before, .hint--warning.hint--top-right:before, .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n\n.hint--warning.hint--bottom-left:before, .hint--warning.hint--bottom-right:before, .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n\n.hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n\n.hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n\n.hint--info:after {\n  text-shadow: 0 -1px #1a3c4d;\n  background-color: #3986ac;\n}\n\n.hint--info.hint--top-left:before, .hint--info.hint--top-right:before, .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n\n.hint--info.hint--bottom-left:before, .hint--info.hint--bottom-right:before, .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n\n.hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n\n.hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n\n.hint--success:after {\n  text-shadow: 0 -1px #1a321a;\n  background-color: #458746;\n}\n\n.hint--success.hint--top-left:before, .hint--success.hint--top-right:before, .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n\n.hint--success.hint--bottom-left:before, .hint--success.hint--bottom-right:before, .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n\n.hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n\n.hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n\n.hint--always:after, .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n\n.hint--always.hint--top:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--always.hint--top-left:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top-left:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--always.hint--top-right:before, .hint--always.hint--top-right:after {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--bottom:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--always.hint--bottom-left:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom-left:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--always.hint--bottom-right:before, .hint--always.hint--bottom-right:after {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--left:before, .hint--always.hint--left:after {\n  transform: translateX(-8px);\n}\n\n.hint--always.hint--right:before, .hint--always.hint--right:after {\n  transform: translateX(8px);\n}\n\n.hint--rounded:after {\n  border-radius: 4px;\n}\n\n.hint--no-animate:before, .hint--no-animate:after {\n  transition-duration: 0s;\n}\n\n.hint--bounce:before, .hint--bounce:after {\n  -webkit-transition: opacity .3s, visibility .3s, -webkit-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  -moz-transition: opacity .3s, visibility .3s, -moz-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n}\n\n.hint--no-shadow:before, .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n\n.hint--no-arrow:before {\n  display: none;\n}\n\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n\n";
+module.exports = ".art-video-player {\n  --art-theme: red;\n  --art-font-color: #fff;\n  --art-background-color: #000;\n  --art-text-shadow-color: #00000080;\n  --art-transition-duration: .2s;\n  --art-padding: 10px;\n  --art-border-radius: 3px;\n  --art-progress-height: 6px;\n  --art-progress-color: #fff3;\n  --art-hover-color: #fff3;\n  --art-loaded-color: #fff3;\n  --art-state-size: 80px;\n  --art-state-opacity: .8;\n  --art-bottom-height: 100px;\n  --art-bottom-offset: 20px;\n  --art-bottom-gap: 5px;\n  --art-highlight-width: 8px;\n  --art-highlight-color: #ffffff80;\n  --art-control-height: 46px;\n  --art-control-opacity: .75;\n  --art-control-icon-size: 36px;\n  --art-control-icon-scale: 1.1;\n  --art-volume-height: 120px;\n  --art-volume-handle-size: 14px;\n  --art-lock-size: 36px;\n  --art-indicator-scale: 0;\n  --art-indicator-size: 16px;\n  --art-fullscreen-web-index: 9999;\n  --art-settings-icon-size: 24px;\n  --art-settings-max-height: 300px;\n  --art-selector-max-height: 300px;\n  --art-contextmenus-min-width: 250px;\n  --art-subtitle-font-size: 20px;\n  --art-subtitle-gap: 5px;\n  --art-subtitle-bottom: 15px;\n  --art-subtitle-border: #000;\n  --art-widget-background: #000000d9;\n  --art-tip-background: #00000080;\n  --art-scrollbar-size: 4px;\n  --art-scrollbar-background: #ffffff40;\n  --art-scrollbar-background-hover: #ffffff80;\n  --art-mini-progress-height: 2px;\n}\n\n.art-bg-cover {\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n\n.art-bottom-gradient {\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n}\n\n.art-backdrop-filter {\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-truncate {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.art-video-player {\n  zoom: 1;\n  text-align: left;\n  user-select: none;\n  box-sizing: border-box;\n  color: var(--art-font-color);\n  background-color: var(--art-background-color);\n  text-shadow: 0 0 2px var(--art-text-shadow-color);\n  -webkit-tap-highlight-color: #0000;\n  -ms-touch-action: manipulation;\n  touch-action: manipulation;\n  -ms-high-contrast-adjust: none;\n  direction: ltr;\n  outline: 0;\n  width: 100%;\n  height: 100%;\n  margin: 0 auto;\n  padding: 0;\n  font-family: PingFang SC, Helvetica Neue, Microsoft YaHei, Roboto, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.3;\n  position: relative;\n}\n\n.art-video-player *, .art-video-player :before, .art-video-player :after {\n  box-sizing: border-box;\n}\n\n.art-video-player ::-webkit-scrollbar {\n  width: var(--art-scrollbar-size);\n  height: var(--art-scrollbar-size);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb {\n  background-color: var(--art-scrollbar-background);\n}\n\n.art-video-player ::-webkit-scrollbar-thumb:hover {\n  background-color: var(--art-scrollbar-background-hover);\n}\n\n.art-video-player img {\n  vertical-align: top;\n  max-width: 100%;\n}\n\n.art-video-player svg {\n  fill: var(--art-font-color);\n}\n\n.art-video-player a {\n  color: var(--art-font-color);\n  text-decoration: none;\n}\n\n.art-icon {\n  justify-content: center;\n  align-items: center;\n  line-height: 1;\n  display: flex;\n}\n\n.art-video-player.art-backdrop .art-contextmenus, .art-video-player.art-backdrop .art-info, .art-video-player.art-backdrop .art-settings, .art-video-player.art-backdrop .art-layer-auto-playback, .art-video-player.art-backdrop .art-selector-list, .art-video-player.art-backdrop .art-volume-inner {\n  backdrop-filter: saturate(180%) blur(20px);\n  background-color: #000000bf !important;\n}\n\n.art-video {\n  z-index: 10;\n  cursor: pointer;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  inset: 0;\n}\n\n.art-poster {\n  z-index: 11;\n  pointer-events: none;\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-subtitle {\n  z-index: 20;\n  text-align: center;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  gap: var(--art-subtitle-gap);\n  bottom: var(--art-subtitle-bottom);\n  font-size: var(--art-subtitle-font-size);\n  transition: bottom var(--art-transition-duration) ease;\n  text-shadow: var(--art-subtitle-border) 1px 0 1px, var(--art-subtitle-border) 0 1px 1px, var(--art-subtitle-border) -1px 0 1px, var(--art-subtitle-border) 0 -1px 1px, var(--art-subtitle-border) 1px 1px 1px, var(--art-subtitle-border) -1px -1px 1px, var(--art-subtitle-border) 1px -1px 1px, var(--art-subtitle-border) -1px 1px 1px;\n  flex-direction: column;\n  width: 100%;\n  padding: 0 5%;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player.art-subtitle-show .art-subtitle {\n  display: flex;\n}\n\n.art-video-player.art-control-show .art-subtitle {\n  bottom: calc(var(--art-control-height)  + var(--art-subtitle-bottom));\n}\n\n.art-danmuku {\n  z-index: 30;\n  pointer-events: none;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-layers {\n  z-index: 40;\n  pointer-events: none;\n  width: 100%;\n  height: 100%;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-layers .art-layer {\n  pointer-events: auto;\n}\n\n.art-video-player.art-layer-show .art-layers {\n  display: flex;\n}\n\n.art-video-player .art-mask {\n  z-index: 50;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player .art-mask .art-state {\n  opacity: 0;\n  width: var(--art-state-size);\n  height: var(--art-state-size);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  transform: scale(2);\n}\n\n.art-video-player.art-mask-show .art-state {\n  cursor: pointer;\n  pointer-events: auto;\n  opacity: var(--art-state-opacity);\n  transform: scale(1);\n}\n\n.art-video-player.art-loading-show .art-state {\n  display: none;\n}\n\n.art-video-player .art-loading {\n  z-index: 70;\n  pointer-events: none;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-video-player.art-loading-show .art-loading {\n  display: flex;\n}\n\n.art-video-player .art-bottom {\n  z-index: 60;\n  opacity: 0;\n  pointer-events: none;\n  padding: 0 var(--art-padding);\n  transition: all var(--art-transition-duration) ease;\n  background-size: 100% var(--art-bottom-height);\n  background-image: linear-gradient(to top, #000, #0006, #0000);\n  background-position: bottom;\n  background-repeat: repeat-x;\n  flex-direction: column;\n  justify-content: flex-end;\n  width: 100%;\n  height: 100%;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n}\n\n.art-video-player .art-bottom .art-controls, .art-video-player .art-bottom .art-progress {\n  transform: translateY(var(--art-bottom-offset));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-video-player.art-control-show .art-bottom, .art-video-player.art-hover .art-bottom {\n  opacity: 1;\n}\n\n.art-video-player.art-control-show .art-bottom .art-controls, .art-video-player.art-hover .art-bottom .art-controls, .art-video-player.art-control-show .art-bottom .art-progress, .art-video-player.art-hover .art-bottom .art-progress {\n  transform: translateY(0);\n}\n\n.art-bottom .art-progress {\n  z-index: 0;\n  pointer-events: auto;\n  padding-bottom: var(--art-bottom-gap);\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress {\n  cursor: pointer;\n  height: var(--art-progress-height);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner {\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  align-items: center;\n  width: 100%;\n  height: 50%;\n  display: flex;\n  position: relative;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-hover {\n  z-index: 0;\n  background-color: var(--art-hover-color);\n  width: 0%;\n  height: 100%;\n  display: none;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {\n  z-index: 10;\n  background-color: var(--art-loaded-color);\n  width: 0%;\n  height: 100%;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played {\n  z-index: 20;\n  background-color: var(--art-theme);\n  width: 0%;\n  height: 100%;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight {\n  z-index: 30;\n  pointer-events: none;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  inset: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-highlight span {\n  z-index: 0;\n  pointer-events: auto;\n  transform: translateX(calc(var(--art-highlight-width) / -2));\n  background-color: var(--art-highlight-color);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  inset: 0 auto 0 0;\n  width: var(--art-highlight-width) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  z-index: 40;\n  width: var(--art-indicator-size);\n  height: var(--art-indicator-size);\n  transform: scale(var(--art-indicator-scale));\n  margin-left: calc(var(--art-indicator-size) / -2);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator .art-icon {\n  pointer-events: none;\n  width: 100%;\n  height: 100%;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:hover {\n  transform: scale(1.2) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator:active {\n  transform: scale(1) !important;\n}\n\n.art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {\n  z-index: 50;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  padding: 3px 5px;\n  font-size: 12px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: -25px;\n  left: 0;\n}\n\n.art-bottom .art-progress .art-control-progress:hover .art-control-progress-inner {\n  height: 100%;\n}\n\n.art-bottom .art-progress .art-control-thumbnails {\n  bottom: calc(var(--art-bottom-gap)  + 10px);\n  border-radius: var(--art-border-radius);\n  pointer-events: none;\n  background-color: var(--art-widget-background);\n  display: none;\n  position: absolute;\n  left: 0;\n  box-shadow: 0 1px 3px #0003, 0 1px 2px -1px #0003;\n}\n\n.art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {\n  transform: scale(1);\n}\n\n.art-controls {\n  z-index: 10;\n  pointer-events: auto;\n  height: var(--art-control-height);\n  justify-content: space-between;\n  align-items: center;\n  display: flex;\n  position: relative;\n}\n\n.art-controls .art-controls-left, .art-controls .art-controls-right {\n  height: 100%;\n  display: flex;\n}\n\n.art-controls .art-controls-center {\n  flex: 1;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  padding: 0 10px;\n  display: none;\n}\n\n.art-controls .art-controls-right {\n  justify-content: flex-end;\n}\n\n.art-controls .art-control {\n  cursor: pointer;\n  white-space: nowrap;\n  opacity: var(--art-control-opacity);\n  min-height: var(--art-control-height);\n  min-width: var(--art-control-height);\n  transition: opacity var(--art-transition-duration) ease;\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-controls .art-control .art-icon {\n  height: var(--art-control-icon-size);\n  width: var(--art-control-icon-size);\n  transform: scale(var(--art-control-icon-scale));\n  transition: transform var(--art-transition-duration) ease;\n}\n\n.art-controls .art-control .art-icon:active {\n  transform: scale(calc(var(--art-control-icon-scale) * .8));\n}\n\n.art-controls .art-control:hover {\n  opacity: 1;\n}\n\n.art-control-volume {\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel {\n  text-align: center;\n  cursor: default;\n  opacity: 0;\n  pointer-events: none;\n  left: 0;\n  right: 0;\n  bottom: var(--art-control-height);\n  width: var(--art-control-height);\n  height: var(--art-volume-height);\n  transition: all var(--art-transition-duration) ease;\n  justify-content: center;\n  align-items: center;\n  padding: 0 5px;\n  font-size: 12px;\n  display: flex;\n  position: absolute;\n  transform: translateY(10px);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner {\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  height: 100%;\n  padding: 10px 0 12px;\n  display: flex;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider {\n  cursor: pointer;\n  flex: 1;\n  justify-content: center;\n  width: 100%;\n  display: flex;\n  position: relative;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle {\n  border-radius: var(--art-border-radius);\n  background-color: #ffffff40;\n  justify-content: center;\n  width: 2px;\n  display: flex;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-handle .art-volume-loaded {\n  z-index: 0;\n  background-color: var(--art-theme);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  inset: 0;\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider .art-volume-indicator {\n  width: var(--art-volume-handle-size);\n  height: var(--art-volume-handle-size);\n  margin-top: calc(var(--art-volume-handle-size) / -2);\n  background-color: var(--art-theme);\n  transition: transform var(--art-transition-duration) ease;\n  border-radius: 100%;\n  flex-shrink: 0;\n  position: absolute;\n  transform: scale(1);\n}\n\n.art-control-volume .art-volume-panel .art-volume-inner .art-volume-slider:active .art-volume-indicator {\n  transform: scale(.9);\n}\n\n.art-control-volume:hover .art-volume-panel {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n.art-video-player .art-notice {\n  z-index: 80;\n  padding: var(--art-padding);\n  pointer-events: none;\n  width: 100%;\n  height: auto;\n  display: none;\n  position: absolute;\n  inset: 0 0 auto;\n}\n\n.art-video-player .art-notice .art-notice-inner {\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-tip-background);\n  padding: 5px;\n  line-height: 1;\n  display: inline-flex;\n}\n\n.art-video-player.art-notice-show .art-notice {\n  display: flex;\n}\n\n.art-video-player .art-contextmenus {\n  z-index: 120;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  min-width: var(--art-contextmenus-min-width);\n  flex-direction: column;\n  padding: 5px 0;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu {\n  cursor: pointer;\n  border-bottom: 1px solid #ffffff1a;\n  padding: 10px 15px;\n  display: flex;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span {\n  padding: 0 8px;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu span:hover, .art-video-player .art-contextmenus .art-contextmenu span.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-contextmenus .art-contextmenu:last-child {\n  border-bottom: none;\n}\n\n.art-video-player.art-contextmenu-show .art-contextmenus {\n  display: flex;\n}\n\n.art-video-player .art-settings {\n  z-index: 90;\n  border-radius: var(--art-border-radius);\n  transform-origin: 100% 100%;\n  max-height: var(--art-settings-max-height);\n  left: auto;\n  right: var(--art-padding);\n  bottom: var(--art-control-height);\n  transform: scale(var(--art-settings-scale));\n  transition: all var(--art-transition-duration) ease;\n  background-color: var(--art-widget-background);\n  flex-direction: column;\n  display: none;\n  position: absolute;\n  overflow: hidden auto;\n}\n\n.art-video-player .art-settings .art-setting-panel {\n  flex-direction: column;\n  display: none;\n}\n\n.art-video-player .art-settings .art-setting-panel.art-current {\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item {\n  cursor: pointer;\n  transition: background-color var(--art-transition-duration) ease;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0 5px;\n  display: flex;\n  overflow: hidden;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-icon-check {\n  visibility: hidden;\n  height: 15px;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item.art-current .art-icon-check {\n  visibility: visible;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-left .art-setting-item-left-icon {\n  height: var(--art-settings-icon-size);\n  width: var(--art-settings-icon-size);\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right {\n  justify-content: center;\n  align-items: center;\n  gap: 5px;\n  font-size: 12px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-tooltip {\n  white-space: nowrap;\n  color: #ffffff80;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-item-right-icon {\n  justify-content: center;\n  align-items: center;\n  min-width: 32px;\n  height: 24px;\n  display: flex;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item .art-setting-item-right .art-setting-range {\n  appearance: none;\n  background-color: #fff3;\n  outline: none;\n  width: 80px;\n  height: 3px;\n}\n\n.art-video-player .art-settings .art-setting-panel .art-setting-item-back {\n  border-bottom: 1px solid #ffffff1a;\n}\n\n.art-video-player.art-setting-show .art-settings {\n  display: flex;\n}\n\n.art-video-player .art-info {\n  left: var(--art-padding);\n  top: var(--art-padding);\n  z-index: 100;\n  border-radius: var(--art-border-radius);\n  background-color: var(--art-widget-background);\n  padding: 10px;\n  font-size: 12px;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-info .art-info-panel {\n  flex-direction: column;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item {\n  align-items: center;\n  gap: 5px;\n  display: flex;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-title {\n  text-align: right;\n  width: 100px;\n}\n\n.art-video-player .art-info .art-info-panel .art-info-item .art-info-content {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  user-select: all;\n  width: 250px;\n  overflow: hidden;\n}\n\n.art-video-player .art-info .art-info-close {\n  cursor: pointer;\n  position: absolute;\n  top: 5px;\n  right: 5px;\n}\n\n.art-video-player.art-info-show .art-info {\n  display: flex;\n}\n\n.art-hide-cursor * {\n  cursor: none !important;\n}\n\n.art-video-player[data-aspect-ratio] {\n  overflow: hidden;\n}\n\n.art-video-player[data-aspect-ratio] .art-video {\n  object-fit: fill;\n  box-sizing: content-box;\n}\n\n.art-fullscreen {\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n}\n\n.art-fullscreen-web {\n  z-index: var(--art-fullscreen-web-index);\n  --art-progress-height: 8px;\n  --art-indicator-size: 20px;\n  --art-control-height: 60px;\n  --art-control-icon-scale: 1.3;\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  inset: 0;\n}\n\n.art-mini-popup {\n  z-index: 9999;\n  border-radius: var(--art-border-radius);\n  cursor: move;\n  user-select: none;\n  background: #000;\n  width: 320px;\n  height: 180px;\n  transition: opacity .2s;\n  position: fixed;\n  overflow: hidden;\n  box-shadow: 0 0 5px #00000080;\n}\n\n.art-mini-popup svg {\n  fill: #fff;\n}\n\n.art-mini-popup .art-video {\n  pointer-events: none;\n}\n\n.art-mini-popup .art-mini-close {\n  z-index: 20;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .2s;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.art-mini-popup .art-mini-state {\n  z-index: 30;\n  pointer-events: none;\n  opacity: 0;\n  background-color: #00000040;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n  transition: opacity .2s;\n  display: flex;\n  position: absolute;\n  inset: 0;\n}\n\n.art-mini-popup .art-mini-state .art-icon {\n  opacity: .75;\n  cursor: pointer;\n  pointer-events: auto;\n  transition: transform .2s;\n  transform: scale(3);\n}\n\n.art-mini-popup .art-mini-state .art-icon:active {\n  transform: scale(2.5);\n}\n\n.art-mini-popup.art-mini-droging {\n  opacity: .9;\n}\n\n.art-mini-popup:hover .art-mini-close, .art-mini-popup:hover .art-mini-state {\n  opacity: 1;\n}\n\n.art-video-player[data-flip=\"horizontal\"] .art-video {\n  transform: scaleX(-1);\n}\n\n.art-video-player[data-flip=\"vertical\"] .art-video {\n  transform: scaleY(-1);\n}\n\n.art-video-player .art-layer-lock {\n  height: var(--art-lock-size);\n  width: var(--art-lock-size);\n  top: 50%;\n  left: var(--art-padding);\n  background-color: var(--art-tip-background);\n  border-radius: 50%;\n  justify-content: center;\n  align-items: center;\n  display: none;\n  position: absolute;\n  transform: translateY(-50%);\n}\n\n.art-video-player .art-layer-auto-playback {\n  border-radius: var(--art-border-radius);\n  left: var(--art-padding);\n  bottom: calc(var(--art-control-height)  + var(--art-bottom-gap)  + 10px);\n  background-color: var(--art-widget-background);\n  align-items: center;\n  gap: 10px;\n  padding: 10px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close {\n  cursor: pointer;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-close svg {\n  fill: var(--art-theme);\n  width: 15px;\n  height: 15px;\n}\n\n.art-video-player .art-layer-auto-playback .art-auto-playback-jump {\n  color: var(--art-theme);\n  cursor: pointer;\n}\n\n.art-video-player.art-lock .art-subtitle {\n  bottom: var(--art-subtitle-bottom) !important;\n}\n\n.art-video-player.art-mini-progress-bar .art-bottom, .art-video-player.art-lock .art-bottom {\n  opacity: 1;\n  background-image: none;\n  padding: 0;\n}\n\n.art-video-player.art-mini-progress-bar .art-bottom .art-controls, .art-video-player.art-lock .art-bottom .art-controls, .art-video-player.art-mini-progress-bar .art-bottom .art-progress, .art-video-player.art-lock .art-bottom .art-progress {\n  transform: translateY(calc(var(--art-control-height)  + var(--art-bottom-gap)  + var(--art-progress-height) / 4));\n}\n\n.art-video-player.art-mini-progress-bar .art-bottom .art-progress-indicator, .art-video-player.art-lock .art-bottom .art-progress-indicator {\n  display: none !important;\n}\n\n.art-video-player.art-control-show .art-layer-lock {\n  display: flex;\n}\n\n.art-control-selector {\n  position: relative;\n}\n\n.art-control-selector .art-selector-list {\n  text-align: center;\n  border-radius: var(--art-border-radius);\n  opacity: 0;\n  pointer-events: none;\n  bottom: var(--art-control-height);\n  max-height: var(--art-selector-max-height);\n  background-color: var(--art-widget-background);\n  transition: all var(--art-transition-duration) ease;\n  flex-direction: column;\n  align-items: center;\n  display: flex;\n  position: absolute;\n  overflow: hidden auto;\n  transform: translateY(10px);\n}\n\n.art-control-selector .art-selector-list .art-selector-item {\n  flex-shrink: 0;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  padding: 10px 15px;\n  line-height: 1;\n  display: flex;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover {\n  background-color: #ffffff1a;\n}\n\n.art-control-selector .art-selector-list .art-selector-item:hover, .art-control-selector .art-selector-list .art-selector-item.art-current {\n  color: var(--art-theme);\n}\n\n.art-control-selector:hover .art-selector-list {\n  opacity: 1;\n  pointer-events: auto;\n  transform: translateY(0);\n}\n\n[class*=\"hint--\"] {\n  font-style: normal;\n  display: inline-block;\n  position: relative;\n}\n\n[class*=\"hint--\"]:before, [class*=\"hint--\"]:after {\n  visibility: hidden;\n  opacity: 0;\n  z-index: 1000000;\n  pointer-events: none;\n  transition: all .3s;\n  position: absolute;\n  transform: translate3d(0, 0, 0);\n}\n\n[class*=\"hint--\"]:hover:before, [class*=\"hint--\"]:hover:after {\n  visibility: visible;\n  opacity: 1;\n  transition-delay: .1s;\n}\n\n[class*=\"hint--\"]:before {\n  content: \"\";\n  z-index: 1000001;\n  background: none;\n  border: 6px solid #0000;\n  position: absolute;\n}\n\n[class*=\"hint--\"]:after {\n  color: #fff;\n  white-space: nowrap;\n  background: #000;\n  padding: 8px 10px;\n  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;\n  font-size: 12px;\n  line-height: 12px;\n}\n\n[class*=\"hint--\"][aria-label]:after {\n  content: attr(aria-label);\n}\n\n[class*=\"hint--\"][data-hint]:after {\n  content: attr(data-hint);\n}\n\n[aria-label=\"\"]:before, [aria-label=\"\"]:after, [data-hint=\"\"]:before, [data-hint=\"\"]:after {\n  display: none !important;\n}\n\n.hint--top-left:before, .hint--top-right:before, .hint--top:before {\n  border-top-color: #000;\n}\n\n.hint--bottom-left:before, .hint--bottom-right:before, .hint--bottom:before {\n  border-bottom-color: #000;\n}\n\n.hint--left:before {\n  border-left-color: #000;\n}\n\n.hint--right:before {\n  border-right-color: #000;\n}\n\n.hint--top:before {\n  margin-bottom: -11px;\n}\n\n.hint--top:before, .hint--top:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top:after {\n  transform: translateX(-50%);\n}\n\n.hint--top:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top:hover:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--bottom:before {\n  margin-top: -11px;\n}\n\n.hint--bottom:before, .hint--bottom:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom:after {\n  transform: translateX(-50%);\n}\n\n.hint--bottom:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom:hover:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--right:before {\n  margin-bottom: -6px;\n  margin-left: -11px;\n}\n\n.hint--right:after {\n  margin-bottom: -14px;\n}\n\n.hint--right:before, .hint--right:after {\n  bottom: 50%;\n  left: 100%;\n}\n\n.hint--right:hover:before, .hint--right:hover:after {\n  transform: translateX(8px);\n}\n\n.hint--left:before {\n  margin-bottom: -6px;\n  margin-right: -11px;\n}\n\n.hint--left:after {\n  margin-bottom: -14px;\n}\n\n.hint--left:before, .hint--left:after {\n  bottom: 50%;\n  right: 100%;\n}\n\n.hint--left:hover:before, .hint--left:hover:after {\n  transform: translateX(-8px);\n}\n\n.hint--top-left:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-left:before, .hint--top-left:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--top-left:hover:before {\n  transform: translateY(-8px);\n}\n\n.hint--top-left:hover:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--top-right:before {\n  margin-bottom: -11px;\n}\n\n.hint--top-right:before, .hint--top-right:after {\n  bottom: 100%;\n  left: 50%;\n}\n\n.hint--top-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--top-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--top-right:hover:before, .hint--top-right:hover:after {\n  transform: translateY(-8px);\n}\n\n.hint--bottom-left:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-left:before, .hint--bottom-left:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-left:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-left:after {\n  margin-left: 12px;\n  transform: translateX(-100%);\n}\n\n.hint--bottom-left:hover:before {\n  transform: translateY(8px);\n}\n\n.hint--bottom-left:hover:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--bottom-right:before {\n  margin-top: -11px;\n}\n\n.hint--bottom-right:before, .hint--bottom-right:after {\n  top: 100%;\n  left: 50%;\n}\n\n.hint--bottom-right:before {\n  left: calc(50% - 6px);\n}\n\n.hint--bottom-right:after {\n  margin-left: -12px;\n  transform: translateX(0);\n}\n\n.hint--bottom-right:hover:before, .hint--bottom-right:hover:after {\n  transform: translateY(8px);\n}\n\n.hint--small:after, .hint--medium:after, .hint--large:after {\n  white-space: normal;\n  word-wrap: break-word;\n  line-height: 1.4em;\n}\n\n.hint--small:after {\n  width: 80px;\n}\n\n.hint--medium:after {\n  width: 150px;\n}\n\n.hint--large:after {\n  width: 300px;\n}\n\n[class*=\"hint--\"]:after {\n  text-shadow: 0 -1px #000;\n  box-shadow: 4px 4px 8px #0000004d;\n}\n\n.hint--error:after {\n  text-shadow: 0 -1px #592726;\n  background-color: #b34e4d;\n}\n\n.hint--error.hint--top-left:before, .hint--error.hint--top-right:before, .hint--error.hint--top:before {\n  border-top-color: #b34e4d;\n}\n\n.hint--error.hint--bottom-left:before, .hint--error.hint--bottom-right:before, .hint--error.hint--bottom:before {\n  border-bottom-color: #b34e4d;\n}\n\n.hint--error.hint--left:before {\n  border-left-color: #b34e4d;\n}\n\n.hint--error.hint--right:before {\n  border-right-color: #b34e4d;\n}\n\n.hint--warning:after {\n  text-shadow: 0 -1px #6c5328;\n  background-color: #c09854;\n}\n\n.hint--warning.hint--top-left:before, .hint--warning.hint--top-right:before, .hint--warning.hint--top:before {\n  border-top-color: #c09854;\n}\n\n.hint--warning.hint--bottom-left:before, .hint--warning.hint--bottom-right:before, .hint--warning.hint--bottom:before {\n  border-bottom-color: #c09854;\n}\n\n.hint--warning.hint--left:before {\n  border-left-color: #c09854;\n}\n\n.hint--warning.hint--right:before {\n  border-right-color: #c09854;\n}\n\n.hint--info:after {\n  text-shadow: 0 -1px #1a3c4d;\n  background-color: #3986ac;\n}\n\n.hint--info.hint--top-left:before, .hint--info.hint--top-right:before, .hint--info.hint--top:before {\n  border-top-color: #3986ac;\n}\n\n.hint--info.hint--bottom-left:before, .hint--info.hint--bottom-right:before, .hint--info.hint--bottom:before {\n  border-bottom-color: #3986ac;\n}\n\n.hint--info.hint--left:before {\n  border-left-color: #3986ac;\n}\n\n.hint--info.hint--right:before {\n  border-right-color: #3986ac;\n}\n\n.hint--success:after {\n  text-shadow: 0 -1px #1a321a;\n  background-color: #458746;\n}\n\n.hint--success.hint--top-left:before, .hint--success.hint--top-right:before, .hint--success.hint--top:before {\n  border-top-color: #458746;\n}\n\n.hint--success.hint--bottom-left:before, .hint--success.hint--bottom-right:before, .hint--success.hint--bottom:before {\n  border-bottom-color: #458746;\n}\n\n.hint--success.hint--left:before {\n  border-left-color: #458746;\n}\n\n.hint--success.hint--right:before {\n  border-right-color: #458746;\n}\n\n.hint--always:after, .hint--always:before {\n  opacity: 1;\n  visibility: visible;\n}\n\n.hint--always.hint--top:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top:after {\n  transform: translateX(-50%)translateY(-8px);\n}\n\n.hint--always.hint--top-left:before {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--top-left:after {\n  transform: translateX(-100%)translateY(-8px);\n}\n\n.hint--always.hint--top-right:before, .hint--always.hint--top-right:after {\n  transform: translateY(-8px);\n}\n\n.hint--always.hint--bottom:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom:after {\n  transform: translateX(-50%)translateY(8px);\n}\n\n.hint--always.hint--bottom-left:before {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--bottom-left:after {\n  transform: translateX(-100%)translateY(8px);\n}\n\n.hint--always.hint--bottom-right:before, .hint--always.hint--bottom-right:after {\n  transform: translateY(8px);\n}\n\n.hint--always.hint--left:before, .hint--always.hint--left:after {\n  transform: translateX(-8px);\n}\n\n.hint--always.hint--right:before, .hint--always.hint--right:after {\n  transform: translateX(8px);\n}\n\n.hint--rounded:after {\n  border-radius: 4px;\n}\n\n.hint--no-animate:before, .hint--no-animate:after {\n  transition-duration: 0s;\n}\n\n.hint--bounce:before, .hint--bounce:after {\n  -webkit-transition: opacity .3s, visibility .3s, -webkit-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  -moz-transition: opacity .3s, visibility .3s, -moz-transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n  transition: opacity .3s, visibility .3s, transform .3s cubic-bezier(.71, 1.7, .77, 1.24);\n}\n\n.hint--no-shadow:before, .hint--no-shadow:after {\n  text-shadow: initial;\n  box-shadow: initial;\n}\n\n.hint--no-arrow:before {\n  display: none;\n}\n\n.art-video-player.art-mobile {\n  --art-bottom-gap: 10px;\n  --art-control-height: 38px;\n  --art-control-icon-scale: 1;\n  --art-state-size: 60px;\n  --art-settings-max-height: 180px;\n  --art-selector-max-height: 180px;\n  --art-indicator-scale: 1;\n  --art-control-opacity: 1;\n}\n\n.art-video-player.art-mobile .art-controls-left {\n  margin-left: calc(var(--art-padding) / -1);\n}\n\n.art-video-player.art-mobile .art-controls-right {\n  margin-right: calc(var(--art-padding) / -1);\n}\n";
 
 },{}],"2tbdu":[function(require,module,exports) {
 !function(r, t) {
@@ -606,7 +606,7 @@ exports.defineInteropFlag = function(a) {
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -827,7 +827,6 @@ function assToVtt(ass) {
                 if (item.length === 1) return `.${item}00`;
                 if (item.length === 2) return `.${item}0`;
             } else if (item.length === 1) return (index === 0 ? "0" : ":0") + item;
-            // eslint-disable-next-line no-nested-ternary
             return index === 0 ? item : index === arr.length - 1 ? `.${item}` : `:${item}`;
         }).join("");
     }
@@ -873,7 +872,7 @@ parcelHelpers.export(exports, "has", ()=>has);
 parcelHelpers.export(exports, "get", ()=>get);
 parcelHelpers.export(exports, "mergeDeep", ()=>mergeDeep);
 const def = Object.defineProperty;
-const { hasOwnProperty  } = Object.prototype;
+const { hasOwnProperty } = Object.prototype;
 function has(obj, name) {
     return hasOwnProperty.call(obj, name);
 }
@@ -1210,7 +1209,7 @@ var _utils = require("./utils");
 class Template {
     constructor(art){
         this.art = art;
-        const { option , constructor  } = art;
+        const { option, constructor } = art;
         if (option.container instanceof Element) this.$container = option.container;
         else {
             this.$container = (0, _utils.query)(option.container);
@@ -1289,7 +1288,7 @@ class Template {
         return (0, _utils.query)(className, this.$container);
     }
     init() {
-        const { option  } = this.art;
+        const { option } = this.art;
         if (!option.useSSR) this.$container.innerHTML = Template.html;
         this.$player = this.query(".art-video-player");
         this.$video = this.query(".art-video");
@@ -1357,42 +1356,42 @@ exports.default = I18n;
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const zhCn = {
-    "Video Info": "统计信息",
-    "Close": "关闭",
-    "Video Load Failed": "加载失败",
-    "Volume": "音量",
-    "Play": "播放",
-    "Pause": "暂停",
-    "Rate": "速度",
-    "Mute": "静音",
-    "Video Flip": "画面翻转",
-    "Horizontal": "水平",
-    "Vertical": "垂直",
-    "Reconnect": "重新连接",
-    "Show Setting": "显示设置",
-    "Hide Setting": "隐藏设置",
-    "Screenshot": "截图",
-    "Play Speed": "播放速度",
-    "Aspect Ratio": "画面比例",
-    "Default": "默认",
-    "Normal": "正常",
-    "Open": "打开",
-    "Switch Video": "切换",
-    "Switch Subtitle": "切换字幕",
-    "Fullscreen": "全屏",
-    "Exit Fullscreen": "退出全屏",
-    "Web Fullscreen": "网页全屏",
-    "Exit Web Fullscreen": "退出网页全屏",
-    "Mini Player": "迷你播放器",
-    "PIP Mode": "开启画中画",
-    "Exit PIP Mode": "退出画中画",
-    "PIP Not Supported": "不支持画中画",
-    "Fullscreen Not Supported": "不支持全屏",
-    "Subtitle Offset": "字幕偏移",
-    "Last Seen": "上次看到",
-    "Jump Play": "跳转播放",
-    "AirPlay": "隔空播放",
-    "AirPlay Not Available": "隔空播放不可用"
+    "Video Info": "\u7EDF\u8BA1\u4FE1\u606F",
+    Close: "\u5173\u95ED",
+    "Video Load Failed": "\u52A0\u8F7D\u5931\u8D25",
+    Volume: "\u97F3\u91CF",
+    Play: "\u64AD\u653E",
+    Pause: "\u6682\u505C",
+    Rate: "\u901F\u5EA6",
+    Mute: "\u9759\u97F3",
+    "Video Flip": "\u753B\u9762\u7FFB\u8F6C",
+    Horizontal: "\u6C34\u5E73",
+    Vertical: "\u5782\u76F4",
+    Reconnect: "\u91CD\u65B0\u8FDE\u63A5",
+    "Show Setting": "\u663E\u793A\u8BBE\u7F6E",
+    "Hide Setting": "\u9690\u85CF\u8BBE\u7F6E",
+    Screenshot: "\u622A\u56FE",
+    "Play Speed": "\u64AD\u653E\u901F\u5EA6",
+    "Aspect Ratio": "\u753B\u9762\u6BD4\u4F8B",
+    Default: "\u9ED8\u8BA4",
+    Normal: "\u6B63\u5E38",
+    Open: "\u6253\u5F00",
+    "Switch Video": "\u5207\u6362",
+    "Switch Subtitle": "\u5207\u6362\u5B57\u5E55",
+    Fullscreen: "\u5168\u5C4F",
+    "Exit Fullscreen": "\u9000\u51FA\u5168\u5C4F",
+    "Web Fullscreen": "\u7F51\u9875\u5168\u5C4F",
+    "Exit Web Fullscreen": "\u9000\u51FA\u7F51\u9875\u5168\u5C4F",
+    "Mini Player": "\u8FF7\u4F60\u64AD\u653E\u5668",
+    "PIP Mode": "\u5F00\u542F\u753B\u4E2D\u753B",
+    "Exit PIP Mode": "\u9000\u51FA\u753B\u4E2D\u753B",
+    "PIP Not Supported": "\u4E0D\u652F\u6301\u753B\u4E2D\u753B",
+    "Fullscreen Not Supported": "\u4E0D\u652F\u6301\u5168\u5C4F",
+    "Subtitle Offset": "\u5B57\u5E55\u504F\u79FB",
+    "Last Seen": "\u4E0A\u6B21\u770B\u5230",
+    "Jump Play": "\u8DF3\u8F6C\u64AD\u653E",
+    AirPlay: "\u9694\u7A7A\u64AD\u653E",
+    "AirPlay Not Available": "\u9694\u7A7A\u64AD\u653E\u4E0D\u53EF\u7528"
 };
 exports.default = zhCn;
 if (typeof window !== "undefined") window["artplayer-i18n-zh-cn"] = zhCn;
@@ -1511,9 +1510,10 @@ exports.default = Player;
 },{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./posterMix":"lglHp","./autoHeightMix":"58Y02","./cssVarMix":"fPbnY","./themeMix":"lga3g","./typeMix":"dnAFx","./stateMix":"8mwXw","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./qualityMix":"1L7ST","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"haOhz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>urlMix);
 var _utils = require("../utils");
 function urlMix(art) {
-    const { option , template: { $video  }  } = art;
+    const { option, template: { $video } } = art;
     (0, _utils.def)(art, "url", {
         get () {
             return $video.src;
@@ -1544,14 +1544,14 @@ function urlMix(art) {
         }
     });
 }
-exports.default = urlMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cSnpy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>attrMix);
 var _utils = require("../utils");
 function attrMix(art) {
-    const { template: { $video  }  } = art;
+    const { template: { $video } } = art;
     (0, _utils.def)(art, "attr", {
         value (key, value) {
             if (value === undefined) return $video[key];
@@ -1559,14 +1559,14 @@ function attrMix(art) {
         }
     });
 }
-exports.default = attrMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ftnB3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playMix);
 var _utils = require("../utils");
 function playMix(art) {
-    const { i18n , notice , option , constructor: { instances  } , template: { $video  }  } = art;
+    const { i18n, notice, option, constructor: { instances }, template: { $video } } = art;
     (0, _utils.def)(art, "play", {
         value: async function() {
             const result = await $video.play();
@@ -1580,14 +1580,14 @@ function playMix(art) {
         }
     });
 }
-exports.default = playMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"kDy9r":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pauseMix);
 var _utils = require("../utils");
 function pauseMix(art) {
-    const { template: { $video  } , i18n , notice  } = art;
+    const { template: { $video }, i18n, notice } = art;
     (0, _utils.def)(art, "pause", {
         value () {
             const result = $video.pause();
@@ -1597,11 +1597,11 @@ function pauseMix(art) {
         }
     });
 }
-exports.default = pauseMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"12BL6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>toggleMix);
 var _utils = require("../utils");
 function toggleMix(art) {
     (0, _utils.def)(art, "toggle", {
@@ -1611,14 +1611,14 @@ function toggleMix(art) {
         }
     });
 }
-exports.default = toggleMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8x3vZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>seekMix);
 var _utils = require("../utils");
 function seekMix(art) {
-    const { notice  } = art;
+    const { notice } = art;
     (0, _utils.def)(art, "seek", {
         set (time) {
             art.currentTime = time;
@@ -1637,14 +1637,14 @@ function seekMix(art) {
         }
     });
 }
-exports.default = seekMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lsF5V":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>volumeMix);
 var _utils = require("../utils");
 function volumeMix(art) {
-    const { template: { $video  } , i18n , notice , storage  } = art;
+    const { template: { $video }, i18n, notice, storage } = art;
     (0, _utils.def)(art, "volume", {
         get: ()=>$video.volume || 0,
         set: (percentage)=>{
@@ -1661,14 +1661,14 @@ function volumeMix(art) {
         }
     });
 }
-exports.default = volumeMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"75HaL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>currentTimeMix);
 var _utils = require("../utils");
 function currentTimeMix(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     (0, _utils.def)(art, "currentTime", {
         get: ()=>$video.currentTime || 0,
         set: (time)=>{
@@ -1678,32 +1678,32 @@ function currentTimeMix(art) {
         }
     });
 }
-exports.default = currentTimeMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5Ud6d":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>durationMix);
 var _utils = require("../utils");
 function durationMix(art) {
     (0, _utils.def)(art, "duration", {
         get: ()=>{
-            const { duration  } = art.template.$video;
+            const { duration } = art.template.$video;
             if (duration === Infinity) return 0;
             return duration || 0;
         }
     });
 }
-exports.default = durationMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"emcjh":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>switchMix);
 var _utils = require("../utils");
 function switchMix(art) {
     function switchUrl(url, currentTime) {
         return new Promise((resolve, reject)=>{
             if (url === art.url) return;
-            const { playing , aspectRatio , playbackRate  } = art;
+            const { playing, aspectRatio, playbackRate } = art;
             art.pause();
             art.url = url;
             art.notice.show = "";
@@ -1732,14 +1732,14 @@ function switchMix(art) {
         set: art.switchUrl
     });
 }
-exports.default = switchMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"78DYM":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playbackRateMix);
 var _utils = require("../utils");
 function playbackRateMix(art) {
-    const { template: { $video  } , i18n , notice  } = art;
+    const { template: { $video }, i18n, notice } = art;
     (0, _utils.def)(art, "playbackRate", {
         get () {
             return $video.playbackRate;
@@ -1753,14 +1753,14 @@ function playbackRateMix(art) {
         }
     });
 }
-exports.default = playbackRateMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"chjHL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>aspectRatioMix);
 var _utils = require("../utils");
 function aspectRatioMix(art) {
-    const { i18n , notice , template: { $video , $player  }  } = art;
+    const { i18n, notice, template: { $video, $player } } = art;
     (0, _utils.def)(art, "aspectRatio", {
         get () {
             return $player.dataset.aspectRatio || "default";
@@ -1774,7 +1774,7 @@ function aspectRatioMix(art) {
                 delete $player.dataset.aspectRatio;
             } else {
                 const ratioArray = ratio.split(":").map(Number);
-                const { clientWidth , clientHeight  } = $player;
+                const { clientWidth, clientHeight } = $player;
                 const playerRatio = clientWidth / clientHeight;
                 const setupRatio = ratioArray[0] / ratioArray[1];
                 if (playerRatio > setupRatio) {
@@ -1793,14 +1793,14 @@ function aspectRatioMix(art) {
         }
     });
 }
-exports.default = aspectRatioMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jDAYl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>screenshotMix);
 var _utils = require("../utils");
 function screenshotMix(art) {
-    const { notice , template: { $video  }  } = art;
+    const { notice, template: { $video } } = art;
     const $canvas = (0, _utils.createElement)("canvas");
     (0, _utils.def)(art, "getDataURL", {
         value: ()=>new Promise((resolve, reject)=>{
@@ -1839,16 +1839,16 @@ function screenshotMix(art) {
         }
     });
 }
-exports.default = screenshotMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"juJAD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreenMix);
 var _screenfull = require("../libs/screenfull");
 var _screenfullDefault = parcelHelpers.interopDefault(_screenfull);
 var _utils = require("../utils");
 function fullscreenMix(art) {
-    const { i18n , notice , template: { $video , $player  }  } = art;
+    const { i18n, notice, template: { $video, $player } } = art;
     const nativeScreenfull = (art)=>{
         (0, _screenfullDefault.default).on("change", ()=>{
             art.emit("fullscreen", (0, _screenfullDefault.default).isFullscreen);
@@ -1906,7 +1906,6 @@ function fullscreenMix(art) {
         (0, _utils.def)(art, "fullscreen", (0, _utils.get)(art, "fullscreen"));
     });
 }
-exports.default = fullscreenMix;
 
 },{"../libs/screenfull":"4XLC7","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4XLC7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2039,9 +2038,10 @@ exports.default = screenfull;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5f725":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreenWebMix);
 var _utils = require("../utils");
 function fullscreenWebMix(art) {
-    const { constructor , template: { $container , $player  }  } = art;
+    const { constructor, template: { $container, $player } } = art;
     let cssText = "";
     (0, _utils.def)(art, "fullscreenWeb", {
         get () {
@@ -2069,14 +2069,14 @@ function fullscreenWebMix(art) {
         }
     });
 }
-exports.default = fullscreenWebMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jWhCt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pipMix);
 var _utils = require("../utils");
 function nativePip(art) {
-    const { template: { $video  } , proxy , notice  } = art;
+    const { template: { $video }, proxy, notice } = art;
     $video.disablePictureInPicture = false;
     (0, _utils.def)(art, "pip", {
         get () {
@@ -2103,7 +2103,7 @@ function nativePip(art) {
     });
 }
 function webkitPip(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     $video.webkitSetPresentationMode("inline");
     (0, _utils.def)(art, "pip", {
         get () {
@@ -2122,7 +2122,7 @@ function webkitPip(art) {
     });
 }
 function pipMix(art) {
-    const { i18n , notice , template: { $video  }  } = art;
+    const { i18n, notice, template: { $video } } = art;
     if (document.pictureInPictureEnabled) nativePip(art);
     else if ($video.webkitSupportsPresentationMode) webkitPip(art);
     else (0, _utils.def)(art, "pip", {
@@ -2134,14 +2134,14 @@ function pipMix(art) {
         }
     });
 }
-exports.default = pipMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jhDPX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>seekMix);
 var _utils = require("../utils");
 function seekMix(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     (0, _utils.def)(art, "loaded", {
         get: ()=>art.loadedTime / $video.duration
     });
@@ -2149,41 +2149,41 @@ function seekMix(art) {
         get: ()=>$video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0
     });
 }
-exports.default = seekMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"3bU8P":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playedMix);
 var _utils = require("../utils");
 function playedMix(art) {
     (0, _utils.def)(art, "played", {
         get: ()=>art.currentTime / art.duration
     });
 }
-exports.default = playedMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5Ctiw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playingMix);
 var _utils = require("../utils");
 function playingMix(art) {
-    const { $video  } = art.template;
+    const { $video } = art.template;
     (0, _utils.def)(art, "playing", {
         get: ()=>!!($video.currentTime > 0 && !$video.paused && !$video.ended && $video.readyState > 2)
     });
 }
-exports.default = playingMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6fRkJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>resizeMix);
 var _utils = require("../utils");
 function resizeMix(art) {
-    const { $container , $player , $video  } = art.template;
+    const { $container, $player, $video } = art.template;
     (0, _utils.def)(art, "autoSize", {
         value () {
-            const { videoWidth , videoHeight  } = $video;
-            const { width , height  } = $container.getBoundingClientRect();
+            const { videoWidth, videoHeight } = $video;
+            const { width, height } = $container.getBoundingClientRect();
             const videoRatio = videoWidth / videoHeight;
             const containerRatio = width / height;
             if (containerRatio > videoRatio) {
@@ -2202,11 +2202,11 @@ function resizeMix(art) {
         }
     });
 }
-exports.default = resizeMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lOJRK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>rectMix);
 var _utils = require("../utils");
 function rectMix(art) {
     (0, _utils.def)(art, "rect", {
@@ -2241,14 +2241,14 @@ function rectMix(art) {
         }
     });
 }
-exports.default = rectMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"fSa7B":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>flipMix);
 var _utils = require("../utils");
 function flipMix(art) {
-    const { template: { $player  } , i18n , notice  } = art;
+    const { template: { $player }, i18n, notice } = art;
     (0, _utils.def)(art, "flip", {
         get () {
             return $player.dataset.flip || "normal";
@@ -2262,19 +2262,19 @@ function flipMix(art) {
         }
     });
 }
-exports.default = flipMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"fy4qC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>miniMix);
 var _utils = require("../utils");
 function miniMix(art) {
-    const { icons , proxy , storage , template: { $player , $video  }  } = art;
+    const { icons, proxy, storage, template: { $player, $video } } = art;
     let isDroging = false;
     let lastPageX = 0;
     let lastPageY = 0;
     function hideMini() {
-        const { $mini  } = art.template;
+        const { $mini } = art.template;
         if ($mini) {
             (0, _utils.removeClass)($player, "art-mini");
             (0, _utils.setStyle)($mini, "display", "none");
@@ -2292,7 +2292,7 @@ function miniMix(art) {
         }
     }
     function createMini() {
-        const { $mini  } = art.template;
+        const { $mini } = art.template;
         if ($mini) {
             (0, _utils.append)($mini, $video);
             return (0, _utils.setStyle)($mini, "display", "flex");
@@ -2343,7 +2343,7 @@ function miniMix(art) {
         }
     }
     function initMini() {
-        const { $mini  } = art.template;
+        const { $mini } = art.template;
         const rect = $mini.getBoundingClientRect();
         const top = window.innerHeight - rect.height - 50;
         const left = window.innerWidth - rect.width - 50;
@@ -2373,18 +2373,19 @@ function miniMix(art) {
         }
     });
 }
-exports.default = miniMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lglHp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>posterMix);
 var _utils = require("../utils");
 function posterMix(art) {
-    const { template: { $poster  }  } = art;
+    const { template: { $poster } } = art;
     (0, _utils.def)(art, "poster", {
         get: ()=>{
             try {
                 return $poster.style["backgroundImage"].match(/"(.*)"/)[1];
+            // eslint-disable-next-line no-unused-vars
             } catch (error) {
                 return "";
             }
@@ -2394,32 +2395,32 @@ function posterMix(art) {
         }
     });
 }
-exports.default = posterMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"58Y02":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>autoHeightMix);
 var _utils = require("../utils");
 function autoHeightMix(art) {
-    const { template: { $container , $video  }  } = art;
+    const { template: { $container, $video } } = art;
     (0, _utils.def)(art, "autoHeight", {
         value () {
-            const { clientWidth  } = $container;
-            const { videoHeight , videoWidth  } = $video;
+            const { clientWidth } = $container;
+            const { videoHeight, videoWidth } = $video;
             const height = videoHeight * (clientWidth / videoWidth);
             (0, _utils.setStyle)($container, "height", height + "px");
             art.emit("autoHeight", height);
         }
     });
 }
-exports.default = autoHeightMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"fPbnY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>cssVarMix);
 var _utils = require("../utils");
 function cssVarMix(art) {
-    const { $player  } = art.template;
+    const { $player } = art.template;
     (0, _utils.def)(art, "cssVar", {
         value (key, value) {
             if (value) return $player.style.setProperty(key, value);
@@ -2427,11 +2428,11 @@ function cssVarMix(art) {
         }
     });
 }
-exports.default = cssVarMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lga3g":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>themeMix);
 var _utils = require("../utils");
 function themeMix(art) {
     (0, _utils.def)(art, "theme", {
@@ -2443,11 +2444,11 @@ function themeMix(art) {
         }
     });
 }
-exports.default = themeMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"dnAFx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>typeMix);
 var _utils = require("../utils");
 function typeMix(art) {
     (0, _utils.def)(art, "type", {
@@ -2459,11 +2460,11 @@ function typeMix(art) {
         }
     });
 }
-exports.default = typeMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8mwXw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>stateMix);
 var _utils = require("../utils");
 function stateMix(art) {
     const states = [
@@ -2482,15 +2483,15 @@ function stateMix(art) {
         }
     });
 }
-exports.default = stateMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4Ny6z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>subtitleOffsetMix);
 var _utils = require("../utils");
 function subtitleOffsetMix(art) {
-    const { clamp  } = art.constructor.utils;
-    const { notice , template , i18n  } = art;
+    const { clamp } = art.constructor.utils;
+    const { notice, template, i18n } = art;
     let offsetCache = 0;
     let cuesCache = [];
     art.on("subtitle:switch", ()=>{
@@ -2520,14 +2521,14 @@ function subtitleOffsetMix(art) {
         }
     });
 }
-exports.default = subtitleOffsetMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"gcYqJ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>airplayMix);
 var _utils = require("../utils");
 function airplayMix(art) {
-    const { i18n , notice , proxy , template: { $video  }  } = art;
+    const { i18n, notice, proxy, template: { $video } } = art;
     let available = true;
     if (window.WebKitPlaybackTargetAvailabilityEvent && $video.webkitShowPlaybackTargetPicker) proxy($video, "webkitplaybacktargetavailabilitychanged", (event)=>{
         switch(event.availability){
@@ -2549,16 +2550,16 @@ function airplayMix(art) {
         }
     });
 }
-exports.default = airplayMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1L7ST":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>qualityMix);
 var _utils = require("../utils");
 function qualityMix(art) {
     (0, _utils.def)(art, "quality", {
         set (quality) {
-            const { controls , notice , i18n  } = art;
+            const { controls, notice, i18n } = art;
             const qualityDefault = quality.find((item)=>item.default) || quality[0];
             controls.update({
                 name: "quality",
@@ -2577,14 +2578,14 @@ function qualityMix(art) {
         }
     });
 }
-exports.default = qualityMix;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"vGIPW":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>attrInit);
 var _utils = require("../utils");
 function attrInit(art) {
-    const { option , storage , template: { $video , $poster  }  } = art;
+    const { option, storage, template: { $video, $poster } } = art;
     for(const key in option.moreVideoAttr)art.attr(key, option.moreVideoAttr[key]);
     if (option.muted) art.muted = option.muted;
     if (option.volume) $video.volume = (0, _utils.clamp)(option.volume, 0, 1);
@@ -2600,16 +2601,16 @@ function attrInit(art) {
     for(const key in option.cssVar)art.cssVar(key, option.cssVar[key]);
     art.url = option.url;
 }
-exports.default = attrInit;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"5D1O8":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>eventInit);
 var _config = require("../config");
 var _configDefault = parcelHelpers.interopDefault(_config);
 var _utils = require("../utils");
 function eventInit(art) {
-    const { i18n , notice , option , constructor , proxy , template: { $player , $video , $poster  }  } = art;
+    const { i18n, notice, option, constructor, proxy, template: { $player, $video, $poster } } = art;
     let reconnectTime = 0;
     for(let index = 0; index < (0, _configDefault.default).events.length; index++)proxy($video, (0, _configDefault.default).events[index], (event)=>{
         art.emit(`video:${event.type}`, event);
@@ -2713,7 +2714,6 @@ function eventInit(art) {
         art.mask.show = false;
     });
 }
-exports.default = eventInit;
 
 },{"../config":"1hSww","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"nK2ZQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2746,10 +2746,11 @@ var _airplayDefault = parcelHelpers.interopDefault(_airplay);
 class Control extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
+        this.isHover = false;
         this.name = "control";
         this.timer = Date.now();
-        const { constructor  } = art;
-        const { $player  } = this.art.template;
+        const { constructor } = art;
+        const { $player, $bottom } = this.art.template;
         art.on("mousemove", ()=>{
             if (!(0, _utils.isMobile)) this.show = true;
         });
@@ -2757,8 +2758,11 @@ class Control extends (0, _componentDefault.default) {
             if (0, _utils.isMobile) this.toggle();
             else this.show = true;
         });
+        art.on("document:mousemove", (event)=>{
+            this.isHover = (0, _utils.includeFromEvent)(event, $bottom);
+        });
         art.on("video:timeupdate", ()=>{
-            if (!art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) this.show = false;
+            if (!art.setting.show && !this.isHover && !art.isInput && art.playing && this.show && Date.now() - this.timer >= constructor.CONTROL_HIDE_TIME) this.show = false;
         });
         art.on("control", (state)=>{
             if (state) {
@@ -2773,7 +2777,7 @@ class Control extends (0, _componentDefault.default) {
         this.init();
     }
     init() {
-        const { option  } = this.art;
+        const { option } = this.art;
         if (!option.isLive) this.add((0, _progressDefault.default)({
             name: "progress",
             position: "top",
@@ -2836,7 +2840,7 @@ class Control extends (0, _componentDefault.default) {
     }
     add(getOption) {
         const option = typeof getOption === "function" ? getOption(this.art) : getOption;
-        const { $progress , $controlsLeft , $controlsRight  } = this.art.template;
+        const { $progress, $controlsLeft, $controlsRight } = this.art.template;
         switch(option.position){
             case "top":
                 this.$parent = $progress;
@@ -2878,7 +2882,7 @@ class Component {
         return (0, _dom.hasClass)(this.art.template.$player, `art-${this.name}-show`);
     }
     set show(value) {
-        const { $player  } = this.art.template;
+        const { $player } = this.art.template;
         const className = `art-${this.name}-show`;
         if (value) (0, _dom.addClass)($player, className);
         else (0, _dom.removeClass)($player, className);
@@ -2929,7 +2933,7 @@ class Component {
         return $ref;
     }
     addSelector(option, $ref, events) {
-        const { hover , proxy  } = this.art.events;
+        const { hover, proxy } = this.art.events;
         (0, _dom.addClass)($ref, "art-control-selector");
         const $value = (0, _dom.createElement)("div");
         (0, _dom.addClass)($value, "art-selector-value");
@@ -2987,13 +2991,14 @@ exports.default = Component;
 },{"./dom":"iWXW0","./format":"9vUua","./error":"kCmly","option-validator":"2tbdu","../scheme":"jVxq1","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"d7VBA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreen);
 var _utils = require("../utils");
 function fullscreen(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Fullscreen"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 const $fullscreenOn = (0, _utils.append)($control, icons.fullscreenOn);
                 const $fullscreenOff = (0, _utils.append)($control, icons.fullscreenOff);
                 (0, _utils.setStyle)($fullscreenOff, "display", "none");
@@ -3014,18 +3019,18 @@ function fullscreen(option) {
             }
         });
 }
-exports.default = fullscreen;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"iE4ux":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fullscreenWeb);
 var _utils = require("../utils");
 function fullscreenWeb(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Web Fullscreen"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 const $fullscreenWebOn = (0, _utils.append)($control, icons.fullscreenWebOn);
                 const $fullscreenWebOff = (0, _utils.append)($control, icons.fullscreenWebOff);
                 (0, _utils.setStyle)($fullscreenWebOff, "display", "none");
@@ -3046,18 +3051,18 @@ function fullscreenWeb(option) {
             }
         });
 }
-exports.default = fullscreenWeb;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"03ERY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pip);
 var _utils = require("../utils");
 function pip(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("PIP Mode"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 (0, _utils.append)($control, icons.pip);
                 proxy($control, "click", ()=>{
                     art.pip = !art.pip;
@@ -3068,17 +3073,17 @@ function pip(option) {
             }
         });
 }
-exports.default = pip;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"2tuF0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playAndPause);
 var _utils = require("../utils");
 function playAndPause(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 const $play = (0, _utils.append)($control, icons.play);
                 const $pause = (0, _utils.append)($control, icons.pause);
                 (0, _utils.tooltip)($play, i18n.get("Play"));
@@ -3108,17 +3113,17 @@ function playAndPause(option) {
             }
         });
 }
-exports.default = playAndPause;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"afGEi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getPosFromEvent", ()=>getPosFromEvent);
 parcelHelpers.export(exports, "setCurrentTime", ()=>setCurrentTime);
+parcelHelpers.export(exports, "default", ()=>progress);
 var _utils = require("../utils");
 function getPosFromEvent(art, event) {
-    const { $progress  } = art.template;
-    const { left  } = $progress.getBoundingClientRect();
+    const { $progress } = art.template;
+    const { left } = $progress.getBoundingClientRect();
     const eventLeft = (0, _utils.isMobile) ? event.touches[0].clientX : event.clientX;
     const width = (0, _utils.clamp)(eventLeft - left, 0, $progress.clientWidth);
     const second = width / $progress.clientWidth * art.duration;
@@ -3138,14 +3143,14 @@ function setCurrentTime(art, event) {
         art.emit("setBar", "played", percentage);
         art.seek = second;
     } else {
-        const { second , percentage  } = getPosFromEvent(art, event);
+        const { second, percentage } = getPosFromEvent(art, event);
         art.emit("setBar", "played", percentage);
         art.seek = second;
     }
 }
 function progress(options) {
     return (art)=>{
-        const { icons , option , proxy  } = art;
+        const { icons, option, proxy } = art;
         return {
             ...options,
             html: `
@@ -3169,8 +3174,8 @@ function progress(options) {
                 if (icons.indicator) (0, _utils.append)($indicator, icons.indicator);
                 else (0, _utils.setStyle)($indicator, "backgroundColor", "var(--art-theme)");
                 function showHighlight(event) {
-                    const { width  } = getPosFromEvent(art, event);
-                    const { text  } = event.target.dataset;
+                    const { width } = getPosFromEvent(art, event);
+                    const { text } = event.target.dataset;
                     $tip.innerHTML = text;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
@@ -3178,7 +3183,7 @@ function progress(options) {
                     else (0, _utils.setStyle)($tip, "left", `${width - tipWidth / 2}px`);
                 }
                 function showTime(event) {
-                    const { width , time  } = getPosFromEvent(art, event);
+                    const { width, time } = getPosFromEvent(art, event);
                     $tip.innerHTML = time;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
@@ -3193,7 +3198,7 @@ function progress(options) {
                     }
                 }
                 function setHover(event) {
-                    const { width  } = getPosFromEvent(art, event);
+                    const { width } = getPosFromEvent(art, event);
                     (0, _utils.setStyle)($hover, "width", `${width}px`);
                     (0, _utils.setStyle)($hover, "display", "flex");
                 }
@@ -3240,7 +3245,7 @@ function progress(options) {
                     });
                     art.on("document:mousemove", (event)=>{
                         if (isDroging) {
-                            const { second , percentage  } = getPosFromEvent(art, event);
+                            const { second, percentage } = getPosFromEvent(art, event);
                             setBar("played", percentage);
                             art.seek = second;
                         }
@@ -3253,11 +3258,11 @@ function progress(options) {
         };
     };
 }
-exports.default = progress;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"e6eX5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>time);
 var _utils = require("../utils");
 function time(option) {
     return (art)=>({
@@ -3284,17 +3289,17 @@ function time(option) {
             }
         });
 }
-exports.default = time;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ezhk3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>volume);
 var _utils = require("../utils");
 function volume(option) {
     return (art)=>({
             ...option,
             mounted: ($control)=>{
-                const { proxy , icons  } = art;
+                const { proxy, icons } = art;
                 const $volume = (0, _utils.append)($control, icons.volume);
                 const $close = (0, _utils.append)($control, icons.volumeClose);
                 const $panel = (0, _utils.append)($control, '<div class="art-volume-panel"></div>');
@@ -3305,7 +3310,7 @@ function volume(option) {
                 const $loaded = (0, _utils.append)($handle, `<div class="art-volume-loaded"></div>`);
                 const $indicator = (0, _utils.append)($slider, `<div class="art-volume-indicator"></div>`);
                 function getVolumeFromEvent(event) {
-                    const { top , height  } = $slider.getBoundingClientRect();
+                    const { top, height } = $slider.getBoundingClientRect();
                     return 1 - (event.clientY - top) / height;
                 }
                 function update() {
@@ -3352,18 +3357,18 @@ function volume(option) {
             }
         });
 }
-exports.default = volume;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"3Vg4s":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>setting);
 var _utils = require("../utils");
 function setting(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Show Setting"),
             mounted: ($control)=>{
-                const { proxy , icons , i18n  } = art;
+                const { proxy, icons, i18n } = art;
                 (0, _utils.append)($control, icons.setting);
                 proxy($control, "click", ()=>{
                     art.setting.toggle();
@@ -3375,25 +3380,25 @@ function setting(option) {
             }
         });
 }
-exports.default = setting;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8AAYm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>thumbnails);
 var _utils = require("../utils");
 var _progress = require("./progress");
 function thumbnails(options) {
     return (art)=>({
             ...options,
             mounted: ($control)=>{
-                const { option , template: { $progress , $video  } , events: { proxy , loadImg  }  } = art;
+                const { option, template: { $progress, $video }, events: { proxy, loadImg } } = art;
                 let image = null;
                 let loading = false;
                 let isLoad = false;
                 let isHover = false;
                 function showThumbnails(event) {
-                    const { width: posWidth  } = (0, _progress.getPosFromEvent)(art, event);
-                    const { url , number , column , width , height  } = option.thumbnails;
+                    const { width: posWidth } = (0, _progress.getPosFromEvent)(art, event);
+                    const { url, number, column, width, height } = option.thumbnails;
                     const width2 = width || image.naturalWidth / column;
                     const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
                     const perWidth = $progress.clientWidth / number;
@@ -3431,18 +3436,18 @@ function thumbnails(options) {
             }
         });
 }
-exports.default = thumbnails;
 
 },{"../utils":"euhMG","./progress":"afGEi","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>screenshot);
 var _utils = require("../utils");
 function screenshot(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("Screenshot"),
             mounted: ($control)=>{
-                const { proxy , icons  } = art;
+                const { proxy, icons } = art;
                 (0, _utils.append)($control, icons.screenshot);
                 proxy($control, "click", ()=>{
                     art.screenshot();
@@ -3450,24 +3455,23 @@ function screenshot(option) {
             }
         });
 }
-exports.default = screenshot;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4dMTc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>pip);
 var _utils = require("../utils");
 function pip(option) {
     return (art)=>({
             ...option,
             tooltip: art.i18n.get("AirPlay"),
             mounted: ($control)=>{
-                const { proxy , icons  } = art;
+                const { proxy, icons } = art;
                 (0, _utils.append)($control, icons.airplay);
                 proxy($control, "click", ()=>art.airplay());
             }
         });
 }
-exports.default = pip;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"iygWX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -3495,7 +3499,7 @@ class Contextmenu extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { option , proxy , template: { $player , $contextmenu  }  } = this.art;
+        const { option, proxy, template: { $player, $contextmenu } } = this.art;
         if (option.playbackRate) this.add((0, _playbackRateDefault.default)({
             name: "playbackRate",
             index: 10
@@ -3527,8 +3531,8 @@ class Contextmenu extends (0, _componentDefault.default) {
             this.show = true;
             const mouseX = event.clientX;
             const mouseY = event.clientY;
-            const { height: cHeight , width: cWidth , left: cLeft , top: cTop  } = $player.getBoundingClientRect();
-            const { height: mHeight , width: mWidth  } = $contextmenu.getBoundingClientRect();
+            const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
+            const { height: mHeight, width: mWidth } = $contextmenu.getBoundingClientRect();
             let menuLeft = mouseX - cLeft;
             let menuTop = mouseY - cTop;
             if (mouseX + mWidth > cLeft + cWidth) menuLeft = cWidth - mWidth;
@@ -3551,16 +3555,17 @@ exports.default = Contextmenu;
 },{"../utils":"euhMG","../utils/component":"1UWqI","./playbackRate":"aEEkc","./aspectRatio":"jQvOA","./flip":"gcvCz","./info":"2g4ET","./version":"6YbWR","./close":"kM2pD","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"aEEkc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playbackRate);
 var _utils = require("../utils");
 function playbackRate(option) {
     return (art)=>{
-        const { i18n , constructor: { PLAYBACK_RATE  }  } = art;
+        const { i18n, constructor: { PLAYBACK_RATE } } = art;
         const html = PLAYBACK_RATE.map((item)=>`<span data-value="${item}">${item === 1 ? i18n.get("Normal") : item.toFixed(1)}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Play Speed")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value  } = event.target.dataset;
+                const { value } = event.target.dataset;
                 if (value) {
                     art.playbackRate = Number(value);
                     contextmenu.show = false;
@@ -3577,21 +3582,21 @@ function playbackRate(option) {
         };
     };
 }
-exports.default = playbackRate;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jQvOA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>aspectRatio);
 var _utils = require("../utils");
 function aspectRatio(option) {
     return (art)=>{
-        const { i18n , constructor: { ASPECT_RATIO  }  } = art;
+        const { i18n, constructor: { ASPECT_RATIO } } = art;
         const html = ASPECT_RATIO.map((item)=>`<span data-value="${item}">${item === "default" ? i18n.get("Default") : item}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Aspect Ratio")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value  } = event.target.dataset;
+                const { value } = event.target.dataset;
                 if (value) {
                     art.aspectRatio = value;
                     contextmenu.show = false;
@@ -3608,21 +3613,21 @@ function aspectRatio(option) {
         };
     };
 }
-exports.default = aspectRatio;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"gcvCz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>flip);
 var _utils = require("../utils");
 function flip(option) {
     return (art)=>{
-        const { i18n , constructor: { FLIP  }  } = art;
+        const { i18n, constructor: { FLIP } } = art;
         const html = FLIP.map((item)=>`<span data-value="${item}">${i18n.get((0, _utils.capitalize)(item))}</span>`).join("");
         return {
             ...option,
             html: `${i18n.get("Video Flip")}: ${html}`,
             click: (contextmenu, event)=>{
-                const { value  } = event.target.dataset;
+                const { value } = event.target.dataset;
                 if (value) {
                     art.flip = value.toLowerCase();
                     contextmenu.show = false;
@@ -3639,11 +3644,11 @@ function flip(option) {
         };
     };
 }
-exports.default = flip;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"2g4ET":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>info);
 function info(option) {
     return (art)=>({
             ...option,
@@ -3654,22 +3659,22 @@ function info(option) {
             }
         });
 }
-exports.default = info;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6YbWR":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
         html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.2"}</a>`
     };
 }
-exports.default = version;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"kM2pD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>close);
 function close(option) {
     return (art)=>({
             ...option,
@@ -3679,7 +3684,6 @@ function close(option) {
             }
         });
 }
-exports.default = close;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6tuCt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -3694,7 +3698,7 @@ class Info extends (0, _componentDefault.default) {
         if (!(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy , constructor , template: { $infoPanel , $infoClose , $video  }  } = this.art;
+        const { proxy, constructor, template: { $infoPanel, $infoClose, $video } } = this.art;
         proxy($infoClose, "click", ()=>{
             this.show = false;
         });
@@ -3755,12 +3759,12 @@ class Subtitle extends (0, _componentDefault.default) {
         return this.textTrack.activeCues[0];
     }
     style(key, value) {
-        const { $subtitle  } = this.art.template;
+        const { $subtitle } = this.art.template;
         if (typeof key === "object") return (0, _utils.setStyles)($subtitle, key);
         return (0, _utils.setStyle)($subtitle, key, value);
     }
     update() {
-        const { $subtitle  } = this.art.template;
+        const { $subtitle } = this.art.template;
         $subtitle.innerHTML = "";
         if (this.activeCue) {
             if (this.art.option.subtitle.escape) $subtitle.innerHTML = this.activeCue.text.split(/\r?\n/).map((item)=>`<div class="art-subtitle-line">${(0, _utils.escape)(item)}</div>`).join("");
@@ -3769,7 +3773,7 @@ class Subtitle extends (0, _componentDefault.default) {
         }
     }
     async switch(url, newOption = {}) {
-        const { i18n , notice , option  } = this.art;
+        const { i18n, notice, option } = this.art;
         const subtitleOption = {
             ...option.subtitle,
             ...newOption,
@@ -3780,8 +3784,8 @@ class Subtitle extends (0, _componentDefault.default) {
         return subUrl;
     }
     createTrack(kind, url) {
-        const { template , proxy , option  } = this.art;
-        const { $video , $track  } = template;
+        const { template, proxy, option } = this.art;
+        const { $video, $track } = template;
         const $newTrack = (0, _utils.createElement)("track");
         $newTrack.default = true;
         $newTrack.kind = kind;
@@ -3795,7 +3799,7 @@ class Subtitle extends (0, _componentDefault.default) {
         this.eventDestroy = proxy(this.textTrack, "cuechange", ()=>this.update());
     }
     async init(subtitleOption) {
-        const { notice , template: { $subtitle  }  } = this.art;
+        const { notice, template: { $subtitle } } = this.art;
         (0, _optionValidatorDefault.default)(subtitleOption, (0, _schemeDefault.default).subtitle);
         if (!subtitleOption.url) return;
         this.style(subtitleOption.style);
@@ -3915,9 +3919,10 @@ exports.default = Events;
 },{"../utils/error":"kCmly","./clickInit":"4xN0W","./hoverInit":"bO8Cy","./moveInit":"l5Ock","./resizeInit":"1e06H","./gestureInit":"1Cim3","./viewInit":"xZUxN","./documentInit":"jKzGQ","./updateInit":"ONlxE","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"4xN0W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>clickInit);
 var _utils = require("../utils");
 function clickInit(art, events) {
-    const { constructor , template: { $player , $video  }  } = art;
+    const { constructor, template: { $player, $video } } = art;
     events.proxy(document, [
         "click",
         "contextmenu"
@@ -3936,7 +3941,7 @@ function clickInit(art, events) {
     events.proxy($video, "click", (event)=>{
         const now = Date.now();
         clickTimes.push(now);
-        const { MOBILE_CLICK_PLAY , DBCLICK_TIME , MOBILE_DBCLICK_PLAY , DBCLICK_FULLSCREEN  } = constructor;
+        const { MOBILE_CLICK_PLAY, DBCLICK_TIME, MOBILE_DBCLICK_PLAY, DBCLICK_FULLSCREEN } = constructor;
         const clicks = clickTimes.filter((t)=>now - t <= DBCLICK_TIME);
         switch(clicks.length){
             case 1:
@@ -3958,14 +3963,14 @@ function clickInit(art, events) {
         }
     });
 }
-exports.default = clickInit;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"bO8Cy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>hoverInit);
 var _utils = require("../utils");
 function hoverInit(art, events) {
-    const { $player  } = art.template;
+    const { $player } = art.template;
     events.hover($player, (event)=>{
         (0, _utils.addClass)($player, "art-hover");
         art.emit("hover", true, event);
@@ -3974,27 +3979,27 @@ function hoverInit(art, events) {
         art.emit("hover", false, event);
     });
 }
-exports.default = hoverInit;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"l5Ock":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>moveInit);
 function moveInit(art, events) {
-    const { $player  } = art.template;
+    const { $player } = art.template;
     events.proxy($player, "mousemove", (event)=>{
         art.emit("mousemove", event);
     });
 }
-exports.default = moveInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1e06H":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>resizeInit);
 var _utils = require("../utils");
 function resizeInit(art, events) {
-    const { option , constructor  } = art;
+    const { option, constructor } = art;
     art.on("resize", ()=>{
-        const { aspectRatio , notice  } = art;
+        const { aspectRatio, notice } = art;
         if (art.state === "standard" && option.autoSize) art.autoSize();
         art.aspectRatio = aspectRatio;
         notice.show = "";
@@ -4006,11 +4011,11 @@ function resizeInit(art, events) {
     ], ()=>resizeFn());
     if (screen && screen.orientation && screen.orientation.onchange) events.proxy(screen.orientation, "change", ()=>resizeFn());
 }
-exports.default = resizeInit;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1Cim3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>gestureInit);
 var _utils = require("../utils");
 var _progress = require("../control/progress");
 function GetSlideAngle(dx, dy) {
@@ -4030,7 +4035,7 @@ function GetSlideDirection(startX, startY, endX, endY) {
 }
 function gestureInit(art, events) {
     if ((0, _utils.isMobile) && !art.option.isLive) {
-        const { $video , $progress  } = art.template;
+        const { $video, $progress } = art.template;
         let touchTarget = null;
         let isDroging = false;
         let startX = 0;
@@ -4040,7 +4045,7 @@ function gestureInit(art, events) {
             if (event.touches.length === 1 && !art.isLock) {
                 if (touchTarget === $progress) (0, _progress.setCurrentTime)(art, event);
                 isDroging = true;
-                const { pageX , pageY  } = event.touches[0];
+                const { pageX, pageY } = event.touches[0];
                 startX = pageX;
                 startY = pageY;
                 startTime = art.currentTime;
@@ -4048,7 +4053,7 @@ function gestureInit(art, events) {
         };
         const onTouchMove = (event)=>{
             if (event.touches.length === 1 && isDroging && art.duration) {
-                const { pageX , pageY  } = event.touches[0];
+                const { pageX, pageY } = event.touches[0];
                 const direction = GetSlideDirection(startX, startY, pageX, pageY);
                 const isHorizontal = [
                     3,
@@ -4093,14 +4098,14 @@ function gestureInit(art, events) {
         events.proxy(document, "touchend", onTouchEnd);
     }
 }
-exports.default = gestureInit;
 
 },{"../utils":"euhMG","../control/progress":"afGEi","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"xZUxN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>viewInit);
 var _utils = require("../utils");
 function viewInit(art, events) {
-    const { option , constructor , template: { $container  }  } = art;
+    const { option, constructor, template: { $container } } = art;
     const scrollFn = (0, _utils.throttle)(()=>{
         art.emit("view", (0, _utils.isInViewport)($container, constructor.SCROLL_GAP));
     }, constructor.SCROLL_TIME);
@@ -4109,11 +4114,11 @@ function viewInit(art, events) {
         if (option.autoMini) art.mini = !state;
     });
 }
-exports.default = viewInit;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"jKzGQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>documentInit);
 function documentInit(art, events) {
     events.proxy(document, "mousemove", (event)=>{
         art.emit("document:mousemove", event);
@@ -4122,11 +4127,11 @@ function documentInit(art, events) {
         art.emit("document:mouseup", event);
     });
 }
-exports.default = documentInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ONlxE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>updateInit);
 function updateInit(art) {
     if (art.constructor.USE_RAF) {
         let timer = null;
@@ -4139,7 +4144,6 @@ function updateInit(art) {
         });
     }
 }
-exports.default = updateInit;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"f1oWx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4152,7 +4156,7 @@ class Hotkey {
         if (art.option.hotkey && !(0, _utils.isMobile)) this.init();
     }
     init() {
-        const { proxy , constructor  } = this.art;
+        const { proxy, constructor } = this.art;
         this.add(27, ()=>{
             if (this.art.fullscreenWeb) this.art.fullscreenWeb = false;
         });
@@ -4211,7 +4215,7 @@ var _componentDefault = parcelHelpers.interopDefault(_component);
 class Layer extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option , template: { $layer  }  } = art;
+        const { option, template: { $layer } } = art;
         this.name = "layer";
         this.$parent = $layer;
         for(let index = 0; index < option.layers.length; index++)this.add(option.layers[index]);
@@ -4244,7 +4248,7 @@ class Notice {
         this.timer = null;
     }
     set show(msg) {
-        const { constructor , template: { $player , $noticeInner  }  } = this.art;
+        const { constructor, template: { $player, $noticeInner } } = this.art;
         if (msg) {
             $noticeInner.innerText = msg instanceof Error ? msg.message.trim() : msg;
             (0, _utils.addClass)($player, "art-notice-show");
@@ -4268,7 +4272,7 @@ class Mask extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
         this.name = "mask";
-        const { template , icons , events  } = art;
+        const { template, icons, events } = art;
         const $state = (0, _utils.append)(template.$state, icons.state);
         const $error = (0, _utils.append)(template.$state, icons.error);
         (0, _utils.setStyle)($error, "display", "none");
@@ -4477,7 +4481,7 @@ var _utils = require("../utils");
 class Setting extends (0, _componentDefault.default) {
     constructor(art){
         super(art);
-        const { option , controls , template: { $setting  }  } = art;
+        const { option, controls, template: { $setting } } = art;
         this.name = "setting";
         this.$parent = $setting;
         this.option = [];
@@ -4512,7 +4516,7 @@ class Setting extends (0, _componentDefault.default) {
     }
     get defaultSettings() {
         const result = [];
-        const { option  } = this.art;
+        const { option } = this.art;
         if (option.playbackRate) result.push((0, _playbackRateDefault.default)(this.art));
         if (option.aspectRatio) result.push((0, _aspectRatioDefault.default)(this.art));
         if (option.flip) result.push((0, _flipDefault.default)(this.art));
@@ -4520,7 +4524,7 @@ class Setting extends (0, _componentDefault.default) {
         return result;
     }
     init() {
-        const { option  } = this.art;
+        const { option } = this.art;
         const mergeSettings = [
             ...this.defaultSettings,
             ...option.settings
@@ -4573,7 +4577,7 @@ class Setting extends (0, _componentDefault.default) {
         return this.option;
     }
     creatHeader(item) {
-        const { icons , proxy , constructor  } = this.art;
+        const { icons, proxy, constructor } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.setStyle)($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
         (0, _utils.addClass)($item, "art-setting-item");
@@ -4589,7 +4593,7 @@ class Setting extends (0, _componentDefault.default) {
         return $item;
     }
     creatItem(type, item) {
-        const { icons , proxy , constructor  } = this.art;
+        const { icons, proxy, constructor } = this.art;
         const $item = (0, _utils.createElement)("div");
         (0, _utils.addClass)($item, "art-setting-item");
         (0, _utils.setStyle)($item, "height", `${constructor.SETTING_ITEM_HEIGHT}px`);
@@ -4764,11 +4768,11 @@ class Setting extends (0, _componentDefault.default) {
         return $item;
     }
     updateStyle(width) {
-        const { controls , constructor , template: { $player , $setting  }  } = this.art;
+        const { controls, constructor, template: { $player, $setting } } = this.art;
         if (controls.setting && !(0, _utils.isMobile)) {
             const settingWidth = width || constructor.SETTING_WIDTH;
-            const { left: controlLeft , width: controlWidth  } = controls.setting.getBoundingClientRect();
-            const { left: playerLeft , width: playerWidth  } = $player.getBoundingClientRect();
+            const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
+            const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
             if (settingLeft + settingWidth > playerWidth) {
                 (0, _utils.setStyle)($setting, "left", null);
@@ -4780,7 +4784,7 @@ class Setting extends (0, _componentDefault.default) {
         }
     }
     render(option, width) {
-        const { constructor  } = this.art;
+        const { constructor } = this.art;
         if (this.cache.has(option)) {
             const $panel = this.cache.get(option);
             (0, _utils.inverseClass)($panel, "art-current");
@@ -4817,9 +4821,10 @@ exports.default = Setting;
 },{"./flip":"cyEw6","./aspectRatio":"l7RGi","./playbackRate":"l9tWN","./subtitleOffset":"lQoyH","../utils/component":"1UWqI","../utils/error":"kCmly","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cyEw6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>flip);
 var _utils = require("../utils");
 function flip(art) {
-    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , FLIP  }  } = art;
+    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, FLIP } } = art;
     function update($panel, $tooltip, value) {
         if ($tooltip) $tooltip.innerText = i18n.get((0, _utils.capitalize)(value));
         const $current = (0, _utils.queryAll)(".art-setting-item", $panel).find((item)=>item.dataset.value === value);
@@ -4851,14 +4856,14 @@ function flip(art) {
         }
     };
 }
-exports.default = flip;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"l7RGi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>aspectRatio);
 var _utils = require("../utils");
 function aspectRatio(art) {
-    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , ASPECT_RATIO  }  } = art;
+    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, ASPECT_RATIO } } = art;
     function getI18n(value) {
         return value === "default" ? i18n.get("Default") : value;
     }
@@ -4893,14 +4898,14 @@ function aspectRatio(art) {
         }
     };
 }
-exports.default = aspectRatio;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"l9tWN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>playbackRate);
 var _utils = require("../utils");
 function playbackRate(art) {
-    const { i18n , icons , constructor: { SETTING_ITEM_WIDTH , PLAYBACK_RATE  }  } = art;
+    const { i18n, icons, constructor: { SETTING_ITEM_WIDTH, PLAYBACK_RATE } } = art;
     function getI18n(value) {
         return value === 1.0 ? i18n.get("Normal") : value.toFixed(1);
     }
@@ -4935,13 +4940,13 @@ function playbackRate(art) {
         }
     };
 }
-exports.default = playbackRate;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lQoyH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>subtitleOffset);
 function subtitleOffset(art) {
-    const { i18n , icons , constructor  } = art;
+    const { i18n, icons, constructor } = art;
     return {
         width: constructor.SETTING_ITEM_WIDTH,
         name: "subtitle-offset",
@@ -4960,7 +4965,6 @@ function subtitleOffset(art) {
         }
     };
 }
-exports.default = subtitleOffset;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"9ruid":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -4974,6 +4978,7 @@ class Storage {
         try {
             const storage = JSON.parse(window.localStorage.getItem(this.name)) || {};
             return key ? storage[key] : storage;
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             return key ? this.settings[key] : this.settings;
         }
@@ -4984,6 +4989,7 @@ class Storage {
                 [key]: value
             });
             window.localStorage.setItem(this.name, JSON.stringify(storage));
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.settings[key] = value;
         }
@@ -4993,6 +4999,7 @@ class Storage {
             const storage = this.get();
             delete storage[key];
             window.localStorage.setItem(this.name, JSON.stringify(storage));
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             delete this.settings[key];
         }
@@ -5000,6 +5007,7 @@ class Storage {
     clear() {
         try {
             window.localStorage.removeItem(this.name);
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.settings = {};
         }
@@ -5025,7 +5033,7 @@ class Plugins {
     constructor(art){
         this.art = art;
         this.id = 0;
-        const { option  } = art;
+        const { option } = art;
         if (option.miniProgressBar && !option.isLive) this.add((0, _miniProgressBarDefault.default));
         if (option.lock && (0, _utils.isMobile)) this.add((0, _lockDefault.default));
         if (option.autoPlayback && !option.isLive) this.add((0, _autoPlaybackDefault.default));
@@ -5053,6 +5061,7 @@ exports.default = Plugins;
 },{"../utils":"euhMG","./miniProgressBar":"3al9F","./autoOrientation":"ocofD","./autoPlayback":"6aLII","./fastForward":"i0uB0","./lock":"cuQyc","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"3al9F":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>miniProgressBar);
 var _utils = require("../utils");
 function miniProgressBar(art) {
     art.on("control", (state)=>{
@@ -5063,18 +5072,18 @@ function miniProgressBar(art) {
         name: "mini-progress-bar"
     };
 }
-exports.default = miniProgressBar;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"ocofD":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>autoOrientation);
 var _utils = require("../utils");
 function autoOrientation(art) {
-    const { constructor , template: { $player , $video  }  } = art;
+    const { constructor, template: { $player, $video } } = art;
     art.on("fullscreenWeb", (state)=>{
         if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            const { videoWidth, videoHeight } = $video;
+            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
             if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) // There is a conflict with the fullscreen event, and it is changed to asynchronous execution
             setTimeout(()=>{
                 (0, _utils.setStyle)($player, "width", `${viewHeight}px`);
@@ -5094,8 +5103,8 @@ function autoOrientation(art) {
     art.on("fullscreen", async (state)=>{
         const lastOrientation = screen.orientation.type;
         if (state) {
-            const { videoWidth , videoHeight  } = $video;
-            const { clientWidth: viewWidth , clientHeight: viewHeight  } = document.documentElement;
+            const { videoWidth, videoHeight } = $video;
+            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
             if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
                 const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
                 await screen.orientation.lock(oppositeOrientation);
@@ -5113,14 +5122,14 @@ function autoOrientation(art) {
         }
     };
 }
-exports.default = autoOrientation;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"6aLII":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>autoPlayback);
 var _utils = require("../utils");
 function autoPlayback(art) {
-    const { i18n , icons , storage , constructor , proxy , template: { $poster  }  } = art;
+    const { i18n, icons, storage, constructor, proxy, template: { $poster } } = art;
     const $autoPlayback = art.layers.add({
         name: "auto-playback",
         html: `
@@ -5181,14 +5190,14 @@ function autoPlayback(art) {
         }
     };
 }
-exports.default = autoPlayback;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"i0uB0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>fastForward);
 var _utils = require("../utils");
 function fastForward(art) {
-    const { constructor , proxy , template: { $player , $video  }  } = art;
+    const { constructor, proxy, template: { $player, $video } } = art;
     let timer = null;
     let isPress = false;
     let lastPlaybackRate = 1;
@@ -5218,14 +5227,14 @@ function fastForward(art) {
         }
     };
 }
-exports.default = fastForward;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"cuQyc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>lock);
 var _utils = require("../utils");
 function lock(art) {
-    const { layers , icons , template: { $player  }  } = art;
+    const { layers, icons, template: { $player } } = art;
     function getState() {
         return (0, _utils.hasClass)($player, "art-lock");
     }
@@ -5271,7 +5280,6 @@ function lock(art) {
         }
     };
 }
-exports.default = lock;
 
 },{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}]},["gEVO5"], "gEVO5", "parcelRequireb749")
 
