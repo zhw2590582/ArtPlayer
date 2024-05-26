@@ -155,6 +155,11 @@ type Option = {
      * 是否显示弹幕发射器
      */
     setting?: boolean;
+
+    /**
+     * 弹幕主题，只在自定义挂载时生效
+     */
+    theme?: 'light' | 'dark';
 };
 
 type Danmuku = {

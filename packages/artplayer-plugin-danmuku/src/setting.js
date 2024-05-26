@@ -56,7 +56,11 @@ export default class Setting {
         this.createTemplate();
         this.createSliders();
         this.createEvents();
+
         this.mount(this.option.mount);
+
+        this.art.on('fullscreen', (state) => this.onFullscreen(state));
+        this.art.on('fullscreenWeb', (state) => this.onFullscreen(state));
     }
 
     get option() {
@@ -492,6 +496,17 @@ export default class Setting {
         return { reset };
     }
 
+    onFullscreen(state) {
+        if (this.outside) {
+            const { $danmuku, $controlsCenter, $mount } = this.template;
+            if (state) {
+                $controlsCenter.appendChild($danmuku);
+            } else {
+                $mount.appendChild($danmuku);
+            }
+        }
+    }
+
     async emit() {
         const { $input } = this.template;
 
@@ -563,6 +578,7 @@ export default class Setting {
         this.slider.margin.reset();
         this.slider.fontSize.reset();
         this.slider.speed.reset();
+
         this.setData('danmukuVisible', this.option.visible);
         this.setData('danmukuMode', this.option.mode);
         this.setData('danmukuColor', this.option.color);
@@ -571,6 +587,7 @@ export default class Setting {
         this.setData('danmukuMode2', this.option.modes.includes(2));
         this.setData('danmukuAntiOverlap', this.option.antiOverlap);
         this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
+        this.setData('danmukuTheme', this.option.theme);
 
         const { inverseClass } = this.utils;
         const colors = this.template.$colors.children;
@@ -581,9 +598,6 @@ export default class Setting {
     mount(target = this.template.$controlsCenter) {
         target.appendChild(this.template.$danmuku);
         this.template.$mount = target;
-        this.danmuku.config({
-            mount: target,
-        });
         this.reset();
     }
 }

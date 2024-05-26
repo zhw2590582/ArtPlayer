@@ -64,6 +64,7 @@ export default class Danmuku {
             maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
             lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
             setting: true, // 是否显示弹幕发射器
+            theme: 'dark', // 弹幕主题，只在自定义挂载时生效
         };
     }
 
@@ -90,6 +91,7 @@ export default class Danmuku {
             maxLength: 'number',
             lockTime: 'number',
             setting: 'boolean',
+            theme: 'string',
         };
     }
 
