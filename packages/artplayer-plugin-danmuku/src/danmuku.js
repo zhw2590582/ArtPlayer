@@ -201,12 +201,6 @@ export default class Danmuku {
         // 弹幕文本为空则直接忽略
         if (!danmu.text.trim()) return this;
 
-        // 弹幕模式只能是 0, 1, 2
-        if (![0, 1, 2].includes(danmu.mode)) return this;
-
-        // 自定义弹幕过滤函数
-        if (!this.option.filter(danmu)) return this;
-
         // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
         if (danmu.time) {
             danmu.time = clamp(danmu.time, 0, Infinity);
@@ -233,6 +227,12 @@ export default class Danmuku {
         if (danmu.color === undefined) {
             danmu.color = this.option.color;
         }
+
+        // 弹幕模式只能是 0, 1, 2
+        if (![0, 1, 2].includes(danmu.mode)) return this;
+
+        // 自定义弹幕过滤函数
+        if (!this.option.filter(danmu)) return this;
 
         // 添加到实际弹幕队列
         this.queue.push({

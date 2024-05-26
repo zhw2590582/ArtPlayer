@@ -2,6 +2,7 @@
     "name": "artplayer-packages",
     "version": "5.1.0",
     "type": "module",
+    "private": true,
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
     "workspaces": [
         "packages/*"

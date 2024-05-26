@@ -164,6 +164,7 @@ var art = new Artplayer({
             danmuku: [
                 {
                     text: '使用数组',
+                    time: 1
                 },
             ],
         }),
@@ -208,6 +209,7 @@ var art = new Artplayer({
                     return resovle([
                         {
                             text: '使用 Promise 异步返回',
+                            time: 1
                         },
                     ]);
                 });
@@ -479,6 +481,10 @@ art.on('ready', () => {
 ```
 
 ## 事件
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
 
 ```js
 var art = new Artplayer({

@@ -9,7 +9,7 @@ var art = new Artplayer({
         artplayerPluginDanmuku({
             danmuku: '/assets/sample/danmuku.xml',
 
-            // 以下为配置为非必填
+            // 以下为非必填
             speed: 5, // 弹幕持续时间，范围在[1 ~ 10]
             margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
             opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
