@@ -150,6 +150,11 @@ type Option = {
      * 输入框锁定时间，范围在[1 ~ 60]
      */
     lockTime?: number;
+
+    /**
+     * 是否显示弹幕发射器
+     */
+    setting?: boolean;
 };
 
 type Danmuku = {
@@ -186,19 +191,9 @@ type Danmuku = {
     mount: (el?: Element) => void;
 
     /**
-     * 重置弹幕发射器
+     * 重置弹幕
      */
     reset: () => void;
-
-    /**
-     * 锁定弹幕发射器
-     */
-    lock: () => void;
-
-    /**
-     * 解锁弹幕发射器
-     */
-    unlock: () => void;
 
     /**
      * 弹幕配置

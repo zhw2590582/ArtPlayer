@@ -63,6 +63,7 @@ export default class Danmuku {
             visible: true, // 弹幕是否可见
             maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
             lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
+            setting: true, // 是否显示弹幕发射器
         };
     }
 
@@ -88,6 +89,7 @@ export default class Danmuku {
             visible: 'boolean',
             maxLength: 'number',
             lockTime: 'number',
+            setting: 'boolean',
         };
     }
 

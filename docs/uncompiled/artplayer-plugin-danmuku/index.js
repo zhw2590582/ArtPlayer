@@ -155,8 +155,9 @@ var _heatmapDefault = parcelHelpers.interopDefault(_heatmap);
 function artplayerPluginDanmuku(option) {
     return (art)=>{
         const danmuku = new (0, _danmukuDefault.default)(art, option);
-        const setting = new (0, _settingDefault.default)(art, danmuku);
-        if (option.heatmap) (0, _heatmapDefault.default)(art, danmuku, option.heatmap);
+        let setting = null;
+        if (danmuku.option.setting) setting = new (0, _settingDefault.default)(art, danmuku);
+        if (danmuku.option.heatmap) (0, _heatmapDefault.default)(art, danmuku, danmuku.option.heatmap);
         return {
             name: "artplayerPluginDanmuku",
             emit: danmuku.emit.bind(danmuku),
@@ -165,10 +166,7 @@ function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
-            mount: setting.mount.bind(setting),
-            reset: setting.reset.bind(setting),
-            lock: setting.lock.bind(setting),
-            unlock: setting.unlock.bind(setting),
+            mount: setting ? setting.mount.bind(setting) : null,
             get option () {
                 return danmuku.option;
             },
@@ -252,7 +250,8 @@ class Danmuku {
             beforeVisible: ()=>true,
             visible: true,
             maxLength: 200,
-            lockTime: 5
+            lockTime: 5,
+            setting: true
         };
     }
     // 配置校验
@@ -276,7 +275,8 @@ class Danmuku {
             beforeVisible: "function",
             visible: "boolean",
             maxLength: "number",
-            lockTime: "number"
+            lockTime: "number",
+            setting: "boolean"
         };
     }
     // 初始弹幕样式

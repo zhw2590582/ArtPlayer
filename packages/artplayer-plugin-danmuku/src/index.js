@@ -5,10 +5,14 @@ import heatmap from './heatmap';
 export default function artplayerPluginDanmuku(option) {
     return (art) => {
         const danmuku = new Danmuku(art, option);
-        const setting = new Setting(art, danmuku);
 
-        if (option.heatmap) {
-            heatmap(art, danmuku, option.heatmap);
+        let setting = null;
+        if (danmuku.option.setting) {
+            setting = new Setting(art, danmuku);
+        }
+
+        if (danmuku.option.heatmap) {
+            heatmap(art, danmuku, danmuku.option.heatmap);
         }
 
         return {
@@ -19,10 +23,7 @@ export default function artplayerPluginDanmuku(option) {
             hide: danmuku.hide.bind(danmuku),
             show: danmuku.show.bind(danmuku),
             reset: danmuku.reset.bind(danmuku),
-            mount: setting.mount.bind(setting),
-            reset: setting.reset.bind(setting),
-            lock: setting.lock.bind(setting),
-            unlock: setting.unlock.bind(setting),
+            mount: setting ? setting.mount.bind(setting) : null,
             get option() {
                 return danmuku.option;
             },
