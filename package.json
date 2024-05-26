@@ -5,7 +5,7 @@
     "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
     "scripts": {
         "build:all": "npm run build all && npm run build:i18n && npm run build:sw && npm run build:ts && npm run build:docs",
-        "bootstrap": "npx lerna run start",
+        "bootstrap": "npx lerna bootstrap",
         "lint": "npx eslint packages/*/src",
         "build:sw": "node ./scripts/build-sw.js",
         "build:ts": "node ./scripts/build-ts.js",
