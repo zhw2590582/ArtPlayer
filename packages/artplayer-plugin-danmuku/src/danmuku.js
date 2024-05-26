@@ -254,6 +254,7 @@ export default class Danmuku {
 
     // 动态配置
     config(option) {
+        console.log('option', option);
         const { clamp } = this.utils;
         const { $controlsCenter } = this.art.template;
 
@@ -269,8 +270,11 @@ export default class Danmuku {
 
         // 重新计算弹幕字体大小，需要重新渲染
         if (option.fontSize) {
-            this.option.fontSize = this.getFontSize(this.option.fontSize);
-            this.reset();
+            const fontSize = this.getFontSize(this.option.fontSize);
+            if (fontSize !== this.option.fontSize) {
+                this.option.fontSize = fontSize;
+                this.reset();
+            }
         }
 
         // 通过配置项控制弹幕的显示和隐藏

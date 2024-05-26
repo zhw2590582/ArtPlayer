@@ -395,6 +395,7 @@ class Danmuku {
     }
     // 动态配置
     config(option) {
+        console.log("option", option);
         const { clamp } = this.utils;
         const { $controlsCenter } = this.art.template;
         this.option = Object.assign({}, Danmuku.option, this.option, option);
@@ -407,8 +408,11 @@ class Danmuku {
         this.option.mount = this.option.mount || $controlsCenter;
         // 重新计算弹幕字体大小，需要重新渲染
         if (option.fontSize) {
-            this.option.fontSize = this.getFontSize(this.option.fontSize);
-            this.reset();
+            const fontSize = this.getFontSize(this.option.fontSize);
+            if (fontSize !== this.option.fontSize) {
+                this.option.fontSize = fontSize;
+                this.reset();
+            }
         }
         // 通过配置项控制弹幕的显示和隐藏
         if (this.option.visible) this.show();
@@ -833,20 +837,22 @@ class Setting {
         art.on("fullscreen", (state)=>this.onFullscreen(state));
         art.on("fullscreenWeb", (state)=>this.onFullscreen(state));
     }
-    static icons = {
-        $on: (0, _onSvgDefault.default),
-        $off: (0, _offSvgDefault.default),
-        $config: (0, _configSvgDefault.default),
-        $style: (0, _styleSvgDefault.default),
-        $mode_0_off: (0, _mode0OffSvgDefault.default),
-        $mode_0_on: (0, _mode0OnSvgDefault.default),
-        $mode_1_off: (0, _mode1OffSvgDefault.default),
-        $mode_1_on: (0, _mode1OnSvgDefault.default),
-        $mode_2_off: (0, _mode2OffSvgDefault.default),
-        $mode_2_on: (0, _mode2OnSvgDefault.default),
-        $check_on: (0, _checkOnSvgDefault.default),
-        $check_off: (0, _checkOffSvgDefault.default)
-    };
+    static get icons() {
+        return {
+            $on: (0, _onSvgDefault.default),
+            $off: (0, _offSvgDefault.default),
+            $config: (0, _configSvgDefault.default),
+            $style: (0, _styleSvgDefault.default),
+            $mode_0_off: (0, _mode0OffSvgDefault.default),
+            $mode_0_on: (0, _mode0OnSvgDefault.default),
+            $mode_1_off: (0, _mode1OffSvgDefault.default),
+            $mode_1_on: (0, _mode1OnSvgDefault.default),
+            $mode_2_off: (0, _mode2OffSvgDefault.default),
+            $mode_2_on: (0, _mode2OnSvgDefault.default),
+            $check_on: (0, _checkOnSvgDefault.default),
+            $check_off: (0, _checkOffSvgDefault.default)
+        };
+    }
     get option() {
         return this.danmuku.option;
     }
@@ -1132,8 +1138,9 @@ class Setting {
             onChange: (index)=>{
                 const { $opacityValue } = this.template;
                 $opacityValue.textContent = `${index}%`;
-                this.danmuku.config({
-                    opacity: index / 100
+                const value = index / 100;
+                if (value !== this.option.opacity) this.danmuku.config({
+                    opacity: value
                 });
             }
         });
@@ -1149,8 +1156,9 @@ class Setting {
                 const margin = this.MARGIN[index];
                 const { $marginValue } = this.template;
                 $marginValue.textContent = margin.name;
-                this.danmuku.config({
-                    margin: margin.value
+                const value = margin.value;
+                if (value[0] !== this.option.margin[0] || value[1] !== this.option.margin[1]) this.danmuku.config({
+                    margin: value
                 });
             }
         });
@@ -1161,13 +1169,14 @@ class Setting {
             container: this.template.$fontSizeSlider,
             findIndex: ()=>{
                 const { clientHeight } = this.art.template.$player;
-                if (typeof this.option.fontSize === "number") return Math.round(this.option.fontSize / clientHeight * 100) || 5;
-                else return Math.round(this.option.fontSize.replace("%", "")) || 5;
+                return Math.round(this.option.fontSize / clientHeight * 100) || 5;
             },
             onChange: (index)=>{
                 const { $fontSizeValue } = this.template;
+                const { clientHeight } = this.art.template.$player;
                 $fontSizeValue.textContent = `${index}%`;
-                this.danmuku.config({
+                const percent = Math.round(this.option.fontSize / clientHeight * 100);
+                if (index !== percent) this.danmuku.config({
                     fontSize: `${index}%`
                 });
             }
@@ -1184,8 +1193,9 @@ class Setting {
                 const speed = this.SPEED[index];
                 const { $speedValue } = this.template;
                 $speedValue.textContent = speed.name;
-                this.danmuku.config({
-                    speed: speed.value
+                const value = speed.value;
+                if (value !== this.option.speed) this.danmuku.config({
+                    speed: value
                 });
             }
         });
