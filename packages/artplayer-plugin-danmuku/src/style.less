@@ -68,6 +68,10 @@
         .apd-mode {
             cursor: pointer;
             text-align: center;
+
+            &:hover {
+                color: @highlight;
+            }
         }
     }
 
@@ -235,6 +239,7 @@
         flex: 1;
         border: none;
         line-height: 1;
+        color: #fff;
         background-color: transparent;
 
         &::placeholder {
