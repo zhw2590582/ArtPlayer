@@ -1,4 +1,4 @@
-@color: #00a1d6;
+@highlight: #00a1d6;
 
 .artplayer-plugin-danmuku {
     display: flex;
@@ -9,13 +9,16 @@
     font-size: 12px;
     height: 32px;
     width: 100%;
+    color: #fff;
     font-weight: 300;
+    flex-shrink: 0;
     gap: 10px;
 
     .apd-icon {
         cursor: pointer;
         opacity: 0.75;
         transition: all 0.2s ease;
+        fill: #fff;
 
         &:hover {
             opacity: 1;
@@ -87,7 +90,6 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        color: rgba(255, 255, 255, 0.5);
 
         .apd-slider-line {
             position: relative;
@@ -116,7 +118,7 @@
         .apd-slider-progress {
             width: 0%;
             height: 100%;
-            background-color: @color;
+            background-color: @highlight;
         }
 
         .apd-slider-dot {
@@ -126,7 +128,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: @color;
+            background-color: @highlight;
         }
 
         .apd-slider-steps {
@@ -136,6 +138,7 @@
             position: absolute;
             bottom: -12px;
             width: calc(100% + 32px);
+            color: #777;
 
             .apd-slider-step {
                 flex-shrink: 0;
@@ -164,7 +167,7 @@
             gap: 2px;
 
             &:hover {
-                color: @color;
+                color: @highlight;
             }
         }
     }
@@ -174,7 +177,7 @@
         flex: 1;
         align-items: center;
         height: 100%;
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.25);
         border-radius: 5px;
     }
 
@@ -229,10 +232,8 @@
     .apd-input {
         outline: none;
         height: 100%;
-        // width: 170px;
         flex: 1;
         border: none;
-        color: #fff;
         line-height: 1;
         background-color: transparent;
 
@@ -248,12 +249,11 @@
         height: 100%;
         width: 60px;
         flex-shrink: 0;
-        color: #fff;
         cursor: pointer;
         text-shadow: none;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
-        background-color: @color;
+        background-color: @highlight;
 
         &.apd-lock {
             cursor: not-allowed;
@@ -279,6 +279,24 @@
         .apd-emitter {
             width: 390px;
             flex: none;
+        }
+    }
+}
+
+[data-danmuku-theme='light'] > .artplayer-plugin-danmuku {
+    .apd-icon {
+        fill: #333;
+    }
+
+    .apd-emitter {
+        background-color: #f1f2f3;
+    }
+
+    .apd-input {
+        color: #000;
+
+        &::placeholder {
+            color: rgba(0, 0, 0, 0.3);
         }
     }
 }
@@ -387,9 +405,9 @@
     [data-danmuku-mode='@{index}'] {
         .apd-style-mode {
             [data-mode='@{index}'] {
-                color: @color;
+                color: @highlight;
                 path {
-                    fill: @color;
+                    fill: @highlight;
                 }
             }
         }
