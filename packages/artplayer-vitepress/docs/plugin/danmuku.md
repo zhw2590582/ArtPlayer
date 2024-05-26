@@ -326,20 +326,7 @@ var art = new Artplayer({
 
 ## `config`
 
-通过方法 `config` 实时改变弹幕配置，支持属性有：
-
--   `danmuku`
--   `speed`
--   `opacity`
--   `fontSize`
--   `color`
--   `mode`
--   `margin`
--   `antiOverlap`
--   `synchronousPlayback`
--   `filter`
--   `lockTime`
--   `beforeEmit`
+通过方法 `config` 实时改变弹幕配置
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -426,7 +413,6 @@ var art = new Artplayer({
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    setting: true,
     plugins: [
         artplayerPluginDanmuku({
             danmuku: '/assets/sample/danmuku.xml',
@@ -437,6 +423,35 @@ var art = new Artplayer({
 art.on('resize', () => {
     art.plugins.artplayerPluginDanmuku.reset();
 });
+```
+
+## `mount`
+
+在初始化弹幕插件的时候，是可以指定弹幕发射器的挂载位置的，默认是挂载在控制栏的中部，你也可以把它挂载在播放器以外的地方。
+当播放器全屏的时候，发射器会自动回到控制栏的中部。假如你挂载的地方是亮色的话，建议把 `theme` 设置成 `light`，否则会看不清。
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
+    ▶ Run Code
+</div>
+
+```js
+var $danmu = document.querySelector('.artplayer-app');
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    fullscreenWeb: true,
+    plugins: [
+        artplayerPluginDanmuku({
+			mount: $danmu,
+            theme: 'dark',
+            danmuku: '/assets/sample/danmuku.xml',
+        }),
+    ],
+});
+
+// 也可以手动挂载
+// art.plugins.artplayerPluginDanmuku.mount($danmu);
 ```
 
 ## `option`
@@ -451,7 +466,6 @@ art.on('resize', () => {
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    setting: true,
     plugins: [
         artplayerPluginDanmuku({
             danmuku: '/assets/sample/danmuku.xml',
@@ -470,12 +484,15 @@ art.on('ready', () => {
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
-    setting: true,
     plugins: [
         artplayerPluginDanmuku({
             danmuku: '/assets/sample/danmuku.xml',
         }),
     ],
+});
+
+art.on('artplayerPluginDanmuku:visible', (danmu) => {
+    console.info('显示弹幕', danmu);
 });
 
 art.on('artplayerPluginDanmuku:emit', (danmu) => {

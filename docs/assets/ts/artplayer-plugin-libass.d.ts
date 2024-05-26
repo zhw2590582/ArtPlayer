@@ -1,9 +1,9 @@
 import type Artplayer from 'artplayer';
-import type SubtitlesOctopus from "@hrgui/libass-wasm-ts"
-import { type Options } from "libass-wasm"
+import type SubtitlesOctopus from '@hrgui/libass-wasm-ts';
+import { type Options } from 'libass-wasm';
 
-export = artplayerPluginAss
-export as namespace artplayerPluginAss
+export = artplayerPluginAss;
+export as namespace artplayerPluginAss;
 
 declare const artplayerPluginAss: (options: Options) => (art: Artplayer) => {
     name: 'artplayerPluginLibass';
