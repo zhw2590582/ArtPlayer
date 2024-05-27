@@ -279,11 +279,9 @@ export default class Setting {
         const $danmuku = createElement('div');
         $danmuku.className = 'artplayer-plugin-danmuku';
         $danmuku.innerHTML = this.TEMPLATE;
+
         this.template.$danmuku = $danmuku;
-
         this.template.$toggle = this.query('.apd-toggle');
-        tooltip(this.template.$toggle, '弹幕开关');
-
         this.template.$configModes = this.query('.apd-config-mode .apd-modes');
         this.template.$styleModes = this.query('.apd-style-mode .apd-modes');
         this.template.$colors = this.query('.apd-colors');
@@ -299,6 +297,8 @@ export default class Setting {
         this.template.$speedValue = this.query('.apd-config-speed .apd-value');
         this.template.$input = this.query('.apd-input');
         this.template.$send = this.query('.apd-send');
+
+        tooltip(this.template.$toggle, '弹幕开关');
     }
 
     createEvents() {
@@ -608,7 +608,6 @@ export default class Setting {
     }
 
     mount(target = this.template.$controlsCenter) {
-        console.log(target);
         const $el = typeof target === 'string' ? document.querySelector(target) : target;
         $el.appendChild(this.template.$danmuku);
         this.template.$mount = $el;
