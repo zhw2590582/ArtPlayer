@@ -1,5 +1,6 @@
 // npm i artplayer-plugin-danmuku
 // import artplayerPluginDanmuku from 'artplayer-plugin-danmuku';
+// 使用文档 https://artplayer.org/document/plugin/danmuku.html
 
 var art = new Artplayer({
     container: '.artplayer-app',
