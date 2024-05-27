@@ -11,10 +11,10 @@ const compiledPath = path.resolve(`docs/compiled`);
 function compressString(input) {
     const compressedHtmlString = input.replace(/\s*(<[^>]+>)\s*/g, '$1');
     const compressedCssString = compressedHtmlString
-        .replace(/\s*([:;,])\s*/g, '$1')
+        .replace(/(\r\n|\n|\r)/gm, ' ')
         .replace(/\s+/g, ' ')
         .trim();
-    return compressedHtmlString;
+    return compressedCssString;
 }
 
 async function build(name, targetName) {
