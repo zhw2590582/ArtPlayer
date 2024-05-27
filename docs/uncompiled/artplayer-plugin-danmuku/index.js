@@ -1195,7 +1195,6 @@ class Setting {
                 const { $speedValue } = this.template;
                 $speedValue.textContent = speed.name;
                 const value = speed.value;
-                console.log(index, value);
                 if (value !== this.option.speed) this.danmuku.config({
                     speed: value
                 });

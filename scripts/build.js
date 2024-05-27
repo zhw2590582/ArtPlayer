@@ -11,7 +11,7 @@ const compiledPath = path.resolve(`docs/compiled`);
 function compressString(input) {
     const compressedHtmlString = input.replace(/\s*(<[^>]+>)\s*/g, '$1');
     const compressedCssString = compressedHtmlString
-        .replace(/\s*([{}:;,])\s*/g, '$1')
+        .replace(/\s*([:;,])\s*/g, '$1')
         .replace(/\s+/g, ' ')
         .trim();
     return compressedCssString;
