@@ -14,7 +14,7 @@ function compressString(input) {
         .replace(/\s*([:;,])\s*/g, '$1')
         .replace(/\s+/g, ' ')
         .trim();
-    return compressedCssString;
+    return compressedHtmlString;
 }
 
 async function build(name, targetName) {
