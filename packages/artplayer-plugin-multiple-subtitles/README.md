@@ -1,6 +1,6 @@
 # artplayer-plugin-multiple-subtitles
 
-multiple subtitles plugin for ArtPlayer
+Multiple subtitles plugin for ArtPlayer
 
 ## Demo
 

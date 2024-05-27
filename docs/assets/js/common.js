@@ -16,7 +16,7 @@
 
     var loadedLibs = [];
     window['consoleLog']($console);
-    $prod.checked = localStorage.getItem('pro') === 'true';
+    $prod.checked = localStorage.getItem('prod') === 'true';
     $typeScript.checked = localStorage.getItem('typeScript') === 'true';
 
     var editor = null;
@@ -226,7 +226,7 @@
     });
 
     $prod.addEventListener('change', function () {
-        localStorage.setItem('pro', $prod.checked ? 'true' : 'false');
+        localStorage.setItem('prod', $prod.checked ? 'true' : 'false');
         window.location.reload();
     });
 
