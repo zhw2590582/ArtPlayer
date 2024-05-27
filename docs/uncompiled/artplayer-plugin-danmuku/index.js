@@ -324,6 +324,59 @@ class Danmuku {
         }
         return Danmuku.option.margin[1];
     }
+    // 计算弹幕字体大小
+    get fontSize() {
+        const { clamp } = this.utils;
+        const { clientHeight } = this.$player;
+        const fontSize = this.option.fontSize;
+        if (typeof fontSize === "number") return clamp(fontSize, 12, clientHeight);
+        if (typeof fontSize === "string" && fontSize.endsWith("%")) {
+            const ratio = parseFloat(fontSize) / 100;
+            return clamp(clientHeight * ratio, 12, clientHeight);
+        }
+        return Danmuku.option.fontSize;
+    }
+    // 获取弹幕DOM节点
+    get $ref() {
+        const $ref = this.$refs.pop() || document.createElement("div");
+        $ref.style.cssText = Danmuku.cssText;
+        $ref.dataset.mode = "";
+        return $ref;
+    }
+    // 获取准备好发送的弹幕：有的是ready状态（如之前因为弹幕太多而暂停发送的弹幕），有的是wait状态
+    get readys() {
+        const { currentTime } = this.art;
+        return this.queue.filter((danmu)=>{
+            return danmu.$state === "ready" || danmu.$state === "wait" && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1;
+        });
+    }
+    // 获取正在发送的弹幕，用于计算下一个弹幕的top值
+    get emits() {
+        const result = [];
+        const { clientWidth } = this.$player;
+        const clientLeft = this.getLeft(this.$player);
+        this.filter("emit", (danmu)=>{
+            const top = danmu.$ref.offsetTop;
+            const left = this.getLeft(danmu.$ref) - clientLeft;
+            const height = danmu.$ref.clientHeight;
+            const width = danmu.$ref.clientWidth;
+            const distance = left + width;
+            const right = clientWidth - distance;
+            const speed = distance / danmu.$restTime;
+            const emit = {};
+            emit.top = top;
+            emit.left = left;
+            emit.height = height;
+            emit.width = width;
+            emit.right = right;
+            emit.speed = speed;
+            emit.distance = distance;
+            emit.time = danmu.$restTime;
+            emit.mode = danmu.mode;
+            result.push(emit);
+        });
+        return result;
+    }
     // 加载弹幕
     async load() {
         const { errorHandle } = this.utils;
@@ -421,25 +474,6 @@ class Danmuku {
         const rect = $ref.getBoundingClientRect();
         return this.isRotate ? rect.top : rect.left;
     }
-    // 获取弹幕DOM节点
-    getRef() {
-        const $ref = this.$refs.pop() || document.createElement("div");
-        $ref.style.cssText = Danmuku.cssText;
-        $ref.dataset.mode = "";
-        return $ref;
-    }
-    // 计算弹幕字体大小
-    get fontSize() {
-        const { clamp } = this.utils;
-        const { clientHeight } = this.$player;
-        const fontSize = this.option.fontSize;
-        if (typeof fontSize === "number") return clamp(fontSize, 12, clientHeight);
-        if (typeof fontSize === "string" && fontSize.endsWith("%")) {
-            const ratio = parseFloat(fontSize) / 100;
-            return clamp(clientHeight * ratio, 12, clientHeight);
-        }
-        return Danmuku.option.fontSize;
-    }
     // 计算弹幕的top值
     postMessage(message = {}) {
         return new Promise((resolve)=>{
@@ -454,40 +488,6 @@ class Danmuku {
     // 根据状态，获取弹幕队列中的弹幕
     filter(state, callback) {
         return this.queue.filter((danmu)=>danmu.$state === state).map(callback);
-    }
-    // 获取准备好发送的弹幕：有的是ready状态（如之前因为弹幕太多而暂停发送的弹幕），有的是wait状态
-    getReady() {
-        const { currentTime } = this.art;
-        return this.queue.filter((danmu)=>{
-            return danmu.$state === "ready" || danmu.$state === "wait" && currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1;
-        });
-    }
-    // 获取正在发送的弹幕，用于计算下一个弹幕的top值
-    getEmits() {
-        const result = [];
-        const { clientWidth } = this.$player;
-        const clientLeft = this.getLeft(this.$player);
-        this.filter("emit", (danmu)=>{
-            const top = danmu.$ref.offsetTop;
-            const left = this.getLeft(danmu.$ref) - clientLeft;
-            const height = danmu.$ref.clientHeight;
-            const width = danmu.$ref.clientWidth;
-            const distance = left + width;
-            const right = clientWidth - distance;
-            const speed = distance / danmu.$restTime;
-            const emit = {};
-            emit.top = top;
-            emit.left = left;
-            emit.height = height;
-            emit.width = width;
-            emit.right = right;
-            emit.speed = speed;
-            emit.distance = distance;
-            emit.time = danmu.$restTime;
-            emit.mode = danmu.mode;
-            result.push(emit);
-        });
-        return result;
     }
     // 重置弹幕到wait状态，回收弹幕DOM节点
     makeWait(danmu) {
@@ -512,14 +512,14 @@ class Danmuku {
                     if (danmu.$restTime <= 0) this.makeWait(danmu);
                 });
                 // 获取准备好发送的弹幕，可能包含ready和wait状态的弹幕
-                const readys = this.getReady();
+                const readys = this.readys;
                 for(let index = 0; index < readys.length; index++){
                     const danmu = readys[index];
                     // 弹幕发送前的过滤器
                     const state = await this.option.beforeVisible(danmu);
                     if (state) {
                         const { clientWidth, clientHeight } = this.$player;
-                        danmu.$ref = this.getRef(); // 获取弹幕DOM节点
+                        danmu.$ref = this.$ref; // 获取弹幕DOM节点
                         // 设置弹幕文本
                         if (danmu.escape) danmu.$ref.innerText = danmu.text;
                         else danmu.$ref.innerHTML = danmu.text;
@@ -546,7 +546,7 @@ class Danmuku {
                                 height: danmu.$ref.clientHeight,
                                 speed: (clientWidth + danmu.$ref.clientWidth) / danmu.$restTime
                             },
-                            emits: this.getEmits(),
+                            emits: this.emits,
                             antiOverlap: this.option.antiOverlap,
                             clientWidth: clientWidth,
                             clientHeight: clientHeight,
