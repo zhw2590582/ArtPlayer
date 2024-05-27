@@ -10,13 +10,13 @@
     var $run = document.querySelector('.run');
     var $popups = document.querySelector('.popups');
     var $console = document.querySelector('.console');
-    var $pro = document.querySelector('#pro');
+    var $prod = document.querySelector('#pro');
     var $typeScript = document.querySelector('#typeScript');
     var $file = document.querySelector('#file');
 
     var loadedLibs = [];
     window['consoleLog']($console);
-    $pro.checked = localStorage.getItem('pro') === 'true';
+    $prod.checked = localStorage.getItem('pro') === 'true';
     $typeScript.checked = localStorage.getItem('typeScript') === 'true';
 
     var editor = null;
@@ -40,6 +40,10 @@
             './assets/ts/artplayer-plugin-dash-quality.d.ts',
             './assets/ts/artplayer-plugin-hls-quality.d.ts',
             './assets/ts/artplayer-plugin-iframe.d.ts',
+            './assets/ts/artplayer-plugin-chromecast.d.ts',
+            './assets/ts/artplayer-plugin-libass.d.ts',
+            './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
+            './assets/ts/artplayer-plugin-vtt-thumbnail.d.ts',
         ];
         
         for (let index = 0; index < libUris.length; index++) {
@@ -221,8 +225,8 @@
         }
     });
 
-    $pro.addEventListener('change', function () {
-        localStorage.setItem('pro', $pro.checked ? 'true' : 'false');
+    $prod.addEventListener('change', function () {
+        localStorage.setItem('pro', $prod.checked ? 'true' : 'false');
         window.location.reload();
     });
 
