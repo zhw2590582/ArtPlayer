@@ -1164,19 +1164,18 @@ class Setting {
             }
         });
         this.slider.fontSize = this.createSlider({
-            min: 1,
-            max: 25,
+            min: 12,
+            max: 120,
             steps: [],
             container: this.template.$fontSizeSlider,
             findIndex: ()=>{
-                const { clientHeight } = this.art.template.$player;
-                return Math.round(this.danmuku.fontSize / clientHeight * 100);
+                return Math.round(this.danmuku.fontSize);
             },
             onChange: (index)=>{
                 const { $fontSizeValue } = this.template;
-                $fontSizeValue.textContent = `${index}%`;
+                $fontSizeValue.textContent = `${index}px`;
                 this.danmuku.config({
-                    fontSize: `${index}%`
+                    fontSize: index
                 });
             }
         });
