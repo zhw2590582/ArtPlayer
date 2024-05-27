@@ -193,7 +193,7 @@ type Danmuku = {
     /**
      * 重置弹幕
      */
-    reset: () => void;
+    reset: () => Danmuku;
 
     /**
      * 弹幕配置

@@ -572,6 +572,7 @@ export default class Danmuku {
 
     reset() {
         this.queue.forEach((danmu) => this.makeWait(danmu));
+        this.art.emit('artplayerPluginDanmuku:reset');
         return this;
     }
 
