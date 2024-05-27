@@ -129,12 +129,12 @@ type Option = {
     /**
      * 弹幕发送前的过滤器，支持返回 Promise
      */
-    beforeEmit?: (danmu: Danmu) => boolean | (() => Promise<boolean>);
+    beforeEmit?: (danmu: Danmu) => boolean | Promise<boolean>;
 
     /**
      * 弹幕显示前的过滤器，支持返回 Promise
      */
-    beforeVisible?: (danmu: Danmu) => boolean | (() => Promise<boolean>);
+    beforeVisible?: (danmu: Danmu) => boolean | Promise<boolean>;
 
     /**
      * 弹幕是否可见

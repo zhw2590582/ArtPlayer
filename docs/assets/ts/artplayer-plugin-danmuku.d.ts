@@ -69,12 +69,12 @@ type Option = {
     color?: string;
 
     /**
-     *  弹幕模式: 0: 滚动，1: 顶部，2: 底部
+     * 弹幕模式: 0: 滚动，1: 顶部，2: 底部
      */
     mode?: Mode;
 
     /**
-     *  幕可见的模式
+     * 弹幕可见的模式
      */
     modes?: Mode[];
 
@@ -96,7 +96,7 @@ type Option = {
     /**
      * 弹幕发射器挂载点, 默认为播放器控制栏中部
      */
-    mount?: Element;
+    mount?: HTMLDivElement | string;
 
     /**
      * 是否开启弹幕热度图
@@ -129,12 +129,12 @@ type Option = {
     /**
      * 弹幕发送前的过滤器，支持返回 Promise
      */
-    beforeEmit?: (danmu: Danmu) => boolean | (() => Promise<boolean>);
+    beforeEmit?: (danmu: Danmu) => boolean | Promise<boolean>;
 
     /**
      * 弹幕显示前的过滤器，支持返回 Promise
      */
-    beforeVisible?: (danmu: Danmu) => boolean | (() => Promise<boolean>);
+    beforeVisible?: (danmu: Danmu) => boolean | Promise<boolean>;
 
     /**
      * 弹幕是否可见
@@ -188,12 +188,12 @@ type Danmuku = {
     /**
      * 挂载弹幕输入框
      */
-    mount: (el?: Element) => void;
+    mount: (el?: HTMLDivElement | string) => void;
 
     /**
      * 重置弹幕
      */
-    reset: () => void;
+    reset: () => Danmuku;
 
     /**
      * 弹幕配置
