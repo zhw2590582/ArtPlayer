@@ -1,7 +1,6 @@
 import Artplayer from '../packages/artplayer';
-import { type Option } from '../packages/artplayer/types/option';
 
-const option: Option = {
+const option: Artplayer['Option'] = {
     container: '.artplayer-app',
     url: './assets/sample/video.mp4',
 };

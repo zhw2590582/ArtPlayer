@@ -254,13 +254,12 @@ art.current = new Artplayer();
 
 ### Option
 
-你也可以单独导入选项的类型
+你也可以使用选项的类型
 
-```ts{2,4}
+```ts{3}
 import Artplayer from 'artplayer';
-import { type Option } from 'artplayer/types/option';
 
-const option: Option = {
+const option: Artplayer['Option'] = {
     container: '.artplayer-app',
     url: './assets/sample/video.mp4',
 };

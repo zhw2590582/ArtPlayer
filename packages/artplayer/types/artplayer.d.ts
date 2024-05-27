@@ -16,6 +16,19 @@ export as namespace Artplayer;
 declare class Artplayer extends Player {
     constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown);
 
+    get Config(): Config;
+    get Events(): Events;
+    get Utils(): Utils;
+    get Player(): Player;
+    get Option(): Option;
+    get Subtitle(): Subtitle;
+    get Icons(): Icons;
+    get Template(): Template;
+    get I18n(): I18n;
+    get Setting(): Setting;
+    get SettingOption(): SettingOption;
+    get Component(): Component;
+
     static readonly instances: Artplayer[];
     static readonly version: string;
     static readonly env: string;

@@ -251,13 +251,12 @@ art.current = new Artplayer();
 
 ### Option
 
-you can also separately import the type for options
+You can also use the option type
 
-```ts{2,4}
+```ts{3}
 import Artplayer from 'artplayer';
-import { type Option } from 'artplayer/types/option';
 
-const option: Option = {
+const option: Artplayer['Option'] = {
     container: '.artplayer-app',
     url: './assets/sample/video.mp4',
 };
