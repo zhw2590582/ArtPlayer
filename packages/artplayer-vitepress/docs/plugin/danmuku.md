@@ -533,7 +533,7 @@ art.on('artplayerPluginDanmuku:show', () => {
     console.info('弹幕显示');
 });
 
-art.on('artplayerPluginDanmuku:react', () => {
+art.on('artplayerPluginDanmuku:reset', () => {
     console.info('弹幕重置');
 });
 
