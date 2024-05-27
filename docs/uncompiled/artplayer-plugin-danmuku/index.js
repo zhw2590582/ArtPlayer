@@ -397,6 +397,9 @@ class Danmuku {
     config(option) {
         const { clamp } = this.utils;
         const { $controlsCenter } = this.art.template;
+        // 判断配置项是否有变化
+        const changed = Object.keys(option).some((key)=>JSON.stringify(this.option[key]) !== JSON.stringify(option[key]));
+        if (!changed) return this;
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
         this.option.mode = clamp(this.option.mode, 0, 2);
@@ -406,13 +409,7 @@ class Danmuku {
         this.option.maxLength = clamp(this.option.maxLength, 1, 1000);
         this.option.mount = this.option.mount || $controlsCenter;
         // 重新计算弹幕字体大小，需要重新渲染
-        if (option.fontSize) {
-            const fontSize = this.getFontSize(this.option.fontSize);
-            if (fontSize !== this.option.fontSize) {
-                this.option.fontSize = fontSize;
-                this.reset();
-            }
-        }
+        if (option.fontSize) this.reset();
         // 通过配置项控制弹幕的显示和隐藏
         if (this.option.visible) this.show();
         else this.hide();
@@ -432,9 +429,10 @@ class Danmuku {
         return $ref;
     }
     // 计算弹幕字体大小
-    getFontSize(fontSize) {
+    get fontSize() {
         const { clamp } = this.utils;
         const { clientHeight } = this.$player;
+        const fontSize = this.option.fontSize;
         if (typeof fontSize === "number") return clamp(fontSize, 12, clientHeight);
         if (typeof fontSize === "string" && fontSize.endsWith("%")) {
             const ratio = parseFloat(fontSize) / 100;
@@ -530,7 +528,7 @@ class Danmuku {
                         // 设置初始弹幕样式
                         danmu.$ref.style.left = `${clientWidth}px`;
                         danmu.$ref.style.opacity = this.option.opacity;
-                        danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
+                        danmu.$ref.style.fontSize = `${this.fontSize}px`;
                         danmu.$ref.style.color = danmu.color;
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
                         danmu.$ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
@@ -653,6 +651,7 @@ class Danmuku {
     }
     reset() {
         this.queue.forEach((danmu)=>this.makeWait(danmu));
+        this.art.emit("artplayerPluginDanmuku:reset");
         return this;
     }
     show() {
@@ -1137,9 +1136,8 @@ class Setting {
             onChange: (index)=>{
                 const { $opacityValue } = this.template;
                 $opacityValue.textContent = `${index}%`;
-                const value = index / 100;
-                if (value !== this.option.opacity) this.danmuku.config({
-                    opacity: value
+                this.danmuku.config({
+                    opacity: index / 100
                 });
             }
         });
@@ -1156,9 +1154,8 @@ class Setting {
                 if (!margin) return;
                 const { $marginValue } = this.template;
                 $marginValue.textContent = margin.name;
-                const value = margin.value;
-                if (value[0] !== this.option.margin[0] || value[1] !== this.option.margin[1]) this.danmuku.config({
-                    margin: value
+                this.danmuku.config({
+                    margin: margin.value
                 });
             }
         });
@@ -1169,14 +1166,12 @@ class Setting {
             container: this.template.$fontSizeSlider,
             findIndex: ()=>{
                 const { clientHeight } = this.art.template.$player;
-                return Math.round(this.option.fontSize / clientHeight * 100);
+                return Math.round(this.danmuku.fontSize / clientHeight * 100);
             },
             onChange: (index)=>{
                 const { $fontSizeValue } = this.template;
-                const { clientHeight } = this.art.template.$player;
                 $fontSizeValue.textContent = `${index}%`;
-                const percent = Math.round(this.option.fontSize / clientHeight * 100);
-                if (index !== percent) this.danmuku.config({
+                this.danmuku.config({
                     fontSize: `${index}%`
                 });
             }
@@ -1194,9 +1189,8 @@ class Setting {
                 if (!speed) return;
                 const { $speedValue } = this.template;
                 $speedValue.textContent = speed.name;
-                const value = speed.value;
-                if (value !== this.option.speed) this.danmuku.config({
-                    speed: value
+                this.danmuku.config({
+                    speed: speed.value
                 });
             }
         });

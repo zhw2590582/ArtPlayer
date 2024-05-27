@@ -257,6 +257,13 @@ export default class Danmuku {
         const { clamp } = this.utils;
         const { $controlsCenter } = this.art.template;
 
+        // 判断配置项是否有变化
+        const changed = Object.keys(option).some(
+            (key) => JSON.stringify(this.option[key]) !== JSON.stringify(option[key]),
+        );
+
+        if (!changed) return this;
+
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
 
@@ -269,11 +276,7 @@ export default class Danmuku {
 
         // 重新计算弹幕字体大小，需要重新渲染
         if (option.fontSize) {
-            const fontSize = this.getFontSize(this.option.fontSize);
-            if (fontSize !== this.option.fontSize) {
-                this.option.fontSize = fontSize;
-                this.reset();
-            }
+            this.reset();
         }
 
         // 通过配置项控制弹幕的显示和隐藏
@@ -303,9 +306,11 @@ export default class Danmuku {
     }
 
     // 计算弹幕字体大小
-    getFontSize(fontSize) {
+    get fontSize() {
         const { clamp } = this.utils;
         const { clientHeight } = this.$player;
+
+        const fontSize = this.option.fontSize;
 
         if (typeof fontSize === 'number') {
             return clamp(fontSize, 12, clientHeight);
@@ -433,7 +438,7 @@ export default class Danmuku {
                         // 设置初始弹幕样式
                         danmu.$ref.style.left = `${clientWidth}px`;
                         danmu.$ref.style.opacity = this.option.opacity;
-                        danmu.$ref.style.fontSize = `${this.option.fontSize}px`;
+                        danmu.$ref.style.fontSize = `${this.fontSize}px`;
                         danmu.$ref.style.color = danmu.color;
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
                         danmu.$ref.style.backgroundColor = danmu.border ? 'rgb(0 0 0 / 50%)' : null;

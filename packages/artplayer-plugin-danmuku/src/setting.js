@@ -382,12 +382,9 @@ export default class Setting {
             onChange: (index) => {
                 const { $opacityValue } = this.template;
                 $opacityValue.textContent = `${index}%`;
-                const value = index / 100;
-                if (value !== this.option.opacity) {
-                    this.danmuku.config({
-                        opacity: value,
-                    });
-                }
+                this.danmuku.config({
+                    opacity: index / 100,
+                });
             },
         });
 
@@ -406,12 +403,9 @@ export default class Setting {
                 if (!margin) return;
                 const { $marginValue } = this.template;
                 $marginValue.textContent = margin.name;
-                const value = margin.value;
-                if (value[0] !== this.option.margin[0] || value[1] !== this.option.margin[1]) {
-                    this.danmuku.config({
-                        margin: value,
-                    });
-                }
+                this.danmuku.config({
+                    margin: margin.value,
+                });
             },
         });
 
@@ -422,18 +416,14 @@ export default class Setting {
             container: this.template.$fontSizeSlider,
             findIndex: () => {
                 const { clientHeight } = this.art.template.$player;
-                return Math.round((this.option.fontSize / clientHeight) * 100);
+                return Math.round((this.danmuku.fontSize / clientHeight) * 100);
             },
             onChange: (index) => {
                 const { $fontSizeValue } = this.template;
-                const { clientHeight } = this.art.template.$player;
                 $fontSizeValue.textContent = `${index}%`;
-                const percent = Math.round((this.option.fontSize / clientHeight) * 100);
-                if (index !== percent) {
-                    this.danmuku.config({
-                        fontSize: `${index}%`,
-                    });
-                }
+                this.danmuku.config({
+                    fontSize: `${index}%`,
+                });
             },
         });
 
@@ -450,12 +440,9 @@ export default class Setting {
                 if (!speed) return;
                 const { $speedValue } = this.template;
                 $speedValue.textContent = speed.name;
-                const value = speed.value;
-                if (value !== this.option.speed) {
-                    this.danmuku.config({
-                        speed: value,
-                    });
-                }
+                this.danmuku.config({
+                    speed: speed.value,
+                });
             },
         });
     }
