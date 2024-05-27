@@ -582,18 +582,22 @@ export default class Danmuku {
     }
 
     show() {
+        if (!this.isHide) return this;
         this.isHide = false;
         this.start();
         this.$danmuku.style.display = '';
+        this.option.visible = true;
         this.art.emit('artplayerPluginDanmuku:show');
         return this;
     }
 
     hide() {
+        if (this.isHide) return this;
         this.isHide = true;
         this.stop();
         this.queue.forEach((item) => this.makeWait(item));
         this.$danmuku.style.display = 'none';
+        this.option.visible = false;
         this.art.emit('artplayerPluginDanmuku:hide');
         return this;
     }
