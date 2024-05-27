@@ -267,7 +267,7 @@ class Danmuku {
             fontSize: "number|string",
             antiOverlap: "boolean",
             synchronousPlayback: "boolean",
-            mount: "?htmldivelement",
+            mount: "?htmldivelement|string",
             heatmap: "object|boolean",
             points: "array",
             filter: "function",
@@ -1327,8 +1327,10 @@ class Setting {
         $color && inverseClass($color, "apd-active");
     }
     mount(target = this.template.$controlsCenter) {
-        target.appendChild(this.template.$danmuku);
-        this.template.$mount = target;
+        console.log(target);
+        const $el = typeof target === "string" ? document.querySelector(target) : target;
+        $el.appendChild(this.template.$danmuku);
+        this.template.$mount = $el;
         this.reset();
     }
 }

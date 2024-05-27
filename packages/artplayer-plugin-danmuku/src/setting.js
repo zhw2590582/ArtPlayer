@@ -608,8 +608,10 @@ export default class Setting {
     }
 
     mount(target = this.template.$controlsCenter) {
-        target.appendChild(this.template.$danmuku);
-        this.template.$mount = target;
+        console.log(target);
+        const $el = typeof target === 'string' ? document.querySelector(target) : target;
+        $el.appendChild(this.template.$danmuku);
+        this.template.$mount = $el;
         this.reset();
     }
 }

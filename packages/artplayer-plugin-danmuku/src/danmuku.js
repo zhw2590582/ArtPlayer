@@ -80,7 +80,7 @@ export default class Danmuku {
             fontSize: 'number|string',
             antiOverlap: 'boolean',
             synchronousPlayback: 'boolean',
-            mount: '?htmldivelement',
+            mount: '?htmldivelement|string',
             heatmap: 'object|boolean',
             points: 'array',
             filter: 'function',

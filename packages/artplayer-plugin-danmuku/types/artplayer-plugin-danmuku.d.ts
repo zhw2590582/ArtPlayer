@@ -96,7 +96,7 @@ type Option = {
     /**
      * 弹幕发射器挂载点, 默认为播放器控制栏中部
      */
-    mount?: Element;
+    mount?: HTMLDivElement | string;
 
     /**
      * 是否开启弹幕热度图
@@ -188,7 +188,7 @@ type Danmuku = {
     /**
      * 挂载弹幕输入框
      */
-    mount: (el?: Element) => void;
+    mount: (el?: HTMLDivElement | string) => void;
 
     /**
      * 重置弹幕
