@@ -210,7 +210,9 @@ export default class LibassAdapter {
                 if (module instanceof WebAssembly.Module)
                     supportsWebAssembly = new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
             }
-        } catch (e) {
+
+            // eslint-disable-next-line no-unused-vars
+        } catch (error) {
             //
         }
 

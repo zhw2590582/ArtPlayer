@@ -547,6 +547,7 @@ export default class Setting {
             $input.value = '';
 
             this.lock();
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.emitting = false;
         }

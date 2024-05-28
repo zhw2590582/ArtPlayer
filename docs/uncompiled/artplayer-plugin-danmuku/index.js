@@ -1104,7 +1104,6 @@ class Setting {
         $danmuku.innerHTML = this.TEMPLATE;
         this.template.$danmuku = $danmuku;
         this.template.$toggle = this.query(".apd-toggle");
-        tooltip(this.template.$toggle, "\u5F39\u5E55\u5F00\u5173");
         this.template.$configModes = this.query(".apd-config-mode .apd-modes");
         this.template.$styleModes = this.query(".apd-style-mode .apd-modes");
         this.template.$colors = this.query(".apd-colors");
@@ -1120,6 +1119,7 @@ class Setting {
         this.template.$speedValue = this.query(".apd-config-speed .apd-value");
         this.template.$input = this.query(".apd-input");
         this.template.$send = this.query(".apd-send");
+        tooltip(this.template.$toggle, "\u5F39\u5E55\u5F00\u5173");
     }
     createEvents() {
         const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo, $send, $input } = this.template;
@@ -1329,6 +1329,7 @@ class Setting {
             this.danmuku.emit(danmu);
             $input.value = "";
             this.lock();
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             this.emitting = false;
         }
@@ -1380,7 +1381,6 @@ class Setting {
         $color && inverseClass($color, "apd-active");
     }
     mount(target = this.template.$controlsCenter) {
-        console.log(target);
         const $el = typeof target === "string" ? document.querySelector(target) : target;
         $el.appendChild(this.template.$danmuku);
         this.template.$mount = $el;
