@@ -635,11 +635,13 @@ class Danmuku {
             switch(danmu.mode){
                 // 滚动的弹幕
                 case 0:
-                    const distance = clientWidth + danmu.$ref.clientWidth;
-                    danmu.$ref.style.left = `${clientWidth}px`;
-                    danmu.$ref.style.transform = `translateX(${-distance}px)`;
-                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
-                    break;
+                    {
+                        const distance = clientWidth + danmu.$ref.clientWidth;
+                        danmu.$ref.style.left = `${clientWidth}px`;
+                        danmu.$ref.style.transform = `translateX(${-distance}px)`;
+                        danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                        break;
+                    }
                 default:
                     break;
             }
