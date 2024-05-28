@@ -551,13 +551,11 @@ class Danmuku {
                         // 提前添加到弹幕层中，用于计算top值
                         this.$danmuku.appendChild(danmu.$ref);
                         // 设置初始弹幕样式
-                        danmu.$ref.style.left = `${clientWidth}px`;
                         danmu.$ref.style.opacity = this.option.opacity;
                         danmu.$ref.style.fontSize = `${this.fontSize}px`;
                         danmu.$ref.style.color = danmu.color;
                         danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
                         danmu.$ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
-                        danmu.$ref.style.marginLeft = "0px";
                         // 设置单独弹幕样式
                         setStyles(danmu.$ref, danmu.style);
                         // 记录弹幕时间戳
@@ -589,6 +587,8 @@ class Danmuku {
                                 switch(danmu.mode){
                                     // 滚动的弹幕
                                     case 0:
+                                        danmu.$ref.style.left = `${clientWidth}px`;
+                                        danmu.$ref.style.marginLeft = "0px";
                                         danmu.$ref.style.transform = `translateX(${-distance}px)`;
                                         danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                                         break;
@@ -620,11 +620,30 @@ class Danmuku {
     // 重置正在显示的弹幕: stop/emit 状态的弹幕
     resize() {
         const { clientWidth } = this.$player;
-        function callback(danmu) {
-            danmu.mode;
-        }
-        this.filter("stop", callback);
-        this.filter("emit", callback);
+        this.filter("stop", (danmu)=>{
+            switch(danmu.mode){
+                // 滚动的弹幕
+                case 0:
+                    danmu.$ref.style.left = `${clientWidth}px`;
+                    break;
+                default:
+                    break;
+            }
+        });
+        this.filter("emit", (danmu)=>{
+            danmu.$lastStartTime = Date.now();
+            switch(danmu.mode){
+                // 滚动的弹幕
+                case 0:
+                    const distance = clientWidth + danmu.$ref.clientWidth;
+                    danmu.$ref.style.left = `${clientWidth}px`;
+                    danmu.$ref.style.transform = `translateX(${-distance}px)`;
+                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                    break;
+                default:
+                    break;
+            }
+        });
     }
     // 继续弹幕
     continue() {
@@ -636,8 +655,8 @@ class Danmuku {
                 // 继续滚动的弹幕
                 case 0:
                     {
-                        const translateX = clientWidth + danmu.$ref.clientWidth;
-                        danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                        const distance = clientWidth + danmu.$ref.clientWidth;
+                        danmu.$ref.style.transform = `translateX(${-distance}px)`;
                         danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
                         break;
                     }
