@@ -10,16 +10,30 @@
     var $run = document.querySelector('.run');
     var $popups = document.querySelector('.popups');
     var $console = document.querySelector('.console');
-    var $prod = document.querySelector('#pro');
-    var $typeScript = document.querySelector('#typeScript');
+    var $prod = document.querySelector('#prod');
+    var $ts = document.querySelector('#ts');
+    var $code = document.querySelector('#code');
+    var $log = document.querySelector('#log');
     var $file = document.querySelector('#file');
+    var $editor = document.querySelector('#editor');
 
-    var loadedLibs = [];
     window['consoleLog']($console);
+
     $prod.checked = localStorage.getItem('prod') === 'true';
-    $typeScript.checked = localStorage.getItem('typeScript') === 'true';
+    $ts.checked = localStorage.getItem('ts') === 'true';
+    $code.checked = localStorage.getItem('code') === 'true';
+    $log.checked = localStorage.getItem('log') === 'true';
+
+    if ($code.checked) {
+        $editor.style.display = 'none';
+    }
+
+    if ($log.checked) {
+        $console.style.display = 'none';
+    }
 
     var editor = null;
+    var loadedLibs = [];
     require.config({ paths: { vs: './assets/js/vs' } });
     require(['vs/editor/editor.main'], async function () {
         monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
@@ -73,7 +87,7 @@
                     "\turl: '/assets/sample/video.mp4',",
                     '});',
                 ].join('\n'),
-                $typeScript.checked ? 'typescript' : 'javascript',
+                $ts.checked ? 'typescript' : 'javascript',
             ),
         });
     });
@@ -230,8 +244,18 @@
         window.location.reload();
     });
 
-    $typeScript.addEventListener('change', function () {
-        localStorage.setItem('typeScript', $typeScript.checked ? 'true' : 'false');
+    $ts.addEventListener('change', function () {
+        localStorage.setItem('ts', $ts.checked ? 'true' : 'false');
+        window.location.reload();
+    });
+
+    $code.addEventListener('change', function () {
+        localStorage.setItem('code', $code.checked ? 'true' : 'false');
+        window.location.reload();
+    });
+
+    $log.addEventListener('change', function () {
+        localStorage.setItem('log', $log.checked ? 'true' : 'false');
         window.location.reload();
     });
 

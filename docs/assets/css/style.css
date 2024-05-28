@@ -86,7 +86,7 @@ input[type="file"] {
     justify-content: space-between;
     height: 100%;
     line-height: 1;
-    gap: 30px;
+    gap: 20px;
 }
 
 .header .checkbox {
