@@ -56,5 +56,8 @@
         "prompts": "^2.4.2",
         "servor": "^4.0.2",
         "workbox-build": "^7.1.0"
+    },
+    "engines": {
+        "node": ">= 20.0.0"
     }
 }
