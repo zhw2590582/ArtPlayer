@@ -124,7 +124,7 @@ input[type="file"] {
 .header .menus .has-sub-menu .sub-menu {
     display: none;
     position: absolute;
-    z-index: 9;
+    z-index: 9999;
     top: 40px;
     left: 0;
     width: 280px;
