@@ -8,14 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [5.1.2] - 2024-6-1
 
+-   重构 `artplayerPluginDanmuku` 插件
+-   新增 `artplayerPluginChromecast` 插件
 -   添加 `fullscreenError` 事件
--   添加 `supportsFlex` 工具函数
 -   优化双击事件: [#728](https://github.com/zhw2590582/ArtPlayer/pull/728)
 -   修复 `thumbnails` 延迟显示问题
--   新增 `artplayerPluginChromecast` 插件
 -   新增 `art.plugins.lock.state = true/false`, 用于手动控制 `lock` 状态
 -   当鼠标在控制栏上，或者打开了设置面板，控制栏不再自动隐藏
--   重构 `artplayerPluginDanmuku` 插件
 
 ## [5.1.1] - 2024-1-11
 

@@ -1,9 +1,9 @@
-function getDanmuTop({ target, emits, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {
+function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {
     // 弹幕最大高度
     const maxTop = clientHeight - marginBottom;
 
     // 过滤同模式的弹幕，即每种模式各不影响
-    const danmus = emits
+    const danmus = visibles
         .filter((item) => item.mode === target.mode && item.top <= maxTop)
         .sort((prev, next) => prev.top - next.top);
 
