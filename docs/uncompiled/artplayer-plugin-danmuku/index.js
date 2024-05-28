@@ -616,11 +616,22 @@ class Danmuku {
         });
         return this;
     }
-    // 重置正在显示的弹幕
+    // 重置正在显示的弹幕: stop/emit 状态的弹幕
     resize() {
-        this.filter("emit", (danmu)=>{
-        //
-        });
+        const { clientWidth } = this.$player;
+        function callback(danmu) {
+            switch(danmu.mode){
+                // 滚动的弹幕
+                case 0:
+                    const translateX = clientWidth + danmu.$ref.clientWidth;
+                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
+                    break;
+                default:
+                    break;
+            }
+        }
+        this.filter("stop", callback);
+        this.filter("emit", callback);
     }
     // 继续弹幕
     continue() {
