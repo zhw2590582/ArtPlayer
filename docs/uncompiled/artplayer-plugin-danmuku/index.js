@@ -389,6 +389,9 @@ class Danmuku {
         });
         return result;
     }
+    get speed() {
+        return this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
+    }
     // 加载弹幕
     async load() {
         const { errorHandle } = this.utils;
@@ -560,13 +563,15 @@ class Danmuku {
                         // 记录弹幕时间戳
                         danmu.$lastStartTime = Date.now();
                         // 计算弹幕剩余时间
-                        danmu.$restTime = this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
+                        danmu.$restTime = this.speed;
+                        // 计算弹幕滚动的距离
+                        const distance = clientWidth + danmu.$ref.clientWidth;
                         // 计算弹幕的top值
                         const { top } = await this.postMessage({
                             target: {
                                 mode: danmu.mode,
                                 height: danmu.$ref.clientHeight,
-                                speed: (clientWidth + danmu.$ref.clientWidth) / danmu.$restTime
+                                speed: distance / danmu.$restTime
                             },
                             visibles: this.visibles,
                             antiOverlap: this.option.antiOverlap,
@@ -578,29 +583,25 @@ class Danmuku {
                         if (danmu.$ref) {
                             if (!this.isStop && top !== undefined) {
                                 this.setState(danmu, "emit"); // 转换为emit状态
+                                danmu.$ref.style.top = `${top}px`;
                                 danmu.$ref.style.visibility = "visible";
                                 danmu.$ref.dataset.mode = danmu.mode; // CSS控制模式的显示和隐藏
-                                this.art.emit("artplayerPluginDanmuku:visible", danmu);
                                 switch(danmu.mode){
                                     // 滚动的弹幕
                                     case 0:
-                                        {
-                                            danmu.$ref.style.top = `${top}px`;
-                                            const translateX = clientWidth + danmu.$ref.clientWidth;
-                                            danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                                            danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
-                                            break;
-                                        }
+                                        danmu.$ref.style.transform = `translateX(${-distance}px)`;
+                                        danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+                                        break;
                                     case 1:
                                     // falls through
                                     case 2:
                                         danmu.$ref.style.left = "50%";
-                                        danmu.$ref.style.top = `${top}px`;
                                         danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
                                         break;
                                     default:
                                         break;
                                 }
+                                this.art.emit("artplayerPluginDanmuku:visible", danmu);
                             } else {
                                 // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点，等待下次发送
                                 this.setState(danmu, "ready");
@@ -620,15 +621,7 @@ class Danmuku {
     resize() {
         const { clientWidth } = this.$player;
         function callback(danmu) {
-            switch(danmu.mode){
-                // 滚动的弹幕
-                case 0:
-                    const translateX = clientWidth + danmu.$ref.clientWidth;
-                    danmu.$ref.style.transform = `translateX(${-translateX}px)`;
-                    break;
-                default:
-                    break;
-            }
+            danmu.mode;
         }
         this.filter("stop", callback);
         this.filter("emit", callback);
