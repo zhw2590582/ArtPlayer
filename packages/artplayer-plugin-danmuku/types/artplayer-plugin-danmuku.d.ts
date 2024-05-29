@@ -169,7 +169,7 @@ type Option = {
     // 不透明度配置项
     OPACITY?: Slider;
 
-    // 速度配置项
+    // 弹幕速度配置项
     SPEED?: Slider;
 
     // 显示区域配置项

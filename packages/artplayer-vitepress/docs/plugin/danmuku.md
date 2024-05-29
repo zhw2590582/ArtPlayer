@@ -62,7 +62,7 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 ```js
 {
-    danmuku: [], // 弹幕源
+    danmuku: [], // 弹幕数据
     speed: 5, // 弹幕持续时间，范围在[1 ~ 10]
     margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
     opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
@@ -82,6 +82,11 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
     maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
     lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
     theme: 'dark', // 弹幕主题，支持 dark 和 light，只在自定义挂载时生效
+    OPACITY: {}, // 不透明度配置项
+    FONT_SIZE: {}, // 弹幕字号配置项
+    MARGIN: {}, // 显示区域配置项
+    SPEED: {}, // 弹幕速度配置项
+    COLOR: [], // 颜色列表配置项
 }
 ```
 

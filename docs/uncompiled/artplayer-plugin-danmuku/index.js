@@ -202,6 +202,7 @@ class Danmuku {
         this.isStop = false; // 是否停止
         this.isHide = false; // 是否隐藏
         this.timer = null; // 定时器
+        this.index = 0; // 弹幕索引
         // 弹幕状态池
         this.states = {
             wait: [],
@@ -260,7 +261,12 @@ class Danmuku {
             visible: true,
             maxLength: 200,
             lockTime: 5,
-            theme: "dark"
+            theme: "dark",
+            OPACITY: {},
+            FONT_SIZE: {},
+            MARGIN: {},
+            SPEED: {},
+            COLOR: []
         };
     }
     // 配置校验
@@ -285,7 +291,12 @@ class Danmuku {
             visible: "boolean",
             maxLength: "number",
             lockTime: "number",
-            theme: "string"
+            theme: "string",
+            OPACITY: "object",
+            FONT_SIZE: "object",
+            MARGIN: "object",
+            SPEED: "object",
+            COLOR: "array"
         };
     }
     // 初始弹幕样式
@@ -352,11 +363,13 @@ class Danmuku {
         $ref.dataset.mode = "";
         return $ref;
     }
-    // 获取准备好发送的弹幕：有的是ready状态（如之前因为弹幕太多而暂停发送的弹幕），有的是wait状态
+    // 获取准备好发送的弹幕
     get readys() {
         const { currentTime } = this.art;
         const result = [];
+        // 有的是ready状态：之前因为弹幕太多而暂停发送的弹幕
         this.filter("ready", (danmu)=>result.push(danmu));
+        // 有的是wait状态：符合时间范围的弹幕
         this.filter("wait", (danmu)=>{
             if (currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1) result.push(danmu);
         });
@@ -405,6 +418,7 @@ class Danmuku {
             this.$danmuku.innerText = ""; // 清空弹幕层
             this.danmus.forEach((danmu)=>this.emit(danmu)); // 逐个验证原始弹幕并转换为实际弹幕
             this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
+            console.log("Danmuku loaded:", this.queue);
         } catch (error) {
             this.art.emit("artplayerPluginDanmuku:error", error);
             throw error;
@@ -444,15 +458,19 @@ class Danmuku {
         ].includes(danmu.mode)) return this;
         // 自定义弹幕过滤函数
         if (!this.option.filter(danmu)) return this;
-        // 转换为wait状态
-        this.setState(danmu, "wait");
-        // 添加到实际弹幕队列
-        this.queue.push({
+        // 添加自定义属性
+        const item = {
             ...danmu,
+            $state: "wait",
+            $id: this.index++,
             $ref: null,
             $restTime: 0,
             $lastStartTime: 0
-        });
+        };
+        // 转换为wait状态
+        this.setState(item, "wait");
+        // 添加到实际弹幕队列
+        this.queue.push(item);
         // 弹幕有四个状态：
         // - wait: 弹幕还未开始显示，没有被添加到 DOM 中
         // - ready: 弹幕准备好显示，没有被添加到 DOM 中
@@ -508,7 +526,7 @@ class Danmuku {
     // 设置弹幕状态
     setState(danmu, state) {
         // 从原状态池中删除
-        if (danmu.$state) this.states[danmu.$state] = this.states[danmu.$state].filter((item)=>item !== danmu);
+        this.states[danmu.$state] = this.states[danmu.$state].filter((item)=>item !== danmu);
         // 设置新状态
         danmu.$state = state;
         // 设置DOM节点状态
@@ -1012,21 +1030,23 @@ class Setting {
         `;
     }
     get OPACITY() {
-        return this.option.OPACITY || {
+        return {
             min: 0,
             max: 100,
-            steps: []
+            steps: [],
+            ...this.option.OPACITY
         };
     }
     get FONT_SIZE() {
-        return this.option.FONT_SIZE || {
+        return {
             min: 12,
             max: 120,
-            steps: []
+            steps: [],
+            ...this.option.FONT_SIZE
         };
     }
     get MARGIN() {
-        return this.option.MARGIN || {
+        return {
             min: 0,
             max: 3,
             steps: [
@@ -1058,11 +1078,12 @@ class Setting {
                         10
                     ]
                 }
-            ]
+            ],
+            ...this.option.MARGIN
         };
     }
     get SPEED() {
-        return this.option.SPEED || {
+        return {
             min: 0,
             max: 4,
             steps: [
@@ -1088,11 +1109,12 @@ class Setting {
                     name: "\u6781\u5FEB",
                     value: 1
                 }
-            ]
+            ],
+            ...this.option.SPEED
         };
     }
     get COLOR() {
-        return this.option.COLOR || [
+        return this.option.COLOR.length ? this.option.COLOR : [
             "#FE0302",
             "#FF7204",
             "#FFAA02",

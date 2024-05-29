@@ -186,104 +186,100 @@ export default class Setting {
     }
 
     get OPACITY() {
-        return (
-            this.option.OPACITY || {
-                min: 0,
-                max: 100,
-                steps: [],
-            }
-        );
+        return {
+            min: 0,
+            max: 100,
+            steps: [],
+            ...this.option.OPACITY,
+        };
     }
 
     get FONT_SIZE() {
-        return (
-            this.option.FONT_SIZE || {
-                min: 12,
-                max: 120,
-                steps: [],
-            }
-        );
+        return {
+            min: 12,
+            max: 120,
+            steps: [],
+            ...this.option.FONT_SIZE,
+        };
     }
 
     get MARGIN() {
-        return (
-            this.option.MARGIN || {
-                min: 0,
-                max: 3,
-                steps: [
-                    {
-                        name: '1/4',
-                        value: [10, '75%'],
-                    },
-                    {
-                        name: '半屏',
-                        value: [10, '50%'],
-                    },
-                    {
-                        name: '3/4',
-                        value: [10, '25%'],
-                    },
-                    {
-                        name: '满屏',
-                        value: [10, 10],
-                    },
-                ],
-            }
-        );
+        return {
+            min: 0,
+            max: 3,
+            steps: [
+                {
+                    name: '1/4',
+                    value: [10, '75%'],
+                },
+                {
+                    name: '半屏',
+                    value: [10, '50%'],
+                },
+                {
+                    name: '3/4',
+                    value: [10, '25%'],
+                },
+                {
+                    name: '满屏',
+                    value: [10, 10],
+                },
+            ],
+            ...this.option.MARGIN,
+        };
     }
 
     get SPEED() {
-        return (
-            this.option.SPEED || {
-                min: 0,
-                max: 4,
-                steps: [
-                    {
-                        name: '极慢',
-                        value: 10,
-                    },
-                    {
-                        name: '较慢',
-                        value: 7.5,
-                        hide: true,
-                    },
-                    {
-                        name: '适中',
-                        value: 5,
-                    },
-                    {
-                        name: '较快',
-                        value: 2.5,
-                        hide: true,
-                    },
-                    {
-                        name: '极快',
-                        value: 1,
-                    },
-                ],
-            }
-        );
+        return {
+            min: 0,
+            max: 4,
+            steps: [
+                {
+                    name: '极慢',
+                    value: 10,
+                },
+                {
+                    name: '较慢',
+                    value: 7.5,
+                    hide: true,
+                },
+                {
+                    name: '适中',
+                    value: 5,
+                },
+                {
+                    name: '较快',
+                    value: 2.5,
+                    hide: true,
+                },
+                {
+                    name: '极快',
+                    value: 1,
+                },
+            ],
+            ...this.option.SPEED,
+        };
     }
 
     get COLOR() {
-        return (
-            this.option.COLOR || [
-                '#FE0302',
-                '#FF7204',
-                '#FFAA02',
-                '#FFD302',
-                '#FFFF00',
-                '#A0EE00',
-                '#00CD00',
-                '#019899',
-                '#4266BE',
-                '#89D5FF',
-                '#CC0273',
-                '#222222',
-                '#9B9B9B',
-                '#FFFFFF',
-            ]
-        );
+        return this.option.COLOR.length
+            ? this.option.COLOR
+            : [
+                  '#FE0302',
+                  '#FF7204',
+                  '#FFAA02',
+                  '#FFD302',
+                  '#FFFF00',
+                  '#A0EE00',
+                  '#00CD00',
+                  '#019899',
+                  '#4266BE',
+                  '#89D5FF',
+                  '#CC0273',
+                  '#222222',
+                  '#9B9B9B',
+                  '#FFFFFF',
+              ];
     }
 
     query(selector) {
