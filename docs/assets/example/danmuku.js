@@ -24,7 +24,7 @@ var art = new Artplayer({
             antiOverlap: true, // 弹幕是否防重叠
             synchronousPlayback: false, // 是否同步播放速度
             mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
-            heatmap: false, // 是否开启热力图
+            heatmap: true, // 是否开启热力图
             points: [], // 热力图数据
             filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
             beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
