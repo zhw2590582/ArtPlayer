@@ -419,7 +419,6 @@ class Danmuku {
             this.$danmuku.innerText = ""; // 清空弹幕层
             this.danmus.forEach((danmu)=>this.emit(danmu)); // 逐个验证原始弹幕并转换为实际弹幕
             this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
-            console.log("Danmuku loaded:", this.queue);
         } catch (error) {
             this.art.emit("artplayerPluginDanmuku:error", error);
             throw error;
