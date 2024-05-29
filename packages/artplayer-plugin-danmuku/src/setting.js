@@ -195,9 +195,9 @@ export default class Setting {
         );
     }
 
-    get FONTSIZE() {
+    get FONT_SIZE() {
         return (
-            this.option.FONTSIZE || {
+            this.option.FONT_SIZE || {
                 min: 12,
                 max: 120,
                 steps: [],
@@ -442,7 +442,7 @@ export default class Setting {
         });
 
         this.slider.fontSize = this.createSlider({
-            ...this.FONTSIZE,
+            ...this.FONT_SIZE,
             container: this.template.$fontSizeSlider,
             findIndex: () => {
                 return Math.round(this.danmuku.fontSize);

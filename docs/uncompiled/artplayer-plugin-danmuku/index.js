@@ -1018,8 +1018,8 @@ class Setting {
             steps: []
         };
     }
-    get FONTSIZE() {
-        return this.option.FONTSIZE || {
+    get FONT_SIZE() {
+        return this.option.FONT_SIZE || {
             min: 12,
             max: 120,
             steps: []
@@ -1242,7 +1242,7 @@ class Setting {
             }
         });
         this.slider.fontSize = this.createSlider({
-            ...this.FONTSIZE,
+            ...this.FONT_SIZE,
             container: this.template.$fontSizeSlider,
             findIndex: ()=>{
                 return Math.round(this.danmuku.fontSize);

@@ -5,6 +5,16 @@ export as namespace artplayerPluginDanmuku;
 
 type Mode = 0 | 1 | 2;
 
+type Slider = {
+    min: number;
+    max: number;
+    steps: {
+        name: string;
+        value: any;
+        show?: boolean;
+    }[];
+};
+
 type Danmu = {
     /**
      * 弹幕文本
@@ -155,6 +165,11 @@ type Option = {
      * 弹幕主题，只在自定义挂载时生效
      */
     theme?: 'light' | 'dark';
+
+    OPACITY?: Slider;
+    SPEED?: Slider;
+    MARGIN?: Slider;
+    FONT_SIZE?: Slider;
 };
 
 type Danmuku = {
