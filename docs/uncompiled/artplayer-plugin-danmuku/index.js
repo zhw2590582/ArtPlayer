@@ -1015,63 +1015,85 @@ class Setting {
             </div>
         `;
     }
+    get OPACITY() {
+        return this.option.OPACITY || {
+            min: 0,
+            max: 100,
+            steps: []
+        };
+    }
+    get FONTSIZE() {
+        return this.option.FONTSIZE || {
+            min: 12,
+            max: 120,
+            steps: []
+        };
+    }
     get MARGIN() {
-        return this.option.MARGIN || [
-            {
-                name: "1/4",
-                value: [
-                    10,
-                    "75%"
-                ]
-            },
-            {
-                name: "\u534A\u5C4F",
-                value: [
-                    10,
-                    "50%"
-                ]
-            },
-            {
-                name: "3/4",
-                value: [
-                    10,
-                    "25%"
-                ]
-            },
-            {
-                name: "\u6EE1\u5C4F",
-                value: [
-                    10,
-                    10
-                ]
-            }
-        ];
+        return this.option.MARGIN || {
+            min: 0,
+            max: 3,
+            steps: [
+                {
+                    name: "1/4",
+                    value: [
+                        10,
+                        "75%"
+                    ]
+                },
+                {
+                    name: "\u534A\u5C4F",
+                    value: [
+                        10,
+                        "50%"
+                    ]
+                },
+                {
+                    name: "3/4",
+                    value: [
+                        10,
+                        "25%"
+                    ]
+                },
+                {
+                    name: "\u6EE1\u5C4F",
+                    value: [
+                        10,
+                        10
+                    ]
+                }
+            ]
+        };
     }
     get SPEED() {
-        return this.option.SPEED || [
-            {
-                name: "\u6781\u6162",
-                value: 10
-            },
-            {
-                name: "\u8F83\u6162",
-                value: 7.5,
-                hide: true
-            },
-            {
-                name: "\u9002\u4E2D",
-                value: 5
-            },
-            {
-                name: "\u8F83\u5FEB",
-                value: 2.5,
-                hide: true
-            },
-            {
-                name: "\u6781\u5FEB",
-                value: 1
-            }
-        ];
+        return this.option.SPEED || {
+            min: 0,
+            max: 4,
+            steps: [
+                {
+                    name: "\u6781\u6162",
+                    value: 10
+                },
+                {
+                    name: "\u8F83\u6162",
+                    value: 7.5,
+                    hide: true
+                },
+                {
+                    name: "\u9002\u4E2D",
+                    value: 5
+                },
+                {
+                    name: "\u8F83\u5FEB",
+                    value: 2.5,
+                    hide: true
+                },
+                {
+                    name: "\u6781\u5FEB",
+                    value: 1
+                }
+            ]
+        };
     }
     get COLOR() {
         return this.option.COLOR || [
@@ -1194,9 +1216,7 @@ class Setting {
     }
     createSliders() {
         this.slider.opacity = this.createSlider({
-            min: 0,
-            max: 100,
-            steps: [],
+            ...this.OPACITY,
             container: this.template.$opacitySlider,
             findIndex: ()=>{
                 return Math.round(this.option.opacity * 100);
@@ -1210,15 +1230,13 @@ class Setting {
             }
         });
         this.slider.margin = this.createSlider({
-            min: 0,
-            max: 3,
-            steps: this.MARGIN,
+            ...this.MARGIN,
             container: this.template.$marginSlider,
             findIndex: ()=>{
-                return this.MARGIN.findIndex((item)=>item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1]);
+                return this.MARGIN.steps.findIndex((item)=>item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1]);
             },
             onChange: (index)=>{
-                const margin = this.MARGIN[index];
+                const margin = this.MARGIN.steps[index];
                 if (!margin) return;
                 const { $marginValue } = this.template;
                 $marginValue.textContent = margin.name;
@@ -1228,9 +1246,7 @@ class Setting {
             }
         });
         this.slider.fontSize = this.createSlider({
-            min: 12,
-            max: 120,
-            steps: [],
+            ...this.FONTSIZE,
             container: this.template.$fontSizeSlider,
             findIndex: ()=>{
                 return Math.round(this.danmuku.fontSize);
@@ -1244,15 +1260,13 @@ class Setting {
             }
         });
         this.slider.speed = this.createSlider({
-            min: 0,
-            max: 4,
-            steps: this.SPEED,
+            ...this.SPEED,
             container: this.template.$speedSlider,
             findIndex: ()=>{
-                return this.SPEED.findIndex((item)=>item.value === this.option.speed);
+                return this.SPEED.steps.findIndex((item)=>item.value === this.option.speed);
             },
             onChange: (index)=>{
-                const speed = this.SPEED[index];
+                const speed = this.SPEED.steps[index];
                 if (!speed) return;
                 const { $speedValue } = this.template;
                 $speedValue.textContent = speed.name;
