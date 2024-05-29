@@ -361,6 +361,7 @@ class Danmuku {
         const $ref = this.$refs.pop() || document.createElement("div");
         $ref.style.cssText = Danmuku.cssText;
         $ref.dataset.mode = "";
+        $ref.className = "";
         return $ref;
     }
     // 获取准备好发送的弹幕
@@ -434,8 +435,7 @@ class Danmuku {
             color: "?string",
             time: "?number",
             border: "?boolean",
-            style: "?object",
-            escape: "?boolean"
+            style: "?object"
         });
         // 弹幕文本为空则直接忽略
         if (!danmu.text.trim()) return this;
@@ -446,8 +446,6 @@ class Danmuku {
         if (danmu.mode === undefined) danmu.mode = this.option.mode;
         // 设置弹幕单独样式，如果没有则默认为空对象
         if (danmu.style === undefined) danmu.style = {};
-        // 设置弹幕弹幕是否转义，如果没有则默认为 true，即不会显示 HTML 标签
-        if (danmu.escape === undefined) danmu.escape = true;
         // 设置弹幕颜色，如果没有则默认为全局配置
         if (danmu.color === undefined) danmu.color = this.option.color;
         // 弹幕模式只能是 0, 1, 2
@@ -569,9 +567,7 @@ class Danmuku {
                     if (state) {
                         const { clientWidth, clientHeight } = this.$player;
                         danmu.$ref = this.$ref; // 获取弹幕DOM节点
-                        // 设置弹幕文本
-                        if (danmu.escape) danmu.$ref.innerText = danmu.text;
-                        else danmu.$ref.innerHTML = danmu.text;
+                        danmu.$ref.innerText = danmu.text; // 设置弹幕文本
                         // 提前添加到弹幕层中，用于计算top值
                         this.$danmuku.appendChild(danmu.$ref);
                         // 设置初始弹幕样式

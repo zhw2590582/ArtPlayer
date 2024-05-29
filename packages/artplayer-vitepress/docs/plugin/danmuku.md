@@ -52,7 +52,6 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
     color: '#FFFFFF', // 弹幕颜色，默认为白色
     border: false, // 弹幕是否有描边, 默认为 false
     style: {}, // 弹幕自定义样式, 默认为空对象
-    escape: true, // 弹幕文本是否转义, 默认为 true
 }
 ```
 

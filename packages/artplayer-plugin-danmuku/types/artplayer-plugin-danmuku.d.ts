@@ -45,11 +45,6 @@ type Danmu = {
      * 弹幕自定义样式
      */
     style?: Partial<CSSStyleDeclaration>;
-
-    /**
-     * 弹幕文本是否转义, 默认为 true
-     */
-    escape?: boolean;
 };
 
 type Option = {
