@@ -511,6 +511,8 @@ class Danmuku {
         if (danmu.$state) this.states[danmu.$state] = this.states[danmu.$state].filter((item)=>item !== danmu);
         // 设置新状态
         danmu.$state = state;
+        // 设置DOM节点状态
+        if (danmu.$ref) danmu.$ref.dataset.state = state;
         // 添加到新状态池中
         this.states[state].push(danmu);
     }
@@ -519,6 +521,10 @@ class Danmuku {
         this.setState(danmu, "wait");
         if (danmu.$ref) {
             danmu.$ref.style.cssText = Danmuku.cssText;
+            danmu.$ref.style.visibility = "hidden";
+            danmu.$ref.style.marginLeft = "0px";
+            danmu.$ref.style.transform = "translateX(0px)";
+            danmu.$ref.style.transition = "transform 0s linear 0s";
             this.$refs.push(danmu.$ref);
             danmu.$ref = null;
         }
