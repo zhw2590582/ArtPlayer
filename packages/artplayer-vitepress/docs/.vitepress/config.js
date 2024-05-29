@@ -13,8 +13,9 @@ const config = {
     logo: '/logo.png',
     nav: [
       { text: '中文版', link: '/' },
-      { text: 'English', link: '/en/', activeMatch: '/en/' },
+      { text: 'English Docs', link: '/en/', activeMatch: '/en/' },
       { text: 'Online Editor', link: 'https://artplayer.org' },
+      { text: '🎉 弹幕库', link: '/plugin/danmuku' },
       {
         text: '5.1.x',
         items: [
