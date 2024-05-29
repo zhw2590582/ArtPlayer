@@ -170,6 +170,7 @@ type Option = {
     SPEED?: Slider;
     MARGIN?: Slider;
     FONT_SIZE?: Slider;
+    COLOR?: string[];
 };
 
 type Danmuku = {
