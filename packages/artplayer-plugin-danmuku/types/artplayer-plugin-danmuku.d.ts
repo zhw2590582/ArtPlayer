@@ -161,19 +161,29 @@ type Option = {
      */
     theme?: 'light' | 'dark';
 
-    // 不透明度配置项
+    /**
+     * 不透明度配置项
+     */
     OPACITY?: Slider;
 
-    // 弹幕速度配置项
+    /**
+     * 弹幕速度配置项
+     */
     SPEED?: Slider;
 
-    // 显示区域配置项
+    /**
+     * 显示区域配置项
+     */
     MARGIN?: Slider;
 
-    // 弹幕字号配置项
+    /**
+     * 弹幕字号配置项
+     */
     FONT_SIZE?: Slider;
 
-    // 颜色列表配置项
+    /**
+     * 颜色列表配置项
+     */
     COLOR?: string[];
 };
 
