@@ -695,6 +695,7 @@ class Danmuku {
         return this;
     }
     stop() {
+        if (this.isStop) return this;
         this.isStop = true;
         this.suspend();
         window.cancelAnimationFrame(this.timer);
@@ -702,6 +703,7 @@ class Danmuku {
         return this;
     }
     start() {
+        if (!this.isStop) return this;
         this.isStop = false;
         this.continue();
         this.update();
@@ -716,8 +718,7 @@ class Danmuku {
     show() {
         if (!this.isHide) return this;
         this.isHide = false;
-        this.start();
-        this.$danmuku.style.display = "";
+        this.$danmuku.style.opacity = 1;
         this.option.visible = true;
         this.art.emit("artplayerPluginDanmuku:show");
         return this;
@@ -725,9 +726,7 @@ class Danmuku {
     hide() {
         if (this.isHide) return this;
         this.isHide = true;
-        this.stop();
-        this.queue.forEach((item)=>this.makeWait(item));
-        this.$danmuku.style.display = "none";
+        this.$danmuku.style.opacity = 0;
         this.option.visible = false;
         this.art.emit("artplayerPluginDanmuku:hide");
         return this;
@@ -1125,7 +1124,13 @@ class Setting {
         this.template.$speedValue = this.query(".apd-config-speed .apd-value");
         this.template.$input = this.query(".apd-input");
         this.template.$send = this.query(".apd-send");
-        tooltip(this.template.$toggle, "\u5F39\u5E55\u5F00\u5173");
+        const { $toggle } = this.template;
+        this.art.on("artplayerPluginDanmuku:show", ()=>{
+            tooltip($toggle, "\u5173\u95ED\u5F39\u5E55");
+        });
+        this.art.on("artplayerPluginDanmuku:hide", ()=>{
+            tooltip($toggle, "\u6253\u5F00\u5F39\u5E55");
+        });
     }
     createEvents() {
         const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo, $send, $input } = this.template;
@@ -1368,6 +1373,8 @@ class Setting {
         removeClass($send, "apd-lock");
     }
     reset() {
+        const { inverseClass, tooltip } = this.utils;
+        const { $toggle, $colors } = this.template;
         this.slider.opacity.reset();
         this.slider.margin.reset();
         this.slider.fontSize.reset();
@@ -1381,10 +1388,10 @@ class Setting {
         this.setData("danmukuAntiOverlap", this.option.antiOverlap);
         this.setData("danmukuSyncVideo", this.option.synchronousPlayback);
         this.setData("danmukuTheme", this.option.theme);
-        const { inverseClass } = this.utils;
-        const colors = this.template.$colors.children;
+        const colors = $colors.children;
         const $color = Array.from(colors).find((item)=>item.dataset.color === this.option.color.toUpperCase());
         $color && inverseClass($color, "apd-active");
+        tooltip($toggle, this.option.visible ? "\u5173\u95ED\u5F39\u5E55" : "\u6253\u5F00\u5F39\u5E55");
     }
     mount(target = this.template.$controlsCenter) {
         const $el = typeof target === "string" ? document.querySelector(target) : target;

@@ -298,7 +298,15 @@ export default class Setting {
         this.template.$input = this.query('.apd-input');
         this.template.$send = this.query('.apd-send');
 
-        tooltip(this.template.$toggle, '弹幕开关');
+        const { $toggle } = this.template;
+
+        this.art.on('artplayerPluginDanmuku:show', () => {
+            tooltip($toggle, '关闭弹幕');
+        });
+
+        this.art.on('artplayerPluginDanmuku:hide', () => {
+            tooltip($toggle, '打开弹幕');
+        });
     }
 
     createEvents() {
@@ -587,6 +595,9 @@ export default class Setting {
     }
 
     reset() {
+        const { inverseClass, tooltip } = this.utils;
+        const { $toggle, $colors } = this.template;
+
         this.slider.opacity.reset();
         this.slider.margin.reset();
         this.slider.fontSize.reset();
@@ -602,10 +613,11 @@ export default class Setting {
         this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
         this.setData('danmukuTheme', this.option.theme);
 
-        const { inverseClass } = this.utils;
-        const colors = this.template.$colors.children;
+        const colors = $colors.children;
         const $color = Array.from(colors).find((item) => item.dataset.color === this.option.color.toUpperCase());
         $color && inverseClass($color, 'apd-active');
+
+        tooltip($toggle, this.option.visible ? '关闭弹幕' : '打开弹幕');
     }
 
     mount(target = this.template.$controlsCenter) {

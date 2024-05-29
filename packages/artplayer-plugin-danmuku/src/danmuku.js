@@ -638,6 +638,7 @@ export default class Danmuku {
     }
 
     stop() {
+        if (this.isStop) return this;
         this.isStop = true;
         this.suspend();
         window.cancelAnimationFrame(this.timer);
@@ -646,6 +647,7 @@ export default class Danmuku {
     }
 
     start() {
+        if (!this.isStop) return this;
         this.isStop = false;
         this.continue();
         this.update();
@@ -662,8 +664,7 @@ export default class Danmuku {
     show() {
         if (!this.isHide) return this;
         this.isHide = false;
-        this.start();
-        this.$danmuku.style.display = '';
+        this.$danmuku.style.opacity = 1;
         this.option.visible = true;
         this.art.emit('artplayerPluginDanmuku:show');
         return this;
@@ -672,9 +673,7 @@ export default class Danmuku {
     hide() {
         if (this.isHide) return this;
         this.isHide = true;
-        this.stop();
-        this.queue.forEach((item) => this.makeWait(item));
-        this.$danmuku.style.display = 'none';
+        this.$danmuku.style.opacity = 0;
         this.option.visible = false;
         this.art.emit('artplayerPluginDanmuku:hide');
         return this;
