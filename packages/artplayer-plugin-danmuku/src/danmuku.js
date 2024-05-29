@@ -638,7 +638,6 @@ export default class Danmuku {
     }
 
     stop() {
-        if (this.isStop) return this;
         this.isStop = true;
         this.suspend();
         window.cancelAnimationFrame(this.timer);
@@ -647,7 +646,6 @@ export default class Danmuku {
     }
 
     start() {
-        if (!this.isStop) return this;
         this.isStop = false;
         this.continue();
         this.update();
@@ -662,7 +660,6 @@ export default class Danmuku {
     }
 
     show() {
-        if (!this.isHide) return this;
         this.isHide = false;
         this.$danmuku.style.opacity = 1;
         this.option.visible = true;
@@ -671,7 +668,6 @@ export default class Danmuku {
     }
 
     hide() {
-        if (this.isHide) return this;
         this.isHide = true;
         this.$danmuku.style.opacity = 0;
         this.option.visible = false;
