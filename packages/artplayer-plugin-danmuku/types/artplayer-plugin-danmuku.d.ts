@@ -9,8 +9,8 @@ type Slider = {
     min: number;
     max: number;
     steps: {
-        name: string;
-        value: any;
+        name?: string;
+        value?: any;
         show?: boolean;
     }[];
 };
