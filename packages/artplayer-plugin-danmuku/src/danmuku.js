@@ -73,6 +73,7 @@ export default class Danmuku {
             beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
             beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
             visible: true, // 弹幕层是否可见
+            emitter: true, // 是否开启弹幕发射器
             maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
             lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
             theme: 'dark', // 弹幕主题，支持 dark 和 light，只在自定义挂载时生效
@@ -104,6 +105,7 @@ export default class Danmuku {
             beforeEmit: 'function',
             beforeVisible: 'function',
             visible: 'boolean',
+            emitter: 'boolean',
             maxLength: 'number',
             lockTime: 'number',
             theme: 'string',

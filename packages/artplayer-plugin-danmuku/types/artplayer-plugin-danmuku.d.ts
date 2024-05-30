@@ -147,6 +147,11 @@ type Option = {
     visible?: boolean;
 
     /**
+     * 是否开启弹幕发射器
+     */
+    emitter?: boolean;
+
+    /**
      * 弹幕输入框最大长度, 范围在[1 ~ 1000]
      */
     maxLength?: number;

@@ -628,6 +628,7 @@ export default class Setting {
         this.setData('danmukuAntiOverlap', this.option.antiOverlap);
         this.setData('danmukuSyncVideo', this.option.synchronousPlayback);
         this.setData('danmukuTheme', this.option.theme);
+        this.setData('danmukuEmitter', this.option.emitter);
 
         const colors = $colors.children;
         const $color = Array.from(colors).find((item) => item.dataset.color === this.option.color.toUpperCase());
@@ -636,7 +637,7 @@ export default class Setting {
         tooltip($toggle, this.option.visible ? '关闭弹幕' : '打开弹幕');
     }
 
-    mount(target = this.template.$controlsCenter) {
+    mount(target) {
         const $el = typeof target === 'string' ? document.querySelector(target) : target;
         $el.appendChild(this.template.$danmuku);
         this.template.$mount = $el;
