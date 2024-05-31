@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   修复 `thumbnails` 延迟显示问题
 -   新增 `art.plugins.lock.state = true/false`, 用于手动控制 `lock` 状态
 -   当鼠标在控制栏上，或者打开了设置面板，控制栏不再自动隐藏
+-   由于兼容性不足，删除 `screen.orientation.lock` 功能
 
 ## [5.1.1] - 2024-1-11
 

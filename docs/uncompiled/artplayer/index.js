@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-06-01 07:11:45";
+        return "2024-06-01 07:16:48";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -5098,21 +5098,6 @@ function autoOrientation(art) {
             (0, _utils.removeClass)($player, "art-auto-orientation");
             art.isRotate = false;
             art.emit("resize");
-        }
-    });
-    art.on("fullscreen", async (state)=>{
-        const lastOrientation = screen.orientation.type;
-        if (state) {
-            const { videoWidth, videoHeight } = $video;
-            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
-            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
-                const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
-                await screen.orientation.lock?.(oppositeOrientation);
-                (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
-            }
-        } else if ((0, _utils.hasClass)($player, "art-auto-orientation-fullscreen")) {
-            await screen.orientation.lock?.(lastOrientation);
-            (0, _utils.removeClass)($player, "art-auto-orientation-fullscreen");
         }
     });
     return {
