@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.1.2";
+        return "5.1.3";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2024-06-01 07:16:48";
+        return "2024-06-01 07:56:48";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1253,7 +1253,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.1.2"}</div>
+                  <div class="art-info-content">${"5.1.3"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3667,7 +3667,7 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.2"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.3"}</a>`
     };
 }
 
