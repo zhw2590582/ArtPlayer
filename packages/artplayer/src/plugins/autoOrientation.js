@@ -49,7 +49,7 @@ export default function autoOrientation(art) {
             }
         } else {
             if (hasClass($player, 'art-auto-orientation-fullscreen')) {
-                await screen.orientation.lock(lastOrientation);
+                await screen.orientation.lock?.(lastOrientation);
                 removeClass($player, 'art-auto-orientation-fullscreen');
             }
         }
