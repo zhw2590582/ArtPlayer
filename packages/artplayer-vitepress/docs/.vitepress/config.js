@@ -84,6 +84,7 @@ const config = {
             { text: 'flv.js', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv' },
             { text: 'dash.js', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash' },
             { text: 'mpegts.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts' },
+            { text: 'webtorrent.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent' },
           ]
         },
       ],
@@ -141,6 +142,7 @@ const config = {
             { text: 'flv.js', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv' },
             { text: 'dash.js', link: 'https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js&example=dash' },
             { text: 'mpegts.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts' },
+            { text: 'webtorrent.js', link: 'https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent' },
           ]
         },
       ],
