@@ -44,7 +44,7 @@ export default function autoOrientation(art) {
                 (videoWidth < videoHeight && viewWidth > viewHeight)
             ) {
                 const oppositeOrientation = lastOrientation.startsWith('portrait') ? 'landscape' : 'portrait';
-                await screen.orientation.lock(oppositeOrientation);
+                await screen.orientation.lock?.(oppositeOrientation);
                 addClass($player, 'art-auto-orientation-fullscreen');
             }
         } else {
