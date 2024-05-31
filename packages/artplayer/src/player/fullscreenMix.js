@@ -5,7 +5,7 @@ export default function fullscreenMix(art) {
     const {
         i18n,
         notice,
-        template: { $video, $player },
+        template: { $player },
     } = art;
 
     const nativeScreenfull = (art) => {
@@ -35,30 +35,9 @@ export default function fullscreenMix(art) {
         });
     };
 
-    const webkitScreenfull = (art) => {
-        def(art, 'fullscreen', {
-            get() {
-                return $video.webkitDisplayingFullscreen;
-            },
-            set(value) {
-                if (value) {
-                    art.state = 'fullscreen';
-                    $video.webkitEnterFullscreen();
-                    art.emit('fullscreen', true);
-                } else {
-                    $video.webkitExitFullscreen();
-                    art.emit('fullscreen', false);
-                }
-                art.emit('resize');
-            },
-        });
-    };
-
     art.once('video:loadedmetadata', () => {
         if (screenfull.isEnabled) {
             nativeScreenfull(art);
-        } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
-            webkitScreenfull(art);
         } else {
             def(art, 'fullscreen', {
                 get() {
