@@ -6,8 +6,7 @@ async function playTorrent(video, url, art) {
         if (art.torrent) art.torrent.destroy();
         art.torrent = new WebTorrent();
 
-        const registration = await navigator.serviceWorker.register('/webtorrent.sw.min.js', { scope: '/' });
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        await navigator.serviceWorker.register('/webtorrent.sw.min.js');
         art.torrent.loadWorker(navigator.serviceWorker.controller);
 
         art.torrent.add(url, (torrent) => {
