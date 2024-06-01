@@ -35,21 +35,64 @@ export default function fullscreenMix(art) {
         });
     };
 
+    const isFullscreenEnabled = () => {
+        return (
+            document.fullscreenEnabled ||
+            document.webkitFullscreenEnabled ||
+            document.mozFullScreenEnabled ||
+            document.msFullscreenEnabled ||
+            $video.webkitSupportsFullscreen
+        );
+    };
+
     const webkitScreenfull = (art) => {
+        const requestFullscreen =
+            $video.requestFullscreen ||
+            $video.mozRequestFullScreen ||
+            $video.webkitRequestFullscreen ||
+            $video.msRequestFullscreen;
+
+        const exitFullscreen =
+            document.exitFullscreen ||
+            document.mozCancelFullScreen ||
+            document.webkitExitFullscreen ||
+            document.msExitFullscreen;
+
+        const isFullscreen = () => {
+            return (
+                document.fullscreenElement === $video ||
+                document.webkitFullscreenElement === $video ||
+                document.mozFullScreenElement === $video ||
+                document.msFullscreenElement === $video ||
+                $video.webkitDisplayingFullscreen
+            );
+        };
+
+        const handleFullscreenChange = () => {
+            if (isFullscreen()) {
+                art.state = 'fullscreen';
+                art.emit('fullscreen', true);
+            } else {
+                art.emit('fullscreen', false);
+            }
+            art.emit('resize');
+        };
+
+        art.proxy(document, 'fullscreenchange', handleFullscreenChange);
+        art.proxy(document, 'webkitfullscreenchange', handleFullscreenChange);
+        art.proxy(document, 'mozfullscreenchange', handleFullscreenChange);
+        art.proxy(document, 'MSFullscreenChange', handleFullscreenChange);
+
         def(art, 'fullscreen', {
             get() {
-                return $video.webkitDisplayingFullscreen;
+                return isFullscreen();
             },
             set(value) {
                 if (value) {
-                    art.state = 'fullscreen';
-                    $video.webkitEnterFullscreen();
-                    art.emit('fullscreen', true);
+                    requestFullscreen.call($video);
                 } else {
-                    $video.webkitExitFullscreen();
-                    art.emit('fullscreen', false);
+                    exitFullscreen.call(document);
                 }
-                art.emit('resize');
             },
         });
     };
@@ -57,7 +100,7 @@ export default function fullscreenMix(art) {
     art.once('video:loadedmetadata', () => {
         if (screenfull.isEnabled) {
             nativeScreenfull(art);
-        } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
+        } else if (isFullscreenEnabled()) {
             webkitScreenfull(art);
         } else {
             def(art, 'fullscreen', {
