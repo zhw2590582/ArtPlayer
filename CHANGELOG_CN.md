@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [5.1.3] - 2024-6-1
+## [5.1.4] - 2024-6-1
 
 -   重构 `artplayerPluginDanmuku` 插件
 -   新增 `artplayerPluginChromecast` 插件
@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   新增 `art.plugins.lock.state = true/false`, 用于手动控制 `lock` 状态
 -   当鼠标在控制栏上，或者打开了设置面板，控制栏不再自动隐藏
 -   由于兼容性不足，删除 `screen.orientation.lock` 功能
+-   修复移动端的 `fullscreen` bug
 
 ## [5.1.1] - 2024-1-11
 
