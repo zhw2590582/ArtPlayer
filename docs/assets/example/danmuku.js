@@ -42,3 +42,8 @@ var art = new Artplayer({
         }),
     ],
 });
+
+// 在移动端或者播放器尺寸太小的时候，可以把弹幕发射器挂载到其他位置
+// if (Artplayer.utils.isMobile) {
+// 	art.plugins.artplayerPluginDanmuku.mount('.danmuku-emitter')
+// }
