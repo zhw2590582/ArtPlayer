@@ -21,7 +21,7 @@ var art = new Artplayer({
         'x5-video-player-type': 'h5',
         'x5-video-player-fullscreen': false,
         'x5-video-orientation': 'portraint',
-        preload: "metadata"
+        preload: "auto"
     },
     subtitle: {
         name: '中日双语',
