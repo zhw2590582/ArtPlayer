@@ -62,10 +62,10 @@ export default function fullscreenMix(art) {
             set(value) {
                 if (value) {
                     art.state = 'fullscreen';
-                    requestFullscreen();
+                    requestFullscreen.call($video);
                     art.emit('fullscreen', true);
                 } else {
-                    exitFullscreen();
+                    exitFullscreen.call(document);
                     art.emit('fullscreen', false);
                 }
                 art.emit('resize');
