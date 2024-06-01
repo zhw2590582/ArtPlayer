@@ -35,18 +35,37 @@ export default function fullscreenMix(art) {
         });
     };
 
+    const requestFullscreen =
+        $video.requestFullscreen ||
+        $video.mozRequestFullScreen ||
+        $video.webkitRequestFullscreen ||
+        $video.msRequestFullscreen;
+
+    const exitFullscreen =
+        document.exitFullscreen ||
+        document.mozCancelFullScreen ||
+        document.webkitExitFullscreen ||
+        document.msExitFullscreen;
+
+    const isFullscreenEnabled =
+        document.fullscreenEnabled ||
+        document.webkitFullscreenEnabled ||
+        document.mozFullScreenEnabled ||
+        document.msFullscreenEnabled ||
+        $video.webkitSupportsFullscreen;
+
     const webkitScreenfull = (art) => {
         def(art, 'fullscreen', {
             get() {
-                return document.fullscreenElement;
+                return document.fullscreenElement || $video.webkitDisplayingFullscreen;
             },
             set(value) {
                 if (value) {
                     art.state = 'fullscreen';
-                    $video.requestFullscreen();
+                    requestFullscreen();
                     art.emit('fullscreen', true);
                 } else {
-                    document.exitFullscreen();
+                    exitFullscreen();
                     art.emit('fullscreen', false);
                 }
                 art.emit('resize');
@@ -57,7 +76,7 @@ export default function fullscreenMix(art) {
     art.once('video:loadedmetadata', () => {
         if (screenfull.isEnabled) {
             nativeScreenfull(art);
-        } else if (document.fullscreenEnabled) {
+        } else if (isFullscreenEnabled) {
             webkitScreenfull(art);
         } else {
             def(art, 'fullscreen', {
