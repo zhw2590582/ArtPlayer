@@ -38,6 +38,7 @@ export default function fullscreenMix(art) {
     const webkitScreenfull = (art) => {
         def(art, 'fullscreen', {
             get() {
+                console.log('webkitDisplayingFullscreen', $video.webkitDisplayingFullscreen);
                 return $video.webkitDisplayingFullscreen;
             },
             set(value) {
@@ -55,6 +56,9 @@ export default function fullscreenMix(art) {
     };
 
     art.once('video:loadedmetadata', () => {
+        console.log('screenfull.isEnabled', screenfull.isEnabled);
+        console.log('document.fullscreenEnabled', document.fullscreenEnabled);
+        console.log('$video.webkitSupportsFullscreen', $video.webkitSupportsFullscreen);
         if (screenfull.isEnabled) {
             nativeScreenfull(art);
         } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
