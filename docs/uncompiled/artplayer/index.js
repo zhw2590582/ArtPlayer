@@ -1876,7 +1876,7 @@ function fullscreenMix(art) {
     const webkitScreenfull = (art)=>{
         (0, _utils.def)(art, "fullscreen", {
             get () {
-                return $video.webkitDisplayingFullscreen;
+                return document.fullscreenElement;
             },
             set (value) {
                 if (value) {

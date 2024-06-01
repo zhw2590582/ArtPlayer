@@ -38,7 +38,7 @@ export default function fullscreenMix(art) {
     const webkitScreenfull = (art) => {
         def(art, 'fullscreen', {
             get() {
-                return $video.webkitDisplayingFullscreen;
+                return document.fullscreenElement;
             },
             set(value) {
                 if (value) {
