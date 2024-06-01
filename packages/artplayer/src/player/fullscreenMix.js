@@ -43,10 +43,10 @@ export default function fullscreenMix(art) {
             set(value) {
                 if (value) {
                     art.state = 'fullscreen';
-                    $video.webkitEnterFullscreen();
+                    $video.requestFullscreen();
                     art.emit('fullscreen', true);
                 } else {
-                    $video.webkitExitFullscreen();
+                    document.exitFullscreen();
                     art.emit('fullscreen', false);
                 }
                 art.emit('resize');
@@ -57,7 +57,7 @@ export default function fullscreenMix(art) {
     art.once('video:loadedmetadata', () => {
         if (screenfull.isEnabled) {
             nativeScreenfull(art);
-        } else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) {
+        } else if (document.fullscreenEnabled) {
             webkitScreenfull(art);
         } else {
             def(art, 'fullscreen', {

@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-06-01 07:56:48";
+        return "2024-06-01 08:42:25";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1881,10 +1881,10 @@ function fullscreenMix(art) {
             set (value) {
                 if (value) {
                     art.state = "fullscreen";
-                    $video.webkitEnterFullscreen();
+                    $video.requestFullscreen();
                     art.emit("fullscreen", true);
                 } else {
-                    $video.webkitExitFullscreen();
+                    document.exitFullscreen();
                     art.emit("fullscreen", false);
                 }
                 art.emit("resize");
@@ -1893,7 +1893,7 @@ function fullscreenMix(art) {
     };
     art.once("video:loadedmetadata", ()=>{
         if ((0, _screenfullDefault.default).isEnabled) nativeScreenfull(art);
-        else if (document.fullscreenEnabled || $video.webkitSupportsFullscreen) webkitScreenfull(art);
+        else if (document.fullscreenEnabled) webkitScreenfull(art);
         else (0, _utils.def)(art, "fullscreen", {
             get () {
                 return false;
