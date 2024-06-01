@@ -42,6 +42,7 @@ export default function fullscreenMix(art) {
                 return $video.webkitDisplayingFullscreen;
             },
             set(value) {
+                console.log('set', value);
                 if (value) {
                     art.state = 'fullscreen';
                     $video.webkitEnterFullscreen();
