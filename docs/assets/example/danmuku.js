@@ -26,9 +26,8 @@ var art = new Artplayer({
             mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
             heatmap: true, // 是否开启热力图
             points: [], // 热力图数据
-            filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
-            beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
-            beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
+            filter: (danmu) => danmu.text.length <= 100, // 弹幕载入前的过滤器
+            beforeVisible: () => true, // 弹幕显示前的过滤器，返回 true 则可以发送
             visible: true, // 弹幕层是否可见
             emitter: true, // 是否开启弹幕发射器
             maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
@@ -39,6 +38,16 @@ var art = new Artplayer({
             MARGIN: {}, // 显示区域配置项
             SPEED: {}, // 弹幕速度配置项
             COLOR: [], // 颜色列表配置项
+
+            // 手动发送弹幕前的过滤器，返回 true 则可以发送，可以做存库处理
+            beforeEmit(danmu) {
+               return new Promise((resolve) => {
+                    console.log(danmu);
+                    setTimeout(() => {
+                        resolve(true);
+                    }, 1000);
+               });
+            },
         }),
     ],
 });
@@ -47,3 +56,8 @@ var art = new Artplayer({
 // if (Artplayer.utils.isMobile) {
 // 	art.plugins.artplayerPluginDanmuku.mount('.danmuku-emitter')
 // }
+
+// 弹幕已经出现在播放器里，你可以访问到弹幕的dom元素里
+// art.on('artplayerPluginDanmuku:visible', danmu => {
+//     danmu.$ref.innerHTML = 'ଘ(੭ˊᵕˋ)੭: ' + danmu.$ref.innerHTML;
+// })
