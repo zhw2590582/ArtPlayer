@@ -142,21 +142,21 @@
       this[globalName] = mainExports;
     }
   }
-})({"fryej":[function(require,module,exports) {
+})({"eSwxK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>artplayerPluginTest);
+parcelHelpers.export(exports, "default", ()=>artplayerPluginVast);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
-function artplayerPluginTest(option) {
+function artplayerPluginVast(option) {
     return (art)=>{
         return {
-            name: "artplayerPluginTest"
+            name: "artplayerPluginVast"
         };
     };
 }
 if (typeof document !== "undefined") {
-    const id = "artplayer-plugin-test";
+    const id = "artplayer-plugin-vast";
     const $style = document.getElementById(id);
     if ($style) $style.textContent = (0, _styleLessDefault.default);
     else {
@@ -166,9 +166,9 @@ if (typeof document !== "undefined") {
         document.head.appendChild($style);
     }
 }
-if (typeof window !== "undefined") window["artplayerPluginTest"] = artplayerPluginTest;
+if (typeof window !== "undefined") window["ArtplayerPluginVast"] = artplayerPluginVast;
 
-},{"bundle-text:./style.less":"hbz6Y","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"hbz6Y":[function(require,module,exports) {
+},{"bundle-text:./style.less":"8l0EI","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8l0EI":[function(require,module,exports) {
 module.exports = "\n";
 
 },{}],"5dUr6":[function(require,module,exports) {
@@ -201,6 +201,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["fryej"], "fryej", "parcelRequire4dc0")
+},{}]},["eSwxK"], "eSwxK", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map

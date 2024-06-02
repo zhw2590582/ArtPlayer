@@ -78,10 +78,10 @@
             automaticLayout: true,
             quickSuggestions: { other: true, comments: true, strings: true },
             model: monaco.editor.createModel(
-                `var art = new Artplayer({
-                    container: '.artplayer-app',
-                    url: '/assets/sample/video.mp4',
-                });`,
+`var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+});`,
                 $ts.checked ? 'typescript' : 'javascript'
             ),
         });

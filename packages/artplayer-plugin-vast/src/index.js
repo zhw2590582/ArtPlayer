@@ -22,5 +22,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof window !== 'undefined') {
-    window['artplayerPluginVast'] = artplayerPluginVast;
+    window['ArtplayerPluginVast'] = artplayerPluginVast;
 }

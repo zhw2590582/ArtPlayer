@@ -74,6 +74,7 @@ const config = {
             { text: '多重字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
             { text: 'Ass 字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass'},
             { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
+            { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},        
           ]
         },
         {
@@ -132,6 +133,7 @@ const config = {
             { text: 'Multiple Subtitles', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
             { text: 'Ass Subtitle', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass'},
             { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
+            { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},            
           ]
         },
         {
