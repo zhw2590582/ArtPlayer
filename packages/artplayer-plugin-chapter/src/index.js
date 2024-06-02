@@ -1,6 +1,6 @@
 import style from 'bundle-text:./style.less';
 
-export default function artplayerPluginChapter({ chapters = [] }) {
+export default function artplayerPluginChapter(option = {}) {
     return (art) => {
         const { $player } = art.template;
         const { setStyle, append, clamp, query, isMobile, addClass, removeClass } = art.constructor.utils;
@@ -32,6 +32,36 @@ export default function artplayerPluginChapter({ chapters = [] }) {
                 setStyle($title, 'left', `${$inner.clientWidth - titleWidth}px`);
             } else {
                 setStyle($title, 'left', `${width - titleWidth / 2}px`);
+            }
+        }
+
+        function update(chapters = []) {
+            $control.innerText = '';
+
+            $chapters = chapters.map((chapter) => {
+                const $chapter = append($control, html);
+                const start = clamp(chapter.start, 0, art.duration);
+                const end = clamp(chapter.end, 0, art.duration);
+                const duration = end - start;
+                const percentage = duration / art.duration;
+                $chapter.dataset.start = start;
+                $chapter.dataset.end = end;
+                $chapter.dataset.duration = duration;
+                $chapter.dataset.title = chapter.title.trim();
+                $chapter.style.width = `${percentage * 100}%`;
+
+                return {
+                    $chapter,
+                    $hover: query('.art-progress-hover', $chapter),
+                    $loaded: query('.art-progress-loaded', $chapter),
+                    $played: query('.art-progress-played', $chapter),
+                };
+            });
+
+            if ($chapters.length) {
+                addClass($player, 'artplayer-plugin-chapter');
+            } else {
+                removeClass($player, 'artplayer-plugin-chapter');
             }
         }
 
@@ -97,38 +127,11 @@ export default function artplayerPluginChapter({ chapters = [] }) {
             });
         }
 
-        art.on('video:loadedmetadata', () => {
-            $control.innerText = '';
-
-            $chapters = chapters.map((chapter) => {
-                const $chapter = append($control, html);
-                const start = clamp(chapter.start, 0, art.duration);
-                const end = clamp(chapter.end, 0, art.duration);
-                const duration = end - start;
-                const percentage = duration / art.duration;
-                $chapter.dataset.start = start;
-                $chapter.dataset.end = end;
-                $chapter.dataset.duration = duration;
-                $chapter.dataset.title = chapter.title.trim();
-                $chapter.style.width = `${percentage * 100}%`;
-
-                return {
-                    $chapter,
-                    $hover: query('.art-progress-hover', $chapter),
-                    $loaded: query('.art-progress-loaded', $chapter),
-                    $played: query('.art-progress-played', $chapter),
-                };
-            });
-
-            if ($chapters.length) {
-                addClass($player, 'artplayer-plugin-chapter');
-            } else {
-                removeClass($player, 'artplayer-plugin-chapter');
-            }
-        });
+        art.once('video:loadedmetadata', () => update(option.chapters));
 
         return {
             name: 'artplayerPluginChapter',
+            update: (chapters) => update(chapters),
         };
     };
 }

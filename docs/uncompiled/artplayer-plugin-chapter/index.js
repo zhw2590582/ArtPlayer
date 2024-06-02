@@ -148,7 +148,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginChapter);
 var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
-function artplayerPluginChapter({ chapters = [] }) {
+function artplayerPluginChapter(option = {}) {
     return (art)=>{
         const { $player } = art.template;
         const { setStyle, append, clamp, query, isMobile, addClass, removeClass } = art.constructor.utils;
@@ -173,6 +173,29 @@ function artplayerPluginChapter({ chapters = [] }) {
             if (width <= titleWidth / 2) setStyle($title, "left", 0);
             else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
             else setStyle($title, "left", `${width - titleWidth / 2}px`);
+        }
+        function update(chapters = []) {
+            $control.innerText = "";
+            $chapters = chapters.map((chapter)=>{
+                const $chapter = append($control, html);
+                const start = clamp(chapter.start, 0, art.duration);
+                const end = clamp(chapter.end, 0, art.duration);
+                const duration = end - start;
+                const percentage = duration / art.duration;
+                $chapter.dataset.start = start;
+                $chapter.dataset.end = end;
+                $chapter.dataset.duration = duration;
+                $chapter.dataset.title = chapter.title.trim();
+                $chapter.style.width = `${percentage * 100}%`;
+                return {
+                    $chapter,
+                    $hover: query(".art-progress-hover", $chapter),
+                    $loaded: query(".art-progress-loaded", $chapter),
+                    $played: query(".art-progress-played", $chapter)
+                };
+            });
+            if ($chapters.length) addClass($player, "artplayer-plugin-chapter");
+            else removeClass($player, "artplayer-plugin-chapter");
         }
         art.on("setBar", (type, percentage, event)=>{
             if (!$chapters.length) return;
@@ -223,31 +246,10 @@ function artplayerPluginChapter({ chapters = [] }) {
                 setStyle($title, "display", "none");
             });
         }
-        art.on("video:loadedmetadata", ()=>{
-            $control.innerText = "";
-            $chapters = chapters.map((chapter)=>{
-                const $chapter = append($control, html);
-                const start = clamp(chapter.start, 0, art.duration);
-                const end = clamp(chapter.end, 0, art.duration);
-                const duration = end - start;
-                const percentage = duration / art.duration;
-                $chapter.dataset.start = start;
-                $chapter.dataset.end = end;
-                $chapter.dataset.duration = duration;
-                $chapter.dataset.title = chapter.title.trim();
-                $chapter.style.width = `${percentage * 100}%`;
-                return {
-                    $chapter,
-                    $hover: query(".art-progress-hover", $chapter),
-                    $loaded: query(".art-progress-loaded", $chapter),
-                    $played: query(".art-progress-played", $chapter)
-                };
-            });
-            if ($chapters.length) addClass($player, "artplayer-plugin-chapter");
-            else removeClass($player, "artplayer-plugin-chapter");
-        });
+        art.once("video:loadedmetadata", ()=>update(option.chapters));
         return {
-            name: "artplayerPluginChapter"
+            name: "artplayerPluginChapter",
+            update: (chapters)=>update(chapters)
         };
     };
 }

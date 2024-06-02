@@ -3,16 +3,19 @@ import type Artplayer from 'artplayer';
 export = artplayerPluginChapter;
 export as namespace artplayerPluginChapter;
 
+type Chapters = {
+    start: number;
+    end: number;
+    title: string;
+}[];
+
 type Option = {
-    chapters?: {
-        start: number;
-        end: number;
-        title: string;
-    }[];
+    chapters?: Chapters;
 };
 
 type Result = {
     name: 'artplayerPluginChapter';
+    update: (chapters: Chapters) => void;
 };
 
 declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Result;
