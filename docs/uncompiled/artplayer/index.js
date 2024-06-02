@@ -3141,11 +3141,11 @@ function setCurrentTime(art, event) {
     if (art.isRotate) {
         const percentage = event.touches[0].clientY / art.height;
         const second = percentage * art.duration;
-        art.emit("setBar", "played", percentage);
+        art.emit("setBar", "played", percentage, event);
         art.seek = second;
     } else {
         const { second, percentage } = getPosFromEvent(art, event);
-        art.emit("setBar", "played", percentage);
+        art.emit("setBar", "played", percentage, event);
         art.seek = second;
     }
 }
@@ -3165,6 +3165,7 @@ function progress(options) {
                 </div>
             `,
             mounted: ($control)=>{
+                let tipTimer = null;
                 let isDroging = false;
                 const $hover = (0, _utils.query)(".art-progress-hover", $control);
                 const $loaded = (0, _utils.query)(".art-progress-loaded", $control);
@@ -3185,18 +3186,26 @@ function progress(options) {
                 }
                 function showTime(event) {
                     const { width, time } = getPosFromEvent(art, event);
-                    $tip.innerHTML = time;
+                    $tip.innerText = time;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
                     else if (width > $control.clientWidth - tipWidth / 2) (0, _utils.setStyle)($tip, "left", `${$control.clientWidth - tipWidth}px`);
                     else (0, _utils.setStyle)($tip, "left", `${width - tipWidth / 2}px`);
                 }
-                function setBar(type, percentage) {
+                function setBar(type, percentage, event) {
                     if (type === "loaded") (0, _utils.setStyle)($loaded, "width", `${percentage * 100}%`);
                     if (type === "hover") (0, _utils.setStyle)($hover, "width", `${percentage * 100}%`);
                     if (type === "played") {
                         (0, _utils.setStyle)($played, "width", `${percentage * 100}%`);
                         (0, _utils.setStyle)($indicator, "left", `${percentage * 100}%`);
+                        if ((0, _utils.isMobile) && event) {
+                            (0, _utils.setStyle)($tip, "display", "flex");
+                            showTime(event);
+                            clearTimeout(tipTimer);
+                            tipTimer = setTimeout(()=>{
+                                (0, _utils.setStyle)($tip, "display", "none");
+                            }, 1000);
+                        }
                     }
                 }
                 art.on("video:loadedmetadata", ()=>{
@@ -3207,8 +3216,8 @@ function progress(options) {
                         (0, _utils.append)($highlight, html);
                     }
                 });
-                art.on("setBar", (type, percentage)=>{
-                    setBar(type, percentage);
+                art.on("setBar", (type, percentage, event)=>{
+                    setBar(type, percentage, event);
                 });
                 art.on("video:progress", ()=>{
                     art.emit("setBar", "loaded", art.loaded);
@@ -3229,14 +3238,14 @@ function progress(options) {
                     });
                     proxy($control, "mousemove", (event)=>{
                         const { percentage } = getPosFromEvent(art, event);
-                        art.emit("setBar", "hover", percentage);
+                        art.emit("setBar", "hover", percentage, event);
                         (0, _utils.setStyle)($tip, "display", "flex");
                         if ((0, _utils.includeFromEvent)(event, $highlight)) showHighlight(event);
                         else showTime(event);
                     });
-                    proxy($control, "mouseleave", ()=>{
+                    proxy($control, "mouseleave", (event)=>{
                         (0, _utils.setStyle)($tip, "display", "none");
-                        art.emit("setBar", "hover", 0);
+                        art.emit("setBar", "hover", 0, event);
                     });
                     proxy($control, "mousedown", (event)=>{
                         isDroging = event.button === 0;
@@ -3244,7 +3253,7 @@ function progress(options) {
                     art.on("document:mousemove", (event)=>{
                         if (isDroging) {
                             const { second, percentage } = getPosFromEvent(art, event);
-                            art.emit("setBar", "played", percentage);
+                            art.emit("setBar", "played", percentage, event);
                             art.seek = second;
                         }
                     });
@@ -4069,7 +4078,7 @@ function gestureInit(art, events) {
                     const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
                     const currentTime = (0, _utils.clamp)(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
                     art.seek = currentTime;
-                    art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1));
+                    art.emit("setBar", "played", (0, _utils.clamp)(currentTime / art.duration, 0, 1), event);
                     art.notice.show = `${(0, _utils.secondToTime)(currentTime)} / ${(0, _utils.secondToTime)(art.duration)}`;
                 }
             }

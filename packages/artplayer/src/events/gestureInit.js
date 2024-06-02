@@ -66,7 +66,7 @@ export default function gestureInit(art, events) {
                     const TOUCH_MOVE_RATIO = touchTarget === $video ? art.constructor.TOUCH_MOVE_RATIO : 1;
                     const currentTime = clamp(startTime + art.duration * ratio * TOUCH_MOVE_RATIO, 0, art.duration);
                     art.seek = currentTime;
-                    art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1));
+                    art.emit('setBar', 'played', clamp(currentTime / art.duration, 0, 1), event);
                     art.notice.show = `${secondToTime(currentTime)} / ${secondToTime(art.duration)}`;
                 }
             }

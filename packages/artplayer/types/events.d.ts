@@ -1,5 +1,7 @@
 import { AspectRatio, Flip } from './player';
 
+export type Bar = 'loaded' | 'played' | 'hover';
+
 export type Events = {
     'video:canplay': [event: Event];
     'video:canplaythrough': [event: Event];
@@ -64,5 +66,5 @@ export type Events = {
     subtitleOffset: [offset: number];
     restart: [url: string];
     muted: [state: boolean];
-    setBar: [type: 'loaded' | 'played' | 'hover', event: Event];
+    setBar: [type: Bar, percentage: number, event?: Event];
 };

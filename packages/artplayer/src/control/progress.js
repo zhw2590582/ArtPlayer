@@ -15,11 +15,11 @@ export function setCurrentTime(art, event) {
     if (art.isRotate) {
         const percentage = event.touches[0].clientY / art.height;
         const second = percentage * art.duration;
-        art.emit('setBar', 'played', percentage);
+        art.emit('setBar', 'played', percentage, event);
         art.seek = second;
     } else {
         const { second, percentage } = getPosFromEvent(art, event);
-        art.emit('setBar', 'played', percentage);
+        art.emit('setBar', 'played', percentage, event);
         art.seek = second;
     }
 }
@@ -41,7 +41,9 @@ export default function progress(options) {
                 </div>
             `,
             mounted: ($control) => {
+                let tipTimer = null;
                 let isDroging = false;
+
                 const $hover = query('.art-progress-hover', $control);
                 const $loaded = query('.art-progress-loaded', $control);
                 const $played = query('.art-progress-played', $control);
@@ -71,7 +73,7 @@ export default function progress(options) {
 
                 function showTime(event) {
                     const { width, time } = getPosFromEvent(art, event);
-                    $tip.innerHTML = time;
+                    $tip.innerText = time;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) {
                         setStyle($tip, 'left', 0);
@@ -82,7 +84,7 @@ export default function progress(options) {
                     }
                 }
 
-                function setBar(type, percentage) {
+                function setBar(type, percentage, event) {
                     if (type === 'loaded') {
                         setStyle($loaded, 'width', `${percentage * 100}%`);
                     }
@@ -94,6 +96,15 @@ export default function progress(options) {
                     if (type === 'played') {
                         setStyle($played, 'width', `${percentage * 100}%`);
                         setStyle($indicator, 'left', `${percentage * 100}%`);
+
+                        if (isMobile && event) {
+                            setStyle($tip, 'display', 'flex');
+                            showTime(event);
+                            clearTimeout(tipTimer);
+                            tipTimer = setTimeout(() => {
+                                setStyle($tip, 'display', 'none');
+                            }, 1000);
+                        }
                     }
                 }
 
@@ -106,8 +117,8 @@ export default function progress(options) {
                     }
                 });
 
-                art.on('setBar', (type, percentage) => {
-                    setBar(type, percentage);
+                art.on('setBar', (type, percentage, event) => {
+                    setBar(type, percentage, event);
                 });
 
                 art.on('video:progress', () => {
@@ -139,7 +150,7 @@ export default function progress(options) {
 
                     proxy($control, 'mousemove', (event) => {
                         const { percentage } = getPosFromEvent(art, event);
-                        art.emit('setBar', 'hover', percentage);
+                        art.emit('setBar', 'hover', percentage, event);
                         setStyle($tip, 'display', 'flex');
                         if (includeFromEvent(event, $highlight)) {
                             showHighlight(event);
@@ -148,9 +159,9 @@ export default function progress(options) {
                         }
                     });
 
-                    proxy($control, 'mouseleave', () => {
+                    proxy($control, 'mouseleave', (event) => {
                         setStyle($tip, 'display', 'none');
-                        art.emit('setBar', 'hover', 0);
+                        art.emit('setBar', 'hover', 0, event);
                     });
 
                     proxy($control, 'mousedown', (event) => {
@@ -160,7 +171,7 @@ export default function progress(options) {
                     art.on('document:mousemove', (event) => {
                         if (isDroging) {
                             const { second, percentage } = getPosFromEvent(art, event);
-                            art.emit('setBar', 'played', percentage);
+                            art.emit('setBar', 'played', percentage, event);
                             art.seek = second;
                         }
                     });
