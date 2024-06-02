@@ -15,11 +15,26 @@ if (!pluginName) {
     process.exit(1);
 }
 
+// Validate plugin name
+const pluginNameRegex = /^[a-z-]+$/;
+if (!pluginNameRegex.test(pluginName)) {
+    console.error('Invalid plugin name. Only lowercase letters and hyphens are allowed.');
+    process.exit(1);
+}
+
+// Convert plugin name to export name (PascalCase)
+const exportName = pluginName
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+const exportNameFull = `artplayerPlugin${exportName}`;
+
 // Define paths
 const templateDir = path.join(__dirname, 'template');
 const destDir = path.join(__dirname, '../../packages', `artplayer-plugin-${pluginName}`);
 const exampleDir = path.join(__dirname, '../../docs/assets/example');
-const exampleFile = path.join(exampleDir, `${pluginName}.js`);
+const exampleFileName = `${pluginName.replace(/-/g, '.')}.js`;
+const exampleFile = path.join(exampleDir, exampleFileName);
 
 // Check if a plugin with the same name already exists
 if (fs.existsSync(destDir)) {
@@ -51,10 +66,7 @@ function copyTemplateFiles(templateDir, destDir) {
 
             // Replace placeholders in the file content
             content = content.replace(/{{name}}/g, pluginName);
-            content = content.replace(
-                /{{export}}/g,
-                `artplayerPlugin${pluginName.charAt(0).toUpperCase() + pluginName.slice(1)}`,
-            );
+            content = content.replace(/{{export}}/g, exportNameFull);
 
             fs.writeFileSync(destFilePath, content);
         }
@@ -63,16 +75,15 @@ function copyTemplateFiles(templateDir, destDir) {
 
 // Create the example file
 function createExampleFile() {
-    const exportName = `artplayerPlugin${pluginName.charAt(0).toUpperCase() + pluginName.slice(1)}`;
     const exampleContent = `
 // npm i artplayer-plugin-${pluginName}
-// import ${exportName} from 'artplayer-plugin-${pluginName}';
+// import ${exportNameFull} from 'artplayer-plugin-${pluginName}';
 
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/video.mp4',
     plugins: [
-        ${exportName}({
+        ${exportNameFull}({
             //
         }),
     ],
