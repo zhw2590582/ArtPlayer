@@ -7,6 +7,12 @@ var art = new Artplayer({
     autoSize: true,
 	fullscreen: true,
 	fullscreenWeb: true,
+	miniProgressBar: true,
+	thumbnails: {
+        url: '/assets/sample/thumbnails.png',
+        number: 60,
+        column: 10,
+    },
     plugins: [
         artplayerPluginChapter({
             chapters: [

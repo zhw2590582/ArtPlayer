@@ -1,4 +1,4 @@
-.art-progress {
+.artplayer-plugin-chapter {
     .art-control-progress-inner {
         height: 100% !important;
         background-color: transparent !important;
@@ -8,6 +8,10 @@
         & > .art-progress-played {
             display: none !important;
         }
+    }
+
+    .art-control-thumbnails {
+        bottom: calc(var(--art-bottom-gap) + 64px) !important;
     }
 
     .art-chapters {
@@ -50,7 +54,7 @@
         left: 0;
         padding: 3px 5px;
         line-height: 1;
-        font-size: 16px;
+        font-size: 14px;
         border-radius: var(--art-border-radius);
         white-space: nowrap;
         background-color: var(--art-tip-background);

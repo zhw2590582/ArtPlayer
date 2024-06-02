@@ -2,7 +2,8 @@ import style from 'bundle-text:./style.less';
 
 export default function artplayerPluginChapter({ chapters = [] }) {
     return (art) => {
-        const { setStyle, append, clamp, query, isMobile } = art.constructor.utils;
+        const { $player } = art.template;
+        const { setStyle, append, clamp, query, isMobile, addClass } = art.constructor.utils;
 
         const html = `
                 <div class="art-chapter">
@@ -15,6 +16,8 @@ export default function artplayerPluginChapter({ chapters = [] }) {
         `;
 
         let $chapters = [];
+
+        addClass($player, 'artplayer-plugin-chapter');
         const $progress = art.query('.art-control-progress');
         const $inner = art.query('.art-control-progress-inner');
         const $control = append($inner, '<div class="art-chapters"></div>');
