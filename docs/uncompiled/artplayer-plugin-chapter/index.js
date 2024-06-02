@@ -179,6 +179,7 @@ function artplayerPluginChapter(option = {}) {
             } else setStyle($title, "display", "none");
         }
         function update(chapters = []) {
+            if (!Array.isArray(chapters)) return;
             if (!chapters.length) return;
             if (!art.duration) return;
             chapters = chapters.sort((a, b)=>a.start - b.start);

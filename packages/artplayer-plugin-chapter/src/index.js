@@ -42,6 +42,7 @@ export default function artplayerPluginChapter(option = {}) {
         }
 
         function update(chapters = []) {
+            if (!Array.isArray(chapters)) return;
             if (!chapters.length) return;
             if (!art.duration) return;
 
