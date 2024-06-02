@@ -161,20 +161,21 @@ function artplayerPluginChapter({ chapters = [] }) {
                     </div>
                 </div>
         `;
+        let titleTimer = null;
         let $chapters = [];
         const $progress = art.query(".art-control-progress");
         const $inner = art.query(".art-control-progress-inner");
         const $control = append($inner, '<div class="art-chapters"></div>');
         const $title = append($inner, '<div class="art-chapter-title"></div>');
-        art.on("setBar", (type, percentage)=>{
+        function showTitle({ $chapter, width }) {
+            $title.innerText = $chapter.dataset.title || "";
+            const titleWidth = $title.clientWidth;
+            if (width <= titleWidth / 2) setStyle($title, "left", 0);
+            else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
+            else setStyle($title, "left", `${width - titleWidth / 2}px`);
+        }
+        art.on("setBar", (type, percentage, event)=>{
             if (!$chapters.length) return;
-            const currentTime = art.duration * percentage;
-            const index = $chapters.findIndex(({ $chapter })=>{
-                const start = parseFloat($chapter.dataset.start);
-                const end = parseFloat($chapter.dataset.end);
-                return art.currentTime >= start && art.currentTime <= end;
-            });
-            if (index === -1) return;
             for(let i = 0; i < $chapters.length; i++){
                 const { $chapter, $loaded, $played, $hover } = $chapters[i];
                 const $target = {
@@ -183,6 +184,8 @@ function artplayerPluginChapter({ chapters = [] }) {
                     played: $played
                 }[type];
                 if (!$target) return;
+                const width = $control.clientWidth * percentage;
+                const currentTime = art.duration * percentage;
                 const duration = parseFloat($chapter.dataset.duration);
                 const start = parseFloat($chapter.dataset.start);
                 const end = parseFloat($chapter.dataset.end);
@@ -191,27 +194,29 @@ function artplayerPluginChapter({ chapters = [] }) {
                 if (currentTime >= start && currentTime <= end) {
                     const percentage = (currentTime - start) / duration;
                     setStyle($target, "width", `${percentage * 100}%`);
+                    if (isMobile) {
+                        if (type === "played" && event) {
+                            showTitle({
+                                $chapter,
+                                width
+                            });
+                            setStyle($title, "display", "flex");
+                            clearTimeout(titleTimer);
+                            titleTimer = setTimeout(()=>{
+                                setStyle($title, "display", "none");
+                            }, 1000);
+                        }
+                    } else if (type === "hover") showTitle({
+                        $chapter,
+                        width
+                    });
                 }
             }
         });
-        function showTitle(event) {
-            const $target = event.target.closest(".art-chapter");
-            if ($target) {
-                setStyle($title, "display", "flex");
-                $title.innerText = $target.dataset.title || "";
-                const { left } = $inner.getBoundingClientRect();
-                const eventLeft = event.clientX;
-                const width = clamp(eventLeft - left, 0, $inner.clientWidth);
-                const titleWidth = $title.clientWidth;
-                if (width <= titleWidth / 2) setStyle($title, "left", 0);
-                else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
-                else setStyle($title, "left", `${width - titleWidth / 2}px`);
-            } else setStyle($title, "display", "none");
-        }
         if (!isMobile) {
-            art.proxy($progress, "mousemove", (event)=>{
+            art.proxy($progress, "mousemove", ()=>{
                 if (!$chapters.length) return;
-                showTitle(event);
+                setStyle($title, "display", "flex");
             });
             art.proxy($progress, "mouseleave", ()=>{
                 if (!$chapters.length) return;
