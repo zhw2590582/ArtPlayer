@@ -7,8 +7,8 @@ type Option = {
     //
 };
 
-type Vast = {
+type Result = {
     name: 'artplayerPluginVast';
 };
 
-declare const artplayerPluginVast: (option: Option) => (art: Artplayer) => Vast;
+declare const artplayerPluginVast: (option: Option) => (art: Artplayer) => Result;

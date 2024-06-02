@@ -1,6 +1,6 @@
 # artplayer-plugin-vast
 
-Vast plugin for ArtPlayer
+vast plugin for ArtPlayer
 
 ## Demo
 

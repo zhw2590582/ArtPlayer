@@ -34,7 +34,7 @@ function copyTemplateFiles(templateDir, destDir) {
 
     files.forEach((file) => {
         const templateFilePath = path.join(templateDir, file);
-        const destFilePath = path.join(destDir, file);
+        let destFilePath = path.join(destDir, file);
 
         const stats = fs.statSync(templateFilePath);
 
@@ -42,9 +42,12 @@ function copyTemplateFiles(templateDir, destDir) {
             fs.mkdirSync(destFilePath, { recursive: true });
             copyTemplateFiles(templateFilePath, destFilePath);
         } else {
+            // Replace placeholders in the file name
+            destFilePath = destFilePath.replace(/{{name}}/g, pluginName);
+
             let content = fs.readFileSync(templateFilePath, 'utf8');
 
-            // Replace placeholders
+            // Replace placeholders in the file content
             content = content.replace(/{{name}}/g, pluginName);
             content = content.replace(
                 /{{export}}/g,

@@ -1,9 +1,9 @@
 {
     "license": "MIT",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "name": "artplayer-plugin-vast",
     "types": "types/artplayer-plugin-vast.d.ts",
-    "description": "Vast plugin for ArtPlayer",
+    "description": "vast plugin for ArtPlayer",
     "main": "dist/artplayer-plugin-vast.js",
     "legacy": "dist/artplayer-plugin-vast.legacy.js",
     "author": "Harvey Zack <laozhaochaguan@gmail.com>",
