@@ -196,6 +196,7 @@ function artplayerPluginChapter(option = {}) {
             });
             if ($chapters.length) addClass($player, "artplayer-plugin-chapter");
             else removeClass($player, "artplayer-plugin-chapter");
+            art.emit("setBar", "loaded", art.loaded || 0);
         }
         art.on("setBar", (type, percentage, event)=>{
             if (!$chapters.length) return;

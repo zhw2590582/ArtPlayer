@@ -63,6 +63,8 @@ export default function artplayerPluginChapter(option = {}) {
             } else {
                 removeClass($player, 'artplayer-plugin-chapter');
             }
+
+            art.emit('setBar', 'loaded', art.loaded || 0);
         }
 
         art.on('setBar', (type, percentage, event) => {
