@@ -74,7 +74,8 @@ const config = {
             { text: '多重字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
             { text: 'Ass 字幕', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass'},
             { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
-            { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},        
+            { text: 'Vast 广告', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},        
+            { text: '视频章节', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter'},        
           ]
         },
         {
@@ -133,7 +134,8 @@ const config = {
             { text: 'Multiple Subtitles', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-multiple-subtitles/index.js&example=multiple.subtitles'},
             { text: 'Ass Subtitle', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-libass/index.js&example=libass'},
             { text: 'Chromecast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast'},
-            { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},            
+            { text: 'Vast', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast'},
+            { text: 'Video Chapters', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter'},
           ]
         },
         {
