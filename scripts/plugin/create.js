@@ -1,21 +1,34 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// 获取插件名称
-const pluginName = process.argv[2];
+// Get the current file path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Get the plugin name from command line arguments
+const args = process.argv.slice(2);
+const pluginName = args[0];
+
 if (!pluginName) {
-    console.error('请提供插件名称，例如：node ./scripts/plugin/create.js somePluginName');
+    console.error('Please provide a plugin name, e.g., npm run create:plugin somePluginName');
     process.exit(1);
 }
 
-// 定义路径
+// Define paths
 const templateDir = path.join(__dirname, 'template');
 const destDir = path.join(__dirname, '../../packages', `artplayer-plugin-${pluginName}`);
 
-// 创建目标目录
+// Check if a plugin with the same name already exists
+if (fs.existsSync(destDir)) {
+    console.error(`Plugin ${pluginName} already exists. Please choose another name.`);
+    process.exit(1);
+}
+
+// Create the destination directory
 fs.mkdirSync(destDir, { recursive: true });
 
-// 读取模板目录中的文件并复制到目标目录
+// Read files from the template directory and copy them to the destination directory
 function copyTemplateFiles(templateDir, destDir) {
     const files = fs.readdirSync(templateDir);
 
@@ -31,7 +44,7 @@ function copyTemplateFiles(templateDir, destDir) {
         } else {
             let content = fs.readFileSync(templateFilePath, 'utf8');
 
-            // 替换占位符
+            // Replace placeholders
             content = content.replace(/{{name}}/g, pluginName);
             content = content.replace(
                 /{{export}}/g,
@@ -43,7 +56,7 @@ function copyTemplateFiles(templateDir, destDir) {
     });
 }
 
-// 开始复制模板文件
+// Start copying template files
 copyTemplateFiles(templateDir, destDir);
 
-console.log(`插件 ${pluginName} 已成功创建在 ${destDir}`);
+console.log(`Plugin ${pluginName} has been successfully created at ${destDir}`);
