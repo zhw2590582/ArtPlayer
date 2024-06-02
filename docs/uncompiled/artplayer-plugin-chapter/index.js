@@ -204,7 +204,7 @@ function artplayerPluginChapter({ chapters = [] }) {
                             clearTimeout(titleTimer);
                             titleTimer = setTimeout(()=>{
                                 setStyle($title, "display", "none");
-                            }, 1000);
+                            }, 500);
                         }
                     } else if (type === "hover") showTitle({
                         $chapter,

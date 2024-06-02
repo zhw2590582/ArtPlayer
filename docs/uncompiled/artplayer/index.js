@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-06-02 22:18:01";
+        return "2024-06-03 00:13:07";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3184,8 +3184,8 @@ function progress(options) {
                     else if (width > $control.clientWidth - tipWidth / 2) (0, _utils.setStyle)($tip, "left", `${$control.clientWidth - tipWidth}px`);
                     else (0, _utils.setStyle)($tip, "left", `${width - tipWidth / 2}px`);
                 }
-                function showTime(event) {
-                    const { width, time } = getPosFromEvent(art, event);
+                function showTime(event, touch) {
+                    const { width, time } = touch || getPosFromEvent(art, event);
                     $tip.innerText = time;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) (0, _utils.setStyle)($tip, "left", 0);
@@ -3200,11 +3200,16 @@ function progress(options) {
                         (0, _utils.setStyle)($indicator, "left", `${percentage * 100}%`);
                         if ((0, _utils.isMobile) && event) {
                             (0, _utils.setStyle)($tip, "display", "flex");
-                            showTime(event);
+                            const width = $control.clientWidth * percentage;
+                            const time = (0, _utils.secondToTime)(percentage * art.duration);
+                            showTime(event, {
+                                width,
+                                time
+                            });
                             clearTimeout(tipTimer);
                             tipTimer = setTimeout(()=>{
                                 (0, _utils.setStyle)($tip, "display", "none");
-                            }, 1000);
+                            }, 500);
                         }
                     }
                 }

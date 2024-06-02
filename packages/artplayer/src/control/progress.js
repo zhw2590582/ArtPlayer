@@ -71,8 +71,8 @@ export default function progress(options) {
                     }
                 }
 
-                function showTime(event) {
-                    const { width, time } = getPosFromEvent(art, event);
+                function showTime(event, touch) {
+                    const { width, time } = touch || getPosFromEvent(art, event);
                     $tip.innerText = time;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) {
@@ -99,11 +99,13 @@ export default function progress(options) {
 
                         if (isMobile && event) {
                             setStyle($tip, 'display', 'flex');
-                            showTime(event);
+                            const width = $control.clientWidth * percentage;
+                            const time = secondToTime(percentage * art.duration);
+                            showTime(event, { width, time });
                             clearTimeout(tipTimer);
                             tipTimer = setTimeout(() => {
                                 setStyle($tip, 'display', 'none');
-                            }, 1000);
+                            }, 500);
                         }
                     }
                 }
