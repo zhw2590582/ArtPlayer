@@ -10,11 +10,11 @@ var art = new Artplayer({
     plugins: [
         artplayerPluginChapter({
             chapters: [
-                { start: 0, end: 18, text: 'Chapter 1' },
-                { start: 18, end: 36, text: 'Chapter 2' },
-                { start: 36, end: 54, text: 'Chapter 3' },
-                { start: 54, end: 72, text: 'Chapter 4' },
-                { start: 72, end: 90, text: 'Chapter 5' },
+                { start: 0, end: 18, title: 'One more chance' },
+                { start: 18, end: 36, title: '谁でもいいはずなのに' },
+                { start: 36, end: 54, title: '夏の想い出がまわる' },
+                { start: 54, end: 72, title: 'こんなとこにあるはずもないのに' },
+                { start: 72, end: 90, title: '终わり' },
             ]
         }),
     ],

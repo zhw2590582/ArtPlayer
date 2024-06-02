@@ -15,7 +15,28 @@ export default function artplayerPluginChapter({ chapters = [] }) {
         let $chapters = [];
         const $progress = art.query('.art-control-progress-inner');
         const $control = append($progress, '<div class="art-chapters"></div>');
-        const $text = append($progress, '<div class="art-chapter-text"></div>');
+        const $title = append($progress, '<div class="art-chapter-title"></div>');
+
+        function showText(event) {
+            const $target = event.target.closest('.art-chapter');
+            if ($target) {
+                setStyle($title, 'display', 'flex');
+                $title.innerText = $target.dataset.title || '';
+                const { left } = $progress.getBoundingClientRect();
+                const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
+                const width = clamp(eventLeft - left, 0, $progress.clientWidth);
+                const titleWidth = $title.clientWidth;
+                if (width <= titleWidth / 2) {
+                    setStyle($title, 'left', 0);
+                } else if (width > $progress.clientWidth - titleWidth / 2) {
+                    setStyle($title, 'left', `${$progress.clientWidth - titleWidth}px`);
+                } else {
+                    setStyle($title, 'left', `${width - titleWidth / 2}px`);
+                }
+            } else {
+                setStyle($title, 'display', 'none');
+            }
+        }
 
         art.on('setBar', (type, percentage) => {
             const currentTime = art.duration * percentage;
@@ -58,29 +79,12 @@ export default function artplayerPluginChapter({ chapters = [] }) {
             }
         });
 
-        art.proxy($control, 'mousemove', (event) => {
-            const $target = event.target.closest('.art-chapter');
-            if ($target) {
-                setStyle($text, 'display', 'flex');
-                $text.innerText = $target.dataset.text || '';
-                const { left } = $control.getBoundingClientRect();
-                const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
-                const width = clamp(eventLeft - left, 0, $control.clientWidth);
-                const textWidth = $text.clientWidth;
-                if (width <= textWidth / 2) {
-                    setStyle($text, 'left', 0);
-                } else if (width > $control.clientWidth - textWidth / 2) {
-                    setStyle($text, 'left', `${$control.clientWidth - textWidth}px`);
-                } else {
-                    setStyle($text, 'left', `${width - textWidth / 2}px`);
-                }
-            } else {
-                setStyle($text, 'display', 'none');
-            }
+        art.proxy($progress, 'mousemove', (event) => {
+            showText(event);
         });
 
-        art.proxy($control, 'mouseleave', () => {
-            setStyle($text, 'display', 'none');
+        art.proxy($progress, 'mouseleave', () => {
+            setStyle($title, 'display', 'none');
         });
 
         art.on('video:loadedmetadata', () => {
@@ -94,9 +98,10 @@ export default function artplayerPluginChapter({ chapters = [] }) {
                 $chapter.dataset.start = start;
                 $chapter.dataset.end = end;
                 $chapter.dataset.duration = duration;
-                $chapter.dataset.text = chapter.text;
+                $chapter.dataset.title = chapter.title.trim();
                 $chapter.dataset.percentage = percentage;
                 $chapter.style.width = `${percentage * 100}%`;
+
                 return {
                     $chapter,
                     $hover: query('.art-progress-hover', $chapter),

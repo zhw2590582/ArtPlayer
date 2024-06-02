@@ -4,7 +4,11 @@ export = artplayerPluginChapter;
 export as namespace artplayerPluginChapter;
 
 type Option = {
-    //
+    chapters?: {
+        start: number;
+        end: number;
+        title: string;
+    }[];
 };
 
 type Result = {
