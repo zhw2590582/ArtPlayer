@@ -65,30 +65,35 @@ export function assToVtt(ass) {
             .join('');
     }
 
-    return `WEBVTT\n\n${ass
-        .split(/\r?\n/)
-        .map((line) => {
-            const m = line.match(reAss);
-            if (!m) return null;
-            return {
-                start: fixTime(m[1].trim()),
-                end: fixTime(m[2].trim()),
-                text: m[5]
-                    .replace(/{[\s\S]*?}/g, '')
-                    .replace(/(\\N)/g, '\n')
-                    .trim()
-                    .split(/\r?\n/)
-                    .map((item) => item.trim())
-                    .join('\n'),
-            };
-        })
-        .filter((line) => line)
-        .map((line, index) => {
-            if (line) {
-                return `${index + 1}\n${line.start} --> ${line.end}\n${line.text}`;
-            }
-            return '';
-        })
-        .filter((line) => line.trim())
-        .join('\n\n')}`;
+    return (
+        'WEBVTT' +
+        '\n' +
+        '\n' +
+        ass
+            .split(/\r?\n/)
+            .map((line) => {
+                const m = line.match(reAss);
+                if (!m) return null;
+                return {
+                    start: fixTime(m[1].trim()),
+                    end: fixTime(m[2].trim()),
+                    text: m[5]
+                        .replace(/{[\s\S]*?}/g, '')
+                        .replace(/(\\N)/g, '\n')
+                        .trim()
+                        .split(/\r?\n/)
+                        .map((item) => item.trim())
+                        .join('\n'),
+                };
+            })
+            .filter((line) => line)
+            .map((line, index) => {
+                if (line) {
+                    return index + 1 + '\n' + `${line.start} --> ${line.end}` + '\n' + `${line.text}`;
+                }
+                return '';
+            })
+            .filter((line) => line.trim())
+            .join('\n\n')
+    );
 }
