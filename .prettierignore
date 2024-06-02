@@ -8,3 +8,4 @@ packages/*/node_modules
 packages/*/.parcel-cache
 packages/artplayer-template/*/.next
 packages/artplayer-template/*/.nuxt
+scripts/plugin/template

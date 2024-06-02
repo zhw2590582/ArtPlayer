@@ -1,41 +1,43 @@
-(function () {
+(() => {
     Artplayer.DEBUG = true;
 
     if (Artplayer.utils.isMobile) {
         window.location.href = './mobile.html' + location.search;
     }
 
-    var $codeMirror = document.querySelector('.codeMirrorWrap');
-    var $lib = document.querySelector('.libsInput');
-    var $run = document.querySelector('.run');
-    var $popups = document.querySelector('.popups');
-    var $console = document.querySelector('.console');
-    var $prod = document.querySelector('#prod');
-    var $ts = document.querySelector('#ts');
-    var $code = document.querySelector('#code');
-    var $log = document.querySelector('#log');
-    var $file = document.querySelector('#file');
-    var $editor = document.querySelector('#editor');
+    const $codeMirror = document.querySelector('.codeMirrorWrap');
+    const $lib = document.querySelector('.libsInput');
+    const $run = document.querySelector('.run');
+    const $popups = document.querySelector('.popups');
+    const $console = document.querySelector('.console');
+    const $prod = document.querySelector('#prod');
+    const $ts = document.querySelector('#ts');
+    const $code = document.querySelector('#code');
+    const $log = document.querySelector('#log');
+    const $file = document.querySelector('#file');
+    const $editor = document.querySelector('#editor');
 
-    window['consoleLog']($console);
+    window.consoleLog($console);
 
-    $prod.checked = localStorage.getItem('prod') === 'true';
-    $ts.checked = localStorage.getItem('ts') === 'true';
-    $code.checked = localStorage.getItem('code') === 'true';
-    $log.checked = localStorage.getItem('log') === 'true';
+    // Initialize checkboxes from localStorage
+    const initCheckbox = ($element, key) => {
+        $element.checked = localStorage.getItem(key) === 'true';
+        if ($element.checked) {
+            $element.style.display = 'none';
+        }
+    };
 
-    if ($code.checked) {
-        $editor.style.display = 'none';
-    }
+    initCheckbox($prod, 'prod');
+    initCheckbox($ts, 'ts');
+    initCheckbox($code, 'code');
+    initCheckbox($log, 'log');
 
-    if ($log.checked) {
-        $console.style.display = 'none';
-    }
+    let editor = null;
+    let loadedLibs = [];
 
-    var editor = null;
-    var loadedLibs = [];
     require.config({ paths: { vs: './assets/js/vs' } });
-    require(['vs/editor/editor.main'], async function () {
+
+    require(['vs/editor/editor.main'], async () => {
         monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
             noSemanticValidation: true,
             noSyntaxValidation: false,
@@ -46,7 +48,7 @@
             allowNonTsExtensions: true,
         });
 
-        var libUris = [
+        const libUris = [
             './assets/ts/artplayer.d.ts',
             './assets/ts/artplayer-plugin-ads.d.ts',
             './assets/ts/artplayer-plugin-control.d.ts',
@@ -59,15 +61,14 @@
             './assets/ts/artplayer-plugin-multiple-subtitles.d.ts',
             './assets/ts/artplayer-plugin-vtt-thumbnail.d.ts',
         ];
-        
-        for (let index = 0; index < libUris.length; index++) {
-            var libUri = libUris[index];
-            var libSource = await (await fetch(libUri)).text();
+
+        for (const libUri of libUris) {
+            const libSource = await (await fetch(libUri)).text();
             monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri);
             monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri));
         }
 
-        var disposable = monaco.editor.onDidCreateEditor(function () {
+        const disposable = monaco.editor.onDidCreateEditor(() => {
             disposable.dispose();
             setTimeout(initApp, 1000);
         });
@@ -75,109 +76,84 @@
         editor = monaco.editor.create($codeMirror, {
             theme: 'vs-dark',
             automaticLayout: true,
-            quickSuggestions: {
-                other: true,
-                comments: true,
-                strings: true,
-            },
+            quickSuggestions: { other: true, comments: true, strings: true },
             model: monaco.editor.createModel(
-                [
-                    'var art = new Artplayer({',
-                    "\tcontainer: '.artplayer-app',",
-                    "\turl: '/assets/sample/video.mp4',",
-                    '});',
-                ].join('\n'),
-                $ts.checked ? 'typescript' : 'javascript',
+                `var art = new Artplayer({
+                    container: '.artplayer-app',
+                    url: '/assets/sample/video.mp4',
+                });`,
+                $ts.checked ? 'typescript' : 'javascript'
             ),
         });
     });
 
-    function getURLParameters(url) {
-        return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(function (a, v) {
-            return (a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)), a;
-        }, {});
-    }
+    const getURLParameters = (url) => (
+        (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce((a, v) => {
+            a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1);
+            return a;
+        }, {})
+    );
 
-    function getExt(url) {
-        if (url.includes('?')) {
-            return getExt(url.split('?')[0]);
-        }
+    const getExt = (url) => {
+        const cleanUrl = url.split(/[?#]/)[0];
+        return cleanUrl.trim().toLowerCase().split('.').pop();
+    };
 
-        if (url.includes('#')) {
-            return getExt(url.split('#')[0]);
-        }
+    const loadScript = (url) => new Promise((resolve, reject) => {
+        const originalDefine = window.define;
+        window.define = undefined;
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+        script.onload = () => {
+            window.define = originalDefine;
+            resolve(url);
+        };
+        script.onerror = () => reject(new Error(`Loading script failed: ${url}`));
+        document.head.appendChild(script);
+    });
 
-        return url.trim().toLowerCase().split('.').pop();
-    }
+    const loadStyle = (url) => new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = url;
+        link.onload = () => resolve(url);
+        link.onerror = () => reject(new Error(`Loading style failed: ${url}`));
+        document.head.appendChild(link);
+    });
 
-    function loadScript(url) {
-        return new Promise(function (resolve, reject) {
-            var define2 = window.define;
-            window.define = undefined;
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = url;
-            script.onload = function () {
-                window.define = define2;
-                resolve(url);
-            };
-            script.onerror = function () {
-                reject(new Error('Loading script failed:' + url));
-            };
-            document.querySelector('head').appendChild(script);
-        });
-    }
+    const loadLib = (libs) => {
+        const libPromises = [];
+        const libsDecode = decodeURIComponent(libs || '');
 
-    function loadStyle(url) {
-        return new Promise(function (resolve, reject) {
-            var link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = url;
-            link.onload = function () {
-                resolve(url);
-            };
-            link.onerror = function () {
-                reject(new Error('Loading style failed:' + url));
-            };
-            document.querySelector('head').appendChild(link);
-        });
-    }
-
-    function loadLib(libs) {
-        var libPromise = [];
-        var libsDecode = decodeURIComponent(libs || '');
         libsDecode
             .split(/\r?\n/)
-            .filter(function (url) {
-                return !loadedLibs.includes(url);
-            })
-            .forEach(function (url) {
-                var ext = getExt(url);
+            .filter(url => !loadedLibs.includes(url))
+            .forEach(url => {
+                const ext = getExt(url);
                 if (ext === 'js') {
-                    libPromise.push(loadScript(url));
+                    libPromises.push(loadScript(url));
                 } else if (ext === 'css') {
-                    libPromise.push(loadStyle(url));
+                    libPromises.push(loadStyle(url));
                 }
             });
+
         $lib.value = libsDecode;
-        return Promise.all(libPromise);
-    }
+        return Promise.all(libPromises);
+    };
 
-    function runExample(name) {
-        fetch('./assets/example/' + name + '.js')
-            .then(function (response) {
-                return response.text();
-            })
-            .then(function (text) {
-                editor.setValue(text);
-                runCode();
-            })
-            .catch(function (err) {
-                console.error(err);
-            });
-    }
+    const runExample = async (name) => {
+        try {
+            const response = await fetch(`./assets/example/${name}.js`);
+            const text = await response.text();
+            editor.setValue(text);
+            runCode();
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-    function loadCode(code, example) {
+    const loadCode = (code, example) => {
         if (example) {
             runExample(example);
         } else if (code) {
@@ -186,111 +162,87 @@
         } else {
             runExample('index');
         }
-    }
+    };
 
-    function runCode() {
-        [...Artplayer.instances].forEach(function (art) {
-            art.destroy(true);
-        });
-        const value = editor.getValue();
-        eval(value);
+    const runCode = () => {
+        Artplayer.instances.forEach(art => art.destroy(true));
+        eval(editor.getValue());
         window.art = Artplayer.instances[0];
-    }
+    };
 
-    function initApp() {
-        var _getURLParameters = getURLParameters(window.location.href),
-            code = _getURLParameters.code,
-            libs = _getURLParameters.libs;
-        example = _getURLParameters.example;
-
+    const initApp = () => {
+        const { code, libs, example } = getURLParameters(window.location.href);
         loadLib(libs)
-            .then(function (result) {
+            .then(result => {
                 loadedLibs = loadedLibs.concat(result);
                 loadCode(code, example);
             })
-            .catch(function (err) {
-                console.error(err);
-            });
-    }
+            .catch(console.error);
+    };
 
-    function restart() {
-        var libs = encodeURIComponent($lib.value);
-        var code = encodeURIComponent(editor.getValue());
-        var url = window.location.origin + window.location.pathname + '?libs=' + libs + '&code=' + code;
+    const restart = () => {
+        const libs = encodeURIComponent($lib.value);
+        const code = encodeURIComponent(editor.getValue());
+        const url = `${window.location.origin}${window.location.pathname}?libs=${libs}&code=${code}`;
         history.pushState(null, null, url);
         initApp();
-    }
+    };
 
-    function readFile(file) {
-        return new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.readAsText(file);
-        })
-    }
-
-    $run.addEventListener('click', function () {
-        restart();
+    const readFile = (file) => new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsText(file);
     });
 
-    $popups.addEventListener('click', function (event) {
-        if (event.target === this) {
-            this.style.display = 'none';
+    $run.addEventListener('click', restart);
+
+    $popups.addEventListener('click', (event) => {
+        if (event.target === $popups) {
+            $popups.style.display = 'none';
         }
     });
 
-    $prod.addEventListener('change', function () {
-        localStorage.setItem('prod', $prod.checked ? 'true' : 'false');
+    $prod.addEventListener('change', () => {
+        localStorage.setItem('prod', $prod.checked);
         window.location.reload();
     });
 
-    $ts.addEventListener('change', function () {
-        localStorage.setItem('ts', $ts.checked ? 'true' : 'false');
+    $ts.addEventListener('change', () => {
+        localStorage.setItem('ts', $ts.checked);
         window.location.reload();
     });
 
-    $code.addEventListener('change', function () {
-        localStorage.setItem('code', $code.checked ? 'true' : 'false');
+    $code.addEventListener('change', () => {
+        localStorage.setItem('code', $code.checked);
         window.location.reload();
     });
 
-    $log.addEventListener('change', function () {
-        localStorage.setItem('log', $log.checked ? 'true' : 'false');
+    $log.addEventListener('change', () => {
+        localStorage.setItem('log', $log.checked);
         window.location.reload();
     });
 
-    $file.addEventListener('change', async function () {
-        for (let index = 0; index < $file.files.length; index++) {
-            const file = $file.files[index];
-            const name = file.name.toLowerCase().trim()
+    $file.addEventListener('change', async () => {
+        for (const file of $file.files) {
+            const name = file.name.toLowerCase().trim();
+            const text = await readFile(file);
             if (name.endsWith('.css')) {
-                const text = await readFile(file);
                 const $style = document.createElement('style');
                 $style.textContent = text;
                 document.body.appendChild($style);
-                $lib.value = `\n[${name}]`;
-                $lib.value = $lib.value.trim();
-            }
-            if (name.endsWith('.js')) {
-                const text = await readFile(file);
+            } else if (name.endsWith('.js')) {
                 const $script = document.createElement('script');
                 $script.textContent = text;
                 document.body.appendChild($script);
-                $lib.value = `\n[${name}]`;
-                $lib.value = $lib.value.trim();
             }
+            $lib.value += `\n[${name}]`.trim();
         }
     });
 
-    window.addEventListener('error', function (err) {
-        console.error(err);
-    });
+    window.addEventListener('error', console.error);
+    window.addEventListener('unhandledrejection', console.error);
 
-    window.addEventListener('unhandledrejection', function (err) {
-        console.error(err);
-    });
-
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', (event) => {
         if ((event.ctrlKey || event.metaKey) && event.key === 's') {
             event.preventDefault();
             restart();
