@@ -18,6 +18,8 @@ if (!pluginName) {
 // Define paths
 const templateDir = path.join(__dirname, 'template');
 const destDir = path.join(__dirname, '../../packages', `artplayer-plugin-${pluginName}`);
+const exampleDir = path.join(__dirname, '../../docs/assets/example');
+const exampleFile = path.join(exampleDir, `${pluginName}.js`);
 
 // Check if a plugin with the same name already exists
 if (fs.existsSync(destDir)) {
@@ -59,7 +61,34 @@ function copyTemplateFiles(templateDir, destDir) {
     });
 }
 
-// Start copying template files
+// Create the example file
+function createExampleFile() {
+    const exportName = `artplayerPlugin${pluginName.charAt(0).toUpperCase() + pluginName.slice(1)}`;
+    const exampleContent = `
+// npm i artplayer-plugin-${pluginName}
+// import ${exportName} from 'artplayer-plugin-${pluginName}';
+
+var art = new Artplayer({
+    container: '.artplayer-app',
+    url: '/assets/sample/video.mp4',
+    plugins: [
+        ${exportName}({
+            //
+        }),
+    ],
+});
+    `.trim();
+
+    if (!fs.existsSync(exampleDir)) {
+        fs.mkdirSync(exampleDir, { recursive: true });
+    }
+
+    fs.writeFileSync(exampleFile, exampleContent);
+    console.log(`Example file created at ${exampleFile}`);
+}
+
+// Start copying template files and creating example file
 copyTemplateFiles(templateDir, destDir);
+createExampleFile();
 
 console.log(`Plugin ${pluginName} has been successfully created at ${destDir}`);
