@@ -390,28 +390,6 @@ export default class Setting extends Component {
         return $item;
     }
 
-    updateStyle(width) {
-        const {
-            controls,
-            constructor,
-            template: { $player, $setting },
-        } = this.art;
-
-        if (controls.setting && !isMobile) {
-            const settingWidth = width || constructor.SETTING_WIDTH;
-            const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
-            const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
-            const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
-            if (settingLeft + settingWidth > playerWidth) {
-                setStyle($setting, 'left', null);
-                setStyle($setting, 'right', null);
-            } else {
-                setStyle($setting, 'left', `${settingLeft}px`);
-                setStyle($setting, 'right', 'auto');
-            }
-        }
-    }
-
     render(option, width) {
         const { constructor } = this.art;
 
@@ -420,7 +398,6 @@ export default class Setting extends Component {
             inverseClass($panel, 'art-current');
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
             setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
-            this.updateStyle(Number($panel.dataset.width));
         } else {
             const $panel = createElement('div');
             addClass($panel, 'art-setting-panel');
@@ -448,7 +425,6 @@ export default class Setting extends Component {
             inverseClass($panel, 'art-current');
             setStyle(this.$parent, 'width', `${$panel.dataset.width}px`);
             setStyle(this.$parent, 'height', `${$panel.dataset.height}px`);
-            this.updateStyle(Number($panel.dataset.width));
 
             if (option[0] && option[0].$parentItem && option[0].$parentItem.mounted) {
                 option[0].$parentItem.mounted.call(this.art, $panel, option[0].$parentItem);
