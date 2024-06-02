@@ -64,9 +64,7 @@ export default function artplayerPluginChapter({ chapters = [] }) {
             }
         });
 
-        art.proxy($progress, 'mousemove', (event) => {
-            if (!$chapters.length) return;
-
+        function showTitle(event) {
             const $target = event.target.closest('.art-chapter');
             if ($target) {
                 setStyle($title, 'display', 'flex');
@@ -85,12 +83,19 @@ export default function artplayerPluginChapter({ chapters = [] }) {
             } else {
                 setStyle($title, 'display', 'none');
             }
-        });
+        }
 
-        art.proxy($progress, 'mouseleave', () => {
-            if (!$chapters.length) return;
-            setStyle($title, 'display', 'none');
-        });
+        if (!isMobile) {
+            art.proxy($progress, 'mousemove', (event) => {
+                if (!$chapters.length) return;
+                showTitle(event);
+            });
+
+            art.proxy($progress, 'mouseleave', () => {
+                if (!$chapters.length) return;
+                setStyle($title, 'display', 'none');
+            });
+        }
 
         art.on('video:loadedmetadata', () => {
             $control.innerText = '';

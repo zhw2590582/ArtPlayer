@@ -151,7 +151,7 @@ var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginChapter({ chapters = [] }) {
     return (art)=>{
         const { $player } = art.template;
-        const { setStyle, append, clamp, query, isMobile, addClass } = art.constructor.utils;
+        const { setStyle, append, clamp, query, isMobile, addClass, removeClass } = art.constructor.utils;
         const html = `
                 <div class="art-chapter">
                     <div class="art-chapter-inner">
@@ -162,26 +162,12 @@ function artplayerPluginChapter({ chapters = [] }) {
                 </div>
         `;
         let $chapters = [];
-        addClass($player, "artplayer-plugin-chapter");
         const $progress = art.query(".art-control-progress");
         const $inner = art.query(".art-control-progress-inner");
         const $control = append($inner, '<div class="art-chapters"></div>');
         const $title = append($inner, '<div class="art-chapter-title"></div>');
-        function showText(event) {
-            const $target = event.target.closest(".art-chapter");
-            if ($target) {
-                setStyle($title, "display", "flex");
-                $title.innerText = $target.dataset.title || "";
-                const { left } = $inner.getBoundingClientRect();
-                const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
-                const width = clamp(eventLeft - left, 0, $inner.clientWidth);
-                const titleWidth = $title.clientWidth;
-                if (width <= titleWidth / 2) setStyle($title, "left", 0);
-                else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
-                else setStyle($title, "left", `${width - titleWidth / 2}px`);
-            } else setStyle($title, "display", "none");
-        }
         art.on("setBar", (type, percentage)=>{
+            if (!$chapters.length) return;
             const currentTime = art.duration * percentage;
             const index = $chapters.findIndex(({ $chapter })=>{
                 const start = parseFloat($chapter.dataset.start);
@@ -203,19 +189,37 @@ function artplayerPluginChapter({ chapters = [] }) {
                 if (currentTime < start) setStyle($target, "width", 0);
                 if (currentTime > end) setStyle($target, "width", "100%");
                 if (currentTime >= start && currentTime <= end) {
-                    const _percentage = (currentTime - start) / duration;
-                    setStyle($target, "width", `${_percentage * 100}%`);
+                    const percentage = (currentTime - start) / duration;
+                    setStyle($target, "width", `${percentage * 100}%`);
                 }
             }
         });
-        art.proxy($progress, "mousemove", (event)=>{
-            showText(event);
-        });
-        art.proxy($progress, "mouseleave", ()=>{
-            setStyle($title, "display", "none");
-        });
+        function showTitle(event) {
+            const $target = event.target.closest(".art-chapter");
+            if ($target) {
+                setStyle($title, "display", "flex");
+                $title.innerText = $target.dataset.title || "";
+                const { left } = $inner.getBoundingClientRect();
+                const eventLeft = event.clientX;
+                const width = clamp(eventLeft - left, 0, $inner.clientWidth);
+                const titleWidth = $title.clientWidth;
+                if (width <= titleWidth / 2) setStyle($title, "left", 0);
+                else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
+                else setStyle($title, "left", `${width - titleWidth / 2}px`);
+            } else setStyle($title, "display", "none");
+        }
+        if (!isMobile) {
+            art.proxy($progress, "mousemove", (event)=>{
+                if (!$chapters.length) return;
+                showTitle(event);
+            });
+            art.proxy($progress, "mouseleave", ()=>{
+                if (!$chapters.length) return;
+                setStyle($title, "display", "none");
+            });
+        }
         art.on("video:loadedmetadata", ()=>{
-            $control.innerHTML = "";
+            $control.innerText = "";
             $chapters = chapters.map((chapter)=>{
                 const $chapter = append($control, html);
                 const start = clamp(chapter.start, 0, art.duration);
@@ -234,6 +238,8 @@ function artplayerPluginChapter({ chapters = [] }) {
                     $played: query(".art-progress-played", $chapter)
                 };
             });
+            if ($chapters.length) addClass($player, "artplayer-plugin-chapter");
+            else removeClass($player, "artplayer-plugin-chapter");
         });
         return {
             name: "artplayerPluginChapter"
