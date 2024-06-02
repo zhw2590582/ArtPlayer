@@ -1,3 +1,37 @@
-.artplayer-plugin-chapter {
-    //
+.art-progress {
+    .art-control-progress-inner {
+        height: 100% !important;
+        background-color: transparent !important;
+
+        & > .art-progress-hover,
+        & > .art-progress-loaded,
+        & > .art-progress-played {
+            display: none !important;
+        }
+    }
+
+    .art-chapters {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        height: 100%;
+        transform: scaleY(1.25);
+
+        .art-chapter {
+            position: relative;
+            cursor: pointer;
+            height: 50%;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: height var(--art-transition-duration) ease;
+            background-color: var(--art-progress-color);
+
+            &:hover {
+                height: 100%;
+            }
+        }
+    }
 }

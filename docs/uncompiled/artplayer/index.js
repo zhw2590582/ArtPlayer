@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-06-02 14:05:18";
+        return "2024-06-02 17:40:53";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3211,22 +3211,22 @@ function progress(options) {
                         (0, _utils.append)($highlight, html);
                     }
                 });
-                setBar("loaded", art.loaded);
                 art.on("setBar", (type, percentage)=>{
                     setBar(type, percentage);
                 });
                 art.on("video:progress", ()=>{
-                    setBar("loaded", art.loaded);
+                    art.emit("setBar", "loaded", art.loaded);
                 });
                 if (art.constructor.USE_RAF) art.on("raf", ()=>{
-                    setBar("played", art.played);
+                    art.emit("setBar", "played", art.played);
                 });
                 else art.on("video:timeupdate", ()=>{
-                    setBar("played", art.played);
+                    art.emit("setBar", "played", art.played);
                 });
                 art.on("video:ended", ()=>{
-                    setBar("played", 1);
+                    art.emit("setBar", "played", 1);
                 });
+                art.emit("setBar", "loaded", art.loaded);
                 if (!(0, _utils.isMobile)) {
                     proxy($control, "click", (event)=>{
                         if (event.target !== $indicator) setCurrentTime(art, event);
@@ -3247,7 +3247,7 @@ function progress(options) {
                     art.on("document:mousemove", (event)=>{
                         if (isDroging) {
                             const { second, percentage } = getPosFromEvent(art, event);
-                            setBar("played", percentage);
+                            art.emit("setBar", "played", percentage);
                             art.seek = second;
                         }
                     });

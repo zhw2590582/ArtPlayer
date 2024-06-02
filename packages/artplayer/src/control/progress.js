@@ -108,29 +108,29 @@ export default function progress(options) {
                     }
                 });
 
-                setBar('loaded', art.loaded);
-
                 art.on('setBar', (type, percentage) => {
                     setBar(type, percentage);
                 });
 
                 art.on('video:progress', () => {
-                    setBar('loaded', art.loaded);
+                    art.emit('setBar', 'loaded', art.loaded);
                 });
 
                 if (art.constructor.USE_RAF) {
                     art.on('raf', () => {
-                        setBar('played', art.played);
+                        art.emit('setBar', 'played', art.played);
                     });
                 } else {
                     art.on('video:timeupdate', () => {
-                        setBar('played', art.played);
+                        art.emit('setBar', 'played', art.played);
                     });
                 }
 
                 art.on('video:ended', () => {
-                    setBar('played', 1);
+                    art.emit('setBar', 'played', 1);
                 });
+
+                art.emit('setBar', 'loaded', art.loaded || 0);
 
                 if (!isMobile) {
                     proxy($control, 'click', (event) => {
@@ -161,7 +161,7 @@ export default function progress(options) {
                     art.on('document:mousemove', (event) => {
                         if (isDroging) {
                             const { second, percentage } = getPosFromEvent(art, event);
-                            setBar('played', percentage);
+                            art.emit('setBar', 'played', percentage);
                             art.seek = second;
                         }
                     });
