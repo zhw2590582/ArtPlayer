@@ -64,4 +64,5 @@ export type Events = {
     subtitleOffset: [offset: number];
     restart: [url: string];
     muted: [state: boolean];
+    setBar: [type: 'loaded' | 'played' | 'hover', event: Event];
 };

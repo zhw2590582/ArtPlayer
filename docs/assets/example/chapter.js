@@ -8,6 +8,7 @@ var art = new Artplayer({
 	fullscreen: true,
 	fullscreenWeb: true,
 	miniProgressBar: true,
+	autoOrientation: true,
 	thumbnails: {
         url: '/assets/sample/thumbnails.png',
         number: 60,

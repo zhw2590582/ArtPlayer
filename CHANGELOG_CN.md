@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   优化 `setBar` 事件
+-   新增 `artplayerPluginChapter` 插件
+
 ## [5.1.4] - 2024-6-1
 
 -   重构 `artplayerPluginDanmuku` 插件
