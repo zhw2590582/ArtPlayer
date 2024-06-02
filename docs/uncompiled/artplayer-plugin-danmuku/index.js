@@ -197,12 +197,13 @@ class Danmuku {
         this.art = art;
         this.danmus = []; // 原始弹幕数据
         this.queue = []; // 实际弹幕队列
-        this.option = {}; // 格式化后的配置项
         this.$refs = []; // 弹幕DOM节点池
         this.isStop = false; // 是否停止
         this.isHide = false; // 是否隐藏
         this.timer = null; // 定时器
         this.index = 0; // 弹幕索引
+        // 格式化后的配置项
+        this.option = Danmuku.option;
         // 弹幕状态池
         this.states = {
             wait: [],
