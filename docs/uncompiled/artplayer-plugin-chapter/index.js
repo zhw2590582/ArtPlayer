@@ -150,7 +150,7 @@ var _styleLess = require("bundle-text:./style.less");
 var _styleLessDefault = parcelHelpers.interopDefault(_styleLess);
 function artplayerPluginChapter({ chapters = [] }) {
     return (art)=>{
-        const { setStyle, append, clamp, query } = art.constructor.utils;
+        const { setStyle, append, clamp, query, isMobile } = art.constructor.utils;
         const html = `
                 <div class="art-chapter">
                     <div class="art-progress-hover"></div>
@@ -161,6 +161,7 @@ function artplayerPluginChapter({ chapters = [] }) {
         let $chapters = [];
         const $progress = art.query(".art-control-progress-inner");
         const $control = append($progress, '<div class="art-chapters"></div>');
+        const $text = append($progress, '<div class="art-chapter-text"></div>');
         art.on("setBar", (type, percentage)=>{
             const currentTime = art.duration * percentage;
             const index = $chapters.findIndex(({ $chapter })=>{
@@ -187,6 +188,23 @@ function artplayerPluginChapter({ chapters = [] }) {
                     setStyle($target, "width", `${_percentage * 100}%`);
                 }
             }
+        });
+        art.proxy($control, "mousemove", (event)=>{
+            const $target = event.target.closest(".art-chapter");
+            if ($target) {
+                setStyle($text, "display", "flex");
+                $text.innerText = $target.dataset.text || "";
+                const { left } = $control.getBoundingClientRect();
+                const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
+                const width = clamp(eventLeft - left, 0, $control.clientWidth);
+                const textWidth = $text.clientWidth;
+                if (width <= textWidth / 2) setStyle($text, "left", 0);
+                else if (width > $control.clientWidth - textWidth / 2) setStyle($text, "left", `${$control.clientWidth - textWidth}px`);
+                else setStyle($text, "left", `${width - textWidth / 2}px`);
+            } else setStyle($text, "display", "none");
+        });
+        art.proxy($control, "mouseleave", ()=>{
+            setStyle($text, "display", "none");
         });
         art.on("video:loadedmetadata", ()=>{
             $control.innerHTML = "";
@@ -229,7 +247,7 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") window["artplayerPluginChapter"] = artplayerPluginChapter;
 
 },{"bundle-text:./style.less":"8SOjD","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8SOjD":[function(require,module,exports) {
-module.exports = ".art-progress .art-control-progress-inner {\n  background-color: #0000 !important;\n  height: 100% !important;\n}\n\n.art-progress .art-control-progress-inner > .art-progress-hover, .art-progress .art-control-progress-inner > .art-progress-loaded, .art-progress .art-control-progress-inner > .art-progress-played {\n  display: none !important;\n}\n\n.art-progress .art-chapters {\n  z-index: 0;\n  align-items: center;\n  gap: 4px;\n  height: 100%;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  transform: scaleY(1.25);\n}\n\n.art-progress .art-chapters .art-chapter {\n  cursor: pointer;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  border-radius: 10px;\n  height: 50%;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-progress .art-chapters .art-chapter:hover {\n  height: 100%;\n}\n";
+module.exports = ".art-progress .art-control-progress-inner {\n  background-color: #0000 !important;\n  height: 100% !important;\n}\n\n.art-progress .art-control-progress-inner > .art-progress-hover, .art-progress .art-control-progress-inner > .art-progress-loaded, .art-progress .art-control-progress-inner > .art-progress-played {\n  display: none !important;\n}\n\n.art-progress .art-chapters {\n  z-index: 0;\n  align-items: center;\n  gap: 4px;\n  height: 100%;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  transform: scaleY(1.25);\n}\n\n.art-progress .art-chapters .art-chapter {\n  cursor: pointer;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  border-radius: 10px;\n  height: 50%;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-progress .art-chapters .art-chapter:hover {\n  height: 100%;\n}\n\n.art-progress .art-chapter-text {\n  z-index: 50;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  padding: 3px 5px;\n  font-size: 16px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: -50px;\n  left: 0;\n}\n";
 
 },{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {

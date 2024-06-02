@@ -2,7 +2,7 @@ import style from 'bundle-text:./style.less';
 
 export default function artplayerPluginChapter({ chapters = [] }) {
     return (art) => {
-        const { setStyle, append, clamp, query } = art.constructor.utils;
+        const { setStyle, append, clamp, query, isMobile } = art.constructor.utils;
 
         const html = `
                 <div class="art-chapter">
@@ -15,6 +15,7 @@ export default function artplayerPluginChapter({ chapters = [] }) {
         let $chapters = [];
         const $progress = art.query('.art-control-progress-inner');
         const $control = append($progress, '<div class="art-chapters"></div>');
+        const $text = append($progress, '<div class="art-chapter-text"></div>');
 
         art.on('setBar', (type, percentage) => {
             const currentTime = art.duration * percentage;
@@ -55,6 +56,31 @@ export default function artplayerPluginChapter({ chapters = [] }) {
                     setStyle($target, 'width', `${_percentage * 100}%`);
                 }
             }
+        });
+
+        art.proxy($control, 'mousemove', (event) => {
+            const $target = event.target.closest('.art-chapter');
+            if ($target) {
+                setStyle($text, 'display', 'flex');
+                $text.innerText = $target.dataset.text || '';
+                const { left } = $control.getBoundingClientRect();
+                const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
+                const width = clamp(eventLeft - left, 0, $control.clientWidth);
+                const textWidth = $text.clientWidth;
+                if (width <= textWidth / 2) {
+                    setStyle($text, 'left', 0);
+                } else if (width > $control.clientWidth - textWidth / 2) {
+                    setStyle($text, 'left', `${$control.clientWidth - textWidth}px`);
+                } else {
+                    setStyle($text, 'left', `${width - textWidth / 2}px`);
+                }
+            } else {
+                setStyle($text, 'display', 'none');
+            }
+        });
+
+        art.proxy($control, 'mouseleave', () => {
+            setStyle($text, 'display', 'none');
         });
 
         art.on('video:loadedmetadata', () => {

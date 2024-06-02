@@ -58,7 +58,7 @@ export default function progress(options) {
                 function showHighlight(event) {
                     const { width } = getPosFromEvent(art, event);
                     const { text } = event.target.dataset;
-                    $tip.innerHTML = text;
+                    $tip.innerText = text;
                     const tipWidth = $tip.clientWidth;
                     if (width <= tipWidth / 2) {
                         setStyle($tip, 'left', 0);
