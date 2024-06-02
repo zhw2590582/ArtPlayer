@@ -161,7 +161,7 @@ function artplayerPluginChapter({ chapters = [] }) {
         let $chapters = [];
         const $progress = art.query(".art-control-progress-inner");
         const $control = append($progress, '<div class="art-chapters"></div>');
-        function setBar(type, percentage) {
+        art.on("setBar", (type, percentage)=>{
             const currentTime = art.duration * percentage;
             const index = $chapters.findIndex(({ $chapter })=>{
                 const start = parseFloat($chapter.dataset.start);
@@ -176,6 +176,7 @@ function artplayerPluginChapter({ chapters = [] }) {
                     loaded: $loaded,
                     played: $played
                 }[type];
+                if (!$target) return;
                 const duration = parseFloat($chapter.dataset.duration);
                 const start = parseFloat($chapter.dataset.start);
                 const end = parseFloat($chapter.dataset.end);
@@ -186,9 +187,6 @@ function artplayerPluginChapter({ chapters = [] }) {
                     setStyle($target, "width", `${_percentage * 100}%`);
                 }
             }
-        }
-        art.on("setBar", (type, percentage)=>{
-            setBar(type, percentage);
         });
         art.on("video:loadedmetadata", ()=>{
             $control.innerHTML = "";

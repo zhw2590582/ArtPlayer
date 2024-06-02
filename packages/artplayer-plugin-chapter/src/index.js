@@ -16,7 +16,7 @@ export default function artplayerPluginChapter({ chapters = [] }) {
         const $progress = art.query('.art-control-progress-inner');
         const $control = append($progress, '<div class="art-chapters"></div>');
 
-        function setBar(type, percentage) {
+        art.on('setBar', (type, percentage) => {
             const currentTime = art.duration * percentage;
 
             const index = $chapters.findIndex(({ $chapter }) => {
@@ -36,6 +36,8 @@ export default function artplayerPluginChapter({ chapters = [] }) {
                     played: $played,
                 }[type];
 
+                if (!$target) return;
+
                 const duration = parseFloat($chapter.dataset.duration);
                 const start = parseFloat($chapter.dataset.start);
                 const end = parseFloat($chapter.dataset.end);
@@ -53,10 +55,6 @@ export default function artplayerPluginChapter({ chapters = [] }) {
                     setStyle($target, 'width', `${_percentage * 100}%`);
                 }
             }
-        }
-
-        art.on('setBar', (type, percentage) => {
-            setBar(type, percentage);
         });
 
         art.on('video:loadedmetadata', () => {

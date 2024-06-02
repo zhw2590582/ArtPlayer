@@ -87,16 +87,14 @@ export default function progress(options) {
                         setStyle($loaded, 'width', `${percentage * 100}%`);
                     }
 
+                    if (type === 'hover') {
+                        setStyle($hover, 'width', `${percentage * 100}%`);
+                    }
+
                     if (type === 'played') {
                         setStyle($played, 'width', `${percentage * 100}%`);
                         setStyle($indicator, 'left', `${percentage * 100}%`);
                     }
-                }
-
-                function setHover(event) {
-                    const { width } = getPosFromEvent(art, event);
-                    setStyle($hover, 'width', `${width}px`);
-                    setStyle($hover, 'display', 'flex');
                 }
 
                 art.on('video:loadedmetadata', () => {
@@ -140,7 +138,8 @@ export default function progress(options) {
                     });
 
                     proxy($control, 'mousemove', (event) => {
-                        setHover(event);
+                        const { percentage } = getPosFromEvent(art, event);
+                        art.emit('setBar', 'hover', percentage);
                         setStyle($tip, 'display', 'flex');
                         if (includeFromEvent(event, $highlight)) {
                             showHighlight(event);
@@ -151,7 +150,7 @@ export default function progress(options) {
 
                     proxy($control, 'mouseleave', () => {
                         setStyle($tip, 'display', 'none');
-                        setStyle($hover, 'display', 'none');
+                        art.emit('setBar', 'hover', 0);
                     });
 
                     proxy($control, 'mousedown', (event) => {
