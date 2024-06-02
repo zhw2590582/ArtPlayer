@@ -6,30 +6,33 @@ export default function artplayerPluginChapter({ chapters = [] }) {
 
         const html = `
                 <div class="art-chapter">
-                    <div class="art-progress-hover"></div>
-                    <div class="art-progress-loaded"></div>
-                    <div class="art-progress-played"></div>
+                    <div class="art-chapter-inner">
+                        <div class="art-progress-hover"></div>
+                        <div class="art-progress-loaded"></div>
+                        <div class="art-progress-played"></div>
+                    </div>
                 </div>
         `;
 
         let $chapters = [];
-        const $progress = art.query('.art-control-progress-inner');
-        const $control = append($progress, '<div class="art-chapters"></div>');
-        const $title = append($progress, '<div class="art-chapter-title"></div>');
+        const $progress = art.query('.art-control-progress');
+        const $inner = art.query('.art-control-progress-inner');
+        const $control = append($inner, '<div class="art-chapters"></div>');
+        const $title = append($inner, '<div class="art-chapter-title"></div>');
 
         function showText(event) {
             const $target = event.target.closest('.art-chapter');
             if ($target) {
                 setStyle($title, 'display', 'flex');
                 $title.innerText = $target.dataset.title || '';
-                const { left } = $progress.getBoundingClientRect();
+                const { left } = $inner.getBoundingClientRect();
                 const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
-                const width = clamp(eventLeft - left, 0, $progress.clientWidth);
+                const width = clamp(eventLeft - left, 0, $inner.clientWidth);
                 const titleWidth = $title.clientWidth;
                 if (width <= titleWidth / 2) {
                     setStyle($title, 'left', 0);
-                } else if (width > $progress.clientWidth - titleWidth / 2) {
-                    setStyle($title, 'left', `${$progress.clientWidth - titleWidth}px`);
+                } else if (width > $inner.clientWidth - titleWidth / 2) {
+                    setStyle($title, 'left', `${$inner.clientWidth - titleWidth}px`);
                 } else {
                     setStyle($title, 'left', `${width - titleWidth / 2}px`);
                 }
@@ -99,7 +102,6 @@ export default function artplayerPluginChapter({ chapters = [] }) {
                 $chapter.dataset.end = end;
                 $chapter.dataset.duration = duration;
                 $chapter.dataset.title = chapter.title.trim();
-                $chapter.dataset.percentage = percentage;
                 $chapter.style.width = `${percentage * 100}%`;
 
                 return {

@@ -21,15 +21,22 @@
         transform: scaleY(1.25);
 
         .art-chapter {
-            position: relative;
-            cursor: pointer;
-            height: 50%;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: height var(--art-transition-duration) ease;
-            background-color: var(--art-progress-color);
+            display: flex;
+            align-items: center;
+            height: 100%;
 
-            &:hover {
+            .art-chapter-inner {
+                position: relative;
+                cursor: pointer;
+                width: 100%;
+                height: 50%;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: height var(--art-transition-duration) ease;
+                background-color: var(--art-progress-color);
+            }
+
+            &:hover .art-chapter-inner {
                 height: 100%;
             }
         }

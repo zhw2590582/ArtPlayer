@@ -153,26 +153,29 @@ function artplayerPluginChapter({ chapters = [] }) {
         const { setStyle, append, clamp, query, isMobile } = art.constructor.utils;
         const html = `
                 <div class="art-chapter">
-                    <div class="art-progress-hover"></div>
-                    <div class="art-progress-loaded"></div>
-                    <div class="art-progress-played"></div>
+                    <div class="art-chapter-inner">
+                        <div class="art-progress-hover"></div>
+                        <div class="art-progress-loaded"></div>
+                        <div class="art-progress-played"></div>
+                    </div>
                 </div>
         `;
         let $chapters = [];
-        const $progress = art.query(".art-control-progress-inner");
-        const $control = append($progress, '<div class="art-chapters"></div>');
-        const $title = append($progress, '<div class="art-chapter-title"></div>');
+        const $progress = art.query(".art-control-progress");
+        const $inner = art.query(".art-control-progress-inner");
+        const $control = append($inner, '<div class="art-chapters"></div>');
+        const $title = append($inner, '<div class="art-chapter-title"></div>');
         function showText(event) {
             const $target = event.target.closest(".art-chapter");
             if ($target) {
                 setStyle($title, "display", "flex");
                 $title.innerText = $target.dataset.title || "";
-                const { left } = $progress.getBoundingClientRect();
+                const { left } = $inner.getBoundingClientRect();
                 const eventLeft = isMobile ? event.touches[0].clientX : event.clientX;
-                const width = clamp(eventLeft - left, 0, $progress.clientWidth);
+                const width = clamp(eventLeft - left, 0, $inner.clientWidth);
                 const titleWidth = $title.clientWidth;
                 if (width <= titleWidth / 2) setStyle($title, "left", 0);
-                else if (width > $progress.clientWidth - titleWidth / 2) setStyle($title, "left", `${$progress.clientWidth - titleWidth}px`);
+                else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
                 else setStyle($title, "left", `${width - titleWidth / 2}px`);
             } else setStyle($title, "display", "none");
         }
@@ -221,7 +224,6 @@ function artplayerPluginChapter({ chapters = [] }) {
                 $chapter.dataset.end = end;
                 $chapter.dataset.duration = duration;
                 $chapter.dataset.title = chapter.title.trim();
-                $chapter.dataset.percentage = percentage;
                 $chapter.style.width = `${percentage * 100}%`;
                 return {
                     $chapter,
@@ -250,7 +252,7 @@ if (typeof document !== "undefined") {
 if (typeof window !== "undefined") window["artplayerPluginChapter"] = artplayerPluginChapter;
 
 },{"bundle-text:./style.less":"8SOjD","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"8SOjD":[function(require,module,exports) {
-module.exports = ".art-progress .art-control-progress-inner {\n  background-color: #0000 !important;\n  height: 100% !important;\n}\n\n.art-progress .art-control-progress-inner > .art-progress-hover, .art-progress .art-control-progress-inner > .art-progress-loaded, .art-progress .art-control-progress-inner > .art-progress-played {\n  display: none !important;\n}\n\n.art-progress .art-chapters {\n  z-index: 0;\n  align-items: center;\n  gap: 4px;\n  height: 100%;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  transform: scaleY(1.25);\n}\n\n.art-progress .art-chapters .art-chapter {\n  cursor: pointer;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  border-radius: 10px;\n  height: 50%;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-progress .art-chapters .art-chapter:hover {\n  height: 100%;\n}\n\n.art-progress .art-chapter-title {\n  z-index: 70;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  padding: 3px 5px;\n  font-size: 16px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: -50px;\n  left: 0;\n}\n";
+module.exports = ".art-progress .art-control-progress-inner {\n  background-color: #0000 !important;\n  height: 100% !important;\n}\n\n.art-progress .art-control-progress-inner > .art-progress-hover, .art-progress .art-control-progress-inner > .art-progress-loaded, .art-progress .art-control-progress-inner > .art-progress-played {\n  display: none !important;\n}\n\n.art-progress .art-chapters {\n  z-index: 0;\n  align-items: center;\n  gap: 4px;\n  height: 100%;\n  display: flex;\n  position: absolute;\n  inset: 0;\n  transform: scaleY(1.25);\n}\n\n.art-progress .art-chapters .art-chapter {\n  align-items: center;\n  height: 100%;\n  display: flex;\n}\n\n.art-progress .art-chapters .art-chapter .art-chapter-inner {\n  cursor: pointer;\n  transition: height var(--art-transition-duration) ease;\n  background-color: var(--art-progress-color);\n  border-radius: 10px;\n  width: 100%;\n  height: 50%;\n  position: relative;\n  overflow: hidden;\n}\n\n.art-progress .art-chapters .art-chapter:hover .art-chapter-inner {\n  height: 100%;\n}\n\n.art-progress .art-chapter-title {\n  z-index: 70;\n  border-radius: var(--art-border-radius);\n  white-space: nowrap;\n  background-color: var(--art-tip-background);\n  padding: 3px 5px;\n  font-size: 16px;\n  line-height: 1;\n  display: none;\n  position: absolute;\n  top: -50px;\n  left: 0;\n}\n";
 
 },{}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
