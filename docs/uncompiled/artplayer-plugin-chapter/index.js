@@ -168,14 +168,41 @@ function artplayerPluginChapter(option = {}) {
         const $control = append($inner, '<div class="art-chapters"></div>');
         const $title = append($inner, '<div class="art-chapter-title"></div>');
         function showTitle({ $chapter, width }) {
-            $title.innerText = $chapter.dataset.title || "";
-            const titleWidth = $title.clientWidth;
-            if (width <= titleWidth / 2) setStyle($title, "left", 0);
-            else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
-            else setStyle($title, "left", `${width - titleWidth / 2}px`);
+            const title = $chapter.dataset.title.trim();
+            if (title) {
+                setStyle($title, "display", "flex");
+                $title.innerText = title;
+                const titleWidth = $title.clientWidth;
+                if (width <= titleWidth / 2) setStyle($title, "left", 0);
+                else if (width > $inner.clientWidth - titleWidth / 2) setStyle($title, "left", `${$inner.clientWidth - titleWidth}px`);
+                else setStyle($title, "left", `${width - titleWidth / 2}px`);
+            } else setStyle($title, "display", "none");
         }
         function update(chapters = []) {
+            if (!chapters.length) return;
+            if (!art.duration) return;
             $control.innerText = "";
+            for(let i = 0; i < chapters.length; i++){
+                const chapter = chapters[i];
+                const nextChapter = chapters[i + 1];
+                if (chapter.start < 0 || chapter.end > art.duration || chapter.start >= chapter.end) throw new Error("Illegal chapter time point");
+                if (nextChapter && chapter.end > nextChapter.start) throw new Error("Illegal chapter time point");
+            }
+            if (chapters[0].start > 0) chapters.unshift({
+                start: 0,
+                end: chapters[0].start,
+                title: ""
+            });
+            if (chapters[chapters.length - 1].end < art.duration) chapters.push({
+                start: chapters[chapters.length - 1].end,
+                end: art.duration,
+                title: ""
+            });
+            for(let i = 0; i < chapters.length - 1; i++)if (chapters[i].end !== chapters[i + 1].start) chapters.splice(i + 1, 0, {
+                start: chapters[i].end,
+                end: chapters[i + 1].start,
+                title: ""
+            });
             $chapters = chapters.map((chapter)=>{
                 const $chapter = append($control, html);
                 const start = clamp(chapter.start, 0, art.duration);
@@ -224,7 +251,6 @@ function artplayerPluginChapter(option = {}) {
                                 $chapter,
                                 width
                             });
-                            setStyle($title, "display", "flex");
                             clearTimeout(titleTimer);
                             titleTimer = setTimeout(()=>{
                                 setStyle($title, "display", "none");
@@ -237,16 +263,10 @@ function artplayerPluginChapter(option = {}) {
                 }
             }
         });
-        if (!isMobile) {
-            art.proxy($progress, "mousemove", ()=>{
-                if (!$chapters.length) return;
-                setStyle($title, "display", "flex");
-            });
-            art.proxy($progress, "mouseleave", ()=>{
-                if (!$chapters.length) return;
-                setStyle($title, "display", "none");
-            });
-        }
+        if (!isMobile) art.proxy($progress, "mouseleave", ()=>{
+            if (!$chapters.length) return;
+            setStyle($title, "display", "none");
+        });
         art.once("video:loadedmetadata", ()=>update(option.chapters));
         return {
             name: "artplayerPluginChapter",
