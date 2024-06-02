@@ -44,11 +44,20 @@ export default function artplayerPluginChapter(option = {}) {
         function update(chapters = []) {
             if (!chapters.length) return;
             if (!art.duration) return;
-            $control.innerText = '';
+
+            chapters = chapters.sort((a, b) => a.start - b.start);
 
             for (let i = 0; i < chapters.length; i++) {
                 const chapter = chapters[i];
                 const nextChapter = chapters[i + 1];
+
+                if (
+                    typeof chapter.start !== 'number' ||
+                    typeof chapter.end !== 'number' ||
+                    typeof chapter.title !== 'string'
+                ) {
+                    throw new Error('Illegal chapter data type');
+                }
 
                 if (chapter.start < 0 || chapter.end > art.duration || chapter.start >= chapter.end) {
                     throw new Error('Illegal chapter time point');
@@ -77,6 +86,7 @@ export default function artplayerPluginChapter(option = {}) {
                 }
             }
 
+            $control.innerText = '';
             $chapters = chapters.map((chapter) => {
                 const $chapter = append($control, html);
                 const start = clamp(chapter.start, 0, art.duration);
