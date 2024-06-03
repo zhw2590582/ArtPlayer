@@ -42,6 +42,8 @@ export default function artplayerPluginChapter(option = {}) {
         }
 
         function update(chapters = []) {
+            removeClass($player, 'artplayer-plugin-chapter');
+
             if (!Array.isArray(chapters)) return;
             if (!chapters.length) return;
             if (!art.duration) return;
@@ -108,12 +110,7 @@ export default function artplayerPluginChapter(option = {}) {
                 };
             });
 
-            if ($chapters.length) {
-                addClass($player, 'artplayer-plugin-chapter');
-            } else {
-                removeClass($player, 'artplayer-plugin-chapter');
-            }
-
+            addClass($player, 'artplayer-plugin-chapter');
             art.emit('setBar', 'loaded', art.loaded || 0);
         }
 

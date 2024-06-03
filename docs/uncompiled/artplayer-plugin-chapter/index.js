@@ -179,6 +179,7 @@ function artplayerPluginChapter(option = {}) {
             } else setStyle($title, "display", "none");
         }
         function update(chapters = []) {
+            removeClass($player, "artplayer-plugin-chapter");
             if (!Array.isArray(chapters)) return;
             if (!chapters.length) return;
             if (!art.duration) return;
@@ -224,8 +225,7 @@ function artplayerPluginChapter(option = {}) {
                     $played: query(".art-progress-played", $chapter)
                 };
             });
-            if ($chapters.length) addClass($player, "artplayer-plugin-chapter");
-            else removeClass($player, "artplayer-plugin-chapter");
+            addClass($player, "artplayer-plugin-chapter");
             art.emit("setBar", "loaded", art.loaded || 0);
         }
         art.on("setBar", (type, percentage, event)=>{
