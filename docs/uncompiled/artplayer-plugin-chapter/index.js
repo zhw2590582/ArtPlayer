@@ -187,6 +187,7 @@ function artplayerPluginChapter(option = {}) {
             for(let i = 0; i < chapters.length; i++){
                 const chapter = chapters[i];
                 const nextChapter = chapters[i + 1];
+                if (chapter.end === Infinity) chapter.end = art.duration;
                 if (typeof chapter.start !== "number" || typeof chapter.end !== "number" || typeof chapter.title !== "string") throw new Error("Illegal chapter data type");
                 if (chapter.start < 0 || chapter.end > art.duration || chapter.start >= chapter.end) throw new Error("Illegal chapter time point");
                 if (nextChapter && chapter.end > nextChapter.start) throw new Error("Illegal chapter time point");

@@ -54,6 +54,10 @@ export default function artplayerPluginChapter(option = {}) {
                 const chapter = chapters[i];
                 const nextChapter = chapters[i + 1];
 
+                if (chapter.end === Infinity) {
+                    chapter.end = art.duration;
+                }
+
                 if (
                     typeof chapter.start !== 'number' ||
                     typeof chapter.end !== 'number' ||
