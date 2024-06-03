@@ -257,6 +257,7 @@ export default class Danmuku {
         return result;
     }
 
+    // 计算弹幕速度
     get speed() {
         return this.option.synchronousPlayback && this.art.playbackRate
             ? this.option.speed / Number(this.art.playbackRate)
