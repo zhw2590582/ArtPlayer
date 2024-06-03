@@ -42,6 +42,8 @@ export default function artplayerPluginChapter(option = {}) {
         }
 
         function update(chapters = []) {
+            $chapters = [];
+            $control.innerText = '';
             removeClass($player, 'artplayer-plugin-chapter');
 
             if (!Array.isArray(chapters)) return;
@@ -93,7 +95,6 @@ export default function artplayerPluginChapter(option = {}) {
                 }
             }
 
-            $control.innerText = '';
             $chapters = chapters.map((chapter) => {
                 const $chapter = append($control, html);
                 const start = clamp(chapter.start, 0, art.duration);

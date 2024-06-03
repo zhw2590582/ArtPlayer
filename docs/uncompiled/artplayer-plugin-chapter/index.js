@@ -179,6 +179,8 @@ function artplayerPluginChapter(option = {}) {
             } else setStyle($title, "display", "none");
         }
         function update(chapters = []) {
+            $chapters = [];
+            $control.innerText = "";
             removeClass($player, "artplayer-plugin-chapter");
             if (!Array.isArray(chapters)) return;
             if (!chapters.length) return;
@@ -207,7 +209,6 @@ function artplayerPluginChapter(option = {}) {
                 end: chapters[i + 1].start,
                 title: ""
             });
-            $control.innerText = "";
             $chapters = chapters.map((chapter)=>{
                 const $chapter = append($control, html);
                 const start = clamp(chapter.start, 0, art.duration);
