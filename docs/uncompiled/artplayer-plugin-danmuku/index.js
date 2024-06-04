@@ -760,26 +760,25 @@ exports.default = Danmuku;
 },{"./bilibili":"95SuC","bundle-text:./worker":"el0Wt","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"95SuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getMode", ()=>getMode);
-parcelHelpers.export(exports, "bilibiliDanmuParseFromXml", ()=>bilibiliDanmuParseFromXml);
 parcelHelpers.export(exports, "bilibiliDanmuParseFromUrl", ()=>bilibiliDanmuParseFromUrl);
 function getMode(key) {
     switch(key){
         case 1:
         case 2:
         case 3:
-            return 0; // 滚动
+            return 0;
         case 4:
-            return 2; // 底部
+            return 2;
         case 5:
-            return 1; // 顶部
+            return 1;
         default:
             return 0;
     }
 }
 function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== "string") return [];
-    const matches = xmlString.matchAll(/<d (?:.*? )??p="(?<p>.+?)"(?: .*?)?>(?<text>.+?)<\/d>/gs);
+    const reg = new RegExp(/<d (?:.*? )??p="(?<p>.+?)"(?: .*?)?>(?<text>.+?)<\/d>/gs);
+    const matches = xmlString.matchAll(reg);
     return Array.from(matches).map((match)=>{
         const attr = match.groups.p.split(",");
         if (attr.length >= 8) {
@@ -798,10 +797,49 @@ function bilibiliDanmuParseFromXml(xmlString) {
         } else return null;
     }).filter(Boolean);
 }
-async function bilibiliDanmuParseFromUrl(url) {
-    const res = await fetch(url);
-    const xmlString = await res.text();
-    return bilibiliDanmuParseFromXml(xmlString);
+function onmessage({ data }) {
+    const { xml, id } = data;
+    if (!id || !xml) return;
+    const danmus = bilibiliDanmuParseFromXml(xml);
+    self.postMessage({
+        danmus,
+        id
+    });
+}
+function createWorker() {
+    const workerText = `
+        ${getMode.toString()}
+        ${bilibiliDanmuParseFromXml.toString()}
+        onmessage = ${onmessage.toString()}
+    `;
+    const blob = new Blob([
+        workerText
+    ], {
+        type: "application/javascript"
+    });
+    return new Worker(URL.createObjectURL(blob));
+}
+function bilibiliDanmuParseFromUrl(url) {
+    return new Promise(async (resolve)=>{
+        const res = await fetch(url);
+        const xml = await res.text();
+        try {
+            const worker = createWorker();
+            worker.onmessage = (event)=>{
+                const { danmus, id } = event.data;
+                if (!id || !danmus) return;
+                resolve(danmus);
+                worker.terminate();
+            };
+            worker.postMessage({
+                xml,
+                id: Date.now()
+            });
+        } catch (error) {
+            const danmus = bilibiliDanmuParseFromXml(xml);
+            resolve(danmus);
+        }
+    });
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {

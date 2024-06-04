@@ -1,21 +1,22 @@
-export function getMode(key) {
+function getMode(key) {
     switch (key) {
         case 1:
         case 2:
         case 3:
-            return 0; // 滚动
+            return 0;
         case 4:
-            return 2; // 底部
+            return 2;
         case 5:
-            return 1; // 顶部
+            return 1;
         default:
             return 0;
     }
 }
 
-export function bilibiliDanmuParseFromXml(xmlString) {
+function bilibiliDanmuParseFromXml(xmlString) {
     if (typeof xmlString !== 'string') return [];
-    const matches = xmlString.matchAll(/<d (?:.*? )??p="(?<p>.+?)"(?: .*?)?>(?<text>.+?)<\/d>/gs);
+    const reg = new RegExp(/<d (?:.*? )??p="(?<p>.+?)"(?: .*?)?>(?<text>.+?)<\/d>/gs);
+    const matches = xmlString.matchAll(reg);
     return Array.from(matches)
         .map((match) => {
             const attr = match.groups.p.split(',');
@@ -46,8 +47,40 @@ export function bilibiliDanmuParseFromXml(xmlString) {
         .filter(Boolean);
 }
 
-export async function bilibiliDanmuParseFromUrl(url) {
-    const res = await fetch(url);
-    const xmlString = await res.text();
-    return bilibiliDanmuParseFromXml(xmlString);
+function onmessage({ data }) {
+    const { xml, id } = data;
+    if (!id || !xml) return;
+    const danmus = bilibiliDanmuParseFromXml(xml);
+    self.postMessage({ danmus, id });
+}
+
+function createWorker() {
+    const workerText = `
+        ${getMode.toString()}
+        ${bilibiliDanmuParseFromXml.toString()}
+        onmessage = ${onmessage.toString()}
+    `;
+    const blob = new Blob([workerText], { type: 'application/javascript' });
+    return new Worker(URL.createObjectURL(blob));
+}
+
+export function bilibiliDanmuParseFromUrl(url) {
+    return new Promise(async (resolve) => {
+        const res = await fetch(url);
+        const xml = await res.text();
+
+        try {
+            const worker = createWorker();
+            worker.onmessage = (event) => {
+                const { danmus, id } = event.data;
+                if (!id || !danmus) return;
+                resolve(danmus);
+                worker.terminate();
+            };
+            worker.postMessage({ xml, id: Date.now() });
+        } catch (error) {
+            const danmus = bilibiliDanmuParseFromXml(xml);
+            resolve(danmus);
+        }
+    });
 }
