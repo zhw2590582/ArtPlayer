@@ -514,7 +514,8 @@ export default class Danmuku {
                         const distance = clientWidth + danmu.$ref.clientWidth;
 
                         // 计算弹幕的top值
-                        const { top } = await this.postMessage({
+                        const { result: top } = await this.postMessage({
+                            type: 'getDanmuTop',
                             target: {
                                 mode: danmu.mode,
                                 height: danmu.$ref.clientHeight,

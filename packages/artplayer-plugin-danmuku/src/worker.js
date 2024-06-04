@@ -129,10 +129,14 @@ function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom
 
 onmessage = (event) => {
     const { data } = event;
-    if (!data.id) return;
-    const top = getDanmuTop(data);
+    if (!data.id || !data.type) return;
+
+    const fns = { getDanmuTop };
+    const fn = fns[data.type];
+    const result = fn(data);
+
     self.postMessage({
-        top,
+        result,
         id: data.id,
     });
 };
