@@ -273,7 +273,7 @@ export default class Danmuku {
             } else if (typeof target === 'string') {
                 danmus = await bilibiliDanmuParseFromUrl(target); // 从B站xml链接解析
             } else if (Array.isArray(target)) {
-                danmus = [...target]; // 直接传入数组
+                danmus = target; // 直接传入数组
             }
 
             errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result');
@@ -302,7 +302,7 @@ export default class Danmuku {
         return this;
     }
 
-    // 把原始弹幕转换为实际弹幕
+    // 把原始弹幕转换到弹幕队列
     async emit(danmu) {
         const { clamp } = this.utils;
 
@@ -381,8 +381,10 @@ export default class Danmuku {
             (key) => JSON.stringify(this.option[key]) !== JSON.stringify(option[key]),
         );
 
+        // 没有变化则直接返回
         if (!changed) return this;
 
+        // 更新配置项
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
 
@@ -393,7 +395,7 @@ export default class Danmuku {
         this.option.maxLength = clamp(this.option.maxLength, 1, 1000);
         this.option.mount = this.option.mount || $controlsCenter;
 
-        // 重新计算弹幕字体大小，需要重新渲染
+        // 动态配置有字体大小，需要重新渲染
         if (option.fontSize) {
             this.reset();
         }
@@ -416,13 +418,14 @@ export default class Danmuku {
         return this.isRotate ? rect.top : rect.left;
     }
 
-    // 计算弹幕的top值
+    // 复杂运算交给 Web Worker 处理
     postMessage(message = {}) {
         return new Promise((resolve) => {
-            message.id = Date.now();
+            message.id = Date.now(); // 生成唯一标识
             this.worker.postMessage(message);
             this.worker.onmessage = (event) => {
                 const { data } = event;
+                // 判断是否是当前的消息
                 if (data.id === message.id) {
                     resolve(data);
                 }

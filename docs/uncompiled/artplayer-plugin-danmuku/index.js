@@ -418,9 +418,7 @@ class Danmuku {
             if (typeof target === "function") danmus = await target(); // 异步函数获取
             else if (target instanceof Promise) danmus = await target; // 从 Promise 对象获取
             else if (typeof target === "string") danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(target); // 从B站xml链接解析
-            else if (Array.isArray(target)) danmus = [
-                ...target
-            ]; // 直接传入数组
+            else if (Array.isArray(target)) danmus = target; // 直接传入数组
             errorHandle(Array.isArray(danmus), "Danmuku need return an array as result");
             // 假如没有传入弹幕参数，则清空弹幕，否则追加弹幕
             if (danmuku === undefined) {
@@ -447,7 +445,7 @@ class Danmuku {
         }
         return this;
     }
-    // 把原始弹幕转换为实际弹幕
+    // 把原始弹幕转换到弹幕队列
     async emit(danmu) {
         const { clamp } = this.utils;
         this.validator(danmu, {
@@ -503,7 +501,9 @@ class Danmuku {
         const { $controlsCenter } = this.art.template;
         // 判断配置项是否有变化
         const changed = Object.keys(option).some((key)=>JSON.stringify(this.option[key]) !== JSON.stringify(option[key]));
+        // 没有变化则直接返回
         if (!changed) return this;
+        // 更新配置项
         this.option = Object.assign({}, Danmuku.option, this.option, option);
         this.validator(this.option, Danmuku.scheme);
         this.option.mode = clamp(this.option.mode, 0, 2);
@@ -512,7 +512,7 @@ class Danmuku {
         this.option.lockTime = clamp(this.option.lockTime, 1, 60);
         this.option.maxLength = clamp(this.option.maxLength, 1, 1000);
         this.option.mount = this.option.mount || $controlsCenter;
-        // 重新计算弹幕字体大小，需要重新渲染
+        // 动态配置有字体大小，需要重新渲染
         if (option.fontSize) this.reset();
         // 通过配置项控制弹幕的显示和隐藏
         if (this.option.visible) this.show();
@@ -525,13 +525,14 @@ class Danmuku {
         const rect = $ref.getBoundingClientRect();
         return this.isRotate ? rect.top : rect.left;
     }
-    // 计算弹幕的top值
+    // 复杂运算交给 Web Worker 处理
     postMessage(message = {}) {
         return new Promise((resolve)=>{
-            message.id = Date.now();
+            message.id = Date.now(); // 生成唯一标识
             this.worker.postMessage(message);
             this.worker.onmessage = (event)=>{
                 const { data } = event;
+                // 判断是否是当前的消息
                 if (data.id === message.id) resolve(data);
             };
         });
