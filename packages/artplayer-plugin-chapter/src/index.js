@@ -179,7 +179,7 @@ export default function artplayerPluginChapter(option = {}) {
 
         return {
             name: 'artplayerPluginChapter',
-            update: (chapters) => update(chapters),
+            update: ({ chapters }) => update(chapters),
         };
     };
 }
