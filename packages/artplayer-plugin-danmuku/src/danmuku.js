@@ -283,7 +283,13 @@ export default class Danmuku {
 
             this.queue = []; // 清空实际弹幕队列
             this.$danmuku.innerText = ''; // 清空弹幕层
-            this.danmus.forEach((danmu) => this.emit(danmu)); // 逐个验证原始弹幕并转换为实际弹幕
+
+            // 逐个验证原始弹幕并转换为实际弹幕
+            for (let index = 0; index < this.danmus.length; index++) {
+                const danmu = this.danmus[index];
+                await this.emit(danmu);
+            }
+
             this.art.emit('artplayerPluginDanmuku:loaded', this.queue);
         } catch (error) {
             this.art.emit('artplayerPluginDanmuku:error', error);
@@ -294,7 +300,7 @@ export default class Danmuku {
     }
 
     // 把原始弹幕转换为实际弹幕
-    emit(danmu) {
+    async emit(danmu) {
         const { clamp } = this.utils;
 
         this.validator(danmu, {
