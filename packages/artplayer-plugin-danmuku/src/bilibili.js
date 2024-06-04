@@ -65,6 +65,7 @@ function createWorker() {
 }
 
 export function bilibiliDanmuParseFromUrl(url) {
+    // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve) => {
         const res = await fetch(url);
         const xml = await res.text();
@@ -78,6 +79,7 @@ export function bilibiliDanmuParseFromUrl(url) {
                 worker.terminate();
             };
             worker.postMessage({ xml, id: Date.now() });
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             const danmus = bilibiliDanmuParseFromXml(xml);
             resolve(danmus);

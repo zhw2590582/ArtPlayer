@@ -1,4 +1,4 @@
-import { setStyle, isMobile } from '../utils';
+import { setStyle } from '../utils';
 import { getPosFromEvent } from './progress';
 
 export default function thumbnails(options) {
