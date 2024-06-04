@@ -42,7 +42,7 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 ## 弹幕结构
 
-每一个弹幕是一个对象，多个弹幕组成的数组就是弹幕源，通常只需要`text`就可以发送一个弹幕，其余都是非必要参数
+每一个弹幕是一个对象，多个弹幕组成的数组就是弹幕库，通常只需要`text`就可以发送一个弹幕，其余都是非必要参数
 
 ```js
 {
@@ -371,7 +371,7 @@ var art = new Artplayer({
 
 ## `load`
 
-通过 load 方法可以重载弹幕源，或者切换新弹幕
+通过 load 方法可以重载弹幕库，或者切换新弹幕库，或者追加新的弹幕库
 
 <div className="run-code" data-libs="./uncompiled/artplayer-plugin-danmuku/index.js">
     ▶ Run Code
@@ -384,24 +384,36 @@ var art = new Artplayer({
     plugins: [
         artplayerPluginDanmuku({
             danmuku: '/assets/sample/danmuku.xml',
+            emitter: false,
         }),
     ],
     controls: [
         {
             position: 'right',
-            html: '重载弹幕',
+            html: '重载',
             click: function () {
+                // 重新加载当前弹幕库
                 art.plugins.artplayerPluginDanmuku.load();
             },
         },
         {
             position: 'right',
-            html: '切换弹幕',
+            html: '切换',
             click: function () {
+                // 切换到新的弹幕库
                 art.plugins.artplayerPluginDanmuku.config({
                     danmuku: '/assets/sample/danmuku-v2.xml',
                 });
                 art.plugins.artplayerPluginDanmuku.load();
+            },
+        },
+        {
+            position: 'right',
+            html: '追加',
+            click: function () {
+                // 追加新的弹幕库，参数类型和option.danmuku
+                const target = '/assets/sample/danmuku.xml'
+                art.plugins.artplayerPluginDanmuku.load(target);
             },
         },
     ],

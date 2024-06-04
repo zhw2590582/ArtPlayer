@@ -195,7 +195,6 @@ class Danmuku {
         this.$danmuku = template.$danmuku; // 弹幕层容器
         this.$player = template.$player; // 播放器容器
         this.art = art;
-        this.danmus = []; // 原始弹幕数据
         this.queue = []; // 实际弹幕队列
         this.$refs = []; // 弹幕DOM节点池
         this.isStop = false; // 是否停止
@@ -411,17 +410,36 @@ class Danmuku {
         return this.option.synchronousPlayback && this.art.playbackRate ? this.option.speed / Number(this.art.playbackRate) : this.option.speed;
     }
     // 加载弹幕
-    async load() {
+    async load(danmuku) {
         const { errorHandle } = this.utils;
+        let danmus = [];
+        const target = danmuku || this.option.danmuku;
         try {
-            if (typeof this.option.danmuku === "function") this.danmus = await this.option.danmuku();
-            else if (typeof this.option.danmuku.then === "function") this.danmus = await this.option.danmuku;
-            else if (typeof this.option.danmuku === "string") this.danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(this.option.danmuku);
-            else this.danmus = this.option.danmuku;
-            errorHandle(Array.isArray(this.danmus), "Danmuku need return an array as result");
-            this.queue = []; // 清空实际弹幕队列
-            this.$danmuku.innerText = ""; // 清空弹幕层
-            this.danmus.forEach((danmu)=>this.emit(danmu)); // 逐个验证原始弹幕并转换为实际弹幕
+            if (typeof target === "function") danmus = await target(); // 异步函数获取
+            else if (target instanceof Promise) danmus = await target; // 从 Promise 对象获取
+            else if (typeof target === "string") danmus = await (0, _bilibili.bilibiliDanmuParseFromUrl)(target); // 从B站xml链接解析
+            else if (Array.isArray(target)) danmus = [
+                ...target
+            ]; // 直接传入数组
+            errorHandle(Array.isArray(danmus), "Danmuku need return an array as result");
+            // 假如没有传入弹幕参数，则清空弹幕，否则追加弹幕
+            if (danmuku === undefined) {
+                this.reset(); // 重置弹幕
+                this.queue = []; // 清空弹幕队列
+                this.states = {
+                    wait: [],
+                    ready: [],
+                    emit: [],
+                    stop: []
+                }; // 清空弹幕状态池
+                this.$refs = []; // 清空弹幕DOM节点池
+                this.$danmuku.innerText = ""; // 清空弹幕层
+            }
+            // 逐个验证原始弹幕并转换到弹幕队列
+            for(let index = 0; index < danmus.length; index++){
+                const danmu = danmus[index];
+                await this.emit(danmu);
+            }
             this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
         } catch (error) {
             this.art.emit("artplayerPluginDanmuku:error", error);
@@ -430,7 +448,7 @@ class Danmuku {
         return this;
     }
     // 把原始弹幕转换为实际弹幕
-    emit(danmu) {
+    async emit(danmu) {
         const { clamp } = this.utils;
         this.validator(danmu, {
             text: "string",
@@ -1597,7 +1615,7 @@ function heatmap(art, danmuku, option) {
                 else {
                     const gap = art.duration / svg.w;
                     for(let x = 0; x <= svg.w; x += options.sampling){
-                        const y = danmuku.danmus.filter(({ time })=>time > x * gap && time <= (x + options.sampling) * gap).length;
+                        const y = danmuku.queue.filter(({ time })=>time > x * gap && time <= (x + options.sampling) * gap).length;
                         points.push([
                             x,
                             y

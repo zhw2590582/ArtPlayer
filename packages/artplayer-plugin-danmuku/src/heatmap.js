@@ -80,7 +80,7 @@ export default function heatmap(art, danmuku, option) {
                 } else {
                     const gap = art.duration / svg.w;
                     for (let x = 0; x <= svg.w; x += options.sampling) {
-                        const y = danmuku.danmus.filter(
+                        const y = danmuku.queue.filter(
                             ({ time }) => time > x * gap && time <= (x + options.sampling) * gap,
                         ).length;
                         points.push([x, y]);

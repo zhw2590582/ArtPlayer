@@ -4,6 +4,7 @@ export = artplayerPluginDanmuku;
 export as namespace artplayerPluginDanmuku;
 
 type Mode = 0 | 1 | 2;
+type Danmuku = Danmu[] | string | (() => Promise<Danmu[]>) | Promise<Danmu[]>;
 
 type Slider = {
     min: number;
@@ -51,7 +52,7 @@ type Option = {
     /**
      * 弹幕数据: 函数，数组，Promise，URL
      */
-    danmuku: Danmu[] | string | (() => Promise<Danmu[]>) | Promise<Danmu[]>;
+    danmuku: Danmuku;
 
     /**
      * 弹幕持续时间，范围在[1 ~ 10]
@@ -192,33 +193,33 @@ type Option = {
     COLOR?: string[];
 };
 
-type Danmuku = {
+type Result = {
     name: 'artplayerPluginDanmuku';
 
     /**
      * 发送一条实时弹幕
      */
-    emit: (danmu: Danmu) => Danmuku;
+    emit: (danmu: Danmu) => Result;
 
     /**
      * 重载弹幕源，或者切换新弹幕
      */
-    load: () => Promise<Danmuku>;
+    load: (danmuku?: Danmuku) => Promise<Result>;
 
     /**
      * 实时改变弹幕配置
      */
-    config: (option: Option) => Danmuku;
+    config: (option: Option) => Result;
 
     /**
      * 隐藏弹幕层
      */
-    hide: () => Danmuku;
+    hide: () => Result;
 
     /**
      * 显示弹幕层
      */
-    show: () => Danmuku;
+    show: () => Result;
 
     /**
      * 挂载弹幕输入框
@@ -228,7 +229,7 @@ type Danmuku = {
     /**
      * 重置弹幕
      */
-    reset: () => Danmuku;
+    reset: () => Result;
 
     /**
      * 弹幕配置
@@ -246,4 +247,4 @@ type Danmuku = {
     isStop: boolean;
 };
 
-declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Danmuku;
+declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Result;
