@@ -180,12 +180,12 @@ export default class Danmuku {
         const fontSize = this.option.fontSize;
 
         if (typeof fontSize === 'number') {
-            return clamp(fontSize, 12, clientHeight);
+            return Math.round(clamp(fontSize, 12, clientHeight));
         }
 
         if (typeof fontSize === 'string' && fontSize.endsWith('%')) {
             const ratio = parseFloat(fontSize) / 100;
-            return clamp(clientHeight * ratio, 12, clientHeight);
+            return Math.round(clamp(clientHeight * ratio, 12, clientHeight));
         }
 
         return Danmuku.option.fontSize;

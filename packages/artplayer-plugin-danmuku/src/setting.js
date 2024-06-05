@@ -27,7 +27,11 @@ export default class Setting {
             $mount: $controlsCenter,
             $danmuku: null,
             $toggle: null,
+            $config: null,
+            $configPanel: null,
             $configModes: null,
+            $style: null,
+            $stylePanel: null,
             $styleModes: null,
             $colors: null,
             $opacitySlider: null,
@@ -61,6 +65,20 @@ export default class Setting {
 
         art.on('fullscreen', (state) => this.onFullscreen(state));
         art.on('fullscreenWeb', (state) => this.onFullscreen(state));
+
+        art.proxy(this.template.$config, 'mouseenter', () => {
+            this.onMouseEnter({
+                $control: this.template.$config,
+                $panel: this.template.$configPanel,
+            });
+        });
+
+        art.proxy(this.template.$style, 'mouseenter', () => {
+            this.onMouseEnter({
+                $control: this.template.$style,
+                $panel: this.template.$stylePanel,
+            });
+        });
     }
 
     static get icons() {
@@ -306,7 +324,11 @@ export default class Setting {
 
         this.template.$danmuku = $danmuku;
         this.template.$toggle = this.query('.apd-toggle');
+        this.template.$config = this.query('.apd-config');
+        this.template.$configPanel = this.query('.apd-config-panel');
         this.template.$configModes = this.query('.apd-config-mode .apd-modes');
+        this.template.$style = this.query('.apd-style');
+        this.template.$stylePanel = this.query('.apd-style-panel');
         this.template.$styleModes = this.query('.apd-style-mode .apd-modes');
         this.template.$colors = this.query('.apd-colors');
         this.template.$antiOverlap = this.query('.apd-anti-overlap');
@@ -441,11 +463,12 @@ export default class Setting {
             ...this.FONT_SIZE,
             container: this.template.$fontSizeSlider,
             findIndex: () => {
-                return Math.round(this.danmuku.fontSize);
+                return this.danmuku.fontSize;
             },
             onChange: (index) => {
                 const { $fontSizeValue } = this.template;
                 $fontSizeValue.textContent = `${index}px`;
+                if (index === this.danmuku.fontSize) return;
                 this.danmuku.config({
                     fontSize: index,
                 });
@@ -541,6 +564,15 @@ export default class Setting {
                 $mount.appendChild($danmuku);
             }
         }
+    }
+
+    onMouseEnter({ $control, $panel }) {
+        const { $player } = this.art.template;
+        const controlRect = $control.getBoundingClientRect();
+        const panelRect = $panel.getBoundingClientRect();
+        const playerRect = $player.getBoundingClientRect();
+        const diff = Math.max(controlRect.right + panelRect.width / 2 - playerRect.right - controlRect.width / 2, 0);
+        $panel.style.left = `-${panelRect.width / 2 - controlRect.width / 2 + diff}px`;
     }
 
     async emit() {

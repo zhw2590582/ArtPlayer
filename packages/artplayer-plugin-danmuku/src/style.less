@@ -32,10 +32,11 @@
         .apd-config-panel {
             position: absolute;
             bottom: 24px;
-            left: -148px;
-            display: none;
+            left: 0;
             width: 320px;
             padding: 10px;
+            opacity: 0;
+            pointer-events: none;
 
             .apd-config-panel-inner {
                 width: 100%;
@@ -47,7 +48,8 @@
 
         &:hover {
             .apd-config-panel {
-                display: flex;
+                opacity: 100;
+                pointer-events: all;
             }
         }
     }
@@ -194,10 +196,11 @@
         .apd-style-panel {
             position: absolute;
             bottom: 24px;
-            left: -88px;
-            display: none;
+            left: 0;
             width: 200px;
             padding: 10px;
+            opacity: 0;
+            pointer-events: none;
 
             .apd-style-panel-inner {
                 width: 100%;
@@ -209,7 +212,8 @@
 
         &:hover {
             .apd-style-panel {
-                display: flex;
+                opacity: 100;
+                pointer-events: all;
             }
         }
     }
