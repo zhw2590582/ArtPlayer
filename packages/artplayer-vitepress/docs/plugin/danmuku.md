@@ -411,7 +411,7 @@ var art = new Artplayer({
             position: 'right',
             html: '追加',
             click: function () {
-                // 追加新的弹幕库，参数类型和option.danmuku
+                // 追加新的弹幕库，参数类型和option.danmuku相同
                 const target = '/assets/sample/danmuku.xml'
                 art.plugins.artplayerPluginDanmuku.load(target);
             },
