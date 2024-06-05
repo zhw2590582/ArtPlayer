@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   优化 `setBar` 事件
 -   新增 `artplayerPluginChapter` 插件
 -   新增 `art.plugins.artplayerPluginDanmuku.load(target)` 参数，用于追加弹幕库
+-   修复弹幕插件样式，和字号百分比显示的bug
 
 ## [5.1.4] - 2024-6-1
 
