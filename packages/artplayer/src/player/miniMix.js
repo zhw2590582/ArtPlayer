@@ -1,4 +1,4 @@
-import { append, setStyle, addClass, removeClass, hasClass, def, isInViewport, createElement } from '../utils';
+import { append, setStyle, addClass, removeClass, hasClass, def, isInViewport, createElement, getRect } from '../utils';
 
 export default function miniMix(art) {
     const {
@@ -77,7 +77,7 @@ export default function miniMix(art) {
                 if (isDroging) {
                     isDroging = false;
                     removeClass($mini, 'art-mini-droging');
-                    const rect = $mini.getBoundingClientRect();
+                    const rect = getRect($mini);
                     storage.set('left', rect.left);
                     storage.set('top', rect.top);
                     setStyle($mini, 'left', `${rect.left}px`);
@@ -92,7 +92,7 @@ export default function miniMix(art) {
 
     function initMini() {
         const { $mini } = art.template;
-        const rect = $mini.getBoundingClientRect();
+        const rect = getRect($mini);
         const top = window.innerHeight - rect.height - 50;
         const left = window.innerWidth - rect.width - 50;
         storage.set('top', top);

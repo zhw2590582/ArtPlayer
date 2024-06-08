@@ -8,6 +8,7 @@ import {
     def,
     has,
     append,
+    getRect,
     addClass,
     setStyle,
     isMobile,
@@ -399,8 +400,8 @@ export default class Setting extends Component {
 
         if (controls.setting && !isMobile) {
             const settingWidth = width || constructor.SETTING_WIDTH;
-            const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
-            const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
+            const { left: controlLeft, width: controlWidth } = getRect(controls.setting);
+            const { left: playerLeft, width: playerWidth } = getRect($player);
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
             if (settingLeft + settingWidth > playerWidth) {
                 setStyle($setting, 'left', null);

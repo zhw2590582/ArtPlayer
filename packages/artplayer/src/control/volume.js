@@ -1,4 +1,4 @@
-import { append, setStyle, isMobile } from '../utils';
+import { append, setStyle, isMobile, getRect } from '../utils';
 
 export default function volume(option) {
     return (art) => ({
@@ -17,7 +17,7 @@ export default function volume(option) {
             const $indicator = append($slider, `<div class="art-volume-indicator"></div>`);
 
             function getVolumeFromEvent(event) {
-                const { top, height } = $slider.getBoundingClientRect();
+                const { top, height } = getRect($slider);
                 return 1 - (event.clientY - top) / height;
             }
 

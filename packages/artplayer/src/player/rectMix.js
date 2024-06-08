@@ -1,9 +1,9 @@
-import { def } from '../utils';
+import { def, getRect } from '../utils';
 
 export default function rectMix(art) {
     def(art, 'rect', {
         get: () => {
-            return art.template.$player.getBoundingClientRect();
+            return getRect(art.template.$player);
         },
     });
 

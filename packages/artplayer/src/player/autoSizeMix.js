@@ -1,4 +1,4 @@
-import { setStyle, def } from '../utils';
+import { setStyle, def, getRect } from '../utils';
 
 export default function resizeMix(art) {
     const { $container, $player, $video } = art.template;
@@ -6,7 +6,7 @@ export default function resizeMix(art) {
     def(art, 'autoSize', {
         value() {
             const { videoWidth, videoHeight } = $video;
-            const { width, height } = $container.getBoundingClientRect();
+            const { width, height } = getRect($container);
             const videoRatio = videoWidth / videoHeight;
             const containerRatio = width / height;
             if (containerRatio > videoRatio) {

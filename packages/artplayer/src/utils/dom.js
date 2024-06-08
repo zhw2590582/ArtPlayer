@@ -113,3 +113,7 @@ export function supportsFlex() {
     div.style.display = 'flex';
     return div.style.display === 'flex';
 }
+
+export function getRect(el) {
+    return el.getBoundingClientRect();
+}

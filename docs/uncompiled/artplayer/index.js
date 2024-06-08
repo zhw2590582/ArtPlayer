@@ -666,6 +666,7 @@ parcelHelpers.export(exports, "createElement", ()=>createElement);
 parcelHelpers.export(exports, "getIcon", ()=>getIcon);
 parcelHelpers.export(exports, "setStyleText", ()=>setStyleText);
 parcelHelpers.export(exports, "supportsFlex", ()=>supportsFlex);
+parcelHelpers.export(exports, "getRect", ()=>getRect);
 var _compatibility = require("./compatibility");
 function query(selector, parent = document) {
     return parent.querySelector(selector);
@@ -754,6 +755,9 @@ function supportsFlex() {
     const div = document.createElement("div");
     div.style.display = "flex";
     return div.style.display === "flex";
+}
+function getRect(el) {
+    return el.getBoundingClientRect();
 }
 
 },{"./compatibility":"bRDYJ","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"bRDYJ":[function(require,module,exports) {
@@ -2184,7 +2188,7 @@ function resizeMix(art) {
     (0, _utils.def)(art, "autoSize", {
         value () {
             const { videoWidth, videoHeight } = $video;
-            const { width, height } = $container.getBoundingClientRect();
+            const { width, height } = (0, _utils.getRect)($container);
             const videoRatio = videoWidth / videoHeight;
             const containerRatio = width / height;
             if (containerRatio > videoRatio) {
@@ -2212,7 +2216,7 @@ var _utils = require("../utils");
 function rectMix(art) {
     (0, _utils.def)(art, "rect", {
         get: ()=>{
-            return art.template.$player.getBoundingClientRect();
+            return (0, _utils.getRect)(art.template.$player);
         }
     });
     const keys = [
@@ -2332,7 +2336,7 @@ function miniMix(art) {
                 if (isDroging) {
                     isDroging = false;
                     (0, _utils.removeClass)($mini, "art-mini-droging");
-                    const rect = $mini.getBoundingClientRect();
+                    const rect = (0, _utils.getRect)($mini);
                     storage.set("left", rect.left);
                     storage.set("top", rect.top);
                     (0, _utils.setStyle)($mini, "left", `${rect.left}px`);
@@ -2345,7 +2349,7 @@ function miniMix(art) {
     }
     function initMini() {
         const { $mini } = art.template;
-        const rect = $mini.getBoundingClientRect();
+        const rect = (0, _utils.getRect)($mini);
         const top = window.innerHeight - rect.height - 50;
         const left = window.innerWidth - rect.width - 50;
         storage.set("top", top);
@@ -3124,7 +3128,7 @@ parcelHelpers.export(exports, "default", ()=>progress);
 var _utils = require("../utils");
 function getPosFromEvent(art, event) {
     const { $progress } = art.template;
-    const { left } = $progress.getBoundingClientRect();
+    const { left } = (0, _utils.getRect)($progress);
     const eventLeft = (0, _utils.isMobile) ? event.touches[0].clientX : event.clientX;
     const width = (0, _utils.clamp)(eventLeft - left, 0, $progress.clientWidth);
     const second = width / $progress.clientWidth * art.duration;
@@ -3322,7 +3326,7 @@ function volume(option) {
                 const $loaded = (0, _utils.append)($handle, `<div class="art-volume-loaded"></div>`);
                 const $indicator = (0, _utils.append)($slider, `<div class="art-volume-indicator"></div>`);
                 function getVolumeFromEvent(event) {
-                    const { top, height } = $slider.getBoundingClientRect();
+                    const { top, height } = (0, _utils.getRect)($slider);
                     return 1 - (event.clientY - top) / height;
                 }
                 function update() {
@@ -3541,8 +3545,8 @@ class Contextmenu extends (0, _componentDefault.default) {
             this.show = true;
             const mouseX = event.clientX;
             const mouseY = event.clientY;
-            const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
-            const { height: mHeight, width: mWidth } = $contextmenu.getBoundingClientRect();
+            const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = (0, _utils.getRect)($player);
+            const { height: mHeight, width: mWidth } = (0, _utils.getRect)($contextmenu);
             let menuLeft = mouseX - cLeft;
             let menuTop = mouseY - cTop;
             if (mouseX + mWidth > cLeft + cWidth) menuLeft = cWidth - mWidth;
@@ -4781,8 +4785,8 @@ class Setting extends (0, _componentDefault.default) {
         const { controls, constructor, template: { $player, $setting } } = this.art;
         if (controls.setting && !(0, _utils.isMobile)) {
             const settingWidth = width || constructor.SETTING_WIDTH;
-            const { left: controlLeft, width: controlWidth } = controls.setting.getBoundingClientRect();
-            const { left: playerLeft, width: playerWidth } = $player.getBoundingClientRect();
+            const { left: controlLeft, width: controlWidth } = (0, _utils.getRect)(controls.setting);
+            const { left: playerLeft, width: playerWidth } = (0, _utils.getRect)($player);
             const settingLeft = controlLeft - playerLeft + controlWidth / 2 - settingWidth / 2;
             if (settingLeft + settingWidth > playerWidth) {
                 (0, _utils.setStyle)($setting, "left", null);

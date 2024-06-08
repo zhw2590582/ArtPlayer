@@ -1,4 +1,4 @@
-import { setStyles, includeFromEvent, isMobile } from '../utils';
+import { setStyles, includeFromEvent, isMobile, getRect } from '../utils';
 import Component from '../utils/component';
 import playbackRate from './playbackRate';
 import aspectRatio from './aspectRatio';
@@ -86,8 +86,8 @@ export default class Contextmenu extends Component {
 
             const mouseX = event.clientX;
             const mouseY = event.clientY;
-            const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = $player.getBoundingClientRect();
-            const { height: mHeight, width: mWidth } = $contextmenu.getBoundingClientRect();
+            const { height: cHeight, width: cWidth, left: cLeft, top: cTop } = getRect($player);
+            const { height: mHeight, width: mWidth } = getRect($contextmenu);
             let menuLeft = mouseX - cLeft;
             let menuTop = mouseY - cTop;
 
