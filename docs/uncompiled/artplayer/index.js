@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.1.5";
+        return "5.1.6";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2024-06-03 00:13:07";
+        return "2024-06-08 11:29:54";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1253,7 +1253,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.1.5"}</div>
+                  <div class="art-info-content">${"5.1.6"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -3449,7 +3449,7 @@ function thumbnails(options) {
         });
 }
 
-},{"../utils":"euhMG","./progress":"afGEi","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN","./progress":"afGEi"}],"lcqMk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>screenshot);
@@ -3679,7 +3679,7 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.5"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.6"}</a>`
     };
 }
 
