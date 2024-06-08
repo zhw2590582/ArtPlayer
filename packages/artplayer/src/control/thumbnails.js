@@ -1,5 +1,4 @@
-import { setStyle } from '../utils';
-import { getPosFromEvent } from './progress';
+import { setStyle, isMobile } from '../utils';
 
 export default function thumbnails(options) {
     return (art) => ({
@@ -7,17 +6,16 @@ export default function thumbnails(options) {
         mounted: ($control) => {
             const {
                 option,
+                events: { loadImg },
                 template: { $progress, $video },
-                events: { proxy, loadImg },
             } = art;
 
+            let timer = null;
             let image = null;
             let loading = false;
             let isLoad = false;
-            let isHover = false;
 
-            function showThumbnails(event) {
-                const { width: posWidth } = getPosFromEvent(art, event);
+            function showThumbnails(posWidth) {
                 const { url, number, column, width, height } = option.thumbnails;
                 const width2 = width || image.naturalWidth / column;
                 const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
@@ -38,29 +36,33 @@ export default function thumbnails(options) {
                 }
             }
 
-            proxy($progress, 'mousemove', async (event) => {
-                isHover = true;
-                if (!loading) {
-                    loading = true;
-                    const img = await loadImg(option.thumbnails.url);
-                    image = img;
-                    isLoad = true;
-                }
+            art.on('setBar', async (type, percentage) => {
+                if (type === 'hover' || (type === 'played' && isMobile)) {
+                    if (!loading) {
+                        loading = true;
+                        image = await loadImg(option.thumbnails.url);
+                        isLoad = true;
+                    }
 
-                if (isLoad && isHover) {
+                    if (!isLoad) return;
+
+                    const width = $progress.clientWidth * percentage;
                     setStyle($control, 'display', 'flex');
-                    showThumbnails(event);
-                }
-            });
 
-            proxy($progress, 'mouseleave', () => {
-                isHover = false;
-                setStyle($control, 'display', 'none');
-            });
+                    if (width > 0 && width < $progress.clientWidth) {
+                        showThumbnails(width);
+                    } else {
+                        if (!isMobile) {
+                            setStyle($control, 'display', 'none');
+                        }
+                    }
 
-            art.on('hover', (state) => {
-                if (!state) {
-                    setStyle($control, 'display', 'none');
+                    if (isMobile) {
+                        clearTimeout(timer);
+                        timer = setTimeout(() => {
+                            setStyle($control, 'display', 'none');
+                        }, 500);
+                    }
                 }
             });
         },

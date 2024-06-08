@@ -2784,7 +2784,7 @@ class Control extends (0, _componentDefault.default) {
             position: "top",
             index: 10
         }));
-        if (option.thumbnails.url && !option.isLive && !(0, _utils.isMobile)) this.add((0, _thumbnailsDefault.default)({
+        if (option.thumbnails.url && !option.isLive) this.add((0, _thumbnailsDefault.default)({
             name: "thumbnails",
             position: "top",
             index: 20
@@ -3398,18 +3398,16 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>thumbnails);
 var _utils = require("../utils");
-var _progress = require("./progress");
 function thumbnails(options) {
     return (art)=>({
             ...options,
             mounted: ($control)=>{
-                const { option, template: { $progress, $video }, events: { proxy, loadImg } } = art;
+                const { option, events: { loadImg }, template: { $progress, $video } } = art;
+                let timer = null;
                 let image = null;
                 let loading = false;
                 let isLoad = false;
-                let isHover = false;
-                function showThumbnails(event) {
-                    const { width: posWidth } = (0, _progress.getPosFromEvent)(art, event);
+                function showThumbnails(posWidth) {
                     const { url, number, column, width, height } = option.thumbnails;
                     const width2 = width || image.naturalWidth / column;
                     const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
@@ -3425,31 +3423,31 @@ function thumbnails(options) {
                     else if (posWidth > $progress.clientWidth - width2 / 2) (0, _utils.setStyle)($control, "left", `${$progress.clientWidth - width2}px`);
                     else (0, _utils.setStyle)($control, "left", `${posWidth - width2 / 2}px`);
                 }
-                proxy($progress, "mousemove", async (event)=>{
-                    isHover = true;
-                    if (!loading) {
-                        loading = true;
-                        const img = await loadImg(option.thumbnails.url);
-                        image = img;
-                        isLoad = true;
-                    }
-                    if (isLoad && isHover) {
+                art.on("setBar", async (type, percentage)=>{
+                    if (type === "hover" || type === "played" && (0, _utils.isMobile)) {
+                        if (!loading) {
+                            loading = true;
+                            image = await loadImg(option.thumbnails.url);
+                            isLoad = true;
+                        }
+                        if (!isLoad) return;
+                        const width = $progress.clientWidth * percentage;
                         (0, _utils.setStyle)($control, "display", "flex");
-                        showThumbnails(event);
+                        if (width > 0 && width < $progress.clientWidth) showThumbnails(width);
+                        else if (!(0, _utils.isMobile)) (0, _utils.setStyle)($control, "display", "none");
+                        if (0, _utils.isMobile) {
+                            clearTimeout(timer);
+                            timer = setTimeout(()=>{
+                                (0, _utils.setStyle)($control, "display", "none");
+                            }, 500);
+                        }
                     }
-                });
-                proxy($progress, "mouseleave", ()=>{
-                    isHover = false;
-                    (0, _utils.setStyle)($control, "display", "none");
-                });
-                art.on("hover", (state)=>{
-                    if (!state) (0, _utils.setStyle)($control, "display", "none");
                 });
             }
         });
 }
 
-},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN","./progress":"afGEi"}],"lcqMk":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>screenshot);

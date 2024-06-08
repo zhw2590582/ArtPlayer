@@ -81,7 +81,7 @@ export default class Control extends Component {
             );
         }
 
-        if (option.thumbnails.url && !option.isLive && !isMobile) {
+        if (option.thumbnails.url && !option.isLive) {
             this.add(
                 thumbnails({
                     name: 'thumbnails',
