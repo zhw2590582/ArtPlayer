@@ -51,4 +51,7 @@ export type Utils = {
     capitalize(str: string): string;
     isStringOrNumber(val: any): boolean;
     getIcon(key: string, html: string | HTMLElement): HTMLElement;
+    supportsFlex(): boolean;
+    setStyleText(element: HTMLElement, text: string): void;
+    getRect(el: HTMLElement): { top: number; left: number; width: number; height: number };
 };
