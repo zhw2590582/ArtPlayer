@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-06-08 11:29:54";
+        return "2024-06-08 17:29:16";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3196,38 +3196,39 @@ function progress(options) {
                     else if (width > $control.clientWidth - tipWidth / 2) (0, _utils.setStyle)($tip, "left", `${$control.clientWidth - tipWidth}px`);
                     else (0, _utils.setStyle)($tip, "left", `${width - tipWidth / 2}px`);
                 }
-                function setBar(type, percentage, event) {
-                    if (type === "loaded") (0, _utils.setStyle)($loaded, "width", `${percentage * 100}%`);
-                    if (type === "hover") (0, _utils.setStyle)($hover, "width", `${percentage * 100}%`);
-                    if (type === "played") {
-                        (0, _utils.setStyle)($played, "width", `${percentage * 100}%`);
-                        (0, _utils.setStyle)($indicator, "left", `${percentage * 100}%`);
-                        if ((0, _utils.isMobile) && event) {
-                            (0, _utils.setStyle)($tip, "display", "flex");
-                            const width = $control.clientWidth * percentage;
-                            const time = (0, _utils.secondToTime)(percentage * art.duration);
-                            showTime(event, {
-                                width,
-                                time
-                            });
-                            clearTimeout(tipTimer);
-                            tipTimer = setTimeout(()=>{
-                                (0, _utils.setStyle)($tip, "display", "none");
-                            }, 500);
-                        }
-                    }
-                }
-                art.on("video:loadedmetadata", ()=>{
+                function updateHighlight() {
+                    $highlight.innerText = "";
                     for(let index = 0; index < option.highlight.length; index++){
                         const item = option.highlight[index];
                         const left = (0, _utils.clamp)(item.time, 0, art.duration) / art.duration * 100;
                         const html = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`;
                         (0, _utils.append)($highlight, html);
                     }
-                });
-                art.on("setBar", (type, percentage, event)=>{
-                    setBar(type, percentage, event);
-                });
+                }
+                function setBar(type, percentage, event) {
+                    const isMobileDroging = type === "played" && event && (0, _utils.isMobile);
+                    if (type === "loaded") (0, _utils.setStyle)($loaded, "width", `${percentage * 100}%`);
+                    if (type === "hover") (0, _utils.setStyle)($hover, "width", `${percentage * 100}%`);
+                    if (type === "played") {
+                        (0, _utils.setStyle)($played, "width", `${percentage * 100}%`);
+                        (0, _utils.setStyle)($indicator, "left", `${percentage * 100}%`);
+                    }
+                    if (isMobileDroging) {
+                        (0, _utils.setStyle)($tip, "display", "flex");
+                        const width = $control.clientWidth * percentage;
+                        const time = (0, _utils.secondToTime)(percentage * art.duration);
+                        showTime(event, {
+                            width,
+                            time
+                        });
+                        clearTimeout(tipTimer);
+                        tipTimer = setTimeout(()=>{
+                            (0, _utils.setStyle)($tip, "display", "none");
+                        }, 500);
+                    }
+                }
+                art.on("setBar", setBar);
+                art.on("video:loadedmetadata", updateHighlight);
                 art.on("video:progress", ()=>{
                     art.emit("setBar", "loaded", art.loaded);
                 });

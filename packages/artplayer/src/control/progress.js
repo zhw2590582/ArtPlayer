@@ -84,7 +84,19 @@ export default function progress(options) {
                     }
                 }
 
+                function updateHighlight() {
+                    $highlight.innerText = '';
+                    for (let index = 0; index < option.highlight.length; index++) {
+                        const item = option.highlight[index];
+                        const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
+                        const html = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`;
+                        append($highlight, html);
+                    }
+                }
+
                 function setBar(type, percentage, event) {
+                    const isMobileDroging = type === 'played' && event && isMobile;
+
                     if (type === 'loaded') {
                         setStyle($loaded, 'width', `${percentage * 100}%`);
                     }
@@ -96,32 +108,22 @@ export default function progress(options) {
                     if (type === 'played') {
                         setStyle($played, 'width', `${percentage * 100}%`);
                         setStyle($indicator, 'left', `${percentage * 100}%`);
+                    }
 
-                        if (isMobile && event) {
-                            setStyle($tip, 'display', 'flex');
-                            const width = $control.clientWidth * percentage;
-                            const time = secondToTime(percentage * art.duration);
-                            showTime(event, { width, time });
-                            clearTimeout(tipTimer);
-                            tipTimer = setTimeout(() => {
-                                setStyle($tip, 'display', 'none');
-                            }, 500);
-                        }
+                    if (isMobileDroging) {
+                        setStyle($tip, 'display', 'flex');
+                        const width = $control.clientWidth * percentage;
+                        const time = secondToTime(percentage * art.duration);
+                        showTime(event, { width, time });
+                        clearTimeout(tipTimer);
+                        tipTimer = setTimeout(() => {
+                            setStyle($tip, 'display', 'none');
+                        }, 500);
                     }
                 }
 
-                art.on('video:loadedmetadata', () => {
-                    for (let index = 0; index < option.highlight.length; index++) {
-                        const item = option.highlight[index];
-                        const left = (clamp(item.time, 0, art.duration) / art.duration) * 100;
-                        const html = `<span data-text="${item.text}" data-time="${item.time}" style="left: ${left}%"></span>`;
-                        append($highlight, html);
-                    }
-                });
-
-                art.on('setBar', (type, percentage, event) => {
-                    setBar(type, percentage, event);
-                });
+                art.on('setBar', setBar);
+                art.on('video:loadedmetadata', updateHighlight);
 
                 art.on('video:progress', () => {
                     art.emit('setBar', 'loaded', art.loaded);
