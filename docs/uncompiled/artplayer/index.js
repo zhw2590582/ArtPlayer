@@ -3427,8 +3427,9 @@ function thumbnails(options) {
                     else if (posWidth > $progress.clientWidth - width2 / 2) (0, _utils.setStyle)($control, "left", `${$progress.clientWidth - width2}px`);
                     else (0, _utils.setStyle)($control, "left", `${posWidth - width2 / 2}px`);
                 }
-                art.on("setBar", async (type, percentage)=>{
-                    if (type === "hover" || type === "played" && (0, _utils.isMobile)) {
+                art.on("setBar", async (type, percentage, event)=>{
+                    const isMobileDroging = type === "played" && event && (0, _utils.isMobile);
+                    if (type === "hover" || isMobileDroging) {
                         if (!loading) {
                             loading = true;
                             image = await loadImg(option.thumbnails.url);
@@ -3439,7 +3440,7 @@ function thumbnails(options) {
                         (0, _utils.setStyle)($control, "display", "flex");
                         if (width > 0 && width < $progress.clientWidth) showThumbnails(width);
                         else if (!(0, _utils.isMobile)) (0, _utils.setStyle)($control, "display", "none");
-                        if (0, _utils.isMobile) {
+                        if (isMobileDroging) {
                             clearTimeout(timer);
                             timer = setTimeout(()=>{
                                 (0, _utils.setStyle)($control, "display", "none");

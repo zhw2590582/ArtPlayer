@@ -36,8 +36,10 @@ export default function thumbnails(options) {
                 }
             }
 
-            art.on('setBar', async (type, percentage) => {
-                if (type === 'hover' || (type === 'played' && isMobile)) {
+            art.on('setBar', async (type, percentage, event) => {
+                const isMobileDroging = type === 'played' && event && isMobile;
+
+                if (type === 'hover' || isMobileDroging) {
                     if (!loading) {
                         loading = true;
                         image = await loadImg(option.thumbnails.url);
@@ -57,7 +59,7 @@ export default function thumbnails(options) {
                         }
                     }
 
-                    if (isMobile) {
+                    if (isMobileDroging) {
                         clearTimeout(timer);
                         timer = setTimeout(() => {
                             setStyle($control, 'display', 'none');
