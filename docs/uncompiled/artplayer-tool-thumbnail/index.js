@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"gEVO5":[function(require,module,exports) {
+})({"1uFaH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _emitter = require("./emitter");
@@ -182,7 +182,7 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
     }
     setup(option = {}) {
         this.option = Object.assign({}, this.option, option);
-        const { fileInput , number , width , column  } = this.option;
+        const { fileInput, number, width, column } = this.option;
         this.errorHandle(fileInput instanceof Element, "The 'fileInput' is not a Element");
         if (!(fileInput.tagName === "INPUT" && fileInput.type === "file")) {
             fileInput.style.position = "relative";
@@ -242,7 +242,7 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
     }
     start() {
         if (!this.video.duration) return (0, _utils.sleep)(1000).then(()=>this.start());
-        const { width , number , begin , end  } = this.option;
+        const { width, number, begin, end } = this.option;
         const height = this.video.videoHeight / this.video.videoWidth * width;
         this.option.height = height;
         this.option.begin = (0, _utils.clamp)(begin, 0, this.video.duration);
@@ -283,7 +283,7 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
         });
     }
     creatScreenshotDate() {
-        const { number , width , height , column , begin  } = this.option;
+        const { number, width, height, column, begin } = this.option;
         const timeGap = this.duration / number;
         const timePoints = [
             begin + timeGap
@@ -299,7 +299,7 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
             }));
     }
     creatCanvas() {
-        const { number , width , height , column  } = this.option;
+        const { number, width, height, column } = this.option;
         const canvas = document.createElement("canvas");
         const context2D = canvas.getContext("2d");
         canvas.width = width * column;
@@ -343,7 +343,7 @@ class ArtplayerToolThumbnail extends (0, _emitterDefault.default) {
 exports.default = ArtplayerToolThumbnail;
 window["ArtplayerToolThumbnail"] = ArtplayerToolThumbnail;
 
-},{"./emitter":"2ZQK0","./utils":"5vF3n","@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"2ZQK0":[function(require,module,exports) {
+},{"./emitter":"lQHUa","./utils":"kMfwO","@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"lQHUa":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Emitter {
@@ -383,7 +383,7 @@ class Emitter {
 }
 exports.default = Emitter;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}],"8MjWm":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"kBreb":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -396,7 +396,7 @@ exports.defineInteropFlag = function(a) {
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -413,7 +413,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"5vF3n":[function(require,module,exports) {
+},{}],"kMfwO":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "sleep", ()=>sleep);
@@ -435,6 +435,6 @@ function clamp(num, a, b) {
     return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"8MjWm"}]},["gEVO5"], "gEVO5", "parcelRequire7b4c")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}]},["1uFaH"], "1uFaH", "parcelRequire94c2")
 
 //# sourceMappingURL=index.js.map

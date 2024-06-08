@@ -142,24 +142,25 @@
       this[globalName] = mainExports;
     }
   }
-})({"1gq8W":[function(require,module,exports) {
+})({"eYYuT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>artplayerPluginVttThumbnail);
 var _getVttArray = require("./getVttArray");
 var _getVttArrayDefault = parcelHelpers.interopDefault(_getVttArray);
 function artplayerPluginVttThumbnail(option) {
     return async (art)=>{
-        const { constructor: { utils: { setStyle , clamp  }  } , template: { $progress  } , events: { proxy  }  } = art;
-        const vttArray = await (0, _getVttArrayDefault.default)(option.vtt);
-        function getPosFromEvent(art, event) {
-            const { $progress  } = art.template;
-            const { left  } = $progress.getBoundingClientRect();
-            const width = clamp(event.pageX - left, 0, $progress.clientWidth);
-            const second = width / $progress.clientWidth * art.duration;
-            return {
-                width,
-                second
-            };
+        const { constructor: { utils: { setStyle, isMobile } }, template: { $progress } } = art;
+        let timer = null;
+        const thumbnails = await (0, _getVttArrayDefault.default)(option.vtt);
+        function showThumbnails($control, find, width) {
+            setStyle($control, "backgroundImage", `url(${find.url})`);
+            setStyle($control, "height", `${find.h}px`);
+            setStyle($control, "width", `${find.w}px`);
+            setStyle($control, "backgroundPosition", `-${find.x}px -${find.y}px`);
+            if (width <= find.w / 2) setStyle($control, "left", 0);
+            else if (width > $progress.clientWidth - find.w / 2) setStyle($control, "left", `${$progress.clientWidth - find.w}px`);
+            else setStyle($control, "left", `${width - find.w / 2}px`);
         }
         art.controls.add({
             name: "thumbnails",
@@ -167,24 +168,23 @@ function artplayerPluginVttThumbnail(option) {
             index: 20,
             style: option.style || {},
             mounted ($control) {
-                proxy($progress, "mousemove", async (event)=>{
-                    setStyle($control, "display", "block");
-                    const { second , width  } = getPosFromEvent(art, event);
-                    const find = vttArray.find((item)=>second >= item.start && second <= item.end);
-                    if (!find) return setStyle($control, "display", "none");
-                    setStyle($control, "backgroundImage", `url(${find.url})`);
-                    setStyle($control, "height", `${find.h}px`);
-                    setStyle($control, "width", `${find.w}px`);
-                    setStyle($control, "backgroundPosition", `-${find.x}px -${find.y}px`);
-                    if (width <= find.w / 2) setStyle($control, "left", 0);
-                    else if (width > $progress.clientWidth - find.w / 2) setStyle($control, "left", `${$progress.clientWidth - find.w}px`);
-                    else setStyle($control, "left", `${width - find.w / 2}px`);
-                });
-                proxy($progress, "mouseleave", ()=>{
-                    setStyle($control, "display", "none");
-                });
-                art.on("hover", (state)=>{
-                    if (!state) setStyle($control, "display", "none");
+                art.on("setBar", async (type, percentage, event)=>{
+                    const isMobileDroging = type === "played" && event && isMobile;
+                    if (type === "hover" || isMobileDroging) {
+                        const width = $progress.clientWidth * percentage;
+                        const second = percentage * art.duration;
+                        setStyle($control, "display", "flex");
+                        const find = thumbnails.find((item)=>second >= item.start && second <= item.end);
+                        if (!find) return setStyle($control, "display", "none");
+                        if (width > 0 && width < $progress.clientWidth) showThumbnails($control, find, width);
+                        else if (!isMobile) setStyle($control, "display", "none");
+                        if (isMobileDroging) {
+                            clearTimeout(timer);
+                            timer = setTimeout(()=>{
+                                setStyle($control, "display", "none");
+                            }, 500);
+                        }
+                    }
                 });
             }
         });
@@ -193,15 +193,12 @@ function artplayerPluginVttThumbnail(option) {
         };
     };
 }
-exports.default = artplayerPluginVttThumbnail;
-artplayerPluginVttThumbnail.env = "development";
-artplayerPluginVttThumbnail.version = "1.0.0";
-artplayerPluginVttThumbnail.build = "2023-04-23 09:57:46";
 if (typeof window !== "undefined") window["artplayerPluginVttThumbnail"] = artplayerPluginVttThumbnail;
 
-},{"./getVttArray":"gSM1I","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gSM1I":[function(require,module,exports) {
+},{"./getVttArray":"cKvoV","@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"cKvoV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>getVttArray);
 function padEnd(str, targetLength, padString) {
     if (str.length > targetLength) return String(str);
     else {
@@ -234,10 +231,14 @@ async function getVttArray(vttUrl = "") {
         const textMatch = text.match(textReg);
         const start = Math.floor(t2d(timeMatch[1]));
         const end = Math.floor(t2d(timeMatch[2]));
-        const urlArr = vttUrl.split("/");
-        urlArr.pop();
-        urlArr.push(textMatch[1]);
-        const url = urlArr.join("/");
+        let url = textMatch[1];
+        const isAbsoluteUrl = /^\/|((https?|ftp|file):\/\/)/i.test(url);
+        if (!isAbsoluteUrl) {
+            const urlArr = vttUrl.split("/");
+            urlArr.pop();
+            urlArr.push(url);
+            url = urlArr.join("/");
+        }
         const result = {
             start,
             end,
@@ -250,9 +251,8 @@ async function getVttArray(vttUrl = "") {
     }
     return vttArray;
 }
-exports.default = getVttArray;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"kBreb":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -265,7 +265,7 @@ exports.defineInteropFlag = function(a) {
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -282,6 +282,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["1gq8W"], "1gq8W", "parcelRequire4dc0")
+},{}]},["eYYuT"], "eYYuT", "parcelRequire94c2")
 
 //# sourceMappingURL=index.js.map

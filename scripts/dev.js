@@ -85,7 +85,6 @@ async function develop(name) {
             choices: Object.keys(projects).map((name) => ({
                 title: name,
                 value: name,
-                description: projects[name],
             })),
             initial: 0,
         });

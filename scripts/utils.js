@@ -16,6 +16,7 @@ export function formatDate(date) {
 export function getProjects() {
     return glob
         .sync('packages/*')
+        .sort()
         .filter((item) => !item.endsWith('artplayer-template') && !item.endsWith('artplayer-vitepress'))
         .reduce((result, item) => {
             const name = item.split(/\/|\\/g).pop();

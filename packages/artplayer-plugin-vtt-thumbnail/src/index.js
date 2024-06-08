@@ -4,20 +4,26 @@ export default function artplayerPluginVttThumbnail(option) {
     return async (art) => {
         const {
             constructor: {
-                utils: { setStyle, clamp },
+                utils: { setStyle, isMobile },
             },
             template: { $progress },
-            events: { proxy },
         } = art;
 
-        const vttArray = await getVttArray(option.vtt);
+        let timer = null;
+        const thumbnails = await getVttArray(option.vtt);
 
-        function getPosFromEvent(art, event) {
-            const { $progress } = art.template;
-            const { left } = $progress.getBoundingClientRect();
-            const width = clamp(event.pageX - left, 0, $progress.clientWidth);
-            const second = (width / $progress.clientWidth) * art.duration;
-            return { width, second };
+        function showThumbnails($control, find, width) {
+            setStyle($control, 'backgroundImage', `url(${find.url})`);
+            setStyle($control, 'height', `${find.h}px`);
+            setStyle($control, 'width', `${find.w}px`);
+            setStyle($control, 'backgroundPosition', `-${find.x}px -${find.y}px`);
+            if (width <= find.w / 2) {
+                setStyle($control, 'left', 0);
+            } else if (width > $progress.clientWidth - find.w / 2) {
+                setStyle($control, 'left', `${$progress.clientWidth - find.w}px`);
+            } else {
+                setStyle($control, 'left', `${width - find.w / 2}px`);
+            }
         }
 
         art.controls.add({
@@ -26,33 +32,31 @@ export default function artplayerPluginVttThumbnail(option) {
             index: 20,
             style: option.style || {},
             mounted($control) {
-                proxy($progress, 'mousemove', async (event) => {
-                    setStyle($control, 'display', 'block');
-                    const { second, width } = getPosFromEvent(art, event);
-                    const find = vttArray.find((item) => second >= item.start && second <= item.end);
-                    if (!find) return setStyle($control, 'display', 'none');
+                art.on('setBar', async (type, percentage, event) => {
+                    const isMobileDroging = type === 'played' && event && isMobile;
 
-                    setStyle($control, 'backgroundImage', `url(${find.url})`);
-                    setStyle($control, 'height', `${find.h}px`);
-                    setStyle($control, 'width', `${find.w}px`);
-                    setStyle($control, 'backgroundPosition', `-${find.x}px -${find.y}px`);
+                    if (type === 'hover' || isMobileDroging) {
+                        const width = $progress.clientWidth * percentage;
+                        const second = percentage * art.duration;
+                        setStyle($control, 'display', 'flex');
 
-                    if (width <= find.w / 2) {
-                        setStyle($control, 'left', 0);
-                    } else if (width > $progress.clientWidth - find.w / 2) {
-                        setStyle($control, 'left', `${$progress.clientWidth - find.w}px`);
-                    } else {
-                        setStyle($control, 'left', `${width - find.w / 2}px`);
-                    }
-                });
+                        const find = thumbnails.find((item) => second >= item.start && second <= item.end);
+                        if (!find) return setStyle($control, 'display', 'none');
 
-                proxy($progress, 'mouseleave', () => {
-                    setStyle($control, 'display', 'none');
-                });
+                        if (width > 0 && width < $progress.clientWidth) {
+                            showThumbnails($control, find, width);
+                        } else {
+                            if (!isMobile) {
+                                setStyle($control, 'display', 'none');
+                            }
+                        }
 
-                art.on('hover', (state) => {
-                    if (!state) {
-                        setStyle($control, 'display', 'none');
+                        if (isMobileDroging) {
+                            clearTimeout(timer);
+                            timer = setTimeout(() => {
+                                setStyle($control, 'display', 'none');
+                            }, 500);
+                        }
                     }
                 });
             },
