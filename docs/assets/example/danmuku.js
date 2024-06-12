@@ -25,6 +25,7 @@ var art = new Artplayer({
             synchronousPlayback: false, // 是否同步播放速度
             mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
             heatmap: true, // 是否开启热力图
+            width: 512, // 当播放器宽度小于此值时，弹幕发射器置于播放器底部
             points: [], // 热力图数据
             filter: (danmu) => danmu.text.length <= 100, // 弹幕载入前的过滤器
             beforeVisible: () => true, // 弹幕显示前的过滤器，返回 true 则可以发送
@@ -51,13 +52,3 @@ var art = new Artplayer({
         }),
     ],
 });
-
-// 在移动端或者播放器尺寸太小的时候，可以把弹幕发射器挂载到其他位置
-// if (Artplayer.utils.isMobile) {
-// 	art.plugins.artplayerPluginDanmuku.mount('.danmuku-emitter')
-// }
-
-// 弹幕已经出现在播放器里，你可以访问到弹幕的dom元素里
-// art.on('artplayerPluginDanmuku:visible', danmu => {
-//     danmu.$ref.innerHTML = 'ଘ(੭ˊᵕˋ)੭: ' + danmu.$ref.innerHTML;
-// })

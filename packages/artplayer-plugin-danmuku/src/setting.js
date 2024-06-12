@@ -63,6 +63,7 @@ export default class Setting {
 
         this.mount(this.option.mount);
 
+        art.on('resize', () => this.onResize());
         art.on('fullscreen', (state) => this.onFullscreen(state));
         art.on('fullscreenWeb', (state) => this.onFullscreen(state));
 
@@ -304,6 +305,13 @@ export default class Setting {
         const { query } = this.utils;
         const { $danmuku } = this.template;
         return query(selector, $danmuku);
+    }
+
+    append(el, target) {
+        const { append } = this.utils;
+        const children = [...el.children];
+        if (children.some((item) => item === target)) return;
+        append(el, target);
     }
 
     setData(key, value) {
@@ -556,13 +564,15 @@ export default class Setting {
     }
 
     onFullscreen(state) {
+        const { $danmuku, $controlsCenter, $mount } = this.template;
         if (this.outside) {
-            const { $danmuku, $controlsCenter, $mount } = this.template;
             if (state) {
-                $controlsCenter.appendChild($danmuku);
+                this.append($controlsCenter, $danmuku);
             } else {
-                $mount.appendChild($danmuku);
+                this.append($mount, $danmuku);
             }
+        } else {
+            this.append($controlsCenter, $danmuku);
         }
     }
 
@@ -642,6 +652,19 @@ export default class Setting {
         removeClass($send, 'apd-lock');
     }
 
+    onResize() {
+        if (this.outside) return;
+        if (this.art.fullscreen) return;
+        if (this.art.fullscreenWeb) return;
+        const { $player, $controlsCenter } = this.art.template;
+        const { $danmuku } = this.template;
+        if (this.art.width < this.option.width) {
+            this.append($player, $danmuku);
+        } else {
+            this.append($controlsCenter, $danmuku);
+        }
+    }
+
     reset() {
         const { inverseClass, tooltip } = this.utils;
         const { $toggle, $colors } = this.template;
@@ -671,7 +694,7 @@ export default class Setting {
 
     mount(target) {
         const $el = typeof target === 'string' ? document.querySelector(target) : target;
-        $el.appendChild(this.template.$danmuku);
+        this.append($el, this.template.$danmuku);
         this.template.$mount = $el;
         this.reset();
     }

@@ -301,6 +301,20 @@
     }
 }
 
+.art-video-player {
+    & > .artplayer-plugin-danmuku {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -40px;
+        padding: 0 10px;
+    }
+
+    &:has(> .artplayer-plugin-danmuku) {
+        margin-bottom: 40px;
+    }
+}
+
 [data-danmuku-emitter='false'] {
     .apd-emitter {
         display: none !important;
