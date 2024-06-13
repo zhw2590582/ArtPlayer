@@ -973,7 +973,7 @@ class Setting {
         this.createSliders();
         this.createEvents();
         this.mount(this.option.mount);
-        art.on("resize", ()=>this.onResize());
+        art.on("resize", ()=>this.resize());
         art.on("fullscreen", (state)=>this.onFullscreen(state));
         art.on("fullscreenWeb", (state)=>this.onFullscreen(state));
         art.proxy(this.template.$config, "mouseenter", ()=>{
@@ -1503,7 +1503,7 @@ class Setting {
         $send.innerText = "\u53D1\u9001";
         removeClass($send, "apd-lock");
     }
-    onResize() {
+    resize() {
         if (this.outside) return;
         if (this.art.fullscreen) return;
         if (this.art.fullscreenWeb) return;
@@ -1533,9 +1533,12 @@ class Setting {
         const $color = Array.from(colors).find((item)=>item.dataset.color === this.option.color.toUpperCase());
         $color && inverseClass($color, "apd-active");
         tooltip($toggle, this.option.visible ? "\u5173\u95ED\u5F39\u5E55" : "\u6253\u5F00\u5F39\u5E55");
+        this.resize();
     }
     mount(target) {
+        const { errorHandle } = this.utils;
         const $el = typeof target === "string" ? document.querySelector(target) : target;
+        errorHandle($el, `Can not find the mount point: ${target}`);
         this.append($el, this.template.$danmuku);
         this.template.$mount = $el;
         this.reset();
