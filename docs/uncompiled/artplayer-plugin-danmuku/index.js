@@ -1446,8 +1446,12 @@ class Setting {
         const controlRect = $control.getBoundingClientRect();
         const panelRect = $panel.getBoundingClientRect();
         const playerRect = $player.getBoundingClientRect();
-        const diff = Math.max(controlRect.right + panelRect.width / 2 - playerRect.right - controlRect.width / 2, 0);
-        $panel.style.left = `-${panelRect.width / 2 - controlRect.width / 2 + diff}px`;
+        const half = panelRect.width / 2 - controlRect.width / 2;
+        const left = playerRect.left - (controlRect.left - half);
+        const right = controlRect.right + half - playerRect.right;
+        if (left > 0) $panel.style.left = `${-half + left}px`;
+        else if (right > 0) $panel.style.left = `${-half - right}px`;
+        else $panel.style.left = `${-half}px`;
     }
     async emit() {
         const { $input } = this.template;
