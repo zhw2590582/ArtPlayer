@@ -28,7 +28,8 @@ export default class Danmuku {
         this.config(option);
 
         // 创建 Web Worker, 用于计算弹幕的 top 值
-        this.worker = new Worker(URL.createObjectURL(new Blob([workerText])));
+        const blob = new Blob([workerText], { type: 'application/javascript' });
+        this.worker = new Worker(URL.createObjectURL(blob));
 
         // 绑定公用事件
         this.start = this.start.bind(this);
