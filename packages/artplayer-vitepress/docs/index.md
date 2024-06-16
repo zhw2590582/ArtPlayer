@@ -40,15 +40,6 @@ https://unpkg.com/artplayer/dist/artplayer.js
 
 ::: code-group
 
-```js [index.js]
-import Artplayer from 'artplayer';
-
-const art = new Artplayer({
-    container: '.artplayer-app',
-    url: 'path/to/video.mp4',
-});
-```
-
 ```html [index.html]
 <html>
     <head>
@@ -63,6 +54,13 @@ const art = new Artplayer({
     </head>
     <body>
         <div class="artplayer-app"></div>
+        <script src="path/to/artplayer.js"></script>
+        <script>
+          const art = new Artplayer({
+              container: '.artplayer-app',
+              url: 'path/to/video.mp4',
+          });
+        </script>
     </body>
 </html>
 ```
