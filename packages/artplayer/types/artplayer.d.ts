@@ -42,6 +42,7 @@ declare class Artplayer extends Player {
     static readonly html: Artplayer['template']['html'];
     static readonly option: Option;
 
+    static STYLE: string;
     static DEBUG: boolean;
     static CONTEXTMENU: boolean;
     static NOTICE_TIME: number;

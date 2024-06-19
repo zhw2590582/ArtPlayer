@@ -212,6 +212,7 @@ export default class Artplayer extends Emitter {
     }
 }
 
+Artplayer.STYLE = style;
 Artplayer.DEBUG = false;
 Artplayer.CONTEXTMENU = true;
 Artplayer.NOTICE_TIME = 2000;
