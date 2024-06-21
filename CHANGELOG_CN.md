@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   新增 `Artplayer.STYLE` 属性，返回播放器样式文本
+
 ## [5.1.6] - 2024-6-15
 
 -   优化 `setBar` 事件

@@ -17,6 +17,16 @@ var art = new Artplayer({
 });
 ```
 
+## STYLE
+
+Returns the player style text
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+console.log(Artplayer.STYLE);
+```
+
 ## CONTEXTMENU
 
 Whether to enable the right-click context menu, enabled by default.

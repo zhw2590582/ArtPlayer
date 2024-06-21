@@ -17,6 +17,16 @@ var art = new Artplayer({
 });
 ```
 
+## STYLE
+
+返回播放器样式文本
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+console.log(Artplayer.STYLE);
+```
+
 ## CONTEXTMENU
 
 是否开启右键菜单，默认开启
