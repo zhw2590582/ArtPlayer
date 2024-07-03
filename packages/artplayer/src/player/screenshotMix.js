@@ -41,9 +41,10 @@ export default function screenshotMix(art) {
     });
 
     def(art, 'screenshot', {
-        value: async () => {
+        value: async (name) => {
             const dataUri = await art.getDataURL();
-            download(dataUri, `artplayer_${secondToTime($video.currentTime)}.png`);
+            const fileName = name || `artplayer_${secondToTime($video.currentTime)}`;
+            download(dataUri, `${fileName}.png`);
             art.emit('screenshot', dataUri);
             return dataUri;
         },
