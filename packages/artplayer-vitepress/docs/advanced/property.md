@@ -344,7 +344,7 @@ art.on('ready', () => {
 
 -   Type: `Function`
 
-下载当前视频帧的截图
+下载当前视频帧的截图, 可选参数为截图名字
 
 <div className="run-code">▶ Run Code</div>
 
@@ -355,7 +355,7 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    art.screenshot();
+    art.screenshot('your-name');
 });
 ```
 

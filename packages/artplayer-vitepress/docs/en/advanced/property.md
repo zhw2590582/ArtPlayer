@@ -338,7 +338,7 @@ Some videos do not have a duration, such as videos that are being live streamed 
 
 -   Type: `Function`
 
-Download a screenshot of the current video frame
+Download a screenshot of the current video frame, optional parameter is the screenshot name
 
 <div className="run-code">▶ Run Code</div>
 
@@ -349,9 +349,10 @@ var art = new Artplayer({
 });
 
 art.on('ready', () => {
-    art.screenshot();
+    art.screenshot('your-name');
 });
 ```
+
 ## `getDataURL`
 
 - Type: `Function`

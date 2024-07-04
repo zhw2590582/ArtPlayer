@@ -72,7 +72,7 @@ export declare class Player {
     switchQuality(url: string): Promise<void>;
     getDataURL(): Promise<string>;
     getBlobUrl(): Promise<string>;
-    screenshot(): Promise<string>;
+    screenshot(name?: string): Promise<string>;
     airplay(): void;
     autoSize(): void;
     autoHeight(): void;
