@@ -15,7 +15,7 @@ type Option = {
 
 type Result = {
     name: 'artplayerPluginChapter';
-    update: (chapters: Chapters) => void;
+    update: (option: Option) => void;
 };
 
 declare const artplayerPluginChapter: (option: Option) => (art: Artplayer) => Result;
