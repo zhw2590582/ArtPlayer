@@ -16,13 +16,23 @@ export default function thumbnails(options) {
             let isLoad = false;
 
             function showThumbnails(posWidth) {
-                const { url, number, column, width, height } = option.thumbnails;
+                const { url, number, column, width, height, interval } = option.thumbnails;
                 const width2 = width || image.naturalWidth / column;
                 const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
-                const perWidth = $progress.clientWidth / number;
-                const perIndex = Math.floor(posWidth / perWidth);
-                const yIndex = Math.ceil(perIndex / column) - 1;
-                const xIndex = perIndex % column || column - 1;
+
+                let perIndex, xIndex, yIndex;
+                if (interval === 0) {
+                    const perWidth = $progress.clientWidth / number;
+                    perIndex = Math.floor(posWidth / perWidth);
+                    yIndex = Math.ceil(perIndex / column) - 1;
+                    xIndex = perIndex % column || column - 1;
+                } else {
+                    const currentTime = $video.currentTime;
+                    perIndex = Math.floor(currentTime / interval);
+                    yIndex = Math.floor(perIndex / column);
+                    xIndex = perIndex % column;
+                }
+
                 setStyle($control, 'backgroundImage', `url(${url})`);
                 setStyle($control, 'height', `${height2}px`);
                 setStyle($control, 'width', `${width2}px`);
