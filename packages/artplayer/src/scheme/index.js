@@ -103,6 +103,7 @@ export default {
         column: n,
         width: n,
         height: n,
+        interval: n,
     },
     subtitle: {
         url: s,

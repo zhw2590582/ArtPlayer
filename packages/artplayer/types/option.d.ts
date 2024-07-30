@@ -253,6 +253,11 @@ export type Option = {
          * The thumbnail height
          */
         height?: number;
+
+        /**
+         * Interval between thumbnails in seconds
+         */
+        interval?: number;
     };
 
     /**
