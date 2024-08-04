@@ -171,6 +171,10 @@ const config = {
     [
       'link',
       { rel: "shortcut icon", href: "/document/favicon.ico" }
+    ],
+    [
+      'meta',
+      { name: 'google-adsense-account', content: 'ca-pub-8579453810848662' }
     ]
   ]
 }
