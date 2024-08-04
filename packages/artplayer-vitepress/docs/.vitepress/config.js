@@ -175,6 +175,10 @@ const config = {
     [
       'meta',
       { name: 'google-adsense-account', content: 'ca-pub-8579453810848662' }
+    ],
+    [
+      'script',
+      { async: true, src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662", crossorigin: "anonymous" }
     ]
   ]
 }
