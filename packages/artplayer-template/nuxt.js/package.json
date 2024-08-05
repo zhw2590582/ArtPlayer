@@ -7,7 +7,7 @@
         "preview": "nuxt preview"
     },
     "devDependencies": {
-        "nuxt": "3.0.0-rc.1"
+        "nuxt": "3.12.4"
     },
     "dependencies": {
         "artplayer": "latest"
