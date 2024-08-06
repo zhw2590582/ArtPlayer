@@ -51,6 +51,9 @@ export type Utils = {
     capitalize(str: string): string;
     isStringOrNumber(val: any): boolean;
     getIcon(key: string, html: string | HTMLElement): HTMLElement;
+    supportsFlex(): boolean;
+    setStyleText(element: HTMLElement, text: string): void;
+    getRect(el: HTMLElement): { top: number; left: number; width: number; height: number };
 };
 
 export type Template = {
@@ -295,7 +298,7 @@ export declare class Player {
     switchQuality(url: string): Promise<void>;
     getDataURL(): Promise<string>;
     getBlobUrl(): Promise<string>;
-    screenshot(): Promise<string>;
+    screenshot(name?: string): Promise<string>;
     airplay(): void;
     autoSize(): void;
     autoHeight(): void;
@@ -685,6 +688,8 @@ export type I18n = Record<I18nKeys, Partial<I18nValue>>;
 
 
 
+export type Bar = 'loaded' | 'played' | 'hover';
+
 export type Events = {
     'video:canplay': [event: Event];
     'video:canplaythrough': [event: Event];
@@ -749,6 +754,7 @@ export type Events = {
     subtitleOffset: [offset: number];
     restart: [url: string];
     muted: [state: boolean];
+    setBar: [type: Bar, percentage: number, event?: Event];
 };
 
 export type CssVar = {
@@ -1019,6 +1025,19 @@ export as namespace Artplayer;
 declare class Artplayer extends Player {
     constructor(option: Option, readyCallback?: (this: Artplayer, art: Artplayer) => unknown);
 
+    get Config(): Config;
+    get Events(): Events;
+    get Utils(): Utils;
+    get Player(): Player;
+    get Option(): Option;
+    get Subtitle(): Subtitle;
+    get Icons(): Icons;
+    get Template(): Template;
+    get I18n(): I18n;
+    get Setting(): Setting;
+    get SettingOption(): SettingOption;
+    get Component(): Component;
+
     static readonly instances: Artplayer[];
     static readonly version: string;
     static readonly env: string;
@@ -1032,6 +1051,7 @@ declare class Artplayer extends Player {
     static readonly html: Artplayer['template']['html'];
     static readonly option: Option;
 
+    static STYLE: string;
     static DEBUG: boolean;
     static CONTEXTMENU: boolean;
     static NOTICE_TIME: number;

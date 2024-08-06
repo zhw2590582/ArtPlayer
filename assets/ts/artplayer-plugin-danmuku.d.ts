@@ -4,6 +4,17 @@ export = artplayerPluginDanmuku;
 export as namespace artplayerPluginDanmuku;
 
 type Mode = 0 | 1 | 2;
+type Danmuku = Danmu[] | string | (() => Promise<Danmu[]>) | Promise<Danmu[]>;
+
+type Slider = {
+    min: number;
+    max: number;
+    steps: {
+        name?: string;
+        value?: any;
+        show?: boolean;
+    }[];
+};
 
 type Danmu = {
     /**
@@ -35,18 +46,13 @@ type Danmu = {
      * 弹幕自定义样式
      */
     style?: Partial<CSSStyleDeclaration>;
-
-    /**
-     * 弹幕文本是否转义, 默认为 true
-     */
-    escape?: boolean;
 };
 
 type Option = {
     /**
      * 弹幕数据: 函数，数组，Promise，URL
      */
-    danmuku: Danmu[] | string | (() => Promise<Danmu[]>) | Promise<Danmu[]>;
+    danmuku: Danmuku;
 
     /**
      * 弹幕持续时间，范围在[1 ~ 10]
@@ -117,6 +123,11 @@ type Option = {
           };
 
     /**
+     * 当播放器宽度小于此值时，弹幕发射器置于播放器底部
+     */
+    width?: number;
+
+    /**
      * 热力图数据
      */
     points?: any[];
@@ -142,6 +153,11 @@ type Option = {
     visible?: boolean;
 
     /**
+     * 是否开启弹幕发射器
+     */
+    emitter?: boolean;
+
+    /**
      * 弹幕输入框最大长度, 范围在[1 ~ 1000]
      */
     maxLength?: number;
@@ -155,35 +171,60 @@ type Option = {
      * 弹幕主题，只在自定义挂载时生效
      */
     theme?: 'light' | 'dark';
+
+    /**
+     * 不透明度配置项
+     */
+    OPACITY?: Slider;
+
+    /**
+     * 弹幕速度配置项
+     */
+    SPEED?: Slider;
+
+    /**
+     * 显示区域配置项
+     */
+    MARGIN?: Slider;
+
+    /**
+     * 弹幕字号配置项
+     */
+    FONT_SIZE?: Slider;
+
+    /**
+     * 颜色列表配置项
+     */
+    COLOR?: string[];
 };
 
-type Danmuku = {
+type Result = {
     name: 'artplayerPluginDanmuku';
 
     /**
      * 发送一条实时弹幕
      */
-    emit: (danmu: Danmu) => Danmuku;
+    emit: (danmu: Danmu) => Result;
 
     /**
      * 重载弹幕源，或者切换新弹幕
      */
-    load: () => Promise<Danmuku>;
+    load: (danmuku?: Danmuku) => Promise<Result>;
 
     /**
      * 实时改变弹幕配置
      */
-    config: (option: Option) => Danmuku;
+    config: (option: Option) => Result;
 
     /**
      * 隐藏弹幕层
      */
-    hide: () => Danmuku;
+    hide: () => Result;
 
     /**
      * 显示弹幕层
      */
-    show: () => Danmuku;
+    show: () => Result;
 
     /**
      * 挂载弹幕输入框
@@ -193,7 +234,7 @@ type Danmuku = {
     /**
      * 重置弹幕
      */
-    reset: () => Danmuku;
+    reset: () => Result;
 
     /**
      * 弹幕配置
@@ -211,4 +252,4 @@ type Danmuku = {
     isStop: boolean;
 };
 
-declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Danmuku;
+declare const artplayerPluginDanmuku: (option: Option) => (art: Artplayer) => Result;
