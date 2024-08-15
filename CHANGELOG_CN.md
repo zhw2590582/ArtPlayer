@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   新增 `Artplayer.STYLE` 属性，返回播放器样式文本
 -   `art.screenshot('your-name')` 截图功能支持自定义文件名字
 -   `Artplayer.CONTEXTMENU` 为 `false` 时，不再隐藏默认右键菜单
+-   新增 `art.thumbnails` 属性，用于动态设置 `thumbnails`
 
 ## [5.1.6] - 2024-6-15
 

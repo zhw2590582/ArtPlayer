@@ -30,6 +30,7 @@ import stateMix from './stateMix';
 import subtitleOffsetMix from './subtitleOffsetMix';
 import airplayMix from './airplayMix';
 import qualityMix from './qualityMix';
+import thumbnailsMix from './thumbnailsMix';
 import optionInit from './optionInit';
 import eventInit from './eventInit';
 
@@ -67,6 +68,7 @@ export default class Player {
         subtitleOffsetMix(art);
         airplayMix(art);
         qualityMix(art);
+        thumbnailsMix(art);
         eventInit(art);
         optionInit(art);
     }

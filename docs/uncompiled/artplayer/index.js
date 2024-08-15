@@ -236,13 +236,13 @@ class Artplayer extends (0, _emitterDefault.default) {
         return instances;
     }
     static get version() {
-        return "5.1.6";
+        return "5.1.7";
     }
     static get env() {
         return "development";
     }
     static get build() {
-        return "2024-06-08 17:29:16";
+        return "2024-08-15 22:21:54";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -352,6 +352,7 @@ class Artplayer extends (0, _emitterDefault.default) {
     }
 }
 exports.default = Artplayer;
+Artplayer.STYLE = (0, _indexLessDefault.default);
 Artplayer.DEBUG = false;
 Artplayer.CONTEXTMENU = true;
 Artplayer.NOTICE_TIME = 2000;
@@ -1257,7 +1258,7 @@ class Template {
               <div class="art-info-panel">
                 <div class="art-info-item">
                   <div class="art-info-title">Player version:</div>
-                  <div class="art-info-content">${"5.1.6"}</div>
+                  <div class="art-info-content">${"5.1.7"}</div>
                 </div>
                 <div class="art-info-item">
                   <div class="art-info-title">Video url:</div>
@@ -1467,6 +1468,8 @@ var _airplayMix = require("./airplayMix");
 var _airplayMixDefault = parcelHelpers.interopDefault(_airplayMix);
 var _qualityMix = require("./qualityMix");
 var _qualityMixDefault = parcelHelpers.interopDefault(_qualityMix);
+var _thumbnailsMix = require("./thumbnailsMix");
+var _thumbnailsMixDefault = parcelHelpers.interopDefault(_thumbnailsMix);
 var _optionInit = require("./optionInit");
 var _optionInitDefault = parcelHelpers.interopDefault(_optionInit);
 var _eventInit = require("./eventInit");
@@ -1505,13 +1508,14 @@ class Player {
         (0, _subtitleOffsetMixDefault.default)(art);
         (0, _airplayMixDefault.default)(art);
         (0, _qualityMixDefault.default)(art);
+        (0, _thumbnailsMixDefault.default)(art);
         (0, _eventInitDefault.default)(art);
         (0, _optionInitDefault.default)(art);
     }
 }
 exports.default = Player;
 
-},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./posterMix":"lglHp","./autoHeightMix":"58Y02","./cssVarMix":"fPbnY","./themeMix":"lga3g","./typeMix":"dnAFx","./stateMix":"8mwXw","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./qualityMix":"1L7ST","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"haOhz":[function(require,module,exports) {
+},{"./urlMix":"haOhz","./attrMix":"cSnpy","./playMix":"ftnB3","./pauseMix":"kDy9r","./toggleMix":"12BL6","./seekMix":"8x3vZ","./volumeMix":"lsF5V","./currentTimeMix":"75HaL","./durationMix":"5Ud6d","./switchMix":"emcjh","./playbackRateMix":"78DYM","./aspectRatioMix":"chjHL","./screenshotMix":"jDAYl","./fullscreenMix":"juJAD","./fullscreenWebMix":"5f725","./pipMix":"jWhCt","./loadedMix":"jhDPX","./playedMix":"3bU8P","./playingMix":"5Ctiw","./autoSizeMix":"6fRkJ","./rectMix":"lOJRK","./flipMix":"fSa7B","./miniMix":"fy4qC","./posterMix":"lglHp","./autoHeightMix":"58Y02","./cssVarMix":"fPbnY","./themeMix":"lga3g","./typeMix":"dnAFx","./stateMix":"8mwXw","./subtitleOffsetMix":"4Ny6z","./airplayMix":"gcYqJ","./qualityMix":"1L7ST","./optionInit":"vGIPW","./eventInit":"5D1O8","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN","./thumbnailsMix":"8B5I7"}],"haOhz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>urlMix);
@@ -2720,7 +2724,79 @@ function eventInit(art) {
     });
 }
 
-},{"../config":"1hSww","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"nK2ZQ":[function(require,module,exports) {
+},{"../config":"1hSww","../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8B5I7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>thumbnailsMix);
+var _utils = require("../utils");
+function thumbnailsMix(art) {
+    const { option, events: { loadImg }, template: { $progress, $video } } = art;
+    let timer = null;
+    let image = null;
+    let loading = false;
+    let isLoad = false;
+    function reset() {
+        clearTimeout(timer);
+        timer = null;
+        image = null;
+        loading = false;
+        isLoad = false;
+    }
+    function showThumbnails(posWidth) {
+        const $thumbnails = art.controls?.thumbnails;
+        if (!$thumbnails) return;
+        const { url, number, column, width, height } = option.thumbnails;
+        const width2 = width || image.naturalWidth / column;
+        const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
+        const perWidth = $progress.clientWidth / number;
+        const perIndex = Math.floor(posWidth / perWidth);
+        const yIndex = Math.ceil(perIndex / column) - 1;
+        const xIndex = perIndex % column || column - 1;
+        (0, _utils.setStyle)($thumbnails, "backgroundImage", `url(${url})`);
+        (0, _utils.setStyle)($thumbnails, "height", `${height2}px`);
+        (0, _utils.setStyle)($thumbnails, "width", `${width2}px`);
+        (0, _utils.setStyle)($thumbnails, "backgroundPosition", `-${xIndex * width2}px -${yIndex * height2}px`);
+        if (posWidth <= width2 / 2) (0, _utils.setStyle)($thumbnails, "left", 0);
+        else if (posWidth > $progress.clientWidth - width2 / 2) (0, _utils.setStyle)($thumbnails, "left", `${$progress.clientWidth - width2}px`);
+        else (0, _utils.setStyle)($thumbnails, "left", `${posWidth - width2 / 2}px`);
+    }
+    art.on("setBar", async (type, percentage, event)=>{
+        const $thumbnails = art.controls?.thumbnails;
+        if (!$thumbnails) return;
+        const isMobileDroging = type === "played" && event && (0, _utils.isMobile);
+        if (type === "hover" || isMobileDroging) {
+            if (!loading) {
+                loading = true;
+                image = await loadImg(option.thumbnails.url);
+                isLoad = true;
+            }
+            if (!isLoad) return;
+            const width = $progress.clientWidth * percentage;
+            (0, _utils.setStyle)($thumbnails, "display", "flex");
+            if (width > 0 && width < $progress.clientWidth) showThumbnails(width);
+            else if (!(0, _utils.isMobile)) (0, _utils.setStyle)($thumbnails, "display", "none");
+            if (isMobileDroging) {
+                clearTimeout(timer);
+                timer = setTimeout(()=>{
+                    (0, _utils.setStyle)($thumbnails, "display", "none");
+                }, 500);
+            }
+        }
+    });
+    (0, _utils.def)(art, "thumbnails", {
+        get () {
+            return art.option.thumbnails;
+        },
+        set (thumbnails) {
+            if (thumbnails.url && !art.option.isLive) {
+                art.option.thumbnails = thumbnails;
+                reset();
+            }
+        }
+    });
+}
+
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"nK2ZQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utils = require("../utils");
@@ -2788,7 +2864,7 @@ class Control extends (0, _componentDefault.default) {
             position: "top",
             index: 10
         }));
-        if (option.thumbnails.url && !option.isLive) this.add((0, _thumbnailsDefault.default)({
+        this.add((0, _thumbnailsDefault.default)({
             name: "thumbnails",
             position: "top",
             index: 20
@@ -3683,7 +3759,7 @@ parcelHelpers.export(exports, "default", ()=>version);
 function version(option) {
     return {
         ...option,
-        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.6"}</a>`
+        html: `<a href="https://artplayer.org" target="_blank">ArtPlayer ${"5.1.7"}</a>`
     };
 }
 
@@ -5114,6 +5190,22 @@ function autoOrientation(art) {
             (0, _utils.removeClass)($player, "art-auto-orientation");
             art.isRotate = false;
             art.emit("resize");
+        }
+    });
+    art.on("fullscreen", async (state)=>{
+        if (!screen?.orientation?.lock) return;
+        const lastOrientation = screen.orientation.type;
+        if (state) {
+            const { videoWidth, videoHeight } = $video;
+            const { clientWidth: viewWidth, clientHeight: viewHeight } = document.documentElement;
+            if (videoWidth > videoHeight && viewWidth < viewHeight || videoWidth < videoHeight && viewWidth > viewHeight) {
+                const oppositeOrientation = lastOrientation.startsWith("portrait") ? "landscape" : "portrait";
+                await screen.orientation.lock(oppositeOrientation);
+                (0, _utils.addClass)($player, "art-auto-orientation-fullscreen");
+            }
+        } else if ((0, _utils.hasClass)($player, "art-auto-orientation-fullscreen")) {
+            await screen.orientation.lock(lastOrientation);
+            (0, _utils.removeClass)($player, "art-auto-orientation-fullscreen");
         }
     });
     return {

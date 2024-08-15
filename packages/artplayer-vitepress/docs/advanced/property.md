@@ -941,3 +941,27 @@ art.on('ready', () => {
 	}, 3000);
 })
 ```
+
+## `thumbnails`
+
+-   Type: `Setter/Getter`
+-   Parameter: `Object`
+
+动态设置缩略图
+
+<div className="run-code">▶ Run Code</div>
+
+```js
+var art = new Artplayer({
+	container: '.artplayer-app',
+	url: '/assets/sample/video.mp4',
+});
+
+art.on('ready', () => {
+    art.thumbnails = {
+        url: '/assets/sample/thumbnails.png',
+        number: 60,
+        column: 10,
+    };
+});
+```
