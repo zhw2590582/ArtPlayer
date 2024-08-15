@@ -3478,58 +3478,16 @@ function setting(option) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>thumbnails);
-var _utils = require("../utils");
 function thumbnails(options) {
     return (art)=>({
             ...options,
-            mounted: ($control)=>{
-                const { option, events: { loadImg }, template: { $progress, $video } } = art;
-                let timer = null;
-                let image = null;
-                let loading = false;
-                let isLoad = false;
-                function showThumbnails(posWidth) {
-                    const { url, number, column, width, height } = option.thumbnails;
-                    const width2 = width || image.naturalWidth / column;
-                    const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
-                    const perWidth = $progress.clientWidth / number;
-                    const perIndex = Math.floor(posWidth / perWidth);
-                    const yIndex = Math.ceil(perIndex / column) - 1;
-                    const xIndex = perIndex % column || column - 1;
-                    (0, _utils.setStyle)($control, "backgroundImage", `url(${url})`);
-                    (0, _utils.setStyle)($control, "height", `${height2}px`);
-                    (0, _utils.setStyle)($control, "width", `${width2}px`);
-                    (0, _utils.setStyle)($control, "backgroundPosition", `-${xIndex * width2}px -${yIndex * height2}px`);
-                    if (posWidth <= width2 / 2) (0, _utils.setStyle)($control, "left", 0);
-                    else if (posWidth > $progress.clientWidth - width2 / 2) (0, _utils.setStyle)($control, "left", `${$progress.clientWidth - width2}px`);
-                    else (0, _utils.setStyle)($control, "left", `${posWidth - width2 / 2}px`);
-                }
-                art.on("setBar", async (type, percentage, event)=>{
-                    const isMobileDroging = type === "played" && event && (0, _utils.isMobile);
-                    if (type === "hover" || isMobileDroging) {
-                        if (!loading) {
-                            loading = true;
-                            image = await loadImg(option.thumbnails.url);
-                            isLoad = true;
-                        }
-                        if (!isLoad) return;
-                        const width = $progress.clientWidth * percentage;
-                        (0, _utils.setStyle)($control, "display", "flex");
-                        if (width > 0 && width < $progress.clientWidth) showThumbnails(width);
-                        else if (!(0, _utils.isMobile)) (0, _utils.setStyle)($control, "display", "none");
-                        if (isMobileDroging) {
-                            clearTimeout(timer);
-                            timer = setTimeout(()=>{
-                                (0, _utils.setStyle)($control, "display", "none");
-                            }, 500);
-                        }
-                    }
-                });
+            mounted: ()=>{
+                art.thumbnails = art.options.thumbnails;
             }
         });
 }
 
-},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>screenshot);
