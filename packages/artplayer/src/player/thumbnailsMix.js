@@ -46,14 +46,15 @@ export default function thumbnailsMix(art) {
 
     art.on('setBar', async (type, percentage, event) => {
         const $thumbnails = art.controls?.thumbnails;
-        if (!$thumbnails) return;
+        const { url } = option.thumbnails;
+        if (!$thumbnails || !url) return;
 
         const isMobileDroging = type === 'played' && event && isMobile;
 
         if (type === 'hover' || isMobileDroging) {
             if (!loading) {
                 loading = true;
-                image = await loadImg(option.thumbnails.url);
+                image = await loadImg(url);
                 isLoad = true;
             }
 

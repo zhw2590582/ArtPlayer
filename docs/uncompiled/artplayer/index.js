@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-08-15 22:21:54";
+        return "2024-08-15 23:01:30";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2762,12 +2762,13 @@ function thumbnailsMix(art) {
     }
     art.on("setBar", async (type, percentage, event)=>{
         const $thumbnails = art.controls?.thumbnails;
-        if (!$thumbnails) return;
+        const { url } = option.thumbnails;
+        if (!$thumbnails || !url) return;
         const isMobileDroging = type === "played" && event && (0, _utils.isMobile);
         if (type === "hover" || isMobileDroging) {
             if (!loading) {
                 loading = true;
-                image = await loadImg(option.thumbnails.url);
+                image = await loadImg(url);
                 isLoad = true;
             }
             if (!isLoad) return;
@@ -2818,8 +2819,6 @@ var _volume = require("./volume");
 var _volumeDefault = parcelHelpers.interopDefault(_volume);
 var _setting = require("./setting");
 var _settingDefault = parcelHelpers.interopDefault(_setting);
-var _thumbnails = require("./thumbnails");
-var _thumbnailsDefault = parcelHelpers.interopDefault(_thumbnails);
 var _screenshot = require("./screenshot");
 var _screenshotDefault = parcelHelpers.interopDefault(_screenshot);
 var _airplay = require("./airplay");
@@ -2864,11 +2863,11 @@ class Control extends (0, _componentDefault.default) {
             position: "top",
             index: 10
         }));
-        this.add((0, _thumbnailsDefault.default)({
+        this.add({
             name: "thumbnails",
             position: "top",
             index: 20
-        }));
+        });
         this.add((0, _playAndPauseDefault.default)({
             name: "playAndPause",
             position: "left",
@@ -2941,7 +2940,7 @@ class Control extends (0, _componentDefault.default) {
 }
 exports.default = Control;
 
-},{"../utils":"euhMG","../utils/component":"1UWqI","./fullscreen":"d7VBA","./fullscreenWeb":"iE4ux","./pip":"03ERY","./playAndPause":"2tuF0","./progress":"afGEi","./time":"e6eX5","./volume":"ezhk3","./setting":"3Vg4s","./thumbnails":"8AAYm","./screenshot":"lcqMk","./airplay":"4dMTc","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1UWqI":[function(require,module,exports) {
+},{"../utils":"euhMG","../utils/component":"1UWqI","./fullscreen":"d7VBA","./fullscreenWeb":"iE4ux","./pip":"03ERY","./playAndPause":"2tuF0","./progress":"afGEi","./time":"e6eX5","./volume":"ezhk3","./setting":"3Vg4s","./screenshot":"lcqMk","./airplay":"4dMTc","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"1UWqI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _dom = require("./dom");
@@ -3474,20 +3473,7 @@ function setting(option) {
         });
 }
 
-},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"8AAYm":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>thumbnails);
-function thumbnails(options) {
-    return (art)=>({
-            ...options,
-            mounted: ()=>{
-                art.thumbnails = art.options.thumbnails;
-            }
-        });
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
+},{"../utils":"euhMG","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"lcqMk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>screenshot);

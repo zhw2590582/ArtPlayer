@@ -8,7 +8,6 @@ import progress from './progress';
 import time from './time';
 import volume from './volume';
 import setting from './setting';
-import thumbnails from './thumbnails';
 import screenshot from './screenshot';
 import airplay from './airplay';
 
@@ -81,13 +80,11 @@ export default class Control extends Component {
             );
         }
 
-        this.add(
-            thumbnails({
-                name: 'thumbnails',
-                position: 'top',
-                index: 20,
-            }),
-        );
+        this.add({
+            name: 'thumbnails',
+            position: 'top',
+            index: 20,
+        });
 
         this.add(
             playAndPause({
