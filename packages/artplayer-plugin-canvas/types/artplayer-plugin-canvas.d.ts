@@ -1,14 +1,14 @@
 import type Artplayer from 'artplayer';
 
-export = artplayerPluginCanvas;
-export as namespace artplayerPluginCanvas;
+export = ArtplayerPluginCanvas;
+export as namespace ArtplayerPluginCanvas;
 
 type Option = {
     //
 };
 
 type Result = {
-    name: 'artplayerPluginCanvas';
+    name: 'ArtplayerPluginCanvas';
 };
 
-declare const artplayerPluginCanvas: (option: Option) => (art: Artplayer) => Result;
+declare const ArtplayerPluginCanvas: (option: Option) => (art: Artplayer) => Result;
