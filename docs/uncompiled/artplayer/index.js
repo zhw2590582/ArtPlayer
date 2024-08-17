@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-08-15 23:17:21";
+        return "2024-08-17 20:59:13";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -1318,6 +1318,12 @@ class Template {
         this.$infoPanel = this.query(".art-info-panel");
         this.$infoClose = this.query(".art-info-close");
         this.$contextmenu = this.query(".art-contextmenus");
+        if (option.Canvas) {
+            const $canvas = new option.Canvas(this.art);
+            (0, _utils.replaceElement)($canvas, this.$video);
+            (0, _utils.addClass)($canvas, "art-video");
+            this.$video = $canvas;
+        }
         if (option.backdrop) (0, _utils.addClass)(this.$player, "art-backdrop");
         if (0, _utils.isMobile) (0, _utils.addClass)(this.$player, "art-mobile");
     }

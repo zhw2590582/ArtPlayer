@@ -1,4 +1,4 @@
-import { supportsFlex, errorHandle, query, addClass, isMobile } from './utils';
+import { supportsFlex, errorHandle, query, addClass, isMobile, replaceElement } from './utils';
 
 export default class Template {
     constructor(art) {
@@ -123,6 +123,13 @@ export default class Template {
         this.$infoPanel = this.query('.art-info-panel');
         this.$infoClose = this.query('.art-info-close');
         this.$contextmenu = this.query('.art-contextmenus');
+
+        if (option.Canvas) {
+            const $canvas = new option.Canvas(this.art);
+            replaceElement($canvas, this.$video);
+            addClass($canvas, 'art-video');
+            this.$video = $canvas;
+        }
 
         if (option.backdrop) {
             addClass(this.$player, 'art-backdrop');
