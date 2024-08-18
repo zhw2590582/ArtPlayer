@@ -300,7 +300,7 @@ class Artplayer extends (0, _emitterDefault.default) {
             autoPlayback: false,
             autoOrientation: false,
             airplay: false,
-            proxy: null,
+            proxy: undefined,
             layers: [],
             contextmenu: [],
             controls: [],
@@ -1056,7 +1056,7 @@ exports.default = {
     autoPlayback: b,
     autoOrientation: b,
     airplay: b,
-    proxy: f,
+    proxy: `?${f}`,
     plugins: [
         f
     ],

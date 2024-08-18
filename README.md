@@ -106,7 +106,6 @@ var art = new Artplayer({
 -   [artplayer-plugin-chromecast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chromecast/index.js&example=chromecast)
 -   [artplayer-plugin-vast](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast) (WIP)
 -   [artplayer-plugin-chapter](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-chapter/index.js&example=chapter)
--   [artplayer-plugin-canvas](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-canvas/index.js&example=canvas) (WIP)
 
 ## Library
 
@@ -115,6 +114,11 @@ var art = new Artplayer({
 -   [flv.js](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js&example=flv)
 -   [mpegts.js](https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js&example=mpegts)
 -   [webtorrent.js](https://artplayer.org/?libs=https://cdn.jsdelivr.net/npm/webtorrent@1/webtorrent.min.js&example=webtorrent)
+
+## Proxys
+
+-   [WebAV](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-webav/index.js&example=webav) (WIP)
+-   [libmedia](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-libmedia/index.js&example=libmedia) (WIP)
 
 ## Changelog
 

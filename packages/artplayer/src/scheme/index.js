@@ -68,7 +68,7 @@ export default {
     autoPlayback: b,
     autoOrientation: b,
     airplay: b,
-    proxy: f,
+    proxy: `?${f}`,
     plugins: [f],
     layers: [ComponentOption],
     contextmenu: [ComponentOption],
