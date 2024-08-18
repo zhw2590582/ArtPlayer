@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+-   新增 `option.proxy` 属性，用于代理第三方的 `video` 和 `canvas`
+-   新增 `artplayer-proxy-webav` 代理
+-   新增 `artplayer-proxy-libmedia` 代理
+
+## [5.1.7] - 2024-8-15
+
 -   新增 `Artplayer.STYLE` 属性，返回播放器样式文本
 -   `art.screenshot('your-name')` 截图功能支持自定义文件名字
 -   `Artplayer.CONTEXTMENU` 为 `false` 时，不再隐藏默认右键菜单

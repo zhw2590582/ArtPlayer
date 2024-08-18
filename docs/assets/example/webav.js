@@ -1,3 +1,4 @@
+// From: https://github.com/bilibili/WebAV
 // npm i artplayer-proxy-webav
 // import artplayerProxyWebAV from 'artplayer-proxy-webav';
 
