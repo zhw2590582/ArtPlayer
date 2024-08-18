@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
--   新增 `option.proxy` 属性，用于代理第三方的 `video` 和 `canvas`
--   新增 `artplayer-proxy-webav` 代理
--   新增 `artplayer-proxy-libmedia` 代理
+-   新增 `option.proxy` 选项，用于代理第三方的 `video` 和 `canvas`
+-   新增 `artplayer-proxy-webav` 代理，来自 [bilibili/WebAV](https://github.com/bilibili/WebAV)
+-   新增 `artplayer-proxy-libmedia` 代理，来自 [zhaohappy/libmedia](https://github.com/zhaohappy/libmedia)
 
 ## [5.1.7] - 2024-8-15
 
