@@ -208,6 +208,11 @@ export type Option = {
     airplay?: boolean;
 
     /**
+     * Custom video element
+     */
+    video?: null | HTMLCanvasElement | HTMLVideoElement;
+
+    /**
      * Custom plugin list
      */
     plugins?: ((this: Artplayer, art: Artplayer) => unknown)[];

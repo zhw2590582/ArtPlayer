@@ -14,6 +14,13 @@ function validElement(value, type, paths) {
     );
 }
 
+function validVideo(value, _type, paths) {
+    return errorHandle(
+        value === null || value instanceof HTMLCanvasElement || value instanceof HTMLVideoElement,
+        `${paths.join('.')} require 'HTMLVideoElement' or 'HTMLCanvasElement' type`,
+    );
+}
+
 export const ComponentOption = {
     html: validElement,
     disable: `?${b}`,
@@ -68,6 +75,7 @@ export default {
     autoPlayback: b,
     autoOrientation: b,
     airplay: b,
+    video: validVideo,
     plugins: [f],
     layers: [ComponentOption],
     contextmenu: [ComponentOption],

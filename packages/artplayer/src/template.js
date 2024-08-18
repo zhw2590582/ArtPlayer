@@ -124,11 +124,10 @@ export default class Template {
         this.$infoClose = this.query('.art-info-close');
         this.$contextmenu = this.query('.art-contextmenus');
 
-        if (option.Canvas) {
-            const $canvas = new option.Canvas(this.art);
-            replaceElement($canvas, this.$video);
-            addClass($canvas, 'art-video');
-            this.$video = $canvas;
+        if (option.video) {
+            replaceElement(option.video, this.$video);
+            addClass(option.video, 'art-video');
+            this.$video = option.video;
         }
 
         if (option.backdrop) {
