@@ -300,7 +300,7 @@ class Artplayer extends (0, _emitterDefault.default) {
             autoPlayback: false,
             autoOrientation: false,
             airplay: false,
-            video: null,
+            proxy: null,
             layers: [],
             contextmenu: [],
             controls: [],
@@ -1003,9 +1003,6 @@ const f = "function";
 function validElement(value, type, paths) {
     return (0, _utils.errorHandle)(type === s || type === n || value instanceof Element, `${paths.join(".")} require '${s}' or 'Element' type`);
 }
-function validVideo(value, _type, paths) {
-    return (0, _utils.errorHandle)(value === null || value instanceof HTMLCanvasElement || value instanceof HTMLVideoElement, `${paths.join(".")} require 'HTMLVideoElement' or 'HTMLCanvasElement' type`);
-}
 const ComponentOption = {
     html: validElement,
     disable: `?${b}`,
@@ -1059,7 +1056,7 @@ exports.default = {
     autoPlayback: b,
     autoOrientation: b,
     airplay: b,
-    video: validVideo,
+    proxy: f,
     plugins: [
         f
     ],
@@ -1323,10 +1320,12 @@ class Template {
         this.$infoPanel = this.query(".art-info-panel");
         this.$infoClose = this.query(".art-info-close");
         this.$contextmenu = this.query(".art-contextmenus");
-        if (option.video) {
-            (0, _utils.replaceElement)(option.video, this.$video);
-            (0, _utils.addClass)(option.video, "art-video");
-            this.$video = option.video;
+        if (option.proxy) {
+            const video = option.proxy.call(this.art, this.art);
+            (0, _utils.errorHandle)(video instanceof HTMLVideoElement || video instanceof HTMLCanvasElement, `Function 'option.proxy' needs to return 'HTMLVideoElement' or 'HTMLCanvasElement'`);
+            (0, _utils.replaceElement)(video, this.$video);
+            video.className = "art-video";
+            this.$video = video;
         }
         if (option.backdrop) (0, _utils.addClass)(this.$player, "art-backdrop");
         if (0, _utils.isMobile) (0, _utils.addClass)(this.$player, "art-mobile");

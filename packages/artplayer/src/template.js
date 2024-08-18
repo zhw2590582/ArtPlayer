@@ -124,10 +124,15 @@ export default class Template {
         this.$infoClose = this.query('.art-info-close');
         this.$contextmenu = this.query('.art-contextmenus');
 
-        if (option.video) {
-            replaceElement(option.video, this.$video);
-            addClass(option.video, 'art-video');
-            this.$video = option.video;
+        if (option.proxy) {
+            const video = option.proxy.call(this.art, this.art);
+            errorHandle(
+                video instanceof HTMLVideoElement || video instanceof HTMLCanvasElement,
+                `Function 'option.proxy' needs to return 'HTMLVideoElement' or 'HTMLCanvasElement'`,
+            );
+            replaceElement(video, this.$video);
+            video.className = 'art-video';
+            this.$video = video;
         }
 
         if (option.backdrop) {
