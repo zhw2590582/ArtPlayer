@@ -9,11 +9,7 @@ export default function seekMix(art) {
 
     def(art, 'loadedTime', {
         get: () => {
-            if (typeof $video.loadedTime === 'number') {
-                return $video.loadedTime;
-            } else {
-                return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
-            }
+            return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
         },
     });
 }

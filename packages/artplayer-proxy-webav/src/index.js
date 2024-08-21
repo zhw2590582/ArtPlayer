@@ -20,7 +20,6 @@ export default function artplayerProxyWebAV() {
             videoWidth: 0,
             videoHeight: 0,
             currentTime: 0,
-            loadedTime: 0,
             volume: 1,
             autoplay: false,
             playbackRate: 1,
@@ -28,6 +27,7 @@ export default function artplayerProxyWebAV() {
             ended: false,
             readyState: 0,
             muted: false,
+            buffered: 0,
         };
 
         function reset() {
@@ -37,7 +37,6 @@ export default function artplayerProxyWebAV() {
                 videoWidth: 0,
                 videoHeight: 0,
                 currentTime: 0,
-                loadedTime: 0,
                 volume: 1,
                 autoplay: false,
                 playbackRate: 1,
@@ -45,6 +44,7 @@ export default function artplayerProxyWebAV() {
                 ended: false,
                 readyState: 0,
                 muted: false,
+                buffered: 0,
             });
         }
 
@@ -84,7 +84,11 @@ export default function artplayerProxyWebAV() {
                 curTime += (1000 / 30) * 1000 * state.playbackRate;
                 state.currentTime = curTime / 1e6;
 
+                // 更新缓冲状态
+                state.buffered = Math.max(state.buffered, state.currentTime);
+
                 art.emit('video:timeupdate', { type: 'timeupdate' });
+                art.emit('video:progress', { type: 'progress' });
 
                 if (clipState === 'done') {
                     stop();
@@ -181,10 +185,6 @@ export default function artplayerProxyWebAV() {
             get: () => [{}],
         });
 
-        def(canvas, 'loadedTime', {
-            get: () => state.loadedTime,
-        });
-
         def(canvas, 'duration', {
             get: () => state.duration,
         });
@@ -276,6 +276,14 @@ export default function artplayerProxyWebAV() {
                 updateVolume();
                 art.emit('video:volumechange', { type: 'volumechange' });
             },
+        });
+
+        def(canvas, 'buffered', {
+            get: () => ({
+                start: () => 0,
+                end: () => state.buffered,
+                length: 1,
+            }),
         });
 
         // Define methods
