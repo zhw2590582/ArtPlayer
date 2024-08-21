@@ -22,14 +22,14 @@ export default function artplayerProxyWebAV() {
             videoWidth: 0,
             videoHeight: 0,
             currentTime: 0,
-            volume: 1,
-            autoplay: false,
             playbackRate: 1,
             paused: true,
             ended: false,
             readyState: 0,
-            muted: false,
             buffered: 0,
+            muted: option.muted,
+            volume: option.volume,
+            autoplay: option.autoplay,
         };
 
         function reset() {
@@ -39,14 +39,14 @@ export default function artplayerProxyWebAV() {
                 videoWidth: 0,
                 videoHeight: 0,
                 currentTime: 0,
-                volume: 1,
-                autoplay: false,
                 playbackRate: 1,
                 paused: true,
                 ended: false,
                 readyState: 0,
-                muted: false,
                 buffered: 0,
+                muted: option.muted,
+                volume: option.volume,
+                autoplay: option.autoplay,
             });
         }
 
@@ -63,6 +63,7 @@ export default function artplayerProxyWebAV() {
 
         function updateVolume() {
             if (gainNode) {
+                console.log('updateVolume', state.volume);
                 const effectiveVolume = state.muted ? 0 : state.volume;
                 gainNode.gain.setValueAtTime(effectiveVolume, audioCtx.currentTime);
             }
