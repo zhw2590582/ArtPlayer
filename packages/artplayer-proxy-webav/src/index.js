@@ -63,7 +63,6 @@ export default function artplayerProxyWebAV() {
 
         function updateVolume() {
             if (gainNode) {
-                console.log('updateVolume', state.volume);
                 const effectiveVolume = state.muted ? 0 : state.volume;
                 gainNode.gain.setValueAtTime(effectiveVolume, audioCtx.currentTime);
             }

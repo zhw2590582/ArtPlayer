@@ -5,7 +5,6 @@
 var art = new Artplayer({
     container: '.artplayer-app',
     url: '/assets/sample/frag_bunny.mp4',
-    autoSize: true,
     proxy: artplayerProxyWebAV({
         //
     }),
