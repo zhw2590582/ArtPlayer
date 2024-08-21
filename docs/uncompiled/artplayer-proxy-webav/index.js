@@ -276,6 +276,26 @@ function artplayerProxyWebAV() {
                 video.close();
             }
         }
+        function resize() {
+            const player = art.template?.$player;
+            if (!player || option.autoSize) return;
+            const aspectRatio = canvas.videoWidth / canvas.videoHeight;
+            const containerWidth = player.clientWidth;
+            const containerHeight = player.clientHeight;
+            const containerRatio = containerWidth / containerHeight;
+            let paddingLeft = 0;
+            let paddingTop = 0;
+            if (containerRatio > aspectRatio) {
+                const canvasWidth = containerHeight * aspectRatio;
+                paddingLeft = (containerWidth - canvasWidth) / 2;
+            } else {
+                const canvasHeight = containerWidth / aspectRatio;
+                paddingTop = (containerHeight - canvasHeight) / 2;
+            }
+            Object.assign(canvas.style, {
+                padding: `${paddingTop}px ${paddingLeft}px`
+            });
+        }
         async function init() {
             stop();
             reset();
@@ -310,6 +330,7 @@ function artplayerProxyWebAV() {
             canvas.width = state.videoWidth;
             canvas.height = state.videoHeight;
             await preview(0.1);
+            resize();
             art.emit("video:loadedmetadata", {
                 type: "loadedmetadata"
             });
@@ -444,6 +465,7 @@ function artplayerProxyWebAV() {
             stop();
             if (clip) clip.destroy();
         });
+        art.on("resize", resize);
         return canvas;
     };
 }

@@ -7,6 +7,7 @@ export default function artplayerProxyWebAV() {
 
         const canvas = createElement('canvas');
         const ctx = canvas.getContext('2d');
+
         let audioCtx;
         let gainNode;
 
@@ -149,6 +150,31 @@ export default function artplayerProxyWebAV() {
             }
         }
 
+        function resize() {
+            const player = art.template?.$player;
+            if (!player || option.autoSize) return;
+
+            const aspectRatio = canvas.videoWidth / canvas.videoHeight;
+            const containerWidth = player.clientWidth;
+            const containerHeight = player.clientHeight;
+            const containerRatio = containerWidth / containerHeight;
+
+            let paddingLeft = 0;
+            let paddingTop = 0;
+
+            if (containerRatio > aspectRatio) {
+                const canvasWidth = containerHeight * aspectRatio;
+                paddingLeft = (containerWidth - canvasWidth) / 2;
+            } else {
+                const canvasHeight = containerWidth / aspectRatio;
+                paddingTop = (containerHeight - canvasHeight) / 2;
+            }
+
+            Object.assign(canvas.style, {
+                padding: `${paddingTop}px ${paddingLeft}px`,
+            });
+        }
+
         async function init() {
             stop();
             reset();
@@ -186,6 +212,7 @@ export default function artplayerProxyWebAV() {
             canvas.width = state.videoWidth;
             canvas.height = state.videoHeight;
             await preview(0.1);
+            resize();
 
             art.emit('video:loadedmetadata', { type: 'loadedmetadata' });
             art.emit('video:durationchange', { type: 'durationchange' });
@@ -325,6 +352,8 @@ export default function artplayerProxyWebAV() {
                 clip.destroy();
             }
         });
+
+        art.on('resize', resize);
 
         return canvas;
     };
