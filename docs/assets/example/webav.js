@@ -4,7 +4,7 @@
 
 var art = new Artplayer({
     container: '.artplayer-app',
-    url: '/assets/sample/frag_bunny.mp4',
+    url: '/assets/sample/bbb-video.mp4',
     volume: 0.5,
     autoplay: false,
     autoSize: false,
@@ -18,6 +18,13 @@ var art = new Artplayer({
     fullscreenWeb: true,
     miniProgressBar: true,
     autoPlayback: true,
+    thumbnails: {
+        url: '/assets/sample/bbb-sprite.jpg',
+        number: 121,
+        column: 11,
+        width: 128,
+        height: 72,
+    },
     proxy: artplayerProxyWebAV({
         //
     }),

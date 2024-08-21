@@ -297,6 +297,11 @@ function artplayerProxyWebAV() {
             });
         }
         async function init() {
+            const isSupported = await (0, _avCliper.Combinator).isSupported();
+            if (!isSupported) {
+                art.notice.show = "WebAV is not supported";
+                throw new Error("WebAV is not supported");
+            }
             stop();
             reset();
             if (clip) {

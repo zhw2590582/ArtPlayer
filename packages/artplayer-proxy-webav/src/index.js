@@ -1,4 +1,4 @@
-import { MP4Clip } from '@webav/av-cliper';
+import { MP4Clip, Combinator } from '@webav/av-cliper';
 
 export default function artplayerProxyWebAV() {
     return (art) => {
@@ -176,6 +176,13 @@ export default function artplayerProxyWebAV() {
         }
 
         async function init() {
+            const isSupported = await Combinator.isSupported();
+
+            if (!isSupported) {
+                art.notice.show = 'WebAV is not supported';
+                throw new Error('WebAV is not supported');
+            }
+
             stop();
             reset();
 
