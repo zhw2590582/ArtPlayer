@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-08-21 20:57:21";
+        return "2024-08-21 23:07:53";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -2166,8 +2166,7 @@ function seekMix(art) {
     });
     (0, _utils.def)(art, "loadedTime", {
         get: ()=>{
-            if (typeof $video.loadedTime === "number") return $video.loadedTime;
-            else return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
+            return $video.buffered.length ? $video.buffered.end($video.buffered.length - 1) : 0;
         }
     });
 }
@@ -3808,6 +3807,7 @@ class Subtitle extends (0, _componentDefault.default) {
         return this.art.template.$video.textTracks[0];
     }
     get activeCue() {
+        if (!this.textTrack) return null;
         return this.textTrack.activeCues[0];
     }
     style(key, value) {
@@ -3852,6 +3852,7 @@ class Subtitle extends (0, _componentDefault.default) {
     }
     async init(subtitleOption) {
         const { notice, template: { $subtitle } } = this.art;
+        if (!this.textTrack) return null;
         (0, _optionValidatorDefault.default)(subtitleOption, (0, _schemeDefault.default).subtitle);
         if (!subtitleOption.url) return;
         this.style(subtitleOption.style);

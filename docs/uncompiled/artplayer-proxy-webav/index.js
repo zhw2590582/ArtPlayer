@@ -156,8 +156,10 @@ function artplayerProxyWebAV() {
         let audioCtx;
         let gainNode;
         let clip = null;
-        let timer = null;
         let audioSource = null;
+        let animationFrameId = null;
+        let seekTarget = null;
+        let lastSeekTime = 0;
         const state = {
             playing: false,
             duration: 0,
@@ -191,7 +193,10 @@ function artplayerProxyWebAV() {
             });
         }
         function stop() {
-            clearInterval(timer);
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
             if (audioSource) {
                 audioSource.stop();
                 audioSource = null;
@@ -212,19 +217,22 @@ function artplayerProxyWebAV() {
             let curTime = state.currentTime * 1e6;
             let startAt = 0;
             let first = true;
+            let lastFrameTime = performance.now();
             stop();
             updateVolume();
-            timer = setInterval(async ()=>{
-                const { state: clipState, video, audio } = await clip.tick(Math.round(curTime));
-                curTime += 1000 / 30 * 1000 * state.playbackRate;
+            async function frameHandler(currentFrameTime) {
+                if (!state.playing) return;
+                const deltaTime = currentFrameTime - lastFrameTime;
+                lastFrameTime = currentFrameTime;
+                if (seekTarget !== null) {
+                    curTime = seekTarget * 1e6;
+                    seekTarget = null;
+                    first = true;
+                } else curTime += deltaTime * 1000 * state.playbackRate;
                 state.currentTime = curTime / 1e6;
-                // 更新缓冲状态
-                state.buffered = Math.max(state.buffered, state.currentTime);
+                const { state: clipState, video, audio } = await clip.tick(Math.round(curTime));
                 art.emit("video:timeupdate", {
                     type: "timeupdate"
-                });
-                art.emit("video:progress", {
-                    type: "progress"
                 });
                 if (clipState === "done") {
                     stop();
@@ -241,11 +249,8 @@ function artplayerProxyWebAV() {
                     ctx.drawImage(video, 0, 0, state.videoWidth, state.videoHeight);
                     video.close();
                 }
-                if (first) {
-                    first = false;
-                    return;
-                }
-                if (audio?.[0]?.length) {
+                if (first) first = false;
+                else if (audio?.[0]?.length) {
                     const buf = audioCtx.createBuffer(2, audio[0].length, 48000);
                     buf.copyToChannel(audio[0], 0);
                     buf.copyToChannel(audio[1], 1);
@@ -257,13 +262,16 @@ function artplayerProxyWebAV() {
                     audioSource.start(startAt);
                     startAt += buf.duration / state.playbackRate;
                 }
-            }, 1000 / 30);
+                animationFrameId = requestAnimationFrame(frameHandler);
+            }
             state.playing = true;
             state.paused = false;
+            animationFrameId = requestAnimationFrame(frameHandler);
         }
         async function preview(time) {
             const { video } = await clip.tick(time * 1e6);
             if (video) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                 video.close();
             }
@@ -319,9 +327,7 @@ function artplayerProxyWebAV() {
             });
         }
         def(canvas, "textTracks", {
-            get: ()=>[
-                    {}
-                ]
+            get: ()=>[]
         });
         def(canvas, "duration", {
             get: ()=>state.duration
@@ -346,15 +352,16 @@ function artplayerProxyWebAV() {
             get: ()=>state.currentTime,
             set: (val)=>{
                 const newTime = Math.max(0, Math.min(val, state.duration));
-                state.currentTime = newTime;
-                preview(newTime);
-                if (state.playing) {
-                    stop();
-                    play();
+                const now = performance.now();
+                if (now - lastSeekTime > 16) {
+                    lastSeekTime = now;
+                    seekTarget = newTime;
+                    state.currentTime = newTime;
+                    if (!state.playing) preview(newTime);
+                    art.emit("video:timeupdate", {
+                        type: "timeupdate"
+                    });
                 }
-                art.emit("video:timeupdate", {
-                    type: "timeupdate"
-                });
             }
         });
         def(canvas, "autoplay", {
@@ -369,7 +376,7 @@ function artplayerProxyWebAV() {
             set: (val)=>{
                 option.url = val;
                 init().then(()=>{
-                    if (state.autoplay) canvas.play();
+                    if (option.autoplay) canvas.play();
                 });
             }
         });
@@ -412,7 +419,6 @@ function artplayerProxyWebAV() {
                     length: 1
                 })
         });
-        // Define methods
         def(canvas, "play", {
             value: async ()=>{
                 await play();
@@ -433,6 +439,10 @@ function artplayerProxyWebAV() {
                     type: "pause"
                 });
             }
+        });
+        art.on("destroy", ()=>{
+            stop();
+            if (clip) clip.destroy();
         });
         return canvas;
     };
