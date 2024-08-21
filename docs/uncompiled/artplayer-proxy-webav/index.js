@@ -157,7 +157,7 @@ function artplayerProxyWebAV() {
         let gainNode;
         let clip = null;
         let audioSource = null;
-        let animationFrameId = null;
+        let intervalId = null;
         let seekTarget = null;
         let lastSeekTime = 0;
         const state = {
@@ -193,9 +193,9 @@ function artplayerProxyWebAV() {
             });
         }
         function stop() {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
             }
             if (audioSource) {
                 audioSource.stop();
@@ -220,8 +220,9 @@ function artplayerProxyWebAV() {
             let lastFrameTime = performance.now();
             stop();
             updateVolume();
-            async function frameHandler(currentFrameTime) {
+            async function frameHandler() {
                 if (!state.playing) return;
+                const currentFrameTime = performance.now();
                 const deltaTime = currentFrameTime - lastFrameTime;
                 lastFrameTime = currentFrameTime;
                 if (seekTarget !== null) {
@@ -262,11 +263,10 @@ function artplayerProxyWebAV() {
                     audioSource.start(startAt);
                     startAt += buf.duration / state.playbackRate;
                 }
-                animationFrameId = requestAnimationFrame(frameHandler);
             }
             state.playing = true;
             state.paused = false;
-            animationFrameId = requestAnimationFrame(frameHandler);
+            intervalId = setInterval(frameHandler, 1000 / 60); // 约60fps
         }
         async function preview(time) {
             const { video } = await clip.tick(time * 1e6);

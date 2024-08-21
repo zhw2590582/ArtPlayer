@@ -12,7 +12,7 @@ export default function artplayerProxyWebAV() {
 
         let clip = null;
         let audioSource = null;
-        let animationFrameId = null;
+        let intervalId = null;
         let seekTarget = null;
         let lastSeekTime = 0;
 
@@ -51,9 +51,9 @@ export default function artplayerProxyWebAV() {
         }
 
         function stop() {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
             }
             if (audioSource) {
                 audioSource.stop();
@@ -83,9 +83,10 @@ export default function artplayerProxyWebAV() {
             stop();
             updateVolume();
 
-            async function frameHandler(currentFrameTime) {
+            async function frameHandler() {
                 if (!state.playing) return;
 
+                const currentFrameTime = performance.now();
                 const deltaTime = currentFrameTime - lastFrameTime;
                 lastFrameTime = currentFrameTime;
 
@@ -132,13 +133,11 @@ export default function artplayerProxyWebAV() {
                     audioSource.start(startAt);
                     startAt += buf.duration / state.playbackRate;
                 }
-
-                animationFrameId = requestAnimationFrame(frameHandler);
             }
 
             state.playing = true;
             state.paused = false;
-            animationFrameId = requestAnimationFrame(frameHandler);
+            intervalId = setInterval(frameHandler, 1000 / 60); // 约60fps
         }
 
         async function preview(time) {
