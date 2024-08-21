@@ -7,8 +7,6 @@ type Option = {
     //
 };
 
-type Result = {
-    name: 'artplayerProxyWebAV';
-};
+type Result = HTMLCanvasElement;
 
 declare const artplayerProxyWebAV: (option: Option) => (art: Artplayer) => Result;
