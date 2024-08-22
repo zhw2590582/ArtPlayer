@@ -1,6 +1,6 @@
 import { MP4Clip, Combinator } from '@webav/av-cliper';
 
-export default function artplayerProxyWebAV() {
+export default function artplayerProxyWebAV(opt = {}) {
     return (art) => {
         const { option, constructor } = art;
         const { createElement, def } = constructor.utils;
@@ -201,7 +201,7 @@ export default function artplayerProxyWebAV() {
                     throw new Error('No response body');
                 }
 
-                clip = new MP4Clip(response.body);
+                clip = new MP4Clip(response.body, opt);
             } catch (error) {
                 art.emit('video:error', error);
                 throw error;

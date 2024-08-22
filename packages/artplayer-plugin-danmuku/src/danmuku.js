@@ -495,6 +495,7 @@ export default class Danmuku {
 
                 // 获取准备好发送的弹幕，可能包含ready和wait状态的弹幕
                 const readys = this.readys;
+
                 for (let index = 0; index < readys.length; index++) {
                     const danmu = readys[index];
 

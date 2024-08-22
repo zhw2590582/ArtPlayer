@@ -7,8 +7,6 @@ type Option = {
     //
 };
 
-type Result = {
-    name: 'artplayerProxyLibmedia';
-};
+type Result = HTMLCanvasElement;
 
 declare const artplayerProxyLibmedia: (option: Option) => (art: Artplayer) => Result;
