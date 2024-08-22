@@ -152,7 +152,7 @@ export default function artplayerProxyWebAV() {
 
         function resize() {
             const player = art.template?.$player;
-            if (!player || option.autoSize) return;
+            if (!player || state.autoSize) return;
 
             const aspectRatio = canvas.videoWidth / canvas.videoHeight;
             const containerWidth = player.clientWidth;
@@ -256,6 +256,7 @@ export default function artplayerProxyWebAV() {
         def(canvas, 'currentTime', {
             get: () => state.currentTime,
             set: (val) => {
+                if (state.readyState < 4) return;
                 const newTime = Math.max(0, Math.min(val, state.duration));
                 const now = performance.now();
                 if (now - lastSeekTime > 16) {
@@ -285,7 +286,7 @@ export default function artplayerProxyWebAV() {
             set: (val) => {
                 option.url = val;
                 init().then(() => {
-                    if (option.autoplay) {
+                    if (state.autoplay) {
                         canvas.play();
                     }
                 });
@@ -338,14 +339,18 @@ export default function artplayerProxyWebAV() {
 
         def(canvas, 'play', {
             value: async () => {
+                if (state.readyState < 4) return false;
+                await init();
                 await play();
                 art.emit('video:play', { type: 'play' });
                 art.emit('video:playing', { type: 'playing' });
+                return true;
             },
         });
 
         def(canvas, 'pause', {
             value: () => {
+                if (state.readyState < 4) return;
                 stop();
                 state.playing = false;
                 state.paused = true;
