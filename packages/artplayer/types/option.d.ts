@@ -210,7 +210,7 @@ export type Option = {
     /**
      * Custom video proxy
      */
-    proxy?: null | ((this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement);
+    proxy?: (this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement;
 
     /**
      * Custom plugin list
