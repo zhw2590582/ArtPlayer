@@ -256,6 +256,7 @@ export default function artplayerProxyWebAV() {
         def(canvas, 'currentTime', {
             get: () => state.currentTime,
             set: (val) => {
+                if (state.readyState < 4) return;
                 const newTime = Math.max(0, Math.min(val, state.duration));
                 const now = performance.now();
                 if (now - lastSeekTime > 16) {
@@ -338,9 +339,11 @@ export default function artplayerProxyWebAV() {
 
         def(canvas, 'play', {
             value: async () => {
+                if (state.readyState < 4) return false;
                 await play();
                 art.emit('video:play', { type: 'play' });
                 art.emit('video:playing', { type: 'playing' });
+                return true;
             },
         });
 
