@@ -42,7 +42,7 @@ export default class Subtitle extends Component {
     }
 
     get textTrack() {
-        return this.art.template.$video.textTracks[0];
+        return this.art.template.$video?.textTracks?.[0];
     }
 
     get activeCue() {

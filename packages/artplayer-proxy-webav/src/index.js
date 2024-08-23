@@ -230,10 +230,6 @@ export default function artplayerProxyWebAV(opt = {}) {
             art.emit('video:canplaythrough', { type: 'canplaythrough' });
         }
 
-        def(canvas, 'textTracks', {
-            get: () => [],
-        });
-
         def(canvas, 'duration', {
             get: () => state.duration,
         });

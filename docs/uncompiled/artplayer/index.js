@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-08-22 18:16:26";
+        return "2024-08-23 10:40:09";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -3804,7 +3804,7 @@ class Subtitle extends (0, _componentDefault.default) {
         this.switch(url);
     }
     get textTrack() {
-        return this.art.template.$video.textTracks[0];
+        return this.art.template.$video?.textTracks?.[0];
     }
     get activeCue() {
         if (!this.textTrack) return null;

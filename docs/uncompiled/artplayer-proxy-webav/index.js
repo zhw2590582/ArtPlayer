@@ -147,7 +147,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerProxyWebAV);
 var _avCliper = require("@webav/av-cliper");
-function artplayerProxyWebAV() {
+function artplayerProxyWebAV(opt = {}) {
     return (art)=>{
         const { option, constructor } = art;
         const { createElement, def } = constructor.utils;
@@ -315,13 +315,15 @@ function artplayerProxyWebAV() {
             }
             try {
                 await Promise.resolve();
+                state.readyState = 1;
                 art.emit("video:loadstart", {
                     type: "loadstart"
                 });
                 const response = await fetch(option.url);
                 if (!response.body) throw new Error("No response body");
-                clip = new (0, _avCliper.MP4Clip)(response.body);
+                clip = new (0, _avCliper.MP4Clip)(response.body, opt);
             } catch (error) {
+                state.readyState = 0;
                 art.emit("video:error", error);
                 throw error;
             }
@@ -352,9 +354,6 @@ function artplayerProxyWebAV() {
                 type: "canplaythrough"
             });
         }
-        def(canvas, "textTracks", {
-            get: ()=>[]
-        });
         def(canvas, "duration", {
             get: ()=>state.duration
         });
