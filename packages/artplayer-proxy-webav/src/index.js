@@ -194,6 +194,7 @@ export default function artplayerProxyWebAV(opt = {}) {
 
             try {
                 await Promise.resolve();
+                state.readyState = 1;
                 art.emit('video:loadstart', { type: 'loadstart' });
                 const response = await fetch(option.url);
 
@@ -203,6 +204,7 @@ export default function artplayerProxyWebAV(opt = {}) {
 
                 clip = new MP4Clip(response.body, opt);
             } catch (error) {
+                state.readyState = 0;
                 art.emit('video:error', error);
                 throw error;
             }
