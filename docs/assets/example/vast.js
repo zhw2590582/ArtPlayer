@@ -2,6 +2,9 @@
 // https://glomex.github.io/vast-ima-player/
 // https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side
 
+// Google's IMA SDK are blocked by your Ad blocker.
+// Please Turn Off Your Ad Blocker.
+
 // npm i artplayer-plugin-vast
 // import artplayerPluginVast from 'artplayer-plugin-vast';
 
