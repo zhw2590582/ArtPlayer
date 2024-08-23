@@ -34,6 +34,11 @@ export type Thumbnails = {
      * The thumbnail height
      */
     height?: number;
+
+    /**
+     * The thumbnail scale
+     */
+    scale?: number;
 };
 
 export type Option = {

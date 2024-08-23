@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-08-23 10:40:09";
+        return "2024-08-23 11:40:09";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -313,7 +313,8 @@ class Artplayer extends (0, _emitterDefault.default) {
                 number: 60,
                 column: 10,
                 width: 0,
-                height: 0
+                height: 0,
+                scale: 1
             },
             subtitle: {
                 url: "",
@@ -669,6 +670,7 @@ parcelHelpers.export(exports, "getIcon", ()=>getIcon);
 parcelHelpers.export(exports, "setStyleText", ()=>setStyleText);
 parcelHelpers.export(exports, "supportsFlex", ()=>supportsFlex);
 parcelHelpers.export(exports, "getRect", ()=>getRect);
+parcelHelpers.export(exports, "loadImg", ()=>loadImg);
 var _compatibility = require("./compatibility");
 function query(selector, parent = document) {
     return parent.querySelector(selector);
@@ -760,6 +762,38 @@ function supportsFlex() {
 }
 function getRect(el) {
     return el.getBoundingClientRect();
+}
+function loadImg(imageUrl, scale) {
+    return new Promise((resolve, reject)=>{
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = function() {
+            if (!scale || scale === 1) resolve(img);
+            else {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob((blob)=>{
+                    const blobUrl = URL.createObjectURL(blob);
+                    const scaledImg = new Image();
+                    scaledImg.onload = function() {
+                        resolve(scaledImg);
+                    };
+                    scaledImg.onerror = function() {
+                        URL.revokeObjectURL(blobUrl);
+                        reject(new Error(`Image load failed: ${imageUrl}`));
+                    };
+                    scaledImg.src = blobUrl;
+                });
+            }
+        };
+        img.onerror = function() {
+            reject(new Error(`Image load failed: ${imageUrl}`));
+        };
+        img.src = imageUrl;
+    });
 }
 
 },{"./compatibility":"gotDS","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gotDS":[function(require,module,exports) {
@@ -1100,7 +1134,8 @@ exports.default = {
         number: n,
         column: n,
         width: n,
-        height: n
+        height: n,
+        scale: n
     },
     subtitle: {
         url: s,
@@ -2609,7 +2644,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>thumbnailsMix);
 var _utils = require("../utils");
 function thumbnailsMix(art) {
-    const { option, events: { loadImg }, template: { $progress, $video } } = art;
+    const { option, template: { $progress, $video } } = art;
     let timer = null;
     let image = null;
     let loading = false;
@@ -2624,14 +2659,14 @@ function thumbnailsMix(art) {
     function showThumbnails(posWidth) {
         const $thumbnails = art.controls?.thumbnails;
         if (!$thumbnails) return;
-        const { url, number, column, width, height } = option.thumbnails;
-        const width2 = width || image.naturalWidth / column;
-        const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
+        const { number, column, width, height, scale } = option.thumbnails;
+        const width2 = width * scale || image.naturalWidth / column;
+        const height2 = height * scale || width2 / ($video.videoWidth / $video.videoHeight);
         const perWidth = $progress.clientWidth / number;
         const perIndex = Math.floor(posWidth / perWidth);
         const yIndex = Math.ceil(perIndex / column) - 1;
         const xIndex = perIndex % column || column - 1;
-        (0, _utils.setStyle)($thumbnails, "backgroundImage", `url(${url})`);
+        (0, _utils.setStyle)($thumbnails, "backgroundImage", `url(${image.src})`);
         (0, _utils.setStyle)($thumbnails, "height", `${height2}px`);
         (0, _utils.setStyle)($thumbnails, "width", `${width2}px`);
         (0, _utils.setStyle)($thumbnails, "backgroundPosition", `-${xIndex * width2}px -${yIndex * height2}px`);
@@ -2641,13 +2676,13 @@ function thumbnailsMix(art) {
     }
     art.on("setBar", async (type, percentage, event)=>{
         const $thumbnails = art.controls?.thumbnails;
-        const { url } = option.thumbnails;
+        const { url, scale } = option.thumbnails;
         if (!$thumbnails || !url) return;
         const isMobileDroging = type === "played" && event && (0, _utils.isMobile);
         if (type === "hover" || isMobileDroging) {
             if (!loading) {
                 loading = true;
-                image = await loadImg(url);
+                image = await (0, _utils.loadImg)(url, scale);
                 isLoad = true;
             }
             if (!isLoad) return;
@@ -3900,7 +3935,6 @@ exports.default = Subtitle;
 },{"./utils":"jmgNb","./utils/component":"bgug2","option-validator":"2tbdu","./scheme":"gL38d","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"dz5ul":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _error = require("../utils/error");
 var _clickInit = require("./clickInit");
 var _clickInitDefault = parcelHelpers.interopDefault(_clickInit);
 var _hoverInit = require("./hoverInit");
@@ -3922,7 +3956,6 @@ class Events {
         this.destroyEvents = [];
         this.proxy = this.proxy.bind(this);
         this.hover = this.hover.bind(this);
-        this.loadImg = this.loadImg.bind(this);
         (0, _clickInitDefault.default)(art, this);
         (0, _hoverInitDefault.default)(art, this);
         (0, _moveInitDefault.default)(art, this);
@@ -3943,19 +3976,6 @@ class Events {
         if (mouseenter) this.proxy(target, "mouseenter", mouseenter);
         if (mouseleave) this.proxy(target, "mouseleave", mouseleave);
     }
-    loadImg(img) {
-        return new Promise((resolve, reject)=>{
-            let image;
-            if (img instanceof HTMLImageElement) image = img;
-            else if (typeof img === "string") {
-                image = new Image();
-                image.src = img;
-            } else return reject(new (0, _error.ArtPlayerError)("Unable to get Image"));
-            if (image.complete) return resolve(image);
-            this.proxy(image, "load", ()=>resolve(image));
-            this.proxy(image, "error", ()=>reject(new (0, _error.ArtPlayerError)(`Failed to load Image: ${image.src}`)));
-        });
-    }
     remove(destroyEvent) {
         const index = this.destroyEvents.indexOf(destroyEvent);
         if (index > -1) {
@@ -3969,7 +3989,7 @@ class Events {
 }
 exports.default = Events;
 
-},{"../utils/error":"622b3","./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","./updateInit":"4Xp2q","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
+},{"./clickInit":"3fsfH","./hoverInit":"jr1ic","./moveInit":"jnUlq","./resizeInit":"2r19L","./gestureInit":"2IPOb","./viewInit":"fmrIX","./documentInit":"bIWxm","./updateInit":"4Xp2q","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"3fsfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>clickInit);
