@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-08-23 12:36:28";
+        return "2024-08-23 16:11:41";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -5215,6 +5215,8 @@ function autoPlayback(art) {
     const $last = (0, _utils.query)(".art-auto-playback-last", $autoPlayback);
     const $jump = (0, _utils.query)(".art-auto-playback-jump", $autoPlayback);
     const $close = (0, _utils.query)(".art-auto-playback-close", $autoPlayback);
+    (0, _utils.append)($close, icons.close);
+    let timer = null;
     art.on("video:timeupdate", ()=>{
         if (art.playing) {
             const times = storage.get("times") || {};
@@ -5224,11 +5226,12 @@ function autoPlayback(art) {
             storage.set("times", times);
         }
     });
-    art.on("ready", ()=>{
+    function init() {
         const times = storage.get("times") || {};
         const currentTime = times[art.option.id || art.option.url];
+        clearTimeout(timer);
+        (0, _utils.setStyle)($autoPlayback, "display", "none");
         if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
-            (0, _utils.append)($close, icons.close);
             (0, _utils.setStyle)($autoPlayback, "display", "flex");
             $last.innerText = `${i18n.get("Last Seen")} ${(0, _utils.secondToTime)(currentTime)}`;
             $jump.innerText = i18n.get("Jump Play");
@@ -5242,12 +5245,14 @@ function autoPlayback(art) {
                 (0, _utils.setStyle)($autoPlayback, "display", "none");
             });
             art.once("video:timeupdate", ()=>{
-                setTimeout(()=>{
+                timer = setTimeout(()=>{
                     (0, _utils.setStyle)($autoPlayback, "display", "none");
                 }, constructor.AUTO_PLAYBACK_TIMEOUT);
             });
         }
-    });
+    }
+    art.on("ready", init);
+    art.on("restart", init);
     return {
         name: "auto-playback",
         get times () {

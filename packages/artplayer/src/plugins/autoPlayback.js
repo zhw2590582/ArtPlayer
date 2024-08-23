@@ -22,6 +22,9 @@ export default function autoPlayback(art) {
     const $last = query('.art-auto-playback-last', $autoPlayback);
     const $jump = query('.art-auto-playback-jump', $autoPlayback);
     const $close = query('.art-auto-playback-close', $autoPlayback);
+    append($close, icons.close);
+
+    let timer = null;
 
     art.on('video:timeupdate', () => {
         if (art.playing) {
@@ -35,11 +38,14 @@ export default function autoPlayback(art) {
         }
     });
 
-    art.on('ready', () => {
+    function init() {
         const times = storage.get('times') || {};
         const currentTime = times[art.option.id || art.option.url];
+
+        clearTimeout(timer);
+        setStyle($autoPlayback, 'display', 'none');
+
         if (currentTime && currentTime >= constructor.AUTO_PLAYBACK_MIN) {
-            append($close, icons.close);
             setStyle($autoPlayback, 'display', 'flex');
 
             $last.innerText = `${i18n.get('Last Seen')} ${secondToTime(currentTime)}`;
@@ -57,12 +63,15 @@ export default function autoPlayback(art) {
             });
 
             art.once('video:timeupdate', () => {
-                setTimeout(() => {
+                timer = setTimeout(() => {
                     setStyle($autoPlayback, 'display', 'none');
                 }, constructor.AUTO_PLAYBACK_TIMEOUT);
             });
         }
-    });
+    }
+
+    art.on('ready', init);
+    art.on('restart', init);
 
     return {
         name: 'auto-playback',
