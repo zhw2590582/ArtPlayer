@@ -23,31 +23,32 @@ export default function artplayerPluginVast(callback) {
             width: '100%',
             height: '100%',
             zIndex: '150',
+            display: 'none',
         });
 
-        const player = new Player(ima, $video, $container, adsRenderingSettings, playerOptions);
+        const imaPlayer = new Player(ima, $video, $container, adsRenderingSettings, playerOptions);
 
         function playUrl(url) {
             const playAdsRequest = new ima.AdsRequest();
             playAdsRequest.adTagUrl = url;
-            player.playAds(playAdsRequest);
+            imaPlayer.playAds(playAdsRequest);
         }
 
         function playRes(res) {
             const playAdsRequest = new ima.AdsRequest();
             playAdsRequest.adsResponse = res;
-            player.playAds(playAdsRequest);
+            imaPlayer.playAds(playAdsRequest);
         }
 
         if (typeof callback === 'function') {
-            await callback({ art, id, ima, player, $container, playUrl, playRes });
+            await callback({ art, id, ima, imaPlayer, $container, playUrl, playRes });
         }
 
         return {
             name: 'artplayerPluginVast',
             id,
             ima,
-            player,
+            imaPlayer,
             $container,
         };
     };

@@ -166,24 +166,25 @@ function artplayerPluginVast(callback) {
             inset: "0",
             width: "100%",
             height: "100%",
-            zIndex: "150"
+            zIndex: "150",
+            display: "none"
         });
-        const player = new (0, _vastImaPlayer.Player)(ima, $video, $container, adsRenderingSettings, playerOptions);
+        const imaPlayer = new (0, _vastImaPlayer.Player)(ima, $video, $container, adsRenderingSettings, playerOptions);
         function playUrl(url) {
             const playAdsRequest = new ima.AdsRequest();
             playAdsRequest.adTagUrl = url;
-            player.playAds(playAdsRequest);
+            imaPlayer.playAds(playAdsRequest);
         }
         function playRes(res) {
             const playAdsRequest = new ima.AdsRequest();
             playAdsRequest.adsResponse = res;
-            player.playAds(playAdsRequest);
+            imaPlayer.playAds(playAdsRequest);
         }
         if (typeof callback === "function") await callback({
             art,
             id,
             ima,
-            player,
+            imaPlayer,
             $container,
             playUrl,
             playRes
@@ -192,7 +193,7 @@ function artplayerPluginVast(callback) {
             name: "artplayerPluginVast",
             id,
             ima,
-            player,
+            imaPlayer,
             $container
         };
     };
