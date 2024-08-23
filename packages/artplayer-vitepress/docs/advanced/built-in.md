@@ -53,7 +53,6 @@ console.info(art.template.$video);
 
 - `proxy` 方法用于代理 `DOM` 事件
 - `hover` 方法用于代理自定义的 `hover` 事件
-- `loadImg` 方法用于监听图片的 `load` 加载事件
 
 <div className="run-code">▶ Run Code</div>
 
@@ -73,10 +72,6 @@ art.events.hover(container, (event) => {
     console.info('mouseenter', event);
 }, (event) => {
     console.info('mouseleave', event);
-});
-
-art.events.loadImg('/assets/sample/poster.jpg').then(img => {
-    console.info('loadImg', img);
 });
 ```
 
