@@ -763,7 +763,7 @@ function supportsFlex() {
 function getRect(el) {
     return el.getBoundingClientRect();
 }
-function loadImg(imageUrl, scale) {
+function loadImg(url, scale) {
     return new Promise((resolve, reject)=>{
         const img = new Image();
         img.crossOrigin = "Anonymous";
@@ -783,16 +783,16 @@ function loadImg(imageUrl, scale) {
                     };
                     scaledImg.onerror = function() {
                         URL.revokeObjectURL(blobUrl);
-                        reject(new Error(`Image load failed: ${imageUrl}`));
+                        reject(new Error(`Image load failed: ${url}`));
                     };
                     scaledImg.src = blobUrl;
                 });
             }
         };
         img.onerror = function() {
-            reject(new Error(`Image load failed: ${imageUrl}`));
+            reject(new Error(`Image load failed: ${url}`));
         };
-        img.src = imageUrl;
+        img.src = url;
     });
 }
 

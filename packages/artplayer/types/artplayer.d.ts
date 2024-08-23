@@ -118,7 +118,6 @@ declare class Artplayer extends Player {
             options?: boolean | AddEventListenerOptions,
         ): () => void;
         hover(element: HTMLElement, mouseenter?: (event: Event) => any, mouseleave?: (event: Event) => any): void;
-        loadImg(element: HTMLImageElement | string): Promise<HTMLImageElement>;
         remove(event: Event): void;
     };
 

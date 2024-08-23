@@ -118,7 +118,7 @@ export function getRect(el) {
     return el.getBoundingClientRect();
 }
 
-export function loadImg(imageUrl, scale) {
+export function loadImg(url, scale) {
     return new Promise((resolve, reject) => {
         const img = new Image();
         img.crossOrigin = 'Anonymous';
@@ -143,7 +143,7 @@ export function loadImg(imageUrl, scale) {
 
                     scaledImg.onerror = function () {
                         URL.revokeObjectURL(blobUrl);
-                        reject(new Error(`Image load failed: ${imageUrl}`));
+                        reject(new Error(`Image load failed: ${url}`));
                     };
 
                     scaledImg.src = blobUrl;
@@ -152,9 +152,9 @@ export function loadImg(imageUrl, scale) {
         };
 
         img.onerror = function () {
-            reject(new Error(`Image load failed: ${imageUrl}`));
+            reject(new Error(`Image load failed: ${url}`));
         };
 
-        img.src = imageUrl;
+        img.src = url;
     });
 }
