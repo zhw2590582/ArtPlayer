@@ -1,5 +1,5 @@
 // npm i artplayer-plugin-vast
-// import ArtplayerPluginVast from 'artplayer-plugin-vast';
+// import artplayerPluginVast from 'artplayer-plugin-vast';
 
 var art = new Artplayer({
     container: '.artplayer-app',
@@ -7,8 +7,8 @@ var art = new Artplayer({
     fullscreen: true,
     fullscreenWeb: true,
     plugins: [
-        ArtplayerPluginVast({
-            url: '/assets/sample/vast.xml',
+        artplayerPluginVast(({ playUrl }) => {
+            //
         }),
     ],
 });
