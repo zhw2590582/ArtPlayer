@@ -190,11 +190,7 @@ function artplayerPluginVast(callback) {
             playRes
         });
         return {
-            name: "artplayerPluginVast",
-            id,
-            ima,
-            imaPlayer,
-            $container
+            name: "artplayerPluginVast"
         };
     };
 }

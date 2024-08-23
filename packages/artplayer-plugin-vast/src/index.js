@@ -46,10 +46,6 @@ export default function artplayerPluginVast(callback) {
 
         return {
             name: 'artplayerPluginVast',
-            id,
-            ima,
-            imaPlayer,
-            $container,
         };
     };
 }
