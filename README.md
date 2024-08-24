@@ -118,7 +118,7 @@ var art = new Artplayer({
 ## Proxys
 
 -   [WebAV](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-webav/index.js&example=webav) (WIP)
--   [libmedia](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-libmedia/index.js&example=libmedia) (WIP)
+-   [WXInlinePlayer](https://artplayer.org/?libs=./uncompiled/artplayer-proxy-flv/index.js&example=WXInlinePlayer) (WIP)
 
 ## Changelog
 
