@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"eYYuT":[function(require,module,exports) {
+})({"1gq8W":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>artplayerPluginVttThumbnail);
@@ -163,7 +163,7 @@ function artplayerPluginVttThumbnail(option) {
             else setStyle($control, "left", `${width - find.w / 2}px`);
         }
         art.controls.add({
-            name: "thumbnails",
+            name: "vtt-thumbnail",
             position: "top",
             index: 20,
             style: option.style || {},
@@ -195,7 +195,7 @@ function artplayerPluginVttThumbnail(option) {
 }
 if (typeof window !== "undefined") window["artplayerPluginVttThumbnail"] = artplayerPluginVttThumbnail;
 
-},{"./getVttArray":"cKvoV","@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"cKvoV":[function(require,module,exports) {
+},{"./getVttArray":"gSM1I","@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"gSM1I":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>getVttArray);
@@ -252,7 +252,7 @@ async function getVttArray(vttUrl = "") {
     return vttArray;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"kBreb"}],"kBreb":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5dUr6"}],"5dUr6":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -282,6 +282,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["eYYuT"], "eYYuT", "parcelRequire94c2")
+},{}]},["1gq8W"], "1gq8W", "parcelRequire4dc0")
 
 //# sourceMappingURL=index.js.map
