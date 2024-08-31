@@ -150,7 +150,7 @@ var _getVttArray = require("./getVttArray");
 var _getVttArrayDefault = parcelHelpers.interopDefault(_getVttArray);
 function artplayerPluginVttThumbnail(option) {
     return async (art)=>{
-        const { constructor: { utils: { setStyle, isMobile } }, template: { $progress } } = art;
+        const { constructor: { utils: { setStyle, isMobile, addClass } }, template: { $progress } } = art;
         let timer = null;
         const thumbnails = await (0, _getVttArrayDefault.default)(option.vtt);
         function showThumbnails($control, find, width) {
@@ -168,6 +168,7 @@ function artplayerPluginVttThumbnail(option) {
             index: 20,
             style: option.style || {},
             mounted ($control) {
+                addClass($control, "art-control-thumbnails");
                 art.on("setBar", async (type, percentage, event)=>{
                     const isMobileDroging = type === "played" && event && isMobile;
                     if (type === "hover" || isMobileDroging) {
