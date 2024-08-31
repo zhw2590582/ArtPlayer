@@ -117,3 +117,44 @@ export function supportsFlex() {
 export function getRect(el) {
     return el.getBoundingClientRect();
 }
+
+export function loadImg(url, scale) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+
+        img.onload = function () {
+            if (!scale || scale === 1) {
+                resolve(img);
+            } else {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                canvas.toBlob((blob) => {
+                    const blobUrl = URL.createObjectURL(blob);
+                    const scaledImg = new Image();
+
+                    scaledImg.onload = function () {
+                        resolve(scaledImg);
+                    };
+
+                    scaledImg.onerror = function () {
+                        URL.revokeObjectURL(blobUrl);
+                        reject(new Error(`Image load failed: ${url}`));
+                    };
+
+                    scaledImg.src = blobUrl;
+                });
+            }
+        };
+
+        img.onerror = function () {
+            reject(new Error(`Image load failed: ${url}`));
+        };
+
+        img.src = url;
+    });
+}

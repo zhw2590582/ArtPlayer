@@ -412,13 +412,13 @@ var art = new Artplayer({
 });
 ```
 
-| Hotkey  | Description          |
-| ------- | --------------------- |
-| `↑`     | Increase volume       |
-| `↓`     | Decrease volume       |
-| `←`     | Fast forward video    |
-| `→`     | Rewind video          |
-| `space` | Toggle play/pause     |
+| Hotkey  | Description        |
+| ------- | ------------------ |
+| `↑`     | Increase volume    |
+| `↓`     | Decrease volume    |
+| `←`     | Fast forward video |
+| `→`     | Rewind video       |
+| `space` | Toggle play/pause  |
 
 :::warning Tip
 
@@ -734,11 +734,11 @@ var art = new Artplayer({
 
 Whether to show the `quality selection` list in the bottom control bar
 
-| Property   | Type      | Description    |
-| ---------- | --------- | -------------- |
-| `default`  | `Boolean` | Default quality|
-| `html`     | `String`  | Quality name   |
-| `url`      | `String`  | Quality URL    |
+| Property  | Type      | Description     |
+| --------- | --------- | --------------- |
+| `default` | `Boolean` | Default quality |
+| `html`    | `String`  | Quality name    |
+| `url`     | `String`  | Quality URL     |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -766,10 +766,10 @@ var art = new Artplayer({
 
 Show `highlight information` on the progress bar
 
-| Property | Type     | Description          |
-| -------- | -------- | -------------------- |
-| `time`   | `Number` | Highlight time (in seconds)|
-| `text`   | `String` | Highlight text       |
+| Property | Type     | Description                 |
+| -------- | -------- | --------------------------- |
+| `time`   | `Number` | Highlight time (in seconds) |
+| `text`   | `String` | Highlight text              |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -836,13 +836,14 @@ var art = new Artplayer({
 
 Set `thumbnails` on the progress bar
 
-| Property | Type     | Description         |
-| -------- | -------- | ------------------- |
-| `url`    | `String` | Thumbnail URL       |
-| `number` | `Number` | Number of thumbnails|
-| `column` | `Number` | Columns of thumbnails|
-| `width`  | `Number` | Thumbnail width     |
-| `height` | `Number` | Thumbnail height    |
+| Property | Type     | Description           |
+| -------- | -------- | --------------------- |
+| `url`    | `String` | Thumbnail URL         |
+| `number` | `Number` | Number of thumbnails  |
+| `column` | `Number` | Columns of thumbnails |
+| `width`  | `Number` | Thumbnail width       |
+| `height` | `Number` | Thumbnail height      |
+| `scale`  | `Number` | Thumbnail scale       |
 
 <div className="run-code">▶ Run Code</div>
 
@@ -870,11 +871,11 @@ var art = new Artplayer({
 
 Set the video subtitles, supporting subtitle formats: `vtt`, `srt`, `ass`
 
-| Property    | Type       | Description                          |
-| ----------- | ---------- | ----------------------------------- |
-| `name`      | `String`   | Subtitle name                       |
-| `url`       | `String`   | Subtitle URL                        |
-| `type`      | `String`   | Subtitle type, options: `vtt`, `srt`, `ass` |
+| Property | Type     | Description                                 |
+| -------- | -------- | ------------------------------------------- |
+| `name`   | `String` | Subtitle name                               |
+| `url`    | `String` | Subtitle URL                                |
+| `type`   | `String` | Subtitle type, options: `vtt`, `srt`, `ass` |
 
 | `style`     | `Object`   | Subtitle style                      |
 | `encoding`  | `String`   | Subtitle encoding, default `utf-8`  |

@@ -34,6 +34,11 @@ export type Thumbnails = {
      * The thumbnail height
      */
     height?: number;
+
+    /**
+     * The thumbnail scale
+     */
+    scale?: number;
 };
 
 export type Option = {
@@ -210,7 +215,7 @@ export type Option = {
     /**
      * Custom video proxy
      */
-    proxy?: null | ((this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement);
+    proxy?: (this: Artplayer, art: Artplayer) => HTMLCanvasElement | HTMLVideoElement;
 
     /**
      * Custom plugin list

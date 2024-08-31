@@ -104,6 +104,7 @@ export default {
         column: n,
         width: n,
         height: n,
+        scale: n,
     },
     subtitle: {
         url: s,

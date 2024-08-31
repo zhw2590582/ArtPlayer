@@ -1,9 +1,8 @@
-import { def, setStyle, isMobile } from '../utils';
+import { def, setStyle, isMobile, loadImg } from '../utils';
 
 export default function thumbnailsMix(art) {
     const {
         option,
-        events: { loadImg },
         template: { $progress, $video },
     } = art;
 
@@ -24,14 +23,14 @@ export default function thumbnailsMix(art) {
         const $thumbnails = art.controls?.thumbnails;
         if (!$thumbnails) return;
 
-        const { url, number, column, width, height } = option.thumbnails;
-        const width2 = width || image.naturalWidth / column;
-        const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
+        const { number, column, width, height, scale } = option.thumbnails;
+        const width2 = width * scale || image.naturalWidth / column;
+        const height2 = height * scale || width2 / ($video.videoWidth / $video.videoHeight);
         const perWidth = $progress.clientWidth / number;
         const perIndex = Math.floor(posWidth / perWidth);
         const yIndex = Math.ceil(perIndex / column) - 1;
         const xIndex = perIndex % column || column - 1;
-        setStyle($thumbnails, 'backgroundImage', `url(${url})`);
+        setStyle($thumbnails, 'backgroundImage', `url(${image.src})`);
         setStyle($thumbnails, 'height', `${height2}px`);
         setStyle($thumbnails, 'width', `${width2}px`);
         setStyle($thumbnails, 'backgroundPosition', `-${xIndex * width2}px -${yIndex * height2}px`);
@@ -46,7 +45,7 @@ export default function thumbnailsMix(art) {
 
     art.on('setBar', async (type, percentage, event) => {
         const $thumbnails = art.controls?.thumbnails;
-        const { url } = option.thumbnails;
+        const { url, scale } = option.thumbnails;
         if (!$thumbnails || !url) return;
 
         const isMobileDroging = type === 'played' && event && isMobile;
@@ -54,7 +53,7 @@ export default function thumbnailsMix(art) {
         if (type === 'hover' || isMobileDroging) {
             if (!loading) {
                 loading = true;
-                image = await loadImg(url);
+                image = await loadImg(url, scale);
                 isLoad = true;
             }
 

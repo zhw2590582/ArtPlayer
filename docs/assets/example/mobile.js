@@ -27,6 +27,7 @@ var art = new Artplayer({
         url: '/assets/sample/thumbnails.png',
         number: 60,
         column: 10,
+        scale: 0.6
     },
     subtitle: {
         name: '中日双语',

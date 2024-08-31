@@ -54,4 +54,5 @@ export type Utils = {
     supportsFlex(): boolean;
     setStyleText(element: HTMLElement, text: string): void;
     getRect(el: HTMLElement): { top: number; left: number; width: number; height: number };
+    loadImg(url: string, scale?: Number): Promise<HTMLImageElement>;
 };

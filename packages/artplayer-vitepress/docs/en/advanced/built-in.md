@@ -52,7 +52,6 @@ Manages all `DOM` events in the player, which is essentially a proxy for `addEve
 
 - The `proxy` method is used to proxy `DOM` events
 - The `hover` method is used to proxy custom `hover` events
-- The `loadImg` method is used to listen for the `load` event of images
 
 <div className="run-code">▶ Run Code</div>
 
@@ -72,10 +71,6 @@ art.events.hover(container, (event) => {
     console.info('mouseenter', event);
 }, (event) => {
     console.info('mouseleave', event);
-});
-
-art.events.loadImg('/assets/sample/poster.jpg').then(img => {
-    console.info('loadImg', img);
 });
 ```
 :::warning Warning

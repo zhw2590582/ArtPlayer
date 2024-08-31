@@ -127,6 +127,7 @@ var art = new Artplayer({
         url: '/assets/sample/thumbnails.png',
         number: 60,
         column: 10,
+        scale: 0.85,
     },
     subtitle: {
         url: '/assets/sample/subtitle.srt',

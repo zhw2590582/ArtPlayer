@@ -42,10 +42,11 @@ export default class Subtitle extends Component {
     }
 
     get textTrack() {
-        return this.art.template.$video.textTracks[0];
+        return this.art.template.$video?.textTracks?.[0];
     }
 
     get activeCue() {
+        if (!this.textTrack) return null;
         return this.textTrack.activeCues[0];
     }
 
@@ -108,6 +109,7 @@ export default class Subtitle extends Component {
             template: { $subtitle },
         } = this.art;
 
+        if (!this.textTrack) return null;
         validator(subtitleOption, scheme.subtitle);
         if (!subtitleOption.url) return;
         this.style(subtitleOption.style);
