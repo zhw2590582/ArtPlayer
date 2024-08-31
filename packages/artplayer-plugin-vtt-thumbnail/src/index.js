@@ -27,7 +27,7 @@ export default function artplayerPluginVttThumbnail(option) {
         }
 
         art.controls.add({
-            name: 'thumbnails',
+            name: 'vtt-thumbnail',
             position: 'top',
             index: 20,
             style: option.style || {},

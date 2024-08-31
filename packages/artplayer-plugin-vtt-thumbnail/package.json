@@ -1,6 +1,6 @@
 {
     "license": "MIT",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "name": "artplayer-plugin-vtt-thumbnail",
     "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
     "description": "vtt thumbnail plugin for ArtPlayer",
