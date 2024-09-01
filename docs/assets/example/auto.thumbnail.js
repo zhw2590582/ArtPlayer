@@ -6,9 +6,7 @@ var art = new Artplayer({
     url: '/assets/sample/video.mp4',
     plugins: [
         artplayerPluginAutoThumbnail({
-            width: 160,
-            number: 100,
-            scale: 1,
+            //
         }),
     ],
 });

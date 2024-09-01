@@ -242,7 +242,7 @@ class Artplayer extends (0, _emitterDefault.default) {
         return "development";
     }
     static get build() {
-        return "2024-09-01 11:27:36";
+        return "2024-09-01 12:11:43";
     }
     static get config() {
         return 0, _configDefault.default;
@@ -670,6 +670,7 @@ parcelHelpers.export(exports, "getIcon", ()=>getIcon);
 parcelHelpers.export(exports, "setStyleText", ()=>setStyleText);
 parcelHelpers.export(exports, "supportsFlex", ()=>supportsFlex);
 parcelHelpers.export(exports, "getRect", ()=>getRect);
+parcelHelpers.export(exports, "loadImg", ()=>loadImg);
 var _compatibility = require("./compatibility");
 function query(selector, parent = document) {
     return parent.querySelector(selector);
@@ -761,6 +762,38 @@ function supportsFlex() {
 }
 function getRect(el) {
     return el.getBoundingClientRect();
+}
+function loadImg(url, scale) {
+    return new Promise((resolve, reject)=>{
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = function() {
+            if (!scale || scale === 1) resolve(img);
+            else {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+                canvas.width = img.width * scale;
+                canvas.height = img.height * scale;
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.toBlob((blob)=>{
+                    const blobUrl = URL.createObjectURL(blob);
+                    const scaledImg = new Image();
+                    scaledImg.onload = function() {
+                        resolve(scaledImg);
+                    };
+                    scaledImg.onerror = function() {
+                        URL.revokeObjectURL(blobUrl);
+                        reject(new Error(`Image load failed: ${url}`));
+                    };
+                    scaledImg.src = blobUrl;
+                });
+            }
+        };
+        img.onerror = function() {
+            reject(new Error(`Image load failed: ${url}`));
+        };
+        img.src = url;
+    });
 }
 
 },{"./compatibility":"bRDYJ","@parcel/transformer-js/src/esmodule-helpers.js":"6SDkN"}],"bRDYJ":[function(require,module,exports) {
@@ -2741,7 +2774,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>thumbnailsMix);
 var _utils = require("../utils");
 function thumbnailsMix(art) {
-    const { option, events: { loadImg }, template: { $progress, $video } } = art;
+    const { option, template: { $progress, $video } } = art;
     let timer = null;
     let image = null;
     let loading = false;
@@ -2756,14 +2789,14 @@ function thumbnailsMix(art) {
     function showThumbnails(posWidth) {
         const $thumbnails = art.controls?.thumbnails;
         if (!$thumbnails) return;
-        const { url, number, column, width, height } = option.thumbnails;
-        const width2 = width || image.naturalWidth / column;
-        const height2 = height || width2 / ($video.videoWidth / $video.videoHeight);
+        const { number, column, width, height, scale } = option.thumbnails;
+        const width2 = width * scale || image.naturalWidth / column;
+        const height2 = height * scale || width2 / ($video.videoWidth / $video.videoHeight);
         const perWidth = $progress.clientWidth / number;
         const perIndex = Math.floor(posWidth / perWidth);
         const yIndex = Math.ceil(perIndex / column) - 1;
         const xIndex = perIndex % column || column - 1;
-        (0, _utils.setStyle)($thumbnails, "backgroundImage", `url(${url})`);
+        (0, _utils.setStyle)($thumbnails, "backgroundImage", `url(${image.src})`);
         (0, _utils.setStyle)($thumbnails, "height", `${height2}px`);
         (0, _utils.setStyle)($thumbnails, "width", `${width2}px`);
         (0, _utils.setStyle)($thumbnails, "backgroundPosition", `-${xIndex * width2}px -${yIndex * height2}px`);
@@ -2773,13 +2806,13 @@ function thumbnailsMix(art) {
     }
     art.on("setBar", async (type, percentage, event)=>{
         const $thumbnails = art.controls?.thumbnails;
-        const { url } = option.thumbnails;
+        const { url, scale } = option.thumbnails;
         if (!$thumbnails || !url) return;
         const isMobileDroging = type === "played" && event && (0, _utils.isMobile);
         if (type === "hover" || isMobileDroging) {
             if (!loading) {
                 loading = true;
-                image = await loadImg(url);
+                image = await (0, _utils.loadImg)(url, scale);
                 isLoad = true;
             }
             if (!isLoad) return;
