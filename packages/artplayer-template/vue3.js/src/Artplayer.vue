@@ -15,7 +15,7 @@ const props = defineProps({
     },
 });
 
-const instance = ref(null);
+const instance = shallowRef(null);
 const artRef = ref(null);
 
 onMounted(() => {
