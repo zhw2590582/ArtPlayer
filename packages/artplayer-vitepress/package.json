@@ -7,10 +7,10 @@
         "preview": "vitepress preview docs"
     },
     "devDependencies": {
-        "flexsearch": "^0.7.43",
-        "markdown-it": "^14.1.0",
+        "flexsearch": "0.7.43",
+        "markdown-it": "14.1.0",
         "vitepress": "1.2.3",
-        "vitepress-plugin-search": "^1.0.4-alpha.22",
-        "vue": "^3.4.29"
+        "vitepress-plugin-search": "1.0.4-alpha.22",
+        "vue": "3.4.29"
     }
 }
