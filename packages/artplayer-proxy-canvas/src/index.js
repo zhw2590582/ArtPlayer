@@ -11,6 +11,7 @@ export default function artplayerProxyCanvas(callback) {
         const { propertys, methods, prototypes, events } = constructor.config;
         const keys = [...propertys, ...methods, ...prototypes];
 
+        // 存储 canvas 的原始属性
         const originalCanvasProperties = {};
         ['width', 'height'].forEach((prop) => {
             originalCanvasProperties[prop] = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, prop);
@@ -49,61 +50,115 @@ export default function artplayerProxyCanvas(callback) {
             }
         });
 
-        let lastDrawTime = 0;
-        const drawFrame = (timestamp) => {
-            if (!video.paused && !video.ended) {
-                if (timestamp - lastDrawTime > 1000 / 30) {
-                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    lastDrawTime = timestamp;
+        const drawFrame = async () => {
+            if (!video.videoWidth || !video.videoHeight) {
+                console.log('Video dimensions not ready yet');
+                return;
+            }
+            try {
+                if (video.readyState >= 2) {
+                    // HAVE_CURRENT_DATA or higher
+                    // 使用 createImageBitmap 进行预处理
+                    const bitmap = await createImageBitmap(video);
+                    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+                    bitmap.close();
+                } else {
+                    console.log('Video not ready for frame extraction');
                 }
-                animationFrame = requestAnimationFrame(drawFrame);
+            } catch (error) {
+                console.error('Error drawing video frame:', error);
             }
         };
+
+        // 使用 requestVideoFrameCallback 进行精确同步
+        let videoFrameCallback;
+        if ('requestVideoFrameCallback' in HTMLVideoElement.prototype) {
+            videoFrameCallback = () => {
+                drawFrame();
+                video.requestVideoFrameCallback(videoFrameCallback);
+            };
+        } else {
+            // 降级方案：使用 requestAnimationFrame
+            videoFrameCallback = () => {
+                drawFrame();
+                animationFrame = requestAnimationFrame(videoFrameCallback);
+            };
+        }
 
         const resize = () => {
-            const player = art.template?.$player;
-            if (!player || option.autoSize) return;
+            try {
+                const player = art.template?.$player;
+                if (!player || option.autoSize) return;
 
-            const aspectRatio = canvas.videoWidth / canvas.videoHeight;
-            const containerWidth = player.clientWidth;
-            const containerHeight = player.clientHeight;
-            const containerRatio = containerWidth / containerHeight;
+                const aspectRatio = video.videoWidth / video.videoHeight;
+                const containerWidth = player.clientWidth;
+                const containerHeight = player.clientHeight;
+                const containerRatio = containerWidth / containerHeight;
 
-            let paddingLeft = 0;
-            let paddingTop = 0;
+                let canvasWidth, canvasHeight;
+                if (containerRatio > aspectRatio) {
+                    canvasHeight = containerHeight;
+                    canvasWidth = canvasHeight * aspectRatio;
+                } else {
+                    canvasWidth = containerWidth;
+                    canvasHeight = canvasWidth / aspectRatio;
+                }
 
-            if (containerRatio > aspectRatio) {
-                const canvasWidth = containerHeight * aspectRatio;
-                paddingLeft = (containerWidth - canvasWidth) / 2;
-            } else {
-                const canvasHeight = containerWidth / aspectRatio;
-                paddingTop = (containerHeight - canvasHeight) / 2;
+                // 设置 canvas 大小为实际显示大小
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+
+                // 居中 canvas
+                const paddingLeft = (containerWidth - canvasWidth) / 2;
+                const paddingTop = (containerHeight - canvasHeight) / 2;
+
+                Object.assign(canvas.style, {
+                    padding: `${paddingTop}px ${paddingLeft}px`,
+                });
+
+                // 重新绘制当前帧
+                drawFrame();
+            } catch (error) {
+                console.error('Error in resize function:', error);
             }
-
-            Object.assign(canvas.style, {
-                padding: `${paddingTop}px ${paddingLeft}px`,
-            });
         };
 
+        // 在视频元数据加载完成后设置 canvas 尺寸并绘制第一帧
         art.on('video:loadedmetadata', () => {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             resize();
         });
 
+        // 在视频数据可用时绘制第一帧
+        art.on('video:canplay', () => {
+            drawFrame();
+        });
+
         art.on('video:play', () => {
-            cancelAnimationFrame(animationFrame);
-            animationFrame = requestAnimationFrame(drawFrame);
+            if ('requestVideoFrameCallback' in HTMLVideoElement.prototype) {
+                video.requestVideoFrameCallback(videoFrameCallback);
+            } else {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = requestAnimationFrame(videoFrameCallback);
+            }
         });
 
         art.on('video:pause', () => {
-            cancelAnimationFrame(animationFrame);
+            if (!('requestVideoFrameCallback' in HTMLVideoElement.prototype)) {
+                cancelAnimationFrame(animationFrame);
+            }
         });
 
         art.on('resize', resize);
 
         const destroy = () => {
-            cancelAnimationFrame(animationFrame);
+            if ('requestVideoFrameCallback' in HTMLVideoElement.prototype) {
+                video.cancelVideoFrameCallback(videoFrameCallback);
+            } else {
+                cancelAnimationFrame(animationFrame);
+            }
+            // 清理其他可能的资源...
         };
 
         art.on('destroy', destroy);
