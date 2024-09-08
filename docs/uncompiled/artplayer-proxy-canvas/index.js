@@ -261,11 +261,8 @@ function artplayerProxyCanvas(callback) {
         art.on("video:loadedmetadata", async ()=>{
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
-            resize();
-        });
-        // 在视频数据可用时绘制第一帧
-        art.on("video:canplay", async ()=>{
             await sleep(300);
+            resize();
             drawFrame();
         });
         art.on("video:play", ()=>{
