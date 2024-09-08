@@ -11,16 +11,33 @@ export default function artplayerProxyCanvas(callback) {
         const { propertys, methods, prototypes, events } = constructor.config;
         const keys = [...propertys, ...methods, ...prototypes];
 
+        const originalCanvasProperties = {};
+        ['width', 'height'].forEach((prop) => {
+            originalCanvasProperties[prop] = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, prop);
+        });
+
         keys.forEach((key) => {
-            def(canvas, key, {
-                get() {
-                    const value = video[key];
-                    return typeof value === 'function' ? value.bind(video) : value;
-                },
-                set(value) {
-                    video[key] = value;
-                },
-            });
+            if (key === 'width' || key === 'height') {
+                def(canvas, key, {
+                    get() {
+                        return originalCanvasProperties[key].get.call(this);
+                    },
+                    set(value) {
+                        originalCanvasProperties[key].set.call(this, value);
+                        video[key] = value;
+                    },
+                });
+            } else {
+                def(canvas, key, {
+                    get() {
+                        const value = video[key];
+                        return typeof value === 'function' ? value.bind(video) : value;
+                    },
+                    set(value) {
+                        video[key] = value;
+                    },
+                });
+            }
         });
 
         setTimeout(() => {
@@ -75,7 +92,6 @@ export default function artplayerProxyCanvas(callback) {
         });
 
         art.on('video:play', () => {
-            console.log('video:play');
             cancelAnimationFrame(animationFrame);
             animationFrame = requestAnimationFrame(drawFrame);
         });
@@ -85,6 +101,12 @@ export default function artplayerProxyCanvas(callback) {
         });
 
         art.on('resize', resize);
+
+        const destroy = () => {
+            cancelAnimationFrame(animationFrame);
+        };
+
+        art.on('destroy', destroy);
 
         if (typeof callback === 'function') {
             callback.call(art, video, option.url, art);
