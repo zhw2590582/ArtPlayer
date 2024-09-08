@@ -1,7 +1,7 @@
 export default function artplayerProxyCanvas(callback) {
     return (art) => {
         const { option, constructor } = art;
-        const { createElement, def, append } = constructor.utils;
+        const { createElement, def, append, sleep } = constructor.utils;
 
         const canvas = createElement('canvas');
         const ctx = canvas.getContext('2d');
@@ -119,23 +119,21 @@ export default function artplayerProxyCanvas(callback) {
                 Object.assign(canvas.style, {
                     padding: `${paddingTop}px ${paddingLeft}px`,
                 });
-
-                // 重新绘制当前帧
-                drawFrame();
             } catch (error) {
                 console.error('Error in resize function:', error);
             }
         };
 
         // 在视频元数据加载完成后设置 canvas 尺寸并绘制第一帧
-        art.on('video:loadedmetadata', () => {
+        art.on('video:loadedmetadata', async () => {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             resize();
         });
 
         // 在视频数据可用时绘制第一帧
-        art.on('video:canplay', () => {
+        art.on('video:canplay', async () => {
+            await sleep(300);
             drawFrame();
         });
 
