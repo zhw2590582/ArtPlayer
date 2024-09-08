@@ -13,10 +13,10 @@ var art = new Artplayer({
     flip: true,
     playbackRate: true,
     aspectRatio: true,
-    fullscreen: true,
     fullscreenWeb: true,
     miniProgressBar: true,
     autoPlayback: true,
+    autoOrientation: true,
     thumbnails: {
         url: '/assets/sample/thumbnails.png',
         number: 60,

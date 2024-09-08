@@ -149,10 +149,14 @@ parcelHelpers.export(exports, "default", ()=>artplayerProxyCanvas);
 function artplayerProxyCanvas(callback) {
     return (art)=>{
         const { option, constructor } = art;
-        const { createElement, def } = constructor.utils;
+        const { createElement, def, append } = constructor.utils;
         const canvas = createElement("canvas");
         const ctx = canvas.getContext("2d");
         const video = createElement("video");
+        const track = createElement("track");
+        track.default = true;
+        track.kind = "metadata";
+        append(video, track);
         let animationFrame = null;
         const { propertys, methods, prototypes, events } = constructor.config;
         const keys = [
