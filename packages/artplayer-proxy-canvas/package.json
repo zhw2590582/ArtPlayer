@@ -1,0 +1,24 @@
+{
+  "license": "MIT",
+  "version": "1.0.0",
+  "name": "artplayer-proxy-canvas",
+  "types": "types/artplayer-proxy-canvas.d.ts",
+  "description": "canvas proxy for ArtPlayer",
+  "main": "dist/artplayer-proxy-canvas.js",
+  "legacy": "dist/artplayer-proxy-canvas.legacy.js",
+  "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+  "browserslist": "last 1 Chrome version",
+  "homepage": "https://artplayer.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+  },
+  "keywords": [
+    "html5",
+    "video",
+    "player"
+  ]
+}

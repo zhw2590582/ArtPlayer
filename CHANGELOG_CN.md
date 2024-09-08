@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 -   新增 `option.proxy` 选项，用于代理第三方的 `video` 和 `canvas`
+-   新增 `artplayer-proxy-canvas` 代理
 -   新增 `artplayer-proxy-webav` 代理，来自 [bilibili/WebAV](https://github.com/bilibili/WebAV)
 -   新增 `option.thumbnails.scale`, 用于预览图缩放
 -   修复更改 `art.url` 不能触发 `autoPlayBack` 的 `bug`: [#797](https://github.com/zhw2590582/ArtPlayer/issues/797)
